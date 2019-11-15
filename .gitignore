@@ -17,3 +17,7 @@ BO4E-dotnet/obj/
 
 BO4ETestProject/bin/
 BO4E-dotnet/bin/
+
+*.manifest
+
+*.testlog
