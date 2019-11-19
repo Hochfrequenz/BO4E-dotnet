@@ -1,7 +1,7 @@
 # BO4E-dotnet
 BO4E-dotnet is a C# implementation of **B**usiness **O**bjects for **E**nergy ([BO4E](https://www.bo4e.de/)), a standard use to model business objects in the German energy market. This repository contains class definitions and enumerations for most of the Business Objects. [JSON.net](https://github.com/JamesNK/Newtonsoft.Json) attributes are used to model obligatory and optional fields of the single business objects and components.
 
-The source code in this repository is Open Source and avaiable under a MIT license; see [LICENSE](the license file).
+The source code in this repository is Open Source and avaiable under a MIT license; see [the license file](LICENSE).
 
 ## Nuget Packages and Usage of BO4E-dotnet
 The content of this repository is used to build the following nuget packages:
