@@ -7,7 +7,7 @@
     <PackageId>Hochfrequenz.BO4Enet</PackageId>
     <Authors>Hochfrequenz Untenehmensberatung GmbH</Authors>
     <Product>BO4E .net core bindings</Product>
-    <RepositoryUrl>https://github.com/Hochfrequenz/energy-service-hub/BO4E-dotnet</RepositoryUrl>
+    <RepositoryUrl>https://github.com/HFInnovation/BO4E-dotnet/</RepositoryUrl>
     <Version>0.1.0</Version>
     <AssemblyName>BO4Enet</AssemblyName>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
@@ -18,11 +18,12 @@
 
     <!-- Optional: Include PDB in the built .nupkg -->
     <AllowedOutputExtensionsInPackageBuildOutputFolder>$(AllowedOutputExtensionsInPackageBuildOutputFolder);.pdb</AllowedOutputExtensionsInPackageBuildOutputFolder>
+    <PackageProjectUrl>https://github.com/HFInnovation/BO4E-dotnet/</PackageProjectUrl>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
     <DocumentationFile>BO4Enet.xml</DocumentationFile>
-    <Optimize>false</Optimize>
+    <Optimize>true</Optimize>
   </PropertyGroup>
 
   <ItemGroup>
@@ -46,7 +47,6 @@
     <PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="2.1.1" />
     <PackageReference Include="MiniProfiler.Shared" Version="4.1.0" />
     <PackageReference Include="Newtonsoft.Json" Version="11.0.2" />
-    <PackageReference Include="Microsoft.SourceLink.GitHub" Version="1.0.0-beta-63127-02" PrivateAssets="All" />
     <PackageReference Include="Newtonsoft.Json.Schema" Version="3.0.10" />
     <PackageReference Include="SourceLink.Copy.PdbFiles" Version="2.8.3" PrivateAssets="All" />
     <PackageReference Include="System.ComponentModel.Annotations" Version="4.5.0" />
