@@ -1,0 +1,28 @@
+name: Nuget package push
+
+on:
+ push:
+    branches:
+      - master
+
+jobs:
+  build:
+    runs-on: windows-latest
+
+    steps:
+    - uses: actions/checkout@master
+    - name: Setup .NET Core
+      uses: actions/setup-dotnet@v1
+      with:
+        dotnet-version: 2.2.108
+    - name: Build with dotnet
+      run: |
+       dotnet build --configuration Release
+       dotnet pack --configuration Release
+    - name: Setup Nuget.exe
+      uses: warrenbuckley/Setup-Nuget@v1
+    - name: Nuget push
+      run:  | 
+              nuget setApiKey ${{ secrets.BO4E_NUGET_ORG_PUSH_TOKEN }}
+              nuget push .\BO4E-dotnet\bin\Release\*.nupkg -Source https://api.nuget.org/v3/index.json -SkipDuplicate
+              

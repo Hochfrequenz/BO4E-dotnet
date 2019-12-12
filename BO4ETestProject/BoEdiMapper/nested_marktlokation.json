@@ -1,0 +1,118 @@
+﻿{
+  "expectedResult": {
+    "versionStruktur": 1,
+    "boTyp": "MARKTLOKATION",
+    "marktlokationsId": "10000001304",
+    "sparte": "STROM",
+    "energierichtung": "Z07",
+    "bilanzierungsmethode": "SLP",
+    "verbrauchsart": "Z65",
+    "unterbrechbar": false,
+    "netzebene": "E06",
+    "netzbetreiberCodeNr": null,
+    "gebietTyp": null,
+    "netzgebietNr": null,
+    "bilanzierungsgebiet": "",
+    "grundversorgerCodeNr": "99000000011",
+    "gasqualitaet": null,
+    "endkunde": {
+      "versionStruktur": 1,
+      "boTyp": "GESCHAEFTSPARTNER",
+      "anrede": "FRAU",
+      "name1": "Sorglos",
+      "name2": "Susi",
+      "name3": "",
+      "gewerbekennzeichnung": false,
+      "hrnummer": "",
+      "amtsgericht": "",
+      "kontaktweg": [
+        "EM"
+      ],
+      "umsatzsteuerId": "",
+      "glaeubigerId": "",
+      "eMailAdresse": "susi@sorglos.de",
+      "website": "DUCKDUCKGO.COM",
+      "geschaeftspartnerrolle": [
+        "UD"
+      ],
+      "partneradresse": {
+        "postleitzahl": "71254",
+        "ort": "Ditzingen",
+        "strasse": "Bülsestraße",
+        "hausnummer": "24",
+        "postfach": "",
+        "adresszusatz": "",
+        "coErgaenzung": "",
+        "landescode": "DE"
+      }
+    },
+    "lokationsadresse": {
+      "postleitzahl": "10249",
+      "ort": "Berlin",
+      "strasse": "Petersburger Platz",
+      "hausnummer": "6",
+      "postfach": "",
+      "adresszusatz": "VH",
+      "coErgaenzung": "",
+      "landescode": "DE"
+    }
+  },
+  "input": {
+    "versionStruktur": 1,
+    "boTyp": "MARKTLOKATION",
+    "marktlokationsId": "10000001304",
+    "sparte": "STROM",
+    "energierichtung": "AUSSP",
+    "bilanzierungsmethode": "SLP",
+    "verbrauchsart": "W",
+    "unterbrechbar": false,
+    "netzebene": "NSP",
+    "netzbetreiberCodeNr": null,
+    "gebietTyp": null,
+    "netzgebietNr": null,
+    "bilanzierungsgebiet": "",
+    "grundversorgerCodeNr": "99000000011",
+    "gasqualitaet": null,
+    "endkunde": {
+      "versionStruktur": 1,
+      "boTyp": "GESCHAEFTSPARTNER",
+      "anrede": "FRAU",
+      "name1": "Sorglos",
+      "name2": "Susi",
+      "name3": "",
+      "gewerbekennzeichnung": false,
+      "hrnummer": "",
+      "amtsgericht": "",
+      "kontaktweg": [
+        "E_MAIL"
+      ],
+      "umsatzsteuerId": "",
+      "glaeubigerId": "",
+      "eMailAdresse": "susi@sorglos.de",
+      "website": "DUCKDUCKGO.COM",
+      "geschaeftspartnerrolle": [
+        "KUNDE"
+      ],
+      "partneradresse": {
+        "postleitzahl": "71254",
+        "ort": "Ditzingen",
+        "strasse": "Bülsestraße",
+        "hausnummer": "24",
+        "postfach": "",
+        "adresszusatz": "",
+        "coErgaenzung": "",
+        "landescode": "DE"
+      }
+    },
+    "lokationsadresse": {
+      "postleitzahl": "10249",
+      "ort": "Berlin",
+      "strasse": "Petersburger Platz",
+      "hausnummer": "6",
+      "postfach": "",
+      "adresszusatz": "VH",
+      "coErgaenzung": "",
+      "landescode": "DE"
+    }
+  }
+}

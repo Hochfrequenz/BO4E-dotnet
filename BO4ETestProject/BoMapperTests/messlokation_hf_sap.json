@@ -1,0 +1,53 @@
+﻿{
+  "objectName": "Messlokation",
+  "input": {
+    "versionStruktur": 1,
+    "boTyp": "MESSLOKATION",
+    "messLokationsId": "DE0000000000000000000000010000397",
+    "sparte": "STROM",
+    "netzebeneMessung": "MSP",
+    "messgebietNr": null,
+    "grundzustaendigerMSBCodeNr": null,
+    "grundzustaendigerMSBIMCodeNr": null,
+    "grundzustaendigerMDLodeNr": null,
+    "messadresse": {
+      "postleitzahl": "10249",
+      "ort": "Berlin",
+      "strasse": "Petersburger Platz",
+      "hausnummer": "6",
+      "postfach": "",
+      "adresszusatz": "VH",
+      "coErgaenzung": "",
+      "landescode": "DE"
+    },
+    "geoadresse": null,
+    "katasterinformation": null,
+    "geraete": [],
+    "messdienstleistung": null,
+    "messlokationszaehler": [
+      {
+        "versionStruktur": 1,
+        "boTyp": "ZAEHLER",
+        "zaehlernummer": "10000548",
+        "sparte": "STROM",
+        "zaehlerauspraegung": "EINRICHTUNGSZAEHLER",
+        "zaehlertyp": "DREHSTROMZAEHLER",
+        "tarifart": "EINTARIF",
+        "zaehlerkonstante": 0.0,
+        "eichungBis": null,
+        "letzteEichung": null,
+        "zaehlwerke": [
+          {
+            "zaehlwerkId": "001",
+            "bezeichnung": "01",
+            "richtung": "AUSSP",
+            "obisKennzahl": "1-1:1.8.0",
+            "wandlerfaktor": 1.00000,
+            "einheit": "KWH"
+          }
+        ],
+        "zaehlerhersteller": null
+      }
+    ]
+  }
+}
