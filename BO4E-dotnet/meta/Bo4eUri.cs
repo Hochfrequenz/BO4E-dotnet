@@ -20,7 +20,7 @@ namespace BO4E.meta
     {
         private const string BO4E_SCHEME = "bo4e://";
         private const string NULL_KEY_PLACEHOLDER = "~"; // an allowed character in URLs that is not escaped
-        private static Regex FILTER_AND_PATTERN = new Regex(@"\s*(?<key>\w+)\s*(?:=|eq)\s*(['""]|)(?<value>\w+)\1\s*(?:and)?\s*", RegexOptions.IgnoreCase|RegexOptions.Compiled); // \1 backreferences the '" group (in c#, would be \2 in other parsers)
+        private static readonly Regex FILTER_AND_PATTERN = new Regex(@"\s*(?<key>\w+)\s*(?:=|eq)\s*(['""]|)(?<value>\w+)\1\s*(?:and)?\s*", RegexOptions.IgnoreCase|RegexOptions.Compiled); // \1 backreferences the '" group (in c#, would be \2 in other parsers)
 
         /// <summary>
         /// Instantiates a Bo4eUri object. Throws Argument(Null)Exception if URI is null, not well formed (<see cref="System.Uri.IsWellFormedOriginalString"/> or doesn't match the bo4e uri regex.

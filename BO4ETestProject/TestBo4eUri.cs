@@ -29,9 +29,9 @@ namespace TestBO4E
                 Assert.IsNotNull(json, $"The content of file {file} seems to be no valid JSON.");
                 Assert.IsNotNull(json["input"], $"The file {file} does not contain the mandatory 'input' key.");
                 Assert.IsNotNull(json["expectedUri"], $"The file {file} does not contain the mandatory 'expectedUri' key.");
-                string boType = (string)json["input"]["boTyp"];
-                Assert.IsNotNull(boType, $"The JSON content of file {file} is missing the obligatory 'boTyp' attribute.");
-                BusinessObject bo = BO4E.BoMapper.MapObject(boType, (JObject)json["input"]);
+                //string boType = (string)json["input"]["boTyp"];
+                //Assert.IsNotNull(boType, $"The JSON content of file {file} is missing the obligatory 'boTyp' attribute.");
+                BusinessObject bo = JsonConvert.DeserializeObject<BusinessObject>(json["input"].ToString());
                 Assert.IsNotNull(bo, $"The business object in file {file} is not a valid BO4E.");
 
                 Bo4eUri uri = Bo4eUri.GetUri(bo);

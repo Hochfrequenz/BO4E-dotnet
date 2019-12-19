@@ -61,24 +61,30 @@ namespace TestBO4E
             em2.lokationstyp = BO4E.ENUM.Lokationstyp.MeLo;
 
             em1.energieverbrauch = new List<Verbrauch>();
-            Verbrauch v1 = new Verbrauch();
-            v1.obiskennzahl = "1-2-3-4-5";
+            Verbrauch v1 = new Verbrauch
+            {
+                obiskennzahl = "1-2-3-4-5"
+            };
             em1.energieverbrauch.Add(v1);
             em2.energieverbrauch = new List<Verbrauch>();
-            Verbrauch v2 = new Verbrauch();
-            v2.obiskennzahl = "1-2-3-4-5";
+            Verbrauch v2 = new Verbrauch
+            {
+                obiskennzahl = "1-2-3-4-5"
+            };
             em2.energieverbrauch.Add(v2);
 
             Assert.AreEqual(em1, em2);
             Assert.AreEqual(em1.GetHashCode(), em2.GetHashCode());
             Assert.IsFalse(em1 == em2);
 
-            Verbrauch v3 = new Verbrauch();
-            v3.einheit = BO4E.ENUM.Mengeneinheit.KWH;
-            v3.obiskennzahl = "ABC";
-            v3.startdatum = new DateTime(2018, 1, 1);
-            v3.enddatum = new DateTime(2018, 12, 31);
-            v3.wert = 123.456M;
+            Verbrauch v3 = new Verbrauch
+            {
+                einheit = BO4E.ENUM.Mengeneinheit.KWH,
+                obiskennzahl = "ABC",
+                startdatum = new DateTime(2018, 1, 1),
+                enddatum = new DateTime(2018, 12, 31),
+                wert = 123.456M
+            };
             em1.energieverbrauch = new List<Verbrauch> { v3 };
             em2.energieverbrauch = new List<Verbrauch> { v3 };
             Assert.AreEqual(em1, em2);

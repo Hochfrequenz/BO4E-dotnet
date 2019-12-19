@@ -1,0 +1,53 @@
+﻿{
+  "operations": {
+    "POD": "HASH"
+  },
+  "input": {
+    "versionStruktur": 1,
+    "boTyp": "MARKTLOKATION",
+    "marktlokationsId": "52935155442",
+    "sparte": "STROM",
+    "energierichtung": "AUSSP",
+    "bilanzierungsmethode": "SLP",
+    "verbrauchsart": "KL",
+    "unterbrechbar": false,
+    "netzebene": "NSP",
+    "netzbetreiberCodeNr": null,
+    "gebietTyp": "VERTEILNETZ",
+    "netzgebietNr": null,
+    "bilanzierungsgebiet": null,
+    "grundversorgerCodeNr": null,
+    "gasqualitaet": null,
+    "endkunde": null,
+    "lokationsadresse": {
+      "postleitzahl": 12345,
+      "ort": "EineStadt",
+      "strasse": "Eine Straße",
+      "hausnummer": "11",
+      "postfach": null,
+      "adresszusatz": null,
+      "coErgaenzung": null,
+      "landescode": null
+    },
+    "geoadresse": null,
+    "katasterinformation": null,
+    "zugehoerigeMesslokationen": [
+      {
+        "messlokationsId": "DE0123456789012345678901234567890"
+      },
+      {
+        "messlokationsId": "DE9876543210987654321098765432109"
+      },
+      {
+        "messlokationsId": "DE0123456789012345678901234567890"
+      }
+    ]
+  },
+  "assertions": {
+    "$['MARKTLOKATION'][0]['lokationsadresse']['strasse']": "Eine Straße",
+    "$['MARKTLOKATION'][0]['marktlokationsId']": "52023133392",
+    "$['MARKTLOKATION'][0]['zugehoerigeMesslokationen'][0]['messlokationsId']": "DE2SAUUANNM4AZU6U4MTRK68MNTS7C4X8",
+    "$['MARKTLOKATION'][0]['zugehoerigeMesslokationen'][1]['messlokationsId']": "DE1HLR36BO0XVVVRLJR8AY8UAI5SHCFKT",
+    "$['MARKTLOKATION'][0]['zugehoerigeMesslokationen'][2]['messlokationsId']": "DE2SAUUANNM4AZU6U4MTRK68MNTS7C4X8"
+  }
+}

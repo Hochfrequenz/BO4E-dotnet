@@ -183,6 +183,62 @@ namespace BO4E
             }
         }
 
+        public static JsonSerializerSettings GetJsonSerializerSettings(LenientParsing lenient)
+        {
+            return GetJsonSerializerSettings(new HashSet<string>(), lenient);
+        }
+
+        public static JsonSerializerSettings GetJsonSerializerSettings(HashSet<string> userPropertiesWhiteList, LenientParsing lenient = LenientParsing.Strict)
+        {
+            List<JsonConverter> converters = new List<JsonConverter>();
+            foreach (LenientParsing lp in Enum.GetValues(typeof(LenientParsing)))
+            {
+                if (lenient.HasFlag(lp))
+                {
+                    switch (lp)
+                    {
+                        case LenientParsing.DateTime:
+                            if (!lenient.HasFlag(LenientParsing.SetInitialDateIfNull))
+                            {
+                                converters.Add(new LenientDateTimeConverter());
+                            }
+                            else
+                            {
+                                converters.Add(new LenientDateTimeConverter(new DateTime()));
+                            }
+                            break;
+                        case LenientParsing.EnumList:
+                            converters.Add(new LenientEnumListConverter());
+                            break;
+                        case LenientParsing.Bo4eUri:
+                            converters.Add(new LenientBo4eUriConverter());
+                            break;
+                            // case LenientParsing.EmptyLists:
+                            // converters.Add(new LenientRequiredListConverter());
+                            // break;
+
+                            // no default case because NONE and MOST_LENIENT do not come up with more converters
+                    }
+                }
+            }
+            IContractResolver contractResolver;
+            if (userPropertiesWhiteList.Count > 0)
+            {
+                contractResolver = new UserPropertiesDataContractResolver(userPropertiesWhiteList);
+            }
+            else
+            {
+                contractResolver = new DefaultContractResolver();
+            }
+            JsonSerializerSettings settings = new JsonSerializerSettings
+            {
+                Converters = converters,
+                DateParseHandling = DateParseHandling.None,
+                ContractResolver = contractResolver
+            };
+            return settings;
+        }
+
         /// <summary>
         /// <see cref="MapObject(Type, JObject, HashSet{string}, LenientParsing)"/>
         /// </summary>
@@ -237,7 +293,7 @@ namespace BO4E
             }
 
             Type clazz;
-            Type[] types = Assembly.GetExecutingAssembly().GetTypes();
+            //Type[] types = Assembly.GetExecutingAssembly().GetTypes();
             clazz = Assembly.GetExecutingAssembly().GetType(packagePrefix + "." + businessObjectName);
             if (clazz != null)
             {
@@ -310,6 +366,11 @@ namespace BO4E
             return GetAnnotatedFields(boName, typeof(DataCategoryAttribute));
         }
 
+        public static FieldInfo[] GetAnnotatedFields(Type type)
+        {
+            return GetAnnotatedFields(type, typeof(DataCategoryAttribute));
+        }
+
         /// <summary>
         /// Get those fields of a business object that do have attributes/annotations.
         /// The result is ordered by the JsonProperty->Order value (assuming 0 if null).
@@ -319,9 +380,7 @@ namespace BO4E
         /// <returns>Array of FieldInfos</returns>
         public static FieldInfo[] GetAnnotatedFields(Type boType, Type attributeType)
         {
-            return Assembly.GetExecutingAssembly().GetTypes()
-                .Where(t => t == boType) // by type
-                .SelectMany(t => t.GetFields())
+            return boType.GetFields()
                 .Where(f => f.GetCustomAttributes(attributeType, false).Length > 0)
                 .OrderBy(af => af.GetCustomAttribute<JsonPropertyAttribute>()?.Order)
                 .ToArray<FieldInfo>();
@@ -337,7 +396,7 @@ namespace BO4E
         public static FieldInfo[] GetAnnotatedFields(string boName, Type attributeType)
         {
             return Assembly.GetExecutingAssembly().GetTypes()
-                .Where(t => t.Name == boName || t.Name.ToUpper()==boName.ToUpper())
+                .Where(t => t.Name == boName || t.Name.ToUpper() == boName.ToUpper())
                 .SelectMany(t => t.GetFields()) // by type name
                 .Where(f => f.GetCustomAttributes(attributeType, false).Length > 0)
                 .OrderBy(af => af.GetCustomAttribute<JsonPropertyAttribute>()?.Order)
@@ -442,7 +501,7 @@ namespace BO4E
             public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
             {
                 string rawDate;
-                if(reader.Value == null)
+                if (reader.Value == null)
                 {
                     return null;
                 }

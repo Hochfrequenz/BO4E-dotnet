@@ -13,6 +13,12 @@
 BO4E-dotnet/bin/Debug/
 
 BO4ETestProject/obj/
+BO4E-dotnet.Encryption/obj/
+BO4E-dotnet.Encryption/bin
+BO4E-dotnet.Extensions/obj/
+BO4E-dotnet.Extensions/bin
+BO4E-dotnet.Reporting/bin
+BO4E-dotnet.Reporting/obj
 BO4E-dotnet/obj/
 
 BO4ETestProject/bin/
@@ -21,3 +27,23 @@ BO4E-dotnet/bin/
 *.manifest
 
 *.testlog
+
+*.dll
+
+*.pdb
+
+*.cache
+
+*.targets
+
+
+*.CopyComplete
+
+TestBO4E-dotnet-Extensions/obj/
+TestBO4E-dotnet-Encryption/obj/
+TestBO4E-dotnet-Reporting/obj/
+
+
+TestBO4E-dotnet-Encryption/bin
+TestBO4E-dotnet-Extensions/bin
+TestBO4E-dotnet-Reporting/bin

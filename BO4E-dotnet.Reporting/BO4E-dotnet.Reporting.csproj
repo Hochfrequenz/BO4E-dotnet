@@ -1,0 +1,31 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <RootNamespace>BO4E_dotnet.Reporting</RootNamespace>
+    <Version>0.1.0</Version>
+    <PackageLicenseFile>LICENSE</PackageLicenseFile>
+    <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
+    <PackageProjectUrl>https://github.com/HFInnovation/BO4E-dotnet</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/HFInnovation/BO4E-dotnet</RepositoryUrl>
+    <PackageId>Hochfrequenz.BO4E.Reporting</PackageId>
+    <Authors>Hochfrequenz Unternehmensberatung GmbH</Authors>
+    <Company>Hochfrequenz Unternehmensberatung GmbH</Company>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <Optimize>true</Optimize>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\BO4E-dotnet\BO4E-dotnet.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="..\LICENSE">
+      <Pack>True</Pack>
+      <PackagePath></PackagePath>
+    </None>
+  </ItemGroup>
+
+</Project>

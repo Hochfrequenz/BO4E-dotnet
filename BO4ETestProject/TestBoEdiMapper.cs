@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using BO4E;
 using BO4E.BO;
@@ -77,7 +78,15 @@ namespace TestBO4E
                 }
                 Assert.IsNotNull(json["input"], $"You have to specify an 'input' in test file {file}");
                 Assert.IsNotNull(json["expectedResult"], $"You have to specify an 'expectedOutput' in test file {file}");
-                BusinessObject bo = BoMapper.MapObject(json["input"]["boTyp"].ToString(), (JObject)json["input"]);
+                BusinessObject bo;
+                try
+                {
+                    bo = JsonConvert.DeserializeObject<BusinessObject>(json["input"].ToString());
+                }
+                catch (ArgumentException)
+                {
+                    bo = BoMapper.MapObject(json["input"]["boTyp"].ToString(), (JObject)json["input"]);
+                }
                 JObject result = BoEdiMapper.ReplaceWithEdiValues(bo);
                 //JObject result = JsonConvert.DeserializeObject<JObject>(JsonConvert.SerializeObject(, new StringEnumConverter()));
                 var jdp = new JsonDiffPatch();
