@@ -145,12 +145,12 @@ namespace BO4E.COM
                     wert = preisWert,
                     einheit = preisEinheit,
                     bezugswert = preisBezugswert,
-                    status = preisStatus.HasValue ? preisStatus.Value : Preisstatus.VORLAEUFIG // poor default choice
+                    status = preisStatus ?? Preisstatus.VORLAEUFIG // poor default choice
                 },
                 positionsMenge = new Menge()
                 {
-                    einheit = positionsMengeEinheit.HasValue ? positionsMengeEinheit.Value : Mengeneinheit.KWH, // poor default choice
-                    wert = positionsMengeWert.HasValue ? positionsMengeWert.Value : 0.0M, // poor default choice
+                    einheit = positionsMengeEinheit ?? Mengeneinheit.KWH, // poor default choice
+                    wert = positionsMengeWert ?? 0.0M, // poor default choice
                 },
                 guid = guid,
                 status = status

@@ -8,8 +8,6 @@ using StackExchange.Profiling;
 
 namespace BO4E.COM
 {
-
-
     /// <summary>
     /// Abbildung eines zeitlich abgegrenzten Verbrauchs.
     /// </summary>
@@ -138,7 +136,7 @@ namespace BO4E.COM
                 {
                     // change winter-->summer time (e.g. UTC+1-->UTC+2)
                     // this is an artefact of the sap enddatum computation
-                    enddatum = enddatum - new TimeSpan(1, 0, 0); // toDo: get offset from timezoneinfo->rules->dstOffset
+                    enddatum -= new TimeSpan(1, 0, 0); // toDo: get offset from timezoneinfo->rules->dstOffset
                 }
             }
             else if ((int)(enddatum - startdatum).TotalMinutes == -45)
@@ -150,7 +148,7 @@ namespace BO4E.COM
                 {
                     // change winter-->summer time (e.g. UTC+1-->UTC+2)
                     // this is an artefact of the sap enddatum computation
-                    enddatum = enddatum + new TimeSpan(1, 0, 0); // toDo: get offset from timezoneinfo->rules->dstOffset
+                    enddatum += new TimeSpan(1, 0, 0); // toDo: get offset from timezoneinfo->rules->dstOffset
                 }
             }
             if (userProperties != null && userProperties.TryGetValue(_SAP_PROFDECIMALS_KEY, out JToken profDecimalsRaw))

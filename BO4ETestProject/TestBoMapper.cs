@@ -54,28 +54,39 @@ namespace TestBO4E
                     lenients |= LenientParsing.Bo4eUri;
                 }
 
-                BusinessObject bo = BoMapper.MapObject(json["objectName"].ToString(), (JObject)json["input"], lenients);
+                BusinessObject bo;
+                try
+                {
+                    bo = JsonConvert.DeserializeObject<BusinessObject>(json["input"].ToString(), BoMapper.GetJsonSerializerSettings(lenients));
+                }
+                catch (Exception e) when (e is ArgumentException || e is JsonSerializationException)
+                {
+                    bo = BoMapper.MapObject(json["objectName"].ToString(), (JObject)json["input"], lenients);
+                }
                 string regularOutputString = JsonConvert.SerializeObject(bo, new StringEnumConverter());
                 if (bo.GetType() == typeof(Rechnung))
                 {
                     continue; // todo: fix this!
                 }
-                if (json["input"]["boTyp"] != null)
+                /*if (json["input"]["boTyp"] != null)
                 {
-                    BusinessObject bo2 = BoMapper.MapObject((JObject)json["input"], lenients);
+                    //BusinessObject bo2 = BoMapper.MapObject((JObject)json["input"], lenients);
+                    BusinessObject bo2 = JsonConvert.DeserializeObject<BusinessObject>(json["input"].ToString(), BoMapper.GetJsonSerializerSettings(lenients));
                     //string regularOutputString2 = JsonConvert.SerializeObject(bo2, new StringEnumConverter());
                     Assert.AreEqual(bo, bo2);
                     switch (json["input"]["boTyp"].ToString().ToLower())
                     {
                         case "energiemenge":
-                            Assert.AreEqual((Energiemenge)bo, BoMapper.MapObject<Energiemenge>((JObject)json["input"], lenients));
+                            //Assert.AreEqual((Energiemenge)bo, BoMapper.MapObject<Energiemenge>((JObject)json["input"], lenients));
+                            Assert.AreEqual((Energiemenge)bo, JsonConvert.DeserializeObject<Energiemenge>(json["input"].ToString(), BoMapper.GetJsonSerializerSettings(lenients)));
                             break;
                         case "messlokation":
-                            Assert.AreEqual((Messlokation)bo, BoMapper.MapObject<Messlokation>((JObject)json["input"], lenients));
+                            //Assert.AreEqual((Messlokation)bo, BoMapper.MapObject<Messlokation>((JObject)json["input"], lenients));
+                            Assert.AreEqual((Messlokation)bo, JsonConvert.DeserializeObject<Messlokation>(json["input"].ToString(), BoMapper.GetJsonSerializerSettings(lenients)));
                             break;
                             // add more if you feel like
                     }
-                }
+                }*/
                 HashSet<string> whitelist;
                 if (json["userPropWhiteList"] != null)
                 {
@@ -90,7 +101,15 @@ namespace TestBO4E
                     foreach (LenientParsing lenient in Enum.GetValues(typeof(LenientParsing)))
                     {
                         // strict mappings must also work with lenient mapping
-                        BusinessObject boLenient = BoMapper.MapObject(json["objectName"].ToString(), (JObject)json["input"], whitelist, lenient);
+                        BusinessObject boLenient;
+                        try
+                        {
+                            boLenient = JsonConvert.DeserializeObject<BusinessObject>(json["input"].ToString(), BoMapper.GetJsonSerializerSettings(whitelist, lenient));
+                        }
+                        catch (ArgumentException)
+                        {
+                            boLenient = BoMapper.MapObject(json["objectName"].ToString(), (JObject)json["input"], whitelist, lenient);
+                        }
                         string dateLenietOutputString = JsonConvert.SerializeObject(boLenient, new StringEnumConverter());
                         //if (whitelist.Count ==0) {
                         Assert.AreEqual(regularOutputString, dateLenietOutputString);
@@ -128,7 +147,7 @@ namespace TestBO4E
                 string jsonString = r.ReadToEnd();
                 json = JsonConvert.DeserializeObject<JObject>(jsonString);
             }
-            var v = BoMapper.MapObject<Vertrag>((JObject)json["input"], LenientParsing.MOST_LENIENT);
+            var v = JsonConvert.DeserializeObject<Vertrag>(json["input"].ToString(), BoMapper.GetJsonSerializerSettings(LenientParsing.MOST_LENIENT));
             Assert.IsNotNull(v.vertragsteile);
             Assert.AreEqual("DE54321", v.vertragsteile.First().lokation);
         }
@@ -143,7 +162,7 @@ namespace TestBO4E
                 string jsonString = r.ReadToEnd();
                 json = JsonConvert.DeserializeObject<JObject>(jsonString);
             }
-            Energiemenge em = BoMapper.MapObject<Energiemenge>((JObject)json["input"], LenientParsing.MOST_LENIENT);
+            Energiemenge em = JsonConvert.DeserializeObject<Energiemenge>(json["input"].ToString(), BoMapper.GetJsonSerializerSettings(LenientParsing.MOST_LENIENT));
             if (TimeZoneInfo.Local == Verbrauch.CENTRAL_EUROPE_STANDARD_TIME)
             {
                 Assert.AreEqual(2, em.energieverbrauch.Count); // weil 2 verschiedene status
@@ -160,7 +179,7 @@ namespace TestBO4E
                 string jsonString = r.ReadToEnd();
                 json = JsonConvert.DeserializeObject<JObject>(jsonString);
             }
-            Energiemenge em = BoMapper.MapObject<Energiemenge>((JObject)json["input"], LenientParsing.MOST_LENIENT);
+            Energiemenge em = JsonConvert.DeserializeObject<Energiemenge>(json["input"].ToString(), BoMapper.GetJsonSerializerSettings(LenientParsing.MOST_LENIENT));
             Assert.AreEqual(4, em.energieverbrauch.Count);
             Assert.AreEqual(59.0M, em.energieverbrauch[0].wert);
             Assert.AreEqual(58.0M, em.energieverbrauch[1].wert);
@@ -178,7 +197,7 @@ namespace TestBO4E
                 string jsonString = r.ReadToEnd();
                 json = JsonConvert.DeserializeObject<JObject>(jsonString);
             }
-            Energiemenge em = BoMapper.MapObject<Energiemenge>((JObject)json["input"], LenientParsing.MOST_LENIENT);
+            Energiemenge em = JsonConvert.DeserializeObject<Energiemenge>(json["input"].ToString(), BoMapper.GetJsonSerializerSettings(LenientParsing.MOST_LENIENT));
             Assert.AreEqual(1.375000M, em.energieverbrauch.First().wert);
             Assert.AreEqual(1.2130000M, em.energieverbrauch.Last().wert);
         }

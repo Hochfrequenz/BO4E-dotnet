@@ -1,0 +1,40 @@
+﻿{
+  "operations": {
+    "POD": "DELETE"
+  },
+  "input": {
+    "versionStruktur": 1,
+    "boTyp": "MARKTLOKATION",
+    "marktlokationsId": "5432109875",
+    "sparte": "STROM",
+    "energierichtung": "AUSSP",
+    "bilanzierungsmethode": "SLP",
+    "verbrauchsart": "KL",
+    "unterbrechbar": false,
+    "netzebene": "NSP",
+    "netzbetreiberCodeNr": null,
+    "gebietTyp": "VERTEILNETZ",
+    "netzgebietNr": null,
+    "bilanzierungsgebiet": null,
+    "grundversorgerCodeNr": null,
+    "gasqualitaet": null,
+    "endkunde": null,
+    "lokationsadresse": {
+      "postleitzahl": 12345,
+      "ort": "EineStadt",
+      "strasse": "Eine Straße",
+      "hausnummer": "11",
+      "postfach": null,
+      "adresszusatz": null,
+      "coErgaenzung": null,
+      "landescode": null
+    },
+    "geoadresse": null,
+    "katasterinformation": null,
+    "zugehoerigeMesslokationen": null
+  },
+  "assertions": {
+    "$['MARKTLOKATION'][0]['lokationsadresse']['strasse']": "Eine Straße",
+    "$['MARKTLOKATION'][0]['marktlokationsId']": "|null|"
+  }
+}

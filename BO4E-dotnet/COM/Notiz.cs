@@ -31,7 +31,7 @@ namespace BO4E.COM
 
 
         [JsonIgnore]
-        private static Regex TrailingMinusRegex = new Regex(@"(?:\\n|\n)?-*$", RegexOptions.Compiled);
+        private static readonly Regex TrailingMinusRegex = new Regex(@"(?:\\n|\n)?-*$", RegexOptions.Compiled);
 
         /// <summary>
         /// method remove trailing minuses ('----') from notiz content. Those are artefact from SAPs internal note structure 

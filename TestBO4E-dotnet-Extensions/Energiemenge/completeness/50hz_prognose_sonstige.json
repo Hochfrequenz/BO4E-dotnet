@@ -1,0 +1,1992 @@
+{
+  "versionStruktur": 1,
+  "boTyp": "ENERGIEMENGE",
+  "lokationsId": "Sonstige[MWh]",
+  "lokationstyp": "MELO",
+  "energieverbrauch": [
+    {
+      "startdatum": "2018-12-23 23:00:00",
+      "enddatum": "2018-12-24 00:00:00",
+      "wertermittlungsverfahren": "PROGNOSE",
+      "obiskennzahl": "4-5-6-7",
+      "wert": 7740.25,
+      "einheit": "MWH"
+    },
+    {
+      "startdatum": "2018-12-24 00:00:00",
+      "enddatum": "2018-12-24 01:00:00",
+      "wertermittlungsverfahren": "PROGNOSE",
+      "obiskennzahl": "4-5-6-7",
+      "wert": 7756.5,
+      "einheit": "MWH"
+    },
+    {
+      "startdatum": "2018-12-24 01:00:00",
+      "enddatum": "2018-12-24 02:00:00",
+      "wertermittlungsverfahren": "PROGNOSE",
+      "obiskennzahl": "4-5-6-7",
+      "wert": 7744.25,
+      "einheit": "MWH"
+    },
+    {
+      "startdatum": "2018-12-24 02:00:00",
+      "enddatum": "2018-12-24 03:00:00",
+      "wertermittlungsverfahren": "PROGNOSE",
+      "obiskennzahl": "4-5-6-7",
+      "wert": 7797.0,
+      "einheit": "MWH"
+    },
+    {
+      "startdatum": "2018-12-24 03:00:00",
+      "enddatum": "2018-12-24 04:00:00",
+      "wertermittlungsverfahren": "PROGNOSE",
+      "obiskennzahl": "4-5-6-7",
+      "wert": 7885.5,
+      "einheit": "MWH"
+    },
+    {
+      "startdatum": "2018-12-24 04:00:00",
+      "enddatum": "2018-12-24 05:00:00",
+      "wertermittlungsverfahren": "PROGNOSE",
+      "obiskennzahl": "4-5-6-7",
+      "wert": 7979.25,
+      "einheit": "MWH"
+    },
+    {
+      "startdatum": "2018-12-24 05:00:00",
+      "enddatum": "2018-12-24 06:00:00",
+      "wertermittlungsverfahren": "PROGNOSE",
+      "obiskennzahl": "4-5-6-7",
+      "wert": 7973.75,
+      "einheit": "MWH"
+    },
+    {
+      "startdatum": "2018-12-24 06:00:00",
+      "enddatum": "2018-12-24 07:00:00",
+      "wertermittlungsverfahren": "PROGNOSE",
+      "obiskennzahl": "4-5-6-7",
+      "wert": 8253.75,
+      "einheit": "MWH"
+    },
+    {
+      "startdatum": "2018-12-24 07:00:00",
+      "enddatum": "2018-12-24 08:00:00",
+      "wertermittlungsverfahren": "PROGNOSE",
+      "obiskennzahl": "4-5-6-7",
+      "wert": 8262.75,
+      "einheit": "MWH"
+    },
+    {
+      "startdatum": "2018-12-24 08:00:00",
+      "enddatum": "2018-12-24 09:00:00",
+      "wertermittlungsverfahren": "PROGNOSE",
+      "obiskennzahl": "4-5-6-7",
+      "wert": 8813.5,
+      "einheit": "MWH"
+    },
+    {
+      "startdatum": "2018-12-24 09:00:00",
+      "enddatum": "2018-12-24 10:00:00",
+      "wertermittlungsverfahren": "PROGNOSE",
+      "obiskennzahl": "4-5-6-7",
+      "wert": 9199.25,
+      "einheit": "MWH"
+    },
+    {
+      "startdatum": "2018-12-24 10:00:00",
+      "enddatum": "2018-12-24 11:00:00",
+      "wertermittlungsverfahren": "PROGNOSE",
+      "obiskennzahl": "4-5-6-7",
+      "wert": 9722.25,
+      "einheit": "MWH"
+    },
+    {
+      "startdatum": "2018-12-24 11:00:00",
+      "enddatum": "2018-12-24 12:00:00",
+      "wertermittlungsverfahren": "PROGNOSE",
+      "obiskennzahl": "4-5-6-7",
+      "wert": 9833.0,
+      "einheit": "MWH"
+    },
+    {
+      "startdatum": "2018-12-24 12:00:00",
+      "enddatum": "2018-12-24 13:00:00",
+      "wertermittlungsverfahren": "PROGNOSE",
+      "obiskennzahl": "4-5-6-7",
+      "wert": 9467.5,
+      "einheit": "MWH"
+    },
+    {
+      "startdatum": "2018-12-24 13:00:00",
+      "enddatum": "2018-12-24 14:00:00",
+      "wertermittlungsverfahren": "PROGNOSE",
+      "obiskennzahl": "4-5-6-7",
+      "wert": 8383.25,
+      "einheit": "MWH"
+    },
+    {
+      "startdatum": "2018-12-24 14:00:00",
+      "enddatum": "2018-12-24 15:00:00",
+      "wertermittlungsverfahren": "PROGNOSE",
+      "obiskennzahl": "4-5-6-7",
+      "wert": 8531.0,
+      "einheit": "MWH"
+    },
+    {
+      "startdatum": "2018-12-24 15:00:00",
+      "enddatum": "2018-12-24 16:00:00",
+      "wertermittlungsverfahren": "PROGNOSE",
+      "obiskennzahl": "4-5-6-7",
+      "wert": 9639.75,
+      "einheit": "MWH"
+    },
+    {
+      "startdatum": "2018-12-24 16:00:00",
+      "enddatum": "2018-12-24 17:00:00",
+      "wertermittlungsverfahren": "PROGNOSE",
+      "obiskennzahl": "4-5-6-7",
+      "wert": 10062.25,
+      "einheit": "MWH"
+    },
+    {
+      "startdatum": "2018-12-24 17:00:00",
+      "enddatum": "2018-12-24 18:00:00",
+      "wertermittlungsverfahren": "PROGNOSE",
+      "obiskennzahl": "4-5-6-7",
+      "wert": 9531.75,
+      "einheit": "MWH"
+    },
+    {
+      "startdatum": "2018-12-24 18:00:00",
+      "enddatum": "2018-12-24 19:00:00",
+      "wertermittlungsverfahren": "PROGNOSE",
+      "obiskennzahl": "4-5-6-7",
+      "wert": 8367.0,
+      "einheit": "MWH"
+    },
+    {
+      "startdatum": "2018-12-24 19:00:00",
+      "enddatum": "2018-12-24 20:00:00",
+      "wertermittlungsverfahren": "PROGNOSE",
+      "obiskennzahl": "4-5-6-7",
+      "wert": 8438.5,
+      "einheit": "MWH"
+    },
+    {
+      "startdatum": "2018-12-24 20:00:00",
+      "enddatum": "2018-12-24 21:00:00",
+      "wertermittlungsverfahren": "PROGNOSE",
+      "obiskennzahl": "4-5-6-7",
+      "wert": 8437.25,
+      "einheit": "MWH"
+    },
+    {
+      "startdatum": "2018-12-24 21:00:00",
+      "enddatum": "2018-12-24 22:00:00",
+      "wertermittlungsverfahren": "PROGNOSE",
+      "obiskennzahl": "4-5-6-7",
+      "wert": 8346.5,
+      "einheit": "MWH"
+    },
+    {
+      "startdatum": "2018-12-24 22:00:00",
+      "enddatum": "2018-12-24 23:00:00",
+      "wertermittlungsverfahren": "PROGNOSE",
+      "obiskennzahl": "4-5-6-7",
+      "wert": 7478.25,
+      "einheit": "MWH"
+    },
+    {
+      "startdatum": "2018-12-24 23:00:00",
+      "enddatum": "2018-12-25 00:00:00",
+      "wertermittlungsverfahren": "PROGNOSE",
+      "obiskennzahl": "4-5-6-7",
+      "wert": 5003.75,
+      "einheit": "MWH"
+    },
+    {
+      "startdatum": "2018-12-25 00:00:00",
+      "enddatum": "2018-12-25 01:00:00",
+      "wertermittlungsverfahren": "PROGNOSE",
+      "obiskennzahl": "4-5-6-7",
+      "wert": 4576.75,
+      "einheit": "MWH"
+    },
+    {
+      "startdatum": "2018-12-25 01:00:00",
+      "enddatum": "2018-12-25 02:00:00",
+      "wertermittlungsverfahren": "PROGNOSE",
+      "obiskennzahl": "4-5-6-7",
+      "wert": 4459.5,
+      "einheit": "MWH"
+    },
+    {
+      "startdatum": "2018-12-25 02:00:00",
+      "enddatum": "2018-12-25 03:00:00",
+      "wertermittlungsverfahren": "PROGNOSE",
+      "obiskennzahl": "4-5-6-7",
+      "wert": 4435.75,
+      "einheit": "MWH"
+    },
+    {
+      "startdatum": "2018-12-25 03:00:00",
+      "enddatum": "2018-12-25 04:00:00",
+      "wertermittlungsverfahren": "PROGNOSE",
+      "obiskennzahl": "4-5-6-7",
+      "wert": 4155.5,
+      "einheit": "MWH"
+    },
+    {
+      "startdatum": "2018-12-25 04:00:00",
+      "enddatum": "2018-12-25 05:00:00",
+      "wertermittlungsverfahren": "PROGNOSE",
+      "obiskennzahl": "4-5-6-7",
+      "wert": 4163.25,
+      "einheit": "MWH"
+    },
+    {
+      "startdatum": "2018-12-25 05:00:00",
+      "enddatum": "2018-12-25 06:00:00",
+      "wertermittlungsverfahren": "PROGNOSE",
+      "obiskennzahl": "4-5-6-7",
+      "wert": 4164.5,
+      "einheit": "MWH"
+    },
+    {
+      "startdatum": "2018-12-25 06:00:00",
+      "enddatum": "2018-12-25 07:00:00",
+      "wertermittlungsverfahren": "PROGNOSE",
+      "obiskennzahl": "4-5-6-7",
+      "wert": 4153.5,
+      "einheit": "MWH"
+    },
+    {
+      "startdatum": "2018-12-25 07:00:00",
+      "enddatum": "2018-12-25 08:00:00",
+      "wertermittlungsverfahren": "PROGNOSE",
+      "obiskennzahl": "4-5-6-7",
+      "wert": 4477.5,
+      "einheit": "MWH"
+    },
+    {
+      "startdatum": "2018-12-25 08:00:00",
+      "enddatum": "2018-12-25 09:00:00",
+      "wertermittlungsverfahren": "PROGNOSE",
+      "obiskennzahl": "4-5-6-7",
+      "wert": 4649.75,
+      "einheit": "MWH"
+    },
+    {
+      "startdatum": "2018-12-25 09:00:00",
+      "enddatum": "2018-12-25 10:00:00",
+      "wertermittlungsverfahren": "PROGNOSE",
+      "obiskennzahl": "4-5-6-7",
+      "wert": 4246.75,
+      "einheit": "MWH"
+    },
+    {
+      "startdatum": "2018-12-25 10:00:00",
+      "enddatum": "2018-12-25 11:00:00",
+      "wertermittlungsverfahren": "PROGNOSE",
+      "obiskennzahl": "4-5-6-7",
+      "wert": 4352.75,
+      "einheit": "MWH"
+    },
+    {
+      "startdatum": "2018-12-25 11:00:00",
+      "enddatum": "2018-12-25 12:00:00",
+      "wertermittlungsverfahren": "PROGNOSE",
+      "obiskennzahl": "4-5-6-7",
+      "wert": 5298.25,
+      "einheit": "MWH"
+    },
+    {
+      "startdatum": "2018-12-25 12:00:00",
+      "enddatum": "2018-12-25 13:00:00",
+      "wertermittlungsverfahren": "PROGNOSE",
+      "obiskennzahl": "4-5-6-7",
+      "wert": 4123.75,
+      "einheit": "MWH"
+    },
+    {
+      "startdatum": "2018-12-25 13:00:00",
+      "enddatum": "2018-12-25 14:00:00",
+      "wertermittlungsverfahren": "PROGNOSE",
+      "obiskennzahl": "4-5-6-7",
+      "wert": 4141.0,
+      "einheit": "MWH"
+    },
+    {
+      "startdatum": "2018-12-25 14:00:00",
+      "enddatum": "2018-12-25 15:00:00",
+      "wertermittlungsverfahren": "PROGNOSE",
+      "obiskennzahl": "4-5-6-7",
+      "wert": 4212.0,
+      "einheit": "MWH"
+    },
+    {
+      "startdatum": "2018-12-25 15:00:00",
+      "enddatum": "2018-12-25 16:00:00",
+      "wertermittlungsverfahren": "PROGNOSE",
+      "obiskennzahl": "4-5-6-7",
+      "wert": 5605.75,
+      "einheit": "MWH"
+    },
+    {
+      "startdatum": "2018-12-25 16:00:00",
+      "enddatum": "2018-12-25 17:00:00",
+      "wertermittlungsverfahren": "PROGNOSE",
+      "obiskennzahl": "4-5-6-7",
+      "wert": 6757.25,
+      "einheit": "MWH"
+    },
+    {
+      "startdatum": "2018-12-25 17:00:00",
+      "enddatum": "2018-12-25 18:00:00",
+      "wertermittlungsverfahren": "PROGNOSE",
+      "obiskennzahl": "4-5-6-7",
+      "wert": 8291.75,
+      "einheit": "MWH"
+    },
+    {
+      "startdatum": "2018-12-25 18:00:00",
+      "enddatum": "2018-12-25 19:00:00",
+      "wertermittlungsverfahren": "PROGNOSE",
+      "obiskennzahl": "4-5-6-7",
+      "wert": 7324.25,
+      "einheit": "MWH"
+    },
+    {
+      "startdatum": "2018-12-25 19:00:00",
+      "enddatum": "2018-12-25 20:00:00",
+      "wertermittlungsverfahren": "PROGNOSE",
+      "obiskennzahl": "4-5-6-7",
+      "wert": 6753.75,
+      "einheit": "MWH"
+    },
+    {
+      "startdatum": "2018-12-25 20:00:00",
+      "enddatum": "2018-12-25 21:00:00",
+      "wertermittlungsverfahren": "PROGNOSE",
+      "obiskennzahl": "4-5-6-7",
+      "wert": 6463.0,
+      "einheit": "MWH"
+    },
+    {
+      "startdatum": "2018-12-25 21:00:00",
+      "enddatum": "2018-12-25 22:00:00",
+      "wertermittlungsverfahren": "PROGNOSE",
+      "obiskennzahl": "4-5-6-7",
+      "wert": 6333.25,
+      "einheit": "MWH"
+    },
+    {
+      "startdatum": "2018-12-25 22:00:00",
+      "enddatum": "2018-12-25 23:00:00",
+      "wertermittlungsverfahren": "PROGNOSE",
+      "obiskennzahl": "4-5-6-7",
+      "wert": 5467.0,
+      "einheit": "MWH"
+    },
+    {
+      "startdatum": "2018-12-25 23:00:00",
+      "enddatum": "2018-12-26 00:00:00",
+      "wertermittlungsverfahren": "PROGNOSE",
+      "obiskennzahl": "4-5-6-7",
+      "wert": 3655.5,
+      "einheit": "MWH"
+    },
+    {
+      "startdatum": "2018-12-26 00:00:00",
+      "enddatum": "2018-12-26 01:00:00",
+      "wertermittlungsverfahren": "PROGNOSE",
+      "obiskennzahl": "4-5-6-7",
+      "wert": 3599.5,
+      "einheit": "MWH"
+    },
+    {
+      "startdatum": "2018-12-26 01:00:00",
+      "enddatum": "2018-12-26 02:00:00",
+      "wertermittlungsverfahren": "PROGNOSE",
+      "obiskennzahl": "4-5-6-7",
+      "wert": 3621.5,
+      "einheit": "MWH"
+    },
+    {
+      "startdatum": "2018-12-26 02:00:00",
+      "enddatum": "2018-12-26 03:00:00",
+      "wertermittlungsverfahren": "PROGNOSE",
+      "obiskennzahl": "4-5-6-7",
+      "wert": 3677.0,
+      "einheit": "MWH"
+    },
+    {
+      "startdatum": "2018-12-26 03:00:00",
+      "enddatum": "2018-12-26 04:00:00",
+      "wertermittlungsverfahren": "PROGNOSE",
+      "obiskennzahl": "4-5-6-7",
+      "wert": 3601.5,
+      "einheit": "MWH"
+    },
+    {
+      "startdatum": "2018-12-26 04:00:00",
+      "enddatum": "2018-12-26 05:00:00",
+      "wertermittlungsverfahren": "PROGNOSE",
+      "obiskennzahl": "4-5-6-7",
+      "wert": 4517.75,
+      "einheit": "MWH"
+    },
+    {
+      "startdatum": "2018-12-26 05:00:00",
+      "enddatum": "2018-12-26 06:00:00",
+      "wertermittlungsverfahren": "PROGNOSE",
+      "obiskennzahl": "4-5-6-7",
+      "wert": 5251.75,
+      "einheit": "MWH"
+    },
+    {
+      "startdatum": "2018-12-26 06:00:00",
+      "enddatum": "2018-12-26 07:00:00",
+      "wertermittlungsverfahren": "PROGNOSE",
+      "obiskennzahl": "4-5-6-7",
+      "wert": 5874.5,
+      "einheit": "MWH"
+    },
+    {
+      "startdatum": "2018-12-26 07:00:00",
+      "enddatum": "2018-12-26 08:00:00",
+      "wertermittlungsverfahren": "PROGNOSE",
+      "obiskennzahl": "4-5-6-7",
+      "wert": 6092.25,
+      "einheit": "MWH"
+    },
+    {
+      "startdatum": "2018-12-26 08:00:00",
+      "enddatum": "2018-12-26 09:00:00",
+      "wertermittlungsverfahren": "PROGNOSE",
+      "obiskennzahl": "4-5-6-7",
+      "wert": 6205.75,
+      "einheit": "MWH"
+    },
+    {
+      "startdatum": "2018-12-26 09:00:00",
+      "enddatum": "2018-12-26 10:00:00",
+      "wertermittlungsverfahren": "PROGNOSE",
+      "obiskennzahl": "4-5-6-7",
+      "wert": 6289.25,
+      "einheit": "MWH"
+    },
+    {
+      "startdatum": "2018-12-26 19:00:00",
+      "enddatum": "2018-12-26 20:00:00",
+      "wertermittlungsverfahren": "PROGNOSE",
+      "obiskennzahl": "4-5-6-7",
+      "wert": 8881.25,
+      "einheit": "MWH"
+    },
+    {
+      "startdatum": "2018-12-26 20:00:00",
+      "enddatum": "2018-12-26 21:00:00",
+      "wertermittlungsverfahren": "PROGNOSE",
+      "obiskennzahl": "4-5-6-7",
+      "wert": 7738.5,
+      "einheit": "MWH"
+    },
+    {
+      "startdatum": "2018-12-26 21:00:00",
+      "enddatum": "2018-12-26 22:00:00",
+      "wertermittlungsverfahren": "PROGNOSE",
+      "obiskennzahl": "4-5-6-7",
+      "wert": 6924.75,
+      "einheit": "MWH"
+    },
+    {
+      "startdatum": "2018-12-26 22:00:00",
+      "enddatum": "2018-12-26 23:00:00",
+      "wertermittlungsverfahren": "PROGNOSE",
+      "obiskennzahl": "4-5-6-7",
+      "wert": 6840.75,
+      "einheit": "MWH"
+    },
+    {
+      "startdatum": "2018-12-26 23:00:00",
+      "enddatum": "2018-12-27 00:00:00",
+      "wertermittlungsverfahren": "PROGNOSE",
+      "obiskennzahl": "4-5-6-7",
+      "wert": 6900.25,
+      "einheit": "MWH"
+    },
+    {
+      "startdatum": "2018-12-27 00:00:00",
+      "enddatum": "2018-12-27 01:00:00",
+      "wertermittlungsverfahren": "PROGNOSE",
+      "obiskennzahl": "4-5-6-7",
+      "wert": 6920.75,
+      "einheit": "MWH"
+    },
+    {
+      "startdatum": "2018-12-27 01:00:00",
+      "enddatum": "2018-12-27 02:00:00",
+      "wertermittlungsverfahren": "PROGNOSE",
+      "obiskennzahl": "4-5-6-7",
+      "wert": 6889.5,
+      "einheit": "MWH"
+    },
+    {
+      "startdatum": "2018-12-27 02:00:00",
+      "enddatum": "2018-12-27 03:00:00",
+      "wertermittlungsverfahren": "PROGNOSE",
+      "obiskennzahl": "4-5-6-7",
+      "wert": 6905.25,
+      "einheit": "MWH"
+    },
+    {
+      "startdatum": "2018-12-27 03:00:00",
+      "enddatum": "2018-12-27 04:00:00",
+      "wertermittlungsverfahren": "PROGNOSE",
+      "obiskennzahl": "4-5-6-7",
+      "wert": 6895.25,
+      "einheit": "MWH"
+    },
+    {
+      "startdatum": "2018-12-27 04:00:00",
+      "enddatum": "2018-12-27 05:00:00",
+      "wertermittlungsverfahren": "PROGNOSE",
+      "obiskennzahl": "4-5-6-7",
+      "wert": 6870.5,
+      "einheit": "MWH"
+    },
+    {
+      "startdatum": "2018-12-27 05:00:00",
+      "enddatum": "2018-12-27 06:00:00",
+      "wertermittlungsverfahren": "PROGNOSE",
+      "obiskennzahl": "4-5-6-7",
+      "wert": 6921.25,
+      "einheit": "MWH"
+    },
+    {
+      "startdatum": "2018-12-27 06:00:00",
+      "enddatum": "2018-12-27 07:00:00",
+      "wertermittlungsverfahren": "PROGNOSE",
+      "obiskennzahl": "4-5-6-7",
+      "wert": 6986.25,
+      "einheit": "MWH"
+    },
+    {
+      "startdatum": "2018-12-27 07:00:00",
+      "enddatum": "2018-12-27 08:00:00",
+      "wertermittlungsverfahren": "PROGNOSE",
+      "obiskennzahl": "4-5-6-7",
+      "wert": 8471.25,
+      "einheit": "MWH"
+    },
+    {
+      "startdatum": "2018-12-27 08:00:00",
+      "enddatum": "2018-12-27 09:00:00",
+      "wertermittlungsverfahren": "PROGNOSE",
+      "obiskennzahl": "4-5-6-7",
+      "wert": 7333.0,
+      "einheit": "MWH"
+    },
+    {
+      "startdatum": "2018-12-27 09:00:00",
+      "enddatum": "2018-12-27 10:00:00",
+      "wertermittlungsverfahren": "PROGNOSE",
+      "obiskennzahl": "4-5-6-7",
+      "wert": 6885.5,
+      "einheit": "MWH"
+    },
+    {
+      "startdatum": "2018-12-27 10:00:00",
+      "enddatum": "2018-12-27 11:00:00",
+      "wertermittlungsverfahren": "PROGNOSE",
+      "obiskennzahl": "4-5-6-7",
+      "wert": 6931.25,
+      "einheit": "MWH"
+    },
+    {
+      "startdatum": "2018-12-27 11:00:00",
+      "enddatum": "2018-12-27 12:00:00",
+      "wertermittlungsverfahren": "PROGNOSE",
+      "obiskennzahl": "4-5-6-7",
+      "wert": 6962.0,
+      "einheit": "MWH"
+    },
+    {
+      "startdatum": "2018-12-27 12:00:00",
+      "enddatum": "2018-12-27 13:00:00",
+      "wertermittlungsverfahren": "PROGNOSE",
+      "obiskennzahl": "4-5-6-7",
+      "wert": 6945.5,
+      "einheit": "MWH"
+    },
+    {
+      "startdatum": "2018-12-27 13:00:00",
+      "enddatum": "2018-12-27 14:00:00",
+      "wertermittlungsverfahren": "PROGNOSE",
+      "obiskennzahl": "4-5-6-7",
+      "wert": 6931.25,
+      "einheit": "MWH"
+    },
+    {
+      "startdatum": "2018-12-27 14:00:00",
+      "enddatum": "2018-12-27 15:00:00",
+      "wertermittlungsverfahren": "PROGNOSE",
+      "obiskennzahl": "4-5-6-7",
+      "wert": 6941.75,
+      "einheit": "MWH"
+    },
+    {
+      "startdatum": "2018-12-27 15:00:00",
+      "enddatum": "2018-12-27 16:00:00",
+      "wertermittlungsverfahren": "PROGNOSE",
+      "obiskennzahl": "4-5-6-7",
+      "wert": 7982.0,
+      "einheit": "MWH"
+    },
+    {
+      "startdatum": "2018-12-27 16:00:00",
+      "enddatum": "2018-12-27 17:00:00",
+      "wertermittlungsverfahren": "PROGNOSE",
+      "obiskennzahl": "4-5-6-7",
+      "wert": 9198.0,
+      "einheit": "MWH"
+    },
+    {
+      "startdatum": "2018-12-27 17:00:00",
+      "enddatum": "2018-12-27 18:00:00",
+      "wertermittlungsverfahren": "PROGNOSE",
+      "obiskennzahl": "4-5-6-7",
+      "wert": 9168.0,
+      "einheit": "MWH"
+    },
+    {
+      "startdatum": "2018-12-27 18:00:00",
+      "enddatum": "2018-12-27 19:00:00",
+      "wertermittlungsverfahren": "PROGNOSE",
+      "obiskennzahl": "4-5-6-7",
+      "wert": 8858.0,
+      "einheit": "MWH"
+    },
+    {
+      "startdatum": "2018-12-27 19:00:00",
+      "enddatum": "2018-12-27 20:00:00",
+      "wertermittlungsverfahren": "PROGNOSE",
+      "obiskennzahl": "4-5-6-7",
+      "wert": 7447.25,
+      "einheit": "MWH"
+    },
+    {
+      "startdatum": "2018-12-27 20:00:00",
+      "enddatum": "2018-12-27 21:00:00",
+      "wertermittlungsverfahren": "PROGNOSE",
+      "obiskennzahl": "4-5-6-7",
+      "wert": 6779.5,
+      "einheit": "MWH"
+    },
+    {
+      "startdatum": "2018-12-27 21:00:00",
+      "enddatum": "2018-12-27 22:00:00",
+      "wertermittlungsverfahren": "PROGNOSE",
+      "obiskennzahl": "4-5-6-7",
+      "wert": 6748.25,
+      "einheit": "MWH"
+    },
+    {
+      "startdatum": "2018-12-27 22:00:00",
+      "enddatum": "2018-12-27 23:00:00",
+      "wertermittlungsverfahren": "PROGNOSE",
+      "obiskennzahl": "4-5-6-7",
+      "wert": 6677.5,
+      "einheit": "MWH"
+    },
+    {
+      "startdatum": "2018-12-27 23:00:00",
+      "enddatum": "2018-12-28 00:00:00",
+      "wertermittlungsverfahren": "PROGNOSE",
+      "obiskennzahl": "4-5-6-7",
+      "wert": 7030.5,
+      "einheit": "MWH"
+    },
+    {
+      "startdatum": "2018-12-28 00:00:00",
+      "enddatum": "2018-12-28 01:00:00",
+      "wertermittlungsverfahren": "PROGNOSE",
+      "obiskennzahl": "4-5-6-7",
+      "wert": 6999.75,
+      "einheit": "MWH"
+    },
+    {
+      "startdatum": "2018-12-28 01:00:00",
+      "enddatum": "2018-12-28 02:00:00",
+      "wertermittlungsverfahren": "PROGNOSE",
+      "obiskennzahl": "4-5-6-7",
+      "wert": 7073.5,
+      "einheit": "MWH"
+    },
+    {
+      "startdatum": "2018-12-28 02:00:00",
+      "enddatum": "2018-12-28 03:00:00",
+      "wertermittlungsverfahren": "PROGNOSE",
+      "obiskennzahl": "4-5-6-7",
+      "wert": 7070.0,
+      "einheit": "MWH"
+    },
+    {
+      "startdatum": "2018-12-28 03:00:00",
+      "enddatum": "2018-12-28 04:00:00",
+      "wertermittlungsverfahren": "PROGNOSE",
+      "obiskennzahl": "4-5-6-7",
+      "wert": 7062.5,
+      "einheit": "MWH"
+    },
+    {
+      "startdatum": "2018-12-28 04:00:00",
+      "enddatum": "2018-12-28 05:00:00",
+      "wertermittlungsverfahren": "PROGNOSE",
+      "obiskennzahl": "4-5-6-7",
+      "wert": 7095.75,
+      "einheit": "MWH"
+    },
+    {
+      "startdatum": "2018-12-28 05:00:00",
+      "enddatum": "2018-12-28 06:00:00",
+      "wertermittlungsverfahren": "PROGNOSE",
+      "obiskennzahl": "4-5-6-7",
+      "wert": 7107.75,
+      "einheit": "MWH"
+    },
+    {
+      "startdatum": "2018-12-28 06:00:00",
+      "enddatum": "2018-12-28 07:00:00",
+      "wertermittlungsverfahren": "PROGNOSE",
+      "obiskennzahl": "4-5-6-7",
+      "wert": 7214.25,
+      "einheit": "MWH"
+    },
+    {
+      "startdatum": "2018-12-28 07:00:00",
+      "enddatum": "2018-12-28 08:00:00",
+      "wertermittlungsverfahren": "PROGNOSE",
+      "obiskennzahl": "4-5-6-7",
+      "wert": 8193.25,
+      "einheit": "MWH"
+    },
+    {
+      "startdatum": "2018-12-28 08:00:00",
+      "enddatum": "2018-12-28 09:00:00",
+      "wertermittlungsverfahren": "PROGNOSE",
+      "obiskennzahl": "4-5-6-7",
+      "wert": 8455.5,
+      "einheit": "MWH"
+    },
+    {
+      "startdatum": "2018-12-28 09:00:00",
+      "enddatum": "2018-12-28 10:00:00",
+      "wertermittlungsverfahren": "PROGNOSE",
+      "obiskennzahl": "4-5-6-7",
+      "wert": 8132.75,
+      "einheit": "MWH"
+    },
+    {
+      "startdatum": "2018-12-28 10:00:00",
+      "enddatum": "2018-12-28 11:00:00",
+      "wertermittlungsverfahren": "PROGNOSE",
+      "obiskennzahl": "4-5-6-7",
+      "wert": 7382.0,
+      "einheit": "MWH"
+    },
+    {
+      "startdatum": "2018-12-28 11:00:00",
+      "enddatum": "2018-12-28 12:00:00",
+      "wertermittlungsverfahren": "PROGNOSE",
+      "obiskennzahl": "4-5-6-7",
+      "wert": 7130.5,
+      "einheit": "MWH"
+    },
+    {
+      "startdatum": "2018-12-28 12:00:00",
+      "enddatum": "2018-12-28 13:00:00",
+      "wertermittlungsverfahren": "PROGNOSE",
+      "obiskennzahl": "4-5-6-7",
+      "wert": 7100.25,
+      "einheit": "MWH"
+    },
+    {
+      "startdatum": "2018-12-28 13:00:00",
+      "enddatum": "2018-12-28 14:00:00",
+      "wertermittlungsverfahren": "PROGNOSE",
+      "obiskennzahl": "4-5-6-7",
+      "wert": 7087.25,
+      "einheit": "MWH"
+    },
+    {
+      "startdatum": "2018-12-28 14:00:00",
+      "enddatum": "2018-12-28 15:00:00",
+      "wertermittlungsverfahren": "PROGNOSE",
+      "obiskennzahl": "4-5-6-7",
+      "wert": 7107.25,
+      "einheit": "MWH"
+    },
+    {
+      "startdatum": "2018-12-28 15:00:00",
+      "enddatum": "2018-12-28 16:00:00",
+      "wertermittlungsverfahren": "PROGNOSE",
+      "obiskennzahl": "4-5-6-7",
+      "wert": 7029.25,
+      "einheit": "MWH"
+    },
+    {
+      "startdatum": "2018-12-28 16:00:00",
+      "enddatum": "2018-12-28 17:00:00",
+      "wertermittlungsverfahren": "PROGNOSE",
+      "obiskennzahl": "4-5-6-7",
+      "wert": 9360.25,
+      "einheit": "MWH"
+    },
+    {
+      "startdatum": "2018-12-28 17:00:00",
+      "enddatum": "2018-12-28 18:00:00",
+      "wertermittlungsverfahren": "PROGNOSE",
+      "obiskennzahl": "4-5-6-7",
+      "wert": 9338.25,
+      "einheit": "MWH"
+    },
+    {
+      "startdatum": "2018-12-28 18:00:00",
+      "enddatum": "2018-12-28 19:00:00",
+      "wertermittlungsverfahren": "PROGNOSE",
+      "obiskennzahl": "4-5-6-7",
+      "wert": 9267.25,
+      "einheit": "MWH"
+    },
+    {
+      "startdatum": "2018-12-28 19:00:00",
+      "enddatum": "2018-12-28 20:00:00",
+      "wertermittlungsverfahren": "PROGNOSE",
+      "obiskennzahl": "4-5-6-7",
+      "wert": 7349.5,
+      "einheit": "MWH"
+    },
+    {
+      "startdatum": "2018-12-28 20:00:00",
+      "enddatum": "2018-12-28 21:00:00",
+      "wertermittlungsverfahren": "PROGNOSE",
+      "obiskennzahl": "4-5-6-7",
+      "wert": 6838.75,
+      "einheit": "MWH"
+    },
+    {
+      "startdatum": "2018-12-28 21:00:00",
+      "enddatum": "2018-12-28 22:00:00",
+      "wertermittlungsverfahren": "PROGNOSE",
+      "obiskennzahl": "4-5-6-7",
+      "wert": 6831.0,
+      "einheit": "MWH"
+    },
+    {
+      "startdatum": "2018-12-28 22:00:00",
+      "enddatum": "2018-12-28 23:00:00",
+      "wertermittlungsverfahren": "PROGNOSE",
+      "obiskennzahl": "4-5-6-7",
+      "wert": 6788.75,
+      "einheit": "MWH"
+    },
+    {
+      "startdatum": "2018-12-28 23:00:00",
+      "enddatum": "2018-12-29 00:00:00",
+      "wertermittlungsverfahren": "PROGNOSE",
+      "obiskennzahl": "4-5-6-7",
+      "wert": 7321.0,
+      "einheit": "MWH"
+    },
+    {
+      "startdatum": "2018-12-29 00:00:00",
+      "enddatum": "2018-12-29 01:00:00",
+      "wertermittlungsverfahren": "PROGNOSE",
+      "obiskennzahl": "4-5-6-7",
+      "wert": 7225.75,
+      "einheit": "MWH"
+    },
+    {
+      "startdatum": "2018-12-29 01:00:00",
+      "enddatum": "2018-12-29 02:00:00",
+      "wertermittlungsverfahren": "PROGNOSE",
+      "obiskennzahl": "4-5-6-7",
+      "wert": 7108.75,
+      "einheit": "MWH"
+    },
+    {
+      "startdatum": "2018-12-29 02:00:00",
+      "enddatum": "2018-12-29 03:00:00",
+      "wertermittlungsverfahren": "PROGNOSE",
+      "obiskennzahl": "4-5-6-7",
+      "wert": 7024.5,
+      "einheit": "MWH"
+    },
+    {
+      "startdatum": "2018-12-29 03:00:00",
+      "enddatum": "2018-12-29 04:00:00",
+      "wertermittlungsverfahren": "PROGNOSE",
+      "obiskennzahl": "4-5-6-7",
+      "wert": 6930.0,
+      "einheit": "MWH"
+    },
+    {
+      "startdatum": "2018-12-29 04:00:00",
+      "enddatum": "2018-12-29 05:00:00",
+      "wertermittlungsverfahren": "PROGNOSE",
+      "obiskennzahl": "4-5-6-7",
+      "wert": 6814.75,
+      "einheit": "MWH"
+    },
+    {
+      "startdatum": "2018-12-29 05:00:00",
+      "enddatum": "2018-12-29 06:00:00",
+      "wertermittlungsverfahren": "PROGNOSE",
+      "obiskennzahl": "4-5-6-7",
+      "wert": 6730.75,
+      "einheit": "MWH"
+    },
+    {
+      "startdatum": "2018-12-29 06:00:00",
+      "enddatum": "2018-12-29 07:00:00",
+      "wertermittlungsverfahren": "PROGNOSE",
+      "obiskennzahl": "4-5-6-7",
+      "wert": 6782.25,
+      "einheit": "MWH"
+    },
+    {
+      "startdatum": "2018-12-29 07:00:00",
+      "enddatum": "2018-12-29 08:00:00",
+      "wertermittlungsverfahren": "PROGNOSE",
+      "obiskennzahl": "4-5-6-7",
+      "wert": 7020.5,
+      "einheit": "MWH"
+    },
+    {
+      "startdatum": "2018-12-29 08:00:00",
+      "enddatum": "2018-12-29 09:00:00",
+      "wertermittlungsverfahren": "PROGNOSE",
+      "obiskennzahl": "4-5-6-7",
+      "wert": 7138.5,
+      "einheit": "MWH"
+    },
+    {
+      "startdatum": "2018-12-29 09:00:00",
+      "enddatum": "2018-12-29 10:00:00",
+      "wertermittlungsverfahren": "PROGNOSE",
+      "obiskennzahl": "4-5-6-7",
+      "wert": 7915.75,
+      "einheit": "MWH"
+    },
+    {
+      "startdatum": "2018-12-29 10:00:00",
+      "enddatum": "2018-12-29 11:00:00",
+      "wertermittlungsverfahren": "PROGNOSE",
+      "obiskennzahl": "4-5-6-7",
+      "wert": 7214.0,
+      "einheit": "MWH"
+    },
+    {
+      "startdatum": "2018-12-29 11:00:00",
+      "enddatum": "2018-12-29 12:00:00",
+      "wertermittlungsverfahren": "PROGNOSE",
+      "obiskennzahl": "4-5-6-7",
+      "wert": 6949.0,
+      "einheit": "MWH"
+    },
+    {
+      "startdatum": "2018-12-29 12:00:00",
+      "enddatum": "2018-12-29 13:00:00",
+      "wertermittlungsverfahren": "PROGNOSE",
+      "obiskennzahl": "4-5-6-7",
+      "wert": 6965.75,
+      "einheit": "MWH"
+    },
+    {
+      "startdatum": "2018-12-29 13:00:00",
+      "enddatum": "2018-12-29 14:00:00",
+      "wertermittlungsverfahren": "PROGNOSE",
+      "obiskennzahl": "4-5-6-7",
+      "wert": 7045.75,
+      "einheit": "MWH"
+    },
+    {
+      "startdatum": "2018-12-29 14:00:00",
+      "enddatum": "2018-12-29 15:00:00",
+      "wertermittlungsverfahren": "PROGNOSE",
+      "obiskennzahl": "4-5-6-7",
+      "wert": 7181.5,
+      "einheit": "MWH"
+    },
+    {
+      "startdatum": "2018-12-29 15:00:00",
+      "enddatum": "2018-12-29 16:00:00",
+      "wertermittlungsverfahren": "PROGNOSE",
+      "obiskennzahl": "4-5-6-7",
+      "wert": 7214.25,
+      "einheit": "MWH"
+    },
+    {
+      "startdatum": "2018-12-29 16:00:00",
+      "enddatum": "2018-12-29 17:00:00",
+      "wertermittlungsverfahren": "PROGNOSE",
+      "obiskennzahl": "4-5-6-7",
+      "wert": 7166.5,
+      "einheit": "MWH"
+    },
+    {
+      "startdatum": "2018-12-29 17:00:00",
+      "enddatum": "2018-12-29 18:00:00",
+      "wertermittlungsverfahren": "PROGNOSE",
+      "obiskennzahl": "4-5-6-7",
+      "wert": 7096.75,
+      "einheit": "MWH"
+    },
+    {
+      "startdatum": "2018-12-29 18:00:00",
+      "enddatum": "2018-12-29 19:00:00",
+      "wertermittlungsverfahren": "PROGNOSE",
+      "obiskennzahl": "4-5-6-7",
+      "wert": 6417.0,
+      "einheit": "MWH"
+    },
+    {
+      "startdatum": "2018-12-29 19:00:00",
+      "enddatum": "2018-12-29 20:00:00",
+      "wertermittlungsverfahren": "PROGNOSE",
+      "obiskennzahl": "4-5-6-7",
+      "wert": 5500.75,
+      "einheit": "MWH"
+    },
+    {
+      "startdatum": "2018-12-29 20:00:00",
+      "enddatum": "2018-12-29 21:00:00",
+      "wertermittlungsverfahren": "PROGNOSE",
+      "obiskennzahl": "4-5-6-7",
+      "wert": 3927.5,
+      "einheit": "MWH"
+    },
+    {
+      "startdatum": "2018-12-29 21:00:00",
+      "enddatum": "2018-12-29 22:00:00",
+      "wertermittlungsverfahren": "PROGNOSE",
+      "obiskennzahl": "4-5-6-7",
+      "wert": 3172.75,
+      "einheit": "MWH"
+    },
+    {
+      "startdatum": "2018-12-29 22:00:00",
+      "enddatum": "2018-12-29 23:00:00",
+      "wertermittlungsverfahren": "PROGNOSE",
+      "obiskennzahl": "4-5-6-7",
+      "wert": 2787.75,
+      "einheit": "MWH"
+    },
+    {
+      "startdatum": "2018-12-29 23:00:00",
+      "enddatum": "2018-12-30 00:00:00",
+      "wertermittlungsverfahren": "PROGNOSE",
+      "obiskennzahl": "4-5-6-7",
+      "wert": 3473.75,
+      "einheit": "MWH"
+    },
+    {
+      "startdatum": "2018-12-30 00:00:00",
+      "enddatum": "2018-12-30 01:00:00",
+      "wertermittlungsverfahren": "PROGNOSE",
+      "obiskennzahl": "4-5-6-7",
+      "wert": 3485.0,
+      "einheit": "MWH"
+    },
+    {
+      "startdatum": "2018-12-30 01:00:00",
+      "enddatum": "2018-12-30 02:00:00",
+      "wertermittlungsverfahren": "PROGNOSE",
+      "obiskennzahl": "4-5-6-7",
+      "wert": 3493.75,
+      "einheit": "MWH"
+    },
+    {
+      "startdatum": "2018-12-30 02:00:00",
+      "enddatum": "2018-12-30 03:00:00",
+      "wertermittlungsverfahren": "PROGNOSE",
+      "obiskennzahl": "4-5-6-7",
+      "wert": 3541.0,
+      "einheit": "MWH"
+    },
+    {
+      "startdatum": "2018-12-30 03:00:00",
+      "enddatum": "2018-12-30 04:00:00",
+      "wertermittlungsverfahren": "PROGNOSE",
+      "obiskennzahl": "4-5-6-7",
+      "wert": 3779.75,
+      "einheit": "MWH"
+    },
+    {
+      "startdatum": "2018-12-30 04:00:00",
+      "enddatum": "2018-12-30 05:00:00",
+      "wertermittlungsverfahren": "PROGNOSE",
+      "obiskennzahl": "4-5-6-7",
+      "wert": 3827.5,
+      "einheit": "MWH"
+    },
+    {
+      "startdatum": "2018-12-30 05:00:00",
+      "enddatum": "2018-12-30 06:00:00",
+      "wertermittlungsverfahren": "PROGNOSE",
+      "obiskennzahl": "4-5-6-7",
+      "wert": 4121.0,
+      "einheit": "MWH"
+    },
+    {
+      "startdatum": "2018-12-30 06:00:00",
+      "enddatum": "2018-12-30 07:00:00",
+      "wertermittlungsverfahren": "PROGNOSE",
+      "obiskennzahl": "4-5-6-7",
+      "wert": 3877.0,
+      "einheit": "MWH"
+    },
+    {
+      "startdatum": "2018-12-30 07:00:00",
+      "enddatum": "2018-12-30 08:00:00",
+      "wertermittlungsverfahren": "PROGNOSE",
+      "obiskennzahl": "4-5-6-7",
+      "wert": 5590.0,
+      "einheit": "MWH"
+    },
+    {
+      "startdatum": "2018-12-30 08:00:00",
+      "enddatum": "2018-12-30 09:00:00",
+      "wertermittlungsverfahren": "PROGNOSE",
+      "obiskennzahl": "4-5-6-7",
+      "wert": 5978.0,
+      "einheit": "MWH"
+    },
+    {
+      "startdatum": "2018-12-30 09:00:00",
+      "enddatum": "2018-12-30 10:00:00",
+      "wertermittlungsverfahren": "PROGNOSE",
+      "obiskennzahl": "4-5-6-7",
+      "wert": 6026.75,
+      "einheit": "MWH"
+    },
+    {
+      "startdatum": "2018-12-30 10:00:00",
+      "enddatum": "2018-12-30 11:00:00",
+      "wertermittlungsverfahren": "PROGNOSE",
+      "obiskennzahl": "4-5-6-7",
+      "wert": 6305.5,
+      "einheit": "MWH"
+    },
+    {
+      "startdatum": "2018-12-30 11:00:00",
+      "enddatum": "2018-12-30 12:00:00",
+      "wertermittlungsverfahren": "PROGNOSE",
+      "obiskennzahl": "4-5-6-7",
+      "wert": 6517.0,
+      "einheit": "MWH"
+    },
+    {
+      "startdatum": "2018-12-30 12:00:00",
+      "enddatum": "2018-12-30 13:00:00",
+      "wertermittlungsverfahren": "PROGNOSE",
+      "obiskennzahl": "4-5-6-7",
+      "wert": 6379.75,
+      "einheit": "MWH"
+    },
+    {
+      "startdatum": "2018-12-30 13:00:00",
+      "enddatum": "2018-12-30 14:00:00",
+      "wertermittlungsverfahren": "PROGNOSE",
+      "obiskennzahl": "4-5-6-7",
+      "wert": 6636.0,
+      "einheit": "MWH"
+    },
+    {
+      "startdatum": "2018-12-30 14:00:00",
+      "enddatum": "2018-12-30 15:00:00",
+      "wertermittlungsverfahren": "PROGNOSE",
+      "obiskennzahl": "4-5-6-7",
+      "wert": 6576.0,
+      "einheit": "MWH"
+    },
+    {
+      "startdatum": "2018-12-30 15:00:00",
+      "enddatum": "2018-12-30 16:00:00",
+      "wertermittlungsverfahren": "PROGNOSE",
+      "obiskennzahl": "4-5-6-7",
+      "wert": 6668.25,
+      "einheit": "MWH"
+    },
+    {
+      "startdatum": "2018-12-30 16:00:00",
+      "enddatum": "2018-12-30 17:00:00",
+      "wertermittlungsverfahren": "PROGNOSE",
+      "obiskennzahl": "4-5-6-7",
+      "wert": 6848.5,
+      "einheit": "MWH"
+    },
+    {
+      "startdatum": "2018-12-30 17:00:00",
+      "enddatum": "2018-12-30 18:00:00",
+      "wertermittlungsverfahren": "PROGNOSE",
+      "obiskennzahl": "4-5-6-7",
+      "wert": 7530.25,
+      "einheit": "MWH"
+    },
+    {
+      "startdatum": "2018-12-30 18:00:00",
+      "enddatum": "2018-12-30 19:00:00",
+      "wertermittlungsverfahren": "PROGNOSE",
+      "obiskennzahl": "4-5-6-7",
+      "wert": 8792.25,
+      "einheit": "MWH"
+    },
+    {
+      "startdatum": "2018-12-30 19:00:00",
+      "enddatum": "2018-12-30 20:00:00",
+      "wertermittlungsverfahren": "PROGNOSE",
+      "obiskennzahl": "4-5-6-7",
+      "wert": 8607.0,
+      "einheit": "MWH"
+    },
+    {
+      "startdatum": "2018-12-30 20:00:00",
+      "enddatum": "2018-12-30 21:00:00",
+      "wertermittlungsverfahren": "PROGNOSE",
+      "obiskennzahl": "4-5-6-7",
+      "wert": 8891.75,
+      "einheit": "MWH"
+    },
+    {
+      "startdatum": "2018-12-30 21:00:00",
+      "enddatum": "2018-12-30 22:00:00",
+      "wertermittlungsverfahren": "PROGNOSE",
+      "obiskennzahl": "4-5-6-7",
+      "wert": 8699.5,
+      "einheit": "MWH"
+    },
+    {
+      "startdatum": "2018-12-30 22:00:00",
+      "enddatum": "2018-12-30 23:00:00",
+      "wertermittlungsverfahren": "PROGNOSE",
+      "obiskennzahl": "4-5-6-7",
+      "wert": 7634.5,
+      "einheit": "MWH"
+    },
+    {
+      "startdatum": "2018-12-30 23:00:00",
+      "enddatum": "2018-12-31 00:00:00",
+      "wertermittlungsverfahren": "PROGNOSE",
+      "obiskennzahl": "4-5-6-7",
+      "wert": 7445.75,
+      "einheit": "MWH"
+    },
+    {
+      "startdatum": "2018-12-31 00:00:00",
+      "enddatum": "2018-12-31 01:00:00",
+      "wertermittlungsverfahren": "PROGNOSE",
+      "obiskennzahl": "4-5-6-7",
+      "wert": 7540.0,
+      "einheit": "MWH"
+    },
+    {
+      "startdatum": "2018-12-31 01:00:00",
+      "enddatum": "2018-12-31 02:00:00",
+      "wertermittlungsverfahren": "PROGNOSE",
+      "obiskennzahl": "4-5-6-7",
+      "wert": 7764.5,
+      "einheit": "MWH"
+    },
+    {
+      "startdatum": "2018-12-31 02:00:00",
+      "enddatum": "2018-12-31 03:00:00",
+      "wertermittlungsverfahren": "PROGNOSE",
+      "obiskennzahl": "4-5-6-7",
+      "wert": 7949.25,
+      "einheit": "MWH"
+    },
+    {
+      "startdatum": "2018-12-31 03:00:00",
+      "enddatum": "2018-12-31 04:00:00",
+      "wertermittlungsverfahren": "PROGNOSE",
+      "obiskennzahl": "4-5-6-7",
+      "wert": 8152.0,
+      "einheit": "MWH"
+    },
+    {
+      "startdatum": "2018-12-31 04:00:00",
+      "enddatum": "2018-12-31 05:00:00",
+      "wertermittlungsverfahren": "PROGNOSE",
+      "obiskennzahl": "4-5-6-7",
+      "wert": 8347.5,
+      "einheit": "MWH"
+    },
+    {
+      "startdatum": "2018-12-31 05:00:00",
+      "enddatum": "2018-12-31 06:00:00",
+      "wertermittlungsverfahren": "PROGNOSE",
+      "obiskennzahl": "4-5-6-7",
+      "wert": 8503.5,
+      "einheit": "MWH"
+    },
+    {
+      "startdatum": "2018-12-31 06:00:00",
+      "enddatum": "2018-12-31 07:00:00",
+      "wertermittlungsverfahren": "PROGNOSE",
+      "obiskennzahl": "4-5-6-7",
+      "wert": 8826.5,
+      "einheit": "MWH"
+    },
+    {
+      "startdatum": "2018-12-31 07:00:00",
+      "enddatum": "2018-12-31 08:00:00",
+      "wertermittlungsverfahren": "PROGNOSE",
+      "obiskennzahl": "4-5-6-7",
+      "wert": 9473.0,
+      "einheit": "MWH"
+    },
+    {
+      "startdatum": "2018-12-31 08:00:00",
+      "enddatum": "2018-12-31 09:00:00",
+      "wertermittlungsverfahren": "PROGNOSE",
+      "obiskennzahl": "4-5-6-7",
+      "wert": 10405.0,
+      "einheit": "MWH"
+    },
+    {
+      "startdatum": "2018-12-31 09:00:00",
+      "enddatum": "2018-12-31 10:00:00",
+      "wertermittlungsverfahren": "PROGNOSE",
+      "obiskennzahl": "4-5-6-7",
+      "wert": 10450.0,
+      "einheit": "MWH"
+    },
+    {
+      "startdatum": "2018-12-31 10:00:00",
+      "enddatum": "2018-12-31 11:00:00",
+      "wertermittlungsverfahren": "PROGNOSE",
+      "obiskennzahl": "4-5-6-7",
+      "wert": 10103.25,
+      "einheit": "MWH"
+    },
+    {
+      "startdatum": "2018-12-31 11:00:00",
+      "enddatum": "2018-12-31 12:00:00",
+      "wertermittlungsverfahren": "PROGNOSE",
+      "obiskennzahl": "4-5-6-7",
+      "wert": 9411.5,
+      "einheit": "MWH"
+    },
+    {
+      "startdatum": "2018-12-31 12:00:00",
+      "enddatum": "2018-12-31 13:00:00",
+      "wertermittlungsverfahren": "PROGNOSE",
+      "obiskennzahl": "4-5-6-7",
+      "wert": 8902.25,
+      "einheit": "MWH"
+    },
+    {
+      "startdatum": "2018-12-31 13:00:00",
+      "enddatum": "2018-12-31 14:00:00",
+      "wertermittlungsverfahren": "PROGNOSE",
+      "obiskennzahl": "4-5-6-7",
+      "wert": 8885.75,
+      "einheit": "MWH"
+    },
+    {
+      "startdatum": "2018-12-31 14:00:00",
+      "enddatum": "2018-12-31 15:00:00",
+      "wertermittlungsverfahren": "PROGNOSE",
+      "obiskennzahl": "4-5-6-7",
+      "wert": 8881.5,
+      "einheit": "MWH"
+    },
+    {
+      "startdatum": "2018-12-31 15:00:00",
+      "enddatum": "2018-12-31 16:00:00",
+      "wertermittlungsverfahren": "PROGNOSE",
+      "obiskennzahl": "4-5-6-7",
+      "wert": 8892.25,
+      "einheit": "MWH"
+    },
+    {
+      "startdatum": "2018-12-31 16:00:00",
+      "enddatum": "2018-12-31 17:00:00",
+      "wertermittlungsverfahren": "PROGNOSE",
+      "obiskennzahl": "4-5-6-7",
+      "wert": 9878.0,
+      "einheit": "MWH"
+    },
+    {
+      "startdatum": "2018-12-31 17:00:00",
+      "enddatum": "2018-12-31 18:00:00",
+      "wertermittlungsverfahren": "PROGNOSE",
+      "obiskennzahl": "4-5-6-7",
+      "wert": 9300.75,
+      "einheit": "MWH"
+    },
+    {
+      "startdatum": "2018-12-31 18:00:00",
+      "enddatum": "2018-12-31 19:00:00",
+      "wertermittlungsverfahren": "PROGNOSE",
+      "obiskennzahl": "4-5-6-7",
+      "wert": 8824.75,
+      "einheit": "MWH"
+    },
+    {
+      "startdatum": "2018-12-31 19:00:00",
+      "enddatum": "2018-12-31 20:00:00",
+      "wertermittlungsverfahren": "PROGNOSE",
+      "obiskennzahl": "4-5-6-7",
+      "wert": 8705.75,
+      "einheit": "MWH"
+    },
+    {
+      "startdatum": "2018-12-31 22:00:00",
+      "enddatum": "2018-12-31 23:00:00",
+      "wertermittlungsverfahren": "PROGNOSE",
+      "obiskennzahl": "4-5-6-7",
+      "wert": 7265.75,
+      "einheit": "MWH"
+    },
+    {
+      "startdatum": "2018-12-31 23:00:00",
+      "enddatum": "2019-01-01 00:00:00",
+      "wertermittlungsverfahren": "PROGNOSE",
+      "obiskennzahl": "4-5-6-7",
+      "wert": 4922.25,
+      "einheit": "MWH"
+    },
+    {
+      "startdatum": "2019-01-01 00:00:00",
+      "enddatum": "2019-01-01 01:00:00",
+      "wertermittlungsverfahren": "PROGNOSE",
+      "obiskennzahl": "4-5-6-7",
+      "wert": 4200.5,
+      "einheit": "MWH"
+    },
+    {
+      "startdatum": "2019-01-01 01:00:00",
+      "enddatum": "2019-01-01 02:00:00",
+      "wertermittlungsverfahren": "PROGNOSE",
+      "obiskennzahl": "4-5-6-7",
+      "wert": 4142.75,
+      "einheit": "MWH"
+    },
+    {
+      "startdatum": "2019-01-01 02:00:00",
+      "enddatum": "2019-01-01 03:00:00",
+      "wertermittlungsverfahren": "PROGNOSE",
+      "obiskennzahl": "4-5-6-7",
+      "wert": 4229.75,
+      "einheit": "MWH"
+    },
+    {
+      "startdatum": "2019-01-01 03:00:00",
+      "enddatum": "2019-01-01 04:00:00",
+      "wertermittlungsverfahren": "PROGNOSE",
+      "obiskennzahl": "4-5-6-7",
+      "wert": 4248.0,
+      "einheit": "MWH"
+    },
+    {
+      "startdatum": "2019-01-01 04:00:00",
+      "enddatum": "2019-01-01 05:00:00",
+      "wertermittlungsverfahren": "PROGNOSE",
+      "obiskennzahl": "4-5-6-7",
+      "wert": 4159.5,
+      "einheit": "MWH"
+    },
+    {
+      "startdatum": "2019-01-01 05:00:00",
+      "enddatum": "2019-01-01 06:00:00",
+      "wertermittlungsverfahren": "PROGNOSE",
+      "obiskennzahl": "4-5-6-7",
+      "wert": 4032.25,
+      "einheit": "MWH"
+    },
+    {
+      "startdatum": "2019-01-01 06:00:00",
+      "enddatum": "2019-01-01 07:00:00",
+      "wertermittlungsverfahren": "PROGNOSE",
+      "obiskennzahl": "4-5-6-7",
+      "wert": 4015.75,
+      "einheit": "MWH"
+    },
+    {
+      "startdatum": "2019-01-01 07:00:00",
+      "enddatum": "2019-01-01 08:00:00",
+      "wertermittlungsverfahren": "PROGNOSE",
+      "obiskennzahl": "4-5-6-7",
+      "wert": 3850.5,
+      "einheit": "MWH"
+    },
+    {
+      "startdatum": "2019-01-01 08:00:00",
+      "enddatum": "2019-01-01 09:00:00",
+      "wertermittlungsverfahren": "PROGNOSE",
+      "obiskennzahl": "4-5-6-7",
+      "wert": 4180.0,
+      "einheit": "MWH"
+    },
+    {
+      "startdatum": "2019-01-01 09:00:00",
+      "enddatum": "2019-01-01 10:00:00",
+      "wertermittlungsverfahren": "PROGNOSE",
+      "obiskennzahl": "4-5-6-7",
+      "wert": 4158.0,
+      "einheit": "MWH"
+    },
+    {
+      "startdatum": "2019-01-01 10:00:00",
+      "enddatum": "2019-01-01 11:00:00",
+      "wertermittlungsverfahren": "PROGNOSE",
+      "obiskennzahl": "4-5-6-7",
+      "wert": 3824.75,
+      "einheit": "MWH"
+    },
+    {
+      "startdatum": "2019-01-01 11:00:00",
+      "enddatum": "2019-01-01 12:00:00",
+      "wertermittlungsverfahren": "PROGNOSE",
+      "obiskennzahl": "4-5-6-7",
+      "wert": 3808.0,
+      "einheit": "MWH"
+    },
+    {
+      "startdatum": "2019-01-01 12:00:00",
+      "enddatum": "2019-01-01 13:00:00",
+      "wertermittlungsverfahren": "PROGNOSE",
+      "obiskennzahl": "4-5-6-7",
+      "wert": 3790.0,
+      "einheit": "MWH"
+    },
+    {
+      "startdatum": "2019-01-01 13:00:00",
+      "enddatum": "2019-01-01 14:00:00",
+      "wertermittlungsverfahren": "PROGNOSE",
+      "obiskennzahl": "4-5-6-7",
+      "wert": 3912.75,
+      "einheit": "MWH"
+    },
+    {
+      "startdatum": "2019-01-01 14:00:00",
+      "enddatum": "2019-01-01 15:00:00",
+      "wertermittlungsverfahren": "PROGNOSE",
+      "obiskennzahl": "4-5-6-7",
+      "wert": 4007.25,
+      "einheit": "MWH"
+    },
+    {
+      "startdatum": "2019-01-01 15:00:00",
+      "enddatum": "2019-01-01 16:00:00",
+      "wertermittlungsverfahren": "PROGNOSE",
+      "obiskennzahl": "4-5-6-7",
+      "wert": 4390.25,
+      "einheit": "MWH"
+    },
+    {
+      "startdatum": "2019-01-01 16:00:00",
+      "enddatum": "2019-01-01 17:00:00",
+      "wertermittlungsverfahren": "PROGNOSE",
+      "obiskennzahl": "4-5-6-7",
+      "wert": 5739.25,
+      "einheit": "MWH"
+    },
+    {
+      "startdatum": "2019-01-01 17:00:00",
+      "enddatum": "2019-01-01 18:00:00",
+      "wertermittlungsverfahren": "PROGNOSE",
+      "obiskennzahl": "4-5-6-7",
+      "wert": 5935.25,
+      "einheit": "MWH"
+    },
+    {
+      "startdatum": "2019-01-01 18:00:00",
+      "enddatum": "2019-01-01 19:00:00",
+      "wertermittlungsverfahren": "PROGNOSE",
+      "obiskennzahl": "4-5-6-7",
+      "wert": 5915.25,
+      "einheit": "MWH"
+    },
+    {
+      "startdatum": "2019-01-01 19:00:00",
+      "enddatum": "2019-01-01 20:00:00",
+      "wertermittlungsverfahren": "PROGNOSE",
+      "obiskennzahl": "4-5-6-7",
+      "wert": 4685.25,
+      "einheit": "MWH"
+    },
+    {
+      "startdatum": "2019-01-01 20:00:00",
+      "enddatum": "2019-01-01 21:00:00",
+      "wertermittlungsverfahren": "PROGNOSE",
+      "obiskennzahl": "4-5-6-7",
+      "wert": 4044.25,
+      "einheit": "MWH"
+    },
+    {
+      "startdatum": "2019-01-01 21:00:00",
+      "enddatum": "2019-01-01 22:00:00",
+      "wertermittlungsverfahren": "PROGNOSE",
+      "obiskennzahl": "4-5-6-7",
+      "wert": 3840.75,
+      "einheit": "MWH"
+    },
+    {
+      "startdatum": "2019-01-01 22:00:00",
+      "enddatum": "2019-01-01 23:00:00",
+      "wertermittlungsverfahren": "PROGNOSE",
+      "obiskennzahl": "4-5-6-7",
+      "wert": 3825.5,
+      "einheit": "MWH"
+    },
+    {
+      "startdatum": "2019-01-01 23:00:00",
+      "enddatum": "2019-01-02 00:00:00",
+      "wertermittlungsverfahren": "PROGNOSE",
+      "obiskennzahl": "4-5-6-7",
+      "wert": 3989.75,
+      "einheit": "MWH"
+    },
+    {
+      "startdatum": "2019-01-02 00:00:00",
+      "enddatum": "2019-01-02 01:00:00",
+      "wertermittlungsverfahren": "PROGNOSE",
+      "obiskennzahl": "4-5-6-7",
+      "wert": 4029.0,
+      "einheit": "MWH"
+    },
+    {
+      "startdatum": "2019-01-02 01:00:00",
+      "enddatum": "2019-01-02 02:00:00",
+      "wertermittlungsverfahren": "PROGNOSE",
+      "obiskennzahl": "4-5-6-7",
+      "wert": 4127.5,
+      "einheit": "MWH"
+    },
+    {
+      "startdatum": "2019-01-02 02:00:00",
+      "enddatum": "2019-01-02 03:00:00",
+      "wertermittlungsverfahren": "PROGNOSE",
+      "obiskennzahl": "4-5-6-7",
+      "wert": 4339.25,
+      "einheit": "MWH"
+    },
+    {
+      "startdatum": "2019-01-02 03:00:00",
+      "enddatum": "2019-01-02 04:00:00",
+      "wertermittlungsverfahren": "PROGNOSE",
+      "obiskennzahl": "4-5-6-7",
+      "wert": 4400.5,
+      "einheit": "MWH"
+    },
+    {
+      "startdatum": "2019-01-02 04:00:00",
+      "enddatum": "2019-01-02 05:00:00",
+      "wertermittlungsverfahren": "PROGNOSE",
+      "obiskennzahl": "4-5-6-7",
+      "wert": 4655.75,
+      "einheit": "MWH"
+    },
+    {
+      "startdatum": "2019-01-02 05:00:00",
+      "enddatum": "2019-01-02 06:00:00",
+      "wertermittlungsverfahren": "PROGNOSE",
+      "obiskennzahl": "4-5-6-7",
+      "wert": 4885.0,
+      "einheit": "MWH"
+    },
+    {
+      "startdatum": "2019-01-02 06:00:00",
+      "enddatum": "2019-01-02 07:00:00",
+      "wertermittlungsverfahren": "PROGNOSE",
+      "obiskennzahl": "4-5-6-7",
+      "wert": 6504.25,
+      "einheit": "MWH"
+    },
+    {
+      "startdatum": "2019-01-02 07:00:00",
+      "enddatum": "2019-01-02 08:00:00",
+      "wertermittlungsverfahren": "PROGNOSE",
+      "obiskennzahl": "4-5-6-7",
+      "wert": 6979.0,
+      "einheit": "MWH"
+    },
+    {
+      "startdatum": "2019-01-02 08:00:00",
+      "enddatum": "2019-01-02 09:00:00",
+      "wertermittlungsverfahren": "PROGNOSE",
+      "obiskennzahl": "4-5-6-7",
+      "wert": 7730.5,
+      "einheit": "MWH"
+    },
+    {
+      "startdatum": "2019-01-02 09:00:00",
+      "enddatum": "2019-01-02 10:00:00",
+      "wertermittlungsverfahren": "PROGNOSE",
+      "obiskennzahl": "4-5-6-7",
+      "wert": 7793.25,
+      "einheit": "MWH"
+    },
+    {
+      "startdatum": "2019-01-02 10:00:00",
+      "enddatum": "2019-01-02 11:00:00",
+      "wertermittlungsverfahren": "PROGNOSE",
+      "obiskennzahl": "4-5-6-7",
+      "wert": 7809.75,
+      "einheit": "MWH"
+    },
+    {
+      "startdatum": "2019-01-02 11:00:00",
+      "enddatum": "2019-01-02 12:00:00",
+      "wertermittlungsverfahren": "PROGNOSE",
+      "obiskennzahl": "4-5-6-7",
+      "wert": 7840.5,
+      "einheit": "MWH"
+    },
+    {
+      "startdatum": "2019-01-02 12:00:00",
+      "enddatum": "2019-01-02 13:00:00",
+      "wertermittlungsverfahren": "PROGNOSE",
+      "obiskennzahl": "4-5-6-7",
+      "wert": 8016.5,
+      "einheit": "MWH"
+    },
+    {
+      "startdatum": "2019-01-02 14:00:00",
+      "enddatum": "2019-01-02 15:00:00",
+      "wertermittlungsverfahren": "PROGNOSE",
+      "obiskennzahl": "4-5-6-7",
+      "wert": 8328.75,
+      "einheit": "MWH"
+    },
+    {
+      "startdatum": "2019-01-02 15:00:00",
+      "enddatum": "2019-01-02 16:00:00",
+      "wertermittlungsverfahren": "PROGNOSE",
+      "obiskennzahl": "4-5-6-7",
+      "wert": 8872.25,
+      "einheit": "MWH"
+    },
+    {
+      "startdatum": "2019-01-02 16:00:00",
+      "enddatum": "2019-01-02 17:00:00",
+      "wertermittlungsverfahren": "PROGNOSE",
+      "obiskennzahl": "4-5-6-7",
+      "wert": 10127.25,
+      "einheit": "MWH"
+    },
+    {
+      "startdatum": "2019-01-02 17:00:00",
+      "enddatum": "2019-01-02 18:00:00",
+      "wertermittlungsverfahren": "PROGNOSE",
+      "obiskennzahl": "4-5-6-7",
+      "wert": 10097.5,
+      "einheit": "MWH"
+    },
+    {
+      "startdatum": "2019-01-02 18:00:00",
+      "enddatum": "2019-01-02 19:00:00",
+      "wertermittlungsverfahren": "PROGNOSE",
+      "obiskennzahl": "4-5-6-7",
+      "wert": 10094.0,
+      "einheit": "MWH"
+    },
+    {
+      "startdatum": "2019-01-02 19:00:00",
+      "enddatum": "2019-01-02 20:00:00",
+      "wertermittlungsverfahren": "PROGNOSE",
+      "obiskennzahl": "4-5-6-7",
+      "wert": 9153.0,
+      "einheit": "MWH"
+    },
+    {
+      "startdatum": "2019-01-02 20:00:00",
+      "enddatum": "2019-01-02 21:00:00",
+      "wertermittlungsverfahren": "PROGNOSE",
+      "obiskennzahl": "4-5-6-7",
+      "wert": 8366.0,
+      "einheit": "MWH"
+    },
+    {
+      "startdatum": "2019-01-02 21:00:00",
+      "enddatum": "2019-01-02 22:00:00",
+      "wertermittlungsverfahren": "PROGNOSE",
+      "obiskennzahl": "4-5-6-7",
+      "wert": 8236.75,
+      "einheit": "MWH"
+    },
+    {
+      "startdatum": "2019-01-02 22:00:00",
+      "enddatum": "2019-01-02 23:00:00",
+      "wertermittlungsverfahren": "PROGNOSE",
+      "obiskennzahl": "4-5-6-7",
+      "wert": 8251.0,
+      "einheit": "MWH"
+    },
+    {
+      "startdatum": "2019-01-02 23:00:00",
+      "enddatum": "2019-01-03 00:00:00",
+      "wertermittlungsverfahren": "PROGNOSE",
+      "obiskennzahl": "4-5-6-7",
+      "wert": 8277.0,
+      "einheit": "MWH"
+    },
+    {
+      "startdatum": "2019-01-03 00:00:00",
+      "enddatum": "2019-01-03 01:00:00",
+      "wertermittlungsverfahren": "PROGNOSE",
+      "obiskennzahl": "4-5-6-7",
+      "wert": 8280.75,
+      "einheit": "MWH"
+    },
+    {
+      "startdatum": "2019-01-03 01:00:00",
+      "enddatum": "2019-01-03 02:00:00",
+      "wertermittlungsverfahren": "PROGNOSE",
+      "obiskennzahl": "4-5-6-7",
+      "wert": 8332.5,
+      "einheit": "MWH"
+    },
+    {
+      "startdatum": "2019-01-03 02:00:00",
+      "enddatum": "2019-01-03 03:00:00",
+      "wertermittlungsverfahren": "PROGNOSE",
+      "obiskennzahl": "4-5-6-7",
+      "wert": 8371.5,
+      "einheit": "MWH"
+    },
+    {
+      "startdatum": "2019-01-03 03:00:00",
+      "enddatum": "2019-01-03 04:00:00",
+      "wertermittlungsverfahren": "PROGNOSE",
+      "obiskennzahl": "4-5-6-7",
+      "wert": 8389.5,
+      "einheit": "MWH"
+    },
+    {
+      "startdatum": "2019-01-03 04:00:00",
+      "enddatum": "2019-01-03 05:00:00",
+      "wertermittlungsverfahren": "PROGNOSE",
+      "obiskennzahl": "4-5-6-7",
+      "wert": 8392.25,
+      "einheit": "MWH"
+    },
+    {
+      "startdatum": "2019-01-03 05:00:00",
+      "enddatum": "2019-01-03 06:00:00",
+      "wertermittlungsverfahren": "PROGNOSE",
+      "obiskennzahl": "4-5-6-7",
+      "wert": 8406.0,
+      "einheit": "MWH"
+    },
+    {
+      "startdatum": "2019-01-03 06:00:00",
+      "enddatum": "2019-01-03 07:00:00",
+      "wertermittlungsverfahren": "PROGNOSE",
+      "obiskennzahl": "4-5-6-7",
+      "wert": 8690.5,
+      "einheit": "MWH"
+    },
+    {
+      "startdatum": "2019-01-03 07:00:00",
+      "enddatum": "2019-01-03 08:00:00",
+      "wertermittlungsverfahren": "PROGNOSE",
+      "obiskennzahl": "4-5-6-7",
+      "wert": 9669.75,
+      "einheit": "MWH"
+    },
+    {
+      "startdatum": "2019-01-03 08:00:00",
+      "enddatum": "2019-01-03 09:00:00",
+      "wertermittlungsverfahren": "PROGNOSE",
+      "obiskennzahl": "4-5-6-7",
+      "wert": 8093.5,
+      "einheit": "MWH"
+    },
+    {
+      "startdatum": "2019-01-03 09:00:00",
+      "enddatum": "2019-01-03 10:00:00",
+      "wertermittlungsverfahren": "PROGNOSE",
+      "obiskennzahl": "4-5-6-7",
+      "wert": 7909.75,
+      "einheit": "MWH"
+    },
+    {
+      "startdatum": "2019-01-03 10:00:00",
+      "enddatum": "2019-01-03 11:00:00",
+      "wertermittlungsverfahren": "PROGNOSE",
+      "obiskennzahl": "4-5-6-7",
+      "wert": 7906.25,
+      "einheit": "MWH"
+    },
+    {
+      "startdatum": "2019-01-03 11:00:00",
+      "enddatum": "2019-01-03 12:00:00",
+      "wertermittlungsverfahren": "PROGNOSE",
+      "obiskennzahl": "4-5-6-7",
+      "wert": 7933.75,
+      "einheit": "MWH"
+    },
+    {
+      "startdatum": "2019-01-03 12:00:00",
+      "enddatum": "2019-01-03 13:00:00",
+      "wertermittlungsverfahren": "PROGNOSE",
+      "obiskennzahl": "4-5-6-7",
+      "wert": 8003.0,
+      "einheit": "MWH"
+    },
+    {
+      "startdatum": "2019-01-03 13:00:00",
+      "enddatum": "2019-01-03 14:00:00",
+      "wertermittlungsverfahren": "PROGNOSE",
+      "obiskennzahl": "4-5-6-7",
+      "wert": 8044.0,
+      "einheit": "MWH"
+    },
+    {
+      "startdatum": "2019-01-03 14:00:00",
+      "enddatum": "2019-01-03 15:00:00",
+      "wertermittlungsverfahren": "PROGNOSE",
+      "obiskennzahl": "4-5-6-7",
+      "wert": 8318.5,
+      "einheit": "MWH"
+    },
+    {
+      "startdatum": "2019-01-03 15:00:00",
+      "enddatum": "2019-01-03 16:00:00",
+      "wertermittlungsverfahren": "PROGNOSE",
+      "obiskennzahl": "4-5-6-7",
+      "wert": 9647.75,
+      "einheit": "MWH"
+    },
+    {
+      "startdatum": "2019-01-03 20:00:00",
+      "enddatum": "2019-01-03 21:00:00",
+      "wertermittlungsverfahren": "PROGNOSE",
+      "obiskennzahl": "4-5-6-7",
+      "wert": 8454.75,
+      "einheit": "MWH"
+    },
+    {
+      "startdatum": "2019-01-03 21:00:00",
+      "enddatum": "2019-01-03 22:00:00",
+      "wertermittlungsverfahren": "PROGNOSE",
+      "obiskennzahl": "4-5-6-7",
+      "wert": 8455.5,
+      "einheit": "MWH"
+    },
+    {
+      "startdatum": "2019-01-03 22:00:00",
+      "enddatum": "2019-01-03 23:00:00",
+      "wertermittlungsverfahren": "PROGNOSE",
+      "obiskennzahl": "4-5-6-7",
+      "wert": 8387.0,
+      "einheit": "MWH"
+    }
+  ]
+}

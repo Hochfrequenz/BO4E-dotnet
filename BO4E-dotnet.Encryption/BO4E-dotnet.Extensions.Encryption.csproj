@@ -1,0 +1,34 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <RootNamespace>BO4E_dotnet.Encryption</RootNamespace>
+    <Version>0.1.0</Version>
+    <PackageLicenseFile>LICENSE</PackageLicenseFile>
+    <PackageProjectUrl>https://github.com/HFInnovation/BO4E-dotnet</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/HFInnovation/BO4E-dotnet</RepositoryUrl>
+    <PackageId>Hochfrequenz.BO4E.Extensions.Encryption</PackageId>
+    <Authors />
+    <Company>Hochfrequenz Unternehmensberatung GmbH</Company>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <Optimize>true</Optimize>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Include="BO4E.Extensions.Encryption.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="BouncyCastle" Version="1.8.5" />
+    <PackageReference Include="Microsoft.CSharp" Version="4.7.0" />
+    <PackageReference Include="Sodium.Core" Version="1.2.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\BO4E-dotnet.Extensions\BO4E-dotnet.Extensions.csproj" />
+    <ProjectReference Include="..\BO4E-dotnet\BO4E-dotnet.csproj" />
+  </ItemGroup>
+
+</Project>

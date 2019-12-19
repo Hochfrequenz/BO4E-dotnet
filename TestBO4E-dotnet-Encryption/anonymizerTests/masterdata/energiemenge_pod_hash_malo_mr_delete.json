@@ -1,0 +1,52 @@
+﻿{
+  "operations": {
+    "POD": "HASH",
+    "METER_READING": "DELETE"
+  },
+  "input": {
+    "boTyp": "ENERGIEMENGE",
+    "lokationsId": "56789012345",
+    "lokationstyp": "MaLo",
+    "energieverbrauch": [
+      {
+        "einheit": "kWh",
+        "enddatum": "2018-06-20",
+        "obiskennzahl": "1-1:1.8.1",
+        "startdatum": "2018-06-20",
+        "wert": 54.29,
+        "wertermittlungsverfahren": "MESSUNG"
+      },
+      {
+        "einheit": "kWh",
+        "enddatum": "2018-06-20",
+        "obiskennzahl": "1-1:1.8.2",
+        "startdatum": "2018-06-20",
+        "wert": 155.38,
+        "wertermittlungsverfahren": "MESSUNG"
+      },
+      {
+        "einheit": "kWh",
+        "enddatum": "2018-06-20",
+        "obiskennzahl": "1-1:5.8.1",
+        "startdatum": "2018-06-20",
+        "wert": 4.35,
+        "wertermittlungsverfahren": "MESSUNG"
+      },
+      {
+        "einheit": "kWh",
+        "enddatum": "2018-06-20",
+        "obiskennzahl": "1-1:5.8.2",
+        "startdatum": "2018-06-20",
+        "wert": 19.36,
+        "wertermittlungsverfahren": "MESSUNG"
+      }
+    ]
+  },
+  "assertions": {
+    "$['ENERGIEMENGE'][0]['lokationsId']": "55548561501",
+    "$['ENERGIEMENGE'][0]['energieverbrauch'][2]['wert']": null,
+    "$['ENERGIEMENGE'][0]['energieverbrauch'][1]['startdatum']": null,
+    "$['ENERGIEMENGE'][0]['energieverbrauch'][2]['einheit']": "kWh"
+  }
+
+}

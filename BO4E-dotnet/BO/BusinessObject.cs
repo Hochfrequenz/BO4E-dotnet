@@ -464,10 +464,32 @@ namespace BO4E.BO
                 {
                     JObject jo = JObject.Load(reader);
                     Type boType;
+                    if (!jo.ContainsKey("boTyp"))
+                    {
+                        throw new ArgumentException("If deserializing into an abstract BusinessObject the key \"boTyp\" has to be set. But it wasn't.");
+                    }
                     boType = BoMapper.GetTypeForBoName(jo["boTyp"].Value<string>()); // ToDo: catch exception if boTyp is not set and throw exception with descriptive error message
                     if (boType == null)
                     {
-                        throw new NotImplementedException();
+                        foreach (var assembley in AppDomain.CurrentDomain.GetAssemblies())
+                        {
+                            try
+                            {
+                                boType = assembley.GetTypes().FirstOrDefault(x => x.Name.ToUpper() == jo["boTyp"].Value<string>().ToUpper());
+                            }
+                            catch (ReflectionTypeLoadException)
+                            {
+                                continue;
+                            }
+                            if (boType != null)
+                            {
+                                break;
+                            }
+                        }
+                        if (boType == null)
+                        {
+                            throw new NotImplementedException($"The type '{jo["boTyp"].Value<string>()}' does not exist in the BO4E standard.");
+                        }
                     }
                     return JsonConvert.DeserializeObject(jo.ToString(), boType);
                 }

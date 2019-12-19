@@ -1,0 +1,19 @@
+﻿{
+  "operations": {
+    "ADDRESS": "HASH"
+  },
+  "input": {
+    "boTyp": "MESSLOKATION",
+    "messLokationsId": "DEIMUDDERIHRMELOID12345",
+    "sparte": "STROM",
+    "messadresse": {
+      "ort": "Leipzig",
+      "strasse": "Lindenauer Markt",
+      "hausnummer": "123",
+      "postleitzahl": "04177"
+    }
+  },
+  "assertions": {
+    "$['MESSLOKATION'][0]['messadresse']['strasse']": "f0674908b59fe943edfe128ead2b262977f7ca32bfb01fc436bc1fb57520914b"
+  }
+}
