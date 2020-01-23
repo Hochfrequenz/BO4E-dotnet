@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
@@ -18,12 +18,14 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\BO4E-dotnet\BO4E-dotnet.csproj" />
 	<None Include="..\LICENSE.txt">
       <Pack>True</Pack>
       <PackagePath></PackagePath>
     </None>
   </ItemGroup>
 
-
+  <ItemGroup>
+    <ProjectReference Include="..\BO4E-dotnet\BO4E-dotnet.csproj" />
+  </ItemGroup>
 </Project>
+
