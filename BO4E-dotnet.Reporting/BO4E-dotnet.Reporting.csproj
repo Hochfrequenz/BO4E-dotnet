@@ -4,7 +4,7 @@
     <TargetFramework>netstandard2.0</TargetFramework>
     <RootNamespace>BO4E_dotnet.Reporting</RootNamespace>
     <Version>0.1.0</Version>
-    <PackageLicenseFile>LICENSE</PackageLicenseFile>
+	<PackageLicenseFile>LICENSE.txt</PackageLicenseFile>
     <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
     <PackageProjectUrl>https://github.com/HFInnovation/BO4E-dotnet</PackageProjectUrl>
     <RepositoryUrl>https://github.com/HFInnovation/BO4E-dotnet</RepositoryUrl>
@@ -19,6 +19,10 @@
 
   <ItemGroup>
     <ProjectReference Include="..\BO4E-dotnet\BO4E-dotnet.csproj" />
+	<None Include="..\LICENSE.txt">
+      <Pack>True</Pack>
+      <PackagePath></PackagePath>
+    </None>
   </ItemGroup>
 
   <ItemGroup>

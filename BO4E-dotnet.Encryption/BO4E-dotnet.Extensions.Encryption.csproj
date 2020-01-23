@@ -4,7 +4,7 @@
     <TargetFramework>netstandard2.0</TargetFramework>
     <RootNamespace>BO4E_dotnet.Encryption</RootNamespace>
     <Version>0.1.0</Version>
-    <PackageLicenseFile>../LICENSE</PackageLicenseFile>
+	<PackageLicenseFile>LICENSE.txt</PackageLicenseFile>
     <PackageProjectUrl>https://github.com/HFInnovation/BO4E-dotnet</PackageProjectUrl>
     <RepositoryUrl>https://github.com/HFInnovation/BO4E-dotnet</RepositoryUrl>
     <PackageId>Hochfrequenz.BO4E.Extensions.Encryption</PackageId>
@@ -18,6 +18,10 @@
 
   <ItemGroup>
     <None Include="BO4E.Extensions.Encryption.csproj" />
+	<None Include="..\LICENSE.txt">
+      <Pack>True</Pack>
+      <PackagePath></PackagePath>
+    </None>
   </ItemGroup>
 
   <ItemGroup>
