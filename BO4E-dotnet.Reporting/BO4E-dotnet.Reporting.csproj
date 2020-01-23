@@ -28,3 +28,4 @@
     <ProjectReference Include="..\BO4E-dotnet\BO4E-dotnet.csproj" />
   </ItemGroup>
 </Project>
+
