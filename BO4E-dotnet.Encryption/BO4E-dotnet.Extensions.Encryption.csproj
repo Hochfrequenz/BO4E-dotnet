@@ -18,6 +18,10 @@
 
   <ItemGroup>
     <None Include="BO4E.Extensions.Encryption.csproj" />
+	<None Include="..\LICENSE.txt">
+      <Pack>True</Pack>
+      <PackagePath></PackagePath>
+    </None>
   </ItemGroup>
 
   <ItemGroup>
