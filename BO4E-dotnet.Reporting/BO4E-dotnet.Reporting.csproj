@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
@@ -25,6 +25,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\..\energy-service-hub\BO4E-dotnet\BO4E-dotnet\BO4E-dotnet.csproj" />
+    <ProjectReference Include="..\BO4E-dotnet\BO4E-dotnet.csproj" />
   </ItemGroup>
 </Project>
