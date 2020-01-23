@@ -17,6 +17,10 @@
 
   <ItemGroup>
     <PackageReference Include="TimePeriodLibrary.NET" Version="2.1.1" />
+	<None Include="..\LICENSE.txt">
+      <Pack>True</Pack>
+      <PackagePath></PackagePath>
+    </None>
   </ItemGroup>
 
   <ItemGroup>

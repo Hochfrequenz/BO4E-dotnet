@@ -19,6 +19,10 @@
 
   <ItemGroup>
     <ProjectReference Include="..\BO4E-dotnet\BO4E-dotnet.csproj" />
+	<None Include="..\LICENSE.txt">
+      <Pack>True</Pack>
+      <PackagePath></PackagePath>
+    </None>
   </ItemGroup>
 
   <ItemGroup>
