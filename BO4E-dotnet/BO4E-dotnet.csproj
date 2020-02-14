@@ -8,7 +8,7 @@
     <Authors>Hochfrequenz Untenehmensberatung GmbH</Authors>
     <Product>BO4E .net core bindings</Product>
     <RepositoryUrl>https://github.com/HFInnovation/BO4E-dotnet/</RepositoryUrl>
-    <Version>0.1.2</Version>
+    <Version>0.1.3</Version>
     <AssemblyName>BO4Enet</AssemblyName>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <PublishRepositoryUrl>true</PublishRepositoryUrl>
@@ -21,6 +21,8 @@
     <PackageProjectUrl>https://github.com/HFInnovation/BO4E-dotnet/</PackageProjectUrl>
     <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
     <PackageLicenseFile>LICENSE.txt</PackageLicenseFile>
+    <AssemblyVersion>0.1.3.0</AssemblyVersion>
+    <FileVersion>0.1.3.0</FileVersion>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
