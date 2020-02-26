@@ -106,7 +106,7 @@ namespace BO4E.BO
         public Katasteradresse katasterinformation;
 
         [JsonProperty(Required = Required.Default, Order = 16)]
-        public List<Marktrolle> marktrollen;
+        public List<COM.Marktrolle> marktrollen;
 
         [JsonProperty(Required = Required.Default, Order = 17)]
         public string regelzone; 

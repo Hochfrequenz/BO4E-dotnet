@@ -1,12 +1,12 @@
 ﻿using System.Collections.Generic;
 using Newtonsoft.Json;
 
-namespace BO4E.BO
+namespace BO4E.COM
 {
     /// <summary>
     /// Marktrolle 
     /// </summary>
-    public class Marktrolle : BusinessObject
+    public class Marktrolle : COM
     {
         /// <summary>
         /// rollencodenummer von Marktrolle

@@ -22,20 +22,5 @@ namespace BO4E.COM
         [JsonProperty(Required = Required.Default)]
         public string gueltigBis;
 
-        /// <summary>Referenz auf die ID der Messlokation</summary>
-        [JsonProperty(Required = Required.Default)]
-        public JaNein abrechnungmessstellenbetriebnna;
-
-        /// <summary>
-        /// 
-        /// </summary>
-        [JsonProperty(Required = Required.Default)]
-        public List<BO.Marktrolle> marktrollen;
-
-        /// <summary>
-        /// 
-        /// </summary>
-        [JsonProperty(Required = Required.Default)]
-        public List<BO.Zaehler> messlokationszaehler;
     }
 }
