@@ -62,6 +62,12 @@ namespace BO4E.ENUM
         /// <summary>elektronischer Haushaltszähler</summary>
         ELEKTRONISCHER_HAUSHALTSZAEHLER,
         /// <summary>Steuereinrichtung</summary>
-        STEUEREINRICHTUNG
+        STEUEREINRICHTUNG,
+        /// <summary>technischeSteuereinrichtung</summary>
+        TECHNISCHESTEUEREINRICHTUNG,
+        /// <summary>Smartmetergateway</summary>
+        SMARTMETERGATEWAY,
+        /// <summary>Steuerbox</summary>
+        STEUERBOX
     }
 }

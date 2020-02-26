@@ -1,5 +1,7 @@
 using BO4E.ENUM;
 using Newtonsoft.Json;
+using System.Collections.Generic;
+
 namespace BO4E.COM
 {
 
@@ -24,5 +26,37 @@ namespace BO4E.COM
         /// <summary>Die Einheit der gemessenen Größe, z.B. kWh. Details <see cref="Mengeneinheit" /></summary>
         [JsonProperty(Required = Required.Always)]
         public Mengeneinheit einheit;
+
+        /// <summary>Obis kennzahl</summary>
+        [JsonProperty(Required = Required.Default)]
+        public string kennzahl;
+        /// <summary>schwachlastfaehig</summary>
+        [JsonProperty(Required = Required.Default)]
+        public Schwachlastfaehig schwachlastfaehig;
+        /// <summary>Verwendungungszweck der Werte Marktlokation</summary>
+        [JsonProperty(Required = Required.Default)]
+        public List<Verwendungszweck> Verwendungszwecke;
+        /// <summary>Stromverbrauchsart/Verbrauchsart Marktlokation</summary>
+        [JsonProperty(Required = Required.Default)]
+        public Verbrauchsart verbrauchsart;
+        /// <summary>Stromverbrauchsart/Unterbrechbarkeit Marktlokation</summary>
+        [JsonProperty(Required = Required.Default)]
+        public Unterbrechbarkeit unterbrechbarkeit;
+        /// <summary>Stromverbrauchsart/Wärmenutzung Marktlokation</summary>
+        [JsonProperty(Required = Required.Default)]
+        public Waermenutzung waermenutzung;
+
+        [JsonProperty(Required = Required.Default)]
+        public Konzessionsabgabe konzessionsabgabe;
+
+        [JsonProperty(Required = Required.Default)]
+        public bool steuerbefreit;
+
+        [JsonProperty(Required = Required.Default)]
+        public string vorkommastelle;
+
+        [JsonProperty(Required = Required.Default)]
+        public string nachkommastelle;
+
     }
 }

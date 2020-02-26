@@ -1,6 +1,7 @@
 using BO4E.ENUM;
 using BO4E.meta;
 using Newtonsoft.Json;
+using System.Collections.Generic;
 
 namespace BO4E.COM
 {
@@ -20,5 +21,21 @@ namespace BO4E.COM
         /// <summary>Zeitpunkt, bis zu dem die Messlokation zur Marktlokation gehört</summary>
         [JsonProperty(Required = Required.Default)]
         public string gueltigBis;
+
+        /// <summary>Referenz auf die ID der Messlokation</summary>
+        [JsonProperty(Required = Required.Default)]
+        public JaNein abrechnungmessstellenbetriebnna;
+
+        /// <summary>
+        /// 
+        /// </summary>
+        [JsonProperty(Required = Required.Default)]
+        public List<BO.Marktrolle> marktrollen;
+
+        /// <summary>
+        /// 
+        /// </summary>
+        [JsonProperty(Required = Required.Default)]
+        public List<BO.Zaehler> messlokationszaehler;
     }
 }
