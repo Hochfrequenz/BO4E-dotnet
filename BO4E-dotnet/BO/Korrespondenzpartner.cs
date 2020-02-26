@@ -7,13 +7,13 @@ using Newtonsoft.Json;
 namespace BO4E.BO
 {
     ///<summary>
-    /// Mit diesem Objekt können Geschäftspartner übertragen werden. Sowohl
-    /// Unternehmen, als auch Privatpersonen können Geschäftspartner sein.
+    /// Mit diesem Objekt können Korrespondenzpartner übertragen werden. Sowohl
+    /// Unternehmen, als auch Privatpersonen können Korrespondenzpartner sein.
     /// </summary>
     ///
     /// Hinweis: Marktteilnehmer haben ein eigenes BO <see cref="Marktteilnehmer"/>, welches sich von diesem BO
     /// ableitet. Hier sollte daher keine Zuordnung zu Marktrollen erfolgen.
-    public class Geschaeftspartner : BusinessObject
+    public class Korrespondenzpartner : BusinessObject
     {
         /// <summary>Die Anrede für den GePa, Z.B. Herr. <seealso cref="Anrede" /></summary>
         [JsonProperty(Required = Required.Default, Order = -2)]
@@ -64,7 +64,7 @@ namespace BO4E.BO
         [FieldName("isCommercial", Language.EN)]
         public bool gewerbekennzeichnung;
 
-        /// <summary>Handelsregisternummer des Geschäftspartners</summary>
+        /// <summary>Handelsregisternummer des Korrespondenzpartners</summary>
         [JsonProperty(Required = Required.Default, Order = 4)]
         [DataCategory(DataCategory.LEGAL)]
         public string hrnummer;
@@ -75,11 +75,11 @@ namespace BO4E.BO
         [DataCategory(DataCategory.LEGAL)]
         public string amtsgericht;
 
-        /// <summary>Bevorzugter Kontaktweg des Geschäftspartners.</summary>
+        /// <summary>Bevorzugter Kontaktweg des Korrespondenzpartners.</summary>
         [JsonProperty(Required = Required.Default, Order = 6)]
         public List<Kontaktart> kontaktweg;
 
-        /// <summary>Die Steuer-ID des Geschäftspartners. Beispiel: DE 813281825</summary>
+        /// <summary>Die Steuer-ID des Korrespondenzpartners. Beispiel: DE 813281825</summary>
         [JsonProperty(Required = Required.Default, Order = 7)]
         [DataCategory(DataCategory.LEGAL)]
         public string umsatzsteuerId;
@@ -99,12 +99,12 @@ namespace BO4E.BO
         [DataCategory(DataCategory.ADDRESS)]
         public string website;
 
-        /// <summary>Rolle, die der Geschäftspartner hat (z.B. Interessent, Kunde).</summary>
+        /// <summary>Rolle, die der Korrespondenzpartner hat (z.B. Interessent, Kunde).</summary>
         [JsonProperty(Required = Required.Default, Order = 11)] // ToDo: it's actually required but I need it to work quickly
         [FieldName("role", Language.EN)]
         public List<Geschaeftspartnerrolle> geschaeftspartnerrolle;
 
-        /// <summary>Adresse des Geschäftspartners, an der sich der Hauptsitz befindet. Details <seealso cref="Adresse" /></summary>
+        /// <summary>Adresse des Korrespondenzpartners, an der sich der Hauptsitz befindet. Details <seealso cref="Adresse" /></summary>
         [JsonProperty(Required = Required.Default, Order = 12)]
         [FieldName("partnerAddress", Language.EN)]
         public Adresse partneradresse;

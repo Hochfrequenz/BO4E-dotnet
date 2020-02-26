@@ -95,6 +95,12 @@ namespace BO4E.BO
         public List<Vertragsteil> vertragsteile;
 
         /// <summary>
+        /// gemeinderabatt
+        /// </summary>
+        [JsonProperty(Required = Required.Default)]
+        public int gemeinderabatt;
+
+        /// <summary>
         /// moves lokationsId from userProperties to vertragsteil if relevant
         /// </summary>
         /// <param name="context"></param>
