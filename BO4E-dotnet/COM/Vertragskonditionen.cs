@@ -1,4 +1,6 @@
 using Newtonsoft.Json;
+using System;
+
 namespace BO4E.COM
 
 {
@@ -23,5 +25,35 @@ namespace BO4E.COM
         /// <summary>In diesen Zyklen werden Abschläge gestellt. Details <see cref="Zeitraum" />. Alternativ kann auch die Anzahl in den Konditionen angeben werden."</summary>
         [JsonProperty(Required = Required.Default)]
         public Zeitraum abschlagszyklus;
+
+        [JsonProperty(Required = Required.Default)]
+        public DateTime startAbrechnungsjahr;
+
+        [JsonProperty(Required = Required.Default)]
+        public Zeitraum geplanteTurnusablesung;
+
+        [JsonProperty(Required = Required.Default)]
+        public int turnusablesungIntervall;
+
+        [JsonProperty(Required = Required.Default)]
+        public Zeitraum netznutzungsabrechnung;
+
+        [JsonProperty(Required = Required.Default)]
+        public int netznutzungsabrechnungIntervall;
+
+        [JsonProperty(Required = Required.Default)]
+        public bool haushaltskunde;
+
+        [JsonProperty(Required = Required.Default)]
+        public ENUM.NetznutzungsVertrag netznutzungsvertrag;
+
+        [JsonProperty(Required = Required.Default)]
+        public ENUM.Netznutzungszahler netznutzungszahler;
+
+        [JsonProperty(Required = Required.Default)]
+        public ENUM.Netznutzungsabrechnungsvariante netznutzungsabrechnungsvariante;
+
+        [JsonProperty(Required = Required.Default)]
+        public ENUM.Netznutzungsabrechnungsgrundlage netznutzungsabrechnungsgrundlage;
     }
 }

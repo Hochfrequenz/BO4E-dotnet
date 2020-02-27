@@ -105,6 +105,22 @@ namespace BO4E.BO
         [JsonProperty(Required = Required.Default, Order = 15)]
         public Katasteradresse katasterinformation;
 
+        [JsonProperty(Required = Required.Default, Order = 16)]
+        public List<COM.Marktrolle> marktrollen;
+
+        [JsonProperty(Required = Required.Default, Order = 17)]
+        public string regelzone; 
+
+        [JsonProperty(Required = Required.Default, Order = 18)]
+        public string marktgebiet;
+
+        [JsonProperty(Required = Required.Default, Order = 19)]
+        public Zeiteinheit? zeitreihentyp;
+
+        [JsonProperty(Required = Required.Default, Order = 20)]
+        public List<Zaehlwerk> zaehlwerke;
+
+
         /// <summary>Aufzählung der Messlokationen, die zu dieser Marktlokation gehören.</summary>
         /// Es können 3 verschiedene Konstrukte auftreten:
         /// <ol>

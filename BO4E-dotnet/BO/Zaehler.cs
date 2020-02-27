@@ -61,5 +61,23 @@ namespace BO4E.BO
         /// <summary>Der Hersteller des Zählers. Details <see cref="Geschaeftspartner" /></summary>
         [JsonProperty(Required = Required.Default)]
         public Geschaeftspartner zaehlerhersteller;
+
+        /// <summary>
+        /// Referenz auf das Smartmeter-Gateway
+        /// </summary>
+        [JsonProperty(Required = Required.Default)]
+        public string gateway;
+
+        /// <summary>
+        /// Fernschaltung
+        /// </summary>
+        [JsonProperty(Required = Required.Default)]
+        public Fernschaltung fernschaltung;
+
+        /// <summary>
+        /// Messwerterfassung am Zählpunkt
+        /// </summary>
+        [JsonProperty(Required = Required.Default)]
+        public Messwerterfassung messwerterfassung;
     }
 }

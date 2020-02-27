@@ -1,5 +1,6 @@
 using BO4E.ENUM;
 using Newtonsoft.Json;
+using System.Collections.Generic;
 
 namespace BO4E.COM
 {
@@ -12,5 +13,21 @@ namespace BO4E.COM
         /// <summary>Bezeichnung der Hardware.</summary>
         [JsonProperty(Required = Required.Always)]
         public string bezeichnung;
+
+        /// <summary>Bezeichnung der Hardware.</summary>
+        [JsonProperty(Required = Required.Always)]
+        public Geraeteeigenschaften geraeteeigenschaften;
+
+        /// <summary>
+        /// Gerätenummer des Wandlers
+        /// </summary>
+        [JsonProperty(Required = Required.Default)]
+        public string[] geraetenummer;
+
+        /// <summary>
+        /// Referenz auf die Gerätenummer des Zählers
+        /// </summary>
+        [JsonProperty(Required = Required.Default)]
+        public string geraetereferenz;
     }
 }

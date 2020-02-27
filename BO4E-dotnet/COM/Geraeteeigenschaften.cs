@@ -1,5 +1,6 @@
 using BO4E.ENUM;
 using Newtonsoft.Json;
+using System.Collections.Generic;
 
 namespace BO4E.COM
 {
@@ -12,5 +13,8 @@ namespace BO4E.COM
         /// <summary>Weitere Merkmale des Geräts, zum Beispiel Mehrtarif, Eintarif etc.. Details <see cref="Geraetemerkmal" /></summary>
         [JsonProperty(Required = Required.Default)]
         public Geraetemerkmal geraetemerkmal;
+
+        [JsonProperty(Required = Required.Default)]
+        public Dictionary<string, string> parameter;
     }
 }

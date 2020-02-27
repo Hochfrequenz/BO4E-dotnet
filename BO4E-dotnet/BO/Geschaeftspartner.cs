@@ -16,9 +16,15 @@ namespace BO4E.BO
     public class Geschaeftspartner : BusinessObject
     {
         /// <summary>Die Anrede für den GePa, Z.B. Herr. <seealso cref="Anrede" /></summary>
-        [JsonProperty(Required = Required.Default, Order = -1)]
+        [JsonProperty(Required = Required.Default, Order = -2)]
         [FieldName("salutation", Language.EN)]
         public Anrede? anrede;
+
+        /// <summary>
+        /// title of name bsw: Dr.
+        /// </summary>
+        [JsonProperty(Required = Required.Default, Order = -1)]
+        public string title;
 
         /// <summary>
         /// Erster Teil des Namens. Hier kann der Firmenname oder bei Privatpersonen

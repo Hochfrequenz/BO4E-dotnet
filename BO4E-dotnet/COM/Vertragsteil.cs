@@ -45,5 +45,14 @@ namespace BO4E.COM
         /// </summary>
         [JsonProperty(Required = Required.Default)]
         public Menge maximaleAbnahmemenge;
+
+        [JsonProperty(Required = Required.Default)]
+        public Menge jahresverbrauchsprognose;
+
+        [JsonProperty(Required = Required.Default)]
+        public Menge kundenwert;
+
+        [JsonProperty(Required = Required.Default)]
+        public string verbrauchsaufteilung;
     }
 }
