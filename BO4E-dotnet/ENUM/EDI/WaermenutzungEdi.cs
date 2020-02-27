@@ -13,7 +13,7 @@ namespace BO4E.ENUM
         [Mapping(Waermenutzung.Speicherheizung)] 
         Z56,
         /// <summary>Z57: Wärmepumpe</summary>
-        [Mapping(Waermenutzung.Wärmepumpe)]
+        [Mapping(Waermenutzung.Waermepumpe)]
         Z57,
         ///<summary>Z61: Direktheizung</summary>
         [Mapping(Waermenutzung.Direktheizung)]
