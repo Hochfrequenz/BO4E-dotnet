@@ -13,7 +13,7 @@ namespace BO4E.ENUM.EDI
         Z08,
 
         /// <summary>Z09: Vertrag zwischen Lieferanten und NB</summary>
-        [Mapping(NetznutzungsVertrag.KUNDEN_NB)]
+        [Mapping(NetznutzungsVertrag.LIEFERANTEN_NB)]
         Z09,
     }
 }
