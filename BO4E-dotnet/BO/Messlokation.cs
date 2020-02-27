@@ -108,7 +108,7 @@ namespace BO4E.BO
 
         /// <summary>Referenz auf die ID der Messlokation</summary>
         [JsonProperty(Required = Required.Default)]
-        public JaNein abrechnungmessstellenbetriebnna;
+        public JaNein? abrechnungmessstellenbetriebnna;
 
         /// <summary>
         /// 

@@ -24,8 +24,6 @@ namespace BO4E.BO
         /// title of name bsw: Dr.
         /// </summary>
         [JsonProperty(Required = Required.Default, Order = -1)]
-        [DataCategory(DataCategory.NAME)]
-        [BoKey]
         public string title;
 
         /// <summary>

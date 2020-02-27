@@ -109,27 +109,27 @@ namespace TestBO4E
             Assert.AreNotEqual(DateTime.MinValue, ml.datum_deutsch);
         }
 
-        [TestMethod]
-        public void TestRechnungFromSapPrintDocument()
-        {
-            string[] files = Directory.GetFiles("TariffMediationTests/sapPrintDocuments/", "*.json");
-            foreach (string file in files)
-            {
-                JObject sapPrintDocument;
-                using (StreamReader r = new StreamReader(file))
-                {
-                    string jsonString = r.ReadToEnd();
-                    sapPrintDocument = JObject.Parse(jsonString);
-                }
-                Rechnung rechnung = new Rechnung(sapPrintDocument);
-                var settings = new JsonSerializerSettings
-                {
-                    ContractResolver = new MultiLangResolver(Language.EN),
-                    Formatting = Formatting.Indented
-                };
-                var json = JsonConvert.SerializeObject(rechnung, settings);
-            }
-        }
+        //[TestMethod]
+        //public void TestRechnungFromSapPrintDocument()
+        //{
+        //    string[] files = Directory.GetFiles("TariffMediationTests/sapPrintDocuments/", "*.json"); // there is not
+        //    foreach (string file in files)
+        //    {
+        //        JObject sapPrintDocument;
+        //        using (StreamReader r = new StreamReader(file))
+        //        {
+        //            string jsonString = r.ReadToEnd();
+        //            sapPrintDocument = JObject.Parse(jsonString);
+        //        }
+        //        Rechnung rechnung = new Rechnung(sapPrintDocument);
+        //        var settings = new JsonSerializerSettings
+        //        {
+        //            ContractResolver = new MultiLangResolver(Language.EN),
+        //            Formatting = Formatting.Indented
+        //        };
+        //        var json = JsonConvert.SerializeObject(rechnung, settings);
+        //    }
+        //}
 
     }
 }

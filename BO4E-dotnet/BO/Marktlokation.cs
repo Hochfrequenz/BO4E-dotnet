@@ -115,7 +115,7 @@ namespace BO4E.BO
         public string marktgebiet;
 
         [JsonProperty(Required = Required.Default, Order = 19)]
-        public Zeiteinheit zeitreihentyp;
+        public Zeiteinheit? zeitreihentyp;
 
         [JsonProperty(Required = Required.Default, Order = 20)]
         public List<Zaehlwerk> zaehlwerke;
