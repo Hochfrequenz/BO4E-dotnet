@@ -7,10 +7,10 @@ namespace BO4E.ENUM
     public enum SchwachlastfaehigEdi
     {
         /// <summary>Z59: Nicht-Schwachlastfähig</summary>
-        [Mapping(Schwachlastfaehig.Nicht_Schwachlastfaehig)]
+        [Mapping(Schwachlastfaehig.NICHT_SCHWACHLASTFAEHIG)]
         Z59,
         /// <summary>Z60: Schwachlast fähig</summary>
-        [Mapping(Schwachlastfaehig.Schwachlastfaehig)]
+        [Mapping(Schwachlastfaehig.SCHWACHLASTFAEHIG)]
         Z60,
     }
 }

@@ -5,8 +5,8 @@ namespace BO4E.ENUM
     public enum Schwachlastfaehig
     {
         /// <summary>Z59: Nicht-Schwachlastfähig</summary>
-        Nicht_Schwachlastfaehig,
+        NICHT_SCHWACHLASTFAEHIG,
         /// <summary>Z60: Schwachlast fähig</summary>
-        Schwachlastfaehig,
+        SCHWACHLASTFAEHIG,
     }
 }

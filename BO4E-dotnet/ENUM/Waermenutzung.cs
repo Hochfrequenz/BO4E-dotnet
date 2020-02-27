@@ -5,10 +5,10 @@ namespace BO4E.ENUM
     public enum Waermenutzung
     {
         /// <summary>Z56: Speicherheizung</summary>
-        Speicherheizung,
+        SPEICHERHEIZUNG,
         /// <summary>Z57: Wärmepumpe</summary>
-        Waermepumpe,
+        WAERMEPUMPE,
         ///Z61: Direktheizung
-        Direktheizung
+        DIREKTHEIZUNG
     }
 }

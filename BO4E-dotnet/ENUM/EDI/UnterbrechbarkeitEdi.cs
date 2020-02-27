@@ -10,10 +10,10 @@ namespace BO4E.ENUM
     public enum UnterbrechbarkeitEdi
     {
         /// <summary>Z62: unterbrechbare Verbrauchseinrichtung</summary>
-        [Mapping(Unterbrechbarkeit.Unterbrechbare_Verbrauchseinrichtung)]
+        [Mapping(Unterbrechbarkeit.UV)]
         Unterbrechbare_Verbrauchseinrichtung,
         /// <summary>Z63: nicht unterbrechbare Verbrauchseinrichtung</summary>
-        [Mapping(Unterbrechbarkeit.Nicht_Unterbrechbare_Verbrauchseinrichtung)]
+        [Mapping(Unterbrechbarkeit.NUV)]
         Nicht_Unterbrechbare_Verbrauchseinrichtung,       
     }
     

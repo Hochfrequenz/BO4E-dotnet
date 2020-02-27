@@ -15,6 +15,6 @@ namespace BO4E.COM
         public Geraetemerkmal geraetemerkmal;
 
         [JsonProperty(Required = Required.Default)]
-        public Dictionary<string, string> parameters;
+        public Dictionary<string, string> parameter;
     }
 }

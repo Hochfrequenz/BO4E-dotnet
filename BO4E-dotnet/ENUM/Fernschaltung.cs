@@ -5,8 +5,8 @@ namespace BO4E.ENUM
     public enum Fernschaltung
     {
         /// <summary>Z06: vorhanden</summary>
-        Vorhanden,
+        VORHANDEN,
         /// <summary>Z07: nicht vorhanden</summary>
-        Nicht_Vorhanden,       
+        NICHT_VORHANDEN,       
     }
 }

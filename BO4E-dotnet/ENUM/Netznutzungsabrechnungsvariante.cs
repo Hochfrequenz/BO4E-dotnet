@@ -5,8 +5,8 @@ namespace BO4E.ENUM
     public enum Netznutzungsabrechnungsvariante
     {
         /// <summary>Z14: Arbeitspreis/Grundpreis</summary>
-        Arbeitspreis_Grundpreis,
+        ARBEITSPREIS_GRUNDPREIS,
         /// <summary>Z15: Arbeitspreis/Leistungspreis</summary>
-        Arbeitspreis_Leistungspreis,       
+        ARBEITSPREIS_LEISTUNGSPREIS,       
     }
 }

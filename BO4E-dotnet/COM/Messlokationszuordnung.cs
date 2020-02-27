@@ -21,6 +21,5 @@ namespace BO4E.COM
         /// <summary>Zeitpunkt, bis zu dem die Messlokation zur Marktlokation gehört</summary>
         [JsonProperty(Required = Required.Default)]
         public string gueltigBis;
-
     }
 }

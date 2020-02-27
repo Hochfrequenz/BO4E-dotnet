@@ -9,11 +9,11 @@ namespace BO4E.ENUM.EDI
     public enum NetznutzungsabrechnungsvarianteEdi
     {
         /// <summary>Z14: Arbeitspreis/Grundpreis</summary>
-        [Mapping(Netznutzungsabrechnungsvariante.Arbeitspreis_Grundpreis)]
+        [Mapping(Netznutzungsabrechnungsvariante.ARBEITSPREIS_GRUNDPREIS)]
         Z14,
 
         /// <summary>Z15: Arbeitspreis/Leistungspreis</summary>
-        [Mapping(Netznutzungsabrechnungsvariante.Arbeitspreis_Leistungspreis)]
+        [Mapping(Netznutzungsabrechnungsvariante.ARBEITSPREIS_LEISTUNGSPREIS)]
         Z15,
     }
 }

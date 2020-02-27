@@ -9,11 +9,11 @@ namespace BO4E.ENUM.EDI
     public enum NetznutzungsabrechnungsgrundlageEdi
     {
         /// <summary>Z12: Lieferschein</summary>
-        [Mapping(Netznutzungsabrechnungsgrundlage.Lieferschein)]
+        [Mapping(Netznutzungsabrechnungsgrundlage.LIEFERSCHEIN)]
         Z12,
 
         /// <summary>Z13: Abweichend vertraglich mit Anschlussnutzer vereinbarte Grundlage</summary>
-        [Mapping(Netznutzungsabrechnungsgrundlage.Abweichende_Grundlage)]
+        [Mapping(Netznutzungsabrechnungsgrundlage.ABWEICHENDE_GRUNDLAGE)]
         Z13,
     }
 }

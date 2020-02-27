@@ -116,7 +116,11 @@ namespace BO4E.BO
         [JsonProperty(Required = Required.Default)]
         public List<COM.Marktrolle> marktrollen;
 
+        [JsonProperty(Required = Required.Default)]
+        public Gasqualitaet gasqualitaet;
 
+        [JsonProperty(Required = Required.Default)]
+        public string verlustfaktor;
 
         [JsonIgnore]
         private static readonly Regex REGEX_VALIDATE = new Regex(@"[A-Z\d]{33}", RegexOptions.Compiled);

@@ -5,13 +5,13 @@ namespace BO4E.ENUM
     public enum Verwendungszweck
     {
         /// <summary>Z84: Netznutzungsabrechnung</summary>
-        Netznutzungsabrechnung,
+        NETZNUTZUNGSABRECHNUNG,
         /// <summary>Z85: Bilanzkreisabrechnung</summary>
-        Bilanzkreisabrechnung,
+        BILANZKREISABRECHNUNG,
         /// <summary>Z86: Mehrmindermbengenabrechnung</summary>
-        Mehrmindermbengenabrechnung,
+        MEHRMINDERMBENGENABRECHNUNG,
         /// <summary>Z47: Endkundenabrechnung</summary>
-        Endkundenabrechnung,
+        ENDKUNDENABRECHNUNG,
     }
 
 }

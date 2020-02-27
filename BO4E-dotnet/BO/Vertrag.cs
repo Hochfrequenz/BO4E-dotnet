@@ -101,6 +101,13 @@ namespace BO4E.BO
         public int gemeinderabatt;
 
         /// <summary>
+        /// gemeinderabatt
+        /// </summary>
+        [JsonProperty(Required = Required.Default)]
+        public Geschaeftspartner korrespondenzpartner;
+
+
+        /// <summary>
         /// moves lokationsId from userProperties to vertragsteil if relevant
         /// </summary>
         /// <param name="context"></param>

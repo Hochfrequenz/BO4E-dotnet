@@ -5,8 +5,8 @@ namespace BO4E.ENUM
     public enum Messwerterfassung
     {
         /// <summary>AMR: fernauslesbare Zähler</summary>
-        Fernauslesbare,
+        FERNAUSLESBARE,
         /// <summary>MMR: manuell ausgelesene Zähler</summary>
-        Manuell_Ausgelesene,       
+        MANUELL_AUSGELESENE,       
     }
 }

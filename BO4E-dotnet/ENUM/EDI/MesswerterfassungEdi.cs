@@ -11,10 +11,10 @@ namespace BO4E.ENUM
     public enum MesswerterfassungEdi
     {
         /// <summary>AMR: fernauslesbare Zähler</summary>
-        [Mapping(Messwerterfassung.Fernauslesbare)]
+        [Mapping(Messwerterfassung.FERNAUSLESBARE)]
         AMR,
         /// <summary>MMR: manuell ausgelesene Zähler</summary>
-        [Mapping(Messwerterfassung.Manuell_Ausgelesene)]
+        [Mapping(Messwerterfassung.MANUELL_AUSGELESENE)]
         MMR,       
     }
 }

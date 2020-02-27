@@ -10,10 +10,10 @@ namespace BO4E.ENUM
     public enum FernschaltungEdi
     {
         /// <summary>Z06: vorhanden</summary>
-        [Mapping(Fernschaltung.Vorhanden)]
+        [Mapping(Fernschaltung.VORHANDEN)]
         Z06,
         /// <summary>Z07: nicht vorhanden</summary>
-        [Mapping(Fernschaltung.Nicht_Vorhanden)]
+        [Mapping(Fernschaltung.NICHT_VORHANDEN)]
         Z07,       
     }
 }

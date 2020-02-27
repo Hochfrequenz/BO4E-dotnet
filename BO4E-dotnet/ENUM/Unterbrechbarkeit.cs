@@ -5,9 +5,9 @@ namespace BO4E.ENUM
     public enum Unterbrechbarkeit
     {
         /// <summary>Z62: unterbrechbare Verbrauchseinrichtung</summary>
-        Unterbrechbare_Verbrauchseinrichtung,
+        UV,
         /// <summary>Z63: nicht unterbrechbare Verbrauchseinrichtung</summary>
-        Nicht_Unterbrechbare_Verbrauchseinrichtung,       
+        NUV,       
     }
     
 }

@@ -5,8 +5,8 @@ namespace BO4E.ENUM
     public enum Netznutzungszahler
     {
         /// <summary>Z10: Kunde</summary>
-        Kunde,
+        KUNDE,
         /// <summary>Z11: Lieferant</summary>
-        Lieferant,       
+        LIEFERANT,       
     }
 }

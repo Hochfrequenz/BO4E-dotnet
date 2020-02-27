@@ -9,11 +9,11 @@ namespace BO4E.ENUM.EDI
     public enum NetznutzungsvertragEdi
     {
         /// <summary>Z08: Direkter Vertrag zwischen Kunden und NB</summary>
-        [Mapping(NetznutzungsVertrag.Kunden_NB)]
+        [Mapping(NetznutzungsVertrag.KUNDEN_NB)]
         Z08,
 
         /// <summary>Z09: Vertrag zwischen Lieferanten und NB</summary>
-        [Mapping(NetznutzungsVertrag.Kunden_NB)]
+        [Mapping(NetznutzungsVertrag.KUNDEN_NB)]
         Z09,
     }
 }

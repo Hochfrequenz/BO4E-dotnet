@@ -11,16 +11,16 @@ namespace BO4E.ENUM
     public enum VerwendungszweckEdi
     {
         /// <summary>Z84: Netznutzungsabrechnung</summary>
-        [Mapping(Verwendungszweck.Netznutzungsabrechnung)]
+        [Mapping(Verwendungszweck.NETZNUTZUNGSABRECHNUNG)]
         Z84,
         /// <summary>Z85: Bilanzkreisabrechnung</summary>
-        [Mapping(Verwendungszweck.Bilanzkreisabrechnung)]
+        [Mapping(Verwendungszweck.BILANZKREISABRECHNUNG)]
         Z85,
         /// <summary>Z86: Mehrmindermbengenabrechnung</summary>
-        [Mapping(Verwendungszweck.Mehrmindermbengenabrechnung)]
+        [Mapping(Verwendungszweck.MEHRMINDERMBENGENABRECHNUNG)]
         Z86,
         /// <summary>Z47: Endkundenabrechnung</summary>
-        [Mapping(Verwendungszweck.Endkundenabrechnung)]
+        [Mapping(Verwendungszweck.ENDKUNDENABRECHNUNG)]
         Z47,
     }
 

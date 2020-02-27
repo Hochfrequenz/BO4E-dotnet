@@ -9,11 +9,11 @@ namespace BO4E.ENUM.EDI
     public enum NetznutzungszahlerEdi
     {
         /// <summary>Z10: Kunde</summary>
-        [Mapping(Netznutzungszahler.Kunde)]
+        [Mapping(Netznutzungszahler.KUNDE)]
         Z10,
 
         /// <summary>Z11: Lieferant</summary>
-        [Mapping(Netznutzungszahler.Lieferant)]
+        [Mapping(Netznutzungszahler.LIEFERANT)]
         Z11,
     }
 }

@@ -5,8 +5,8 @@ namespace BO4E.ENUM
     public enum Netznutzungsabrechnungsgrundlage
     {
         /// <summary>Z12: Lieferschein</summary>
-        Lieferschein,
+        LIEFERSCHEIN,
         /// <summary>Z13: Abweichend vertraglich mit Anschlussnutzer vereinbarte Grundlage</summary>
-        Abweichende_Grundlage,       
+        ABWEICHENDE_GRUNDLAGE,       
     }
 }
