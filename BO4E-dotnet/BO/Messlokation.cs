@@ -116,8 +116,8 @@ namespace BO4E.BO
         [JsonProperty(Required = Required.Default)]
         public List<COM.Marktrolle> marktrollen;
 
-        [JsonProperty(Required = Required.Default)]
-        public Gasqualitaet gasqualitaet;
+        [JsonProperty(Required = Required.Default, NullValueHandling = NullValueHandling.Ignore)]
+        public Gasqualitaet? gasqualitaet;
 
         [JsonProperty(Required = Required.Default)]
         public string verlustfaktor;
