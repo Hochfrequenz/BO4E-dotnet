@@ -1,10 +1,12 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using BO4E;
 using BO4E.BO;
 using BO4E.meta;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Newtonsoft.Json;
 
 namespace TestBO4E
 {
@@ -90,6 +92,37 @@ namespace TestBO4E
             {
                 var keyFields = BoMapper.GetAnnotatedFields(type, typeof(BoKey));
                 Assert.IsTrue(keyFields.Count() > 0, $"Type {type} is derived from {nameof(BusinessObject)} but has no [{nameof(BoKey)}] attribute.");
+            }
+        }
+
+        /// <summary>
+        /// There must be no fields in BusinessObjects or COMponents where you cannot distinguish no value (null) and initial value (e.g. ENUM default values or integer 0)
+        /// </summary>
+        [TestMethod]
+        public void NullableDefaultEnums()
+        {
+            foreach (var boType in typeof(BusinessObject).Assembly.GetTypes().Where(t => t.BaseType == typeof(BusinessObject) && !t.IsAbstract))
+            {
+                foreach (var obligDefaultField in boType.GetFields(BindingFlags.DeclaredOnly | BindingFlags.Public | BindingFlags.Instance)
+                    .Where(field => field.GetCustomAttributes(typeof(JsonPropertyAttribute), true)
+                        .Cast<JsonPropertyAttribute>()
+                        .Any(jpa => jpa.Required == Required.Default)))
+                {
+                    if (Nullable.GetUnderlyingType(obligDefaultField.FieldType) != null)
+                    {
+                        continue;
+                    }
+                    if (obligDefaultField.FieldType == typeof(string))
+                    {
+                        continue;
+                    }
+                    if (!obligDefaultField.FieldType.IsPrimitive && !obligDefaultField.FieldType.IsEnum)
+                    {
+                        continue;
+                    }
+                    Assert.IsTrue(false, $"The type {obligDefaultField.FieldType} of {boType.FullName}.{obligDefaultField.Name} is not nullable but not marked as obligatory.");
+                    // this is a problem because e.g. for integers you can't distinguish between no value (null) or initial value (0). Same is true for Enum values
+                }
             }
         }
     }

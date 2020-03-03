@@ -118,7 +118,7 @@ namespace BO4E.BO
         public Gasqualitaet? gasqualitaet;
 
         [JsonProperty(Required = Required.Default)]
-        public decimal? verlustfaktor;
+        public decimal verlustfaktor;
 
         [JsonIgnore]
         private static readonly Regex REGEX_VALIDATE = new Regex(@"[A-Z\d]{33}", RegexOptions.Compiled);
