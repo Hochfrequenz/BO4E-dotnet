@@ -52,7 +52,7 @@ namespace TestBO4E
             Energiemenge em1 = new Energiemenge();
             Energiemenge em2 = new Energiemenge();
             Assert.ThrowsException<ArgumentException>(() => em1.Equals(em2));
-            //Assert.AreEqual(em1.GetHashCode(), em2.GetHashCode()); TODO: Konstantin
+            Assert.AreEqual(em1.GetHashCode(), em2.GetHashCode());
              
             em1.lokationsId = "DE1234";
             em2.lokationsId = "DE1234";
@@ -74,7 +74,7 @@ namespace TestBO4E
             em2.energieverbrauch.Add(v2);
 
             Assert.AreEqual(em1, em2);
-            //Assert.AreEqual(em1.GetHashCode(), em2.GetHashCode());
+            Assert.AreEqual(em1.GetHashCode(), em2.GetHashCode());
             Assert.IsFalse(em1 == em2);
 
             Verbrauch v3 = new Verbrauch
@@ -88,7 +88,7 @@ namespace TestBO4E
             em1.energieverbrauch = new List<Verbrauch> { v3 };
             em2.energieverbrauch = new List<Verbrauch> { v3 };
             Assert.AreEqual(em1, em2);
-            //Assert.AreEqual(em1.GetHashCode(), em2.GetHashCode());
+            Assert.AreEqual(em1.GetHashCode(), em2.GetHashCode());
             Assert.IsFalse(em1 == em2);
 
             Verbrauch v4 = JsonConvert.DeserializeObject<Verbrauch>(JsonConvert.SerializeObject(v1));
@@ -103,7 +103,7 @@ namespace TestBO4E
             em2.energieverbrauch = new List<Verbrauch> { v4, v3 };
 
             Assert.AreNotEqual(em1, em2);
-            //Assert.AreNotEqual(em1.GetHashCode(), em2.GetHashCode());
+            Assert.AreNotEqual(em1.GetHashCode(), em2.GetHashCode());
         }
 
     }
