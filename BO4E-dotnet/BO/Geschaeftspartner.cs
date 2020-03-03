@@ -21,8 +21,9 @@ namespace BO4E.BO
         public Anrede? anrede;
 
         /// <summary>
-        /// title of name bsw: Dr.
+        /// title of name
         /// </summary>
+        /// <example>Dr.</example>
         [JsonProperty(Required = Required.Default, Order = -1)]
         public string title;
 
