@@ -98,7 +98,7 @@ namespace BO4E.BO
         /// gemeinderabatt
         /// </summary>
         [JsonProperty(Required = Required.Default)]
-        public int gemeinderabatt;
+        public decimal gemeinderabatt;
 
         /// <summary>
         /// gemeinderabatt
