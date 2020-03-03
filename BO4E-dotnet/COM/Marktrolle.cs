@@ -15,6 +15,12 @@ namespace BO4E.COM
         public string rollencodenummer;
 
         /// <summary>
+        /// code von Marktrolle
+        /// </summary>
+        [JsonProperty(Required = Required.Default)]
+        public string code;
+
+        /// <summary>
         /// List of Marktrolle. Details siehe <see cref="ENUM.Marktrolle"/>
         /// </summary>
         [JsonProperty(Required = Required.Always)] 
