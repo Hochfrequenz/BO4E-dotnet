@@ -8,7 +8,7 @@ namespace BO4E_dotnet.Extensions.BusinessObjects.SomeCustomer
 {
     public class MarktlokationTestExtension : BO4E.BO.Marktlokation
     {
-        public List<Messlokationszuordnung> testList;
+        public List<Messlokation> meloList;
 
         /// <summary>
         /// create a custom Marklokation busines object where associated melos are part of the malo object itself.
