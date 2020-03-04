@@ -73,6 +73,11 @@ namespace BO4E.COM
         [JsonProperty(Required = Required.Always, Order = 4)]
         public Mengeneinheit einheit;
 
+        /// <summary>type</summary>
+        /// <example>arbeitleistungtagesparameterabhmalo | veranschlagtejahresmenge | TUMKundenwert</example>
+        [JsonProperty(Required = Required.Default)]
+        public Verbrauchsmengetyp type;
+
         /// <param name="context"></param>
         [OnDeserialized]
         protected void FixSapBugs(StreamingContext context)
