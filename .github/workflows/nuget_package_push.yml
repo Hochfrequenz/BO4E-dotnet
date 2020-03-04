@@ -4,11 +4,9 @@ on:
  push:
     branches:
       - master
-
 jobs:
   build:
     runs-on: windows-latest
-
     steps:
     - uses: actions/checkout@master
     - name: Setup .NET Core

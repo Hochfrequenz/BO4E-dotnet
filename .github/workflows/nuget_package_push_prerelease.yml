@@ -12,16 +12,13 @@ jobs:
       uses: srfrnk/current-time@master
       id: current-time
       with:
-        format: YYYY-MM-DDTHH:MM:SSZ
+        format: YYYYMMDDTHHMMSS
     - uses: actions/checkout@master
     - name: Setup .NET Core
       uses: actions/setup-dotnet@v1
       with:
         dotnet-version: 3.1.100
     - name: Build with dotnet
-      env:
-        TIME: "${{ steps.current-time.outputs.time }}"
-        F_TIME: "${{ steps.current-time.outputs.formattedTime }}"
       run: |
        echo ${{ steps.current-time.outputs.time }}
        dotnet pack --configuration Release --version-suffix ${{ steps.current-time.outputs.time }}
