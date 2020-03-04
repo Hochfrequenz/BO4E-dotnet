@@ -12,7 +12,7 @@ namespace BO4E.COM
         public Geraetetyp geraetetyp;
         /// <summary>Weitere Merkmale des Geräts, zum Beispiel Mehrtarif, Eintarif etc.. Details <see cref="Geraetemerkmal" /></summary>
         [JsonProperty(Required = Required.Default)]
-        public Geraetemerkmal geraetemerkmal;
+        public Geraetemerkmal? geraetemerkmal;
 
         [JsonProperty(Required = Required.Default)]
         public Dictionary<string, string> parameter;

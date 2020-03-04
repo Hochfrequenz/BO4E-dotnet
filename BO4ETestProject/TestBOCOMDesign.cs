@@ -4,6 +4,7 @@ using System.Linq;
 using System.Reflection;
 using BO4E;
 using BO4E.BO;
+using BO4E.COM;
 using BO4E.meta;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Newtonsoft.Json;
@@ -101,19 +102,16 @@ namespace TestBO4E
         [TestMethod]
         public void NullableDefaultEnums()
         {
-            foreach (var boType in typeof(BusinessObject).Assembly.GetTypes().Where(t => t.BaseType == typeof(BusinessObject) && !t.IsAbstract))
+            foreach (var boType in typeof(BusinessObject).Assembly.GetTypes().Where(t => (t.BaseType == typeof(BusinessObject) || t.BaseType == typeof(COM)) && !t.IsAbstract))
             {
                 foreach (var obligDefaultField in boType.GetFields(BindingFlags.DeclaredOnly | BindingFlags.Public | BindingFlags.Instance)
                     .Where(field => field.GetCustomAttributes(typeof(JsonPropertyAttribute), true)
                         .Cast<JsonPropertyAttribute>()
                         .Any(jpa => jpa.Required == Required.Default)))
                 {
-                    if (Nullable.GetUnderlyingType(obligDefaultField.FieldType) != null)
+                    if (Nullable.GetUnderlyingType(obligDefaultField.FieldType) != null || obligDefaultField.FieldType==typeof(string))
                     {
-                        continue;
-                    }
-                    if (obligDefaultField.FieldType == typeof(string))
-                    {
+                        // it is already nullable. 
                         continue;
                     }
                     if (!obligDefaultField.FieldType.IsPrimitive && !obligDefaultField.FieldType.IsEnum)

@@ -24,6 +24,6 @@ namespace BO4E.COM
         /// Gibt den Status des veröffentlichten Preises an
         /// </summary>
         [JsonProperty(Required = Required.Default)]
-        public Preisstatus status;
+        public Preisstatus? status;
     }
 }
