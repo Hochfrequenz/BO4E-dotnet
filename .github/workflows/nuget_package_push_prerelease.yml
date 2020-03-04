@@ -22,8 +22,8 @@ jobs:
       run: |
        echo ${{ steps.current-time.outputs.formattedTime }}
        dotnet test
-       dotnet build --configuration Release --version-suffix "${{ steps.current-time.outputs.formattedTime }}"
-       dotnet pack --configuration Release --version-suffix "${{ steps.current-time.outputs.formattedTime }}"
+       dotnet build --configuration Release --version-suffix "beta${{ steps.current-time.outputs.formattedTime }}"
+       dotnet pack --configuration Release --version-suffix "beta${{ steps.current-time.outputs.formattedTime }}"
     - name: Setup Nuget.exe
       uses: warrenbuckley/Setup-Nuget@v1
     - name: Nuget push
