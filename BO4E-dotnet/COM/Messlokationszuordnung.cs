@@ -14,7 +14,7 @@ namespace BO4E.COM
         public string messlokationsId;
         /// <summary>Die Operation, mit der eine Messung an dieser Lokation für den Gesamtverbrauch der Marktlokation verrechnet wird. Beispielsweise bei einer Untermessung, wird der Verbauch der Untermessung subtrahiert. Details <see cref="ArithmetischeOperation" /></summary>
         [JsonProperty(Required = Required.Default)] // Default weil Hochfrequenz/energy-service-hub#35
-        public ArithmetischeOperation arithmetik;
+        public ArithmetischeOperation? arithmetik;
         /// <summary>Zeitpunkt, ab dem die Messlokation zur Marktlokation gehört</summary>
         [JsonProperty(Required = Required.Default)]
         public string gueltigSeit;

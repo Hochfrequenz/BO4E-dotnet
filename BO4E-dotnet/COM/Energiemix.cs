@@ -37,7 +37,7 @@ namespace BO4E.COM
         public List<Oekolabel> oekolabel;
         /// <summary>Kennzeichen, ob der Versorger zu den Öko Top Ten gehört.</summary>
         [JsonProperty(Required = Required.Default)]
-        public bool oekoTopTen;
+        public bool? oekoTopTen;
         /// <summary>Internetseite, auf der die Strommixdaten veröffentlicht sind.</summary>
         [JsonProperty(Required = Required.Default)]
         public string website;

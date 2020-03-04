@@ -48,7 +48,7 @@ namespace BO4E.BO
 
         /// <summary>Gibt an, ob es sich um eine unterbrechbare Belieferung handelt.</summary>
         [JsonProperty(Required = Required.Default, Order = 4)]
-        public Boolean unterbrechbar;
+        public bool? unterbrechbar;
 
         ///<summary>
         /// Netzebene, in der der Bezug der Energie erfolgt. Bei Strom Spannungsebene der

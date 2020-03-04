@@ -31,7 +31,7 @@ namespace BO4E.BO
         /// </summary>
         [JsonProperty(Required = Required.Default)]
         [FieldName("billStatus", Language.EN)]
-        public Rechnungsstatus rechnungsstatus;
+        public Rechnungsstatus? rechnungsstatus;
 
         /// <summary>
         /// Kennzeichnung, ob es sich um eine Stornorechnung handelt. Im Falle "true" findet sich im Attribut "originalrechnungsnummer" die Nummer der Originalrechnung.
