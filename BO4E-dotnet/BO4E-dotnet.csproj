@@ -29,7 +29,6 @@
     <DocumentationFile></DocumentationFile>
     <Optimize>true</Optimize>
   </PropertyGroup>
-
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
     <DefineConstants>DEBUG</DefineConstants>
     <DocumentationFile>BO4Enet.xml</DocumentationFile>
