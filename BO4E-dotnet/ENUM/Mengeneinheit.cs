@@ -1,11 +1,8 @@
-//using BO4E.BO.TariffMediation;
-
 namespace BO4E.ENUM
 {
     /// <summary>
     /// Einheit: Messgrößen, die per Messung oder Vorgabe ermittelt werden können.
     /// </summary>
-    //[TypeConverter(typeof(UnitMengeEinheitConverter))]
     public enum Mengeneinheit
     {
         /// <summary>Wattstunde</summary>
