@@ -1,7 +1,7 @@
 name: Nuget package push (pre-release from develop)
 
 on:
- push:
+  push:
     branches:
       - develop
 jobs:
