@@ -23,9 +23,8 @@ jobs:
         TIME: "${{ steps.current-time.outputs.time }}"
         F_TIME: "${{ steps.current-time.outputs.formattedTime }}"
       run: |
-       echo $TIME
-       dotnet build --configuration Release
-       dotnet pack --configuration Release --version-suffix '$TIME'
+       echo ${{ steps.current-time.outputs.time }}
+       dotnet pack --configuration Release --version-suffix ${{ steps.current-time.outputs.time }}
     - name: Setup Nuget.exe
       uses: warrenbuckley/Setup-Nuget@v1
     - name: Nuget push
