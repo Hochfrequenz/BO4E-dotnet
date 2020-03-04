@@ -8,7 +8,8 @@
     <Authors>Hochfrequenz Untenehmensberatung GmbH</Authors>
     <Product>BO4E .net core bindings</Product>
     <RepositoryUrl>https://github.com/HFInnovation/BO4E-dotnet/</RepositoryUrl>
-    <Version>0.1.8$(VersionSuffix)</Version>
+	<VersionPrefix>0.1.8</VersionPrefix>
+	<VersionSuffix>$(VersionSuffix)</VersionSuffix>
     <AssemblyName>BO4Enet</AssemblyName>
     <GeneratePackageOnBuild>false</GeneratePackageOnBuild>
     <PublishRepositoryUrl>true</PublishRepositoryUrl>
