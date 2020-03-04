@@ -1,13 +1,18 @@
 ﻿using System;
 using System.Collections.Generic;
-using BO4E.COM;
 using BO4E.BO;
 using System.Linq;
 
 namespace BO4E_dotnet.Extensions.BusinessObjects.SomeCustomer
 {
+    /// <summary>
+    /// class derived from standard BO4E <see cref="Marktlokation"/> with some extensions, specifically for a customer
+    /// </summary>
     public class MarktlokationTestExtension : BO4E.BO.Marktlokation
     {
+        /// <summary>
+        /// list of associated melos. Should have the same length as <see cref="Marktlokation.zugehoerigeMesslokationen"/>.
+        /// </summary>
         public List<Messlokation> meloList;
 
         /// <summary>
