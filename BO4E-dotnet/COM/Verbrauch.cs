@@ -76,7 +76,7 @@ namespace BO4E.COM
         /// <summary>type</summary>
         /// <example>arbeitleistungtagesparameterabhmalo | veranschlagtejahresmenge | TUMKundenwert</example>
         [JsonProperty(Required = Required.Default)]
-        public Verbrauchsmengetyp type;
+        public Verbrauchsmengetyp? type;
 
         /// <param name="context"></param>
         [OnDeserialized]
