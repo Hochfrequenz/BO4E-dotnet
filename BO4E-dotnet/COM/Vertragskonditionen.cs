@@ -1,3 +1,4 @@
+using BO4E.ENUM;
 using Newtonsoft.Json;
 using System;
 
@@ -33,27 +34,27 @@ namespace BO4E.COM
         public Zeitraum geplanteTurnusablesung;
 
         [JsonProperty(Required = Required.Default)]
-        public int turnusablesungIntervall;
+        public int? turnusablesungIntervall;
 
         [JsonProperty(Required = Required.Default)]
         public Zeitraum netznutzungsabrechnung;
 
         [JsonProperty(Required = Required.Default)]
-        public int netznutzungsabrechnungIntervall;
+        public int? netznutzungsabrechnungIntervall;
 
         [JsonProperty(Required = Required.Default)]
-        public bool haushaltskunde;
+        public bool? haushaltskunde;
 
         [JsonProperty(Required = Required.Default)]
-        public ENUM.NetznutzungsVertrag netznutzungsvertrag;
+        public NetznutzungsVertrag? netznutzungsvertrag;
 
         [JsonProperty(Required = Required.Default)]
-        public ENUM.Netznutzungszahler netznutzungszahler;
+        public Netznutzungszahler? netznutzungszahler;
 
         [JsonProperty(Required = Required.Default)]
-        public ENUM.Netznutzungsabrechnungsvariante netznutzungsabrechnungsvariante;
+        public Netznutzungsabrechnungsvariante? netznutzungsabrechnungsvariante;
 
         [JsonProperty(Required = Required.Default)]
-        public ENUM.Netznutzungsabrechnungsgrundlage netznutzungsabrechnungsgrundlage;
+        public Netznutzungsabrechnungsgrundlage? netznutzungsabrechnungsgrundlage;
     }
 }

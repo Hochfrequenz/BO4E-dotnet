@@ -52,7 +52,7 @@ namespace TestBO4E
             Energiemenge em1 = new Energiemenge();
             Energiemenge em2 = new Energiemenge();
             Assert.ThrowsException<ArgumentException>(() => em1.Equals(em2));
-            //Assert.AreEqual(em1.GetHashCode(), em2.GetHashCode()); TODO: Konstantin
+            Assert.AreEqual(em1.GetHashCode(), em2.GetHashCode());
              
             em1.lokationsId = "DE1234";
             em2.lokationsId = "DE1234";

@@ -33,7 +33,7 @@ namespace BO4E.COM
         public Zaehlertyp? zaehlertechnik;
         /// <summary>Zeigt an, ob es zu der Marktlokation einen Lastgang gibt. Falls ja, kann dieser abgerufen werden und daraus die Verbrauchswerte ermittelt werden.</summary>
         [JsonProperty(Required = Required.Default)]
-        public Boolean lastgangVorhanden;
+        public bool? lastgangVorhanden;
         /// <summary>Die Adresse an der die Marktlokation sich befindet. Struktur <seealso cref="Adresse" /></summary>
         [JsonProperty(Required = Required.Always)]
         public Adresse lokationsadresse;

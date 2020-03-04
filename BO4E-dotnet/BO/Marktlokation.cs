@@ -48,7 +48,7 @@ namespace BO4E.BO
 
         /// <summary>Gibt an, ob es sich um eine unterbrechbare Belieferung handelt.</summary>
         [JsonProperty(Required = Required.Default, Order = 4)]
-        public Boolean unterbrechbar;
+        public bool? unterbrechbar;
 
         ///<summary>
         /// Netzebene, in der der Bezug der Energie erfolgt. Bei Strom Spannungsebene der
@@ -120,6 +120,8 @@ namespace BO4E.BO
         [JsonProperty(Required = Required.Default, Order = 20)]
         public List<Zaehlwerk> zaehlwerke;
 
+        [JsonProperty(Required = Required.Default, Order = 20)]
+        public List<Menge> verbauchsmenge;
 
         /// <summary>Aufzählung der Messlokationen, die zu dieser Marktlokation gehören.</summary>
         /// Es können 3 verschiedene Konstrukte auftreten:

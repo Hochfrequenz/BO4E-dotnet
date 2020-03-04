@@ -63,9 +63,8 @@ namespace BO4E.BO
 
         /// <summary>  Die Adresse, an der die Messeinrichtungen zu finden sind.( Nur angeben, wenn
         /// diese von der Adresse der Marktlokation abweicht.)
-        /// 
-        ///Achtung: Es darf immer nur eine Art der Ortsangabe vorhanden sein (entweder
-        ///eine Adresse oder eine GeoKoordinate oder eine Katasteradresse.
+        /// Achtung: Es darf immer nur eine Art der Ortsangabe vorhanden sein (entweder
+        /// eine Adresse oder eine GeoKoordinate oder eine Katasteradresse.
         ///</summary> 
         [JsonProperty(Required = Required.Default, Order = 6)]
         [DataCategory(DataCategory.ADDRESS)]
@@ -105,7 +104,6 @@ namespace BO4E.BO
         [JsonProperty(Required = Required.Default, Order = 12)]
         public Bilanzierungsmethode? bilanzierungsmethode;
 
-
         /// <summary>Referenz auf die ID der Messlokation</summary>
         [JsonProperty(Required = Required.Default)]
         public JaNein? abrechnungmessstellenbetriebnna;
@@ -116,11 +114,11 @@ namespace BO4E.BO
         [JsonProperty(Required = Required.Default)]
         public List<COM.Marktrolle> marktrollen;
 
-        [JsonProperty(Required = Required.Default)]
-        public Gasqualitaet gasqualitaet;
+        [JsonProperty(Required = Required.Default, NullValueHandling = NullValueHandling.Ignore)]
+        public Gasqualitaet? gasqualitaet;
 
         [JsonProperty(Required = Required.Default)]
-        public string verlustfaktor;
+        public decimal? verlustfaktor;
 
         [JsonIgnore]
         private static readonly Regex REGEX_VALIDATE = new Regex(@"[A-Z\d]{33}", RegexOptions.Compiled);

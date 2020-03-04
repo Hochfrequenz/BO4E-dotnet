@@ -72,12 +72,12 @@ namespace BO4E.BO
         /// Fernschaltung
         /// </summary>
         [JsonProperty(Required = Required.Default)]
-        public Fernschaltung fernschaltung;
+        public Fernschaltung? fernschaltung;
 
         /// <summary>
         /// Messwerterfassung am Zählpunkt
         /// </summary>
         [JsonProperty(Required = Required.Default)]
-        public Messwerterfassung messwerterfassung;
+        public Messwerterfassung? messwerterfassung;
     }
 }
