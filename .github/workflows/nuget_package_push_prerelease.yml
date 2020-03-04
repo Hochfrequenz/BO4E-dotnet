@@ -9,8 +9,10 @@ jobs:
     runs-on: windows-latest
     steps:
     - name: Get current time
-      uses: gerred/actions/current-time@master
+      uses: srfrnk/current-time@master
       id: current-time
+      with:
+        format: YYYY-MM-DDTHH:MM:SSZ
     - uses: actions/checkout@master
     - name: Setup .NET Core
       uses: actions/setup-dotnet@v1
@@ -19,9 +21,10 @@ jobs:
     - name: Build with dotnet
       env:
         TIME: "${{ steps.current-time.outputs.time }}"
+        F_TIME: "${{ steps.current-time.outputs.formattedTime }}"
       run: |
        dotnet build --configuration Release
-       dotnet pack --configuration Release --version-suffix $TIME
+       dotnet pack --configuration Release --version-suffix $F_TIME
     - name: Setup Nuget.exe
       uses: warrenbuckley/Setup-Nuget@v1
     - name: Nuget push
