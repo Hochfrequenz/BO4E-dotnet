@@ -1,0 +1,31 @@
+name: Nuget package push (pre-release from develop)
+
+on:
+ push:
+    branches:
+      - develop
+jobs:
+  build:
+    runs-on: windows-latest
+    steps:
+    - name: Get current time
+      uses: gerred/actions/current-time@master
+      id: current-time
+    - uses: actions/checkout@master
+    - name: Setup .NET Core
+      uses: actions/setup-dotnet@v1
+      with:
+        dotnet-version: 3.1.100
+    - name: Build with dotnet
+      env:
+        TIME: "${{ steps.current-time.outputs.time }}"
+      run: |
+       dotnet build --configuration Release
+       dotnet pack --configuration Release --version-suffix $TIME
+    - name: Setup Nuget.exe
+      uses: warrenbuckley/Setup-Nuget@v1
+    - name: Nuget push
+      run:  | 
+              nuget setApiKey ${{ secrets.BO4E_NUGET_ORG_PUSH_TOKEN }}
+              nuget push .\**\bin\Release\*.nupkg -Source https://api.nuget.org/v3/index.json -SkipDuplicate -NoSymbols
+              
