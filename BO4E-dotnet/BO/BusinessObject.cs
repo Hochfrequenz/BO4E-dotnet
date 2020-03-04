@@ -70,7 +70,7 @@ namespace BO4E.BO
         [JsonProperty(PropertyName = userPropertiesName, Required = Required.Default, Order = 100)]
         [JsonExtensionData]
         [DataCategory(DataCategory.USER_PROPERTIES)]
-        public IDictionary<string, JToken> userProperties = new Dictionary<string,JToken>();
+        public IDictionary<string, JToken> userProperties;
 
         /// <summary>
         /// generates the BO4E boTyp attribute value (class name as upper case)
