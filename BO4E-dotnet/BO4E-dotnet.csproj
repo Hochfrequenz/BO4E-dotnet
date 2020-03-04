@@ -8,9 +8,9 @@
     <Authors>Hochfrequenz Untenehmensberatung GmbH</Authors>
     <Product>BO4E .net core bindings</Product>
     <RepositoryUrl>https://github.com/HFInnovation/BO4E-dotnet/</RepositoryUrl>
-    <Version>0.1.8</Version>
+    <Version>0.1.8$(VersionSuffix)</Version>
     <AssemblyName>BO4Enet</AssemblyName>
-    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <GeneratePackageOnBuild>false</GeneratePackageOnBuild>
     <PublishRepositoryUrl>true</PublishRepositoryUrl>
 
     <!-- Optional: Embed source files that are not tracked by the source control manager to the PDB -->
