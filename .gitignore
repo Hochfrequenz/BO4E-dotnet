@@ -1,14 +1,4 @@
-
-.vs/BO4E-dotnet/v16/.suo
-
-.vs/BO4E-dotnet/v16/Server/sqlite3/db.lock
-
-.vs/BO4E-dotnet/v16/Server/sqlite3/storage.ide
-
-.vs/BO4E-dotnet/v16/Server/sqlite3/storage.ide-shm
-
-.vs/BO4E-dotnet/v16/Server/sqlite3/
-
+.vs
 
 BO4E-dotnet/bin/Debug/
 
