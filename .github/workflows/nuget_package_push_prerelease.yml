@@ -20,8 +20,8 @@ jobs:
         dotnet-version: 3.1.100
     - name: Build with dotnet
       run: |
-       echo ${{ steps.current-time.outputs.time }}
        echo ${{ steps.current-time.outputs.formattedTime }}
+       dotnet test
        dotnet build --configuration Release
        dotnet pack --configuration Release --version-suffix ${{ steps.current-time.outputs.formattedTime }}
     - name: Setup Nuget.exe
