@@ -1,4 +1,4 @@
-name: Nuget package push (pre release from develop)
+name: Nuget package push (pre-release from develop)
 
 on:
  push:
@@ -22,6 +22,7 @@ jobs:
       run: |
        echo ${{ steps.current-time.outputs.time }}
        echo ${{ steps.current-time.outputs.formattedTime }}
+       dotnet build --configuration Release
        dotnet pack --configuration Release --version-suffix ${{ steps.current-time.outputs.formattedTime }}
     - name: Setup Nuget.exe
       uses: warrenbuckley/Setup-Nuget@v1
