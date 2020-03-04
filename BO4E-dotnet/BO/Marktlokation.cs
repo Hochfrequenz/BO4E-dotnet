@@ -120,8 +120,8 @@ namespace BO4E.BO
         [JsonProperty(Required = Required.Default, Order = 20)]
         public List<Zaehlwerk> zaehlwerke;
 
-        [JsonProperty(Required = Required.Default, Order = 20)]
-        public List<Menge> verbauchsmenge;
+        [JsonProperty(Required = Required.Default, Order = 21)]
+        public List<Verbauchsmenge> verbauchsmenge;
 
         /// <summary>Aufzählung der Messlokationen, die zu dieser Marktlokation gehören.</summary>
         /// Es können 3 verschiedene Konstrukte auftreten:
