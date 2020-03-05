@@ -1,14 +1,13 @@
-name: Nuget package push
+name: Nuget package push (release master)
 
 on:
- push:
+  push:
     branches:
       - master
 
 jobs:
   build:
     runs-on: windows-latest
-
     steps:
     - uses: actions/checkout@master
     - name: Setup .NET Core
@@ -17,6 +16,7 @@ jobs:
         dotnet-version: 3.1.100
     - name: Build with dotnet
       run: |
+       dotnet test
        dotnet build --configuration Release
        dotnet pack --configuration Release
     - name: Setup Nuget.exe
