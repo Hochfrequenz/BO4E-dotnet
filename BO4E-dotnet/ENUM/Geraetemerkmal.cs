@@ -123,7 +123,15 @@ namespace BO4E.ENUM
         /// <summary>
         /// Ethernet-Kom.-Einricht. LAN/WLAN
         /// </summary>
-        Ethernet_KOM,
+        ETHERNET_KOM,
+        /// <summary>
+        /// Ethernet-Kom.-Einricht. DSL
+        /// </summary>
+        DSL_KOM,
+        /// <summary>
+        /// Ethernet-Kom.-Einricht. LTE
+        /// </summary>
+        LTE_KOM,
         /// <summary>
         /// Rundsteuerempfänger
         /// </summary>
