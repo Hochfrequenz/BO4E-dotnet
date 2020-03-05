@@ -91,7 +91,10 @@ namespace BO4E.ENUM
         /// <summary>Smartmetergateway</summary>
         SMARTMETERGATEWAY,
         /// <summary>Steuerbox</summary>
-        STEUERBOX
-
+        STEUERBOX,
+        /// <summary>BLOCKSTROMWANDLER</summary>
+        BLOCKSTROMWANDLER,
+        ///<summary>KOMBIMESSWANDLER</summary>
+        KOMBIMESSWANDLER
     }
 }

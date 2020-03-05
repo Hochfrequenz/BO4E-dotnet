@@ -139,6 +139,22 @@ namespace BO4E.ENUM
         /// <summary>
         /// Tarifschaltgerät
         /// </summary>
-        TARIFSCHALTGERAET
+        TARIFSCHALTGERAET,
+        /// <summary>
+        /// ZUSTANDS_MU
+        /// </summary>
+        ZUSTANDS_MU,
+        /// <summary>
+        /// TEMPERATUR_MU
+        /// </summary>
+        TEMPERATUR_MU,
+        /// <summary>
+        /// KOMPAKT_MU
+        /// </summary>
+        KOMPAKT_MU,
+        /// <summary>
+        /// SYSTEM_MU
+        /// </summary>
+        SYSTEM_MU
     }
 }
