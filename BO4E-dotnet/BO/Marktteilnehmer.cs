@@ -29,5 +29,12 @@ namespace BO4E.BO
         /// </summary>
         [JsonProperty(Required = Required.Always, Order = 23)]
         public string makoadresse;
+
+        /// <summary>
+        /// Ansprechpartner as in EDIFACT NAD+MS, that includes e.g. the email address of a natural person.
+        /// </summary>
+        [NonOfficial(NonOfficialCategory.CUSTOMER_REQUIREMENTS)]
+        [JsonProperty(Required = Required.Default, Order = 24)]
+        public Ansprechpartner ansprechpartner;
     }
 }
