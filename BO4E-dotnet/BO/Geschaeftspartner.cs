@@ -25,6 +25,7 @@ namespace BO4E.BO
         /// </summary>
         /// <example>Dr.</example>
         [JsonProperty(Required = Required.Default, Order = -1)]
+        [NonOfficial(NonOfficialCategory.CUSTOMER_REQUIREMENTS)]
         public string title;
 
         /// <summary>

@@ -1,4 +1,5 @@
 ﻿using System;
+using BO4E.meta;
 using Newtonsoft.Json;
 
 namespace BO4E.COM
@@ -46,13 +47,25 @@ namespace BO4E.COM
         [JsonProperty(Required = Required.Default)]
         public Menge maximaleAbnahmemenge;
 
+        /// <summary>
+        /// jahresverbrauchsprognose für TopComXML mapping
+        /// </summary>
         [JsonProperty(Required = Required.Default)]
+        [NonOfficial(NonOfficialCategory.CUSTOMER_REQUIREMENTS)]
         public Menge jahresverbrauchsprognose;
 
+        /// <summary>
+        /// kundenwert für TopComXML mapping
+        /// </summary>
         [JsonProperty(Required = Required.Default)]
+        [NonOfficial(NonOfficialCategory.CUSTOMER_REQUIREMENTS)]
         public Menge kundenwert;
 
+        /// <summary>
+        /// verbrauchsaufteilung für TopComXML mapping
+        /// </summary>
         [JsonProperty(Required = Required.Default)]
+        [NonOfficial(NonOfficialCategory.CUSTOMER_REQUIREMENTS)]
         public string verbrauchsaufteilung;
     }
 }

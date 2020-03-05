@@ -106,18 +106,28 @@ namespace BO4E.BO
 
         /// <summary>Referenz auf die ID der Messlokation</summary>
         [JsonProperty(Required = Required.Default)]
+        [NonOfficial(NonOfficialCategory.CUSTOMER_REQUIREMENTS)]
         public JaNein? abrechnungmessstellenbetriebnna;
 
         /// <summary>
-        /// 
+        /// marktrollen für EDIFACT mapping
         /// </summary>
         [JsonProperty(Required = Required.Default)]
+        [NonOfficial(NonOfficialCategory.CUSTOMER_REQUIREMENTS)]
         public List<COM.Marktrolle> marktrollen;
 
+        /// <summary>
+        /// gasqualitaet für EDIFACT mapping
+        /// </summary>
         [JsonProperty(Required = Required.Default, NullValueHandling = NullValueHandling.Ignore)]
+        [NonOfficial(NonOfficialCategory.CUSTOMER_REQUIREMENTS)]
         public Gasqualitaet? gasqualitaet;
 
+        /// <summary>
+        /// verlustfaktor für EDIFACT mapping
+        /// </summary>
         [JsonProperty(Required = Required.Default)]
+        [NonOfficial(NonOfficialCategory.CUSTOMER_REQUIREMENTS)]
         public decimal? verlustfaktor;
 
         [JsonIgnore]
