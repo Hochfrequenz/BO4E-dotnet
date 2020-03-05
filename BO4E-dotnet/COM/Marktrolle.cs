@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+﻿using BO4E.meta;
 using Newtonsoft.Json;
 
 namespace BO4E.COM
@@ -18,12 +18,13 @@ namespace BO4E.COM
         /// code von Marktrolle
         /// </summary>
         [JsonProperty(Required = Required.Default)]
+        [NonOfficial(NonOfficialCategory.UNSPECIFIED)]
         public string code;
 
         /// <summary>
         /// List of Marktrolle. Details siehe <see cref="ENUM.Marktrolle"/>
         /// </summary>
-        [JsonProperty(Required = Required.Always)] 
+        [JsonProperty(Required = Required.Always)]
         public ENUM.Marktrolle marktrolle;
     }
 }
