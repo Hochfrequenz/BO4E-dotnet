@@ -22,9 +22,10 @@ namespace BO4E.meta
         /// </summary>
         REGULATORY_REQUIREMENTS,
         /// <summary>
-        /// an information or field is no longer necessary (please use <see cref="System.ObsoleteAttribute"/> too)
+        /// an information or field is no longer necessary or outdated (please use <see cref="System.ObsoleteAttribute"/> too). Hochfrequenz favours removal of this field from the official BO4E standard.
         /// </summary>
-        OUTDATED,
+        [Obsolete("Hochfrequenz favours the removal of this field/property from BO4E.")]
+        PROPOSED_DELETION,
         /// <summary>
         /// a field or information is necessary to represent requirements of a customer but is not (yet) part of the official BO4E standard
         /// </summary>
