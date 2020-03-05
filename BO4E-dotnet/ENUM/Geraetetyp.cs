@@ -1,3 +1,5 @@
+using System;
+
 namespace BO4E.ENUM
 {
     /// <summary>Auflistung möglicher abzurechnender Gerätetypen.</summary>
@@ -63,6 +65,9 @@ namespace BO4E.ENUM
         ELEKTRONISCHER_HAUSHALTSZAEHLER,
         /// <summary>Steuereinrichtung</summary>
         STEUEREINRICHTUNG,
+        /// <summary>technische Steuereinrichtung</summary>
+        [Obsolete("Verwenden Sie die detailierte Steuereinrichtung",false)]
+        TECHNISCHESTEUEREINRICHTUNG,
         /// <summary>Tarifschaltgerät</summary>
         TARIFSCHALTGERAET,
         /// <summary>Rundsteuerempfänger</summary>
