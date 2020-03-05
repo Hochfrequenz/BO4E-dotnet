@@ -48,21 +48,21 @@ namespace BO4E.COM
         public Menge maximaleAbnahmemenge;
 
         /// <summary>
-        /// jahresverbrauchsprognose für TopComXML mapping
+        /// jahresverbrauchsprognose für EDIFACT mapping
         /// </summary>
         [JsonProperty(Required = Required.Default)]
         [NonOfficial(NonOfficialCategory.CUSTOMER_REQUIREMENTS)]
         public Menge jahresverbrauchsprognose;
 
         /// <summary>
-        /// kundenwert für TopComXML mapping
+        /// kundenwert für EDIFACT mapping
         /// </summary>
         [JsonProperty(Required = Required.Default)]
         [NonOfficial(NonOfficialCategory.CUSTOMER_REQUIREMENTS)]
         public Menge kundenwert;
 
         /// <summary>
-        /// verbrauchsaufteilung für TopComXML mapping
+        /// verbrauchsaufteilung für EDIFACT mapping
         /// </summary>
         [JsonProperty(Required = Required.Default)]
         [NonOfficial(NonOfficialCategory.CUSTOMER_REQUIREMENTS)]

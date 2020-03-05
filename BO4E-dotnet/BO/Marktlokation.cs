@@ -106,49 +106,49 @@ namespace BO4E.BO
         public Katasteradresse katasterinformation;
 
         /// <summary>
-        /// für TopComXML mapping 
+        /// für EDIFACT mapping 
         /// </summary>
         [JsonProperty(Required = Required.Default, Order = 16)]
         [NonOfficial(NonOfficialCategory.CUSTOMER_REQUIREMENTS)]
         public List<COM.Marktrolle> marktrollen;
 
         /// <summary>
-        /// für TopComXML mapping 
+        /// für EDIFACT mapping 
         /// </summary>
         [JsonProperty(Required = Required.Default, Order = 17)]
         [NonOfficial(NonOfficialCategory.CUSTOMER_REQUIREMENTS)]
         public string regelzone;
 
         /// <summary>
-        /// für TopComXML mapping 
+        /// für EDIFACT mapping 
         /// </summary>
         [JsonProperty(Required = Required.Default, Order = 18)]
         [NonOfficial(NonOfficialCategory.CUSTOMER_REQUIREMENTS)]
         public string marktgebiet;
 
         /// <summary>
-        /// für TopComXML mapping 
+        /// für EDIFACT mapping 
         /// </summary>
         [JsonProperty(Required = Required.Default, Order = 19)]
         [NonOfficial(NonOfficialCategory.CUSTOMER_REQUIREMENTS)]
         public Zeiteinheit? zeitreihentyp;
 
         /// <summary>
-        /// für TopComXML mapping 
+        /// für EDIFACT mapping 
         /// </summary>
         [JsonProperty(Required = Required.Default, Order = 20)]
         [NonOfficial(NonOfficialCategory.CUSTOMER_REQUIREMENTS)]
         public List<Zaehlwerk> zaehlwerke;
 
         /// <summary>
-        /// für TopComXML mapping 
+        /// für EDIFACT mapping 
         /// </summary>
         [JsonProperty(Required = Required.Default, Order = 21)]
         [NonOfficial(NonOfficialCategory.CUSTOMER_REQUIREMENTS)]
         public List<Verbrauch> verbauchsmenge;
 
         /// <summary>
-        /// für TopComXML mapping 
+        /// für EDIFACT mapping 
         /// </summary>
         [JsonProperty(Required = Required.Default, Order = 22)]
         [NonOfficial(NonOfficialCategory.CUSTOMER_REQUIREMENTS)]

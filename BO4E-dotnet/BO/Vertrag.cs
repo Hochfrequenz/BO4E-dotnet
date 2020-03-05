@@ -95,14 +95,14 @@ namespace BO4E.BO
         public List<Vertragsteil> vertragsteile;
 
         /// <summary>
-        /// gemeinderabatt für TopComXML mapping
+        /// gemeinderabatt für EDIFACT mapping
         /// </summary>
         [JsonProperty(Required = Required.Default)]
         [NonOfficial(NonOfficialCategory.CUSTOMER_REQUIREMENTS)]
         public decimal? gemeinderabatt;
 
         /// <summary> 
-        /// korrespondenzpartner für TopComXML mapping
+        /// korrespondenzpartner für EDIFACT mapping
         /// </summary>
         [JsonProperty(Required = Required.Default)]
         [NonOfficial(NonOfficialCategory.CUSTOMER_REQUIREMENTS)]
