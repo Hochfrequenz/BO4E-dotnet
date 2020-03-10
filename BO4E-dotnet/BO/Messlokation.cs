@@ -22,36 +22,36 @@ namespace BO4E.BO
         /// <summary>Die Messlokations-Identifikation. Das ist die frühere Zählpunktbezeichnung,
         /// z.B. DE 47108151234567</summary>
         [DefaultValue("|null|")]
-        [JsonProperty(PropertyName = "messLokationsId", Required = Required.Always, Order = -1)]
+        [JsonProperty(PropertyName = "messLokationsId", Required = Required.Always, Order = 7)]
         [DataCategory(DataCategory.POD)]
         [BoKey]
         public string messlokationsId;
 
         /// <summary>* Sparte der Messlokation, z.B. Gas oder Strom.
         /// <seealso cref="Sparte" /></summary>
-        [JsonProperty(Required = Required.Always, Order = 0)]
+        [JsonProperty(Required = Required.Always, Order = 8)]
         public Sparte sparte;
         ///<summary> Spannungsebene der Messung.
         ///
         /// <seealso cref="Netzebene" /></summary>
-        [JsonProperty(Required = Required.Default, Order = 1)] //explicitly set NOT required.
+        [JsonProperty(Required = Required.Default, Order = 5)] //explicitly set NOT required.
         public Netzebene? netzebeneMessung;
 
         /// <summary>Die Nummer des Messgebietes in der ene't-Datenbank.</summary>
-        [JsonProperty(Required = Required.Default, Order = 2)]
+        [JsonProperty(Required = Required.Default, Order = 6)]
         public string messgebietNr;
 
         /// <summary>Codenummer des grundzuständigen Messstellenbetreibers, der für diese
         /// Messlokation zuständig ist.( Dieser ist immer dann Messstellenbetreiber, wenn
         /// kein anderer MSB die Einrichtungen an der Messlokation betreibt.)</summary>
-        [JsonProperty(Required = Required.Default, Order = 3)]
+        [JsonProperty(Required = Required.Default, Order = 7)]
         public string grundzustaendigerMSBCodeNr;
 
         /// <summary>Codenummer des grundzuständigen Messstellenbetreibers für intelligente
         /// Messsysteme der für diese Messlokation zuständig ist.(Dieser ist immer dann
         /// Messstellenbetreiber, wenn kein anderer MSB die Einrichtungen an der
         /// Messlokation betreibt.)</summary>
-        [JsonProperty(Required = Required.Default, Order = 4)]
+        [JsonProperty(Required = Required.Default, Order = 8)]
         public string grundzustaendigerMSBIMCodeNr;// grundzustaendigerMSB_IMCodenr;  https://github.com/Hochfrequenz/energy-service-hub/issues/11
 
         /// <summary> Codenummer des Messdienstleisters, der für diese Messlokation zuständig
@@ -91,17 +91,17 @@ namespace BO4E.BO
         public List<Hardware> geraete;
 
         /// <summary>Liste der Messdienstleistungen, die zu dieser Messstelle gehört.</summary>
-        [JsonProperty(Required = Required.Default, Order = 10)]
+        [JsonProperty(Required = Required.Default, Order = 50)]
         public List<Dienstleistung> messdienstleistung;
 
         /// <summary> Zähler, die zu dieser Messlokation gehören. Details</summary>
-        [JsonProperty(Required = Required.Default, Order = 11)]
+        [JsonProperty(Required = Required.Default, Order = 51)]
         public List<Zaehler> messlokationszaehler;
 
         /// <summary>
         /// <see cref="Marktlokation.bilanzierungsmethode"/>
         /// </summary>
-        [JsonProperty(Required = Required.Default, Order = 12)]
+        [JsonProperty(Required = Required.Default, Order = 52)]
         public Bilanzierungsmethode? bilanzierungsmethode;
 
         /// <summary>Referenz auf die ID der Messlokation</summary>

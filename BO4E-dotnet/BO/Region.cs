@@ -3,6 +3,7 @@ using System.ComponentModel.DataAnnotations;
 using BO4E.COM;
 using BO4E.meta;
 using Newtonsoft.Json;
+using ProtoBuf;
 
 namespace BO4E.BO
 {
@@ -14,14 +15,16 @@ namespace BO4E.BO
         /// <summary>
         ///  Bezeichnung der Region.
         /// </summary>
-        [JsonProperty(Required = Required.Always, Order = -1)]
+        [JsonProperty(Required = Required.Always, Order = 7)]
+        [ProtoMember(-1)]
         [BoKey]
         public string bezeichnung;
 
         /// <summary>
         /// Kriterien zur Definition der Region. Details siehe <see cref="Regionskriterium"/>
         /// </summary>
-        [JsonProperty(Required = Required.Always, Order = 0)] // at least one entry
+        [JsonProperty(Required = Required.Always, Order = 8)] // at least one entry
+        [ProtoMember(99)]
         [MinLength(1)]
         public List<Regionskriterium> regionkriterien;
     }

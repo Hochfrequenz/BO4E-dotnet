@@ -5,6 +5,7 @@ using BO4E.BO;
 using BO4E.meta;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
+using ProtoBuf;
 
 namespace BO4E.COM
 {
@@ -18,7 +19,8 @@ namespace BO4E.COM
         /// <summary>
         /// User properties (non bo4e standard)
         /// </summary>
-        [JsonProperty(PropertyName = BusinessObject.userPropertiesName, Required = Required.Default, Order = 100)]
+        [JsonProperty(PropertyName = BusinessObject.userPropertiesName, Required = Required.Default, Order = 500)]
+        [ProtoMember(100)]
         [JsonExtensionData]
         [DataCategory(DataCategory.USER_PROPERTIES)]
         public IDictionary<string, JToken> userProperties;

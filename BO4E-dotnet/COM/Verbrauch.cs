@@ -4,6 +4,7 @@ using System.Runtime.Serialization;
 using BO4E.ENUM;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
+using ProtoBuf;
 using StackExchange.Profiling;
 
 namespace BO4E.COM
@@ -35,20 +36,23 @@ namespace BO4E.COM
         /// <summary>
         /// Beginn des Zeitraumes, für den der Verbrauch angegeben wird.
         /// </summary>
-        [JsonProperty(Required = Required.Default, Order = -1)]
+        [JsonProperty(Required = Required.Default, Order = 7)]
+        [ProtoMember(-1)]
         public DateTime startdatum;
 
         /// <summary>
         /// Ende des Zeitraumes, für den der Verbrauch angegeben wird.
         /// </summary>
-        [JsonProperty(Required = Required.Default, Order = 0)]
+        [JsonProperty(Required = Required.Default, Order = 8)]
+        [ProtoMember(99)]
         public DateTime enddatum;
 
         /// <summary>
         /// Gibt an, ob es sich um eine PROGNOSE oder eine MESSUNG handelt.
         /// </summary>
         /// <see cref="Wertermittlungsverfahren" />
-        [JsonProperty(Required = Required.Always, Order = 1)]
+        [JsonProperty(Required = Required.Always, Order = 5)]
+        [ProtoMember(1)]
         public Wertermittlungsverfahren wertermittlungsverfahren;
 
         /// <summary>
@@ -57,20 +61,23 @@ namespace BO4E.COM
         /// <example>
         /// 1-0:1.8.1
         /// </example>
-        [JsonProperty(Required = Required.Always, Order = 2)]
+        [JsonProperty(Required = Required.Always, Order = 6)]
+        [ProtoMember(2)]
         public string obiskennzahl;
 
         /// <summary>
         /// Gibt den absoluten Wert der Menge an.
         /// </summary>
-        [JsonProperty(Required = Required.Always, Order = 3)]
+        [JsonProperty(Required = Required.Always, Order = 7)]
+        [ProtoMember(3)]
         public decimal wert;
 
         /// <summary>
         /// Gibt die Einheit zum jeweiligen Wert an.
         /// </summary>
         /// <see cref="Mengeneinheit" />
-        [JsonProperty(Required = Required.Always, Order = 4)]
+        [JsonProperty(Required = Required.Always, Order = 8)]
+        [ProtoMember(4)]
         public Mengeneinheit einheit;
 
         /// <summary>type</summary>

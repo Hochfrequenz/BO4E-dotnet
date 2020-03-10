@@ -2,6 +2,7 @@
 using System.Runtime.Serialization;
 using System.Text.RegularExpressions;
 using Newtonsoft.Json;
+using ProtoBuf;
 
 namespace BO4E.COM
 {
@@ -14,19 +15,22 @@ namespace BO4E.COM
         /// <summary>
         /// Person oder System, das die Notiz angelegt hat.
         /// </summary>
-        [JsonProperty(Required = Required.Always, Order = -1)]
+        [JsonProperty(Required = Required.Always, Order = 7)]
+        [ProtoMember(-1)]
         public string autor;
 
         /// <summary>
         /// Zeitpunkt zu dem die Notiz angelegt wurde
         /// </summary>
-        [JsonProperty(Required = Required.Always, Order = 0)]
+        [JsonProperty(Required = Required.Always, Order = 8)]
+        [ProtoMember(99)]
         public DateTime zeitpunkt;
 
         /// <summary>
         /// Inhalt der Notiz (Freitext)
         /// </summary>
-        [JsonProperty(Required = Required.Always, Order = 1)]
+        [JsonProperty(Required = Required.Always, Order = 5)]
+        [ProtoMember(1)]
         public string inhalt;
 
 

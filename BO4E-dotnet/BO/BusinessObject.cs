@@ -10,6 +10,7 @@ using Newtonsoft.Json.Linq;
 using Newtonsoft.Json.Schema;
 using Newtonsoft.Json.Schema.Generation;
 using Newtonsoft.Json.Serialization;
+using ProtoBuf;
 
 namespace BO4E.BO
 {
@@ -20,6 +21,7 @@ namespace BO4E.BO
     /// attribute which are obligatory for all BO4E business objects.
     /// <author>Hochfrequenz Unternehmensberatung GmbH</author>
     [JsonConverter(typeof(BusinessObjectBaseConverter))]
+    [ProtoContract]
     public abstract class BusinessObject : IEquatable<BusinessObject>
     {
         /// <summary>
@@ -29,7 +31,8 @@ namespace BO4E.BO
         /// 'MESSLOKATION',
         /// 'MARKTLOKATION'
         /// </example>
-        [JsonProperty(Required = Required.Default, Order = -2)]
+        [JsonProperty(Required = Required.Default, Order = 1)]
+        [ProtoMember(1)]
         private string boTyp;
 
         /// <summary>
@@ -67,7 +70,8 @@ namespace BO4E.BO
         /// <summary>
         /// User properties (non bo4e standard)
         /// </summary>
-        [JsonProperty(PropertyName = userPropertiesName, Required = Required.Default, Order = 100)]
+        [JsonProperty(PropertyName = userPropertiesName, Required = Required.Default, Order = 500)]
+        [ProtoMember(500)]
         [JsonExtensionData]
         [DataCategory(DataCategory.USER_PROPERTIES)]
         public IDictionary<string, JToken> userProperties;
@@ -101,13 +105,15 @@ namespace BO4E.BO
         /// <example>
         /// 1
         /// </example>
-        [JsonProperty(Required = Required.Default, Order = -3)]
+        [JsonProperty(Required = Required.Default, Order = 2)]
+        [ProtoMember(2)]
         public int versionStruktur;
 
         /// <summary>
         /// allows adding a GUID to Business Objects for tracking across systems
         /// </summary>
         [JsonProperty(NullValueHandling = NullValueHandling.Ignore, Required = Required.Default)]
+        [ProtoMember(3)]
         public string guid;
 
         /// <summary>

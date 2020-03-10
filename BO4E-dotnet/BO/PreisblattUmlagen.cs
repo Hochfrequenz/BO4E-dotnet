@@ -1,5 +1,6 @@
 ﻿using BO4E.ENUM;
 using Newtonsoft.Json;
+using ProtoBuf;
 
 namespace BO4E.BO
 {
@@ -11,7 +12,8 @@ namespace BO4E.BO
         /// <summary>
         /// Sparte, auf die sich die Umlage bezieht. 
         /// </summary>
-        [JsonProperty(Required = Required.Always, Order = -1)]
+        [JsonProperty(Required = Required.Always, Order = 7)]
+        [ProtoMember(-1)]
         public Sparte sparte;
     }
 }
