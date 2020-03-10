@@ -1,3 +1,5 @@
+using BO4E.meta;
+
 namespace BO4E.ENUM
 {
     /// <summary>Übersicht möglicher Anreden, z.B. eines Geschäftspartners.</summary>
@@ -12,6 +14,11 @@ namespace BO4E.ENUM
         /// <summary>Firma</summary>
         FIRMA,
         /// <summary>Individuell festgelegt</summary>
-        INDIVIDUELL
+        INDIVIDUELL,
+        /// <summary>
+        /// Doktor
+        /// </summary>
+        [NonOfficial(NonOfficialCategory.CUSTOMER_REQUIREMENTS)]
+        DR
     }
 }

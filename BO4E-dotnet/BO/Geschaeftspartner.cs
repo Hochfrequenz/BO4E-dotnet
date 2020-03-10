@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using BO4E.COM;
 using BO4E.ENUM;
@@ -25,6 +26,7 @@ namespace BO4E.BO
         /// </summary>
         /// <example>Dr.</example>
         [JsonProperty(Required = Required.Default, Order = -1)]
+        [Obsolete("Please use anrede instead")]
         [NonOfficial(NonOfficialCategory.CUSTOMER_REQUIREMENTS)]
         public string title;
 
