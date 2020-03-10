@@ -13,6 +13,7 @@ namespace BO4E.BO
     /// Eine Benachrichtigung ist die BO-Entsprechung eines "Klärfall"s im SAP oder eines "Task"s im Salesforce
     /// </summary>
     /// <author>Hochfrequenz Unternehmensberatung GmbH</author>
+    [ProtoContract]
     public class Benachrichtigung : BusinessObject
     {
         /// <summary>
@@ -37,7 +38,7 @@ namespace BO4E.BO
         /// </summary>
         [DefaultValue(Bearbeitungsstatus.OFFEN)]
         [JsonProperty(Required = Required.Always, Order = 6)]
-        [ProtoMember(5)]
+        [ProtoMember(6)]
         public Bearbeitungsstatus bearbeitungsstatus;
 
         /// <summary>

@@ -6,6 +6,7 @@ using BO4E.ENUM;
 using BO4E.meta;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
+using ProtoBuf;
 
 namespace BO4E.BO
 {
@@ -13,37 +14,38 @@ namespace BO4E.BO
     /// Modell für die Abbildung von Rechnungen im Kontext der Energiewirtschaft. Ausgehend von diesem Basismodell werden weitere spezifische Formen abgeleitet.
     /// https://www.bo4e.de/dokumentation/geschaeftsobjekte/bo-rechnung
     /// </summary>
-    /// 	
-    /// 
-
+    [ProtoContract]
     public class Rechnung : BusinessObject
     {
         /// <summary>
         /// Bezeichnung für die vorliegende Rechnung.
         /// </summary>
-        /// 
-        [JsonProperty(Required = Required.Default)]
+        [JsonProperty(Required = Required.Default, Order = 4)]
         [FieldName("billTitle", Language.EN)]
+        [ProtoMember(4)]
         public string rechnungstitel;
 
         /// <summary>
         /// Status der Rechnung zur Kennzeichnung des Bearbeitungsstandes. Details siehe ENUM Rechnungsstatus
         /// </summary>
-        [JsonProperty(Required = Required.Default)]
+        [JsonProperty(Required = Required.Default, Order = 5)]
         [FieldName("billStatus", Language.EN)]
+        [ProtoMember(5)]
         public Rechnungsstatus? rechnungsstatus;
 
         /// <summary>
         /// Kennzeichnung, ob es sich um eine Stornorechnung handelt. Im Falle "true" findet sich im Attribut "originalrechnungsnummer" die Nummer der Originalrechnung.
         /// </summary>
-        [JsonProperty(Required = Required.Always)]
+        [JsonProperty(Required = Required.Always, Order = 6)]
         [FieldName("isCancellation", Language.EN)]
+        [ProtoMember(6)]
         public bool storno;
 
         /// <summary>
         /// Eine im Verwendungskontext eindeutige Nummer für die Rechnung.
         /// </summary>
-        [JsonProperty(Required = Required.Always)]
+        [JsonProperty(Required = Required.Always, Order = 7)]
+        [ProtoMember(7)]
         [BoKey]
         [FieldName("billNumber", Language.EN)]
         public string rechnungsnummer;
@@ -51,104 +53,119 @@ namespace BO4E.BO
         /// <summary>
         /// Ausstellungsdatum der Rechnung.
         /// </summary>
-        [JsonProperty(Required = Required.Always)]
+        [JsonProperty(Required = Required.Always, Order = 8)]
+        [ProtoMember(8)]
         [FieldName("billDate", Language.EN)]
         public DateTime rechnungsdatum;
 
         /// <summary>
         /// Zu diesem Datum ist die Zahlung fällig.
         /// </summary>
-        [JsonProperty(Required = Required.Always)]
+        [JsonProperty(Required = Required.Always, Order = 9)]
+        [ProtoMember(9)]
         [FieldName("dueDate", Language.EN)]
         public DateTime faelligkeitsdatum;
 
         /// <summary>
         /// Ein kontextbezogender Rechnungstyp, z.B. Netznutzungsrechnung. Details siehe ENUM Rechnungstyp
         /// </summary>
-        [JsonProperty(Required = Required.Always)]
+        [JsonProperty(Required = Required.Always, Order = 10)]
+        [ProtoMember(10)]
         [FieldName("billType", Language.EN)]
         public Rechnungstyp rechnungsstyp;
 
         /// <summary>
         /// Im Falle einer Stornorechnung (storno = true) steht hier die Rechnungsnummer der stornierten Rechnung.
         /// </summary>
-        [JsonProperty(Required = Required.Default)]
+        [JsonProperty(Required = Required.Default, Order = 11)]
+        [ProtoMember(11)]
         public string originalRechnungsnummer;
 
         /// <summary>
         /// Der Zeitraum der zugrunde liegenden Lieferung zur Rechnung. In der COM Zeitraum können diese angegeben werden.
         /// </summary>
-        [JsonProperty(Required = Required.Always)]
+        [JsonProperty(Required = Required.Always, Order = 12)]
+        [ProtoMember(12)]
         [FieldName("billPeriod", Language.EN)]
         public Zeitraum rechnungsperiode;
 
         /// <summary>
         /// Der Aussteller der Rechnung. Details <see cref="Geschaeftspartner"/>
         /// </summary>
-        [JsonProperty(Required = Required.Always)]
+        [JsonProperty(Required = Required.Always, Order = 13)]
+        [ProtoMember(13)]
         [FieldName("issuer", Language.EN)]
         public Geschaeftspartner rechnungsersteller;
 
         /// <summary>
         /// Der Empfänger der Rechnung. Details <see cref="Geschaeftspartner"/>
         /// </summary>
-        [JsonProperty(Required = Required.Always)]
+        [JsonProperty(Required = Required.Always, Order = 14)]
+        [ProtoMember(14)]
         [FieldName("recipient", Language.EN)]
         public Geschaeftspartner rechnungsempfaenger;
 
         /// <summary>
         /// Die Summe der Nettobeträge der Rechnungsteile. Details <see cref="Betrag"/>
         /// </summary>
-        [JsonProperty(Required = Required.Always)]
+        [JsonProperty(Required = Required.Always, Order = 15)]
+        [ProtoMember(15)]
         [FieldName("totalNet", Language.EN)]
         public Betrag gesamtnetto;
 
         /// <summary>
         /// Die Summe der Steuerbeträge der Rechnungsteile. Details <see cref="Betrag"/>
         /// </summary>
-        [JsonProperty(Required = Required.Always)]
+        [JsonProperty(Required = Required.Always, Order = 16)]
+        [ProtoMember(16)]
         [FieldName("totalTax", Language.EN)]
         public Betrag gesamtsteuer;
 
         /// <summary>
         /// Die Summe aus Netto- und Steuerbetrag. Details <see cref="Betrag"/>
         /// </summary>
-        [JsonProperty(Required = Required.Always)]
+        [JsonProperty(Required = Required.Always, Order = 17)]
+        [ProtoMember(17)]
         [FieldName("totalGross", Language.EN)]
         public Betrag gesamtbrutto;
 
         /// <summary>
         /// Die Summe evtl. vorausgezahlter Beträge, z.B. Abschläge. Angabe als Bruttowert. Details <see cref="Betrag"/>
         /// </summary>
-        [JsonProperty(Required = Required.Default)]
+        [JsonProperty(Required = Required.Default, Order = 18)]
+        [ProtoMember(18)]
         [FieldName("prepaid", Language.EN)]
         public Betrag vorausgezahlt;
 
         /// <summary>
         /// Gesamtrabatt auf den Bruttobetrag. Details <see cref="Betrag"/>
         /// </summary>
-        [JsonProperty(Required = Required.Default)]
+        [JsonProperty(Required = Required.Default, Order = 19)]
+        [ProtoMember(19)]
         [FieldName("discountGross", Language.EN)]
         public Betrag rabattBrutto;
 
         /// <summary>
         /// Der zu zahlende Betrag, der sich aus (<see cref="gesamtbrutto"/> - <see cref="vorausgezahlt"/> - <see cref="rabattBrutto"/>) ergibt. Details <see cref="Betrag"/>
         /// /// </summary>
-        [JsonProperty(Required = Required.Always)]
+        [JsonProperty(Required = Required.Always, Order = 20)]
+        [ProtoMember(20)]
         [FieldName("toPay", Language.EN)]
         public Betrag zuzahlen;
 
         /// <summary>
         /// Eine Liste mit Steuerbeträgen pro Steuerkennzeichen/Steuersatz. Die Summe dieser Beträge ergibt den Wert für gesamtsteuer. Details <see cref="Steuerbetrag"/>
         /// </summary>
-        [JsonProperty(Required = Required.Default)]
+        [JsonProperty(Required = Required.Default, Order = 21)]
+        [ProtoMember(21)]
         [FieldName("taxList", Language.EN)]
         public List<Steuerbetrag> steuerbetraege;
 
         /// <summary>
         /// Die Rechnungspositionen. Details siehe <see cref="Rechnungsposition"/>
         /// </summary>
-        [JsonProperty(Required = Required.Always)]
+        [ProtoMember(22)]
+        [JsonProperty(Required = Required.Always, Order = 22)]
         [FieldName("invoiceItemList", Language.EN)]
         public List<Rechnungsposition> rechnungspositionen;
 

@@ -12,6 +12,7 @@ namespace BO4E.BO
     /// <summary>
     /// Mit diesem BO kann ein Versorgungsangebot zur Strom- oder Gasversorgung oder die Teilnahme an einer Ausschreibung übertragen werden.Es können verschiedene Varianten enthalten sein (z.B.ein- und mehrjährige Laufzeit). Innerhalb jeder Variante können Teile enthalten sein, die jeweils für eine oder mehrere Marktlokationen erstellt werden.
     /// </summary>
+    [ProtoContract]
     public class Angebot : BusinessObject
     {
         /// <summary>
@@ -38,7 +39,7 @@ namespace BO4E.BO
         /// 2017-12-24
         /// </example>
         [JsonProperty(Required = Required.Always, Order = 6)]
-        [ProtoMember(5)]
+        [ProtoMember(6)]
         [DataCategory(DataCategory.FINANCE)]
         // ToDo: handle this as DateTime object that serializes without the "time" in "DateTime"
         public string angebotsdatum;
@@ -67,7 +68,7 @@ namespace BO4E.BO
         /// </summary>
         /// <see cref="Geschaeftspartner"/>
         [JsonProperty(Required = Required.Always, Order = 9)]
-        [ProtoMember(10)]
+        [ProtoMember(9)]
         [DataCategory(DataCategory.FINANCE)]
         public Geschaeftspartner angebotgeber;
 

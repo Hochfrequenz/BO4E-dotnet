@@ -11,13 +11,14 @@ namespace BO4E.BO
     /// Das allgemeine Modell zur Abbildung von Preisen. Davon abgeleitet können, über die Zuordnung identifizierender Merkmale, spezielle Preisblatt-Varianten modelliert werden.
     /// Die jeweiligen Sätze von Merkmalen sind in der Grafik ergänzt worden und stellen jeweils eine Ausprägung für die verschiedenen Anwendungsfälle der Preisblätter dar.
     /// </summary>
+    [ProtoContract]
     public class Preisblatt : BusinessObject
     {
         /// <summary>
         /// Eine Bezeichnung für das Preisblatt.
         /// </summary>
-        [JsonProperty(Required = Required.Always, Order = 7)]
-        [ProtoMember(-1)]
+        [JsonProperty(Required = Required.Always, Order = 4)]
+        [ProtoMember(4)]
         [DataCategory(DataCategory.FINANCE)]
         [BoKey]
         public string bezeichnung;
@@ -25,18 +26,17 @@ namespace BO4E.BO
         /// <summary>
         /// Der Zeitraum für den der Preis festgelegt ist. Details siehe <see cref="Zeitraum"/>
         /// </summary>
-        [JsonProperty(Required = Required.Always, Order = 8)]
-        [ProtoMember(99)]
+        [JsonProperty(Required = Required.Always, Order = 5)]
+        [ProtoMember(5)]
         [DataCategory(DataCategory.FINANCE)]
         public Zeitraum gueltigkeit;
 
         /// <summary>
         /// Die einzelnen Positionen, die mit dem Preisblatt abgerechnet werden können. Z.B. Arbeitspreis, Grundpreis etc. Details siehe <see cref="Preisposition"/>
         /// </summary>
-        [JsonProperty(Required = Required.Always, Order = 5)] // at least one entry
+        [JsonProperty(Required = Required.Always, Order = 6)] // at least one entry
         [DataCategory(DataCategory.FINANCE)]
-        [MinLength(1)]
-        [ProtoMember(1)]
+        [ProtoMember(6)]
         public List<Preisposition> preispositionen;
 
         /*/// <summary>

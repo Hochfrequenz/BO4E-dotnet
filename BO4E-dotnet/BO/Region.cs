@@ -10,21 +10,22 @@ namespace BO4E.BO
     /// <summary>
     /// Modellierung einer Region als Menge von Kriterien, die eine Region beschreiben.
     /// </summary>
+    [ProtoContract]
     public class Region : BusinessObject
     {
         /// <summary>
         ///  Bezeichnung der Region.
         /// </summary>
-        [JsonProperty(Required = Required.Always, Order = 7)]
-        [ProtoMember(-1)]
+        [JsonProperty(Required = Required.Always, Order = 4)]
+        [ProtoMember(4)]
         [BoKey]
         public string bezeichnung;
 
         /// <summary>
         /// Kriterien zur Definition der Region. Details siehe <see cref="Regionskriterium"/>
         /// </summary>
-        [JsonProperty(Required = Required.Always, Order = 8)] // at least one entry
-        [ProtoMember(99)]
+        [JsonProperty(Required = Required.Always, Order = 5)] // at least one entry
+        [ProtoMember(5)]
         [MinLength(1)]
         public List<Regionskriterium> regionkriterien;
     }

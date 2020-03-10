@@ -12,15 +12,13 @@ namespace BO4E.COM
     /// <summary>
     /// The COM class is the abstract class from which all BO4E.COM classes are derived.
     /// </summary>
-    // The COMs are modelled as classes instead of structs, because other than structs,
-    // classes allow for manipulation of single fields (they're mutable).
     public abstract class COM : IEquatable<COM>
     {
         /// <summary>
         /// User properties (non bo4e standard)
         /// </summary>
-        [JsonProperty(PropertyName = BusinessObject.userPropertiesName, Required = Required.Default, Order = 500)]
-        [ProtoMember(100)]
+        [JsonProperty(PropertyName = BusinessObject.userPropertiesName, Required = Required.Default, Order = 2)]
+        [ProtoMember(2)]
         [JsonExtensionData]
         [DataCategory(DataCategory.USER_PROPERTIES)]
         public IDictionary<string, JToken> userProperties;
@@ -90,7 +88,8 @@ namespace BO4E.COM
         /// <summary>
         /// allows adding a GUID to COM objects for tracking across systems
         /// </summary>
-        [JsonProperty(NullValueHandling = NullValueHandling.Ignore, Required = Required.Default)]
+        [JsonProperty(NullValueHandling = NullValueHandling.Ignore, Required = Required.Default, Order = 1)]
+        [ProtoMember(1)]
         public string guid;
     }
 }
