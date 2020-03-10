@@ -104,10 +104,10 @@ namespace BO4E.BO
         [JsonProperty(Required = Required.Default, Order = 12)]
         public Bilanzierungsmethode? bilanzierungsmethode;
 
-        /// <summary>Referenz auf die ID der Messlokation</summary>
+        /// <summary>Referenz auf die ID der Messlokation</summary> // @hamid please update docstring.
         [JsonProperty(Required = Required.Default)]
         [NonOfficial(NonOfficialCategory.CUSTOMER_REQUIREMENTS)]
-        public JaNein? abrechnungmessstellenbetriebnna;
+        public bool? abrechnungmessstellenbetriebnna;
 
         /// <summary>
         /// marktrollen für EDIFACT mapping
