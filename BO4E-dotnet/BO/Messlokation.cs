@@ -107,7 +107,7 @@ namespace BO4E.BO
         /// <summary>Referenz auf die ID der Messlokation</summary>
         [JsonProperty(Required = Required.Default)]
         [NonOfficial(NonOfficialCategory.CUSTOMER_REQUIREMENTS)]
-        public JaNein? abrechnungmessstellenbetriebnna;
+        public bool? abrechnungmessstellenbetriebnna;
 
         /// <summary>
         /// marktrollen für EDIFACT mapping

@@ -66,18 +66,21 @@ namespace BO4E.BO
         /// Referenz auf das Smartmeter-Gateway
         /// </summary>
         [JsonProperty(Required = Required.Default)]
+        [NonOfficial(NonOfficialCategory.CUSTOMER_REQUIREMENTS)]
         public string gateway;
 
         /// <summary>
         /// Fernschaltung
         /// </summary>
         [JsonProperty(Required = Required.Default)]
+        [NonOfficial(NonOfficialCategory.CUSTOMER_REQUIREMENTS)]
         public Fernschaltung? fernschaltung;
 
         /// <summary>
         /// Messwerterfassung am Zählpunkt
         /// </summary>
         [JsonProperty(Required = Required.Default)]
+        [NonOfficial(NonOfficialCategory.CUSTOMER_REQUIREMENTS)]
         public Messwerterfassung? messwerterfassung;
     }
 }

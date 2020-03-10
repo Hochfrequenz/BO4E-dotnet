@@ -1,4 +1,5 @@
 using BO4E.ENUM;
+using BO4E.meta;
 using Newtonsoft.Json;
 using System.Collections.Generic;
 
@@ -29,33 +30,43 @@ namespace BO4E.COM
 
         /// <summary>Obis kennzahl</summary>
         [JsonProperty(Required = Required.Default)]
+        [NonOfficial(NonOfficialCategory.CUSTOMER_REQUIREMENTS)]
         public string kennzahl;
         /// <summary>schwachlastfaehig</summary>
         [JsonProperty(Required = Required.Default)]
+        [NonOfficial(NonOfficialCategory.CUSTOMER_REQUIREMENTS)]
         public Schwachlastfaehig? schwachlastfaehig;
         /// <summary>Verwendungungszweck der Werte Marktlokation</summary>
         [JsonProperty(Required = Required.Default)]
+        [NonOfficial(NonOfficialCategory.CUSTOMER_REQUIREMENTS)]
         public List<Verwendungszweck> Verwendungszwecke;
         /// <summary>Stromverbrauchsart/Verbrauchsart Marktlokation</summary>
         [JsonProperty(Required = Required.Default)]
+        [NonOfficial(NonOfficialCategory.CUSTOMER_REQUIREMENTS)]
         public Verbrauchsart? verbrauchsart;
         /// <summary>Stromverbrauchsart/Unterbrechbarkeit Marktlokation</summary>
         [JsonProperty(Required = Required.Default)]
+        [NonOfficial(NonOfficialCategory.CUSTOMER_REQUIREMENTS)]
         public Unterbrechbarkeit? unterbrechbarkeit;
         /// <summary>Stromverbrauchsart/Wärmenutzung Marktlokation</summary>
         [JsonProperty(Required = Required.Default)]
+        [NonOfficial(NonOfficialCategory.CUSTOMER_REQUIREMENTS)]
         public Waermenutzung? waermenutzung;
 
         [JsonProperty(Required = Required.Default)]
+        [NonOfficial(NonOfficialCategory.CUSTOMER_REQUIREMENTS)]
         public Konzessionsabgabe konzessionsabgabe;
 
         [JsonProperty(Required = Required.Default)]
+        [NonOfficial(NonOfficialCategory.CUSTOMER_REQUIREMENTS)]
         public bool? steuerbefreit;
 
         [JsonProperty(Required = Required.Default)]
+        [NonOfficial(NonOfficialCategory.CUSTOMER_REQUIREMENTS)]
         public string vorkommastelle;
 
         [JsonProperty(Required = Required.Default)]
+        [NonOfficial(NonOfficialCategory.CUSTOMER_REQUIREMENTS)]
         public string nachkommastelle;
 
     }

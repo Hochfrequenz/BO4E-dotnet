@@ -1,4 +1,5 @@
 using BO4E.ENUM;
+using BO4E.meta;
 using Newtonsoft.Json;
 using System;
 
@@ -28,33 +29,43 @@ namespace BO4E.COM
         public Zeitraum abschlagszyklus;
 
         [JsonProperty(Required = Required.Default)]
+        [NonOfficial(NonOfficialCategory.CUSTOMER_REQUIREMENTS)]
         public DateTime startAbrechnungsjahr;
 
         [JsonProperty(Required = Required.Default)]
+        [NonOfficial(NonOfficialCategory.CUSTOMER_REQUIREMENTS)]
         public Zeitraum geplanteTurnusablesung;
 
         [JsonProperty(Required = Required.Default)]
+        [NonOfficial(NonOfficialCategory.CUSTOMER_REQUIREMENTS)]
         public int? turnusablesungIntervall;
 
         [JsonProperty(Required = Required.Default)]
+        [NonOfficial(NonOfficialCategory.CUSTOMER_REQUIREMENTS)]
         public Zeitraum netznutzungsabrechnung;
 
         [JsonProperty(Required = Required.Default)]
+        [NonOfficial(NonOfficialCategory.CUSTOMER_REQUIREMENTS)]
         public int? netznutzungsabrechnungIntervall;
 
         [JsonProperty(Required = Required.Default)]
+        [NonOfficial(NonOfficialCategory.CUSTOMER_REQUIREMENTS)]
         public bool? haushaltskunde;
 
         [JsonProperty(Required = Required.Default)]
+        [NonOfficial(NonOfficialCategory.CUSTOMER_REQUIREMENTS)]
         public NetznutzungsVertrag? netznutzungsvertrag;
 
         [JsonProperty(Required = Required.Default)]
+        [NonOfficial(NonOfficialCategory.CUSTOMER_REQUIREMENTS)]
         public Netznutzungszahler? netznutzungszahler;
 
         [JsonProperty(Required = Required.Default)]
+        [NonOfficial(NonOfficialCategory.CUSTOMER_REQUIREMENTS)]
         public Netznutzungsabrechnungsvariante? netznutzungsabrechnungsvariante;
 
         [JsonProperty(Required = Required.Default)]
+        [NonOfficial(NonOfficialCategory.CUSTOMER_REQUIREMENTS)]
         public Netznutzungsabrechnungsgrundlage? netznutzungsabrechnungsgrundlage;
     }
 }

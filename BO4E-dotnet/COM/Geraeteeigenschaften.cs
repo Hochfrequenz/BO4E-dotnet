@@ -1,4 +1,5 @@
 using BO4E.ENUM;
+using BO4E.meta;
 using Newtonsoft.Json;
 using System.Collections.Generic;
 
@@ -15,6 +16,7 @@ namespace BO4E.COM
         public Geraetemerkmal? geraetemerkmal;
 
         [JsonProperty(Required = Required.Default)]
+        [NonOfficial(NonOfficialCategory.CUSTOMER_REQUIREMENTS)]
         public Dictionary<string, string> parameter;
     }
 }
