@@ -52,6 +52,23 @@ namespace TestBO4E
             Assert.AreEqual(0, duplicateTags.Count, $"The folllowing [(ProtoMember(<tag>)] tags in {type} are not unique: {string.Join(", ", duplicateTags.Keys)}");
         }
 
+        /*protected void TestUniqueProtoIncludeTag(Type abstractBaseType) // ToDo: test this with preisblatt
+        {
+            if (!abstractBaseType.IsAbstract)
+            {
+                throw new ArgumentException($"The type {abstractBaseType} is not abstract", nameof(abstractBaseType));
+            }
+            var includeTags = typeof(BusinessObject).Assembly.GetTypes()
+                .Where(t => abstractBaseType.IsAssignableFrom(t))
+                .GetCustomAttributes(typeof(ProtoIncludeAttribute))
+                .Cast<ProtoIncludeAttribute>()
+                .Select(pia=>pia.)
+            foreach (var type in typeof(BusinessObject).Assembly.GetTypes().Where(t => abstractBaseType.IsAssignableFrom(t)))
+            {
+                TestProtobufType(type);
+            }
+        }*/
+
         [TestMethod]
         public void TestExplicitProtobufInheritance()
         {
