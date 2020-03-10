@@ -11,18 +11,22 @@ namespace BO4E.BO
         /// unique id of the log event
         /// </summary>
         [BoKey]
-        [JsonProperty(Required = Required.Always, Order = 6)]
-        [ProtoMember(-2)]
+        [JsonProperty(Required = Required.Always, Order = 3)]
+        [ProtoMember(3)]
         public string id;
 
-        [JsonProperty(Required = Required.Always, Order = 7)]
-
-        [ProtoMember(-1)]
+        /// <summary>
+        /// date time at which the log event has been raised
+        /// </summary>
+        [JsonProperty(Required = Required.Always, Order = 4)]
+        [ProtoMember(4)]
         public DateTime datetime;
 
-        [JsonProperty(Required = Required.Always, Order = 8)]
-
-        [ProtoMember(99)]
+        /// <summary>
+        /// actual log message
+        /// </summary>
+        [JsonProperty(Required = Required.Always, Order = 5)]
+        [ProtoMember(5)]
         public string logMessage;
     }
 }
