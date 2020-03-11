@@ -19,6 +19,9 @@ namespace BO4E.COM
         [ProtoMember(4)]
         public Geraetemerkmal? geraetemerkmal;
 
+        /// <summary>
+        /// Für nicht feste Fields, bsw: 'faktor' 
+        /// </summary>
         [JsonProperty(Required = Required.Default)]
         [NonOfficial(NonOfficialCategory.CUSTOMER_REQUIREMENTS)]
         [ProtoMember(5)]

@@ -25,15 +25,15 @@ namespace BO4E.COM
         public Geraeteeigenschaften geraeteeigenschaften;
 
         /// <summary>
-        /// Gerätenummer des Wandlers
+        /// Gerï¿½tenummer des Wandlers
         /// </summary>
         [JsonProperty(Required = Required.Default)]
         [NonOfficial(NonOfficialCategory.CUSTOMER_REQUIREMENTS)]
         [ProtoMember(6)]
-        public string[] geraetenummer;
+        public string geraetenummer;
 
         /// <summary>
-        /// Referenz auf die Gerätenummer des Zählers
+        /// Referenz auf die Gerï¿½tenummer des Zï¿½hlers
         /// </summary>
         [JsonProperty(Required = Required.Default)]
         [NonOfficial(NonOfficialCategory.CUSTOMER_REQUIREMENTS)]
