@@ -9,23 +9,23 @@ namespace BO4E.BO
     /// <summary>
     /// Objekt zur Kommunikation von Marktteilnehmern jeglicher Art.
     /// </summary>
-    [ProtoContract]
+    //[ProtoContract]
     public class Marktteilnehmer : Geschaeftspartner
     {
         /// <summary>Gibt im Klartext die Bezeichnung der Marktrolle an.</summary>
         [JsonProperty(Required = Required.Always, Order = 19)]
-        [ProtoMember(19)]
+        //[ProtoMember(19)]
         public Marktrolle marktrolle;
 
         /// <summary>Gibt die Codenummer der Marktrolle an.</summary>
         [BoKey(true)]
         [JsonProperty(Required = Required.Always, Order = 20)]
-        [ProtoMember(20)]
+        //[ProtoMember(20)]
         public string rollencodenummer;
 
         /// <summary>Gibt den Typ des Codes an.</summary>
         [JsonProperty(Required = Required.Always, Order = 21)]
-        [ProtoMember(21)]
+        //[ProtoMember(21)]
         public Rollencodetyp rollencodetyp;
 
         /// <summary>
@@ -33,7 +33,7 @@ namespace BO4E.BO
         /// Marktkommunikation verwendet.
         /// </summary>
         [JsonProperty(Required = Required.Always, Order = 22)]
-        [ProtoMember(22)]
+        //[ProtoMember(22)]
         public string makoadresse;
 
         /// <summary>
@@ -41,7 +41,7 @@ namespace BO4E.BO
         /// </summary>
         [NonOfficial(NonOfficialCategory.CUSTOMER_REQUIREMENTS)]
         [JsonProperty(Required = Required.Default, Order = 23)]
-        [ProtoMember(23)]
+        //[ProtoMember(23)]
         public Ansprechpartner ansprechpartner;
     }
 }

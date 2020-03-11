@@ -12,11 +12,11 @@ namespace BO4E.BO
     /// Die jeweiligen Sätze von Merkmalen sind in der Grafik ergänzt worden und stellen jeweils eine Ausprägung für die verschiedenen Anwendungsfälle der Preisblätter dar.
     /// </summary>
     [ProtoContract]
-    [ProtoInclude(30, typeof(PreisblattDienstleistung))]
-    [ProtoInclude(31, typeof(PreisblattKonzessionsabgabe))]
-    [ProtoInclude(32, typeof(PreisblattMessung))]
-    [ProtoInclude(33, typeof(PreisblattNetznutzung))]
-    [ProtoInclude(34, typeof(PreisblattUmlagen))]
+    // [ProtoInclude(30, typeof(PreisblattDienstleistung))] // protobuf-net doesn't support multiple levels of inheritance yet
+    // [ProtoInclude(31, typeof(PreisblattKonzessionsabgabe))] // protobuf-net doesn't support multiple levels of inheritance yet
+    // [ProtoInclude(32, typeof(PreisblattMessung))] // protobuf-net doesn't support multiple levels of inheritance yet
+    // [ProtoInclude(33, typeof(PreisblattNetznutzung))] // protobuf-net doesn't support multiple levels of inheritance yet
+    // [ProtoInclude(34, typeof(PreisblattUmlagen))] // protobuf-net doesn't support multiple levels of inheritance yet
     public class Preisblatt : BusinessObject
     {
         /// <summary>

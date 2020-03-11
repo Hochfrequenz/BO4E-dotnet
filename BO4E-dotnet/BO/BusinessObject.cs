@@ -29,7 +29,7 @@ namespace BO4E.BO
     [ProtoInclude(5, typeof(Geschaeftspartner))]
     [ProtoInclude(6, typeof(Kosten))]
     [ProtoInclude(7, typeof(Marktlokation))]
-    [ProtoInclude(8, typeof(Marktteilnehmer))]
+    //[ProtoInclude(8, typeof(Marktteilnehmer))] // https://stackoverflow.com/a/13791539/10009545
     [ProtoInclude(9, typeof(Messlokation))]
     [ProtoInclude(10, typeof(Preisblatt))]
     [ProtoInclude(11, typeof(Rechnung))]
@@ -49,7 +49,7 @@ namespace BO4E.BO
         /// </example>
         [JsonProperty(Required = Required.Default, Order = 1)]
         [ProtoMember(1)]
-        private string boTyp;
+        public string boTyp;
 
         /// <summary>
         /// Fields that are not part of the BO4E-definition are stored in a element, that is

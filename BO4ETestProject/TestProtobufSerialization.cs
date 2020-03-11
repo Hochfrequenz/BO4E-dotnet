@@ -55,7 +55,6 @@ namespace TestBO4E
             }
 
             // now use base64 string to get back the original energiemenge
-
             Energiemenge emRoundTrip;
             using (var backStream = new MemoryStream(Convert.FromBase64String(emBase64)))
             {
