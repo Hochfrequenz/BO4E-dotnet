@@ -121,7 +121,7 @@ namespace BO4E.BO
         [ProtoMember(17)]
         public Bilanzierungsmethode? bilanzierungsmethode;
 
-        /// <summary>Referenz auf die ID der Messlokation</summary>
+        /// <summary>Dieser Wert ist true, falls die Abrechnungs des Messstellenbetriebs die Netznutzungsabrechnung enthält. false andernfalls</summary>
         [JsonProperty(Required = Required.Default, Order = 18)]
         [ProtoMember(18)]
         [NonOfficial(NonOfficialCategory.CUSTOMER_REQUIREMENTS)]
