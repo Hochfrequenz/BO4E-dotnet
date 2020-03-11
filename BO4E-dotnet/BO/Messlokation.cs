@@ -104,7 +104,7 @@ namespace BO4E.BO
         [JsonProperty(Required = Required.Default, Order = 12)]
         public Bilanzierungsmethode? bilanzierungsmethode;
 
-        /// <summary>Referenz auf die ID der Messlokation</summary>
+        /// <summary>Dieser Wert ist true, falls die Abrechnungs des Messstellenbetriebs die Netznutzungsabrechnung enthält. false andernfalls</summary>
         [JsonProperty(Required = Required.Default)]
         [NonOfficial(NonOfficialCategory.CUSTOMER_REQUIREMENTS)]
         public bool? abrechnungmessstellenbetriebnna;
