@@ -25,7 +25,7 @@ namespace BO4E.COM
         /// </summary>
         [JsonProperty(Required = Required.Default)]
         [NonOfficial(NonOfficialCategory.CUSTOMER_REQUIREMENTS)]
-        public string[] geraetenummer;
+        public string geraetenummer;
 
         /// <summary>
         /// Referenz auf die Gerätenummer des Zählers

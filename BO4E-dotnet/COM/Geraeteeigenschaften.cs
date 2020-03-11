@@ -15,6 +15,9 @@ namespace BO4E.COM
         [JsonProperty(Required = Required.Default)]
         public Geraetemerkmal? geraetemerkmal;
 
+        /// <summary>
+        /// Für nicht feste Fields, bsw: 'faktor' 
+        /// </summary>
         [JsonProperty(Required = Required.Default)]
         [NonOfficial(NonOfficialCategory.CUSTOMER_REQUIREMENTS)]
         public Dictionary<string, string> parameter;
