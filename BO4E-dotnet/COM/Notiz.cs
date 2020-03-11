@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Runtime.Serialization;
 using System.Text.RegularExpressions;
+using BO4E.meta;
 using Newtonsoft.Json;
 using ProtoBuf;
 
@@ -10,27 +11,29 @@ namespace BO4E.COM
     /// Eine Notiz enthält beliebige, unstrukturierte Zusatzinformationen
     /// </summary>
     /// <author>Hochfrequenz Unternehmensberatung GmbH</author>
+    [ProtoContract]
+    [NonOfficial(NonOfficialCategory.CUSTOMER_REQUIREMENTS)]
     public class Notiz : COM
     {
         /// <summary>
         /// Person oder System, das die Notiz angelegt hat.
         /// </summary>
         [JsonProperty(Required = Required.Always, Order = 7)]
-        [ProtoMember(-1)]
+        [ProtoMember(3)]
         public string autor;
 
         /// <summary>
         /// Zeitpunkt zu dem die Notiz angelegt wurde
         /// </summary>
         [JsonProperty(Required = Required.Always, Order = 8)]
-        [ProtoMember(99)]
+        [ProtoMember(4)]
         public DateTime zeitpunkt;
 
         /// <summary>
         /// Inhalt der Notiz (Freitext)
         /// </summary>
         [JsonProperty(Required = Required.Always, Order = 5)]
-        [ProtoMember(1)]
+        [ProtoMember(5)]
         public string inhalt;
 
 

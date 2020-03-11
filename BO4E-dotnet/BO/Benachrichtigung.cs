@@ -14,6 +14,7 @@ namespace BO4E.BO
     /// </summary>
     /// <author>Hochfrequenz Unternehmensberatung GmbH</author>
     [ProtoContract]
+    [NonOfficial(NonOfficialCategory.CUSTOMER_REQUIREMENTS)]
     public class Benachrichtigung : BusinessObject
     {
         /// <summary>

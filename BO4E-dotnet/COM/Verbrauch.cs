@@ -5,13 +5,13 @@ using BO4E.ENUM;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using ProtoBuf;
-using StackExchange.Profiling;
 
 namespace BO4E.COM
 {
     /// <summary>
     /// Abbildung eines zeitlich abgegrenzten Verbrauchs.
     /// </summary>
+    [ProtoContract]
     public class Verbrauch : COM
     {
         /// <summary>
@@ -37,22 +37,22 @@ namespace BO4E.COM
         /// Beginn des Zeitraumes, für den der Verbrauch angegeben wird.
         /// </summary>
         [JsonProperty(Required = Required.Default, Order = 7)]
-        [ProtoMember(-1)]
+        [ProtoMember(3)]
         public DateTime startdatum;
 
         /// <summary>
         /// Ende des Zeitraumes, für den der Verbrauch angegeben wird.
         /// </summary>
         [JsonProperty(Required = Required.Default, Order = 8)]
-        [ProtoMember(99)]
-        public DateTime enddatum;
+        [ProtoMember(4)]
+        public DateTime enddatum; // ToDo: is DateTime? better suited?
 
         /// <summary>
         /// Gibt an, ob es sich um eine PROGNOSE oder eine MESSUNG handelt.
         /// </summary>
         /// <see cref="Wertermittlungsverfahren" />
         [JsonProperty(Required = Required.Always, Order = 5)]
-        [ProtoMember(1)]
+        [ProtoMember(5)]
         public Wertermittlungsverfahren wertermittlungsverfahren;
 
         /// <summary>
@@ -62,14 +62,14 @@ namespace BO4E.COM
         /// 1-0:1.8.1
         /// </example>
         [JsonProperty(Required = Required.Always, Order = 6)]
-        [ProtoMember(2)]
+        [ProtoMember(6)]
         public string obiskennzahl;
 
         /// <summary>
         /// Gibt den absoluten Wert der Menge an.
         /// </summary>
         [JsonProperty(Required = Required.Always, Order = 7)]
-        [ProtoMember(3)]
+        [ProtoMember(7)]
         public decimal wert;
 
         /// <summary>
@@ -77,12 +77,13 @@ namespace BO4E.COM
         /// </summary>
         /// <see cref="Mengeneinheit" />
         [JsonProperty(Required = Required.Always, Order = 8)]
-        [ProtoMember(4)]
+        [ProtoMember(8)]
         public Mengeneinheit einheit;
 
         /// <summary>type</summary>
         /// <example>arbeitleistungtagesparameterabhmalo | veranschlagtejahresmenge | TUMKundenwert</example>
         [JsonProperty(Required = Required.Default)]
+        [ProtoMember(9)]
         public Verbrauchsmengetyp? type;
 
         /// <param name="context"></param>
