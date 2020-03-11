@@ -12,7 +12,7 @@ namespace BO4E.COM
     /// <summary>
     /// The COM class is the abstract class from which all BO4E.COM classes are derived.
     /// </summary>
-    [ProtoContract]
+    //[ProtoContract] // If I add this line I get the following message: System.InvalidOperationException: Duplicate field-number detected; 1 on: BO4E.COM.COM
     [ProtoInclude(1, typeof(Adresse))]
     [ProtoInclude(2, typeof(Angebotsposition))]
     [ProtoInclude(3, typeof(Angebotsteil))]

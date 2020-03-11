@@ -17,6 +17,7 @@ namespace BO4E.COM
         /// <summary>
         /// Central Europe Standard Time as hard coded default time. Public to be used elsewhere ;)
         /// </summary>
+        [ProtoIgnore]
         public static readonly TimeZoneInfo CENTRAL_EUROPE_STANDARD_TIME;
         static Verbrauch()
         {
@@ -106,6 +107,7 @@ namespace BO4E.COM
             return result;
         }
 
+        [ProtoIgnore]
         internal const string _SAP_PROFDECIMALS_KEY = "sap_profdecimals";
 
         /// <summary>

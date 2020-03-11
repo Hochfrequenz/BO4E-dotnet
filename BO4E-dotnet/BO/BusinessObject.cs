@@ -21,7 +21,7 @@ namespace BO4E.BO
     /// attribute which are obligatory for all BO4E business objects.
     /// <author>Hochfrequenz Unternehmensberatung GmbH</author>
     [JsonConverter(typeof(BusinessObjectBaseConverter))]
-    [ProtoContract]
+    //[ProtoContract] // If I add this I get an error message: "System.InvalidOperationException: Duplicate field-number detected; 1 on: BO4E.BO.BusinessObject"
     [ProtoInclude(1, typeof(Angebot))]
     [ProtoInclude(2, typeof(Ansprechpartner))]
     [ProtoInclude(3, typeof(Benachrichtigung))]
@@ -37,7 +37,6 @@ namespace BO4E.BO
     [ProtoInclude(13, typeof(Vertrag))]
     [ProtoInclude(14, typeof(Zaehler))]
     [ProtoInclude(15, typeof(LogObject))]
-
     public abstract class BusinessObject : IEquatable<BusinessObject>
     {
         /// <summary>
@@ -81,21 +80,22 @@ namespace BO4E.BO
         /// the BO4E standard to be passed along.
         /// </example>
         [JsonIgnore]
+        [ProtoIgnore]
         public const string userPropertiesName = "userProperties";
 
         /// <summary>
         /// User properties (non bo4e standard)
         /// </summary>
-        [JsonProperty(PropertyName = userPropertiesName, Required = Required.Default, Order = 500)]
-        [ProtoMember(500)]
+        [JsonProperty(PropertyName = userPropertiesName, Required = Required.Default, Order = 200)]
         [JsonExtensionData]
+        [ProtoMember(200)]
         [DataCategory(DataCategory.USER_PROPERTIES)]
         public IDictionary<string, JToken> userProperties;
 
         /// <summary>
         /// generates the BO4E boTyp attribute value (class name as upper case)
         /// </summary>
-        public BusinessObject()
+        protected BusinessObject()
         {
             boTyp = this.GetType().Name.ToUpper();
             versionStruktur = 1;
@@ -140,7 +140,6 @@ namespace BO4E.BO
         {
             return GetJsonScheme(this.GetType());
         }
-
 
         /// <summary>
         /// returns a JSON scheme for the given type <paramref name="boType"/>
