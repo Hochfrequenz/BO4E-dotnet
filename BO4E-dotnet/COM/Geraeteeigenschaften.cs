@@ -14,6 +14,7 @@ namespace BO4E.COM
         [JsonProperty(Required = Required.Always)]
         [ProtoMember(3)]
         public Geraetetyp geraetetyp;
+
         /// <summary>Weitere Merkmale des Geräts, zum Beispiel Mehrtarif, Eintarif etc.. Details <see cref="Geraetemerkmal" /></summary>
         [JsonProperty(Required = Required.Default)]
         [ProtoMember(4)]
