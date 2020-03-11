@@ -91,12 +91,12 @@ namespace BO4E.COM
         [JsonProperty(Required = Required.Default)]
         [NonOfficial(NonOfficialCategory.CUSTOMER_REQUIREMENTS)]
         [ProtoMember(17)]
-        public string vorkommastelle; // ToDo: check if this is an int
+        public int? vorkommastelle; // ToDo: check if this is an int
 
         [JsonProperty(Required = Required.Default)]
         [NonOfficial(NonOfficialCategory.CUSTOMER_REQUIREMENTS)]
         [ProtoMember(18)]
-        public string nachkommastelle; // ToDo: check if this is an int
+        public int? nachkommastelle; // ToDo: check if this is an int
 
     }
 }
