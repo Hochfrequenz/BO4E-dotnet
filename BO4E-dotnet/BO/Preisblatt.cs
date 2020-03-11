@@ -12,11 +12,11 @@ namespace BO4E.BO
     /// Die jeweiligen Sätze von Merkmalen sind in der Grafik ergänzt worden und stellen jeweils eine Ausprägung für die verschiedenen Anwendungsfälle der Preisblätter dar.
     /// </summary>
     [ProtoContract]
-    [ProtoInclude(3, typeof(PreisblattDienstleistung))]
-    [ProtoInclude(4, typeof(PreisblattKonzessionsabgabe))]
-    [ProtoInclude(5, typeof(PreisblattMessung))]
-    [ProtoInclude(6, typeof(PreisblattNetznutzung))]
-    [ProtoInclude(7, typeof(PreisblattUmlagen))]
+    [ProtoInclude(30, typeof(PreisblattDienstleistung))]
+    [ProtoInclude(31, typeof(PreisblattKonzessionsabgabe))]
+    [ProtoInclude(32, typeof(PreisblattMessung))]
+    [ProtoInclude(33, typeof(PreisblattNetznutzung))]
+    [ProtoInclude(34, typeof(PreisblattUmlagen))]
     public class Preisblatt : BusinessObject
     {
         /// <summary>

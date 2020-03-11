@@ -22,7 +22,22 @@ namespace BO4E.BO
     /// <author>Hochfrequenz Unternehmensberatung GmbH</author>
     [JsonConverter(typeof(BusinessObjectBaseConverter))]
     [ProtoContract]
-    [ProtoInclude(1,typeof(Angebot))]
+    [ProtoInclude(1, typeof(Angebot))]
+    [ProtoInclude(2, typeof(Ansprechpartner))]
+    [ProtoInclude(3, typeof(Benachrichtigung))]
+    [ProtoInclude(4, typeof(Energiemenge))]
+    [ProtoInclude(5, typeof(Geschaeftspartner))]
+    [ProtoInclude(6, typeof(Kosten))]
+    [ProtoInclude(7, typeof(Marktlokation))]
+    [ProtoInclude(8, typeof(Marktteilnehmer))]
+    [ProtoInclude(9, typeof(Messlokation))]
+    [ProtoInclude(10, typeof(Preisblatt))]
+    [ProtoInclude(11, typeof(Rechnung))]
+    [ProtoInclude(12, typeof(Region))]
+    [ProtoInclude(13, typeof(Vertrag))]
+    [ProtoInclude(14, typeof(Zaehler))]
+    [ProtoInclude(15, typeof(LogObject))]
+
     public abstract class BusinessObject : IEquatable<BusinessObject>
     {
         /// <summary>
