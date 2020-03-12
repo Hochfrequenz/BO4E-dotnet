@@ -18,14 +18,14 @@ namespace BO4E.Reporting
         /// <summary>
         /// all information is normalised to this reference time frame
         /// </summary>
-        [JsonProperty(Required = Required.Always, Order = -1)]
+        [JsonProperty(Required = Required.Always, Order = 7)]
         public Zeitraum referenceTimeFrame;
 
         /// <summary>
         /// refers to a <see cref="Energiemenge.lokationsId"/>
         /// </summary>
         [DataCategory(DataCategory.POD)]
-        [JsonProperty(Required = Required.Always, Order = 0)]
+        [JsonProperty(Required = Required.Always, Order = 8)]
         public string lokationsId;
 
         /// <summary>
@@ -37,27 +37,27 @@ namespace BO4E.Reporting
         /// +1 = other Energiemenge has twice the consumption of the reference
         /// -1 = other Energiemenge has 0 consumption
         /// </example>
-        [JsonProperty(Required = Required.AllowNull, Order = 1)]
+        [JsonProperty(Required = Required.AllowNull, Order = 5)]
         public decimal? relativeDeviation;
 
         /// <summary>
         /// Verbrauch of the reference Energiemenge
         /// </summary>
         [DataCategory(DataCategory.METER_READING)]
-        [JsonProperty(Required = Required.Always, Order = 2)]
+        [JsonProperty(Required = Required.Always, Order = 6)]
         public Verbrauch verbrauchReference;
 
         /// <summary>
         /// Verbrauch of another Energiemenge
         /// </summary>
         [DataCategory(DataCategory.METER_READING)]
-        [JsonProperty(Required = Required.Always, Order = 3)]
+        [JsonProperty(Required = Required.Always, Order = 7)]
         public Verbrauch verbrauchOther;
 
         /// <summary>
         /// absolute value of the difference between <see cref="Verbrauch.wert"/> of <see cref="verbrauchReference"/> and <see cref="verbrauchOther"/>
         /// </summary>
-        [JsonProperty(Required = Required.Always, Order = 4)]
+        [JsonProperty(Required = Required.Always, Order = 8)]
         public decimal absoluteDeviation;
 
         /// <summary>

@@ -17,14 +17,14 @@ namespace BO4E.BO
         /// <summary>
         /// encryption scheme used
         /// </summary>
-        [JsonProperty(Required = Required.Always, Order = -1)]
+        [JsonProperty(Required = Required.Always, Order = 7)]
         [BoKey]
         public EncryptionScheme encryptionScheme;
 
         /// <summary>
         /// base64 encoded cipher text of the original objects JSON serialisation
         /// </summary>
-        [JsonProperty(Required = Required.Always, Order = 0)]
+        [JsonProperty(Required = Required.Always, Order = 8)]
         [BoKey]
         public string cipherText;
 

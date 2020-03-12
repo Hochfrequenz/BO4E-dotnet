@@ -7,6 +7,7 @@ using BO4E.ENUM;
 using BO4E.meta;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
+using ProtoBuf;
 
 namespace BO4E.BO
 {
@@ -14,98 +15,116 @@ namespace BO4E.BO
     /// Modell für die Abbildung von Vertragsbeziehungen. Das Objekt dient dazu, alle Arten von Verträgen, die in der Energiewirtschaft Verwendung finden, abzubilden.
     /// https://www.bo4e.de/dokumentation/geschaeftsobjekte/bo-vertrag
     /// </summary>
+    [ProtoContract]
     public class Vertrag : BusinessObject
     {
         /// <summary>
         /// Eine im Verwendungskontext eindeutige Nummer für den Vertrag
         /// </summary>
         [BoKey]
-        [JsonProperty(Required = Required.Always)]
+        [JsonProperty(Required = Required.Always, Order = 4)]
+        [ProtoMember(4)]
         public string vertragsnummer;
 
         /// <summary>
         /// Beschreibung zum Vertrag
         /// </summary>
-        [JsonProperty(Required = Required.Default)]
+        [JsonProperty(Required = Required.Default, Order = 5)]
+        [ProtoMember(5)]
         public string beschreibung;
         /// <summary>
         /// Hier ist festgelegt, um welche Art von Vertrag es sich handelt. Z.B. Netznutzungvertrag. Details siehe ENUM Vertragsart
         /// </summary>
-        [JsonProperty(Required = Required.Always)]
+        [JsonProperty(Required = Required.Always, Order = 6)]
+        [ProtoMember(6)]
         public Vertragsart vertragsart;
 
         /// <summary>
         /// Gibt den Status des Vertrags an. Siehe ENUM Vertragsstatus
         /// </summary>
-        [JsonProperty(Required = Required.Always)]
+        [JsonProperty(Required = Required.Always, Order = 7)]
+        [ProtoMember(7)]
         public Vertragstatus vertragstatus;
 
         /// <summary>
         /// Unterscheidungsmöglichkeiten für die Sparte. Siehe ENUM Sparte
         /// </summary>
-        [JsonProperty(Required = Required.Always)]
+        [JsonProperty(Required = Required.Always, Order = 8)]
+        [ProtoMember(8)]
         public Sparte sparte;
 
         /// <summary>
         /// Gibt an, wann der Vertrag beginnt.
         /// </summary>
-        [JsonProperty(Required = Required.Always)]
+        [JsonProperty(Required = Required.Always, Order = 9)]
+        [ProtoMember(9)]
         public DateTime vertragsbeginn;
 
         /// <summary>
         /// Gibt an, wann der Vertrag (voraussichtlich) endet oder beendet wurde.
         /// </summary>
-        [JsonProperty(Required = Required.Always)]
+        [JsonProperty(Required = Required.Always, Order = 10)]
+        [ProtoMember(10)]
         public DateTime vertragsende;
 
         /// <summary>
         /// Der "erstgenannte" Vertragspartner. In der Regel der Aussteller des Vertrags. Beispiel: "Vertrag zwischen Vertagspartner 1 ..." Siehe BO Geschaeftspartner
         /// </summary>
-        [JsonProperty(Required = Required.Default)] // TODO: should be required but our CDS is missing the association
+        [JsonProperty(Required = Required.Default, Order = 11)] // TODO: should be required but our CDS is missing the association
+        [ProtoMember(11)]
         public Geschaeftspartner vertragspartner1;
 
         /// <summary>
         /// Der "zweitgenannte" Vertragspartner. In der Regel der Empfänger des Vertrags. Beispiel "Vertrag zwischen Vertagspartner 1 und Vertragspartner 2". Siehe BO Geschaeftspartner
         /// </summary>
-        [JsonProperty(Required = Required.Default)] // TODO: should be required but our CDS is missing the association
+        [JsonProperty(Required = Required.Default, Order = 12)] // TODO: should be required but our CDS is missing the association
+        [ProtoMember(12)]
         public Geschaeftspartner vertragspartner2;
 
         /// <summary>
         /// Unterzeichner des Vertragspartners1. Siehe COM Unterschrift
         /// </summary>
-        [JsonProperty(Required = Required.Default)]
+        [JsonProperty(Required = Required.Default, Order = 13)]
+        [ProtoMember(13)]
         public List<Unterschrift> unterzeichnervp1;
 
         /// <summary>
         /// Unterzeichner des Vertragspartners2. Siehe COM Unterschrift
         /// </summary>
-        [JsonProperty(Required = Required.Default)]
+        [JsonProperty(Required = Required.Default, Order = 14)]
+        [ProtoMember(14)]
         public List<Unterschrift> unterzeichnervp2;
 
         /// <summary>
         /// Festlegungen zu Laufzeiten und Kündigungsfristen. Details siehe COM Vertragskonditionen
         /// </summary>
-        [JsonProperty(Required = Required.Default)]
+        [JsonProperty(Required = Required.Default, Order = 15)]
+        [ProtoMember(15)]
         public Vertragskonditionen vertragskonditionen;
 
         /// <summary>
         /// Der Vertragsteil wird dazu verwendet, eine vertragliche Leistung in Bezug zu einer Lokation (Markt- oder Messlokation) festzulegen. Details siehe COM Vertragsteil
         /// </summary>
-        [JsonProperty(Required = Required.Default)] // TODO: should be required but our CDS is missing the association
+        [JsonProperty(Required = Required.Default, Order = 16)] // TODO: should be required but our CDS is missing the association
+        [ProtoMember(16)]
         public List<Vertragsteil> vertragsteile;
 
         /// <summary>
-        /// gemeinderabatt für EDIFACT mapping
+        /// gemeinderabatt für EDIFACT mapping.
         /// </summary>
-        [JsonProperty(Required = Required.Default)]
+        // ToDo: What is the unit? is 1.0 = 100% discount?
+        [JsonProperty(Required = Required.Default, Order = 17)]
         [NonOfficial(NonOfficialCategory.CUSTOMER_REQUIREMENTS)]
+        [ProtoMember(1017)]
         public decimal? gemeinderabatt;
 
         /// <summary> 
         /// korrespondenzpartner für EDIFACT mapping
         /// </summary>
-        [JsonProperty(Required = Required.Default)]
+        [JsonProperty(Required = Required.Default, Order = 18)]
         [NonOfficial(NonOfficialCategory.CUSTOMER_REQUIREMENTS)]
+        [ProtoMember(1018)]
+        // ToDO: isn't an Ansprechpartner the better choice than a Geschaeftspartner?
         public Geschaeftspartner korrespondenzpartner;
 
 

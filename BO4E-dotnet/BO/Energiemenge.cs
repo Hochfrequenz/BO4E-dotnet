@@ -9,19 +9,22 @@ using BO4E.ENUM;
 using BO4E.meta;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
+using ProtoBuf;
 
 namespace BO4E.BO
 {
     /// <summary>
     /// Abbildung von Mengen, die Lokationen zugeordnet sind.
     /// </summary>
+    [ProtoContract]
     public class Energiemenge : BusinessObject
     {
         /// <summary>
         /// Eindeutige Nummer der Marktlokation bzw. der Messlokation, zu der die Energiemenge gehört
         /// </summary>
         [DefaultValue("|null|")]
-        [JsonProperty(Required = Required.Always, Order = -1)]
+        [JsonProperty(Required = Required.Always, Order = 4)]
+        [ProtoMember(4)]
         [DataCategory(DataCategory.POD)]
         [BoKey]
         public string lokationsId;
@@ -30,14 +33,16 @@ namespace BO4E.BO
         /// Gibt an, ob es sich um eine Markt- oder Messlokation handelt.
         /// </summary>
         /// <see cref="Lokationstyp"/>
-        [JsonProperty(Required = Required.Always, Order = 0)]
+        [JsonProperty(Required = Required.Always, Order = 5)]
+        [ProtoMember(5)]
         [DataCategory(DataCategory.POD)]
         public Lokationstyp lokationstyp;
 
         /// <summary>
         /// Gibt den <see cref="Verbrauch"/> in einer Zeiteinheit an.
         /// </summary>
-        [JsonProperty(Order = 1)]
+        [JsonProperty(Order = 6)]
+        [ProtoMember(6)]
         [DataCategory(DataCategory.METER_READING)]
         [MinLength(1)]
         public List<Verbrauch> energieverbrauch;

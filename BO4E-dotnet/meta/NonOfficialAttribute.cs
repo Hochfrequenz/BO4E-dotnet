@@ -27,9 +27,9 @@ namespace BO4E.meta
         protected HashSet<Enum> Mapping { get; set; }
         public NonOfficialAttribute(params object[] enums)
         {
-            if (enums.Any(r => r.GetType().BaseType != typeof(Enum) || r.GetType()!=typeof(NonOfficialCategory)))
+            if (enums.Any(r => r.GetType().BaseType != typeof(Enum) || r.GetType() != typeof(NonOfficialCategory)))
             {
-                throw new ArgumentException($"You must only pass enums of type {nameof(NonOfficialCategory)}",nameof(enums));
+                throw new ArgumentException($"You must only pass enums of type {nameof(NonOfficialCategory)}", nameof(enums));
             }
             Mapping = new HashSet<Enum>();
             foreach (Enum e in enums)
@@ -37,5 +37,11 @@ namespace BO4E.meta
                 Mapping.Add(e);
             }
         }
+        /// <summary>
+        /// test if a category is part of the attribute data
+        /// </summary>
+        /// <param name="noc">a category</param>
+        /// <returns>true if the attribute contains the category</returns>
+        public bool HasCategory(NonOfficialCategory noc) => Mapping.Contains(noc);
     }
 }

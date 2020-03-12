@@ -5,20 +5,75 @@ using BO4E.BO;
 using BO4E.meta;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
+using ProtoBuf;
 
 namespace BO4E.COM
 {
     /// <summary>
     /// The COM class is the abstract class from which all BO4E.COM classes are derived.
     /// </summary>
-    // The COMs are modelled as classes instead of structs, because other than structs,
-    // classes allow for manipulation of single fields (they're mutable).
+    //[ProtoContract] // If I add this line I get the following message: System.InvalidOperationException: Duplicate field-number detected; 1 on: BO4E.COM.COM
+    [ProtoInclude(1, typeof(Adresse))]
+    [ProtoInclude(2, typeof(Angebotsposition))]
+    [ProtoInclude(3, typeof(Angebotsteil))]
+    [ProtoInclude(4, typeof(Angebotsvariante))]
+    [ProtoInclude(5, typeof(AufAbschlag))]
+    [ProtoInclude(6, typeof(Aufgabe))]
+    [ProtoInclude(7, typeof(Ausschreibungsdetail))]
+    [ProtoInclude(8, typeof(Ausschreibungslos))]
+    [ProtoInclude(9, typeof(Betrag))]
+    [ProtoInclude(10, typeof(Dienstleistung))]
+    [ProtoInclude(11, typeof(Energieherkunft))]
+    [ProtoInclude(12, typeof(Energiemix))]
+    [ProtoInclude(13, typeof(GenericStringStringInfo))]
+    [ProtoInclude(14, typeof(Geokoordinaten))]
+    [ProtoInclude(15, typeof(Geraet))]
+    [ProtoInclude(16, typeof(Geraeteeigenschaften))]
+    [ProtoInclude(17, typeof(Hardware))]
+    [ProtoInclude(18, typeof(Katasteradresse))]
+    [ProtoInclude(19, typeof(Konzessionsabgabe))]
+    [ProtoInclude(20, typeof(Kostenblock))]
+    [ProtoInclude(21, typeof(Kostenposition))]
+    [ProtoInclude(22, typeof(KriteriumsWert))]
+    [ProtoInclude(23, typeof(Kostenposition))]
+    [ProtoInclude(24, typeof(Marktrolle))]
+    [ProtoInclude(25, typeof(Menge))]
+    [ProtoInclude(26, typeof(Messlokationszuordnung))]
+    [ProtoInclude(27, typeof(Notiz))]
+    [ProtoInclude(28, typeof(PhysikalischerWert))]
+    [ProtoInclude(29, typeof(PositionsAufAbschlag))]
+    [ProtoInclude(30, typeof(Preis))]
+    //[ProtoInclude(31, typeof(Preisstaffel))]
+    //[ProtoInclude(31, typeof(Preisgarantie))]
+    [ProtoInclude(32, typeof(Preisposition))]
+    [ProtoInclude(33, typeof(Rechnungsposition))]
+    [ProtoInclude(34, typeof(RechnungspositionFlat))]
+    [ProtoInclude(35, typeof(RegionaleGueltigkeit))]
+    //[ProtoInclude(36, typeof(RegionalePreisgarantie))]
+    //[ProtoInclude(37, typeof(RegionalePreisstaffel))]
+    [ProtoInclude(38, typeof(RegionalerAufAbschlag))]
+    [ProtoInclude(39, typeof(RegionaleTarifpreisposition))]
+    [ProtoInclude(40, typeof(Regionskriterium))]
+    [ProtoInclude(41, typeof(Rufnummer))]
+    [ProtoInclude(42, typeof(Sigmoidparameter))]
+    [ProtoInclude(43, typeof(Steuerbetrag))]
+    [ProtoInclude(44, typeof(Tarifberechnungsparameter))]
+    [ProtoInclude(45, typeof(Tarifeinschraenkung))]
+    [ProtoInclude(46, typeof(Tarifpreisposition))]
+    [ProtoInclude(47, typeof(Unterschrift))]
+    [ProtoInclude(48, typeof(Verbrauch))]
+    [ProtoInclude(49, typeof(Vertragskonditionen))]
+    [ProtoInclude(50, typeof(Vertragsteil))]
+    [ProtoInclude(51, typeof(Zaehlwerk))]
+    [ProtoInclude(52, typeof(Zeitraum))]
+    [ProtoInclude(53, typeof(Zustaendigkeit))]
     public abstract class COM : IEquatable<COM>
     {
         /// <summary>
         /// User properties (non bo4e standard)
         /// </summary>
-        [JsonProperty(PropertyName = BusinessObject.userPropertiesName, Required = Required.Default, Order = 100)]
+        [JsonProperty(PropertyName = BusinessObject.userPropertiesName, Required = Required.Default, Order = 2)]
+        [ProtoMember(2)]
         [JsonExtensionData]
         [DataCategory(DataCategory.USER_PROPERTIES)]
         public IDictionary<string, JToken> userProperties;
@@ -88,7 +143,8 @@ namespace BO4E.COM
         /// <summary>
         /// allows adding a GUID to COM objects for tracking across systems
         /// </summary>
-        [JsonProperty(NullValueHandling = NullValueHandling.Ignore, Required = Required.Default)]
+        [JsonProperty(NullValueHandling = NullValueHandling.Ignore, Required = Required.Default, Order = 1)]
+        [ProtoMember(1)]
         public string guid;
     }
 }

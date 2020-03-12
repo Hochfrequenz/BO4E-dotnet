@@ -6,11 +6,11 @@ using BO4E.COM;
 using BO4E.ENUM;
 using BO4E.meta;
 using Newtonsoft.Json;
+using ProtoBuf;
 
 namespace BO4E.BO
 {
 
-    // The key order is actually relevant for the online validation. WTF!
     // https://github.com/Hochfrequenz/energy-service-hub/issues/11
     //@JsonPropertyOrder({ "versionStruktur", "boTyp", "marktlokationsId", "sparte", "energierichtung",
     //        "bilanzierungsmethode", "verbrauchsart", "unterbrechbar", "netzebene", "netzbetreiberCodeNr", "gebietTyp",
@@ -19,6 +19,7 @@ namespace BO4E.BO
     /// <summary>
     /// Objekt zur Aufnahme der Informationen zu einer Marktlokation
     /// </summary>
+    [ProtoContract]
     public class Marktlokation : BusinessObject
     {
         /// <summary>
@@ -26,28 +27,34 @@ namespace BO4E.BO
         /// verbraucht, oder erzeugt wird
         /// </summary>
         [DefaultValue("|null|")]
-        [JsonProperty(Required = Required.Always, Order = -1)]
+        [JsonProperty(Required = Required.Always, Order = 4)]
         [DataCategory(DataCategory.POD)]
         [BoKey]
+        [ProtoMember(4)]
         public string marktlokationsId;
         /// <summary>Sparte der Messlokation, z.B. Gas oder Strom.</summary>
-        [JsonProperty(Required = Required.Always, Order = 0)]
+        [JsonProperty(Required = Required.Always, Order = 5)]
+        [ProtoMember(5)]
         public Sparte sparte;
 
         /// <summary>Kennzeichnung, ob Energie eingespeist oder entnommen (ausgespeist) wird.</summary>
-        [JsonProperty(Required = Required.Always, Order = 1)]
+        [JsonProperty(Required = Required.Always, Order = 6)]
+        [ProtoMember(6)]
         public Energierichtung energierichtung;
 
         /// <summary>Kennzeichnung, ob Energie eingespeist oder entnommen (ausgespeist) wird.</summary>
-        [JsonProperty(Required = Required.Always, Order = 2)]
+        [JsonProperty(Required = Required.Always, Order = 7)]
+        [ProtoMember(7)]
         public Bilanzierungsmethode bilanzierungsmethode;
 
         /// <summary>Verbrauchsart der Marktlokation</summary>
-        [JsonProperty(Required = Required.Default, Order = 3)]
+        [JsonProperty(Required = Required.Default, Order = 8)]
+        [ProtoMember(8)]
         public Verbrauchsart? verbrauchsart;
 
         /// <summary>Gibt an, ob es sich um eine unterbrechbare Belieferung handelt.</summary>
-        [JsonProperty(Required = Required.Default, Order = 4)]
+        [JsonProperty(Required = Required.Default, Order = 9)]
+        [ProtoMember(9)]
         public bool? unterbrechbar;
 
         ///<summary>
@@ -55,102 +62,127 @@ namespace BO4E.BO
         /// Lieferung, bei Gas Druckstufe. Beispiel Strom: Niederspannung Beispiel Gas:
         /// Niederdruck.
         /// <seealso cref="Netzebene" /></summary> 
-        [JsonProperty(Required = Required.Always, Order = 5)]
+        [JsonProperty(Required = Required.Always, Order = 10)]
+        [ProtoMember(10)]
         public Netzebene netzebene;
 
         /// <summary>
         /// Codenummer des Netzbetreibers, an dessen Netz diese Marktlokation
         /// angeschlossen ist.
         /// </summary>
-        [JsonProperty(PropertyName = "netzbetreiberCodeNr", Required = Required.Default, Order = 6)]
+        [JsonProperty(PropertyName = "netzbetreiberCodeNr", Required = Required.Default, Order = 11)]
+        [ProtoMember(11)]
         public string netzbetreibercodenr;
 
         /// <summary>Typ des Netzgebietes,z.B.Verteilnetz.</summary>
         /// https://github.com/Hochfrequenz/energy-service-hub/issues/11
-        [JsonProperty(PropertyName = "gebietTyp", Order = 7, Required = Required.Default)]
+        [JsonProperty(PropertyName = "gebietTyp", Order = 12, Required = Required.Default)]
+        [ProtoMember(12)]
         public Gebiettyp? gebiettyp;
 
         /// <summary>Die Nummer des Netzgebietes in der ene't-Datenbank.</summary>
-        [JsonProperty(PropertyName = "netzgebietNr", Order = 8, Required = Required.Default)]
+        [JsonProperty(PropertyName = "netzgebietNr", Order = 13, Required = Required.Default)]
+        [ProtoMember(13)]
         public string netzgebietnr;
 
         /// <summary>Bilanzierungsgebiet, dem das Netzgebiet zugeordnet ist - im Falle eines Strom Netzes.</summary>
-        [JsonProperty(Required = Required.Default, Order = 9)]
+        [JsonProperty(Required = Required.Default, Order = 14)]
+        [ProtoMember(14)]
         public string bilanzierungsgebiet;
 
         /// <summary>CodeNummer des Grundversorgers, der für diese Marktlokation zuständig ist.</summary>
-        [JsonProperty(PropertyName = "grundversorgerCodeNr", Order = 10, Required = Required.Default)]
+        [JsonProperty(PropertyName = "grundversorgerCodeNr", Order = 15, Required = Required.Default)]
+        [ProtoMember(15)]
         public string grundversorgercodenr;
 
         ///<summary>Die Gasqualität in diesem Netzgebiet. H-Gas oder L-Gas. Im Falle eines Gas-Netzes.<seealso cref="Gasqualitaet" /></summary> */
-        [JsonProperty(Required = Required.Default, Order = 11)]
+        [JsonProperty(Required = Required.Default, Order = 16)]
+        [ProtoMember(16)]
         public Gasqualitaet? gasqualitaet;
 
         /// <summary>Link zum Geschäftspartner, dem diese Marktlokation gehört.</summary>
-        [JsonProperty(Required = Required.Default, Order = 12)]
+        [JsonProperty(Required = Required.Default, Order = 17)]
+        [ProtoMember(17)]
         public Geschaeftspartner endkunde;
 
         /// <summary>Die Adresse, an der die Energie-Lieferung oder -Einspeisung erfolgt. <seealso cref="Adresse" /></summary> */
         [DataCategory(DataCategory.ADDRESS)]
-        [JsonProperty(Required = Required.Default, Order = 13)]
+        [JsonProperty(Required = Required.Default, Order = 18)]
+        [ProtoMember(18)]
         public Adresse lokationsadresse;
 
         /// <summary>Alternativ zu einer postalischen Adresse kann hier ein Ort mittels Geokoordinaten angegeben werden (z.B. zur Identifikation von Sendemasten).<seealso cref="Geokoordinaten" /></summary> */
         [DataCategory(DataCategory.ADDRESS)]
-        [JsonProperty(Required = Required.Default, Order = 14)]
+        [JsonProperty(Required = Required.Default, Order = 19)]
+        [ProtoMember(19)]
         public Geokoordinaten geoadresse;
 
         /// <summary>Alternativ zu einer postalischen Adresse und Geokoordinaten kann hier eine  Ortsangabe mittels Gemarkung und Flurstück erfolgen. <seealso cref="Katasteradresse" /></summary>
         [DataCategory(DataCategory.ADDRESS)]
-        [JsonProperty(Required = Required.Default, Order = 15)]
+        [JsonProperty(Required = Required.Default, Order = 20)]
+        [ProtoMember(20)]
         public Katasteradresse katasterinformation;
 
         /// <summary>
         /// für EDIFACT mapping 
         /// </summary>
-        [JsonProperty(Required = Required.Default, Order = 16)]
+        // ToDo: specify docstring.
+        [JsonProperty(Required = Required.Default, Order = 21)]
+        [ProtoMember(1021)]
         [NonOfficial(NonOfficialCategory.CUSTOMER_REQUIREMENTS)]
         public List<COM.Marktrolle> marktrollen;
 
         /// <summary>
         /// für EDIFACT mapping 
         /// </summary>
-        [JsonProperty(Required = Required.Default, Order = 17)]
+        // ToDo: specify docstring.
+        [JsonProperty(Required = Required.Default, Order = 22)]
+        [ProtoMember(1022)]
         [NonOfficial(NonOfficialCategory.CUSTOMER_REQUIREMENTS)]
         public string regelzone;
 
         /// <summary>
         /// für EDIFACT mapping 
         /// </summary>
-        [JsonProperty(Required = Required.Default, Order = 18)]
+        // ToDo: specify docstring.
+        [JsonProperty(Required = Required.Default, Order = 23)]
+        [ProtoMember(1023)]
         [NonOfficial(NonOfficialCategory.CUSTOMER_REQUIREMENTS)]
         public string marktgebiet;
 
         /// <summary>
         /// für EDIFACT mapping 
         /// </summary>
-        [JsonProperty(Required = Required.Default, Order = 19)]
+        // ToDo: specify docstring.
+        [JsonProperty(Required = Required.Default, Order = 24)]
+        [ProtoMember(1024)]
         [NonOfficial(NonOfficialCategory.CUSTOMER_REQUIREMENTS)]
         public Zeiteinheit? zeitreihentyp;
 
         /// <summary>
         /// für EDIFACT mapping 
         /// </summary>
-        [JsonProperty(Required = Required.Default, Order = 20)]
+        // ToDo: specify docstring.
+        [JsonProperty(Required = Required.Default, Order = 25)]
+        [ProtoMember(1025)]
         [NonOfficial(NonOfficialCategory.CUSTOMER_REQUIREMENTS)]
         public List<Zaehlwerk> zaehlwerke;
 
         /// <summary>
         /// für EDIFACT mapping 
         /// </summary>
-        [JsonProperty(Required = Required.Default, Order = 21)]
+        // ToDo: specify docstring.
+        [JsonProperty(Required = Required.Default, Order = 26)]
+        [ProtoMember(1026)]
         [NonOfficial(NonOfficialCategory.CUSTOMER_REQUIREMENTS)]
         public List<Verbrauch> verbauchsmenge;
 
         /// <summary>
         /// für EDIFACT mapping 
         /// </summary>
-        [JsonProperty(Required = Required.Default, Order = 22)]
+        // ToDo: specify docstring.
+        [JsonProperty(Required = Required.Default, Order = 27)]
+        [ProtoMember(1027)]
         [NonOfficial(NonOfficialCategory.CUSTOMER_REQUIREMENTS)]
         public List<Messlokation> messlokationen;
 
@@ -177,7 +209,8 @@ namespace BO4E.BO
         /// einer Messlokation zum Verbrauch einer Marktlokation beitrögt mit aufgeführt.
         /// Der Standard ist hier die Addition.
         [DataCategory(DataCategory.POD)]
-        [JsonProperty(Required = Required.Default, Order = 16)]
+        [JsonProperty(Required = Required.Default, Order = 28)]
+        [ProtoMember(28)]
         public List<Messlokationszuordnung> zugehoerigeMesslokationen;
 
 
