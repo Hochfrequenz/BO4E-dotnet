@@ -123,7 +123,7 @@ namespace BO4E.BO
 
         /// <summary>Dieser Wert ist true, falls die Abrechnungs des Messstellenbetriebs die Netznutzungsabrechnung enthält. false andernfalls</summary>
         [JsonProperty(Required = Required.Default, Order = 18)]
-        [ProtoMember(18)]
+        [ProtoMember(1018)]
         [NonOfficial(NonOfficialCategory.CUSTOMER_REQUIREMENTS)]
         public bool? abrechnungmessstellenbetriebnna;
 
@@ -131,7 +131,7 @@ namespace BO4E.BO
         /// marktrollen für EDIFACT mapping
         /// </summary>
         [JsonProperty(Required = Required.Default, Order = 19)]
-        [ProtoMember(19)]
+        [ProtoMember(1019)]
         [NonOfficial(NonOfficialCategory.CUSTOMER_REQUIREMENTS)]
         public List<COM.Marktrolle> marktrollen;
 
@@ -139,7 +139,7 @@ namespace BO4E.BO
         /// gasqualitaet für EDIFACT mapping
         /// </summary>
         [JsonProperty(Required = Required.Default, Order = 20, NullValueHandling = NullValueHandling.Ignore)]
-        [ProtoMember(20)]
+        [ProtoMember(1020)]
         [NonOfficial(NonOfficialCategory.CUSTOMER_REQUIREMENTS)]
         public Gasqualitaet? gasqualitaet;
 
@@ -149,7 +149,7 @@ namespace BO4E.BO
         // ToDo: so does this mean that a factor of 0.0M has no losses?
         [JsonProperty(Required = Required.Default, Order = 21)]
         [NonOfficial(NonOfficialCategory.CUSTOMER_REQUIREMENTS)]
-        [ProtoMember(21)]
+        [ProtoMember(1021)]
         public decimal? verlustfaktor;
 
         [JsonIgnore]

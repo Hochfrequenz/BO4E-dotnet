@@ -4,6 +4,7 @@ using System.Linq;
 using System.Reflection;
 using BO4E.BO;
 using BO4E.COM;
+using BO4E.meta;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using ProtoBuf;
 
@@ -48,6 +49,16 @@ namespace TestBO4E
                 allFields = type.GetFields(BindingFlags.Public | BindingFlags.Instance | BindingFlags.DeclaredOnly);
                 fieldsWithProtoMemberAttribute = type.GetFields(BindingFlags.Public | BindingFlags.Instance | BindingFlags.DeclaredOnly).Where(f => f.GetCustomAttributes(typeof(ProtoMemberAttribute), false).Any());
             }
+
+            var nonOfficialFieldsWithProtoMember = allFields.Where(field => field.GetCustomAttributes(typeof(NonOfficialAttribute)).Any()) // those fields having an [NonOfficial(...)] attribute
+                .Where(field => ((NonOfficialAttribute)(field.GetCustomAttributes(typeof(NonOfficialAttribute)).First())).HasCategory(NonOfficialCategory.CUSTOMER_REQUIREMENTS)) // and the customer_requirements category
+                .Intersect(fieldsWithProtoMemberAttribute); // and a [ProtoMember(<id>)] attribute
+            
+            var wrongTagsNonOfficial = nonOfficialFieldsWithProtoMember.Where(f => ((ProtoMemberAttribute)f.GetCustomAttributes(typeof(ProtoMemberAttribute)).First()).Tag < 1000);
+            Assert.AreEqual(0, wrongTagsNonOfficial.Count(), $"Fields in {type} are non official and do not have proto tags >= 1000: {string.Join(", ", wrongTagsNonOfficial.Select(f => f.Name))}");
+            var wrongTagsOfficial = fieldsWithProtoMemberAttribute.Except(nonOfficialFieldsWithProtoMember).Where(f => ((ProtoMemberAttribute)f.GetCustomAttributes(typeof(ProtoMemberAttribute)).First()).Tag > 1000);
+            Assert.AreEqual(0, wrongTagsOfficial.Count(), $"Fields in {type} are official but have proto tags >= 1000: {string.Join(", ", wrongTagsOfficial.Select(f => f.Name))}");
+
             try
             {
                 if (isDirectBase)

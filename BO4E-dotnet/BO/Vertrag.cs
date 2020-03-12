@@ -115,7 +115,7 @@ namespace BO4E.BO
         // ToDo: What is the unit? is 1.0 = 100% discount?
         [JsonProperty(Required = Required.Default, Order = 17)]
         [NonOfficial(NonOfficialCategory.CUSTOMER_REQUIREMENTS)]
-        [ProtoMember(17)]
+        [ProtoMember(1017)]
         public decimal? gemeinderabatt;
 
         /// <summary> 
@@ -123,7 +123,8 @@ namespace BO4E.BO
         /// </summary>
         [JsonProperty(Required = Required.Default, Order = 18)]
         [NonOfficial(NonOfficialCategory.CUSTOMER_REQUIREMENTS)]
-        [ProtoMember(18)]
+        [ProtoMember(1018)]
+        // ToDO: isn't an Ansprechpartner the better choice than a Geschaeftspartner?
         public Geschaeftspartner korrespondenzpartner;
 
 

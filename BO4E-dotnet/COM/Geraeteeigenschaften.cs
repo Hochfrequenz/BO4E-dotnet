@@ -25,7 +25,7 @@ namespace BO4E.COM
         /// </summary>
         [JsonProperty(Required = Required.Default)]
         [NonOfficial(NonOfficialCategory.CUSTOMER_REQUIREMENTS)]
-        [ProtoMember(5)]
+        [ProtoMember(1005)]
         public Dictionary<string, string> parameter; // ToDo: add docstring
     }
 }

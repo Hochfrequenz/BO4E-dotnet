@@ -30,7 +30,7 @@ namespace BO4E.BO
         /// </summary>
         /// <example>Dr.</example>
         [JsonProperty(Required = Required.Default, Order = 5)]
-        [ProtoMember(5)]
+        [ProtoMember(1001)]
         [Obsolete("Please use anrede instead or Ansprechpartner.individuelleAnrede")]
         [NonOfficial(NonOfficialCategory.CUSTOMER_REQUIREMENTS)]
         public string title;

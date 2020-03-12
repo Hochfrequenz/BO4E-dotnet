@@ -76,14 +76,14 @@ namespace BO4E.BO
         /// </summary>
         [JsonProperty(Required = Required.Default, Order = 14)]
         [NonOfficial(NonOfficialCategory.CUSTOMER_REQUIREMENTS)]
-        [ProtoMember(14)]
+        [ProtoMember(1014)]
         public string gateway;
 
         /// <summary>
         /// Fernschaltung
         /// </summary>
         [JsonProperty(Required = Required.Default, Order = 15)]
-        [ProtoMember(15)]
+        [ProtoMember(1015)]
         [NonOfficial(NonOfficialCategory.CUSTOMER_REQUIREMENTS)]
         public Fernschaltung? fernschaltung;
 
@@ -91,7 +91,7 @@ namespace BO4E.BO
         /// Messwerterfassung am Zählpunkt
         /// </summary>
         [JsonProperty(Required = Required.Default, Order = 16)]
-        [ProtoMember(16)]
+        [ProtoMember(1016)]
         [NonOfficial(NonOfficialCategory.CUSTOMER_REQUIREMENTS)]
         public Messwerterfassung? messwerterfassung;
     }

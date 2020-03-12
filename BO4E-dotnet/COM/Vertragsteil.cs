@@ -60,7 +60,7 @@ namespace BO4E.COM
         /// </summary>
         [JsonProperty(Required = Required.Default)]
         [NonOfficial(NonOfficialCategory.CUSTOMER_REQUIREMENTS)]
-        [ProtoMember(9)]
+        [ProtoMember(1009)]
         public Menge jahresverbrauchsprognose;
 
         /// <summary>
@@ -68,7 +68,7 @@ namespace BO4E.COM
         /// </summary>
         [JsonProperty(Required = Required.Default)]
         [NonOfficial(NonOfficialCategory.CUSTOMER_REQUIREMENTS)]
-        [ProtoMember(10)]
+        [ProtoMember(1010)]
         public Menge kundenwert;
 
         /// <summary>
@@ -76,7 +76,7 @@ namespace BO4E.COM
         /// </summary>
         [JsonProperty(Required = Required.Default)]
         [NonOfficial(NonOfficialCategory.CUSTOMER_REQUIREMENTS)]
-        [ProtoMember(11)]
+        [ProtoMember(1011)]
         public string verbrauchsaufteilung; // ToDo: evaluate if this actually should be an enum
     }
 }

@@ -99,7 +99,7 @@ namespace BO4E.COM
         /// (Ergänzung von Hochfrequenz Unternehmensberatung GmbH)
         /// </summary>
         [JsonProperty(Required = Required.Default)]
-        [ProtoMember(17)]
+        [ProtoMember(1017)]
         [NonOfficial(NonOfficialCategory.CUSTOMER_REQUIREMENTS)]
         public string vertragsId;
 
@@ -109,7 +109,7 @@ namespace BO4E.COM
         /// </summary>
         [JsonProperty(Required = Required.Default)]
         [NonOfficial(NonOfficialCategory.CUSTOMER_REQUIREMENTS)]
-        [ProtoMember(18)]
+        [ProtoMember(1018)]
         public RechnungspositionsStatus? status;
 
     }

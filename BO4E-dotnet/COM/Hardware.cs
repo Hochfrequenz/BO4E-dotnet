@@ -21,7 +21,7 @@ namespace BO4E.COM
         /// <summary>Bezeichnung der Hardware.</summary>
         [JsonProperty(Required = Required.Default)]
         [NonOfficial(NonOfficialCategory.CUSTOMER_REQUIREMENTS)]
-        [ProtoMember(5)]
+        [ProtoMember(1005)]
         public Geraeteeigenschaften geraeteeigenschaften;
 
         /// <summary>
@@ -29,7 +29,7 @@ namespace BO4E.COM
         /// </summary>
         [JsonProperty(Required = Required.Default)]
         [NonOfficial(NonOfficialCategory.CUSTOMER_REQUIREMENTS)]
-        [ProtoMember(6)]
+        [ProtoMember(1006)]
         public string geraetenummer;
 
         /// <summary>
@@ -37,7 +37,7 @@ namespace BO4E.COM
         /// </summary>
         [JsonProperty(Required = Required.Default)]
         [NonOfficial(NonOfficialCategory.CUSTOMER_REQUIREMENTS)]
-        [ProtoMember(7)]
+        [ProtoMember(1007)]
         public string geraetereferenz;
     }
 }

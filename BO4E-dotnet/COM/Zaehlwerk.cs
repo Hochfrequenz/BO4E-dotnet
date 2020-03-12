@@ -45,57 +45,57 @@ namespace BO4E.COM
         [JsonProperty(Required = Required.Default)]
         [NonOfficial(NonOfficialCategory.CUSTOMER_REQUIREMENTS)]
         [Obsolete("Use existing obisKennzahl instead.", true)]
-        [ProtoMember(9)]
+        [ProtoMember(1009)]
         public string kennzahl;
 
         /// <summary>schwachlastfaehig</summary>
         [JsonProperty(Required = Required.Default)]
         [NonOfficial(NonOfficialCategory.CUSTOMER_REQUIREMENTS)]
-        [ProtoMember(10)]
+        [ProtoMember(1010)]
         public Schwachlastfaehig? schwachlastfaehig;
 
         /// <summary>Verwendungungszweck der Werte Marktlokation</summary>
         [JsonProperty(Required = Required.Default)]
         [NonOfficial(NonOfficialCategory.CUSTOMER_REQUIREMENTS)]
-        [ProtoMember(11)]
+        [ProtoMember(1011)]
         public List<Verwendungszweck> verwendungszwecke;
 
         /// <summary>Stromverbrauchsart/Verbrauchsart Marktlokation</summary>
         [JsonProperty(Required = Required.Default)]
         [NonOfficial(NonOfficialCategory.CUSTOMER_REQUIREMENTS)]
-        [ProtoMember(12)]
+        [ProtoMember(1012)]
         public Verbrauchsart? verbrauchsart;
 
         /// <summary>Stromverbrauchsart/Unterbrechbarkeit Marktlokation</summary>
         [JsonProperty(Required = Required.Default)]
         [NonOfficial(NonOfficialCategory.CUSTOMER_REQUIREMENTS)]
-        [ProtoMember(13)]
+        [ProtoMember(1013)]
         public Unterbrechbarkeit? unterbrechbarkeit;
 
         /// <summary>Stromverbrauchsart/Wärmenutzung Marktlokation</summary>
         [JsonProperty(Required = Required.Default)]
         [NonOfficial(NonOfficialCategory.CUSTOMER_REQUIREMENTS)]
-        [ProtoMember(14)]
+        [ProtoMember(1014)]
         public Waermenutzung? waermenutzung;
 
         [JsonProperty(Required = Required.Default)]
         [NonOfficial(NonOfficialCategory.CUSTOMER_REQUIREMENTS)]
-        [ProtoMember(15)]
+        [ProtoMember(1015)]
         public Konzessionsabgabe konzessionsabgabe;
 
         [JsonProperty(Required = Required.Default)]
         [NonOfficial(NonOfficialCategory.CUSTOMER_REQUIREMENTS)]
-        [ProtoMember(16)]
+        [ProtoMember(1016)]
         public bool? steuerbefreit;
 
         [JsonProperty(Required = Required.Default)]
         [NonOfficial(NonOfficialCategory.CUSTOMER_REQUIREMENTS)]
-        [ProtoMember(17)]
+        [ProtoMember(1017)]
         public int? vorkommastelle;
 
         [JsonProperty(Required = Required.Default)]
         [NonOfficial(NonOfficialCategory.CUSTOMER_REQUIREMENTS)]
-        [ProtoMember(18)]
+        [ProtoMember(1018)]
         public int? nachkommastelle;
 
     }

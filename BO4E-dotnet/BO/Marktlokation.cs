@@ -126,56 +126,63 @@ namespace BO4E.BO
         /// <summary>
         /// für EDIFACT mapping 
         /// </summary>
+        // ToDo: specify docstring.
         [JsonProperty(Required = Required.Default, Order = 21)]
-        [ProtoMember(21)]
+        [ProtoMember(1021)]
         [NonOfficial(NonOfficialCategory.CUSTOMER_REQUIREMENTS)]
         public List<COM.Marktrolle> marktrollen;
 
         /// <summary>
         /// für EDIFACT mapping 
         /// </summary>
+        // ToDo: specify docstring.
         [JsonProperty(Required = Required.Default, Order = 22)]
-        [ProtoMember(22)]
+        [ProtoMember(1022)]
         [NonOfficial(NonOfficialCategory.CUSTOMER_REQUIREMENTS)]
         public string regelzone;
 
         /// <summary>
         /// für EDIFACT mapping 
         /// </summary>
+        // ToDo: specify docstring.
         [JsonProperty(Required = Required.Default, Order = 23)]
-        [ProtoMember(23)]
+        [ProtoMember(1023)]
         [NonOfficial(NonOfficialCategory.CUSTOMER_REQUIREMENTS)]
         public string marktgebiet;
 
         /// <summary>
         /// für EDIFACT mapping 
         /// </summary>
+        // ToDo: specify docstring.
         [JsonProperty(Required = Required.Default, Order = 24)]
-        [ProtoMember(24)]
+        [ProtoMember(1024)]
         [NonOfficial(NonOfficialCategory.CUSTOMER_REQUIREMENTS)]
         public Zeiteinheit? zeitreihentyp;
 
         /// <summary>
         /// für EDIFACT mapping 
         /// </summary>
+        // ToDo: specify docstring.
         [JsonProperty(Required = Required.Default, Order = 25)]
-        [ProtoMember(25)]
+        [ProtoMember(1025)]
         [NonOfficial(NonOfficialCategory.CUSTOMER_REQUIREMENTS)]
         public List<Zaehlwerk> zaehlwerke;
 
         /// <summary>
         /// für EDIFACT mapping 
         /// </summary>
+        // ToDo: specify docstring.
         [JsonProperty(Required = Required.Default, Order = 26)]
-        [ProtoMember(26)]
+        [ProtoMember(1026)]
         [NonOfficial(NonOfficialCategory.CUSTOMER_REQUIREMENTS)]
         public List<Verbrauch> verbauchsmenge;
 
         /// <summary>
         /// für EDIFACT mapping 
         /// </summary>
+        // ToDo: specify docstring.
         [JsonProperty(Required = Required.Default, Order = 27)]
-        [ProtoMember(27)]
+        [ProtoMember(1027)]
         [NonOfficial(NonOfficialCategory.CUSTOMER_REQUIREMENTS)]
         public List<Messlokation> messlokationen;
 
