@@ -33,7 +33,7 @@ namespace BO4E.COM
         public string geraetenummer;
 
         /// <summary>
-        /// Referenz auf die Ger�tenummer des Z�hlers
+        /// Referenz auf die Gerätenummer des Zählers
         /// </summary>
         [JsonProperty(Required = Required.Default)]
         [NonOfficial(NonOfficialCategory.CUSTOMER_REQUIREMENTS)]
