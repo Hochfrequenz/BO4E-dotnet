@@ -30,7 +30,7 @@ namespace BO4E.BO
         /// <summary>
         /// Negativliste der Kriterien zur Definition der Region. 
         /// </summary>
-        [JsonProperty(Required = Required.Always, Order = 6)]
+        [JsonProperty(Required = Required.Default, Order = 6)]
         [ProtoMember(6)]
         public List<Regionskriterium> negativListe;
     }
