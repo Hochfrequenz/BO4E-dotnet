@@ -25,7 +25,7 @@ namespace BO4E.COM
         public Geraeteeigenschaften geraeteeigenschaften;
 
         /// <summary>
-        /// Ger�tenummer des Wandlers
+        /// Gerätenummer des Wandlers
         /// </summary>
         [JsonProperty(Required = Required.Default)]
         [NonOfficial(NonOfficialCategory.CUSTOMER_REQUIREMENTS)]
