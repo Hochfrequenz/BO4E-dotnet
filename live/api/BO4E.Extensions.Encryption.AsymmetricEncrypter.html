@@ -1,0 +1,551 @@
+﻿<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<html>
+  
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>Class AsymmetricEncrypter
+   </title>
+    <meta name="viewport" content="width=device-width">
+    <meta name="title" content="Class AsymmetricEncrypter
+   ">
+    <meta name="generator" content="docfx 2.50.0.0">
+    
+    <link rel="shortcut icon" href="../favicon.ico">
+    <link rel="stylesheet" href="../styles/docfx.vendor.css">
+    <link rel="stylesheet" href="../styles/docfx.css">
+    <link rel="stylesheet" href="../styles/main.css">
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
+    <meta property="docfx:navrel" content="">
+    <meta property="docfx:tocrel" content="toc.html">
+    
+    
+    
+  </head>  <body data-spy="scroll" data-target="#affix" data-offset="120">
+    <div id="wrapper">
+      <header>
+        
+        <nav id="autocollapse" class="navbar navbar-inverse ng-scope" role="navigation">
+          <div class="container">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+              
+              <a class="navbar-brand" href="../index.html">
+                <img id="logo" class="svg" src="../logo.svg" alt="">
+              </a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar">
+              <form class="navbar-form navbar-right" role="search" id="search">
+                <div class="form-group">
+                  <input type="text" class="form-control" id="search-query" placeholder="Search" autocomplete="off">
+                </div>
+              </form>
+            </div>
+          </div>
+        </nav>
+        
+        <div class="subnav navbar navbar-default">
+          <div class="container hide-when-search" id="breadcrumb">
+            <ul class="breadcrumb">
+              <li></li>
+            </ul>
+          </div>
+        </div>
+      </header>
+      <div role="main" class="container body-content hide-when-search">
+        
+        <div class="sidenav hide-when-search">
+          <a class="btn toc-toggle collapse" data-toggle="collapse" href="#sidetoggle" aria-expanded="false" aria-controls="sidetoggle">Show / Hide Table of Contents</a>
+          <div class="sidetoggle collapse" id="sidetoggle">
+            <div id="sidetoc"></div>
+          </div>
+        </div>
+        <div class="article row grid-right">
+          <div class="col-md-10">
+            <article class="content wrap" id="_content" data-uid="BO4E.Extensions.Encryption.AsymmetricEncrypter">
+  
+  
+  <h1 id="BO4E_Extensions_Encryption_AsymmetricEncrypter" data-uid="BO4E.Extensions.Encryption.AsymmetricEncrypter" class="text-break">Class AsymmetricEncrypter
+  </h1>
+  <div class="markdown level0 summary"></div>
+  <div class="markdown level0 conceptual"></div>
+  <div class="inheritance">
+    <h5>Inheritance</h5>
+    <div class="level0"><span class="xref">System.Object</span></div>
+    <div class="level1"><a class="xref" href="BO4E.Extensions.Encryption.Encrypter.html">Encrypter</a></div>
+    <div class="level2"><span class="xref">AsymmetricEncrypter</span></div>
+  </div>
+  <div class="inheritedMembers">
+    <h5>Inherited Members</h5>
+    <div>
+      <a class="xref" href="BO4E.Extensions.Encryption.Encrypter.html#BO4E_Extensions_Encryption_Encrypter__logger">Encrypter._logger</a>
+    </div>
+  </div>
+  <h6><strong>Namespace</strong>: <a class="xref" href="BO4E.Extensions.Encryption.html">BO4E.Extensions.Encryption</a></h6>
+  <h6><strong>Assembly</strong>: BO4E-dotnet.Extensions.Encryption.dll</h6>
+  <h5 id="BO4E_Extensions_Encryption_AsymmetricEncrypter_syntax">Syntax</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public class AsymmetricEncrypter : Encrypter</code></pre>
+  </div>
+  <h3 id="constructors">Constructors
+  </h3>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/Hochfrequenz/BO4E-dotnet/new/d5bbd2f0618891e20f87c48001c05b3629adb2ae/apiSpec/new?filename=BO4E_Extensions_Encryption_AsymmetricEncrypter__ctor_KeyPair_.md&amp;value=---%0Auid%3A%20BO4E.Extensions.Encryption.AsymmetricEncrypter.%23ctor(KeyPair)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/Hochfrequenz/BO4E-dotnet/blob/d5bbd2f0618891e20f87c48001c05b3629adb2ae/BO4E-dotnet.Encryption/AsymmetricEncrypter.cs/#L35">View Source</a>
+  </span>
+  <a id="BO4E_Extensions_Encryption_AsymmetricEncrypter__ctor_" data-uid="BO4E.Extensions.Encryption.AsymmetricEncrypter.#ctor*"></a>
+  <h4 id="BO4E_Extensions_Encryption_AsymmetricEncrypter__ctor_KeyPair_" data-uid="BO4E.Extensions.Encryption.AsymmetricEncrypter.#ctor(KeyPair)">AsymmetricEncrypter(KeyPair)</h4>
+  <div class="markdown level1 summary"><p>Instantiate with libsodium KeyPair</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public AsymmetricEncrypter(KeyPair kp)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">KeyPair</span></td>
+        <td><span class="parametername">kp</span></td>
+        <td><p>key pair</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/Hochfrequenz/BO4E-dotnet/new/d5bbd2f0618891e20f87c48001c05b3629adb2ae/apiSpec/new?filename=BO4E_Extensions_Encryption_AsymmetricEncrypter__ctor_System_Byte___.md&amp;value=---%0Auid%3A%20BO4E.Extensions.Encryption.AsymmetricEncrypter.%23ctor(System.Byte%5B%5D)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/Hochfrequenz/BO4E-dotnet/blob/d5bbd2f0618891e20f87c48001c05b3629adb2ae/BO4E-dotnet.Encryption/AsymmetricEncrypter.cs/#L41">View Source</a>
+  </span>
+  <a id="BO4E_Extensions_Encryption_AsymmetricEncrypter__ctor_" data-uid="BO4E.Extensions.Encryption.AsymmetricEncrypter.#ctor*"></a>
+  <h4 id="BO4E_Extensions_Encryption_AsymmetricEncrypter__ctor_System_Byte___" data-uid="BO4E.Extensions.Encryption.AsymmetricEncrypter.#ctor(System.Byte[])">AsymmetricEncrypter(Byte[])</h4>
+  <div class="markdown level1 summary"><p>instantiate with own private key only</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public AsymmetricEncrypter(byte[] privateKey)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Byte</span>[]</td>
+        <td><span class="parametername">privateKey</span></td>
+        <td><p>private key</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/Hochfrequenz/BO4E-dotnet/new/d5bbd2f0618891e20f87c48001c05b3629adb2ae/apiSpec/new?filename=BO4E_Extensions_Encryption_AsymmetricEncrypter__ctor_System_Byte___System_Byte___.md&amp;value=---%0Auid%3A%20BO4E.Extensions.Encryption.AsymmetricEncrypter.%23ctor(System.Byte%5B%5D%2CSystem.Byte%5B%5D)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/Hochfrequenz/BO4E-dotnet/blob/d5bbd2f0618891e20f87c48001c05b3629adb2ae/BO4E-dotnet.Encryption/AsymmetricEncrypter.cs/#L20">View Source</a>
+  </span>
+  <a id="BO4E_Extensions_Encryption_AsymmetricEncrypter__ctor_" data-uid="BO4E.Extensions.Encryption.AsymmetricEncrypter.#ctor*"></a>
+  <h4 id="BO4E_Extensions_Encryption_AsymmetricEncrypter__ctor_System_Byte___System_Byte___" data-uid="BO4E.Extensions.Encryption.AsymmetricEncrypter.#ctor(System.Byte[],System.Byte[])">AsymmetricEncrypter(Byte[], Byte[])</h4>
+  <div class="markdown level1 summary"><p>Instantiate with private and public key</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public AsymmetricEncrypter(byte[] privateKey, byte[] publicKey)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Byte</span>[]</td>
+        <td><span class="parametername">privateKey</span></td>
+        <td><p>private key</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Byte</span>[]</td>
+        <td><span class="parametername">publicKey</span></td>
+        <td><p>public key</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/Hochfrequenz/BO4E-dotnet/new/d5bbd2f0618891e20f87c48001c05b3629adb2ae/apiSpec/new?filename=BO4E_Extensions_Encryption_AsymmetricEncrypter__ctor_System_String_System_String_.md&amp;value=---%0Auid%3A%20BO4E.Extensions.Encryption.AsymmetricEncrypter.%23ctor(System.String%2CSystem.String)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/Hochfrequenz/BO4E-dotnet/blob/d5bbd2f0618891e20f87c48001c05b3629adb2ae/BO4E-dotnet.Encryption/AsymmetricEncrypter.cs/#L30">View Source</a>
+  </span>
+  <a id="BO4E_Extensions_Encryption_AsymmetricEncrypter__ctor_" data-uid="BO4E.Extensions.Encryption.AsymmetricEncrypter.#ctor*"></a>
+  <h4 id="BO4E_Extensions_Encryption_AsymmetricEncrypter__ctor_System_String_System_String_" data-uid="BO4E.Extensions.Encryption.AsymmetricEncrypter.#ctor(System.String,System.String)">AsymmetricEncrypter(String, String)</h4>
+  <div class="markdown level1 summary"><p>Instantiate with private and public key</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public AsymmetricEncrypter(string privateKey, string publicKey)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td><span class="parametername">privateKey</span></td>
+        <td><p>base64 encoded private key</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td><span class="parametername">publicKey</span></td>
+        <td><p>base64 encoded public key</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h3 id="methods">Methods
+  </h3>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/Hochfrequenz/BO4E-dotnet/new/d5bbd2f0618891e20f87c48001c05b3629adb2ae/apiSpec/new?filename=BO4E_Extensions_Encryption_AsymmetricEncrypter_Decrypt_BO4E_BO_EncryptedObject_.md&amp;value=---%0Auid%3A%20BO4E.Extensions.Encryption.AsymmetricEncrypter.Decrypt(BO4E.BO.EncryptedObject)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/Hochfrequenz/BO4E-dotnet/blob/d5bbd2f0618891e20f87c48001c05b3629adb2ae/BO4E-dotnet.Encryption/AsymmetricEncrypter.cs/#L101">View Source</a>
+  </span>
+  <a id="BO4E_Extensions_Encryption_AsymmetricEncrypter_Decrypt_" data-uid="BO4E.Extensions.Encryption.AsymmetricEncrypter.Decrypt*"></a>
+  <h4 id="BO4E_Extensions_Encryption_AsymmetricEncrypter_Decrypt_BO4E_BO_EncryptedObject_" data-uid="BO4E.Extensions.Encryption.AsymmetricEncrypter.Decrypt(BO4E.BO.EncryptedObject)">Decrypt(EncryptedObject)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public override BusinessObject Decrypt(EncryptedObject encryptedObject)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="BO4E.BO.EncryptedObject.html">EncryptedObject</a></td>
+        <td><span class="parametername">encryptedObject</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="BO4E.BO.BusinessObject.html">BusinessObject</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="overrides">Overrides</h5>
+  <div><a class="xref" href="BO4E.Extensions.Encryption.Encrypter.html#BO4E_Extensions_Encryption_Encrypter_Decrypt_BO4E_BO_EncryptedObject_">Encrypter.Decrypt(EncryptedObject)</a></div>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/Hochfrequenz/BO4E-dotnet/new/d5bbd2f0618891e20f87c48001c05b3629adb2ae/apiSpec/new?filename=BO4E_Extensions_Encryption_AsymmetricEncrypter_Decrypt_System_String_System_String_System_String_.md&amp;value=---%0Auid%3A%20BO4E.Extensions.Encryption.AsymmetricEncrypter.Decrypt(System.String%2CSystem.String%2CSystem.String)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/Hochfrequenz/BO4E-dotnet/blob/d5bbd2f0618891e20f87c48001c05b3629adb2ae/BO4E-dotnet.Encryption/AsymmetricEncrypter.cs/#L96">View Source</a>
+  </span>
+  <a id="BO4E_Extensions_Encryption_AsymmetricEncrypter_Decrypt_" data-uid="BO4E.Extensions.Encryption.AsymmetricEncrypter.Decrypt*"></a>
+  <h4 id="BO4E_Extensions_Encryption_AsymmetricEncrypter_Decrypt_System_String_System_String_System_String_" data-uid="BO4E.Extensions.Encryption.AsymmetricEncrypter.Decrypt(System.String,System.String,System.String)">Decrypt(String, String, String)</h4>
+  <div class="markdown level1 summary"><p>decrypt and authenticate a cipher text</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public string Decrypt(string cipherText, string sendersPublicKey, string nonce)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td><span class="parametername">cipherText</span></td>
+        <td><p>encrypted message as base64 encoded string</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td><span class="parametername">sendersPublicKey</span></td>
+        <td><p>public key of sender for authentication as base64 encoded string</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td><span class="parametername">nonce</span></td>
+        <td><p>non-secret nonce as base64 encoded string</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td><p>decrypted plain text</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/Hochfrequenz/BO4E-dotnet/new/d5bbd2f0618891e20f87c48001c05b3629adb2ae/apiSpec/new?filename=BO4E_Extensions_Encryption_AsymmetricEncrypter_Dispose.md&amp;value=---%0Auid%3A%20BO4E.Extensions.Encryption.AsymmetricEncrypter.Dispose%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/Hochfrequenz/BO4E-dotnet/blob/d5bbd2f0618891e20f87c48001c05b3629adb2ae/BO4E-dotnet.Encryption/AsymmetricEncrypter.cs/#L112">View Source</a>
+  </span>
+  <a id="BO4E_Extensions_Encryption_AsymmetricEncrypter_Dispose_" data-uid="BO4E.Extensions.Encryption.AsymmetricEncrypter.Dispose*"></a>
+  <h4 id="BO4E_Extensions_Encryption_AsymmetricEncrypter_Dispose" data-uid="BO4E.Extensions.Encryption.AsymmetricEncrypter.Dispose">Dispose()</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public override void Dispose()</code></pre>
+  </div>
+  <h5 class="overrides">Overrides</h5>
+  <div><a class="xref" href="BO4E.Extensions.Encryption.Encrypter.html#BO4E_Extensions_Encryption_Encrypter_Dispose">Encrypter.Dispose()</a></div>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/Hochfrequenz/BO4E-dotnet/new/d5bbd2f0618891e20f87c48001c05b3629adb2ae/apiSpec/new?filename=BO4E_Extensions_Encryption_AsymmetricEncrypter_Encrypt_BO4E_BO_BusinessObject_System_String_.md&amp;value=---%0Auid%3A%20BO4E.Extensions.Encryption.AsymmetricEncrypter.Encrypt(BO4E.BO.BusinessObject%2CSystem.String)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/Hochfrequenz/BO4E-dotnet/blob/d5bbd2f0618891e20f87c48001c05b3629adb2ae/BO4E-dotnet.Encryption/AsymmetricEncrypter.cs/#L73">View Source</a>
+  </span>
+  <a id="BO4E_Extensions_Encryption_AsymmetricEncrypter_Encrypt_" data-uid="BO4E.Extensions.Encryption.AsymmetricEncrypter.Encrypt*"></a>
+  <h4 id="BO4E_Extensions_Encryption_AsymmetricEncrypter_Encrypt_BO4E_BO_BusinessObject_System_String_" data-uid="BO4E.Extensions.Encryption.AsymmetricEncrypter.Encrypt(BO4E.BO.BusinessObject,System.String)">Encrypt(BusinessObject, String)</h4>
+  <div class="markdown level1 summary"><p>Encrypt a Business Object for a given public key</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public EncryptedObjectPublicKeyBox Encrypt(BusinessObject plainObject, string publicKey)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="BO4E.BO.BusinessObject.html">BusinessObject</a></td>
+        <td><span class="parametername">plainObject</span></td>
+        <td><p>unencrypted Business Object</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td><span class="parametername">publicKey</span></td>
+        <td><p>recipients public key</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="BO4E.BO.EncryptedObjectPublicKeyBox.html">EncryptedObjectPublicKeyBox</a></td>
+        <td><p>An encrypted Business Object</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/Hochfrequenz/BO4E-dotnet/new/d5bbd2f0618891e20f87c48001c05b3629adb2ae/apiSpec/new?filename=BO4E_Extensions_Encryption_AsymmetricEncrypter_Encrypt_System_String_System_String_.md&amp;value=---%0Auid%3A%20BO4E.Extensions.Encryption.AsymmetricEncrypter.Encrypt(System.String%2CSystem.String)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/Hochfrequenz/BO4E-dotnet/blob/d5bbd2f0618891e20f87c48001c05b3629adb2ae/BO4E-dotnet.Encryption/AsymmetricEncrypter.cs/#L61">View Source</a>
+  </span>
+  <a id="BO4E_Extensions_Encryption_AsymmetricEncrypter_Encrypt_" data-uid="BO4E.Extensions.Encryption.AsymmetricEncrypter.Encrypt*"></a>
+  <h4 id="BO4E_Extensions_Encryption_AsymmetricEncrypter_Encrypt_System_String_System_String_" data-uid="BO4E.Extensions.Encryption.AsymmetricEncrypter.Encrypt(System.String,System.String)">Encrypt(String, String)</h4>
+  <div class="markdown level1 summary"><p>Encrypt a plain text with a public key</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public (string, string) Encrypt(string plainText, string recipientsPublicKey)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td><span class="parametername">plainText</span></td>
+        <td><p>UTF-8 encoded string containing the plain text to be encrypted</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td><span class="parametername">recipientsPublicKey</span></td>
+        <td><p>public key of receiver</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.ValueTuple</span>&lt;<span class="xref">System.String</span>, <span class="xref">System.String</span>&gt;</td>
+        <td><p>Tuple of (cipherText, nonce); both as base64 encoded string</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/Hochfrequenz/BO4E-dotnet/new/d5bbd2f0618891e20f87c48001c05b3629adb2ae/apiSpec/new?filename=BO4E_Extensions_Encryption_AsymmetricEncrypter_Finalize.md&amp;value=---%0Auid%3A%20BO4E.Extensions.Encryption.AsymmetricEncrypter.Finalize%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/Hochfrequenz/BO4E-dotnet/blob/d5bbd2f0618891e20f87c48001c05b3629adb2ae/BO4E-dotnet.Encryption/AsymmetricEncrypter.cs/#L123">View Source</a>
+  </span>
+  <a id="BO4E_Extensions_Encryption_AsymmetricEncrypter_Finalize_" data-uid="BO4E.Extensions.Encryption.AsymmetricEncrypter.Finalize*"></a>
+  <h4 id="BO4E_Extensions_Encryption_AsymmetricEncrypter_Finalize" data-uid="BO4E.Extensions.Encryption.AsymmetricEncrypter.Finalize">Finalize()</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected void Finalize()</code></pre>
+  </div>
+  <h3 id="extensionmethods">Extension Methods</h3>
+  <div>
+      <a class="xref" href="BO4E.Extensions.BusinessObjects.BusinessObjectExtensions.html#BO4E_Extensions_BusinessObjects_BusinessObjectExtensions_DeepClone__1___0_">BusinessObjectExtensions.DeepClone&lt;T&gt;(T)</a>
+  </div>
+  <div>
+      <a class="xref" href="BO4E.Extensions.COM.COMExtensions.html#BO4E_Extensions_COM_COMExtensions_DeepClone__1___0_">COMExtensions.DeepClone&lt;T&gt;(T)</a>
+  </div>
+</article>
+          </div>
+          
+          <div class="hidden-sm col-md-2" role="complementary">
+            <div class="sideaffix">
+              <div class="contribution">
+                <ul class="nav">
+                  <li>
+                    <a href="https://github.com/Hochfrequenz/BO4E-dotnet/new/d5bbd2f0618891e20f87c48001c05b3629adb2ae/apiSpec/new?filename=BO4E_Extensions_Encryption_AsymmetricEncrypter.md&amp;value=---%0Auid%3A%20BO4E.Extensions.Encryption.AsymmetricEncrypter%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" class="contribution-link">Improve this Doc</a>
+                  </li>
+                  <li>
+                    <a href="https://github.com/Hochfrequenz/BO4E-dotnet/blob/d5bbd2f0618891e20f87c48001c05b3629adb2ae/BO4E-dotnet.Encryption/AsymmetricEncrypter.cs/#L10" class="contribution-link">View Source</a>
+                  </li>
+                </ul>
+              </div>
+              <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
+              <!-- <p><a class="back-to-top" href="#top">Back to top</a><p> -->
+              </nav>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <footer>
+        <div class="grad-bottom"></div>
+        <div class="footer">
+          <div class="container">
+            <span class="pull-right">
+              <a href="#top">Back to top</a>
+            </span>
+            
+            <span>Generated by <strong>DocFX</strong></span>
+          </div>
+        </div>
+      </footer>
+    </div>
+    
+    <script type="text/javascript" src="../styles/docfx.vendor.js"></script>
+    <script type="text/javascript" src="../styles/docfx.js"></script>
+    <script type="text/javascript" src="../styles/main.js"></script>
+  </body>
+</html>
