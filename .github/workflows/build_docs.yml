@@ -65,7 +65,7 @@ jobs:
         cd live
         git config --global user.email "konstantin.klein@hochfrequenz.de"
         git config --global user.name "Automatic DocFX Build"
-        git submodule set-url https://github.com/Hochfrequenz/bo4e-livedocs.git
+        git submodule init .
         git submodule add .
         git commit -m "Automated update from Github Action"
         header=$(echo -n "ad-m:${{ secrets.DOC_MGMT_TOKEN }}" | base64)
