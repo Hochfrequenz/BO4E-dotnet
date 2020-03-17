@@ -1,12 +1,12 @@
 # BO4E-dotnet
-BO4E-dotnet is a C# implementation of **B**usiness **O**bjects for **E**nergy ([BO4E](https://www.bo4e.de/)), a standard use to model business objects in the German energy market. This repository contains class definitions and enumerations for most of the Business Objects. [JSON.net](https://github.com/JamesNK/Newtonsoft.Json) attributes are used to model obligatory and optional fields of the single business objects and components.
+BO4E-dotnet is a C# implementation of **B**usiness **O**bjects for **E**nergy ([BO4E](https://www.bo4e.de/)), a standard used to model business objects in the German energy market. This repository contains class definitions and enumerations for most of the Business Objects, however as of today it's not complete yet and pull requests are very welcome. [JSON.net](https://github.com/JamesNK/Newtonsoft.Json) attributes are used to model obligatory and optional fields of the single business objects and components.
 
-The source code in this repository is Open Source and avaiable under a MIT license; see [the license file](LICENSE).
+The source code in this repository is Open Source and available under a MIT license; see [the license file](LICENSE).
 
 ## Nuget Packages and Usage of BO4E-dotnet
 The content of this repository is used to build the following nuget packages:
-- [Hochfrequenz.BO4Enet](https://www.nuget.org/packages/Hochfrequenz.BO4Enet) contains definitions of the business objects (namespace `BO4E.BO`), compontents (namespace `BO4E.COM`) and enumerations (namespace `BO4E.ENUM`). This package depends on JSON.net only.
-- [Hochfrequenz.BO4E.Extensions](https://www.nuget.org/packages/Hochfrequenz.BO4E.Extensions/) contains extension methods for business objects and components (currently Energiemenge and COM Verbrauch, which are heavily used by Hochfrequenz cloud solutions).
+- [Hochfrequenz.BO4Enet](https://www.nuget.org/packages/Hochfrequenz.BO4Enet) contains definitions of the business objects (namespace `BO4E.BO`), compontents (namespace `BO4E.COM`) and enumerations (namespace `BO4E.ENUM`).
+- [Hochfrequenz.BO4E.Extensions](https://www.nuget.org/packages/Hochfrequenz.BO4E.Extensions/) contains extension methods for business objects and components (as of now mostly `BO.Energiemenge` and `COM.Verbrauch`, which are heavily used by Hochfrequenz cloud solutions).
 - [Hochfrequenz.BO4E.Reporting](https://www.nuget.org/packages/Hochfrequenz.BO4E.Extensions/) contains tools to analyse single business objects and sets of objects.
 - [Hochfrequenz.BO4E.Extensions.Encryption](https://www.nuget.org/packages/Hochfrequenz.BO4E.Extensions.Encryption/) provides code to encrypt and anonymize Business Objects and compontents using [libsodium](https://libsodium.org)/[`Sodium`](https://github.com/tabrath/libsodium-core/) and [Bouncy Castle](https://bouncycastle.org/csharp/)/`Org.BouncyCastle` APIs.
 
