@@ -1,0 +1,195 @@
+﻿<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<html>
+  
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>BO4E-dotnet </title>
+    <meta name="viewport" content="width=device-width">
+    <meta name="title" content="BO4E-dotnet ">
+    <meta name="generator" content="docfx 2.50.0.0">
+    
+    <link rel="shortcut icon" href="favicon.ico">
+    <link rel="stylesheet" href="styles/docfx.vendor.css">
+    <link rel="stylesheet" href="styles/docfx.css">
+    <link rel="stylesheet" href="styles/main.css">
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
+    <meta property="docfx:navrel" content="">
+    <meta property="docfx:tocrel" content="">
+    
+    
+    
+  </head>  <body data-spy="scroll" data-target="#affix" data-offset="120">
+    <div id="wrapper">
+      <header>
+        
+        <nav id="autocollapse" class="navbar navbar-inverse ng-scope" role="navigation">
+          <div class="container">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+              
+              <a class="navbar-brand" href="index.html">
+                <img id="logo" class="svg" src="logo.svg" alt="">
+              </a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar">
+              <form class="navbar-form navbar-right" role="search" id="search">
+                <div class="form-group">
+                  <input type="text" class="form-control" id="search-query" placeholder="Search" autocomplete="off">
+                </div>
+              </form>
+            </div>
+          </div>
+        </nav>
+        
+        <div class="subnav navbar navbar-default">
+          <div class="container hide-when-search" id="breadcrumb">
+            <ul class="breadcrumb">
+              <li></li>
+            </ul>
+          </div>
+        </div>
+      </header>
+      <div role="main" class="container body-content hide-when-search">
+        <div class="article row grid">
+          <div class="col-md-10">
+            <article class="content wrap" id="_content" data-uid="">
+<h1 id="bo4e-dotnet">BO4E-dotnet</h1>
+
+<p>BO4E-dotnet is a C# implementation of <strong>B</strong>usiness <strong>O</strong>bjects for <strong>E</strong>nergy (<a href="https://www.bo4e.de/">BO4E</a>), a standard used to model business objects in the German energy market. This repository contains class definitions and enumerations for most of the Business Objects, however as of today it's not complete yet and pull requests are very welcome. <a href="https://github.com/JamesNK/Newtonsoft.Json">JSON.net</a> attributes are used to model obligatory and optional fields of the single business objects and components.</p>
+<p>The source code in this repository is Open Source and available under a MIT license; see <a href="LICENSE">the license file</a>.</p>
+<h2 id="nuget-packages-and-usage-of-bo4e-dotnet">Nuget Packages and Usage of BO4E-dotnet</h2>
+<p>The content of this repository is used to build the following nuget packages:</p>
+<ul>
+<li><a href="https://www.nuget.org/packages/Hochfrequenz.BO4Enet">Hochfrequenz.BO4Enet</a> contains definitions of the business objects (namespace <code>BO4E.BO</code>), compontents (namespace <code>BO4E.COM</code>) and enumerations (namespace <code>BO4E.ENUM</code>).</li>
+<li><a href="https://www.nuget.org/packages/Hochfrequenz.BO4E.Extensions/">Hochfrequenz.BO4E.Extensions</a> contains extension methods for business objects and components (as of now mostly <code>BO.Energiemenge</code> and <code>COM.Verbrauch</code>, which are heavily used by Hochfrequenz cloud solutions).</li>
+<li><a href="https://www.nuget.org/packages/Hochfrequenz.BO4E.Extensions/">Hochfrequenz.BO4E.Reporting</a> contains tools to analyse single business objects and sets of objects.</li>
+<li><a href="https://www.nuget.org/packages/Hochfrequenz.BO4E.Extensions.Encryption/">Hochfrequenz.BO4E.Extensions.Encryption</a> provides code to encrypt and anonymize Business Objects and compontents using <a href="https://libsodium.org">libsodium</a>/<a href="https://github.com/tabrath/libsodium-core/"><code>Sodium</code></a> and <a href="https://bouncycastle.org/csharp/">Bouncy Castle</a>/<code>Org.BouncyCastle</code> APIs.</li>
+</ul>
+<h2 id="detailed-documentation">Detailed Documentation</h2>
+<p>The docstrings from within the source code are used to automatically generate a <a href="https://hochfrequenz.github.io/bo4e-livedocs/api/BO4E.BO.html">doc.fx based documentation</a>. Please also consider the <a href="https://www.bo4e.de/dokumentation">official documentation</a> maintained by Interessengemeinschaft Geschäftsobjekte Energiewirtschaft e.V. from which most of the source code docstrings are copied/derived.</p>
+<h2 id="getting-started--basic-examples">Getting Started / Basic Examples</h2>
+<ol>
+<li>install the nuget package <a href="https://www.nuget.org/packages/Hochfrequenz.BO4Enet">Hochfrequenz.BO4Enet</a></li>
+<li>import it</li>
+</ol>
+<pre><code class="lang-c#">using BO4E;
+</code></pre>
+<ol start="3">
+<li>start developing applications based on Business Objects for Energy (BO4E)</li>
+</ol>
+<h3 id="create-businessobjects">Create BusinessObjects</h3>
+<pre><code class="lang-c#">using BO4E.BO;
+using BO4E.ENUM;
+// ...
+var energiemenge = new Energiemenge()
+{
+    lokationsId = &quot;DE0123456789012345678901234567890&quot;,
+    lokationsTyp = LokationsTyp.MeLo,
+    energieverbrauch = new List&lt;Verbrauch&gt;()
+};
+</code></pre>
+<h3 id="make-use-of-built-in-validation-methods">Make use of built in validation methods</h3>
+<p>full source</p>
+<pre><code class="lang-c#">using BO4E.BO;
+using BO4E.ENUM;
+// ...
+var malo = new Marktlokation()
+{
+    marktlokationsId = &quot;1235678901&quot;,
+    sparte = Sparte.STROM,
+    energierichtung = Energierichtung.AUSSP
+};
+Assert.IsFalse(malo.IsValid()); // because the obligatory bilanzierungsmethode is not set
+malo.bilanzierungsmethode = Bilanzierungsmethode.SLP;
+Assert.IsTrue(malo.IsValid(checkId:false)); // because all obligatory fields are set
+Assert.IsFalse(malo.IsValid()); // but the marklokationsId is still wrong
+malo.marktlokationsId = &quot;51238696781&quot;; // matches the appropriate regex and has the right check sum
+Assert.IsTrue(malo.IsValid());
+</code></pre>
+<h3 id="add-custom-fields-via-userproperties">Add custom fields via userProperties</h3>
+<pre><code class="lang-c#">using BO4E.BO;
+using Newtonsoft.Json;
+// ...
+string meloJson = @&quot;{'messlokationsId': 'DE0123456789012345678901234567890', 'sparte': 'STROM', 'myCustomInfo': 'some_value_not_covered_by_bo4e', 'myCustomValue': 123.456}&quot;;
+var melo = JsonConvert.DeserializeObject&lt;Messlokation&gt;(meloJson);
+Assert.IsTrue(melo.IsValid());
+Assert.IsNotNull(melo.userProperties);
+Assert.AreEqual(&quot;some_value_not_covered_by_bo4e&quot;, melo.userProperties[&quot;myCustomInfo&quot;].ToObject&lt;string&gt;());
+Assert.AreEqual(123.456M, melo.userProperties[&quot;myCustomValue&quot;].ToObject&lt;decimal&gt;());
+</code></pre>
+<h3 id="dont-write-your-own-logic-for-basic-operations">Don't write your own logic for basic operations</h3>
+<pre><code class="lang-c#">using BO4E.COM;
+using BO4E.ENUM;
+// ...
+var v1 = new Verbrauch()
+{
+    einheit = Mengeneinheit.KWH,
+    obiskennzahl = &quot;1-1:1.8.0&quot;,
+    startdatum = new DateTime(2019, 1, 1, 0, 0, 0, DateTimeKind.Utc),
+    enddatum = new DateTime(2020, 1, 1, 0, 0, 0, DateTimeKind.Utc)
+};
+var v2 = new Verbrauch()
+{
+    einheit = Mengeneinheit.KWH,
+    obiskennzahl = &quot;1-1:1.8.0&quot;,
+    startdatum = new DateTime(2019, 1, 1, 0, 0, 0, DateTimeKind.Utc),
+    enddatum = new DateTime(2020, 1, 1, 0, 0, 0, DateTimeKind.Utc)
+};
+
+Assert.AreEqual(v1, v2);
+Assert.IsTrue(v1.Equals(v2));
+Assert.AreEqual(v1.GetHashCode(), v2.GetHashCode());
+Assert.IsFalse(v1 == v2);
+</code></pre>
+<h2 id="protocol-buffer-defintions">Protocol-Buffer defintions</h2>
+<p>In the folder <a href="/protobuf-files">protobuf-files</a> you can find autogenerated <code>.proto</code> files for all implemented Business Objects (except for those with multiple inheritance like e.g. <code>BO.Marktteilnehmer</code> or those derived from <code>BO.Preisblatt</code> which still causes headache using <a href="https://github.com/protobuf-net/protobuf-net">protobuf-net</a>).</p>
+<h2 id="contributing">Contributing</h2>
+<p>Contributions are welcome. Feel free to open a Pull Request against the develop branch of this repository. Please provide unit tests if you contribute logic beyond bare bare business object definitions.</p>
+<h2 id="hochfrequenz">Hochfrequenz</h2>
+<p><a href="https://www.hochfrequenz.de">Hochfrequenz Unternehmensberatung GmbH</a> is a Mannheim based consulting company with offices in Berlin and Bremen. Based on <a href="https://www.kununu.com/de/hochfrequenz-unternehmensberatung1">Kununu ratings</a> Hochfrequenz is among the most attractive employers within the German energy market. Applications of talented developers are welcome at any time! Please consider visiting our <a href="https://www.hochfrequenz.de/index.php/karriere/aktuelle-stellenausschreibungen/full-stack-entwickler">career page</a> (German only) and our <a href="https://stackoverflow.com/jobs/companies/hochfrequenz-unternehmensberatung-gmbh">Stack Overflow profile</a> that also contains job openings.</p>
+</article>
+          </div>
+          
+          <div class="hidden-sm col-md-2" role="complementary">
+            <div class="sideaffix">
+              <div class="contribution">
+                <ul class="nav">
+                  <li>
+                    <a href="https://github.com/Hochfrequenz/BO4E-dotnet/blob/97ceed515441e9ac061cee8fdca227bcc9e290bb/README.md/#L1" class="contribution-link">Improve this Doc</a>
+                  </li>
+                </ul>
+              </div>
+              <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
+              <!-- <p><a class="back-to-top" href="#top">Back to top</a><p> -->
+              </nav>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <footer>
+        <div class="grad-bottom"></div>
+        <div class="footer">
+          <div class="container">
+            <span class="pull-right">
+              <a href="#top">Back to top</a>
+            </span>
+            
+            <span>Generated by <strong>DocFX</strong></span>
+          </div>
+        </div>
+      </footer>
+    </div>
+    
+    <script type="text/javascript" src="styles/docfx.vendor.js"></script>
+    <script type="text/javascript" src="styles/docfx.js"></script>
+    <script type="text/javascript" src="styles/main.js"></script>
+  </body>
+</html>
