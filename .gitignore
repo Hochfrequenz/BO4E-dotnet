@@ -29,8 +29,6 @@ BO4E-dotnet/bin/
 
 *.CopyComplete
 
-live/
-
 TestBO4E-dotnet-Extensions/obj/
 TestBO4E-dotnet-Encryption/obj/
 TestBO4E-dotnet-Reporting/obj/
