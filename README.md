@@ -12,7 +12,7 @@ The content of this repository is used to build the following nuget packages:
 
 
 ## Detailed Documentation
-The docstrings from within the source code are used to automatically generate a [doc.fx based documentation](https://hfinnovation.github.io/bo4e-livedocs/api/BO4E.html). Please also consider the [official documentation](https://www.bo4e.de/dokumentation) maintained by Interessengemeinschaft Geschäftsobjekte Energiewirtschaft e.V. from which most of the source code docstrings are copied/derived.
+The docstrings from within the source code are used to automatically generate a [doc.fx based documentation](https://hochfrequenz.github.io/bo4e-livedocs/api/BO4E.BO.html). Please also consider the [official documentation](https://www.bo4e.de/dokumentation) maintained by Interessengemeinschaft Geschäftsobjekte Energiewirtschaft e.V. from which most of the source code docstrings are copied/derived.
 
 ## Getting Started / Basic Examples
 1. install the nuget package [Hochfrequenz.BO4Enet](https://www.nuget.org/packages/Hochfrequenz.BO4Enet)
