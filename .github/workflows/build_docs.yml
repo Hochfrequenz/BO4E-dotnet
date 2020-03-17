@@ -57,16 +57,16 @@ jobs:
       run: |
         curl -L https://github.com/dotnet/docfx/releases/latest/download/docfx.zip -o docfx.zip
         unzip -d .docfx docfx.zip
-
+    
     # Build
     - name: Build docs
       run:  mono .docfx/docfx.exe
     - name: Commit and push
       run: |
-        cd live
+        cd docs/live
         git config --global user.email "konstantin.klein@hochfrequenz.de"
         git config --global user.name "Automatic DocFX Build"
         git add .
-        git commit -m "Automated update"
+        git commit -m "Automated update from Github Action"
         header=$(echo -n "ad-m:${{ secrets.DOC_MGMT_TOKEN }}" | base64)
         git -c http.extraheader="AUTHORIZATION: basic $header" push origin HEAD:master
