@@ -20,13 +20,13 @@ namespace BO4E.BO
         /// <summary>
         /// base64 encoded unique nonce / initialisation vector
         /// </summary>
-        [JsonProperty(Required = Required.Always, Order = 0)]
+        [JsonProperty(Required = Required.Always, Order = 8)]
         public string nonce;
 
         /// <summary>
         /// associated data string (UTF-8); might be an empty string but not null
         /// </summary>
-        [JsonProperty(Required = Required.Always, Order = 1)]
+        [JsonProperty(Required = Required.Always, Order = 5)]
         public string associatedData;
     }
 }

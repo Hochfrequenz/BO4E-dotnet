@@ -1,6 +1,8 @@
 using System;
 using BO4E.ENUM;
+using BO4E.meta;
 using Newtonsoft.Json;
+using ProtoBuf;
 
 namespace BO4E.COM
 {
@@ -9,18 +11,23 @@ namespace BO4E.COM
     /// Jedoch enthält sie weniger Daten und v.a. in einem flachen Format, das mit den beschränkten SAP
     /// Bordmitteln leichter als Entitätstyp für die Verarbeitung in einer OData-Schnittstelle abgebildet werden kann.
     /// </summary>
+    [ProtoContract]
+    [NonOfficial(NonOfficialCategory.CUSTOMER_REQUIREMENTS)]
     public class RechnungspositionFlat : COM
     {
         /// <inheritdoc cref="Rechnungsposition.positionsnummer"/>
         [JsonProperty(Required = Required.Always)]
+        [ProtoMember(3)]
         public int positionsnummer;
 
         /// <inheritdoc cref="Rechnungsposition.lieferungVon"/>
         [JsonProperty(Required = Required.Always)]
+        [ProtoMember(4)]
         public DateTime lieferungVon;
 
         /// <inheritdoc cref="Rechnungsposition.lieferungBis"/>
         [JsonProperty(Required = Required.Always)]
+        [ProtoMember(5)]
         public DateTime lieferungBis;
 
         /// <summary>
@@ -28,38 +35,45 @@ namespace BO4E.COM
         /// <seealso cref="Rechnungsposition.positionstext"/>
         /// </summary>
         [JsonProperty(Required = Required.Always)]
+        [ProtoMember(6)]
         public string positionstext;
 
         /// <inheritdoc cref="Rechnungsposition.lokationsId"/>>
         [JsonProperty(Required = Required.Always)]
+        [ProtoMember(7)]
         public string lokationsId;
 
         /// <inheritdoc cref="Rechnungsposition.vertragskontoId"/>>
         [JsonProperty(Required = Required.Always)]
+        [ProtoMember(8)]
         public string vertragskontoId;
 
         /// <summary>
         /// <see cref="Rechnungsposition.einzelpreis"/> and <see cref="Preis.wert"/>
         /// </summary>
         [JsonProperty(Required = Required.Always)]
+        [ProtoMember(9)]
         public decimal preisWert;
 
         /// <summary>
         /// <see cref="Rechnungsposition.einzelpreis"/> and <see cref="Preis.einheit"/>
         /// </summary>
         [JsonProperty(Required = Required.Always)]
+        [ProtoMember(10)]
         public Waehrungseinheit preisEinheit;
 
         /// <summary>
         /// <see cref="Rechnungsposition.einzelpreis"/> and <see cref="Preis.bezugswert"/>
         /// </summary>
         [JsonProperty(Required = Required.Always)]
+        [ProtoMember(11)]
         public Mengeneinheit preisBezugswert;
 
         /// <summary>
         /// <see cref="Rechnungsposition.einzelpreis"/> and <see cref="Preis.status"/>
         /// </summary>
         [JsonProperty(Required = Required.Default)]
+        [ProtoMember(12)]
         public Preisstatus? preisStatus;
 
         /// <summary>
@@ -67,6 +81,7 @@ namespace BO4E.COM
         /// <see cref="Rechnungsposition.positionsMenge"/> and <see cref="Menge.wert"/>
         /// </summary>
         [JsonProperty(Required = Required.Always)]
+        [ProtoMember(13)]
         public decimal? positionsMengeWert;
 
 
@@ -75,10 +90,12 @@ namespace BO4E.COM
         /// <see cref="Rechnungsposition.positionsMenge"/> and <see cref="Menge.einheit"/>
         /// </summary>
         [JsonProperty(Required = Required.Always)]
+        [ProtoMember(14)]
         public Mengeneinheit? positionsMengeEinheit;
 
         /// <inheritdoc cref="Rechnungsposition.vertragsId"/>
         [JsonProperty(Required = Required.Default)]
+        [ProtoMember(15)]
         public string vertragsId;
 
         /// <summary>
@@ -86,6 +103,7 @@ namespace BO4E.COM
         /// (Ergänzung von Hochfrequenz Unternehmensberatung GmbH)
         /// </summary>
         [JsonProperty(Required = Required.Default)]
+        [ProtoMember(16)]
         public RechnungspositionsStatus? status;
 
         /// <summary>

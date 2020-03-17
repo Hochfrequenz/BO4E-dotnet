@@ -23,13 +23,13 @@ namespace BO4E.BO
         /// <summary>
         /// Base64 encoded unique nonce / initialisation vector (IV)
         /// </summary>
-        [JsonProperty(Required = Required.Always, Order = 0)]
+        [JsonProperty(Required = Required.Always, Order = 8)]
         public string nonce;
 
         /// <summary>
         /// base64 encoded public key of the message sender
         /// </summary>
-        [JsonProperty(Required = Required.Always, Order = 1)]
+        [JsonProperty(Required = Required.Always, Order = 5)]
         public string publicKey;
     }
 }

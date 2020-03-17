@@ -39,8 +39,8 @@
       {
         "messlokationsId": "DE46381937837",
         "arithmetik": "ADDITION",
-        "gueltigSeit": "2010-01-01",
-        "gueltigBis": "2099-12-31"
+        "gueltigSeit": "2010-01-01T00:00:00Z",
+        "gueltigBis": "2099-12-31T00:00:00Z"
       }
     ]
   },

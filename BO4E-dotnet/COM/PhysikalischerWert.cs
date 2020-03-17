@@ -1,21 +1,27 @@
 ﻿using System;
 using BO4E.ENUM;
+using BO4E.meta;
+using ProtoBuf;
 
 namespace BO4E.COM
 {
     /// <summary>
     /// Kombination aus einem Wert und einer Einheit (see <see cref="Mengeneinheit"/>).
     /// </summary>
+    [ProtoContract]
+    [NonOfficial(NonOfficialCategory.UNSPECIFIED)]
     public class PhysikalischerWert : COM
     {
         /// <summary>
         /// numerischer Wert
         /// </summary>
+        [ProtoMember(3)]
         public readonly decimal wert;
 
         /// <summary>
         /// Einheit von <see cref="wert"/>
         /// </summary>
+        [ProtoMember(4)]
         public readonly Mengeneinheit einheit;
 
         /// <summary>

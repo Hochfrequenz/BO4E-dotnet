@@ -3,27 +3,36 @@ using System.Runtime.Serialization;
 using BO4E.ENUM;
 using BO4E.meta;
 using Newtonsoft.Json;
+using ProtoBuf;
 
 namespace BO4E.COM
 {
     /// <summary>Diese Komponente wird zur Abbildung von Zeiträumen in Form von Dauern oder der Angabe von Start und Ende verwendet.</summary>
+    [ProtoContract]
     public class Zeitraum : COM
     {
         /// <summary>Die Einheit in der die Dauer angeben ist. Z.B. Monate. <seealso cref="Zeiteinheit" /></summary>
         [JsonProperty(Required = Required.Default)]
         [FieldName("unit", Language.EN)]
+        [ProtoMember(3)]
         public Zeiteinheit? einheit;
+
         /// <summary>Gibt die Anzahl der Zeiteinheiten an, z.B. 3 (Monate).</summary>
         [JsonProperty(Required = Required.Default)]
         [FieldName("duration", Language.EN)]
+        [ProtoMember(4)]
         public decimal? dauer;
+
         /// <summary>Gibt Tag und Uhrzeit (falls vorhanden) an, wann der Zeitraum startet.</summary>
         [JsonProperty(Required = Required.Default)]
         [FieldName("startDate", Language.EN)]
+        [ProtoMember(5)]
         public DateTime? startdatum;
+
         /// <summary>Gibt Tag und Uhrzeit (falls vorhanden) an, wann der Zeitraum endet.</summary>
         [JsonProperty(Required = Required.Default)]
         [FieldName("endDate", Language.EN)]
+        [ProtoMember(6)]
         public DateTime? enddatum;
 
         /// <summary>
