@@ -4,18 +4,20 @@ using System.Runtime.Serialization;
 using BO4E.ENUM;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
-using StackExchange.Profiling;
+using ProtoBuf;
 
 namespace BO4E.COM
 {
     /// <summary>
     /// Abbildung eines zeitlich abgegrenzten Verbrauchs.
     /// </summary>
+    [ProtoContract]
     public class Verbrauch : COM
     {
         /// <summary>
         /// Central Europe Standard Time as hard coded default time. Public to be used elsewhere ;)
         /// </summary>
+        [ProtoIgnore]
         public static readonly TimeZoneInfo CENTRAL_EUROPE_STANDARD_TIME;
         static Verbrauch()
         {
@@ -35,20 +37,23 @@ namespace BO4E.COM
         /// <summary>
         /// Beginn des Zeitraumes, für den der Verbrauch angegeben wird.
         /// </summary>
-        [JsonProperty(Required = Required.Default, Order = -1)]
+        [JsonProperty(Required = Required.Default, Order = 7)]
+        [ProtoMember(3)]
         public DateTime startdatum;
 
         /// <summary>
         /// Ende des Zeitraumes, für den der Verbrauch angegeben wird.
         /// </summary>
-        [JsonProperty(Required = Required.Default, Order = 0)]
-        public DateTime enddatum;
+        [JsonProperty(Required = Required.Default, Order = 8)]
+        [ProtoMember(4)]
+        public DateTime enddatum; // ToDo: is DateTime? better suited?
 
         /// <summary>
         /// Gibt an, ob es sich um eine PROGNOSE oder eine MESSUNG handelt.
         /// </summary>
         /// <see cref="Wertermittlungsverfahren" />
-        [JsonProperty(Required = Required.Always, Order = 1)]
+        [JsonProperty(Required = Required.Always, Order = 5)]
+        [ProtoMember(5)]
         public Wertermittlungsverfahren wertermittlungsverfahren;
 
         /// <summary>
@@ -57,21 +62,30 @@ namespace BO4E.COM
         /// <example>
         /// 1-0:1.8.1
         /// </example>
-        [JsonProperty(Required = Required.Always, Order = 2)]
+        [JsonProperty(Required = Required.Always, Order = 6)]
+        [ProtoMember(6)]
         public string obiskennzahl;
 
         /// <summary>
         /// Gibt den absoluten Wert der Menge an.
         /// </summary>
-        [JsonProperty(Required = Required.Always, Order = 3)]
+        [JsonProperty(Required = Required.Always, Order = 7)]
+        [ProtoMember(7)]
         public decimal wert;
 
         /// <summary>
         /// Gibt die Einheit zum jeweiligen Wert an.
         /// </summary>
         /// <see cref="Mengeneinheit" />
-        [JsonProperty(Required = Required.Always, Order = 4)]
+        [JsonProperty(Required = Required.Always, Order = 8)]
+        [ProtoMember(8)]
         public Mengeneinheit einheit;
+
+        /// <summary>type</summary>
+        /// <example>arbeitleistungtagesparameterabhmalo | veranschlagtejahresmenge | TUMKundenwert</example>
+        [JsonProperty(Required = Required.Default)]
+        [ProtoMember(9)]
+        public Verbrauchsmengetyp? type;
 
         /// <param name="context"></param>
         [OnDeserialized]
@@ -93,6 +107,7 @@ namespace BO4E.COM
             return result;
         }
 
+        [ProtoIgnore]
         internal const string _SAP_PROFDECIMALS_KEY = "sap_profdecimals";
 
         /// <summary>

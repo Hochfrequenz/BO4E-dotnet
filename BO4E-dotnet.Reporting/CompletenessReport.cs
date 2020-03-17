@@ -19,39 +19,39 @@ namespace BO4E.Reporting
         /// all information like e.g. <see cref="coverage"/> is normalised to this reference time frame.
         /// Must only be null if an error occurred and <see cref="_errorMessage"/> is not null.
         /// </summary>
-        [JsonProperty(Required = Required.AllowNull, Order = -1)]
+        [JsonProperty(Required = Required.AllowNull, Order = 7)]
         public Zeitraum referenceTimeFrame;
 
         /// <summary>
         /// <see cref="Energiemenge.lokationsId"/>
         /// </summary>
         [DataCategory(DataCategory.POD)]
-        [JsonProperty(Required = Required.Always, Order = 0)]
+        [JsonProperty(Required = Required.Always, Order = 8)]
         public string lokationsId;
 
         /// <summary>
         /// <see cref="Verbrauch.obiskennzahl"/>
         /// </summary>
-        [JsonProperty(Required = Required.Default, Order = 1)]
+        [JsonProperty(Required = Required.Default, Order = 5)]
         public string obiskennzahl;
 
         /// <summary>
         /// <see cref="Verbrauch.einheit"/>
         /// </summary>
-        [JsonProperty(Required = Required.Default, Order = 2)]
+        [JsonProperty(Required = Required.Default, Order = 6)]
         public Mengeneinheit einheit;
 
         /// <summary>
         /// <see cref="Verbrauch.wertermittlungsverfahren"/>
         /// </summary>
-        [JsonProperty(Required = Required.Default, Order = 3)]
+        [JsonProperty(Required = Required.Default, Order = 7)]
         public Wertermittlungsverfahren wertermittlungsverfahren;
 
         /// <summary>
         /// ratio of time with data present compared to <see cref="referenceTimeFrame"/>.
         /// 1.0 means 100% coverage.
         /// </summary>
-        [JsonProperty(Required = Required.AllowNull, Order = 4)]
+        [JsonProperty(Required = Required.AllowNull, Order = 8)]
         public decimal? coverage;
 
         /// <summary>
@@ -158,25 +158,25 @@ namespace BO4E.Reporting
             /// <summary>
             /// reference time frame to be analysed
             /// </summary>
-            [JsonProperty(Required = Required.Always, Order = -1)]
+            [JsonProperty(Required = Required.Always, Order = 7)]
             public Zeitraum referenceTimeFrame;
 
             /// <summary>
             /// Wertermittlungsverfahren (<see cref="Verbrauch.wertermittlungsverfahren"/>) to be taken into account.
             /// </summary>
-            [JsonProperty(Required = Required.Default, Order = 0)]
+            [JsonProperty(Required = Required.Default, Order = 8)]
             public Wertermittlungsverfahren wertermittlungsverfahren;
 
             /// <summary>
             /// OBIS ID (<see cref="Verbrauch.obiskennzahl"/>) to be taken into account.
             /// </summary>
-            [JsonProperty(Required = Required.Default, Order = 1)]
+            [JsonProperty(Required = Required.Default, Order = 5)]
             public string obis;
 
             /// <summary>
             /// Unit (<see cref="Verbrauch.einheit"/>) to be taken into account.
             /// </summary>
-            [JsonProperty(Required = Required.Default, Order = 2)]
+            [JsonProperty(Required = Required.Default, Order = 6)]
             public Mengeneinheit einheit;
         }
         /*

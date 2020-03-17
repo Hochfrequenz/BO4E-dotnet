@@ -1,28 +1,37 @@
 ﻿using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
 using BO4E.COM;
 using BO4E.meta;
 using Newtonsoft.Json;
+using ProtoBuf;
 
 namespace BO4E.BO
 {
     /// <summary>
     /// Modellierung einer Region als Menge von Kriterien, die eine Region beschreiben.
     /// </summary>
+    [ProtoContract]
     public class Region : BusinessObject
     {
         /// <summary>
         ///  Bezeichnung der Region.
         /// </summary>
-        [JsonProperty(Required = Required.Always, Order = -1)]
+        [JsonProperty(Required = Required.Always, Order = 4)]
+        [ProtoMember(4)]
         [BoKey]
         public string bezeichnung;
 
         /// <summary>
-        /// Kriterien zur Definition der Region. Details siehe <see cref="Regionskriterium"/>
+        /// Positivliste der Kriterien zur Definition der Region.
         /// </summary>
-        [JsonProperty(Required = Required.Always, Order = 0)] // at least one entry
-        [MinLength(1)]
-        public List<Regionskriterium> regionkriterien;
+        [JsonProperty(Required = Required.Always, Order = 5)]
+        [ProtoMember(5)]
+        public List<Regionskriterium> positivListe;
+
+        /// <summary>
+        /// Negativliste der Kriterien zur Definition der Region. 
+        /// </summary>
+        [JsonProperty(Required = Required.Default, Order = 6)]
+        [ProtoMember(6)]
+        public List<Regionskriterium> negativListe;
     }
 }

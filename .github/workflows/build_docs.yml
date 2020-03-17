@@ -1,0 +1,72 @@
+name: Build Documentation
+
+on:
+ repository_dispatch:  # This is used to trigger the flow from Hochfrequenz/BO4E-dotnet via HTTP POST
+ push:
+    branches:
+      - master  # We don't want branches in doc to trigger builds
+      - develop # yes, we do
+
+jobs:
+  build:
+
+    runs-on: ubuntu-18.04
+
+    steps:
+    # Checkout all repos
+    - name: Checkout repo
+      uses: actions/checkout@v1
+      with:
+        path: docs
+        fetch-depth: 1
+    - name: Checkout live docs repo
+      uses: actions/checkout@v1
+      with:
+        repository: Hochfrequenz/bo4e-livedocs
+        ref: master
+        fetch-depth: 1
+        path: docs/live
+    - name: Clear live docs repo
+      run: rm -rf live/*
+    - name: Checkout BO4E-dotnet
+      uses: actions/checkout@v1
+      with:
+        repository: Hochfrequenz/BO4E-dotnet
+        ref: master
+        fetch-depth: 1
+        path: docs/BO4E-dotnet
+    - name: Checkout doxfx mathew theme
+      uses: actions/checkout@v1
+      with:
+        repository: MathewSachin/docfx-tmpl
+        ref: master
+        fetch-depth: 1
+        path: mathew
+    # Setup software
+    - name: Setup .NET Core
+      uses: actions/setup-dotnet@v1
+      with:
+        dotnet-version: 3.0.100
+    - name: Get mono
+      run: |
+        apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys 3FA7E0328081BFF6A14DA29AA6A19B38D3D831EF
+        echo "deb https://download.mono-project.com/repo/ubuntu stable-bionic main" | sudo tee /etc/apt/sources.list.d/mono-official-stable.list
+        sudo apt-get update
+        sudo apt-get install mono-complete --yes
+    - name: Get docfx
+      run: |
+        curl -L https://github.com/dotnet/docfx/releases/latest/download/docfx.zip -o docfx.zip
+        unzip -d .docfx docfx.zip
+
+    # Build
+    - name: Build docs
+      run:  mono .docfx/docfx.exe
+    - name: Commit and push
+      run: |
+        cd live
+        git config --global user.email "konstantin.klein@hochfrequenz.de"
+        git config --global user.name "Automatic DocFX Build"
+        git add .
+        git commit -m "Automated update"
+        header=$(echo -n "ad-m:${{ secrets.DOC_MGMT_TOKEN }}" | base64)
+        git -c http.extraheader="AUTHORIZATION: basic $header" push origin HEAD:master

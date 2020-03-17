@@ -1,3 +1,5 @@
+using System;
+
 namespace BO4E.ENUM
 {
     /// <summary>Auflistung möglicher abzurechnender Gerätetypen.</summary>
@@ -63,11 +65,36 @@ namespace BO4E.ENUM
         ELEKTRONISCHER_HAUSHALTSZAEHLER,
         /// <summary>Steuereinrichtung</summary>
         STEUEREINRICHTUNG,
-        /// <summary>technischeSteuereinrichtung</summary>
+        /// <summary>technische Steuereinrichtung</summary>
+        [Obsolete("Verwenden Sie die detailierte Steuereinrichtung",false)]
         TECHNISCHESTEUEREINRICHTUNG,
+        /// <summary>Tarifschaltgerät</summary>
+        TARIFSCHALTGERAET,
+        /// <summary>Rundsteuerempfänger</summary>
+        RUNDSTEUEREMPFAENGER,
+        /// <summary>optionale zusätzliche Zähleinrichtung</summary>
+        OPTIONALE_ZUS_ZAEHLEINRICHTUNG,
+        /// <summary>Messwandlersatz Strom iMS und mME, NSP</summary>
+        MESSWANDLERSATZ_IMS_MME,
+        /// <summary>Kombimesswandlersatz (Strom u. Spg) iMS und mME</summary>
+        KOMBIMESSWANDLER_IMS_MME,
+        /// <summary>   Tarifschaltung iMS und mME</summary>
+        TARIFSCHALTGERAET_IMS_MME,
+        /// <summary>Rundsteuerempfänger iMS und mME</summary>
+        RUNDSTEUEREMPFAENGER_IMS_MME,
+        /// <summary>Temperaturkompensation</summary>
+        TEMPERATUR_KOMPENSATION,
+        /// <summary>Höchsbelastungsanzeiger</summary>
+        HOECHSTBELASTUNGS_ANZEIGER,
+        /// <summary>Sonstiges Gerät</summary>
+        SONSTIGES_GERAET,
         /// <summary>Smartmetergateway</summary>
         SMARTMETERGATEWAY,
         /// <summary>Steuerbox</summary>
-        STEUERBOX
+        STEUERBOX,
+        /// <summary>BLOCKSTROMWANDLER</summary>
+        BLOCKSTROMWANDLER,
+        ///<summary>KOMBIMESSWANDLER</summary>
+        KOMBIMESSWANDLER
     }
 }

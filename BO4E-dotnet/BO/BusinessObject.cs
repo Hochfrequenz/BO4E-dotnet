@@ -10,6 +10,7 @@ using Newtonsoft.Json.Linq;
 using Newtonsoft.Json.Schema;
 using Newtonsoft.Json.Schema.Generation;
 using Newtonsoft.Json.Serialization;
+using ProtoBuf;
 
 namespace BO4E.BO
 {
@@ -20,6 +21,22 @@ namespace BO4E.BO
     /// attribute which are obligatory for all BO4E business objects.
     /// <author>Hochfrequenz Unternehmensberatung GmbH</author>
     [JsonConverter(typeof(BusinessObjectBaseConverter))]
+    //[ProtoContract] // If I add this I get an error message: "System.InvalidOperationException: Duplicate field-number detected; 1 on: BO4E.BO.BusinessObject"
+    [ProtoInclude(1, typeof(Angebot))]
+    [ProtoInclude(2, typeof(Ansprechpartner))]
+    [ProtoInclude(3, typeof(Benachrichtigung))]
+    [ProtoInclude(4, typeof(Energiemenge))]
+    [ProtoInclude(5, typeof(Geschaeftspartner))]
+    [ProtoInclude(6, typeof(Kosten))]
+    [ProtoInclude(7, typeof(Marktlokation))]
+    //[ProtoInclude(8, typeof(Marktteilnehmer))] // https://stackoverflow.com/a/13791539/10009545
+    [ProtoInclude(9, typeof(Messlokation))]
+    [ProtoInclude(10, typeof(Preisblatt))]
+    [ProtoInclude(11, typeof(Rechnung))]
+    [ProtoInclude(12, typeof(Region))]
+    [ProtoInclude(13, typeof(Vertrag))]
+    [ProtoInclude(14, typeof(Zaehler))]
+    [ProtoInclude(15, typeof(LogObject))]
     public abstract class BusinessObject : IEquatable<BusinessObject>
     {
         /// <summary>
@@ -29,8 +46,9 @@ namespace BO4E.BO
         /// 'MESSLOKATION',
         /// 'MARKTLOKATION'
         /// </example>
-        [JsonProperty(Required = Required.Default, Order = -2)]
-        private string boTyp;
+        [JsonProperty(Required = Required.Default, Order = 1)]
+        [ProtoMember(1)]
+        public string boTyp;
 
         /// <summary>
         /// Fields that are not part of the BO4E-definition are stored in a element, that is
@@ -62,20 +80,22 @@ namespace BO4E.BO
         /// the BO4E standard to be passed along.
         /// </example>
         [JsonIgnore]
+        [ProtoIgnore]
         public const string userPropertiesName = "userProperties";
 
         /// <summary>
         /// User properties (non bo4e standard)
         /// </summary>
-        [JsonProperty(PropertyName = userPropertiesName, Required = Required.Default, Order = 100)]
+        [JsonProperty(PropertyName = userPropertiesName, Required = Required.Default, Order = 200)]
         [JsonExtensionData]
+        [ProtoMember(200)]
         [DataCategory(DataCategory.USER_PROPERTIES)]
         public IDictionary<string, JToken> userProperties;
 
         /// <summary>
         /// generates the BO4E boTyp attribute value (class name as upper case)
         /// </summary>
-        public BusinessObject()
+        protected BusinessObject()
         {
             boTyp = this.GetType().Name.ToUpper();
             versionStruktur = 1;
@@ -101,13 +121,15 @@ namespace BO4E.BO
         /// <example>
         /// 1
         /// </example>
-        [JsonProperty(Required = Required.Default, Order = -3)]
+        [JsonProperty(Required = Required.Default, Order = 2)]
+        [ProtoMember(2)]
         public int versionStruktur;
 
         /// <summary>
         /// allows adding a GUID to Business Objects for tracking across systems
         /// </summary>
         [JsonProperty(NullValueHandling = NullValueHandling.Ignore, Required = Required.Default)]
+        [ProtoMember(3)]
         public string guid;
 
         /// <summary>
@@ -118,7 +140,6 @@ namespace BO4E.BO
         {
             return GetJsonScheme(this.GetType());
         }
-
 
         /// <summary>
         /// returns a JSON scheme for the given type <paramref name="boType"/>

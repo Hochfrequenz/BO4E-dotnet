@@ -1,0 +1,673 @@
+﻿syntax = "proto2";
+import "protobuf-net/bcl.proto"; // schema for protobuf-net's handling of core .NET types
+
+enum AbgabeArt {
+   KAS = 0;
+   SA = 1;
+   SAS = 2;
+   TA = 3;
+   TAS = 4;
+   TK = 5;
+   TKS = 6;
+   TS = 7;
+   TSS = 8;
+}
+message Adresse {
+   optional string postleitzahl = 3;
+   optional string ort = 4;
+   optional string strasse = 5;
+   optional string hausnummer = 6;
+   optional string postfach = 7;
+   optional string adresszusatz = 8;
+   optional string coErgaenzung = 9;
+   optional Landescode landescode = 10;
+}
+enum Anrede {
+   HERR = 0;
+   FRAU = 1;
+   EHELEUTE = 2;
+   FIRMA = 3;
+   INDIVIDUELL = 4;
+   DR = 5;
+}
+enum Bilanzierungsmethode {
+   RLM = 0;
+   SLP = 1;
+   TLP_GEMEINSAM = 2;
+   TLP_GETRENNT = 3;
+   PAUSCHAL = 4;
+   IMS = 5;
+}
+message Dienstleistung {
+   optional Dienstleistungstyp dienstleistungstyp = 3 [default = DATENBEREITSTELLUNG_TAEGLICH];
+   optional string bezeichnung = 4;
+}
+enum Dienstleistungstyp {
+   DATENBEREITSTELLUNG_TAEGLICH = 0;
+   DATENBEREITSTELLUNG_WOECHENTLICH = 1;
+   DATENBEREITSTELLUNG_MONATLICH = 2;
+   DATENBEREITSTELLUNG_JAEHRLICH = 3;
+   DATENBEREITSTELLUNG_HISTORISCHE_LG = 4;
+   DATENBEREITSTELLUNG_STUENDLICH = 5;
+   DATENBEREITSTELLUNG_VIERTELJAEHRLICH = 6;
+   DATENBEREITSTELLUNG_HALBJAEHRLICH = 7;
+   DATENBEREITSTELLUNG_MONATLICH_ZUSAETZLICH = 8;
+   DATENBEREITSTELLUNG_EINMALIG = 9;
+   AUSLESUNG_2X_TAEGLICH_FERNAUSLESUNG = 10;
+   AUSLESUNG_TAEGLICH_FERNAUSLESUNG = 11;
+   AUSLESUNG_LGK_MANUELL_MSB = 12;
+   AUSLESUNG_MONATLICH_SLP_FERNAUSLESUNG = 13;
+   AUSLESUNG_JAEHRLICH_SLP_FERNAUSLESUNG = 14;
+   AUSLESUNG_MDE_SLP = 15;
+   ABLESUNG_MONATLICH_SLP = 16;
+   ABLESUNG_VIERTELJAEHRLICH_SLP = 17;
+   ABLESUNG_HALBJAEHRLICH_SLP = 18;
+   ABLESUNG_JAEHRLICH_SLP = 19;
+   AUSLESUNG_SLP_FERNAUSLESUNG = 20;
+   ABLESUNG_SLP_ZUSAETZLICH_MSB = 21;
+   ABLESUNG_SLP_ZUSAETZLICH_KUNDE = 22;
+   AUSLESUNG_LGK_FERNAUSLESUNG_ZUSAETZLICH_MSB = 23;
+   AUSLESUNG_MOATLICH_FERNAUSLESUNG = 24;
+   AUSLESUNG_STUENDLICH_FERNAUSLESUNG = 25;
+   ABLESUNG_MONATLICH_LGK = 26;
+   AUSLESUNG_TEMERATURMENGENUMWERTER = 27;
+   AUSLESUNG_ZUSTANDSMENGENUMWERTER = 28;
+   AUSLESUNG_SYSTEMMENGENUMWERTER = 29;
+   AUSLESUNG_VORGANG_SLP = 30;
+   AUSLESUUNG_KOMPAKTMENGENUMWERTER = 31;
+   AUSLESUNG_MDE_LGK = 32;
+   SPERRUNG_SLP = 33;
+   ENTSPERRUNG_SLP = 34;
+   SPERRUNG_RLM = 35;
+   ENTSPERRUNG_RLM = 36;
+   MAHNKOSTEN = 37;
+   INKASSOKOSTEN = 38;
+}
+enum Energierichtung {
+   AUSSP = 0;
+   EINSP = 1;
+}
+enum Fernschaltung {
+   VORHANDEN = 0;
+   NICHT_VORHANDEN = 1;
+}
+enum Gasqualitaet {
+   option allow_alias = true;
+   H_GAS = 1;
+   HGAS = 1;
+   L_GAS = 2;
+   LGAS = 2;
+}
+message Geokoordinaten {
+   optional .bcl.Decimal breitengrad = 3 [default = 0];
+   optional .bcl.Decimal laengengrad = 4 [default = 0];
+}
+message Geraeteeigenschaften {
+   optional Geraetetyp geraetetyp = 3 [default = WECHSELSTROMZAEHLER];
+   optional Geraetemerkmal geraetemerkmal = 4;
+   map<string,string> parameter = 1005;
+}
+enum Geraetemerkmal {
+   EINTARIF = 0;
+   ZWEITARIF = 1;
+   MEHRTARIF = 2;
+   GAS_G2_5 = 3;
+   GAS_G4 = 4;
+   GAS_G6 = 5;
+   GAS_G10 = 6;
+   GAS_G16 = 7;
+   GAS_G25 = 8;
+   GAS_G40 = 9;
+   GAS_G65 = 10;
+   GAS_G100 = 11;
+   GAS_G160 = 12;
+   GAS_G250 = 13;
+   GAS_G400 = 14;
+   GAS_G650 = 15;
+   GAS_G1000 = 16;
+   GAS_G1600 = 17;
+   GAS_G2500 = 18;
+   IMPULSGEBER_G4_G100 = 19;
+   IMPULSGEBER_G100 = 20;
+   MODEM_GSM = 21;
+   MODEM_GPRS = 22;
+   MODEM_FUNK = 23;
+   MODEM_GSM_O_LG = 24;
+   MODEM_GSM_M_LG = 25;
+   MODEM_FESTNETZ = 26;
+   MODEM_GPRS_M_LG = 27;
+   PLC_COM = 28;
+   ETHERNET_KOM = 29;
+   DSL_KOM = 30;
+   LTE_KOM = 31;
+   RUNDSTEUEREMPFAENGER = 32;
+   TARIFSCHALTGERAET = 33;
+   ZUSTANDS_MU = 34;
+   TEMPERATUR_MU = 35;
+   KOMPAKT_MU = 36;
+   SYSTEM_MU = 37;
+}
+enum Geraetetyp {
+   WECHSELSTROMZAEHLER = 0;
+   DREHSTROMZAEHLER = 1;
+   ZWEIRICHTUNGSZAEHLER = 2;
+   RLM_ZAEHLER = 3;
+   IMS_ZAEHLER = 4;
+   BALGENGASZAEHLER = 5;
+   MAXIMUMZAEHLER = 6;
+   MULTIPLEXANLAGE = 7;
+   PAUSCHALANLAGE = 8;
+   VERSTAERKERANLAGE = 9;
+   SUMMATIONSGERAET = 10;
+   IMPULSGEBER = 11;
+   EDL_21_ZAEHLERAUFSATZ = 12;
+   VIER_QUADRANTEN_LASTGANGZAEHLER = 13;
+   MENGENUMWERTER = 14;
+   STROMWANDLER = 15;
+   SPANNUNGSWANDLER = 16;
+   DATENLOGGER = 17;
+   KOMMUNIKATIONSANSCHLUSS = 18;
+   MODEM = 19;
+   TELEKOMMUNIKATIONSEINRICHTUNG = 20;
+   DREHKOLBENGASZAEHLER = 21;
+   TURBINENRADGASZAEHLER = 22;
+   ULTRASCHALLZAEHLER = 23;
+   WIRBELGASZAEHLER = 24;
+   MODERNE_MESSEINRICHTUNG = 25;
+   ELEKTRONISCHER_HAUSHALTSZAEHLER = 26;
+   STEUEREINRICHTUNG = 27;
+   TECHNISCHESTEUEREINRICHTUNG = 28;
+   TARIFSCHALTGERAET = 29;
+   RUNDSTEUEREMPFAENGER = 30;
+   OPTIONALE_ZUS_ZAEHLEINRICHTUNG = 31;
+   MESSWANDLERSATZ_IMS_MME = 32;
+   KOMBIMESSWANDLER_IMS_MME = 33;
+   TARIFSCHALTGERAET_IMS_MME = 34;
+   RUNDSTEUEREMPFAENGER_IMS_MME = 35;
+   TEMPERATUR_KOMPENSATION = 36;
+   HOECHSTBELASTUNGS_ANZEIGER = 37;
+   SONSTIGES_GERAET = 38;
+   SMARTMETERGATEWAY = 39;
+   STEUERBOX = 40;
+   BLOCKSTROMWANDLER = 41;
+   KOMBIMESSWANDLER = 42;
+}
+message Geschaeftspartner {
+   optional Anrede anrede = 4;
+   optional string name1 = 6;
+   optional string name2 = 7;
+   optional string name3 = 8;
+   optional bool gewerbekennzeichnung = 9 [default = false];
+   optional string hrnummer = 10;
+   optional string amtsgericht = 11;
+   repeated Kontaktart kontaktweg = 12;
+   optional string umsatzsteuerId = 13;
+   optional string glaeubigerId = 14;
+   optional string eMailAdresse = 15;
+   optional string website = 16;
+   repeated Geschaeftspartnerrolle geschaeftspartnerrolle = 17;
+   optional Adresse partneradresse = 18;
+   optional string title = 1001;
+}
+enum Geschaeftspartnerrolle {
+   LIEFERANT = 0;
+   DIENSTLEISTER = 1;
+   KUNDE = 2;
+   INTERESSENT = 3;
+   MARKTPARTNER = 4;
+}
+message Hardware {
+   optional Geraetetyp geraetetyp = 3 [default = WECHSELSTROMZAEHLER];
+   optional string bezeichnung = 4;
+   optional Geraeteeigenschaften geraeteeigenschaften = 1005;
+   optional string geraetenummer = 1006;
+   optional string geraetereferenz = 1007;
+}
+message Katasteradresse {
+   optional string gemarkung_flur = 3;
+   optional string flurstueck = 4;
+}
+enum Kontaktart {
+   ANSCHREIBEN = 0;
+   TELEFONAT = 1;
+   FAX = 2;
+   E_MAIL = 3;
+   SMS = 4;
+}
+message Konzessionsabgabe {
+   optional AbgabeArt satz = 3 [default = KAS];
+   optional .bcl.Decimal kosten = 4 [default = 0];
+   optional string kategorie = 5;
+}
+enum Landescode {
+   AC = 0;
+   AD = 1;
+   AE = 2;
+   AF = 3;
+   AG = 4;
+   AI = 5;
+   AL = 6;
+   AM = 7;
+   AN = 8;
+   AO = 9;
+   AQ = 10;
+   AR = 11;
+   AS = 12;
+   AT = 13;
+   AU = 14;
+   AW = 15;
+   AX = 16;
+   AZ = 17;
+   BA = 18;
+   BB = 19;
+   BD = 20;
+   BE = 21;
+   BF = 22;
+   BG = 23;
+   BH = 24;
+   BI = 25;
+   BJ = 26;
+   BL = 27;
+   BM = 28;
+   BN = 29;
+   BO = 30;
+   BQ = 31;
+   BR = 32;
+   BS = 33;
+   BT = 34;
+   BU = 35;
+   BV = 36;
+   BW = 37;
+   BY = 38;
+   BZ = 39;
+   CA = 40;
+   CC = 41;
+   CD = 42;
+   CF = 43;
+   CG = 44;
+   CH = 45;
+   CI = 46;
+   CK = 47;
+   CL = 48;
+   CM = 49;
+   CN = 50;
+   CO = 51;
+   CP = 52;
+   CR = 53;
+   CS = 54;
+   CU = 55;
+   CV = 56;
+   CW = 57;
+   CX = 58;
+   CY = 59;
+   CZ = 60;
+   DE = 61;
+   DG = 62;
+   DJ = 63;
+   DK = 64;
+   DM = 65;
+   DO = 66;
+   DZ = 67;
+   EA = 68;
+   EC = 69;
+   EE = 70;
+   EG = 71;
+   EH = 72;
+   ER = 73;
+   ES = 74;
+   ET = 75;
+   EU = 76;
+   FI = 77;
+   FJ = 78;
+   FK = 79;
+   FM = 80;
+   FO = 81;
+   FR = 82;
+   FX = 83;
+   GA = 84;
+   GB = 85;
+   GD = 86;
+   GE = 87;
+   GF = 88;
+   GG = 89;
+   GH = 90;
+   GI = 91;
+   GL = 92;
+   GM = 93;
+   GN = 94;
+   GP = 95;
+   GQ = 96;
+   GR = 97;
+   GS = 98;
+   GT = 99;
+   GU = 100;
+   GW = 101;
+   GY = 102;
+   HK = 103;
+   HM = 104;
+   HN = 105;
+   HR = 106;
+   HT = 107;
+   HU = 108;
+   IC = 109;
+   ID = 110;
+   IE = 111;
+   IL = 112;
+   IM = 113;
+   IN = 114;
+   IO = 115;
+   IQ = 116;
+   IR = 117;
+   IS = 118;
+   IT = 119;
+   JE = 120;
+   JM = 121;
+   JO = 122;
+   JP = 123;
+   KE = 124;
+   KG = 125;
+   KH = 126;
+   KI = 127;
+   KM = 128;
+   KN = 129;
+   KP = 130;
+   KR = 131;
+   KW = 132;
+   KY = 133;
+   KZ = 134;
+   LA = 135;
+   LB = 136;
+   LC = 137;
+   LI = 138;
+   LK = 139;
+   LR = 140;
+   LS = 141;
+   LT = 142;
+   LU = 143;
+   LV = 144;
+   LY = 145;
+   MA = 146;
+   MC = 147;
+   MD = 148;
+   ME = 149;
+   MF = 150;
+   MG = 151;
+   MH = 152;
+   MK = 153;
+   ML = 154;
+   MM = 155;
+   MN = 156;
+   MO = 157;
+   MP = 158;
+   MQ = 159;
+   MR = 160;
+   MS = 161;
+   MT = 162;
+   MU = 163;
+   MV = 164;
+   MW = 165;
+   MX = 166;
+   MY = 167;
+   MZ = 168;
+   NA = 169;
+   NC = 170;
+   NE = 171;
+   NF = 172;
+   NG = 173;
+   NI = 174;
+   NL = 175;
+   NO = 176;
+   NP = 177;
+   NR = 178;
+   NT = 179;
+   NU = 180;
+   NZ = 181;
+   OM = 182;
+   PA = 183;
+   PE = 184;
+   PF = 185;
+   PG = 186;
+   PH = 187;
+   PK = 188;
+   PL = 189;
+   PM = 190;
+   PN = 191;
+   PR = 192;
+   PS = 193;
+   PT = 194;
+   PW = 195;
+   PY = 196;
+   QA = 197;
+   RE = 198;
+   RO = 199;
+   RS = 200;
+   RU = 201;
+   RW = 202;
+   SA = 203;
+   SB = 204;
+   SC = 205;
+   SD = 206;
+   SE = 207;
+   SF = 208;
+   SG = 209;
+   SH = 210;
+   SI = 211;
+   SJ = 212;
+   SK = 213;
+   SL = 214;
+   SM = 215;
+   SN = 216;
+   SO = 217;
+   SR = 218;
+   SS = 219;
+   ST = 220;
+   SU = 221;
+   SV = 222;
+   SX = 223;
+   SY = 224;
+   SZ = 225;
+   TA = 226;
+   TC = 227;
+   TD = 228;
+   TF = 229;
+   TG = 230;
+   TJ = 231;
+   TK = 232;
+   TL = 233;
+   TM = 234;
+   TN = 235;
+   TO = 236;
+   TP = 237;
+   TR = 238;
+   TT = 239;
+   TV = 240;
+   TW = 241;
+   TZ = 242;
+   UA = 243;
+   UG = 244;
+   UK = 245;
+   UM = 246;
+   US = 247;
+   UY = 248;
+   UZ = 249;
+   VA = 250;
+   VC = 251;
+   VE = 252;
+   VG = 253;
+   VI = 254;
+   VN = 255;
+   VU = 256;
+   WF = 257;
+   WS = 258;
+   XK = 259;
+   YE = 260;
+   YT = 261;
+   YU = 262;
+   ZA = 263;
+   ZM = 264;
+   ZR = 265;
+   ZW = 266;
+}
+message Marktrolle {
+   optional string rollencodenummer = 3;
+   optional string code = 4;
+   optional Marktrolle marktrolle = 5 [default = NB];
+}
+enum Marktrolle {
+   NB = 0;
+   LF = 1;
+   MSB = 2;
+   MDL = 3;
+   DL = 4;
+   BKV = 5;
+   BIKO = 6;
+   UENB = 7;
+   KUNDE_SELBST_NN = 8;
+   MGV = 9;
+   EIV = 10;
+   RB = 11;
+   KUNDE = 12;
+   INTERESSENT = 13;
+}
+enum Mengeneinheit {
+   WH = 2;
+   KW = 3;
+   ANZAHL = 7;
+   KUBIKMETER = 11;
+   STUNDE = 13;
+   TAG = 17;
+   MONAT = 19;
+   VAR = 23;
+   VARH = 29;
+   JAHR = 228;
+   KWH = 2000;
+   MW = 3000;
+   KVAR = 23000;
+   KVARH = 29000;
+   MWH = 2000000;
+}
+message Messlokation {
+   optional string messlokationsId = 4 [default = "|null|"];
+   optional Sparte sparte = 5 [default = STROM];
+   optional Netzebene netzebeneMessung = 6;
+   optional string messgebietNr = 7;
+   optional string grundzustaendigerMSBCodeNr = 8;
+   optional string grundzustaendigerMSBIMCodeNr = 9;
+   optional string grundzustaendigerMDLCodeNr = 10;
+   optional Adresse messadresse = 11;
+   optional Geokoordinaten geoadresse = 12;
+   optional Katasteradresse katasterinformation = 13;
+   repeated Hardware geraete = 14;
+   repeated Dienstleistung messdienstleistung = 15;
+   repeated Zaehler messlokationszaehler = 16;
+   optional Bilanzierungsmethode bilanzierungsmethode = 17;
+   optional bool abrechnungmessstellenbetriebnna = 1018;
+   repeated Marktrolle marktrollen = 1019;
+   optional Gasqualitaet gasqualitaet = 1020;
+   optional .bcl.Decimal verlustfaktor = 1021;
+}
+enum Messwerterfassung {
+   FERNAUSLESBAR = 0;
+   MANUELL_AUSGELESENE = 1;
+}
+enum Netzebene {
+   NSP = 0;
+   MSP = 1;
+   HSP = 2;
+   HSS = 3;
+   MSP_NSP_UMSP = 4;
+   HSP_MSP_UMSP = 5;
+   HSS_HSP_UMSP = 6;
+   HD = 7;
+   MD = 8;
+   ND = 9;
+}
+enum Schwachlastfaehig {
+   NICHT_SCHWACHLASTFAEHIG = 0;
+   SCHWACHLASTFAEHIG = 1;
+}
+enum Sparte {
+   STROM = 0;
+   GAS = 1;
+   FERNWAERME = 2;
+   NAHWAERME = 3;
+   WASSER = 4;
+   ABWASSER = 5;
+}
+enum Tarifart {
+   EINTARIF = 0;
+   ZWEITARIF = 1;
+   MEHRTARIF = 2;
+   SMART_METER = 3;
+   LEISTUNGSGEMESSEN = 4;
+}
+enum Unterbrechbarkeit {
+   UV = 0;
+   NUV = 1;
+}
+enum Verbrauchsart {
+   KL = 0;
+   KLW = 1;
+   KLWS = 2;
+   W = 3;
+   WS = 4;
+}
+enum Verwendungszweck {
+   NETZNUTZUNGSABRECHNUNG = 0;
+   BILANZKREISABRECHNUNG = 1;
+   MEHRMINDERMBENGENABRECHNUNG = 2;
+   ENDKUNDENABRECHNUNG = 3;
+}
+enum Waermenutzung {
+   SPEICHERHEIZUNG = 0;
+   WAERMEPUMPE = 1;
+   DIREKTHEIZUNG = 2;
+}
+message Zaehler {
+   optional string zaehlernummer = 4;
+   optional Sparte sparte = 5 [default = STROM];
+   optional Zaehlerauspraegung zaehlerauspraegung = 6 [default = EINRICHTUNGSZAEHLER];
+   optional Zaehlertyp zaehlertyp = 7 [default = DREHSTROMZAEHLER];
+   optional Tarifart tarifart = 8 [default = EINTARIF];
+   optional .bcl.Decimal zaehlerkonstante = 9 [default = 0];
+   optional .bcl.DateTime eichungBis = 10;
+   optional .bcl.DateTime letzteEichung = 11;
+   repeated Zaehlwerk zaehlwerke = 12;
+   optional Geschaeftspartner zaehlerhersteller = 13;
+   optional string gateway = 1014;
+   optional Fernschaltung fernschaltung = 1015;
+   optional Messwerterfassung messwerterfassung = 1016;
+}
+enum Zaehlerauspraegung {
+   EINRICHTUNGSZAEHLER = 0;
+   ZWEIRICHTUNGSZAEHLER = 1;
+}
+enum Zaehlertyp {
+   DREHSTROMZAEHLER = 0;
+   BALGENGASZAEHLER = 1;
+   DREHKOLBENZAEHLER = 2;
+   SMARTMETER = 3;
+   LEISTUNGSZAEHLER = 4;
+   MAXIMUMZAEHLER = 5;
+   TURBINENRADGASZAEHLER = 6;
+   ULTRASCHALLGASZAEHLER = 7;
+   WECHSELSTROMZAEHLER = 8;
+}
+message Zaehlwerk {
+   optional string zaehlwerkId = 3;
+   optional string bezeichnung = 4;
+   optional Energierichtung richtung = 5 [default = AUSSP];
+   optional string obisKennzahl = 6;
+   optional .bcl.Decimal wandlerfaktor = 7 [default = 0];
+   optional Mengeneinheit einheit = 8 [default = 0];
+   optional string kennzahl = 1009;
+   optional Schwachlastfaehig schwachlastfaehig = 1010;
+   repeated Verwendungszweck verwendungszwecke = 1011;
+   optional Verbrauchsart verbrauchsart = 1012;
+   optional Unterbrechbarkeit unterbrechbarkeit = 1013;
+   optional Waermenutzung waermenutzung = 1014;
+   optional Konzessionsabgabe konzessionsabgabe = 1015;
+   optional bool steuerbefreit = 1016;
+   optional int32 vorkommastelle = 1017;
+   optional int32 nachkommastelle = 1018;
+}

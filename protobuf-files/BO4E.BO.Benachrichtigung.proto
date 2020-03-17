@@ -1,0 +1,48 @@
+﻿syntax = "proto2";
+import "protobuf-net/bcl.proto"; // schema for protobuf-net's handling of core .NET types
+
+message Aufgabe {
+   optional string aufgabenId = 3;
+   optional string beschreibung = 4;
+   optional .bcl.DateTime deadline = 5;
+   optional bool ausgefuehrt = 6 [default = false];
+   optional .bcl.DateTime ausfuehrungszeitpunkt = 7;
+   optional string ausfuehrender = 8;
+}
+enum Bearbeitungsstatus {
+   OFFEN = 0;
+   IN_BEARBEITUNG = 1;
+   ABGESCHLOSSEN = 2;
+   STORNIERT = 3;
+   QUITTIERT = 4;
+   IGNORIERT = 5;
+}
+message Benachrichtigung {
+   optional string benachrichtigungsId = 4;
+   optional Prioritaet prioritaet = 5 [default = NORMAL];
+   optional Bearbeitungsstatus bearbeitungsstatus = 6 [default = OFFEN];
+   optional string kurztext = 7;
+   optional .bcl.DateTime erstellungsZeitpunkt = 8;
+   optional string kategorie = 9;
+   optional string bearbeiter = 10;
+   repeated Notiz notizen = 11;
+   optional .bcl.DateTime deadline = 12;
+   repeated Aufgabe aufgaben = 13;
+   repeated GenericStringStringInfo infos = 14;
+}
+message GenericStringStringInfo {
+   optional string keyColumn = 3;
+   optional string value = 4;
+}
+message Notiz {
+   optional string autor = 3;
+   optional .bcl.DateTime zeitpunkt = 4;
+   optional string inhalt = 5;
+}
+enum Prioritaet {
+   SEHR_NIEDRIG = 0;
+   NIEDRIG = 1;
+   NORMAL = 2;
+   HOCH = 3;
+   SEHR_HOCH = 4;
+}
