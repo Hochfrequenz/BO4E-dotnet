@@ -1,0 +1,3239 @@
+{
+  "homepages": [],
+  "source_base_path": "/home/runner/work/BO4E-dotnet/docs/BO4E-dotnet",
+  "xrefmap": "xrefmap.yml",
+  "files": [
+    {
+      "log_codes": [
+        "InvalidFileLink"
+      ],
+      "type": "Conceptual",
+      "source_relative_path": "README.md",
+      "output": {
+        ".html": {
+          "relative_path": "README.html",
+          "hash": "fpZya3EfnVTThyTajlG9tw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/BO4E.BO.Angebot.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/BO4E.BO.Angebot.html",
+          "hash": "wLt/cvNYuhqz01a9lm3s+w=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/BO4E.BO.Ansprechpartner.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/BO4E.BO.Ansprechpartner.html",
+          "hash": "3vwmG4+r4nXBbjGOep+Wvg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/BO4E.BO.Benachrichtigung.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/BO4E.BO.Benachrichtigung.html",
+          "hash": "8DQsaYptclC1k5aecg54xg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/BO4E.BO.BusinessObject.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/BO4E.BO.BusinessObject.html",
+          "hash": "q8sQYOCy8nWSjCh956cTqw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/BO4E.BO.EncryptedObject.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/BO4E.BO.EncryptedObject.html",
+          "hash": "4exZu7B9xpJ1UOhkAp7Fbg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/BO4E.BO.EncryptedObjectAEAD.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/BO4E.BO.EncryptedObjectAEAD.html",
+          "hash": "SXwUGELiaLd1JWPd2ikFjA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/BO4E.BO.EncryptedObjectPKCS7.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/BO4E.BO.EncryptedObjectPKCS7.html",
+          "hash": "WTVKjPnElSoKmUTxTKBetA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/BO4E.BO.EncryptedObjectPublicKeyBox.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/BO4E.BO.EncryptedObjectPublicKeyBox.html",
+          "hash": "ncpHIcN7LHETzSEX0LCNmg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/BO4E.BO.Energiemenge.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/BO4E.BO.Energiemenge.html",
+          "hash": "3hH44poi/6Ae+986j5l/1A=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/BO4E.BO.Geschaeftspartner.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/BO4E.BO.Geschaeftspartner.html",
+          "hash": "tc9sGDaAgDAHdF/qLwdZXg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/BO4E.BO.Kosten.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/BO4E.BO.Kosten.html",
+          "hash": "4W1yXY3vO0LVfEITJGdGyg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/BO4E.BO.LogObject.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/BO4E.BO.LogObject.html",
+          "hash": "RElDJlVwjc+/cOE4EdIQGA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/BO4E.BO.Marktlokation.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/BO4E.BO.Marktlokation.html",
+          "hash": "SJn3q7DU3w89V3IcGWJrbg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/BO4E.BO.Marktteilnehmer.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/BO4E.BO.Marktteilnehmer.html",
+          "hash": "JJaEwGCNxpzL5lMIg1/01A=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/BO4E.BO.Messlokation.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/BO4E.BO.Messlokation.html",
+          "hash": "L7v+JubGgWWmHEQP+Z9Qsw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/BO4E.BO.Preisblatt.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/BO4E.BO.Preisblatt.html",
+          "hash": "fSYtR9cfhxo/2ubSsb7tGQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/BO4E.BO.PreisblattDienstleistung.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/BO4E.BO.PreisblattDienstleistung.html",
+          "hash": "gLkg+6AXtOs9urvUKQ6VGQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/BO4E.BO.PreisblattKonzessionsabgabe.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/BO4E.BO.PreisblattKonzessionsabgabe.html",
+          "hash": "LXSPRXf0zaeP82+Jar6oqg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/BO4E.BO.PreisblattMessung.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/BO4E.BO.PreisblattMessung.html",
+          "hash": "YGvO/k0/TWrhfRrKMKiKfA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/BO4E.BO.PreisblattNetznutzung.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/BO4E.BO.PreisblattNetznutzung.html",
+          "hash": "gn/jYP/9m4SplIlaXT5dvQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/BO4E.BO.PreisblattUmlagen.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/BO4E.BO.PreisblattUmlagen.html",
+          "hash": "x/K2hAxcNKQ+GJQ7w7hXPw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/BO4E.BO.Rechnung.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/BO4E.BO.Rechnung.html",
+          "hash": "YfSKORS0/npf8XeFtgkRoA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/BO4E.BO.Region.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/BO4E.BO.Region.html",
+          "hash": "fXGZnXUX8zUWnh6rdTuSOw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/BO4E.BO.Vertrag.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/BO4E.BO.Vertrag.html",
+          "hash": "WtRoSjd5inTRmFepYteZ2A=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/BO4E.BO.Zaehler.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/BO4E.BO.Zaehler.html",
+          "hash": "hrxsRfTeLaH1AXbguLjcAQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/BO4E.BO.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/BO4E.BO.html",
+          "hash": "LwpuGSHfbSzXOIhVV55ogA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/BO4E.BoEdiMapper.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/BO4E.BoEdiMapper.html",
+          "hash": "VzqCho4D+ug4hWnI+nQGng=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/BO4E.BoMapper.LenientDateTimeConverter.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/BO4E.BoMapper.LenientDateTimeConverter.html",
+          "hash": "luigh4/wH6aCd47g1/5fNQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/BO4E.BoMapper.UserPropertiesDataContractResolver.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/BO4E.BoMapper.UserPropertiesDataContractResolver.html",
+          "hash": "R7NV6Fih7rKBSepHH5RaTQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/BO4E.BoMapper.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/BO4E.BoMapper.html",
+          "hash": "wZuGb36yKWzE2icPxuNOSg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/BO4E.COM.Adresse.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/BO4E.COM.Adresse.html",
+          "hash": "kwgZ0d4PM0iHkidLR0H+dA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/BO4E.COM.Angebotsposition.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/BO4E.COM.Angebotsposition.html",
+          "hash": "U6eXmBMp3HRPLBdgmyE1cw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/BO4E.COM.Angebotsteil.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/BO4E.COM.Angebotsteil.html",
+          "hash": "MEdThXQHTlfRx+CSQvhqMw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/BO4E.COM.Angebotsvariante.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/BO4E.COM.Angebotsvariante.html",
+          "hash": "zFAUoK9krUO7ITufXFnZ2g=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/BO4E.COM.AufAbschlag.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/BO4E.COM.AufAbschlag.html",
+          "hash": "bJqB3Bzt7KfUCmKxF9gLGg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/BO4E.COM.Aufgabe.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/BO4E.COM.Aufgabe.html",
+          "hash": "suLi/xO37rO8WAouXn8zXA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/BO4E.COM.Ausschreibungsdetail.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/BO4E.COM.Ausschreibungsdetail.html",
+          "hash": "i9NGWzXgWPX5OjEOosyztA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/BO4E.COM.Ausschreibungslos.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/BO4E.COM.Ausschreibungslos.html",
+          "hash": "sL2AGtfCSUzV3f8+Ajd8MQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/BO4E.COM.Betrag.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/BO4E.COM.Betrag.html",
+          "hash": "zxopnxBer9e2hnws9dCsKA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/BO4E.COM.COM.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/BO4E.COM.COM.html",
+          "hash": "7TbvWYzq1OWOQfYeMecGMA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/BO4E.COM.Dienstleistung.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/BO4E.COM.Dienstleistung.html",
+          "hash": "fPms9no72GDfDu0CRXoGzQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/BO4E.COM.Energieherkunft.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/BO4E.COM.Energieherkunft.html",
+          "hash": "tGS03rYzr1+u4wzGUI66gA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/BO4E.COM.Energiemix.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/BO4E.COM.Energiemix.html",
+          "hash": "FxVOyHR4JqEL6AudKNZ5QA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/BO4E.COM.GenericStringStringInfo.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/BO4E.COM.GenericStringStringInfo.html",
+          "hash": "hy0ZPfReXsD4BY7MP7NMgw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/BO4E.COM.Geokoordinaten.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/BO4E.COM.Geokoordinaten.html",
+          "hash": "3gJtCYH8cZBUN+lbl/LaCA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/BO4E.COM.Geraet.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/BO4E.COM.Geraet.html",
+          "hash": "jEbQLna38NY7ovmn4NuUvA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/BO4E.COM.Geraeteeigenschaften.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/BO4E.COM.Geraeteeigenschaften.html",
+          "hash": "zjwEYFM0zIp4yp+U96lfYQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/BO4E.COM.Hardware.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/BO4E.COM.Hardware.html",
+          "hash": "vKol/RytSjYKvM0oxfrJLA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/BO4E.COM.Katasteradresse.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/BO4E.COM.Katasteradresse.html",
+          "hash": "dPvtu0NtP1lNQjsNLBnduA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/BO4E.COM.Konzessionsabgabe.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/BO4E.COM.Konzessionsabgabe.html",
+          "hash": "JPicL5T+8PTW15PvL2sU4g=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/BO4E.COM.Kostenblock.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/BO4E.COM.Kostenblock.html",
+          "hash": "L7U+dQ8FVBRjOE5iJAwsAw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/BO4E.COM.Kostenposition.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/BO4E.COM.Kostenposition.html",
+          "hash": "TAsXtIU9oveY5kwtPOeqNg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/BO4E.COM.KriteriumsWert.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/BO4E.COM.KriteriumsWert.html",
+          "hash": "vigrfGuJVVRdOkJA4OEjFg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/BO4E.COM.Marktrolle.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/BO4E.COM.Marktrolle.html",
+          "hash": "8baicpUabEeGjmoHBNdhhw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/BO4E.COM.Menge.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/BO4E.COM.Menge.html",
+          "hash": "YgfLkP7g6ImxyL3zV/pFow=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/BO4E.COM.Messlokationszuordnung.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/BO4E.COM.Messlokationszuordnung.html",
+          "hash": "NldsCOq8lKdkEXQLsqfmtA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/BO4E.COM.Notiz.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/BO4E.COM.Notiz.html",
+          "hash": "8B1E2OrwTfk0Rx51JuxVeg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/BO4E.COM.PhysikalischerWert.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/BO4E.COM.PhysikalischerWert.html",
+          "hash": "SmpyaccWiYd0IozSD82gyg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/BO4E.COM.PositionsAufAbschlag.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/BO4E.COM.PositionsAufAbschlag.html",
+          "hash": "dAaI0cwmjc/BCCJVJ8Gdag=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/BO4E.COM.Preis.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/BO4E.COM.Preis.html",
+          "hash": "CUtoN1MJ4FyMARzKYOke5w=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/BO4E.COM.Preisgarantie.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/BO4E.COM.Preisgarantie.html",
+          "hash": "1NO94lrYeLZmtlY+cnqh2w=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/BO4E.COM.Preisposition.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/BO4E.COM.Preisposition.html",
+          "hash": "/65VARNePs67v33V6RkYXw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/BO4E.COM.Preisstaffel.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/BO4E.COM.Preisstaffel.html",
+          "hash": "k5BvqbGIoCCaubmfopWodg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/BO4E.COM.Rechnungsposition.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/BO4E.COM.Rechnungsposition.html",
+          "hash": "iQshYai0RklpikU0dq14Nw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/BO4E.COM.RechnungspositionFlat.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/BO4E.COM.RechnungspositionFlat.html",
+          "hash": "/QV0XZ84x6FVMQmDAXMMMg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/BO4E.COM.RegionaleGueltigkeit.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/BO4E.COM.RegionaleGueltigkeit.html",
+          "hash": "hk1z/X18FQh9QDxLT6zi6Q=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/BO4E.COM.RegionalePreisgarantie.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/BO4E.COM.RegionalePreisgarantie.html",
+          "hash": "m4hdbM0Ob7GVcVf4MUYuPw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/BO4E.COM.RegionalePreisstaffel.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/BO4E.COM.RegionalePreisstaffel.html",
+          "hash": "VcM2O05yB5tkTDlg/nxEIw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/BO4E.COM.RegionaleTarifpreisposition.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/BO4E.COM.RegionaleTarifpreisposition.html",
+          "hash": "zncmkMY+7RxYbc2/5NtACg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/BO4E.COM.RegionalerAufAbschlag.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/BO4E.COM.RegionalerAufAbschlag.html",
+          "hash": "dxLhxPW0dZyy14Aev2OFrA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/BO4E.COM.Regionskriterium.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/BO4E.COM.Regionskriterium.html",
+          "hash": "FU/YUeY6ylDtsbvvY/sgrw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/BO4E.COM.Rufnummer.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/BO4E.COM.Rufnummer.html",
+          "hash": "i2XuPvIBzRjLZki+xeHNxg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/BO4E.COM.Sigmoidparameter.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/BO4E.COM.Sigmoidparameter.html",
+          "hash": "aN8yfo7oW9f0GJBYnqkJog=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/BO4E.COM.Steuerbetrag.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/BO4E.COM.Steuerbetrag.html",
+          "hash": "VoI3Y3tLjdyc94p2wvEgCg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/BO4E.COM.Tarifberechnungsparameter.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/BO4E.COM.Tarifberechnungsparameter.html",
+          "hash": "4MmsPflEbntNcWM+M+qITw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/BO4E.COM.Tarifeinschraenkung.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/BO4E.COM.Tarifeinschraenkung.html",
+          "hash": "CdfF1rAlONDLbLbDeVGjqw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/BO4E.COM.Tarifpreisposition.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/BO4E.COM.Tarifpreisposition.html",
+          "hash": "MwOxkSDLsjCRrUavKrkKAA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/BO4E.COM.Unterschrift.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/BO4E.COM.Unterschrift.html",
+          "hash": "x+iua5A0V0gcwuzDl/48vg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/BO4E.COM.Verbrauch.SapTimezone.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/BO4E.COM.Verbrauch.SapTimezone.html",
+          "hash": "y/gqCOE6Ko6e/fVKYl68gw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/BO4E.COM.Verbrauch.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/BO4E.COM.Verbrauch.html",
+          "hash": "5Flqbru+BUoOgUJgEN1Bbw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/BO4E.COM.Vertragskonditionen.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/BO4E.COM.Vertragskonditionen.html",
+          "hash": "b/ki0O8RFWDrvPxWb+xs6w=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/BO4E.COM.Vertragsteil.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/BO4E.COM.Vertragsteil.html",
+          "hash": "YL0TurfwwDDV2FmS+Z7lyg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/BO4E.COM.Zaehlwerk.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/BO4E.COM.Zaehlwerk.html",
+          "hash": "grh7lCNYPo+T7lSl/5OEWA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/BO4E.COM.Zeitraum.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/BO4E.COM.Zeitraum.html",
+          "hash": "tY/H9iGBvBWCNh/NjGA5hw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/BO4E.COM.Zustaendigkeit.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/BO4E.COM.Zustaendigkeit.html",
+          "hash": "AM3kR4e4TGoZAnXhMBTkhA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/BO4E.COM.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/BO4E.COM.html",
+          "hash": "9Mrpp7mFhhm7i41et9sXNA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/BO4E.ENUM.AbgabeArt.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/BO4E.ENUM.AbgabeArt.html",
+          "hash": "24pdr1YpGF0Y32yDrM315Q=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/BO4E.ENUM.Angebotsstatus.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/BO4E.ENUM.Angebotsstatus.html",
+          "hash": "InMWGdrFEBZ2C40hct5UdQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/BO4E.ENUM.Anrede.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/BO4E.ENUM.Anrede.html",
+          "hash": "oHTYXAJ2oqY2xzb+Bf+BCQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/BO4E.ENUM.ArithmetischeOperation.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/BO4E.ENUM.ArithmetischeOperation.html",
+          "hash": "JGrC+tx2i7oix2ILvn8foA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/BO4E.ENUM.AufAbschlagstyp.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/BO4E.ENUM.AufAbschlagstyp.html",
+          "hash": "vgMpbbhtxDdt0axUluC6uQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/BO4E.ENUM.AufAbschlagsziel.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/BO4E.ENUM.AufAbschlagsziel.html",
+          "hash": "e1eRnipry+XtR753X+SpQw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/BO4E.ENUM.Ausschreibungsportal.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/BO4E.ENUM.Ausschreibungsportal.html",
+          "hash": "Dz9SHKPR4iVfOFy/EdpdUw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/BO4E.ENUM.Ausschreibungsstatus.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/BO4E.ENUM.Ausschreibungsstatus.html",
+          "hash": "Osmyl2AhKionF0MhdTJ8rg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/BO4E.ENUM.Ausschreibungstyp.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/BO4E.ENUM.Ausschreibungstyp.html",
+          "hash": "MV4o+i6zO6TqaygLZpvEyw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/BO4E.ENUM.BDEWArtikelnummer.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/BO4E.ENUM.BDEWArtikelnummer.html",
+          "hash": "+poeakMIcewyv6cbPIlvhA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/BO4E.ENUM.Bearbeitungsstatus.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/BO4E.ENUM.Bearbeitungsstatus.html",
+          "hash": "rdw/IDvE+S6AJDAgsjx//Q=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/BO4E.ENUM.Bemessungsgroesse.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/BO4E.ENUM.Bemessungsgroesse.html",
+          "hash": "ujXi98c0F4FzASOsYGDonA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/BO4E.ENUM.Bilanzierungsmethode.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/BO4E.ENUM.Bilanzierungsmethode.html",
+          "hash": "pHIsg7UNZqA40350j1JVAA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/BO4E.ENUM.BoTyp.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/BO4E.ENUM.BoTyp.html",
+          "hash": "QdE4xbSmkVZnhG5UgfiGIA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/BO4E.ENUM.Dienstleistungstyp.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/BO4E.ENUM.Dienstleistungstyp.html",
+          "hash": "QM186DSOhBKO9JyPHUH+FQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/BO4E.ENUM.EDI.BDEWArtikelnummerEdi.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/BO4E.ENUM.EDI.BDEWArtikelnummerEdi.html",
+          "hash": "gFXTYJKtMH0FGgsNIynx3A=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/BO4E.ENUM.EDI.EnergierichtungEdi.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/BO4E.ENUM.EDI.EnergierichtungEdi.html",
+          "hash": "myOOrPiLEWdWQYcxbuy1Cw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/BO4E.ENUM.EDI.GeraetetypEdi.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/BO4E.ENUM.EDI.GeraetetypEdi.html",
+          "hash": "CTH8y1thCn1BMHQq6ffbqg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/BO4E.ENUM.EDI.GeschaeftspartnerrolleEdi.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/BO4E.ENUM.EDI.GeschaeftspartnerrolleEdi.html",
+          "hash": "6/7Er0ZL5n63xayLCG0ZOQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/BO4E.ENUM.EDI.KontaktartEdi.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/BO4E.ENUM.EDI.KontaktartEdi.html",
+          "hash": "gZgT9fJSgQ9i8IANTlarhQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/BO4E.ENUM.EDI.NetzebeneEdi.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/BO4E.ENUM.EDI.NetzebeneEdi.html",
+          "hash": "0CD+O5nFrh57jPKt0NjPCw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/BO4E.ENUM.EDI.NetznutzungsabrechnungsgrundlageEdi.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/BO4E.ENUM.EDI.NetznutzungsabrechnungsgrundlageEdi.html",
+          "hash": "J30GwPLJXqXw3zaLDmR5kA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/BO4E.ENUM.EDI.NetznutzungsabrechnungsvarianteEdi.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/BO4E.ENUM.EDI.NetznutzungsabrechnungsvarianteEdi.html",
+          "hash": "A/I7KbUVT7RU7/zWwF2Ygg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/BO4E.ENUM.EDI.NetznutzungsvertragEdi.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/BO4E.ENUM.EDI.NetznutzungsvertragEdi.html",
+          "hash": "mozjZ592lGuRdJweGRzrAQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/BO4E.ENUM.EDI.NetznutzungszahlerEdi.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/BO4E.ENUM.EDI.NetznutzungszahlerEdi.html",
+          "hash": "EHqne+hjSOOp5omD8hl4zw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/BO4E.ENUM.EDI.RollencodetypEdi.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/BO4E.ENUM.EDI.RollencodetypEdi.html",
+          "hash": "L4SG0eWYppBfIa/vkfFCUw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/BO4E.ENUM.EDI.TarifartEdi.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/BO4E.ENUM.EDI.TarifartEdi.html",
+          "hash": "qLxP+6Bzt0IUdd7RZo7g+Q=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/BO4E.ENUM.EDI.UTILMD.UTILMD7433.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/BO4E.ENUM.EDI.UTILMD.UTILMD7433.html",
+          "hash": "9J7i9qbiGcroGILbgrRScQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/BO4E.ENUM.EDI.UTILMD.UTILMD9013.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/BO4E.ENUM.EDI.UTILMD.UTILMD9013.html",
+          "hash": "b3kbtV7m2R9xr/NODuSN2w=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/BO4E.ENUM.EDI.UTILMD.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/BO4E.ENUM.EDI.UTILMD.html",
+          "hash": "bBnNCulcX9JkamCFxe38eg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/BO4E.ENUM.EDI.VerbrauchsartEdi.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/BO4E.ENUM.EDI.VerbrauchsartEdi.html",
+          "hash": "F1yGgV2JCie9DXWldCxmvQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/BO4E.ENUM.EDI.WaehrungseinheitEdi.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/BO4E.ENUM.EDI.WaehrungseinheitEdi.html",
+          "hash": "11v7lQbJbkUi9S3Akz7cdQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/BO4E.ENUM.EDI.WertermittlungsverfahrenEdi.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/BO4E.ENUM.EDI.WertermittlungsverfahrenEdi.html",
+          "hash": "G4BJY00gOCiKAkitKcpTcQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/BO4E.ENUM.EDI.ZaehlerauspraegungEdi.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/BO4E.ENUM.EDI.ZaehlerauspraegungEdi.html",
+          "hash": "G7dJN1AY3/KCniankljRCw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/BO4E.ENUM.EDI.ZaehlertypEdi.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/BO4E.ENUM.EDI.ZaehlertypEdi.html",
+          "hash": "5NvcfMHnbn5HDB5eH/TYxg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/BO4E.ENUM.EDI.ZeiteinheitEdi.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/BO4E.ENUM.EDI.ZeiteinheitEdi.html",
+          "hash": "ZvvQD7VF63U0LuWZDcSETA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/BO4E.ENUM.EDI.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/BO4E.ENUM.EDI.html",
+          "hash": "aZiJdIgH8J69BXe6ADsWjg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/BO4E.ENUM.EncryptionScheme.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/BO4E.ENUM.EncryptionScheme.html",
+          "hash": "b7kdLTND+SWYhGHQ0mb+aQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/BO4E.ENUM.Energierichtung.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/BO4E.ENUM.Energierichtung.html",
+          "hash": "Ru7fHgUAJz2cjfXW8TpuVA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/BO4E.ENUM.Erzeugungsart.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/BO4E.ENUM.Erzeugungsart.html",
+          "hash": "PYT9Msd8JJYr6IoOtPxvjQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/BO4E.ENUM.Fernschaltung.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/BO4E.ENUM.Fernschaltung.html",
+          "hash": "V58NPsbprCVVFbFWrpGcjg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/BO4E.ENUM.FernschaltungEdi.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/BO4E.ENUM.FernschaltungEdi.html",
+          "hash": "vbOYYXo6yzGWk1g9pi+1vA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/BO4E.ENUM.Gasqualitaet.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/BO4E.ENUM.Gasqualitaet.html",
+          "hash": "MbF/2/MzXaCCycPdqpk2hA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/BO4E.ENUM.Gebiettyp.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/BO4E.ENUM.Gebiettyp.html",
+          "hash": "JTOVTpywXIxEwmt8h7F4tA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/BO4E.ENUM.Geraetemerkmal.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/BO4E.ENUM.Geraetemerkmal.html",
+          "hash": "qsPVUNqYwnc8xzKuD7E99g=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/BO4E.ENUM.Geraetetyp.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/BO4E.ENUM.Geraetetyp.html",
+          "hash": "6ooIciQNNfhJOz4x3JRLnA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/BO4E.ENUM.Geschaeftspartnerrolle.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/BO4E.ENUM.Geschaeftspartnerrolle.html",
+          "hash": "Z1GzmwxZgyBt+3LjXnTdQQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/BO4E.ENUM.Gueltigkeitstyp.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/BO4E.ENUM.Gueltigkeitstyp.html",
+          "hash": "Gxvp2YvP5YLEjmBHqrHEeA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/BO4E.ENUM.Kalkulationsmethode.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/BO4E.ENUM.Kalkulationsmethode.html",
+          "hash": "1lkZOGHpi39hjAS3FJ7A/A=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/BO4E.ENUM.Kontaktart.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/BO4E.ENUM.Kontaktart.html",
+          "hash": "9Fcw47h0y3mtj+wt/PyQ8A=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/BO4E.ENUM.Kostenklasse.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/BO4E.ENUM.Kostenklasse.html",
+          "hash": "YUbH4eG9KEsKOnmTAjm2ig=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/BO4E.ENUM.Kundengruppe.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/BO4E.ENUM.Kundengruppe.html",
+          "hash": "9vEwmXwfkPXIoyQQZCyprA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/BO4E.ENUM.KundengruppeKA.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/BO4E.ENUM.KundengruppeKA.html",
+          "hash": "fyx1/a9R6oSarpoQOmbZIA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/BO4E.ENUM.Kundentyp.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/BO4E.ENUM.Kundentyp.html",
+          "hash": "nw4iv/ygTE5FHuic7FBW3A=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/BO4E.ENUM.Landescode.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/BO4E.ENUM.Landescode.html",
+          "hash": "yEGqkwkY2eicSN8Xlsf0aQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/BO4E.ENUM.Leistungstyp.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/BO4E.ENUM.Leistungstyp.html",
+          "hash": "FsNC+BRrhbdNkU0ZvhIPfg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/BO4E.ENUM.Lokationstyp.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/BO4E.ENUM.Lokationstyp.html",
+          "hash": "EToJC+glYBat2MXjiKShww=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/BO4E.ENUM.Marktrolle.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/BO4E.ENUM.Marktrolle.html",
+          "hash": "RMJgoGfmpMgKGjS53kmbOQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/BO4E.ENUM.Mengeneinheit.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/BO4E.ENUM.Mengeneinheit.html",
+          "hash": "rhx2BOWOKCPDO6ROTylhZg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/BO4E.ENUM.Mengenoperator.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/BO4E.ENUM.Mengenoperator.html",
+          "hash": "sHMy0x/mcB3MBt6LssYFyw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/BO4E.ENUM.Messpreistyp.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/BO4E.ENUM.Messpreistyp.html",
+          "hash": "6vgkjz4iqODy3I6PPdaMgw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/BO4E.ENUM.Messwerterfassung.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/BO4E.ENUM.Messwerterfassung.html",
+          "hash": "41tKVWF4ITP/klgaGb6qYQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/BO4E.ENUM.MesswerterfassungEdi.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/BO4E.ENUM.MesswerterfassungEdi.html",
+          "hash": "fgFJjcgNRrq2QCPQiw3BbQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/BO4E.ENUM.NNRechnungsart.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/BO4E.ENUM.NNRechnungsart.html",
+          "hash": "sMriAdRt/QyqdatcsxiR0Q=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/BO4E.ENUM.NNRechnungstyp.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/BO4E.ENUM.NNRechnungstyp.html",
+          "hash": "2mNgxIo9g8lJs4Meutl3fg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/BO4E.ENUM.Netzebene.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/BO4E.ENUM.Netzebene.html",
+          "hash": "dNW8nKZTCFofd8H4sOrNvA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/BO4E.ENUM.NetznutzungsVertrag.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/BO4E.ENUM.NetznutzungsVertrag.html",
+          "hash": "XWHqjfDFwRRBs8nJjP8Srw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/BO4E.ENUM.Netznutzungsabrechnungsgrundlage.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/BO4E.ENUM.Netznutzungsabrechnungsgrundlage.html",
+          "hash": "5FX2Jznh3u+2zH3DEg6TVA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/BO4E.ENUM.Netznutzungsabrechnungsvariante.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/BO4E.ENUM.Netznutzungsabrechnungsvariante.html",
+          "hash": "JBrmAkBFx3mj9x5HLTIVPQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/BO4E.ENUM.Netznutzungszahler.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/BO4E.ENUM.Netznutzungszahler.html",
+          "hash": "CJFGr5/nptrwSzmvoYPFYA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/BO4E.ENUM.Oekolabel.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/BO4E.ENUM.Oekolabel.html",
+          "hash": "tZkUdXo3Eyi3VLeiS4gcWw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/BO4E.ENUM.Oekozertifikat.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/BO4E.ENUM.Oekozertifikat.html",
+          "hash": "hL3kA+jvfoJOePIo+vc04w=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/BO4E.ENUM.Preisgarantietyp.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/BO4E.ENUM.Preisgarantietyp.html",
+          "hash": "kniChhMRLrDOBqzP2GK2qA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/BO4E.ENUM.Preismodell.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/BO4E.ENUM.Preismodell.html",
+          "hash": "mEM+nlrRiFO+xbmrUcUEmw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/BO4E.ENUM.Preisstatus.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/BO4E.ENUM.Preisstatus.html",
+          "hash": "buNgwtORl6XmHarSZdHG9Q=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/BO4E.ENUM.Preistyp.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/BO4E.ENUM.Preistyp.html",
+          "hash": "DsbjbF2E89TKrXLSZjmswQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/BO4E.ENUM.Prioritaet.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/BO4E.ENUM.Prioritaet.html",
+          "hash": "bSbQ5gqG5vbnhasoZ9IiGQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/BO4E.ENUM.Rechnungslegung.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/BO4E.ENUM.Rechnungslegung.html",
+          "hash": "1BLqwfwt/RE/REuIBTh4LA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/BO4E.ENUM.RechnungspositionsStatus.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/BO4E.ENUM.RechnungspositionsStatus.html",
+          "hash": "dAjgGL3/U2l21foWE3wWrg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/BO4E.ENUM.Rechnungsstatus.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/BO4E.ENUM.Rechnungsstatus.html",
+          "hash": "orbhKEQIul3b+BStcECNEQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/BO4E.ENUM.Rechnungstyp.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/BO4E.ENUM.Rechnungstyp.html",
+          "hash": "vPKXZG18rYx8RAKOHjw30w=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/BO4E.ENUM.Regionskriteriumtyp.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/BO4E.ENUM.Regionskriteriumtyp.html",
+          "hash": "5nT7xGh6s+ogdZNQaePhug=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/BO4E.ENUM.Rollencodetyp.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/BO4E.ENUM.Rollencodetyp.html",
+          "hash": "NhYankfCGyNfX+p/zBBL7A=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/BO4E.ENUM.Rufnummernart.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/BO4E.ENUM.Rufnummernart.html",
+          "hash": "LBos5YxbbEVqppuY5vdFaQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/BO4E.ENUM.Schwachlastfaehig.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/BO4E.ENUM.Schwachlastfaehig.html",
+          "hash": "xmtYCpO7gasEFbH/tgL5Gw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/BO4E.ENUM.SchwachlastfaehigEdi.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/BO4E.ENUM.SchwachlastfaehigEdi.html",
+          "hash": "H0hdFK/LdsqQ0s8CGLGn5Q=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/BO4E.ENUM.Servicetyp.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/BO4E.ENUM.Servicetyp.html",
+          "hash": "D4ukjH/LIlOWcLTgV1UeFA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/BO4E.ENUM.Sparte.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/BO4E.ENUM.Sparte.html",
+          "hash": "RtOzK7EJAy53MzVpc+4CgQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/BO4E.ENUM.Steuerkennzeichen.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/BO4E.ENUM.Steuerkennzeichen.html",
+          "hash": "Oe2pgplx12ALy7zIjJSvqw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/BO4E.ENUM.Tarifart.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/BO4E.ENUM.Tarifart.html",
+          "hash": "hqMTEraf0NFWl1yOabFNFw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/BO4E.ENUM.Tarifkalkulationsmethode.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/BO4E.ENUM.Tarifkalkulationsmethode.html",
+          "hash": "W4B6wdRKyYVB2Q8UD4BO6w=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/BO4E.ENUM.Tarifmerkmal.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/BO4E.ENUM.Tarifmerkmal.html",
+          "hash": "2QZ5zKkTzJPwHdDeoSFTJQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/BO4E.ENUM.Tarifregionskriterium.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/BO4E.ENUM.Tarifregionskriterium.html",
+          "hash": "BvJGaCaV4qN2sMlZojnZLg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/BO4E.ENUM.Tariftyp.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/BO4E.ENUM.Tariftyp.html",
+          "hash": "9QbydSUSyKE9qAS9+DmKlQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/BO4E.ENUM.Tarifzeit.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/BO4E.ENUM.Tarifzeit.html",
+          "hash": "kTxn4T/i+06njkOljjVW5w=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/BO4E.ENUM.Themengebiet.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/BO4E.ENUM.Themengebiet.html",
+          "hash": "St9jcC5cciGS6YZ2O0PyjQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/BO4E.ENUM.Titel.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/BO4E.ENUM.Titel.html",
+          "hash": "7ZtsDUNscDFOmPRdSz4emg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/BO4E.ENUM.Unterbrechbarkeit.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/BO4E.ENUM.Unterbrechbarkeit.html",
+          "hash": "tkmwmEl8po4d6HLfS1BR/g=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/BO4E.ENUM.UnterbrechbarkeitEdi.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/BO4E.ENUM.UnterbrechbarkeitEdi.html",
+          "hash": "DyKzE+0uo7J8JUmLHSJBrg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/BO4E.ENUM.Verbrauchsart.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/BO4E.ENUM.Verbrauchsart.html",
+          "hash": "xlbCH5HiRmR7Z554suDoBw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/BO4E.ENUM.Verbrauchsmengetyp.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/BO4E.ENUM.Verbrauchsmengetyp.html",
+          "hash": "JoMuPLbN+OUl39DPQP3ULw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/BO4E.ENUM.Vertragsart.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/BO4E.ENUM.Vertragsart.html",
+          "hash": "Mr0cHUndOffSv7Qk279TuQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/BO4E.ENUM.Vertragsform.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/BO4E.ENUM.Vertragsform.html",
+          "hash": "88plEGkjhnRvxMJ4WUtbyA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/BO4E.ENUM.Vertragstatus.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/BO4E.ENUM.Vertragstatus.html",
+          "hash": "JTC/znIEo3wDSu39M8RvOA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/BO4E.ENUM.Verwendungszweck.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/BO4E.ENUM.Verwendungszweck.html",
+          "hash": "wrFzlclX3veUGwBft92cEg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/BO4E.ENUM.VerwendungszweckEdi.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/BO4E.ENUM.VerwendungszweckEdi.html",
+          "hash": "mp+ChXOCo/kKA8Kf9KvLiA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/BO4E.ENUM.Voraussetzungen.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/BO4E.ENUM.Voraussetzungen.html",
+          "hash": "M9k9VKhzMLJ9yjl+7Et50w=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/BO4E.ENUM.Waehrungscode.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/BO4E.ENUM.Waehrungscode.html",
+          "hash": "DZU7vlECBX6HNSqqjI5dTA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/BO4E.ENUM.Waehrungseinheit.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/BO4E.ENUM.Waehrungseinheit.html",
+          "hash": "gLrPe1kd1rb2Lrap/D2ErQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/BO4E.ENUM.Waermenutzung.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/BO4E.ENUM.Waermenutzung.html",
+          "hash": "T8Kpeq5P8VhmVdCVtxCfvQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/BO4E.ENUM.WaermenutzungEdi.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/BO4E.ENUM.WaermenutzungEdi.html",
+          "hash": "XSipVOz/8GjJ79ZQ9lDKrQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/BO4E.ENUM.Wertermittlungsverfahren.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/BO4E.ENUM.Wertermittlungsverfahren.html",
+          "hash": "Pgp9KtUNzR6nZmIq/tlYIA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/BO4E.ENUM.Zaehlerauspraegung.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/BO4E.ENUM.Zaehlerauspraegung.html",
+          "hash": "SA9n+or1y13p/ZRmKiHmIg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/BO4E.ENUM.Zaehlertyp.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/BO4E.ENUM.Zaehlertyp.html",
+          "hash": "AZqhutoo2QIilS/uYSFtrA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/BO4E.ENUM.Zeiteinheit.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/BO4E.ENUM.Zeiteinheit.html",
+          "hash": "SufN2/FDyK5M7u4pCPPuWA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/BO4E.ENUM.Zeitreihentyp.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/BO4E.ENUM.Zeitreihentyp.html",
+          "hash": "IgmQH1VSRA+twY2Ls3y9kw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/BO4E.ENUM.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/BO4E.ENUM.html",
+          "hash": "7wpem9ZeNHSrO1jDErqS1g=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/BO4E.EdiBoMapper.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/BO4E.EdiBoMapper.html",
+          "hash": "G4qBvIgYfo4bhpF/nlJ3Sg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/BO4E.Extensions.BusinessObjects.Benachrichtigung.BenachrichtigungExtension.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/BO4E.Extensions.BusinessObjects.Benachrichtigung.BenachrichtigungExtension.html",
+          "hash": "0oi8xpQQakOetKCyLwl0Og=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/BO4E.Extensions.BusinessObjects.Benachrichtigung.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/BO4E.Extensions.BusinessObjects.Benachrichtigung.html",
+          "hash": "e8D++5BSSnRbodsT/5jCGw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/BO4E.Extensions.BusinessObjects.BusinessObjectExtensions.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/BO4E.Extensions.BusinessObjects.BusinessObjectExtensions.html",
+          "hash": "61T51x1C3t29O7AyMUyfiQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/BO4E.Extensions.BusinessObjects.Energiemenge.EnergiemengeExtension.BasicVerbrauchDateTimeComparer.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/BO4E.Extensions.BusinessObjects.Energiemenge.EnergiemengeExtension.BasicVerbrauchDateTimeComparer.html",
+          "hash": "7bOOrkAzovWQBBpxWG2X4Q=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/BO4E.Extensions.BusinessObjects.Energiemenge.EnergiemengeExtension.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/BO4E.Extensions.BusinessObjects.Energiemenge.EnergiemengeExtension.html",
+          "hash": "lCXPN89CHIOVHb6dtVhz/w=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/BO4E.Extensions.BusinessObjects.Energiemenge.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/BO4E.Extensions.BusinessObjects.Energiemenge.html",
+          "hash": "ar+wMlstbArbYOsJcXaf4w=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/BO4E.Extensions.BusinessObjects.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/BO4E.Extensions.BusinessObjects.html",
+          "hash": "EcMWWv+gjp+mYh1xfxG9hA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/BO4E.Extensions.COM.COMExtensions.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/BO4E.Extensions.COM.COMExtensions.html",
+          "hash": "0wxAF94DG8GMasu8qAVzrw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/BO4E.Extensions.COM.PhysikalischerWertExtension.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/BO4E.Extensions.COM.PhysikalischerWertExtension.html",
+          "hash": "EAMH7XM6XYxt7n+izCVKoA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/BO4E.Extensions.COM.VerbrauchExtension.VerbrauchDateTimeComparer.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/BO4E.Extensions.COM.VerbrauchExtension.VerbrauchDateTimeComparer.html",
+          "hash": "1xnrs7OOSnlmIkqwMrhldA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/BO4E.Extensions.COM.VerbrauchExtension.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/BO4E.Extensions.COM.VerbrauchExtension.html",
+          "hash": "jdrCwFHYPa/oIbwxbXTa3A=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/BO4E.Extensions.COM.ZeitraumExtension.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/BO4E.Extensions.COM.ZeitraumExtension.html",
+          "hash": "n9RpHCSXufwH0ZeHCGwKSw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/BO4E.Extensions.COM.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/BO4E.Extensions.COM.html",
+          "hash": "5ApkUyGnIjOOTugkwor/bg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/BO4E.Extensions.ENUM.MengeneinheitExtenion.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/BO4E.Extensions.ENUM.MengeneinheitExtenion.html",
+          "hash": "PA+t6WxqYWPIxq549io9bA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/BO4E.Extensions.ENUM.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/BO4E.Extensions.ENUM.html",
+          "hash": "xs9uUS/98oYopCYxNv1wDQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/BO4E.Extensions.Encryption.Anonymizer.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/BO4E.Extensions.Encryption.Anonymizer.html",
+          "hash": "gLmw/pTzc4w0+CDu3GWtkw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/BO4E.Extensions.Encryption.AnonymizerApproach.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/BO4E.Extensions.Encryption.AnonymizerApproach.html",
+          "hash": "uFfYgJMMyWfRcCh5hZGRXw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/BO4E.Extensions.Encryption.AnonymizerConfiguration.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/BO4E.Extensions.Encryption.AnonymizerConfiguration.html",
+          "hash": "5eahLiP9ZRtOPVMZ5vcfLQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/BO4E.Extensions.Encryption.AsymmetricEncrypter.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/BO4E.Extensions.Encryption.AsymmetricEncrypter.html",
+          "hash": "gRYYILsG5gefa4Q2widx0w=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/BO4E.Extensions.Encryption.Encrypter.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/BO4E.Extensions.Encryption.Encrypter.html",
+          "hash": "COu45yFLnSg9Zvid/p63Dg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/BO4E.Extensions.Encryption.SymmetricEncrypter.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/BO4E.Extensions.Encryption.SymmetricEncrypter.html",
+          "hash": "/x3KAyOZqyeDBwelbc//tA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/BO4E.Extensions.Encryption.X509AsymmetricEncrypter.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/BO4E.Extensions.Encryption.X509AsymmetricEncrypter.html",
+          "hash": "nLu/Naohgsw59dKLgAz0kg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/BO4E.Extensions.Encryption.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/BO4E.Extensions.Encryption.html",
+          "hash": "Ql01lFPLz7YM+V/ADK9+RA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/BO4E.LenientParsing.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/BO4E.LenientParsing.html",
+          "hash": "L/QEhnOov0yXCgy2OLIlSQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/BO4E.Reporting.CompletenessReport.BasicVerbrauch.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/BO4E.Reporting.CompletenessReport.BasicVerbrauch.html",
+          "hash": "VOOJkGlCfdzNqPFeCgjIIw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/BO4E.Reporting.CompletenessReport.CompletenessReportConfiguration.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/BO4E.Reporting.CompletenessReport.CompletenessReportConfiguration.html",
+          "hash": "DNLwpoYcC4bOV7qL8TkwIQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/BO4E.Reporting.CompletenessReport.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/BO4E.Reporting.CompletenessReport.html",
+          "hash": "SqT5eWHEYrEVnlUAFHLK/Q=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/BO4E.Reporting.PlausibilityReport.PlausibilityReportConfiguration.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/BO4E.Reporting.PlausibilityReport.PlausibilityReportConfiguration.html",
+          "hash": "MFKN9mxyC0w0Hnl2bytxsA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/BO4E.Reporting.PlausibilityReport.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/BO4E.Reporting.PlausibilityReport.html",
+          "hash": "R8lzWRBfUtmpzTryyBCMeA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/BO4E.Reporting.Report.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/BO4E.Reporting.Report.html",
+          "hash": "aCb6ReqTmgexHGiOr8x+Gw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/BO4E.Reporting.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/BO4E.Reporting.html",
+          "hash": "S3JcPwzBZ86zFTeeGsB7ng=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/BO4E.StaticLogger.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/BO4E.StaticLogger.html",
+          "hash": "sLk/HAB+QPPDNXZadEPk3w=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/BO4E.meta.Bo4eUri.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/BO4E.meta.Bo4eUri.html",
+          "hash": "HtjITL5sMzcmfyB29pCeug=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/BO4E.meta.BoKey.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/BO4E.meta.BoKey.html",
+          "hash": "SzIYpDh2tO/oMGJgG2u5jA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/BO4E.meta.DataCategory.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/BO4E.meta.DataCategory.html",
+          "hash": "Wy87uArqGv2cW0gkBGcTtg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/BO4E.meta.DataCategoryAttribute.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/BO4E.meta.DataCategoryAttribute.html",
+          "hash": "As6jVvuTT0OzHe0VPITmSQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/BO4E.meta.FieldName.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/BO4E.meta.FieldName.html",
+          "hash": "fKPWHQSmZzeR2KKqYL7Hag=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/BO4E.meta.Language.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/BO4E.meta.Language.html",
+          "hash": "TPWAalXknmHVvu92mHF/XQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/BO4E.meta.MultiLangResolver.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/BO4E.meta.MultiLangResolver.html",
+          "hash": "tExjBfwx57aKpsOqAmjlEw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/BO4E.meta.NonOfficialAttribute.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/BO4E.meta.NonOfficialAttribute.html",
+          "hash": "MssXiP2i5IGj0EgtuTKw4g=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/BO4E.meta.NonOfficialCategory.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/BO4E.meta.NonOfficialCategory.html",
+          "hash": "2/H1bBeE82JaXab90clnRw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/BO4E.meta.StringUriConverter.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/BO4E.meta.StringUriConverter.html",
+          "hash": "EV8WpqI2OnQBuRHPlakrEQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/BO4E.meta.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/BO4E.meta.html",
+          "hash": "ftI2SeO1YQmdtLq/46HAdw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/BO4E.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/BO4E.html",
+          "hash": "ErQLsJqYMG8KTpLXpcZDxw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/TestBO4E.Reporting.TestCompletenessReportSorting.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/TestBO4E.Reporting.TestCompletenessReportSorting.html",
+          "hash": "4/wUh644WIgAySOEv6XqLQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/TestBO4E.Reporting.TestReportToCsv.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/TestBO4E.Reporting.TestReportToCsv.html",
+          "hash": "tTF9Pg7woICz6ZthxEYuYA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/TestBO4E.Reporting.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/TestBO4E.Reporting.html",
+          "hash": "5C1FdMdW0RZR2gb9dq+/Ig=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/TestBO4EExtensions.Encryption.TestAnonymizer.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/TestBO4EExtensions.Encryption.TestAnonymizer.html",
+          "hash": "fWiBnuYMBenfZxj91jtbXg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/TestBO4EExtensions.Encryption.TestAnonymizerConfiguration.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/TestBO4EExtensions.Encryption.TestAnonymizerConfiguration.html",
+          "hash": "sOHdigr94aMkPouDSJLxYg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/TestBO4EExtensions.Encryption.TestEncrypter.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/TestBO4EExtensions.Encryption.TestEncrypter.html",
+          "hash": "JyqT3c+zdN3U93IvenhIUQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/TestBO4EExtensions.Encryption.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/TestBO4EExtensions.Encryption.html",
+          "hash": "+qR+nrUtrfFZ7h0zcFLTKg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/TestBO4EExtensions.TestBenachrichtigungExtension.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/TestBO4EExtensions.TestBenachrichtigungExtension.html",
+          "hash": "T0ncERsqjwsY9+bJIzUruQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/TestBO4EExtensions.TestCloningExtension.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/TestBO4EExtensions.TestCloningExtension.html",
+          "hash": "XTueLWdSuDm0WprBYUjhrw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/TestBO4EExtensions.TestEnergiemengeExtension.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/TestBO4EExtensions.TestEnergiemengeExtension.html",
+          "hash": "1ZhYC0whmIhpy1/rv+PaTA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/TestBO4EExtensions.TestEnergiemengeExtensionCompleteness.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/TestBO4EExtensions.TestEnergiemengeExtensionCompleteness.html",
+          "hash": "DR9ft4i1HAM7VeeNq9tHQQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/TestBO4EExtensions.TestEnergiemengeExtensionPlausibility.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/TestBO4EExtensions.TestEnergiemengeExtensionPlausibility.html",
+          "hash": "SvNtR0nQ8WXKFY1M/AoNiw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/TestBO4EExtensions.TestMengeneinheitExtension.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/TestBO4EExtensions.TestMengeneinheitExtension.html",
+          "hash": "o8itcy1ay8C2je6I9R+6wg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/TestBO4EExtensions.TestVerbrauchExtension.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/TestBO4EExtensions.TestVerbrauchExtension.html",
+          "hash": "QIlJTMyUqBVH2sZhBfcvOQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/TestBO4EExtensions.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/TestBO4EExtensions.html",
+          "hash": "sl+RE0Oh/vsSF254SrSUmw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Toc",
+      "source_relative_path": "api/toc.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/toc.html",
+          "hash": "/AO0zof/3/hBqsxSIu2I4g=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    }
+  ],
+  "incremental_info": [
+    {
+      "status": {
+        "can_incremental": false,
+        "details": "Cannot build incrementally because last build info is missing.",
+        "incrementalPhase": "build",
+        "total_file_count": 0,
+        "skipped_file_count": 0,
+        "full_build_reason_code": "NoAvailableBuildCache"
+      },
+      "processors": {
+        "ConceptualDocumentProcessor": {
+          "can_incremental": false,
+          "incrementalPhase": "build",
+          "total_file_count": 1,
+          "skipped_file_count": 0
+        },
+        "ManagedReferenceDocumentProcessor": {
+          "can_incremental": false,
+          "incrementalPhase": "build",
+          "total_file_count": 263,
+          "skipped_file_count": 0
+        },
+        "TocDocumentProcessor": {
+          "can_incremental": false,
+          "details": "Processor TocDocumentProcessor cannot support incremental build because the processor doesn't implement ISupportIncrementalDocumentProcessor interface.",
+          "incrementalPhase": "build",
+          "total_file_count": 0,
+          "skipped_file_count": 0
+        }
+      }
+    },
+    {
+      "status": {
+        "can_incremental": false,
+        "details": "Cannot support incremental post processing, the reason is: last post processor info is null.",
+        "incrementalPhase": "postProcessing",
+        "total_file_count": 0,
+        "skipped_file_count": 0
+      },
+      "processors": {}
+    }
+  ],
+  "version_info": {},
+  "groups": [
+    {
+      "xrefmap": "xrefmap.yml"
+    }
+  ]
+}

@@ -1,0 +1,146 @@
+﻿<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<html>
+  
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>Namespace BO4E.Reporting
+   </title>
+    <meta name="viewport" content="width=device-width">
+    <meta name="title" content="Namespace BO4E.Reporting
+   ">
+    <meta name="generator" content="docfx 2.50.0.0">
+    
+    <link rel="shortcut icon" href="../favicon.ico">
+    <link rel="stylesheet" href="../styles/docfx.vendor.css">
+    <link rel="stylesheet" href="../styles/docfx.css">
+    <link rel="stylesheet" href="../styles/main.css">
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
+    <meta property="docfx:navrel" content="">
+    <meta property="docfx:tocrel" content="toc.html">
+    
+    
+    
+  </head>  <body data-spy="scroll" data-target="#affix" data-offset="120">
+    <div id="wrapper">
+      <header>
+        
+        <nav id="autocollapse" class="navbar navbar-inverse ng-scope" role="navigation">
+          <div class="container">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+              
+              <a class="navbar-brand" href="../index.html">
+                <img id="logo" class="svg" src="../logo.svg" alt="">
+              </a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar">
+              <form class="navbar-form navbar-right" role="search" id="search">
+                <div class="form-group">
+                  <input type="text" class="form-control" id="search-query" placeholder="Search" autocomplete="off">
+                </div>
+              </form>
+            </div>
+          </div>
+        </nav>
+        
+        <div class="subnav navbar navbar-default">
+          <div class="container hide-when-search" id="breadcrumb">
+            <ul class="breadcrumb">
+              <li></li>
+            </ul>
+          </div>
+        </div>
+      </header>
+      <div role="main" class="container body-content hide-when-search">
+        
+        <div class="sidenav hide-when-search">
+          <a class="btn toc-toggle collapse" data-toggle="collapse" href="#sidetoggle" aria-expanded="false" aria-controls="sidetoggle">Show / Hide Table of Contents</a>
+          <div class="sidetoggle collapse" id="sidetoggle">
+            <div id="sidetoc"></div>
+          </div>
+        </div>
+        <div class="article row grid-right">
+          <div class="col-md-10">
+            <article class="content wrap" id="_content" data-uid="BO4E.Reporting">
+  
+  <h1 id="BO4E_Reporting" data-uid="BO4E.Reporting" class="text-break">Namespace BO4E.Reporting
+  </h1>
+  <div class="markdown level0 summary"></div>
+  <div class="markdown level0 conceptual"></div>
+  <div class="markdown level0 remarks"></div>
+    <h3 id="classes">Classes
+  </h3>
+      <h4><a class="xref" href="BO4E.Reporting.CompletenessReport.html">CompletenessReport</a></h4>
+      <section><p>A completeness report contains information about the completeness of a pure
+<see cref="!:Energiemenge"></see>. In this context &quot;pure&quot; means, that the Energiemenge
+does only contain one distinct set of (<a class="xref" href="BO4E.COM.Verbrauch.html#BO4E_COM_Verbrauch_obiskennzahl">obiskennzahl</a>, <a class="xref" href="BO4E.COM.Verbrauch.html#BO4E_COM_Verbrauch_einheit">einheit</a>,
+<a class="xref" href="BO4E.COM.Verbrauch.html#BO4E_COM_Verbrauch_wertermittlungsverfahren">wertermittlungsverfahren</a>).</p>
+</section>
+      <h4><a class="xref" href="BO4E.Reporting.CompletenessReport.BasicVerbrauch.html">CompletenessReport.BasicVerbrauch</a></h4>
+      <section><p>similar to <a class="xref" href="BO4E.COM.Verbrauch.html">Verbrauch</a> but with less obligatory values.</p>
+</section>
+      <h4><a class="xref" href="BO4E.Reporting.CompletenessReport.CompletenessReportConfiguration.html">CompletenessReport.CompletenessReportConfiguration</a></h4>
+      <section><p>This data class contains all the parameters required to start the CompletenessReport generation.
+It's easier to handle than four single parameters passed to the constructor of the CompletenessReport.</p>
+</section>
+      <h4><a class="xref" href="BO4E.Reporting.PlausibilityReport.html">PlausibilityReport</a></h4>
+      <section><p>A plausibility report contains information about how likely it is that two objects of
+of the type <a class="xref" href="BO4E.BO.Energiemenge.html">Energiemenge</a> are actually from the same source. Typically
+you'd like to compare Energiemenge from meter readings with different graining.
+E.g. values that are transmitted periodically in 15minute intervals and isolated
+readings.</p>
+</section>
+      <h4><a class="xref" href="BO4E.Reporting.PlausibilityReport.PlausibilityReportConfiguration.html">PlausibilityReport.PlausibilityReportConfiguration</a></h4>
+      <section><p>This data class contains all the data required to start the PlausibilityReport generation.
+It's easier to handle than four single parameters passed to the constructor of the Plausibility Report.</p>
+</section>
+      <h4><a class="xref" href="BO4E.Reporting.Report.html">Report</a></h4>
+      <section><p>The base class of all reports.
+The idea behind this BusinessObject and all derived classes is that heavy calculations
+of interesting metrics is separated from displaying the data. Report BO acts as a intermediate
+format between a BusinessObject extension methods and e.g. a Notification- or Plotting
+service that can easily rely on the pre calculated values stored in a Report Object.</p>
+</section>
+</article>
+          </div>
+          
+          <div class="hidden-sm col-md-2" role="complementary">
+            <div class="sideaffix">
+              <div class="contribution">
+                <ul class="nav">
+                </ul>
+              </div>
+              <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
+              <!-- <p><a class="back-to-top" href="#top">Back to top</a><p> -->
+              </nav>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <footer>
+        <div class="grad-bottom"></div>
+        <div class="footer">
+          <div class="container">
+            <span class="pull-right">
+              <a href="#top">Back to top</a>
+            </span>
+            
+            <span>Generated by <strong>DocFX</strong></span>
+          </div>
+        </div>
+      </footer>
+    </div>
+    
+    <script type="text/javascript" src="../styles/docfx.vendor.js"></script>
+    <script type="text/javascript" src="../styles/docfx.js"></script>
+    <script type="text/javascript" src="../styles/main.js"></script>
+  </body>
+</html>

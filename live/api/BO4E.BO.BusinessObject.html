@@ -1,0 +1,1100 @@
+﻿<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<html>
+  
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>Class BusinessObject
+   </title>
+    <meta name="viewport" content="width=device-width">
+    <meta name="title" content="Class BusinessObject
+   ">
+    <meta name="generator" content="docfx 2.50.0.0">
+    
+    <link rel="shortcut icon" href="../favicon.ico">
+    <link rel="stylesheet" href="../styles/docfx.vendor.css">
+    <link rel="stylesheet" href="../styles/docfx.css">
+    <link rel="stylesheet" href="../styles/main.css">
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
+    <meta property="docfx:navrel" content="">
+    <meta property="docfx:tocrel" content="toc.html">
+    
+    
+    
+  </head>  <body data-spy="scroll" data-target="#affix" data-offset="120">
+    <div id="wrapper">
+      <header>
+        
+        <nav id="autocollapse" class="navbar navbar-inverse ng-scope" role="navigation">
+          <div class="container">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+              
+              <a class="navbar-brand" href="../index.html">
+                <img id="logo" class="svg" src="../logo.svg" alt="">
+              </a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar">
+              <form class="navbar-form navbar-right" role="search" id="search">
+                <div class="form-group">
+                  <input type="text" class="form-control" id="search-query" placeholder="Search" autocomplete="off">
+                </div>
+              </form>
+            </div>
+          </div>
+        </nav>
+        
+        <div class="subnav navbar navbar-default">
+          <div class="container hide-when-search" id="breadcrumb">
+            <ul class="breadcrumb">
+              <li></li>
+            </ul>
+          </div>
+        </div>
+      </header>
+      <div role="main" class="container body-content hide-when-search">
+        
+        <div class="sidenav hide-when-search">
+          <a class="btn toc-toggle collapse" data-toggle="collapse" href="#sidetoggle" aria-expanded="false" aria-controls="sidetoggle">Show / Hide Table of Contents</a>
+          <div class="sidetoggle collapse" id="sidetoggle">
+            <div id="sidetoc"></div>
+          </div>
+        </div>
+        <div class="article row grid-right">
+          <div class="col-md-10">
+            <article class="content wrap" id="_content" data-uid="BO4E.BO.BusinessObject">
+  
+  
+  <h1 id="BO4E_BO_BusinessObject" data-uid="BO4E.BO.BusinessObject" class="text-break">Class BusinessObject
+  </h1>
+  <div class="markdown level0 summary"><p>General abstract class for Business Objects for Energy (BO4E)</p>
+</div>
+  <div class="markdown level0 conceptual"></div>
+  <div class="inheritance">
+    <h5>Inheritance</h5>
+    <div class="level0"><span class="xref">System.Object</span></div>
+    <div class="level1"><span class="xref">BusinessObject</span></div>
+      <div class="level2"><a class="xref" href="BO4E.BO.Angebot.html">Angebot</a></div>
+      <div class="level2"><a class="xref" href="BO4E.BO.Ansprechpartner.html">Ansprechpartner</a></div>
+      <div class="level2"><a class="xref" href="BO4E.BO.Benachrichtigung.html">Benachrichtigung</a></div>
+      <div class="level2"><a class="xref" href="BO4E.BO.EncryptedObject.html">EncryptedObject</a></div>
+      <div class="level2"><a class="xref" href="BO4E.BO.Energiemenge.html">Energiemenge</a></div>
+      <div class="level2"><a class="xref" href="BO4E.BO.Geschaeftspartner.html">Geschaeftspartner</a></div>
+      <div class="level2"><a class="xref" href="BO4E.BO.Kosten.html">Kosten</a></div>
+      <div class="level2"><a class="xref" href="BO4E.BO.LogObject.html">LogObject</a></div>
+      <div class="level2"><a class="xref" href="BO4E.BO.Marktlokation.html">Marktlokation</a></div>
+      <div class="level2"><a class="xref" href="BO4E.BO.Messlokation.html">Messlokation</a></div>
+      <div class="level2"><a class="xref" href="BO4E.BO.Preisblatt.html">Preisblatt</a></div>
+      <div class="level2"><a class="xref" href="BO4E.BO.Rechnung.html">Rechnung</a></div>
+      <div class="level2"><a class="xref" href="BO4E.BO.Region.html">Region</a></div>
+      <div class="level2"><a class="xref" href="BO4E.BO.Vertrag.html">Vertrag</a></div>
+      <div class="level2"><a class="xref" href="BO4E.BO.Zaehler.html">Zaehler</a></div>
+      <div class="level2"><a class="xref" href="BO4E.Reporting.Report.html">Report</a></div>
+  </div>
+  <h6><strong>Namespace</strong>: <a class="xref" href="BO4E.BO.html">BO4E.BO</a></h6>
+  <h6><strong>Assembly</strong>: BO4Enet.dll</h6>
+  <h5 id="BO4E_BO_BusinessObject_syntax">Syntax</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public abstract class BusinessObject : IEquatable&lt;BusinessObject&gt;</code></pre>
+  </div>
+  <h3 id="constructors">Constructors
+  </h3>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/Hochfrequenz/BO4E-dotnet/new/0bfc7d6fc2702427f4fe6d54024dc7b00b8072b6/apiSpec/new?filename=BO4E_BO_BusinessObject__ctor.md&amp;value=---%0Auid%3A%20BO4E.BO.BusinessObject.%23ctor%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/Hochfrequenz/BO4E-dotnet/blob/0bfc7d6fc2702427f4fe6d54024dc7b00b8072b6/BO4E-dotnet/BO/BusinessObject.cs/#L98">View Source</a>
+  </span>
+  <a id="BO4E_BO_BusinessObject__ctor_" data-uid="BO4E.BO.BusinessObject.#ctor*"></a>
+  <h4 id="BO4E_BO_BusinessObject__ctor" data-uid="BO4E.BO.BusinessObject.#ctor">BusinessObject()</h4>
+  <div class="markdown level1 summary"><p>generates the BO4E boTyp attribute value (class name as upper case)</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected BusinessObject()</code></pre>
+  </div>
+  <h3 id="fields">Fields
+  </h3>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/Hochfrequenz/BO4E-dotnet/new/0bfc7d6fc2702427f4fe6d54024dc7b00b8072b6/apiSpec/new?filename=BO4E_BO_BusinessObject_boTyp.md&amp;value=---%0Auid%3A%20BO4E.BO.BusinessObject.boTyp%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/Hochfrequenz/BO4E-dotnet/blob/0bfc7d6fc2702427f4fe6d54024dc7b00b8072b6/BO4E-dotnet/BO/BusinessObject.cs/#L51">View Source</a>
+  </span>
+  <h4 id="BO4E_BO_BusinessObject_boTyp" data-uid="BO4E.BO.BusinessObject.boTyp">boTyp</h4>
+  <div class="markdown level1 summary"><p>obligatory type of the business object in UPPER CASE</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public string boTyp</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 id="BO4E_BO_BusinessObject_boTyp_examples">Examples</h5>
+  <p>'MESSLOKATION',
+'MARKTLOKATION'</p>
+
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/Hochfrequenz/BO4E-dotnet/new/0bfc7d6fc2702427f4fe6d54024dc7b00b8072b6/apiSpec/new?filename=BO4E_BO_BusinessObject_guid.md&amp;value=---%0Auid%3A%20BO4E.BO.BusinessObject.guid%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/Hochfrequenz/BO4E-dotnet/blob/0bfc7d6fc2702427f4fe6d54024dc7b00b8072b6/BO4E-dotnet/BO/BusinessObject.cs/#L133">View Source</a>
+  </span>
+  <h4 id="BO4E_BO_BusinessObject_guid" data-uid="BO4E.BO.BusinessObject.guid">guid</h4>
+  <div class="markdown level1 summary"><p>allows adding a GUID to Business Objects for tracking across systems</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public string guid</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/Hochfrequenz/BO4E-dotnet/new/0bfc7d6fc2702427f4fe6d54024dc7b00b8072b6/apiSpec/new?filename=BO4E_BO_BusinessObject_userProperties.md&amp;value=---%0Auid%3A%20BO4E.BO.BusinessObject.userProperties%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/Hochfrequenz/BO4E-dotnet/blob/0bfc7d6fc2702427f4fe6d54024dc7b00b8072b6/BO4E-dotnet/BO/BusinessObject.cs/#L93">View Source</a>
+  </span>
+  <h4 id="BO4E_BO_BusinessObject_userProperties" data-uid="BO4E.BO.BusinessObject.userProperties">userProperties</h4>
+  <div class="markdown level1 summary"><p>User properties (non bo4e standard)</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public IDictionary&lt;string, JToken&gt; userProperties</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">IDictionary</span>&lt;<span class="xref">System.String</span>, <span class="xref">JToken</span>&gt;</td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/Hochfrequenz/BO4E-dotnet/new/0bfc7d6fc2702427f4fe6d54024dc7b00b8072b6/apiSpec/new?filename=BO4E_BO_BusinessObject_userPropertiesName.md&amp;value=---%0Auid%3A%20BO4E.BO.BusinessObject.userPropertiesName%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/Hochfrequenz/BO4E-dotnet/blob/0bfc7d6fc2702427f4fe6d54024dc7b00b8072b6/BO4E-dotnet/BO/BusinessObject.cs/#L84">View Source</a>
+  </span>
+  <h4 id="BO4E_BO_BusinessObject_userPropertiesName" data-uid="BO4E.BO.BusinessObject.userPropertiesName">userPropertiesName</h4>
+  <div class="markdown level1 summary"><p>Fields that are not part of the BO4E-definition are stored in a element, that is
+accessable under the key defined in userPropertiesName.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public const string userPropertiesName = null</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 id="BO4E_BO_BusinessObject_userPropertiesName_examples">Examples</h5>
+  <pre><code>{
+   &quot;boTyp&quot;: &quot;MESSLOKATION&quot;,
+   &quot;versionStruktur&quot;: 1,
+   &quot;messLokationsId&quot;: &quot;DE123...&quot;,
+   &quot;irgendwas unbekanntes&quot;: &quot;xyz&quot;
+}</code></pre>
+<p>is mapped to</p>
+<pre><code>{
+   &quot;boTyp&quot;: &quot;MESSLOKATION&quot;,
+   &quot;versionStruktur&quot;: 1,
+   &quot;messLokationsId&quot;: &quot;DE123...&quot;,
+   &quot;userProperties&quot;:
+   {
+       &quot;irgendwas unbekanntes&quot;: &quot;xyz&quot;
+   }
+}</code></pre>
+<p>This keeps the Business Object simple but allows for user specific arguments beyond
+the BO4E standard to be passed along.</p>
+
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/Hochfrequenz/BO4E-dotnet/new/0bfc7d6fc2702427f4fe6d54024dc7b00b8072b6/apiSpec/new?filename=BO4E_BO_BusinessObject_versionStruktur.md&amp;value=---%0Auid%3A%20BO4E.BO.BusinessObject.versionStruktur%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/Hochfrequenz/BO4E-dotnet/blob/0bfc7d6fc2702427f4fe6d54024dc7b00b8072b6/BO4E-dotnet/BO/BusinessObject.cs/#L126">View Source</a>
+  </span>
+  <h4 id="BO4E_BO_BusinessObject_versionStruktur" data-uid="BO4E.BO.BusinessObject.versionStruktur">versionStruktur</h4>
+  <div class="markdown level1 summary"><p>obligatory version of the BO4E definition. Currently hard coded to 1</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public int versionStruktur</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Int32</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 id="BO4E_BO_BusinessObject_versionStruktur_examples">Examples</h5>
+  <p>1</p>
+
+  <h3 id="methods">Methods
+  </h3>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/Hochfrequenz/BO4E-dotnet/new/0bfc7d6fc2702427f4fe6d54024dc7b00b8072b6/apiSpec/new?filename=BO4E_BO_BusinessObject_DeserializationFixes_StreamingContext_.md&amp;value=---%0Auid%3A%20BO4E.BO.BusinessObject.DeserializationFixes(StreamingContext)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/Hochfrequenz/BO4E-dotnet/blob/0bfc7d6fc2702427f4fe6d54024dc7b00b8072b6/BO4E-dotnet/BO/BusinessObject.cs/#L430">View Source</a>
+  </span>
+  <a id="BO4E_BO_BusinessObject_DeserializationFixes_" data-uid="BO4E.BO.BusinessObject.DeserializationFixes*"></a>
+  <h4 id="BO4E_BO_BusinessObject_DeserializationFixes_StreamingContext_" data-uid="BO4E.BO.BusinessObject.DeserializationFixes(StreamingContext)">DeserializationFixes(StreamingContext)</h4>
+  <div class="markdown level1 summary"><p>converts <a class="xref" href="BO4E.BO.BusinessObject.html#BO4E_BO_BusinessObject_boTyp">boTyp</a> to upper case.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected void DeserializationFixes(StreamingContext context)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">StreamingContext</span></td>
+        <td><span class="parametername">context</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/Hochfrequenz/BO4E-dotnet/new/0bfc7d6fc2702427f4fe6d54024dc7b00b8072b6/apiSpec/new?filename=BO4E_BO_BusinessObject_Equals_BO4E_BO_BusinessObject_.md&amp;value=---%0Auid%3A%20BO4E.BO.BusinessObject.Equals(BO4E.BO.BusinessObject)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/Hochfrequenz/BO4E-dotnet/blob/0bfc7d6fc2702427f4fe6d54024dc7b00b8072b6/BO4E-dotnet/BO/BusinessObject.cs/#L371">View Source</a>
+  </span>
+  <a id="BO4E_BO_BusinessObject_Equals_" data-uid="BO4E.BO.BusinessObject.Equals*"></a>
+  <h4 id="BO4E_BO_BusinessObject_Equals_BO4E_BO_BusinessObject_" data-uid="BO4E.BO.BusinessObject.Equals(BO4E.BO.BusinessObject)">Equals(BusinessObject)</h4>
+  <div class="markdown level1 summary"><p>BO4E Business Objects are considered equal iff all of their elements/fields are equal.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public bool Equals(BusinessObject b)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="BO4E.BO.BusinessObject.html">BusinessObject</a></td>
+        <td><span class="parametername">b</span></td>
+        <td><p>another Business Object</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Boolean</span></td>
+        <td><pre><code>true</code></pre> iff b has the same type as this object and all elements
+<p>of this and object b are equal; <pre><code>false</code></pre> otherwise</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/Hochfrequenz/BO4E-dotnet/new/0bfc7d6fc2702427f4fe6d54024dc7b00b8072b6/apiSpec/new?filename=BO4E_BO_BusinessObject_Equals_System_Object_.md&amp;value=---%0Auid%3A%20BO4E.BO.BusinessObject.Equals(System.Object)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/Hochfrequenz/BO4E-dotnet/blob/0bfc7d6fc2702427f4fe6d54024dc7b00b8072b6/BO4E-dotnet/BO/BusinessObject.cs/#L352">View Source</a>
+  </span>
+  <a id="BO4E_BO_BusinessObject_Equals_" data-uid="BO4E.BO.BusinessObject.Equals*"></a>
+  <h4 id="BO4E_BO_BusinessObject_Equals_System_Object_" data-uid="BO4E.BO.BusinessObject.Equals(System.Object)">Equals(Object)</h4>
+  <div class="markdown level1 summary"><p>BO4E Business Objects are considered equal iff all of their elements/fields are equal.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public override bool Equals(object b)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Object</span></td>
+        <td><span class="parametername">b</span></td>
+        <td><p>another object</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Boolean</span></td>
+        <td><pre><code>true</code></pre> iff b has the same type as this object and all elements of this and object b are equal; <pre><code>false</code></pre> otherwise
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/Hochfrequenz/BO4E-dotnet/new/0bfc7d6fc2702427f4fe6d54024dc7b00b8072b6/apiSpec/new?filename=BO4E_BO_BusinessObject_GetBoKeyFieldInfos_Type_.md&amp;value=---%0Auid%3A%20BO4E.BO.BusinessObject.GetBoKeyFieldInfos(Type)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/Hochfrequenz/BO4E-dotnet/blob/0bfc7d6fc2702427f4fe6d54024dc7b00b8072b6/BO4E-dotnet/BO/BusinessObject.cs/#L337">View Source</a>
+  </span>
+  <a id="BO4E_BO_BusinessObject_GetBoKeyFieldInfos_" data-uid="BO4E.BO.BusinessObject.GetBoKeyFieldInfos*"></a>
+  <h4 id="BO4E_BO_BusinessObject_GetBoKeyFieldInfos_Type_" data-uid="BO4E.BO.BusinessObject.GetBoKeyFieldInfos(Type)">GetBoKeyFieldInfos(Type)</h4>
+  <div class="markdown level1 summary"><p>Get a list of FieldInfo objects that contain the key of a Business Object.
+The list is sorted by the JsonPropertyAttribute.Order, assuming 0 if not specified.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static List&lt;FieldInfo&gt; GetBoKeyFieldInfos(Type boType)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">Type</span></td>
+        <td><span class="parametername">boType</span></td>
+        <td><p>Business Object type</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">List</span>&lt;<span class="xref">FieldInfo</span>&gt;</td>
+        <td><p>A list of FieldInfos to be used for accessing the key values.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/Hochfrequenz/BO4E-dotnet/new/0bfc7d6fc2702427f4fe6d54024dc7b00b8072b6/apiSpec/new?filename=BO4E_BO_BusinessObject_GetBoKeyNames.md&amp;value=---%0Auid%3A%20BO4E.BO.BusinessObject.GetBoKeyNames%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/Hochfrequenz/BO4E-dotnet/blob/0bfc7d6fc2702427f4fe6d54024dc7b00b8072b6/BO4E-dotnet/BO/BusinessObject.cs/#L189">View Source</a>
+  </span>
+  <a id="BO4E_BO_BusinessObject_GetBoKeyNames_" data-uid="BO4E.BO.BusinessObject.GetBoKeyNames*"></a>
+  <h4 id="BO4E_BO_BusinessObject_GetBoKeyNames" data-uid="BO4E.BO.BusinessObject.GetBoKeyNames">GetBoKeyNames()</h4>
+  <div class="markdown level1 summary"><p>(Some) Business Objects do have keys that should identify them in a unique manner across
+multiple systems. This method returns a list of these keys. The list contains the key
+names as they are serialised in JSON. This means that the fields PropertyName is part
+of the list if JsonPropertyAttribute.PropertyName is set in the Business Objects
+definition. Please do not use this method trying to access the actual key values. Use
+the <a class="xref" href="BO4E.BO.BusinessObject.html#BO4E_BO_BusinessObject_GetBoKeys">GetBoKeys()</a> or <a class="xref" href="BO4E.BO.BusinessObject.html#BO4E_BO_BusinessObject_GetBoKeyFieldInfos_Type_">GetBoKeyFieldInfos(Type)</a> for this purpose.
+The list is sorted by the JsonPropertyAttribute.Order, assuming 0 if not specified.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public List&lt;string&gt; GetBoKeyNames()</code></pre>
+  </div>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">List</span>&lt;<span class="xref">System.String</span>&gt;</td>
+        <td><p>A list of the names (not the values) of the (composite) Business Object key or an empty list if no key attributes are defined.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 id="BO4E_BO_BusinessObject_GetBoKeyNames_examples">Examples</h5>
+  <pre><code>    Marktlokation malo = ... some initialisation code ...;
+    malo.GetBoKeyNames()</code></pre>
+<p>[ &quot;marktlokationsId&quot; ]</p>
+
+  <h5 id="BO4E_BO_BusinessObject_GetBoKeyNames_seealso">See Also</h5>
+  <div class="seealso">
+      <div><a class="xref" href="BO4E.BO.BusinessObject.html#BO4E_BO_BusinessObject_GetBoKeyNames_Type_">GetBoKeyNames(Type)</a></div>
+  </div>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/Hochfrequenz/BO4E-dotnet/new/0bfc7d6fc2702427f4fe6d54024dc7b00b8072b6/apiSpec/new?filename=BO4E_BO_BusinessObject_GetBoKeyNames_Type_.md&amp;value=---%0Auid%3A%20BO4E.BO.BusinessObject.GetBoKeyNames(Type)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/Hochfrequenz/BO4E-dotnet/blob/0bfc7d6fc2702427f4fe6d54024dc7b00b8072b6/BO4E-dotnet/BO/BusinessObject.cs/#L199">View Source</a>
+  </span>
+  <a id="BO4E_BO_BusinessObject_GetBoKeyNames_" data-uid="BO4E.BO.BusinessObject.GetBoKeyNames*"></a>
+  <h4 id="BO4E_BO_BusinessObject_GetBoKeyNames_Type_" data-uid="BO4E.BO.BusinessObject.GetBoKeyNames(Type)">GetBoKeyNames(Type)</h4>
+  <div class="markdown level1 summary"><p>Same as <a class="xref" href="BO4E.BO.BusinessObject.html#BO4E_BO_BusinessObject_GetBoKeyNames_Type_">GetBoKeyNames(Type)</a> but allows static calling with a Business Object Type provided.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static List&lt;string&gt; GetBoKeyNames(Type boType)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">Type</span></td>
+        <td><span class="parametername">boType</span></td>
+        <td><p>Business Object Type</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">List</span>&lt;<span class="xref">System.String</span>&gt;</td>
+        <td><p>A list just like the result of <a class="xref" href="BO4E.BO.BusinessObject.html#BO4E_BO_BusinessObject_GetBoKeyNames_Type_">GetBoKeyNames(Type)</a></p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/Hochfrequenz/BO4E-dotnet/new/0bfc7d6fc2702427f4fe6d54024dc7b00b8072b6/apiSpec/new?filename=BO4E_BO_BusinessObject_GetBoKeys.md&amp;value=---%0Auid%3A%20BO4E.BO.BusinessObject.GetBoKeys%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/Hochfrequenz/BO4E-dotnet/blob/0bfc7d6fc2702427f4fe6d54024dc7b00b8072b6/BO4E-dotnet/BO/BusinessObject.cs/#L313">View Source</a>
+  </span>
+  <a id="BO4E_BO_BusinessObject_GetBoKeys_" data-uid="BO4E.BO.BusinessObject.GetBoKeys*"></a>
+  <h4 id="BO4E_BO_BusinessObject_GetBoKeys" data-uid="BO4E.BO.BusinessObject.GetBoKeys">GetBoKeys()</h4>
+  <div class="markdown level1 summary"><p>Get a dictionary containing the key values of this Business Object.
+The dictionary has the JsonPropertyAttribute.PropertyName or FieldName
+of the key as key and the actual key value as value.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public Dictionary&lt;string, object&gt; GetBoKeys()</code></pre>
+  </div>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">Dictionary</span>&lt;<span class="xref">System.String</span>, <span class="xref">System.Object</span>&gt;</td>
+        <td><p>A dictionary with key value pairs.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 id="BO4E_BO_BusinessObject_GetBoKeys_seealso">See Also</h5>
+  <div class="seealso">
+      <div><a class="xref" href="BO4E.BO.BusinessObject.html#BO4E_BO_BusinessObject_GetBoKeyFieldInfos_Type_">GetBoKeyFieldInfos(Type)</a></div>
+  </div>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/Hochfrequenz/BO4E-dotnet/new/0bfc7d6fc2702427f4fe6d54024dc7b00b8072b6/apiSpec/new?filename=BO4E_BO_BusinessObject_GetBoTyp.md&amp;value=---%0Auid%3A%20BO4E.BO.BusinessObject.GetBoTyp%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/Hochfrequenz/BO4E-dotnet/blob/0bfc7d6fc2702427f4fe6d54024dc7b00b8072b6/BO4E-dotnet/BO/BusinessObject.cs/#L108">View Source</a>
+  </span>
+  <a id="BO4E_BO_BusinessObject_GetBoTyp_" data-uid="BO4E.BO.BusinessObject.GetBoTyp*"></a>
+  <h4 id="BO4E_BO_BusinessObject_GetBoTyp" data-uid="BO4E.BO.BusinessObject.GetBoTyp">GetBoTyp()</h4>
+  <div class="markdown level1 summary"><p>return <a class="xref" href="BO4E.BO.BusinessObject.html#BO4E_BO_BusinessObject_boTyp">boTyp</a> (as string, not as type)</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public string GetBoTyp()</code></pre>
+  </div>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/Hochfrequenz/BO4E-dotnet/new/0bfc7d6fc2702427f4fe6d54024dc7b00b8072b6/apiSpec/new?filename=BO4E_BO_BusinessObject_GetExpandableFieldNames_System_String_.md&amp;value=---%0Auid%3A%20BO4E.BO.BusinessObject.GetExpandableFieldNames(System.String)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/Hochfrequenz/BO4E-dotnet/blob/0bfc7d6fc2702427f4fe6d54024dc7b00b8072b6/BO4E-dotnet/BO/BusinessObject.cs/#L240">View Source</a>
+  </span>
+  <a id="BO4E_BO_BusinessObject_GetExpandableFieldNames_" data-uid="BO4E.BO.BusinessObject.GetExpandableFieldNames*"></a>
+  <h4 id="BO4E_BO_BusinessObject_GetExpandableFieldNames_System_String_" data-uid="BO4E.BO.BusinessObject.GetExpandableFieldNames(System.String)">GetExpandableFieldNames(String)</h4>
+  <div class="markdown level1 summary"><p><a class="xref" href="BO4E.BO.BusinessObject.html#BO4E_BO_BusinessObject_GetExpandableFieldNames_Type_">GetExpandableFieldNames(Type)</a></p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static Dictionary&lt;string, Type&gt; GetExpandableFieldNames(string boTypeName)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td><span class="parametername">boTypeName</span></td>
+        <td><p>name of the business object as string</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">Dictionary</span>&lt;<span class="xref">System.String</span>, <span class="xref">Type</span>&gt;</td>
+        <td><p><a class="xref" href="BO4E.BO.BusinessObject.html#BO4E_BO_BusinessObject_GetExpandableFieldNames_Type_">GetExpandableFieldNames(Type)</a></p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/Hochfrequenz/BO4E-dotnet/new/0bfc7d6fc2702427f4fe6d54024dc7b00b8072b6/apiSpec/new?filename=BO4E_BO_BusinessObject_GetExpandableFieldNames_Type_.md&amp;value=---%0Auid%3A%20BO4E.BO.BusinessObject.GetExpandableFieldNames(Type)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/Hochfrequenz/BO4E-dotnet/blob/0bfc7d6fc2702427f4fe6d54024dc7b00b8072b6/BO4E-dotnet/BO/BusinessObject.cs/#L230">View Source</a>
+  </span>
+  <a id="BO4E_BO_BusinessObject_GetExpandableFieldNames_" data-uid="BO4E.BO.BusinessObject.GetExpandableFieldNames*"></a>
+  <h4 id="BO4E_BO_BusinessObject_GetExpandableFieldNames_Type_" data-uid="BO4E.BO.BusinessObject.GetExpandableFieldNames(Type)">GetExpandableFieldNames(Type)</h4>
+  <div class="markdown level1 summary"><p>This method returns information about the object structure, especially if there are
+nested field, that could be used, e.g. to expand OData queries.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static Dictionary&lt;string, Type&gt; GetExpandableFieldNames(Type boType)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">Type</span></td>
+        <td><span class="parametername">boType</span></td>
+        <td><p>valid business object type
+<example><p>
+<pre><code>typeof(Marktlokation)</code></pre>
+</example>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">Dictionary</span>&lt;<span class="xref">System.String</span>, <span class="xref">Type</span>&gt;</td>
+        <td><p>A dictionary with field names as keys (or the different JSON property name if set)
+and the type of the property as value. Nesting and different layers are denoted by
+using &quot;.&quot;</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/Hochfrequenz/BO4E-dotnet/new/0bfc7d6fc2702427f4fe6d54024dc7b00b8072b6/apiSpec/new?filename=BO4E_BO_BusinessObject_GetExpandableFieldNames_Type_System_Boolean_.md&amp;value=---%0Auid%3A%20BO4E.BO.BusinessObject.GetExpandableFieldNames(Type%2CSystem.Boolean)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/Hochfrequenz/BO4E-dotnet/blob/0bfc7d6fc2702427f4fe6d54024dc7b00b8072b6/BO4E-dotnet/BO/BusinessObject.cs/#L257">View Source</a>
+  </span>
+  <a id="BO4E_BO_BusinessObject_GetExpandableFieldNames_" data-uid="BO4E.BO.BusinessObject.GetExpandableFieldNames*"></a>
+  <h4 id="BO4E_BO_BusinessObject_GetExpandableFieldNames_Type_System_Boolean_" data-uid="BO4E.BO.BusinessObject.GetExpandableFieldNames(Type,System.Boolean)">GetExpandableFieldNames(Type, Boolean)</h4>
+  <div class="markdown level1 summary"><p>recursive function to return all expandable fields for a given type <code data-dev-comment-type="paramref" class="paramref">type</code>.
+Set <code data-dev-comment-type="paramref" class="paramref">rootLevel</code> when calling from outside the function itself.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected static Dictionary&lt;string, Type&gt; GetExpandableFieldNames(Type type, bool rootLevel = true)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">Type</span></td>
+        <td><span class="parametername">type</span></td>
+        <td><p>Type inherited from Business Object</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Boolean</span></td>
+        <td><span class="parametername">rootLevel</span></td>
+        <td><p>true iff calling from outside the function itself / default</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">Dictionary</span>&lt;<span class="xref">System.String</span>, <span class="xref">Type</span>&gt;</td>
+        <td><p>HashSet of strings</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/Hochfrequenz/BO4E-dotnet/new/0bfc7d6fc2702427f4fe6d54024dc7b00b8072b6/apiSpec/new?filename=BO4E_BO_BusinessObject_GetHashCode.md&amp;value=---%0Auid%3A%20BO4E.BO.BusinessObject.GetHashCode%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/Hochfrequenz/BO4E-dotnet/blob/0bfc7d6fc2702427f4fe6d54024dc7b00b8072b6/BO4E-dotnet/BO/BusinessObject.cs/#L391">View Source</a>
+  </span>
+  <a id="BO4E_BO_BusinessObject_GetHashCode_" data-uid="BO4E.BO.BusinessObject.GetHashCode*"></a>
+  <h4 id="BO4E_BO_BusinessObject_GetHashCode" data-uid="BO4E.BO.BusinessObject.GetHashCode">GetHashCode()</h4>
+  <div class="markdown level1 summary"><p>override hash code generation</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public override int GetHashCode()</code></pre>
+  </div>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Int32</span></td>
+        <td><p>hash code as int</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/Hochfrequenz/BO4E-dotnet/new/0bfc7d6fc2702427f4fe6d54024dc7b00b8072b6/apiSpec/new?filename=BO4E_BO_BusinessObject_GetJsonScheme.md&amp;value=---%0Auid%3A%20BO4E.BO.BusinessObject.GetJsonScheme%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/Hochfrequenz/BO4E-dotnet/blob/0bfc7d6fc2702427f4fe6d54024dc7b00b8072b6/BO4E-dotnet/BO/BusinessObject.cs/#L139">View Source</a>
+  </span>
+  <a id="BO4E_BO_BusinessObject_GetJsonScheme_" data-uid="BO4E.BO.BusinessObject.GetJsonScheme*"></a>
+  <h4 id="BO4E_BO_BusinessObject_GetJsonScheme" data-uid="BO4E.BO.BusinessObject.GetJsonScheme">GetJsonScheme()</h4>
+  <div class="markdown level1 summary"><p>returns a JSON scheme for the Business Object</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public JSchema GetJsonScheme()</code></pre>
+  </div>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">JSchema</span></td>
+        <td><p>a JSON scheme</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/Hochfrequenz/BO4E-dotnet/new/0bfc7d6fc2702427f4fe6d54024dc7b00b8072b6/apiSpec/new?filename=BO4E_BO_BusinessObject_GetJsonScheme_Type_.md&amp;value=---%0Auid%3A%20BO4E.BO.BusinessObject.GetJsonScheme(Type)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/Hochfrequenz/BO4E-dotnet/blob/0bfc7d6fc2702427f4fe6d54024dc7b00b8072b6/BO4E-dotnet/BO/BusinessObject.cs/#L150">View Source</a>
+  </span>
+  <a id="BO4E_BO_BusinessObject_GetJsonScheme_" data-uid="BO4E.BO.BusinessObject.GetJsonScheme*"></a>
+  <h4 id="BO4E_BO_BusinessObject_GetJsonScheme_Type_" data-uid="BO4E.BO.BusinessObject.GetJsonScheme(Type)">GetJsonScheme(Type)</h4>
+  <div class="markdown level1 summary"><p>returns a JSON scheme for the given type <code data-dev-comment-type="paramref" class="paramref">boType</code></p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static JSchema GetJsonScheme(Type boType)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">Type</span></td>
+        <td><span class="parametername">boType</span></td>
+        <td><p>a type derived from <a class="xref" href="BO4E.BO.BusinessObject.html">BusinessObject</a></p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">JSchema</span></td>
+        <td><p>a JSON scheme</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/Hochfrequenz/BO4E-dotnet/new/0bfc7d6fc2702427f4fe6d54024dc7b00b8072b6/apiSpec/new?filename=BO4E_BO_BusinessObject_GetURI_System_Boolean_.md&amp;value=---%0Auid%3A%20BO4E.BO.BusinessObject.GetURI(System.Boolean)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/Hochfrequenz/BO4E-dotnet/blob/0bfc7d6fc2702427f4fe6d54024dc7b00b8072b6/BO4E-dotnet/BO/BusinessObject.cs/#L167">View Source</a>
+  </span>
+  <a id="BO4E_BO_BusinessObject_GetURI_" data-uid="BO4E.BO.BusinessObject.GetURI*"></a>
+  <h4 id="BO4E_BO_BusinessObject_GetURI_System_Boolean_" data-uid="BO4E.BO.BusinessObject.GetURI(System.Boolean)">GetURI(Boolean)</h4>
+  <div class="markdown level1 summary"><p>Get a BO4E compliant URI for this business object.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public Bo4eUri GetURI(bool includeUserProperties = false)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Boolean</span></td>
+        <td><span class="parametername">includeUserProperties</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="BO4E.meta.Bo4eUri.html">Bo4eUri</a></td>
+        <td><p>a BO4E compliant URI object</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/Hochfrequenz/BO4E-dotnet/new/0bfc7d6fc2702427f4fe6d54024dc7b00b8072b6/apiSpec/new?filename=BO4E_BO_BusinessObject_IsValid.md&amp;value=---%0Auid%3A%20BO4E.BO.BusinessObject.IsValid%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/Hochfrequenz/BO4E-dotnet/blob/0bfc7d6fc2702427f4fe6d54024dc7b00b8072b6/BO4E-dotnet/BO/BusinessObject.cs/#L446">View Source</a>
+  </span>
+  <a id="BO4E_BO_BusinessObject_IsValid_" data-uid="BO4E.BO.BusinessObject.IsValid*"></a>
+  <h4 id="BO4E_BO_BusinessObject_IsValid" data-uid="BO4E.BO.BusinessObject.IsValid">IsValid()</h4>
+  <div class="markdown level1 summary"><p>Tests if the object does contain all mandatory information / fields.
+To do so, the function tries to serialize the object as JSON.
+If the serialization fails due to fields that are <see cref="!:JsonPropertyAttribute.Required"></see> but not filled
+it returns false and true otherwise.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual bool IsValid()</code></pre>
+  </div>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Boolean</span></td>
+        <td><p>true if COM object is compatible with BO4E standards</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/Hochfrequenz/BO4E-dotnet/new/0bfc7d6fc2702427f4fe6d54024dc7b00b8072b6/apiSpec/new?filename=BO4E_BO_BusinessObject_SetBoTyp_System_String_.md&amp;value=---%0Auid%3A%20BO4E.BO.BusinessObject.SetBoTyp(System.String)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/Hochfrequenz/BO4E-dotnet/blob/0bfc7d6fc2702427f4fe6d54024dc7b00b8072b6/BO4E-dotnet/BO/BusinessObject.cs/#L114">View Source</a>
+  </span>
+  <a id="BO4E_BO_BusinessObject_SetBoTyp_" data-uid="BO4E.BO.BusinessObject.SetBoTyp*"></a>
+  <h4 id="BO4E_BO_BusinessObject_SetBoTyp_System_String_" data-uid="BO4E.BO.BusinessObject.SetBoTyp(System.String)">SetBoTyp(String)</h4>
+  <div class="markdown level1 summary"><p>This method is just to make sure the mapping actually makes sense.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected void SetBoTyp(string s)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td><span class="parametername">s</span></td>
+        <td><p>name of the business object</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h3 id="extensionmethods">Extension Methods</h3>
+  <div>
+      <a class="xref" href="BO4E.Extensions.BusinessObjects.BusinessObjectExtensions.html#BO4E_Extensions_BusinessObjects_BusinessObjectExtensions_DeepClone__1___0_">BusinessObjectExtensions.DeepClone&lt;T&gt;(T)</a>
+  </div>
+  <div>
+      <a class="xref" href="BO4E.Extensions.COM.COMExtensions.html#BO4E_Extensions_COM_COMExtensions_DeepClone__1___0_">COMExtensions.DeepClone&lt;T&gt;(T)</a>
+  </div>
+</article>
+          </div>
+          
+          <div class="hidden-sm col-md-2" role="complementary">
+            <div class="sideaffix">
+              <div class="contribution">
+                <ul class="nav">
+                  <li>
+                    <a href="https://github.com/Hochfrequenz/BO4E-dotnet/new/0bfc7d6fc2702427f4fe6d54024dc7b00b8072b6/apiSpec/new?filename=BO4E_BO_BusinessObject.md&amp;value=---%0Auid%3A%20BO4E.BO.BusinessObject%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" class="contribution-link">Improve this Doc</a>
+                  </li>
+                  <li>
+                    <a href="https://github.com/Hochfrequenz/BO4E-dotnet/blob/0bfc7d6fc2702427f4fe6d54024dc7b00b8072b6/BO4E-dotnet/BO/BusinessObject.cs/#L23" class="contribution-link">View Source</a>
+                  </li>
+                </ul>
+              </div>
+              <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
+              <!-- <p><a class="back-to-top" href="#top">Back to top</a><p> -->
+              </nav>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <footer>
+        <div class="grad-bottom"></div>
+        <div class="footer">
+          <div class="container">
+            <span class="pull-right">
+              <a href="#top">Back to top</a>
+            </span>
+            
+            <span>Generated by <strong>DocFX</strong></span>
+          </div>
+        </div>
+      </footer>
+    </div>
+    
+    <script type="text/javascript" src="../styles/docfx.vendor.js"></script>
+    <script type="text/javascript" src="../styles/docfx.js"></script>
+    <script type="text/javascript" src="../styles/main.js"></script>
+  </body>
+</html>
