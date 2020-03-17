@@ -131,7 +131,7 @@ namespace BO4E.BO
         /// </summary>
         [JsonProperty(Required = Required.Default, Order = 19)]
         [NonOfficial(NonOfficialCategory.CUSTOMER_REQUIREMENTS)]
-        public Zeiteinheit? zeitreihentyp;
+        public Zeitreihentyp? zeitreihentyp;
 
         /// <summary>
         /// für EDIFACT mapping 
