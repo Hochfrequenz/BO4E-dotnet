@@ -5,6 +5,7 @@ on:
  push:
     branches:
       - master  # We don't want branches in doc to trigger builds
+      - develop # yes, we do
 
 jobs:
   build:
