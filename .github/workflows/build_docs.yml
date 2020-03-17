@@ -1,7 +1,6 @@
 name: Build Documentation
 
 on:
- repository_dispatch:  # This is used to trigger the flow from Hochfrequenz/BO4E-dotnet via HTTP POST
  push:
     branches:
       - master  # We don't want branches in doc to trigger builds
