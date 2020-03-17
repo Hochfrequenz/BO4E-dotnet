@@ -62,7 +62,7 @@ jobs:
       run:  mono .docfx/docfx.exe
     - name: Commit and push
       run: |
-        cd docs/live
+        cd live
         git config --global user.email "konstantin.klein@hochfrequenz.de"
         git config --global user.name "Automatic DocFX Build"
         git add .
