@@ -1,53 +1,58 @@
 
 using System;
+using System.Collections.Generic;
 using System.IO;
-using System.Linq;
+using System.Text;
+
 using BO4E.BO;
-using BO4E.COM;
+
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+
 using ProtoBuf;
 
 namespace TestBO4E
 {
     [TestClass]
-    public class TestProtFileGeneration
+    public class TestProtoFileGeneration
     {
-        [TestMethod]
-        public void TestProtoGenerationBo()  //=> TestProtoForAbstractType(typeof(BusinessObject));
+
+        static readonly HashSet<Type> PROTO_SERIALIZABLE_TYPES = new HashSet<Type>()
         {
-            Assert.IsFalse(string.IsNullOrWhiteSpace(Serializer.GetProto<Angebot>()));
-            Assert.IsFalse(string.IsNullOrWhiteSpace(Serializer.GetProto<Ansprechpartner>()));
-            Assert.IsFalse(string.IsNullOrWhiteSpace(Serializer.GetProto<Benachrichtigung>()));
-            Assert.IsFalse(string.IsNullOrWhiteSpace(Serializer.GetProto<Energiemenge>()));
-            Assert.IsFalse(string.IsNullOrWhiteSpace(Serializer.GetProto<Geschaeftspartner>()));
-            Assert.IsFalse(string.IsNullOrWhiteSpace(Serializer.GetProto<Kosten>()));
-            Assert.IsFalse(string.IsNullOrWhiteSpace(Serializer.GetProto<Marktlokation>()));
-            //Serializer.GetProto<Marktteilnehmer>(); // doenst work!
-            Assert.IsFalse(string.IsNullOrWhiteSpace(Serializer.GetProto<Messlokation>()));
-            Assert.IsFalse(string.IsNullOrWhiteSpace(Serializer.GetProto<Preisblatt>()));
-            Assert.IsFalse(string.IsNullOrWhiteSpace(Serializer.GetProto<Rechnung>()));
-            Assert.IsFalse(string.IsNullOrWhiteSpace(Serializer.GetProto<Rechnung>()));
-            Assert.IsFalse(string.IsNullOrWhiteSpace(Serializer.GetProto<Region>()));
-            Assert.IsFalse(string.IsNullOrWhiteSpace(Serializer.GetProto<Vertrag>()));
-            Assert.IsFalse(string.IsNullOrWhiteSpace(Serializer.GetProto<Zaehler>()));
-            var protoEm = Serializer.GetProto<Energiemenge>();
-            
+            typeof(Angebot),
+            typeof(Ansprechpartner),
+            typeof(Benachrichtigung),
+            typeof(Energiemenge),
+            typeof(Geschaeftspartner),
+            typeof(Kosten),
+            typeof(Marktlokation),
+            //typeof(Marktteilnehmer),
+            typeof(Messlokation),
+            typeof(Preisblatt),
+            typeof(Rechnung),
+            typeof(Region),
+            typeof(Vertrag),
+            typeof(Zaehler)
+        };
+
+
+        [TestMethod]
+        public void TestProtoGenerationBo() 
+        {
+            foreach (var type in PROTO_SERIALIZABLE_TYPES)
+            {
+                var method = typeof(Serializer).GetMethod(nameof(Serializer.GetProto), new Type[0] { });
+                method = method.MakeGenericMethod(type);
+                Assert.IsNotNull(method);
+                string protoString = (string)method.Invoke(null, null);
+                Assert.IsFalse(string.IsNullOrWhiteSpace(protoString));
+                string path = $"../../../../protobuf-files/{type}.proto"; // not elegant but ok ;)
+                if (!File.Exists(path))
+                {
+                    var stream = File.Create(path);
+                    stream.Close();
+                }
+                File.WriteAllText(path, protoString, Encoding.UTF8);
+            }
         }
-        /*
-         protected void TestProtoForAbstractType(Type abstractBaseType)
-         {
-             if (!abstractBaseType.IsAbstract)
-             {
-                 throw new ArgumentException($"The type {abstractBaseType} is not abstract", nameof(abstractBaseType));
-             }
-             foreach(var type in typeof(BusinessObject).Assembly.GetTypes()
-                 .Where(t => abstractBaseType.IsAssignableFrom(t)
-                     && t != abstractBaseType ) // because of bug in protobuf-net (or I don't get it ;))
-                 )
-             {
-                 // var proto = Serializer.GetProto<type>()
-             }
-         }
-         */
     }
 }

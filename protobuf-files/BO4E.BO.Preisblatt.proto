@@ -1,0 +1,192 @@
+﻿syntax = "proto2";
+import "protobuf-net/bcl.proto"; // schema for protobuf-net's handling of core .NET types
+
+enum AufAbschlagstyp {
+   RELATIV = 0;
+   ABSOLUT = 1;
+}
+enum BDEWArtikelnummer {
+   LEISTUNG = 0;
+   LEISTUNG_PAUSCHAL = 1;
+   GRUNDPREIS = 2;
+   REGELENERGIE_ARBEIT = 3;
+   REGELENERGIE_LEISTUNG = 4;
+   NOTSTROMLIEFERUNG_ARBEIT = 5;
+   NOTSTROMLIEFERUNG_LEISTUNG = 6;
+   RESERVENETZKAPAZITAET = 7;
+   RESERVELEISTUNG = 8;
+   ZUSAETZLICHE_ABLESUNG = 9;
+   PRUEFGEBUEHREN_AUSSERPLANMAESSIG = 10;
+   WIRKARBEIT = 11;
+   SINGULAER_GENUTZTE_BETRIEBSMITTEL = 12;
+   ABGABE_KWKG = 13;
+   ABSCHLAG = 14;
+   KONZESSIONSABGABE = 15;
+   ENTGELT_FERNAUSLESUNG = 16;
+   UNTERMESSUNG = 17;
+   BLINDMEHRARBEIT = 18;
+   ENTGELT_ABRECHNUNG = 19;
+   SPERRKOSTEN = 20;
+   ENTSPERRKOSTEN = 21;
+   MAHNKOSTEN = 22;
+   MEHR_MINDERMENGEN = 23;
+   INKASSOKOSTEN = 24;
+   BLINDMEHRLEISTUNG = 25;
+   ENTGELT_MESSUNG_ABLESUNG = 26;
+   ENTGELT_EINBAU_BETRIEB_WARTUNG_MESSTECHNIK = 27;
+   AUSGLEICHSENERGIE = 28;
+   ZAEHLEINRICHTUNG = 29;
+   WANDLER_MENGENUMWERTER = 30;
+   KOMMUNIKATIONSEINRICHTUNG = 31;
+   TECHNISCHE_STEUEREINRICHTUNG = 32;
+   PARAGRAF_19_STROM_NEV_UMLAGE = 33;
+   BEFESTIGUNGSEINRICHTUNG = 34;
+   OFFSHORE_HAFTUNGSUMLAGE = 35;
+   FIXE_ARBEITSENTGELTKOMPONENTE = 36;
+   FIXE_LEISTUNGSENTGELTKOMPONENTE = 37;
+   UMLAGE_ABSCHALTBARE_LASTEN = 38;
+   MEHRMENGE = 39;
+   MINDERMENGE = 40;
+   ENERGIESTEUER = 41;
+   SMARTMETER_GATEWAY = 42;
+   STEUERBOX = 43;
+   MSB_INKL_MESSUNG = 44;
+}
+enum Bemessungsgroesse {
+   WIRKARBEIT_EL = 0;
+   LEISTUNG_EL = 1;
+   BLINDARBEIT_KAP = 2;
+   BLINDARBEIT_IND = 3;
+   BLINDLEISTUNG_KAP = 4;
+   BLINDLEISTUNG_IND = 5;
+   WIRKARBEIT_TH = 6;
+   LEISTUNG_TH = 7;
+   VOLUMEN = 8;
+   VOLUMENSTROM = 9;
+   BENUTZUNGSDAUER = 10;
+   ANZAHL = 11;
+}
+enum Kalkulationsmethode {
+   KEINE = 0;
+   STAFFELN = 1;
+   ZONEN = 2;
+   VORZONEN_GP = 3;
+   SIGMOID = 4;
+   BLINDARBEIT_GT_50_PROZENT = 5;
+   BLINDARBEIT_GT_40_PROZENT = 6;
+   AP_GP_ZONEN = 7;
+   LP_INSTALL_LEISTUNG = 8;
+   AP_TRANSPORT_ODER_VERTEILNETZ = 9;
+   AP_TRANSPORT_ODER_VERTEILNETZ_ORTSVERTEILNETZ_SIGMOID = 10;
+   LP_JAHRESVERBRAUCH = 11;
+   LP_TRANSPORT_ODER_VERTEILNETZ = 12;
+   LP_TRANSPORT_ODER_VERTEILNETZ_ORTSVERTEILNETZ_SIGMOID = 13;
+   FUNKTIONEN = 14;
+   VERBRAUCH_UEBER_SLP_GRENZE_FUNKTIONSBEZOGEN_WEITERE_BERECHNUNG_ALS_LGK = 15;
+}
+enum Leistungstyp {
+   ARBEITSPREIS_WIRKARBEIT = 0;
+   LEISTUNGSPREIS_WIRKLEISTUNG = 1;
+   ARBEITSPREIS_BLINDARBEIT_IND = 2;
+   ARBEITSPREIS_BLINDARBEIT_KAP = 3;
+   GRUNDPREIS = 4;
+   MEHRMINDERMENGE = 5;
+   MESSSTELLENBETRIEB = 6;
+   MESSDIENSTLEISTUNG = 7;
+   MESSDIENSTLEISTUNG_INKL_MESSUNG = 8;
+   ABRECHNUNG = 9;
+   KONZESSIONS_ABGABE = 10;
+   KWK_UMLAGE = 11;
+   OFFSHORE_UMLAGE = 12;
+   ABLAV_UMLAGE = 13;
+   REGELENERGIE_UMLAGE = 14;
+   BILANZIERUNG_UMLAGE = 15;
+   AUSLESUNG_ZUSAETZLICH = 16;
+   ABLESUNG_ZUSAETZLICH = 17;
+   ABRECHNUNG_ZUSAETZLICH = 18;
+   SPERRUNG = 19;
+   ENTSPERRUNG = 20;
+   MAHNKOSTEN = 21;
+   INKASSOKOSTEN = 22;
+}
+enum Mengeneinheit {
+   WH = 2;
+   KW = 3;
+   ANZAHL = 7;
+   KUBIKMETER = 11;
+   STUNDE = 13;
+   TAG = 17;
+   MONAT = 19;
+   VAR = 23;
+   VARH = 29;
+   JAHR = 228;
+   KWH = 2000;
+   MW = 3000;
+   KVAR = 23000;
+   KVARH = 29000;
+   MWH = 2000000;
+}
+message PositionsAufAbschlag {
+   optional string bezeichnung = 3;
+   optional string beschreibung = 4;
+   optional AufAbschlagstyp aufAbschlagstyp = 5 [default = RELATIV];
+   optional .bcl.Decimal aufAbschlagswert = 6 [default = 0];
+   optional Waehrungseinheit aufAbschlagswaehrung = 7 [default = EUR];
+}
+message Preisblatt {
+   optional string bezeichnung = 4;
+   optional Zeitraum gueltigkeit = 5;
+   repeated Preisposition preispositionen = 6;
+}
+message Preisposition {
+   optional Kalkulationsmethode berechnungsmethode = 3 [default = KEINE];
+   optional Leistungstyp leistungstyp = 4 [default = ARBEITSPREIS_WIRKARBEIT];
+   optional string leistungsbezeichung = 5;
+   optional Waehrungseinheit preiseinheit = 6 [default = EUR];
+   optional Mengeneinheit bezugsgroesse = 7 [default = 0];
+   optional Zeiteinheit zeitbasis = 8;
+   optional Tarifzeit tarifzeit = 9;
+   optional BDEWArtikelnummer bdewArtikelnummer = 10;
+   optional Bemessungsgroesse zonungsgroesse = 11;
+   optional PositionsAufAbschlag zu_abschlaege = 12;
+   repeated Preisstaffel preisstaffeln = 13;
+}
+message Preisstaffel {
+   optional .bcl.Decimal einheitspreis = 3 [default = 0];
+   optional .bcl.Decimal staffelgrenzeVon = 4 [default = 0];
+   optional .bcl.Decimal staffelgrenzeBis = 5 [default = 0];
+   optional Sigmoidparameter sigmoidparameter = 6;
+}
+message Sigmoidparameter {
+   optional .bcl.Decimal A = 3 [default = 0];
+   optional .bcl.Decimal B = 4 [default = 0];
+   optional .bcl.Decimal C = 5 [default = 0];
+   optional .bcl.Decimal D = 6 [default = 0];
+}
+enum Tarifzeit {
+   TZ_STANDARD = 0;
+   TZ_HT = 1;
+   TZ_NT = 2;
+}
+enum Waehrungseinheit {
+   EUR = 0;
+   CT = 1;
+}
+enum Zeiteinheit {
+   SEKUNDE = 0;
+   MINUTE = 1;
+   STUNDE = 2;
+   VIERTEL_STUNDE = 3;
+   TAG = 4;
+   WOCHE = 5;
+   MONAT = 6;
+   QUARTAL = 7;
+   HALBJAHR = 8;
+   JAHR = 9;
+}
+message Zeitraum {
+   optional Zeiteinheit einheit = 3;
+   optional .bcl.Decimal dauer = 4;
+   optional .bcl.DateTime startdatum = 5;
+   optional .bcl.DateTime enddatum = 6;
+}
