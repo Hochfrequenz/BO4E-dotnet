@@ -138,7 +138,7 @@ namespace BO4E.BO
         /// <returns>a JSON scheme</returns>
         public JSchema GetJsonScheme()
         {
-            return GetJsonScheme(this.GetType());
+            return GetJsonSchema(this.GetType());
         }
 
         /// <summary>
@@ -147,7 +147,7 @@ namespace BO4E.BO
         /// <param name="boType">a type derived from <see cref="BusinessObject"/></param>
         /// <returns>a JSON scheme</returns>
         /// <exception cref="System.ArgumentException" />
-        public static JSchema GetJsonScheme(Type boType)
+        public static JSchema GetJsonSchema(Type boType)
         {
             if (!boType.IsSubclassOf(typeof(BusinessObject)))
             {

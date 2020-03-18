@@ -1,0 +1,218 @@
+﻿{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "definitions": {
+    "Aufgabe": {
+      "type": [
+        "object",
+        "null"
+      ],
+      "properties": {
+        "aufgabenId": {
+          "type": "string"
+        },
+        "beschreibung": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "deadline": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "format": "date-time"
+        },
+        "ausgefuehrt": {
+          "type": "boolean"
+        },
+        "ausfuehrungszeitpunkt": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "format": "date-time"
+        },
+        "ausfuehrender": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "guid": {
+          "type": [
+            "string",
+            "null"
+          ]
+        }
+      },
+      "required": [
+        "aufgabenId",
+        "ausgefuehrt"
+      ]
+    },
+    "GenericStringStringInfo": {
+      "type": [
+        "object",
+        "null"
+      ],
+      "properties": {
+        "keyColumn": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "value": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "guid": {
+          "type": [
+            "string",
+            "null"
+          ]
+        }
+      },
+      "required": [
+        "keyColumn",
+        "value"
+      ]
+    },
+    "Notiz": {
+      "type": [
+        "object",
+        "null"
+      ],
+      "properties": {
+        "guid": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "inhalt": {
+          "type": "string"
+        },
+        "autor": {
+          "type": "string"
+        },
+        "zeitpunkt": {
+          "type": "string",
+          "format": "date-time"
+        }
+      },
+      "required": [
+        "inhalt",
+        "autor",
+        "zeitpunkt"
+      ]
+    }
+  },
+  "type": "object",
+  "properties": {
+    "guid": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "boTyp": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "versionStruktur": {
+      "type": "integer"
+    },
+    "benachrichtigungsId": {
+      "type": "string"
+    },
+    "prioritaet": {
+      "type": "string",
+      "default": "NORMAL",
+      "enum": [
+        "SEHR_NIEDRIG",
+        "NIEDRIG",
+        "NORMAL",
+        "HOCH",
+        "SEHR_HOCH"
+      ]
+    },
+    "bearbeitungsstatus": {
+      "type": "string",
+      "default": "OFFEN",
+      "enum": [
+        "OFFEN",
+        "IN_BEARBEITUNG",
+        "ABGESCHLOSSEN",
+        "STORNIERT",
+        "QUITTIERT",
+        "IGNORIERT"
+      ]
+    },
+    "kurztext": {
+      "type": "string"
+    },
+    "erstellungsZeitpunkt": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "kategorie": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "bearbeiter": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "notizen": {
+      "type": [
+        "array",
+        "null"
+      ],
+      "items": {
+        "$ref": "#/definitions/Notiz"
+      }
+    },
+    "deadline": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "format": "date-time"
+    },
+    "aufgaben": {
+      "type": [
+        "array",
+        "null"
+      ],
+      "items": {
+        "$ref": "#/definitions/Aufgabe"
+      }
+    },
+    "infos": {
+      "type": [
+        "array",
+        "null"
+      ],
+      "items": {
+        "$ref": "#/definitions/GenericStringStringInfo"
+      }
+    }
+  },
+  "required": [
+    "benachrichtigungsId",
+    "prioritaet",
+    "bearbeitungsstatus",
+    "kurztext",
+    "erstellungsZeitpunkt"
+  ]
+}

@@ -1,0 +1,638 @@
+﻿{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "definitions": {
+    "Adresse": {
+      "type": [
+        "object",
+        "null"
+      ],
+      "properties": {
+        "postleitzahl": {
+          "type": "string"
+        },
+        "ort": {
+          "type": "string"
+        },
+        "strasse": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "hausnummer": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "postfach": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "adresszusatz": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "coErgaenzung": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "landescode": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "enum": [
+            null,
+            "AC",
+            "AD",
+            "AE",
+            "AF",
+            "AG",
+            "AI",
+            "AL",
+            "AM",
+            "AN",
+            "AO",
+            "AQ",
+            "AR",
+            "AS",
+            "AT",
+            "AU",
+            "AW",
+            "AX",
+            "AZ",
+            "BA",
+            "BB",
+            "BD",
+            "BE",
+            "BF",
+            "BG",
+            "BH",
+            "BI",
+            "BJ",
+            "BL",
+            "BM",
+            "BN",
+            "BO",
+            "BQ",
+            "BR",
+            "BS",
+            "BT",
+            "BU",
+            "BV",
+            "BW",
+            "BY",
+            "BZ",
+            "CA",
+            "CC",
+            "CD",
+            "CF",
+            "CG",
+            "CH",
+            "CI",
+            "CK",
+            "CL",
+            "CM",
+            "CN",
+            "CO",
+            "CP",
+            "CR",
+            "CS",
+            "CU",
+            "CV",
+            "CW",
+            "CX",
+            "CY",
+            "CZ",
+            "DE",
+            "DG",
+            "DJ",
+            "DK",
+            "DM",
+            "DO",
+            "DZ",
+            "EA",
+            "EC",
+            "EE",
+            "EG",
+            "EH",
+            "ER",
+            "ES",
+            "ET",
+            "EU",
+            "FI",
+            "FJ",
+            "FK",
+            "FM",
+            "FO",
+            "FR",
+            "FX",
+            "GA",
+            "GB",
+            "GD",
+            "GE",
+            "GF",
+            "GG",
+            "GH",
+            "GI",
+            "GL",
+            "GM",
+            "GN",
+            "GP",
+            "GQ",
+            "GR",
+            "GS",
+            "GT",
+            "GU",
+            "GW",
+            "GY",
+            "HK",
+            "HM",
+            "HN",
+            "HR",
+            "HT",
+            "HU",
+            "IC",
+            "ID",
+            "IE",
+            "IL",
+            "IM",
+            "IN",
+            "IO",
+            "IQ",
+            "IR",
+            "IS",
+            "IT",
+            "JE",
+            "JM",
+            "JO",
+            "JP",
+            "KE",
+            "KG",
+            "KH",
+            "KI",
+            "KM",
+            "KN",
+            "KP",
+            "KR",
+            "KW",
+            "KY",
+            "KZ",
+            "LA",
+            "LB",
+            "LC",
+            "LI",
+            "LK",
+            "LR",
+            "LS",
+            "LT",
+            "LU",
+            "LV",
+            "LY",
+            "MA",
+            "MC",
+            "MD",
+            "ME",
+            "MF",
+            "MG",
+            "MH",
+            "MK",
+            "ML",
+            "MM",
+            "MN",
+            "MO",
+            "MP",
+            "MQ",
+            "MR",
+            "MS",
+            "MT",
+            "MU",
+            "MV",
+            "MW",
+            "MX",
+            "MY",
+            "MZ",
+            "NA",
+            "NC",
+            "NE",
+            "NF",
+            "NG",
+            "NI",
+            "NL",
+            "NO",
+            "NP",
+            "NR",
+            "NT",
+            "NU",
+            "NZ",
+            "OM",
+            "PA",
+            "PE",
+            "PF",
+            "PG",
+            "PH",
+            "PK",
+            "PL",
+            "PM",
+            "PN",
+            "PR",
+            "PS",
+            "PT",
+            "PW",
+            "PY",
+            "QA",
+            "RE",
+            "RO",
+            "RS",
+            "RU",
+            "RW",
+            "SA",
+            "SB",
+            "SC",
+            "SD",
+            "SE",
+            "SF",
+            "SG",
+            "SH",
+            "SI",
+            "SJ",
+            "SK",
+            "SL",
+            "SM",
+            "SN",
+            "SO",
+            "SR",
+            "SS",
+            "ST",
+            "SU",
+            "SV",
+            "SX",
+            "SY",
+            "SZ",
+            "TA",
+            "TC",
+            "TD",
+            "TF",
+            "TG",
+            "TJ",
+            "TK",
+            "TL",
+            "TM",
+            "TN",
+            "TO",
+            "TP",
+            "TR",
+            "TT",
+            "TV",
+            "TW",
+            "TZ",
+            "UA",
+            "UG",
+            "UK",
+            "UM",
+            "US",
+            "UY",
+            "UZ",
+            "VA",
+            "VC",
+            "VE",
+            "VG",
+            "VI",
+            "VN",
+            "VU",
+            "WF",
+            "WS",
+            "XK",
+            "YE",
+            "YT",
+            "YU",
+            "ZA",
+            "ZM",
+            "ZR",
+            "ZW"
+          ]
+        },
+        "guid": {
+          "type": [
+            "string",
+            "null"
+          ]
+        }
+      },
+      "required": [
+        "postleitzahl",
+        "ort"
+      ]
+    },
+    "Geschaeftspartner": {
+      "type": "object",
+      "properties": {
+        "guid": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "boTyp": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "versionStruktur": {
+          "type": "integer"
+        },
+        "anrede": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "enum": [
+            null,
+            "HERR",
+            "FRAU",
+            "EHELEUTE",
+            "FIRMA",
+            "INDIVIDUELL",
+            "DR"
+          ]
+        },
+        "title": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "name1": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "name2": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "name3": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "gewerbekennzeichnung": {
+          "type": "boolean"
+        },
+        "hrnummer": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "amtsgericht": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "kontaktweg": {
+          "type": [
+            "array",
+            "null"
+          ],
+          "items": {
+            "type": "string",
+            "enum": [
+              "ANSCHREIBEN",
+              "TELEFONAT",
+              "FAX",
+              "E_MAIL",
+              "SMS"
+            ]
+          }
+        },
+        "umsatzsteuerId": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "glaeubigerId": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "eMailAdresse": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "website": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "geschaeftspartnerrolle": {
+          "type": [
+            "array",
+            "null"
+          ],
+          "items": {
+            "type": "string",
+            "enum": [
+              "LIEFERANT",
+              "DIENSTLEISTER",
+              "KUNDE",
+              "INTERESSENT",
+              "MARKTPARTNER"
+            ]
+          }
+        },
+        "partneradresse": {
+          "$ref": "#/definitions/Adresse"
+        }
+      },
+      "required": [
+        "gewerbekennzeichnung"
+      ]
+    },
+    "Rufnummer": {
+      "type": [
+        "object",
+        "null"
+      ],
+      "properties": {
+        "nummerntyp": {
+          "type": "string",
+          "enum": [
+            "RUF_ZENTRALE",
+            "FAX_ZENTRALE",
+            "SAMMELRUF",
+            "SAMMELFAX",
+            "ABTEILUNGRUF",
+            "ABTEILUNGFAX",
+            "RUF_DURCHWAHL",
+            "FAX_DURCHWAHL",
+            "MOBIL_NUMMER"
+          ]
+        },
+        "rufnummer": {
+          "type": "string"
+        },
+        "guid": {
+          "type": [
+            "string",
+            "null"
+          ]
+        }
+      },
+      "required": [
+        "nummerntyp",
+        "rufnummer"
+      ]
+    },
+    "Zustaendigkeit": {
+      "type": [
+        "object",
+        "null"
+      ],
+      "properties": {
+        "jobtitel": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "abteilung": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "themengebiet": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "guid": {
+          "type": [
+            "string",
+            "null"
+          ]
+        }
+      }
+    }
+  },
+  "type": "object",
+  "properties": {
+    "guid": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "boTyp": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "versionStruktur": {
+      "type": "integer"
+    },
+    "anrede": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "enum": [
+        null,
+        "HERR",
+        "FRAU",
+        "EHELEUTE",
+        "FIRMA",
+        "INDIVIDUELL",
+        "DR"
+      ]
+    },
+    "individuelleAnrede": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "titel": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "enum": [
+        null,
+        "DR",
+        "PROF",
+        "PROF_DR"
+      ]
+    },
+    "vorname": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "nachname": {
+      "type": "string"
+    },
+    "eMailAdresse": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "kommentar": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "geschaeftspartner": {
+      "$ref": "#/definitions/Geschaeftspartner"
+    },
+    "adresse": {
+      "$ref": "#/definitions/Adresse"
+    },
+    "rufnummer": {
+      "type": [
+        "array",
+        "null"
+      ],
+      "items": {
+        "$ref": "#/definitions/Rufnummer"
+      }
+    },
+    "zustaendigkeit": {
+      "type": [
+        "array",
+        "null"
+      ],
+      "items": {
+        "$ref": "#/definitions/Zustaendigkeit"
+      }
+    }
+  },
+  "required": [
+    "nachname",
+    "geschaeftspartner"
+  ]
+}

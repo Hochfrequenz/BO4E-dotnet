@@ -1,0 +1,122 @@
+﻿{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "definitions": {
+    "Verbrauch": {
+      "type": [
+        "object",
+        "null"
+      ],
+      "properties": {
+        "type": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "enum": [
+            null,
+            "ARBEITLEISTUNGTAGESPARAMETERABHMALO",
+            "VERANSCHLAGTEJAHRESMENGE",
+            "TUMKUNDENWERT"
+          ]
+        },
+        "guid": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "wertermittlungsverfahren": {
+          "type": "string",
+          "enum": [
+            "PROGNOSE",
+            "MESSUNG"
+          ]
+        },
+        "obiskennzahl": {
+          "type": "string"
+        },
+        "startdatum": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "wert": {
+          "type": "number"
+        },
+        "enddatum": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "einheit": {
+          "type": "string",
+          "enum": [
+            "WH",
+            "KW",
+            "ANZAHL",
+            "KUBIKMETER",
+            "STUNDE",
+            "TAG",
+            "MONAT",
+            "VAR",
+            "VARH",
+            "JAHR",
+            "KWH",
+            "MW",
+            "KVAR",
+            "KVARH",
+            "MWH"
+          ]
+        }
+      },
+      "required": [
+        "wertermittlungsverfahren",
+        "obiskennzahl",
+        "wert",
+        "einheit"
+      ]
+    }
+  },
+  "type": "object",
+  "properties": {
+    "guid": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "boTyp": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "versionStruktur": {
+      "type": "integer"
+    },
+    "lokationsId": {
+      "type": "string",
+      "default": "|null|"
+    },
+    "lokationstyp": {
+      "type": "string",
+      "enum": [
+        "MaLo",
+        "MeLo"
+      ]
+    },
+    "energieverbrauch": {
+      "type": [
+        "array",
+        "null"
+      ],
+      "items": {
+        "$ref": "#/definitions/Verbrauch"
+      },
+      "minItems": 1
+    }
+  },
+  "required": [
+    "lokationsId",
+    "lokationstyp",
+    "energieverbrauch"
+  ]
+}
