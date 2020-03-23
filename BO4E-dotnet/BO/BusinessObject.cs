@@ -512,7 +512,8 @@ namespace BO4E.BO
                             throw new NotImplementedException($"The type '{jo["boTyp"].Value<string>()}' does not exist in the BO4E standard.");
                         }
                     }
-                    return JsonConvert.DeserializeObject(jo.ToString(), boType);
+                    return serializer.Deserialize(reader, boType);
+                    //return JsonConvert.DeserializeObject(jo.ToString(), boType);
                 }
                 else
                 {

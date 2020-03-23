@@ -37,6 +37,11 @@ namespace BO4E
         /// <summary>
         /// most lenient (all others)
         /// </summary>
-        MOST_LENIENT = ~0
+        MOST_LENIENT = ~0,
+        /// <summary>
+        /// Set integer value instead of String wrong old values
+        /// </summary>
+        StringToInt = 16,
+
     }
 }

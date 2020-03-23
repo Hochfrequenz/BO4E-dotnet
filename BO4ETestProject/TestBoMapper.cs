@@ -11,7 +11,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 using Newtonsoft.Json.Linq;
-using static BO4E.BoMapper;
+using static BO4E.meta.LenientConverter.LenientConverter;
 
 namespace TestBO4E
 {
@@ -54,6 +54,10 @@ namespace TestBO4E
                     lenients |= LenientParsing.Bo4eUri;
                 }
 
+                if (json["lenientStringToInt"] != null && (bool)json["lenientStringToInt"])
+                {
+                    lenients |= LenientParsing.StringToInt;
+                }
                 BusinessObject bo;
                 try
                 {
@@ -109,6 +113,10 @@ namespace TestBO4E
                         catch (ArgumentException)
                         {
                             boLenient = BoMapper.MapObject(json["objectName"].ToString(), (JObject)json["input"], whitelist, lenient);
+                        }catch(JsonSerializationException jse)
+                        {
+                            Assert.IsTrue(false, $"Unexpected {nameof(JsonSerializationException)} in file {file}: {jse.Message}");
+                            throw jse;
                         }
                         string dateLenietOutputString = JsonConvert.SerializeObject(boLenient, new StringEnumConverter());
                         //if (whitelist.Count ==0) {
@@ -167,6 +175,40 @@ namespace TestBO4E
             {
                 Assert.AreEqual(2, em.energieverbrauch.Count); // weil 2 verschiedene status
             }
+        }
+
+        [TestMethod]
+        public void TestVertragStringToInt()
+        {
+            // first test serialization of complete business object
+            JObject json;
+            using (StreamReader r = new StreamReader("BoMapperTests/Vertrag_lenient_String.json"))
+            {
+                string jsonString = r.ReadToEnd();
+                json = JsonConvert.DeserializeObject<JObject>(jsonString);
+            }
+            LenientParsing lenients = LenientParsing.Strict; // default
+            if (json["lenientDateTime"] != null && (bool)json["lenientDateTime"])
+            {
+                lenients |= LenientParsing.DateTime;
+            }
+
+            if (json["lenientEnumList"] != null && (bool)json["lenientEnumList"])
+            {
+                lenients |= LenientParsing.EnumList;
+            }
+
+            if (json["lenientBo4eUri"] != null && (bool)json["lenientBo4eUri"])
+            {
+                lenients |= LenientParsing.Bo4eUri;
+            }
+
+            if (json["lenientStringToInt"] != null && (bool)json["lenientStringToInt"])
+            {
+                lenients |= LenientParsing.StringToInt;
+            }
+            Vertrag em = JsonConvert.DeserializeObject<Vertrag>(json["input"].ToString(), BoMapper.GetJsonSerializerSettings(lenients));
+            Assert.AreEqual(em.vertragskonditionen.anzahlAbschlaege, 12);
         }
 
         [TestMethod]
