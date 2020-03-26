@@ -267,17 +267,7 @@ namespace TestBO4E
             Assert.AreEqual(typeof(Benachrichtigung), BoMapper.GetTypeForBoName("Benachrichtigung"));
             Assert.AreEqual(typeof(Benachrichtigung), BoMapper.GetTypeForBoName("bEnAcHriCHTIGuNg"));
 
-            bool nullExceptionThrown = false;
-            try
-            {
-                BoMapper.GetTypeForBoName(null);
-            }
-            catch (ArgumentNullException)
-            {
-                nullExceptionThrown = true;
-            }
-            Assert.IsTrue(nullExceptionThrown, "null as argument must result in a ArgumentNullException");
-
+            Assert.ThrowsException<ArgumentNullException>(() => BoMapper.GetTypeForBoName(null), "null as argument must result in a ArgumentNullException");
             /*
             bool argumentExceptionThrown = false;
             try

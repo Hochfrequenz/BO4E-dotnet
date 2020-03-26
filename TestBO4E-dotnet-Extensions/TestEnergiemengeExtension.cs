@@ -2,13 +2,17 @@ using System;
 using System.Globalization;
 using System.IO;
 using System.Linq;
+
 using BO4E;
 using BO4E.BO;
 using BO4E.ENUM;
 using BO4E.Extensions.BusinessObjects;
 using BO4E.Extensions.BusinessObjects.Energiemenge;
+
 using Itenso.TimePeriod;
+
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 
@@ -33,7 +37,6 @@ namespace TestBO4EExtensions
         [TestMethod]
         public void TestEnergiemengeObjects()
         {
-            bool intensiveExceptionThrown = false;
             foreach (string boFile in Directory.GetFiles("Energiemenge/", "*.json"))
             {
                 JObject json;
@@ -174,17 +177,9 @@ namespace TestBO4EExtensions
                     Assert.AreEqual(Math.Round(targetValue, 12), Math.Round(emNormalised.GetTotalConsumption().Item1, 12));
                 }
 
-                if (em.IsIntensive() && !intensiveExceptionThrown) // test this once for one object. that's enough
+                if (em.IsIntensive()) // test this once for one object. that's enough
                 {
-                    try
-                    {
-                        em.GetTotalConsumption();
-                    }
-                    catch (ArgumentException)
-                    {
-                        intensiveExceptionThrown = true;
-                    }
-                    Assert.IsTrue(intensiveExceptionThrown, "It must not be allowed to add up intensive units.");
+                    Assert.ThrowsException<ArgumentException>(() => em.GetTotalConsumption(), "It must not be allowed to add up intensive units.");
                 }
             }
         }

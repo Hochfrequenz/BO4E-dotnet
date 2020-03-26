@@ -2,13 +2,18 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Security.Cryptography.X509Certificates;
+
 using BO4E.BO;
 using BO4E.Extensions.Encryption;
+
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
+
 using Org.BouncyCastle.Crypto;
 using Org.BouncyCastle.OpenSsl;
+
 using Sodium;
 
 namespace TestBO4EExtensions.Encryption
@@ -88,8 +93,8 @@ namespace TestBO4EExtensions.Encryption
                 }
                 string expectedString = JsonConvert.SerializeObject(bo);
                 string actualString = JsonConvert.SerializeObject(boDecrypted);
-                Assert.IsTrue(expectedString == actualString, "Original and encrypted->decrypted object do not match!");
-               
+                Assert.AreEqual(expectedString, actualString, "Original and encrypted->decrypted object do not match!");
+
                 /******* asymmetric test ******/
                 var asykeyPairSender = PublicKeyBox.GenerateKeyPair();
                 var asykeyPairRecipient = PublicKeyBox.GenerateKeyPair();
@@ -104,7 +109,7 @@ namespace TestBO4EExtensions.Encryption
                 }
                 expectedString = JsonConvert.SerializeObject(bo);
                 actualString = JsonConvert.SerializeObject(boDecrypted);
-                Assert.IsTrue(expectedString == actualString, "Original and encrypted->decrypted object do not match!");
+                Assert.AreEqual(expectedString, actualString, "Original and encrypted->decrypted object do not match!");
 
                 /******* X509 + RSA test ******/
                 // encrypt (without needing a private key)
@@ -153,12 +158,12 @@ namespace TestBO4EExtensions.Encryption
                         boDecrypted = xasydecMultiple.Decrypt(eoMultiple);
                         BusinessObject boDecrypted2 = xasydecMultiple2.Decrypt(eoMultiple);
                         string actualString2 = JsonConvert.SerializeObject(boDecrypted2);
-                        Assert.IsTrue(expectedString == actualString2, "Original and encrypted->decrypted object do not match!");
+                        Assert.AreEqual(expectedString, actualString2, "Original and encrypted->decrypted object do not match!");
                     }
                 }
                 expectedString = JsonConvert.SerializeObject(bo);
                 actualString = JsonConvert.SerializeObject(boDecrypted);
-                Assert.IsTrue(expectedString == actualString, "Original and encrypted->decrypted object do not match!");
+                Assert.AreEqual(expectedString, actualString, "Original and encrypted->decrypted object do not match!");
             }
         }
 
