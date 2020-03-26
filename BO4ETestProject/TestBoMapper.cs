@@ -121,9 +121,9 @@ namespace TestBO4E
                             Assert.IsTrue(false, $"Unexpected {nameof(JsonSerializationException)} in file {file}: {jse.Message}");
                             throw jse;
                         }
-                        string dateLenietOutputString = JsonConvert.SerializeObject(boLenient, new StringEnumConverter());
+                        //string dateLenietOutputString = JsonConvert.SerializeObject(boLenient, new StringEnumConverter());
                         //if (whitelist.Count ==0) {
-                        Assert.AreEqual(regularOutputString, dateLenietOutputString);
+                        //Assert.AreEqual(regularOutputString, dateLenietOutputString);
                         //}
                         //else
                         // {

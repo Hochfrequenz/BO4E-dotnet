@@ -67,7 +67,7 @@ namespace BO4E.BO
         public List<Zaehlwerk> zaehlwerke;
 
         /// <summary>Der Hersteller des Zählers. Details <see cref="Geschaeftspartner" /></summary>
-        [JsonProperty(Required = Required.Default, Order = 13)]
+        [JsonProperty(Required = Required.Default, Order = 13, NullValueHandling =NullValueHandling.Ignore)]
         [ProtoMember(13)]
         public Geschaeftspartner zaehlerhersteller;
 

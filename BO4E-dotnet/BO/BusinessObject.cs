@@ -530,12 +530,19 @@ namespace BO4E.BO
                          .First()
                          .GetGenericMethodDefinition()
                          .MakeGenericMethod(new Type[] { boType });
-                    return deserializationMethod.Invoke(serializer, new object[] { jo.CreateReader() });
+                    try
+                    {
+                        return deserializationMethod.Invoke(serializer, new object[] { jo.CreateReader() });
+                    }
+                    catch (TargetInvocationException tie) when (tie.InnerException != null)
+                    {
+                        throw tie.InnerException; // to hide the reflection to the outside.
+                    }
                 }
                 else
                 {
                     serializer.ContractResolver.ResolveContract(objectType).Converter = null;
-                    return serializer.Deserialize(reader, objectType);
+                    return serializer.Deserialize(JObject.Load(reader).CreateReader(), objectType);
                 }
             }
 
