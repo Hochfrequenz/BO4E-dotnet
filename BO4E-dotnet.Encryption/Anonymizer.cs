@@ -11,6 +11,7 @@ using System.Text;
 using BO4E.BO;
 using BO4E.Extensions.BusinessObjects;
 using BO4E.meta;
+using BO4E.meta.LenientParsing;
 using Microsoft.CSharp.RuntimeBinder;
 using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;

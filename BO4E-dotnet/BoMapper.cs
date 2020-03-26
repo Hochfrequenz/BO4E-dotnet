@@ -1,17 +1,17 @@
 using System;
-using System.Collections;
 using System.Collections.Generic;
-using System.Globalization;
 using System.Linq;
 using System.Reflection;
 using System.Text.RegularExpressions;
+
 using BO4E.BO;
 using BO4E.meta;
+using BO4E.meta.LenientParsing;
+
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using Newtonsoft.Json.Schema;
 using Newtonsoft.Json.Serialization;
-using static BO4E.meta.LenientConverter.LenientConverter;
 
 namespace BO4E
 {

@@ -3,15 +3,17 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Reflection;
+
 using BO4E;
 using BO4E.BO;
 using BO4E.COM;
+using BO4E.meta.LenientParsing;
 //using BO4E.Extensions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 using Newtonsoft.Json.Linq;
-using static BO4E.meta.LenientConverter.LenientConverter;
 
 namespace TestBO4E
 {
@@ -113,7 +115,8 @@ namespace TestBO4E
                         catch (ArgumentException)
                         {
                             boLenient = BoMapper.MapObject(json["objectName"].ToString(), (JObject)json["input"], whitelist, lenient);
-                        }catch(JsonSerializationException jse)
+                        }
+                        catch (JsonSerializationException jse)
                         {
                             Assert.IsTrue(false, $"Unexpected {nameof(JsonSerializationException)} in file {file}: {jse.Message}");
                             throw jse;
