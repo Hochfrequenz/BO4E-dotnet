@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace BO4E
+namespace BO4E.meta.LenientParsing
 {
     /// <summary>
     /// Passing LenientParsing flags to <see cref="BoMapper"/> allows you to map such JSONs that
@@ -34,6 +34,10 @@ namespace BO4E
         /// Set initial DateTime if date could not be parsed (only applies if <see cref="LenientParsing.DateTime"/> is set)
         /// </summary>
         SetInitialDateIfNull = 8,
+        /// <summary>
+        /// Try to parse Strings as Integer if type doesn't fit
+        /// </summary>
+        StringToInt = 16,
         /// <summary>
         /// most lenient (all others)
         /// </summary>

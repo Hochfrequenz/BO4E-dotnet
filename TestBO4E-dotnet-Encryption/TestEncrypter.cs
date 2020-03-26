@@ -189,7 +189,7 @@ namespace TestBO4EExtensions.Encryption
                 EncryptedObject eo = JsonConvert.DeserializeObject<EncryptedObjectPublicKeyBox>("{\"versionStruktur\":1,\"boTyp\":\"ENCRYPTEDOBJECTPUBLICKEYBOX\",\"encryptionScheme\":1,\"nonce\":\"YRmjJpSb7irazqWbCwWvNWKlApIjGiRh\",\"cipherText\":\"H315B/1ualMyzg882cXXB2I8Ol19bQQ1RlzohUXIGvbY7xCtkVuZZXmTI3Ff1GLf7NoymoQKqW50k2jmBTsoSmFWhPwKxDlW9vdS71fzuJTXSgfEmXWEhez2cMuNo0CRP/jgWDDUDmu5R5jz0bB+/FxZECOfYR4WFuvTz4jM+G8=\",\"publicKey\":\"enRUmVbcBbnneJCnvaU+ldANIDc/wGfqTUVCtSkVwhU=\"}");
                 Encrypter dec = new AsymmetricEncrypter(privateKey);
                 BusinessObject bo = dec.Decrypt(eo);
-                Assert.AreEqual(typeof(LogObject), bo.GetType());
+                Assert.IsInstanceOfType(bo, typeof(BO4E.BO.LogObject));
             }
             catch (JsonSerializationException)
             {
