@@ -4,12 +4,15 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using System.Runtime.Serialization;
+
 using BO4E.meta;
+
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using Newtonsoft.Json.Schema;
 using Newtonsoft.Json.Schema.Generation;
 using Newtonsoft.Json.Serialization;
+
 using ProtoBuf;
 
 namespace BO4E.BO
@@ -512,12 +515,34 @@ namespace BO4E.BO
                             throw new NotImplementedException($"The type '{jo["boTyp"].Value<string>()}' does not exist in the BO4E standard.");
                         }
                     }
-                    return JsonConvert.DeserializeObject(jo.ToString(), boType);
+                    var deserializationMethod = serializer.GetType() // https://stackoverflow.com/a/5218492/10009545
+                         .GetMethods()
+                         .Where(m => m.Name == nameof(serializer.Deserialize))
+                         .Select(m => new
+                         {
+                             Method = m,
+                             Params = m.GetParameters(),
+                             Args = m.GetGenericArguments()
+                         })
+                         .Where(x => x.Params.Length == 1
+                                     && x.Args.Length == 1)
+                         .Select(x => x.Method)
+                         .First()
+                         .GetGenericMethodDefinition()
+                         .MakeGenericMethod(new Type[] { boType });
+                    try
+                    {
+                        return deserializationMethod.Invoke(serializer, new object[] { jo.CreateReader() });
+                    }
+                    catch (TargetInvocationException tie) when (tie.InnerException != null)
+                    {
+                        throw tie.InnerException; // to hide the reflection to the outside.
+                    }
                 }
                 else
                 {
                     serializer.ContractResolver.ResolveContract(objectType).Converter = null;
-                    return serializer.Deserialize(reader, objectType);
+                    return serializer.Deserialize(JObject.Load(reader).CreateReader(), objectType);
                 }
             }
 

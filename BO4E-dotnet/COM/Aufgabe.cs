@@ -1,8 +1,11 @@
 using System;
+
 using BO4E.meta;
+using BO4E.meta.LenientParsing;
+
 using Newtonsoft.Json;
+
 using ProtoBuf;
-using static BO4E.BoMapper;
 
 namespace BO4E.COM
 {
