@@ -101,7 +101,7 @@ namespace BO4E.BO
         public Gasqualitaet? gasqualitaet;
 
         /// <summary>Link zum Geschäftspartner, dem diese Marktlokation gehört.</summary>
-        [JsonProperty(Required = Required.Default, Order = 17)]
+        [JsonProperty(Required = Required.Default, Order = 17, NullValueHandling = NullValueHandling.Ignore)]
         [ProtoMember(17)]
         public Geschaeftspartner endkunde;
 
