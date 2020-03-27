@@ -124,7 +124,7 @@ namespace BO4E.BO
         [JsonProperty(Required = Required.Default, Order = 17, PropertyName = "geschaeftspartnerrolle")] // ToDo: it's actually required but I need it to work quickly
         [FieldName("role", Language.EN)]
         [ProtoMember(17)]
-        public List<Geschaeftspartnerrolle> Geschaeftspartnerrolle;
+        public List<Geschaeftspartnerrolle> Geschaeftspartnerrolle { get; set; }
 
         /// <summary>Adresse des Geschäftspartners, an der sich der Hauptsitz befindet. Details <seealso cref="Adresse" /></summary>
         [JsonProperty(Required = Required.Default, Order = 18, PropertyName = "partneradresse")]

@@ -55,7 +55,7 @@ namespace BO4E
                 StaticLogger.Logger = new Microsoft.Extensions.Logging.Debug.DebugLogger("Testlogger", (log, level) => { return true; });
                 _logger = StaticLogger.Logger;
             }
-            Type[] types = Assembly.GetExecutingAssembly().GetTypes();
+            //Type[] types = Assembly.GetExecutingAssembly().GetTypes();
             Type clazz = Assembly.GetExecutingAssembly().GetType(namespacePrefix + "." + objectName);
             Type ediClazz = Assembly.GetExecutingAssembly().GetType($"{namespacePrefix}.EDI.{objectName}Edi");
 
@@ -130,26 +130,14 @@ namespace BO4E
             }
             string boString = JsonConvert.SerializeObject(o, new StringEnumConverter());
             JObject result = (JObject)JsonConvert.DeserializeObject(boString);
-            foreach (var oProp in o.GetType().GetProperties())
+            foreach (var oProp in o.GetType().GetProperties().Where(p=>p.GetValue(o)!=null))
             {
-                if (oProp.GetValue(o) == null)
-                {
-                    continue;
-                }
-                Type originalType;
-                Type underlyingType = Nullable.GetUnderlyingType(oProp.PropertyType);
-                if (underlyingType == null)
-                {
-                    originalType = oProp.PropertyType;
-                }
-                else
-                {
-                    originalType = underlyingType;
-                }
+                string serializationName = oProp.GetCustomAttribute<JsonPropertyAttribute>().PropertyName ?? oProp.Name;
+                Type originalType = Nullable.GetUnderlyingType(oProp.PropertyType) ?? oProp.PropertyType;
                 if (originalType.IsSubclassOf(typeof(BO4E.COM.COM)) || originalType.IsSubclassOf(typeof(BO4E.BO.BusinessObject)))
                 {
                     object newValue = ReplaceWithEdiValues(oProp.GetValue(o));
-                    result[oProp.Name] = (JToken)newValue;
+                    result[serializationName] = (JToken)newValue;
                 }
                 else if (originalType.IsGenericType && (originalType.GetGenericTypeDefinition() == typeof(List<>)))
                 {
@@ -169,7 +157,7 @@ namespace BO4E
                             }
                             JsonSerializer js = new JsonSerializer();
                             js.Converters.Add(new StringEnumConverter());
-                            result[oProp.Name] = JToken.FromObject(newList, js);
+                            result[serializationName] = JToken.FromObject(newList, js);
                         }
                         else
                         {
@@ -186,14 +174,14 @@ namespace BO4E
                             object newListItem = ReplaceWithEdiValues(listItem);
                             miAdd.Invoke(newList, new object[] { newListItem });
                         }
-                        result[oProp.Name] = JToken.FromObject(newList);
+                        result[serializationName] = JToken.FromObject(newList);
                     }
                 }
                 Type ediType = Assembly.GetExecutingAssembly().GetType($"{namespacePrefix}.EDI.{originalType.Name}Edi");
                 if (ediType != null)
                 {
                     string newValue = ToEdi(originalType.Name, oProp.GetValue(o).ToString());
-                    result[oProp.Name] = newValue;
+                    result[serializationName] = newValue;
                 }
             }
             return result;
