@@ -17,16 +17,16 @@ namespace BO4E.BO
         /// <summary>
         /// encryption scheme used
         /// </summary>
-        [JsonProperty(Required = Required.Always, Order = 7)]
+        [JsonProperty(PropertyName = "encryptionScheme", Required = Required.Always, Order = 7)]
         [BoKey]
-        public EncryptionScheme encryptionScheme;
+        public EncryptionScheme EncryptionScheme { get; set; }
 
         /// <summary>
         /// base64 encoded cipher text of the original objects JSON serialisation
         /// </summary>
-        [JsonProperty(Required = Required.Always, Order = 8)]
+        [JsonProperty(PropertyName = "cipherText", Required = Required.Always, Order = 8)]
         [BoKey]
-        public string cipherText;
+        public string CipherText { get; set; }
 
         /// <summary>
         /// create a new EncryptedObject instance by providing both
@@ -35,8 +35,8 @@ namespace BO4E.BO
         /// <param name="es">the encryption scheme</param>
         public EncryptedObject(string _cipherText, EncryptionScheme es) : base()
         {
-            this.cipherText = _cipherText;
-            this.encryptionScheme = es;
+            this.CipherText = _cipherText;
+            this.EncryptionScheme = es;
         }
     }
 }
