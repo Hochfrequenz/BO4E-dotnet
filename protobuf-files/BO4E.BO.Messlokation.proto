@@ -547,24 +547,24 @@ enum Mengeneinheit {
    MWH = 2000000;
 }
 message Messlokation {
-   optional string messlokationsId = 4 [default = "|null|"];
-   optional Sparte sparte = 5 [default = STROM];
-   optional Netzebene netzebeneMessung = 6;
-   optional string messgebietNr = 7;
-   optional string grundzustaendigerMSBCodeNr = 8;
-   optional string grundzustaendigerMSBIMCodeNr = 9;
-   optional string grundzustaendigerMDLCodeNr = 10;
-   optional Adresse messadresse = 11;
-   optional Geokoordinaten geoadresse = 12;
-   optional Katasteradresse katasterinformation = 13;
-   repeated Hardware geraete = 14;
-   repeated Dienstleistung messdienstleistung = 15;
-   repeated Zaehler messlokationszaehler = 16;
-   optional Bilanzierungsmethode bilanzierungsmethode = 17;
-   optional bool abrechnungmessstellenbetriebnna = 1018;
-   repeated Marktrolle marktrollen = 1019;
-   optional Gasqualitaet gasqualitaet = 1020;
-   optional .bcl.Decimal verlustfaktor = 1021;
+   optional string MesslokationsId = 4 [default = "|null|"];
+   optional Sparte Sparte = 5 [default = STROM];
+   optional Netzebene NetzebeneMessung = 6;
+   optional string MessgebietNr = 7;
+   optional string GrundzustaendigerMSBCodeNr = 8;
+   optional string GrundzustaendigerMSBIMCodeNr = 9;
+   optional string GrundzustaendigerMDLCodeNr = 10;
+   optional Adresse Messadresse = 11;
+   optional Geokoordinaten Geoadresse = 12;
+   optional Katasteradresse Katasterinformation = 13;
+   repeated Hardware Geraete = 14;
+   repeated Dienstleistung Messdienstleistung = 15;
+   repeated Zaehler Messlokationszaehler = 16;
+   optional Bilanzierungsmethode Bilanzierungsmethode = 17;
+   optional bool Abrechnungmessstellenbetriebnna = 1018;
+   repeated Marktrolle Marktrollen = 1019;
+   optional Gasqualitaet Gasqualitaet = 1020;
+   optional .bcl.Decimal Verlustfaktor = 1021;
 }
 enum Messwerterfassung {
    FERNAUSLESBAR = 0;

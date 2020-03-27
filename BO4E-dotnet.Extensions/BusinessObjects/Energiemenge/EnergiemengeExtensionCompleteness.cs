@@ -22,7 +22,7 @@ namespace BO4E.Extensions.BusinessObjects.Energiemenge
         /// <returns></returns>
         public static CompletenessReport GetCompletenessReport(this BO4E.BO.Energiemenge em, CompletenessReport.CompletenessReportConfiguration config)
         {
-            return em.GetCompletenessReport(new TimeRange(config.referenceTimeFrame.Startdatum.Value, config.referenceTimeFrame.Enddatum.Value), config.wertermittlungsverfahren, config.obis, config.einheit);
+            return em.GetCompletenessReport(new TimeRange(config.ReferenceTimeFrame.Startdatum.Value, config.ReferenceTimeFrame.Enddatum.Value), config.Wertermittlungsverfahren, config.Obis, config.Einheit);
         }
 
         /// <summary>
@@ -50,14 +50,14 @@ namespace BO4E.Extensions.BusinessObjects.Energiemenge
                 }
                 return new CompletenessReport()
                 {
-                    lokationsId = em.LokationsId,
-                    referenceTimeFrame = new Zeitraum()
+                    LokationsId = em.LokationsId,
+                    ReferenceTimeFrame = new Zeitraum()
                     {
                         Startdatum = reference.Start,
                         Enddatum = reference.End
                     },
-                    coverage = coverage,
-                    _errorMessage = errorMessage
+                    Coverage = coverage,
+                    ErrorMessage = errorMessage
                 };
             }
             var combi = combis.First();
@@ -80,12 +80,12 @@ namespace BO4E.Extensions.BusinessObjects.Energiemenge
             {
                 result = new CompletenessReport
                 {
-                    lokationsId = em.LokationsId,
-                    einheit = einheit,
-                    coverage = GetCoverage(em, reference, wev, obiskennzahl, einheit),
+                    LokationsId = em.LokationsId,
+                    Einheit = einheit,
+                    Coverage = GetCoverage(em, reference, wev, obiskennzahl, einheit),
                     wertermittlungsverfahren = wev,
-                    obiskennzahl = obiskennzahl,
-                    referenceTimeFrame = new Zeitraum
+                    Obiskennzahl = obiskennzahl,
+                    ReferenceTimeFrame = new Zeitraum
                     {
                         Startdatum = DateTime.SpecifyKind(reference.Start, DateTimeKind.Utc),
                         Enddatum = DateTime.SpecifyKind(reference.End, DateTimeKind.Utc)
@@ -122,20 +122,20 @@ namespace BO4E.Extensions.BusinessObjects.Energiemenge
                 {
                     var nonNullValues = new TimePeriodCollection(em.Energieverbrauch.Select(v => new TimeRange(v.Startdatum, v.Enddatum)));
                     ITimeRange limits;
-                    if (result.referenceTimeFrame != null && result.referenceTimeFrame.Startdatum.HasValue && result.referenceTimeFrame.Enddatum.HasValue)
+                    if (result.ReferenceTimeFrame != null && result.ReferenceTimeFrame.Startdatum.HasValue && result.ReferenceTimeFrame.Enddatum.HasValue)
                     {
-                        limits = new TimeRange(result.referenceTimeFrame.Startdatum.Value, result.referenceTimeFrame.Enddatum.Value);
+                        limits = new TimeRange(result.ReferenceTimeFrame.Startdatum.Value, result.ReferenceTimeFrame.Enddatum.Value);
                     }
                     else
                     {
                         limits = null;
                     }
                     var gaps = (new TimeGapCalculator<TimeRange>()).GetGaps(nonNullValues, limits: limits);
-                    result.gaps = gaps.Select(gap => new CompletenessReport.BasicVerbrauch()
+                    result.Gaps = gaps.Select(gap => new CompletenessReport.BasicVerbrauch()
                     {
-                        startdatum = gap.Start,
-                        enddatum = gap.End,
-                        wert = null
+                        Startdatum = gap.Start,
+                        Enddatum = gap.End,
+                        Wert = null
                     }).ToList();
 
                 }
@@ -194,9 +194,9 @@ namespace BO4E.Extensions.BusinessObjects.Energiemenge
             {
                 return new CompletenessReport()
                 {
-                    coverage = null,
-                    lokationsId = em.LokationsId,
-                    _errorMessage = "energieverbrauch is empty"
+                    Coverage = null,
+                    LokationsId = em.LokationsId,
+                    ErrorMessage = "energieverbrauch is empty"
                 };
             }
             return em.GetCompletenessReport(em.GetTimeRange(), v.Wertermittlungsverfahren, v.Obiskennzahl, v.Einheit);

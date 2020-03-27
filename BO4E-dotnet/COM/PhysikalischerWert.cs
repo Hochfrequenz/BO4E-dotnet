@@ -20,14 +20,14 @@ namespace BO4E.COM
         /// numerischer Wert
         /// </summary>
         [ProtoMember(3)]
-        [JsonProperty(PropertyName = "wert")]
+        [JsonProperty(Required = Required.Always, PropertyName = "wert")]
         public decimal Wert { get; set; }
 
         /// <summary>
         /// Einheit von <see cref="Wert"/>
         /// </summary>
         [ProtoMember(4)]
-        [JsonProperty(PropertyName = "einheit")]
+        [JsonProperty(Required=Required.Always, PropertyName = "einheit")]
         public Mengeneinheit Einheit { get; set; }
 
         /// <summary>

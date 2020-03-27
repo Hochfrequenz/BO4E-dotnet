@@ -84,12 +84,12 @@ namespace BO4E.BO
         /// </example>
         [JsonIgnore]
         [ProtoIgnore]
-        public const string userPropertiesName = "userProperties";
+        public const string USER_PROPERTIES_NAME = "userProperties";
 
         /// <summary>
         /// User properties (non bo4e standard)
         /// </summary>
-        [JsonProperty(PropertyName = userPropertiesName, Required = Required.Default, Order = 200)]
+        [JsonProperty(PropertyName = USER_PROPERTIES_NAME, Required = Required.Default, Order = 200)]
         [JsonExtensionData]
         [ProtoMember(200)]
         [DataCategory(DataCategory.USER_PROPERTIES)]

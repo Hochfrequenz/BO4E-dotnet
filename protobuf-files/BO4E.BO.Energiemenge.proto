@@ -2,9 +2,9 @@
 import "protobuf-net/bcl.proto"; // schema for protobuf-net's handling of core .NET types
 
 message Energiemenge {
-   optional string lokationsId = 4 [default = "|null|"];
-   optional Lokationstyp lokationstyp = 5 [default = MaLo];
-   repeated Verbrauch energieverbrauch = 6;
+   optional string LokationsId = 4 [default = "|null|"];
+   optional Lokationstyp LokationsTyp = 5 [default = MaLo];
+   repeated Verbrauch Energieverbrauch = 6;
 }
 enum Lokationstyp {
    MaLo = 0;

@@ -218,7 +218,7 @@ namespace BO4E.Extensions.Encryption
                                 else if (affectedProp.GetValue(bo).GetType().IsSubclassOf(typeof(BO4E.COM.COM)))
                                 {
                                     var comObject = affectedProp.GetValue(bo);
-                                    dynamic comFields = comObject.GetType().GetFields();
+                                    dynamic comFields = comObject.GetType().GetProperties());
                                     foreach (dynamic comField in comFields)
                                     {
                                         try

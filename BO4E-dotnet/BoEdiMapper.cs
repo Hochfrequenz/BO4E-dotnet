@@ -59,13 +59,12 @@ namespace BO4E
             Type clazz = Assembly.GetExecutingAssembly().GetType(namespacePrefix + "." + objectName);
             Type ediClazz = Assembly.GetExecutingAssembly().GetType($"{namespacePrefix}.EDI.{objectName}Edi");
 
-            FieldInfo field = null;
-            field = clazz.GetField(objectValue);
-            if (field == null)
+            var prop = clazz.GetField(objectValue);
+            if (prop == null)
             {
                 _logger.LogWarning($"Class objectName has no field {objectValue}; Might already be the edi value...");
-                var alternativeField = EdiBoMapper.fromEdi(objectName, objectValue);
-                if (alternativeField != null && clazz.GetField(alternativeField) != null)
+                var alternativField = EdiBoMapper.fromEdi(objectName, objectValue);
+                if (alternativField != null && clazz.GetField(alternativField) != null)
                 {
                     return objectValue;
                 }
@@ -81,21 +80,19 @@ namespace BO4E
                 return objectValue;
             }
             // try to find annotation with EdiValue
-            FieldInfo[] annotatedEdiFields = Assembly.GetExecutingAssembly().GetTypes().Where(t => t.Name == ediClazz.Name).SelectMany(t => t.GetFields()).Where(f => f.GetCustomAttributes(typeof(MappingAttribute), false).Length > 0).ToArray();
+            var annotatedEdiFields = Assembly.GetExecutingAssembly().GetTypes()
+                .Where(t => t.Name == ediClazz.Name)
+                .SelectMany(t => t.GetFields())
+                .Where(f => f.GetCustomAttributes(typeof(MappingAttribute), false).Length > 0).ToArray();
             if (annotatedEdiFields.Length == 0)
             {
                 _logger.LogError($"No annotated EdiFields found for {objectName} / {objectValue}");
                 return null;
             }
-            foreach (FieldInfo aef in annotatedEdiFields)
+            foreach (var aef in annotatedEdiFields)
             {
-                foreach (Attribute a in aef.GetCustomAttributes())
+                foreach (MappingAttribute ma in aef.GetCustomAttributes<MappingAttribute>())
                 {
-                    if (a.GetType() != typeof(MappingAttribute))
-                    {
-                        continue;
-                    }
-                    MappingAttribute ma = (MappingAttribute)a;
                     var matchCandidate = ma.Mapping.FirstOrDefault();
                     if (matchCandidate != null && matchCandidate.ToString() == objectValue)
                     {
@@ -133,17 +130,17 @@ namespace BO4E
             }
             string boString = JsonConvert.SerializeObject(o, new StringEnumConverter());
             JObject result = (JObject)JsonConvert.DeserializeObject(boString);
-            foreach (FieldInfo oField in o.GetType().GetFields())
+            foreach (var oProp in o.GetType().GetProperties())
             {
-                if (oField.GetValue(o) == null)
+                if (oProp.GetValue(o) == null)
                 {
                     continue;
                 }
                 Type originalType;
-                Type underlyingType = Nullable.GetUnderlyingType(oField.FieldType);
+                Type underlyingType = Nullable.GetUnderlyingType(oProp.PropertyType);
                 if (underlyingType == null)
                 {
-                    originalType = oField.FieldType;
+                    originalType = oProp.PropertyType;
                 }
                 else
                 {
@@ -151,8 +148,8 @@ namespace BO4E
                 }
                 if (originalType.IsSubclassOf(typeof(BO4E.COM.COM)) || originalType.IsSubclassOf(typeof(BO4E.BO.BusinessObject)))
                 {
-                    object newValue = ReplaceWithEdiValues(oField.GetValue(o));
-                    result[oField.Name] = (JToken)newValue;
+                    object newValue = ReplaceWithEdiValues(oProp.GetValue(o));
+                    result[oProp.Name] = (JToken)newValue;
                 }
                 else if (originalType.IsGenericType && (originalType.GetGenericTypeDefinition() == typeof(List<>)))
                 {
@@ -165,14 +162,14 @@ namespace BO4E
                             Type listType = typeof(List<>).MakeGenericType(listItemEdiType);
                             object newList = Activator.CreateInstance(listType);
                             MethodInfo miAdd = listType.GetMethod("Add");
-                            foreach (object listItem in (IEnumerable)oField.GetValue(o))
+                            foreach (object listItem in (IEnumerable)oProp.GetValue(o))
                             {
                                 string newValue = ToEdi(originalListItemType.Name, listItem.ToString());
                                 miAdd.Invoke(newList, new object[] { Enum.Parse(listItemEdiType, newValue) });
                             }
                             JsonSerializer js = new JsonSerializer();
                             js.Converters.Add(new StringEnumConverter());
-                            result[oField.Name] = JToken.FromObject(newList, js);
+                            result[oProp.Name] = JToken.FromObject(newList, js);
                         }
                         else
                         {
@@ -184,19 +181,19 @@ namespace BO4E
                         Type listType = typeof(List<>).MakeGenericType(typeof(JObject));
                         object newList = Activator.CreateInstance(listType);
                         MethodInfo miAdd = listType.GetMethod("Add");
-                        foreach (object listItem in (IEnumerable)oField.GetValue(o))
+                        foreach (object listItem in (IEnumerable)oProp.GetValue(o))
                         {
                             object newListItem = ReplaceWithEdiValues(listItem);
                             miAdd.Invoke(newList, new object[] { newListItem });
                         }
-                        result[oField.Name] = JToken.FromObject(newList);
+                        result[oProp.Name] = JToken.FromObject(newList);
                     }
                 }
                 Type ediType = Assembly.GetExecutingAssembly().GetType($"{namespacePrefix}.EDI.{originalType.Name}Edi");
                 if (ediType != null)
                 {
-                    string newValue = ToEdi(originalType.Name, oField.GetValue(o).ToString());
-                    result[oField.Name] = newValue;
+                    string newValue = ToEdi(originalType.Name, oProp.GetValue(o).ToString());
+                    result[oProp.Name] = newValue;
                 }
             }
             return result;

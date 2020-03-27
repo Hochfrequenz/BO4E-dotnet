@@ -274,9 +274,9 @@ namespace TestBO4EExtensions.Encryption
             BO4E.StaticLogger.Logger = new Microsoft.Extensions.Logging.Debug.DebugLogger("Testlogger", (log, level) => { return true; });
             CompletenessReport cr = new CompletenessReport()
             {
-                lokationsId = "56789012345",
-                coverage = 0.9M,
-                einheit = BO4E.ENUM.Mengeneinheit.MWH,
+                LokationsId = "56789012345",
+                Coverage = 0.9M,
+                Einheit = BO4E.ENUM.Mengeneinheit.MWH,
                 wertermittlungsverfahren = BO4E.ENUM.Wertermittlungsverfahren.MESSUNG,
                 UserProperties = new Dictionary<string, JToken>()
                 {
@@ -294,8 +294,8 @@ namespace TestBO4EExtensions.Encryption
                 hashedReport = anonymizer.ApplyOperations<CompletenessReport>(cr);
             }
             Assert.IsNotNull(hashedReport);
-            Assert.AreNotEqual(cr.lokationsId, hashedReport.lokationsId);
-            Assert.IsTrue(Marktlokation.ValidateId(hashedReport.lokationsId));
+            Assert.AreNotEqual(cr.LokationsId, hashedReport.LokationsId);
+            Assert.IsTrue(Marktlokation.ValidateId(hashedReport.LokationsId));
             Assert.IsNotNull(cr.UserProperties["anlage"]);
             Assert.AreNotEqual(cr.UserProperties["anlage"].Value<string>(), hashedReport.UserProperties["anlage"].Value<string>());
             Assert.IsNotNull(cr.UserProperties["profil"]);
@@ -307,12 +307,12 @@ namespace TestBO4EExtensions.Encryption
             {
                 saltedReport = anonymizer.ApplyOperations<CompletenessReport>(cr);
             }
-            Assert.IsNotNull(saltedReport.lokationsId);
-            Assert.AreNotEqual(cr.lokationsId, saltedReport.lokationsId);
-            Assert.AreNotEqual(hashedReport.lokationsId, saltedReport.lokationsId);
+            Assert.IsNotNull(saltedReport.LokationsId);
+            Assert.AreNotEqual(cr.LokationsId, saltedReport.LokationsId);
+            Assert.AreNotEqual(hashedReport.LokationsId, saltedReport.LokationsId);
 
-            Assert.IsTrue(Anonymizer.IsHashedKey(hashedReport.lokationsId));
-            Assert.IsTrue(Anonymizer.IsHashedKey(saltedReport.lokationsId));
+            Assert.IsTrue(Anonymizer.IsHashedKey(hashedReport.LokationsId));
+            Assert.IsTrue(Anonymizer.IsHashedKey(saltedReport.LokationsId));
         }
 
         [TestMethod]

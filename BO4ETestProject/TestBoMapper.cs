@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Reflection;
 
 using BO4E;
 using BO4E.BO;
@@ -20,13 +19,6 @@ namespace TestBO4E
     [TestClass]
     public class TestBoMapper
     {
-        [TestMethod]
-        public void TestFieldAnnotationFinder()
-        {
-            FieldInfo[] result = BoMapper.GetAnnotatedFields("Messlokation");
-            Assert.IsTrue(result.Length > 0);
-        }
-
         [TestMethod]
         public void TestBoMapping()
         {

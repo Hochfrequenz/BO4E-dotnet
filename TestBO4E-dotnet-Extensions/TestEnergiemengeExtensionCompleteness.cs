@@ -40,19 +40,19 @@ namespace TestBO4EExtensions
                 if (boFile.EndsWith("somecustomer1.json"))
                 {
                     cr = em.GetCompletenessReport();
-                    Assert.AreEqual((decimal)0.9601, Math.Round(cr.coverage.Value, 4));
-                    Assert.AreEqual("4-5-6-7", cr.obiskennzahl);
+                    Assert.AreEqual((decimal)0.9601, Math.Round(cr.Coverage.Value, 4));
+                    Assert.AreEqual("4-5-6-7", cr.Obiskennzahl);
                     Assert.AreEqual(Wertermittlungsverfahren.MESSUNG, cr.wertermittlungsverfahren);
-                    Assert.AreEqual(Mengeneinheit.KWH, cr.einheit);
-                    Assert.AreEqual("DEXXX", cr.lokationsId);
+                    Assert.AreEqual(Mengeneinheit.KWH, cr.Einheit);
+                    Assert.AreEqual("DEXXX", cr.LokationsId);
                     //Assert.AreEqual(15, cr.values[0].wert);
                     //Assert.AreEqual(TestEnergiemengeExtension.GERMAN_APRIL_2018.Start, cr.values[0].startdatum);
                     string resultString = JsonConvert.SerializeObject(cr, new StringEnumConverter());
 
-                    Assert.IsNotNull(cr.gaps);
-                    Assert.AreEqual(1, cr.gaps.Count);
-                    Assert.AreEqual(new DateTime(2018, 4, 1, 1, 45, 0, DateTimeKind.Utc), cr.gaps.First().startdatum);
-                    Assert.AreEqual(new DateTime(2018, 4, 2, 6, 30, 0, DateTimeKind.Utc), cr.gaps.First().enddatum);
+                    Assert.IsNotNull(cr.Gaps);
+                    Assert.AreEqual(1, cr.Gaps.Count);
+                    Assert.AreEqual(new DateTime(2018, 4, 1, 1, 45, 0, DateTimeKind.Utc), cr.Gaps.First().Startdatum);
+                    Assert.AreEqual(new DateTime(2018, 4, 2, 6, 30, 0, DateTimeKind.Utc), cr.Gaps.First().Enddatum);
                 }
                 else if (boFile.EndsWith("somecustomer2.json"))
                 {
@@ -62,10 +62,10 @@ namespace TestBO4EExtensions
                         string resultString = JsonConvert.SerializeObject(cr, new StringEnumConverter());
                         CompletenessReport cr2 = em.GetCompletenessReport(new CompletenessReport.CompletenessReportConfiguration
                         {
-                            einheit = combi.Item3,
-                            obis = combi.Item2,
-                            wertermittlungsverfahren = combi.Item1,
-                            referenceTimeFrame = new BO4E.COM.Zeitraum
+                            Einheit = combi.Item3,
+                            Obis = combi.Item2,
+                            Wertermittlungsverfahren = combi.Item1,
+                            ReferenceTimeFrame = new BO4E.COM.Zeitraum
                             {
                                 Startdatum = TestEnergiemengeExtension.GERMAN_APRIL_2018.Start,
                                 Enddatum = TestEnergiemengeExtension.GERMAN_APRIL_2018.End
@@ -132,8 +132,8 @@ namespace TestBO4EExtensions
                 Start = new DateTime(2017, 12, 31, 23, 0, 0, 0, DateTimeKind.Utc),
                 End = new DateTime(2018, 1, 31, 23, 0, 0, 0, DateTimeKind.Utc)
             });
-            Assert.AreEqual(1.0M, cr.coverage.Value);
-            Assert.AreEqual(0, cr.gaps.Count());
+            Assert.AreEqual(1.0M, cr.Coverage.Value);
+            Assert.AreEqual(0, cr.Gaps.Count());
 
             var dailies = em.GetDailyCompletenessReports(new TimeRange()
             {
@@ -142,9 +142,9 @@ namespace TestBO4EExtensions
             });
             foreach (var crDaily in dailies)
             {
-                Assert.AreEqual(1.0M, crDaily.Value.coverage.Value, $"error in slice {crDaily.Key}");
+                Assert.AreEqual(1.0M, crDaily.Value.Coverage.Value, $"error in slice {crDaily.Key}");
             }
-            Assert.AreEqual(1.0M, cr.coverage.Value);
+            Assert.AreEqual(1.0M, cr.Coverage.Value);
         }
 
         [TestMethod]
@@ -176,11 +176,11 @@ namespace TestBO4EExtensions
             };
 
             var cr = em.GetCompletenessReport(new TimeRange(new DateTime(2018, 12, 29, 0, 0, 0, DateTimeKind.Utc), new DateTime(2019, 1, 10, 0, 0, 0, DateTimeKind.Utc)));
-            Assert.AreEqual(2, cr.gaps.Count());
-            Assert.AreEqual(new DateTime(2018, 12, 29, 0, 0, 0, DateTimeKind.Utc), cr.gaps.First().startdatum);
-            Assert.AreEqual(new DateTime(2019, 1, 1, 0, 0, 0, DateTimeKind.Utc), cr.gaps.First().enddatum);
-            Assert.AreEqual(new DateTime(2019, 1, 7, 0, 0, 0, DateTimeKind.Utc), cr.gaps.Last().startdatum);
-            Assert.AreEqual(new DateTime(2019, 1, 10, 0, 0, 0, DateTimeKind.Utc), cr.gaps.Last().enddatum);
+            Assert.AreEqual(2, cr.Gaps.Count());
+            Assert.AreEqual(new DateTime(2018, 12, 29, 0, 0, 0, DateTimeKind.Utc), cr.Gaps.First().Startdatum);
+            Assert.AreEqual(new DateTime(2019, 1, 1, 0, 0, 0, DateTimeKind.Utc), cr.Gaps.First().Enddatum);
+            Assert.AreEqual(new DateTime(2019, 1, 7, 0, 0, 0, DateTimeKind.Utc), cr.Gaps.Last().Startdatum);
+            Assert.AreEqual(new DateTime(2019, 1, 10, 0, 0, 0, DateTimeKind.Utc), cr.Gaps.Last().Enddatum);
         }
 
         [TestMethod]
@@ -194,7 +194,7 @@ namespace TestBO4EExtensions
             };
             CompletenessReport cr1 = em1.GetCompletenessReport();
             Assert.IsNotNull(cr1);
-            Assert.IsNull(cr1.coverage);
+            Assert.IsNull(cr1.Coverage);
             JsonConvert.SerializeObject(cr1); // must _not_ throw exception
 
             Energiemenge em2 = new Energiemenge()
@@ -205,14 +205,14 @@ namespace TestBO4EExtensions
             };
             CompletenessReport cr2 = em2.GetCompletenessReport(CHRISTMAS_2018, Wertermittlungsverfahren.MESSUNG, "1-2-3-4", Mengeneinheit.KUBIKMETER);
             Assert.IsNotNull(cr2);
-            Assert.IsNotNull(cr2.coverage); // not null because no values but configuration given
-            Assert.AreEqual(0.0M, cr2.coverage);
+            Assert.IsNotNull(cr2.Coverage); // not null because no values but configuration given
+            Assert.AreEqual(0.0M, cr2.Coverage);
             JsonConvert.SerializeObject(cr2); // must _not_ throw exception
 
             CompletenessReport cr3 = em2.GetCompletenessReport(CHRISTMAS_2018);
             Assert.IsNotNull(cr3);
-            Assert.IsNotNull(cr3.coverage);
-            Assert.AreEqual(0.0M, cr3.coverage);
+            Assert.IsNotNull(cr3.Coverage);
+            Assert.AreEqual(0.0M, cr3.Coverage);
             JsonConvert.SerializeObject(cr3); // must _not_ throw exception
         }
 
@@ -402,10 +402,10 @@ namespace TestBO4EExtensions
             };
             var result = em.GetDailyCompletenessReports(new TimeRange(utcStart, utcEnd));
             Assert.AreEqual(2, result.Count);
-            Assert.AreEqual(new DateTime(2018, 3, 24, 23, 0, 0, DateTimeKind.Utc), result.First().Value.referenceTimeFrame.Startdatum);
-            Assert.AreEqual(new DateTime(2018, 3, 25, 22, 0, 0, DateTimeKind.Utc), result.First().Value.referenceTimeFrame.Enddatum);
-            Assert.AreEqual(new DateTime(2018, 3, 25, 22, 0, 0, DateTimeKind.Utc), result.Last().Value.referenceTimeFrame.Startdatum);
-            Assert.AreEqual(new DateTime(2018, 3, 26, 22, 0, 0, DateTimeKind.Utc), result.Last().Value.referenceTimeFrame.Enddatum);
+            Assert.AreEqual(new DateTime(2018, 3, 24, 23, 0, 0, DateTimeKind.Utc), result.First().Value.ReferenceTimeFrame.Startdatum);
+            Assert.AreEqual(new DateTime(2018, 3, 25, 22, 0, 0, DateTimeKind.Utc), result.First().Value.ReferenceTimeFrame.Enddatum);
+            Assert.AreEqual(new DateTime(2018, 3, 25, 22, 0, 0, DateTimeKind.Utc), result.Last().Value.ReferenceTimeFrame.Startdatum);
+            Assert.AreEqual(new DateTime(2018, 3, 26, 22, 0, 0, DateTimeKind.Utc), result.Last().Value.ReferenceTimeFrame.Enddatum);
         }
 
         [TestMethod]

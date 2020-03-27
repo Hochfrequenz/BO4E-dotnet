@@ -260,6 +260,7 @@ namespace BO4E
         /// </summary>
         /// <param name="boName">name of the business object in title case<example>Messlokation</example></param>
         /// <returns>Array of FieldInfos</returns>
+        [Obsolete("Fields are only private version 1.1", true)]
         public static FieldInfo[] GetAnnotatedFields(string boName)
         {
             return GetAnnotatedFields(boName, typeof(DataCategoryAttribute));

@@ -109,21 +109,21 @@ namespace TestBO4E
         {
             foreach (var boType in typeof(BusinessObject).Assembly.GetTypes().Where(t => (t.BaseType == typeof(BusinessObject) || t.BaseType == typeof(COM)) && !t.IsAbstract))
             {
-                foreach (var obligDefaultField in boType.GetFields(BindingFlags.DeclaredOnly | BindingFlags.Public | BindingFlags.Instance)
+                foreach (var obligDefaultField in boType.GetProperties(BindingFlags.DeclaredOnly | BindingFlags.Public | BindingFlags.Instance)
                     .Where(field => field.GetCustomAttributes(typeof(JsonPropertyAttribute), true)
                         .Cast<JsonPropertyAttribute>()
                         .Any(jpa => jpa.Required == Required.Default)))
                 {
-                    if (Nullable.GetUnderlyingType(obligDefaultField.FieldType) != null || obligDefaultField.FieldType == typeof(string))
+                    if (Nullable.GetUnderlyingType(obligDefaultField.PropertyType) != null || obligDefaultField.PropertyType == typeof(string))
                     {
                         // it is already nullable. 
                         continue;
                     }
-                    if (!obligDefaultField.FieldType.IsPrimitive && !obligDefaultField.FieldType.IsEnum)
+                    if (!obligDefaultField.PropertyType.IsPrimitive && !obligDefaultField.PropertyType.IsEnum)
                     {
                         continue;
                     }
-                    Assert.IsTrue(false, $"The type {obligDefaultField.FieldType} of {boType.FullName}.{obligDefaultField.Name} is not nullable but not marked as obligatory.");
+                    Assert.IsTrue(false, $"The type {obligDefaultField.PropertyType} of {boType.FullName}.{obligDefaultField.Name} is not nullable but not marked as obligatory.");
                     // this is a problem because e.g. for integers you can't distinguish between no value (null) or initial value (0). Same is true for Enum values
                 }
             }

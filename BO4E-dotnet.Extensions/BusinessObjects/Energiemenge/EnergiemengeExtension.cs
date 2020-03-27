@@ -898,13 +898,13 @@ namespace BO4E.Extensions.BusinessObjects.Energiemenge
             {
                 Verbrauch vx = new Verbrauch
                 {
-                    Startdatum = x.startdatum,
-                    Enddatum = x.enddatum,
+                    Startdatum = x.Startdatum,
+                    Enddatum = x.Enddatum,
                 };
                 Verbrauch vy = new Verbrauch
                 {
-                    Startdatum = y.startdatum,
-                    Enddatum = y.enddatum,
+                    Startdatum = y.Startdatum,
+                    Enddatum = y.Enddatum,
                 };
                 IComparer<Verbrauch> cv = new VerbrauchDateTimeComparer();
                 return cv.Compare(vx, vy);
