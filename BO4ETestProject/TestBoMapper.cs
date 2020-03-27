@@ -7,7 +7,7 @@ using System.Reflection;
 using BO4E;
 using BO4E.BO;
 using BO4E.COM;
-using BO4E.meta.LenientParsing;
+using BO4E.meta.LenientConverters;
 //using BO4E.Extensions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
@@ -63,7 +63,7 @@ namespace TestBO4E
                 BusinessObject bo;
                 try
                 {
-                    bo = JsonConvert.DeserializeObject<BusinessObject>(json["input"].ToString(), BoMapper.GetJsonSerializerSettings(lenients));
+                    bo = JsonConvert.DeserializeObject<BusinessObject>(json["input"].ToString(), lenients.GetJsonSerializerSettings());
                 }
                 catch (Exception e) when (e is ArgumentException || e is JsonSerializationException)
                 {
@@ -110,7 +110,7 @@ namespace TestBO4E
                         BusinessObject boLenient;
                         try
                         {
-                            boLenient = JsonConvert.DeserializeObject<BusinessObject>(json["input"].ToString(), BoMapper.GetJsonSerializerSettings(whitelist, lenient));
+                            boLenient = JsonConvert.DeserializeObject<BusinessObject>(json["input"].ToString(), lenient.GetJsonSerializerSettings(whitelist));
                         }
                         catch (ArgumentException)
                         {
@@ -158,7 +158,7 @@ namespace TestBO4E
                 string jsonString = r.ReadToEnd();
                 json = JsonConvert.DeserializeObject<JObject>(jsonString);
             }
-            var v = JsonConvert.DeserializeObject<Vertrag>(json["input"].ToString(), BoMapper.GetJsonSerializerSettings(LenientParsing.MOST_LENIENT));
+            var v = JsonConvert.DeserializeObject<Vertrag>(json["input"].ToString(), LenientParsing.MOST_LENIENT.GetJsonSerializerSettings());
             Assert.IsNotNull(v.vertragsteile);
             Assert.AreEqual("DE54321", v.vertragsteile.First().lokation);
         }
@@ -173,7 +173,7 @@ namespace TestBO4E
                 string jsonString = r.ReadToEnd();
                 json = JsonConvert.DeserializeObject<JObject>(jsonString);
             }
-            Energiemenge em = JsonConvert.DeserializeObject<Energiemenge>(json["input"].ToString(), BoMapper.GetJsonSerializerSettings(LenientParsing.MOST_LENIENT));
+            Energiemenge em = JsonConvert.DeserializeObject<Energiemenge>(json["input"].ToString(), LenientParsing.MOST_LENIENT.GetJsonSerializerSettings());
             if (TimeZoneInfo.Local == Verbrauch.CENTRAL_EUROPE_STANDARD_TIME)
             {
                 Assert.AreEqual(2, em.energieverbrauch.Count); // weil 2 verschiedene status
@@ -190,28 +190,9 @@ namespace TestBO4E
                 string jsonString = r.ReadToEnd();
                 json = JsonConvert.DeserializeObject<JObject>(jsonString);
             }
-            LenientParsing lenients = LenientParsing.Strict; // default
-            if (json["lenientDateTime"] != null && (bool)json["lenientDateTime"])
-            {
-                lenients |= LenientParsing.DateTime;
-            }
-
-            if (json["lenientEnumList"] != null && (bool)json["lenientEnumList"])
-            {
-                lenients |= LenientParsing.EnumList;
-            }
-
-            if (json["lenientBo4eUri"] != null && (bool)json["lenientBo4eUri"])
-            {
-                lenients |= LenientParsing.Bo4eUri;
-            }
-
-            if (json["lenientStringToInt"] != null && (bool)json["lenientStringToInt"])
-            {
-                lenients |= LenientParsing.StringToInt;
-            }
-            Vertrag em = JsonConvert.DeserializeObject<Vertrag>(json["input"].ToString(), BoMapper.GetJsonSerializerSettings(lenients));
-            Assert.AreEqual(em.vertragskonditionen.anzahlAbschlaege, 12);
+            LenientParsing lenients = LenientParsing.StringToInt;
+            Vertrag v = JsonConvert.DeserializeObject<Vertrag>(json["input"].ToString(), lenients.GetJsonSerializerSettings());
+            Assert.AreEqual(v.vertragskonditionen.anzahlAbschlaege, 12);
         }
 
         [TestMethod]
@@ -224,7 +205,7 @@ namespace TestBO4E
                 string jsonString = r.ReadToEnd();
                 json = JsonConvert.DeserializeObject<JObject>(jsonString);
             }
-            Energiemenge em = JsonConvert.DeserializeObject<Energiemenge>(json["input"].ToString(), BoMapper.GetJsonSerializerSettings(LenientParsing.MOST_LENIENT));
+            Energiemenge em = JsonConvert.DeserializeObject<Energiemenge>(json["input"].ToString(), LenientParsing.MOST_LENIENT.GetJsonSerializerSettings());
             Assert.AreEqual(4, em.energieverbrauch.Count);
             Assert.AreEqual(59.0M, em.energieverbrauch[0].wert);
             Assert.AreEqual(58.0M, em.energieverbrauch[1].wert);
@@ -242,7 +223,7 @@ namespace TestBO4E
                 string jsonString = r.ReadToEnd();
                 json = JsonConvert.DeserializeObject<JObject>(jsonString);
             }
-            Energiemenge em = JsonConvert.DeserializeObject<Energiemenge>(json["input"].ToString(), BoMapper.GetJsonSerializerSettings(LenientParsing.MOST_LENIENT));
+            Energiemenge em = JsonConvert.DeserializeObject<Energiemenge>(json["input"].ToString(), LenientParsing.MOST_LENIENT.GetJsonSerializerSettings());
             Assert.AreEqual(1.375000M, em.energieverbrauch.First().wert);
             Assert.AreEqual(1.2130000M, em.energieverbrauch.Last().wert);
         }

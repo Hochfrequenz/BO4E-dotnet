@@ -8,7 +8,7 @@ using BO4E.BO;
 using BO4E.ENUM;
 using BO4E.Extensions.BusinessObjects;
 using BO4E.Extensions.BusinessObjects.Energiemenge;
-using BO4E.meta.LenientParsing;
+using BO4E.meta.LenientConverters;
 using Itenso.TimePeriod;
 
 using Microsoft.VisualStudio.TestTools.UnitTesting;

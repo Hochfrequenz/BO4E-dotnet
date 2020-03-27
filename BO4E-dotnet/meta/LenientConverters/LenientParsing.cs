@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace BO4E.meta.LenientParsing
+namespace BO4E.meta.LenientConverters
 {
     /// <summary>
     /// Passing LenientParsing flags to <see cref="BoMapper"/> allows you to map such JSONs that

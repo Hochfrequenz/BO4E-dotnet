@@ -6,12 +6,11 @@ using System.Text.RegularExpressions;
 
 using BO4E.BO;
 using BO4E.meta;
-using BO4E.meta.LenientParsing;
+using BO4E.meta.LenientConverters;
 
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using Newtonsoft.Json.Schema;
-using Newtonsoft.Json.Serialization;
 
 namespace BO4E
 {
@@ -129,55 +128,7 @@ namespace BO4E
                 }
                 else
                 {
-                    List<JsonConverter> converters = new List<JsonConverter>();
-                    foreach (LenientParsing lp in Enum.GetValues(typeof(LenientParsing)))
-                    {
-                        if (lenient.HasFlag(lp))
-                        {
-                            switch (lp)
-                            {
-                                case LenientParsing.DateTime:
-                                    if (!lenient.HasFlag(LenientParsing.SetInitialDateIfNull))
-                                    {
-                                        converters.Add(new LenientDateTimeConverter());
-                                    }
-                                    else
-                                    {
-                                        converters.Add(new LenientDateTimeConverter(new DateTime()));
-                                    }
-                                    break;
-                                case LenientParsing.EnumList:
-                                    converters.Add(new LenientEnumListConverter());
-                                    break;
-                                case LenientParsing.Bo4eUri:
-                                    converters.Add(new LenientBo4eUriConverter());
-                                    break;
-                                case LenientParsing.StringToInt:
-                                    converters.Add(new LenientStringToIntConverter());
-                                    break;
-                                    // case LenientParsing.EmptyLists:
-                                    // converters.Add(new LenientRequiredListConverter());
-                                    // break;
-
-                                    // no default case because NONE and MOST_LENIENT do not come up with more converters
-                            }
-                        }
-                    }
-                    IContractResolver contractResolver;
-                    if (userPropertiesWhiteList.Count > 0)
-                    {
-                        contractResolver = new UserPropertiesDataContractResolver(userPropertiesWhiteList);
-                    }
-                    else
-                    {
-                        contractResolver = new DefaultContractResolver();
-                    }
-                    JsonSerializerSettings settings = new JsonSerializerSettings
-                    {
-                        Converters = converters,
-                        DateParseHandling = DateParseHandling.None,
-                        ContractResolver = contractResolver
-                    };
+                    var settings = lenient.GetJsonSerializerSettings();
                     return (BusinessObject)JsonConvert.DeserializeObject(jobject.ToString(), businessObjectType, settings);
                 }
             }
@@ -185,65 +136,6 @@ namespace BO4E
             {
                 return null;
             }
-        }
-
-        public static JsonSerializerSettings GetJsonSerializerSettings(LenientParsing lenient)
-        {
-            return GetJsonSerializerSettings(new HashSet<string>(), lenient);
-        }
-
-        public static JsonSerializerSettings GetJsonSerializerSettings(HashSet<string> userPropertiesWhiteList, LenientParsing lenient = LenientParsing.Strict)
-        {
-            List<JsonConverter> converters = new List<JsonConverter>();
-            foreach (LenientParsing lp in Enum.GetValues(typeof(LenientParsing)))
-            {
-                if (lenient.HasFlag(lp))
-                {
-                    switch (lp)
-                    {
-                        case LenientParsing.DateTime:
-                            if (!lenient.HasFlag(LenientParsing.SetInitialDateIfNull))
-                            {
-                                converters.Add(new LenientDateTimeConverter());
-                            }
-                            else
-                            {
-                                converters.Add(new LenientDateTimeConverter(new DateTime()));
-                            }
-                            break;
-                        case LenientParsing.EnumList:
-                            converters.Add(new LenientEnumListConverter());
-                            break;
-                        case LenientParsing.Bo4eUri:
-                            converters.Add(new LenientBo4eUriConverter());
-                            break;
-                        case LenientParsing.StringToInt:
-                            converters.Add(new LenientStringToIntConverter());
-                            break;
-                            // case LenientParsing.EmptyLists:
-                            // converters.Add(new LenientRequiredListConverter());
-                            // break;
-
-                            // no default case because NONE and MOST_LENIENT do not come up with more converters
-                    }
-                }
-            }
-            IContractResolver contractResolver;
-            if (userPropertiesWhiteList.Count > 0)
-            {
-                contractResolver = new UserPropertiesDataContractResolver(userPropertiesWhiteList);
-            }
-            else
-            {
-                contractResolver = new DefaultContractResolver();
-            }
-            JsonSerializerSettings settings = new JsonSerializerSettings
-            {
-                Converters = converters,
-                DateParseHandling = DateParseHandling.None,
-                ContractResolver = contractResolver
-            };
-            return settings;
         }
 
         /// <summary>

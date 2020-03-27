@@ -4,7 +4,7 @@ using System.Globalization;
 
 using Newtonsoft.Json;
 
-namespace BO4E.meta.LenientParsing
+namespace BO4E.meta.LenientConverters
 {
     /// <summary>
     /// The lenient DateTimeConverter allows for transforming strings into (nullable) DateTime(?) objects,

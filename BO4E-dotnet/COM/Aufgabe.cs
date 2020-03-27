@@ -1,7 +1,7 @@
 using System;
 
 using BO4E.meta;
-using BO4E.meta.LenientParsing;
+using BO4E.meta.LenientConverters;
 
 using Newtonsoft.Json;
 

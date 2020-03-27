@@ -6,7 +6,7 @@ using System.Linq;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 
-namespace BO4E.meta.LenientParsing
+namespace BO4E.meta.LenientConverters
 {
     public class LenientEnumListConverter : JsonConverter
     {

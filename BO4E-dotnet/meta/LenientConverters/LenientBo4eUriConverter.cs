@@ -2,7 +2,7 @@
 
 using Newtonsoft.Json;
 
-namespace BO4E.meta.LenientParsing
+namespace BO4E.meta.LenientConverters
 {
     public class LenientBo4eUriConverter : JsonConverter
     {

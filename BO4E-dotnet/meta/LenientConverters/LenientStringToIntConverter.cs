@@ -3,7 +3,7 @@ using System.Linq;
 
 using Newtonsoft.Json;
 
-namespace BO4E.meta.LenientParsing
+namespace BO4E.meta.LenientConverters
 {
     /// <summary>
     /// The lenient StringToIntConverter allows for int or int? objects have alphabetic characters.
