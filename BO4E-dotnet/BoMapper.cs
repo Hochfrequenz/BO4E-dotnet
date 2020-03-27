@@ -114,6 +114,7 @@ namespace BO4E
         /// <item><description>a BO4E business object (<see cref="BusinessObject"/>) of the type provided in businessObjectName</description></item>
         /// </list>
         /// </returns>
+        [Obsolete("DEPRECATED! Please use the overloaded method MapObject<T>(...) or MapObject(Type t,...) that accept types, not strings.")]
         public static BusinessObject MapObject(Type businessObjectType, JObject jobject, HashSet<string> userPropertiesWhiteList, LenientParsing lenient = LenientParsing.Strict)
         {
             if (!businessObjectType.IsSubclassOf(typeof(BusinessObject)))
