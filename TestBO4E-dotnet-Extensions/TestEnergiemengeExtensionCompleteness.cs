@@ -284,7 +284,7 @@ namespace TestBO4EExtensions
                 MiniProfiler mpFixSapCds = MiniProfiler.StartNew("Fix SAP CDS");
                 em.FixSapCDSBug();
                 mpFixSapCds.Stop();
-                Assert.IsTrue(mpFixSapCds.DurationMilliseconds < 50, mpFixSapCds.RenderPlainText());
+                Assert.IsTrue(mpFixSapCds.DurationMilliseconds < 500, mpFixSapCds.RenderPlainText());
                 Console.Out.WriteLine(mpFixSapCds.RenderPlainText());
 
                 MiniProfiler mpFixSapCds2 = MiniProfiler.StartNew("Fix SAP CDS");
