@@ -8,7 +8,7 @@
     "rechnungsnummer": "003000000007",
     "rechnungsdatum": "2019-08-27T22:00:00Z",
     "faelligkeitsdatum": "2019-08-27T22:00:00Z",
-    "rechnungsstyp": "ABSCHLAGSRECHNUNG",
+    "rechnungstyp": "ABSCHLAGSRECHNUNG",
     "rechnungsperiode": {
       "startdatum": "2019-01-10T23:00:00Z",
       "enddatum": "2019-12-24T23:00:00Z"

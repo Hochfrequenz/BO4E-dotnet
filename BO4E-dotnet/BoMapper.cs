@@ -114,6 +114,7 @@ namespace BO4E
         /// <item><description>a BO4E business object (<see cref="BusinessObject"/>) of the type provided in businessObjectName</description></item>
         /// </list>
         /// </returns>
+        [Obsolete("DEPRECATED! Please use the overloaded method MapObject<T>(...) or MapObject(Type t,...) that accept types, not strings.")]
         public static BusinessObject MapObject(Type businessObjectType, JObject jobject, HashSet<string> userPropertiesWhiteList, LenientParsing lenient = LenientParsing.Strict)
         {
             if (!businessObjectType.IsSubclassOf(typeof(BusinessObject)))
@@ -260,11 +261,12 @@ namespace BO4E
         /// </summary>
         /// <param name="boName">name of the business object in title case<example>Messlokation</example></param>
         /// <returns>Array of FieldInfos</returns>
+        [Obsolete("Fields are only private version 1.1", true)]
         public static FieldInfo[] GetAnnotatedFields(string boName)
         {
             return GetAnnotatedFields(boName, typeof(DataCategoryAttribute));
         }
-
+        [Obsolete("Fields are only private version 1.1", true)]
         public static FieldInfo[] GetAnnotatedFields(Type type)
         {
             return GetAnnotatedFields(type, typeof(DataCategoryAttribute));
@@ -277,6 +279,7 @@ namespace BO4E
         /// <param name="boType">type of the business object</param>
         /// <param name="attributeType">type of the attribute/annotation you're interested in<example>typeof(DataCategoryAttribute)</example></param>
         /// <returns>Array of FieldInfos</returns>
+        [Obsolete("Fields are only private version 1.1",true)]
         public static FieldInfo[] GetAnnotatedFields(Type boType, Type attributeType)
         {
             return boType.GetFields()
@@ -292,6 +295,7 @@ namespace BO4E
         /// <param name="boName">name of the business object in title case<example>Messlokation</example></param>
         /// <param name="attributeType">type of the attribute/annotation you're interested in<example>typeof(DataCategoryAttribute)</example></param>
         /// <returns>Array of FieldInfos</returns>
+        [Obsolete("Fields are only private version 1.1",true)]
         public static FieldInfo[] GetAnnotatedFields(string boName, Type attributeType)
         {
             return Assembly.GetExecutingAssembly().GetTypes()

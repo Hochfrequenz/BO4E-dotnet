@@ -153,18 +153,18 @@ namespace TestBO4EExtensions.Encryption
             BO4E.StaticLogger.Logger = new Microsoft.Extensions.Logging.Debug.DebugLogger("Testlogger", (log, level) => { return true; });
             Energiemenge em = new Energiemenge()
             {
-                lokationsId = "DE0123456789012345678901234567890",
-                lokationstyp = BO4E.ENUM.Lokationstyp.MeLo,
-                energieverbrauch = new List<Verbrauch>()
+                LokationsId = "DE0123456789012345678901234567890",
+                LokationsTyp = BO4E.ENUM.Lokationstyp.MeLo,
+                Energieverbrauch = new List<Verbrauch>()
                {
                    new Verbrauch()
                    {
-                       wert = 123.456M,
-                       wertermittlungsverfahren=BO4E.ENUM.Wertermittlungsverfahren.MESSUNG,
-                       startdatum=new DateTime(2019,1,1,0,0,0,DateTimeKind.Utc),
-                       enddatum = new DateTime(2019,2,1,0,0,0,DateTimeKind.Utc),
-                       obiskennzahl="1-2-3-4",
-                       einheit =BO4E.ENUM.Mengeneinheit.KWH
+                       Wert = 123.456M,
+                       Wertermittlungsverfahren=BO4E.ENUM.Wertermittlungsverfahren.MESSUNG,
+                       Startdatum=new DateTime(2019,1,1,0,0,0,DateTimeKind.Utc),
+                       Enddatum = new DateTime(2019,2,1,0,0,0,DateTimeKind.Utc),
+                       Obiskennzahl="1-2-3-4",
+                       Einheit =BO4E.ENUM.Mengeneinheit.KWH
                    }
                }
             };
@@ -173,27 +173,27 @@ namespace TestBO4EExtensions.Encryption
             conf.SetOption(DataCategory.USER_PROPERTIES, AnonymizerApproach.HASH);
             Anonymizer anonymizer = new Anonymizer(conf);
             var verbrauch2 = JsonConvert.DeserializeObject<Verbrauch>("{\"zw\":\"000000000000485549\",\"startdatum\":\"2018-03-24T01:45:00Z\",\"enddatum\":\"2018-03-24T02:00:00Z\",\"wert\":\"59\",\"status\":\"IU012\",\"obiskennzahl\":\"1-1:2.29.0\",\"wertermittlungsverfahren\":\"MESSUNG\",\"einheit\":\"KWH\"}");
-            em.energieverbrauch.Add(verbrauch2);
+            em.Energieverbrauch.Add(verbrauch2);
 
             // hash everything
             var result = anonymizer.ApplyOperations<Energiemenge>(em);
             Assert.IsNotNull(result);
-            Assert.AreNotEqual(em.lokationsId, result.lokationsId);
-            Assert.IsTrue(Messlokation.ValidateId(result.lokationsId));
-            Assert.AreEqual(em.energieverbrauch.Count, result.energieverbrauch.Count);
-            Assert.IsNotNull(result.energieverbrauch[1].userProperties["zw"]);
-            Assert.AreNotEqual(em.energieverbrauch[1].userProperties["zw"].Value<string>(), result.energieverbrauch[1].userProperties["zw"].Value<string>());
+            Assert.AreNotEqual(em.LokationsId, result.LokationsId);
+            Assert.IsTrue(Messlokation.ValidateId(result.LokationsId));
+            Assert.AreEqual(em.Energieverbrauch.Count, result.Energieverbrauch.Count);
+            Assert.IsNotNull(result.Energieverbrauch[1].UserProperties["zw"]);
+            Assert.AreNotEqual(em.Energieverbrauch[1].UserProperties["zw"].Value<string>(), result.Energieverbrauch[1].UserProperties["zw"].Value<string>());
             Assert.IsTrue(Anonymizer.HasHashedKey(result));
 
             // do not hash zw user property
             conf.unaffectedUserProperties.Add("zw");
             result = anonymizer.ApplyOperations<Energiemenge>(em);
             Assert.IsNotNull(result);
-            Assert.AreNotEqual(em.lokationsId, result.lokationsId);
-            Assert.IsTrue(Messlokation.ValidateId(result.lokationsId));
-            Assert.AreEqual(em.energieverbrauch.Count, result.energieverbrauch.Count);
-            Assert.IsNotNull(result.energieverbrauch[1].userProperties["zw"]);
-            Assert.AreEqual(em.energieverbrauch[1].userProperties["zw"].Value<string>(), result.energieverbrauch[1].userProperties["zw"].Value<string>());
+            Assert.AreNotEqual(em.LokationsId, result.LokationsId);
+            Assert.IsTrue(Messlokation.ValidateId(result.LokationsId));
+            Assert.AreEqual(em.Energieverbrauch.Count, result.Energieverbrauch.Count);
+            Assert.IsNotNull(result.Energieverbrauch[1].UserProperties["zw"]);
+            Assert.AreEqual(em.Energieverbrauch[1].UserProperties["zw"].Value<string>(), result.Energieverbrauch[1].UserProperties["zw"].Value<string>());
             Assert.IsTrue(Anonymizer.HasHashedKey(result));
         }
 
@@ -203,16 +203,16 @@ namespace TestBO4EExtensions.Encryption
             BO4E.StaticLogger.Logger = new Microsoft.Extensions.Logging.Debug.DebugLogger("Testlogger", (log, level) => { return true; });
             Energiemenge em = new Energiemenge()
             {
-                lokationsId = "DE0123456789012345678901234567890",
-                lokationstyp = BO4E.ENUM.Lokationstyp.MeLo,
-                energieverbrauch = new List<Verbrauch>()
+                LokationsId = "DE0123456789012345678901234567890",
+                LokationsTyp = BO4E.ENUM.Lokationstyp.MeLo,
+                Energieverbrauch = new List<Verbrauch>()
                {
                    new Verbrauch()
                    {
-                       wert = 123.456M,
-                       wertermittlungsverfahren=BO4E.ENUM.Wertermittlungsverfahren.MESSUNG,
-                       obiskennzahl="1-2-3-4",
-                       einheit =BO4E.ENUM.Mengeneinheit.KWH
+                       Wert = 123.456M,
+                       Wertermittlungsverfahren=BO4E.ENUM.Wertermittlungsverfahren.MESSUNG,
+                       Obiskennzahl="1-2-3-4",
+                       Einheit =BO4E.ENUM.Mengeneinheit.KWH
                    }
                }
             };
@@ -242,7 +242,7 @@ namespace TestBO4EExtensions.Encryption
                 decryptingAnonymizer.SetPrivateKey(keyPair.Private);
                 decryptedEm = decryptingAnonymizer.ApplyOperations<Energiemenge>(encryptedEm);
             }
-            Assert.AreEqual(em.lokationsId, decryptedEm.lokationsId);
+            Assert.AreEqual(em.LokationsId, decryptedEm.LokationsId);
             Assert.IsFalse(Anonymizer.HasHashedKey(em));
         }
 
@@ -252,9 +252,9 @@ namespace TestBO4EExtensions.Encryption
             BO4E.StaticLogger.Logger = new Microsoft.Extensions.Logging.Debug.DebugLogger("Testlogger", (log, level) => { return true; });
             Energiemenge em = new Energiemenge()
             {
-                lokationsId = "asdkasldkmaslkdmas", // not identifyable as lokationsId
-                lokationstyp = BO4E.ENUM.Lokationstyp.MeLo,
-                energieverbrauch = new List<Verbrauch>()
+                LokationsId = "asdkasldkmaslkdmas", // not identifyable as lokationsId
+                LokationsTyp = BO4E.ENUM.Lokationstyp.MeLo,
+                Energieverbrauch = new List<Verbrauch>()
             };
             Assert.IsFalse(Anonymizer.HasHashedKey(em));
 
@@ -274,11 +274,11 @@ namespace TestBO4EExtensions.Encryption
             BO4E.StaticLogger.Logger = new Microsoft.Extensions.Logging.Debug.DebugLogger("Testlogger", (log, level) => { return true; });
             CompletenessReport cr = new CompletenessReport()
             {
-                lokationsId = "56789012345",
-                coverage = 0.9M,
-                einheit = BO4E.ENUM.Mengeneinheit.MWH,
+                LokationsId = "56789012345",
+                Coverage = 0.9M,
+                Einheit = BO4E.ENUM.Mengeneinheit.MWH,
                 wertermittlungsverfahren = BO4E.ENUM.Wertermittlungsverfahren.MESSUNG,
-                userProperties = new Dictionary<string, JToken>()
+                UserProperties = new Dictionary<string, JToken>()
                 {
                     { "anlage", "5012345678" },
                     { "profil", "123456" }
@@ -294,12 +294,12 @@ namespace TestBO4EExtensions.Encryption
                 hashedReport = anonymizer.ApplyOperations<CompletenessReport>(cr);
             }
             Assert.IsNotNull(hashedReport);
-            Assert.AreNotEqual(cr.lokationsId, hashedReport.lokationsId);
-            Assert.IsTrue(Marktlokation.ValidateId(hashedReport.lokationsId));
-            Assert.IsNotNull(cr.userProperties["anlage"]);
-            Assert.AreNotEqual(cr.userProperties["anlage"].Value<string>(), hashedReport.userProperties["anlage"].Value<string>());
-            Assert.IsNotNull(cr.userProperties["profil"]);
-            Assert.AreNotEqual(cr.userProperties["profil"].Value<string>(), hashedReport.userProperties["profil"].Value<string>());
+            Assert.AreNotEqual(cr.LokationsId, hashedReport.LokationsId);
+            Assert.IsTrue(Marktlokation.ValidateId(hashedReport.LokationsId));
+            Assert.IsNotNull(cr.UserProperties["anlage"]);
+            Assert.AreNotEqual(cr.UserProperties["anlage"].Value<string>(), hashedReport.UserProperties["anlage"].Value<string>());
+            Assert.IsNotNull(cr.UserProperties["profil"]);
+            Assert.AreNotEqual(cr.UserProperties["profil"].Value<string>(), hashedReport.UserProperties["profil"].Value<string>());
 
             conf.hashingSalt = "TWFuIGlzIGRpc3Rpbmd1aXNoZWQsIG5vdCBvbmx5IGJ5IGhpcyByZWFzb24sIGJ1dCBieSB0aGlzIHNpbmd1bGFyIHBhc3Npb24gZnJvbSBvdGhlciBhbmltYWxzLCB3aGljaCBpcyBhIGx1c3Qgb2YgdGhlIG1pbmQsIHRoYXQgYnkgYSBwZXJzZXZlcmFuY2Ugb2YgZGVsaWdodCBpbiB0aGUgY29udGludWVkIGFuZCBpbmRlZmF0aWdhYmxlIGdlbmVyYXRpb24gb2Yga25vd2xlZGdlLCBleGNlZWRzIHRoZSBzaG9ydCB2ZWhlbWVuY2Ugb2YgYW55IGNhcm5hbCBwbGVhc3VyZS4=";
             CompletenessReport saltedReport;
@@ -307,12 +307,12 @@ namespace TestBO4EExtensions.Encryption
             {
                 saltedReport = anonymizer.ApplyOperations<CompletenessReport>(cr);
             }
-            Assert.IsNotNull(saltedReport.lokationsId);
-            Assert.AreNotEqual(cr.lokationsId, saltedReport.lokationsId);
-            Assert.AreNotEqual(hashedReport.lokationsId, saltedReport.lokationsId);
+            Assert.IsNotNull(saltedReport.LokationsId);
+            Assert.AreNotEqual(cr.LokationsId, saltedReport.LokationsId);
+            Assert.AreNotEqual(hashedReport.LokationsId, saltedReport.LokationsId);
 
-            Assert.IsTrue(Anonymizer.IsHashedKey(hashedReport.lokationsId));
-            Assert.IsTrue(Anonymizer.IsHashedKey(saltedReport.lokationsId));
+            Assert.IsTrue(Anonymizer.IsHashedKey(hashedReport.LokationsId));
+            Assert.IsTrue(Anonymizer.IsHashedKey(saltedReport.LokationsId));
         }
 
         [TestMethod]
@@ -321,18 +321,18 @@ namespace TestBO4EExtensions.Encryption
             BO4E.StaticLogger.Logger = new Microsoft.Extensions.Logging.Debug.DebugLogger("Testlogger", (log, level) => { return true; });
             Energiemenge em = new Energiemenge()
             {
-                lokationsId = "DE0123456789012345678901234567890",
-                lokationstyp = BO4E.ENUM.Lokationstyp.MeLo,
-                energieverbrauch = new List<Verbrauch>()
+                LokationsId = "DE0123456789012345678901234567890",
+                LokationsTyp = BO4E.ENUM.Lokationstyp.MeLo,
+                Energieverbrauch = new List<Verbrauch>()
                {
                    new Verbrauch()
                    {
-                       wert = 123.456M,
-                       wertermittlungsverfahren=BO4E.ENUM.Wertermittlungsverfahren.MESSUNG,
-                       startdatum=new DateTime(2019,1,1,0,0,0,DateTimeKind.Utc),
-                       enddatum = new DateTime(2019,2,1,0,0,0,DateTimeKind.Utc),
-                       obiskennzahl="1-2-3-4",
-                       einheit =BO4E.ENUM.Mengeneinheit.KWH
+                       Wert = 123.456M,
+                       Wertermittlungsverfahren=BO4E.ENUM.Wertermittlungsverfahren.MESSUNG,
+                       Startdatum=new DateTime(2019,1,1,0,0,0,DateTimeKind.Utc),
+                       Enddatum = new DateTime(2019,2,1,0,0,0,DateTimeKind.Utc),
+                       Obiskennzahl="1-2-3-4",
+                       Einheit =BO4E.ENUM.Mengeneinheit.KWH
                    }
                }
             };
@@ -340,19 +340,17 @@ namespace TestBO4EExtensions.Encryption
 
             Messlokation melo = new Messlokation()
             {
-                messlokationsId = "DE0123456789012345678901234567890"
+                MesslokationsId = "DE0123456789012345678901234567890"
             };
             Assert.IsTrue(melo.IsValid());
 
             var conf = new AnonymizerConfiguration();
             conf.SetOption(DataCategory.POD, AnonymizerApproach.HASH);
 
-            using (Anonymizer anonymizer = new Anonymizer(conf))
-            {
-                var hashedEm = anonymizer.ApplyOperations<Energiemenge>(em);
-                var hashedMelo = anonymizer.ApplyOperations<Messlokation>(melo);
-                Assert.AreEqual(hashedEm.lokationsId, hashedMelo.messlokationsId);
-            }
+            using Anonymizer anonymizer = new Anonymizer(conf);
+            var hashedEm = anonymizer.ApplyOperations<Energiemenge>(em);
+            var hashedMelo = anonymizer.ApplyOperations<Messlokation>(melo);
+            Assert.AreEqual(hashedEm.LokationsId, hashedMelo.MesslokationsId);
         }
 
         [TestMethod]
@@ -374,10 +372,10 @@ namespace TestBO4EExtensions.Encryption
                 {
                     Messlokation melo = new Messlokation()
                     {
-                        messlokationsId = plaintextMeLoId
+                        MesslokationsId = plaintextMeLoId
                     };
                     var hashedMelo = anonymizer.ApplyOperations<Messlokation>(melo);
-                    result[plaintextMeLoId] = hashedMelo.messlokationsId;
+                    result[plaintextMeLoId] = hashedMelo.MesslokationsId;
                 }
             }
             var resultJson = JsonConvert.SerializeObject(result);

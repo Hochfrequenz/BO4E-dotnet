@@ -1,5 +1,7 @@
 ﻿using System.Collections.Generic;
+
 using BO4E.ENUM;
+
 using Newtonsoft.Json;
 
 
@@ -14,13 +16,13 @@ namespace BO4E.BO
         /// <param name="publicKeys">list of public keys for which the object is decrypt-able </param>
         public EncryptedObjectPKCS7(string cipherText, List<string> publicKeys) : base(cipherText, EncryptionScheme.BouncyCastleCMS)
         {
-            this.publicKeys = publicKeys;
+            this.PublicKeys = publicKeys;
         }
 
         /// <summary>
         /// list of public keys for which the object is decrypt-able 
         /// </summary>
-        [JsonProperty(Required = Required.Default)]
-        public List<string> publicKeys;
+        [JsonProperty(PropertyName = "publicKeys", Required = Required.Default)]
+        public List<string> PublicKeys { get; set; }
     }
 }

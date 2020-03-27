@@ -2,9 +2,9 @@
 import "protobuf-net/bcl.proto"; // schema for protobuf-net's handling of core .NET types
 
 message Energiemenge {
-   optional string lokationsId = 4 [default = "|null|"];
-   optional Lokationstyp lokationstyp = 5 [default = MaLo];
-   repeated Verbrauch energieverbrauch = 6;
+   optional string LokationsId = 4 [default = "|null|"];
+   optional Lokationstyp LokationsTyp = 5 [default = MaLo];
+   repeated Verbrauch Energieverbrauch = 6;
 }
 enum Lokationstyp {
    MaLo = 0;
@@ -28,13 +28,13 @@ enum Mengeneinheit {
    MWH = 2000000;
 }
 message Verbrauch {
-   optional .bcl.DateTime startdatum = 3;
-   optional .bcl.DateTime enddatum = 4;
-   optional Wertermittlungsverfahren wertermittlungsverfahren = 5 [default = PROGNOSE];
-   optional string obiskennzahl = 6;
-   optional .bcl.Decimal wert = 7 [default = 0];
-   optional Mengeneinheit einheit = 8 [default = 0];
-   optional Verbrauchsmengetyp type = 9;
+   optional .bcl.DateTime Startdatum = 3;
+   optional .bcl.DateTime Enddatum = 4;
+   optional Wertermittlungsverfahren Wertermittlungsverfahren = 5 [default = PROGNOSE];
+   optional string Obiskennzahl = 6;
+   optional .bcl.Decimal Wert = 7 [default = 0];
+   optional Mengeneinheit Einheit = 8 [default = 0];
+   optional Verbrauchsmengetyp Type = 9;
 }
 enum Verbrauchsmengetyp {
    ARBEITLEISTUNGTAGESPARAMETERABHMALO = 0;

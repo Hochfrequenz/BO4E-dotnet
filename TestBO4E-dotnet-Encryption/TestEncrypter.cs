@@ -50,7 +50,7 @@ namespace TestBO4EExtensions.Encryption
             {
                 exceptionThrown = true;
             }
-            def = new SymmetricEncrypter(symkey);
+            _ = new SymmetricEncrypter(symkey);
             Assert.IsFalse(exceptionThrown);
         }
 
@@ -153,13 +153,11 @@ namespace TestBO4EExtensions.Encryption
 
                 using (X509AsymmetricEncrypter xasydecMultiple = new X509AsymmetricEncrypter(keyPair.Private))
                 {
-                    using (X509AsymmetricEncrypter xasydecMultiple2 = new X509AsymmetricEncrypter(keyPair2.Private))
-                    {
-                        boDecrypted = xasydecMultiple.Decrypt(eoMultiple);
-                        BusinessObject boDecrypted2 = xasydecMultiple2.Decrypt(eoMultiple);
-                        string actualString2 = JsonConvert.SerializeObject(boDecrypted2);
-                        Assert.AreEqual(expectedString, actualString2, "Original and encrypted->decrypted object do not match!");
-                    }
+                    using X509AsymmetricEncrypter xasydecMultiple2 = new X509AsymmetricEncrypter(keyPair2.Private);
+                    boDecrypted = xasydecMultiple.Decrypt(eoMultiple);
+                    BusinessObject boDecrypted2 = xasydecMultiple2.Decrypt(eoMultiple);
+                    string actualString2 = JsonConvert.SerializeObject(boDecrypted2);
+                    Assert.AreEqual(expectedString, actualString2, "Original and encrypted->decrypted object do not match!");
                 }
                 expectedString = JsonConvert.SerializeObject(bo);
                 actualString = JsonConvert.SerializeObject(boDecrypted);
@@ -182,7 +180,7 @@ namespace TestBO4EExtensions.Encryption
         [TestMethod]
         public void TestLogObjectDecryption()
         {
-            byte[] publicKey = Convert.FromBase64String("C1RpdN5DO86swpkegPxEMB60yVSXYLta6PfSnHuYpxA=");
+            //byte[] publicKey = Convert.FromBase64String("C1RpdN5DO86swpkegPxEMB60yVSXYLta6PfSnHuYpxA=");
             byte[] privateKey = Convert.FromBase64String("7BSU9FLrvo8hSk58fs/vHTN4fmRFYbwvI9ZRKmTDt/o=");
             try
             {

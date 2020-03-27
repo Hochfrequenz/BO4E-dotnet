@@ -1,5 +1,7 @@
 using BO4E.meta;
+
 using Newtonsoft.Json;
+
 using ProtoBuf;
 
 namespace BO4E.COM
@@ -10,13 +12,13 @@ namespace BO4E.COM
     {
         /// <summary>Die Gemarkung oder die Flur in der die Liegenschaft liegt</summary>
         [DataCategory(DataCategory.ADDRESS)]
-        [JsonProperty(Required = Required.Always)]
+        [JsonProperty(PropertyName = "gemarkung_flur", Required = Required.Always)]
         [ProtoMember(3)]
-        public string gemarkung_flur;
+        public string Gemarkung_flur { get; set; }
         /// <summary>Das Flurstück mit dem die Liegenschaft (Grundstück) bezeichnet ist.</summary>
         [DataCategory(DataCategory.ADDRESS)]
-        [JsonProperty(Required = Required.Always)]
+        [JsonProperty(PropertyName = "flurstueck", Required = Required.Always)]
         [ProtoMember(4)]
-        public string flurstueck;
+        public string Flurstueck { get; set; }
     }
 }

@@ -1,5 +1,5 @@
-using BO4E.ENUM;
 using Newtonsoft.Json;
+
 using ProtoBuf;
 
 namespace BO4E.COM
@@ -9,16 +9,16 @@ namespace BO4E.COM
     public class Zustaendigkeit : COM
     {
         /// <summary>Berufliche Rolle des Ansprechpartners</summary>
-        [JsonProperty(Required = Required.Default)]
+        [JsonProperty(PropertyName = "jobtitel", Required = Required.Default)]
         [ProtoMember(3)]
-        public string jobtitel;
+        public string Jobtitel { get; set; }
         /// <summary>Abteilung, in der der Ansprechpartner tätig ist</summary>
-        [JsonProperty(Required = Required.Default)]
+        [JsonProperty(PropertyName = "abteilung", Required = Required.Default)]
         [ProtoMember(4)]
-        public string abteilung;
-        /// <summary>Hier kann eine thematische Zuordnung des APs angegeben werden. Details <see cref="Themengebiet" /></summary>
-        [JsonProperty(Required = Required.Default)]
+        public string Abteilung { get; set; }
+        /// <summary>Hier kann eine thematische Zuordnung des APs angegeben werden. Details <see cref="ENUM.Themengebiet" /></summary>
+        [JsonProperty(PropertyName = "themengebiet", Required = Required.Default)]
         [ProtoMember(5)]
-        public string themengebiet;
+        public string Themengebiet { get; set; }
     }
 }

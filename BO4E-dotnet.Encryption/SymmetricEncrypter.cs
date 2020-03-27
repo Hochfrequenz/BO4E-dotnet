@@ -95,7 +95,7 @@ namespace BO4E.Extensions.Encryption
             {
                 return null;
             }
-            string plainString = Decrypt(eo.cipherText, eo.associatedData, eo.nonce);
+            string plainString = Decrypt(eo.CipherText, eo.AssociatedData, eo.Nonce);
             return JsonConvert.DeserializeObject<BusinessObject>(plainString);
         }
 

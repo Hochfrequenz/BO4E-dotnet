@@ -367,7 +367,7 @@
             "DR"
           ]
         },
-        "individuelleAnrede": {
+        "inviduelleAnrede": {
           "type": [
             "string",
             "null"

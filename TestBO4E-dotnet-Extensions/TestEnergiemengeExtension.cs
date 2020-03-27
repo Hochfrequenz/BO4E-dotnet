@@ -148,13 +148,13 @@ namespace TestBO4EExtensions
                             {
                                 var pureEms = em.SplitInPureGroups();
                                 var emptyEm = em.DeepClone();
-                                emptyEm.energieverbrauch = null;
-                                Assert.AreEqual(em.energieverbrauch.Count, pureEms.Select(x => x.energieverbrauch.Count).Sum());
+                                emptyEm.Energieverbrauch = null;
+                                Assert.AreEqual(em.Energieverbrauch.Count, pureEms.Select(x => x.Energieverbrauch.Count).Sum());
                                 foreach (var pureEm in pureEms)
                                 {
                                     Assert.IsTrue(pureEm.IsPure());
                                     var emptyPureEm = pureEm.DeepClone();
-                                    emptyPureEm.energieverbrauch = null;
+                                    emptyPureEm.Energieverbrauch = null;
                                     Assert.AreEqual(emptyEm, emptyPureEm);
                                 }
                             }
@@ -189,7 +189,7 @@ namespace TestBO4EExtensions
         {
             Energiemenge em = JsonConvert.DeserializeObject<Energiemenge>("{\"versionStruktur\":1,\"boTyp\":\"ENERGIEMENGE\",\"lokationsId\":\"DE0003604780400000000000012345678\",\"lokationstyp\":\"MeLo\",\"energieverbrauch\":[{\"startdatum\":\"2019-03-01T00:00:00Z\",\"enddatum\":\"2019-06-24T00:00:00Z\",\"wertermittlungsverfahren\":\"MESSUNG\",\"obiskennzahl\":\"1-0:1.8.0\",\"wert\":1,\"einheit\":\"KWH\",\"zaehlernummer\":\"10654212\"},{\"startdatum\":\"2019-03-01T00:00:00Z\",\"enddatum\":\"2019-06-24T00:00:00Z\",\"wertermittlungsverfahren\":\"MESSUNG\",\"obiskennzahl\":\"1-0:2.8.0\",\"wert\":1,\"einheit\":\"KWH\",\"zaehlernummer\":\"10654212\"}],\"anlagennummer\":\"50693510\",\"messlokationsId\":\"DE0003604780400000000000012345678\",\"marktlokationsId\":\"\",\"isMelo\":true,\"zaehlernummer\":\"10654212\"}");
             em.Detangle();
-            Assert.AreEqual(2, em.energieverbrauch.Count);
+            Assert.AreEqual(2, em.Energieverbrauch.Count);
             // todo: add real test. this one is limited.
 
         }

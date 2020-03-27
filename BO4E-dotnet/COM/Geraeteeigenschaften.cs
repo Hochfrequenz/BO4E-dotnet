@@ -1,8 +1,12 @@
+using System;
+using System.Collections.Generic;
+
 using BO4E.ENUM;
 using BO4E.meta;
+
 using Newtonsoft.Json;
+
 using ProtoBuf;
-using System.Collections.Generic;
 
 namespace BO4E.COM
 {
@@ -10,15 +14,15 @@ namespace BO4E.COM
     [ProtoContract]
     public class Geraeteeigenschaften : COM
     {
-        /// <summary>Der Typ eines Gerätes, beispielsweise Drehstromzähler. Details <see cref="Geraetetyp" /></summary>
-        [JsonProperty(Required = Required.Always)]
+        /// <summary>Der Typ eines Gerätes, beispielsweise Drehstromzähler. Details <see cref="ENUM.Geraetetyp" /></summary>
+        [JsonProperty(PropertyName = "geraetetyp", Required = Required.Always)]
         [ProtoMember(3)]
-        public Geraetetyp geraetetyp;
+        public Geraetetyp Geraetetyp { get; set; }
 
-        /// <summary>Weitere Merkmale des Geräts, zum Beispiel Mehrtarif, Eintarif etc.. Details <see cref="Geraetemerkmal" /></summary>
-        [JsonProperty(Required = Required.Default)]
+        /// <summary>Weitere Merkmale des Geräts, zum Beispiel Mehrtarif, Eintarif etc.. Details <see cref="ENUM.Geraetemerkmal" /></summary>
+        [JsonProperty(PropertyName = "geraetemerkmal", Required = Required.Default)]
         [ProtoMember(4)]
-        public Geraetemerkmal? geraetemerkmal;
+        public Geraetemerkmal? Geraetemerkmal { get; set; }
 
         /// <summary>
         /// Für nicht feste Fields, bsw: 'faktor' 
@@ -26,6 +30,7 @@ namespace BO4E.COM
         [JsonProperty(Required = Required.Default)]
         [NonOfficial(NonOfficialCategory.CUSTOMER_REQUIREMENTS)]
         [ProtoMember(1005)]
-        public Dictionary<string, string> parameter; // ToDo: add docstring
+        [Obsolete("Use the COM.UserProperties instead", true)]
+        private Dictionary<string, string> Parameter { get; set; } // ToDo: add docstring
     }
 }

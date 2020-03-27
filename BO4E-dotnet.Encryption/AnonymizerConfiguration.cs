@@ -19,7 +19,7 @@ namespace BO4E.Extensions.Encryption
         public Dictionary<DataCategory, AnonymizerApproach> operations { get; private set; }
 
         /// <summary>
-        /// set of key in <see cref="BO4E.BO.BusinessObject.userProperties"/> / <see cref="BO4E.COM.COM.userProperties"/> that should not be affected by the anonymizing operations
+        /// set of key in <see cref="BO4E.BO.BusinessObject.UserProperties"/> / <see cref="BO4E.COM.COM.UserProperties"/> that should not be affected by the anonymizing operations
         /// </summary>
         [JsonProperty(Required = Required.Default)]
         public HashSet<string> unaffectedUserProperties;

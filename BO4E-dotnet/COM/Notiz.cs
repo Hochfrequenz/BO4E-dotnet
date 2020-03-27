@@ -1,8 +1,11 @@
 ﻿using System;
 using System.Runtime.Serialization;
 using System.Text.RegularExpressions;
+
 using BO4E.meta;
+
 using Newtonsoft.Json;
+
 using ProtoBuf;
 
 namespace BO4E.COM
@@ -18,23 +21,23 @@ namespace BO4E.COM
         /// <summary>
         /// Person oder System, das die Notiz angelegt hat.
         /// </summary>
-        [JsonProperty(Required = Required.Always, Order = 7)]
+        [JsonProperty(PropertyName = "autor", Required = Required.Always, Order = 7)]
         [ProtoMember(3)]
-        public string autor;
+        public string Autor { get; set; }
 
         /// <summary>
         /// Zeitpunkt zu dem die Notiz angelegt wurde
         /// </summary>
-        [JsonProperty(Required = Required.Always, Order = 8)]
+        [JsonProperty(PropertyName = "zeitpunkt", Required = Required.Always, Order = 8)]
         [ProtoMember(4)]
-        public DateTime zeitpunkt;
+        public DateTime Zeitpunkt { get; set; }
 
         /// <summary>
         /// Inhalt der Notiz (Freitext)
         /// </summary>
-        [JsonProperty(Required = Required.Always, Order = 5)]
+        [JsonProperty(PropertyName = "inhalt", Required = Required.Always, Order = 5)]
         [ProtoMember(5)]
-        public string inhalt;
+        public string Inhalt { get; set; }
 
 
         [JsonIgnore]
@@ -47,7 +50,7 @@ namespace BO4E.COM
         [OnDeserialized]
         public void CleanUpSapNotes(StreamingContext context)
         {
-            this.inhalt = TrailingMinusRegex.Replace(inhalt, string.Empty);
+            this.Inhalt = TrailingMinusRegex.Replace(Inhalt, string.Empty);
         }
     }
 }

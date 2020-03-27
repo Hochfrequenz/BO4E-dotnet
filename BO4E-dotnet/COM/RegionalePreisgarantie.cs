@@ -1,5 +1,4 @@
 using Newtonsoft.Json;
-using ProtoBuf;
 
 namespace BO4E.COM
 {
@@ -7,9 +6,9 @@ namespace BO4E.COM
     //[ProtoContract]
     public class RegionalePreisgarantie : Preisgarantie
     {
-        /// <summary>Regionale Eingrenzung der Preisgarantie. Details <see cref="RegionaleGueltigkeit" /></summary>
-        [JsonProperty(Required = Required.Always)]
+        /// <summary>Regionale Eingrenzung der Preisgarantie. Details <see cref="BO4E.COM.RegionaleGueltigkeit" /></summary>
+        [JsonProperty(PropertyName = "regionaleGueltigkeit", Required = Required.Always)]
         //[ProtoMember(6)]
-        public RegionaleGueltigkeit regionaleGueltigkeit;
+        public RegionaleGueltigkeit RegionaleGueltigkeit { get; set; }
     }
 }

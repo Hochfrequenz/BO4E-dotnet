@@ -1,4 +1,5 @@
 ﻿using BO4E.ENUM;
+
 using Newtonsoft.Json;
 
 namespace BO4E.BO
@@ -13,20 +14,20 @@ namespace BO4E.BO
         /// <param name="nonce">unique nonce / initialisation vector (base 64 encoded, must not be used twice)</param>
         public EncryptedObjectAEAD(string cipherText, string associatedData, string nonce) : base(cipherText, EncryptionScheme.SodiumSymmetricAEAD)
         {
-            this.associatedData = associatedData;
-            this.nonce = nonce;
+            this.AssociatedData = associatedData;
+            this.Nonce = nonce;
         }
 
         /// <summary>
         /// base64 encoded unique nonce / initialisation vector
         /// </summary>
-        [JsonProperty(Required = Required.Always, Order = 8)]
-        public string nonce;
+        [JsonProperty(PropertyName = "nonce", Required = Required.Always, Order = 8)]
+        public string Nonce { get; set; }
 
         /// <summary>
         /// associated data string (UTF-8); might be an empty string but not null
         /// </summary>
-        [JsonProperty(Required = Required.Always, Order = 5)]
-        public string associatedData;
+        [JsonProperty(PropertyName = "AssociatedData", Required = Required.Always, Order = 5)]
+        public string AssociatedData { get; set; }
     }
 }

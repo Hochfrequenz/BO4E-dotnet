@@ -1,14 +1,14 @@
 ﻿syntax = "proto2";
 
 message Adresse {
-   optional string postleitzahl = 3;
-   optional string ort = 4;
-   optional string strasse = 5;
-   optional string hausnummer = 6;
-   optional string postfach = 7;
-   optional string adresszusatz = 8;
-   optional string coErgaenzung = 9;
-   optional Landescode landescode = 10;
+   optional string Postleitzahl = 3;
+   optional string Ort = 4;
+   optional string Strasse = 5;
+   optional string Hausnummer = 6;
+   optional string Postfach = 7;
+   optional string Adresszusatz = 8;
+   optional string CoErgaenzung = 9;
+   optional Landescode Landescode = 10;
 }
 enum Anrede {
    HERR = 0;
@@ -19,34 +19,34 @@ enum Anrede {
    DR = 5;
 }
 message Ansprechpartner {
-   optional Anrede anrede = 4;
-   optional string individuelleAnrede = 5;
-   optional Titel titel = 6;
-   optional string vorname = 7;
-   optional string nachname = 8;
-   optional string eMailAdresse = 9;
-   optional string kommentar = 10;
-   optional Geschaeftspartner geschaeftspartner = 11;
-   optional Adresse adresse = 12;
-   repeated Rufnummer rufnummer = 13;
-   repeated Zustaendigkeit zustaendigkeit = 14;
+   optional Anrede Anrede = 4;
+   optional string IndividuelleAnrede = 5;
+   optional Titel Titel = 6;
+   optional string Vorname = 7;
+   optional string Nachname = 8;
+   optional string EMailAdresse = 9;
+   optional string Kommentar = 10;
+   optional Geschaeftspartner Geschaeftspartner = 11;
+   optional Adresse Adresse = 12;
+   repeated Rufnummer Rufnummer = 13;
+   repeated Zustaendigkeit Zustaendigkeit = 14;
 }
 message Geschaeftspartner {
    optional Anrede anrede = 4;
-   optional string name1 = 6;
-   optional string name2 = 7;
-   optional string name3 = 8;
-   optional bool gewerbekennzeichnung = 9 [default = false];
-   optional string hrnummer = 10;
-   optional string amtsgericht = 11;
-   repeated Kontaktart kontaktweg = 12;
-   optional string umsatzsteuerId = 13;
-   optional string glaeubigerId = 14;
-   optional string eMailAdresse = 15;
-   optional string website = 16;
-   repeated Geschaeftspartnerrolle geschaeftspartnerrolle = 17;
-   optional Adresse partneradresse = 18;
-   optional string title = 1001;
+   optional string Name1 = 6;
+   optional string Name2 = 7;
+   optional string Name3 = 8;
+   optional bool Gewerbekennzeichnung = 9 [default = false];
+   optional string Hrnummer = 10;
+   optional string Amtsgericht = 11;
+   repeated Kontaktart Kontaktweg = 12;
+   optional string UmsatzsteuerId = 13;
+   optional string GlaeubigerId = 14;
+   optional string EMailAdresse = 15;
+   optional string Website = 16;
+   repeated Geschaeftspartnerrolle Geschaeftspartnerrolle = 17;
+   optional Adresse Partneradresse = 18;
+   optional string Title = 1001;
 }
 enum Geschaeftspartnerrolle {
    LIEFERANT = 0;
@@ -332,7 +332,7 @@ enum Landescode {
    ZW = 266;
 }
 message Rufnummer {
-   optional Rufnummernart nummerntyp = 3 [default = RUF_ZENTRALE];
+   optional Rufnummernart Nummerntyp = 3 [default = RUF_ZENTRALE];
    optional string rufnummer = 4;
 }
 enum Rufnummernart {
@@ -352,7 +352,7 @@ enum Titel {
    PROF_DR = 2;
 }
 message Zustaendigkeit {
-   optional string jobtitel = 3;
-   optional string abteilung = 4;
-   optional string themengebiet = 5;
+   optional string Jobtitel = 3;
+   optional string Abteilung = 4;
+   optional string Themengebiet = 5;
 }

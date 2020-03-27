@@ -21,7 +21,7 @@ namespace BO4E.Extensions.BusinessObjects.Energiemenge
         /// <param name="emReference">reference Energiemenge (reference = used for normalisation)</param>
         /// <param name="emOther">other Energiemenge</param>
         /// <param name="timeframe">time frame to be analysed. If null, the overlap of <paramref name="emReference"/> and <paramref name="emOther"/> is used.</param>
-        /// <param name="ignoreLocation">By default (false) an ArgumentException is thrown if the <see cref="BO4E.BO.Energiemenge.lokationsId"/> do not match. Setting this flag suppresses the error.</param>
+        /// <param name="ignoreLocation">By default (false) an ArgumentException is thrown if the <see cref="BO4E.BO.Energiemenge.LokationsId"/> do not match. Setting this flag suppresses the error.</param>
         /// <returns>a <see cref="PlausibilityReport"/></returns>
         public static PlausibilityReport GetPlausibilityReport(this BO4E.BO.Energiemenge emReference, BO4E.BO.Energiemenge emOther, ITimeRange timeframe = null, bool ignoreLocation = false)
         {
@@ -34,9 +34,9 @@ namespace BO4E.Extensions.BusinessObjects.Energiemenge
                     ITimeRange overlap = trReference.GetIntersection(trOther);
                     if (!ignoreLocation)
                     {
-                        if (!(emReference.lokationsId == emOther.lokationsId && emReference.lokationstyp == emOther.lokationstyp))
+                        if (!(emReference.LokationsId == emOther.LokationsId && emReference.LokationsTyp == emOther.LokationsTyp))
                         {
-                            throw new ArgumentException($"locations do not match! '{emReference.lokationsId}' ({emReference.lokationstyp}) != '{emOther.lokationsId}' ({emOther.lokationstyp})");
+                            throw new ArgumentException($"locations do not match! '{emReference.LokationsId}' ({emReference.LokationsTyp}) != '{emOther.LokationsId}' ({emOther.LokationsTyp})");
                         }
                     }
                     timeframe = overlap;
@@ -78,34 +78,34 @@ namespace BO4E.Extensions.BusinessObjects.Energiemenge
                     relativeDeviation = null;
                 }
 
-                Verbrauch vReference = emReference.energieverbrauch.FirstOrDefault(); // copies obiskennzahl, wertermittlungsverfahren...
-                vReference.wert = consumptionReference.Item1;
-                vReference.einheit = consumptionReference.Item2;
-                vReference.startdatum = timeframe.Start;
-                vReference.enddatum = timeframe.End;
+                Verbrauch vReference = emReference.Energieverbrauch.FirstOrDefault(); // copies obiskennzahl, wertermittlungsverfahren...
+                vReference.Wert = consumptionReference.Item1;
+                vReference.Einheit = consumptionReference.Item2;
+                vReference.Startdatum = timeframe.Start;
+                vReference.Enddatum = timeframe.End;
 
-                Verbrauch vOther = emOther.energieverbrauch.FirstOrDefault(); // copies obiskennzahl, wertermittlungsverfahren...
-                vOther.wert = consumptionOther.Item1;
-                vOther.einheit = consumptionOther.Item2;
-                vOther.startdatum = timeframe.Start;
-                vOther.enddatum = timeframe.End;
+                Verbrauch vOther = emOther.Energieverbrauch.FirstOrDefault(); // copies obiskennzahl, wertermittlungsverfahren...
+                vOther.Wert = consumptionOther.Item1;
+                vOther.Einheit = consumptionOther.Item2;
+                vOther.Startdatum = timeframe.Start;
+                vOther.Enddatum = timeframe.End;
 
                 var pr = new PlausibilityReport()
                 {
-                    lokationsId = emReference.lokationsId,
-                    referenceTimeFrame = new BO4E.COM.Zeitraum() { startdatum = timeframe.Start, enddatum = timeframe.End },
-                    verbrauchReference = vReference,
-                    verbrauchOther = vOther,
-                    absoluteDeviation = Math.Abs(absoluteDeviation),
-                    absoluteDeviationEinheit = consumptionReference.Item2
+                    LokationsId = emReference.LokationsId,
+                    ReferenceTimeFrame = new BO4E.COM.Zeitraum() { Startdatum = timeframe.Start, Enddatum = timeframe.End },
+                    VerbrauchReference = vReference,
+                    VerbrauchOther = vOther,
+                    AbsoluteDeviation = Math.Abs(absoluteDeviation),
+                    AbsoluteDeviationEinheit = consumptionReference.Item2
                 };
                 if (relativeDeviation.HasValue)
                 {
-                    pr.relativeDeviation = Math.Round(relativeDeviation.Value, 4);
+                    pr.RelativeDeviation = Math.Round(relativeDeviation.Value, 4);
                 }
                 else
                 {
-                    pr.relativeDeviation = null;
+                    pr.RelativeDeviation = null;
                 }
                 return pr;
             }
@@ -118,7 +118,7 @@ namespace BO4E.Extensions.BusinessObjects.Energiemenge
         /// <returns></returns>
         public static PlausibilityReport GetPlausibilityReport(this BO4E.BO.Energiemenge energiemenge, PlausibilityReport.PlausibilityReportConfiguration config)
         {
-            return energiemenge.GetPlausibilityReport(config.other, new TimeRange(config.timeframe.startdatum.Value, config.timeframe.enddatum.Value), config.ignoreLocation);
+            return energiemenge.GetPlausibilityReport(config.Other, new TimeRange(config.Timeframe.Startdatum.Value, config.Timeframe.Enddatum.Value), config.IgnoreLocation);
         }
 
         /// <summary>
@@ -137,10 +137,10 @@ namespace BO4E.Extensions.BusinessObjects.Energiemenge
             foreach (var range in ranges)
             {
                 var localConfig = JsonConvert.DeserializeObject<PlausibilityReportConfiguration>(JsonConvert.SerializeObject(config));
-                localConfig.timeframe = new Zeitraum()
+                localConfig.Timeframe = new Zeitraum()
                 {
-                    startdatum = range.Start,
-                    enddatum = range.End
+                    Startdatum = range.Start,
+                    Enddatum = range.End
                 };
                 var subResult = GetPlausibilityReport(em, localConfig);
                 result.Add(range, subResult);
@@ -153,7 +153,7 @@ namespace BO4E.Extensions.BusinessObjects.Energiemenge
         /// The magic is, that it takes DST into account!
         /// </summary>
         /// <param name="em">Energiemenge</param>
-        /// <param name="config">configuration that contains the overall time range in <see cref="PlausibilityReportConfiguration.timeframe"/></param>
+        /// <param name="config">configuration that contains the overall time range in <see cref="PlausibilityReportConfiguration.Timeframe"/></param>
         /// <returns></returns>
         public static IDictionary<ITimeRange, PlausibilityReport> GetDailyPlausibilityReports(this BO.Energiemenge em, PlausibilityReportConfiguration config)
         {
@@ -161,14 +161,14 @@ namespace BO4E.Extensions.BusinessObjects.Energiemenge
             {
                 throw new ArgumentNullException(nameof(config));
             }
-            if (config.timeframe == null)
+            if (config.Timeframe == null)
             {
-                throw new ArgumentNullException(nameof(config.timeframe));
+                throw new ArgumentNullException(nameof(config.Timeframe));
             }
             var slices = GetLocalDailySlices(new TimeRange()
             {
-                Start = config.timeframe.startdatum.Value,
-                End = config.timeframe.enddatum.Value
+                Start = config.Timeframe.Startdatum.Value,
+                End = config.Timeframe.Enddatum.Value
             });
             return em.GetSlicedPlausibilityReports(config, slices);
         }
@@ -177,7 +177,7 @@ namespace BO4E.Extensions.BusinessObjects.Energiemenge
         /// Get Monthly Completeness Reports for overall time range defined in <paramref name="config"/>. 
         /// </summary>
         /// <param name="em">Energiemenge</param>
-        /// <param name="config">configuration that contains the overall time range in <see cref="PlausibilityReportConfiguration.timeframe"/></param>
+        /// <param name="config">configuration that contains the overall time range in <see cref="PlausibilityReportConfiguration.Timeframe"/></param>
         /// <returns></returns>
         public static IDictionary<ITimeRange, PlausibilityReport> GetMonthlyPlausibilityReports(this BO4E.BO.Energiemenge em, PlausibilityReportConfiguration config)
         {
@@ -185,14 +185,14 @@ namespace BO4E.Extensions.BusinessObjects.Energiemenge
             {
                 throw new ArgumentNullException(nameof(config));
             }
-            if (config.timeframe == null)
+            if (config.Timeframe == null)
             {
-                throw new ArgumentNullException(nameof(config.timeframe));
+                throw new ArgumentNullException(nameof(config.Timeframe));
             }
             var slices = GetLocalMonthlySlices(new TimeRange()
             {
-                Start = config.timeframe.startdatum.Value,
-                End = config.timeframe.enddatum.Value
+                Start = config.Timeframe.Startdatum.Value,
+                End = config.Timeframe.Enddatum.Value
             });
             return em.GetSlicedPlausibilityReports(config, slices);
         }

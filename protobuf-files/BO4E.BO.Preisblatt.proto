@@ -127,35 +127,35 @@ enum Mengeneinheit {
    MWH = 2000000;
 }
 message PositionsAufAbschlag {
-   optional string bezeichnung = 3;
-   optional string beschreibung = 4;
-   optional AufAbschlagstyp aufAbschlagstyp = 5 [default = RELATIV];
-   optional .bcl.Decimal aufAbschlagswert = 6 [default = 0];
-   optional Waehrungseinheit aufAbschlagswaehrung = 7 [default = EUR];
+   optional string Bezeichnung = 3;
+   optional string Beschreibung = 4;
+   optional AufAbschlagstyp AufAbschlagstyp = 5 [default = RELATIV];
+   optional .bcl.Decimal AufAbschlagswert = 6 [default = 0];
+   optional Waehrungseinheit AufAbschlagswaehrung = 7 [default = EUR];
 }
 message Preisblatt {
-   optional string bezeichnung = 4;
-   optional Zeitraum gueltigkeit = 5;
-   repeated Preisposition preispositionen = 6;
+   optional string Bezeichnung = 4;
+   optional Zeitraum Gueltigkeit = 5;
+   repeated Preisposition Preispositionen = 6;
 }
 message Preisposition {
-   optional Kalkulationsmethode berechnungsmethode = 3 [default = KEINE];
-   optional Leistungstyp leistungstyp = 4 [default = ARBEITSPREIS_WIRKARBEIT];
-   optional string leistungsbezeichung = 5;
-   optional Waehrungseinheit preiseinheit = 6 [default = EUR];
-   optional Mengeneinheit bezugsgroesse = 7 [default = 0];
-   optional Zeiteinheit zeitbasis = 8;
-   optional Tarifzeit tarifzeit = 9;
-   optional BDEWArtikelnummer bdewArtikelnummer = 10;
-   optional Bemessungsgroesse zonungsgroesse = 11;
-   optional PositionsAufAbschlag zu_abschlaege = 12;
-   repeated Preisstaffel preisstaffeln = 13;
+   optional Kalkulationsmethode Berechnungsmethode = 3 [default = KEINE];
+   optional Leistungstyp Leistungstyp = 4 [default = ARBEITSPREIS_WIRKARBEIT];
+   optional string Leistungsbezeichung = 5;
+   optional Waehrungseinheit Preiseinheit = 6 [default = EUR];
+   optional Mengeneinheit Bezugsgroesse = 7 [default = 0];
+   optional Zeiteinheit Zeitbasis = 8;
+   optional Tarifzeit Tarifzeit = 9;
+   optional BDEWArtikelnummer BdewArtikelnummer = 10;
+   optional Bemessungsgroesse Zonungsgroesse = 11;
+   optional PositionsAufAbschlag Zu_abschlaege = 12;
+   repeated Preisstaffel Preisstaffeln = 13;
 }
 message Preisstaffel {
-   optional .bcl.Decimal einheitspreis = 3 [default = 0];
-   optional .bcl.Decimal staffelgrenzeVon = 4 [default = 0];
-   optional .bcl.Decimal staffelgrenzeBis = 5 [default = 0];
-   optional Sigmoidparameter sigmoidparameter = 6;
+   optional .bcl.Decimal Einheitspreis = 3 [default = 0];
+   optional .bcl.Decimal StaffelgrenzeVon = 4 [default = 0];
+   optional .bcl.Decimal StaffelgrenzeBis = 5 [default = 0];
+   optional Sigmoidparameter Sigmoidparameter = 6;
 }
 message Sigmoidparameter {
    optional .bcl.Decimal A = 3 [default = 0];
@@ -185,8 +185,8 @@ enum Zeiteinheit {
    JAHR = 9;
 }
 message Zeitraum {
-   optional Zeiteinheit einheit = 3;
-   optional .bcl.Decimal dauer = 4;
-   optional .bcl.DateTime startdatum = 5;
-   optional .bcl.DateTime enddatum = 6;
+   optional Zeiteinheit Einheit = 3;
+   optional .bcl.Decimal Dauer = 4;
+   optional .bcl.DateTime Startdatum = 5;
+   optional .bcl.DateTime Enddatum = 6;
 }

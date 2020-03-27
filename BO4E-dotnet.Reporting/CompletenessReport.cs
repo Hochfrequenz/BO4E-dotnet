@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+
 using BO4E.COM;
 using BO4E.ENUM;
 using BO4E.meta;
+
 using Newtonsoft.Json;
 
 namespace BO4E.Reporting
@@ -10,68 +12,68 @@ namespace BO4E.Reporting
     /// <summary>
     /// A completeness report contains information about the completeness of a pure
     /// <see cref="Energiemenge"/>. In this context "pure" means, that the Energiemenge
-    /// does only contain one distinct set of (<see cref="Verbrauch.obiskennzahl"/>, <see cref="Verbrauch.einheit"/>,
-    /// <see cref="Verbrauch.wertermittlungsverfahren"/>).
+    /// does only contain one distinct set of (<see cref="Verbrauch.Obiskennzahl"/>, <see cref="Verbrauch.Einheit"/>,
+    /// <see cref="Verbrauch.Wertermittlungsverfahren"/>).
     /// </summary>
     public class CompletenessReport : Report, IComparable<CompletenessReport>
     {
         /// <summary>
-        /// all information like e.g. <see cref="coverage"/> is normalised to this reference time frame.
-        /// Must only be null if an error occurred and <see cref="_errorMessage"/> is not null.
+        /// all information like e.g. <see cref="Coverage"/> is normalised to this reference time frame.
+        /// Must only be null if an error occurred and <see cref="ErrorMessage"/> is not null.
         /// </summary>
-        [JsonProperty(Required = Required.AllowNull, Order = 7)]
-        public Zeitraum referenceTimeFrame;
+        [JsonProperty(PropertyName = "referenceTimeFrame", Required = Required.AllowNull, Order = 7)]
+        public Zeitraum ReferenceTimeFrame { get; set; }
 
         /// <summary>
         /// <see cref="Energiemenge.lokationsId"/>
         /// </summary>
         [DataCategory(DataCategory.POD)]
-        [JsonProperty(Required = Required.Always, Order = 8)]
-        public string lokationsId;
+        [JsonProperty(PropertyName = "lokationsId", Required = Required.Always, Order = 8)]
+        public string LokationsId { get; set; }
 
         /// <summary>
-        /// <see cref="Verbrauch.obiskennzahl"/>
+        /// <see cref="Verbrauch.Obiskennzahl"/>
         /// </summary>
-        [JsonProperty(Required = Required.Default, Order = 5)]
-        public string obiskennzahl;
+        [JsonProperty(PropertyName = "obiskennzahl", Required = Required.Default, Order = 5)]
+        public string Obiskennzahl { get; set; }
 
         /// <summary>
-        /// <see cref="Verbrauch.einheit"/>
+        /// <see cref="Verbrauch.Einheit"/>
         /// </summary>
-        [JsonProperty(Required = Required.Default, Order = 6)]
-        public Mengeneinheit einheit;
+        [JsonProperty(PropertyName = "einheit", Required = Required.Default, Order = 6)]
+        public Mengeneinheit Einheit { get; set; }
 
         /// <summary>
-        /// <see cref="Verbrauch.wertermittlungsverfahren"/>
+        /// <see cref="Verbrauch.Wertermittlungsverfahren"/>
         /// </summary>
-        [JsonProperty(Required = Required.Default, Order = 7)]
-        public Wertermittlungsverfahren wertermittlungsverfahren;
+        [JsonProperty(PropertyName = "wertermittlungsverfahren", Required = Required.Default, Order = 7)]
+        public Wertermittlungsverfahren wertermittlungsverfahren { get; set; }
 
         /// <summary>
-        /// ratio of time with data present compared to <see cref="referenceTimeFrame"/>.
+        /// ratio of time with data present compared to <see cref="ReferenceTimeFrame"/>.
         /// 1.0 means 100% coverage.
         /// </summary>
-        [JsonProperty(Required = Required.AllowNull, Order = 8)]
-        public decimal? coverage;
+        [JsonProperty(PropertyName = "coverage", Required = Required.AllowNull, Order = 8)]
+        public decimal? Coverage { get; set; }
 
         /// <summary>
         /// values
         /// </summary>
-        [JsonProperty(Required = Required.Default, Order = 5)]
+        [JsonProperty(PropertyName = "values", Required = Required.Default, Order = 5)]
         [DataCategory(DataCategory.METER_READING)]
-        public List<BasicVerbrauch> values;
+        public List<BasicVerbrauch> Values { get; set; }
 
         /// <summary>
-        /// gaps are continous values (<see cref="values"/>) with value null.
+        /// gaps are continous values (<see cref="Values"/>) with value null.
         /// </summary>
-        [JsonProperty(Required = Required.Default, Order = 6)]
-        public List<BasicVerbrauch> gaps;
+        [JsonProperty(PropertyName = "gaps", Required = Required.Default, Order = 6)]
+        public List<BasicVerbrauch> Gaps { get; set; }
 
         /// <summary>
         /// optional field for storing error messages
         /// </summary>
-        [JsonProperty(Required = Required.Default)]
-        public string _errorMessage;
+        [JsonProperty(PropertyName = "_errorMessage", Required = Required.Default)]
+        public string ErrorMessage { get; set; }
 
         // ToDo: make it nice.
         /// <summary>
@@ -81,25 +83,25 @@ namespace BO4E.Reporting
         /// <returns></returns>
         public int CompareTo(CompletenessReport other)
         {
-            if(this.referenceTimeFrame==null && other.referenceTimeFrame == null)
+            if (this.ReferenceTimeFrame == null && other.ReferenceTimeFrame == null)
             {
                 return 0;
             }
-            if(this.referenceTimeFrame!=null && other.referenceTimeFrame == null)
+            if (this.ReferenceTimeFrame != null && other.ReferenceTimeFrame == null)
             {
                 return 1;
             }
-            if(this.referenceTimeFrame==null && other.referenceTimeFrame != null)
+            if (this.ReferenceTimeFrame == null && other.ReferenceTimeFrame != null)
             {
                 return -1;
             }
-            if(this.referenceTimeFrame!=null && other.referenceTimeFrame != null)
+            if (this.ReferenceTimeFrame != null && other.ReferenceTimeFrame != null)
             {
-                if(this.referenceTimeFrame.startdatum.HasValue && other.referenceTimeFrame.startdatum.HasValue)
+                if (this.ReferenceTimeFrame.Startdatum.HasValue && other.ReferenceTimeFrame.Startdatum.HasValue)
                 {
-                    return Comparer<DateTime>.Default.Compare(referenceTimeFrame.startdatum.Value, other.referenceTimeFrame.startdatum.Value);
+                    return Comparer<DateTime>.Default.Compare(ReferenceTimeFrame.Startdatum.Value, other.ReferenceTimeFrame.Startdatum.Value);
                 }
-                if (this.referenceTimeFrame.startdatum.HasValue)
+                if (this.ReferenceTimeFrame.Startdatum.HasValue)
                 {
                     return 1;
                 }
@@ -118,21 +120,21 @@ namespace BO4E.Reporting
         public class BasicVerbrauch // : Verbrauch
         {
             /// <summary>
-            /// <see cref="Verbrauch.startdatum"/>
+            /// <see cref="Verbrauch.Startdatum"/>
             /// </summary>
-            [JsonProperty(Required = Required.Always)]
-            public DateTime startdatum;
+            [JsonProperty(PropertyName = "startdatum", Required = Required.Always)]
+            public DateTime Startdatum { get; set; }
             /// <summary>
-            /// <see cref="Verbrauch.enddatum"/>
+            /// <see cref="Verbrauch.Enddatum"/>
             /// </summary>
-            [JsonProperty(Required = Required.Always)]
-            public DateTime enddatum;
+            [JsonProperty(PropertyName = "enddatum", Required = Required.Always)]
+            public DateTime Enddatum { get; set; }
             /// <summary>
-            /// <see cref="Verbrauch.wert"/>. Make it null to express no value present.
+            /// <see cref="Verbrauch.Wert"/>. Make it null to express no value present.
             /// </summary>
             [DataCategory(DataCategory.METER_READING)]
-            [JsonProperty(Required = Required.AllowNull)]
-            public decimal? wert;
+            [JsonProperty(PropertyName = "wert", Required = Required.AllowNull)]
+            public decimal? Wert { get; set; }
 
             /*
             [JsonIgnore]
@@ -158,26 +160,26 @@ namespace BO4E.Reporting
             /// <summary>
             /// reference time frame to be analysed
             /// </summary>
-            [JsonProperty(Required = Required.Always, Order = 7)]
-            public Zeitraum referenceTimeFrame;
+            [JsonProperty(PropertyName = "referenceTimeFrame", Required = Required.Always, Order = 7)]
+            public Zeitraum ReferenceTimeFrame { get; set; }
 
             /// <summary>
-            /// Wertermittlungsverfahren (<see cref="Verbrauch.wertermittlungsverfahren"/>) to be taken into account.
+            /// Wertermittlungsverfahren (<see cref="Verbrauch.Wertermittlungsverfahren"/>) to be taken into account.
             /// </summary>
-            [JsonProperty(Required = Required.Default, Order = 8)]
-            public Wertermittlungsverfahren wertermittlungsverfahren;
+            [JsonProperty(PropertyName = "wertermittlungsverfahren", Required = Required.Default, Order = 8)]
+            public Wertermittlungsverfahren Wertermittlungsverfahren { get; set; }
 
             /// <summary>
-            /// OBIS ID (<see cref="Verbrauch.obiskennzahl"/>) to be taken into account.
+            /// OBIS ID (<see cref="Verbrauch.Obiskennzahl"/>) to be taken into account.
             /// </summary>
-            [JsonProperty(Required = Required.Default, Order = 5)]
-            public string obis;
+            [JsonProperty(PropertyName = "obis", Required = Required.Default, Order = 5)]
+            public string Obis { get; set; }
 
             /// <summary>
-            /// Unit (<see cref="Verbrauch.einheit"/>) to be taken into account.
+            /// Unit (<see cref="Verbrauch.Einheit"/>) to be taken into account.
             /// </summary>
-            [JsonProperty(Required = Required.Default, Order = 6)]
-            public Mengeneinheit einheit;
+            [JsonProperty(PropertyName = "einheit", Required = Required.Default, Order = 6)]
+            public Mengeneinheit Einheit { get; set; }
         }
         /*
         /// <summary>

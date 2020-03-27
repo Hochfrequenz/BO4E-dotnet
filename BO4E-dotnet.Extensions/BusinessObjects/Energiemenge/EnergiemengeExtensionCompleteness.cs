@@ -22,7 +22,7 @@ namespace BO4E.Extensions.BusinessObjects.Energiemenge
         /// <returns></returns>
         public static CompletenessReport GetCompletenessReport(this BO4E.BO.Energiemenge em, CompletenessReport.CompletenessReportConfiguration config)
         {
-            return em.GetCompletenessReport(new TimeRange(config.referenceTimeFrame.startdatum.Value, config.referenceTimeFrame.enddatum.Value), config.wertermittlungsverfahren, config.obis, config.einheit);
+            return em.GetCompletenessReport(new TimeRange(config.ReferenceTimeFrame.Startdatum.Value, config.ReferenceTimeFrame.Enddatum.Value), config.Wertermittlungsverfahren, config.Obis, config.Einheit);
         }
 
         /// <summary>
@@ -50,14 +50,14 @@ namespace BO4E.Extensions.BusinessObjects.Energiemenge
                 }
                 return new CompletenessReport()
                 {
-                    lokationsId = em.lokationsId,
-                    referenceTimeFrame = new Zeitraum()
+                    LokationsId = em.LokationsId,
+                    ReferenceTimeFrame = new Zeitraum()
                     {
-                        startdatum = reference.Start,
-                        enddatum = reference.End
+                        Startdatum = reference.Start,
+                        Enddatum = reference.End
                     },
-                    coverage = coverage,
-                    _errorMessage = errorMessage
+                    Coverage = coverage,
+                    ErrorMessage = errorMessage
                 };
             }
             var combi = combis.First();
@@ -80,19 +80,19 @@ namespace BO4E.Extensions.BusinessObjects.Energiemenge
             {
                 result = new CompletenessReport
                 {
-                    lokationsId = em.lokationsId,
-                    einheit = einheit,
-                    coverage = GetCoverage(em, reference, wev, obiskennzahl, einheit),
+                    LokationsId = em.LokationsId,
+                    Einheit = einheit,
+                    Coverage = GetCoverage(em, reference, wev, obiskennzahl, einheit),
                     wertermittlungsverfahren = wev,
-                    obiskennzahl = obiskennzahl,
-                    referenceTimeFrame = new Zeitraum
+                    Obiskennzahl = obiskennzahl,
+                    ReferenceTimeFrame = new Zeitraum
                     {
-                        startdatum = DateTime.SpecifyKind(reference.Start, DateTimeKind.Utc),
-                        enddatum = DateTime.SpecifyKind(reference.End, DateTimeKind.Utc)
+                        Startdatum = DateTime.SpecifyKind(reference.Start, DateTimeKind.Utc),
+                        Enddatum = DateTime.SpecifyKind(reference.End, DateTimeKind.Utc)
                     },
                 };
             }
-            if (em.energieverbrauch != null && em.energieverbrauch.Count > 0)
+            if (em.Energieverbrauch != null && em.Energieverbrauch.Count > 0)
             {
                 /*using (MiniProfiler.Current.Step("populating time slices of/with missing/null values"))
                 {
@@ -120,22 +120,22 @@ namespace BO4E.Extensions.BusinessObjects.Energiemenge
                 }*/
                 using (MiniProfiler.Current.Step("Setting aggregated gaps"))
                 {
-                    var nonNullValues = new TimePeriodCollection(em.energieverbrauch.Select(v => new TimeRange(v.startdatum, v.enddatum)));
+                    var nonNullValues = new TimePeriodCollection(em.Energieverbrauch.Select(v => new TimeRange(v.Startdatum, v.Enddatum)));
                     ITimeRange limits;
-                    if (result.referenceTimeFrame != null && result.referenceTimeFrame.startdatum.HasValue && result.referenceTimeFrame.enddatum.HasValue)
+                    if (result.ReferenceTimeFrame != null && result.ReferenceTimeFrame.Startdatum.HasValue && result.ReferenceTimeFrame.Enddatum.HasValue)
                     {
-                        limits = new TimeRange(result.referenceTimeFrame.startdatum.Value, result.referenceTimeFrame.enddatum.Value);
+                        limits = new TimeRange(result.ReferenceTimeFrame.Startdatum.Value, result.ReferenceTimeFrame.Enddatum.Value);
                     }
                     else
                     {
                         limits = null;
                     }
                     var gaps = (new TimeGapCalculator<TimeRange>()).GetGaps(nonNullValues, limits: limits);
-                    result.gaps = gaps.Select(gap => new CompletenessReport.BasicVerbrauch()
+                    result.Gaps = gaps.Select(gap => new CompletenessReport.BasicVerbrauch()
                     {
-                        startdatum = gap.Start,
-                        enddatum = gap.End,
-                        wert = null
+                        Startdatum = gap.Start,
+                        Enddatum = gap.End,
+                        Wert = null
                     }).ToList();
 
                 }
@@ -147,15 +147,15 @@ namespace BO4E.Extensions.BusinessObjects.Energiemenge
                 {
                     try
                     {
-                        foreach (var kvp in em.energieverbrauch.Where(v => v.userProperties != null).SelectMany(v => v.userProperties))
+                        foreach (var kvp in em.Energieverbrauch.Where(v => v.UserProperties != null).SelectMany(v => v.UserProperties))
                         {
-                            if (result.userProperties == null)
+                            if (result.UserProperties == null)
                             {
-                                result.userProperties = new Dictionary<string, JToken>();
+                                result.UserProperties = new Dictionary<string, JToken>();
                             }
-                            if (!result.userProperties.ContainsKey(kvp.Key))
+                            if (!result.UserProperties.ContainsKey(kvp.Key))
                             {
-                                result.userProperties.Add(kvp.Key, kvp.Value);
+                                result.UserProperties.Add(kvp.Key, kvp.Value);
                             }
                         }
                     }
@@ -188,18 +188,18 @@ namespace BO4E.Extensions.BusinessObjects.Energiemenge
             Verbrauch v;
             try
             {
-                v = em.energieverbrauch.First<Verbrauch>();
+                v = em.Energieverbrauch.First<Verbrauch>();
             }
             catch (InvalidOperationException)
             {
                 return new CompletenessReport()
                 {
-                    coverage = null,
-                    lokationsId = em.lokationsId,
-                    _errorMessage = "energieverbrauch is empty"
+                    Coverage = null,
+                    LokationsId = em.LokationsId,
+                    ErrorMessage = "energieverbrauch is empty"
                 };
             }
-            return em.GetCompletenessReport(em.GetTimeRange(), v.wertermittlungsverfahren, v.obiskennzahl, v.einheit);
+            return em.GetCompletenessReport(em.GetTimeRange(), v.Wertermittlungsverfahren, v.Obiskennzahl, v.Einheit);
         }
 
         /// <summary>

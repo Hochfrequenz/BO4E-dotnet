@@ -49,9 +49,9 @@ namespace BO4E.BO
         /// 'MESSLOKATION',
         /// 'MARKTLOKATION'
         /// </example>
-        [JsonProperty(Required = Required.Default, Order = 1)]
+        [JsonProperty(Required = Required.Default, Order = 1, PropertyName = "boTyp")]
         [ProtoMember(1)]
-        public string boTyp;
+        public string BoTyp { get; set; }
 
         /// <summary>
         /// Fields that are not part of the BO4E-definition are stored in a element, that is
@@ -84,31 +84,31 @@ namespace BO4E.BO
         /// </example>
         [JsonIgnore]
         [ProtoIgnore]
-        public const string userPropertiesName = "userProperties";
+        public const string USER_PROPERTIES_NAME = "userProperties";
 
         /// <summary>
         /// User properties (non bo4e standard)
         /// </summary>
-        [JsonProperty(PropertyName = userPropertiesName, Required = Required.Default, Order = 200)]
+        [JsonProperty(PropertyName = USER_PROPERTIES_NAME, Required = Required.Default, Order = 200)]
         [JsonExtensionData]
         [ProtoMember(200)]
         [DataCategory(DataCategory.USER_PROPERTIES)]
-        public IDictionary<string, JToken> userProperties;
+        public IDictionary<string, JToken> UserProperties { get; set; }
 
         /// <summary>
         /// generates the BO4E boTyp attribute value (class name as upper case)
         /// </summary>
         protected BusinessObject()
         {
-            boTyp = this.GetType().Name.ToUpper();
+            BoTyp = this.GetType().Name.ToUpper();
             versionStruktur = 1;
         }
 
         /// <summary>
-        /// return <see cref="BusinessObject.boTyp"/> (as string, not as type)
+        /// return <see cref="BusinessObject.BoTyp"/> (as string, not as type)
         /// </summary>
         /// <returns></returns>
-        public string GetBoTyp() => this.boTyp;
+        public string GetBoTyp() => this.BoTyp;
 
         /// <summary>
         /// This method is just to make sure the mapping actually makes sense.
@@ -178,7 +178,7 @@ namespace BO4E.BO
         /// names as they are serialised in JSON. This means that the fields PropertyName is part
         /// of the list if JsonPropertyAttribute.PropertyName is set in the Business Objects 
         /// definition. Please do not use this method trying to access the actual key values. Use 
-        /// the <see cref="GetBoKeys"/> or <see cref="GetBoKeyFieldInfos(Type)"/> for this purpose.
+        /// the <see cref="GetBoKeys"/> or <see cref="GetBoKeyProps(Type)"/> for this purpose.
         /// The list is sorted by the JsonPropertyAttribute.Order, assuming 0 if not specified.
         /// </summary>
         /// <returns>A list of the names (not the values) of the (composite) Business Object key or an empty list if no key attributes are defined.</returns>
@@ -202,16 +202,16 @@ namespace BO4E.BO
         public static List<string> GetBoKeyNames(Type boType)
         {
             List<string> result = new List<string>();
-            foreach (FieldInfo fi in GetBoKeyFieldInfos(boType))
+            foreach (var pi in GetBoKeyProps(boType))
             {
-                JsonPropertyAttribute jpa = fi.GetCustomAttribute<JsonPropertyAttribute>();
+                JsonPropertyAttribute jpa = pi.GetCustomAttribute<JsonPropertyAttribute>();
                 if (jpa != null && jpa.PropertyName != null)
                 {
                     result.Add(jpa.PropertyName);
                 }
                 else
                 {
-                    result.Add(fi.Name.ToString());
+                    result.Add(pi.Name.ToString());
                 }
             }
             return result;
@@ -230,16 +230,16 @@ namespace BO4E.BO
         /// and the type of the property as value. Nesting and different layers are denoted by
         /// using "."
         /// </returns>
-        public static Dictionary<string, Type> GetExpandableFieldNames(Type boType)
+        public static Dictionary<string, Type> GetExpandablePropertyNames(Type boType)
         {
-            return GetExpandableFieldNames(boType, true);
+            return GetExpandablePropertyNames(boType, true);
         }
 
         /// <summary>
-        /// <see cref="GetExpandableFieldNames(Type)"/>
+        /// <see cref="GetExpandablePropertyNames(Type)"/>
         /// </summary>
         /// <param name="boTypeName">name of the business object as string</param>
-        /// <returns><see cref="GetExpandableFieldNames(Type)"/></returns>
+        /// <returns><see cref="GetExpandablePropertyNames(Type)"/></returns>
         public static Dictionary<string, Type> GetExpandableFieldNames(string boTypeName)
         {
             Type clazz = Assembly.GetExecutingAssembly().GetType(BoMapper.packagePrefix + "." + boTypeName);
@@ -247,7 +247,7 @@ namespace BO4E.BO
             {
                 throw new ArgumentException($"{boTypeName} is not a valid Business Object name. Use one of the following: {string.Join("\n -", BoMapper.GetValidBoNames())}");
             }
-            return GetExpandableFieldNames(clazz);
+            return GetExpandablePropertyNames(clazz);
         }
 
         /// <summary>
@@ -257,46 +257,47 @@ namespace BO4E.BO
         /// <param name="type">Type inherited from Business Object</param>
         /// <param name="rootLevel">true iff calling from outside the function itself / default</param>
         /// <returns>HashSet of strings</returns>
-        protected static Dictionary<string, Type> GetExpandableFieldNames(Type type, bool rootLevel = true)
+        protected static Dictionary<string, Type> GetExpandablePropertyNames(Type type, bool rootLevel = true)
         {
             if (rootLevel && !type.IsSubclassOf(typeof(BO.BusinessObject)))
             {
                 throw new ArgumentException("Only allowed for BusinessObjects");
             }
             Dictionary<string, Type> result = new Dictionary<string, Type>();
-            foreach (FieldInfo field in type.GetFields())
+            foreach (var prop in type.GetProperties())
             {
                 string fieldName;
-                JsonPropertyAttribute jpa = field.GetCustomAttribute<JsonPropertyAttribute>();
+                JsonPropertyAttribute jpa = prop.GetCustomAttribute<JsonPropertyAttribute>();
                 if (jpa != null && jpa.PropertyName != null)
                 {
                     fieldName = jpa.PropertyName;
                 }
                 else
                 {
-                    fieldName = field.Name;
+                    fieldName = prop.Name;
                 }
-                if (field.FieldType.IsSubclassOf(typeof(BO.BusinessObject)))
+                if (prop.PropertyType.IsSubclassOf(typeof(BO.BusinessObject)))
                 {
-                    foreach (KeyValuePair<string, Type> subResult in GetExpandableFieldNames(field.FieldType, false))
+                    foreach (KeyValuePair<string, Type> subResult in GetExpandablePropertyNames(prop.PropertyType, false))
+
                     {
                         result.Add(string.Join(".", new string[] { fieldName, subResult.Key }), subResult.Value);
                     }
-                    result.Add(fieldName, field.FieldType);
+                    result.Add(fieldName, prop.PropertyType);
                 }
-                else if (field.FieldType.IsSubclassOf(typeof(COM.COM)))
+                else if (prop.PropertyType.IsSubclassOf(typeof(COM.COM)))
                 {
-                    result.Add(fieldName, field.FieldType);
+                    result.Add(fieldName, prop.PropertyType);
                     // coms do not contain any exandable subfield since they're flat
                 }
-                else if (field.FieldType.IsGenericType && field.FieldType.GetGenericTypeDefinition() == typeof(List<>))
+                else if (prop.PropertyType.IsGenericType && prop.PropertyType.GetGenericTypeDefinition() == typeof(List<>))
                 {
-                    Type listElementType = field.FieldType.GetGenericArguments()[0];
-                    foreach (KeyValuePair<string, Type> subResult in GetExpandableFieldNames(listElementType, false))
+                    Type listElementType = prop.PropertyType.GetGenericArguments()[0];
+                    foreach (KeyValuePair<string, Type> subResult in GetExpandablePropertyNames(listElementType, false))
                     {
                         result.Add(string.Join(".", new string[] { fieldName, subResult.Key }), subResult.Value);
                     }
-                    result.Add(fieldName, field.FieldType);
+                    result.Add(fieldName, prop.PropertyType);
                 }
                 else
                 {
@@ -311,21 +312,21 @@ namespace BO4E.BO
         /// The dictionary has the JsonPropertyAttribute.PropertyName or FieldName
         /// of the key as key and the actual key value as value.
         /// </summary>
-        /// <seealso cref="GetBoKeyFieldInfos(Type)"/>
+        /// <seealso cref="GetBoKeyProps(Type)"/>
         /// <returns>A dictionary with key value pairs.</returns>
         public Dictionary<string, object> GetBoKeys()
         {
             Dictionary<string, object> result = new Dictionary<string, object>();
-            foreach (FieldInfo fi in GetBoKeyFieldInfos(this.GetType()))
+            foreach (var pi in GetBoKeyProps(this.GetType()))
             {
-                JsonPropertyAttribute jpa = fi.GetCustomAttribute<JsonPropertyAttribute>();
+                JsonPropertyAttribute jpa = pi.GetCustomAttribute<JsonPropertyAttribute>();
                 if (jpa != null && jpa.PropertyName != null)
                 {
-                    result.Add(jpa.PropertyName, fi.GetValue(this));
+                    result.Add(jpa.PropertyName, pi.GetValue(this));
                 }
                 else
                 {
-                    result.Add(fi.Name, fi.GetValue(this));
+                    result.Add(pi.Name, pi.GetValue(this));
                 }
             }
             return result;
@@ -337,16 +338,16 @@ namespace BO4E.BO
         /// </summary>
         /// <param name="boType">Business Object type</param>
         /// <returns>A list of FieldInfos to be used for accessing the key values.</returns>
-        public static List<FieldInfo> GetBoKeyFieldInfos(Type boType)
+        public static List<PropertyInfo> GetBoKeyProps(Type boType)
         {
             if (!boType.IsSubclassOf(typeof(BusinessObject)))
             {
                 throw new ArgumentException($"Business Object keys are only defined on Business Object types but {boType.ToString()} is not a Business Object.");
             }
-            return boType.GetFields()
-                 .Where(f => f.GetCustomAttributes(typeof(BoKey), false).Length > 0)
-                 .OrderBy(af => af.GetCustomAttribute<JsonPropertyAttribute>()?.Order)
-                 .ToList<FieldInfo>();
+            return boType.GetProperties()
+                 .Where(p => p.GetCustomAttributes(typeof(BoKey), false).Length > 0)
+                 .OrderBy(ap => ap.GetCustomAttribute<JsonPropertyAttribute>()?.Order)
+                 .ToList<PropertyInfo>();
         }
 
         /// <summary>BO4E Business Objects are considered equal iff all of their elements/fields are equal.</summary>
@@ -397,14 +398,14 @@ namespace BO4E.BO
             unchecked
             {
                 result *= this.GetType().GetHashCode();
-                foreach (FieldInfo field in this.GetType().GetFields())
+                foreach (var prop in this.GetType().GetProperties())
                 {
-                    if (field.GetValue(this) != null)
+                    if (prop.GetValue(this) != null)
                     {
-                        if (field.GetValue(this).GetType().IsGenericType && field.GetValue(this).GetType().GetGenericTypeDefinition() == typeof(List<>))
+                        if (prop.GetValue(this).GetType().IsGenericType && prop.GetValue(this).GetType().GetGenericTypeDefinition() == typeof(List<>))
                         {
-                            IEnumerable enumerable = field.GetValue(this) as IEnumerable;
-                            Type listElementType = field.GetValue(this).GetType().GetGenericArguments()[0];
+                            IEnumerable enumerable = prop.GetValue(this) as IEnumerable;
+                            Type listElementType = prop.GetValue(this).GetType().GetGenericArguments()[0];
                             Type listType = typeof(List<>).MakeGenericType(listElementType);
                             int index = 0;
                             foreach (object listItem in enumerable)
@@ -418,7 +419,7 @@ namespace BO4E.BO
                         {
                             // Using + 19 because the default hash code of uninitialised enums is zero.
                             // This would screw up the calculation such that all objects with at least one null value had the same hash code, namely 0.
-                            result *= 19 + field.GetValue(this).GetHashCode();
+                            result *= 19 + prop.GetValue(this).GetHashCode();
                         }
                     }
                 }
@@ -427,15 +428,15 @@ namespace BO4E.BO
         }
 
         /// <summary>
-        /// converts <see cref="BusinessObject.boTyp"/> to upper case.
+        /// converts <see cref="BusinessObject.BoTyp"/> to upper case.
         /// </summary>
         /// <param name="context"></param>
         [OnDeserialized]
         protected void DeserializationFixes(StreamingContext context)
         {
-            if (boTyp != null)
+            if (BoTyp != null)
             {
-                this.boTyp = boTyp.ToUpper();
+                this.BoTyp = BoTyp.ToUpper();
             }
         }
 

@@ -1,10 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Globalization;
 using System.Linq;
 using System.Threading;
+
 using BO4E.Reporting;
+
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+
 using Newtonsoft.Json;
 
 namespace TestBO4E.Reporting
@@ -17,13 +19,13 @@ namespace TestBO4E.Reporting
         {
             CompletenessReport cr = new CompletenessReport()
             {
-                lokationsId = "DE12345",
-                coverage = 0.87M, // 87%
+                LokationsId = "DE12345",
+                Coverage = 0.87M, // 87%
                 wertermittlungsverfahren = BO4E.ENUM.Wertermittlungsverfahren.PROGNOSE,
-                referenceTimeFrame = new BO4E.COM.Zeitraum()
+                ReferenceTimeFrame = new BO4E.COM.Zeitraum()
                 {
-                    startdatum = new DateTime(2019, 1, 1, 0, 0, 0, DateTimeKind.Utc),
-                    enddatum = new DateTime(2019, 3, 1, 0, 0, 0, DateTimeKind.Utc)
+                    Startdatum = new DateTime(2019, 1, 1, 0, 0, 0, DateTimeKind.Utc),
+                    Enddatum = new DateTime(2019, 3, 1, 0, 0, 0, DateTimeKind.Utc)
                 },
             };
             string result = cr.ToCsv(';', true, Environment.NewLine);
@@ -33,10 +35,10 @@ namespace TestBO4E.Reporting
             // reihenfolge
             List<Dictionary<string, string>> reihenfolge = new List<Dictionary<string, string>>
             {
-                new Dictionary<string, string>() { ["lokationsId"] = "messlokationsId" },
-                new Dictionary<string, string>() { ["coverage"] = "Newcoverage" },
-                new Dictionary<string, string>() { ["Zeitraum.startdatum"] = "time.startdatum" },
-                new Dictionary<string, string>() { ["Zeitraum.enddatum"] = "time.enddatum" }
+                new Dictionary<string, string>() { ["LokationsId"] = "messlokationsId" },
+                new Dictionary<string, string>() { ["Coverage"] = "Newcoverage" },
+                new Dictionary<string, string>() { ["Zeitraum.Startdatum"] = "time.startdatum" },
+                new Dictionary<string, string>() { ["Zeitraum.Enddatum"] = "time.enddatum" }
             };
 
             //string JSONdata = "{'completenessZfa':[{'lokationsId':'lokationsId'},{'coverage':'coverage'},{'Zeitraum.einheit':'einheit'},{'Zeitraum.dauer':'dauer'},{'Zeitraum.startdatum':'startdatum'},{'Zeitraum.enddatum':'enddatum'},{'obiskennzahl':'obiskennzahl'},{'einheit':'einheit'},{'wertermittlungsverfahren':'wertermittlungsverfahren'},{'startdatum':'Verbrauch.startdatum'},{'enddatum':'Verbrauch.enddatum'},{'wert':'Verbrauch.wert'},{'headerLine':'1'}]}";
@@ -46,11 +48,6 @@ namespace TestBO4E.Reporting
             var Newresult = cr.ToCsv(';', true, Environment.NewLine, reihenfolge);
             lines = new List<string>(Newresult.Split(Environment.NewLine));
             Assert.AreEqual(2, lines.Count);
-            var headerline = lines.First();
-            //for (int i = 0; i < reihenfolge.Count; i++)
-            //{
-            //    Assert.AreEqual(reihenfolge[i].Values.First(), headerline.Split(";")[i]);
-            //}
             string decimalSeparator = Thread.CurrentThread.CurrentCulture.NumberFormat.NumberDecimalSeparator;
             Assert.AreEqual("DE12345;0" + decimalSeparator + "87;2019-01-01T00:00:00Z;2019-03-01T00:00:00Z;", lines[1]);
             var commaResult = cr.ToCsv(',', lineTerminator: Environment.NewLine, reihenfolge: reihenfolge);
@@ -58,34 +55,34 @@ namespace TestBO4E.Reporting
             var dpunktResult = cr.ToCsv(':', lineTerminator: Environment.NewLine, reihenfolge: reihenfolge);
             Assert.AreEqual("DE12345:0" + decimalSeparator + "87:\"2019-01-01T00:00:00Z\":\"2019-03-01T00:00:00Z\":", dpunktResult.Split(Environment.NewLine)[1]);
 
-            cr.values = new List<CompletenessReport.BasicVerbrauch>
+            cr.Values = new List<CompletenessReport.BasicVerbrauch>
             {
                 new CompletenessReport.BasicVerbrauch()
                 {
-                    wert = 17,
-                    startdatum = new DateTime(2019,1,1,0,0,0, DateTimeKind.Utc),
-                    enddatum = new DateTime(2019,1,2,0,0,0, DateTimeKind.Utc)
+                    Wert = 17,
+                    Startdatum = new DateTime(2019,1,1,0,0,0, DateTimeKind.Utc),
+                    Enddatum = new DateTime(2019,1,2,0,0,0, DateTimeKind.Utc)
                 },
                 new CompletenessReport.BasicVerbrauch()
                 {
-                    wert = 21,
-                    startdatum = new DateTime(2019,1,7,0,0,0, DateTimeKind.Utc),
-                    enddatum = new DateTime(2019,1,8,0,0,0, DateTimeKind.Utc)
+                    Wert = 21,
+                    Startdatum = new DateTime(2019,1,7,0,0,0, DateTimeKind.Utc),
+                    Enddatum = new DateTime(2019,1,8,0,0,0, DateTimeKind.Utc)
                 },
                 new CompletenessReport.BasicVerbrauch()
                 {
-                    wert = 35,
-                    startdatum = new DateTime(2019,1,12,0,0,0, DateTimeKind.Utc),
-                    enddatum = new DateTime(2019,1,13,0,0,0, DateTimeKind.Utc)
+                    Wert = 35,
+                    Startdatum = new DateTime(2019,1,12,0,0,0, DateTimeKind.Utc),
+                    Enddatum = new DateTime(2019,1,13,0,0,0, DateTimeKind.Utc)
                 }
             };
 
-            reihenfolge.Add(new Dictionary<string, string>() { ["wert"] = "V.wert" });
-            reihenfolge.Add(new Dictionary<string, string>() { ["startdatum"] = "V.startdatum" });
-            reihenfolge.Add(new Dictionary<string, string>() { ["enddatum"] = "V.enddatum" });
+            reihenfolge.Add(new Dictionary<string, string>() { ["Wert"] = "V.wert" });
+            reihenfolge.Add(new Dictionary<string, string>() { ["Startdatum"] = "V.startdatum" });
+            reihenfolge.Add(new Dictionary<string, string>() { ["Enddatum"] = "V.enddatum" });
 
             var multiplicityResult = cr.ToCsv(lineTerminator: Environment.NewLine, reihenfolge: reihenfolge);
-            Assert.AreEqual(2 + cr.values.Count, new List<string>(multiplicityResult.Split(Environment.NewLine)).Count);
+            Assert.AreEqual(2 + cr.Values.Count, new List<string>(multiplicityResult.Split(Environment.NewLine)).Count);
         }
         [TestMethod]
         public void TestDeserialisationCompletenessReportColumnsToCsv()
@@ -123,7 +120,7 @@ namespace TestBO4E.Reporting
                 counter++;
             }
             Assert.IsTrue(lastCsvText.Length > 0);
-            Assert.IsFalse(lastCsvText.Contains(BO4E.BO.BusinessObject.userPropertiesName));
+            Assert.IsFalse(lastCsvText.Contains(BO4E.BO.BusinessObject.USER_PROPERTIES_NAME));
             Assert.IsFalse(lastCsvText.Contains("_errorMessage"));
         }
 
@@ -132,59 +129,59 @@ namespace TestBO4E.Reporting
         {
             CompletenessReport cr = new CompletenessReport()
             {
-                lokationsId = "DE12345",
-                coverage = 0.87M, // 87%
+                LokationsId = "DE12345",
+                Coverage = 0.87M, // 87%
                 wertermittlungsverfahren = BO4E.ENUM.Wertermittlungsverfahren.PROGNOSE,
-                referenceTimeFrame = new BO4E.COM.Zeitraum()
+                ReferenceTimeFrame = new BO4E.COM.Zeitraum()
                 {
-                    startdatum = new DateTime(2019, 1, 1, 0, 0, 0, DateTimeKind.Utc),
-                    enddatum = new DateTime(2019, 3, 1, 0, 0, 0, DateTimeKind.Utc)
+                    Startdatum = new DateTime(2019, 1, 1, 0, 0, 0, DateTimeKind.Utc),
+                    Enddatum = new DateTime(2019, 3, 1, 0, 0, 0, DateTimeKind.Utc)
                 },
             };
-            cr.values = new List<CompletenessReport.BasicVerbrauch>
+            cr.Values = new List<CompletenessReport.BasicVerbrauch>
             {
                 new CompletenessReport.BasicVerbrauch()
                 {
-                    wert = 17,
-                    startdatum = new DateTime(2019,1,1,0,0,0, DateTimeKind.Utc),
-                    enddatum = new DateTime(2019,1,2,0,0,0, DateTimeKind.Utc)
+                    Wert = 17,
+                    Startdatum = new DateTime(2019,1,1,0,0,0, DateTimeKind.Utc),
+                    Enddatum = new DateTime(2019,1,2,0,0,0, DateTimeKind.Utc)
                 },
                 new CompletenessReport.BasicVerbrauch()
                 {
-                    wert = 21,
-                    startdatum = new DateTime(2019,1,7,0,0,0, DateTimeKind.Utc),
-                    enddatum = new DateTime(2019,1,8,0,0,0, DateTimeKind.Utc)
+                    Wert = 21,
+                    Startdatum = new DateTime(2019,1,7,0,0,0, DateTimeKind.Utc),
+                    Enddatum = new DateTime(2019,1,8,0,0,0, DateTimeKind.Utc)
                 },
                 new CompletenessReport.BasicVerbrauch()
                 {
-                    wert = 35,
-                    startdatum = new DateTime(2019,1,12,0,0,0, DateTimeKind.Utc),
-                    enddatum = new DateTime(2019,1,13,0,0,0, DateTimeKind.Utc)
+                    Wert = 35,
+                    Startdatum = new DateTime(2019,1,12,0,0,0, DateTimeKind.Utc),
+                    Enddatum = new DateTime(2019,1,13,0,0,0, DateTimeKind.Utc)
                 }
             };
-            cr.gaps = new List<CompletenessReport.BasicVerbrauch>
+            cr.Gaps = new List<CompletenessReport.BasicVerbrauch>
             {
                 new CompletenessReport.BasicVerbrauch()
                 {
-                    wert = 0,
-                    startdatum = new DateTime(2017,1,1,0,0,0, DateTimeKind.Utc),
-                    enddatum = new DateTime(2017,1,2,0,0,0, DateTimeKind.Utc)
+                    Wert = 0,
+                    Startdatum = new DateTime(2017,1,1,0,0,0, DateTimeKind.Utc),
+                    Enddatum = new DateTime(2017,1,2,0,0,0, DateTimeKind.Utc)
                 },
                 new CompletenessReport.BasicVerbrauch()
                 {
-                    wert = 0,
-                    startdatum = new DateTime(2017,1,7,0,0,0, DateTimeKind.Utc),
-                    enddatum = new DateTime(2017,1,8,0,0,0, DateTimeKind.Utc)
+                    Wert = 0,
+                    Startdatum = new DateTime(2017,1,7,0,0,0, DateTimeKind.Utc),
+                    Enddatum = new DateTime(2017,1,8,0,0,0, DateTimeKind.Utc)
                 },
                 new CompletenessReport.BasicVerbrauch()
                 {
-                    wert = 0,
-                    startdatum = new DateTime(2017,1,12,0,0,0, DateTimeKind.Utc),
-                    enddatum = new DateTime(2017,1,13,0,0,0, DateTimeKind.Utc)
+                    Wert = 0,
+                    Startdatum = new DateTime(2017,1,12,0,0,0, DateTimeKind.Utc),
+                    Enddatum = new DateTime(2017,1,13,0,0,0, DateTimeKind.Utc)
                 }
             };
             var multiplicityResult = cr.ToCsv(lineTerminator: Environment.NewLine);
-            Assert.AreEqual(2 + cr.values.Count + cr.gaps.Count, new List<string>(multiplicityResult.Split(Environment.NewLine)).Count);
+            Assert.AreEqual(2 + cr.Values.Count + cr.Gaps.Count, new List<string>(multiplicityResult.Split(Environment.NewLine)).Count);
         }
 
         [TestMethod]
@@ -192,26 +189,26 @@ namespace TestBO4E.Reporting
         {
             CompletenessReport cr = new CompletenessReport()
             {
-                lokationsId = "DE12345",
-                coverage = 0.87M, // 87%
+                LokationsId = "DE12345",
+                Coverage = 0.87M, // 87%
                 wertermittlungsverfahren = BO4E.ENUM.Wertermittlungsverfahren.PROGNOSE,
-                referenceTimeFrame = new BO4E.COM.Zeitraum()
+                ReferenceTimeFrame = new BO4E.COM.Zeitraum()
                 {
-                    startdatum = new DateTime(2019, 1, 1, 0, 0, 0, DateTimeKind.Utc),
-                    enddatum = new DateTime(2019, 3, 1, 0, 0, 0, DateTimeKind.Utc)
+                    Startdatum = new DateTime(2019, 1, 1, 0, 0, 0, DateTimeKind.Utc),
+                    Enddatum = new DateTime(2019, 3, 1, 0, 0, 0, DateTimeKind.Utc)
                 },
             };
 
             // reihenfolge
             List<Dictionary<string, string>> reihenfolge = new List<Dictionary<string, string>>
             {
-                new Dictionary<string, string>() { ["lokationsId"] = "messlokationsId" },
-                new Dictionary<string, string>() { ["coverage"] = "Newcoverage" },
-                new Dictionary<string, string>() { ["Zeitraum.startdatum"] = "time.startdatum" },
-                new Dictionary<string, string>() { ["Zeitraum.enddatum"] = "time.enddatum" },
-                new Dictionary<string, string>() { ["wert"] = null },
-                new Dictionary<string, string>() { ["startdatum"] = "V.startdatum" },
-                new Dictionary<string, string>() { ["enddatum"] = "V.enddatum" },
+                new Dictionary<string, string>() { ["LokationsId"] = "messlokationsId" },
+                new Dictionary<string, string>() { ["Coverage"] = "Newcoverage" },
+                new Dictionary<string, string>() { ["Zeitraum.Startdatum"] = "time.startdatum" },
+                new Dictionary<string, string>() { ["Zeitraum.Enddatum"] = "time.enddatum" },
+                new Dictionary<string, string>() { ["Wert"] = null },
+                new Dictionary<string, string>() { ["Startdatum"] = "V.startdatum" },
+                new Dictionary<string, string>() { ["Enddatum"] = "V.enddatum" },
                 null
             };
             string newResult = string.Empty;

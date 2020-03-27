@@ -10,6 +10,7 @@
     <RepositoryUrl>https://github.com/HFInnovation/BO4E-dotnet/</RepositoryUrl>
     <PackageId>Hochfrequenz.BO4E.Extensions</PackageId>
     <Authors>Hochfrequenz Unternehmensberatung GmbH</Authors>
+    <Version>0.2.0</Version>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">

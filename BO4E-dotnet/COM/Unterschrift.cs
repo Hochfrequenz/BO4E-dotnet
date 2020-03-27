@@ -1,5 +1,7 @@
 ﻿using System;
+
 using Newtonsoft.Json;
+
 using ProtoBuf;
 
 namespace BO4E.COM
@@ -14,22 +16,22 @@ namespace BO4E.COM
         /// <summary>
         /// Ort, an dem die Unterschrift geleistet wird
         /// </summary>
-        [JsonProperty(Required = Required.Default)]
+        [JsonProperty(PropertyName = "ort", Required = Required.Default)]
         [ProtoMember(3)]
-        public string ort;
+        public string Ort { get; set; }
 
         /// <summary>
         /// Datum der Unterschrift
         /// </summary>
-        [JsonProperty(Required = Required.Default)]
+        [JsonProperty(PropertyName = "datum", Required = Required.Default)]
         [ProtoMember(4)]
-        public DateTime? datum;
+        public DateTime? Datum { get; set; }
 
         /// <summary>
         /// Name des Unterschreibers
         /// </summary>
-        [JsonProperty(Required = Required.Always)]
+        [JsonProperty(PropertyName = "name", Required = Required.Always)]
         [ProtoMember(5)]
-        public string name;
+        public string Name { get; set; }
     }
 }

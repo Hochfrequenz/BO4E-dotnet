@@ -1,5 +1,7 @@
 ﻿using BO4E.meta;
+
 using Newtonsoft.Json;
+
 using ProtoBuf;
 
 namespace BO4E.COM
@@ -14,23 +16,25 @@ namespace BO4E.COM
         /// <summary>
         /// rollencodenummer von Marktrolle
         /// </summary>
-        [JsonProperty(Required = Required.Default)]
+        [JsonProperty(PropertyName = "rollencodenummer", Required = Required.Default)]
         [ProtoMember(3)]
-        public string rollencodenummer;
+        public string Rollencodenummer { get; set; }
 
         /// <summary>
         /// code von Marktrolle
         /// </summary>
-        [JsonProperty(Required = Required.Default)]
+        [JsonProperty(PropertyName = "code", Required = Required.Default)]
         [NonOfficial(NonOfficialCategory.UNSPECIFIED)]
         [ProtoMember(4)]
-        public string code;
+        public string Code { get; set; }
 
         /// <summary>
         /// List of Marktrolle. Details siehe <see cref="ENUM.Marktrolle"/>
         /// </summary>
         [JsonProperty(Required = Required.Always)]
         [ProtoMember(5)]
-        public ENUM.Marktrolle marktrolle;
+#pragma warning disable IDE1006 // Naming Styles because Marktrolle is already the name of the enum
+        public ENUM.Marktrolle marktrolle { get; set; }
+#pragma warning restore IDE1006 // Naming Styles
     }
 }

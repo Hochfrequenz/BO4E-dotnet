@@ -5,7 +5,7 @@
   "input": {
     "boTyp": "MESSLOKATION",
     "versionStruktur": 1,
-    "messLokationsId": "DEIMUDDERIHRMELOID12345",
+    "messlokationsId": "DEIMUDDERIHRMELOID12345",
     "sparte": 0,
     "netzebeneMessung": 0,
     "messadresse": {

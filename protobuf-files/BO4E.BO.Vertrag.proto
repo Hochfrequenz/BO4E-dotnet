@@ -2,14 +2,14 @@
 import "protobuf-net/bcl.proto"; // schema for protobuf-net's handling of core .NET types
 
 message Adresse {
-   optional string postleitzahl = 3;
-   optional string ort = 4;
-   optional string strasse = 5;
-   optional string hausnummer = 6;
-   optional string postfach = 7;
-   optional string adresszusatz = 8;
-   optional string coErgaenzung = 9;
-   optional Landescode landescode = 10;
+   optional string Postleitzahl = 3;
+   optional string Ort = 4;
+   optional string Strasse = 5;
+   optional string Hausnummer = 6;
+   optional string Postfach = 7;
+   optional string Adresszusatz = 8;
+   optional string CoErgaenzung = 9;
+   optional Landescode Landescode = 10;
 }
 enum Anrede {
    HERR = 0;
@@ -21,20 +21,20 @@ enum Anrede {
 }
 message Geschaeftspartner {
    optional Anrede anrede = 4;
-   optional string name1 = 6;
-   optional string name2 = 7;
-   optional string name3 = 8;
-   optional bool gewerbekennzeichnung = 9 [default = false];
-   optional string hrnummer = 10;
-   optional string amtsgericht = 11;
-   repeated Kontaktart kontaktweg = 12;
-   optional string umsatzsteuerId = 13;
-   optional string glaeubigerId = 14;
-   optional string eMailAdresse = 15;
-   optional string website = 16;
-   repeated Geschaeftspartnerrolle geschaeftspartnerrolle = 17;
-   optional Adresse partneradresse = 18;
-   optional string title = 1001;
+   optional string Name1 = 6;
+   optional string Name2 = 7;
+   optional string Name3 = 8;
+   optional bool Gewerbekennzeichnung = 9 [default = false];
+   optional string Hrnummer = 10;
+   optional string Amtsgericht = 11;
+   repeated Kontaktart Kontaktweg = 12;
+   optional string UmsatzsteuerId = 13;
+   optional string GlaeubigerId = 14;
+   optional string EMailAdresse = 15;
+   optional string Website = 16;
+   repeated Geschaeftspartnerrolle Geschaeftspartnerrolle = 17;
+   optional Adresse Partneradresse = 18;
+   optional string Title = 1001;
 }
 enum Geschaeftspartnerrolle {
    LIEFERANT = 0;
@@ -320,8 +320,8 @@ enum Landescode {
    ZW = 266;
 }
 message Menge {
-   optional .bcl.Decimal wert = 3 [default = 0];
-   optional Mengeneinheit einheit = 4 [default = 0];
+   optional .bcl.Decimal Wert = 3 [default = 0];
+   optional Mengeneinheit Einheit = 4 [default = 0];
 }
 enum Mengeneinheit {
    WH = 2;
@@ -365,26 +365,26 @@ enum Sparte {
    ABWASSER = 5;
 }
 message Unterschrift {
-   optional string ort = 3;
-   optional .bcl.DateTime datum = 4;
-   optional string name = 5;
+   optional string Ort = 3;
+   optional .bcl.DateTime Datum = 4;
+   optional string Name = 5;
 }
 message Vertrag {
-   optional string vertragsnummer = 4;
-   optional string beschreibung = 5;
-   optional Vertragsart vertragsart = 6 [default = ENERGIELIEFERVERTRAG];
-   optional Vertragstatus vertragstatus = 7 [default = IN_ARBEIT];
-   optional Sparte sparte = 8 [default = STROM];
-   optional .bcl.DateTime vertragsbeginn = 9;
-   optional .bcl.DateTime vertragsende = 10;
-   optional Geschaeftspartner vertragspartner1 = 11;
-   optional Geschaeftspartner vertragspartner2 = 12;
-   repeated Unterschrift unterzeichnervp1 = 13;
-   repeated Unterschrift unterzeichnervp2 = 14;
-   optional Vertragskonditionen vertragskonditionen = 15;
-   repeated Vertragsteil vertragsteile = 16;
-   optional .bcl.Decimal gemeinderabatt = 1017;
-   optional Geschaeftspartner korrespondenzpartner = 1018;
+   optional string Vertragsnummer = 4;
+   optional string Beschreibung = 5;
+   optional Vertragsart Vertragsart = 6 [default = ENERGIELIEFERVERTRAG];
+   optional Vertragstatus Vertragstatus = 7 [default = IN_ARBEIT];
+   optional Sparte Sparte = 8 [default = STROM];
+   optional .bcl.DateTime Vertragsbeginn = 9;
+   optional .bcl.DateTime Vertragsende = 10;
+   optional Geschaeftspartner Vertragspartner1 = 11;
+   optional Geschaeftspartner Vertragspartner2 = 12;
+   repeated Unterschrift Unterzeichnervp1 = 13;
+   repeated Unterschrift Unterzeichnervp2 = 14;
+   optional Vertragskonditionen Vertragskonditionen = 15;
+   repeated Vertragsteil Vertragsteile = 16;
+   optional .bcl.Decimal Gemeinderabatt = 1017;
+   optional Geschaeftspartner Korrespondenzpartner = 1018;
 }
 enum Vertragsart {
    ENERGIELIEFERVERTRAG = 0;
@@ -394,22 +394,22 @@ enum Vertragsart {
    BUENDELVERTRAG = 4;
 }
 message Vertragskonditionen {
-   optional string beschreibung = 3;
-   optional int32 anzahlAbschlaege = 4;
-   optional Zeitraum vertragslaufzeit = 5;
-   optional Zeitraum kuendigungsfrist = 6;
-   optional Zeitraum vertragsverlaengerung = 7;
-   optional Zeitraum abschlagszyklus = 8;
-   optional .bcl.DateTime startAbrechnungsjahr = 1009;
-   optional Zeitraum geplanteTurnusablesung = 1010;
-   optional int32 turnusablesungIntervall = 1011;
-   optional Zeitraum netznutzungsabrechnung = 1012;
-   optional int32 netznutzungsabrechnungIntervall = 1013;
-   optional bool haushaltskunde = 1014;
-   optional NetznutzungsVertrag netznutzungsvertrag = 1015;
-   optional Netznutzungszahler netznutzungszahler = 1016;
-   optional Netznutzungsabrechnungsvariante netznutzungsabrechnungsvariante = 1017;
-   optional Netznutzungsabrechnungsgrundlage netznutzungsabrechnungsgrundlage = 1018;
+   optional string Beschreibung = 3;
+   optional int32 AnzahlAbschlaege = 4;
+   optional Zeitraum Vertragslaufzeit = 5;
+   optional Zeitraum Kuendigungsfrist = 6;
+   optional Zeitraum Vertragsverlaengerung = 7;
+   optional Zeitraum Abschlagszyklus = 8;
+   optional .bcl.DateTime StartAbrechnungsjahr = 1009;
+   optional Zeitraum GeplanteTurnusablesung = 1010;
+   optional int32 TurnusablesungIntervall = 1011;
+   optional Zeitraum Netznutzungsabrechnung = 1012;
+   optional int32 NetznutzungsabrechnungIntervall = 1013;
+   optional bool Haushaltskunde = 1014;
+   optional NetznutzungsVertrag Netznutzungsvertrag = 1015;
+   optional Netznutzungszahler Netznutzungszahler = 1016;
+   optional Netznutzungsabrechnungsvariante Netznutzungsabrechnungsvariante = 1017;
+   optional Netznutzungsabrechnungsgrundlage Netznutzungsabrechnungsgrundlage = 1018;
 }
 enum Vertragstatus {
    IN_ARBEIT = 0;
@@ -423,15 +423,15 @@ enum Vertragstatus {
    BEENDET = 8;
 }
 message Vertragsteil {
-   optional .bcl.DateTime vertragsteilbeginn = 3;
-   optional .bcl.DateTime vertragsteilende = 4;
-   optional string lokation = 5;
-   optional Menge vertraglichFixierteMenge = 6;
-   optional Menge minimaleAbnahmemenge = 7;
-   optional Menge maximaleAbnahmemenge = 8;
-   optional Menge jahresverbrauchsprognose = 1009;
-   optional Menge kundenwert = 1010;
-   optional string verbrauchsaufteilung = 1011;
+   optional .bcl.DateTime Vertragsteilbeginn = 3;
+   optional .bcl.DateTime Vertragsteilende = 4;
+   optional string Lokation = 5;
+   optional Menge VertraglichFixierteMenge = 6;
+   optional Menge MinimaleAbnahmemenge = 7;
+   optional Menge MaximaleAbnahmemenge = 8;
+   optional Menge Jahresverbrauchsprognose = 1009;
+   optional Menge Kundenwert = 1010;
+   optional string Verbrauchsaufteilung = 1011;
 }
 enum Zeiteinheit {
    SEKUNDE = 0;
@@ -446,8 +446,8 @@ enum Zeiteinheit {
    JAHR = 9;
 }
 message Zeitraum {
-   optional Zeiteinheit einheit = 3;
-   optional .bcl.Decimal dauer = 4;
-   optional .bcl.DateTime startdatum = 5;
-   optional .bcl.DateTime enddatum = 6;
+   optional Zeiteinheit Einheit = 3;
+   optional .bcl.Decimal Dauer = 4;
+   optional .bcl.DateTime Startdatum = 5;
+   optional .bcl.DateTime Enddatum = 6;
 }
