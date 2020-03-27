@@ -23,154 +23,154 @@ namespace BO4E.BO
         /// <summary>
         /// Bezeichnung für die vorliegende Rechnung.
         /// </summary>
-        [JsonProperty(Required = Required.Default, Order = 4)]
+        [JsonProperty(Required = Required.Default, Order = 4, PropertyName ="rechnungstitel")]
         [FieldName("billTitle", Language.EN)]
         [ProtoMember(4)]
-        public string rechnungstitel;
+        public string Rechnungstitel { get;set; }
 
         /// <summary>
         /// Status der Rechnung zur Kennzeichnung des Bearbeitungsstandes. Details siehe ENUM Rechnungsstatus
         /// </summary>
-        [JsonProperty(Required = Required.Default, Order = 5)]
+        [JsonProperty(Required = Required.Default, Order = 5, PropertyName= "rechnungsstatus")]
         [FieldName("billStatus", Language.EN)]
         [ProtoMember(5)]
-        public Rechnungsstatus? rechnungsstatus;
+        public Rechnungsstatus? Rechnungsstatus { get;set; }
 
         /// <summary>
         /// Kennzeichnung, ob es sich um eine Stornorechnung handelt. Im Falle "true" findet sich im Attribut "originalrechnungsnummer" die Nummer der Originalrechnung.
         /// </summary>
-        [JsonProperty(Required = Required.Always, Order = 6)]
+        [JsonProperty(Required = Required.Always, Order = 6, PropertyName= "storno")]
         [FieldName("isCancellation", Language.EN)]
         [ProtoMember(6)]
-        public bool storno;
+        public bool Storno { get;set; }
 
         /// <summary>
         /// Eine im Verwendungskontext eindeutige Nummer für die Rechnung.
         /// </summary>
-        [JsonProperty(Required = Required.Always, Order = 7)]
+        [JsonProperty(Required = Required.Always, Order = 7, PropertyName= "rechnungsnummer")]
         [ProtoMember(7)]
         [BoKey]
         [FieldName("billNumber", Language.EN)]
-        public string rechnungsnummer;
+        public string Rechnungsnummer { get;set; }
 
         /// <summary>
         /// Ausstellungsdatum der Rechnung.
         /// </summary>
-        [JsonProperty(Required = Required.Always, Order = 8)]
+        [JsonProperty(Required = Required.Always, Order = 8, PropertyName= "rechnungsdatum")]
         [ProtoMember(8)]
         [FieldName("billDate", Language.EN)]
-        public DateTime rechnungsdatum;
+        public DateTime Rechnungsdatum { get;set; }
 
         /// <summary>
         /// Zu diesem Datum ist die Zahlung fällig.
         /// </summary>
-        [JsonProperty(Required = Required.Always, Order = 9)]
+        [JsonProperty(Required = Required.Always, Order = 9, PropertyName= "faelligkeitsdatum")]
         [ProtoMember(9)]
         [FieldName("dueDate", Language.EN)]
-        public DateTime faelligkeitsdatum;
+        public DateTime Faelligkeitsdatum { get;set; }
 
         /// <summary>
         /// Ein kontextbezogender Rechnungstyp, z.B. Netznutzungsrechnung. Details siehe ENUM Rechnungstyp
         /// </summary>
-        [JsonProperty(Required = Required.Always, Order = 10)]
+        [JsonProperty(Required = Required.Always, Order = 10, PropertyName ="rechnungstyp")]
         [ProtoMember(10)]
         [FieldName("billType", Language.EN)]
-        public Rechnungstyp rechnungsstyp;
+        public Rechnungstyp Rechnungsstyp { get;set; }
 
         /// <summary>
         /// Im Falle einer Stornorechnung (storno = true) steht hier die Rechnungsnummer der stornierten Rechnung.
         /// </summary>
-        [JsonProperty(Required = Required.Default, Order = 11)]
+        [JsonProperty(Required = Required.Default, Order = 11, PropertyName= "originalRechnungsnummer")]
         [ProtoMember(11)]
-        public string originalRechnungsnummer;
+        public string OriginalRechnungsnummer { get;set; }
 
         /// <summary>
         /// Der Zeitraum der zugrunde liegenden Lieferung zur Rechnung. In der COM Zeitraum können diese angegeben werden.
         /// </summary>
-        [JsonProperty(Required = Required.Always, Order = 12)]
+        [JsonProperty(Required = Required.Always, Order = 12,PropertyName= "rechnungsperiode")]
         [ProtoMember(12)]
         [FieldName("billPeriod", Language.EN)]
-        public Zeitraum rechnungsperiode;
+        public Zeitraum Rechnungsperiode { get;set; }
 
         /// <summary>
         /// Der Aussteller der Rechnung. Details <see cref="Geschaeftspartner"/>
         /// </summary>
-        [JsonProperty(Required = Required.Always, Order = 13)]
+        [JsonProperty(Required = Required.Always, Order = 13, PropertyName= "rechnungsersteller")]
         [ProtoMember(13)]
         [FieldName("issuer", Language.EN)]
-        public Geschaeftspartner rechnungsersteller;
+        public Geschaeftspartner Rechnungsersteller { get;set; }
 
         /// <summary>
         /// Der Empfänger der Rechnung. Details <see cref="Geschaeftspartner"/>
         /// </summary>
-        [JsonProperty(Required = Required.Always, Order = 14)]
+        [JsonProperty(Required = Required.Always, Order = 14, PropertyName= "rechnungsempfaenger")]
         [ProtoMember(14)]
         [FieldName("recipient", Language.EN)]
-        public Geschaeftspartner rechnungsempfaenger;
+        public Geschaeftspartner Rechnungsempfaenger { get;set; }
 
         /// <summary>
         /// Die Summe der Nettobeträge der Rechnungsteile. Details <see cref="Betrag"/>
         /// </summary>
-        [JsonProperty(Required = Required.Always, Order = 15)]
+        [JsonProperty(Required = Required.Always, Order = 15, PropertyName= "gesamtnetto")]
         [ProtoMember(15)]
         [FieldName("totalNet", Language.EN)]
-        public Betrag gesamtnetto;
+        public Betrag Gesamtnetto { get;set; }
 
         /// <summary>
         /// Die Summe der Steuerbeträge der Rechnungsteile. Details <see cref="Betrag"/>
         /// </summary>
-        [JsonProperty(Required = Required.Always, Order = 16)]
+        [JsonProperty(Required = Required.Always, Order = 16, PropertyName="gesamtsteuer")]
         [ProtoMember(16)]
         [FieldName("totalTax", Language.EN)]
-        public Betrag gesamtsteuer;
+        public Betrag Gesamtsteuer { get;set; }
 
         /// <summary>
         /// Die Summe aus Netto- und Steuerbetrag. Details <see cref="Betrag"/>
         /// </summary>
-        [JsonProperty(Required = Required.Always, Order = 17)]
+        [JsonProperty(Required = Required.Always, Order = 17, PropertyName= "gesamtbrutto")]
         [ProtoMember(17)]
         [FieldName("totalGross", Language.EN)]
-        public Betrag gesamtbrutto;
+        public Betrag Gesamtbrutto { get;set; }
 
         /// <summary>
         /// Die Summe evtl. vorausgezahlter Beträge, z.B. Abschläge. Angabe als Bruttowert. Details <see cref="Betrag"/>
         /// </summary>
-        [JsonProperty(Required = Required.Default, Order = 18)]
+        [JsonProperty(Required = Required.Default, Order = 18, PropertyName= "vorausgezahlt")]
         [ProtoMember(18)]
         [FieldName("prepaid", Language.EN)]
-        public Betrag vorausgezahlt;
+        public Betrag Vorausgezahlt { get;set; }
 
         /// <summary>
         /// Gesamtrabatt auf den Bruttobetrag. Details <see cref="Betrag"/>
         /// </summary>
-        [JsonProperty(Required = Required.Default, Order = 19)]
+        [JsonProperty(Required = Required.Default, Order = 19,PropertyName= "rabattBrutto")]
         [ProtoMember(19)]
         [FieldName("discountGross", Language.EN)]
-        public Betrag rabattBrutto;
+        public Betrag rabattBrutto { get;set; }
 
         /// <summary>
-        /// Der zu zahlende Betrag, der sich aus (<see cref="gesamtbrutto"/> - <see cref="vorausgezahlt"/> - <see cref="rabattBrutto"/>) ergibt. Details <see cref="Betrag"/>
+        /// Der zu zahlende Betrag, der sich aus (<see cref="Gesamtbrutto"/> - <see cref="Vorausgezahlt"/> - <see cref="rabattBrutto"/>) ergibt. Details <see cref="Betrag"/>
         /// /// </summary>
-        [JsonProperty(Required = Required.Always, Order = 20)]
+        [JsonProperty(Required = Required.Always, Order = 20, PropertyName= "zuzahlen")]
         [ProtoMember(20)]
         [FieldName("toPay", Language.EN)]
-        public Betrag zuzahlen;
+        public Betrag Zuzahlen { get;set; }
 
         /// <summary>
         /// Eine Liste mit Steuerbeträgen pro Steuerkennzeichen/Steuersatz. Die Summe dieser Beträge ergibt den Wert für gesamtsteuer. Details <see cref="Steuerbetrag"/>
         /// </summary>
-        [JsonProperty(Required = Required.Default, Order = 21)]
+        [JsonProperty(Required = Required.Default, Order = 21, PropertyName= "steuerbetraege")]
         [ProtoMember(21)]
         [FieldName("taxList", Language.EN)]
-        public List<Steuerbetrag> steuerbetraege;
+        public List<Steuerbetrag> Steuerbetraege { get;set; }
 
         /// <summary>
         /// Die Rechnungspositionen. Details siehe <see cref="Rechnungsposition"/>
         /// </summary>
         [ProtoMember(22)]
-        [JsonProperty(Required = Required.Always, Order = 22)]
+        [JsonProperty(Required = Required.Always, Order = 22, PropertyName= "rechnungspositionen")]
         [FieldName("invoiceItemList", Language.EN)]
-        public List<Rechnungsposition> rechnungspositionen;
+        public List<Rechnungsposition> Rechnungspositionen { get;set; }
 
         public Rechnung() { }
 
@@ -192,15 +192,15 @@ namespace BO4E.BO
                 throw new ArgumentException("The SAP print document did not contain a 'tErdz' token. Did you serialize using the right naming convention?");
             }
 
-            rechnungsnummer = (infoToken["opbel"] ?? infoToken["OPBEL"]).Value<string>();
-            rechnungsdatum = TimeZoneInfo.ConvertTime((infoToken["bldat"] ?? infoToken["BLDAT"]).Value<DateTime>(), Verbrauch.CENTRAL_EUROPE_STANDARD_TIME, TimeZoneInfo.Utc);
-            rechnungsperiode = new Zeitraum()
+            Rechnungsnummer = (infoToken["opbel"] ?? infoToken["OPBEL"]).Value<string>();
+            Rechnungsdatum = TimeZoneInfo.ConvertTime((infoToken["bldat"] ?? infoToken["BLDAT"]).Value<DateTime>(), Verbrauch.CENTRAL_EUROPE_STANDARD_TIME, TimeZoneInfo.Utc);
+            Rechnungsperiode = new Zeitraum()
             {
                 startdatum = TimeZoneInfo.ConvertTime((tErdzToken[0]["ab"] ?? tErdzToken[0]["AB"]).Value<DateTime>(), Verbrauch.CENTRAL_EUROPE_STANDARD_TIME, TimeZoneInfo.Utc),
                 enddatum = TimeZoneInfo.ConvertTime((tErdzToken[0]["bis"] ?? tErdzToken[0]["BIS"]).Value<DateTime>(), Verbrauch.CENTRAL_EUROPE_STANDARD_TIME, TimeZoneInfo.Utc)
             };
-            faelligkeitsdatum = TimeZoneInfo.ConvertTime((infoToken["faedn"] ?? infoToken["FAEDN"]).Value<DateTime>(), Verbrauch.CENTRAL_EUROPE_STANDARD_TIME, TimeZoneInfo.Utc);
-            storno = false;
+            Faelligkeitsdatum = TimeZoneInfo.ConvertTime((infoToken["faedn"] ?? infoToken["FAEDN"]).Value<DateTime>(), Verbrauch.CENTRAL_EUROPE_STANDARD_TIME, TimeZoneInfo.Utc);
+            Storno = false;
 
             decimal gNetto, gSteure, gBrutto, vGezahlt, rBrutto, zZahlen;
             gNetto = gSteure = gBrutto = vGezahlt = rBrutto = zZahlen = 0.00M;
@@ -210,7 +210,7 @@ namespace BO4E.BO
 
             List<Rechnungsposition> rpList = new List<Rechnungsposition>();
             List<Steuerbetrag> stList = new List<Steuerbetrag>();
-            vorausgezahlt = new Betrag() { waehrung = waehrungscode, wert = 0 };
+            Vorausgezahlt = new Betrag() { waehrung = waehrungscode, wert = 0 };
             foreach (JToken jrp in tErdzToken)
             {
                 string belzart = (jrp["belzart"] ?? jrp["BELZART"]).ToString();
@@ -358,7 +358,7 @@ namespace BO4E.BO
                         }
                         if ((jrp["nettobtr"] ?? jrp["NETTOBTR"]).Value<decimal>() <= 0)
                         {
-                            vorausgezahlt = new Betrag() { waehrung = waehrungscode, wert = (jrp["nettobtr"] ?? jrp["NETTOBTR"]).Value<decimal>() };
+                            Vorausgezahlt = new Betrag() { waehrung = waehrungscode, wert = (jrp["nettobtr"] ?? jrp["NETTOBTR"]).Value<decimal>() };
                         }
                     }
 
@@ -407,22 +407,22 @@ namespace BO4E.BO
                     }
                 }
             }
-            steuerbetraege = stList;
-            rechnungspositionen = rpList;
+            Steuerbetraege = stList;
+            Rechnungspositionen = rpList;
             gBrutto = gNetto + gSteure;
             zZahlen = gBrutto - vGezahlt - rBrutto;
-            gesamtnetto = new Betrag() { wert = gNetto, waehrung = waehrungscode };
-            gesamtsteuer = new Betrag() { wert = gSteure, waehrung = waehrungscode };
-            gesamtbrutto = new Betrag() { wert = gBrutto, waehrung = waehrungscode };
-            zuzahlen = new Betrag() { wert = zZahlen, waehrung = waehrungscode };
+            Gesamtnetto = new Betrag() { wert = gNetto, waehrung = waehrungscode };
+            Gesamtsteuer = new Betrag() { wert = gSteure, waehrung = waehrungscode };
+            Gesamtbrutto = new Betrag() { wert = gBrutto, waehrung = waehrungscode };
+            Zuzahlen = new Betrag() { wert = zZahlen, waehrung = waehrungscode };
 
-            rechnungsersteller = new Geschaeftspartner()
+            Rechnungsersteller = new Geschaeftspartner()
             {
-                geschaeftspartnerrolle = new List<Geschaeftspartnerrolle>() { Geschaeftspartnerrolle.LIEFERANT },
-                gewerbekennzeichnung = true,
+                Geschaeftspartnerrolle = new List<Geschaeftspartnerrolle>() { Geschaeftspartnerrolle.LIEFERANT },
+                Gewerbekennzeichnung = true,
                 anrede = Anrede.HERR,
-                name1 = "Mein super Lieferant",
-                partneradresse = new Adresse()
+                Name1 = "Mein super Lieferant",
+                Partneradresse = new Adresse()
                 {
                     strasse = "Max-Plank-Strasse",
                     hausnummer = "8",
@@ -431,14 +431,14 @@ namespace BO4E.BO
                     ort = "Walldorf"
                 }
             };
-            rechnungsempfaenger = new Geschaeftspartner()
+            Rechnungsempfaenger = new Geschaeftspartner()
             {
-                geschaeftspartnerrolle = new List<Geschaeftspartnerrolle>() { Geschaeftspartnerrolle.KUNDE },
-                gewerbekennzeichnung = false,
+                Geschaeftspartnerrolle = new List<Geschaeftspartnerrolle>() { Geschaeftspartnerrolle.KUNDE },
+                Gewerbekennzeichnung = false,
                 anrede = Anrede.HERR,
-                name1 = "Lustig",
-                name2 = "Peter",
-                partneradresse = new Adresse()
+                Name1 = "Lustig",
+                Name2 = "Peter",
+                Partneradresse = new Adresse()
                 {
                     strasse = "Magnusstraße",
                     hausnummer = "20",

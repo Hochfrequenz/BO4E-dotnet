@@ -65,7 +65,7 @@ namespace BO4E.BO
                     .Where(v => !(v.startdatum == DateTime.MinValue || v.enddatum == DateTime.MinValue))
                     .Where(v => !(v.userProperties != null && v.userProperties.ContainsKey("invalid") && (bool)v.userProperties["invalid"] == true))
                     .ToList();
-                if (userProperties != null && userProperties.TryGetValue(Verbrauch._SAP_PROFDECIMALS_KEY, out JToken profDecimalsRaw))
+                if (UserProperties != null && UserProperties.TryGetValue(Verbrauch._SAP_PROFDECIMALS_KEY, out JToken profDecimalsRaw))
                 {
                     var profDecimals = profDecimalsRaw.Value<int>();
                     if (profDecimals > 0)
@@ -79,7 +79,7 @@ namespace BO4E.BO
                             }
                         }
                     }
-                    userProperties.Remove(Verbrauch._SAP_PROFDECIMALS_KEY);
+                    UserProperties.Remove(Verbrauch._SAP_PROFDECIMALS_KEY);
                 }
             }
         }
@@ -104,27 +104,27 @@ namespace BO4E.BO
                 lokationstyp = em1.lokationstyp,
                 versionStruktur = em1.versionStruktur,
             };
-            if (em1.userProperties == null)
+            if (em1.UserProperties == null)
             {
-                result.userProperties = em2.userProperties;
+                result.UserProperties = em2.UserProperties;
             }
-            else if (em2.userProperties == null)
+            else if (em2.UserProperties == null)
             {
-                result.userProperties = em1.userProperties;
+                result.UserProperties = em1.UserProperties;
             }
             else
             {
                 // there's no consistency check on user properties!
-                result.userProperties = new Dictionary<string, JToken>();
-                foreach (var kvp1 in em1.userProperties)
+                result.UserProperties = new Dictionary<string, JToken>();
+                foreach (var kvp1 in em1.UserProperties)
                 {
-                    result.userProperties.Add(kvp1);
+                    result.UserProperties.Add(kvp1);
                 }
-                foreach (var kvp2 in em2.userProperties)
+                foreach (var kvp2 in em2.UserProperties)
                 {
-                    if (!result.userProperties.ContainsKey(kvp2.Key))
+                    if (!result.UserProperties.ContainsKey(kvp2.Key))
                     {
-                        result.userProperties.Add(kvp2);
+                        result.UserProperties.Add(kvp2);
                     }
                 }
             }

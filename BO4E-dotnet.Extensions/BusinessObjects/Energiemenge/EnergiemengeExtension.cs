@@ -850,11 +850,11 @@ namespace BO4E.Extensions.BusinessObjects.Energiemenge
                             }*/
                         }
                     }
-                    if (em.userProperties == null)
+                    if (em.UserProperties == null)
                     {
-                        em.userProperties = new Dictionary<string, JToken>();
+                        em.UserProperties = new Dictionary<string, JToken>();
                     }
-                    em.userProperties[SAP_SANITIZED_USERPROPERTY_KEY] = true;
+                    em.UserProperties[SAP_SANITIZED_USERPROPERTY_KEY] = true;
                 }
             }
         }
@@ -868,7 +868,7 @@ namespace BO4E.Extensions.BusinessObjects.Energiemenge
         private static bool HasBeenSanitized(this BO4E.BO.Energiemenge em)
         {
             bool sanitized;
-            if (em.userProperties == null || !em.userProperties.TryGetValue(SAP_SANITIZED_USERPROPERTY_KEY, out JToken sapSanitizedToken))
+            if (em.UserProperties == null || !em.UserProperties.TryGetValue(SAP_SANITIZED_USERPROPERTY_KEY, out JToken sapSanitizedToken))
             {
                 sanitized = false;
             }

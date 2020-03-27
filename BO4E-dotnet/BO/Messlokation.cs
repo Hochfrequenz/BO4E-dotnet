@@ -115,7 +115,7 @@ namespace BO4E.BO
         public List<Zaehler> messlokationszaehler;
 
         /// <summary>
-        /// <see cref="Marktlokation.bilanzierungsmethode"/>
+        /// <see cref="Marktlokation.Bilanzierungsmethode"/>
         /// </summary>
         [JsonProperty(Required = Required.Default, Order = 17)]
         [ProtoMember(17)]

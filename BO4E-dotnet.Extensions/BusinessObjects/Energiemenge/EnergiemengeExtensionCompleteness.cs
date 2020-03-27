@@ -149,13 +149,13 @@ namespace BO4E.Extensions.BusinessObjects.Energiemenge
                     {
                         foreach (var kvp in em.energieverbrauch.Where(v => v.userProperties != null).SelectMany(v => v.userProperties))
                         {
-                            if (result.userProperties == null)
+                            if (result.UserProperties == null)
                             {
-                                result.userProperties = new Dictionary<string, JToken>();
+                                result.UserProperties = new Dictionary<string, JToken>();
                             }
-                            if (!result.userProperties.ContainsKey(kvp.Key))
+                            if (!result.UserProperties.ContainsKey(kvp.Key))
                             {
-                                result.userProperties.Add(kvp.Key, kvp.Value);
+                                result.UserProperties.Add(kvp.Key, kvp.Value);
                             }
                         }
                     }

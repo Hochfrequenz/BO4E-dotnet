@@ -1,8 +1,9 @@
 ﻿using System.Collections.Generic;
+
 using BO4E.COM;
 using BO4E.ENUM;
+
 using Newtonsoft.Json;
-using ProtoBuf;
 
 namespace BO4E.BO
 {
@@ -15,50 +16,50 @@ namespace BO4E.BO
         /// <summary>
         /// Preisblatt gilt für die angegebene Sparte.
         /// </summary>
-        [JsonProperty(Required = Required.Always, Order = 7)]
+        [JsonProperty(Required = Required.Always, Order = 7, PropertyName = "sparte")]
         //[ProtoMember(7)]
-        public Sparte sparte;
+        public Sparte Sparte { get; set; }
 
         /// <summary>
         /// Die Preise gelten für Marktlokationen der angegebenen Bilanzierungsmethode. 
         /// </summary>
-        [JsonProperty(Required = Required.Always, Order = 8)]
+        [JsonProperty(Required = Required.Always, Order = 8, PropertyName = "bilanzierungsmethode")]
         //[ProtoMember(8)]
-        public Bilanzierungsmethode bilanzierungsmethode;
+        public Bilanzierungsmethode Bilanzierungsmethode { get; set; }
 
         /// <summary>
         /// Die Preise gelten für Messlokationen in der angegebenen Netzebene.
         /// </summary>
-        [JsonProperty(Required = Required.Always, Order = 9)]
+        [JsonProperty(Required = Required.Always, Order = 9, PropertyName = "messebene")]
         //[ProtoMember(9)]
-        public Netzebene messebene;
+        public Netzebene Messebene { get; set; }
 
         /// <summary>
         /// Im Preis sind die hier angegebenen Dienstleistungen enthalten. Z.B. Jährliche Ablesung. 
         /// </summary>
-        [JsonProperty(Required = Required.Default, Order = 10)]
+        [JsonProperty(Required = Required.Default, Order = 10, PropertyName = "inklusiveDienstleistung")]
         //[ProtoMember(10)]
-        public List<Dienstleistungstyp> inklusiveDienstleistung;
+        public List<Dienstleistungstyp> InklusiveDienstleistung { get; set; }
 
         /// <summary>
         /// Der Preis betrifft das hier angegebene Geräte, z.B. einen Drehstromzähler.
         /// </summary>
-        [JsonProperty(Required = Required.Always, Order = 11)]
+        [JsonProperty(Required = Required.Always, Order = 11, PropertyName = "basisgeraet")]
         //[ProtoMember(11)]
-        public Geraeteeigenschaften basisgeraet;
+        public Geraeteeigenschaften Basisgeraet { get; set; }
 
         /// <summary>
         /// Im Preis sind die hier angegebenen Geräte mit enthalten, z.B. ein Wandler.
         /// </summary>
-        [JsonProperty(Required = Required.Default, Order = 12)]
+        [JsonProperty(Required = Required.Default, Order = 12, PropertyName = "inklusiveGeraete")]
         //[ProtoMember(12)]
-        public List<Geraeteeigenschaften> inklusiveGeraete;
+        public List<Geraeteeigenschaften> InklusiveGeraete { get; set; }
 
         /// <summary>
         /// Der Netzbetreiber oder Messstellenbetreiber, der die Preise veröffentlicht hat.
         /// </summary>
-        [JsonProperty(Required = Required.Always, Order = 13)]
+        [JsonProperty(Required = Required.Always, Order = 13, PropertyName = "herausgeber")]
         //[ProtoMember(13)]
-        public Marktteilnehmer herausgeber;
+        public Marktteilnehmer Herausgeber { get; set; }
     }
 }

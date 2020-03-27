@@ -49,9 +49,9 @@ namespace BO4E.BO
         /// 'MESSLOKATION',
         /// 'MARKTLOKATION'
         /// </example>
-        [JsonProperty(Required = Required.Default, Order = 1)]
+        [JsonProperty(Required = Required.Default, Order = 1, PropertyName = "boTyp")]
         [ProtoMember(1)]
-        public string boTyp;
+        public string BoTyp { get; set; }
 
         /// <summary>
         /// Fields that are not part of the BO4E-definition are stored in a element, that is
@@ -93,22 +93,22 @@ namespace BO4E.BO
         [JsonExtensionData]
         [ProtoMember(200)]
         [DataCategory(DataCategory.USER_PROPERTIES)]
-        public IDictionary<string, JToken> userProperties;
+        public IDictionary<string, JToken> UserProperties { get; set; }
 
         /// <summary>
         /// generates the BO4E boTyp attribute value (class name as upper case)
         /// </summary>
         protected BusinessObject()
         {
-            boTyp = this.GetType().Name.ToUpper();
+            BoTyp = this.GetType().Name.ToUpper();
             versionStruktur = 1;
         }
 
         /// <summary>
-        /// return <see cref="BusinessObject.boTyp"/> (as string, not as type)
+        /// return <see cref="BusinessObject.BoTyp"/> (as string, not as type)
         /// </summary>
         /// <returns></returns>
-        public string GetBoTyp() => this.boTyp;
+        public string GetBoTyp() => this.BoTyp;
 
         /// <summary>
         /// This method is just to make sure the mapping actually makes sense.
@@ -427,15 +427,15 @@ namespace BO4E.BO
         }
 
         /// <summary>
-        /// converts <see cref="BusinessObject.boTyp"/> to upper case.
+        /// converts <see cref="BusinessObject.BoTyp"/> to upper case.
         /// </summary>
         /// <param name="context"></param>
         [OnDeserialized]
         protected void DeserializationFixes(StreamingContext context)
         {
-            if (boTyp != null)
+            if (BoTyp != null)
             {
-                this.boTyp = boTyp.ToUpper();
+                this.BoTyp = BoTyp.ToUpper();
             }
         }
 

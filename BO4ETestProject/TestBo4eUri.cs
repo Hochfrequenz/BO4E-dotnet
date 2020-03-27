@@ -154,8 +154,8 @@ namespace TestBO4E
         {
             string emString = @"{'versionStruktur':1,'boTyp':'ENERGIEMENGE','lokationsId':'DE0000000000000000000000010000400','lokationstyp':'MeLo','zw':'000000000030000301','anlagennummer':'4000000199','messlokationsId':'DE0000000000000000000000010000400','marktlokationsId':''}";
             Energiemenge em = JsonConvert.DeserializeObject<Energiemenge>(emString);
-            Assert.IsNotNull(em.userProperties);
-            Assert.IsTrue(em.userProperties.Keys.Count > 0);
+            Assert.IsNotNull(em.UserProperties);
+            Assert.IsTrue(em.UserProperties.Keys.Count > 0);
             Bo4eUri uri = em.GetURI(true);
             Assert.IsTrue(uri.ToString().Contains("messlokationsId="));
             Assert.IsTrue(uri.ToString().Contains("anlagennummer=4000000199"));

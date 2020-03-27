@@ -1,10 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+
 using BO4E.COM;
 using BO4E.ENUM;
 using BO4E.meta;
+
 using Newtonsoft.Json;
+
 using ProtoBuf;
 
 namespace BO4E.BO
@@ -18,19 +21,19 @@ namespace BO4E.BO
         /// <summary>
         ///  Eindeutige Nummer des Angebotes.
         /// </summary>
-        [JsonProperty(Required = Required.Always, Order = 4)]
+        [JsonProperty(Required = Required.Always, Order = 4, PropertyName = "angebotsnummer")]
         [ProtoMember(4)]
         [DataCategory(DataCategory.FINANCE)]
         [BoKey]
-        public string angebotsnummer;
+        public string Angebotsnummer { get; set; }
 
         /// <summary>
         /// Referenz auf eine Anfrage oder Ausschreibung.Kann dem Empfänger des Angebotes bei Zuordnung des Angebotes zur Anfrage bzw.Ausschreibung helfen.
         /// </summary>
-        [JsonProperty(Required = Required.Default, Order = 5)]
+        [JsonProperty(Required = Required.Default, Order = 5, PropertyName = "anfragereferenz")]
         [ProtoMember(5)]
         [DataCategory(DataCategory.FINANCE)]
-        public string anfragereferenz;
+        public string Anfragereferenz { get; set; }
 
         /// <summary>
         /// Erstellungsdatum des Angebots,
@@ -38,19 +41,19 @@ namespace BO4E.BO
         /// <example>
         /// 2017-12-24
         /// </example>
-        [JsonProperty(Required = Required.Always, Order = 6)]
+        [JsonProperty(Required = Required.Always, Order = 6, PropertyName = "angebotsdatum")]
         [ProtoMember(6)]
         [DataCategory(DataCategory.FINANCE)]
         // ToDo: handle this as DateTime object that serializes without the "time" in "DateTime"
-        public string angebotsdatum;
+        public string Angebotsdatum { get; set; }
 
         /// <summary>
         /// Sparte, für die das Angebot abgegeben wird (Strom/Gas).
         /// </summary>
         /// <see cref="Sparte"/>
-        [JsonProperty(Required = Required.Always, Order = 7)]
+        [JsonProperty(Required = Required.Always, Order = 7, PropertyName = "sparte")]
         [ProtoMember(7)]
-        public Sparte sparte;
+        public Sparte Sparte { get; set; }
 
         /// <summary>
         /// Bis zu diesem Zeitpunkt(Tag/Uhrzeit) inklusive gilt das Angebot
@@ -58,55 +61,55 @@ namespace BO4E.BO
         /// <example>
         /// 2017-12-31 17:00:00
         /// </example>
-        [JsonProperty(Required = Required.Default, Order = 8)]
+        [JsonProperty(Required = Required.Default, Order = 8, PropertyName = "bindefrist")]
         [ProtoMember(8)]
         [DataCategory(DataCategory.FINANCE)]
-        public DateTime bindefrist;
+        public DateTime Bindefrist { get; set; }
 
         /// <summary>
         /// Link auf den Ersteller des Angebots.
         /// </summary>
         /// <see cref="Geschaeftspartner"/>
-        [JsonProperty(Required = Required.Always, Order = 9)]
+        [JsonProperty(Required = Required.Always, Order = 9, PropertyName = "angebotgeber")]
         [ProtoMember(9)]
         [DataCategory(DataCategory.FINANCE)]
-        public Geschaeftspartner angebotgeber;
+        public Geschaeftspartner Angebotgeber { get; set; }
 
         /// <summary>
         /// Link auf den Empfänger des Angebots.
         /// </summary>
         /// <see cref="Geschaeftspartner"/>
-        [JsonProperty(Required = Required.Always, Order = 10)]
+        [JsonProperty(Required = Required.Always, Order = 10, PropertyName = "angebotnehmer")]
         [ProtoMember(10)]
         [DataCategory(DataCategory.FINANCE)]
-        public Geschaeftspartner angebotnehmer;
+        public Geschaeftspartner Angebotnehmer { get; set; }
 
         /// <summary>
         /// Link auf die Person, die als Angebotsnehmer das Angebot angenommen hat.
         /// </summary>
         /// <see cref="Ansprechpartner"/>
-        [JsonProperty(Required = Required.Default, Order = 11)]
+        [JsonProperty(Required = Required.Default, Order = 11, PropertyName = "unterzeichnerAngebotsnehmer")]
         [ProtoMember(11)]
         [DataCategory(DataCategory.NAME)]
-        public Ansprechpartner unterzeichnerAngebotsnehmer;
+        public Ansprechpartner UnterzeichnerAngebotsnehmer { get; set; }
 
         /// <summary>
         /// Link auf die Person, die als Angebotsgeber das Angebots ausgestellt hat.
         /// </summary>
         /// <see cref="Ansprechpartner"/>
-        [JsonProperty(Required = Required.Default, Order = 12)]
+        [JsonProperty(Required = Required.Default, Order = 12, PropertyName = "unterzeichnerAngebotsgeber")]
         [ProtoMember(12)]
         [DataCategory(DataCategory.NAME)]
-        public Ansprechpartner unterzeichnerAngebotsgeber;
+        public Ansprechpartner UnterzeichnerAngebotsgeber { get; set; }
 
         /// <summary>
         /// Eine oder mehrere Varianten des Angebots mit den Angebotsteilen. Ein Angebot besteht mindestens aus einer Variante.
         /// </summary>
         /// <see cref="Angebotsvariante"/>
-        [JsonProperty(Required = Required.Default, Order = 13)]
+        [JsonProperty(Required = Required.Default, Order = 13, PropertyName = "varianten")]
         [ProtoMember(13)]
         [DataCategory(DataCategory.FINANCE)]
         [MinLength(1)]
-        public List<Angebotsvariante> varianten;
+        public List<Angebotsvariante> Varianten { get; set; };
     }
 }

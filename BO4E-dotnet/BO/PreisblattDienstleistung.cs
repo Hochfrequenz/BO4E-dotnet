@@ -1,6 +1,6 @@
 ﻿using BO4E.ENUM;
+
 using Newtonsoft.Json;
-using ProtoBuf;
 
 namespace BO4E.BO
 {
@@ -13,22 +13,22 @@ namespace BO4E.BO
         /// <summary>
         /// Hier kann der Preis noch auf bestimmte Dienstleistungsbereiche eingegrenzt werden. Z.B. Sperrung/Entsperrung.
         /// </summary>
-        [JsonProperty(Required = Required.Always, Order = 7)]
+        [JsonProperty(Required = Required.Always, Order = 7, PropertyName = "dienstleistungsdetails")]
         //[ProtoMember(7)]
-        public Dienstleistungstyp dienstleistungsdetails;
+        public Dienstleistungstyp Dienstleistungsdetails { get; set; }
 
         /// <summary>
         /// Hier kann der Preis auf bestimmte Geräte eingegrenzt werden. Z.B. auf die Zählergröße. 
         /// </summary>
-        [JsonProperty(Required = Required.Default, Order = 8)]
+        [JsonProperty(Required = Required.Default, Order = 8, PropertyName = "geraetedetails")]
         //[ProtoMember(8)]
-        public Bilanzierungsmethode? geraetedetails;
+        public Bilanzierungsmethode? Geraetedetails { get; set; }
 
         /// <summary>
         /// Der Netzbetreiber oder Messstellenbetreiber, der die Preise veröffentlicht hat. 
         /// </summary>
-        [JsonProperty(Required = Required.Always, Order = 9)]
+        [JsonProperty(Required = Required.Always, Order = 9, PropertyName = "herausgeber")]
         //[ProtoMember(9)]
-        public Marktteilnehmer herausgeber;
+        public Marktteilnehmer Herausgeber { get; set; }
     }
 }

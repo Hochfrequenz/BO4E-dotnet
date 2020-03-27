@@ -97,7 +97,7 @@ namespace BO4E.Extensions.BusinessObjects.Benachrichtigung
         }
 
         /// <summary>
-        /// moves key value pairs from <see cref="BO4E.BO.Benachrichtigung.infos"/> to <see cref="BO4E.BO.BusinessObject.userProperties"/> for more conventient handling.
+        /// moves key value pairs from <see cref="BO4E.BO.Benachrichtigung.infos"/> to <see cref="BO4E.BO.BusinessObject.UserProperties"/> for more conventient handling.
         /// </summary>
         /// <param name="b">Benachrichtigung</param>
         /// <param name="overwriteExistingKeys">set true to overwrite userProperties with same key</param>
@@ -106,17 +106,17 @@ namespace BO4E.Extensions.BusinessObjects.Benachrichtigung
         {
             if (b.infos != null && b.infos.Count > 0)
             {
-                if (b.userProperties == null)
+                if (b.UserProperties == null)
                 {
-                    b.userProperties = new Dictionary<string, JToken>();
+                    b.UserProperties = new Dictionary<string, JToken>();
                 }
                 foreach (var info in b.infos)
                 {
-                    if (b.userProperties.ContainsKey(info.keyColumn) && overwriteExistingKeys)
+                    if (b.UserProperties.ContainsKey(info.keyColumn) && overwriteExistingKeys)
                     {
-                        b.userProperties.Remove(info.keyColumn);
+                        b.UserProperties.Remove(info.keyColumn);
                     }
-                    b.userProperties.Add(info.keyColumn, info.value); // might throw exception if key exists and !overwriteExistingKeys. That's ok.
+                    b.UserProperties.Add(info.keyColumn, info.value); // might throw exception if key exists and !overwriteExistingKeys. That's ok.
                 }
                 b.infos = null; // set to null after all elements have been moved
             }

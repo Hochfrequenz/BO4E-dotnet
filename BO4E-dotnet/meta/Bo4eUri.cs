@@ -185,10 +185,10 @@ namespace BO4E.meta
                     relativeUriString += NULL_KEY_PLACEHOLDER + "/";
                 }
             }
-            if (includeUserProperties && bo.userProperties != null && bo.userProperties.Count > 0)
+            if (includeUserProperties && bo.UserProperties != null && bo.UserProperties.Count > 0)
             {
                 int n = 0;
-                foreach (var up in bo.userProperties)
+                foreach (var up in bo.UserProperties)
                 {
                     if (n == 0)
                     {

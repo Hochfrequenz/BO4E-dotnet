@@ -41,11 +41,11 @@ namespace TestBO4E
             var malo = new Marktlokation()
             {
                 marktlokationsId = "1235678901",
-                sparte = Sparte.STROM,
-                energierichtung = Energierichtung.AUSSP
+                Sparte = Sparte.STROM,
+                Energierichtung = Energierichtung.AUSSP
             };
             Assert.IsFalse(malo.IsValid()); // because the obligatory bilanzierungsmethode is not set
-            malo.bilanzierungsmethode = Bilanzierungsmethode.SLP;
+            malo.Bilanzierungsmethode = Bilanzierungsmethode.SLP;
             Assert.IsTrue(malo.IsValid(checkId:false)); // because all obligatory fields are set
             Assert.IsFalse(malo.IsValid()); // but the marklokationsId is wrong
             malo.marktlokationsId = "51238696781"; // matches the appropriate regex and has the right check sum

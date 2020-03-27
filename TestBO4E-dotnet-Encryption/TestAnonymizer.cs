@@ -278,7 +278,7 @@ namespace TestBO4EExtensions.Encryption
                 coverage = 0.9M,
                 einheit = BO4E.ENUM.Mengeneinheit.MWH,
                 wertermittlungsverfahren = BO4E.ENUM.Wertermittlungsverfahren.MESSUNG,
-                userProperties = new Dictionary<string, JToken>()
+                UserProperties = new Dictionary<string, JToken>()
                 {
                     { "anlage", "5012345678" },
                     { "profil", "123456" }
@@ -296,10 +296,10 @@ namespace TestBO4EExtensions.Encryption
             Assert.IsNotNull(hashedReport);
             Assert.AreNotEqual(cr.lokationsId, hashedReport.lokationsId);
             Assert.IsTrue(Marktlokation.ValidateId(hashedReport.lokationsId));
-            Assert.IsNotNull(cr.userProperties["anlage"]);
-            Assert.AreNotEqual(cr.userProperties["anlage"].Value<string>(), hashedReport.userProperties["anlage"].Value<string>());
-            Assert.IsNotNull(cr.userProperties["profil"]);
-            Assert.AreNotEqual(cr.userProperties["profil"].Value<string>(), hashedReport.userProperties["profil"].Value<string>());
+            Assert.IsNotNull(cr.UserProperties["anlage"]);
+            Assert.AreNotEqual(cr.UserProperties["anlage"].Value<string>(), hashedReport.UserProperties["anlage"].Value<string>());
+            Assert.IsNotNull(cr.UserProperties["profil"]);
+            Assert.AreNotEqual(cr.UserProperties["profil"].Value<string>(), hashedReport.UserProperties["profil"].Value<string>());
 
             conf.hashingSalt = "TWFuIGlzIGRpc3Rpbmd1aXNoZWQsIG5vdCBvbmx5IGJ5IGhpcyByZWFzb24sIGJ1dCBieSB0aGlzIHNpbmd1bGFyIHBhc3Npb24gZnJvbSBvdGhlciBhbmltYWxzLCB3aGljaCBpcyBhIGx1c3Qgb2YgdGhlIG1pbmQsIHRoYXQgYnkgYSBwZXJzZXZlcmFuY2Ugb2YgZGVsaWdodCBpbiB0aGUgY29udGludWVkIGFuZCBpbmRlZmF0aWdhYmxlIGdlbmVyYXRpb24gb2Yga25vd2xlZGdlLCBleGNlZWRzIHRoZSBzaG9ydCB2ZWhlbWVuY2Ugb2YgYW55IGNhcm5hbCBwbGVhc3VyZS4=";
             CompletenessReport saltedReport;

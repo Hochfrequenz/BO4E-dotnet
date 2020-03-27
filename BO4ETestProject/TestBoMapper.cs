@@ -159,8 +159,8 @@ namespace TestBO4E
                 json = JsonConvert.DeserializeObject<JObject>(jsonString);
             }
             var v = JsonConvert.DeserializeObject<Vertrag>(json["input"].ToString(), LenientParsing.MOST_LENIENT.GetJsonSerializerSettings());
-            Assert.IsNotNull(v.vertragsteile);
-            Assert.AreEqual("DE54321", v.vertragsteile.First().lokation);
+            Assert.IsNotNull(v.Vertragsteile);
+            Assert.AreEqual("DE54321", v.Vertragsteile.First().lokation);
         }
 
         [TestMethod]
@@ -192,7 +192,7 @@ namespace TestBO4E
             }
             LenientParsing lenients = LenientParsing.StringToInt;
             Vertrag v = JsonConvert.DeserializeObject<Vertrag>(json["input"].ToString(), lenients.GetJsonSerializerSettings());
-            Assert.AreEqual(v.vertragskonditionen.anzahlAbschlaege, 12);
+            Assert.AreEqual(v.Vertragskonditionen.anzahlAbschlaege, 12);
         }
 
         [TestMethod]

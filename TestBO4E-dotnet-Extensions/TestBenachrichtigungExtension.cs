@@ -18,7 +18,7 @@ namespace TestBO4EExtensions
             Benachrichtigung b = new Benachrichtigung()
             {
                 benachrichtigungsId = "1234",
-                bearbeiter = "dei mudder",
+                Bearbeiter = "dei mudder",
                 infos = new List<GenericStringStringInfo>()
                 {
                     new GenericStringStringInfo() { keyColumn = "ads", value = "xyz" },
@@ -43,10 +43,10 @@ namespace TestBO4EExtensions
         {
             Benachrichtigung b = JsonConvert.DeserializeObject<Benachrichtigung>("{\"versionStruktur\":1,\"boTyp\":\"BENACHRICHTIGUNG\",\"benachrichtigungsId\":\"468985\",\"prioritaet\":2,\"bearbeitungsstatus\":0,\"kurztext\":\"Manuelles Überschreiben von Profilwerten\",\"erstellungsZeitpunkt\":\"2019-04-01T14:27:23Z\",\"kategorie\":\"ZE01\",\"bearbeiter\":\"\",\"notizen\":null,\"deadline\":null,\"aufgaben\":null,\"infos\":null,\"aufgaben\":[{\"ccat\":\"ZE01\",\"objtype\":\"ZISUPROFIL\",\"aufgabenId\":\"OVERWRITE\",\"ausgefuehrt\":\"true\"},{\"ccat\":\"ZE01\",\"objtype\":\"ZISUPROFIL\",\"aufgabenId\":\"DISPLAY\",\"ausgefuehrt\":\"true\"}],\"infos\":[{\"keyColumn\":\"MESSLOKATIONSID\",\"value\":\"DE000360478090000000\",\"boolean_true_column\":false},{\"keyColumn\":\"TIMESPAN_FROM\",\"value\":\"2019-02-25T23:00:00Z\",\"boolean_true_column\":false},{\"keyColumn\":\"TIMESPAN_TO\",\"value\":\"2019-03-19T22:44:59Z\",\"boolean_true_column\":false}],\"notizen\":[]}");
             Assert.IsTrue(b.Has("MESSLOKATIONSID"));
-            Assert.IsTrue(b.userProperties == null || b.userProperties.Count == 0);
+            Assert.IsTrue(b.UserProperties == null || b.UserProperties.Count == 0);
             b.MoveInfosToUserProperties();
-            Assert.IsNotNull(b.userProperties);
-            Assert.IsTrue(b.userProperties.ContainsKey("MESSLOKATIONSID"));
+            Assert.IsNotNull(b.UserProperties);
+            Assert.IsTrue(b.UserProperties.ContainsKey("MESSLOKATIONSID"));
             Assert.IsNull(b.infos);
         }
 
@@ -62,9 +62,9 @@ namespace TestBO4EExtensions
         public void TestDateTimePredicates()
         {
             Benachrichtigung b = JsonConvert.DeserializeObject<Benachrichtigung>("{\"versionStruktur\":1,\"boTyp\":\"BENACHRICHTIGUNG\",\"benachrichtigungsId\":\"469568\",\"prioritaet\":2,\"bearbeitungsstatus\":1,\"kurztext\":\"Manuelles \u00dcberschreiben von Profilwerten\",\"erstellungsZeitpunkt\":\"2019-04-02T13:35:03Z\",\"kategorie\":\"ZE01\",\"bearbeiter\":\"SCHLEBDA\",\"notizen\":[],\"deadline\":null,\"aufgaben\":[{\"aufgabenId\":\"OVERWRITE\",\"beschreibung\":null,\"deadline\":null,\"ausgefuehrt\":true,\"ausfuehrungsdatum\":null,\"ausfuehrender\":null,\"ccat\":\"ZE01\",\"objtype\":\"ZISUPROFIL\"},{\"aufgabenId\":\"DISPLAY\",\"beschreibung\":null,\"deadline\":null,\"ausgefuehrt\":true,\"ausfuehrungsdatum\":null,\"ausfuehrender\":null,\"ccat\":\"ZE01\",\"objtype\":\"ZISUPROFIL\"}],\"infos\":null,\"MESS\":\"9977768000005\",\"MESSLOKATIONSID\":\"DE0003604763800000000000010376811\",\"TIMESPAN_FROM\":\"2019-03-11T23:30:00Z\",\"TIMESPAN_TO\":\"2019-03-12T22:59:59Z\"}");
-            Assert.IsTrue(b.userProperties.TryGetValue("TIMESPAN_FROM", out JToken jtLower));
+            Assert.IsTrue(b.UserProperties.TryGetValue("TIMESPAN_FROM", out JToken jtLower));
             var lower = jtLower.Value<DateTime>();
-            Assert.IsTrue(b.userProperties.TryGetValue("TIMESPAN_TO", out JToken jtUpper));
+            Assert.IsTrue(b.UserProperties.TryGetValue("TIMESPAN_TO", out JToken jtUpper));
             var upper = jtUpper.Value<DateTime>();
         }
     }
