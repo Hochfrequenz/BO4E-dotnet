@@ -1,6 +1,8 @@
 using BO4E.ENUM;
 using BO4E.meta;
+
 using Newtonsoft.Json;
+
 using ProtoBuf;
 
 namespace BO4E.COM
@@ -10,14 +12,14 @@ namespace BO4E.COM
     public class Betrag : COM
     {
         /// <summary>Gibt den Betrag des Preises an.</summary>
-        [JsonProperty(Required = Required.Always)]
+        [JsonProperty(PropertyName = "wert", Required = Required.Always)]
         [FieldName("value", Language.EN)]
         [ProtoMember(3)]
-        public decimal wert;
+        public decimal Wert { get; set; }
         /// <summary><seealso cref="Waehrungscode" /></summary>
-        [JsonProperty(Required = Required.Always)]
+        [JsonProperty(PropertyName = "waehrung", Required = Required.Always)]
         [FieldName("currency", Language.EN)]
         [ProtoMember(4)]
-        public Waehrungscode waehrung;
+        public Waehrungscode Waehrung { get; set; }
     }
 }

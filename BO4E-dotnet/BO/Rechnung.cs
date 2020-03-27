@@ -196,8 +196,8 @@ namespace BO4E.BO
             Rechnungsdatum = TimeZoneInfo.ConvertTime((infoToken["bldat"] ?? infoToken["BLDAT"]).Value<DateTime>(), Verbrauch.CENTRAL_EUROPE_STANDARD_TIME, TimeZoneInfo.Utc);
             Rechnungsperiode = new Zeitraum()
             {
-                startdatum = TimeZoneInfo.ConvertTime((tErdzToken[0]["ab"] ?? tErdzToken[0]["AB"]).Value<DateTime>(), Verbrauch.CENTRAL_EUROPE_STANDARD_TIME, TimeZoneInfo.Utc),
-                enddatum = TimeZoneInfo.ConvertTime((tErdzToken[0]["bis"] ?? tErdzToken[0]["BIS"]).Value<DateTime>(), Verbrauch.CENTRAL_EUROPE_STANDARD_TIME, TimeZoneInfo.Utc)
+                Startdatum = TimeZoneInfo.ConvertTime((tErdzToken[0]["ab"] ?? tErdzToken[0]["AB"]).Value<DateTime>(), Verbrauch.CENTRAL_EUROPE_STANDARD_TIME, TimeZoneInfo.Utc),
+                Enddatum = TimeZoneInfo.ConvertTime((tErdzToken[0]["bis"] ?? tErdzToken[0]["BIS"]).Value<DateTime>(), Verbrauch.CENTRAL_EUROPE_STANDARD_TIME, TimeZoneInfo.Utc)
             };
             Faelligkeitsdatum = TimeZoneInfo.ConvertTime((infoToken["faedn"] ?? infoToken["FAEDN"]).Value<DateTime>(), Verbrauch.CENTRAL_EUROPE_STANDARD_TIME, TimeZoneInfo.Utc);
             Storno = false;
@@ -210,7 +210,7 @@ namespace BO4E.BO
 
             List<Rechnungsposition> rpList = new List<Rechnungsposition>();
             List<Steuerbetrag> stList = new List<Steuerbetrag>();
-            Vorausgezahlt = new Betrag() { waehrung = waehrungscode, wert = 0 };
+            Vorausgezahlt = new Betrag() { Waehrung = waehrungscode, Wert = 0 };
             foreach (JToken jrp in tErdzToken)
             {
                 string belzart = (jrp["belzart"] ?? jrp["BELZART"]).ToString();
@@ -224,30 +224,30 @@ namespace BO4E.BO
                     decimal zeitbezogeneMengeWert = 0;
                     if (belzart == "000001")
                     {
-                        rp.positionstext = "ARBEITSPREIS";
+                        rp.Positionstext = "ARBEITSPREIS";
                     }
                     else if (belzart == "000003")
                     {
-                        rp.positionstext = "PAUSCHALE";
+                        rp.Positionstext = "PAUSCHALE";
                         mengeneinheit = Mengeneinheit.JAHR;
                         zeitbezogeneMengeWert = (jrp["preisbtr"] ?? jrp["PREISBTR"]).Value<decimal>();
-                        rp.zeitbezogeneMenge = new Menge() { einheit = Mengeneinheit.TAG, wert = zeitbezogeneMengeWert };
+                        rp.ZeitbezogeneMenge = new Menge() { Einheit = Mengeneinheit.TAG, Wert = zeitbezogeneMengeWert };
 
-                        rp.einzelpreis = new Preis()
+                        rp.Einzelpreis = new Preis()
                         {
-                            wert = decimal.Parse((jrp["zeitant"] ?? jrp["ZEITANT"]).ToString()),
-                            einheit = waehrungseinheit,
-                            bezugswert = mengeneinheit
+                            Wert = decimal.Parse((jrp["zeitant"] ?? jrp["ZEITANT"]).ToString()),
+                            Einheit = waehrungseinheit,
+                            Bezugswert = mengeneinheit
                         };
                     }
                     else if (belzart == "000004")
-                        rp.positionstext = "VERRECHNUNGSPREIS";
+                        rp.Positionstext = "VERRECHNUNGSPREIS";
                     else if (belzart == "SUBT")
-                        rp.positionstext = "zuzüglich Mehrwertsteuer 19,000%";
+                        rp.Positionstext = "zuzüglich Mehrwertsteuer 19,000%";
                     else if (belzart == "ZHFBP1" || belzart == "CITAX")
-                        rp.positionstext = belzart;
+                        rp.Positionstext = belzart;
                     else
-                        rp.positionstext = "";
+                        rp.Positionstext = "";
 
                     if ((jrp["massbill"] ?? jrp["MASSBILL"]) != null && !string.IsNullOrWhiteSpace((jrp["massbill"] ?? jrp["MASSBILL"]).Value<string>()))
                     {
@@ -258,7 +258,7 @@ namespace BO4E.BO
                         if ((jrp["timbasis"] ?? jrp["TIMBASIS"]).Value<string>() == "365")
                         {
                             mengeneinheit = Mengeneinheit.JAHR;
-                            rp.zeitbezogeneMenge = new Menge() { einheit = Mengeneinheit.TAG, wert = zeitbezogeneMengeWert };
+                            rp.ZeitbezogeneMenge = new Menge() { Einheit = Mengeneinheit.TAG, Wert = zeitbezogeneMengeWert };
                         }
                     }
                     else
@@ -266,47 +266,47 @@ namespace BO4E.BO
                         mengeneinheit = Mengeneinheit.KWH;
                     }
 
-                    if (rp.einzelpreis == null)
+                    if (rp.Einzelpreis == null)
                     {
                         if ((jrp["preisbtr"] ?? jrp["PREISBTR"]) != null)
                         {
-                            rp.einzelpreis = new Preis()
+                            rp.Einzelpreis = new Preis()
                             {
-                                wert = decimal.Parse((jrp["preisbtr"] ?? jrp["PREISBTR"]).ToString()),
-                                einheit = waehrungseinheit,
-                                bezugswert = mengeneinheit
+                                Wert = decimal.Parse((jrp["preisbtr"] ?? jrp["PREISBTR"]).ToString()),
+                                Einheit = waehrungseinheit,
+                                Bezugswert = mengeneinheit
                             };
                         }
                         else
-                            rp.einzelpreis = new Preis()
+                            rp.Einzelpreis = new Preis()
                             {
-                                wert = 0,
-                                einheit = waehrungseinheit,
-                                bezugswert = mengeneinheit
+                                Wert = 0,
+                                Einheit = waehrungseinheit,
+                                Bezugswert = mengeneinheit
                             };
                     }
 
 
-                    rp.positionsnummer = (jrp["belzeile"] ?? jrp["BELZEILE"]).Value<int>();
+                    rp.Positionsnummer = (jrp["belzeile"] ?? jrp["BELZEILE"]).Value<int>();
                     if ((jrp["bis"] ?? jrp["BIS"]) != null && (jrp["bis"] ?? jrp["BIS"]).Value<string>() != "0000-00-00")
                     {
-                        rp.lieferungBis = TimeZoneInfo.ConvertTime((jrp["bis"] ?? jrp["BIS"]).Value<DateTime>(), Verbrauch.CENTRAL_EUROPE_STANDARD_TIME, TimeZoneInfo.Utc);
+                        rp.LieferungBis = TimeZoneInfo.ConvertTime((jrp["bis"] ?? jrp["BIS"]).Value<DateTime>(), Verbrauch.CENTRAL_EUROPE_STANDARD_TIME, TimeZoneInfo.Utc);
                     }
                     if ((jrp["ab"] ?? jrp["AB"]) != null && (jrp["ab"] ?? jrp["AB"]).Value<string>() != "0000-00-00")
                     {
-                        rp.lieferungVon = TimeZoneInfo.ConvertTime((jrp["ab"] ?? jrp["AB"]).Value<DateTime>(), Verbrauch.CENTRAL_EUROPE_STANDARD_TIME, TimeZoneInfo.Utc);
+                        rp.LieferungVon = TimeZoneInfo.ConvertTime((jrp["ab"] ?? jrp["AB"]).Value<DateTime>(), Verbrauch.CENTRAL_EUROPE_STANDARD_TIME, TimeZoneInfo.Utc);
                     }
                     if ((jrp["vertrag"] ?? jrp["VERTRAG"]) != null)
                     {
-                        rp.vertragskontoId = (jrp["vertrag"] ?? jrp["VERTRAG"]).Value<string>();
+                        rp.VertragskontoId = (jrp["vertrag"] ?? jrp["VERTRAG"]).Value<string>();
                     }
 
                     if ((jrp["iAbrmenge"] ?? jrp["I_ABRMENGE"]) != null)
                     {
-                        rp.positionsMenge = new Menge()
+                        rp.PositionsMenge = new Menge()
                         {
-                            wert = (jrp["iAbrmenge"] ?? jrp["I_ABRMENGE"]).Value<decimal>(),
-                            einheit = mengeneinheit
+                            Wert = (jrp["iAbrmenge"] ?? jrp["I_ABRMENGE"]).Value<decimal>(),
+                            Einheit = mengeneinheit
                         };
                     }
 
@@ -314,24 +314,24 @@ namespace BO4E.BO
                     {
                         if (belzart != "SUBT" && belzart != "CITAX")
                         {
-                            rp.teilsummeNetto = new Betrag()
+                            rp.TeilsummeNetto = new Betrag()
                             {
-                                wert = (jrp["nettobtr"] ?? jrp["NETTOBTR"]).Value<decimal>(),
-                                waehrung = waehrungscode
+                                Wert = (jrp["nettobtr"] ?? jrp["NETTOBTR"]).Value<decimal>(),
+                                Waehrung = waehrungscode
                             };
                         }
                         else
                         {
-                            rp.teilsummeNetto = new Betrag()
+                            rp.TeilsummeNetto = new Betrag()
                             {
-                                wert = (jrp["sbasw"] ?? jrp["SBASW"]).Value<decimal>(),
-                                waehrung = waehrungscode
+                                Wert = (jrp["sbasw"] ?? jrp["SBASW"]).Value<decimal>(),
+                                Waehrung = waehrungscode
                             };
                             Steuerbetrag steuerbetrag = new Steuerbetrag()
                             {
-                                basiswert = (jrp["sbasw"] ?? jrp["SBASW"]).Value<decimal>(),
-                                steuerwert = (jrp["sbetw"] ?? jrp["SBETW"]).Value<decimal>(),
-                                waehrung = (Waehrungscode)Enum.Parse(typeof(Waehrungscode), (jrp["twaers"] ?? jrp["TWAERS"]).Value<string>())
+                                Basiswert = (jrp["sbasw"] ?? jrp["SBASW"]).Value<decimal>(),
+                                Steuerwert = (jrp["sbetw"] ?? jrp["SBETW"]).Value<decimal>(),
+                                Waehrung = (Waehrungscode)Enum.Parse(typeof(Waehrungscode), (jrp["twaers"] ?? jrp["TWAERS"]).Value<string>())
                             };
                             decimal steuerProzent;
                             if ((jrp["stprz"] ?? jrp["STPRZ"]) != null && !string.IsNullOrWhiteSpace((jrp["stprz"] ?? jrp["STPRZ"]).Value<string>()))
@@ -340,29 +340,29 @@ namespace BO4E.BO
                             }
                             else
                             {
-                                steuerProzent = steuerbetrag.steuerwert / steuerbetrag.basiswert * 100.0M;
+                                steuerProzent = steuerbetrag.Steuerwert / steuerbetrag.Basiswert * 100.0M;
                             }
                             if ((int)steuerProzent == 19)
                             {
-                                steuerbetrag.steuerkennzeichen = Steuerkennzeichen.UST_19;
+                                steuerbetrag.Steuerkennzeichen = Steuerkennzeichen.UST_19;
                             }
                             else if ((int)steuerProzent == 7)
                             {
-                                steuerbetrag.steuerkennzeichen = Steuerkennzeichen.UST_7;
+                                steuerbetrag.Steuerkennzeichen = Steuerkennzeichen.UST_7;
                             }
                             else
                             {
                                 throw new NotImplementedException($"Taxrate Internal '{jrp["taxrateInternal"]}' is not mapped.");
                             }
-                            rp.teilsummeSteuer = steuerbetrag;
+                            rp.TeilsummeSteuer = steuerbetrag;
                         }
                         if ((jrp["nettobtr"] ?? jrp["NETTOBTR"]).Value<decimal>() <= 0)
                         {
-                            Vorausgezahlt = new Betrag() { waehrung = waehrungscode, wert = (jrp["nettobtr"] ?? jrp["NETTOBTR"]).Value<decimal>() };
+                            Vorausgezahlt = new Betrag() { Waehrung = waehrungscode, Wert = (jrp["nettobtr"] ?? jrp["NETTOBTR"]).Value<decimal>() };
                         }
                     }
 
-                    rp.zeiteinheit = mengeneinheit;
+                    rp.Zeiteinheit = mengeneinheit;
                     rpList.Add(rp);
 
                     var be = (jrp["nettobtr"] ?? jrp["NETTOBTR"]);
@@ -376,9 +376,9 @@ namespace BO4E.BO
                         {
                             Steuerbetrag steuerbetrag = new Steuerbetrag()
                             {
-                                basiswert = (jrp["sbasw"] ?? jrp["SBASW"]).Value<decimal>(),
-                                steuerwert = (jrp["sbetw"] ?? jrp["SBETW"]).Value<decimal>(),
-                                waehrung = (Waehrungscode)Enum.Parse(typeof(Waehrungscode), (jrp["twaers"] ?? jrp["TWAERS"]).Value<string>())
+                                Basiswert = (jrp["sbasw"] ?? jrp["SBASW"]).Value<decimal>(),
+                                Steuerwert = (jrp["sbetw"] ?? jrp["SBETW"]).Value<decimal>(),
+                                Waehrung = (Waehrungscode)Enum.Parse(typeof(Waehrungscode), (jrp["twaers"] ?? jrp["TWAERS"]).Value<string>())
                             };
                             decimal steuerProzent;
                             if ((jrp["stprz"] ?? jrp["STPRZ"]) != null && !string.IsNullOrWhiteSpace((jrp["stprz"] ?? jrp["STPRZ"]).Value<string>()))
@@ -387,15 +387,15 @@ namespace BO4E.BO
                             }
                             else
                             {
-                                steuerProzent = Math.Round(steuerbetrag.steuerwert / steuerbetrag.basiswert * 100.0M);
+                                steuerProzent = Math.Round(steuerbetrag.Steuerwert / steuerbetrag.Basiswert * 100.0M);
                             }
                             if (steuerProzent == 19.0M)
                             {
-                                steuerbetrag.steuerkennzeichen = Steuerkennzeichen.UST_19;
+                                steuerbetrag.Steuerkennzeichen = Steuerkennzeichen.UST_19;
                             }
                             else if (steuerProzent == 7.0M)
                             {
-                                steuerbetrag.steuerkennzeichen = Steuerkennzeichen.UST_7;
+                                steuerbetrag.Steuerkennzeichen = Steuerkennzeichen.UST_7;
                             }
                             else
                             {
@@ -411,10 +411,10 @@ namespace BO4E.BO
             Rechnungspositionen = rpList;
             gBrutto = gNetto + gSteure;
             zZahlen = gBrutto - vGezahlt - rBrutto;
-            Gesamtnetto = new Betrag() { wert = gNetto, waehrung = waehrungscode };
-            Gesamtsteuer = new Betrag() { wert = gSteure, waehrung = waehrungscode };
-            Gesamtbrutto = new Betrag() { wert = gBrutto, waehrung = waehrungscode };
-            Zuzahlen = new Betrag() { wert = zZahlen, waehrung = waehrungscode };
+            Gesamtnetto = new Betrag() { Wert = gNetto, Waehrung = waehrungscode };
+            Gesamtsteuer = new Betrag() { Wert = gSteure, Waehrung = waehrungscode };
+            Gesamtbrutto = new Betrag() { Wert = gBrutto, Waehrung = waehrungscode };
+            Zuzahlen = new Betrag() { Wert = zZahlen, Waehrung = waehrungscode };
 
             Rechnungsersteller = new Geschaeftspartner()
             {
@@ -424,11 +424,11 @@ namespace BO4E.BO
                 Name1 = "Mein super Lieferant",
                 Partneradresse = new Adresse()
                 {
-                    strasse = "Max-Plank-Strasse",
-                    hausnummer = "8",
-                    postleitzahl = "90190",
-                    landescode = Landescode.DE,
-                    ort = "Walldorf"
+                    Strasse = "Max-Plank-Strasse",
+                    Hausnummer = "8",
+                    Postleitzahl = "90190",
+                    Landescode = Landescode.DE,
+                    Ort = "Walldorf"
                 }
             };
             Rechnungsempfaenger = new Geschaeftspartner()
@@ -440,11 +440,11 @@ namespace BO4E.BO
                 Name2 = "Peter",
                 Partneradresse = new Adresse()
                 {
-                    strasse = "Magnusstraße",
-                    hausnummer = "20",
-                    postleitzahl = "50672",
-                    landescode = Landescode.DE,
-                    ort = "Köln"
+                    Strasse = "Magnusstraße",
+                    Hausnummer = "20",
+                    Postleitzahl = "50672",
+                    Landescode = Landescode.DE,
+                    Ort = "Köln"
                 }
             };
         }

@@ -22,8 +22,8 @@ namespace TestBO4E.Reporting
                 wertermittlungsverfahren = BO4E.ENUM.Wertermittlungsverfahren.PROGNOSE,
                 referenceTimeFrame = new BO4E.COM.Zeitraum()
                 {
-                    startdatum = new DateTime(2019, 1, 1, 0, 0, 0, DateTimeKind.Utc),
-                    enddatum = new DateTime(2019, 3, 1, 0, 0, 0, DateTimeKind.Utc)
+                    Startdatum = new DateTime(2019, 1, 1, 0, 0, 0, DateTimeKind.Utc),
+                    Enddatum = new DateTime(2019, 3, 1, 0, 0, 0, DateTimeKind.Utc)
                 },
             };
             string result = cr.ToCsv(';', true, Environment.NewLine);
@@ -137,8 +137,8 @@ namespace TestBO4E.Reporting
                 wertermittlungsverfahren = BO4E.ENUM.Wertermittlungsverfahren.PROGNOSE,
                 referenceTimeFrame = new BO4E.COM.Zeitraum()
                 {
-                    startdatum = new DateTime(2019, 1, 1, 0, 0, 0, DateTimeKind.Utc),
-                    enddatum = new DateTime(2019, 3, 1, 0, 0, 0, DateTimeKind.Utc)
+                    Startdatum = new DateTime(2019, 1, 1, 0, 0, 0, DateTimeKind.Utc),
+                    Enddatum = new DateTime(2019, 3, 1, 0, 0, 0, DateTimeKind.Utc)
                 },
             };
             cr.values = new List<CompletenessReport.BasicVerbrauch>
@@ -197,8 +197,8 @@ namespace TestBO4E.Reporting
                 wertermittlungsverfahren = BO4E.ENUM.Wertermittlungsverfahren.PROGNOSE,
                 referenceTimeFrame = new BO4E.COM.Zeitraum()
                 {
-                    startdatum = new DateTime(2019, 1, 1, 0, 0, 0, DateTimeKind.Utc),
-                    enddatum = new DateTime(2019, 3, 1, 0, 0, 0, DateTimeKind.Utc)
+                    Startdatum = new DateTime(2019, 1, 1, 0, 0, 0, DateTimeKind.Utc),
+                    Enddatum = new DateTime(2019, 3, 1, 0, 0, 0, DateTimeKind.Utc)
                 },
             };
 

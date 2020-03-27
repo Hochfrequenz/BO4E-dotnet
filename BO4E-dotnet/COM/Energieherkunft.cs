@@ -1,5 +1,7 @@
 using BO4E.ENUM;
+
 using Newtonsoft.Json;
+
 using ProtoBuf;
 
 namespace BO4E.COM
@@ -8,13 +10,13 @@ namespace BO4E.COM
     [ProtoContract]
     public class Energieherkunft : COM
     {
-        /// <summary>Art der Erzeugung der Energie. Details <see cref="Erzeugungsart" /></summary>
-        [JsonProperty(Required = Required.Always)]
+        /// <summary>Art der Erzeugung der Energie. Details <see cref="ENUM.Erzeugungsart" /></summary>
+        [JsonProperty(PropertyName = "erzeugungsart", Required = Required.Always)]
         [ProtoMember(3)]
-        public Erzeugungsart erzeugungsart;
+        public Erzeugungsart Erzeugungsart { get; set; }
         /// <summary>Prozentualer Anteil der jeweiligen Erzeugungsart.</summary>
-        [JsonProperty(Required = Required.Always)]
+        [JsonProperty(PropertyName = "anteilProzent", Required = Required.Always)]
         [ProtoMember(4)]
-        public decimal anteilProzent;
+        public decimal AnteilProzent { get; set; }
     }
 }

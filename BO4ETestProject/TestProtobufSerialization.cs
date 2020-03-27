@@ -23,19 +23,19 @@ namespace TestBO4E
                 {
                     new Verbrauch()
                     {
-                        einheit = BO4E.ENUM.Mengeneinheit.KWH,
-                        wert = 10.0M,
-                        startdatum = new DateTime(2019, 1, 1, 0, 0, 0, DateTimeKind.Utc),
-                        enddatum = new DateTime(2019, 1, 2, 0, 0, 0, DateTimeKind.Utc),
-                        obiskennzahl =  "1–0:1.8.1"
+                        Einheit = BO4E.ENUM.Mengeneinheit.KWH,
+                        Wert = 10.0M,
+                        Startdatum = new DateTime(2019, 1, 1, 0, 0, 0, DateTimeKind.Utc),
+                        Enddatum = new DateTime(2019, 1, 2, 0, 0, 0, DateTimeKind.Utc),
+                        Obiskennzahl =  "1–0:1.8.1"
                     },
                     new Verbrauch()
                     {
-                        einheit = BO4E.ENUM.Mengeneinheit.MWH,
-                        wert = 23.0M,
-                        startdatum = new DateTime(2019, 1, 2, 0, 0, 0, DateTimeKind.Utc),
-                        enddatum = new DateTime(2019, 1, 3, 0, 0, 0, DateTimeKind.Utc),
-                        obiskennzahl =  "1–0:1.8.1"
+                        Einheit = BO4E.ENUM.Mengeneinheit.MWH,
+                        Wert = 23.0M,
+                        Startdatum = new DateTime(2019, 1, 2, 0, 0, 0, DateTimeKind.Utc),
+                        Enddatum = new DateTime(2019, 1, 3, 0, 0, 0, DateTimeKind.Utc),
+                        Obiskennzahl =  "1–0:1.8.1"
                     }
                 }
             };

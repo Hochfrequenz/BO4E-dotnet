@@ -62,8 +62,8 @@ namespace BO4E.BO
             {
                 energieverbrauch = energieverbrauch
                     .Select(v => Verbrauch.FixSapCdsBug(v))
-                    .Where(v => !(v.startdatum == DateTime.MinValue || v.enddatum == DateTime.MinValue))
-                    .Where(v => !(v.userProperties != null && v.userProperties.ContainsKey("invalid") && (bool)v.userProperties["invalid"] == true))
+                    .Where(v => !(v.Startdatum == DateTime.MinValue || v.Enddatum == DateTime.MinValue))
+                    .Where(v => !(v.UserProperties != null && v.UserProperties.ContainsKey("invalid") && (bool)v.UserProperties["invalid"] == true))
                     .ToList();
                 if (UserProperties != null && UserProperties.TryGetValue(Verbrauch._SAP_PROFDECIMALS_KEY, out JToken profDecimalsRaw))
                 {
@@ -73,9 +73,9 @@ namespace BO4E.BO
                         for (int i = 0; i < profDecimals; i++)
                         {
                             // or should I import math.pow() for this purpose?
-                            foreach (Verbrauch v in energieverbrauch.Where(v => v.userProperties == null || !v.userProperties.ContainsKey(Verbrauch._SAP_PROFDECIMALS_KEY)))
+                            foreach (Verbrauch v in energieverbrauch.Where(v => v.UserProperties == null || !v.UserProperties.ContainsKey(Verbrauch._SAP_PROFDECIMALS_KEY)))
                             {
-                                v.wert /= 10.0M;
+                                v.Wert /= 10.0M;
                             }
                         }
                     }

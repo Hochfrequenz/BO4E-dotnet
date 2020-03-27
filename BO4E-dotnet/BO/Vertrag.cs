@@ -143,9 +143,9 @@ namespace BO4E.BO
                 {
                     new Vertragsteil()
                     {
-                        vertragsteilbeginn = this.Vertragsbeginn,
-                        vertragsteilende = this.Vertragsende,
-                        lokation = UserProperties["lokationsId"].Value<string>()
+                        Vertragsteilbeginn = this.Vertragsbeginn,
+                        Vertragsteilende = this.Vertragsende,
+                        Lokation = UserProperties["lokationsId"].Value<string>()
                     }
                 };
             }

@@ -76,7 +76,7 @@ namespace BO4E.COM
         [ProtoMember(2)]
         [JsonExtensionData]
         [DataCategory(DataCategory.USER_PROPERTIES)]
-        public IDictionary<string, JToken> userProperties;
+        public IDictionary<string, JToken> UserProperties { get; set; }
 
         /// <summary>
         /// BO4E components are considered equal iff all of their elements/fields are equal.
@@ -143,8 +143,8 @@ namespace BO4E.COM
         /// <summary>
         /// allows adding a GUID to COM objects for tracking across systems
         /// </summary>
-        [JsonProperty(NullValueHandling = NullValueHandling.Ignore, Required = Required.Default, Order = 1)]
+        [JsonProperty(PropertyName="guid", NullValueHandling = NullValueHandling.Ignore, Required = Required.Default, Order = 1)]
         [ProtoMember(1)]
-        public string guid;
+        public string Guid { get;set; }
     }
 }

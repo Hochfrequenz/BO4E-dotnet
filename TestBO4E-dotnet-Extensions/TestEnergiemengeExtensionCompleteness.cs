@@ -67,8 +67,8 @@ namespace TestBO4EExtensions
                             wertermittlungsverfahren = combi.Item1,
                             referenceTimeFrame = new BO4E.COM.Zeitraum
                             {
-                                startdatum = TestEnergiemengeExtension.GERMAN_APRIL_2018.Start,
-                                enddatum = TestEnergiemengeExtension.GERMAN_APRIL_2018.End
+                                Startdatum = TestEnergiemengeExtension.GERMAN_APRIL_2018.Start,
+                                Enddatum = TestEnergiemengeExtension.GERMAN_APRIL_2018.End
                             }
                         });
                         //Assert.AreEqual(cr, cr2, "calling report with configuration instead of loose parameters doesn't work.");
@@ -158,19 +158,19 @@ namespace TestBO4EExtensions
                 {
                     new Verbrauch()
                     {
-                        obiskennzahl="1234",
-                        wert=123.456M,
-                        wertermittlungsverfahren=Wertermittlungsverfahren.MESSUNG,
-                        startdatum = new DateTime(2019,1,1,0,0,0,DateTimeKind.Utc),
-                        enddatum = new DateTime(2019,1,4,0,0,0,DateTimeKind.Utc),
+                        Obiskennzahl="1234",
+                        Wert=123.456M,
+                        Wertermittlungsverfahren=Wertermittlungsverfahren.MESSUNG,
+                        Startdatum = new DateTime(2019,1,1,0,0,0,DateTimeKind.Utc),
+                        Enddatum = new DateTime(2019,1,4,0,0,0,DateTimeKind.Utc),
                     },
                     new Verbrauch()
                     {
-                        obiskennzahl="1234",
-                        wert=123.456M,
-                        wertermittlungsverfahren=Wertermittlungsverfahren.MESSUNG,
-                        startdatum = new DateTime(2019,1,4,0,0,0,DateTimeKind.Utc),
-                        enddatum = new DateTime(2019,1,7,0,0,0,DateTimeKind.Utc),
+                        Obiskennzahl="1234",
+                        Wert=123.456M,
+                        Wertermittlungsverfahren=Wertermittlungsverfahren.MESSUNG,
+                        Startdatum = new DateTime(2019,1,4,0,0,0,DateTimeKind.Utc),
+                        Enddatum = new DateTime(2019,1,7,0,0,0,DateTimeKind.Utc),
                     }
                 }
             };
@@ -326,7 +326,7 @@ namespace TestBO4EExtensions
                 dateTime = dateTime.AddMinutes(15);
                 DateTime endDateTime = dateTime.AddMinutes(15);
 
-                listvb.Add(new Verbrauch() { startdatum = dateTime, enddatum = endDateTime, einheit = Mengeneinheit.JAHR, wert = 12 });
+                listvb.Add(new Verbrauch() { Startdatum = dateTime, Enddatum = endDateTime, Einheit = Mengeneinheit.JAHR, Wert = 12 });
                 dateTime = endDateTime;
             }
             em.energieverbrauch = listvb;
@@ -392,20 +392,20 @@ namespace TestBO4EExtensions
                 lokationstyp = Lokationstyp.MeLo,
                 energieverbrauch = verbrauchSlices.Select(vs => new BO4E.COM.Verbrauch()
                 {
-                    startdatum = vs.Start,
-                    enddatum = vs.End,
-                    einheit = Mengeneinheit.KWH,
-                    wert = (decimal)123.456,
-                    wertermittlungsverfahren = Wertermittlungsverfahren.MESSUNG
+                    Startdatum = vs.Start,
+                    Enddatum = vs.End,
+                    Einheit = Mengeneinheit.KWH,
+                    Wert = (decimal)123.456,
+                    Wertermittlungsverfahren = Wertermittlungsverfahren.MESSUNG
                 }
                 ).ToList()
             };
             var result = em.GetDailyCompletenessReports(new TimeRange(utcStart, utcEnd));
             Assert.AreEqual(2, result.Count);
-            Assert.AreEqual(new DateTime(2018, 3, 24, 23, 0, 0, DateTimeKind.Utc), result.First().Value.referenceTimeFrame.startdatum);
-            Assert.AreEqual(new DateTime(2018, 3, 25, 22, 0, 0, DateTimeKind.Utc), result.First().Value.referenceTimeFrame.enddatum);
-            Assert.AreEqual(new DateTime(2018, 3, 25, 22, 0, 0, DateTimeKind.Utc), result.Last().Value.referenceTimeFrame.startdatum);
-            Assert.AreEqual(new DateTime(2018, 3, 26, 22, 0, 0, DateTimeKind.Utc), result.Last().Value.referenceTimeFrame.enddatum);
+            Assert.AreEqual(new DateTime(2018, 3, 24, 23, 0, 0, DateTimeKind.Utc), result.First().Value.referenceTimeFrame.Startdatum);
+            Assert.AreEqual(new DateTime(2018, 3, 25, 22, 0, 0, DateTimeKind.Utc), result.First().Value.referenceTimeFrame.Enddatum);
+            Assert.AreEqual(new DateTime(2018, 3, 25, 22, 0, 0, DateTimeKind.Utc), result.Last().Value.referenceTimeFrame.Startdatum);
+            Assert.AreEqual(new DateTime(2018, 3, 26, 22, 0, 0, DateTimeKind.Utc), result.Last().Value.referenceTimeFrame.Enddatum);
         }
 
         [TestMethod]

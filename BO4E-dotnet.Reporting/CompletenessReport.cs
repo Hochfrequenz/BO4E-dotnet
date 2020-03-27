@@ -10,8 +10,8 @@ namespace BO4E.Reporting
     /// <summary>
     /// A completeness report contains information about the completeness of a pure
     /// <see cref="Energiemenge"/>. In this context "pure" means, that the Energiemenge
-    /// does only contain one distinct set of (<see cref="Verbrauch.obiskennzahl"/>, <see cref="Verbrauch.einheit"/>,
-    /// <see cref="Verbrauch.wertermittlungsverfahren"/>).
+    /// does only contain one distinct set of (<see cref="Verbrauch.Obiskennzahl"/>, <see cref="Verbrauch.Einheit"/>,
+    /// <see cref="Verbrauch.Wertermittlungsverfahren"/>).
     /// </summary>
     public class CompletenessReport : Report, IComparable<CompletenessReport>
     {
@@ -30,19 +30,19 @@ namespace BO4E.Reporting
         public string lokationsId;
 
         /// <summary>
-        /// <see cref="Verbrauch.obiskennzahl"/>
+        /// <see cref="Verbrauch.Obiskennzahl"/>
         /// </summary>
         [JsonProperty(Required = Required.Default, Order = 5)]
         public string obiskennzahl;
 
         /// <summary>
-        /// <see cref="Verbrauch.einheit"/>
+        /// <see cref="Verbrauch.Einheit"/>
         /// </summary>
         [JsonProperty(Required = Required.Default, Order = 6)]
         public Mengeneinheit einheit;
 
         /// <summary>
-        /// <see cref="Verbrauch.wertermittlungsverfahren"/>
+        /// <see cref="Verbrauch.Wertermittlungsverfahren"/>
         /// </summary>
         [JsonProperty(Required = Required.Default, Order = 7)]
         public Wertermittlungsverfahren wertermittlungsverfahren;
@@ -95,11 +95,11 @@ namespace BO4E.Reporting
             }
             if(this.referenceTimeFrame!=null && other.referenceTimeFrame != null)
             {
-                if(this.referenceTimeFrame.startdatum.HasValue && other.referenceTimeFrame.startdatum.HasValue)
+                if(this.referenceTimeFrame.Startdatum.HasValue && other.referenceTimeFrame.Startdatum.HasValue)
                 {
-                    return Comparer<DateTime>.Default.Compare(referenceTimeFrame.startdatum.Value, other.referenceTimeFrame.startdatum.Value);
+                    return Comparer<DateTime>.Default.Compare(referenceTimeFrame.Startdatum.Value, other.referenceTimeFrame.Startdatum.Value);
                 }
-                if (this.referenceTimeFrame.startdatum.HasValue)
+                if (this.referenceTimeFrame.Startdatum.HasValue)
                 {
                     return 1;
                 }
@@ -118,17 +118,17 @@ namespace BO4E.Reporting
         public class BasicVerbrauch // : Verbrauch
         {
             /// <summary>
-            /// <see cref="Verbrauch.startdatum"/>
+            /// <see cref="Verbrauch.Startdatum"/>
             /// </summary>
             [JsonProperty(Required = Required.Always)]
             public DateTime startdatum;
             /// <summary>
-            /// <see cref="Verbrauch.enddatum"/>
+            /// <see cref="Verbrauch.Enddatum"/>
             /// </summary>
             [JsonProperty(Required = Required.Always)]
             public DateTime enddatum;
             /// <summary>
-            /// <see cref="Verbrauch.wert"/>. Make it null to express no value present.
+            /// <see cref="Verbrauch.Wert"/>. Make it null to express no value present.
             /// </summary>
             [DataCategory(DataCategory.METER_READING)]
             [JsonProperty(Required = Required.AllowNull)]
@@ -162,19 +162,19 @@ namespace BO4E.Reporting
             public Zeitraum referenceTimeFrame;
 
             /// <summary>
-            /// Wertermittlungsverfahren (<see cref="Verbrauch.wertermittlungsverfahren"/>) to be taken into account.
+            /// Wertermittlungsverfahren (<see cref="Verbrauch.Wertermittlungsverfahren"/>) to be taken into account.
             /// </summary>
             [JsonProperty(Required = Required.Default, Order = 8)]
             public Wertermittlungsverfahren wertermittlungsverfahren;
 
             /// <summary>
-            /// OBIS ID (<see cref="Verbrauch.obiskennzahl"/>) to be taken into account.
+            /// OBIS ID (<see cref="Verbrauch.Obiskennzahl"/>) to be taken into account.
             /// </summary>
             [JsonProperty(Required = Required.Default, Order = 5)]
             public string obis;
 
             /// <summary>
-            /// Unit (<see cref="Verbrauch.einheit"/>) to be taken into account.
+            /// Unit (<see cref="Verbrauch.Einheit"/>) to be taken into account.
             /// </summary>
             [JsonProperty(Required = Required.Default, Order = 6)]
             public Mengeneinheit einheit;

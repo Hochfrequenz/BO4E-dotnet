@@ -1,4 +1,5 @@
 using Newtonsoft.Json;
+
 using ProtoBuf;
 
 namespace BO4E.COM
@@ -8,23 +9,23 @@ namespace BO4E.COM
     public class Sigmoidparameter : COM
     {
         /// <summary>Briefmarke Ortsverteilnetz</summary> //?
-        [JsonProperty(Required = Required.Always)]
+        [JsonProperty(PropertyName = "A", Required = Required.Always)]
         [ProtoMember(3)]
-        public decimal A;
+        public decimal A { get; set; }
 
         /// <summary>Wendepunkt für die bepreiste Menge</summary>
-        [JsonProperty(Required = Required.Always)]
+        [JsonProperty(PropertyName = "B", Required = Required.Always)]
         [ProtoMember(4)]
-        public decimal B;
+        public decimal B { get; set; }
 
         /// <summary>Exponent</summary>
-        [JsonProperty(Required = Required.Always)]
+        [JsonProperty(PropertyName = "C", Required = Required.Always)]
         [ProtoMember(5)]
-        public decimal C;
+        public decimal C { get; set; }
 
         /// <summary>Briefmarke Transportnetz</summary>
-        [JsonProperty(Required = Required.Always)]
+        [JsonProperty(PropertyName = "D", Required = Required.Always)]
         [ProtoMember(6)]
-        public decimal D;
+        public decimal D { get; set; }
     }
 }

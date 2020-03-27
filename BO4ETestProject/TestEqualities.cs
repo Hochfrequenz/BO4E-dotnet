@@ -22,17 +22,17 @@ namespace TestBO4E
 
             v1 = new Verbrauch()
             {
-                einheit = Mengeneinheit.KWH,
-                obiskennzahl = "1-1:1.8.0",
-                startdatum = new DateTime(2019, 1, 1, 0, 0, 0, DateTimeKind.Utc),
-                enddatum = new DateTime(2020, 1, 1, 0, 0, 0, DateTimeKind.Utc)
+                Einheit = Mengeneinheit.KWH,
+                Obiskennzahl = "1-1:1.8.0",
+                Startdatum = new DateTime(2019, 1, 1, 0, 0, 0, DateTimeKind.Utc),
+                Enddatum = new DateTime(2020, 1, 1, 0, 0, 0, DateTimeKind.Utc)
             };
             v2 = new Verbrauch()
             {
-                einheit = Mengeneinheit.KWH,
-                obiskennzahl = "1-1:1.8.0",
-                startdatum = new DateTime(2019, 1, 1, 0, 0, 0, DateTimeKind.Utc),
-                enddatum = new DateTime(2020, 1, 1, 0, 0, 0, DateTimeKind.Utc)
+                Einheit = Mengeneinheit.KWH,
+                Obiskennzahl = "1-1:1.8.0",
+                Startdatum = new DateTime(2019, 1, 1, 0, 0, 0, DateTimeKind.Utc),
+                Enddatum = new DateTime(2020, 1, 1, 0, 0, 0, DateTimeKind.Utc)
             };
 
             Assert.AreEqual(v1, v2);
@@ -40,7 +40,7 @@ namespace TestBO4E
             Assert.AreEqual(v1.GetHashCode(), v2.GetHashCode());
             Assert.IsFalse(v1 == v2);
 
-            v2.obiskennzahl = "1-1:1.8.1";
+            v2.Obiskennzahl = "1-1:1.8.1";
             Assert.AreNotEqual(v1, v2);
             Assert.AreNotEqual(v1.GetHashCode(), v2.GetHashCode());
             Assert.AreNotEqual(new Preis(), new Menge());
@@ -63,13 +63,13 @@ namespace TestBO4E
             em1.energieverbrauch = new List<Verbrauch>();
             Verbrauch v1 = new Verbrauch
             {
-                obiskennzahl = "1-2-3-4-5"
+                Obiskennzahl = "1-2-3-4-5"
             };
             em1.energieverbrauch.Add(v1);
             em2.energieverbrauch = new List<Verbrauch>();
             Verbrauch v2 = new Verbrauch
             {
-                obiskennzahl = "1-2-3-4-5"
+                Obiskennzahl = "1-2-3-4-5"
             };
             em2.energieverbrauch.Add(v2);
 
@@ -79,11 +79,11 @@ namespace TestBO4E
 
             Verbrauch v3 = new Verbrauch
             {
-                einheit = BO4E.ENUM.Mengeneinheit.KWH,
-                obiskennzahl = "ABC",
-                startdatum = new DateTime(2018, 1, 1),
-                enddatum = new DateTime(2018, 12, 31),
-                wert = 123.456M
+                Einheit = BO4E.ENUM.Mengeneinheit.KWH,
+                Obiskennzahl = "ABC",
+                Startdatum = new DateTime(2018, 1, 1),
+                Enddatum = new DateTime(2018, 12, 31),
+                Wert = 123.456M
             };
             em1.energieverbrauch = new List<Verbrauch> { v3 };
             em2.energieverbrauch = new List<Verbrauch> { v3 };
@@ -92,7 +92,7 @@ namespace TestBO4E
             Assert.IsFalse(em1 == em2);
 
             Verbrauch v4 = JsonConvert.DeserializeObject<Verbrauch>(JsonConvert.SerializeObject(v1));
-            v4.wert = 789.012M;
+            v4.Wert = 789.012M;
             em1.energieverbrauch.Add(v4);
             Assert.AreNotEqual(em1, em2);
 

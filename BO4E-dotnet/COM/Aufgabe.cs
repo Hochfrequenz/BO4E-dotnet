@@ -20,46 +20,46 @@ namespace BO4E.COM
         /// <summary>
         /// Eindeutige Kennzeichnung der Aufgabe
         /// </summary>
-        [JsonProperty(Required = Required.Always)]
+        [JsonProperty(PropertyName = "aufgabenId", Required = Required.Always)]
         [ProtoMember(3)]
-        public string aufgabenId;
+        public string AufgabenId { get; set; }
 
         /// <summary>
         /// Optionale Beschreibung der Aufgabe
         /// </summary>
-        [JsonProperty(Required = Required.Default)]
+        [JsonProperty(PropertyName = "beschreibung", Required = Required.Default)]
         [ProtoMember(4)]
-        public string beschreibung;
+        public string Beschreibung { get; set; }
 
         /// <summary>
         /// Optionale Deadline bis zu der die Aufgabe ausführt werden kann oder ihre Ausführung 
         /// sinnvoll ist.
         /// </summary>
-        [JsonProperty(Required = Required.Default)]
+        [JsonProperty(PropertyName = "deadline", Required = Required.Default)]
         [ProtoMember(5)]
-        public DateTime? deadline;
+        public DateTime? Deadline { get; set; }
 
         /// <summary>
         /// Wurde diese Aufgabe schon ausgeführt (true)? Steht sie noch zur Bearbeitung an (false)?
         /// </summary>
-        [JsonProperty(Required = Required.Always)]
+        [JsonProperty(PropertyName = "ausgefuehrt", Required = Required.Always)]
         [ProtoMember(6)]
-        public bool ausgefuehrt;
+        public bool Ausgefuehrt { get; set; }
 
         /// <summary>
         /// Zeitpunkt zu dem die Aufgabe ausgeführt wurde. (Nur sinnvoll, wenn <c>ausgefuehrt==true</c>)
         /// </summary>
         [JsonConverter(typeof(LenientDateTimeConverter))]
-        [JsonProperty(Required = Required.Default)]
+        [JsonProperty(PropertyName = "ausfuehrungszeitpunkt", Required = Required.Default)]
         [ProtoMember(7)]
-        public DateTime? ausfuehrungszeitpunkt;
+        public DateTime? Ausfuehrungszeitpunkt { get; set; }
 
         /// <summary>
         /// Eindeutige Kennung des Benutzers, der diese Aufgabe ausführt hat.
         /// (Nur sinnvoll, wenn <c>ausgefuehrt==true</c>)
         /// </summary>
-        [JsonProperty(Required = Required.Default)]
+        [JsonProperty(PropertyName = "ausfuehrender", Required = Required.Default)]
         [ProtoMember(8)]
-        public string ausfuehrender;
+        public string Ausfuehrender { get; set; }
     }
 }

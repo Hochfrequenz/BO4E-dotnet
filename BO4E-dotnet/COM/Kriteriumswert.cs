@@ -1,5 +1,7 @@
 ﻿using BO4E.ENUM;
+
 using Newtonsoft.Json;
+
 using ProtoBuf;
 
 namespace BO4E.COM
@@ -13,15 +15,15 @@ namespace BO4E.COM
         /// <summary>
         /// Hier steht, für welches Kriterium der Wert gilt. Z.B. Postleitzahlen.
         /// </summary>
-        [JsonProperty(Required = Required.Always)]
+        [JsonProperty(PropertyName = "kriterium", Required = Required.Always)]
         [ProtoMember(3)]
-        public Tarifregionskriterium kriterium;
+        public Tarifregionskriterium Kriterium { get; set; }
 
         /// <summary>
         /// Ein Wert, passend zum Kriterium. Z.B. eine Postleitzahl.
         /// </summary>
-        [JsonProperty(Required = Required.Always)]
+        [JsonProperty(PropertyName = "wert", Required = Required.Always)]
         [ProtoMember(4)]
-        public string wert;
+        public string Wert { get; set; }
     }
 }

@@ -30,7 +30,7 @@ namespace BO4E.Reporting
 
         /// <summary>
         /// relative deviation of both Energiemengen within <see cref="referenceTimeFrame"/>.
-        /// Null iff the <see cref="Verbrauch.wert"/> of <see cref="verbrauchReference"/> is 0.
+        /// Null iff the <see cref="Verbrauch.Wert"/> of <see cref="verbrauchReference"/> is 0.
         /// </summary>
         /// <example>
         /// 0 = equal consumption
@@ -55,7 +55,7 @@ namespace BO4E.Reporting
         public Verbrauch verbrauchOther;
 
         /// <summary>
-        /// absolute value of the difference between <see cref="Verbrauch.wert"/> of <see cref="verbrauchReference"/> and <see cref="verbrauchOther"/>
+        /// absolute value of the difference between <see cref="Verbrauch.Wert"/> of <see cref="verbrauchReference"/> and <see cref="verbrauchOther"/>
         /// </summary>
         [JsonProperty(Required = Required.Always, Order = 8)]
         public decimal absoluteDeviation;

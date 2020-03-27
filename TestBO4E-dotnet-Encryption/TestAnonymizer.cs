@@ -159,12 +159,12 @@ namespace TestBO4EExtensions.Encryption
                {
                    new Verbrauch()
                    {
-                       wert = 123.456M,
-                       wertermittlungsverfahren=BO4E.ENUM.Wertermittlungsverfahren.MESSUNG,
-                       startdatum=new DateTime(2019,1,1,0,0,0,DateTimeKind.Utc),
-                       enddatum = new DateTime(2019,2,1,0,0,0,DateTimeKind.Utc),
-                       obiskennzahl="1-2-3-4",
-                       einheit =BO4E.ENUM.Mengeneinheit.KWH
+                       Wert = 123.456M,
+                       Wertermittlungsverfahren=BO4E.ENUM.Wertermittlungsverfahren.MESSUNG,
+                       Startdatum=new DateTime(2019,1,1,0,0,0,DateTimeKind.Utc),
+                       Enddatum = new DateTime(2019,2,1,0,0,0,DateTimeKind.Utc),
+                       Obiskennzahl="1-2-3-4",
+                       Einheit =BO4E.ENUM.Mengeneinheit.KWH
                    }
                }
             };
@@ -181,8 +181,8 @@ namespace TestBO4EExtensions.Encryption
             Assert.AreNotEqual(em.lokationsId, result.lokationsId);
             Assert.IsTrue(Messlokation.ValidateId(result.lokationsId));
             Assert.AreEqual(em.energieverbrauch.Count, result.energieverbrauch.Count);
-            Assert.IsNotNull(result.energieverbrauch[1].userProperties["zw"]);
-            Assert.AreNotEqual(em.energieverbrauch[1].userProperties["zw"].Value<string>(), result.energieverbrauch[1].userProperties["zw"].Value<string>());
+            Assert.IsNotNull(result.energieverbrauch[1].UserProperties["zw"]);
+            Assert.AreNotEqual(em.energieverbrauch[1].UserProperties["zw"].Value<string>(), result.energieverbrauch[1].UserProperties["zw"].Value<string>());
             Assert.IsTrue(Anonymizer.HasHashedKey(result));
 
             // do not hash zw user property
@@ -192,8 +192,8 @@ namespace TestBO4EExtensions.Encryption
             Assert.AreNotEqual(em.lokationsId, result.lokationsId);
             Assert.IsTrue(Messlokation.ValidateId(result.lokationsId));
             Assert.AreEqual(em.energieverbrauch.Count, result.energieverbrauch.Count);
-            Assert.IsNotNull(result.energieverbrauch[1].userProperties["zw"]);
-            Assert.AreEqual(em.energieverbrauch[1].userProperties["zw"].Value<string>(), result.energieverbrauch[1].userProperties["zw"].Value<string>());
+            Assert.IsNotNull(result.energieverbrauch[1].UserProperties["zw"]);
+            Assert.AreEqual(em.energieverbrauch[1].UserProperties["zw"].Value<string>(), result.energieverbrauch[1].UserProperties["zw"].Value<string>());
             Assert.IsTrue(Anonymizer.HasHashedKey(result));
         }
 
@@ -209,10 +209,10 @@ namespace TestBO4EExtensions.Encryption
                {
                    new Verbrauch()
                    {
-                       wert = 123.456M,
-                       wertermittlungsverfahren=BO4E.ENUM.Wertermittlungsverfahren.MESSUNG,
-                       obiskennzahl="1-2-3-4",
-                       einheit =BO4E.ENUM.Mengeneinheit.KWH
+                       Wert = 123.456M,
+                       Wertermittlungsverfahren=BO4E.ENUM.Wertermittlungsverfahren.MESSUNG,
+                       Obiskennzahl="1-2-3-4",
+                       Einheit =BO4E.ENUM.Mengeneinheit.KWH
                    }
                }
             };
@@ -327,12 +327,12 @@ namespace TestBO4EExtensions.Encryption
                {
                    new Verbrauch()
                    {
-                       wert = 123.456M,
-                       wertermittlungsverfahren=BO4E.ENUM.Wertermittlungsverfahren.MESSUNG,
-                       startdatum=new DateTime(2019,1,1,0,0,0,DateTimeKind.Utc),
-                       enddatum = new DateTime(2019,2,1,0,0,0,DateTimeKind.Utc),
-                       obiskennzahl="1-2-3-4",
-                       einheit =BO4E.ENUM.Mengeneinheit.KWH
+                       Wert = 123.456M,
+                       Wertermittlungsverfahren=BO4E.ENUM.Wertermittlungsverfahren.MESSUNG,
+                       Startdatum=new DateTime(2019,1,1,0,0,0,DateTimeKind.Utc),
+                       Enddatum = new DateTime(2019,2,1,0,0,0,DateTimeKind.Utc),
+                       Obiskennzahl="1-2-3-4",
+                       Einheit =BO4E.ENUM.Mengeneinheit.KWH
                    }
                }
             };

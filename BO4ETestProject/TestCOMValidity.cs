@@ -14,11 +14,11 @@ namespace TestBO4E
             Assert.IsFalse(v1.IsValid());
             Verbrauch v2 = new Verbrauch
             {
-                startdatum = new DateTime(),
-                enddatum = new DateTime(),
-                einheit = BO4E.ENUM.Mengeneinheit.ANZAHL,
-                wert = (decimal)123.456,
-                obiskennzahl = "asd"
+                Startdatum = new DateTime(),
+                Enddatum = new DateTime(),
+                Einheit = BO4E.ENUM.Mengeneinheit.ANZAHL,
+                Wert = (decimal)123.456,
+                Obiskennzahl = "asd"
             };
             Assert.IsTrue(v2.IsValid());
         }

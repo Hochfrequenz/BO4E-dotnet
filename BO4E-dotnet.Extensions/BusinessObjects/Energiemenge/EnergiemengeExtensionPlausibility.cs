@@ -79,21 +79,21 @@ namespace BO4E.Extensions.BusinessObjects.Energiemenge
                 }
 
                 Verbrauch vReference = emReference.energieverbrauch.FirstOrDefault(); // copies obiskennzahl, wertermittlungsverfahren...
-                vReference.wert = consumptionReference.Item1;
-                vReference.einheit = consumptionReference.Item2;
-                vReference.startdatum = timeframe.Start;
-                vReference.enddatum = timeframe.End;
+                vReference.Wert = consumptionReference.Item1;
+                vReference.Einheit = consumptionReference.Item2;
+                vReference.Startdatum = timeframe.Start;
+                vReference.Enddatum = timeframe.End;
 
                 Verbrauch vOther = emOther.energieverbrauch.FirstOrDefault(); // copies obiskennzahl, wertermittlungsverfahren...
-                vOther.wert = consumptionOther.Item1;
-                vOther.einheit = consumptionOther.Item2;
-                vOther.startdatum = timeframe.Start;
-                vOther.enddatum = timeframe.End;
+                vOther.Wert = consumptionOther.Item1;
+                vOther.Einheit = consumptionOther.Item2;
+                vOther.Startdatum = timeframe.Start;
+                vOther.Enddatum = timeframe.End;
 
                 var pr = new PlausibilityReport()
                 {
                     lokationsId = emReference.lokationsId,
-                    referenceTimeFrame = new BO4E.COM.Zeitraum() { startdatum = timeframe.Start, enddatum = timeframe.End },
+                    referenceTimeFrame = new BO4E.COM.Zeitraum() { Startdatum = timeframe.Start, Enddatum = timeframe.End },
                     verbrauchReference = vReference,
                     verbrauchOther = vOther,
                     absoluteDeviation = Math.Abs(absoluteDeviation),
@@ -118,7 +118,7 @@ namespace BO4E.Extensions.BusinessObjects.Energiemenge
         /// <returns></returns>
         public static PlausibilityReport GetPlausibilityReport(this BO4E.BO.Energiemenge energiemenge, PlausibilityReport.PlausibilityReportConfiguration config)
         {
-            return energiemenge.GetPlausibilityReport(config.other, new TimeRange(config.timeframe.startdatum.Value, config.timeframe.enddatum.Value), config.ignoreLocation);
+            return energiemenge.GetPlausibilityReport(config.other, new TimeRange(config.timeframe.Startdatum.Value, config.timeframe.Enddatum.Value), config.ignoreLocation);
         }
 
         /// <summary>
@@ -139,8 +139,8 @@ namespace BO4E.Extensions.BusinessObjects.Energiemenge
                 var localConfig = JsonConvert.DeserializeObject<PlausibilityReportConfiguration>(JsonConvert.SerializeObject(config));
                 localConfig.timeframe = new Zeitraum()
                 {
-                    startdatum = range.Start,
-                    enddatum = range.End
+                    Startdatum = range.Start,
+                    Enddatum = range.End
                 };
                 var subResult = GetPlausibilityReport(em, localConfig);
                 result.Add(range, subResult);
@@ -167,8 +167,8 @@ namespace BO4E.Extensions.BusinessObjects.Energiemenge
             }
             var slices = GetLocalDailySlices(new TimeRange()
             {
-                Start = config.timeframe.startdatum.Value,
-                End = config.timeframe.enddatum.Value
+                Start = config.timeframe.Startdatum.Value,
+                End = config.timeframe.Enddatum.Value
             });
             return em.GetSlicedPlausibilityReports(config, slices);
         }
@@ -191,8 +191,8 @@ namespace BO4E.Extensions.BusinessObjects.Energiemenge
             }
             var slices = GetLocalMonthlySlices(new TimeRange()
             {
-                Start = config.timeframe.startdatum.Value,
-                End = config.timeframe.enddatum.Value
+                Start = config.timeframe.Startdatum.Value,
+                End = config.timeframe.Enddatum.Value
             });
             return em.GetSlicedPlausibilityReports(config, slices);
         }

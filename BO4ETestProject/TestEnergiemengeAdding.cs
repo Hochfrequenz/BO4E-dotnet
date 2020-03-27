@@ -19,12 +19,12 @@ namespace TestBO4E
                 {
                     new BO4E.COM.Verbrauch()
                     {
-                        einheit = BO4E.ENUM.Mengeneinheit.ANZAHL,
-                        obiskennzahl = "1-2-3",
-                        enddatum = new DateTime(),
-                        startdatum = new DateTime(),
-                        wert = (decimal)123.456,
-                        wertermittlungsverfahren= BO4E.ENUM.Wertermittlungsverfahren.PROGNOSE
+                        Einheit = BO4E.ENUM.Mengeneinheit.ANZAHL,
+                        Obiskennzahl = "1-2-3",
+                        Enddatum = new DateTime(),
+                        Startdatum = new DateTime(),
+                        Wert = (decimal)123.456,
+                        Wertermittlungsverfahren= BO4E.ENUM.Wertermittlungsverfahren.PROGNOSE
                     }
                 }
             };
@@ -36,12 +36,12 @@ namespace TestBO4E
                 {
                     new BO4E.COM.Verbrauch()
                     {
-                        einheit = BO4E.ENUM.Mengeneinheit.ANZAHL,
-                        obiskennzahl = "4-5-6",
-                        enddatum = new DateTime(),
-                        startdatum = new DateTime(),
-                        wert = (decimal)123.456,
-                        wertermittlungsverfahren= BO4E.ENUM.Wertermittlungsverfahren.PROGNOSE
+                        Einheit = BO4E.ENUM.Mengeneinheit.ANZAHL,
+                        Obiskennzahl = "4-5-6",
+                        Enddatum = new DateTime(),
+                        Startdatum = new DateTime(),
+                        Wert = (decimal)123.456,
+                        Wertermittlungsverfahren= BO4E.ENUM.Wertermittlungsverfahren.PROGNOSE
                     }
                 }
             };

@@ -36,21 +36,21 @@ namespace TestBO4EExtensions
                 {
                     new BO4E.COM.Verbrauch()
                     {
-                        einheit = BO4E.ENUM.Mengeneinheit.KWH,
-                        wert = 123.456M,
-                        obiskennzahl = "dei vadder",
-                        wertermittlungsverfahren = BO4E.ENUM.Wertermittlungsverfahren.MESSUNG,
-                        startdatum = new System.DateTime(2018,12,31,23,0,0,0, System.DateTimeKind.Utc),
-                        enddatum = new System.DateTime(2019,12,31,23,0,0,0,System.DateTimeKind.Utc)
+                        Einheit = BO4E.ENUM.Mengeneinheit.KWH,
+                        Wert = 123.456M,
+                        Obiskennzahl = "dei vadder",
+                        Wertermittlungsverfahren = BO4E.ENUM.Wertermittlungsverfahren.MESSUNG,
+                        Startdatum = new System.DateTime(2018,12,31,23,0,0,0, System.DateTimeKind.Utc),
+                        Enddatum = new System.DateTime(2019,12,31,23,0,0,0,System.DateTimeKind.Utc)
                     },
                     new BO4E.COM.Verbrauch()
                     {
-                        einheit = BO4E.ENUM.Mengeneinheit.KWH,
-                        wert = 789.123M,
-                        obiskennzahl = "dei mudder",
-                        wertermittlungsverfahren = BO4E.ENUM.Wertermittlungsverfahren.MESSUNG,
-                        startdatum = new System.DateTime(2019,12,31,23,0,0,0, System.DateTimeKind.Utc),
-                        enddatum = new System.DateTime(2020,12,31,23,0,0,0,System.DateTimeKind.Utc)
+                        Einheit = BO4E.ENUM.Mengeneinheit.KWH,
+                        Wert = 789.123M,
+                        Obiskennzahl = "dei mudder",
+                        Wertermittlungsverfahren = BO4E.ENUM.Wertermittlungsverfahren.MESSUNG,
+                        Startdatum = new System.DateTime(2019,12,31,23,0,0,0, System.DateTimeKind.Utc),
+                        Enddatum = new System.DateTime(2020,12,31,23,0,0,0,System.DateTimeKind.Utc)
                     }
                 }
             };

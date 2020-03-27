@@ -1,7 +1,10 @@
 using System;
+
 using BO4E.ENUM;
 using BO4E.meta;
+
 using Newtonsoft.Json;
+
 using ProtoBuf;
 
 namespace BO4E.COM
@@ -12,20 +15,20 @@ namespace BO4E.COM
     {
         /// <summary>Die Messlokations-ID, früher die Zählpunktbezeichnung.</summary>
         [DataCategory(DataCategory.POD)]
-        [JsonProperty(Required = Required.Always)]
+        [JsonProperty(PropertyName = "messlokationsId", Required = Required.Always)]
         [ProtoMember(3)]
-        public string messlokationsId;
+        public string MesslokationsId { get; set; }
         /// <summary>Die Operation, mit der eine Messung an dieser Lokation für den Gesamtverbrauch der Marktlokation verrechnet wird. Beispielsweise bei einer Untermessung, wird der Verbauch der Untermessung subtrahiert. Details <see cref="ArithmetischeOperation" /></summary>
-        [JsonProperty(Required = Required.Default)] // Default weil Hochfrequenz/energy-service-hub#35
+        [JsonProperty(PropertyName = "arithmetik", Required = Required.Default)] // Default weil Hochfrequenz/energy-service-hub#35
         [ProtoMember(4)]
-        public ArithmetischeOperation? arithmetik;
+        public ArithmetischeOperation? Arithmetik { get; set; }
         /// <summary>Zeitpunkt, ab dem die Messlokation zur Marktlokation gehört</summary>
-        [JsonProperty(Required = Required.Default)]
+        [JsonProperty(PropertyName = "gueltigSeit", Required = Required.Default)]
         [ProtoMember(5)]
-        public DateTime? gueltigSeit;
+        public DateTime? GueltigSeit { get; set; }
         /// <summary>Zeitpunkt, bis zu dem die Messlokation zur Marktlokation gehört</summary>
-        [JsonProperty(Required = Required.Default)]
+        [JsonProperty(PropertyName = "gueltigBis", Required = Required.Default)]
         [ProtoMember(6)]
-        public DateTime? gueltigBis;
+        public DateTime? GueltigBis { get; set; }
     }
 }

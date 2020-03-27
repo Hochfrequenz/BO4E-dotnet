@@ -1,6 +1,8 @@
 ﻿using System;
+
 using BO4E.ENUM;
 using BO4E.meta;
+
 using ProtoBuf;
 
 namespace BO4E.COM
@@ -43,7 +45,7 @@ namespace BO4E.COM
         public PhysikalischerWert(decimal wert, string einheitString)
         {
             this.wert = wert;
-            if(!Enum.TryParse<Mengeneinheit>(einheitString, true, out this.einheit))
+            if (!Enum.TryParse<Mengeneinheit>(einheitString, true, out this.einheit))
             {
                 throw new ArgumentException($"'{einheitString}' is not a valid Mengeneinheit");
             }

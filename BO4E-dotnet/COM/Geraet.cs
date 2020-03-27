@@ -1,4 +1,5 @@
 using Newtonsoft.Json;
+
 using ProtoBuf;
 
 namespace BO4E.COM
@@ -8,12 +9,12 @@ namespace BO4E.COM
     public class Geraet : COM
     {
         /// <summary>Die auf dem Geräte aufgedruckte Nummer, die vom MSB vergeben wird.</summary>
-        [JsonProperty(Required = Required.Default)]
+        [JsonProperty(PropertyName = "geraetenummer", Required = Required.Default)]
         [ProtoMember(3)]
-        public string geraetenummer;
-        /// <summary>Festlegung der Eigenschaften des Gerätes. Z.B. Wandler MS/NS. Details <see cref="Geraeteeigenschaften" /></summary>
-        [JsonProperty(Required = Required.Default)]
+        public string Geraetenummer { get; set; }
+        /// <summary>Festlegung der Eigenschaften des Gerätes. Z.B. Wandler MS/NS. Details <see cref="BO4E.COM.Geraeteeigenschaften" /></summary>
+        [JsonProperty(PropertyName = "geraeteeigenschaften", Required = Required.Default)]
         [ProtoMember(4)]
-        public Geraeteeigenschaften geraeteeigenschaften;
+        public Geraeteeigenschaften Geraeteeigenschaften { get; set; }
     }
 }
