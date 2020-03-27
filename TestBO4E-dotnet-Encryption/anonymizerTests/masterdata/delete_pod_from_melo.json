@@ -4,7 +4,7 @@
   },
   "input": {
     "boTyp": "MESSLOKATION",
-    "messLokationsId": "DEIMUDDERIHRMELOID12345",
+    "messlokationsId": "DEIMUDDERIHRMELOID12345",
     "sparte": "STROM",
     "messadresse": {
       "ort": "Leipzig",
@@ -15,6 +15,6 @@
   },
   "assertions": {
     "$['MESSLOKATION'][0]['messadresse']['strasse']": "Lindenauer Markt",
-    "$['MESSLOKATION'][0]['messLokationsId']": "|null|"
+    "$['MESSLOKATION'][0]['messlokationsId']": "|null|"
   }
 }
