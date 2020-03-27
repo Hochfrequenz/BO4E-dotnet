@@ -1,7 +1,7 @@
 ﻿using BO4E.BO;
 using BO4E.ENUM;
+
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Newtonsoft.Json;
 
 namespace TestBO4E
 {
@@ -46,7 +46,7 @@ namespace TestBO4E
             };
             Assert.IsFalse(malo.IsValid()); // because the obligatory bilanzierungsmethode is not set
             malo.Bilanzierungsmethode = Bilanzierungsmethode.SLP;
-            Assert.IsTrue(malo.IsValid(checkId:false)); // because all obligatory fields are set
+            Assert.IsTrue(malo.IsValid(checkId: false)); // because all obligatory fields are set
             Assert.IsFalse(malo.IsValid()); // but the marklokationsId is wrong
             malo.marktlokationsId = "51238696781"; // matches the appropriate regex and has the right check sum
             Assert.IsTrue(malo.IsValid());

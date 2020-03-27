@@ -1,10 +1,12 @@
 
 using System;
 using System.IO;
-using System.Linq;
+
 using BO4E.BO;
 using BO4E.COM;
+
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+
 using ProtoBuf;
 
 namespace TestBO4E

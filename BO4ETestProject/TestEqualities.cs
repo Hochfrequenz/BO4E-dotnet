@@ -1,9 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
+
 using BO4E.BO;
 using BO4E.COM;
 using BO4E.ENUM;
+
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+
 using Newtonsoft.Json;
 
 namespace TestBO4E
@@ -53,7 +56,7 @@ namespace TestBO4E
             Energiemenge em2 = new Energiemenge();
             Assert.ThrowsException<ArgumentException>(() => em1.Equals(em2));
             Assert.AreEqual(em1.GetHashCode(), em2.GetHashCode());
-             
+
             em1.lokationsId = "DE1234";
             em2.lokationsId = "DE1234";
 

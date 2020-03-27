@@ -2,8 +2,8 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
+
 using Newtonsoft.Json.Linq;
-using BO4E.BO;
 
 namespace BO4E.Extensions.BusinessObjects.Benachrichtigung
 {
@@ -34,12 +34,12 @@ namespace BO4E.Extensions.BusinessObjects.Benachrichtigung
         /// <returns></returns>
         public static bool Has(this BO4E.BO.Benachrichtigung b, BO4E.COM.GenericStringStringInfo gssi)
         {
-            if (b.infos == null || b.infos.Count == 0)
+            if (b.Infos == null || b.Infos.Count == 0)
             {
                 return false;
             }
             // ToDo für Hamid: Bitte prüfen, warum Contains false zurückliefert.
-            return (b.infos.Where(m => m.keyColumn == gssi.keyColumn && m.value == gssi.value).Count() > 0);
+            return (b.Infos.Where(m => m.keyColumn == gssi.keyColumn && m.value == gssi.value).Count() > 0);
         }
 
         /// <summary>
@@ -50,11 +50,11 @@ namespace BO4E.Extensions.BusinessObjects.Benachrichtigung
         /// <returns>true if key is in <see cref="BO4E.BO.Benachrichtigung.infos"/></returns>
         public static bool Has(this BO4E.BO.Benachrichtigung b, string key)
         {
-            if (b.infos == null || b.infos.Count == 0)
+            if (b.Infos == null || b.Infos.Count == 0)
             {
                 return false;
             }
-            return (b.infos.Where(gssi => gssi.keyColumn == key).Count() > 0);
+            return (b.Infos.Where(gssi => gssi.keyColumn == key).Count() > 0);
         }
 
         /// <summary>
@@ -73,7 +73,7 @@ namespace BO4E.Extensions.BusinessObjects.Benachrichtigung
             {
                 return passByDefault;
             }
-            foreach (var info in b.infos.Where(gssi => gssi.keyColumn == keyName))
+            foreach (var info in b.Infos.Where(gssi => gssi.keyColumn == keyName))
             {
                 try
                 {
@@ -104,13 +104,13 @@ namespace BO4E.Extensions.BusinessObjects.Benachrichtigung
         // ToDo: make method generic MoveInfosTouserProperties<boT>(...)
         public static void MoveInfosToUserProperties(this BO4E.BO.Benachrichtigung b, bool overwriteExistingKeys = false)
         {
-            if (b.infos != null && b.infos.Count > 0)
+            if (b.Infos != null && b.Infos.Count > 0)
             {
                 if (b.UserProperties == null)
                 {
                     b.UserProperties = new Dictionary<string, JToken>();
                 }
-                foreach (var info in b.infos)
+                foreach (var info in b.Infos)
                 {
                     if (b.UserProperties.ContainsKey(info.keyColumn) && overwriteExistingKeys)
                     {
@@ -118,7 +118,7 @@ namespace BO4E.Extensions.BusinessObjects.Benachrichtigung
                     }
                     b.UserProperties.Add(info.keyColumn, info.value); // might throw exception if key exists and !overwriteExistingKeys. That's ok.
                 }
-                b.infos = null; // set to null after all elements have been moved
+                b.Infos = null; // set to null after all elements have been moved
             }
         }
     }

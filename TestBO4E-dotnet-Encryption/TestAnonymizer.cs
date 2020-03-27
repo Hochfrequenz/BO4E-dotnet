@@ -347,12 +347,10 @@ namespace TestBO4EExtensions.Encryption
             var conf = new AnonymizerConfiguration();
             conf.SetOption(DataCategory.POD, AnonymizerApproach.HASH);
 
-            using (Anonymizer anonymizer = new Anonymizer(conf))
-            {
-                var hashedEm = anonymizer.ApplyOperations<Energiemenge>(em);
-                var hashedMelo = anonymizer.ApplyOperations<Messlokation>(melo);
-                Assert.AreEqual(hashedEm.lokationsId, hashedMelo.messlokationsId);
-            }
+            using Anonymizer anonymizer = new Anonymizer(conf);
+            var hashedEm = anonymizer.ApplyOperations<Energiemenge>(em);
+            var hashedMelo = anonymizer.ApplyOperations<Messlokation>(melo);
+            Assert.AreEqual(hashedEm.lokationsId, hashedMelo.messlokationsId);
         }
 
         [TestMethod]

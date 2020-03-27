@@ -1,9 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
+
 using BO4E.BO;
 using BO4E.COM;
 using BO4E.Extensions.BusinessObjects.Benachrichtigung;
+
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 
@@ -17,9 +20,9 @@ namespace TestBO4EExtensions
         {
             Benachrichtigung b = new Benachrichtigung()
             {
-                benachrichtigungsId = "1234",
+                BenachrichtigungsId = "1234",
                 Bearbeiter = "dei mudder",
-                infos = new List<GenericStringStringInfo>()
+                Infos = new List<GenericStringStringInfo>()
                 {
                     new GenericStringStringInfo() { keyColumn = "ads", value = "xyz" },
                     new GenericStringStringInfo() { keyColumn = "null", value = null },
@@ -47,7 +50,7 @@ namespace TestBO4EExtensions
             b.MoveInfosToUserProperties();
             Assert.IsNotNull(b.UserProperties);
             Assert.IsTrue(b.UserProperties.ContainsKey("MESSLOKATIONSID"));
-            Assert.IsNull(b.infos);
+            Assert.IsNull(b.Infos);
         }
 
         [TestMethod]
@@ -63,9 +66,9 @@ namespace TestBO4EExtensions
         {
             Benachrichtigung b = JsonConvert.DeserializeObject<Benachrichtigung>("{\"versionStruktur\":1,\"boTyp\":\"BENACHRICHTIGUNG\",\"benachrichtigungsId\":\"469568\",\"prioritaet\":2,\"bearbeitungsstatus\":1,\"kurztext\":\"Manuelles \u00dcberschreiben von Profilwerten\",\"erstellungsZeitpunkt\":\"2019-04-02T13:35:03Z\",\"kategorie\":\"ZE01\",\"bearbeiter\":\"SCHLEBDA\",\"notizen\":[],\"deadline\":null,\"aufgaben\":[{\"aufgabenId\":\"OVERWRITE\",\"beschreibung\":null,\"deadline\":null,\"ausgefuehrt\":true,\"ausfuehrungsdatum\":null,\"ausfuehrender\":null,\"ccat\":\"ZE01\",\"objtype\":\"ZISUPROFIL\"},{\"aufgabenId\":\"DISPLAY\",\"beschreibung\":null,\"deadline\":null,\"ausgefuehrt\":true,\"ausfuehrungsdatum\":null,\"ausfuehrender\":null,\"ccat\":\"ZE01\",\"objtype\":\"ZISUPROFIL\"}],\"infos\":null,\"MESS\":\"9977768000005\",\"MESSLOKATIONSID\":\"DE0003604763800000000000010376811\",\"TIMESPAN_FROM\":\"2019-03-11T23:30:00Z\",\"TIMESPAN_TO\":\"2019-03-12T22:59:59Z\"}");
             Assert.IsTrue(b.UserProperties.TryGetValue("TIMESPAN_FROM", out JToken jtLower));
-            var lower = jtLower.Value<DateTime>();
+            _ = jtLower.Value<DateTime>();
             Assert.IsTrue(b.UserProperties.TryGetValue("TIMESPAN_TO", out JToken jtUpper));
-            var upper = jtUpper.Value<DateTime>();
+            _ = jtUpper.Value<DateTime>();
         }
     }
 }

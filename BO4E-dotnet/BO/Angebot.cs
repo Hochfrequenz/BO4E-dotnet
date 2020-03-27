@@ -110,6 +110,6 @@ namespace BO4E.BO
         [ProtoMember(13)]
         [DataCategory(DataCategory.FINANCE)]
         [MinLength(1)]
-        public List<Angebotsvariante> Varianten { get; set; };
+        public List<Angebotsvariante> Varianten { get; set; }
     }
 }

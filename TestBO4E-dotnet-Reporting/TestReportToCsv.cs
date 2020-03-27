@@ -1,10 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Globalization;
 using System.Linq;
 using System.Threading;
+
 using BO4E.Reporting;
+
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+
 using Newtonsoft.Json;
 
 namespace TestBO4E.Reporting
@@ -46,11 +48,6 @@ namespace TestBO4E.Reporting
             var Newresult = cr.ToCsv(';', true, Environment.NewLine, reihenfolge);
             lines = new List<string>(Newresult.Split(Environment.NewLine));
             Assert.AreEqual(2, lines.Count);
-            var headerline = lines.First();
-            //for (int i = 0; i < reihenfolge.Count; i++)
-            //{
-            //    Assert.AreEqual(reihenfolge[i].Values.First(), headerline.Split(";")[i]);
-            //}
             string decimalSeparator = Thread.CurrentThread.CurrentCulture.NumberFormat.NumberDecimalSeparator;
             Assert.AreEqual("DE12345;0" + decimalSeparator + "87;2019-01-01T00:00:00Z;2019-03-01T00:00:00Z;", lines[1]);
             var commaResult = cr.ToCsv(',', lineTerminator: Environment.NewLine, reihenfolge: reihenfolge);
