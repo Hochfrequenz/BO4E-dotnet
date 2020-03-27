@@ -2,11 +2,13 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
-using BO4E;
+
 using BO4E.BO;
 using BO4E.COM;
 using BO4E.meta;
+
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+
 using Newtonsoft.Json;
 
 namespace TestBO4E
@@ -15,13 +17,13 @@ namespace TestBO4E
     public class TestBOCOMDesign
     {
         [TestMethod]
-        public void TestNoPropertiesBo()
+        public void TestNoBOFields()
         {
-            foreach (var type in typeof(BusinessObject).Assembly.GetTypes().Where(t => t.BaseType == typeof(BusinessObject)))
+            foreach (var type in typeof(BusinessObject).Assembly.GetTypes().Where(t => typeof(BusinessObject).IsAssignableFrom(t)))
             {
-                var properties = type.GetProperties();
+                var fields = type.GetFields(BindingFlags.Public);
                 // properties are not allowed in BusinessObjects because a lot of features rely on fields!
-                Assert.AreEqual(0, properties.Count(), $"Type {type} must not contain properties but has: {String.Join(", ", properties.ToList())}");
+                Assert.AreEqual(0, fields.Count(), $"Type {type} must not contain fields but has: {string.Join(", ", fields.ToList())}");
             }
         }
 
@@ -35,13 +37,13 @@ namespace TestBO4E
         }
 
         [TestMethod]
-        public void TestNoPropertiesCOM()
+        public void TestNoCOMFields()
         {
-            foreach (var type in typeof(BO4E.COM.COM).Assembly.GetTypes().Where(t => t.BaseType == typeof(BO4E.COM.COM)))
+            foreach (var type in typeof(BO4E.COM.COM).Assembly.GetTypes().Where(t => typeof(COM).IsAssignableFrom(t)))
             {
-                var properties = type.GetProperties();
+                var fields = type.GetFields();
                 // properties are not allowed in COM Objects because a lot of features rely on fields!
-                Assert.AreEqual(0, properties.Count(), $"Type {type} must not contain properties but has: {String.Join(", ", properties.ToList())}");
+                Assert.AreEqual(0, fields.Count(), $"Type {type} must not contain fields but has: {string.Join(", ", fields.ToList())}");
             }
         }
 
@@ -91,8 +93,11 @@ namespace TestBO4E
         {
             foreach (var type in typeof(BusinessObject).Assembly.GetTypes().Where(t => t.BaseType == typeof(BusinessObject) && !t.IsAbstract && !NO_KEYS_WHITELIST.Contains(t)))
             {
-                var keyFields = BoMapper.GetAnnotatedFields(type, typeof(BoKey));
-                Assert.IsTrue(keyFields.Count() > 0, $"Type {type} is derived from {nameof(BusinessObject)} but has no [{nameof(BoKey)}] attribute.");
+                var keyProps = type.GetProperties()
+                    .Where(p => p.GetCustomAttributes(typeof(BoKey), false).Length > 0)
+                    .OrderBy(ap => ap.GetCustomAttribute<JsonPropertyAttribute>()?.Order)
+                    .ToArray<PropertyInfo>();
+                Assert.IsTrue(keyProps.Count() > 0, $"Type {type} is derived from {nameof(BusinessObject)} but has no [{nameof(BoKey)}] attribute.");
             }
         }
 
@@ -109,7 +114,7 @@ namespace TestBO4E
                         .Cast<JsonPropertyAttribute>()
                         .Any(jpa => jpa.Required == Required.Default)))
                 {
-                    if (Nullable.GetUnderlyingType(obligDefaultField.FieldType) != null || obligDefaultField.FieldType==typeof(string))
+                    if (Nullable.GetUnderlyingType(obligDefaultField.FieldType) != null || obligDefaultField.FieldType == typeof(string))
                     {
                         // it is already nullable. 
                         continue;

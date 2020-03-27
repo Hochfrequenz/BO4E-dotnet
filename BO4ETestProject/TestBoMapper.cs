@@ -176,7 +176,7 @@ namespace TestBO4E
             Energiemenge em = JsonConvert.DeserializeObject<Energiemenge>(json["input"].ToString(), LenientParsing.MOST_LENIENT.GetJsonSerializerSettings());
             if (TimeZoneInfo.Local == Verbrauch.CENTRAL_EUROPE_STANDARD_TIME)
             {
-                Assert.AreEqual(2, em.energieverbrauch.Count); // weil 2 verschiedene status
+                Assert.AreEqual(2, em.Energieverbrauch.Count); // weil 2 verschiedene status
             }
         }
 
@@ -206,11 +206,11 @@ namespace TestBO4E
                 json = JsonConvert.DeserializeObject<JObject>(jsonString);
             }
             Energiemenge em = JsonConvert.DeserializeObject<Energiemenge>(json["input"].ToString(), LenientParsing.MOST_LENIENT.GetJsonSerializerSettings());
-            Assert.AreEqual(4, em.energieverbrauch.Count);
-            Assert.AreEqual(59.0M, em.energieverbrauch[0].Wert);
-            Assert.AreEqual(58.0M, em.energieverbrauch[1].Wert);
-            Assert.AreEqual(57.0M, em.energieverbrauch[2].Wert);
-            Assert.AreEqual(57.123M, em.energieverbrauch[3].Wert);
+            Assert.AreEqual(4, em.Energieverbrauch.Count);
+            Assert.AreEqual(59.0M, em.Energieverbrauch[0].Wert);
+            Assert.AreEqual(58.0M, em.Energieverbrauch[1].Wert);
+            Assert.AreEqual(57.0M, em.Energieverbrauch[2].Wert);
+            Assert.AreEqual(57.123M, em.Energieverbrauch[3].Wert);
         }
 
         [TestMethod]
@@ -224,8 +224,8 @@ namespace TestBO4E
                 json = JsonConvert.DeserializeObject<JObject>(jsonString);
             }
             Energiemenge em = JsonConvert.DeserializeObject<Energiemenge>(json["input"].ToString(), LenientParsing.MOST_LENIENT.GetJsonSerializerSettings());
-            Assert.AreEqual(1.375000M, em.energieverbrauch.First().Wert);
-            Assert.AreEqual(1.2130000M, em.energieverbrauch.Last().Wert);
+            Assert.AreEqual(1.375000M, em.Energieverbrauch.First().Wert);
+            Assert.AreEqual(1.2130000M, em.Energieverbrauch.Last().Wert);
         }
 
         [TestMethod]

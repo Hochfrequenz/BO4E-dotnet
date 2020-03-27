@@ -28,13 +28,13 @@ enum Mengeneinheit {
    MWH = 2000000;
 }
 message Verbrauch {
-   optional .bcl.DateTime startdatum = 3;
-   optional .bcl.DateTime enddatum = 4;
-   optional Wertermittlungsverfahren wertermittlungsverfahren = 5 [default = PROGNOSE];
-   optional string obiskennzahl = 6;
-   optional .bcl.Decimal wert = 7 [default = 0];
-   optional Mengeneinheit einheit = 8 [default = 0];
-   optional Verbrauchsmengetyp type = 9;
+   optional .bcl.DateTime Startdatum = 3;
+   optional .bcl.DateTime Enddatum = 4;
+   optional Wertermittlungsverfahren Wertermittlungsverfahren = 5 [default = PROGNOSE];
+   optional string Obiskennzahl = 6;
+   optional .bcl.Decimal Wert = 7 [default = 0];
+   optional Mengeneinheit Einheit = 8 [default = 0];
+   optional Verbrauchsmengetyp Type = 9;
 }
 enum Verbrauchsmengetyp {
    ARBEITLEISTUNGTAGESPARAMETERABHMALO = 0;

@@ -9,16 +9,16 @@ enum Mengenoperator {
    GLEICH = 2;
 }
 message Region {
-   optional string bezeichnung = 4;
-   repeated Regionskriterium positivListe = 5;
-   repeated Regionskriterium negativListe = 6;
+   optional string Bezeichnung = 4;
+   repeated Regionskriterium PositivListe = 5;
+   repeated Regionskriterium NegativListe = 6;
 }
 message Regionskriterium {
-   optional Gueltigkeitstyp gueltigkeitstyp = 3 [default = NICHT_IN];
-   optional Sparte sparte = 4;
-   optional Mengenoperator mengenoperator = 5 [default = KLEINER_ALS];
-   optional Regionskriteriumtyp regionskriteriumtyp = 6 [default = BUNDESLANDKENNZIFFER];
-   optional string wert = 7;
+   optional Gueltigkeitstyp Gueltigkeitstyp = 3 [default = NICHT_IN];
+   optional Sparte Sparte = 4;
+   optional Mengenoperator Mengenoperator = 5 [default = KLEINER_ALS];
+   optional Regionskriteriumtyp Regionskriteriumtyp = 6 [default = BUNDESLANDKENNZIFFER];
+   optional string Wert = 7;
 }
 enum Regionskriteriumtyp {
    BUNDESLANDKENNZIFFER = 0;

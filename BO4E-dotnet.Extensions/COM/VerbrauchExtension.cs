@@ -314,8 +314,8 @@ namespace BO4E.Extensions.COM
         {
             PhysikalischerWert oldWert = new PhysikalischerWert(v.Wert, v.Einheit);
             PhysikalischerWert newWert = oldWert.ConvertToUnit(mengeneinheit);
-            v.Wert = newWert.wert;
-            v.Einheit = newWert.einheit;
+            v.Wert = newWert.Wert;
+            v.Einheit = newWert.Einheit;
         }
 
         /// <summary>

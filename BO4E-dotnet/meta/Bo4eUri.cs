@@ -6,7 +6,9 @@ using System.Globalization;
 using System.Linq;
 using System.Reflection;
 using System.Text.RegularExpressions;
+
 using BO4E.BO;
+
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 
@@ -20,7 +22,7 @@ namespace BO4E.meta
     {
         private const string BO4E_SCHEME = "bo4e://";
         private const string NULL_KEY_PLACEHOLDER = "~"; // an allowed character in URLs that is not escaped
-        private static readonly Regex FILTER_AND_PATTERN = new Regex(@"\s*(?<key>\w+)\s*(?:=|eq)\s*(['""]|)(?<value>\w+)\1\s*(?:and)?\s*", RegexOptions.IgnoreCase|RegexOptions.Compiled); // \1 backreferences the '" group (in c#, would be \2 in other parsers)
+        private static readonly Regex FILTER_AND_PATTERN = new Regex(@"\s*(?<key>\w+)\s*(?:=|eq)\s*(['""]|)(?<value>\w+)\1\s*(?:and)?\s*", RegexOptions.IgnoreCase | RegexOptions.Compiled); // \1 backreferences the '" group (in c#, would be \2 in other parsers)
 
         /// <summary>
         /// Instantiates a Bo4eUri object. Throws Argument(Null)Exception if URI is null, not well formed (<see cref="System.Uri.IsWellFormedOriginalString"/> or doesn't match the bo4e uri regex.
@@ -141,38 +143,38 @@ namespace BO4E.meta
             Bo4eUri baseUri = new Bo4eUri(baseUriString);
             string relativeUriString = string.Empty;
 
-            foreach (FieldInfo keyField in GetKeyFields(bo))
+            foreach (PropertyInfo keyProp in GetKeyFields(bo))
             {
                 //relativeUriString += keyField.Name; // line is useful for debugging
-                if (keyField.GetValue(bo) != null)
+                if (keyProp.GetValue(bo) != null)
                 {
-                    if (keyField.GetValue(bo).GetType() == typeof(string))
+                    if (keyProp.GetValue(bo).GetType() == typeof(string))
                     {
-                        if (keyField.GetValue(bo).ToString() == string.Empty)
+                        if (keyProp.GetValue(bo).ToString() == string.Empty)
                         {
                             relativeUriString += NULL_KEY_PLACEHOLDER + "/";
                         }
                         else
                         {
-                            relativeUriString += keyField.GetValue(bo) + "/";
+                            relativeUriString += keyProp.GetValue(bo) + "/";
                         }
                     }
-                    else if (keyField.GetValue(bo).GetType() == typeof(int))
+                    else if (keyProp.GetValue(bo).GetType() == typeof(int))
                     {
-                        relativeUriString += keyField.GetValue(bo).ToString() + "/";
+                        relativeUriString += keyProp.GetValue(bo).ToString() + "/";
                     }
-                    else if (keyField.GetValue(bo) is Enum)
+                    else if (keyProp.GetValue(bo) is Enum)
                     {
-                        relativeUriString += keyField.GetValue(bo).ToString() + "/";
+                        relativeUriString += keyProp.GetValue(bo).ToString() + "/";
                     }
-                    else if (keyField.GetValue(bo).GetType().IsSubclassOf(typeof(BusinessObject)))
+                    else if (keyProp.GetValue(bo).GetType().IsSubclassOf(typeof(BusinessObject)))
                     {
-                        BusinessObject innerBo = (BusinessObject)keyField.GetValue(bo);
+                        BusinessObject innerBo = (BusinessObject)keyProp.GetValue(bo);
                         relativeUriString += GetUri(innerBo).GetComponents(UriComponents.Path, UriFormat.UriEscaped).ToString();
                     }
                     else
                     {
-                        throw new NotImplementedException($"Using {keyField.GetValue(bo).GetType()} as [BoKey] is not supported yet.");
+                        throw new NotImplementedException($"Using {keyProp.GetValue(bo).GetType()} as [BoKey] is not supported yet.");
                     }
                 }
                 else
@@ -214,40 +216,43 @@ namespace BO4E.meta
             }
         }
 
-        private static IList<FieldInfo> GetKeyFields(BusinessObject bo)
+        private static IList<PropertyInfo> GetKeyFields(BusinessObject bo)
         {
             if (bo == null)
             {
                 throw new ArgumentNullException("Business Object must not be null.");
             }
-            return GetKeyFields(bo.GetType());
+            return GetKeyProperties(bo.GetType());
         }
 
-        private static IList<FieldInfo> GetKeyFields(Type boType)
+        private static IList<PropertyInfo> GetKeyProperties(Type boType)
         {
-            FieldInfo[] allKeyFields = BoMapper.GetAnnotatedFields(boType, typeof(BoKey));
-            if (allKeyFields.Length == 0)
+            var allKeyProperties = boType.GetProperties()
+                .Where(p => p.GetCustomAttributes(typeof(BoKey), false).Length > 0)
+                .OrderBy(af => af.GetCustomAttribute<JsonPropertyAttribute>()?.Order)
+                .ToArray<PropertyInfo>();
+            if (allKeyProperties.Length == 0)
             {
                 throw new NotImplementedException($"Business Object {boType.Name} has no [BoKey] defined => can't create URI.");
             }
-            IList<FieldInfo> ownKeyFields = new List<FieldInfo>();
+            IList<PropertyInfo> ownKeyProps = new List<PropertyInfo>();
             bool ignoreInheritedFields = false; // default
-            foreach (FieldInfo keyField in allKeyFields)
+            foreach (var keyProp in allKeyProperties)
             {
-                if (keyField.DeclaringType == boType
-                    && keyField.GetCustomAttribute<BoKey>().IgnoreInheritedKeys)
+                if (keyProp.DeclaringType == boType
+                    && keyProp.GetCustomAttribute<BoKey>().IgnoreInheritedKeys)
                 {
                     ignoreInheritedFields = true;
-                    ownKeyFields.Add(keyField);
+                    ownKeyProps.Add(keyProp);
                 }
             }
             if (ignoreInheritedFields)
             {
-                return ownKeyFields;
+                return ownKeyProps;
             }
             else
             {
-                return allKeyFields.ToList<FieldInfo>();
+                return allKeyProperties.ToList<PropertyInfo>();
             }
         }
 
@@ -279,13 +284,13 @@ namespace BO4E.meta
             // business objects is the same as the order of the BO key values encoded in the URI
             // path segments.
 
-            foreach (FieldInfo keyField in GetKeyFields(boType))
+            foreach (PropertyInfo keyProp in GetKeyProperties(boType))
             {
-                string keyFieldName = keyField.Name;
-                JsonPropertyAttribute jpa = keyField.GetCustomAttribute<JsonPropertyAttribute>();
+                string keyPropName = keyProp.Name;
+                JsonPropertyAttribute jpa = keyProp.GetCustomAttribute<JsonPropertyAttribute>();
                 if (jpa != null && jpa.PropertyName != null)
                 {
-                    keyFieldName = jpa.PropertyName;
+                    keyPropName = jpa.PropertyName;
                 }
                 string keyValue;
                 try
@@ -300,18 +305,18 @@ namespace BO4E.meta
                 {
                     keyValue = keyValue.Substring(0, keyValue.Length - 1);
                 }
-                if (keyField.FieldType == typeof(string))
+                if (keyProp.PropertyType == typeof(string))
                 {
                     if (keyValue == NULL_KEY_PLACEHOLDER)
                     {
-                        result.Add(keyFieldName, null);
+                        result.Add(keyPropName, null);
                     }
                     else
                     {
-                        result.Add(keyFieldName, keyValue);
+                        result.Add(keyPropName, keyValue);
                     }
                 }
-                else if (keyField.FieldType == typeof(int))
+                else if (keyProp.PropertyType == typeof(int))
                 {
                     /*if (keyField.FieldType.IsEnum)
                     {
@@ -321,32 +326,32 @@ namespace BO4E.meta
                     else*/
                     if (Int32.TryParse(keyValue, out int keyValueInt))
                     {
-                        result.Add(keyFieldName, keyValueInt);
+                        result.Add(keyPropName, keyValueInt);
                     }
                     else
                     {
-                        throw new ArgumentException($"Key segment {keyFieldName} could not be parsed as int although an integer type was expected!");
+                        throw new ArgumentException($"Key segment {keyPropName} could not be parsed as int although an integer type was expected!");
                     }
                 }
-                else if (keyField.FieldType.IsSubclassOf(typeof(BusinessObject)))
+                else if (keyProp.PropertyType.IsSubclassOf(typeof(BusinessObject)))
                 {
-                    JObject subresult = GetQueryObject(keyField.FieldType, i - 1);
-                    result.Add(keyFieldName, subresult);
+                    JObject subresult = GetQueryObject(keyProp.PropertyType, i - 1);
+                    result.Add(keyPropName, subresult);
                 }
                 else
                 {
-                    throw new NotImplementedException($"Using {keyField.FieldType} as [BoKey] is not supported yet.");
+                    throw new NotImplementedException($"Using {keyProp.PropertyType} as [BoKey] is not supported yet.");
                 }
             }
 
             var query = System.Web.HttpUtility.ParseQueryString(this.Query);
-            var boFields = this.GetBoType().GetFields().Select(f => f.Name);
+            var boProps = this.GetBoType().GetProperties().Select(p => p.Name);
             if (query.AllKeys.Contains("filter")) // currently this pattern only supports AND concatenation, not OR. result should contain multiple JObjects
             {
                 string filter = query.Get("filter");
                 foreach (Match match in FILTER_AND_PATTERN.Matches(filter))
                 {
-                    if (boFields.Contains(match.Groups["key"].Value))
+                    if (boProps.Contains(match.Groups["key"].Value, StringComparer.OrdinalIgnoreCase))
                     {
                         result[match.Groups["key"].Value] = match.Groups["value"].Value;
                     }
@@ -363,9 +368,9 @@ namespace BO4E.meta
         {
             NameValueCollection query = System.Web.HttpUtility.ParseQueryString(this.Query);
             string filterString = string.Empty;
-            var boFields = this.GetBoType().GetFields().Select(f => f.Name);
+            var boFields = this.GetBoType().GetProperties().Select(p => p.Name);
             string andString = " and ";
-            foreach (var kvp in filterObject.Where(kvp => kvp.Value != null && boFields.Contains(kvp.Key)))
+            foreach (var kvp in filterObject.Where(kvp => kvp.Value != null && boFields.Contains(kvp.Key, StringComparer.OrdinalIgnoreCase)))
             {
                 filterString += $"{andString}{kvp.Key} eq '{kvp.Value}'";
             }

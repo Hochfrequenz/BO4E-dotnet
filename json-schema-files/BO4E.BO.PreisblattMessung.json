@@ -367,7 +367,7 @@
             "DR"
           ]
         },
-        "individuelleAnrede": {
+        "inviduelleAnrede": {
           "type": [
             "string",
             "null"
@@ -534,7 +534,7 @@
             "SYSTEM_MU"
           ]
         },
-        "parameter": {
+        "Parameter": {
           "type": [
             "object",
             "null"
@@ -658,7 +658,7 @@
             "SYSTEM_MU"
           ]
         },
-        "parameter": {
+        "Parameter": {
           "type": [
             "object",
             "null"

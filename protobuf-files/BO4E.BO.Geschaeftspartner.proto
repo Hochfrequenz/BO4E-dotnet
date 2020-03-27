@@ -1,14 +1,14 @@
 ﻿syntax = "proto2";
 
 message Adresse {
-   optional string postleitzahl = 3;
-   optional string ort = 4;
-   optional string strasse = 5;
-   optional string hausnummer = 6;
-   optional string postfach = 7;
-   optional string adresszusatz = 8;
-   optional string coErgaenzung = 9;
-   optional Landescode landescode = 10;
+   optional string Postleitzahl = 3;
+   optional string Ort = 4;
+   optional string Strasse = 5;
+   optional string Hausnummer = 6;
+   optional string Postfach = 7;
+   optional string Adresszusatz = 8;
+   optional string CoErgaenzung = 9;
+   optional Landescode Landescode = 10;
 }
 enum Anrede {
    HERR = 0;
@@ -20,20 +20,20 @@ enum Anrede {
 }
 message Geschaeftspartner {
    optional Anrede anrede = 4;
-   optional string name1 = 6;
-   optional string name2 = 7;
-   optional string name3 = 8;
-   optional bool gewerbekennzeichnung = 9 [default = false];
-   optional string hrnummer = 10;
-   optional string amtsgericht = 11;
-   repeated Kontaktart kontaktweg = 12;
-   optional string umsatzsteuerId = 13;
-   optional string glaeubigerId = 14;
-   optional string eMailAdresse = 15;
-   optional string website = 16;
-   repeated Geschaeftspartnerrolle geschaeftspartnerrolle = 17;
-   optional Adresse partneradresse = 18;
-   optional string title = 1001;
+   optional string Name1 = 6;
+   optional string Name2 = 7;
+   optional string Name3 = 8;
+   optional bool Gewerbekennzeichnung = 9 [default = false];
+   optional string Hrnummer = 10;
+   optional string Amtsgericht = 11;
+   repeated Kontaktart Kontaktweg = 12;
+   optional string UmsatzsteuerId = 13;
+   optional string GlaeubigerId = 14;
+   optional string EMailAdresse = 15;
+   optional string Website = 16;
+   repeated Geschaeftspartnerrolle Geschaeftspartnerrolle = 17;
+   optional Adresse Partneradresse = 18;
+   optional string Title = 1001;
 }
 enum Geschaeftspartnerrolle {
    LIEFERANT = 0;

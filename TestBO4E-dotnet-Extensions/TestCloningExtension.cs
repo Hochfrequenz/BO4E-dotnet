@@ -16,7 +16,7 @@ namespace TestBO4EExtensions
         {
             Messlokation bo = new Messlokation()
             {
-                messlokationsId = "DE345",
+                MesslokationsId = "DE345",
 
             };
             Messlokation cloneBo = BusinessObjectExtensions.DeepClone<Messlokation>((Messlokation)bo);
@@ -30,9 +30,9 @@ namespace TestBO4EExtensions
         {
             Energiemenge em = new Energiemenge()
             {
-                lokationsId = "De12345",
-                lokationstyp = BO4E.ENUM.Lokationstyp.MaLo,
-                energieverbrauch = new List<BO4E.COM.Verbrauch>()
+                LokationsId = "De12345",
+                LokationsTyp = BO4E.ENUM.Lokationstyp.MaLo,
+                Energieverbrauch = new List<BO4E.COM.Verbrauch>()
                 {
                     new BO4E.COM.Verbrauch()
                     {
@@ -55,13 +55,13 @@ namespace TestBO4EExtensions
                 }
             };
             var cloned = em.DeepClone<Energiemenge>();
-            Assert.AreEqual(em.energieverbrauch.Count, cloned.energieverbrauch.Count);
+            Assert.AreEqual(em.Energieverbrauch.Count, cloned.Energieverbrauch.Count);
 
             var cloned2 = em.DeepClone();
-            Assert.AreEqual(em.energieverbrauch.Count, cloned2.energieverbrauch.Count);
+            Assert.AreEqual(em.Energieverbrauch.Count, cloned2.Energieverbrauch.Count);
 
             var cloned3 = (em as BusinessObject).DeepClone();
-            Assert.AreEqual(em.energieverbrauch.Count, (cloned3 as Energiemenge).energieverbrauch.Count);
+            Assert.AreEqual(em.Energieverbrauch.Count, (cloned3 as Energiemenge).Energieverbrauch.Count);
         }
     }
 }

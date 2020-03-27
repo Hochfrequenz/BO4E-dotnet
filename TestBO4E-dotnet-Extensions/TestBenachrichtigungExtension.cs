@@ -24,8 +24,8 @@ namespace TestBO4EExtensions
                 Bearbeiter = "dei mudder",
                 Infos = new List<GenericStringStringInfo>()
                 {
-                    new GenericStringStringInfo() { keyColumn = "ads", value = "xyz" },
-                    new GenericStringStringInfo() { keyColumn = "null", value = null },
+                    new GenericStringStringInfo() { KeyColumn = "ads", Value = "xyz" },
+                    new GenericStringStringInfo() { KeyColumn = "null", Value = null },
                 }
             };
 

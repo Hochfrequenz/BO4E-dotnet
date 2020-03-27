@@ -22,7 +22,7 @@ namespace BO4E.Reporting
         public Zeitraum referenceTimeFrame;
 
         /// <summary>
-        /// refers to a <see cref="Energiemenge.lokationsId"/>
+        /// refers to a <see cref="Energiemenge.LokationsId"/>
         /// </summary>
         [DataCategory(DataCategory.POD)]
         [JsonProperty(Required = Required.Always, Order = 8)]
@@ -85,7 +85,7 @@ namespace BO4E.Reporting
             public Energiemenge other;
 
             /// <summary>
-            /// set true to ignore if Energiemenge do have different <see cref="Energiemenge.lokationsId"/> or <see cref="Energiemenge.lokationstyp"/>
+            /// set true to ignore if Energiemenge do have different <see cref="Energiemenge.LokationsId"/> or <see cref="Energiemenge.LokationsTyp"/>
             /// </summary>
             [JsonProperty(Required = Required.Always)]
             public bool ignoreLocation;

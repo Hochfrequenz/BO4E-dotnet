@@ -113,13 +113,13 @@ namespace BO4E.COM
             unchecked
             {
                 result *= this.GetType().GetHashCode();
-                foreach (FieldInfo field in this.GetType().GetFields())
+                foreach (var prop in this.GetType().GetProperties())
                 {
-                    if (field.GetValue(this) != null)
+                    if (prop.GetValue(this) != null)
                     {
                         // Using +19 because the default hash code of uninitialised enums is zero.
                         // This would screw up the calculation such that all objects with at least one null value had the same hash code, namely 0.
-                        result *= 19 + field.GetValue(this).GetHashCode();
+                        result *= 19 + prop.GetValue(this).GetHashCode();
                     }
                 }
                 return result;

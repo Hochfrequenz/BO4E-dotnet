@@ -34,7 +34,7 @@ namespace BO4E.BO
         [DataCategory(DataCategory.POD)]
         [BoKey]
         [ProtoMember(4)]
-        public string marktlokationsId;
+        public string MarktlokationsId { get; set; }
         /// <summary>Sparte der Messlokation, z.B. Gas oder Strom.</summary>
         [JsonProperty(Required = Required.Always, Order = 5, PropertyName = "sparte")]
         [ProtoMember(5)]
@@ -300,7 +300,7 @@ namespace BO4E.BO
         /// <returns>if marktlokaionsId matches the expected format</returns>
         public bool HasValidId()
         {
-            return ValidateId(this.marktlokationsId);
+            return ValidateId(this.MarktlokationsId);
         }
 
         /// <summary>

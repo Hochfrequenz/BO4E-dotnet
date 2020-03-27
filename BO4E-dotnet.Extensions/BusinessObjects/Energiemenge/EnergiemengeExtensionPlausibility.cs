@@ -21,7 +21,7 @@ namespace BO4E.Extensions.BusinessObjects.Energiemenge
         /// <param name="emReference">reference Energiemenge (reference = used for normalisation)</param>
         /// <param name="emOther">other Energiemenge</param>
         /// <param name="timeframe">time frame to be analysed. If null, the overlap of <paramref name="emReference"/> and <paramref name="emOther"/> is used.</param>
-        /// <param name="ignoreLocation">By default (false) an ArgumentException is thrown if the <see cref="BO4E.BO.Energiemenge.lokationsId"/> do not match. Setting this flag suppresses the error.</param>
+        /// <param name="ignoreLocation">By default (false) an ArgumentException is thrown if the <see cref="BO4E.BO.Energiemenge.LokationsId"/> do not match. Setting this flag suppresses the error.</param>
         /// <returns>a <see cref="PlausibilityReport"/></returns>
         public static PlausibilityReport GetPlausibilityReport(this BO4E.BO.Energiemenge emReference, BO4E.BO.Energiemenge emOther, ITimeRange timeframe = null, bool ignoreLocation = false)
         {
@@ -34,9 +34,9 @@ namespace BO4E.Extensions.BusinessObjects.Energiemenge
                     ITimeRange overlap = trReference.GetIntersection(trOther);
                     if (!ignoreLocation)
                     {
-                        if (!(emReference.lokationsId == emOther.lokationsId && emReference.lokationstyp == emOther.lokationstyp))
+                        if (!(emReference.LokationsId == emOther.LokationsId && emReference.LokationsTyp == emOther.LokationsTyp))
                         {
-                            throw new ArgumentException($"locations do not match! '{emReference.lokationsId}' ({emReference.lokationstyp}) != '{emOther.lokationsId}' ({emOther.lokationstyp})");
+                            throw new ArgumentException($"locations do not match! '{emReference.LokationsId}' ({emReference.LokationsTyp}) != '{emOther.LokationsId}' ({emOther.LokationsTyp})");
                         }
                     }
                     timeframe = overlap;
@@ -78,13 +78,13 @@ namespace BO4E.Extensions.BusinessObjects.Energiemenge
                     relativeDeviation = null;
                 }
 
-                Verbrauch vReference = emReference.energieverbrauch.FirstOrDefault(); // copies obiskennzahl, wertermittlungsverfahren...
+                Verbrauch vReference = emReference.Energieverbrauch.FirstOrDefault(); // copies obiskennzahl, wertermittlungsverfahren...
                 vReference.Wert = consumptionReference.Item1;
                 vReference.Einheit = consumptionReference.Item2;
                 vReference.Startdatum = timeframe.Start;
                 vReference.Enddatum = timeframe.End;
 
-                Verbrauch vOther = emOther.energieverbrauch.FirstOrDefault(); // copies obiskennzahl, wertermittlungsverfahren...
+                Verbrauch vOther = emOther.Energieverbrauch.FirstOrDefault(); // copies obiskennzahl, wertermittlungsverfahren...
                 vOther.Wert = consumptionOther.Item1;
                 vOther.Einheit = consumptionOther.Item2;
                 vOther.Startdatum = timeframe.Start;
@@ -92,7 +92,7 @@ namespace BO4E.Extensions.BusinessObjects.Energiemenge
 
                 var pr = new PlausibilityReport()
                 {
-                    lokationsId = emReference.lokationsId,
+                    lokationsId = emReference.LokationsId,
                     referenceTimeFrame = new BO4E.COM.Zeitraum() { Startdatum = timeframe.Start, Enddatum = timeframe.End },
                     verbrauchReference = vReference,
                     verbrauchOther = vOther,

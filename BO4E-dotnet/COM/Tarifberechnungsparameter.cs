@@ -20,9 +20,10 @@ namespace BO4E.COM
         [ProtoMember(4)]
         public string MesspreisInGPEnthalten { get; set; }
 
-        /// <summary>Typ des Messpreises. Details <see cref="Messpreistyp" /></summary>
+        /// <summary>Typ des Messpreises. Details <see cref="ENUM.Messpreistyp" /></summary>
         [ProtoMember(5)]
-        public Messpreistyp? messpreistyp;
+        [JsonProperty(PropertyName = "messpreistyp", Required = Required.Default)]
+        public Messpreistyp? Messpreistyp { get; set; }
 
         /// <summary>Im Preis bereits eingeschlossene Leistung (für Gas).</summary>
         [JsonProperty(PropertyName = "kwInklusive", Required = Required.Default)]

@@ -50,7 +50,7 @@ namespace BO4E.Extensions.BusinessObjects.Energiemenge
                 }
                 return new CompletenessReport()
                 {
-                    lokationsId = em.lokationsId,
+                    lokationsId = em.LokationsId,
                     referenceTimeFrame = new Zeitraum()
                     {
                         Startdatum = reference.Start,
@@ -80,7 +80,7 @@ namespace BO4E.Extensions.BusinessObjects.Energiemenge
             {
                 result = new CompletenessReport
                 {
-                    lokationsId = em.lokationsId,
+                    lokationsId = em.LokationsId,
                     einheit = einheit,
                     coverage = GetCoverage(em, reference, wev, obiskennzahl, einheit),
                     wertermittlungsverfahren = wev,
@@ -92,7 +92,7 @@ namespace BO4E.Extensions.BusinessObjects.Energiemenge
                     },
                 };
             }
-            if (em.energieverbrauch != null && em.energieverbrauch.Count > 0)
+            if (em.Energieverbrauch != null && em.Energieverbrauch.Count > 0)
             {
                 /*using (MiniProfiler.Current.Step("populating time slices of/with missing/null values"))
                 {
@@ -120,7 +120,7 @@ namespace BO4E.Extensions.BusinessObjects.Energiemenge
                 }*/
                 using (MiniProfiler.Current.Step("Setting aggregated gaps"))
                 {
-                    var nonNullValues = new TimePeriodCollection(em.energieverbrauch.Select(v => new TimeRange(v.Startdatum, v.Enddatum)));
+                    var nonNullValues = new TimePeriodCollection(em.Energieverbrauch.Select(v => new TimeRange(v.Startdatum, v.Enddatum)));
                     ITimeRange limits;
                     if (result.referenceTimeFrame != null && result.referenceTimeFrame.Startdatum.HasValue && result.referenceTimeFrame.Enddatum.HasValue)
                     {
@@ -147,7 +147,7 @@ namespace BO4E.Extensions.BusinessObjects.Energiemenge
                 {
                     try
                     {
-                        foreach (var kvp in em.energieverbrauch.Where(v => v.UserProperties != null).SelectMany(v => v.UserProperties))
+                        foreach (var kvp in em.Energieverbrauch.Where(v => v.UserProperties != null).SelectMany(v => v.UserProperties))
                         {
                             if (result.UserProperties == null)
                             {
@@ -188,14 +188,14 @@ namespace BO4E.Extensions.BusinessObjects.Energiemenge
             Verbrauch v;
             try
             {
-                v = em.energieverbrauch.First<Verbrauch>();
+                v = em.Energieverbrauch.First<Verbrauch>();
             }
             catch (InvalidOperationException)
             {
                 return new CompletenessReport()
                 {
                     coverage = null,
-                    lokationsId = em.lokationsId,
+                    lokationsId = em.LokationsId,
                     _errorMessage = "energieverbrauch is empty"
                 };
             }

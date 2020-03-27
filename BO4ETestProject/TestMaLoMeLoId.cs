@@ -40,7 +40,7 @@ namespace TestBO4E
         {
             var malo = new Marktlokation()
             {
-                marktlokationsId = "1235678901",
+                MarktlokationsId = "1235678901",
                 Sparte = Sparte.STROM,
                 Energierichtung = Energierichtung.AUSSP
             };
@@ -48,7 +48,7 @@ namespace TestBO4E
             malo.Bilanzierungsmethode = Bilanzierungsmethode.SLP;
             Assert.IsTrue(malo.IsValid(checkId: false)); // because all obligatory fields are set
             Assert.IsFalse(malo.IsValid()); // but the marklokationsId is wrong
-            malo.marktlokationsId = "51238696781"; // matches the appropriate regex and has the right check sum
+            malo.MarktlokationsId = "51238696781"; // matches the appropriate regex and has the right check sum
             Assert.IsTrue(malo.IsValid());
         }
     }

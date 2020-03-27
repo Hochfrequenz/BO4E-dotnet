@@ -117,7 +117,7 @@ namespace TestBO4E
         private static readonly Dictionary<Type, List<string>> boKeyNamesResults = new Dictionary<Type, List<string>>()
         {
             {typeof(Marktlokation), new List<string>{"marktlokationsId"}},
-            {typeof(Messlokation), new List<string>{"messLokationsId"} } //<-- should be the json property name if annotated 
+            {typeof(Messlokation), new List<string>{"messlokationsId"} } //<-- should be the json property name if annotated 
         };
 
         [TestMethod]
@@ -127,7 +127,7 @@ namespace TestBO4E
             {
                 List<string> expectedList = boKeyNamesResults[boType];
                 List<string> actualList = BusinessObject.GetBoKeyNames(boType);
-                Assert.IsTrue(expectedList.SequenceEqual(actualList), $"{boType.ToString()}: expected: [{String.Join(",", expectedList)}] actual: [{String.Join(",", actualList)}] ");
+                Assert.IsTrue(expectedList.SequenceEqual(actualList), $"{boType.ToString()}: expected: [{string.Join(",", expectedList)}] actual: [{string.Join(",", actualList)}] ");
             }
         }
 

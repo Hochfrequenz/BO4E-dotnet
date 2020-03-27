@@ -264,7 +264,7 @@ namespace BO4E
         {
             return GetAnnotatedFields(boName, typeof(DataCategoryAttribute));
         }
-
+        [Obsolete("Fields are only private version 1.1", true)]
         public static FieldInfo[] GetAnnotatedFields(Type type)
         {
             return GetAnnotatedFields(type, typeof(DataCategoryAttribute));
@@ -277,6 +277,7 @@ namespace BO4E
         /// <param name="boType">type of the business object</param>
         /// <param name="attributeType">type of the attribute/annotation you're interested in<example>typeof(DataCategoryAttribute)</example></param>
         /// <returns>Array of FieldInfos</returns>
+        [Obsolete("Fields are only private version 1.1",true)]
         public static FieldInfo[] GetAnnotatedFields(Type boType, Type attributeType)
         {
             return boType.GetFields()
@@ -292,6 +293,7 @@ namespace BO4E
         /// <param name="boName">name of the business object in title case<example>Messlokation</example></param>
         /// <param name="attributeType">type of the attribute/annotation you're interested in<example>typeof(DataCategoryAttribute)</example></param>
         /// <returns>Array of FieldInfos</returns>
+        [Obsolete("Fields are only private version 1.1",true)]
         public static FieldInfo[] GetAnnotatedFields(string boName, Type attributeType)
         {
             return Assembly.GetExecutingAssembly().GetTypes()

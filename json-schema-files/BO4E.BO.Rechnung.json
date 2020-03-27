@@ -1463,7 +1463,7 @@
       "type": "string",
       "format": "date-time"
     },
-    "rechnungsstyp": {
+    "rechnungstyp": {
       "type": "string",
       "enum": [
         "ABSCHLAGSRECHNUNG",
@@ -1530,7 +1530,7 @@
     "rechnungsnummer",
     "rechnungsdatum",
     "faelligkeitsdatum",
-    "rechnungsstyp",
+    "rechnungstyp",
     "rechnungsperiode",
     "rechnungsersteller",
     "rechnungsempfaenger",

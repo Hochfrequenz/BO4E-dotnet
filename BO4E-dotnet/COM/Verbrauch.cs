@@ -21,7 +21,7 @@ namespace BO4E.COM
         /// Central Europe Standard Time as hard coded default time. Public to be used elsewhere ;)
         /// </summary>
         [ProtoIgnore]
-        public static readonly TimeZoneInfo CENTRAL_EUROPE_STANDARD_TIME;
+        public static TimeZoneInfo CENTRAL_EUROPE_STANDARD_TIME { get; private set; }
         static Verbrauch()
         {
             var assembly = typeof(Verbrauch).Assembly; // ??? zumindest eher als executing assembly.

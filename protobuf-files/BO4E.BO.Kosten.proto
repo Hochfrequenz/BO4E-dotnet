@@ -2,38 +2,38 @@
 import "protobuf-net/bcl.proto"; // schema for protobuf-net's handling of core .NET types
 
 message Betrag {
-   optional .bcl.Decimal wert = 3 [default = 0];
-   optional Waehrungscode waehrung = 4 [default = AFN];
+   optional .bcl.Decimal Wert = 3 [default = 0];
+   optional Waehrungscode Waehrung = 4 [default = AFN];
 }
 message Kosten {
-   optional Kostenklasse kostenklasse = 4 [default = 0];
-   optional Zeitraum gueltigkeit = 5;
-   repeated Betrag summeKosten = 6;
-   repeated Kostenblock kostenbloecke = 7;
-   repeated Kostenposition kostenpositionen = 8;
+   optional Kostenklasse Kostenklasse = 4 [default = 0];
+   optional Zeitraum Gueltigkeit = 5;
+   repeated Betrag SummeKosten = 6;
+   repeated Kostenblock Kostenbloecke = 7;
+   repeated Kostenposition Kostenpositionen = 8;
 }
 message Kostenblock {
-   optional string kostenblockbezeichnung = 3;
-   optional Betrag summeKostenblock = 4;
-   repeated Kostenposition kostenpositionen = 5;
+   optional string Kostenblockbezeichnung = 3;
+   optional Betrag SummeKostenblock = 4;
+   repeated Kostenposition Kostenpositionen = 5;
 }
 enum Kostenklasse {
    // this enumeration will be passed as a raw value
 }
 message Kostenposition {
-   optional string positionstitel = 3;
-   optional .bcl.DateTime von = 4;
-   optional .bcl.DateTime bis = 5;
-   optional string artikelbezeichnung = 6;
-   optional string artikeldetail = 7;
-   optional Menge menge = 8;
-   optional Menge zeitmenge = 9;
-   optional Preis einzelpreis = 10;
-   optional Betrag betragKostenposition = 11;
+   optional string Positionstitel = 3;
+   optional .bcl.DateTime Von = 4;
+   optional .bcl.DateTime Bis = 5;
+   optional string Artikelbezeichnung = 6;
+   optional string Artikeldetail = 7;
+   optional Menge Menge = 8;
+   optional Menge Zeitmenge = 9;
+   optional Preis Einzelpreis = 10;
+   optional Betrag BetragKostenposition = 11;
 }
 message Menge {
-   optional .bcl.Decimal wert = 3 [default = 0];
-   optional Mengeneinheit einheit = 4 [default = 0];
+   optional .bcl.Decimal Wert = 3 [default = 0];
+   optional Mengeneinheit Einheit = 4 [default = 0];
 }
 enum Mengeneinheit {
    WH = 2;
@@ -53,10 +53,10 @@ enum Mengeneinheit {
    MWH = 2000000;
 }
 message Preis {
-   optional .bcl.Decimal wert = 3 [default = 0];
-   optional Waehrungseinheit einheit = 4 [default = EUR];
-   optional Mengeneinheit bezugswert = 5 [default = 0];
-   optional Preisstatus status = 6;
+   optional .bcl.Decimal Wert = 3 [default = 0];
+   optional Waehrungseinheit Einheit = 4 [default = EUR];
+   optional Mengeneinheit Bezugswert = 5 [default = 0];
+   optional Preisstatus Status = 6;
 }
 enum Preisstatus {
    VORLAEUFIG = 0;
@@ -262,8 +262,8 @@ enum Zeiteinheit {
    JAHR = 9;
 }
 message Zeitraum {
-   optional Zeiteinheit einheit = 3;
-   optional .bcl.Decimal dauer = 4;
-   optional .bcl.DateTime startdatum = 5;
-   optional .bcl.DateTime enddatum = 6;
+   optional Zeiteinheit Einheit = 3;
+   optional .bcl.Decimal Dauer = 4;
+   optional .bcl.DateTime Startdatum = 5;
+   optional .bcl.DateTime Enddatum = 6;
 }

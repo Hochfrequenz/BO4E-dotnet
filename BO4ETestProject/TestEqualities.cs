@@ -45,7 +45,7 @@ namespace TestBO4E
 
             v2.Obiskennzahl = "1-1:1.8.1";
             Assert.AreNotEqual(v1, v2);
-            Assert.AreNotEqual(v1.GetHashCode(), v2.GetHashCode());
+            Assert.AreNotEqual<int>(v1.GetHashCode(), v2.GetHashCode());
             Assert.AreNotEqual(new Preis(), new Menge());
         }
 
@@ -57,24 +57,24 @@ namespace TestBO4E
             Assert.ThrowsException<ArgumentException>(() => em1.Equals(em2));
             Assert.AreEqual(em1.GetHashCode(), em2.GetHashCode());
 
-            em1.lokationsId = "DE1234";
-            em2.lokationsId = "DE1234";
+            em1.LokationsId = "DE1234";
+            em2.LokationsId = "DE1234";
 
-            em1.lokationstyp = BO4E.ENUM.Lokationstyp.MeLo;
-            em2.lokationstyp = BO4E.ENUM.Lokationstyp.MeLo;
+            em1.LokationsTyp = BO4E.ENUM.Lokationstyp.MeLo;
+            em2.LokationsTyp = BO4E.ENUM.Lokationstyp.MeLo;
 
-            em1.energieverbrauch = new List<Verbrauch>();
+            em1.Energieverbrauch = new List<Verbrauch>();
             Verbrauch v1 = new Verbrauch
             {
                 Obiskennzahl = "1-2-3-4-5"
             };
-            em1.energieverbrauch.Add(v1);
-            em2.energieverbrauch = new List<Verbrauch>();
+            em1.Energieverbrauch.Add(v1);
+            em2.Energieverbrauch = new List<Verbrauch>();
             Verbrauch v2 = new Verbrauch
             {
                 Obiskennzahl = "1-2-3-4-5"
             };
-            em2.energieverbrauch.Add(v2);
+            em2.Energieverbrauch.Add(v2);
 
             Assert.AreEqual(em1, em2);
             //Assert.AreEqual(em1.GetHashCode(), em2.GetHashCode());
@@ -88,22 +88,22 @@ namespace TestBO4E
                 Enddatum = new DateTime(2018, 12, 31),
                 Wert = 123.456M
             };
-            em1.energieverbrauch = new List<Verbrauch> { v3 };
-            em2.energieverbrauch = new List<Verbrauch> { v3 };
+            em1.Energieverbrauch = new List<Verbrauch> { v3 };
+            em2.Energieverbrauch = new List<Verbrauch> { v3 };
             Assert.AreEqual(em1, em2);
             //Assert.AreEqual(em1.GetHashCode(), em2.GetHashCode());
             Assert.IsFalse(em1 == em2);
 
             Verbrauch v4 = JsonConvert.DeserializeObject<Verbrauch>(JsonConvert.SerializeObject(v1));
             v4.Wert = 789.012M;
-            em1.energieverbrauch.Add(v4);
+            em1.Energieverbrauch.Add(v4);
             Assert.AreNotEqual(em1, em2);
 
-            em2.energieverbrauch.Add(v4);
+            em2.Energieverbrauch.Add(v4);
             Assert.AreEqual(em1, em2);
 
-            em1.energieverbrauch = new List<Verbrauch> { v3, v4 };
-            em2.energieverbrauch = new List<Verbrauch> { v4, v3 };
+            em1.Energieverbrauch = new List<Verbrauch> { v3, v4 };
+            em2.Energieverbrauch = new List<Verbrauch> { v4, v3 };
 
             Assert.AreNotEqual(em1, em2);
             //Assert.AreNotEqual(em1.GetHashCode(), em2.GetHashCode());

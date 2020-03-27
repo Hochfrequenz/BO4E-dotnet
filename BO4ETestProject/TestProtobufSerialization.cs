@@ -19,9 +19,9 @@ namespace TestBO4E
         {
             Energiemenge em = new Energiemenge()
             {
-                lokationsId = "54321012345",
-                lokationstyp = BO4E.ENUM.Lokationstyp.MaLo,
-                energieverbrauch = new System.Collections.Generic.List<Verbrauch>()
+                LokationsId = "54321012345",
+                LokationsTyp = BO4E.ENUM.Lokationstyp.MaLo,
+                Energieverbrauch = new System.Collections.Generic.List<Verbrauch>()
                 {
                     new Verbrauch()
                     {
@@ -60,7 +60,7 @@ namespace TestBO4E
                 backStream.Seek(0, SeekOrigin.Begin);
                 emRoundTrip = Serializer.Deserialize<Energiemenge>(backStream);
             }
-            Assert.IsNotNull(emRoundTrip.lokationsId);
+            Assert.IsNotNull(emRoundTrip.LokationsId);
             Assert.IsTrue(emRoundTrip.IsValid());
             Assert.AreEqual(em, emRoundTrip);
         }

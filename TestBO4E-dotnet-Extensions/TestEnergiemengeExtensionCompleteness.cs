@@ -152,9 +152,9 @@ namespace TestBO4EExtensions
         {
             Energiemenge em = new Energiemenge()
             {
-                lokationsId = "DE123455",
-                lokationstyp = Lokationstyp.MeLo,
-                energieverbrauch = new List<Verbrauch>()
+                LokationsId = "DE123455",
+                LokationsTyp = Lokationstyp.MeLo,
+                Energieverbrauch = new List<Verbrauch>()
                 {
                     new Verbrauch()
                     {
@@ -188,9 +188,9 @@ namespace TestBO4EExtensions
         {
             Energiemenge em1 = new Energiemenge()
             {
-                lokationsId = "DE123456789DieseEmhatkeineVerbräuche",
-                lokationstyp = Lokationstyp.MeLo,
-                energieverbrauch = new List<Verbrauch>() //empty list
+                LokationsId = "DE123456789DieseEmhatkeineVerbräuche",
+                LokationsTyp = Lokationstyp.MeLo,
+                Energieverbrauch = new List<Verbrauch>() //empty list
             };
             CompletenessReport cr1 = em1.GetCompletenessReport();
             Assert.IsNotNull(cr1);
@@ -199,9 +199,9 @@ namespace TestBO4EExtensions
 
             Energiemenge em2 = new Energiemenge()
             {
-                lokationsId = "54321012345DieseEmhatkeineVerbräuche",
-                lokationstyp = Lokationstyp.MeLo,
-                energieverbrauch = new List<Verbrauch>() //empty list
+                LokationsId = "54321012345DieseEmhatkeineVerbräuche",
+                LokationsTyp = Lokationstyp.MeLo,
+                Energieverbrauch = new List<Verbrauch>() //empty list
             };
             CompletenessReport cr2 = em2.GetCompletenessReport(CHRISTMAS_2018, Wertermittlungsverfahren.MESSUNG, "1-2-3-4", Mengeneinheit.KUBIKMETER);
             Assert.IsNotNull(cr2);
@@ -329,7 +329,7 @@ namespace TestBO4EExtensions
                 listvb.Add(new Verbrauch() { Startdatum = dateTime, Enddatum = endDateTime, Einheit = Mengeneinheit.JAHR, Wert = 12 });
                 dateTime = endDateTime;
             }
-            em.energieverbrauch = listvb;
+            em.Energieverbrauch = listvb;
 
             MiniProfiler mpLinear = MiniProfiler.StartNew("Non-Parallel");
             em.GetMonthlyCompletenessReports(new TimeRange(new DateTime(2015, 1, 1, 23, 00, 0, DateTimeKind.Utc), new DateTime(2019, 12, 31, 23, 0, 0, DateTimeKind.Utc)), useParallelExecution: false);
@@ -388,9 +388,9 @@ namespace TestBO4EExtensions
             Assert.AreEqual(2 * 24 - 1, verbrauchSlices.Count);
             Energiemenge em = new Energiemenge()
             {
-                lokationsId = "MeinUnitTest123",
-                lokationstyp = Lokationstyp.MeLo,
-                energieverbrauch = verbrauchSlices.Select(vs => new BO4E.COM.Verbrauch()
+                LokationsId = "MeinUnitTest123",
+                LokationsTyp = Lokationstyp.MeLo,
+                Energieverbrauch = verbrauchSlices.Select(vs => new BO4E.COM.Verbrauch()
                 {
                     Startdatum = vs.Start,
                     Enddatum = vs.End,

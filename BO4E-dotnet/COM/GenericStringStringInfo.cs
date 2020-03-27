@@ -1,4 +1,7 @@
 ﻿using System.Collections.Generic;
+
+using Newtonsoft.Json;
+
 using ProtoBuf;
 
 namespace BO4E.COM
@@ -13,12 +16,14 @@ namespace BO4E.COM
         /// key (named differently because key is a reserved keyword)
         /// </summary>
         [ProtoMember(3)]
-        public string keyColumn;
+        [JsonProperty(PropertyName = "keyColumn")]
+        public string KeyColumn { get; set; }
         /// <summary>
         /// value
         /// </summary>
         [ProtoMember(4)]
-        public string value;
+        [JsonProperty(PropertyName = "value")]
+        public string Value { get; set; }
 
         /// <summary>
         /// convert object to a key value pair
@@ -26,7 +31,7 @@ namespace BO4E.COM
         /// <returns></returns>
         public KeyValuePair<string, string> ToKeyValuePair()
         {
-            return new KeyValuePair<string, string>(this.keyColumn, this.value);
+            return new KeyValuePair<string, string>(this.KeyColumn, this.Value);
         }
     }
 }
