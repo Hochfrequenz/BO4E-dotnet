@@ -18,6 +18,8 @@ namespace BO4E.COM
         /// <summary>Die konkrete Nummer, z.B. 02433 5 26 01 900</summary>
         [JsonProperty(PropertyName = "rufnummer", Required = Required.Always)]
         [ProtoMember(4)]
-        public string Rufnummer { get; set; }
+#pragma warning disable IDE1006 // Naming Styles
+        public string rufnummer { get; set; }
+#pragma warning restore IDE1006 // Naming Styles
     }
 }
