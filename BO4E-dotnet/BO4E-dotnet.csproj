@@ -38,8 +38,11 @@
 
   <ItemGroup>
     <Compile Remove="BO\NewFolder\**" />
+    <Compile Remove="json-schema-files\**" />
     <EmbeddedResource Remove="BO\NewFolder\**" />
+    <EmbeddedResource Remove="json-schema-files\**" />
     <None Remove="BO\NewFolder\**" />
+    <None Remove="json-schema-files\**" />
     <None Include="..\LICENSE.txt">
       <Pack>True</Pack>
       <PackagePath></PackagePath>
@@ -48,26 +51,6 @@
 
   <ItemGroup>
     <None Remove="CentralEuropeStandardTime.json" />
-    <None Remove="json-schema-files\BO4E.BO.Angebot.json" />
-    <None Remove="json-schema-files\BO4E.BO.Ansprechpartner.json" />
-    <None Remove="json-schema-files\BO4E.BO.Benachrichtigung.json" />
-    <None Remove="json-schema-files\BO4E.BO.Energiemenge.json" />
-    <None Remove="json-schema-files\BO4E.BO.Geschaeftspartner.json" />
-    <None Remove="json-schema-files\BO4E.BO.Kosten.json" />
-    <None Remove="json-schema-files\BO4E.BO.LogObject.json" />
-    <None Remove="json-schema-files\BO4E.BO.Marktlokation.json" />
-    <None Remove="json-schema-files\BO4E.BO.Marktteilnehmer.json" />
-    <None Remove="json-schema-files\BO4E.BO.Messlokation.json" />
-    <None Remove="json-schema-files\BO4E.BO.Preisblatt.json" />
-    <None Remove="json-schema-files\BO4E.BO.PreisblattDienstleistung.json" />
-    <None Remove="json-schema-files\BO4E.BO.PreisblattKonzessionsabgabe.json" />
-    <None Remove="json-schema-files\BO4E.BO.PreisblattMessung.json" />
-    <None Remove="json-schema-files\BO4E.BO.PreisblattNetznutzung.json" />
-    <None Remove="json-schema-files\BO4E.BO.PreisblattUmlagen.json" />
-    <None Remove="json-schema-files\BO4E.BO.Rechnung.json" />
-    <None Remove="json-schema-files\BO4E.BO.Region.json" />
-    <None Remove="json-schema-files\BO4E.BO.Vertrag.json" />
-    <None Remove="json-schema-files\BO4E.BO.Zaehler.json" />
     <None Remove="protobuf-files\BO4E.BO.Angebot.proto" />
     <None Remove="protobuf-files\BO4E.BO.Ansprechpartner.proto" />
     <None Remove="protobuf-files\BO4E.BO.Benachrichtigung.proto" />
@@ -137,69 +120,6 @@
     <PackageReference Include="protobuf-net" Version="2.4.4" />
     <PackageReference Include="SourceLink.Copy.PdbFiles" Version="2.8.3" PrivateAssets="All" />
     <PackageReference Include="System.ComponentModel.Annotations" Version="4.5.0" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Content Include="json-schema-files\BO4E.BO.Angebot.json">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="json-schema-files\BO4E.BO.Ansprechpartner.json">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="json-schema-files\BO4E.BO.Benachrichtigung.json">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="json-schema-files\BO4E.BO.Energiemenge.json">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="json-schema-files\BO4E.BO.Geschaeftspartner.json">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="json-schema-files\BO4E.BO.Kosten.json">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="json-schema-files\BO4E.BO.LogObject.json">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="json-schema-files\BO4E.BO.Marktlokation.json">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="json-schema-files\BO4E.BO.Marktteilnehmer.json">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="json-schema-files\BO4E.BO.Messlokation.json">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="json-schema-files\BO4E.BO.Preisblatt.json">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="json-schema-files\BO4E.BO.PreisblattDienstleistung.json">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="json-schema-files\BO4E.BO.PreisblattKonzessionsabgabe.json">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="json-schema-files\BO4E.BO.PreisblattMessung.json">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="json-schema-files\BO4E.BO.PreisblattNetznutzung.json">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="json-schema-files\BO4E.BO.PreisblattUmlagen.json">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="json-schema-files\BO4E.BO.Rechnung.json">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="json-schema-files\BO4E.BO.Region.json">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="json-schema-files\BO4E.BO.Vertrag.json">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="json-schema-files\BO4E.BO.Zaehler.json">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
   </ItemGroup>
 
 </Project>
