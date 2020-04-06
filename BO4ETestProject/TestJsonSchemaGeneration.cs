@@ -43,7 +43,7 @@ namespace TestBO4E
                 {
                     var schema = BusinessObject.GetJsonSchema(type);
                     Assert.IsNotNull(schema);
-                    string path = $"../../../../json-schema-files/{type}.json"; // not elegant but ok ;)
+                    string path = $"../../../json-schema-files/{type}.json"; // not elegant but ok ;)
                     if (!File.Exists(path))
                     {
                         var stream = File.Create(path);
