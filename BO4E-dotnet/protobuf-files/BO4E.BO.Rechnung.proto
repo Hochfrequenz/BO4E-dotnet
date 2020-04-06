@@ -1,15 +1,15 @@
-﻿syntax = "proto2";
+﻿syntax = "proto3";
 import "protobuf-net/bcl.proto"; // schema for protobuf-net's handling of core .NET types
 
 message Adresse {
-   optional string Postleitzahl = 3;
-   optional string Ort = 4;
-   optional string Strasse = 5;
-   optional string Hausnummer = 6;
-   optional string Postfach = 7;
-   optional string Adresszusatz = 8;
-   optional string CoErgaenzung = 9;
-   optional Landescode Landescode = 10;
+   string Postleitzahl = 3;
+   string Ort = 4;
+   string Strasse = 5;
+   string Hausnummer = 6;
+   string Postfach = 7;
+   string Adresszusatz = 8;
+   string CoErgaenzung = 9;
+   Landescode Landescode = 10;
 }
 enum Anrede {
    HERR = 0;
@@ -67,25 +67,25 @@ enum BDEWArtikelnummer {
    MSB_INKL_MESSUNG = 44;
 }
 message Betrag {
-   optional .bcl.Decimal Wert = 3 [default = 0];
-   optional Waehrungscode Waehrung = 4 [default = AFN];
+   .bcl.Decimal Wert = 3;
+   Waehrungscode Waehrung = 4;
 }
 message Geschaeftspartner {
-   optional Anrede anrede = 4;
-   optional string Name1 = 6;
-   optional string Name2 = 7;
-   optional string Name3 = 8;
-   optional bool Gewerbekennzeichnung = 9 [default = false];
-   optional string Hrnummer = 10;
-   optional string Amtsgericht = 11;
-   repeated Kontaktart Kontaktweg = 12;
-   optional string UmsatzsteuerId = 13;
-   optional string GlaeubigerId = 14;
-   optional string EMailAdresse = 15;
-   optional string Website = 16;
-   repeated Geschaeftspartnerrolle Geschaeftspartnerrolle = 17;
-   optional Adresse Partneradresse = 18;
-   optional string Title = 1001;
+   Anrede Anrede = 4;
+   string Name1 = 6;
+   string Name2 = 7;
+   string Name3 = 8;
+   bool Gewerbekennzeichnung = 9;
+   string Hrnummer = 10;
+   string Amtsgericht = 11;
+   repeated Kontaktart Kontaktweg = 12 [packed = false];
+   string UmsatzsteuerId = 13;
+   string GlaeubigerId = 14;
+   string EMailAdresse = 15;
+   string Website = 16;
+   repeated Geschaeftspartnerrolle Geschaeftspartnerrolle = 17 [packed = false];
+   Adresse Partneradresse = 18;
+   string Title = 1001;
 }
 enum Geschaeftspartnerrolle {
    LIEFERANT = 0;
@@ -371,74 +371,75 @@ enum Landescode {
    ZW = 266;
 }
 message Menge {
-   optional .bcl.Decimal Wert = 3 [default = 0];
-   optional Mengeneinheit Einheit = 4 [default = 0];
+   .bcl.Decimal Wert = 3;
+   Mengeneinheit Einheit = 4;
 }
 enum Mengeneinheit {
+   ZERO = 0; // proto3 requires a zero value as the first item (it can be named anything)
    WH = 2;
    KW = 3;
+   KWH = 2000;
+   MW = 3000;
+   MWH = 2000000;
    ANZAHL = 7;
    KUBIKMETER = 11;
    STUNDE = 13;
    TAG = 17;
    MONAT = 19;
-   VAR = 23;
-   VARH = 29;
    JAHR = 228;
-   KWH = 2000;
-   MW = 3000;
+   VAR = 23;
    KVAR = 23000;
+   VARH = 29;
    KVARH = 29000;
-   MWH = 2000000;
 }
 message Preis {
-   optional .bcl.Decimal Wert = 3 [default = 0];
-   optional Waehrungseinheit Einheit = 4 [default = EUR];
-   optional Mengeneinheit Bezugswert = 5 [default = 0];
-   optional Preisstatus Status = 6;
+   .bcl.Decimal Wert = 3;
+   Waehrungseinheit Einheit = 4;
+   Mengeneinheit Bezugswert = 5;
+   Preisstatus Status = 6;
 }
 enum Preisstatus {
    VORLAEUFIG = 0;
    ENDGUELTIG = 1;
 }
 message Rechnung {
-   optional string Rechnungstitel = 4;
-   optional Rechnungsstatus Rechnungsstatus = 5;
-   optional bool Storno = 6 [default = false];
-   optional string Rechnungsnummer = 7;
-   optional .bcl.DateTime Rechnungsdatum = 8;
-   optional .bcl.DateTime Faelligkeitsdatum = 9;
-   optional Rechnungstyp Rechnungsstyp = 10 [default = ABSCHLAGSRECHNUNG];
-   optional string OriginalRechnungsnummer = 11;
-   optional Zeitraum Rechnungsperiode = 12;
-   optional Geschaeftspartner Rechnungsersteller = 13;
-   optional Geschaeftspartner Rechnungsempfaenger = 14;
-   optional Betrag Gesamtnetto = 15;
-   optional Betrag Gesamtsteuer = 16;
-   optional Betrag Gesamtbrutto = 17;
-   optional Betrag Vorausgezahlt = 18;
-   optional Betrag rabattBrutto = 19;
-   optional Betrag Zuzahlen = 20;
+   string Rechnungstitel = 4;
+   Rechnungsstatus Rechnungsstatus = 5;
+   bool Storno = 6;
+   string Rechnungsnummer = 7;
+   .bcl.DateTime Rechnungsdatum = 8;
+   .bcl.DateTime Faelligkeitsdatum = 9;
+   Rechnungstyp Rechnungsstyp = 10;
+   string OriginalRechnungsnummer = 11;
+   Zeitraum Rechnungsperiode = 12;
+   Geschaeftspartner Rechnungsersteller = 13;
+   Geschaeftspartner Rechnungsempfaenger = 14;
+   Betrag Gesamtnetto = 15;
+   Betrag Gesamtsteuer = 16;
+   Betrag Gesamtbrutto = 17;
+   Betrag Vorausgezahlt = 18;
+   Betrag rabattBrutto = 19;
+   Betrag Zuzahlen = 20;
    repeated Steuerbetrag Steuerbetraege = 21;
    repeated Rechnungsposition Rechnungspositionen = 22;
 }
 message Rechnungsposition {
-   optional int32 Positionsnummer = 3 [default = 0];
-   optional .bcl.DateTime LieferungVon = 4;
-   optional .bcl.DateTime LieferungBis = 5;
-   optional string Positionstext = 6;
-   optional Mengeneinheit Zeiteinheit = 7;
-   optional BDEWArtikelnummer Artikelnummer = 8;
-   optional string LokationsId = 9;
-   optional Menge PositionsMenge = 10;
-   optional Menge ZeitbezogeneMenge = 11;
-   optional Preis Einzelpreis = 12;
-   optional Betrag TeilsummeNetto = 13;
-   optional Betrag TeilrabattNetto = 14;
-   optional Steuerbetrag TeilsummeSteuer = 15;
-   optional string VertragskontoId = 16;
-   optional string VertragsId = 1017;
-   optional RechnungspositionsStatus Status = 1018;
+   int32 Positionsnummer = 3;
+   .bcl.DateTime LieferungVon = 4;
+   .bcl.DateTime LieferungBis = 5;
+   string Positionstext = 6;
+   Mengeneinheit Zeiteinheit = 7;
+   BDEWArtikelnummer Artikelnummer = 8;
+   string LokationsId = 9;
+   Menge PositionsMenge = 10;
+   Menge ZeitbezogeneMenge = 11;
+   Preis Einzelpreis = 12;
+   Betrag TeilsummeNetto = 13;
+   Betrag TeilrabattNetto = 14;
+   Steuerbetrag TeilsummeSteuer = 15;
+   string VertragskontoId = 16;
+   string VertragsId = 1017;
+   RechnungspositionsStatus Status = 1018;
 }
 enum RechnungspositionsStatus {
    ROH = 0;
@@ -464,10 +465,10 @@ enum Rechnungstyp {
    MEHRMINDERMENGENRECHNUNG = 7;
 }
 message Steuerbetrag {
-   optional Steuerkennzeichen Steuerkennzeichen = 3 [default = UST_19];
-   optional .bcl.Decimal Basiswert = 4 [default = 0];
-   optional .bcl.Decimal Steuerwert = 5 [default = 0];
-   optional Waehrungscode Waehrung = 6 [default = AFN];
+   Steuerkennzeichen Steuerkennzeichen = 3;
+   .bcl.Decimal Basiswert = 4;
+   .bcl.Decimal Steuerwert = 5;
+   Waehrungscode Waehrung = 6;
 }
 enum Steuerkennzeichen {
    UST_19 = 0;
@@ -677,8 +678,8 @@ enum Zeiteinheit {
    JAHR = 9;
 }
 message Zeitraum {
-   optional Zeiteinheit Einheit = 3;
-   optional .bcl.Decimal Dauer = 4;
-   optional .bcl.DateTime Startdatum = 5;
-   optional .bcl.DateTime Enddatum = 6;
+   Zeiteinheit Einheit = 3;
+   .bcl.Decimal Dauer = 4;
+   .bcl.DateTime Startdatum = 5;
+   .bcl.DateTime Enddatum = 6;
 }

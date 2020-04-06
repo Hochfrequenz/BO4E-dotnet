@@ -1,13 +1,13 @@
-﻿syntax = "proto2";
+﻿syntax = "proto3";
 import "protobuf-net/bcl.proto"; // schema for protobuf-net's handling of core .NET types
 
 message Aufgabe {
-   optional string AufgabenId = 3;
-   optional string Beschreibung = 4;
-   optional .bcl.DateTime Deadline = 5;
-   optional bool Ausgefuehrt = 6 [default = false];
-   optional .bcl.DateTime Ausfuehrungszeitpunkt = 7;
-   optional string Ausfuehrender = 8;
+   string AufgabenId = 3;
+   string Beschreibung = 4;
+   .bcl.DateTime Deadline = 5;
+   bool Ausgefuehrt = 6;
+   .bcl.DateTime Ausfuehrungszeitpunkt = 7;
+   string Ausfuehrender = 8;
 }
 enum Bearbeitungsstatus {
    OFFEN = 0;
@@ -18,26 +18,26 @@ enum Bearbeitungsstatus {
    IGNORIERT = 5;
 }
 message Benachrichtigung {
-   optional string BenachrichtigungsId = 4;
-   optional Prioritaet Prioritaet = 5 [default = NORMAL];
-   optional Bearbeitungsstatus Bearbeitungsstatus = 6 [default = OFFEN];
-   optional string Kurztext = 7;
-   optional .bcl.DateTime ErstellungsZeitpunkt = 8;
-   optional string Kategorie = 9;
-   optional string Bearbeiter = 10;
+   string BenachrichtigungsId = 4;
+   Prioritaet Prioritaet = 5; // default value could not be applied: NORMAL
+   Bearbeitungsstatus Bearbeitungsstatus = 6;
+   string Kurztext = 7;
+   .bcl.DateTime ErstellungsZeitpunkt = 8;
+   string Kategorie = 9;
+   string Bearbeiter = 10;
    repeated Notiz Notizen = 11;
-   optional .bcl.DateTime Deadline = 12;
+   .bcl.DateTime Deadline = 12;
    repeated Aufgabe Aufgaben = 13;
    repeated GenericStringStringInfo Infos = 14;
 }
 message GenericStringStringInfo {
-   optional string KeyColumn = 3;
-   optional string Value = 4;
+   string KeyColumn = 3;
+   string Value = 4;
 }
 message Notiz {
-   optional string Autor = 3;
-   optional .bcl.DateTime Zeitpunkt = 4;
-   optional string Inhalt = 5;
+   string Autor = 3;
+   .bcl.DateTime Zeitpunkt = 4;
+   string Inhalt = 5;
 }
 enum Prioritaet {
    SEHR_NIEDRIG = 0;

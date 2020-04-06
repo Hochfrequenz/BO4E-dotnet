@@ -1,4 +1,4 @@
-﻿syntax = "proto2";
+﻿syntax = "proto3";
 import "protobuf-net/bcl.proto"; // schema for protobuf-net's handling of core .NET types
 
 enum AbgabeArt {
@@ -13,14 +13,14 @@ enum AbgabeArt {
    TSS = 8;
 }
 message Adresse {
-   optional string Postleitzahl = 3;
-   optional string Ort = 4;
-   optional string Strasse = 5;
-   optional string Hausnummer = 6;
-   optional string Postfach = 7;
-   optional string Adresszusatz = 8;
-   optional string CoErgaenzung = 9;
-   optional Landescode Landescode = 10;
+   string Postleitzahl = 3;
+   string Ort = 4;
+   string Strasse = 5;
+   string Hausnummer = 6;
+   string Postfach = 7;
+   string Adresszusatz = 8;
+   string CoErgaenzung = 9;
+   Landescode Landescode = 10;
 }
 enum Anrede {
    HERR = 0;
@@ -39,8 +39,8 @@ enum Bilanzierungsmethode {
    IMS = 5;
 }
 message Dienstleistung {
-   optional Dienstleistungstyp Dienstleistungstyp = 3 [default = DATENBEREITSTELLUNG_TAEGLICH];
-   optional string Bezeichnung = 4;
+   Dienstleistungstyp Dienstleistungstyp = 3;
+   string Bezeichnung = 4;
 }
 enum Dienstleistungstyp {
    DATENBEREITSTELLUNG_TAEGLICH = 0;
@@ -93,18 +93,19 @@ enum Fernschaltung {
 }
 enum Gasqualitaet {
    option allow_alias = true;
+   ZERO = 0; // proto3 requires a zero value as the first item (it can be named anything)
    H_GAS = 1;
-   HGAS = 1;
    L_GAS = 2;
+   HGAS = 1;
    LGAS = 2;
 }
 message Geokoordinaten {
-   optional .bcl.Decimal Breitengrad = 3 [default = 0];
-   optional .bcl.Decimal Laengengrad = 4 [default = 0];
+   .bcl.Decimal Breitengrad = 3;
+   .bcl.Decimal Laengengrad = 4;
 }
 message Geraeteeigenschaften {
-   optional Geraetetyp Geraetetyp = 3 [default = WECHSELSTROMZAEHLER];
-   optional Geraetemerkmal Geraetemerkmal = 4;
+   Geraetetyp Geraetetyp = 3;
+   Geraetemerkmal Geraetemerkmal = 4;
    map<string,string> Parameter = 1005;
 }
 enum Geraetemerkmal {
@@ -193,21 +194,21 @@ enum Geraetetyp {
    KOMBIMESSWANDLER = 42;
 }
 message Geschaeftspartner {
-   optional Anrede anrede = 4;
-   optional string Name1 = 6;
-   optional string Name2 = 7;
-   optional string Name3 = 8;
-   optional bool Gewerbekennzeichnung = 9 [default = false];
-   optional string Hrnummer = 10;
-   optional string Amtsgericht = 11;
-   repeated Kontaktart Kontaktweg = 12;
-   optional string UmsatzsteuerId = 13;
-   optional string GlaeubigerId = 14;
-   optional string EMailAdresse = 15;
-   optional string Website = 16;
-   repeated Geschaeftspartnerrolle Geschaeftspartnerrolle = 17;
-   optional Adresse Partneradresse = 18;
-   optional string Title = 1001;
+   Anrede Anrede = 4;
+   string Name1 = 6;
+   string Name2 = 7;
+   string Name3 = 8;
+   bool Gewerbekennzeichnung = 9;
+   string Hrnummer = 10;
+   string Amtsgericht = 11;
+   repeated Kontaktart Kontaktweg = 12 [packed = false];
+   string UmsatzsteuerId = 13;
+   string GlaeubigerId = 14;
+   string EMailAdresse = 15;
+   string Website = 16;
+   repeated Geschaeftspartnerrolle Geschaeftspartnerrolle = 17 [packed = false];
+   Adresse Partneradresse = 18;
+   string Title = 1001;
 }
 enum Geschaeftspartnerrolle {
    LIEFERANT = 0;
@@ -217,15 +218,15 @@ enum Geschaeftspartnerrolle {
    MARKTPARTNER = 4;
 }
 message Hardware {
-   optional Geraetetyp Geraetetyp = 3 [default = WECHSELSTROMZAEHLER];
-   optional string Bezeichnung = 4;
-   optional Geraeteeigenschaften Geraeteeigenschaften = 1005;
-   optional string Geraetenummer = 1006;
-   optional string Geraetereferenz = 1007;
+   Geraetetyp Geraetetyp = 3;
+   string Bezeichnung = 4;
+   Geraeteeigenschaften Geraeteeigenschaften = 1005;
+   string Geraetenummer = 1006;
+   string Geraetereferenz = 1007;
 }
 message Katasteradresse {
-   optional string Gemarkung_flur = 3;
-   optional string Flurstueck = 4;
+   string Gemarkung_flur = 3;
+   string Flurstueck = 4;
 }
 enum Kontaktart {
    ANSCHREIBEN = 0;
@@ -235,9 +236,9 @@ enum Kontaktart {
    SMS = 4;
 }
 message Konzessionsabgabe {
-   optional AbgabeArt Satz = 3 [default = KAS];
-   optional .bcl.Decimal Kosten = 4 [default = 0];
-   optional string Kategorie = 5;
+   AbgabeArt Satz = 3;
+   .bcl.Decimal Kosten = 4;
+   string Kategorie = 5;
 }
 enum Landescode {
    AC = 0;
@@ -509,9 +510,9 @@ enum Landescode {
    ZW = 266;
 }
 message Marktrolle {
-   optional string Rollencodenummer = 3;
-   optional string Code = 4;
-   optional Marktrolle marktrolle = 5 [default = NB];
+   string Rollencodenummer = 3;
+   string Code = 4;
+   Marktrolle marktrolle = 5;
 }
 enum Marktrolle {
    NB = 0;
@@ -530,41 +531,42 @@ enum Marktrolle {
    INTERESSENT = 13;
 }
 enum Mengeneinheit {
+   ZERO = 0; // proto3 requires a zero value as the first item (it can be named anything)
    WH = 2;
    KW = 3;
+   KWH = 2000;
+   MW = 3000;
+   MWH = 2000000;
    ANZAHL = 7;
    KUBIKMETER = 11;
    STUNDE = 13;
    TAG = 17;
    MONAT = 19;
-   VAR = 23;
-   VARH = 29;
    JAHR = 228;
-   KWH = 2000;
-   MW = 3000;
+   VAR = 23;
    KVAR = 23000;
+   VARH = 29;
    KVARH = 29000;
-   MWH = 2000000;
 }
 message Messlokation {
-   optional string MesslokationsId = 4 [default = "|null|"];
-   optional Sparte Sparte = 5 [default = STROM];
-   optional Netzebene NetzebeneMessung = 6;
-   optional string MessgebietNr = 7;
-   optional string GrundzustaendigerMSBCodeNr = 8;
-   optional string GrundzustaendigerMSBIMCodeNr = 9;
-   optional string GrundzustaendigerMDLCodeNr = 10;
-   optional Adresse Messadresse = 11;
-   optional Geokoordinaten Geoadresse = 12;
-   optional Katasteradresse Katasterinformation = 13;
+   string MesslokationsId = 4; // default value could not be applied: |null|
+   Sparte Sparte = 5;
+   Netzebene NetzebeneMessung = 6;
+   string MessgebietNr = 7;
+   string GrundzustaendigerMSBCodeNr = 8;
+   string GrundzustaendigerMSBIMCodeNr = 9;
+   string GrundzustaendigerMDLCodeNr = 10;
+   Adresse Messadresse = 11;
+   Geokoordinaten Geoadresse = 12;
+   Katasteradresse Katasterinformation = 13;
    repeated Hardware Geraete = 14;
    repeated Dienstleistung Messdienstleistung = 15;
    repeated Zaehler Messlokationszaehler = 16;
-   optional Bilanzierungsmethode Bilanzierungsmethode = 17;
-   optional bool Abrechnungmessstellenbetriebnna = 1018;
+   Bilanzierungsmethode Bilanzierungsmethode = 17;
+   bool Abrechnungmessstellenbetriebnna = 1018;
    repeated Marktrolle Marktrollen = 1019;
-   optional Gasqualitaet Gasqualitaet = 1020;
-   optional .bcl.Decimal Verlustfaktor = 1021;
+   Gasqualitaet Gasqualitaet = 1020;
+   .bcl.Decimal Verlustfaktor = 1021;
 }
 enum Messwerterfassung {
    FERNAUSLESBAR = 0;
@@ -624,19 +626,19 @@ enum Waermenutzung {
    DIREKTHEIZUNG = 2;
 }
 message Zaehler {
-   optional string Zaehlernummer = 4;
-   optional Sparte Sparte = 5 [default = STROM];
-   optional Zaehlerauspraegung Zaehlerauspraegung = 6 [default = EINRICHTUNGSZAEHLER];
-   optional Zaehlertyp Zaehlertyp = 7 [default = DREHSTROMZAEHLER];
-   optional Tarifart Tarifart = 8 [default = EINTARIF];
-   optional .bcl.Decimal zaehlerkonstante = 9 [default = 0];
-   optional .bcl.DateTime EichungBis = 10;
-   optional .bcl.DateTime LetzteEichung = 11;
+   string Zaehlernummer = 4;
+   Sparte Sparte = 5;
+   Zaehlerauspraegung Zaehlerauspraegung = 6;
+   Zaehlertyp Zaehlertyp = 7;
+   Tarifart Tarifart = 8;
+   .bcl.Decimal zaehlerkonstante = 9;
+   .bcl.DateTime EichungBis = 10;
+   .bcl.DateTime LetzteEichung = 11;
    repeated Zaehlwerk Zaehlwerke = 12;
-   optional Geschaeftspartner Zaehlerhersteller = 13;
-   optional string Gateway = 1014;
-   optional Fernschaltung Fernschaltung = 1015;
-   optional Messwerterfassung Messwerterfassung = 1016;
+   Geschaeftspartner Zaehlerhersteller = 13;
+   string Gateway = 1014;
+   Fernschaltung Fernschaltung = 1015;
+   Messwerterfassung Messwerterfassung = 1016;
 }
 enum Zaehlerauspraegung {
    EINRICHTUNGSZAEHLER = 0;
@@ -654,20 +656,20 @@ enum Zaehlertyp {
    WECHSELSTROMZAEHLER = 8;
 }
 message Zaehlwerk {
-   optional string ZaehlwerkId = 3;
-   optional string Bezeichnung = 4;
-   optional Energierichtung Richtung = 5 [default = AUSSP];
-   optional string ObisKennzahl = 6;
-   optional .bcl.Decimal Wandlerfaktor = 7 [default = 0];
-   optional Mengeneinheit Einheit = 8 [default = 0];
-   optional string Kennzahl = 1009;
-   optional Schwachlastfaehig Schwachlastfaehig = 1010;
-   repeated Verwendungszweck Verwendungszwecke = 1011;
-   optional Verbrauchsart Verbrauchsart = 1012;
-   optional Unterbrechbarkeit Unterbrechbarkeit = 1013;
-   optional Waermenutzung Waermenutzung = 1014;
-   optional Konzessionsabgabe Konzessionsabgabe = 1015;
-   optional bool Steuerbefreit = 1016;
-   optional int32 Vorkommastelle = 1017;
-   optional int32 Nachkommastelle = 1018;
+   string ZaehlwerkId = 3;
+   string Bezeichnung = 4;
+   Energierichtung Richtung = 5;
+   string ObisKennzahl = 6;
+   .bcl.Decimal Wandlerfaktor = 7;
+   Mengeneinheit Einheit = 8;
+   string Kennzahl = 1009;
+   Schwachlastfaehig Schwachlastfaehig = 1010;
+   repeated Verwendungszweck Verwendungszwecke = 1011 [packed = false];
+   Verbrauchsart Verbrauchsart = 1012;
+   Unterbrechbarkeit Unterbrechbarkeit = 1013;
+   Waermenutzung Waermenutzung = 1014;
+   Konzessionsabgabe Konzessionsabgabe = 1015;
+   bool Steuerbefreit = 1016;
+   int32 Vorkommastelle = 1017;
+   int32 Nachkommastelle = 1018;
 }
