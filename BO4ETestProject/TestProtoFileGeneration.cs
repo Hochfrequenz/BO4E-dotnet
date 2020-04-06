@@ -45,7 +45,7 @@ namespace TestBO4E
                 Assert.IsNotNull(method);
                 string protoString = (string)method.Invoke(null, null);
                 Assert.IsFalse(string.IsNullOrWhiteSpace(protoString));
-                string path = $"../../../protobuf-files/{type}.proto"; // not elegant but ok ;)
+                string path = $"../../../../BO4E-dotnet/protobuf-files/{type}.proto"; // not elegant but ok ;)
                 if (!File.Exists(path))
                 {
                     var stream = File.Create(path);
