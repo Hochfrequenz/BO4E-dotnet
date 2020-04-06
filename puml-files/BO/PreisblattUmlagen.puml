@@ -1,0 +1,6 @@
+@startuml
+class PreisblattUmlagen {
+}
+Preisblatt <|-- PreisblattUmlagen
+PreisblattUmlagen --> "Sparte" Sparte
+@enduml

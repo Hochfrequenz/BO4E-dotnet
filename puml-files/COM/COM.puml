@@ -1,0 +1,15 @@
+@startuml
+abstract class COM {
+    + <<override>> Equals(b:object) : bool
+    + Equals(b:COM) : bool
+    + <<override>> GetHashCode() : int
+    + IsValid() : bool
+    + Guid : string <<get>> <<set>>
+}
+class "IEquatable`1"<T> {
+}
+class "IDictionary`2"<T1,T2> {
+}
+"IEquatable`1" "<COM>" <|-- COM
+COM --> "UserProperties<string,JToken>" "IDictionary`2"
+@enduml

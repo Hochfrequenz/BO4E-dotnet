@@ -1,0 +1,9 @@
+@startuml
+class RegionaleGueltigkeit {
+}
+class "List`1"<T> {
+}
+COM <|-- RegionaleGueltigkeit
+RegionaleGueltigkeit --> "Gueltigkeitstyp" Gueltigkeitstyp
+RegionaleGueltigkeit --> "KriteriumsWerte<KriteriumsWert>" "List`1"
+@enduml

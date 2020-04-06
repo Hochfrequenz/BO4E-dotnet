@@ -1,0 +1,7 @@
+@startuml
+class Betrag {
+    + Wert : decimal <<get>> <<set>>
+}
+COM <|-- Betrag
+Betrag --> "Waehrung" Waehrungscode
+@enduml

@@ -1,0 +1,13 @@
+@startuml
+enum Vertragstatus {
+    IN_ARBEIT,
+    UEBERMITTELT,
+    ANGENOMMEN,
+    AKTIV,
+    ABGELEHNT,
+    WIDERRUFEN,
+    STORNIERT,
+    GEKUENDIGT,
+    BEENDET,
+}
+@enduml

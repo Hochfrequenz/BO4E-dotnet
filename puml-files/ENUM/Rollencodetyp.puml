@@ -1,0 +1,7 @@
+@startuml
+enum Rollencodetyp {
+    BDEW,
+    DVGW,
+    GLN,
+}
+@enduml

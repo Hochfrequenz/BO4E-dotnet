@@ -1,0 +1,7 @@
+@startuml
+enum Verbrauchsmengetyp {
+    ARBEITLEISTUNGTAGESPARAMETERABHMALO,
+    VERANSCHLAGTEJAHRESMENGE,
+    TUMKUNDENWERT,
+}
+@enduml

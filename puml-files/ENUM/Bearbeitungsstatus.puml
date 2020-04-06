@@ -1,0 +1,10 @@
+@startuml
+enum Bearbeitungsstatus {
+    OFFEN,
+    IN_BEARBEITUNG,
+    ABGESCHLOSSEN,
+    STORNIERT,
+    QUITTIERT,
+    IGNORIERT,
+}
+@enduml

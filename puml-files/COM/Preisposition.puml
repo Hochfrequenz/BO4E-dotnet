@@ -1,0 +1,18 @@
+@startuml
+class Preisposition {
+    + Leistungsbezeichung : string <<get>> <<set>>
+    + Zeitbasis : Zeiteinheit? <<get>> <<set>>
+    + Tarifzeit : Tarifzeit? <<get>> <<set>>
+    + BdewArtikelnummer : BDEWArtikelnummer? <<get>> <<set>>
+    + Zonungsgroesse : Bemessungsgroesse? <<get>> <<set>>
+}
+class "List`1"<T> {
+}
+COM <|-- Preisposition
+Preisposition --> "Berechnungsmethode" Kalkulationsmethode
+Preisposition --> "Leistungstyp" Leistungstyp
+Preisposition --> "Preiseinheit" Waehrungseinheit
+Preisposition --> "Bezugsgroesse" Mengeneinheit
+Preisposition --> "Zu_abschlaege" PositionsAufAbschlag
+Preisposition --> "Preisstaffeln<Preisstaffel>" "List`1"
+@enduml

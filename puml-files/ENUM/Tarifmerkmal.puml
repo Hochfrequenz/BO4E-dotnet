@@ -1,0 +1,11 @@
+@startuml
+enum Tarifmerkmal {
+    VORKASSE,
+    PAKET,
+    KOMBI,
+    FESTPREIS,
+    BAUSTROM,
+    HAUSLICHT,
+    HEIZSTROM,
+}
+@enduml

@@ -1,0 +1,10 @@
+@startuml
+class Regionskriterium {
+    + Sparte : Sparte? <<get>> <<set>>
+    + Wert : string <<get>> <<set>>
+}
+COM <|-- Regionskriterium
+Regionskriterium --> "Gueltigkeitstyp" Gueltigkeitstyp
+Regionskriterium --> "Mengenoperator" Mengenoperator
+Regionskriterium --> "Regionskriteriumtyp" Regionskriteriumtyp
+@enduml

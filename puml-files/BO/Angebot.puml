@@ -1,0 +1,17 @@
+@startuml
+class Angebot {
+    + Angebotsnummer : string <<get>> <<set>>
+    + Anfragereferenz : string <<get>> <<set>>
+    + Angebotsdatum : string <<get>> <<set>>
+}
+class "List`1"<T> {
+}
+BusinessObject <|-- Angebot
+Angebot --> "Sparte" Sparte
+Angebot --> "Bindefrist" DateTime
+Angebot --> "Angebotgeber" Geschaeftspartner
+Angebot --> "Angebotnehmer" Geschaeftspartner
+Angebot --> "UnterzeichnerAngebotsnehmer" Ansprechpartner
+Angebot --> "UnterzeichnerAngebotsgeber" Ansprechpartner
+Angebot --> "Varianten<Angebotsvariante>" "List`1"
+@enduml

@@ -1,0 +1,7 @@
+@startuml
+enum WaermenutzungEdi {
+    Z56,
+    Z57,
+    Z61,
+}
+@enduml

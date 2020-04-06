@@ -1,0 +1,6 @@
+@startuml
+class LenientParsingExtensions <<static>> {
+    + {static} GetJsonSerializerSettings(lenient:LenientParsing) : JsonSerializerSettings
+    + {static} GetJsonSerializerSettings(lenient:LenientParsing, userPropertiesWhiteList:HashSet<string>) : JsonSerializerSettings
+}
+@enduml

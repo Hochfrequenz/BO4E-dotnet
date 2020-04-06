@@ -1,0 +1,12 @@
+@startuml
+class Energiemenge {
+    + LokationsId : string <<get>> <<set>>
+}
+class "List`1"<T> {
+}
+class "Dictionary`2"<T1,T2> {
+}
+BusinessObject <|-- Energiemenge
+Energiemenge --> "LokationsTyp" Lokationstyp
+Energiemenge --> "Energieverbrauch<Verbrauch>" "List`1"
+@enduml

@@ -1,0 +1,6 @@
+@startuml
+enum Lokationstyp {
+    MaLo,
+    MeLo,
+}
+@enduml

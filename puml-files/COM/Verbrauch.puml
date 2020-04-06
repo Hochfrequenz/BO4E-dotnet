@@ -1,0 +1,25 @@
+@startuml
+class Verbrauch {
+    {static} Verbrauch()
+    + Obiskennzahl : string <<get>> <<set>>
+    + Wert : decimal <<get>> <<set>>
+    + Type : Verbrauchsmengetyp? <<get>> <<set>>
+    + {static} FixSapCdsBug(v:Verbrauch) : Verbrauch
+    + FixSapCdsBug() : void
+}
+enum SapTimezone {
+    UTC,
+    GMT,
+    CET,
+    MEZ,
+    CEST,
+    MESZ,
+}
+COM <|-- Verbrauch
+Verbrauch --> "CENTRAL_EUROPE_STANDARD_TIME" TimeZoneInfo
+Verbrauch --> "Startdatum" DateTime
+Verbrauch --> "Enddatum" DateTime
+Verbrauch --> "Wertermittlungsverfahren" Wertermittlungsverfahren
+Verbrauch --> "Einheit" Mengeneinheit
+Verbrauch +-- SapTimezone
+@enduml

@@ -1,0 +1,6 @@
+@startuml
+enum NetznutzungsabrechnungsgrundlageEdi {
+    Z12,
+    Z13,
+}
+@enduml

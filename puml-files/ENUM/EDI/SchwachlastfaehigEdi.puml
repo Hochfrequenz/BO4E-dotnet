@@ -1,0 +1,6 @@
+@startuml
+enum SchwachlastfaehigEdi {
+    Z59,
+    Z60,
+}
+@enduml

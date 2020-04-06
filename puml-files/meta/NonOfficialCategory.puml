@@ -1,0 +1,9 @@
+@startuml
+enum NonOfficialCategory {
+    UNSPECIFIED,
+    MISSING,
+    REGULATORY_REQUIREMENTS,
+    PROPOSED_DELETION,
+    CUSTOMER_REQUIREMENTS,
+}
+@enduml

@@ -1,0 +1,8 @@
+@startuml
+enum Gasqualitaet {
+    H_GAS= 1,
+    L_GAS= 2,
+    HGAS= 1,
+    LGAS= 2,
+}
+@enduml

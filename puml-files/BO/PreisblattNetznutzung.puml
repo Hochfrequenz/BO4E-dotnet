@@ -1,0 +1,10 @@
+@startuml
+class PreisblattNetznutzung {
+}
+Preisblatt <|-- PreisblattNetznutzung
+PreisblattNetznutzung --> "Sparte" Sparte
+PreisblattNetznutzung --> "Bilanzierungsmethode" Bilanzierungsmethode
+PreisblattNetznutzung --> "Netzebene" Netzebene
+PreisblattNetznutzung --> "Kundengruppe" Kundengruppe
+PreisblattNetznutzung --> "Herausgeber" Marktteilnehmer
+@enduml

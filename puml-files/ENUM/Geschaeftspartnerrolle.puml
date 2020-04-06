@@ -1,0 +1,9 @@
+@startuml
+enum Geschaeftspartnerrolle {
+    LIEFERANT,
+    DIENSTLEISTER,
+    KUNDE,
+    INTERESSENT,
+    MARKTPARTNER,
+}
+@enduml

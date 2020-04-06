@@ -1,0 +1,9 @@
+@startuml
+class Steuerbetrag {
+    + Basiswert : decimal <<get>> <<set>>
+    + Steuerwert : decimal <<get>> <<set>>
+}
+COM <|-- Steuerbetrag
+Steuerbetrag --> "Steuerkennzeichen" Steuerkennzeichen
+Steuerbetrag --> "Waehrung" Waehrungscode
+@enduml

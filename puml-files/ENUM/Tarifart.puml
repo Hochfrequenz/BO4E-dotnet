@@ -1,0 +1,9 @@
+@startuml
+enum Tarifart {
+    EINTARIF,
+    ZWEITARIF,
+    MEHRTARIF,
+    SMART_METER,
+    LEISTUNGSGEMESSEN,
+}
+@enduml

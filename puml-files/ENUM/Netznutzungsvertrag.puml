@@ -1,0 +1,6 @@
+@startuml
+enum NetznutzungsVertrag {
+    KUNDEN_NB,
+    LIEFERANTEN_NB,
+}
+@enduml

@@ -1,0 +1,9 @@
+@startuml
+enum Prioritaet {
+    SEHR_NIEDRIG,
+    NIEDRIG,
+    NORMAL,
+    HOCH,
+    SEHR_HOCH,
+}
+@enduml

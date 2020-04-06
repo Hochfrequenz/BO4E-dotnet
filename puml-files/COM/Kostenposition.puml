@@ -1,0 +1,14 @@
+@startuml
+class Kostenposition {
+    + Positionstitel : string <<get>> <<set>>
+    + Von : DateTime? <<get>> <<set>>
+    + Bis : DateTime? <<get>> <<set>>
+    + Artikelbezeichnung : string <<get>> <<set>>
+    + Artikeldetail : string <<get>> <<set>>
+}
+COM <|-- Kostenposition
+Kostenposition --> "Menge" Menge
+Kostenposition --> "Zeitmenge" Menge
+Kostenposition --> "Einzelpreis" Preis
+Kostenposition --> "BetragKostenposition" Betrag
+@enduml

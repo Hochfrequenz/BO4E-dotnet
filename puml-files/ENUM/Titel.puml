@@ -1,0 +1,7 @@
+@startuml
+enum Titel {
+    DR,
+    PROF,
+    PROF_DR,
+}
+@enduml

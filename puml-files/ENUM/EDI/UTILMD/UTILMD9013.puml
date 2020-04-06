@@ -1,0 +1,6 @@
+@startuml
+enum UTILMD7433 {
+    Z04,
+    Z06,
+}
+@enduml

@@ -1,0 +1,8 @@
+@startuml
+class Preisgarantie {
+    + Beschreibung : string <<get>> <<set>>
+}
+COM <|-- Preisgarantie
+Preisgarantie --> "Preisgarantietyp" Preisgarantietyp
+Preisgarantie --> "ZeitlicheGueltigkeit" Zeitraum
+@enduml

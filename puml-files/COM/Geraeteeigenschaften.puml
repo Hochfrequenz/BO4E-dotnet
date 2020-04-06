@@ -1,0 +1,7 @@
+@startuml
+class Geraeteeigenschaften {
+    + Geraetemerkmal : Geraetemerkmal? <<get>> <<set>>
+}
+COM <|-- Geraeteeigenschaften
+Geraeteeigenschaften --> "Geraetetyp" Geraetetyp
+@enduml

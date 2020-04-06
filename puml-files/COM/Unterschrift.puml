@@ -1,0 +1,8 @@
+@startuml
+class Unterschrift {
+    + Ort : string <<get>> <<set>>
+    + Datum : DateTime? <<get>> <<set>>
+    + Name : string <<get>> <<set>>
+}
+COM <|-- Unterschrift
+@enduml

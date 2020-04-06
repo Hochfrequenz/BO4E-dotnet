@@ -1,0 +1,12 @@
+@startuml
+class Kosten {
+}
+class "List`1"<T> {
+}
+BusinessObject <|-- Kosten
+Kosten --> "Kostenklasse" Kostenklasse
+Kosten --> "Gueltigkeit" Zeitraum
+Kosten --> "SummeKosten<Betrag>" "List`1"
+Kosten --> "Kostenbloecke<Kostenblock>" "List`1"
+Kosten --> "Kostenpositionen<Kostenposition>" "List`1"
+@enduml

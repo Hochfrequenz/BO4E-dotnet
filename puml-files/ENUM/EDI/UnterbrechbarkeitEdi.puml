@@ -1,0 +1,6 @@
+@startuml
+enum UnterbrechbarkeitEdi {
+    Unterbrechbare_Verbrauchseinrichtung,
+    Nicht_Unterbrechbare_Verbrauchseinrichtung,
+}
+@enduml

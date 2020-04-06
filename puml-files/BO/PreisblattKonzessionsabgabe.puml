@@ -1,0 +1,7 @@
+@startuml
+class PreisblattKonzessionsabgabe {
+}
+Preisblatt <|-- PreisblattKonzessionsabgabe
+PreisblattKonzessionsabgabe --> "sparte" Sparte
+PreisblattKonzessionsabgabe --> "KundengruppeKA" KundengruppeKA
+@enduml

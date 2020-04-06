@@ -1,0 +1,6 @@
+@startuml
+enum Fernschaltung {
+    VORHANDEN,
+    NICHT_VORHANDEN,
+}
+@enduml

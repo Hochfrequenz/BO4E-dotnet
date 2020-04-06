@@ -1,0 +1,13 @@
+@startuml
+class Adresse {
+    + Postleitzahl : string <<get>> <<set>>
+    + Ort : string <<get>> <<set>>
+    + Strasse : string <<get>> <<set>>
+    + Hausnummer : string <<get>> <<set>>
+    + Postfach : string <<get>> <<set>>
+    + Adresszusatz : string <<get>> <<set>>
+    + CoErgaenzung : string <<get>> <<set>>
+    + Landescode : Landescode? <<get>> <<set>>
+}
+COM <|-- Adresse
+@enduml

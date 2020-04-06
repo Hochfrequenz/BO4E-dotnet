@@ -1,0 +1,8 @@
+@startuml
+enum WertermittlungsverfahrenEdi {
+    _220,
+    _67,
+    _201,
+    _20,
+}
+@enduml

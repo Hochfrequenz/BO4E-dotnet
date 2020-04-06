@@ -1,0 +1,10 @@
+@startuml
+class Kostenblock {
+    + Kostenblockbezeichnung : string <<get>> <<set>>
+}
+class "List`1"<T> {
+}
+COM <|-- Kostenblock
+Kostenblock --> "SummeKostenblock" Betrag
+Kostenblock --> "Kostenpositionen<Kostenposition>" "List`1"
+@enduml

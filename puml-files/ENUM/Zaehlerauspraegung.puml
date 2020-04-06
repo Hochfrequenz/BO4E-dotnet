@@ -1,0 +1,6 @@
+@startuml
+enum Zaehlerauspraegung {
+    EINRICHTUNGSZAEHLER,
+    ZWEIRICHTUNGSZAEHLER,
+}
+@enduml

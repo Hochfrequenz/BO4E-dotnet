@@ -1,0 +1,8 @@
+@startuml
+class Zustaendigkeit {
+    + Jobtitel : string <<get>> <<set>>
+    + Abteilung : string <<get>> <<set>>
+    + Themengebiet : string <<get>> <<set>>
+}
+COM <|-- Zustaendigkeit
+@enduml

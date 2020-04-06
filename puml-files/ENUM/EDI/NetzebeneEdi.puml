@@ -1,0 +1,14 @@
+@startuml
+enum NetzebeneEdi {
+    E03,
+    E04,
+    E05,
+    E06,
+    E07,
+    E08,
+    E09,
+    Y01,
+    Y02,
+    Y03,
+}
+@enduml

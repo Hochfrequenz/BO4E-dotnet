@@ -1,0 +1,6 @@
+@startuml
+enum Preisstatus {
+    VORLAEUFIG,
+    ENDGUELTIG,
+}
+@enduml

@@ -1,0 +1,10 @@
+@startuml
+class Hardware {
+    + Bezeichnung : string <<get>> <<set>>
+    + Geraetenummer : string <<get>> <<set>>
+    + Geraetereferenz : string <<get>> <<set>>
+}
+COM <|-- Hardware
+Hardware --> "Geraetetyp" Geraetetyp
+Hardware --> "Geraeteeigenschaften" Geraeteeigenschaften
+@enduml

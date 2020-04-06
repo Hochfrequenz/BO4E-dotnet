@@ -1,0 +1,11 @@
+@startuml
+class Aufgabe {
+    + AufgabenId : string <<get>> <<set>>
+    + Beschreibung : string <<get>> <<set>>
+    + Deadline : DateTime? <<get>> <<set>>
+    + Ausgefuehrt : bool <<get>> <<set>>
+    + Ausfuehrungszeitpunkt : DateTime? <<get>> <<set>>
+    + Ausfuehrender : string <<get>> <<set>>
+}
+COM <|-- Aufgabe
+@enduml

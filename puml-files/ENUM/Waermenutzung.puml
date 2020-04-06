@@ -1,0 +1,7 @@
+@startuml
+enum Waermenutzung {
+    SPEICHERHEIZUNG,
+    WAERMEPUMPE,
+    DIREKTHEIZUNG,
+}
+@enduml

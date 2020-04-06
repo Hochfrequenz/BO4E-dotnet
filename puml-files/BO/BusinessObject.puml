@@ -1,0 +1,40 @@
+@startuml
+abstract class BusinessObject {
+    + BoTyp : string <<get>> <<set>>
+    + <<const>> USER_PROPERTIES_NAME : string = "userProperties"
+    + GetBoTyp() : string
+    + versionStruktur : int
+    + guid : string
+    + GetJsonScheme() : JSchema
+    + {static} GetJsonSchema(boType:Type) : JSchema
+    + GetURI(includeUserProperties:bool) : Bo4eUri
+    + GetBoKeyNames() : List<string>
+    + {static} GetBoKeyNames(boType:Type) : List<string>
+    + {static} GetExpandablePropertyNames(boType:Type) : Dictionary<string, Type>
+    + {static} GetExpandableFieldNames(boTypeName:string) : Dictionary<string, Type>
+    + GetBoKeys() : Dictionary<string, object>
+    + {static} GetBoKeyProps(boType:Type) : List<PropertyInfo>
+    + <<override>> Equals(b:object) : bool
+    + Equals(b:BusinessObject) : bool
+    + <<override>> GetHashCode() : int
+    + <<virtual>> IsValid() : bool
+}
+class "IEquatable`1"<T> {
+}
+class "IDictionary`2"<T1,T2> {
+}
+class BaseSpecifiedConcreteClassConverter {
+}
+class BusinessObjectBaseConverter {
+    + <<override>> CanConvert(objectType:Type) : bool
+    + <<override>> ReadJson(reader:JsonReader, objectType:Type, existingValue:object, serializer:JsonSerializer) : object
+    + <<override>> CanWrite : bool <<get>>
+    + <<override>> WriteJson(writer:JsonWriter, value:object, serializer:JsonSerializer) : void
+}
+"IEquatable`1" "<BusinessObject>" <|-- BusinessObject
+BusinessObject --> "UserProperties<string,JToken>" "IDictionary`2"
+BusinessObject +-- BaseSpecifiedConcreteClassConverter
+DefaultContractResolver <|-- BaseSpecifiedConcreteClassConverter
+BusinessObject +-- BusinessObjectBaseConverter
+JsonConverter <|-- BusinessObjectBaseConverter
+@enduml

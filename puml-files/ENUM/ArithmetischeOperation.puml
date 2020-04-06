@@ -1,0 +1,8 @@
+@startuml
+enum ArithmetischeOperation {
+    ADDITION,
+    SUBTRAKTION,
+    MULTIPLIKATION,
+    DIVISION,
+}
+@enduml

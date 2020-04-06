@@ -1,0 +1,10 @@
+@startuml
+class Marktteilnehmer {
+    + Rollencodenummer : string <<get>> <<set>>
+    + Makoadresse : string <<get>> <<set>>
+}
+Geschaeftspartner <|-- Marktteilnehmer
+Marktteilnehmer --> "Marktrolle" Marktrolle
+Marktteilnehmer --> "Rollencodetyp" Rollencodetyp
+Marktteilnehmer --> "Ansprechpartner" Ansprechpartner
+@enduml

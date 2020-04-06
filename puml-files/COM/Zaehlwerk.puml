@@ -1,0 +1,23 @@
+@startuml
+class Zaehlwerk {
+    + ZaehlwerkId : string <<get>> <<set>>
+    + Bezeichnung : string <<get>> <<set>>
+    + ObisKennzahl : string <<get>> <<set>>
+    + Wandlerfaktor : decimal <<get>> <<set>>
+    + Kennzahl : string <<get>> <<set>>
+    + Schwachlastfaehig : Schwachlastfaehig? <<get>> <<set>>
+    + Verbrauchsart : Verbrauchsart? <<get>> <<set>>
+    + Unterbrechbarkeit : Unterbrechbarkeit? <<get>> <<set>>
+    + Waermenutzung : Waermenutzung? <<get>> <<set>>
+    + Steuerbefreit : bool? <<get>> <<set>>
+    + Vorkommastelle : int? <<get>> <<set>>
+    + Nachkommastelle : int? <<get>> <<set>>
+}
+class "List`1"<T> {
+}
+COM <|-- Zaehlwerk
+Zaehlwerk --> "Richtung" Energierichtung
+Zaehlwerk --> "Einheit" Mengeneinheit
+Zaehlwerk --> "Verwendungszwecke<Verwendungszweck>" "List`1"
+Zaehlwerk --> "Konzessionsabgabe" Konzessionsabgabe
+@enduml

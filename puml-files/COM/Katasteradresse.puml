@@ -1,0 +1,7 @@
+@startuml
+class Katasteradresse {
+    + Gemarkung_flur : string <<get>> <<set>>
+    + Flurstueck : string <<get>> <<set>>
+}
+COM <|-- Katasteradresse
+@enduml

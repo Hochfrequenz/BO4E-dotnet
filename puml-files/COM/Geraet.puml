@@ -1,0 +1,7 @@
+@startuml
+class Geraet {
+    + Geraetenummer : string <<get>> <<set>>
+}
+COM <|-- Geraet
+Geraet --> "Geraeteeigenschaften" Geraeteeigenschaften
+@enduml

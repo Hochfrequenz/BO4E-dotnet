@@ -1,0 +1,8 @@
+@startuml
+class GenericStringStringInfo {
+    + KeyColumn : string <<get>> <<set>>
+    + Value : string <<get>> <<set>>
+    + ToKeyValuePair() : KeyValuePair<string, string>
+}
+COM <|-- GenericStringStringInfo
+@enduml

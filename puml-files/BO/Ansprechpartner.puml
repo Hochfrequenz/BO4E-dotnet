@@ -1,0 +1,18 @@
+@startuml
+class Ansprechpartner {
+    + Anrede : Anrede? <<get>> <<set>>
+    + IndividuelleAnrede : string <<get>> <<set>>
+    + Titel : Titel?
+    + Vorname : string <<get>> <<set>>
+    + Nachname : string <<get>> <<set>>
+    + EMailAdresse : string <<get>> <<set>>
+    + Kommentar : string <<get>> <<set>>
+}
+class "List`1"<T> {
+}
+BusinessObject <|-- Ansprechpartner
+Ansprechpartner --> "Geschaeftspartner" Geschaeftspartner
+Ansprechpartner --> "Adresse" Adresse
+Ansprechpartner --> "Rufnummer<Rufnummer>" "List`1"
+Ansprechpartner --> "Zustaendigkeit<Zustaendigkeit>" "List`1"
+@enduml

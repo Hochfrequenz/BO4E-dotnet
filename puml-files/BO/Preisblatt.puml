@@ -1,0 +1,10 @@
+@startuml
+class Preisblatt {
+    + Bezeichnung : string <<get>> <<set>>
+}
+class "List`1"<T> {
+}
+BusinessObject <|-- Preisblatt
+Preisblatt --> "Gueltigkeit" Zeitraum
+Preisblatt --> "Preispositionen<Preisposition>" "List`1"
+@enduml

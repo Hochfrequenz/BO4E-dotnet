@@ -1,0 +1,7 @@
+@startuml
+class Geokoordinaten {
+    + Breitengrad : decimal <<get>> <<set>>
+    + Laengengrad : decimal <<get>> <<set>>
+}
+COM <|-- Geokoordinaten
+@enduml

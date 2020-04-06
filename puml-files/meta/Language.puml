@@ -1,0 +1,8 @@
+@startuml
+enum Language {
+    EN,
+    DE,
+    FR,
+    SP,
+}
+@enduml

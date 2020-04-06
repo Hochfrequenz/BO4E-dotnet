@@ -1,0 +1,22 @@
+@startuml
+class Geschaeftspartner {
+    + anrede : Anrede? <<get>> <<set>>
+    + Title : string <<get>> <<set>>
+    + Name1 : string <<get>> <<set>>
+    + Name2 : string <<get>> <<set>>
+    + Name3 : string <<get>> <<set>>
+    + Gewerbekennzeichnung : bool <<get>> <<set>>
+    + Hrnummer : string <<get>> <<set>>
+    + Amtsgericht : string <<get>> <<set>>
+    + UmsatzsteuerId : string <<get>> <<set>>
+    + GlaeubigerId : string <<get>> <<set>>
+    + EMailAdresse : string <<get>> <<set>>
+    + Website : string <<get>> <<set>>
+}
+class "List`1"<T> {
+}
+BusinessObject <|-- Geschaeftspartner
+Geschaeftspartner --> "Kontaktweg<Kontaktart>" "List`1"
+Geschaeftspartner --> "Geschaeftspartnerrolle<Geschaeftspartnerrolle>" "List`1"
+Geschaeftspartner --> "Partneradresse" Adresse
+@enduml

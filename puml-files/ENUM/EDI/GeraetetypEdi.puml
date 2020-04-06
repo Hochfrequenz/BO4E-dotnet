@@ -1,0 +1,17 @@
+@startuml
+enum GeraetetypEdi {
+    AHZ,
+    WSZ,
+    LAZ,
+    MAZ,
+    MME,
+    DKZ,
+    BGZ,
+    TRZ,
+    UGZ,
+    WGZ,
+    MRG,
+    EHZ,
+    IVA,
+}
+@enduml

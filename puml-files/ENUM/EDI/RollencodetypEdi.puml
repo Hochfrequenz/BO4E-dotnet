@@ -1,0 +1,6 @@
+@startuml
+enum RollencodetypEdi {
+    _293,
+    _332,
+}
+@enduml

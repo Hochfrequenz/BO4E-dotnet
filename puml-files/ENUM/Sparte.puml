@@ -1,0 +1,10 @@
+@startuml
+enum Sparte {
+    STROM,
+    GAS,
+    FERNWAERME,
+    NAHWAERME,
+    WASSER,
+    ABWASSER,
+}
+@enduml

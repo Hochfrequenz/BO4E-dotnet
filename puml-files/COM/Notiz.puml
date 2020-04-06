@@ -1,0 +1,9 @@
+@startuml
+class Notiz {
+    + Autor : string <<get>> <<set>>
+    + Inhalt : string <<get>> <<set>>
+    + CleanUpSapNotes(context:StreamingContext) : void
+}
+COM <|-- Notiz
+Notiz --> "Zeitpunkt" DateTime
+@enduml

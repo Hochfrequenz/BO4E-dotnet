@@ -1,0 +1,9 @@
+@startuml
+class Preis {
+    + Wert : decimal <<get>> <<set>>
+    + Status : Preisstatus? <<get>> <<set>>
+}
+COM <|-- Preis
+Preis --> "Einheit" Waehrungseinheit
+Preis --> "Bezugswert" Mengeneinheit
+@enduml

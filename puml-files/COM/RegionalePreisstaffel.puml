@@ -1,0 +1,6 @@
+@startuml
+class RegionalePreisstaffel {
+}
+Preisstaffel <|-- RegionalePreisstaffel
+RegionalePreisstaffel --> "RegionaleGueltigkeit" RegionaleGueltigkeit
+@enduml

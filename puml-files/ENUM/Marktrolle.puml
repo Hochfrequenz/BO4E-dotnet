@@ -1,0 +1,18 @@
+@startuml
+enum Marktrolle {
+    NB,
+    LF,
+    MSB,
+    MDL,
+    DL,
+    BKV,
+    BIKO,
+    UENB,
+    KUNDE_SELBST_NN,
+    MGV,
+    EIV,
+    RB,
+    KUNDE,
+    INTERESSENT,
+}
+@enduml

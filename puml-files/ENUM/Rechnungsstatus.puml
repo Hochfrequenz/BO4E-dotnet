@@ -1,0 +1,8 @@
+@startuml
+enum Rechnungsstatus {
+    GEPRUEFT_OK,
+    GEPRUEFT_FEHLERHAFT,
+    GEBUCHT,
+    BEZAHLT,
+}
+@enduml

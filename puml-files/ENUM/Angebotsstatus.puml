@@ -1,0 +1,13 @@
+@startuml
+enum Angebotsstatus {
+    KONZEPTION,
+    UNVERBINDLICH,
+    VERBINDLICH,
+    BEAUFTRAGT,
+    UNGUELTIG,
+    ABGELEHNT,
+    NACHGEFASST,
+    AUSSTEHEND,
+    ERLEDIGT,
+}
+@enduml

@@ -1,0 +1,7 @@
+@startuml
+class NonOfficialAttribute {
+    + NonOfficialAttribute(enums:object[])
+    + HasCategory(noc:NonOfficialCategory) : bool
+}
+Attribute <|-- NonOfficialAttribute
+@enduml

@@ -1,0 +1,14 @@
+@startuml
+class Vertragsteil {
+    + Lokation : string <<get>> <<set>>
+    + Verbrauchsaufteilung : string <<get>> <<set>>
+}
+COM <|-- Vertragsteil
+Vertragsteil --> "Vertragsteilbeginn" DateTime
+Vertragsteil --> "Vertragsteilende" DateTime
+Vertragsteil --> "VertraglichFixierteMenge" Menge
+Vertragsteil --> "MinimaleAbnahmemenge" Menge
+Vertragsteil --> "MaximaleAbnahmemenge" Menge
+Vertragsteil --> "Jahresverbrauchsprognose" Menge
+Vertragsteil --> "Kundenwert" Menge
+@enduml

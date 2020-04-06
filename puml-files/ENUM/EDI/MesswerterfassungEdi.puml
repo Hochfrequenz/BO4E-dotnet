@@ -1,0 +1,6 @@
+@startuml
+enum MesswerterfassungEdi {
+    AMR,
+    MMR,
+}
+@enduml

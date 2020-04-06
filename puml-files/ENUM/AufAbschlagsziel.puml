@@ -1,0 +1,9 @@
+@startuml
+enum AufAbschlagsziel {
+    ARBEITSPREIS_HT,
+    ARBEITSPREIS_NT,
+    ARBEITSPREIS_HT_NT,
+    GRUNDPREIS,
+    GESAMTPREIS,
+}
+@enduml

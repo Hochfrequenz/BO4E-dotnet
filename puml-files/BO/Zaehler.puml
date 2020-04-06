@@ -1,0 +1,20 @@
+@startuml
+class Zaehler {
+    + Zaehlernummer : string <<get>> <<set>>
+    + EichungBis : DateTime? <<get>> <<set>>
+    + LetzteEichung : DateTime? <<get>> <<set>>
+    + Gateway : string <<get>> <<set>>
+    + Fernschaltung : Fernschaltung? <<get>> <<set>>
+    + Messwerterfassung : Messwerterfassung? <<get>> <<set>>
+}
+class "List`1"<T> {
+}
+BusinessObject <|-- Zaehler
+Zaehler --> "Sparte" Sparte
+Zaehler --> "Zaehlerauspraegung" Zaehlerauspraegung
+Zaehler --> "Zaehlertyp" Zaehlertyp
+Zaehler --> "Tarifart" Tarifart
+Zaehler --> "zaehlerkonstante" Decimal
+Zaehler --> "Zaehlwerke<Zaehlwerk>" "List`1"
+Zaehler --> "Zaehlerhersteller" Geschaeftspartner
+@enduml

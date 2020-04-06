@@ -1,0 +1,7 @@
+@startuml
+class BoKey {
+    + IgnoreInheritedKeys : bool <<get>>
+    + BoKey(ignoreInheritedKeys:bool)
+}
+Attribute <|-- BoKey
+@enduml

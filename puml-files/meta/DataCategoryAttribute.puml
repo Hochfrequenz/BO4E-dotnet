@@ -1,0 +1,9 @@
+@startuml
+class DataCategoryAttribute {
+    + DataCategoryAttribute(enums:object[])
+}
+class "HashSet`1"<T> {
+}
+Attribute <|-- DataCategoryAttribute
+DataCategoryAttribute --> "Mapping<Enum>" "HashSet`1"
+@enduml

@@ -1,0 +1,8 @@
+@startuml
+enum Tariftyp {
+    GRUND_ERSATZVERSORGUNG,
+    GRUNDVERSORGUNG,
+    ERSATZVERSORGUNG,
+    SONDERTARIF,
+}
+@enduml

@@ -1,0 +1,8 @@
+@startuml
+enum Tarifregionskriterium {
+    NETZ_NUMMER,
+    POSTLEITZAHL,
+    ORT,
+    GRUNDVERSORGER_NUMMER,
+}
+@enduml

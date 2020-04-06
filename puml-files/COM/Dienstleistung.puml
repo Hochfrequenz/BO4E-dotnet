@@ -1,0 +1,7 @@
+@startuml
+class Dienstleistung {
+    + Bezeichnung : string <<get>> <<set>>
+}
+COM <|-- Dienstleistung
+Dienstleistung --> "Dienstleistungstyp" Dienstleistungstyp
+@enduml

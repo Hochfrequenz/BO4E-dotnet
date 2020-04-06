@@ -1,0 +1,6 @@
+@startuml
+enum ZaehlerauspraegungEdi {
+    ERZ,
+    ZRZ,
+}
+@enduml

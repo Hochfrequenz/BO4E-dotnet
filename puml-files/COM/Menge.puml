@@ -1,0 +1,7 @@
+@startuml
+class Menge {
+    + Wert : decimal <<get>> <<set>>
+}
+COM <|-- Menge
+Menge --> "Einheit" Mengeneinheit
+@enduml
