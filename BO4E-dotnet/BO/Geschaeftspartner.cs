@@ -26,7 +26,7 @@ namespace BO4E.BO
         [JsonProperty(Required = Required.Default, Order = 4, PropertyName = "anrede")]
         [ProtoMember(4)]
         [FieldName("salutation", Language.EN)]
-        public Anrede? anrede { get; set; }
+        public Anrede? Anrede { get; set; }
 
         /// <summary>
         /// title of name

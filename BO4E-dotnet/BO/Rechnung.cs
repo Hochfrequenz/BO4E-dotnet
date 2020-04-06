@@ -420,7 +420,7 @@ namespace BO4E.BO
             {
                 Geschaeftspartnerrolle = new List<Geschaeftspartnerrolle>() { Geschaeftspartnerrolle.LIEFERANT },
                 Gewerbekennzeichnung = true,
-                anrede = Anrede.HERR,
+                Anrede = Anrede.HERR,
                 Name1 = "Mein super Lieferant",
                 Partneradresse = new Adresse()
                 {
@@ -435,7 +435,7 @@ namespace BO4E.BO
             {
                 Geschaeftspartnerrolle = new List<Geschaeftspartnerrolle>() { Geschaeftspartnerrolle.KUNDE },
                 Gewerbekennzeichnung = false,
-                anrede = Anrede.HERR,
+                Anrede = Anrede.HERR,
                 Name1 = "Lustig",
                 Name2 = "Peter",
                 Partneradresse = new Adresse()
