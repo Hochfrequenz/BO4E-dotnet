@@ -97,7 +97,11 @@ Using the [Hochfrequenz.BO4E.Extensions](https://www.nuget.org/packages/Hochfreq
 
 * [Energiemenge](/TestBO4E-dotnet-Extensions/ShowCaseTests/EnergiemengeShowCaseTests.cs)
 
-### Impressive Test Coverage
+### Stable and Reliable Due to Good Test Coverage
+(branch coverage as of 2020-04-09, not yet automated)
+- ~54% in BO4E main project
+- ~69% in the extensions package
+- ~66% in the reporting package 
 
 ## Batteries Included
 We try to make the usage of BO4E in general and this library in particular as smooth as possible. Therefore it not only includes bare C\# files but also some extra ressources that might be usefule to you.
