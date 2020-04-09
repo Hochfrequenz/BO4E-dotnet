@@ -9,6 +9,7 @@ using BO4E.ENUM;
 using BO4E.Extensions.BusinessObjects;
 using BO4E.Extensions.BusinessObjects.Energiemenge;
 using BO4E.meta.LenientConverters;
+
 using Itenso.TimePeriod;
 
 using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -32,7 +33,6 @@ namespace TestBO4EExtensions
             Assert.AreEqual(31 * 24 - 1, GERMAN_MARCH_2018.Duration.TotalHours); // Uhren am 25.03.18 eine Stunde vor
             Assert.AreEqual(47, march2425.Duration.TotalHours);
         }
-
 
         [TestMethod]
         public void TestEnergiemengeObjects()
