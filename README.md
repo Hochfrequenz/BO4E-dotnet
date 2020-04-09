@@ -29,32 +29,31 @@ using BO4E.ENUM;
 // ...
 var energiemenge = new Energiemenge()
 {
-    lokationsId = "DE0123456789012345678901234567890",
-    lokationsTyp = LokationsTyp.MeLo,
-    energieverbrauch = new List<Verbrauch>()
+    LokationsId = "DE0123456789012345678901234567890",
+    LokationsTyp = LokationsTyp.MeLo,
+    Energieverbrauch = new List<Verbrauch>()
 };
 ```
-### Make use of built in validation methods
-full source
+### Make Use of Built in Validation Methods for German Location IDs
 ```c#
 using BO4E.BO;
 using BO4E.ENUM;
 // ...
 var malo = new Marktlokation()
 {
-    marktlokationsId = "1235678901",
-    sparte = Sparte.STROM,
-    energierichtung = Energierichtung.AUSSP
+    MarktlokationsId = "1235678901",
+    Sparte = Sparte.STROM,
+    Energierichtung = Energierichtung.AUSSP
 };
 Assert.IsFalse(malo.IsValid()); // because the obligatory bilanzierungsmethode is not set
 malo.bilanzierungsmethode = Bilanzierungsmethode.SLP;
 Assert.IsTrue(malo.IsValid(checkId:false)); // because all obligatory fields are set
 Assert.IsFalse(malo.IsValid()); // but the marklokationsId is still wrong
-malo.marktlokationsId = "51238696781"; // matches the appropriate regex and has the right check sum
+malo.MarktlokationsId = "51238696781"; // matches the appropriate regex and has the right check sum
 Assert.IsTrue(malo.IsValid());
 ```
 
-### Add custom fields via userProperties
+### Add Custom Fields on the Fly via UserProperties
 ```c#
 using BO4E.BO;
 using Newtonsoft.Json;
@@ -62,29 +61,29 @@ using Newtonsoft.Json;
 string meloJson = @"{'messlokationsId': 'DE0123456789012345678901234567890', 'sparte': 'STROM', 'myCustomInfo': 'some_value_not_covered_by_bo4e', 'myCustomValue': 123.456}";
 var melo = JsonConvert.DeserializeObject<Messlokation>(meloJson);
 Assert.IsTrue(melo.IsValid());
-Assert.IsNotNull(melo.userProperties);
-Assert.AreEqual("some_value_not_covered_by_bo4e", melo.userProperties["myCustomInfo"].ToObject<string>());
-Assert.AreEqual(123.456M, melo.userProperties["myCustomValue"].ToObject<decimal>());
+Assert.IsNotNull(melo.UserProperties);
+Assert.AreEqual("some_value_not_covered_by_bo4e", melo.UserProperties["myCustomInfo"].ToObject<string>());
+Assert.AreEqual(123.456M, melo.UserProperties["myCustomValue"].ToObject<decimal>());
 ```
 
-### Don't write your own logic for basic operations
+### Don't Write Your Own Logic for Basic Operations
 ```c#
 using BO4E.COM;
 using BO4E.ENUM;
 // ...
 var v1 = new Verbrauch()
 {
-    einheit = Mengeneinheit.KWH,
-    obiskennzahl = "1-1:1.8.0",
-    startdatum = new DateTime(2019, 1, 1, 0, 0, 0, DateTimeKind.Utc),
-    enddatum = new DateTime(2020, 1, 1, 0, 0, 0, DateTimeKind.Utc)
+    Einheit = Mengeneinheit.KWH,
+    Obiskennzahl = "1-1:1.8.0",
+    Startdatum = new DateTime(2019, 1, 1, 0, 0, 0, DateTimeKind.Utc),
+    Enddatum = new DateTime(2020, 1, 1, 0, 0, 0, DateTimeKind.Utc)
 };
 var v2 = new Verbrauch()
 {
-    einheit = Mengeneinheit.KWH,
-    obiskennzahl = "1-1:1.8.0",
-    startdatum = new DateTime(2019, 1, 1, 0, 0, 0, DateTimeKind.Utc),
-    enddatum = new DateTime(2020, 1, 1, 0, 0, 0, DateTimeKind.Utc)
+    Einheit = Mengeneinheit.KWH,
+    Obiskennzahl = "1-1:1.8.0",
+    Startdatum = new DateTime(2019, 1, 1, 0, 0, 0, DateTimeKind.Utc),
+    Enddatum = new DateTime(2020, 1, 1, 0, 0, 0, DateTimeKind.Utc)
 };
 
 Assert.AreEqual(v1, v2);
@@ -92,6 +91,13 @@ Assert.IsTrue(v1.Equals(v2));
 Assert.AreEqual(v1.GetHashCode(), v2.GetHashCode());
 Assert.IsFalse(v1 == v2);
 ```
+
+### Feature Rich Extension Packages
+Using the [Hochfrequenz.BO4E.Extensions](https://www.nuget.org/packages/Hochfrequenz.BO4E.Extensions/) gives you access to powerful analysis methods for Business Objects. We present them directly as executable show case tests.
+
+* [Energiemenge](/TestBO4E-dotnet-Extensions/ShowCaseTests/EnergiemengeShowCaseTests.cs)
+
+### Impressive Test Coverage
 
 ## Batteries Included
 We try to make the usage of BO4E in general and this library in particular as smooth as possible. Therefore it not only includes bare C\# files but also some extra ressources that might be usefule to you.
