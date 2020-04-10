@@ -99,6 +99,7 @@ Using the [Hochfrequenz.BO4E.Extensions](https://www.nuget.org/packages/Hochfreq
 * [Verbrauch](/TestBO4E-dotnet-Extensions/ShowCaseTests/VerbrauchShowCaseTests.cs)
 * [CompletenessReport](/TestBO4E-dotnet-Reporting/ShowCaseTests/CompletenessReportShowCaseTests.cs)
 * [Encrypted Business Objects](/TestBO4E-dotnet-Extensions-Encryption/ShowCaseTests/EncryptionShowCaseTests.cs)
+* [(Partially) Anonymized Business Objects](/TestBO4E-dotnet-Extensions-Encryption/ShowCaseTests/AnonymizerShowCaseTests.cs)
 
 ### Stable and Reliable Due to Good Test Coverage
 (branch coverage as of 2020-04-09, not yet automated)
