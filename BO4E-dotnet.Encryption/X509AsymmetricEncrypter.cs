@@ -4,8 +4,11 @@ using System.Collections.Generic;
 using System.IO;
 using System.Security.Cryptography.X509Certificates;
 using System.Text;
+
 using BO4E.BO;
+
 using Newtonsoft.Json;
+
 using Org.BouncyCastle.Cms;
 using Org.BouncyCastle.Crypto;
 using Org.BouncyCastle.OpenSsl;
@@ -96,14 +99,7 @@ namespace BO4E.Extensions.Encryption
         {
             byte[] cipherBytes = Convert.FromBase64String(cipherText);
             CmsEnvelopedData envelopedData;
-            try
-            {
-                envelopedData = new CmsEnvelopedData(cipherBytes);
-            }catch(Exception e)
-            {
-                int a = 0;
-                throw e;
-            }
+            envelopedData = new CmsEnvelopedData(cipherBytes);
             RecipientInformationStore recipientsStore = envelopedData.GetRecipientInfos();
             ICollection recipientsCollection = recipientsStore.GetRecipients();
             IList recipients = recipientsCollection as IList;
@@ -150,6 +146,16 @@ namespace BO4E.Extensions.Encryption
             }
             string plainString = Decrypt(eo.CipherText);
             return JsonConvert.DeserializeObject<BusinessObject>(plainString);
+        }
+
+        public override T Decrypt<T>(EncryptedObject encryptedObject)
+        {
+            if (!(encryptedObject is EncryptedObjectPKCS7 eo))
+            {
+                return (T)null;
+            }
+            string plainString = Decrypt(eo.CipherText);
+            return JsonConvert.DeserializeObject<T>(plainString);
         }
 
         public override void Dispose()

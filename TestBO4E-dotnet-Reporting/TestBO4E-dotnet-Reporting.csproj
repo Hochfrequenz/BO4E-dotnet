@@ -18,6 +18,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\BO4E-dotnet.Extensions\BO4E-dotnet.Extensions.csproj" />
     <ProjectReference Include="..\BO4E-dotnet.Reporting\BO4E-dotnet.Reporting.csproj" />
     <ProjectReference Include="..\BO4ETestProject\TestBO4E-dotnet.csproj" />
   </ItemGroup>

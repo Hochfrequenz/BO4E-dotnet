@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Text;
+
 using BO4E.BO;
+
 using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
+
 using Sodium;
 
 namespace BO4E.Extensions.Encryption
@@ -17,7 +19,8 @@ namespace BO4E.Extensions.Encryption
         /// <param name="secretKey">secret key</param>
         public SymmetricEncrypter(byte[] secretKey)
         {
-            this.secretKey = secretKey;
+            this.secretKey = new byte[secretKey.Length];
+            secretKey.CopyTo(this.secretKey, 0);
         }
         /// <summary>
         /// pass the secret key as base64 encoded string to the constructor
@@ -36,7 +39,7 @@ namespace BO4E.Extensions.Encryption
         {
             byte[] plainBytes = Encoding.UTF8.GetBytes(plainText);
             byte[] adBytes = Encoding.UTF8.GetBytes(associatedDataString);
-            byte[] cipherBytes = SecretAead.Encrypt(plainBytes, nonce, secretKey, adBytes);
+            byte[] cipherBytes = SecretAeadChaCha20Poly1305.Encrypt(plainBytes, nonce, secretKey, adBytes);
             string cipherString = Convert.ToBase64String(cipherBytes);
             return cipherString;
         }
@@ -49,7 +52,7 @@ namespace BO4E.Extensions.Encryption
         /// <returns>Tuple of (cipherText, nonce); both as base64 encoded string</returns>
         public (string, string) Encrypt(string plainText, string associatedDataString)
         {
-            byte[] nonce = SecretAead.GenerateNonce();
+            byte[] nonce = SecretAeadChaCha20Poly1305.GenerateNonce();
             return (Encrypt(plainText, associatedDataString, nonce), Convert.ToBase64String(nonce));
         }
 
@@ -62,7 +65,7 @@ namespace BO4E.Extensions.Encryption
         public EncryptedObjectAEAD Encrypt(BusinessObject plainObject, string associatedDataString)
         {
             string plainText = JsonConvert.SerializeObject(plainObject);
-            byte[] nonce = SecretAead.GenerateNonce();
+            byte[] nonce = SecretAeadChaCha20Poly1305.GenerateNonce();
             string cipherString = Encrypt(plainText, associatedDataString, nonce);
             return new EncryptedObjectAEAD(cipherString, associatedDataString, Convert.ToBase64String(nonce));
         }
@@ -77,7 +80,7 @@ namespace BO4E.Extensions.Encryption
         {
             byte[] cipherBytes = Convert.FromBase64String(cipherText);
             byte[] adBytes = Encoding.UTF8.GetBytes(associatedDataString);
-            byte[] plainBytes = SecretAead.Decrypt(cipherBytes, nonce, secretKey, adBytes);
+            byte[] plainBytes = SecretAeadChaCha20Poly1305.Decrypt(cipherBytes, nonce, secretKey, adBytes);
             return Encoding.UTF8.GetString(plainBytes);
         }
 
@@ -97,6 +100,17 @@ namespace BO4E.Extensions.Encryption
             }
             string plainString = Decrypt(eo.CipherText, eo.AssociatedData, eo.Nonce);
             return JsonConvert.DeserializeObject<BusinessObject>(plainString);
+        }
+
+        public override T Decrypt<T>(EncryptedObject encryptedObject)
+        {
+            EncryptedObjectAEAD eo = (EncryptedObjectAEAD)encryptedObject;
+            if (eo == null)
+            {
+                return (T)null;
+            }
+            string plainString = Decrypt(eo.CipherText, eo.AssociatedData, eo.Nonce);
+            return JsonConvert.DeserializeObject<T>(plainString);
         }
 
         public override void Dispose()

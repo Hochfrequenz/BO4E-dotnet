@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
@@ -8,14 +8,12 @@ using BO4E.COM;
 using BO4E.ENUM;
 using BO4E.Extensions.BusinessObjects.Energiemenge;
 
-using Itenso.TimePeriod;
-
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace TestBO4E.ShowCaseTests
 {
     [TestClass]
-    public class EnergiemengeShowCaseTests
+    public class CompletenessReportShowCaseTests
     {
         [TestMethod]
         public void ShowCaseTest()
@@ -44,18 +42,13 @@ namespace TestBO4E.ShowCaseTests
                    }
                 }
             };
-            Debug.WriteLine($"You got Verbrauch data for {Decimal.Round(em.GetCoverage() * 100.0M)}% of the time in between {em.Energieverbrauch.Select(v => v.Startdatum).Min().ToString("yyyy-MM-dd")} and {em.Energieverbrauch.Select(v => v.Enddatum).Max().ToString("yyyy-MM-dd")}");
-            // You got Verbrauch data for 45% of the time in between 2020-03-01 and 2020-04-01
 
-            var consumption = em.GetTotalConsumption();
-            Debug.WriteLine($"The total consumption is {consumption.Item1}{consumption.Item2}");
-            // The total consumption is 579,0KWH
+            var cr = em.GetCompletenessReport();
+            Debug.WriteLine($"{nameof(em)} has a coverage of {Decimal.Round(cr.Coverage.Value * 100.0M)}%.");
+            // em has a coverage of 45%.
 
-            var consumptionMarch7 = em.GetConsumption(new TimeRange(start: new DateTime(2020, 3, 7, 0, 0, 0, DateTimeKind.Utc), end: new DateTime(2020, 3, 8, 0, 0, 0, DateTimeKind.Utc)));
-            Debug.WriteLine($"The total consumption on March 7 is {Decimal.Round(consumptionMarch7.Item1)}{consumptionMarch7.Item2}");
-            // The total consumption on March 7 is 65KWH
-
-            // ToDo: show other methods.
+            Debug.WriteLine($"{nameof(em)} has no values for the following intervals: {string.Join(", ", cr.Gaps.Select(g => g.Startdatum.ToString("yyyy-MM-dd") + " to " + g.Enddatum.ToString("yyyy-MM-dd")))}");
+            // em has no values for the following intervals: 2020-03-08 to 2020-03-25
         }
     }
 }

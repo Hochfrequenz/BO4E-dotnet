@@ -3,7 +3,7 @@ using System.IO;
 using System.Runtime.Serialization;
 
 using BO4E.ENUM;
-
+using BO4E.meta;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 
@@ -86,6 +86,7 @@ namespace BO4E.COM
 
         /// <summary>type</summary>
         /// <example>arbeitleistungtagesparameterabhmalo | veranschlagtejahresmenge | TUMKundenwert</example>
+        [NonOfficial(NonOfficialCategory.UNSPECIFIED)]
         [JsonProperty(PropertyName = "type", Required = Required.Default)]
         [ProtoMember(9)]
         public Verbrauchsmengetyp? Type { get; set; }
