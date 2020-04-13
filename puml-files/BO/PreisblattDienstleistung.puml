@@ -1,0 +1,8 @@
+@startuml
+class PreisblattDienstleistung {
+    + Geraetedetails : Bilanzierungsmethode? <<get>> <<set>>
+}
+Preisblatt <|-- PreisblattDienstleistung
+PreisblattDienstleistung --> "Dienstleistungsdetails" Dienstleistungstyp
+PreisblattDienstleistung --> "Herausgeber" Marktteilnehmer
+@enduml

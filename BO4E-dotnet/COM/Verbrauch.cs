@@ -1,9 +1,12 @@
 using System;
 using System.IO;
 using System.Runtime.Serialization;
+
 using BO4E.ENUM;
+using BO4E.meta;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
+
 using ProtoBuf;
 
 namespace BO4E.COM
@@ -18,7 +21,7 @@ namespace BO4E.COM
         /// Central Europe Standard Time as hard coded default time. Public to be used elsewhere ;)
         /// </summary>
         [ProtoIgnore]
-        public static readonly TimeZoneInfo CENTRAL_EUROPE_STANDARD_TIME;
+        public static TimeZoneInfo CENTRAL_EUROPE_STANDARD_TIME { get; private set; }
         static Verbrauch()
         {
             var assembly = typeof(Verbrauch).Assembly; // ??? zumindest eher als executing assembly.
@@ -37,24 +40,24 @@ namespace BO4E.COM
         /// <summary>
         /// Beginn des Zeitraumes, für den der Verbrauch angegeben wird.
         /// </summary>
-        [JsonProperty(Required = Required.Default, Order = 7)]
+        [JsonProperty(PropertyName = "startdatum", Required = Required.Default, Order = 7)]
         [ProtoMember(3)]
-        public DateTime startdatum;
+        public DateTime Startdatum { get; set; }
 
         /// <summary>
         /// Ende des Zeitraumes, für den der Verbrauch angegeben wird.
         /// </summary>
-        [JsonProperty(Required = Required.Default, Order = 8)]
+        [JsonProperty(PropertyName = "enddatum", Required = Required.Default, Order = 8)]
         [ProtoMember(4)]
-        public DateTime enddatum; // ToDo: is DateTime? better suited?
+        public DateTime Enddatum { get; set; } // ToDo: is DateTime? better suited?
 
         /// <summary>
         /// Gibt an, ob es sich um eine PROGNOSE oder eine MESSUNG handelt.
         /// </summary>
-        /// <see cref="Wertermittlungsverfahren" />
-        [JsonProperty(Required = Required.Always, Order = 5)]
+        /// <see cref="ENUM.Wertermittlungsverfahren" />
+        [JsonProperty(PropertyName = "wertermittlungsverfahren", Required = Required.Always, Order = 5)]
         [ProtoMember(5)]
-        public Wertermittlungsverfahren wertermittlungsverfahren;
+        public Wertermittlungsverfahren Wertermittlungsverfahren { get; set; }
 
         /// <summary>
         /// Die OBIS-Kennzahl für den Wert, die festlegt, welche Größe mit dem Stand gemeldet wird.
@@ -62,30 +65,31 @@ namespace BO4E.COM
         /// <example>
         /// 1-0:1.8.1
         /// </example>
-        [JsonProperty(Required = Required.Always, Order = 6)]
+        [JsonProperty(PropertyName = "obiskennzahl", Required = Required.Always, Order = 6)]
         [ProtoMember(6)]
-        public string obiskennzahl;
+        public string Obiskennzahl { get; set; }
 
         /// <summary>
         /// Gibt den absoluten Wert der Menge an.
         /// </summary>
-        [JsonProperty(Required = Required.Always, Order = 7)]
+        [JsonProperty(PropertyName = "wert", Required = Required.Always, Order = 7)]
         [ProtoMember(7)]
-        public decimal wert;
+        public decimal Wert { get; set; }
 
         /// <summary>
         /// Gibt die Einheit zum jeweiligen Wert an.
         /// </summary>
         /// <see cref="Mengeneinheit" />
-        [JsonProperty(Required = Required.Always, Order = 8)]
+        [JsonProperty(PropertyName = "einheit", Required = Required.Always, Order = 8)]
         [ProtoMember(8)]
-        public Mengeneinheit einheit;
+        public Mengeneinheit Einheit { get; set; }
 
         /// <summary>type</summary>
         /// <example>arbeitleistungtagesparameterabhmalo | veranschlagtejahresmenge | TUMKundenwert</example>
-        [JsonProperty(Required = Required.Default)]
+        [NonOfficial(NonOfficialCategory.UNSPECIFIED)]
+        [JsonProperty(PropertyName = "type", Required = Required.Default)]
         [ProtoMember(9)]
-        public Verbrauchsmengetyp? type;
+        public Verbrauchsmengetyp? Type { get; set; }
 
         /// <param name="context"></param>
         [OnDeserialized]
@@ -128,45 +132,45 @@ namespace BO4E.COM
         {
             //using (MiniProfiler.Current.Step("FixSapCdsBug (Verbrauch)")) // don't do this. it slows down everything !
             // {
-            if (startdatum != null && enddatum != null && startdatum > enddatum)
+            if (Startdatum != null && Enddatum != null && Startdatum > Enddatum)
             {
-                TimeSpan diff = startdatum - enddatum;
-                if (diff.Hours <= 25 && diff.Hours >= 23 && diff.Minutes == 45 && startdatum.Hour >= 22 && enddatum.Hour == 0)
+                TimeSpan diff = Startdatum - Enddatum;
+                if (diff.Hours <= 25 && diff.Hours >= 23 && diff.Minutes == 45 && Startdatum.Hour >= 22 && Enddatum.Hour == 0)
                 {
-                    enddatum += new TimeSpan(diff.Hours + 1, 0, 0);
+                    Enddatum += new TimeSpan(diff.Hours + 1, 0, 0);
                 }
                 else
                 {
                     // something seems wrong but not sure how to fix it. 
                 }
             }
-            startdatum = DateTime.SpecifyKind(startdatum, DateTimeKind.Utc);
-            enddatum = DateTime.SpecifyKind(enddatum, DateTimeKind.Utc);
-            if ((int)(enddatum - startdatum).TotalHours == 2)
+            Startdatum = DateTime.SpecifyKind(Startdatum, DateTimeKind.Utc);
+            Enddatum = DateTime.SpecifyKind(Enddatum, DateTimeKind.Utc);
+            if ((int)(Enddatum - Startdatum).TotalHours == 2)
             {
                 // check DST of start and enddatum
-                var startdatumLocal = TimeZoneInfo.ConvertTimeFromUtc(startdatum, Verbrauch.CENTRAL_EUROPE_STANDARD_TIME);
-                var enddatumLocal = TimeZoneInfo.ConvertTimeFromUtc(enddatum, Verbrauch.CENTRAL_EUROPE_STANDARD_TIME);
+                var startdatumLocal = TimeZoneInfo.ConvertTimeFromUtc(Startdatum, Verbrauch.CENTRAL_EUROPE_STANDARD_TIME);
+                var enddatumLocal = TimeZoneInfo.ConvertTimeFromUtc(Enddatum, Verbrauch.CENTRAL_EUROPE_STANDARD_TIME);
                 if (!Verbrauch.CENTRAL_EUROPE_STANDARD_TIME.IsDaylightSavingTime(startdatumLocal - new TimeSpan(0, 0, 1)) && Verbrauch.CENTRAL_EUROPE_STANDARD_TIME.IsDaylightSavingTime(enddatumLocal))
                 {
                     // change winter-->summer time (e.g. UTC+1-->UTC+2)
                     // this is an artefact of the sap enddatum computation
-                    enddatum -= new TimeSpan(1, 0, 0); // toDo: get offset from timezoneinfo->rules->dstOffset
+                    Enddatum -= new TimeSpan(1, 0, 0); // toDo: get offset from timezoneinfo->rules->dstOffset
                 }
             }
-            else if ((int)(enddatum - startdatum).TotalMinutes == -45)
+            else if ((int)(Enddatum - Startdatum).TotalMinutes == -45)
             {
                 // check DST of start and enddatum
                 //var startdatumLocal = TimeZoneInfo.ConvertTimeFromUtc(startdatum, Verbrauch.CENTRAL_EUROPE_STANDARD_TIME);
-                var enddatumLocal = TimeZoneInfo.ConvertTimeFromUtc(enddatum, Verbrauch.CENTRAL_EUROPE_STANDARD_TIME);
+                var enddatumLocal = TimeZoneInfo.ConvertTimeFromUtc(Enddatum, Verbrauch.CENTRAL_EUROPE_STANDARD_TIME);
                 if (!Verbrauch.CENTRAL_EUROPE_STANDARD_TIME.IsDaylightSavingTime(enddatumLocal - new TimeSpan(1, 0, 0)) && Verbrauch.CENTRAL_EUROPE_STANDARD_TIME.IsDaylightSavingTime(enddatumLocal - new TimeSpan(1, 0, 1)))
                 {
                     // change winter-->summer time (e.g. UTC+1-->UTC+2)
                     // this is an artefact of the sap enddatum computation
-                    enddatum += new TimeSpan(1, 0, 0); // toDo: get offset from timezoneinfo->rules->dstOffset
+                    Enddatum += new TimeSpan(1, 0, 0); // toDo: get offset from timezoneinfo->rules->dstOffset
                 }
             }
-            if (userProperties != null && userProperties.TryGetValue(_SAP_PROFDECIMALS_KEY, out JToken profDecimalsRaw))
+            if (UserProperties != null && UserProperties.TryGetValue(_SAP_PROFDECIMALS_KEY, out JToken profDecimalsRaw))
             {
                 var profDecimals = profDecimalsRaw.Value<int>();
                 if (profDecimals > 0)
@@ -174,10 +178,10 @@ namespace BO4E.COM
                     // or should I import math.pow() for this purpose?
                     for (int i = 0; i < profDecimals; i++)
                     {
-                        wert /= 10.0M;
+                        Wert /= 10.0M;
                     }
                 }
-                userProperties.Remove(_SAP_PROFDECIMALS_KEY);
+                UserProperties.Remove(_SAP_PROFDECIMALS_KEY);
             }
         }
 

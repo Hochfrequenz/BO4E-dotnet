@@ -1,0 +1,12 @@
+@startuml
+class Angebotsteil {
+    + AnfrageSubreferenz : string <<get>> <<set>>
+}
+class "List`1"<T> {
+}
+COM <|-- Angebotsteil
+Angebotsteil --> "Lieferstellenangebotsteil<Marktlokation>" "List`1"
+Angebotsteil --> "Gesamtmengeangebotsteil" Menge
+Angebotsteil --> "Gesamtkostenangebotsteil" Betrag
+Angebotsteil --> "Positionen<Angebotsposition>" "List`1"
+@enduml

@@ -1,0 +1,6 @@
+@startuml
+enum EnergierichtungEdi {
+    Z06,
+    Z07,
+}
+@enduml

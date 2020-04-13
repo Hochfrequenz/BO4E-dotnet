@@ -1,0 +1,14 @@
+@startuml
+class Tarifberechnungsparameter {
+    + Berechnungsmethode : Tarifkalkulationsmethode? <<get>> <<set>>
+    + MesspreisInGPEnthalten : string <<get>> <<set>>
+    + Messpreistyp : Messpreistyp? <<get>> <<set>>
+    + KwInklusive : decimal? <<get>> <<set>>
+    + KwWeitereMengen : decimal? <<get>> <<set>>
+    + MesspreisBeruecksichtigen : bool? <<get>> <<set>>
+}
+COM <|-- Tarifberechnungsparameter
+Tarifberechnungsparameter --> "HoechstpreisNT" Preis
+Tarifberechnungsparameter --> "HoechstpreisHT" Preis
+Tarifberechnungsparameter --> "Mindestpreis" Preis
+@enduml

@@ -1,0 +1,13 @@
+@startuml
+enum AbgabeArt {
+    KAS,
+    SA,
+    SAS,
+    TA,
+    TAS,
+    TK,
+    TKS,
+    TS,
+    TSS,
+}
+@enduml

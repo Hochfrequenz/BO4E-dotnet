@@ -1,0 +1,11 @@
+@startuml
+enum Zeitreihentyp {
+    EGS,
+    LGS,
+    NZR,
+    SES,
+    SLS,
+    TES,
+    TLS,
+}
+@enduml

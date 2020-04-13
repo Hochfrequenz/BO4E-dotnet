@@ -1,0 +1,9 @@
+@startuml
+class LenientEnumListConverter {
+    + <<override>> CanConvert(objectType:Type) : bool
+    + <<override>> ReadJson(reader:JsonReader, objectType:Type, existingValue:object, serializer:JsonSerializer) : object
+    + <<override>> CanWrite : bool <<get>>
+    + <<override>> WriteJson(writer:JsonWriter, value:object, serializer:JsonSerializer) : void
+}
+JsonConverter <|-- LenientEnumListConverter
+@enduml

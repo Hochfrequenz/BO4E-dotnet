@@ -1,0 +1,9 @@
+@startuml
+enum Kontaktart {
+    ANSCHREIBEN,
+    TELEFONAT,
+    FAX,
+    E_MAIL,
+    SMS,
+}
+@enduml

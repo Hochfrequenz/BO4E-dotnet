@@ -1,0 +1,36 @@
+@startuml
+class Marktlokation {
+    + MarktlokationsId : string <<get>> <<set>>
+    + Verbrauchsart : Verbrauchsart? <<get>> <<set>>
+    + Unterbrechbar : bool? <<get>> <<set>>
+    + NetzbetreiberCodeNr : string <<get>> <<set>>
+    + GebietType : Gebiettyp? <<get>> <<set>>
+    + NetzgebietNr : string <<get>> <<set>>
+    + Bilanzierungsgebiet : string <<get>> <<set>>
+    + GrundversorgerCodeNr : string <<get>> <<set>>
+    + Gasqualitaet : Gasqualitaet? <<get>> <<set>>
+    + Regelzone : string <<get>> <<set>>
+    + Marktgebiet : string <<get>> <<set>>
+    + Zeitreihentyp : Zeitreihentyp? <<get>> <<set>>
+    + {static} ValidateId(id:string) : bool
+    + {static} GetChecksum(input:string) : string
+    + HasValidId() : bool
+    + IsValid(checkId:bool) : bool
+}
+class "List`1"<T> {
+}
+BusinessObject <|-- Marktlokation
+Marktlokation --> "Sparte" Sparte
+Marktlokation --> "Energierichtung" Energierichtung
+Marktlokation --> "Bilanzierungsmethode" Bilanzierungsmethode
+Marktlokation --> "Netzebene" Netzebene
+Marktlokation --> "Endkunde" Geschaeftspartner
+Marktlokation --> "Lokationsadresse" Adresse
+Marktlokation --> "Geoadresse" Geokoordinaten
+Marktlokation --> "Katasterinformation" Katasteradresse
+Marktlokation --> "Marktrollen<COM.Marktrolle>" "List`1"
+Marktlokation --> "Zaehlwerke<Zaehlwerk>" "List`1"
+Marktlokation --> "Verbrauchsmenge<Verbrauch>" "List`1"
+Marktlokation --> "Messlokationen<Messlokation>" "List`1"
+Marktlokation --> "ZugehoerigeMesslokationen<Messlokationszuordnung>" "List`1"
+@enduml

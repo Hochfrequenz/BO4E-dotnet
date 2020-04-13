@@ -1,0 +1,14 @@
+@startuml
+class PreisblattMessung {
+}
+class "List`1"<T> {
+}
+Preisblatt <|-- PreisblattMessung
+PreisblattMessung --> "Sparte" Sparte
+PreisblattMessung --> "Bilanzierungsmethode" Bilanzierungsmethode
+PreisblattMessung --> "Messebene" Netzebene
+PreisblattMessung --> "InklusiveDienstleistung<Dienstleistungstyp>" "List`1"
+PreisblattMessung --> "Basisgeraet" Geraeteeigenschaften
+PreisblattMessung --> "InklusiveGeraete<Geraeteeigenschaften>" "List`1"
+PreisblattMessung --> "Herausgeber" Marktteilnehmer
+@enduml

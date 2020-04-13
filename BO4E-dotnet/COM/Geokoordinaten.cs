@@ -1,4 +1,5 @@
 using Newtonsoft.Json;
+
 using ProtoBuf;
 
 namespace BO4E.COM
@@ -8,12 +9,12 @@ namespace BO4E.COM
     public class Geokoordinaten : COM
     {
         /// <summary>Gibt den Breitengrad eines entsprechenden Ortes an.</summary>
-        [JsonProperty(Required = Required.Always)]
+        [JsonProperty(PropertyName = "breitengrad", Required = Required.Always)]
         [ProtoMember(3)]
-        public decimal breitengrad;
+        public decimal Breitengrad { get; set; }
         /// <summary>Gibt den Längengrad eines entsprechenden Ortes an.</summary>
-        [JsonProperty(Required = Required.Always)]
+        [JsonProperty(PropertyName = "laengengrad", Required = Required.Always)]
         [ProtoMember(4)]
-        public decimal laengengrad;
+        public decimal Laengengrad { get; set; }
     }
 }

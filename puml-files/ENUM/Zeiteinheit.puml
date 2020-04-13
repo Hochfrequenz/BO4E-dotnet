@@ -1,0 +1,14 @@
+@startuml
+enum Zeiteinheit {
+    SEKUNDE,
+    MINUTE,
+    STUNDE,
+    VIERTEL_STUNDE,
+    TAG,
+    WOCHE,
+    MONAT,
+    QUARTAL,
+    HALBJAHR,
+    JAHR,
+}
+@enduml

@@ -1,6 +1,10 @@
 ﻿using System;
+
 using BO4E.ENUM;
 using BO4E.meta;
+
+using Newtonsoft.Json;
+
 using ProtoBuf;
 
 namespace BO4E.COM
@@ -16,13 +20,15 @@ namespace BO4E.COM
         /// numerischer Wert
         /// </summary>
         [ProtoMember(3)]
-        public readonly decimal wert;
+        [JsonProperty(Required = Required.Always, PropertyName = "wert")]
+        public decimal Wert { get; set; }
 
         /// <summary>
-        /// Einheit von <see cref="wert"/>
+        /// Einheit von <see cref="Wert"/>
         /// </summary>
         [ProtoMember(4)]
-        public readonly Mengeneinheit einheit;
+        [JsonProperty(Required=Required.Always, PropertyName = "einheit")]
+        public Mengeneinheit Einheit { get; set; }
 
         /// <summary>
         /// initialise with wert and einheit
@@ -31,8 +37,8 @@ namespace BO4E.COM
         /// <param name="einheit">zugehörige Mengeneinheit</param>
         public PhysikalischerWert(decimal wert, Mengeneinheit einheit)
         {
-            this.wert = wert;
-            this.einheit = einheit;
+            this.Wert = wert;
+            this.Einheit = einheit;
         }
 
         /// <summary>
@@ -42,10 +48,15 @@ namespace BO4E.COM
         /// <param name="einheitString">zugehörige Einheit als string (case insensitive)</param>
         public PhysikalischerWert(decimal wert, string einheitString)
         {
-            this.wert = wert;
-            if(!Enum.TryParse<Mengeneinheit>(einheitString, true, out this.einheit))
+            this.Wert = wert;
+
+            if (!Enum.TryParse<Mengeneinheit>(einheitString, true, out Mengeneinheit einheit))
             {
                 throw new ArgumentException($"'{einheitString}' is not a valid Mengeneinheit");
+            }
+            else
+            {
+                this.Einheit = einheit;
             }
         }
     }

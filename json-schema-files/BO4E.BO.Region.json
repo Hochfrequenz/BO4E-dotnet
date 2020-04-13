@@ -1,0 +1,127 @@
+﻿{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "definitions": {
+    "Regionskriterium": {
+      "type": [
+        "object",
+        "null"
+      ],
+      "properties": {
+        "gueltigkeitstyp": {
+          "type": "string",
+          "enum": [
+            "NICHT_IN"
+          ]
+        },
+        "sparte": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "enum": [
+            null,
+            "STROM",
+            "GAS",
+            "FERNWAERME",
+            "NAHWAERME",
+            "WASSER",
+            "ABWASSER"
+          ]
+        },
+        "mengenoperator": {
+          "type": "string",
+          "enum": [
+            "KLEINER_ALS",
+            "GROESSER_ALS",
+            "GLEICH"
+          ]
+        },
+        "regionskriteriumtyp": {
+          "type": "string",
+          "enum": [
+            "BUNDESLANDKENNZIFFER",
+            "BUNDESLAND_NAME",
+            "MARKTGEBIET_NUMMER",
+            "MARKTGEBIET_NAME",
+            "REGELGEBIET_NUMMER",
+            "REGELGEBIET_NAME",
+            "NETZBETREIBER_NUMMER",
+            "NETZBETREIBER_NAME",
+            "BILANZIERUNGS_GEBIET_NUMMER",
+            "MSB_NUMMER",
+            "MSB_NAME",
+            "VERSORGER_NUMMER",
+            "VERSORGER_NAME",
+            "GRUNDVERSORGER_NUMMER",
+            "GRUNDVERSORGER_NAME",
+            "KREIS_NAME",
+            "KREISKENNZIFFER",
+            "GEMEINDE_NAME",
+            "GEMEINDEKENNZIFFER",
+            "POSTLEITZAHL",
+            "ORT",
+            "EINWOHNERZAHL_GEMEINDE",
+            "EINWOHNERZAHL_ORT",
+            "KM_UMKREIS",
+            "BUNDESWEIT"
+          ]
+        },
+        "wert": {
+          "type": "string"
+        },
+        "guid": {
+          "type": [
+            "string",
+            "null"
+          ]
+        }
+      },
+      "required": [
+        "gueltigkeitstyp",
+        "mengenoperator",
+        "regionskriteriumtyp",
+        "wert"
+      ]
+    }
+  },
+  "type": "object",
+  "properties": {
+    "guid": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "boTyp": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "versionStruktur": {
+      "type": "integer"
+    },
+    "bezeichnung": {
+      "type": "string"
+    },
+    "positivListe": {
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/Regionskriterium"
+      }
+    },
+    "negativListe": {
+      "type": [
+        "array",
+        "null"
+      ],
+      "items": {
+        "$ref": "#/definitions/Regionskriterium"
+      }
+    }
+  },
+  "required": [
+    "bezeichnung",
+    "positivListe"
+  ]
+}

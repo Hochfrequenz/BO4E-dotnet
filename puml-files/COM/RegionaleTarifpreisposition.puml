@@ -1,0 +1,12 @@
+@startuml
+class RegionaleTarifpreisposition {
+    + Einheit : string <<get>> <<set>>
+    + Mengeneinheitstaffel : Mengeneinheit? <<get>> <<set>>
+}
+class "List`1"<T> {
+}
+COM <|-- RegionaleTarifpreisposition
+RegionaleTarifpreisposition --> "Preistyp" Preistyp
+RegionaleTarifpreisposition --> "Bezugseinheit" Mengeneinheit
+RegionaleTarifpreisposition --> "Preisstaffeln<RegionalePreisstaffel>" "List`1"
+@enduml

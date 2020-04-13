@@ -1,0 +1,8 @@
+@startuml
+enum Ausschreibungsstatus {
+    PHASE1,
+    PHASE2,
+    PHASE3,
+    PHASE4,
+}
+@enduml

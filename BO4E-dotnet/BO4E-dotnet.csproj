@@ -8,7 +8,7 @@
     <Authors>Hochfrequenz Untenehmensberatung GmbH</Authors>
     <Product>BO4E .net core bindings</Product>
     <RepositoryUrl>https://github.com/HFInnovation/BO4E-dotnet/</RepositoryUrl>
-	<VersionPrefix>0.1.9</VersionPrefix>
+	<VersionPrefix>0.2.1</VersionPrefix>
 	<VersionSuffix>$(VersionSuffix)</VersionSuffix>
     <AssemblyName>BO4Enet</AssemblyName>
     <GeneratePackageOnBuild>false</GeneratePackageOnBuild>
@@ -37,8 +37,11 @@
 
   <ItemGroup>
     <Compile Remove="BO\NewFolder\**" />
+    <Compile Remove="json-schema-files\**" />
     <EmbeddedResource Remove="BO\NewFolder\**" />
+    <EmbeddedResource Remove="json-schema-files\**" />
     <None Remove="BO\NewFolder\**" />
+    <None Remove="json-schema-files\**" />
     <None Include="..\LICENSE.txt">
       <Pack>True</Pack>
       <PackagePath></PackagePath>
@@ -47,12 +50,64 @@
 
   <ItemGroup>
     <None Remove="CentralEuropeStandardTime.json" />
+    <None Remove="protobuf-files\BO4E.BO.Angebot.proto" />
+    <None Remove="protobuf-files\BO4E.BO.Ansprechpartner.proto" />
+    <None Remove="protobuf-files\BO4E.BO.Benachrichtigung.proto" />
+    <None Remove="protobuf-files\BO4E.BO.Energiemenge.proto" />
+    <None Remove="protobuf-files\BO4E.BO.Geschaeftspartner.proto" />
+    <None Remove="protobuf-files\BO4E.BO.Kosten.proto" />
+    <None Remove="protobuf-files\BO4E.BO.Marktlokation.proto" />
+    <None Remove="protobuf-files\BO4E.BO.Messlokation.proto" />
+    <None Remove="protobuf-files\BO4E.BO.Preisblatt.proto" />
+    <None Remove="protobuf-files\BO4E.BO.Rechnung.proto" />
+    <None Remove="protobuf-files\BO4E.BO.Region.proto" />
+    <None Remove="protobuf-files\BO4E.BO.Vertrag.proto" />
+    <None Remove="protobuf-files\BO4E.BO.Zaehler.proto" />
   </ItemGroup>
 
   <ItemGroup>
     <EmbeddedResource Include="CentralEuropeStandardTime.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </EmbeddedResource>
+    <Content Include="protobuf-files\BO4E.BO.Angebot.proto">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="protobuf-files\BO4E.BO.Ansprechpartner.proto">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="protobuf-files\BO4E.BO.Benachrichtigung.proto">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="protobuf-files\BO4E.BO.Energiemenge.proto">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="protobuf-files\BO4E.BO.Geschaeftspartner.proto">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="protobuf-files\BO4E.BO.Kosten.proto">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="protobuf-files\BO4E.BO.Marktlokation.proto">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="protobuf-files\BO4E.BO.Messlokation.proto">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="protobuf-files\BO4E.BO.Preisblatt.proto">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="protobuf-files\BO4E.BO.Rechnung.proto">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="protobuf-files\BO4E.BO.Region.proto">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="protobuf-files\BO4E.BO.Vertrag.proto">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="protobuf-files\BO4E.BO.Zaehler.proto">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
 
   <ItemGroup>
@@ -61,7 +116,7 @@
     <PackageReference Include="MiniProfiler.Shared" Version="4.1.0" />
     <PackageReference Include="Newtonsoft.Json" Version="11.0.2" />
     <PackageReference Include="Newtonsoft.Json.Schema" Version="3.0.10" />
-    <PackageReference Include="protobuf-net" Version="2.4.4" />
+    <PackageReference Include="protobuf-net" Version="3.0.0-alpha.143" />
     <PackageReference Include="SourceLink.Copy.PdbFiles" Version="2.8.3" PrivateAssets="All" />
     <PackageReference Include="System.ComponentModel.Annotations" Version="4.5.0" />
   </ItemGroup>

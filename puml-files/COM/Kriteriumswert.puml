@@ -1,0 +1,7 @@
+@startuml
+class KriteriumsWert {
+    + Wert : string <<get>> <<set>>
+}
+COM <|-- KriteriumsWert
+KriteriumsWert --> "Kriterium" Tarifregionskriterium
+@enduml

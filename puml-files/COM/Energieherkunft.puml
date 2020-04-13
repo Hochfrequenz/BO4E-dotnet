@@ -1,0 +1,7 @@
+@startuml
+class Energieherkunft {
+    + AnteilProzent : decimal <<get>> <<set>>
+}
+COM <|-- Energieherkunft
+Energieherkunft --> "Erzeugungsart" Erzeugungsart
+@enduml

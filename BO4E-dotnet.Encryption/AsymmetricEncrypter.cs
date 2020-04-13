@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Text;
+
 using BO4E.BO;
+
 using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
+
 using Sodium;
 
 namespace BO4E.Extensions.Encryption
@@ -19,8 +21,10 @@ namespace BO4E.Extensions.Encryption
         /// <param name="publicKey">public key</param>
         public AsymmetricEncrypter(byte[] privateKey, byte[] publicKey)
         {
-            this.privateKey = privateKey;
-            this.ownPublicKey = publicKey;
+            this.ownPublicKey = new byte[publicKey.Length];
+            this.privateKey = new byte[privateKey.Length];
+            privateKey.CopyTo(this.privateKey, 0);
+            publicKey.CopyTo(this.ownPublicKey, 0);
         }
         /// <summary>
         /// Instantiate with private and public key
@@ -105,8 +109,19 @@ namespace BO4E.Extensions.Encryption
             {
                 return null;
             }
-            string plainString = Decrypt(eo.cipherText, eo.publicKey, eo.nonce);
+            string plainString = Decrypt(eo.CipherText, eo.PublicKey, eo.Nonce);
             return JsonConvert.DeserializeObject<BusinessObject>(plainString);
+        }
+
+        public override T Decrypt<T>(EncryptedObject encryptedObject)
+        {
+            EncryptedObjectPublicKeyBox eo = (EncryptedObjectPublicKeyBox)(encryptedObject);// (EncryptedObjectPublicKeyBox)BoMapper.MapObject("EncryptedObjectPublicKeyBox", JObject.FromObject(encryptedObject));
+            if (eo == null)
+            {
+                return (T)null;
+            }
+            string plainString = Decrypt(eo.CipherText, eo.PublicKey, eo.Nonce);
+            return JsonConvert.DeserializeObject<T>(plainString);
         }
 
         public override void Dispose()

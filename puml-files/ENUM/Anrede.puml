@@ -1,0 +1,10 @@
+@startuml
+enum Anrede {
+    HERR,
+    FRAU,
+    EHELEUTE,
+    FIRMA,
+    INDIVIDUELL,
+    DR,
+}
+@enduml

@@ -1,0 +1,18 @@
+@startuml
+class Bo4eUri {
+    + Bo4eUri(uri:string)
+    + GetBoName() : string
+    + GetBoType() : Type
+    + {static} FullyUnescapeDataString(stringToUnescape:string) : string
+    + {static} IsValid(uri:string) : bool
+    + {static} GetUri(bo:BusinessObject, includeUserProperties:bool) : Bo4eUri
+    + GetQueryObject(boType:Type, i:int) : JObject
+    + AddFilter(filterObject:IDictionary<string, object>) : Bo4eUri
+}
+class StringUriConverter {
+    + <<override>> CanConvertFrom(context:ITypeDescriptorContext, sourceType:Type) : bool
+    + <<override>> ConvertFrom(context:ITypeDescriptorContext, culture:CultureInfo, value:object) : object
+}
+Uri <|-- Bo4eUri
+TypeConverter <|-- StringUriConverter
+@enduml

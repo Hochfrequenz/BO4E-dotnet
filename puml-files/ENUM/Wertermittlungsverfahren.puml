@@ -1,0 +1,6 @@
+@startuml
+enum Wertermittlungsverfahren {
+    PROGNOSE,
+    MESSUNG,
+}
+@enduml

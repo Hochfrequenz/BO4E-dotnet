@@ -1,0 +1,23 @@
+@startuml
+class Vertrag {
+    + Vertragsnummer : string <<get>> <<set>>
+    + Beschreibung : string <<get>> <<set>>
+    + Gemeinderabatt : decimal? <<get>> <<set>>
+    + Vertrag()
+}
+class "List`1"<T> {
+}
+BusinessObject <|-- Vertrag
+Vertrag --> "Vertragsart" Vertragsart
+Vertrag --> "Vertragstatus" Vertragstatus
+Vertrag --> "Sparte" Sparte
+Vertrag --> "Vertragsbeginn" DateTime
+Vertrag --> "Vertragsende" DateTime
+Vertrag --> "Vertragspartner1" Geschaeftspartner
+Vertrag --> "Vertragspartner2" Geschaeftspartner
+Vertrag --> "Unterzeichnervp1<Unterschrift>" "List`1"
+Vertrag --> "Unterzeichnervp2<Unterschrift>" "List`1"
+Vertrag --> "Vertragskonditionen" Vertragskonditionen
+Vertrag --> "Vertragsteile<Vertragsteil>" "List`1"
+Vertrag --> "Korrespondenzpartner" Geschaeftspartner
+@enduml

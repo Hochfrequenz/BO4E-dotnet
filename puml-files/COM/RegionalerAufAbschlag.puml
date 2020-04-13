@@ -1,0 +1,22 @@
+@startuml
+class RegionalerAufAbschlag {
+    + Bezeichnung : string <<get>> <<set>>
+    + Beschreibung : string <<get>> <<set>>
+    + AufAbschlagstyp : AufAbschlagstyp? <<get>> <<set>>
+    + AufAbschlagsziel : AufAbschlagsziel? <<get>> <<set>>
+    + Einheit : Waehrungseinheit? <<get>> <<set>>
+    + Website : string <<get>> <<set>>
+    + Tarifnamensaenderungen : string <<get>> <<set>>
+}
+class "List`1"<T> {
+}
+COM <|-- RegionalerAufAbschlag
+RegionalerAufAbschlag --> "Zusatzprodukte<string>" "List`1"
+RegionalerAufAbschlag --> "Voraussetzungen<string>" "List`1"
+RegionalerAufAbschlag --> "Gueltigkeitszeitraum" Zeitraum
+RegionalerAufAbschlag --> "Energiemixaenderung" Energiemix
+RegionalerAufAbschlag --> "Vertagskonditionsaenderung" Vertragskonditionen
+RegionalerAufAbschlag --> "Garantieaenderung" Preisgarantie
+RegionalerAufAbschlag --> "Einschraenkungsaenderung" Tarifeinschraenkung
+RegionalerAufAbschlag --> "Staffeln<RegionalePreisstaffel>" "List`1"
+@enduml

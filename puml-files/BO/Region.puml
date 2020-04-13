@@ -1,0 +1,10 @@
+@startuml
+class Region {
+    + Bezeichnung : string <<get>> <<set>>
+}
+class "List`1"<T> {
+}
+BusinessObject <|-- Region
+Region --> "PositivListe<Regionskriterium>" "List`1"
+Region --> "NegativListe<Regionskriterium>" "List`1"
+@enduml

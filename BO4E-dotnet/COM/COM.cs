@@ -72,11 +72,11 @@ namespace BO4E.COM
         /// <summary>
         /// User properties (non bo4e standard)
         /// </summary>
-        [JsonProperty(PropertyName = BusinessObject.userPropertiesName, Required = Required.Default, Order = 2)]
+        [JsonProperty(PropertyName = BusinessObject.USER_PROPERTIES_NAME, Required = Required.Default, Order = 2)]
         [ProtoMember(2)]
         [JsonExtensionData]
         [DataCategory(DataCategory.USER_PROPERTIES)]
-        public IDictionary<string, JToken> userProperties;
+        public IDictionary<string, JToken> UserProperties { get; set; }
 
         /// <summary>
         /// BO4E components are considered equal iff all of their elements/fields are equal.
@@ -113,13 +113,13 @@ namespace BO4E.COM
             unchecked
             {
                 result *= this.GetType().GetHashCode();
-                foreach (FieldInfo field in this.GetType().GetFields())
+                foreach (var prop in this.GetType().GetProperties())
                 {
-                    if (field.GetValue(this) != null)
+                    if (prop.GetValue(this) != null)
                     {
                         // Using +19 because the default hash code of uninitialised enums is zero.
                         // This would screw up the calculation such that all objects with at least one null value had the same hash code, namely 0.
-                        result *= 19 + field.GetValue(this).GetHashCode();
+                        result *= 19 + prop.GetValue(this).GetHashCode();
                     }
                 }
                 return result;
@@ -143,8 +143,8 @@ namespace BO4E.COM
         /// <summary>
         /// allows adding a GUID to COM objects for tracking across systems
         /// </summary>
-        [JsonProperty(NullValueHandling = NullValueHandling.Ignore, Required = Required.Default, Order = 1)]
+        [JsonProperty(PropertyName="guid", NullValueHandling = NullValueHandling.Ignore, Required = Required.Default, Order = 1)]
         [ProtoMember(1)]
-        public string guid;
+        public string Guid { get;set; }
     }
 }

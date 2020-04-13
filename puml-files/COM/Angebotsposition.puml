@@ -1,0 +1,9 @@
+@startuml
+class Angebotsposition {
+    + Positionsbezeichung : string <<get>> <<set>>
+}
+COM <|-- Angebotsposition
+Angebotsposition --> "Positionsmenge" Menge
+Angebotsposition --> "Positionspreis" Preis
+Angebotsposition --> "Positionsbetrag" Betrag
+@enduml

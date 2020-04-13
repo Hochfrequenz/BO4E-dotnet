@@ -1,0 +1,19 @@
+@startuml
+class Energiemix {
+    + Energiemixnummer : int <<get>> <<set>>
+    + Bezeichnung : string <<get>> <<set>>
+    + Bemerkung : string <<get>> <<set>>
+    + Gueltigkeitsjahr : int <<get>> <<set>>
+    + CO2Emission : decimal? <<get>> <<set>>
+    + Atommuell : decimal? <<get>> <<set>>
+    + OekoTopTen : bool? <<get>> <<set>>
+    + Website : string <<get>> <<set>>
+}
+class "List`1"<T> {
+}
+COM <|-- Energiemix
+Energiemix --> "Energieart" Sparte
+Energiemix --> "oekozertifikat<Oekozertifikat>" "List`1"
+Energiemix --> "Oekolabel<Oekolabel>" "List`1"
+Energiemix --> "Anteil<Energieherkunft>" "List`1"
+@enduml

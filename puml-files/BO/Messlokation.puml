@@ -1,0 +1,28 @@
+@startuml
+class Messlokation {
+    + MesslokationsId : string <<get>> <<set>>
+    + NetzebeneMessung : Netzebene? <<get>> <<set>>
+    + MessgebietNr : string <<get>> <<set>>
+    + GrundzustaendigerMSBCodeNr : string <<get>> <<set>>
+    + GrundzustaendigerMSBIMCodeNr : string <<get>> <<set>>
+    + GrundzustaendigerMDLCodeNr : string <<get>> <<set>>
+    + Bilanzierungsmethode : Bilanzierungsmethode? <<get>> <<set>>
+    + Abrechnungmessstellenbetriebnna : bool? <<get>> <<set>>
+    + Gasqualitaet : Gasqualitaet? <<get>> <<set>>
+    + Verlustfaktor : decimal? <<get>> <<set>>
+    + {static} ValidateId(id:string) : bool
+    + HasValidId() : bool
+    + IsValid(checkId:bool) : bool
+}
+class "List`1"<T> {
+}
+BusinessObject <|-- Messlokation
+Messlokation --> "Sparte" Sparte
+Messlokation --> "Messadresse" Adresse
+Messlokation --> "Geoadresse" Geokoordinaten
+Messlokation --> "Katasterinformation" Katasteradresse
+Messlokation --> "Geraete<Hardware>" "List`1"
+Messlokation --> "Messdienstleistung<Dienstleistung>" "List`1"
+Messlokation --> "Messlokationszaehler<Zaehler>" "List`1"
+Messlokation --> "Marktrollen<COM.Marktrolle>" "List`1"
+@enduml

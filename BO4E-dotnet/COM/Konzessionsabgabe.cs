@@ -1,5 +1,7 @@
 ﻿using BO4E.ENUM;
+
 using Newtonsoft.Json;
+
 using ProtoBuf;
 
 namespace BO4E.COM
@@ -14,22 +16,22 @@ namespace BO4E.COM
         /// <summary>
         /// Art der Abgabe
         /// </summary>
-        [JsonProperty(Required = Required.Always, Order = 8)]
+        [JsonProperty(PropertyName = "satz", Required = Required.Always, Order = 8)]
         [ProtoMember(3)]
-        public AbgabeArt satz;
+        public AbgabeArt Satz { get; set; }
 
         /// <summary>
         /// Konzessionsabgabe in E/kWh
         /// </summary>
-        [JsonProperty(Required = Required.Always, Order = 5)]
+        [JsonProperty(PropertyName = "kosten", Required = Required.Always, Order = 5)]
         [ProtoMember(4)]
-        public decimal kosten;
+        public decimal Kosten { get; set; }
 
         /// <summary>
         /// Gebührenkategorie der Konzessionsabgabe
         /// </summary>
-        [JsonProperty(Required = Required.Always, Order = 6)]
+        [JsonProperty(PropertyName = "kategorie", Required = Required.Always, Order = 6)]
         [ProtoMember(5)]
-        public string kategorie;
+        public string Kategorie { get; set; }
     }
 }

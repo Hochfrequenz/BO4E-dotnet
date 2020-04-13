@@ -1,5 +1,7 @@
 ﻿using BO4E.ENUM;
+
 using Newtonsoft.Json;
+
 using ProtoBuf;
 
 namespace BO4E.COM
@@ -11,38 +13,38 @@ namespace BO4E.COM
     public class Regionskriterium : COM
     {
         /// <summary>
-        ///  Hier wird festgelegt, ob es sich um ein einschließendes oder ausschließendes Kriterium handelt.Details siehe <see cref="Gueltigkeitstyp"/>
+        ///  Hier wird festgelegt, ob es sich um ein einschließendes oder ausschließendes Kriterium handelt.Details siehe <see cref="ENUM.Gueltigkeitstyp"/>
         /// </summary>
-        [JsonProperty(Required = Required.Always)]
+        [JsonProperty(PropertyName = "gueltigkeitstyp", Required = Required.Always)]
         [ProtoMember(3)]
-        public Gueltigkeitstyp gueltigkeitstyp;
+        public Gueltigkeitstyp Gueltigkeitstyp { get; set; }
 
         /// <summary>
-        /// Das Kriterium gilt in der angegebenen Sparte.Details siehe <see cref="Sparte"/>
+        /// Das Kriterium gilt in der angegebenen Sparte.Details siehe <see cref="ENUM.Sparte"/>
         /// </summary>
-        [JsonProperty(Required = Required.Default)]
+        [JsonProperty(PropertyName = "sparte", Required = Required.Default)]
         [ProtoMember(4)]
-        public Sparte? sparte;
+        public Sparte? Sparte { get; set; }
 
         /// <summary>
-        /// Unterscheidung, wie der Wert angewendet werden soll, z.B.kleiner, größer, gleich.Details siehe <see cref="Mengenoperator"/>
+        /// Unterscheidung, wie der Wert angewendet werden soll, z.B.kleiner, größer, gleich.Details siehe <see cref="ENUM.Mengenoperator"/>
         /// </summary>
-        [JsonProperty(Required = Required.Always)]
+        [JsonProperty(PropertyName = "mengenoperator", Required = Required.Always)]
         [ProtoMember(5)]
-        public Mengenoperator mengenoperator;
+        public Mengenoperator Mengenoperator { get; set; }
 
         /// <summary>
-        /// Hier wird das Kriterium selbst angegeben, z.B.Bundesland. Details siehe <see cref="Regionskriteriumtyp"/>
+        /// Hier wird das Kriterium selbst angegeben, z.B.Bundesland. Details siehe <see cref="ENUM.Regionskriteriumtyp"/>
         /// </summary>
-        [JsonProperty(Required = Required.Always)]
+        [JsonProperty(PropertyName = "regionskriteriumtyp", Required = Required.Always)]
         [ProtoMember(6)]
-        public Regionskriteriumtyp regionskriteriumtyp;
+        public Regionskriteriumtyp Regionskriteriumtyp { get; set; }
 
         /// <summary>
         /// Der Wert, den das Kriterium annehmen kann, z.B.NRW.Im Falle des Regionskriteriumstyp BUNDESWEIT spielt dieser Wert keine Rolle.
         /// </summary>
-        [JsonProperty(Required = Required.Always)]
+        [JsonProperty(PropertyName = "wert", Required = Required.Always)]
         [ProtoMember(7)]
-        public string wert;
+        public string Wert { get; set; }
     }
 }

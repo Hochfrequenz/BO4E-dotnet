@@ -1,0 +1,272 @@
+﻿syntax = "proto3";
+import "protobuf-net/bcl.proto"; // schema for protobuf-net's handling of core .NET types
+
+message Betrag {
+   .bcl.Decimal Wert = 3;
+   Waehrungscode Waehrung = 4;
+}
+message Kosten {
+   int32 Kostenklasse = 4; // declared as invalid enum: Kostenklasse
+   Zeitraum Gueltigkeit = 5;
+   repeated Betrag SummeKosten = 6;
+   repeated Kostenblock Kostenbloecke = 7;
+   repeated Kostenposition Kostenpositionen = 8;
+}
+message Kostenblock {
+   string Kostenblockbezeichnung = 3;
+   Betrag SummeKostenblock = 4;
+   repeated Kostenposition Kostenpositionen = 5;
+}
+/* for context only
+enum Kostenklasse {
+   ZERO = 0; // proto3 requires a zero value as the first item (it can be named anything)
+}
+*/
+message Kostenposition {
+   string Positionstitel = 3;
+   .bcl.DateTime Von = 4;
+   .bcl.DateTime Bis = 5;
+   string Artikelbezeichnung = 6;
+   string Artikeldetail = 7;
+   Menge Menge = 8;
+   Menge Zeitmenge = 9;
+   Preis Einzelpreis = 10;
+   Betrag BetragKostenposition = 11;
+}
+message Menge {
+   .bcl.Decimal Wert = 3;
+   Mengeneinheit Einheit = 4;
+}
+enum Mengeneinheit {
+   ZERO = 0; // proto3 requires a zero value as the first item (it can be named anything)
+   WH = 2;
+   KW = 3;
+   KWH = 2000;
+   MW = 3000;
+   MWH = 2000000;
+   ANZAHL = 7;
+   KUBIKMETER = 11;
+   STUNDE = 13;
+   TAG = 17;
+   MONAT = 19;
+   JAHR = 228;
+   VAR = 23;
+   KVAR = 23000;
+   VARH = 29;
+   KVARH = 29000;
+}
+message Preis {
+   .bcl.Decimal Wert = 3;
+   Waehrungseinheit Einheit = 4;
+   Mengeneinheit Bezugswert = 5;
+   Preisstatus Status = 6;
+}
+enum Preisstatus {
+   VORLAEUFIG = 0;
+   ENDGUELTIG = 1;
+}
+enum Waehrungscode {
+   AFN = 0;
+   ALL = 1;
+   AMD = 2;
+   ANG = 3;
+   AOA = 4;
+   ARS = 5;
+   AUD = 6;
+   AWG = 7;
+   AZN = 8;
+   BAM = 9;
+   BBD = 10;
+   BDT = 11;
+   BGN = 12;
+   BHD = 13;
+   BIF = 14;
+   BMD = 15;
+   BND = 16;
+   BOB = 17;
+   BOV = 18;
+   BRL = 19;
+   BSD = 20;
+   BTN = 21;
+   BWP = 22;
+   BYN = 23;
+   BYR = 24;
+   BZD = 25;
+   CAD = 26;
+   CDF = 27;
+   CHE = 28;
+   CHF = 29;
+   CHW = 30;
+   CLF = 31;
+   CLP = 32;
+   CNY = 33;
+   COP = 34;
+   COU = 35;
+   CRC = 36;
+   CUC = 37;
+   CUP = 38;
+   CVE = 39;
+   CZK = 40;
+   DJF = 41;
+   DKK = 42;
+   DOP = 43;
+   DZD = 44;
+   EGP = 45;
+   ERN = 46;
+   ETB = 47;
+   EUR = 48;
+   FJD = 49;
+   FKP = 50;
+   GBP = 51;
+   GEL = 52;
+   GHS = 53;
+   GIP = 54;
+   GMD = 55;
+   GNF = 56;
+   GTQ = 57;
+   GYD = 58;
+   HKD = 59;
+   HNL = 60;
+   HRK = 61;
+   HTG = 62;
+   HUF = 63;
+   IDR = 64;
+   ILS = 65;
+   INR = 66;
+   IQD = 67;
+   IRR = 68;
+   ISK = 69;
+   JMD = 70;
+   JOD = 71;
+   JPY = 72;
+   KES = 73;
+   KGS = 74;
+   KHR = 75;
+   KMF = 76;
+   KPW = 77;
+   KRW = 78;
+   KWD = 79;
+   KYD = 80;
+   KZT = 81;
+   LAK = 82;
+   LBP = 83;
+   LKR = 84;
+   LRD = 85;
+   LSL = 86;
+   LTL = 87;
+   LYD = 88;
+   MAD = 89;
+   MDL = 90;
+   MGA = 91;
+   MKD = 92;
+   MMK = 93;
+   MNT = 94;
+   MOP = 95;
+   MRO = 96;
+   MUR = 97;
+   MVR = 98;
+   MWK = 99;
+   MXN = 100;
+   MXV = 101;
+   MYR = 102;
+   MZN = 103;
+   NAD = 104;
+   NGN = 105;
+   NIO = 106;
+   NOK = 107;
+   NPR = 108;
+   NZD = 109;
+   OMR = 110;
+   PAB = 111;
+   PEN = 112;
+   PGK = 113;
+   PHP = 114;
+   PKR = 115;
+   PLN = 116;
+   PYG = 117;
+   QAR = 118;
+   RON = 119;
+   RSD = 120;
+   RUB = 121;
+   RUR = 122;
+   RWF = 123;
+   SAR = 124;
+   SBD = 125;
+   SCR = 126;
+   SDG = 127;
+   SEK = 128;
+   SGD = 129;
+   SHP = 130;
+   SLL = 131;
+   SOS = 132;
+   SRD = 133;
+   SSP = 134;
+   STD = 135;
+   SVC = 136;
+   SYP = 137;
+   SZL = 138;
+   THB = 139;
+   TJS = 140;
+   TMT = 141;
+   TND = 142;
+   TOP = 143;
+   TRY = 144;
+   TTD = 145;
+   TWD = 146;
+   TZS = 147;
+   UAH = 148;
+   UGX = 149;
+   USD = 150;
+   USN = 151;
+   USS = 152;
+   UYI = 153;
+   UYU = 154;
+   UZS = 155;
+   VEF = 156;
+   VND = 157;
+   VUV = 158;
+   WST = 159;
+   XAF = 160;
+   XAG = 161;
+   XAU = 162;
+   XBA = 163;
+   XBB = 164;
+   XBC = 165;
+   XBD = 166;
+   XCD = 167;
+   XDR = 168;
+   XOF = 169;
+   XPD = 170;
+   XPF = 171;
+   XPT = 172;
+   XSU = 173;
+   XTS = 174;
+   XUA = 175;
+   XXX = 176;
+   YER = 177;
+   ZAR = 178;
+   ZMW = 179;
+   ZWL = 180;
+}
+enum Waehrungseinheit {
+   EUR = 0;
+   CT = 1;
+}
+enum Zeiteinheit {
+   SEKUNDE = 0;
+   MINUTE = 1;
+   STUNDE = 2;
+   VIERTEL_STUNDE = 3;
+   TAG = 4;
+   WOCHE = 5;
+   MONAT = 6;
+   QUARTAL = 7;
+   HALBJAHR = 8;
+   JAHR = 9;
+}
+message Zeitraum {
+   Zeiteinheit Einheit = 3;
+   .bcl.Decimal Dauer = 4;
+   .bcl.DateTime Startdatum = 5;
+   .bcl.DateTime Enddatum = 6;
+}

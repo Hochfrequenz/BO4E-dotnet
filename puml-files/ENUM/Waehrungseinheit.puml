@@ -1,0 +1,6 @@
+@startuml
+enum Waehrungseinheit {
+    EUR,
+    CT,
+}
+@enduml

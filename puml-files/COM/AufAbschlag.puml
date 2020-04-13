@@ -1,0 +1,15 @@
+@startuml
+class AufAbschlag {
+    + Bezeichnung : string <<get>> <<set>>
+    + Beschreibung : string <<get>> <<set>>
+    + AufAbschlagstyp : AufAbschlagstyp? <<get>> <<set>>
+    + aufAbschlagsziel : AufAbschlagsziel? <<get>> <<set>>
+    + Einheit : Waehrungseinheit? <<get>> <<set>>
+    + Website : string <<get>> <<set>>
+}
+class "List`1"<T> {
+}
+COM <|-- AufAbschlag
+AufAbschlag --> "Gueltigkeitszeitraum" Zeitraum
+AufAbschlag --> "Staffeln<Preisstaffel>" "List`1"
+@enduml

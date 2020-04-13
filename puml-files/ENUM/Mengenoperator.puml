@@ -1,0 +1,7 @@
+@startuml
+enum Mengenoperator {
+    KLEINER_ALS,
+    GROESSER_ALS,
+    GLEICH,
+}
+@enduml

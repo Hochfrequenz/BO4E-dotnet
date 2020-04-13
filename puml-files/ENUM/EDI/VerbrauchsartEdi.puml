@@ -1,0 +1,7 @@
+@startuml
+enum VerbrauchsartEdi {
+    Z64,
+    Z65,
+    Z66,
+}
+@enduml

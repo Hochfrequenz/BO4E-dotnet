@@ -1,0 +1,9 @@
+@startuml
+enum Verbrauchsart {
+    KL,
+    KLW,
+    KLWS,
+    W,
+    WS,
+}
+@enduml

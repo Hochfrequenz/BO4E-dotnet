@@ -1,0 +1,28 @@
+@startuml
+class Rechnung {
+    + Rechnungstitel : string <<get>> <<set>>
+    + Rechnungsstatus : Rechnungsstatus? <<get>> <<set>>
+    + Storno : bool <<get>> <<set>>
+    + Rechnungsnummer : string <<get>> <<set>>
+    + OriginalRechnungsnummer : string <<get>> <<set>>
+    + Rechnung()
+    + Rechnung(sapPrintDocument:JObject)
+}
+class "List`1"<T> {
+}
+BusinessObject <|-- Rechnung
+Rechnung --> "Rechnungsdatum" DateTime
+Rechnung --> "Faelligkeitsdatum" DateTime
+Rechnung --> "Rechnungsstyp" Rechnungstyp
+Rechnung --> "Rechnungsperiode" Zeitraum
+Rechnung --> "Rechnungsersteller" Geschaeftspartner
+Rechnung --> "Rechnungsempfaenger" Geschaeftspartner
+Rechnung --> "Gesamtnetto" Betrag
+Rechnung --> "Gesamtsteuer" Betrag
+Rechnung --> "Gesamtbrutto" Betrag
+Rechnung --> "Vorausgezahlt" Betrag
+Rechnung --> "rabattBrutto" Betrag
+Rechnung --> "Zuzahlen" Betrag
+Rechnung --> "Steuerbetraege<Steuerbetrag>" "List`1"
+Rechnung --> "Rechnungspositionen<Rechnungsposition>" "List`1"
+@enduml

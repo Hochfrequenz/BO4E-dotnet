@@ -1,0 +1,14 @@
+@startuml
+class Angebotsvariante {
+    + Beschreibung : string <<get>> <<set>>
+}
+class "List`1"<T> {
+}
+COM <|-- Angebotsvariante
+Angebotsvariante --> "Angebotsstatus" Angebotsstatus
+Angebotsvariante --> "Erstelldatum" DateTime
+Angebotsvariante --> "Bindefrist" DateTime
+Angebotsvariante --> "Gesamtmenge" Menge
+Angebotsvariante --> "Gesamtkosten" Betrag
+Angebotsvariante --> "Teile<Angebotsteil>" "List`1"
+@enduml

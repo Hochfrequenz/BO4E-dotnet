@@ -1,16 +1,16 @@
 using System;
-using System.Collections;
 using System.Collections.Generic;
-using System.Globalization;
 using System.Linq;
 using System.Reflection;
 using System.Text.RegularExpressions;
+
 using BO4E.BO;
 using BO4E.meta;
+using BO4E.meta.LenientConverters;
+
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using Newtonsoft.Json.Schema;
-using Newtonsoft.Json.Serialization;
 
 namespace BO4E
 {
@@ -114,6 +114,7 @@ namespace BO4E
         /// <item><description>a BO4E business object (<see cref="BusinessObject"/>) of the type provided in businessObjectName</description></item>
         /// </list>
         /// </returns>
+        [Obsolete("DEPRECATED! Please use the overloaded method MapObject<T>(...) or MapObject(Type t,...) that accept types, not strings.")]
         public static BusinessObject MapObject(Type businessObjectType, JObject jobject, HashSet<string> userPropertiesWhiteList, LenientParsing lenient = LenientParsing.Strict)
         {
             if (!businessObjectType.IsSubclassOf(typeof(BusinessObject)))
@@ -128,52 +129,7 @@ namespace BO4E
                 }
                 else
                 {
-                    List<JsonConverter> converters = new List<JsonConverter>();
-                    foreach (LenientParsing lp in Enum.GetValues(typeof(LenientParsing)))
-                    {
-                        if (lenient.HasFlag(lp))
-                        {
-                            switch (lp)
-                            {
-                                case LenientParsing.DateTime:
-                                    if (!lenient.HasFlag(LenientParsing.SetInitialDateIfNull))
-                                    {
-                                        converters.Add(new LenientDateTimeConverter());
-                                    }
-                                    else
-                                    {
-                                        converters.Add(new LenientDateTimeConverter(new DateTime()));
-                                    }
-                                    break;
-                                case LenientParsing.EnumList:
-                                    converters.Add(new LenientEnumListConverter());
-                                    break;
-                                case LenientParsing.Bo4eUri:
-                                    converters.Add(new LenientBo4eUriConverter());
-                                    break;
-                                    // case LenientParsing.EmptyLists:
-                                    // converters.Add(new LenientRequiredListConverter());
-                                    // break;
-
-                                    // no default case because NONE and MOST_LENIENT do not come up with more converters
-                            }
-                        }
-                    }
-                    IContractResolver contractResolver;
-                    if (userPropertiesWhiteList.Count > 0)
-                    {
-                        contractResolver = new UserPropertiesDataContractResolver(userPropertiesWhiteList);
-                    }
-                    else
-                    {
-                        contractResolver = new DefaultContractResolver();
-                    }
-                    JsonSerializerSettings settings = new JsonSerializerSettings
-                    {
-                        Converters = converters,
-                        DateParseHandling = DateParseHandling.None,
-                        ContractResolver = contractResolver
-                    };
+                    var settings = lenient.GetJsonSerializerSettings();
                     return (BusinessObject)JsonConvert.DeserializeObject(jobject.ToString(), businessObjectType, settings);
                 }
             }
@@ -181,62 +137,6 @@ namespace BO4E
             {
                 return null;
             }
-        }
-
-        public static JsonSerializerSettings GetJsonSerializerSettings(LenientParsing lenient)
-        {
-            return GetJsonSerializerSettings(new HashSet<string>(), lenient);
-        }
-
-        public static JsonSerializerSettings GetJsonSerializerSettings(HashSet<string> userPropertiesWhiteList, LenientParsing lenient = LenientParsing.Strict)
-        {
-            List<JsonConverter> converters = new List<JsonConverter>();
-            foreach (LenientParsing lp in Enum.GetValues(typeof(LenientParsing)))
-            {
-                if (lenient.HasFlag(lp))
-                {
-                    switch (lp)
-                    {
-                        case LenientParsing.DateTime:
-                            if (!lenient.HasFlag(LenientParsing.SetInitialDateIfNull))
-                            {
-                                converters.Add(new LenientDateTimeConverter());
-                            }
-                            else
-                            {
-                                converters.Add(new LenientDateTimeConverter(new DateTime()));
-                            }
-                            break;
-                        case LenientParsing.EnumList:
-                            converters.Add(new LenientEnumListConverter());
-                            break;
-                        case LenientParsing.Bo4eUri:
-                            converters.Add(new LenientBo4eUriConverter());
-                            break;
-                            // case LenientParsing.EmptyLists:
-                            // converters.Add(new LenientRequiredListConverter());
-                            // break;
-
-                            // no default case because NONE and MOST_LENIENT do not come up with more converters
-                    }
-                }
-            }
-            IContractResolver contractResolver;
-            if (userPropertiesWhiteList.Count > 0)
-            {
-                contractResolver = new UserPropertiesDataContractResolver(userPropertiesWhiteList);
-            }
-            else
-            {
-                contractResolver = new DefaultContractResolver();
-            }
-            JsonSerializerSettings settings = new JsonSerializerSettings
-            {
-                Converters = converters,
-                DateParseHandling = DateParseHandling.None,
-                ContractResolver = contractResolver
-            };
-            return settings;
         }
 
         /// <summary>
@@ -361,11 +261,12 @@ namespace BO4E
         /// </summary>
         /// <param name="boName">name of the business object in title case<example>Messlokation</example></param>
         /// <returns>Array of FieldInfos</returns>
+        [Obsolete("Fields are only private version 1.1", true)]
         public static FieldInfo[] GetAnnotatedFields(string boName)
         {
             return GetAnnotatedFields(boName, typeof(DataCategoryAttribute));
         }
-
+        [Obsolete("Fields are only private version 1.1", true)]
         public static FieldInfo[] GetAnnotatedFields(Type type)
         {
             return GetAnnotatedFields(type, typeof(DataCategoryAttribute));
@@ -378,6 +279,7 @@ namespace BO4E
         /// <param name="boType">type of the business object</param>
         /// <param name="attributeType">type of the attribute/annotation you're interested in<example>typeof(DataCategoryAttribute)</example></param>
         /// <returns>Array of FieldInfos</returns>
+        [Obsolete("Fields are only private version 1.1",true)]
         public static FieldInfo[] GetAnnotatedFields(Type boType, Type attributeType)
         {
             return boType.GetFields()
@@ -393,6 +295,7 @@ namespace BO4E
         /// <param name="boName">name of the business object in title case<example>Messlokation</example></param>
         /// <param name="attributeType">type of the attribute/annotation you're interested in<example>typeof(DataCategoryAttribute)</example></param>
         /// <returns>Array of FieldInfos</returns>
+        [Obsolete("Fields are only private version 1.1",true)]
         public static FieldInfo[] GetAnnotatedFields(string boName, Type attributeType)
         {
             return Assembly.GetExecutingAssembly().GetTypes()
@@ -401,236 +304,6 @@ namespace BO4E
                 .Where(f => f.GetCustomAttributes(attributeType, false).Length > 0)
                 .OrderBy(af => af.GetCustomAttribute<JsonPropertyAttribute>()?.Order)
                 .ToArray<FieldInfo>();
-        }
-
-        private class LenientEnumListConverter : JsonConverter
-        {
-
-            public override bool CanConvert(Type objectType)
-            {
-                if (!objectType.IsGenericType)
-                {
-                    return false;
-                }
-                if (objectType.GetGenericTypeDefinition() != typeof(List<>))
-                {
-                    return false;
-                }
-                Type expectedListElementType = objectType.GetGenericArguments()[0];
-                return expectedListElementType.ToString().StartsWith("BO4E.ENUM");
-            }
-
-            public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
-            {
-                JToken token = JToken.Load(reader); // https://stackoverflow.com/a/47864946/10009545
-                List<object> rawList = token.ToObject<List<object>>();
-                Type expectedListElementType = objectType.GetGenericArguments()[0];
-                Type expectedListType = typeof(List<>).MakeGenericType(expectedListElementType);
-                object result = Activator.CreateInstance(expectedListType);
-                if (rawList == null || rawList.Count == 0)
-                {
-                    return result;
-                }
-                // First try to parse the List normally, in case it's formatted as expected
-                foreach (var rawItem in rawList)
-                {
-                    if (rawItem.GetType() == typeof(string) && Enum.IsDefined(expectedListElementType, rawItem.ToString()))
-                    {
-                        // default. everything is as it should be :-)
-                        object enumValue = Enum.Parse(expectedListElementType, rawItem.ToString());
-                        ((IList)result).Add(enumValue);
-                    }
-                    else if (rawItem.GetType() == typeof(JObject))
-                    {
-                        Dictionary<string, object> rawDict = ((JObject)rawItem).ToObject<Dictionary<string, object>>();
-                        object rawObject = rawDict.Values.FirstOrDefault<object>();
-                        object enumValue = Enum.Parse(expectedListElementType, rawObject.ToString());
-                        ((IList)result).Add(enumValue);
-                    }
-                    else
-                    {
-                        ((IList)result).Add(rawItem);
-                    }
-                }
-                return result;
-            }
-
-            public override bool CanWrite
-            {
-                get { return false; }
-            }
-
-            public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
-            {
-                throw new NotImplementedException();
-            }
-        }
-
-        /// <summary>
-        /// The lenient DateTimeConverter allows for transforming strings into (nullable) DateTime(?) objects,
-        /// even if their formatting is somehow weird.
-        /// </summary>
-        public class LenientDateTimeConverter : JsonConverter
-        {
-            // basic structure copied from https://stackoverflow.com/a/33172735/10009545
-
-            private readonly DateTime? _defaultDateTime;
-
-            public LenientDateTimeConverter(DateTime? defaultDateTime = null)
-            {
-                this._defaultDateTime = defaultDateTime;
-            }
-
-            public LenientDateTimeConverter() : this(null)
-            {
-
-            }
-
-            private readonly List<string> ALLOWED_DATETIME_FORMATS = new List<string>()
-            {
-                "yyyyMMddHHmm",
-                "yyyyMMddHHmmss",
-                @"yyyyMMddHHmmss'--T::zzzz'", // ToDo: remove again. this is just a buggy, nasty workaround
-            };
-
-            public override bool CanConvert(Type objectType)
-            {
-                return (objectType == typeof(DateTime) || objectType == typeof(DateTime?));
-            }
-
-            public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
-            {
-                string rawDate;
-                if (reader.Value == null)
-                {
-                    return null;
-                }
-                else if (reader.Value as string != null)
-                {
-                    rawDate = (string)reader.Value;
-                }
-                else if (reader.Value.GetType() == typeof(DateTime))
-                {
-                    return (DateTime)reader.Value;
-                }
-                else
-                {
-                    rawDate = reader.Value.ToString();
-                }
-                // First try to parse the date string as is (in case it is correctly formatted)
-                if (DateTime.TryParse(rawDate, out DateTime date))
-                {
-                    return date;
-                }
-
-                foreach (string dtf in ALLOWED_DATETIME_FORMATS)
-                {
-                    if (DateTime.TryParseExact(rawDate, dtf, CultureInfo.InvariantCulture, DateTimeStyles.None, out date))
-                    {
-                        return date;
-                    }
-                }
-
-                // It's not a date after all, so just return the default value
-                if (objectType == typeof(DateTime?))
-                {
-                    return null;
-                }
-                if (this._defaultDateTime.HasValue)
-                {
-                    return _defaultDateTime;
-                }
-                else
-                {
-                    throw new JsonReaderException($"Couldn't convert {rawDate} to any of the allowed date time formats: {String.Join(";", ALLOWED_DATETIME_FORMATS)})");
-                }
-            }
-
-            public override bool CanWrite
-            {
-                get { return false; }
-            }
-
-            public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
-            {
-                throw new NotImplementedException();
-            }
-        }
-
-        private class LenientBo4eUriConverter : JsonConverter
-        {
-            public override bool CanConvert(Type objectType)
-            {
-                return (objectType == typeof(Bo4eUri));
-            }
-
-            public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
-            {
-                if (reader.Value == null)
-                {
-                    return null;
-                }
-                string rawString = (string)reader.Value;
-                if (rawString.Trim() == String.Empty)
-                {
-                    return null;
-                }
-                return new Bo4eUri(rawString);
-            }
-
-            public override bool CanWrite
-            {
-                get { return false; }
-            }
-
-            public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
-            {
-                throw new NotImplementedException();
-            }
-        }
-
-        /// <summary>
-        /// The UserPropertiesContractResolver allows to put non-BO4E-standard/custom fields/properties into a "userProperties" object.
-        /// </summary>
-        public class UserPropertiesDataContractResolver : DefaultContractResolver
-        {
-            public static readonly UserPropertiesDataContractResolver Instance = new UserPropertiesDataContractResolver(new HashSet<string>());
-
-            private readonly HashSet<string> whitelist;
-
-            /// <summary>
-            /// The UserPropertiesDataContractResolver is initialised with a white list of allowed properties. Everything else is discarded.
-            /// </summary>
-            /// <param name="userPropertiesWhiteList">white list of properties (actually a white"set")</param>
-            public UserPropertiesDataContractResolver(HashSet<string> userPropertiesWhiteList)
-            {
-                whitelist = userPropertiesWhiteList;
-            }
-
-            public override JsonContract ResolveContract(Type type)
-            {
-                JsonContract contract = base.ResolveContract(type);
-                if (contract is JsonObjectContract objContract)
-                {
-                    if (objContract.ExtensionDataSetter != null)
-                    {
-                        ExtensionDataSetter oldSetter = objContract.ExtensionDataSetter;
-                        objContract.ExtensionDataSetter = (o, key, value) =>
-                        {
-                            if (whitelist.Contains(key))
-                            {
-                                oldSetter(o, key, value);
-                            }
-                            else
-                            {
-                                int a = 0;
-                                a++;
-                            }
-                        };
-                    }
-                }
-                return contract;
-            }
         }
     }
 }

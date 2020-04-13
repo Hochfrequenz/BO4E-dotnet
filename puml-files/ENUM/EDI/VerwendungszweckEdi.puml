@@ -1,0 +1,8 @@
+@startuml
+enum VerwendungszweckEdi {
+    Z84,
+    Z85,
+    Z86,
+    Z47,
+}
+@enduml

@@ -1,0 +1,11 @@
+@startuml
+class Tarifeinschraenkung {
+}
+class "List`1"<T> {
+}
+COM <|-- Tarifeinschraenkung
+Tarifeinschraenkung --> "Zusatzprodukte<string>" "List`1"
+Tarifeinschraenkung --> "Voraussetzungen<Voraussetzungen>" "List`1"
+Tarifeinschraenkung --> "Einschraenkungzaehler" Geraet
+Tarifeinschraenkung --> "Einschraenkungleistung" Menge
+@enduml

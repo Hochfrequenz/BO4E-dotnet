@@ -1,10 +1,12 @@
 
 using System;
 using System.IO;
-using System.Linq;
+
 using BO4E.BO;
 using BO4E.COM;
+
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+
 using ProtoBuf;
 
 namespace TestBO4E
@@ -17,25 +19,25 @@ namespace TestBO4E
         {
             Energiemenge em = new Energiemenge()
             {
-                lokationsId = "54321012345",
-                lokationstyp = BO4E.ENUM.Lokationstyp.MaLo,
-                energieverbrauch = new System.Collections.Generic.List<Verbrauch>()
+                LokationsId = "54321012345",
+                LokationsTyp = BO4E.ENUM.Lokationstyp.MaLo,
+                Energieverbrauch = new System.Collections.Generic.List<Verbrauch>()
                 {
                     new Verbrauch()
                     {
-                        einheit = BO4E.ENUM.Mengeneinheit.KWH,
-                        wert = 10.0M,
-                        startdatum = new DateTime(2019, 1, 1, 0, 0, 0, DateTimeKind.Utc),
-                        enddatum = new DateTime(2019, 1, 2, 0, 0, 0, DateTimeKind.Utc),
-                        obiskennzahl =  "1–0:1.8.1"
+                        Einheit = BO4E.ENUM.Mengeneinheit.KWH,
+                        Wert = 10.0M,
+                        Startdatum = new DateTime(2019, 1, 1, 0, 0, 0, DateTimeKind.Utc),
+                        Enddatum = new DateTime(2019, 1, 2, 0, 0, 0, DateTimeKind.Utc),
+                        Obiskennzahl =  "1–0:1.8.1"
                     },
                     new Verbrauch()
                     {
-                        einheit = BO4E.ENUM.Mengeneinheit.MWH,
-                        wert = 23.0M,
-                        startdatum = new DateTime(2019, 1, 2, 0, 0, 0, DateTimeKind.Utc),
-                        enddatum = new DateTime(2019, 1, 3, 0, 0, 0, DateTimeKind.Utc),
-                        obiskennzahl =  "1–0:1.8.1"
+                        Einheit = BO4E.ENUM.Mengeneinheit.MWH,
+                        Wert = 23.0M,
+                        Startdatum = new DateTime(2019, 1, 2, 0, 0, 0, DateTimeKind.Utc),
+                        Enddatum = new DateTime(2019, 1, 3, 0, 0, 0, DateTimeKind.Utc),
+                        Obiskennzahl =  "1–0:1.8.1"
                     }
                 }
             };
@@ -58,7 +60,7 @@ namespace TestBO4E
                 backStream.Seek(0, SeekOrigin.Begin);
                 emRoundTrip = Serializer.Deserialize<Energiemenge>(backStream);
             }
-            Assert.IsNotNull(emRoundTrip.lokationsId);
+            Assert.IsNotNull(emRoundTrip.LokationsId);
             Assert.IsTrue(emRoundTrip.IsValid());
             Assert.AreEqual(em, emRoundTrip);
         }

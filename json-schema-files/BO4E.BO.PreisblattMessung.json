@@ -1,0 +1,1579 @@
+﻿{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "definitions": {
+    "Adresse": {
+      "type": [
+        "object",
+        "null"
+      ],
+      "properties": {
+        "postleitzahl": {
+          "type": "string"
+        },
+        "ort": {
+          "type": "string"
+        },
+        "strasse": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "hausnummer": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "postfach": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "adresszusatz": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "coErgaenzung": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "landescode": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "enum": [
+            null,
+            "AC",
+            "AD",
+            "AE",
+            "AF",
+            "AG",
+            "AI",
+            "AL",
+            "AM",
+            "AN",
+            "AO",
+            "AQ",
+            "AR",
+            "AS",
+            "AT",
+            "AU",
+            "AW",
+            "AX",
+            "AZ",
+            "BA",
+            "BB",
+            "BD",
+            "BE",
+            "BF",
+            "BG",
+            "BH",
+            "BI",
+            "BJ",
+            "BL",
+            "BM",
+            "BN",
+            "BO",
+            "BQ",
+            "BR",
+            "BS",
+            "BT",
+            "BU",
+            "BV",
+            "BW",
+            "BY",
+            "BZ",
+            "CA",
+            "CC",
+            "CD",
+            "CF",
+            "CG",
+            "CH",
+            "CI",
+            "CK",
+            "CL",
+            "CM",
+            "CN",
+            "CO",
+            "CP",
+            "CR",
+            "CS",
+            "CU",
+            "CV",
+            "CW",
+            "CX",
+            "CY",
+            "CZ",
+            "DE",
+            "DG",
+            "DJ",
+            "DK",
+            "DM",
+            "DO",
+            "DZ",
+            "EA",
+            "EC",
+            "EE",
+            "EG",
+            "EH",
+            "ER",
+            "ES",
+            "ET",
+            "EU",
+            "FI",
+            "FJ",
+            "FK",
+            "FM",
+            "FO",
+            "FR",
+            "FX",
+            "GA",
+            "GB",
+            "GD",
+            "GE",
+            "GF",
+            "GG",
+            "GH",
+            "GI",
+            "GL",
+            "GM",
+            "GN",
+            "GP",
+            "GQ",
+            "GR",
+            "GS",
+            "GT",
+            "GU",
+            "GW",
+            "GY",
+            "HK",
+            "HM",
+            "HN",
+            "HR",
+            "HT",
+            "HU",
+            "IC",
+            "ID",
+            "IE",
+            "IL",
+            "IM",
+            "IN",
+            "IO",
+            "IQ",
+            "IR",
+            "IS",
+            "IT",
+            "JE",
+            "JM",
+            "JO",
+            "JP",
+            "KE",
+            "KG",
+            "KH",
+            "KI",
+            "KM",
+            "KN",
+            "KP",
+            "KR",
+            "KW",
+            "KY",
+            "KZ",
+            "LA",
+            "LB",
+            "LC",
+            "LI",
+            "LK",
+            "LR",
+            "LS",
+            "LT",
+            "LU",
+            "LV",
+            "LY",
+            "MA",
+            "MC",
+            "MD",
+            "ME",
+            "MF",
+            "MG",
+            "MH",
+            "MK",
+            "ML",
+            "MM",
+            "MN",
+            "MO",
+            "MP",
+            "MQ",
+            "MR",
+            "MS",
+            "MT",
+            "MU",
+            "MV",
+            "MW",
+            "MX",
+            "MY",
+            "MZ",
+            "NA",
+            "NC",
+            "NE",
+            "NF",
+            "NG",
+            "NI",
+            "NL",
+            "NO",
+            "NP",
+            "NR",
+            "NT",
+            "NU",
+            "NZ",
+            "OM",
+            "PA",
+            "PE",
+            "PF",
+            "PG",
+            "PH",
+            "PK",
+            "PL",
+            "PM",
+            "PN",
+            "PR",
+            "PS",
+            "PT",
+            "PW",
+            "PY",
+            "QA",
+            "RE",
+            "RO",
+            "RS",
+            "RU",
+            "RW",
+            "SA",
+            "SB",
+            "SC",
+            "SD",
+            "SE",
+            "SF",
+            "SG",
+            "SH",
+            "SI",
+            "SJ",
+            "SK",
+            "SL",
+            "SM",
+            "SN",
+            "SO",
+            "SR",
+            "SS",
+            "ST",
+            "SU",
+            "SV",
+            "SX",
+            "SY",
+            "SZ",
+            "TA",
+            "TC",
+            "TD",
+            "TF",
+            "TG",
+            "TJ",
+            "TK",
+            "TL",
+            "TM",
+            "TN",
+            "TO",
+            "TP",
+            "TR",
+            "TT",
+            "TV",
+            "TW",
+            "TZ",
+            "UA",
+            "UG",
+            "UK",
+            "UM",
+            "US",
+            "UY",
+            "UZ",
+            "VA",
+            "VC",
+            "VE",
+            "VG",
+            "VI",
+            "VN",
+            "VU",
+            "WF",
+            "WS",
+            "XK",
+            "YE",
+            "YT",
+            "YU",
+            "ZA",
+            "ZM",
+            "ZR",
+            "ZW"
+          ]
+        },
+        "guid": {
+          "type": [
+            "string",
+            "null"
+          ]
+        }
+      },
+      "required": [
+        "postleitzahl",
+        "ort"
+      ]
+    },
+    "Ansprechpartner": {
+      "type": [
+        "object",
+        "null"
+      ],
+      "properties": {
+        "guid": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "boTyp": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "versionStruktur": {
+          "type": "integer"
+        },
+        "anrede": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "enum": [
+            null,
+            "HERR",
+            "FRAU",
+            "EHELEUTE",
+            "FIRMA",
+            "INDIVIDUELL",
+            "DR"
+          ]
+        },
+        "inviduelleAnrede": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "titel": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "enum": [
+            null,
+            "DR",
+            "PROF",
+            "PROF_DR"
+          ]
+        },
+        "vorname": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "nachname": {
+          "type": "string"
+        },
+        "eMailAdresse": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "kommentar": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "geschaeftspartner": {
+          "$ref": "#/definitions/Geschaeftspartner"
+        },
+        "adresse": {
+          "$ref": "#/definitions/Adresse"
+        },
+        "rufnummer": {
+          "type": [
+            "array",
+            "null"
+          ],
+          "items": {
+            "$ref": "#/definitions/Rufnummer"
+          }
+        },
+        "zustaendigkeit": {
+          "type": [
+            "array",
+            "null"
+          ],
+          "items": {
+            "$ref": "#/definitions/Zustaendigkeit"
+          }
+        }
+      },
+      "required": [
+        "nachname",
+        "geschaeftspartner"
+      ]
+    },
+    "Geraeteeigenschaften": {
+      "type": "object",
+      "properties": {
+        "geraetetyp": {
+          "type": "string",
+          "enum": [
+            "WECHSELSTROMZAEHLER",
+            "DREHSTROMZAEHLER",
+            "ZWEIRICHTUNGSZAEHLER",
+            "RLM_ZAEHLER",
+            "IMS_ZAEHLER",
+            "BALGENGASZAEHLER",
+            "MAXIMUMZAEHLER",
+            "MULTIPLEXANLAGE",
+            "PAUSCHALANLAGE",
+            "VERSTAERKERANLAGE",
+            "SUMMATIONSGERAET",
+            "IMPULSGEBER",
+            "EDL_21_ZAEHLERAUFSATZ",
+            "VIER_QUADRANTEN_LASTGANGZAEHLER",
+            "MENGENUMWERTER",
+            "STROMWANDLER",
+            "SPANNUNGSWANDLER",
+            "DATENLOGGER",
+            "KOMMUNIKATIONSANSCHLUSS",
+            "MODEM",
+            "TELEKOMMUNIKATIONSEINRICHTUNG",
+            "DREHKOLBENGASZAEHLER",
+            "TURBINENRADGASZAEHLER",
+            "ULTRASCHALLZAEHLER",
+            "WIRBELGASZAEHLER",
+            "MODERNE_MESSEINRICHTUNG",
+            "ELEKTRONISCHER_HAUSHALTSZAEHLER",
+            "STEUEREINRICHTUNG",
+            "TECHNISCHESTEUEREINRICHTUNG",
+            "TARIFSCHALTGERAET",
+            "RUNDSTEUEREMPFAENGER",
+            "OPTIONALE_ZUS_ZAEHLEINRICHTUNG",
+            "MESSWANDLERSATZ_IMS_MME",
+            "KOMBIMESSWANDLER_IMS_MME",
+            "TARIFSCHALTGERAET_IMS_MME",
+            "RUNDSTEUEREMPFAENGER_IMS_MME",
+            "TEMPERATUR_KOMPENSATION",
+            "HOECHSTBELASTUNGS_ANZEIGER",
+            "SONSTIGES_GERAET",
+            "SMARTMETERGATEWAY",
+            "STEUERBOX",
+            "BLOCKSTROMWANDLER",
+            "KOMBIMESSWANDLER"
+          ]
+        },
+        "geraetemerkmal": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "enum": [
+            null,
+            "EINTARIF",
+            "ZWEITARIF",
+            "MEHRTARIF",
+            "GAS_G2_5",
+            "GAS_G4",
+            "GAS_G6",
+            "GAS_G10",
+            "GAS_G16",
+            "GAS_G25",
+            "GAS_G40",
+            "GAS_G65",
+            "GAS_G100",
+            "GAS_G160",
+            "GAS_G250",
+            "GAS_G400",
+            "GAS_G650",
+            "GAS_G1000",
+            "GAS_G1600",
+            "GAS_G2500",
+            "IMPULSGEBER_G4_G100",
+            "IMPULSGEBER_G100",
+            "MODEM_GSM",
+            "MODEM_GPRS",
+            "MODEM_FUNK",
+            "MODEM_GSM_O_LG",
+            "MODEM_GSM_M_LG",
+            "MODEM_FESTNETZ",
+            "MODEM_GPRS_M_LG",
+            "PLC_COM",
+            "ETHERNET_KOM",
+            "DSL_KOM",
+            "LTE_KOM",
+            "RUNDSTEUEREMPFAENGER",
+            "TARIFSCHALTGERAET",
+            "ZUSTANDS_MU",
+            "TEMPERATUR_MU",
+            "KOMPAKT_MU",
+            "SYSTEM_MU"
+          ]
+        },
+        "Parameter": {
+          "type": [
+            "object",
+            "null"
+          ],
+          "additionalProperties": {
+            "type": [
+              "string",
+              "null"
+            ]
+          }
+        },
+        "guid": {
+          "type": [
+            "string",
+            "null"
+          ]
+        }
+      },
+      "required": [
+        "geraetetyp"
+      ]
+    },
+    "Geraeteeigenschaften-1": {
+      "type": [
+        "object",
+        "null"
+      ],
+      "properties": {
+        "geraetetyp": {
+          "type": "string",
+          "enum": [
+            "WECHSELSTROMZAEHLER",
+            "DREHSTROMZAEHLER",
+            "ZWEIRICHTUNGSZAEHLER",
+            "RLM_ZAEHLER",
+            "IMS_ZAEHLER",
+            "BALGENGASZAEHLER",
+            "MAXIMUMZAEHLER",
+            "MULTIPLEXANLAGE",
+            "PAUSCHALANLAGE",
+            "VERSTAERKERANLAGE",
+            "SUMMATIONSGERAET",
+            "IMPULSGEBER",
+            "EDL_21_ZAEHLERAUFSATZ",
+            "VIER_QUADRANTEN_LASTGANGZAEHLER",
+            "MENGENUMWERTER",
+            "STROMWANDLER",
+            "SPANNUNGSWANDLER",
+            "DATENLOGGER",
+            "KOMMUNIKATIONSANSCHLUSS",
+            "MODEM",
+            "TELEKOMMUNIKATIONSEINRICHTUNG",
+            "DREHKOLBENGASZAEHLER",
+            "TURBINENRADGASZAEHLER",
+            "ULTRASCHALLZAEHLER",
+            "WIRBELGASZAEHLER",
+            "MODERNE_MESSEINRICHTUNG",
+            "ELEKTRONISCHER_HAUSHALTSZAEHLER",
+            "STEUEREINRICHTUNG",
+            "TECHNISCHESTEUEREINRICHTUNG",
+            "TARIFSCHALTGERAET",
+            "RUNDSTEUEREMPFAENGER",
+            "OPTIONALE_ZUS_ZAEHLEINRICHTUNG",
+            "MESSWANDLERSATZ_IMS_MME",
+            "KOMBIMESSWANDLER_IMS_MME",
+            "TARIFSCHALTGERAET_IMS_MME",
+            "RUNDSTEUEREMPFAENGER_IMS_MME",
+            "TEMPERATUR_KOMPENSATION",
+            "HOECHSTBELASTUNGS_ANZEIGER",
+            "SONSTIGES_GERAET",
+            "SMARTMETERGATEWAY",
+            "STEUERBOX",
+            "BLOCKSTROMWANDLER",
+            "KOMBIMESSWANDLER"
+          ]
+        },
+        "geraetemerkmal": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "enum": [
+            null,
+            "EINTARIF",
+            "ZWEITARIF",
+            "MEHRTARIF",
+            "GAS_G2_5",
+            "GAS_G4",
+            "GAS_G6",
+            "GAS_G10",
+            "GAS_G16",
+            "GAS_G25",
+            "GAS_G40",
+            "GAS_G65",
+            "GAS_G100",
+            "GAS_G160",
+            "GAS_G250",
+            "GAS_G400",
+            "GAS_G650",
+            "GAS_G1000",
+            "GAS_G1600",
+            "GAS_G2500",
+            "IMPULSGEBER_G4_G100",
+            "IMPULSGEBER_G100",
+            "MODEM_GSM",
+            "MODEM_GPRS",
+            "MODEM_FUNK",
+            "MODEM_GSM_O_LG",
+            "MODEM_GSM_M_LG",
+            "MODEM_FESTNETZ",
+            "MODEM_GPRS_M_LG",
+            "PLC_COM",
+            "ETHERNET_KOM",
+            "DSL_KOM",
+            "LTE_KOM",
+            "RUNDSTEUEREMPFAENGER",
+            "TARIFSCHALTGERAET",
+            "ZUSTANDS_MU",
+            "TEMPERATUR_MU",
+            "KOMPAKT_MU",
+            "SYSTEM_MU"
+          ]
+        },
+        "Parameter": {
+          "type": [
+            "object",
+            "null"
+          ],
+          "additionalProperties": {
+            "type": [
+              "string",
+              "null"
+            ]
+          }
+        },
+        "guid": {
+          "type": [
+            "string",
+            "null"
+          ]
+        }
+      },
+      "required": [
+        "geraetetyp"
+      ]
+    },
+    "Geschaeftspartner": {
+      "type": "object",
+      "properties": {
+        "guid": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "boTyp": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "versionStruktur": {
+          "type": "integer"
+        },
+        "anrede": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "enum": [
+            null,
+            "HERR",
+            "FRAU",
+            "EHELEUTE",
+            "FIRMA",
+            "INDIVIDUELL",
+            "DR"
+          ]
+        },
+        "title": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "name1": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "name2": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "name3": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "gewerbekennzeichnung": {
+          "type": "boolean"
+        },
+        "hrnummer": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "amtsgericht": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "kontaktweg": {
+          "type": [
+            "array",
+            "null"
+          ],
+          "items": {
+            "type": "string",
+            "enum": [
+              "ANSCHREIBEN",
+              "TELEFONAT",
+              "FAX",
+              "E_MAIL",
+              "SMS"
+            ]
+          }
+        },
+        "umsatzsteuerId": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "glaeubigerId": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "eMailAdresse": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "website": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "geschaeftspartnerrolle": {
+          "type": [
+            "array",
+            "null"
+          ],
+          "items": {
+            "type": "string",
+            "enum": [
+              "LIEFERANT",
+              "DIENSTLEISTER",
+              "KUNDE",
+              "INTERESSENT",
+              "MARKTPARTNER"
+            ]
+          }
+        },
+        "partneradresse": {
+          "$ref": "#/definitions/Adresse"
+        }
+      },
+      "required": [
+        "gewerbekennzeichnung"
+      ]
+    },
+    "Marktteilnehmer": {
+      "type": "object",
+      "properties": {
+        "guid": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "boTyp": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "versionStruktur": {
+          "type": "integer"
+        },
+        "anrede": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "enum": [
+            null,
+            "HERR",
+            "FRAU",
+            "EHELEUTE",
+            "FIRMA",
+            "INDIVIDUELL",
+            "DR"
+          ]
+        },
+        "title": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "name1": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "name2": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "name3": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "gewerbekennzeichnung": {
+          "type": "boolean"
+        },
+        "hrnummer": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "amtsgericht": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "kontaktweg": {
+          "type": [
+            "array",
+            "null"
+          ],
+          "items": {
+            "type": "string",
+            "enum": [
+              "ANSCHREIBEN",
+              "TELEFONAT",
+              "FAX",
+              "E_MAIL",
+              "SMS"
+            ]
+          }
+        },
+        "umsatzsteuerId": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "glaeubigerId": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "eMailAdresse": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "website": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "geschaeftspartnerrolle": {
+          "type": [
+            "array",
+            "null"
+          ],
+          "items": {
+            "type": "string",
+            "enum": [
+              "LIEFERANT",
+              "DIENSTLEISTER",
+              "KUNDE",
+              "INTERESSENT",
+              "MARKTPARTNER"
+            ]
+          }
+        },
+        "partneradresse": {
+          "$ref": "#/definitions/Adresse"
+        },
+        "marktrolle": {
+          "type": "string",
+          "enum": [
+            "NB",
+            "LF",
+            "MSB",
+            "MDL",
+            "DL",
+            "BKV",
+            "BIKO",
+            "UENB",
+            "KUNDE_SELBST_NN",
+            "MGV",
+            "EIV",
+            "RB",
+            "KUNDE",
+            "INTERESSENT"
+          ]
+        },
+        "rollencodenummer": {
+          "type": "string"
+        },
+        "rollencodetyp": {
+          "type": "string",
+          "enum": [
+            "BDEW",
+            "DVGW",
+            "GLN"
+          ]
+        },
+        "makoadresse": {
+          "type": "string"
+        },
+        "ansprechpartner": {
+          "$ref": "#/definitions/Ansprechpartner"
+        }
+      },
+      "required": [
+        "gewerbekennzeichnung",
+        "marktrolle",
+        "rollencodenummer",
+        "rollencodetyp",
+        "makoadresse"
+      ]
+    },
+    "PositionsAufAbschlag": {
+      "type": [
+        "object",
+        "null"
+      ],
+      "properties": {
+        "bezeichnung": {
+          "type": "string"
+        },
+        "beschreibung": {
+          "type": "string"
+        },
+        "aufAbschlagstyp": {
+          "type": "string",
+          "enum": [
+            "RELATIV",
+            "ABSOLUT"
+          ]
+        },
+        "aufAbschlagswert": {
+          "type": "number"
+        },
+        "aufAbschlagswaehrung": {
+          "type": "string",
+          "enum": [
+            "EUR",
+            "CT"
+          ]
+        },
+        "guid": {
+          "type": [
+            "string",
+            "null"
+          ]
+        }
+      },
+      "required": [
+        "bezeichnung",
+        "beschreibung",
+        "aufAbschlagstyp",
+        "aufAbschlagswert",
+        "aufAbschlagswaehrung"
+      ]
+    },
+    "Preisposition": {
+      "type": [
+        "object",
+        "null"
+      ],
+      "properties": {
+        "berechnungsmethode": {
+          "type": "string",
+          "enum": [
+            "KEINE",
+            "STAFFELN",
+            "ZONEN",
+            "VORZONEN_GP",
+            "SIGMOID",
+            "BLINDARBEIT_GT_50_PROZENT",
+            "BLINDARBEIT_GT_40_PROZENT",
+            "AP_GP_ZONEN",
+            "LP_INSTALL_LEISTUNG",
+            "AP_TRANSPORT_ODER_VERTEILNETZ",
+            "AP_TRANSPORT_ODER_VERTEILNETZ_ORTSVERTEILNETZ_SIGMOID",
+            "LP_JAHRESVERBRAUCH",
+            "LP_TRANSPORT_ODER_VERTEILNETZ",
+            "LP_TRANSPORT_ODER_VERTEILNETZ_ORTSVERTEILNETZ_SIGMOID",
+            "FUNKTIONEN",
+            "VERBRAUCH_UEBER_SLP_GRENZE_FUNKTIONSBEZOGEN_WEITERE_BERECHNUNG_ALS_LGK"
+          ]
+        },
+        "leistungstyp": {
+          "type": "string",
+          "enum": [
+            "ARBEITSPREIS_WIRKARBEIT",
+            "LEISTUNGSPREIS_WIRKLEISTUNG",
+            "ARBEITSPREIS_BLINDARBEIT_IND",
+            "ARBEITSPREIS_BLINDARBEIT_KAP",
+            "GRUNDPREIS",
+            "MEHRMINDERMENGE",
+            "MESSSTELLENBETRIEB",
+            "MESSDIENSTLEISTUNG",
+            "MESSDIENSTLEISTUNG_INKL_MESSUNG",
+            "ABRECHNUNG",
+            "KONZESSIONS_ABGABE",
+            "KWK_UMLAGE",
+            "OFFSHORE_UMLAGE",
+            "ABLAV_UMLAGE",
+            "REGELENERGIE_UMLAGE",
+            "BILANZIERUNG_UMLAGE",
+            "AUSLESUNG_ZUSAETZLICH",
+            "ABLESUNG_ZUSAETZLICH",
+            "ABRECHNUNG_ZUSAETZLICH",
+            "SPERRUNG",
+            "ENTSPERRUNG",
+            "MAHNKOSTEN",
+            "INKASSOKOSTEN"
+          ]
+        },
+        "leistungsbezeichung": {
+          "type": "string"
+        },
+        "preiseinheit": {
+          "type": "string",
+          "enum": [
+            "EUR",
+            "CT"
+          ]
+        },
+        "bezugsgroesse": {
+          "type": "string",
+          "enum": [
+            "WH",
+            "KW",
+            "ANZAHL",
+            "KUBIKMETER",
+            "STUNDE",
+            "TAG",
+            "MONAT",
+            "VAR",
+            "VARH",
+            "JAHR",
+            "KWH",
+            "MW",
+            "KVAR",
+            "KVARH",
+            "MWH"
+          ]
+        },
+        "zeitbasis": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "enum": [
+            null,
+            "SEKUNDE",
+            "MINUTE",
+            "STUNDE",
+            "VIERTEL_STUNDE",
+            "TAG",
+            "WOCHE",
+            "MONAT",
+            "QUARTAL",
+            "HALBJAHR",
+            "JAHR"
+          ]
+        },
+        "tarifzeit": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "enum": [
+            null,
+            "TZ_STANDARD",
+            "TZ_HT",
+            "TZ_NT"
+          ]
+        },
+        "bdewArtikelnummer": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "enum": [
+            null,
+            "LEISTUNG",
+            "LEISTUNG_PAUSCHAL",
+            "GRUNDPREIS",
+            "REGELENERGIE_ARBEIT",
+            "REGELENERGIE_LEISTUNG",
+            "NOTSTROMLIEFERUNG_ARBEIT",
+            "NOTSTROMLIEFERUNG_LEISTUNG",
+            "RESERVENETZKAPAZITAET",
+            "RESERVELEISTUNG",
+            "ZUSAETZLICHE_ABLESUNG",
+            "PRUEFGEBUEHREN_AUSSERPLANMAESSIG",
+            "WIRKARBEIT",
+            "SINGULAER_GENUTZTE_BETRIEBSMITTEL",
+            "ABGABE_KWKG",
+            "ABSCHLAG",
+            "KONZESSIONSABGABE",
+            "ENTGELT_FERNAUSLESUNG",
+            "UNTERMESSUNG",
+            "BLINDMEHRARBEIT",
+            "ENTGELT_ABRECHNUNG",
+            "SPERRKOSTEN",
+            "ENTSPERRKOSTEN",
+            "MAHNKOSTEN",
+            "MEHR_MINDERMENGEN",
+            "INKASSOKOSTEN",
+            "BLINDMEHRLEISTUNG",
+            "ENTGELT_MESSUNG_ABLESUNG",
+            "ENTGELT_EINBAU_BETRIEB_WARTUNG_MESSTECHNIK",
+            "AUSGLEICHSENERGIE",
+            "ZAEHLEINRICHTUNG",
+            "WANDLER_MENGENUMWERTER",
+            "KOMMUNIKATIONSEINRICHTUNG",
+            "TECHNISCHE_STEUEREINRICHTUNG",
+            "PARAGRAF_19_STROM_NEV_UMLAGE",
+            "BEFESTIGUNGSEINRICHTUNG",
+            "OFFSHORE_HAFTUNGSUMLAGE",
+            "FIXE_ARBEITSENTGELTKOMPONENTE",
+            "FIXE_LEISTUNGSENTGELTKOMPONENTE",
+            "UMLAGE_ABSCHALTBARE_LASTEN",
+            "MEHRMENGE",
+            "MINDERMENGE",
+            "ENERGIESTEUER",
+            "SMARTMETER_GATEWAY",
+            "STEUERBOX",
+            "MSB_INKL_MESSUNG"
+          ]
+        },
+        "zonungsgroesse": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "enum": [
+            null,
+            "WIRKARBEIT_EL",
+            "LEISTUNG_EL",
+            "BLINDARBEIT_KAP",
+            "BLINDARBEIT_IND",
+            "BLINDLEISTUNG_KAP",
+            "BLINDLEISTUNG_IND",
+            "WIRKARBEIT_TH",
+            "LEISTUNG_TH",
+            "VOLUMEN",
+            "VOLUMENSTROM",
+            "BENUTZUNGSDAUER",
+            "ANZAHL"
+          ]
+        },
+        "zu_abschlaege": {
+          "$ref": "#/definitions/PositionsAufAbschlag"
+        },
+        "preisstaffeln": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Preisstaffel"
+          }
+        },
+        "guid": {
+          "type": [
+            "string",
+            "null"
+          ]
+        }
+      },
+      "required": [
+        "berechnungsmethode",
+        "leistungstyp",
+        "leistungsbezeichung",
+        "preiseinheit",
+        "bezugsgroesse",
+        "preisstaffeln"
+      ]
+    },
+    "Preisstaffel": {
+      "type": [
+        "object",
+        "null"
+      ],
+      "properties": {
+        "einheitspreis": {
+          "type": "number"
+        },
+        "staffelgrenzeVon": {
+          "type": "number"
+        },
+        "staffelgrenzeBis": {
+          "type": "number"
+        },
+        "sigmoidparameter": {
+          "$ref": "#/definitions/Sigmoidparameter"
+        },
+        "guid": {
+          "type": [
+            "string",
+            "null"
+          ]
+        }
+      },
+      "required": [
+        "einheitspreis",
+        "staffelgrenzeVon",
+        "staffelgrenzeBis"
+      ]
+    },
+    "Rufnummer": {
+      "type": [
+        "object",
+        "null"
+      ],
+      "properties": {
+        "nummerntyp": {
+          "type": "string",
+          "enum": [
+            "RUF_ZENTRALE",
+            "FAX_ZENTRALE",
+            "SAMMELRUF",
+            "SAMMELFAX",
+            "ABTEILUNGRUF",
+            "ABTEILUNGFAX",
+            "RUF_DURCHWAHL",
+            "FAX_DURCHWAHL",
+            "MOBIL_NUMMER"
+          ]
+        },
+        "rufnummer": {
+          "type": "string"
+        },
+        "guid": {
+          "type": [
+            "string",
+            "null"
+          ]
+        }
+      },
+      "required": [
+        "nummerntyp",
+        "rufnummer"
+      ]
+    },
+    "Sigmoidparameter": {
+      "type": [
+        "object",
+        "null"
+      ],
+      "properties": {
+        "A": {
+          "type": "number"
+        },
+        "B": {
+          "type": "number"
+        },
+        "C": {
+          "type": "number"
+        },
+        "D": {
+          "type": "number"
+        },
+        "guid": {
+          "type": [
+            "string",
+            "null"
+          ]
+        }
+      },
+      "required": [
+        "A",
+        "B",
+        "C",
+        "D"
+      ]
+    },
+    "Zeitraum": {
+      "type": "object",
+      "properties": {
+        "einheit": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "enum": [
+            null,
+            "SEKUNDE",
+            "MINUTE",
+            "STUNDE",
+            "VIERTEL_STUNDE",
+            "TAG",
+            "WOCHE",
+            "MONAT",
+            "QUARTAL",
+            "HALBJAHR",
+            "JAHR"
+          ]
+        },
+        "dauer": {
+          "type": [
+            "number",
+            "null"
+          ]
+        },
+        "startdatum": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "format": "date-time"
+        },
+        "enddatum": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "format": "date-time"
+        },
+        "guid": {
+          "type": [
+            "string",
+            "null"
+          ]
+        }
+      }
+    },
+    "Zustaendigkeit": {
+      "type": [
+        "object",
+        "null"
+      ],
+      "properties": {
+        "jobtitel": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "abteilung": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "themengebiet": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "guid": {
+          "type": [
+            "string",
+            "null"
+          ]
+        }
+      }
+    }
+  },
+  "type": "object",
+  "properties": {
+    "guid": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "boTyp": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "versionStruktur": {
+      "type": "integer"
+    },
+    "bezeichnung": {
+      "type": "string"
+    },
+    "gueltigkeit": {
+      "$ref": "#/definitions/Zeitraum"
+    },
+    "preispositionen": {
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/Preisposition"
+      }
+    },
+    "sparte": {
+      "type": "string",
+      "enum": [
+        "STROM",
+        "GAS",
+        "FERNWAERME",
+        "NAHWAERME",
+        "WASSER",
+        "ABWASSER"
+      ]
+    },
+    "bilanzierungsmethode": {
+      "type": "string",
+      "enum": [
+        "RLM",
+        "SLP",
+        "TLP_GEMEINSAM",
+        "TLP_GETRENNT",
+        "PAUSCHAL",
+        "IMS"
+      ]
+    },
+    "messebene": {
+      "type": "string",
+      "enum": [
+        "NSP",
+        "MSP",
+        "HSP",
+        "HSS",
+        "MSP_NSP_UMSP",
+        "HSP_MSP_UMSP",
+        "HSS_HSP_UMSP",
+        "HD",
+        "MD",
+        "ND"
+      ]
+    },
+    "inklusiveDienstleistung": {
+      "type": [
+        "array",
+        "null"
+      ],
+      "items": {
+        "type": "string",
+        "enum": [
+          "DATENBEREITSTELLUNG_TAEGLICH",
+          "DATENBEREITSTELLUNG_WOECHENTLICH",
+          "DATENBEREITSTELLUNG_MONATLICH",
+          "DATENBEREITSTELLUNG_JAEHRLICH",
+          "DATENBEREITSTELLUNG_HISTORISCHE_LG",
+          "DATENBEREITSTELLUNG_STUENDLICH",
+          "DATENBEREITSTELLUNG_VIERTELJAEHRLICH",
+          "DATENBEREITSTELLUNG_HALBJAEHRLICH",
+          "DATENBEREITSTELLUNG_MONATLICH_ZUSAETZLICH",
+          "DATENBEREITSTELLUNG_EINMALIG",
+          "AUSLESUNG_2X_TAEGLICH_FERNAUSLESUNG",
+          "AUSLESUNG_TAEGLICH_FERNAUSLESUNG",
+          "AUSLESUNG_LGK_MANUELL_MSB",
+          "AUSLESUNG_MONATLICH_SLP_FERNAUSLESUNG",
+          "AUSLESUNG_JAEHRLICH_SLP_FERNAUSLESUNG",
+          "AUSLESUNG_MDE_SLP",
+          "ABLESUNG_MONATLICH_SLP",
+          "ABLESUNG_VIERTELJAEHRLICH_SLP",
+          "ABLESUNG_HALBJAEHRLICH_SLP",
+          "ABLESUNG_JAEHRLICH_SLP",
+          "AUSLESUNG_SLP_FERNAUSLESUNG",
+          "ABLESUNG_SLP_ZUSAETZLICH_MSB",
+          "ABLESUNG_SLP_ZUSAETZLICH_KUNDE",
+          "AUSLESUNG_LGK_FERNAUSLESUNG_ZUSAETZLICH_MSB",
+          "AUSLESUNG_MOATLICH_FERNAUSLESUNG",
+          "AUSLESUNG_STUENDLICH_FERNAUSLESUNG",
+          "ABLESUNG_MONATLICH_LGK",
+          "AUSLESUNG_TEMERATURMENGENUMWERTER",
+          "AUSLESUNG_ZUSTANDSMENGENUMWERTER",
+          "AUSLESUNG_SYSTEMMENGENUMWERTER",
+          "AUSLESUNG_VORGANG_SLP",
+          "AUSLESUUNG_KOMPAKTMENGENUMWERTER",
+          "AUSLESUNG_MDE_LGK",
+          "SPERRUNG_SLP",
+          "ENTSPERRUNG_SLP",
+          "SPERRUNG_RLM",
+          "ENTSPERRUNG_RLM",
+          "MAHNKOSTEN",
+          "INKASSOKOSTEN"
+        ]
+      }
+    },
+    "basisgeraet": {
+      "$ref": "#/definitions/Geraeteeigenschaften"
+    },
+    "inklusiveGeraete": {
+      "type": [
+        "array",
+        "null"
+      ],
+      "items": {
+        "$ref": "#/definitions/Geraeteeigenschaften-1"
+      }
+    },
+    "herausgeber": {
+      "$ref": "#/definitions/Marktteilnehmer"
+    }
+  },
+  "required": [
+    "bezeichnung",
+    "gueltigkeit",
+    "preispositionen",
+    "sparte",
+    "bilanzierungsmethode",
+    "messebene",
+    "basisgeraet",
+    "herausgeber"
+  ]
+}

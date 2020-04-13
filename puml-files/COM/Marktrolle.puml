@@ -1,0 +1,7 @@
+@startuml
+class Marktrolle {
+    + Rollencodenummer : string <<get>> <<set>>
+    + Code : string <<get>> <<set>>
+}
+COM <|-- Marktrolle
+@enduml

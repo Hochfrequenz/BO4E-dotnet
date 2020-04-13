@@ -4,7 +4,7 @@
   "input": {
     "versionStruktur": 1,
     "boTyp": "MESSLOKATION",
-    "messLokationsId": "DE0000000000000000000000010000397",
+    "messlokationsId": "DE0000000000000000000000010000397",
     "sparte": "STROM",
     "netzebeneMessung": "MSP",
     "messgebietNr": null,

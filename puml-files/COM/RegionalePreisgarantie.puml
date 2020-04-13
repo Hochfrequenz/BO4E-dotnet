@@ -1,0 +1,6 @@
+@startuml
+class RegionalePreisgarantie {
+}
+Preisgarantie <|-- RegionalePreisgarantie
+RegionalePreisgarantie --> "RegionaleGueltigkeit" RegionaleGueltigkeit
+@enduml

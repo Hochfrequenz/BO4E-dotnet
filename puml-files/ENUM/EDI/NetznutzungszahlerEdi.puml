@@ -1,0 +1,6 @@
+@startuml
+enum NetznutzungszahlerEdi {
+    Z10,
+    Z11,
+}
+@enduml

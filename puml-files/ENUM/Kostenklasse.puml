@@ -1,0 +1,4 @@
+@startuml
+enum Kostenklasse {
+}
+@enduml

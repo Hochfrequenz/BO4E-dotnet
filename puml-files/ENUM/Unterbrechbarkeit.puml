@@ -1,0 +1,6 @@
+@startuml
+enum Unterbrechbarkeit {
+    UV,
+    NUV,
+}
+@enduml

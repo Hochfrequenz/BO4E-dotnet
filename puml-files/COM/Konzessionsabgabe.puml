@@ -1,0 +1,8 @@
+@startuml
+class Konzessionsabgabe {
+    + Kosten : decimal <<get>> <<set>>
+    + Kategorie : string <<get>> <<set>>
+}
+COM <|-- Konzessionsabgabe
+Konzessionsabgabe --> "Satz" AbgabeArt
+@enduml

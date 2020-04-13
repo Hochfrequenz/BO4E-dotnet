@@ -1,0 +1,11 @@
+@startuml
+enum LenientParsing {
+    Strict= 0,
+    DateTime= 1,
+    EnumList= 2,
+    Bo4eUri= 4,
+    SetInitialDateIfNull= 8,
+    StringToInt= 16,
+    MOST_LENIENT= ~0,
+}
+@enduml

@@ -1,0 +1,9 @@
+@startuml
+enum Rechnungslegung {
+    MONATSRECHN,
+    ABSCHL_MONATSRECHN,
+    ABSCHL_JAHRESRECHN,
+    MONATSRECHN_JAHRESRECHN,
+    VORKASSE,
+}
+@enduml

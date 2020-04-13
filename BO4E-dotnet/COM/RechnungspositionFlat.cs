@@ -1,7 +1,10 @@
 using System;
+
 using BO4E.ENUM;
 using BO4E.meta;
+
 using Newtonsoft.Json;
+
 using ProtoBuf;
 
 namespace BO4E.COM
@@ -15,96 +18,96 @@ namespace BO4E.COM
     [NonOfficial(NonOfficialCategory.CUSTOMER_REQUIREMENTS)]
     public class RechnungspositionFlat : COM
     {
-        /// <inheritdoc cref="Rechnungsposition.positionsnummer"/>
-        [JsonProperty(Required = Required.Always)]
+        /// <inheritdoc cref="Rechnungsposition.Positionsnummer"/>
+        [JsonProperty(PropertyName = "positionsnummer", Required = Required.Always)]
         [ProtoMember(3)]
-        public int positionsnummer;
+        public int Positionsnummer { get; set; }
 
-        /// <inheritdoc cref="Rechnungsposition.lieferungVon"/>
-        [JsonProperty(Required = Required.Always)]
+        /// <inheritdoc cref="Rechnungsposition.LieferungVon"/>
+        [JsonProperty(PropertyName = "lieferungVon", Required = Required.Always)]
         [ProtoMember(4)]
-        public DateTime lieferungVon;
+        public DateTime LieferungVon { get; set; }
 
-        /// <inheritdoc cref="Rechnungsposition.lieferungBis"/>
-        [JsonProperty(Required = Required.Always)]
+        /// <inheritdoc cref="Rechnungsposition.LieferungBis"/>
+        [JsonProperty(PropertyName = "lieferungBis", Required = Required.Always)]
         [ProtoMember(5)]
-        public DateTime lieferungBis;
+        public DateTime LieferungBis { get; set; }
 
         /// <summary>
         /// Der Positionstext entspricht dem SAP CI Teilprozess bzw. der GCN Categoy
-        /// <seealso cref="Rechnungsposition.positionstext"/>
+        /// <seealso cref="Rechnungsposition.Positionstext"/>
         /// </summary>
-        [JsonProperty(Required = Required.Always)]
+        [JsonProperty(PropertyName = "positionstext", Required = Required.Always)]
         [ProtoMember(6)]
-        public string positionstext;
+        public string Positionstext { get; set; }
 
-        /// <inheritdoc cref="Rechnungsposition.lokationsId"/>>
-        [JsonProperty(Required = Required.Always)]
+        /// <inheritdoc cref="Rechnungsposition.LokationsId"/>>
+        [JsonProperty(PropertyName = "lokationsId", Required = Required.Always)]
         [ProtoMember(7)]
-        public string lokationsId;
+        public string LokationsId { get; set; }
 
-        /// <inheritdoc cref="Rechnungsposition.vertragskontoId"/>>
-        [JsonProperty(Required = Required.Always)]
+        /// <inheritdoc cref="Rechnungsposition.VertragskontoId"/>>
+        [JsonProperty(PropertyName = "vertragskontoId", Required = Required.Always)]
         [ProtoMember(8)]
-        public string vertragskontoId;
+        public string VertragskontoId { get; set; }
 
         /// <summary>
-        /// <see cref="Rechnungsposition.einzelpreis"/> and <see cref="Preis.wert"/>
+        /// <see cref="Rechnungsposition.Einzelpreis"/> and <see cref="Preis.Wert"/>
         /// </summary>
-        [JsonProperty(Required = Required.Always)]
+        [JsonProperty(PropertyName = "preisWert", Required = Required.Always)]
         [ProtoMember(9)]
-        public decimal preisWert;
+        public decimal PreisWert { get; set; }
 
         /// <summary>
-        /// <see cref="Rechnungsposition.einzelpreis"/> and <see cref="Preis.einheit"/>
+        /// <see cref="Rechnungsposition.Einzelpreis"/> and <see cref="Preis.Einheit"/>
         /// </summary>
-        [JsonProperty(Required = Required.Always)]
+        [JsonProperty(PropertyName = "preisEinheit", Required = Required.Always)]
         [ProtoMember(10)]
-        public Waehrungseinheit preisEinheit;
+        public Waehrungseinheit PreisEinheit { get; set; }
 
         /// <summary>
-        /// <see cref="Rechnungsposition.einzelpreis"/> and <see cref="Preis.bezugswert"/>
+        /// <see cref="Rechnungsposition.Einzelpreis"/> and <see cref="Preis.Bezugswert"/>
         /// </summary>
-        [JsonProperty(Required = Required.Always)]
+        [JsonProperty(PropertyName = "preisBezugswert", Required = Required.Always)]
         [ProtoMember(11)]
-        public Mengeneinheit preisBezugswert;
+        public Mengeneinheit PreisBezugswert { get; set; }
 
         /// <summary>
-        /// <see cref="Rechnungsposition.einzelpreis"/> and <see cref="Preis.status"/>
+        /// <see cref="Rechnungsposition.Einzelpreis"/> and <see cref="Preis.Status"/>
         /// </summary>
-        [JsonProperty(Required = Required.Default)]
+        [JsonProperty(PropertyName = "preisStatus", Required = Required.Default)]
         [ProtoMember(12)]
-        public Preisstatus? preisStatus;
+        public Preisstatus? PreisStatus { get; set; }
 
         /// <summary>
         /// GCN mediated value value
-        /// <see cref="Rechnungsposition.positionsMenge"/> and <see cref="Menge.wert"/>
+        /// <see cref="Rechnungsposition.PositionsMenge"/> and <see cref="Menge.Wert"/>
         /// </summary>
-        [JsonProperty(Required = Required.Always)]
+        [JsonProperty(PropertyName = "positionsMengeWert", Required = Required.Always)]
         [ProtoMember(13)]
-        public decimal? positionsMengeWert;
+        public decimal? PositionsMengeWert { get; set; }
 
 
         /// <summary>
         /// GCN mediated value unit
-        /// <see cref="Rechnungsposition.positionsMenge"/> and <see cref="Menge.einheit"/>
+        /// <see cref="Rechnungsposition.PositionsMenge"/> and <see cref="Menge.Einheit"/>
         /// </summary>
-        [JsonProperty(Required = Required.Always)]
+        [JsonProperty(PropertyName = "positionsMengeEinheit", Required = Required.Always)]
         [ProtoMember(14)]
-        public Mengeneinheit? positionsMengeEinheit;
+        public Mengeneinheit? PositionsMengeEinheit { get; set; }
 
-        /// <inheritdoc cref="Rechnungsposition.vertragsId"/>
-        [JsonProperty(Required = Required.Default)]
+        /// <inheritdoc cref="Rechnungsposition.VertragsId"/>
+        [JsonProperty(PropertyName = "vertragsId", Required = Required.Default)]
         [ProtoMember(15)]
-        public string vertragsId;
+        public string VertragsId { get; set; }
 
         /// <summary>
         /// status einer Rechnungsposition in SAP Convergent Invoicing
         /// (Ergänzung von Hochfrequenz Unternehmensberatung GmbH)
         /// </summary>
-        [JsonProperty(Required = Required.Default)]
+        [JsonProperty(PropertyName = "status", Required = Required.Default)]
         [ProtoMember(16)]
-        public RechnungspositionsStatus? status;
+        public RechnungspositionsStatus? Status { get; set; }
 
         /// <summary>
         /// Kind of a copy constructor that moves data from a <see cref="Rechnungsposition"/>
@@ -114,32 +117,32 @@ namespace BO4E.COM
         public RechnungspositionFlat(Rechnungsposition rp)
         {
             // todo: make this reflection based. this is pita.
-            this.positionsnummer = rp.positionsnummer;
-            this.lieferungVon = rp.lieferungVon;
-            this.lieferungBis = rp.lieferungBis;
-            this.positionstext = rp.positionstext;
-            this.lokationsId = rp.lokationsId;
-            this.vertragsId = rp.vertragsId;
-            this.vertragskontoId = rp.vertragskontoId;
-            if (rp.einzelpreis != null)
+            this.Positionsnummer = rp.Positionsnummer;
+            this.LieferungVon = rp.LieferungVon;
+            this.LieferungBis = rp.LieferungBis;
+            this.Positionstext = rp.Positionstext;
+            this.LokationsId = rp.LokationsId;
+            this.VertragsId = rp.VertragsId;
+            this.VertragskontoId = rp.VertragskontoId;
+            if (rp.Einzelpreis != null)
             {
-                this.preisWert = rp.einzelpreis.wert;
-                this.preisEinheit = rp.einzelpreis.einheit;
-                this.preisBezugswert = rp.einzelpreis.bezugswert;
-                this.preisStatus = rp.einzelpreis.status;
+                this.PreisWert = rp.Einzelpreis.Wert;
+                this.PreisEinheit = rp.Einzelpreis.Einheit;
+                this.PreisBezugswert = rp.Einzelpreis.Bezugswert;
+                this.PreisStatus = rp.Einzelpreis.Status;
             }
-            if (rp.positionsMenge != null)
+            if (rp.PositionsMenge != null)
             {
-                this.positionsMengeEinheit = rp.positionsMenge.einheit;
-                this.positionsMengeWert = rp.positionsMenge.wert;
+                this.PositionsMengeEinheit = rp.PositionsMenge.Einheit;
+                this.PositionsMengeWert = rp.PositionsMenge.Wert;
             }
             else
             {
-                this.positionsMengeEinheit = null;
-                this.positionsMengeWert = null;
+                this.PositionsMengeEinheit = null;
+                this.PositionsMengeWert = null;
             }
-            this.guid = rp.guid;
-            this.status = rp.status;
+            this.Guid = rp.Guid;
+            this.Status = rp.Status;
         }
 
         /// <summary>
@@ -151,27 +154,27 @@ namespace BO4E.COM
             // todo: make this reflection based. this is pure pita. in fact the whole process of the flat structure is pita for sap
             Rechnungsposition result = new Rechnungsposition()
             {
-                positionsnummer = positionsnummer,
-                lieferungVon = lieferungVon,
-                lieferungBis = lieferungBis,
-                positionstext = positionstext,
-                lokationsId = lokationsId,
-                vertragsId = vertragsId,
-                vertragskontoId = vertragskontoId,
-                einzelpreis = new Preis()
+                Positionsnummer = Positionsnummer,
+                LieferungVon = LieferungVon,
+                LieferungBis = LieferungBis,
+                Positionstext = Positionstext,
+                LokationsId = LokationsId,
+                VertragsId = VertragsId,
+                VertragskontoId = VertragskontoId,
+                Einzelpreis = new Preis()
                 {
-                    wert = preisWert,
-                    einheit = preisEinheit,
-                    bezugswert = preisBezugswert,
-                    status = preisStatus ?? Preisstatus.VORLAEUFIG // poor default choice
+                    Wert = PreisWert,
+                    Einheit = PreisEinheit,
+                    Bezugswert = PreisBezugswert,
+                    Status = PreisStatus ?? Preisstatus.VORLAEUFIG // poor default choice
                 },
-                positionsMenge = new Menge()
+                PositionsMenge = new Menge()
                 {
-                    einheit = positionsMengeEinheit ?? Mengeneinheit.KWH, // poor default choice
-                    wert = positionsMengeWert ?? 0.0M, // poor default choice
+                    Einheit = PositionsMengeEinheit ?? Mengeneinheit.KWH, // poor default choice
+                    Wert = PositionsMengeWert ?? 0.0M, // poor default choice
                 },
-                guid = guid,
-                status = status
+                Guid = Guid,
+                Status = Status
             };
             return result;
         }

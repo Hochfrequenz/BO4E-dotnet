@@ -1,0 +1,18 @@
+@startuml
+class Benachrichtigung {
+    + BenachrichtigungsId : string <<get>> <<set>>
+    + Kurztext : string <<get>> <<set>>
+    + Kategorie : string <<get>> <<set>>
+    + Bearbeiter : string <<get>> <<set>>
+    + Deadline : DateTime? <<get>> <<set>>
+}
+class "List`1"<T> {
+}
+BusinessObject <|-- Benachrichtigung
+Benachrichtigung --> "Prioritaet" Prioritaet
+Benachrichtigung --> "Bearbeitungsstatus" Bearbeitungsstatus
+Benachrichtigung --> "ErstellungsZeitpunkt" DateTime
+Benachrichtigung --> "Notizen<Notiz>" "List`1"
+Benachrichtigung --> "Aufgaben<Aufgabe>" "List`1"
+Benachrichtigung --> "Infos<GenericStringStringInfo>" "List`1"
+@enduml

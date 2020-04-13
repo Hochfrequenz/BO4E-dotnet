@@ -1,9 +1,12 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+
 using BO4E.COM;
 using BO4E.ENUM;
 using BO4E.meta;
+
 using Newtonsoft.Json;
+
 using ProtoBuf;
 
 namespace BO4E.BO
@@ -15,45 +18,44 @@ namespace BO4E.BO
     public class Kosten : BusinessObject
     {
         /// <summary>
-        /// Klasse der Kosten, beispielsweise Fremdkosten. Details siehe <see cref="Kostenklasse"/>
+        /// Klasse der Kosten, beispielsweise Fremdkosten. Details siehe <see cref="ENUM.Kostenklasse"/>
         /// </summary>
-        [JsonProperty(Required = Required.Always, Order = 4)]
+        [JsonProperty(Required = Required.Always, Order = 4, PropertyName = "kostenklasse")]
         [ProtoMember(4)]
         [DataCategory(DataCategory.FINANCE)]
-        public Kostenklasse kostenklasse;
+        public Kostenklasse Kostenklasse { get; set; }
 
         /// <summary>
         /// Für diesen Zeitraum wurden die Kosten ermittelt. Details siehe <see cref="Zeitraum"/>
         /// </summary>
-        [JsonProperty(Required = Required.Always, Order = 5)]
+        [JsonProperty(Required = Required.Always, Order = 5, PropertyName = "gueltigkeit")]
         [ProtoMember(5)]
         [DataCategory(DataCategory.FINANCE)]
-        public Zeitraum gueltigkeit;
+        public Zeitraum Gueltigkeit { get; set; }
 
         /// <summary>
         /// Die Gesamtsumme über alle Kostenblöcke und -positionen. Details siehe <see cref="Betrag"/>
         /// </summary>
-        [JsonProperty(Required = Required.Default, Order = 6)]
+        [JsonProperty(Required = Required.Default, Order = 6, PropertyName = "summeKosten")]
         [ProtoMember(6)]
         [DataCategory(DataCategory.FINANCE)]
-        // ToDo: handle this as DateTime object that serializes without the "time" in "DateTime"
-        public List<Betrag> summeKosten;
+        public List<Betrag> SummeKosten { get; set; }
 
         /// <summary>
         /// Eine Liste mit Kostenblöcken. In Kostenblöcken werden Kostenpositionen zusammengefasst. Beispiele: Netzkosten, Umlagen, Steuern etc. Details siehe <see cref="Kostenblock"/>
         /// </summary>
-        [JsonProperty(Required = Required.Always, Order = 7)] // at least 1 entry
+        [JsonProperty(Required = Required.Always, Order = 7, PropertyName = "kostenbloecke")] // at least 1 entry
         [ProtoMember(7)]
         [MinLength(1)]
-        public List<Kostenblock> kostenbloecke;
+        public List<Kostenblock> Kostenbloecke { get; set; }
 
         /// <summary>
         /// Hier sind die Details zu einer Kostenposition aufgeführt. Z.B.:
         /// Alliander Netz Heinsberg GmbH, 01.02.2018, 31.12.2018, Arbeitspreis HT, 3.660 kWh, 5,8200 ct/kWh, 213,01 €. Details siehe COM Kostenposition
         /// </summary>
-        [JsonProperty(Required = Required.Default, Order = 8)]
+        [JsonProperty(Required = Required.Default, Order = 8, PropertyName = "kostenpositionen")]
         [ProtoMember(8)]
         [DataCategory(DataCategory.FINANCE)]
-        public List<Kostenposition> kostenpositionen;
+        public List<Kostenposition> Kostenpositionen { get; set; }
     }
 }

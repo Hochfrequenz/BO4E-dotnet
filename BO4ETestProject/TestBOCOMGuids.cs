@@ -15,9 +15,9 @@ namespace TestBO4E
         {
             Energiemenge em = new Energiemenge()
             {
-                lokationsId = "DE123456",
-                lokationstyp = BO4E.ENUM.Lokationstyp.MaLo,
-                energieverbrauch = new List<Verbrauch>(),
+                LokationsId = "DE123456",
+                LokationsTyp = BO4E.ENUM.Lokationstyp.MaLo,
+                Energieverbrauch = new List<Verbrauch>(),
                 guid = Guid.NewGuid().ToString()
             };
 

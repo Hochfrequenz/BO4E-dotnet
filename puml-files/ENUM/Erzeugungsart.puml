@@ -1,0 +1,15 @@
+@startuml
+enum Erzeugungsart {
+    KWK,
+    WIND,
+    SOLAR,
+    KERNKRAFT,
+    WASSER,
+    GEOTHERMIE,
+    BIOMASSE,
+    KOHLE,
+    GAS,
+    SONSTIGE,
+    SONSTIGE_EEG,
+}
+@enduml

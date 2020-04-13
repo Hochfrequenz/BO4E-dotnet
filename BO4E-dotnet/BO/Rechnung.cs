@@ -1,11 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Globalization;
+
 using BO4E.COM;
 using BO4E.ENUM;
 using BO4E.meta;
+
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
+
 using ProtoBuf;
 
 namespace BO4E.BO
@@ -20,154 +23,154 @@ namespace BO4E.BO
         /// <summary>
         /// Bezeichnung für die vorliegende Rechnung.
         /// </summary>
-        [JsonProperty(Required = Required.Default, Order = 4)]
+        [JsonProperty(Required = Required.Default, Order = 4, PropertyName = "rechnungstitel")]
         [FieldName("billTitle", Language.EN)]
         [ProtoMember(4)]
-        public string rechnungstitel;
+        public string Rechnungstitel { get; set; }
 
         /// <summary>
         /// Status der Rechnung zur Kennzeichnung des Bearbeitungsstandes. Details siehe ENUM Rechnungsstatus
         /// </summary>
-        [JsonProperty(Required = Required.Default, Order = 5)]
+        [JsonProperty(Required = Required.Default, Order = 5, PropertyName = "rechnungsstatus")]
         [FieldName("billStatus", Language.EN)]
         [ProtoMember(5)]
-        public Rechnungsstatus? rechnungsstatus;
+        public Rechnungsstatus? Rechnungsstatus { get; set; }
 
         /// <summary>
         /// Kennzeichnung, ob es sich um eine Stornorechnung handelt. Im Falle "true" findet sich im Attribut "originalrechnungsnummer" die Nummer der Originalrechnung.
         /// </summary>
-        [JsonProperty(Required = Required.Always, Order = 6)]
+        [JsonProperty(Required = Required.Always, Order = 6, PropertyName = "storno")]
         [FieldName("isCancellation", Language.EN)]
         [ProtoMember(6)]
-        public bool storno;
+        public bool Storno { get; set; }
 
         /// <summary>
         /// Eine im Verwendungskontext eindeutige Nummer für die Rechnung.
         /// </summary>
-        [JsonProperty(Required = Required.Always, Order = 7)]
+        [JsonProperty(Required = Required.Always, Order = 7, PropertyName = "rechnungsnummer")]
         [ProtoMember(7)]
         [BoKey]
         [FieldName("billNumber", Language.EN)]
-        public string rechnungsnummer;
+        public string Rechnungsnummer { get; set; }
 
         /// <summary>
         /// Ausstellungsdatum der Rechnung.
         /// </summary>
-        [JsonProperty(Required = Required.Always, Order = 8)]
+        [JsonProperty(Required = Required.Always, Order = 8, PropertyName = "rechnungsdatum")]
         [ProtoMember(8)]
         [FieldName("billDate", Language.EN)]
-        public DateTime rechnungsdatum;
+        public DateTime Rechnungsdatum { get; set; }
 
         /// <summary>
         /// Zu diesem Datum ist die Zahlung fällig.
         /// </summary>
-        [JsonProperty(Required = Required.Always, Order = 9)]
+        [JsonProperty(Required = Required.Always, Order = 9, PropertyName = "faelligkeitsdatum")]
         [ProtoMember(9)]
         [FieldName("dueDate", Language.EN)]
-        public DateTime faelligkeitsdatum;
+        public DateTime Faelligkeitsdatum { get; set; }
 
         /// <summary>
         /// Ein kontextbezogender Rechnungstyp, z.B. Netznutzungsrechnung. Details siehe ENUM Rechnungstyp
         /// </summary>
-        [JsonProperty(Required = Required.Always, Order = 10)]
+        [JsonProperty(Required = Required.Always, Order = 10, PropertyName = "rechnungstyp")]
         [ProtoMember(10)]
         [FieldName("billType", Language.EN)]
-        public Rechnungstyp rechnungsstyp;
+        public Rechnungstyp Rechnungsstyp { get; set; }
 
         /// <summary>
         /// Im Falle einer Stornorechnung (storno = true) steht hier die Rechnungsnummer der stornierten Rechnung.
         /// </summary>
-        [JsonProperty(Required = Required.Default, Order = 11)]
+        [JsonProperty(Required = Required.Default, Order = 11, PropertyName = "originalRechnungsnummer")]
         [ProtoMember(11)]
-        public string originalRechnungsnummer;
+        public string OriginalRechnungsnummer { get; set; }
 
         /// <summary>
         /// Der Zeitraum der zugrunde liegenden Lieferung zur Rechnung. In der COM Zeitraum können diese angegeben werden.
         /// </summary>
-        [JsonProperty(Required = Required.Always, Order = 12)]
+        [JsonProperty(Required = Required.Always, Order = 12, PropertyName = "rechnungsperiode")]
         [ProtoMember(12)]
         [FieldName("billPeriod", Language.EN)]
-        public Zeitraum rechnungsperiode;
+        public Zeitraum Rechnungsperiode { get; set; }
 
         /// <summary>
         /// Der Aussteller der Rechnung. Details <see cref="Geschaeftspartner"/>
         /// </summary>
-        [JsonProperty(Required = Required.Always, Order = 13)]
+        [JsonProperty(Required = Required.Always, Order = 13, PropertyName = "rechnungsersteller")]
         [ProtoMember(13)]
         [FieldName("issuer", Language.EN)]
-        public Geschaeftspartner rechnungsersteller;
+        public Geschaeftspartner Rechnungsersteller { get; set; }
 
         /// <summary>
         /// Der Empfänger der Rechnung. Details <see cref="Geschaeftspartner"/>
         /// </summary>
-        [JsonProperty(Required = Required.Always, Order = 14)]
+        [JsonProperty(Required = Required.Always, Order = 14, PropertyName = "rechnungsempfaenger")]
         [ProtoMember(14)]
         [FieldName("recipient", Language.EN)]
-        public Geschaeftspartner rechnungsempfaenger;
+        public Geschaeftspartner Rechnungsempfaenger { get; set; }
 
         /// <summary>
         /// Die Summe der Nettobeträge der Rechnungsteile. Details <see cref="Betrag"/>
         /// </summary>
-        [JsonProperty(Required = Required.Always, Order = 15)]
+        [JsonProperty(Required = Required.Always, Order = 15, PropertyName = "gesamtnetto")]
         [ProtoMember(15)]
         [FieldName("totalNet", Language.EN)]
-        public Betrag gesamtnetto;
+        public Betrag Gesamtnetto { get; set; }
 
         /// <summary>
         /// Die Summe der Steuerbeträge der Rechnungsteile. Details <see cref="Betrag"/>
         /// </summary>
-        [JsonProperty(Required = Required.Always, Order = 16)]
+        [JsonProperty(Required = Required.Always, Order = 16, PropertyName = "gesamtsteuer")]
         [ProtoMember(16)]
         [FieldName("totalTax", Language.EN)]
-        public Betrag gesamtsteuer;
+        public Betrag Gesamtsteuer { get; set; }
 
         /// <summary>
         /// Die Summe aus Netto- und Steuerbetrag. Details <see cref="Betrag"/>
         /// </summary>
-        [JsonProperty(Required = Required.Always, Order = 17)]
+        [JsonProperty(Required = Required.Always, Order = 17, PropertyName = "gesamtbrutto")]
         [ProtoMember(17)]
         [FieldName("totalGross", Language.EN)]
-        public Betrag gesamtbrutto;
+        public Betrag Gesamtbrutto { get; set; }
 
         /// <summary>
         /// Die Summe evtl. vorausgezahlter Beträge, z.B. Abschläge. Angabe als Bruttowert. Details <see cref="Betrag"/>
         /// </summary>
-        [JsonProperty(Required = Required.Default, Order = 18)]
+        [JsonProperty(Required = Required.Default, Order = 18, PropertyName = "vorausgezahlt")]
         [ProtoMember(18)]
         [FieldName("prepaid", Language.EN)]
-        public Betrag vorausgezahlt;
+        public Betrag Vorausgezahlt { get; set; }
 
         /// <summary>
         /// Gesamtrabatt auf den Bruttobetrag. Details <see cref="Betrag"/>
         /// </summary>
-        [JsonProperty(Required = Required.Default, Order = 19)]
+        [JsonProperty(Required = Required.Default, Order = 19, PropertyName = "rabattBrutto")]
         [ProtoMember(19)]
         [FieldName("discountGross", Language.EN)]
-        public Betrag rabattBrutto;
+        public Betrag rabattBrutto { get; set; }
 
         /// <summary>
-        /// Der zu zahlende Betrag, der sich aus (<see cref="gesamtbrutto"/> - <see cref="vorausgezahlt"/> - <see cref="rabattBrutto"/>) ergibt. Details <see cref="Betrag"/>
+        /// Der zu zahlende Betrag, der sich aus (<see cref="Gesamtbrutto"/> - <see cref="Vorausgezahlt"/> - <see cref="rabattBrutto"/>) ergibt. Details <see cref="Betrag"/>
         /// /// </summary>
-        [JsonProperty(Required = Required.Always, Order = 20)]
+        [JsonProperty(Required = Required.Always, Order = 20, PropertyName = "zuzahlen")]
         [ProtoMember(20)]
         [FieldName("toPay", Language.EN)]
-        public Betrag zuzahlen;
+        public Betrag Zuzahlen { get; set; }
 
         /// <summary>
         /// Eine Liste mit Steuerbeträgen pro Steuerkennzeichen/Steuersatz. Die Summe dieser Beträge ergibt den Wert für gesamtsteuer. Details <see cref="Steuerbetrag"/>
         /// </summary>
-        [JsonProperty(Required = Required.Default, Order = 21)]
+        [JsonProperty(Required = Required.Default, Order = 21, PropertyName = "steuerbetraege")]
         [ProtoMember(21)]
         [FieldName("taxList", Language.EN)]
-        public List<Steuerbetrag> steuerbetraege;
+        public List<Steuerbetrag> Steuerbetraege { get; set; }
 
         /// <summary>
         /// Die Rechnungspositionen. Details siehe <see cref="Rechnungsposition"/>
         /// </summary>
         [ProtoMember(22)]
-        [JsonProperty(Required = Required.Always, Order = 22)]
+        [JsonProperty(Required = Required.Always, Order = 22, PropertyName = "rechnungspositionen")]
         [FieldName("invoiceItemList", Language.EN)]
-        public List<Rechnungsposition> rechnungspositionen;
+        public List<Rechnungsposition> Rechnungspositionen { get; set; }
 
         public Rechnung() { }
 
@@ -189,15 +192,15 @@ namespace BO4E.BO
                 throw new ArgumentException("The SAP print document did not contain a 'tErdz' token. Did you serialize using the right naming convention?");
             }
 
-            rechnungsnummer = (infoToken["opbel"] ?? infoToken["OPBEL"]).Value<string>();
-            rechnungsdatum = TimeZoneInfo.ConvertTime((infoToken["bldat"] ?? infoToken["BLDAT"]).Value<DateTime>(), Verbrauch.CENTRAL_EUROPE_STANDARD_TIME, TimeZoneInfo.Utc);
-            rechnungsperiode = new Zeitraum()
+            Rechnungsnummer = (infoToken["opbel"] ?? infoToken["OPBEL"]).Value<string>();
+            Rechnungsdatum = TimeZoneInfo.ConvertTime((infoToken["bldat"] ?? infoToken["BLDAT"]).Value<DateTime>(), Verbrauch.CENTRAL_EUROPE_STANDARD_TIME, TimeZoneInfo.Utc);
+            Rechnungsperiode = new Zeitraum()
             {
-                startdatum = TimeZoneInfo.ConvertTime((tErdzToken[0]["ab"] ?? tErdzToken[0]["AB"]).Value<DateTime>(), Verbrauch.CENTRAL_EUROPE_STANDARD_TIME, TimeZoneInfo.Utc),
-                enddatum = TimeZoneInfo.ConvertTime((tErdzToken[0]["bis"] ?? tErdzToken[0]["BIS"]).Value<DateTime>(), Verbrauch.CENTRAL_EUROPE_STANDARD_TIME, TimeZoneInfo.Utc)
+                Startdatum = TimeZoneInfo.ConvertTime((tErdzToken[0]["ab"] ?? tErdzToken[0]["AB"]).Value<DateTime>(), Verbrauch.CENTRAL_EUROPE_STANDARD_TIME, TimeZoneInfo.Utc),
+                Enddatum = TimeZoneInfo.ConvertTime((tErdzToken[0]["bis"] ?? tErdzToken[0]["BIS"]).Value<DateTime>(), Verbrauch.CENTRAL_EUROPE_STANDARD_TIME, TimeZoneInfo.Utc)
             };
-            faelligkeitsdatum = TimeZoneInfo.ConvertTime((infoToken["faedn"] ?? infoToken["FAEDN"]).Value<DateTime>(), Verbrauch.CENTRAL_EUROPE_STANDARD_TIME, TimeZoneInfo.Utc);
-            storno = false;
+            Faelligkeitsdatum = TimeZoneInfo.ConvertTime((infoToken["faedn"] ?? infoToken["FAEDN"]).Value<DateTime>(), Verbrauch.CENTRAL_EUROPE_STANDARD_TIME, TimeZoneInfo.Utc);
+            Storno = false;
 
             decimal gNetto, gSteure, gBrutto, vGezahlt, rBrutto, zZahlen;
             gNetto = gSteure = gBrutto = vGezahlt = rBrutto = zZahlen = 0.00M;
@@ -207,7 +210,7 @@ namespace BO4E.BO
 
             List<Rechnungsposition> rpList = new List<Rechnungsposition>();
             List<Steuerbetrag> stList = new List<Steuerbetrag>();
-            vorausgezahlt = new Betrag() { waehrung = waehrungscode, wert = 0 };
+            Vorausgezahlt = new Betrag() { Waehrung = waehrungscode, Wert = 0 };
             foreach (JToken jrp in tErdzToken)
             {
                 string belzart = (jrp["belzart"] ?? jrp["BELZART"]).ToString();
@@ -221,30 +224,30 @@ namespace BO4E.BO
                     decimal zeitbezogeneMengeWert = 0;
                     if (belzart == "000001")
                     {
-                        rp.positionstext = "ARBEITSPREIS";
+                        rp.Positionstext = "ARBEITSPREIS";
                     }
                     else if (belzart == "000003")
                     {
-                        rp.positionstext = "PAUSCHALE";
+                        rp.Positionstext = "PAUSCHALE";
                         mengeneinheit = Mengeneinheit.JAHR;
                         zeitbezogeneMengeWert = (jrp["preisbtr"] ?? jrp["PREISBTR"]).Value<decimal>();
-                        rp.zeitbezogeneMenge = new Menge() { einheit = Mengeneinheit.TAG, wert = zeitbezogeneMengeWert };
+                        rp.ZeitbezogeneMenge = new Menge() { Einheit = Mengeneinheit.TAG, Wert = zeitbezogeneMengeWert };
 
-                        rp.einzelpreis = new Preis()
+                        rp.Einzelpreis = new Preis()
                         {
-                            wert = decimal.Parse((jrp["zeitant"] ?? jrp["ZEITANT"]).ToString()),
-                            einheit = waehrungseinheit,
-                            bezugswert = mengeneinheit
+                            Wert = decimal.Parse((jrp["zeitant"] ?? jrp["ZEITANT"]).ToString()),
+                            Einheit = waehrungseinheit,
+                            Bezugswert = mengeneinheit
                         };
                     }
                     else if (belzart == "000004")
-                        rp.positionstext = "VERRECHNUNGSPREIS";
+                        rp.Positionstext = "VERRECHNUNGSPREIS";
                     else if (belzart == "SUBT")
-                        rp.positionstext = "zuzüglich Mehrwertsteuer 19,000%";
+                        rp.Positionstext = "zuzüglich Mehrwertsteuer 19,000%";
                     else if (belzart == "ZHFBP1" || belzart == "CITAX")
-                        rp.positionstext = belzart;
+                        rp.Positionstext = belzart;
                     else
-                        rp.positionstext = "";
+                        rp.Positionstext = "";
 
                     if ((jrp["massbill"] ?? jrp["MASSBILL"]) != null && !string.IsNullOrWhiteSpace((jrp["massbill"] ?? jrp["MASSBILL"]).Value<string>()))
                     {
@@ -255,7 +258,7 @@ namespace BO4E.BO
                         if ((jrp["timbasis"] ?? jrp["TIMBASIS"]).Value<string>() == "365")
                         {
                             mengeneinheit = Mengeneinheit.JAHR;
-                            rp.zeitbezogeneMenge = new Menge() { einheit = Mengeneinheit.TAG, wert = zeitbezogeneMengeWert };
+                            rp.ZeitbezogeneMenge = new Menge() { Einheit = Mengeneinheit.TAG, Wert = zeitbezogeneMengeWert };
                         }
                     }
                     else
@@ -263,47 +266,47 @@ namespace BO4E.BO
                         mengeneinheit = Mengeneinheit.KWH;
                     }
 
-                    if (rp.einzelpreis == null)
+                    if (rp.Einzelpreis == null)
                     {
                         if ((jrp["preisbtr"] ?? jrp["PREISBTR"]) != null)
                         {
-                            rp.einzelpreis = new Preis()
+                            rp.Einzelpreis = new Preis()
                             {
-                                wert = decimal.Parse((jrp["preisbtr"] ?? jrp["PREISBTR"]).ToString()),
-                                einheit = waehrungseinheit,
-                                bezugswert = mengeneinheit
+                                Wert = decimal.Parse((jrp["preisbtr"] ?? jrp["PREISBTR"]).ToString()),
+                                Einheit = waehrungseinheit,
+                                Bezugswert = mengeneinheit
                             };
                         }
                         else
-                            rp.einzelpreis = new Preis()
+                            rp.Einzelpreis = new Preis()
                             {
-                                wert = 0,
-                                einheit = waehrungseinheit,
-                                bezugswert = mengeneinheit
+                                Wert = 0,
+                                Einheit = waehrungseinheit,
+                                Bezugswert = mengeneinheit
                             };
                     }
 
 
-                    rp.positionsnummer = (jrp["belzeile"] ?? jrp["BELZEILE"]).Value<int>();
+                    rp.Positionsnummer = (jrp["belzeile"] ?? jrp["BELZEILE"]).Value<int>();
                     if ((jrp["bis"] ?? jrp["BIS"]) != null && (jrp["bis"] ?? jrp["BIS"]).Value<string>() != "0000-00-00")
                     {
-                        rp.lieferungBis = TimeZoneInfo.ConvertTime((jrp["bis"] ?? jrp["BIS"]).Value<DateTime>(), Verbrauch.CENTRAL_EUROPE_STANDARD_TIME, TimeZoneInfo.Utc);
+                        rp.LieferungBis = TimeZoneInfo.ConvertTime((jrp["bis"] ?? jrp["BIS"]).Value<DateTime>(), Verbrauch.CENTRAL_EUROPE_STANDARD_TIME, TimeZoneInfo.Utc);
                     }
                     if ((jrp["ab"] ?? jrp["AB"]) != null && (jrp["ab"] ?? jrp["AB"]).Value<string>() != "0000-00-00")
                     {
-                        rp.lieferungVon = TimeZoneInfo.ConvertTime((jrp["ab"] ?? jrp["AB"]).Value<DateTime>(), Verbrauch.CENTRAL_EUROPE_STANDARD_TIME, TimeZoneInfo.Utc);
+                        rp.LieferungVon = TimeZoneInfo.ConvertTime((jrp["ab"] ?? jrp["AB"]).Value<DateTime>(), Verbrauch.CENTRAL_EUROPE_STANDARD_TIME, TimeZoneInfo.Utc);
                     }
                     if ((jrp["vertrag"] ?? jrp["VERTRAG"]) != null)
                     {
-                        rp.vertragskontoId = (jrp["vertrag"] ?? jrp["VERTRAG"]).Value<string>();
+                        rp.VertragskontoId = (jrp["vertrag"] ?? jrp["VERTRAG"]).Value<string>();
                     }
 
                     if ((jrp["iAbrmenge"] ?? jrp["I_ABRMENGE"]) != null)
                     {
-                        rp.positionsMenge = new Menge()
+                        rp.PositionsMenge = new Menge()
                         {
-                            wert = (jrp["iAbrmenge"] ?? jrp["I_ABRMENGE"]).Value<decimal>(),
-                            einheit = mengeneinheit
+                            Wert = (jrp["iAbrmenge"] ?? jrp["I_ABRMENGE"]).Value<decimal>(),
+                            Einheit = mengeneinheit
                         };
                     }
 
@@ -311,24 +314,24 @@ namespace BO4E.BO
                     {
                         if (belzart != "SUBT" && belzart != "CITAX")
                         {
-                            rp.teilsummeNetto = new Betrag()
+                            rp.TeilsummeNetto = new Betrag()
                             {
-                                wert = (jrp["nettobtr"] ?? jrp["NETTOBTR"]).Value<decimal>(),
-                                waehrung = waehrungscode
+                                Wert = (jrp["nettobtr"] ?? jrp["NETTOBTR"]).Value<decimal>(),
+                                Waehrung = waehrungscode
                             };
                         }
                         else
                         {
-                            rp.teilsummeNetto = new Betrag()
+                            rp.TeilsummeNetto = new Betrag()
                             {
-                                wert = (jrp["sbasw"] ?? jrp["SBASW"]).Value<decimal>(),
-                                waehrung = waehrungscode
+                                Wert = (jrp["sbasw"] ?? jrp["SBASW"]).Value<decimal>(),
+                                Waehrung = waehrungscode
                             };
                             Steuerbetrag steuerbetrag = new Steuerbetrag()
                             {
-                                basiswert = (jrp["sbasw"] ?? jrp["SBASW"]).Value<decimal>(),
-                                steuerwert = (jrp["sbetw"] ?? jrp["SBETW"]).Value<decimal>(),
-                                waehrung = (Waehrungscode)Enum.Parse(typeof(Waehrungscode), (jrp["twaers"] ?? jrp["TWAERS"]).Value<string>())
+                                Basiswert = (jrp["sbasw"] ?? jrp["SBASW"]).Value<decimal>(),
+                                Steuerwert = (jrp["sbetw"] ?? jrp["SBETW"]).Value<decimal>(),
+                                Waehrung = (Waehrungscode)Enum.Parse(typeof(Waehrungscode), (jrp["twaers"] ?? jrp["TWAERS"]).Value<string>())
                             };
                             decimal steuerProzent;
                             if ((jrp["stprz"] ?? jrp["STPRZ"]) != null && !string.IsNullOrWhiteSpace((jrp["stprz"] ?? jrp["STPRZ"]).Value<string>()))
@@ -337,29 +340,29 @@ namespace BO4E.BO
                             }
                             else
                             {
-                                steuerProzent = steuerbetrag.steuerwert / steuerbetrag.basiswert * 100.0M;
+                                steuerProzent = steuerbetrag.Steuerwert / steuerbetrag.Basiswert * 100.0M;
                             }
                             if ((int)steuerProzent == 19)
                             {
-                                steuerbetrag.steuerkennzeichen = Steuerkennzeichen.UST_19;
+                                steuerbetrag.Steuerkennzeichen = Steuerkennzeichen.UST_19;
                             }
                             else if ((int)steuerProzent == 7)
                             {
-                                steuerbetrag.steuerkennzeichen = Steuerkennzeichen.UST_7;
+                                steuerbetrag.Steuerkennzeichen = Steuerkennzeichen.UST_7;
                             }
                             else
                             {
                                 throw new NotImplementedException($"Taxrate Internal '{jrp["taxrateInternal"]}' is not mapped.");
                             }
-                            rp.teilsummeSteuer = steuerbetrag;
+                            rp.TeilsummeSteuer = steuerbetrag;
                         }
                         if ((jrp["nettobtr"] ?? jrp["NETTOBTR"]).Value<decimal>() <= 0)
                         {
-                            vorausgezahlt = new Betrag() { waehrung = waehrungscode, wert = (jrp["nettobtr"] ?? jrp["NETTOBTR"]).Value<decimal>() };
+                            Vorausgezahlt = new Betrag() { Waehrung = waehrungscode, Wert = (jrp["nettobtr"] ?? jrp["NETTOBTR"]).Value<decimal>() };
                         }
                     }
 
-                    rp.zeiteinheit = mengeneinheit;
+                    rp.Zeiteinheit = mengeneinheit;
                     rpList.Add(rp);
 
                     var be = (jrp["nettobtr"] ?? jrp["NETTOBTR"]);
@@ -373,9 +376,9 @@ namespace BO4E.BO
                         {
                             Steuerbetrag steuerbetrag = new Steuerbetrag()
                             {
-                                basiswert = (jrp["sbasw"] ?? jrp["SBASW"]).Value<decimal>(),
-                                steuerwert = (jrp["sbetw"] ?? jrp["SBETW"]).Value<decimal>(),
-                                waehrung = (Waehrungscode)Enum.Parse(typeof(Waehrungscode), (jrp["twaers"] ?? jrp["TWAERS"]).Value<string>())
+                                Basiswert = (jrp["sbasw"] ?? jrp["SBASW"]).Value<decimal>(),
+                                Steuerwert = (jrp["sbetw"] ?? jrp["SBETW"]).Value<decimal>(),
+                                Waehrung = (Waehrungscode)Enum.Parse(typeof(Waehrungscode), (jrp["twaers"] ?? jrp["TWAERS"]).Value<string>())
                             };
                             decimal steuerProzent;
                             if ((jrp["stprz"] ?? jrp["STPRZ"]) != null && !string.IsNullOrWhiteSpace((jrp["stprz"] ?? jrp["STPRZ"]).Value<string>()))
@@ -384,15 +387,15 @@ namespace BO4E.BO
                             }
                             else
                             {
-                                steuerProzent = Math.Round(steuerbetrag.steuerwert / steuerbetrag.basiswert * 100.0M);
+                                steuerProzent = Math.Round(steuerbetrag.Steuerwert / steuerbetrag.Basiswert * 100.0M);
                             }
                             if (steuerProzent == 19.0M)
                             {
-                                steuerbetrag.steuerkennzeichen = Steuerkennzeichen.UST_19;
+                                steuerbetrag.Steuerkennzeichen = Steuerkennzeichen.UST_19;
                             }
                             else if (steuerProzent == 7.0M)
                             {
-                                steuerbetrag.steuerkennzeichen = Steuerkennzeichen.UST_7;
+                                steuerbetrag.Steuerkennzeichen = Steuerkennzeichen.UST_7;
                             }
                             else
                             {
@@ -404,44 +407,44 @@ namespace BO4E.BO
                     }
                 }
             }
-            steuerbetraege = stList;
-            rechnungspositionen = rpList;
+            Steuerbetraege = stList;
+            Rechnungspositionen = rpList;
             gBrutto = gNetto + gSteure;
             zZahlen = gBrutto - vGezahlt - rBrutto;
-            gesamtnetto = new Betrag() { wert = gNetto, waehrung = waehrungscode };
-            gesamtsteuer = new Betrag() { wert = gSteure, waehrung = waehrungscode };
-            gesamtbrutto = new Betrag() { wert = gBrutto, waehrung = waehrungscode };
-            zuzahlen = new Betrag() { wert = zZahlen, waehrung = waehrungscode };
+            Gesamtnetto = new Betrag() { Wert = gNetto, Waehrung = waehrungscode };
+            Gesamtsteuer = new Betrag() { Wert = gSteure, Waehrung = waehrungscode };
+            Gesamtbrutto = new Betrag() { Wert = gBrutto, Waehrung = waehrungscode };
+            Zuzahlen = new Betrag() { Wert = zZahlen, Waehrung = waehrungscode };
 
-            rechnungsersteller = new Geschaeftspartner()
+            Rechnungsersteller = new Geschaeftspartner()
             {
-                geschaeftspartnerrolle = new List<Geschaeftspartnerrolle>() { Geschaeftspartnerrolle.LIEFERANT },
-                gewerbekennzeichnung = true,
-                anrede = Anrede.HERR,
-                name1 = "Mein super Lieferant",
-                partneradresse = new Adresse()
+                Geschaeftspartnerrolle = new List<Geschaeftspartnerrolle>() { Geschaeftspartnerrolle.LIEFERANT },
+                Gewerbekennzeichnung = true,
+                Anrede = Anrede.HERR,
+                Name1 = "Mein super Lieferant",
+                Partneradresse = new Adresse()
                 {
-                    strasse = "Max-Plank-Strasse",
-                    hausnummer = "8",
-                    postleitzahl = "90190",
-                    landescode = Landescode.DE,
-                    ort = "Walldorf"
+                    Strasse = "Max-Plank-Strasse",
+                    Hausnummer = "8",
+                    Postleitzahl = "90190",
+                    Landescode = Landescode.DE,
+                    Ort = "Walldorf"
                 }
             };
-            rechnungsempfaenger = new Geschaeftspartner()
+            Rechnungsempfaenger = new Geschaeftspartner()
             {
-                geschaeftspartnerrolle = new List<Geschaeftspartnerrolle>() { Geschaeftspartnerrolle.KUNDE },
-                gewerbekennzeichnung = false,
-                anrede = Anrede.HERR,
-                name1 = "Lustig",
-                name2 = "Peter",
-                partneradresse = new Adresse()
+                Geschaeftspartnerrolle = new List<Geschaeftspartnerrolle>() { Geschaeftspartnerrolle.KUNDE },
+                Gewerbekennzeichnung = false,
+                Anrede = Anrede.HERR,
+                Name1 = "Lustig",
+                Name2 = "Peter",
+                Partneradresse = new Adresse()
                 {
-                    strasse = "Magnusstraße",
-                    hausnummer = "20",
-                    postleitzahl = "50672",
-                    landescode = Landescode.DE,
-                    ort = "Köln"
+                    Strasse = "Magnusstraße",
+                    Hausnummer = "20",
+                    Postleitzahl = "50672",
+                    Landescode = Landescode.DE,
+                    Ort = "Köln"
                 }
             };
         }

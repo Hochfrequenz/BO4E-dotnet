@@ -1,0 +1,10 @@
+@startuml
+enum Bilanzierungsmethode {
+    RLM,
+    SLP,
+    TLP_GEMEINSAM,
+    TLP_GETRENNT,
+    PAUSCHAL,
+    IMS,
+}
+@enduml

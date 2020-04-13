@@ -1,0 +1,7 @@
+@startuml
+enum Tarifzeit {
+    TZ_STANDARD,
+    TZ_HT,
+    TZ_NT,
+}
+@enduml

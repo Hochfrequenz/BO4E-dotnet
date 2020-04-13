@@ -1,0 +1,9 @@
+@startuml
+class MappingAttribute {
+    + MappingAttribute(enums:object[])
+}
+class "List`1"<T> {
+}
+Attribute <|-- MappingAttribute
+MappingAttribute --> "Mapping<Enum>" "List`1"
+@enduml

@@ -1,0 +1,24 @@
+@startuml
+class Ausschreibungslos {
+    + Losnummer : string <<get>> <<set>>
+    + Bezeichung : string <<get>> <<set>>
+    + Bemerkung : string <<get>> <<set>>
+    + BetreutDurch : string <<get>> <<set>>
+    + AnzahlLieferstellen : int <<get>> <<set>>
+}
+class "List`1"<T> {
+}
+COM <|-- Ausschreibungslos
+Ausschreibungslos --> "Preismodell" Preismodell
+Ausschreibungslos --> "Energieart" Sparte
+Ausschreibungslos --> "WunschRechnungslegung" Rechnungslegung
+Ausschreibungslos --> "WunschVertragsform" Vertragsform
+Ausschreibungslos --> "Lieferstellen<Ausschreibungsdetail>" "List`1"
+Ausschreibungslos --> "Gesamtmenge" Menge
+Ausschreibungslos --> "WunschMindestmenge" Menge
+Ausschreibungslos --> "WunschMaximalmenge" Menge
+Ausschreibungslos --> "Wiederholungsintervall" Zeitraum
+Ausschreibungslos --> "lieferzeitraum" Zeitraum
+Ausschreibungslos --> "WunschKuendingungsfrist" Zeitraum
+Ausschreibungslos --> "WunschZahlungsziel" Zeitraum
+@enduml

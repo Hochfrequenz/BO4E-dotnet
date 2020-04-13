@@ -1,0 +1,8 @@
+@startuml
+enum Tarifkalkulationsmethode {
+    STAFFELN,
+    ZONEN,
+    BESTABRECHNUNG_STAFFEL,
+    PAKETPREIS,
+}
+@enduml

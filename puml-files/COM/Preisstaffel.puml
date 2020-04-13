@@ -1,0 +1,9 @@
+@startuml
+class Preisstaffel {
+    + Einheitspreis : decimal <<get>> <<set>>
+    + StaffelgrenzeVon : decimal <<get>> <<set>>
+    + StaffelgrenzeBis : decimal <<get>> <<set>>
+}
+COM <|-- Preisstaffel
+Preisstaffel --> "Sigmoidparameter" Sigmoidparameter
+@enduml

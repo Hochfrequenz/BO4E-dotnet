@@ -1,0 +1,9 @@
+@startuml
+class Sigmoidparameter {
+    + A : decimal <<get>> <<set>>
+    + B : decimal <<get>> <<set>>
+    + C : decimal <<get>> <<set>>
+    + D : decimal <<get>> <<set>>
+}
+COM <|-- Sigmoidparameter
+@enduml

@@ -4,11 +4,14 @@ using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Runtime.Serialization;
+
 using BO4E.COM;
 using BO4E.ENUM;
 using BO4E.meta;
+
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
+
 using ProtoBuf;
 
 namespace BO4E.BO
@@ -23,29 +26,29 @@ namespace BO4E.BO
         /// Eindeutige Nummer der Marktlokation bzw. der Messlokation, zu der die Energiemenge gehört
         /// </summary>
         [DefaultValue("|null|")]
-        [JsonProperty(Required = Required.Always, Order = 4)]
+        [JsonProperty(PropertyName = "lokationsId", Required = Required.Always, Order = 4)]
         [ProtoMember(4)]
         [DataCategory(DataCategory.POD)]
         [BoKey]
-        public string lokationsId;
+        public string LokationsId { get; set; }
 
         /// <summary>
         /// Gibt an, ob es sich um eine Markt- oder Messlokation handelt.
         /// </summary>
         /// <see cref="Lokationstyp"/>
-        [JsonProperty(Required = Required.Always, Order = 5)]
+        [JsonProperty(PropertyName = "lokationsTyp", Required = Required.Always, Order = 5)]
         [ProtoMember(5)]
         [DataCategory(DataCategory.POD)]
-        public Lokationstyp lokationstyp;
+        public Lokationstyp LokationsTyp { get; set; }
 
         /// <summary>
         /// Gibt den <see cref="Verbrauch"/> in einer Zeiteinheit an.
         /// </summary>
-        [JsonProperty(Order = 6)]
+        [JsonProperty(Order = 6, PropertyName = "energieverbrauch")]
         [ProtoMember(6)]
         [DataCategory(DataCategory.METER_READING)]
         [MinLength(1)]
-        public List<Verbrauch> energieverbrauch;
+        public List<Verbrauch> Energieverbrauch { get; set; }
 
         /// <summary>
         /// If energieverbrauch is null or not present, it is initialised with an empty list for easier handling (less null checks) elsewhere.
@@ -54,18 +57,18 @@ namespace BO4E.BO
         [OnDeserialized]
         protected void OnDeserialized(StreamingContext context)
         {
-            if (energieverbrauch == null)
+            if (Energieverbrauch == null)
             {
-                energieverbrauch = new List<Verbrauch>();
+                Energieverbrauch = new List<Verbrauch>();
             }
-            else if (energieverbrauch.Count > 0)
+            else if (Energieverbrauch.Count > 0)
             {
-                energieverbrauch = energieverbrauch
+                Energieverbrauch = Energieverbrauch
                     .Select(v => Verbrauch.FixSapCdsBug(v))
-                    .Where(v => !(v.startdatum == DateTime.MinValue || v.enddatum == DateTime.MinValue))
-                    .Where(v => !(v.userProperties != null && v.userProperties.ContainsKey("invalid") && (bool)v.userProperties["invalid"] == true))
+                    .Where(v => !(v.Startdatum == DateTime.MinValue || v.Enddatum == DateTime.MinValue))
+                    .Where(v => !(v.UserProperties != null && v.UserProperties.ContainsKey("invalid") && (bool)v.UserProperties["invalid"] == true))
                     .ToList();
-                if (userProperties != null && userProperties.TryGetValue(Verbrauch._SAP_PROFDECIMALS_KEY, out JToken profDecimalsRaw))
+                if (UserProperties != null && UserProperties.TryGetValue(Verbrauch._SAP_PROFDECIMALS_KEY, out JToken profDecimalsRaw))
                 {
                     var profDecimals = profDecimalsRaw.Value<int>();
                     if (profDecimals > 0)
@@ -73,13 +76,13 @@ namespace BO4E.BO
                         for (int i = 0; i < profDecimals; i++)
                         {
                             // or should I import math.pow() for this purpose?
-                            foreach (Verbrauch v in energieverbrauch.Where(v => v.userProperties == null || !v.userProperties.ContainsKey(Verbrauch._SAP_PROFDECIMALS_KEY)))
+                            foreach (Verbrauch v in Energieverbrauch.Where(v => v.UserProperties == null || !v.UserProperties.ContainsKey(Verbrauch._SAP_PROFDECIMALS_KEY)))
                             {
-                                v.wert /= 10.0M;
+                                v.Wert /= 10.0M;
                             }
                         }
                     }
-                    userProperties.Remove(Verbrauch._SAP_PROFDECIMALS_KEY);
+                    UserProperties.Remove(Verbrauch._SAP_PROFDECIMALS_KEY);
                 }
             }
         }
@@ -94,53 +97,53 @@ namespace BO4E.BO
         /// <returns>new Energiemenge object</returns>
         public static Energiemenge operator +(Energiemenge em1, Energiemenge em2)
         {
-            if (em1.lokationsId != em2.lokationsId || em1.lokationstyp != em2.lokationstyp || em1.versionStruktur != em2.versionStruktur)
+            if (em1.LokationsId != em2.LokationsId || em1.LokationsTyp != em2.LokationsTyp || em1.versionStruktur != em2.versionStruktur)
             {
-                throw new InvalidOperationException($"You must not add the Energiemengen with different locations {em1.lokationsId} ({em1.lokationstyp}) (v{em1.versionStruktur}) vs. {em2.lokationsId} ({em2.lokationstyp}) (v{em2.versionStruktur})");
+                throw new InvalidOperationException($"You must not add the Energiemengen with different locations {em1.LokationsId} ({em1.LokationsTyp}) (v{em1.versionStruktur}) vs. {em2.LokationsId} ({em2.LokationsTyp}) (v{em2.versionStruktur})");
             }
             Energiemenge result = new Energiemenge()
             {
-                lokationsId = em1.lokationsId,
-                lokationstyp = em1.lokationstyp,
+                LokationsId = em1.LokationsId,
+                LokationsTyp = em1.LokationsTyp,
                 versionStruktur = em1.versionStruktur,
             };
-            if (em1.userProperties == null)
+            if (em1.UserProperties == null)
             {
-                result.userProperties = em2.userProperties;
+                result.UserProperties = em2.UserProperties;
             }
-            else if (em2.userProperties == null)
+            else if (em2.UserProperties == null)
             {
-                result.userProperties = em1.userProperties;
+                result.UserProperties = em1.UserProperties;
             }
             else
             {
                 // there's no consistency check on user properties!
-                result.userProperties = new Dictionary<string, JToken>();
-                foreach (var kvp1 in em1.userProperties)
+                result.UserProperties = new Dictionary<string, JToken>();
+                foreach (var kvp1 in em1.UserProperties)
                 {
-                    result.userProperties.Add(kvp1);
+                    result.UserProperties.Add(kvp1);
                 }
-                foreach (var kvp2 in em2.userProperties)
+                foreach (var kvp2 in em2.UserProperties)
                 {
-                    if (!result.userProperties.ContainsKey(kvp2.Key))
+                    if (!result.UserProperties.ContainsKey(kvp2.Key))
                     {
-                        result.userProperties.Add(kvp2);
+                        result.UserProperties.Add(kvp2);
                     }
                 }
             }
-            if (em1.energieverbrauch == null || em1.energieverbrauch.Count == 0)
+            if (em1.Energieverbrauch == null || em1.Energieverbrauch.Count == 0)
             {
-                result.energieverbrauch = em2.energieverbrauch;
+                result.Energieverbrauch = em2.Energieverbrauch;
             }
-            else if (em2.energieverbrauch == null || em2.energieverbrauch.Count == 0)
+            else if (em2.Energieverbrauch == null || em2.Energieverbrauch.Count == 0)
             {
-                result.energieverbrauch = em1.energieverbrauch;
+                result.Energieverbrauch = em1.Energieverbrauch;
             }
             else
             {
-                result.energieverbrauch = new List<Verbrauch>();
-                result.energieverbrauch.AddRange(em1.energieverbrauch);
-                result.energieverbrauch.AddRange(em2.energieverbrauch);
+                result.Energieverbrauch = new List<Verbrauch>();
+                result.Energieverbrauch.AddRange(em1.Energieverbrauch);
+                result.Energieverbrauch.AddRange(em2.Energieverbrauch);
             }
             return result;
         }

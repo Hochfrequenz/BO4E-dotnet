@@ -1,0 +1,6 @@
+@startuml
+enum Schwachlastfaehig {
+    NICHT_SCHWACHLASTFAEHIG,
+    SCHWACHLASTFAEHIG,
+}
+@enduml

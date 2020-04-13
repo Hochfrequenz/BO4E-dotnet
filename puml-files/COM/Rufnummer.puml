@@ -1,0 +1,7 @@
+@startuml
+class Rufnummer {
+    + rufnummer : string <<get>> <<set>>
+}
+COM <|-- Rufnummer
+Rufnummer --> "Nummerntyp" Rufnummernart
+@enduml

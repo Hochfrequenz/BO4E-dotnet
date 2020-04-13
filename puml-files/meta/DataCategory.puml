@@ -1,0 +1,12 @@
+@startuml
+enum DataCategory {
+    ADDRESS,
+    DEVICE,
+    FINANCE,
+    LEGAL,
+    NAME,
+    METER_READING,
+    POD,
+    USER_PROPERTIES,
+}
+@enduml

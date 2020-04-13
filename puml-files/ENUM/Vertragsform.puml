@@ -1,0 +1,7 @@
+@startuml
+enum Vertragsform {
+    ONLINE,
+    DIREKT,
+    FAX,
+}
+@enduml

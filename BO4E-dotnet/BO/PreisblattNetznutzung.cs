@@ -13,36 +13,36 @@ namespace BO4E.BO
         /// <summary>
         /// Preisblatt gilt für angegebene Sparte. 
         /// </summary>
-        [JsonProperty(Required = Required.Always, Order = 7)]
+        [JsonProperty(Required = Required.Always, Order = 7, PropertyName="sparte")]
         //[ProtoMember(7)]
-        public Sparte sparte;
+        public Sparte Sparte { get;set; }
 
         /// <summary>
         /// Die Preise gelten für Marktlokationen der angegebenen Bilanzierungsmethode. 
         /// </summary>
-        [JsonProperty(Required = Required.Always, Order = 8)]
+        [JsonProperty(Required = Required.Always, Order = 8, PropertyName="bilanzierungsmethode")]
         //[ProtoMember(8)]
-        public Bilanzierungsmethode bilanzierungsmethode;
+        public Bilanzierungsmethode Bilanzierungsmethode { get;set; }
 
         /// <summary>
         /// Die Preise gelten für Marktlokationen in der angegebenen Netzebene.
         /// </summary>
-        [JsonProperty(Required = Required.Always, Order = 9)]
+        [JsonProperty(Required = Required.Always, Order = 9, PropertyName= "netzebene")]
         //[ProtoMember(9)]
-        public Netzebene netzebene;
+        public Netzebene Netzebene { get;set; }
 
         /// <summary>
         /// Hier wird die Kundengruppe, für die der Preis gilt mit angegeben. 
         /// </summary>
-        [JsonProperty(Required = Required.Always, Order = 10)]
+        [JsonProperty(Required = Required.Always, Order = 10, PropertyName="kundengruppe")]
         //[ProtoMember(10)]
-        public Kundengruppe kundengruppe;
+        public Kundengruppe Kundengruppe { get;set; }
 
         /// <summary>
         /// Der Netzbetreiber oder Messstellenbetreiber, der die Preise veröffentlicht hat. 
         /// </summary>
-        [JsonProperty(Required = Required.Always, Order = 11)]
+        [JsonProperty(Required = Required.Always, Order = 11, PropertyName="herausgeber")]
         //[ProtoMember(11)]
-        public Marktteilnehmer herausgeber;
+        public Marktteilnehmer Herausgeber { get;set; }
     }
 }

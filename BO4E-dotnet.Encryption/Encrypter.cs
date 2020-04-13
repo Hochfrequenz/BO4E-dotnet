@@ -1,5 +1,7 @@
 ﻿using System;
+
 using BO4E.BO;
+
 using Microsoft.Extensions.Logging;
 
 namespace BO4E.Extensions.Encryption
@@ -16,6 +18,7 @@ namespace BO4E.Extensions.Encryption
         /// <param name="encryptedObject">an encrypted Business Object</param>
         /// <returns>a decrypted Business Object</returns>
         public abstract BusinessObject Decrypt(EncryptedObject encryptedObject);
+        public abstract T Decrypt<T>(EncryptedObject encryptedObject) where T : BusinessObject;
         public abstract void Dispose();
 
         ~Encrypter()

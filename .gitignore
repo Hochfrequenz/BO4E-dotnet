@@ -12,6 +12,7 @@ BO4E-dotnet.Reporting/obj
 BO4E-dotnet/obj/
 
 BO4ETestProject/bin/
+BO4ETestProject/TestResults/
 BO4E-dotnet/bin/
 
 *.manifest
@@ -35,5 +36,8 @@ TestBO4E-dotnet-Reporting/obj/
 
 
 TestBO4E-dotnet-Encryption/bin
+TestBO4E-dotnet-Encryption/TestResults
 TestBO4E-dotnet-Extensions/bin
+TestBO4E-dotnet-Extensions/TestResults
 TestBO4E-dotnet-Reporting/bin
+TestBO4E-dotnet-Reporting/TestResults/

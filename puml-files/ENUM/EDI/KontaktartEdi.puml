@@ -1,0 +1,9 @@
+@startuml
+enum KontaktartEdi {
+    EM,
+    FX,
+    TE,
+    AJ,
+    AL,
+}
+@enduml

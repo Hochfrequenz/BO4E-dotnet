@@ -35,7 +35,7 @@
         /// </summary>
         POD,
         /// <summary>
-        /// the <see cref="BO.BusinessObject.userProperties"/> might be handled separately with this DataCategory
+        /// the <see cref="BO.BusinessObject.UserProperties"/> might be handled separately with this DataCategory
         /// </summary>
         USER_PROPERTIES,
     }

@@ -4,7 +4,7 @@
   },
   "input": {
     "boTyp": "MESSLOKATION",
-    "messLokationsId": "DEIMUDDERIHRMELOID12345",
+    "messlokationsId": "DEIMUDDERIHRMELOID12345",
     "sparte": "STROM",
     "messadresse": {
       "ort": "Leipzig",
@@ -15,6 +15,6 @@
   },
   "assertions": {
     "$['MESSLOKATION'][0]['messadresse']['strasse']": "Lindenauer Markt",
-    "$['MESSLOKATION'][0]['messLokationsId']": "414bdcdf7e6adbe0eb18867371575021e284ad13d496b6f43aae4fe04b535e9f"
+    "$['MESSLOKATION'][0]['messlokationsId']": "414bdcdf7e6adbe0eb18867371575021e284ad13d496b6f43aae4fe04b535e9f"
   }
 }

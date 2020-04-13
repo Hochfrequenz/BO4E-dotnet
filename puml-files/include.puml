@@ -1,0 +1,2669 @@
+@startuml
+class BoEdiMapper {
+    + {static} ToEdi(objectName:string, objectValue:string) : string
+    + {static} ReplaceWithEdiValues(o:Object) : JObject
+}
+BoEdiMapper o-> "_logger" ILogger
+abstract class BoMapper {
+    + {static} <<readonly>> packagePrefix : string = "BO4E.BO"
+    + {static} MapObject(jobject:JObject, lenient:LenientParsing) : BusinessObject
+    + {static} MapObject(jobject:JObject, userPropertiesWhiteList:HashSet<string>, lenient:LenientParsing) : BusinessObject
+    + {static} MapObject(businessObjectName:string, jobject:JObject, lenient:LenientParsing) : BusinessObject
+    + {static} MapObject(businessObjectType:Type, jobject:JObject, lenient:LenientParsing) : BusinessObject
+    + {static} MapObject(jobject:JObject, lenient:LenientParsing) : BusinessObjectType
+    + {static} MapObject(businessObjectName:string, jobject:JObject, userPropertiesWhiteList:HashSet<string>, lenient:LenientParsing) : BusinessObject
+    + {static} MapObject(businessObjectType:Type, jobject:JObject, userPropertiesWhiteList:HashSet<string>, lenient:LenientParsing) : BusinessObject
+    + {static} MapObject(jobject:JObject, userPropertiesWhiteList:HashSet<string>, lenient:LenientParsing) : BusinessObjectType
+    + {static} GetValidBoNames() : HashSet<string>
+    + {static} GetTypeForBoName(businessObjectName:string) : Type
+    + {static} GetJsonSchemeFor(businessObjectName:string) : JSchema
+    + {static} GetJsonSchemeFor(businessObjectType:Type) : JSchema
+    + {static} GetAnnotatedFields(boName:string) : FieldInfo[]
+    + {static} GetAnnotatedFields(type:Type) : FieldInfo[]
+    + {static} GetAnnotatedFields(boType:Type, attributeType:Type) : FieldInfo[]
+    + {static} GetAnnotatedFields(boName:string, attributeType:Type) : FieldInfo[]
+}
+class EdiBoMapper {
+    + {static} fromEdi(objectName:string, objectValue:string) : string
+}
+EdiBoMapper o-> "_logger" ILogger
+class StaticLogger <<static>> {
+}
+StaticLogger --> "Logger" ILogger
+class UserPropertiesDataContractResolver {
+    + UserPropertiesDataContractResolver(userPropertiesWhiteList:HashSet<string>)
+    + <<override>> ResolveContract(type:Type) : JsonContract
+}
+DefaultContractResolver <|-- UserPropertiesDataContractResolver
+UserPropertiesDataContractResolver o-> "Instance" UserPropertiesDataContractResolver
+class Angebot {
+    + Angebotsnummer : string <<get>> <<set>>
+    + Anfragereferenz : string <<get>> <<set>>
+    + Angebotsdatum : string <<get>> <<set>>
+}
+class "List`1"<T> {
+}
+BusinessObject <|-- Angebot
+Angebot --> "Sparte" Sparte
+Angebot --> "Bindefrist" DateTime
+Angebot --> "Angebotgeber" Geschaeftspartner
+Angebot --> "Angebotnehmer" Geschaeftspartner
+Angebot --> "UnterzeichnerAngebotsnehmer" Ansprechpartner
+Angebot --> "UnterzeichnerAngebotsgeber" Ansprechpartner
+Angebot --> "Varianten<Angebotsvariante>" "List`1"
+class Ansprechpartner {
+    + Anrede : Anrede? <<get>> <<set>>
+    + IndividuelleAnrede : string <<get>> <<set>>
+    + Titel : Titel?
+    + Vorname : string <<get>> <<set>>
+    + Nachname : string <<get>> <<set>>
+    + EMailAdresse : string <<get>> <<set>>
+    + Kommentar : string <<get>> <<set>>
+}
+class "List`1"<T> {
+}
+BusinessObject <|-- Ansprechpartner
+Ansprechpartner --> "Geschaeftspartner" Geschaeftspartner
+Ansprechpartner --> "Adresse" Adresse
+Ansprechpartner --> "Rufnummer<Rufnummer>" "List`1"
+Ansprechpartner --> "Zustaendigkeit<Zustaendigkeit>" "List`1"
+class Benachrichtigung {
+    + BenachrichtigungsId : string <<get>> <<set>>
+    + Kurztext : string <<get>> <<set>>
+    + Kategorie : string <<get>> <<set>>
+    + Bearbeiter : string <<get>> <<set>>
+    + Deadline : DateTime? <<get>> <<set>>
+}
+class "List`1"<T> {
+}
+BusinessObject <|-- Benachrichtigung
+Benachrichtigung --> "Prioritaet" Prioritaet
+Benachrichtigung --> "Bearbeitungsstatus" Bearbeitungsstatus
+Benachrichtigung --> "ErstellungsZeitpunkt" DateTime
+Benachrichtigung --> "Notizen<Notiz>" "List`1"
+Benachrichtigung --> "Aufgaben<Aufgabe>" "List`1"
+Benachrichtigung --> "Infos<GenericStringStringInfo>" "List`1"
+abstract class BusinessObject {
+    + BoTyp : string <<get>> <<set>>
+    + <<const>> USER_PROPERTIES_NAME : string = "userProperties"
+    + GetBoTyp() : string
+    + versionStruktur : int
+    + guid : string
+    + GetJsonScheme() : JSchema
+    + {static} GetJsonSchema(boType:Type) : JSchema
+    + GetURI(includeUserProperties:bool) : Bo4eUri
+    + GetBoKeyNames() : List<string>
+    + {static} GetBoKeyNames(boType:Type) : List<string>
+    + {static} GetExpandablePropertyNames(boType:Type) : Dictionary<string, Type>
+    + {static} GetExpandableFieldNames(boTypeName:string) : Dictionary<string, Type>
+    + GetBoKeys() : Dictionary<string, object>
+    + {static} GetBoKeyProps(boType:Type) : List<PropertyInfo>
+    + <<override>> Equals(b:object) : bool
+    + Equals(b:BusinessObject) : bool
+    + <<override>> GetHashCode() : int
+    + <<virtual>> IsValid() : bool
+}
+class "IEquatable`1"<T> {
+}
+class "IDictionary`2"<T1,T2> {
+}
+class BaseSpecifiedConcreteClassConverter {
+}
+class BusinessObjectBaseConverter {
+    + <<override>> CanConvert(objectType:Type) : bool
+    + <<override>> ReadJson(reader:JsonReader, objectType:Type, existingValue:object, serializer:JsonSerializer) : object
+    + <<override>> CanWrite : bool <<get>>
+    + <<override>> WriteJson(writer:JsonWriter, value:object, serializer:JsonSerializer) : void
+}
+"IEquatable`1" "<BusinessObject>" <|-- BusinessObject
+BusinessObject --> "UserProperties<string,JToken>" "IDictionary`2"
+BusinessObject +-- BaseSpecifiedConcreteClassConverter
+DefaultContractResolver <|-- BaseSpecifiedConcreteClassConverter
+BusinessObject +-- BusinessObjectBaseConverter
+JsonConverter <|-- BusinessObjectBaseConverter
+class Energiemenge {
+    + LokationsId : string <<get>> <<set>>
+}
+class "List`1"<T> {
+}
+class "Dictionary`2"<T1,T2> {
+}
+BusinessObject <|-- Energiemenge
+Energiemenge --> "LokationsTyp" Lokationstyp
+Energiemenge --> "Energieverbrauch<Verbrauch>" "List`1"
+class Geschaeftspartner {
+    + anrede : Anrede? <<get>> <<set>>
+    + Title : string <<get>> <<set>>
+    + Name1 : string <<get>> <<set>>
+    + Name2 : string <<get>> <<set>>
+    + Name3 : string <<get>> <<set>>
+    + Gewerbekennzeichnung : bool <<get>> <<set>>
+    + Hrnummer : string <<get>> <<set>>
+    + Amtsgericht : string <<get>> <<set>>
+    + UmsatzsteuerId : string <<get>> <<set>>
+    + GlaeubigerId : string <<get>> <<set>>
+    + EMailAdresse : string <<get>> <<set>>
+    + Website : string <<get>> <<set>>
+}
+class "List`1"<T> {
+}
+BusinessObject <|-- Geschaeftspartner
+Geschaeftspartner --> "Kontaktweg<Kontaktart>" "List`1"
+Geschaeftspartner --> "Geschaeftspartnerrolle<Geschaeftspartnerrolle>" "List`1"
+Geschaeftspartner --> "Partneradresse" Adresse
+class Kosten {
+}
+class "List`1"<T> {
+}
+BusinessObject <|-- Kosten
+Kosten --> "Kostenklasse" Kostenklasse
+Kosten --> "Gueltigkeit" Zeitraum
+Kosten --> "SummeKosten<Betrag>" "List`1"
+Kosten --> "Kostenbloecke<Kostenblock>" "List`1"
+Kosten --> "Kostenpositionen<Kostenposition>" "List`1"
+class Marktlokation {
+    + MarktlokationsId : string <<get>> <<set>>
+    + Verbrauchsart : Verbrauchsart? <<get>> <<set>>
+    + Unterbrechbar : bool? <<get>> <<set>>
+    + NetzbetreiberCodeNr : string <<get>> <<set>>
+    + GebietType : Gebiettyp? <<get>> <<set>>
+    + NetzgebietNr : string <<get>> <<set>>
+    + Bilanzierungsgebiet : string <<get>> <<set>>
+    + GrundversorgerCodeNr : string <<get>> <<set>>
+    + Gasqualitaet : Gasqualitaet? <<get>> <<set>>
+    + Regelzone : string <<get>> <<set>>
+    + Marktgebiet : string <<get>> <<set>>
+    + Zeitreihentyp : Zeitreihentyp? <<get>> <<set>>
+    + {static} ValidateId(id:string) : bool
+    + {static} GetChecksum(input:string) : string
+    + HasValidId() : bool
+    + IsValid(checkId:bool) : bool
+}
+class "List`1"<T> {
+}
+BusinessObject <|-- Marktlokation
+Marktlokation --> "Sparte" Sparte
+Marktlokation --> "Energierichtung" Energierichtung
+Marktlokation --> "Bilanzierungsmethode" Bilanzierungsmethode
+Marktlokation --> "Netzebene" Netzebene
+Marktlokation --> "Endkunde" Geschaeftspartner
+Marktlokation --> "Lokationsadresse" Adresse
+Marktlokation --> "Geoadresse" Geokoordinaten
+Marktlokation --> "Katasterinformation" Katasteradresse
+Marktlokation --> "Marktrollen<COM.Marktrolle>" "List`1"
+Marktlokation --> "Zaehlwerke<Zaehlwerk>" "List`1"
+Marktlokation --> "Verbrauchsmenge<Verbrauch>" "List`1"
+Marktlokation --> "Messlokationen<Messlokation>" "List`1"
+Marktlokation --> "ZugehoerigeMesslokationen<Messlokationszuordnung>" "List`1"
+class Marktteilnehmer {
+    + Rollencodenummer : string <<get>> <<set>>
+    + Makoadresse : string <<get>> <<set>>
+}
+Geschaeftspartner <|-- Marktteilnehmer
+Marktteilnehmer --> "Marktrolle" Marktrolle
+Marktteilnehmer --> "Rollencodetyp" Rollencodetyp
+Marktteilnehmer --> "Ansprechpartner" Ansprechpartner
+class Messlokation {
+    + MesslokationsId : string <<get>> <<set>>
+    + NetzebeneMessung : Netzebene? <<get>> <<set>>
+    + MessgebietNr : string <<get>> <<set>>
+    + GrundzustaendigerMSBCodeNr : string <<get>> <<set>>
+    + GrundzustaendigerMSBIMCodeNr : string <<get>> <<set>>
+    + GrundzustaendigerMDLCodeNr : string <<get>> <<set>>
+    + Bilanzierungsmethode : Bilanzierungsmethode? <<get>> <<set>>
+    + Abrechnungmessstellenbetriebnna : bool? <<get>> <<set>>
+    + Gasqualitaet : Gasqualitaet? <<get>> <<set>>
+    + Verlustfaktor : decimal? <<get>> <<set>>
+    + {static} ValidateId(id:string) : bool
+    + HasValidId() : bool
+    + IsValid(checkId:bool) : bool
+}
+class "List`1"<T> {
+}
+BusinessObject <|-- Messlokation
+Messlokation --> "Sparte" Sparte
+Messlokation --> "Messadresse" Adresse
+Messlokation --> "Geoadresse" Geokoordinaten
+Messlokation --> "Katasterinformation" Katasteradresse
+Messlokation --> "Geraete<Hardware>" "List`1"
+Messlokation --> "Messdienstleistung<Dienstleistung>" "List`1"
+Messlokation --> "Messlokationszaehler<Zaehler>" "List`1"
+Messlokation --> "Marktrollen<COM.Marktrolle>" "List`1"
+class Preisblatt {
+    + Bezeichnung : string <<get>> <<set>>
+}
+class "List`1"<T> {
+}
+BusinessObject <|-- Preisblatt
+Preisblatt --> "Gueltigkeit" Zeitraum
+Preisblatt --> "Preispositionen<Preisposition>" "List`1"
+class PreisblattDienstleistung {
+    + Geraetedetails : Bilanzierungsmethode? <<get>> <<set>>
+}
+Preisblatt <|-- PreisblattDienstleistung
+PreisblattDienstleistung --> "Dienstleistungsdetails" Dienstleistungstyp
+PreisblattDienstleistung --> "Herausgeber" Marktteilnehmer
+class PreisblattKonzessionsabgabe {
+}
+Preisblatt <|-- PreisblattKonzessionsabgabe
+PreisblattKonzessionsabgabe --> "sparte" Sparte
+PreisblattKonzessionsabgabe --> "KundengruppeKA" KundengruppeKA
+class PreisblattMessung {
+}
+class "List`1"<T> {
+}
+Preisblatt <|-- PreisblattMessung
+PreisblattMessung --> "Sparte" Sparte
+PreisblattMessung --> "Bilanzierungsmethode" Bilanzierungsmethode
+PreisblattMessung --> "Messebene" Netzebene
+PreisblattMessung --> "InklusiveDienstleistung<Dienstleistungstyp>" "List`1"
+PreisblattMessung --> "Basisgeraet" Geraeteeigenschaften
+PreisblattMessung --> "InklusiveGeraete<Geraeteeigenschaften>" "List`1"
+PreisblattMessung --> "Herausgeber" Marktteilnehmer
+class PreisblattNetznutzung {
+}
+Preisblatt <|-- PreisblattNetznutzung
+PreisblattNetznutzung --> "Sparte" Sparte
+PreisblattNetznutzung --> "Bilanzierungsmethode" Bilanzierungsmethode
+PreisblattNetznutzung --> "Netzebene" Netzebene
+PreisblattNetznutzung --> "Kundengruppe" Kundengruppe
+PreisblattNetznutzung --> "Herausgeber" Marktteilnehmer
+class PreisblattUmlagen {
+}
+Preisblatt <|-- PreisblattUmlagen
+PreisblattUmlagen --> "Sparte" Sparte
+class Rechnung {
+    + Rechnungstitel : string <<get>> <<set>>
+    + Rechnungsstatus : Rechnungsstatus? <<get>> <<set>>
+    + Storno : bool <<get>> <<set>>
+    + Rechnungsnummer : string <<get>> <<set>>
+    + OriginalRechnungsnummer : string <<get>> <<set>>
+    + Rechnung()
+    + Rechnung(sapPrintDocument:JObject)
+}
+class "List`1"<T> {
+}
+BusinessObject <|-- Rechnung
+Rechnung --> "Rechnungsdatum" DateTime
+Rechnung --> "Faelligkeitsdatum" DateTime
+Rechnung --> "Rechnungsstyp" Rechnungstyp
+Rechnung --> "Rechnungsperiode" Zeitraum
+Rechnung --> "Rechnungsersteller" Geschaeftspartner
+Rechnung --> "Rechnungsempfaenger" Geschaeftspartner
+Rechnung --> "Gesamtnetto" Betrag
+Rechnung --> "Gesamtsteuer" Betrag
+Rechnung --> "Gesamtbrutto" Betrag
+Rechnung --> "Vorausgezahlt" Betrag
+Rechnung --> "rabattBrutto" Betrag
+Rechnung --> "Zuzahlen" Betrag
+Rechnung --> "Steuerbetraege<Steuerbetrag>" "List`1"
+Rechnung --> "Rechnungspositionen<Rechnungsposition>" "List`1"
+class Region {
+    + Bezeichnung : string <<get>> <<set>>
+}
+class "List`1"<T> {
+}
+BusinessObject <|-- Region
+Region --> "PositivListe<Regionskriterium>" "List`1"
+Region --> "NegativListe<Regionskriterium>" "List`1"
+class Vertrag {
+    + Vertragsnummer : string <<get>> <<set>>
+    + Beschreibung : string <<get>> <<set>>
+    + Gemeinderabatt : decimal? <<get>> <<set>>
+    + Vertrag()
+}
+class "List`1"<T> {
+}
+BusinessObject <|-- Vertrag
+Vertrag --> "Vertragsart" Vertragsart
+Vertrag --> "Vertragstatus" Vertragstatus
+Vertrag --> "Sparte" Sparte
+Vertrag --> "Vertragsbeginn" DateTime
+Vertrag --> "Vertragsende" DateTime
+Vertrag --> "Vertragspartner1" Geschaeftspartner
+Vertrag --> "Vertragspartner2" Geschaeftspartner
+Vertrag --> "Unterzeichnervp1<Unterschrift>" "List`1"
+Vertrag --> "Unterzeichnervp2<Unterschrift>" "List`1"
+Vertrag --> "Vertragskonditionen" Vertragskonditionen
+Vertrag --> "Vertragsteile<Vertragsteil>" "List`1"
+Vertrag --> "Korrespondenzpartner" Geschaeftspartner
+class Zaehler {
+    + Zaehlernummer : string <<get>> <<set>>
+    + EichungBis : DateTime? <<get>> <<set>>
+    + LetzteEichung : DateTime? <<get>> <<set>>
+    + Gateway : string <<get>> <<set>>
+    + Fernschaltung : Fernschaltung? <<get>> <<set>>
+    + Messwerterfassung : Messwerterfassung? <<get>> <<set>>
+}
+class "List`1"<T> {
+}
+BusinessObject <|-- Zaehler
+Zaehler --> "Sparte" Sparte
+Zaehler --> "Zaehlerauspraegung" Zaehlerauspraegung
+Zaehler --> "Zaehlertyp" Zaehlertyp
+Zaehler --> "Tarifart" Tarifart
+Zaehler --> "zaehlerkonstante" Decimal
+Zaehler --> "Zaehlwerke<Zaehlwerk>" "List`1"
+Zaehler --> "Zaehlerhersteller" Geschaeftspartner
+class Adresse {
+    + Postleitzahl : string <<get>> <<set>>
+    + Ort : string <<get>> <<set>>
+    + Strasse : string <<get>> <<set>>
+    + Hausnummer : string <<get>> <<set>>
+    + Postfach : string <<get>> <<set>>
+    + Adresszusatz : string <<get>> <<set>>
+    + CoErgaenzung : string <<get>> <<set>>
+    + Landescode : Landescode? <<get>> <<set>>
+}
+COM <|-- Adresse
+class Angebotsposition {
+    + Positionsbezeichung : string <<get>> <<set>>
+}
+COM <|-- Angebotsposition
+Angebotsposition --> "Positionsmenge" Menge
+Angebotsposition --> "Positionspreis" Preis
+Angebotsposition --> "Positionsbetrag" Betrag
+class Angebotsteil {
+    + AnfrageSubreferenz : string <<get>> <<set>>
+}
+class "List`1"<T> {
+}
+COM <|-- Angebotsteil
+Angebotsteil --> "Lieferstellenangebotsteil<Marktlokation>" "List`1"
+Angebotsteil --> "Gesamtmengeangebotsteil" Menge
+Angebotsteil --> "Gesamtkostenangebotsteil" Betrag
+Angebotsteil --> "Positionen<Angebotsposition>" "List`1"
+class Angebotsvariante {
+    + Beschreibung : string <<get>> <<set>>
+}
+class "List`1"<T> {
+}
+COM <|-- Angebotsvariante
+Angebotsvariante --> "Angebotsstatus" Angebotsstatus
+Angebotsvariante --> "Erstelldatum" DateTime
+Angebotsvariante --> "Bindefrist" DateTime
+Angebotsvariante --> "Gesamtmenge" Menge
+Angebotsvariante --> "Gesamtkosten" Betrag
+Angebotsvariante --> "Teile<Angebotsteil>" "List`1"
+class AufAbschlag {
+    + Bezeichnung : string <<get>> <<set>>
+    + Beschreibung : string <<get>> <<set>>
+    + AufAbschlagstyp : AufAbschlagstyp? <<get>> <<set>>
+    + aufAbschlagsziel : AufAbschlagsziel? <<get>> <<set>>
+    + Einheit : Waehrungseinheit? <<get>> <<set>>
+    + Website : string <<get>> <<set>>
+}
+class "List`1"<T> {
+}
+COM <|-- AufAbschlag
+AufAbschlag --> "Gueltigkeitszeitraum" Zeitraum
+AufAbschlag --> "Staffeln<Preisstaffel>" "List`1"
+class Aufgabe {
+    + AufgabenId : string <<get>> <<set>>
+    + Beschreibung : string <<get>> <<set>>
+    + Deadline : DateTime? <<get>> <<set>>
+    + Ausgefuehrt : bool <<get>> <<set>>
+    + Ausfuehrungszeitpunkt : DateTime? <<get>> <<set>>
+    + Ausfuehrender : string <<get>> <<set>>
+}
+COM <|-- Aufgabe
+class Ausschreibungsdetail {
+    + LokationsId : string <<get>> <<set>>
+    + Lokationsbezeichung : string <<get>> <<set>>
+    + Netzbetreiber : string <<get>> <<set>>
+    + Kunde : string <<get>> <<set>>
+    + Zaehlernummer : string <<get>> <<set>>
+    + Zaehlertechnik : Zaehlertyp? <<get>> <<set>>
+    + LastgangVorhanden : bool? <<get>> <<set>>
+}
+COM <|-- Ausschreibungsdetail
+Ausschreibungsdetail --> "NetzebeneLieferung" Netzebene
+Ausschreibungsdetail --> "NetzebeneMessung" Netzebene
+Ausschreibungsdetail --> "Lokationsadresse" Adresse
+Ausschreibungsdetail --> "Rechnungsadresse" Adresse
+Ausschreibungsdetail --> "PrognoseJahresarbeit" Menge
+Ausschreibungsdetail --> "PrognoseArbeitLieferzeitraum" Menge
+Ausschreibungsdetail --> "PrognoseLeistung" Menge
+Ausschreibungsdetail --> "Lieferzeitraum" Zeitraum
+class Ausschreibungslos {
+    + Losnummer : string <<get>> <<set>>
+    + Bezeichung : string <<get>> <<set>>
+    + Bemerkung : string <<get>> <<set>>
+    + BetreutDurch : string <<get>> <<set>>
+    + AnzahlLieferstellen : int <<get>> <<set>>
+}
+class "List`1"<T> {
+}
+COM <|-- Ausschreibungslos
+Ausschreibungslos --> "Preismodell" Preismodell
+Ausschreibungslos --> "Energieart" Sparte
+Ausschreibungslos --> "WunschRechnungslegung" Rechnungslegung
+Ausschreibungslos --> "WunschVertragsform" Vertragsform
+Ausschreibungslos --> "Lieferstellen<Ausschreibungsdetail>" "List`1"
+Ausschreibungslos --> "Gesamtmenge" Menge
+Ausschreibungslos --> "WunschMindestmenge" Menge
+Ausschreibungslos --> "WunschMaximalmenge" Menge
+Ausschreibungslos --> "Wiederholungsintervall" Zeitraum
+Ausschreibungslos --> "lieferzeitraum" Zeitraum
+Ausschreibungslos --> "WunschKuendingungsfrist" Zeitraum
+Ausschreibungslos --> "WunschZahlungsziel" Zeitraum
+class Betrag {
+    + Wert : decimal <<get>> <<set>>
+}
+COM <|-- Betrag
+Betrag --> "Waehrung" Waehrungscode
+abstract class COM {
+    + <<override>> Equals(b:object) : bool
+    + Equals(b:COM) : bool
+    + <<override>> GetHashCode() : int
+    + IsValid() : bool
+    + Guid : string <<get>> <<set>>
+}
+class "IEquatable`1"<T> {
+}
+class "IDictionary`2"<T1,T2> {
+}
+"IEquatable`1" "<COM>" <|-- COM
+COM --> "UserProperties<string,JToken>" "IDictionary`2"
+class Dienstleistung {
+    + Bezeichnung : string <<get>> <<set>>
+}
+COM <|-- Dienstleistung
+Dienstleistung --> "Dienstleistungstyp" Dienstleistungstyp
+class Energieherkunft {
+    + AnteilProzent : decimal <<get>> <<set>>
+}
+COM <|-- Energieherkunft
+Energieherkunft --> "Erzeugungsart" Erzeugungsart
+class Energiemix {
+    + Energiemixnummer : int <<get>> <<set>>
+    + Bezeichnung : string <<get>> <<set>>
+    + Bemerkung : string <<get>> <<set>>
+    + Gueltigkeitsjahr : int <<get>> <<set>>
+    + CO2Emission : decimal? <<get>> <<set>>
+    + Atommuell : decimal? <<get>> <<set>>
+    + OekoTopTen : bool? <<get>> <<set>>
+    + Website : string <<get>> <<set>>
+}
+class "List`1"<T> {
+}
+COM <|-- Energiemix
+Energiemix --> "Energieart" Sparte
+Energiemix --> "oekozertifikat<Oekozertifikat>" "List`1"
+Energiemix --> "Oekolabel<Oekolabel>" "List`1"
+Energiemix --> "Anteil<Energieherkunft>" "List`1"
+class GenericStringStringInfo {
+    + KeyColumn : string <<get>> <<set>>
+    + Value : string <<get>> <<set>>
+    + ToKeyValuePair() : KeyValuePair<string, string>
+}
+COM <|-- GenericStringStringInfo
+class Geokoordinaten {
+    + Breitengrad : decimal <<get>> <<set>>
+    + Laengengrad : decimal <<get>> <<set>>
+}
+COM <|-- Geokoordinaten
+class Geraet {
+    + Geraetenummer : string <<get>> <<set>>
+}
+COM <|-- Geraet
+Geraet --> "Geraeteeigenschaften" Geraeteeigenschaften
+class Geraeteeigenschaften {
+    + Geraetemerkmal : Geraetemerkmal? <<get>> <<set>>
+}
+COM <|-- Geraeteeigenschaften
+Geraeteeigenschaften --> "Geraetetyp" Geraetetyp
+class Hardware {
+    + Bezeichnung : string <<get>> <<set>>
+    + Geraetenummer : string <<get>> <<set>>
+    + Geraetereferenz : string <<get>> <<set>>
+}
+COM <|-- Hardware
+Hardware --> "Geraetetyp" Geraetetyp
+Hardware --> "Geraeteeigenschaften" Geraeteeigenschaften
+class Katasteradresse {
+    + Gemarkung_flur : string <<get>> <<set>>
+    + Flurstueck : string <<get>> <<set>>
+}
+COM <|-- Katasteradresse
+class Konzessionsabgabe {
+    + Kosten : decimal <<get>> <<set>>
+    + Kategorie : string <<get>> <<set>>
+}
+COM <|-- Konzessionsabgabe
+Konzessionsabgabe --> "Satz" AbgabeArt
+class Kostenblock {
+    + Kostenblockbezeichnung : string <<get>> <<set>>
+}
+class "List`1"<T> {
+}
+COM <|-- Kostenblock
+Kostenblock --> "SummeKostenblock" Betrag
+Kostenblock --> "Kostenpositionen<Kostenposition>" "List`1"
+class Kostenposition {
+    + Positionstitel : string <<get>> <<set>>
+    + Von : DateTime? <<get>> <<set>>
+    + Bis : DateTime? <<get>> <<set>>
+    + Artikelbezeichnung : string <<get>> <<set>>
+    + Artikeldetail : string <<get>> <<set>>
+}
+COM <|-- Kostenposition
+Kostenposition --> "Menge" Menge
+Kostenposition --> "Zeitmenge" Menge
+Kostenposition --> "Einzelpreis" Preis
+Kostenposition --> "BetragKostenposition" Betrag
+class KriteriumsWert {
+    + Wert : string <<get>> <<set>>
+}
+COM <|-- KriteriumsWert
+KriteriumsWert --> "Kriterium" Tarifregionskriterium
+class Marktrolle {
+    + Rollencodenummer : string <<get>> <<set>>
+    + Code : string <<get>> <<set>>
+}
+COM <|-- Marktrolle
+class Menge {
+    + Wert : decimal <<get>> <<set>>
+}
+COM <|-- Menge
+Menge --> "Einheit" Mengeneinheit
+class Messlokationszuordnung {
+    + MesslokationsId : string <<get>> <<set>>
+    + Arithmetik : ArithmetischeOperation? <<get>> <<set>>
+    + GueltigSeit : DateTime? <<get>> <<set>>
+    + GueltigBis : DateTime? <<get>> <<set>>
+}
+COM <|-- Messlokationszuordnung
+class Notiz {
+    + Autor : string <<get>> <<set>>
+    + Inhalt : string <<get>> <<set>>
+    + CleanUpSapNotes(context:StreamingContext) : void
+}
+COM <|-- Notiz
+Notiz --> "Zeitpunkt" DateTime
+class PhysikalischerWert {
+    + Wert : decimal <<get>> <<set>>
+    + PhysikalischerWert(wert:decimal, einheit:Mengeneinheit)
+    + PhysikalischerWert(wert:decimal, einheitString:string)
+}
+COM <|-- PhysikalischerWert
+PhysikalischerWert --> "Einheit" Mengeneinheit
+class PositionsAufAbschlag {
+    + Bezeichnung : string <<get>> <<set>>
+    + Beschreibung : string <<get>> <<set>>
+    + AufAbschlagswert : decimal <<get>> <<set>>
+}
+COM <|-- PositionsAufAbschlag
+PositionsAufAbschlag --> "AufAbschlagstyp" AufAbschlagstyp
+PositionsAufAbschlag --> "AufAbschlagswaehrung" Waehrungseinheit
+class Preis {
+    + Wert : decimal <<get>> <<set>>
+    + Status : Preisstatus? <<get>> <<set>>
+}
+COM <|-- Preis
+Preis --> "Einheit" Waehrungseinheit
+Preis --> "Bezugswert" Mengeneinheit
+class Preisgarantie {
+    + Beschreibung : string <<get>> <<set>>
+}
+COM <|-- Preisgarantie
+Preisgarantie --> "Preisgarantietyp" Preisgarantietyp
+Preisgarantie --> "ZeitlicheGueltigkeit" Zeitraum
+class Preisposition {
+    + Leistungsbezeichung : string <<get>> <<set>>
+    + Zeitbasis : Zeiteinheit? <<get>> <<set>>
+    + Tarifzeit : Tarifzeit? <<get>> <<set>>
+    + BdewArtikelnummer : BDEWArtikelnummer? <<get>> <<set>>
+    + Zonungsgroesse : Bemessungsgroesse? <<get>> <<set>>
+}
+class "List`1"<T> {
+}
+COM <|-- Preisposition
+Preisposition --> "Berechnungsmethode" Kalkulationsmethode
+Preisposition --> "Leistungstyp" Leistungstyp
+Preisposition --> "Preiseinheit" Waehrungseinheit
+Preisposition --> "Bezugsgroesse" Mengeneinheit
+Preisposition --> "Zu_abschlaege" PositionsAufAbschlag
+Preisposition --> "Preisstaffeln<Preisstaffel>" "List`1"
+class Preisstaffel {
+    + Einheitspreis : decimal <<get>> <<set>>
+    + StaffelgrenzeVon : decimal <<get>> <<set>>
+    + StaffelgrenzeBis : decimal <<get>> <<set>>
+}
+COM <|-- Preisstaffel
+Preisstaffel --> "Sigmoidparameter" Sigmoidparameter
+class Rechnungsposition {
+    + Positionsnummer : int <<get>> <<set>>
+    + Positionstext : string <<get>> <<set>>
+    + Zeiteinheit : Mengeneinheit? <<get>> <<set>>
+    + Artikelnummer : BDEWArtikelnummer? <<get>> <<set>>
+    + LokationsId : string <<get>> <<set>>
+    + VertragskontoId : string <<get>> <<set>>
+    + VertragsId : string <<get>> <<set>>
+    + Status : RechnungspositionsStatus? <<get>> <<set>>
+}
+COM <|-- Rechnungsposition
+Rechnungsposition --> "LieferungVon" DateTime
+Rechnungsposition --> "LieferungBis" DateTime
+Rechnungsposition --> "PositionsMenge" Menge
+Rechnungsposition --> "ZeitbezogeneMenge" Menge
+Rechnungsposition --> "Einzelpreis" Preis
+Rechnungsposition --> "TeilsummeNetto" Betrag
+Rechnungsposition --> "TeilrabattNetto" Betrag
+Rechnungsposition --> "TeilsummeSteuer" Steuerbetrag
+class RechnungspositionFlat {
+    + Positionsnummer : int <<get>> <<set>>
+    + Positionstext : string <<get>> <<set>>
+    + LokationsId : string <<get>> <<set>>
+    + VertragskontoId : string <<get>> <<set>>
+    + PreisWert : decimal <<get>> <<set>>
+    + PreisStatus : Preisstatus? <<get>> <<set>>
+    + PositionsMengeWert : decimal? <<get>> <<set>>
+    + PositionsMengeEinheit : Mengeneinheit? <<get>> <<set>>
+    + VertragsId : string <<get>> <<set>>
+    + Status : RechnungspositionsStatus? <<get>> <<set>>
+    + RechnungspositionFlat(rp:Rechnungsposition)
+    + ToRechnungsposition() : Rechnungsposition
+    + RechnungspositionFlat()
+}
+COM <|-- RechnungspositionFlat
+RechnungspositionFlat --> "LieferungVon" DateTime
+RechnungspositionFlat --> "LieferungBis" DateTime
+RechnungspositionFlat --> "PreisEinheit" Waehrungseinheit
+RechnungspositionFlat --> "PreisBezugswert" Mengeneinheit
+class RegionaleGueltigkeit {
+}
+class "List`1"<T> {
+}
+COM <|-- RegionaleGueltigkeit
+RegionaleGueltigkeit --> "Gueltigkeitstyp" Gueltigkeitstyp
+RegionaleGueltigkeit --> "KriteriumsWerte<KriteriumsWert>" "List`1"
+class RegionalePreisgarantie {
+}
+Preisgarantie <|-- RegionalePreisgarantie
+RegionalePreisgarantie --> "RegionaleGueltigkeit" RegionaleGueltigkeit
+class RegionalePreisstaffel {
+}
+Preisstaffel <|-- RegionalePreisstaffel
+RegionalePreisstaffel --> "RegionaleGueltigkeit" RegionaleGueltigkeit
+class RegionalerAufAbschlag {
+    + Bezeichnung : string <<get>> <<set>>
+    + Beschreibung : string <<get>> <<set>>
+    + AufAbschlagstyp : AufAbschlagstyp? <<get>> <<set>>
+    + AufAbschlagsziel : AufAbschlagsziel? <<get>> <<set>>
+    + Einheit : Waehrungseinheit? <<get>> <<set>>
+    + Website : string <<get>> <<set>>
+    + Tarifnamensaenderungen : string <<get>> <<set>>
+}
+class "List`1"<T> {
+}
+COM <|-- RegionalerAufAbschlag
+RegionalerAufAbschlag --> "Zusatzprodukte<string>" "List`1"
+RegionalerAufAbschlag --> "Voraussetzungen<string>" "List`1"
+RegionalerAufAbschlag --> "Gueltigkeitszeitraum" Zeitraum
+RegionalerAufAbschlag --> "Energiemixaenderung" Energiemix
+RegionalerAufAbschlag --> "Vertagskonditionsaenderung" Vertragskonditionen
+RegionalerAufAbschlag --> "Garantieaenderung" Preisgarantie
+RegionalerAufAbschlag --> "Einschraenkungsaenderung" Tarifeinschraenkung
+RegionalerAufAbschlag --> "Staffeln<RegionalePreisstaffel>" "List`1"
+class RegionaleTarifpreisposition {
+    + Einheit : string <<get>> <<set>>
+    + Mengeneinheitstaffel : Mengeneinheit? <<get>> <<set>>
+}
+class "List`1"<T> {
+}
+COM <|-- RegionaleTarifpreisposition
+RegionaleTarifpreisposition --> "Preistyp" Preistyp
+RegionaleTarifpreisposition --> "Bezugseinheit" Mengeneinheit
+RegionaleTarifpreisposition --> "Preisstaffeln<RegionalePreisstaffel>" "List`1"
+class Regionskriterium {
+    + Sparte : Sparte? <<get>> <<set>>
+    + Wert : string <<get>> <<set>>
+}
+COM <|-- Regionskriterium
+Regionskriterium --> "Gueltigkeitstyp" Gueltigkeitstyp
+Regionskriterium --> "Mengenoperator" Mengenoperator
+Regionskriterium --> "Regionskriteriumtyp" Regionskriteriumtyp
+class Rufnummer {
+    + rufnummer : string <<get>> <<set>>
+}
+COM <|-- Rufnummer
+Rufnummer --> "Nummerntyp" Rufnummernart
+class Sigmoidparameter {
+    + A : decimal <<get>> <<set>>
+    + B : decimal <<get>> <<set>>
+    + C : decimal <<get>> <<set>>
+    + D : decimal <<get>> <<set>>
+}
+COM <|-- Sigmoidparameter
+class Steuerbetrag {
+    + Basiswert : decimal <<get>> <<set>>
+    + Steuerwert : decimal <<get>> <<set>>
+}
+COM <|-- Steuerbetrag
+Steuerbetrag --> "Steuerkennzeichen" Steuerkennzeichen
+Steuerbetrag --> "Waehrung" Waehrungscode
+class Tarifberechnungsparameter {
+    + Berechnungsmethode : Tarifkalkulationsmethode? <<get>> <<set>>
+    + MesspreisInGPEnthalten : string <<get>> <<set>>
+    + Messpreistyp : Messpreistyp? <<get>> <<set>>
+    + KwInklusive : decimal? <<get>> <<set>>
+    + KwWeitereMengen : decimal? <<get>> <<set>>
+    + MesspreisBeruecksichtigen : bool? <<get>> <<set>>
+}
+COM <|-- Tarifberechnungsparameter
+Tarifberechnungsparameter --> "HoechstpreisNT" Preis
+Tarifberechnungsparameter --> "HoechstpreisHT" Preis
+Tarifberechnungsparameter --> "Mindestpreis" Preis
+class Tarifeinschraenkung {
+}
+class "List`1"<T> {
+}
+COM <|-- Tarifeinschraenkung
+Tarifeinschraenkung --> "Zusatzprodukte<string>" "List`1"
+Tarifeinschraenkung --> "Voraussetzungen<Voraussetzungen>" "List`1"
+Tarifeinschraenkung --> "Einschraenkungzaehler" Geraet
+Tarifeinschraenkung --> "Einschraenkungleistung" Menge
+class Tarifpreisposition {
+    + Mengeneinheitstaffel : Mengeneinheit? <<get>> <<set>>
+}
+COM <|-- Tarifpreisposition
+Tarifpreisposition --> "Preistyp" Preistyp
+Tarifpreisposition --> "Einheit" Waehrungseinheit
+Tarifpreisposition --> "Bezugseinheit" Mengeneinheit
+Tarifpreisposition --> "Preisstaffeln" Preisstaffel
+class Unterschrift {
+    + Ort : string <<get>> <<set>>
+    + Datum : DateTime? <<get>> <<set>>
+    + Name : string <<get>> <<set>>
+}
+COM <|-- Unterschrift
+class Verbrauch {
+    {static} Verbrauch()
+    + Obiskennzahl : string <<get>> <<set>>
+    + Wert : decimal <<get>> <<set>>
+    + Type : Verbrauchsmengetyp? <<get>> <<set>>
+    + {static} FixSapCdsBug(v:Verbrauch) : Verbrauch
+    + FixSapCdsBug() : void
+}
+enum SapTimezone {
+    UTC,
+    GMT,
+    CET,
+    MEZ,
+    CEST,
+    MESZ,
+}
+COM <|-- Verbrauch
+Verbrauch --> "CENTRAL_EUROPE_STANDARD_TIME" TimeZoneInfo
+Verbrauch --> "Startdatum" DateTime
+Verbrauch --> "Enddatum" DateTime
+Verbrauch --> "Wertermittlungsverfahren" Wertermittlungsverfahren
+Verbrauch --> "Einheit" Mengeneinheit
+Verbrauch +-- SapTimezone
+class Vertragskonditionen {
+    + Beschreibung : string <<get>> <<set>>
+    + AnzahlAbschlaege : int? <<get>> <<set>>
+    + StartAbrechnungsjahr : DateTime? <<get>> <<set>>
+    + TurnusablesungIntervall : int? <<get>> <<set>>
+    + NetznutzungsabrechnungIntervall : int? <<get>> <<set>>
+    + Haushaltskunde : bool? <<get>> <<set>>
+    + Netznutzungsvertrag : NetznutzungsVertrag? <<get>> <<set>>
+    + Netznutzungszahler : Netznutzungszahler? <<get>> <<set>>
+    + Netznutzungsabrechnungsvariante : Netznutzungsabrechnungsvariante? <<get>> <<set>>
+    + Netznutzungsabrechnungsgrundlage : Netznutzungsabrechnungsgrundlage? <<get>> <<set>>
+}
+COM <|-- Vertragskonditionen
+Vertragskonditionen --> "Vertragslaufzeit" Zeitraum
+Vertragskonditionen --> "Kuendigungsfrist" Zeitraum
+Vertragskonditionen --> "Vertragsverlaengerung" Zeitraum
+Vertragskonditionen --> "Abschlagszyklus" Zeitraum
+Vertragskonditionen --> "GeplanteTurnusablesung" Zeitraum
+Vertragskonditionen --> "Netznutzungsabrechnung" Zeitraum
+class Vertragsteil {
+    + Lokation : string <<get>> <<set>>
+    + Verbrauchsaufteilung : string <<get>> <<set>>
+}
+COM <|-- Vertragsteil
+Vertragsteil --> "Vertragsteilbeginn" DateTime
+Vertragsteil --> "Vertragsteilende" DateTime
+Vertragsteil --> "VertraglichFixierteMenge" Menge
+Vertragsteil --> "MinimaleAbnahmemenge" Menge
+Vertragsteil --> "MaximaleAbnahmemenge" Menge
+Vertragsteil --> "Jahresverbrauchsprognose" Menge
+Vertragsteil --> "Kundenwert" Menge
+class Zaehlwerk {
+    + ZaehlwerkId : string <<get>> <<set>>
+    + Bezeichnung : string <<get>> <<set>>
+    + ObisKennzahl : string <<get>> <<set>>
+    + Wandlerfaktor : decimal <<get>> <<set>>
+    + Kennzahl : string <<get>> <<set>>
+    + Schwachlastfaehig : Schwachlastfaehig? <<get>> <<set>>
+    + Verbrauchsart : Verbrauchsart? <<get>> <<set>>
+    + Unterbrechbarkeit : Unterbrechbarkeit? <<get>> <<set>>
+    + Waermenutzung : Waermenutzung? <<get>> <<set>>
+    + Steuerbefreit : bool? <<get>> <<set>>
+    + Vorkommastelle : int? <<get>> <<set>>
+    + Nachkommastelle : int? <<get>> <<set>>
+}
+class "List`1"<T> {
+}
+COM <|-- Zaehlwerk
+Zaehlwerk --> "Richtung" Energierichtung
+Zaehlwerk --> "Einheit" Mengeneinheit
+Zaehlwerk --> "Verwendungszwecke<Verwendungszweck>" "List`1"
+Zaehlwerk --> "Konzessionsabgabe" Konzessionsabgabe
+class Zeitraum {
+    + Einheit : Zeiteinheit? <<get>> <<set>>
+    + Dauer : decimal? <<get>> <<set>>
+    + Startdatum : DateTime? <<get>> <<set>>
+    + Enddatum : DateTime? <<get>> <<set>>
+    + FillNullValues(context:StreamingContext) : void
+}
+COM <|-- Zeitraum
+class Zustaendigkeit {
+    + Jobtitel : string <<get>> <<set>>
+    + Abteilung : string <<get>> <<set>>
+    + Themengebiet : string <<get>> <<set>>
+}
+COM <|-- Zustaendigkeit
+enum AbgabeArt {
+    KAS,
+    SA,
+    SAS,
+    TA,
+    TAS,
+    TK,
+    TKS,
+    TS,
+    TSS,
+}
+enum Angebotsstatus {
+    KONZEPTION,
+    UNVERBINDLICH,
+    VERBINDLICH,
+    BEAUFTRAGT,
+    UNGUELTIG,
+    ABGELEHNT,
+    NACHGEFASST,
+    AUSSTEHEND,
+    ERLEDIGT,
+}
+enum Anrede {
+    HERR,
+    FRAU,
+    EHELEUTE,
+    FIRMA,
+    INDIVIDUELL,
+    DR,
+}
+enum ArithmetischeOperation {
+    ADDITION,
+    SUBTRAKTION,
+    MULTIPLIKATION,
+    DIVISION,
+}
+enum AufAbschlagstyp {
+    RELATIV,
+    ABSOLUT,
+}
+enum AufAbschlagsziel {
+    ARBEITSPREIS_HT,
+    ARBEITSPREIS_NT,
+    ARBEITSPREIS_HT_NT,
+    GRUNDPREIS,
+    GESAMTPREIS,
+}
+enum Ausschreibungsportal {
+    ENPORTAL,
+    ENERGIE_AGENTUR,
+    BMWI,
+    ENERGIE_HANDELSPLATZ,
+    BUND,
+    VERA_ONLINE,
+    ISPEX,
+    ENERGIEMARKTPLATZ,
+    EVERGABE,
+    DTAD,
+}
+enum Ausschreibungsstatus {
+    PHASE1,
+    PHASE2,
+    PHASE3,
+    PHASE4,
+}
+enum Ausschreibungstyp {
+    OEFFENTLICHRECHTLICH,
+    EUROPAWEIT,
+}
+enum BDEWArtikelnummer {
+    LEISTUNG,
+    LEISTUNG_PAUSCHAL,
+    GRUNDPREIS,
+    REGELENERGIE_ARBEIT,
+    REGELENERGIE_LEISTUNG,
+    NOTSTROMLIEFERUNG_ARBEIT,
+    NOTSTROMLIEFERUNG_LEISTUNG,
+    RESERVENETZKAPAZITAET,
+    RESERVELEISTUNG,
+    ZUSAETZLICHE_ABLESUNG,
+    PRUEFGEBUEHREN_AUSSERPLANMAESSIG,
+    WIRKARBEIT,
+    SINGULAER_GENUTZTE_BETRIEBSMITTEL,
+    ABGABE_KWKG,
+    ABSCHLAG,
+    KONZESSIONSABGABE,
+    ENTGELT_FERNAUSLESUNG,
+    UNTERMESSUNG,
+    BLINDMEHRARBEIT,
+    ENTGELT_ABRECHNUNG,
+    SPERRKOSTEN,
+    ENTSPERRKOSTEN,
+    MAHNKOSTEN,
+    MEHR_MINDERMENGEN,
+    INKASSOKOSTEN,
+    BLINDMEHRLEISTUNG,
+    ENTGELT_MESSUNG_ABLESUNG,
+    ENTGELT_EINBAU_BETRIEB_WARTUNG_MESSTECHNIK,
+    AUSGLEICHSENERGIE,
+    ZAEHLEINRICHTUNG,
+    WANDLER_MENGENUMWERTER,
+    KOMMUNIKATIONSEINRICHTUNG,
+    TECHNISCHE_STEUEREINRICHTUNG,
+    PARAGRAF_19_STROM_NEV_UMLAGE,
+    BEFESTIGUNGSEINRICHTUNG,
+    OFFSHORE_HAFTUNGSUMLAGE,
+    FIXE_ARBEITSENTGELTKOMPONENTE,
+    FIXE_LEISTUNGSENTGELTKOMPONENTE,
+    UMLAGE_ABSCHALTBARE_LASTEN,
+    MEHRMENGE,
+    MINDERMENGE,
+    ENERGIESTEUER,
+    SMARTMETER_GATEWAY,
+    STEUERBOX,
+    MSB_INKL_MESSUNG,
+}
+enum Bearbeitungsstatus {
+    OFFEN,
+    IN_BEARBEITUNG,
+    ABGESCHLOSSEN,
+    STORNIERT,
+    QUITTIERT,
+    IGNORIERT,
+}
+enum Bemessungsgroesse {
+    WIRKARBEIT_EL,
+    LEISTUNG_EL,
+    BLINDARBEIT_KAP,
+    BLINDARBEIT_IND,
+    BLINDLEISTUNG_KAP,
+    BLINDLEISTUNG_IND,
+    WIRKARBEIT_TH,
+    LEISTUNG_TH,
+    VOLUMEN,
+    VOLUMENSTROM,
+    BENUTZUNGSDAUER,
+    ANZAHL,
+}
+enum Bilanzierungsmethode {
+    RLM,
+    SLP,
+    TLP_GEMEINSAM,
+    TLP_GETRENNT,
+    PAUSCHAL,
+    IMS,
+}
+enum BoTyp {
+    ANSPRECHPARTNER,
+    ENERGIEMENGE,
+    GESCHAEFTSOBJEKT,
+    GESCHAEFTSPARTNER,
+    MARKTLOKATION,
+    MARKTTEILNEHMER,
+    MESSLOKATION,
+    ZAEHLER,
+    KOSTEN,
+    TARIF,
+    PREISBLATT,
+    PREISBLATTNETZNUTZUNG,
+    PREISBLATTMESSUNG,
+    PREISBLATTUMLAGEN,
+    PREISBLATTDIENSTLEISTUNG,
+    PREISBLATTKONZESSIONSABGABE,
+    ZEITREIHE,
+    LASTGANG,
+}
+enum Dienstleistungstyp {
+    DATENBEREITSTELLUNG_TAEGLICH,
+    DATENBEREITSTELLUNG_WOECHENTLICH,
+    DATENBEREITSTELLUNG_MONATLICH,
+    DATENBEREITSTELLUNG_JAEHRLICH,
+    DATENBEREITSTELLUNG_HISTORISCHE_LG,
+    DATENBEREITSTELLUNG_STUENDLICH,
+    DATENBEREITSTELLUNG_VIERTELJAEHRLICH,
+    DATENBEREITSTELLUNG_HALBJAEHRLICH,
+    DATENBEREITSTELLUNG_MONATLICH_ZUSAETZLICH,
+    DATENBEREITSTELLUNG_EINMALIG,
+    AUSLESUNG_2X_TAEGLICH_FERNAUSLESUNG,
+    AUSLESUNG_TAEGLICH_FERNAUSLESUNG,
+    AUSLESUNG_LGK_MANUELL_MSB,
+    AUSLESUNG_MONATLICH_SLP_FERNAUSLESUNG,
+    AUSLESUNG_JAEHRLICH_SLP_FERNAUSLESUNG,
+    AUSLESUNG_MDE_SLP,
+    ABLESUNG_MONATLICH_SLP,
+    ABLESUNG_VIERTELJAEHRLICH_SLP,
+    ABLESUNG_HALBJAEHRLICH_SLP,
+    ABLESUNG_JAEHRLICH_SLP,
+    AUSLESUNG_SLP_FERNAUSLESUNG,
+    ABLESUNG_SLP_ZUSAETZLICH_MSB,
+    ABLESUNG_SLP_ZUSAETZLICH_KUNDE,
+    AUSLESUNG_LGK_FERNAUSLESUNG_ZUSAETZLICH_MSB,
+    AUSLESUNG_MOATLICH_FERNAUSLESUNG,
+    AUSLESUNG_STUENDLICH_FERNAUSLESUNG,
+    ABLESUNG_MONATLICH_LGK,
+    AUSLESUNG_TEMERATURMENGENUMWERTER,
+    AUSLESUNG_ZUSTANDSMENGENUMWERTER,
+    AUSLESUNG_SYSTEMMENGENUMWERTER,
+    AUSLESUNG_VORGANG_SLP,
+    AUSLESUUNG_KOMPAKTMENGENUMWERTER,
+    AUSLESUNG_MDE_LGK,
+    SPERRUNG_SLP,
+    ENTSPERRUNG_SLP,
+    SPERRUNG_RLM,
+    ENTSPERRUNG_RLM,
+    MAHNKOSTEN,
+    INKASSOKOSTEN,
+}
+enum EncryptionScheme {
+    SodiumSymmetricAEAD,
+    SodiumAsymmetricPublicKeyBox,
+    BouncyCastleCMS,
+}
+enum Energierichtung {
+    AUSSP,
+    EINSP,
+}
+enum Erzeugungsart {
+    KWK,
+    WIND,
+    SOLAR,
+    KERNKRAFT,
+    WASSER,
+    GEOTHERMIE,
+    BIOMASSE,
+    KOHLE,
+    GAS,
+    SONSTIGE,
+    SONSTIGE_EEG,
+}
+enum Fernschaltung {
+    VORHANDEN,
+    NICHT_VORHANDEN,
+}
+enum Gasqualitaet {
+    H_GAS= 1,
+    L_GAS= 2,
+    HGAS= 1,
+    LGAS= 2,
+}
+enum Gebiettyp {
+    REGELZONE,
+    MARKTGEBIET,
+    BILANZIERUNGSGEBIET,
+    VERTEILNETZ,
+    TRANSPORTNETZ,
+    REGIONALNETZ,
+    AREALNETZ,
+    GRUNDVERSORGUNGSGEBIET,
+    VERSORGUNGSGEBIET,
+}
+enum Geraetemerkmal {
+    EINTARIF,
+    ZWEITARIF,
+    MEHRTARIF,
+    GAS_G2_5,
+    GAS_G4,
+    GAS_G6,
+    GAS_G10,
+    GAS_G16,
+    GAS_G25,
+    GAS_G40,
+    GAS_G65,
+    GAS_G100,
+    GAS_G160,
+    GAS_G250,
+    GAS_G400,
+    GAS_G650,
+    GAS_G1000,
+    GAS_G1600,
+    GAS_G2500,
+    IMPULSGEBER_G4_G100,
+    IMPULSGEBER_G100,
+    MODEM_GSM,
+    MODEM_GPRS,
+    MODEM_FUNK,
+    MODEM_GSM_O_LG,
+    MODEM_GSM_M_LG,
+    MODEM_FESTNETZ,
+    MODEM_GPRS_M_LG,
+    PLC_COM,
+    ETHERNET_KOM,
+    DSL_KOM,
+    LTE_KOM,
+    RUNDSTEUEREMPFAENGER,
+    TARIFSCHALTGERAET,
+    ZUSTANDS_MU,
+    TEMPERATUR_MU,
+    KOMPAKT_MU,
+    SYSTEM_MU,
+}
+enum Geraetetyp {
+    WECHSELSTROMZAEHLER,
+    DREHSTROMZAEHLER,
+    ZWEIRICHTUNGSZAEHLER,
+    RLM_ZAEHLER,
+    IMS_ZAEHLER,
+    BALGENGASZAEHLER,
+    MAXIMUMZAEHLER,
+    MULTIPLEXANLAGE,
+    PAUSCHALANLAGE,
+    VERSTAERKERANLAGE,
+    SUMMATIONSGERAET,
+    IMPULSGEBER,
+    EDL_21_ZAEHLERAUFSATZ,
+    VIER_QUADRANTEN_LASTGANGZAEHLER,
+    MENGENUMWERTER,
+    STROMWANDLER,
+    SPANNUNGSWANDLER,
+    DATENLOGGER,
+    KOMMUNIKATIONSANSCHLUSS,
+    MODEM,
+    TELEKOMMUNIKATIONSEINRICHTUNG,
+    DREHKOLBENGASZAEHLER,
+    TURBINENRADGASZAEHLER,
+    ULTRASCHALLZAEHLER,
+    WIRBELGASZAEHLER,
+    MODERNE_MESSEINRICHTUNG,
+    ELEKTRONISCHER_HAUSHALTSZAEHLER,
+    STEUEREINRICHTUNG,
+    TECHNISCHESTEUEREINRICHTUNG,
+    TARIFSCHALTGERAET,
+    RUNDSTEUEREMPFAENGER,
+    OPTIONALE_ZUS_ZAEHLEINRICHTUNG,
+    MESSWANDLERSATZ_IMS_MME,
+    KOMBIMESSWANDLER_IMS_MME,
+    TARIFSCHALTGERAET_IMS_MME,
+    RUNDSTEUEREMPFAENGER_IMS_MME,
+    TEMPERATUR_KOMPENSATION,
+    HOECHSTBELASTUNGS_ANZEIGER,
+    SONSTIGES_GERAET,
+    SMARTMETERGATEWAY,
+    STEUERBOX,
+    BLOCKSTROMWANDLER,
+    KOMBIMESSWANDLER,
+}
+enum Geschaeftspartnerrolle {
+    LIEFERANT,
+    DIENSTLEISTER,
+    KUNDE,
+    INTERESSENT,
+    MARKTPARTNER,
+}
+enum Gueltigkeitstyp {
+    NICHT_IN,
+}
+enum Kalkulationsmethode {
+    KEINE,
+    STAFFELN,
+    ZONEN,
+    VORZONEN_GP,
+    SIGMOID,
+    BLINDARBEIT_GT_50_PROZENT,
+    BLINDARBEIT_GT_40_PROZENT,
+    AP_GP_ZONEN,
+    LP_INSTALL_LEISTUNG,
+    AP_TRANSPORT_ODER_VERTEILNETZ,
+    AP_TRANSPORT_ODER_VERTEILNETZ_ORTSVERTEILNETZ_SIGMOID,
+    LP_JAHRESVERBRAUCH,
+    LP_TRANSPORT_ODER_VERTEILNETZ,
+    LP_TRANSPORT_ODER_VERTEILNETZ_ORTSVERTEILNETZ_SIGMOID,
+    FUNKTIONEN,
+    VERBRAUCH_UEBER_SLP_GRENZE_FUNKTIONSBEZOGEN_WEITERE_BERECHNUNG_ALS_LGK,
+}
+enum Kontaktart {
+    ANSCHREIBEN,
+    TELEFONAT,
+    FAX,
+    E_MAIL,
+    SMS,
+}
+enum Kostenklasse {
+}
+enum Kundengruppe {
+    RLM,
+    SLP_S_G0,
+    SLP_S_G1,
+    SLP_S_G2,
+    SLP_S_G3,
+    SLP_S_G4,
+    SLP_S_G5,
+    SLP_S_G6,
+    SLP_S_G7,
+    SLP_S_L0,
+    SLP_S_L1,
+    SLP_S_L2,
+    SLP_S_H0,
+    SLP_S_SB,
+    SLP_S_HZ,
+    SLP_S_WP,
+    SLP_G_GKO,
+    SLP_G_GHA,
+    SLP_G_GMK,
+    SLP_G_GBD,
+    SLP_G_GGA,
+    SLP_G_GBH,
+    SLP_G_GBA,
+    SLP_G_GWA,
+    SLP_G_GGB,
+    SLP_G_GPD,
+    SLP_G_GMF,
+    SLP_G_HEF,
+    SLP_G_HMF,
+    SLP_G_HKO,
+}
+enum KundengruppeKA {
+    S_TARIF_25000,
+    S_TARIF_100000,
+    S_TARIF_500000,
+    S_TARIF_G_500000,
+    S_SONDERKUNDE,
+    G_KOWA_25000,
+    G_KOWA_100000,
+    G_KOWA_500000,
+    G_KOWA_G_500000,
+    G_TARIF_25000,
+    G_TARIF_100000,
+    G_TARIF_500000,
+    G_TARIF_G_500000,
+    G_SONDERKUNDE,
+    SONDER_KAS,
+    SONDER_SAS,
+    SONDER_TAS,
+    SONDER_TKS,
+    SONDER_TSS,
+}
+enum Kundentyp {
+    PRIVAT,
+    LANDWIRT,
+    SONSTIGE,
+    HAUSHALT,
+    DIREKTHEIZUNG,
+    GEMEINSCHAFT_MFH,
+    KIRCHE,
+    KWK,
+    LADESAEULE,
+    BELEUCHTUNG_OEFFENTLICH,
+    BELEUCHTUNG_STRASSE,
+    SPEICHERHEIZUNG,
+    UNTERBR_EINRICHTUNG,
+    WAERMEPUMPE,
+}
+enum Landescode {
+    AC,
+    AD,
+    AE,
+    AF,
+    AG,
+    AI,
+    AL,
+    AM,
+    AN,
+    AO,
+    AQ,
+    AR,
+    AS,
+    AT,
+    AU,
+    AW,
+    AX,
+    AZ,
+    BA,
+    BB,
+    BD,
+    BE,
+    BF,
+    BG,
+    BH,
+    BI,
+    BJ,
+    BL,
+    BM,
+    BN,
+    BO,
+    BQ,
+    BR,
+    BS,
+    BT,
+    BU,
+    BV,
+    BW,
+    BY,
+    BZ,
+    CA,
+    CC,
+    CD,
+    CF,
+    CG,
+    CH,
+    CI,
+    CK,
+    CL,
+    CM,
+    CN,
+    CO,
+    CP,
+    CR,
+    CS,
+    CU,
+    CV,
+    CW,
+    CX,
+    CY,
+    CZ,
+    DE,
+    DG,
+    DJ,
+    DK,
+    DM,
+    DO,
+    DZ,
+    EA,
+    EC,
+    EE,
+    EG,
+    EH,
+    ER,
+    ES,
+    ET,
+    EU,
+    FI,
+    FJ,
+    FK,
+    FM,
+    FO,
+    FR,
+    FX,
+    GA,
+    GB,
+    GD,
+    GE,
+    GF,
+    GG,
+    GH,
+    GI,
+    GL,
+    GM,
+    GN,
+    GP,
+    GQ,
+    GR,
+    GS,
+    GT,
+    GU,
+    GW,
+    GY,
+    HK,
+    HM,
+    HN,
+    HR,
+    HT,
+    HU,
+    IC,
+    ID,
+    IE,
+    IL,
+    IM,
+    IN,
+    IO,
+    IQ,
+    IR,
+    IS,
+    IT,
+    JE,
+    JM,
+    JO,
+    JP,
+    KE,
+    KG,
+    KH,
+    KI,
+    KM,
+    KN,
+    KP,
+    KR,
+    KW,
+    KY,
+    KZ,
+    LA,
+    LB,
+    LC,
+    LI,
+    LK,
+    LR,
+    LS,
+    LT,
+    LU,
+    LV,
+    LY,
+    MA,
+    MC,
+    MD,
+    ME,
+    MF,
+    MG,
+    MH,
+    MK,
+    ML,
+    MM,
+    MN,
+    MO,
+    MP,
+    MQ,
+    MR,
+    MS,
+    MT,
+    MU,
+    MV,
+    MW,
+    MX,
+    MY,
+    MZ,
+    NA,
+    NC,
+    NE,
+    NF,
+    NG,
+    NI,
+    NL,
+    NO,
+    NP,
+    NR,
+    NT,
+    NU,
+    NZ,
+    OM,
+    PA,
+    PE,
+    PF,
+    PG,
+    PH,
+    PK,
+    PL,
+    PM,
+    PN,
+    PR,
+    PS,
+    PT,
+    PW,
+    PY,
+    QA,
+    RE,
+    RO,
+    RS,
+    RU,
+    RW,
+    SA,
+    SB,
+    SC,
+    SD,
+    SE,
+    SF,
+    SG,
+    SH,
+    SI,
+    SJ,
+    SK,
+    SL,
+    SM,
+    SN,
+    SO,
+    SR,
+    SS,
+    ST,
+    SU,
+    SV,
+    SX,
+    SY,
+    SZ,
+    TA,
+    TC,
+    TD,
+    TF,
+    TG,
+    TJ,
+    TK,
+    TL,
+    TM,
+    TN,
+    TO,
+    TP,
+    TR,
+    TT,
+    TV,
+    TW,
+    TZ,
+    UA,
+    UG,
+    UK,
+    UM,
+    US,
+    UY,
+    UZ,
+    VA,
+    VC,
+    VE,
+    VG,
+    VI,
+    VN,
+    VU,
+    WF,
+    WS,
+    XK,
+    YE,
+    YT,
+    YU,
+    ZA,
+    ZM,
+    ZR,
+    ZW,
+}
+enum Leistungstyp {
+    ARBEITSPREIS_WIRKARBEIT,
+    LEISTUNGSPREIS_WIRKLEISTUNG,
+    ARBEITSPREIS_BLINDARBEIT_IND,
+    ARBEITSPREIS_BLINDARBEIT_KAP,
+    GRUNDPREIS,
+    MEHRMINDERMENGE,
+    MESSSTELLENBETRIEB,
+    MESSDIENSTLEISTUNG,
+    MESSDIENSTLEISTUNG_INKL_MESSUNG,
+    ABRECHNUNG,
+    KONZESSIONS_ABGABE,
+    KWK_UMLAGE,
+    OFFSHORE_UMLAGE,
+    ABLAV_UMLAGE,
+    REGELENERGIE_UMLAGE,
+    BILANZIERUNG_UMLAGE,
+    AUSLESUNG_ZUSAETZLICH,
+    ABLESUNG_ZUSAETZLICH,
+    ABRECHNUNG_ZUSAETZLICH,
+    SPERRUNG,
+    ENTSPERRUNG,
+    MAHNKOSTEN,
+    INKASSOKOSTEN,
+}
+enum Lokationstyp {
+    MaLo,
+    MeLo,
+}
+enum Marktrolle {
+    NB,
+    LF,
+    MSB,
+    MDL,
+    DL,
+    BKV,
+    BIKO,
+    UENB,
+    KUNDE_SELBST_NN,
+    MGV,
+    EIV,
+    RB,
+    KUNDE,
+    INTERESSENT,
+}
+enum Mengeneinheit {
+    WH= 2,
+    KW= 3,
+    KWH= 1000 * WH,
+    MW= 1000 * KW,
+    MWH= 1000 * KWH,
+    ANZAHL= 7,
+    KUBIKMETER= 11,
+    STUNDE= 13,
+    TAG= 17,
+    MONAT= 19,
+    JAHR= 12 * MONAT,
+    VAR= 23,
+    KVAR= 1000 * VAR,
+    VARH= 29,
+    KVARH= 1000 * VARH,
+}
+enum Mengenoperator {
+    KLEINER_ALS,
+    GROESSER_ALS,
+    GLEICH,
+}
+enum Messpreistyp {
+    MESSPREIS_G4,
+    MESSPREIS_G6,
+    MESSPREIS_G10,
+    MESSPREIS_G16,
+    MESSPREIS_G25,
+    MESSPREIS_G40,
+    ELEKTRONISCHER_AUFSATZ,
+    SMART_METER_MESSPREIS_G2_5,
+    SMART_METER_MESSPREIS_G4,
+    SMART_METER_MESSPREIS_G6,
+    SMART_METER_MESSPREIS_G10,
+    SMART_METER_MESSPREIS_G16,
+    SMART_METER_MESSPREIS_G25,
+    SMART_METER_MESSPREIS_G40,
+    VERRECHNUNGSPREIS_ET_WECHSEL,
+    VERRECHNUNGSPREIS_ET_DREH,
+    VERRECHNUNGSPREIS_ZT_WECHSEL,
+    VERRECHNUNGSPREIS_ZT_DREH,
+    VERRECHNUNGSPREIS_L_ET,
+    VERRECHNUNGSPREIS_L_ZT,
+    VERRECHNUNGSPREIS_SM,
+    AUFSCHLAG_WANDLER,
+    AUFSCHLAG_TARIFSCHALTUNG,
+}
+enum Messwerterfassung {
+    FERNAUSLESBAR,
+    MANUELL_AUSGELESENE,
+}
+enum Netzebene {
+    NSP,
+    MSP,
+    HSP,
+    HSS,
+    MSP_NSP_UMSP,
+    HSP_MSP_UMSP,
+    HSS_HSP_UMSP,
+    HD,
+    MD,
+    ND,
+}
+enum Netznutzungsabrechnungsgrundlage {
+    LIEFERSCHEIN,
+    ABWEICHENDE_GRUNDLAGE,
+}
+enum Netznutzungsabrechnungsvariante {
+    ARBEITSPREIS_GRUNDPREIS,
+    ARBEITSPREIS_LEISTUNGSPREIS,
+}
+enum NetznutzungsVertrag {
+    KUNDEN_NB,
+    LIEFERANTEN_NB,
+}
+enum Netznutzungszahler {
+    KUNDE,
+    LIEFERANT,
+}
+enum NNRechnungsart {
+    SELBSTAUSGESTELLT,
+}
+enum NNRechnungstyp {
+    ABSCHLAGSRECHNUNG,
+    TURNUSRECHNUNG,
+    MONATSRECHNUNG,
+    WIMRECHNUNG,
+    ZWISCHENRECHNUNG,
+    INTEGRIERTE_13TE_RECHNUNG,
+    _13TE_RECHNUNG,
+    MEHRMINDERMENGENRECHNUNG,
+}
+enum Oekolabel {
+    GASGREEN_GRUENER_STROM,
+    GASGREEN,
+    GRUENER_STROM_GOLD,
+    GRUENER_STROM_SILBER,
+    GRUENER_STROM,
+    GRUENES_GAS,
+    NATURWATT_STROM,
+    OK_POWER,
+    RENEWABLE_PLUS,
+    WATERGREEN,
+    WATERGREEN_PLUS,
+}
+enum Oekozertifikat {
+    CMS_EE02,
+    EECS,
+    FRAUNHOFER,
+    BET,
+    KLIMA_INVEST,
+    LGA,
+    FREIBERG,
+    RECS,
+    REGS_EGL,
+    TUEV,
+    TUEV_HESSEN,
+    TUEV_NORD,
+    TUEV_RHEINLAND,
+    TUEV_SUED,
+    TUEV_SUED_EE01,
+    TUEV_SUED_EE02,
+}
+enum Preisgarantietyp {
+    ALLE_PREISBESTANDTEILE_NETTO,
+    PREISBESTANDTEILE_OHNE_ABGABEN,
+    NUR_ENERGIEPREIS,
+}
+enum Preismodell {
+    TRANCHE,
+}
+enum Preisstatus {
+    VORLAEUFIG,
+    ENDGUELTIG,
+}
+enum Preistyp {
+    ARBEITSPREIS_EINTARIF,
+    ARBEITSPREIS_HT,
+    ARBEITSPREIS_NT,
+    LEISTUNGSPREIS,
+    MESSPREIS,
+    ENTGELT_ABLESUNG,
+    ENTGELT_ABRECHNUNG,
+    ENTGELT_MSB,
+    PROVISION,
+}
+enum Prioritaet {
+    SEHR_NIEDRIG,
+    NIEDRIG,
+    NORMAL,
+    HOCH,
+    SEHR_HOCH,
+}
+enum Rechnungslegung {
+    MONATSRECHN,
+    ABSCHL_MONATSRECHN,
+    ABSCHL_JAHRESRECHN,
+    MONATSRECHN_JAHRESRECHN,
+    VORKASSE,
+}
+enum RechnungspositionsStatus {
+    ROH= 0,
+    ROH_AUSGENOMMEN= 1,
+    ABRECHENBAR= 2,
+    ABRECHENBAR_AUSGENOMMEN= 3,
+    ABGERECHNET= 4,
+}
+enum Rechnungsstatus {
+    GEPRUEFT_OK,
+    GEPRUEFT_FEHLERHAFT,
+    GEBUCHT,
+    BEZAHLT,
+}
+enum Rechnungstyp {
+    ABSCHLAGSRECHNUNG,
+    TURNUSRECHNUNG,
+    MONATSRECHNUNG,
+    WIMRECHNUNG,
+    ZWISCHENRECHNUNG,
+    INTEGRIERTE_13TE_RECHNUNG,
+    ZUSAETZLICHE_13TE_RECHNUNG,
+    MEHRMINDERMENGENRECHNUNG,
+}
+enum Regionskriteriumtyp {
+    BUNDESLANDKENNZIFFER,
+    BUNDESLAND_NAME,
+    MARKTGEBIET_NUMMER,
+    MARKTGEBIET_NAME,
+    REGELGEBIET_NUMMER,
+    REGELGEBIET_NAME,
+    NETZBETREIBER_NUMMER,
+    NETZBETREIBER_NAME,
+    BILANZIERUNGS_GEBIET_NUMMER,
+    MSB_NUMMER,
+    MSB_NAME,
+    VERSORGER_NUMMER,
+    VERSORGER_NAME,
+    GRUNDVERSORGER_NUMMER,
+    GRUNDVERSORGER_NAME,
+    KREIS_NAME,
+    KREISKENNZIFFER,
+    GEMEINDE_NAME,
+    GEMEINDEKENNZIFFER,
+    POSTLEITZAHL,
+    ORT,
+    EINWOHNERZAHL_GEMEINDE,
+    EINWOHNERZAHL_ORT,
+    KM_UMKREIS,
+    BUNDESWEIT,
+}
+enum Rollencodetyp {
+    BDEW,
+    DVGW,
+    GLN,
+}
+enum Rufnummernart {
+    RUF_ZENTRALE,
+    FAX_ZENTRALE,
+    SAMMELRUF,
+    SAMMELFAX,
+    ABTEILUNGRUF,
+    ABTEILUNGFAX,
+    RUF_DURCHWAHL,
+    FAX_DURCHWAHL,
+    MOBIL_NUMMER,
+}
+enum Schwachlastfaehig {
+    NICHT_SCHWACHLASTFAEHIG,
+    SCHWACHLASTFAEHIG,
+}
+enum Servicetyp {
+    STROM_NB,
+    STROM_MSB,
+    STROM_LIEF,
+    GAS_NB,
+    GAS_MSB,
+    GAS_LIEF,
+}
+enum Sparte {
+    STROM,
+    GAS,
+    FERNWAERME,
+    NAHWAERME,
+    WASSER,
+    ABWASSER,
+}
+enum Steuerkennzeichen {
+    UST_19,
+    UST_7,
+    VST_0,
+    VST_19,
+    VST_7,
+    RCV,
+}
+enum Tarifart {
+    EINTARIF,
+    ZWEITARIF,
+    MEHRTARIF,
+    SMART_METER,
+    LEISTUNGSGEMESSEN,
+}
+enum Tarifkalkulationsmethode {
+    STAFFELN,
+    ZONEN,
+    BESTABRECHNUNG_STAFFEL,
+    PAKETPREIS,
+}
+enum Tarifmerkmal {
+    VORKASSE,
+    PAKET,
+    KOMBI,
+    FESTPREIS,
+    BAUSTROM,
+    HAUSLICHT,
+    HEIZSTROM,
+}
+enum Tarifregionskriterium {
+    NETZ_NUMMER,
+    POSTLEITZAHL,
+    ORT,
+    GRUNDVERSORGER_NUMMER,
+}
+enum Tariftyp {
+    GRUND_ERSATZVERSORGUNG,
+    GRUNDVERSORGUNG,
+    ERSATZVERSORGUNG,
+    SONDERTARIF,
+}
+enum Tarifzeit {
+    TZ_STANDARD,
+    TZ_HT,
+    TZ_NT,
+}
+enum Themengebiet {
+    ALLGEMEINER_INFORMATIONSAUSTAUSCH,
+    AN_UND_ABMELDUNG,
+    ANSPRECHPARTNER_ALLGEMEIN,
+    ANSPRECHPARTNER_BDEW_DVGW,
+    ANSPRECHPARTNER_IT_TECHNIK,
+    BILANZIERUNG,
+    BILANZKREISKOORDINATOR,
+    BILANZKREISVERANTWORTLICHER,
+    DATENFORMATE_ZERTIFIKATE_VERSCHLUESSELUNGEN,
+    DEBITORENMANAGEMENT,
+    DEMAND_SIDE_MANAGEMENT,
+    EDI_VEREINBARUNG,
+    EDIFACT,
+    ENERGIEDATENMANAGEMENT,
+    FAHRPLANMANAGEMENT,
+    ALOCAT,
+    APERAK,
+    CONTRL,
+    INVOIC,
+    MSCONS,
+    ORDERS,
+    ORDERSP,
+    REMADV,
+    UTILMD,
+    GABI,
+    GELI,
+    GERAETERUECKGABE,
+    GERAETEWECHSEL,
+    GPKE,
+    INBETRIEBNAHME,
+    KAPAZITAETSMANAGEMENT,
+    KLAERFAELLE,
+    LASTGAENGE_RLM,
+    LIEFERANTENRAHMENVERTRAG,
+    LIEFERANTENWECHSEL,
+    MABIS,
+    MAHNWESEN,
+    MARKTGEBIETSVERANTWORTLICHER,
+    MARKTKOMMUNIKATION,
+    MEHR_MINDERMENGEN,
+    MSB_MDL,
+    NETZABRECHNUNG,
+    NETZENTGELTE,
+    NETZMANAGEMENT,
+    RECHT,
+    REGULIERUNGSMANAGEMENT,
+    REKLAMATIONEN,
+    SPERREN_ENTSPERREN_INKASSO,
+    STAMMDATEN,
+    STOERUNGSFAELLE,
+    TECHNISCHE_FRAGEN,
+    UMSTELLUNG_INVOIC,
+    VERSCHLUESSELUNG_SIGNATUR,
+    VERTRAGSMANAGEMENT,
+    VERTRIEB,
+    WIM,
+    ZAEHLERSTAENDE_SLP,
+    ZAHLUNGSVERKEHR,
+    ZUORDNUNGSVEREINBARUNG,
+}
+enum Titel {
+    DR,
+    PROF,
+    PROF_DR,
+}
+enum Unterbrechbarkeit {
+    UV,
+    NUV,
+}
+enum Verbrauchsart {
+    KL,
+    KLW,
+    KLWS,
+    W,
+    WS,
+}
+enum Verbrauchsmengetyp {
+    ARBEITLEISTUNGTAGESPARAMETERABHMALO,
+    VERANSCHLAGTEJAHRESMENGE,
+    TUMKUNDENWERT,
+}
+enum Vertragsart {
+    ENERGIELIEFERVERTRAG,
+    NETZNUTZUNGSVERTRAG,
+    BILANZIERUNGSVERTRAG,
+    MESSSTELLENBETRIEBSVERTRAG,
+    BUENDELVERTRAG,
+}
+enum Vertragsform {
+    ONLINE,
+    DIREKT,
+    FAX,
+}
+enum Vertragstatus {
+    IN_ARBEIT,
+    UEBERMITTELT,
+    ANGENOMMEN,
+    AKTIV,
+    ABGELEHNT,
+    WIDERRUFEN,
+    STORNIERT,
+    GEKUENDIGT,
+    BEENDET,
+}
+enum Verwendungszweck {
+    NETZNUTZUNGSABRECHNUNG,
+    BILANZKREISABRECHNUNG,
+    MEHRMINDERMBENGENABRECHNUNG,
+    ENDKUNDENABRECHNUNG,
+}
+enum Voraussetzungen {
+    EINZUGSERMAECHTIGUNG,
+    ZEITPUNKT,
+    LIEFERANBINDUNG_EINE,
+    LIEFERANBINDUNG_ALLE,
+    GEWERBE,
+    LASTPROFIL,
+    ZAEHLERTYP_GROESSE,
+    AUSSCHLUSS_GROSSVERBRAUCHER,
+    NEUKUNDE,
+    BESTIMMTE_VERTRAGSFORMALITAETEN,
+    SELBSTABLESUNG,
+    ONLINEVORAUSSETZUNG,
+    MINDESTUMSATZ,
+    ZUSATZPRODUKT,
+    NEUKUNDE_MIT_VORAUSSETZUNGEN,
+    DIREKTVERTRIEB,
+    ANSCHLUSSART,
+    ANSCHLUSSWERT,
+    ALTER_KUNDENANLAGE,
+    ANLAGEBESCHAFFENHEIT,
+    BETRIEBSSTUNDENBEGRENZUNG,
+    FREIGABEZEITEN,
+    FAMILIENSTRUKTUR,
+    MITGLIEDSCHAFT,
+    STAATLICHE_FOERDERUNG,
+    BESONDERE_VERBRAUCHSSTELLE,
+    NIEDRIGENERGIE,
+    ORTSTEILE_LIEFERGEBIET,
+    WAERMEBEDARF_ERDGAS,
+    MAX_ZAEHLER_LIEFERSTELLEN,
+    LIEFERUNGSBESCHRAENKUNG_GASART,
+    KOMBI_BONI,
+    ALTVERTRAG,
+    VORGESCHRIEBENE_ZUSATZANLAGE,
+    MEHRERE_ZAEHLER_ABNAHMESTELLEN,
+    BESTIMMTER_ABNAHMEFALL,
+    ZUSATZMODALITAET,
+    NACHWEIS_ZAHLUNGSFAEHIGKEIT,
+    UMSTELLUNG_ENERGIEART,
+}
+enum Waehrungscode {
+    AFN,
+    ALL,
+    AMD,
+    ANG,
+    AOA,
+    ARS,
+    AUD,
+    AWG,
+    AZN,
+    BAM,
+    BBD,
+    BDT,
+    BGN,
+    BHD,
+    BIF,
+    BMD,
+    BND,
+    BOB,
+    BOV,
+    BRL,
+    BSD,
+    BTN,
+    BWP,
+    BYN,
+    BYR,
+    BZD,
+    CAD,
+    CDF,
+    CHE,
+    CHF,
+    CHW,
+    CLF,
+    CLP,
+    CNY,
+    COP,
+    COU,
+    CRC,
+    CUC,
+    CUP,
+    CVE,
+    CZK,
+    DJF,
+    DKK,
+    DOP,
+    DZD,
+    EGP,
+    ERN,
+    ETB,
+    EUR,
+    FJD,
+    FKP,
+    GBP,
+    GEL,
+    GHS,
+    GIP,
+    GMD,
+    GNF,
+    GTQ,
+    GYD,
+    HKD,
+    HNL,
+    HRK,
+    HTG,
+    HUF,
+    IDR,
+    ILS,
+    INR,
+    IQD,
+    IRR,
+    ISK,
+    JMD,
+    JOD,
+    JPY,
+    KES,
+    KGS,
+    KHR,
+    KMF,
+    KPW,
+    KRW,
+    KWD,
+    KYD,
+    KZT,
+    LAK,
+    LBP,
+    LKR,
+    LRD,
+    LSL,
+    LTL,
+    LYD,
+    MAD,
+    MDL,
+    MGA,
+    MKD,
+    MMK,
+    MNT,
+    MOP,
+    MRO,
+    MUR,
+    MVR,
+    MWK,
+    MXN,
+    MXV,
+    MYR,
+    MZN,
+    NAD,
+    NGN,
+    NIO,
+    NOK,
+    NPR,
+    NZD,
+    OMR,
+    PAB,
+    PEN,
+    PGK,
+    PHP,
+    PKR,
+    PLN,
+    PYG,
+    QAR,
+    RON,
+    RSD,
+    RUB,
+    RUR,
+    RWF,
+    SAR,
+    SBD,
+    SCR,
+    SDG,
+    SEK,
+    SGD,
+    SHP,
+    SLL,
+    SOS,
+    SRD,
+    SSP,
+    STD,
+    SVC,
+    SYP,
+    SZL,
+    THB,
+    TJS,
+    TMT,
+    TND,
+    TOP,
+    TRY,
+    TTD,
+    TWD,
+    TZS,
+    UAH,
+    UGX,
+    USD,
+    USN,
+    USS,
+    UYI,
+    UYU,
+    UZS,
+    VEF,
+    VND,
+    VUV,
+    WST,
+    XAF,
+    XAG,
+    XAU,
+    XBA,
+    XBB,
+    XBC,
+    XBD,
+    XCD,
+    XDR,
+    XOF,
+    XPD,
+    XPF,
+    XPT,
+    XSU,
+    XTS,
+    XUA,
+    XXX,
+    YER,
+    ZAR,
+    ZMW,
+    ZWL,
+}
+enum Waehrungseinheit {
+    EUR,
+    CT,
+}
+enum Waermenutzung {
+    SPEICHERHEIZUNG,
+    WAERMEPUMPE,
+    DIREKTHEIZUNG,
+}
+enum Wertermittlungsverfahren {
+    PROGNOSE,
+    MESSUNG,
+}
+enum Zaehlerauspraegung {
+    EINRICHTUNGSZAEHLER,
+    ZWEIRICHTUNGSZAEHLER,
+}
+enum Zaehlertyp {
+    DREHSTROMZAEHLER,
+    BALGENGASZAEHLER,
+    DREHKOLBENZAEHLER,
+    SMARTMETER,
+    LEISTUNGSZAEHLER,
+    MAXIMUMZAEHLER,
+    TURBINENRADGASZAEHLER,
+    ULTRASCHALLGASZAEHLER,
+    WECHSELSTROMZAEHLER,
+}
+enum Zeiteinheit {
+    SEKUNDE,
+    MINUTE,
+    STUNDE,
+    VIERTEL_STUNDE,
+    TAG,
+    WOCHE,
+    MONAT,
+    QUARTAL,
+    HALBJAHR,
+    JAHR,
+}
+enum Zeitreihentyp {
+    EGS,
+    LGS,
+    NZR,
+    SES,
+    SLS,
+    TES,
+    TLS,
+}
+class Bo4eUri {
+    + Bo4eUri(uri:string)
+    + GetBoName() : string
+    + GetBoType() : Type
+    + {static} FullyUnescapeDataString(stringToUnescape:string) : string
+    + {static} IsValid(uri:string) : bool
+    + {static} GetUri(bo:BusinessObject, includeUserProperties:bool) : Bo4eUri
+    + GetQueryObject(boType:Type, i:int) : JObject
+    + AddFilter(filterObject:IDictionary<string, object>) : Bo4eUri
+}
+class StringUriConverter {
+    + <<override>> CanConvertFrom(context:ITypeDescriptorContext, sourceType:Type) : bool
+    + <<override>> ConvertFrom(context:ITypeDescriptorContext, culture:CultureInfo, value:object) : object
+}
+Uri <|-- Bo4eUri
+TypeConverter <|-- StringUriConverter
+class BoKey {
+    + IgnoreInheritedKeys : bool <<get>>
+    + BoKey(ignoreInheritedKeys:bool)
+}
+Attribute <|-- BoKey
+enum DataCategory {
+    ADDRESS,
+    DEVICE,
+    FINANCE,
+    LEGAL,
+    NAME,
+    METER_READING,
+    POD,
+    USER_PROPERTIES,
+}
+class DataCategoryAttribute {
+    + DataCategoryAttribute(enums:object[])
+}
+class "HashSet`1"<T> {
+}
+Attribute <|-- DataCategoryAttribute
+DataCategoryAttribute --> "Mapping<Enum>" "HashSet`1"
+class FieldName {
+    + text : string <<get>>
+    + FieldName(text:string, language:Language)
+}
+Attribute <|-- FieldName
+FieldName --> "language" Language
+enum Language {
+    EN,
+    DE,
+    FR,
+    SP,
+}
+class MappingAttribute {
+    + MappingAttribute(enums:object[])
+}
+class "List`1"<T> {
+}
+Attribute <|-- MappingAttribute
+MappingAttribute --> "Mapping<Enum>" "List`1"
+class MultiLangResolver {
+    + MultiLangResolver(lang:Language)
+}
+DefaultContractResolver <|-- MultiLangResolver
+class NonOfficialAttribute {
+    + NonOfficialAttribute(enums:object[])
+    + HasCategory(noc:NonOfficialCategory) : bool
+}
+Attribute <|-- NonOfficialAttribute
+enum NonOfficialCategory {
+    UNSPECIFIED,
+    MISSING,
+    REGULATORY_REQUIREMENTS,
+    PROPOSED_DELETION,
+    CUSTOMER_REQUIREMENTS,
+}
+class LogObject {
+    + Id : string <<get>> <<set>>
+    + LogMessage : string <<get>> <<set>>
+}
+BusinessObject <|-- LogObject
+LogObject --> "Datetime" DateTime
+enum BDEWArtikelnummerEdi {
+    _9990001000053,
+    _9990001000079,
+    _9990001000087,
+    _9990001000128,
+    _9990001000136,
+    _9990001000144,
+    _9990001000152,
+    _9990001000160,
+    _9990001000178,
+    _9990001000186,
+    _9990001000219,
+    _9990001000269,
+    _9990001000285,
+    _9990001000334,
+    _9990001000376,
+    _9990001000417,
+    _9990001000433,
+    _9990001000475,
+    _9990001000508,
+    _9990001000532,
+    _9990001000540,
+    _9990001000558,
+    _9990001000566,
+    _9990001000574,
+    _9990001000582,
+    _9990001000590,
+    _9990001000615,
+    _9990001000623,
+    _9990001000631,
+    _9990001000649,
+    _9990001000657,
+    _9990001000665,
+    _9990001000673,
+    _9990001000681,
+    _9990001000699,
+    _9990001000706,
+    _9990001000714,
+    _9990001000722,
+    _9990001000730,
+    _9990001000748,
+    _9990001000756,
+    _9990001000764,
+    _9990001000772,
+    _9990001000780,
+    _9990001000798,
+}
+enum EnergierichtungEdi {
+    Z06,
+    Z07,
+}
+enum FernschaltungEdi {
+    Z06,
+    Z07,
+}
+enum GeraetetypEdi {
+    AHZ,
+    WSZ,
+    LAZ,
+    MAZ,
+    MME,
+    DKZ,
+    BGZ,
+    TRZ,
+    UGZ,
+    WGZ,
+    MRG,
+    EHZ,
+    IVA,
+}
+enum GeschaeftspartnerrolleEdi {
+    SU,
+    DEB,
+    UD,
+    MS,
+    MR,
+    VY,
+}
+enum KontaktartEdi {
+    EM,
+    FX,
+    TE,
+    AJ,
+    AL,
+}
+enum MesswerterfassungEdi {
+    AMR,
+    MMR,
+}
+enum NetzebeneEdi {
+    E03,
+    E04,
+    E05,
+    E06,
+    E07,
+    E08,
+    E09,
+    Y01,
+    Y02,
+    Y03,
+}
+enum NetznutzungsabrechnungsgrundlageEdi {
+    Z12,
+    Z13,
+}
+enum NetznutzungsabrechnungsvarianteEdi {
+    Z14,
+    Z15,
+}
+enum NetznutzungsvertragEdi {
+    Z08,
+    Z09,
+}
+enum NetznutzungszahlerEdi {
+    Z10,
+    Z11,
+}
+enum RollencodetypEdi {
+    _293,
+    _332,
+}
+enum SchwachlastfaehigEdi {
+    Z59,
+    Z60,
+}
+enum TarifartEdi {
+    ETZ,
+    ZTZ,
+    NTZ,
+}
+enum UnterbrechbarkeitEdi {
+    Unterbrechbare_Verbrauchseinrichtung,
+    Nicht_Unterbrechbare_Verbrauchseinrichtung,
+}
+enum VerbrauchsartEdi {
+    Z64,
+    Z65,
+    Z66,
+}
+enum VerwendungszweckEdi {
+    Z84,
+    Z85,
+    Z86,
+    Z47,
+}
+enum WaehrungseinheitEdi {
+    EUR,
+}
+enum WaermenutzungEdi {
+    Z56,
+    Z57,
+    Z61,
+}
+enum WertermittlungsverfahrenEdi {
+    _220,
+    _67,
+    _201,
+    _20,
+}
+enum ZaehlerauspraegungEdi {
+    ERZ,
+    ZRZ,
+}
+enum ZaehlertypEdi {
+    AHZ,
+    WSZ,
+    LAZ,
+    MAZ,
+    MME,
+    DKZ,
+    BGZ,
+    TRZ,
+    UGZ,
+    WGZ,
+    MRG,
+    EHZ,
+    IVA,
+}
+enum ZeiteinheitEdi {
+    ANN,
+}
+class LenientBo4eUriConverter {
+    + <<override>> CanConvert(objectType:Type) : bool
+    + <<override>> ReadJson(reader:JsonReader, objectType:Type, existingValue:object, serializer:JsonSerializer) : object
+    + <<override>> CanWrite : bool <<get>>
+    + <<override>> WriteJson(writer:JsonWriter, value:object, serializer:JsonSerializer) : void
+}
+JsonConverter <|-- LenientBo4eUriConverter
+class LenientDateTimeConverter {
+    + LenientDateTimeConverter(defaultDateTime:DateTime?)
+    + LenientDateTimeConverter()
+    + <<override>> CanConvert(objectType:Type) : bool
+    + <<override>> ReadJson(reader:JsonReader, objectType:Type, existingValue:object, serializer:JsonSerializer) : object
+    + <<override>> CanWrite : bool <<get>>
+    + <<override>> WriteJson(writer:JsonWriter, value:object, serializer:JsonSerializer) : void
+}
+JsonConverter <|-- LenientDateTimeConverter
+class LenientEnumListConverter {
+    + <<override>> CanConvert(objectType:Type) : bool
+    + <<override>> ReadJson(reader:JsonReader, objectType:Type, existingValue:object, serializer:JsonSerializer) : object
+    + <<override>> CanWrite : bool <<get>>
+    + <<override>> WriteJson(writer:JsonWriter, value:object, serializer:JsonSerializer) : void
+}
+JsonConverter <|-- LenientEnumListConverter
+class LenientParsingExtensions <<static>> {
+    + {static} GetJsonSerializerSettings(lenient:LenientParsing) : JsonSerializerSettings
+    + {static} GetJsonSerializerSettings(lenient:LenientParsing, userPropertiesWhiteList:HashSet<string>) : JsonSerializerSettings
+}
+enum LenientParsing {
+    Strict= 0,
+    DateTime= 1,
+    EnumList= 2,
+    Bo4eUri= 4,
+    SetInitialDateIfNull= 8,
+    StringToInt= 16,
+    MOST_LENIENT= ~0,
+}
+class LenientStringToIntConverter {
+    + <<override>> CanConvert(objectType:Type) : bool
+    + <<override>> ReadJson(reader:JsonReader, objectType:Type, existingValue:object, serializer:JsonSerializer) : object
+    + <<override>> CanWrite : bool <<get>>
+    + <<override>> WriteJson(writer:JsonWriter, value:object, serializer:JsonSerializer) : void
+}
+JsonConverter <|-- LenientStringToIntConverter
+enum UTILMD9013 {
+    E01,
+    E02,
+    E03,
+    E05,
+    E06,
+    E11,
+    E15,
+    E17,
+    Z01,
+    Z09,
+    Z15,
+    Z26,
+    Z29,
+    Z33,
+    Z37,
+    Z38,
+    Z39,
+    Z40,
+    Z41,
+    Z44,
+    Z69,
+    ZB2,
+    ZB3,
+    ZB6,
+    ZC6,
+    ZC7,
+    ZC8,
+    ZG9,
+    ZH0,
+    ZH1,
+    ZH2,
+    ZD0,
+    ZD9,
+    ZE3,
+    ZE4,
+    ZE5,
+    ZE6,
+    ZE7,
+    ZE8,
+    ZE9,
+    ZF0,
+    ZF1,
+    ZF2,
+    ZF3,
+    ZF4,
+    ZF5,
+    ZF6,
+    ZF7,
+    ZF8,
+    ZG5,
+    ZG6,
+    ZG7,
+    ZG8,
+    ZI8,
+    ZI9,
+    ZJ0,
+    ZJ1,
+    ZJ4,
+}
+enum UTILMD7433 {
+    Z04,
+    Z06,
+}
+@enduml

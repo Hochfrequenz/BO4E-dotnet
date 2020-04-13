@@ -1,0 +1,7 @@
+@startuml
+class BoEdiMapper {
+    + {static} ToEdi(objectName:string, objectValue:string) : string
+    + {static} ReplaceWithEdiValues(o:Object) : JObject
+}
+BoEdiMapper o-> "_logger" ILogger
+@enduml

@@ -1,0 +1,9 @@
+@startuml
+class PhysikalischerWert {
+    + Wert : decimal <<get>> <<set>>
+    + PhysikalischerWert(wert:decimal, einheit:Mengeneinheit)
+    + PhysikalischerWert(wert:decimal, einheitString:string)
+}
+COM <|-- PhysikalischerWert
+PhysikalischerWert --> "Einheit" Mengeneinheit
+@enduml

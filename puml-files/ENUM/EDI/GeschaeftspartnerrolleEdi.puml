@@ -1,0 +1,10 @@
+@startuml
+enum GeschaeftspartnerrolleEdi {
+    SU,
+    DEB,
+    UD,
+    MS,
+    MR,
+    VY,
+}
+@enduml

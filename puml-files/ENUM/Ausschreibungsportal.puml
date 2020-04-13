@@ -1,0 +1,14 @@
+@startuml
+enum Ausschreibungsportal {
+    ENPORTAL,
+    ENERGIE_AGENTUR,
+    BMWI,
+    ENERGIE_HANDELSPLATZ,
+    BUND,
+    VERA_ONLINE,
+    ISPEX,
+    ENERGIEMARKTPLATZ,
+    EVERGABE,
+    DTAD,
+}
+@enduml

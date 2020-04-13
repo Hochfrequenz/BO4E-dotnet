@@ -1,6 +1,6 @@
 ﻿using BO4E.ENUM;
+
 using Newtonsoft.Json;
-using ProtoBuf;
 
 namespace BO4E.BO
 {
@@ -13,15 +13,15 @@ namespace BO4E.BO
         /// <summary>
         /// Sparte, auf die sich die KA bezieht.
         /// </summary>
-        [JsonProperty(Required = Required.Always, Order = 7)]
+        [JsonProperty(Required = Required.Always, Order = 7, PropertyName = "sparte")]
         //[ProtoMember(7)]
-        public Sparte sparte;
+        public Sparte sparte { get; set; }
 
         /// <summary>
         /// Kundegruppe anhand derer die Höhe der Konzessionsabgabe festgelegt ist.
         /// </summary>
-        [JsonProperty(Required = Required.Always, Order = 8)]
+        [JsonProperty(Required = Required.Always, Order = 8, PropertyName = "kundengruppeKA")]
         //[ProtoMember(8)]
-        public KundengruppeKA kundengruppeKA;
+        public KundengruppeKA KundengruppeKA { get; set; }
     }
 }

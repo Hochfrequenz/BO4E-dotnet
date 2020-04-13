@@ -1,0 +1,21 @@
+@startuml
+class Vertragskonditionen {
+    + Beschreibung : string <<get>> <<set>>
+    + AnzahlAbschlaege : int? <<get>> <<set>>
+    + StartAbrechnungsjahr : DateTime? <<get>> <<set>>
+    + TurnusablesungIntervall : int? <<get>> <<set>>
+    + NetznutzungsabrechnungIntervall : int? <<get>> <<set>>
+    + Haushaltskunde : bool? <<get>> <<set>>
+    + Netznutzungsvertrag : NetznutzungsVertrag? <<get>> <<set>>
+    + Netznutzungszahler : Netznutzungszahler? <<get>> <<set>>
+    + Netznutzungsabrechnungsvariante : Netznutzungsabrechnungsvariante? <<get>> <<set>>
+    + Netznutzungsabrechnungsgrundlage : Netznutzungsabrechnungsgrundlage? <<get>> <<set>>
+}
+COM <|-- Vertragskonditionen
+Vertragskonditionen --> "Vertragslaufzeit" Zeitraum
+Vertragskonditionen --> "Kuendigungsfrist" Zeitraum
+Vertragskonditionen --> "Vertragsverlaengerung" Zeitraum
+Vertragskonditionen --> "Abschlagszyklus" Zeitraum
+Vertragskonditionen --> "GeplanteTurnusablesung" Zeitraum
+Vertragskonditionen --> "Netznutzungsabrechnung" Zeitraum
+@enduml

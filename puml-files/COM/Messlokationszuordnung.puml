@@ -1,0 +1,9 @@
+@startuml
+class Messlokationszuordnung {
+    + MesslokationsId : string <<get>> <<set>>
+    + Arithmetik : ArithmetischeOperation? <<get>> <<set>>
+    + GueltigSeit : DateTime? <<get>> <<set>>
+    + GueltigBis : DateTime? <<get>> <<set>>
+}
+COM <|-- Messlokationszuordnung
+@enduml

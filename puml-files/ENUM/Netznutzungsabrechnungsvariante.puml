@@ -1,0 +1,6 @@
+@startuml
+enum Netznutzungsabrechnungsvariante {
+    ARBEITSPREIS_GRUNDPREIS,
+    ARBEITSPREIS_LEISTUNGSPREIS,
+}
+@enduml

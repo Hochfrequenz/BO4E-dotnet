@@ -1,0 +1,10 @@
+@startuml
+class Zeitraum {
+    + Einheit : Zeiteinheit? <<get>> <<set>>
+    + Dauer : decimal? <<get>> <<set>>
+    + Startdatum : DateTime? <<get>> <<set>>
+    + Enddatum : DateTime? <<get>> <<set>>
+    + FillNullValues(context:StreamingContext) : void
+}
+COM <|-- Zeitraum
+@enduml

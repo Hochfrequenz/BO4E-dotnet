@@ -2,13 +2,18 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Security.Cryptography.X509Certificates;
+
 using BO4E.BO;
 using BO4E.Extensions.Encryption;
+
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
+
 using Org.BouncyCastle.Crypto;
 using Org.BouncyCastle.OpenSsl;
+
 using Sodium;
 
 namespace TestBO4EExtensions.Encryption
@@ -45,7 +50,7 @@ namespace TestBO4EExtensions.Encryption
             {
                 exceptionThrown = true;
             }
-            def = new SymmetricEncrypter(symkey);
+            _ = new SymmetricEncrypter(symkey);
             Assert.IsFalse(exceptionThrown);
         }
 
@@ -88,8 +93,8 @@ namespace TestBO4EExtensions.Encryption
                 }
                 string expectedString = JsonConvert.SerializeObject(bo);
                 string actualString = JsonConvert.SerializeObject(boDecrypted);
-                Assert.IsTrue(expectedString == actualString, "Original and encrypted->decrypted object do not match!");
-               
+                Assert.AreEqual(expectedString, actualString, "Original and encrypted->decrypted object do not match!");
+
                 /******* asymmetric test ******/
                 var asykeyPairSender = PublicKeyBox.GenerateKeyPair();
                 var asykeyPairRecipient = PublicKeyBox.GenerateKeyPair();
@@ -104,7 +109,7 @@ namespace TestBO4EExtensions.Encryption
                 }
                 expectedString = JsonConvert.SerializeObject(bo);
                 actualString = JsonConvert.SerializeObject(boDecrypted);
-                Assert.IsTrue(expectedString == actualString, "Original and encrypted->decrypted object do not match!");
+                Assert.AreEqual(expectedString, actualString, "Original and encrypted->decrypted object do not match!");
 
                 /******* X509 + RSA test ******/
                 // encrypt (without needing a private key)
@@ -148,17 +153,15 @@ namespace TestBO4EExtensions.Encryption
 
                 using (X509AsymmetricEncrypter xasydecMultiple = new X509AsymmetricEncrypter(keyPair.Private))
                 {
-                    using (X509AsymmetricEncrypter xasydecMultiple2 = new X509AsymmetricEncrypter(keyPair2.Private))
-                    {
-                        boDecrypted = xasydecMultiple.Decrypt(eoMultiple);
-                        BusinessObject boDecrypted2 = xasydecMultiple2.Decrypt(eoMultiple);
-                        string actualString2 = JsonConvert.SerializeObject(boDecrypted2);
-                        Assert.IsTrue(expectedString == actualString2, "Original and encrypted->decrypted object do not match!");
-                    }
+                    using X509AsymmetricEncrypter xasydecMultiple2 = new X509AsymmetricEncrypter(keyPair2.Private);
+                    boDecrypted = xasydecMultiple.Decrypt(eoMultiple);
+                    BusinessObject boDecrypted2 = xasydecMultiple2.Decrypt(eoMultiple);
+                    string actualString2 = JsonConvert.SerializeObject(boDecrypted2);
+                    Assert.AreEqual(expectedString, actualString2, "Original and encrypted->decrypted object do not match!");
                 }
                 expectedString = JsonConvert.SerializeObject(bo);
                 actualString = JsonConvert.SerializeObject(boDecrypted);
-                Assert.IsTrue(expectedString == actualString, "Original and encrypted->decrypted object do not match!");
+                Assert.AreEqual(expectedString, actualString, "Original and encrypted->decrypted object do not match!");
             }
         }
 
@@ -177,14 +180,14 @@ namespace TestBO4EExtensions.Encryption
         [TestMethod]
         public void TestLogObjectDecryption()
         {
-            byte[] publicKey = Convert.FromBase64String("C1RpdN5DO86swpkegPxEMB60yVSXYLta6PfSnHuYpxA=");
+            //byte[] publicKey = Convert.FromBase64String("C1RpdN5DO86swpkegPxEMB60yVSXYLta6PfSnHuYpxA=");
             byte[] privateKey = Convert.FromBase64String("7BSU9FLrvo8hSk58fs/vHTN4fmRFYbwvI9ZRKmTDt/o=");
             try
             {
                 EncryptedObject eo = JsonConvert.DeserializeObject<EncryptedObjectPublicKeyBox>("{\"versionStruktur\":1,\"boTyp\":\"ENCRYPTEDOBJECTPUBLICKEYBOX\",\"encryptionScheme\":1,\"nonce\":\"YRmjJpSb7irazqWbCwWvNWKlApIjGiRh\",\"cipherText\":\"H315B/1ualMyzg882cXXB2I8Ol19bQQ1RlzohUXIGvbY7xCtkVuZZXmTI3Ff1GLf7NoymoQKqW50k2jmBTsoSmFWhPwKxDlW9vdS71fzuJTXSgfEmXWEhez2cMuNo0CRP/jgWDDUDmu5R5jz0bB+/FxZECOfYR4WFuvTz4jM+G8=\",\"publicKey\":\"enRUmVbcBbnneJCnvaU+ldANIDc/wGfqTUVCtSkVwhU=\"}");
                 Encrypter dec = new AsymmetricEncrypter(privateKey);
                 BusinessObject bo = dec.Decrypt(eo);
-                Assert.AreEqual(typeof(LogObject), bo.GetType());
+                Assert.IsInstanceOfType(bo, typeof(BO4E.BO.LogObject));
             }
             catch (JsonSerializationException)
             {

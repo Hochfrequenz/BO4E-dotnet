@@ -1,0 +1,20 @@
+@startuml
+enum Oekozertifikat {
+    CMS_EE02,
+    EECS,
+    FRAUNHOFER,
+    BET,
+    KLIMA_INVEST,
+    LGA,
+    FREIBERG,
+    RECS,
+    REGS_EGL,
+    TUEV,
+    TUEV_HESSEN,
+    TUEV_NORD,
+    TUEV_RHEINLAND,
+    TUEV_SUED,
+    TUEV_SUED_EE01,
+    TUEV_SUED_EE02,
+}
+@enduml

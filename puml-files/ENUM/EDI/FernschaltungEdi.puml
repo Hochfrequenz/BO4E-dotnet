@@ -1,0 +1,6 @@
+@startuml
+enum FernschaltungEdi {
+    Z06,
+    Z07,
+}
+@enduml

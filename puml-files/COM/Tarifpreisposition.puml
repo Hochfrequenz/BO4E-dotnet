@@ -1,0 +1,10 @@
+@startuml
+class Tarifpreisposition {
+    + Mengeneinheitstaffel : Mengeneinheit? <<get>> <<set>>
+}
+COM <|-- Tarifpreisposition
+Tarifpreisposition --> "Preistyp" Preistyp
+Tarifpreisposition --> "Einheit" Waehrungseinheit
+Tarifpreisposition --> "Bezugseinheit" Mengeneinheit
+Tarifpreisposition --> "Preisstaffeln" Preisstaffel
+@enduml

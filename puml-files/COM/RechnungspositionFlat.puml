@@ -1,0 +1,22 @@
+@startuml
+class RechnungspositionFlat {
+    + Positionsnummer : int <<get>> <<set>>
+    + Positionstext : string <<get>> <<set>>
+    + LokationsId : string <<get>> <<set>>
+    + VertragskontoId : string <<get>> <<set>>
+    + PreisWert : decimal <<get>> <<set>>
+    + PreisStatus : Preisstatus? <<get>> <<set>>
+    + PositionsMengeWert : decimal? <<get>> <<set>>
+    + PositionsMengeEinheit : Mengeneinheit? <<get>> <<set>>
+    + VertragsId : string <<get>> <<set>>
+    + Status : RechnungspositionsStatus? <<get>> <<set>>
+    + RechnungspositionFlat(rp:Rechnungsposition)
+    + ToRechnungsposition() : Rechnungsposition
+    + RechnungspositionFlat()
+}
+COM <|-- RechnungspositionFlat
+RechnungspositionFlat --> "LieferungVon" DateTime
+RechnungspositionFlat --> "LieferungBis" DateTime
+RechnungspositionFlat --> "PreisEinheit" Waehrungseinheit
+RechnungspositionFlat --> "PreisBezugswert" Mengeneinheit
+@enduml

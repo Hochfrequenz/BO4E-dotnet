@@ -1,0 +1,8 @@
+@startuml
+class FieldName {
+    + text : string <<get>>
+    + FieldName(text:string, language:Language)
+}
+Attribute <|-- FieldName
+FieldName --> "language" Language
+@enduml

@@ -1,7 +1,10 @@
 ﻿using System.Collections.Generic;
+
 using BO4E.COM;
 using BO4E.meta;
+
 using Newtonsoft.Json;
+
 using ProtoBuf;
 
 namespace BO4E.BO
@@ -15,23 +18,23 @@ namespace BO4E.BO
         /// <summary>
         ///  Bezeichnung der Region.
         /// </summary>
-        [JsonProperty(Required = Required.Always, Order = 4)]
+        [JsonProperty(Required = Required.Always, Order = 4, PropertyName = "bezeichnung")]
         [ProtoMember(4)]
         [BoKey]
-        public string bezeichnung;
+        public string Bezeichnung { get; set; }
 
         /// <summary>
         /// Positivliste der Kriterien zur Definition der Region.
         /// </summary>
-        [JsonProperty(Required = Required.Always, Order = 5)]
+        [JsonProperty(Required = Required.Always, Order = 5, PropertyName = "positivListe")]
         [ProtoMember(5)]
-        public List<Regionskriterium> positivListe;
+        public List<Regionskriterium> PositivListe { get; set; }
 
         /// <summary>
         /// Negativliste der Kriterien zur Definition der Region. 
         /// </summary>
-        [JsonProperty(Required = Required.Default, Order = 6)]
+        [JsonProperty(Required = Required.Default, Order = 6, PropertyName = "negativListe")]
         [ProtoMember(6)]
-        public List<Regionskriterium> negativListe;
+        public List<Regionskriterium> NegativListe { get; set; }
     }
 }

@@ -11,7 +11,7 @@ namespace TestBO4E
         [TestMethod]
         public void TestBoExpansionMaLo()
         {
-            HashSet<string> result = new HashSet<string>(BusinessObject.GetExpandableFieldNames(typeof(Marktlokation)).Keys);
+            HashSet<string> result = new HashSet<string>(BusinessObject.GetExpandablePropertyNames(typeof(Marktlokation)).Keys);
             Assert.IsTrue(result.Contains("zugehoerigeMesslokationen"));
 
             HashSet<string> result2 = new HashSet<string>(BusinessObject.GetExpandableFieldNames("Marktlokation").Keys);
@@ -22,7 +22,7 @@ namespace TestBO4E
         [TestMethod]
         public void TestBoExpansionMeLo()
         {
-            HashSet<string> result = new HashSet<string>(BusinessObject.GetExpandableFieldNames(typeof(Messlokation)).Keys);
+            HashSet<string> result = new HashSet<string>(BusinessObject.GetExpandablePropertyNames(typeof(Messlokation)).Keys);
             Assert.IsTrue(result.Contains("messadresse"));
             Assert.IsTrue(result.Contains("messlokationszaehler"));
             Assert.IsTrue(result.Contains("messlokationszaehler.zaehlwerke"));
@@ -31,7 +31,7 @@ namespace TestBO4E
         [TestMethod]
         public void TestTypesEnergiemenge()
         {
-            Dictionary<string, Type> result = BusinessObject.GetExpandableFieldNames(typeof(Energiemenge));
+            Dictionary<string, Type> result = BusinessObject.GetExpandablePropertyNames(typeof(Energiemenge));
             Assert.IsTrue(result.ContainsKey("energieverbrauch"));
             Type verbrauchsType = result["energieverbrauch"];
             Assert.IsTrue(verbrauchsType.IsGenericType);

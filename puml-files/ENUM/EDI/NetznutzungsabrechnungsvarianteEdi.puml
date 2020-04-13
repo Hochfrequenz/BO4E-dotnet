@@ -1,0 +1,6 @@
+@startuml
+enum NetznutzungsabrechnungsvarianteEdi {
+    Z14,
+    Z15,
+}
+@enduml

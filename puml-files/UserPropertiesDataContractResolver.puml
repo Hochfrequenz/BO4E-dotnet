@@ -1,0 +1,8 @@
+@startuml
+class UserPropertiesDataContractResolver {
+    + UserPropertiesDataContractResolver(userPropertiesWhiteList:HashSet<string>)
+    + <<override>> ResolveContract(type:Type) : JsonContract
+}
+DefaultContractResolver <|-- UserPropertiesDataContractResolver
+UserPropertiesDataContractResolver o-> "Instance" UserPropertiesDataContractResolver
+@enduml

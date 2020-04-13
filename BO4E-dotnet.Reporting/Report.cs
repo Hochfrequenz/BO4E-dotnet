@@ -1,8 +1,10 @@
-﻿using BO4E.BO;
-using System;
+﻿using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+
+using BO4E.BO;
+
 using static BO4E.Reporting.CompletenessReport;
 
 namespace BO4E.Reporting
@@ -85,7 +87,7 @@ namespace BO4E.Reporting
                     }
                     else
                     {
-                        int userPropertiesIndex = headerNames.IndexOf("userProperties");
+                        int userPropertiesIndex = headerNames.IndexOf(BusinessObject.USER_PROPERTIES_NAME);
                         if (userPropertiesIndex >= 0)
                         {
                             headerNames.RemoveAt(userPropertiesIndex);
@@ -131,7 +133,7 @@ namespace BO4E.Reporting
                             }
                             else
                             {
-                                throw new ArgumentException("invalid values", nameof(reihenfolge));
+                                throw new ArgumentException($"'{reihenItem.Keys.First()}' was not part of {nameof(headerNames)}=[{string.Join(", ", headerNames)}]", nameof(reihenfolge));
                             }
                         }
                         else
@@ -142,7 +144,7 @@ namespace BO4E.Reporting
                 }
                 else
                 {
-                    int userPropertiesIndex = headerNames.IndexOf("userProperties");
+                    int userPropertiesIndex = headerNames.IndexOf(BusinessObject.USER_PROPERTIES_NAME);
                     if (userPropertiesIndex >= 0)
                     {
                         headerNames.RemoveAt(userPropertiesIndex);
@@ -193,17 +195,17 @@ namespace BO4E.Reporting
 
         private Dictionary<List<string>, List<string>> Detect(Type type, char separator, object value, Dictionary<List<string>, List<string>> returnData)
         {
-            var fields = type.GetFields();
-            var fieldsList = fields.Where(s => !s.Name.StartsWith("_")).ToList();
+            var props = type.GetProperties();
+            var nonHiddenProps = props.Where(s => !s.Name.StartsWith("_")).ToList();
             List<string> d = returnData.Values.First();
             List<string> h = returnData.Keys.First();
-            foreach (var field in fieldsList)
+            foreach (var field in nonHiddenProps)
             {
-                if (field.FieldType.IsSubclassOf(typeof(BO4E.COM.COM)))
+                if (field.PropertyType.IsSubclassOf(typeof(BO4E.COM.COM)))
                 {
-                    returnData = Detect(field.FieldType, separator, field.GetValue(value), returnData);
+                    returnData = Detect(field.PropertyType, separator, field.GetValue(value), returnData);
                 }
-                else if ((field.FieldType.IsGenericType && (field.FieldType.GetGenericTypeDefinition() == typeof(List<>))))
+                else if ((field.PropertyType.IsGenericType && (field.PropertyType.GetGenericTypeDefinition() == typeof(List<>))))
                 {
                     if (field.GetValue(value) != null && field.Name != "gaps")
                     {
@@ -231,14 +233,14 @@ namespace BO4E.Reporting
                             muterType = field.DeclaringType.Name + ".";
                         }
                         string val = nestedValue.ToString();
-                        if (field.FieldType == typeof(DateTime?))
+                        if (field.PropertyType == typeof(DateTime?))
                         {
                             if (((DateTime?)nestedValue).HasValue)
                             {
                                 val = ((DateTime?)nestedValue).Value.ToString("yyyy-MM-ddTHH:mm:ssZ");
                             }
                         }
-                        else if (field.FieldType == typeof(DateTime))
+                        else if (field.PropertyType == typeof(DateTime))
                         {
                             val = ((DateTime)nestedValue).ToString("yyyy-MM-ddTHH:mm:ssZ");
                         }

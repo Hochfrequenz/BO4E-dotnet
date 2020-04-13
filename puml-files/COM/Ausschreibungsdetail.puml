@@ -1,0 +1,20 @@
+@startuml
+class Ausschreibungsdetail {
+    + LokationsId : string <<get>> <<set>>
+    + Lokationsbezeichung : string <<get>> <<set>>
+    + Netzbetreiber : string <<get>> <<set>>
+    + Kunde : string <<get>> <<set>>
+    + Zaehlernummer : string <<get>> <<set>>
+    + Zaehlertechnik : Zaehlertyp? <<get>> <<set>>
+    + LastgangVorhanden : bool? <<get>> <<set>>
+}
+COM <|-- Ausschreibungsdetail
+Ausschreibungsdetail --> "NetzebeneLieferung" Netzebene
+Ausschreibungsdetail --> "NetzebeneMessung" Netzebene
+Ausschreibungsdetail --> "Lokationsadresse" Adresse
+Ausschreibungsdetail --> "Rechnungsadresse" Adresse
+Ausschreibungsdetail --> "PrognoseJahresarbeit" Menge
+Ausschreibungsdetail --> "PrognoseArbeitLieferzeitraum" Menge
+Ausschreibungsdetail --> "PrognoseLeistung" Menge
+Ausschreibungsdetail --> "Lieferzeitraum" Zeitraum
+@enduml

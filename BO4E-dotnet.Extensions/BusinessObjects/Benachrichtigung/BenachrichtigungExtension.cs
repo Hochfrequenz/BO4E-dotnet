@@ -2,8 +2,8 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
+
 using Newtonsoft.Json.Linq;
-using BO4E.BO;
 
 namespace BO4E.Extensions.BusinessObjects.Benachrichtigung
 {
@@ -21,8 +21,8 @@ namespace BO4E.Extensions.BusinessObjects.Benachrichtigung
         {
             return Has(b, new BO4E.COM.GenericStringStringInfo()
             {
-                keyColumn = key,
-                value = value
+                KeyColumn = key,
+                Value = value
             });
         }
 
@@ -34,12 +34,12 @@ namespace BO4E.Extensions.BusinessObjects.Benachrichtigung
         /// <returns></returns>
         public static bool Has(this BO4E.BO.Benachrichtigung b, BO4E.COM.GenericStringStringInfo gssi)
         {
-            if (b.infos == null || b.infos.Count == 0)
+            if (b.Infos == null || b.Infos.Count == 0)
             {
                 return false;
             }
             // ToDo für Hamid: Bitte prüfen, warum Contains false zurückliefert.
-            return (b.infos.Where(m => m.keyColumn == gssi.keyColumn && m.value == gssi.value).Count() > 0);
+            return (b.Infos.Where(m => m.KeyColumn == gssi.KeyColumn && m.Value == gssi.Value).Count() > 0);
         }
 
         /// <summary>
@@ -50,11 +50,11 @@ namespace BO4E.Extensions.BusinessObjects.Benachrichtigung
         /// <returns>true if key is in <see cref="BO4E.BO.Benachrichtigung.infos"/></returns>
         public static bool Has(this BO4E.BO.Benachrichtigung b, string key)
         {
-            if (b.infos == null || b.infos.Count == 0)
+            if (b.Infos == null || b.Infos.Count == 0)
             {
                 return false;
             }
-            return (b.infos.Where(gssi => gssi.keyColumn == key).Count() > 0);
+            return (b.Infos.Where(gssi => gssi.KeyColumn == key).Count() > 0);
         }
 
         /// <summary>
@@ -73,7 +73,7 @@ namespace BO4E.Extensions.BusinessObjects.Benachrichtigung
             {
                 return passByDefault;
             }
-            foreach (var info in b.infos.Where(gssi => gssi.keyColumn == keyName))
+            foreach (var info in b.Infos.Where(gssi => gssi.KeyColumn == keyName))
             {
                 try
                 {
@@ -83,7 +83,7 @@ namespace BO4E.Extensions.BusinessObjects.Benachrichtigung
                     }
                     if (typeConverter != null)
                     {
-                        T value = (T)typeConverter.ConvertFromString(info.value);
+                        T value = (T)typeConverter.ConvertFromString(info.Value);
                         return predicate(value);
                     }
                     continue;
@@ -97,28 +97,28 @@ namespace BO4E.Extensions.BusinessObjects.Benachrichtigung
         }
 
         /// <summary>
-        /// moves key value pairs from <see cref="BO4E.BO.Benachrichtigung.infos"/> to <see cref="BO4E.BO.BusinessObject.userProperties"/> for more conventient handling.
+        /// moves key value pairs from <see cref="BO4E.BO.Benachrichtigung.infos"/> to <see cref="BO4E.BO.BusinessObject.UserProperties"/> for more conventient handling.
         /// </summary>
         /// <param name="b">Benachrichtigung</param>
         /// <param name="overwriteExistingKeys">set true to overwrite userProperties with same key</param>
         // ToDo: make method generic MoveInfosTouserProperties<boT>(...)
         public static void MoveInfosToUserProperties(this BO4E.BO.Benachrichtigung b, bool overwriteExistingKeys = false)
         {
-            if (b.infos != null && b.infos.Count > 0)
+            if (b.Infos != null && b.Infos.Count > 0)
             {
-                if (b.userProperties == null)
+                if (b.UserProperties == null)
                 {
-                    b.userProperties = new Dictionary<string, JToken>();
+                    b.UserProperties = new Dictionary<string, JToken>();
                 }
-                foreach (var info in b.infos)
+                foreach (var info in b.Infos)
                 {
-                    if (b.userProperties.ContainsKey(info.keyColumn) && overwriteExistingKeys)
+                    if (b.UserProperties.ContainsKey(info.KeyColumn) && overwriteExistingKeys)
                     {
-                        b.userProperties.Remove(info.keyColumn);
+                        b.UserProperties.Remove(info.KeyColumn);
                     }
-                    b.userProperties.Add(info.keyColumn, info.value); // might throw exception if key exists and !overwriteExistingKeys. That's ok.
+                    b.UserProperties.Add(info.KeyColumn, info.Value); // might throw exception if key exists and !overwriteExistingKeys. That's ok.
                 }
-                b.infos = null; // set to null after all elements have been moved
+                b.Infos = null; // set to null after all elements have been moved
             }
         }
     }

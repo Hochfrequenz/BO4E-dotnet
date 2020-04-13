@@ -1,0 +1,21 @@
+@startuml
+class Rechnungsposition {
+    + Positionsnummer : int <<get>> <<set>>
+    + Positionstext : string <<get>> <<set>>
+    + Zeiteinheit : Mengeneinheit? <<get>> <<set>>
+    + Artikelnummer : BDEWArtikelnummer? <<get>> <<set>>
+    + LokationsId : string <<get>> <<set>>
+    + VertragskontoId : string <<get>> <<set>>
+    + VertragsId : string <<get>> <<set>>
+    + Status : RechnungspositionsStatus? <<get>> <<set>>
+}
+COM <|-- Rechnungsposition
+Rechnungsposition --> "LieferungVon" DateTime
+Rechnungsposition --> "LieferungBis" DateTime
+Rechnungsposition --> "PositionsMenge" Menge
+Rechnungsposition --> "ZeitbezogeneMenge" Menge
+Rechnungsposition --> "Einzelpreis" Preis
+Rechnungsposition --> "TeilsummeNetto" Betrag
+Rechnungsposition --> "TeilrabattNetto" Betrag
+Rechnungsposition --> "TeilsummeSteuer" Steuerbetrag
+@enduml

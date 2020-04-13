@@ -2,10 +2,14 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+
 using BO4E.BO;
 using BO4E.meta;
+
 using JsonDiffPatchDotNet;
+
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 
@@ -113,7 +117,7 @@ namespace TestBO4E
         private static readonly Dictionary<Type, List<string>> boKeyNamesResults = new Dictionary<Type, List<string>>()
         {
             {typeof(Marktlokation), new List<string>{"marktlokationsId"}},
-            {typeof(Messlokation), new List<string>{"messLokationsId"} } //<-- should be the json property name if annotated 
+            {typeof(Messlokation), new List<string>{"messlokationsId"} } //<-- should be the json property name if annotated 
         };
 
         [TestMethod]
@@ -123,7 +127,7 @@ namespace TestBO4E
             {
                 List<string> expectedList = boKeyNamesResults[boType];
                 List<string> actualList = BusinessObject.GetBoKeyNames(boType);
-                Assert.IsTrue(expectedList.SequenceEqual(actualList), $"{boType.ToString()}: expected: [{String.Join(",", expectedList)}] actual: [{String.Join(",", actualList)}] ");
+                Assert.IsTrue(expectedList.SequenceEqual(actualList), $"{boType.ToString()}: expected: [{string.Join(",", expectedList)}] actual: [{string.Join(",", actualList)}] ");
             }
         }
 
@@ -154,8 +158,8 @@ namespace TestBO4E
         {
             string emString = @"{'versionStruktur':1,'boTyp':'ENERGIEMENGE','lokationsId':'DE0000000000000000000000010000400','lokationstyp':'MeLo','zw':'000000000030000301','anlagennummer':'4000000199','messlokationsId':'DE0000000000000000000000010000400','marktlokationsId':''}";
             Energiemenge em = JsonConvert.DeserializeObject<Energiemenge>(emString);
-            Assert.IsNotNull(em.userProperties);
-            Assert.IsTrue(em.userProperties.Keys.Count > 0);
+            Assert.IsNotNull(em.UserProperties);
+            Assert.IsTrue(em.UserProperties.Keys.Count > 0);
             Bo4eUri uri = em.GetURI(true);
             Assert.IsTrue(uri.ToString().Contains("messlokationsId="));
             Assert.IsTrue(uri.ToString().Contains("anlagennummer=4000000199"));
