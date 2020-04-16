@@ -118,7 +118,7 @@ namespace BO4E.Extensions.BusinessObjects.Energiemenge
         /// <returns></returns>
         public static PlausibilityReport GetPlausibilityReport(this BO4E.BO.Energiemenge energiemenge, PlausibilityReport.PlausibilityReportConfiguration config)
         {
-            return energiemenge.GetPlausibilityReport(config.Other, new TimeRange(config.Timeframe.Startdatum.Value, config.Timeframe.Enddatum.Value), config.IgnoreLocation);
+            return energiemenge.GetPlausibilityReport(config.Other, new TimeRange(config.Timeframe.Startdatum.Value.UtcDateTime, config.Timeframe.Enddatum.Value.UtcDateTime), config.IgnoreLocation);
         }
 
         /// <summary>
@@ -167,8 +167,8 @@ namespace BO4E.Extensions.BusinessObjects.Energiemenge
             }
             var slices = GetLocalDailySlices(new TimeRange()
             {
-                Start = config.Timeframe.Startdatum.Value,
-                End = config.Timeframe.Enddatum.Value
+                Start = config.Timeframe.Startdatum.Value.UtcDateTime,
+                End = config.Timeframe.Enddatum.Value.UtcDateTime
             });
             return em.GetSlicedPlausibilityReports(config, slices);
         }
@@ -191,8 +191,8 @@ namespace BO4E.Extensions.BusinessObjects.Energiemenge
             }
             var slices = GetLocalMonthlySlices(new TimeRange()
             {
-                Start = config.Timeframe.Startdatum.Value,
-                End = config.Timeframe.Enddatum.Value
+                Start = config.Timeframe.Startdatum.Value.UtcDateTime,
+                End = config.Timeframe.Enddatum.Value.UtcDateTime
             });
             return em.GetSlicedPlausibilityReports(config, slices);
         }

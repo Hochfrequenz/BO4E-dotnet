@@ -59,7 +59,7 @@ namespace BO4E.BO
         [JsonProperty(Required = Required.Always, Order = 8, PropertyName = "rechnungsdatum")]
         [ProtoMember(8)]
         [FieldName("billDate", Language.EN)]
-        public DateTime Rechnungsdatum { get; set; }
+        public DateTimeOffset Rechnungsdatum { get; set; }
 
         /// <summary>
         /// Zu diesem Datum ist die Zahlung fällig.
@@ -67,7 +67,7 @@ namespace BO4E.BO
         [JsonProperty(Required = Required.Always, Order = 9, PropertyName = "faelligkeitsdatum")]
         [ProtoMember(9)]
         [FieldName("dueDate", Language.EN)]
-        public DateTime Faelligkeitsdatum { get; set; }
+        public DateTimeOffset Faelligkeitsdatum { get; set; }
 
         /// <summary>
         /// Ein kontextbezogender Rechnungstyp, z.B. Netznutzungsrechnung. Details siehe ENUM Rechnungstyp
@@ -193,13 +193,13 @@ namespace BO4E.BO
             }
 
             Rechnungsnummer = (infoToken["opbel"] ?? infoToken["OPBEL"]).Value<string>();
-            Rechnungsdatum = TimeZoneInfo.ConvertTime((infoToken["bldat"] ?? infoToken["BLDAT"]).Value<DateTime>(), Verbrauch.CENTRAL_EUROPE_STANDARD_TIME, TimeZoneInfo.Utc);
+            Rechnungsdatum = new DateTimeOffset(TimeZoneInfo.ConvertTime((infoToken["bldat"] ?? infoToken["BLDAT"]).Value<DateTime>(), Verbrauch.CENTRAL_EUROPE_STANDARD_TIME, TimeZoneInfo.Utc));
             Rechnungsperiode = new Zeitraum()
             {
-                Startdatum = TimeZoneInfo.ConvertTime((tErdzToken[0]["ab"] ?? tErdzToken[0]["AB"]).Value<DateTime>(), Verbrauch.CENTRAL_EUROPE_STANDARD_TIME, TimeZoneInfo.Utc),
-                Enddatum = TimeZoneInfo.ConvertTime((tErdzToken[0]["bis"] ?? tErdzToken[0]["BIS"]).Value<DateTime>(), Verbrauch.CENTRAL_EUROPE_STANDARD_TIME, TimeZoneInfo.Utc)
+                Startdatum = new DateTimeOffset(TimeZoneInfo.ConvertTime((tErdzToken[0]["ab"] ?? tErdzToken[0]["AB"]).Value<DateTime>(), Verbrauch.CENTRAL_EUROPE_STANDARD_TIME, TimeZoneInfo.Utc)),
+                Enddatum = new DateTimeOffset(TimeZoneInfo.ConvertTime((tErdzToken[0]["bis"] ?? tErdzToken[0]["BIS"]).Value<DateTime>(), Verbrauch.CENTRAL_EUROPE_STANDARD_TIME, TimeZoneInfo.Utc))
             };
-            Faelligkeitsdatum = TimeZoneInfo.ConvertTime((infoToken["faedn"] ?? infoToken["FAEDN"]).Value<DateTime>(), Verbrauch.CENTRAL_EUROPE_STANDARD_TIME, TimeZoneInfo.Utc);
+            Faelligkeitsdatum = new DateTimeOffset(TimeZoneInfo.ConvertTime((infoToken["faedn"] ?? infoToken["FAEDN"]).Value<DateTime>(), Verbrauch.CENTRAL_EUROPE_STANDARD_TIME, TimeZoneInfo.Utc));
             Storno = false;
 
             decimal gNetto, gSteure, gBrutto, vGezahlt, rBrutto, zZahlen;
@@ -290,11 +290,11 @@ namespace BO4E.BO
                     rp.Positionsnummer = (jrp["belzeile"] ?? jrp["BELZEILE"]).Value<int>();
                     if ((jrp["bis"] ?? jrp["BIS"]) != null && (jrp["bis"] ?? jrp["BIS"]).Value<string>() != "0000-00-00")
                     {
-                        rp.LieferungBis = TimeZoneInfo.ConvertTime((jrp["bis"] ?? jrp["BIS"]).Value<DateTime>(), Verbrauch.CENTRAL_EUROPE_STANDARD_TIME, TimeZoneInfo.Utc);
+                        rp.LieferungBis = new DateTimeOffset(TimeZoneInfo.ConvertTime((jrp["bis"] ?? jrp["BIS"]).Value<DateTime>(), Verbrauch.CENTRAL_EUROPE_STANDARD_TIME, TimeZoneInfo.Utc));
                     }
                     if ((jrp["ab"] ?? jrp["AB"]) != null && (jrp["ab"] ?? jrp["AB"]).Value<string>() != "0000-00-00")
                     {
-                        rp.LieferungVon = TimeZoneInfo.ConvertTime((jrp["ab"] ?? jrp["AB"]).Value<DateTime>(), Verbrauch.CENTRAL_EUROPE_STANDARD_TIME, TimeZoneInfo.Utc);
+                        rp.LieferungVon = new DateTimeOffset(TimeZoneInfo.ConvertTime((jrp["ab"] ?? jrp["AB"]).Value<DateTime>(), Verbrauch.CENTRAL_EUROPE_STANDARD_TIME, TimeZoneInfo.Utc));
                     }
                     if ((jrp["vertrag"] ?? jrp["VERTRAG"]) != null)
                     {

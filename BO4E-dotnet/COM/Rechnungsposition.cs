@@ -22,13 +22,13 @@ namespace BO4E.COM
         [JsonProperty(PropertyName = "lieferungVon", Required = Required.Always)]
         [FieldName("deliveryStart", Language.EN)]
         [ProtoMember(4)]
-        public DateTime LieferungVon { get; set; }
+        public DateTimeOffset LieferungVon { get; set; }
 
         /// <summary>Ende der Lieferung für die abgerechnete Leistung.</summary>
         [JsonProperty(PropertyName = "lieferungBis", Required = Required.Always)]
         [FieldName("deliveryEnd", Language.EN)]
         [ProtoMember(5)]
-        public DateTime LieferungBis { get; set; }
+        public DateTimeOffset LieferungBis { get; set; }
 
         /// <summary>Bezeichnung für die abgerechnete Position.</summary>
         [JsonProperty(PropertyName = "positionstext", Required = Required.Always)]

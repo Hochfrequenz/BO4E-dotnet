@@ -66,6 +66,8 @@ enum Bemessungsgroesse {
    BENUTZUNGSDAUER = 10;
    ANZAHL = 11;
 }
+message DateTimeOffset {
+}
 enum Kalkulationsmethode {
    KEINE = 0;
    STAFFELN = 1;
@@ -188,6 +190,6 @@ enum Zeiteinheit {
 message Zeitraum {
    Zeiteinheit Einheit = 3;
    .bcl.Decimal Dauer = 4;
-   .bcl.DateTime Startdatum = 5;
-   .bcl.DateTime Enddatum = 6;
+   DateTimeOffset Startdatum = 5;
+   DateTimeOffset Enddatum = 6;
 }

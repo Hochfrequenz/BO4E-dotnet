@@ -7,16 +7,16 @@ using Newtonsoft.Json;
 namespace BO4E.meta.LenientConverters
 {
     /// <summary>
-    /// The lenient DateTimeConverter allows for transforming strings into (nullable) DateTime(?) objects,
+    /// The lenient DateTimeConverter allows for transforming strings into (nullable) DateTimeOffset(?) objects,
     /// even if their formatting is somehow weird.
     /// </summary>
     public class LenientDateTimeConverter : JsonConverter
     {
         // basic structure copied from https://stackoverflow.com/a/33172735/10009545
 
-        private readonly DateTime? _defaultDateTime;
+        private readonly DateTimeOffset? _defaultDateTime;
 
-        public LenientDateTimeConverter(DateTime? defaultDateTime = null)
+        public LenientDateTimeConverter(DateTimeOffset? defaultDateTime = null)
         {
             this._defaultDateTime = defaultDateTime;
         }
@@ -35,7 +35,7 @@ namespace BO4E.meta.LenientConverters
 
         public override bool CanConvert(Type objectType)
         {
-            return (objectType == typeof(DateTime) || objectType == typeof(DateTime?));
+            return (objectType == typeof(DateTimeOffset) || objectType == typeof(DateTimeOffset?));
         }
 
         public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
@@ -49,30 +49,30 @@ namespace BO4E.meta.LenientConverters
             {
                 rawDate = (string)reader.Value;
             }
-            else if (reader.Value.GetType() == typeof(DateTime))
+            else if (reader.Value.GetType() == typeof(DateTimeOffset))
             {
-                return (DateTime)reader.Value;
+                return (DateTimeOffset)reader.Value;
             }
             else
             {
                 rawDate = reader.Value.ToString();
             }
             // First try to parse the date string as is (in case it is correctly formatted)
-            if (DateTime.TryParse(rawDate, out DateTime date))
+            if (DateTimeOffset.TryParse(rawDate, out DateTimeOffset date))
             {
                 return date;
             }
 
             foreach (string dtf in ALLOWED_DATETIME_FORMATS)
             {
-                if (DateTime.TryParseExact(rawDate, dtf, CultureInfo.InvariantCulture, DateTimeStyles.None, out date))
+                if (DateTimeOffset.TryParseExact(rawDate, dtf, CultureInfo.InvariantCulture, DateTimeStyles.None, out date))
                 {
                     return date;
                 }
             }
 
             // It's not a date after all, so just return the default value
-            if (objectType == typeof(DateTime?))
+            if (objectType == typeof(DateTimeOffset?))
             {
                 return null;
             }

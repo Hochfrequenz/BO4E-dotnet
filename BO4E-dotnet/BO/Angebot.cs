@@ -44,8 +44,7 @@ namespace BO4E.BO
         [JsonProperty(Required = Required.Always, Order = 6, PropertyName = "angebotsdatum")]
         [ProtoMember(6)]
         [DataCategory(DataCategory.FINANCE)]
-        // ToDo: handle this as DateTime object that serializes without the "time" in "DateTime"
-        public string Angebotsdatum { get; set; }
+        public DateTimeOffset Angebotsdatum { get; set; }
 
         /// <summary>
         /// Sparte, für die das Angebot abgegeben wird (Strom/Gas).
@@ -64,7 +63,7 @@ namespace BO4E.BO
         [JsonProperty(Required = Required.Default, Order = 8, PropertyName = "bindefrist")]
         [ProtoMember(8)]
         [DataCategory(DataCategory.FINANCE)]
-        public DateTime Bindefrist { get; set; }
+        public DateTimeOffset Bindefrist { get; set; }
 
         /// <summary>
         /// Link auf den Ersteller des Angebots.

@@ -1,12 +1,11 @@
 ﻿syntax = "proto3";
-import "protobuf-net/bcl.proto"; // schema for protobuf-net's handling of core .NET types
 
 message Aufgabe {
    string AufgabenId = 3;
    string Beschreibung = 4;
-   .bcl.DateTime Deadline = 5;
+   DateTimeOffset Deadline = 5;
    bool Ausgefuehrt = 6;
-   .bcl.DateTime Ausfuehrungszeitpunkt = 7;
+   DateTimeOffset Ausfuehrungszeitpunkt = 7;
    string Ausfuehrender = 8;
 }
 enum Bearbeitungsstatus {
@@ -22,13 +21,15 @@ message Benachrichtigung {
    Prioritaet Prioritaet = 5; // default value could not be applied: NORMAL
    Bearbeitungsstatus Bearbeitungsstatus = 6;
    string Kurztext = 7;
-   .bcl.DateTime ErstellungsZeitpunkt = 8;
+   DateTimeOffset ErstellungsZeitpunkt = 8;
    string Kategorie = 9;
    string Bearbeiter = 10;
    repeated Notiz Notizen = 11;
-   .bcl.DateTime Deadline = 12;
+   DateTimeOffset Deadline = 12;
    repeated Aufgabe Aufgaben = 13;
    repeated GenericStringStringInfo Infos = 14;
+}
+message DateTimeOffset {
 }
 message GenericStringStringInfo {
    string KeyColumn = 3;
@@ -36,7 +37,7 @@ message GenericStringStringInfo {
 }
 message Notiz {
    string Autor = 3;
-   .bcl.DateTime Zeitpunkt = 4;
+   DateTimeOffset Zeitpunkt = 4;
    string Inhalt = 5;
 }
 enum Prioritaet {

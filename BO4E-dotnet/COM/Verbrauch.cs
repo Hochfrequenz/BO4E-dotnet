@@ -42,14 +42,14 @@ namespace BO4E.COM
         /// </summary>
         [JsonProperty(PropertyName = "startdatum", Required = Required.Default, Order = 7)]
         [ProtoMember(3)]
-        public DateTime Startdatum { get; set; }
+        public DateTimeOffset Startdatum { get; set; }
 
         /// <summary>
         /// Ende des Zeitraumes, für den der Verbrauch angegeben wird.
         /// </summary>
         [JsonProperty(PropertyName = "enddatum", Required = Required.Default, Order = 8)]
         [ProtoMember(4)]
-        public DateTime Enddatum { get; set; } // ToDo: is DateTime? better suited?
+        public DateTimeOffset Enddatum { get; set; } // ToDo: is DateTimeOffset? better suited?
 
         /// <summary>
         /// Gibt an, ob es sich um eine PROGNOSE oder eine MESSUNG handelt.
@@ -144,13 +144,13 @@ namespace BO4E.COM
                     // something seems wrong but not sure how to fix it. 
                 }
             }
-            Startdatum = DateTime.SpecifyKind(Startdatum, DateTimeKind.Utc);
-            Enddatum = DateTime.SpecifyKind(Enddatum, DateTimeKind.Utc);
+            Startdatum = DateTime.SpecifyKind(Startdatum.UtcDateTime, DateTimeKind.Utc);
+            Enddatum = DateTime.SpecifyKind(Enddatum.UtcDateTime, DateTimeKind.Utc);
             if ((int)(Enddatum - Startdatum).TotalHours == 2)
             {
                 // check DST of start and enddatum
-                var startdatumLocal = TimeZoneInfo.ConvertTimeFromUtc(Startdatum, Verbrauch.CENTRAL_EUROPE_STANDARD_TIME);
-                var enddatumLocal = TimeZoneInfo.ConvertTimeFromUtc(Enddatum, Verbrauch.CENTRAL_EUROPE_STANDARD_TIME);
+                var startdatumLocal = TimeZoneInfo.ConvertTimeFromUtc(Startdatum.UtcDateTime, Verbrauch.CENTRAL_EUROPE_STANDARD_TIME);
+                var enddatumLocal = TimeZoneInfo.ConvertTimeFromUtc(Enddatum.UtcDateTime, Verbrauch.CENTRAL_EUROPE_STANDARD_TIME);
                 if (!Verbrauch.CENTRAL_EUROPE_STANDARD_TIME.IsDaylightSavingTime(startdatumLocal - new TimeSpan(0, 0, 1)) && Verbrauch.CENTRAL_EUROPE_STANDARD_TIME.IsDaylightSavingTime(enddatumLocal))
                 {
                     // change winter-->summer time (e.g. UTC+1-->UTC+2)
@@ -162,7 +162,7 @@ namespace BO4E.COM
             {
                 // check DST of start and enddatum
                 //var startdatumLocal = TimeZoneInfo.ConvertTimeFromUtc(startdatum, Verbrauch.CENTRAL_EUROPE_STANDARD_TIME);
-                var enddatumLocal = TimeZoneInfo.ConvertTimeFromUtc(Enddatum, Verbrauch.CENTRAL_EUROPE_STANDARD_TIME);
+                var enddatumLocal = TimeZoneInfo.ConvertTimeFromUtc(Enddatum.UtcDateTime, Verbrauch.CENTRAL_EUROPE_STANDARD_TIME);
                 if (!Verbrauch.CENTRAL_EUROPE_STANDARD_TIME.IsDaylightSavingTime(enddatumLocal - new TimeSpan(1, 0, 0)) && Verbrauch.CENTRAL_EUROPE_STANDARD_TIME.IsDaylightSavingTime(enddatumLocal - new TimeSpan(1, 0, 1)))
                 {
                     // change winter-->summer time (e.g. UTC+1-->UTC+2)

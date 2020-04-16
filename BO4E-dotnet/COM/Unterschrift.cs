@@ -25,7 +25,7 @@ namespace BO4E.COM
         /// </summary>
         [JsonProperty(PropertyName = "datum", Required = Required.Default)]
         [ProtoMember(4)]
-        public DateTime? Datum { get; set; }
+        public DateTimeOffset? Datum { get; set; }
 
         /// <summary>
         /// Name des Unterschreibers

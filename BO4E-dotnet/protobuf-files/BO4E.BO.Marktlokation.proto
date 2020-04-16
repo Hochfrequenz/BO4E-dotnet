@@ -44,6 +44,8 @@ enum Bilanzierungsmethode {
    PAUSCHAL = 4;
    IMS = 5;
 }
+message DateTimeOffset {
+}
 message Dienstleistung {
    Dienstleistungstyp Dienstleistungstyp = 3;
    string Bezeichnung = 4;
@@ -615,8 +617,8 @@ message Messlokation {
 message Messlokationszuordnung {
    string MesslokationsId = 3;
    ArithmetischeOperation Arithmetik = 4;
-   .bcl.DateTime GueltigSeit = 5;
-   .bcl.DateTime GueltigBis = 6;
+   DateTimeOffset GueltigSeit = 5;
+   DateTimeOffset GueltigBis = 6;
 }
 enum Messwerterfassung {
    FERNAUSLESBAR = 0;
@@ -658,8 +660,8 @@ enum Unterbrechbarkeit {
    NUV = 1;
 }
 message Verbrauch {
-   .bcl.DateTime Startdatum = 3;
-   .bcl.DateTime Enddatum = 4;
+   DateTimeOffset Startdatum = 3;
+   DateTimeOffset Enddatum = 4;
    Wertermittlungsverfahren Wertermittlungsverfahren = 5;
    string Obiskennzahl = 6;
    .bcl.Decimal Wert = 7;
@@ -700,8 +702,8 @@ message Zaehler {
    Zaehlertyp Zaehlertyp = 7;
    Tarifart Tarifart = 8;
    .bcl.Decimal Zaehlerkonstante = 9;
-   .bcl.DateTime EichungBis = 10;
-   .bcl.DateTime LetzteEichung = 11;
+   DateTimeOffset EichungBis = 10;
+   DateTimeOffset LetzteEichung = 11;
    repeated Zaehlwerk Zaehlwerke = 12;
    Geschaeftspartner Zaehlerhersteller = 13;
    string Gateway = 1014;

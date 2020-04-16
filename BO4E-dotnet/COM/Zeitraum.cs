@@ -30,13 +30,13 @@ namespace BO4E.COM
         [JsonProperty(PropertyName = "startdatum", Required = Required.Default)]
         [FieldName("startDate", Language.EN)]
         [ProtoMember(5)]
-        public DateTime? Startdatum { get; set; }
+        public DateTimeOffset? Startdatum { get; set; }
 
         /// <summary>Gibt Tag und Uhrzeit (falls vorhanden) an, wann der Zeitraum endet.</summary>
         [JsonProperty(PropertyName = "enddatum", Required = Required.Default)]
         [FieldName("endDate", Language.EN)]
         [ProtoMember(6)]
-        public DateTime? Enddatum { get; set; }
+        public DateTimeOffset? Enddatum { get; set; }
 
         /// <summary>
         /// sets <see cref="Dauer"/> and <see cref="Einheit"/> iff <see cref="Startdatum"/> and <see cref="Enddatum"/> are given.

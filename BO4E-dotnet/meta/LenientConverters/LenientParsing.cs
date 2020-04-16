@@ -31,7 +31,7 @@ namespace BO4E.meta.LenientConverters
         // /// </summary>
         // EmptyLists = 8,
         /// <summary>
-        /// Set initial DateTime if date could not be parsed (only applies if <see cref="LenientParsing.DateTime"/> is set)
+        /// Set initial DateTimeOffset if date could not be parsed (only applies if <see cref="LenientParsing.DateTimeOffset"/> is set)
         /// </summary>
         SetInitialDateIfNull = 8,
         /// <summary>

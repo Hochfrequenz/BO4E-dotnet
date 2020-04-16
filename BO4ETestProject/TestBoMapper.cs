@@ -224,26 +224,26 @@ namespace TestBO4E
         public void TestSapTimeZoneUserProperties()
         {
             Verbrauch v1 = JsonConvert.DeserializeObject<Verbrauch>("{\"startdatum\":\"2019-03-30T02:45:00\",\"enddatum\":\"2019-03-30T03:15:00\",\"wertermittlungsverfahren\":1,\"obiskennzahl\":\"1-0:1.29.0\",\"wert\":0.0,\"einheit\":1,\"zw\":\"000000000030000301\",\"Status\":\"IU015\",\"sap_timezone\":\"CET\"}");
-            Assert.AreEqual(DateTimeKind.Utc, v1.Startdatum.Kind);
-            Assert.AreEqual(DateTimeKind.Utc, v1.Enddatum.Kind);
+            Assert.AreEqual(DateTimeKind.Utc, v1.Startdatum.UtcDateTime.Kind);
+            Assert.AreEqual(DateTimeKind.Utc, v1.Enddatum.UtcDateTime.Kind);
             Assert.AreEqual(2.75, v1.Startdatum.TimeOfDay.TotalHours);
             Assert.AreEqual(3.25, v1.Enddatum.TimeOfDay.TotalHours);
 
             Verbrauch v2 = JsonConvert.DeserializeObject<Verbrauch>("{\"startdatum\":\"2019-03-30T02:45:00\",\"enddatum\":\"2019-03-30T03:15:00\",\"wertermittlungsverfahren\":1,\"obiskennzahl\":\"1-0:1.29.0\",\"wert\":0.0,\"einheit\":1,\"zw\":\"000000000030000301\",\"Status\":\"IU015\",\"sap_timezone\":\"UTC\"}");
-            Assert.AreEqual(DateTimeKind.Utc, v2.Startdatum.Kind);
-            Assert.AreEqual(DateTimeKind.Utc, v2.Enddatum.Kind);
+            Assert.AreEqual(DateTimeKind.Utc, v2.Startdatum.UtcDateTime.Kind);
+            Assert.AreEqual(DateTimeKind.Utc, v2.Enddatum.UtcDateTime.Kind);
             Assert.AreEqual(2.75, v2.Startdatum.TimeOfDay.TotalHours);
             Assert.AreEqual(3.25, v2.Enddatum.TimeOfDay.TotalHours);
 
             Verbrauch v3 = JsonConvert.DeserializeObject<Verbrauch>("{\"startdatum\":\"2019-10-27T02:30:00\",\"enddatum\":\"2019-10-27T02:45:00\",\"wertermittlungsverfahren\":1,\"obiskennzahl\":\"1-0:1.29.0\",\"wert\":0.0,\"einheit\":1,\"zw\":\"000000000030000301\",\"Status\":\"IU015\",\"sap_timezone\":\"CEST\"}");
-            Assert.AreEqual(DateTimeKind.Utc, v3.Startdatum.Kind);
-            Assert.AreEqual(DateTimeKind.Utc, v3.Enddatum.Kind);
+            Assert.AreEqual(DateTimeKind.Utc, v3.Startdatum.UtcDateTime.Kind);
+            Assert.AreEqual(DateTimeKind.Utc, v3.Enddatum.UtcDateTime.Kind);
             Assert.AreEqual(2.5, v3.Startdatum.TimeOfDay.TotalHours);
             Assert.AreEqual(2.75, v3.Enddatum.TimeOfDay.TotalHours);
 
             Verbrauch v4 = JsonConvert.DeserializeObject<Verbrauch>("{\"startdatum\":\"2019-10-27T02:45:00\",\"enddatum\":\"2019-10-27T03:15:00\",\"wertermittlungsverfahren\":1,\"obiskennzahl\":\"1-0:1.29.0\",\"wert\":0.0,\"einheit\":1,\"zw\":\"000000000030000301\",\"Status\":\"IU015\",\"sap_timezone\":\"CEST\"}");
-            Assert.AreEqual(DateTimeKind.Utc, v4.Startdatum.Kind);
-            Assert.AreEqual(DateTimeKind.Utc, v4.Enddatum.Kind);
+            Assert.AreEqual(DateTimeKind.Utc, v4.Startdatum.UtcDateTime.Kind);
+            Assert.AreEqual(DateTimeKind.Utc, v4.Enddatum.UtcDateTime.Kind);
             Assert.AreEqual(2.75, v4.Startdatum.TimeOfDay.TotalHours);
             Assert.AreEqual(3.25, v4.Enddatum.TimeOfDay.TotalHours);
         }
