@@ -30,7 +30,7 @@ namespace BO4E.COM
         /// </summary>
         [JsonProperty(PropertyName = "zeitpunkt", Required = Required.Always, Order = 8)]
         [ProtoMember(4)]
-        public DateTime Zeitpunkt { get; set; }
+        public DateTimeOffset Zeitpunkt { get; set; }
 
         /// <summary>
         /// Inhalt der Notiz (Freitext)

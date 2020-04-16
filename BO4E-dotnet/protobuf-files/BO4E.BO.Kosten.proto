@@ -5,6 +5,8 @@ message Betrag {
    .bcl.Decimal Wert = 3;
    Waehrungscode Waehrung = 4;
 }
+message DateTimeOffset {
+}
 message Kosten {
    Kostenklasse Kostenklasse = 4;
    Zeitraum Gueltigkeit = 5;
@@ -22,8 +24,8 @@ enum Kostenklasse {
 }
 message Kostenposition {
    string Positionstitel = 3;
-   .bcl.DateTime Von = 4;
-   .bcl.DateTime Bis = 5;
+   DateTimeOffset Von = 4;
+   DateTimeOffset Bis = 5;
    string Artikelbezeichnung = 6;
    string Artikeldetail = 7;
    Menge Menge = 8;
@@ -265,6 +267,6 @@ enum Zeiteinheit {
 message Zeitraum {
    Zeiteinheit Einheit = 3;
    .bcl.Decimal Dauer = 4;
-   .bcl.DateTime Startdatum = 5;
-   .bcl.DateTime Enddatum = 6;
+   DateTimeOffset Startdatum = 5;
+   DateTimeOffset Enddatum = 6;
 }

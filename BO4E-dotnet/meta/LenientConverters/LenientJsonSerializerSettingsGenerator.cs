@@ -40,7 +40,7 @@ namespace BO4E.meta.LenientConverters
                             }
                             else
                             {
-                                converters.Add(new LenientDateTimeConverter(new DateTime()));
+                                converters.Add(new LenientDateTimeConverter(new DateTimeOffset()));
                             }
                             break;
                         case LenientParsing.EnumList:

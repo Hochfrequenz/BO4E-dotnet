@@ -2,7 +2,7 @@ using System;
 
 using BO4E.ENUM;
 using BO4E.meta;
-
+using BO4E.meta.LenientConverters;
 using Newtonsoft.Json;
 
 using ProtoBuf;
@@ -48,9 +48,10 @@ namespace BO4E.COM
         [JsonProperty(PropertyName = "startAbrechnungsjahr", Required = Required.Default)]
         [NonOfficial(NonOfficialCategory.CUSTOMER_REQUIREMENTS)]
         [ProtoMember(1009)]
-        public DateTime? StartAbrechnungsjahr { get; set; }
+        [JsonConverter(typeof(LenientDateTimeConverter))]
+        public DateTimeOffset? StartAbrechnungsjahr { get; set; }
 
-        // ToDo: Docstring! why is this a zeitraum and no DateTime??
+        // ToDo: Docstring! why is this a zeitraum and no DateTimeOffset??
         [JsonProperty(PropertyName = "geplanteTurnusablesung", Required = Required.Default)]
         [NonOfficial(NonOfficialCategory.CUSTOMER_REQUIREMENTS)]
         [ProtoMember(1010)]

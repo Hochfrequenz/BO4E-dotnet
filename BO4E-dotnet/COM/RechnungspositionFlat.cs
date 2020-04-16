@@ -2,7 +2,7 @@ using System;
 
 using BO4E.ENUM;
 using BO4E.meta;
-
+using BO4E.meta.LenientConverters;
 using Newtonsoft.Json;
 
 using ProtoBuf;
@@ -26,12 +26,14 @@ namespace BO4E.COM
         /// <inheritdoc cref="Rechnungsposition.LieferungVon"/>
         [JsonProperty(PropertyName = "lieferungVon", Required = Required.Always)]
         [ProtoMember(4)]
-        public DateTime LieferungVon { get; set; }
+        [JsonConverter(typeof(LenientDateTimeConverter))]
+        public DateTimeOffset LieferungVon { get; set; }
 
         /// <inheritdoc cref="Rechnungsposition.LieferungBis"/>
         [JsonProperty(PropertyName = "lieferungBis", Required = Required.Always)]
         [ProtoMember(5)]
-        public DateTime LieferungBis { get; set; }
+        [JsonConverter(typeof(LenientDateTimeConverter))]
+        public DateTimeOffset LieferungBis { get; set; }
 
         /// <summary>
         /// Der Positionstext entspricht dem SAP CI Teilprozess bzw. der GCN Categoy

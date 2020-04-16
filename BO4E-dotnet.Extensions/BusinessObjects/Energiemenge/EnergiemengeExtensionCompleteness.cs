@@ -22,7 +22,7 @@ namespace BO4E.Extensions.BusinessObjects.Energiemenge
         /// <returns></returns>
         public static CompletenessReport GetCompletenessReport(this BO4E.BO.Energiemenge em, CompletenessReport.CompletenessReportConfiguration config)
         {
-            return em.GetCompletenessReport(new TimeRange(config.ReferenceTimeFrame.Startdatum.Value, config.ReferenceTimeFrame.Enddatum.Value), config.Wertermittlungsverfahren, config.Obis, config.Einheit);
+            return em.GetCompletenessReport(new TimeRange(config.ReferenceTimeFrame.Startdatum.Value.UtcDateTime, config.ReferenceTimeFrame.Enddatum.Value.UtcDateTime), config.Wertermittlungsverfahren, config.Obis, config.Einheit);
         }
 
         /// <summary>
@@ -124,7 +124,7 @@ namespace BO4E.Extensions.BusinessObjects.Energiemenge
                     ITimeRange limits;
                     if (result.ReferenceTimeFrame != null && result.ReferenceTimeFrame.Startdatum.HasValue && result.ReferenceTimeFrame.Enddatum.HasValue)
                     {
-                        limits = new TimeRange(result.ReferenceTimeFrame.Startdatum.Value, result.ReferenceTimeFrame.Enddatum.Value);
+                        limits = new TimeRange(result.ReferenceTimeFrame.Startdatum.Value.UtcDateTime, result.ReferenceTimeFrame.Enddatum.Value.UtcDateTime);
                     }
                     else
                     {

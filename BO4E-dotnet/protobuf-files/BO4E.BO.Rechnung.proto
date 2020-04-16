@@ -70,6 +70,8 @@ message Betrag {
    .bcl.Decimal Wert = 3;
    Waehrungscode Waehrung = 4;
 }
+message DateTimeOffset {
+}
 message Geschaeftspartner {
    Anrede Anrede = 4;
    string Name1 = 6;
@@ -407,8 +409,8 @@ message Rechnung {
    Rechnungsstatus Rechnungsstatus = 5;
    bool Storno = 6;
    string Rechnungsnummer = 7;
-   .bcl.DateTime Rechnungsdatum = 8;
-   .bcl.DateTime Faelligkeitsdatum = 9;
+   DateTimeOffset Rechnungsdatum = 8;
+   DateTimeOffset Faelligkeitsdatum = 9;
    Rechnungstyp Rechnungsstyp = 10;
    string OriginalRechnungsnummer = 11;
    Zeitraum Rechnungsperiode = 12;
@@ -425,8 +427,8 @@ message Rechnung {
 }
 message Rechnungsposition {
    int32 Positionsnummer = 3;
-   .bcl.DateTime LieferungVon = 4;
-   .bcl.DateTime LieferungBis = 5;
+   DateTimeOffset LieferungVon = 4;
+   DateTimeOffset LieferungBis = 5;
    string Positionstext = 6;
    Mengeneinheit Zeiteinheit = 7;
    BDEWArtikelnummer Artikelnummer = 8;
@@ -680,6 +682,6 @@ enum Zeiteinheit {
 message Zeitraum {
    Zeiteinheit Einheit = 3;
    .bcl.Decimal Dauer = 4;
-   .bcl.DateTime Startdatum = 5;
-   .bcl.DateTime Enddatum = 6;
+   DateTimeOffset Startdatum = 5;
+   DateTimeOffset Enddatum = 6;
 }

@@ -199,7 +199,7 @@
         </member>
         <member name="T:BO4E.BoMapper.LenientDateTimeConverter">
             <summary>
-            The lenient DateTimeConverter allows for transforming strings into (nullable) DateTime(?) objects,
+            The lenient DateTimeConverter allows for transforming strings into (nullable) DateTimeOffset(?) objects,
             even if their formatting is somehow weird.
             </summary>
         </member>
@@ -7126,7 +7126,7 @@
             strict parsing, no lenient behaviour
             </summary>
         </member>
-        <member name="F:BO4E.LenientParsing.DateTime">
+        <member name="F:BO4E.LenientParsing.DateTimeOffset">
             <summary>
             allows automatic conversion of other date formats
             </summary>
@@ -7144,7 +7144,7 @@
         </member>
         <member name="F:BO4E.LenientParsing.SetInitialDateIfNull">
             <summary>
-            Set initial DateTime if date could not be parsed (only applies if <see cref="F:BO4E.LenientParsing.DateTime"/> is set)
+            Set initial DateTimeOffset if date could not be parsed (only applies if <see cref="F:BO4E.LenientParsing.DateTimeOffset"/> is set)
             </summary>
         </member>
         <member name="F:BO4E.LenientParsing.MOST_LENIENT">

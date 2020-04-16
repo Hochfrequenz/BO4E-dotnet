@@ -24,7 +24,7 @@ namespace TestBO4E
         public class MultiLangBo : BusinessObject
         {
             [FieldName("date_english", Language.EN)]
-            public DateTime datum_deutsch;
+            public DateTimeOffset datum_deutsch;
             [FieldName("value_english", Language.EN)]
             public string wert_deutsch;
             [FieldName("internal Object", Language.EN)]
@@ -39,7 +39,7 @@ namespace TestBO4E
         {
             MultiLangBo mlb = new MultiLangBo()
             {
-                datum_deutsch = new DateTime(2018, 1, 1, 0, 0, 0, DateTimeKind.Utc),
+                datum_deutsch = new DateTimeOffset(2018, 1, 1, 0, 0, 0, TimeSpan.Zero),
                 wert_deutsch = "Hallo Welt"
             };
             var settings = new JsonSerializerSettings
@@ -66,7 +66,7 @@ namespace TestBO4E
         {
             MultiLangBo mlb = new MultiLangBo()
             {
-                datum_deutsch = new DateTime(2018, 1, 1, 0, 0, 0, DateTimeKind.Utc),
+                datum_deutsch = new DateTimeOffset(2018, 1, 1, 0, 0, 0, TimeSpan.Zero),
                 wert_deutsch = "Hallo Welt",
                 intern = new NestedObject()
                 {
@@ -106,7 +106,7 @@ namespace TestBO4E
             Assert.IsFalse(DEjson.Contains("internal_english"));
 
             MultiLangBo ml = JsonConvert.DeserializeObject<MultiLangBo>(DEjson);
-            Assert.AreNotEqual(DateTime.MinValue, ml.datum_deutsch);
+            Assert.AreNotEqual(DateTime.MinValue, ml.datum_deutsch.UtcDateTime);
         }
 
         //[TestMethod]

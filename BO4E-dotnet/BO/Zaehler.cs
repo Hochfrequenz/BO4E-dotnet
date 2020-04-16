@@ -55,12 +55,12 @@ namespace BO4E.BO
         /// <summary>Bis zu diesem Datum ist der Zähler geeicht.</summary>
         [JsonProperty(Required = Required.Default, Order = 10, PropertyName = "eichungBis")]
         [ProtoMember(10)]
-        public DateTime? EichungBis { get; set; } // ToDO implement date
+        public DateTimeOffset? EichungBis { get; set; } // ToDO implement date
 
         /// <summary>Zu diesem Datum fand die letzte Eichprüfung des Zählers statt.</summary>
         [JsonProperty(Required = Required.Default, Order = 11, PropertyName = "letzteEichung")]
         [ProtoMember(11)]
-        public DateTime? LetzteEichung { get; set; }
+        public DateTimeOffset? LetzteEichung { get; set; }
 
         /// <summary> Die Zählwerke des Zählers.
         /// <seealso cref="Zaehlwerk" /></summary>

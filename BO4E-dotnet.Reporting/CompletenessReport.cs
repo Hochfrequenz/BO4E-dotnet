@@ -99,7 +99,7 @@ namespace BO4E.Reporting
             {
                 if (this.ReferenceTimeFrame.Startdatum.HasValue && other.ReferenceTimeFrame.Startdatum.HasValue)
                 {
-                    return Comparer<DateTime>.Default.Compare(ReferenceTimeFrame.Startdatum.Value, other.ReferenceTimeFrame.Startdatum.Value);
+                    return Comparer<DateTimeOffset>.Default.Compare(ReferenceTimeFrame.Startdatum.Value, other.ReferenceTimeFrame.Startdatum.Value);
                 }
                 if (this.ReferenceTimeFrame.Startdatum.HasValue)
                 {

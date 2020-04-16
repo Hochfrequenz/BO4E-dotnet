@@ -17,11 +17,11 @@ namespace BO4E.COM
         /// <summary>von-Datum der Kostenzeitscheibe. Z.B. 2017-01-01</summary>
         [JsonProperty(PropertyName = "von", Required = Required.Default)]
         [ProtoMember(4)]
-        public DateTime? Von { get; set; }
+        public DateTimeOffset? Von { get; set; }
         /// <summary>bis-Datum der Kostenzeitscheibe. Z.B. 2017-12-31</summary>
         [JsonProperty(PropertyName = "bis", Required = Required.Default)]
         [ProtoMember(5)]
-        public DateTime? Bis { get; set; }
+        public DateTimeOffset? Bis { get; set; }
         /// <summary>Bezeichnung für den Artikel für den die Kosten ermittelt wurden. Beispiel: Arbeitspreis HT</summary>
         [JsonProperty(PropertyName = "artikelbezeichnung", Required = Required.Always)]
         [ProtoMember(6)]

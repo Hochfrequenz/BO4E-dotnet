@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+
 using BO4E;
 using BO4E.BO;
 using BO4E.COM;
@@ -9,11 +10,15 @@ using BO4E.ENUM;
 using BO4E.Extensions.BusinessObjects.Energiemenge;
 using BO4E.meta.LenientConverters;
 using BO4E.Reporting;
+
 using Itenso.TimePeriod;
+
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 using Newtonsoft.Json.Linq;
+
 using StackExchange.Profiling;
 
 namespace TestBO4EExtensions
@@ -51,8 +56,8 @@ namespace TestBO4EExtensions
 
                     Assert.IsNotNull(cr.Gaps);
                     Assert.AreEqual(1, cr.Gaps.Count);
-                    Assert.AreEqual(new DateTime(2018, 4, 1, 1, 45, 0, DateTimeKind.Utc), cr.Gaps.First().Startdatum);
-                    Assert.AreEqual(new DateTime(2018, 4, 2, 6, 30, 0, DateTimeKind.Utc), cr.Gaps.First().Enddatum);
+                    Assert.AreEqual(new DateTimeOffset(2018, 4, 1, 1, 45, 0, TimeSpan.Zero), cr.Gaps.First().Startdatum);
+                    Assert.AreEqual(new DateTimeOffset(2018, 4, 2, 6, 30, 0, TimeSpan.Zero), cr.Gaps.First().Enddatum);
                 }
                 else if (boFile.EndsWith("somecustomer2.json"))
                 {
@@ -129,16 +134,16 @@ namespace TestBO4EExtensions
             Energiemenge em = (Energiemenge)BoMapper.MapObject(JObject.FromObject(json["input"]), LenientParsing.Strict);
             CompletenessReport cr = em.GetCompletenessReport(new TimeRange()
             {
-                Start = new DateTime(2017, 12, 31, 23, 0, 0, 0, DateTimeKind.Utc),
-                End = new DateTime(2018, 1, 31, 23, 0, 0, 0, DateTimeKind.Utc)
+                Start = new DateTimeOffset(2017, 12, 31, 23, 0, 0, 0, TimeSpan.Zero).UtcDateTime,
+                End = new DateTimeOffset(2018, 1, 31, 23, 0, 0, 0, TimeSpan.Zero).UtcDateTime
             });
             Assert.AreEqual(1.0M, cr.Coverage.Value);
             Assert.AreEqual(0, cr.Gaps.Count());
 
             var dailies = em.GetDailyCompletenessReports(new TimeRange()
             {
-                Start = new DateTime(2017, 12, 31, 23, 0, 0, 0, DateTimeKind.Utc),
-                End = new DateTime(2018, 1, 2, 23, 0, 0, 0, DateTimeKind.Utc)
+                Start = new DateTimeOffset(2017, 12, 31, 23, 0, 0, 0, TimeSpan.Zero).UtcDateTime,
+                End = new DateTimeOffset(2018, 1, 2, 23, 0, 0, 0, TimeSpan.Zero).UtcDateTime
             });
             foreach (var crDaily in dailies)
             {
@@ -161,26 +166,26 @@ namespace TestBO4EExtensions
                         Obiskennzahl="1234",
                         Wert=123.456M,
                         Wertermittlungsverfahren=Wertermittlungsverfahren.MESSUNG,
-                        Startdatum = new DateTime(2019,1,1,0,0,0,DateTimeKind.Utc),
-                        Enddatum = new DateTime(2019,1,4,0,0,0,DateTimeKind.Utc),
+                        Startdatum = new DateTimeOffset(2019,1,1,0,0,0,TimeSpan.Zero).UtcDateTime,
+                        Enddatum = new DateTimeOffset(2019,1,4,0,0,0,TimeSpan.Zero).UtcDateTime,
                     },
                     new Verbrauch()
                     {
                         Obiskennzahl="1234",
                         Wert=123.456M,
                         Wertermittlungsverfahren=Wertermittlungsverfahren.MESSUNG,
-                        Startdatum = new DateTime(2019,1,4,0,0,0,DateTimeKind.Utc),
-                        Enddatum = new DateTime(2019,1,7,0,0,0,DateTimeKind.Utc),
+                        Startdatum = new DateTimeOffset(2019,1,4,0,0,0,TimeSpan.Zero).UtcDateTime,
+                        Enddatum = new DateTimeOffset(2019,1,7,0,0,0,TimeSpan.Zero).UtcDateTime,
                     }
                 }
             };
 
             var cr = em.GetCompletenessReport(new TimeRange(new DateTime(2018, 12, 29, 0, 0, 0, DateTimeKind.Utc), new DateTime(2019, 1, 10, 0, 0, 0, DateTimeKind.Utc)));
             Assert.AreEqual(2, cr.Gaps.Count());
-            Assert.AreEqual(new DateTime(2018, 12, 29, 0, 0, 0, DateTimeKind.Utc), cr.Gaps.First().Startdatum);
-            Assert.AreEqual(new DateTime(2019, 1, 1, 0, 0, 0, DateTimeKind.Utc), cr.Gaps.First().Enddatum);
-            Assert.AreEqual(new DateTime(2019, 1, 7, 0, 0, 0, DateTimeKind.Utc), cr.Gaps.Last().Startdatum);
-            Assert.AreEqual(new DateTime(2019, 1, 10, 0, 0, 0, DateTimeKind.Utc), cr.Gaps.Last().Enddatum);
+            Assert.AreEqual(new DateTimeOffset(2018, 12, 29, 0, 0, 0, TimeSpan.Zero), cr.Gaps.First().Startdatum);
+            Assert.AreEqual(new DateTimeOffset(2019, 1, 1, 0, 0, 0, TimeSpan.Zero), cr.Gaps.First().Enddatum);
+            Assert.AreEqual(new DateTimeOffset(2019, 1, 7, 0, 0, 0, TimeSpan.Zero), cr.Gaps.Last().Startdatum);
+            Assert.AreEqual(new DateTimeOffset(2019, 1, 10, 0, 0, 0, TimeSpan.Zero), cr.Gaps.Last().Enddatum);
         }
 
         [TestMethod]
@@ -217,11 +222,11 @@ namespace TestBO4EExtensions
         }
 
         internal static readonly TimeRange CHRISTMAS_2018 = new TimeRange(
-            new DateTime(2018, 12, 23, 22, 0, 0, DateTimeKind.Utc),
-            new DateTime(2018, 12, 31, 22, 0, 0, DateTimeKind.Utc));
+            new DateTimeOffset(2018, 12, 23, 22, 0, 0, TimeSpan.Zero).UtcDateTime,
+            new DateTimeOffset(2018, 12, 31, 22, 0, 0, TimeSpan.Zero).UtcDateTime);
         internal static readonly TimeRange GERMAN_YEAR_2018 = new TimeRange(
-            new DateTime(2017, 12, 31, 23, 0, 0, DateTimeKind.Utc),
-            new DateTime(2018, 12, 31, 23, 0, 0, DateTimeKind.Utc));
+            new DateTimeOffset(2017, 12, 31, 23, 0, 0, TimeSpan.Zero).UtcDateTime,
+            new DateTimeOffset(2018, 12, 31, 23, 0, 0, TimeSpan.Zero).UtcDateTime);
 
         [TestMethod]
         public void TestDailyCompleteness()
@@ -349,8 +354,8 @@ namespace TestBO4EExtensions
         [TestMethod]
         public void TestDailyCompletenessDST()
         {
-            var localStart = TimeZoneInfo.ConvertTimeFromUtc(new DateTime(2018, 3, 24, 23, 0, 0, DateTimeKind.Utc), Verbrauch.CENTRAL_EUROPE_STANDARD_TIME);//, DateTimeKind.Unspecified);
-            var localEnd = TimeZoneInfo.ConvertTimeFromUtc(new DateTime(2018, 3, 26, 22, 0, 0, DateTimeKind.Utc), Verbrauch.CENTRAL_EUROPE_STANDARD_TIME);//, DateTimeKind.Unspecified);
+            var localStart = TimeZoneInfo.ConvertTimeFromUtc(new DateTimeOffset(2018, 3, 24, 23, 0, 0, TimeSpan.Zero).UtcDateTime, Verbrauch.CENTRAL_EUROPE_STANDARD_TIME);//, DateTimeKind.Unspecified);
+            var localEnd = TimeZoneInfo.ConvertTimeFromUtc(new DateTimeOffset(2018, 3, 26, 22, 0, 0, TimeSpan.Zero).UtcDateTime, Verbrauch.CENTRAL_EUROPE_STANDARD_TIME);//, DateTimeKind.Unspecified);
             if (TimeZoneInfo.Local != Verbrauch.CENTRAL_EUROPE_STANDARD_TIME)
             {
                 localStart = DateTime.SpecifyKind(TimeZoneInfo.ConvertTime(localStart, TimeZoneInfo.Local, Verbrauch.CENTRAL_EUROPE_STANDARD_TIME), DateTimeKind.Unspecified);
@@ -361,8 +366,8 @@ namespace TestBO4EExtensions
                 localStart = DateTime.SpecifyKind(localStart, DateTimeKind.Unspecified);
                 localEnd = DateTime.SpecifyKind(localEnd, DateTimeKind.Unspecified);
             }
-            var utcStart = new DateTime(2018, 3, 24, 23, 0, 0, DateTimeKind.Utc);
-            var utcEnd = new DateTime(2018, 3, 26, 22, 0, 0, DateTimeKind.Utc);
+            var utcStart = new DateTimeOffset(2018, 3, 24, 23, 0, 0, TimeSpan.Zero);
+            var utcEnd = new DateTimeOffset(2018, 3, 26, 22, 0, 0, TimeSpan.Zero);
             if (TimeZoneInfo.Local.SupportsDaylightSavingTime && Verbrauch.CENTRAL_EUROPE_STANDARD_TIME == TimeZoneInfo.Local)
             {
                 Assert.IsFalse(Verbrauch.CENTRAL_EUROPE_STANDARD_TIME.IsDaylightSavingTime(localStart));
@@ -373,8 +378,8 @@ namespace TestBO4EExtensions
             {
                 new TimeRange()
                 {
-                    Start = utcStart,
-                    End = utcStart.AddHours(1)
+                    Start = utcStart.UtcDateTime,
+                    End = utcStart.AddHours(1).UtcDateTime
                 }
             };
             while (verbrauchSlices.Last().End < utcEnd)
@@ -400,19 +405,19 @@ namespace TestBO4EExtensions
                 }
                 ).ToList()
             };
-            var result = em.GetDailyCompletenessReports(new TimeRange(utcStart, utcEnd));
+            var result = em.GetDailyCompletenessReports(new TimeRange(utcStart.UtcDateTime, utcEnd.UtcDateTime));
             Assert.AreEqual(2, result.Count);
-            Assert.AreEqual(new DateTime(2018, 3, 24, 23, 0, 0, DateTimeKind.Utc), result.First().Value.ReferenceTimeFrame.Startdatum);
-            Assert.AreEqual(new DateTime(2018, 3, 25, 22, 0, 0, DateTimeKind.Utc), result.First().Value.ReferenceTimeFrame.Enddatum);
-            Assert.AreEqual(new DateTime(2018, 3, 25, 22, 0, 0, DateTimeKind.Utc), result.Last().Value.ReferenceTimeFrame.Startdatum);
-            Assert.AreEqual(new DateTime(2018, 3, 26, 22, 0, 0, DateTimeKind.Utc), result.Last().Value.ReferenceTimeFrame.Enddatum);
+            Assert.AreEqual(new DateTimeOffset(2018, 3, 24, 23, 0, 0, TimeSpan.Zero), result.First().Value.ReferenceTimeFrame.Startdatum);
+            Assert.AreEqual(new DateTimeOffset(2018, 3, 25, 22, 0, 0, TimeSpan.Zero), result.First().Value.ReferenceTimeFrame.Enddatum);
+            Assert.AreEqual(new DateTimeOffset(2018, 3, 25, 22, 0, 0, TimeSpan.Zero), result.Last().Value.ReferenceTimeFrame.Startdatum);
+            Assert.AreEqual(new DateTimeOffset(2018, 3, 26, 22, 0, 0, TimeSpan.Zero), result.Last().Value.ReferenceTimeFrame.Enddatum);
         }
 
         [TestMethod]
         public void TestAddDaysDSTSpring()
         {
-            DateTime utcDt = new DateTime(2018, 3, 24, 23, 0, 0, DateTimeKind.Utc);
-            DateTime localDt = DateTime.SpecifyKind(TimeZoneInfo.ConvertTimeFromUtc(new DateTime(2018, 3, 24, 23, 0, 0, DateTimeKind.Utc), Verbrauch.CENTRAL_EUROPE_STANDARD_TIME), DateTimeKind.Unspecified);
+            DateTime utcDt = new DateTimeOffset(2018, 3, 24, 23, 0, 0, TimeSpan.Zero).UtcDateTime;
+            DateTime localDt = DateTime.SpecifyKind(TimeZoneInfo.ConvertTimeFromUtc(new DateTimeOffset(2018, 3, 24, 23, 0, 0, TimeSpan.Zero).UtcDateTime, Verbrauch.CENTRAL_EUROPE_STANDARD_TIME), DateTimeKind.Unspecified);
 
             DateTime resultUtc = utcDt.AddDaysDST(1);
             DateTime resultLocal = localDt.AddDaysDST(1);
@@ -431,8 +436,8 @@ namespace TestBO4EExtensions
         [TestMethod]
         public void TestAddDaysDSTAutumn()
         {
-            DateTime utcDt = new DateTime(2018, 10, 27, 22, 0, 0, DateTimeKind.Utc);
-            DateTime localDt = DateTime.SpecifyKind(TimeZoneInfo.ConvertTimeFromUtc(new DateTime(2018, 10, 27, 22, 0, 0, DateTimeKind.Utc), Verbrauch.CENTRAL_EUROPE_STANDARD_TIME), DateTimeKind.Unspecified);
+            DateTime utcDt = new DateTimeOffset(2018, 10, 27, 22, 0, 0, TimeSpan.Zero).UtcDateTime;
+            DateTime localDt = DateTime.SpecifyKind(TimeZoneInfo.ConvertTimeFromUtc(new DateTimeOffset(2018, 10, 27, 22, 0, 0, TimeSpan.Zero).UtcDateTime, Verbrauch.CENTRAL_EUROPE_STANDARD_TIME), DateTimeKind.Unspecified);
 
             DateTime resultUtc = utcDt.AddDaysDST(1);
             DateTime resultLocal = localDt.AddDaysDST(1);
@@ -451,8 +456,8 @@ namespace TestBO4EExtensions
         [TestMethod]
         public void TestAddDaysDSTSummer() // could be winter as well ;)
         {
-            DateTime utcDt = new DateTime(2018, 7, 27, 22, 0, 0, DateTimeKind.Utc);
-            DateTime localDt = DateTime.SpecifyKind(TimeZoneInfo.ConvertTimeFromUtc(new DateTime(2018, 7, 27, 22, 0, 0, DateTimeKind.Utc), Verbrauch.CENTRAL_EUROPE_STANDARD_TIME), DateTimeKind.Unspecified);
+            DateTime utcDt = new DateTimeOffset(2018, 7, 27, 22, 0, 0, TimeSpan.Zero).UtcDateTime;
+            DateTime localDt = DateTime.SpecifyKind(TimeZoneInfo.ConvertTimeFromUtc(new DateTimeOffset(2018, 7, 27, 22, 0, 0, TimeSpan.Zero).UtcDateTime, Verbrauch.CENTRAL_EUROPE_STANDARD_TIME), DateTimeKind.Unspecified);
 
             DateTime resultUtc = utcDt.AddDaysDST(1);
             DateTime resultLocal = localDt.AddDaysDST(1);

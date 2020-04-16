@@ -65,7 +65,7 @@ namespace BO4E.BO
             {
                 Energieverbrauch = Energieverbrauch
                     .Select(v => Verbrauch.FixSapCdsBug(v))
-                    .Where(v => !(v.Startdatum == DateTime.MinValue || v.Enddatum == DateTime.MinValue))
+                    .Where(v => !(v.Startdatum == DateTimeOffset.MinValue || v.Enddatum == DateTimeOffset.MinValue))
                     .Where(v => !(v.UserProperties != null && v.UserProperties.ContainsKey("invalid") && (bool)v.UserProperties["invalid"] == true))
                     .ToList();
                 if (UserProperties != null && UserProperties.TryGetValue(Verbrauch._SAP_PROFDECIMALS_KEY, out JToken profDecimalsRaw))

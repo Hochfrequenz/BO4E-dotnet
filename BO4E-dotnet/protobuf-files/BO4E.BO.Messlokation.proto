@@ -38,6 +38,8 @@ enum Bilanzierungsmethode {
    PAUSCHAL = 4;
    IMS = 5;
 }
+message DateTimeOffset {
+}
 message Dienstleistung {
    Dienstleistungstyp Dienstleistungstyp = 3;
    string Bezeichnung = 4;
@@ -509,11 +511,6 @@ enum Landescode {
    ZR = 265;
    ZW = 266;
 }
-message Marktrolle {
-   string Rollencodenummer = 3;
-   string Code = 4;
-   Marktrolle marktrolle = 5;
-}
 enum Marktrolle {
    NB = 0;
    LF = 1;
@@ -529,6 +526,11 @@ enum Marktrolle {
    RB = 11;
    KUNDE = 12;
    INTERESSENT = 13;
+}
+message Marktrolle {
+   string Rollencodenummer = 3;
+   string Code = 4;
+   Marktrolle marktrolle = 5;
 }
 enum Mengeneinheit {
    ZERO = 0; // proto3 requires a zero value as the first item (it can be named anything)
@@ -632,8 +634,8 @@ message Zaehler {
    Zaehlertyp Zaehlertyp = 7;
    Tarifart Tarifart = 8;
    .bcl.Decimal Zaehlerkonstante = 9;
-   .bcl.DateTime EichungBis = 10;
-   .bcl.DateTime LetzteEichung = 11;
+   DateTimeOffset EichungBis = 10;
+   DateTimeOffset LetzteEichung = 11;
    repeated Zaehlwerk Zaehlwerke = 12;
    Geschaeftspartner Zaehlerhersteller = 13;
    string Gateway = 1014;

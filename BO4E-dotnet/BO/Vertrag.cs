@@ -5,7 +5,7 @@ using System.Runtime.Serialization;
 using BO4E.COM;
 using BO4E.ENUM;
 using BO4E.meta;
-
+using BO4E.meta.LenientConverters;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 
@@ -60,14 +60,16 @@ namespace BO4E.BO
         /// </summary>
         [JsonProperty(Required = Required.Always, Order = 9, PropertyName = "vertragsbeginn")]
         [ProtoMember(9)]
-        public DateTime Vertragsbeginn { get; set; }
+        [JsonConverter(typeof(LenientDateTimeConverter))]
+        public DateTimeOffset Vertragsbeginn { get; set; }
 
         /// <summary>
         /// Gibt an, wann der Vertrag (voraussichtlich) endet oder beendet wurde.
         /// </summary>
         [JsonProperty(Required = Required.Always, Order = 10, PropertyName = "vertragsende")]
         [ProtoMember(10)]
-        public DateTime Vertragsende { get; set; }
+        [JsonConverter(typeof(LenientDateTimeConverter))]
+        public DateTimeOffset Vertragsende { get; set; }
 
         /// <summary>
         /// Der "erstgenannte" Vertragspartner. In der Regel der Aussteller des Vertrags. Beispiel: "Vertrag zwischen Vertagspartner 1 ..." Siehe BO Geschaeftspartner

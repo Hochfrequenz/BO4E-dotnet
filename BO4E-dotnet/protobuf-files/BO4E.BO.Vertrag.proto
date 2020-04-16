@@ -19,6 +19,8 @@ enum Anrede {
    INDIVIDUELL = 4;
    DR = 5;
 }
+message DateTimeOffset {
+}
 message Geschaeftspartner {
    Anrede Anrede = 4;
    string Name1 = 6;
@@ -367,7 +369,7 @@ enum Sparte {
 }
 message Unterschrift {
    string Ort = 3;
-   .bcl.DateTime Datum = 4;
+   DateTimeOffset Datum = 4;
    string Name = 5;
 }
 message Vertrag {
@@ -376,8 +378,8 @@ message Vertrag {
    Vertragsart Vertragsart = 6;
    Vertragstatus Vertragstatus = 7;
    Sparte Sparte = 8;
-   .bcl.DateTime Vertragsbeginn = 9;
-   .bcl.DateTime Vertragsende = 10;
+   DateTimeOffset Vertragsbeginn = 9;
+   DateTimeOffset Vertragsende = 10;
    Geschaeftspartner Vertragspartner1 = 11;
    Geschaeftspartner Vertragspartner2 = 12;
    repeated Unterschrift Unterzeichnervp1 = 13;
@@ -401,7 +403,7 @@ message Vertragskonditionen {
    Zeitraum Kuendigungsfrist = 6;
    Zeitraum Vertragsverlaengerung = 7;
    Zeitraum Abschlagszyklus = 8;
-   .bcl.DateTime StartAbrechnungsjahr = 1009;
+   DateTimeOffset StartAbrechnungsjahr = 1009;
    Zeitraum GeplanteTurnusablesung = 1010;
    int32 TurnusablesungIntervall = 1011;
    Zeitraum Netznutzungsabrechnung = 1012;
@@ -424,8 +426,8 @@ enum Vertragstatus {
    BEENDET = 8;
 }
 message Vertragsteil {
-   .bcl.DateTime Vertragsteilbeginn = 3;
-   .bcl.DateTime Vertragsteilende = 4;
+   DateTimeOffset Vertragsteilbeginn = 3;
+   DateTimeOffset Vertragsteilende = 4;
    string Lokation = 5;
    Menge VertraglichFixierteMenge = 6;
    Menge MinimaleAbnahmemenge = 7;
@@ -449,6 +451,6 @@ enum Zeiteinheit {
 message Zeitraum {
    Zeiteinheit Einheit = 3;
    .bcl.Decimal Dauer = 4;
-   .bcl.DateTime Startdatum = 5;
-   .bcl.DateTime Enddatum = 6;
+   DateTimeOffset Startdatum = 5;
+   DateTimeOffset Enddatum = 6;
 }

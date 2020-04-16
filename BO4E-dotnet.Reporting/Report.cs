@@ -240,9 +240,20 @@ namespace BO4E.Reporting
                                 val = ((DateTime?)nestedValue).Value.ToString("yyyy-MM-ddTHH:mm:ssZ");
                             }
                         }
+                        else if (field.PropertyType == typeof(DateTimeOffset?))
+                        {
+                            if (((DateTimeOffset?)nestedValue).HasValue)
+                            {
+                                val = ((DateTimeOffset?)nestedValue).Value.ToString("yyyy-MM-ddTHH:mm:ssZ");
+                            }
+                        }
                         else if (field.PropertyType == typeof(DateTime))
                         {
                             val = ((DateTime)nestedValue).ToString("yyyy-MM-ddTHH:mm:ssZ");
+                        }
+                        else if (field.PropertyType == typeof(DateTimeOffset))
+                        {
+                            val = ((DateTimeOffset)nestedValue).ToString("yyyy-MM-ddTHH:mm:ssZ");
                         }
                         h.Add(muterType + field.Name);
                         d.Add((val.Contains(separator)) ? "\"" + val + "\"" : val);

@@ -358,11 +358,11 @@ namespace BO4E.Extensions.COM
             {
                 if (x.Startdatum != y.Startdatum)
                 {
-                    return DateTime.Compare(x.Startdatum, y.Startdatum);
+                    return DateTimeOffset.Compare(x.Startdatum, y.Startdatum);
                 }
                 else if (x.Enddatum != y.Enddatum)
                 {
-                    return DateTime.Compare(x.Enddatum, y.Enddatum);
+                    return DateTimeOffset.Compare(x.Enddatum, y.Enddatum);
                 }
                 else
                 {
