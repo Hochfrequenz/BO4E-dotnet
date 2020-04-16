@@ -24,7 +24,7 @@ namespace TestBO4EExtensions.Encryption
         [TestMethod]
         public void TestOperations()
         {
-            BO4E.StaticLogger.Logger = new Microsoft.Extensions.Logging.Debug.DebugLogger("Testlogger", (log, level) => { return true; });
+            BO4E.StaticLogger.Logger = new Microsoft.Extensions.Logging.Debug.DebugLoggerProvider().CreateLogger("Testlogger");
             string[] files = Directory.GetFiles($"anonymizerTests/masterdata/", "*.json"); // 
             foreach (string testFile in files)
             {
@@ -150,7 +150,7 @@ namespace TestBO4EExtensions.Encryption
         [TestMethod]
         public void TestAnonymizeEnergiemengeHashing()
         {
-            BO4E.StaticLogger.Logger = new Microsoft.Extensions.Logging.Debug.DebugLogger("Testlogger", (log, level) => { return true; });
+            BO4E.StaticLogger.Logger = new Microsoft.Extensions.Logging.Debug.DebugLoggerProvider().CreateLogger("Testlogger");
             Energiemenge em = new Energiemenge()
             {
                 LokationsId = "DE0123456789012345678901234567890",
@@ -200,7 +200,7 @@ namespace TestBO4EExtensions.Encryption
         [TestMethod]
         public void TestAnonymizeEnergiemengeEncryptionRoundtrip()
         {
-            BO4E.StaticLogger.Logger = new Microsoft.Extensions.Logging.Debug.DebugLogger("Testlogger", (log, level) => { return true; });
+            BO4E.StaticLogger.Logger = new Microsoft.Extensions.Logging.Debug.DebugLoggerProvider().CreateLogger("Testlogger");
             Energiemenge em = new Energiemenge()
             {
                 LokationsId = "DE0123456789012345678901234567890",
@@ -249,7 +249,7 @@ namespace TestBO4EExtensions.Encryption
         [TestMethod]
         public void TestHashingDetectionForNonconformingString()
         {
-            BO4E.StaticLogger.Logger = new Microsoft.Extensions.Logging.Debug.DebugLogger("Testlogger", (log, level) => { return true; });
+            BO4E.StaticLogger.Logger = new Microsoft.Extensions.Logging.Debug.DebugLoggerProvider().CreateLogger("Testlogger");
             Energiemenge em = new Energiemenge()
             {
                 LokationsId = "asdkasldkmaslkdmas", // not identifyable as lokationsId
@@ -271,7 +271,7 @@ namespace TestBO4EExtensions.Encryption
         [TestMethod]
         public void TestCompletenessReportHashing()
         {
-            BO4E.StaticLogger.Logger = new Microsoft.Extensions.Logging.Debug.DebugLogger("Testlogger", (log, level) => { return true; });
+            BO4E.StaticLogger.Logger = new Microsoft.Extensions.Logging.Debug.DebugLoggerProvider().CreateLogger("Testlogger");
             CompletenessReport cr = new CompletenessReport()
             {
                 LokationsId = "56789012345",
@@ -318,7 +318,7 @@ namespace TestBO4EExtensions.Encryption
         [TestMethod]
         public void TestSameHashDifferentObjectTypes()
         {
-            BO4E.StaticLogger.Logger = new Microsoft.Extensions.Logging.Debug.DebugLogger("Testlogger", (log, level) => { return true; });
+            BO4E.StaticLogger.Logger = new Microsoft.Extensions.Logging.Debug.DebugLoggerProvider().CreateLogger("Testlogger");
             Energiemenge em = new Energiemenge()
             {
                 LokationsId = "DE0123456789012345678901234567890",
@@ -356,7 +356,7 @@ namespace TestBO4EExtensions.Encryption
         [TestMethod]
         public void TestCaginMeLos()
         {
-            BO4E.StaticLogger.Logger = new Microsoft.Extensions.Logging.Debug.DebugLogger("Testlogger", (log, level) => { return true; });
+            BO4E.StaticLogger.Logger = new Microsoft.Extensions.Logging.Debug.DebugLoggerProvider().CreateLogger("Testlogger");
             var result = new Dictionary<string, string>() {
                 {"DE0004096816110000000000000022591", null },
                 {"DE0004946353300000000000001652988", null },

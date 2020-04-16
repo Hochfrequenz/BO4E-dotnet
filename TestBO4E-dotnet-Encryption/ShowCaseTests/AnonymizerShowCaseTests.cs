@@ -46,7 +46,7 @@ namespace TestBO4E.ShowCaseTests
         public void ShowCaseTest()
         {
             Assert.IsTrue(em.IsValid());
-            BO4E.StaticLogger.Logger = new Microsoft.Extensions.Logging.Debug.DebugLogger("Testlogger", (log, level) => { return true; });
+            BO4E.StaticLogger.Logger = new Microsoft.Extensions.Logging.Debug.DebugLoggerProvider().CreateLogger("Testlogger");
             // Image there is a service provider to analyse the verbrauchs data but he shouldn't know about the location data.
             // Yet it should still be possible to map the results back to my original data. So hashing seems like a good approach.
             var config = new AnonymizerConfiguration();

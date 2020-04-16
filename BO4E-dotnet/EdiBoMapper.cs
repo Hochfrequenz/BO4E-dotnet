@@ -48,7 +48,7 @@ namespace BO4E
             if (_logger == null)
             {
                 // ToDo: inject it instead of ugly workaround.
-                BO4E.StaticLogger.Logger = new Microsoft.Extensions.Logging.Debug.DebugLogger("Testlogger", (log, level) => { return true; });
+                BO4E.StaticLogger.Logger = new Microsoft.Extensions.Logging.Debug.DebugLoggerProvider().CreateLogger("Testlogger");
                 _logger = StaticLogger.Logger;
             }
             Type[] types = Assembly.GetExecutingAssembly().GetTypes();
