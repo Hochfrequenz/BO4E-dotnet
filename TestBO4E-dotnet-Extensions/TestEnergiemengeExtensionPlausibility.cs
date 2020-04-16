@@ -9,7 +9,6 @@ using BO4E.Reporting;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
 using Newtonsoft.Json.Linq;
 
 namespace TestBO4EExtensions
@@ -36,12 +35,12 @@ namespace TestBO4EExtensions
                         throw new ArgumentException($"Test file {boFile} has no key '{key}'.");
                     }
                 }
-                Energiemenge emReference = JsonConvert.DeserializeObject<Energiemenge>(JsonConvert.SerializeObject(json["reference"], new IsoDateTimeConverter()));
-                Energiemenge emOther = JsonConvert.DeserializeObject<Energiemenge>(JsonConvert.SerializeObject(json["other"], new IsoDateTimeConverter()));
+                Energiemenge emReference = JsonConvert.DeserializeObject<Energiemenge>(json["reference"].ToString());
+                Energiemenge emOther = JsonConvert.DeserializeObject<Energiemenge>(json["other"].ToString());
 
                 PlausibilityReport prActual = emReference.GetPlausibilityReport(emOther);
-                PlausibilityReport prExpected = JsonConvert.DeserializeObject<PlausibilityReport>(JsonConvert.SerializeObject(json["expectedResult"], new IsoDateTimeConverter()));
-                //Assert.AreEqual(prExpected, prActual);
+                PlausibilityReport prExpected = JsonConvert.DeserializeObject<PlausibilityReport>(json["expectedResult"].ToString());
+                Assert.AreEqual(prExpected, prActual);
             }
         }
     }

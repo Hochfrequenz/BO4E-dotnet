@@ -30,8 +30,7 @@ namespace BO4E.meta.LenientConverters
         private readonly List<(string, bool)> ALLOWED_DATETIME_FORMATS = new List<(string, bool)>()
             {
                ("yyyy-MM-ddTHH:mm:ss", false),
-               ("yyyy-MM-ddTHH:mm:sszzzz", true),
-               ("yyyy-MM-ddTHH:mm:ssZ", true),
+               ("yyyy-MM-ddTHH:mm:sszzzz",true),
                ("yyyyMMddHHmm",false),
                ("yyyyMMddHHmmss",false),
                (@"yyyyMMddHHmmss'--T::zzzz'",false), // ToDo: remove again. this is just a buggy, nasty workaround
@@ -71,13 +70,13 @@ namespace BO4E.meta.LenientConverters
             // First try to parse the date string as is (in case it is correctly formatted)
             if (objectType == typeof(DateTimeOffset) || objectType == typeof(DateTimeOffset?))
             {
-                /*if (DateTimeOffset.TryParse(rawDate, out DateTimeOffset dateTimeOffset))
+                if (DateTimeOffset.TryParse(rawDate, out DateTimeOffset dateTimeOffset))
                 {
                     return dateTimeOffset;
-                }*/
+                }
                 foreach ((string dtf, bool asUniversal) in ALLOWED_DATETIME_FORMATS)
                 {
-                    if (DateTimeOffset.TryParseExact(rawDate, dtf, CultureInfo.InvariantCulture, asUniversal ? DateTimeStyles.AssumeUniversal : DateTimeStyles.None, out var dateTimeOffset))
+                    if (DateTimeOffset.TryParseExact(rawDate, dtf, CultureInfo.InvariantCulture, asUniversal ? DateTimeStyles.AssumeUniversal : DateTimeStyles.None, out dateTimeOffset))
                     {
                         return dateTimeOffset;
                     }
