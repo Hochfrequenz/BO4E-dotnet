@@ -93,7 +93,7 @@ namespace BO4E.Extensions.BusinessObjects.Energiemenge
                 var pr = new PlausibilityReport()
                 {
                     LokationsId = emReference.LokationsId,
-                    ReferenceTimeFrame = new BO4E.COM.Zeitraum() { Startdatum = timeframe.Start, Enddatum = timeframe.End },
+                    ReferenceTimeFrame = new BO4E.COM.Zeitraum() { Startdatum = new DateTimeOffset(timeframe.Start), Enddatum = new DateTimeOffset(timeframe.End) },
                     VerbrauchReference = vReference,
                     VerbrauchOther = vOther,
                     AbsoluteDeviation = Math.Abs(absoluteDeviation),

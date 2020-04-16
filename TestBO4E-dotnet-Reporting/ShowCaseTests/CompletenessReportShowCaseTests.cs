@@ -27,16 +27,16 @@ namespace TestBO4E.ShowCaseTests
                    new Verbrauch()
                    {
                        Einheit = Mengeneinheit.KWH,
-                       Startdatum = new DateTimeOffset(2020,3,1,0,0,0,TimeSpan.Zero),
-                       Enddatum = new DateTimeOffset(2020,3,8,0,0,0,TimeSpan.Zero),
+                       Startdatum = new DateTimeOffset(2020,3,1,0,0,0,TimeSpan.Zero).UtcDateTime,
+                       Enddatum = new DateTimeOffset(2020,3,8,0,0,0,TimeSpan.Zero).UtcDateTime,
                        Wert = 456.0M,
                        Wertermittlungsverfahren = Wertermittlungsverfahren.MESSUNG
                    },
                    new Verbrauch()
                    {
                        Einheit = Mengeneinheit.KWH,
-                       Startdatum = new DateTimeOffset(2020,3,25,0,0,0,TimeSpan.Zero),
-                       Enddatum = new DateTimeOffset(2020,4,1,0,0,0,TimeSpan.Zero),
+                       Startdatum = new DateTimeOffset(2020,3,25,0,0,0,TimeSpan.Zero).UtcDateTime,
+                       Enddatum = new DateTimeOffset(2020,4,1,0,0,0,TimeSpan.Zero).UtcDateTime,
                        Wert = 123.0M,
                        Wertermittlungsverfahren = Wertermittlungsverfahren.MESSUNG
                    }

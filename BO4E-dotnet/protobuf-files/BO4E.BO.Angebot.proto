@@ -756,8 +756,8 @@ enum Unterbrechbarkeit {
    NUV = 1;
 }
 message Verbrauch {
-   DateTimeOffset Startdatum = 3;
-   DateTimeOffset Enddatum = 4;
+   .bcl.DateTime Startdatum = 3;
+   .bcl.DateTime Enddatum = 4;
    Wertermittlungsverfahren Wertermittlungsverfahren = 5;
    string Obiskennzahl = 6;
    .bcl.Decimal Wert = 7;

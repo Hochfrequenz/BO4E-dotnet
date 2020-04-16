@@ -2,6 +2,7 @@ using System;
 
 using BO4E.ENUM;
 using BO4E.meta;
+using BO4E.meta.LenientConverters;
 
 using Newtonsoft.Json;
 
@@ -22,12 +23,14 @@ namespace BO4E.COM
         [JsonProperty(PropertyName = "lieferungVon", Required = Required.Always)]
         [FieldName("deliveryStart", Language.EN)]
         [ProtoMember(4)]
+        [JsonConverter(typeof(LenientDateTimeConverter))]
         public DateTimeOffset LieferungVon { get; set; }
 
         /// <summary>Ende der Lieferung für die abgerechnete Leistung.</summary>
         [JsonProperty(PropertyName = "lieferungBis", Required = Required.Always)]
         [FieldName("deliveryEnd", Language.EN)]
         [ProtoMember(5)]
+        [JsonConverter(typeof(LenientDateTimeConverter))]
         public DateTimeOffset LieferungBis { get; set; }
 
         /// <summary>Bezeichnung für die abgerechnete Position.</summary>

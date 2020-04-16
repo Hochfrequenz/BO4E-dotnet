@@ -23,8 +23,8 @@ namespace TestBO4EExtensions
                 Wertermittlungsverfahren = Wertermittlungsverfahren.MESSUNG,
                 Einheit = Mengeneinheit.KWH,
                 Wert = 5,
-                Startdatum = new DateTimeOffset(2017, 12, 31, 23, 0, 0, TimeSpan.Zero),
-                Enddatum = new DateTimeOffset(2018, 1, 31, 23, 0, 0, TimeSpan.Zero)
+                Startdatum = new DateTimeOffset(2017, 12, 31, 23, 0, 0, TimeSpan.Zero).UtcDateTime,
+                Enddatum = new DateTimeOffset(2018, 1, 31, 23, 0, 0, TimeSpan.Zero).UtcDateTime
             };
             Verbrauch v2 = new Verbrauch()
             {
@@ -32,8 +32,8 @@ namespace TestBO4EExtensions
                 Wertermittlungsverfahren = Wertermittlungsverfahren.MESSUNG,
                 Einheit = Mengeneinheit.KWH,
                 Wert = 3,
-                Startdatum = new DateTimeOffset(2018, 2, 28, 23, 0, 0, TimeSpan.Zero),
-                Enddatum = new DateTimeOffset(2018, 3, 31, 23, 0, 0, TimeSpan.Zero)
+                Startdatum = new DateTimeOffset(2018, 2, 28, 23, 0, 0, TimeSpan.Zero).UtcDateTime,
+                Enddatum = new DateTimeOffset(2018, 3, 31, 23, 0, 0, TimeSpan.Zero).UtcDateTime
             };
             HashSet<Verbrauch> result = v1.Merge(v2);
             Assert.AreEqual(2, result.Count);
@@ -50,8 +50,8 @@ namespace TestBO4EExtensions
                 Wertermittlungsverfahren = Wertermittlungsverfahren.MESSUNG,
                 Einheit = Mengeneinheit.KWH,
                 Wert = 5,
-                Startdatum = new DateTimeOffset(2017, 12, 31, 23, 0, 0, TimeSpan.Zero),
-                Enddatum = new DateTimeOffset(2018, 1, 31, 23, 0, 0, TimeSpan.Zero)
+                Startdatum = new DateTimeOffset(2017, 12, 31, 23, 0, 0, TimeSpan.Zero).UtcDateTime,
+                Enddatum = new DateTimeOffset(2018, 1, 31, 23, 0, 0, TimeSpan.Zero).UtcDateTime
             };
             Verbrauch v2 = new Verbrauch()
             {
@@ -59,8 +59,8 @@ namespace TestBO4EExtensions
                 Wertermittlungsverfahren = Wertermittlungsverfahren.MESSUNG,
                 Einheit = Mengeneinheit.KWH,
                 Wert = 3,
-                Startdatum = new DateTimeOffset(2018, 1, 31, 23, 0, 0, TimeSpan.Zero),
-                Enddatum = new DateTimeOffset(2018, 2, 28, 23, 0, 0, TimeSpan.Zero)
+                Startdatum = new DateTimeOffset(2018, 1, 31, 23, 0, 0, TimeSpan.Zero).UtcDateTime,
+                Enddatum = new DateTimeOffset(2018, 2, 28, 23, 0, 0, TimeSpan.Zero).UtcDateTime
             };
             HashSet<Verbrauch> result = v1.Merge(v2);
             Assert.AreEqual(1, result.Count);
@@ -80,8 +80,8 @@ namespace TestBO4EExtensions
                 Wertermittlungsverfahren = Wertermittlungsverfahren.MESSUNG,
                 Einheit = Mengeneinheit.KW,
                 Wert = 5,
-                Startdatum = new DateTimeOffset(2017, 12, 31, 23, 0, 0, TimeSpan.Zero),
-                Enddatum = new DateTimeOffset(2018, 1, 31, 23, 0, 0, TimeSpan.Zero)
+                Startdatum = new DateTimeOffset(2017, 12, 31, 23, 0, 0, TimeSpan.Zero).UtcDateTime,
+                Enddatum = new DateTimeOffset(2018, 1, 31, 23, 0, 0, TimeSpan.Zero).UtcDateTime
             };
             Verbrauch v2 = new Verbrauch()
             {
@@ -89,8 +89,8 @@ namespace TestBO4EExtensions
                 Wertermittlungsverfahren = Wertermittlungsverfahren.MESSUNG,
                 Einheit = Mengeneinheit.KW,
                 Wert = 3,
-                Startdatum = new DateTimeOffset(2018, 1, 31, 23, 0, 0, TimeSpan.Zero),
-                Enddatum = new DateTimeOffset(2018, 2, 28, 23, 0, 0, TimeSpan.Zero)
+                Startdatum = new DateTimeOffset(2018, 1, 31, 23, 0, 0, TimeSpan.Zero).UtcDateTime,
+                Enddatum = new DateTimeOffset(2018, 2, 28, 23, 0, 0, TimeSpan.Zero).UtcDateTime
             };
             HashSet<Verbrauch> result12 = v1.Merge(v2);
             Assert.AreEqual(2, result12.Count);
@@ -103,8 +103,8 @@ namespace TestBO4EExtensions
                 Wertermittlungsverfahren = Wertermittlungsverfahren.MESSUNG,
                 Einheit = Mengeneinheit.KW,
                 Wert = 5,
-                Startdatum = new DateTimeOffset(2017, 12, 31, 23, 0, 0, TimeSpan.Zero),
-                Enddatum = new DateTimeOffset(2018, 1, 31, 23, 0, 0, TimeSpan.Zero)
+                Startdatum = new DateTimeOffset(2017, 12, 31, 23, 0, 0, TimeSpan.Zero).UtcDateTime,
+                Enddatum = new DateTimeOffset(2018, 1, 31, 23, 0, 0, TimeSpan.Zero).UtcDateTime
             };
             Verbrauch v4 = new Verbrauch()
             {
@@ -112,8 +112,8 @@ namespace TestBO4EExtensions
                 Wertermittlungsverfahren = Wertermittlungsverfahren.MESSUNG,
                 Einheit = Mengeneinheit.KW,
                 Wert = 5,
-                Startdatum = new DateTimeOffset(2018, 1, 31, 23, 0, 0, TimeSpan.Zero),
-                Enddatum = new DateTimeOffset(2018, 2, 28, 23, 0, 0, TimeSpan.Zero)
+                Startdatum = new DateTimeOffset(2018, 1, 31, 23, 0, 0, TimeSpan.Zero).UtcDateTime,
+                Enddatum = new DateTimeOffset(2018, 2, 28, 23, 0, 0, TimeSpan.Zero).UtcDateTime
             };
             HashSet<Verbrauch> result34 = v3.Merge(v4);
             //Assert.AreEqual(1, result34.Count);
@@ -131,8 +131,8 @@ namespace TestBO4EExtensions
                 Wertermittlungsverfahren = Wertermittlungsverfahren.MESSUNG,
                 Einheit = Mengeneinheit.KWH,
                 Wert = 5,
-                Startdatum = new DateTimeOffset(2017, 12, 31, 23, 0, 0, TimeSpan.Zero),
-                Enddatum = new DateTimeOffset(2018, 1, 31, 23, 0, 0, TimeSpan.Zero)
+                Startdatum = new DateTimeOffset(2017, 12, 31, 23, 0, 0, TimeSpan.Zero).UtcDateTime,
+                Enddatum = new DateTimeOffset(2018, 1, 31, 23, 0, 0, TimeSpan.Zero).UtcDateTime
             };
             Verbrauch v2 = new Verbrauch()
             {
@@ -140,8 +140,8 @@ namespace TestBO4EExtensions
                 Wertermittlungsverfahren = Wertermittlungsverfahren.MESSUNG,
                 Einheit = Mengeneinheit.KWH,
                 Wert = 3,
-                Startdatum = new DateTimeOffset(2018, 1, 15, 23, 0, 0, TimeSpan.Zero),
-                Enddatum = new DateTimeOffset(2018, 2, 28, 23, 0, 0, TimeSpan.Zero)
+                Startdatum = new DateTimeOffset(2018, 1, 15, 23, 0, 0, TimeSpan.Zero).UtcDateTime,
+                Enddatum = new DateTimeOffset(2018, 2, 28, 23, 0, 0, TimeSpan.Zero).UtcDateTime
             };
             HashSet<Verbrauch> result = v1.Merge(v2);
             Assert.AreEqual(1, result.Count);
@@ -162,8 +162,8 @@ namespace TestBO4EExtensions
                 Wertermittlungsverfahren = Wertermittlungsverfahren.MESSUNG,
                 Einheit = Mengeneinheit.KW,
                 Wert = 5,
-                Startdatum = new DateTimeOffset(2017, 12, 31, 23, 0, 0, TimeSpan.Zero),
-                Enddatum = new DateTimeOffset(2018, 1, 31, 23, 0, 0, TimeSpan.Zero)
+                Startdatum = new DateTimeOffset(2017, 12, 31, 23, 0, 0, TimeSpan.Zero).UtcDateTime,
+                Enddatum = new DateTimeOffset(2018, 1, 31, 23, 0, 0, TimeSpan.Zero).UtcDateTime
             };
             Verbrauch v2 = new Verbrauch()
             {
@@ -171,8 +171,8 @@ namespace TestBO4EExtensions
                 Wertermittlungsverfahren = Wertermittlungsverfahren.MESSUNG,
                 Einheit = Mengeneinheit.KW,
                 Wert = 3,
-                Startdatum = new DateTimeOffset(2018, 1, 15, 23, 0, 0, TimeSpan.Zero),
-                Enddatum = new DateTimeOffset(2018, 2, 28, 23, 0, 0, TimeSpan.Zero)
+                Startdatum = new DateTimeOffset(2018, 1, 15, 23, 0, 0, TimeSpan.Zero).UtcDateTime,
+                Enddatum = new DateTimeOffset(2018, 2, 28, 23, 0, 0, TimeSpan.Zero).UtcDateTime
             };
             var rawResult = v1.Merge(v2);
             List<Verbrauch> result = new List<Verbrauch>(rawResult);
@@ -198,8 +198,8 @@ namespace TestBO4EExtensions
                 Wertermittlungsverfahren = Wertermittlungsverfahren.MESSUNG,
                 Einheit = Mengeneinheit.KW,
                 Wert = 5,
-                Startdatum = new DateTimeOffset(2017, 12, 31, 23, 0, 0, TimeSpan.Zero),
-                Enddatum = new DateTimeOffset(2018, 1, 31, 23, 0, 0, TimeSpan.Zero)
+                Startdatum = new DateTimeOffset(2017, 12, 31, 23, 0, 0, TimeSpan.Zero).UtcDateTime,
+                Enddatum = new DateTimeOffset(2018, 1, 31, 23, 0, 0, TimeSpan.Zero).UtcDateTime
             };
             Verbrauch v2 = new Verbrauch()
             {
@@ -207,8 +207,8 @@ namespace TestBO4EExtensions
                 Wertermittlungsverfahren = Wertermittlungsverfahren.MESSUNG,
                 Einheit = Mengeneinheit.KW,
                 Wert = 5,
-                Startdatum = new DateTimeOffset(2017, 12, 31, 23, 0, 0, TimeSpan.Zero),
-                Enddatum = new DateTimeOffset(2018, 1, 31, 23, 0, 0, TimeSpan.Zero)
+                Startdatum = new DateTimeOffset(2017, 12, 31, 23, 0, 0, TimeSpan.Zero).UtcDateTime,
+                Enddatum = new DateTimeOffset(2018, 1, 31, 23, 0, 0, TimeSpan.Zero).UtcDateTime
             };
             var rawResult = v1.MergeRedundant(v2, true);
             List<Verbrauch> result = new List<Verbrauch>(rawResult);
@@ -227,8 +227,8 @@ namespace TestBO4EExtensions
                 Wertermittlungsverfahren = Wertermittlungsverfahren.MESSUNG,
                 Einheit = Mengeneinheit.KWH,
                 Wert = 5,
-                Startdatum = new DateTimeOffset(2017, 12, 31, 23, 0, 0, TimeSpan.Zero),
-                Enddatum = new DateTimeOffset(2018, 1, 31, 23, 0, 0, TimeSpan.Zero)
+                Startdatum = new DateTimeOffset(2017, 12, 31, 23, 0, 0, TimeSpan.Zero).UtcDateTime,
+                Enddatum = new DateTimeOffset(2018, 1, 31, 23, 0, 0, TimeSpan.Zero).UtcDateTime
             };
             Verbrauch v2 = new Verbrauch()
             {
@@ -236,8 +236,8 @@ namespace TestBO4EExtensions
                 Wertermittlungsverfahren = Wertermittlungsverfahren.MESSUNG,
                 Einheit = Mengeneinheit.KWH,
                 Wert = 5,
-                Startdatum = new DateTimeOffset(2017, 12, 31, 23, 0, 0, TimeSpan.Zero),
-                Enddatum = new DateTimeOffset(2018, 1, 31, 23, 0, 0, TimeSpan.Zero)
+                Startdatum = new DateTimeOffset(2017, 12, 31, 23, 0, 0, TimeSpan.Zero).UtcDateTime,
+                Enddatum = new DateTimeOffset(2018, 1, 31, 23, 0, 0, TimeSpan.Zero).UtcDateTime
             };
             var rawResult = v1.MergeRedundant(v2, true);
             List<Verbrauch> result = new List<Verbrauch>(rawResult);
@@ -255,8 +255,8 @@ namespace TestBO4EExtensions
                 Wertermittlungsverfahren = Wertermittlungsverfahren.MESSUNG,
                 Einheit = Mengeneinheit.KWH,
                 Wert = 5,
-                Startdatum = new DateTimeOffset(2017, 12, 31, 23, 0, 0, TimeSpan.Zero),
-                Enddatum = new DateTimeOffset(2018, 2, 28, 23, 0, 0, TimeSpan.Zero)
+                Startdatum = new DateTimeOffset(2017, 12, 31, 23, 0, 0, TimeSpan.Zero).UtcDateTime,
+                Enddatum = new DateTimeOffset(2018, 2, 28, 23, 0, 0, TimeSpan.Zero).UtcDateTime
             };
             Verbrauch v2 = new Verbrauch()
             {
@@ -264,8 +264,8 @@ namespace TestBO4EExtensions
                 Wertermittlungsverfahren = Wertermittlungsverfahren.MESSUNG,
                 Einheit = Mengeneinheit.KWH,
                 Wert = 3,
-                Startdatum = new DateTimeOffset(2017, 12, 31, 23, 0, 0, TimeSpan.Zero),
-                Enddatum = new DateTimeOffset(2018, 1, 31, 23, 0, 0, TimeSpan.Zero)
+                Startdatum = new DateTimeOffset(2017, 12, 31, 23, 0, 0, TimeSpan.Zero).UtcDateTime,
+                Enddatum = new DateTimeOffset(2018, 1, 31, 23, 0, 0, TimeSpan.Zero).UtcDateTime
             };
             var rawResult = v1.MergeRedundant(v2, true);
 
@@ -304,8 +304,8 @@ namespace TestBO4EExtensions
             Wertermittlungsverfahren = Wertermittlungsverfahren.MESSUNG,
             Einheit = Mengeneinheit.KWH,
             Wert = 31 + 2 * 28,
-            Startdatum = new DateTimeOffset(2017, 12, 31, 23, 0, 0, TimeSpan.Zero),
-            Enddatum = new DateTimeOffset(2018, 2, 28, 23, 0, 0, TimeSpan.Zero)
+            Startdatum = new DateTimeOffset(2017, 12, 31, 23, 0, 0, TimeSpan.Zero).UtcDateTime,
+            Enddatum = new DateTimeOffset(2018, 2, 28, 23, 0, 0, TimeSpan.Zero).UtcDateTime
         };
 
         private static readonly Verbrauch dtV2 = new Verbrauch()
@@ -314,8 +314,8 @@ namespace TestBO4EExtensions
             Wertermittlungsverfahren = Wertermittlungsverfahren.MESSUNG,
             Einheit = Mengeneinheit.KWH,
             Wert = 31,
-            Startdatum = new DateTimeOffset(2017, 12, 31, 23, 0, 0, TimeSpan.Zero),
-            Enddatum = new DateTimeOffset(2018, 1, 31, 23, 0, 0, TimeSpan.Zero)
+            Startdatum = new DateTimeOffset(2017, 12, 31, 23, 0, 0, TimeSpan.Zero).UtcDateTime,
+            Enddatum = new DateTimeOffset(2018, 1, 31, 23, 0, 0, TimeSpan.Zero).UtcDateTime
         };
 
         private static readonly Verbrauch dtV3 = new Verbrauch()
@@ -324,8 +324,8 @@ namespace TestBO4EExtensions
             Wertermittlungsverfahren = Wertermittlungsverfahren.MESSUNG,
             Einheit = Mengeneinheit.KWH,
             Wert = 31 + 2 * 28 + 3 * 31,
-            Startdatum = new DateTimeOffset(2017, 12, 31, 23, 0, 0, TimeSpan.Zero),
-            Enddatum = new DateTimeOffset(2018, 3, 31, 23, 0, 0, TimeSpan.Zero)
+            Startdatum = new DateTimeOffset(2017, 12, 31, 23, 0, 0, TimeSpan.Zero).UtcDateTime,
+            Enddatum = new DateTimeOffset(2018, 3, 31, 23, 0, 0, TimeSpan.Zero).UtcDateTime
         };
 
         [TestMethod]
@@ -401,8 +401,8 @@ namespace TestBO4EExtensions
                 Wertermittlungsverfahren = Wertermittlungsverfahren.MESSUNG,
                 Einheit = Mengeneinheit.MW,
                 Wert = 17,
-                Startdatum = new DateTimeOffset(2017, 12, 31, 23, 0, 0, TimeSpan.Zero),
-                Enddatum = new DateTimeOffset(2018, 3, 31, 23, 0, 0, TimeSpan.Zero)
+                Startdatum = new DateTimeOffset(2017, 12, 31, 23, 0, 0, TimeSpan.Zero).UtcDateTime,
+                Enddatum = new DateTimeOffset(2018, 3, 31, 23, 0, 0, TimeSpan.Zero).UtcDateTime
             };
             v1.ConvertToUnit(Mengeneinheit.KW);
             Assert.AreEqual(Mengeneinheit.KW, v1.Einheit);

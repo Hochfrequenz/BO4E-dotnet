@@ -123,12 +123,12 @@ namespace BO4E.Reporting
             /// <see cref="Verbrauch.Startdatum"/>
             /// </summary>
             [JsonProperty(PropertyName = "startdatum", Required = Required.Always)]
-            public DateTimeOffset Startdatum { get; set; }
+            public DateTime Startdatum { get; set; }
             /// <summary>
             /// <see cref="Verbrauch.Enddatum"/>
             /// </summary>
             [JsonProperty(PropertyName = "enddatum", Required = Required.Always)]
-            public DateTimeOffset Enddatum { get; set; }
+            public DateTime Enddatum { get; set; }
             /// <summary>
             /// <see cref="Verbrauch.Wert"/>. Make it null to express no value present.
             /// </summary>

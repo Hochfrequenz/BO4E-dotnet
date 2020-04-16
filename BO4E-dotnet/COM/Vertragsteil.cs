@@ -1,7 +1,7 @@
 ﻿using System;
 
 using BO4E.meta;
-
+using BO4E.meta.LenientConverters;
 using Newtonsoft.Json;
 
 using ProtoBuf;
@@ -20,6 +20,7 @@ namespace BO4E.COM
         /// </summary>
         [JsonProperty(PropertyName = "vertragsteilbeginn", Required = Required.Always)]
         [ProtoMember(3)]
+        [JsonConverter(typeof(LenientDateTimeConverter))]
         public DateTimeOffset Vertragsteilbeginn { get; set; }
 
         /// <summary>
@@ -27,6 +28,7 @@ namespace BO4E.COM
         /// </summary>
         [JsonProperty(PropertyName = "vertragsteilende", Required = Required.Always)]
         [ProtoMember(4)]
+        [JsonConverter(typeof(LenientDateTimeConverter))]
         public DateTimeOffset Vertragsteilende { get; set; }
 
         /// <summary>

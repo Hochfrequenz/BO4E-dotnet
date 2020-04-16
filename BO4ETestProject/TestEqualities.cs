@@ -27,15 +27,15 @@ namespace TestBO4E
             {
                 Einheit = Mengeneinheit.KWH,
                 Obiskennzahl = "1-1:1.8.0",
-                Startdatum = new DateTimeOffset(2019, 1, 1, 0, 0, 0, TimeSpan.Zero),
-                Enddatum = new DateTimeOffset(2020, 1, 1, 0, 0, 0, TimeSpan.Zero)
+                Startdatum = new DateTime(2019, 1, 1, 0, 0, 0, DateTimeKind.Utc),
+                Enddatum = new DateTime(2020, 1, 1, 0, 0, 0, DateTimeKind.Utc)
             };
             v2 = new Verbrauch()
             {
                 Einheit = Mengeneinheit.KWH,
                 Obiskennzahl = "1-1:1.8.0",
-                Startdatum = new DateTimeOffset(2019, 1, 1, 0, 0, 0, TimeSpan.Zero),
-                Enddatum = new DateTimeOffset(2020, 1, 1, 0, 0, 0, TimeSpan.Zero)
+                Startdatum = new DateTime(2019, 1, 1, 0, 0, 0, DateTimeKind.Utc),
+                Enddatum = new DateTime(2020, 1, 1, 0, 0, 0, DateTimeKind.Utc)
             };
 
             Assert.AreEqual(v1, v2);

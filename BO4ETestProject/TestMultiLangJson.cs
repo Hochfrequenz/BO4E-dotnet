@@ -106,7 +106,7 @@ namespace TestBO4E
             Assert.IsFalse(DEjson.Contains("internal_english"));
 
             MultiLangBo ml = JsonConvert.DeserializeObject<MultiLangBo>(DEjson);
-            Assert.AreNotEqual(DateTime.MinValue, ml.datum_deutsch);
+            Assert.AreNotEqual(DateTime.MinValue, ml.datum_deutsch.UtcDateTime);
         }
 
         //[TestMethod]

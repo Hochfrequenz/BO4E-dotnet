@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+
 using BO4E;
 using BO4E.BO;
 using BO4E.COM;
@@ -9,11 +10,15 @@ using BO4E.ENUM;
 using BO4E.Extensions.BusinessObjects.Energiemenge;
 using BO4E.meta.LenientConverters;
 using BO4E.Reporting;
+
 using Itenso.TimePeriod;
+
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 using Newtonsoft.Json.Linq;
+
 using StackExchange.Profiling;
 
 namespace TestBO4EExtensions
@@ -161,16 +166,16 @@ namespace TestBO4EExtensions
                         Obiskennzahl="1234",
                         Wert=123.456M,
                         Wertermittlungsverfahren=Wertermittlungsverfahren.MESSUNG,
-                        Startdatum = new DateTimeOffset(2019,1,1,0,0,0,TimeSpan.Zero),
-                        Enddatum = new DateTimeOffset(2019,1,4,0,0,0,TimeSpan.Zero),
+                        Startdatum = new DateTimeOffset(2019,1,1,0,0,0,TimeSpan.Zero).UtcDateTime,
+                        Enddatum = new DateTimeOffset(2019,1,4,0,0,0,TimeSpan.Zero).UtcDateTime,
                     },
                     new Verbrauch()
                     {
                         Obiskennzahl="1234",
                         Wert=123.456M,
                         Wertermittlungsverfahren=Wertermittlungsverfahren.MESSUNG,
-                        Startdatum = new DateTimeOffset(2019,1,4,0,0,0,TimeSpan.Zero),
-                        Enddatum = new DateTimeOffset(2019,1,7,0,0,0,TimeSpan.Zero),
+                        Startdatum = new DateTimeOffset(2019,1,4,0,0,0,TimeSpan.Zero).UtcDateTime,
+                        Enddatum = new DateTimeOffset(2019,1,7,0,0,0,TimeSpan.Zero).UtcDateTime,
                     }
                 }
             };

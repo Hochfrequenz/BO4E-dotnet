@@ -120,7 +120,7 @@ namespace BO4E.Extensions.BusinessObjects.Energiemenge
                 }*/
                 using (MiniProfiler.Current.Step("Setting aggregated gaps"))
                 {
-                    var nonNullValues = new TimePeriodCollection(em.Energieverbrauch.Select(v => new TimeRange(v.Startdatum.UtcDateTime, v.Enddatum.UtcDateTime)));
+                    var nonNullValues = new TimePeriodCollection(em.Energieverbrauch.Select(v => new TimeRange(v.Startdatum, v.Enddatum)));
                     ITimeRange limits;
                     if (result.ReferenceTimeFrame != null && result.ReferenceTimeFrame.Startdatum.HasValue && result.ReferenceTimeFrame.Enddatum.HasValue)
                     {

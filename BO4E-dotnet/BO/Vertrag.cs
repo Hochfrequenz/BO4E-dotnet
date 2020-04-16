@@ -5,7 +5,7 @@ using System.Runtime.Serialization;
 using BO4E.COM;
 using BO4E.ENUM;
 using BO4E.meta;
-
+using BO4E.meta.LenientConverters;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 
@@ -60,6 +60,7 @@ namespace BO4E.BO
         /// </summary>
         [JsonProperty(Required = Required.Always, Order = 9, PropertyName = "vertragsbeginn")]
         [ProtoMember(9)]
+        [JsonConverter(typeof(LenientDateTimeConverter))]
         public DateTimeOffset Vertragsbeginn { get; set; }
 
         /// <summary>
@@ -67,6 +68,7 @@ namespace BO4E.BO
         /// </summary>
         [JsonProperty(Required = Required.Always, Order = 10, PropertyName = "vertragsende")]
         [ProtoMember(10)]
+        [JsonConverter(typeof(LenientDateTimeConverter))]
         public DateTimeOffset Vertragsende { get; set; }
 
         /// <summary>

@@ -38,8 +38,8 @@ namespace BO4E.Extensions.COM
                     // don't wanna deal with time running backwards.
                     //Debug.Assert(v1.enddatum >= v1.startdatum);
                     //Debug.Assert(v2.enddatum >= v2.startdatum);
-                    TimeRange tr1 = new TimeRange(v1.Startdatum.UtcDateTime, v1.Enddatum.UtcDateTime);
-                    TimeRange tr2 = new TimeRange(v2.Startdatum.UtcDateTime, v2.Enddatum.UtcDateTime);
+                    TimeRange tr1 = new TimeRange(v1.Startdatum, v1.Enddatum);
+                    TimeRange tr2 = new TimeRange(v2.Startdatum, v2.Enddatum);
                     ITimeRange overlap = v1.GetIntersection(v2);
                     if (v1.Einheit.IsExtensive())
                     {
@@ -141,8 +141,8 @@ namespace BO4E.Extensions.COM
                 }
                 else if (v1.Startdatum == v2.Enddatum || v2.Startdatum == v1.Enddatum)
                 {
-                    DateTimeOffset start = v1.Startdatum < v2.Startdatum ? v1.Startdatum : v2.Startdatum;
-                    DateTimeOffset stop = v1.Enddatum > v2.Enddatum ? v1.Enddatum : v2.Enddatum;
+                    DateTime start = v1.Startdatum < v2.Startdatum ? v1.Startdatum : v2.Startdatum;
+                    DateTime stop = v1.Enddatum > v2.Enddatum ? v1.Enddatum : v2.Enddatum;
                     Verbrauch vmerge = new Verbrauch()
                     {
                         Obiskennzahl = v1.Obiskennzahl,
@@ -181,7 +181,7 @@ namespace BO4E.Extensions.COM
                 result.Add(v1);
                 result.Add(v2);
             }
-            result.RemoveWhere(v => v.Einheit.IsIntensive() && new TimeRange(v.Startdatum.UtcDateTime, v.Enddatum.UtcDateTime).Duration.TotalMilliseconds == 0);
+            result.RemoveWhere(v => v.Einheit.IsIntensive() && new TimeRange(v.Startdatum, v.Enddatum).Duration.TotalMilliseconds == 0);
             return result;
         }
 
@@ -192,7 +192,7 @@ namespace BO4E.Extensions.COM
         /// <returns></returns>
         public static TimeRange GetTimeRange(this Verbrauch v)
         {
-            return new TimeRange(v.Startdatum.UtcDateTime, v.Enddatum.UtcDateTime);
+            return new TimeRange(v.Startdatum, v.Enddatum);
         }
 
         public static TimeSpan GetDuration(this Verbrauch v)
@@ -326,22 +326,22 @@ namespace BO4E.Extensions.COM
         /// <returns>true iff [<paramref name="v1"/>.startdatum, <paramref name="v1"/>.enddatum) and [<paramref name="v2"/>.startdatum, <paramref name="v2"/>.enddatum) overlap</returns>
         public static bool OverlapsWith(this Verbrauch v1, Verbrauch v2)
         {
-            return v1.OverlapsWith(new TimeRange(v2.Startdatum.UtcDateTime, v2.Enddatum.UtcDateTime, true));
+            return v1.OverlapsWith(new TimeRange(v2.Startdatum, v2.Enddatum, true));
         }
 
         public static bool OverlapsWith(this Verbrauch v1, ITimeRange tr2)
         {
-            return new TimeRange(v1.Startdatum.UtcDateTime, v1.Enddatum.UtcDateTime).OverlapsWith(tr2);
+            return new TimeRange(v1.Startdatum, v1.Enddatum).OverlapsWith(tr2);
         }
 
         public static ITimeRange GetIntersection(this Verbrauch v1, ITimeRange tr2)
         {
-            return (new TimeRange(v1.Startdatum.UtcDateTime, v1.Enddatum.UtcDateTime).GetIntersection(tr2));
+            return (new TimeRange(v1.Startdatum, v1.Enddatum).GetIntersection(tr2));
         }
 
         public static ITimeRange GetIntersection(this Verbrauch v1, Verbrauch v2)
         {
-            return v1.GetIntersection(new TimeRange(v2.Startdatum.UtcDateTime, v2.Enddatum.UtcDateTime));
+            return v1.GetIntersection(new TimeRange(v2.Startdatum, v2.Enddatum));
         }
 
         public static bool Contains(this Verbrauch v1, Verbrauch v2)

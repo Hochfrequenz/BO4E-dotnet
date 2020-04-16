@@ -5,7 +5,7 @@ using System.ComponentModel;
 using BO4E.COM;
 using BO4E.ENUM;
 using BO4E.meta;
-
+using BO4E.meta.LenientConverters;
 using Newtonsoft.Json;
 
 using ProtoBuf;
@@ -60,6 +60,7 @@ namespace BO4E.BO
         // [DefaultValue(DateTimeOffset.UtcNow)] <-- doesn't work.
         [JsonProperty(Required = Required.Always, Order = 8, PropertyName = "erstellungsZeitpunkt")]
         [ProtoMember(8)]
+        [JsonConverter(typeof(LenientDateTimeConverter))]
         public DateTimeOffset ErstellungsZeitpunkt { get; set; }
         /*{
             get { return _erstellungsZeitpunkt; }
@@ -115,6 +116,7 @@ namespace BO4E.BO
         /// </summary>
         [JsonProperty(Required = Required.Default, Order = 12, PropertyName = "deadline")]
         [ProtoMember(12)]
+        [JsonConverter(typeof(LenientDateTimeConverter))]
         public DateTimeOffset? Deadline { get; set; }
 
         /// <summary>
