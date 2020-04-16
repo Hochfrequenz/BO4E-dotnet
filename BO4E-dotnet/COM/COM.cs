@@ -1,10 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Reflection;
+
 using BO4E.BO;
 using BO4E.meta;
+
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
+
 using ProtoBuf;
 
 namespace BO4E.COM
@@ -143,8 +145,8 @@ namespace BO4E.COM
         /// <summary>
         /// allows adding a GUID to COM objects for tracking across systems
         /// </summary>
-        [JsonProperty(PropertyName="guid", NullValueHandling = NullValueHandling.Ignore, Required = Required.Default, Order = 1)]
+        [JsonProperty(PropertyName = "guid", NullValueHandling = NullValueHandling.Ignore, Required = Required.Default, Order = 1)]
         [ProtoMember(1)]
-        public string Guid { get;set; }
+        public string Guid { get; set; }
     }
 }
