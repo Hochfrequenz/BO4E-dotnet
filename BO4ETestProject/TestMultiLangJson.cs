@@ -24,7 +24,7 @@ namespace TestBO4E
         public class MultiLangBo : BusinessObject
         {
             [FieldName("date_english", Language.EN)]
-            public DateTime datum_deutsch;
+            public DateTimeOffset datum_deutsch;
             [FieldName("value_english", Language.EN)]
             public string wert_deutsch;
             [FieldName("internal Object", Language.EN)]

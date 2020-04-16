@@ -22,9 +22,9 @@ namespace TestBO4EExtensions
     [TestClass]
     public class TestEnergiemengeExtension
     {
-        internal static readonly TimeRange GERMAN_MARCH_2018 = new TimeRange(new DateTimeOffset(2018, 2, 28, 23, 0, 0, TimeSpan.Zero), new DateTimeOffset(2018, 3, 31, 22, 0, 0, TimeSpan.Zero));
-        internal static readonly TimeRange GERMAN_APRIL_2018 = new TimeRange(new DateTimeOffset(2018, 3, 31, 22, 0, 0, TimeSpan.Zero), new DateTimeOffset(2018, 4, 30, 22, 0, 0, TimeSpan.Zero));
-        internal static readonly TimeRange march2425 = new TimeRange(new DateTimeOffset(2018, 3, 23, 23, 0, 0, TimeSpan.Zero), new DateTimeOffset(2018, 3, 25, 22, 0, 0, TimeSpan.Zero));
+        internal static readonly TimeRange GERMAN_MARCH_2018 = new TimeRange(new DateTimeOffset(2018, 2, 28, 23, 0, 0, TimeSpan.Zero).UtcDateTime, new DateTimeOffset(2018, 3, 31, 22, 0, 0, TimeSpan.Zero).UtcDateTime);
+        internal static readonly TimeRange GERMAN_APRIL_2018 = new TimeRange(new DateTimeOffset(2018, 3, 31, 22, 0, 0, TimeSpan.Zero).UtcDateTime, new DateTimeOffset(2018, 4, 30, 22, 0, 0, TimeSpan.Zero).UtcDateTime);
+        internal static readonly TimeRange march2425 = new TimeRange(new DateTimeOffset(2018, 3, 23, 23, 0, 0, TimeSpan.Zero).UtcDateTime, new DateTimeOffset(2018, 3, 25, 22, 0, 0, TimeSpan.Zero).UtcDateTime);
 
         [TestMethod]
         public void TestTestingRanges()

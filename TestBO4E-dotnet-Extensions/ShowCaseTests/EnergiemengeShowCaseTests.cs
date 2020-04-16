@@ -51,7 +51,7 @@ namespace TestBO4E.ShowCaseTests
             Debug.WriteLine($"The total consumption is {consumption.Item1}{consumption.Item2}");
             // The total consumption is 579,0KWH
 
-            var consumptionMarch7 = em.GetConsumption(new TimeRange(start: new DateTimeOffset(2020, 3, 7, 0, 0, 0, TimeSpan.Zero), end: new DateTimeOffset(2020, 3, 8, 0, 0, 0, TimeSpan.Zero)));
+            var consumptionMarch7 = em.GetConsumption(new TimeRange(start: new DateTimeOffset(2020, 3, 7, 0, 0, 0, TimeSpan.Zero).UtcDateTime, end: new DateTimeOffset(2020, 3, 8, 0, 0, 0, TimeSpan.Zero).UtcDateTime));
             Debug.WriteLine($"The total consumption on March 7 is {Decimal.Round(consumptionMarch7.Item1)}{consumptionMarch7.Item2}");
             // The total consumption on March 7 is 65KWH
 

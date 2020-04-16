@@ -129,16 +129,16 @@ namespace TestBO4EExtensions
             Energiemenge em = (Energiemenge)BoMapper.MapObject(JObject.FromObject(json["input"]), LenientParsing.Strict);
             CompletenessReport cr = em.GetCompletenessReport(new TimeRange()
             {
-                Start = new DateTimeOffset(2017, 12, 31, 23, 0, 0, 0, TimeSpan.Zero),
-                End = new DateTimeOffset(2018, 1, 31, 23, 0, 0, 0, TimeSpan.Zero)
+                Start = new DateTimeOffset(2017, 12, 31, 23, 0, 0, 0, TimeSpan.Zero).UtcDateTime,
+                End = new DateTimeOffset(2018, 1, 31, 23, 0, 0, 0, TimeSpan.Zero).UtcDateTime
             });
             Assert.AreEqual(1.0M, cr.Coverage.Value);
             Assert.AreEqual(0, cr.Gaps.Count());
 
             var dailies = em.GetDailyCompletenessReports(new TimeRange()
             {
-                Start = new DateTimeOffset(2017, 12, 31, 23, 0, 0, 0, TimeSpan.Zero),
-                End = new DateTimeOffset(2018, 1, 2, 23, 0, 0, 0, TimeSpan.Zero)
+                Start = new DateTimeOffset(2017, 12, 31, 23, 0, 0, 0, TimeSpan.Zero).UtcDateTime,
+                End = new DateTimeOffset(2018, 1, 2, 23, 0, 0, 0, TimeSpan.Zero).UtcDateTime
             });
             foreach (var crDaily in dailies)
             {
@@ -175,7 +175,7 @@ namespace TestBO4EExtensions
                 }
             };
 
-            var cr = em.GetCompletenessReport(new TimeRange(new DateTimeOffset(2018, 12, 29, 0, 0, 0, TimeSpan.Zero), new DateTimeOffset(2019, 1, 10, 0, 0, 0, TimeSpan.Zero)));
+            var cr = em.GetCompletenessReport(new TimeRange(new DateTimeOffset(2018, 12, 29, 0, 0, 0, TimeSpan.Zero).UtcDateTime, new DateTimeOffset(2019, 1, 10, 0, 0, 0, TimeSpan.Zero).UtcDateTime));
             Assert.AreEqual(2, cr.Gaps.Count());
             Assert.AreEqual(new DateTimeOffset(2018, 12, 29, 0, 0, 0, TimeSpan.Zero), cr.Gaps.First().Startdatum);
             Assert.AreEqual(new DateTimeOffset(2019, 1, 1, 0, 0, 0, TimeSpan.Zero), cr.Gaps.First().Enddatum);
@@ -217,11 +217,11 @@ namespace TestBO4EExtensions
         }
 
         internal static readonly TimeRange CHRISTMAS_2018 = new TimeRange(
-            new DateTimeOffset(2018, 12, 23, 22, 0, 0, TimeSpan.Zero),
-            new DateTimeOffset(2018, 12, 31, 22, 0, 0, TimeSpan.Zero));
+            new DateTimeOffset(2018, 12, 23, 22, 0, 0, TimeSpan.Zero).UtcDateTime,
+            new DateTimeOffset(2018, 12, 31, 22, 0, 0, TimeSpan.Zero).UtcDateTime);
         internal static readonly TimeRange GERMAN_YEAR_2018 = new TimeRange(
-            new DateTimeOffset(2017, 12, 31, 23, 0, 0, TimeSpan.Zero),
-            new DateTimeOffset(2018, 12, 31, 23, 0, 0, TimeSpan.Zero));
+            new DateTimeOffset(2017, 12, 31, 23, 0, 0, TimeSpan.Zero).UtcDateTime,
+            new DateTimeOffset(2018, 12, 31, 23, 0, 0, TimeSpan.Zero).UtcDateTime);
 
         [TestMethod]
         public void TestDailyCompleteness()
@@ -294,13 +294,13 @@ namespace TestBO4EExtensions
 
 
                 MiniProfiler mpLinear = MiniProfiler.StartNew("Non-Parallel");
-                em.GetMonthlyCompletenessReports(new TimeRange(new DateTimeOffset(2016, 1, 31, 23, 0, 0, TimeSpan.Zero), new DateTimeOffset(2016, 12, 31, 23, 0, 0, TimeSpan.Zero)), useParallelExecution: false);
+                em.GetMonthlyCompletenessReports(new TimeRange(new DateTimeOffset(2016, 1, 31, 23, 0, 0, TimeSpan.Zero).UtcDateTime, new DateTimeOffset(2016, 12, 31, 23, 0, 0, TimeSpan.Zero).UtcDateTime), useParallelExecution: false);
                 mpLinear.Stop();
                 Console.Out.Write(mpLinear.RenderPlainText());
                 Assert.IsTrue(mpLinear.DurationMilliseconds < 4000, $"Linear completeness report generation was too slow. Expected less than 4 seconds but was {mpLinear.DurationMilliseconds}ms: {mpLinear.RenderPlainText()}");
 
                 MiniProfiler mpParallel = MiniProfiler.StartNew("Parallel");
-                em.GetMonthlyCompletenessReports(new TimeRange(new DateTimeOffset(2016, 1, 31, 23, 0, 0, TimeSpan.Zero), new DateTimeOffset(2016, 12, 31, 23, 0, 0, TimeSpan.Zero)), useParallelExecution: true);
+                em.GetMonthlyCompletenessReports(new TimeRange(new DateTimeOffset(2016, 1, 31, 23, 0, 0, TimeSpan.Zero).UtcDateTime, new DateTimeOffset(2016, 12, 31, 23, 0, 0, TimeSpan.Zero).UtcDateTime), useParallelExecution: true);
                 mpParallel.Stop();
                 Console.Out.Write(mpParallel.RenderPlainText());
                 //Assert.IsTrue(mpParallel.DurationMilliseconds < 3000, $"Parallel completeness report generation was too slow. Expected less than 3 seconds but was {mpParallel.DurationMilliseconds}ms: {mpParallel.RenderPlainText()}");
@@ -332,13 +332,13 @@ namespace TestBO4EExtensions
             em.Energieverbrauch = listvb;
 
             MiniProfiler mpLinear = MiniProfiler.StartNew("Non-Parallel");
-            em.GetMonthlyCompletenessReports(new TimeRange(new DateTimeOffset(2015, 1, 1, 23, 00, 0, TimeSpan.Zero), new DateTimeOffset(2019, 12, 31, 23, 0, 0, TimeSpan.Zero)), useParallelExecution: false);
+            em.GetMonthlyCompletenessReports(new TimeRange(new DateTimeOffset(2015, 1, 1, 23, 00, 0, TimeSpan.Zero).UtcDateTime, new DateTimeOffset(2019, 12, 31, 23, 0, 0, TimeSpan.Zero).UtcDateTime), useParallelExecution: false);
             mpLinear.Stop();
             Console.Out.Write(mpLinear.RenderPlainText());
             //Assert.IsTrue(mpLinear.DurationMilliseconds < 4000, $"Linear completeness report generation was too slow. Expected less than 4 seconds but was {mpLinear.DurationMilliseconds}ms: {mpLinear.RenderPlainText()}");
 
             MiniProfiler mpParallel = MiniProfiler.StartNew("Parallel");
-            em.GetDailyCompletenessReports(new TimeRange(new DateTimeOffset(2015, 1, 01, 23, 0, 0, TimeSpan.Zero), new DateTimeOffset(2019, 12, 31, 23, 0, 0, TimeSpan.Zero)), useParallelExecution: true);
+            em.GetDailyCompletenessReports(new TimeRange(new DateTimeOffset(2015, 1, 01, 23, 0, 0, TimeSpan.Zero).UtcDateTime, new DateTimeOffset(2019, 12, 31, 23, 0, 0, TimeSpan.Zero).UtcDateTime), useParallelExecution: true);
             mpParallel.Stop();
             Console.Out.Write(mpParallel.RenderPlainText());
             //Assert.IsTrue(mpParallel.DurationMilliseconds < 3000, $"Parallel completeness report generation was too slow. Expected less than 3 seconds but was {mpParallel.DurationMilliseconds}ms: {mpParallel.RenderPlainText()}");
@@ -349,8 +349,8 @@ namespace TestBO4EExtensions
         [TestMethod]
         public void TestDailyCompletenessDST()
         {
-            var localStart = TimeZoneInfo.ConvertTimeFromUtc(new DateTimeOffset(2018, 3, 24, 23, 0, 0, TimeSpan.Zero), Verbrauch.CENTRAL_EUROPE_STANDARD_TIME);//, DateTimeKind.Unspecified);
-            var localEnd = TimeZoneInfo.ConvertTimeFromUtc(new DateTimeOffset(2018, 3, 26, 22, 0, 0, TimeSpan.Zero), Verbrauch.CENTRAL_EUROPE_STANDARD_TIME);//, DateTimeKind.Unspecified);
+            var localStart = TimeZoneInfo.ConvertTimeFromUtc(new DateTimeOffset(2018, 3, 24, 23, 0, 0, TimeSpan.Zero).UtcDateTime, Verbrauch.CENTRAL_EUROPE_STANDARD_TIME);//, DateTimeKind.Unspecified);
+            var localEnd = TimeZoneInfo.ConvertTimeFromUtc(new DateTimeOffset(2018, 3, 26, 22, 0, 0, TimeSpan.Zero).UtcDateTime, Verbrauch.CENTRAL_EUROPE_STANDARD_TIME);//, DateTimeKind.Unspecified);
             if (TimeZoneInfo.Local != Verbrauch.CENTRAL_EUROPE_STANDARD_TIME)
             {
                 localStart = DateTime.SpecifyKind(TimeZoneInfo.ConvertTime(localStart, TimeZoneInfo.Local, Verbrauch.CENTRAL_EUROPE_STANDARD_TIME), DateTimeKind.Unspecified);
@@ -373,8 +373,8 @@ namespace TestBO4EExtensions
             {
                 new TimeRange()
                 {
-                    Start = utcStart,
-                    End = utcStart.AddHours(1)
+                    Start = utcStart.UtcDateTime,
+                    End = utcStart.AddHours(1).UtcDateTime
                 }
             };
             while (verbrauchSlices.Last().End < utcEnd)
@@ -400,7 +400,7 @@ namespace TestBO4EExtensions
                 }
                 ).ToList()
             };
-            var result = em.GetDailyCompletenessReports(new TimeRange(utcStart, utcEnd));
+            var result = em.GetDailyCompletenessReports(new TimeRange(utcStart.UtcDateTime, utcEnd.UtcDateTime));
             Assert.AreEqual(2, result.Count);
             Assert.AreEqual(new DateTimeOffset(2018, 3, 24, 23, 0, 0, TimeSpan.Zero), result.First().Value.ReferenceTimeFrame.Startdatum);
             Assert.AreEqual(new DateTimeOffset(2018, 3, 25, 22, 0, 0, TimeSpan.Zero), result.First().Value.ReferenceTimeFrame.Enddatum);
@@ -411,8 +411,8 @@ namespace TestBO4EExtensions
         [TestMethod]
         public void TestAddDaysDSTSpring()
         {
-            DateTime utcDt = new DateTimeOffset(2018, 3, 24, 23, 0, 0, TimeSpan.Zero);
-            DateTime localDt = DateTime.SpecifyKind(TimeZoneInfo.ConvertTimeFromUtc(new DateTimeOffset(2018, 3, 24, 23, 0, 0, TimeSpan.Zero), Verbrauch.CENTRAL_EUROPE_STANDARD_TIME), DateTimeKind.Unspecified);
+            DateTime utcDt = new DateTimeOffset(2018, 3, 24, 23, 0, 0, TimeSpan.Zero).UtcDateTime;
+            DateTime localDt = DateTime.SpecifyKind(TimeZoneInfo.ConvertTimeFromUtc(new DateTimeOffset(2018, 3, 24, 23, 0, 0, TimeSpan.Zero).UtcDateTime, Verbrauch.CENTRAL_EUROPE_STANDARD_TIME), DateTimeKind.Unspecified);
 
             DateTime resultUtc = utcDt.AddDaysDST(1);
             DateTime resultLocal = localDt.AddDaysDST(1);
@@ -431,8 +431,8 @@ namespace TestBO4EExtensions
         [TestMethod]
         public void TestAddDaysDSTAutumn()
         {
-            DateTime utcDt = new DateTimeOffset(2018, 10, 27, 22, 0, 0, TimeSpan.Zero);
-            DateTime localDt = DateTime.SpecifyKind(TimeZoneInfo.ConvertTimeFromUtc(new DateTimeOffset(2018, 10, 27, 22, 0, 0, TimeSpan.Zero), Verbrauch.CENTRAL_EUROPE_STANDARD_TIME), DateTimeKind.Unspecified);
+            DateTime utcDt = new DateTimeOffset(2018, 10, 27, 22, 0, 0, TimeSpan.Zero).UtcDateTime;
+            DateTime localDt = DateTime.SpecifyKind(TimeZoneInfo.ConvertTimeFromUtc(new DateTimeOffset(2018, 10, 27, 22, 0, 0, TimeSpan.Zero).UtcDateTime, Verbrauch.CENTRAL_EUROPE_STANDARD_TIME), DateTimeKind.Unspecified);
 
             DateTime resultUtc = utcDt.AddDaysDST(1);
             DateTime resultLocal = localDt.AddDaysDST(1);
@@ -451,8 +451,8 @@ namespace TestBO4EExtensions
         [TestMethod]
         public void TestAddDaysDSTSummer() // could be winter as well ;)
         {
-            DateTime utcDt = new DateTimeOffset(2018, 7, 27, 22, 0, 0, TimeSpan.Zero);
-            DateTime localDt = DateTime.SpecifyKind(TimeZoneInfo.ConvertTimeFromUtc(new DateTimeOffset(2018, 7, 27, 22, 0, 0, TimeSpan.Zero), Verbrauch.CENTRAL_EUROPE_STANDARD_TIME), DateTimeKind.Unspecified);
+            DateTime utcDt = new DateTimeOffset(2018, 7, 27, 22, 0, 0, TimeSpan.Zero).UtcDateTime;
+            DateTime localDt = DateTime.SpecifyKind(TimeZoneInfo.ConvertTimeFromUtc(new DateTimeOffset(2018, 7, 27, 22, 0, 0, TimeSpan.Zero).UtcDateTime, Verbrauch.CENTRAL_EUROPE_STANDARD_TIME), DateTimeKind.Unspecified);
 
             DateTime resultUtc = utcDt.AddDaysDST(1);
             DateTime resultLocal = localDt.AddDaysDST(1);
