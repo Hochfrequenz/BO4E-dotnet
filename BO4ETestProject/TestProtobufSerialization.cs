@@ -27,16 +27,16 @@ namespace TestBO4E
                     {
                         Einheit = BO4E.ENUM.Mengeneinheit.KWH,
                         Wert = 10.0M,
-                        Startdatum = new DateTime(2019, 1, 1, 0, 0, 0, DateTimeKind.Utc),
-                        Enddatum = new DateTime(2019, 1, 2, 0, 0, 0, DateTimeKind.Utc),
+                        Startdatum = new DateTimeOffset(2019, 1, 1, 0, 0, 0, TimeSpan.Zero),
+                        Enddatum = new DateTimeOffset(2019, 1, 2, 0, 0, 0, TimeSpan.Zero),
                         Obiskennzahl =  "1–0:1.8.1"
                     },
                     new Verbrauch()
                     {
                         Einheit = BO4E.ENUM.Mengeneinheit.MWH,
                         Wert = 23.0M,
-                        Startdatum = new DateTime(2019, 1, 2, 0, 0, 0, DateTimeKind.Utc),
-                        Enddatum = new DateTime(2019, 1, 3, 0, 0, 0, DateTimeKind.Utc),
+                        Startdatum = new DateTimeOffset(2019, 1, 2, 0, 0, 0, TimeSpan.Zero),
+                        Enddatum = new DateTimeOffset(2019, 1, 3, 0, 0, 0, TimeSpan.Zero),
                         Obiskennzahl =  "1–0:1.8.1"
                     }
                 }

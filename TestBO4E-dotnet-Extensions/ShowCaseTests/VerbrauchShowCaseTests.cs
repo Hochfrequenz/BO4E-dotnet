@@ -17,8 +17,8 @@ namespace TestBO4E.ShowCaseTests
         {
             var verbrauchA = new Verbrauch()
             {
-                Startdatum = new DateTime(2020, 3, 1, 0, 0, 0, DateTimeKind.Utc),
-                Enddatum = new DateTime(2020, 3, 8, 0, 0, 0, DateTimeKind.Utc),
+                Startdatum = new DateTimeOffset(2020, 3, 1, 0, 0, 0, TimeSpan.Zero),
+                Enddatum = new DateTimeOffset(2020, 3, 8, 0, 0, 0, TimeSpan.Zero),
                 Wert = 0.456M,
                 Einheit = Mengeneinheit.MW,
                 Wertermittlungsverfahren = Wertermittlungsverfahren.MESSUNG
@@ -40,8 +40,8 @@ namespace TestBO4E.ShowCaseTests
 
             var verbrauchB = new Verbrauch()
             {
-                Startdatum = new DateTime(2020, 3, 7, 0, 0, 0, DateTimeKind.Utc),
-                Enddatum = new DateTime(2020, 3, 14, 0, 0, 0, DateTimeKind.Utc),
+                Startdatum = new DateTimeOffset(2020, 3, 7, 0, 0, 0, TimeSpan.Zero),
+                Enddatum = new DateTimeOffset(2020, 3, 14, 0, 0, 0, TimeSpan.Zero),
                 Wert = 0.1M,
                 Einheit = Mengeneinheit.KW,
                 Wertermittlungsverfahren = Wertermittlungsverfahren.MESSUNG

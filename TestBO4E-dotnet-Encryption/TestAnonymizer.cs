@@ -161,8 +161,8 @@ namespace TestBO4EExtensions.Encryption
                    {
                        Wert = 123.456M,
                        Wertermittlungsverfahren=BO4E.ENUM.Wertermittlungsverfahren.MESSUNG,
-                       Startdatum=new DateTime(2019,1,1,0,0,0,DateTimeKind.Utc),
-                       Enddatum = new DateTime(2019,2,1,0,0,0,DateTimeKind.Utc),
+                       Startdatum=new DateTimeOffset(2019,1,1,0,0,0,TimeSpan.Zero),
+                       Enddatum = new DateTimeOffset(2019,2,1,0,0,0,TimeSpan.Zero),
                        Obiskennzahl="1-2-3-4",
                        Einheit =BO4E.ENUM.Mengeneinheit.KWH
                    }
@@ -329,8 +329,8 @@ namespace TestBO4EExtensions.Encryption
                    {
                        Wert = 123.456M,
                        Wertermittlungsverfahren=BO4E.ENUM.Wertermittlungsverfahren.MESSUNG,
-                       Startdatum=new DateTime(2019,1,1,0,0,0,DateTimeKind.Utc),
-                       Enddatum = new DateTime(2019,2,1,0,0,0,DateTimeKind.Utc),
+                       Startdatum=new DateTimeOffset(2019,1,1,0,0,0,TimeSpan.Zero),
+                       Enddatum = new DateTimeOffset(2019,2,1,0,0,0,TimeSpan.Zero),
                        Obiskennzahl="1-2-3-4",
                        Einheit =BO4E.ENUM.Mengeneinheit.KWH
                    }

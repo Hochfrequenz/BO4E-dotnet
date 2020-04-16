@@ -39,7 +39,7 @@ namespace TestBO4E
         {
             MultiLangBo mlb = new MultiLangBo()
             {
-                datum_deutsch = new DateTime(2018, 1, 1, 0, 0, 0, DateTimeKind.Utc),
+                datum_deutsch = new DateTimeOffset(2018, 1, 1, 0, 0, 0, TimeSpan.Zero),
                 wert_deutsch = "Hallo Welt"
             };
             var settings = new JsonSerializerSettings
@@ -66,7 +66,7 @@ namespace TestBO4E
         {
             MultiLangBo mlb = new MultiLangBo()
             {
-                datum_deutsch = new DateTime(2018, 1, 1, 0, 0, 0, DateTimeKind.Utc),
+                datum_deutsch = new DateTimeOffset(2018, 1, 1, 0, 0, 0, TimeSpan.Zero),
                 wert_deutsch = "Hallo Welt",
                 intern = new NestedObject()
                 {
