@@ -22,9 +22,9 @@ namespace BO4E.BO
         /// <summary>
         /// date time at which the log event has been raised
         /// </summary>
-        [JsonProperty(Required = Required.Always, Order = 5, PropertyName = "DateTimeOffset")]
+        [JsonProperty(Required = Required.Always, Order = 5, PropertyName = "DateTime")]
         [ProtoMember(5)]
-        public DateTimeOffset DateTimeOffset { get; set; }
+        public DateTimeOffset DateTime { get; set; }
 
         /// <summary>
         /// actual log message
