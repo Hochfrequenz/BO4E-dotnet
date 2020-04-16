@@ -97,15 +97,15 @@ namespace BO4E.BO
         /// <returns>new Energiemenge object</returns>
         public static Energiemenge operator +(Energiemenge em1, Energiemenge em2)
         {
-            if (em1.LokationsId != em2.LokationsId || em1.LokationsTyp != em2.LokationsTyp || em1.versionStruktur != em2.versionStruktur)
+            if (em1.LokationsId != em2.LokationsId || em1.LokationsTyp != em2.LokationsTyp || em1.VersionStruktur != em2.VersionStruktur)
             {
-                throw new InvalidOperationException($"You must not add the Energiemengen with different locations {em1.LokationsId} ({em1.LokationsTyp}) (v{em1.versionStruktur}) vs. {em2.LokationsId} ({em2.LokationsTyp}) (v{em2.versionStruktur})");
+                throw new InvalidOperationException($"You must not add the Energiemengen with different locations {em1.LokationsId} ({em1.LokationsTyp}) (v{em1.VersionStruktur}) vs. {em2.LokationsId} ({em2.LokationsTyp}) (v{em2.VersionStruktur})");
             }
             Energiemenge result = new Energiemenge()
             {
                 LokationsId = em1.LokationsId,
                 LokationsTyp = em1.LokationsTyp,
-                versionStruktur = em1.versionStruktur,
+                VersionStruktur = em1.VersionStruktur,
             };
             if (em1.UserProperties == null)
             {

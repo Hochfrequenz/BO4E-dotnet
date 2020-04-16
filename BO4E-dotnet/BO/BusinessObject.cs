@@ -101,7 +101,7 @@ namespace BO4E.BO
         protected BusinessObject()
         {
             BoTyp = this.GetType().Name.ToUpper();
-            versionStruktur = 1;
+            VersionStruktur = 1;
         }
 
         /// <summary>
@@ -124,16 +124,17 @@ namespace BO4E.BO
         /// <example>
         /// 1
         /// </example>
-        [JsonProperty(Required = Required.Default, Order = 2)]
+        [JsonProperty(PropertyName = "versionStruktur", Required = Required.Default, Order = 2)]
         [ProtoMember(2)]
-        public int versionStruktur;
+        public int VersionStruktur { get; set; }
 
         /// <summary>
         /// allows adding a GUID to Business Objects for tracking across systems
         /// </summary>
-        [JsonProperty(NullValueHandling = NullValueHandling.Ignore, Required = Required.Default)]
+        [JsonProperty(PropertyName = "guid", NullValueHandling = NullValueHandling.Ignore, Required = Required.Default)]
         [ProtoMember(3)]
-        public string guid;
+        public string Guid { get; set; }
+
 
         /// <summary>
         /// returns a JSON scheme for the Business Object

@@ -18,11 +18,20 @@ namespace TestBO4E
                 LokationsId = "DE123456",
                 LokationsTyp = BO4E.ENUM.Lokationstyp.MaLo,
                 Energieverbrauch = new List<Verbrauch>(),
-                guid = Guid.NewGuid().ToString()
+                Guid = Guid.NewGuid().ToString()
             };
 
-            string jsonString = JsonConvert.SerializeObject(em);
-            Assert.AreEqual<string>(em.guid, JsonConvert.DeserializeObject<Energiemenge>(jsonString).guid);
+            string emJson = JsonConvert.SerializeObject(em);
+            Assert.AreEqual<string>(em.Guid, JsonConvert.DeserializeObject<Energiemenge>(emJson).Guid);
+
+            Geschaeftspartner gp = new Geschaeftspartner()
+            {
+                Gewerbekennzeichnung = true,
+                Guid = Guid.NewGuid().ToString()
+            };
+
+            string gpJson = JsonConvert.SerializeObject(gp);
+            Assert.AreEqual<string>(gp.Guid, JsonConvert.DeserializeObject<Geschaeftspartner>(gpJson).Guid);
         }
         /*
         [TestMethod]
