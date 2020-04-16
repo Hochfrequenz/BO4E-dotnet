@@ -101,8 +101,8 @@ enum Gasqualitaet {
    option allow_alias = true;
    ZERO = 0; // proto3 requires a zero value as the first item (it can be named anything)
    H_GAS = 1;
-   L_GAS = 2;
    HGAS = 1;
+   L_GAS = 2;
    LGAS = 2;
 }
 enum Gebiettyp {
@@ -578,19 +578,19 @@ enum Mengeneinheit {
    ZERO = 0; // proto3 requires a zero value as the first item (it can be named anything)
    WH = 2;
    KW = 3;
-   KWH = 2000;
-   MW = 3000;
-   MWH = 2000000;
    ANZAHL = 7;
    KUBIKMETER = 11;
    STUNDE = 13;
    TAG = 17;
    MONAT = 19;
-   JAHR = 228;
    VAR = 23;
-   KVAR = 23000;
    VARH = 29;
+   JAHR = 228;
+   KWH = 2000;
+   MW = 3000;
+   KVAR = 23000;
    KVARH = 29000;
+   MWH = 2000000;
 }
 message Messlokation {
    string MesslokationsId = 4; // default value could not be applied: |null|
@@ -699,7 +699,7 @@ message Zaehler {
    Zaehlerauspraegung Zaehlerauspraegung = 6;
    Zaehlertyp Zaehlertyp = 7;
    Tarifart Tarifart = 8;
-   .bcl.Decimal zaehlerkonstante = 9;
+   .bcl.Decimal Zaehlerkonstante = 9;
    .bcl.DateTime EichungBis = 10;
    .bcl.DateTime LetzteEichung = 11;
    repeated Zaehlwerk Zaehlwerke = 12;

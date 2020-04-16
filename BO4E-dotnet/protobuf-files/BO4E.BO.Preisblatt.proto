@@ -113,19 +113,19 @@ enum Mengeneinheit {
    ZERO = 0; // proto3 requires a zero value as the first item (it can be named anything)
    WH = 2;
    KW = 3;
-   KWH = 2000;
-   MW = 3000;
-   MWH = 2000000;
    ANZAHL = 7;
    KUBIKMETER = 11;
    STUNDE = 13;
    TAG = 17;
    MONAT = 19;
-   JAHR = 228;
    VAR = 23;
-   KVAR = 23000;
    VARH = 29;
+   JAHR = 228;
+   KWH = 2000;
+   MW = 3000;
+   KVAR = 23000;
    KVARH = 29000;
+   MWH = 2000000;
 }
 message PositionsAufAbschlag {
    string Bezeichnung = 3;
