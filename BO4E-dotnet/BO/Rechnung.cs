@@ -146,7 +146,7 @@ namespace BO4E.BO
         [JsonProperty(Required = Required.Default, Order = 19, PropertyName = "rabattBrutto")]
         [ProtoMember(19)]
         [FieldName("discountGross", Language.EN)]
-        public Betrag rabattBrutto { get; set; }
+        public Betrag RabattBrutto { get; set; }
 
         /// <summary>
         /// Der zu zahlende Betrag, der sich aus (<see cref="Gesamtbrutto"/> - <see cref="Vorausgezahlt"/> - <see cref="rabattBrutto"/>) ergibt. Details <see cref="Betrag"/>
@@ -203,7 +203,7 @@ namespace BO4E.BO
             Storno = false;
 
             decimal gNetto, gSteure, gBrutto, vGezahlt, rBrutto, zZahlen;
-            gNetto = gSteure = gBrutto = vGezahlt = rBrutto = zZahlen = 0.00M;
+            gNetto = gSteure = _ = vGezahlt = rBrutto = 0.00M;
             Waehrungscode waehrungscode = (Waehrungscode)Enum.Parse(typeof(Waehrungscode), (infoToken["totalWaer"] ?? infoToken["TOTAL_WAER"]).Value<string>());
             Waehrungseinheit waehrungseinheit = (Waehrungseinheit)Enum.Parse(typeof(Waehrungseinheit), (infoToken["totalWaer"] ?? infoToken["TOTAL_WAER"]).Value<string>());
             Mengeneinheit mengeneinheit = (Mengeneinheit)Enum.Parse(typeof(Mengeneinheit), (tErdzToken[0]["massbill"] ?? tErdzToken[0]["MASSBILL"]).Value<string>());

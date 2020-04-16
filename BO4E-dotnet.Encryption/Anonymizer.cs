@@ -26,9 +26,9 @@ namespace BO4E.Extensions.Encryption
 {
     public class Anonymizer : IDisposable
     {
-        private static ILogger _logger = StaticLogger.Logger;
+        private static readonly ILogger _logger = StaticLogger.Logger;
         private readonly AnonymizerConfiguration configuration;
-        public X509Certificate2 publicKeyX509 { get; set; }
+        public X509Certificate2 PublicKeyX509 { get; set; }
         private AsymmetricKeyParameter privateKey;
         private byte[] hashingSalt;
 
@@ -47,7 +47,7 @@ namespace BO4E.Extensions.Encryption
         /// <param name="x509Certificate">X509 certificate</param>
         public void SetPublicKey(X509Certificate2 x509Certificate)
         {
-            this.publicKeyX509 = x509Certificate;
+            this.PublicKeyX509 = x509Certificate;
         }
 
         /// <summary>
@@ -202,11 +202,11 @@ namespace BO4E.Extensions.Encryption
                             }
                             break;
                         case AnonymizerApproach.ENCRYPT:
-                            if (this.publicKeyX509 == null)
+                            if (this.PublicKeyX509 == null)
                             {
                                 throw new ArgumentNullException("To use the encryption feature you have to provide a public X509 certificate using the SetPublicKey method.");
                             }
-                            using (X509AsymmetricEncrypter xasyncenc = new X509AsymmetricEncrypter(this.publicKeyX509))
+                            using (X509AsymmetricEncrypter xasyncenc = new X509AsymmetricEncrypter(this.PublicKeyX509))
                             {
                                 if (affectedProp.GetValue(bo).GetType() == typeof(string))
                                 {

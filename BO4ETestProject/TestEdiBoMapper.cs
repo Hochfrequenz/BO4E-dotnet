@@ -7,7 +7,7 @@ namespace TestBO4E
     [TestClass]
     public class TestEdiBOMapper
     {
-        private Dictionary<string, Dictionary<string, string>> expectedResults = new Dictionary<string, Dictionary<string, string>>();
+        private readonly Dictionary<string, Dictionary<string, string>> expectedResults = new Dictionary<string, Dictionary<string, string>>();
         public TestEdiBOMapper()
         {
             expectedResults.Add("Netzebene", new Dictionary<string, string>() {

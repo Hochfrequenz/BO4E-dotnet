@@ -13,7 +13,7 @@ namespace TestBO4E
     [TestClass]
     public class TestBoEdiMapper
     {
-        private Dictionary<string, Dictionary<string, string>> expectedResults = new Dictionary<string, Dictionary<string, string>>();
+        private readonly Dictionary<string, Dictionary<string, string>> expectedResults = new Dictionary<string, Dictionary<string, string>>();
         public TestBoEdiMapper()
         {
             // all in all very similar to EdiBoMapper...

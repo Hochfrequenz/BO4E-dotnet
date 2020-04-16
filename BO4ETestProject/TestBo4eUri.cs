@@ -210,7 +210,9 @@ namespace TestBO4E
             Assert.IsTrue(ThisMethodOnlyAcceptsBo4eUri("bo4e://energiemenge?backendId=12345"));
         }
 
+#pragma warning disable IDE0060 // Remove unused parameter
         private bool ThisMethodOnlyAcceptsBo4eUri(Bo4eUri uri)
+#pragma warning restore IDE0060 // Remove unused parameter
         {
             return true;
         }
