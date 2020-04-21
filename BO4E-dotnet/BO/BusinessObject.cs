@@ -1,10 +1,3 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Linq;
-using System.Reflection;
-using System.Runtime.Serialization;
-
 using BO4E.meta;
 
 using Newtonsoft.Json;
@@ -14,6 +7,13 @@ using Newtonsoft.Json.Schema.Generation;
 using Newtonsoft.Json.Serialization;
 
 using ProtoBuf;
+
+using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.Linq;
+using System.Reflection;
+using System.Runtime.Serialization;
 
 namespace BO4E.BO
 {
@@ -133,7 +133,7 @@ namespace BO4E.BO
         /// </summary>
         [JsonProperty(PropertyName = "guid", NullValueHandling = NullValueHandling.Ignore, Required = Required.Default)]
         [ProtoMember(3)]
-        public string Guid { get; set; }
+        public Guid? Guid { get; set; }
 
 
         /// <summary>
