@@ -74,7 +74,7 @@ namespace BO4E.COM
         /// <summary>
         /// User properties (non bo4e standard)
         /// </summary>
-        [JsonProperty(PropertyName = BusinessObject.USER_PROPERTIES_NAME, Required = Required.Default, Order = 2)]
+        [JsonProperty(PropertyName = BusinessObject.USER_PROPERTIES_NAME, Required = Required.Default, Order = 2, DefaultValueHandling = DefaultValueHandling.Ignore)]
         [ProtoMember(2)]
         [JsonExtensionData]
         [DataCategory(DataCategory.USER_PROPERTIES)]
@@ -147,6 +147,7 @@ namespace BO4E.COM
         /// </summary>
         [JsonProperty(PropertyName = "guid", NullValueHandling = NullValueHandling.Ignore, Required = Required.Default, Order = 1)]
         [ProtoMember(1)]
+
         public Guid? Guid { get; set; }
     }
 }
