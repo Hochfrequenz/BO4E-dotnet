@@ -141,20 +141,24 @@ namespace BO4E.ENUM
         /// </summary>
         TARIFSCHALTGERAET,
         /// <summary>
-        /// ZUSTANDS_MU
+        /// Zustandsmengenumwerter
         /// </summary>
         ZUSTANDS_MU,
         /// <summary>
-        /// TEMPERATUR_MU
+        /// Temperaturmengenumwerter
         /// </summary>
         TEMPERATUR_MU,
         /// <summary>
-        /// KOMPAKT_MU
+        /// Kompaktmengenumwerter
         /// </summary>
         KOMPAKT_MU,
         /// <summary>
-        /// SYSTEM_MU
+        /// Systemmengenumwerter
         /// </summary>
-        SYSTEM_MU
+        SYSTEM_MU,
+        /// <summary>
+        /// Unbestimmtes Merkmal
+        /// </summary>
+        UNBESTIMMT
     }
 }
