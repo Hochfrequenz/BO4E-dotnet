@@ -19,7 +19,7 @@ namespace BO4E.ENUM
         /// <summary>
         /// Gaszähler Größe G2.5
         /// </summary>
-        GAS_G2_5,
+        GAS_G2P5, // changed to "GAS_G2P5" as "GAS_G2_5" and "GAS_G25" are equivalent in protobuf.
         /// <summary>
         /// Gaszähler Größe G4
         /// </summary>

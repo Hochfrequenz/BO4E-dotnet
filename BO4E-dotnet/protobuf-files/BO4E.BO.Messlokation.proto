@@ -114,7 +114,7 @@ enum Geraetemerkmal {
    EINTARIF = 0;
    ZWEITARIF = 1;
    MEHRTARIF = 2;
-   GAS_G2_5 = 3;
+   GAS_G2P5 = 3;
    GAS_G4 = 4;
    GAS_G6 = 5;
    GAS_G10 = 6;
@@ -149,6 +149,7 @@ enum Geraetemerkmal {
    TEMPERATUR_MU = 35;
    KOMPAKT_MU = 36;
    SYSTEM_MU = 37;
+   UNBESTIMMT = 38;
 }
 enum Geraetetyp {
    WECHSELSTROMZAEHLER = 0;

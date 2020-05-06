@@ -497,7 +497,7 @@
             "EINTARIF",
             "ZWEITARIF",
             "MEHRTARIF",
-            "GAS_G2_5",
+            "GAS_G2P5",
             "GAS_G4",
             "GAS_G6",
             "GAS_G10",
@@ -531,7 +531,8 @@
             "ZUSTANDS_MU",
             "TEMPERATUR_MU",
             "KOMPAKT_MU",
-            "SYSTEM_MU"
+            "SYSTEM_MU",
+            "UNBESTIMMT"
           ]
         },
         "Parameter": {
@@ -621,7 +622,7 @@
             "EINTARIF",
             "ZWEITARIF",
             "MEHRTARIF",
-            "GAS_G2_5",
+            "GAS_G2P5",
             "GAS_G4",
             "GAS_G6",
             "GAS_G10",
@@ -655,7 +656,8 @@
             "ZUSTANDS_MU",
             "TEMPERATUR_MU",
             "KOMPAKT_MU",
-            "SYSTEM_MU"
+            "SYSTEM_MU",
+            "UNBESTIMMT"
           ]
         },
         "Parameter": {
