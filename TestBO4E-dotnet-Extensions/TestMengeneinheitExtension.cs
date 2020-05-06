@@ -23,6 +23,10 @@ namespace TestBO4EExtensions
         {
             foreach (Mengeneinheit me in Enum.GetValues(typeof(Mengeneinheit)))
             {
+                if ((int)me == 0)
+                {
+                    continue;
+                }
                 Assert.AreEqual(1.0M, me.GetConversionFactor(me));
                 Assert.IsTrue(me.IsConvertibleTo(me));
             }
