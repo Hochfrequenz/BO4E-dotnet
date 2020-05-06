@@ -138,7 +138,7 @@ namespace BO4E.BO
         [ProtoMember(1019)]
         [NonOfficial(NonOfficialCategory.CUSTOMER_REQUIREMENTS)]
         [Obsolete("This isn't the right place for this information")] // ToDo: check
-        public List<COM.Marktrolle> Marktrollen { get; set; }
+        public List<COM.MarktpartnerDetails> Marktrollen { get; set; }
 
         /// <summary>
         /// gasqualitaet für EDIFACT mapping

@@ -1,4 +1,4 @@
-﻿using BO4E.BO;
+using BO4E.BO;
 using BO4E.meta;
 
 using Newtonsoft.Json;
@@ -38,7 +38,7 @@ namespace BO4E.COM
     [ProtoInclude(21, typeof(Kostenposition))]
     [ProtoInclude(22, typeof(KriteriumsWert))]
     [ProtoInclude(23, typeof(Kostenposition))]
-    [ProtoInclude(24, typeof(Marktrolle))]
+    [ProtoInclude(24, typeof(MarktpartnerDetails))]
     [ProtoInclude(25, typeof(Menge))]
     [ProtoInclude(26, typeof(Messlokationszuordnung))]
     [ProtoInclude(27, typeof(Notiz))]
