@@ -1,6 +1,5 @@
 namespace BO4E.ENUM
 {
-
     /// <summary>Übersicht möglicher Titel, z.B. eines Geschäftspartners.</summary>
     public enum Titel
     {

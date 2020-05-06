@@ -1,3 +1,5 @@
+using ProtoBuf;
+
 namespace BO4E.ENUM
 {
 
@@ -5,6 +7,7 @@ namespace BO4E.ENUM
     public enum Waehrungseinheit
     {
         /// <summary>Euro</summary>
+        [ProtoEnum(Name = nameof(Waehrungseinheit) + "_" + nameof(EUR))]
         EUR,
         /// <summary>Eurocent</summary>
         CT

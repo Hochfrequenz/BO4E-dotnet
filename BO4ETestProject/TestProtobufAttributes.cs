@@ -1,12 +1,16 @@
 
-using System;
-using System.Linq;
-using System.Reflection;
 using BO4E.BO;
 using BO4E.COM;
 using BO4E.meta;
+
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Newtonsoft.Json;
 using ProtoBuf;
+
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Reflection;
 
 namespace TestBO4E
 {
@@ -53,7 +57,7 @@ namespace TestBO4E
             var nonOfficialFieldsWithProtoMember = allFields.Where(field => field.GetCustomAttributes(typeof(NonOfficialAttribute)).Any()) // those fields having an [NonOfficial(...)] attribute
                 .Where(field => ((NonOfficialAttribute)(field.GetCustomAttributes(typeof(NonOfficialAttribute)).First())).HasCategory(NonOfficialCategory.CUSTOMER_REQUIREMENTS)) // and the customer_requirements category
                 .Intersect(fieldsWithProtoMemberAttribute); // and a [ProtoMember(<id>)] attribute
-            
+
             var wrongTagsNonOfficial = nonOfficialFieldsWithProtoMember.Where(f => ((ProtoMemberAttribute)f.GetCustomAttributes(typeof(ProtoMemberAttribute)).First()).Tag < 1000);
             Assert.AreEqual(0, wrongTagsNonOfficial.Count(), $"Fields in {type} are non official and do not have proto tags >= 1000: {string.Join(", ", wrongTagsNonOfficial.Select(f => f.Name))}");
             var wrongTagsOfficial = fieldsWithProtoMemberAttribute.Except(nonOfficialFieldsWithProtoMember).Where(f => ((ProtoMemberAttribute)f.GetCustomAttributes(typeof(ProtoMemberAttribute)).First()).Tag > 1000);
@@ -104,6 +108,31 @@ namespace TestBO4E
             Assert.AreEqual(0, duplicateIncludeTags.Count, $"The following [(ProtoInclude(<tag>, ...)] attributes are not unique: {string.Join(", ", duplicateIncludeTags.Keys)}");
         }
 
+        [TestMethod]
+        public void TestNoDuplicateProtoEnums()//https://github.com/protobuf-net/protobuf-net/issues/60
+        {
+            var enumTypes = typeof(BO4E.ENUM.AbgabeArt).Assembly.GetTypes()
+                .Where(t => t.IsEnum && t.Namespace.StartsWith("BO4E.ENUM") && !t.Namespace.StartsWith("BO4E.ENUM.EDI"));
+            var allValues = new List<Tuple<Type,string>>();
+            foreach (var enumType in enumTypes)
+            {
+                var naturalEnumValues = enumType.GetFields().Where(f => !f.GetCustomAttributes<ProtoEnumAttribute>().Any()).Select(f => new Tuple<Type,string>(enumType, f.Name));
+                allValues.AddRange(naturalEnumValues);
+                //var protoEnumValues = enumType.GetFields().SelectMany(f => f.GetCustomAttributes<ProtoEnumAttribute>()).Select(pea => new Tuple<Type, string>(enumType, pea.Name));
+                //allValues.AddRange(protoEnumValues);
+                foreach (var field in enumType.GetFields().Where(f=>f.GetCustomAttributes<ProtoEnumAttribute>().Any()))
+                {
+                    var pea = field.GetCustomAttributes<ProtoEnumAttribute>().First();
+                    Assert.AreEqual(enumType.Name + "_" + field.Name, pea.Name);
+                    allValues.Add(new Tuple<Type, string>(enumType, pea.Name));
+                }
+            }
+            var nonDistinctValues = allValues
+                .GroupBy(tuple => tuple.Item2) // group by field/protoenum name
+                .Where(g => g.Count() > 1 && g.Key != "value__")
+                .ToDictionary(x => x.Key, y => y.Select(t => t.Item1.Name));
+            Assert.IsFalse(nonDistinctValues.Any(), $"There are non-distinct Enum values. Add a matching [ProtoEnum] attribute to: {JsonConvert.SerializeObject(nonDistinctValues)}");
+        }
         [TestMethod]
         public void TestExplicitProtobufInheritance()
         {

@@ -155,7 +155,7 @@ namespace BO4E.BO
         {
             if (!boType.IsSubclassOf(typeof(BusinessObject)))
             {
-                throw new ArgumentException($"You must only request JSON schemes for Business Objects. {boType.ToString()} is not a valid Business Object type.");
+                throw new ArgumentException($"You must only request JSON schemes for Business Objects. {boType} is not a valid Business Object type.");
             }
             JSchemaGenerator generator = new JSchemaGenerator();
             generator.GenerationProviders.Add(new StringEnumGenerationProvider());
@@ -343,7 +343,7 @@ namespace BO4E.BO
         {
             if (!boType.IsSubclassOf(typeof(BusinessObject)))
             {
-                throw new ArgumentException($"Business Object keys are only defined on Business Object types but {boType.ToString()} is not a Business Object.");
+                throw new ArgumentException($"Business Object keys are only defined on Business Object types but {boType} is not a Business Object.");
             }
             return boType.GetProperties()
                  .Where(p => p.GetCustomAttributes(typeof(BoKey), false).Length > 0)
