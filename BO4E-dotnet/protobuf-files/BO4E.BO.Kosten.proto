@@ -156,7 +156,7 @@ enum Waehrungscode {
    LTL = 87;
    LYD = 88;
    MAD = 89;
-   MDL = 90;
+   Waehrungscode_MDL = 90;
    MGA = 91;
    MKD = 92;
    MMK = 93;
@@ -249,20 +249,20 @@ enum Waehrungscode {
    ZWL = 180;
 }
 enum Waehrungseinheit {
-   EUR = 0;
+   Waehrungseinheit_EUR = 0;
    CT = 1;
 }
 enum Zeiteinheit {
-   SEKUNDE = 0;
-   MINUTE = 1;
-   STUNDE = 2;
-   VIERTEL_STUNDE = 3;
-   TAG = 4;
-   WOCHE = 5;
-   MONAT = 6;
-   QUARTAL = 7;
-   HALBJAHR = 8;
-   JAHR = 9;
+   Zeiteinheit_SEKUNDE = 0;
+   Zeiteinheit_MINUTE = 1;
+   Zeiteinheit_STUNDE = 2;
+   Zeiteinheit_VIERTEL_STUNDE = 3;
+   Zeiteinheit_TAG = 4;
+   Zeiteinheit_WOCHE = 5;
+   Zeiteinheit_MONAT = 6;
+   Zeiteinheit_QUARTAL = 7;
+   Zeiteinheit_HALBJAHR = 8;
+   Zeiteinheit_JAHR = 9;
 }
 message Zeitraum {
    Zeiteinheit Einheit = 3;
