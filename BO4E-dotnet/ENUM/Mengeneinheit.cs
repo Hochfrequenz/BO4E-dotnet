@@ -1,3 +1,9 @@
+using Newtonsoft.Json;
+
+using ProtoBuf;
+
+using System;
+
 namespace BO4E.ENUM
 {
     /// <summary>
@@ -5,6 +11,10 @@ namespace BO4E.ENUM
     /// </summary>
     public enum Mengeneinheit
     {
+        [Obsolete("This value is only a workaround for the proto3 syntax generation. You shouldn't actually use it")]
+        [ProtoEnum(Name = nameof(Mengeneinheit) + "_" + nameof(ZERO))]
+        [JsonIgnore]
+        ZERO = 0,
         /// <summary>Wattstunde</summary>
         WH = 2,
         /// <summary>Kilowatt</summary>

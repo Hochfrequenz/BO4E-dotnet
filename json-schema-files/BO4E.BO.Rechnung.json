@@ -890,6 +890,7 @@
         "einheit": {
           "type": "string",
           "enum": [
+            "ZERO",
             "WH",
             "KW",
             "ANZAHL",
@@ -935,6 +936,7 @@
         "bezugswert": {
           "type": "string",
           "enum": [
+            "ZERO",
             "WH",
             "KW",
             "ANZAHL",
@@ -1003,6 +1005,7 @@
           ],
           "enum": [
             null,
+            "ZERO",
             "WH",
             "KW",
             "ANZAHL",

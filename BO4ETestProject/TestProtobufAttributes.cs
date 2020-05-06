@@ -109,7 +109,7 @@ namespace TestBO4E
         }
 
         [TestMethod]
-        public void TestNoDuplicateProtoEnums()//https://github.com/protobuf-net/protobuf-net/issues/60
+        public void TestProtoEnumConsistency()//https://github.com/protobuf-net/protobuf-net/issues/60
         {
             var enumTypes = typeof(BO4E.ENUM.AbgabeArt).Assembly.GetTypes()
                 .Where(t => t.IsEnum && t.Namespace.StartsWith("BO4E.ENUM") && !t.Namespace.StartsWith("BO4E.ENUM.EDI"));
@@ -126,6 +126,7 @@ namespace TestBO4E
                     Assert.AreEqual(enumType.Name + "_" + field.Name, pea.Name);
                     allValues.Add(new Tuple<Type, string>(enumType, pea.Name));
                 }
+                Assert.IsTrue(Enum.IsDefined(enumType, (int)0), $"Any enum must define a ZERO like value for Protobuf3 but {enumType} doesn't.");
             }
             var nonDistinctValues = allValues
                 .GroupBy(tuple => tuple.Item2) // group by field/protoenum name

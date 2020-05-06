@@ -101,7 +101,7 @@ enum Fernschaltung {
 }
 enum Gasqualitaet {
    option allow_alias = true;
-   ZERO = 0; // proto3 requires a zero value as the first item (it can be named anything)
+   Gasqualitaet_ZERO = 0;
    H_GAS = 1;
    HGAS = 1;
    L_GAS = 2;
@@ -548,13 +548,18 @@ message Marktlokation {
    Geokoordinaten Geoadresse = 19;
    Katasteradresse Katasterinformation = 20;
    repeated Messlokationszuordnung ZugehoerigeMesslokationen = 28;
-   repeated Marktrolle Marktrollen = 1021;
+   repeated MarktpartnerDetails Marktrollen = 1021;
    string Regelzone = 1022;
    string Marktgebiet = 1023;
    Zeitreihentyp Zeitreihentyp = 1024;
    repeated Zaehlwerk Zaehlwerke = 1025;
    repeated Verbrauch Verbrauchsmenge = 1026;
    repeated Messlokation Messlokationen = 1027;
+}
+message MarktpartnerDetails {
+   string Rollencodenummer = 3;
+   string Code = 4;
+   Marktrolle marktrolle = 5;
 }
 enum Marktrolle {
    NB = 0;
@@ -572,13 +577,8 @@ enum Marktrolle {
    KUNDE = 12;
    INTERESSENT = 13;
 }
-message Marktrolle {
-   string Rollencodenummer = 3;
-   string Code = 4;
-   Marktrolle marktrolle = 5;
-}
 enum Mengeneinheit {
-   ZERO = 0; // proto3 requires a zero value as the first item (it can be named anything)
+   Mengeneinheit_ZERO = 0;
    WH = 2;
    KW = 3;
    ANZAHL = 7;
@@ -611,7 +611,7 @@ message Messlokation {
    repeated Zaehler Messlokationszaehler = 16;
    Bilanzierungsmethode Bilanzierungsmethode = 17;
    bool Abrechnungmessstellenbetriebnna = 1018;
-   repeated Marktrolle Marktrollen = 1019;
+   repeated MarktpartnerDetails Marktrollen = 1019;
    Gasqualitaet Gasqualitaet = 1020;
    .bcl.Decimal Verlustfaktor = 1021;
 }

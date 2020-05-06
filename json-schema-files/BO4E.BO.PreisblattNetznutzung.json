@@ -728,13 +728,17 @@
         "rollencodetyp": {
           "type": "string",
           "enum": [
+            "ZERO",
+            "GLN",
             "BDEW",
-            "DVGW",
-            "GLN"
+            "DVGW"
           ]
         },
         "makoadresse": {
-          "type": "string"
+          "type": [
+            "string",
+            "null"
+          ]
         },
         "ansprechpartner": {
           "$ref": "#/definitions/Ansprechpartner"
@@ -744,8 +748,7 @@
         "gewerbekennzeichnung",
         "marktrolle",
         "rollencodenummer",
-        "rollencodetyp",
-        "makoadresse"
+        "rollencodetyp"
       ]
     },
     "PositionsAufAbschlag": {
@@ -860,6 +863,7 @@
         "bezugsgroesse": {
           "type": "string",
           "enum": [
+            "ZERO",
             "WH",
             "KW",
             "ANZAHL",
