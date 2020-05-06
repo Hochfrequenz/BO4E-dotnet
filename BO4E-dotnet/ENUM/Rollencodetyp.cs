@@ -4,10 +4,10 @@ namespace BO4E.ENUM
     public enum Rollencodetyp
     {
         /// <summary>Bundesverband der Energie- u. Wasserwirtschaft</summary>
-        BDEW,
+        BDEW = 293,
         /// <summary>Deutscher Verein des Gas- und Wasserfaches</summary>
-        DVGW,
+        DVGW = 332,
         /// <summary>Global Location Number</summary>
-        GLN
+        GLN = 9
     }
 }
