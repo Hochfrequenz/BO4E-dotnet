@@ -64,7 +64,6 @@ namespace TestBO4E
                 foreach (string teststring in map.Keys)
                 {
                     string expectedResult = map[teststring];
-                    //BO4E.StaticLogger.Logger = new Microsoft.Extensions.Logging.Debug.DebugLogger("Testlogger", (log, level) => { return true; });
                     string result = EdiBoMapper.fromEdi(objectName, teststring);
                     Assert.AreEqual(expectedResult, result);
                 }

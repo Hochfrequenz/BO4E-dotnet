@@ -57,7 +57,6 @@ namespace TestBO4EExtensions.Encryption
         [TestMethod]
         public void TestBOEncryption()
         {
-            //hubnet.StaticLogger.Logger = new Microsoft.Extensions.Logging.Debug.DebugLogger("Testlogger", (log, level) => { return true; });
             string[] files = Directory.GetFiles($"encrypterTests/bo/", "*.json"); // 
 
             foreach (string testFile in files)
