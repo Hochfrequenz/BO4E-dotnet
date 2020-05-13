@@ -1,5 +1,6 @@
 ﻿syntax = "proto3";
 import "protobuf-net/bcl.proto"; // schema for protobuf-net's handling of core .NET types
+import "google/protobuf/timestamp.proto";
 
 message Energiemenge {
    string LokationsId = 4; // default value could not be applied: |null|
@@ -29,8 +30,8 @@ enum Mengeneinheit {
    MWH = 2000000;
 }
 message Verbrauch {
-   .bcl.DateTime Startdatum = 3;
-   .bcl.DateTime Enddatum = 4;
+   .google.protobuf.Timestamp Startdatum = 3;
+   .google.protobuf.Timestamp Enddatum = 4;
    Wertermittlungsverfahren Wertermittlungsverfahren = 5;
    string Obiskennzahl = 6;
    .bcl.Decimal Wert = 7;
