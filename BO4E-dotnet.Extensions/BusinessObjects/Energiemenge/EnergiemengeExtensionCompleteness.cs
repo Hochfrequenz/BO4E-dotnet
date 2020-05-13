@@ -53,8 +53,8 @@ namespace BO4E.Extensions.BusinessObjects.Energiemenge
                     LokationsId = em.LokationsId,
                     ReferenceTimeFrame = new Zeitraum()
                     {
-                        Startdatum = reference.Start,
-                        Enddatum = reference.End
+                        Startdatum = new DateTimeOffset(reference.Start),
+                        Enddatum = new DateTimeOffset(reference.End)
                     },
                     Coverage = coverage,
                     ErrorMessage = errorMessage
@@ -87,8 +87,8 @@ namespace BO4E.Extensions.BusinessObjects.Energiemenge
                     Obiskennzahl = obiskennzahl,
                     ReferenceTimeFrame = new Zeitraum
                     {
-                        Startdatum = DateTime.SpecifyKind(reference.Start, DateTimeKind.Utc),
-                        Enddatum = DateTime.SpecifyKind(reference.End, DateTimeKind.Utc)
+                        Startdatum = new DateTimeOffset(DateTime.SpecifyKind(reference.Start, DateTimeKind.Utc)),
+                        Enddatum = new DateTimeOffset(DateTime.SpecifyKind(reference.End, DateTimeKind.Utc))
                     },
                 };
             }
