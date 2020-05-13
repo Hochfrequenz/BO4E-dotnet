@@ -11,6 +11,7 @@
     <PackageId>Hochfrequenz.BO4E.Extensions</PackageId>
     <Authors>Hochfrequenz Unternehmensberatung GmbH</Authors>
     <Version>0.2.0</Version>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
