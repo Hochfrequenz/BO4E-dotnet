@@ -11,7 +11,6 @@
     <PackageId>Hochfrequenz.BO4E.Extensions.Encryption</PackageId>
     <Authors />
     <Company>Hochfrequenz Unternehmensberatung GmbH</Company>
-    <Version>0.2.0</Version>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
   </PropertyGroup>
 
