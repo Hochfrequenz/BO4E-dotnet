@@ -1,8 +1,10 @@
+using BO4E.COM;
+
+using Itenso.TimePeriod;
+
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using BO4E.COM;
-using Itenso.TimePeriod;
 
 
 namespace BO4E.Extensions.BusinessObjects.Energiemenge

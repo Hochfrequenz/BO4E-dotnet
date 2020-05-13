@@ -1,14 +1,18 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using BO4E.Reporting;
-using BO4E.COM;
+﻿using BO4E.COM;
 using BO4E.ENUM;
+using BO4E.Reporting;
+
 using Itenso.TimePeriod;
+
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 using Newtonsoft.Json.Linq;
+
 using StackExchange.Profiling;
+
+using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace BO4E.Extensions.BusinessObjects.Energiemenge
 {

@@ -1,12 +1,17 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using BO4E.COM;
+﻿using BO4E.COM;
 using BO4E.ENUM;
 using BO4E.Reporting;
+
 using Itenso.TimePeriod;
+
 using Newtonsoft.Json;
+
 using StackExchange.Profiling;
+
+using System;
+using System.Collections.Generic;
+using System.Linq;
+
 using static BO4E.Extensions.ENUM.MengeneinheitExtenion;
 using static BO4E.Reporting.PlausibilityReport;
 

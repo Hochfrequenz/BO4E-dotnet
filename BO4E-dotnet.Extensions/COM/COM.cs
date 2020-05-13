@@ -2,7 +2,7 @@
 
 namespace BO4E.Extensions.COM
 {
-    
+
     /// <summary>
     /// common extensions for all COM objects
     /// </summary>

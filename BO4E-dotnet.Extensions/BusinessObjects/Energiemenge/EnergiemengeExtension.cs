@@ -1,8 +1,3 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-
 using BO4E.COM;
 using BO4E.ENUM;
 using BO4E.Extensions.COM;
@@ -14,6 +9,11 @@ using Itenso.TimePeriod;
 using Newtonsoft.Json.Linq;
 
 using StackExchange.Profiling;
+
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 
 using static BO4E.Extensions.COM.VerbrauchExtension;
 
