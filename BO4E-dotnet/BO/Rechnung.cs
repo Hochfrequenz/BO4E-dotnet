@@ -57,7 +57,7 @@ namespace BO4E.BO
         /// Ausstellungsdatum der Rechnung.
         /// </summary>
         [JsonProperty(Required = Required.Always, Order = 8, PropertyName = "rechnungsdatum")]
-        [ProtoMember(8)]
+        [ProtoMember(8, DataFormat = DataFormat.WellKnown)]
         [FieldName("billDate", Language.EN)]
         public DateTimeOffset Rechnungsdatum { get; set; }
 
@@ -65,7 +65,7 @@ namespace BO4E.BO
         /// Zu diesem Datum ist die Zahlung fällig.
         /// </summary>
         [JsonProperty(Required = Required.Always, Order = 9, PropertyName = "faelligkeitsdatum")]
-        [ProtoMember(9)]
+        [ProtoMember(9, DataFormat = DataFormat.WellKnown)]
         [FieldName("dueDate", Language.EN)]
         public DateTimeOffset Faelligkeitsdatum { get; set; }
 

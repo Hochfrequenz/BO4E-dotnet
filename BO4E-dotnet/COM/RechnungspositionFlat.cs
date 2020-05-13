@@ -25,13 +25,13 @@ namespace BO4E.COM
 
         /// <inheritdoc cref="Rechnungsposition.LieferungVon"/>
         [JsonProperty(PropertyName = "lieferungVon", Required = Required.Always)]
-        [ProtoMember(4)]
+        [ProtoMember(4, DataFormat = DataFormat.WellKnown)]
         [JsonConverter(typeof(LenientDateTimeConverter))]
         public DateTimeOffset LieferungVon { get; set; }
 
         /// <inheritdoc cref="Rechnungsposition.LieferungBis"/>
         [JsonProperty(PropertyName = "lieferungBis", Required = Required.Always)]
-        [ProtoMember(5)]
+        [ProtoMember(5, DataFormat = DataFormat.WellKnown)]
         [JsonConverter(typeof(LenientDateTimeConverter))]
         public DateTimeOffset LieferungBis { get; set; }
 

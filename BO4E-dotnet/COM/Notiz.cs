@@ -29,7 +29,7 @@ namespace BO4E.COM
         /// Zeitpunkt zu dem die Notiz angelegt wurde
         /// </summary>
         [JsonProperty(PropertyName = "zeitpunkt", Required = Required.Always, Order = 8)]
-        [ProtoMember(4)]
+        [ProtoMember(4, DataFormat = DataFormat.WellKnown)]
         public DateTimeOffset Zeitpunkt { get; set; }
 
         /// <summary>

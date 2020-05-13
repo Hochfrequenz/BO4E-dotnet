@@ -59,7 +59,7 @@ namespace BO4E.BO
         /// Gibt an, wann der Vertrag beginnt.
         /// </summary>
         [JsonProperty(Required = Required.Always, Order = 9, PropertyName = "vertragsbeginn")]
-        [ProtoMember(9)]
+        [ProtoMember(9, DataFormat = DataFormat.WellKnown)]
         [JsonConverter(typeof(LenientDateTimeConverter))]
         public DateTimeOffset Vertragsbeginn { get; set; }
 
@@ -67,7 +67,7 @@ namespace BO4E.BO
         /// Gibt an, wann der Vertrag (voraussichtlich) endet oder beendet wurde.
         /// </summary>
         [JsonProperty(Required = Required.Always, Order = 10, PropertyName = "vertragsende")]
-        [ProtoMember(10)]
+        [ProtoMember(10, DataFormat = DataFormat.WellKnown)]
         [JsonConverter(typeof(LenientDateTimeConverter))]
         public DateTimeOffset Vertragsende { get; set; }
 
