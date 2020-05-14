@@ -22,6 +22,19 @@ namespace BO4E.BO
     [ProtoContract]
     public class Energiemenge : BusinessObject
     {
+        // overriding is necessary for protobuf behaviour.do we want this?
+        /// <summary>
+        /// allows adding a GUID to Business Objects for tracking across systems
+        /// </summary>
+        [JsonProperty(PropertyName = "guid", NullValueHandling = NullValueHandling.Ignore, Required = Required.Default)]
+        public override Guid? Guid { get; set; }
+        [ProtoMember(3)]
+        protected override string guidSerialized
+        {
+            get => this.Guid.HasValue ? this.Guid.ToString() : string.Empty;
+            set { this.Guid = string.IsNullOrWhiteSpace(value) ? (Guid?)null : System.Guid.Parse(value.ToString()); }
+        }
+
         /// <summary>
         /// Eindeutige Nummer der Marktlokation bzw. der Messlokation, zu der die Energiemenge gehört
         /// </summary>

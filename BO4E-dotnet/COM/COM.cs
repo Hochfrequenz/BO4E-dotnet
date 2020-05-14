@@ -146,8 +146,13 @@ namespace BO4E.COM
         /// allows adding a GUID to COM objects for tracking across systems
         /// </summary>
         [JsonProperty(PropertyName = "guid", NullValueHandling = NullValueHandling.Ignore, Required = Required.Default, Order = 1)]
-        [ProtoMember(1)]
-
         public Guid? Guid { get; set; }
+
+        [ProtoMember(1)]
+        protected string guidSerialized
+        {
+            get => this.Guid.HasValue ? this.Guid.ToString() : string.Empty;
+            set { this.Guid = string.IsNullOrWhiteSpace(value) ? (Guid?)null : System.Guid.Parse(value.ToString()); }
+        }
     }
 }
