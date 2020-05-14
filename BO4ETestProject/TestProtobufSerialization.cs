@@ -32,7 +32,7 @@ namespace TestBO4E
                         Wert = 10.0M,
                         Startdatum = new DateTime(2019, 1, 1, 0, 0, 0, DateTimeKind.Utc),
                         Enddatum = new DateTime(2019, 1, 2, 0, 0, 0, DateTimeKind.Utc),
-                        Obiskennzahl =  "1–0:1.8.1",
+                        Obiskennzahl =  "1-0:1.8.1",
                         //Guid = v1Guid
                     },
                     new Verbrauch()
@@ -41,7 +41,7 @@ namespace TestBO4E
                         Wert = 23.0M,
                         Startdatum = new DateTime(2019, 1, 2, 0, 0, 0, DateTimeKind.Utc),
                         Enddatum = new DateTime(2019, 1, 3, 0, 0, 0, DateTimeKind.Utc),
-                        Obiskennzahl =  "1–0:1.8.1",
+                        Obiskennzahl =  "1-0:1.8.1",
                         //Guid = null
                     }
                 }
