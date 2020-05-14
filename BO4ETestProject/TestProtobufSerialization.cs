@@ -1,7 +1,7 @@
 
 using System;
 using System.IO;
-
+using System.Linq;
 using BO4E.BO;
 using BO4E.COM;
 
@@ -17,10 +17,13 @@ namespace TestBO4E
         [TestMethod]
         public void TestProtobufRoundTrip()
         {
+            //Guid emGuid = Guid.NewGuid();
+            //Guid v1Guid = Guid.NewGuid();
             Energiemenge em = new Energiemenge()
             {
                 LokationsId = "54321012345",
                 LokationsTyp = BO4E.ENUM.Lokationstyp.MaLo,
+                //Guid = emGuid,
                 Energieverbrauch = new System.Collections.Generic.List<Verbrauch>()
                 {
                     new Verbrauch()
@@ -29,7 +32,8 @@ namespace TestBO4E
                         Wert = 10.0M,
                         Startdatum = new DateTime(2019, 1, 1, 0, 0, 0, DateTimeKind.Utc),
                         Enddatum = new DateTime(2019, 1, 2, 0, 0, 0, DateTimeKind.Utc),
-                        Obiskennzahl =  "1–0:1.8.1"
+                        Obiskennzahl =  "1-0:1.8.1",
+                        //Guid = v1Guid
                     },
                     new Verbrauch()
                     {
@@ -37,7 +41,8 @@ namespace TestBO4E
                         Wert = 23.0M,
                         Startdatum = new DateTime(2019, 1, 2, 0, 0, 0, DateTimeKind.Utc),
                         Enddatum = new DateTime(2019, 1, 3, 0, 0, 0, DateTimeKind.Utc),
-                        Obiskennzahl =  "1–0:1.8.1"
+                        Obiskennzahl =  "1-0:1.8.1",
+                        //Guid = null
                     }
                 }
             };
@@ -60,6 +65,14 @@ namespace TestBO4E
             }
             Assert.IsNotNull(emRoundTrip.LokationsId);
             Assert.IsTrue(emRoundTrip.IsValid());
+            /*
+            Assert.IsTrue(emRoundTrip.Guid.HasValue);
+            Assert.AreEqual(emGuid, em.Guid.Value);
+            Assert.IsTrue(emRoundTrip.Energieverbrauch.First().Guid.HasValue);
+            Assert.AreEqual(v1Guid, emRoundTrip.Energieverbrauch.First().Guid.Value);
+            Assert.IsFalse(emRoundTrip.Energieverbrauch.Last().Guid.HasValue);
+            */
+
             Assert.AreEqual(em, emRoundTrip);
         }
     }
