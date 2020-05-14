@@ -133,6 +133,7 @@ namespace BO4E.BO
         /// </summary>
         [JsonProperty(PropertyName = "guid", NullValueHandling = NullValueHandling.Ignore, Required = Required.Default)]
         public virtual Guid? Guid { get; set; }
+        // note that this inheritance protobuf thing doesn't work as expected. please see the comments in TestBO4E project->TestProfobufSerialization
         [ProtoMember(3)]
         protected virtual string guidSerialized
         {
