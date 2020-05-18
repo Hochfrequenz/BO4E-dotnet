@@ -126,6 +126,21 @@ namespace BO4E.meta.LenientConverters
                         return DateTimeOffset.MinValue; 
                     }
                 }
+                catch(ArgumentOutOfRangeException ae) when (ae.Message == "The UTC time represented when the offset is applied must be between year 0 and 10,000. (Parameter 'offset')")
+                {
+                    if (objectType == typeof(DateTime))
+                    {
+                        return DateTime.MinValue;
+                    }
+                    else if (objectType == typeof(DateTime?) || objectType == typeof(DateTimeOffset?))
+                    {
+                        return null;
+                    }
+                    else
+                    {
+                        return DateTimeOffset.MinValue;
+                    }
+                }
                 //throw new JsonReaderException($"Couldn't convert {rawDate} to any of the allowed date time formats: {String.Join(";", ALLOWED_DATETIME_FORMATS)})");
             }
         }
