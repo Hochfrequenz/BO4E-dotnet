@@ -35,10 +35,15 @@ namespace BO4E.COM
         /// </summary>
         /// <param name="wert">numerischer Wert</param>
         /// <param name="einheit">zugehörige Mengeneinheit</param>
-        public PhysikalischerWert(decimal wert, Mengeneinheit einheit)
+        public PhysikalischerWert(decimal wert, Mengeneinheit einheit) : this()
         {
             this.Wert = wert;
             this.Einheit = einheit;
+        }
+
+        public PhysikalischerWert()
+        {
+
         }
 
         /// <summary>
@@ -46,7 +51,7 @@ namespace BO4E.COM
         /// </summary>
         /// <param name="wert">numerischer wert</param>
         /// <param name="einheitString">zugehörige Einheit als string (case insensitive)</param>
-        public PhysikalischerWert(decimal wert, string einheitString)
+        public PhysikalischerWert(decimal wert, string einheitString) : this()
         {
             this.Wert = wert;
 
