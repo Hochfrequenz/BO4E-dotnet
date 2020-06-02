@@ -101,5 +101,10 @@ namespace BO4E.COM
         [ProtoMember(1018)]
         public int? Nachkommastelle { get; set; }
 
+        [JsonProperty(PropertyName = "abrechnungsrelevant", Required = Required.Default)]
+        [NonOfficial(NonOfficialCategory.CUSTOMER_REQUIREMENTS)]
+        [ProtoMember(1019)]
+        public bool? Abrechnungsrelevant { get; set; }
+
     }
 }

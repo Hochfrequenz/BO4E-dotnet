@@ -1027,6 +1027,7 @@ message Zaehlwerk {
    bool Steuerbefreit = 1016;
    int32 Vorkommastelle = 1017;
    int32 Nachkommastelle = 1018;
+   bool Abrechnungsrelevant = 1019;
 }
 enum Zeitreihentyp {
    EGS = 0;
