@@ -491,6 +491,10 @@ namespace BO4E.BO
 
             public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
             {
+                if (reader.TokenType == JsonToken.Null)
+                {
+                    return null;
+                }
                 if (objectType.IsAbstract)
                 {
                     JObject jo = JObject.Load(reader);
