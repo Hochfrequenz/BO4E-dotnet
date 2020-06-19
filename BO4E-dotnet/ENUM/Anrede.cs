@@ -20,11 +20,18 @@ namespace BO4E.ENUM
         /// <summary>Individuell festgelegt</summary>
         INDIVIDUELL,
         /// <summary>
+        /// Familien
+        /// </summary>
+        [NonOfficial(NonOfficialCategory.CUSTOMER_REQUIREMENTS)]
+        FAMILIE,
+        [NonOfficial(NonOfficialCategory.CUSTOMER_REQUIREMENTS)]
+        ERBENGEMEINSCHAFT,
+        /// <summary>
         /// Doktor
         /// </summary>
         [NonOfficial(NonOfficialCategory.CUSTOMER_REQUIREMENTS)]
         [Obsolete("Use BO4E.ENUM.Titel instead", true)]
         [ProtoEnum(Name = nameof(Anrede) + "_" + "DR")]
-        DR
+        DR,
     }
 }
