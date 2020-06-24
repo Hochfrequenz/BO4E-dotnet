@@ -1,10 +1,3 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Linq;
-using System.Reflection;
-using System.Runtime.Serialization;
-
 using BO4E.meta;
 
 using Newtonsoft.Json;
@@ -14,6 +7,13 @@ using Newtonsoft.Json.Schema.Generation;
 using Newtonsoft.Json.Serialization;
 
 using ProtoBuf;
+
+using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.Linq;
+using System.Reflection;
+using System.Runtime.Serialization;
 
 namespace BO4E.BO
 {
@@ -84,12 +84,12 @@ namespace BO4E.BO
         /// </example>
         [JsonIgnore]
         [ProtoIgnore]
-        public const string USER_PROPERTIES_NAME = "userProperties";
+        public const string USER_PROPERTIES_NAME = "UserProperties";
 
         /// <summary>
         /// User properties (non bo4e standard)
         /// </summary>
-        [JsonProperty(PropertyName = USER_PROPERTIES_NAME, Required = Required.Default, Order = 200)]
+        [JsonProperty(PropertyName = USER_PROPERTIES_NAME, Required = Required.Default, DefaultValueHandling = DefaultValueHandling.Ignore, Order = 200)]
         [JsonExtensionData]
         [ProtoMember(200)]
         [DataCategory(DataCategory.USER_PROPERTIES)]
@@ -101,7 +101,7 @@ namespace BO4E.BO
         protected BusinessObject()
         {
             BoTyp = this.GetType().Name.ToUpper();
-            versionStruktur = 1;
+            VersionStruktur = 1;
         }
 
         /// <summary>
@@ -124,16 +124,22 @@ namespace BO4E.BO
         /// <example>
         /// 1
         /// </example>
-        [JsonProperty(Required = Required.Default, Order = 2)]
+        [JsonProperty(PropertyName = "versionStruktur", Required = Required.Default, Order = 2)]
         [ProtoMember(2)]
-        public int versionStruktur;
+        public int VersionStruktur { get; set; }
 
         /// <summary>
         /// allows adding a GUID to Business Objects for tracking across systems
         /// </summary>
-        [JsonProperty(NullValueHandling = NullValueHandling.Ignore, Required = Required.Default)]
+        [JsonProperty(PropertyName = "guid", NullValueHandling = NullValueHandling.Ignore, Required = Required.Default)]
+        public virtual Guid? Guid { get; set; }
+        // note that this inheritance protobuf thing doesn't work as expected. please see the comments in TestBO4E project->TestProfobufSerialization
         [ProtoMember(3)]
-        public string guid;
+        protected virtual string guidSerialized
+        {
+            get => this.Guid.HasValue ? this.Guid.ToString() : string.Empty;
+            set { this.Guid = string.IsNullOrWhiteSpace(value) ? (Guid?)null : System.Guid.Parse(value.ToString()); }
+        }
 
         /// <summary>
         /// returns a JSON scheme for the Business Object
@@ -154,7 +160,7 @@ namespace BO4E.BO
         {
             if (!boType.IsSubclassOf(typeof(BusinessObject)))
             {
-                throw new ArgumentException($"You must only request JSON schemes for Business Objects. {boType.ToString()} is not a valid Business Object type.");
+                throw new ArgumentException($"You must only request JSON schemes for Business Objects. {boType} is not a valid Business Object type.");
             }
             JSchemaGenerator generator = new JSchemaGenerator();
             generator.GenerationProviders.Add(new StringEnumGenerationProvider());
@@ -342,7 +348,7 @@ namespace BO4E.BO
         {
             if (!boType.IsSubclassOf(typeof(BusinessObject)))
             {
-                throw new ArgumentException($"Business Object keys are only defined on Business Object types but {boType.ToString()} is not a Business Object.");
+                throw new ArgumentException($"Business Object keys are only defined on Business Object types but {boType} is not a Business Object.");
             }
             return boType.GetProperties()
                  .Where(p => p.GetCustomAttributes(typeof(BoKey), false).Length > 0)
@@ -485,6 +491,10 @@ namespace BO4E.BO
 
             public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
             {
+                if (reader.TokenType == JsonToken.Null)
+                {
+                    return null;
+                }
                 if (objectType.IsAbstract)
                 {
                     JObject jo = JObject.Load(reader);

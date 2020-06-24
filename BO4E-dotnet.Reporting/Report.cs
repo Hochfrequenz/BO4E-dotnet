@@ -87,7 +87,7 @@ namespace BO4E.Reporting
                     }
                     else
                     {
-                        int userPropertiesIndex = headerNames.IndexOf("UserProperties");
+                        int userPropertiesIndex = headerNames.IndexOf(BusinessObject.USER_PROPERTIES_NAME);
                         if (userPropertiesIndex >= 0)
                         {
                             headerNames.RemoveAt(userPropertiesIndex);
@@ -144,7 +144,7 @@ namespace BO4E.Reporting
                 }
                 else
                 {
-                    int userPropertiesIndex = headerNames.IndexOf("UserProperties");
+                    int userPropertiesIndex = headerNames.IndexOf(BusinessObject.USER_PROPERTIES_NAME);
                     if (userPropertiesIndex >= 0)
                     {
                         headerNames.RemoveAt(userPropertiesIndex);
