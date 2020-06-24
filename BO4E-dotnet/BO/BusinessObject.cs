@@ -84,7 +84,7 @@ namespace BO4E.BO
         /// </example>
         [JsonIgnore]
         [ProtoIgnore]
-        public const string USER_PROPERTIES_NAME = "userProperties";
+        public const string USER_PROPERTIES_NAME = "UserProperties";
 
         /// <summary>
         /// User properties (non bo4e standard)
