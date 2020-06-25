@@ -55,13 +55,15 @@ namespace BO4E.Reporting
                         reihenfolge = reihenfolge.Where(x => x != null).ToList();
                         foreach (var reihenItem in reihenfolge)
                         {
-                            if (!string.IsNullOrEmpty(reihenItem.Values.First()) && !string.IsNullOrEmpty(reihenItem.Keys.First()))
+                            string rf_value = reihenItem.Values.First();
+                            string rf_key = reihenItem.Keys.First();
+                            if (!string.IsNullOrEmpty(rf_value) && !string.IsNullOrEmpty(rf_key))
                             {
-                                int index = headerNames.IndexOf(reihenItem.Keys.First());
+                                int index = headerNames.IndexOf(rf_key);
                                 if (index != -1)
                                 {
-                                    sortedHeaderNamesList.Add(reihenItem.Values.First());
-                                    string CurFieldName = reihenItem.Keys.First();
+                                    sortedHeaderNamesList.Add(rf_value);
+                                    string CurFieldName = rf_key;
                                     if (parallelItems.Where(g => g.Element == CurFieldName).Count() > 0)
                                     {
                                         sortedResults.Add(result[index]);
@@ -76,7 +78,22 @@ namespace BO4E.Reporting
                                 }
                                 else
                                 {
-                                    throw new ArgumentException("invalid values", nameof(reihenfolge));
+                                    switch (rf_key)
+                                    {
+                                        case "Messung":
+                                            sortedHeaderNamesList.Add("Messung");
+                                            string messung = "RLM";
+                                            string obis = result[headerNames.IndexOf("obiskennzahl")];
+                                            if (obis.Contains("-65:"))
+                                            {
+                                                messung = "IMS";
+                                            }
+                                            sortedResults.Add(messung);
+                                            break;
+                                        default:
+                                            throw new ArgumentException("invalid values", nameof(reihenfolge));
+                                    }
+
                                 }
                             }
                             else
@@ -321,5 +338,10 @@ namespace BO4E.Reporting
             return returnData;
         }
 
+
+        //public string ToCustomCsv(char separator = ';', bool headerLine = true, string lineTerminator = "\\n", List<Dictionary<string, string>> reihenfolge = null)
+        //{
+
+        //}
     }
 }
