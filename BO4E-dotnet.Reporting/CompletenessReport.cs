@@ -1,12 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-
-using BO4E.COM;
+﻿using BO4E.COM;
 using BO4E.ENUM;
 using BO4E.meta;
 
 using Newtonsoft.Json;
+
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text.RegularExpressions;
 
 namespace BO4E.Reporting
 {
@@ -183,59 +184,98 @@ namespace BO4E.Reporting
             public Mengeneinheit Einheit { get; set; }
         }
 
-        public string toCSV(char separator = ';', bool headerLine = true, string lineTerminator = "\\n", List<Dictionary<string, string>> reihenfolge = null)
+        /// <summary>
+        /// matches a OBIS-Kennzahl that stands for an intelligentes messsystem for power.
+        /// </summary>
+        private static Regex imsysRegex = new Regex(@"(1)-(65):((?:[1-8]|99))\.((?:6|8|9|29))\.([0-9]{1,2})", RegexOptions.Compiled);
+
+        public string ToCSV(string separator = ";", bool headerLine = true, string lineTerminator = "\\n", List<Dictionary<string, string>> reihenfolge = null)
         {
-            string returnCSV = "";
+            string returnCSV = string.Empty;
             if (headerLine)
             {
-                returnCSV = "Startdatum" + separator + "Enddatum" + separator + "Melo" + separator + "Malo" + separator + "Messung" + separator + "MSB" + separator +
-                    "Profil-Nr" + separator + "Profil-Typ" + separator + "Zeitbereich in dem kein wahrer Wert vorhanden ist von" +
-                    separator + "Zeitbereich in dem kein wahrer Wert vorhanden ist bis" + separator + "Anzahl fehlende Werte" +
-                    separator + "Prozentuale Vollständigkeit" + separator + "Status" + lineTerminator;
+                var headerColumns = new List<string>()
+                {
+                    "Startdatum",
+                    "Enddatum",
+                    "MeLo",
+                    "MaLo",
+                    "Messung",
+                    "MSB",
+                    "Profil-Nr.",
+                    "Profil-Typ",
+                    "Zeitbereich in dem kein wahrer Wert vorhanden ist von",
+                    "Zeitbereich in dem kein wahrer Wert vorhanden ist bis",
+                    "Prozentuale Vollständigkeit",
+                    "Status"
+                };
+                returnCSV += string.Join(separator, headerColumns) + lineTerminator;
+                //returnCSV = "Startdatum" + separator + "Enddatum" + separator + "Melo" + separator + "Malo" + separator + "Messung" + separator + "MSB" + separator +
+                //    "Profil-Nr" + separator + "Profil-Typ" + separator + "Zeitbereich in dem kein wahrer Wert vorhanden ist von" +
+                //    separator + "Zeitbereich in dem kein wahrer Wert vorhanden ist bis" + separator + "Anzahl fehlende Werte" +
+                //    separator + "Prozentuale Vollständigkeit" + separator + "Status" + lineTerminator;
             }
-            returnCSV += this.ReferenceTimeFrame.Startdatum.Value.ToString("yyyy-MM-ddTHH:mm:ssZ") + separator +
-                this.ReferenceTimeFrame.Enddatum.Value.ToString("yyyy-MM-ddTHH:mm:ssZ") + separator;
-
-            returnCSV += LokationsId + separator; // Melo
-            returnCSV += LokationsId + separator; // Malo
-
-            string messung = "RLM";
-            if (Obiskennzahl.Contains("-65:"))
+            var columns = new List<string>
             {
-                messung = "IMS";
+                this.ReferenceTimeFrame.Startdatum.Value.ToString("yyyy-MM-ddTHH:mm:ssZ"),
+                this.ReferenceTimeFrame.Enddatum.Value.ToString("yyyy-MM-ddTHH:mm:ssZ")
+            };
+            //returnCSV += this.ReferenceTimeFrame.Startdatum.Value.ToString("yyyy-MM-ddTHH:mm:ssZ") + separator +
+            //    this.ReferenceTimeFrame.Enddatum.Value.ToString("yyyy-MM-ddTHH:mm:ssZ") + separator;
+
+            if (BO4E.BO.Messlokation.ValidateId(LokationsId))
+            {
+                columns.Add(LokationsId); // melo
+                columns.Add(string.Empty); // malo
             }
-            returnCSV += messung + separator;
-            returnCSV += "MSB" + separator; // MSB
+            else if (BO.Marktlokation.ValidateId(LokationsId))
+            {
+                columns.Add(string.Empty);//melo
+                columns.Add(LokationsId);//malo
+            }
+            else
+            { // fallback only
+                columns.Add(LokationsId);
+                columns.Add(LokationsId);
+            }
+
+            columns.Add(imsysRegex.Match(Obiskennzahl).Success ? "IMS" : "RLM");// messung
+            columns.Add("MSB"); // MSB
+
             if (this.UserProperties.TryGetValue("profil", out var profil))
             {
-                returnCSV += profil.ToString() + separator;
+                columns.Add(profil.ToString());
             }
             else
             {
-                returnCSV += separator;
+                columns.Add(string.Empty);
             }
 
             if (this.UserProperties.TryGetValue("profilRolle", out var profilRolle))
             {
-                returnCSV += profilRolle.ToString() + separator;
+                columns.Add(profilRolle.ToString());
             }
             else
             {
-                returnCSV += separator;
+                columns.Add(string.Empty);
             }
-            if (Gaps.Count > 0)
+            if (Gaps.Any())
             {
                 DateTime minGap = this.Gaps.OrderBy(x => x.Startdatum).First().Startdatum;
                 DateTime maxGap = this.Gaps.OrderByDescending(x => x.Enddatum).First().Startdatum;
-                returnCSV += minGap.ToString("yyyy-MM-ddTHH:mm:ssZ") + separator + maxGap.ToString("yyyy-MM-ddTHH:mm:ssZ") + separator;
+                columns.Add(minGap.ToString("yyyy-MM-ddTHH:mm:ssZ"));
+                columns.Add(maxGap.ToString("yyyy-MM-ddTHH:mm:ssZ"));
             }
             else
             {
-                returnCSV += separator + separator;
+                columns.Add(string.Empty);
+                columns.Add(string.Empty);
             }
-            returnCSV += ((1 - this.Coverage) * (ReferenceTimeFrame.Dauer / 15)).ToString() + separator;
-            returnCSV += (this.Coverage * 100).ToString() + " %" + separator;
-            returnCSV += "Status" + lineTerminator;
+            columns.Add(((1 - this.Coverage) * (ReferenceTimeFrame.Dauer / 15)).ToString());
+            columns.Add((this.Coverage * 100).ToString() + " %");
+            columns.Add("Status");
+            returnCSV += string.Join(separator, columns) + lineTerminator;
+
             return returnCSV;
         }
 
