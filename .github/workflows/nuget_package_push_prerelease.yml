@@ -5,7 +5,7 @@ on:
     branches:
       - develop
 jobs:
-  build:
+  pushprerelease:
     runs-on: windows-latest
     steps:
     - name: Get current time

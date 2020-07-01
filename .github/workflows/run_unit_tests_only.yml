@@ -3,7 +3,7 @@ name: Run Unit Tests (BO4E) as Check
 on: [push]
 
 jobs:
-  build:
+  unittest:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v1
