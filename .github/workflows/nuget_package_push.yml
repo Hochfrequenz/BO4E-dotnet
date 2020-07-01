@@ -6,7 +6,7 @@ on:
       - master
 
 jobs:
-  build:
+  pushrelease:
     runs-on: windows-latest
     steps:
     - uses: actions/checkout@master
