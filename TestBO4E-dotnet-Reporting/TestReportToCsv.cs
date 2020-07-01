@@ -138,6 +138,7 @@ namespace TestBO4E.Reporting
                 {
                     Assert.IsTrue(singleReportLine.Split(Environment.NewLine)[1].StartsWith("2019-09-30T22:00:00Z;2019-10-31T23:00:00Z;;50985149762")); // no melo, just malo
                     Assert.IsTrue(singleReportLine.Contains("IMS"));
+                    Assert.IsTrue(singleReportLine.Contains(";"+(5 * 24 * 4).ToString()+";"));  // 5 days * 24 hours/day * 4 missing values/hour 
                 }
                 else if (counter == 0)
                 {
