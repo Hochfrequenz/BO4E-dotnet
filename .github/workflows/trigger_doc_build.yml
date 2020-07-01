@@ -9,10 +9,8 @@ on:
       - master
 
 jobs:
-  build:
-
+  builddocs:
     runs-on: ubuntu-18.04
-
     steps:
     - name: Trigger documentation build
       run: |

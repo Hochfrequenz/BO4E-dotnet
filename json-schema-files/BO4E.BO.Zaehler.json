@@ -709,8 +709,12 @@
       ]
     },
     "zaehlertyp": {
-      "type": "string",
+      "type": [
+        "string",
+        "null"
+      ],
       "enum": [
+        null,
         "DREHSTROMZAEHLER",
         "BALGENGASZAEHLER",
         "DREHKOLBENZAEHLER",
