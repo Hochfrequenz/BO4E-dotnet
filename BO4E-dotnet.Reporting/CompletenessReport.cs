@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 
 using BO4E.COM;
 using BO4E.ENUM;
@@ -181,6 +182,63 @@ namespace BO4E.Reporting
             [JsonProperty(PropertyName = "einheit", Required = Required.Default, Order = 6)]
             public Mengeneinheit Einheit { get; set; }
         }
+
+        public string toCSV(char separator = ';', bool headerLine = true, string lineTerminator = "\\n", List<Dictionary<string, string>> reihenfolge = null)
+        {
+            string returnCSV = "";
+            if (headerLine)
+            {
+                returnCSV = "Startdatum" + separator + "Enddatum" + separator + "Melo" + separator + "Malo" + separator + "Messung" + separator + "MSB" + separator +
+                    "Profil-Nr" + separator + "Profil-Typ" + separator + "Zeitbereich in dem kein wahrer Wert vorhanden ist von" +
+                    separator + "Zeitbereich in dem kein wahrer Wert vorhanden ist bis" + separator + "Anzahl fehlende Werte" +
+                    separator + "Prozentuale Vollständigkeit" + separator + "Status" + lineTerminator;
+            }
+            returnCSV += this.ReferenceTimeFrame.Startdatum.Value.ToString("yyyy-MM-ddTHH:mm:ssZ") + separator +
+                this.ReferenceTimeFrame.Enddatum.Value.ToString("yyyy-MM-ddTHH:mm:ssZ") + separator;
+
+            returnCSV += LokationsId + separator; // Melo
+            returnCSV += LokationsId + separator; // Malo
+
+            string messung = "RLM";
+            if (Obiskennzahl.Contains("-65:"))
+            {
+                messung = "IMS";
+            }
+            returnCSV += messung + separator;
+            returnCSV += "MSB" + separator; // MSB
+            if (this.UserProperties.TryGetValue("profil", out var profil))
+            {
+                returnCSV += profil.ToString() + separator;
+            }
+            else
+            {
+                returnCSV += separator;
+            }
+
+            if (this.UserProperties.TryGetValue("profilRolle", out var profilRolle))
+            {
+                returnCSV += profilRolle.ToString() + separator;
+            }
+            else
+            {
+                returnCSV += separator;
+            }
+            if (Gaps.Count > 0)
+            {
+                DateTime minGap = this.Gaps.OrderBy(x => x.Startdatum).First().Startdatum;
+                DateTime maxGap = this.Gaps.OrderByDescending(x => x.Enddatum).First().Startdatum;
+                returnCSV += minGap.ToString("yyyy-MM-ddTHH:mm:ssZ") + separator + maxGap.ToString("yyyy-MM-ddTHH:mm:ssZ") + separator;
+            }
+            else
+            {
+                returnCSV += separator + separator;
+            }
+            returnCSV += ((1 - this.Coverage) * this.ReferenceTimeFrame.Dauer / 15).ToString() + separator;
+            returnCSV += (this.Coverage + 100.00M).ToString() + " %" + separator;
+            returnCSV += "Status" + lineTerminator;
+            return returnCSV;
+        }
+
         /*
         /// <summary>
         /// allows sorting completeness reports based on <see cref="CompletenessReport.referenceTimeFrame.startdatum"/>
