@@ -5,8 +5,6 @@ using System.Linq;
 
 using BO4E.BO;
 
-using Newtonsoft.Json.Linq;
-
 using static BO4E.Reporting.CompletenessReport;
 
 namespace BO4E.Reporting
@@ -57,15 +55,13 @@ namespace BO4E.Reporting
                         reihenfolge = reihenfolge.Where(x => x != null).ToList();
                         foreach (var reihenItem in reihenfolge)
                         {
-                            string rf_value = reihenItem.Values.First();
-                            string rf_key = reihenItem.Keys.First();
-                            if (!string.IsNullOrEmpty(rf_value) && !string.IsNullOrEmpty(rf_key))
+                            if (!string.IsNullOrEmpty(reihenItem.Values.First()) && !string.IsNullOrEmpty(reihenItem.Keys.First()))
                             {
-                                int index = headerNames.IndexOf(rf_key);
+                                int index = headerNames.IndexOf(reihenItem.Keys.First());
                                 if (index != -1)
                                 {
-                                    sortedHeaderNamesList.Add(rf_value);
-                                    string CurFieldName = rf_key;
+                                    sortedHeaderNamesList.Add(reihenItem.Values.First());
+                                    string CurFieldName = reihenItem.Keys.First();
                                     if (parallelItems.Where(g => g.Element == CurFieldName).Count() > 0)
                                     {
                                         sortedResults.Add(result[index]);
@@ -80,22 +76,7 @@ namespace BO4E.Reporting
                                 }
                                 else
                                 {
-                                    switch (rf_key)
-                                    {
-                                        case "Messung":
-                                            sortedHeaderNamesList.Add("Messung");
-                                            string messung = "RLM";
-                                            string obis = result[headerNames.IndexOf("obiskennzahl")];
-                                            if (obis.Contains("-65:"))
-                                            {
-                                                messung = "IMS";
-                                            }
-                                            sortedResults.Add(messung);
-                                            break;
-                                        default:
-                                            throw new ArgumentException("invalid values", nameof(reihenfolge));
-                                    }
-
+                                    throw new ArgumentException("invalid values", nameof(reihenfolge));
                                 }
                             }
                             else
@@ -226,7 +207,7 @@ namespace BO4E.Reporting
                 }
                 else if ((field.PropertyType.IsGenericType && (field.PropertyType.GetGenericTypeDefinition() == typeof(List<>))))
                 {
-                    if (field.GetValue(value) != null && field.Name != "Gaps")
+                    if (field.GetValue(value) != null && field.Name != "gaps")
                     {
                         Type ItemType = field.GetValue(value).GetType().GetGenericArguments()[0];
                         var list = field.GetValue(value);
@@ -234,25 +215,6 @@ namespace BO4E.Reporting
                         foreach (var s in a)
                         {
                             returnData = Detect(s.GetType(), separator, s, returnData);
-                        }
-                    }
-                    else
-                    {
-                        continue;
-                    }
-                }
-                else if ((field.Name == "UserProperties"))
-                {
-                    if (field.GetValue(value) != null)
-                    {
-                        Type ItemType = field.GetValue(value).GetType().GetGenericArguments()[0];
-                        var userPropertiesDic = field.GetValue(value);
-                        IDictionary<string, JToken> a = (IDictionary<string, JToken>)userPropertiesDic;
-                        foreach (var pair in a)
-                        {
-                            h.Add(pair.Key);
-                            d.Add((pair.Value.ToString().Contains(separator)) ? "\"" + pair.Value.ToString() + "\"" : pair.Value.ToString());
-                            Console.WriteLine(pair.Key + " = " + pair.Value);
                         }
                     }
                     else
@@ -313,7 +275,7 @@ namespace BO4E.Reporting
                 }
                 else if ((field.FieldType.IsGenericType && (field.FieldType.GetGenericTypeDefinition() == typeof(List<>))))
                 {
-                    if (field.GetValue(value) != null && field.Name == "Gaps")
+                    if (field.GetValue(value) != null && field.Name == "gaps")
                     {
                         Type ItemType = field.GetValue(value).GetType().GetGenericArguments()[0];
                         var list = field.GetValue(value);
@@ -335,7 +297,7 @@ namespace BO4E.Reporting
                         }
                         if (field.DeclaringType == typeof(BasicVerbrauch))
                         {
-                            string muterType = "Gap.";
+                            string muterType = "gap.";
                             string val = nestedValue.ToString();
                             if (field.FieldType == typeof(DateTime?))
                             {
@@ -359,10 +321,5 @@ namespace BO4E.Reporting
             return returnData;
         }
 
-
-        //public string ToCustomCsv(char separator = ';', bool headerLine = true, string lineTerminator = "\\n", List<Dictionary<string, string>> reihenfolge = null)
-        //{
-
-        //}
     }
 }
