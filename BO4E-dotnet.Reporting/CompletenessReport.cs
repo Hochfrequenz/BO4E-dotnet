@@ -233,8 +233,8 @@ namespace BO4E.Reporting
             {
                 returnCSV += separator + separator;
             }
-            returnCSV += ((1 - this.Coverage) * this.ReferenceTimeFrame.Dauer / 15).ToString() + separator;
-            returnCSV += (this.Coverage + 100.00M).ToString() + " %" + separator;
+            returnCSV += ((1 - this.Coverage) * (ReferenceTimeFrame.Dauer / 15)).ToString() + separator;
+            returnCSV += (this.Coverage * 100).ToString() + " %" + separator;
             returnCSV += "Status" + lineTerminator;
             return returnCSV;
         }
