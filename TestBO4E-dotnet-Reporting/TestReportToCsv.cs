@@ -1,13 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading;
-
-using BO4E.Reporting;
+﻿using BO4E.Reporting;
 
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 using Newtonsoft.Json;
+
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading;
 
 namespace TestBO4E.Reporting
 {
@@ -127,18 +127,30 @@ namespace TestBO4E.Reporting
         [TestMethod]
         public void TestPrivateFieldsAndUserPropertiesHardCodingCSV()
         {
-            string jsonData = "[{\"versionStruktur\":1,\"boTyp\":\"COMPLETENESSREPORT\",\"referenceTimeFrame\":{\"$type\":\"BO4E.COM.Zeitraum, BO4Enet\",\"einheit\":null,\"dauer\":null,\"startdatum\":\"2019-09-30T22:00:00Z\",\"enddatum\":\"2019-10-31T23:00:00Z\"},\"_errorMessage\":null,\"lokationsId\":\"50985149762\",\"obiskennzahl\":\"1-1:1.29.0\",\"einheit\":2000,\"wertermittlungsverfahren\":1,\"coverage\":0.8402684564,\"values\":[],\"gaps\":[{\"$type\":\"BO4E.Reporting.CompletenessReport+BasicVerbrauch, BO4Enet\",\"startdatum\":\"2019-10-27T00:00:00Z\",\"enddatum\":\"2019-10-31T23:00:00Z\",\"wert\":null}],\"profil\":\"000000000111127365\",\"profilRolle\":\"0001\",\"anlagennummer\":\"5000080657\",\"zw\":\"000000000020708905\",\"sap_time_zone\":\"CET\",\"sapSanitized\":true,\"valueCount\":0,\"overallGapStart\":\"2019-10-31T23:00:00Z\",\"overallGapEnd\":\"2019-11-30T23:00:00Z\"},{\"$type\":\"BO4E.Reporting.CompletenessReport, BO4Enet\",\"versionStruktur\":1,\"boTyp\":\"COMPLETENESSREPORT\",\"referenceTimeFrame\":{\"$type\":\"BO4E.COM.Zeitraum, BO4Enet\",\"einheit\":null,\"dauer\":null,\"startdatum\":\"2019-09-30T22:00:00Z\",\"enddatum\":\"2019-10-31T23:00:00Z\"},\"_errorMessage\":null,\"lokationsId\":\"DE0004096816100000000000000200712\",\"obiskennzahl\":\"1-1:1.29.0\",\"einheit\":2000,\"wertermittlungsverfahren\":1,\"coverage\":0.8402684564,\"values\":[],\"gaps\":[{\"$type\":\"BO4E.Reporting.CompletenessReport+BasicVerbrauch, BO4Enet\",\"startdatum\":\"2019-10-27T00:00:00Z\",\"enddatum\":\"2019-10-31T23:00:00Z\",\"wert\":null}],\"profil\":\"000000000111127365\",\"profilRolle\":\"0001\",\"anlagennummer\":\"5001065966\",\"zw\":\"000000000020708905\",\"sap_time_zone\":\"CET\",\"sapSanitized\":true,\"valueCount\":0,\"overallGapStart\":\"2019-10-31T23:00:00Z\",\"overallGapEnd\":\"2019-11-30T23:00:00Z\"},{\"$type\":\"BO4E.Reporting.CompletenessReport, BO4Enet\",\"versionStruktur\":1,\"boTyp\":\"COMPLETENESSREPORT\",\"referenceTimeFrame\":{\"$type\":\"BO4E.COM.Zeitraum, BO4Enet\",\"einheit\":null,\"dauer\":null,\"startdatum\":\"2019-10-31T23:00:00Z\",\"enddatum\":\"2019-11-30T23:00:00Z\"},\"_errorMessage\":null,\"lokationsId\":\"50985149762\",\"obiskennzahl\":\"1-1:1.29.0\",\"einheit\":2000,\"wertermittlungsverfahren\":1,\"coverage\":0.3,\"values\":[],\"gaps\":[{\"$type\":\"BO4E.Reporting.CompletenessReport+BasicVerbrauch, BO4Enet\",\"startdatum\":\"2019-10-31T23:00:00Z\",\"enddatum\":\"2019-11-13T00:00:00Z\",\"wert\":null},{\"$type\":\"BO4E.Reporting.CompletenessReport+BasicVerbrauch, BO4Enet\",\"startdatum\":\"2019-11-22T00:00:00Z\",\"enddatum\":\"2019-11-30T23:00:00Z\",\"wert\":null}],\"profil\":\"000000000111127365\",\"profilRolle\":\"0001\",\"anlagennummer\":\"5000080657\",\"zw\":\"000000000020708905\",\"sap_time_zone\":\"CET\",\"sapSanitized\":true,\"valueCount\":0,\"overallGapStart\":\"2019-10-31T23:00:00Z\",\"overallGapEnd\":\"2019-11-30T23:00:00Z\"},{\"$type\":\"BO4E.Reporting.CompletenessReport, BO4Enet\",\"versionStruktur\":1,\"boTyp\":\"COMPLETENESSREPORT\",\"referenceTimeFrame\":{\"$type\":\"BO4E.COM.Zeitraum, BO4Enet\",\"einheit\":null,\"dauer\":null,\"startdatum\":\"2019-10-31T23:00:00Z\",\"enddatum\":\"2019-11-30T23:00:00Z\"},\"_errorMessage\":null,\"lokationsId\":\"DE0004096816100000000000000200712\",\"obiskennzahl\":\"1-1:1.29.0\",\"einheit\":2000,\"wertermittlungsverfahren\":1,\"coverage\":0.3,\"values\":[],\"gaps\":[{\"$type\":\"BO4E.Reporting.CompletenessReport+BasicVerbrauch, BO4Enet\",\"startdatum\":\"2019-10-31T23:00:00Z\",\"enddatum\":\"2019-11-13T00:00:00Z\",\"wert\":null},{\"$type\":\"BO4E.Reporting.CompletenessReport+BasicVerbrauch, BO4Enet\",\"startdatum\":\"2019-11-22T00:00:00Z\",\"enddatum\":\"2019-11-30T23:00:00Z\",\"wert\":null}],\"profil\":\"000000000111127365\",\"profilRolle\":\"0001\",\"anlagennummer\":\"5001065966\",\"zw\":\"000000000020708905\",\"sap_time_zone\":\"CET\",\"sapSanitized\":true,\"valueCount\":0,\"overallGapStart\":\"2019-10-31T23:00:00Z\",\"overallGapEnd\":\"2019-11-30T23:00:00Z\"}]";
+            string jsonData = "[{\"versionStruktur\":1,\"boTyp\":\"COMPLETENESSREPORT\",\"referenceTimeFrame\":{\"$type\":\"BO4E.COM.Zeitraum, BO4Enet\",\"einheit\":null,\"dauer\":null,\"startdatum\":\"2019-09-30T22:00:00Z\",\"enddatum\":\"2019-10-31T23:00:00Z\"},\"_errorMessage\":null,\"lokationsId\":\"50985149762\",\"obiskennzahl\":\"1-65:1.29.0\",\"einheit\":2000,\"wertermittlungsverfahren\":1,\"coverage\":0.8402684564,\"values\":[],\"gaps\":[{\"$type\":\"BO4E.Reporting.CompletenessReport+BasicVerbrauch, BO4Enet\",\"startdatum\":\"2019-10-27T00:00:00Z\",\"enddatum\":\"2019-10-31T23:00:00Z\",\"wert\":null}],\"profil\":\"000000000111127365\",\"profilRolle\":\"0001\",\"anlagennummer\":\"5000080657\",\"zw\":\"000000000020708905\",\"sap_time_zone\":\"CET\",\"sapSanitized\":true,\"valueCount\":0,\"overallGapStart\":\"2019-10-31T23:00:00Z\",\"overallGapEnd\":\"2019-11-30T23:00:00Z\"},{\"$type\":\"BO4E.Reporting.CompletenessReport, BO4Enet\",\"versionStruktur\":1,\"boTyp\":\"COMPLETENESSREPORT\",\"referenceTimeFrame\":{\"$type\":\"BO4E.COM.Zeitraum, BO4Enet\",\"einheit\":null,\"dauer\":null,\"startdatum\":\"2019-09-30T22:00:00Z\",\"enddatum\":\"2019-10-31T23:00:00Z\"},\"_errorMessage\":null,\"lokationsId\":\"DE0004096816100000000000000200712\",\"obiskennzahl\":\"1-1:1.29.0\",\"einheit\":2000,\"wertermittlungsverfahren\":1,\"coverage\":0.8402684564,\"values\":[],\"gaps\":[{\"$type\":\"BO4E.Reporting.CompletenessReport+BasicVerbrauch, BO4Enet\",\"startdatum\":\"2019-10-27T00:00:00Z\",\"enddatum\":\"2019-10-31T23:00:00Z\",\"wert\":null}],\"profil\":\"000000000111127365\",\"profilRolle\":\"0001\",\"anlagennummer\":\"5001065966\",\"zw\":\"000000000020708905\",\"sap_time_zone\":\"CET\",\"sapSanitized\":true,\"valueCount\":0,\"overallGapStart\":\"2019-10-31T23:00:00Z\",\"overallGapEnd\":\"2019-11-30T23:00:00Z\"},{\"$type\":\"BO4E.Reporting.CompletenessReport, BO4Enet\",\"versionStruktur\":1,\"boTyp\":\"COMPLETENESSREPORT\",\"referenceTimeFrame\":{\"$type\":\"BO4E.COM.Zeitraum, BO4Enet\",\"einheit\":null,\"dauer\":null,\"startdatum\":\"2019-10-31T23:00:00Z\",\"enddatum\":\"2019-11-30T23:00:00Z\"},\"_errorMessage\":null,\"lokationsId\":\"50985149762\",\"obiskennzahl\":\"1-1:1.29.0\",\"einheit\":2000,\"wertermittlungsverfahren\":1,\"coverage\":0.3,\"values\":[],\"gaps\":[{\"$type\":\"BO4E.Reporting.CompletenessReport+BasicVerbrauch, BO4Enet\",\"startdatum\":\"2019-10-31T23:00:00Z\",\"enddatum\":\"2019-11-13T00:00:00Z\",\"wert\":null},{\"$type\":\"BO4E.Reporting.CompletenessReport+BasicVerbrauch, BO4Enet\",\"startdatum\":\"2019-11-22T00:00:00Z\",\"enddatum\":\"2019-11-30T23:00:00Z\",\"wert\":null}],\"profil\":\"000000000111127365\",\"profilRolle\":\"0001\",\"anlagennummer\":\"5000080657\",\"zw\":\"000000000020708905\",\"sap_time_zone\":\"CET\",\"sapSanitized\":true,\"valueCount\":0,\"overallGapStart\":\"2019-10-31T23:00:00Z\",\"overallGapEnd\":\"2019-11-30T23:00:00Z\"},{\"$type\":\"BO4E.Reporting.CompletenessReport, BO4Enet\",\"versionStruktur\":1,\"boTyp\":\"COMPLETENESSREPORT\",\"referenceTimeFrame\":{\"$type\":\"BO4E.COM.Zeitraum, BO4Enet\",\"einheit\":null,\"dauer\":null,\"startdatum\":\"2019-10-31T23:00:00Z\",\"enddatum\":\"2019-11-30T23:00:00Z\"},\"_errorMessage\":null,\"lokationsId\":\"DE0004096816100000000000000200712\",\"obiskennzahl\":\"1-1:1.29.0\",\"einheit\":2000,\"wertermittlungsverfahren\":1,\"coverage\":0.3,\"values\":[],\"gaps\":[{\"$type\":\"BO4E.Reporting.CompletenessReport+BasicVerbrauch, BO4Enet\",\"startdatum\":\"2019-10-31T23:00:00Z\",\"enddatum\":\"2019-11-13T00:00:00Z\",\"wert\":null},{\"$type\":\"BO4E.Reporting.CompletenessReport+BasicVerbrauch, BO4Enet\",\"startdatum\":\"2019-11-22T00:00:00Z\",\"enddatum\":\"2019-11-30T23:00:00Z\",\"wert\":null}],\"profil\":\"000000000111127365\",\"profilRolle\":\"0001\",\"anlagennummer\":\"5001065966\",\"zw\":\"000000000020708905\",\"sap_time_zone\":\"CET\",\"sapSanitized\":true,\"valueCount\":0,\"overallGapStart\":\"2019-10-31T23:00:00Z\",\"overallGapEnd\":\"2019-11-30T23:00:00Z\"}]";
             var reports = JsonConvert.DeserializeObject<List<CompletenessReport>>(jsonData);
             string lastCsvText = string.Empty;
-            int counter = 1;
+            int counter = 0;
             foreach (var report in reports)
             {
-                lastCsvText += report.toCSV(';', (counter == 1 ? true : false), Environment.NewLine, null) + Environment.NewLine;
+                string singleReportLine = report.toCSV(";", (counter == 0 ? true : false), Environment.NewLine, null) + Environment.NewLine;
+                if (counter == 0)
+                {
+                    Assert.IsTrue(singleReportLine.Split(Environment.NewLine)[1].StartsWith("2019-09-30T22:00:00Z;2019-10-31T23:00:00Z;;50985149762")); // no melo, just malo
+                    Assert.IsTrue(singleReportLine.Contains("IMS"));
+                }
+                else if (counter == 0)
+                {
+                    Assert.IsTrue(singleReportLine.StartsWith("2019-09-30T22:00:00Z;2019-10-31T23:00:00Z;DE0004096816100000000000000200712;;"));// no malo, just melo
+                    Assert.IsTrue(singleReportLine.Contains("RLM"));
+                }
+                lastCsvText += singleReportLine;
                 counter++;
             }
             Assert.IsTrue(lastCsvText.Length > 0);
             Assert.IsFalse(lastCsvText.Contains(BO4E.BO.BusinessObject.USER_PROPERTIES_NAME));
             Assert.IsFalse(lastCsvText.Contains("_errorMessage"));
+
         }
 
 
