@@ -263,17 +263,20 @@ namespace BO4E.Reporting
             if (Gaps.Any())
             {
                 DateTime minGap = this.Gaps.OrderBy(x => x.Startdatum).First().Startdatum;
-                DateTime maxGap = this.Gaps.OrderByDescending(x => x.Enddatum).First().Startdatum;
+                DateTime maxGap = this.Gaps.OrderByDescending(x => x.Enddatum).First().Enddatum;
                 columns.Add(minGap.ToString("yyyy-MM-ddTHH:mm:ssZ"));
                 columns.Add(maxGap.ToString("yyyy-MM-ddTHH:mm:ssZ"));
+                var gapsHours = (maxGap - minGap).TotalHours + 1;
+                columns.Add(((gapsHours * 4)).ToString());
             }
             else
             {
                 columns.Add(string.Empty);
                 columns.Add(string.Empty);
+                columns.Add(string.Empty);
             }
-            columns.Add(((1 - this.Coverage) * (ReferenceTimeFrame.Dauer / 15)).ToString());
-            columns.Add((this.Coverage * 100).ToString() + " %");
+            
+            columns.Add((this.Coverage * 100).Value.ToString("0.####") + " %");
             columns.Add("Status");
             returnCSV += string.Join(separator, columns) + lineTerminator;
 

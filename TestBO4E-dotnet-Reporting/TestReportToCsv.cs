@@ -133,7 +133,7 @@ namespace TestBO4E.Reporting
             int counter = 0;
             foreach (var report in reports)
             {
-                string singleReportLine = report.ToCSV(";", (counter == 0 ? true : false), Environment.NewLine, null) + Environment.NewLine;
+                string singleReportLine = report.ToCSV(";", (counter == 0 ? true : false), Environment.NewLine) + Environment.NewLine;
                 if (counter == 0)
                 {
                     Assert.IsTrue(singleReportLine.Split(Environment.NewLine)[1].StartsWith("2019-09-30T22:00:00Z;2019-10-31T23:00:00Z;;50985149762")); // no melo, just malo
