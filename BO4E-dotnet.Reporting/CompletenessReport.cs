@@ -262,11 +262,11 @@ namespace BO4E.Reporting
             }
             if (Gaps.Any())
             {
-                DateTime minGap = this.Gaps.OrderBy(x => x.Startdatum).First().Startdatum;
-                DateTime maxGap = this.Gaps.OrderByDescending(x => x.Enddatum).First().Enddatum;
+                DateTime minGap = this.Gaps.Min(x => x.Startdatum);// OrderBy(x => x.Startdatum).First().Startdatum;
+                DateTime maxGap = this.Gaps.Max(x => x.Enddatum);// OrderByDescending(x => x.Enddatum).First().Enddatum;
                 columns.Add(minGap.ToString("yyyy-MM-ddTHH:mm:ssZ"));
                 columns.Add(maxGap.ToString("yyyy-MM-ddTHH:mm:ssZ"));
-                var gapsHours = (maxGap - minGap).TotalHours + 1;
+                var gapsHours = (maxGap - minGap).TotalHours;
                 columns.Add(((gapsHours * 4)).ToString());
             }
             else

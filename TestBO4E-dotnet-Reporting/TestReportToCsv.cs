@@ -1,5 +1,7 @@
 ﻿using BO4E.Reporting;
 
+using Itenso.TimePeriod;
+
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 using Newtonsoft.Json;
@@ -138,7 +140,8 @@ namespace TestBO4E.Reporting
                 {
                     Assert.IsTrue(singleReportLine.Split(Environment.NewLine)[1].StartsWith("2019-09-30T22:00:00Z;2019-10-31T23:00:00Z;;50985149762")); // no melo, just malo
                     Assert.IsTrue(singleReportLine.Contains("IMS"));
-                    Assert.IsTrue(singleReportLine.Contains(";"+(5 * 24 * 4).ToString()+";"));  // 5 days * 24 hours/day * 4 missing values/hour 
+                    var missingEntries = ((new DateTime(2019,10,31,23,0,0,0,DateTimeKind.Utc) - new DateTime(2019, 10, 27, 0, 0, 0, 0, DateTimeKind.Utc)).TotalHours * 4).ToString();
+                    Assert.IsTrue(singleReportLine.Contains($";{missingEntries};"));
                 }
                 else if (counter == 0)
                 {
