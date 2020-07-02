@@ -213,6 +213,7 @@ namespace BO4E.Reporting
                     "Profil-Typ",
                     "Zeitbereich in dem kein wahrer Wert vorhanden ist von",
                     "Zeitbereich in dem kein wahrer Wert vorhanden ist bis",
+                    "Anzahl fehlende Werte",
                     "Prozentuale Vollständigkeit",
                     "Status"
                 };
