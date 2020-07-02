@@ -189,7 +189,14 @@ namespace BO4E.Reporting
         /// </summary>
         private static Regex imsysRegex = new Regex(@"(1)-(65):((?:[1-8]|99))\.((?:6|8|9|29))\.([0-9]{1,2})", RegexOptions.Compiled);
 
-        public string ToCSV(string separator = ";", bool headerLine = true, string lineTerminator = "\\n", List<Dictionary<string, string>> reihenfolge = null)
+        /// <summary>
+        /// Convert CompletenessReport to CSV string
+        /// </summary>
+        /// <param name="separator">Seperatur char for CSV items. By default is ';'</param>
+        /// <param name="headerLine">Shows header of columns in return string?</param>
+        /// <param name="lineTerminator">This value goes to end of every line. By default is "\\n"</param>
+        /// <returns></returns>
+        public string ToCSV(string separator = ";", bool headerLine = true, string lineTerminator = "\\n")
         {
             string returnCSV = string.Empty;
             if (headerLine)
@@ -210,18 +217,12 @@ namespace BO4E.Reporting
                     "Status"
                 };
                 returnCSV += string.Join(separator, headerColumns) + lineTerminator;
-                //returnCSV = "Startdatum" + separator + "Enddatum" + separator + "Melo" + separator + "Malo" + separator + "Messung" + separator + "MSB" + separator +
-                //    "Profil-Nr" + separator + "Profil-Typ" + separator + "Zeitbereich in dem kein wahrer Wert vorhanden ist von" +
-                //    separator + "Zeitbereich in dem kein wahrer Wert vorhanden ist bis" + separator + "Anzahl fehlende Werte" +
-                //    separator + "Prozentuale Vollständigkeit" + separator + "Status" + lineTerminator;
             }
             var columns = new List<string>
             {
                 this.ReferenceTimeFrame.Startdatum.Value.ToString("yyyy-MM-ddTHH:mm:ssZ"),
                 this.ReferenceTimeFrame.Enddatum.Value.ToString("yyyy-MM-ddTHH:mm:ssZ")
             };
-            //returnCSV += this.ReferenceTimeFrame.Startdatum.Value.ToString("yyyy-MM-ddTHH:mm:ssZ") + separator +
-            //    this.ReferenceTimeFrame.Enddatum.Value.ToString("yyyy-MM-ddTHH:mm:ssZ") + separator;
 
             if (BO4E.BO.Messlokation.ValidateId(LokationsId))
             {
