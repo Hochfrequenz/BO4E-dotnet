@@ -1,11 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-
-using BO4E.COM;
+﻿using BO4E.COM;
 using BO4E.ENUM;
 using BO4E.meta;
 
 using Newtonsoft.Json;
+
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text.RegularExpressions;
 
 namespace BO4E.Reporting
 {
@@ -181,6 +183,106 @@ namespace BO4E.Reporting
             [JsonProperty(PropertyName = "einheit", Required = Required.Default, Order = 6)]
             public Mengeneinheit Einheit { get; set; }
         }
+
+        /// <summary>
+        /// matches a OBIS-Kennzahl that stands for an intelligentes messsystem for power.
+        /// </summary>
+        private static Regex imsysRegex = new Regex(@"(1)-(65):((?:[1-8]|99))\.((?:6|8|9|29))\.([0-9]{1,2})", RegexOptions.Compiled);
+
+        /// <summary>
+        /// Convert CompletenessReport to CSV string
+        /// </summary>
+        /// <param name="separator">Seperatur char for CSV items. By default is ';'</param>
+        /// <param name="headerLine">Shows header of columns in return string?</param>
+        /// <param name="lineTerminator">This value goes to end of every line. By default is "\\n"</param>
+        /// <returns></returns>
+        public string ToCSV(string separator = ";", bool headerLine = true, string lineTerminator = "\\n")
+        {
+            string returnCSV = string.Empty;
+            if (headerLine)
+            {
+                var headerColumns = new List<string>()
+                {
+                    "Startdatum",
+                    "Enddatum",
+                    "MeLo",
+                    "MaLo",
+                    "Messung",
+                    "MSB",
+                    "Profil-Nr.",
+                    "Profil-Typ",
+                    "Zeitbereich in dem kein wahrer Wert vorhanden ist von",
+                    "Zeitbereich in dem kein wahrer Wert vorhanden ist bis",
+                    "Prozentuale Vollständigkeit",
+                    "Status"
+                };
+                returnCSV += string.Join(separator, headerColumns) + lineTerminator;
+            }
+            var columns = new List<string>
+            {
+                this.ReferenceTimeFrame.Startdatum.Value.ToString("yyyy-MM-ddTHH:mm:ssZ"),
+                this.ReferenceTimeFrame.Enddatum.Value.ToString("yyyy-MM-ddTHH:mm:ssZ")
+            };
+
+            if (BO4E.BO.Messlokation.ValidateId(LokationsId))
+            {
+                columns.Add(LokationsId); // melo
+                columns.Add(string.Empty); // malo
+            }
+            else if (BO.Marktlokation.ValidateId(LokationsId))
+            {
+                columns.Add(string.Empty);//melo
+                columns.Add(LokationsId);//malo
+            }
+            else
+            { // fallback only
+                columns.Add(LokationsId);
+                columns.Add(LokationsId);
+            }
+
+            columns.Add(imsysRegex.Match(Obiskennzahl).Success ? "IMS" : "RLM");// messung
+            columns.Add("MSB"); // MSB
+
+            if (this.UserProperties.TryGetValue("profil", out var profil))
+            {
+                columns.Add(profil.ToString());
+            }
+            else
+            {
+                columns.Add(string.Empty);
+            }
+
+            if (this.UserProperties.TryGetValue("profilRolle", out var profilRolle))
+            {
+                columns.Add(profilRolle.ToString());
+            }
+            else
+            {
+                columns.Add(string.Empty);
+            }
+            if (Gaps.Any())
+            {
+                DateTime minGap = this.Gaps.Min(x => x.Startdatum);// OrderBy(x => x.Startdatum).First().Startdatum;
+                DateTime maxGap = this.Gaps.Max(x => x.Enddatum);// OrderByDescending(x => x.Enddatum).First().Enddatum;
+                columns.Add(minGap.ToString("yyyy-MM-ddTHH:mm:ssZ"));
+                columns.Add(maxGap.ToString("yyyy-MM-ddTHH:mm:ssZ"));
+                var gapsHours = (maxGap - minGap).TotalHours;
+                columns.Add(((gapsHours * 4)).ToString());
+            }
+            else
+            {
+                columns.Add(string.Empty);
+                columns.Add(string.Empty);
+                columns.Add(string.Empty);
+            }
+            
+            columns.Add((this.Coverage * 100).Value.ToString("0.####") + " %");
+            columns.Add("Status");
+            returnCSV += string.Join(separator, columns) + lineTerminator;
+
+            return returnCSV;
+        }
+
         /*
         /// <summary>
         /// allows sorting completeness reports based on <see cref="CompletenessReport.referenceTimeFrame.startdatum"/>

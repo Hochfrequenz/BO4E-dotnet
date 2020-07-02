@@ -7,7 +7,7 @@ namespace BO4E.ENUM
     [NonOfficial(NonOfficialCategory.REGULATORY_REQUIREMENTS)]
     public enum Zeitreihentyp
     {
-        /// <summaryEinspeisegangsumme</summary>
+        /// <summary>Einspeisegangsumme</summary>
         EGS,
         /// <summary>Lastgangsumme</summary>
         LGS,
