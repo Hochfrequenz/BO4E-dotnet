@@ -261,7 +261,7 @@ namespace BO4E.Reporting
             {
                 columns.Add(string.Empty);
             }
-            if (Gaps.Any())
+            if (Gaps!=null && Gaps.Any())
             {
                 DateTime minGap = this.Gaps.Min(x => x.Startdatum);// OrderBy(x => x.Startdatum).First().Startdatum;
                 DateTime maxGap = this.Gaps.Max(x => x.Enddatum);// OrderByDescending(x => x.Enddatum).First().Enddatum;

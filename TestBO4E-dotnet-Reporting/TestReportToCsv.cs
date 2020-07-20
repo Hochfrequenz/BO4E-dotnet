@@ -265,5 +265,12 @@ namespace TestBO4E.Reporting
             Assert.ThrowsException<ArgumentException>(() => cr.ToCsv(';', true, Environment.NewLine, reihenfolge2));
             Assert.AreEqual(newResult, "");
         }
+
+        [TestMethod]
+        public void TestSerializingCrWithoutGaps()
+        {
+            var report = JsonConvert.DeserializeObject<CompletenessReport>("{\"_errorMessage\":\"Cannot use autoconfigured method because there are no values.\",\"boTyp\":\"COMPLETENESSREPORT\",\"versionStruktur\":1,\"obiskennzahl\":\"1-1:1.29.0\",\"values\":[],\"einheit\":0,\"gaps\":null,\"referenceTimeFrame\":{ \"einheit\":4,\"dauer\":1.0,\"startdatum\":\"2020-06-30T22:00:00+00:00\",\"enddatum\":\"2020-07-01T22:00:00+00:00\"},\"wertermittlungsverfahren\":0,\"lokationsId\":\"DE000XXXXXXXXXXXXXXXXXXXXXXXXXXXX\",\"coverage\":0.0,\"profil\":\"000000000111129993\",\"profilRolle\":\"0001\",\"anlagennummer\":\"5111111111\",\"zw\":\"000000000020709888\",\"sap_time_zone\":\"CET\",\"sap_profdecimals\":\"06\",\"sapSanitized\":true,\"valueCount\":0,\"coverage_07-01\":0,\"coverage_07-02\":0,\"coverage_07-03\":0,\"coverage_07-04\":0,\"coverage_07-05\":0,\"coverage_07-06\":0,\"coverage_07-07\":0,\"coverage_07-08\":0,\"coverage_07-09\":0,\"coverage_07-10\":0,\"coverage_07-11\":0,\"coverage_07-12\":0,\"coverage_07-13\":0,\"coverage_07-14\":0,\"coverage_07-15\":0,\"coverage_07-16\":0,\"coverage_07-17\":0,\"coverage_07-18\":0,\"coverage_07-19\":0,\"coverage_07-20\":0,\"coverage_07-21\":0,\"coverage_07-22\":0,\"coverage_07-23\":0,\"coverage_07-24\":0,\"coverage_07-25\":0,\"coverage_07-26\":0,\"coverage_07-27\":0,\"coverage_07-28\":0,\"coverage_07-29\":0,\"coverage_07-30\":0,\"coverage_07-31\":0,\"coverage_sum\":0}");
+            report.ToCSV(";", true, Environment.NewLine);
+        }
     }
 }
