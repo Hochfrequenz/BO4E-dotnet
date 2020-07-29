@@ -5,6 +5,7 @@ using System.ComponentModel;
 using System.Globalization;
 using System.Linq;
 using System.Reflection;
+using System.Text;
 using System.Text.RegularExpressions;
 
 using BO4E.BO;
@@ -141,7 +142,7 @@ namespace BO4E.meta
             }
             string baseUriString = BO4E_SCHEME + bo.GetType().Name + "/";
             Bo4eUri baseUri = new Bo4eUri(baseUriString);
-            string relativeUriString = string.Empty;
+            var relativeUriBuilder= new StringBuilder();
 
             foreach (PropertyInfo keyProp in GetKeyFields(bo))
             {
@@ -152,25 +153,25 @@ namespace BO4E.meta
                     {
                         if (keyProp.GetValue(bo).ToString() == string.Empty)
                         {
-                            relativeUriString += NULL_KEY_PLACEHOLDER + "/";
+                            relativeUriBuilder.Append(NULL_KEY_PLACEHOLDER + "/");
                         }
                         else
                         {
-                            relativeUriString += keyProp.GetValue(bo) + "/";
+                            relativeUriBuilder.Append(keyProp.GetValue(bo) + "/");
                         }
                     }
                     else if (keyProp.GetValue(bo).GetType() == typeof(int))
                     {
-                        relativeUriString += keyProp.GetValue(bo).ToString() + "/";
+                        relativeUriBuilder.Append(keyProp.GetValue(bo).ToString() + "/");
                     }
                     else if (keyProp.GetValue(bo) is Enum)
                     {
-                        relativeUriString += keyProp.GetValue(bo).ToString() + "/";
+                        relativeUriBuilder.Append(keyProp.GetValue(bo).ToString() + "/");
                     }
                     else if (keyProp.GetValue(bo).GetType().IsSubclassOf(typeof(BusinessObject)))
                     {
                         BusinessObject innerBo = (BusinessObject)keyProp.GetValue(bo);
-                        relativeUriString += GetUri(innerBo).GetComponents(UriComponents.Path, UriFormat.UriEscaped).ToString();
+                        relativeUriBuilder.Append(GetUri(innerBo).GetComponents(UriComponents.Path, UriFormat.UriEscaped).ToString());
                     }
                     else
                     {
@@ -184,7 +185,7 @@ namespace BO4E.meta
                     // Think of two Ansprechpartners:
                     // - Günther Hermann but Günther is not set/null ==> /~/Hermann
                     // - Hermann Maier but Maier is not set/null ==> /Hermann/~/
-                    relativeUriString += NULL_KEY_PLACEHOLDER + "/";
+                    relativeUriBuilder.Append(NULL_KEY_PLACEHOLDER + "/");
                 }
             }
             if (includeUserProperties && bo.UserProperties != null && bo.UserProperties.Count > 0)
@@ -194,18 +195,18 @@ namespace BO4E.meta
                 {
                     if (n == 0)
                     {
-                        relativeUriString += "?";
+                        relativeUriBuilder.Append("?");
                     }
                     else
                     {
-                        relativeUriString += "&";
+                        relativeUriBuilder.Append("&");
                     }
-                    relativeUriString += $"{up.Key}={up.Value}";
+                    relativeUriBuilder.Append($"{up.Key}={up.Value}");
                     n += 1;
                 }
             }
 
-            Uri relativeUri = new Uri(Uri.EscapeUriString(relativeUriString), UriKind.Relative);
+            Uri relativeUri = new Uri(Uri.EscapeUriString(relativeUriBuilder.ToString()), UriKind.Relative);
             if (TryCreate(baseUri, relativeUri, out Uri resultUri))
             {
                 return new Bo4eUri(resultUri.AbsoluteUri);

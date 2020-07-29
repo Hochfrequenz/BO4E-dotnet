@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 
 using BO4E.BO;
 
@@ -28,7 +29,7 @@ namespace BO4E.Reporting
         public string ToCsv(char separator = ';', bool headerLine = true, string lineTerminator = "\\n", List<Dictionary<string, string>> reihenfolge = null)
         {
             var type = this.GetType();
-            string returnStr = string.Empty;
+            var resultBuilder = new StringBuilder();
             List<string> result = new List<string>();
             List<string> headerNames = new List<string>();
             Dictionary<List<string>, List<string>> reterned = new Dictionary<List<string>, List<string>>() { [headerNames] = result };
@@ -111,9 +112,9 @@ namespace BO4E.Reporting
                     }
                     if (i == 0 && headerLine)
                     {
-                        returnStr = string.Join(separator.ToString(), sortedHeaderNamesList) + lineTerminator;
+                        resultBuilder = new StringBuilder(string.Join(separator.ToString(), sortedHeaderNamesList) + lineTerminator);
                     }
-                    returnStr += string.Join(separator.ToString(), sortedResults) + lineTerminator;
+                    resultBuilder.Append(string.Join(separator.ToString(), sortedResults) + lineTerminator);
                 }
             }
             else
@@ -154,8 +155,8 @@ namespace BO4E.Reporting
                     sortedResults.AddRange(result);
                 }
                 if (headerLine)
-                    returnStr = string.Join(separator.ToString(), sortedHeaderNamesList) + lineTerminator;
-                returnStr += string.Join(separator.ToString(), sortedResults);
+                    resultBuilder = new StringBuilder(string.Join(separator.ToString(), sortedHeaderNamesList) + lineTerminator);
+                resultBuilder.Append(string.Join(separator.ToString(), sortedResults));
             }
 
 
@@ -179,18 +180,18 @@ namespace BO4E.Reporting
                     int valueIndex = index + (i * 2);
                     var curValues = gapdata.Skip(valueIndex).Take(2);
                     gapSortedResults.AddRange(curValues);
-                    returnStr += lineTerminator;
+                    resultBuilder.Append(lineTerminator);
                     for (int z = 2; z < sortedHeaderNamesList.Count(); z++)
-                        returnStr += separator.ToString();
-                    returnStr += String.Join(separator.ToString(), gapSortedResults);
+                        resultBuilder.Append(separator.ToString());
+                    resultBuilder.Append(String.Join(separator.ToString(), gapSortedResults));
                 }
             }
             else
             {
                 gapSortedResults.AddRange(gapdata);
-                returnStr += separator.ToString() + string.Join(separator.ToString(), gapSortedResults);
+                resultBuilder.Append(separator.ToString() + string.Join(separator.ToString(), gapSortedResults));
             }
-            return returnStr;
+            return resultBuilder.ToString();
         }
 
         private Dictionary<List<string>, List<string>> Detect(Type type, char separator, object value, Dictionary<List<string>, List<string>> returnData)

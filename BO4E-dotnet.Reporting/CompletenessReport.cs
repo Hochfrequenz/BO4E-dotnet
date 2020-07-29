@@ -7,6 +7,7 @@ using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 using System.Text.RegularExpressions;
 
 namespace BO4E.Reporting
@@ -198,7 +199,7 @@ namespace BO4E.Reporting
         /// <returns></returns>
         public string ToCSV(string separator = ";", bool headerLine = true, string lineTerminator = "\\n")
         {
-            string returnCSV = string.Empty;
+            StringBuilder builder = new StringBuilder();
             if (headerLine)
             {
                 var headerColumns = new List<string>()
@@ -217,7 +218,7 @@ namespace BO4E.Reporting
                     "Prozentuale Vollständigkeit",
                     "Status"
                 };
-                returnCSV += string.Join(separator, headerColumns) + lineTerminator;
+                builder.Append(string.Join(separator, headerColumns) + lineTerminator);
             }
             var columns = new List<string>
             {
@@ -279,9 +280,9 @@ namespace BO4E.Reporting
             
             columns.Add((this.Coverage * 100).Value.ToString("0.####") + " %");
             columns.Add("Status");
-            returnCSV += string.Join(separator, columns) + lineTerminator;
+            builder.Append(string.Join(separator, columns) + lineTerminator); ;
 
-            return returnCSV;
+            return builder.ToString();
         }
 
         /*
