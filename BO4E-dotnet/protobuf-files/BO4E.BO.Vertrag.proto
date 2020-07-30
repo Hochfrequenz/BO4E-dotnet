@@ -331,19 +331,19 @@ enum Mengeneinheit {
    Mengeneinheit_ZERO = 0;
    WH = 2;
    KW = 3;
+   KWH = 2000;
+   MW = 3000;
+   MWH = 2000000;
    ANZAHL = 7;
    KUBIKMETER = 11;
    STUNDE = 13;
    TAG = 17;
    MONAT = 19;
-   VAR = 23;
-   VARH = 29;
    JAHR = 228;
-   KWH = 2000;
-   MW = 3000;
+   VAR = 23;
    KVAR = 23000;
+   VARH = 29;
    KVARH = 29000;
-   MWH = 2000000;
 }
 enum NetznutzungsVertrag {
    KUNDEN_NB = 0;
