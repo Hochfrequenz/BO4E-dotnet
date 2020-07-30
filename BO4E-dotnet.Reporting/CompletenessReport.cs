@@ -277,8 +277,14 @@ namespace BO4E.Reporting
                 columns.Add(string.Empty);
                 columns.Add(string.Empty);
             }
-            
-            columns.Add((this.Coverage * 100).Value.ToString("0.####") + " %");
+            if (this.Coverage.HasValue)
+            {
+                columns.Add((this.Coverage.Value * 100).Value.ToString("0.####") + " %");
+            }
+            else
+            {
+                columns.Add(string.Empty);
+            }
             columns.Add("Status");
             builder.Append(string.Join(separator, columns) + lineTerminator); ;
 
