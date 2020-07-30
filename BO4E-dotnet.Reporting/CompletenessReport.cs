@@ -279,7 +279,7 @@ namespace BO4E.Reporting
             }
             if (this.Coverage.HasValue)
             {
-                columns.Add((this.Coverage.Value * 100).Value.ToString("0.####") + " %");
+                columns.Add((this.Coverage.Value * 100).ToString("0.####") + " %");
             }
             else
             {
