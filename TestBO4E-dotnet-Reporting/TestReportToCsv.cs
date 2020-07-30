@@ -118,12 +118,21 @@ namespace TestBO4E.Reporting
             int counter = 1;
             foreach (var report in reports)
             {
-                lastCsvText += report.ToCsv(';', (counter == 1 ? true : false), Environment.NewLine, null) + Environment.NewLine;
+                lastCsvText += report.ToCsv(';', (counter == 1), Environment.NewLine, null) + Environment.NewLine;
                 counter++;
             }
             Assert.IsTrue(lastCsvText.Length > 0);
             Assert.IsFalse(lastCsvText.Contains(BO4E.BO.BusinessObject.USER_PROPERTIES_NAME));
             Assert.IsFalse(lastCsvText.Contains("_errorMessage"));
+        }
+
+        [TestMethod]
+        public void TestErrorCsv()
+        {
+            string jsonData = "{\"boTyp\":\"COMPLETENESSREPORT\",\"versionStruktur\":1,\"obiskennzahl\":\"1-1:5.29.0\",\"values\":[],\"einheit\":\"ZERO\",\"gaps\":null,\"referenceTimeFrame\":{\"einheit\":\"TAG\",\"dauer\":1,\"startdatum\":\"2020-06-30T22:00:00+00:00\",\"enddatum\":\"2020-07-01T22:00:00+00:00\"},\"wertermittlungsverfahren\":\"PROGNOSE\",\"lokationsId\":\"99998888777\",\"coverage\":null,\"profil\":\"000000000123456789\",\"profilRolle\":\"0002\",\"anlagennummer\":\"1234567890\",\"zw\":\"000000000020707999\",\"sap_time_zone\":\"CET\",\"sapSanitized\":true,\"valueCount\":0,\"coverage_sum\":0}";
+            var report = JsonConvert.DeserializeObject<CompletenessReport>(jsonData);
+            var csv = report.ToCSV();
+            Assert.IsTrue(csv.Contains("99998888777"));
         }
 
         [TestMethod]
@@ -135,7 +144,7 @@ namespace TestBO4E.Reporting
             int counter = 0;
             foreach (var report in reports)
             {
-                string singleReportLine = report.ToCSV(";", (counter == 0 ? true : false), Environment.NewLine) + Environment.NewLine;
+                string singleReportLine = report.ToCSV(";", (counter == 0), Environment.NewLine) + Environment.NewLine;
                 if (counter == 0)
                 {
                     Assert.IsTrue(singleReportLine.Split(Environment.NewLine)[1].StartsWith("2019-09-30T22:00:00Z;2019-10-31T23:00:00Z;;50985149762")); // no melo, just malo
