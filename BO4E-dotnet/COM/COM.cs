@@ -8,6 +8,7 @@ using ProtoBuf;
 
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
 namespace BO4E.COM
 {
@@ -154,5 +155,13 @@ namespace BO4E.COM
             get => this.Guid.HasValue ? this.Guid.ToString() : string.Empty;
             set { this.Guid = string.IsNullOrWhiteSpace(value) ? (Guid?)null : System.Guid.Parse(value.ToString()); }
         }
+
+        /// <summary>
+        /// allows adding a GUID to COM objects for tracking across systems
+        /// </summary>
+        [JsonProperty(PropertyName = "timestamp", NullValueHandling = NullValueHandling.Ignore, Required = Required.Default, Order = 2)]
+        [Timestamp]
+        public DateTimeOffset Timestamp { get; set; }
+      
     }
 }

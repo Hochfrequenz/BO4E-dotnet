@@ -11,6 +11,7 @@ using ProtoBuf;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Reflection;
 using System.Runtime.Serialization;
@@ -141,6 +142,12 @@ namespace BO4E.BO
             set { this.Guid = string.IsNullOrWhiteSpace(value) ? (Guid?)null : System.Guid.Parse(value.ToString()); }
         }
 
+        /// <summary>
+        /// allows adding a GUID to COM objects for tracking across systems
+        /// </summary>
+        [JsonProperty(PropertyName = "timestamp", NullValueHandling = NullValueHandling.Ignore, Required = Required.Default, Order = 2)]
+        [Timestamp]
+        public DateTimeOffset Timestamp { get; set; }
         /// <summary>
         /// returns a JSON scheme for the Business Object
         /// </summary>
