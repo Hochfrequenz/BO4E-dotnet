@@ -74,6 +74,13 @@
             "string",
             "null"
           ]
+        },
+        "timestamp": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "format": "date-time"
         }
       },
       "required": [
@@ -100,6 +107,13 @@
     },
     "versionStruktur": {
       "type": "integer"
+    },
+    "timestamp": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "format": "date-time"
     },
     "bezeichnung": {
       "type": "string"

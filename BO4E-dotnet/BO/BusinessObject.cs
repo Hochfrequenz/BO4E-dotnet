@@ -147,7 +147,7 @@ namespace BO4E.BO
         /// </summary>
         [JsonProperty(PropertyName = "timestamp", NullValueHandling = NullValueHandling.Ignore, Required = Required.Default, Order = 2)]
         [Timestamp]
-        public DateTimeOffset Timestamp { get; set; }
+        public DateTimeOffset? Timestamp { get; set; }
         /// <summary>
         /// returns a JSON scheme for the Business Object
         /// </summary>
