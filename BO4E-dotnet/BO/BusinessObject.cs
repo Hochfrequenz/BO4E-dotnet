@@ -121,7 +121,7 @@ namespace BO4E.BO
         }
         /// <summary>
         /// obligatory version of the BO4E definition. Currently hard coded to 1
-        /// </summary>
+        /// </summary> 
         /// <example>
         /// 1
         /// </example>
