@@ -18,7 +18,9 @@ enum Anrede {
    INDIVIDUELL = 4;
    FAMILIE = 5;
    ERBENGEMEINSCHAFT = 6;
-   Anrede_DR = 7;
+   WOHNGEMEINSCHAFT = 7;
+   GRUNDSTUECKGEMEINSCHAFT = 8;
+   Anrede_DR = 9;
 }
 message Geschaeftspartner {
    Anrede Anrede = 4;

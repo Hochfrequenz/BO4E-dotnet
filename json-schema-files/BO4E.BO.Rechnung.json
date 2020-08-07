@@ -802,6 +802,8 @@
             "INDIVIDUELL",
             "FAMILIE",
             "ERBENGEMEINSCHAFT",
+            "WOHNGEMEINSCHAFT",
+            "GRUNDSTUECKGEMEINSCHAFT",
             "DR"
           ]
         },
