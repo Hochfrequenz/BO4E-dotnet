@@ -32,6 +32,11 @@ namespace BO4E.ENUM
         [NonOfficial(NonOfficialCategory.CUSTOMER_REQUIREMENTS)]
         WOHNGEMEINSCHAFT,
         /// <summary>
+        /// Grundstückgemeinschaft
+        /// </summary>
+        [NonOfficial(NonOfficialCategory.CUSTOMER_REQUIREMENTS)]
+        GRUNDSTUECKGEMEINSCHAFT,
+        /// <summary>
         /// Doktor
         /// </summary>
         [NonOfficial(NonOfficialCategory.CUSTOMER_REQUIREMENTS)]
