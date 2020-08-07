@@ -27,6 +27,11 @@ namespace BO4E.ENUM
         [NonOfficial(NonOfficialCategory.CUSTOMER_REQUIREMENTS)]
         ERBENGEMEINSCHAFT,
         /// <summary>
+        /// WG
+        /// </summary>
+        [NonOfficial(NonOfficialCategory.CUSTOMER_REQUIREMENTS)]
+        WOHNGEMEINSCHAFT,
+        /// <summary>
         /// Doktor
         /// </summary>
         [NonOfficial(NonOfficialCategory.CUSTOMER_REQUIREMENTS)]
