@@ -142,12 +142,11 @@ namespace BO4E.BO
             set { this.Guid = string.IsNullOrWhiteSpace(value) ? (Guid?)null : System.Guid.Parse(value.ToString()); }
         }
 
-        /// <summary>
-        /// allows adding a GUID to COM objects for tracking across systems
-        /// </summary>
+        // ToDo @JoschaMetze: Add a docstring about this
         [JsonProperty(PropertyName = "timestamp", NullValueHandling = NullValueHandling.Ignore, Required = Required.Default, Order = 2)]
         [Timestamp]
         public DateTimeOffset? Timestamp { get; set; }
+
         /// <summary>
         /// returns a JSON scheme for the Business Object
         /// </summary>
