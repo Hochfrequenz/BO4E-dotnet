@@ -32,7 +32,7 @@ message Ansprechpartner {
    string Kommentar = 10;
    Geschaeftspartner Geschaeftspartner = 11;
    Adresse Adresse = 12;
-   repeated Rufnummer Rufnummer = 13;
+   repeated Rufnummer Rufnummern = 13;
    repeated Zustaendigkeit Zustaendigkeit = 14;
 }
 message Geschaeftspartner {

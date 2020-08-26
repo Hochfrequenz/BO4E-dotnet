@@ -79,10 +79,11 @@ namespace BO4E.BO
         public Adresse Adresse { get; set; }
 
         /// <summary>Liste der Telefonnummern, unter denen der Ansprechpartner erreichbar ist.</summary>
-        [JsonProperty(Required = Required.Default, Order = 13, PropertyName = "rufnummer")]
+        [NonOfficial(NonOfficialCategory.UNSPECIFIED)] //  We suggest to name it "rufnummern" instead of "rufnummer" because it's a list")]
+        [JsonProperty(Required = Required.Default, Order = 13, PropertyName = "rufnummern")]
         [ProtoMember(13)]
         [DataCategory(DataCategory.ADDRESS)]
-        public List<Rufnummer> Rufnummer;
+        public List<Rufnummer> Rufnummern;
 
         /// <summary>Liste der Abteilungen und Zuständigkeiten des Ansprechpartners.</summary>
         [JsonProperty(Required = Required.Default, Order = 14, PropertyName = "zustaendigkeit")]

@@ -430,7 +430,7 @@
         "adresse": {
           "$ref": "#/definitions/Adresse"
         },
-        "rufnummer": {
+        "rufnummern": {
           "type": [
             "array",
             "null"
