@@ -52,7 +52,11 @@ namespace BO4E.BO
         /// </example>
         [JsonProperty(Required = Required.Default, Order = 1, PropertyName = "boTyp")]
         [ProtoMember(1)]
-        public string BoTyp { get; set; }
+        public string BoTyp
+        {
+            get { return this.GetType().Name.ToUpper(); }
+            set { }
+        }
 
         /// <summary>
         /// Fields that are not part of the BO4E-definition are stored in a element, that is
@@ -101,7 +105,7 @@ namespace BO4E.BO
         /// </summary>
         protected BusinessObject()
         {
-            BoTyp = this.GetType().Name.ToUpper();
+            //BoTyp = this.GetType().Name.ToUpper();
             VersionStruktur = 1;
         }
 
@@ -436,19 +440,6 @@ namespace BO4E.BO
                     }
                 }
                 return result;
-            }
-        }
-
-        /// <summary>
-        /// converts <see cref="BusinessObject.BoTyp"/> to upper case.
-        /// </summary>
-        /// <param name="context"></param>
-        [OnDeserialized]
-        protected void DeserializationFixes(StreamingContext context)
-        {
-            if (BoTyp != null)
-            {
-                this.BoTyp = BoTyp.ToUpper();
             }
         }
 
