@@ -471,7 +471,6 @@ namespace BO4E.BO
                 {
                     return null; // pretend TableSortRuleConvert is not specified (thus avoiding a stack overflow)
                 }
-
                 return base.ResolveContractConverter(objectType);
             }
         }
@@ -496,11 +495,18 @@ namespace BO4E.BO
                 {
                     JObject jo = JObject.Load(reader);
                     Type boType;
-                    if (!jo.ContainsKey("boTyp"))
+                    if (serializer.TypeNameHandling.HasFlag(TypeNameHandling.Objects) && jo.ContainsKey("$type"))
+                    {
+                        boType = BusinessObjectSerializationBinder.BusinessObjectAndCOMTypes.Where(t => t.Name.ToUpper() == jo["$type"].Value<string>().Split('.').Last().ToUpper()).SingleOrDefault();
+                    }
+                    else if (!jo.ContainsKey("boTyp"))
                     {
                         throw new ArgumentException("If deserializing into an abstract BusinessObject the key \"boTyp\" has to be set. But it wasn't.");
                     }
-                    boType = BoMapper.GetTypeForBoName(jo["boTyp"].Value<string>()); // ToDo: catch exception if boTyp is not set and throw exception with descriptive error message
+                    else
+                    {
+                        boType = BoMapper.GetTypeForBoName(jo["boTyp"].Value<string>()); // ToDo: catch exception if boTyp is not set and throw exception with descriptive error message
+                    }
                     if (boType == null)
                     {
                         foreach (var assembley in AppDomain.CurrentDomain.GetAssemblies())
