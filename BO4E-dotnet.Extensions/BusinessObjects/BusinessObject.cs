@@ -1,4 +1,5 @@
 ﻿using BO4E.BO;
+
 using Newtonsoft.Json;
 
 namespace BO4E.Extensions.BusinessObjects
@@ -14,7 +15,7 @@ namespace BO4E.Extensions.BusinessObjects
         /// <typeparam name="T">Type of the BusinessObject</typeparam>
         /// <param name="source">the BO that is copied</param>
         /// <returns>the deep copy</returns>
-        public static T DeepClone<T>(this T source)
+        public static T DeepClone<T>(this T source) where T : BusinessObject
         {
             return JsonConvert.DeserializeObject<T>(JsonConvert.SerializeObject(source));
         }
