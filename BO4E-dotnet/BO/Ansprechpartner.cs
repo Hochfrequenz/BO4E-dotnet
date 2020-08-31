@@ -67,7 +67,8 @@ namespace BO4E.BO
         public string Kommentar { get; set; }
 
         /// <summary>Der Geschäftspartner, für den dieser Ansprechpartner modelliert wird.</summary>
-        [JsonProperty(Required = Required.Always, Order = 11, PropertyName = "geschaeftspartner")]
+        [JsonProperty(Required = Required.Default, Order = 11, PropertyName = "geschaeftspartner")]
+        [NonOfficial(NonOfficialCategory.UNSPECIFIED)] // it's always required in BO4E, changed it to default 2020-08-31 KK
         [ProtoMember(11)]
         [BoKey]
         public Geschaeftspartner Geschaeftspartner { get; set; }
