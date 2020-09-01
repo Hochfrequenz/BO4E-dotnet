@@ -450,12 +450,14 @@
         }
       },
       "required": [
-        "nachname",
-        "geschaeftspartner"
+        "nachname"
       ]
     },
     "Geschaeftspartner": {
-      "type": "object",
+      "type": [
+        "object",
+        "null"
+      ],
       "properties": {
         "guid": {
           "type": [

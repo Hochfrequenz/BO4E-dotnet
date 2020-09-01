@@ -450,8 +450,7 @@
         }
       },
       "required": [
-        "nachname",
-        "geschaeftspartner"
+        "nachname"
       ]
     },
     "Geraeteeigenschaften": {
@@ -716,7 +715,10 @@
       ]
     },
     "Geschaeftspartner": {
-      "type": "object",
+      "type": [
+        "object",
+        "null"
+      ],
       "properties": {
         "guid": {
           "type": [

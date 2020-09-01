@@ -38,7 +38,7 @@ namespace BO4E.BO
         [JsonProperty(Required = Required.Default, Order = 6, PropertyName = "titel")]
         [ProtoMember(6)]
         [DataCategory(DataCategory.NAME)]
-        public Titel? Titel;
+        public Titel? Titel { get; set; }
 
         /// <summary>Vorname des Ansprechpartners</summary>
         [JsonProperty(Required = Required.Default, Order = 7, PropertyName = "vorname")]
@@ -84,12 +84,12 @@ namespace BO4E.BO
         [JsonProperty(Required = Required.Default, Order = 13, PropertyName = "rufnummern")]
         [ProtoMember(13)]
         [DataCategory(DataCategory.ADDRESS)]
-        public List<Rufnummer> Rufnummern;
+        public List<Rufnummer> Rufnummern { get; set; }
 
         /// <summary>Liste der Abteilungen und Zuständigkeiten des Ansprechpartners.</summary>
         [JsonProperty(Required = Required.Default, Order = 14, PropertyName = "zustaendigkeit")]
         [ProtoMember(14)]
-        public List<Zustaendigkeit> Zustaendigkeit;
+        public List<Zustaendigkeit> Zustaendigkeit { get; set; }
 
     }
 }

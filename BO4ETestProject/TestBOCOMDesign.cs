@@ -21,9 +21,8 @@ namespace TestBO4E
         {
             foreach (var type in typeof(BusinessObject).Assembly.GetTypes().Where(t => typeof(BusinessObject).IsAssignableFrom(t)))
             {
-                var fields = type.GetFields(BindingFlags.Public);
-                // properties are not allowed in BusinessObjects because a lot of features rely on fields!
-                Assert.AreEqual(0, fields.Count(), $"Type {type} must not contain fields but has: {string.Join(", ", fields.ToList())}");
+                var fields = type.GetFields().Where(f=>f.IsPublic && !f.IsLiteral);
+                Assert.IsFalse(fields.Any(), $"Type {type} must not contain fields but has: {string.Join(", ", fields.ToList())}");
             }
         }
 
@@ -41,9 +40,8 @@ namespace TestBO4E
         {
             foreach (var type in typeof(BO4E.COM.COM).Assembly.GetTypes().Where(t => typeof(COM).IsAssignableFrom(t)))
             {
-                var fields = type.GetFields();
-                // properties are not allowed in COM Objects because a lot of features rely on fields!
-                Assert.AreEqual(0, fields.Count(), $"Type {type} must not contain fields but has: {string.Join(", ", fields.ToList())}");
+                var fields = type.GetFields().Where(f=>f.IsPublic);
+                Assert.IsFalse(fields.Any(), $"Type {type} must not contain public fields but has: {string.Join(", ", fields.ToList())}");
             }
         }
 
