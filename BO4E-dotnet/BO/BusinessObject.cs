@@ -494,9 +494,9 @@ namespace BO4E.BO
                 {
                     JObject jo = JObject.Load(reader);
                     Type boType;
-                    if (serializer.TypeNameHandling.HasFlag(TypeNameHandling.Objects) && jo.ContainsKey("$type"))
+                    if (serializer.TypeNameHandling.HasFlag(TypeNameHandling.Objects) && jo.TryGetValue("$type", out JToken typeToken))
                     {
-                        boType = BusinessObjectSerializationBinder.BusinessObjectAndCOMTypes.Where(t => t.Name.ToUpper() == jo["$type"].Value<string>().Split('.').Last().ToUpper()).SingleOrDefault();
+                        boType = BusinessObjectSerializationBinder.BusinessObjectAndCOMTypes.Where(t => typeToken.Value<string>().ToUpper().StartsWith(t.FullName.ToUpper())).SingleOrDefault();
                     }
                     else if (!jo.ContainsKey("boTyp"))
                     {

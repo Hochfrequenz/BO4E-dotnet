@@ -61,6 +61,9 @@
     <None Update="BoMapperTests\geschaeftspartner_non_lenient_enumlist.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Update="BoMapperTests\marktlokation_with_typenamehandling.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Update="BoMapperTests\rechnung.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
