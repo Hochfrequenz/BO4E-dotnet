@@ -27,7 +27,7 @@ namespace BO4E
         /// <summary>
         /// transform a BO4E value of known type to an EDIFACT value
         /// </summary>
-        /// <seealso cref="EdiBoMapper.fromEdi(string, string)"/>
+        /// <seealso cref="EdiBoMapper.FromEdi(string, string)"/>
         /// <param name="objectName">name of the BO4E datatype<example>Netzebene</example></param>
         /// <param name="objectValue">BO4E value<example>HSP</example></param>
         /// <returns>
@@ -63,7 +63,7 @@ namespace BO4E
             if (prop == null)
             {
                 _logger.LogWarning($"Class objectName has no field {objectValue}; Might already be the edi value...");
-                var alternativField = EdiBoMapper.fromEdi(objectName, objectValue);
+                var alternativField = EdiBoMapper.FromEdi(objectName, objectValue);
                 if (alternativField != null && clazz.GetField(alternativField) != null)
                 {
                     return objectValue;
@@ -98,7 +98,7 @@ namespace BO4E
                     {
                         if (aef.Name.StartsWith("_"))
                         {
-                            if (clazz.GetField(EdiBoMapper.fromEdi(objectName, aef.Name.Substring(1))) != null)
+                            if (clazz.GetField(EdiBoMapper.FromEdi(objectName, aef.Name.Substring(1))) != null)
                             {
                                 return aef.Name.Substring(1);
                             }

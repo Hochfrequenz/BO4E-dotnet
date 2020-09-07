@@ -64,7 +64,7 @@ namespace TestBO4E
                 foreach (string teststring in map.Keys)
                 {
                     string expectedResult = map[teststring];
-                    string result = EdiBoMapper.fromEdi(objectName, teststring);
+                    string result = EdiBoMapper.FromEdi(objectName, teststring);
                     Assert.AreEqual(expectedResult, result);
                 }
             }

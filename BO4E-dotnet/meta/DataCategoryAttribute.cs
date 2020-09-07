@@ -27,6 +27,11 @@ namespace BO4E.meta
         /// contains those DataCategories (<see cref="DataCategory"/>) annotated to the field.
         /// </summary>
         public HashSet<Enum> Mapping { get; set; }
+
+        /// <summary>
+        /// initialize by providing a list of data categories
+        /// </summary>
+        /// <param name="enums"></param>
         public DataCategoryAttribute(params object[] enums)
         {
             if (enums.Any(r => r.GetType().BaseType != typeof(Enum)))

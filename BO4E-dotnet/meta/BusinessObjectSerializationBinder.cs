@@ -15,7 +15,7 @@ namespace BO4E.meta
     {
         // implementation is similar to the JSON.net example implementation in the docs: https://www.newtonsoft.com/json/help/html/SerializeSerializationBinder.htm
         /// <summary>
-        /// list of all known BusinessOjects inheriting from <see cref="BO4E.BO.BusinessObject"/> and components inheriting from <see cref="BO4E.COM.COM"/> 
+        /// list of all known BusinessOjects inheriting from <see cref="BO4E.BO.BusinessObject"/> and components inheriting from <see cref="BO4E.COM.COM"/>
         /// </summary>
         public static IList<Type> BusinessObjectAndCOMTypes { get; }
 
@@ -24,11 +24,13 @@ namespace BO4E.meta
             BusinessObjectAndCOMTypes = typeof(BusinessObject).Assembly.GetTypes().Where(t => t.IsClass && !t.IsAbstract && (typeof(BO4E.BO.BusinessObject).IsAssignableFrom(t) || typeof(BO4E.COM.COM).IsAssignableFrom(t))).ToList();
         }
 
+        /// <inheritdoc cref="ISerializationBinder.BindToType(string, string)"/>
         public Type BindToType(string assemblyName, string typeName)
         {
             return BusinessObjectAndCOMTypes.SingleOrDefault(t => t.Name == typeName);
         }
 
+        /// <inheritdoc cref="ISerializationBinder.BindToName(Type, out string, out string)"/>
         public void BindToName(Type serializedType, out string assemblyName, out string typeName)
         {
             assemblyName = null;

@@ -1,9 +1,9 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using Newtonsoft.Json.Converters;
+
+using System;
 using System.Collections.Generic;
 using System.Globalization;
-
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
 
 namespace BO4E.meta.LenientConverters
 {
@@ -17,14 +17,20 @@ namespace BO4E.meta.LenientConverters
 
         private readonly DateTimeOffset? _defaultDateTime;
 
+        /// <summary>
+        /// initialize using a default date time
+        /// </summary>
+        /// <param name="defaultDateTime"></param>
         public LenientDateTimeConverter(DateTimeOffset? defaultDateTime = null)
         {
             this._defaultDateTime = defaultDateTime;
         }
 
+        /// <summary>
+        /// initialize using no default datetime
+        /// </summary>
         public LenientDateTimeConverter() : this(null)
         {
-
         }
 
         private readonly List<(string, bool)> ALLOWED_DATETIME_FORMATS = new List<(string, bool)>()
@@ -36,6 +42,7 @@ namespace BO4E.meta.LenientConverters
                (@"yyyyMMddHHmmss'--T::zzzz'",false), // ToDo: remove again. this is just a buggy, nasty workaround
             };
 
+        /// <inheritdoc cref="JsonConverter.CanConvert(Type)"/>
         public override bool CanConvert(Type objectType)
         {
             return objectType == typeof(DateTimeOffset)
@@ -44,6 +51,7 @@ namespace BO4E.meta.LenientConverters
                 || objectType == typeof(DateTime?);
         }
 
+        /// <inheritdoc cref="JsonConverter.ReadJson(JsonReader, Type, object, JsonSerializer)"/>
         public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
         {
             string rawDate;
@@ -123,10 +131,10 @@ namespace BO4E.meta.LenientConverters
                     }
                     else
                     {
-                        return DateTimeOffset.MinValue; 
+                        return DateTimeOffset.MinValue;
                     }
                 }
-                catch(ArgumentOutOfRangeException ae) when (ae.Message == "The UTC time represented when the offset is applied must be between year 0 and 10,000. (Parameter 'offset')")
+                catch (ArgumentOutOfRangeException ae) when (ae.Message == "The UTC time represented when the offset is applied must be between year 0 and 10,000. (Parameter 'offset')")
                 {
                     if (objectType == typeof(DateTime))
                     {
@@ -145,11 +153,13 @@ namespace BO4E.meta.LenientConverters
             }
         }
 
+        /// <inheritdoc cref="JsonConverter.CanWrite"/>
         public override bool CanWrite
         {
             get { return false; }
         }
 
+        /// <inheritdoc cref="JsonConverter.WriteJson(JsonWriter, object, JsonSerializer)"/>
         public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
         {
             throw new NotImplementedException();

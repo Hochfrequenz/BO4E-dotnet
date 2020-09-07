@@ -1,6 +1,7 @@
-using BO4E.ENUM;
 using BO4E.meta;
+
 using Microsoft.Extensions.Logging;
+
 using System;
 using System.Linq;
 using System.Reflection;
@@ -18,12 +19,13 @@ namespace BO4E
         /// project wide logger
         /// </summary>
         public static ILogger _logger = StaticLogger.Logger;
+
         private static readonly string namespacePrefix = "BO4E.ENUM";
 
         /// <summary>
         /// transform an EDIFACT value of known type to a BO4E value
         /// </summary>
-        /// <seealso cref="BoEdiMapper.toEdi(string, string)"/>
+        /// <seealso cref="BoEdiMapper.ToEdi(string, string)"/>
         /// <param name="objectName">name of the BO4E datatype<example>Netzebene</example></param>
         /// <param name="objectValue">EDIFACT value<example>E06</example></param>
         /// <returns>
@@ -38,7 +40,7 @@ namespace BO4E
         /// string bo4eValue = EdiBoMapper.fromEdi("Netzebene", "E06"); // returns "NSP"
         /// </code>
         /// </example>
-        public static string fromEdi(string objectName, string objectValue)
+        public static string FromEdi(string objectName, string objectValue)
         {
             if (objectValue == null)
             {
@@ -48,17 +50,15 @@ namespace BO4E
             if (_logger == null)
             {
                 // ToDo: inject it instead of ugly workaround.
-                BO4E.StaticLogger.Logger = Microsoft.Extensions.Logging.Abstractions.NullLogger.Instance; 
+                BO4E.StaticLogger.Logger = Microsoft.Extensions.Logging.Abstractions.NullLogger.Instance;
                 _logger = StaticLogger.Logger;
             }
-            Type[] types = Assembly.GetExecutingAssembly().GetTypes();
+            //Type[] types = Assembly.GetExecutingAssembly().GetTypes();
             Type clazz = Assembly.GetExecutingAssembly().GetType(namespacePrefix + "." + objectName);
             Type ediClazz = Assembly.GetExecutingAssembly().GetType($"{namespacePrefix}.EDI.{objectName}Edi");
 
             bool useEdiClass = false;
-            FieldInfo field = null;
-
-            field = clazz.GetField(objectValue);
+            FieldInfo field = clazz.GetField(objectValue);
             if (field == null)
             {
                 _logger.LogDebug("Class " + objectName + " has no field " + objectValue);
@@ -104,7 +104,6 @@ namespace BO4E
             {
                 return attribute.Mapping.FirstOrDefault()?.ToString();
             }
-
         }
     }
 }

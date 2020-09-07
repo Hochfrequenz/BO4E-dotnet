@@ -1,4 +1,9 @@
-﻿using System;
+﻿using BO4E.BO;
+
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
+
+using System;
 using System.Collections.Generic;
 using System.Collections.Specialized;
 using System.ComponentModel;
@@ -7,11 +12,6 @@ using System.Linq;
 using System.Reflection;
 using System.Text;
 using System.Text.RegularExpressions;
-
-using BO4E.BO;
-
-using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
 
 namespace BO4E.meta
 {
@@ -64,7 +64,9 @@ namespace BO4E.meta
         /// <returns>business object name or null iff there is no such object</returns>
         public string GetBoName()
         {
+#pragma warning disable CS0618 // Type or member is obsolete
             foreach (string boName in BoMapper.GetValidBoNames())
+#pragma warning restore CS0618 // Type or member is obsolete
             {
                 if (boName.ToUpper().Equals(this.Host.ToUpper()))
                 {
@@ -75,7 +77,7 @@ namespace BO4E.meta
         }
 
         /// <summary>
-        /// Get type of business object (e.g. to be used with Activator.CreateInstance) 
+        /// Get type of business object (e.g. to be used with Activator.CreateInstance)
         /// </summary>
         /// <returns>business object type of null iff there is no such object</returns>
         public Type GetBoType()
@@ -142,7 +144,7 @@ namespace BO4E.meta
             }
             string baseUriString = BO4E_SCHEME + bo.GetType().Name + "/";
             Bo4eUri baseUri = new Bo4eUri(baseUriString);
-            var relativeUriBuilder= new StringBuilder();
+            var relativeUriBuilder = new StringBuilder();
 
             foreach (PropertyInfo keyProp in GetKeyFields(bo))
             {
@@ -256,7 +258,6 @@ namespace BO4E.meta
                 return allKeyProperties.ToList<PropertyInfo>();
             }
         }
-
 
         /// <summary>
         /// The query object / dictionary returned by this method allows to search for Business Objects.
@@ -397,18 +398,17 @@ namespace BO4E.meta
         /// <inheritdoc/>
         public override bool CanConvertFrom(ITypeDescriptorContext context, Type sourceType)
         {
-            return sourceType == typeof(string) ? true : base.CanConvertFrom(context, sourceType);
+            return sourceType == typeof(string) || base.CanConvertFrom(context, sourceType);
         }
 
         /// <inheritdoc/>
         public override object ConvertFrom(ITypeDescriptorContext context, CultureInfo culture, object value)
         {
-            if (value is string)
+            if (value is string @string)
             {
-                return new Bo4eUri((string)value);
+                return new Bo4eUri(@string);
             }
             return base.ConvertFrom(context, culture, value);
         }
     }
-
 }

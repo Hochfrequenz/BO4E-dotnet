@@ -1,12 +1,12 @@
-using System;
-using System.Collections.Generic;
-
 using BO4E.ENUM;
 using BO4E.meta;
 
 using Newtonsoft.Json;
 
 using ProtoBuf;
+
+using System;
+using System.Collections.Generic;
 
 namespace BO4E.COM
 {
@@ -84,27 +84,34 @@ namespace BO4E.COM
         [JsonProperty(PropertyName = "konzessionsabgabe", Required = Required.Default)]
         [NonOfficial(NonOfficialCategory.CUSTOMER_REQUIREMENTS)]
         [ProtoMember(1015)]
+#pragma warning disable CS1591 // Missing XML comment for publicly visible type or member
+        // Todo @hamid: add a docstring
         public Konzessionsabgabe Konzessionsabgabe { get; set; }
 
         [JsonProperty(PropertyName = "steuerbefreit", Required = Required.Default)]
         [NonOfficial(NonOfficialCategory.CUSTOMER_REQUIREMENTS)]
         [ProtoMember(1016)]
+        // Todo @hamid: add a docstring
         public bool? Steuerbefreit { get; set; }
 
         [JsonProperty(PropertyName = "vorkommastelle", Required = Required.Default)]
         [NonOfficial(NonOfficialCategory.CUSTOMER_REQUIREMENTS)]
         [ProtoMember(1017)]
+        // Todo @hamid: add a docstring
         public int? Vorkommastelle { get; set; }
 
         [JsonProperty(PropertyName = "nachkommastelle", Required = Required.Default)]
         [NonOfficial(NonOfficialCategory.CUSTOMER_REQUIREMENTS)]
         [ProtoMember(1018)]
+        // Todo @hamid: add a docstring
         public int? Nachkommastelle { get; set; }
 
         [JsonProperty(PropertyName = "abrechnungsrelevant", Required = Required.Default)]
         [NonOfficial(NonOfficialCategory.CUSTOMER_REQUIREMENTS)]
         [ProtoMember(1019)]
+        // Todo @hamid: add a docstring
         public bool? Abrechnungsrelevant { get; set; }
 
+#pragma warning restore CS1591 // Missing XML comment for publicly visible type or member
     }
 }

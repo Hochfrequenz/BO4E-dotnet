@@ -1,11 +1,12 @@
-using System;
-
 using BO4E.ENUM;
 using BO4E.meta;
 using BO4E.meta.LenientConverters;
+
 using Newtonsoft.Json;
 
 using ProtoBuf;
+
+using System;
 
 namespace BO4E.COM
 {
@@ -89,7 +90,6 @@ namespace BO4E.COM
         [ProtoMember(13)]
         public decimal? PositionsMengeWert { get; set; }
 
-
         /// <summary>
         /// GCN mediated value unit
         /// <see cref="Rechnungsposition.PositionsMenge"/> and <see cref="Menge.Einheit"/>
@@ -125,7 +125,9 @@ namespace BO4E.COM
             this.Positionstext = rp.Positionstext;
             this.LokationsId = rp.LokationsId;
             this.VertragsId = rp.VertragsId;
+#pragma warning disable CS0618 // Type or member is obsolete
             this.VertragskontoId = rp.VertragskontoId;
+#pragma warning restore CS0618 // Type or member is obsolete
             if (rp.Einzelpreis != null)
             {
                 this.PreisWert = rp.Einzelpreis.Wert;
@@ -162,7 +164,9 @@ namespace BO4E.COM
                 Positionstext = Positionstext,
                 LokationsId = LokationsId,
                 VertragsId = VertragsId,
+#pragma warning disable CS0618 // Type or member is obsolete
                 VertragskontoId = VertragskontoId,
+#pragma warning restore CS0618 // Type or member is obsolete
                 Einzelpreis = new Preis()
                 {
                     Wert = PreisWert,

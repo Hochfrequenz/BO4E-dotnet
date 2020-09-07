@@ -39,7 +39,9 @@ namespace BO4E.COM
     [ProtoInclude(21, typeof(Kostenposition))]
     [ProtoInclude(22, typeof(KriteriumsWert))]
     [ProtoInclude(23, typeof(Kostenposition))]
+#pragma warning disable CS0618 // Type or member is obsolete
     [ProtoInclude(24, typeof(MarktpartnerDetails))]
+#pragma warning restore CS0618 // Type or member is obsolete
     [ProtoInclude(25, typeof(Menge))]
     [ProtoInclude(26, typeof(Messlokationszuordnung))]
     [ProtoInclude(27, typeof(Notiz))]
@@ -148,18 +150,25 @@ namespace BO4E.COM
         /// </summary>
         [JsonProperty(PropertyName = "guid", NullValueHandling = NullValueHandling.Ignore, Required = Required.Default, Order = 1)]
         public Guid? Guid { get; set; }
+
+        /// <inheritdoc cref="BO.BusinessObject.guidSerialized"/>
+
         // note that this inheritance protobuf thing doesn't work as expected. please see the comments in TestBO4E project->TestProfobufSerialization
         [ProtoMember(1)]
+#pragma warning disable IDE1006 // Naming Styles
         protected string guidSerialized
+#pragma warning restore IDE1006 // Naming Styles
         {
             get => this.Guid.HasValue ? this.Guid.ToString() : string.Empty;
             set { this.Guid = string.IsNullOrWhiteSpace(value) ? (Guid?)null : System.Guid.Parse(value.ToString()); }
         }
 
-        // ToDo @JoschaMetze: Add a docstring about this
         [JsonProperty(PropertyName = "timestamp", NullValueHandling = NullValueHandling.Ignore, Required = Required.Default, Order = 2)]
         [Timestamp]
+#pragma warning disable CS1591 // Missing XML comment for publicly visible type or member
+        // ToDo @JoschaMetze: Add a docstring about this
         public DateTimeOffset? Timestamp { get; set; }
 
+#pragma warning restore CS1591 // Missing XML comment for publicly visible type or member
     }
 }

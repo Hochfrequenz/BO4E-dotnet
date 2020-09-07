@@ -12,10 +12,14 @@ namespace BO4E.BO
     //[ProtoContract]
     public class Marktteilnehmer : Geschaeftspartner
     {
+        /// <summary>
+        /// empty constructor
+        /// </summary>
         public Marktteilnehmer() : base()
         {
             Gewerbekennzeichnung = true;
         }
+
         /// <summary>Gibt im Klartext die Bezeichnung der Marktrolle an.</summary>
         /// <example>LF</example>
         [JsonProperty(Required = Required.Always, Order = 19, PropertyName = "marktrolle")]

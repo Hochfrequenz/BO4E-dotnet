@@ -1,15 +1,16 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Runtime.Serialization;
-
-using BO4E.COM;
+﻿using BO4E.COM;
 using BO4E.ENUM;
 using BO4E.meta;
 using BO4E.meta.LenientConverters;
+
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 
 using ProtoBuf;
+
+using System;
+using System.Collections.Generic;
+using System.Runtime.Serialization;
 
 namespace BO4E.BO
 {
@@ -34,6 +35,7 @@ namespace BO4E.BO
         [JsonProperty(Required = Required.Default, Order = 5, PropertyName = "beschreibung")]
         [ProtoMember(5)]
         public string Beschreibung { get; set; }
+
         /// <summary>
         /// Hier ist festgelegt, um welche Art von Vertrag es sich handelt. Z.B. Netznutzungvertrag. Details siehe ENUM Vertragsart
         /// </summary>
@@ -122,7 +124,7 @@ namespace BO4E.BO
         [ProtoMember(1017)]
         public decimal? Gemeinderabatt { get; set; }
 
-        /// <summary> 
+        /// <summary>
         /// korrespondenzpartner für EDIFACT mapping
         /// </summary>
         [JsonProperty(Required = Required.Default, Order = 18, PropertyName = "korrespondenzpartner")]
@@ -130,7 +132,6 @@ namespace BO4E.BO
         [ProtoMember(1018)]
         // ToDO: isn't an Ansprechpartner the better choice than a Geschaeftspartner?
         public Geschaeftspartner Korrespondenzpartner { get; set; }
-
 
         /// <summary>
         /// moves lokationsId from userProperties to vertragsteil if relevant
@@ -152,9 +153,12 @@ namespace BO4E.BO
                 };
             }
         }
+
+        /// <summary>
+        /// empty constructor for deserialization
+        /// </summary>
         public Vertrag()
         {
-
         }
     }
 }

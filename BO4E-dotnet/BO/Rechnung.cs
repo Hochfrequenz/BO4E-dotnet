@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Globalization;
-
-using BO4E.COM;
+﻿using BO4E.COM;
 using BO4E.ENUM;
 using BO4E.meta;
 
@@ -10,6 +6,10 @@ using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 
 using ProtoBuf;
+
+using System;
+using System.Collections.Generic;
+using System.Globalization;
 
 namespace BO4E.BO
 {
@@ -149,7 +149,7 @@ namespace BO4E.BO
         public Betrag RabattBrutto { get; set; }
 
         /// <summary>
-        /// Der zu zahlende Betrag, der sich aus (<see cref="Gesamtbrutto"/> - <see cref="Vorausgezahlt"/> - <see cref="rabattBrutto"/>) ergibt. Details <see cref="Betrag"/>
+        /// Der zu zahlende Betrag, der sich aus (<see cref="Gesamtbrutto"/> - <see cref="Vorausgezahlt"/> - <see cref="RabattBrutto"/>) ergibt. Details <see cref="Betrag"/>
         /// /// </summary>
         [JsonProperty(Required = Required.Always, Order = 20, PropertyName = "zuzahlen")]
         [ProtoMember(20)]
@@ -172,7 +172,12 @@ namespace BO4E.BO
         [FieldName("invoiceItemList", Language.EN)]
         public List<Rechnungsposition> Rechnungspositionen { get; set; }
 
-        public Rechnung() { }
+        /// <summary>
+        /// empty constructor for deserilization
+        /// </summary>
+        public Rechnung()
+        {
+        }
 
         /// <summary>
         /// this constructor creates a BO4E.Rechnung from a JSON serialized SAP print document ("Druckbeleg")
@@ -184,7 +189,7 @@ namespace BO4E.BO
             // Initially I exported the SAP print document "Druckbeleg") using the SAP library /ui2/cl_json which allows for pretty printing
             // the ALL_UPPER_CASE SAP internal keys to lowerCamelCase. Later on technical constraints in SAP forced me to use a different
             // serialization which is closer to SAPs internal structure and has no lower case keys at all. Furthermore in SAP there is
-            // no difference between string.Empty and null; the latter doesn't even exist as a concept. 
+            // no difference between string.Empty and null; the latter doesn't even exist as a concept.
             JToken infoToken = sapPrintDocument.SelectToken("erdk") ?? sapPrintDocument.SelectToken("ERDK");
             JToken tErdzToken = sapPrintDocument.SelectToken("tErdz") ?? sapPrintDocument.SelectToken("T_ERDZ");
             if (tErdzToken == null)
@@ -286,7 +291,6 @@ namespace BO4E.BO
                             };
                     }
 
-
                     rp.Positionsnummer = (jrp["belzeile"] ?? jrp["BELZEILE"]).Value<int>();
                     if ((jrp["bis"] ?? jrp["BIS"]) != null && (jrp["bis"] ?? jrp["BIS"]).Value<string>() != "0000-00-00")
                     {
@@ -298,7 +302,9 @@ namespace BO4E.BO
                     }
                     if ((jrp["vertrag"] ?? jrp["VERTRAG"]) != null)
                     {
+#pragma warning disable CS0618 // Type or member is obsolete
                         rp.VertragskontoId = (jrp["vertrag"] ?? jrp["VERTRAG"]).Value<string>();
+#pragma warning restore CS0618 // Type or member is obsolete
                     }
 
                     if ((jrp["iAbrmenge"] ?? jrp["I_ABRMENGE"]) != null)

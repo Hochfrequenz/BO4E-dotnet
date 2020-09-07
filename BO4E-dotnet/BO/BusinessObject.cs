@@ -122,9 +122,10 @@ namespace BO4E.BO
         {
             //Debug.Assert(boTyp == s);
         }
+
         /// <summary>
         /// obligatory version of the BO4E definition. Currently hard coded to 1
-        /// </summary> 
+        /// </summary>
         /// <example>
         /// 1
         /// </example>
@@ -137,18 +138,27 @@ namespace BO4E.BO
         /// </summary>
         [JsonProperty(PropertyName = "guid", NullValueHandling = NullValueHandling.Ignore, Required = Required.Default)]
         public virtual Guid? Guid { get; set; }
+
+        /// <summary>
+        /// protobuf serilization requires the <see cref="Guid"/> as string.
+        /// </summary>
         // note that this inheritance protobuf thing doesn't work as expected. please see the comments in TestBO4E project->TestProfobufSerialization
         [ProtoMember(3)]
+#pragma warning disable IDE1006 // Naming Styles
         protected virtual string guidSerialized
+#pragma warning restore IDE1006 // Naming Styles
         {
             get => this.Guid.HasValue ? this.Guid.ToString() : string.Empty;
             set { this.Guid = string.IsNullOrWhiteSpace(value) ? (Guid?)null : System.Guid.Parse(value.ToString()); }
         }
 
-        // ToDo @JoschaMetze: Add a docstring about this
         [JsonProperty(PropertyName = "timestamp", NullValueHandling = NullValueHandling.Ignore, Required = Required.Default, Order = 2)]
         [Timestamp]
+#pragma warning disable CS1591 // Missing XML comment for publicly visible type or member
+        // ToDo @JoschaMetze: Add a docstring about this
         public DateTimeOffset? Timestamp { get; set; }
+
+#pragma warning restore CS1591 // Missing XML comment for publicly visible type or member
 
         /// <summary>
         /// returns a JSON scheme for the Business Object
@@ -178,7 +188,7 @@ namespace BO4E.BO
         }
 
         /// <summary>
-        /// Get a BO4E compliant URI for this business object. 
+        /// Get a BO4E compliant URI for this business object.
         /// </summary>
         /// Use .ToString() on the result to pass it between services.
         /// <returns>a BO4E compliant URI object</returns>
@@ -191,8 +201,8 @@ namespace BO4E.BO
         /// (Some) Business Objects do have keys that should identify them in a unique manner across
         /// multiple systems. This method returns a list of these keys. The list contains the key
         /// names as they are serialised in JSON. This means that the fields PropertyName is part
-        /// of the list if JsonPropertyAttribute.PropertyName is set in the Business Objects 
-        /// definition. Please do not use this method trying to access the actual key values. Use 
+        /// of the list if JsonPropertyAttribute.PropertyName is set in the Business Objects
+        /// definition. Please do not use this method trying to access the actual key values. Use
         /// the <see cref="GetBoKeys"/> or <see cref="GetBoKeyProps(Type)"/> for this purpose.
         /// The list is sorted by the JsonPropertyAttribute.Order, assuming 0 if not specified.
         /// </summary>
@@ -257,10 +267,14 @@ namespace BO4E.BO
         /// <returns><see cref="GetExpandablePropertyNames(Type)"/></returns>
         public static Dictionary<string, Type> GetExpandableFieldNames(string boTypeName)
         {
+#pragma warning disable CS0618 // Type or member is obsolete
             Type clazz = Assembly.GetExecutingAssembly().GetType(BoMapper.packagePrefix + "." + boTypeName);
+#pragma warning restore CS0618 // Type or member is obsolete
             if (clazz == null)
             {
+#pragma warning disable CS0618 // Type or member is obsolete
                 throw new ArgumentException($"{boTypeName} is not a valid Business Object name. Use one of the following: {string.Join("\n -", BoMapper.GetValidBoNames())}");
+#pragma warning restore CS0618 // Type or member is obsolete
             }
             return GetExpandablePropertyNames(clazz);
         }
@@ -474,7 +488,6 @@ namespace BO4E.BO
             }
         }
 
-
         internal class BusinessObjectBaseConverter : JsonConverter
         {
             //private static readonly JsonSerializerSettings SpecifiedSubclassConversion = new JsonSerializerSettings() { ContractResolver = new BaseSpecifiedConcreteClassConverter() };
@@ -504,7 +517,9 @@ namespace BO4E.BO
                     }
                     else
                     {
+#pragma warning disable CS0618 // Type or member is obsolete
                         boType = BoMapper.GetTypeForBoName(jo["boTyp"].Value<string>()); // ToDo: catch exception if boTyp is not set and throw exception with descriptive error message
+#pragma warning restore CS0618 // Type or member is obsolete
                     }
                     if (boType == null)
                     {
