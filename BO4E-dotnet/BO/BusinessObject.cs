@@ -100,6 +100,43 @@ namespace BO4E.BO
         public IDictionary<string, JToken> UserProperties { get; set; }
 
         /// <summary>
+        /// try to get the Userproperty with key <paramref name="userPropertyKey"/> from <see cref="UserProperties"/> if <see cref="UserProperties"/> is not null and the key is present.
+        /// </summary>
+        /// <typeparam name="TUserProperty">type expected to be found in the User Property with key <paramref name="userPropertyKey"/></typeparam>
+        /// <param name="userPropertyKey">key under which the <paramref name="value"/> is expected in <see cref="UserProperties"/></param>
+        /// <param name="value">default if false is returned, the stored value otherwise</param>
+        /// <returns>true if found</returns>
+        /// <exception cref="ArgumentNullException">iff <paramref name="userPropertyKey"/> is null or whitespace</exception>
+        public bool TryGetUserProperty<TUserProperty>(string userPropertyKey, out TUserProperty value) where TUserProperty : class
+        {
+            if (string.IsNullOrWhiteSpace(userPropertyKey)) throw new ArgumentNullException(nameof(userPropertyKey));
+            if (this.UserProperties != null && this.UserProperties.TryGetValue(userPropertyKey, out var upToken))
+            {
+                value = upToken.Value<TUserProperty>();
+                return true;
+            }
+            value = default;
+            return false;
+        }
+
+        /// <summary>
+        /// same as <see cref="TryGetUserProperty{TUserProperty}(string, out TUserProperty)"/> but returns a default <paramref name="defaultValue"/> if <paramref name="userPropertyKey"/> was not found or the user properties are null
+        /// </summary>
+        /// <typeparam name="TUserProperty">type expected to be found in the User Property with key <paramref name="userPropertyKey"/></typeparam>
+        /// <param name="userPropertyKey">key of the <see cref="UserProperties"/> dictionary</param>
+        /// <param name="defaultValue">default value returned if <see cref="UserProperties"/>are null or the key was not found</param>
+        /// <returns>the value stored in the userproperty or the default <paramref name="defaultValue"/></returns>
+        /// /// <exception cref="ArgumentNullException">iff <paramref name="userPropertyKey"/> is null or whitespace</exception>
+        public TUserProperty GetUserProperty<TUserProperty>(string userPropertyKey, TUserProperty defaultValue) where TUserProperty : class
+        {
+            if (this.TryGetUserProperty(userPropertyKey, out TUserProperty actualValue))
+            {
+                return actualValue;
+            }
+            return defaultValue;
+        }
+
+        /// <summary>
         /// generates the BO4E boTyp attribute value (class name as upper case)
         /// </summary>
         protected BusinessObject()
@@ -117,8 +154,8 @@ namespace BO4E.BO
         /// <summary>
         /// This method is just to make sure the mapping actually makes sense.
         /// </summary>
-        /// <param name="s">name of the business object</param>
-        protected void SetBoTyp(string s)
+        /// <param name="_">name of the business object</param>
+        protected void SetBoTyp(string _)
         {
             //Debug.Assert(boTyp == s);
         }

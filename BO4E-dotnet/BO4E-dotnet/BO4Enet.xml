@@ -426,6 +426,26 @@
             User properties (non bo4e standard)
             </summary>
         </member>
+        <member name="M:BO4E.BO.BusinessObject.TryGetUserProperty``1(System.String,``0@)">
+            <summary>
+            try to get the Userproperty with key <paramref name="userPropertyKey"/> from <see cref="P:BO4E.BO.BusinessObject.UserProperties"/> if <see cref="P:BO4E.BO.BusinessObject.UserProperties"/> is not null and the key is present.
+            </summary>
+            <typeparam name="TUserProperty">type expected to be found in the User Property with key <paramref name="userPropertyKey"/></typeparam>
+            <param name="userPropertyKey">key under which the <paramref name="value"/> is expected in <see cref="P:BO4E.BO.BusinessObject.UserProperties"/></param>
+            <param name="value">default if false is returned, the stored value otherwise</param>
+            <returns>true if found</returns>
+            <exception cref="T:System.ArgumentNullException">iff <paramref name="userPropertyKey"/> is null or whitespace</exception>
+        </member>
+        <member name="M:BO4E.BO.BusinessObject.GetUserProperty``1(System.String,``0)">
+            <summary>
+            same as <see cref="M:BO4E.BO.BusinessObject.TryGetUserProperty``1(System.String,``0@)"/> but returns a default <paramref name="defaultValue"/> if <paramref name="userPropertyKey"/> was not found or the user properties are null
+            </summary>
+            <typeparam name="TUserProperty">type expected to be found in the User Property with key <paramref name="userPropertyKey"/></typeparam>
+            <param name="userPropertyKey">key of the <see cref="P:BO4E.BO.BusinessObject.UserProperties"/> dictionary</param>
+            <param name="defaultValue">default value returned if <see cref="P:BO4E.BO.BusinessObject.UserProperties"/>are null or the key was not found</param>
+            <returns>the value stored in the userproperty or the default <paramref name="defaultValue"/></returns>
+            /// <exception cref="T:System.ArgumentNullException">iff <paramref name="userPropertyKey"/> is null or whitespace</exception>
+        </member>
         <member name="M:BO4E.BO.BusinessObject.#ctor">
             <summary>
             generates the BO4E boTyp attribute value (class name as upper case)
@@ -441,7 +461,7 @@
             <summary>
             This method is just to make sure the mapping actually makes sense.
             </summary>
-            <param name="s">name of the business object</param>
+            <param name="_">name of the business object</param>
         </member>
         <member name="P:BO4E.BO.BusinessObject.VersionStruktur">
             <summary>
