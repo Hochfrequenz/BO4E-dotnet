@@ -446,6 +446,14 @@
             <returns>the value stored in the userproperty or the default <paramref name="defaultValue"/></returns>
             /// <exception cref="T:System.ArgumentNullException">iff <paramref name="userPropertyKey"/> is null or whitespace</exception>
         </member>
+        <member name="M:BO4E.BO.BusinessObject.UserPropertyEquals``1(System.String,``0)">
+            <summary>
+            test if the <see cref="P:BO4E.BO.BusinessObject.UserProperties"/> value under key <paramref name="userPropertyKey"/> equals <paramref name="other"/>.
+            </summary>
+            <param name="userPropertyKey">key under which the value is expected</param>
+            <param name="other">comparison value</param>
+            <returns>true iff <see cref="P:BO4E.BO.BusinessObject.UserProperties"/>!=null and the value stored under key <paramref name="userPropertyKey"/> == <paramref name="other"/></returns>
+        </member>
         <member name="M:BO4E.BO.BusinessObject.#ctor">
             <summary>
             generates the BO4E boTyp attribute value (class name as upper case)

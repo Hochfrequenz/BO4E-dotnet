@@ -107,7 +107,7 @@ namespace BO4E.BO
         /// <param name="value">default if false is returned, the stored value otherwise</param>
         /// <returns>true if found</returns>
         /// <exception cref="ArgumentNullException">iff <paramref name="userPropertyKey"/> is null or whitespace</exception>
-        public bool TryGetUserProperty<TUserProperty>(string userPropertyKey, out TUserProperty value) where TUserProperty : class
+        public bool TryGetUserProperty<TUserProperty>(string userPropertyKey, out TUserProperty value)
         {
             if (string.IsNullOrWhiteSpace(userPropertyKey)) throw new ArgumentNullException(nameof(userPropertyKey));
             if (this.UserProperties != null && this.UserProperties.TryGetValue(userPropertyKey, out var upToken))
@@ -127,13 +127,35 @@ namespace BO4E.BO
         /// <param name="defaultValue">default value returned if <see cref="UserProperties"/>are null or the key was not found</param>
         /// <returns>the value stored in the userproperty or the default <paramref name="defaultValue"/></returns>
         /// /// <exception cref="ArgumentNullException">iff <paramref name="userPropertyKey"/> is null or whitespace</exception>
-        public TUserProperty GetUserProperty<TUserProperty>(string userPropertyKey, TUserProperty defaultValue) where TUserProperty : class
+        public TUserProperty GetUserProperty<TUserProperty>(string userPropertyKey, TUserProperty defaultValue)
         {
             if (this.TryGetUserProperty(userPropertyKey, out TUserProperty actualValue))
             {
                 return actualValue;
             }
             return defaultValue;
+        }
+
+        /// <summary>
+        /// test if the <see cref="UserProperties"/> value under key <paramref name="userPropertyKey"/> equals <paramref name="other"/>.
+        /// </summary>
+        /// <param name="userPropertyKey">key under which the value is expected</param>
+        /// <param name="other">comparison value</param>
+        /// <returns>true iff <see cref="UserProperties"/>!=null and the value stored under key <paramref name="userPropertyKey"/> == <paramref name="other"/></returns>
+        public bool UserPropertyEquals<TUserProperty>(string userPropertyKey, TUserProperty other)
+        {
+            try
+            {
+                if (!TryGetUserProperty(userPropertyKey, out TUserProperty value))
+                {
+                    return false;
+                }
+                return value.Equals(other);
+            }
+            catch (FormatException)
+            {
+                return false;
+            }
         }
 
         /// <summary>

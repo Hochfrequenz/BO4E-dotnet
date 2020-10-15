@@ -27,8 +27,13 @@ namespace TestBO4E
             var melo = JsonConvert.DeserializeObject<Messlokation>(meloJson);
             Assert.IsTrue(melo.TryGetUserProperty("myCustomInfo", out string myCustomValue));
             Assert.AreEqual("some_value_not_covered_by_bo4e", myCustomValue);
+            Assert.IsTrue(melo.UserPropertyEquals("myCustomValue", 123.456M));
+            Assert.IsFalse(melo.UserPropertyEquals("myCustomValue", "foo"));
+
             Assert.IsFalse(melo.TryGetUserProperty("something else", out string _));
             Assert.AreEqual("default value", melo.GetUserProperty("something else", "default value"));
+            Assert.IsFalse(melo.UserPropertyEquals("myCustomInfo", 888.999M)); // the cast exception is catched inside.
+            Assert.IsFalse(melo.UserPropertyEquals("myCustomValue", "asd")); // the cast exception is catched inside.
         }
     }
 }
