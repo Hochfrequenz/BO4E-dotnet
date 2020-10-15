@@ -99,93 +99,21 @@ namespace BO4E.BO
         [DataCategory(DataCategory.USER_PROPERTIES)]
         public IDictionary<string, JToken> UserProperties { get; set; }
 
-        /// <summary>
-        /// try to get the Userproperty with key <paramref name="userPropertyKey"/> from <see cref="UserProperties"/> if <see cref="UserProperties"/> is not null and the key is present.
-        /// </summary>
-        /// <typeparam name="TUserProperty">type expected to be found in the User Property with key <paramref name="userPropertyKey"/></typeparam>
-        /// <param name="userPropertyKey">key under which the <paramref name="value"/> is expected in <see cref="UserProperties"/></param>
-        /// <param name="value">default if false is returned, the stored value otherwise</param>
-        /// <returns>true if found</returns>
-        /// <exception cref="ArgumentNullException">iff <paramref name="userPropertyKey"/> is null or whitespace</exception>
+        /// <inheritdoc cref="BO4E.UserPropertiesExtensions.TryGetUserProperty{TUserProperty}(IDictionary{string, JToken}, string, out TUserProperty)"/>
         public bool TryGetUserProperty<TUserProperty>(string userPropertyKey, out TUserProperty value)
-        {
-            if (string.IsNullOrWhiteSpace(userPropertyKey)) throw new ArgumentNullException(nameof(userPropertyKey));
-            if (this.UserProperties != null && this.UserProperties.TryGetValue(userPropertyKey, out var upToken))
-            {
-                value = upToken.Value<TUserProperty>();
-                return true;
-            }
-            value = default;
-            return false;
-        }
+           => this.UserProperties.TryGetUserProperty(userPropertyKey, out value);
 
-        /// <summary>
-        /// same as <see cref="TryGetUserProperty{TUserProperty}(string, out TUserProperty)"/> but returns a default <paramref name="defaultValue"/> if <paramref name="userPropertyKey"/> was not found or the user properties are null
-        /// </summary>
-        /// <typeparam name="TUserProperty">type expected to be found in the User Property with key <paramref name="userPropertyKey"/></typeparam>
-        /// <param name="userPropertyKey">key of the <see cref="UserProperties"/> dictionary</param>
-        /// <param name="defaultValue">default value returned if <see cref="UserProperties"/>are null or the key was not found</param>
-        /// <returns>the value stored in the userproperty or the default <paramref name="defaultValue"/></returns>
-        /// /// <exception cref="ArgumentNullException">iff <paramref name="userPropertyKey"/> is null or whitespace</exception>
+        /// <inheritdoc cref="BO4E.UserPropertiesExtensions.GetUserProperty{TUserProperty}(IDictionary{string, JToken}, string, TUserProperty)"/>
         public TUserProperty GetUserProperty<TUserProperty>(string userPropertyKey, TUserProperty defaultValue)
-        {
-            if (this.TryGetUserProperty(userPropertyKey, out TUserProperty actualValue))
-            {
-                return actualValue;
-            }
-            return defaultValue;
-        }
+            => this.UserProperties.GetUserProperty(userPropertyKey, defaultValue);
 
-        /// <summary>
-        /// test if the <see cref="UserProperties"/> value under key <paramref name="userPropertyKey"/> equals <paramref name="other"/>.
-        /// </summary>
-        /// <param name="userPropertyKey">key under which the value is expected</param>
-        /// <param name="other">comparison value</param>
-        /// <param name="ignoreWrongType">set true to automatically catch <see cref="FormatException"/> if the cast to <typeparamref name="TUserProperty"/> fails</param>
-        /// <returns>true iff <see cref="UserProperties"/>!=null and the value stored under key <paramref name="userPropertyKey"/> == <paramref name="other"/></returns>
+        /// <inheritdoc cref="BO4E.UserPropertiesExtensions.UserPropertyEquals{TUserProperty}(IDictionary{string, JToken}, string, TUserProperty, bool)"/>
         public bool UserPropertyEquals<TUserProperty>(string userPropertyKey, TUserProperty other, bool ignoreWrongType = true)
-        {
-            try
-            {
-                if (!TryGetUserProperty(userPropertyKey, out TUserProperty value))
-                {
-                    return false;
-                }
-                if (value == null && other != null)
-                {
-                    return false;
-                }
-                else if (value == null)
-                {
-                    return other == null;
-                }
-                else
-                {
-                    return value.Equals(other);
-                }
-            }
-            catch (FormatException) when (ignoreWrongType)
-            {
-                return false;
-            }
-        }
+            => this.UserProperties.UserPropertyEquals(userPropertyKey, other, ignoreWrongType);
 
-        /// <summary>
-        /// Apply <paramref name="evaluation"/> to the userproperty under <paramref name="userPropertyKey"/> if it exists
-        /// </summary>
-        /// <typeparam name="TUserProperty">type of the userproperty value</typeparam>
-        /// <typeparam name="TEvaluationResult">type of the expected result</typeparam>
-        /// <param name="userPropertyKey">key of the userproperty</param>
-        /// <param name="evaluation">function to generate result from key value if present</param>
-        /// <returns>result of <paramref name="evaluation"/> if the key exists, default otherwise</returns>
+        /// <inheritdoc cref="BO4E.UserPropertiesExtensions.EvaluateUserProperty{TUserProperty, TEvaluationResult}(IDictionary{string, JToken}, string, Func{TUserProperty, TEvaluationResult})"/>
         public TEvaluationResult EvaluateUserProperty<TUserProperty, TEvaluationResult>(string userPropertyKey, Func<TUserProperty, TEvaluationResult> evaluation)
-        {
-            if (TryGetUserProperty<TUserProperty>(userPropertyKey, out var value))
-            {
-                return evaluation(value);
-            }
-            return default;
-        }
+            => this.UserProperties.EvaluateUserProperty<TUserProperty, TEvaluationResult>(userPropertyKey, evaluation);
 
         /// <summary>
         /// generates the BO4E boTyp attribute value (class name as upper case)

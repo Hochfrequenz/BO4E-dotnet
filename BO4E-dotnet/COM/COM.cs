@@ -83,6 +83,22 @@ namespace BO4E.COM
         [DataCategory(DataCategory.USER_PROPERTIES)]
         public IDictionary<string, JToken> UserProperties { get; set; }
 
+        /// <inheritdoc cref="BO4E.UserPropertiesExtensions.TryGetUserProperty{TUserProperty}(IDictionary{string, JToken}, string, out TUserProperty)"/>
+        public bool TryGetUserProperty<TUserProperty>(string userPropertyKey, out TUserProperty value)
+           => this.UserProperties.TryGetUserProperty(userPropertyKey, out value);
+
+        /// <inheritdoc cref="BO4E.UserPropertiesExtensions.GetUserProperty{TUserProperty}(IDictionary{string, JToken}, string, TUserProperty)"/>
+        public TUserProperty GetUserProperty<TUserProperty>(string userPropertyKey, TUserProperty defaultValue)
+            => this.UserProperties.GetUserProperty(userPropertyKey, defaultValue);
+
+        /// <inheritdoc cref="BO4E.UserPropertiesExtensions.UserPropertyEquals{TUserProperty}(IDictionary{string, JToken}, string, TUserProperty, bool)"/>
+        public bool UserPropertyEquals<TUserProperty>(string userPropertyKey, TUserProperty other, bool ignoreWrongType = true)
+            => this.UserProperties.UserPropertyEquals(userPropertyKey, other, ignoreWrongType);
+
+        /// <inheritdoc cref="BO4E.UserPropertiesExtensions.EvaluateUserProperty{TUserProperty, TEvaluationResult}(IDictionary{string, JToken}, string, Func{TUserProperty, TEvaluationResult})"/>
+        public TEvaluationResult EvaluateUserProperty<TUserProperty, TEvaluationResult>(string userPropertyKey, Func<TUserProperty, TEvaluationResult> evaluation)
+            => this.UserProperties.EvaluateUserProperty<TUserProperty, TEvaluationResult>(userPropertyKey, evaluation);
+
         /// <summary>
         /// BO4E components are considered equal iff all of their elements/fields are equal.
         /// </summary>

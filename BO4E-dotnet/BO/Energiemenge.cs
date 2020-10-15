@@ -1,10 +1,3 @@
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Runtime.Serialization;
-
 using BO4E.COM;
 using BO4E.ENUM;
 using BO4E.meta;
@@ -13,6 +6,13 @@ using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 
 using ProtoBuf;
+
+using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
+using System.Linq;
+using System.Runtime.Serialization;
 
 namespace BO4E.BO
 {
