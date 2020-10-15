@@ -350,6 +350,15 @@
             "null"
           ]
         },
+        "externeReferenzen": {
+          "type": [
+            "array",
+            "null"
+          ],
+          "items": {
+            "$ref": "#/definitions/ExterneReferenz"
+          }
+        },
         "boTyp": {
           "type": [
             "string",
@@ -451,6 +460,37 @@
       },
       "required": [
         "nachname"
+      ]
+    },
+    "ExterneReferenz": {
+      "type": [
+        "object",
+        "null"
+      ],
+      "properties": {
+        "exRefName": {
+          "type": "string"
+        },
+        "exRefWert": {
+          "type": "string"
+        },
+        "guid": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "timestamp": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "format": "date-time"
+        }
+      },
+      "required": [
+        "exRefName",
+        "exRefWert"
       ]
     },
     "Geraeteeigenschaften": {
@@ -726,6 +766,15 @@
             "null"
           ]
         },
+        "externeReferenzen": {
+          "type": [
+            "array",
+            "null"
+          ],
+          "items": {
+            "$ref": "#/definitions/ExterneReferenz"
+          }
+        },
         "boTyp": {
           "type": [
             "string",
@@ -872,6 +921,15 @@
             "string",
             "null"
           ]
+        },
+        "externeReferenzen": {
+          "type": [
+            "array",
+            "null"
+          ],
+          "items": {
+            "$ref": "#/definitions/ExterneReferenz"
+          }
         },
         "boTyp": {
           "type": [
@@ -1552,6 +1610,15 @@
         "string",
         "null"
       ]
+    },
+    "externeReferenzen": {
+      "type": [
+        "array",
+        "null"
+      ],
+      "items": {
+        "$ref": "#/definitions/ExterneReferenz"
+      }
     },
     "boTyp": {
       "type": [

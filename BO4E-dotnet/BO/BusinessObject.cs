@@ -1,3 +1,4 @@
+using BO4E.COM;
 using BO4E.meta;
 
 using Newtonsoft.Json;
@@ -175,6 +176,37 @@ namespace BO4E.BO
         public DateTimeOffset? Timestamp { get; set; }
 
 #pragma warning restore CS1591 // Missing XML comment for publicly visible type or member
+
+        /// <summary>
+        /// Hier können IDs anderer Systeme hinterlegt werden (z.B. eine SAP-GP-Nummer) (Details siehe <see cref="ExterneReferenz"/>)
+        /// </summary>
+        [JsonProperty(PropertyName = "externeReferenzen", Required = Required.Default)]
+        [ProtoMember(4)]
+        public List<ExterneReferenz> ExterneReferenzen { get; set; }
+
+        /// <summary>
+        /// try to get a value from <see cref="ExterneReferenzen"/>
+        /// </summary>
+        /// <param name="extRefName">name of the externe referenz</param>
+        /// <param name="extRefWert">non-null if the externe referenz was found</param>
+        /// <returns>true if externe referenz with name <paramref name="extRefName"/> was found</returns>
+        public bool TryGetExterneReferenz(string extRefName, out string extRefWert)
+        {
+            if (extRefName == null) throw new ArgumentNullException(nameof(extRefName));
+            if (ExterneReferenzen == null)
+            {
+                extRefWert = null;
+                return false;
+            }
+            var externeReferenz = ExterneReferenzen.SingleOrDefault(er => er.ExRefName == extRefName);
+            if (externeReferenz == null)
+            {
+                extRefWert = null;
+                return false;
+            }
+            extRefWert = externeReferenz.ExRefWert;
+            return true;
+        }
 
         /// <summary>
         /// returns a JSON scheme for the Business Object

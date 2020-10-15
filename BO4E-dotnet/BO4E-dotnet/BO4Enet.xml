@@ -473,6 +473,19 @@
             protobuf serilization requires the <see cref="P:BO4E.BO.BusinessObject.Guid"/> as string.
             </summary>
         </member>
+        <member name="P:BO4E.BO.BusinessObject.ExterneReferenzen">
+            <summary>
+            Hier können IDs anderer Systeme hinterlegt werden (z.B. eine SAP-GP-Nummer) (Details siehe <see cref="T:BO4E.COM.ExterneReferenz"/>)
+            </summary>
+        </member>
+        <member name="M:BO4E.BO.BusinessObject.TryGetExterneReferenz(System.String,System.String@)">
+            <summary>
+            try to get a value from <see cref="P:BO4E.BO.BusinessObject.ExterneReferenzen"/>
+            </summary>
+            <param name="extRefName"></param>
+            <param name="extRefWert"></param>
+            <returns></returns>
+        </member>
         <member name="M:BO4E.BO.BusinessObject.GetJsonScheme">
             <summary>
             returns a JSON scheme for the Business Object
@@ -1855,6 +1868,23 @@
         </member>
         <member name="P:BO4E.COM.Energiemix.Anteil">
             <summary>Anteile der jeweiligen Erzeugungsart. Details <see cref="T:BO4E.COM.Energieherkunft" /></summary>
+        </member>
+        <member name="T:BO4E.COM.ExterneReferenz">
+            <summary>
+            Viele Datenobjekte weisen in unterschiedlichen Systemen eine eindeutige ID (Kundennummer, GP-Nummer etc.) auf.
+            Beim Austausch von Datenobjekten zwischen verschiedenen Systemen ist es daher hilfreich, sich die eindeutigen IDs der anzubindenden Systeme zu merken.
+            Diese Komponente ermöglicht es, sich die SAP GP-Nummer zu merken, um diese bei SAP-Aufrufen als Parameter mitgeben zu können.
+            </summary>
+        </member>
+        <member name="P:BO4E.COM.ExterneReferenz.ExRefName">
+            <summary>
+            Bezeichnung der externen Referenz (z.B. "hochfrequenz integration services")
+            </summary>
+        </member>
+        <member name="P:BO4E.COM.ExterneReferenz.ExRefWert">
+            <summary>
+            Wert der externen Referenz (z.B. "123456"; "4711")
+            </summary>
         </member>
         <member name="T:BO4E.COM.GenericStringStringInfo">
             <summary>
@@ -8424,7 +8454,7 @@
             <param name="up">user properties dict</param>
             <param name="defaultValue">default value returned if <paramref name="up"/> are null or the key was not found</param>
             <returns>the value stored in the userproperty or the default <paramref name="defaultValue"/></returns>
-            /// <exception cref="T:System.ArgumentNullException">iff <paramref name="userPropertyKey"/> is null or whitespace</exception>
+            <exception cref="T:System.ArgumentNullException">iff <paramref name="userPropertyKey"/> is null or whitespace</exception>
         </member>
         <member name="M:BO4E.UserPropertiesExtensions.UserPropertyEquals``1(System.Collections.Generic.IDictionary{System.String,Newtonsoft.Json.Linq.JToken},System.String,``0,System.Boolean)">
             <summary>
@@ -8435,6 +8465,7 @@
             <param name="other">comparison value</param>
             <param name="ignoreWrongType">set true to automatically catch <see cref="T:System.FormatException"/> if the cast to <typeparamref name="TUserProperty"/> fails</param>
             <returns>true iff <paramref name="up"/>!=null and the value stored under key <paramref name="userPropertyKey"/> == <paramref name="other"/></returns>
+            <exception cref="T:System.ArgumentNullException">iff <paramref name="userPropertyKey"/> is null or whitespace</exception>
         </member>
         <member name="M:BO4E.UserPropertiesExtensions.EvaluateUserProperty``2(System.Collections.Generic.IDictionary{System.String,Newtonsoft.Json.Linq.JToken},System.String,System.Func{``0,``1})">
             <summary>
@@ -8446,6 +8477,7 @@
             <param name="userPropertyKey">key of the userproperty</param>
             <param name="evaluation">function to generate result from key value if present</param>
             <returns>result of <paramref name="evaluation"/> if the key exists, default otherwise</returns>
+            <exception cref="T:System.ArgumentNullException">iff <paramref name="userPropertyKey"/> is null or whitespace</exception>
         </member>
     </members>
 </doc>
