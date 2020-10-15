@@ -141,8 +141,9 @@ namespace BO4E.BO
         /// </summary>
         /// <param name="userPropertyKey">key under which the value is expected</param>
         /// <param name="other">comparison value</param>
+        /// <param name="ignoreWrongType">set true to automatically catch <see cref="FormatException"/> if the cast to <typeparamref name="TUserProperty"/> fails</param>
         /// <returns>true iff <see cref="UserProperties"/>!=null and the value stored under key <paramref name="userPropertyKey"/> == <paramref name="other"/></returns>
-        public bool UserPropertyEquals<TUserProperty>(string userPropertyKey, TUserProperty other)
+        public bool UserPropertyEquals<TUserProperty>(string userPropertyKey, TUserProperty other, bool ignoreWrongType = true)
         {
             try
             {
@@ -150,12 +151,40 @@ namespace BO4E.BO
                 {
                     return false;
                 }
-                return value.Equals(other);
+                if (value == null && other != null)
+                {
+                    return false;
+                }
+                else if (value == null)
+                {
+                    return other == null;
+                }
+                else
+                {
+                    return value.Equals(other);
+                }
             }
-            catch (FormatException)
+            catch (FormatException) when (ignoreWrongType)
             {
                 return false;
             }
+        }
+
+        /// <summary>
+        /// Apply <paramref name="evaluation"/> to the userproperty under <paramref name="userPropertyKey"/> if it exists
+        /// </summary>
+        /// <typeparam name="TUserProperty">type of the userproperty value</typeparam>
+        /// <typeparam name="TEvaluationResult">type of the expected result</typeparam>
+        /// <param name="userPropertyKey">key of the userproperty</param>
+        /// <param name="evaluation">function to generate result from key value if present</param>
+        /// <returns>result of <paramref name="evaluation"/> if the key exists, default otherwise</returns>
+        public TEvaluationResult EvaluateUserProperty<TUserProperty, TEvaluationResult>(string userPropertyKey, Func<TUserProperty, TEvaluationResult> evaluation)
+        {
+            if (TryGetUserProperty<TUserProperty>(userPropertyKey, out var value))
+            {
+                return evaluation(value);
+            }
+            return default;
         }
 
         /// <summary>
