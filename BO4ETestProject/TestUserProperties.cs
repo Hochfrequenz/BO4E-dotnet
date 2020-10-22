@@ -34,6 +34,7 @@ namespace TestBO4E
             Assert.AreEqual("default value", melo.GetUserProperty("something else", "default value"));
             Assert.IsFalse(melo.UserPropertyEquals("myCustomInfo", 888.999M)); // the cast exception is catched inside.
             Assert.IsFalse(melo.UserPropertyEquals("myCustomValue", "asd")); // the cast exception is catched inside.
+            Assert.IsFalse(melo.UserPropertyEquals("some_key_that_was_not_found", "asd"));
             Assert.IsTrue(melo.EvaluateUserProperty<string, bool>("myCustomInfo", up => !string.IsNullOrEmpty(up)));
         }
     }

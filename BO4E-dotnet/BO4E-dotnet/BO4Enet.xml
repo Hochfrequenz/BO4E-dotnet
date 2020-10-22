@@ -482,9 +482,9 @@
             <summary>
             try to get a value from <see cref="P:BO4E.BO.BusinessObject.ExterneReferenzen"/>
             </summary>
-            <param name="extRefName"></param>
-            <param name="extRefWert"></param>
-            <returns></returns>
+            <param name="extRefName">name of the externe referenz</param>
+            <param name="extRefWert">non-null if the externe referenz was found</param>
+            <returns>true if externe referenz with name <paramref name="extRefName"/> was found</returns>
         </member>
         <member name="M:BO4E.BO.BusinessObject.GetJsonScheme">
             <summary>
