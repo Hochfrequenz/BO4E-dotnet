@@ -42,7 +42,7 @@ namespace BO4E
         /// <exception cref="ArgumentNullException">iff <paramref name="userPropertyKey"/> is null or whitespace</exception>
         public static TUserProperty GetUserProperty<TUserProperty>(this IDictionary<string, JToken> up, string userPropertyKey, TUserProperty defaultValue)
         {
-            if (up.TryGetUserProperty(userPropertyKey, out TUserProperty actualValue))
+            if (up != null && up.TryGetUserProperty(userPropertyKey, out TUserProperty actualValue))
             {
                 return actualValue;
             }
@@ -60,6 +60,10 @@ namespace BO4E
         /// <exception cref="ArgumentNullException">iff <paramref name="userPropertyKey"/> is null or whitespace</exception>
         public static bool UserPropertyEquals<TUserProperty>(this IDictionary<string, JToken> up, string userPropertyKey, TUserProperty other, bool ignoreWrongType = true)
         {
+            if (up == null)
+            {
+                return false;
+            }
             try
             {
                 return up.EvaluateUserProperty<TUserProperty, bool>(userPropertyKey, (value) =>
@@ -97,6 +101,7 @@ namespace BO4E
         /// <exception cref="ArgumentNullException">iff <paramref name="userPropertyKey"/> is null or whitespace</exception>
         public static TEvaluationResult EvaluateUserProperty<TUserProperty, TEvaluationResult>(this IDictionary<string, JToken> up, string userPropertyKey, Func<TUserProperty, TEvaluationResult> evaluation)
         {
+            if (up == null) throw new ArgumentNullException(nameof(up));
             if (up.TryGetUserProperty<TUserProperty>(userPropertyKey, out var value))
             {
                 return evaluation(value);

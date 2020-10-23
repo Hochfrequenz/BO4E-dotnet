@@ -4,6 +4,8 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 using Newtonsoft.Json;
 
+using System;
+
 namespace TestBO4E
 {
     [TestClass]
@@ -36,6 +38,11 @@ namespace TestBO4E
             Assert.IsFalse(melo.UserPropertyEquals("myCustomValue", "asd")); // the cast exception is catched inside.
             Assert.IsFalse(melo.UserPropertyEquals("some_key_that_was_not_found", "asd"));
             Assert.IsTrue(melo.EvaluateUserProperty<string, bool>("myCustomInfo", up => !string.IsNullOrEmpty(up)));
+
+            melo.UserProperties = null;
+            Assert.IsFalse(melo.UserPropertyEquals("there are no user properties", "asd"));
+            Assert.IsFalse(melo.TryGetUserProperty("there are no user properties", out string _));
+            Assert.ThrowsException<ArgumentNullException>(() => melo.EvaluateUserProperty<string, bool>("there are no user properties", _ => default));
         }
     }
 }
