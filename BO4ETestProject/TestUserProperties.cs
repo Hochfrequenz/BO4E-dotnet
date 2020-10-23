@@ -25,7 +25,7 @@ namespace TestBO4E
         [TestMethod]
         public void TestTryGetUserProperties()
         {
-            string meloJson = @"{'messlokationsId': 'DE0123456789012345678901234567890', 'sparte': 'STROM', 'myCustomInfo': 'some_value_not_covered_by_bo4e', 'myCustomValue': 123.456}";
+            string meloJson = @"{'messlokationsId': 'DE0123456789012345678901234567890', 'sparte': 'STROM', 'myCustomInfo': 'some_value_not_covered_by_bo4e', 'myCustomValue': 123.456, 'myNullProp': null}";
             var melo = JsonConvert.DeserializeObject<Messlokation>(meloJson);
             Assert.IsTrue(melo.TryGetUserProperty("myCustomInfo", out string myCustomValue));
             Assert.AreEqual("some_value_not_covered_by_bo4e", myCustomValue);
@@ -43,6 +43,7 @@ namespace TestBO4E
             Assert.IsFalse(melo.UserPropertyEquals("there are no user properties", "asd"));
             Assert.IsFalse(melo.TryGetUserProperty("there are no user properties", out string _));
             Assert.ThrowsException<ArgumentNullException>(() => melo.EvaluateUserProperty<string, bool>("there are no user properties", _ => default));
+            Assert.IsFalse(melo.UserPropertyEquals("myNullProp", true));
         }
     }
 }
