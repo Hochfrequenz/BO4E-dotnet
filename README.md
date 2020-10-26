@@ -3,6 +3,8 @@ BO4E-dotnet is a C# implementation of **B**usiness **O**bjects for **E**nergy ([
 
 The source code in this repository is Open Source and available under a MIT license; see [the license file](LICENSE).
 
+See also our (still very alpha) [Python Implementation of BO4E](https://github.com/Hochfrequenz/BO4E-python) ([pypi](https://pypi.org/project/bo4e/)).
+
 ## Nuget Packages and Usage of BO4E-dotnet
 The content of this repository is used to build the following nuget packages:
 - [Hochfrequenz.BO4Enet](https://www.nuget.org/packages/Hochfrequenz.BO4Enet) contains definitions of the business objects (namespace `BO4E.BO`), compontents (namespace `BO4E.COM`) and enumerations (namespace `BO4E.ENUM`).
@@ -125,4 +127,4 @@ In the folder [BO4E-dotnet/protobuf-files](BO4E-dotnet/protobuf-files) you can f
 Contributions are welcome. Feel free to open a Pull Request against the develop branch of this repository. Please provide unit tests if you contribute logic beyond bare bare business object definitions. We do track our modification proposals to the official BO4E standard in a separate repository: [BO4E-modification-proposals](https://github.com/Hochfrequenz/bo4e-modification-proposals).
 
 ## Hochfrequenz
-[Hochfrequenz Unternehmensberatung GmbH](https://www.hochfrequenz.de) is a Grünwald (near Munich) based consulting company with offices in Berlin and Bremen. According to [Kununu ratings](https://www.kununu.com/de/hochfrequenz-unternehmensberatung1) Hochfrequenz is among the most attractive employers within the German energy market. Applications of talented developers are welcome at any time! Please consider visiting our [career page](https://www.hochfrequenz.de/index.php/karriere/aktuelle-stellenausschreibungen/full-stack-entwickler) (German only) and our [Stack Overflow profile](https://stackoverflow.com/jobs/companies/hochfrequenz-unternehmensberatung-gmbh) that also contains job openings.
+[Hochfrequenz Unternehmensberatung GmbH](https://www.hochfrequenz.de) is a Grünwald (near Munich) based consulting company with offices in Berlin and Bremen. We're not only the main contributor to open source BO4E software but, according to [Kununu ratings](https://www.kununu.com/de/hochfrequenz-unternehmensberatung1), also among the most attractive employers within the German energy market. Applications of talented developers are welcome at any time! Please consider visiting our [career page](https://www.hochfrequenz.de/index.php/karriere/aktuelle-stellenausschreibungen/full-stack-entwickler) (German only) and our [Stack Overflow profile](https://stackoverflow.com/jobs/companies/hochfrequenz-unternehmensberatung-gmbh) that also contains job openings.
