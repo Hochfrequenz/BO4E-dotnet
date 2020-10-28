@@ -185,28 +185,16 @@ namespace BO4E.BO
         public List<ExterneReferenz> ExterneReferenzen { get; set; }
 
         /// <summary>
-        /// try to get a value from <see cref="ExterneReferenzen"/>
+        /// <inheritdoc cref="ExterneReferenzExtensions.TryGetExterneReferenz(ICollection{ExterneReferenz}, string, out string)"/>
         /// </summary>
-        /// <param name="extRefName">name of the externe referenz</param>
-        /// <param name="extRefWert">non-null if the externe referenz was found</param>
-        /// <returns>true if externe referenz with name <paramref name="extRefName"/> was found</returns>
         public bool TryGetExterneReferenz(string extRefName, out string extRefWert)
-        {
-            if (extRefName == null) throw new ArgumentNullException(nameof(extRefName));
-            if (ExterneReferenzen == null)
-            {
-                extRefWert = null;
-                return false;
-            }
-            var externeReferenz = ExterneReferenzen.SingleOrDefault(er => er.ExRefName == extRefName);
-            if (externeReferenz == null)
-            {
-                extRefWert = null;
-                return false;
-            }
-            extRefWert = externeReferenz.ExRefWert;
-            return true;
-        }
+            => this.ExterneReferenzen.TryGetExterneReferenz(extRefName, out extRefWert);
+
+        /// <summary>
+        /// <inheritdoc cref="ExterneReferenzExtensions.SetExterneReferenz"/>
+        /// </summary>
+        public void SetExterneReferenz(ExterneReferenz extRef, bool overwriteExisting = false)
+            => this.ExterneReferenzen = this.ExterneReferenzen.SetExterneReferenz(extRef, overwriteExisting);
 
         /// <summary>
         /// returns a JSON scheme for the Business Object
