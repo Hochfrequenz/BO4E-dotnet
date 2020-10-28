@@ -1,12 +1,11 @@
 ﻿using BO4E.BO;
 using BO4E.COM;
-using BO4E.Extensions.BusinessObjects;
 
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 using System.Collections.Generic;
 
-namespace TestBO4EExtensions
+namespace TestBO4E
 {
     [TestClass]
     public class TestExterneReferenzen

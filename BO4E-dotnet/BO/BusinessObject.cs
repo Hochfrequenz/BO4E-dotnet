@@ -185,6 +185,18 @@ namespace BO4E.BO
         public List<ExterneReferenz> ExterneReferenzen { get; set; }
 
         /// <summary>
+        /// <inheritdoc cref="ExterneReferenzExtensions.TryGetExterneReferenz(ICollection{ExterneReferenz}, string, out string)"/>
+        /// </summary>
+        public bool TryGetExterneReferenz(string extRefName, out string extRefWert)
+            => this.ExterneReferenzen.TryGetExterneReferenz(extRefName, out extRefWert);
+
+        /// <summary>
+        /// <inheritdoc cref="ExterneReferenzExtensions.SetExterneReferenz"/>
+        /// </summary>
+        public void SetExterneReferenz(ExterneReferenz extRef, bool overwriteExisting = false)
+            => this.ExterneReferenzen = this.ExterneReferenzen.SetExterneReferenz(extRef, overwriteExisting);
+
+        /// <summary>
         /// returns a JSON scheme for the Business Object
         /// </summary>
         /// <returns>a JSON scheme</returns>
