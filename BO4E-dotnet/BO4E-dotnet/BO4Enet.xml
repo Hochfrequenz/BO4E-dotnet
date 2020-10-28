@@ -478,16 +478,6 @@
             Hier können IDs anderer Systeme hinterlegt werden (z.B. eine SAP-GP-Nummer) (Details siehe <see cref="T:BO4E.COM.ExterneReferenz"/>)
             </summary>
         </member>
-        <member name="M:BO4E.BO.BusinessObject.TryGetExterneReferenz(System.String,System.String@)">
-            <summary>
-            <inheritdoc cref="M:BO4E.COM.ExterneReferenzExtensions.TryGetExterneReferenz(System.Collections.Generic.ICollection{BO4E.COM.ExterneReferenz},System.String,System.String@)"/>
-            </summary>
-        </member>
-        <member name="M:BO4E.BO.BusinessObject.SetExterneReferenz(BO4E.COM.ExterneReferenz,System.Boolean)">
-            <summary>
-            <inheritdoc cref="M:BO4E.COM.ExterneReferenzExtensions.SetExterneReferenz(System.Collections.Generic.List{BO4E.COM.ExterneReferenz},BO4E.COM.ExterneReferenz,System.Boolean)"/>
-            </summary>
-        </member>
         <member name="M:BO4E.BO.BusinessObject.GetJsonScheme">
             <summary>
             returns a JSON scheme for the Business Object
@@ -1887,29 +1877,6 @@
             <summary>
             Wert der externen Referenz (z.B. "123456"; "4711")
             </summary>
-        </member>
-        <member name="T:BO4E.COM.ExterneReferenzExtensions">
-            <summary>
-            easy access methods for <see cref="T:System.Collections.Generic.List`1"/> to allow easier setting and getting.
-            </summary>
-        </member>
-        <member name="M:BO4E.COM.ExterneReferenzExtensions.TryGetExterneReferenz(System.Collections.Generic.ICollection{BO4E.COM.ExterneReferenz},System.String,System.String@)">
-            <summary>
-            try to get a value from <see cref="P:BO4E.BO.BusinessObject.ExterneReferenzen"/>
-            </summary>
-            <param name="extRefName">name of the externe referenz</param>
-            <param name="extRefWert">non-null if the externe referenz was found</param>
-            <param name="extReferences">list of external references</param>
-            <returns>true if externe referenz with name <paramref name="extRefName"/> was found</returns>
-        </member>
-        <member name="M:BO4E.COM.ExterneReferenzExtensions.SetExterneReferenz(System.Collections.Generic.List{BO4E.COM.ExterneReferenz},BO4E.COM.ExterneReferenz,System.Boolean)">
-            <summary>
-            Adds a new value to <paramref name="extReferences"/> and created the list if it's null.
-            </summary>
-            <param name="extReferences">list of external references</param>
-            <param name="extRef">new externe Referenz</param>
-            <param name="overwriteExisting">set true to overwrite existing values</param>
-            <exception cref="T:System.InvalidOperationException">if there is a conflicting value and <paramref name="overwriteExisting"/> is false</exception>
         </member>
         <member name="T:BO4E.COM.GenericStringStringInfo">
             <summary>
