@@ -36,7 +36,7 @@ namespace BO4E.COM
     /// <summary>
     /// easy access methods for <see cref="List{ExterneReferenz}"/> to allow easier setting and getting.
     /// </summary>
-    public static class ExterneReferenzExtensions
+    internal static class ExterneReferenzExtensions
     {
         /// <summary>
         /// try to get a value from <see cref="BusinessObject.ExterneReferenzen"/>
