@@ -4,6 +4,7 @@ on:
   push:
     branches:
       - develop
+      - protobuf3
 jobs:
   pushprerelease:
     runs-on: windows-latest
