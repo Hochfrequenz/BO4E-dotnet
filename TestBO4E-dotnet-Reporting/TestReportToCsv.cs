@@ -1,15 +1,13 @@
-﻿using BO4E.Reporting;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading;
 
-using Itenso.TimePeriod;
+using BO4E.Reporting;
 
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 using Newtonsoft.Json;
-
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading;
 
 namespace TestBO4E.Reporting
 {
@@ -53,7 +51,7 @@ namespace TestBO4E.Reporting
             string decimalSeparator = Thread.CurrentThread.CurrentCulture.NumberFormat.NumberDecimalSeparator;
             Assert.AreEqual("DE12345;0" + decimalSeparator + "87;2019-01-01T00:00:00Z;2019-03-01T00:00:00Z;", lines[1]);
             var commaResult = cr.ToCsv(',', lineTerminator: Environment.NewLine, reihenfolge: reihenfolge);
-            Assert.AreEqual("DE12345,0" + decimalSeparator + "87,2019-01-01T00:00:00Z,2019-03-01T00:00:00Z,", commaResult.Split(Environment.NewLine)[1]);
+            Assert.AreEqual("DE12345,\"0" + decimalSeparator + "87\",2019-01-01T00:00:00Z,2019-03-01T00:00:00Z,", commaResult.Split(Environment.NewLine)[1]);
             var dpunktResult = cr.ToCsv(':', lineTerminator: Environment.NewLine, reihenfolge: reihenfolge);
             Assert.AreEqual("DE12345:0" + decimalSeparator + "87:\"2019-01-01T00:00:00Z\":\"2019-03-01T00:00:00Z\":", dpunktResult.Split(Environment.NewLine)[1]);
 
@@ -149,7 +147,7 @@ namespace TestBO4E.Reporting
                 {
                     Assert.IsTrue(singleReportLine.Split(Environment.NewLine)[1].StartsWith("2019-09-30T22:00:00Z;2019-10-31T23:00:00Z;;50985149762")); // no melo, just malo
                     Assert.IsTrue(singleReportLine.Contains("IMS"));
-                    var missingEntries = ((new DateTime(2019,10,31,23,0,0,0,DateTimeKind.Utc) - new DateTime(2019, 10, 27, 0, 0, 0, 0, DateTimeKind.Utc)).TotalHours * 4).ToString();
+                    var missingEntries = ((new DateTime(2019, 10, 31, 23, 0, 0, 0, DateTimeKind.Utc) - new DateTime(2019, 10, 27, 0, 0, 0, 0, DateTimeKind.Utc)).TotalHours * 4).ToString();
                     Assert.IsTrue(singleReportLine.Contains($";{missingEntries};"));
                 }
                 else if (counter == 0)

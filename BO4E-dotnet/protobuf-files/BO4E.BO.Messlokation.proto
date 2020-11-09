@@ -1,5 +1,4 @@
 ﻿syntax = "proto3";
-import "protobuf-net/bcl.proto"; // schema for protobuf-net's handling of core .NET types
 
 enum AbgabeArt {
    KAS = 0;
@@ -101,13 +100,13 @@ enum Gasqualitaet {
    option allow_alias = true;
    Gasqualitaet_ZERO = 0;
    H_GAS = 1;
-   HGAS = 1;
    L_GAS = 2;
+   HGAS = 1;
    LGAS = 2;
 }
 message Geokoordinaten {
-   .bcl.Decimal Breitengrad = 3;
-   .bcl.Decimal Laengengrad = 4;
+   string Breitengrad = 3;
+   string Laengengrad = 4;
 }
 message Geraeteeigenschaften {
    Geraetetyp Geraetetyp = 3;
@@ -244,7 +243,7 @@ enum Kontaktart {
 }
 message Konzessionsabgabe {
    AbgabeArt Satz = 3;
-   .bcl.Decimal Kosten = 4;
+   string Kosten = 4;
    string Kategorie = 5;
 }
 enum Landescode {
@@ -541,19 +540,19 @@ enum Mengeneinheit {
    Mengeneinheit_ZERO = 0;
    WH = 2;
    KW = 3;
+   KWH = 2000;
+   MW = 3000;
+   MWH = 2000000;
    ANZAHL = 7;
    KUBIKMETER = 11;
    STUNDE = 13;
    TAG = 17;
    MONAT = 19;
-   VAR = 23;
-   VARH = 29;
    JAHR = 228;
-   KWH = 2000;
-   MW = 3000;
+   VAR = 23;
    KVAR = 23000;
+   VARH = 29;
    KVARH = 29000;
-   MWH = 2000000;
 }
 message Messlokation {
    string MesslokationsId = 4; // default value could not be applied: |null|
@@ -573,7 +572,7 @@ message Messlokation {
    bool Abrechnungmessstellenbetriebnna = 1018;
    repeated MarktpartnerDetails Marktrollen = 1019;
    Gasqualitaet Gasqualitaet = 1020;
-   .bcl.Decimal Verlustfaktor = 1021;
+   string Verlustfaktor = 1021;
 }
 enum Messwerterfassung {
    FERNAUSLESBAR = 0;
@@ -638,7 +637,7 @@ message Zaehler {
    Zaehlerauspraegung Zaehlerauspraegung = 6;
    Zaehlertyp Zaehlertyp = 7;
    Tarifart Tarifart = 8;
-   .bcl.Decimal Zaehlerkonstante = 9;
+   string Zaehlerkonstante = 9;
    DateTimeOffset EichungBis = 10;
    DateTimeOffset LetzteEichung = 11;
    repeated Zaehlwerk Zaehlwerke = 12;
@@ -667,7 +666,7 @@ message Zaehlwerk {
    string Bezeichnung = 4;
    Energierichtung Richtung = 5;
    string ObisKennzahl = 6;
-   .bcl.Decimal Wandlerfaktor = 7;
+   string Wandlerfaktor = 7;
    Mengeneinheit Einheit = 8;
    string Kennzahl = 1009;
    Schwachlastfaehig Schwachlastfaehig = 1010;
