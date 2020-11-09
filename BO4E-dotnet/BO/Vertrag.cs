@@ -1,4 +1,8 @@
-﻿using BO4E.COM;
+﻿using System;
+using System.Collections.Generic;
+using System.Runtime.Serialization;
+
+using BO4E.COM;
 using BO4E.ENUM;
 using BO4E.meta;
 using BO4E.meta.LenientConverters;
@@ -7,10 +11,6 @@ using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 
 using ProtoBuf;
-
-using System;
-using System.Collections.Generic;
-using System.Runtime.Serialization;
 
 namespace BO4E.BO
 {
@@ -61,7 +61,7 @@ namespace BO4E.BO
         /// Gibt an, wann der Vertrag beginnt.
         /// </summary>
         [JsonProperty(Required = Required.Always, Order = 9, PropertyName = "vertragsbeginn")]
-        [ProtoMember(9, DataFormat = DataFormat.WellKnown)]
+        [ProtoMember(9)]
         [JsonConverter(typeof(LenientDateTimeConverter))]
         public DateTimeOffset Vertragsbeginn { get; set; }
 
@@ -69,7 +69,7 @@ namespace BO4E.BO
         /// Gibt an, wann der Vertrag (voraussichtlich) endet oder beendet wurde.
         /// </summary>
         [JsonProperty(Required = Required.Always, Order = 10, PropertyName = "vertragsende")]
-        [ProtoMember(10, DataFormat = DataFormat.WellKnown)]
+        [ProtoMember(10)]
         [JsonConverter(typeof(LenientDateTimeConverter))]
         public DateTimeOffset Vertragsende { get; set; }
 

@@ -60,7 +60,7 @@ namespace BO4E.BO
         /// </summary>
         // [DefaultValue(DateTimeOffset.UtcNow)] <-- doesn't work.
         [JsonProperty(Required = Required.Always, Order = 8, PropertyName = "erstellungsZeitpunkt")]
-        [ProtoMember(8, DataFormat = DataFormat.WellKnown)]
+        [ProtoMember(8)]
         [JsonConverter(typeof(LenientDateTimeConverter))]
         public DateTimeOffset ErstellungsZeitpunkt { get; set; }
         /*{
@@ -116,7 +116,7 @@ namespace BO4E.BO
         /// Zeitpunkt bis zu dem die Benachrichtigung bearbeitet worden sein muss.
         /// </summary>
         [JsonProperty(Required = Required.Default, Order = 12, PropertyName = "deadline")]
-        [ProtoMember(12, DataFormat = DataFormat.WellKnown)]
+        [ProtoMember(12)]
         [JsonConverter(typeof(LenientDateTimeConverter))]
         public DateTimeOffset? Deadline { get; set; }
 

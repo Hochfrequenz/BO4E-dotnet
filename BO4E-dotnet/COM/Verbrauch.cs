@@ -42,14 +42,14 @@ namespace BO4E.COM
         /// Beginn des Zeitraumes, für den der Verbrauch angegeben wird.
         /// </summary>
         [JsonProperty(PropertyName = "startdatum", Required = Required.Default, Order = 7)]
-        [ProtoMember(3, DataFormat = DataFormat.WellKnown)]
+        [ProtoMember(3)]
         public DateTime Startdatum { get; set; } // ToDo: use datetimeoffset as well
 
         /// <summary>
         /// Ende des Zeitraumes, für den der Verbrauch angegeben wird.
         /// </summary>
         [JsonProperty(PropertyName = "enddatum", Required = Required.Default, Order = 8)]
-        [ProtoMember(4, DataFormat = DataFormat.WellKnown)]
+        [ProtoMember(4)]
         public DateTime Enddatum { get; set; } // ToDo: use datetimeoffset as well
 
         /// <summary>

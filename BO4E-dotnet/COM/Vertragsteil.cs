@@ -19,7 +19,7 @@ namespace BO4E.COM
         /// Start der Gültigkeit des Vertragsteils.
         /// </summary>
         [JsonProperty(PropertyName = "vertragsteilbeginn", Required = Required.Always)]
-        [ProtoMember(3, DataFormat = DataFormat.WellKnown)]
+        [ProtoMember(3)]
         [JsonConverter(typeof(LenientDateTimeConverter))]
         public DateTimeOffset Vertragsteilbeginn { get; set; }
 
@@ -27,7 +27,7 @@ namespace BO4E.COM
         /// Ende der Gültigkeit des Vertragsteils.
         /// </summary>
         [JsonProperty(PropertyName = "vertragsteilende", Required = Required.Always)]
-        [ProtoMember(4, DataFormat = DataFormat.WellKnown)]
+        [ProtoMember(4)]
         [JsonConverter(typeof(LenientDateTimeConverter))]
         public DateTimeOffset Vertragsteilende { get; set; }
 
