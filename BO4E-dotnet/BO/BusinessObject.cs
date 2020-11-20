@@ -217,7 +217,7 @@ namespace BO4E.BO
         /// </summary>
         /// <remarks>"having a flag set" means that the Business Object has a UserProperty entry that has <paramref name="flagKey"/> as key and the value of the user property is true.</remarks>
         /// <param name="flagKey">key in the userproperties that should hold the value <paramref name="flagValue"/></param>
-        /// <param name="flagValue">flag value</param>
+        /// <param name="flagValue">flag value, use null to remove the flag</param>
         /// <returns>true iff userProperties had been modified, false if not</returns>
         public bool SetFlag(string flagKey, bool? flagValue = true)
         {
@@ -228,13 +228,39 @@ namespace BO4E.BO
             if (this.UserProperties == null)
             {
                 this.UserProperties = new Dictionary<string, JToken>();
+                if (!flagValue.HasValue)
+                {
+                    return false;
+                }
             }
             else if (flagValue.HasValue && flagValue.Value == this.HasFlagSet(flagKey))
             {
                 return false;
             }
-            this.UserProperties[flagKey] = flagValue;
-            return true;
+            if (!flagValue.HasValue)
+            {
+                if (!this.UserProperties.ContainsKey(flagKey))
+                {
+                    return false;
+                }
+                else
+                {
+                    this.UserProperties.Remove(flagKey);
+                    return true;
+                }
+            }
+            else
+            {
+                if (this.TryGetUserProperty<bool?>(flagKey, out var existingValue) && existingValue == flagValue.Value)
+                {
+                    return false;
+                }
+                else
+                {
+                    this.UserProperties[flagKey] = flagValue.Value;
+                }
+                return true;
+            }
         }
 
         /// <summary>

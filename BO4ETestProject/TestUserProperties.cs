@@ -65,7 +65,7 @@ namespace TestBO4E
             Assert.IsTrue(melo.SetFlag("foo", flagValue: false));
             Assert.IsFalse(melo.HasFlagSet("foo"));
             Assert.IsTrue(melo.SetFlag("foo", flagValue: null));
-            Assert.IsTrue(melo.UserProperties.TryGetValue("foo", out var upValue2) && !upValue2.Value<bool?>().HasValue);
+            Assert.IsFalse(melo.UserProperties.TryGetValue("foo", out var _));
             Assert.IsFalse(melo.HasFlagSet("foo"));
             Assert.IsTrue(melo.SetFlag("foo", flagValue: true));
         }

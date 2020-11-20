@@ -503,7 +503,7 @@
             </summary>
             <remarks>"having a flag set" means that the Business Object has a UserProperty entry that has <paramref name="flagKey"/> as key and the value of the user property is true.</remarks>
             <param name="flagKey">key in the userproperties that should hold the value <paramref name="flagValue"/></param>
-            <param name="flagValue">flag value</param>
+            <param name="flagValue">flag value, use null to remove the flag</param>
             <returns>true iff userProperties had been modified, false if not</returns>
         </member>
         <member name="M:BO4E.BO.BusinessObject.GetJsonScheme">
