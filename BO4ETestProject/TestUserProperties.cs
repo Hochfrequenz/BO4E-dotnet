@@ -3,6 +3,7 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 
 using System;
 
@@ -44,6 +45,29 @@ namespace TestBO4E
             Assert.IsFalse(melo.TryGetUserProperty("there are no user properties", out string _));
             Assert.ThrowsException<ArgumentNullException>(() => melo.EvaluateUserProperty<string, bool>("there are no user properties", _ => default));
             Assert.IsFalse(melo.UserPropertyEquals("myNullProp", true));
+        }
+
+        [TestMethod]
+        public void TestFlags()
+        {
+            var melo = new Messlokation()
+            {
+                MesslokationsId = "DE0123456789012345678901234567890",
+                Sparte = BO4E.ENUM.Sparte.STROM
+            };
+            Assert.IsNull(melo.UserProperties);
+            Assert.IsFalse(melo.HasFlagSet("foo"));
+            Assert.IsTrue(melo.SetFlag("foo"));
+            Assert.IsNotNull(melo.UserProperties);
+            Assert.IsTrue(melo.UserProperties.TryGetValue("foo", out var upValue) && upValue.Value<bool>());
+            Assert.IsTrue(melo.HasFlagSet("foo"));
+            Assert.IsFalse(melo.SetFlag("foo"));
+            Assert.IsTrue(melo.SetFlag("foo", flagValue: false));
+            Assert.IsFalse(melo.HasFlagSet("foo"));
+            Assert.IsTrue(melo.SetFlag("foo", flagValue: null));
+            Assert.IsTrue(melo.UserProperties.TryGetValue("foo", out var upValue2) && !upValue2.Value<bool?>().HasValue);
+            Assert.IsFalse(melo.HasFlagSet("foo"));
+            Assert.IsTrue(melo.SetFlag("foo", flagValue: true));
         }
     }
 }

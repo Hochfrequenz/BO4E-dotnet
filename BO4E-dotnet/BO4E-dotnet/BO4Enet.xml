@@ -488,6 +488,24 @@
             <inheritdoc cref="M:BO4E.COM.ExterneReferenzExtensions.SetExterneReferenz(System.Collections.Generic.List{BO4E.COM.ExterneReferenz},BO4E.COM.ExterneReferenz,System.Boolean)"/>
             </summary>
         </member>
+        <member name="M:BO4E.BO.BusinessObject.HasFlagSet(System.String)">
+            <summary>
+            checks if the BusinessObject has a flag set.
+            </summary>
+            <remarks>"having a flag set" means that the Business Object has a UserProperty entry that has <paramref name="flagKey"/> as key and the value of the user property is true.</remarks>
+            <param name="flagKey"></param>
+            <returns>true iff flag is set and has value true</returns>
+        </member>
+        <member name="M:BO4E.BO.BusinessObject.SetFlag(System.String,System.Nullable{System.Boolean})">
+            <summary>
+            set the value of flag <paramref name="flagKey"/> to <paramref name="flagValue"/>.
+            If there is no such flag or not user properties yet, they will be created.
+            </summary>
+            <remarks>"having a flag set" means that the Business Object has a UserProperty entry that has <paramref name="flagKey"/> as key and the value of the user property is true.</remarks>
+            <param name="flagKey">key in the userproperties that should hold the value <paramref name="flagValue"/></param>
+            <param name="flagValue">flag value</param>
+            <returns>true iff userProperties had been modified, false if not</returns>
+        </member>
         <member name="M:BO4E.BO.BusinessObject.GetJsonScheme">
             <summary>
             returns a JSON scheme for the Business Object

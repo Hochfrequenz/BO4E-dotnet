@@ -197,6 +197,47 @@ namespace BO4E.BO
             => this.ExterneReferenzen = this.ExterneReferenzen.SetExterneReferenz(extRef, overwriteExisting);
 
         /// <summary>
+        /// checks if the BusinessObject has a flag set.
+        /// </summary>
+        /// <remarks>"having a flag set" means that the Business Object has a UserProperty entry that has <paramref name="flagKey"/> as key and the value of the user property is true.</remarks>
+        /// <param name="flagKey"></param>
+        /// <returns>true iff flag is set and has value true</returns>
+        public bool HasFlagSet(string flagKey)
+        {
+            if (string.IsNullOrWhiteSpace(flagKey))
+            {
+                throw new ArgumentNullException(nameof(flagKey));
+            }
+            return this.UserProperties != null && this.UserPropertyEquals(flagKey, other: (bool?)true);
+        }
+
+        /// <summary>
+        /// set the value of flag <paramref name="flagKey"/> to <paramref name="flagValue"/>.
+        /// If there is no such flag or not user properties yet, they will be created.
+        /// </summary>
+        /// <remarks>"having a flag set" means that the Business Object has a UserProperty entry that has <paramref name="flagKey"/> as key and the value of the user property is true.</remarks>
+        /// <param name="flagKey">key in the userproperties that should hold the value <paramref name="flagValue"/></param>
+        /// <param name="flagValue">flag value</param>
+        /// <returns>true iff userProperties had been modified, false if not</returns>
+        public bool SetFlag(string flagKey, bool? flagValue = true)
+        {
+            if (string.IsNullOrWhiteSpace(flagKey))
+            {
+                throw new ArgumentNullException(nameof(flagKey));
+            }
+            if (this.UserProperties == null)
+            {
+                this.UserProperties = new Dictionary<string, JToken>();
+            }
+            else if (flagValue.HasValue && flagValue.Value == this.HasFlagSet(flagKey))
+            {
+                return false;
+            }
+            this.UserProperties[flagKey] = flagValue;
+            return true;
+        }
+
+        /// <summary>
         /// returns a JSON scheme for the Business Object
         /// </summary>
         /// <returns>a JSON scheme</returns>
