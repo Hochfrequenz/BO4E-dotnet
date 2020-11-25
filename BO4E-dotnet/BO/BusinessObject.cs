@@ -208,7 +208,14 @@ namespace BO4E.BO
             {
                 throw new ArgumentNullException(nameof(flagKey));
             }
-            return this.UserProperties != null && this.UserPropertyEquals(flagKey, other: (bool?)true);
+            try
+            {
+                return this.UserProperties != null && this.UserPropertyEquals(flagKey, other: (bool?)true);
+            }
+            catch (ArgumentNullException ane) when (ane.ParamName == "value")
+            {
+                return false;
+            }
         }
 
         /// <summary>
