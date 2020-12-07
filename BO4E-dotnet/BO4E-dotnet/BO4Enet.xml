@@ -473,6 +473,11 @@
             protobuf serilization requires the <see cref="P:BO4E.BO.BusinessObject.Guid"/> as string.
             </summary>
         </member>
+        <member name="P:BO4E.BO.BusinessObject.Timestamp">
+            <summary>
+            Store the latest database update, is Datetime, because postgres doesn't handle datetimeoffset in a generated column gracefully
+            </summary>
+        </member>
         <member name="P:BO4E.BO.BusinessObject.ExterneReferenzen">
             <summary>
             Hier können IDs anderer Systeme hinterlegt werden (z.B. eine SAP-GP-Nummer) (Details siehe <see cref="T:BO4E.COM.ExterneReferenz"/>)
@@ -1831,6 +1836,11 @@
         </member>
         <member name="P:BO4E.COM.COM.guidSerialized">
             <inheritdoc cref="P:BO4E.BO.BusinessObject.guidSerialized"/>
+        </member>
+        <member name="P:BO4E.COM.COM.Timestamp">
+            <summary>
+            Store the latest timestamp (update from the database)
+            </summary>
         </member>
         <member name="T:BO4E.COM.Dienstleistung">
             <summary>Abbildung einer abrechenbaren Dienstleistung.</summary>

@@ -1,3 +1,7 @@
+using System;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+
 using BO4E.BO;
 using BO4E.meta;
 
@@ -5,10 +9,6 @@ using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 
 using ProtoBuf;
-
-using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
 
 namespace BO4E.COM
 {
@@ -179,12 +179,12 @@ namespace BO4E.COM
             set { this.Guid = string.IsNullOrWhiteSpace(value) ? (Guid?)null : System.Guid.Parse(value.ToString()); }
         }
 
+        /// <summary>
+        /// Store the latest timestamp (update from the database)
+        /// </summary>
         [JsonProperty(PropertyName = "timestamp", NullValueHandling = NullValueHandling.Ignore, Required = Required.Default, Order = 2)]
         [Timestamp]
-#pragma warning disable CS1591 // Missing XML comment for publicly visible type or member
-        // ToDo @JoschaMetze: Add a docstring about this
-        public DateTimeOffset? Timestamp { get; set; }
+        public DateTime? Timestamp { get; set; }
 
-#pragma warning restore CS1591 // Missing XML comment for publicly visible type or member
     }
 }

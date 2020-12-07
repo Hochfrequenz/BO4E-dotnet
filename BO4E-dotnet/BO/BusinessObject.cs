@@ -1,3 +1,10 @@
+using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.Linq;
+using System.Reflection;
+
 using BO4E.COM;
 using BO4E.meta;
 
@@ -8,13 +15,6 @@ using Newtonsoft.Json.Schema.Generation;
 using Newtonsoft.Json.Serialization;
 
 using ProtoBuf;
-
-using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Reflection;
 
 namespace BO4E.BO
 {
@@ -168,14 +168,14 @@ namespace BO4E.BO
             get => this.Guid.HasValue ? this.Guid.ToString() : string.Empty;
             set { this.Guid = string.IsNullOrWhiteSpace(value) ? (Guid?)null : System.Guid.Parse(value.ToString()); }
         }
-
+        /// <summary>
+        /// Store the latest database update, is Datetime, because postgres doesn't handle datetimeoffset in a generated column gracefully
+        /// </summary>
         [JsonProperty(PropertyName = "timestamp", NullValueHandling = NullValueHandling.Ignore, Required = Required.Default, Order = 2)]
         [Timestamp]
-#pragma warning disable CS1591 // Missing XML comment for publicly visible type or member
-        // ToDo @JoschaMetze: Add a docstring about this
-        public DateTimeOffset? Timestamp { get; set; }
+        public DateTime? Timestamp { get; set; }
 
-#pragma warning restore CS1591 // Missing XML comment for publicly visible type or member
+
 
         /// <summary>
         /// Hier können IDs anderer Systeme hinterlegt werden (z.B. eine SAP-GP-Nummer) (Details siehe <see cref="ExterneReferenz"/>)
