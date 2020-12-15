@@ -189,12 +189,11 @@ namespace BO4E
         {
             if (businessObjectName == null)
             {
-                throw new ArgumentNullException("Business Object Name must not be null.");
+                throw new ArgumentNullException(nameof(businessObjectName));
             }
 
-            Type clazz;
             //Type[] types = Assembly.GetExecutingAssembly().GetTypes();
-            clazz = Assembly.GetExecutingAssembly().GetType(packagePrefix + "." + businessObjectName);
+            var clazz = Assembly.GetExecutingAssembly().GetType(packagePrefix + "." + businessObjectName);
             if (clazz != null)
             {
                 return clazz;

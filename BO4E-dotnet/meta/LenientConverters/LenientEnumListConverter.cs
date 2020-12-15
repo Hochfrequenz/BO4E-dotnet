@@ -43,7 +43,7 @@ namespace BO4E.meta.LenientConverters
             // First try to parse the List normally, in case it's formatted as expected
             foreach (var rawItem in rawList)
             {
-                if (rawItem.GetType() == typeof(string) && Enum.IsDefined(expectedListElementType, rawItem.ToString()))
+                if (rawItem is string && Enum.IsDefined(expectedListElementType, rawItem.ToString()))
                 {
                     // default. everything is as it should be :-)
                     object enumValue = Enum.Parse(expectedListElementType, rawItem.ToString());
@@ -65,10 +65,7 @@ namespace BO4E.meta.LenientConverters
         }
 
         /// <inheritdoc cref="JsonConverter.CanWrite"/>
-        public override bool CanWrite
-        {
-            get { return false; }
-        }
+        public override bool CanWrite => false;
 
         /// <inheritdoc cref="JsonConverter.WriteJson(JsonWriter, object, JsonSerializer)"/>
         public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)

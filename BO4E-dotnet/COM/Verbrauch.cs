@@ -1,7 +1,3 @@
-using System;
-using System.IO;
-using System.Runtime.Serialization;
-
 using BO4E.ENUM;
 using BO4E.meta;
 
@@ -9,6 +5,10 @@ using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 
 using ProtoBuf;
+
+using System;
+using System.IO;
+using System.Runtime.Serialization;
 
 namespace BO4E.COM
 {
@@ -22,7 +22,7 @@ namespace BO4E.COM
         /// Central Europe Standard Time as hard coded default time. Public to be used elsewhere ;)
         /// </summary>
         [ProtoIgnore]
-        public static TimeZoneInfo CENTRAL_EUROPE_STANDARD_TIME { get; private set; }
+        public static TimeZoneInfo CENTRAL_EUROPE_STANDARD_TIME { get; }
         static Verbrauch()
         {
             var assembly = typeof(Verbrauch).Assembly; // ??? zumindest eher als executing assembly.
@@ -106,8 +106,7 @@ namespace BO4E.COM
         /// <returns>new Verbrauch instance with fixed bugs</returns>
         public static Verbrauch FixSapCdsBug(Verbrauch v)
         {
-            Verbrauch result;
-            result = JsonConvert.DeserializeObject<Verbrauch>(JsonConvert.SerializeObject(v));
+            var result = JsonConvert.DeserializeObject<Verbrauch>(JsonConvert.SerializeObject(v));
             result.FixSapCdsBug();
             return result;
         }

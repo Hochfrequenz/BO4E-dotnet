@@ -31,10 +31,7 @@ namespace BO4E.meta.LenientConverters
         }
 
         /// <inheritdoc cref="JsonConverter.CanConvert(Type)"/>
-        public override bool CanWrite
-        {
-            get { return false; }
-        }
+        public override bool CanWrite => false;
 
         /// <inheritdoc cref="JsonConverter.WriteJson(JsonWriter, object, JsonSerializer)"/>
         public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)

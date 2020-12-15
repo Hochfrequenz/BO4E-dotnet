@@ -54,7 +54,7 @@ namespace BO4E.BO
         [ProtoMember(1)]
         public string BoTyp
         {
-            get { return this.GetType().Name.ToUpper(); }
+            get => GetType().Name.ToUpper();
             set { }
         }
 
@@ -325,7 +325,7 @@ namespace BO4E.BO
             foreach (var pi in GetBoKeyProps(boType))
             {
                 JsonPropertyAttribute jpa = pi.GetCustomAttribute<JsonPropertyAttribute>();
-                if (jpa != null && jpa.PropertyName != null)
+                if (jpa?.PropertyName != null)
                 {
                     result.Add(jpa.PropertyName);
                 }
@@ -392,7 +392,7 @@ namespace BO4E.BO
             {
                 string fieldName;
                 JsonPropertyAttribute jpa = prop.GetCustomAttribute<JsonPropertyAttribute>();
-                if (jpa != null && jpa.PropertyName != null)
+                if (jpa?.PropertyName != null)
                 {
                     fieldName = jpa.PropertyName;
                 }
@@ -444,7 +444,7 @@ namespace BO4E.BO
             foreach (var pi in GetBoKeyProps(this.GetType()))
             {
                 JsonPropertyAttribute jpa = pi.GetCustomAttribute<JsonPropertyAttribute>();
-                if (jpa != null && jpa.PropertyName != null)
+                if (jpa?.PropertyName != null)
                 {
                     result.Add(jpa.PropertyName, pi.GetValue(this));
                 }
@@ -604,7 +604,7 @@ namespace BO4E.BO
                     Type boType;
                     if (serializer.TypeNameHandling.HasFlag(TypeNameHandling.Objects) && jo.TryGetValue("$type", out JToken typeToken))
                     {
-                        boType = BusinessObjectSerializationBinder.BusinessObjectAndCOMTypes.Where(t => typeToken.Value<string>().ToUpper().StartsWith(t.FullName.ToUpper())).SingleOrDefault();
+                        boType = BusinessObjectSerializationBinder.BusinessObjectAndCOMTypes.SingleOrDefault(t => typeToken.Value<string>().ToUpper().StartsWith(t.FullName.ToUpper()));
                     }
                     else if (!jo.ContainsKey("boTyp"))
                     {
@@ -669,10 +669,7 @@ namespace BO4E.BO
                 }
             }
 
-            public override bool CanWrite
-            {
-                get { return false; }
-            }
+            public override bool CanWrite => false;
 
             public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
             {
