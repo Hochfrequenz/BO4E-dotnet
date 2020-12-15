@@ -5,8 +5,10 @@ message Betrag {
    .bcl.Decimal Wert = 3;
    Waehrungscode Waehrung = 4;
 }
+message DateTimeOffset {
+}
 message Kosten {
-   int32 Kostenklasse = 4; // declared as invalid enum: Kostenklasse
+   Kostenklasse Kostenklasse = 4;
    Zeitraum Gueltigkeit = 5;
    repeated Betrag SummeKosten = 6;
    repeated Kostenblock Kostenbloecke = 7;
@@ -17,15 +19,13 @@ message Kostenblock {
    Betrag SummeKostenblock = 4;
    repeated Kostenposition Kostenpositionen = 5;
 }
-/* for context only
 enum Kostenklasse {
-   ZERO = 0; // proto3 requires a zero value as the first item (it can be named anything)
+   Kostenklasse_ZERO = 0;
 }
-*/
 message Kostenposition {
    string Positionstitel = 3;
-   .bcl.DateTime Von = 4;
-   .bcl.DateTime Bis = 5;
+   DateTimeOffset Von = 4;
+   DateTimeOffset Bis = 5;
    string Artikelbezeichnung = 6;
    string Artikeldetail = 7;
    Menge Menge = 8;
@@ -38,22 +38,22 @@ message Menge {
    Mengeneinheit Einheit = 4;
 }
 enum Mengeneinheit {
-   ZERO = 0; // proto3 requires a zero value as the first item (it can be named anything)
+   Mengeneinheit_ZERO = 0;
    WH = 2;
    KW = 3;
-   KWH = 2000;
-   MW = 3000;
-   MWH = 2000000;
    ANZAHL = 7;
    KUBIKMETER = 11;
    STUNDE = 13;
    TAG = 17;
    MONAT = 19;
-   JAHR = 228;
    VAR = 23;
-   KVAR = 23000;
    VARH = 29;
+   JAHR = 228;
+   KWH = 2000;
+   MW = 3000;
+   KVAR = 23000;
    KVARH = 29000;
+   MWH = 2000000;
 }
 message Preis {
    .bcl.Decimal Wert = 3;
@@ -156,7 +156,7 @@ enum Waehrungscode {
    LTL = 87;
    LYD = 88;
    MAD = 89;
-   MDL = 90;
+   Waehrungscode_MDL = 90;
    MGA = 91;
    MKD = 92;
    MMK = 93;
@@ -249,24 +249,24 @@ enum Waehrungscode {
    ZWL = 180;
 }
 enum Waehrungseinheit {
-   EUR = 0;
+   Waehrungseinheit_EUR = 0;
    CT = 1;
 }
 enum Zeiteinheit {
-   SEKUNDE = 0;
-   MINUTE = 1;
-   STUNDE = 2;
-   VIERTEL_STUNDE = 3;
-   TAG = 4;
-   WOCHE = 5;
-   MONAT = 6;
-   QUARTAL = 7;
-   HALBJAHR = 8;
-   JAHR = 9;
+   Zeiteinheit_SEKUNDE = 0;
+   Zeiteinheit_MINUTE = 1;
+   Zeiteinheit_STUNDE = 2;
+   Zeiteinheit_VIERTEL_STUNDE = 3;
+   Zeiteinheit_TAG = 4;
+   Zeiteinheit_WOCHE = 5;
+   Zeiteinheit_MONAT = 6;
+   Zeiteinheit_QUARTAL = 7;
+   Zeiteinheit_HALBJAHR = 8;
+   Zeiteinheit_JAHR = 9;
 }
 message Zeitraum {
    Zeiteinheit Einheit = 3;
    .bcl.Decimal Dauer = 4;
-   .bcl.DateTime Startdatum = 5;
-   .bcl.DateTime Enddatum = 6;
+   DateTimeOffset Startdatum = 5;
+   DateTimeOffset Enddatum = 6;
 }

@@ -1,8 +1,11 @@
-﻿using System;
-
-using BO4E.BO;
+﻿using BO4E.BO;
+using BO4E.meta;
 
 using Microsoft.Extensions.Logging;
+
+using Newtonsoft.Json;
+
+using System;
 
 namespace BO4E.Extensions.Encryption
 {
@@ -11,6 +14,15 @@ namespace BO4E.Extensions.Encryption
     /// </summary>
     public abstract class Encrypter : IDisposable
     {
+        /// <summary>
+        /// serializer settings used in the encrypted objects
+        /// </summary>
+        protected static JsonSerializerSettings encryptionSerializerSettings = new JsonSerializerSettings()
+        {
+            TypeNameHandling = TypeNameHandling.Objects,
+            SerializationBinder = new BusinessObjectSerializationBinder()
+        };
+
         public ILogger _logger { get; set; }
         /// <summary>
         /// decrypt an encrypted Business Object

@@ -1,6 +1,37 @@
 ﻿{
   "$schema": "http://json-schema.org/draft-07/schema#",
   "definitions": {
+    "ExterneReferenz": {
+      "type": [
+        "object",
+        "null"
+      ],
+      "properties": {
+        "exRefName": {
+          "type": "string"
+        },
+        "exRefWert": {
+          "type": "string"
+        },
+        "guid": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "timestamp": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "format": "date-time"
+        }
+      },
+      "required": [
+        "exRefName",
+        "exRefWert"
+      ]
+    },
     "Regionskriterium": {
       "type": [
         "object",
@@ -74,6 +105,13 @@
             "string",
             "null"
           ]
+        },
+        "timestamp": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "format": "date-time"
         }
       },
       "required": [
@@ -92,6 +130,15 @@
         "null"
       ]
     },
+    "externeReferenzen": {
+      "type": [
+        "array",
+        "null"
+      ],
+      "items": {
+        "$ref": "#/definitions/ExterneReferenz"
+      }
+    },
     "boTyp": {
       "type": [
         "string",
@@ -100,6 +147,13 @@
     },
     "versionStruktur": {
       "type": "integer"
+    },
+    "timestamp": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "format": "date-time"
     },
     "bezeichnung": {
       "type": "string"

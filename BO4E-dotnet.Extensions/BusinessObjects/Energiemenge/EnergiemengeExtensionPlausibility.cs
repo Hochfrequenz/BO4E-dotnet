@@ -1,12 +1,17 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using BO4E.COM;
+﻿using BO4E.COM;
 using BO4E.ENUM;
 using BO4E.Reporting;
+
 using Itenso.TimePeriod;
+
 using Newtonsoft.Json;
+
 using StackExchange.Profiling;
+
+using System;
+using System.Collections.Generic;
+using System.Linq;
+
 using static BO4E.Extensions.ENUM.MengeneinheitExtenion;
 using static BO4E.Reporting.PlausibilityReport;
 
@@ -93,7 +98,7 @@ namespace BO4E.Extensions.BusinessObjects.Energiemenge
                 var pr = new PlausibilityReport()
                 {
                     LokationsId = emReference.LokationsId,
-                    ReferenceTimeFrame = new BO4E.COM.Zeitraum() { Startdatum = timeframe.Start, Enddatum = timeframe.End },
+                    ReferenceTimeFrame = new BO4E.COM.Zeitraum() { Startdatum = new DateTimeOffset(timeframe.Start), Enddatum = new DateTimeOffset(timeframe.End) },
                     VerbrauchReference = vReference,
                     VerbrauchOther = vOther,
                     AbsoluteDeviation = Math.Abs(absoluteDeviation),
@@ -118,7 +123,7 @@ namespace BO4E.Extensions.BusinessObjects.Energiemenge
         /// <returns></returns>
         public static PlausibilityReport GetPlausibilityReport(this BO4E.BO.Energiemenge energiemenge, PlausibilityReport.PlausibilityReportConfiguration config)
         {
-            return energiemenge.GetPlausibilityReport(config.Other, new TimeRange(config.Timeframe.Startdatum.Value, config.Timeframe.Enddatum.Value), config.IgnoreLocation);
+            return energiemenge.GetPlausibilityReport(config.Other, new TimeRange(config.Timeframe.Startdatum.Value.UtcDateTime, config.Timeframe.Enddatum.Value.UtcDateTime), config.IgnoreLocation);
         }
 
         /// <summary>
@@ -167,8 +172,8 @@ namespace BO4E.Extensions.BusinessObjects.Energiemenge
             }
             var slices = GetLocalDailySlices(new TimeRange()
             {
-                Start = config.Timeframe.Startdatum.Value,
-                End = config.Timeframe.Enddatum.Value
+                Start = config.Timeframe.Startdatum.Value.UtcDateTime,
+                End = config.Timeframe.Enddatum.Value.UtcDateTime
             });
             return em.GetSlicedPlausibilityReports(config, slices);
         }
@@ -191,8 +196,8 @@ namespace BO4E.Extensions.BusinessObjects.Energiemenge
             }
             var slices = GetLocalMonthlySlices(new TimeRange()
             {
-                Start = config.Timeframe.Startdatum.Value,
-                End = config.Timeframe.Enddatum.Value
+                Start = config.Timeframe.Startdatum.Value.UtcDateTime,
+                End = config.Timeframe.Enddatum.Value.UtcDateTime
             });
             return em.GetSlicedPlausibilityReports(config, slices);
         }

@@ -1,11 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Reflection;
 using BO4E.BO;
 using BO4E.meta;
+
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
+
 using ProtoBuf;
+
+using System;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
 namespace BO4E.COM
 {
@@ -36,7 +39,9 @@ namespace BO4E.COM
     [ProtoInclude(21, typeof(Kostenposition))]
     [ProtoInclude(22, typeof(KriteriumsWert))]
     [ProtoInclude(23, typeof(Kostenposition))]
-    [ProtoInclude(24, typeof(Marktrolle))]
+#pragma warning disable CS0618 // Type or member is obsolete
+    [ProtoInclude(24, typeof(MarktpartnerDetails))]
+#pragma warning restore CS0618 // Type or member is obsolete
     [ProtoInclude(25, typeof(Menge))]
     [ProtoInclude(26, typeof(Messlokationszuordnung))]
     [ProtoInclude(27, typeof(Notiz))]
@@ -67,12 +72,12 @@ namespace BO4E.COM
     [ProtoInclude(51, typeof(Zaehlwerk))]
     [ProtoInclude(52, typeof(Zeitraum))]
     [ProtoInclude(53, typeof(Zustaendigkeit))]
-    public abstract class COM : IEquatable<COM>
+    public abstract class COM : IEquatable<COM>, IUserProperties, IOptionalGuid
     {
         /// <summary>
         /// User properties (non bo4e standard)
         /// </summary>
-        [JsonProperty(PropertyName = BusinessObject.USER_PROPERTIES_NAME, Required = Required.Default, Order = 2)]
+        [JsonProperty(PropertyName = BusinessObject.USER_PROPERTIES_NAME, Required = Required.Default, Order = 2, DefaultValueHandling = DefaultValueHandling.Ignore)]
         [ProtoMember(2)]
         [JsonExtensionData]
         [DataCategory(DataCategory.USER_PROPERTIES)]
@@ -143,8 +148,27 @@ namespace BO4E.COM
         /// <summary>
         /// allows adding a GUID to COM objects for tracking across systems
         /// </summary>
-        [JsonProperty(PropertyName="guid", NullValueHandling = NullValueHandling.Ignore, Required = Required.Default, Order = 1)]
+        [JsonProperty(PropertyName = "guid", NullValueHandling = NullValueHandling.Ignore, Required = Required.Default, Order = 1)]
+        public Guid? Guid { get; set; }
+
+        /// <inheritdoc cref="BO.BusinessObject.guidSerialized"/>
+
+        // note that this inheritance protobuf thing doesn't work as expected. please see the comments in TestBO4E project->TestProfobufSerialization
         [ProtoMember(1)]
-        public string Guid { get;set; }
+#pragma warning disable IDE1006 // Naming Styles
+        protected string guidSerialized
+#pragma warning restore IDE1006 // Naming Styles
+        {
+            get => this.Guid.HasValue ? this.Guid.ToString() : string.Empty;
+            set { this.Guid = string.IsNullOrWhiteSpace(value) ? (Guid?)null : System.Guid.Parse(value.ToString()); }
+        }
+
+        /// <summary>
+        /// Store the latest timestamp (update from the database)
+        /// </summary>
+        [JsonProperty(PropertyName = "timestamp", NullValueHandling = NullValueHandling.Ignore, Required = Required.Default, Order = 2)]
+        [Timestamp]
+        public DateTime? Timestamp { get; set; }
+
     }
 }

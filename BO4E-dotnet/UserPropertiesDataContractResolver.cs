@@ -1,7 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using Newtonsoft.Json.Serialization;
 
-using Newtonsoft.Json.Serialization;
+using System;
+using System.Collections.Generic;
 
 namespace BO4E
 {
@@ -10,6 +10,9 @@ namespace BO4E
     /// </summary>
     public class UserPropertiesDataContractResolver : DefaultContractResolver
     {
+        /// <summary>
+        /// easily accessible instance of this converter
+        /// </summary>
         public static readonly UserPropertiesDataContractResolver Instance = new UserPropertiesDataContractResolver(new HashSet<string>());
 
         private readonly HashSet<string> whitelist;
@@ -23,6 +26,7 @@ namespace BO4E
             whitelist = userPropertiesWhiteList;
         }
 
+        /// <inheritdoc cref="DefaultContractResolver.ResolveContract(Type)"/>
         public override JsonContract ResolveContract(Type type)
         {
             JsonContract contract = base.ResolveContract(type);

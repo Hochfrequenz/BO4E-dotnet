@@ -1,11 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-
-using BO4E;
+﻿using BO4E;
 using BO4E.BO;
 using BO4E.COM;
+using BO4E.meta;
 using BO4E.meta.LenientConverters;
 //using BO4E.Extensions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -13,6 +9,11 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 using Newtonsoft.Json.Linq;
+
+using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Linq;
 
 namespace TestBO4E
 {
@@ -166,7 +167,7 @@ namespace TestBO4E
                 json = JsonConvert.DeserializeObject<JObject>(jsonString);
             }
             Energiemenge em = JsonConvert.DeserializeObject<Energiemenge>(json["input"].ToString(), LenientParsing.MOST_LENIENT.GetJsonSerializerSettings());
-            if (TimeZoneInfo.Local == Verbrauch.CENTRAL_EUROPE_STANDARD_TIME)
+            if (TimeZoneInfo.Local == CentralEuropeStandardTime.CENTRAL_EUROPE_STANDARD_TIME)
             {
                 Assert.AreEqual(2, em.Energieverbrauch.Count); // weil 2 verschiedene status
             }
@@ -254,17 +255,17 @@ namespace TestBO4E
             // endzeitpunkt wird im sap aus startzeitpunkt + 1 std zusammengesetzt. bei umstellung auf sommerzeit entsteht als artefakt ein shift
             Verbrauch v1 = JsonConvert.DeserializeObject<Verbrauch>("{\"zw\":\"000000000020720475\",\"startdatum\":\"201903310100\",\"enddatum\":\"201903310300\",\"wert\":263,\"status\":\"IU021\",\"obiskennzahl\":\"7-10:99.33.17\",\"wertermittlungsverfahren\":\"MESSUNG\",\"einheit\":\"KWH\",\"sap_timezone\":\"CET\"}",
                 new LenientDateTimeConverter());
-            Assert.AreEqual(new DateTime(2019, 3, 31, 2, 0, 0, DateTimeKind.Utc), v1.Enddatum);
+            Assert.AreEqual(new DateTimeOffset(2019, 3, 31, 2, 0, 0, TimeSpan.Zero), v1.Enddatum);
 
             // negativ test: nur in der sommerzeit soll das nicht passieren
             Verbrauch v2 = JsonConvert.DeserializeObject<Verbrauch>("{\"zw\":\"000000000020720475\",\"startdatum\":\"201905310100\",\"enddatum\":\"201905310300\",\"wert\":263,\"status\":\"IU021\",\"obiskennzahl\":\"7-10:99.33.17\",\"wertermittlungsverfahren\":\"MESSUNG\",\"einheit\":\"KWH\",\"sap_timezone\":\"CET\"}",
                 new LenientDateTimeConverter());
-            Assert.AreEqual(new DateTime(2019, 5, 31, 3, 0, 0, DateTimeKind.Utc), v2.Enddatum);
+            Assert.AreEqual(new DateTimeOffset(2019, 5, 31, 3, 0, 0, TimeSpan.Zero), v2.Enddatum);
 
             // negativ test: nur in der winterzeit soll das nicht passieren
             Verbrauch v3 = JsonConvert.DeserializeObject<Verbrauch>("{\"zw\":\"000000000020720475\",\"startdatum\":\"201901310100\",\"enddatum\":\"201901310300\",\"wert\":263,\"status\":\"IU021\",\"obiskennzahl\":\"7-10:99.33.17\",\"wertermittlungsverfahren\":\"MESSUNG\",\"einheit\":\"KWH\",\"sap_timezone\":\"CET\"}",
                 new LenientDateTimeConverter());
-            Assert.AreEqual(new DateTime(2019, 1, 31, 3, 0, 0, DateTimeKind.Utc), v3.Enddatum);
+            Assert.AreEqual(new DateTimeOffset(2019, 1, 31, 3, 0, 0, TimeSpan.Zero), v3.Enddatum);
         }
 
 

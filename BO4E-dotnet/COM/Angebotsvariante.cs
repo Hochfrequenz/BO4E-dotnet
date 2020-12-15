@@ -23,12 +23,12 @@ namespace BO4E.COM
         public string Beschreibung { get; set; }
         /// <summary>Datum der Erstellung der Angebotsvariante</summary>
         [JsonProperty(PropertyName = "erstelldatum", Required = Required.Default)]
-        [ProtoMember(6)]
-        public DateTime Erstelldatum { get; set; }
+        [ProtoMember(6, DataFormat = DataFormat.WellKnown)]
+        public DateTimeOffset Erstelldatum { get; set; }
         /// <summary>Bis zu diesem Zeitpunkt (Tag/Uhrzeit) inklusive gilt die Angebotsvariante, z.B. 31.12.2017, 17:00 Uhr.</summary>
         [JsonProperty(PropertyName = "bindefrist", Required = Required.Always)]
-        [ProtoMember(7)]
-        public DateTime Bindefrist { get; set; }
+        [ProtoMember(7, DataFormat = DataFormat.WellKnown)]
+        public DateTimeOffset Bindefrist { get; set; }
         /// <summary>Aufsummierte Wirkarbeitsmenge aller Angebotsteile. <seealso cref="Menge" /></summary>
         [JsonProperty(PropertyName = "gesamtmenge", Required = Required.Default)]
         [ProtoMember(8)]

@@ -37,7 +37,7 @@ namespace BO4E.COM
         /// </summary>
         [JsonProperty(PropertyName = "deadline", Required = Required.Default)]
         [ProtoMember(5)]
-        public DateTime? Deadline { get; set; }
+        public DateTimeOffset? Deadline { get; set; }
 
         /// <summary>
         /// Wurde diese Aufgabe schon ausgeführt (true)? Steht sie noch zur Bearbeitung an (false)?
@@ -52,7 +52,7 @@ namespace BO4E.COM
         [JsonConverter(typeof(LenientDateTimeConverter))]
         [JsonProperty(PropertyName = "ausfuehrungszeitpunkt", Required = Required.Default)]
         [ProtoMember(7)]
-        public DateTime? Ausfuehrungszeitpunkt { get; set; }
+        public DateTimeOffset? Ausfuehrungszeitpunkt { get; set; }
 
         /// <summary>
         /// Eindeutige Kennung des Benutzers, der diese Aufgabe ausführt hat.

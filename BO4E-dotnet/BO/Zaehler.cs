@@ -35,11 +35,16 @@ namespace BO4E.BO
         [ProtoMember(6)]
         public Zaehlerauspraegung Zaehlerauspraegung { get; set; }
 
-        /// <summary>Typisierung des Zählers
-        /// <seealso cref="ENUM.Zaehlertyp" /></summary>
-        [JsonProperty(Required = Required.Always, Order = 7, PropertyName = "zaehlertyp")]
+        /// <summary>
+        /// Typisierung des Zählers
+        /// <seealso cref="ENUM.Zaehlertyp" />
+        /// </summary>
+        [JsonProperty(
+            Required=Required.AllowNull, //Required = Required.Always, 
+            Order = 7, PropertyName = "zaehlertyp")]
         [ProtoMember(7)]
-        public Zaehlertyp Zaehlertyp { get; set; }
+        [NonOfficial(NonOfficialCategory.REGULATORY_REQUIREMENTS)] // this is ALWAYS required in BO4E standard; Maybe nullable if you as a LIEFERANT don't care about the type of Zähler, othern than in the grid
+        public Zaehlertyp? Zaehlertyp { get; set; }
 
         /// <summary> Spezifikation bezüglich unterstützter Tarifarten.
         /// <seealso cref="ENUM.Tarifart" /></summary>
@@ -50,17 +55,17 @@ namespace BO4E.BO
         /// <summary>Zählerkonstante auf dem Zähler.</summary>
         [JsonProperty(Required = Required.Default, Order = 9, PropertyName = "zaehlerkonstante")]
         [ProtoMember(9)]
-        public Decimal zaehlerkonstante { get; set; }
+        public Decimal Zaehlerkonstante { get; set; }
 
         /// <summary>Bis zu diesem Datum ist der Zähler geeicht.</summary>
         [JsonProperty(Required = Required.Default, Order = 10, PropertyName = "eichungBis")]
         [ProtoMember(10)]
-        public DateTime? EichungBis { get; set; } // ToDO implement date
+        public DateTimeOffset? EichungBis { get; set; } // ToDO implement date
 
         /// <summary>Zu diesem Datum fand die letzte Eichprüfung des Zählers statt.</summary>
         [JsonProperty(Required = Required.Default, Order = 11, PropertyName = "letzteEichung")]
         [ProtoMember(11)]
-        public DateTime? LetzteEichung { get; set; }
+        public DateTimeOffset? LetzteEichung { get; set; }
 
         /// <summary> Die Zählwerke des Zählers.
         /// <seealso cref="Zaehlwerk" /></summary>

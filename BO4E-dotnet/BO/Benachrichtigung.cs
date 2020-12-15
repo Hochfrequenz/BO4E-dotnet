@@ -1,11 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Runtime.Serialization;
 
 using BO4E.COM;
 using BO4E.ENUM;
 using BO4E.meta;
-
+using BO4E.meta.LenientConverters;
 using Newtonsoft.Json;
 
 using ProtoBuf;
@@ -53,21 +54,22 @@ namespace BO4E.BO
         public string Kurztext { get; set; }
 
         //[JsonIgnore]
-        //private DateTime _erstellungsZeitpunkt;
+        //private DateTimeOffset _erstellungsZeitpunkt;
         /// <summary>
         /// Zeitpunkt zu dem die Benachrichtigung erstellt wurde (UTC).
         /// </summary>
-        // [DefaultValue(DateTime.UtcNow)] <-- doesn't work.
+        // [DefaultValue(DateTimeOffset.UtcNow)] <-- doesn't work.
         [JsonProperty(Required = Required.Always, Order = 8, PropertyName = "erstellungsZeitpunkt")]
-        [ProtoMember(8)]
-        public DateTime ErstellungsZeitpunkt { get; set; }
+        [ProtoMember(8, DataFormat = DataFormat.WellKnown)]
+        [JsonConverter(typeof(LenientDateTimeConverter))]
+        public DateTimeOffset ErstellungsZeitpunkt { get; set; }
         /*{
             get { return _erstellungsZeitpunkt; }
             set
             {
                 if (value == null)
                 {
-                    _erstellungsZeitpunkt = DateTime.UtcNow;
+                    _erstellungsZeitpunkt = DateTimeOffset.UtcNow;
                 }
                 else
                 {
@@ -114,8 +116,9 @@ namespace BO4E.BO
         /// Zeitpunkt bis zu dem die Benachrichtigung bearbeitet worden sein muss.
         /// </summary>
         [JsonProperty(Required = Required.Default, Order = 12, PropertyName = "deadline")]
-        [ProtoMember(12)]
-        public DateTime? Deadline { get; set; }
+        [ProtoMember(12, DataFormat = DataFormat.WellKnown)]
+        [JsonConverter(typeof(LenientDateTimeConverter))]
+        public DateTimeOffset? Deadline { get; set; }
 
         /// <summary>
         /// Liste von Aktivitäten, die der Bearbeiter ausführen kann.

@@ -1,11 +1,11 @@
-﻿using System;
-
-using BO4E.ENUM;
+﻿using BO4E.ENUM;
 using BO4E.meta;
 
 using Newtonsoft.Json;
 
 using ProtoBuf;
+
+using System;
 
 namespace BO4E.COM
 {
@@ -27,7 +27,7 @@ namespace BO4E.COM
         /// Einheit von <see cref="Wert"/>
         /// </summary>
         [ProtoMember(4)]
-        [JsonProperty(Required=Required.Always, PropertyName = "einheit")]
+        [JsonProperty(Required = Required.Always, PropertyName = "einheit")]
         public Mengeneinheit Einheit { get; set; }
 
         /// <summary>
@@ -35,10 +35,17 @@ namespace BO4E.COM
         /// </summary>
         /// <param name="wert">numerischer Wert</param>
         /// <param name="einheit">zugehörige Mengeneinheit</param>
-        public PhysikalischerWert(decimal wert, Mengeneinheit einheit)
+        public PhysikalischerWert(decimal wert, Mengeneinheit einheit) : this()
         {
             this.Wert = wert;
             this.Einheit = einheit;
+        }
+
+        /// <summary>
+        /// empty constructor for deserilization
+        /// </summary>
+        public PhysikalischerWert()
+        {
         }
 
         /// <summary>
@@ -46,7 +53,7 @@ namespace BO4E.COM
         /// </summary>
         /// <param name="wert">numerischer wert</param>
         /// <param name="einheitString">zugehörige Einheit als string (case insensitive)</param>
-        public PhysikalischerWert(decimal wert, string einheitString)
+        public PhysikalischerWert(decimal wert, string einheitString) : this()
         {
             this.Wert = wert;
 

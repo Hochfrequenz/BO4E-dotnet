@@ -1,9 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using BO4E.BO;
+﻿using BO4E.BO;
 using BO4E.COM;
+
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+
 using Newtonsoft.Json;
+
+using System;
+using System.Collections.Generic;
 
 namespace TestBO4E
 {
@@ -18,11 +21,20 @@ namespace TestBO4E
                 LokationsId = "DE123456",
                 LokationsTyp = BO4E.ENUM.Lokationstyp.MaLo,
                 Energieverbrauch = new List<Verbrauch>(),
-                guid = Guid.NewGuid().ToString()
+                Guid = Guid.NewGuid()
             };
 
-            string jsonString = JsonConvert.SerializeObject(em);
-            Assert.AreEqual<string>(em.guid, JsonConvert.DeserializeObject<Energiemenge>(jsonString).guid);
+            string emJson = JsonConvert.SerializeObject(em);
+            Assert.AreEqual<Guid>(em.Guid.Value, JsonConvert.DeserializeObject<Energiemenge>(emJson).Guid.Value);
+
+            Geschaeftspartner gp = new Geschaeftspartner()
+            {
+                Gewerbekennzeichnung = true,
+                Guid = Guid.NewGuid()
+            };
+
+            string gpJson = JsonConvert.SerializeObject(gp);
+            Assert.AreEqual<Guid>(gp.Guid.Value, JsonConvert.DeserializeObject<Geschaeftspartner>(gpJson).Guid.Value);
         }
         /*
         [TestMethod]

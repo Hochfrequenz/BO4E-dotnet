@@ -48,10 +48,10 @@ enum Regionskriteriumtyp {
    BUNDESWEIT = 24;
 }
 enum Sparte {
-   STROM = 0;
-   GAS = 1;
-   FERNWAERME = 2;
-   NAHWAERME = 3;
-   WASSER = 4;
-   ABWASSER = 5;
+   Sparte_STROM = 0;
+   Sparte_GAS = 1;
+   Sparte_FERNWAERME = 2;
+   Sparte_NAHWAERME = 3;
+   Sparte_WASSER = 4;
+   Sparte_ABWASSER = 5;
 }

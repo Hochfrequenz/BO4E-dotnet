@@ -38,7 +38,7 @@ namespace BO4E.BO
         [JsonProperty(Required = Required.Default, Order = 6, PropertyName = "titel")]
         [ProtoMember(6)]
         [DataCategory(DataCategory.NAME)]
-        public Titel? Titel;
+        public Titel? Titel { get; set; }
 
         /// <summary>Vorname des Ansprechpartners</summary>
         [JsonProperty(Required = Required.Default, Order = 7, PropertyName = "vorname")]
@@ -67,7 +67,8 @@ namespace BO4E.BO
         public string Kommentar { get; set; }
 
         /// <summary>Der Geschäftspartner, für den dieser Ansprechpartner modelliert wird.</summary>
-        [JsonProperty(Required = Required.Always, Order = 11, PropertyName = "geschaeftspartner")]
+        [JsonProperty(Required = Required.Default, Order = 11, PropertyName = "geschaeftspartner")]
+        [NonOfficial(NonOfficialCategory.UNSPECIFIED)] // it's always required in BO4E, changed it to default 2020-08-31 KK
         [ProtoMember(11)]
         [BoKey]
         public Geschaeftspartner Geschaeftspartner { get; set; }
@@ -79,15 +80,16 @@ namespace BO4E.BO
         public Adresse Adresse { get; set; }
 
         /// <summary>Liste der Telefonnummern, unter denen der Ansprechpartner erreichbar ist.</summary>
-        [JsonProperty(Required = Required.Default, Order = 13, PropertyName = "rufnummer")]
+        [NonOfficial(NonOfficialCategory.UNSPECIFIED)] //  We suggest to name it "rufnummern" instead of "rufnummer" because it's a list")]
+        [JsonProperty(Required = Required.Default, Order = 13, PropertyName = "rufnummern")]
         [ProtoMember(13)]
         [DataCategory(DataCategory.ADDRESS)]
-        public List<Rufnummer> Rufnummer;
+        public List<Rufnummer> Rufnummern { get; set; }
 
         /// <summary>Liste der Abteilungen und Zuständigkeiten des Ansprechpartners.</summary>
         [JsonProperty(Required = Required.Default, Order = 14, PropertyName = "zustaendigkeit")]
         [ProtoMember(14)]
-        public List<Zustaendigkeit> Zustaendigkeit;
+        public List<Zustaendigkeit> Zustaendigkeit { get; set; }
 
     }
 }

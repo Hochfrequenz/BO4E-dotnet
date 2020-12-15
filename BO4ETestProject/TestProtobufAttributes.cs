@@ -1,12 +1,18 @@
 
-using System;
-using System.Linq;
-using System.Reflection;
 using BO4E.BO;
 using BO4E.COM;
 using BO4E.meta;
+
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+
+using Newtonsoft.Json;
+
 using ProtoBuf;
+
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Reflection;
 
 namespace TestBO4E
 {
@@ -14,10 +20,14 @@ namespace TestBO4E
     public class TestProtobufAttributes
     {
         [TestMethod]
+        public void TestProtobufDateTimeWorkaroundCOM() => TestProtobufDateTimeWorkaround(typeof(COM));
+        [TestMethod]
         public void TestUniqueProtobufMemberIdCOM() => TestUniqueProtobufMemberIdAbstract(typeof(COM));
         [TestMethod]
         public void TestUniqueProtoIncludeTagsCOM() => TestUniqueProtoIncludeTagAbstract(typeof(COM));
 
+        [TestMethod]
+        public void TestProtobufDateTimeWorkaroundBO() => TestProtobufDateTimeWorkaround(typeof(BusinessObject));
         [TestMethod]
         public void TestUniqueProtobufMemberIdBO() => TestUniqueProtobufMemberIdAbstract(typeof(BusinessObject));
         [TestMethod]
@@ -53,7 +63,7 @@ namespace TestBO4E
             var nonOfficialFieldsWithProtoMember = allFields.Where(field => field.GetCustomAttributes(typeof(NonOfficialAttribute)).Any()) // those fields having an [NonOfficial(...)] attribute
                 .Where(field => ((NonOfficialAttribute)(field.GetCustomAttributes(typeof(NonOfficialAttribute)).First())).HasCategory(NonOfficialCategory.CUSTOMER_REQUIREMENTS)) // and the customer_requirements category
                 .Intersect(fieldsWithProtoMemberAttribute); // and a [ProtoMember(<id>)] attribute
-            
+
             var wrongTagsNonOfficial = nonOfficialFieldsWithProtoMember.Where(f => ((ProtoMemberAttribute)f.GetCustomAttributes(typeof(ProtoMemberAttribute)).First()).Tag < 1000);
             Assert.AreEqual(0, wrongTagsNonOfficial.Count(), $"Fields in {type} are non official and do not have proto tags >= 1000: {string.Join(", ", wrongTagsNonOfficial.Select(f => f.Name))}");
             var wrongTagsOfficial = fieldsWithProtoMemberAttribute.Except(nonOfficialFieldsWithProtoMember).Where(f => ((ProtoMemberAttribute)f.GetCustomAttributes(typeof(ProtoMemberAttribute)).First()).Tag > 1000);
@@ -88,6 +98,27 @@ namespace TestBO4E
             }
         }
 
+        protected void TestProtobufDateTimeWorkaround(Type abstractBaseType)
+        {
+            if (!abstractBaseType.IsAbstract)
+            {
+                throw new ArgumentException($"The type {abstractBaseType} is not abstract", nameof(abstractBaseType));
+            }
+            var relevantTypes = typeof(BusinessObject).Assembly.GetTypes()
+                                    .Where(t => abstractBaseType.IsAssignableFrom(t));
+            foreach (var relevantType in relevantTypes)
+            {
+                var dtProperties = relevantType.GetProperties().Where(p => p.PropertyType == typeof(DateTime) || p.PropertyType == typeof(DateTimeOffset));
+                foreach (var dtProperty in dtProperties)
+                {
+                    // there must be an attribute like described in https://github.com/protobuf-net/protobuf-net.Grpc/issues/56#issuecomment-580509687
+                    var pma = dtProperty.GetCustomAttributes<ProtoMemberAttribute>().FirstOrDefault();
+                    Assert.IsNotNull(pma, $"The property {dtProperty.Name} of type {relevantType.Name} is missing the ProtoMemberAttribute.");
+                    Assert.AreEqual(DataFormat.WellKnown, pma.DataFormat, $"The property {dtProperty.Name} of type {relevantType.Name} has the wrong dataformat in the protomember attribute");
+                }
+            }
+        }
+
         protected void TestUniqueProtoIncludeTagAbstract(Type abstractBaseType) // ToDo: test this with preisblatt
         {
             if (!abstractBaseType.IsAbstract)
@@ -104,6 +135,32 @@ namespace TestBO4E
             Assert.AreEqual(0, duplicateIncludeTags.Count, $"The following [(ProtoInclude(<tag>, ...)] attributes are not unique: {string.Join(", ", duplicateIncludeTags.Keys)}");
         }
 
+        [TestMethod]
+        public void TestProtoEnumConsistency()//https://github.com/protobuf-net/protobuf-net/issues/60
+        {
+            var enumTypes = typeof(BO4E.ENUM.AbgabeArt).Assembly.GetTypes()
+                .Where(t => t.IsEnum && t.Namespace.StartsWith("BO4E.ENUM") && !t.Namespace.StartsWith("BO4E.ENUM.EDI"));
+            var allValues = new List<Tuple<Type, string>>();
+            foreach (var enumType in enumTypes)
+            {
+                var naturalEnumValues = enumType.GetFields().Where(f => !f.GetCustomAttributes<ProtoEnumAttribute>().Any()).Select(f => new Tuple<Type, string>(enumType, f.Name));
+                allValues.AddRange(naturalEnumValues);
+                //var protoEnumValues = enumType.GetFields().SelectMany(f => f.GetCustomAttributes<ProtoEnumAttribute>()).Select(pea => new Tuple<Type, string>(enumType, pea.Name));
+                //allValues.AddRange(protoEnumValues);
+                foreach (var field in enumType.GetFields().Where(f => f.GetCustomAttributes<ProtoEnumAttribute>().Any()))
+                {
+                    var pea = field.GetCustomAttributes<ProtoEnumAttribute>().First();
+                    Assert.AreEqual(enumType.Name + "_" + field.Name, pea.Name);
+                    allValues.Add(new Tuple<Type, string>(enumType, pea.Name));
+                }
+                Assert.IsTrue(Enum.IsDefined(enumType, (int)0), $"Any enum must define a ZERO like value for Protobuf3 but {enumType} doesn't.");
+            }
+            var nonDistinctValues = allValues
+                .GroupBy(tuple => tuple.Item2) // group by field/protoenum name
+                .Where(g => g.Count() > 1 && g.Key != "value__")
+                .ToDictionary(x => x.Key, y => y.Select(t => t.Item1.Name));
+            Assert.IsFalse(nonDistinctValues.Any(), $"There are non-distinct Enum values. Add a matching [ProtoEnum] attribute to: {JsonConvert.SerializeObject(nonDistinctValues)}");
+        }
         [TestMethod]
         public void TestExplicitProtobufInheritance()
         {

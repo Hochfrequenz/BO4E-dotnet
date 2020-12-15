@@ -1,15 +1,18 @@
-﻿using System;
-using System.Collections.Generic;
-
-using Newtonsoft.Json;
+﻿using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
+
+using System;
+using System.Collections.Generic;
 
 namespace BO4E.meta.LenientConverters
 {
+    /// <summary>
+    /// Extensions to simplify the usage of the Lenient parser
+    /// </summary>
     public static class LenientParsingExtensions
     {
         /// <summary>
-        /// <inheritdoc cref="GetJsonSerializerSettings(LenientParsing, HashSet{string})/>
+        /// <inheritdoc cref="GetJsonSerializerSettings(LenientParsing, HashSet{string})"/>
         /// </summary>
         /// <param name="lenient"></param>
         /// <returns></returns>
@@ -40,15 +43,18 @@ namespace BO4E.meta.LenientConverters
                             }
                             else
                             {
-                                converters.Add(new LenientDateTimeConverter(new DateTime()));
+                                converters.Add(new LenientDateTimeConverter(new DateTimeOffset()));
                             }
                             break;
+
                         case LenientParsing.EnumList:
                             converters.Add(new LenientEnumListConverter());
                             break;
+
                         case LenientParsing.Bo4eUri:
                             converters.Add(new LenientBo4eUriConverter());
                             break;
+
                         case LenientParsing.StringToInt:
                             converters.Add(new LenientStringToIntConverter());
                             break;

@@ -1,13 +1,16 @@
-﻿using System;
-
-using BO4E.meta;
+﻿using BO4E.meta;
 
 using Newtonsoft.Json;
 
 using ProtoBuf;
 
+using System;
+
 namespace BO4E.BO
 {
+    /// <summary>
+    ///  a log objects allows to log things
+    /// </summary>
     [ProtoContract]
     public class LogObject : BusinessObject
     {
@@ -22,9 +25,9 @@ namespace BO4E.BO
         /// <summary>
         /// date time at which the log event has been raised
         /// </summary>
-        [JsonProperty(Required = Required.Always, Order = 5, PropertyName = "datetime")]
-        [ProtoMember(5)]
-        public DateTime Datetime { get; set; }
+        [JsonProperty(Required = Required.Always, Order = 5, PropertyName = "DateTime")]
+        [ProtoMember(5, DataFormat = DataFormat.WellKnown)]
+        public DateTimeOffset DateTime { get; set; }
 
         /// <summary>
         /// actual log message

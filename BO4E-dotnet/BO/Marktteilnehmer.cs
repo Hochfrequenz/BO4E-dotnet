@@ -12,18 +12,29 @@ namespace BO4E.BO
     //[ProtoContract]
     public class Marktteilnehmer : Geschaeftspartner
     {
+        /// <summary>
+        /// empty constructor
+        /// </summary>
+        public Marktteilnehmer() : base()
+        {
+            Gewerbekennzeichnung = true;
+        }
+
         /// <summary>Gibt im Klartext die Bezeichnung der Marktrolle an.</summary>
+        /// <example>LF</example>
         [JsonProperty(Required = Required.Always, Order = 19, PropertyName = "marktrolle")]
         //[ProtoMember(19)]
         public Marktrolle Marktrolle { get; set; }
 
         /// <summary>Gibt die Codenummer der Marktrolle an.</summary>
+        /// <example>"9903100000006"</example>
         [BoKey(true)]
         [JsonProperty(Required = Required.Always, Order = 20, PropertyName = "rollencodenummer")]
         //[ProtoMember(20)]
         public string Rollencodenummer { get; set; }
 
         /// <summary>Gibt den Typ des Codes an.</summary>
+        /// <example>BDEW (instead of 293, 500 etc.)</example>
         [JsonProperty(Required = Required.Always, Order = 21, PropertyName = "rollencodetyp")]
         //[ProtoMember(21)]
         public Rollencodetyp Rollencodetyp { get; set; }
@@ -32,7 +43,7 @@ namespace BO4E.BO
         /// Die 1:1-Kommunikationsadresse des Marktteilnehmers. Diese wird in der
         /// Marktkommunikation verwendet.
         /// </summary>
-        [JsonProperty(Required = Required.Always, Order = 22, PropertyName = "makoadresse")]
+        [JsonProperty(Required = Required.Default, Order = 22, PropertyName = "makoadresse")] // relaxed from always to default to make COM.Marktrolle obsolete.
         //[ProtoMember(22)]
         public string Makoadresse { get; set; }
 

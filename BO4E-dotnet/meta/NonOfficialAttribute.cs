@@ -25,6 +25,11 @@ namespace BO4E.meta
         /// contains those NonOfficialCategories (<see cref="NonOfficialCategory"/>) annotated to the field.
         /// </summary>
         protected HashSet<Enum> Mapping { get; set; }
+
+        /// <summary>
+        /// instantiate by providing a reason
+        /// </summary>
+        /// <param name="enums"></param>
         public NonOfficialAttribute(params object[] enums)
         {
             if (enums.Any(r => r.GetType().BaseType != typeof(Enum) || r.GetType() != typeof(NonOfficialCategory)))
@@ -37,6 +42,7 @@ namespace BO4E.meta
                 Mapping.Add(e);
             }
         }
+
         /// <summary>
         /// test if a category is part of the attribute data
         /// </summary>

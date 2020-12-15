@@ -324,11 +324,49 @@
             "string",
             "null"
           ]
+        },
+        "timestamp": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "format": "date-time"
         }
       },
       "required": [
         "postleitzahl",
         "ort"
+      ]
+    },
+    "ExterneReferenz": {
+      "type": [
+        "object",
+        "null"
+      ],
+      "properties": {
+        "exRefName": {
+          "type": "string"
+        },
+        "exRefWert": {
+          "type": "string"
+        },
+        "guid": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "timestamp": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "format": "date-time"
+        }
+      },
+      "required": [
+        "exRefName",
+        "exRefWert"
       ]
     },
     "Geschaeftspartner": {
@@ -343,6 +381,15 @@
             "null"
           ]
         },
+        "externeReferenzen": {
+          "type": [
+            "array",
+            "null"
+          ],
+          "items": {
+            "$ref": "#/definitions/ExterneReferenz"
+          }
+        },
         "boTyp": {
           "type": [
             "string",
@@ -351,6 +398,13 @@
         },
         "versionStruktur": {
           "type": "integer"
+        },
+        "timestamp": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "format": "date-time"
         },
         "anrede": {
           "type": [
@@ -364,6 +418,10 @@
             "EHELEUTE",
             "FIRMA",
             "INDIVIDUELL",
+            "FAMILIE",
+            "ERBENGEMEINSCHAFT",
+            "WOHNGEMEINSCHAFT",
+            "GRUNDSTUECKGEMEINSCHAFT",
             "DR"
           ]
         },
@@ -482,6 +540,13 @@
             "null"
           ]
         },
+        "timestamp": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "format": "date-time"
+        },
         "kosten": {
           "type": "number"
         },
@@ -537,6 +602,7 @@
         "einheit": {
           "type": "string",
           "enum": [
+            "ZERO",
             "WH",
             "KW",
             "ANZAHL",
@@ -644,11 +710,24 @@
             "null"
           ]
         },
+        "abrechnungsrelevant": {
+          "type": [
+            "boolean",
+            "null"
+          ]
+        },
         "guid": {
           "type": [
             "string",
             "null"
           ]
+        },
+        "timestamp": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "format": "date-time"
         }
       },
       "required": [
@@ -669,6 +748,15 @@
         "null"
       ]
     },
+    "externeReferenzen": {
+      "type": [
+        "array",
+        "null"
+      ],
+      "items": {
+        "$ref": "#/definitions/ExterneReferenz"
+      }
+    },
     "boTyp": {
       "type": [
         "string",
@@ -677,6 +765,13 @@
     },
     "versionStruktur": {
       "type": "integer"
+    },
+    "timestamp": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "format": "date-time"
     },
     "zaehlernummer": {
       "type": "string"
@@ -700,8 +795,12 @@
       ]
     },
     "zaehlertyp": {
-      "type": "string",
+      "type": [
+        "string",
+        "null"
+      ],
       "enum": [
+        null,
         "DREHSTROMZAEHLER",
         "BALGENGASZAEHLER",
         "DREHKOLBENZAEHLER",

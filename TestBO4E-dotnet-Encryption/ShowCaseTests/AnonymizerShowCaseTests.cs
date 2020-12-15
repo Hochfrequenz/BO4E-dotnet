@@ -24,8 +24,8 @@ namespace TestBO4E.ShowCaseTests
                 new Verbrauch()
                 {
                     Einheit = Mengeneinheit.KWH,
-                    Startdatum = new DateTime(2020,3,1,0,0,0,DateTimeKind.Utc),
-                    Enddatum = new DateTime(2020,3,8,0,0,0,DateTimeKind.Utc),
+                    Startdatum = new DateTimeOffset(2020,3,1,0,0,0,TimeSpan.Zero).UtcDateTime,
+                    Enddatum = new DateTimeOffset(2020,3,8,0,0,0,TimeSpan.Zero).UtcDateTime,
                     Wert = 456.0M,
                     Obiskennzahl ="1-2-3-4",
                     Wertermittlungsverfahren = Wertermittlungsverfahren.MESSUNG
@@ -33,8 +33,8 @@ namespace TestBO4E.ShowCaseTests
                 new Verbrauch()
                 {
                     Einheit = Mengeneinheit.KWH,
-                    Startdatum = new DateTime(2020,3,25,0,0,0,DateTimeKind.Utc),
-                    Enddatum = new DateTime(2020,4,1,0,0,0,DateTimeKind.Utc),
+                    Startdatum = new DateTimeOffset(2020,3,25,0,0,0,TimeSpan.Zero).UtcDateTime,
+                    Enddatum = new DateTimeOffset(2020,4,1,0,0,0,TimeSpan.Zero).UtcDateTime,
                     Wert = 123.0M,
                     Obiskennzahl ="5-6-7-8",
                     Wertermittlungsverfahren = Wertermittlungsverfahren.MESSUNG
@@ -46,7 +46,7 @@ namespace TestBO4E.ShowCaseTests
         public void ShowCaseTest()
         {
             Assert.IsTrue(em.IsValid());
-            BO4E.StaticLogger.Logger = new Microsoft.Extensions.Logging.Debug.DebugLogger("Testlogger", (log, level) => { return true; });
+            BO4E.StaticLogger.Logger = Microsoft.Extensions.Logging.Abstractions.NullLogger.Instance;
             // Image there is a service provider to analyse the verbrauchs data but he shouldn't know about the location data.
             // Yet it should still be possible to map the results back to my original data. So hashing seems like a good approach.
             var config = new AnonymizerConfiguration();

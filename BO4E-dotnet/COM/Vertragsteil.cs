@@ -1,7 +1,7 @@
 ﻿using System;
 
 using BO4E.meta;
-
+using BO4E.meta.LenientConverters;
 using Newtonsoft.Json;
 
 using ProtoBuf;
@@ -19,15 +19,17 @@ namespace BO4E.COM
         /// Start der Gültigkeit des Vertragsteils.
         /// </summary>
         [JsonProperty(PropertyName = "vertragsteilbeginn", Required = Required.Always)]
-        [ProtoMember(3)]
-        public DateTime Vertragsteilbeginn { get; set; }
+        [ProtoMember(3, DataFormat = DataFormat.WellKnown)]
+        [JsonConverter(typeof(LenientDateTimeConverter))]
+        public DateTimeOffset Vertragsteilbeginn { get; set; }
 
         /// <summary>
         /// Ende der Gültigkeit des Vertragsteils.
         /// </summary>
         [JsonProperty(PropertyName = "vertragsteilende", Required = Required.Always)]
-        [ProtoMember(4)]
-        public DateTime Vertragsteilende { get; set; }
+        [ProtoMember(4, DataFormat = DataFormat.WellKnown)]
+        [JsonConverter(typeof(LenientDateTimeConverter))]
+        public DateTimeOffset Vertragsteilende { get; set; }
 
         /// <summary>
         /// Der Identifier für diejenigen Markt- oder Messlokation, die zu diesem Vertragsteil gehören.

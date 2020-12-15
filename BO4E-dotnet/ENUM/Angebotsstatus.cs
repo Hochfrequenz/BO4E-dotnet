@@ -1,3 +1,5 @@
+using ProtoBuf;
+
 namespace BO4E.ENUM
 {
 
@@ -30,6 +32,7 @@ namespace BO4E.ENUM
         /// <summary>
         /// abgelehnt
         /// </summary>
+        [ProtoEnum(Name=nameof(Angebotsstatus)+"_"+nameof(ABGELEHNT))]
         ABGELEHNT,
 
         /// <summary>

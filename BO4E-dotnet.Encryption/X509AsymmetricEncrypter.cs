@@ -1,10 +1,3 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.IO;
-using System.Security.Cryptography.X509Certificates;
-using System.Text;
-
 using BO4E.BO;
 
 using Newtonsoft.Json;
@@ -13,6 +6,13 @@ using Org.BouncyCastle.Cms;
 using Org.BouncyCastle.Crypto;
 using Org.BouncyCastle.OpenSsl;
 using Org.BouncyCastle.Security;
+
+using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.IO;
+using System.Security.Cryptography.X509Certificates;
+using System.Text;
 
 namespace BO4E.Extensions.Encryption
 {
@@ -83,14 +83,14 @@ namespace BO4E.Extensions.Encryption
                 envelopedGen.AddKeyTransRecipient(bouncyCert);
             }
 
-            CmsEnvelopedData envelopedData = envelopedGen.Generate(cpba, CmsEnvelopedDataGenerator.Aes256Cbc);
+            CmsEnvelopedData envelopedData = envelopedGen.Generate(cpba, CmsEnvelopedGenerator.Aes256Cbc);
             string cipherString = Convert.ToBase64String(envelopedData.GetEncoded());
             return cipherString;
         }
 
         public EncryptedObject Encrypt(BusinessObject plainObject)
         {
-            string plainText = JsonConvert.SerializeObject(plainObject);
+            string plainText = JsonConvert.SerializeObject(plainObject, settings: encryptionSerializerSettings);
             string cipherString = Encrypt(plainText);
             return new EncryptedObjectPKCS7(cipherString, GetPublicKeysBase64());
         }
@@ -98,8 +98,7 @@ namespace BO4E.Extensions.Encryption
         public string Decrypt(string cipherText)
         {
             byte[] cipherBytes = Convert.FromBase64String(cipherText);
-            CmsEnvelopedData envelopedData;
-            envelopedData = new CmsEnvelopedData(cipherBytes);
+            var envelopedData = new CmsEnvelopedData(cipherBytes);
             RecipientInformationStore recipientsStore = envelopedData.GetRecipientInfos();
             ICollection recipientsCollection = recipientsStore.GetRecipients();
             IList recipients = recipientsCollection as IList;
@@ -114,12 +113,8 @@ namespace BO4E.Extensions.Encryption
                     plainBytes = recipient.GetContent(this.privateKey);
                     break;
                 }
-                catch (CmsException e)
+                catch (CmsException e) when (index != recipientsStore.Count - 1)
                 {
-                    if (index == recipientsStore.Count - 1)
-                    {
-                        throw e;
-                    }
                 }
                 index++;
             }
@@ -145,7 +140,7 @@ namespace BO4E.Extensions.Encryption
                 return null;
             }
             string plainString = Decrypt(eo.CipherText);
-            return JsonConvert.DeserializeObject<BusinessObject>(plainString);
+            return JsonConvert.DeserializeObject<BusinessObject>(plainString, settings: encryptionSerializerSettings);
         }
 
         public override T Decrypt<T>(EncryptedObject encryptedObject)
@@ -155,7 +150,7 @@ namespace BO4E.Extensions.Encryption
                 return (T)null;
             }
             string plainString = Decrypt(eo.CipherText);
-            return JsonConvert.DeserializeObject<T>(plainString);
+            return JsonConvert.DeserializeObject<T>(plainString, settings: encryptionSerializerSettings);
         }
 
         public override void Dispose()

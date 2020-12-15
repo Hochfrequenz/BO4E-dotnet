@@ -1,9 +1,3 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Reflection;
-using System.Text.RegularExpressions;
-
 using BO4E.BO;
 using BO4E.meta;
 using BO4E.meta.LenientConverters;
@@ -12,16 +6,22 @@ using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using Newtonsoft.Json.Schema;
 
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Reflection;
+using System.Text.RegularExpressions;
+
 namespace BO4E
 {
     /// <summary>
-    /// This class maps generic JObjects to BO4E business objects. 
+    /// This class maps generic JObjects to BO4E business objects.
     /// </summary>
     [Obsolete("The BoMapper is obsolete and should be replace with JsonConvert.DeserializeObject<T>(...) in the long run. It's not a good coding style but still thoroughly tested.")]
     public abstract class BoMapper
     {
-
         private static readonly Regex BO_REGEX = new Regex(@"BO4E\.(?:Extensions\.)?BO\.\b(?<boName>\w+)\b", RegexOptions.Compiled);
+
         /// <summary>
         /// namespace.subnamespace for the BO4E package. maybe there's a more elegant way using self reflection.
         /// </summary>
@@ -103,7 +103,7 @@ namespace BO4E
         /// The assertion error message should be a good hint to what is wrong.
         /// If the method passes without an assertion error, there are at
         /// least no unknown or wrong attributes.
-        /// 
+        ///
         /// <param name="jobject">JObject that should be mapped to a BO4E business object.</param>
         /// <param name="userPropertiesWhiteList">white list of non BO4E standard field you'd like to have de-serialised</param>
         /// <param name="businessObjectType">type of the business object</param>
@@ -189,12 +189,11 @@ namespace BO4E
         {
             if (businessObjectName == null)
             {
-                throw new ArgumentNullException("Business Object Name must not be null.");
+                throw new ArgumentNullException(nameof(businessObjectName));
             }
 
-            Type clazz;
             //Type[] types = Assembly.GetExecutingAssembly().GetTypes();
-            clazz = Assembly.GetExecutingAssembly().GetType(packagePrefix + "." + businessObjectName);
+            var clazz = Assembly.GetExecutingAssembly().GetType(packagePrefix + "." + businessObjectName);
             if (clazz != null)
             {
                 return clazz;
@@ -250,7 +249,7 @@ namespace BO4E
         {
             if (!businessObjectType.IsSubclassOf(typeof(BusinessObject)))
             {
-                throw new ArgumentException($"The given type {businessObjectType.ToString()} is not derived from BusinessObject.");
+                throw new ArgumentException($"The given type {businessObjectType} is not derived from BusinessObject.");
             }
             BusinessObject bo = Activator.CreateInstance(businessObjectType) as BusinessObject;
             return bo.GetJsonScheme();
@@ -266,11 +265,17 @@ namespace BO4E
         {
             return GetAnnotatedFields(boName, typeof(DataCategoryAttribute));
         }
+
         [Obsolete("Fields are only private version 1.1", true)]
+#pragma warning disable CS1591 // Missing XML comment for publicly visible type or member
+        // no docstrings for deprecated methods
         public static FieldInfo[] GetAnnotatedFields(Type type)
+
         {
             return GetAnnotatedFields(type, typeof(DataCategoryAttribute));
         }
+
+#pragma warning restore CS1591 // Missing XML comment for publicly visible type or member
 
         /// <summary>
         /// Get those fields of a business object that do have attributes/annotations.
@@ -279,7 +284,7 @@ namespace BO4E
         /// <param name="boType">type of the business object</param>
         /// <param name="attributeType">type of the attribute/annotation you're interested in<example>typeof(DataCategoryAttribute)</example></param>
         /// <returns>Array of FieldInfos</returns>
-        [Obsolete("Fields are only private version 1.1",true)]
+        [Obsolete("Fields are only private version 1.1", true)]
         public static FieldInfo[] GetAnnotatedFields(Type boType, Type attributeType)
         {
             return boType.GetFields()
@@ -295,7 +300,7 @@ namespace BO4E
         /// <param name="boName">name of the business object in title case<example>Messlokation</example></param>
         /// <param name="attributeType">type of the attribute/annotation you're interested in<example>typeof(DataCategoryAttribute)</example></param>
         /// <returns>Array of FieldInfos</returns>
-        [Obsolete("Fields are only private version 1.1",true)]
+        [Obsolete("Fields are only private version 1.1", true)]
         public static FieldInfo[] GetAnnotatedFields(string boName, Type attributeType)
         {
             return Assembly.GetExecutingAssembly().GetTypes()

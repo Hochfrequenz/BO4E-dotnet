@@ -4,9 +4,12 @@ on:
   push:
     branches:
       - develop
+      - protobuf3
 jobs:
   pushprerelease:
     runs-on: windows-latest
+    env:
+      ACTIONS_ALLOW_UNSECURE_COMMANDS: 'true'
     steps:
     - name: Get current time
       uses: srfrnk/current-time@master

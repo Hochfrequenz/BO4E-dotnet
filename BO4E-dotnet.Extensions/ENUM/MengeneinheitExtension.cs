@@ -1,6 +1,7 @@
-﻿using System;
+﻿using BO4E.ENUM;
+
+using System;
 using System.Collections.Generic;
-using BO4E.ENUM;
 
 namespace BO4E.Extensions.ENUM
 {
@@ -32,6 +33,7 @@ namespace BO4E.Extensions.ENUM
         /// <returns>true iff convertible</returns>
         public static bool AreConvertible(Mengeneinheit me1, Mengeneinheit me2)
         {
+            if (me1 == Mengeneinheit.ZERO || me2 == Mengeneinheit.ZERO) { return false; }
             foreach (ISet<Mengeneinheit> einheitengroup in DIMENSION_SETS)
             {
                 if (einheitengroup.Contains(me1) && einheitengroup.Contains(me2))
@@ -106,7 +108,11 @@ namespace BO4E.Extensions.ENUM
         /// <exception cref="InvalidOperationException">iff units do not have the same dimension</exception>
         public static decimal GetConversionFactor(this Mengeneinheit me1, Mengeneinheit me2)
         {
-            if (me1 == me2)
+            if (me1 == Mengeneinheit.ZERO || me2 == Mengeneinheit.ZERO)
+            {
+                throw new InvalidOperationException($"You must not use the artifical 'ZERO' value.");
+            }
+            else if (me1 == me2)
             {
                 return 1.0M;
             }

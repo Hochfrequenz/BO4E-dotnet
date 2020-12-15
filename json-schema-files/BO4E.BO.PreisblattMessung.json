@@ -324,6 +324,13 @@
             "string",
             "null"
           ]
+        },
+        "timestamp": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "format": "date-time"
         }
       },
       "required": [
@@ -343,6 +350,15 @@
             "null"
           ]
         },
+        "externeReferenzen": {
+          "type": [
+            "array",
+            "null"
+          ],
+          "items": {
+            "$ref": "#/definitions/ExterneReferenz"
+          }
+        },
         "boTyp": {
           "type": [
             "string",
@@ -351,6 +367,13 @@
         },
         "versionStruktur": {
           "type": "integer"
+        },
+        "timestamp": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "format": "date-time"
         },
         "anrede": {
           "type": [
@@ -364,6 +387,10 @@
             "EHELEUTE",
             "FIRMA",
             "INDIVIDUELL",
+            "FAMILIE",
+            "ERBENGEMEINSCHAFT",
+            "WOHNGEMEINSCHAFT",
+            "GRUNDSTUECKGEMEINSCHAFT",
             "DR"
           ]
         },
@@ -412,7 +439,7 @@
         "adresse": {
           "$ref": "#/definitions/Adresse"
         },
-        "rufnummer": {
+        "rufnummern": {
           "type": [
             "array",
             "null"
@@ -432,8 +459,38 @@
         }
       },
       "required": [
-        "nachname",
-        "geschaeftspartner"
+        "nachname"
+      ]
+    },
+    "ExterneReferenz": {
+      "type": [
+        "object",
+        "null"
+      ],
+      "properties": {
+        "exRefName": {
+          "type": "string"
+        },
+        "exRefWert": {
+          "type": "string"
+        },
+        "guid": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "timestamp": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "format": "date-time"
+        }
+      },
+      "required": [
+        "exRefName",
+        "exRefWert"
       ]
     },
     "Geraeteeigenschaften": {
@@ -497,7 +554,7 @@
             "EINTARIF",
             "ZWEITARIF",
             "MEHRTARIF",
-            "GAS_G2_5",
+            "GAS_G2P5",
             "GAS_G4",
             "GAS_G6",
             "GAS_G10",
@@ -531,7 +588,8 @@
             "ZUSTANDS_MU",
             "TEMPERATUR_MU",
             "KOMPAKT_MU",
-            "SYSTEM_MU"
+            "SYSTEM_MU",
+            "UNBESTIMMT"
           ]
         },
         "Parameter": {
@@ -551,6 +609,13 @@
             "string",
             "null"
           ]
+        },
+        "timestamp": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "format": "date-time"
         }
       },
       "required": [
@@ -621,7 +686,7 @@
             "EINTARIF",
             "ZWEITARIF",
             "MEHRTARIF",
-            "GAS_G2_5",
+            "GAS_G2P5",
             "GAS_G4",
             "GAS_G6",
             "GAS_G10",
@@ -655,7 +720,8 @@
             "ZUSTANDS_MU",
             "TEMPERATUR_MU",
             "KOMPAKT_MU",
-            "SYSTEM_MU"
+            "SYSTEM_MU",
+            "UNBESTIMMT"
           ]
         },
         "Parameter": {
@@ -675,6 +741,13 @@
             "string",
             "null"
           ]
+        },
+        "timestamp": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "format": "date-time"
         }
       },
       "required": [
@@ -682,13 +755,25 @@
       ]
     },
     "Geschaeftspartner": {
-      "type": "object",
+      "type": [
+        "object",
+        "null"
+      ],
       "properties": {
         "guid": {
           "type": [
             "string",
             "null"
           ]
+        },
+        "externeReferenzen": {
+          "type": [
+            "array",
+            "null"
+          ],
+          "items": {
+            "$ref": "#/definitions/ExterneReferenz"
+          }
         },
         "boTyp": {
           "type": [
@@ -698,6 +783,13 @@
         },
         "versionStruktur": {
           "type": "integer"
+        },
+        "timestamp": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "format": "date-time"
         },
         "anrede": {
           "type": [
@@ -711,6 +803,10 @@
             "EHELEUTE",
             "FIRMA",
             "INDIVIDUELL",
+            "FAMILIE",
+            "ERBENGEMEINSCHAFT",
+            "WOHNGEMEINSCHAFT",
+            "GRUNDSTUECKGEMEINSCHAFT",
             "DR"
           ]
         },
@@ -826,6 +922,15 @@
             "null"
           ]
         },
+        "externeReferenzen": {
+          "type": [
+            "array",
+            "null"
+          ],
+          "items": {
+            "$ref": "#/definitions/ExterneReferenz"
+          }
+        },
         "boTyp": {
           "type": [
             "string",
@@ -834,6 +939,13 @@
         },
         "versionStruktur": {
           "type": "integer"
+        },
+        "timestamp": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "format": "date-time"
         },
         "anrede": {
           "type": [
@@ -847,6 +959,10 @@
             "EHELEUTE",
             "FIRMA",
             "INDIVIDUELL",
+            "FAMILIE",
+            "ERBENGEMEINSCHAFT",
+            "WOHNGEMEINSCHAFT",
+            "GRUNDSTUECKGEMEINSCHAFT",
             "DR"
           ]
         },
@@ -973,13 +1089,17 @@
         "rollencodetyp": {
           "type": "string",
           "enum": [
+            "ZERO",
+            "GLN",
             "BDEW",
-            "DVGW",
-            "GLN"
+            "DVGW"
           ]
         },
         "makoadresse": {
-          "type": "string"
+          "type": [
+            "string",
+            "null"
+          ]
         },
         "ansprechpartner": {
           "$ref": "#/definitions/Ansprechpartner"
@@ -989,8 +1109,7 @@
         "gewerbekennzeichnung",
         "marktrolle",
         "rollencodenummer",
-        "rollencodetyp",
-        "makoadresse"
+        "rollencodetyp"
       ]
     },
     "PositionsAufAbschlag": {
@@ -1027,6 +1146,13 @@
             "string",
             "null"
           ]
+        },
+        "timestamp": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "format": "date-time"
         }
       },
       "required": [
@@ -1105,6 +1231,7 @@
         "bezugsgroesse": {
           "type": "string",
           "enum": [
+            "ZERO",
             "WH",
             "KW",
             "ANZAHL",
@@ -1242,6 +1369,13 @@
             "string",
             "null"
           ]
+        },
+        "timestamp": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "format": "date-time"
         }
       },
       "required": [
@@ -1276,6 +1410,13 @@
             "string",
             "null"
           ]
+        },
+        "timestamp": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "format": "date-time"
         }
       },
       "required": [
@@ -1312,6 +1453,13 @@
             "string",
             "null"
           ]
+        },
+        "timestamp": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "format": "date-time"
         }
       },
       "required": [
@@ -1342,6 +1490,13 @@
             "string",
             "null"
           ]
+        },
+        "timestamp": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "format": "date-time"
         }
       },
       "required": [
@@ -1398,6 +1553,13 @@
             "string",
             "null"
           ]
+        },
+        "timestamp": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "format": "date-time"
         }
       }
     },
@@ -1430,6 +1592,13 @@
             "string",
             "null"
           ]
+        },
+        "timestamp": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "format": "date-time"
         }
       }
     }
@@ -1442,6 +1611,15 @@
         "null"
       ]
     },
+    "externeReferenzen": {
+      "type": [
+        "array",
+        "null"
+      ],
+      "items": {
+        "$ref": "#/definitions/ExterneReferenz"
+      }
+    },
     "boTyp": {
       "type": [
         "string",
@@ -1450,6 +1628,13 @@
     },
     "versionStruktur": {
       "type": "integer"
+    },
+    "timestamp": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "format": "date-time"
     },
     "bezeichnung": {
       "type": "string"

@@ -1,14 +1,18 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using BO4E.Reporting;
-using BO4E.COM;
+﻿using BO4E.COM;
 using BO4E.ENUM;
+using BO4E.Reporting;
+
 using Itenso.TimePeriod;
+
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 using Newtonsoft.Json.Linq;
+
 using StackExchange.Profiling;
+
+using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace BO4E.Extensions.BusinessObjects.Energiemenge
 {
@@ -22,7 +26,7 @@ namespace BO4E.Extensions.BusinessObjects.Energiemenge
         /// <returns></returns>
         public static CompletenessReport GetCompletenessReport(this BO4E.BO.Energiemenge em, CompletenessReport.CompletenessReportConfiguration config)
         {
-            return em.GetCompletenessReport(new TimeRange(config.ReferenceTimeFrame.Startdatum.Value, config.ReferenceTimeFrame.Enddatum.Value), config.Wertermittlungsverfahren, config.Obis, config.Einheit);
+            return em.GetCompletenessReport(new TimeRange(config.ReferenceTimeFrame.Startdatum.Value.UtcDateTime, config.ReferenceTimeFrame.Enddatum.Value.UtcDateTime), config.Wertermittlungsverfahren, config.Obis, config.Einheit);
         }
 
         /// <summary>
@@ -53,8 +57,8 @@ namespace BO4E.Extensions.BusinessObjects.Energiemenge
                     LokationsId = em.LokationsId,
                     ReferenceTimeFrame = new Zeitraum()
                     {
-                        Startdatum = reference.Start,
-                        Enddatum = reference.End
+                        Startdatum = new DateTimeOffset(reference.Start),
+                        Enddatum = new DateTimeOffset(reference.End)
                     },
                     Coverage = coverage,
                     ErrorMessage = errorMessage
@@ -87,8 +91,8 @@ namespace BO4E.Extensions.BusinessObjects.Energiemenge
                     Obiskennzahl = obiskennzahl,
                     ReferenceTimeFrame = new Zeitraum
                     {
-                        Startdatum = DateTime.SpecifyKind(reference.Start, DateTimeKind.Utc),
-                        Enddatum = DateTime.SpecifyKind(reference.End, DateTimeKind.Utc)
+                        Startdatum = new DateTimeOffset(DateTime.SpecifyKind(reference.Start, DateTimeKind.Utc)),
+                        Enddatum = new DateTimeOffset(DateTime.SpecifyKind(reference.End, DateTimeKind.Utc))
                     },
                 };
             }
@@ -124,7 +128,7 @@ namespace BO4E.Extensions.BusinessObjects.Energiemenge
                     ITimeRange limits;
                     if (result.ReferenceTimeFrame != null && result.ReferenceTimeFrame.Startdatum.HasValue && result.ReferenceTimeFrame.Enddatum.HasValue)
                     {
-                        limits = new TimeRange(result.ReferenceTimeFrame.Startdatum.Value, result.ReferenceTimeFrame.Enddatum.Value);
+                        limits = new TimeRange(result.ReferenceTimeFrame.Startdatum.Value.UtcDateTime, result.ReferenceTimeFrame.Enddatum.Value.UtcDateTime);
                     }
                     else
                     {
@@ -215,7 +219,7 @@ namespace BO4E.Extensions.BusinessObjects.Energiemenge
             {
                 throw new ArgumentNullException(nameof(ranges), "list of time ranges must not be null");
             }
-            if (ranges.Count() > 0)
+            if (ranges.Any())
             {
                 if (useParallelExecution)
                 {

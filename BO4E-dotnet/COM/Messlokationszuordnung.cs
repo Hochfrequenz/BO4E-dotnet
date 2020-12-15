@@ -25,10 +25,10 @@ namespace BO4E.COM
         /// <summary>Zeitpunkt, ab dem die Messlokation zur Marktlokation gehört</summary>
         [JsonProperty(PropertyName = "gueltigSeit", Required = Required.Default)]
         [ProtoMember(5)]
-        public DateTime? GueltigSeit { get; set; }
+        public DateTimeOffset? GueltigSeit { get; set; }
         /// <summary>Zeitpunkt, bis zu dem die Messlokation zur Marktlokation gehört</summary>
         [JsonProperty(PropertyName = "gueltigBis", Required = Required.Default)]
         [ProtoMember(6)]
-        public DateTime? GueltigBis { get; set; }
+        public DateTimeOffset? GueltigBis { get; set; }
     }
 }

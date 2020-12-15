@@ -1,7 +1,7 @@
-﻿using System;
-using System.Linq;
+﻿using Newtonsoft.Json;
 
-using Newtonsoft.Json;
+using System;
+using System.Linq;
 
 namespace BO4E.meta.LenientConverters
 {
@@ -12,11 +12,13 @@ namespace BO4E.meta.LenientConverters
     /// <example>(string)"12" will be parsed as (int)12 where an integer value is expected.</example>
     public class LenientStringToIntConverter : JsonConverter
     {
+        /// <inheritdoc cref="JsonConverter.CanConvert(Type)"/>
         public override bool CanConvert(Type objectType)
         {
             return (objectType == typeof(int) || objectType == typeof(int?));
         }
 
+        /// <inheritdoc cref="JsonConverter.ReadJson(JsonReader, Type, object, JsonSerializer)"/>
         public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
         {
             if (reader.Value == null)
@@ -40,11 +42,11 @@ namespace BO4E.meta.LenientConverters
                 }
             }
         }
-        public override bool CanWrite
-        {
-            get { return false; }
-        }
 
+        /// <inheritdoc cref="JsonConverter.CanWrite"/>
+        public override bool CanWrite => false;
+
+        /// <inheritdoc cref="JsonConverter.WriteJson(JsonWriter, object, JsonSerializer)"/>
         public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
         {
             throw new NotImplementedException();

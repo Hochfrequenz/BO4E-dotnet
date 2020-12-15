@@ -1,9 +1,9 @@
+using Newtonsoft.Json.Linq;
+
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
-
-using Newtonsoft.Json.Linq;
 
 namespace BO4E.Extensions.BusinessObjects.Benachrichtigung
 {
@@ -39,7 +39,7 @@ namespace BO4E.Extensions.BusinessObjects.Benachrichtigung
                 return false;
             }
             // ToDo für Hamid: Bitte prüfen, warum Contains false zurückliefert.
-            return (b.Infos.Where(m => m.KeyColumn == gssi.KeyColumn && m.Value == gssi.Value).Count() > 0);
+            return b.Infos.Any(m => m.KeyColumn == gssi.KeyColumn && m.Value == gssi.Value);
         }
 
         /// <summary>
@@ -54,7 +54,7 @@ namespace BO4E.Extensions.BusinessObjects.Benachrichtigung
             {
                 return false;
             }
-            return (b.Infos.Where(gssi => gssi.KeyColumn == key).Count() > 0);
+            return b.Infos.Any(gssi => gssi.KeyColumn == key);
         }
 
         /// <summary>

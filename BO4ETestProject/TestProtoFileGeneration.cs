@@ -15,7 +15,6 @@ namespace TestBO4E
     [TestClass]
     public class TestProtoFileGeneration
     {
-
         static readonly HashSet<Type> PROTO_SERIALIZABLE_TYPES = new HashSet<Type>()
         {
             typeof(Angebot),
@@ -34,7 +33,6 @@ namespace TestBO4E
             typeof(Zaehler)
         };
 
-
         [TestMethod]
         public void TestProtoGenerationBo() 
         {
@@ -52,6 +50,7 @@ namespace TestBO4E
                     stream.Close();
                 }
                 File.WriteAllText(path, protoString, Encoding.UTF8);
+                
             }
         }
     }

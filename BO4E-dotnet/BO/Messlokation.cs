@@ -1,8 +1,3 @@
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Text.RegularExpressions;
-
 using BO4E.COM;
 using BO4E.ENUM;
 using BO4E.meta;
@@ -11,9 +6,13 @@ using Newtonsoft.Json;
 
 using ProtoBuf;
 
+using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Text.RegularExpressions;
+
 namespace BO4E.BO
 {
-
     // The key order is actually relevant for the online validation. WTF!
     // https://github.com/Hochfrequenz/energy-service-hub/issues/11
     //@JsonPropertyOrder({ "versionStruktur", "boTyp", "messLokationsId", "sparte", "netzebeneMessung", "messgebietNr",
@@ -39,10 +38,10 @@ namespace BO4E.BO
         [JsonProperty(PropertyName = "sparte", Required = Required.Always, Order = 5)]
         [ProtoMember(5)]
         public Sparte Sparte { get; set; }
+
         ///<summary> Spannungsebene der Messung. <seealso cref="Netzebene" /></summary>
         [JsonProperty(PropertyName = "netzebeneMessung", Required = Required.Default, Order = 6)] //explicitly set NOT required.
         [ProtoMember(6)]
-
         public Netzebene? NetzebeneMessung { get; set; }
 
         /// <summary>Die Nummer des Messgebietes in der ene't-Datenbank.</summary>
@@ -70,7 +69,9 @@ namespace BO4E.BO
         /// Messlokation abliest.)
         /// </summary>
         [JsonProperty(PropertyName = "grundzustaendigerMDLCodeNr", Order = 10, Required = Required.Default)]
+#pragma warning disable CS0618 // Type or member is obsolete
         [NonOfficial(NonOfficialCategory.PROPOSED_DELETION)]
+#pragma warning restore CS0618 // Type or member is obsolete
         [ProtoMember(10)]
         [Obsolete("MDL is deprecated.", true)]
         public string GrundzustaendigerMDLCodeNr { get; set; }
@@ -79,7 +80,7 @@ namespace BO4E.BO
         /// diese von der Adresse der Marktlokation abweicht.)
         /// Achtung: Es darf immer nur eine Art der Ortsangabe vorhanden sein (entweder
         /// eine Adresse oder eine GeoKoordinate oder eine Katasteradresse.
-        ///</summary> 
+        ///</summary>
         [JsonProperty(PropertyName = "messadresse", Required = Required.Default, Order = 11)]
         [DataCategory(DataCategory.ADDRESS)]
         [ProtoMember(11)]
@@ -88,7 +89,7 @@ namespace BO4E.BO
         /// <summary> Alternativ zu einer postalischen Adresse kann hier ein Ort mittels
         /// Geokoordinaten angegeben werden (z.B. zur Identifikation von Sendemasten).
         /// Achtung: Es darf immer nur eine Art der Ortsangabe vorhanden sein (entweder
-        /// eine Adresse oder eine GeoKoordinate oder eine Katasteradresse.</summary> 
+        /// eine Adresse oder eine GeoKoordinate oder eine Katasteradresse.</summary>
         [JsonProperty(PropertyName = "geoadresse", Required = Required.Default, Order = 12)]
         [DataCategory(DataCategory.ADDRESS)]
         [ProtoMember(12)]
@@ -138,7 +139,7 @@ namespace BO4E.BO
         [ProtoMember(1019)]
         [NonOfficial(NonOfficialCategory.CUSTOMER_REQUIREMENTS)]
         [Obsolete("This isn't the right place for this information")] // ToDo: check
-        public List<COM.Marktrolle> Marktrollen { get; set; }
+        public List<COM.MarktpartnerDetails> Marktrollen { get; set; }
 
         /// <summary>
         /// gasqualitaet für EDIFACT mapping

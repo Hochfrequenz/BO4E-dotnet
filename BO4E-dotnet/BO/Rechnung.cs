@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Globalization;
-
-using BO4E.COM;
+﻿using BO4E.COM;
 using BO4E.ENUM;
 using BO4E.meta;
 
@@ -10,6 +6,10 @@ using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 
 using ProtoBuf;
+
+using System;
+using System.Collections.Generic;
+using System.Globalization;
 
 namespace BO4E.BO
 {
@@ -57,17 +57,17 @@ namespace BO4E.BO
         /// Ausstellungsdatum der Rechnung.
         /// </summary>
         [JsonProperty(Required = Required.Always, Order = 8, PropertyName = "rechnungsdatum")]
-        [ProtoMember(8)]
+        [ProtoMember(8, DataFormat = DataFormat.WellKnown)]
         [FieldName("billDate", Language.EN)]
-        public DateTime Rechnungsdatum { get; set; }
+        public DateTimeOffset Rechnungsdatum { get; set; }
 
         /// <summary>
         /// Zu diesem Datum ist die Zahlung fällig.
         /// </summary>
         [JsonProperty(Required = Required.Always, Order = 9, PropertyName = "faelligkeitsdatum")]
-        [ProtoMember(9)]
+        [ProtoMember(9, DataFormat = DataFormat.WellKnown)]
         [FieldName("dueDate", Language.EN)]
-        public DateTime Faelligkeitsdatum { get; set; }
+        public DateTimeOffset Faelligkeitsdatum { get; set; }
 
         /// <summary>
         /// Ein kontextbezogender Rechnungstyp, z.B. Netznutzungsrechnung. Details siehe ENUM Rechnungstyp
@@ -146,10 +146,10 @@ namespace BO4E.BO
         [JsonProperty(Required = Required.Default, Order = 19, PropertyName = "rabattBrutto")]
         [ProtoMember(19)]
         [FieldName("discountGross", Language.EN)]
-        public Betrag rabattBrutto { get; set; }
+        public Betrag RabattBrutto { get; set; }
 
         /// <summary>
-        /// Der zu zahlende Betrag, der sich aus (<see cref="Gesamtbrutto"/> - <see cref="Vorausgezahlt"/> - <see cref="rabattBrutto"/>) ergibt. Details <see cref="Betrag"/>
+        /// Der zu zahlende Betrag, der sich aus (<see cref="Gesamtbrutto"/> - <see cref="Vorausgezahlt"/> - <see cref="RabattBrutto"/>) ergibt. Details <see cref="Betrag"/>
         /// /// </summary>
         [JsonProperty(Required = Required.Always, Order = 20, PropertyName = "zuzahlen")]
         [ProtoMember(20)]
@@ -172,7 +172,12 @@ namespace BO4E.BO
         [FieldName("invoiceItemList", Language.EN)]
         public List<Rechnungsposition> Rechnungspositionen { get; set; }
 
-        public Rechnung() { }
+        /// <summary>
+        /// empty constructor for deserilization
+        /// </summary>
+        public Rechnung()
+        {
+        }
 
         /// <summary>
         /// this constructor creates a BO4E.Rechnung from a JSON serialized SAP print document ("Druckbeleg")
@@ -184,7 +189,7 @@ namespace BO4E.BO
             // Initially I exported the SAP print document "Druckbeleg") using the SAP library /ui2/cl_json which allows for pretty printing
             // the ALL_UPPER_CASE SAP internal keys to lowerCamelCase. Later on technical constraints in SAP forced me to use a different
             // serialization which is closer to SAPs internal structure and has no lower case keys at all. Furthermore in SAP there is
-            // no difference between string.Empty and null; the latter doesn't even exist as a concept. 
+            // no difference between string.Empty and null; the latter doesn't even exist as a concept.
             JToken infoToken = sapPrintDocument.SelectToken("erdk") ?? sapPrintDocument.SelectToken("ERDK");
             JToken tErdzToken = sapPrintDocument.SelectToken("tErdz") ?? sapPrintDocument.SelectToken("T_ERDZ");
             if (tErdzToken == null)
@@ -193,17 +198,17 @@ namespace BO4E.BO
             }
 
             Rechnungsnummer = (infoToken["opbel"] ?? infoToken["OPBEL"]).Value<string>();
-            Rechnungsdatum = TimeZoneInfo.ConvertTime((infoToken["bldat"] ?? infoToken["BLDAT"]).Value<DateTime>(), Verbrauch.CENTRAL_EUROPE_STANDARD_TIME, TimeZoneInfo.Utc);
+            Rechnungsdatum = new DateTimeOffset(TimeZoneInfo.ConvertTime((infoToken["bldat"] ?? infoToken["BLDAT"]).Value<DateTime>(), CentralEuropeStandardTime.CENTRAL_EUROPE_STANDARD_TIME, TimeZoneInfo.Utc));
             Rechnungsperiode = new Zeitraum()
             {
-                Startdatum = TimeZoneInfo.ConvertTime((tErdzToken[0]["ab"] ?? tErdzToken[0]["AB"]).Value<DateTime>(), Verbrauch.CENTRAL_EUROPE_STANDARD_TIME, TimeZoneInfo.Utc),
-                Enddatum = TimeZoneInfo.ConvertTime((tErdzToken[0]["bis"] ?? tErdzToken[0]["BIS"]).Value<DateTime>(), Verbrauch.CENTRAL_EUROPE_STANDARD_TIME, TimeZoneInfo.Utc)
+                Startdatum = new DateTimeOffset(TimeZoneInfo.ConvertTime((tErdzToken[0]["ab"] ?? tErdzToken[0]["AB"]).Value<DateTime>(), CentralEuropeStandardTime.CENTRAL_EUROPE_STANDARD_TIME, TimeZoneInfo.Utc)),
+                Enddatum = new DateTimeOffset(TimeZoneInfo.ConvertTime((tErdzToken[0]["bis"] ?? tErdzToken[0]["BIS"]).Value<DateTime>(), CentralEuropeStandardTime.CENTRAL_EUROPE_STANDARD_TIME, TimeZoneInfo.Utc))
             };
-            Faelligkeitsdatum = TimeZoneInfo.ConvertTime((infoToken["faedn"] ?? infoToken["FAEDN"]).Value<DateTime>(), Verbrauch.CENTRAL_EUROPE_STANDARD_TIME, TimeZoneInfo.Utc);
+            Faelligkeitsdatum = new DateTimeOffset(TimeZoneInfo.ConvertTime((infoToken["faedn"] ?? infoToken["FAEDN"]).Value<DateTime>(), CentralEuropeStandardTime.CENTRAL_EUROPE_STANDARD_TIME, TimeZoneInfo.Utc));
             Storno = false;
 
-            decimal gNetto, gSteure, gBrutto, vGezahlt, rBrutto, zZahlen;
-            gNetto = gSteure = gBrutto = vGezahlt = rBrutto = zZahlen = 0.00M;
+            decimal gSteure, gBrutto, vGezahlt, rBrutto;
+            var gNetto = gSteure = _ = vGezahlt = rBrutto = 0.00M;
             Waehrungscode waehrungscode = (Waehrungscode)Enum.Parse(typeof(Waehrungscode), (infoToken["totalWaer"] ?? infoToken["TOTAL_WAER"]).Value<string>());
             Waehrungseinheit waehrungseinheit = (Waehrungseinheit)Enum.Parse(typeof(Waehrungseinheit), (infoToken["totalWaer"] ?? infoToken["TOTAL_WAER"]).Value<string>());
             Mengeneinheit mengeneinheit = (Mengeneinheit)Enum.Parse(typeof(Mengeneinheit), (tErdzToken[0]["massbill"] ?? tErdzToken[0]["MASSBILL"]).Value<string>());
@@ -286,19 +291,20 @@ namespace BO4E.BO
                             };
                     }
 
-
                     rp.Positionsnummer = (jrp["belzeile"] ?? jrp["BELZEILE"]).Value<int>();
                     if ((jrp["bis"] ?? jrp["BIS"]) != null && (jrp["bis"] ?? jrp["BIS"]).Value<string>() != "0000-00-00")
                     {
-                        rp.LieferungBis = TimeZoneInfo.ConvertTime((jrp["bis"] ?? jrp["BIS"]).Value<DateTime>(), Verbrauch.CENTRAL_EUROPE_STANDARD_TIME, TimeZoneInfo.Utc);
+                        rp.LieferungBis = new DateTimeOffset(TimeZoneInfo.ConvertTime((jrp["bis"] ?? jrp["BIS"]).Value<DateTime>(), CentralEuropeStandardTime.CENTRAL_EUROPE_STANDARD_TIME, TimeZoneInfo.Utc));
                     }
                     if ((jrp["ab"] ?? jrp["AB"]) != null && (jrp["ab"] ?? jrp["AB"]).Value<string>() != "0000-00-00")
                     {
-                        rp.LieferungVon = TimeZoneInfo.ConvertTime((jrp["ab"] ?? jrp["AB"]).Value<DateTime>(), Verbrauch.CENTRAL_EUROPE_STANDARD_TIME, TimeZoneInfo.Utc);
+                        rp.LieferungVon = new DateTimeOffset(TimeZoneInfo.ConvertTime((jrp["ab"] ?? jrp["AB"]).Value<DateTime>(), CentralEuropeStandardTime.CENTRAL_EUROPE_STANDARD_TIME, TimeZoneInfo.Utc));
                     }
                     if ((jrp["vertrag"] ?? jrp["VERTRAG"]) != null)
                     {
+#pragma warning disable CS0618 // Type or member is obsolete
                         rp.VertragskontoId = (jrp["vertrag"] ?? jrp["VERTRAG"]).Value<string>();
+#pragma warning restore CS0618 // Type or member is obsolete
                     }
 
                     if ((jrp["iAbrmenge"] ?? jrp["I_ABRMENGE"]) != null)
@@ -410,7 +416,7 @@ namespace BO4E.BO
             Steuerbetraege = stList;
             Rechnungspositionen = rpList;
             gBrutto = gNetto + gSteure;
-            zZahlen = gBrutto - vGezahlt - rBrutto;
+            var zZahlen = gBrutto - vGezahlt - rBrutto;
             Gesamtnetto = new Betrag() { Wert = gNetto, Waehrung = waehrungscode };
             Gesamtsteuer = new Betrag() { Wert = gSteure, Waehrung = waehrungscode };
             Gesamtbrutto = new Betrag() { Wert = gBrutto, Waehrung = waehrungscode };

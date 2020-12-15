@@ -1,10 +1,4 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Linq;
-using System.Reflection;
-using System.Runtime.Serialization;
-
+using BO4E.COM;
 using BO4E.meta;
 
 using Newtonsoft.Json;
@@ -14,6 +8,13 @@ using Newtonsoft.Json.Schema.Generation;
 using Newtonsoft.Json.Serialization;
 
 using ProtoBuf;
+
+using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.Linq;
+using System.Reflection;
 
 namespace BO4E.BO
 {
@@ -40,7 +41,7 @@ namespace BO4E.BO
     [ProtoInclude(13, typeof(Vertrag))]
     [ProtoInclude(14, typeof(Zaehler))]
     [ProtoInclude(15, typeof(LogObject))]
-    public abstract class BusinessObject : IEquatable<BusinessObject>
+    public abstract class BusinessObject : IEquatable<BusinessObject>, IUserProperties, IOptionalGuid
     {
         /// <summary>
         /// obligatory type of the business object in UPPER CASE
@@ -51,7 +52,11 @@ namespace BO4E.BO
         /// </example>
         [JsonProperty(Required = Required.Default, Order = 1, PropertyName = "boTyp")]
         [ProtoMember(1)]
-        public string BoTyp { get; set; }
+        public string BoTyp
+        {
+            get => GetType().Name.ToUpper();
+            set { }
+        }
 
         /// <summary>
         /// Fields that are not part of the BO4E-definition are stored in a element, that is
@@ -89,7 +94,8 @@ namespace BO4E.BO
         /// <summary>
         /// User properties (non bo4e standard)
         /// </summary>
-        [JsonProperty(PropertyName = USER_PROPERTIES_NAME, Required = Required.Default, Order = 200)]
+        [JsonProperty(PropertyName = USER_PROPERTIES_NAME, Required = Required.Default,
+            DefaultValueHandling = DefaultValueHandling.Ignore, Order = 200)]
         [JsonExtensionData]
         [ProtoMember(200)]
         [DataCategory(DataCategory.USER_PROPERTIES)]
@@ -100,8 +106,8 @@ namespace BO4E.BO
         /// </summary>
         protected BusinessObject()
         {
-            BoTyp = this.GetType().Name.ToUpper();
-            versionStruktur = 1;
+            //BoTyp = this.GetType().Name.ToUpper();
+            VersionStruktur = 1;
         }
 
         /// <summary>
@@ -113,27 +119,141 @@ namespace BO4E.BO
         /// <summary>
         /// This method is just to make sure the mapping actually makes sense.
         /// </summary>
-        /// <param name="s">name of the business object</param>
-        protected void SetBoTyp(string s)
+        /// <param name="_">name of the business object</param>
+        protected void SetBoTyp(string _)
         {
             //Debug.Assert(boTyp == s);
         }
+
         /// <summary>
         /// obligatory version of the BO4E definition. Currently hard coded to 1
         /// </summary>
         /// <example>
         /// 1
         /// </example>
-        [JsonProperty(Required = Required.Default, Order = 2)]
+        [JsonProperty(PropertyName = "versionStruktur", Required = Required.Default, Order = 2)]
         [ProtoMember(2)]
-        public int versionStruktur;
+        public int VersionStruktur { get; set; }
 
         /// <summary>
         /// allows adding a GUID to Business Objects for tracking across systems
         /// </summary>
-        [JsonProperty(NullValueHandling = NullValueHandling.Ignore, Required = Required.Default)]
+        [JsonProperty(PropertyName = "guid", NullValueHandling = NullValueHandling.Ignore, Required = Required.Default)]
+        public virtual Guid? Guid { get; set; }
+
+        /// <summary>
+        /// protobuf serilization requires the <see cref="Guid"/> as string.
+        /// </summary>
+        // note that this inheritance protobuf thing doesn't work as expected. please see the comments in TestBO4E project->TestProfobufSerialization
         [ProtoMember(3)]
-        public string guid;
+#pragma warning disable IDE1006 // Naming Styles
+        protected virtual string guidSerialized
+#pragma warning restore IDE1006 // Naming Styles
+        {
+            get => this.Guid.HasValue ? this.Guid.ToString() : string.Empty;
+            set { this.Guid = string.IsNullOrWhiteSpace(value) ? (Guid?)null : System.Guid.Parse(value.ToString()); }
+        }
+        /// <summary>
+        /// Store the latest database update, is Datetime, because postgres doesn't handle datetimeoffset in a generated column gracefully
+        /// </summary>
+        [JsonProperty(PropertyName = "timestamp", NullValueHandling = NullValueHandling.Ignore, Required = Required.Default, Order = 2)]
+        [Timestamp]
+        public DateTime? Timestamp { get; set; }
+
+
+
+        /// <summary>
+        /// Hier können IDs anderer Systeme hinterlegt werden (z.B. eine SAP-GP-Nummer) (Details siehe <see cref="ExterneReferenz"/>)
+        /// </summary>
+        [JsonProperty(PropertyName = "externeReferenzen", Required = Required.Default)]
+        [ProtoMember(4)]
+        public List<ExterneReferenz> ExterneReferenzen { get; set; }
+
+        /// <summary>
+        /// <inheritdoc cref="ExterneReferenzExtensions.TryGetExterneReferenz(ICollection{ExterneReferenz}, string, out string)"/>
+        /// </summary>
+        public bool TryGetExterneReferenz(string extRefName, out string extRefWert)
+            => this.ExterneReferenzen.TryGetExterneReferenz(extRefName, out extRefWert);
+
+        /// <summary>
+        /// <inheritdoc cref="ExterneReferenzExtensions.SetExterneReferenz"/>
+        /// </summary>
+        public void SetExterneReferenz(ExterneReferenz extRef, bool overwriteExisting = false)
+            => this.ExterneReferenzen = this.ExterneReferenzen.SetExterneReferenz(extRef, overwriteExisting);
+
+        /// <summary>
+        /// checks if the BusinessObject has a flag set.
+        /// </summary>
+        /// <remarks>"having a flag set" means that the Business Object has a UserProperty entry that has <paramref name="flagKey"/> as key and the value of the user property is true.</remarks>
+        /// <param name="flagKey"></param>
+        /// <returns>true iff flag is set and has value true</returns>
+        public bool HasFlagSet(string flagKey)
+        {
+            if (string.IsNullOrWhiteSpace(flagKey))
+            {
+                throw new ArgumentNullException(nameof(flagKey));
+            }
+            try
+            {
+                return this.UserProperties != null && this.UserPropertyEquals(flagKey, other: (bool?)true);
+            }
+            catch (ArgumentNullException ane) when (ane.ParamName == "value")
+            {
+                return false;
+            }
+        }
+
+        /// <summary>
+        /// set the value of flag <paramref name="flagKey"/> to <paramref name="flagValue"/>.
+        /// If there is no such flag or not user properties yet, they will be created.
+        /// </summary>
+        /// <remarks>"having a flag set" means that the Business Object has a UserProperty entry that has <paramref name="flagKey"/> as key and the value of the user property is true.</remarks>
+        /// <param name="flagKey">key in the userproperties that should hold the value <paramref name="flagValue"/></param>
+        /// <param name="flagValue">flag value, use null to remove the flag</param>
+        /// <returns>true iff userProperties had been modified, false if not</returns>
+        public bool SetFlag<TBusinessObject>(string flagKey, bool? flagValue = true) where TBusinessObject : BO4E.BO.BusinessObject, IUserProperties
+        {
+            if (string.IsNullOrWhiteSpace(flagKey))
+            {
+                throw new ArgumentNullException(nameof(flagKey));
+            }
+            if (this.UserProperties == null)
+            {
+                this.UserProperties = new Dictionary<string, JToken>();
+                if (!flagValue.HasValue)
+                {
+                    return false;
+                }
+            }
+            else if (flagValue.HasValue && flagValue.Value == this.HasFlagSet(flagKey))
+            {
+                return false;
+            }
+            if (!flagValue.HasValue)
+            {
+                if (!this.UserProperties.ContainsKey(flagKey))
+                {
+                    return false;
+                }
+                else
+                {
+                    this.UserProperties.Remove(flagKey);
+                    return true;
+                }
+            }
+            else
+            {
+                if (((TBusinessObject)this).TryGetUserProperty<bool?, TBusinessObject>(flagKey, out var existingValue) && existingValue == flagValue.Value)
+                {
+                    return false;
+                }
+                else
+                {
+                    this.UserProperties[flagKey] = flagValue.Value;
+                }
+                return true;
+            }
+        }
 
         /// <summary>
         /// returns a JSON scheme for the Business Object
@@ -154,7 +274,7 @@ namespace BO4E.BO
         {
             if (!boType.IsSubclassOf(typeof(BusinessObject)))
             {
-                throw new ArgumentException($"You must only request JSON schemes for Business Objects. {boType.ToString()} is not a valid Business Object type.");
+                throw new ArgumentException($"You must only request JSON schemes for Business Objects. {boType} is not a valid Business Object type.");
             }
             JSchemaGenerator generator = new JSchemaGenerator();
             generator.GenerationProviders.Add(new StringEnumGenerationProvider());
@@ -163,7 +283,7 @@ namespace BO4E.BO
         }
 
         /// <summary>
-        /// Get a BO4E compliant URI for this business object. 
+        /// Get a BO4E compliant URI for this business object.
         /// </summary>
         /// Use .ToString() on the result to pass it between services.
         /// <returns>a BO4E compliant URI object</returns>
@@ -176,8 +296,8 @@ namespace BO4E.BO
         /// (Some) Business Objects do have keys that should identify them in a unique manner across
         /// multiple systems. This method returns a list of these keys. The list contains the key
         /// names as they are serialised in JSON. This means that the fields PropertyName is part
-        /// of the list if JsonPropertyAttribute.PropertyName is set in the Business Objects 
-        /// definition. Please do not use this method trying to access the actual key values. Use 
+        /// of the list if JsonPropertyAttribute.PropertyName is set in the Business Objects
+        /// definition. Please do not use this method trying to access the actual key values. Use
         /// the <see cref="GetBoKeys"/> or <see cref="GetBoKeyProps(Type)"/> for this purpose.
         /// The list is sorted by the JsonPropertyAttribute.Order, assuming 0 if not specified.
         /// </summary>
@@ -205,7 +325,7 @@ namespace BO4E.BO
             foreach (var pi in GetBoKeyProps(boType))
             {
                 JsonPropertyAttribute jpa = pi.GetCustomAttribute<JsonPropertyAttribute>();
-                if (jpa != null && jpa.PropertyName != null)
+                if (jpa?.PropertyName != null)
                 {
                     result.Add(jpa.PropertyName);
                 }
@@ -242,10 +362,14 @@ namespace BO4E.BO
         /// <returns><see cref="GetExpandablePropertyNames(Type)"/></returns>
         public static Dictionary<string, Type> GetExpandableFieldNames(string boTypeName)
         {
+#pragma warning disable CS0618 // Type or member is obsolete
             Type clazz = Assembly.GetExecutingAssembly().GetType(BoMapper.packagePrefix + "." + boTypeName);
+#pragma warning restore CS0618 // Type or member is obsolete
             if (clazz == null)
             {
+#pragma warning disable CS0618 // Type or member is obsolete
                 throw new ArgumentException($"{boTypeName} is not a valid Business Object name. Use one of the following: {string.Join("\n -", BoMapper.GetValidBoNames())}");
+#pragma warning restore CS0618 // Type or member is obsolete
             }
             return GetExpandablePropertyNames(clazz);
         }
@@ -268,7 +392,7 @@ namespace BO4E.BO
             {
                 string fieldName;
                 JsonPropertyAttribute jpa = prop.GetCustomAttribute<JsonPropertyAttribute>();
-                if (jpa != null && jpa.PropertyName != null)
+                if (jpa?.PropertyName != null)
                 {
                     fieldName = jpa.PropertyName;
                 }
@@ -320,7 +444,7 @@ namespace BO4E.BO
             foreach (var pi in GetBoKeyProps(this.GetType()))
             {
                 JsonPropertyAttribute jpa = pi.GetCustomAttribute<JsonPropertyAttribute>();
-                if (jpa != null && jpa.PropertyName != null)
+                if (jpa?.PropertyName != null)
                 {
                     result.Add(jpa.PropertyName, pi.GetValue(this));
                 }
@@ -342,7 +466,7 @@ namespace BO4E.BO
         {
             if (!boType.IsSubclassOf(typeof(BusinessObject)))
             {
-                throw new ArgumentException($"Business Object keys are only defined on Business Object types but {boType.ToString()} is not a Business Object.");
+                throw new ArgumentException($"Business Object keys are only defined on Business Object types but {boType} is not a Business Object.");
             }
             return boType.GetProperties()
                  .Where(p => p.GetCustomAttributes(typeof(BoKey), false).Length > 0)
@@ -428,19 +552,6 @@ namespace BO4E.BO
         }
 
         /// <summary>
-        /// converts <see cref="BusinessObject.BoTyp"/> to upper case.
-        /// </summary>
-        /// <param name="context"></param>
-        [OnDeserialized]
-        protected void DeserializationFixes(StreamingContext context)
-        {
-            if (BoTyp != null)
-            {
-                this.BoTyp = BoTyp.ToUpper();
-            }
-        }
-
-        /// <summary>
         /// Tests if the object does contain all mandatory information / fields.
         /// To do so, the function tries to serialize the object as JSON.
         /// If the serialization fails due to fields that are <see cref="JsonPropertyAttribute.Required"/> but not filled
@@ -468,11 +579,9 @@ namespace BO4E.BO
                 {
                     return null; // pretend TableSortRuleConvert is not specified (thus avoiding a stack overflow)
                 }
-
                 return base.ResolveContractConverter(objectType);
             }
         }
-
 
         internal class BusinessObjectBaseConverter : JsonConverter
         {
@@ -485,15 +594,28 @@ namespace BO4E.BO
 
             public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
             {
+                if (reader.TokenType == JsonToken.Null)
+                {
+                    return null;
+                }
                 if (objectType.IsAbstract)
                 {
                     JObject jo = JObject.Load(reader);
                     Type boType;
-                    if (!jo.ContainsKey("boTyp"))
+                    if (serializer.TypeNameHandling.HasFlag(TypeNameHandling.Objects) && jo.TryGetValue("$type", out JToken typeToken))
+                    {
+                        boType = BusinessObjectSerializationBinder.BusinessObjectAndCOMTypes.SingleOrDefault(t => typeToken.Value<string>().ToUpper().StartsWith(t.FullName.ToUpper()));
+                    }
+                    else if (!jo.ContainsKey("boTyp"))
                     {
                         throw new ArgumentException("If deserializing into an abstract BusinessObject the key \"boTyp\" has to be set. But it wasn't.");
                     }
-                    boType = BoMapper.GetTypeForBoName(jo["boTyp"].Value<string>()); // ToDo: catch exception if boTyp is not set and throw exception with descriptive error message
+                    else
+                    {
+#pragma warning disable CS0618 // Type or member is obsolete
+                        boType = BoMapper.GetTypeForBoName(jo["boTyp"].Value<string>()); // ToDo: catch exception if boTyp is not set and throw exception with descriptive error message
+#pragma warning restore CS0618 // Type or member is obsolete
+                    }
                     if (boType == null)
                     {
                         foreach (var assembley in AppDomain.CurrentDomain.GetAssemblies())
@@ -547,10 +669,7 @@ namespace BO4E.BO
                 }
             }
 
-            public override bool CanWrite
-            {
-                get { return false; }
-            }
+            public override bool CanWrite => false;
 
             public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
             {

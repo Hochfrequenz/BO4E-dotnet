@@ -1,11 +1,12 @@
-using System;
-
 using BO4E.ENUM;
 using BO4E.meta;
+using BO4E.meta.LenientConverters;
 
 using Newtonsoft.Json;
 
 using ProtoBuf;
+
+using System;
 
 namespace BO4E.COM
 
@@ -48,60 +49,74 @@ namespace BO4E.COM
         [JsonProperty(PropertyName = "startAbrechnungsjahr", Required = Required.Default)]
         [NonOfficial(NonOfficialCategory.CUSTOMER_REQUIREMENTS)]
         [ProtoMember(1009)]
-        public DateTime? StartAbrechnungsjahr { get; set; }
+        [JsonConverter(typeof(LenientDateTimeConverter))]
+#pragma warning disable CS1591 // Missing XML comment for publicly visible type or member
+        // todo @hamid: add a docstring
+        public DateTimeOffset? StartAbrechnungsjahr { get; set; }
 
-        // ToDo: Docstring! why is this a zeitraum and no DateTime??
+        // ToDo: Docstring! why is this a zeitraum and no DateTimeOffset??
         [JsonProperty(PropertyName = "geplanteTurnusablesung", Required = Required.Default)]
         [NonOfficial(NonOfficialCategory.CUSTOMER_REQUIREMENTS)]
         [ProtoMember(1010)]
+        // todo @hamid: add a docstring
         public Zeitraum GeplanteTurnusablesung { get; set; }
 
         // ToDo: Docstring! what is the unit? days? why don't you use zeitraum?
+        // todo @hamid: add a docstring
         [JsonProperty(PropertyName = "turnusablesungIntervall", Required = Required.Default)]
         [NonOfficial(NonOfficialCategory.CUSTOMER_REQUIREMENTS)]
         [ProtoMember(1011)]
         public int? TurnusablesungIntervall { get; set; }
 
         // ToDo: Docstring!
+        // todo @hamid: add a docstring
         [JsonProperty(PropertyName = "netznutzungsabrechnung", Required = Required.Default)]
         [NonOfficial(NonOfficialCategory.CUSTOMER_REQUIREMENTS)]
         [ProtoMember(1012)]
         public Zeitraum Netznutzungsabrechnung { get; set; }
 
         // ToDo: Docstring! what is the unit? days? why dont you use zeitraum?
+        // todo @hamid: add a docstring
         [JsonProperty(PropertyName = "netznutzungsabrechnungIntervall", Required = Required.Default)]
         [NonOfficial(NonOfficialCategory.CUSTOMER_REQUIREMENTS)]
         [ProtoMember(1013)]
         public int? NetznutzungsabrechnungIntervall { get; set; }
 
         // ToDo: Docstring!
+        // todo @hamid: add a docstring
         [JsonProperty(PropertyName = "haushaltskunde", Required = Required.Default)]
         [NonOfficial(NonOfficialCategory.CUSTOMER_REQUIREMENTS)]
         [ProtoMember(1014)]
         public bool? Haushaltskunde { get; set; }
 
         // ToDo: Docstring!
+        // todo @hamid: add a docstring
         [JsonProperty(PropertyName = "netznutzungsvertrag", Required = Required.Default)]
         [NonOfficial(NonOfficialCategory.CUSTOMER_REQUIREMENTS)]
         [ProtoMember(1015)]
         public NetznutzungsVertrag? Netznutzungsvertrag { get; set; }
 
         // ToDo: Docstring!
+        // todo @hamid: add a docstring
         [JsonProperty(PropertyName = "netznutzungszahler", Required = Required.Default)]
         [NonOfficial(NonOfficialCategory.CUSTOMER_REQUIREMENTS)]
         [ProtoMember(1016)]
         public Netznutzungszahler? Netznutzungszahler { get; set; }
 
         // ToDo: Docstring!
+        // todo @hamid: add a docstring
         [JsonProperty(PropertyName = "netznutzungsabrechnungsvariante", Required = Required.Default)]
         [NonOfficial(NonOfficialCategory.CUSTOMER_REQUIREMENTS)]
         [ProtoMember(1017)]
         public Netznutzungsabrechnungsvariante? Netznutzungsabrechnungsvariante { get; set; }
 
         // ToDo: Docstring!
+        // todo @hamid: add a docstring
         [JsonProperty(PropertyName = "netznutzungsabrechnungsgrundlage", Required = Required.Default)]
         [NonOfficial(NonOfficialCategory.CUSTOMER_REQUIREMENTS)]
         [ProtoMember(1018)]
         public Netznutzungsabrechnungsgrundlage? Netznutzungsabrechnungsgrundlage { get; set; }
+
+#pragma warning restore CS1591 // Missing XML comment for publicly visible type or member
     }
 }

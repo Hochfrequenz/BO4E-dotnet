@@ -1,12 +1,8 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-
 using BO4E.COM;
 using BO4E.ENUM;
 using BO4E.Extensions.COM;
 using BO4E.Extensions.ENUM;
+using BO4E.meta;
 using BO4E.Reporting;
 
 using Itenso.TimePeriod;
@@ -14,6 +10,11 @@ using Itenso.TimePeriod;
 using Newtonsoft.Json.Linq;
 
 using StackExchange.Profiling;
+
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 
 using static BO4E.Extensions.COM.VerbrauchExtension;
 
@@ -53,7 +54,7 @@ namespace BO4E.Extensions.BusinessObjects.Energiemenge
         {
             using (MiniProfiler.Current.Step(nameof(GetTimeRange)))
             {
-                return new TimeRange(menge.GetMinDate(), menge.GetMaxDate());
+                return new TimeRange(menge.GetMinDate().UtcDateTime, menge.GetMaxDate().UtcDateTime);
             }
         }
 
@@ -67,7 +68,7 @@ namespace BO4E.Extensions.BusinessObjects.Energiemenge
          * would propably lead to unspecific NullReferenceExceptions we'd better let the invalid
          * operation exception bubble up from here as far as it's required.
          */
-        private static DateTime GetMinDate(this BO4E.BO.Energiemenge em)
+        private static DateTimeOffset GetMinDate(this BO4E.BO.Energiemenge em)
         {
             using (MiniProfiler.Current.Step(nameof(GetMinDate)))
             {
@@ -75,7 +76,7 @@ namespace BO4E.Extensions.BusinessObjects.Energiemenge
             }
         }
 
-        private static DateTime GetMaxDate(this BO4E.BO.Energiemenge em)
+        private static DateTimeOffset GetMaxDate(this BO4E.BO.Energiemenge em)
         {
             using (MiniProfiler.Current.Step(nameof(GetMinDate)))
             {
@@ -91,7 +92,7 @@ namespace BO4E.Extensions.BusinessObjects.Energiemenge
         /// <returns>Tuple of consumption value and unit of measurement</returns>
         public static Tuple<decimal, Mengeneinheit> GetTotalConsumption(this BO4E.BO.Energiemenge em)
         {
-            return GetConsumption(em, new TimeRange(em.GetMinDate(), em.GetMaxDate()));
+            return GetConsumption(em, new TimeRange(em.GetMinDate().UtcDateTime, em.GetMaxDate().UtcDateTime));
         }
 
         /// <summary>
@@ -599,7 +600,7 @@ namespace BO4E.Extensions.BusinessObjects.Energiemenge
         /// </returns>
         public static bool IsContinuous(this BO4E.BO.Energiemenge em)
         {
-            return IsContinuous(em, new TimeRange(em.GetMinDate(), em.GetMaxDate()));
+            return IsContinuous(em, new TimeRange(em.GetMinDate().UtcDateTime, em.GetMaxDate().UtcDateTime));
         }
 
         /// <summary>
@@ -823,9 +824,9 @@ namespace BO4E.Extensions.BusinessObjects.Energiemenge
                     {
                         foreach (var relevantEnddatum in em.Energieverbrauch.Where(v =>
                              {
-                                 var localEnd = DateTime.SpecifyKind(v.Enddatum, DateTimeKind.Unspecified);
+                                 var localEnd = DateTime.SpecifyKind(v.Enddatum, DateTimeKind.Unspecified); // ToDo: Check .UtcDateTime
                                  var localStart = DateTime.SpecifyKind(v.Startdatum, DateTimeKind.Unspecified);
-                                 return !Verbrauch.CENTRAL_EUROPE_STANDARD_TIME.IsDaylightSavingTime(localStart) && Verbrauch.CENTRAL_EUROPE_STANDARD_TIME.IsDaylightSavingTime(localEnd);
+                                 return !CentralEuropeStandardTime.CENTRAL_EUROPE_STANDARD_TIME.IsDaylightSavingTime(localStart) && CentralEuropeStandardTime.CENTRAL_EUROPE_STANDARD_TIME.IsDaylightSavingTime(localEnd);
                                  //return !localStart.IsDaylightSavingTime() && localEnd.IsDaylightSavingTime();
                              }).Select(v => v.Enddatum))
                         {
@@ -835,7 +836,7 @@ namespace BO4E.Extensions.BusinessObjects.Energiemenge
                                 v.Enddatum = v.Startdatum.AddSeconds(intervalSize);
                             }
                         }
-                        if (em.Energieverbrauch.Where(v => (v.Enddatum - v.Startdatum).TotalMinutes == -45).Count() > 1)
+                        if (em.Energieverbrauch.Count(v => (v.Enddatum - v.Startdatum).TotalMinutes == -45) > 1)
                         {
                             /*foreach (var dstAffected in em.energieverbrauch.Where(v => (v.enddatum - v.startdatum).TotalMinutes != -45))                          
                             {
@@ -892,7 +893,7 @@ namespace BO4E.Extensions.BusinessObjects.Energiemenge
             }
         }
 
-        protected class BasicVerbrauchDateTimeComparer : IComparer<CompletenessReport.BasicVerbrauch>
+        private class BasicVerbrauchDateTimeComparer : IComparer<CompletenessReport.BasicVerbrauch>
         {
             int IComparer<CompletenessReport.BasicVerbrauch>.Compare(CompletenessReport.BasicVerbrauch x, CompletenessReport.BasicVerbrauch y)
             {

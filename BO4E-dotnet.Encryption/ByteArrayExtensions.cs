@@ -17,8 +17,7 @@ namespace BO4E.Extensions.Encryption
             var builder = new StringBuilder();
             while (dividend != 0)
             {
-                BigInteger remainder;
-                dividend = BigInteger.DivRem(dividend, alphabet.Length, out remainder);
+                dividend = BigInteger.DivRem(dividend, alphabet.Length, out BigInteger remainder);
                 builder.Insert(0, alphabet[Math.Abs(((int)remainder))]);
             }
             return builder.ToString();

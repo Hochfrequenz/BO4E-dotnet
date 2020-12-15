@@ -1,10 +1,3 @@
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Runtime.Serialization;
-
 using BO4E.COM;
 using BO4E.ENUM;
 using BO4E.meta;
@@ -13,6 +6,13 @@ using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 
 using ProtoBuf;
+
+using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
+using System.Linq;
+using System.Runtime.Serialization;
 
 namespace BO4E.BO
 {
@@ -64,9 +64,9 @@ namespace BO4E.BO
             else if (Energieverbrauch.Count > 0)
             {
                 Energieverbrauch = Energieverbrauch
-                    .Select(v => Verbrauch.FixSapCdsBug(v))
-                    .Where(v => !(v.Startdatum == DateTime.MinValue || v.Enddatum == DateTime.MinValue))
-                    .Where(v => !(v.UserProperties != null && v.UserProperties.ContainsKey("invalid") && (bool)v.UserProperties["invalid"] == true))
+                    .Select(Verbrauch.FixSapCdsBug)
+                    .Where(v => !(v.Startdatum == DateTimeOffset.MinValue || v.Enddatum == DateTimeOffset.MinValue))
+                    .Where(v => !v.UserPropertyEquals("invalid", true))
                     .ToList();
                 if (UserProperties != null && UserProperties.TryGetValue(Verbrauch._SAP_PROFDECIMALS_KEY, out JToken profDecimalsRaw))
                 {
@@ -97,15 +97,15 @@ namespace BO4E.BO
         /// <returns>new Energiemenge object</returns>
         public static Energiemenge operator +(Energiemenge em1, Energiemenge em2)
         {
-            if (em1.LokationsId != em2.LokationsId || em1.LokationsTyp != em2.LokationsTyp || em1.versionStruktur != em2.versionStruktur)
+            if (em1.LokationsId != em2.LokationsId || em1.LokationsTyp != em2.LokationsTyp || em1.VersionStruktur != em2.VersionStruktur)
             {
-                throw new InvalidOperationException($"You must not add the Energiemengen with different locations {em1.LokationsId} ({em1.LokationsTyp}) (v{em1.versionStruktur}) vs. {em2.LokationsId} ({em2.LokationsTyp}) (v{em2.versionStruktur})");
+                throw new InvalidOperationException($"You must not add the Energiemengen with different locations {em1.LokationsId} ({em1.LokationsTyp}) (v{em1.VersionStruktur}) vs. {em2.LokationsId} ({em2.LokationsTyp}) (v{em2.VersionStruktur})");
             }
             Energiemenge result = new Energiemenge()
             {
                 LokationsId = em1.LokationsId,
                 LokationsTyp = em1.LokationsTyp,
-                versionStruktur = em1.versionStruktur,
+                VersionStruktur = em1.VersionStruktur,
             };
             if (em1.UserProperties == null)
             {

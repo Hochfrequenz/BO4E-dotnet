@@ -7,7 +7,7 @@ namespace TestBO4E
     [TestClass]
     public class TestEdiBOMapper
     {
-        private Dictionary<string, Dictionary<string, string>> expectedResults = new Dictionary<string, Dictionary<string, string>>();
+        private readonly Dictionary<string, Dictionary<string, string>> expectedResults = new Dictionary<string, Dictionary<string, string>>();
         public TestEdiBOMapper()
         {
             expectedResults.Add("Netzebene", new Dictionary<string, string>() {
@@ -64,8 +64,7 @@ namespace TestBO4E
                 foreach (string teststring in map.Keys)
                 {
                     string expectedResult = map[teststring];
-                    //BO4E.StaticLogger.Logger = new Microsoft.Extensions.Logging.Debug.DebugLogger("Testlogger", (log, level) => { return true; });
-                    string result = EdiBoMapper.fromEdi(objectName, teststring);
+                    string result = EdiBoMapper.FromEdi(objectName, teststring);
                     Assert.AreEqual(expectedResult, result);
                 }
             }

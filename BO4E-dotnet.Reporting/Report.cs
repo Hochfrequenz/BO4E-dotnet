@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 
 using BO4E.BO;
 
@@ -28,7 +29,7 @@ namespace BO4E.Reporting
         public string ToCsv(char separator = ';', bool headerLine = true, string lineTerminator = "\\n", List<Dictionary<string, string>> reihenfolge = null)
         {
             var type = this.GetType();
-            string returnStr = string.Empty;
+            var resultBuilder = new StringBuilder();
             List<string> result = new List<string>();
             List<string> headerNames = new List<string>();
             Dictionary<List<string>, List<string>> reterned = new Dictionary<List<string>, List<string>>() { [headerNames] = result };
@@ -87,7 +88,7 @@ namespace BO4E.Reporting
                     }
                     else
                     {
-                        int userPropertiesIndex = headerNames.IndexOf(BusinessObject.USER_PROPERTIES_NAME);
+                        int userPropertiesIndex = headerNames.IndexOf("UserProperties");
                         if (userPropertiesIndex >= 0)
                         {
                             headerNames.RemoveAt(userPropertiesIndex);
@@ -111,9 +112,9 @@ namespace BO4E.Reporting
                     }
                     if (i == 0 && headerLine)
                     {
-                        returnStr = string.Join(separator.ToString(), sortedHeaderNamesList) + lineTerminator;
+                        resultBuilder = new StringBuilder(string.Join(separator.ToString(), sortedHeaderNamesList) + lineTerminator);
                     }
-                    returnStr += string.Join(separator.ToString(), sortedResults) + lineTerminator;
+                    resultBuilder.Append(string.Join(separator.ToString(), sortedResults) + lineTerminator);
                 }
             }
             else
@@ -144,7 +145,7 @@ namespace BO4E.Reporting
                 }
                 else
                 {
-                    int userPropertiesIndex = headerNames.IndexOf(BusinessObject.USER_PROPERTIES_NAME);
+                    int userPropertiesIndex = headerNames.IndexOf("UserProperties");
                     if (userPropertiesIndex >= 0)
                     {
                         headerNames.RemoveAt(userPropertiesIndex);
@@ -154,8 +155,8 @@ namespace BO4E.Reporting
                     sortedResults.AddRange(result);
                 }
                 if (headerLine)
-                    returnStr = string.Join(separator.ToString(), sortedHeaderNamesList) + lineTerminator;
-                returnStr += string.Join(separator.ToString(), sortedResults);
+                    resultBuilder = new StringBuilder(string.Join(separator.ToString(), sortedHeaderNamesList) + lineTerminator);
+                resultBuilder.Append(string.Join(separator.ToString(), sortedResults));
             }
 
 
@@ -179,18 +180,18 @@ namespace BO4E.Reporting
                     int valueIndex = index + (i * 2);
                     var curValues = gapdata.Skip(valueIndex).Take(2);
                     gapSortedResults.AddRange(curValues);
-                    returnStr += lineTerminator;
+                    resultBuilder.Append(lineTerminator);
                     for (int z = 2; z < sortedHeaderNamesList.Count(); z++)
-                        returnStr += separator.ToString();
-                    returnStr += String.Join(separator.ToString(), gapSortedResults);
+                        resultBuilder.Append(separator.ToString());
+                    resultBuilder.Append(String.Join(separator.ToString(), gapSortedResults));
                 }
             }
             else
             {
                 gapSortedResults.AddRange(gapdata);
-                returnStr += separator.ToString() + string.Join(separator.ToString(), gapSortedResults);
+                resultBuilder.Append(separator.ToString() + string.Join(separator.ToString(), gapSortedResults));
             }
-            return returnStr;
+            return resultBuilder.ToString();
         }
 
         private Dictionary<List<string>, List<string>> Detect(Type type, char separator, object value, Dictionary<List<string>, List<string>> returnData)
@@ -240,9 +241,20 @@ namespace BO4E.Reporting
                                 val = ((DateTime?)nestedValue).Value.ToString("yyyy-MM-ddTHH:mm:ssZ");
                             }
                         }
+                        else if (field.PropertyType == typeof(DateTimeOffset?))
+                        {
+                            if (((DateTimeOffset?)nestedValue).HasValue)
+                            {
+                                val = ((DateTimeOffset?)nestedValue).Value.ToString("yyyy-MM-ddTHH:mm:ssZ");
+                            }
+                        }
                         else if (field.PropertyType == typeof(DateTime))
                         {
                             val = ((DateTime)nestedValue).ToString("yyyy-MM-ddTHH:mm:ssZ");
+                        }
+                        else if (field.PropertyType == typeof(DateTimeOffset))
+                        {
+                            val = ((DateTimeOffset)nestedValue).ToString("yyyy-MM-ddTHH:mm:ssZ");
                         }
                         h.Add(muterType + field.Name);
                         d.Add((val.Contains(separator)) ? "\"" + val + "\"" : val);

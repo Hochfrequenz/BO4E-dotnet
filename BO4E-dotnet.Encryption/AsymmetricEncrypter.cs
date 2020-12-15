@@ -1,11 +1,11 @@
-﻿using System;
-using System.Text;
-
-using BO4E.BO;
+﻿using BO4E.BO;
 
 using Newtonsoft.Json;
 
 using Sodium;
+
+using System;
+using System.Text;
 
 namespace BO4E.Extensions.Encryption
 {
@@ -76,7 +76,7 @@ namespace BO4E.Extensions.Encryption
         /// <returns>An encrypted Business Object</returns>
         public EncryptedObjectPublicKeyBox Encrypt(BusinessObject plainObject, string publicKey)
         {
-            string plainText = JsonConvert.SerializeObject(plainObject);
+            string plainText = JsonConvert.SerializeObject(plainObject, settings: encryptionSerializerSettings);
             byte[] nonce = PublicKeyBox.GenerateNonce();
             string cipherString = Encrypt(plainText, publicKey, nonce);
             return new EncryptedObjectPublicKeyBox(cipherString, Convert.ToBase64String(ownPublicKey), Convert.ToBase64String(nonce));
@@ -110,7 +110,7 @@ namespace BO4E.Extensions.Encryption
                 return null;
             }
             string plainString = Decrypt(eo.CipherText, eo.PublicKey, eo.Nonce);
-            return JsonConvert.DeserializeObject<BusinessObject>(plainString);
+            return JsonConvert.DeserializeObject<BusinessObject>(plainString, settings: encryptionSerializerSettings);
         }
 
         public override T Decrypt<T>(EncryptedObject encryptedObject)
@@ -121,7 +121,7 @@ namespace BO4E.Extensions.Encryption
                 return (T)null;
             }
             string plainString = Decrypt(eo.CipherText, eo.PublicKey, eo.Nonce);
-            return JsonConvert.DeserializeObject<T>(plainString);
+            return JsonConvert.DeserializeObject<T>(plainString, settings: encryptionSerializerSettings);
         }
 
         public override void Dispose()

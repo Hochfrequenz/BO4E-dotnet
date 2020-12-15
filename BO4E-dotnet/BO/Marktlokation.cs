@@ -1,8 +1,3 @@
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Text.RegularExpressions;
-
 using BO4E.COM;
 using BO4E.ENUM;
 using BO4E.meta;
@@ -11,9 +6,13 @@ using Newtonsoft.Json;
 
 using ProtoBuf;
 
+using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Text.RegularExpressions;
+
 namespace BO4E.BO
 {
-
     // https://github.com/Hochfrequenz/energy-service-hub/issues/11
     //@JsonPropertyOrder({ "versionStruktur", "boTyp", "marktlokationsId", "sparte", "energierichtung",
     //        "bilanzierungsmethode", "verbrauchsart", "unterbrechbar", "netzebene", "netzbetreiberCodeNr", "gebietTyp",
@@ -35,6 +34,7 @@ namespace BO4E.BO
         [BoKey]
         [ProtoMember(4)]
         public string MarktlokationsId { get; set; }
+
         /// <summary>Sparte der Messlokation, z.B. Gas oder Strom.</summary>
         [JsonProperty(Required = Required.Always, Order = 5, PropertyName = "sparte")]
         [ProtoMember(5)]
@@ -64,7 +64,7 @@ namespace BO4E.BO
         /// Netzebene, in der der Bezug der Energie erfolgt. Bei Strom Spannungsebene der
         /// Lieferung, bei Gas Druckstufe. Beispiel Strom: Niederspannung Beispiel Gas:
         /// Niederdruck.
-        /// <seealso cref="ENUM.Netzebene" /></summary> 
+        /// <seealso cref="ENUM.Netzebene" /></summary>
         [JsonProperty(Required = Required.Always, Order = 10, PropertyName = "netzebene")]
         [ProtoMember(10)]
         public Netzebene Netzebene { get; set; }
@@ -127,17 +127,17 @@ namespace BO4E.BO
         public Katasteradresse Katasterinformation { get; set; }
 
         /// <summary>
-        /// für EDIFACT mapping 
+        /// für EDIFACT mapping
         /// </summary>
         // ToDo: specify docstring / evaluate if necessary
         [JsonProperty(Required = Required.Default, Order = 21, PropertyName = "marktrollen")]
         [ProtoMember(1021)]
         [NonOfficial(NonOfficialCategory.CUSTOMER_REQUIREMENTS)]
         [Obsolete("I'm pretty sure the BO.Marktlokation is not the right place to store this information. Please evaluate!")]
-        public List<COM.Marktrolle> Marktrollen { get; set; } // ToDo: evaluate this
+        public List<COM.MarktpartnerDetails> Marktrollen { get; set; } // ToDo: evaluate this
 
         /// <summary>
-        /// für EDIFACT mapping 
+        /// für EDIFACT mapping
         /// </summary>
         // ToDo: specify docstring.
         [JsonProperty(Required = Required.Default, Order = 22, PropertyName = "regelzone")]
@@ -146,7 +146,7 @@ namespace BO4E.BO
         public string Regelzone { get; set; }
 
         /// <summary>
-        /// für EDIFACT mapping 
+        /// für EDIFACT mapping
         /// </summary>
         // ToDo: specify docstring.
         [JsonProperty(Required = Required.Default, Order = 23, PropertyName = "marktgebiet")]
@@ -155,7 +155,7 @@ namespace BO4E.BO
         public string Marktgebiet { get; set; }
 
         /// <summary>
-        /// für EDIFACT mapping 
+        /// für EDIFACT mapping
         /// </summary>
         // ToDo: specify docstring.
         [JsonProperty(Required = Required.Default, Order = 24, PropertyName = "zeitreihentyp")]
@@ -164,7 +164,7 @@ namespace BO4E.BO
         public Zeitreihentyp? Zeitreihentyp { get; set; }
 
         /// <summary>
-        /// für EDIFACT mapping 
+        /// für EDIFACT mapping
         /// </summary>
         // ToDo: specify docstring.
         [JsonProperty(Required = Required.Default, Order = 25, PropertyName = "zaehlwerke")]
@@ -173,7 +173,7 @@ namespace BO4E.BO
         public List<Zaehlwerk> Zaehlwerke { get; set; }
 
         /// <summary>
-        /// für EDIFACT mapping 
+        /// für EDIFACT mapping
         /// </summary>
         // ToDo: specify docstring / check if needed
         [JsonProperty(Required = Required.Default, Order = 26, PropertyName = "verbrauchsmenge")]
@@ -183,7 +183,7 @@ namespace BO4E.BO
         public List<Verbrauch> Verbrauchsmenge { get; set; }
 
         /// <summary>
-        /// für EDIFACT mapping 
+        /// für EDIFACT mapping
         /// </summary>
         // ToDo: specify docstring.
         [JsonProperty(Required = Required.Default, Order = 27, PropertyName = "messlokationen")]
@@ -218,12 +218,12 @@ namespace BO4E.BO
         [ProtoMember(28)]
         public List<Messlokationszuordnung> ZugehoerigeMesslokationen { get; set; }
 
-
         /// <summary>
         /// Regular Expression used to validate 11 digit MarktlokationId
         /// </summary>
         [JsonIgnore]
         protected static readonly Regex REGEX_VALIDATE = new Regex(@"^[1-9][\d]{10}$", RegexOptions.Compiled);
+
         /// <summary>
         /// Regular Expression to check if a string consists only of numbers (is numeric)
         /// </summary>
@@ -295,7 +295,7 @@ namespace BO4E.BO
         }
 
         /// <summary>
-        /// Test if the <see cref="marktlokationsId"/> is valid.
+        /// Test if the <see cref="MarktlokationsId"/> is valid.
         /// </summary>
         /// <returns>if marktlokaionsId matches the expected format</returns>
         public bool HasValidId()
@@ -304,9 +304,9 @@ namespace BO4E.BO
         }
 
         /// <summary>
-        /// same as <see cref="BusinessObject.IsValid()" /> if <paramref name="checkId"/> is false but by default additionally checks if the <see cref="marktlokationsId"/> is valid using <see cref="HasValidId"/>.
+        /// same as <see cref="BusinessObject.IsValid()" /> if <paramref name="checkId"/> is false but by default additionally checks if the <see cref="MarktlokationsId"/> is valid using <see cref="HasValidId"/>.
         /// </summary>
-        /// <param name="checkId">validate the <see cref="marktlokationsId"/>, too</param>
+        /// <param name="checkId">validate the <see cref="MarktlokationsId"/>, too</param>
         /// <returns>true if the marktlokation is valid</returns>
         public bool IsValid(bool checkId = true)
         {

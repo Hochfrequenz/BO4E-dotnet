@@ -324,6 +324,13 @@
             "string",
             "null"
           ]
+        },
+        "timestamp": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "format": "date-time"
         }
       },
       "required": [
@@ -528,6 +535,13 @@
             "string",
             "null"
           ]
+        },
+        "timestamp": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "format": "date-time"
         }
       },
       "required": [
@@ -735,11 +749,49 @@
             "string",
             "null"
           ]
+        },
+        "timestamp": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "format": "date-time"
         }
       },
       "required": [
         "wert",
         "waehrung"
+      ]
+    },
+    "ExterneReferenz": {
+      "type": [
+        "object",
+        "null"
+      ],
+      "properties": {
+        "exRefName": {
+          "type": "string"
+        },
+        "exRefWert": {
+          "type": "string"
+        },
+        "guid": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "timestamp": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "format": "date-time"
+        }
+      },
+      "required": [
+        "exRefName",
+        "exRefWert"
       ]
     },
     "Geschaeftspartner": {
@@ -751,6 +803,15 @@
             "null"
           ]
         },
+        "externeReferenzen": {
+          "type": [
+            "array",
+            "null"
+          ],
+          "items": {
+            "$ref": "#/definitions/ExterneReferenz"
+          }
+        },
         "boTyp": {
           "type": [
             "string",
@@ -759,6 +820,13 @@
         },
         "versionStruktur": {
           "type": "integer"
+        },
+        "timestamp": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "format": "date-time"
         },
         "anrede": {
           "type": [
@@ -772,6 +840,10 @@
             "EHELEUTE",
             "FIRMA",
             "INDIVIDUELL",
+            "FAMILIE",
+            "ERBENGEMEINSCHAFT",
+            "WOHNGEMEINSCHAFT",
+            "GRUNDSTUECKGEMEINSCHAFT",
             "DR"
           ]
         },
@@ -890,6 +962,7 @@
         "einheit": {
           "type": "string",
           "enum": [
+            "ZERO",
             "WH",
             "KW",
             "ANZAHL",
@@ -912,6 +985,13 @@
             "string",
             "null"
           ]
+        },
+        "timestamp": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "format": "date-time"
         }
       },
       "required": [
@@ -935,6 +1015,7 @@
         "bezugswert": {
           "type": "string",
           "enum": [
+            "ZERO",
             "WH",
             "KW",
             "ANZAHL",
@@ -968,6 +1049,13 @@
             "string",
             "null"
           ]
+        },
+        "timestamp": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "format": "date-time"
         }
       },
       "required": [
@@ -1003,6 +1091,7 @@
           ],
           "enum": [
             null,
+            "ZERO",
             "WH",
             "KW",
             "ANZAHL",
@@ -1129,6 +1218,13 @@
             "string",
             "null"
           ]
+        },
+        "timestamp": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "format": "date-time"
         }
       },
       "required": [
@@ -1353,6 +1449,13 @@
             "string",
             "null"
           ]
+        },
+        "timestamp": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "format": "date-time"
         }
       },
       "required": [
@@ -1409,6 +1512,13 @@
             "string",
             "null"
           ]
+        },
+        "timestamp": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "format": "date-time"
         }
       }
     }
@@ -1421,6 +1531,15 @@
         "null"
       ]
     },
+    "externeReferenzen": {
+      "type": [
+        "array",
+        "null"
+      ],
+      "items": {
+        "$ref": "#/definitions/ExterneReferenz"
+      }
+    },
     "boTyp": {
       "type": [
         "string",
@@ -1429,6 +1548,13 @@
     },
     "versionStruktur": {
       "type": "integer"
+    },
+    "timestamp": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "format": "date-time"
     },
     "rechnungstitel": {
       "type": [
