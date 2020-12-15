@@ -50,7 +50,10 @@ namespace TestBO4E
                 var patch = jdp.Diff(left, right);
                 if (patch != null)
                 {
-                    if (patch.ToString() == "{\r\n  \"vorname\": [\r\n    null,\r\n    null\r\n  ]\r\n}")
+                    if (patch.ToString()
+                        .Replace("\n", "")
+                        .Replace("\r", "")
+                        .Replace(" ", "") == "{\"vorname\":[null,null]}")
                     {
                         continue;
                     }
