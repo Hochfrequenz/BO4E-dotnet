@@ -41,7 +41,7 @@ namespace BO4E.BO
     [ProtoInclude(13, typeof(Vertrag))]
     [ProtoInclude(14, typeof(Zaehler))]
     [ProtoInclude(15, typeof(LogObject))]
-    public abstract class BusinessObject : IEquatable<BusinessObject>, IUserProperties
+    public abstract class BusinessObject : IEquatable<BusinessObject>, IUserProperties, IOptionalGuid
     {
         /// <summary>
         /// obligatory type of the business object in UPPER CASE
