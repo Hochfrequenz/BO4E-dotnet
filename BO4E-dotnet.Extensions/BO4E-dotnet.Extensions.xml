@@ -452,7 +452,7 @@
             </summary>
             <param name="dt">datetime (kind unspecified or Utc)</param>
             <param name="value">number of days to add</param>
-            <param name="tz">timezone <paramref name="dt"/> is meant to be iff dt.Kind == DateTimeKind.Unspecified, default (if null) is <see cref="F:BO4E.COM.Verbrauch.CENTRAL_EUROPE_STANDARD_TIME"/></param>
+            <param name="tz">timezone <paramref name="dt"/> is meant to be iff dt.Kind == DateTimeKind.Unspecified, default (if null) is <see cref="F:BO4E.COM.CentralEuropeStandardTime.CENTRAL_EUROPE_STANDARD_TIME"/></param>
             <returns></returns>
         </member>
         <member name="T:BO4E.Extensions.COM.COMExtensions">

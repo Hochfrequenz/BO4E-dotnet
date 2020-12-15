@@ -2,6 +2,7 @@ using BO4E.COM;
 using BO4E.ENUM;
 using BO4E.Extensions.COM;
 using BO4E.Extensions.ENUM;
+using BO4E.meta;
 using BO4E.Reporting;
 
 using Itenso.TimePeriod;
@@ -825,7 +826,7 @@ namespace BO4E.Extensions.BusinessObjects.Energiemenge
                              {
                                  var localEnd = DateTime.SpecifyKind(v.Enddatum, DateTimeKind.Unspecified); // ToDo: Check .UtcDateTime
                                  var localStart = DateTime.SpecifyKind(v.Startdatum, DateTimeKind.Unspecified);
-                                 return !Verbrauch.CENTRAL_EUROPE_STANDARD_TIME.IsDaylightSavingTime(localStart) && Verbrauch.CENTRAL_EUROPE_STANDARD_TIME.IsDaylightSavingTime(localEnd);
+                                 return !CentralEuropeStandardTime.CENTRAL_EUROPE_STANDARD_TIME.IsDaylightSavingTime(localStart) && CentralEuropeStandardTime.CENTRAL_EUROPE_STANDARD_TIME.IsDaylightSavingTime(localEnd);
                                  //return !localStart.IsDaylightSavingTime() && localEnd.IsDaylightSavingTime();
                              }).Select(v => v.Enddatum))
                         {
