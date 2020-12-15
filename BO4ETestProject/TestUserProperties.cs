@@ -1,4 +1,5 @@
-﻿using BO4E.BO;
+﻿using BO4E;
+using BO4E.BO;
 
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
@@ -38,12 +39,12 @@ namespace TestBO4E
             Assert.IsFalse(melo.UserPropertyEquals("myCustomInfo", 888.999M)); // the cast exception is catched inside.
             Assert.IsFalse(melo.UserPropertyEquals("myCustomValue", "asd")); // the cast exception is catched inside.
             Assert.IsFalse(melo.UserPropertyEquals("some_key_that_was_not_found", "asd"));
-            Assert.IsTrue(melo.EvaluateUserProperty<string, bool>("myCustomInfo", up => !string.IsNullOrEmpty(up)));
+            Assert.IsTrue(melo.EvaluateUserProperty<string, bool, Messlokation>("myCustomInfo", up => !string.IsNullOrEmpty(up)));
 
             melo.UserProperties = null;
             Assert.IsFalse(melo.UserPropertyEquals("there are no user properties", "asd"));
             Assert.IsFalse(melo.TryGetUserProperty("there are no user properties", out string _));
-            Assert.ThrowsException<ArgumentNullException>(() => melo.EvaluateUserProperty<string, bool>("there are no user properties", _ => default));
+            Assert.ThrowsException<ArgumentNullException>(() => melo.EvaluateUserProperty<string, bool, Messlokation>("there are no user properties", _ => default));
             Assert.IsFalse(melo.UserPropertyEquals("myNullProp", true));
         }
 
@@ -57,18 +58,18 @@ namespace TestBO4E
             };
             Assert.IsNull(melo.UserProperties);
             Assert.IsFalse(melo.HasFlagSet("foo"));
-            Assert.IsTrue(melo.SetFlag("foo"));
+            Assert.IsTrue(melo.SetFlag<Messlokation>("foo"));
             Assert.IsNotNull(melo.UserProperties);
             Assert.IsTrue(melo.UserProperties.TryGetValue("foo", out var upValue) && upValue.Value<bool>());
             Assert.IsTrue(melo.HasFlagSet("foo"));
-            Assert.IsFalse(melo.SetFlag("foo"));
-            Assert.IsTrue(melo.SetFlag("foo", flagValue: false));
+            Assert.IsFalse(melo.SetFlag<Messlokation>("foo"));
+            Assert.IsTrue(melo.SetFlag<Messlokation>("foo", flagValue: false));
             Assert.IsFalse(melo.HasFlagSet("foo"));
-            Assert.IsTrue(melo.SetFlag("foo", flagValue: null));
+            Assert.IsTrue(melo.SetFlag<Messlokation>("foo", flagValue: null));
             Assert.IsFalse(melo.UserProperties.TryGetValue("foo", out var _));
-            Assert.IsFalse(melo.SetFlag("foo", flagValue: null));
+            Assert.IsFalse(melo.SetFlag<Messlokation>("foo", flagValue: null));
             Assert.IsFalse(melo.HasFlagSet("foo"));
-            Assert.IsTrue(melo.SetFlag("foo", flagValue: true));
+            Assert.IsTrue(melo.SetFlag<Messlokation>("foo", flagValue: true));
 
             melo.UserProperties["foo"] = null;
             Assert.IsFalse(melo.HasFlagSet("foo"));

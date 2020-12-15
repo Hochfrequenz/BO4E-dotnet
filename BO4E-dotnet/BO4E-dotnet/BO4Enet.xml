@@ -426,18 +426,6 @@
             User properties (non bo4e standard)
             </summary>
         </member>
-        <member name="M:BO4E.BO.BusinessObject.TryGetUserProperty``1(System.String,``0@)">
-            <inheritdoc cref="M:BO4E.UserPropertiesExtensions.TryGetUserProperty``1(System.Collections.Generic.IDictionary{System.String,Newtonsoft.Json.Linq.JToken},System.String,``0@)"/>
-        </member>
-        <member name="M:BO4E.BO.BusinessObject.GetUserProperty``1(System.String,``0)">
-            <inheritdoc cref="M:BO4E.UserPropertiesExtensions.GetUserProperty``1(System.Collections.Generic.IDictionary{System.String,Newtonsoft.Json.Linq.JToken},System.String,``0)"/>
-        </member>
-        <member name="M:BO4E.BO.BusinessObject.UserPropertyEquals``1(System.String,``0,System.Boolean)">
-            <inheritdoc cref="M:BO4E.UserPropertiesExtensions.UserPropertyEquals``1(System.Collections.Generic.IDictionary{System.String,Newtonsoft.Json.Linq.JToken},System.String,``0,System.Boolean)"/>
-        </member>
-        <member name="M:BO4E.BO.BusinessObject.EvaluateUserProperty``2(System.String,System.Func{``0,``1})">
-            <inheritdoc cref="M:BO4E.UserPropertiesExtensions.EvaluateUserProperty``2(System.Collections.Generic.IDictionary{System.String,Newtonsoft.Json.Linq.JToken},System.String,System.Func{``0,``1})"/>
-        </member>
         <member name="M:BO4E.BO.BusinessObject.#ctor">
             <summary>
             generates the BO4E boTyp attribute value (class name as upper case)
@@ -501,7 +489,7 @@
             <param name="flagKey"></param>
             <returns>true iff flag is set and has value true</returns>
         </member>
-        <member name="M:BO4E.BO.BusinessObject.SetFlag(System.String,System.Nullable{System.Boolean})">
+        <member name="M:BO4E.BO.BusinessObject.SetFlag``1(System.String,System.Nullable{System.Boolean})">
             <summary>
             set the value of flag <paramref name="flagKey"/> to <paramref name="flagValue"/>.
             If there is no such flag or not user properties yet, they will be created.
@@ -1796,18 +1784,6 @@
             <summary>
             User properties (non bo4e standard)
             </summary>
-        </member>
-        <member name="M:BO4E.COM.COM.TryGetUserProperty``1(System.String,``0@)">
-            <inheritdoc cref="M:BO4E.UserPropertiesExtensions.TryGetUserProperty``1(System.Collections.Generic.IDictionary{System.String,Newtonsoft.Json.Linq.JToken},System.String,``0@)"/>
-        </member>
-        <member name="M:BO4E.COM.COM.GetUserProperty``1(System.String,``0)">
-            <inheritdoc cref="M:BO4E.UserPropertiesExtensions.GetUserProperty``1(System.Collections.Generic.IDictionary{System.String,Newtonsoft.Json.Linq.JToken},System.String,``0)"/>
-        </member>
-        <member name="M:BO4E.COM.COM.UserPropertyEquals``1(System.String,``0,System.Boolean)">
-            <inheritdoc cref="M:BO4E.UserPropertiesExtensions.UserPropertyEquals``1(System.Collections.Generic.IDictionary{System.String,Newtonsoft.Json.Linq.JToken},System.String,``0,System.Boolean)"/>
-        </member>
-        <member name="M:BO4E.COM.COM.EvaluateUserProperty``2(System.String,System.Func{``0,``1})">
-            <inheritdoc cref="M:BO4E.UserPropertiesExtensions.EvaluateUserProperty``2(System.Collections.Generic.IDictionary{System.String,Newtonsoft.Json.Linq.JToken},System.String,System.Func{``0,``1})"/>
         </member>
         <member name="M:BO4E.COM.COM.Equals(System.Object)">
             <summary>
@@ -8203,6 +8179,18 @@
             <param name="text">translated field name</param>
             <param name="language">language of the translation</param>
         </member>
+        <member name="T:BO4E.meta.IUserProperties">
+            <summary>
+            Any class implementing this interface has a userProperties dictionary.
+            <seealso cref="P:BO4E.BO.BusinessObject.UserProperties"/>, <seealso cref="P:BO4E.COM.COM.UserProperties"/>.
+            User Properties are key value pairs that are not part of the official BO4E Standard but can still be part of JSONs.
+            </summary>
+        </member>
+        <member name="P:BO4E.meta.IUserProperties.UserProperties">
+            <summary>
+            <see cref="P:BO4E.BO.BusinessObject.UserProperties"/>, <see cref="P:BO4E.COM.COM.UserProperties"/>
+            </summary>
+        </member>
         <member name="T:BO4E.meta.Language">
             <summary>
             List of labguages for making translatedJson in JsonConvert.SerializeObject() function.
@@ -8487,47 +8475,52 @@
             extensions for both <see cref="P:BO4E.BO.BusinessObject.UserProperties"/> and <see cref="P:BO4E.COM.COM.UserProperties"/>
             </summary>
         </member>
-        <member name="M:BO4E.UserPropertiesExtensions.TryGetUserProperty``1(System.Collections.Generic.IDictionary{System.String,Newtonsoft.Json.Linq.JToken},System.String,``0@)">
+        <member name="M:BO4E.UserPropertiesExtensions.TryGetUserProperty``2(``1,System.String,``0@)">
             <summary>
-            try to get the Userproperty with key <paramref name="userPropertyKey"/> from <paramref name="up"/> if<paramref name="up"/> is not null and the key is present.
+            try to get the Userproperty with key <paramref name="userPropertyKey"/> from <paramref name="parent"/> if <paramref name="parent"/>.UserProperties is not null and the key is present.
             </summary>
             <typeparam name="TUserProperty">type expected to be found in the User Property with key <paramref name="userPropertyKey"/></typeparam>
-            <param name="up">user properties dict</param>
-            <param name="userPropertyKey">key under which the <paramref name="value"/> is expected in <paramref name="up"/></param>
+            <typeparam name="TParent">class implementing <see cref="T:BO4E.meta.IUserProperties"/></typeparam>
+            <param name="parent">object implementing <see cref="T:BO4E.meta.IUserProperties"/></param>
+            <param name="userPropertyKey">key under which the <paramref name="value"/> is expected in <paramref name="parent"/>.UserProperties</param>
             <param name="value">default if false is returned, the stored value otherwise</param>
             <returns>true if found</returns>
             <exception cref="T:System.ArgumentNullException">iff <paramref name="userPropertyKey"/> is null or whitespace</exception>
         </member>
-        <member name="M:BO4E.UserPropertiesExtensions.GetUserProperty``1(System.Collections.Generic.IDictionary{System.String,Newtonsoft.Json.Linq.JToken},System.String,``0)">
+        <member name="M:BO4E.UserPropertiesExtensions.GetUserProperty``2(``1,System.String,``0)">
             <summary>
-            same as <see cref="M:BO4E.UserPropertiesExtensions.TryGetUserProperty``1(System.Collections.Generic.IDictionary{System.String,Newtonsoft.Json.Linq.JToken},System.String,``0@)"/> but returns a default <paramref name="defaultValue"/> if <paramref name="userPropertyKey"/> was not found or the user properties are null
+            same as <see cref="M:BO4E.UserPropertiesExtensions.TryGetUserProperty``2(``1,System.String,``0@)"/> if <paramref name="userPropertyKey"/> was not found or the user properties are null
             </summary>
             <typeparam name="TUserProperty">type expected to be found in the User Property with key <paramref name="userPropertyKey"/></typeparam>
-            <param name="userPropertyKey">key of the <paramref name="up"/> dictionary</param>
-            <param name="up">user properties dict</param>
-            <param name="defaultValue">default value returned if <paramref name="up"/> are null or the key was not found</param>
+            <param name="userPropertyKey">key of the <paramref name="parent"/>.UserProperties dictionary</param>
+            <typeparam name="TParent">class implementing <see cref="T:BO4E.meta.IUserProperties"/></typeparam>
+            <param name="parent">object implementing <see cref="T:BO4E.meta.IUserProperties"/></param>
+            <param name="defaultValue">default value returned if <paramref name="parent"/>.UserProperties are null or the key was not found</param>
             <returns>the value stored in the userproperty or the default <paramref name="defaultValue"/></returns>
             <exception cref="T:System.ArgumentNullException">iff <paramref name="userPropertyKey"/> is null or whitespace</exception>
         </member>
-        <member name="M:BO4E.UserPropertiesExtensions.UserPropertyEquals``1(System.Collections.Generic.IDictionary{System.String,Newtonsoft.Json.Linq.JToken},System.String,``0,System.Boolean)">
+        <member name="M:BO4E.UserPropertiesExtensions.UserPropertyEquals``2(``1,System.String,``0,System.Boolean)">
             <summary>
-            test if the <paramref name="up"/> value under key <paramref name="userPropertyKey"/> equals <paramref name="other"/>.
+            test if the <paramref name="parent"/>.UserProperty value under key <paramref name="userPropertyKey"/> equals <paramref name="other"/>.
             </summary>
-            <param name="up">user properties dict</param>
+            <typeparam name="TParent">class implementing <see cref="T:BO4E.meta.IUserProperties"/></typeparam>
+            <typeparam name="TUserProperty">type expected to be found in the User Property with key <paramref name="userPropertyKey"/></typeparam>
+            <param name="parent">object implementing <see cref="T:BO4E.meta.IUserProperties"/></param>
             <param name="userPropertyKey">key under which the value is expected</param>
             <param name="other">comparison value</param>
             <param name="ignoreWrongType">set true to automatically catch <see cref="T:System.FormatException"/> if the cast to <typeparamref name="TUserProperty"/> fails</param>
-            <returns>true iff <paramref name="up"/>!=null and the value stored under key <paramref name="userPropertyKey"/> == <paramref name="other"/></returns>
+            <returns>true iff <paramref name="parent"/>.UserProperties!=null and the value stored under key <paramref name="userPropertyKey"/> == <paramref name="other"/></returns>
             <exception cref="T:System.ArgumentNullException">iff <paramref name="userPropertyKey"/> is null or whitespace</exception>
         </member>
-        <member name="M:BO4E.UserPropertiesExtensions.EvaluateUserProperty``2(System.Collections.Generic.IDictionary{System.String,Newtonsoft.Json.Linq.JToken},System.String,System.Func{``0,``1})">
+        <member name="M:BO4E.UserPropertiesExtensions.EvaluateUserProperty``3(``2,System.String,System.Func{``0,``1})">
             <summary>
             Apply <paramref name="evaluation"/> to the userproperty under <paramref name="userPropertyKey"/> if it exists
             </summary>
             <typeparam name="TUserProperty">type of the userproperty value</typeparam>
             <typeparam name="TEvaluationResult">type of the expected result</typeparam>
-            <param name="up">user properties dict</param>
-            <param name="userPropertyKey">key of the userproperty</param>
+            <typeparam name="TParent">class implementing <see cref="T:BO4E.meta.IUserProperties"/></typeparam>
+            <param name="parent">object implementing <see cref="T:BO4E.meta.IUserProperties"/></param>
+            <param name="userPropertyKey">key under which the value is expected</param>
             <param name="evaluation">function to generate result from key value if present</param>
             <returns>result of <paramref name="evaluation"/> if the key exists, default otherwise</returns>
             <exception cref="T:System.ArgumentNullException">iff <paramref name="userPropertyKey"/> is null or whitespace</exception>

@@ -1,10 +1,3 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Reflection;
-
 using BO4E.COM;
 using BO4E.meta;
 
@@ -15,6 +8,13 @@ using Newtonsoft.Json.Schema.Generation;
 using Newtonsoft.Json.Serialization;
 
 using ProtoBuf;
+
+using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.Linq;
+using System.Reflection;
 
 namespace BO4E.BO
 {
@@ -41,7 +41,7 @@ namespace BO4E.BO
     [ProtoInclude(13, typeof(Vertrag))]
     [ProtoInclude(14, typeof(Zaehler))]
     [ProtoInclude(15, typeof(LogObject))]
-    public abstract class BusinessObject : IEquatable<BusinessObject>
+    public abstract class BusinessObject : IEquatable<BusinessObject>, IUserProperties
     {
         /// <summary>
         /// obligatory type of the business object in UPPER CASE
@@ -94,27 +94,12 @@ namespace BO4E.BO
         /// <summary>
         /// User properties (non bo4e standard)
         /// </summary>
-        [JsonProperty(PropertyName = USER_PROPERTIES_NAME, Required = Required.Default, DefaultValueHandling = DefaultValueHandling.Ignore, Order = 200)]
+        [JsonProperty(PropertyName = USER_PROPERTIES_NAME, Required = Required.Default,
+            DefaultValueHandling = DefaultValueHandling.Ignore, Order = 200)]
         [JsonExtensionData]
         [ProtoMember(200)]
         [DataCategory(DataCategory.USER_PROPERTIES)]
         public IDictionary<string, JToken> UserProperties { get; set; }
-
-        /// <inheritdoc cref="BO4E.UserPropertiesExtensions.TryGetUserProperty{TUserProperty}(IDictionary{string, JToken}, string, out TUserProperty)"/>
-        public bool TryGetUserProperty<TUserProperty>(string userPropertyKey, out TUserProperty value)
-           => this.UserProperties.TryGetUserProperty(userPropertyKey, out value);
-
-        /// <inheritdoc cref="BO4E.UserPropertiesExtensions.GetUserProperty{TUserProperty}(IDictionary{string, JToken}, string, TUserProperty)"/>
-        public TUserProperty GetUserProperty<TUserProperty>(string userPropertyKey, TUserProperty defaultValue)
-            => this.UserProperties.GetUserProperty(userPropertyKey, defaultValue);
-
-        /// <inheritdoc cref="BO4E.UserPropertiesExtensions.UserPropertyEquals{TUserProperty}(IDictionary{string, JToken}, string, TUserProperty, bool)"/>
-        public bool UserPropertyEquals<TUserProperty>(string userPropertyKey, TUserProperty other, bool ignoreWrongType = true)
-            => this.UserProperties.UserPropertyEquals(userPropertyKey, other, ignoreWrongType);
-
-        /// <inheritdoc cref="BO4E.UserPropertiesExtensions.EvaluateUserProperty{TUserProperty, TEvaluationResult}(IDictionary{string, JToken}, string, Func{TUserProperty, TEvaluationResult})"/>
-        public TEvaluationResult EvaluateUserProperty<TUserProperty, TEvaluationResult>(string userPropertyKey, Func<TUserProperty, TEvaluationResult> evaluation)
-            => this.UserProperties.EvaluateUserProperty<TUserProperty, TEvaluationResult>(userPropertyKey, evaluation);
 
         /// <summary>
         /// generates the BO4E boTyp attribute value (class name as upper case)
@@ -226,7 +211,7 @@ namespace BO4E.BO
         /// <param name="flagKey">key in the userproperties that should hold the value <paramref name="flagValue"/></param>
         /// <param name="flagValue">flag value, use null to remove the flag</param>
         /// <returns>true iff userProperties had been modified, false if not</returns>
-        public bool SetFlag(string flagKey, bool? flagValue = true)
+        public bool SetFlag<TBusinessObject>(string flagKey, bool? flagValue = true) where TBusinessObject : BO4E.BO.BusinessObject, IUserProperties
         {
             if (string.IsNullOrWhiteSpace(flagKey))
             {
@@ -258,7 +243,7 @@ namespace BO4E.BO
             }
             else
             {
-                if (this.TryGetUserProperty<bool?>(flagKey, out var existingValue) && existingValue == flagValue.Value)
+                if (((TBusinessObject)this).TryGetUserProperty<bool?, TBusinessObject>(flagKey, out var existingValue) && existingValue == flagValue.Value)
                 {
                     return false;
                 }

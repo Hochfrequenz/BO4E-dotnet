@@ -1,7 +1,3 @@
-using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-
 using BO4E.BO;
 using BO4E.meta;
 
@@ -9,6 +5,10 @@ using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 
 using ProtoBuf;
+
+using System;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
 namespace BO4E.COM
 {
@@ -72,7 +72,7 @@ namespace BO4E.COM
     [ProtoInclude(51, typeof(Zaehlwerk))]
     [ProtoInclude(52, typeof(Zeitraum))]
     [ProtoInclude(53, typeof(Zustaendigkeit))]
-    public abstract class COM : IEquatable<COM>
+    public abstract class COM : IEquatable<COM>, IUserProperties
     {
         /// <summary>
         /// User properties (non bo4e standard)
@@ -82,22 +82,6 @@ namespace BO4E.COM
         [JsonExtensionData]
         [DataCategory(DataCategory.USER_PROPERTIES)]
         public IDictionary<string, JToken> UserProperties { get; set; }
-
-        /// <inheritdoc cref="BO4E.UserPropertiesExtensions.TryGetUserProperty{TUserProperty}(IDictionary{string, JToken}, string, out TUserProperty)"/>
-        public bool TryGetUserProperty<TUserProperty>(string userPropertyKey, out TUserProperty value)
-           => this.UserProperties.TryGetUserProperty(userPropertyKey, out value);
-
-        /// <inheritdoc cref="BO4E.UserPropertiesExtensions.GetUserProperty{TUserProperty}(IDictionary{string, JToken}, string, TUserProperty)"/>
-        public TUserProperty GetUserProperty<TUserProperty>(string userPropertyKey, TUserProperty defaultValue)
-            => this.UserProperties.GetUserProperty(userPropertyKey, defaultValue);
-
-        /// <inheritdoc cref="BO4E.UserPropertiesExtensions.UserPropertyEquals{TUserProperty}(IDictionary{string, JToken}, string, TUserProperty, bool)"/>
-        public bool UserPropertyEquals<TUserProperty>(string userPropertyKey, TUserProperty other, bool ignoreWrongType = true)
-            => this.UserProperties.UserPropertyEquals(userPropertyKey, other, ignoreWrongType);
-
-        /// <inheritdoc cref="BO4E.UserPropertiesExtensions.EvaluateUserProperty{TUserProperty, TEvaluationResult}(IDictionary{string, JToken}, string, Func{TUserProperty, TEvaluationResult})"/>
-        public TEvaluationResult EvaluateUserProperty<TUserProperty, TEvaluationResult>(string userPropertyKey, Func<TUserProperty, TEvaluationResult> evaluation)
-            => this.UserProperties.EvaluateUserProperty<TUserProperty, TEvaluationResult>(userPropertyKey, evaluation);
 
         /// <summary>
         /// BO4E components are considered equal iff all of their elements/fields are equal.
