@@ -55,25 +55,20 @@ namespace BO4E.meta.LenientConverters
         public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
         {
             string rawDate;
-            if (reader.Value == null)
+            switch (reader.Value)
             {
-                return null;
-            }
-            else if (reader.Value as string != null)
-            {
-                rawDate = (string)reader.Value;
-            }
-            else if (reader.Value.GetType() == typeof(DateTimeOffset) && objectType == typeof(DateTimeOffset))
-            {
-                return (DateTimeOffset)reader.Value;
-            }
-            else if (reader.Value.GetType() == typeof(DateTime) && objectType == typeof(DateTime))
-            {
-                return (DateTime)reader.Value;
-            }
-            else
-            {
-                rawDate = reader.Value.ToString();
+                case null:
+                    return null;
+                case string value:
+                    rawDate = value;
+                    break;
+                case DateTimeOffset value when objectType == typeof(DateTimeOffset):
+                    return value;
+                case DateTime time when objectType == typeof(DateTime):
+                    return time;
+                default:
+                    rawDate = reader.Value.ToString();
+                    break;
             }
             // First try to parse the date string as is (in case it is correctly formatted)
             if (objectType == typeof(DateTimeOffset) || objectType == typeof(DateTimeOffset?))
@@ -154,10 +149,7 @@ namespace BO4E.meta.LenientConverters
         }
 
         /// <inheritdoc cref="JsonConverter.CanWrite"/>
-        public override bool CanWrite
-        {
-            get { return false; }
-        }
+        public override bool CanWrite => false;
 
         /// <inheritdoc cref="JsonConverter.WriteJson(JsonWriter, object, JsonSerializer)"/>
         public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)

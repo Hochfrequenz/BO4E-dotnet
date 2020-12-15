@@ -1,7 +1,3 @@
-using System;
-using System.IO;
-using System.Runtime.Serialization;
-
 using BO4E.ENUM;
 using BO4E.meta;
 
@@ -9,6 +5,9 @@ using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 
 using ProtoBuf;
+
+using System;
+using System.Runtime.Serialization;
 
 namespace BO4E.COM
 {
@@ -19,24 +18,11 @@ namespace BO4E.COM
     public class Verbrauch : COM
     {
         /// <summary>
-        /// Central Europe Standard Time as hard coded default time. Public to be used elsewhere ;)
+        /// <inheritdoc cref="CentralEuropeStandardTime.CENTRAL_EUROPE_STANDARD_TIME"/>
         /// </summary>
         [ProtoIgnore]
-        public static TimeZoneInfo CENTRAL_EUROPE_STANDARD_TIME { get; private set; }
-        static Verbrauch()
-        {
-            var assembly = typeof(Verbrauch).Assembly; // ??? zumindest eher als executing assembly.
-            // load serialized time zone from json resource file:
-            using (Stream stream = assembly.GetManifestResourceStream("BO4E.CentralEuropeStandardTime.json"))
-            {
-                using (var jsonReader = new StreamReader(stream))
-                {
-                    string jsonString = jsonReader.ReadToEnd();
-                    //Console.WriteLine(jsonString);
-                    CENTRAL_EUROPE_STANDARD_TIME = JsonConvert.DeserializeObject<TimeZoneInfo>(jsonString);
-                }
-            }
-        }
+        [Obsolete("This property moved. Use the property BO4E.meta." + nameof(CentralEuropeStandardTime) + "." + nameof(CentralEuropeStandardTime.CENTRAL_EUROPE_STANDARD_TIME) + " instead.", true)]
+        public static TimeZoneInfo CENTRAL_EUROPE_STANDARD_TIME { get => CentralEuropeStandardTime.CENTRAL_EUROPE_STANDARD_TIME; }
 
         /// <summary>
         /// Beginn des Zeitraumes, für den der Verbrauch angegeben wird.
@@ -106,8 +92,7 @@ namespace BO4E.COM
         /// <returns>new Verbrauch instance with fixed bugs</returns>
         public static Verbrauch FixSapCdsBug(Verbrauch v)
         {
-            Verbrauch result;
-            result = JsonConvert.DeserializeObject<Verbrauch>(JsonConvert.SerializeObject(v));
+            var result = JsonConvert.DeserializeObject<Verbrauch>(JsonConvert.SerializeObject(v));
             result.FixSapCdsBug();
             return result;
         }
@@ -150,9 +135,9 @@ namespace BO4E.COM
             if ((int)(Enddatum - Startdatum).TotalHours == 2)
             {
                 // check DST of start and enddatum
-                var startdatumLocal = TimeZoneInfo.ConvertTimeFromUtc(Startdatum, Verbrauch.CENTRAL_EUROPE_STANDARD_TIME);
-                var enddatumLocal = TimeZoneInfo.ConvertTimeFromUtc(Enddatum, Verbrauch.CENTRAL_EUROPE_STANDARD_TIME);
-                if (!Verbrauch.CENTRAL_EUROPE_STANDARD_TIME.IsDaylightSavingTime(startdatumLocal - new TimeSpan(0, 0, 1)) && Verbrauch.CENTRAL_EUROPE_STANDARD_TIME.IsDaylightSavingTime(enddatumLocal))
+                var startdatumLocal = TimeZoneInfo.ConvertTimeFromUtc(Startdatum, CentralEuropeStandardTime.CENTRAL_EUROPE_STANDARD_TIME);
+                var enddatumLocal = TimeZoneInfo.ConvertTimeFromUtc(Enddatum, CentralEuropeStandardTime.CENTRAL_EUROPE_STANDARD_TIME);
+                if (!CentralEuropeStandardTime.CENTRAL_EUROPE_STANDARD_TIME.IsDaylightSavingTime(startdatumLocal - new TimeSpan(0, 0, 1)) && CentralEuropeStandardTime.CENTRAL_EUROPE_STANDARD_TIME.IsDaylightSavingTime(enddatumLocal))
                 {
                     // change winter-->summer time (e.g. UTC+1-->UTC+2)
                     // this is an artefact of the sap enddatum computation
@@ -162,9 +147,9 @@ namespace BO4E.COM
             else if ((int)(Enddatum - Startdatum).TotalMinutes == -45)
             {
                 // check DST of start and enddatum
-                //var startdatumLocal = TimeZoneInfo.ConvertTimeFromUtc(startdatum, Verbrauch.CENTRAL_EUROPE_STANDARD_TIME);
-                var enddatumLocal = TimeZoneInfo.ConvertTimeFromUtc(Enddatum, Verbrauch.CENTRAL_EUROPE_STANDARD_TIME);
-                if (!Verbrauch.CENTRAL_EUROPE_STANDARD_TIME.IsDaylightSavingTime(enddatumLocal - new TimeSpan(1, 0, 0)) && Verbrauch.CENTRAL_EUROPE_STANDARD_TIME.IsDaylightSavingTime(enddatumLocal - new TimeSpan(1, 0, 1)))
+                //var startdatumLocal = TimeZoneInfo.ConvertTimeFromUtc(startdatum, CentralEuropeStandardTime.CENTRAL_EUROPE_STANDARD_TIME);
+                var enddatumLocal = TimeZoneInfo.ConvertTimeFromUtc(Enddatum, CentralEuropeStandardTime.CENTRAL_EUROPE_STANDARD_TIME);
+                if (!CentralEuropeStandardTime.CENTRAL_EUROPE_STANDARD_TIME.IsDaylightSavingTime(enddatumLocal - new TimeSpan(1, 0, 0)) && CentralEuropeStandardTime.CENTRAL_EUROPE_STANDARD_TIME.IsDaylightSavingTime(enddatumLocal - new TimeSpan(1, 0, 1)))
                 {
                     // change winter-->summer time (e.g. UTC+1-->UTC+2)
                     // this is an artefact of the sap enddatum computation

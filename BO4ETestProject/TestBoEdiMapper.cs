@@ -1,12 +1,16 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using BO4E;
+﻿using BO4E;
 using BO4E.BO;
+
 using JsonDiffPatchDotNet;
+
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
+
+using System;
+using System.Collections.Generic;
+using System.IO;
 
 namespace TestBO4E
 {
@@ -89,9 +93,8 @@ namespace TestBO4E
                 JObject result = BoEdiMapper.ReplaceWithEdiValues(bo);
                 //JObject result = JsonConvert.DeserializeObject<JObject>(JsonConvert.SerializeObject(, new StringEnumConverter()));
                 var jdp = new JsonDiffPatch();
-                JToken left, right;
-                left = JsonHelper.RemoveEmptyChildren(json["expectedResult"]);
-                right = JsonHelper.RemoveEmptyChildren(result);
+                var left = JsonHelper.RemoveEmptyChildren(json["expectedResult"]);
+                var right = JsonHelper.RemoveEmptyChildren(result);
                 var patch = jdp.Diff(left, right);
                 string additionalMessage = string.Empty;
                 if (patch != null)

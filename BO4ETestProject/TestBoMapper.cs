@@ -1,11 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-
-using BO4E;
+﻿using BO4E;
 using BO4E.BO;
 using BO4E.COM;
+using BO4E.meta;
 using BO4E.meta.LenientConverters;
 //using BO4E.Extensions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -13,6 +9,11 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 using Newtonsoft.Json.Linq;
+
+using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Linq;
 
 namespace TestBO4E
 {
@@ -166,7 +167,7 @@ namespace TestBO4E
                 json = JsonConvert.DeserializeObject<JObject>(jsonString);
             }
             Energiemenge em = JsonConvert.DeserializeObject<Energiemenge>(json["input"].ToString(), LenientParsing.MOST_LENIENT.GetJsonSerializerSettings());
-            if (TimeZoneInfo.Local == Verbrauch.CENTRAL_EUROPE_STANDARD_TIME)
+            if (TimeZoneInfo.Local == CentralEuropeStandardTime.CENTRAL_EUROPE_STANDARD_TIME)
             {
                 Assert.AreEqual(2, em.Energieverbrauch.Count); // weil 2 verschiedene status
             }

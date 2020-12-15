@@ -1,8 +1,3 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Reflection;
-
 using BO4E.BO;
 using BO4E.COM;
 using BO4E.meta;
@@ -10,6 +5,11 @@ using BO4E.meta;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 using Newtonsoft.Json;
+
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Reflection;
 
 namespace TestBO4E
 {
@@ -21,7 +21,7 @@ namespace TestBO4E
         {
             foreach (var type in typeof(BusinessObject).Assembly.GetTypes().Where(t => typeof(BusinessObject).IsAssignableFrom(t)))
             {
-                var fields = type.GetFields().Where(f=>f.IsPublic && !f.IsLiteral);
+                var fields = type.GetFields().Where(f => f.IsPublic && !f.IsLiteral);
                 Assert.IsFalse(fields.Any(), $"Type {type} must not contain fields but has: {string.Join(", ", fields.ToList())}");
             }
         }
@@ -40,7 +40,7 @@ namespace TestBO4E
         {
             foreach (var type in typeof(BO4E.COM.COM).Assembly.GetTypes().Where(t => typeof(COM).IsAssignableFrom(t)))
             {
-                var fields = type.GetFields().Where(f=>f.IsPublic);
+                var fields = type.GetFields().Where(f => f.IsPublic);
                 Assert.IsFalse(fields.Any(), $"Type {type} must not contain public fields but has: {string.Join(", ", fields.ToList())}");
             }
         }
@@ -59,7 +59,7 @@ namespace TestBO4E
         {
             foreach (var type in typeof(BusinessObject).Assembly.GetTypes().Where(t => t.IsClass && t.IsPublic && t.Namespace == "BO4E.BO"))
             {
-                Assert.IsTrue(type.IsSubclassOf(typeof(BusinessObject)) || type.Equals(typeof(BusinessObject)), $"Type {type} does not inherit from {nameof(BusinessObject)}.");
+                Assert.IsTrue(type.IsSubclassOf(typeof(BusinessObject)) || type == typeof(BusinessObject), $"Type {type} does not inherit from {nameof(BusinessObject)}.");
             }
         }
 
@@ -68,7 +68,7 @@ namespace TestBO4E
         {
             foreach (var type in typeof(BusinessObject).Assembly.GetTypes().Where(t => t.IsClass && t.IsPublic && t.Namespace == "BO4E.COM"))
             {
-                Assert.IsTrue(type.IsSubclassOf(typeof(BO4E.COM.COM)) || type.Equals(typeof(BO4E.COM.COM)), $"Type {type} does not inherit from {nameof(BO4E.COM.COM)}.");
+                Assert.IsTrue(type.IsSubclassOf(typeof(BO4E.COM.COM)) || type == typeof(COM), $"Type {type} does not inherit from {nameof(BO4E.COM.COM)}.");
             }
         }
 
@@ -95,7 +95,7 @@ namespace TestBO4E
                     .Where(p => p.GetCustomAttributes(typeof(BoKey), false).Length > 0)
                     .OrderBy(ap => ap.GetCustomAttribute<JsonPropertyAttribute>()?.Order)
                     .ToArray<PropertyInfo>();
-                Assert.IsTrue(keyProps.Count() > 0, $"Type {type} is derived from {nameof(BusinessObject)} but has no [{nameof(BoKey)}] attribute.");
+                Assert.IsTrue(keyProps.Any(), $"Type {type} is derived from {nameof(BusinessObject)} but has no [{nameof(BoKey)}] attribute.");
             }
         }
 

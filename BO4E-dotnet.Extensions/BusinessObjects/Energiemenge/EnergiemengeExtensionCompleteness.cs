@@ -219,7 +219,7 @@ namespace BO4E.Extensions.BusinessObjects.Energiemenge
             {
                 throw new ArgumentNullException(nameof(ranges), "list of time ranges must not be null");
             }
-            if (ranges.Count() > 0)
+            if (ranges.Any())
             {
                 if (useParallelExecution)
                 {

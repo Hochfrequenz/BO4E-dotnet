@@ -83,7 +83,7 @@ namespace BO4E.Extensions.Encryption
                 envelopedGen.AddKeyTransRecipient(bouncyCert);
             }
 
-            CmsEnvelopedData envelopedData = envelopedGen.Generate(cpba, CmsEnvelopedDataGenerator.Aes256Cbc);
+            CmsEnvelopedData envelopedData = envelopedGen.Generate(cpba, CmsEnvelopedGenerator.Aes256Cbc);
             string cipherString = Convert.ToBase64String(envelopedData.GetEncoded());
             return cipherString;
         }
@@ -98,8 +98,7 @@ namespace BO4E.Extensions.Encryption
         public string Decrypt(string cipherText)
         {
             byte[] cipherBytes = Convert.FromBase64String(cipherText);
-            CmsEnvelopedData envelopedData;
-            envelopedData = new CmsEnvelopedData(cipherBytes);
+            var envelopedData = new CmsEnvelopedData(cipherBytes);
             RecipientInformationStore recipientsStore = envelopedData.GetRecipientInfos();
             ICollection recipientsCollection = recipientsStore.GetRecipients();
             IList recipients = recipientsCollection as IList;
@@ -114,12 +113,8 @@ namespace BO4E.Extensions.Encryption
                     plainBytes = recipient.GetContent(this.privateKey);
                     break;
                 }
-                catch (CmsException e)
+                catch (CmsException e) when (index != recipientsStore.Count - 1)
                 {
-                    if (index == recipientsStore.Count - 1)
-                    {
-                        throw e;
-                    }
                 }
                 index++;
             }

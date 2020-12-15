@@ -1,13 +1,9 @@
-using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-
 using BO4E;
 using BO4E.BO;
 using BO4E.COM;
 using BO4E.ENUM;
 using BO4E.Extensions.BusinessObjects.Energiemenge;
+using BO4E.meta;
 using BO4E.meta.LenientConverters;
 using BO4E.Reporting;
 
@@ -20,6 +16,11 @@ using Newtonsoft.Json.Converters;
 using Newtonsoft.Json.Linq;
 
 using StackExchange.Profiling;
+
+using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Linq;
 
 namespace TestBO4EExtensions
 {
@@ -354,12 +355,12 @@ namespace TestBO4EExtensions
         [TestMethod]
         public void TestDailyCompletenessDST()
         {
-            var localStart = TimeZoneInfo.ConvertTimeFromUtc(new DateTimeOffset(2018, 3, 24, 23, 0, 0, TimeSpan.Zero).UtcDateTime, Verbrauch.CENTRAL_EUROPE_STANDARD_TIME);//, DateTimeKind.Unspecified);
-            var localEnd = TimeZoneInfo.ConvertTimeFromUtc(new DateTimeOffset(2018, 3, 26, 22, 0, 0, TimeSpan.Zero).UtcDateTime, Verbrauch.CENTRAL_EUROPE_STANDARD_TIME);//, DateTimeKind.Unspecified);
-            if (TimeZoneInfo.Local != Verbrauch.CENTRAL_EUROPE_STANDARD_TIME)
+            var localStart = TimeZoneInfo.ConvertTimeFromUtc(new DateTimeOffset(2018, 3, 24, 23, 0, 0, TimeSpan.Zero).UtcDateTime, CentralEuropeStandardTime.CENTRAL_EUROPE_STANDARD_TIME);//, DateTimeKind.Unspecified);
+            var localEnd = TimeZoneInfo.ConvertTimeFromUtc(new DateTimeOffset(2018, 3, 26, 22, 0, 0, TimeSpan.Zero).UtcDateTime, CentralEuropeStandardTime.CENTRAL_EUROPE_STANDARD_TIME);//, DateTimeKind.Unspecified);
+            if (TimeZoneInfo.Local != CentralEuropeStandardTime.CENTRAL_EUROPE_STANDARD_TIME)
             {
-                localStart = DateTime.SpecifyKind(TimeZoneInfo.ConvertTime(localStart, TimeZoneInfo.Local, Verbrauch.CENTRAL_EUROPE_STANDARD_TIME), DateTimeKind.Unspecified);
-                localEnd = DateTime.SpecifyKind(TimeZoneInfo.ConvertTime(localEnd, TimeZoneInfo.Local, Verbrauch.CENTRAL_EUROPE_STANDARD_TIME), DateTimeKind.Unspecified);
+                localStart = DateTime.SpecifyKind(TimeZoneInfo.ConvertTime(localStart, TimeZoneInfo.Local, CentralEuropeStandardTime.CENTRAL_EUROPE_STANDARD_TIME), DateTimeKind.Unspecified);
+                localEnd = DateTime.SpecifyKind(TimeZoneInfo.ConvertTime(localEnd, TimeZoneInfo.Local, CentralEuropeStandardTime.CENTRAL_EUROPE_STANDARD_TIME), DateTimeKind.Unspecified);
             }
             else
             {
@@ -368,10 +369,10 @@ namespace TestBO4EExtensions
             }
             var utcStart = new DateTimeOffset(2018, 3, 24, 23, 0, 0, TimeSpan.Zero);
             var utcEnd = new DateTimeOffset(2018, 3, 26, 22, 0, 0, TimeSpan.Zero);
-            if (TimeZoneInfo.Local.SupportsDaylightSavingTime && Verbrauch.CENTRAL_EUROPE_STANDARD_TIME == TimeZoneInfo.Local)
+            if (TimeZoneInfo.Local.SupportsDaylightSavingTime && CentralEuropeStandardTime.CENTRAL_EUROPE_STANDARD_TIME == TimeZoneInfo.Local)
             {
-                Assert.IsFalse(Verbrauch.CENTRAL_EUROPE_STANDARD_TIME.IsDaylightSavingTime(localStart));
-                Assert.IsTrue(Verbrauch.CENTRAL_EUROPE_STANDARD_TIME.IsDaylightSavingTime(localEnd));
+                Assert.IsFalse(CentralEuropeStandardTime.CENTRAL_EUROPE_STANDARD_TIME.IsDaylightSavingTime(localStart));
+                Assert.IsTrue(CentralEuropeStandardTime.CENTRAL_EUROPE_STANDARD_TIME.IsDaylightSavingTime(localEnd));
             }
 
             var verbrauchSlices = new List<TimeRange>()
@@ -417,7 +418,7 @@ namespace TestBO4EExtensions
         public void TestAddDaysDSTSpring()
         {
             DateTime utcDt = new DateTimeOffset(2018, 3, 24, 23, 0, 0, TimeSpan.Zero).UtcDateTime;
-            DateTime localDt = DateTime.SpecifyKind(TimeZoneInfo.ConvertTimeFromUtc(new DateTimeOffset(2018, 3, 24, 23, 0, 0, TimeSpan.Zero).UtcDateTime, Verbrauch.CENTRAL_EUROPE_STANDARD_TIME), DateTimeKind.Unspecified);
+            DateTime localDt = DateTime.SpecifyKind(TimeZoneInfo.ConvertTimeFromUtc(new DateTimeOffset(2018, 3, 24, 23, 0, 0, TimeSpan.Zero).UtcDateTime, CentralEuropeStandardTime.CENTRAL_EUROPE_STANDARD_TIME), DateTimeKind.Unspecified);
 
             DateTime resultUtc = utcDt.AddDaysDST(1);
             DateTime resultLocal = localDt.AddDaysDST(1);
@@ -428,8 +429,8 @@ namespace TestBO4EExtensions
             Assert.AreEqual(23, (new TimeRange(utcDt, resultUtc)).Duration.TotalHours);
             Assert.AreEqual(23, (new TimeRange()
             {
-                Start = TimeZoneInfo.ConvertTimeToUtc(DateTime.SpecifyKind(localDt, DateTimeKind.Unspecified), Verbrauch.CENTRAL_EUROPE_STANDARD_TIME),
-                End = TimeZoneInfo.ConvertTimeToUtc(DateTime.SpecifyKind(resultLocal, DateTimeKind.Unspecified), Verbrauch.CENTRAL_EUROPE_STANDARD_TIME)
+                Start = TimeZoneInfo.ConvertTimeToUtc(DateTime.SpecifyKind(localDt, DateTimeKind.Unspecified), CentralEuropeStandardTime.CENTRAL_EUROPE_STANDARD_TIME),
+                End = TimeZoneInfo.ConvertTimeToUtc(DateTime.SpecifyKind(resultLocal, DateTimeKind.Unspecified), CentralEuropeStandardTime.CENTRAL_EUROPE_STANDARD_TIME)
             }).Duration.TotalHours);
         }
 
@@ -437,7 +438,7 @@ namespace TestBO4EExtensions
         public void TestAddDaysDSTAutumn()
         {
             DateTime utcDt = new DateTimeOffset(2018, 10, 27, 22, 0, 0, TimeSpan.Zero).UtcDateTime;
-            DateTime localDt = DateTime.SpecifyKind(TimeZoneInfo.ConvertTimeFromUtc(new DateTimeOffset(2018, 10, 27, 22, 0, 0, TimeSpan.Zero).UtcDateTime, Verbrauch.CENTRAL_EUROPE_STANDARD_TIME), DateTimeKind.Unspecified);
+            DateTime localDt = DateTime.SpecifyKind(TimeZoneInfo.ConvertTimeFromUtc(new DateTimeOffset(2018, 10, 27, 22, 0, 0, TimeSpan.Zero).UtcDateTime, CentralEuropeStandardTime.CENTRAL_EUROPE_STANDARD_TIME), DateTimeKind.Unspecified);
 
             DateTime resultUtc = utcDt.AddDaysDST(1);
             DateTime resultLocal = localDt.AddDaysDST(1);
@@ -448,8 +449,8 @@ namespace TestBO4EExtensions
             Assert.AreEqual(25, (new TimeRange(utcDt, resultUtc)).Duration.TotalHours);
             Assert.AreEqual(25, (new TimeRange()
             {
-                Start = TimeZoneInfo.ConvertTimeToUtc(DateTime.SpecifyKind(localDt, DateTimeKind.Unspecified), Verbrauch.CENTRAL_EUROPE_STANDARD_TIME),
-                End = TimeZoneInfo.ConvertTimeToUtc(DateTime.SpecifyKind(resultLocal, DateTimeKind.Unspecified), Verbrauch.CENTRAL_EUROPE_STANDARD_TIME)
+                Start = TimeZoneInfo.ConvertTimeToUtc(DateTime.SpecifyKind(localDt, DateTimeKind.Unspecified), CentralEuropeStandardTime.CENTRAL_EUROPE_STANDARD_TIME),
+                End = TimeZoneInfo.ConvertTimeToUtc(DateTime.SpecifyKind(resultLocal, DateTimeKind.Unspecified), CentralEuropeStandardTime.CENTRAL_EUROPE_STANDARD_TIME)
             }).Duration.TotalHours);
         }
 
@@ -457,7 +458,7 @@ namespace TestBO4EExtensions
         public void TestAddDaysDSTSummer() // could be winter as well ;)
         {
             DateTime utcDt = new DateTimeOffset(2018, 7, 27, 22, 0, 0, TimeSpan.Zero).UtcDateTime;
-            DateTime localDt = DateTime.SpecifyKind(TimeZoneInfo.ConvertTimeFromUtc(new DateTimeOffset(2018, 7, 27, 22, 0, 0, TimeSpan.Zero).UtcDateTime, Verbrauch.CENTRAL_EUROPE_STANDARD_TIME), DateTimeKind.Unspecified);
+            DateTime localDt = DateTime.SpecifyKind(TimeZoneInfo.ConvertTimeFromUtc(new DateTimeOffset(2018, 7, 27, 22, 0, 0, TimeSpan.Zero).UtcDateTime, CentralEuropeStandardTime.CENTRAL_EUROPE_STANDARD_TIME), DateTimeKind.Unspecified);
 
             DateTime resultUtc = utcDt.AddDaysDST(1);
             DateTime resultLocal = localDt.AddDaysDST(1);
@@ -468,8 +469,8 @@ namespace TestBO4EExtensions
             Assert.AreEqual(24, (new TimeRange(utcDt, resultUtc)).Duration.TotalHours);
             Assert.AreEqual(24, (new TimeRange()
             {
-                Start = TimeZoneInfo.ConvertTimeToUtc(DateTime.SpecifyKind(localDt, DateTimeKind.Unspecified), Verbrauch.CENTRAL_EUROPE_STANDARD_TIME),
-                End = TimeZoneInfo.ConvertTimeToUtc(DateTime.SpecifyKind(resultLocal, DateTimeKind.Unspecified), Verbrauch.CENTRAL_EUROPE_STANDARD_TIME)
+                Start = TimeZoneInfo.ConvertTimeToUtc(DateTime.SpecifyKind(localDt, DateTimeKind.Unspecified), CentralEuropeStandardTime.CENTRAL_EUROPE_STANDARD_TIME),
+                End = TimeZoneInfo.ConvertTimeToUtc(DateTime.SpecifyKind(resultLocal, DateTimeKind.Unspecified), CentralEuropeStandardTime.CENTRAL_EUROPE_STANDARD_TIME)
             }).Duration.TotalHours);
         }
     }

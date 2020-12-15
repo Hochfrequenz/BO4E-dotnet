@@ -1,8 +1,10 @@
-﻿using System;
+﻿using BO4E.meta;
+
+using Newtonsoft.Json;
+
+using System;
 using System.Collections.Generic;
 using System.Linq;
-using BO4E.meta;
-using Newtonsoft.Json;
 
 namespace BO4E.Extensions.Encryption
 {
@@ -87,8 +89,7 @@ namespace BO4E.Extensions.Encryption
         public bool ContainsNonKeepingOperations()
         {
             return this.operations
-                .Where(kvp => kvp.Value != AnonymizerApproach.KEEP)
-                .Count() > 0;
+                .Any(kvp => kvp.Value != AnonymizerApproach.KEEP);
         }
 
         /// <summary>
