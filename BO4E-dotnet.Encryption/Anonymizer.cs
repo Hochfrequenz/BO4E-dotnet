@@ -152,14 +152,14 @@ namespace BO4E.Extensions.Encryption
                              * annotated default value, otherwise we can safely set null. */
                             bool isRequired = false;
                             Attribute defaultValueAttribute = null;
-                            Attribute jsonPropertyAttribute = affectedProp.GetCustomAttributes().Where(a => a.GetType() == typeof(JsonPropertyAttribute)).FirstOrDefault();
+                            Attribute jsonPropertyAttribute = affectedProp.GetCustomAttributes().FirstOrDefault(a => a.GetType() == typeof(JsonPropertyAttribute));
                             if (jsonPropertyAttribute != null)
                             {
                                 JsonPropertyAttribute jpa = (JsonPropertyAttribute)jsonPropertyAttribute;
                                 if (jpa.Required == Required.Always)
                                 {
                                     isRequired = true;
-                                    defaultValueAttribute = affectedProp.GetCustomAttributes().Where(a => a.GetType() == typeof(DefaultValueAttribute)).FirstOrDefault();
+                                    defaultValueAttribute = affectedProp.GetCustomAttributes().FirstOrDefault(a => a.GetType() == typeof(DefaultValueAttribute));
                                 }
                             }
 
