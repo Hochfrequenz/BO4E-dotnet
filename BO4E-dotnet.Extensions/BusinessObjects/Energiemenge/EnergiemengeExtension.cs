@@ -835,7 +835,7 @@ namespace BO4E.Extensions.BusinessObjects.Energiemenge
                                 v.Enddatum = v.Startdatum.AddSeconds(intervalSize);
                             }
                         }
-                        if (em.Energieverbrauch.Where(v => (v.Enddatum - v.Startdatum).TotalMinutes == -45).Count() > 1)
+                        if (em.Energieverbrauch.Count(v => (v.Enddatum - v.Startdatum).TotalMinutes == -45) > 1)
                         {
                             /*foreach (var dstAffected in em.energieverbrauch.Where(v => (v.enddatum - v.startdatum).TotalMinutes != -45))                          
                             {
@@ -892,7 +892,7 @@ namespace BO4E.Extensions.BusinessObjects.Energiemenge
             }
         }
 
-        protected class BasicVerbrauchDateTimeComparer : IComparer<CompletenessReport.BasicVerbrauch>
+        private class BasicVerbrauchDateTimeComparer : IComparer<CompletenessReport.BasicVerbrauch>
         {
             int IComparer<CompletenessReport.BasicVerbrauch>.Compare(CompletenessReport.BasicVerbrauch x, CompletenessReport.BasicVerbrauch y)
             {
