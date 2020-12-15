@@ -60,7 +60,7 @@ namespace BO4E.Extensions.Encryption
         /// Encrypt a Business Object
         /// </summary>
         /// <param name="plainObject">unencrypted Business Object</param>
-        /// <param name="associatedData">max. 16 character long string (not secret)</param>
+        /// <param name="associatedDataString">max. 16 character long string (not secret)</param>
         /// <returns>an encrypted Business Object</returns>
         public EncryptedObjectAEAD Encrypt(BusinessObject plainObject, string associatedDataString)
         {

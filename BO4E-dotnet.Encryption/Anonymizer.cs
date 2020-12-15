@@ -1,14 +1,3 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Diagnostics;
-using System.Linq;
-using System.Reflection;
-using System.Security.Cryptography;
-using System.Security.Cryptography.X509Certificates;
-using System.Text;
-
 using BO4E.BO;
 using BO4E.Extensions.BusinessObjects;
 using BO4E.meta;
@@ -21,6 +10,18 @@ using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 
 using Org.BouncyCastle.Crypto;
+using Org.BouncyCastle.Security;
+
+using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Diagnostics;
+using System.Linq;
+using System.Reflection;
+using System.Security.Cryptography;
+using System.Security.Cryptography.X509Certificates;
+using System.Text;
 
 namespace BO4E.Extensions.Encryption
 {
@@ -117,7 +118,7 @@ namespace BO4E.Extensions.Encryption
                 throw new ArgumentNullException(nameof(bo));
             }
             Dictionary<DataCategory, AnonymizerApproach> mapping = configuration.operations;
-            BusinessObject result = bo.DeepClone<BusinessObject>();
+            BusinessObject result = bo.DeepClone();
             foreach (DataCategory dataCategory in mapping.Keys)
             {
                 AnonymizerApproach approach = mapping[dataCategory];
@@ -152,7 +153,7 @@ namespace BO4E.Extensions.Encryption
                              * annotated default value, otherwise we can safely set null. */
                             bool isRequired = false;
                             Attribute defaultValueAttribute = null;
-                            Attribute jsonPropertyAttribute = affectedProp.GetCustomAttributes().FirstOrDefault(a => a.GetType() == typeof(JsonPropertyAttribute));
+                            Attribute jsonPropertyAttribute = affectedProp.GetCustomAttributes().FirstOrDefault(a => a is JsonPropertyAttribute);
                             if (jsonPropertyAttribute != null)
                             {
                                 JsonPropertyAttribute jpa = (JsonPropertyAttribute)jsonPropertyAttribute;
@@ -208,7 +209,7 @@ namespace BO4E.Extensions.Encryption
                             }
                             using (X509AsymmetricEncrypter xasyncenc = new X509AsymmetricEncrypter(this.PublicKeyX509))
                             {
-                                if (affectedProp.GetValue(bo).GetType() == typeof(string))
+                                if (affectedProp.GetValue(bo) is string)
                                 {
                                     if (affectedProp.GetValue(bo) != null)
                                     {
@@ -257,7 +258,7 @@ namespace BO4E.Extensions.Encryption
                         case AnonymizerApproach.DECRYPT:
                             if (this.privateKey == null)
                             {
-                                throw new ArgumentNullException("To use the decryption feature you have to provide a private key using the SetPrivateKey method.");
+                                throw new ArgumentNullException(nameof(PrivateKeyFactory), "To use the decryption feature you have to provide a private key using the SetPrivateKey method.");
                             }
                             using (X509AsymmetricEncrypter xasydec = new X509AsymmetricEncrypter(this.privateKey))
                             {
@@ -362,7 +363,7 @@ namespace BO4E.Extensions.Encryption
                         throw new ArgumentException($"Couldn't hash field {prop.Name}: {f.Message}");
                     }
                 }
-                if (properties.Count() == 0)
+                if (!properties.Any())
                 {
                     throw new NotImplementedException($"Type {inputType} with value '{input}' has no subfields but is not handled separately.");
                 }
@@ -387,7 +388,7 @@ namespace BO4E.Extensions.Encryption
         protected void HashString(ref string input, DataCategory? dataCategory)
         {
             string hashedValue;
-            if (dataCategory.HasValue && dataCategory.Value == DataCategory.POD)
+            if (dataCategory == DataCategory.POD)
             {
                 if (Messlokation.ValidateId(input) || input.Length == 33)
                 {
@@ -483,7 +484,7 @@ namespace BO4E.Extensions.Encryption
         private byte[] Sha256HashBytes(string value)
         {
             byte[] hashedByteArray;
-            using (SHA256 hash = SHA256Managed.Create())
+            using (SHA256 hash = SHA256.Create())
             {
                 if (hashingSalt != null)
                 {
