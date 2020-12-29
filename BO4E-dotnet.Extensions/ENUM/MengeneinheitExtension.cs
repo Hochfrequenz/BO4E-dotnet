@@ -2,6 +2,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace BO4E.Extensions.ENUM
 {
@@ -14,7 +15,7 @@ namespace BO4E.Extensions.ENUM
         /// This set contains sets of Mengeneinheiten that share the same dimension (e.g. time, power, work, volume)
         /// Einheiten in the same subset are considered convertible amongst each other.
         /// </summary>
-        public static readonly ISet<ISet<Mengeneinheit>> DIMENSION_SETS = new HashSet<ISet<Mengeneinheit>>
+        public static readonly ISet<ISet<Mengeneinheit>> DimensionSets = new HashSet<ISet<Mengeneinheit>>
         {
            new HashSet<Mengeneinheit>{ Mengeneinheit.WH, Mengeneinheit.KWH, Mengeneinheit.MWH },
            new HashSet<Mengeneinheit>{ Mengeneinheit.KW, Mengeneinheit.MW },
@@ -33,15 +34,10 @@ namespace BO4E.Extensions.ENUM
         /// <returns>true iff convertible</returns>
         public static bool AreConvertible(Mengeneinheit me1, Mengeneinheit me2)
         {
+#pragma warning disable 618
             if (me1 == Mengeneinheit.ZERO || me2 == Mengeneinheit.ZERO) { return false; }
-            foreach (ISet<Mengeneinheit> einheitengroup in DIMENSION_SETS)
-            {
-                if (einheitengroup.Contains(me1) && einheitengroup.Contains(me2))
-                {
-                    return true;
-                }
-            }
-            return false;
+#pragma warning restore 618
+            return DimensionSets.Any(einheitengroup => einheitengroup.Contains(me1) && einheitengroup.Contains(me2));
         }
 
         /// <summary>
@@ -108,9 +104,11 @@ namespace BO4E.Extensions.ENUM
         /// <exception cref="InvalidOperationException">iff units do not have the same dimension</exception>
         public static decimal GetConversionFactor(this Mengeneinheit me1, Mengeneinheit me2)
         {
+#pragma warning disable 618
             if (me1 == Mengeneinheit.ZERO || me2 == Mengeneinheit.ZERO)
+#pragma warning restore 618
             {
-                throw new InvalidOperationException($"You must not use the artifical 'ZERO' value.");
+                throw new InvalidOperationException("You must not use the artificial 'ZERO' value.");
             }
             else if (me1 == me2)
             {

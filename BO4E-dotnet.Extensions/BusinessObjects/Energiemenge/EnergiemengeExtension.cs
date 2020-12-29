@@ -45,7 +45,7 @@ namespace BO4E.Extensions.BusinessObjects.Energiemenge
         }
 
         /// <summary>
-        /// Get TimeRange covery by Energiemenge
+        /// Get TimeRange covered by Energiemenge
         /// </summary>
         /// <param name="menge">Energiemenge</param>
         /// <returns>TimeRange ranging from the earliest <see cref="Verbrauch.Startdatum"/> to the latest <see cref="Verbrauch.Enddatum"/></returns>
@@ -65,7 +65,7 @@ namespace BO4E.Extensions.BusinessObjects.Energiemenge
          * This usually happens if one tries to use the auto-configuration feature but the 
          * Energieverbrauch array is empty. The result is simply undefined. Returning null
          * would require all dependent methods to properly handle the null value. Since this 
-         * would propably lead to unspecific NullReferenceExceptions we'd better let the invalid
+         * would probably lead to unspecific NullReferenceExceptions we'd better let the invalid
          * operation exception bubble up from here as far as it's required.
          */
         private static DateTimeOffset GetMinDate(this BO4E.BO.Energiemenge em)
@@ -85,7 +85,7 @@ namespace BO4E.Extensions.BusinessObjects.Energiemenge
         }
 
         /// <summary>
-        /// Same as <see cref="GetTotalConsumption(BO.Energiemenge, Wertermittlungsverfahren, string, Mengeneinheit)"/> but without autodetected parameters. 
+        /// Same as <see cref="GetTotalConsumption(BO.Energiemenge, Wertermittlungsverfahren, string, Mengeneinheit)"/> but without auto-detected parameters. 
         /// By default a the full length of the Energiemenge is taken into account.
         /// </summary>
         /// <param name="em">Energiemenge</param>
@@ -125,7 +125,7 @@ namespace BO4E.Extensions.BusinessObjects.Energiemenge
                 }
                 if (em.Energieverbrauch.Count == 0)
                 {
-                    return Tuple.Create<decimal, Mengeneinheit>(0.0M, Mengeneinheit.ANZAHL);
+                    return Tuple.Create(0.0M, Mengeneinheit.ANZAHL);
                 }
                 ISet<Mengeneinheit> einheiten = new HashSet<Mengeneinheit>(em.Energieverbrauch.Select(x => x.Einheit));
                 if (einheiten.Count > 1)
@@ -133,9 +133,9 @@ namespace BO4E.Extensions.BusinessObjects.Energiemenge
                     // z.B. kWh und Wh oder Monat und Jahr... Die liefern IsPure==true.
                     throw new NotImplementedException("Converting different units of same type is not supported yet.");
                 }
-                Verbrauch v = em.Energieverbrauch.First<Verbrauch>();
+                Verbrauch v = em.Energieverbrauch.First();
                 decimal consumption = em.GetConsumption(reference, v.Wertermittlungsverfahren, v.Obiskennzahl, v.Einheit);
-                return Tuple.Create<decimal, Mengeneinheit>(consumption, v.Einheit);
+                return Tuple.Create(consumption, v.Einheit);
             }
         }
 
@@ -189,7 +189,7 @@ namespace BO4E.Extensions.BusinessObjects.Energiemenge
                 }
                 using (MiniProfiler.Current.Step("Parallelised normalising of all values."))
                 {
-                    Parallel.ForEach<Verbrauch>(result.Energieverbrauch.Where(v => v.Einheit == totalConsumption.Item2), v =>
+                    Parallel.ForEach(result.Energieverbrauch.Where(v => v.Einheit == totalConsumption.Item2), v =>
                     {
                         v.Wert = scalingFactor * v.Wert;
                     });
@@ -297,7 +297,7 @@ namespace BO4E.Extensions.BusinessObjects.Energiemenge
             }
             else
             {
-                return result;
+                return null;
             }
         }
 
@@ -315,7 +315,7 @@ namespace BO4E.Extensions.BusinessObjects.Energiemenge
         /// Get a list of those time ranges within a reference, where no energieverbrauch entries are defined.
         /// </summary>
         /// <param name="em">Energiemenge</param>
-        /// <param name="reference">reference timeframe</param>
+        /// <param name="reference">reference time frame</param>
         /// <param name="wev">Wertermittlungsverfahren</param>
         /// <param name="obis">OBIS-Kennzahl</param>
         /// <param name="me">Mengeneinheit</param>
@@ -328,7 +328,7 @@ namespace BO4E.Extensions.BusinessObjects.Energiemenge
                 using (MiniProfiler.Current.Step($"Filtering energieverbrauch on OBIS={obis}, WEV={wev}, Mengeneinheit={me}"))
                 {
                     filteredVerbrauch = em.Energieverbrauch
-                        .Where<Verbrauch>(v => v.Wertermittlungsverfahren == wev && v.Obiskennzahl == obis && v.Einheit == me)
+                        .Where(v => v.Wertermittlungsverfahren == wev && v.Obiskennzahl == obis && v.Einheit == me)
                         .ToDictionary(v => new Tuple<DateTime, DateTime>(v.Startdatum, v.Enddatum), v => v);
                 }
                 if (filteredVerbrauch.Count < 2)
@@ -339,7 +339,7 @@ namespace BO4E.Extensions.BusinessObjects.Energiemenge
                 {
                     throw new ArgumentException("The provided Energiemenge is not evenly spaced although gaps are allowed.");
                 }
-                TimeSpan periodicity = GetTimeSpans(em, wev, obis, me).Min<TimeSpan>();
+                TimeSpan periodicity = GetTimeSpans(em, wev, obis, me).Min();
                 if (Math.Abs((reference.Start - em.GetMinDate()).TotalMilliseconds % periodicity.TotalMilliseconds) != 0)
                 {
                     throw new ArgumentException($"The absolute difference between reference.start ({reference.Start}) and the minimal date time in the Energiemenge ({em.GetMinDate()}) has to be an integer multiple of the periodicity {periodicity.TotalMilliseconds} but was {(reference.Start - em.GetMinDate()).TotalMilliseconds}.");

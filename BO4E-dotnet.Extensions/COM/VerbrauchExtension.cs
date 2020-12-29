@@ -58,7 +58,7 @@ namespace BO4E.Extensions.COM
                             decimal exclusiveV2Wert = (decimal)(tr2.Duration.TotalSeconds - overlap.Duration.TotalSeconds) * v2.Wert / ((decimal)tr2.Duration.TotalSeconds);
                             decimal overlapV1Wert = ((decimal)overlap.Duration.TotalSeconds * v1.Wert) / (decimal)(tr1.Duration.TotalSeconds);
                             decimal overlapV2Wert = ((decimal)overlap.Duration.TotalSeconds * v2.Wert) / (decimal)(tr2.Duration.TotalSeconds);
-                            if (biased == true)
+                            if (biased)
                             {
                                 // biased ==> assume that v2 is contained in v1
                                 vmerge.Startdatum = v1.Startdatum;
@@ -72,21 +72,11 @@ namespace BO4E.Extensions.COM
                                     vmerge.Wert = v1.Wert - overlapV2Wert; // overlapV1Wert;
                                 }
                             }
-                            else if (biased == false)
+                            else
                             {
                                 vmerge.Startdatum = v1.Startdatum;
                                 vmerge.Enddatum = v2.Startdatum;
                                 vmerge.Wert = v1.Wert - overlapV2Wert;
-                            }
-                            else // biased null
-                            {
-                                vmerge.Startdatum = v1.Startdatum < v2.Startdatum ? v1.Startdatum : v2.Startdatum;
-                                vmerge.Enddatum = v1.Enddatum > v2.Enddatum ? v1.Enddatum : v2.Enddatum;
-                                if (overlapV1Wert != overlapV2Wert)
-                                {
-                                    throw new ArgumentException("The inequality is unsolvable.");
-                                }
-                                vmerge.Wert = exclusiveV1Wert + overlapV1Wert + exclusiveV2Wert;
                             }
                         }
                         else
@@ -270,7 +260,7 @@ namespace BO4E.Extensions.COM
                 foreach (Verbrauch z in new HashSet<Verbrauch>(subResult))
                 {
                     var ys = subResult.Where(y => z.Contains(y) && !z.Equals(y));
-                    if (ys.Count() > 0)
+                    if (ys.Any())
                     {
                         TimePeriodSubtractor<TimeRange> tps = new TimePeriodSubtractor<TimeRange>();
                         TimePeriodCollection source = new TimePeriodCollection { z.GetTimeRange() };
