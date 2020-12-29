@@ -125,7 +125,7 @@ namespace BO4E.Extensions.Encryption
                 PropertyInfo[] affectedProps = bo.GetType().GetProperties()
                     .Where(p => p.GetCustomAttributes(typeof(DataCategoryAttribute), false).Length > 0)
                     .OrderBy(ap => ap.GetCustomAttribute<JsonPropertyAttribute>()?.Order)
-                    .ToArray<PropertyInfo>();
+                    .ToArray();
                 foreach (PropertyInfo affectedProp in affectedProps)
                 {
                     if (!affectedProp.IsAnonymizerRelevant(approach, dataCategory))
@@ -169,7 +169,7 @@ namespace BO4E.Extensions.Encryption
                                 DefaultValueAttribute dva = (DefaultValueAttribute)defaultValueAttribute;
                                 affectedProp.SetValue(result, dva.Value);
                             }
-                            else if (bo.GetType().IsSubclassOf(typeof(BO4E.BO.BusinessObject)))
+                            else if (bo.GetType().IsSubclassOf(typeof(BusinessObject)))
                             {
                                 // e.g. 1*Energiemenge (mappedObject)---> n*Verbrauch (boSubObject)
                                 var boSubObject = affectedProp.GetValue(bo);
@@ -205,7 +205,7 @@ namespace BO4E.Extensions.Encryption
                         case AnonymizerApproach.ENCRYPT:
                             if (this.PublicKeyX509 == null)
                             {
-                                throw new ArgumentNullException("To use the encryption feature you have to provide a public X509 certificate using the SetPublicKey method.");
+                                throw new ArgumentNullException(nameof(PublicKeyX509), "To use the encryption feature you have to provide a public X509 certificate using the SetPublicKey method.");
                             }
                             using (X509AsymmetricEncrypter xasyncenc = new X509AsymmetricEncrypter(this.PublicKeyX509))
                             {
@@ -239,7 +239,7 @@ namespace BO4E.Extensions.Encryption
                                     }
                                     affectedProp.SetValue(result, comObject);
                                 }
-                                else if (affectedProp.PropertyType.IsSubclassOf(typeof(BO4E.BO.BusinessObject)))
+                                else if (affectedProp.PropertyType.IsSubclassOf(typeof(BusinessObject)))
                                 {
                                     affectedProp.SetValue(result, xasyncenc.Encrypt((BusinessObject)affectedProp.GetValue(bo)));
                                 }
@@ -319,7 +319,7 @@ namespace BO4E.Extensions.Encryption
                 IList inputList = input as IList;
                 for (int i = 0; i < inputList.Count; i++)
                 {
-                    object listItem = inputList[i] as object;
+                    object listItem = inputList[i];
                     HashObject(ref listItem, dataCategory);
                     inputList[i] = listItem;
                 }
@@ -373,12 +373,12 @@ namespace BO4E.Extensions.Encryption
         /// <summary>
         /// instead of 'DE' oder another country code messlokationIds that are a hashed/pseudonymized value do start with this prefix.
         /// </summary>
-        protected const string HASHED_MESSLOKATION_PREFIX = "XX";
+        protected const string HashedMesslokationPrefix = "XX";
 
         /// <summary>
         /// instead of '5' or '4' marktlokationIds that are a hashed/pseudonymized value do start with this prefix.
         /// </summary>
-        protected const string HASHED_MARKTLOKATION_PREFIX = "9";
+        protected const string HashedMarktlokationPrefix = "9";
 
         /// <summary>
         /// Applies hashing on string value
@@ -392,14 +392,14 @@ namespace BO4E.Extensions.Encryption
             {
                 if (Messlokation.ValidateId(input) || input.Length == 33)
                 {
-                    string base36String = Sha256Hash(input, BASE36_ALPHABET);
-                    hashedValue = $"{HASHED_MESSLOKATION_PREFIX}{base36String.Substring(0, 31)}";
+                    string base36String = Sha256Hash(input, Base36Alphabet);
+                    hashedValue = $"{HashedMesslokationPrefix}{base36String.Substring(0, 31)}";
                     Debug.Assert(Messlokation.ValidateId(hashedValue));
                 }
                 else if (Marktlokation.ValidateId(input) || input.Length == 11)
                 {
-                    string base10String = Sha256Hash(input, BASE10_ALPHABET);
-                    base10String = $"{HASHED_MARKTLOKATION_PREFIX}{base10String.Substring(0, 9)}";
+                    string base10String = Sha256Hash(input, Base10Alphabet);
+                    base10String = $"{HashedMarktlokationPrefix}{base10String.Substring(0, 9)}";
                     string checkSum = Marktlokation.GetChecksum(base10String);
                     hashedValue = base10String + checkSum;
                     Debug.Assert(Marktlokation.ValidateId(hashedValue));
@@ -421,10 +421,10 @@ namespace BO4E.Extensions.Encryption
         /// As of 2019 it's impossible for a "real" Marktlokation to fulfill this condition. 
         /// </summary>
         /// <param name="ma">Marktlokation</param>
-        /// <returns>true if the <see cref="Marktlokation.marktlokationsId"/> fulfills the requirements of a hashed key</returns>
+        /// <returns>true if the <see cref="Marktlokation.MarktlokationsId"/> fulfills the requirements of a hashed key</returns>
         public static bool HasHashedKey(Marktlokation ma)
         {
-            return !string.IsNullOrWhiteSpace(ma.MarktlokationsId) && ma.MarktlokationsId.StartsWith(HASHED_MARKTLOKATION_PREFIX);
+            return !string.IsNullOrWhiteSpace(ma.MarktlokationsId) && ma.MarktlokationsId.StartsWith(HashedMarktlokationPrefix);
         }
         /// <summary>
         /// check if a Messlokation has been pseudonymized using <see cref="AnonymizerApproach.HASH"/>
@@ -434,7 +434,7 @@ namespace BO4E.Extensions.Encryption
         /// <returns>true if the <see cref="Messlokation.MesslokationsId"/> fulfills the requirements of a hashed key</returns>
         public static bool HasHashedKey(Messlokation me)
         {
-            return !string.IsNullOrWhiteSpace(me.MesslokationsId) && me.MesslokationsId.StartsWith(HASHED_MESSLOKATION_PREFIX);
+            return !string.IsNullOrWhiteSpace(me.MesslokationsId) && me.MesslokationsId.StartsWith(HashedMesslokationPrefix);
         }
 
         /// <summary>
@@ -459,25 +459,21 @@ namespace BO4E.Extensions.Encryption
             {
                 return false;
             }
-            if ((Marktlokation.ValidateId(key) && key.StartsWith(HASHED_MARKTLOKATION_PREFIX)) ||
-                (Messlokation.ValidateId(key) && key.StartsWith(HASHED_MESSLOKATION_PREFIX)))
+            if ((Marktlokation.ValidateId(key) && key.StartsWith(HashedMarktlokationPrefix)) ||
+                (Messlokation.ValidateId(key) && key.StartsWith(HashedMesslokationPrefix)))
             {
                 return true;
             }
-            else
+            try
             {
-                byte[] bytes;
-                try
-                {
-                    bytes = Convert.FromBase64String(key);
-                }
-                catch (FormatException)
-                {
-                    return false;
-                }
-                return true; // Todo: fix this
-                             //return bytes.Length == 256 / 8; // sha256 = 256 bits
+                _ = Convert.FromBase64String(key);
             }
+            catch (FormatException)
+            {
+                return false;
+            }
+            return true; // Todo: fix this
+            //return bytes.Length == 256 / 8; // sha256 = 256 bits
         }
 
         // https://stackoverflow.com/questions/16999361/obtain-sha-256-string-of-a-string
@@ -511,8 +507,8 @@ namespace BO4E.Extensions.Encryption
             }
         }
 
-        private const string BASE36_ALPHABET = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-        private const string BASE10_ALPHABET = "0123456789";
+        private const string Base36Alphabet = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+        private const string Base10Alphabet = "0123456789";
 
         /// <inheritdoc/>
         public void Dispose()

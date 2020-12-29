@@ -118,7 +118,7 @@ namespace BO4E.Extensions.Encryption
             EncryptedObjectPublicKeyBox eo = (EncryptedObjectPublicKeyBox)(encryptedObject);// (EncryptedObjectPublicKeyBox)BoMapper.MapObject("EncryptedObjectPublicKeyBox", JObject.FromObject(encryptedObject));
             if (eo == null)
             {
-                return (T)null;
+                return null;
             }
             string plainString = Decrypt(eo.CipherText, eo.PublicKey, eo.Nonce);
             return JsonConvert.DeserializeObject<T>(plainString, settings: encryptionSerializerSettings);

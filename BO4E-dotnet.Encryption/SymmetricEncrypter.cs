@@ -107,7 +107,7 @@ namespace BO4E.Extensions.Encryption
             EncryptedObjectAEAD eo = (EncryptedObjectAEAD)encryptedObject;
             if (eo == null)
             {
-                return (T)null;
+                return null;
             }
             string plainString = Decrypt(eo.CipherText, eo.AssociatedData, eo.Nonce);
             return JsonConvert.DeserializeObject<T>(plainString, settings: encryptionSerializerSettings);

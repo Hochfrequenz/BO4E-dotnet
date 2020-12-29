@@ -113,7 +113,7 @@ namespace BO4E.Extensions.Encryption
                     plainBytes = recipient.GetContent(this.privateKey);
                     break;
                 }
-                catch (CmsException e) when (index != recipientsStore.Count - 1)
+                catch (CmsException) when (index != recipientsStore.Count - 1)
                 {
                 }
                 index++;
@@ -147,7 +147,7 @@ namespace BO4E.Extensions.Encryption
         {
             if (!(encryptedObject is EncryptedObjectPKCS7 eo))
             {
-                return (T)null;
+                return null;
             }
             string plainString = Decrypt(eo.CipherText);
             return JsonConvert.DeserializeObject<T>(plainString, settings: encryptionSerializerSettings);
