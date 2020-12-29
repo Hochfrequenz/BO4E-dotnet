@@ -48,7 +48,7 @@ namespace TestBO4EExtensions
                     cr = em.GetCompletenessReport();
                     Assert.AreEqual((decimal)0.9601, Math.Round(cr.Coverage.Value, 4));
                     Assert.AreEqual("4-5-6-7", cr.Obiskennzahl);
-                    Assert.AreEqual(Wertermittlungsverfahren.MESSUNG, cr.wertermittlungsverfahren);
+                    Assert.AreEqual(Wertermittlungsverfahren.MESSUNG, cr.Wertermittlungsverfahren);
                     Assert.AreEqual(Mengeneinheit.KWH, cr.Einheit);
                     Assert.AreEqual("DEXXX", cr.LokationsId);
                     //Assert.AreEqual(15, cr.values[0].wert);

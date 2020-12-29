@@ -1,19 +1,24 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Security.Cryptography.X509Certificates;
-using BO4E.BO;
+﻿using BO4E.BO;
 using BO4E.COM;
 using BO4E.Extensions.Encryption;
 using BO4E.meta;
 using BO4E.Reporting;
+
 using JsonDiffPatchDotNet;
+
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
+
 using Org.BouncyCastle.Crypto;
 using Org.BouncyCastle.OpenSsl;
+
+using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Linq;
+using System.Security.Cryptography.X509Certificates;
 
 namespace TestBO4EExtensions.Encryption
 {
@@ -277,7 +282,7 @@ namespace TestBO4EExtensions.Encryption
                 LokationsId = "56789012345",
                 Coverage = 0.9M,
                 Einheit = BO4E.ENUM.Mengeneinheit.MWH,
-                wertermittlungsverfahren = BO4E.ENUM.Wertermittlungsverfahren.MESSUNG,
+                Wertermittlungsverfahren = BO4E.ENUM.Wertermittlungsverfahren.MESSUNG,
                 UserProperties = new Dictionary<string, JToken>()
                 {
                     { "anlage", "5012345678" },

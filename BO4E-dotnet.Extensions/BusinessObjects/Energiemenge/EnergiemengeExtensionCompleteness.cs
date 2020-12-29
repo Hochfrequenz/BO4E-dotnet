@@ -87,7 +87,7 @@ namespace BO4E.Extensions.BusinessObjects.Energiemenge
                     LokationsId = em.LokationsId,
                     Einheit = einheit,
                     Coverage = GetCoverage(em, reference, wev, obiskennzahl, einheit),
-                    wertermittlungsverfahren = wev,
+                    Wertermittlungsverfahren = wev,
                     Obiskennzahl = obiskennzahl,
                     ReferenceTimeFrame = new Zeitraum
                     {

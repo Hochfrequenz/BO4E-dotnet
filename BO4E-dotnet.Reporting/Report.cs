@@ -1,10 +1,10 @@
-﻿using System;
+﻿using BO4E.BO;
+
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-
-using BO4E.BO;
 
 using static BO4E.Reporting.CompletenessReport;
 
@@ -139,7 +139,7 @@ namespace BO4E.Reporting
                         }
                         else
                         {
-                            throw new ArgumentNullException("null value", nameof(reihenfolge));
+                            throw new ArgumentNullException(nameof(reihenfolge));
                         }
                     }
                 }
@@ -278,7 +278,7 @@ namespace BO4E.Reporting
                 {
                     if (field.GetValue(value) != null && field.Name == "gaps")
                     {
-                        Type ItemType = field.GetValue(value).GetType().GetGenericArguments()[0];
+                        Type itemType = field.GetValue(value).GetType().GetGenericArguments()[0];
                         var list = field.GetValue(value);
                         IList a = (IList)list;
                         foreach (var s in a)

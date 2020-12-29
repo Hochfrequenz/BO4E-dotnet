@@ -14,7 +14,7 @@ namespace BO4E.Reporting
 {
     /// <summary>
     /// A completeness report contains information about the completeness of a pure
-    /// <see cref="Energiemenge"/>. In this context "pure" means, that the Energiemenge
+    /// <see cref="BO4E.BO.Energiemenge"/>. In this context "pure" means, that the Energiemenge
     /// does only contain one distinct set of (<see cref="Verbrauch.Obiskennzahl"/>, <see cref="Verbrauch.Einheit"/>,
     /// <see cref="Verbrauch.Wertermittlungsverfahren"/>).
     /// </summary>
@@ -28,7 +28,7 @@ namespace BO4E.Reporting
         public Zeitraum ReferenceTimeFrame { get; set; }
 
         /// <summary>
-        /// <see cref="Energiemenge.lokationsId"/>
+        /// <see cref="BO4E.BO.Energiemenge.LokationsId"/>
         /// </summary>
         [DataCategory(DataCategory.POD)]
         [JsonProperty(PropertyName = "lokationsId", Required = Required.Always, Order = 8)]
@@ -50,7 +50,7 @@ namespace BO4E.Reporting
         /// <see cref="Verbrauch.Wertermittlungsverfahren"/>
         /// </summary>
         [JsonProperty(PropertyName = "wertermittlungsverfahren", Required = Required.Default, Order = 7)]
-        public Wertermittlungsverfahren wertermittlungsverfahren { get; set; }
+        public Wertermittlungsverfahren Wertermittlungsverfahren { get; set; }
 
         /// <summary>
         /// ratio of time with data present compared to <see cref="ReferenceTimeFrame"/>.
@@ -226,7 +226,7 @@ namespace BO4E.Reporting
                 this.ReferenceTimeFrame.Enddatum.Value.ToString("yyyy-MM-ddTHH:mm:ssZ")
             };
 
-            if (BO4E.BO.Messlokation.ValidateId(LokationsId))
+            if (BO.Messlokation.ValidateId(LokationsId))
             {
                 columns.Add(LokationsId); // melo
                 columns.Add(string.Empty); // malo
@@ -262,7 +262,7 @@ namespace BO4E.Reporting
             {
                 columns.Add(string.Empty);
             }
-            if (Gaps!=null && Gaps.Any())
+            if (Gaps != null && Gaps.Any())
             {
                 DateTime minGap = this.Gaps.Min(x => x.Startdatum);// OrderBy(x => x.Startdatum).First().Startdatum;
                 DateTime maxGap = this.Gaps.Max(x => x.Enddatum);// OrderByDescending(x => x.Enddatum).First().Enddatum;
@@ -286,7 +286,7 @@ namespace BO4E.Reporting
                 columns.Add(string.Empty);
             }
             columns.Add("Status");
-            builder.Append(string.Join(separator, columns) + lineTerminator); ;
+            builder.Append(string.Join(separator, columns) + lineTerminator);
 
             return builder.ToString();
         }
