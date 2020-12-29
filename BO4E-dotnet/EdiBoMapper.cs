@@ -26,7 +26,7 @@ namespace BO4E
         /// transform an EDIFACT value of known type to a BO4E value
         /// </summary>
         /// <seealso cref="BoEdiMapper.ToEdi(string, string)"/>
-        /// <param name="objectName">name of the BO4E datatype<example>Netzebene</example></param>
+        /// <param name="objectName">name of the BO4E data type<example>Netzebene</example></param>
         /// <param name="objectValue">EDIFACT value<example>E06</example></param>
         /// <returns>
         /// <list type="bullet">
@@ -50,7 +50,7 @@ namespace BO4E
             if (_logger == null)
             {
                 // ToDo: inject it instead of ugly workaround.
-                BO4E.StaticLogger.Logger = Microsoft.Extensions.Logging.Abstractions.NullLogger.Instance;
+                StaticLogger.Logger = Microsoft.Extensions.Logging.Abstractions.NullLogger.Instance;
                 _logger = StaticLogger.Logger;
             }
             //Type[] types = Assembly.GetExecutingAssembly().GetTypes();
@@ -73,7 +73,6 @@ namespace BO4E
                         // now try with leading underscore, used for enum values that would normally
                         // start with a number, e.g. _293 for Codelist "293"
                         field = ediClazz.GetField("_" + objectValue);
-                        useEdiClass = true;
                         if (field == null)
                         {
                             _logger.LogError("No matching field " + objectValue + " for " + objectName + "! returning null");

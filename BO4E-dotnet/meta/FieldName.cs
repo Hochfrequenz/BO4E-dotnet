@@ -12,22 +12,22 @@ namespace BO4E.meta
         /// <summary>
         /// "translated" field name
         /// </summary>
-        public string text { get; }
+        public string Text { get; }
 
         /// <summary>
         /// language of the translation
         /// </summary>
-        public Language language { get; }
+        public Language Language { get; }
 
         /// <summary>
-        /// attribute is intialized by providing both language and translation
+        /// attribute is initialized by providing both language and translation
         /// </summary>
         /// <param name="text">translated field name</param>
         /// <param name="language">language of the translation</param>
         public FieldName(string text, Language language)
         {
-            this.text = text;
-            this.language = language;
+            this.Text = text;
+            this.Language = language;
         }
     }
 }

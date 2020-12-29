@@ -139,7 +139,7 @@ namespace BO4E.BO
         [ProtoMember(1019)]
         [NonOfficial(NonOfficialCategory.CUSTOMER_REQUIREMENTS)]
         [Obsolete("This isn't the right place for this information")] // ToDo: check
-        public List<COM.MarktpartnerDetails> Marktrollen { get; set; }
+        public List<MarktpartnerDetails> Marktrollen { get; set; }
 
         /// <summary>
         /// gasqualitaet für EDIFACT mapping
@@ -159,7 +159,7 @@ namespace BO4E.BO
         public decimal? Verlustfaktor { get; set; }
 
         [JsonIgnore]
-        private static readonly Regex REGEX_VALIDATE = new Regex(@"[A-Z\d]{33}", RegexOptions.Compiled);
+        private static readonly Regex RegexValidate = new Regex(@"[A-Z\d]{33}", RegexOptions.Compiled);
 
         /// <summary>
         /// Test if a <paramref name="id"/> is a valid messlokations ID.
@@ -172,7 +172,7 @@ namespace BO4E.BO
             {
                 return false;
             }
-            return REGEX_VALIDATE.IsMatch(id);
+            return RegexValidate.IsMatch(id);
         }
 
         /// <summary>

@@ -160,7 +160,7 @@ namespace BO4E.COM
 #pragma warning restore IDE1006 // Naming Styles
         {
             get => this.Guid.HasValue ? this.Guid.ToString() : string.Empty;
-            set { this.Guid = string.IsNullOrWhiteSpace(value) ? (Guid?)null : System.Guid.Parse(value.ToString()); }
+            set { this.Guid = string.IsNullOrWhiteSpace(value) ? (Guid?)null : System.Guid.Parse(value); }
         }
 
         /// <summary>

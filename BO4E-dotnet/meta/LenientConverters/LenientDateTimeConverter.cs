@@ -33,7 +33,7 @@ namespace BO4E.meta.LenientConverters
         {
         }
 
-        private readonly List<(string, bool)> ALLOWED_DATETIME_FORMATS = new List<(string, bool)>()
+        private readonly List<(string, bool)> _allowedDatetimeFormats = new List<(string, bool)>()
             {
                ("yyyy-MM-ddTHH:mm:ss", false),
                ("yyyy-MM-ddTHH:mm:sszzzz",true),
@@ -77,7 +77,7 @@ namespace BO4E.meta.LenientConverters
                 {
                     return dateTimeOffset;
                 }
-                foreach ((string dtf, bool asUniversal) in ALLOWED_DATETIME_FORMATS)
+                foreach ((string dtf, bool asUniversal) in _allowedDatetimeFormats)
                 {
                     if (DateTimeOffset.TryParseExact(rawDate, dtf, CultureInfo.InvariantCulture, asUniversal ? DateTimeStyles.AssumeUniversal : DateTimeStyles.None, out dateTimeOffset))
                     {
@@ -91,7 +91,7 @@ namespace BO4E.meta.LenientConverters
                 {
                     return dateTime;
                 }
-                foreach ((string dtf, bool asUniversal) in ALLOWED_DATETIME_FORMATS)
+                foreach ((string dtf, bool asUniversal) in _allowedDatetimeFormats)
                 {
                     if (DateTime.TryParseExact(rawDate, dtf, CultureInfo.InvariantCulture, DateTimeStyles.None, out dateTime))
                     {

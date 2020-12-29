@@ -15,15 +15,15 @@ namespace BO4E
         /// </summary>
         public static readonly UserPropertiesDataContractResolver Instance = new UserPropertiesDataContractResolver(new HashSet<string>());
 
-        private readonly HashSet<string> whitelist;
+        private readonly HashSet<string> _whitelist;
 
         /// <summary>
-        /// The UserPropertiesDataContractResolver is initialised with a white list of allowed properties. Everything else is discarded.
+        /// The UserPropertiesDataContractResolver is initialized with a white list of allowed properties. Everything else is discarded.
         /// </summary>
         /// <param name="userPropertiesWhiteList">white list of properties (actually a white"set")</param>
         public UserPropertiesDataContractResolver(HashSet<string> userPropertiesWhiteList)
         {
-            whitelist = userPropertiesWhiteList;
+            _whitelist = userPropertiesWhiteList;
         }
 
         /// <inheritdoc cref="DefaultContractResolver.ResolveContract(Type)"/>
@@ -37,14 +37,9 @@ namespace BO4E
                     ExtensionDataSetter oldSetter = objContract.ExtensionDataSetter;
                     objContract.ExtensionDataSetter = (o, key, value) =>
                     {
-                        if (whitelist.Contains(key))
+                        if (_whitelist.Contains(key))
                         {
                             oldSetter(o, key, value);
-                        }
-                        else
-                        {
-                            int a = 0;
-                            a++;
                         }
                     };
                 }

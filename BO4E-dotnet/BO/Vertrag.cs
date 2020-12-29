@@ -153,12 +153,5 @@ namespace BO4E.BO
                 };
             }
         }
-
-        /// <summary>
-        /// empty constructor for deserialization
-        /// </summary>
-        public Vertrag()
-        {
-        }
     }
 }

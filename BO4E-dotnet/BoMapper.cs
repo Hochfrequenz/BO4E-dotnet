@@ -20,12 +20,12 @@ namespace BO4E
     [Obsolete("The BoMapper is obsolete and should be replace with JsonConvert.DeserializeObject<T>(...) in the long run. It's not a good coding style but still thoroughly tested.")]
     public abstract class BoMapper
     {
-        private static readonly Regex BO_REGEX = new Regex(@"BO4E\.(?:Extensions\.)?BO\.\b(?<boName>\w+)\b", RegexOptions.Compiled);
+        private static readonly Regex BoRegex = new Regex(@"BO4E\.(?:Extensions\.)?BO\.\b(?<boName>\w+)\b", RegexOptions.Compiled);
 
         /// <summary>
         /// namespace.subnamespace for the BO4E package. maybe there's a more elegant way using self reflection.
         /// </summary>
-        public static readonly string packagePrefix = "BO4E.BO";
+        public static readonly string PackagePrefix = "BO4E.BO";
 
         /// <summary>
         /// shortcut for MapObject with an empty userProperties white list
@@ -43,7 +43,7 @@ namespace BO4E
         /// </summary>
         /// <param name="jobject">business object json</param>
         /// <param name="lenient">lenient parsing flags</param>
-        /// <param name="userPropertiesWhiteList">white list of non BO4E standard field you'd like to have de-serialised</param>
+        /// <param name="userPropertiesWhiteList">white list of non BO4E standard field you'd like to have de-serialized</param>
         /// <returns><see cref="MapObject(string, JObject, LenientParsing)"/></returns>
         public static BusinessObject MapObject(JObject jobject, HashSet<string> userPropertiesWhiteList, LenientParsing lenient = LenientParsing.Strict)
         {
@@ -121,21 +121,15 @@ namespace BO4E
             {
                 throw new ArgumentException("Mapping is only allowed for types derived from BO4E.BO.BusinessObject");
             }
-            else if (businessObjectType != null)
+            else
             {
                 if (lenient == LenientParsing.Strict && userPropertiesWhiteList.Count == 0)
                 {
                     return (BusinessObject)jobject.ToObject(businessObjectType);
                 }
-                else
-                {
-                    var settings = lenient.GetJsonSerializerSettings();
-                    return (BusinessObject)JsonConvert.DeserializeObject(jobject.ToString(), businessObjectType, settings);
-                }
-            }
-            else
-            {
-                return null;
+
+                var settings = lenient.GetJsonSerializerSettings();
+                return (BusinessObject)JsonConvert.DeserializeObject(jobject.ToString(), businessObjectType, settings);
             }
         }
 
@@ -163,7 +157,7 @@ namespace BO4E
             Type[] types = Assembly.GetExecutingAssembly().GetTypes();
             foreach (Type t in types)
             {
-                Match m = BO_REGEX.Match(t.ToString());
+                Match m = BoRegex.Match(t.ToString());
                 if (m.Success)
                 {
                     result.Add((m.Groups)["boName"].Value);
@@ -193,7 +187,7 @@ namespace BO4E
             }
 
             //Type[] types = Assembly.GetExecutingAssembly().GetTypes();
-            var clazz = Assembly.GetExecutingAssembly().GetType(packagePrefix + "." + businessObjectName);
+            var clazz = Assembly.GetExecutingAssembly().GetType(PackagePrefix + "." + businessObjectName);
             if (clazz != null)
             {
                 return clazz;
@@ -205,7 +199,7 @@ namespace BO4E
                     // fallback.
                     if (boName.ToUpper() == businessObjectName.ToUpper())
                     {
-                        return Assembly.GetExecutingAssembly().GetType(packagePrefix + "." + boName);
+                        return Assembly.GetExecutingAssembly().GetType(PackagePrefix + "." + boName);
                     }
                 }
             }

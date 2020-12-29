@@ -7,7 +7,7 @@ namespace BO4E.meta.LenientConverters
 {
     /// <summary>
     /// The lenient StringToIntConverter allows for int or int? objects have alphabetic characters.
-    /// If the string is not parsable as integer 0 is used in case of (int) and <c>null</c> in case of (int?).
+    /// If the string is not parseable as integer 0 is used in case of (int) and <c>null</c> in case of (int?).
     /// </summary>
     /// <example>(string)"12" will be parsed as (int)12 where an integer value is expected.</example>
     public class LenientStringToIntConverter : JsonConverter

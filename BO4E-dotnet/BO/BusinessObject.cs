@@ -151,7 +151,7 @@ namespace BO4E.BO
 #pragma warning restore IDE1006 // Naming Styles
         {
             get => this.Guid.HasValue ? this.Guid.ToString() : string.Empty;
-            set { this.Guid = string.IsNullOrWhiteSpace(value) ? (Guid?)null : System.Guid.Parse(value.ToString()); }
+            set { this.Guid = string.IsNullOrWhiteSpace(value) ? (Guid?)null : System.Guid.Parse(value); }
         }
         /// <summary>
         /// Store the latest database update, is Datetime, because postgres doesn't handle datetimeoffset in a generated column gracefully
@@ -211,7 +211,7 @@ namespace BO4E.BO
         /// <param name="flagKey">key in the userproperties that should hold the value <paramref name="flagValue"/></param>
         /// <param name="flagValue">flag value, use null to remove the flag</param>
         /// <returns>true iff userProperties had been modified, false if not</returns>
-        public bool SetFlag<TBusinessObject>(string flagKey, bool? flagValue = true) where TBusinessObject : BO4E.BO.BusinessObject, IUserProperties
+        public bool SetFlag<TBusinessObject>(string flagKey, bool? flagValue = true) where TBusinessObject : BusinessObject, IUserProperties
         {
             if (string.IsNullOrWhiteSpace(flagKey))
             {
@@ -363,7 +363,7 @@ namespace BO4E.BO
         public static Dictionary<string, Type> GetExpandableFieldNames(string boTypeName)
         {
 #pragma warning disable CS0618 // Type or member is obsolete
-            Type clazz = Assembly.GetExecutingAssembly().GetType(BoMapper.packagePrefix + "." + boTypeName);
+            Type clazz = Assembly.GetExecutingAssembly().GetType(BoMapper.PackagePrefix + "." + boTypeName);
 #pragma warning restore CS0618 // Type or member is obsolete
             if (clazz == null)
             {
@@ -383,7 +383,7 @@ namespace BO4E.BO
         /// <returns>HashSet of strings</returns>
         protected static Dictionary<string, Type> GetExpandablePropertyNames(Type type, bool rootLevel = true)
         {
-            if (rootLevel && !type.IsSubclassOf(typeof(BO.BusinessObject)))
+            if (rootLevel && !type.IsSubclassOf(typeof(BusinessObject)))
             {
                 throw new ArgumentException("Only allowed for BusinessObjects");
             }
@@ -400,7 +400,7 @@ namespace BO4E.BO
                 {
                     fieldName = prop.Name;
                 }
-                if (prop.PropertyType.IsSubclassOf(typeof(BO.BusinessObject)))
+                if (prop.PropertyType.IsSubclassOf(typeof(BusinessObject)))
                 {
                     foreach (KeyValuePair<string, Type> subResult in GetExpandablePropertyNames(prop.PropertyType, false))
 

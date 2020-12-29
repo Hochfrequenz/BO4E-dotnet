@@ -1,7 +1,7 @@
 ﻿namespace BO4E.meta
 {
     /// <summary>
-    /// List of labguages for making translatedJson in JsonConvert.SerializeObject() function.
+    /// List of languages for making translatedJson in JsonConvert.SerializeObject() function.
     /// </summary>
     public enum Language
     {
@@ -14,7 +14,7 @@
         /// </summary>
         DE,
         /// <summary>
-        /// Fransösisch
+        /// Französisch
         /// </summary>
         FR,
         /// <summary>
