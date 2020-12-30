@@ -8189,6 +8189,17 @@
             <param name="text">translated field name</param>
             <param name="language">language of the translation</param>
         </member>
+        <member name="T:BO4E.meta.IOptionalGuid">
+            <summary>
+            Our BO and COM objects all come with a nullable Guid <code>Guid?</code>.
+            This interface allows to define extensions methods namely for Entity Framework that use this Guid as key.
+            </summary>
+        </member>
+        <member name="P:BO4E.meta.IOptionalGuid.Guid">
+            <summary>
+            a nullable Guid that may be used as key in database tables.
+            </summary>
+        </member>
         <member name="T:BO4E.meta.IUserProperties">
             <summary>
             Any class implementing this interface has a userProperties dictionary.
