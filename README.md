@@ -7,13 +7,17 @@ See also our (still very alpha) [Python Implementation of BO4E](https://github.c
 
 ## Nuget Packages and Usage of BO4E-dotnet
 The content of this repository is used to build the following nuget packages:
-- [Hochfrequenz.BO4Enet](https://www.nuget.org/packages/Hochfrequenz.BO4Enet) contains definitions of the business objects (namespace `BO4E.BO`), compontents (namespace `BO4E.COM`) and enumerations (namespace `BO4E.ENUM`).
-- [Hochfrequenz.BO4E.Extensions](https://www.nuget.org/packages/Hochfrequenz.BO4E.Extensions/) contains extension methods for business objects and components (as of now mostly `BO.Energiemenge` and `COM.Verbrauch`, which are heavily used by Hochfrequenz cloud solutions).
-- [Hochfrequenz.BO4E.Reporting](https://www.nuget.org/packages/Hochfrequenz.BO4E.Extensions/) contains tools to analyse single business objects and sets of objects.
-- [Hochfrequenz.BO4E.Extensions.Encryption](https://www.nuget.org/packages/Hochfrequenz.BO4E.Extensions.Encryption/) provides code to encrypt and anonymize Business Objects and compontents using [libsodium](https://libsodium.org)/[`Sodium`](https://github.com/tabrath/libsodium-core/) and [Bouncy Castle](https://bouncycastle.org/csharp/)/`Org.BouncyCastle` APIs.
 
-## This Repository Is Not Complete Yet
+|**Package Name**|**Description**|**Stability & Maturity**|
+|----------------|---------------|------------------------|
+|[Hochfrequenz.BO4Enet](https://www.nuget.org/packages/Hochfrequenz.BO4Enet)|Definitions of the business objects (namespace `BO4E.BO`), compontents (namespace `BO4E.COM`) and enumerations (namespace `BO4E.ENUM`)|not feature complete but stable and widely used in production for JSON serialization; still alpha for GRPC serialization|
+|[Hochfrequenz.BO4E.Extensions](https://www.nuget.org/packages/Hochfrequenz.BO4E.Extensions/)|Contains extension methods for business objects and components (as of now mostly `BO.Energiemenge` and `COM.Verbrauch`, which are heavily used by Hochfrequenz cloud solutions).|stable, high test coverage, production use|
+|[Hochfrequenz.BO4E.Reporting](https://www.nuget.org/packages/Hochfrequenz.BO4E.Extensions/)|Contains tools to analyse single business objects and sets of objects|stable, high test coverage, production use|
+|[Hochfrequenz.BO4E.Extensions.Encryption](https://www.nuget.org/packages/Hochfrequenz.BO4E.Extensions.Encryption/)|Provides methods to encrypt and anonymize business objects and compontents using [libsodium](https://libsodium.org)/[`Sodium`](https://github.com/tabrath/libsodium-core/) and [Bouncy Castle](https://bouncycastle.org/csharp/)/`Org.BouncyCastle` APIs|high test coverage, so far missing real world usage|
+
+## This Repository Is Not Feature Complete Yet
 Please see [Issue #29](https://github.com/Hochfrequenz/BO4E-dotnet/issues/29) for a list of Business Objects, that are not yet implemented. Your contributions are very welcome. 
+
 
 ## Detailed Documentation
 The docstrings from within the source code are used to automatically generate a [doc.fx based documentation](https://hochfrequenz.github.io/bo4e-livedocs/api/BO4E.BO.html). Please also consider the [official documentation](https://www.bo4e.de/dokumentation) maintained by Interessengemeinschaft Geschäftsobjekte Energiewirtschaft e.V. from which most of the source code docstrings are copied/derived.

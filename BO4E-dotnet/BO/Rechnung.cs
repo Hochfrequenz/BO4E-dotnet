@@ -198,17 +198,17 @@ namespace BO4E.BO
             }
 
             Rechnungsnummer = (infoToken["opbel"] ?? infoToken["OPBEL"]).Value<string>();
-            Rechnungsdatum = new DateTimeOffset(TimeZoneInfo.ConvertTime((infoToken["bldat"] ?? infoToken["BLDAT"]).Value<DateTime>(), Verbrauch.CENTRAL_EUROPE_STANDARD_TIME, TimeZoneInfo.Utc));
+            Rechnungsdatum = new DateTimeOffset(TimeZoneInfo.ConvertTime((infoToken["bldat"] ?? infoToken["BLDAT"]).Value<DateTime>(), CentralEuropeStandardTime.CENTRAL_EUROPE_STANDARD_TIME, TimeZoneInfo.Utc));
             Rechnungsperiode = new Zeitraum()
             {
-                Startdatum = new DateTimeOffset(TimeZoneInfo.ConvertTime((tErdzToken[0]["ab"] ?? tErdzToken[0]["AB"]).Value<DateTime>(), Verbrauch.CENTRAL_EUROPE_STANDARD_TIME, TimeZoneInfo.Utc)),
-                Enddatum = new DateTimeOffset(TimeZoneInfo.ConvertTime((tErdzToken[0]["bis"] ?? tErdzToken[0]["BIS"]).Value<DateTime>(), Verbrauch.CENTRAL_EUROPE_STANDARD_TIME, TimeZoneInfo.Utc))
+                Startdatum = new DateTimeOffset(TimeZoneInfo.ConvertTime((tErdzToken[0]["ab"] ?? tErdzToken[0]["AB"]).Value<DateTime>(), CentralEuropeStandardTime.CENTRAL_EUROPE_STANDARD_TIME, TimeZoneInfo.Utc)),
+                Enddatum = new DateTimeOffset(TimeZoneInfo.ConvertTime((tErdzToken[0]["bis"] ?? tErdzToken[0]["BIS"]).Value<DateTime>(), CentralEuropeStandardTime.CENTRAL_EUROPE_STANDARD_TIME, TimeZoneInfo.Utc))
             };
-            Faelligkeitsdatum = new DateTimeOffset(TimeZoneInfo.ConvertTime((infoToken["faedn"] ?? infoToken["FAEDN"]).Value<DateTime>(), Verbrauch.CENTRAL_EUROPE_STANDARD_TIME, TimeZoneInfo.Utc));
+            Faelligkeitsdatum = new DateTimeOffset(TimeZoneInfo.ConvertTime((infoToken["faedn"] ?? infoToken["FAEDN"]).Value<DateTime>(), CentralEuropeStandardTime.CENTRAL_EUROPE_STANDARD_TIME, TimeZoneInfo.Utc));
             Storno = false;
 
-            decimal gNetto, gSteure, gBrutto, vGezahlt, rBrutto, zZahlen;
-            gNetto = gSteure = _ = vGezahlt = rBrutto = 0.00M;
+            decimal gSteure, gBrutto, vGezahlt, rBrutto;
+            var gNetto = gSteure = _ = vGezahlt = rBrutto = 0.00M;
             Waehrungscode waehrungscode = (Waehrungscode)Enum.Parse(typeof(Waehrungscode), (infoToken["totalWaer"] ?? infoToken["TOTAL_WAER"]).Value<string>());
             Waehrungseinheit waehrungseinheit = (Waehrungseinheit)Enum.Parse(typeof(Waehrungseinheit), (infoToken["totalWaer"] ?? infoToken["TOTAL_WAER"]).Value<string>());
             Mengeneinheit mengeneinheit = (Mengeneinheit)Enum.Parse(typeof(Mengeneinheit), (tErdzToken[0]["massbill"] ?? tErdzToken[0]["MASSBILL"]).Value<string>());
@@ -294,11 +294,11 @@ namespace BO4E.BO
                     rp.Positionsnummer = (jrp["belzeile"] ?? jrp["BELZEILE"]).Value<int>();
                     if ((jrp["bis"] ?? jrp["BIS"]) != null && (jrp["bis"] ?? jrp["BIS"]).Value<string>() != "0000-00-00")
                     {
-                        rp.LieferungBis = new DateTimeOffset(TimeZoneInfo.ConvertTime((jrp["bis"] ?? jrp["BIS"]).Value<DateTime>(), Verbrauch.CENTRAL_EUROPE_STANDARD_TIME, TimeZoneInfo.Utc));
+                        rp.LieferungBis = new DateTimeOffset(TimeZoneInfo.ConvertTime((jrp["bis"] ?? jrp["BIS"]).Value<DateTime>(), CentralEuropeStandardTime.CENTRAL_EUROPE_STANDARD_TIME, TimeZoneInfo.Utc));
                     }
                     if ((jrp["ab"] ?? jrp["AB"]) != null && (jrp["ab"] ?? jrp["AB"]).Value<string>() != "0000-00-00")
                     {
-                        rp.LieferungVon = new DateTimeOffset(TimeZoneInfo.ConvertTime((jrp["ab"] ?? jrp["AB"]).Value<DateTime>(), Verbrauch.CENTRAL_EUROPE_STANDARD_TIME, TimeZoneInfo.Utc));
+                        rp.LieferungVon = new DateTimeOffset(TimeZoneInfo.ConvertTime((jrp["ab"] ?? jrp["AB"]).Value<DateTime>(), CentralEuropeStandardTime.CENTRAL_EUROPE_STANDARD_TIME, TimeZoneInfo.Utc));
                     }
                     if ((jrp["vertrag"] ?? jrp["VERTRAG"]) != null)
                     {
@@ -416,7 +416,7 @@ namespace BO4E.BO
             Steuerbetraege = stList;
             Rechnungspositionen = rpList;
             gBrutto = gNetto + gSteure;
-            zZahlen = gBrutto - vGezahlt - rBrutto;
+            var zZahlen = gBrutto - vGezahlt - rBrutto;
             Gesamtnetto = new Betrag() { Wert = gNetto, Waehrung = waehrungscode };
             Gesamtsteuer = new Betrag() { Wert = gSteure, Waehrung = waehrungscode };
             Gesamtbrutto = new Betrag() { Wert = gBrutto, Waehrung = waehrungscode };

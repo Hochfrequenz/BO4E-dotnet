@@ -2413,7 +2413,7 @@
             Abbildung eines zeitlich abgegrenzten Verbrauchs.
             </summary>
         </member>
-        <member name="F:BO4E.COM.Verbrauch.CENTRAL_EUROPE_STANDARD_TIME">
+        <member name="F:BO4E.COM.CentralEuropeStandardTime.CENTRAL_EUROPE_STANDARD_TIME">
             <summary>
             Central Europe Standard Time as hard coded default time. Public to be used elsewhere ;)
             </summary>

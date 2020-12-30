@@ -64,7 +64,7 @@ namespace BO4E.BO
             else if (Energieverbrauch.Count > 0)
             {
                 Energieverbrauch = Energieverbrauch
-                    .Select(v => Verbrauch.FixSapCdsBug(v))
+                    .Select(Verbrauch.FixSapCdsBug)
                     .Where(v => !(v.Startdatum == DateTimeOffset.MinValue || v.Enddatum == DateTimeOffset.MinValue))
                     .Where(v => !v.UserPropertyEquals("invalid", true))
                     .ToList();

@@ -41,7 +41,7 @@ namespace BO4E.BO
     [ProtoInclude(13, typeof(Vertrag))]
     [ProtoInclude(14, typeof(Zaehler))]
     [ProtoInclude(15, typeof(LogObject))]
-    public abstract class BusinessObject : IEquatable<BusinessObject>
+    public abstract class BusinessObject : IEquatable<BusinessObject>, IUserProperties, IOptionalGuid
     {
         /// <summary>
         /// obligatory type of the business object in UPPER CASE
@@ -54,7 +54,7 @@ namespace BO4E.BO
         [ProtoMember(1)]
         public string BoTyp
         {
-            get { return this.GetType().Name.ToUpper(); }
+            get => GetType().Name.ToUpper();
             set { }
         }
 
@@ -94,27 +94,12 @@ namespace BO4E.BO
         /// <summary>
         /// User properties (non bo4e standard)
         /// </summary>
-        [JsonProperty(PropertyName = USER_PROPERTIES_NAME, Required = Required.Default, DefaultValueHandling = DefaultValueHandling.Ignore, Order = 200)]
+        [JsonProperty(PropertyName = USER_PROPERTIES_NAME, Required = Required.Default,
+            DefaultValueHandling = DefaultValueHandling.Ignore, Order = 200)]
         [JsonExtensionData]
         [ProtoMember(200)]
         [DataCategory(DataCategory.USER_PROPERTIES)]
         public IDictionary<string, JToken> UserProperties { get; set; }
-
-        /// <inheritdoc cref="BO4E.UserPropertiesExtensions.TryGetUserProperty{TUserProperty}(IDictionary{string, JToken}, string, out TUserProperty)"/>
-        public bool TryGetUserProperty<TUserProperty>(string userPropertyKey, out TUserProperty value)
-           => this.UserProperties.TryGetUserProperty(userPropertyKey, out value);
-
-        /// <inheritdoc cref="BO4E.UserPropertiesExtensions.GetUserProperty{TUserProperty}(IDictionary{string, JToken}, string, TUserProperty)"/>
-        public TUserProperty GetUserProperty<TUserProperty>(string userPropertyKey, TUserProperty defaultValue)
-            => this.UserProperties.GetUserProperty(userPropertyKey, defaultValue);
-
-        /// <inheritdoc cref="BO4E.UserPropertiesExtensions.UserPropertyEquals{TUserProperty}(IDictionary{string, JToken}, string, TUserProperty, bool)"/>
-        public bool UserPropertyEquals<TUserProperty>(string userPropertyKey, TUserProperty other, bool ignoreWrongType = true)
-            => this.UserProperties.UserPropertyEquals(userPropertyKey, other, ignoreWrongType);
-
-        /// <inheritdoc cref="BO4E.UserPropertiesExtensions.EvaluateUserProperty{TUserProperty, TEvaluationResult}(IDictionary{string, JToken}, string, Func{TUserProperty, TEvaluationResult})"/>
-        public TEvaluationResult EvaluateUserProperty<TUserProperty, TEvaluationResult>(string userPropertyKey, Func<TUserProperty, TEvaluationResult> evaluation)
-            => this.UserProperties.EvaluateUserProperty<TUserProperty, TEvaluationResult>(userPropertyKey, evaluation);
 
         /// <summary>
         /// generates the BO4E boTyp attribute value (class name as upper case)
@@ -168,14 +153,14 @@ namespace BO4E.BO
             get => this.Guid.HasValue ? this.Guid.ToString() : string.Empty;
             set { this.Guid = string.IsNullOrWhiteSpace(value) ? (Guid?)null : System.Guid.Parse(value.ToString()); }
         }
-
+        /// <summary>
+        /// Store the latest database update, is Datetime, because postgres doesn't handle datetimeoffset in a generated column gracefully
+        /// </summary>
         [JsonProperty(PropertyName = "timestamp", NullValueHandling = NullValueHandling.Ignore, Required = Required.Default, Order = 2)]
         [Timestamp]
-#pragma warning disable CS1591 // Missing XML comment for publicly visible type or member
-        // ToDo @JoschaMetze: Add a docstring about this
-        public DateTimeOffset? Timestamp { get; set; }
+        public DateTime? Timestamp { get; set; }
 
-#pragma warning restore CS1591 // Missing XML comment for publicly visible type or member
+
 
         /// <summary>
         /// Hier können IDs anderer Systeme hinterlegt werden (z.B. eine SAP-GP-Nummer) (Details siehe <see cref="ExterneReferenz"/>)
@@ -195,6 +180,80 @@ namespace BO4E.BO
         /// </summary>
         public void SetExterneReferenz(ExterneReferenz extRef, bool overwriteExisting = false)
             => this.ExterneReferenzen = this.ExterneReferenzen.SetExterneReferenz(extRef, overwriteExisting);
+
+        /// <summary>
+        /// checks if the BusinessObject has a flag set.
+        /// </summary>
+        /// <remarks>"having a flag set" means that the Business Object has a UserProperty entry that has <paramref name="flagKey"/> as key and the value of the user property is true.</remarks>
+        /// <param name="flagKey"></param>
+        /// <returns>true iff flag is set and has value true</returns>
+        public bool HasFlagSet(string flagKey)
+        {
+            if (string.IsNullOrWhiteSpace(flagKey))
+            {
+                throw new ArgumentNullException(nameof(flagKey));
+            }
+            try
+            {
+                return this.UserProperties != null && this.UserPropertyEquals(flagKey, other: (bool?)true);
+            }
+            catch (ArgumentNullException ane) when (ane.ParamName == "value")
+            {
+                return false;
+            }
+        }
+
+        /// <summary>
+        /// set the value of flag <paramref name="flagKey"/> to <paramref name="flagValue"/>.
+        /// If there is no such flag or not user properties yet, they will be created.
+        /// </summary>
+        /// <remarks>"having a flag set" means that the Business Object has a UserProperty entry that has <paramref name="flagKey"/> as key and the value of the user property is true.</remarks>
+        /// <param name="flagKey">key in the userproperties that should hold the value <paramref name="flagValue"/></param>
+        /// <param name="flagValue">flag value, use null to remove the flag</param>
+        /// <returns>true iff userProperties had been modified, false if not</returns>
+        public bool SetFlag<TBusinessObject>(string flagKey, bool? flagValue = true) where TBusinessObject : BO4E.BO.BusinessObject, IUserProperties
+        {
+            if (string.IsNullOrWhiteSpace(flagKey))
+            {
+                throw new ArgumentNullException(nameof(flagKey));
+            }
+            if (this.UserProperties == null)
+            {
+                this.UserProperties = new Dictionary<string, JToken>();
+                if (!flagValue.HasValue)
+                {
+                    return false;
+                }
+            }
+            else if (flagValue.HasValue && flagValue.Value == this.HasFlagSet(flagKey))
+            {
+                return false;
+            }
+            if (!flagValue.HasValue)
+            {
+                if (!this.UserProperties.ContainsKey(flagKey))
+                {
+                    return false;
+                }
+                else
+                {
+                    this.UserProperties.Remove(flagKey);
+                    return true;
+                }
+            }
+            else
+            {
+                if (((TBusinessObject)this).TryGetUserProperty<bool?, TBusinessObject>(flagKey, out var existingValue) && existingValue == flagValue.Value)
+                {
+                    return false;
+                }
+                else
+                {
+                    this.UserProperties[flagKey] = flagValue.Value;
+                }
+                return true;
+            }
+        }
 
         /// <summary>
         /// returns a JSON scheme for the Business Object
@@ -266,7 +325,7 @@ namespace BO4E.BO
             foreach (var pi in GetBoKeyProps(boType))
             {
                 JsonPropertyAttribute jpa = pi.GetCustomAttribute<JsonPropertyAttribute>();
-                if (jpa != null && jpa.PropertyName != null)
+                if (jpa?.PropertyName != null)
                 {
                     result.Add(jpa.PropertyName);
                 }
@@ -333,7 +392,7 @@ namespace BO4E.BO
             {
                 string fieldName;
                 JsonPropertyAttribute jpa = prop.GetCustomAttribute<JsonPropertyAttribute>();
-                if (jpa != null && jpa.PropertyName != null)
+                if (jpa?.PropertyName != null)
                 {
                     fieldName = jpa.PropertyName;
                 }
@@ -385,7 +444,7 @@ namespace BO4E.BO
             foreach (var pi in GetBoKeyProps(this.GetType()))
             {
                 JsonPropertyAttribute jpa = pi.GetCustomAttribute<JsonPropertyAttribute>();
-                if (jpa != null && jpa.PropertyName != null)
+                if (jpa?.PropertyName != null)
                 {
                     result.Add(jpa.PropertyName, pi.GetValue(this));
                 }
@@ -545,7 +604,7 @@ namespace BO4E.BO
                     Type boType;
                     if (serializer.TypeNameHandling.HasFlag(TypeNameHandling.Objects) && jo.TryGetValue("$type", out JToken typeToken))
                     {
-                        boType = BusinessObjectSerializationBinder.BusinessObjectAndCOMTypes.Where(t => typeToken.Value<string>().ToUpper().StartsWith(t.FullName.ToUpper())).SingleOrDefault();
+                        boType = BusinessObjectSerializationBinder.BusinessObjectAndCOMTypes.SingleOrDefault(t => typeToken.Value<string>().ToUpper().StartsWith(t.FullName.ToUpper()));
                     }
                     else if (!jo.ContainsKey("boTyp"))
                     {
@@ -610,10 +669,7 @@ namespace BO4E.BO
                 }
             }
 
-            public override bool CanWrite
-            {
-                get { return false; }
-            }
+            public override bool CanWrite => false;
 
             public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
             {

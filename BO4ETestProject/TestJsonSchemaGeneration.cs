@@ -1,13 +1,13 @@
-﻿using System;
-using System.IO;
-using System.Linq;
-using System.Text;
-
-using BO4E.BO;
+﻿using BO4E.BO;
 
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 using Newtonsoft.Json.Schema;
+
+using System;
+using System.IO;
+using System.Linq;
+using System.Text;
 
 namespace TestBO4E
 {
@@ -18,8 +18,7 @@ namespace TestBO4E
         public void BasicTest()
         {
             Messlokation melo = new Messlokation();
-            string result;
-            result = melo.GetJsonScheme().ToString();
+            var result = melo.GetJsonScheme().ToString();
 
             Energiemenge em = new Energiemenge();
             result = em.GetJsonScheme().ToString();

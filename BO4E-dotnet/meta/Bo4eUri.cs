@@ -89,7 +89,7 @@ namespace BO4E.meta
             }
             else
             {
-                return Assembly.GetExecutingAssembly().GetTypes().Where(t => t.Name.Equals(boName)).FirstOrDefault();
+                return Assembly.GetExecutingAssembly().GetTypes().FirstOrDefault(t => t.Name.Equals(boName));
             }
         }
 
@@ -119,7 +119,7 @@ namespace BO4E.meta
         {
             try
             {
-                new Bo4eUri(uri);
+                _ = new Bo4eUri(uri);
             }
             catch (Exception)
             {
@@ -151,7 +151,7 @@ namespace BO4E.meta
                 //relativeUriString += keyField.Name; // line is useful for debugging
                 if (keyProp.GetValue(bo) != null)
                 {
-                    if (keyProp.GetValue(bo).GetType() == typeof(string))
+                    if (keyProp.GetValue(bo) is string)
                     {
                         if (keyProp.GetValue(bo).ToString() == string.Empty)
                         {
@@ -162,7 +162,7 @@ namespace BO4E.meta
                             relativeUriBuilder.Append(keyProp.GetValue(bo) + "/");
                         }
                     }
-                    else if (keyProp.GetValue(bo).GetType() == typeof(int))
+                    else if (keyProp.GetValue(bo) is int)
                     {
                         relativeUriBuilder.Append(keyProp.GetValue(bo).ToString() + "/");
                     }
@@ -195,14 +195,7 @@ namespace BO4E.meta
                 int n = 0;
                 foreach (var up in bo.UserProperties)
                 {
-                    if (n == 0)
-                    {
-                        relativeUriBuilder.Append("?");
-                    }
-                    else
-                    {
-                        relativeUriBuilder.Append("&");
-                    }
+                    relativeUriBuilder.Append(n == 0 ? "?" : "&");
                     relativeUriBuilder.Append($"{up.Key}={up.Value}");
                     n += 1;
                 }
@@ -290,7 +283,7 @@ namespace BO4E.meta
             {
                 string keyPropName = keyProp.Name;
                 JsonPropertyAttribute jpa = keyProp.GetCustomAttribute<JsonPropertyAttribute>();
-                if (jpa != null && jpa.PropertyName != null)
+                if (jpa?.PropertyName != null)
                 {
                     keyPropName = jpa.PropertyName;
                 }
@@ -309,14 +302,7 @@ namespace BO4E.meta
                 }
                 if (keyProp.PropertyType == typeof(string))
                 {
-                    if (keyValue == NULL_KEY_PLACEHOLDER)
-                    {
-                        result.Add(keyPropName, null);
-                    }
-                    else
-                    {
-                        result.Add(keyPropName, keyValue);
-                    }
+                    result.Add(keyPropName, keyValue == NULL_KEY_PLACEHOLDER ? null : keyValue);
                 }
                 else if (keyProp.PropertyType == typeof(int))
                 {
