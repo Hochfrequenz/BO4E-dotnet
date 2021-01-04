@@ -49,7 +49,7 @@ namespace BO4E.COM
         {
             if (Startdatum.HasValue && Enddatum.HasValue)
             {
-                TimeSpan ts = Enddatum.Value - Startdatum.Value;
+                var ts = Enddatum.Value - Startdatum.Value;
                 if (ts.TotalSeconds < 60)
                 {
                     Dauer = (decimal)ts.TotalSeconds;

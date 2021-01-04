@@ -24,18 +24,18 @@ namespace BO4E.meta.LenientConverters
             {
                 return false;
             }
-            Type expectedListElementType = objectType.GetGenericArguments()[0];
+            var expectedListElementType = objectType.GetGenericArguments()[0];
             return expectedListElementType.ToString().StartsWith("BO4E.ENUM");
         }
 
         /// <inheritdoc cref="JsonConverter.ReadJson(JsonReader, Type, object, JsonSerializer)"/>
         public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
         {
-            JToken token = JToken.Load(reader); // https://stackoverflow.com/a/47864946/10009545
-            List<object> rawList = token.ToObject<List<object>>();
-            Type expectedListElementType = objectType.GetGenericArguments()[0];
-            Type expectedListType = typeof(List<>).MakeGenericType(expectedListElementType);
-            object result = Activator.CreateInstance(expectedListType);
+            var token = JToken.Load(reader); // https://stackoverflow.com/a/47864946/10009545
+            var rawList = token.ToObject<List<object>>();
+            var expectedListElementType = objectType.GetGenericArguments()[0];
+            var expectedListType = typeof(List<>).MakeGenericType(expectedListElementType);
+            var result = Activator.CreateInstance(expectedListType);
             if (rawList == null || rawList.Count == 0)
             {
                 return result;
@@ -46,14 +46,14 @@ namespace BO4E.meta.LenientConverters
                 if (rawItem is string && Enum.IsDefined(expectedListElementType, rawItem.ToString()))
                 {
                     // default. everything is as it should be :-)
-                    object enumValue = Enum.Parse(expectedListElementType, rawItem.ToString());
+                    var enumValue = Enum.Parse(expectedListElementType, rawItem.ToString());
                     ((IList)result).Add(enumValue);
                 }
                 else if (rawItem.GetType() == typeof(JObject))
                 {
-                    Dictionary<string, object> rawDict = ((JObject)rawItem).ToObject<Dictionary<string, object>>();
-                    object rawObject = rawDict.Values.FirstOrDefault<object>();
-                    object enumValue = Enum.Parse(expectedListElementType, rawObject.ToString());
+                    var rawDict = ((JObject)rawItem).ToObject<Dictionary<string, object>>();
+                    var rawObject = rawDict.Values.FirstOrDefault<object>();
+                    var enumValue = Enum.Parse(expectedListElementType, rawObject.ToString());
                     ((IList)result).Add(enumValue);
                 }
                 else

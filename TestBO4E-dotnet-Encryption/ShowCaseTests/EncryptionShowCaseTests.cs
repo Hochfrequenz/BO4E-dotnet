@@ -38,7 +38,7 @@ namespace TestBO4E.ShowCaseTests
         {
             Assert.IsTrue(maLo.IsValid()); // as the encryption relies on serializing the BO invalid BOs cannot be encrypted.
 
-            byte[] sharedSecret = Sodium.SecretBox.GenerateKey();
+            var sharedSecret = Sodium.SecretBox.GenerateKey();
             EncryptedObject encryptedBo;
             using (var encrypter = new SymmetricEncrypter(sharedSecret))
             {
@@ -74,7 +74,7 @@ namespace TestBO4E.ShowCaseTests
             // Bob: Hey @Alice, this is my public key: HsGsYigFqgDouUvUW3uMYpy54DqsAxXxQ=...
 
             EncryptedObject encryptedBo;
-            using (AsymmetricEncrypter aliceEncrypter = new AsymmetricEncrypter(aliceKeyPair))
+            using (var aliceEncrypter = new AsymmetricEncrypter(aliceKeyPair))
             {
                 encryptedBo = aliceEncrypter.Encrypt(maLo, Convert.ToBase64String(bobKeyPair.PublicKey));
             }
@@ -92,9 +92,9 @@ namespace TestBO4E.ShowCaseTests
             Assert.AreEqual(Convert.ToBase64String(aliceKeyPair.PublicKey), ((EncryptedObjectPublicKeyBox)encryptedBo).PublicKey, "Bob: I did, otherwise this would fail");
 
             Marktlokation decryptedMaLo;
-            using (AsymmetricEncrypter bobsDecrypter = new AsymmetricEncrypter(bobKeyPair.PrivateKey))
+            using (var bobsDecrypter = new AsymmetricEncrypter(bobKeyPair.PrivateKey))
             {
-                BusinessObject decryptedBo = bobsDecrypter.Decrypt(encryptedBo); // In case Bob had no idea what alice sent him...
+                var decryptedBo = bobsDecrypter.Decrypt(encryptedBo); // In case Bob had no idea what alice sent him...
                 Assert.IsInstanceOfType(decryptedBo, typeof(Marktlokation)); // ...now he knows.
                 decryptedMaLo = bobsDecrypter.Decrypt<Marktlokation>(encryptedBo); // Bob knows at compile time it's a MaLo.
             }
@@ -103,7 +103,7 @@ namespace TestBO4E.ShowCaseTests
             var eveKeyPair = Sodium.PublicKeyBox.GenerateKeyPair();
             // Eve entered the chat
             EncryptedObjectPublicKeyBox manipulatedBo;
-            using (AsymmetricEncrypter eveEncrypter = new AsymmetricEncrypter(eveKeyPair))
+            using (var eveEncrypter = new AsymmetricEncrypter(eveKeyPair))
             {
                 manipulatedBo = eveEncrypter.Encrypt(maLo, Convert.ToBase64String(bobKeyPair.PublicKey));
             }
@@ -111,7 +111,7 @@ namespace TestBO4E.ShowCaseTests
             Debug.WriteLine("Eve: Hey @Bob, Alice asked me to give you this BO");
 
             Assert.AreEqual(Convert.ToBase64String(aliceKeyPair.PublicKey), manipulatedBo.PublicKey, "Bob: Hrm, seems like it's from Alice, indeed...");
-            using (AsymmetricEncrypter bobsDecrypter = new AsymmetricEncrypter(bobKeyPair.PrivateKey))
+            using (var bobsDecrypter = new AsymmetricEncrypter(bobKeyPair.PrivateKey))
             {
                 try
                 {

@@ -120,7 +120,7 @@ namespace BO4E.COM
             // {
             if (Startdatum != null && Enddatum != null && Startdatum > Enddatum)
             {
-                TimeSpan diff = Startdatum - Enddatum;
+                var diff = Startdatum - Enddatum;
                 if (diff.Hours <= 25 && diff.Hours >= 23 && diff.Minutes == 45 && Startdatum.Hour >= 22 && Enddatum.Hour == 0)
                 {
                     Enddatum += new TimeSpan(diff.Hours + 1, 0, 0);
@@ -156,13 +156,13 @@ namespace BO4E.COM
                     Enddatum += new TimeSpan(1, 0, 0); // toDo: get offset from timezoneinfo->rules->dstOffset
                 }
             }
-            if (UserProperties != null && UserProperties.TryGetValue(_SAP_PROFDECIMALS_KEY, out JToken profDecimalsRaw))
+            if (UserProperties != null && UserProperties.TryGetValue(_SAP_PROFDECIMALS_KEY, out var profDecimalsRaw))
             {
                 var profDecimals = profDecimalsRaw.Value<int>();
                 if (profDecimals > 0)
                 {
                     // or should I import math.pow() for this purpose?
-                    for (int i = 0; i < profDecimals; i++)
+                    for (var i = 0; i < profDecimals; i++)
                     {
                         Wert /= 10.0M;
                     }

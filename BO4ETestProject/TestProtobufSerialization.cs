@@ -19,7 +19,7 @@ namespace TestBO4E
         {
             //Guid emGuid = Guid.NewGuid();
             //Guid v1Guid = Guid.NewGuid();
-            Energiemenge em = new Energiemenge()
+            var em = new Energiemenge()
             {
                 LokationsId = "54321012345",
                 LokationsTyp = BO4E.ENUM.Lokationstyp.MaLo,

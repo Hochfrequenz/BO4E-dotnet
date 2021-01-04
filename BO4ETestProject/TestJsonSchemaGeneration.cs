@@ -17,13 +17,13 @@ namespace TestBO4E
         [TestMethod]
         public void BasicTest()
         {
-            Messlokation melo = new Messlokation();
+            var melo = new Messlokation();
             var result = melo.GetJsonScheme().ToString();
 
-            Energiemenge em = new Energiemenge();
+            var em = new Energiemenge();
             result = em.GetJsonScheme().ToString();
 
-            string result2 = BusinessObject.GetJsonSchema(typeof(Energiemenge)).ToString();
+            var result2 = BusinessObject.GetJsonSchema(typeof(Energiemenge)).ToString();
             Assert.AreEqual(result, result2);
         }
 
@@ -42,7 +42,7 @@ namespace TestBO4E
                 {
                     var schema = BusinessObject.GetJsonSchema(type);
                     Assert.IsNotNull(schema);
-                    string path = $"../../../../json-schema-files/{type}.json"; // not elegant but ok ;)
+                    var path = $"../../../../json-schema-files/{type}.json"; // not elegant but ok ;)
                     if (!File.Exists(path))
                     {
                         var stream = File.Create(path);

@@ -56,8 +56,8 @@ namespace BO4E
                 _logger = StaticLogger.Logger;
             }
             //Type[] types = Assembly.GetExecutingAssembly().GetTypes();
-            Type clazz = Assembly.GetExecutingAssembly().GetType(namespacePrefix + "." + objectName);
-            Type ediClazz = Assembly.GetExecutingAssembly().GetType($"{namespacePrefix}.EDI.{objectName}Edi");
+            var clazz = Assembly.GetExecutingAssembly().GetType(namespacePrefix + "." + objectName);
+            var ediClazz = Assembly.GetExecutingAssembly().GetType($"{namespacePrefix}.EDI.{objectName}Edi");
 
             var prop = clazz.GetField(objectValue);
             if (prop == null)
@@ -91,7 +91,7 @@ namespace BO4E
             }
             foreach (var aef in annotatedEdiFields)
             {
-                foreach (MappingAttribute ma in aef.GetCustomAttributes<MappingAttribute>())
+                foreach (var ma in aef.GetCustomAttributes<MappingAttribute>())
                 {
                     var matchCandidate = ma.Mapping.FirstOrDefault();
                     if (matchCandidate != null && matchCandidate.ToString() == objectValue)
@@ -123,17 +123,17 @@ namespace BO4E
         /// <returns>JObject with same structure as original object</returns>
         public static JObject ReplaceWithEdiValues(Object o)
         {
-            Type type = o.GetType();
+            var type = o.GetType();
             if (!type.IsSubclassOf(typeof(BusinessObject)) && !type.IsSubclassOf(typeof(BO4E.COM.COM)))
             {
                 throw new ArgumentException($"Please pass a Business Object or BO4E COMpontent instead of {o.GetType()} with value '{o.ToString()}'.");
             }
-            string boString = JsonConvert.SerializeObject(o, new StringEnumConverter());
-            JObject result = (JObject)JsonConvert.DeserializeObject(boString);
+            var boString = JsonConvert.SerializeObject(o, new StringEnumConverter());
+            var result = (JObject)JsonConvert.DeserializeObject(boString);
             foreach (var oProp in o.GetType().GetProperties().Where(p=>p.GetValue(o)!=null))
             {
-                string serializationName = oProp.GetCustomAttribute<JsonPropertyAttribute>().PropertyName ?? oProp.Name;
-                Type originalType = Nullable.GetUnderlyingType(oProp.PropertyType) ?? oProp.PropertyType;
+                var serializationName = oProp.GetCustomAttribute<JsonPropertyAttribute>().PropertyName ?? oProp.Name;
+                var originalType = Nullable.GetUnderlyingType(oProp.PropertyType) ?? oProp.PropertyType;
                 if (originalType.IsSubclassOf(typeof(BO4E.COM.COM)) || originalType.IsSubclassOf(typeof(BO4E.BO.BusinessObject)))
                 {
                     object newValue = ReplaceWithEdiValues(oProp.GetValue(o));
@@ -141,21 +141,21 @@ namespace BO4E
                 }
                 else if (originalType.IsGenericType && (originalType.GetGenericTypeDefinition() == typeof(List<>)))
                 {
-                    Type originalListItemType = originalType.GetGenericArguments()[0];
+                    var originalListItemType = originalType.GetGenericArguments()[0];
                     if (originalListItemType.ToString().StartsWith("BO4E.ENUM"))
                     {
-                        Type listItemEdiType = Assembly.GetExecutingAssembly().GetType($"{namespacePrefix}.EDI.{originalListItemType.Name}Edi");
+                        var listItemEdiType = Assembly.GetExecutingAssembly().GetType($"{namespacePrefix}.EDI.{originalListItemType.Name}Edi");
                         if (listItemEdiType != null)
                         {
-                            Type listType = typeof(List<>).MakeGenericType(listItemEdiType);
-                            object newList = Activator.CreateInstance(listType);
-                            MethodInfo miAdd = listType.GetMethod("Add");
-                            foreach (object listItem in (IEnumerable)oProp.GetValue(o))
+                            var listType = typeof(List<>).MakeGenericType(listItemEdiType);
+                            var newList = Activator.CreateInstance(listType);
+                            var miAdd = listType.GetMethod("Add");
+                            foreach (var listItem in (IEnumerable)oProp.GetValue(o))
                             {
-                                string newValue = ToEdi(originalListItemType.Name, listItem.ToString());
+                                var newValue = ToEdi(originalListItemType.Name, listItem.ToString());
                                 miAdd.Invoke(newList, new object[] { Enum.Parse(listItemEdiType, newValue) });
                             }
-                            JsonSerializer js = new JsonSerializer();
+                            var js = new JsonSerializer();
                             js.Converters.Add(new StringEnumConverter());
                             result[serializationName] = JToken.FromObject(newList, js);
                         }
@@ -166,10 +166,10 @@ namespace BO4E
                     }
                     else
                     {
-                        Type listType = typeof(List<>).MakeGenericType(typeof(JObject));
-                        object newList = Activator.CreateInstance(listType);
-                        MethodInfo miAdd = listType.GetMethod("Add");
-                        foreach (object listItem in (IEnumerable)oProp.GetValue(o))
+                        var listType = typeof(List<>).MakeGenericType(typeof(JObject));
+                        var newList = Activator.CreateInstance(listType);
+                        var miAdd = listType.GetMethod("Add");
+                        foreach (var listItem in (IEnumerable)oProp.GetValue(o))
                         {
                             object newListItem = ReplaceWithEdiValues(listItem);
                             miAdd.Invoke(newList, new object[] { newListItem });
@@ -177,10 +177,10 @@ namespace BO4E
                         result[serializationName] = JToken.FromObject(newList);
                     }
                 }
-                Type ediType = Assembly.GetExecutingAssembly().GetType($"{namespacePrefix}.EDI.{originalType.Name}Edi");
+                var ediType = Assembly.GetExecutingAssembly().GetType($"{namespacePrefix}.EDI.{originalType.Name}Edi");
                 if (ediType != null)
                 {
-                    string newValue = ToEdi(originalType.Name, oProp.GetValue(o).ToString());
+                    var newValue = ToEdi(originalType.Name, oProp.GetValue(o).ToString());
                     result[serializationName] = newValue;
                 }
             }

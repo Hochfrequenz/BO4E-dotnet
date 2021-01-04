@@ -37,10 +37,10 @@ namespace BO4E.Extensions.Encryption
         /// <returns>the encrypted data as Base64 encoded string</returns>
         private string Encrypt(string plainText, string associatedDataString, byte[] nonce)
         {
-            byte[] plainBytes = Encoding.UTF8.GetBytes(plainText);
-            byte[] adBytes = Encoding.UTF8.GetBytes(associatedDataString);
-            byte[] cipherBytes = SecretAeadChaCha20Poly1305.Encrypt(plainBytes, nonce, secretKey, adBytes);
-            string cipherString = Convert.ToBase64String(cipherBytes);
+            var plainBytes = Encoding.UTF8.GetBytes(plainText);
+            var adBytes = Encoding.UTF8.GetBytes(associatedDataString);
+            var cipherBytes = SecretAeadChaCha20Poly1305.Encrypt(plainBytes, nonce, secretKey, adBytes);
+            var cipherString = Convert.ToBase64String(cipherBytes);
             return cipherString;
         }
 
@@ -52,7 +52,7 @@ namespace BO4E.Extensions.Encryption
         /// <returns>Tuple of (cipherText, nonce); both as base64 encoded string</returns>
         public (string, string) Encrypt(string plainText, string associatedDataString)
         {
-            byte[] nonce = SecretAeadChaCha20Poly1305.GenerateNonce();
+            var nonce = SecretAeadChaCha20Poly1305.GenerateNonce();
             return (Encrypt(plainText, associatedDataString, nonce), Convert.ToBase64String(nonce));
         }
 
@@ -64,9 +64,9 @@ namespace BO4E.Extensions.Encryption
         /// <returns>an encrypted Business Object</returns>
         public EncryptedObjectAEAD Encrypt(BusinessObject plainObject, string associatedDataString)
         {
-            string plainText = JsonConvert.SerializeObject(plainObject, settings: encryptionSerializerSettings);
-            byte[] nonce = SecretAeadChaCha20Poly1305.GenerateNonce();
-            string cipherString = Encrypt(plainText, associatedDataString, nonce);
+            var plainText = JsonConvert.SerializeObject(plainObject, settings: encryptionSerializerSettings);
+            var nonce = SecretAeadChaCha20Poly1305.GenerateNonce();
+            var cipherString = Encrypt(plainText, associatedDataString, nonce);
             return new EncryptedObjectAEAD(cipherString, associatedDataString, Convert.ToBase64String(nonce));
         }
         /// <summary>
@@ -78,38 +78,38 @@ namespace BO4E.Extensions.Encryption
         /// <returns>decrypted as an UTF-8 encoded string</returns>
         private string Decrypt(string cipherText, string associatedDataString, byte[] nonce)
         {
-            byte[] cipherBytes = Convert.FromBase64String(cipherText);
-            byte[] adBytes = Encoding.UTF8.GetBytes(associatedDataString);
-            byte[] plainBytes = SecretAeadChaCha20Poly1305.Decrypt(cipherBytes, nonce, secretKey, adBytes);
+            var cipherBytes = Convert.FromBase64String(cipherText);
+            var adBytes = Encoding.UTF8.GetBytes(associatedDataString);
+            var plainBytes = SecretAeadChaCha20Poly1305.Decrypt(cipherBytes, nonce, secretKey, adBytes);
             return Encoding.UTF8.GetString(plainBytes);
         }
 
 
         public string Decrypt(string cipherText, string associatedData, string nonceString)
         {
-            byte[] nonceBytes = Convert.FromBase64String(nonceString);
+            var nonceBytes = Convert.FromBase64String(nonceString);
             return Decrypt(cipherText, associatedData, nonceBytes);
         }
 
         public override BusinessObject Decrypt(EncryptedObject encryptedObject)
         {
-            EncryptedObjectAEAD eo = (EncryptedObjectAEAD)encryptedObject;//(EncryptedObjectAEAD)BoMapper.MapObject("EncryptedObjectAEAD", JObject.FromObject(encryptedObject));
+            var eo = (EncryptedObjectAEAD)encryptedObject;//(EncryptedObjectAEAD)BoMapper.MapObject("EncryptedObjectAEAD", JObject.FromObject(encryptedObject));
             if (eo == null)
             {
                 return null;
             }
-            string plainString = Decrypt(eo.CipherText, eo.AssociatedData, eo.Nonce);
+            var plainString = Decrypt(eo.CipherText, eo.AssociatedData, eo.Nonce);
             return JsonConvert.DeserializeObject<BusinessObject>(plainString, settings: encryptionSerializerSettings);
         }
 
         public override T Decrypt<T>(EncryptedObject encryptedObject)
         {
-            EncryptedObjectAEAD eo = (EncryptedObjectAEAD)encryptedObject;
+            var eo = (EncryptedObjectAEAD)encryptedObject;
             if (eo == null)
             {
                 return null;
             }
-            string plainString = Decrypt(eo.CipherText, eo.AssociatedData, eo.Nonce);
+            var plainString = Decrypt(eo.CipherText, eo.AssociatedData, eo.Nonce);
             return JsonConvert.DeserializeObject<T>(plainString, settings: encryptionSerializerSettings);
         }
 
@@ -117,7 +117,7 @@ namespace BO4E.Extensions.Encryption
         {
             if (secretKey != null)
             {
-                for (int i = 0; i < secretKey.Length; i++)
+                for (var i = 0; i < secretKey.Length; i++)
                 {
                     secretKey[i] = 0x0;
                 }

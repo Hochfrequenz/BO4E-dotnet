@@ -190,8 +190,8 @@ namespace BO4E.BO
             // the ALL_UPPER_CASE SAP internal keys to lowerCamelCase. Later on technical constraints in SAP forced me to use a different
             // serialization which is closer to SAPs internal structure and has no lower case keys at all. Furthermore in SAP there is
             // no difference between string.Empty and null; the latter doesn't even exist as a concept.
-            JToken infoToken = sapPrintDocument.SelectToken("erdk") ?? sapPrintDocument.SelectToken("ERDK");
-            JToken tErdzToken = sapPrintDocument.SelectToken("tErdz") ?? sapPrintDocument.SelectToken("T_ERDZ");
+            var infoToken = sapPrintDocument.SelectToken("erdk") ?? sapPrintDocument.SelectToken("ERDK");
+            var tErdzToken = sapPrintDocument.SelectToken("tErdz") ?? sapPrintDocument.SelectToken("T_ERDZ");
             if (tErdzToken == null)
             {
                 throw new ArgumentException("The SAP print document did not contain a 'tErdz' token. Did you serialize using the right naming convention?");
@@ -209,23 +209,23 @@ namespace BO4E.BO
 
             decimal gSteure, gBrutto, vGezahlt, rBrutto;
             var gNetto = gSteure = _ = vGezahlt = rBrutto = 0.00M;
-            Waehrungscode waehrungscode = (Waehrungscode)Enum.Parse(typeof(Waehrungscode), (infoToken["totalWaer"] ?? infoToken["TOTAL_WAER"]).Value<string>());
-            Waehrungseinheit waehrungseinheit = (Waehrungseinheit)Enum.Parse(typeof(Waehrungseinheit), (infoToken["totalWaer"] ?? infoToken["TOTAL_WAER"]).Value<string>());
-            Mengeneinheit mengeneinheit = (Mengeneinheit)Enum.Parse(typeof(Mengeneinheit), (tErdzToken[0]["massbill"] ?? tErdzToken[0]["MASSBILL"]).Value<string>());
+            var waehrungscode = (Waehrungscode)Enum.Parse(typeof(Waehrungscode), (infoToken["totalWaer"] ?? infoToken["TOTAL_WAER"]).Value<string>());
+            var waehrungseinheit = (Waehrungseinheit)Enum.Parse(typeof(Waehrungseinheit), (infoToken["totalWaer"] ?? infoToken["TOTAL_WAER"]).Value<string>());
+            var mengeneinheit = (Mengeneinheit)Enum.Parse(typeof(Mengeneinheit), (tErdzToken[0]["massbill"] ?? tErdzToken[0]["MASSBILL"]).Value<string>());
 
-            List<Rechnungsposition> rpList = new List<Rechnungsposition>();
-            List<Steuerbetrag> stList = new List<Steuerbetrag>();
+            var rpList = new List<Rechnungsposition>();
+            var stList = new List<Steuerbetrag>();
             Vorausgezahlt = new Betrag() { Waehrung = waehrungscode, Wert = 0 };
-            foreach (JToken jrp in tErdzToken)
+            foreach (var jrp in tErdzToken)
             {
-                string belzart = (jrp["belzart"] ?? jrp["BELZART"]).ToString();
+                var belzart = (jrp["belzart"] ?? jrp["BELZART"]).ToString();
                 if (belzart == "IQUANT" || belzart == "ROUND" || belzart == "ROUNDO")
                 {
                     continue;
                 }
                 else
                 {
-                    Rechnungsposition rp = new Rechnungsposition();
+                    var rp = new Rechnungsposition();
                     decimal zeitbezogeneMengeWert = 0;
                     if (belzart == "000001")
                     {
@@ -333,7 +333,7 @@ namespace BO4E.BO
                                 Wert = (jrp["sbasw"] ?? jrp["SBASW"]).Value<decimal>(),
                                 Waehrung = waehrungscode
                             };
-                            Steuerbetrag steuerbetrag = new Steuerbetrag()
+                            var steuerbetrag = new Steuerbetrag()
                             {
                                 Basiswert = (jrp["sbasw"] ?? jrp["SBASW"]).Value<decimal>(),
                                 Steuerwert = (jrp["sbetw"] ?? jrp["SBETW"]).Value<decimal>(),
@@ -380,7 +380,7 @@ namespace BO4E.BO
                         }
                         else
                         {
-                            Steuerbetrag steuerbetrag = new Steuerbetrag()
+                            var steuerbetrag = new Steuerbetrag()
                             {
                                 Basiswert = (jrp["sbasw"] ?? jrp["SBASW"]).Value<decimal>(),
                                 Steuerwert = (jrp["sbetw"] ?? jrp["SBETW"]).Value<decimal>(),

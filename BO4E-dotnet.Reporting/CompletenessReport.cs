@@ -199,7 +199,7 @@ namespace BO4E.Reporting
         /// <returns></returns>
         public string ToCSV(string separator = ";", bool headerLine = true, string lineTerminator = "\\n")
         {
-            StringBuilder builder = new StringBuilder();
+            var builder = new StringBuilder();
             if (headerLine)
             {
                 var headerColumns = new List<string>()
@@ -264,8 +264,8 @@ namespace BO4E.Reporting
             }
             if (Gaps != null && Gaps.Any())
             {
-                DateTime minGap = this.Gaps.Min(x => x.Startdatum);// OrderBy(x => x.Startdatum).First().Startdatum;
-                DateTime maxGap = this.Gaps.Max(x => x.Enddatum);// OrderByDescending(x => x.Enddatum).First().Enddatum;
+                var minGap = this.Gaps.Min(x => x.Startdatum);// OrderBy(x => x.Startdatum).First().Startdatum;
+                var maxGap = this.Gaps.Max(x => x.Enddatum);// OrderByDescending(x => x.Enddatum).First().Enddatum;
                 columns.Add(minGap.ToString("yyyy-MM-ddTHH:mm:ssZ"));
                 columns.Add(maxGap.ToString("yyyy-MM-ddTHH:mm:ssZ"));
                 var gapsHours = (maxGap - minGap).TotalHours;

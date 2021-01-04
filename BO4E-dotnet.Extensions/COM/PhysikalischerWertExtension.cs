@@ -17,7 +17,7 @@ namespace BO4E.Extensions.COM
         /// <returns>a new instance of PhysikalischerWert having the unit <paramref name="newEinheit"/></returns>
         public static PhysikalischerWert ConvertToUnit(this PhysikalischerWert pw, Mengeneinheit newEinheit)
         {
-            decimal factor = pw.Einheit.GetConversionFactor(newEinheit); // throws all the exceptions.
+            var factor = pw.Einheit.GetConversionFactor(newEinheit); // throws all the exceptions.
             return new PhysikalischerWert(factor * pw.Wert, newEinheit);
         }
     }

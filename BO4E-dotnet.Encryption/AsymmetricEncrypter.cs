@@ -49,10 +49,10 @@ namespace BO4E.Extensions.Encryption
 
         private string Encrypt(string plainText, string recipientsPublicKey, byte[] nonce)
         {
-            byte[] plainBytes = Encoding.UTF8.GetBytes(plainText);
-            byte[] rpkBytes = Convert.FromBase64String(recipientsPublicKey);
-            byte[] cipherBytes = PublicKeyBox.Create(plainBytes, nonce, privateKey, rpkBytes);
-            string cipherString = Convert.ToBase64String(cipherBytes);
+            var plainBytes = Encoding.UTF8.GetBytes(plainText);
+            var rpkBytes = Convert.FromBase64String(recipientsPublicKey);
+            var cipherBytes = PublicKeyBox.Create(plainBytes, nonce, privateKey, rpkBytes);
+            var cipherString = Convert.ToBase64String(cipherBytes);
             return cipherString;
         }
 
@@ -64,7 +64,7 @@ namespace BO4E.Extensions.Encryption
         /// <returns>Tuple of (cipherText, nonce); both as base64 encoded string</returns>
         public (string, string) Encrypt(string plainText, string recipientsPublicKey)
         {
-            byte[] nonce = PublicKeyBox.GenerateNonce();
+            var nonce = PublicKeyBox.GenerateNonce();
             return (Encrypt(plainText, recipientsPublicKey, nonce), Convert.ToBase64String(nonce));
         }
 
@@ -76,17 +76,17 @@ namespace BO4E.Extensions.Encryption
         /// <returns>An encrypted Business Object</returns>
         public EncryptedObjectPublicKeyBox Encrypt(BusinessObject plainObject, string publicKey)
         {
-            string plainText = JsonConvert.SerializeObject(plainObject, settings: encryptionSerializerSettings);
-            byte[] nonce = PublicKeyBox.GenerateNonce();
-            string cipherString = Encrypt(plainText, publicKey, nonce);
+            var plainText = JsonConvert.SerializeObject(plainObject, settings: encryptionSerializerSettings);
+            var nonce = PublicKeyBox.GenerateNonce();
+            var cipherString = Encrypt(plainText, publicKey, nonce);
             return new EncryptedObjectPublicKeyBox(cipherString, Convert.ToBase64String(ownPublicKey), Convert.ToBase64String(nonce));
         }
 
         private string Decrypt(string cipherText, string sendersPublicKey, byte[] nonce)
         {
-            byte[] cipherBytes = Convert.FromBase64String(cipherText);
-            byte[] spkBytes = Convert.FromBase64String(sendersPublicKey);
-            byte[] plainBytes = PublicKeyBox.Open(cipherBytes, nonce, privateKey, spkBytes);
+            var cipherBytes = Convert.FromBase64String(cipherText);
+            var spkBytes = Convert.FromBase64String(sendersPublicKey);
+            var plainBytes = PublicKeyBox.Open(cipherBytes, nonce, privateKey, spkBytes);
             return Encoding.UTF8.GetString(plainBytes);
         }
 
@@ -104,23 +104,23 @@ namespace BO4E.Extensions.Encryption
 
         public override BusinessObject Decrypt(EncryptedObject encryptedObject)
         {
-            EncryptedObjectPublicKeyBox eo = (EncryptedObjectPublicKeyBox)(encryptedObject);// (EncryptedObjectPublicKeyBox)BoMapper.MapObject("EncryptedObjectPublicKeyBox", JObject.FromObject(encryptedObject));
+            var eo = (EncryptedObjectPublicKeyBox)(encryptedObject);// (EncryptedObjectPublicKeyBox)BoMapper.MapObject("EncryptedObjectPublicKeyBox", JObject.FromObject(encryptedObject));
             if (eo == null)
             {
                 return null;
             }
-            string plainString = Decrypt(eo.CipherText, eo.PublicKey, eo.Nonce);
+            var plainString = Decrypt(eo.CipherText, eo.PublicKey, eo.Nonce);
             return JsonConvert.DeserializeObject<BusinessObject>(plainString, settings: encryptionSerializerSettings);
         }
 
         public override T Decrypt<T>(EncryptedObject encryptedObject)
         {
-            EncryptedObjectPublicKeyBox eo = (EncryptedObjectPublicKeyBox)(encryptedObject);// (EncryptedObjectPublicKeyBox)BoMapper.MapObject("EncryptedObjectPublicKeyBox", JObject.FromObject(encryptedObject));
+            var eo = (EncryptedObjectPublicKeyBox)(encryptedObject);// (EncryptedObjectPublicKeyBox)BoMapper.MapObject("EncryptedObjectPublicKeyBox", JObject.FromObject(encryptedObject));
             if (eo == null)
             {
                 return null;
             }
-            string plainString = Decrypt(eo.CipherText, eo.PublicKey, eo.Nonce);
+            var plainString = Decrypt(eo.CipherText, eo.PublicKey, eo.Nonce);
             return JsonConvert.DeserializeObject<T>(plainString, settings: encryptionSerializerSettings);
         }
 
@@ -128,7 +128,7 @@ namespace BO4E.Extensions.Encryption
         {
             if (privateKey != null)
             {
-                for (int i = 0; i < privateKey.Length; i++)
+                for (var i = 0; i < privateKey.Length; i++)
                 {
                     privateKey[i] = 0x0;
                 }

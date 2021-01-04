@@ -57,7 +57,7 @@ namespace BO4E.COM
         {
             this.Wert = wert;
 
-            if (!Enum.TryParse<Mengeneinheit>(einheitString, true, out Mengeneinheit einheit))
+            if (!Enum.TryParse<Mengeneinheit>(einheitString, true, out var einheit))
             {
                 throw new ArgumentException($"'{einheitString}' is not a valid Mengeneinheit");
             }

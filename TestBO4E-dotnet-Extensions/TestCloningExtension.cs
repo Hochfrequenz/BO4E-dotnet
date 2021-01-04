@@ -14,12 +14,12 @@ namespace TestBO4EExtensions
         [TestMethod]
         public void TestCloning()
         {
-            Messlokation bo = new Messlokation()
+            var bo = new Messlokation()
             {
                 MesslokationsId = "DE345",
 
             };
-            Messlokation cloneBo = BusinessObjectExtensions.DeepClone<Messlokation>((Messlokation)bo);
+            var cloneBo = BusinessObjectExtensions.DeepClone<Messlokation>((Messlokation)bo);
             Assert.AreNotSame(bo, cloneBo);
             // Assert.AreEqual<Messlokation>((Messlokation)bo, cloneBo); <--- keine ahnung warum das failed. vllt. auch mit json patch/diff arbeiten wie im hubnet projekt
 
@@ -28,7 +28,7 @@ namespace TestBO4EExtensions
         [TestMethod]
         public void TestCloningEnergiemenge()
         {
-            Energiemenge em = new Energiemenge()
+            var em = new Energiemenge()
             {
                 LokationsId = "De12345",
                 LokationsTyp = BO4E.ENUM.Lokationstyp.MaLo,

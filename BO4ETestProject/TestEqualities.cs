@@ -17,8 +17,8 @@ namespace TestBO4E
         [TestMethod]
         public void TestEqualsCOM()
         {
-            Verbrauch v1 = new Verbrauch();
-            Verbrauch v2 = new Verbrauch();
+            var v1 = new Verbrauch();
+            var v2 = new Verbrauch();
             Assert.ThrowsException<JsonSerializationException>(() => v1.Equals(v2), "You must not compare invalid/incomplete COMs");
             Assert.AreEqual(v1.GetHashCode(), v2.GetHashCode());
 
@@ -52,8 +52,8 @@ namespace TestBO4E
         [TestMethod]
         public void TestEqualsBO()
         {
-            Energiemenge em1 = new Energiemenge();
-            Energiemenge em2 = new Energiemenge();
+            var em1 = new Energiemenge();
+            var em2 = new Energiemenge();
             Assert.ThrowsException<ArgumentException>(() => em1.Equals(em2));
             Assert.AreEqual(em1.GetHashCode(), em2.GetHashCode());
 
@@ -64,13 +64,13 @@ namespace TestBO4E
             em2.LokationsTyp = BO4E.ENUM.Lokationstyp.MeLo;
 
             em1.Energieverbrauch = new List<Verbrauch>();
-            Verbrauch v1 = new Verbrauch
+            var v1 = new Verbrauch
             {
                 Obiskennzahl = "1-2-3-4-5"
             };
             em1.Energieverbrauch.Add(v1);
             em2.Energieverbrauch = new List<Verbrauch>();
-            Verbrauch v2 = new Verbrauch
+            var v2 = new Verbrauch
             {
                 Obiskennzahl = "1-2-3-4-5"
             };
@@ -80,7 +80,7 @@ namespace TestBO4E
             //Assert.AreEqual(em1.GetHashCode(), em2.GetHashCode());
             Assert.IsFalse(em1 == em2);
 
-            Verbrauch v3 = new Verbrauch
+            var v3 = new Verbrauch
             {
                 Einheit = BO4E.ENUM.Mengeneinheit.KWH,
                 Obiskennzahl = "ABC",
@@ -94,7 +94,7 @@ namespace TestBO4E
             //Assert.AreEqual(em1.GetHashCode(), em2.GetHashCode());
             Assert.IsFalse(em1 == em2);
 
-            Verbrauch v4 = JsonConvert.DeserializeObject<Verbrauch>(JsonConvert.SerializeObject(v1));
+            var v4 = JsonConvert.DeserializeObject<Verbrauch>(JsonConvert.SerializeObject(v1));
             v4.Wert = 789.012M;
             em1.Energieverbrauch.Add(v4);
             Assert.AreNotEqual(em1, em2);

@@ -34,7 +34,7 @@ namespace BO4E.meta
         /// <returns></returns>
         protected override JsonProperty CreateProperty(MemberInfo member, MemberSerialization memberSerialization)
         {
-            JsonProperty prop = base.CreateProperty(member, memberSerialization);
+            var prop = base.CreateProperty(member, memberSerialization);
 
             // See if there is a [FieldName] attribute applied to the property 
             // for the requested language

@@ -23,7 +23,7 @@ namespace TestBO4EExtensions.Encryption
         [TestMethod]
         public void TestAcInitial()
         {
-            AnonymizerConfiguration ac = new AnonymizerConfiguration();
+            var ac = new AnonymizerConfiguration();
             Assert.IsTrue(ac.IsInitial());
             Assert.IsFalse(ac.ContainsNonKeepingOperations());
             ac.SetOption(DataCategory.ADDRESS, AnonymizerApproach.ENCRYPT);
@@ -34,7 +34,7 @@ namespace TestBO4EExtensions.Encryption
         [TestMethod]
         public void TestAcSalt()
         {
-            AnonymizerConfiguration ac = new AnonymizerConfiguration
+            var ac = new AnonymizerConfiguration
             {
                 hashingSalt = "UG9seWZvbiB6d2l0c2NoZXJuZCBhw59lbiBNw6R4Y2hlbnMgVsO2Z2VsIFLDvGJlbiwgSm9naHVydCB1bmQgUXVhcms="
             };

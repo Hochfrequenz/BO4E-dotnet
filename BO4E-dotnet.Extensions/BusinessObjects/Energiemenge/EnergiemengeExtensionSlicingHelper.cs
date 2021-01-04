@@ -110,8 +110,8 @@ namespace BO4E.Extensions.BusinessObjects.Energiemenge
             IList<ITimeRange> result = new List<ITimeRange>();
             if (!overallTimeRange.IsMoment)
             {
-                DateTime initialStart = new DateTime(localStart.Year, localStart.Month, 1, 0, 0, 0, DateTimeKind.Unspecified);
-                DateTime initialEnd = initialStart.AddMonths(1);
+                var initialStart = new DateTime(localStart.Year, localStart.Month, 1, 0, 0, 0, DateTimeKind.Unspecified);
+                var initialEnd = initialStart.AddMonths(1);
                 result.Add(new TimeRange()
                 {
                     Start = initialStart,
@@ -119,7 +119,7 @@ namespace BO4E.Extensions.BusinessObjects.Energiemenge
                 });
                 while (result.Last().End < overallTimeRange.End)
                 {
-                    DateTime sliceStart = result.Last().Start.AddMonths(1);
+                    var sliceStart = result.Last().Start.AddMonths(1);
                     result.Add(new TimeRange()
                     {
                         Start = sliceStart,
@@ -161,9 +161,9 @@ namespace BO4E.Extensions.BusinessObjects.Energiemenge
             else if (dt.Kind == DateTimeKind.Utc)
             {
                 // an utc day does always have 24 hours. not what humans expect!
-                DateTime dtLocal = DateTime.SpecifyKind(TimeZoneInfo.ConvertTimeFromUtc(dt, tz), DateTimeKind.Unspecified);
-                DateTime preResult = DateTime.SpecifyKind(dtLocal.AddDays(value), DateTimeKind.Unspecified);
-                DateTime result = TimeZoneInfo.ConvertTimeToUtc(preResult, tz);
+                var dtLocal = DateTime.SpecifyKind(TimeZoneInfo.ConvertTimeFromUtc(dt, tz), DateTimeKind.Unspecified);
+                var preResult = DateTime.SpecifyKind(dtLocal.AddDays(value), DateTimeKind.Unspecified);
+                var result = TimeZoneInfo.ConvertTimeToUtc(preResult, tz);
                 return result;
             }
             else

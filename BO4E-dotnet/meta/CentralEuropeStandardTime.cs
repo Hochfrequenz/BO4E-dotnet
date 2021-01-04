@@ -18,11 +18,11 @@ namespace BO4E.meta
         {
             var assembly = typeof(CentralEuropeStandardTime).Assembly;
             // load serialized time zone from json resource file:
-            using (Stream stream = assembly.GetManifestResourceStream("BO4E.meta.CentralEuropeStandardTime.json"))
+            using (var stream = assembly.GetManifestResourceStream("BO4E.meta.CentralEuropeStandardTime.json"))
             {
                 using (var jsonReader = new StreamReader(stream))
                 {
-                    string jsonString = jsonReader.ReadToEnd();
+                    var jsonString = jsonReader.ReadToEnd();
                     //Console.WriteLine(jsonString);
                     CENTRAL_EUROPE_STANDARD_TIME = JsonConvert.DeserializeObject<TimeZoneInfo>(jsonString);
                 }

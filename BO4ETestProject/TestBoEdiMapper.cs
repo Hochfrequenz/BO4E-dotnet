@@ -45,13 +45,13 @@ namespace TestBO4E
         [TestMethod]
         public void TestSimpleEnums()
         {
-            foreach (string objectName in expectedResults.Keys)
+            foreach (var objectName in expectedResults.Keys)
             {
-                Dictionary<string, string> map = expectedResults[objectName];
-                foreach (string teststring in map.Keys)
+                var map = expectedResults[objectName];
+                foreach (var teststring in map.Keys)
                 {
-                    string expectedResult = map[teststring];
-                    string result = BoEdiMapper.ToEdi(objectName, teststring);
+                    var expectedResult = map[teststring];
+                    var result = BoEdiMapper.ToEdi(objectName, teststring);
                     Assert.AreEqual(expectedResult, result);
                 }
             }
@@ -60,7 +60,7 @@ namespace TestBO4E
         [TestMethod]
         public void TestNullStuff()
         {
-            string result = BoEdiMapper.ToEdi("Landescode", null);
+            var result = BoEdiMapper.ToEdi("Landescode", null);
             Assert.IsNull(result);
 
             result = BoEdiMapper.ToEdi("Rollencodetyp", "0");
@@ -70,13 +70,13 @@ namespace TestBO4E
         [TestMethod]
         public void TestBoEdiReplacement()
         {
-            string[] files = Directory.GetFiles($"BoEdiMapper/", "*.json");
-            foreach (string file in files)
+            var files = Directory.GetFiles($"BoEdiMapper/", "*.json");
+            foreach (var file in files)
             {
                 JObject json;
-                using (StreamReader r = new StreamReader(file))
+                using (var r = new StreamReader(file))
                 {
-                    string jsonString = r.ReadToEnd();
+                    var jsonString = r.ReadToEnd();
                     json = JsonConvert.DeserializeObject<JObject>(jsonString);
                 }
                 Assert.IsNotNull(json["input"], $"You have to specify an 'input' in test file {file}");
@@ -90,13 +90,13 @@ namespace TestBO4E
                 {
                     bo = BoMapper.MapObject(json["input"]["boTyp"].ToString(), (JObject)json["input"]);
                 }
-                JObject result = BoEdiMapper.ReplaceWithEdiValues(bo);
+                var result = BoEdiMapper.ReplaceWithEdiValues(bo);
                 //JObject result = JsonConvert.DeserializeObject<JObject>(JsonConvert.SerializeObject(, new StringEnumConverter()));
                 var jdp = new JsonDiffPatch();
                 var left = JsonHelper.RemoveEmptyChildren(json["expectedResult"]);
                 var right = JsonHelper.RemoveEmptyChildren(result);
                 var patch = jdp.Diff(left, right);
-                string additionalMessage = string.Empty;
+                var additionalMessage = string.Empty;
                 if (patch != null)
                 {
                     additionalMessage = $";\r\n Diff: { patch.ToString()}";

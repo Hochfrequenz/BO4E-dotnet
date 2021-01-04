@@ -30,17 +30,17 @@ namespace BO4E.Reporting
         {
             var type = this.GetType();
             var resultBuilder = new StringBuilder();
-            List<string> result = new List<string>();
-            List<string> headerNames = new List<string>();
-            Dictionary<List<string>, List<string>> reterned = new Dictionary<List<string>, List<string>>() { [headerNames] = result };
+            var result = new List<string>();
+            var headerNames = new List<string>();
+            var reterned = new Dictionary<List<string>, List<string>>() { [headerNames] = result };
             reterned = Detect(type, separator, this, reterned);
 
             headerNames = reterned.Keys.First();
             headerNames.AddRange(new List<string>() { "gap.startDatum", "gap.endDatum" });
             result = reterned.Values.First();
 
-            List<string> sortedResults = new List<string>();
-            List<string> sortedHeaderNamesList = new List<string>();
+            var sortedResults = new List<string>();
+            var sortedHeaderNamesList = new List<string>();
             var parallelItems = headerNames.GroupBy(x => x)
                 .Where(g => g.Count() > 1)
                 .Select(y => new { Element = y.Key, Counter = y.Count() })
@@ -48,7 +48,7 @@ namespace BO4E.Reporting
 
             if (parallelItems.Count() > 0)
             {
-                for (int i = 0; i < parallelItems.First().Counter; i++)
+                for (var i = 0; i < parallelItems.First().Counter; i++)
                 {
                     sortedResults.Clear();
                     if (reihenfolge != null)
@@ -58,15 +58,15 @@ namespace BO4E.Reporting
                         {
                             if (!string.IsNullOrEmpty(reihenItem.Values.First()) && !string.IsNullOrEmpty(reihenItem.Keys.First()))
                             {
-                                int index = headerNames.IndexOf(reihenItem.Keys.First());
+                                var index = headerNames.IndexOf(reihenItem.Keys.First());
                                 if (index != -1)
                                 {
                                     sortedHeaderNamesList.Add(reihenItem.Values.First());
-                                    string CurFieldName = reihenItem.Keys.First();
+                                    var CurFieldName = reihenItem.Keys.First();
                                     if (parallelItems.Where(g => g.Element == CurFieldName).Count() > 0)
                                     {
                                         sortedResults.Add(result[index]);
-                                        int indx = headerNames.IndexOf(CurFieldName);
+                                        var indx = headerNames.IndexOf(CurFieldName);
                                         headerNames.RemoveAt(indx);
                                         result.RemoveAt(indx);
                                     }
@@ -88,23 +88,23 @@ namespace BO4E.Reporting
                     }
                     else
                     {
-                        int userPropertiesIndex = headerNames.IndexOf("UserProperties");
+                        var userPropertiesIndex = headerNames.IndexOf("UserProperties");
                         if (userPropertiesIndex >= 0)
                         {
                             headerNames.RemoveAt(userPropertiesIndex);
                             result.RemoveAt(userPropertiesIndex);
                         }
                         //Values organize
-                        int index = headerNames.IndexOf(parallelItems.First().Element);
+                        var index = headerNames.IndexOf(parallelItems.First().Element);
                         if (i == 0)
                         {
                             headerNames.RemoveRange(index + 3, 3 * (parallelItems.First().Counter - 1));
                             sortedHeaderNamesList.AddRange(headerNames);
                         }
-                        int valueIndex = index + (i * 3);
+                        var valueIndex = index + (i * 3);
                         var curValues = result.Skip(valueIndex).Take(3);
                         var startfix = result.Take(index);
-                        int indexEndSection = index + (3 * parallelItems.First().Counter);
+                        var indexEndSection = index + (3 * parallelItems.First().Counter);
                         var endfix = result.Skip(indexEndSection).Take(result.Count - indexEndSection);
                         sortedResults.AddRange(startfix);
                         sortedResults.AddRange(curValues);
@@ -126,7 +126,7 @@ namespace BO4E.Reporting
                     {
                         if (!string.IsNullOrEmpty(reihenItem.Values.First()) && !string.IsNullOrEmpty(reihenItem.Keys.First()))
                         {
-                            int index = headerNames.IndexOf(reihenItem.Keys.First());
+                            var index = headerNames.IndexOf(reihenItem.Keys.First());
                             if (index != -1)
                             {
                                 sortedHeaderNamesList.Add(reihenItem.Values.First());
@@ -145,7 +145,7 @@ namespace BO4E.Reporting
                 }
                 else
                 {
-                    int userPropertiesIndex = headerNames.IndexOf("UserProperties");
+                    var userPropertiesIndex = headerNames.IndexOf("UserProperties");
                     if (userPropertiesIndex >= 0)
                     {
                         headerNames.RemoveAt(userPropertiesIndex);
@@ -160,28 +160,28 @@ namespace BO4E.Reporting
             }
 
 
-            List<string> gapdata = new List<string>();
-            List<string> gapHeaderNames = new List<string>();
-            Dictionary<List<string>, List<string>> gapReterned = new Dictionary<List<string>, List<string>>() { [gapHeaderNames] = gapdata };
+            var gapdata = new List<string>();
+            var gapHeaderNames = new List<string>();
+            var gapReterned = new Dictionary<List<string>, List<string>>() { [gapHeaderNames] = gapdata };
             gapReterned = DetectGaps(type, separator, this, gapReterned);
 
-            List<string> gapSortedResults = new List<string>();
+            var gapSortedResults = new List<string>();
             var gapParallelItems = gapHeaderNames.GroupBy(x => x)
                 .Where(g => g.Count() > 1)
                 .Select(y => new { Element = y.Key, Counter = y.Count() })
                 .ToList();
             if (gapParallelItems.Count() > 0)
             {
-                for (int i = 0; i < gapParallelItems.First().Counter; i++)
+                for (var i = 0; i < gapParallelItems.First().Counter; i++)
                 {
                     gapSortedResults.Clear();
 
-                    int index = gapHeaderNames.IndexOf(gapParallelItems.First().Element);
-                    int valueIndex = index + (i * 2);
+                    var index = gapHeaderNames.IndexOf(gapParallelItems.First().Element);
+                    var valueIndex = index + (i * 2);
                     var curValues = gapdata.Skip(valueIndex).Take(2);
                     gapSortedResults.AddRange(curValues);
                     resultBuilder.Append(lineTerminator);
-                    for (int z = 2; z < sortedHeaderNamesList.Count(); z++)
+                    for (var z = 2; z < sortedHeaderNamesList.Count(); z++)
                         resultBuilder.Append(separator.ToString());
                     resultBuilder.Append(String.Join(separator.ToString(), gapSortedResults));
                 }
@@ -198,8 +198,8 @@ namespace BO4E.Reporting
         {
             var props = type.GetProperties();
             var nonHiddenProps = props.Where(s => !s.Name.StartsWith("_")).ToList();
-            List<string> d = returnData.Values.First();
-            List<string> h = returnData.Keys.First();
+            var d = returnData.Values.First();
+            var h = returnData.Keys.First();
             foreach (var field in nonHiddenProps)
             {
                 if (field.PropertyType.IsSubclassOf(typeof(BO4E.COM.COM)))
@@ -210,9 +210,9 @@ namespace BO4E.Reporting
                 {
                     if (field.GetValue(value) != null && field.Name != "gaps")
                     {
-                        Type ItemType = field.GetValue(value).GetType().GetGenericArguments()[0];
+                        var ItemType = field.GetValue(value).GetType().GetGenericArguments()[0];
                         var list = field.GetValue(value);
-                        IList a = (IList)list;
+                        var a = (IList)list;
                         foreach (var s in a)
                         {
                             returnData = Detect(s.GetType(), separator, s, returnData);
@@ -228,12 +228,12 @@ namespace BO4E.Reporting
                     var nestedValue = field.GetValue(value);
                     if (nestedValue != null)
                     {
-                        string muterType = "";
+                        var muterType = "";
                         if (field.DeclaringType.BaseType == typeof(BO4E.COM.COM))
                         {
                             muterType = field.DeclaringType.Name + ".";
                         }
-                        string val = nestedValue.ToString();
+                        var val = nestedValue.ToString();
                         if (field.PropertyType == typeof(DateTime?))
                         {
                             if (((DateTime?)nestedValue).HasValue)
@@ -266,8 +266,8 @@ namespace BO4E.Reporting
         private Dictionary<List<string>, List<string>> DetectGaps(Type type, char separator, object value, Dictionary<List<string>, List<string>> returnData)
         {
             var fields = type.GetFields();
-            List<string> d = returnData.Values.First();
-            List<string> h = returnData.Keys.First();
+            var d = returnData.Values.First();
+            var h = returnData.Keys.First();
             foreach (var field in fields)
             {
                 if (field.FieldType.IsSubclassOf(typeof(BO4E.COM.COM)))
@@ -278,9 +278,9 @@ namespace BO4E.Reporting
                 {
                     if (field.GetValue(value) != null && field.Name == "gaps")
                     {
-                        Type itemType = field.GetValue(value).GetType().GetGenericArguments()[0];
+                        var itemType = field.GetValue(value).GetType().GetGenericArguments()[0];
                         var list = field.GetValue(value);
-                        IList a = (IList)list;
+                        var a = (IList)list;
                         foreach (var s in a)
                         {
                             returnData = DetectGaps(s.GetType(), separator, s, returnData);
@@ -298,8 +298,8 @@ namespace BO4E.Reporting
                         }
                         if (field.DeclaringType == typeof(BasicVerbrauch))
                         {
-                            string muterType = "gap.";
-                            string val = nestedValue.ToString();
+                            var muterType = "gap.";
+                            var val = nestedValue.ToString();
                             if (field.FieldType == typeof(DateTime?))
                             {
                                 if (((DateTime?)nestedValue).HasValue)

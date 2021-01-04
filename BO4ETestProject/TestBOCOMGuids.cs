@@ -16,7 +16,7 @@ namespace TestBO4E
         [TestMethod]
         public void TestBOGuids()
         {
-            Energiemenge em = new Energiemenge()
+            var em = new Energiemenge()
             {
                 LokationsId = "DE123456",
                 LokationsTyp = BO4E.ENUM.Lokationstyp.MaLo,
@@ -24,16 +24,16 @@ namespace TestBO4E
                 Guid = Guid.NewGuid()
             };
 
-            string emJson = JsonConvert.SerializeObject(em);
+            var emJson = JsonConvert.SerializeObject(em);
             Assert.AreEqual<Guid>(em.Guid.Value, JsonConvert.DeserializeObject<Energiemenge>(emJson).Guid.Value);
 
-            Geschaeftspartner gp = new Geschaeftspartner()
+            var gp = new Geschaeftspartner()
             {
                 Gewerbekennzeichnung = true,
                 Guid = Guid.NewGuid()
             };
 
-            string gpJson = JsonConvert.SerializeObject(gp);
+            var gpJson = JsonConvert.SerializeObject(gp);
             Assert.AreEqual<Guid>(gp.Guid.Value, JsonConvert.DeserializeObject<Geschaeftspartner>(gpJson).Guid.Value);
         }
         /*

@@ -17,7 +17,7 @@ namespace TestBO4EExtensions
         [TestMethod]
         public void TestMergeNoOverlap()
         {
-            Verbrauch v1 = new Verbrauch()
+            var v1 = new Verbrauch()
             {
                 Obiskennzahl = "123",
                 Wertermittlungsverfahren = Wertermittlungsverfahren.MESSUNG,
@@ -26,7 +26,7 @@ namespace TestBO4EExtensions
                 Startdatum = new DateTimeOffset(2017, 12, 31, 23, 0, 0, TimeSpan.Zero).UtcDateTime,
                 Enddatum = new DateTimeOffset(2018, 1, 31, 23, 0, 0, TimeSpan.Zero).UtcDateTime
             };
-            Verbrauch v2 = new Verbrauch()
+            var v2 = new Verbrauch()
             {
                 Obiskennzahl = "123",
                 Wertermittlungsverfahren = Wertermittlungsverfahren.MESSUNG,
@@ -35,7 +35,7 @@ namespace TestBO4EExtensions
                 Startdatum = new DateTimeOffset(2018, 2, 28, 23, 0, 0, TimeSpan.Zero).UtcDateTime,
                 Enddatum = new DateTimeOffset(2018, 3, 31, 23, 0, 0, TimeSpan.Zero).UtcDateTime
             };
-            HashSet<Verbrauch> result = v1.Merge(v2);
+            var result = v1.Merge(v2);
             Assert.AreEqual(2, result.Count);
 
             Assert.IsTrue(result.SetEquals(new HashSet<Verbrauch> { v1, v2 }));
@@ -44,7 +44,7 @@ namespace TestBO4EExtensions
         [TestMethod]
         public void TestMergeAdjacentExtensive()
         {
-            Verbrauch v1 = new Verbrauch()
+            var v1 = new Verbrauch()
             {
                 Obiskennzahl = "123",
                 Wertermittlungsverfahren = Wertermittlungsverfahren.MESSUNG,
@@ -53,7 +53,7 @@ namespace TestBO4EExtensions
                 Startdatum = new DateTimeOffset(2017, 12, 31, 23, 0, 0, TimeSpan.Zero).UtcDateTime,
                 Enddatum = new DateTimeOffset(2018, 1, 31, 23, 0, 0, TimeSpan.Zero).UtcDateTime
             };
-            Verbrauch v2 = new Verbrauch()
+            var v2 = new Verbrauch()
             {
                 Obiskennzahl = "123",
                 Wertermittlungsverfahren = Wertermittlungsverfahren.MESSUNG,
@@ -62,7 +62,7 @@ namespace TestBO4EExtensions
                 Startdatum = new DateTimeOffset(2018, 1, 31, 23, 0, 0, TimeSpan.Zero).UtcDateTime,
                 Enddatum = new DateTimeOffset(2018, 2, 28, 23, 0, 0, TimeSpan.Zero).UtcDateTime
             };
-            HashSet<Verbrauch> result = v1.Merge(v2);
+            var result = v1.Merge(v2);
             Assert.AreEqual(1, result.Count);
             Assert.AreEqual(v1.Startdatum, result.First().Startdatum);
             Assert.AreEqual(v2.Enddatum, result.First().Enddatum);
@@ -74,7 +74,7 @@ namespace TestBO4EExtensions
         [TestMethod]
         public void TestMergeAdjacentIntensive()
         {
-            Verbrauch v1 = new Verbrauch()
+            var v1 = new Verbrauch()
             {
                 Obiskennzahl = "123",
                 Wertermittlungsverfahren = Wertermittlungsverfahren.MESSUNG,
@@ -83,7 +83,7 @@ namespace TestBO4EExtensions
                 Startdatum = new DateTimeOffset(2017, 12, 31, 23, 0, 0, TimeSpan.Zero).UtcDateTime,
                 Enddatum = new DateTimeOffset(2018, 1, 31, 23, 0, 0, TimeSpan.Zero).UtcDateTime
             };
-            Verbrauch v2 = new Verbrauch()
+            var v2 = new Verbrauch()
             {
                 Obiskennzahl = "123",
                 Wertermittlungsverfahren = Wertermittlungsverfahren.MESSUNG,
@@ -92,12 +92,12 @@ namespace TestBO4EExtensions
                 Startdatum = new DateTimeOffset(2018, 1, 31, 23, 0, 0, TimeSpan.Zero).UtcDateTime,
                 Enddatum = new DateTimeOffset(2018, 2, 28, 23, 0, 0, TimeSpan.Zero).UtcDateTime
             };
-            HashSet<Verbrauch> result12 = v1.Merge(v2);
+            var result12 = v1.Merge(v2);
             Assert.AreEqual(2, result12.Count);
 
             Assert.IsTrue(result12.SetEquals(v2.Merge(v1)));
 
-            Verbrauch v3 = new Verbrauch()
+            var v3 = new Verbrauch()
             {
                 Obiskennzahl = "123",
                 Wertermittlungsverfahren = Wertermittlungsverfahren.MESSUNG,
@@ -106,7 +106,7 @@ namespace TestBO4EExtensions
                 Startdatum = new DateTimeOffset(2017, 12, 31, 23, 0, 0, TimeSpan.Zero).UtcDateTime,
                 Enddatum = new DateTimeOffset(2018, 1, 31, 23, 0, 0, TimeSpan.Zero).UtcDateTime
             };
-            Verbrauch v4 = new Verbrauch()
+            var v4 = new Verbrauch()
             {
                 Obiskennzahl = "123",
                 Wertermittlungsverfahren = Wertermittlungsverfahren.MESSUNG,
@@ -115,7 +115,7 @@ namespace TestBO4EExtensions
                 Startdatum = new DateTimeOffset(2018, 1, 31, 23, 0, 0, TimeSpan.Zero).UtcDateTime,
                 Enddatum = new DateTimeOffset(2018, 2, 28, 23, 0, 0, TimeSpan.Zero).UtcDateTime
             };
-            HashSet<Verbrauch> result34 = v3.Merge(v4);
+            var result34 = v3.Merge(v4);
             //Assert.AreEqual(1, result34.Count);
 
             Assert.IsTrue(result34.SetEquals(v4.Merge(v3)));
@@ -125,7 +125,7 @@ namespace TestBO4EExtensions
         [TestMethod]
         public void TestMergeOverlappingExtensive()
         {
-            Verbrauch v1 = new Verbrauch()
+            var v1 = new Verbrauch()
             {
                 Obiskennzahl = "123",
                 Wertermittlungsverfahren = Wertermittlungsverfahren.MESSUNG,
@@ -134,7 +134,7 @@ namespace TestBO4EExtensions
                 Startdatum = new DateTimeOffset(2017, 12, 31, 23, 0, 0, TimeSpan.Zero).UtcDateTime,
                 Enddatum = new DateTimeOffset(2018, 1, 31, 23, 0, 0, TimeSpan.Zero).UtcDateTime
             };
-            Verbrauch v2 = new Verbrauch()
+            var v2 = new Verbrauch()
             {
                 Obiskennzahl = "123",
                 Wertermittlungsverfahren = Wertermittlungsverfahren.MESSUNG,
@@ -143,7 +143,7 @@ namespace TestBO4EExtensions
                 Startdatum = new DateTimeOffset(2018, 1, 15, 23, 0, 0, TimeSpan.Zero).UtcDateTime,
                 Enddatum = new DateTimeOffset(2018, 2, 28, 23, 0, 0, TimeSpan.Zero).UtcDateTime
             };
-            HashSet<Verbrauch> result = v1.Merge(v2);
+            var result = v1.Merge(v2);
             Assert.AreEqual(1, result.Count);
             Assert.AreEqual(v1.Startdatum, result.First().Startdatum);
             Assert.AreEqual(v2.Enddatum, result.First().Enddatum);
@@ -156,7 +156,7 @@ namespace TestBO4EExtensions
         [TestMethod]
         public void TestMergeOverlappingIntensive()
         {
-            Verbrauch v1 = new Verbrauch()
+            var v1 = new Verbrauch()
             {
                 Obiskennzahl = "123",
                 Wertermittlungsverfahren = Wertermittlungsverfahren.MESSUNG,
@@ -165,7 +165,7 @@ namespace TestBO4EExtensions
                 Startdatum = new DateTimeOffset(2017, 12, 31, 23, 0, 0, TimeSpan.Zero).UtcDateTime,
                 Enddatum = new DateTimeOffset(2018, 1, 31, 23, 0, 0, TimeSpan.Zero).UtcDateTime
             };
-            Verbrauch v2 = new Verbrauch()
+            var v2 = new Verbrauch()
             {
                 Obiskennzahl = "123",
                 Wertermittlungsverfahren = Wertermittlungsverfahren.MESSUNG,
@@ -175,7 +175,7 @@ namespace TestBO4EExtensions
                 Enddatum = new DateTimeOffset(2018, 2, 28, 23, 0, 0, TimeSpan.Zero).UtcDateTime
             };
             var rawResult = v1.Merge(v2);
-            List<Verbrauch> result = new List<Verbrauch>(rawResult);
+            var result = new List<Verbrauch>(rawResult);
             Assert.AreEqual(3, result.Count);
             result.Sort(new VerbrauchDateTimeComparer());
             Assert.AreEqual(v1.Startdatum, result.First().Startdatum);
@@ -192,7 +192,7 @@ namespace TestBO4EExtensions
         [TestMethod]
         public void TestMergeRedundantIntensiveSameTime()
         {
-            Verbrauch v1 = new Verbrauch()
+            var v1 = new Verbrauch()
             {
                 Obiskennzahl = "123",
                 Wertermittlungsverfahren = Wertermittlungsverfahren.MESSUNG,
@@ -201,7 +201,7 @@ namespace TestBO4EExtensions
                 Startdatum = new DateTimeOffset(2017, 12, 31, 23, 0, 0, TimeSpan.Zero).UtcDateTime,
                 Enddatum = new DateTimeOffset(2018, 1, 31, 23, 0, 0, TimeSpan.Zero).UtcDateTime
             };
-            Verbrauch v2 = new Verbrauch()
+            var v2 = new Verbrauch()
             {
                 Obiskennzahl = "123",
                 Wertermittlungsverfahren = Wertermittlungsverfahren.MESSUNG,
@@ -211,7 +211,7 @@ namespace TestBO4EExtensions
                 Enddatum = new DateTimeOffset(2018, 1, 31, 23, 0, 0, TimeSpan.Zero).UtcDateTime
             };
             var rawResult = v1.MergeRedundant(v2, true);
-            List<Verbrauch> result = new List<Verbrauch>(rawResult);
+            var result = new List<Verbrauch>(rawResult);
             Assert.AreEqual(1, result.Count);
             Assert.AreEqual(v1, v2);
             Assert.AreEqual(v1, result.First());
@@ -221,7 +221,7 @@ namespace TestBO4EExtensions
         [TestMethod]
         public void TestMergeRedundantExtensiveSameTime()
         {
-            Verbrauch v1 = new Verbrauch()
+            var v1 = new Verbrauch()
             {
                 Obiskennzahl = "123",
                 Wertermittlungsverfahren = Wertermittlungsverfahren.MESSUNG,
@@ -230,7 +230,7 @@ namespace TestBO4EExtensions
                 Startdatum = new DateTimeOffset(2017, 12, 31, 23, 0, 0, TimeSpan.Zero).UtcDateTime,
                 Enddatum = new DateTimeOffset(2018, 1, 31, 23, 0, 0, TimeSpan.Zero).UtcDateTime
             };
-            Verbrauch v2 = new Verbrauch()
+            var v2 = new Verbrauch()
             {
                 Obiskennzahl = "123",
                 Wertermittlungsverfahren = Wertermittlungsverfahren.MESSUNG,
@@ -240,7 +240,7 @@ namespace TestBO4EExtensions
                 Enddatum = new DateTimeOffset(2018, 1, 31, 23, 0, 0, TimeSpan.Zero).UtcDateTime
             };
             var rawResult = v1.MergeRedundant(v2, true);
-            List<Verbrauch> result = new List<Verbrauch>(rawResult);
+            var result = new List<Verbrauch>(rawResult);
             Assert.AreEqual(1, result.Count);
             Assert.AreEqual(5, result.First().Wert);
         }
@@ -249,7 +249,7 @@ namespace TestBO4EExtensions
         [TestMethod]
         public void TestMergeRedundantExtensiveLeftJustifiedOverlap()
         {
-            Verbrauch v1 = new Verbrauch()
+            var v1 = new Verbrauch()
             {
                 Obiskennzahl = "123",
                 Wertermittlungsverfahren = Wertermittlungsverfahren.MESSUNG,
@@ -258,7 +258,7 @@ namespace TestBO4EExtensions
                 Startdatum = new DateTimeOffset(2017, 12, 31, 23, 0, 0, TimeSpan.Zero).UtcDateTime,
                 Enddatum = new DateTimeOffset(2018, 2, 28, 23, 0, 0, TimeSpan.Zero).UtcDateTime
             };
-            Verbrauch v2 = new Verbrauch()
+            var v2 = new Verbrauch()
             {
                 Obiskennzahl = "123",
                 Wertermittlungsverfahren = Wertermittlungsverfahren.MESSUNG,
@@ -269,7 +269,7 @@ namespace TestBO4EExtensions
             };
             var rawResult = v1.MergeRedundant(v2, true);
 
-            List<Verbrauch> result = new List<Verbrauch>(rawResult);
+            var result = new List<Verbrauch>(rawResult);
             result.Sort(new VerbrauchDateTimeComparer());
             Assert.AreEqual(1, result.Count);
 
@@ -286,10 +286,10 @@ namespace TestBO4EExtensions
         [TestMethod]
         public void TestMergeRedundantRightJustifiedOverlap()
         {
-            Verbrauch v1 = JsonConvert.DeserializeObject<Verbrauch>("{\"startdatum\":\"2018-12-25T16:22:00Z\",\"enddatum\":\"2019-12-25T08:20:00Z\",\"wertermittlungsverfahren\":0,\"obiskennzahl\":\"1-1:1.8.0\",\"wert\":1539,\"einheit\":2,\"zaehlernummer\":\"10000548\"}");
-            Verbrauch v2 = JsonConvert.DeserializeObject<Verbrauch>("{\"startdatum\":\"2018-09-01T00:00:00Z\",\"enddatum\":\"2018-12-25T16:22:00Z\",\"wertermittlungsverfahren\":0,\"obiskennzahl\":\"1-1:1.8.0\",\"wert\":911,\"einheit\":2,\"zaehlernummer\":\"10000548\"}");
+            var v1 = JsonConvert.DeserializeObject<Verbrauch>("{\"startdatum\":\"2018-12-25T16:22:00Z\",\"enddatum\":\"2019-12-25T08:20:00Z\",\"wertermittlungsverfahren\":0,\"obiskennzahl\":\"1-1:1.8.0\",\"wert\":1539,\"einheit\":2,\"zaehlernummer\":\"10000548\"}");
+            var v2 = JsonConvert.DeserializeObject<Verbrauch>("{\"startdatum\":\"2018-09-01T00:00:00Z\",\"enddatum\":\"2018-12-25T16:22:00Z\",\"wertermittlungsverfahren\":0,\"obiskennzahl\":\"1-1:1.8.0\",\"wert\":911,\"einheit\":2,\"zaehlernummer\":\"10000548\"}");
             var rawResult = v1.MergeRedundant(v2, true);
-            List<Verbrauch> result = new List<Verbrauch>(rawResult);
+            var result = new List<Verbrauch>(rawResult);
             result.Sort(new VerbrauchDateTimeComparer());
             Assert.AreEqual(1, result.Count);
 
@@ -362,7 +362,7 @@ namespace TestBO4EExtensions
         [TestMethod]
         public void TestHfSapDataDetangle()
         {
-            List<Verbrauch> testList = JsonConvert.DeserializeObject<List<Verbrauch>>("[{\"startdatum\":\"2000-01-01T00:00:00Z\",\"enddatum\":\"2018-09-01T00:00:00Z\",\"wertermittlungsverfahren\":1,\"obiskennzahl\":\"1-1:1.8.0\",\"wert\":50,\"einheit\":2,\"zaehlernummer\":\"10000548\"},{\"startdatum\":\"2000-01-01T00:00:00Z\",\"enddatum\":\"2018-12-25T16:22:00Z\",\"wertermittlungsverfahren\":0,\"obiskennzahl\":\"1-1:1.8.0\",\"wert\":961,\"einheit\":2,\"zaehlernummer\":\"10000548\"},{\"startdatum\":\"2000-01-01T00:00:00Z\",\"enddatum\":\"2019-12-25T08:20:00Z\",\"wertermittlungsverfahren\":1,\"obiskennzahl\":\"1-1:1.8.0\",\"wert\":2500,\"einheit\":2,\"zaehlernummer\":\"10000548\"},{\"startdatum\":\"2018-09-01T00:00:00Z\",\"enddatum\":\"2018-12-25T16:22:00Z\",\"wertermittlungsverfahren\":0,\"obiskennzahl\":\"1-1:1.8.0\",\"wert\":911,\"einheit\":2,\"zaehlernummer\":\"10000548\"},{\"startdatum\":\"2018-09-01T00:00:00Z\",\"enddatum\":\"2019-12-25T08:20:00Z\",\"wertermittlungsverfahren\":1,\"obiskennzahl\":\"1-1:1.8.0\",\"wert\":2450,\"einheit\":2,\"zaehlernummer\":\"10000548\"},{\"startdatum\":\"2018-12-25T16:22:00Z\",\"enddatum\":\"2019-12-25T08:20:00Z\",\"wertermittlungsverfahren\":0,\"obiskennzahl\":\"1-1:1.8.0\",\"wert\":1539,\"einheit\":2,\"zaehlernummer\":\"10000548\"}]");
+            var testList = JsonConvert.DeserializeObject<List<Verbrauch>>("[{\"startdatum\":\"2000-01-01T00:00:00Z\",\"enddatum\":\"2018-09-01T00:00:00Z\",\"wertermittlungsverfahren\":1,\"obiskennzahl\":\"1-1:1.8.0\",\"wert\":50,\"einheit\":2,\"zaehlernummer\":\"10000548\"},{\"startdatum\":\"2000-01-01T00:00:00Z\",\"enddatum\":\"2018-12-25T16:22:00Z\",\"wertermittlungsverfahren\":0,\"obiskennzahl\":\"1-1:1.8.0\",\"wert\":961,\"einheit\":2,\"zaehlernummer\":\"10000548\"},{\"startdatum\":\"2000-01-01T00:00:00Z\",\"enddatum\":\"2019-12-25T08:20:00Z\",\"wertermittlungsverfahren\":1,\"obiskennzahl\":\"1-1:1.8.0\",\"wert\":2500,\"einheit\":2,\"zaehlernummer\":\"10000548\"},{\"startdatum\":\"2018-09-01T00:00:00Z\",\"enddatum\":\"2018-12-25T16:22:00Z\",\"wertermittlungsverfahren\":0,\"obiskennzahl\":\"1-1:1.8.0\",\"wert\":911,\"einheit\":2,\"zaehlernummer\":\"10000548\"},{\"startdatum\":\"2018-09-01T00:00:00Z\",\"enddatum\":\"2019-12-25T08:20:00Z\",\"wertermittlungsverfahren\":1,\"obiskennzahl\":\"1-1:1.8.0\",\"wert\":2450,\"einheit\":2,\"zaehlernummer\":\"10000548\"},{\"startdatum\":\"2018-12-25T16:22:00Z\",\"enddatum\":\"2019-12-25T08:20:00Z\",\"wertermittlungsverfahren\":0,\"obiskennzahl\":\"1-1:1.8.0\",\"wert\":1539,\"einheit\":2,\"zaehlernummer\":\"10000548\"}]");
             Assert.AreEqual(3, testList.Where(v => v.Wertermittlungsverfahren == Wertermittlungsverfahren.MESSUNG).Count());
             Assert.AreEqual(3, testList.Where(v => v.Wertermittlungsverfahren == Wertermittlungsverfahren.PROGNOSE).Count());
             var result = Detangle(testList);
@@ -395,7 +395,7 @@ namespace TestBO4EExtensions
         [TestMethod]
         public void TestUnitConversion()
         {
-            Verbrauch v1 = new Verbrauch()
+            var v1 = new Verbrauch()
             {
                 Obiskennzahl = "123",
                 Wertermittlungsverfahren = Wertermittlungsverfahren.MESSUNG,

@@ -156,7 +156,7 @@ namespace BO4E.COM
         public Rechnungsposition ToRechnungsposition()
         {
             // todo: make this reflection based. this is pure pita. in fact the whole process of the flat structure is pita for sap
-            Rechnungsposition result = new Rechnungsposition()
+            var result = new Rechnungsposition()
             {
                 Positionsnummer = Positionsnummer,
                 LieferungVon = LieferungVon,

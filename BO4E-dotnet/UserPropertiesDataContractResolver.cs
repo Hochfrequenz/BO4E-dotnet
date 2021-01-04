@@ -29,12 +29,12 @@ namespace BO4E
         /// <inheritdoc cref="DefaultContractResolver.ResolveContract(Type)"/>
         public override JsonContract ResolveContract(Type type)
         {
-            JsonContract contract = base.ResolveContract(type);
+            var contract = base.ResolveContract(type);
             if (contract is JsonObjectContract objContract)
             {
                 if (objContract.ExtensionDataSetter != null)
                 {
-                    ExtensionDataSetter oldSetter = objContract.ExtensionDataSetter;
+                    var oldSetter = objContract.ExtensionDataSetter;
                     objContract.ExtensionDataSetter = (o, key, value) =>
                     {
                         if (_allowList.Contains(key))

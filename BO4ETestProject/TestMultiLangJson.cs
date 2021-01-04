@@ -37,7 +37,7 @@ namespace TestBO4E
         [TestMethod]
         public void TestContractResolverSerialization()
         {
-            MultiLangBo mlb = new MultiLangBo()
+            var mlb = new MultiLangBo()
             {
                 datum_deutsch = new DateTimeOffset(2018, 1, 1, 0, 0, 0, TimeSpan.Zero),
                 wert_deutsch = "Hallo Welt"
@@ -54,7 +54,7 @@ namespace TestBO4E
             Assert.IsFalse(json.Contains("datum_deutsch"));
             Assert.IsFalse(json.Contains("wert_deutsch"));
 
-            string DEjson = JsonConvert.SerializeObject(mlb);
+            var DEjson = JsonConvert.SerializeObject(mlb);
             Assert.IsFalse(DEjson.Contains("date_english"));
             Assert.IsFalse(DEjson.Contains("value_english"));
             Assert.IsTrue(DEjson.Contains("datum_deutsch"));
@@ -64,7 +64,7 @@ namespace TestBO4E
         [TestMethod]
         public void TestNestedContractResolverSerialization()
         {
-            MultiLangBo mlb = new MultiLangBo()
+            var mlb = new MultiLangBo()
             {
                 datum_deutsch = new DateTimeOffset(2018, 1, 1, 0, 0, 0, TimeSpan.Zero),
                 wert_deutsch = "Hallo Welt",
@@ -96,7 +96,7 @@ namespace TestBO4E
             Assert.IsTrue(json.Contains("internal_english"));
             Assert.IsFalse(json.Contains("intern_deutsch"));
 
-            string DEjson = JsonConvert.SerializeObject(mlb);
+            var DEjson = JsonConvert.SerializeObject(mlb);
             Assert.IsFalse(DEjson.Contains("date_english"));
             Assert.IsFalse(DEjson.Contains("value_english"));
             Assert.IsTrue(DEjson.Contains("datum_deutsch"));
@@ -105,7 +105,7 @@ namespace TestBO4E
             Assert.IsTrue(DEjson.Contains("intern_deutsch"));
             Assert.IsFalse(DEjson.Contains("internal_english"));
 
-            MultiLangBo ml = JsonConvert.DeserializeObject<MultiLangBo>(DEjson);
+            var ml = JsonConvert.DeserializeObject<MultiLangBo>(DEjson);
             Assert.AreNotEqual(DateTime.MinValue, ml.datum_deutsch.UtcDateTime);
         }
 

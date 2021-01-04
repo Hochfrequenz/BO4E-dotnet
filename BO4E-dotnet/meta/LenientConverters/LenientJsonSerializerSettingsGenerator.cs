@@ -29,7 +29,7 @@ namespace BO4E.meta.LenientConverters
         /// <returns></returns>
         public static JsonSerializerSettings GetJsonSerializerSettings(this LenientParsing lenient, HashSet<string> userPropertiesWhiteList)
         {
-            List<JsonConverter> converters = new List<JsonConverter>();
+            var converters = new List<JsonConverter>();
             foreach (LenientParsing lp in Enum.GetValues(typeof(LenientParsing)))
             {
                 if (lenient.HasFlag(lp))
@@ -75,7 +75,7 @@ namespace BO4E.meta.LenientConverters
             {
                 contractResolver = new DefaultContractResolver();
             }
-            JsonSerializerSettings settings = new JsonSerializerSettings
+            var settings = new JsonSerializerSettings
             {
                 Converters = converters,
                 DateParseHandling = DateParseHandling.None,

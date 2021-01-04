@@ -24,7 +24,7 @@ namespace BO4E
         /// <exception cref="ArgumentNullException">iff <paramref name="userPropertyKey"/> is null or whitespace</exception>
         public static bool TryGetUserProperty<TUserProperty, TParent>(this TParent parent, string userPropertyKey, out TUserProperty value) where TParent : IUserProperties
         {
-            IDictionary<string, JToken> up = parent.UserProperties;
+            var up = parent.UserProperties;
             if (string.IsNullOrWhiteSpace(userPropertyKey)) throw new ArgumentNullException(nameof(userPropertyKey));
             if (up != null && up.TryGetValue(userPropertyKey, out var upToken))
             {

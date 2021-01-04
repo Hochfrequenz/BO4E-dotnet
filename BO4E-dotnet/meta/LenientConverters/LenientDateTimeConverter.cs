@@ -73,11 +73,11 @@ namespace BO4E.meta.LenientConverters
             // First try to parse the date string as is (in case it is correctly formatted)
             if (objectType == typeof(DateTimeOffset) || objectType == typeof(DateTimeOffset?))
             {
-                if (DateTimeOffset.TryParse(rawDate, out DateTimeOffset dateTimeOffset))
+                if (DateTimeOffset.TryParse(rawDate, out var dateTimeOffset))
                 {
                     return dateTimeOffset;
                 }
-                foreach ((string dtf, bool asUniversal) in _allowedDatetimeFormats)
+                foreach ((var dtf, var asUniversal) in _allowedDatetimeFormats)
                 {
                     if (DateTimeOffset.TryParseExact(rawDate, dtf, CultureInfo.InvariantCulture, asUniversal ? DateTimeStyles.AssumeUniversal : DateTimeStyles.None, out dateTimeOffset))
                     {
@@ -87,11 +87,11 @@ namespace BO4E.meta.LenientConverters
             }
             else if (objectType == typeof(DateTime) || objectType == typeof(DateTime?))
             {
-                if (DateTime.TryParse(rawDate, out DateTime dateTime))
+                if (DateTime.TryParse(rawDate, out var dateTime))
                 {
                     return dateTime;
                 }
-                foreach ((string dtf, bool asUniversal) in _allowedDatetimeFormats)
+                foreach ((var dtf, var asUniversal) in _allowedDatetimeFormats)
                 {
                     if (DateTime.TryParseExact(rawDate, dtf, CultureInfo.InvariantCulture, DateTimeStyles.None, out dateTime))
                     {

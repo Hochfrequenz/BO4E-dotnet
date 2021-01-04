@@ -16,7 +16,7 @@ namespace TestBO4E
             {
                 Mengeneinheit.TAG
             };
-            string jsonString = JsonConvert.SerializeObject(einheiten, new StringEnumConverter());
+            var jsonString = JsonConvert.SerializeObject(einheiten, new StringEnumConverter());
             Assert.IsTrue(jsonString.Contains("TAG"));
         }
     }

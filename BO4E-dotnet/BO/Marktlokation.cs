@@ -245,8 +245,8 @@ namespace BO4E.BO
             {
                 return false;
             }
-            string expectedChecksum = GetChecksum(id);
-            string actualChecksum = id.Substring(10, 1);
+            var expectedChecksum = GetChecksum(id);
+            var actualChecksum = id.Substring(10, 1);
             return actualChecksum == expectedChecksum;
         }
 
@@ -274,13 +274,13 @@ namespace BO4E.BO
             {
                 throw new ArgumentException($"Input '{nameof(input)}' must be numeric was '{input}'");
             }
-            int oddChecksum = 0;
-            int evenChecksum = 0;
+            var oddChecksum = 0;
+            var evenChecksum = 0;
 
             // start counting at 1 to be consistent with the above description of "even" and  "odd" but stop at tenth digit.
-            for (int i = 1; i < 11; i++)
+            for (var i = 1; i < 11; i++)
             {
-                string s = input.Substring(i - 1, 1);
+                var s = input.Substring(i - 1, 1);
                 if (i % 2 == 0)
                 {
                     evenChecksum += 2 * Int32.Parse(s);
@@ -290,7 +290,7 @@ namespace BO4E.BO
                     oddChecksum += Int32.Parse(s);
                 }
             }
-            int result = (10 - ((evenChecksum + oddChecksum) % 10)) % 10;
+            var result = (10 - ((evenChecksum + oddChecksum) % 10)) % 10;
             return result.ToString();
         }
 

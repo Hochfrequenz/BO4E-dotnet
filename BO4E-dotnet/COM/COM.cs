@@ -114,7 +114,7 @@ namespace BO4E.COM
         /// <inheritdoc/>
         public override int GetHashCode()
         {
-            int result = 31; // I read online that a medium sized prime was a good choice ;)
+            var result = 31; // I read online that a medium sized prime was a good choice ;)
             unchecked
             {
                 result *= this.GetType().GetHashCode();

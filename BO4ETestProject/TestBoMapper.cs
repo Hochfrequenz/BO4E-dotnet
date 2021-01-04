@@ -23,17 +23,17 @@ namespace TestBO4E
         [TestMethod]
         public void TestBoMapping()
         {
-            string[] files = Directory.GetFiles($"BoMapperTests/", "*.json");
-            foreach (string file in files)
+            var files = Directory.GetFiles($"BoMapperTests/", "*.json");
+            foreach (var file in files)
             {
                 JObject json;
-                using (StreamReader r = new StreamReader(file))
+                using (var r = new StreamReader(file))
                 {
-                    string jsonString = r.ReadToEnd();
+                    var jsonString = r.ReadToEnd();
                     json = JsonConvert.DeserializeObject<JObject>(jsonString);
                 }
                 Assert.IsNotNull(json["objectName"], $"You have to specify the object name in test file {file}");
-                LenientParsing lenients = LenientParsing.Strict; // default
+                var lenients = LenientParsing.Strict; // default
                 if (json["lenientDateTime"] != null && (bool)json["lenientDateTime"])
                 {
                     lenients |= LenientParsing.DateTime;
@@ -62,7 +62,7 @@ namespace TestBO4E
                 {
                     bo = BoMapper.MapObject(json["objectName"].ToString(), (JObject)json["input"], lenients);
                 }
-                string regularOutputString = JsonConvert.SerializeObject(bo, new StringEnumConverter());
+                var regularOutputString = JsonConvert.SerializeObject(bo, new StringEnumConverter());
                 if (bo.GetType() == typeof(Rechnung))
                 {
                     continue; // todo: fix this!
@@ -146,9 +146,9 @@ namespace TestBO4E
         public void TestVertragQuickFix()
         {
             JObject json;
-            using (StreamReader r = new StreamReader("BoMapperTests/vertragLokationsIdUp.json"))
+            using (var r = new StreamReader("BoMapperTests/vertragLokationsIdUp.json"))
             {
-                string jsonString = r.ReadToEnd();
+                var jsonString = r.ReadToEnd();
                 json = JsonConvert.DeserializeObject<JObject>(jsonString);
             }
             var v = JsonConvert.DeserializeObject<Vertrag>(json["input"].ToString(), LenientParsing.MOST_LENIENT.GetJsonSerializerSettings());
@@ -161,12 +161,12 @@ namespace TestBO4E
         {
             // first test serialization of complete business object
             JObject json;
-            using (StreamReader r = new StreamReader("BoMapperTests/energiemenge_sommerzeit_bug.json"))
+            using (var r = new StreamReader("BoMapperTests/energiemenge_sommerzeit_bug.json"))
             {
-                string jsonString = r.ReadToEnd();
+                var jsonString = r.ReadToEnd();
                 json = JsonConvert.DeserializeObject<JObject>(jsonString);
             }
-            Energiemenge em = JsonConvert.DeserializeObject<Energiemenge>(json["input"].ToString(), LenientParsing.MOST_LENIENT.GetJsonSerializerSettings());
+            var em = JsonConvert.DeserializeObject<Energiemenge>(json["input"].ToString(), LenientParsing.MOST_LENIENT.GetJsonSerializerSettings());
             if (TimeZoneInfo.Local == CentralEuropeStandardTime.CENTRAL_EUROPE_STANDARD_TIME)
             {
                 Assert.AreEqual(2, em.Energieverbrauch.Count); // weil 2 verschiedene status
@@ -178,13 +178,13 @@ namespace TestBO4E
         {
             // first test serialization of complete business object
             JObject json;
-            using (StreamReader r = new StreamReader("BoMapperTests/Vertrag_lenient_String.json"))
+            using (var r = new StreamReader("BoMapperTests/Vertrag_lenient_String.json"))
             {
-                string jsonString = r.ReadToEnd();
+                var jsonString = r.ReadToEnd();
                 json = JsonConvert.DeserializeObject<JObject>(jsonString);
             }
-            LenientParsing lenients = LenientParsing.StringToInt;
-            Vertrag v = JsonConvert.DeserializeObject<Vertrag>(json["input"].ToString(), lenients.GetJsonSerializerSettings());
+            var lenients = LenientParsing.StringToInt;
+            var v = JsonConvert.DeserializeObject<Vertrag>(json["input"].ToString(), lenients.GetJsonSerializerSettings());
             Assert.AreEqual(v.Vertragskonditionen.AnzahlAbschlaege, 12);
         }
 
@@ -193,12 +193,12 @@ namespace TestBO4E
         {
             // first test serialization of complete business object
             JObject json;
-            using (StreamReader r = new StreamReader("BoMapperTests/energiemenge_profdecimal_verbrauch_bug.json"))
+            using (var r = new StreamReader("BoMapperTests/energiemenge_profdecimal_verbrauch_bug.json"))
             {
-                string jsonString = r.ReadToEnd();
+                var jsonString = r.ReadToEnd();
                 json = JsonConvert.DeserializeObject<JObject>(jsonString);
             }
-            Energiemenge em = JsonConvert.DeserializeObject<Energiemenge>(json["input"].ToString(), LenientParsing.MOST_LENIENT.GetJsonSerializerSettings());
+            var em = JsonConvert.DeserializeObject<Energiemenge>(json["input"].ToString(), LenientParsing.MOST_LENIENT.GetJsonSerializerSettings());
             Assert.AreEqual(4, em.Energieverbrauch.Count);
             Assert.AreEqual(59.0M, em.Energieverbrauch[0].Wert);
             Assert.AreEqual(58.0M, em.Energieverbrauch[1].Wert);
@@ -211,12 +211,12 @@ namespace TestBO4E
         {
             // first test serialization of complete business object
             JObject json;
-            using (StreamReader r = new StreamReader("BoMapperTests/energiemenge_profdecimal_em_bug.json"))
+            using (var r = new StreamReader("BoMapperTests/energiemenge_profdecimal_em_bug.json"))
             {
-                string jsonString = r.ReadToEnd();
+                var jsonString = r.ReadToEnd();
                 json = JsonConvert.DeserializeObject<JObject>(jsonString);
             }
-            Energiemenge em = JsonConvert.DeserializeObject<Energiemenge>(json["input"].ToString(), LenientParsing.MOST_LENIENT.GetJsonSerializerSettings());
+            var em = JsonConvert.DeserializeObject<Energiemenge>(json["input"].ToString(), LenientParsing.MOST_LENIENT.GetJsonSerializerSettings());
             Assert.AreEqual(1.375000M, em.Energieverbrauch.First().Wert);
             Assert.AreEqual(1.2130000M, em.Energieverbrauch.Last().Wert);
         }
@@ -224,25 +224,25 @@ namespace TestBO4E
         [TestMethod]
         public void TestSapTimeZoneUserProperties()
         {
-            Verbrauch v1 = JsonConvert.DeserializeObject<Verbrauch>("{\"startdatum\":\"2019-03-30T02:45:00\",\"enddatum\":\"2019-03-30T03:15:00\",\"wertermittlungsverfahren\":1,\"obiskennzahl\":\"1-0:1.29.0\",\"wert\":0.0,\"einheit\":1,\"zw\":\"000000000030000301\",\"Status\":\"IU015\",\"sap_timezone\":\"CET\"}");
+            var v1 = JsonConvert.DeserializeObject<Verbrauch>("{\"startdatum\":\"2019-03-30T02:45:00\",\"enddatum\":\"2019-03-30T03:15:00\",\"wertermittlungsverfahren\":1,\"obiskennzahl\":\"1-0:1.29.0\",\"wert\":0.0,\"einheit\":1,\"zw\":\"000000000030000301\",\"Status\":\"IU015\",\"sap_timezone\":\"CET\"}");
             Assert.AreEqual(DateTimeKind.Utc, v1.Startdatum.Kind);
             Assert.AreEqual(DateTimeKind.Utc, v1.Enddatum.Kind);
             Assert.AreEqual(2.75, v1.Startdatum.TimeOfDay.TotalHours);
             Assert.AreEqual(3.25, v1.Enddatum.TimeOfDay.TotalHours);
 
-            Verbrauch v2 = JsonConvert.DeserializeObject<Verbrauch>("{\"startdatum\":\"2019-03-30T02:45:00\",\"enddatum\":\"2019-03-30T03:15:00\",\"wertermittlungsverfahren\":1,\"obiskennzahl\":\"1-0:1.29.0\",\"wert\":0.0,\"einheit\":1,\"zw\":\"000000000030000301\",\"Status\":\"IU015\",\"sap_timezone\":\"UTC\"}");
+            var v2 = JsonConvert.DeserializeObject<Verbrauch>("{\"startdatum\":\"2019-03-30T02:45:00\",\"enddatum\":\"2019-03-30T03:15:00\",\"wertermittlungsverfahren\":1,\"obiskennzahl\":\"1-0:1.29.0\",\"wert\":0.0,\"einheit\":1,\"zw\":\"000000000030000301\",\"Status\":\"IU015\",\"sap_timezone\":\"UTC\"}");
             Assert.AreEqual(DateTimeKind.Utc, v2.Startdatum.Kind);
             Assert.AreEqual(DateTimeKind.Utc, v2.Enddatum.Kind);
             Assert.AreEqual(2.75, v2.Startdatum.TimeOfDay.TotalHours);
             Assert.AreEqual(3.25, v2.Enddatum.TimeOfDay.TotalHours);
 
-            Verbrauch v3 = JsonConvert.DeserializeObject<Verbrauch>("{\"startdatum\":\"2019-10-27T02:30:00\",\"enddatum\":\"2019-10-27T02:45:00\",\"wertermittlungsverfahren\":1,\"obiskennzahl\":\"1-0:1.29.0\",\"wert\":0.0,\"einheit\":1,\"zw\":\"000000000030000301\",\"Status\":\"IU015\",\"sap_timezone\":\"CEST\"}");
+            var v3 = JsonConvert.DeserializeObject<Verbrauch>("{\"startdatum\":\"2019-10-27T02:30:00\",\"enddatum\":\"2019-10-27T02:45:00\",\"wertermittlungsverfahren\":1,\"obiskennzahl\":\"1-0:1.29.0\",\"wert\":0.0,\"einheit\":1,\"zw\":\"000000000030000301\",\"Status\":\"IU015\",\"sap_timezone\":\"CEST\"}");
             Assert.AreEqual(DateTimeKind.Utc, v3.Startdatum.Kind);
             Assert.AreEqual(DateTimeKind.Utc, v3.Enddatum.Kind);
             Assert.AreEqual(2.5, v3.Startdatum.TimeOfDay.TotalHours);
             Assert.AreEqual(2.75, v3.Enddatum.TimeOfDay.TotalHours);
 
-            Verbrauch v4 = JsonConvert.DeserializeObject<Verbrauch>("{\"startdatum\":\"2019-10-27T02:45:00\",\"enddatum\":\"2019-10-27T03:15:00\",\"wertermittlungsverfahren\":1,\"obiskennzahl\":\"1-0:1.29.0\",\"wert\":0.0,\"einheit\":1,\"zw\":\"000000000030000301\",\"Status\":\"IU015\",\"sap_timezone\":\"CEST\"}");
+            var v4 = JsonConvert.DeserializeObject<Verbrauch>("{\"startdatum\":\"2019-10-27T02:45:00\",\"enddatum\":\"2019-10-27T03:15:00\",\"wertermittlungsverfahren\":1,\"obiskennzahl\":\"1-0:1.29.0\",\"wert\":0.0,\"einheit\":1,\"zw\":\"000000000030000301\",\"Status\":\"IU015\",\"sap_timezone\":\"CEST\"}");
             Assert.AreEqual(DateTimeKind.Utc, v4.Startdatum.Kind);
             Assert.AreEqual(DateTimeKind.Utc, v4.Enddatum.Kind);
             Assert.AreEqual(2.75, v4.Startdatum.TimeOfDay.TotalHours);
@@ -253,17 +253,17 @@ namespace TestBO4E
         public void TestSommerzeitumstellung()
         {
             // endzeitpunkt wird im sap aus startzeitpunkt + 1 std zusammengesetzt. bei umstellung auf sommerzeit entsteht als artefakt ein shift
-            Verbrauch v1 = JsonConvert.DeserializeObject<Verbrauch>("{\"zw\":\"000000000020720475\",\"startdatum\":\"201903310100\",\"enddatum\":\"201903310300\",\"wert\":263,\"status\":\"IU021\",\"obiskennzahl\":\"7-10:99.33.17\",\"wertermittlungsverfahren\":\"MESSUNG\",\"einheit\":\"KWH\",\"sap_timezone\":\"CET\"}",
+            var v1 = JsonConvert.DeserializeObject<Verbrauch>("{\"zw\":\"000000000020720475\",\"startdatum\":\"201903310100\",\"enddatum\":\"201903310300\",\"wert\":263,\"status\":\"IU021\",\"obiskennzahl\":\"7-10:99.33.17\",\"wertermittlungsverfahren\":\"MESSUNG\",\"einheit\":\"KWH\",\"sap_timezone\":\"CET\"}",
                 new LenientDateTimeConverter());
             Assert.AreEqual(new DateTimeOffset(2019, 3, 31, 2, 0, 0, TimeSpan.Zero), v1.Enddatum);
 
             // negativ test: nur in der sommerzeit soll das nicht passieren
-            Verbrauch v2 = JsonConvert.DeserializeObject<Verbrauch>("{\"zw\":\"000000000020720475\",\"startdatum\":\"201905310100\",\"enddatum\":\"201905310300\",\"wert\":263,\"status\":\"IU021\",\"obiskennzahl\":\"7-10:99.33.17\",\"wertermittlungsverfahren\":\"MESSUNG\",\"einheit\":\"KWH\",\"sap_timezone\":\"CET\"}",
+            var v2 = JsonConvert.DeserializeObject<Verbrauch>("{\"zw\":\"000000000020720475\",\"startdatum\":\"201905310100\",\"enddatum\":\"201905310300\",\"wert\":263,\"status\":\"IU021\",\"obiskennzahl\":\"7-10:99.33.17\",\"wertermittlungsverfahren\":\"MESSUNG\",\"einheit\":\"KWH\",\"sap_timezone\":\"CET\"}",
                 new LenientDateTimeConverter());
             Assert.AreEqual(new DateTimeOffset(2019, 5, 31, 3, 0, 0, TimeSpan.Zero), v2.Enddatum);
 
             // negativ test: nur in der winterzeit soll das nicht passieren
-            Verbrauch v3 = JsonConvert.DeserializeObject<Verbrauch>("{\"zw\":\"000000000020720475\",\"startdatum\":\"201901310100\",\"enddatum\":\"201901310300\",\"wert\":263,\"status\":\"IU021\",\"obiskennzahl\":\"7-10:99.33.17\",\"wertermittlungsverfahren\":\"MESSUNG\",\"einheit\":\"KWH\",\"sap_timezone\":\"CET\"}",
+            var v3 = JsonConvert.DeserializeObject<Verbrauch>("{\"zw\":\"000000000020720475\",\"startdatum\":\"201901310100\",\"enddatum\":\"201901310300\",\"wert\":263,\"status\":\"IU021\",\"obiskennzahl\":\"7-10:99.33.17\",\"wertermittlungsverfahren\":\"MESSUNG\",\"einheit\":\"KWH\",\"sap_timezone\":\"CET\"}",
                 new LenientDateTimeConverter());
             Assert.AreEqual(new DateTimeOffset(2019, 1, 31, 3, 0, 0, TimeSpan.Zero), v3.Enddatum);
         }
@@ -272,7 +272,7 @@ namespace TestBO4E
         [TestMethod]
         public void TestBoNames()
         {
-            HashSet<string> testResult = BoMapper.GetValidBoNames();
+            var testResult = BoMapper.GetValidBoNames();
             Assert.IsTrue(testResult.Contains("Messlokation"));
             Assert.IsTrue(testResult.Contains("Energiemenge"));
             Assert.IsFalse(testResult.Contains("Verbrauch"), "No COM");
@@ -316,11 +316,11 @@ namespace TestBO4E
         [TestMethod]
         public void TestNullableDateTimeDeserialization()
         {
-            Aufgabe a = JsonConvert.DeserializeObject<Aufgabe>("{\"ccat\":\"ZE01\",\"casenr\":\"470272\",\"objtype\":\"ZISUPROFIL\",\"aufgabenId\":\"REIMPORT\",\"ausgefuehrt\":\"false\",\"ausfuehrender\":\"\",\"ausfuehrungszeitpunkt\":\"0000-00-00T00:00:00Z\"}");
+            var a = JsonConvert.DeserializeObject<Aufgabe>("{\"ccat\":\"ZE01\",\"casenr\":\"470272\",\"objtype\":\"ZISUPROFIL\",\"aufgabenId\":\"REIMPORT\",\"ausgefuehrt\":\"false\",\"ausfuehrender\":\"\",\"ausfuehrungszeitpunkt\":\"0000-00-00T00:00:00Z\"}");
             Assert.IsNotNull(a);
             Assert.IsFalse(a.Ausfuehrungszeitpunkt.HasValue);
 
-            Aufgabe b = JsonConvert.DeserializeObject<Aufgabe>("{\"ccat\":\"ZE01\",\"casenr\":\"470272\",\"objtype\":\"ZISUPROFIL\",\"aufgabenId\":\"REIMPORT\",\"ausgefuehrt\":\"false\",\"ausfuehrender\":\"\",\"ausfuehrungszeitpunkt\":\"2019-07-10T11:52:59Z\"}");
+            var b = JsonConvert.DeserializeObject<Aufgabe>("{\"ccat\":\"ZE01\",\"casenr\":\"470272\",\"objtype\":\"ZISUPROFIL\",\"aufgabenId\":\"REIMPORT\",\"ausgefuehrt\":\"false\",\"ausfuehrender\":\"\",\"ausfuehrungszeitpunkt\":\"2019-07-10T11:52:59Z\"}");
             Assert.IsNotNull(b);
             Assert.IsTrue(b.Ausfuehrungszeitpunkt.HasValue);
         }

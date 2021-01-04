@@ -38,7 +38,7 @@ namespace BO4E.Extensions.Encryption
         public X509AsymmetricEncrypter(ISet<X509Certificate2> certs)
         {
             this.publicCerts = new HashSet<X509Certificate2>();
-            foreach (X509Certificate2 c in certs)
+            foreach (var c in certs)
             {
                 this.publicCerts.Add(c);
             }
@@ -47,11 +47,11 @@ namespace BO4E.Extensions.Encryption
 
         private List<string> GetPublicKeysBase64()
         {
-            List<string> result = new List<string>();
-            foreach (X509Certificate2 cert in publicCerts)
+            var result = new List<string>();
+            foreach (var cert in publicCerts)
             {
                 // https://stackoverflow.com/a/4740292
-                StringBuilder builder = new StringBuilder();
+                var builder = new StringBuilder();
                 builder.AppendLine("-----BEGIN CERTIFICATE-----");
                 builder.AppendLine(Convert.ToBase64String(cert.Export(X509ContentType.Cert), Base64FormattingOptions.InsertLineBreaks));
                 builder.AppendLine("-----END CERTIFICATE-----");
@@ -72,42 +72,42 @@ namespace BO4E.Extensions.Encryption
 
         public string Encrypt(string plainText)
         {
-            byte[] plainBytes = Encoding.UTF8.GetBytes(plainText);
-            CmsProcessableByteArray cpba = new CmsProcessableByteArray(plainBytes);
+            var plainBytes = Encoding.UTF8.GetBytes(plainText);
+            var cpba = new CmsProcessableByteArray(plainBytes);
 
-            CmsEnvelopedDataGenerator envelopedGen = new CmsEnvelopedDataGenerator();
-            foreach (X509Certificate2 cert in publicCerts)
+            var envelopedGen = new CmsEnvelopedDataGenerator();
+            foreach (var cert in publicCerts)
             {
-                Org.BouncyCastle.X509.X509Certificate bouncyCert = DotNetUtilities.FromX509Certificate(cert);
-                AsymmetricKeyParameter keyParameter = bouncyCert.GetPublicKey();
+                var bouncyCert = DotNetUtilities.FromX509Certificate(cert);
+                var keyParameter = bouncyCert.GetPublicKey();
                 envelopedGen.AddKeyTransRecipient(bouncyCert);
             }
 
-            CmsEnvelopedData envelopedData = envelopedGen.Generate(cpba, CmsEnvelopedGenerator.Aes256Cbc);
-            string cipherString = Convert.ToBase64String(envelopedData.GetEncoded());
+            var envelopedData = envelopedGen.Generate(cpba, CmsEnvelopedGenerator.Aes256Cbc);
+            var cipherString = Convert.ToBase64String(envelopedData.GetEncoded());
             return cipherString;
         }
 
         public EncryptedObject Encrypt(BusinessObject plainObject)
         {
-            string plainText = JsonConvert.SerializeObject(plainObject, settings: encryptionSerializerSettings);
-            string cipherString = Encrypt(plainText);
+            var plainText = JsonConvert.SerializeObject(plainObject, settings: encryptionSerializerSettings);
+            var cipherString = Encrypt(plainText);
             return new EncryptedObjectPKCS7(cipherString, GetPublicKeysBase64());
         }
 
         public string Decrypt(string cipherText)
         {
-            byte[] cipherBytes = Convert.FromBase64String(cipherText);
+            var cipherBytes = Convert.FromBase64String(cipherText);
             var envelopedData = new CmsEnvelopedData(cipherBytes);
-            RecipientInformationStore recipientsStore = envelopedData.GetRecipientInfos();
-            ICollection recipientsCollection = recipientsStore.GetRecipients();
-            IList recipients = recipientsCollection as IList;
-            byte[] plainBytes = new byte[] { };
-            int index = 0;
+            var recipientsStore = envelopedData.GetRecipientInfos();
+            var recipientsCollection = recipientsStore.GetRecipients();
+            var recipients = recipientsCollection as IList;
+            var plainBytes = new byte[] { };
+            var index = 0;
             foreach (KeyTransRecipientInformation recipientInfo in recipients)
             {
                 // todo: better approach than catching n exceptions.
-                RecipientInformation recipient = recipientsStore.GetFirstRecipient(recipientInfo.RecipientID);
+                var recipient = recipientsStore.GetFirstRecipient(recipientInfo.RecipientID);
                 try
                 {
                     plainBytes = recipient.GetContent(this.privateKey);
@@ -139,7 +139,7 @@ namespace BO4E.Extensions.Encryption
             {
                 return null;
             }
-            string plainString = Decrypt(eo.CipherText);
+            var plainString = Decrypt(eo.CipherText);
             return JsonConvert.DeserializeObject<BusinessObject>(plainString, settings: encryptionSerializerSettings);
         }
 
@@ -149,7 +149,7 @@ namespace BO4E.Extensions.Encryption
             {
                 return null;
             }
-            string plainString = Decrypt(eo.CipherText);
+            var plainString = Decrypt(eo.CipherText);
             return JsonConvert.DeserializeObject<T>(plainString, settings: encryptionSerializerSettings);
         }
 

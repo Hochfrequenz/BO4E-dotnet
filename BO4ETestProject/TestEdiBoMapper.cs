@@ -58,13 +58,13 @@ namespace TestBO4E
         [TestMethod]
         public void TestSimpleEnums()
         {
-            foreach (string objectName in expectedResults.Keys)
+            foreach (var objectName in expectedResults.Keys)
             {
-                Dictionary<string, string> map = expectedResults[objectName];
-                foreach (string teststring in map.Keys)
+                var map = expectedResults[objectName];
+                foreach (var teststring in map.Keys)
                 {
-                    string expectedResult = map[teststring];
-                    string result = EdiBoMapper.FromEdi(objectName, teststring);
+                    var expectedResult = map[teststring];
+                    var result = EdiBoMapper.FromEdi(objectName, teststring);
                     Assert.AreEqual(expectedResult, result);
                 }
             }

@@ -36,7 +36,7 @@ namespace BO4E.Extensions.Encryption
         {
             this.ConfigurationKey = null;
             this.operations = new Dictionary<DataCategory, AnonymizerApproach>();
-            foreach (object ao in Enum.GetValues(typeof(DataCategory)))
+            foreach (var ao in Enum.GetValues(typeof(DataCategory)))
             {
                 this.operations.Add((DataCategory)ao, AnonymizerApproach.KEEP);
             }

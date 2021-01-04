@@ -38,7 +38,7 @@ namespace BO4E.Extensions.BusinessObjects.Benachrichtigung
             {
                 return false;
             }
-            // ToDo für Hamid: Bitte prüfen, warum Contains false zurückliefert.
+            // ToDo fÃ¼r Hamid: Bitte prÃ¼fen, warum Contains false zurÃ¼ckliefert.
             return b.Infos.Any(m => m.KeyColumn == gssi.KeyColumn && m.Value == gssi.Value);
         }
 
@@ -83,7 +83,7 @@ namespace BO4E.Extensions.BusinessObjects.Benachrichtigung
                     }
 
                     {
-                        T value = (T)typeConverter.ConvertFromString(info.Value);
+                        var value = (T)typeConverter.ConvertFromString(info.Value);
                         return predicate(value);
                     }
                 }

@@ -41,9 +41,9 @@ namespace TestBO4E
                 var method = typeof(Serializer).GetMethod(nameof(Serializer.GetProto), new Type[] { typeof(ProtoBuf.Meta.ProtoSyntax)});
                 method = method.MakeGenericMethod(type);
                 Assert.IsNotNull(method);
-                string protoString = (string)method.Invoke(null, new object[] { ProtoBuf.Meta.ProtoSyntax.Proto3 });
+                var protoString = (string)method.Invoke(null, new object[] { ProtoBuf.Meta.ProtoSyntax.Proto3 });
                 Assert.IsFalse(string.IsNullOrWhiteSpace(protoString));
-                string path = $"../../../../BO4E-dotnet/protobuf-files/{type}.proto"; // not elegant but ok ;)
+                var path = $"../../../../BO4E-dotnet/protobuf-files/{type}.proto"; // not elegant but ok ;)
                 if (!File.Exists(path))
                 {
                     var stream = File.Create(path);

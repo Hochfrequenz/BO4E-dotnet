@@ -51,7 +51,7 @@ namespace BO4E
             {
                 throw new ArgumentNullException("boTyp", "Either call MapObject(JObject) with a Business Object containing the mandatory 'boTyp' key or explicitly name the Object");
             }
-            Type businessObjectType = GetTypeForBoName(jobject["boTyp"].ToString());
+            var businessObjectType = GetTypeForBoName(jobject["boTyp"].ToString());
             return MapObject(businessObjectType, jobject, userPropertiesWhiteList, lenient);
         }
 
@@ -143,7 +143,7 @@ namespace BO4E
         /// <returns><see cref="MapObject(Type, JObject, HashSet{string}, LenientParsing)"/></returns>
         public static BusinessObjectType MapObject<BusinessObjectType>(JObject jobject, HashSet<string> userPropertiesWhiteList, LenientParsing lenient = LenientParsing.Strict)
         {
-            Type businessObjectType = typeof(BusinessObjectType);
+            var businessObjectType = typeof(BusinessObjectType);
             return (BusinessObjectType)Convert.ChangeType(MapObject(businessObjectType, jobject, userPropertiesWhiteList, lenient), typeof(BusinessObjectType));
         }
 
@@ -153,11 +153,11 @@ namespace BO4E
         /// <returns>a list of valid BO4E names; upper/lower case sensitive</returns>
         public static HashSet<string> GetValidBoNames()
         {
-            HashSet<string> result = new HashSet<string>();
-            Type[] types = Assembly.GetExecutingAssembly().GetTypes();
-            foreach (Type t in types)
+            var result = new HashSet<string>();
+            var types = Assembly.GetExecutingAssembly().GetTypes();
+            foreach (var t in types)
             {
-                Match m = BoRegex.Match(t.ToString());
+                var m = BoRegex.Match(t.ToString());
                 if (m.Success)
                 {
                     result.Add((m.Groups)["boName"].Value);
@@ -194,7 +194,7 @@ namespace BO4E
             }
             else
             {
-                foreach (string boName in GetValidBoNames())
+                foreach (var boName in GetValidBoNames())
                 {
                     // fallback.
                     if (boName.ToUpper() == businessObjectName.ToUpper())
@@ -245,7 +245,7 @@ namespace BO4E
             {
                 throw new ArgumentException($"The given type {businessObjectType} is not derived from BusinessObject.");
             }
-            BusinessObject bo = Activator.CreateInstance(businessObjectType) as BusinessObject;
+            var bo = Activator.CreateInstance(businessObjectType) as BusinessObject;
             return bo.GetJsonScheme();
         }
 

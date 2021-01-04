@@ -7,10 +7,10 @@ public static class JsonHelper
     {
         if (token.Type == JTokenType.Object)
         {
-            JObject copy = new JObject();
-            foreach (JProperty prop in token.Children<JProperty>())
+            var copy = new JObject();
+            foreach (var prop in token.Children<JProperty>())
             {
-                JToken child = prop.Value;
+                var child = prop.Value;
                 if (child.HasValues)
                 {
                     child = RemoveEmptyChildren(child);
@@ -24,10 +24,10 @@ public static class JsonHelper
         }
         else if (token.Type == JTokenType.Array)
         {
-            JArray copy = new JArray();
-            foreach (JToken item in token.Children())
+            var copy = new JArray();
+            foreach (var item in token.Children())
             {
-                JToken child = item;
+                var child = item;
                 if (child.HasValues)
                 {
                     child = RemoveEmptyChildren(child);

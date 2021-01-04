@@ -47,7 +47,7 @@ namespace TestBO4E.ShowCaseTests
                 Wertermittlungsverfahren = Wertermittlungsverfahren.MESSUNG
             };
 
-            foreach (Verbrauch v in verbrauchA.Merge(verbrauchB))
+            foreach (var v in verbrauchA.Merge(verbrauchB))
             {
                 Debug.WriteLine($"{v.Startdatum.ToString("yyyy-MM-dd")} to {v.Enddatum.ToString("yyyy-MM-dd")}: {v.Wert}{v.Einheit}");
             }

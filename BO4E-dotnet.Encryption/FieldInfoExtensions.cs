@@ -38,9 +38,9 @@ namespace BO4E.Extensions.Encryption
             }
             else if (dataCategory.HasValue)
             {
-                foreach (Attribute attribute in property.GetCustomAttributes().Where(a => a.GetType() == typeof(DataCategoryAttribute)))
+                foreach (var attribute in property.GetCustomAttributes().Where(a => a.GetType() == typeof(DataCategoryAttribute)))
                 {
-                    DataCategoryAttribute dataCatagoryAttribute = (DataCategoryAttribute)attribute;
+                    var dataCatagoryAttribute = (DataCategoryAttribute)attribute;
                     if (!dataCatagoryAttribute.Mapping.Contains(dataCategory.Value))
                     {
                         continue;
@@ -59,9 +59,9 @@ namespace BO4E.Extensions.Encryption
             }
             if (dataCategory.HasValue)
             {
-                foreach (Attribute attribute in property.GetCustomAttributes().Where(a => a.GetType() == typeof(DataCategoryAttribute)))
+                foreach (var attribute in property.GetCustomAttributes().Where(a => a.GetType() == typeof(DataCategoryAttribute)))
                 {
-                    DataCategoryAttribute dataCatagoryAttribute = (DataCategoryAttribute)attribute;
+                    var dataCatagoryAttribute = (DataCategoryAttribute)attribute;
                     if (!dataCatagoryAttribute.Mapping.Contains(dataCategory.Value))
                     {
                         continue;
@@ -80,9 +80,9 @@ namespace BO4E.Extensions.Encryption
             }
             if (dataCategory.HasValue)
             {
-                foreach (Attribute attribute in property.GetCustomAttributes().Where(a => a.GetType() == typeof(DataCategoryAttribute)))
+                foreach (var attribute in property.GetCustomAttributes().Where(a => a.GetType() == typeof(DataCategoryAttribute)))
                 {
-                    DataCategoryAttribute dataCatagoryAttribute = (DataCategoryAttribute)attribute;
+                    var dataCatagoryAttribute = (DataCategoryAttribute)attribute;
                     if (!dataCatagoryAttribute.Mapping.Contains(dataCategory.Value))
                     {
                         continue;

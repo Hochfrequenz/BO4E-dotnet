@@ -54,11 +54,11 @@ namespace BO4E
                 _logger = StaticLogger.Logger;
             }
             //Type[] types = Assembly.GetExecutingAssembly().GetTypes();
-            Type clazz = Assembly.GetExecutingAssembly().GetType(namespacePrefix + "." + objectName);
-            Type ediClazz = Assembly.GetExecutingAssembly().GetType($"{namespacePrefix}.EDI.{objectName}Edi");
+            var clazz = Assembly.GetExecutingAssembly().GetType(namespacePrefix + "." + objectName);
+            var ediClazz = Assembly.GetExecutingAssembly().GetType($"{namespacePrefix}.EDI.{objectName}Edi");
 
-            bool useEdiClass = false;
-            FieldInfo field = clazz.GetField(objectValue);
+            var useEdiClass = false;
+            var field = clazz.GetField(objectValue);
             if (field == null)
             {
                 _logger.LogDebug("Class " + objectName + " has no field " + objectValue);

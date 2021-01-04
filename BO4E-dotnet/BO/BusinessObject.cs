@@ -163,7 +163,7 @@ namespace BO4E.BO
 
 
         /// <summary>
-        /// Hier können IDs anderer Systeme hinterlegt werden (z.B. eine SAP-GP-Nummer) (Details siehe <see cref="ExterneReferenz"/>)
+        /// Hier kÃ¶nnen IDs anderer Systeme hinterlegt werden (z.B. eine SAP-GP-Nummer) (Details siehe <see cref="ExterneReferenz"/>)
         /// </summary>
         [JsonProperty(PropertyName = "externeReferenzen", Required = Required.Default)]
         [ProtoMember(4)]
@@ -276,9 +276,9 @@ namespace BO4E.BO
             {
                 throw new ArgumentException($"You must only request JSON schemes for Business Objects. {boType} is not a valid Business Object type.");
             }
-            JSchemaGenerator generator = new JSchemaGenerator();
+            var generator = new JSchemaGenerator();
             generator.GenerationProviders.Add(new StringEnumGenerationProvider());
-            JSchema schema = generator.Generate(boType);
+            var schema = generator.Generate(boType);
             return schema;
         }
 
@@ -321,10 +321,10 @@ namespace BO4E.BO
         /// <returns>A list just like the result of <see cref="GetBoKeyNames(Type)"/></returns>
         public static List<string> GetBoKeyNames(Type boType)
         {
-            List<string> result = new List<string>();
+            var result = new List<string>();
             foreach (var pi in GetBoKeyProps(boType))
             {
-                JsonPropertyAttribute jpa = pi.GetCustomAttribute<JsonPropertyAttribute>();
+                var jpa = pi.GetCustomAttribute<JsonPropertyAttribute>();
                 if (jpa?.PropertyName != null)
                 {
                     result.Add(jpa.PropertyName);
@@ -363,7 +363,7 @@ namespace BO4E.BO
         public static Dictionary<string, Type> GetExpandableFieldNames(string boTypeName)
         {
 #pragma warning disable CS0618 // Type or member is obsolete
-            Type clazz = Assembly.GetExecutingAssembly().GetType(BoMapper.PackagePrefix + "." + boTypeName);
+            var clazz = Assembly.GetExecutingAssembly().GetType(BoMapper.PackagePrefix + "." + boTypeName);
 #pragma warning restore CS0618 // Type or member is obsolete
             if (clazz == null)
             {
@@ -387,11 +387,11 @@ namespace BO4E.BO
             {
                 throw new ArgumentException("Only allowed for BusinessObjects");
             }
-            Dictionary<string, Type> result = new Dictionary<string, Type>();
+            var result = new Dictionary<string, Type>();
             foreach (var prop in type.GetProperties())
             {
                 string fieldName;
-                JsonPropertyAttribute jpa = prop.GetCustomAttribute<JsonPropertyAttribute>();
+                var jpa = prop.GetCustomAttribute<JsonPropertyAttribute>();
                 if (jpa?.PropertyName != null)
                 {
                     fieldName = jpa.PropertyName;
@@ -402,7 +402,7 @@ namespace BO4E.BO
                 }
                 if (prop.PropertyType.IsSubclassOf(typeof(BusinessObject)))
                 {
-                    foreach (KeyValuePair<string, Type> subResult in GetExpandablePropertyNames(prop.PropertyType, false))
+                    foreach (var subResult in GetExpandablePropertyNames(prop.PropertyType, false))
 
                     {
                         result.Add(string.Join(".", new string[] { fieldName, subResult.Key }), subResult.Value);
@@ -416,8 +416,8 @@ namespace BO4E.BO
                 }
                 else if (prop.PropertyType.IsGenericType && prop.PropertyType.GetGenericTypeDefinition() == typeof(List<>))
                 {
-                    Type listElementType = prop.PropertyType.GetGenericArguments()[0];
-                    foreach (KeyValuePair<string, Type> subResult in GetExpandablePropertyNames(listElementType, false))
+                    var listElementType = prop.PropertyType.GetGenericArguments()[0];
+                    foreach (var subResult in GetExpandablePropertyNames(listElementType, false))
                     {
                         result.Add(string.Join(".", new string[] { fieldName, subResult.Key }), subResult.Value);
                     }
@@ -440,10 +440,10 @@ namespace BO4E.BO
         /// <returns>A dictionary with key value pairs.</returns>
         public Dictionary<string, object> GetBoKeys()
         {
-            Dictionary<string, object> result = new Dictionary<string, object>();
+            var result = new Dictionary<string, object>();
             foreach (var pi in GetBoKeyProps(this.GetType()))
             {
-                JsonPropertyAttribute jpa = pi.GetCustomAttribute<JsonPropertyAttribute>();
+                var jpa = pi.GetCustomAttribute<JsonPropertyAttribute>();
                 if (jpa?.PropertyName != null)
                 {
                     result.Add(jpa.PropertyName, pi.GetValue(this));
@@ -518,7 +518,7 @@ namespace BO4E.BO
         /// <returns>hash code as int</returns>
         public override int GetHashCode()
         {
-            int result = 31;  // I read online that a medium sized prime was a good choice ;)
+            var result = 31;  // I read online that a medium sized prime was a good choice ;)
             unchecked
             {
                 result *= this.GetType().GetHashCode();
@@ -528,11 +528,11 @@ namespace BO4E.BO
                     {
                         if (prop.GetValue(this).GetType().IsGenericType && prop.GetValue(this).GetType().GetGenericTypeDefinition() == typeof(List<>))
                         {
-                            IEnumerable enumerable = prop.GetValue(this) as IEnumerable;
-                            Type listElementType = prop.GetValue(this).GetType().GetGenericArguments()[0];
-                            Type listType = typeof(List<>).MakeGenericType(listElementType);
-                            int index = 0;
-                            foreach (object listItem in enumerable)
+                            var enumerable = prop.GetValue(this) as IEnumerable;
+                            var listElementType = prop.GetValue(this).GetType().GetGenericArguments()[0];
+                            var listType = typeof(List<>).MakeGenericType(listElementType);
+                            var index = 0;
+                            foreach (var listItem in enumerable)
                             {
                                 // the index/position inside the list is taken into account, because
                                 // if two lists contain the same items but in different order, they must not be considered equal.
@@ -600,9 +600,9 @@ namespace BO4E.BO
                 }
                 if (objectType.IsAbstract)
                 {
-                    JObject jo = JObject.Load(reader);
+                    var jo = JObject.Load(reader);
                     Type boType;
-                    if (serializer.TypeNameHandling.HasFlag(TypeNameHandling.Objects) && jo.TryGetValue("$type", out JToken typeToken))
+                    if (serializer.TypeNameHandling.HasFlag(TypeNameHandling.Objects) && jo.TryGetValue("$type", out var typeToken))
                     {
                         boType = BusinessObjectSerializationBinder.BusinessObjectAndCOMTypes.SingleOrDefault(t => typeToken.Value<string>().ToUpper().StartsWith(t.FullName.ToUpper()));
                     }
