@@ -22,7 +22,7 @@ namespace BO4E
         /// <summary>
         /// project wide logger
         /// </summary>
-        public static ILogger _logger = StaticLogger.Logger;
+        public static ILogger Logger = StaticLogger.Logger;
         private static readonly string namespacePrefix = "BO4E.ENUM";
         /// <summary>
         /// transform a BO4E value of known type to an EDIFACT value
@@ -49,11 +49,11 @@ namespace BO4E
                 return null;
             }
 
-            if (_logger == null)
+            if (Logger == null)
             {
                 // ToDo: inject it instead of ugly workaround.
                 StaticLogger.Logger = Microsoft.Extensions.Logging.Abstractions.NullLogger.Instance; 
-                _logger = StaticLogger.Logger;
+                Logger = StaticLogger.Logger;
             }
             //Type[] types = Assembly.GetExecutingAssembly().GetTypes();
             var clazz = Assembly.GetExecutingAssembly().GetType(namespacePrefix + "." + objectName);
@@ -62,7 +62,7 @@ namespace BO4E
             var prop = clazz.GetField(objectValue);
             if (prop == null)
             {
-                _logger.LogWarning($"Class objectName has no field {objectValue}; Might already be the edi value...");
+                Logger.LogWarning($"Class objectName has no field {objectValue}; Might already be the edi value...");
                 var alternativField = EdiBoMapper.FromEdi(objectName, objectValue);
                 if (alternativField != null && clazz.GetField(alternativField) != null)
                 {
@@ -70,13 +70,13 @@ namespace BO4E
                 }
                 else
                 {
-                    _logger.LogError($"Couldn't make any sense out of {objectName} / {objectValue}");
+                    Logger.LogError($"Couldn't make any sense out of {objectName} / {objectValue}");
                     return null;
                 }
             }
             if (ediClazz == null)
             {
-                _logger.LogWarning($"No EdiClass defined for {objectName}. Too lazy? Returning original value {objectValue}"); // holds true for landescode.
+                Logger.LogWarning($"No EdiClass defined for {objectName}. Too lazy? Returning original value {objectValue}"); // holds true for landescode.
                 return objectValue;
             }
             // try to find annotation with EdiValue
@@ -86,7 +86,7 @@ namespace BO4E
                 .Where(f => f.GetCustomAttributes(typeof(MappingAttribute), false).Length > 0).ToArray();
             if (annotatedEdiFields.Length == 0)
             {
-                _logger.LogError($"No annotated EdiFields found for {objectName} / {objectValue}");
+                Logger.LogError($"No annotated EdiFields found for {objectName} / {objectValue}");
                 return null;
             }
             foreach (var aef in annotatedEdiFields)
@@ -107,7 +107,7 @@ namespace BO4E
                     }
                 }
             }
-            _logger.LogError($"No EDI match found for {objectName} /{objectValue}. Probably is already EDI");
+            Logger.LogError($"No EDI match found for {objectName} /{objectValue}. Probably is already EDI");
             return objectValue;
         }
 

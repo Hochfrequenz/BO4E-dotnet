@@ -18,7 +18,7 @@ namespace BO4E
         /// <summary>
         /// project wide logger
         /// </summary>
-        public static ILogger _logger = StaticLogger.Logger;
+        public static ILogger Logger = StaticLogger.Logger;
 
         private static readonly string namespacePrefix = "BO4E.ENUM";
 
@@ -47,11 +47,11 @@ namespace BO4E
                 return null;
             }
 
-            if (_logger == null)
+            if (Logger == null)
             {
                 // ToDo: inject it instead of ugly workaround.
                 StaticLogger.Logger = Microsoft.Extensions.Logging.Abstractions.NullLogger.Instance;
-                _logger = StaticLogger.Logger;
+                Logger = StaticLogger.Logger;
             }
             //Type[] types = Assembly.GetExecutingAssembly().GetTypes();
             var clazz = Assembly.GetExecutingAssembly().GetType(namespacePrefix + "." + objectName);
@@ -61,7 +61,7 @@ namespace BO4E
             var field = clazz.GetField(objectValue);
             if (field == null)
             {
-                _logger.LogDebug("Class " + objectName + " has no field " + objectValue);
+                Logger.LogDebug("Class " + objectName + " has no field " + objectValue);
                 if (ediClazz != null)
                 {
                     field = ediClazz.GetField(objectValue);
@@ -69,13 +69,13 @@ namespace BO4E
 
                     if (field == null)
                     {
-                        _logger.LogDebug("Even ediClass of " + objectName + " has no such field.");
+                        Logger.LogDebug("Even ediClass of " + objectName + " has no such field.");
                         // now try with leading underscore, used for enum values that would normally
                         // start with a number, e.g. _293 for code list "293"
                         field = ediClazz.GetField("_" + objectValue);
                         if (field == null)
                         {
-                            _logger.LogError("No matching field " + objectValue + " for " + objectName + "! returning null");
+                            Logger.LogError("No matching field " + objectValue + " for " + objectName + "! returning null");
                             return null;
                         }
                     }
@@ -89,14 +89,14 @@ namespace BO4E
                 }
                 catch (Exception e) // ToDo: Fix pokemon catcher
                 {
-                    _logger.LogError($"No such field: {e.Message}");
+                    Logger.LogError($"No such field: {e.Message}");
                     return null;
                 }
             }
             var attribute = field.GetCustomAttribute<MappingAttribute>();
             if (attribute == null || attribute.Mapping.Count == 0)
             {
-                _logger.LogError("Custom attribute not set, returning null");
+                Logger.LogError("Custom attribute not set, returning null");
                 return null;
             }
 

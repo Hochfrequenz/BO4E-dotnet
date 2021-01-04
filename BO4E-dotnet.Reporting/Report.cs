@@ -210,17 +210,13 @@ namespace BO4E.Reporting
                 {
                     if (field.GetValue(value) != null && field.Name != "gaps")
                     {
-                        var ItemType = field.GetValue(value).GetType().GetGenericArguments()[0];
+                        //var ItemType = field.GetValue(value).GetType().GetGenericArguments()[0];
                         var list = field.GetValue(value);
                         var a = (IList)list;
                         foreach (var s in a)
                         {
                             returnData = Detect(s.GetType(), separator, s, returnData);
                         }
-                    }
-                    else
-                    {
-                        continue;
                     }
                 }
                 else

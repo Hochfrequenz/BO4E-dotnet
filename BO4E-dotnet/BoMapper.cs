@@ -74,9 +74,9 @@ namespace BO4E
         /// <summary>
         /// <see cref="MapObject(Type, JObject, HashSet{string}, LenientParsing)"/>
         /// </summary>
-        public static BusinessObjectType MapObject<BusinessObjectType>(JObject jobject, LenientParsing lenient = LenientParsing.Strict)
+        public static TBusinessObjectType MapObject<TBusinessObjectType>(JObject jobject, LenientParsing lenient = LenientParsing.Strict)
         {
-            return (BusinessObjectType)Convert.ChangeType(MapObject(typeof(BusinessObjectType), jobject, lenient), typeof(BusinessObjectType));
+            return (TBusinessObjectType)Convert.ChangeType(MapObject(typeof(TBusinessObjectType), jobject, lenient), typeof(TBusinessObjectType));
         }
 
         /// <summary>

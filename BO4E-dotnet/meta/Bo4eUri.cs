@@ -33,7 +33,7 @@ namespace BO4E.meta
         {
             if (uri == null)
             {
-                throw new ArgumentNullException("URI string must not be null.");
+                throw new ArgumentNullException(nameof(uri),"URI string must not be null.");
             }
             /*if (!base.IsWellFormedOriginalString())
             {
@@ -140,7 +140,7 @@ namespace BO4E.meta
         {
             if (bo == null)
             {
-                throw new ArgumentNullException("Business Object must not be null.");
+                throw new ArgumentNullException(nameof(bo),"Business Object must not be null.");
             }
             var baseUriString = BO4E_SCHEME + bo.GetType().Name + "/";
             var baseUri = new Bo4eUri(baseUriString);
@@ -216,7 +216,7 @@ namespace BO4E.meta
         {
             if (bo == null)
             {
-                throw new ArgumentNullException("Business Object must not be null.");
+                throw new ArgumentNullException(nameof(bo), "Business Object must not be null.");
             }
             return GetKeyProperties(bo.GetType());
         }
