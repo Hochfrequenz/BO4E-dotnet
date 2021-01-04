@@ -114,7 +114,7 @@ namespace BO4E.BO
         /// return <see cref="BusinessObject.BoTyp"/> (as string, not as type)
         /// </summary>
         /// <returns></returns>
-        public string GetBoTyp() => this.BoTyp;
+        public string GetBoTyp() => BoTyp;
 
         /// <summary>
         /// This method is just to make sure the mapping actually makes sense.
@@ -150,8 +150,8 @@ namespace BO4E.BO
         protected virtual string guidSerialized
 #pragma warning restore IDE1006 // Naming Styles
         {
-            get => this.Guid.HasValue ? this.Guid.ToString() : string.Empty;
-            set { this.Guid = string.IsNullOrWhiteSpace(value) ? (Guid?)null : System.Guid.Parse(value); }
+            get => Guid.HasValue ? Guid.ToString() : string.Empty;
+            set { Guid = string.IsNullOrWhiteSpace(value) ? (Guid?)null : System.Guid.Parse(value); }
         }
         /// <summary>
         /// Store the latest database update, is Datetime, because postgres doesn't handle datetimeoffset in a generated column gracefully
@@ -173,13 +173,13 @@ namespace BO4E.BO
         /// <inheritdoc cref="ExterneReferenzExtensions.TryGetExterneReferenz(ICollection{ExterneReferenz}, string, out string)"/>
         /// </summary>
         public bool TryGetExterneReferenz(string extRefName, out string extRefWert)
-            => this.ExterneReferenzen.TryGetExterneReferenz(extRefName, out extRefWert);
+            => ExterneReferenzen.TryGetExterneReferenz(extRefName, out extRefWert);
 
         /// <summary>
         /// <inheritdoc cref="ExterneReferenzExtensions.SetExterneReferenz"/>
         /// </summary>
         public void SetExterneReferenz(ExterneReferenz extRef, bool overwriteExisting = false)
-            => this.ExterneReferenzen = this.ExterneReferenzen.SetExterneReferenz(extRef, overwriteExisting);
+            => ExterneReferenzen = ExterneReferenzen.SetExterneReferenz(extRef, overwriteExisting);
 
         /// <summary>
         /// checks if the BusinessObject has a flag set.
@@ -195,7 +195,7 @@ namespace BO4E.BO
             }
             try
             {
-                return this.UserProperties != null && this.UserPropertyEquals(flagKey, other: (bool?)true);
+                return UserProperties != null && this.UserPropertyEquals(flagKey, other: (bool?)true);
             }
             catch (ArgumentNullException ane) when (ane.ParamName == "value")
             {
@@ -217,27 +217,27 @@ namespace BO4E.BO
             {
                 throw new ArgumentNullException(nameof(flagKey));
             }
-            if (this.UserProperties == null)
+            if (UserProperties == null)
             {
-                this.UserProperties = new Dictionary<string, JToken>();
+                UserProperties = new Dictionary<string, JToken>();
                 if (!flagValue.HasValue)
                 {
                     return false;
                 }
             }
-            else if (flagValue.HasValue && flagValue.Value == this.HasFlagSet(flagKey))
+            else if (flagValue.HasValue && flagValue.Value == HasFlagSet(flagKey))
             {
                 return false;
             }
             if (!flagValue.HasValue)
             {
-                if (!this.UserProperties.ContainsKey(flagKey))
+                if (!UserProperties.ContainsKey(flagKey))
                 {
                     return false;
                 }
                 else
                 {
-                    this.UserProperties.Remove(flagKey);
+                    UserProperties.Remove(flagKey);
                     return true;
                 }
             }
@@ -249,7 +249,7 @@ namespace BO4E.BO
                 }
                 else
                 {
-                    this.UserProperties[flagKey] = flagValue.Value;
+                    UserProperties[flagKey] = flagValue.Value;
                 }
                 return true;
             }
@@ -261,7 +261,7 @@ namespace BO4E.BO
         /// <returns>a JSON scheme</returns>
         public JSchema GetJsonScheme()
         {
-            return GetJsonSchema(this.GetType());
+            return GetJsonSchema(GetType());
         }
 
         /// <summary>
@@ -311,7 +311,7 @@ namespace BO4E.BO
         /// <seealso cref="GetBoKeyNames(Type)"/>
         public List<string> GetBoKeyNames()
         {
-            return GetBoKeyNames(this.GetType());
+            return GetBoKeyNames(GetType());
         }
 
         /// <summary>
@@ -441,7 +441,7 @@ namespace BO4E.BO
         public Dictionary<string, object> GetBoKeys()
         {
             var result = new Dictionary<string, object>();
-            foreach (var pi in GetBoKeyProps(this.GetType()))
+            foreach (var pi in GetBoKeyProps(GetType()))
             {
                 var jpa = pi.GetCustomAttribute<JsonPropertyAttribute>();
                 if (jpa?.PropertyName != null)
@@ -479,11 +479,11 @@ namespace BO4E.BO
         /// <returns><code>true</code> iff b has the same type as this object and all elements of this and object b are equal; <code>false</code> otherwise</returns>
         public override bool Equals(object b)
         {
-            if (b == null || b.GetType() != this.GetType())
+            if (b == null || b.GetType() != GetType())
             {
                 return false;
             }
-            return this.Equals(b as BusinessObject);
+            return Equals(b as BusinessObject);
         }
 
         /// <summary>
@@ -498,7 +498,7 @@ namespace BO4E.BO
         /// </returns>
         public bool Equals(BusinessObject b)
         {
-            if (b == null || b.GetType() != this.GetType())
+            if (b == null || b.GetType() != GetType())
             {
                 return false;
             }
@@ -521,8 +521,8 @@ namespace BO4E.BO
             var result = 31;  // I read online that a medium sized prime was a good choice ;)
             unchecked
             {
-                result *= this.GetType().GetHashCode();
-                foreach (var prop in this.GetType().GetProperties())
+                result *= GetType().GetHashCode();
+                foreach (var prop in GetType().GetProperties())
                 {
                     if (prop.GetValue(this) != null)
                     {

@@ -28,7 +28,7 @@ namespace BO4E.Reporting
 
         public string ToCsv(char separator = ';', bool headerLine = true, string lineTerminator = "\\n", List<Dictionary<string, string>> reihenfolge = null)
         {
-            var type = this.GetType();
+            var type = GetType();
             var resultBuilder = new StringBuilder();
             var result = new List<string>();
             var headerNames = new List<string>();

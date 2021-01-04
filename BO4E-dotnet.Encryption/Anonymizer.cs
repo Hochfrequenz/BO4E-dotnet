@@ -38,7 +38,7 @@ namespace BO4E.Extensions.Encryption
             this.configuration = configuration;
             if (this.configuration.hashingSalt != null)
             {
-                this.SetHashingSalt(configuration.GetSalt());
+                SetHashingSalt(configuration.GetSalt());
             }
         }
 
@@ -48,7 +48,7 @@ namespace BO4E.Extensions.Encryption
         /// <param name="x509Certificate">X509 certificate</param>
         public void SetPublicKey(X509Certificate2 x509Certificate)
         {
-            this.PublicKeyX509 = x509Certificate;
+            PublicKeyX509 = x509Certificate;
         }
 
         /// <summary>
@@ -75,7 +75,7 @@ namespace BO4E.Extensions.Encryption
         /// <param name="salt">random salt as byte array</param>
         public void SetHashingSalt(byte[] salt)
         {
-            this.hashingSalt = salt;
+            hashingSalt = salt;
         }
 
         /// <summary>
@@ -203,11 +203,11 @@ namespace BO4E.Extensions.Encryption
                             }
                             break;
                         case AnonymizerApproach.ENCRYPT:
-                            if (this.PublicKeyX509 == null)
+                            if (PublicKeyX509 == null)
                             {
                                 throw new ArgumentNullException(nameof(PublicKeyX509), "To use the encryption feature you have to provide a public X509 certificate using the SetPublicKey method.");
                             }
-                            using (var xasyncenc = new X509AsymmetricEncrypter(this.PublicKeyX509))
+                            using (var xasyncenc = new X509AsymmetricEncrypter(PublicKeyX509))
                             {
                                 if (affectedProp.GetValue(bo) is string)
                                 {
@@ -256,11 +256,11 @@ namespace BO4E.Extensions.Encryption
                             }
                             break;
                         case AnonymizerApproach.DECRYPT:
-                            if (this.privateKey == null)
+                            if (privateKey == null)
                             {
                                 throw new ArgumentNullException(nameof(PrivateKeyFactory), "To use the decryption feature you have to provide a private key using the SetPrivateKey method.");
                             }
-                            using (var xasydec = new X509AsymmetricEncrypter(this.privateKey))
+                            using (var xasydec = new X509AsymmetricEncrypter(privateKey))
                             {
                                 affectedProp.SetValue(result, xasydec.Decrypt(affectedProp.GetValue(bo).ToString()));
                             }
@@ -513,7 +513,7 @@ namespace BO4E.Extensions.Encryption
         /// <inheritdoc/>
         public void Dispose()
         {
-            this.privateKey = null;
+            privateKey = null;
             if (hashingSalt != null)
             {
                 for (var i = 0; i < hashingSalt.Length; i++)

@@ -86,25 +86,25 @@ namespace BO4E.Reporting
         /// <returns></returns>
         public int CompareTo(CompletenessReport other)
         {
-            if (this.ReferenceTimeFrame == null && other.ReferenceTimeFrame == null)
+            if (ReferenceTimeFrame == null && other.ReferenceTimeFrame == null)
             {
                 return 0;
             }
-            if (this.ReferenceTimeFrame != null && other.ReferenceTimeFrame == null)
+            if (ReferenceTimeFrame != null && other.ReferenceTimeFrame == null)
             {
                 return 1;
             }
-            if (this.ReferenceTimeFrame == null && other.ReferenceTimeFrame != null)
+            if (ReferenceTimeFrame == null && other.ReferenceTimeFrame != null)
             {
                 return -1;
             }
-            if (this.ReferenceTimeFrame != null && other.ReferenceTimeFrame != null)
+            if (ReferenceTimeFrame != null && other.ReferenceTimeFrame != null)
             {
-                if (this.ReferenceTimeFrame.Startdatum.HasValue && other.ReferenceTimeFrame.Startdatum.HasValue)
+                if (ReferenceTimeFrame.Startdatum.HasValue && other.ReferenceTimeFrame.Startdatum.HasValue)
                 {
                     return Comparer<DateTimeOffset>.Default.Compare(ReferenceTimeFrame.Startdatum.Value, other.ReferenceTimeFrame.Startdatum.Value);
                 }
-                if (this.ReferenceTimeFrame.Startdatum.HasValue)
+                if (ReferenceTimeFrame.Startdatum.HasValue)
                 {
                     return 1;
                 }
@@ -222,8 +222,8 @@ namespace BO4E.Reporting
             }
             var columns = new List<string>
             {
-                this.ReferenceTimeFrame.Startdatum.Value.ToString("yyyy-MM-ddTHH:mm:ssZ"),
-                this.ReferenceTimeFrame.Enddatum.Value.ToString("yyyy-MM-ddTHH:mm:ssZ")
+                ReferenceTimeFrame.Startdatum.Value.ToString("yyyy-MM-ddTHH:mm:ssZ"),
+                ReferenceTimeFrame.Enddatum.Value.ToString("yyyy-MM-ddTHH:mm:ssZ")
             };
 
             if (BO.Messlokation.ValidateId(LokationsId))
@@ -245,7 +245,7 @@ namespace BO4E.Reporting
             columns.Add(imsysRegex.Match(Obiskennzahl).Success ? "IMS" : "RLM");// messung
             columns.Add("MSB"); // MSB
 
-            if (this.UserProperties.TryGetValue("profil", out var profil))
+            if (UserProperties.TryGetValue("profil", out var profil))
             {
                 columns.Add(profil.ToString());
             }
@@ -254,7 +254,7 @@ namespace BO4E.Reporting
                 columns.Add(string.Empty);
             }
 
-            if (this.UserProperties.TryGetValue("profilRolle", out var profilRolle))
+            if (UserProperties.TryGetValue("profilRolle", out var profilRolle))
             {
                 columns.Add(profilRolle.ToString());
             }
@@ -264,8 +264,8 @@ namespace BO4E.Reporting
             }
             if (Gaps != null && Gaps.Any())
             {
-                var minGap = this.Gaps.Min(x => x.Startdatum);// OrderBy(x => x.Startdatum).First().Startdatum;
-                var maxGap = this.Gaps.Max(x => x.Enddatum);// OrderByDescending(x => x.Enddatum).First().Enddatum;
+                var minGap = Gaps.Min(x => x.Startdatum);// OrderBy(x => x.Startdatum).First().Startdatum;
+                var maxGap = Gaps.Max(x => x.Enddatum);// OrderByDescending(x => x.Enddatum).First().Enddatum;
                 columns.Add(minGap.ToString("yyyy-MM-ddTHH:mm:ssZ"));
                 columns.Add(maxGap.ToString("yyyy-MM-ddTHH:mm:ssZ"));
                 var gapsHours = (maxGap - minGap).TotalHours;
@@ -277,9 +277,9 @@ namespace BO4E.Reporting
                 columns.Add(string.Empty);
                 columns.Add(string.Empty);
             }
-            if (this.Coverage.HasValue)
+            if (Coverage.HasValue)
             {
-                columns.Add((this.Coverage.Value * 100).ToString("0.####") + " %");
+                columns.Add((Coverage.Value * 100).ToString("0.####") + " %");
             }
             else
             {

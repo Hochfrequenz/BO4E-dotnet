@@ -48,7 +48,7 @@ namespace TestBO4E
         protected void TestProtobufType(Type type, bool isDirectBase)
         {
             FieldInfo[] allFields;
-            System.Collections.Generic.IEnumerable<FieldInfo> fieldsWithProtoMemberAttribute;
+            IEnumerable<FieldInfo> fieldsWithProtoMemberAttribute;
             if (isDirectBase)
             {
                 allFields = type.GetFields(BindingFlags.Public | BindingFlags.Instance);

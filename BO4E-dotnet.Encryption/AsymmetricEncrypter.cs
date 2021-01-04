@@ -21,10 +21,10 @@ namespace BO4E.Extensions.Encryption
         /// <param name="publicKey">public key</param>
         public AsymmetricEncrypter(byte[] privateKey, byte[] publicKey)
         {
-            this.ownPublicKey = new byte[publicKey.Length];
+            ownPublicKey = new byte[publicKey.Length];
             this.privateKey = new byte[privateKey.Length];
             privateKey.CopyTo(this.privateKey, 0);
-            publicKey.CopyTo(this.ownPublicKey, 0);
+            publicKey.CopyTo(ownPublicKey, 0);
         }
         /// <summary>
         /// Instantiate with private and public key

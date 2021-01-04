@@ -82,7 +82,7 @@ namespace BO4E.COM
         [OnDeserialized]
         protected void FixSapBugs(StreamingContext context)
         {
-            this.FixSapCdsBug();
+            FixSapCdsBug();
         }
 
         /// <summary>

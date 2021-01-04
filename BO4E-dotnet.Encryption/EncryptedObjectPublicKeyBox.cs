@@ -17,8 +17,8 @@ namespace BO4E.BO
         /// <param name="nonce">unique nonce / initialisation vector (base 64 encoded, must not be used twice)</param>
         public EncryptedObjectPublicKeyBox(string cipherText, string publicKey, string nonce) : base(cipherText, EncryptionScheme.SodiumAsymmetricPublicKeyBox)
         {
-            this.PublicKey = publicKey;
-            this.Nonce = nonce;
+            PublicKey = publicKey;
+            Nonce = nonce;
         }
 
         /// <summary>

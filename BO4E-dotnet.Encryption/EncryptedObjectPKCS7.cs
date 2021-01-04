@@ -16,7 +16,7 @@ namespace BO4E.BO
         /// <param name="publicKeys">list of public keys for which the object is decrypt-able </param>
         public EncryptedObjectPKCS7(string cipherText, List<string> publicKeys) : base(cipherText, EncryptionScheme.BouncyCastleCMS)
         {
-            this.PublicKeys = publicKeys;
+            PublicKeys = publicKeys;
         }
 
         /// <summary>

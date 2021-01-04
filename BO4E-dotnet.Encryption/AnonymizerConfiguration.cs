@@ -34,13 +34,13 @@ namespace BO4E.Extensions.Encryption
         /// </summary>
         public AnonymizerConfiguration()
         {
-            this.ConfigurationKey = null;
-            this.operations = new Dictionary<DataCategory, AnonymizerApproach>();
+            ConfigurationKey = null;
+            operations = new Dictionary<DataCategory, AnonymizerApproach>();
             foreach (var ao in Enum.GetValues(typeof(DataCategory)))
             {
-                this.operations.Add((DataCategory)ao, AnonymizerApproach.KEEP);
+                operations.Add((DataCategory)ao, AnonymizerApproach.KEEP);
             }
-            this.unaffectedUserProperties = new HashSet<string>();
+            unaffectedUserProperties = new HashSet<string>();
         }
 
         /// <summary>
@@ -74,12 +74,12 @@ namespace BO4E.Extensions.Encryption
         {
             try
             {
-                this.operations.Add(anonymizerOption, anonymizerApproach);
+                operations.Add(anonymizerOption, anonymizerApproach);
             }
             catch (ArgumentException)
             {
-                this.operations.Remove(anonymizerOption);
-                this.operations.Add(anonymizerOption, anonymizerApproach);
+                operations.Remove(anonymizerOption);
+                operations.Add(anonymizerOption, anonymizerApproach);
             }
         }
         /// <summary>
@@ -88,7 +88,7 @@ namespace BO4E.Extensions.Encryption
         /// <returns>true if configuration potentially changes something</returns>
         public bool ContainsNonKeepingOperations()
         {
-            return this.operations
+            return operations
                 .Any(kvp => kvp.Value != AnonymizerApproach.KEEP);
         }
 

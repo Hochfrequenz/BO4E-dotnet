@@ -14,8 +14,8 @@ namespace BO4E.BO
         /// <param name="nonce">unique nonce / initialisation vector (base 64 encoded, must not be used twice)</param>
         public EncryptedObjectAEAD(string cipherText, string associatedData, string nonce) : base(cipherText, EncryptionScheme.SodiumSymmetricAEAD)
         {
-            this.AssociatedData = associatedData;
-            this.Nonce = nonce;
+            AssociatedData = associatedData;
+            Nonce = nonce;
         }
 
         /// <summary>

@@ -60,8 +60,8 @@ namespace TestBO4E
             em1.LokationsId = "DE1234";
             em2.LokationsId = "DE1234";
 
-            em1.LokationsTyp = BO4E.ENUM.Lokationstyp.MeLo;
-            em2.LokationsTyp = BO4E.ENUM.Lokationstyp.MeLo;
+            em1.LokationsTyp = Lokationstyp.MeLo;
+            em2.LokationsTyp = Lokationstyp.MeLo;
 
             em1.Energieverbrauch = new List<Verbrauch>();
             var v1 = new Verbrauch
@@ -82,7 +82,7 @@ namespace TestBO4E
 
             var v3 = new Verbrauch
             {
-                Einheit = BO4E.ENUM.Mengeneinheit.KWH,
+                Einheit = Mengeneinheit.KWH,
                 Obiskennzahl = "ABC",
                 Startdatum = new DateTime(2018, 1, 1),
                 Enddatum = new DateTime(2018, 12, 31),

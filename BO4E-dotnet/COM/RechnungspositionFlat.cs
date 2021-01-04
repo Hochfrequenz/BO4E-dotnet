@@ -119,34 +119,34 @@ namespace BO4E.COM
         public RechnungspositionFlat(Rechnungsposition rp)
         {
             // todo: make this reflection based. this is pita.
-            this.Positionsnummer = rp.Positionsnummer;
-            this.LieferungVon = rp.LieferungVon;
-            this.LieferungBis = rp.LieferungBis;
-            this.Positionstext = rp.Positionstext;
-            this.LokationsId = rp.LokationsId;
-            this.VertragsId = rp.VertragsId;
+            Positionsnummer = rp.Positionsnummer;
+            LieferungVon = rp.LieferungVon;
+            LieferungBis = rp.LieferungBis;
+            Positionstext = rp.Positionstext;
+            LokationsId = rp.LokationsId;
+            VertragsId = rp.VertragsId;
 #pragma warning disable CS0618 // Type or member is obsolete
-            this.VertragskontoId = rp.VertragskontoId;
+            VertragskontoId = rp.VertragskontoId;
 #pragma warning restore CS0618 // Type or member is obsolete
             if (rp.Einzelpreis != null)
             {
-                this.PreisWert = rp.Einzelpreis.Wert;
-                this.PreisEinheit = rp.Einzelpreis.Einheit;
-                this.PreisBezugswert = rp.Einzelpreis.Bezugswert;
-                this.PreisStatus = rp.Einzelpreis.Status;
+                PreisWert = rp.Einzelpreis.Wert;
+                PreisEinheit = rp.Einzelpreis.Einheit;
+                PreisBezugswert = rp.Einzelpreis.Bezugswert;
+                PreisStatus = rp.Einzelpreis.Status;
             }
             if (rp.PositionsMenge != null)
             {
-                this.PositionsMengeEinheit = rp.PositionsMenge.Einheit;
-                this.PositionsMengeWert = rp.PositionsMenge.Wert;
+                PositionsMengeEinheit = rp.PositionsMenge.Einheit;
+                PositionsMengeWert = rp.PositionsMenge.Wert;
             }
             else
             {
-                this.PositionsMengeEinheit = null;
-                this.PositionsMengeWert = null;
+                PositionsMengeEinheit = null;
+                PositionsMengeWert = null;
             }
-            this.Guid = rp.Guid;
-            this.Status = rp.Status;
+            Guid = rp.Guid;
+            Status = rp.Status;
         }
 
         /// <summary>

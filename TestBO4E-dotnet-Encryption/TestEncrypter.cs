@@ -112,7 +112,7 @@ namespace TestBO4EExtensions.Encryption
 
                 /******* X509 + RSA test ******/
                 // encrypt (without needing a private key)
-                var x509certPubl = new X509Certificate2(X509Certificate2.CreateFromCertFile("encrypterTests/publickey.cer"));
+                var x509certPubl = new X509Certificate2(X509Certificate.CreateFromCertFile("encrypterTests/publickey.cer"));
                 using (var xasyEnc = new X509AsymmetricEncrypter(x509certPubl))// encrypter needs no private key!
                 {
                     eo = xasyEnc.Encrypt(bo);
@@ -136,7 +136,7 @@ namespace TestBO4EExtensions.Encryption
                 Assert.IsTrue(expectedString == actualString, "Original and encrypted->decrypted object do not match!");
 
                 /********** X509 + RSA multiple recipients *******/
-                var x509certPubl2 = new X509Certificate2(X509Certificate2.CreateFromCertFile("encrypterTests/publickey2.cer"));
+                var x509certPubl2 = new X509Certificate2(X509Certificate.CreateFromCertFile("encrypterTests/publickey2.cer"));
                 EncryptedObject eoMultiple;
                 using (var xasyEncMultiple = new X509AsymmetricEncrypter(new HashSet<X509Certificate2> { x509certPubl, x509certPubl2 })) // encrypter needs not private key!
                 {
@@ -186,7 +186,7 @@ namespace TestBO4EExtensions.Encryption
                 EncryptedObject eo = JsonConvert.DeserializeObject<EncryptedObjectPublicKeyBox>("{\"versionStruktur\":1,\"boTyp\":\"ENCRYPTEDOBJECTPUBLICKEYBOX\",\"encryptionScheme\":1,\"nonce\":\"YRmjJpSb7irazqWbCwWvNWKlApIjGiRh\",\"cipherText\":\"H315B/1ualMyzg882cXXB2I8Ol19bQQ1RlzohUXIGvbY7xCtkVuZZXmTI3Ff1GLf7NoymoQKqW50k2jmBTsoSmFWhPwKxDlW9vdS71fzuJTXSgfEmXWEhez2cMuNo0CRP/jgWDDUDmu5R5jz0bB+/FxZECOfYR4WFuvTz4jM+G8=\",\"publicKey\":\"enRUmVbcBbnneJCnvaU+ldANIDc/wGfqTUVCtSkVwhU=\"}");
                 Encrypter dec = new AsymmetricEncrypter(privateKey);
                 var bo = dec.Decrypt(eo);
-                Assert.IsInstanceOfType(bo, typeof(BO4E.BO.LogObject));
+                Assert.IsInstanceOfType(bo, typeof(LogObject));
             }
             catch (JsonSerializationException)
             {

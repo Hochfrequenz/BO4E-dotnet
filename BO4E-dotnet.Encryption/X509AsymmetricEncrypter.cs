@@ -27,8 +27,8 @@ namespace BO4E.Extensions.Encryption
         /// <param name="cert">X509 certificate must contain the public key.</param>
         public X509AsymmetricEncrypter(X509Certificate2 cert)
         {
-            this.publicCerts = new HashSet<X509Certificate2> { cert };
-            this.privateKey = null;
+            publicCerts = new HashSet<X509Certificate2> { cert };
+            privateKey = null;
         }
 
         /// <summary>
@@ -37,12 +37,12 @@ namespace BO4E.Extensions.Encryption
         /// <param name="certs">Collection of certificates</param>
         public X509AsymmetricEncrypter(ISet<X509Certificate2> certs)
         {
-            this.publicCerts = new HashSet<X509Certificate2>();
+            publicCerts = new HashSet<X509Certificate2>();
             foreach (var c in certs)
             {
-                this.publicCerts.Add(c);
+                publicCerts.Add(c);
             }
-            this.privateKey = null;
+            privateKey = null;
         }
 
         private List<string> GetPublicKeysBase64()
@@ -66,8 +66,8 @@ namespace BO4E.Extensions.Encryption
         /// <param name="kp">AsymmetricKeyParamer, must contain the RSA private key.</param>
         public X509AsymmetricEncrypter(AsymmetricKeyParameter kp)
         {
-            this.publicCerts = null;
-            this.privateKey = kp;
+            publicCerts = null;
+            privateKey = kp;
         }
 
         public string Encrypt(string plainText)
@@ -110,7 +110,7 @@ namespace BO4E.Extensions.Encryption
                 var recipient = recipientsStore.GetFirstRecipient(recipientInfo.RecipientID);
                 try
                 {
-                    plainBytes = recipient.GetContent(this.privateKey);
+                    plainBytes = recipient.GetContent(privateKey);
                     break;
                 }
                 catch (CmsException) when (index != recipientsStore.Count - 1)
@@ -155,7 +155,7 @@ namespace BO4E.Extensions.Encryption
 
         public override void Dispose()
         {
-            this.privateKey = null;
+            privateKey = null;
         }
 
         ~X509AsymmetricEncrypter()

@@ -47,7 +47,7 @@ namespace BO4E.COM
         /// <returns>true if externe referenz with name <paramref name="extRefName"/> was found</returns>
         public static bool TryGetExterneReferenz(this ICollection<ExterneReferenz> extReferences, string extRefName, out string extRefWert)
         {
-            if (extRefName == null) throw new System.ArgumentNullException(nameof(extRefName));
+            if (extRefName == null) throw new ArgumentNullException(nameof(extRefName));
             if (extReferences == null)
             {
                 extRefWert = null;

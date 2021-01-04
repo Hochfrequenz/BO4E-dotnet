@@ -36,8 +36,8 @@ namespace BO4E.BO
         /// <param name="es">the encryption scheme</param>
         public EncryptedObject(string cipherText, EncryptionScheme es)
         {
-            this.CipherText = cipherText;
-            this.EncryptionScheme = es;
+            CipherText = cipherText;
+            EncryptionScheme = es;
         }
     }
 }

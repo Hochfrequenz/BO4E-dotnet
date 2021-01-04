@@ -71,7 +71,7 @@ namespace TestBO4EExtensions
                             Einheit = combi.Item3,
                             Obis = combi.Item2,
                             Wertermittlungsverfahren = combi.Item1,
-                            ReferenceTimeFrame = new BO4E.COM.Zeitraum
+                            ReferenceTimeFrame = new Zeitraum
                             {
                                 Startdatum = TestEnergiemengeExtension.GERMAN_APRIL_2018.Start,
                                 Enddatum = TestEnergiemengeExtension.GERMAN_APRIL_2018.End
@@ -396,7 +396,7 @@ namespace TestBO4EExtensions
             {
                 LokationsId = "MeinUnitTest123",
                 LokationsTyp = Lokationstyp.MeLo,
-                Energieverbrauch = verbrauchSlices.Select(vs => new BO4E.COM.Verbrauch()
+                Energieverbrauch = verbrauchSlices.Select(vs => new Verbrauch()
                 {
                     Startdatum = vs.Start,
                     Enddatum = vs.End,

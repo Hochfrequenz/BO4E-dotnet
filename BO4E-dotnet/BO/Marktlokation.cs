@@ -134,7 +134,7 @@ namespace BO4E.BO
         [ProtoMember(1021)]
         [NonOfficial(NonOfficialCategory.CUSTOMER_REQUIREMENTS)]
         [Obsolete("I'm pretty sure the BO.Marktlokation is not the right place to store this information. Please evaluate!")]
-        public List<COM.MarktpartnerDetails> Marktrollen { get; set; } // ToDo: evaluate this
+        public List<MarktpartnerDetails> Marktrollen { get; set; } // ToDo: evaluate this
 
         /// <summary>
         /// für EDIFACT mapping
@@ -300,7 +300,7 @@ namespace BO4E.BO
         /// <returns>if marktlokaionsId matches the expected format</returns>
         public bool HasValidId()
         {
-            return ValidateId(this.MarktlokationsId);
+            return ValidateId(MarktlokationsId);
         }
 
         /// <summary>

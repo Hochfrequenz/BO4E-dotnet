@@ -23,7 +23,7 @@ namespace BO4E.meta.LenientConverters
         /// <param name="defaultDateTime"></param>
         public LenientDateTimeConverter(DateTimeOffset? defaultDateTime = null)
         {
-            this._defaultDateTime = defaultDateTime;
+            _defaultDateTime = defaultDateTime;
         }
 
         /// <summary>
@@ -104,7 +104,7 @@ namespace BO4E.meta.LenientConverters
             {
                 return null;
             }
-            if (this._defaultDateTime.HasValue)
+            if (_defaultDateTime.HasValue)
             {
                 return _defaultDateTime;
             }

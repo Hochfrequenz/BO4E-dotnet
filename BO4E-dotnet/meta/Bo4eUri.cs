@@ -39,13 +39,13 @@ namespace BO4E.meta
             {
                 throw new ArgumentException($"The URI {uri} is not well formed.");
             }*/
-            if (base.Scheme + "://" != BO4E_SCHEME)
+            if (Scheme + "://" != BO4E_SCHEME)
             {
-                throw new ArgumentException($"The scheme '{base.Scheme}' in {uri} is not valid. Expected '{BO4E_SCHEME}://'");
+                throw new ArgumentException($"The scheme '{Scheme}' in {uri} is not valid. Expected '{BO4E_SCHEME}://'");
             }
             if (GetBoName() == null)
             {
-                throw new ArgumentException($"There is no Business Object of type '{base.Host}'.");
+                throw new ArgumentException($"There is no Business Object of type '{Host}'.");
             }
         }
 
@@ -68,7 +68,7 @@ namespace BO4E.meta
             foreach (var boName in BoMapper.GetValidBoNames())
 #pragma warning restore CS0618 // Type or member is obsolete
             {
-                if (boName.ToUpper().Equals(this.Host.ToUpper()))
+                if (boName.ToUpper().Equals(Host.ToUpper()))
                 {
                     return boName;
                 }
@@ -103,7 +103,7 @@ namespace BO4E.meta
             // https://stackoverflow.com/a/3847593/10009545
             // But why?
             string result;
-            while ((result = Uri.UnescapeDataString(stringToUnescape)) != stringToUnescape)
+            while ((result = UnescapeDataString(stringToUnescape)) != stringToUnescape)
             {
                 stringToUnescape = result;
             }
@@ -201,7 +201,7 @@ namespace BO4E.meta
                 }
             }
 
-            var relativeUri = new Uri(Uri.EscapeUriString(relativeUriBuilder.ToString()), UriKind.Relative);
+            var relativeUri = new Uri(EscapeUriString(relativeUriBuilder.ToString()), UriKind.Relative);
             if (TryCreate(baseUri, relativeUri, out var resultUri))
             {
                 return new Bo4eUri(resultUri.AbsoluteUri);
@@ -271,7 +271,7 @@ namespace BO4E.meta
             // top level and recursive calls, check the value of boType and i.
             if (boType == null) // top level call
             {
-                boType = this.GetBoType();
+                boType = GetBoType();
             }
             result.Add("boTyp", boType.Name.ToUpper());
 
@@ -290,7 +290,7 @@ namespace BO4E.meta
                 string keyValue;
                 try
                 {
-                    keyValue = FullyUnescapeDataString(this.Segments[++i]);
+                    keyValue = FullyUnescapeDataString(Segments[++i]);
                 }
                 catch (IndexOutOfRangeException)
                 {
@@ -332,8 +332,8 @@ namespace BO4E.meta
                 }
             }
 
-            var query = System.Web.HttpUtility.ParseQueryString(this.Query);
-            var boProps = this.GetBoType().GetProperties().Select(p => p.Name);
+            var query = System.Web.HttpUtility.ParseQueryString(Query);
+            var boProps = GetBoType().GetProperties().Select(p => p.Name);
             if (query.AllKeys.Contains("filter")) // currently this pattern only supports AND concatenation, not OR. result should contain multiple JObjects
             {
                 var filter = query.Get("filter");
@@ -354,9 +354,9 @@ namespace BO4E.meta
         /// <param name="filterObject"></param>
         public Bo4eUri AddFilter(IDictionary<string, object> filterObject)
         {
-            var query = System.Web.HttpUtility.ParseQueryString(this.Query);
+            var query = System.Web.HttpUtility.ParseQueryString(Query);
             var filterString = string.Empty;
-            var boFields = this.GetBoType().GetProperties().Select(p => p.Name);
+            var boFields = GetBoType().GetProperties().Select(p => p.Name);
             var andString = " and ";
             foreach (var kvp in filterObject.Where(kvp => kvp.Value != null && boFields.Contains(kvp.Key, StringComparer.OrdinalIgnoreCase)))
             {

@@ -90,11 +90,11 @@ namespace BO4E.COM
         /// <returns><code>true</code> iff all elements of this COM and COM b are equal; <code>false</code> otherwise</returns>
         public override bool Equals(object b)
         {
-            if (b == null || b.GetType() != this.GetType())
+            if (b == null || b.GetType() != GetType())
             {
                 return false;
             }
-            return this.Equals(b as COM);
+            return Equals(b as COM);
         }
 
         /// <summary>
@@ -104,7 +104,7 @@ namespace BO4E.COM
         /// <returns><code>true</code> iff all elements of this COM and COM b are equal; <code>false</code> otherwise</returns>
         public bool Equals(COM b)
         {
-            if (b == null || b.GetType() != this.GetType())
+            if (b == null || b.GetType() != GetType())
             {
                 return false;
             }
@@ -117,8 +117,8 @@ namespace BO4E.COM
             var result = 31; // I read online that a medium sized prime was a good choice ;)
             unchecked
             {
-                result *= this.GetType().GetHashCode();
-                foreach (var prop in this.GetType().GetProperties())
+                result *= GetType().GetHashCode();
+                foreach (var prop in GetType().GetProperties())
                 {
                     if (prop.GetValue(this) != null)
                     {
@@ -159,8 +159,8 @@ namespace BO4E.COM
         protected string guidSerialized
 #pragma warning restore IDE1006 // Naming Styles
         {
-            get => this.Guid.HasValue ? this.Guid.ToString() : string.Empty;
-            set { this.Guid = string.IsNullOrWhiteSpace(value) ? (Guid?)null : System.Guid.Parse(value); }
+            get => Guid.HasValue ? Guid.ToString() : string.Empty;
+            set { Guid = string.IsNullOrWhiteSpace(value) ? (Guid?)null : System.Guid.Parse(value); }
         }
 
         /// <summary>

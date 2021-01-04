@@ -63,7 +63,7 @@ namespace TestBO4EExtensions.Encryption
                 {
                     if (ac.operations.ContainsValue(AnonymizerApproach.ENCRYPT))
                     {
-                        var x509certPubl = new X509Certificate2(X509Certificate2.CreateFromCertFile("anonymizerTests/certificates/publicX509Cert.crt"));
+                        var x509certPubl = new X509Certificate2(X509Certificate.CreateFromCertFile("anonymizerTests/certificates/publicX509Cert.crt"));
                         a.SetPublicKey(x509certPubl);
                     }
                     if (ac.operations.ContainsValue(AnonymizerApproach.HASH))
@@ -228,7 +228,7 @@ namespace TestBO4EExtensions.Encryption
             Energiemenge encryptedEm;
             using (var anonymizer = new Anonymizer(encConf))
             {
-                var x509certPubl = new X509Certificate2(X509Certificate2.CreateFromCertFile("anonymizerTests/certificates/publicX509Cert.crt"));
+                var x509certPubl = new X509Certificate2(X509Certificate.CreateFromCertFile("anonymizerTests/certificates/publicX509Cert.crt"));
                 anonymizer.SetPublicKey(x509certPubl);
                 encryptedEm = anonymizer.ApplyOperations<Energiemenge>(em);
             }

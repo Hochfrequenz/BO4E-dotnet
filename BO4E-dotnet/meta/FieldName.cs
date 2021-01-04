@@ -26,8 +26,8 @@ namespace BO4E.meta
         /// <param name="language">language of the translation</param>
         public FieldName(string text, Language language)
         {
-            this.Text = text;
-            this.Language = language;
+            Text = text;
+            Language = language;
         }
     }
 }

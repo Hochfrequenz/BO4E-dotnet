@@ -181,7 +181,7 @@ namespace BO4E.BO
         /// <returns>if messlokationsId matches the expected format</returns>
         public bool HasValidId()
         {
-            return ValidateId(this.MesslokationsId);
+            return ValidateId(MesslokationsId);
         }
 
         /// <summary>
