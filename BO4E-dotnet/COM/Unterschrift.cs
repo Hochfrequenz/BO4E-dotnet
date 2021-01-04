@@ -11,7 +11,7 @@ namespace BO4E.COM
     /// https://www.bo4e.de/dokumentation/komponenten/com-unterschrift
     /// </summary>
     [ProtoContract]
-    public class Unterschrift : COM
+    public class Unterschrift : Com
     {
         /// <summary>
         /// Ort, an dem die Unterschrift geleistet wird

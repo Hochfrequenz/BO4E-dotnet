@@ -13,7 +13,7 @@ namespace BO4E.COM
 {
     /// <summary>Abbildung für Vertragskonditionen. Die Komponente wird sowohl im Vertrag als auch im Tarif verwendet.</summary>
     [ProtoContract]
-    public class Vertragskonditionen : COM
+    public class Vertragskonditionen : Com
     {
         /// <summary>Freitext zur Beschreibung der Konditionen, z.B. "Standardkonditionen Gas"</summary>
         [JsonProperty(PropertyName = "beschreibung", Required = Required.Default)]

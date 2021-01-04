@@ -23,7 +23,7 @@ namespace TestBO4E.ShowCaseTests
             var em = new Energiemenge()
             {
                 LokationsId = "DE0123456789012345678901234567890",
-                LokationsTyp = Lokationstyp.MeLo,
+                LokationsTyp = Lokationstyp.ME_LO,
                 Energieverbrauch = new List<Verbrauch>()
                 {
                    new Verbrauch()

@@ -17,7 +17,7 @@ namespace BO4E.COM
     /// </summary>
     [ProtoContract]
     [NonOfficial(NonOfficialCategory.CUSTOMER_REQUIREMENTS)]
-    public class RechnungspositionFlat : COM
+    public class RechnungspositionFlat : Com
     {
         /// <inheritdoc cref="Rechnungsposition.Positionsnummer"/>
         [JsonProperty(PropertyName = "positionsnummer", Required = Required.Always)]

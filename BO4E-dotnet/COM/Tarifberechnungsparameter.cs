@@ -8,7 +8,7 @@ namespace BO4E.COM
 {
     /// <summary>In dieser Komponente sind die Berechnungsparameter für die Ermittlung der Tarifkosten zusammengefasst.</summary>
     [ProtoContract]
-    public class Tarifberechnungsparameter : COM
+    public class Tarifberechnungsparameter : Com
     {
         /// <summary>Gibt an, wie die Einzelpreise des Tarifes zu verarbeiten sind. Details <see cref="Tarifkalkulationsmethode" /></summary>
         [JsonProperty(PropertyName = "berechnungsmethode", Required = Required.Default)]
@@ -18,7 +18,7 @@ namespace BO4E.COM
         /// <summary>Zeigt an, ob der Messpreis im Grundpreis enthalten ist.</summary>
         [JsonProperty(PropertyName = "messpreisInGPEnthalten", Required = Required.Default)]
         [ProtoMember(4)]
-        public string MesspreisInGPEnthalten { get; set; }
+        public string MesspreisInGpEnthalten { get; set; }
 
         /// <summary>Typ des Messpreises. Details <see cref="ENUM.Messpreistyp" /></summary>
         [ProtoMember(5)]
@@ -43,12 +43,12 @@ namespace BO4E.COM
         /// <summary>Höchstpreis für den Durchschnitts-Arbeitspreis NT. Details <see cref="Preis" /></summary>
         [JsonProperty(PropertyName = "hoechstpreisNT", Required = Required.Default)]
         [ProtoMember(10)]
-        public Preis HoechstpreisNT { get; set; }
+        public Preis HoechstpreisNt { get; set; }
 
         /// <summary>Höchstpreis für den Durchschnitts-Arbeitspreis HT. Details <see cref="Preis" /></summary>
         [JsonProperty(PropertyName = "hoechstpreisHT", Required = Required.Default)]
         [ProtoMember(11)]
-        public Preis HoechstpreisHT { get; set; }
+        public Preis HoechstpreisHt { get; set; }
 
         /// <summary>Mindestpreis für den Durchschnitts-Arbeitspreis. Details <see cref="Preis" /></summary>
         [JsonProperty(PropertyName = "mindestpreis", Required = Required.Default)]

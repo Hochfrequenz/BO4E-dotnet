@@ -10,7 +10,7 @@ namespace BO4E.COM
 {
     /// <summary>Mit dieser Komponente können Tarifpreise verschiedener Typen im Zusammenhang mit regionalen Gültigkeiten abgebildet werden.</summary>
     [ProtoContract]
-    public class RegionaleTarifpreisposition : COM
+    public class RegionaleTarifpreisposition : Com
     {
         /// <summary>Angabe des Preistyps (z.B. Grundpreis) Details <see cref="ENUM.Preistyp" /></summary>
         [JsonProperty(PropertyName = "preistyp", Required = Required.Always)]

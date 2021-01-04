@@ -2,16 +2,16 @@ namespace BO4E.ENUM.EDI.UTILMD
 {
     /// <summary>
     /// Zur Angabe eines Status. Dieses Segment wird benutzt um den Transaktionsgrund mitzuteilen.
-    /// Der Transaktionsgrund beschreibt den Geschäftsvorfall zur Kategorie genauer. Dies dient der
-    /// Plausibilisierung und Prozesssteuerung.Die Erläuterung zu den einzelnen Transaktionsgründen
+    /// Der Transaktionsgrund beschreibt den GeschÃ¤ftsvorfall zur Kategorie genauer. Dies dient der
+    /// Plausibilisierung und Prozesssteuerung.Die ErlÃ¤uterung zu den einzelnen TransaktionsgrÃ¼nden
     /// ist im DE9013 beschrieben
     /// </summary>
-    public enum UTILMD9013
+    public enum Utilmd9013
     {
 #pragma warning disable CS1591 // Missing XML comment for publicly visible type or member
 
         /// <summary>Ein/Auszug (Umzug)</summary>
-        /// Kunde verlässt oder bezieht eine schon bestehende Marktlokation
+        /// Kunde verlÃ¤sst oder bezieht eine schon bestehende Marktlokation
         E01,
 
         /// <summary>Einzug/Neuanlage</summary>
@@ -21,7 +21,7 @@ namespace BO4E.ENUM.EDI.UTILMD
         /// <summary>Wechsel</summary>
         /// <list type="bullet">
         /// <item>Kunde bleibt an der Marktlokation, hat nur den Marktpartner gewechselt</item>
-        /// <item>Marktpartner hat den Kunden gekündigt</item>
+        /// <item>Marktpartner hat den Kunden gekÃ¼ndigt</item>
         /// </list>
         E03,
 
@@ -29,21 +29,21 @@ namespace BO4E.ENUM.EDI.UTILMD
         E06,
 
         /// <summary>Ablehnung (Messproblem)</summary>
-        /// Der Absender lehnt die Transaktion ab. Der Marktpartner fordert ein Messverfahren, was in diesem Fall nicht möglich ist bzw. nicht mit dem Leistungsumfang vereinbar ist.
+        /// Der Absender lehnt die Transaktion ab. Der Marktpartner fordert ein Messverfahren, was in diesem Fall nicht mÃ¶glich ist bzw. nicht mit dem Leistungsumfang vereinbar ist.
         E11,
 
         /// <summary>Zustimmung ohne Korrekturen</summary>
-        /// Der Absender stimmt der Meldung und den Inhalten des Vorgangs voll zu. Er hat keine Änderungen an den gesendeten Daten vorgenommen. Er kann allerdings Daten gem. seiner Aufgabe im Prozess vervollständigt haben (z.B. der NB bei einer Anmeldung mit dem Standardlastprofil). In diesen Fällen ist Z43 oder Z44 nicht zu verwenden
+        /// Der Absender stimmt der Meldung und den Inhalten des Vorgangs voll zu. Er hat keine Ã„nderungen an den gesendeten Daten vorgenommen. Er kann allerdings Daten gem. seiner Aufgabe im Prozess vervollstÃ¤ndigt haben (z.B. der NB bei einer Anmeldung mit dem Standardlastprofil). In diesen FÃ¤llen ist Z43 oder Z44 nicht zu verwenden
         E15,
 
-        /// <summary>Ablehnung wg. Fristüberschreitung</summary>
-        /// Der Absender lehnt die Transaktion ab. Eine einzuhaltende Frist ist überschritten worden. Bei der Übermittlung von bilanzierungsrelevanten Stammdatenänderungen wird auch eine Ablehnung erfolgen, wenn das Änderungsdatum kein Monatserster ist.
+        /// <summary>Ablehnung wg. FristÃ¼berschreitung</summary>
+        /// Der Absender lehnt die Transaktion ab. Eine einzuhaltende Frist ist Ã¼berschritten worden. Bei der Ãœbermittlung von bilanzierungsrelevanten StammdatenÃ¤nderungen wird auch eine Ablehnung erfolgen, wenn das Ã„nderungsdatum kein Monatserster ist.
         E17,
 
         /// <summary>
-        /// Zustimmung mit Terminänderung
+        /// Zustimmung mit TerminÃ¤nderung
         /// </summary>
-        /// Der Absender stimmt der Meldung zu einem abweichenden Termin zu. Mit dieser Kennzeichnung übermittelt der Absender dem Sender der ursprünglichen Meldung, dass diese abgelehnt wurde (Ablehnung zum alten Termin), jedoch eine Zustimmung zu einem abweichenden Termin erfolgte.
+        /// Der Absender stimmt der Meldung zu einem abweichenden Termin zu. Mit dieser Kennzeichnung Ã¼bermittelt der Absender dem Sender der ursprÃ¼nglichen Meldung, dass diese abgelehnt wurde (Ablehnung zum alten Termin), jedoch eine Zustimmung zu einem abweichenden Termin erfolgte.
         Z01,
 
         /// <summary>
@@ -56,9 +56,9 @@ namespace BO4E.ENUM.EDI.UTILMD
         Z26,
 
         /// <summary>
-        /// Ablehnung (kein Vertragsverhältnis mehr vorhanden)
+        /// Ablehnung (kein VertragsverhÃ¤ltnis mehr vorhanden)
         /// </summary>
-        /// Der Absender lehnt die Transaktion ab. Der Kunde wurde zur betreffenden Marktlokation, Messlokation bzw. Tranche identifiziert, das Vertragsverhältnis wurde bereits zu einem früheren Zeitpunkt schon beendet.
+        /// Der Absender lehnt die Transaktion ab. Der Kunde wurde zur betreffenden Marktlokation, Messlokation bzw. Tranche identifiziert, das VertragsverhÃ¤ltnis wurde bereits zu einem frÃ¼heren Zeitpunkt schon beendet.
         Z29,
 
         Z33,
@@ -73,7 +73,7 @@ namespace BO4E.ENUM.EDI.UTILMD
         /// <summary>
         /// Zustimmung mit Korrektur von nicht bilanzierungsrel. Daten
         /// </summary>
-        /// Die Zustimmung erfolgt mit Korrektur von nicht bilanzierungsrelevanten Daten in der Antwortnachricht. Die Bilanzierungsrelevanz leitet sich aus der Übersicht der Änderungsmeldungen ab.
+        /// Die Zustimmung erfolgt mit Korrektur von nicht bilanzierungsrelevanten Daten in der Antwortnachricht. Die Bilanzierungsrelevanz leitet sich aus der Ãœbersicht der Ã„nderungsmeldungen ab.
         Z44,
 
         Z69,
@@ -120,7 +120,7 @@ namespace BO4E.ENUM.EDI.UTILMD
         ZJ1,
 
         /// <summary>
-        /// Übernahme aufgrund nicht erfolgtem iMS-Einbau
+        /// Ãœbernahme aufgrund nicht erfolgtem iMS-Einbau
         /// </summary>
         ZJ4
     }

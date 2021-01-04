@@ -21,7 +21,7 @@ namespace BO4E.COM
     [ProtoContract]
     [NonOfficial(NonOfficialCategory.UNSPECIFIED)]
     [Obsolete("Please use BO4E.BO." + nameof(Marktteilnehmer) + " instead.")]
-    public class MarktpartnerDetails : COM
+    public class MarktpartnerDetails : Com
     {
         /// <summary>
         /// rollencodenummer von Marktrolle
@@ -47,7 +47,7 @@ namespace BO4E.COM
         [ProtoMember(5)]
         [Obsolete("Use " + nameof(Marktteilnehmer) + "." + nameof(Marktteilnehmer.Marktrolle) + " instead")]
 #pragma warning disable IDE1006 // Naming Styles because Marktrolle is already the name of the enum
-        public ENUM.Marktrolle marktrolle { get; set; }
+        public ENUM.Marktrolle Marktrolle { get; set; }
 
 #pragma warning restore IDE1006 // Naming Styles
     }

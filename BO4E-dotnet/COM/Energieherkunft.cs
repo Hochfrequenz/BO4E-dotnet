@@ -8,7 +8,7 @@ namespace BO4E.COM
 {
     /// <summary>Energieherkunft</summary>
     [ProtoContract]
-    public class Energieherkunft : COM
+    public class Energieherkunft : Com
     {
         /// <summary>Art der Erzeugung der Energie. Details <see cref="ENUM.Erzeugungsart" /></summary>
         [JsonProperty(PropertyName = "erzeugungsart", Required = Required.Always)]

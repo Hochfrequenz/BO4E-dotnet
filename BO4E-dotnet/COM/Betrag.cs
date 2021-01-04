@@ -9,7 +9,7 @@ namespace BO4E.COM
 {
     /// <summary>Die Komponente wird dazu verwendet Summebeträge - beispielsweise in Angeboten und Rechnungen - als Geldbeträge abzubilden. Die Einheit ist dabei immer die Hauptwährung also Euro, Dollar etc..</summary>
     [ProtoContract]
-    public class Betrag : COM
+    public class Betrag : Com
     {
         /// <summary>Gibt den Betrag des Preises an.</summary>
         [JsonProperty(PropertyName = "wert", Required = Required.Always)]

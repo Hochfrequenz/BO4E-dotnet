@@ -9,7 +9,7 @@ namespace BO4E.COM
 {
     /// <summary>Abbildung einer Menge mit Wert und Einheit.</summary>
     [ProtoContract]
-    public class Menge : COM
+    public class Menge : Com
     {
         /// <summary>Gibt den absoluten Wert der Menge an.</summary>
         [JsonProperty(PropertyName = "wert", Required = Required.Always)]

@@ -31,7 +31,7 @@ namespace TestBO4EExtensions
             var em = new Energiemenge()
             {
                 LokationsId = "De12345",
-                LokationsTyp = BO4E.ENUM.Lokationstyp.MaLo,
+                LokationsTyp = BO4E.ENUM.Lokationstyp.MA_LO,
                 Energieverbrauch = new List<BO4E.COM.Verbrauch>()
                 {
                     new BO4E.COM.Verbrauch()

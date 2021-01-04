@@ -19,7 +19,7 @@ namespace BO4E.Extensions.Encryption
     public class X509AsymmetricEncrypter : Encrypter
     {
         private readonly ISet<X509Certificate2> _publicCerts;
-        private AsymmetricKeyParameter privateKey;
+        private AsymmetricKeyParameter _privateKey;
 
         /// <summary>
         /// Provide the constructor with an X509 certificate to use as encrypter.
@@ -28,7 +28,7 @@ namespace BO4E.Extensions.Encryption
         public X509AsymmetricEncrypter(X509Certificate2 cert)
         {
             _publicCerts = new HashSet<X509Certificate2> { cert };
-            privateKey = null;
+            _privateKey = null;
         }
 
         /// <summary>
@@ -42,7 +42,7 @@ namespace BO4E.Extensions.Encryption
             {
                 _publicCerts.Add(c);
             }
-            privateKey = null;
+            _privateKey = null;
         }
 
         private List<string> GetPublicKeysBase64()
@@ -67,7 +67,7 @@ namespace BO4E.Extensions.Encryption
         public X509AsymmetricEncrypter(AsymmetricKeyParameter kp)
         {
             _publicCerts = null;
-            privateKey = kp;
+            _privateKey = kp;
         }
 
         public string Encrypt(string plainText)
@@ -90,9 +90,9 @@ namespace BO4E.Extensions.Encryption
 
         public EncryptedObject Encrypt(BusinessObject plainObject)
         {
-            var plainText = JsonConvert.SerializeObject(plainObject, settings: encryptionSerializerSettings);
+            var plainText = JsonConvert.SerializeObject(plainObject, settings: EncryptionSerializerSettings);
             var cipherString = Encrypt(plainText);
-            return new EncryptedObjectPKCS7(cipherString, GetPublicKeysBase64());
+            return new EncryptedObjectPkcs7(cipherString, GetPublicKeysBase64());
         }
 
         public string Decrypt(string cipherText)
@@ -110,7 +110,7 @@ namespace BO4E.Extensions.Encryption
                 var recipient = recipientsStore.GetFirstRecipient(recipientInfo.RecipientID);
                 try
                 {
-                    plainBytes = recipient.GetContent(privateKey);
+                    plainBytes = recipient.GetContent(_privateKey);
                     break;
                 }
                 catch (CmsException) when (index != recipientsStore.Count - 1)
@@ -121,7 +121,7 @@ namespace BO4E.Extensions.Encryption
             return Encoding.UTF8.GetString(plainBytes);
         }
 
-        public static AsymmetricCipherKeyPair PrivateBase64KeyToACKP(string pemKeyBase64)
+        public static AsymmetricCipherKeyPair PrivateBase64KeyToAckp(string pemKeyBase64)
         {
             if (!pemKeyBase64.StartsWith("-----"))
             {
@@ -135,27 +135,27 @@ namespace BO4E.Extensions.Encryption
 
         public override BusinessObject Decrypt(EncryptedObject encryptedObject)
         {
-            if (!(encryptedObject is EncryptedObjectPKCS7 eo))
+            if (!(encryptedObject is EncryptedObjectPkcs7 eo))
             {
                 return null;
             }
             var plainString = Decrypt(eo.CipherText);
-            return JsonConvert.DeserializeObject<BusinessObject>(plainString, settings: encryptionSerializerSettings);
+            return JsonConvert.DeserializeObject<BusinessObject>(plainString, settings: EncryptionSerializerSettings);
         }
 
         public override T Decrypt<T>(EncryptedObject encryptedObject)
         {
-            if (!(encryptedObject is EncryptedObjectPKCS7 eo))
+            if (!(encryptedObject is EncryptedObjectPkcs7 eo))
             {
                 return null;
             }
             var plainString = Decrypt(eo.CipherText);
-            return JsonConvert.DeserializeObject<T>(plainString, settings: encryptionSerializerSettings);
+            return JsonConvert.DeserializeObject<T>(plainString, settings: EncryptionSerializerSettings);
         }
 
         public override void Dispose()
         {
-            privateKey = null;
+            _privateKey = null;
         }
 
         ~X509AsymmetricEncrypter()

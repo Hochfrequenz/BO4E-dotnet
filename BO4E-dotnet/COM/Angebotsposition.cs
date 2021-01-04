@@ -7,7 +7,7 @@ namespace BO4E.COM
 {
     /// <summary>Unterhalb von Angebotsteilen sind die Angebotspositionen eingebunden. Hier werden die angebotenen Bestandteile einzeln aufgeführt. Beispiel:</summary>
     [ProtoContract]
-    public class Angebotsposition : COM
+    public class Angebotsposition : Com
     {
         /// <summary>Bezeichnung der jeweiligen Position des Angebotsteils.</summary>
         [JsonProperty(PropertyName = "positionsbezeichung", Required = Required.Always)]

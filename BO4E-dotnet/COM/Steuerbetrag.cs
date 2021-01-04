@@ -9,7 +9,7 @@ namespace BO4E.COM
 {
     /// <summary>Abbildung eines Steuerbetrages.</summary>
     [ProtoContract]
-    public class Steuerbetrag : COM
+    public class Steuerbetrag : Com
     {
         /// <summary>Kennzeichnung des Steuersatzes, bzw. Verfahrens. Details <see cref="ENUM.Steuerkennzeichen" /></summary>
         [JsonProperty(PropertyName = "steuerkennzeichen", Required = Required.Always)]

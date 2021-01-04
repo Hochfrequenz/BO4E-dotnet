@@ -24,7 +24,7 @@ namespace BO4E.Extensions.BusinessObjects.Energiemenge
     /// <summary>Do calculations on top of an Energiemenge BO4E.</summary>
     public static partial class EnergiemengeExtension
     {
-        private static readonly decimal QUASI_ZERO = 0.00000000001M;
+        private static readonly decimal QuasiZero = 0.00000000001M;
 
         /// <summary>
         /// Get Zeitraum covered by Energiemenge.
@@ -611,7 +611,7 @@ namespace BO4E.Extensions.BusinessObjects.Energiemenge
         /// <returns>true iff Energiemenge has defined value for every point in time range, false otherwise</returns>
         public static bool IsContinuous(this BO4E.BO.Energiemenge em, TimeRange reference)
         {
-            return Math.Abs(em.Energieverbrauch.Sum(v => GetOverlapFactor(new TimeRange(v.Startdatum, v.Enddatum), reference, true)) - 1.0M) < QUASI_ZERO;
+            return Math.Abs(em.Energieverbrauch.Sum(v => GetOverlapFactor(new TimeRange(v.Startdatum, v.Enddatum), reference, true)) - 1.0M) < QuasiZero;
         }
 
         private static decimal GetOverlapFactor(TimeRange period, ITimeRange reference, bool toReference)
@@ -806,13 +806,13 @@ namespace BO4E.Extensions.BusinessObjects.Energiemenge
         /// to the first second of the DST period. To 
         /// </summary>
         /// <param name="em"></param>
-        public static void FixSapCDSBug(this BO4E.BO.Energiemenge em)
+        public static void FixSapCdsBug(this BO4E.BO.Energiemenge em)
         {
             using (MiniProfiler.Current.Step("Fix SAP CDS Bug (Energiemenge)"))
             {
                 if (em.Energieverbrauch != null && !em.HasBeenSanitized())
                 {
-                    using (MiniProfiler.Current.Step($"for each Verbrauch entry: {nameof(FixSapCDSBug)}"))
+                    using (MiniProfiler.Current.Step($"for each Verbrauch entry: {nameof(FixSapCdsBug)}"))
                     {
                         foreach (var v in em.Energieverbrauch)
                         {
@@ -860,13 +860,13 @@ namespace BO4E.Extensions.BusinessObjects.Energiemenge
                     {
                         em.UserProperties = new Dictionary<string, JToken>();
                     }
-                    em.UserProperties[SAP_SANITIZED_USERPROPERTY_KEY] = true;
+                    em.UserProperties[SapSanitizedUserpropertyKey] = true;
                 }
             }
         }
 
 
-        private const string SAP_SANITIZED_USERPROPERTY_KEY = "sapSanitized";
+        private const string SapSanitizedUserpropertyKey = "sapSanitized";
         /// <summary>
         /// tests if the method <see cref="Verbrauch.FixSapCdsBug"/> has been executed yet.
         /// </summary>
@@ -874,7 +874,7 @@ namespace BO4E.Extensions.BusinessObjects.Energiemenge
         private static bool HasBeenSanitized(this BO4E.BO.Energiemenge em)
         {
             bool sanitized;
-            if (em.UserProperties == null || !em.UserProperties.TryGetValue(SAP_SANITIZED_USERPROPERTY_KEY, out var sapSanitizedToken))
+            if (em.UserProperties == null || !em.UserProperties.TryGetValue(SapSanitizedUserpropertyKey, out var sapSanitizedToken))
             {
                 sanitized = false;
             }

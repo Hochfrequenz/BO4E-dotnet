@@ -19,17 +19,17 @@ namespace BO4E.meta
     /// Bo4eUri class is derived from System.Uri and works the same way. It's just a bit more strict in validation.
     /// </summary>
     [TypeConverter(typeof(StringUriConverter))]
-    public class Bo4eUri : Uri
+    public class Bo4EUri : Uri
     {
-        private const string BO4E_SCHEME = "bo4e://";
-        private const string NULL_KEY_PLACEHOLDER = "~"; // an allowed character in URLs that is not escaped
-        private static readonly Regex FILTER_AND_PATTERN = new Regex(@"\s*(?<key>\w+)\s*(?:=|eq)\s*(['""]|)(?<value>\w+)\1\s*(?:and)?\s*", RegexOptions.IgnoreCase | RegexOptions.Compiled); // \1 backreferences the '" group (in c#, would be \2 in other parsers)
+        private const string Bo4EScheme = "bo4e://";
+        private const string NullKeyPlaceholder = "~"; // an allowed character in URLs that is not escaped
+        private static readonly Regex FilterAndPattern = new Regex(@"\s*(?<key>\w+)\s*(?:=|eq)\s*(['""]|)(?<value>\w+)\1\s*(?:and)?\s*", RegexOptions.IgnoreCase | RegexOptions.Compiled); // \1 backreferences the '" group (in c#, would be \2 in other parsers)
 
         /// <summary>
         /// Instantiates a Bo4eUri object. Throws Argument(Null)Exception if URI is null, not well formed (<see cref="System.Uri.IsWellFormedOriginalString"/> or doesn't match the bo4e uri regex.
         /// </summary>
         /// <param name="uri">URI string to be processed</param>
-        public Bo4eUri(string uri) : base(uri)
+        public Bo4EUri(string uri) : base(uri)
         {
             if (uri == null)
             {
@@ -39,9 +39,9 @@ namespace BO4E.meta
             {
                 throw new ArgumentException($"The URI {uri} is not well formed.");
             }*/
-            if (Scheme + "://" != BO4E_SCHEME)
+            if (Scheme + "://" != Bo4EScheme)
             {
-                throw new ArgumentException($"The scheme '{Scheme}' in {uri} is not valid. Expected '{BO4E_SCHEME}://'");
+                throw new ArgumentException($"The scheme '{Scheme}' in {uri} is not valid. Expected '{Bo4EScheme}://'");
             }
             if (GetBoName() == null)
             {
@@ -53,9 +53,9 @@ namespace BO4E.meta
         /// implicit casting operator for strings (useful during de serialising
         /// </summary>
         /// <param name="input">string </param>
-        public static implicit operator Bo4eUri(string input)
+        public static implicit operator Bo4EUri(string input)
         {
-            return new Bo4eUri(input);
+            return new Bo4EUri(input);
         }
 
         /// <summary>
@@ -119,7 +119,7 @@ namespace BO4E.meta
         {
             try
             {
-                _ = new Bo4eUri(uri);
+                _ = new Bo4EUri(uri);
             }
             catch (Exception)
             {
@@ -136,14 +136,14 @@ namespace BO4E.meta
         /// <param name="includeUserProperties">set true to add userProperties as query parameters</param>
         /// <returns>Bo4eUri</returns>
         /// call e.g. <see cref="System.Uri.GetComponents"/> or <see cref="System.Uri.ToString"/> on the returned object.
-        public static Bo4eUri GetUri(BusinessObject bo, bool includeUserProperties = false)
+        public static Bo4EUri GetUri(BusinessObject bo, bool includeUserProperties = false)
         {
             if (bo == null)
             {
                 throw new ArgumentNullException(nameof(bo),"Business Object must not be null.");
             }
-            var baseUriString = BO4E_SCHEME + bo.GetType().Name + "/";
-            var baseUri = new Bo4eUri(baseUriString);
+            var baseUriString = Bo4EScheme + bo.GetType().Name + "/";
+            var baseUri = new Bo4EUri(baseUriString);
             var relativeUriBuilder = new StringBuilder();
 
             foreach (var keyProp in GetKeyFields(bo))
@@ -155,7 +155,7 @@ namespace BO4E.meta
                     {
                         if (keyProp.GetValue(bo).ToString() == string.Empty)
                         {
-                            relativeUriBuilder.Append(NULL_KEY_PLACEHOLDER + "/");
+                            relativeUriBuilder.Append(NullKeyPlaceholder + "/");
                         }
                         else
                         {
@@ -187,7 +187,7 @@ namespace BO4E.meta
                     // Think of two Ansprechpartners:
                     // - Günther Hermann but Günther is not set/null ==> /~/Hermann
                     // - Hermann Maier but Maier is not set/null ==> /Hermann/~/
-                    relativeUriBuilder.Append(NULL_KEY_PLACEHOLDER + "/");
+                    relativeUriBuilder.Append(NullKeyPlaceholder + "/");
                 }
             }
             if (includeUserProperties && bo.UserProperties != null && bo.UserProperties.Any())
@@ -204,7 +204,7 @@ namespace BO4E.meta
             var relativeUri = new Uri(EscapeUriString(relativeUriBuilder.ToString()), UriKind.Relative);
             if (TryCreate(baseUri, relativeUri, out var resultUri))
             {
-                return new Bo4eUri(resultUri.AbsoluteUri);
+                return new Bo4EUri(resultUri.AbsoluteUri);
             }
             else
             {
@@ -302,7 +302,7 @@ namespace BO4E.meta
                 }
                 if (keyProp.PropertyType == typeof(string))
                 {
-                    result.Add(keyPropName, keyValue == NULL_KEY_PLACEHOLDER ? null : keyValue);
+                    result.Add(keyPropName, keyValue == NullKeyPlaceholder ? null : keyValue);
                 }
                 else if (keyProp.PropertyType == typeof(int))
                 {
@@ -337,7 +337,7 @@ namespace BO4E.meta
             if (query.AllKeys.Contains("filter")) // currently this pattern only supports AND concatenation, not OR. result should contain multiple JObjects
             {
                 var filter = query.Get("filter");
-                foreach (Match match in FILTER_AND_PATTERN.Matches(filter))
+                foreach (Match match in FilterAndPattern.Matches(filter))
                 {
                     if (boProps.Contains(match.Groups["key"].Value, StringComparer.OrdinalIgnoreCase))
                     {
@@ -352,7 +352,7 @@ namespace BO4E.meta
         /// returns a new Bo4eUri instance with an additional filter in the query
         /// </summary>
         /// <param name="filterObject"></param>
-        public Bo4eUri AddFilter(IDictionary<string, object> filterObject)
+        public Bo4EUri AddFilter(IDictionary<string, object> filterObject)
         {
             var query = System.Web.HttpUtility.ParseQueryString(Query);
             var filterString = string.Empty;
@@ -371,7 +371,7 @@ namespace BO4E.meta
             {
                 Query = query.ToString()
             };
-            return new Bo4eUri(ub.Uri.ToString());
+            return new Bo4EUri(ub.Uri.ToString());
         }
     }
 
@@ -392,7 +392,7 @@ namespace BO4E.meta
         {
             if (value is string @string)
             {
-                return new Bo4eUri(@string);
+                return new Bo4EUri(@string);
             }
             return base.ConvertFrom(context, culture, value);
         }

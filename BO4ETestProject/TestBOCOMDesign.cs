@@ -14,10 +14,10 @@ using System.Reflection;
 namespace TestBO4E
 {
     [TestClass]
-    public class TestBOCOMDesign
+    public class TestBocomDesign
     {
         [TestMethod]
-        public void TestNoBOFields()
+        public void TestNoBoFields()
         {
             foreach (var type in typeof(BusinessObject).Assembly.GetTypes().Where(t => typeof(BusinessObject).IsAssignableFrom(t)))
             {
@@ -36,9 +36,9 @@ namespace TestBO4E
         }
 
         [TestMethod]
-        public void TestNoCOMFields()
+        public void TestNoComFields()
         {
-            foreach (var type in typeof(COM).Assembly.GetTypes().Where(t => typeof(COM).IsAssignableFrom(t)))
+            foreach (var type in typeof(Com).Assembly.GetTypes().Where(t => typeof(Com).IsAssignableFrom(t)))
             {
                 var fields = type.GetFields().Where(f => f.IsPublic);
                 Assert.IsFalse(fields.Any(), $"Type {type} must not contain public fields but has: {string.Join(", ", fields.ToList())}");
@@ -46,11 +46,11 @@ namespace TestBO4E
         }
 
         [TestMethod]
-        public void TestCOMAllPublic()
+        public void TestComAllPublic()
         {
-            foreach (var type in typeof(BusinessObject).Assembly.GetTypes().Where(t => t.BaseType == typeof(COM)))
+            foreach (var type in typeof(BusinessObject).Assembly.GetTypes().Where(t => t.BaseType == typeof(Com)))
             {
-                Assert.IsTrue(type.IsPublic, $"Type {type} is derived from {nameof(COM)} but is not public.");
+                Assert.IsTrue(type.IsPublic, $"Type {type} is derived from {nameof(Com)} but is not public.");
             }
         }
 
@@ -64,11 +64,11 @@ namespace TestBO4E
         }
 
         [TestMethod]
-        public void TestCOMInheritance()
+        public void TestComInheritance()
         {
             foreach (var type in typeof(BusinessObject).Assembly.GetTypes().Where(t => t.IsClass && t.IsPublic && t.Namespace == "BO4E.COM"))
             {
-                Assert.IsTrue(type.IsSubclassOf(typeof(COM)) || type == typeof(COM), $"Type {type} does not inherit from {nameof(COM)}.");
+                Assert.IsTrue(type.IsSubclassOf(typeof(Com)) || type == typeof(Com), $"Type {type} does not inherit from {nameof(Com)}.");
             }
         }
 
@@ -81,7 +81,7 @@ namespace TestBO4E
             }
         }
 
-        private static readonly HashSet<Type> NO_KEYS_WHITELIST = new HashSet<Type>() {
+        private static readonly HashSet<Type> NoKeysWhitelist = new HashSet<Type>() {
             {
                 typeof(Kosten)
             } };
@@ -89,7 +89,7 @@ namespace TestBO4E
         [TestMethod]
         public void TestBoKeys()
         {
-            foreach (var type in typeof(BusinessObject).Assembly.GetTypes().Where(t => t.BaseType == typeof(BusinessObject) && !t.IsAbstract && !NO_KEYS_WHITELIST.Contains(t)))
+            foreach (var type in typeof(BusinessObject).Assembly.GetTypes().Where(t => t.BaseType == typeof(BusinessObject) && !t.IsAbstract && !NoKeysWhitelist.Contains(t)))
             {
                 var keyProps = type.GetProperties()
                     .Where(p => p.GetCustomAttributes(typeof(BoKey), false).Length > 0)
@@ -105,7 +105,7 @@ namespace TestBO4E
         [TestMethod]
         public void NullableDefaultEnums()
         {
-            foreach (var boType in typeof(BusinessObject).Assembly.GetTypes().Where(t => (t.BaseType == typeof(BusinessObject) || t.BaseType == typeof(COM)) && !t.IsAbstract))
+            foreach (var boType in typeof(BusinessObject).Assembly.GetTypes().Where(t => (t.BaseType == typeof(BusinessObject) || t.BaseType == typeof(Com)) && !t.IsAbstract))
             {
                 foreach (var obligDefaultField in boType.GetProperties(BindingFlags.DeclaredOnly | BindingFlags.Public | BindingFlags.Instance)
                     .Where(field => field.GetCustomAttributes(typeof(JsonPropertyAttribute), true)

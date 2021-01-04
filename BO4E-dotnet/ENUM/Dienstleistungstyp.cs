@@ -36,8 +36,8 @@ namespace BO4E.ENUM
         [ProtoEnum(Name = nameof(Dienstleistungstyp) + "_" + nameof(DATENBEREITSTELLUNG_EINMALIG))]
         DATENBEREITSTELLUNG_EINMALIG,
         /// <summary>Auslesung 2x täglich mittels Fernauslesung</summary>
-        [ProtoEnum(Name = nameof(Dienstleistungstyp) + "_" + nameof(AUSLESUNG_2X_TAEGLICH_FERNAUSLESUNG))]
-        AUSLESUNG_2X_TAEGLICH_FERNAUSLESUNG,
+        [ProtoEnum(Name = nameof(Dienstleistungstyp) + "_" + nameof(AUSLESUNG_2_X_TAEGLICH_FERNAUSLESUNG))]
+        AUSLESUNG_2_X_TAEGLICH_FERNAUSLESUNG,
         /// <summary>Auslesung täglich mittels Fernauslesung</summary>
         [ProtoEnum(Name = nameof(Dienstleistungstyp) + "_" + nameof(AUSLESUNG_TAEGLICH_FERNAUSLESUNG))]
         AUSLESUNG_TAEGLICH_FERNAUSLESUNG,

@@ -22,7 +22,7 @@ namespace TestBO4E
             var em = new Energiemenge()
             {
                 LokationsId = "54321012345",
-                LokationsTyp = BO4E.ENUM.Lokationstyp.MaLo,
+                LokationsTyp = BO4E.ENUM.Lokationstyp.MA_LO,
                 //Guid = emGuid,
                 Energieverbrauch = new System.Collections.Generic.List<Verbrauch>()
                 {

@@ -10,7 +10,7 @@ namespace BO4E.COM
 {
     /// <summary>Mit dieser Komponente werden Einschränkungen für die Anwendung von Tarifen modelliert.</summary>
     [ProtoContract]
-    public class Tarifeinschraenkung : COM
+    public class Tarifeinschraenkung : Com
     {
         /// <summary>Weitere Produkte, die gemeinsam mit diesem Tarif bestellt werden können.</summary>
         [JsonProperty(PropertyName = "zusatzprodukte", Required = Required.Default)]

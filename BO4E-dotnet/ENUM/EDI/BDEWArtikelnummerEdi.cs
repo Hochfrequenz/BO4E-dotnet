@@ -3,189 +3,189 @@ using BO4E.meta;
 namespace BO4E.ENUM.EDI
 {
     /// <summary>
-    /// EDIFACT values of <see cref="BDEWArtikelnummer"/>
+    /// EDIFACT values of <see cref="BdewArtikelnummer"/>
     /// </summary>
     /// <author>Hochfrequenz Unternehmensberatung GmbH</author>
-    public enum BDEWArtikelnummerEdi
+    public enum BdewArtikelnummerEdi
     {
-        /// <inheritdoc cref="BDEWArtikelnummer.LEISTUNG"/>
-        [Mapping(BDEWArtikelnummer.LEISTUNG)]
+        /// <inheritdoc cref="BdewArtikelnummer.LEISTUNG"/>
+        [Mapping(BdewArtikelnummer.LEISTUNG)]
         _9990001000053,
 
-        /// <inheritdoc cref="BDEWArtikelnummer.LEISTUNG_PAUSCHAL"/>
-        [Mapping(BDEWArtikelnummer.LEISTUNG_PAUSCHAL)]
+        /// <inheritdoc cref="BdewArtikelnummer.LEISTUNG_PAUSCHAL"/>
+        [Mapping(BdewArtikelnummer.LEISTUNG_PAUSCHAL)]
         _9990001000079,
 
-        /// <inheritdoc cref="BDEWArtikelnummer.GRUNDPREIS"/>
-        [Mapping(BDEWArtikelnummer.GRUNDPREIS)]
+        /// <inheritdoc cref="BdewArtikelnummer.GRUNDPREIS"/>
+        [Mapping(BdewArtikelnummer.GRUNDPREIS)]
         _9990001000087,
 
-        /// <inheritdoc cref="BDEWArtikelnummer.REGELENERGIE_ARBEIT"/>
-        [Mapping(BDEWArtikelnummer.REGELENERGIE_ARBEIT)]
+        /// <inheritdoc cref="BdewArtikelnummer.REGELENERGIE_ARBEIT"/>
+        [Mapping(BdewArtikelnummer.REGELENERGIE_ARBEIT)]
         _9990001000128,
 
-        /// <inheritdoc cref="BDEWArtikelnummer.REGELENERGIE_LEISTUNG"/>
-        [Mapping(BDEWArtikelnummer.REGELENERGIE_LEISTUNG)]
+        /// <inheritdoc cref="BdewArtikelnummer.REGELENERGIE_LEISTUNG"/>
+        [Mapping(BdewArtikelnummer.REGELENERGIE_LEISTUNG)]
         _9990001000136,
 
-        /// <inheritdoc cref="BDEWArtikelnummer.NOTSTROMLIEFERUNG_ARBEIT"/>
-        [Mapping(BDEWArtikelnummer.NOTSTROMLIEFERUNG_ARBEIT)]
+        /// <inheritdoc cref="BdewArtikelnummer.NOTSTROMLIEFERUNG_ARBEIT"/>
+        [Mapping(BdewArtikelnummer.NOTSTROMLIEFERUNG_ARBEIT)]
         _9990001000144,
 
-        /// <inheritdoc cref="BDEWArtikelnummer.NOTSTROMLIEFERUNG_LEISTUNG"/>
-        [Mapping(BDEWArtikelnummer.NOTSTROMLIEFERUNG_LEISTUNG)]
+        /// <inheritdoc cref="BdewArtikelnummer.NOTSTROMLIEFERUNG_LEISTUNG"/>
+        [Mapping(BdewArtikelnummer.NOTSTROMLIEFERUNG_LEISTUNG)]
         _9990001000152,
 
-        /// <inheritdoc cref="BDEWArtikelnummer.RESERVENETZKAPAZITAET"/>
-        [Mapping(BDEWArtikelnummer.RESERVENETZKAPAZITAET)]
+        /// <inheritdoc cref="BdewArtikelnummer.RESERVENETZKAPAZITAET"/>
+        [Mapping(BdewArtikelnummer.RESERVENETZKAPAZITAET)]
         _9990001000160,
 
-        /// <inheritdoc cref="BDEWArtikelnummer.RESERVELEISTUNG"/>
-        [Mapping(BDEWArtikelnummer.RESERVELEISTUNG)]
+        /// <inheritdoc cref="BdewArtikelnummer.RESERVELEISTUNG"/>
+        [Mapping(BdewArtikelnummer.RESERVELEISTUNG)]
         _9990001000178,
 
-        /// <inheritdoc cref="BDEWArtikelnummer.ZUSAETZLICHE_ABLESUNG"/>
-        [Mapping(BDEWArtikelnummer.ZUSAETZLICHE_ABLESUNG)]
+        /// <inheritdoc cref="BdewArtikelnummer.ZUSAETZLICHE_ABLESUNG"/>
+        [Mapping(BdewArtikelnummer.ZUSAETZLICHE_ABLESUNG)]
         _9990001000186,
 
-        /// <inheritdoc cref="BDEWArtikelnummer.PRUEFGEBUEHREN_AUSSERPLANMAESSIG"/>
-        [Mapping(BDEWArtikelnummer.PRUEFGEBUEHREN_AUSSERPLANMAESSIG)]
+        /// <inheritdoc cref="BdewArtikelnummer.PRUEFGEBUEHREN_AUSSERPLANMAESSIG"/>
+        [Mapping(BdewArtikelnummer.PRUEFGEBUEHREN_AUSSERPLANMAESSIG)]
         _9990001000219,
 
-        /// <inheritdoc cref="BDEWArtikelnummer.WIRKARBEIT"/>
-        [Mapping(BDEWArtikelnummer.WIRKARBEIT)]
+        /// <inheritdoc cref="BdewArtikelnummer.WIRKARBEIT"/>
+        [Mapping(BdewArtikelnummer.WIRKARBEIT)]
         _9990001000269,
 
-        /// <inheritdoc cref="BDEWArtikelnummer.SINGULAER_GENUTZTE_BETRIEBSMITTEL"/>
-        [Mapping(BDEWArtikelnummer.SINGULAER_GENUTZTE_BETRIEBSMITTEL)]
+        /// <inheritdoc cref="BdewArtikelnummer.SINGULAER_GENUTZTE_BETRIEBSMITTEL"/>
+        [Mapping(BdewArtikelnummer.SINGULAER_GENUTZTE_BETRIEBSMITTEL)]
         _9990001000285,
 
-        /// <inheritdoc cref="BDEWArtikelnummer.ABGABE_KWKG"/>
-        [Mapping(BDEWArtikelnummer.ABGABE_KWKG)]
+        /// <inheritdoc cref="BdewArtikelnummer.ABGABE_KWKG"/>
+        [Mapping(BdewArtikelnummer.ABGABE_KWKG)]
         _9990001000334,
 
-        /// <inheritdoc cref="BDEWArtikelnummer.ABSCHLAG"/>
-        [Mapping(BDEWArtikelnummer.ABSCHLAG)]
+        /// <inheritdoc cref="BdewArtikelnummer.ABSCHLAG"/>
+        [Mapping(BdewArtikelnummer.ABSCHLAG)]
         _9990001000376,
 
-        /// <inheritdoc cref="BDEWArtikelnummer.KONZESSIONSABGABE"/>
-        [Mapping(BDEWArtikelnummer.KONZESSIONSABGABE)]
+        /// <inheritdoc cref="BdewArtikelnummer.KONZESSIONSABGABE"/>
+        [Mapping(BdewArtikelnummer.KONZESSIONSABGABE)]
         _9990001000417,
 
-        /// <inheritdoc cref="BDEWArtikelnummer.ENTGELT_FERNAUSLESUNG"/>
-        [Mapping(BDEWArtikelnummer.ENTGELT_FERNAUSLESUNG)]
+        /// <inheritdoc cref="BdewArtikelnummer.ENTGELT_FERNAUSLESUNG"/>
+        [Mapping(BdewArtikelnummer.ENTGELT_FERNAUSLESUNG)]
         _9990001000433,
 
-        /// <inheritdoc cref="BDEWArtikelnummer.UNTERMESSUNG"/>
-        [Mapping(BDEWArtikelnummer.UNTERMESSUNG)]
+        /// <inheritdoc cref="BdewArtikelnummer.UNTERMESSUNG"/>
+        [Mapping(BdewArtikelnummer.UNTERMESSUNG)]
         _9990001000475,
 
-        /// <inheritdoc cref="BDEWArtikelnummer.BLINDMEHRARBEIT"/>
-        [Mapping(BDEWArtikelnummer.BLINDMEHRARBEIT)]
+        /// <inheritdoc cref="BdewArtikelnummer.BLINDMEHRARBEIT"/>
+        [Mapping(BdewArtikelnummer.BLINDMEHRARBEIT)]
         _9990001000508,
 
-        /// <inheritdoc cref="BDEWArtikelnummer.ENTGELT_ABRECHNUNG"/>
-        [Mapping(BDEWArtikelnummer.ENTGELT_ABRECHNUNG)]
+        /// <inheritdoc cref="BdewArtikelnummer.ENTGELT_ABRECHNUNG"/>
+        [Mapping(BdewArtikelnummer.ENTGELT_ABRECHNUNG)]
         _9990001000532,
 
-        /// <inheritdoc cref="BDEWArtikelnummer.SPERRKOSTEN"/>
-        [Mapping(BDEWArtikelnummer.SPERRKOSTEN)]
+        /// <inheritdoc cref="BdewArtikelnummer.SPERRKOSTEN"/>
+        [Mapping(BdewArtikelnummer.SPERRKOSTEN)]
         _9990001000540,
 
-        /// <inheritdoc cref="BDEWArtikelnummer.ENTSPERRKOSTEN"/>
-        [Mapping(BDEWArtikelnummer.ENTSPERRKOSTEN)]
+        /// <inheritdoc cref="BdewArtikelnummer.ENTSPERRKOSTEN"/>
+        [Mapping(BdewArtikelnummer.ENTSPERRKOSTEN)]
         _9990001000558,
 
-        /// <inheritdoc cref="BDEWArtikelnummer.MAHNKOSTEN"/>
-        [Mapping(BDEWArtikelnummer.MAHNKOSTEN)]
+        /// <inheritdoc cref="BdewArtikelnummer.MAHNKOSTEN"/>
+        [Mapping(BdewArtikelnummer.MAHNKOSTEN)]
         _9990001000566,
 
-        /// <inheritdoc cref="BDEWArtikelnummer.MEHR_MINDERMENGEN"/>
-        [Mapping(BDEWArtikelnummer.MEHR_MINDERMENGEN)]
+        /// <inheritdoc cref="BdewArtikelnummer.MEHR_MINDERMENGEN"/>
+        [Mapping(BdewArtikelnummer.MEHR_MINDERMENGEN)]
         _9990001000574,
 
-        /// <inheritdoc cref="BDEWArtikelnummer.INKASSOKOSTEN"/>
-        [Mapping(BDEWArtikelnummer.INKASSOKOSTEN)]
+        /// <inheritdoc cref="BdewArtikelnummer.INKASSOKOSTEN"/>
+        [Mapping(BdewArtikelnummer.INKASSOKOSTEN)]
         _9990001000582,
 
-        /// <inheritdoc cref="BDEWArtikelnummer.BLINDMEHRLEISTUNG"/>
-        [Mapping(BDEWArtikelnummer.BLINDMEHRLEISTUNG)]
+        /// <inheritdoc cref="BdewArtikelnummer.BLINDMEHRLEISTUNG"/>
+        [Mapping(BdewArtikelnummer.BLINDMEHRLEISTUNG)]
         _9990001000590,
 
-        /// <inheritdoc cref="BDEWArtikelnummer.ENTGELT_MESSUNG_ABLESUNG"/>
-        [Mapping(BDEWArtikelnummer.ENTGELT_MESSUNG_ABLESUNG)]
+        /// <inheritdoc cref="BdewArtikelnummer.ENTGELT_MESSUNG_ABLESUNG"/>
+        [Mapping(BdewArtikelnummer.ENTGELT_MESSUNG_ABLESUNG)]
         _9990001000615,
 
-        /// <inheritdoc cref="BDEWArtikelnummer.ENTGELT_EINBAU_BETRIEB_WARTUNG_MESSTECHNIK"/>
-        [Mapping(BDEWArtikelnummer.ENTGELT_EINBAU_BETRIEB_WARTUNG_MESSTECHNIK)]
+        /// <inheritdoc cref="BdewArtikelnummer.ENTGELT_EINBAU_BETRIEB_WARTUNG_MESSTECHNIK"/>
+        [Mapping(BdewArtikelnummer.ENTGELT_EINBAU_BETRIEB_WARTUNG_MESSTECHNIK)]
         _9990001000623,
 
-        /// <inheritdoc cref="BDEWArtikelnummer.AUSGLEICHSENERGIE"/>
-        [Mapping(BDEWArtikelnummer.AUSGLEICHSENERGIE)]
+        /// <inheritdoc cref="BdewArtikelnummer.AUSGLEICHSENERGIE"/>
+        [Mapping(BdewArtikelnummer.AUSGLEICHSENERGIE)]
         _9990001000631,
 
-        /// <inheritdoc cref="BDEWArtikelnummer.ZAEHLEINRICHTUNG"/>
-        [Mapping(BDEWArtikelnummer.ZAEHLEINRICHTUNG)]
+        /// <inheritdoc cref="BdewArtikelnummer.ZAEHLEINRICHTUNG"/>
+        [Mapping(BdewArtikelnummer.ZAEHLEINRICHTUNG)]
         _9990001000649,
 
-        /// <inheritdoc cref="BDEWArtikelnummer.WANDLER_MENGENUMWERTER"/>
-        [Mapping(BDEWArtikelnummer.WANDLER_MENGENUMWERTER)]
+        /// <inheritdoc cref="BdewArtikelnummer.WANDLER_MENGENUMWERTER"/>
+        [Mapping(BdewArtikelnummer.WANDLER_MENGENUMWERTER)]
         _9990001000657,
 
-        /// <inheritdoc cref="BDEWArtikelnummer.KOMMUNIKATIONSEINRICHTUNG"/>
-        [Mapping(BDEWArtikelnummer.KOMMUNIKATIONSEINRICHTUNG)]
+        /// <inheritdoc cref="BdewArtikelnummer.KOMMUNIKATIONSEINRICHTUNG"/>
+        [Mapping(BdewArtikelnummer.KOMMUNIKATIONSEINRICHTUNG)]
         _9990001000665,
 
-        /// <inheritdoc cref="BDEWArtikelnummer.TECHNISCHE_STEUEREINRICHTUNG"/>
-        [Mapping(BDEWArtikelnummer.TECHNISCHE_STEUEREINRICHTUNG)]
+        /// <inheritdoc cref="BdewArtikelnummer.TECHNISCHE_STEUEREINRICHTUNG"/>
+        [Mapping(BdewArtikelnummer.TECHNISCHE_STEUEREINRICHTUNG)]
         _9990001000673,
 
-        /// <inheritdoc cref="BDEWArtikelnummer.PARAGRAF_19_STROM_NEV_UMLAGE"/>
-        [Mapping(BDEWArtikelnummer.PARAGRAF_19_STROM_NEV_UMLAGE)]
+        /// <inheritdoc cref="BdewArtikelnummer.PARAGRAF_19_STROM_NEV_UMLAGE"/>
+        [Mapping(BdewArtikelnummer.PARAGRAF_19_STROM_NEV_UMLAGE)]
         _9990001000681,
 
-        /// <inheritdoc cref="BDEWArtikelnummer.BEFESTIGUNGSEINRICHTUNG"/>
-        [Mapping(BDEWArtikelnummer.BEFESTIGUNGSEINRICHTUNG)]
+        /// <inheritdoc cref="BdewArtikelnummer.BEFESTIGUNGSEINRICHTUNG"/>
+        [Mapping(BdewArtikelnummer.BEFESTIGUNGSEINRICHTUNG)]
         _9990001000699,
 
-        /// <inheritdoc cref="BDEWArtikelnummer.OFFSHORE_HAFTUNGSUMLAGE"/>
-        [Mapping(BDEWArtikelnummer.OFFSHORE_HAFTUNGSUMLAGE)]
+        /// <inheritdoc cref="BdewArtikelnummer.OFFSHORE_HAFTUNGSUMLAGE"/>
+        [Mapping(BdewArtikelnummer.OFFSHORE_HAFTUNGSUMLAGE)]
         _9990001000706,
 
-        /// <inheritdoc cref="BDEWArtikelnummer.FIXE_ARBEITSENTGELTKOMPONENTE"/>
-        [Mapping(BDEWArtikelnummer.FIXE_ARBEITSENTGELTKOMPONENTE)]
+        /// <inheritdoc cref="BdewArtikelnummer.FIXE_ARBEITSENTGELTKOMPONENTE"/>
+        [Mapping(BdewArtikelnummer.FIXE_ARBEITSENTGELTKOMPONENTE)]
         _9990001000714,
 
-        /// <inheritdoc cref="BDEWArtikelnummer.FIXE_LEISTUNGSENTGELTKOMPONENTE"/>
-        [Mapping(BDEWArtikelnummer.FIXE_LEISTUNGSENTGELTKOMPONENTE)]
+        /// <inheritdoc cref="BdewArtikelnummer.FIXE_LEISTUNGSENTGELTKOMPONENTE"/>
+        [Mapping(BdewArtikelnummer.FIXE_LEISTUNGSENTGELTKOMPONENTE)]
         _9990001000722,
 
-        /// <inheritdoc cref="BDEWArtikelnummer.UMLAGE_ABSCHALTBARE_LASTEN"/>
-        [Mapping(BDEWArtikelnummer.UMLAGE_ABSCHALTBARE_LASTEN)]
+        /// <inheritdoc cref="BdewArtikelnummer.UMLAGE_ABSCHALTBARE_LASTEN"/>
+        [Mapping(BdewArtikelnummer.UMLAGE_ABSCHALTBARE_LASTEN)]
         _9990001000730,
 
-        /// <inheritdoc cref="BDEWArtikelnummer.MEHRMENGE"/>
-        [Mapping(BDEWArtikelnummer.MEHRMENGE)]
+        /// <inheritdoc cref="BdewArtikelnummer.MEHRMENGE"/>
+        [Mapping(BdewArtikelnummer.MEHRMENGE)]
         _9990001000748,
 
-        /// <inheritdoc cref="BDEWArtikelnummer.MINDERMENGE"/>
-        [Mapping(BDEWArtikelnummer.MINDERMENGE)]
+        /// <inheritdoc cref="BdewArtikelnummer.MINDERMENGE"/>
+        [Mapping(BdewArtikelnummer.MINDERMENGE)]
         _9990001000756,
 
-        /// <inheritdoc cref="BDEWArtikelnummer.ENERGIESTEUER"/>
-        [Mapping(BDEWArtikelnummer.ENERGIESTEUER)]
+        /// <inheritdoc cref="BdewArtikelnummer.ENERGIESTEUER"/>
+        [Mapping(BdewArtikelnummer.ENERGIESTEUER)]
         _9990001000764,
 
-        /// <inheritdoc cref="BDEWArtikelnummer.SMARTMETER_GATEWAY"/>
-        [Mapping(BDEWArtikelnummer.SMARTMETER_GATEWAY)]
+        /// <inheritdoc cref="BdewArtikelnummer.SMARTMETER_GATEWAY"/>
+        [Mapping(BdewArtikelnummer.SMARTMETER_GATEWAY)]
         _9990001000772,
 
-        /// <inheritdoc cref="BDEWArtikelnummer.STEUERBOX"/>
-        [Mapping(BDEWArtikelnummer.STEUERBOX)]
+        /// <inheritdoc cref="BdewArtikelnummer.STEUERBOX"/>
+        [Mapping(BdewArtikelnummer.STEUERBOX)]
         _9990001000780,
 
-        /// <inheritdoc cref="BDEWArtikelnummer.MSB_INKL_MESSUNG"/>
-        [Mapping(BDEWArtikelnummer.MSB_INKL_MESSUNG)]
+        /// <inheritdoc cref="BdewArtikelnummer.MSB_INKL_MESSUNG"/>
+        [Mapping(BdewArtikelnummer.MSB_INKL_MESSUNG)]
         _9990001000798
     }
 }

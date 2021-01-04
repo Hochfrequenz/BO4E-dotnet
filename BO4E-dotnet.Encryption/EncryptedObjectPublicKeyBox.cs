@@ -15,7 +15,7 @@ namespace BO4E.BO
         /// <param name="cipherText">base64 encoded cipher text</param>
         /// <param name="publicKey">public key of the sender (base64 encoded)</param>
         /// <param name="nonce">unique nonce / initialisation vector (base 64 encoded, must not be used twice)</param>
-        public EncryptedObjectPublicKeyBox(string cipherText, string publicKey, string nonce) : base(cipherText, EncryptionScheme.SodiumAsymmetricPublicKeyBox)
+        public EncryptedObjectPublicKeyBox(string cipherText, string publicKey, string nonce) : base(cipherText, EncryptionScheme.SODIUM_ASYMMETRIC_PUBLIC_KEY_BOX)
         {
             PublicKey = publicKey;
             Nonce = nonce;

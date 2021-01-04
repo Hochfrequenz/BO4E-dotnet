@@ -45,8 +45,8 @@ namespace TestBO4E.Reporting
             //var alldata = JsonConvert.DeserializeObject<Dictionary<string, List<Dictionary<string, string>>>>(JSONdata);
             //List<Dictionary<string, string>> reihenfolge = alldata["completenessZfa"];
 
-            var Newresult = cr.ToCsv(';', true, Environment.NewLine, reihenfolge);
-            lines = new List<string>(Newresult.Split(Environment.NewLine));
+            var newresult = cr.ToCsv(';', true, Environment.NewLine, reihenfolge);
+            lines = new List<string>(newresult.Split(Environment.NewLine));
             Assert.AreEqual(2, lines.Count);
             var decimalSeparator = Thread.CurrentThread.CurrentCulture.NumberFormat.NumberDecimalSeparator;
             Assert.AreEqual("DE12345;0" + decimalSeparator + "87;2019-01-01T00:00:00Z;2019-03-01T00:00:00Z;", lines[1]);
@@ -88,8 +88,8 @@ namespace TestBO4E.Reporting
         public void TestDeserialisationCompletenessReportColumnsToCsv()
         {
             var jsonData = "{'completenessZfa':[{'lokationsId':'lokationsId'},{'coverage':'coverage'},{'referenceTimeFrame.einheit':'referenceTimeFrame.einheit'},{'referenceTimeFrame.dauer':'referenceTimeFrame.dauer'},{'referenceTimeFrame.startdatum':'referenceTimeFrame.startdatum'},{'referenceTimeFrame.enddatum':'referenceTimeFrame.enddatum'},{'obiskennzahl':'obiskennzahl'},{'einheit':'einheit'},{'wertermittlungsverfahren':'wertermittlungsverfahren'},{'values.startdatum':'Verbrauch.startdatum'},{'values.enddatum':'Verbrauch.enddatum'},{'values.wert':'Verbrauch.wert'},{'headerLine':'1'}]}";
-            var Reihenfolge = JsonConvert.DeserializeObject<Dictionary<string, List<Dictionary<string, string>>>>(jsonData);
-            Assert.AreEqual("coverage", Reihenfolge["completenessZfa"][1].Values.First());
+            var reihenfolge = JsonConvert.DeserializeObject<Dictionary<string, List<Dictionary<string, string>>>>(jsonData);
+            Assert.AreEqual("coverage", reihenfolge["completenessZfa"][1].Values.First());
         }
 
         [TestMethod]
@@ -120,7 +120,7 @@ namespace TestBO4E.Reporting
                 counter++;
             }
             Assert.IsTrue(lastCsvText.Length > 0);
-            Assert.IsFalse(lastCsvText.Contains(BO4E.BO.BusinessObject.USER_PROPERTIES_NAME));
+            Assert.IsFalse(lastCsvText.Contains(BO4E.BO.BusinessObject.UserPropertiesName));
             Assert.IsFalse(lastCsvText.Contains("_errorMessage"));
         }
 
@@ -129,12 +129,12 @@ namespace TestBO4E.Reporting
         {
             var jsonData = "{\"boTyp\":\"COMPLETENESSREPORT\",\"versionStruktur\":1,\"obiskennzahl\":\"1-1:5.29.0\",\"values\":[],\"einheit\":\"ZERO\",\"gaps\":null,\"referenceTimeFrame\":{\"einheit\":\"TAG\",\"dauer\":1,\"startdatum\":\"2020-06-30T22:00:00+00:00\",\"enddatum\":\"2020-07-01T22:00:00+00:00\"},\"wertermittlungsverfahren\":\"PROGNOSE\",\"lokationsId\":\"99998888777\",\"coverage\":null,\"profil\":\"000000000123456789\",\"profilRolle\":\"0002\",\"anlagennummer\":\"1234567890\",\"zw\":\"000000000020707999\",\"sap_time_zone\":\"CET\",\"sapSanitized\":true,\"valueCount\":0,\"coverage_sum\":0}";
             var report = JsonConvert.DeserializeObject<CompletenessReport>(jsonData);
-            var csv = report.ToCSV();
+            var csv = report.ToCsv();
             Assert.IsTrue(csv.Contains("99998888777"));
         }
 
         [TestMethod]
-        public void TestPrivateFieldsAndUserPropertiesHardCodingCSV()
+        public void TestPrivateFieldsAndUserPropertiesHardCodingCsv()
         {
             var jsonData = "[{\"versionStruktur\":1,\"boTyp\":\"COMPLETENESSREPORT\",\"referenceTimeFrame\":{\"$type\":\"BO4E.COM.Zeitraum, BO4Enet\",\"einheit\":null,\"dauer\":null,\"startdatum\":\"2019-09-30T22:00:00Z\",\"enddatum\":\"2019-10-31T23:00:00Z\"},\"_errorMessage\":null,\"lokationsId\":\"50985149762\",\"obiskennzahl\":\"1-65:1.29.0\",\"einheit\":2000,\"wertermittlungsverfahren\":1,\"coverage\":0.8402684564,\"values\":[],\"gaps\":[{\"$type\":\"BO4E.Reporting.CompletenessReport+BasicVerbrauch, BO4Enet\",\"startdatum\":\"2019-10-27T00:00:00Z\",\"enddatum\":\"2019-10-31T23:00:00Z\",\"wert\":null}],\"profil\":\"000000000111127365\",\"profilRolle\":\"0001\",\"anlagennummer\":\"5000080657\",\"zw\":\"000000000020708905\",\"sap_time_zone\":\"CET\",\"sapSanitized\":true,\"valueCount\":0,\"overallGapStart\":\"2019-10-31T23:00:00Z\",\"overallGapEnd\":\"2019-11-30T23:00:00Z\"},{\"$type\":\"BO4E.Reporting.CompletenessReport, BO4Enet\",\"versionStruktur\":1,\"boTyp\":\"COMPLETENESSREPORT\",\"referenceTimeFrame\":{\"$type\":\"BO4E.COM.Zeitraum, BO4Enet\",\"einheit\":null,\"dauer\":null,\"startdatum\":\"2019-09-30T22:00:00Z\",\"enddatum\":\"2019-10-31T23:00:00Z\"},\"_errorMessage\":null,\"lokationsId\":\"DE0004096816100000000000000200712\",\"obiskennzahl\":\"1-1:1.29.0\",\"einheit\":2000,\"wertermittlungsverfahren\":1,\"coverage\":0.8402684564,\"values\":[],\"gaps\":[{\"$type\":\"BO4E.Reporting.CompletenessReport+BasicVerbrauch, BO4Enet\",\"startdatum\":\"2019-10-27T00:00:00Z\",\"enddatum\":\"2019-10-31T23:00:00Z\",\"wert\":null}],\"profil\":\"000000000111127365\",\"profilRolle\":\"0001\",\"anlagennummer\":\"5001065966\",\"zw\":\"000000000020708905\",\"sap_time_zone\":\"CET\",\"sapSanitized\":true,\"valueCount\":0,\"overallGapStart\":\"2019-10-31T23:00:00Z\",\"overallGapEnd\":\"2019-11-30T23:00:00Z\"},{\"$type\":\"BO4E.Reporting.CompletenessReport, BO4Enet\",\"versionStruktur\":1,\"boTyp\":\"COMPLETENESSREPORT\",\"referenceTimeFrame\":{\"$type\":\"BO4E.COM.Zeitraum, BO4Enet\",\"einheit\":null,\"dauer\":null,\"startdatum\":\"2019-10-31T23:00:00Z\",\"enddatum\":\"2019-11-30T23:00:00Z\"},\"_errorMessage\":null,\"lokationsId\":\"50985149762\",\"obiskennzahl\":\"1-1:1.29.0\",\"einheit\":2000,\"wertermittlungsverfahren\":1,\"coverage\":0.3,\"values\":[],\"gaps\":[{\"$type\":\"BO4E.Reporting.CompletenessReport+BasicVerbrauch, BO4Enet\",\"startdatum\":\"2019-10-31T23:00:00Z\",\"enddatum\":\"2019-11-13T00:00:00Z\",\"wert\":null},{\"$type\":\"BO4E.Reporting.CompletenessReport+BasicVerbrauch, BO4Enet\",\"startdatum\":\"2019-11-22T00:00:00Z\",\"enddatum\":\"2019-11-30T23:00:00Z\",\"wert\":null}],\"profil\":\"000000000111127365\",\"profilRolle\":\"0001\",\"anlagennummer\":\"5000080657\",\"zw\":\"000000000020708905\",\"sap_time_zone\":\"CET\",\"sapSanitized\":true,\"valueCount\":0,\"overallGapStart\":\"2019-10-31T23:00:00Z\",\"overallGapEnd\":\"2019-11-30T23:00:00Z\"},{\"$type\":\"BO4E.Reporting.CompletenessReport, BO4Enet\",\"versionStruktur\":1,\"boTyp\":\"COMPLETENESSREPORT\",\"referenceTimeFrame\":{\"$type\":\"BO4E.COM.Zeitraum, BO4Enet\",\"einheit\":null,\"dauer\":null,\"startdatum\":\"2019-10-31T23:00:00Z\",\"enddatum\":\"2019-11-30T23:00:00Z\"},\"_errorMessage\":null,\"lokationsId\":\"DE0004096816100000000000000200712\",\"obiskennzahl\":\"1-1:1.29.0\",\"einheit\":2000,\"wertermittlungsverfahren\":1,\"coverage\":0.3,\"values\":[],\"gaps\":[{\"$type\":\"BO4E.Reporting.CompletenessReport+BasicVerbrauch, BO4Enet\",\"startdatum\":\"2019-10-31T23:00:00Z\",\"enddatum\":\"2019-11-13T00:00:00Z\",\"wert\":null},{\"$type\":\"BO4E.Reporting.CompletenessReport+BasicVerbrauch, BO4Enet\",\"startdatum\":\"2019-11-22T00:00:00Z\",\"enddatum\":\"2019-11-30T23:00:00Z\",\"wert\":null}],\"profil\":\"000000000111127365\",\"profilRolle\":\"0001\",\"anlagennummer\":\"5001065966\",\"zw\":\"000000000020708905\",\"sap_time_zone\":\"CET\",\"sapSanitized\":true,\"valueCount\":0,\"overallGapStart\":\"2019-10-31T23:00:00Z\",\"overallGapEnd\":\"2019-11-30T23:00:00Z\"}]";
             var reports = JsonConvert.DeserializeObject<List<CompletenessReport>>(jsonData);
@@ -142,7 +142,7 @@ namespace TestBO4E.Reporting
             var counter = 0;
             foreach (var report in reports)
             {
-                var singleReportLine = report.ToCSV(";", (counter == 0), Environment.NewLine) + Environment.NewLine;
+                var singleReportLine = report.ToCsv(";", (counter == 0), Environment.NewLine) + Environment.NewLine;
                 if (counter == 0)
                 {
                     Assert.IsTrue(singleReportLine.Split(Environment.NewLine)[1].StartsWith("2019-09-30T22:00:00Z;2019-10-31T23:00:00Z;;50985149762")); // no melo, just malo
@@ -159,7 +159,7 @@ namespace TestBO4E.Reporting
                 counter++;
             }
             Assert.IsTrue(lastCsvText.Length > 0);
-            Assert.IsFalse(lastCsvText.Contains(BO4E.BO.BusinessObject.USER_PROPERTIES_NAME));
+            Assert.IsFalse(lastCsvText.Contains(BO4E.BO.BusinessObject.UserPropertiesName));
             Assert.IsFalse(lastCsvText.Contains("_errorMessage"));
 
         }
@@ -221,7 +221,7 @@ namespace TestBO4E.Reporting
                     Enddatum = new DateTimeOffset(2017,1,13,0,0,0, TimeSpan.Zero).UtcDateTime
                 }
             };
-            var multiplicityResult = cr.ToCsv(lineTerminator: Environment.NewLine);
+            var multiplicityResult = ((Report) cr).ToCsv(lineTerminator: Environment.NewLine);
             Assert.AreEqual(2 + cr.Values.Count + cr.Gaps.Count, new List<string>(multiplicityResult.Split(Environment.NewLine)).Count);
         }
 
@@ -277,7 +277,7 @@ namespace TestBO4E.Reporting
         public void TestSerializingCrWithoutGaps()
         {
             var report = JsonConvert.DeserializeObject<CompletenessReport>("{\"_errorMessage\":\"Cannot use autoconfigured method because there are no values.\",\"boTyp\":\"COMPLETENESSREPORT\",\"versionStruktur\":1,\"obiskennzahl\":\"1-1:1.29.0\",\"values\":[],\"einheit\":0,\"gaps\":null,\"referenceTimeFrame\":{ \"einheit\":4,\"dauer\":1.0,\"startdatum\":\"2020-06-30T22:00:00+00:00\",\"enddatum\":\"2020-07-01T22:00:00+00:00\"},\"wertermittlungsverfahren\":0,\"lokationsId\":\"DE000XXXXXXXXXXXXXXXXXXXXXXXXXXXX\",\"coverage\":0.0,\"profil\":\"000000000111129993\",\"profilRolle\":\"0001\",\"anlagennummer\":\"5111111111\",\"zw\":\"000000000020709888\",\"sap_time_zone\":\"CET\",\"sap_profdecimals\":\"06\",\"sapSanitized\":true,\"valueCount\":0,\"coverage_07-01\":0,\"coverage_07-02\":0,\"coverage_07-03\":0,\"coverage_07-04\":0,\"coverage_07-05\":0,\"coverage_07-06\":0,\"coverage_07-07\":0,\"coverage_07-08\":0,\"coverage_07-09\":0,\"coverage_07-10\":0,\"coverage_07-11\":0,\"coverage_07-12\":0,\"coverage_07-13\":0,\"coverage_07-14\":0,\"coverage_07-15\":0,\"coverage_07-16\":0,\"coverage_07-17\":0,\"coverage_07-18\":0,\"coverage_07-19\":0,\"coverage_07-20\":0,\"coverage_07-21\":0,\"coverage_07-22\":0,\"coverage_07-23\":0,\"coverage_07-24\":0,\"coverage_07-25\":0,\"coverage_07-26\":0,\"coverage_07-27\":0,\"coverage_07-28\":0,\"coverage_07-29\":0,\"coverage_07-30\":0,\"coverage_07-31\":0,\"coverage_sum\":0}");
-            report.ToCSV(";", true, Environment.NewLine);
+            report.ToCsv(";", true, Environment.NewLine);
         }
     }
 }

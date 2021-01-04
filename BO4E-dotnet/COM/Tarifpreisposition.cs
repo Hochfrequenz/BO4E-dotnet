@@ -8,7 +8,7 @@ namespace BO4E.COM
 {
     /// <summary>Mit dieser Komponente können Tarifpreise verschiedener Typen abgebildet werden.</summary>
     [ProtoContract]
-    public class Tarifpreisposition : COM
+    public class Tarifpreisposition : Com
     {
         /// <summary>Angabe des Preistypes (z.B. Grundpreis) Details <see cref="ENUM.Preistyp" /></summary>
         [JsonProperty(PropertyName = "preistyp", Required = Required.Always)]

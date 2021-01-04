@@ -12,7 +12,7 @@ namespace BO4E.COM
 {
     /// <summary>Mit dieser Komponente werden die Eigenschaften eines Gerätes in Bezug auf den Typ und weitere Merkmale modelliert.</summary>
     [ProtoContract]
-    public class Geraeteeigenschaften : COM
+    public class Geraeteeigenschaften : Com
     {
         /// <summary>Der Typ eines Gerätes, beispielsweise Drehstromzähler. Details <see cref="ENUM.Geraetetyp" /></summary>
         [JsonProperty(PropertyName = "geraetetyp", Required = Required.Always)]

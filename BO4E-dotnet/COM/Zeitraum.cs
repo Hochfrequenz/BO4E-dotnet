@@ -13,7 +13,7 @@ namespace BO4E.COM
 {
     /// <summary>Diese Komponente wird zur Abbildung von Zeiträumen in Form von Dauern oder der Angabe von Start und Ende verwendet.</summary>
     [ProtoContract]
-    public class Zeitraum : COM
+    public class Zeitraum : Com
     {
         /// <summary>Die Einheit in der die Dauer angeben ist. Z.B. Monate. <seealso cref="Zeiteinheit" /></summary>
         [JsonProperty(PropertyName = "einheit", Required = Required.Default)]

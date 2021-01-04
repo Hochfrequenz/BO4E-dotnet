@@ -16,7 +16,7 @@ namespace TestBO4E.ShowCaseTests
     [TestClass]
     public class EncryptionShowCaseTests
     {
-        protected static readonly Marktlokation maLo = new Marktlokation()
+        protected static readonly Marktlokation MaLo = new Marktlokation()
         {
             MarktlokationsId = "54321098765",
             Sparte = Sparte.STROM,
@@ -36,13 +36,13 @@ namespace TestBO4E.ShowCaseTests
         [TestMethod]
         public void ShowCaseTestSymmetric()
         {
-            Assert.IsTrue(maLo.IsValid()); // as the encryption relies on serializing the BO invalid BOs cannot be encrypted.
+            Assert.IsTrue(MaLo.IsValid()); // as the encryption relies on serializing the BO invalid BOs cannot be encrypted.
 
             var sharedSecret = Sodium.SecretBox.GenerateKey();
             EncryptedObject encryptedBo;
             using (var encrypter = new SymmetricEncrypter(sharedSecret))
             {
-                encryptedBo = encrypter.Encrypt(maLo, "test case");
+                encryptedBo = encrypter.Encrypt(MaLo, "test case");
             }
             Debug.Write(JsonConvert.SerializeObject(encryptedBo, new StringEnumConverter()));
             //{
@@ -59,13 +59,13 @@ namespace TestBO4E.ShowCaseTests
             {
                 decryptedMaLo = decrypter.Decrypt<Marktlokation>(encryptedBo);
             }
-            Assert.AreEqual(maLo.Lokationsadresse, decryptedMaLo.Lokationsadresse);
+            Assert.AreEqual(MaLo.Lokationsadresse, decryptedMaLo.Lokationsadresse);
         }
 
         [TestMethod]
         public void ShowCaseTestAsymmetric()
         {
-            Assert.IsTrue(maLo.IsValid()); // as the encryption relies on serializing the BO invalid BOs cannot be encrypted.
+            Assert.IsTrue(MaLo.IsValid()); // as the encryption relies on serializing the BO invalid BOs cannot be encrypted.
 
             var aliceKeyPair = Sodium.PublicKeyBox.GenerateKeyPair();
             var bobKeyPair = Sodium.PublicKeyBox.GenerateKeyPair();
@@ -76,7 +76,7 @@ namespace TestBO4E.ShowCaseTests
             EncryptedObject encryptedBo;
             using (var aliceEncrypter = new AsymmetricEncrypter(aliceKeyPair))
             {
-                encryptedBo = aliceEncrypter.Encrypt(maLo, Convert.ToBase64String(bobKeyPair.PublicKey));
+                encryptedBo = aliceEncrypter.Encrypt(MaLo, Convert.ToBase64String(bobKeyPair.PublicKey));
             }
             Debug.WriteLine($"Alice: Hey @Bob: This is my signed and encrypted BusinssObject: ");
             Debug.WriteLine(JsonConvert.SerializeObject(encryptedBo, new StringEnumConverter()));
@@ -98,14 +98,14 @@ namespace TestBO4E.ShowCaseTests
                 Assert.IsInstanceOfType(decryptedBo, typeof(Marktlokation)); // ...now he knows.
                 decryptedMaLo = bobsDecrypter.Decrypt<Marktlokation>(encryptedBo); // Bob knows at compile time it's a MaLo.
             }
-            Assert.AreEqual(maLo, decryptedMaLo);
+            Assert.AreEqual(MaLo, decryptedMaLo);
 
             var eveKeyPair = Sodium.PublicKeyBox.GenerateKeyPair();
             // Eve entered the chat
             EncryptedObjectPublicKeyBox manipulatedBo;
             using (var eveEncrypter = new AsymmetricEncrypter(eveKeyPair))
             {
-                manipulatedBo = eveEncrypter.Encrypt(maLo, Convert.ToBase64String(bobKeyPair.PublicKey));
+                manipulatedBo = eveEncrypter.Encrypt(MaLo, Convert.ToBase64String(bobKeyPair.PublicKey));
             }
             manipulatedBo.PublicKey = Convert.ToBase64String(aliceKeyPair.PublicKey); // Eve: Never will Bob know this message is not from Alice!
             Debug.WriteLine("Eve: Hey @Bob, Alice asked me to give you this BO");

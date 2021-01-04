@@ -23,7 +23,7 @@ namespace BO4E
         /// project wide logger
         /// </summary>
         public static ILogger Logger = StaticLogger.Logger;
-        private static readonly string namespacePrefix = "BO4E.ENUM";
+        private static readonly string NamespacePrefix = "BO4E.ENUM";
         /// <summary>
         /// transform a BO4E value of known type to an EDIFACT value
         /// </summary>
@@ -56,8 +56,8 @@ namespace BO4E
                 Logger = StaticLogger.Logger;
             }
             //Type[] types = Assembly.GetExecutingAssembly().GetTypes();
-            var clazz = Assembly.GetExecutingAssembly().GetType(namespacePrefix + "." + objectName);
-            var ediClazz = Assembly.GetExecutingAssembly().GetType($"{namespacePrefix}.EDI.{objectName}Edi");
+            var clazz = Assembly.GetExecutingAssembly().GetType(NamespacePrefix + "." + objectName);
+            var ediClazz = Assembly.GetExecutingAssembly().GetType($"{NamespacePrefix}.EDI.{objectName}Edi");
 
             var prop = clazz.GetField(objectValue);
             if (prop == null)
@@ -124,7 +124,7 @@ namespace BO4E
         public static JObject ReplaceWithEdiValues(Object o)
         {
             var type = o.GetType();
-            if (!type.IsSubclassOf(typeof(BusinessObject)) && !type.IsSubclassOf(typeof(BO4E.COM.COM)))
+            if (!type.IsSubclassOf(typeof(BusinessObject)) && !type.IsSubclassOf(typeof(BO4E.COM.Com)))
             {
                 throw new ArgumentException($"Please pass a Business Object or BO4E COMpontent instead of {o.GetType()} with value '{o}'.");
             }
@@ -134,7 +134,7 @@ namespace BO4E
             {
                 var serializationName = oProp.GetCustomAttribute<JsonPropertyAttribute>().PropertyName ?? oProp.Name;
                 var originalType = Nullable.GetUnderlyingType(oProp.PropertyType) ?? oProp.PropertyType;
-                if (originalType.IsSubclassOf(typeof(BO4E.COM.COM)) || originalType.IsSubclassOf(typeof(BusinessObject)))
+                if (originalType.IsSubclassOf(typeof(BO4E.COM.Com)) || originalType.IsSubclassOf(typeof(BusinessObject)))
                 {
                     object newValue = ReplaceWithEdiValues(oProp.GetValue(o));
                     result[serializationName] = (JToken)newValue;
@@ -144,7 +144,7 @@ namespace BO4E
                     var originalListItemType = originalType.GetGenericArguments()[0];
                     if (originalListItemType.ToString().StartsWith("BO4E.ENUM"))
                     {
-                        var listItemEdiType = Assembly.GetExecutingAssembly().GetType($"{namespacePrefix}.EDI.{originalListItemType.Name}Edi");
+                        var listItemEdiType = Assembly.GetExecutingAssembly().GetType($"{NamespacePrefix}.EDI.{originalListItemType.Name}Edi");
                         if (listItemEdiType != null)
                         {
                             var listType = typeof(List<>).MakeGenericType(listItemEdiType);
@@ -177,7 +177,7 @@ namespace BO4E
                         result[serializationName] = JToken.FromObject(newList);
                     }
                 }
-                var ediType = Assembly.GetExecutingAssembly().GetType($"{namespacePrefix}.EDI.{originalType.Name}Edi");
+                var ediType = Assembly.GetExecutingAssembly().GetType($"{NamespacePrefix}.EDI.{originalType.Name}Edi");
                 if (ediType != null)
                 {
                     var newValue = ToEdi(originalType.Name, oProp.GetValue(o).ToString());

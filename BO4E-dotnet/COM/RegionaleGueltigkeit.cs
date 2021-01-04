@@ -10,7 +10,7 @@ namespace BO4E.COM
 {
     /// <summary>Mit dieser Komponente können regionale Gültigkeiten, z.B. für Tarife, Zu- und Abschläge und Preise definiert werden.</summary>
     [ProtoContract]
-    public class RegionaleGueltigkeit : COM
+    public class RegionaleGueltigkeit : Com
     {
         /// <summary>Unterscheidung ob Positivliste oder Negativliste übertragen wird. Details <see cref="ENUM.Gueltigkeitstyp" /></summary>
         [JsonProperty(PropertyName = "gueltigkeitstyp", Required = Required.Always)]

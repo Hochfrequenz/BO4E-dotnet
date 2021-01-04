@@ -11,7 +11,7 @@ namespace BO4E.COM
     /// </summary>
     /// <author>Hochfrequenz Unternehmensberatung GmbH</author>
     [ProtoContract]
-    public class Konzessionsabgabe : COM
+    public class Konzessionsabgabe : Com
     {
         /// <summary>
         /// Art der Abgabe

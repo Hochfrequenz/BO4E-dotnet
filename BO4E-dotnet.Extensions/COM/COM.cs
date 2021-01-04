@@ -6,7 +6,7 @@ namespace BO4E.Extensions.COM
     /// <summary>
     /// common extensions for all COM objects
     /// </summary>
-    public static class COMExtensions
+    public static class ComExtensions
     {
         /// <summary>
         /// Create a deep copy of a COMponent
@@ -14,7 +14,7 @@ namespace BO4E.Extensions.COM
         /// <typeparam name="T">Type of the COM</typeparam>
         /// <param name="source">the BO that is copied</param>
         /// <returns>the deep copy</returns>
-        public static T DeepClone<T>(this T source) where T : BO4E.COM.COM
+        public static T DeepClone<T>(this T source) where T : BO4E.COM.Com
         {
             return JsonConvert.DeserializeObject<T>(JsonConvert.SerializeObject(source));
         }

@@ -188,7 +188,7 @@ namespace BO4E.Reporting
         /// <summary>
         /// matches a OBIS-Kennzahl that stands for an intelligentes messsystem for power.
         /// </summary>
-        private static Regex imsysRegex = new Regex(@"(1)-(65):((?:[1-8]|99))\.((?:6|8|9|29))\.([0-9]{1,2})", RegexOptions.Compiled);
+        private static Regex _imsysRegex = new Regex(@"(1)-(65):((?:[1-8]|99))\.((?:6|8|9|29))\.([0-9]{1,2})", RegexOptions.Compiled);
 
         /// <summary>
         /// Convert CompletenessReport to CSV string
@@ -197,7 +197,7 @@ namespace BO4E.Reporting
         /// <param name="headerLine">Shows header of columns in return string?</param>
         /// <param name="lineTerminator">This value goes to end of every line. By default is "\\n"</param>
         /// <returns></returns>
-        public string ToCSV(string separator = ";", bool headerLine = true, string lineTerminator = "\\n")
+        public string ToCsv(string separator = ";", bool headerLine = true, string lineTerminator = "\\n")
         {
             var builder = new StringBuilder();
             if (headerLine)
@@ -242,7 +242,7 @@ namespace BO4E.Reporting
                 columns.Add(LokationsId);
             }
 
-            columns.Add(imsysRegex.Match(Obiskennzahl).Success ? "IMS" : "RLM");// messung
+            columns.Add(_imsysRegex.Match(Obiskennzahl).Success ? "IMS" : "RLM");// messung
             columns.Add("MSB"); // MSB
 
             if (UserProperties.TryGetValue("profil", out var profil))

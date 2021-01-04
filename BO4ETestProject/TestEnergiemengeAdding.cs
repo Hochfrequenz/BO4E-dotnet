@@ -14,7 +14,7 @@ namespace TestBO4E
             var em1 = new Energiemenge()
             {
                 LokationsId = "DE123",
-                LokationsTyp = BO4E.ENUM.Lokationstyp.MaLo,
+                LokationsTyp = BO4E.ENUM.Lokationstyp.MA_LO,
                 Energieverbrauch = new List<BO4E.COM.Verbrauch>()
                 {
                     new BO4E.COM.Verbrauch()
@@ -31,7 +31,7 @@ namespace TestBO4E
             var em2 = new Energiemenge()
             {
                 LokationsId = "DE123",
-                LokationsTyp = BO4E.ENUM.Lokationstyp.MaLo,
+                LokationsTyp = BO4E.ENUM.Lokationstyp.MA_LO,
                 Energieverbrauch = new List<BO4E.COM.Verbrauch>()
                 {
                     new BO4E.COM.Verbrauch()
@@ -56,12 +56,12 @@ namespace TestBO4E
             var em1 = new Energiemenge()
             {
                 LokationsId = "DE456",
-                LokationsTyp = BO4E.ENUM.Lokationstyp.MeLo
+                LokationsTyp = BO4E.ENUM.Lokationstyp.ME_LO
             };
             var em2 = new Energiemenge()
             {
                 LokationsId = "DE789",
-                LokationsTyp = BO4E.ENUM.Lokationstyp.MeLo
+                LokationsTyp = BO4E.ENUM.Lokationstyp.ME_LO
             };
             Assert.ThrowsException<InvalidOperationException>(() => em1 + em2);
         }

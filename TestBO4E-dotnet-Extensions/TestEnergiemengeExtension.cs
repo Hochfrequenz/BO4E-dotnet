@@ -22,16 +22,16 @@ namespace TestBO4EExtensions
     [TestClass]
     public class TestEnergiemengeExtension
     {
-        internal static readonly TimeRange GERMAN_MARCH_2018 = new TimeRange(new DateTime(2018, 2, 28, 23, 0, 0, DateTimeKind.Utc), new DateTime(2018, 3, 31, 22, 0, 0, DateTimeKind.Utc));
-        internal static readonly TimeRange GERMAN_APRIL_2018 = new TimeRange(new DateTime(2018, 3, 31, 22, 0, 0, DateTimeKind.Utc), new DateTime(2018, 4, 30, 22, 0, 0, DateTimeKind.Utc));
-        internal static readonly TimeRange march2425 = new TimeRange(new DateTime(2018, 3, 23, 23, 0, 0, DateTimeKind.Utc), new DateTime(2018, 3, 25, 22, 0, 0, DateTimeKind.Utc));
+        internal static readonly TimeRange GermanMarch2018 = new TimeRange(new DateTime(2018, 2, 28, 23, 0, 0, DateTimeKind.Utc), new DateTime(2018, 3, 31, 22, 0, 0, DateTimeKind.Utc));
+        internal static readonly TimeRange GermanApril2018 = new TimeRange(new DateTime(2018, 3, 31, 22, 0, 0, DateTimeKind.Utc), new DateTime(2018, 4, 30, 22, 0, 0, DateTimeKind.Utc));
+        internal static readonly TimeRange March2425 = new TimeRange(new DateTime(2018, 3, 23, 23, 0, 0, DateTimeKind.Utc), new DateTime(2018, 3, 25, 22, 0, 0, DateTimeKind.Utc));
 
         [TestMethod]
         public void TestTestingRanges()
         {
-            Assert.AreEqual(30 * 24, GERMAN_APRIL_2018.Duration.TotalHours); // keine Zeitumstellung im April
-            Assert.AreEqual(31 * 24 - 1, GERMAN_MARCH_2018.Duration.TotalHours); // Uhren am 25.03.18 eine Stunde vor
-            Assert.AreEqual(47, march2425.Duration.TotalHours);
+            Assert.AreEqual(30 * 24, GermanApril2018.Duration.TotalHours); // keine Zeitumstellung im April
+            Assert.AreEqual(31 * 24 - 1, GermanMarch2018.Duration.TotalHours); // Uhren am 25.03.18 eine Stunde vor
+            Assert.AreEqual(47, March2425.Duration.TotalHours);
         }
 
         [TestMethod]
@@ -75,7 +75,7 @@ namespace TestBO4EExtensions
                     var fixit = fixSapCdsRaw.Value<bool>();
                     if (fixit)
                     {
-                        em.FixSapCDSBug();
+                        em.FixSapCdsBug();
                     }
                 }
 
@@ -125,22 +125,22 @@ namespace TestBO4EExtensions
                             Assert.AreEqual(assertion.Value, em.GetMissingTimeRanges().Count, $"{assertion.Name}: {boFile}");
                             break;
                         case "coverage201804":
-                            Assert.AreEqual(assertion.Value, Math.Round(em.GetCoverage(GERMAN_APRIL_2018), 4));
+                            Assert.AreEqual(assertion.Value, Math.Round(em.GetCoverage(GermanApril2018), 4));
                             break;
                         case "coverage201803":
-                            Assert.AreEqual(assertion.Value, Math.Round(em.GetCoverage(GERMAN_MARCH_2018), 8));
+                            Assert.AreEqual(assertion.Value, Math.Round(em.GetCoverage(GermanMarch2018), 8));
                             break;
                         case "coverage2018032425":
-                            Assert.AreEqual(assertion.Value, Math.Round(em.GetCoverage(march2425), 4));
+                            Assert.AreEqual(assertion.Value, Math.Round(em.GetCoverage(March2425), 4));
                             break;
                         case "coverage201804-KWHPROGNOSE1234":
-                            Assert.AreEqual(assertion.Value, Math.Round(em.GetCoverage(GERMAN_APRIL_2018, Wertermittlungsverfahren.PROGNOSE, "1-2-3-4", Mengeneinheit.KWH), 4), $"{assertion.Name}: {boFile}");
+                            Assert.AreEqual(assertion.Value, Math.Round(em.GetCoverage(GermanApril2018, Wertermittlungsverfahren.PROGNOSE, "1-2-3-4", Mengeneinheit.KWH), 4), $"{assertion.Name}: {boFile}");
                             break;
                         case "coverage201804-KWHMESSUNG5678":
-                            Assert.AreEqual(assertion.Value, Math.Round(em.GetCoverage(GERMAN_APRIL_2018, Wertermittlungsverfahren.MESSUNG, "5-6-7-8", Mengeneinheit.KWH), 4), $"{assertion.Name}: {boFile}");
+                            Assert.AreEqual(assertion.Value, Math.Round(em.GetCoverage(GermanApril2018, Wertermittlungsverfahren.MESSUNG, "5-6-7-8", Mengeneinheit.KWH), 4), $"{assertion.Name}: {boFile}");
                             break;
                         case "jointCoverage":
-                            Assert.AreEqual(assertion.Value, Math.Round(em.GetJointCoverage(GERMAN_APRIL_2018), 4), $"{assertion.Name}: {boFile}");
+                            Assert.AreEqual(assertion.Value, Math.Round(em.GetJointCoverage(GermanApril2018), 4), $"{assertion.Name}: {boFile}");
                             break;
                         case "isPure":
                             Assert.AreEqual((bool)assertion.Value, em.IsPure(), boFile);

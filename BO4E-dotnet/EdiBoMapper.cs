@@ -20,7 +20,7 @@ namespace BO4E
         /// </summary>
         public static ILogger Logger = StaticLogger.Logger;
 
-        private static readonly string namespacePrefix = "BO4E.ENUM";
+        private static readonly string NamespacePrefix = "BO4E.ENUM";
 
         /// <summary>
         /// transform an EDIFACT value of known type to a BO4E value
@@ -54,8 +54,8 @@ namespace BO4E
                 Logger = StaticLogger.Logger;
             }
             //Type[] types = Assembly.GetExecutingAssembly().GetTypes();
-            var clazz = Assembly.GetExecutingAssembly().GetType(namespacePrefix + "." + objectName);
-            var ediClazz = Assembly.GetExecutingAssembly().GetType($"{namespacePrefix}.EDI.{objectName}Edi");
+            var clazz = Assembly.GetExecutingAssembly().GetType(NamespacePrefix + "." + objectName);
+            var ediClazz = Assembly.GetExecutingAssembly().GetType($"{NamespacePrefix}.EDI.{objectName}Edi");
 
             var useEdiClass = false;
             var field = clazz.GetField(objectValue);

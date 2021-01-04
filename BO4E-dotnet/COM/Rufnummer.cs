@@ -8,7 +8,7 @@ namespace BO4E.COM
 {
     /// <summary>Abbildung von Rufnummern.</summary>
     [ProtoContract]
-    public class Rufnummer : COM
+    public class Rufnummer : Com
     {
         /// <summary>Ausprägung der Nummer, z.B. Zentrale, Faxnummer, Mobilnummer etc. Details <see cref="Rufnummernart" /></summary>
         [JsonProperty(PropertyName = "nummerntyp", Required = Required.Always)]
@@ -19,6 +19,7 @@ namespace BO4E.COM
         [JsonProperty(PropertyName = "rufnummer", Required = Required.Always)]
         [ProtoMember(4)]
 #pragma warning disable IDE1006 // Naming Styles
+        // ReSharper disable once InconsistentNaming
         public string rufnummer { get; set; }
 #pragma warning restore IDE1006 // Naming Styles
     }

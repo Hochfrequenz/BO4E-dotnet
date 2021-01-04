@@ -7,7 +7,7 @@ namespace BO4E.COM
     /// <summary>Gibt die Staffelgrenzen der jeweiligen Preise an.</summary>
     [ProtoContract]
     // [ProtoInclude(102, typeof(RegionalePreisstaffel))] // protobuf-net doesn't support multiple levels of inheritance yet
-    public class Preisstaffel : COM
+    public class Preisstaffel : Com
     {
         /// <summary>Preis pro abgerechneter Mengeneinheit</summary>
         [JsonProperty(PropertyName = "einheitspreis", Required = Required.Always)]

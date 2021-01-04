@@ -12,7 +12,7 @@ namespace BO4E.COM
 {
     /// <summary>Mit dieser Komponente werden Zählwerke modelliert.</summary>
     [ProtoContract]
-    public class Zaehlwerk : COM
+    public class Zaehlwerk : Com
     {
         /// <summary>Identifikation des Zählwerks (Registers) innerhalb des Zählers. Oftmals eine laufende Nummer hinter der Zählernummer. Z.B. 47110815_1</summary>
         [JsonProperty(PropertyName = "zaehlwerkId", Required = Required.Always)]

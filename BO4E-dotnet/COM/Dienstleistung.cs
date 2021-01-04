@@ -8,7 +8,7 @@ namespace BO4E.COM
 {
     /// <summary>Abbildung einer abrechenbaren Dienstleistung.</summary>
     [ProtoContract]
-    public class Dienstleistung : COM
+    public class Dienstleistung : Com
     {
         /// <summary>Eindeutige Nummer der Dienstleistung. Details <see cref="ENUM.Dienstleistungstyp" /></summary>
         [JsonProperty(PropertyName = "dienstleistungstyp", Required = Required.Always)]

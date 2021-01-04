@@ -89,12 +89,12 @@ namespace BO4E.BO
         /// </example>
         [JsonIgnore]
         [ProtoIgnore]
-        public const string USER_PROPERTIES_NAME = "userProperties";
+        public const string UserPropertiesName = "userProperties";
 
         /// <summary>
         /// User properties (non bo4e standard)
         /// </summary>
-        [JsonProperty(PropertyName = USER_PROPERTIES_NAME, Required = Required.Default,
+        [JsonProperty(PropertyName = UserPropertiesName, Required = Required.Default,
             DefaultValueHandling = DefaultValueHandling.Ignore, Order = 200)]
         [JsonExtensionData]
         [ProtoMember(200)]
@@ -147,7 +147,7 @@ namespace BO4E.BO
         // note that this inheritance protobuf thing doesn't work as expected. please see the comments in TestBO4E project->TestProfobufSerialization
         [ProtoMember(3)]
 #pragma warning disable IDE1006 // Naming Styles
-        protected virtual string guidSerialized
+        protected virtual string GuidSerialized
 #pragma warning restore IDE1006 // Naming Styles
         {
             get => Guid.HasValue ? Guid.ToString() : string.Empty;
@@ -287,9 +287,9 @@ namespace BO4E.BO
         /// </summary>
         /// Use .ToString() on the result to pass it between services.
         /// <returns>a BO4E compliant URI object</returns>
-        public Bo4eUri GetURI(bool includeUserProperties = false)
+        public Bo4EUri GetUri(bool includeUserProperties = false)
         {
-            return Bo4eUri.GetUri(this, includeUserProperties);
+            return Bo4EUri.GetUri(this, includeUserProperties);
         }
 
         /// <summary>
@@ -409,7 +409,7 @@ namespace BO4E.BO
                     }
                     result.Add(fieldName, prop.PropertyType);
                 }
-                else if (prop.PropertyType.IsSubclassOf(typeof(COM.COM)))
+                else if (prop.PropertyType.IsSubclassOf(typeof(COM.Com)))
                 {
                     result.Add(fieldName, prop.PropertyType);
                     // coms do not contain any exandable subfield since they're flat
@@ -604,7 +604,7 @@ namespace BO4E.BO
                     Type boType;
                     if (serializer.TypeNameHandling.HasFlag(TypeNameHandling.Objects) && jo.TryGetValue("$type", out var typeToken))
                     {
-                        boType = BusinessObjectSerializationBinder.BusinessObjectAndCOMTypes.SingleOrDefault(t => typeToken.Value<string>().ToUpper().StartsWith(t.FullName.ToUpper()));
+                        boType = BusinessObjectSerializationBinder.BusinessObjectAndComTypes.SingleOrDefault(t => typeToken.Value<string>().ToUpper().StartsWith(t.FullName.ToUpper()));
                     }
                     else if (!jo.ContainsKey("boTyp"))
                     {

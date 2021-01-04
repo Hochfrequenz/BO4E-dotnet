@@ -10,7 +10,7 @@ namespace BO4E.COM
     /// Komponente zur Abbildung eines Regionskriteriums.
     /// </summary>
     [ProtoContract]
-    public class Regionskriterium : COM
+    public class Regionskriterium : Com
     {
         /// <summary>
         ///  Hier wird festgelegt, ob es sich um ein einschließendes oder ausschließendes Kriterium handelt.Details siehe <see cref="ENUM.Gueltigkeitstyp"/>

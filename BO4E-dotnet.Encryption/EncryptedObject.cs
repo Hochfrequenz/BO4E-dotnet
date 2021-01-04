@@ -9,8 +9,8 @@ namespace BO4E.BO
     /// An EncryptedObject does not contain any plain text but only information necessary to 
     /// decrypt and authenticate the original data. The decrypted cipher text contains the 
     /// original objects JSON serialization. The abstract class EncryptedObject contains
-    /// mandatory attributes for all encrypted object types. Please see <see cref="EncryptedObjectAEAD"/>,
-    /// <see cref="EncryptedObjectPublicKeyBox"/>, <see cref="EncryptedObjectPKCS7"/>.
+    /// mandatory attributes for all encrypted object types. Please see <see cref="EncryptedObjectAead"/>,
+    /// <see cref="EncryptedObjectPublicKeyBox"/>, <see cref="EncryptedObjectPkcs7"/>.
     /// </summary>
     /// <author>Hochfrequenz Unternehmensberatung GmbH</author>
     public abstract class EncryptedObject : BusinessObject

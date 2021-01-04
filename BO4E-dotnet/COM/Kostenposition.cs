@@ -8,7 +8,7 @@ namespace BO4E.COM
 {
     /// <summary>Diese Komponente wird zur Übertagung der Details zu einer Kostenposition verwendet.</summary>
     [ProtoContract]
-    public class Kostenposition : COM
+    public class Kostenposition : Com
     {
         /// <summary>Ein Titel für die Zeile. Hier kann z.B. der Netzbetreiber eingetragen werden, wenn es sich um Netzkosten handelt.</summary>
         [JsonProperty(PropertyName = "positionstitel", Required = Required.Always)]

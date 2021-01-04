@@ -6,7 +6,7 @@ namespace BO4E.COM
 {
     /// <summary>Enthält die zeitliche Zuordnung eines Ansprechpartners zu Abteilungen und Zuständigkeiten.</summary>
     [ProtoContract]
-    public class Zustaendigkeit : COM
+    public class Zustaendigkeit : Com
     {
         /// <summary>Berufliche Rolle des Ansprechpartners</summary>
         [JsonProperty(PropertyName = "jobtitel", Required = Required.Default)]

@@ -10,7 +10,7 @@ namespace BO4E.COM
 {
     /// <summary>Eine Komponente zur Abbildung einzelner Lose einer Ausschreibung.</summary>
     [ProtoContract]
-    public class Ausschreibungslos : COM
+    public class Ausschreibungslos : Com
     {
         /// <summary>Laufende Nummer des Loses</summary>
         [JsonProperty(PropertyName = "losnummer", Required = Required.Always)]
@@ -71,7 +71,7 @@ namespace BO4E.COM
         /// <summary>Zeitraum, für den die in diesem Los enthaltenen Lieferstellen beliefert werden sollen</summary> <see cref="Zeitraum" />
         [JsonProperty(PropertyName = "lieferzeitraum", Required = Required.Default)]
         [ProtoMember(17)]
-        public Zeitraum lieferzeitraum { get; set; }
+        public Zeitraum Lieferzeitraum { get; set; }
         /// <summary>Kundenwunsch zur Kündigungsfrist in der Ausschreibung.</summary> <see cref="Zeitraum" />
         [JsonProperty(PropertyName = "wunschKuendingungsfrist", Required = Required.Default)]
         [ProtoMember(18)]

@@ -10,7 +10,7 @@ namespace BO4E.COM
 {
     /// <summary>Mit dieser Komponente wird ein Teil einer Angebotsvariante abgebildet. Hier werden alle Angebotspositionen aggregiert.</summary>
     [ProtoContract]
-    public class Angebotsteil : COM
+    public class Angebotsteil : Com
     {
         /// <summary>Identifizierung eines Subkapitels einer Anfrage, beispielsweise das Los einer Ausschreibung.</summary>
         [JsonProperty(PropertyName = "anfrageSubreferenz", Required = Required.Default)]

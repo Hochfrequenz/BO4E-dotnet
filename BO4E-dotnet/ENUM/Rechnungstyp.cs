@@ -15,9 +15,9 @@ namespace BO4E.ENUM
         /// <summary>Zwischenrechnung</summary>
         ZWISCHENRECHNUNG,
         /// <summary>Integrierte 13. Rechnung</summary>
-        INTEGRIERTE_13TE_RECHNUNG,
+        INTEGRIERTE_13_TE_RECHNUNG,
         /// <summary>Zusätzliche 13. Rechnung</summary>
-        ZUSAETZLICHE_13TE_RECHNUNG,
+        ZUSAETZLICHE_13_TE_RECHNUNG,
         /// <summary>Mehr/Mindermengenabrechnung</summary>
         MEHRMINDERMENGENRECHNUNG
     }

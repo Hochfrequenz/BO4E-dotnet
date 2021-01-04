@@ -17,13 +17,13 @@ namespace BO4E.Extensions.Encryption
         /// <summary>
         /// serializer settings used in the encrypted objects
         /// </summary>
-        protected static JsonSerializerSettings encryptionSerializerSettings = new JsonSerializerSettings()
+        protected static JsonSerializerSettings EncryptionSerializerSettings = new JsonSerializerSettings()
         {
             TypeNameHandling = TypeNameHandling.Objects,
             SerializationBinder = new BusinessObjectSerializationBinder()
         };
 
-        public ILogger _logger { get; set; }
+        public ILogger Logger { get; set; }
         /// <summary>
         /// decrypt an encrypted Business Object
         /// </summary>

@@ -10,7 +10,7 @@ namespace BO4E.COM
 {
     /// <summary>Zusammensetzung der gelieferten Energie aus den verschiedenen Primärenergieformen.</summary>
     [ProtoContract]
-    public class Energiemix : COM
+    public class Energiemix : Com
     {
         /// <summary>Eindeutige Nummer zur Identifizierung des Energiemixes.</summary>
         [JsonProperty(PropertyName = "energiemixnummer", Required = Required.Always)]
@@ -35,15 +35,15 @@ namespace BO4E.COM
         /// <summary>Höhe des erzeugten CO2-Ausstosses in g/kWh.</summary>
         [JsonProperty(PropertyName = "cO2Emission", Required = Required.Default)]
         [ProtoMember(8)]
-        public decimal? CO2Emission { get; set; }
+        public decimal? Co2Emission { get; set; }
         /// <summary>Höhe des erzeugten Atommülls in g/kWh.</summary>
         [JsonProperty(PropertyName = "atommuell", Required = Required.Default)]
         [ProtoMember(9)]
         public decimal? Atommuell { get; set; }
-        /// <summary>Zertifikat für den Energiemix. Details <see cref="Oekozertifikat" /></summary>
+        /// <summary>Zertifikat für den Energiemix. Details <see cref="ENUM.Oekozertifikat" /></summary>
         [JsonProperty(PropertyName = "oekozertifikat", Required = Required.Default)]
         [ProtoMember(10)]
-        public List<Oekozertifikat> oekozertifikat { get; set; }
+        public List<Oekozertifikat> Oekozertifikat { get; set; }
         /// <summary>Ökolabel für den Energiemix. Details <see cref="ENUM.Oekolabel" /></summary>
         [JsonProperty(PropertyName = "oekolabel", Required = Required.Default)]
         [ProtoMember(11)]

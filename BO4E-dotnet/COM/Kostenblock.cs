@@ -8,7 +8,7 @@ namespace BO4E.COM
 {
     /// <summary>Mit dieser Komponente werden mehrere Kostenpositionen zusammengefasst.</summary>
     [ProtoContract]
-    public class Kostenblock : COM
+    public class Kostenblock : Com
     {
         /// <summary>Bezeichnung für einen Kostenblock. Z.B. Netzkosten, Messkosten, Umlagen, etc.</summary>
         [JsonProperty(PropertyName = "kostenblockbezeichnung", Required = Required.Always)]

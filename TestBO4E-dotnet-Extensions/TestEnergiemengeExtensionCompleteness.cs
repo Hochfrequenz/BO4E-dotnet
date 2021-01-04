@@ -64,7 +64,7 @@ namespace TestBO4EExtensions
                 {
                     foreach (var combi in em.GetWevObisMeCombinations())
                     {
-                        cr = em.GetCompletenessReport(TestEnergiemengeExtension.GERMAN_APRIL_2018, combi.Item1, combi.Item2, combi.Item3);
+                        cr = em.GetCompletenessReport(TestEnergiemengeExtension.GermanApril2018, combi.Item1, combi.Item2, combi.Item3);
                         var resultString = JsonConvert.SerializeObject(cr, new StringEnumConverter());
                         var cr2 = em.GetCompletenessReport(new CompletenessReport.CompletenessReportConfiguration
                         {
@@ -73,8 +73,8 @@ namespace TestBO4EExtensions
                             Wertermittlungsverfahren = combi.Item1,
                             ReferenceTimeFrame = new Zeitraum
                             {
-                                Startdatum = TestEnergiemengeExtension.GERMAN_APRIL_2018.Start,
-                                Enddatum = TestEnergiemengeExtension.GERMAN_APRIL_2018.End
+                                Startdatum = TestEnergiemengeExtension.GermanApril2018.Start,
+                                Enddatum = TestEnergiemengeExtension.GermanApril2018.End
                             }
                         });
                         //Assert.AreEqual(cr, cr2, "calling report with configuration instead of loose parameters doesn't work.");
@@ -159,7 +159,7 @@ namespace TestBO4EExtensions
             var em = new Energiemenge()
             {
                 LokationsId = "DE123455",
-                LokationsTyp = Lokationstyp.MeLo,
+                LokationsTyp = Lokationstyp.ME_LO,
                 Energieverbrauch = new List<Verbrauch>()
                 {
                     new Verbrauch()
@@ -195,7 +195,7 @@ namespace TestBO4EExtensions
             var em1 = new Energiemenge()
             {
                 LokationsId = "DE123456789DieseEmhatkeineVerbräuche",
-                LokationsTyp = Lokationstyp.MeLo,
+                LokationsTyp = Lokationstyp.ME_LO,
                 Energieverbrauch = new List<Verbrauch>() //empty list
             };
             var cr1 = em1.GetCompletenessReport();
@@ -206,26 +206,26 @@ namespace TestBO4EExtensions
             var em2 = new Energiemenge()
             {
                 LokationsId = "54321012345DieseEmhatkeineVerbräuche",
-                LokationsTyp = Lokationstyp.MeLo,
+                LokationsTyp = Lokationstyp.ME_LO,
                 Energieverbrauch = new List<Verbrauch>() //empty list
             };
-            var cr2 = em2.GetCompletenessReport(CHRISTMAS_2018, Wertermittlungsverfahren.MESSUNG, "1-2-3-4", Mengeneinheit.KUBIKMETER);
+            var cr2 = em2.GetCompletenessReport(Christmas2018, Wertermittlungsverfahren.MESSUNG, "1-2-3-4", Mengeneinheit.KUBIKMETER);
             Assert.IsNotNull(cr2);
             Assert.IsNotNull(cr2.Coverage); // not null because no values but configuration given
             Assert.AreEqual(0.0M, cr2.Coverage);
             JsonConvert.SerializeObject(cr2); // must _not_ throw exception
 
-            var cr3 = em2.GetCompletenessReport(CHRISTMAS_2018);
+            var cr3 = em2.GetCompletenessReport(Christmas2018);
             Assert.IsNotNull(cr3);
             Assert.IsNotNull(cr3.Coverage);
             Assert.AreEqual(0.0M, cr3.Coverage);
             JsonConvert.SerializeObject(cr3); // must _not_ throw exception
         }
 
-        internal static readonly TimeRange CHRISTMAS_2018 = new TimeRange(
+        internal static readonly TimeRange Christmas2018 = new TimeRange(
             new DateTimeOffset(2018, 12, 23, 22, 0, 0, TimeSpan.Zero).UtcDateTime,
             new DateTimeOffset(2018, 12, 31, 22, 0, 0, TimeSpan.Zero).UtcDateTime);
-        internal static readonly TimeRange GERMAN_YEAR_2018 = new TimeRange(
+        internal static readonly TimeRange GermanYear2018 = new TimeRange(
             new DateTimeOffset(2017, 12, 31, 23, 0, 0, TimeSpan.Zero).UtcDateTime,
             new DateTimeOffset(2018, 12, 31, 23, 0, 0, TimeSpan.Zero).UtcDateTime);
 
@@ -243,7 +243,7 @@ namespace TestBO4EExtensions
                         json = JsonConvert.DeserializeObject<JObject>(jsonString);
                     }
                     var em = BoMapper.MapObject<Energiemenge>(json, LenientParsing.STRICT);
-                    var result = em.GetDailyCompletenessReports(CHRISTMAS_2018);
+                    var result = em.GetDailyCompletenessReports(Christmas2018);
                     Assert.AreEqual(8, result.Count);
                     break; // one test is enough. the rest is covered by the individual completeness report tests.
                 }
@@ -266,7 +266,7 @@ namespace TestBO4EExtensions
                         json = JsonConvert.DeserializeObject<JObject>(jsonString);
                     }
                     var em = BoMapper.MapObject<Energiemenge>(json, LenientParsing.STRICT);
-                    var result = em.GetMonthlyCompletenessReports(GERMAN_YEAR_2018, useParallelExecution: useParallelExecution);
+                    var result = em.GetMonthlyCompletenessReports(GermanYear2018, useParallelExecution: useParallelExecution);
                     Assert.AreEqual(12, result.Count); // don't care about values of coverage, just the start/end and count of reports generated.
                     if (testFirstOnly)
                     {
@@ -288,13 +288,13 @@ namespace TestBO4EExtensions
                     em = JsonConvert.DeserializeObject<Energiemenge>(jsonString);
                 }
                 var mpFixSapCds = MiniProfiler.StartNew("Fix SAP CDS");
-                em.FixSapCDSBug();
+                em.FixSapCdsBug();
                 mpFixSapCds.Stop();
                 Assert.IsTrue(mpFixSapCds.DurationMilliseconds < 500, mpFixSapCds.RenderPlainText());
                 Console.Out.WriteLine(mpFixSapCds.RenderPlainText());
 
                 var mpFixSapCds2 = MiniProfiler.StartNew("Fix SAP CDS");
-                em.FixSapCDSBug();
+                em.FixSapCdsBug();
                 mpFixSapCds2.Stop();
                 Assert.IsTrue(mpFixSapCds2.DurationMilliseconds * 10 < mpFixSapCds.DurationMilliseconds);
 
@@ -353,7 +353,7 @@ namespace TestBO4EExtensions
 
 
         [TestMethod]
-        public void TestDailyCompletenessDST()
+        public void TestDailyCompletenessDst()
         {
             var localStart = TimeZoneInfo.ConvertTimeFromUtc(new DateTimeOffset(2018, 3, 24, 23, 0, 0, TimeSpan.Zero).UtcDateTime, CentralEuropeStandardTime.CENTRAL_EUROPE_STANDARD_TIME);//, DateTimeKind.Unspecified);
             var localEnd = TimeZoneInfo.ConvertTimeFromUtc(new DateTimeOffset(2018, 3, 26, 22, 0, 0, TimeSpan.Zero).UtcDateTime, CentralEuropeStandardTime.CENTRAL_EUROPE_STANDARD_TIME);//, DateTimeKind.Unspecified);
@@ -395,7 +395,7 @@ namespace TestBO4EExtensions
             var em = new Energiemenge()
             {
                 LokationsId = "MeinUnitTest123",
-                LokationsTyp = Lokationstyp.MeLo,
+                LokationsTyp = Lokationstyp.ME_LO,
                 Energieverbrauch = verbrauchSlices.Select(vs => new Verbrauch()
                 {
                     Startdatum = vs.Start,
@@ -415,13 +415,13 @@ namespace TestBO4EExtensions
         }
 
         [TestMethod]
-        public void TestAddDaysDSTSpring()
+        public void TestAddDaysDstSpring()
         {
             var utcDt = new DateTimeOffset(2018, 3, 24, 23, 0, 0, TimeSpan.Zero).UtcDateTime;
             var localDt = DateTime.SpecifyKind(TimeZoneInfo.ConvertTimeFromUtc(new DateTimeOffset(2018, 3, 24, 23, 0, 0, TimeSpan.Zero).UtcDateTime, CentralEuropeStandardTime.CENTRAL_EUROPE_STANDARD_TIME), DateTimeKind.Unspecified);
 
-            var resultUtc = utcDt.AddDaysDST(1);
-            var resultLocal = localDt.AddDaysDST(1);
+            var resultUtc = utcDt.AddDaysDst(1);
+            var resultLocal = localDt.AddDaysDst(1);
 
             Assert.AreEqual(DateTimeKind.Utc, resultUtc.Kind);
             Assert.AreEqual(DateTimeKind.Unspecified, resultLocal.Kind);
@@ -435,13 +435,13 @@ namespace TestBO4EExtensions
         }
 
         [TestMethod]
-        public void TestAddDaysDSTAutumn()
+        public void TestAddDaysDstAutumn()
         {
             var utcDt = new DateTimeOffset(2018, 10, 27, 22, 0, 0, TimeSpan.Zero).UtcDateTime;
             var localDt = DateTime.SpecifyKind(TimeZoneInfo.ConvertTimeFromUtc(new DateTimeOffset(2018, 10, 27, 22, 0, 0, TimeSpan.Zero).UtcDateTime, CentralEuropeStandardTime.CENTRAL_EUROPE_STANDARD_TIME), DateTimeKind.Unspecified);
 
-            var resultUtc = utcDt.AddDaysDST(1);
-            var resultLocal = localDt.AddDaysDST(1);
+            var resultUtc = utcDt.AddDaysDst(1);
+            var resultLocal = localDt.AddDaysDst(1);
 
             Assert.AreEqual(DateTimeKind.Utc, resultUtc.Kind);
             Assert.AreEqual(DateTimeKind.Unspecified, resultLocal.Kind);
@@ -455,13 +455,13 @@ namespace TestBO4EExtensions
         }
 
         [TestMethod]
-        public void TestAddDaysDSTSummer() // could be winter as well ;)
+        public void TestAddDaysDstSummer() // could be winter as well ;)
         {
             var utcDt = new DateTimeOffset(2018, 7, 27, 22, 0, 0, TimeSpan.Zero).UtcDateTime;
             var localDt = DateTime.SpecifyKind(TimeZoneInfo.ConvertTimeFromUtc(new DateTimeOffset(2018, 7, 27, 22, 0, 0, TimeSpan.Zero).UtcDateTime, CentralEuropeStandardTime.CENTRAL_EUROPE_STANDARD_TIME), DateTimeKind.Unspecified);
 
-            var resultUtc = utcDt.AddDaysDST(1);
-            var resultLocal = localDt.AddDaysDST(1);
+            var resultUtc = utcDt.AddDaysDst(1);
+            var resultLocal = localDt.AddDaysDst(1);
 
             Assert.AreEqual(DateTimeKind.Utc, resultUtc.Kind);
             Assert.AreEqual(DateTimeKind.Unspecified, resultLocal.Kind);

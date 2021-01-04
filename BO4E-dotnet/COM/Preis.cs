@@ -9,7 +9,7 @@ namespace BO4E.COM
 {
     /// <summary>Preis</summary>
     [ProtoContract]
-    public class Preis : COM
+    public class Preis : Com
     {
         /// <summary>Gibt die nomiale Höhe des Preises an.</summary>
         [JsonProperty(PropertyName = "wert", Required = Required.Always)]

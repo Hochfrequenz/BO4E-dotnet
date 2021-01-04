@@ -8,7 +8,7 @@ namespace BO4E.COM
 {
     /// <summary>Differenzierung der zu betrachtenden Produkte anhand der preiserhöhenden (Aufschlag) bzw. preisvermindernden (Abschlag) Zusatzvereinbarungen, die individuell zu einem neuen oder bestehenden Liefervertrag abgeschlossen werden können. Es können mehrere Auf-/Abschläge gleichzeitig ausgewählt werden.</summary>
     [ProtoContract]
-    public class PositionsAufAbschlag : COM
+    public class PositionsAufAbschlag : Com
     {
         /// <summary>Bezeichnung des Auf-/Abschlags</summary>
         [JsonProperty(PropertyName = "bezeichnung", Required = Required.Always)]

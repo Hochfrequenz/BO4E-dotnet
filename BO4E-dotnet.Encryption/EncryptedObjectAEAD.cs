@@ -7,12 +7,12 @@ namespace BO4E.BO
     /// <summary>
     /// Encrypted Object using libsodium AEAD algorithm with a shared secret/private key
     /// </summary>
-    public class EncryptedObjectAEAD : EncryptedObject
+    public class EncryptedObjectAead : EncryptedObject
     {
         /// <param name="cipherText">base64 encoded cipher text</param>
         /// <param name="associatedData">associated data (UTF-8), &lt;=16 characters</param>
         /// <param name="nonce">unique nonce / initialisation vector (base 64 encoded, must not be used twice)</param>
-        public EncryptedObjectAEAD(string cipherText, string associatedData, string nonce) : base(cipherText, EncryptionScheme.SodiumSymmetricAEAD)
+        public EncryptedObjectAead(string cipherText, string associatedData, string nonce) : base(cipherText, EncryptionScheme.SODIUM_SYMMETRIC_AEAD)
         {
             AssociatedData = associatedData;
             Nonce = nonce;

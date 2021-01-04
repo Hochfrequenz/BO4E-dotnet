@@ -10,7 +10,7 @@ namespace BO4E.COM
 {
     /// <summary>Modell für die preiserhöhenden (Aufschlag) bzw. preisvermindernden (Abschlag) Zusatzvereinbarungen, die individuell zu einem neuen oder bestehenden Liefervertrag abgeschlossen wurden.</summary>
     [ProtoContract]
-    public class AufAbschlag : COM
+    public class AufAbschlag : Com
     {
         /// <summary>Bezeichnung des Auf-/Abschlags</summary>
         [JsonProperty(PropertyName = "bezeichnung", Required = Required.Always)]
@@ -24,10 +24,10 @@ namespace BO4E.COM
         [JsonProperty(PropertyName = "aufAbschlagstyp", Required = Required.Default)]
         [ProtoMember(5)]
         public AufAbschlagstyp? AufAbschlagstyp { get; set; }
-        /// <summary>Diesem Preis oder den Kosten ist der Auf/Abschlag zugeordnet. Z.B. Arbeitspreis, Gesamtpreis etc.. Details <see cref="AufAbschlagsziel" /></summary>
+        /// <summary>Diesem Preis oder den Kosten ist der Auf/Abschlag zugeordnet. Z.B. Arbeitspreis, Gesamtpreis etc.. Details <see cref="ENUM.AufAbschlagsziel" /></summary>
         [JsonProperty(PropertyName = "aufAbschlagsziel", Required = Required.Default)]
         [ProtoMember(6)]
-        public AufAbschlagsziel? aufAbschlagsziel { get; set; }
+        public AufAbschlagsziel? AufAbschlagsziel { get; set; }
         /// <summary>Gibt an in welcher Währungseinheit der Auf/Abschlag berechnet wird. Euro oder Ct.. (Nur im Falle absoluter Aufschlagstypen). Details <see cref="Waehrungseinheit" /></summary>
         [JsonProperty(PropertyName = "einheit", Required = Required.Default)]
         [ProtoMember(7)]

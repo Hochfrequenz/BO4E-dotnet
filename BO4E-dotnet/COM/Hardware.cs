@@ -9,7 +9,7 @@ namespace BO4E.COM
 {
     /// <summary>Abbildung einer abrechenbaren Hardware.</summary>
     [ProtoContract]
-    public class Hardware : COM
+    public class Hardware : Com
     {
         /// <summary>Eindeutiger Typ der Hardware. Details <see cref="ENUM.Geraetetyp" /></summary>
         [JsonProperty(PropertyName = "geraetetyp", Required = Required.Always)]

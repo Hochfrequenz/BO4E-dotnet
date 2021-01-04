@@ -141,10 +141,10 @@ namespace BO4E
         /// <param name="userPropertiesWhiteList"><see cref="MapObject(Type, JObject, HashSet{string}, LenientParsing)"/></param>
         /// <param name="lenient"><see cref="MapObject(Type, JObject, HashSet{string}, LenientParsing)"/></param>
         /// <returns><see cref="MapObject(Type, JObject, HashSet{string}, LenientParsing)"/></returns>
-        public static BusinessObjectType MapObject<BusinessObjectType>(JObject jobject, HashSet<string> userPropertiesWhiteList, LenientParsing lenient = LenientParsing.STRICT)
+        public static TBusinessObjectType MapObject<TBusinessObjectType>(JObject jobject, HashSet<string> userPropertiesWhiteList, LenientParsing lenient = LenientParsing.STRICT)
         {
-            var businessObjectType = typeof(BusinessObjectType);
-            return (BusinessObjectType)Convert.ChangeType(MapObject(businessObjectType, jobject, userPropertiesWhiteList, lenient), typeof(BusinessObjectType));
+            var businessObjectType = typeof(TBusinessObjectType);
+            return (TBusinessObjectType)Convert.ChangeType(MapObject(businessObjectType, jobject, userPropertiesWhiteList, lenient), typeof(TBusinessObjectType));
         }
 
         /// <summary>

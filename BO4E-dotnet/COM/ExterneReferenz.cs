@@ -16,7 +16,7 @@ namespace BO4E.COM
     /// Diese Komponente ermöglicht es, sich die SAP GP-Nummer zu merken, um diese bei SAP-Aufrufen als Parameter mitgeben zu können.
     /// </summary>
     [ProtoContract]
-    public class ExterneReferenz : COM
+    public class ExterneReferenz : Com
     {
         /// <summary>
         /// Bezeichnung der externen Referenz (z.B. "hochfrequenz integration services")

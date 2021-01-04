@@ -6,7 +6,7 @@ namespace BO4E.COM
 {
     /// <summary>Die Komponente Ausschreibungsdetail wird verwendet um die Informationen zu einer Abnahmestelle innerhalb eines Ausschreibungsloses abzubilden.</summary>
     [ProtoContract]
-    public class Ausschreibungsdetail : COM
+    public class Ausschreibungsdetail : Com
     {
         /// <summary>Identifikation einer ausgeschriebenen Marktlokation</summary>
         [JsonProperty(PropertyName="lokationsId", Required = Required.Always)]

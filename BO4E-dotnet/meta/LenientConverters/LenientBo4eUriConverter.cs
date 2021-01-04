@@ -5,14 +5,14 @@ using System;
 namespace BO4E.meta.LenientConverters
 {
     /// <summary>
-    /// allows deserializing <see cref="Bo4eUri"/>s
+    /// allows deserializing <see cref="Bo4EUri"/>s
     /// </summary>
-    public class LenientBo4eUriConverter : JsonConverter
+    public class LenientBo4EUriConverter : JsonConverter
     {
         /// <inheritdoc cref="JsonConverter.CanConvert(Type)"/>
         public override bool CanConvert(Type objectType)
         {
-            return (objectType == typeof(Bo4eUri));
+            return (objectType == typeof(Bo4EUri));
         }
 
         /// <inheritdoc cref="JsonConverter.ReadJson(JsonReader, Type, object, JsonSerializer)"/>
@@ -27,7 +27,7 @@ namespace BO4E.meta.LenientConverters
             {
                 return null;
             }
-            return new Bo4eUri(rawString);
+            return new Bo4EUri(rawString);
         }
 
         /// <inheritdoc cref="JsonConverter.CanConvert(Type)"/>
