@@ -33,25 +33,25 @@ namespace TestBO4E
                     json = JsonConvert.DeserializeObject<JObject>(jsonString);
                 }
                 Assert.IsNotNull(json["objectName"], $"You have to specify the object name in test file {file}");
-                var lenients = LenientParsing.Strict; // default
+                var lenients = LenientParsing.STRICT; // default
                 if (json["lenientDateTime"] != null && (bool)json["lenientDateTime"])
                 {
-                    lenients |= LenientParsing.DateTime;
+                    lenients |= LenientParsing.DATE_TIME;
                 }
 
                 if (json["lenientEnumList"] != null && (bool)json["lenientEnumList"])
                 {
-                    lenients |= LenientParsing.EnumList;
+                    lenients |= LenientParsing.ENUM_LIST;
                 }
 
                 if (json["lenientBo4eUri"] != null && (bool)json["lenientBo4eUri"])
                 {
-                    lenients |= LenientParsing.Bo4eUri;
+                    lenients |= LenientParsing.BO4_E_URI;
                 }
 
                 if (json["lenientStringToInt"] != null && (bool)json["lenientStringToInt"])
                 {
-                    lenients |= LenientParsing.StringToInt;
+                    lenients |= LenientParsing.STRING_TO_INT;
                 }
                 BusinessObject bo;
                 try
@@ -95,7 +95,7 @@ namespace TestBO4E
                 {
                     whitelist = new HashSet<string>();
                 }
-                if (lenients == LenientParsing.Strict)
+                if (lenients == LenientParsing.STRICT)
                 {
                     foreach (LenientParsing lenient in Enum.GetValues(typeof(LenientParsing)))
                     {
@@ -183,7 +183,7 @@ namespace TestBO4E
                 var jsonString = r.ReadToEnd();
                 json = JsonConvert.DeserializeObject<JObject>(jsonString);
             }
-            var lenients = LenientParsing.StringToInt;
+            var lenients = LenientParsing.STRING_TO_INT;
             var v = JsonConvert.DeserializeObject<Vertrag>(json["input"].ToString(), lenients.GetJsonSerializerSettings());
             Assert.AreEqual(v.Vertragskonditionen.AnzahlAbschlaege, 12);
         }

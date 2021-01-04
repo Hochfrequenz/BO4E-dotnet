@@ -33,7 +33,7 @@ namespace BO4E
         /// <param name="jobject">business object json</param>
         /// <param name="lenient">lenient parsing flags</param>
         /// <returns><see cref="MapObject(string, JObject, LenientParsing)"/></returns>
-        public static BusinessObject MapObject(JObject jobject, LenientParsing lenient = LenientParsing.Strict)
+        public static BusinessObject MapObject(JObject jobject, LenientParsing lenient = LenientParsing.STRICT)
         {
             return MapObject(jobject, new HashSet<string>(), lenient);
         }
@@ -45,7 +45,7 @@ namespace BO4E
         /// <param name="lenient">lenient parsing flags</param>
         /// <param name="userPropertiesWhiteList">white list of non BO4E standard field you'd like to have de-serialized</param>
         /// <returns><see cref="MapObject(string, JObject, LenientParsing)"/></returns>
-        public static BusinessObject MapObject(JObject jobject, HashSet<string> userPropertiesWhiteList, LenientParsing lenient = LenientParsing.Strict)
+        public static BusinessObject MapObject(JObject jobject, HashSet<string> userPropertiesWhiteList, LenientParsing lenient = LenientParsing.STRICT)
         {
             if (jobject["boTyp"] == null)
             {
@@ -58,7 +58,7 @@ namespace BO4E
         /// <summary>
         /// <see cref="MapObject(string, JObject, HashSet{string}, LenientParsing)"/> with empty user properties white list
         /// </summary>
-        public static BusinessObject MapObject(string businessObjectName, JObject jobject, LenientParsing lenient = LenientParsing.Strict)
+        public static BusinessObject MapObject(string businessObjectName, JObject jobject, LenientParsing lenient = LenientParsing.STRICT)
         {
             return MapObject(GetTypeForBoName(businessObjectName), jobject, new HashSet<string>(), lenient);
         }
@@ -66,7 +66,7 @@ namespace BO4E
         /// <summary>
         /// <see cref="MapObject(Type, JObject, HashSet{string}, LenientParsing)"/> with empty user properties white list
         /// </summary>
-        public static BusinessObject MapObject(Type businessObjectType, JObject jobject, LenientParsing lenient = LenientParsing.Strict)
+        public static BusinessObject MapObject(Type businessObjectType, JObject jobject, LenientParsing lenient = LenientParsing.STRICT)
         {
             return MapObject(businessObjectType, jobject, new HashSet<string>(), lenient);
         }
@@ -74,7 +74,7 @@ namespace BO4E
         /// <summary>
         /// <see cref="MapObject(Type, JObject, HashSet{string}, LenientParsing)"/>
         /// </summary>
-        public static TBusinessObjectType MapObject<TBusinessObjectType>(JObject jobject, LenientParsing lenient = LenientParsing.Strict)
+        public static TBusinessObjectType MapObject<TBusinessObjectType>(JObject jobject, LenientParsing lenient = LenientParsing.STRICT)
         {
             return (TBusinessObjectType)Convert.ChangeType(MapObject(typeof(TBusinessObjectType), jobject, lenient), typeof(TBusinessObjectType));
         }
@@ -88,7 +88,7 @@ namespace BO4E
         /// <param name="lenient"></param>
         /// <returns></returns>
         [Obsolete("DEPRECATED! Please use the overloaded method MapObject<T>(...) or MapObject(Type t,...) that accept types, not strings.")]
-        public static BusinessObject MapObject(string businessObjectName, JObject jobject, HashSet<string> userPropertiesWhiteList, LenientParsing lenient = LenientParsing.Strict)
+        public static BusinessObject MapObject(string businessObjectName, JObject jobject, HashSet<string> userPropertiesWhiteList, LenientParsing lenient = LenientParsing.STRICT)
         {
             return MapObject(GetTypeForBoName(businessObjectName), jobject, userPropertiesWhiteList, lenient);
         }
@@ -115,7 +115,7 @@ namespace BO4E
         /// </list>
         /// </returns>
         [Obsolete("DEPRECATED! Please use the overloaded method MapObject<T>(...) or MapObject(Type t,...) that accept types, not strings.")]
-        public static BusinessObject MapObject(Type businessObjectType, JObject jobject, HashSet<string> userPropertiesWhiteList, LenientParsing lenient = LenientParsing.Strict)
+        public static BusinessObject MapObject(Type businessObjectType, JObject jobject, HashSet<string> userPropertiesWhiteList, LenientParsing lenient = LenientParsing.STRICT)
         {
             if (!businessObjectType.IsSubclassOf(typeof(BusinessObject)))
             {
@@ -123,7 +123,7 @@ namespace BO4E
             }
             else
             {
-                if (lenient == LenientParsing.Strict && userPropertiesWhiteList.Count == 0)
+                if (lenient == LenientParsing.STRICT && userPropertiesWhiteList.Count == 0)
                 {
                     return (BusinessObject)jobject.ToObject(businessObjectType);
                 }
@@ -141,7 +141,7 @@ namespace BO4E
         /// <param name="userPropertiesWhiteList"><see cref="MapObject(Type, JObject, HashSet{string}, LenientParsing)"/></param>
         /// <param name="lenient"><see cref="MapObject(Type, JObject, HashSet{string}, LenientParsing)"/></param>
         /// <returns><see cref="MapObject(Type, JObject, HashSet{string}, LenientParsing)"/></returns>
-        public static BusinessObjectType MapObject<BusinessObjectType>(JObject jobject, HashSet<string> userPropertiesWhiteList, LenientParsing lenient = LenientParsing.Strict)
+        public static BusinessObjectType MapObject<BusinessObjectType>(JObject jobject, HashSet<string> userPropertiesWhiteList, LenientParsing lenient = LenientParsing.STRICT)
         {
             var businessObjectType = typeof(BusinessObjectType);
             return (BusinessObjectType)Convert.ChangeType(MapObject(businessObjectType, jobject, userPropertiesWhiteList, lenient), typeof(BusinessObjectType));

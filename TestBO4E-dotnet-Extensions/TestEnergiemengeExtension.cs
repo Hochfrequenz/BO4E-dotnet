@@ -58,7 +58,7 @@ namespace TestBO4EExtensions
                 {
                     if (boFile.Contains("wintertime2018.json"))
                     {
-                        em = BoMapper.MapObject<Energiemenge>(bo, LenientParsing.DateTime);
+                        em = BoMapper.MapObject<Energiemenge>(bo, LenientParsing.DATE_TIME);
                     }
                     else
                     {

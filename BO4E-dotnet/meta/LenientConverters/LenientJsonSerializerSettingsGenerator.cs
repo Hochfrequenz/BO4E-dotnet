@@ -36,8 +36,8 @@ namespace BO4E.meta.LenientConverters
                 {
                     switch (lp)
                     {
-                        case LenientParsing.DateTime:
-                            if (!lenient.HasFlag(LenientParsing.SetInitialDateIfNull))
+                        case LenientParsing.DATE_TIME:
+                            if (!lenient.HasFlag(LenientParsing.SET_INITIAL_DATE_IF_NULL))
                             {
                                 converters.Add(new LenientDateTimeConverter());
                             }
@@ -47,15 +47,15 @@ namespace BO4E.meta.LenientConverters
                             }
                             break;
 
-                        case LenientParsing.EnumList:
+                        case LenientParsing.ENUM_LIST:
                             converters.Add(new LenientEnumListConverter());
                             break;
 
-                        case LenientParsing.Bo4eUri:
+                        case LenientParsing.BO4_E_URI:
                             converters.Add(new LenientBo4eUriConverter());
                             break;
 
-                        case LenientParsing.StringToInt:
+                        case LenientParsing.STRING_TO_INT:
                             converters.Add(new LenientStringToIntConverter());
                             break;
                             // case LenientParsing.EmptyLists:

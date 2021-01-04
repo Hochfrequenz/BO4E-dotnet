@@ -41,7 +41,7 @@ namespace TestBO4EExtensions
                     var jsonString = r.ReadToEnd();
                     json = JsonConvert.DeserializeObject<JObject>(jsonString);
                 }
-                var em = (Energiemenge)BoMapper.MapObject((JObject)json["input"], LenientParsing.Strict);
+                var em = (Energiemenge)BoMapper.MapObject((JObject)json["input"], LenientParsing.STRICT);
                 CompletenessReport cr;
                 if (boFile.EndsWith("somecustomer1.json"))
                 {
@@ -106,7 +106,7 @@ namespace TestBO4EExtensions
                         var jsonString = r.ReadToEnd();
                         json = JsonConvert.DeserializeObject<JObject>(jsonString);
                     }
-                    var em = (Energiemenge)BoMapper.MapObject(json, LenientParsing.Strict);
+                    var em = (Energiemenge)BoMapper.MapObject(json, LenientParsing.STRICT);
                     var cr = em.GetCompletenessReport();
                     crlist.Add(cr);
                     if (boFile.Contains("onshore.json"))
@@ -132,7 +132,7 @@ namespace TestBO4EExtensions
                 var jsonString = r.ReadToEnd();
                 json = JsonConvert.DeserializeObject<JObject>(jsonString);
             }
-            var em = (Energiemenge)BoMapper.MapObject(JObject.FromObject(json["input"]), LenientParsing.Strict);
+            var em = (Energiemenge)BoMapper.MapObject(JObject.FromObject(json["input"]), LenientParsing.STRICT);
             var cr = em.GetCompletenessReport(new TimeRange()
             {
                 Start = new DateTimeOffset(2017, 12, 31, 23, 0, 0, 0, TimeSpan.Zero).UtcDateTime,
@@ -242,7 +242,7 @@ namespace TestBO4EExtensions
                         var jsonString = r.ReadToEnd();
                         json = JsonConvert.DeserializeObject<JObject>(jsonString);
                     }
-                    var em = BoMapper.MapObject<Energiemenge>(json, LenientParsing.Strict);
+                    var em = BoMapper.MapObject<Energiemenge>(json, LenientParsing.STRICT);
                     var result = em.GetDailyCompletenessReports(CHRISTMAS_2018);
                     Assert.AreEqual(8, result.Count);
                     break; // one test is enough. the rest is covered by the individual completeness report tests.
@@ -265,7 +265,7 @@ namespace TestBO4EExtensions
                         var jsonString = r.ReadToEnd();
                         json = JsonConvert.DeserializeObject<JObject>(jsonString);
                     }
-                    var em = BoMapper.MapObject<Energiemenge>(json, LenientParsing.Strict);
+                    var em = BoMapper.MapObject<Energiemenge>(json, LenientParsing.STRICT);
                     var result = em.GetMonthlyCompletenessReports(GERMAN_YEAR_2018, useParallelExecution: useParallelExecution);
                     Assert.AreEqual(12, result.Count); // don't care about values of coverage, just the start/end and count of reports generated.
                     if (testFirstOnly)
