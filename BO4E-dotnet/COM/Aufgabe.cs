@@ -15,7 +15,7 @@ namespace BO4E.COM
     /// </summary>
     [NonOfficial(NonOfficialCategory.CUSTOMER_REQUIREMENTS)]
     [ProtoContract]
-    public class Aufgabe : Com
+    public class Aufgabe : COM
     {
         /// <summary>
         /// Eindeutige Kennzeichnung der Aufgabe

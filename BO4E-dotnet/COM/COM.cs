@@ -72,12 +72,12 @@ namespace BO4E.COM
     [ProtoInclude(51, typeof(Zaehlwerk))]
     [ProtoInclude(52, typeof(Zeitraum))]
     [ProtoInclude(53, typeof(Zustaendigkeit))]
-    public abstract class Com : IEquatable<Com>, IUserProperties, IOptionalGuid
+    public abstract class COM : IEquatable<COM>, IUserProperties, IOptionalGuid
     {
         /// <summary>
         /// User properties (non bo4e standard)
         /// </summary>
-        [JsonProperty(PropertyName = BusinessObject.UserPropertiesName, Required = Required.Default, Order = 2, DefaultValueHandling = DefaultValueHandling.Ignore)]
+        [JsonProperty(PropertyName = BusinessObject.USER_PROPERTIES_NAME, Required = Required.Default, Order = 2, DefaultValueHandling = DefaultValueHandling.Ignore)]
         [ProtoMember(2)]
         [JsonExtensionData]
         [DataCategory(DataCategory.USER_PROPERTIES)]
@@ -94,7 +94,7 @@ namespace BO4E.COM
             {
                 return false;
             }
-            return Equals(b as Com);
+            return Equals(b as COM);
         }
 
         /// <summary>
@@ -102,7 +102,7 @@ namespace BO4E.COM
         /// </summary>
         /// <param name="b">another BO4E component</param>
         /// <returns><code>true</code> iff all elements of this COM and COM b are equal; <code>false</code> otherwise</returns>
-        public bool Equals(Com b)
+        public bool Equals(COM b)
         {
             if (b == null || b.GetType() != GetType())
             {
@@ -151,12 +151,12 @@ namespace BO4E.COM
         [JsonProperty(PropertyName = "guid", NullValueHandling = NullValueHandling.Ignore, Required = Required.Default, Order = 1)]
         public Guid? Guid { get; set; }
 
-        /// <inheritdoc cref="BusinessObject.GuidSerialized"/>
+        /// <inheritdoc cref="BO.BusinessObject.guidSerialized"/>
 
         // note that this inheritance protobuf thing doesn't work as expected. please see the comments in TestBO4E project->TestProfobufSerialization
         [ProtoMember(1)]
 #pragma warning disable IDE1006 // Naming Styles
-        protected string GuidSerialized
+        protected string guidSerialized
 #pragma warning restore IDE1006 // Naming Styles
         {
             get => Guid.HasValue ? Guid.ToString() : string.Empty;

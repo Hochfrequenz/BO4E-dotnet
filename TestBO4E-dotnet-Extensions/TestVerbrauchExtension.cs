@@ -298,7 +298,7 @@ namespace TestBO4EExtensions
             Assert.AreEqual(new DateTimeOffset(2019, 12, 25, 08, 20, 0, TimeSpan.Zero), result.First().Enddatum);
         }
 
-        private static readonly Verbrauch DtV1 = new Verbrauch()
+        private static readonly Verbrauch dtV1 = new Verbrauch()
         {
             Obiskennzahl = "123",
             Wertermittlungsverfahren = Wertermittlungsverfahren.MESSUNG,
@@ -308,7 +308,7 @@ namespace TestBO4EExtensions
             Enddatum = new DateTimeOffset(2018, 2, 28, 23, 0, 0, TimeSpan.Zero).UtcDateTime
         };
 
-        private static readonly Verbrauch DtV2 = new Verbrauch()
+        private static readonly Verbrauch dtV2 = new Verbrauch()
         {
             Obiskennzahl = "123",
             Wertermittlungsverfahren = Wertermittlungsverfahren.MESSUNG,
@@ -318,7 +318,7 @@ namespace TestBO4EExtensions
             Enddatum = new DateTimeOffset(2018, 1, 31, 23, 0, 0, TimeSpan.Zero).UtcDateTime
         };
 
-        private static readonly Verbrauch DtV3 = new Verbrauch()
+        private static readonly Verbrauch dtV3 = new Verbrauch()
         {
             Obiskennzahl = "123",
             Wertermittlungsverfahren = Wertermittlungsverfahren.MESSUNG,
@@ -331,7 +331,7 @@ namespace TestBO4EExtensions
         [TestMethod]
         public void TestDetangleTwofold()
         {
-            var result = Detangle(new List<Verbrauch> { DtV1, DtV2 });
+            var result = Detangle(new List<Verbrauch> { dtV1, dtV2 });
             result.Sort(new VerbrauchDateTimeComparer());
             Assert.AreEqual(2, result.Count);
             Assert.AreEqual(new DateTimeOffset(2017, 12, 31, 23, 0, 0, TimeSpan.Zero), result.First().Startdatum);
@@ -345,7 +345,7 @@ namespace TestBO4EExtensions
         [TestMethod]
         public void TestDetangleThreefold()
         {
-            var result = Detangle(new List<Verbrauch> { DtV1, DtV2, DtV3 });
+            var result = Detangle(new List<Verbrauch> { dtV1, dtV2, dtV3 });
             result.Sort(new VerbrauchDateTimeComparer());
             Assert.AreEqual(3, result.Count);
             Assert.AreEqual(new DateTimeOffset(2017, 12, 31, 23, 0, 0, 0, TimeSpan.Zero), result[0].Startdatum);

@@ -17,37 +17,37 @@ namespace TestBO4E
     [TestClass]
     public class TestBoEdiMapper
     {
-        private readonly Dictionary<string, Dictionary<string, string>> _expectedResults = new Dictionary<string, Dictionary<string, string>>();
+        private readonly Dictionary<string, Dictionary<string, string>> expectedResults = new Dictionary<string, Dictionary<string, string>>();
         public TestBoEdiMapper()
         {
             // all in all very similar to EdiBoMapper...
-            _expectedResults.Add("Netzebene", new Dictionary<string, string>() {
+            expectedResults.Add("Netzebene", new Dictionary<string, string>() {
                 {"NSP", "E06"}, // BO4E -> EDI (power)
                 {"E05", "E05"}, // EDI preserving
                 {"MD", "Y02" }, // EDI -> BO4E (gas)
             });
-            _expectedResults.Add("Zaehlerauspraegung", new Dictionary<string, string>() {
+            expectedResults.Add("Zaehlerauspraegung", new Dictionary<string, string>() {
                 {"EINRICHTUNGSZAEHLER", "ERZ"},
                 {"ZWEIRICHTUNGSZAEHLER", "ZRZ"}
             });
-            _expectedResults.Add("Rollencodetyp", new Dictionary<string, string>() {
+            expectedResults.Add("Rollencodetyp", new Dictionary<string, string>() {
                 {"BDEW", "293"},
                 {"DVGW", "332"}
             });
-            _expectedResults.Add("Landescode", new Dictionary<string, string>() {
+            expectedResults.Add("Landescode", new Dictionary<string, string>() {
                 {"DE", "DE"},
                 {"AT", "AT"}
             });
-            _expectedResults.Add("Wertermittlungsverfahren", new Dictionary<string, string>() {
+            expectedResults.Add("Wertermittlungsverfahren", new Dictionary<string, string>() {
                 {"MESSUNG", "220"}
             });
         }
         [TestMethod]
         public void TestSimpleEnums()
         {
-            foreach (var objectName in _expectedResults.Keys)
+            foreach (var objectName in expectedResults.Keys)
             {
-                var map = _expectedResults[objectName];
+                var map = expectedResults[objectName];
                 foreach (var teststring in map.Keys)
                 {
                     var expectedResult = map[teststring];

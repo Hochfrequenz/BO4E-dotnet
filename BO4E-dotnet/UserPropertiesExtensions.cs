@@ -1,12 +1,11 @@
 ﻿using BO4E.meta;
 using Newtonsoft.Json.Linq;
 using System;
-using BO4E.COM;
 
 namespace BO4E
 {
     /// <summary>
-    /// extensions for both <see cref="BO.BusinessObject.UserProperties"/> and <see cref="Com.UserProperties"/>
+    /// extensions for both <see cref="BO.BusinessObject.UserProperties"/> and <see cref="COM.COM.UserProperties"/>
     /// </summary>
     public static class UserPropertiesExtensions
     {

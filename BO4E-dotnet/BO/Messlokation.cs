@@ -54,7 +54,7 @@ namespace BO4E.BO
         /// kein anderer MSB die Einrichtungen an der Messlokation betreibt.)</summary>
         [JsonProperty(PropertyName = "grundzustaendigerMSBCodeNr", Required = Required.Default, Order = 8)]
         [ProtoMember(8)]
-        public string GrundzustaendigerMsbCodeNr { get; set; }
+        public string GrundzustaendigerMSBCodeNr { get; set; }
 
         /// <summary>Codenummer des grundzuständigen Messstellenbetreibers für intelligente
         /// Messsysteme der für diese Messlokation zuständig ist.(Dieser ist immer dann
@@ -62,7 +62,7 @@ namespace BO4E.BO
         /// Messlokation betreibt.)</summary>
         [JsonProperty(PropertyName = "grundzustaendigerMSBIMCodeNr", Required = Required.Default, Order = 9)]
         [ProtoMember(9)]
-        public string GrundzustaendigerMsbimCodeNr { get; set; }// grundzustaendigerMSB_IMCodenr;  https://github.com/Hochfrequenz/energy-service-hub/issues/11
+        public string GrundzustaendigerMSBIMCodeNr { get; set; }// grundzustaendigerMSB_IMCodenr;  https://github.com/Hochfrequenz/energy-service-hub/issues/11
 
         /// <summary> Codenummer des Messdienstleisters, der für diese Messlokation zuständig
         /// ist.( Dieser ist immer dann Messdienstleister, wenn kein anderer MDL die
@@ -74,7 +74,7 @@ namespace BO4E.BO
 #pragma warning restore CS0618 // Type or member is obsolete
         [ProtoMember(10)]
         [Obsolete("MDL is deprecated.", true)]
-        public string GrundzustaendigerMdlCodeNr { get; set; }
+        public string GrundzustaendigerMDLCodeNr { get; set; }
 
         /// <summary>  Die Adresse, an der die Messeinrichtungen zu finden sind.( Nur angeben, wenn
         /// diese von der Adresse der Marktlokation abweicht.)

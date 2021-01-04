@@ -20,18 +20,18 @@ namespace TestBO4E
     public class TestProtobufAttributes
     {
         [TestMethod]
-        public void TestProtobufDateTimeWorkaroundCom() => TestProtobufDateTimeWorkaround(typeof(Com));
+        public void TestProtobufDateTimeWorkaroundCOM() => TestProtobufDateTimeWorkaround(typeof(COM));
         [TestMethod]
-        public void TestUniqueProtobufMemberIdCom() => TestUniqueProtobufMemberIdAbstract(typeof(Com));
+        public void TestUniqueProtobufMemberIdCOM() => TestUniqueProtobufMemberIdAbstract(typeof(COM));
         [TestMethod]
-        public void TestUniqueProtoIncludeTagsCom() => TestUniqueProtoIncludeTagAbstract(typeof(Com));
+        public void TestUniqueProtoIncludeTagsCOM() => TestUniqueProtoIncludeTagAbstract(typeof(COM));
 
         [TestMethod]
-        public void TestProtobufDateTimeWorkaroundBo() => TestProtobufDateTimeWorkaround(typeof(BusinessObject));
+        public void TestProtobufDateTimeWorkaroundBO() => TestProtobufDateTimeWorkaround(typeof(BusinessObject));
         [TestMethod]
-        public void TestUniqueProtobufMemberIdBo() => TestUniqueProtobufMemberIdAbstract(typeof(BusinessObject));
+        public void TestUniqueProtobufMemberIdBO() => TestUniqueProtobufMemberIdAbstract(typeof(BusinessObject));
         [TestMethod]
-        public void TestUniqueProtoIncludeTagsBo() => TestUniqueProtoIncludeTagAbstract(typeof(BusinessObject));
+        public void TestUniqueProtoIncludeTagsBO() => TestUniqueProtoIncludeTagAbstract(typeof(BusinessObject));
 
         protected void TestUniqueProtobufMemberIdAbstract(Type abstractType)
         {

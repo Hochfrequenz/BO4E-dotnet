@@ -11,7 +11,7 @@ namespace BO4E.COM
 
     /// <summary>Mit dieser Komponente können Auf- und Abschläge verschiedener Typen im Zusammenhang mit regionalen Gültigkeiten abgebildet werden.</summary>
     [ProtoContract]
-    public class RegionalerAufAbschlag : Com
+    public class RegionalerAufAbschlag : COM
     {
         /// <summary>Bezeichnung des Auf-/Abschlags</summary>
         [JsonProperty(PropertyName = "bezeichnung", Required = Required.Always)]

@@ -11,10 +11,10 @@ namespace BO4E.ENUM
     {
         /// <summary>Z62: unterbrechbare Verbrauchseinrichtung</summary>
         [Mapping(Unterbrechbarkeit.UV)]
-        UNTERBRECHBARE_VERBRAUCHSEINRICHTUNG,
+        Unterbrechbare_Verbrauchseinrichtung,
         /// <summary>Z63: nicht unterbrechbare Verbrauchseinrichtung</summary>
         [Mapping(Unterbrechbarkeit.NUV)]
-        NICHT_UNTERBRECHBARE_VERBRAUCHSEINRICHTUNG,       
+        Nicht_Unterbrechbare_Verbrauchseinrichtung,       
     }
     
 }

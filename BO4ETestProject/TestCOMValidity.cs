@@ -5,7 +5,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 namespace TestBO4E
 {
     [TestClass]
-    public class TestComValidity
+    public class TestCOMValidity
     {
         [TestMethod]
         public void TestVerbrauch()

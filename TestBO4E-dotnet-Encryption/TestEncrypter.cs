@@ -55,7 +55,7 @@ namespace TestBO4EExtensions.Encryption
         }
 
         [TestMethod]
-        public void TestBoEncryption()
+        public void TestBOEncryption()
         {
             var files = Directory.GetFiles($"encrypterTests/bo/", "*.json"); // 
 
@@ -112,8 +112,8 @@ namespace TestBO4EExtensions.Encryption
 
                 /******* X509 + RSA test ******/
                 // encrypt (without needing a private key)
-                var x509CertPubl = new X509Certificate2(X509Certificate.CreateFromCertFile("encrypterTests/publickey.cer"));
-                using (var xasyEnc = new X509AsymmetricEncrypter(x509CertPubl))// encrypter needs no private key!
+                var x509certPubl = new X509Certificate2(X509Certificate.CreateFromCertFile("encrypterTests/publickey.cer"));
+                using (var xasyEnc = new X509AsymmetricEncrypter(x509certPubl))// encrypter needs no private key!
                 {
                     eo = xasyEnc.Encrypt(bo);
                 }
@@ -136,9 +136,9 @@ namespace TestBO4EExtensions.Encryption
                 Assert.IsTrue(expectedString == actualString, "Original and encrypted->decrypted object do not match!");
 
                 /********** X509 + RSA multiple recipients *******/
-                var x509CertPubl2 = new X509Certificate2(X509Certificate.CreateFromCertFile("encrypterTests/publickey2.cer"));
+                var x509certPubl2 = new X509Certificate2(X509Certificate.CreateFromCertFile("encrypterTests/publickey2.cer"));
                 EncryptedObject eoMultiple;
-                using (var xasyEncMultiple = new X509AsymmetricEncrypter(new HashSet<X509Certificate2> { x509CertPubl, x509CertPubl2 })) // encrypter needs not private key!
+                using (var xasyEncMultiple = new X509AsymmetricEncrypter(new HashSet<X509Certificate2> { x509certPubl, x509certPubl2 })) // encrypter needs not private key!
                 {
                     eoMultiple = xasyEncMultiple.Encrypt(bo);
                 }
@@ -172,7 +172,7 @@ namespace TestBO4EExtensions.Encryption
             {
                 expectedPrivate = (AsymmetricCipherKeyPair)new PemReader(reader).ReadObject();
             }
-            var actualPrivate = X509AsymmetricEncrypter.PrivateBase64KeyToAckp("MIIEpAIBAAKCAQEAydkev6usDL3Bc8nf5olqLlVXCYTRNYoTeUiTD/+CDynW+dU4redtTEkHy4YHJ0CAK82thV7DtAw52dR7/q/5/ZuvZzwtz30L+qhZSHKleTu7xxQrRhY2Tbrldxd1zbUbAjBHL4EUTbASTmojKCXEvG1U+jYRhfoCX8KRW/2AfhmQtvHmEVomRFUFy2tC5i6oS5l7YzM0j4hPQSj6FyWGLDHrLQ61kx8VTEdt6nH9Gr5S5DMUWyuscXwNJe6LK8WJNUwszI/MYwl4AFLVVy1w3DdL2UFuwyaZHLu5Tmn18Sx3yZWB0KUE3jwZ9q1v1zo05qcYJ8NbxdWZwygRE8tsHQIDAQABAoIBABP5JR7ISQUVvc/MWRiB3nzpOuyZNO58VEL7GHpLyT3g4QHlxG8I6HrU+y17fLe4nTY4awQ4hVsKnqrcaMyh8zXSMwAfJ1VRxV6vS+5sUc12SLWBXGraBdOZO92V97U8R4jm6BReTHkHhDg4LnRpkFco5nC/6un7/EIniaS1qAJSLk9NT3O+Nj7l+KTq3IVm9fDHnjEh+tmqTpJDWZZdyhTXZic2kD548Y1MeKDkH5n29/olmbz3n8aaNgf8MwEqjgurluMtkpE+UKB3TLDYZ2Im7kHyrD65vMuEcddkS8PT3l/vddt2dN6MHn4cTRsBOPF5k1CTglzVYd0R8TFZK00CgYEA5a98QQXlz7ZeV2dF1cBsRyYMyHSusK1gHHRUvyletRLe9Z//gnE/4a67B5YJ/UTDZgf7W5pH8v1ifBdY5rK54sWF4uPnupWUcsS0zM6Lxc7NreK08HR//yqiBeFKLZO1aBrSIcemG0T0801Fn2XgeLz+FQvwFEDu/ZKOuJnYsxcCgYEA4PkvMLUsfiTzG2NWM3aMDCBRF3x3LE0C9qf2OYTV1uB/4fyCsAg0jBIopcC8xhRUTPCGXKJcSxwmBBTaIhwO4Phf/DC4lJfGWHTSDl7SsB9wyRNKNL+NUPwJ75f9RlPEvdFZtPNPqqyfGfEFyZn1RXihcOyUb7s6vqx7QTa06usCgYEAxF+k/HLuaQii4FeLfZVm/e2qQDiCosuYwLs1ObtFHctklNyWuA/bbjjV70Z4g/GmnjV00ny1xyqcaTwM5jEofJokPjhch0ocAYPskK6HEjgd4e1ShcMVLDRnEl/r68u97aQAxKDNg8MRKnOGcyHHKXNsSNJMEQTzUBldrLbcb0ECgYEAn4f0L7z5rQX0ooJBmULCMsMj3dy0AWUm6dPXJZiNrs8JwC24Wq2m3YDu9AMFmgzGbrzM+pljixuN1a0XtcJhxqQ6JHJEIZKy4v0MC4awLpZM+zlDkL4YrsnbHdyQjLNQOy5eR5OV9bhtJg8lBH25UKcnDBWneMey840J5geuKTsCgYBg4g2cz7OH+lQMlc/xECl0h4hPDV4V1R7oL1VH/qmMeeHe0rCx7/a8sAWjWVNQal/8R3dT/7/Ct6SPIc2WJ0UG/robSw0Ii/YG9iLYImF0IdHgPGxvjjmRvfxrToeWvTlzaStH4MLNPB6TRi18mlS5WUaNQcOQGDh4jypmhlic+Q==");
+            var actualPrivate = X509AsymmetricEncrypter.PrivateBase64KeyToACKP("MIIEpAIBAAKCAQEAydkev6usDL3Bc8nf5olqLlVXCYTRNYoTeUiTD/+CDynW+dU4redtTEkHy4YHJ0CAK82thV7DtAw52dR7/q/5/ZuvZzwtz30L+qhZSHKleTu7xxQrRhY2Tbrldxd1zbUbAjBHL4EUTbASTmojKCXEvG1U+jYRhfoCX8KRW/2AfhmQtvHmEVomRFUFy2tC5i6oS5l7YzM0j4hPQSj6FyWGLDHrLQ61kx8VTEdt6nH9Gr5S5DMUWyuscXwNJe6LK8WJNUwszI/MYwl4AFLVVy1w3DdL2UFuwyaZHLu5Tmn18Sx3yZWB0KUE3jwZ9q1v1zo05qcYJ8NbxdWZwygRE8tsHQIDAQABAoIBABP5JR7ISQUVvc/MWRiB3nzpOuyZNO58VEL7GHpLyT3g4QHlxG8I6HrU+y17fLe4nTY4awQ4hVsKnqrcaMyh8zXSMwAfJ1VRxV6vS+5sUc12SLWBXGraBdOZO92V97U8R4jm6BReTHkHhDg4LnRpkFco5nC/6un7/EIniaS1qAJSLk9NT3O+Nj7l+KTq3IVm9fDHnjEh+tmqTpJDWZZdyhTXZic2kD548Y1MeKDkH5n29/olmbz3n8aaNgf8MwEqjgurluMtkpE+UKB3TLDYZ2Im7kHyrD65vMuEcddkS8PT3l/vddt2dN6MHn4cTRsBOPF5k1CTglzVYd0R8TFZK00CgYEA5a98QQXlz7ZeV2dF1cBsRyYMyHSusK1gHHRUvyletRLe9Z//gnE/4a67B5YJ/UTDZgf7W5pH8v1ifBdY5rK54sWF4uPnupWUcsS0zM6Lxc7NreK08HR//yqiBeFKLZO1aBrSIcemG0T0801Fn2XgeLz+FQvwFEDu/ZKOuJnYsxcCgYEA4PkvMLUsfiTzG2NWM3aMDCBRF3x3LE0C9qf2OYTV1uB/4fyCsAg0jBIopcC8xhRUTPCGXKJcSxwmBBTaIhwO4Phf/DC4lJfGWHTSDl7SsB9wyRNKNL+NUPwJ75f9RlPEvdFZtPNPqqyfGfEFyZn1RXihcOyUb7s6vqx7QTa06usCgYEAxF+k/HLuaQii4FeLfZVm/e2qQDiCosuYwLs1ObtFHctklNyWuA/bbjjV70Z4g/GmnjV00ny1xyqcaTwM5jEofJokPjhch0ocAYPskK6HEjgd4e1ShcMVLDRnEl/r68u97aQAxKDNg8MRKnOGcyHHKXNsSNJMEQTzUBldrLbcb0ECgYEAn4f0L7z5rQX0ooJBmULCMsMj3dy0AWUm6dPXJZiNrs8JwC24Wq2m3YDu9AMFmgzGbrzM+pljixuN1a0XtcJhxqQ6JHJEIZKy4v0MC4awLpZM+zlDkL4YrsnbHdyQjLNQOy5eR5OV9bhtJg8lBH25UKcnDBWneMey840J5geuKTsCgYBg4g2cz7OH+lQMlc/xECl0h4hPDV4V1R7oL1VH/qmMeeHe0rCx7/a8sAWjWVNQal/8R3dT/7/Ct6SPIc2WJ0UG/robSw0Ii/YG9iLYImF0IdHgPGxvjjmRvfxrToeWvTlzaStH4MLNPB6TRi18mlS5WUaNQcOQGDh4jypmhlic+Q==");
             Assert.AreEqual(expectedPrivate.Private, actualPrivate.Private);
         }
 

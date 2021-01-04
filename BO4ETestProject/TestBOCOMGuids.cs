@@ -11,15 +11,15 @@ using System.Collections.Generic;
 namespace TestBO4E
 {
     [TestClass]
-    public class TestBocomGuids
+    public class TestBOCOMGuids
     {
         [TestMethod]
-        public void TestBoGuids()
+        public void TestBOGuids()
         {
             var em = new Energiemenge()
             {
                 LokationsId = "DE123456",
-                LokationsTyp = BO4E.ENUM.Lokationstyp.MA_LO,
+                LokationsTyp = BO4E.ENUM.Lokationstyp.MaLo,
                 Energieverbrauch = new List<Verbrauch>(),
                 Guid = Guid.NewGuid()
             };

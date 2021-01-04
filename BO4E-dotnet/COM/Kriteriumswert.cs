@@ -10,7 +10,7 @@ namespace BO4E.COM
     /// Mit dieser Komponente können Kriterien und deren Werte definiert werden.
     /// </summary>
     [ProtoContract]
-    public class KriteriumsWert : Com
+    public class KriteriumsWert : COM
     {
         /// <summary>
         /// Hier steht, für welches Kriterium der Wert gilt. Z.B. Postleitzahlen.

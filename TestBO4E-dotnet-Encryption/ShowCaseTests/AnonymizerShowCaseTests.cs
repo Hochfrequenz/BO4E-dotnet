@@ -15,10 +15,10 @@ namespace TestBO4E.ShowCaseTests
     [TestClass]
     public class AnonymizerShowCaseTests
     {
-        protected static readonly Energiemenge Em = new Energiemenge()
+        protected static readonly Energiemenge em = new Energiemenge()
         {
             LokationsId = "DE0123456789012345678901234567890",
-            LokationsTyp = Lokationstyp.ME_LO,
+            LokationsTyp = Lokationstyp.MeLo,
             Energieverbrauch = new List<Verbrauch>()
             {
                 new Verbrauch()
@@ -45,7 +45,7 @@ namespace TestBO4E.ShowCaseTests
         [TestMethod]
         public void ShowCaseTest()
         {
-            Assert.IsTrue(Em.IsValid());
+            Assert.IsTrue(em.IsValid());
             BO4E.StaticLogger.Logger = Microsoft.Extensions.Logging.Abstractions.NullLogger.Instance;
             // Image there is a service provider to analyse the verbrauchs data but he shouldn't know about the location data.
             // Yet it should still be possible to map the results back to my original data. So hashing seems like a good approach.
@@ -54,14 +54,14 @@ namespace TestBO4E.ShowCaseTests
             var salt = new Byte[100];
             var rng = new RNGCryptoServiceProvider();
             rng.GetBytes(salt);
-            config.HashingSalt = Convert.ToBase64String(salt); // Some random but not necessarily secret salt;
+            config.hashingSalt = Convert.ToBase64String(salt); // Some random but not necessarily secret salt;
             Energiemenge anonymizedEm;
             using (var anon = new Anonymizer(config))
             {
-                anonymizedEm = anon.ApplyOperations<Energiemenge>(Em);
+                anonymizedEm = anon.ApplyOperations<Energiemenge>(em);
             }
-            Debug.WriteLine($"No one knowing only {anonymizedEm.LokationsId} actually means {Em.LokationsId}");
-            Assert.AreNotEqual(Em.LokationsId, anonymizedEm.LokationsId);
+            Debug.WriteLine($"No one knowing only {anonymizedEm.LokationsId} actually means {em.LokationsId}");
+            Assert.AreNotEqual(em.LokationsId, anonymizedEm.LokationsId);
             Debug.WriteLine($"But it won't cause any problems in satellite systems because the data is still there (!=null) and the business object is still valid.");
             Assert.IsNotNull(anonymizedEm.LokationsId);
             Assert.IsTrue(anonymizedEm.IsValid());

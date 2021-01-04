@@ -10,7 +10,7 @@ namespace BO4E.COM
     /// generic object to retrieve values from a dummy Core Data Service View
     /// </summary>
     [ProtoContract]
-    public class GenericStringStringInfo : Com
+    public class GenericStringStringInfo : COM
     {
         /// <summary>
         /// key (named differently because key is a reserved keyword)

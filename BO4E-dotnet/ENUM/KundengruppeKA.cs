@@ -2,7 +2,7 @@ namespace BO4E.ENUM
 {
 
     /// <summary>Eine Aufzählung zur Einordnung für die Höhe der Konzessionsabgabe.</summary>
-    public enum KundengruppeKa
+    public enum KundengruppeKA
     {
         /// <summary>Strom</summary>
         S_TARIF_25000,

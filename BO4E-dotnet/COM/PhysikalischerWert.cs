@@ -14,7 +14,7 @@ namespace BO4E.COM
     /// </summary>
     [ProtoContract]
     [NonOfficial(NonOfficialCategory.UNSPECIFIED)]
-    public class PhysikalischerWert : Com
+    public class PhysikalischerWert : COM
     {
         /// <summary>
         /// numerischer Wert

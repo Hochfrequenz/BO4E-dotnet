@@ -11,7 +11,7 @@ namespace BO4E.COM
 {
     /// <summary>Mit dieser Komponente werden Messlokationen zu Marktlokationen zugeordnet. Dabei kann eine arithmetische Operation (Addition, Subtraktion) angegeben werden, mit der die Messlokation zum Verbrauch der Marklokation beiträgt.</summary>
     [ProtoContract]
-    public class Messlokationszuordnung : Com
+    public class Messlokationszuordnung : COM
     {
         /// <summary>Die Messlokations-ID, früher die Zählpunktbezeichnung.</summary>
         [DataCategory(DataCategory.POD)]

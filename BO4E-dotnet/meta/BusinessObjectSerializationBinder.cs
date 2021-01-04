@@ -5,7 +5,6 @@ using Newtonsoft.Json.Serialization;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using BO4E.COM;
 
 namespace BO4E.meta
 {
@@ -16,19 +15,19 @@ namespace BO4E.meta
     {
         // implementation is similar to the JSON.net example implementation in the docs: https://www.newtonsoft.com/json/help/html/SerializeSerializationBinder.htm
         /// <summary>
-        /// list of all known BusinessObjects inheriting from <see cref="BO4E.BO.BusinessObject"/> and components inheriting from <see cref="Com"/>
+        /// list of all known BusinessObjects inheriting from <see cref="BO4E.BO.BusinessObject"/> and components inheriting from <see cref="BO4E.COM.COM"/>
         /// </summary>
-        public static IList<Type> BusinessObjectAndComTypes { get; }
+        public static IList<Type> BusinessObjectAndCOMTypes { get; }
 
         static BusinessObjectSerializationBinder()
         {
-            BusinessObjectAndComTypes = typeof(BusinessObject).Assembly.GetTypes().Where(t => t.IsClass && !t.IsAbstract && (typeof(BusinessObject).IsAssignableFrom(t) || typeof(BO4E.COM.Com).IsAssignableFrom(t))).ToList();
+            BusinessObjectAndCOMTypes = typeof(BusinessObject).Assembly.GetTypes().Where(t => t.IsClass && !t.IsAbstract && (typeof(BusinessObject).IsAssignableFrom(t) || typeof(BO4E.COM.COM).IsAssignableFrom(t))).ToList();
         }
 
         /// <inheritdoc cref="ISerializationBinder.BindToType(string, string)"/>
         public Type BindToType(string assemblyName, string typeName)
         {
-            return BusinessObjectAndComTypes.SingleOrDefault(t => t.Name == typeName);
+            return BusinessObjectAndCOMTypes.SingleOrDefault(t => t.Name == typeName);
         }
 
         /// <inheritdoc cref="ISerializationBinder.BindToName(Type, out string, out string)"/>

@@ -27,16 +27,16 @@ namespace BO4E.Extensions.Encryption
 {
     public class Anonymizer : IDisposable
     {
-        private static readonly ILogger Logger = StaticLogger.Logger;
-        private readonly AnonymizerConfiguration _configuration;
+        private static readonly ILogger _logger = StaticLogger.Logger;
+        private readonly AnonymizerConfiguration configuration;
         public X509Certificate2 PublicKeyX509 { get; set; }
-        private AsymmetricKeyParameter _privateKey;
-        private byte[] _hashingSalt;
+        private AsymmetricKeyParameter privateKey;
+        private byte[] hashingSalt;
 
         public Anonymizer(AnonymizerConfiguration configuration)
         {
-            this._configuration = configuration;
-            if (this._configuration.HashingSalt != null)
+            this.configuration = configuration;
+            if (this.configuration.hashingSalt != null)
             {
                 SetHashingSalt(configuration.GetSalt());
             }
@@ -57,7 +57,7 @@ namespace BO4E.Extensions.Encryption
         /// <param name="privateKey">Bouncy Castle compatible private key</param>
         public void SetPrivateKey(AsymmetricKeyParameter privateKey)
         {
-            this._privateKey = privateKey;
+            this.privateKey = privateKey;
         }
 
         /// <summary>
@@ -75,7 +75,7 @@ namespace BO4E.Extensions.Encryption
         /// <param name="salt">random salt as byte array</param>
         public void SetHashingSalt(byte[] salt)
         {
-            _hashingSalt = salt;
+            hashingSalt = salt;
         }
 
         /// <summary>
@@ -117,7 +117,7 @@ namespace BO4E.Extensions.Encryption
             {
                 throw new ArgumentNullException(nameof(bo));
             }
-            var mapping = _configuration.Operations;
+            var mapping = configuration.operations;
             var result = bo.DeepClone();
             foreach (var dataCategory in mapping.Keys)
             {
@@ -143,7 +143,7 @@ namespace BO4E.Extensions.Encryption
                             }
                             catch (RuntimeBinderException e)
                             {
-                                Logger.LogWarning($"Catched RuntimeBinderException in Object {bo.GetBoTyp()}. Probably due to trying to get the type of a null object BO: {e.Message}");
+                                _logger.LogWarning($"Catched RuntimeBinderException in Object {bo.GetBoTyp()}. Probably due to trying to get the type of a null object BO: {e.Message}");
                             }
                             break;
                         case AnonymizerApproach.DELETE:
@@ -191,7 +191,7 @@ namespace BO4E.Extensions.Encryption
                                     }
                                     catch (RuntimeBinderException e)
                                     {
-                                        Logger.LogError($"Couldn't null BO field!: {e.Message}");
+                                        _logger.LogError($"Couldn't null BO field!: {e.Message}");
                                     }
                                     affectedProp.SetValue(result, boSubObject);
                                 }
@@ -216,7 +216,7 @@ namespace BO4E.Extensions.Encryption
                                         affectedProp.SetValue(result, xasyncenc.Encrypt(affectedProp.GetValue(bo).ToString()));
                                     }
                                 }
-                                else if (affectedProp.GetValue(bo).GetType().IsSubclassOf(typeof(BO4E.COM.Com)))
+                                else if (affectedProp.GetValue(bo).GetType().IsSubclassOf(typeof(BO4E.COM.COM)))
                                 {
                                     var comObject = affectedProp.GetValue(bo);
                                     dynamic comFields = comObject.GetType().GetProperties();
@@ -229,12 +229,12 @@ namespace BO4E.Extensions.Encryption
                                         catch (ArgumentException e)
                                         {
                                             // das sollte passieren, wenn das Argument kein String is und deswegen das encrypten kein sinn macht
-                                            Logger.LogError($"Couldn't encrypt COM field!: {e.Message}");
+                                            _logger.LogError($"Couldn't encrypt COM field!: {e.Message}");
                                         }
                                         catch (Exception f)
                                         {
                                             // das sollte passieren, wenn das Argument ein enum
-                                            Logger.LogError($"Couldn't encrypt COM field!: {f.Message}");
+                                            _logger.LogError($"Couldn't encrypt COM field!: {f.Message}");
                                         }
                                     }
                                     affectedProp.SetValue(result, comObject);
@@ -246,7 +246,7 @@ namespace BO4E.Extensions.Encryption
                                 else if (affectedProp.PropertyType.ToString().StartsWith("BO4E.ENUM")) // todo: check for namespace instead of strinyfied comparison
                                 {
                                     //affectedField.SetValue(mappedObject, Sha256HashEnum(affectedField.GetValue(mappedObject).ToString()));
-                                    Logger.LogWarning($"Encrypting {affectedProp.PropertyType} is not supported, since the result would not be a valid ENUM value.");
+                                    _logger.LogWarning($"Encrypting {affectedProp.PropertyType} is not supported, since the result would not be a valid ENUM value.");
                                     //throw new NotSupportedException($"Hashing {affectedField.FieldType} is not supported, since the result would not be a valid ENUM value.");
                                 }
                                 else
@@ -256,11 +256,11 @@ namespace BO4E.Extensions.Encryption
                             }
                             break;
                         case AnonymizerApproach.DECRYPT:
-                            if (_privateKey == null)
+                            if (privateKey == null)
                             {
                                 throw new ArgumentNullException(nameof(PrivateKeyFactory), "To use the decryption feature you have to provide a private key using the SetPrivateKey method.");
                             }
-                            using (var xasydec = new X509AsymmetricEncrypter(_privateKey))
+                            using (var xasydec = new X509AsymmetricEncrypter(privateKey))
                             {
                                 affectedProp.SetValue(result, xasydec.Decrypt(affectedProp.GetValue(bo).ToString()));
                             }
@@ -306,12 +306,12 @@ namespace BO4E.Extensions.Encryption
             }*/
             else if (inputType == typeof(Int32))
             {
-                Logger.LogWarning($"Hashing {inputType} is not supported.");
+                _logger.LogWarning($"Hashing {inputType} is not supported.");
             }
             else if (inputType.ToString().StartsWith("BO4E.ENUM"))
             {
                 //affectedField.SetValue(mappedObject, Sha256HashEnum(affectedField.GetValue(mappedObject).ToString()));
-                Logger.LogWarning($"Hashing {inputType} is not supported, since the result would not be a valid ENUM value.");
+                _logger.LogWarning($"Hashing {inputType} is not supported, since the result would not be a valid ENUM value.");
                 //throw new NotSupportedException($"Hashing {affectedField.FieldType} is not supported, since the result would not be a valid ENUM value.");
             }
             else if (inputType.IsGenericType && inputType.GetGenericTypeDefinition() == typeof(List<>))
@@ -327,7 +327,7 @@ namespace BO4E.Extensions.Encryption
             else if (typeof(IDictionary<string, JToken>).IsAssignableFrom(inputType)) // typeof BusinessObject.userProperties
             {
                 dynamic dict = input as IDictionary<string, JToken>;
-                foreach (var dictKey in ((ICollection<string>)dict.Keys).ToList().Where(key => !_configuration.UnaffectedUserProperties.Contains(key)))
+                foreach (var dictKey in ((ICollection<string>)dict.Keys).ToList().Where(key => !configuration.unaffectedUserProperties.Contains(key)))
                 {
                     if (dict[dictKey] != null)
                     {
@@ -482,9 +482,9 @@ namespace BO4E.Extensions.Encryption
             byte[] hashedByteArray;
             using (var hash = SHA256.Create())
             {
-                if (_hashingSalt != null)
+                if (hashingSalt != null)
                 {
-                    hashedByteArray = hash.ComputeHash(Encoding.UTF8.GetBytes(value + Convert.ToBase64String(_hashingSalt)));
+                    hashedByteArray = hash.ComputeHash(Encoding.UTF8.GetBytes(value + Convert.ToBase64String(hashingSalt)));
                 }
                 else
                 {
@@ -513,12 +513,12 @@ namespace BO4E.Extensions.Encryption
         /// <inheritdoc/>
         public void Dispose()
         {
-            _privateKey = null;
-            if (_hashingSalt != null)
+            privateKey = null;
+            if (hashingSalt != null)
             {
-                for (var i = 0; i < _hashingSalt.Length; i++)
+                for (var i = 0; i < hashingSalt.Length; i++)
                 {
-                    _hashingSalt[i] = 0x0;
+                    hashingSalt[i] = 0x0;
                 }
             }
         }

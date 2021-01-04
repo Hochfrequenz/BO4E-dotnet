@@ -42,7 +42,7 @@ namespace TestBO4EExtensions
         }
 
         [TestMethod]
-        public void TestMoveInfo2Up()
+        public void TestMoveInfo2UP()
         {
             var b = JsonConvert.DeserializeObject<Benachrichtigung>("{\"versionStruktur\":1,\"boTyp\":\"BENACHRICHTIGUNG\",\"benachrichtigungsId\":\"468985\",\"prioritaet\":2,\"bearbeitungsstatus\":0,\"kurztext\":\"Manuelles Überschreiben von Profilwerten\",\"erstellungsZeitpunkt\":\"2019-04-01T14:27:23Z\",\"kategorie\":\"ZE01\",\"bearbeiter\":\"\",\"notizen\":null,\"deadline\":null,\"aufgaben\":null,\"infos\":null,\"aufgaben\":[{\"ccat\":\"ZE01\",\"objtype\":\"ZISUPROFIL\",\"aufgabenId\":\"OVERWRITE\",\"ausgefuehrt\":\"true\"},{\"ccat\":\"ZE01\",\"objtype\":\"ZISUPROFIL\",\"aufgabenId\":\"DISPLAY\",\"ausgefuehrt\":\"true\"}],\"infos\":[{\"keyColumn\":\"MESSLOKATIONSID\",\"value\":\"DE000360478090000000\",\"boolean_true_column\":false},{\"keyColumn\":\"TIMESPAN_FROM\",\"value\":\"2019-02-25T23:00:00Z\",\"boolean_true_column\":false},{\"keyColumn\":\"TIMESPAN_TO\",\"value\":\"2019-03-19T22:44:59Z\",\"boolean_true_column\":false}],\"notizen\":[]}");
             Assert.IsTrue(b.Has("MESSLOKATIONSID"));

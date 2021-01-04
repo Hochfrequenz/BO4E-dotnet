@@ -16,7 +16,7 @@ namespace BO4E.COM
     /// <author>Hochfrequenz Unternehmensberatung GmbH</author>
     [ProtoContract]
     [NonOfficial(NonOfficialCategory.CUSTOMER_REQUIREMENTS)]
-    public class Notiz : Com
+    public class Notiz : COM
     {
         /// <summary>
         /// Person oder System, das die Notiz angelegt hat.

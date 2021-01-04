@@ -6,7 +6,7 @@ namespace BO4E.COM
 {
     /// <summary>Mit dieser Komponente werden alle Geräte modelliert, die keine Zähler sind.</summary>
     [ProtoContract]
-    public class Geraet : Com
+    public class Geraet : COM
     {
         /// <summary>Die auf dem Geräte aufgedruckte Nummer, die vom MSB vergeben wird.</summary>
         [JsonProperty(PropertyName = "geraetenummer", Required = Required.Default)]

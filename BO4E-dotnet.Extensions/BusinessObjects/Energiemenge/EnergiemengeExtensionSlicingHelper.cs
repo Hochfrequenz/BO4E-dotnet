@@ -38,14 +38,14 @@ namespace BO4E.Extensions.BusinessObjects.Energiemenge
                 result.Add(new TimeRange()
                 {
                     Start = overallTimeRange.Start,
-                    End = overallTimeRange.Start.AddDaysDst(1)
+                    End = overallTimeRange.Start.AddDaysDST(1)
                 });
                 while (result.Last().End < overallTimeRange.End)
                 {
                     result.Add(new TimeRange()
                     {
-                        Start = result.Last().Start.AddDaysDst(1),
-                        End = result.Last().End.AddDaysDst(1)
+                        Start = result.Last().Start.AddDaysDST(1),
+                        End = result.Last().End.AddDaysDST(1)
                     });
                 }
             }
@@ -144,7 +144,7 @@ namespace BO4E.Extensions.BusinessObjects.Energiemenge
         /// <param name="value">number of days to add</param>
         /// <param name="tz">timezone <paramref name="dt"/> is meant to be iff dt.Kind == DateTimeKind.Unspecified, default (if null) is <see cref="CentralEuropeStandardTime.CENTRAL_EUROPE_STANDARD_TIME"/></param>
         /// <returns></returns>
-        public static DateTime AddDaysDst(this DateTime dt, double value, TimeZoneInfo tz = null)
+        public static DateTime AddDaysDST(this DateTime dt, double value, TimeZoneInfo tz = null)
         {
             if (tz == null)
             {

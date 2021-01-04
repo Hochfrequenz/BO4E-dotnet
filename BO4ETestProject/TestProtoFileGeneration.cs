@@ -15,7 +15,7 @@ namespace TestBO4E
     [TestClass]
     public class TestProtoFileGeneration
     {
-        static readonly HashSet<Type> ProtoSerializableTypes = new HashSet<Type>()
+        static readonly HashSet<Type> PROTO_SERIALIZABLE_TYPES = new HashSet<Type>()
         {
             typeof(Angebot),
             typeof(Ansprechpartner),
@@ -36,7 +36,7 @@ namespace TestBO4E
         [TestMethod]
         public void TestProtoGenerationBo() 
         {
-            foreach (var type in ProtoSerializableTypes)
+            foreach (var type in PROTO_SERIALIZABLE_TYPES)
             {
                 var method = typeof(Serializer).GetMethod(nameof(Serializer.GetProto), new[] { typeof(ProtoBuf.Meta.ProtoSyntax)});
                 method = method.MakeGenericMethod(type);

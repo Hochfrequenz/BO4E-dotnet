@@ -10,7 +10,7 @@ namespace BO4E.COM
 {
     /// <summary>Preisposition</summary>
     [ProtoContract]
-    public class Preisposition : Com
+    public class Preisposition : COM
     {
         /// <summary>Das Modell, das der Preisbildung zugrunde liegt. Details <see cref="Kalkulationsmethode" /></summary>
         [JsonProperty(PropertyName = "berechnungsmethode", Required = Required.Always)]
@@ -40,10 +40,10 @@ namespace BO4E.COM
         [JsonProperty(PropertyName = "tarifzeit", Required = Required.Default)]
         [ProtoMember(9)]
         public Tarifzeit? Tarifzeit { get; set; }
-        /// <summary>Eine vom BDEW standardisierte Bezeichnung für die abgerechnete Leistungserbringung. Diese Artikelnummer wird auch im Rechnungsteil der INVOIC verwendet. <seealso cref="ENUM.BdewArtikelnummer" /></summary>
+        /// <summary>Eine vom BDEW standardisierte Bezeichnung für die abgerechnete Leistungserbringung. Diese Artikelnummer wird auch im Rechnungsteil der INVOIC verwendet. <seealso cref="BDEWArtikelnummer" /></summary>
         [JsonProperty(PropertyName = "bdewArtikelnummer", Required = Required.Default)]
         [ProtoMember(10)]
-        public BdewArtikelnummer? BdewArtikelnummer { get; set; }
+        public BDEWArtikelnummer? BdewArtikelnummer { get; set; }
         /// <summary>Mit der Menge der hier angegebenen Größe wird die Staffelung/Zonung durchgeführt. Z.B. Vollbenutzungsstunden. <seealso cref="Bemessungsgroesse" /></summary>
         [JsonProperty(PropertyName = "zonungsgroesse", Required = Required.Default)]
         [ProtoMember(11)]
@@ -51,7 +51,7 @@ namespace BO4E.COM
         /// <summary>Zuschläge oder Abschläge auf die Position. <seealso cref="PositionsAufAbschlag" /></summary>
         [JsonProperty(PropertyName = "zu_abschlaege", Required = Required.Default)]
         [ProtoMember(12)]
-        public PositionsAufAbschlag ZuAbschlaege { get; set; }
+        public PositionsAufAbschlag Zu_abschlaege { get; set; }
         /// <summary>Preisstaffeln, die zu dieser Preisposition gehören. Details <see cref="Preisstaffel" /></summary>
         [JsonProperty(PropertyName = "preisstaffeln", Required = Required.Always)]
         [ProtoMember(13)]

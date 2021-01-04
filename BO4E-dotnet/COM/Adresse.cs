@@ -9,7 +9,7 @@ namespace BO4E.COM
 {
     /// <summary>Enthält eine Adresse, die für die meisten Zwecke verwendbar ist.</summary>
     [ProtoContract]
-    public class Adresse : Com
+    public class Adresse : COM
     {
         /// <summary>Die Postleitzahl. Beispiel: 41836</summary>
         [DataCategory(DataCategory.ADDRESS)]

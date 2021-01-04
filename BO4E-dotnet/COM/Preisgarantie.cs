@@ -11,7 +11,7 @@ namespace BO4E.COM
     /// </summary>
     [ProtoContract]
     //[ProtoInclude(101, typeof(RegionalePreisgarantie))] // protobuf-net doesn't support multiple levels of inheritance yet
-    public class Preisgarantie : Com
+    public class Preisgarantie : COM
     {
         /// <summary>Freitext zur Beschreibung der Preisgarantie</summary>
         [JsonProperty(PropertyName = "beschreibung", Required = Required.Default)]

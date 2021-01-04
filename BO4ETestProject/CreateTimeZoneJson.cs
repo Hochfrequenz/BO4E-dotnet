@@ -11,7 +11,7 @@ namespace TestBO4E
     [TestClass]
     public class CreateTimeZoneJson
     {
-        public static readonly string ResxName = "western_europe_standard_time.resx";
+        public static readonly string resxName = "western_europe_standard_time.resx";
 
         [TestMethod]
         public void SerializeAsJson()

@@ -10,11 +10,11 @@ namespace BO4E.BO
     /// <summary>
     /// Bouncy Castle CMS encrypted object
     /// </summary>
-    public class EncryptedObjectPkcs7 : EncryptedObject
+    public class EncryptedObjectPKCS7 : EncryptedObject
     {
         /// <param name="cipherText">base64 encoded cipher text</param>
         /// <param name="publicKeys">list of public keys for which the object is decrypt-able </param>
-        public EncryptedObjectPkcs7(string cipherText, List<string> publicKeys) : base(cipherText, EncryptionScheme.BOUNCY_CASTLE_CMS)
+        public EncryptedObjectPKCS7(string cipherText, List<string> publicKeys) : base(cipherText, EncryptionScheme.BouncyCastleCMS)
         {
             PublicKeys = publicKeys;
         }

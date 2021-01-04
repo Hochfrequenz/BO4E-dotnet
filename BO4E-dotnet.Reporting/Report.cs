@@ -62,11 +62,11 @@ namespace BO4E.Reporting
                                 if (index != -1)
                                 {
                                     sortedHeaderNamesList.Add(reihenItem.Values.First());
-                                    var curFieldName = reihenItem.Keys.First();
-                                    if (parallelItems.Where(g => g.Element == curFieldName).Count() > 0)
+                                    var CurFieldName = reihenItem.Keys.First();
+                                    if (parallelItems.Where(g => g.Element == CurFieldName).Count() > 0)
                                     {
                                         sortedResults.Add(result[index]);
-                                        var indx = headerNames.IndexOf(curFieldName);
+                                        var indx = headerNames.IndexOf(CurFieldName);
                                         headerNames.RemoveAt(indx);
                                         result.RemoveAt(indx);
                                     }
@@ -202,7 +202,7 @@ namespace BO4E.Reporting
             var h = returnData.Keys.First();
             foreach (var field in nonHiddenProps)
             {
-                if (field.PropertyType.IsSubclassOf(typeof(BO4E.COM.Com)))
+                if (field.PropertyType.IsSubclassOf(typeof(BO4E.COM.COM)))
                 {
                     returnData = Detect(field.PropertyType, separator, field.GetValue(value), returnData);
                 }
@@ -225,7 +225,7 @@ namespace BO4E.Reporting
                     if (nestedValue != null)
                     {
                         var muterType = "";
-                        if (field.DeclaringType.BaseType == typeof(BO4E.COM.Com))
+                        if (field.DeclaringType.BaseType == typeof(BO4E.COM.COM))
                         {
                             muterType = field.DeclaringType.Name + ".";
                         }
@@ -266,7 +266,7 @@ namespace BO4E.Reporting
             var h = returnData.Keys.First();
             foreach (var field in fields)
             {
-                if (field.FieldType.IsSubclassOf(typeof(BO4E.COM.Com)))
+                if (field.FieldType.IsSubclassOf(typeof(BO4E.COM.COM)))
                 {
                     continue;
                 }
@@ -288,7 +288,7 @@ namespace BO4E.Reporting
                     var nestedValue = field.GetValue(value);
                     if (nestedValue != null)
                     {
-                        if (field.DeclaringType.BaseType == typeof(BO4E.COM.Com))
+                        if (field.DeclaringType.BaseType == typeof(BO4E.COM.COM))
                         {
                             continue;
                         }

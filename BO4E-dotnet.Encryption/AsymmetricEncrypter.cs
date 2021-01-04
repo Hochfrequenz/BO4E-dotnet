@@ -11,8 +11,8 @@ namespace BO4E.Extensions.Encryption
 {
     public class AsymmetricEncrypter : Encrypter
     {
-        private readonly byte[] _ownPublicKey;
-        private readonly byte[] _privateKey;
+        private readonly byte[] ownPublicKey;
+        private readonly byte[] privateKey;
 
         /// <summary>
         /// Instantiate with private and public key
@@ -21,10 +21,10 @@ namespace BO4E.Extensions.Encryption
         /// <param name="publicKey">public key</param>
         public AsymmetricEncrypter(byte[] privateKey, byte[] publicKey)
         {
-            _ownPublicKey = new byte[publicKey.Length];
-            this._privateKey = new byte[privateKey.Length];
-            privateKey.CopyTo(this._privateKey, 0);
-            publicKey.CopyTo(_ownPublicKey, 0);
+            ownPublicKey = new byte[publicKey.Length];
+            this.privateKey = new byte[privateKey.Length];
+            privateKey.CopyTo(this.privateKey, 0);
+            publicKey.CopyTo(ownPublicKey, 0);
         }
         /// <summary>
         /// Instantiate with private and public key
@@ -44,14 +44,14 @@ namespace BO4E.Extensions.Encryption
         /// <param name="privateKey">private key</param>
         public AsymmetricEncrypter(byte[] privateKey)
         {
-            this._privateKey = privateKey;
+            this.privateKey = privateKey;
         }
 
         private string Encrypt(string plainText, string recipientsPublicKey, byte[] nonce)
         {
             var plainBytes = Encoding.UTF8.GetBytes(plainText);
             var rpkBytes = Convert.FromBase64String(recipientsPublicKey);
-            var cipherBytes = PublicKeyBox.Create(plainBytes, nonce, _privateKey, rpkBytes);
+            var cipherBytes = PublicKeyBox.Create(plainBytes, nonce, privateKey, rpkBytes);
             var cipherString = Convert.ToBase64String(cipherBytes);
             return cipherString;
         }
@@ -76,17 +76,17 @@ namespace BO4E.Extensions.Encryption
         /// <returns>An encrypted Business Object</returns>
         public EncryptedObjectPublicKeyBox Encrypt(BusinessObject plainObject, string publicKey)
         {
-            var plainText = JsonConvert.SerializeObject(plainObject, settings: EncryptionSerializerSettings);
+            var plainText = JsonConvert.SerializeObject(plainObject, settings: encryptionSerializerSettings);
             var nonce = PublicKeyBox.GenerateNonce();
             var cipherString = Encrypt(plainText, publicKey, nonce);
-            return new EncryptedObjectPublicKeyBox(cipherString, Convert.ToBase64String(_ownPublicKey), Convert.ToBase64String(nonce));
+            return new EncryptedObjectPublicKeyBox(cipherString, Convert.ToBase64String(ownPublicKey), Convert.ToBase64String(nonce));
         }
 
         private string Decrypt(string cipherText, string sendersPublicKey, byte[] nonce)
         {
             var cipherBytes = Convert.FromBase64String(cipherText);
             var spkBytes = Convert.FromBase64String(sendersPublicKey);
-            var plainBytes = PublicKeyBox.Open(cipherBytes, nonce, _privateKey, spkBytes);
+            var plainBytes = PublicKeyBox.Open(cipherBytes, nonce, privateKey, spkBytes);
             return Encoding.UTF8.GetString(plainBytes);
         }
 
@@ -110,7 +110,7 @@ namespace BO4E.Extensions.Encryption
                 return null;
             }
             var plainString = Decrypt(eo.CipherText, eo.PublicKey, eo.Nonce);
-            return JsonConvert.DeserializeObject<BusinessObject>(plainString, settings: EncryptionSerializerSettings);
+            return JsonConvert.DeserializeObject<BusinessObject>(plainString, settings: encryptionSerializerSettings);
         }
 
         public override T Decrypt<T>(EncryptedObject encryptedObject)
@@ -121,16 +121,16 @@ namespace BO4E.Extensions.Encryption
                 return null;
             }
             var plainString = Decrypt(eo.CipherText, eo.PublicKey, eo.Nonce);
-            return JsonConvert.DeserializeObject<T>(plainString, settings: EncryptionSerializerSettings);
+            return JsonConvert.DeserializeObject<T>(plainString, settings: encryptionSerializerSettings);
         }
 
         public override void Dispose()
         {
-            if (_privateKey != null)
+            if (privateKey != null)
             {
-                for (var i = 0; i < _privateKey.Length; i++)
+                for (var i = 0; i < privateKey.Length; i++)
                 {
-                    _privateKey[i] = 0x0;
+                    privateKey[i] = 0x0;
                 }
             }
         }

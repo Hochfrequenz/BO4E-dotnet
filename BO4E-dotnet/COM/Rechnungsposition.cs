@@ -12,7 +12,7 @@ namespace BO4E.COM
 {
     /// <summary>Abbildung einer Rechnungsposition. Über Rechnungspositionen werden Rechnungen strukturiert. In einem Rechnungsteil wird jeweils eine in sich geschlossene Leistung abgerechnet.</summary>
     [ProtoContract]
-    public class Rechnungsposition : Com
+    public class Rechnungsposition : COM
     {
         /// <summary>Fortlaufende Nummer für die Rechnungsposition.</summary>
         [JsonProperty(PropertyName = "positionsnummer", Required = Required.Always)]
@@ -44,10 +44,10 @@ namespace BO4E.COM
         [FieldName("unit", Language.EN)]
         [ProtoMember(7)] public Mengeneinheit? Zeiteinheit { get; set; }
 
-        /// <summary>Kennzeichnung der Rechnungsposition mit der Standard-Artikelnummer des BDEW. Details <see cref="BdewArtikelnummer" /></summary>
+        /// <summary>Kennzeichnung der Rechnungsposition mit der Standard-Artikelnummer des BDEW. Details <see cref="BDEWArtikelnummer" /></summary>
         [JsonProperty(PropertyName = "artikelnummer", Required = Required.Default)]
         [ProtoMember(8)]
-        public BdewArtikelnummer? Artikelnummer { get; set; }
+        public BDEWArtikelnummer? Artikelnummer { get; set; }
 
         /// <summary>Marktlokation, die zu dieser Position gehört.</summary>
         [JsonProperty(PropertyName = "lokationsId", Required = Required.Default)]

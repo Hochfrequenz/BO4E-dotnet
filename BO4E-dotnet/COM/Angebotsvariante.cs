@@ -11,7 +11,7 @@ namespace BO4E.COM
 {
     /// <summary>Führt die verschiedenen Ausprägungen der Angebotsberechnung auf.</summary>
     [ProtoContract]
-    public class Angebotsvariante : Com
+    public class Angebotsvariante : COM
     {
         /// <summary>Gibt den Status eines Angebotes an. <seealso cref="ENUM.Angebotsstatus" /></summary>
         [JsonProperty(PropertyName = "angebotsstatus", Required = Required.Always)]

@@ -13,7 +13,6 @@ namespace BO4E.meta
         /// <summary>
         /// Central Europe Standard Time as hard coded default time. Public to be used elsewhere ;)
         /// </summary>
-        // ReSharper disable once InconsistentNaming
         public static readonly TimeZoneInfo CENTRAL_EUROPE_STANDARD_TIME;
         static CentralEuropeStandardTime()
         {

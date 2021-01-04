@@ -13,7 +13,7 @@ namespace BO4E.COM
     /// https://www.bo4e.de/dokumentation/komponenten/com-vertragsteil
     /// </summary>
     [ProtoContract]
-    public class Vertragsteil : Com
+    public class Vertragsteil : COM
     {
         /// <summary>
         /// Start der Gültigkeit des Vertragsteils.

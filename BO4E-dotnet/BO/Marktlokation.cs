@@ -222,13 +222,13 @@ namespace BO4E.BO
         /// Regular Expression used to validate 11 digit MarktlokationId
         /// </summary>
         [JsonIgnore]
-        protected static readonly Regex RegexValidate = new Regex(@"^[1-9][\d]{10}$", RegexOptions.Compiled);
+        protected static readonly Regex REGEX_VALIDATE = new Regex(@"^[1-9][\d]{10}$", RegexOptions.Compiled);
 
         /// <summary>
         /// Regular Expression to check if a string consists only of numbers (is numeric)
         /// </summary>
         [JsonIgnore]
-        protected static readonly Regex RegexNumericString = new Regex(@"^\d+$", RegexOptions.Compiled);
+        protected static readonly Regex REGEX_NUMERIC_STRING = new Regex(@"^\d+$", RegexOptions.Compiled);
 
         /// <summary>
         /// Test if a <paramref name="id"/> is a valid Marktlokations ID.
@@ -241,7 +241,7 @@ namespace BO4E.BO
             {
                 return false;
             }
-            if (!RegexValidate.IsMatch(id))
+            if (!REGEX_VALIDATE.IsMatch(id))
             {
                 return false;
             }
@@ -270,7 +270,7 @@ namespace BO4E.BO
             {
                 throw new ArgumentException($"Input '{nameof(input)}' must be a string with length 10 (to generate the checksum) or 11 (to validate the checksum).");
             }
-            if (!RegexNumericString.IsMatch(input))
+            if (!REGEX_NUMERIC_STRING.IsMatch(input))
             {
                 throw new ArgumentException($"Input '{nameof(input)}' must be numeric was '{input}'");
             }

@@ -52,7 +52,7 @@ namespace BO4E.meta.LenientConverters
                             break;
 
                         case LenientParsing.BO4_E_URI:
-                            converters.Add(new LenientBo4EUriConverter());
+                            converters.Add(new LenientBo4eUriConverter());
                             break;
 
                         case LenientParsing.STRING_TO_INT:

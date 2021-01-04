@@ -6,7 +6,7 @@ namespace BO4E.COM
 {
     /// <summary>Diese Komponente liefert die Geokoordinaten für einen Ort.</summary>
     [ProtoContract]
-    public class Geokoordinaten : Com
+    public class Geokoordinaten : COM
     {
         /// <summary>Gibt den Breitengrad eines entsprechenden Ortes an.</summary>
         [JsonProperty(PropertyName = "breitengrad", Required = Required.Always)]

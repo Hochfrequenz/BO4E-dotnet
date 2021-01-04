@@ -6,7 +6,7 @@ namespace BO4E.COM
 {
     /// <summary>Sigmoidparameter</summary>
     [ProtoContract]
-    public class Sigmoidparameter : Com
+    public class Sigmoidparameter : COM
     {
         /// <summary>Briefmarke Ortsverteilnetz</summary> //?
         [JsonProperty(PropertyName = "A", Required = Required.Always)]

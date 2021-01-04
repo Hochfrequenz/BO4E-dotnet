@@ -15,7 +15,7 @@ namespace TestBO4E
     public class TestEqualities
     {
         [TestMethod]
-        public void TestEqualsCom()
+        public void TestEqualsCOM()
         {
             var v1 = new Verbrauch();
             var v2 = new Verbrauch();
@@ -50,7 +50,7 @@ namespace TestBO4E
         }
 
         [TestMethod]
-        public void TestEqualsBo()
+        public void TestEqualsBO()
         {
             var em1 = new Energiemenge();
             var em2 = new Energiemenge();
@@ -60,8 +60,8 @@ namespace TestBO4E
             em1.LokationsId = "DE1234";
             em2.LokationsId = "DE1234";
 
-            em1.LokationsTyp = Lokationstyp.ME_LO;
-            em2.LokationsTyp = Lokationstyp.ME_LO;
+            em1.LokationsTyp = Lokationstyp.MeLo;
+            em2.LokationsTyp = Lokationstyp.MeLo;
 
             em1.Energieverbrauch = new List<Verbrauch>();
             var v1 = new Verbrauch
