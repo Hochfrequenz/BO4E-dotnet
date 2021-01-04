@@ -18,7 +18,7 @@ namespace BO4E.Extensions.Encryption
 {
     public class X509AsymmetricEncrypter : Encrypter
     {
-        private readonly ISet<X509Certificate2> publicCerts;
+        private readonly ISet<X509Certificate2> _publicCerts;
         private AsymmetricKeyParameter privateKey;
 
         /// <summary>
@@ -27,7 +27,7 @@ namespace BO4E.Extensions.Encryption
         /// <param name="cert">X509 certificate must contain the public key.</param>
         public X509AsymmetricEncrypter(X509Certificate2 cert)
         {
-            publicCerts = new HashSet<X509Certificate2> { cert };
+            _publicCerts = new HashSet<X509Certificate2> { cert };
             privateKey = null;
         }
 
@@ -37,10 +37,10 @@ namespace BO4E.Extensions.Encryption
         /// <param name="certs">Collection of certificates</param>
         public X509AsymmetricEncrypter(ISet<X509Certificate2> certs)
         {
-            publicCerts = new HashSet<X509Certificate2>();
+            _publicCerts = new HashSet<X509Certificate2>();
             foreach (var c in certs)
             {
-                publicCerts.Add(c);
+                _publicCerts.Add(c);
             }
             privateKey = null;
         }
@@ -48,7 +48,7 @@ namespace BO4E.Extensions.Encryption
         private List<string> GetPublicKeysBase64()
         {
             var result = new List<string>();
-            foreach (var cert in publicCerts)
+            foreach (var cert in _publicCerts)
             {
                 // https://stackoverflow.com/a/4740292
                 var builder = new StringBuilder();
@@ -66,7 +66,7 @@ namespace BO4E.Extensions.Encryption
         /// <param name="kp">AsymmetricKeyParamer, must contain the RSA private key.</param>
         public X509AsymmetricEncrypter(AsymmetricKeyParameter kp)
         {
-            publicCerts = null;
+            _publicCerts = null;
             privateKey = kp;
         }
 
@@ -76,7 +76,7 @@ namespace BO4E.Extensions.Encryption
             var cpba = new CmsProcessableByteArray(plainBytes);
 
             var envelopedGen = new CmsEnvelopedDataGenerator();
-            foreach (var cert in publicCerts)
+            foreach (var cert in _publicCerts)
             {
                 var bouncyCert = DotNetUtilities.FromX509Certificate(cert);
                 var keyParameter = bouncyCert.GetPublicKey();

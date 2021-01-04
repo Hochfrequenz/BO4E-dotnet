@@ -91,7 +91,7 @@ namespace BO4E.meta.LenientConverters
                 {
                     return dateTime;
                 }
-                foreach ((var dtf, var asUniversal) in _allowedDatetimeFormats)
+                foreach ((var dtf, _) in _allowedDatetimeFormats)
                 {
                     if (DateTime.TryParseExact(rawDate, dtf, CultureInfo.InvariantCulture, DateTimeStyles.None, out dateTime))
                     {
