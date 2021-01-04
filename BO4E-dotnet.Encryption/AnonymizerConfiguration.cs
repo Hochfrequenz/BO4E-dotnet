@@ -17,8 +17,8 @@ namespace BO4E.Extensions.Encryption
     public class AnonymizerConfiguration
     {
 
-        [JsonProperty(Required = Required.Always)]
-        public Dictionary<DataCategory, AnonymizerApproach> operations { get; private set; }
+        [JsonProperty(Required = Required.Always, PropertyName = "operations")]
+        public Dictionary<DataCategory, AnonymizerApproach> Operations { get; private set; }
 
         /// <summary>
         /// set of key in <see cref="BO4E.BO.BusinessObject.UserProperties"/> / <see cref="BO4E.COM.COM.UserProperties"/> that should not be affected by the anonymizing operations
@@ -35,10 +35,10 @@ namespace BO4E.Extensions.Encryption
         public AnonymizerConfiguration()
         {
             ConfigurationKey = null;
-            operations = new Dictionary<DataCategory, AnonymizerApproach>();
+            Operations = new Dictionary<DataCategory, AnonymizerApproach>();
             foreach (var ao in Enum.GetValues(typeof(DataCategory)))
             {
-                operations.Add((DataCategory)ao, AnonymizerApproach.KEEP);
+                Operations.Add((DataCategory)ao, AnonymizerApproach.KEEP);
             }
             UnaffectedUserProperties = new HashSet<string>();
         }
@@ -67,12 +67,12 @@ namespace BO4E.Extensions.Encryption
         {
             try
             {
-                operations.Add(anonymizerOption, anonymizerApproach);
+                Operations.Add(anonymizerOption, anonymizerApproach);
             }
             catch (ArgumentException)
             {
-                operations.Remove(anonymizerOption);
-                operations.Add(anonymizerOption, anonymizerApproach);
+                Operations.Remove(anonymizerOption);
+                Operations.Add(anonymizerOption, anonymizerApproach);
             }
         }
         /// <summary>
@@ -81,7 +81,7 @@ namespace BO4E.Extensions.Encryption
         /// <returns>true if configuration potentially changes something</returns>
         public bool ContainsNonKeepingOperations()
         {
-            return operations
+            return Operations
                 .Any(kvp => kvp.Value != AnonymizerApproach.KEEP);
         }
 

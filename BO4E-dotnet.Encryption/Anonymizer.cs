@@ -117,7 +117,7 @@ namespace BO4E.Extensions.Encryption
             {
                 throw new ArgumentNullException(nameof(bo));
             }
-            var mapping = _configuration.operations;
+            var mapping = _configuration.Operations;
             var result = bo.DeepClone();
             foreach (var dataCategory in mapping.Keys)
             {
