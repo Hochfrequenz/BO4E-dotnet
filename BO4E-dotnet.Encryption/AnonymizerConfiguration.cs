@@ -23,8 +23,8 @@ namespace BO4E.Extensions.Encryption
         /// <summary>
         /// set of key in <see cref="BO4E.BO.BusinessObject.UserProperties"/> / <see cref="BO4E.COM.COM.UserProperties"/> that should not be affected by the anonymizing operations
         /// </summary>
-        [JsonProperty(Required = Required.Default)]
-        public HashSet<string> unaffectedUserProperties;
+        [JsonProperty(Required = Required.Default, PropertyName = "unaffectedUserProperties")]
+        public HashSet<string> UnaffectedUserProperties;
 
         [JsonProperty(Required = Required.Default)]
         public string ConfigurationKey { get; private set; }
@@ -40,29 +40,22 @@ namespace BO4E.Extensions.Encryption
             {
                 operations.Add((DataCategory)ao, AnonymizerApproach.KEEP);
             }
-            unaffectedUserProperties = new HashSet<string>();
+            UnaffectedUserProperties = new HashSet<string>();
         }
 
         /// <summary>
         /// base64 encoded bytes used to salt hashing (<see cref="AnonymizerApproach.HASH"/>
         /// </summary>
-        [JsonProperty(Required = Required.Default)]
-        public string hashingSalt;
+        [JsonProperty(Required = Required.Always, PropertyName = "hashingSalt")]
+        public string HashingSalt;
 
         /// <summary>
-        /// returns the base64 encoded bytes from <see cref="AnonymizerConfiguration.hashingSalt"/> as byte array
+        /// returns the base64 encoded bytes from <see cref="HashingSalt"/> as byte array
         /// </summary>
         /// <returns>byte array or empty byte array if hashing salt is not set.</returns>
         public byte[] GetSalt()
         {
-            if (string.IsNullOrWhiteSpace(hashingSalt))
-            {
-                return new byte[0];
-            }
-            else
-            {
-                return Convert.FromBase64String(hashingSalt);
-            }
+            return string.IsNullOrWhiteSpace(HashingSalt) ? new byte[0] : Convert.FromBase64String(HashingSalt);
         }
 
         /// <summary>

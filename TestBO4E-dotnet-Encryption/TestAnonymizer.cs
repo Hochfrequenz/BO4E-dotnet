@@ -61,12 +61,12 @@ namespace TestBO4EExtensions.Encryption
                 }
                 using (var a = new Anonymizer(ac))
                 {
-                    if (ac.operations.ContainsValue(AnonymizerApproach.ENCRYPT))
+                    if (ac.Operations.ContainsValue(AnonymizerApproach.ENCRYPT))
                     {
                         var x509certPubl = new X509Certificate2(X509Certificate.CreateFromCertFile("anonymizerTests/certificates/publicX509Cert.crt"));
                         a.SetPublicKey(x509certPubl);
                     }
-                    if (ac.operations.ContainsValue(AnonymizerApproach.HASH))
+                    if (ac.Operations.ContainsValue(AnonymizerApproach.HASH))
                     {
                         var predefinedSalt = new byte[] { 0x20, 0x30, 0x40, 0x50, 0x60, 0x70, 0x80, 0x90 }; // only predefined for test case
                         a.SetHashingSalt(predefinedSalt);
@@ -191,7 +191,7 @@ namespace TestBO4EExtensions.Encryption
             Assert.IsTrue(Anonymizer.HasHashedKey(result));
 
             // do not hash zw user property
-            conf.unaffectedUserProperties.Add("zw");
+            conf.UnaffectedUserProperties.Add("zw");
             result = anonymizer.ApplyOperations<Energiemenge>(em);
             Assert.IsNotNull(result);
             Assert.AreNotEqual(em.LokationsId, result.LokationsId);
@@ -306,7 +306,7 @@ namespace TestBO4EExtensions.Encryption
             Assert.IsNotNull(cr.UserProperties["profil"]);
             Assert.AreNotEqual(cr.UserProperties["profil"].Value<string>(), hashedReport.UserProperties["profil"].Value<string>());
 
-            conf.hashingSalt = "TWFuIGlzIGRpc3Rpbmd1aXNoZWQsIG5vdCBvbmx5IGJ5IGhpcyByZWFzb24sIGJ1dCBieSB0aGlzIHNpbmd1bGFyIHBhc3Npb24gZnJvbSBvdGhlciBhbmltYWxzLCB3aGljaCBpcyBhIGx1c3Qgb2YgdGhlIG1pbmQsIHRoYXQgYnkgYSBwZXJzZXZlcmFuY2Ugb2YgZGVsaWdodCBpbiB0aGUgY29udGludWVkIGFuZCBpbmRlZmF0aWdhYmxlIGdlbmVyYXRpb24gb2Yga25vd2xlZGdlLCBleGNlZWRzIHRoZSBzaG9ydCB2ZWhlbWVuY2Ugb2YgYW55IGNhcm5hbCBwbGVhc3VyZS4=";
+            conf.HashingSalt = "TWFuIGlzIGRpc3Rpbmd1aXNoZWQsIG5vdCBvbmx5IGJ5IGhpcyByZWFzb24sIGJ1dCBieSB0aGlzIHNpbmd1bGFyIHBhc3Npb24gZnJvbSBvdGhlciBhbmltYWxzLCB3aGljaCBpcyBhIGx1c3Qgb2YgdGhlIG1pbmQsIHRoYXQgYnkgYSBwZXJzZXZlcmFuY2Ugb2YgZGVsaWdodCBpbiB0aGUgY29udGludWVkIGFuZCBpbmRlZmF0aWdhYmxlIGdlbmVyYXRpb24gb2Yga25vd2xlZGdlLCBleGNlZWRzIHRoZSBzaG9ydCB2ZWhlbWVuY2Ugb2YgYW55IGNhcm5hbCBwbGVhc3VyZS4=";
             CompletenessReport saltedReport;
             using (var anonymizer = new Anonymizer(conf))
             {

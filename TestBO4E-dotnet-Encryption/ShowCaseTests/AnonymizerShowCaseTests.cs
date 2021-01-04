@@ -54,7 +54,7 @@ namespace TestBO4E.ShowCaseTests
             var salt = new Byte[100];
             var rng = new RNGCryptoServiceProvider();
             rng.GetBytes(salt);
-            config.hashingSalt = Convert.ToBase64String(salt); // Some random but not necessarily secret salt;
+            config.HashingSalt = Convert.ToBase64String(salt); // Some random but not necessarily secret salt;
             Energiemenge anonymizedEm;
             using (var anon = new Anonymizer(config))
             {

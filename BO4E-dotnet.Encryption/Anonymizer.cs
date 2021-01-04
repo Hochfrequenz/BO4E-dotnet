@@ -28,15 +28,15 @@ namespace BO4E.Extensions.Encryption
     public class Anonymizer : IDisposable
     {
         private static readonly ILogger _logger = StaticLogger.Logger;
-        private readonly AnonymizerConfiguration configuration;
+        private readonly AnonymizerConfiguration _configuration;
         public X509Certificate2 PublicKeyX509 { get; set; }
-        private AsymmetricKeyParameter privateKey;
-        private byte[] hashingSalt;
+        private AsymmetricKeyParameter _privateKey;
+        private byte[] _hashingSalt;
 
         public Anonymizer(AnonymizerConfiguration configuration)
         {
-            this.configuration = configuration;
-            if (this.configuration.hashingSalt != null)
+            this._configuration = configuration;
+            if (this._configuration.HashingSalt != null)
             {
                 SetHashingSalt(configuration.GetSalt());
             }
@@ -57,7 +57,7 @@ namespace BO4E.Extensions.Encryption
         /// <param name="privateKey">Bouncy Castle compatible private key</param>
         public void SetPrivateKey(AsymmetricKeyParameter privateKey)
         {
-            this.privateKey = privateKey;
+            this._privateKey = privateKey;
         }
 
         /// <summary>
@@ -75,7 +75,7 @@ namespace BO4E.Extensions.Encryption
         /// <param name="salt">random salt as byte array</param>
         public void SetHashingSalt(byte[] salt)
         {
-            hashingSalt = salt;
+            _hashingSalt = salt;
         }
 
         /// <summary>
@@ -117,7 +117,7 @@ namespace BO4E.Extensions.Encryption
             {
                 throw new ArgumentNullException(nameof(bo));
             }
-            var mapping = configuration.operations;
+            var mapping = _configuration.operations;
             var result = bo.DeepClone();
             foreach (var dataCategory in mapping.Keys)
             {
@@ -256,11 +256,11 @@ namespace BO4E.Extensions.Encryption
                             }
                             break;
                         case AnonymizerApproach.DECRYPT:
-                            if (privateKey == null)
+                            if (_privateKey == null)
                             {
                                 throw new ArgumentNullException(nameof(PrivateKeyFactory), "To use the decryption feature you have to provide a private key using the SetPrivateKey method.");
                             }
-                            using (var xasydec = new X509AsymmetricEncrypter(privateKey))
+                            using (var xasydec = new X509AsymmetricEncrypter(_privateKey))
                             {
                                 affectedProp.SetValue(result, xasydec.Decrypt(affectedProp.GetValue(bo).ToString()));
                             }
@@ -327,7 +327,7 @@ namespace BO4E.Extensions.Encryption
             else if (typeof(IDictionary<string, JToken>).IsAssignableFrom(inputType)) // typeof BusinessObject.userProperties
             {
                 dynamic dict = input as IDictionary<string, JToken>;
-                foreach (var dictKey in ((ICollection<string>)dict.Keys).ToList().Where(key => !configuration.unaffectedUserProperties.Contains(key)))
+                foreach (var dictKey in ((ICollection<string>)dict.Keys).ToList().Where(key => !_configuration.UnaffectedUserProperties.Contains(key)))
                 {
                     if (dict[dictKey] != null)
                     {
@@ -482,9 +482,9 @@ namespace BO4E.Extensions.Encryption
             byte[] hashedByteArray;
             using (var hash = SHA256.Create())
             {
-                if (hashingSalt != null)
+                if (_hashingSalt != null)
                 {
-                    hashedByteArray = hash.ComputeHash(Encoding.UTF8.GetBytes(value + Convert.ToBase64String(hashingSalt)));
+                    hashedByteArray = hash.ComputeHash(Encoding.UTF8.GetBytes(value + Convert.ToBase64String(_hashingSalt)));
                 }
                 else
                 {
@@ -513,12 +513,12 @@ namespace BO4E.Extensions.Encryption
         /// <inheritdoc/>
         public void Dispose()
         {
-            privateKey = null;
-            if (hashingSalt != null)
+            _privateKey = null;
+            if (_hashingSalt != null)
             {
-                for (var i = 0; i < hashingSalt.Length; i++)
+                for (var i = 0; i < _hashingSalt.Length; i++)
                 {
-                    hashingSalt[i] = 0x0;
+                    _hashingSalt[i] = 0x0;
                 }
             }
         }
