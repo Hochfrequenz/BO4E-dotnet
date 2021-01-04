@@ -99,7 +99,7 @@ namespace TestBO4E
                 var additionalMessage = string.Empty;
                 if (patch != null)
                 {
-                    additionalMessage = $";\r\n Diff: { patch.ToString()}";
+                    additionalMessage = $";\r\n Diff: { patch}";
                 }
                 try
                 {

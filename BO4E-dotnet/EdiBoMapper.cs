@@ -99,10 +99,8 @@ namespace BO4E
                 _logger.LogError("Custom attribute not set, returning null");
                 return null;
             }
-            else
-            {
-                return attribute.Mapping.FirstOrDefault()?.ToString();
-            }
+
+            return attribute.Mapping.FirstOrDefault()?.ToString();
         }
     }
 }

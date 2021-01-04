@@ -134,7 +134,7 @@ namespace TestBO4E
             {
                 var expectedList = boKeyNamesResults[boType];
                 var actualList = BusinessObject.GetBoKeyNames(boType);
-                Assert.IsTrue(expectedList.SequenceEqual(actualList), $"{boType.ToString()}: expected: [{string.Join(",", expectedList)}] actual: [{string.Join(",", actualList)}] ");
+                Assert.IsTrue(expectedList.SequenceEqual(actualList), $"{boType}: expected: [{string.Join(",", expectedList)}] actual: [{string.Join(",", actualList)}] ");
             }
         }
 

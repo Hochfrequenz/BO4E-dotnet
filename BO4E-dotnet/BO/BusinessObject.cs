@@ -331,7 +331,7 @@ namespace BO4E.BO
                 }
                 else
                 {
-                    result.Add(pi.Name.ToString());
+                    result.Add(pi.Name);
                 }
             }
             return result;

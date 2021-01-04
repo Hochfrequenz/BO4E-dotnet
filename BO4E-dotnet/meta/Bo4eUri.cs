@@ -164,16 +164,16 @@ namespace BO4E.meta
                     }
                     else if (keyProp.GetValue(bo) is int)
                     {
-                        relativeUriBuilder.Append(keyProp.GetValue(bo).ToString() + "/");
+                        relativeUriBuilder.Append(keyProp.GetValue(bo) + "/");
                     }
                     else if (keyProp.GetValue(bo) is Enum)
                     {
-                        relativeUriBuilder.Append(keyProp.GetValue(bo).ToString() + "/");
+                        relativeUriBuilder.Append(keyProp.GetValue(bo) + "/");
                     }
                     else if (keyProp.GetValue(bo).GetType().IsSubclassOf(typeof(BusinessObject)))
                     {
                         var innerBo = (BusinessObject)keyProp.GetValue(bo);
-                        relativeUriBuilder.Append(GetUri(innerBo).GetComponents(UriComponents.Path, UriFormat.UriEscaped).ToString());
+                        relativeUriBuilder.Append(GetUri(innerBo).GetComponents(UriComponents.Path, UriFormat.UriEscaped));
                     }
                     else
                     {

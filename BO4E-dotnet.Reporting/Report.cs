@@ -189,7 +189,7 @@ namespace BO4E.Reporting
             else
             {
                 gapSortedResults.AddRange(gapdata);
-                resultBuilder.Append(separator.ToString() + string.Join(separator.ToString(), gapSortedResults));
+                resultBuilder.Append(separator + string.Join(separator.ToString(), gapSortedResults));
             }
             return resultBuilder.ToString();
         }

@@ -126,7 +126,7 @@ namespace BO4E
             var type = o.GetType();
             if (!type.IsSubclassOf(typeof(BusinessObject)) && !type.IsSubclassOf(typeof(BO4E.COM.COM)))
             {
-                throw new ArgumentException($"Please pass a Business Object or BO4E COMpontent instead of {o.GetType()} with value '{o.ToString()}'.");
+                throw new ArgumentException($"Please pass a Business Object or BO4E COMpontent instead of {o.GetType()} with value '{o}'.");
             }
             var boString = JsonConvert.SerializeObject(o, new StringEnumConverter());
             var result = (JObject)JsonConvert.DeserializeObject(boString);
@@ -134,7 +134,7 @@ namespace BO4E
             {
                 var serializationName = oProp.GetCustomAttribute<JsonPropertyAttribute>().PropertyName ?? oProp.Name;
                 var originalType = Nullable.GetUnderlyingType(oProp.PropertyType) ?? oProp.PropertyType;
-                if (originalType.IsSubclassOf(typeof(BO4E.COM.COM)) || originalType.IsSubclassOf(typeof(BO4E.BO.BusinessObject)))
+                if (originalType.IsSubclassOf(typeof(BO4E.COM.COM)) || originalType.IsSubclassOf(typeof(BusinessObject)))
                 {
                     object newValue = ReplaceWithEdiValues(oProp.GetValue(o));
                     result[serializationName] = (JToken)newValue;
@@ -161,7 +161,7 @@ namespace BO4E
                         }
                         else
                         {
-                            throw new NotImplementedException($"There is no BO4E<-->EDIFACT mapping defined for {originalListItemType.ToString()}.");
+                            throw new NotImplementedException($"There is no BO4E<-->EDIFACT mapping defined for {originalListItemType}.");
                         }
                     }
                     else

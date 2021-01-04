@@ -110,7 +110,7 @@ namespace TestBO4EExtensions.Encryption
                         var additionalMessage = testFile;
                         if (patch != null)
                         {
-                            additionalMessage = $";\r\n Diff: { patch.ToString()}";
+                            additionalMessage = $";\r\n Diff: { patch}";
                         }
                         // patch == null <--> jobjects match (except for key order)
                         Assert.IsNull(patch, $"Decryption failed: {testFile}{additionalMessage}");
