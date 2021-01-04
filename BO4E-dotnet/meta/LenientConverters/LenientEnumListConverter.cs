@@ -52,7 +52,7 @@ namespace BO4E.meta.LenientConverters
                 else if (rawItem.GetType() == typeof(JObject))
                 {
                     var rawDict = ((JObject)rawItem).ToObject<Dictionary<string, object>>();
-                    var rawObject = rawDict.Values.FirstOrDefault<object>();
+                    var rawObject = rawDict.Values.FirstOrDefault();
                     var enumValue = Enum.Parse(expectedListElementType, rawObject.ToString());
                     ((IList)result).Add(enumValue);
                 }

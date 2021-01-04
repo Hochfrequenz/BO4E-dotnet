@@ -192,7 +192,7 @@ namespace BO4E.Extensions.BusinessObjects.Energiemenge
             Verbrauch v;
             try
             {
-                v = em.Energieverbrauch.First<Verbrauch>();
+                v = em.Energieverbrauch.First();
             }
             catch (InvalidOperationException)
             {

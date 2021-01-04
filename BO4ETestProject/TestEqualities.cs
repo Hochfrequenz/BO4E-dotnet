@@ -45,7 +45,7 @@ namespace TestBO4E
 
             v2.Obiskennzahl = "1-1:1.8.1";
             Assert.AreNotEqual(v1, v2);
-            Assert.AreNotEqual<int>(v1.GetHashCode(), v2.GetHashCode());
+            Assert.AreNotEqual(v1.GetHashCode(), v2.GetHashCode());
             Assert.AreNotEqual(new Preis(), new Menge());
         }
 

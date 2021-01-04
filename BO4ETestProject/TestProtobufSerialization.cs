@@ -50,7 +50,7 @@ namespace TestBO4E
             string emBase64;
             using (var stream = new MemoryStream())
             {
-                Serializer.Serialize<Energiemenge>(stream, em);
+                Serializer.Serialize(stream, em);
                 using var reader = new BinaryReader(stream);
                 emBase64 = Convert.ToBase64String(stream.ToArray());
             }

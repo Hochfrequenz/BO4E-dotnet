@@ -25,7 +25,7 @@ namespace TestBO4E
             };
 
             var emJson = JsonConvert.SerializeObject(em);
-            Assert.AreEqual<Guid>(em.Guid.Value, JsonConvert.DeserializeObject<Energiemenge>(emJson).Guid.Value);
+            Assert.AreEqual(em.Guid.Value, JsonConvert.DeserializeObject<Energiemenge>(emJson).Guid.Value);
 
             var gp = new Geschaeftspartner()
             {
@@ -34,7 +34,7 @@ namespace TestBO4E
             };
 
             var gpJson = JsonConvert.SerializeObject(gp);
-            Assert.AreEqual<Guid>(gp.Guid.Value, JsonConvert.DeserializeObject<Geschaeftspartner>(gpJson).Guid.Value);
+            Assert.AreEqual(gp.Guid.Value, JsonConvert.DeserializeObject<Geschaeftspartner>(gpJson).Guid.Value);
         }
         /*
         [TestMethod]

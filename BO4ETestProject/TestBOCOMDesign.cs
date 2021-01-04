@@ -94,7 +94,7 @@ namespace TestBO4E
                 var keyProps = type.GetProperties()
                     .Where(p => p.GetCustomAttributes(typeof(BoKey), false).Length > 0)
                     .OrderBy(ap => ap.GetCustomAttribute<JsonPropertyAttribute>()?.Order)
-                    .ToArray<PropertyInfo>();
+                    .ToArray();
                 Assert.IsTrue(keyProps.Any(), $"Type {type} is derived from {nameof(BusinessObject)} but has no [{nameof(BoKey)}] attribute.");
             }
         }

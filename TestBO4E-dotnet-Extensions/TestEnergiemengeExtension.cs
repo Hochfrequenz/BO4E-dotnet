@@ -143,7 +143,7 @@ namespace TestBO4EExtensions
                             Assert.AreEqual(assertion.Value, Math.Round(em.GetJointCoverage(GERMAN_APRIL_2018), 4), $"{assertion.Name}: {boFile}");
                             break;
                         case "isPure":
-                            Assert.AreEqual<bool>((bool)assertion.Value, em.IsPure(), boFile);
+                            Assert.AreEqual((bool)assertion.Value, em.IsPure(), boFile);
                             if (!(bool)assertion.Value)
                             {
                                 var pureEms = em.SplitInPureGroups();
@@ -160,7 +160,7 @@ namespace TestBO4EExtensions
                             }
                             break;
                         case "isPureUserProperties":
-                            Assert.AreEqual<bool>((bool)assertion.Value, em.IsPure(true), boFile);
+                            Assert.AreEqual((bool)assertion.Value, em.IsPure(true), boFile);
                             break;
                         default:
                             Assert.IsTrue(false, $"Unknown assertion type {assertion.Name} in {boFile}");

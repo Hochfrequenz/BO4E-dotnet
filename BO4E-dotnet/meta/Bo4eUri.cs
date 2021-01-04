@@ -226,7 +226,7 @@ namespace BO4E.meta
             var allKeyProperties = boType.GetProperties()
                 .Where(p => p.GetCustomAttributes(typeof(BoKey), false).Length > 0)
                 .OrderBy(af => af.GetCustomAttribute<JsonPropertyAttribute>()?.Order)
-                .ToArray<PropertyInfo>();
+                .ToArray();
             if (allKeyProperties.Length == 0)
             {
                 throw new NotImplementedException($"Business Object {boType.Name} has no [BoKey] defined => can't create URI.");
@@ -248,7 +248,7 @@ namespace BO4E.meta
             }
             else
             {
-                return allKeyProperties.ToList<PropertyInfo>();
+                return allKeyProperties.ToList();
             }
         }
 

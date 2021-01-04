@@ -177,7 +177,7 @@ namespace BO4E.Extensions.BusinessObjects.Energiemenge
                 using (MiniProfiler.Current.Step("Calculating total consumption and normalisation factor."))
                 {
                     totalConsumption = em.GetTotalConsumption();
-                    result = BusinessObjectExtensions.DeepClone<BO4E.BO.Energiemenge>(em);
+                    result = BusinessObjectExtensions.DeepClone(em);
                     if (totalConsumption.Item1 != 0.0M)
                     {
                         scalingFactor = target / totalConsumption.Item1;
@@ -245,7 +245,7 @@ namespace BO4E.Extensions.BusinessObjects.Energiemenge
             }
             else
             {
-                var v = em.Energieverbrauch.First<Verbrauch>();
+                var v = em.Energieverbrauch.First();
                 return Tuple.Create<decimal?, Mengeneinheit>(em.GetAverage(v.Wertermittlungsverfahren, v.Obiskennzahl, v.Einheit), v.Einheit);
             }
         }
@@ -418,7 +418,7 @@ namespace BO4E.Extensions.BusinessObjects.Energiemenge
                 // each time difference must be a multiple of the smallest difference.
                 using (MiniProfiler.Current.Step("Iterating over all time spans"))
                 {
-                    var minDiff = startEndDatumPeriods.Min<TimeSpan>().TotalSeconds;
+                    var minDiff = startEndDatumPeriods.Min().TotalSeconds;
                     foreach (var ts in startEndDatumPeriods)
                     {
                         if (Math.Abs(ts.TotalSeconds % minDiff) != 0)
@@ -492,7 +492,7 @@ namespace BO4E.Extensions.BusinessObjects.Energiemenge
             var result = new HashSet<TimeSpan>();
             var vlist = new List<Verbrauch>(em.Energieverbrauch);
             vlist.Sort(new VerbrauchDateTimeComparer());
-            vlist = vlist.Where<Verbrauch>(v => v.Wertermittlungsverfahren == wev && v.Obiskennzahl == obis && v.Einheit == me).ToList<Verbrauch>();
+            vlist = vlist.Where(v => v.Wertermittlungsverfahren == wev && v.Obiskennzahl == obis && v.Einheit == me).ToList();
             for (var i = 1; i < vlist.Count; i++)
             {
                 result.Add(vlist[i].Startdatum - vlist[i - 1].Startdatum);
@@ -511,7 +511,7 @@ namespace BO4E.Extensions.BusinessObjects.Energiemenge
             return new HashSet<Tuple<Wertermittlungsverfahren, string, Mengeneinheit>>(
                 em.Energieverbrauch
                 //.AsParallel<Verbrauch>()
-                .Select(v => Tuple.Create<Wertermittlungsverfahren, string, Mengeneinheit>(v.Wertermittlungsverfahren, v.Obiskennzahl, v.Einheit)));
+                .Select(v => Tuple.Create(v.Wertermittlungsverfahren, v.Obiskennzahl, v.Einheit)));
         }
 
         /// <summary>
@@ -526,7 +526,7 @@ namespace BO4E.Extensions.BusinessObjects.Energiemenge
             var combinations = GetWevObisMeCombinations(em);
             var jointCoverage = em.Energieverbrauch
                 //.AsParallel<Verbrauch>()
-                .Where<Verbrauch>(v => combinations.Contains(Tuple.Create<Wertermittlungsverfahren, string, Mengeneinheit>(v.Wertermittlungsverfahren, v.Obiskennzahl, v.Einheit)))
+                .Where(v => combinations.Contains(Tuple.Create(v.Wertermittlungsverfahren, v.Obiskennzahl, v.Einheit)))
                 .Sum(v => GetOverlapFactor(new TimeRange(v.Startdatum, v.Enddatum), reference, true));
             return jointCoverage - (combinations.Count - 1);
         }
@@ -549,7 +549,7 @@ namespace BO4E.Extensions.BusinessObjects.Energiemenge
                 {
                     return 0.0M;
                 }
-                var v = em.Energieverbrauch.First<Verbrauch>();
+                var v = em.Energieverbrauch.First();
                 return em.GetCoverage(reference, v.Wertermittlungsverfahren, v.Obiskennzahl, v.Einheit);
             }
         }
@@ -583,7 +583,7 @@ namespace BO4E.Extensions.BusinessObjects.Energiemenge
             {
                 exactResult = em.Energieverbrauch
                     //.AsParallel<Verbrauch>()
-                    .Where<Verbrauch>(v => v.Einheit == mengeneinheit && v.Obiskennzahl == obisKz && v.Wertermittlungsverfahren == wev)
+                    .Where(v => v.Einheit == mengeneinheit && v.Obiskennzahl == obisKz && v.Wertermittlungsverfahren == wev)
                     .Sum(v => GetOverlapFactor(new TimeRange(v.Startdatum, v.Enddatum), reference, true));
             }
             return Math.Round(exactResult, decimalRounding);
@@ -674,7 +674,7 @@ namespace BO4E.Extensions.BusinessObjects.Energiemenge
             using (MiniProfiler.Current.Step(nameof(IsPureWertermittlungsverfahren)))
             {
                 ISet<Wertermittlungsverfahren> wefs = new HashSet<Wertermittlungsverfahren>();
-                em.Energieverbrauch.All<Verbrauch>(v => wefs.Add(v.Wertermittlungsverfahren));
+                em.Energieverbrauch.All(v => wefs.Add(v.Wertermittlungsverfahren));
                 return wefs.Count <= 1;
             }
         }
@@ -689,7 +689,7 @@ namespace BO4E.Extensions.BusinessObjects.Energiemenge
             using (MiniProfiler.Current.Step(nameof(IsPureObisKennzahl)))
             {
                 ISet<string> obisKzs = new HashSet<string>();
-                em.Energieverbrauch.All<Verbrauch>(v => obisKzs.Add(v.Obiskennzahl));
+                em.Energieverbrauch.All(v => obisKzs.Add(v.Obiskennzahl));
                 return obisKzs.Count <= 1;
             }
         }
@@ -741,7 +741,7 @@ namespace BO4E.Extensions.BusinessObjects.Energiemenge
             using (MiniProfiler.Current.Step(nameof(IsPureMengeneinheit)))
             {
                 ISet<Mengeneinheit> einheiten = new HashSet<Mengeneinheit>();
-                em.Energieverbrauch.All<Verbrauch>(v => einheiten.Add(v.Einheit));
+                em.Energieverbrauch.All(v => einheiten.Add(v.Einheit));
 
                 if (einheiten.Count <= 1)
                 {
@@ -749,7 +749,7 @@ namespace BO4E.Extensions.BusinessObjects.Energiemenge
                 }
                 else
                 {
-                    var me1 = einheiten.First<Mengeneinheit>();
+                    var me1 = einheiten.First();
                     foreach (var me2 in einheiten)
                     {
                         if (!me1.IsConvertibleTo(me2))
@@ -779,7 +779,7 @@ namespace BO4E.Extensions.BusinessObjects.Energiemenge
         /// <returns>true iff all <paramref name="em"/>-&gt;energieverbrauch entries are extensive</returns>
         public static bool IsExtensive(this BO4E.BO.Energiemenge em)
         {
-            return em.IsPureMengeneinheit() && em.Energieverbrauch.First<Verbrauch>().Einheit.IsExtensive();
+            return em.IsPureMengeneinheit() && em.Energieverbrauch.First().Einheit.IsExtensive();
         }
 
         public static List<BO.Energiemenge> SplitInPureGroups(this BO.Energiemenge em)

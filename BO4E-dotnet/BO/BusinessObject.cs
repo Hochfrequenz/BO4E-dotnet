@@ -471,7 +471,7 @@ namespace BO4E.BO
             return boType.GetProperties()
                  .Where(p => p.GetCustomAttributes(typeof(BoKey), false).Length > 0)
                  .OrderBy(ap => ap.GetCustomAttribute<JsonPropertyAttribute>()?.Order)
-                 .ToList<PropertyInfo>();
+                 .ToList();
         }
 
         /// <summary>BO4E Business Objects are considered equal iff all of their elements/fields are equal.</summary>

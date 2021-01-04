@@ -284,7 +284,7 @@ namespace BO4E
             return boType.GetFields()
                 .Where(f => f.GetCustomAttributes(attributeType, false).Length > 0)
                 .OrderBy(af => af.GetCustomAttribute<JsonPropertyAttribute>()?.Order)
-                .ToArray<FieldInfo>();
+                .ToArray();
         }
 
         /// <summary>
@@ -302,7 +302,7 @@ namespace BO4E
                 .SelectMany(t => t.GetFields()) // by type name
                 .Where(f => f.GetCustomAttributes(attributeType, false).Length > 0)
                 .OrderBy(af => af.GetCustomAttribute<JsonPropertyAttribute>()?.Order)
-                .ToArray<FieldInfo>();
+                .ToArray();
         }
     }
 }
