@@ -47,7 +47,7 @@ namespace TestBO4EExtensions.Encryption
                     Assert.IsTrue(bo.Equals(a.ApplyOperations<BusinessObject>(bo)));
                 }
                 var ac = new AnonymizerConfiguration();
-                var allApproaches = new HashSet<AnonymizerApproach>(); ;
+                var allApproaches = new HashSet<AnonymizerApproach>();
                 var operations = JsonConvert.DeserializeObject<Dictionary<string, string>>(((JObject)json["operations"]).ToString());
                 //Assert.AreEqual(json["input"].ToString(), resultJobject.ToString(), "Anonymizer without configuration should return the original message");
                 foreach (var key in operations.Keys)

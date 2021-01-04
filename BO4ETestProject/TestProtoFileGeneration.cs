@@ -38,7 +38,7 @@ namespace TestBO4E
         {
             foreach (var type in PROTO_SERIALIZABLE_TYPES)
             {
-                var method = typeof(Serializer).GetMethod(nameof(Serializer.GetProto), new Type[] { typeof(ProtoBuf.Meta.ProtoSyntax)});
+                var method = typeof(Serializer).GetMethod(nameof(Serializer.GetProto), new[] { typeof(ProtoBuf.Meta.ProtoSyntax)});
                 method = method.MakeGenericMethod(type);
                 Assert.IsNotNull(method);
                 var protoString = (string)method.Invoke(null, new object[] { ProtoBuf.Meta.ProtoSyntax.Proto3 });

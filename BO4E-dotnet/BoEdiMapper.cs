@@ -153,7 +153,7 @@ namespace BO4E
                             foreach (var listItem in (IEnumerable)oProp.GetValue(o))
                             {
                                 var newValue = ToEdi(originalListItemType.Name, listItem.ToString());
-                                miAdd.Invoke(newList, new object[] { Enum.Parse(listItemEdiType, newValue) });
+                                miAdd.Invoke(newList, new[] { Enum.Parse(listItemEdiType, newValue) });
                             }
                             var js = new JsonSerializer();
                             js.Converters.Add(new StringEnumConverter());
@@ -172,7 +172,7 @@ namespace BO4E
                         foreach (var listItem in (IEnumerable)oProp.GetValue(o))
                         {
                             object newListItem = ReplaceWithEdiValues(listItem);
-                            miAdd.Invoke(newList, new object[] { newListItem });
+                            miAdd.Invoke(newList, new[] { newListItem });
                         }
                         result[serializationName] = JToken.FromObject(newList);
                     }

@@ -405,7 +405,7 @@ namespace BO4E.BO
                     foreach (var subResult in GetExpandablePropertyNames(prop.PropertyType, false))
 
                     {
-                        result.Add(string.Join(".", new string[] { fieldName, subResult.Key }), subResult.Value);
+                        result.Add(string.Join(".", new[] { fieldName, subResult.Key }), subResult.Value);
                     }
                     result.Add(fieldName, prop.PropertyType);
                 }
@@ -419,7 +419,7 @@ namespace BO4E.BO
                     var listElementType = prop.PropertyType.GetGenericArguments()[0];
                     foreach (var subResult in GetExpandablePropertyNames(listElementType, false))
                     {
-                        result.Add(string.Join(".", new string[] { fieldName, subResult.Key }), subResult.Value);
+                        result.Add(string.Join(".", new[] { fieldName, subResult.Key }), subResult.Value);
                     }
                     result.Add(fieldName, prop.PropertyType);
                 }
@@ -652,7 +652,7 @@ namespace BO4E.BO
                          .Select(x => x.Method)
                          .First()
                          .GetGenericMethodDefinition()
-                         .MakeGenericMethod(new Type[] { boType });
+                         .MakeGenericMethod(new[] { boType });
                     try
                     {
                         return deserializationMethod.Invoke(serializer, new object[] { jo.CreateReader() });

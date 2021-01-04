@@ -49,7 +49,7 @@ namespace BO4E
         {
             if (jobject["boTyp"] == null)
             {
-                throw new ArgumentNullException("boTyp", "Either call MapObject(JObject) with a Business Object containing the mandatory 'boTyp' key or explicitly name the Object");
+                throw new ArgumentNullException(nameof(jobject), "Either call MapObject(JObject) with a Business Object containing the mandatory 'boTyp' key or explicitly name the Object");
             }
             var businessObjectType = GetTypeForBoName(jobject["boTyp"].ToString());
             return MapObject(businessObjectType, jobject, userPropertiesWhiteList, lenient);
