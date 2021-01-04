@@ -71,7 +71,7 @@ namespace BO4E
                     {
                         _logger.LogDebug("Even ediClass of " + objectName + " has no such field.");
                         // now try with leading underscore, used for enum values that would normally
-                        // start with a number, e.g. _293 for Codelist "293"
+                        // start with a number, e.g. _293 for code list "293"
                         field = ediClazz.GetField("_" + objectValue);
                         if (field == null)
                         {

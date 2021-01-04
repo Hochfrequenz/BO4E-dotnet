@@ -97,7 +97,7 @@ namespace BO4E
         }
 
         /// <summary>
-        /// Apply <paramref name="evaluation"/> to the userproperty under <paramref name="userPropertyKey"/> if it exists
+        /// Apply <paramref name="evaluation"/> to the user property under <paramref name="userPropertyKey"/> if it exists
         /// </summary>
         /// <typeparam name="TUserProperty">type of the userproperty value</typeparam>
         /// <typeparam name="TEvaluationResult">type of the expected result</typeparam>
