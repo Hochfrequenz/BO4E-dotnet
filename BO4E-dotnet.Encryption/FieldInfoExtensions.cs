@@ -18,7 +18,6 @@ namespace BO4E.Extensions.Encryption
                 case AnonymizerApproach.ENCRYPT:
                 case AnonymizerApproach.DECRYPT:
                     return prop.IsEncryptionRelevant(dataCategory);
-                case AnonymizerApproach.KEEP:
                 default:
                     return false;
             }
@@ -38,15 +37,7 @@ namespace BO4E.Extensions.Encryption
             }
             if (dataCategory.HasValue)
             {
-                foreach (var attribute in property.GetCustomAttributes().Where(a => a.GetType() == typeof(DataCategoryAttribute)))
-                {
-                    var dataCatagoryAttribute = (DataCategoryAttribute)attribute;
-                    if (!dataCatagoryAttribute.Mapping.Contains(dataCategory.Value))
-                    {
-                        continue;
-                    }
-                    return true;
-                }
+                return property.GetCustomAttributes().Where(a => a.GetType() == typeof(DataCategoryAttribute)).Cast<DataCategoryAttribute>().Any(dataCatagoryAttribute => dataCatagoryAttribute.Mapping.Contains(dataCategory.Value));
             }
 
             return false;
@@ -62,8 +53,8 @@ namespace BO4E.Extensions.Encryption
             {
                 foreach (var attribute in property.GetCustomAttributes().Where(a => a.GetType() == typeof(DataCategoryAttribute)))
                 {
-                    var dataCatagoryAttribute = (DataCategoryAttribute)attribute;
-                    if (!dataCatagoryAttribute.Mapping.Contains(dataCategory.Value))
+                    var dataCategoryAttribute = (DataCategoryAttribute)attribute;
+                    if (!dataCategoryAttribute.Mapping.Contains(dataCategory.Value))
                     {
                         continue;
                     }
@@ -81,15 +72,7 @@ namespace BO4E.Extensions.Encryption
             }
             if (dataCategory.HasValue)
             {
-                foreach (var attribute in property.GetCustomAttributes().Where(a => a.GetType() == typeof(DataCategoryAttribute)))
-                {
-                    var dataCatagoryAttribute = (DataCategoryAttribute)attribute;
-                    if (!dataCatagoryAttribute.Mapping.Contains(dataCategory.Value))
-                    {
-                        continue;
-                    }
-                    return true;
-                }
+                return property.GetCustomAttributes().Where(a => a.GetType() == typeof(DataCategoryAttribute)).Cast<DataCategoryAttribute>().Any(dataCatagoryAttribute => dataCatagoryAttribute.Mapping.Contains(dataCategory.Value));
             }
             return false;
         }
