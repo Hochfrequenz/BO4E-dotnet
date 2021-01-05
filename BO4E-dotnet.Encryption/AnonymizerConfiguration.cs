@@ -46,7 +46,7 @@ namespace BO4E.Extensions.Encryption
         /// <summary>
         /// base64 encoded bytes used to salt hashing (<see cref="AnonymizerApproach.HASH"/>
         /// </summary>
-        [JsonProperty(Required = Required.Always, PropertyName = "hashingSalt")]
+        [JsonProperty(Required = Required.Default, PropertyName = "hashingSalt")]
         public string HashingSalt;
 
         /// <summary>
