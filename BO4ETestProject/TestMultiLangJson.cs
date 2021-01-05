@@ -94,16 +94,16 @@ namespace TestBO4E
             Assert.IsTrue(json.Contains("internal_english"));
             Assert.IsFalse(json.Contains("intern_deutsch"));
 
-            var DEjson = JsonConvert.SerializeObject(mlb);
-            Assert.IsFalse(DEjson.Contains("date_english"));
-            Assert.IsFalse(DEjson.Contains("value_english"));
-            Assert.IsTrue(DEjson.Contains("datum_deutsch"));
-            Assert.IsTrue(DEjson.Contains("wert_deutsch"));
-            Assert.IsTrue(DEjson.Contains("internList"));
-            Assert.IsTrue(DEjson.Contains("intern_deutsch"));
-            Assert.IsFalse(DEjson.Contains("internal_english"));
+            var deJson = JsonConvert.SerializeObject(mlb);
+            Assert.IsFalse(deJson.Contains("date_english"));
+            Assert.IsFalse(deJson.Contains("value_english"));
+            Assert.IsTrue(deJson.Contains(nameof(MultiLangBo.DatumDeutsch)));
+            Assert.IsTrue(deJson.Contains(nameof(MultiLangBo.WertDeutsch)));
+            Assert.IsTrue(deJson.Contains(nameof(MultiLangBo.InternList)));
+            Assert.IsTrue(deJson.Contains(nameof(NestedObject.InternDeutsch)));
+            Assert.IsFalse(deJson.Contains("internal_english"));
 
-            var ml = JsonConvert.DeserializeObject<MultiLangBo>(DEjson);
+            var ml = JsonConvert.DeserializeObject<MultiLangBo>(deJson);
             Assert.AreNotEqual(DateTime.MinValue, ml.DatumDeutsch.UtcDateTime);
         }
 
