@@ -19,7 +19,7 @@ namespace BO4E.Extensions.Encryption
     public class X509AsymmetricEncrypter : Encrypter
     {
         private readonly ISet<X509Certificate2> _publicCerts;
-        private AsymmetricKeyParameter privateKey;
+        private AsymmetricKeyParameter _privateKey;
 
         /// <summary>
         /// Provide the constructor with an X509 certificate to use as encrypter.
@@ -28,7 +28,7 @@ namespace BO4E.Extensions.Encryption
         public X509AsymmetricEncrypter(X509Certificate2 cert)
         {
             _publicCerts = new HashSet<X509Certificate2> { cert };
-            privateKey = null;
+            _privateKey = null;
         }
 
         /// <summary>
@@ -42,7 +42,7 @@ namespace BO4E.Extensions.Encryption
             {
                 _publicCerts.Add(c);
             }
-            privateKey = null;
+            _privateKey = null;
         }
 
         private List<string> GetPublicKeysBase64()
@@ -67,7 +67,7 @@ namespace BO4E.Extensions.Encryption
         public X509AsymmetricEncrypter(AsymmetricKeyParameter kp)
         {
             _publicCerts = null;
-            privateKey = kp;
+            _privateKey = kp;
         }
 
         public string Encrypt(string plainText)
@@ -79,7 +79,7 @@ namespace BO4E.Extensions.Encryption
             foreach (var cert in _publicCerts)
             {
                 var bouncyCert = DotNetUtilities.FromX509Certificate(cert);
-                var keyParameter = bouncyCert.GetPublicKey();
+                bouncyCert.GetPublicKey();
                 envelopedGen.AddKeyTransRecipient(bouncyCert);
             }
 
@@ -110,7 +110,7 @@ namespace BO4E.Extensions.Encryption
                 var recipient = recipientsStore.GetFirstRecipient(recipientInfo.RecipientID);
                 try
                 {
-                    plainBytes = recipient.GetContent(privateKey);
+                    plainBytes = recipient.GetContent(_privateKey);
                     break;
                 }
                 catch (CmsException) when (index != recipientsStore.Count - 1)
@@ -155,7 +155,7 @@ namespace BO4E.Extensions.Encryption
 
         public override void Dispose()
         {
-            privateKey = null;
+            _privateKey = null;
         }
 
         ~X509AsymmetricEncrypter()

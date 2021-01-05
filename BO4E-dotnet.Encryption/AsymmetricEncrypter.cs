@@ -22,8 +22,8 @@ namespace BO4E.Extensions.Encryption
         public AsymmetricEncrypter(byte[] privateKey, byte[] publicKey)
         {
             _ownPublicKey = new byte[publicKey.Length];
-            this._privateKey = new byte[privateKey.Length];
-            privateKey.CopyTo(this._privateKey, 0);
+            _privateKey = new byte[privateKey.Length];
+            privateKey.CopyTo(_privateKey, 0);
             publicKey.CopyTo(_ownPublicKey, 0);
         }
         /// <summary>
@@ -44,7 +44,7 @@ namespace BO4E.Extensions.Encryption
         /// <param name="privateKey">private key</param>
         public AsymmetricEncrypter(byte[] privateKey)
         {
-            this._privateKey = privateKey;
+            _privateKey = privateKey;
         }
 
         private string Encrypt(string plainText, string recipientsPublicKey, byte[] nonce)

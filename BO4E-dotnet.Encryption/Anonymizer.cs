@@ -35,8 +35,8 @@ namespace BO4E.Extensions.Encryption
 
         public Anonymizer(AnonymizerConfiguration configuration)
         {
-            this._configuration = configuration;
-            if (this._configuration.HashingSalt != null)
+            _configuration = configuration;
+            if (_configuration.HashingSalt != null)
             {
                 SetHashingSalt(configuration.GetSalt());
             }
@@ -57,7 +57,7 @@ namespace BO4E.Extensions.Encryption
         /// <param name="privateKey">Bouncy Castle compatible private key</param>
         public void SetPrivateKey(AsymmetricKeyParameter privateKey)
         {
-            this._privateKey = privateKey;
+            _privateKey = privateKey;
         }
 
         /// <summary>

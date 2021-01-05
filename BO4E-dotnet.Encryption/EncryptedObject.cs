@@ -34,7 +34,7 @@ namespace BO4E.BO
         /// </summary>
         /// <param name="cipherText">the cipher text (bae64 encoded string)</param>
         /// <param name="es">the encryption scheme</param>
-        public EncryptedObject(string cipherText, EncryptionScheme es)
+        protected EncryptedObject(string cipherText, EncryptionScheme es)
         {
             CipherText = cipherText;
             EncryptionScheme = es;

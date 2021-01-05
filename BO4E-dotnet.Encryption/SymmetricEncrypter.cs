@@ -11,7 +11,7 @@ namespace BO4E.Extensions.Encryption
 {
     public class SymmetricEncrypter : Encrypter
     {
-        private readonly byte[] secretKey;
+        private readonly byte[] _secretKey;
 
         /// <summary>
         /// pass the secret encryption key to the constructor
@@ -19,8 +19,8 @@ namespace BO4E.Extensions.Encryption
         /// <param name="secretKey">secret key</param>
         public SymmetricEncrypter(byte[] secretKey)
         {
-            this.secretKey = new byte[secretKey.Length];
-            secretKey.CopyTo(this.secretKey, 0);
+            _secretKey = new byte[secretKey.Length];
+            secretKey.CopyTo(_secretKey, 0);
         }
         /// <summary>
         /// pass the secret key as base64 encoded string to the constructor
@@ -39,7 +39,7 @@ namespace BO4E.Extensions.Encryption
         {
             var plainBytes = Encoding.UTF8.GetBytes(plainText);
             var adBytes = Encoding.UTF8.GetBytes(associatedDataString);
-            var cipherBytes = SecretAeadChaCha20Poly1305.Encrypt(plainBytes, nonce, secretKey, adBytes);
+            var cipherBytes = SecretAeadChaCha20Poly1305.Encrypt(plainBytes, nonce, _secretKey, adBytes);
             var cipherString = Convert.ToBase64String(cipherBytes);
             return cipherString;
         }
@@ -80,7 +80,7 @@ namespace BO4E.Extensions.Encryption
         {
             var cipherBytes = Convert.FromBase64String(cipherText);
             var adBytes = Encoding.UTF8.GetBytes(associatedDataString);
-            var plainBytes = SecretAeadChaCha20Poly1305.Decrypt(cipherBytes, nonce, secretKey, adBytes);
+            var plainBytes = SecretAeadChaCha20Poly1305.Decrypt(cipherBytes, nonce, _secretKey, adBytes);
             return Encoding.UTF8.GetString(plainBytes);
         }
 
@@ -115,11 +115,11 @@ namespace BO4E.Extensions.Encryption
 
         public override void Dispose()
         {
-            if (secretKey != null)
+            if (_secretKey != null)
             {
-                for (var i = 0; i < secretKey.Length; i++)
+                for (var i = 0; i < _secretKey.Length; i++)
                 {
-                    secretKey[i] = 0x0;
+                    _secretKey[i] = 0x0;
                 }
             }
         }
