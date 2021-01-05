@@ -101,7 +101,7 @@ namespace BO4E.BO
             {
                 throw new InvalidOperationException($"You must not add the Energiemengen with different locations {em1.LokationsId} ({em1.LokationsTyp}) (v{em1.VersionStruktur}) vs. {em2.LokationsId} ({em2.LokationsTyp}) (v{em2.VersionStruktur})");
             }
-            var result = new Energiemenge()
+            var result = new Energiemenge
             {
                 LokationsId = em1.LokationsId,
                 LokationsTyp = em1.LokationsTyp,

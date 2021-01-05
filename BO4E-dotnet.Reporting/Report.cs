@@ -32,11 +32,11 @@ namespace BO4E.Reporting
             var resultBuilder = new StringBuilder();
             var result = new List<string>();
             var headerNames = new List<string>();
-            var reterned = new Dictionary<List<string>, List<string>>() { [headerNames] = result };
+            var reterned = new Dictionary<List<string>, List<string>> { [headerNames] = result };
             reterned = Detect(type, separator, this, reterned);
 
             headerNames = reterned.Keys.First();
-            headerNames.AddRange(new List<string>() { "gap.startDatum", "gap.endDatum" });
+            headerNames.AddRange(new List<string> { "gap.startDatum", "gap.endDatum" });
             result = reterned.Values.First();
 
             var sortedResults = new List<string>();
@@ -162,7 +162,7 @@ namespace BO4E.Reporting
 
             var gapdata = new List<string>();
             var gapHeaderNames = new List<string>();
-            var gapReterned = new Dictionary<List<string>, List<string>>() { [gapHeaderNames] = gapdata };
+            var gapReterned = new Dictionary<List<string>, List<string>> { [gapHeaderNames] = gapdata };
             gapReterned = DetectGaps(type, separator, this, gapReterned);
 
             var gapSortedResults = new List<string>();

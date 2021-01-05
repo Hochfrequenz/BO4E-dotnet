@@ -14,7 +14,7 @@ namespace TestBO4EExtensions
         [TestMethod]
         public void TestCloning()
         {
-            var bo = new Messlokation()
+            var bo = new Messlokation
             {
                 MesslokationsId = "DE345",
 
@@ -28,13 +28,13 @@ namespace TestBO4EExtensions
         [TestMethod]
         public void TestCloningEnergiemenge()
         {
-            var em = new Energiemenge()
+            var em = new Energiemenge
             {
                 LokationsId = "De12345",
                 LokationsTyp = BO4E.ENUM.Lokationstyp.MaLo,
-                Energieverbrauch = new List<BO4E.COM.Verbrauch>()
+                Energieverbrauch = new List<BO4E.COM.Verbrauch>
                 {
-                    new BO4E.COM.Verbrauch()
+                    new BO4E.COM.Verbrauch
                     {
                         Einheit = BO4E.ENUM.Mengeneinheit.KWH,
                         Wert = 123.456M,
@@ -43,7 +43,7 @@ namespace TestBO4EExtensions
                         Startdatum = new System.DateTime(2018,12,31,23,0,0,0, System.DateTimeKind.Utc),
                         Enddatum = new System.DateTime(2019,12,31,23,0,0,0,System.DateTimeKind.Utc)
                     },
-                    new BO4E.COM.Verbrauch()
+                    new BO4E.COM.Verbrauch
                     {
                         Einheit = BO4E.ENUM.Mengeneinheit.KWH,
                         Wert = 789.123M,

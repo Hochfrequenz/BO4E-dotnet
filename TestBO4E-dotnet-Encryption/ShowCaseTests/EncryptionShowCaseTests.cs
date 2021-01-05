@@ -16,14 +16,14 @@ namespace TestBO4E.ShowCaseTests
     [TestClass]
     public class EncryptionShowCaseTests
     {
-        protected static readonly Marktlokation maLo = new Marktlokation()
+        protected static readonly Marktlokation maLo = new Marktlokation
         {
             MarktlokationsId = "54321098765",
             Sparte = Sparte.STROM,
             Energierichtung = Energierichtung.AUSSP,
             Bilanzierungsmethode = Bilanzierungsmethode.SLP,
             Netzebene = Netzebene.NSP,
-            Lokationsadresse = new Adresse()
+            Lokationsadresse = new Adresse
             {
                 Postleitzahl = "82031",
                 Ort = "Grünwald",

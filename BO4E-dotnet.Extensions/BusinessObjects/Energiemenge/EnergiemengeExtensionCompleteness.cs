@@ -52,10 +52,10 @@ namespace BO4E.Extensions.BusinessObjects.Energiemenge
                     errorMessage = $"Cannot use autoconfigured method because there are {combis.Count}>1 distinct (wertermittlungsverfahren, obis, einheit) tuple present: {JsonConvert.SerializeObject(combis, new StringEnumConverter())}";
                     coverage = null;
                 }
-                return new CompletenessReport()
+                return new CompletenessReport
                 {
                     LokationsId = em.LokationsId,
-                    ReferenceTimeFrame = new Zeitraum()
+                    ReferenceTimeFrame = new Zeitraum
                     {
                         Startdatum = new DateTimeOffset(reference.Start),
                         Enddatum = new DateTimeOffset(reference.End)
@@ -135,7 +135,7 @@ namespace BO4E.Extensions.BusinessObjects.Energiemenge
                         limits = null;
                     }
                     var gaps = (new TimeGapCalculator<TimeRange>()).GetGaps(nonNullValues, limits: limits);
-                    result.Gaps = gaps.Select(gap => new CompletenessReport.BasicVerbrauch()
+                    result.Gaps = gaps.Select(gap => new CompletenessReport.BasicVerbrauch
                     {
                         Startdatum = gap.Start,
                         Enddatum = gap.End,
@@ -196,7 +196,7 @@ namespace BO4E.Extensions.BusinessObjects.Energiemenge
             }
             catch (InvalidOperationException)
             {
-                return new CompletenessReport()
+                return new CompletenessReport
                 {
                     Coverage = null,
                     LokationsId = em.LokationsId,

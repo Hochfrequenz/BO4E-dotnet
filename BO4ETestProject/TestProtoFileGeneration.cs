@@ -15,7 +15,7 @@ namespace TestBO4E
     [TestClass]
     public class TestProtoFileGeneration
     {
-        static readonly HashSet<Type> PROTO_SERIALIZABLE_TYPES = new HashSet<Type>()
+        static readonly HashSet<Type> PROTO_SERIALIZABLE_TYPES = new HashSet<Type>
         {
             typeof(Angebot),
             typeof(Ansprechpartner),

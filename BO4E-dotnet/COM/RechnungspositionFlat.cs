@@ -156,7 +156,7 @@ namespace BO4E.COM
         public Rechnungsposition ToRechnungsposition()
         {
             // todo: make this reflection based. this is pure pita. in fact the whole process of the flat structure is pita for sap
-            var result = new Rechnungsposition()
+            var result = new Rechnungsposition
             {
                 Positionsnummer = Positionsnummer,
                 LieferungVon = LieferungVon,
@@ -167,14 +167,14 @@ namespace BO4E.COM
 #pragma warning disable CS0618 // Type or member is obsolete
                 VertragskontoId = VertragskontoId,
 #pragma warning restore CS0618 // Type or member is obsolete
-                Einzelpreis = new Preis()
+                Einzelpreis = new Preis
                 {
                     Wert = PreisWert,
                     Einheit = PreisEinheit,
                     Bezugswert = PreisBezugswert,
                     Status = PreisStatus ?? Preisstatus.VORLAEUFIG // poor default choice
                 },
-                PositionsMenge = new Menge()
+                PositionsMenge = new Menge
                 {
                     Einheit = PositionsMengeEinheit ?? Mengeneinheit.KWH, // poor default choice
                     Wert = PositionsMengeWert ?? 0.0M, // poor default choice

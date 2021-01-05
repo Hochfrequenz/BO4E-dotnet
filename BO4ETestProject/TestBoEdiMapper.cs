@@ -21,24 +21,29 @@ namespace TestBO4E
         public TestBoEdiMapper()
         {
             // all in all very similar to EdiBoMapper...
-            expectedResults.Add("Netzebene", new Dictionary<string, string>() {
+            expectedResults.Add("Netzebene", new Dictionary<string, string>
+            {
                 {"NSP", "E06"}, // BO4E -> EDI (power)
                 {"E05", "E05"}, // EDI preserving
                 {"MD", "Y02" }, // EDI -> BO4E (gas)
             });
-            expectedResults.Add("Zaehlerauspraegung", new Dictionary<string, string>() {
+            expectedResults.Add("Zaehlerauspraegung", new Dictionary<string, string>
+            {
                 {"EINRICHTUNGSZAEHLER", "ERZ"},
                 {"ZWEIRICHTUNGSZAEHLER", "ZRZ"}
             });
-            expectedResults.Add("Rollencodetyp", new Dictionary<string, string>() {
+            expectedResults.Add("Rollencodetyp", new Dictionary<string, string>
+            {
                 {"BDEW", "293"},
                 {"DVGW", "332"}
             });
-            expectedResults.Add("Landescode", new Dictionary<string, string>() {
+            expectedResults.Add("Landescode", new Dictionary<string, string>
+            {
                 {"DE", "DE"},
                 {"AT", "AT"}
             });
-            expectedResults.Add("Wertermittlungsverfahren", new Dictionary<string, string>() {
+            expectedResults.Add("Wertermittlungsverfahren", new Dictionary<string, string>
+            {
                 {"MESSUNG", "220"}
             });
         }

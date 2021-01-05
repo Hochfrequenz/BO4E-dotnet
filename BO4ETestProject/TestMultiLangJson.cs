@@ -37,7 +37,7 @@ namespace TestBO4E
         [TestMethod]
         public void TestContractResolverSerialization()
         {
-            var mlb = new MultiLangBo()
+            var mlb = new MultiLangBo
             {
                 datum_deutsch = new DateTimeOffset(2018, 1, 1, 0, 0, 0, TimeSpan.Zero),
                 wert_deutsch = "Hallo Welt"
@@ -64,21 +64,21 @@ namespace TestBO4E
         [TestMethod]
         public void TestNestedContractResolverSerialization()
         {
-            var mlb = new MultiLangBo()
+            var mlb = new MultiLangBo
             {
                 datum_deutsch = new DateTimeOffset(2018, 1, 1, 0, 0, 0, TimeSpan.Zero),
                 wert_deutsch = "Hallo Welt",
-                intern = new NestedObject()
+                intern = new NestedObject
                 {
                     bool_deutsch = true,
                     intern_deutsch = "Hallo",
                     int_deutsch = 33
                 },
-                internList = new List<NestedObject>()
+                internList = new List<NestedObject>
                 {
-                    new NestedObject(){bool_deutsch=false,int_deutsch=10,intern_deutsch="internalList1"},
-                    new NestedObject(){bool_deutsch=false,int_deutsch=35,intern_deutsch="internalList2"},
-                    new NestedObject(){bool_deutsch=true,int_deutsch=1200,intern_deutsch="internalList3"},
+                    new NestedObject {bool_deutsch=false,int_deutsch=10,intern_deutsch="internalList1"},
+                    new NestedObject {bool_deutsch=false,int_deutsch=35,intern_deutsch="internalList2"},
+                    new NestedObject {bool_deutsch=true,int_deutsch=1200,intern_deutsch="internalList3"},
                 }
             };
             var settings = new JsonSerializerSettings

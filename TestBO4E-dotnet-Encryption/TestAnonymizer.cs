@@ -156,13 +156,13 @@ namespace TestBO4EExtensions.Encryption
         public void TestAnonymizeEnergiemengeHashing()
         {
             BO4E.StaticLogger.Logger = Microsoft.Extensions.Logging.Abstractions.NullLogger.Instance;
-            var em = new Energiemenge()
+            var em = new Energiemenge
             {
                 LokationsId = "DE0123456789012345678901234567890",
                 LokationsTyp = BO4E.ENUM.Lokationstyp.MeLo,
-                Energieverbrauch = new List<Verbrauch>()
-               {
-                   new Verbrauch()
+                Energieverbrauch = new List<Verbrauch>
+                {
+                   new Verbrauch
                    {
                        Wert = 123.456M,
                        Wertermittlungsverfahren=BO4E.ENUM.Wertermittlungsverfahren.MESSUNG,
@@ -206,13 +206,13 @@ namespace TestBO4EExtensions.Encryption
         public void TestAnonymizeEnergiemengeEncryptionRoundtrip()
         {
             BO4E.StaticLogger.Logger = Microsoft.Extensions.Logging.Abstractions.NullLogger.Instance;
-            var em = new Energiemenge()
+            var em = new Energiemenge
             {
                 LokationsId = "DE0123456789012345678901234567890",
                 LokationsTyp = BO4E.ENUM.Lokationstyp.MeLo,
-                Energieverbrauch = new List<Verbrauch>()
-               {
-                   new Verbrauch()
+                Energieverbrauch = new List<Verbrauch>
+                {
+                   new Verbrauch
                    {
                        Wert = 123.456M,
                        Wertermittlungsverfahren=BO4E.ENUM.Wertermittlungsverfahren.MESSUNG,
@@ -255,7 +255,7 @@ namespace TestBO4EExtensions.Encryption
         public void TestHashingDetectionForNonconformingString()
         {
             BO4E.StaticLogger.Logger = Microsoft.Extensions.Logging.Abstractions.NullLogger.Instance;
-            var em = new Energiemenge()
+            var em = new Energiemenge
             {
                 LokationsId = "asdkasldkmaslkdmas", // not identifyable as lokationsId
                 LokationsTyp = BO4E.ENUM.Lokationstyp.MeLo,
@@ -277,13 +277,13 @@ namespace TestBO4EExtensions.Encryption
         public void TestCompletenessReportHashing()
         {
             BO4E.StaticLogger.Logger = Microsoft.Extensions.Logging.Abstractions.NullLogger.Instance;
-            var cr = new CompletenessReport()
+            var cr = new CompletenessReport
             {
                 LokationsId = "56789012345",
                 Coverage = 0.9M,
                 Einheit = BO4E.ENUM.Mengeneinheit.MWH,
                 Wertermittlungsverfahren = BO4E.ENUM.Wertermittlungsverfahren.MESSUNG,
-                UserProperties = new Dictionary<string, JToken>()
+                UserProperties = new Dictionary<string, JToken>
                 {
                     { "anlage", "5012345678" },
                     { "profil", "123456" }
@@ -324,13 +324,13 @@ namespace TestBO4EExtensions.Encryption
         public void TestSameHashDifferentObjectTypes()
         {
             BO4E.StaticLogger.Logger = Microsoft.Extensions.Logging.Abstractions.NullLogger.Instance;
-            var em = new Energiemenge()
+            var em = new Energiemenge
             {
                 LokationsId = "DE0123456789012345678901234567890",
                 LokationsTyp = BO4E.ENUM.Lokationstyp.MeLo,
-                Energieverbrauch = new List<Verbrauch>()
-               {
-                   new Verbrauch()
+                Energieverbrauch = new List<Verbrauch>
+                {
+                   new Verbrauch
                    {
                        Wert = 123.456M,
                        Wertermittlungsverfahren=BO4E.ENUM.Wertermittlungsverfahren.MESSUNG,
@@ -343,7 +343,7 @@ namespace TestBO4EExtensions.Encryption
             };
             Assert.IsTrue(em.IsValid());
 
-            var melo = new Messlokation()
+            var melo = new Messlokation
             {
                 MesslokationsId = "DE0123456789012345678901234567890"
             };
@@ -362,7 +362,8 @@ namespace TestBO4EExtensions.Encryption
         public void TestCaginMeLos()
         {
             BO4E.StaticLogger.Logger = Microsoft.Extensions.Logging.Abstractions.NullLogger.Instance;
-            var result = new Dictionary<string, string>() {
+            var result = new Dictionary<string, string>
+            {
                 {"DE0004096816110000000000000022591", null },
                 {"DE0004946353300000000000001652988", null },
                 {"DE00746663128OF000000000000010156", null },
@@ -375,7 +376,7 @@ namespace TestBO4EExtensions.Encryption
             {
                 foreach (var plaintextMeLoId in result.Keys.ToList())
                 {
-                    var melo = new Messlokation()
+                    var melo = new Messlokation
                     {
                         MesslokationsId = plaintextMeLoId
                     };

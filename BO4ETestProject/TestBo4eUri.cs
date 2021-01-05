@@ -92,7 +92,7 @@ namespace TestBO4E
             Assert.IsNotNull(uri);
         }
 
-        private static readonly Dictionary<string, string> boNameResults = new Dictionary<string, string>()
+        private static readonly Dictionary<string, string> boNameResults = new Dictionary<string, string>
         {
             {"bo4e://Marktlokation/987654321098", "Marktlokation" },
             {"bo4e://hurzelasdanoafi/123456", null},
@@ -121,7 +121,7 @@ namespace TestBO4E
             }
         }
 
-        private static readonly Dictionary<Type, List<string>> boKeyNamesResults = new Dictionary<Type, List<string>>()
+        private static readonly Dictionary<Type, List<string>> boKeyNamesResults = new Dictionary<Type, List<string>>
         {
             {typeof(Marktlokation), new List<string>{"marktlokationsId"}},
             {typeof(Messlokation), new List<string>{"messlokationsId"} } //<-- should be the json property name if annotated 
@@ -138,7 +138,7 @@ namespace TestBO4E
             }
         }
 
-        private static readonly Dictionary<string, bool> validationResults = new Dictionary<string, bool>()
+        private static readonly Dictionary<string, bool> validationResults = new Dictionary<string, bool>
         {
             {"bo4e://Marktlokation/987654321098", true },
            // {"   bo4e://Leerzeichen/987654321098", false },

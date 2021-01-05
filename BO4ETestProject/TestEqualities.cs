@@ -23,14 +23,14 @@ namespace TestBO4E
             Assert.AreEqual(v1.GetHashCode(), v2.GetHashCode());
 
 
-            v1 = new Verbrauch()
+            v1 = new Verbrauch
             {
                 Einheit = Mengeneinheit.KWH,
                 Obiskennzahl = "1-1:1.8.0",
                 Startdatum = new DateTime(2019, 1, 1, 0, 0, 0, DateTimeKind.Utc),
                 Enddatum = new DateTime(2020, 1, 1, 0, 0, 0, DateTimeKind.Utc)
             };
-            v2 = new Verbrauch()
+            v2 = new Verbrauch
             {
                 Einheit = Mengeneinheit.KWH,
                 Obiskennzahl = "1-1:1.8.0",

@@ -19,7 +19,7 @@ namespace BO4E.Extensions.BusinessObjects.Benachrichtigung
         /// <returns></returns>
         public static bool Has(this BO4E.BO.Benachrichtigung b, string key, string value)
         {
-            return Has(b, new BO4E.COM.GenericStringStringInfo()
+            return Has(b, new BO4E.COM.GenericStringStringInfo
             {
                 KeyColumn = key,
                 Value = value

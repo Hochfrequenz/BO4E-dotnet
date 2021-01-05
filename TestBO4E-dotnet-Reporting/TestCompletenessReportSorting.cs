@@ -10,28 +10,28 @@ namespace TestBO4E.Reporting
         [TestMethod]
         public void TestStartdatumSorting()
         {
-            var cr1 = new BO4E.Reporting.CompletenessReport()
+            var cr1 = new BO4E.Reporting.CompletenessReport
             {
-                ReferenceTimeFrame = new BO4E.COM.Zeitraum()
+                ReferenceTimeFrame = new BO4E.COM.Zeitraum
                 {
                     Startdatum = new System.DateTime(2001, 1, 1, 0, 0, 0, System.DateTimeKind.Utc)
                 }
             };
-            var cr2 = new BO4E.Reporting.CompletenessReport()
+            var cr2 = new BO4E.Reporting.CompletenessReport
             {
-                ReferenceTimeFrame = new BO4E.COM.Zeitraum()
+                ReferenceTimeFrame = new BO4E.COM.Zeitraum
                 {
                     Startdatum = new System.DateTime(2002, 1, 1, 0, 0, 0, System.DateTimeKind.Utc)
                 }
             };
-            var cr3 = new BO4E.Reporting.CompletenessReport()
+            var cr3 = new BO4E.Reporting.CompletenessReport
             {
-                ReferenceTimeFrame = new BO4E.COM.Zeitraum()
+                ReferenceTimeFrame = new BO4E.COM.Zeitraum
                 {
                     Startdatum = new System.DateTime(2003, 1, 1, 0, 0, 0, System.DateTimeKind.Utc)
                 }
             };
-            var crList = new List<BO4E.Reporting.CompletenessReport>() { cr2, cr3, cr1 };
+            var crList = new List<BO4E.Reporting.CompletenessReport> { cr2, cr3, cr1 };
             // before sorting
             Assert.IsTrue(crList.First().ReferenceTimeFrame.Startdatum.Value.Year == 2002);
             Assert.IsTrue(crList[1].ReferenceTimeFrame.Startdatum.Value.Year == 2003);
@@ -45,9 +45,9 @@ namespace TestBO4E.Reporting
 
             var crNull = new BO4E.Reporting.CompletenessReport();
             crList.Add(crNull);
-            var cr0 = new BO4E.Reporting.CompletenessReport()
+            var cr0 = new BO4E.Reporting.CompletenessReport
             {
-                ReferenceTimeFrame = new BO4E.COM.Zeitraum()
+                ReferenceTimeFrame = new BO4E.COM.Zeitraum
                 {
                     Startdatum = new System.DateTime(1999, 1, 1, 0, 0, 0, System.DateTimeKind.Utc)
                 }

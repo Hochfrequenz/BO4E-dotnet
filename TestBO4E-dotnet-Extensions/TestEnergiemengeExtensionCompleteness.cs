@@ -133,7 +133,7 @@ namespace TestBO4EExtensions
                 json = JsonConvert.DeserializeObject<JObject>(jsonString);
             }
             var em = (Energiemenge)BoMapper.MapObject(JObject.FromObject(json["input"]), LenientParsing.STRICT);
-            var cr = em.GetCompletenessReport(new TimeRange()
+            var cr = em.GetCompletenessReport(new TimeRange
             {
                 Start = new DateTimeOffset(2017, 12, 31, 23, 0, 0, 0, TimeSpan.Zero).UtcDateTime,
                 End = new DateTimeOffset(2018, 1, 31, 23, 0, 0, 0, TimeSpan.Zero).UtcDateTime
@@ -141,7 +141,7 @@ namespace TestBO4EExtensions
             Assert.AreEqual(1.0M, cr.Coverage.Value);
             Assert.AreEqual(0, cr.Gaps.Count());
 
-            var dailies = em.GetDailyCompletenessReports(new TimeRange()
+            var dailies = em.GetDailyCompletenessReports(new TimeRange
             {
                 Start = new DateTimeOffset(2017, 12, 31, 23, 0, 0, 0, TimeSpan.Zero).UtcDateTime,
                 End = new DateTimeOffset(2018, 1, 2, 23, 0, 0, 0, TimeSpan.Zero).UtcDateTime
@@ -156,13 +156,13 @@ namespace TestBO4EExtensions
         [TestMethod]
         public void TestFirstLastGap()
         {
-            var em = new Energiemenge()
+            var em = new Energiemenge
             {
                 LokationsId = "DE123455",
                 LokationsTyp = Lokationstyp.MeLo,
-                Energieverbrauch = new List<Verbrauch>()
+                Energieverbrauch = new List<Verbrauch>
                 {
-                    new Verbrauch()
+                    new Verbrauch
                     {
                         Obiskennzahl="1234",
                         Wert=123.456M,
@@ -170,7 +170,7 @@ namespace TestBO4EExtensions
                         Startdatum = new DateTimeOffset(2019,1,1,0,0,0,TimeSpan.Zero).UtcDateTime,
                         Enddatum = new DateTimeOffset(2019,1,4,0,0,0,TimeSpan.Zero).UtcDateTime,
                     },
-                    new Verbrauch()
+                    new Verbrauch
                     {
                         Obiskennzahl="1234",
                         Wert=123.456M,
@@ -192,7 +192,7 @@ namespace TestBO4EExtensions
         [TestMethod]
         public void TestNullableCoverage()
         {
-            var em1 = new Energiemenge()
+            var em1 = new Energiemenge
             {
                 LokationsId = "DE123456789DieseEmhatkeineVerbräuche",
                 LokationsTyp = Lokationstyp.MeLo,
@@ -203,7 +203,7 @@ namespace TestBO4EExtensions
             Assert.IsNull(cr1.Coverage);
             JsonConvert.SerializeObject(cr1); // must _not_ throw exception
 
-            var em2 = new Energiemenge()
+            var em2 = new Energiemenge
             {
                 LokationsId = "54321012345DieseEmhatkeineVerbräuche",
                 LokationsTyp = Lokationstyp.MeLo,
@@ -332,7 +332,7 @@ namespace TestBO4EExtensions
                 dateTime = dateTime.AddMinutes(15);
                 var endDateTime = dateTime.AddMinutes(15);
 
-                listvb.Add(new Verbrauch() { Startdatum = dateTime, Enddatum = endDateTime, Einheit = Mengeneinheit.JAHR, Wert = 12 });
+                listvb.Add(new Verbrauch { Startdatum = dateTime, Enddatum = endDateTime, Einheit = Mengeneinheit.JAHR, Wert = 12 });
                 dateTime = endDateTime;
             }
             em.Energieverbrauch = listvb;
@@ -375,9 +375,9 @@ namespace TestBO4EExtensions
                 Assert.IsTrue(CentralEuropeStandardTime.CENTRAL_EUROPE_STANDARD_TIME.IsDaylightSavingTime(localEnd));
             }
 
-            var verbrauchSlices = new List<TimeRange>()
+            var verbrauchSlices = new List<TimeRange>
             {
-                new TimeRange()
+                new TimeRange
                 {
                     Start = utcStart.UtcDateTime,
                     End = utcStart.AddHours(1).UtcDateTime
@@ -385,19 +385,19 @@ namespace TestBO4EExtensions
             };
             while (verbrauchSlices.Last().End < utcEnd)
             {
-                verbrauchSlices.Add(new TimeRange()
+                verbrauchSlices.Add(new TimeRange
                 {
                     Start = verbrauchSlices.Last().Start.AddHours(1),
                     End = verbrauchSlices.Last().End.AddHours(1),
                 });
             }
             Assert.AreEqual(2 * 24 - 1, verbrauchSlices.Count);
-            var em = new Energiemenge()
+            var em = new Energiemenge
             {
                 LokationsId = "MeinUnitTest123",
                 LokationsTyp = Lokationstyp.MeLo,
-                Energieverbrauch = verbrauchSlices.Select(vs => new Verbrauch()
-                {
+                Energieverbrauch = verbrauchSlices.Select(vs => new Verbrauch
+                    {
                     Startdatum = vs.Start,
                     Enddatum = vs.End,
                     Einheit = Mengeneinheit.KWH,
@@ -427,7 +427,7 @@ namespace TestBO4EExtensions
             Assert.AreEqual(DateTimeKind.Unspecified, resultLocal.Kind);
 
             Assert.AreEqual(23, (new TimeRange(utcDt, resultUtc)).Duration.TotalHours);
-            Assert.AreEqual(23, (new TimeRange()
+            Assert.AreEqual(23, (new TimeRange
             {
                 Start = TimeZoneInfo.ConvertTimeToUtc(DateTime.SpecifyKind(localDt, DateTimeKind.Unspecified), CentralEuropeStandardTime.CENTRAL_EUROPE_STANDARD_TIME),
                 End = TimeZoneInfo.ConvertTimeToUtc(DateTime.SpecifyKind(resultLocal, DateTimeKind.Unspecified), CentralEuropeStandardTime.CENTRAL_EUROPE_STANDARD_TIME)
@@ -447,7 +447,7 @@ namespace TestBO4EExtensions
             Assert.AreEqual(DateTimeKind.Unspecified, resultLocal.Kind);
 
             Assert.AreEqual(25, (new TimeRange(utcDt, resultUtc)).Duration.TotalHours);
-            Assert.AreEqual(25, (new TimeRange()
+            Assert.AreEqual(25, (new TimeRange
             {
                 Start = TimeZoneInfo.ConvertTimeToUtc(DateTime.SpecifyKind(localDt, DateTimeKind.Unspecified), CentralEuropeStandardTime.CENTRAL_EUROPE_STANDARD_TIME),
                 End = TimeZoneInfo.ConvertTimeToUtc(DateTime.SpecifyKind(resultLocal, DateTimeKind.Unspecified), CentralEuropeStandardTime.CENTRAL_EUROPE_STANDARD_TIME)
@@ -467,7 +467,7 @@ namespace TestBO4EExtensions
             Assert.AreEqual(DateTimeKind.Unspecified, resultLocal.Kind);
 
             Assert.AreEqual(24, (new TimeRange(utcDt, resultUtc)).Duration.TotalHours);
-            Assert.AreEqual(24, (new TimeRange()
+            Assert.AreEqual(24, (new TimeRange
             {
                 Start = TimeZoneInfo.ConvertTimeToUtc(DateTime.SpecifyKind(localDt, DateTimeKind.Unspecified), CentralEuropeStandardTime.CENTRAL_EUROPE_STANDARD_TIME),
                 End = TimeZoneInfo.ConvertTimeToUtc(DateTime.SpecifyKind(resultLocal, DateTimeKind.Unspecified), CentralEuropeStandardTime.CENTRAL_EUROPE_STANDARD_TIME)

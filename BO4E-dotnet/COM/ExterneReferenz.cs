@@ -79,7 +79,7 @@ namespace BO4E.COM
             }
             if (extReferences == null)
             {
-                return new List<ExterneReferenz>() { extRef };
+                return new List<ExterneReferenz> { extRef };
             }
             else if (extReferences.Any() && extReferences.TryGetExterneReferenz(extRef.ExRefName, out var existingRefWert))
             {

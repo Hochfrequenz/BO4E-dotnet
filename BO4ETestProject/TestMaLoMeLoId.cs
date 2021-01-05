@@ -38,7 +38,7 @@ namespace TestBO4E
         [TestMethod]
         public void TestMeLoValidity()
         {
-            var malo = new Marktlokation()
+            var malo = new Marktlokation
             {
                 MarktlokationsId = "1235678901",
                 Sparte = Sparte.STROM,

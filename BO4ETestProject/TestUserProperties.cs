@@ -51,7 +51,7 @@ namespace TestBO4E
         [TestMethod]
         public void TestFlags()
         {
-            var melo = new Messlokation()
+            var melo = new Messlokation
             {
                 MesslokationsId = "DE0123456789012345678901234567890",
                 Sparte = BO4E.ENUM.Sparte.STROM

@@ -786,7 +786,7 @@ namespace BO4E.Extensions.BusinessObjects.Energiemenge
         {
             if (em.Energieverbrauch == null)
             {
-                return new List<BO.Energiemenge>() { em };
+                return new List<BO.Energiemenge> { em };
             }
             else
             {

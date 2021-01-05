@@ -81,7 +81,8 @@ namespace TestBO4E
             }
         }
 
-        private static readonly HashSet<Type> NO_KEYS_WHITELIST = new HashSet<Type>() {
+        private static readonly HashSet<Type> NO_KEYS_WHITELIST = new HashSet<Type>
+        {
             {
                 typeof(Kosten)
             } };

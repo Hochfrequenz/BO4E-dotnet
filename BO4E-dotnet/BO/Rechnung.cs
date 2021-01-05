@@ -199,7 +199,7 @@ namespace BO4E.BO
 
             Rechnungsnummer = (infoToken["opbel"] ?? infoToken["OPBEL"]).Value<string>();
             Rechnungsdatum = new DateTimeOffset(TimeZoneInfo.ConvertTime((infoToken["bldat"] ?? infoToken["BLDAT"]).Value<DateTime>(), CentralEuropeStandardTime.CENTRAL_EUROPE_STANDARD_TIME, TimeZoneInfo.Utc));
-            Rechnungsperiode = new Zeitraum()
+            Rechnungsperiode = new Zeitraum
             {
                 Startdatum = new DateTimeOffset(TimeZoneInfo.ConvertTime((tErdzToken[0]["ab"] ?? tErdzToken[0]["AB"]).Value<DateTime>(), CentralEuropeStandardTime.CENTRAL_EUROPE_STANDARD_TIME, TimeZoneInfo.Utc)),
                 Enddatum = new DateTimeOffset(TimeZoneInfo.ConvertTime((tErdzToken[0]["bis"] ?? tErdzToken[0]["BIS"]).Value<DateTime>(), CentralEuropeStandardTime.CENTRAL_EUROPE_STANDARD_TIME, TimeZoneInfo.Utc))
@@ -215,7 +215,7 @@ namespace BO4E.BO
 
             var rpList = new List<Rechnungsposition>();
             var stList = new List<Steuerbetrag>();
-            Vorausgezahlt = new Betrag() { Waehrung = waehrungscode, Wert = 0 };
+            Vorausgezahlt = new Betrag { Waehrung = waehrungscode, Wert = 0 };
             foreach (var jrp in tErdzToken)
             {
                 var belzart = (jrp["belzart"] ?? jrp["BELZART"]).ToString();
@@ -236,9 +236,9 @@ namespace BO4E.BO
                         rp.Positionstext = "PAUSCHALE";
                         mengeneinheit = Mengeneinheit.JAHR;
                         zeitbezogeneMengeWert = (jrp["preisbtr"] ?? jrp["PREISBTR"]).Value<decimal>();
-                        rp.ZeitbezogeneMenge = new Menge() { Einheit = Mengeneinheit.TAG, Wert = zeitbezogeneMengeWert };
+                        rp.ZeitbezogeneMenge = new Menge { Einheit = Mengeneinheit.TAG, Wert = zeitbezogeneMengeWert };
 
-                        rp.Einzelpreis = new Preis()
+                        rp.Einzelpreis = new Preis
                         {
                             Wert = decimal.Parse((jrp["zeitant"] ?? jrp["ZEITANT"]).ToString()),
                             Einheit = waehrungseinheit,
@@ -263,7 +263,7 @@ namespace BO4E.BO
                         if ((jrp["timbasis"] ?? jrp["TIMBASIS"]).Value<string>() == "365")
                         {
                             mengeneinheit = Mengeneinheit.JAHR;
-                            rp.ZeitbezogeneMenge = new Menge() { Einheit = Mengeneinheit.TAG, Wert = zeitbezogeneMengeWert };
+                            rp.ZeitbezogeneMenge = new Menge { Einheit = Mengeneinheit.TAG, Wert = zeitbezogeneMengeWert };
                         }
                     }
                     else
@@ -275,7 +275,7 @@ namespace BO4E.BO
                     {
                         if ((jrp["preisbtr"] ?? jrp["PREISBTR"]) != null)
                         {
-                            rp.Einzelpreis = new Preis()
+                            rp.Einzelpreis = new Preis
                             {
                                 Wert = decimal.Parse((jrp["preisbtr"] ?? jrp["PREISBTR"]).ToString()),
                                 Einheit = waehrungseinheit,
@@ -283,7 +283,7 @@ namespace BO4E.BO
                             };
                         }
                         else
-                            rp.Einzelpreis = new Preis()
+                            rp.Einzelpreis = new Preis
                             {
                                 Wert = 0,
                                 Einheit = waehrungseinheit,
@@ -309,7 +309,7 @@ namespace BO4E.BO
 
                     if ((jrp["iAbrmenge"] ?? jrp["I_ABRMENGE"]) != null)
                     {
-                        rp.PositionsMenge = new Menge()
+                        rp.PositionsMenge = new Menge
                         {
                             Wert = (jrp["iAbrmenge"] ?? jrp["I_ABRMENGE"]).Value<decimal>(),
                             Einheit = mengeneinheit
@@ -320,7 +320,7 @@ namespace BO4E.BO
                     {
                         if (belzart != "SUBT" && belzart != "CITAX")
                         {
-                            rp.TeilsummeNetto = new Betrag()
+                            rp.TeilsummeNetto = new Betrag
                             {
                                 Wert = (jrp["nettobtr"] ?? jrp["NETTOBTR"]).Value<decimal>(),
                                 Waehrung = waehrungscode
@@ -328,12 +328,12 @@ namespace BO4E.BO
                         }
                         else
                         {
-                            rp.TeilsummeNetto = new Betrag()
+                            rp.TeilsummeNetto = new Betrag
                             {
                                 Wert = (jrp["sbasw"] ?? jrp["SBASW"]).Value<decimal>(),
                                 Waehrung = waehrungscode
                             };
-                            var steuerbetrag = new Steuerbetrag()
+                            var steuerbetrag = new Steuerbetrag
                             {
                                 Basiswert = (jrp["sbasw"] ?? jrp["SBASW"]).Value<decimal>(),
                                 Steuerwert = (jrp["sbetw"] ?? jrp["SBETW"]).Value<decimal>(),
@@ -364,7 +364,7 @@ namespace BO4E.BO
                         }
                         if ((jrp["nettobtr"] ?? jrp["NETTOBTR"]).Value<decimal>() <= 0)
                         {
-                            Vorausgezahlt = new Betrag() { Waehrung = waehrungscode, Wert = (jrp["nettobtr"] ?? jrp["NETTOBTR"]).Value<decimal>() };
+                            Vorausgezahlt = new Betrag { Waehrung = waehrungscode, Wert = (jrp["nettobtr"] ?? jrp["NETTOBTR"]).Value<decimal>() };
                         }
                     }
 
@@ -380,7 +380,7 @@ namespace BO4E.BO
                         }
                         else
                         {
-                            var steuerbetrag = new Steuerbetrag()
+                            var steuerbetrag = new Steuerbetrag
                             {
                                 Basiswert = (jrp["sbasw"] ?? jrp["SBASW"]).Value<decimal>(),
                                 Steuerwert = (jrp["sbetw"] ?? jrp["SBETW"]).Value<decimal>(),
@@ -417,18 +417,18 @@ namespace BO4E.BO
             Rechnungspositionen = rpList;
             gBrutto = gNetto + gSteure;
             var zZahlen = gBrutto - vGezahlt - rBrutto;
-            Gesamtnetto = new Betrag() { Wert = gNetto, Waehrung = waehrungscode };
-            Gesamtsteuer = new Betrag() { Wert = gSteure, Waehrung = waehrungscode };
-            Gesamtbrutto = new Betrag() { Wert = gBrutto, Waehrung = waehrungscode };
-            Zuzahlen = new Betrag() { Wert = zZahlen, Waehrung = waehrungscode };
+            Gesamtnetto = new Betrag { Wert = gNetto, Waehrung = waehrungscode };
+            Gesamtsteuer = new Betrag { Wert = gSteure, Waehrung = waehrungscode };
+            Gesamtbrutto = new Betrag { Wert = gBrutto, Waehrung = waehrungscode };
+            Zuzahlen = new Betrag { Wert = zZahlen, Waehrung = waehrungscode };
 
-            Rechnungsersteller = new Geschaeftspartner()
+            Rechnungsersteller = new Geschaeftspartner
             {
-                Geschaeftspartnerrolle = new List<Geschaeftspartnerrolle>() { Geschaeftspartnerrolle.LIEFERANT },
+                Geschaeftspartnerrolle = new List<Geschaeftspartnerrolle> { Geschaeftspartnerrolle.LIEFERANT },
                 Gewerbekennzeichnung = true,
                 Anrede = Anrede.HERR,
                 Name1 = "Mein super Lieferant",
-                Partneradresse = new Adresse()
+                Partneradresse = new Adresse
                 {
                     Strasse = "Max-Plank-Strasse",
                     Hausnummer = "8",
@@ -437,14 +437,14 @@ namespace BO4E.BO
                     Ort = "Walldorf"
                 }
             };
-            Rechnungsempfaenger = new Geschaeftspartner()
+            Rechnungsempfaenger = new Geschaeftspartner
             {
-                Geschaeftspartnerrolle = new List<Geschaeftspartnerrolle>() { Geschaeftspartnerrolle.KUNDE },
+                Geschaeftspartnerrolle = new List<Geschaeftspartnerrolle> { Geschaeftspartnerrolle.KUNDE },
                 Gewerbekennzeichnung = false,
                 Anrede = Anrede.HERR,
                 Name1 = "Lustig",
                 Name2 = "Peter",
-                Partneradresse = new Adresse()
+                Partneradresse = new Adresse
                 {
                     Strasse = "Magnusstraße",
                     Hausnummer = "20",

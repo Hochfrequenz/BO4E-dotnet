@@ -17,12 +17,12 @@ namespace TestBO4E.Reporting
         [TestMethod]
         public void TestCompletenessReportToCsv()
         {
-            var cr = new CompletenessReport()
+            var cr = new CompletenessReport
             {
                 LokationsId = "DE12345",
                 Coverage = 0.87M, // 87%
                 Wertermittlungsverfahren = BO4E.ENUM.Wertermittlungsverfahren.PROGNOSE,
-                ReferenceTimeFrame = new BO4E.COM.Zeitraum()
+                ReferenceTimeFrame = new BO4E.COM.Zeitraum
                 {
                     Startdatum = new DateTimeOffset(2019, 1, 1, 0, 0, 0, TimeSpan.Zero),
                     Enddatum = new DateTimeOffset(2019, 3, 1, 0, 0, 0, TimeSpan.Zero)
@@ -35,10 +35,10 @@ namespace TestBO4E.Reporting
             // reihenfolge
             var reihenfolge = new List<Dictionary<string, string>>
             {
-                new Dictionary<string, string>() { ["LokationsId"] = "messlokationsId" },
-                new Dictionary<string, string>() { ["Coverage"] = "Newcoverage" },
-                new Dictionary<string, string>() { ["Zeitraum.Startdatum"] = "time.startdatum" },
-                new Dictionary<string, string>() { ["Zeitraum.Enddatum"] = "time.enddatum" }
+                new Dictionary<string, string> { ["LokationsId"] = "messlokationsId" },
+                new Dictionary<string, string> { ["Coverage"] = "Newcoverage" },
+                new Dictionary<string, string> { ["Zeitraum.Startdatum"] = "time.startdatum" },
+                new Dictionary<string, string> { ["Zeitraum.Enddatum"] = "time.enddatum" }
             };
 
             //string JSONdata = "{'completenessZfa':[{'lokationsId':'lokationsId'},{'coverage':'coverage'},{'Zeitraum.einheit':'einheit'},{'Zeitraum.dauer':'dauer'},{'Zeitraum.startdatum':'startdatum'},{'Zeitraum.enddatum':'enddatum'},{'obiskennzahl':'obiskennzahl'},{'einheit':'einheit'},{'wertermittlungsverfahren':'wertermittlungsverfahren'},{'startdatum':'Verbrauch.startdatum'},{'enddatum':'Verbrauch.enddatum'},{'wert':'Verbrauch.wert'},{'headerLine':'1'}]}";
@@ -57,19 +57,19 @@ namespace TestBO4E.Reporting
 
             cr.Values = new List<CompletenessReport.BasicVerbrauch>
             {
-                new CompletenessReport.BasicVerbrauch()
+                new CompletenessReport.BasicVerbrauch
                 {
                     Wert = 17,
                     Startdatum = new DateTimeOffset(2019,1,1,0,0,0, TimeSpan.Zero).UtcDateTime,
                     Enddatum = new DateTimeOffset(2019,1,2,0,0,0, TimeSpan.Zero).UtcDateTime
                 },
-                new CompletenessReport.BasicVerbrauch()
+                new CompletenessReport.BasicVerbrauch
                 {
                     Wert = 21,
                     Startdatum = new DateTimeOffset(2019,1,7,0,0,0, TimeSpan.Zero).UtcDateTime,
                     Enddatum = new DateTimeOffset(2019,1,8,0,0,0, TimeSpan.Zero).UtcDateTime
                 },
-                new CompletenessReport.BasicVerbrauch()
+                new CompletenessReport.BasicVerbrauch
                 {
                     Wert = 35,
                     Startdatum = new DateTimeOffset(2019,1,12,0,0,0, TimeSpan.Zero).UtcDateTime,
@@ -77,9 +77,9 @@ namespace TestBO4E.Reporting
                 }
             };
 
-            reihenfolge.Add(new Dictionary<string, string>() { ["Wert"] = "V.wert" });
-            reihenfolge.Add(new Dictionary<string, string>() { ["Startdatum"] = "V.startdatum" });
-            reihenfolge.Add(new Dictionary<string, string>() { ["Enddatum"] = "V.enddatum" });
+            reihenfolge.Add(new Dictionary<string, string> { ["Wert"] = "V.wert" });
+            reihenfolge.Add(new Dictionary<string, string> { ["Startdatum"] = "V.startdatum" });
+            reihenfolge.Add(new Dictionary<string, string> { ["Enddatum"] = "V.enddatum" });
 
             var multiplicityResult = cr.ToCsv(lineTerminator: Environment.NewLine, reihenfolge: reihenfolge);
             Assert.AreEqual(2 + cr.Values.Count, new List<string>(multiplicityResult.Split(Environment.NewLine)).Count);
@@ -168,12 +168,12 @@ namespace TestBO4E.Reporting
         [TestMethod]
         public void TestCompletenessReportMitGapToCsv()
         {
-            var cr = new CompletenessReport()
+            var cr = new CompletenessReport
             {
                 LokationsId = "DE12345",
                 Coverage = 0.87M, // 87%
                 Wertermittlungsverfahren = BO4E.ENUM.Wertermittlungsverfahren.PROGNOSE,
-                ReferenceTimeFrame = new BO4E.COM.Zeitraum()
+                ReferenceTimeFrame = new BO4E.COM.Zeitraum
                 {
                     Startdatum = new DateTimeOffset(2019, 1, 1, 0, 0, 0, TimeSpan.Zero),
                     Enddatum = new DateTimeOffset(2019, 3, 1, 0, 0, 0, TimeSpan.Zero)
@@ -181,19 +181,19 @@ namespace TestBO4E.Reporting
             };
             cr.Values = new List<CompletenessReport.BasicVerbrauch>
             {
-                new CompletenessReport.BasicVerbrauch()
+                new CompletenessReport.BasicVerbrauch
                 {
                     Wert = 17,
                     Startdatum = new DateTimeOffset(2019,1,1,0,0,0, TimeSpan.Zero).UtcDateTime,
                     Enddatum = new DateTimeOffset(2019,1,2,0,0,0, TimeSpan.Zero).UtcDateTime
                 },
-                new CompletenessReport.BasicVerbrauch()
+                new CompletenessReport.BasicVerbrauch
                 {
                     Wert = 21,
                     Startdatum = new DateTimeOffset(2019,1,7,0,0,0, TimeSpan.Zero).UtcDateTime,
                     Enddatum = new DateTimeOffset(2019,1,8,0,0,0, TimeSpan.Zero).UtcDateTime
                 },
-                new CompletenessReport.BasicVerbrauch()
+                new CompletenessReport.BasicVerbrauch
                 {
                     Wert = 35,
                     Startdatum = new DateTimeOffset(2019,1,12,0,0,0, TimeSpan.Zero).UtcDateTime,
@@ -202,19 +202,19 @@ namespace TestBO4E.Reporting
             };
             cr.Gaps = new List<CompletenessReport.BasicVerbrauch>
             {
-                new CompletenessReport.BasicVerbrauch()
+                new CompletenessReport.BasicVerbrauch
                 {
                     Wert = 0,
                     Startdatum = new DateTimeOffset(2017,1,1,0,0,0, TimeSpan.Zero).UtcDateTime,
                     Enddatum = new DateTimeOffset(2017,1,2,0,0,0, TimeSpan.Zero).UtcDateTime
                 },
-                new CompletenessReport.BasicVerbrauch()
+                new CompletenessReport.BasicVerbrauch
                 {
                     Wert = 0,
                     Startdatum = new DateTimeOffset(2017,1,7,0,0,0, TimeSpan.Zero).UtcDateTime,
                     Enddatum = new DateTimeOffset(2017,1,8,0,0,0, TimeSpan.Zero).UtcDateTime
                 },
-                new CompletenessReport.BasicVerbrauch()
+                new CompletenessReport.BasicVerbrauch
                 {
                     Wert = 0,
                     Startdatum = new DateTimeOffset(2017,1,12,0,0,0, TimeSpan.Zero).UtcDateTime,
@@ -228,12 +228,12 @@ namespace TestBO4E.Reporting
         [TestMethod]
         public void TestCompletenessReportToCsvExceptions()
         {
-            var cr = new CompletenessReport()
+            var cr = new CompletenessReport
             {
                 LokationsId = "DE12345",
                 Coverage = 0.87M, // 87%
                 Wertermittlungsverfahren = BO4E.ENUM.Wertermittlungsverfahren.PROGNOSE,
-                ReferenceTimeFrame = new BO4E.COM.Zeitraum()
+                ReferenceTimeFrame = new BO4E.COM.Zeitraum
                 {
                     Startdatum = new DateTimeOffset(2019, 1, 1, 0, 0, 0, TimeSpan.Zero),
                     Enddatum = new DateTimeOffset(2019, 3, 1, 0, 0, 0, TimeSpan.Zero)
@@ -243,13 +243,13 @@ namespace TestBO4E.Reporting
             // reihenfolge
             var reihenfolge = new List<Dictionary<string, string>>
             {
-                new Dictionary<string, string>() { ["LokationsId"] = "messlokationsId" },
-                new Dictionary<string, string>() { ["Coverage"] = "Newcoverage" },
-                new Dictionary<string, string>() { ["Zeitraum.Startdatum"] = "time.startdatum" },
-                new Dictionary<string, string>() { ["Zeitraum.Enddatum"] = "time.enddatum" },
-                new Dictionary<string, string>() { ["Wert"] = null },
-                new Dictionary<string, string>() { ["Startdatum"] = "V.startdatum" },
-                new Dictionary<string, string>() { ["Enddatum"] = "V.enddatum" },
+                new Dictionary<string, string> { ["LokationsId"] = "messlokationsId" },
+                new Dictionary<string, string> { ["Coverage"] = "Newcoverage" },
+                new Dictionary<string, string> { ["Zeitraum.Startdatum"] = "time.startdatum" },
+                new Dictionary<string, string> { ["Zeitraum.Enddatum"] = "time.enddatum" },
+                new Dictionary<string, string> { ["Wert"] = null },
+                new Dictionary<string, string> { ["Startdatum"] = "V.startdatum" },
+                new Dictionary<string, string> { ["Enddatum"] = "V.enddatum" },
                 null
             };
             var newResult = string.Empty;
@@ -260,14 +260,14 @@ namespace TestBO4E.Reporting
             // reihenfolge
             var reihenfolge2 = new List<Dictionary<string, string>>
             {
-                new Dictionary<string, string>() { ["lokationsId"] = "messlokationsId" },
-                new Dictionary<string, string>() { ["coverage"] = "Newcoverage" },
-                new Dictionary<string, string>() { ["Zeitraum.startdatum"] = "time.startdatum" },
-                new Dictionary<string, string>() { ["Zeitraum.enddatum"] = "time.enddatum" },
-                new Dictionary<string, string>() { ["wert"] = "V.wert" },
-                new Dictionary<string, string>() { ["startdatum"] = "V.startdatum" },
-                new Dictionary<string, string>() { ["enddatum"] = "V.enddatum" },
-                new Dictionary<string, string>() { ["asdasd"] = "000" }
+                new Dictionary<string, string> { ["lokationsId"] = "messlokationsId" },
+                new Dictionary<string, string> { ["coverage"] = "Newcoverage" },
+                new Dictionary<string, string> { ["Zeitraum.startdatum"] = "time.startdatum" },
+                new Dictionary<string, string> { ["Zeitraum.enddatum"] = "time.enddatum" },
+                new Dictionary<string, string> { ["wert"] = "V.wert" },
+                new Dictionary<string, string> { ["startdatum"] = "V.startdatum" },
+                new Dictionary<string, string> { ["enddatum"] = "V.enddatum" },
+                new Dictionary<string, string> { ["asdasd"] = "000" }
             };
             Assert.ThrowsException<ArgumentException>(() => cr.ToCsv(';', true, Environment.NewLine, reihenfolge2));
             Assert.AreEqual(newResult, "");

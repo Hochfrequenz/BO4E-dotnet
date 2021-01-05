@@ -35,14 +35,14 @@ namespace BO4E.Extensions.BusinessObjects.Energiemenge
             IList<ITimeRange> result = new List<ITimeRange>();
             if (!overallTimeRange.IsMoment)
             {
-                result.Add(new TimeRange()
+                result.Add(new TimeRange
                 {
                     Start = overallTimeRange.Start,
                     End = overallTimeRange.Start.AddDaysDST(1)
                 });
                 while (result.Last().End < overallTimeRange.End)
                 {
-                    result.Add(new TimeRange()
+                    result.Add(new TimeRange
                     {
                         Start = result.Last().Start.AddDaysDST(1),
                         End = result.Last().End.AddDaysDST(1)
@@ -112,7 +112,7 @@ namespace BO4E.Extensions.BusinessObjects.Energiemenge
             {
                 var initialStart = new DateTime(localStart.Year, localStart.Month, 1, 0, 0, 0, DateTimeKind.Unspecified);
                 var initialEnd = initialStart.AddMonths(1);
-                result.Add(new TimeRange()
+                result.Add(new TimeRange
                 {
                     Start = initialStart,
                     End = initialEnd
@@ -120,7 +120,7 @@ namespace BO4E.Extensions.BusinessObjects.Energiemenge
                 while (result.Last().End < overallTimeRange.End)
                 {
                     var sliceStart = result.Last().Start.AddMonths(1);
-                    result.Add(new TimeRange()
+                    result.Add(new TimeRange
                     {
                         Start = sliceStart,
                         End = sliceStart.AddMonths(1)
@@ -128,7 +128,7 @@ namespace BO4E.Extensions.BusinessObjects.Energiemenge
                 }
             }
             return result
-                .Select(tr => (ITimeRange)new TimeRange()
+                .Select(tr => (ITimeRange)new TimeRange
                 {
                     Start = TimeZoneInfo.ConvertTimeToUtc(tr.Start, tz),
                     End = TimeZoneInfo.ConvertTimeToUtc(tr.End, tz)

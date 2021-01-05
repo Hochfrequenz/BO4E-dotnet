@@ -38,7 +38,7 @@ namespace TestBO4E
                 var jsonString = r.ReadToEnd();
                 json = JObject.Parse(jsonString);
             }
-            var settings = new JsonSerializerSettings()
+            var settings = new JsonSerializerSettings
             {
                 TypeNameHandling = TypeNameHandling.Objects
             };

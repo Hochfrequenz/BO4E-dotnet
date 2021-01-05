@@ -33,8 +33,8 @@ namespace BO4E.meta.LenientConverters
         {
         }
 
-        private readonly List<(string, bool)> _allowedDatetimeFormats = new List<(string, bool)>()
-            {
+        private readonly List<(string, bool)> _allowedDatetimeFormats = new List<(string, bool)>
+        {
                ("yyyy-MM-ddTHH:mm:ss", false),
                ("yyyy-MM-ddTHH:mm:sszzzz",true),
                ("yyyyMMddHHmm",false),

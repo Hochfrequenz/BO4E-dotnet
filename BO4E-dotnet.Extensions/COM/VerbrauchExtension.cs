@@ -46,7 +46,7 @@ namespace BO4E.Extensions.COM
                     ITimeRange overlap = v1.GetIntersection(v2);
                     if (v1.Einheit.IsExtensive())
                     {
-                        var vmerge = new Verbrauch()
+                        var vmerge = new Verbrauch
                         {
                             Obiskennzahl = v1.Obiskennzahl,
                             Einheit = v1.Einheit,
@@ -89,7 +89,7 @@ namespace BO4E.Extensions.COM
                     }
                     else
                     {
-                        var vmerge1 = new Verbrauch()
+                        var vmerge1 = new Verbrauch
                         {
                             Obiskennzahl = v1.Obiskennzahl,
                             Einheit = v1.Einheit,
@@ -98,7 +98,7 @@ namespace BO4E.Extensions.COM
                             Enddatum = overlap.Start,
                             Wert = v1.Startdatum < v2.Startdatum ? v1.Wert : v2.Wert
                         };
-                        var vmerge2 = new Verbrauch()
+                        var vmerge2 = new Verbrauch
                         {
                             Obiskennzahl = v1.Obiskennzahl,
                             Einheit = v1.Einheit,
@@ -118,7 +118,7 @@ namespace BO4E.Extensions.COM
                         {
                             vmerge2.Wert = v1.Wert + v2.Wert;
                         }
-                        var vmerge3 = new Verbrauch()
+                        var vmerge3 = new Verbrauch
                         {
                             Obiskennzahl = v1.Obiskennzahl,
                             Einheit = v1.Einheit,
@@ -136,7 +136,7 @@ namespace BO4E.Extensions.COM
                 {
                     var start = v1.Startdatum < v2.Startdatum ? v1.Startdatum : v2.Startdatum;
                     var stop = v1.Enddatum > v2.Enddatum ? v1.Enddatum : v2.Enddatum;
-                    var vmerge = new Verbrauch()
+                    var vmerge = new Verbrauch
                     {
                         Obiskennzahl = v1.Obiskennzahl,
                         Einheit = v1.Einheit,
@@ -270,7 +270,7 @@ namespace BO4E.Extensions.COM
                         var xs = new HashSet<Verbrauch>();
                         foreach (var tr in subtractionResult)
                         {
-                            var v = new Verbrauch()
+                            var v = new Verbrauch
                             {
                                 Einheit = z.Einheit,
                                 Wertermittlungsverfahren = z.Wertermittlungsverfahren,

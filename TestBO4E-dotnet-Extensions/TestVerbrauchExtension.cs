@@ -17,7 +17,7 @@ namespace TestBO4EExtensions
         [TestMethod]
         public void TestMergeNoOverlap()
         {
-            var v1 = new Verbrauch()
+            var v1 = new Verbrauch
             {
                 Obiskennzahl = "123",
                 Wertermittlungsverfahren = Wertermittlungsverfahren.MESSUNG,
@@ -26,7 +26,7 @@ namespace TestBO4EExtensions
                 Startdatum = new DateTimeOffset(2017, 12, 31, 23, 0, 0, TimeSpan.Zero).UtcDateTime,
                 Enddatum = new DateTimeOffset(2018, 1, 31, 23, 0, 0, TimeSpan.Zero).UtcDateTime
             };
-            var v2 = new Verbrauch()
+            var v2 = new Verbrauch
             {
                 Obiskennzahl = "123",
                 Wertermittlungsverfahren = Wertermittlungsverfahren.MESSUNG,
@@ -44,7 +44,7 @@ namespace TestBO4EExtensions
         [TestMethod]
         public void TestMergeAdjacentExtensive()
         {
-            var v1 = new Verbrauch()
+            var v1 = new Verbrauch
             {
                 Obiskennzahl = "123",
                 Wertermittlungsverfahren = Wertermittlungsverfahren.MESSUNG,
@@ -53,7 +53,7 @@ namespace TestBO4EExtensions
                 Startdatum = new DateTimeOffset(2017, 12, 31, 23, 0, 0, TimeSpan.Zero).UtcDateTime,
                 Enddatum = new DateTimeOffset(2018, 1, 31, 23, 0, 0, TimeSpan.Zero).UtcDateTime
             };
-            var v2 = new Verbrauch()
+            var v2 = new Verbrauch
             {
                 Obiskennzahl = "123",
                 Wertermittlungsverfahren = Wertermittlungsverfahren.MESSUNG,
@@ -74,7 +74,7 @@ namespace TestBO4EExtensions
         [TestMethod]
         public void TestMergeAdjacentIntensive()
         {
-            var v1 = new Verbrauch()
+            var v1 = new Verbrauch
             {
                 Obiskennzahl = "123",
                 Wertermittlungsverfahren = Wertermittlungsverfahren.MESSUNG,
@@ -83,7 +83,7 @@ namespace TestBO4EExtensions
                 Startdatum = new DateTimeOffset(2017, 12, 31, 23, 0, 0, TimeSpan.Zero).UtcDateTime,
                 Enddatum = new DateTimeOffset(2018, 1, 31, 23, 0, 0, TimeSpan.Zero).UtcDateTime
             };
-            var v2 = new Verbrauch()
+            var v2 = new Verbrauch
             {
                 Obiskennzahl = "123",
                 Wertermittlungsverfahren = Wertermittlungsverfahren.MESSUNG,
@@ -97,7 +97,7 @@ namespace TestBO4EExtensions
 
             Assert.IsTrue(result12.SetEquals(v2.Merge(v1)));
 
-            var v3 = new Verbrauch()
+            var v3 = new Verbrauch
             {
                 Obiskennzahl = "123",
                 Wertermittlungsverfahren = Wertermittlungsverfahren.MESSUNG,
@@ -106,7 +106,7 @@ namespace TestBO4EExtensions
                 Startdatum = new DateTimeOffset(2017, 12, 31, 23, 0, 0, TimeSpan.Zero).UtcDateTime,
                 Enddatum = new DateTimeOffset(2018, 1, 31, 23, 0, 0, TimeSpan.Zero).UtcDateTime
             };
-            var v4 = new Verbrauch()
+            var v4 = new Verbrauch
             {
                 Obiskennzahl = "123",
                 Wertermittlungsverfahren = Wertermittlungsverfahren.MESSUNG,
@@ -125,7 +125,7 @@ namespace TestBO4EExtensions
         [TestMethod]
         public void TestMergeOverlappingExtensive()
         {
-            var v1 = new Verbrauch()
+            var v1 = new Verbrauch
             {
                 Obiskennzahl = "123",
                 Wertermittlungsverfahren = Wertermittlungsverfahren.MESSUNG,
@@ -134,7 +134,7 @@ namespace TestBO4EExtensions
                 Startdatum = new DateTimeOffset(2017, 12, 31, 23, 0, 0, TimeSpan.Zero).UtcDateTime,
                 Enddatum = new DateTimeOffset(2018, 1, 31, 23, 0, 0, TimeSpan.Zero).UtcDateTime
             };
-            var v2 = new Verbrauch()
+            var v2 = new Verbrauch
             {
                 Obiskennzahl = "123",
                 Wertermittlungsverfahren = Wertermittlungsverfahren.MESSUNG,
@@ -156,7 +156,7 @@ namespace TestBO4EExtensions
         [TestMethod]
         public void TestMergeOverlappingIntensive()
         {
-            var v1 = new Verbrauch()
+            var v1 = new Verbrauch
             {
                 Obiskennzahl = "123",
                 Wertermittlungsverfahren = Wertermittlungsverfahren.MESSUNG,
@@ -165,7 +165,7 @@ namespace TestBO4EExtensions
                 Startdatum = new DateTimeOffset(2017, 12, 31, 23, 0, 0, TimeSpan.Zero).UtcDateTime,
                 Enddatum = new DateTimeOffset(2018, 1, 31, 23, 0, 0, TimeSpan.Zero).UtcDateTime
             };
-            var v2 = new Verbrauch()
+            var v2 = new Verbrauch
             {
                 Obiskennzahl = "123",
                 Wertermittlungsverfahren = Wertermittlungsverfahren.MESSUNG,
@@ -192,7 +192,7 @@ namespace TestBO4EExtensions
         [TestMethod]
         public void TestMergeRedundantIntensiveSameTime()
         {
-            var v1 = new Verbrauch()
+            var v1 = new Verbrauch
             {
                 Obiskennzahl = "123",
                 Wertermittlungsverfahren = Wertermittlungsverfahren.MESSUNG,
@@ -201,7 +201,7 @@ namespace TestBO4EExtensions
                 Startdatum = new DateTimeOffset(2017, 12, 31, 23, 0, 0, TimeSpan.Zero).UtcDateTime,
                 Enddatum = new DateTimeOffset(2018, 1, 31, 23, 0, 0, TimeSpan.Zero).UtcDateTime
             };
-            var v2 = new Verbrauch()
+            var v2 = new Verbrauch
             {
                 Obiskennzahl = "123",
                 Wertermittlungsverfahren = Wertermittlungsverfahren.MESSUNG,
@@ -221,7 +221,7 @@ namespace TestBO4EExtensions
         [TestMethod]
         public void TestMergeRedundantExtensiveSameTime()
         {
-            var v1 = new Verbrauch()
+            var v1 = new Verbrauch
             {
                 Obiskennzahl = "123",
                 Wertermittlungsverfahren = Wertermittlungsverfahren.MESSUNG,
@@ -230,7 +230,7 @@ namespace TestBO4EExtensions
                 Startdatum = new DateTimeOffset(2017, 12, 31, 23, 0, 0, TimeSpan.Zero).UtcDateTime,
                 Enddatum = new DateTimeOffset(2018, 1, 31, 23, 0, 0, TimeSpan.Zero).UtcDateTime
             };
-            var v2 = new Verbrauch()
+            var v2 = new Verbrauch
             {
                 Obiskennzahl = "123",
                 Wertermittlungsverfahren = Wertermittlungsverfahren.MESSUNG,
@@ -249,7 +249,7 @@ namespace TestBO4EExtensions
         [TestMethod]
         public void TestMergeRedundantExtensiveLeftJustifiedOverlap()
         {
-            var v1 = new Verbrauch()
+            var v1 = new Verbrauch
             {
                 Obiskennzahl = "123",
                 Wertermittlungsverfahren = Wertermittlungsverfahren.MESSUNG,
@@ -258,7 +258,7 @@ namespace TestBO4EExtensions
                 Startdatum = new DateTimeOffset(2017, 12, 31, 23, 0, 0, TimeSpan.Zero).UtcDateTime,
                 Enddatum = new DateTimeOffset(2018, 2, 28, 23, 0, 0, TimeSpan.Zero).UtcDateTime
             };
-            var v2 = new Verbrauch()
+            var v2 = new Verbrauch
             {
                 Obiskennzahl = "123",
                 Wertermittlungsverfahren = Wertermittlungsverfahren.MESSUNG,
@@ -298,7 +298,7 @@ namespace TestBO4EExtensions
             Assert.AreEqual(new DateTimeOffset(2019, 12, 25, 08, 20, 0, TimeSpan.Zero), result.First().Enddatum);
         }
 
-        private static readonly Verbrauch dtV1 = new Verbrauch()
+        private static readonly Verbrauch dtV1 = new Verbrauch
         {
             Obiskennzahl = "123",
             Wertermittlungsverfahren = Wertermittlungsverfahren.MESSUNG,
@@ -308,7 +308,7 @@ namespace TestBO4EExtensions
             Enddatum = new DateTimeOffset(2018, 2, 28, 23, 0, 0, TimeSpan.Zero).UtcDateTime
         };
 
-        private static readonly Verbrauch dtV2 = new Verbrauch()
+        private static readonly Verbrauch dtV2 = new Verbrauch
         {
             Obiskennzahl = "123",
             Wertermittlungsverfahren = Wertermittlungsverfahren.MESSUNG,
@@ -318,7 +318,7 @@ namespace TestBO4EExtensions
             Enddatum = new DateTimeOffset(2018, 1, 31, 23, 0, 0, TimeSpan.Zero).UtcDateTime
         };
 
-        private static readonly Verbrauch dtV3 = new Verbrauch()
+        private static readonly Verbrauch dtV3 = new Verbrauch
         {
             Obiskennzahl = "123",
             Wertermittlungsverfahren = Wertermittlungsverfahren.MESSUNG,
@@ -395,7 +395,7 @@ namespace TestBO4EExtensions
         [TestMethod]
         public void TestUnitConversion()
         {
-            var v1 = new Verbrauch()
+            var v1 = new Verbrauch
             {
                 Obiskennzahl = "123",
                 Wertermittlungsverfahren = Wertermittlungsverfahren.MESSUNG,

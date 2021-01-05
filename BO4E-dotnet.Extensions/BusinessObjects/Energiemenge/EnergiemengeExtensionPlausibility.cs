@@ -95,10 +95,10 @@ namespace BO4E.Extensions.BusinessObjects.Energiemenge
                 vOther.Startdatum = timeframe.Start;
                 vOther.Enddatum = timeframe.End;
 
-                var pr = new PlausibilityReport()
+                var pr = new PlausibilityReport
                 {
                     LokationsId = emReference.LokationsId,
-                    ReferenceTimeFrame = new Zeitraum() { Startdatum = new DateTimeOffset(timeframe.Start), Enddatum = new DateTimeOffset(timeframe.End) },
+                    ReferenceTimeFrame = new Zeitraum { Startdatum = new DateTimeOffset(timeframe.Start), Enddatum = new DateTimeOffset(timeframe.End) },
                     VerbrauchReference = vReference,
                     VerbrauchOther = vOther,
                     AbsoluteDeviation = Math.Abs(absoluteDeviation),
@@ -142,7 +142,7 @@ namespace BO4E.Extensions.BusinessObjects.Energiemenge
             foreach (var range in ranges)
             {
                 var localConfig = JsonConvert.DeserializeObject<PlausibilityReportConfiguration>(JsonConvert.SerializeObject(config));
-                localConfig.Timeframe = new Zeitraum()
+                localConfig.Timeframe = new Zeitraum
                 {
                     Startdatum = range.Start,
                     Enddatum = range.End
@@ -170,7 +170,7 @@ namespace BO4E.Extensions.BusinessObjects.Energiemenge
             {
                 throw new ArgumentNullException(nameof(config.Timeframe));
             }
-            var slices = GetLocalDailySlices(new TimeRange()
+            var slices = GetLocalDailySlices(new TimeRange
             {
                 Start = config.Timeframe.Startdatum.Value.UtcDateTime,
                 End = config.Timeframe.Enddatum.Value.UtcDateTime
@@ -194,7 +194,7 @@ namespace BO4E.Extensions.BusinessObjects.Energiemenge
             {
                 throw new ArgumentNullException(nameof(config.Timeframe));
             }
-            var slices = GetLocalMonthlySlices(new TimeRange()
+            var slices = GetLocalMonthlySlices(new TimeRange
             {
                 Start = config.Timeframe.Startdatum.Value.UtcDateTime,
                 End = config.Timeframe.Enddatum.Value.UtcDateTime

@@ -142,9 +142,9 @@ namespace BO4E.BO
         {
             if ((Vertragsteile == null || Vertragsteile.Count == 0) && (UserProperties != null && UserProperties.ContainsKey("lokationsId")))
             {
-                Vertragsteile = new List<Vertragsteil>()
+                Vertragsteile = new List<Vertragsteil>
                 {
-                    new Vertragsteil()
+                    new Vertragsteil
                     {
                         Vertragsteilbeginn = Vertragsbeginn,
                         Vertragsteilende = Vertragsende,

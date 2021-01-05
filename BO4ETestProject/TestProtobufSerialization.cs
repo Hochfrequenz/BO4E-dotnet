@@ -19,14 +19,14 @@ namespace TestBO4E
         {
             //Guid emGuid = Guid.NewGuid();
             //Guid v1Guid = Guid.NewGuid();
-            var em = new Energiemenge()
+            var em = new Energiemenge
             {
                 LokationsId = "54321012345",
                 LokationsTyp = BO4E.ENUM.Lokationstyp.MaLo,
                 //Guid = emGuid,
-                Energieverbrauch = new System.Collections.Generic.List<Verbrauch>()
+                Energieverbrauch = new System.Collections.Generic.List<Verbrauch>
                 {
-                    new Verbrauch()
+                    new Verbrauch
                     {
                         Einheit = BO4E.ENUM.Mengeneinheit.KWH,
                         Wert = 10.0M,
@@ -35,7 +35,7 @@ namespace TestBO4E
                         Obiskennzahl =  "1-0:1.8.1",
                         //Guid = v1Guid
                     },
-                    new Verbrauch()
+                    new Verbrauch
                     {
                         Einheit = BO4E.ENUM.Mengeneinheit.MWH,
                         Wert = 23.0M,

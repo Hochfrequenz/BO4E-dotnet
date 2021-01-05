@@ -202,7 +202,7 @@ namespace BO4E.Reporting
             var builder = new StringBuilder();
             if (headerLine)
             {
-                var headerColumns = new List<string>()
+                var headerColumns = new List<string>
                 {
                     "Startdatum",
                     "Enddatum",

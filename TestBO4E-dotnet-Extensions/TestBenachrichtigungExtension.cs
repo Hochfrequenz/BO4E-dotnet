@@ -18,14 +18,14 @@ namespace TestBO4EExtensions
         [TestMethod]
         public void TestHas()
         {
-            var b = new Benachrichtigung()
+            var b = new Benachrichtigung
             {
                 BenachrichtigungsId = "1234",
                 Bearbeiter = "dei mudder",
-                Infos = new List<GenericStringStringInfo>()
+                Infos = new List<GenericStringStringInfo>
                 {
-                    new GenericStringStringInfo() { KeyColumn = "ads", Value = "xyz" },
-                    new GenericStringStringInfo() { KeyColumn = "null", Value = null },
+                    new GenericStringStringInfo { KeyColumn = "ads", Value = "xyz" },
+                    new GenericStringStringInfo { KeyColumn = "null", Value = null },
                 }
             };
 
