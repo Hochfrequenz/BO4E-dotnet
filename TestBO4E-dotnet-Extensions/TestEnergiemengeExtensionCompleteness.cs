@@ -278,6 +278,7 @@ namespace TestBO4EExtensions
             }
         }
 
+        [DoNotParallelize]
         [TestMethod]
         public void TestParallization()
         {
