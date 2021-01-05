@@ -8,6 +8,6 @@ namespace BO4E.ENUM
         /// <summary>Veranschlagtejahresmenge</summary>
         VERANSCHLAGTEJAHRESMENGE,
         /// <summary>TUMKundenwert</summary>
-        TUMKUNDENWERT,
+        TUMKUNDENWERT
     }
 }

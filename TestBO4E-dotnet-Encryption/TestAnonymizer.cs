@@ -367,7 +367,7 @@ namespace TestBO4EExtensions.Encryption
                 {"DE0004096816110000000000000022591", null },
                 {"DE0004946353300000000000001652988", null },
                 {"DE00746663128OF000000000000010156", null },
-                {"DE0004946307100000000000001312595", null },
+                {"DE0004946307100000000000001312595", null }
             };
             var conf = new AnonymizerConfiguration();
             conf.SetOption(DataCategory.POD, AnonymizerApproach.HASH);

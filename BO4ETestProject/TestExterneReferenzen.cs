@@ -15,7 +15,7 @@ namespace TestBO4E
         {
             var marktlokation = new Marktlokation
             {
-                MarktlokationsId = "54321012345",
+                MarktlokationsId = "54321012345"
             };
             Assert.IsFalse(marktlokation.TryGetExterneReferenz("foo", out var _));
             marktlokation.ExterneReferenzen = new List<ExterneReferenz>

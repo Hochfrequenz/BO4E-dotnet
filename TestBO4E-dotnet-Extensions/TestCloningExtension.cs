@@ -16,7 +16,7 @@ namespace TestBO4EExtensions
         {
             var bo = new Messlokation
             {
-                MesslokationsId = "DE345",
+                MesslokationsId = "DE345"
 
             };
             var cloneBo = BusinessObjectExtensions.DeepClone((Messlokation)bo);

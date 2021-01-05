@@ -29,7 +29,7 @@ namespace TestBO4E.ShowCaseTests
                 Ort = "Grünwald",
                 Strasse = "Nördliche Münchner Straße",
                 Hausnummer = "27A",
-                Landescode = Landescode.DE,
+                Landescode = Landescode.DE
             }
         };
 

@@ -24,6 +24,6 @@ namespace BO4E.ENUM.EDI
         /// <summary>
         /// Nicht verwendbarer Wert (nicht abrechnungsrelevant)
         /// </summary>
-        _20,
+        _20
     }
 }

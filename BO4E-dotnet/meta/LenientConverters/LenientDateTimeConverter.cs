@@ -39,7 +39,7 @@ namespace BO4E.meta.LenientConverters
                ("yyyy-MM-ddTHH:mm:sszzzz",true),
                ("yyyyMMddHHmm",false),
                ("yyyyMMddHHmmss",false),
-               (@"yyyyMMddHHmmss'--T::zzzz'",false), // ToDo: remove again. this is just a buggy, nasty workaround
+               (@"yyyyMMddHHmmss'--T::zzzz'",false) // ToDo: remove again. this is just a buggy, nasty workaround
             };
 
         /// <inheritdoc cref="JsonConverter.CanConvert(Type)"/>

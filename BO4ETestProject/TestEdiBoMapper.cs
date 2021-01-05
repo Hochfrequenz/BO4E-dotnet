@@ -14,7 +14,7 @@ namespace TestBO4E
             {
                 {"E06", "NSP"}, // EDI -> BO4E (power)
                 {"HSP", "HSP"}, // BO4E preserving
-                {"Y02", "MD"}, // EDI -> BO4E (gas)
+                {"Y02", "MD"} // EDI -> BO4E (gas)
             });
             expectedResults.Add("Zaehlertyp", new Dictionary<string, string>
             {

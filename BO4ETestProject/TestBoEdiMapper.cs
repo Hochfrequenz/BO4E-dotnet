@@ -25,7 +25,7 @@ namespace TestBO4E
             {
                 {"NSP", "E06"}, // BO4E -> EDI (power)
                 {"E05", "E05"}, // EDI preserving
-                {"MD", "Y02" }, // EDI -> BO4E (gas)
+                {"MD", "Y02" } // EDI -> BO4E (gas)
             });
             expectedResults.Add("Zaehlerauspraegung", new Dictionary<string, string>
             {

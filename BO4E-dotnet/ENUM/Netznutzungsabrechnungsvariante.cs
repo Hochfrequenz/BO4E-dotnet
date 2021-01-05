@@ -7,6 +7,6 @@ namespace BO4E.ENUM
         /// <summary>Z14: Arbeitspreis/Grundpreis</summary>
         ARBEITSPREIS_GRUNDPREIS,
         /// <summary>Z15: Arbeitspreis/Leistungspreis</summary>
-        ARBEITSPREIS_LEISTUNGSPREIS,       
+        ARBEITSPREIS_LEISTUNGSPREIS
     }
 }

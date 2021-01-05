@@ -20,6 +20,6 @@
         /// <summary>
         /// Spanisch
         /// </summary>
-        SP,
+        SP
     }
 }

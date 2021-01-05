@@ -14,7 +14,7 @@ namespace BO4E.ENUM
         Unterbrechbare_Verbrauchseinrichtung,
         /// <summary>Z63: nicht unterbrechbare Verbrauchseinrichtung</summary>
         [Mapping(Unterbrechbarkeit.NUV)]
-        Nicht_Unterbrechbare_Verbrauchseinrichtung,       
+        Nicht_Unterbrechbare_Verbrauchseinrichtung
     }
     
 }

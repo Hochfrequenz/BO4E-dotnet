@@ -93,7 +93,7 @@ namespace BO4E.Extensions.BusinessObjects.Energiemenge
                     {
                         Startdatum = new DateTimeOffset(DateTime.SpecifyKind(reference.Start, DateTimeKind.Utc)),
                         Enddatum = new DateTimeOffset(DateTime.SpecifyKind(reference.End, DateTimeKind.Utc))
-                    },
+                    }
                 };
             }
             if (em.Energieverbrauch != null && em.Energieverbrauch.Count > 0)

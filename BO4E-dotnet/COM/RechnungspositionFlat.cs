@@ -177,7 +177,7 @@ namespace BO4E.COM
                 PositionsMenge = new Menge
                 {
                     Einheit = PositionsMengeEinheit ?? Mengeneinheit.KWH, // poor default choice
-                    Wert = PositionsMengeWert ?? 0.0M, // poor default choice
+                    Wert = PositionsMengeWert ?? 0.0M // poor default choice
                 },
                 Guid = Guid,
                 Status = Status

@@ -168,7 +168,7 @@ namespace TestBO4EExtensions
                         Wert=123.456M,
                         Wertermittlungsverfahren=Wertermittlungsverfahren.MESSUNG,
                         Startdatum = new DateTimeOffset(2019,1,1,0,0,0,TimeSpan.Zero).UtcDateTime,
-                        Enddatum = new DateTimeOffset(2019,1,4,0,0,0,TimeSpan.Zero).UtcDateTime,
+                        Enddatum = new DateTimeOffset(2019,1,4,0,0,0,TimeSpan.Zero).UtcDateTime
                     },
                     new Verbrauch
                     {
@@ -176,7 +176,7 @@ namespace TestBO4EExtensions
                         Wert=123.456M,
                         Wertermittlungsverfahren=Wertermittlungsverfahren.MESSUNG,
                         Startdatum = new DateTimeOffset(2019,1,4,0,0,0,TimeSpan.Zero).UtcDateTime,
-                        Enddatum = new DateTimeOffset(2019,1,7,0,0,0,TimeSpan.Zero).UtcDateTime,
+                        Enddatum = new DateTimeOffset(2019,1,7,0,0,0,TimeSpan.Zero).UtcDateTime
                     }
                 }
             };
@@ -388,7 +388,7 @@ namespace TestBO4EExtensions
                 verbrauchSlices.Add(new TimeRange
                 {
                     Start = verbrauchSlices.Last().Start.AddHours(1),
-                    End = verbrauchSlices.Last().End.AddHours(1),
+                    End = verbrauchSlices.Last().End.AddHours(1)
                 });
             }
             Assert.AreEqual(2 * 24 - 1, verbrauchSlices.Count);

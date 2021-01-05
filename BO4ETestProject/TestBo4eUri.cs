@@ -148,7 +148,7 @@ namespace TestBO4E
             {"bo4e://kf56@Marktlokation:100/adadsadad", true },
             {"bo4e://kf56:pw@Marktlokation:100/adadsadad?dasd=asd", true },
             {"bo4e://Marktlokation/123467/adsadad/aafe4rq3rqr?asdasda=3r343&adasdas=2334#341", true },
-            {"bo4e://Marktteilnehmer/?backendId=1234", true },
+            {"bo4e://Marktteilnehmer/?backendId=1234", true }
         };
 
         [TestMethod]

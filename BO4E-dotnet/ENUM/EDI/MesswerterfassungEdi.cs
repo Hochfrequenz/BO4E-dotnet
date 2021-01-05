@@ -10,11 +10,11 @@ namespace BO4E.ENUM
     /// <author>Hochfrequenz Unternehmensberatung GmbH</author>
     public enum MesswerterfassungEdi
     {
-        /// <summary>AMR: fernauslesbare Zähler</summary>
+        /// <summary>AMR: fernauslesbare ZÃ¤hler</summary>
         [Mapping(Messwerterfassung.FERNAUSLESBAR)]
         AMR,
-        /// <summary>MMR: manuell ausgelesene Zähler</summary>
+        /// <summary>MMR: manuell ausgelesene ZÃ¤hler</summary>
         [Mapping(Messwerterfassung.MANUELL_AUSGELESENE)]
-        MMR,       
+        MMR
     }
 }

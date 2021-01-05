@@ -54,6 +54,6 @@ namespace BO4E.ENUM
         [NonOfficial(NonOfficialCategory.CUSTOMER_REQUIREMENTS)]
         [Obsolete("Use BO4E.ENUM.Titel instead", true)]
         [ProtoEnum(Name = nameof(Anrede) + "_" + "DR")]
-        DR,
+        DR
     }
 }

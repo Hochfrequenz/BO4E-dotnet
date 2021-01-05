@@ -900,12 +900,12 @@ namespace BO4E.Extensions.BusinessObjects.Energiemenge
                 var vx = new Verbrauch
                 {
                     Startdatum = x.Startdatum,
-                    Enddatum = x.Enddatum,
+                    Enddatum = x.Enddatum
                 };
                 var vy = new Verbrauch
                 {
                     Startdatum = y.Startdatum,
-                    Enddatum = y.Enddatum,
+                    Enddatum = y.Enddatum
                 };
                 IComparer<Verbrauch> cv = new VerbrauchDateTimeComparer();
                 return cv.Compare(vx, vy);

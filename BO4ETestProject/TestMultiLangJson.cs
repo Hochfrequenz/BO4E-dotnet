@@ -78,7 +78,7 @@ namespace TestBO4E
                 {
                     new NestedObject {bool_deutsch=false,int_deutsch=10,intern_deutsch="internalList1"},
                     new NestedObject {bool_deutsch=false,int_deutsch=35,intern_deutsch="internalList2"},
-                    new NestedObject {bool_deutsch=true,int_deutsch=1200,intern_deutsch="internalList3"},
+                    new NestedObject {bool_deutsch=true,int_deutsch=1200,intern_deutsch="internalList3"}
                 }
             };
             var settings = new JsonSerializerSettings

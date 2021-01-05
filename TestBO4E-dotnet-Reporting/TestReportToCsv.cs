@@ -26,7 +26,7 @@ namespace TestBO4E.Reporting
                 {
                     Startdatum = new DateTimeOffset(2019, 1, 1, 0, 0, 0, TimeSpan.Zero),
                     Enddatum = new DateTimeOffset(2019, 3, 1, 0, 0, 0, TimeSpan.Zero)
-                },
+                }
             };
             var result = cr.ToCsv(';', true, Environment.NewLine);
             var lines = new List<string>(result.Split(Environment.NewLine));
@@ -177,7 +177,7 @@ namespace TestBO4E.Reporting
                 {
                     Startdatum = new DateTimeOffset(2019, 1, 1, 0, 0, 0, TimeSpan.Zero),
                     Enddatum = new DateTimeOffset(2019, 3, 1, 0, 0, 0, TimeSpan.Zero)
-                },
+                }
             };
             cr.Values = new List<CompletenessReport.BasicVerbrauch>
             {
@@ -237,7 +237,7 @@ namespace TestBO4E.Reporting
                 {
                     Startdatum = new DateTimeOffset(2019, 1, 1, 0, 0, 0, TimeSpan.Zero),
                     Enddatum = new DateTimeOffset(2019, 3, 1, 0, 0, 0, TimeSpan.Zero)
-                },
+                }
             };
 
             // reihenfolge

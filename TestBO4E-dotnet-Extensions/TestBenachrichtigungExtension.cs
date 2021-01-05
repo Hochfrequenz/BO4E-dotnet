@@ -25,7 +25,7 @@ namespace TestBO4EExtensions
                 Infos = new List<GenericStringStringInfo>
                 {
                     new GenericStringStringInfo { KeyColumn = "ads", Value = "xyz" },
-                    new GenericStringStringInfo { KeyColumn = "null", Value = null },
+                    new GenericStringStringInfo { KeyColumn = "null", Value = null }
                 }
             };
 

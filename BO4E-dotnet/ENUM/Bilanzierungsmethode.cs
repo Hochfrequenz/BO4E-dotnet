@@ -25,6 +25,6 @@ namespace BO4E.ENUM
         /// intelligentes Messsystem / Smart Meter
         /// </summary>
         [ProtoEnum(Name = nameof(Bilanzierungsmethode) + "_" + nameof(IMS))]
-        IMS,
+        IMS
     }
 }

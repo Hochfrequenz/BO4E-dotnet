@@ -105,7 +105,7 @@ namespace BO4E.BO
             {
                 LokationsId = em1.LokationsId,
                 LokationsTyp = em1.LokationsTyp,
-                VersionStruktur = em1.VersionStruktur,
+                VersionStruktur = em1.VersionStruktur
             };
             if (em1.UserProperties == null)
             {
