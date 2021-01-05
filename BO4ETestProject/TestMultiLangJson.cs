@@ -52,11 +52,11 @@ namespace TestBO4E
             Assert.IsFalse(json.Contains("datum_deutsch"));
             Assert.IsFalse(json.Contains("wert_deutsch"));
 
-            var DEjson = JsonConvert.SerializeObject(mlb);
-            Assert.IsFalse(DEjson.Contains("date_english"));
-            Assert.IsFalse(DEjson.Contains("value_english"));
-            Assert.IsTrue(DEjson.Contains("datum_deutsch"));
-            Assert.IsTrue(DEjson.Contains("wert_deutsch"));
+            var dEjson = JsonConvert.SerializeObject(mlb);
+            Assert.IsFalse(dEjson.Contains("date_english"));
+            Assert.IsFalse(dEjson.Contains("value_english"));
+            Assert.IsTrue(dEjson.Contains(nameof(MultiLangBo.DatumDeutsch)));
+            Assert.IsTrue(dEjson.Contains(nameof(MultiLangBo.WertDeutsch)));
         }
 
         [TestMethod]
