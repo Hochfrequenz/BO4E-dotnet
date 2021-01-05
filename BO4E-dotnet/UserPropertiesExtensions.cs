@@ -83,12 +83,7 @@ namespace BO4E
                             return false;
                         }
 
-                        if (value == null)
-                        {
-                            return true;
-                        }
-
-                        return value.Equals(other);
+                        return value == null || value.Equals(other);
                     }
                 );
             }

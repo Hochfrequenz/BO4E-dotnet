@@ -44,6 +44,6 @@ public static class JsonHelper
 
     public static bool IsEmpty(JToken token)
     {
-        return (token.Type == JTokenType.Null);
+        return token.Type == JTokenType.Null;
     }
 }

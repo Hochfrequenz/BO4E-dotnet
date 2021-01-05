@@ -371,7 +371,7 @@ namespace BO4E.BO
                     rp.Zeiteinheit = mengeneinheit;
                     rpList.Add(rp);
 
-                    var be = (jrp["nettobtr"] ?? jrp["NETTOBTR"]);
+                    var be = jrp["nettobtr"] ?? jrp["NETTOBTR"];
                     if (be != null)
                     {
                         if (belzart != "SUBT" && belzart != "CITAX") // this will lead to problems in the long run.

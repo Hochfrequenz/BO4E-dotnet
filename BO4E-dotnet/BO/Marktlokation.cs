@@ -290,7 +290,7 @@ namespace BO4E.BO
                     oddChecksum += Int32.Parse(s);
                 }
             }
-            var result = (10 - ((evenChecksum + oddChecksum) % 10)) % 10;
+            var result = (10 - (evenChecksum + oddChecksum) % 10) % 10;
             return result.ToString();
         }
 

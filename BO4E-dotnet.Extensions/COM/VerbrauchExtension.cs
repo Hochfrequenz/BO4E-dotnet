@@ -54,10 +54,10 @@ namespace BO4E.Extensions.COM
                         };
                         if (redundant)
                         {
-                            var exclusiveV1Wert = (decimal)(tr1.Duration.TotalSeconds - overlap.Duration.TotalSeconds) * v1.Wert / ((decimal)tr1.Duration.TotalSeconds);
-                            var exclusiveV2Wert = (decimal)(tr2.Duration.TotalSeconds - overlap.Duration.TotalSeconds) * v2.Wert / ((decimal)tr2.Duration.TotalSeconds);
-                            var overlapV1Wert = ((decimal)overlap.Duration.TotalSeconds * v1.Wert) / (decimal)(tr1.Duration.TotalSeconds);
-                            var overlapV2Wert = ((decimal)overlap.Duration.TotalSeconds * v2.Wert) / (decimal)(tr2.Duration.TotalSeconds);
+                            var exclusiveV1Wert = (decimal)(tr1.Duration.TotalSeconds - overlap.Duration.TotalSeconds) * v1.Wert / (decimal)tr1.Duration.TotalSeconds;
+                            var exclusiveV2Wert = (decimal)(tr2.Duration.TotalSeconds - overlap.Duration.TotalSeconds) * v2.Wert / (decimal)tr2.Duration.TotalSeconds;
+                            var overlapV1Wert = (decimal)overlap.Duration.TotalSeconds * v1.Wert / (decimal)tr1.Duration.TotalSeconds;
+                            var overlapV2Wert = (decimal)overlap.Duration.TotalSeconds * v2.Wert / (decimal)tr2.Duration.TotalSeconds;
                             if (biased)
                             {
                                 // biased ==> assume that v2 is contained in v1
@@ -284,7 +284,7 @@ namespace BO4E.Extensions.COM
                         var totalXDuration = xs.Select(x => x.GetDuration().TotalSeconds).Sum();
                         foreach (var x in xs)
                         {
-                            x.Wert = (totalXWert * (decimal)x.GetDuration().TotalSeconds) / ((decimal)totalXDuration);
+                            x.Wert = totalXWert * (decimal)x.GetDuration().TotalSeconds / (decimal)totalXDuration;
                         }
                         subResult.Remove(z);
                         subResult.UnionWith(xs);
@@ -329,7 +329,7 @@ namespace BO4E.Extensions.COM
 
         public static ITimeRange GetIntersection(this Verbrauch v1, ITimeRange tr2)
         {
-            return (new TimeRange(v1.Startdatum, v1.Enddatum).GetIntersection(tr2));
+            return new TimeRange(v1.Startdatum, v1.Enddatum).GetIntersection(tr2);
         }
 
         public static ITimeRange GetIntersection(this Verbrauch v1, Verbrauch v2)

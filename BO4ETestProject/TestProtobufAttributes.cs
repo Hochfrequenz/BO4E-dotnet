@@ -61,7 +61,7 @@ namespace TestBO4E
             }
 
             var nonOfficialFieldsWithProtoMember = allFields.Where(field => field.GetCustomAttributes(typeof(NonOfficialAttribute)).Any()) // those fields having an [NonOfficial(...)] attribute
-                .Where(field => ((NonOfficialAttribute)(field.GetCustomAttributes(typeof(NonOfficialAttribute)).First())).HasCategory(NonOfficialCategory.CUSTOMER_REQUIREMENTS)) // and the customer_requirements category
+                .Where(field => ((NonOfficialAttribute)field.GetCustomAttributes(typeof(NonOfficialAttribute)).First()).HasCategory(NonOfficialCategory.CUSTOMER_REQUIREMENTS)) // and the customer_requirements category
                 .Intersect(fieldsWithProtoMemberAttribute); // and a [ProtoMember(<id>)] attribute
 
             var wrongTagsNonOfficial = nonOfficialFieldsWithProtoMember.Where(f => ((ProtoMemberAttribute)f.GetCustomAttributes(typeof(ProtoMemberAttribute)).First()).Tag < 1000);
@@ -168,7 +168,7 @@ namespace TestBO4E
             var boTypesCrossProduct =
                 from baseType in businessObjectTypes
                 from inheritingType in businessObjectTypes
-                where (baseType.IsAssignableFrom(inheritingType) && baseType != inheritingType)
+                where baseType.IsAssignableFrom(inheritingType) && baseType != inheritingType
                 select new { baseType, inheritingType };
             // Background: https://github.com/protobuf-net/protobuf-net#inheritance
             // The base type must have an attribute that refers to the inherited type.

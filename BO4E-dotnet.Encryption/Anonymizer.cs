@@ -459,8 +459,8 @@ namespace BO4E.Extensions.Encryption
             {
                 return false;
             }
-            if ((Marktlokation.ValidateId(key) && key.StartsWith(HashedMarktlokationPrefix)) ||
-                (Messlokation.ValidateId(key) && key.StartsWith(HashedMesslokationPrefix)))
+            if (Marktlokation.ValidateId(key) && key.StartsWith(HashedMarktlokationPrefix) ||
+                Messlokation.ValidateId(key) && key.StartsWith(HashedMesslokationPrefix))
             {
                 return true;
             }

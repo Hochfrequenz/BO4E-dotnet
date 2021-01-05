@@ -15,7 +15,7 @@ namespace BO4E.meta.LenientConverters
         /// <inheritdoc cref="JsonConverter.CanConvert(Type)"/>
         public override bool CanConvert(Type objectType)
         {
-            return (objectType == typeof(int) || objectType == typeof(int?));
+            return objectType == typeof(int) || objectType == typeof(int?);
         }
 
         /// <inheritdoc cref="JsonConverter.ReadJson(JsonReader, Type, object, JsonSerializer)"/>

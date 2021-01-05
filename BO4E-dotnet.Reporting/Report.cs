@@ -101,10 +101,10 @@ namespace BO4E.Reporting
                             headerNames.RemoveRange(index + 3, 3 * (parallelItems.First().Counter - 1));
                             sortedHeaderNamesList.AddRange(headerNames);
                         }
-                        var valueIndex = index + (i * 3);
+                        var valueIndex = index + i * 3;
                         var curValues = result.Skip(valueIndex).Take(3);
                         var startfix = result.Take(index);
-                        var indexEndSection = index + (3 * parallelItems.First().Counter);
+                        var indexEndSection = index + 3 * parallelItems.First().Counter;
                         var endfix = result.Skip(indexEndSection).Take(result.Count - indexEndSection);
                         sortedResults.AddRange(startfix);
                         sortedResults.AddRange(curValues);
@@ -177,7 +177,7 @@ namespace BO4E.Reporting
                     gapSortedResults.Clear();
 
                     var index = gapHeaderNames.IndexOf(gapParallelItems.First().Element);
-                    var valueIndex = index + (i * 2);
+                    var valueIndex = index + i * 2;
                     var curValues = gapdata.Skip(valueIndex).Take(2);
                     gapSortedResults.AddRange(curValues);
                     resultBuilder.Append(lineTerminator);
@@ -206,7 +206,7 @@ namespace BO4E.Reporting
                 {
                     returnData = Detect(field.PropertyType, separator, field.GetValue(value), returnData);
                 }
-                else if ((field.PropertyType.IsGenericType && (field.PropertyType.GetGenericTypeDefinition() == typeof(List<>))))
+                else if (field.PropertyType.IsGenericType && field.PropertyType.GetGenericTypeDefinition() == typeof(List<>))
                 {
                     if (field.GetValue(value) != null && field.Name != "gaps")
                     {
@@ -253,7 +253,7 @@ namespace BO4E.Reporting
                             val = ((DateTimeOffset)nestedValue).ToString("yyyy-MM-ddTHH:mm:ssZ");
                         }
                         h.Add(muterType + field.Name);
-                        d.Add((val.Contains(separator)) ? "\"" + val + "\"" : val);
+                        d.Add(val.Contains(separator) ? "\"" + val + "\"" : val);
                     }
                 }
             }
@@ -270,7 +270,7 @@ namespace BO4E.Reporting
                 {
                     continue;
                 }
-                else if ((field.FieldType.IsGenericType && (field.FieldType.GetGenericTypeDefinition() == typeof(List<>))))
+                else if (field.FieldType.IsGenericType && field.FieldType.GetGenericTypeDefinition() == typeof(List<>))
                 {
                     if (field.GetValue(value) != null && field.Name == "gaps")
                     {
@@ -303,13 +303,13 @@ namespace BO4E.Reporting
                                     val = ((DateTime?)nestedValue).Value.ToString("yyyy-MM-ddTHH:mm:ssZ");
                                 }
                                 h.Add(muterType + field.Name);
-                                d.Add((val.Contains(separator)) ? "\"" + val + "\"" : val);
+                                d.Add(val.Contains(separator) ? "\"" + val + "\"" : val);
                             }
                             else if (field.FieldType == typeof(DateTime))
                             {
                                 val = ((DateTime)nestedValue).ToString("yyyy-MM-ddTHH:mm:ssZ");
                                 h.Add(muterType + field.Name);
-                                d.Add((val.Contains(separator)) ? "\"" + val + "\"" : val);
+                                d.Add(val.Contains(separator) ? "\"" + val + "\"" : val);
                             }
                         }
                     }

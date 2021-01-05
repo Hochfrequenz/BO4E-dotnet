@@ -25,7 +25,7 @@ namespace BO4E
         /// <summary>
         /// namespace.subnamespace for the BO4E package. maybe there's a more elegant way using self reflection.
         /// </summary>
-        public static readonly string PackagePrefix = "BO4E.BO";
+        public const string PackagePrefix = "BO4E.BO";
 
         /// <summary>
         /// shortcut for MapObject with an empty userProperties white list
@@ -121,16 +121,14 @@ namespace BO4E
             {
                 throw new ArgumentException("Mapping is only allowed for types derived from BO4E.BO.BusinessObject");
             }
-            else
-            {
-                if (lenient == LenientParsing.STRICT && userPropertiesWhiteList.Count == 0)
-                {
-                    return (BusinessObject)jobject.ToObject(businessObjectType);
-                }
 
-                var settings = lenient.GetJsonSerializerSettings();
-                return (BusinessObject)JsonConvert.DeserializeObject(jobject.ToString(), businessObjectType, settings);
+            if (lenient == LenientParsing.STRICT && userPropertiesWhiteList.Count == 0)
+            {
+                return (BusinessObject)jobject.ToObject(businessObjectType);
             }
+
+            var settings = lenient.GetJsonSerializerSettings();
+            return (BusinessObject)JsonConvert.DeserializeObject(jobject.ToString(), businessObjectType, settings);
         }
 
         /// <summary>
@@ -160,7 +158,7 @@ namespace BO4E
                 var m = BoRegex.Match(t.ToString());
                 if (m.Success)
                 {
-                    result.Add((m.Groups)["boName"].Value);
+                    result.Add(m.Groups["boName"].Value);
                 }
             }
             return result;
@@ -197,7 +195,7 @@ namespace BO4E
                 foreach (var boName in GetValidBoNames())
                 {
                     // fallback.
-                    if (boName.ToUpper() == businessObjectName.ToUpper())
+                    if (String.Equals(boName, businessObjectName, StringComparison.CurrentCultureIgnoreCase))
                     {
                         return Assembly.GetExecutingAssembly().GetType(PackagePrefix + "." + boName);
                     }
@@ -225,11 +223,7 @@ namespace BO4E
             {
                 return null;
             }
-            if (clazz == null)
-            {
-                return null;
-            }
-            return GetJsonSchemeFor(clazz);
+            return clazz == null ? null : GetJsonSchemeFor(clazz);
         }
 
         /// <summary>
@@ -298,7 +292,7 @@ namespace BO4E
         public static FieldInfo[] GetAnnotatedFields(string boName, Type attributeType)
         {
             return Assembly.GetExecutingAssembly().GetTypes()
-                .Where(t => t.Name == boName || t.Name.ToUpper() == boName.ToUpper())
+                .Where(t => t.Name == boName || String.Equals(t.Name, boName, StringComparison.CurrentCultureIgnoreCase))
                 .SelectMany(t => t.GetFields()) // by type name
                 .Where(f => f.GetCustomAttributes(attributeType, false).Length > 0)
                 .OrderBy(af => af.GetCustomAttribute<JsonPropertyAttribute>()?.Order)

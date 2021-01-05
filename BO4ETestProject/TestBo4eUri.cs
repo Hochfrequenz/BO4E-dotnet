@@ -176,7 +176,7 @@ namespace TestBO4E
         public void TestRoundTripUriFilterQueryObject()
         {
             var qo = JObject.Parse("{'marktlokationsId':'543212345', 'messlokationsId':'DE123', 'bilanzierungsmethode':'SLP'}");
-            var uri = (new Bo4eUri("bo4e://marktlokation?search=something")).AddFilter(JsonConvert.DeserializeObject<IDictionary<string, object>>(qo.ToString()));
+            var uri = new Bo4eUri("bo4e://marktlokation?search=something").AddFilter(JsonConvert.DeserializeObject<IDictionary<string, object>>(qo.ToString()));
             Assert.IsNotNull(uri);
             Assert.AreEqual("bo4e://marktlokation/?search=something&filter=marktlokationsId+eq+%27543212345%27+and+bilanzierungsmethode+eq+%27SLP%27", uri.ToString());
             var qo2 = uri.GetQueryObject();

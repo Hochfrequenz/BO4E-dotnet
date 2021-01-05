@@ -134,7 +134,7 @@ namespace BO4E.Extensions.BusinessObjects.Energiemenge
                     {
                         limits = null;
                     }
-                    var gaps = (new TimeGapCalculator<TimeRange>()).GetGaps(nonNullValues, limits: limits);
+                    var gaps = new TimeGapCalculator<TimeRange>().GetGaps(nonNullValues, limits: limits);
                     result.Gaps = gaps.Select(gap => new CompletenessReport.BasicVerbrauch
                     {
                         Startdatum = gap.Start,

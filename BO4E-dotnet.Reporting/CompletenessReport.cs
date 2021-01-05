@@ -269,7 +269,7 @@ namespace BO4E.Reporting
                 columns.Add(minGap.ToString("yyyy-MM-ddTHH:mm:ssZ"));
                 columns.Add(maxGap.ToString("yyyy-MM-ddTHH:mm:ssZ"));
                 var gapsHours = (maxGap - minGap).TotalHours;
-                columns.Add(((gapsHours * 4)).ToString());
+                columns.Add((gapsHours * 4).ToString());
             }
             else
             {

@@ -104,7 +104,7 @@ namespace BO4E.Extensions.Encryption
 
         public override BusinessObject Decrypt(EncryptedObject encryptedObject)
         {
-            var eo = (EncryptedObjectPublicKeyBox)(encryptedObject);// (EncryptedObjectPublicKeyBox)BoMapper.MapObject("EncryptedObjectPublicKeyBox", JObject.FromObject(encryptedObject));
+            var eo = (EncryptedObjectPublicKeyBox)encryptedObject;// (EncryptedObjectPublicKeyBox)BoMapper.MapObject("EncryptedObjectPublicKeyBox", JObject.FromObject(encryptedObject));
             if (eo == null)
             {
                 return null;
@@ -115,7 +115,7 @@ namespace BO4E.Extensions.Encryption
 
         public override T Decrypt<T>(EncryptedObject encryptedObject)
         {
-            var eo = (EncryptedObjectPublicKeyBox)(encryptedObject);// (EncryptedObjectPublicKeyBox)BoMapper.MapObject("EncryptedObjectPublicKeyBox", JObject.FromObject(encryptedObject));
+            var eo = (EncryptedObjectPublicKeyBox)encryptedObject;// (EncryptedObjectPublicKeyBox)BoMapper.MapObject("EncryptedObjectPublicKeyBox", JObject.FromObject(encryptedObject));
             if (eo == null)
             {
                 return null;

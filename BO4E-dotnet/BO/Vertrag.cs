@@ -140,7 +140,7 @@ namespace BO4E.BO
         [OnDeserialized]
         protected void OnDeserialized(StreamingContext context)
         {
-            if ((Vertragsteile == null || Vertragsteile.Count == 0) && (UserProperties != null && UserProperties.ContainsKey("lokationsId")))
+            if ((Vertragsteile == null || Vertragsteile.Count == 0) && UserProperties != null && UserProperties.ContainsKey("lokationsId"))
             {
                 Vertragsteile = new List<Vertragsteil>
                 {

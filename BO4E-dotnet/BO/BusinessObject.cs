@@ -536,7 +536,7 @@ namespace BO4E.BO
                             {
                                 // the index/position inside the list is taken into account, because
                                 // if two lists contain the same items but in different order, they must not be considered equal.
-                                result *= 19 + (17 * (++index)) * listItem.GetHashCode();
+                                result *= 19 + 17 * ++index * listItem.GetHashCode();
                             }
                         }
                         else
@@ -589,7 +589,7 @@ namespace BO4E.BO
 
             public override bool CanConvert(Type objectType)
             {
-                return (objectType == typeof(BusinessObject));
+                return objectType == typeof(BusinessObject);
             }
 
             public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)

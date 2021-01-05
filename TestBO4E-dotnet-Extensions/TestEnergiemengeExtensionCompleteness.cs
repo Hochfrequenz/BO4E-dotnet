@@ -426,12 +426,12 @@ namespace TestBO4EExtensions
             Assert.AreEqual(DateTimeKind.Utc, resultUtc.Kind);
             Assert.AreEqual(DateTimeKind.Unspecified, resultLocal.Kind);
 
-            Assert.AreEqual(23, (new TimeRange(utcDt, resultUtc)).Duration.TotalHours);
-            Assert.AreEqual(23, (new TimeRange
+            Assert.AreEqual(23, new TimeRange(utcDt, resultUtc).Duration.TotalHours);
+            Assert.AreEqual(23, new TimeRange
             {
                 Start = TimeZoneInfo.ConvertTimeToUtc(DateTime.SpecifyKind(localDt, DateTimeKind.Unspecified), CentralEuropeStandardTime.CENTRAL_EUROPE_STANDARD_TIME),
                 End = TimeZoneInfo.ConvertTimeToUtc(DateTime.SpecifyKind(resultLocal, DateTimeKind.Unspecified), CentralEuropeStandardTime.CENTRAL_EUROPE_STANDARD_TIME)
-            }).Duration.TotalHours);
+            }.Duration.TotalHours);
         }
 
         [TestMethod]
@@ -446,12 +446,12 @@ namespace TestBO4EExtensions
             Assert.AreEqual(DateTimeKind.Utc, resultUtc.Kind);
             Assert.AreEqual(DateTimeKind.Unspecified, resultLocal.Kind);
 
-            Assert.AreEqual(25, (new TimeRange(utcDt, resultUtc)).Duration.TotalHours);
-            Assert.AreEqual(25, (new TimeRange
+            Assert.AreEqual(25, new TimeRange(utcDt, resultUtc).Duration.TotalHours);
+            Assert.AreEqual(25, new TimeRange
             {
                 Start = TimeZoneInfo.ConvertTimeToUtc(DateTime.SpecifyKind(localDt, DateTimeKind.Unspecified), CentralEuropeStandardTime.CENTRAL_EUROPE_STANDARD_TIME),
                 End = TimeZoneInfo.ConvertTimeToUtc(DateTime.SpecifyKind(resultLocal, DateTimeKind.Unspecified), CentralEuropeStandardTime.CENTRAL_EUROPE_STANDARD_TIME)
-            }).Duration.TotalHours);
+            }.Duration.TotalHours);
         }
 
         [TestMethod]
@@ -466,12 +466,12 @@ namespace TestBO4EExtensions
             Assert.AreEqual(DateTimeKind.Utc, resultUtc.Kind);
             Assert.AreEqual(DateTimeKind.Unspecified, resultLocal.Kind);
 
-            Assert.AreEqual(24, (new TimeRange(utcDt, resultUtc)).Duration.TotalHours);
-            Assert.AreEqual(24, (new TimeRange
+            Assert.AreEqual(24, new TimeRange(utcDt, resultUtc).Duration.TotalHours);
+            Assert.AreEqual(24, new TimeRange
             {
                 Start = TimeZoneInfo.ConvertTimeToUtc(DateTime.SpecifyKind(localDt, DateTimeKind.Unspecified), CentralEuropeStandardTime.CENTRAL_EUROPE_STANDARD_TIME),
                 End = TimeZoneInfo.ConvertTimeToUtc(DateTime.SpecifyKind(resultLocal, DateTimeKind.Unspecified), CentralEuropeStandardTime.CENTRAL_EUROPE_STANDARD_TIME)
-            }).Duration.TotalHours);
+            }.Duration.TotalHours);
         }
     }
 }

@@ -91,20 +91,16 @@ namespace BO4E
             }
             foreach (var aef in annotatedEdiFields)
             {
-                foreach (var ma in aef.GetCustomAttributes<MappingAttribute>())
+                if (aef.GetCustomAttributes<MappingAttribute>().Select(ma => ma.Mapping.FirstOrDefault()).Any(matchCandidate => matchCandidate != null && matchCandidate.ToString() == objectValue))
                 {
-                    var matchCandidate = ma.Mapping.FirstOrDefault();
-                    if (matchCandidate != null && matchCandidate.ToString() == objectValue)
+                    if (aef.Name.StartsWith("_"))
                     {
-                        if (aef.Name.StartsWith("_"))
+                        if (clazz.GetField(EdiBoMapper.FromEdi(objectName, aef.Name.Substring(1))) != null)
                         {
-                            if (clazz.GetField(EdiBoMapper.FromEdi(objectName, aef.Name.Substring(1))) != null)
-                            {
-                                return aef.Name.Substring(1);
-                            }
+                            return aef.Name.Substring(1);
                         }
-                        return aef.Name;
                     }
+                    return aef.Name;
                 }
             }
             Logger.LogError($"No EDI match found for {objectName} /{objectValue}. Probably is already EDI");
@@ -139,7 +135,7 @@ namespace BO4E
                     object newValue = ReplaceWithEdiValues(oProp.GetValue(o));
                     result[serializationName] = (JToken)newValue;
                 }
-                else if (originalType.IsGenericType && (originalType.GetGenericTypeDefinition() == typeof(List<>)))
+                else if (originalType.IsGenericType && originalType.GetGenericTypeDefinition() == typeof(List<>))
                 {
                     var originalListItemType = originalType.GetGenericArguments()[0];
                     if (originalListItemType.ToString().StartsWith("BO4E.ENUM"))

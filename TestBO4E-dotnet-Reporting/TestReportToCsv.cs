@@ -101,7 +101,7 @@ namespace TestBO4E.Reporting
             var counter = 1;
             foreach (var report in reports)
             {
-                lastCsvText += report.ToCsv(';', (counter == 1 ? true : false), Environment.NewLine, null) + Environment.NewLine;
+                lastCsvText += report.ToCsv(';', counter == 1 ? true : false, Environment.NewLine, null) + Environment.NewLine;
                 counter++;
             }
             Assert.IsTrue(lastCsvText.Length > 0);
@@ -116,7 +116,7 @@ namespace TestBO4E.Reporting
             var counter = 1;
             foreach (var report in reports)
             {
-                lastCsvText += report.ToCsv(';', (counter == 1), Environment.NewLine, null) + Environment.NewLine;
+                lastCsvText += report.ToCsv(';', counter == 1, Environment.NewLine, null) + Environment.NewLine;
                 counter++;
             }
             Assert.IsTrue(lastCsvText.Length > 0);
@@ -142,7 +142,7 @@ namespace TestBO4E.Reporting
             var counter = 0;
             foreach (var report in reports)
             {
-                var singleReportLine = report.ToCSV(";", (counter == 0), Environment.NewLine) + Environment.NewLine;
+                var singleReportLine = report.ToCSV(";", counter == 0, Environment.NewLine) + Environment.NewLine;
                 if (counter == 0)
                 {
                     Assert.IsTrue(singleReportLine.Split(Environment.NewLine)[1].StartsWith("2019-09-30T22:00:00Z;2019-10-31T23:00:00Z;;50985149762")); // no melo, just malo
