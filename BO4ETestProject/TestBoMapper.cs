@@ -112,7 +112,7 @@ namespace TestBO4E
                         catch (JsonSerializationException jse)
                         {
                             Assert.IsTrue(false, $"Unexpected {nameof(JsonSerializationException)} in file {file}: {jse.Message}");
-                            throw jse;
+                            throw;
                         }
                         //string dateLenietOutputString = JsonConvert.SerializeObject(boLenient, new StringEnumConverter());
                         //if (whitelist.Count ==0) {

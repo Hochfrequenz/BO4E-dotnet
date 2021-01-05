@@ -79,7 +79,7 @@ namespace TestBO4E
             catch (ArgumentOutOfRangeException aoore) when (aoore.ParamName == "tag")
             {
                 Assert.IsTrue(false, $"Do you have any ProtoMember attributes with an id<=0 in {type}?");
-                throw aoore;
+                throw;
             }
 
             if (isDirectBase) // because protobuf-net doesn't support multiple levels of inheritance
