@@ -810,7 +810,7 @@ namespace BO4E.Extensions.BusinessObjects.Energiemenge
                              {
                                  var localEnd = DateTime.SpecifyKind(v.Enddatum, DateTimeKind.Unspecified); // ToDo: Check .UtcDateTime
                                  var localStart = DateTime.SpecifyKind(v.Startdatum, DateTimeKind.Unspecified);
-                                 return !CentralEuropeStandardTime.CENTRAL_EUROPE_STANDARD_TIME.IsDaylightSavingTime(localStart) && CentralEuropeStandardTime.CENTRAL_EUROPE_STANDARD_TIME.IsDaylightSavingTime(localEnd);
+                                 return !CentralEuropeStandardTime.CentralEuropeStandardTimezoneInfo.IsDaylightSavingTime(localStart) && CentralEuropeStandardTime.CentralEuropeStandardTimezoneInfo.IsDaylightSavingTime(localEnd);
                                  //return !localStart.IsDaylightSavingTime() && localEnd.IsDaylightSavingTime();
                              }).Select(v => v.Enddatum))
                         {

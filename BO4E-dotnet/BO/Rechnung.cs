@@ -198,13 +198,13 @@ namespace BO4E.BO
             }
 
             Rechnungsnummer = (infoToken["opbel"] ?? infoToken["OPBEL"]).Value<string>();
-            Rechnungsdatum = new DateTimeOffset(TimeZoneInfo.ConvertTime((infoToken["bldat"] ?? infoToken["BLDAT"]).Value<DateTime>(), CentralEuropeStandardTime.CENTRAL_EUROPE_STANDARD_TIME, TimeZoneInfo.Utc));
+            Rechnungsdatum = new DateTimeOffset(TimeZoneInfo.ConvertTime((infoToken["bldat"] ?? infoToken["BLDAT"]).Value<DateTime>(), CentralEuropeStandardTime.CentralEuropeStandardTimezoneInfo, TimeZoneInfo.Utc));
             Rechnungsperiode = new Zeitraum
             {
-                Startdatum = new DateTimeOffset(TimeZoneInfo.ConvertTime((tErdzToken[0]["ab"] ?? tErdzToken[0]["AB"]).Value<DateTime>(), CentralEuropeStandardTime.CENTRAL_EUROPE_STANDARD_TIME, TimeZoneInfo.Utc)),
-                Enddatum = new DateTimeOffset(TimeZoneInfo.ConvertTime((tErdzToken[0]["bis"] ?? tErdzToken[0]["BIS"]).Value<DateTime>(), CentralEuropeStandardTime.CENTRAL_EUROPE_STANDARD_TIME, TimeZoneInfo.Utc))
+                Startdatum = new DateTimeOffset(TimeZoneInfo.ConvertTime((tErdzToken[0]["ab"] ?? tErdzToken[0]["AB"]).Value<DateTime>(), CentralEuropeStandardTime.CentralEuropeStandardTimezoneInfo, TimeZoneInfo.Utc)),
+                Enddatum = new DateTimeOffset(TimeZoneInfo.ConvertTime((tErdzToken[0]["bis"] ?? tErdzToken[0]["BIS"]).Value<DateTime>(), CentralEuropeStandardTime.CentralEuropeStandardTimezoneInfo, TimeZoneInfo.Utc))
             };
-            Faelligkeitsdatum = new DateTimeOffset(TimeZoneInfo.ConvertTime((infoToken["faedn"] ?? infoToken["FAEDN"]).Value<DateTime>(), CentralEuropeStandardTime.CENTRAL_EUROPE_STANDARD_TIME, TimeZoneInfo.Utc));
+            Faelligkeitsdatum = new DateTimeOffset(TimeZoneInfo.ConvertTime((infoToken["faedn"] ?? infoToken["FAEDN"]).Value<DateTime>(), CentralEuropeStandardTime.CentralEuropeStandardTimezoneInfo, TimeZoneInfo.Utc));
             Storno = false;
 
             decimal gSteure, gBrutto, vGezahlt, rBrutto;
@@ -293,11 +293,11 @@ namespace BO4E.BO
                 rp.Positionsnummer = (jrp["belzeile"] ?? jrp["BELZEILE"]).Value<int>();
                 if ((jrp["bis"] ?? jrp["BIS"]) != null && (jrp["bis"] ?? jrp["BIS"]).Value<string>() != "0000-00-00")
                 {
-                    rp.LieferungBis = new DateTimeOffset(TimeZoneInfo.ConvertTime((jrp["bis"] ?? jrp["BIS"]).Value<DateTime>(), CentralEuropeStandardTime.CENTRAL_EUROPE_STANDARD_TIME, TimeZoneInfo.Utc));
+                    rp.LieferungBis = new DateTimeOffset(TimeZoneInfo.ConvertTime((jrp["bis"] ?? jrp["BIS"]).Value<DateTime>(), CentralEuropeStandardTime.CentralEuropeStandardTimezoneInfo, TimeZoneInfo.Utc));
                 }
                 if ((jrp["ab"] ?? jrp["AB"]) != null && (jrp["ab"] ?? jrp["AB"]).Value<string>() != "0000-00-00")
                 {
-                    rp.LieferungVon = new DateTimeOffset(TimeZoneInfo.ConvertTime((jrp["ab"] ?? jrp["AB"]).Value<DateTime>(), CentralEuropeStandardTime.CENTRAL_EUROPE_STANDARD_TIME, TimeZoneInfo.Utc));
+                    rp.LieferungVon = new DateTimeOffset(TimeZoneInfo.ConvertTime((jrp["ab"] ?? jrp["AB"]).Value<DateTime>(), CentralEuropeStandardTime.CentralEuropeStandardTimezoneInfo, TimeZoneInfo.Utc));
                 }
                 if ((jrp["vertrag"] ?? jrp["VERTRAG"]) != null)
                 {

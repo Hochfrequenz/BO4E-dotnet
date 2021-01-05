@@ -6,14 +6,20 @@ using System.IO;
 namespace BO4E.meta
 {
     /// <summary>
-    /// Holds a <see cref="TimeZoneInfo"/> object with the german time zone <see cref="CENTRAL_EUROPE_STANDARD_TIME"/>
+    /// Holds a <see cref="TimeZoneInfo"/> object with the german time zone <see cref="CentralEuropeStandardTimezoneInfo"/>
     /// </summary>
     public abstract class CentralEuropeStandardTime
     {
         /// <summary>
+        /// legacy time zone info object.
+        /// </summary>
+        [Obsolete("Use "+nameof(CentralEuropeStandardTimezoneInfo)+" instead.")]
+        // ReSharper disable once InconsistentNaming
+        public static TimeZoneInfo CENTRAL_EUROPE_STANDARD_TIME => CentralEuropeStandardTimezoneInfo;
+        /// <summary>
         /// Central Europe Standard Time as hard coded default time. Public to be used elsewhere ;)
         /// </summary>
-        public static readonly TimeZoneInfo CENTRAL_EUROPE_STANDARD_TIME;
+        public static readonly TimeZoneInfo CentralEuropeStandardTimezoneInfo;
         static CentralEuropeStandardTime()
         {
             var assembly = typeof(CentralEuropeStandardTime).Assembly;
@@ -30,7 +36,7 @@ namespace BO4E.meta
                 {
                     var jsonString = jsonReader.ReadToEnd();
                     //Console.WriteLine(jsonString);
-                    CENTRAL_EUROPE_STANDARD_TIME = JsonConvert.DeserializeObject<TimeZoneInfo>(jsonString);
+                    CentralEuropeStandardTimezoneInfo = JsonConvert.DeserializeObject<TimeZoneInfo>(jsonString);
                 }
             }
         }

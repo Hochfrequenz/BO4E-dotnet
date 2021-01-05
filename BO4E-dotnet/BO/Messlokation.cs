@@ -168,11 +168,7 @@ namespace BO4E.BO
         /// <returns></returns>
         public static bool ValidateId(string id)
         {
-            if (string.IsNullOrWhiteSpace(id))
-            {
-                return false;
-            }
-            return RegexValidate.IsMatch(id);
+            return !string.IsNullOrWhiteSpace(id) && RegexValidate.IsMatch(id);
         }
 
         /// <summary>

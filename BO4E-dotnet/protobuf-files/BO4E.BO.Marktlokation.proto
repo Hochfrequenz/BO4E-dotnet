@@ -250,7 +250,7 @@ message Hardware {
    string Geraetereferenz = 1007;
 }
 message Katasteradresse {
-   string Gemarkung_flur = 3;
+   string GemarkungFlur = 3;
    string Flurstueck = 4;
 }
 enum Kontaktart {

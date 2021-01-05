@@ -1,6 +1,5 @@
 ﻿using BO4E.ENUM;
 using Newtonsoft.Json;
-using ProtoBuf;
 
 namespace BO4E.BO
 {

@@ -82,7 +82,7 @@ namespace TestBO4EExtensions.Encryption
                         var acInvert = new AnonymizerConfiguration();
                         foreach (var key in operations.Keys)
                         {
-                            if (Enum.TryParse(operations[key], out AnonymizerApproach option))
+                            if (Enum.TryParse(operations[key], out AnonymizerApproach _))
                             {
                                 if (Enum.TryParse(key, out DataCategory dc))
                                 {
@@ -385,7 +385,7 @@ namespace TestBO4EExtensions.Encryption
                     result[plaintextMeLoId] = hashedMelo.MesslokationsId;
                 }
             }
-            var resultJson = JsonConvert.SerializeObject(result);
+            JsonConvert.SerializeObject(result);
         }
     }
 }

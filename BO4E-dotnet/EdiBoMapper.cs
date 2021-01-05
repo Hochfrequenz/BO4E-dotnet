@@ -83,15 +83,12 @@ namespace BO4E
             }
             if (!useEdiClass)
             {
-                try
+                if(field!=null)
                 {
                     return field.GetValue(null).ToString();
                 }
-                catch (Exception e) // ToDo: Fix pokemon catcher
-                {
-                    Logger.LogError($"No such field: {e.Message}");
-                    return null;
-                }
+                Logger?.LogError($"No such field: '{objectValue}'");
+                return null;
             }
             var attribute = field.GetCustomAttribute<MappingAttribute>();
             if (attribute == null || attribute.Mapping.Count == 0)

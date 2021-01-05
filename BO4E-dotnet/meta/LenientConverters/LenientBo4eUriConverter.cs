@@ -7,6 +7,7 @@ namespace BO4E.meta.LenientConverters
     /// <summary>
     /// allows deserializing <see cref="Bo4eUri"/>s
     /// </summary>
+    // ReSharper disable once InconsistentNaming
     public class LenientBo4eUriConverter : JsonConverter
     {
         /// <inheritdoc cref="JsonConverter.CanConvert(Type)"/>

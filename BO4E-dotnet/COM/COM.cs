@@ -9,6 +9,7 @@ using ProtoBuf;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.Linq;
 
 namespace BO4E.COM
 {
@@ -118,16 +119,7 @@ namespace BO4E.COM
             unchecked
             {
                 result *= GetType().GetHashCode();
-                foreach (var prop in GetType().GetProperties())
-                {
-                    if (prop.GetValue(this) != null)
-                    {
-                        // Using +19 because the default hash code of uninitialised enums is zero.
-                        // This would screw up the calculation such that all objects with at least one null value had the same hash code, namely 0.
-                        result *= 19 + prop.GetValue(this).GetHashCode();
-                    }
-                }
-                return result;
+                return GetType().GetProperties().Where(prop => prop.GetValue(this) != null).Aggregate(result, (current, prop) => current * (19 + prop.GetValue(this).GetHashCode()));
             }
         }
 
@@ -156,6 +148,7 @@ namespace BO4E.COM
         // note that this inheritance protobuf thing doesn't work as expected. please see the comments in TestBO4E project->TestProfobufSerialization
         [ProtoMember(1)]
 #pragma warning disable IDE1006 // Naming Styles
+        // ReSharper disable once InconsistentNaming
         protected string guidSerialized
 #pragma warning restore IDE1006 // Naming Styles
         {

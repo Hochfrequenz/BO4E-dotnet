@@ -32,10 +32,9 @@ namespace TestBO4EExtensions.Encryption
             var abc = new SymmetricEncrypter(symkey);
             abc.Dispose();
 
-            SymmetricEncrypter def;
             try
             {
-                def = new SymmetricEncrypter("Not a valid base64 code triggering an exception!");
+                _  = new SymmetricEncrypter("Not a valid base64 code triggering an exception!");
             }
             catch (FormatException)
             {
@@ -44,7 +43,6 @@ namespace TestBO4EExtensions.Encryption
             var exceptionThrown = false;
             try
             {
-                def = null;
             }
             catch (Exception)
             {
@@ -112,8 +110,8 @@ namespace TestBO4EExtensions.Encryption
 
                 /******* X509 + RSA test ******/
                 // encrypt (without needing a private key)
-                var x509certPubl = new X509Certificate2(X509Certificate.CreateFromCertFile("encrypterTests/publickey.cer"));
-                using (var xasyEnc = new X509AsymmetricEncrypter(x509certPubl))// encrypter needs no private key!
+                var x509CertPubl = new X509Certificate2(X509Certificate.CreateFromCertFile("encrypterTests/publickey.cer"));
+                using (var xasyEnc = new X509AsymmetricEncrypter(x509CertPubl))// encrypter needs no private key!
                 {
                     eo = xasyEnc.Encrypt(bo);
                 }
@@ -136,9 +134,9 @@ namespace TestBO4EExtensions.Encryption
                 Assert.IsTrue(expectedString == actualString, "Original and encrypted->decrypted object do not match!");
 
                 /********** X509 + RSA multiple recipients *******/
-                var x509certPubl2 = new X509Certificate2(X509Certificate.CreateFromCertFile("encrypterTests/publickey2.cer"));
+                var x509CertPubl2 = new X509Certificate2(X509Certificate.CreateFromCertFile("encrypterTests/publickey2.cer"));
                 EncryptedObject eoMultiple;
-                using (var xasyEncMultiple = new X509AsymmetricEncrypter(new HashSet<X509Certificate2> { x509certPubl, x509certPubl2 })) // encrypter needs not private key!
+                using (var xasyEncMultiple = new X509AsymmetricEncrypter(new HashSet<X509Certificate2> { x509CertPubl, x509CertPubl2 })) // encrypter needs not private key!
                 {
                     eoMultiple = xasyEncMultiple.Encrypt(bo);
                 }

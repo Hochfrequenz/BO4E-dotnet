@@ -19,6 +19,7 @@ namespace BO4E.COM
         [JsonProperty(PropertyName = "rufnummer", Required = Required.Always)]
         [ProtoMember(4)]
 #pragma warning disable IDE1006 // Naming Styles
+        // ReSharper disable once InconsistentNaming
         public string rufnummer { get; set; }
 #pragma warning restore IDE1006 // Naming Styles
     }

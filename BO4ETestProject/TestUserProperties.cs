@@ -69,7 +69,7 @@ namespace TestBO4E
             Assert.IsFalse(melo.UserProperties.TryGetValue("foo", out var _));
             Assert.IsFalse(melo.SetFlag<Messlokation>("foo", null));
             Assert.IsFalse(melo.HasFlagSet("foo"));
-            Assert.IsTrue(melo.SetFlag<Messlokation>("foo", true));
+            Assert.IsTrue(melo.SetFlag<Messlokation>("foo"));
 
             melo.UserProperties["foo"] = null;
             Assert.IsFalse(melo.HasFlagSet("foo"));

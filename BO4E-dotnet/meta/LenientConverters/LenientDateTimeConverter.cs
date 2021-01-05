@@ -4,6 +4,7 @@ using Newtonsoft.Json.Converters;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
+using System.Linq;
 
 namespace BO4E.meta.LenientConverters
 {
@@ -91,12 +92,10 @@ namespace BO4E.meta.LenientConverters
                 {
                     return dateTime;
                 }
-                foreach ((var dtf, _) in _allowedDatetimeFormats)
+
+                if (_allowedDatetimeFormats.Any(dtf => DateTime.TryParseExact(rawDate, dtf.Item1, CultureInfo.InvariantCulture, DateTimeStyles.None, out dateTime)))
                 {
-                    if (DateTime.TryParseExact(rawDate, dtf, CultureInfo.InvariantCulture, DateTimeStyles.None, out dateTime))
-                    {
-                        return dateTime;
-                    }
+                    return dateTime;
                 }
             }
             // It's not a date after all, so just return the default value

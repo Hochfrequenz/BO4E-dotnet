@@ -127,7 +127,7 @@
             <summary>
             <see cref="M:BO4E.BoMapper.MapObject(System.Type,Newtonsoft.Json.Linq.JObject,System.Collections.Generic.HashSet{System.String},BO4E.meta.LenientConverters.LenientParsing)"/>
             </summary>
-            <typeparam name="BusinessObjectType">type of return value</typeparam>
+            <typeparam name="TBusinessObjectType">type of return value</typeparam>
             <param name="jobject"><see cref="M:BO4E.BoMapper.MapObject(System.Type,Newtonsoft.Json.Linq.JObject,System.Collections.Generic.HashSet{System.String},BO4E.meta.LenientConverters.LenientParsing)"/></param>
             <param name="userPropertiesWhiteList"><see cref="M:BO4E.BoMapper.MapObject(System.Type,Newtonsoft.Json.Linq.JObject,System.Collections.Generic.HashSet{System.String},BO4E.meta.LenientConverters.LenientParsing)"/></param>
             <param name="lenient"><see cref="M:BO4E.BoMapper.MapObject(System.Type,Newtonsoft.Json.Linq.JObject,System.Collections.Generic.HashSet{System.String},BO4E.meta.LenientConverters.LenientParsing)"/></param>
@@ -912,12 +912,12 @@
              einer Messlokation zum Verbrauch einer Marktlokation beitrögt mit aufgeführt.
              Der Standard ist hier die Addition.
         </member>
-        <member name="F:BO4E.BO.Marktlokation.REGEX_VALIDATE">
+        <member name="F:BO4E.BO.Marktlokation.RegexValidate">
             <summary>
             Regular Expression used to validate 11 digit MarktlokationId
             </summary>
         </member>
-        <member name="F:BO4E.BO.Marktlokation.REGEX_NUMERIC_STRING">
+        <member name="F:BO4E.BO.Marktlokation.RegexNumericString">
             <summary>
             Regular Expression to check if a string consists only of numbers (is numeric)
             </summary>
@@ -1140,7 +1140,7 @@
             Die Variante des Preisblattmodells zur Abbildung von allgemeinen Abgaben
             </summary>
         </member>
-        <member name="P:BO4E.BO.PreisblattKonzessionsabgabe.sparte">
+        <member name="P:BO4E.BO.PreisblattKonzessionsabgabe.Sparte">
             <summary>
             Sparte, auf die sich die KA bezieht.
             </summary>
@@ -1606,7 +1606,7 @@
         <member name="P:BO4E.COM.AufAbschlag.AufAbschlagstyp">
             <summary>Typ des Aufabschlages (z.B. absolut oder prozentual). Details <see cref="T:BO4E.ENUM.AufAbschlagstyp" /></summary>
         </member>
-        <member name="P:BO4E.COM.AufAbschlag.aufAbschlagsziel">
+        <member name="P:BO4E.COM.AufAbschlag.AufAbschlagsziel">
             <summary>Diesem Preis oder den Kosten ist der Auf/Abschlag zugeordnet. Z.B. Arbeitspreis, Gesamtpreis etc.. Details <see cref="T:BO4E.ENUM.AufAbschlagsziel" /></summary>
         </member>
         <member name="P:BO4E.COM.AufAbschlag.Einheit">
@@ -1752,7 +1752,7 @@
         <member name="P:BO4E.COM.Ausschreibungslos.Wiederholungsintervall">
             <summary>Angabe, in welchem Intervall die Angebotsabgabe wiederholt werden darf. Angabe nur gesetzt für die 2. Phase bei öffentlich-rechtlichen Ausschreibungen, ansonsten NULL</summary> <see cref="T:BO4E.COM.Zeitraum" />
         </member>
-        <member name="P:BO4E.COM.Ausschreibungslos.lieferzeitraum">
+        <member name="P:BO4E.COM.Ausschreibungslos.Lieferzeitraum">
             <summary>Zeitraum, für den die in diesem Los enthaltenen Lieferstellen beliefert werden sollen</summary> <see cref="T:BO4E.COM.Zeitraum" />
         </member>
         <member name="P:BO4E.COM.Ausschreibungslos.WunschKuendingungsfrist">
@@ -1855,7 +1855,7 @@
         <member name="P:BO4E.COM.Energiemix.Atommuell">
             <summary>Höhe des erzeugten Atommülls in g/kWh.</summary>
         </member>
-        <member name="P:BO4E.COM.Energiemix.oekozertifikat">
+        <member name="P:BO4E.COM.Energiemix.Oekozertifikat">
             <summary>Zertifikat für den Energiemix. Details <see cref="T:BO4E.ENUM.Oekozertifikat" /></summary>
         </member>
         <member name="P:BO4E.COM.Energiemix.Oekolabel">
@@ -1988,7 +1988,7 @@
         <member name="T:BO4E.COM.Katasteradresse">
             <summary>Dient der Adressierung über die Liegenschaftsinformation.</summary>
         </member>
-        <member name="P:BO4E.COM.Katasteradresse.Gemarkung_flur">
+        <member name="P:BO4E.COM.Katasteradresse.GemarkungFlur">
             <summary>Die Gemarkung oder die Flur in der die Liegenschaft liegt</summary>
         </member>
         <member name="P:BO4E.COM.Katasteradresse.Flurstueck">
@@ -2256,7 +2256,7 @@
         <member name="P:BO4E.COM.Preisposition.Zonungsgroesse">
             <summary>Mit der Menge der hier angegebenen Größe wird die Staffelung/Zonung durchgeführt. Z.B. Vollbenutzungsstunden. <seealso cref="T:BO4E.ENUM.Bemessungsgroesse" /></summary>
         </member>
-        <member name="P:BO4E.COM.Preisposition.Zu_abschlaege">
+        <member name="P:BO4E.COM.Preisposition.ZuAbschlaege">
             <summary>Zuschläge oder Abschläge auf die Position. <seealso cref="T:BO4E.COM.PositionsAufAbschlag" /></summary>
         </member>
         <member name="P:BO4E.COM.Preisposition.Preisstaffeln">
@@ -2671,7 +2671,7 @@
         </member>
         <member name="P:BO4E.COM.Verbrauch.CENTRAL_EUROPE_STANDARD_TIME">
             <summary>
-            <inheritdoc cref="F:BO4E.meta.CentralEuropeStandardTime.CENTRAL_EUROPE_STANDARD_TIME"/>
+            <inheritdoc cref="F:BO4E.meta.CentralEuropeStandardTime.CentralEuropeStandardTimezoneInfo"/>
             </summary>
         </member>
         <member name="P:BO4E.COM.Verbrauch.Startdatum">
@@ -8077,10 +8077,15 @@
         </member>
         <member name="T:BO4E.meta.CentralEuropeStandardTime">
             <summary>
-            Holds a <see cref="T:System.TimeZoneInfo"/> object with the german time zone <see cref="F:BO4E.meta.CentralEuropeStandardTime.CENTRAL_EUROPE_STANDARD_TIME"/>
+            Holds a <see cref="T:System.TimeZoneInfo"/> object with the german time zone <see cref="F:BO4E.meta.CentralEuropeStandardTime.CentralEuropeStandardTimezoneInfo"/>
             </summary>
         </member>
-        <member name="F:BO4E.meta.CentralEuropeStandardTime.CENTRAL_EUROPE_STANDARD_TIME">
+        <member name="P:BO4E.meta.CentralEuropeStandardTime.CENTRAL_EUROPE_STANDARD_TIME">
+            <summary>
+            legacy time zone info object.
+            </summary>
+        </member>
+        <member name="F:BO4E.meta.CentralEuropeStandardTime.CentralEuropeStandardTimezoneInfo">
             <summary>
             Central Europe Standard Time as hard coded default time. Public to be used elsewhere ;)
             </summary>

@@ -519,15 +519,10 @@ namespace BO4E.BO
                         if (prop.GetValue(this).GetType().IsGenericType && prop.GetValue(this).GetType().GetGenericTypeDefinition() == typeof(List<>))
                         {
                             var enumerable = prop.GetValue(this) as IEnumerable;
-                            var listElementType = prop.GetValue(this).GetType().GetGenericArguments()[0];
-                            var listType = typeof(List<>).MakeGenericType(listElementType);
+                            //var listElementType = prop.GetValue(this).GetType().GetGenericArguments()[0];
+                            //var listType = typeof(List<>).MakeGenericType(listElementType);
                             var index = 0;
-                            foreach (var listItem in enumerable)
-                            {
-                                // the index/position inside the list is taken into account, because
-                                // if two lists contain the same items but in different order, they must not be considered equal.
-                                result *= 19 + 17 * ++index * listItem.GetHashCode();
-                            }
+                            result = enumerable.Cast<object>().Aggregate(result, (current, listItem) => current * (19 + 17 * ++index * listItem.GetHashCode()));
                         }
                         else
                         {

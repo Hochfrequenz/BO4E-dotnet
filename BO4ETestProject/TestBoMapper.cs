@@ -152,7 +152,7 @@ namespace TestBO4E
                 json = JsonConvert.DeserializeObject<JObject>(jsonString);
             }
             var em = JsonConvert.DeserializeObject<Energiemenge>(json["input"].ToString(), LenientParsing.MOST_LENIENT.GetJsonSerializerSettings());
-            if (TimeZoneInfo.Local == CentralEuropeStandardTime.CENTRAL_EUROPE_STANDARD_TIME)
+            if (TimeZoneInfo.Local == CentralEuropeStandardTime.CentralEuropeStandardTimezoneInfo)
             {
                 Assert.AreEqual(2, em.Energieverbrauch.Count); // weil 2 verschiedene status
             }

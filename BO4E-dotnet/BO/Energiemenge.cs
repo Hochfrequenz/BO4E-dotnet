@@ -68,7 +68,7 @@ namespace BO4E.BO
                     .Where(v => !(v.Startdatum == DateTimeOffset.MinValue || v.Enddatum == DateTimeOffset.MinValue))
                     .Where(v => !v.UserPropertyEquals("invalid", true))
                     .ToList();
-                if (UserProperties != null && UserProperties.TryGetValue(Verbrauch._SAP_PROFDECIMALS_KEY, out var profDecimalsRaw))
+                if (UserProperties != null && UserProperties.TryGetValue(Verbrauch.SapProfdecimalsKey, out var profDecimalsRaw))
                 {
                     var profDecimals = profDecimalsRaw.Value<int>();
                     if (profDecimals > 0)
@@ -76,13 +76,13 @@ namespace BO4E.BO
                         for (var i = 0; i < profDecimals; i++)
                         {
                             // or should I import math.pow() for this purpose?
-                            foreach (var v in Energieverbrauch.Where(v => v.UserProperties == null || !v.UserProperties.ContainsKey(Verbrauch._SAP_PROFDECIMALS_KEY)))
+                            foreach (var v in Energieverbrauch.Where(v => v.UserProperties == null || !v.UserProperties.ContainsKey(Verbrauch.SapProfdecimalsKey)))
                             {
                                 v.Wert /= 10.0M;
                             }
                         }
                     }
-                    UserProperties.Remove(Verbrauch._SAP_PROFDECIMALS_KEY);
+                    UserProperties.Remove(Verbrauch.SapProfdecimalsKey);
                 }
             }
         }

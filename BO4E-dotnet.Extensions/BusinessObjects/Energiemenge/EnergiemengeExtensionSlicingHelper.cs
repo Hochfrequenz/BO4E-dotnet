@@ -21,7 +21,7 @@ namespace BO4E.Extensions.BusinessObjects.Energiemenge
             }
             if (tz == null)
             {
-                tz = CentralEuropeStandardTime.CENTRAL_EUROPE_STANDARD_TIME;
+                tz = CentralEuropeStandardTime.CentralEuropeStandardTimezoneInfo;
             }
             if (overallTimeRange.Start.Kind == DateTimeKind.Unspecified)
             {
@@ -62,7 +62,7 @@ namespace BO4E.Extensions.BusinessObjects.Energiemenge
             DateTime localEnd;
             if (tz == null)
             {
-                tz = CentralEuropeStandardTime.CENTRAL_EUROPE_STANDARD_TIME;
+                tz = CentralEuropeStandardTime.CentralEuropeStandardTimezoneInfo;
 
                 if (overallTimeRange.Start.Kind != DateTimeKind.Utc)
                 {
@@ -142,13 +142,13 @@ namespace BO4E.Extensions.BusinessObjects.Energiemenge
         /// </summary>
         /// <param name="dt">datetime (kind unspecified or Utc)</param>
         /// <param name="value">number of days to add</param>
-        /// <param name="tz">timezone <paramref name="dt"/> is meant to be iff dt.Kind == DateTimeKind.Unspecified, default (if null) is <see cref="CentralEuropeStandardTime.CENTRAL_EUROPE_STANDARD_TIME"/></param>
+        /// <param name="tz">timezone <paramref name="dt"/> is meant to be iff dt.Kind == DateTimeKind.Unspecified, default (if null) is <see cref="CentralEuropeStandardTime.CentralEuropeStandardTimezoneInfo"/></param>
         /// <returns></returns>
         public static DateTime AddDaysDST(this DateTime dt, double value, TimeZoneInfo tz = null)
         {
             if (tz == null)
             {
-                tz = CentralEuropeStandardTime.CENTRAL_EUROPE_STANDARD_TIME;
+                tz = CentralEuropeStandardTime.CentralEuropeStandardTimezoneInfo;
             }
             if (dt.Kind == DateTimeKind.Local)
             {

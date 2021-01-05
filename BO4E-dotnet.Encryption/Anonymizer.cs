@@ -384,6 +384,7 @@ namespace BO4E.Extensions.Encryption
         /// Applies hashing on string value
         /// </summary>
         /// <param name="input">string that is going to be hashed</param>
+        /// <param name="dataCategory"><see cref="DataCategory"/></param>
         /// <returns>new string containing hashed content</returns>
         protected void HashString(ref string input, DataCategory? dataCategory)
         {

@@ -101,7 +101,7 @@ namespace TestBO4E.Reporting
             var counter = 1;
             foreach (var report in reports)
             {
-                lastCsvText += report.ToCsv(';', counter == 1 ? true : false, Environment.NewLine, null) + Environment.NewLine;
+                lastCsvText += report.ToCsv(';', counter == 1 ? true : false, Environment.NewLine) + Environment.NewLine;
                 counter++;
             }
             Assert.IsTrue(lastCsvText.Length > 0);
@@ -116,7 +116,7 @@ namespace TestBO4E.Reporting
             var counter = 1;
             foreach (var report in reports)
             {
-                lastCsvText += report.ToCsv(';', counter == 1, Environment.NewLine, null) + Environment.NewLine;
+                lastCsvText += report.ToCsv(';', counter == 1, Environment.NewLine) + Environment.NewLine;
                 counter++;
             }
             Assert.IsTrue(lastCsvText.Length > 0);
@@ -150,7 +150,7 @@ namespace TestBO4E.Reporting
                     var missingEntries = ((new DateTime(2019, 10, 31, 23, 0, 0, 0, DateTimeKind.Utc) - new DateTime(2019, 10, 27, 0, 0, 0, 0, DateTimeKind.Utc)).TotalHours * 4).ToString();
                     Assert.IsTrue(singleReportLine.Contains($";{missingEntries};"));
                 }
-                else if (counter == 0)
+                else if (counter == 0) // ToDo: where did this come from?
                 {
                     Assert.IsTrue(singleReportLine.StartsWith("2019-09-30T22:00:00Z;2019-10-31T23:00:00Z;DE0004096816100000000000000200712;;"));// no malo, just melo
                     Assert.IsTrue(singleReportLine.Contains("RLM"));

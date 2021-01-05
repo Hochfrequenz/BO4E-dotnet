@@ -43,11 +43,13 @@ namespace BO4E.COM
         /// <summary>Höchstpreis für den Durchschnitts-Arbeitspreis NT. Details <see cref="Preis" /></summary>
         [JsonProperty(PropertyName = "hoechstpreisNT", Required = Required.Default)]
         [ProtoMember(10)]
+        // ReSharper disable once InconsistentNaming
         public Preis HoechstpreisNT { get; set; }
 
         /// <summary>Höchstpreis für den Durchschnitts-Arbeitspreis HT. Details <see cref="Preis" /></summary>
         [JsonProperty(PropertyName = "hoechstpreisHT", Required = Required.Default)]
         [ProtoMember(11)]
+        // ReSharper disable once InconsistentNaming
         public Preis HoechstpreisHT { get; set; }
 
         /// <summary>Mindestpreis für den Durchschnitts-Arbeitspreis. Details <see cref="Preis" /></summary>

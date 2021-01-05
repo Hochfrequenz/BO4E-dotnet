@@ -134,15 +134,15 @@ namespace BO4E
         /// <summary>
         /// <see cref="MapObject(Type, JObject, HashSet{string}, LenientParsing)"/>
         /// </summary>
-        /// <typeparam name="BusinessObjectType">type of return value</typeparam>
+        /// <typeparam name="TBusinessObjectType">type of return value</typeparam>
         /// <param name="jobject"><see cref="MapObject(Type, JObject, HashSet{string}, LenientParsing)"/></param>
         /// <param name="userPropertiesWhiteList"><see cref="MapObject(Type, JObject, HashSet{string}, LenientParsing)"/></param>
         /// <param name="lenient"><see cref="MapObject(Type, JObject, HashSet{string}, LenientParsing)"/></param>
         /// <returns><see cref="MapObject(Type, JObject, HashSet{string}, LenientParsing)"/></returns>
-        public static BusinessObjectType MapObject<BusinessObjectType>(JObject jobject, HashSet<string> userPropertiesWhiteList, LenientParsing lenient = LenientParsing.STRICT)
+        public static TBusinessObjectType MapObject<TBusinessObjectType>(JObject jobject, HashSet<string> userPropertiesWhiteList, LenientParsing lenient = LenientParsing.STRICT)
         {
-            var businessObjectType = typeof(BusinessObjectType);
-            return (BusinessObjectType)Convert.ChangeType(MapObject(businessObjectType, jobject, userPropertiesWhiteList, lenient), typeof(BusinessObjectType));
+            var businessObjectType = typeof(TBusinessObjectType);
+            return (TBusinessObjectType)Convert.ChangeType(MapObject(businessObjectType, jobject, userPropertiesWhiteList, lenient), typeof(TBusinessObjectType));
         }
 
         /// <summary>
@@ -186,12 +186,8 @@ namespace BO4E
 
             //Type[] types = Assembly.GetExecutingAssembly().GetTypes();
             var clazz = Assembly.GetExecutingAssembly().GetType(PackagePrefix + "." + businessObjectName);
-            if (clazz != null)
-            {
-                return clazz;
-            }
+            return clazz != null ? clazz : (from boName in GetValidBoNames() where string.Equals(boName, businessObjectName, StringComparison.CurrentCultureIgnoreCase) select Assembly.GetExecutingAssembly().GetType(PackagePrefix + "." + boName)).FirstOrDefault();
 
-            return (from boName in GetValidBoNames() where string.Equals(boName, businessObjectName, StringComparison.CurrentCultureIgnoreCase) select Assembly.GetExecutingAssembly().GetType(PackagePrefix + "." + boName)).FirstOrDefault();
             //throw new ArgumentException($"No implemented BusinessObject type matches the name '{businessObjectName}'.");
         }
 

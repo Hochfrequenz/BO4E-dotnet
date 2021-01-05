@@ -34,6 +34,7 @@ namespace BO4E.meta.LenientConverters
             {
                 if (lenient.HasFlag(lp))
                 {
+                    // ReSharper disable once SwitchStatementMissingSomeEnumCasesNoDefault
                     switch (lp)
                     {
                         case LenientParsing.DATE_TIME:

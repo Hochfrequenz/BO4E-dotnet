@@ -40,10 +40,10 @@ namespace BO4E.COM
         [JsonProperty(PropertyName = "atommuell", Required = Required.Default)]
         [ProtoMember(9)]
         public decimal? Atommuell { get; set; }
-        /// <summary>Zertifikat für den Energiemix. Details <see cref="Oekozertifikat" /></summary>
+        /// <summary>Zertifikat für den Energiemix. Details <see cref="ENUM.Oekozertifikat" /></summary>
         [JsonProperty(PropertyName = "oekozertifikat", Required = Required.Default)]
         [ProtoMember(10)]
-        public List<Oekozertifikat> oekozertifikat { get; set; }
+        public List<Oekozertifikat> Oekozertifikat { get; set; }
         /// <summary>Ökolabel für den Energiemix. Details <see cref="ENUM.Oekolabel" /></summary>
         [JsonProperty(PropertyName = "oekolabel", Required = Required.Default)]
         [ProtoMember(11)]

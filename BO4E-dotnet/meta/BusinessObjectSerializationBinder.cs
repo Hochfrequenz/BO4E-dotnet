@@ -17,6 +17,7 @@ namespace BO4E.meta
         /// <summary>
         /// list of all known BusinessObjects inheriting from <see cref="BO4E.BO.BusinessObject"/> and components inheriting from <see cref="BO4E.COM.COM"/>
         /// </summary>
+        // ReSharper disable once InconsistentNaming
         public static IList<Type> BusinessObjectAndCOMTypes { get; }
 
         static BusinessObjectSerializationBinder()

@@ -58,11 +58,15 @@ namespace TestBO4EExtensions
                 {
                     if (boFile.Contains("wintertime2018.json"))
                     {
+#pragma warning disable 618
                         em = BoMapper.MapObject<Energiemenge>(bo, LenientParsing.DATE_TIME);
+#pragma warning restore 618
                     }
                     else
                     {
+#pragma warning disable 618
                         em = BoMapper.MapObject<Energiemenge>(bo);
+#pragma warning restore 618
                     }
                 }
                 catch (JsonSerializationException e)

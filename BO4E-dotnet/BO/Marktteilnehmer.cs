@@ -15,7 +15,7 @@ namespace BO4E.BO
         /// <summary>
         /// empty constructor
         /// </summary>
-        public Marktteilnehmer() : base()
+        public Marktteilnehmer()
         {
             Gewerbekennzeichnung = true;
         }
