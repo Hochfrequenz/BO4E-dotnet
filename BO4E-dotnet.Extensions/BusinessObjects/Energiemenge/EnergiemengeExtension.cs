@@ -661,9 +661,7 @@ namespace BO4E.Extensions.BusinessObjects.Energiemenge
         {
             using (MiniProfiler.Current.Step(nameof(IsPureWertermittlungsverfahren)))
             {
-                ISet<Wertermittlungsverfahren> wefs = new HashSet<Wertermittlungsverfahren>();
-                em.Energieverbrauch.All(v => wefs.Add(v.Wertermittlungsverfahren));
-                return wefs.Count <= 1;
+                return em.Energieverbrauch.Select(v=>v.Wertermittlungsverfahren).Distinct().Count() <= 1;
             }
         }
 
@@ -676,9 +674,7 @@ namespace BO4E.Extensions.BusinessObjects.Energiemenge
         {
             using (MiniProfiler.Current.Step(nameof(IsPureObisKennzahl)))
             {
-                ISet<string> obisKzs = new HashSet<string>();
-                em.Energieverbrauch.All(v => obisKzs.Add(v.Obiskennzahl));
-                return obisKzs.Count <= 1;
+                return em.Energieverbrauch.Select(v=>v.Obiskennzahl).Distinct().Count() <= 1;
             }
         }
 
@@ -728,23 +724,14 @@ namespace BO4E.Extensions.BusinessObjects.Energiemenge
         {
             using (MiniProfiler.Current.Step(nameof(IsPureMengeneinheit)))
             {
-                ISet<Mengeneinheit> einheiten = new HashSet<Mengeneinheit>();
-                em.Energieverbrauch.All(v => einheiten.Add(v.Einheit));
-
-                if (einheiten.Count <= 1)
+                
+                if (em.Energieverbrauch.Select(v=>v.Einheit).Distinct().Count() <= 1)
                 {
                     return true;
                 }
 
-                var me1 = einheiten.First();
-                foreach (var me2 in einheiten)
-                {
-                    if (!me1.IsConvertibleTo(me2))
-                    {
-                        return false;
-                    }
-                }
-                return true;
+                var me1 = em.Energieverbrauch.Select(v => v.Einheit).First();
+                return em.Energieverbrauch.Select(v => v.Einheit).All(me2 => me1.IsConvertibleTo(me2));
             }
         }
 
