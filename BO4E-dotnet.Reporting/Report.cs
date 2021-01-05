@@ -62,11 +62,11 @@ namespace BO4E.Reporting
                                 if (index != -1)
                                 {
                                     sortedHeaderNamesList.Add(reihenItem.Values.First());
-                                    var CurFieldName = reihenItem.Keys.First();
-                                    if (parallelItems.Where(g => g.Element == CurFieldName).Count() > 0)
+                                    var curFieldName = reihenItem.Keys.First();
+                                    if (parallelItems.Where(g => g.Element == curFieldName).Count() > 0)
                                     {
                                         sortedResults.Add(result[index]);
-                                        var indx = headerNames.IndexOf(CurFieldName);
+                                        var indx = headerNames.IndexOf(curFieldName);
                                         headerNames.RemoveAt(indx);
                                         result.RemoveAt(indx);
                                     }
@@ -163,14 +163,14 @@ namespace BO4E.Reporting
             var gapdata = new List<string>();
             var gapHeaderNames = new List<string>();
             var gapReterned = new Dictionary<List<string>, List<string>> { [gapHeaderNames] = gapdata };
-            gapReterned = DetectGaps(type, separator, this, gapReterned);
+            _ = DetectGaps(type, separator, this, gapReterned);
 
             var gapSortedResults = new List<string>();
             var gapParallelItems = gapHeaderNames.GroupBy(x => x)
                 .Where(g => g.Count() > 1)
                 .Select(y => new { Element = y.Key, Counter = y.Count() })
                 .ToList();
-            if (gapParallelItems.Count() > 0)
+            if (gapParallelItems.Any())
             {
                 for (var i = 0; i < gapParallelItems.First().Counter; i++)
                 {

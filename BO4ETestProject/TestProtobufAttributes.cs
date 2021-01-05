@@ -153,7 +153,7 @@ namespace TestBO4E
                     Assert.AreEqual(enumType.Name + "_" + field.Name, pea.Name);
                     allValues.Add(new Tuple<Type, string>(enumType, pea.Name));
                 }
-                Assert.IsTrue(Enum.IsDefined(enumType, (int)0), $"Any enum must define a ZERO like value for Protobuf3 but {enumType} doesn't.");
+                Assert.IsTrue(Enum.IsDefined(enumType, 0), $"Any enum must define a ZERO like value for Protobuf3 but {enumType} doesn't.");
             }
             var nonDistinctValues = allValues
                 .GroupBy(tuple => tuple.Item2) // group by field/protoenum name

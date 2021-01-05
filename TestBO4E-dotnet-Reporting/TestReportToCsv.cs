@@ -45,8 +45,8 @@ namespace TestBO4E.Reporting
             //var alldata = JsonConvert.DeserializeObject<Dictionary<string, List<Dictionary<string, string>>>>(JSONdata);
             //List<Dictionary<string, string>> reihenfolge = alldata["completenessZfa"];
 
-            var Newresult = cr.ToCsv(';', true, Environment.NewLine, reihenfolge);
-            lines = new List<string>(Newresult.Split(Environment.NewLine));
+            var newresult = cr.ToCsv(';', true, Environment.NewLine, reihenfolge);
+            lines = new List<string>(newresult.Split(Environment.NewLine));
             Assert.AreEqual(2, lines.Count);
             var decimalSeparator = Thread.CurrentThread.CurrentCulture.NumberFormat.NumberDecimalSeparator;
             Assert.AreEqual("DE12345;0" + decimalSeparator + "87;2019-01-01T00:00:00Z;2019-03-01T00:00:00Z;", lines[1]);
@@ -88,8 +88,8 @@ namespace TestBO4E.Reporting
         public void TestDeserialisationCompletenessReportColumnsToCsv()
         {
             var jsonData = "{'completenessZfa':[{'lokationsId':'lokationsId'},{'coverage':'coverage'},{'referenceTimeFrame.einheit':'referenceTimeFrame.einheit'},{'referenceTimeFrame.dauer':'referenceTimeFrame.dauer'},{'referenceTimeFrame.startdatum':'referenceTimeFrame.startdatum'},{'referenceTimeFrame.enddatum':'referenceTimeFrame.enddatum'},{'obiskennzahl':'obiskennzahl'},{'einheit':'einheit'},{'wertermittlungsverfahren':'wertermittlungsverfahren'},{'values.startdatum':'Verbrauch.startdatum'},{'values.enddatum':'Verbrauch.enddatum'},{'values.wert':'Verbrauch.wert'},{'headerLine':'1'}]}";
-            var Reihenfolge = JsonConvert.DeserializeObject<Dictionary<string, List<Dictionary<string, string>>>>(jsonData);
-            Assert.AreEqual("coverage", Reihenfolge["completenessZfa"][1].Values.First());
+            var reihenfolge = JsonConvert.DeserializeObject<Dictionary<string, List<Dictionary<string, string>>>>(jsonData);
+            Assert.AreEqual("coverage", reihenfolge["completenessZfa"][1].Values.First());
         }
 
         [TestMethod]
@@ -101,7 +101,7 @@ namespace TestBO4E.Reporting
             var counter = 1;
             foreach (var report in reports)
             {
-                lastCsvText += report.ToCsv(';', counter == 1 ? true : false, Environment.NewLine) + Environment.NewLine;
+                lastCsvText += report.ToCsv(';', counter == 1, Environment.NewLine) + Environment.NewLine;
                 counter++;
             }
             Assert.IsTrue(lastCsvText.Length > 0);
