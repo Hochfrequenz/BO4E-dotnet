@@ -68,21 +68,21 @@ namespace BO4E.BO
                     .Where(v => !(v.Startdatum == DateTimeOffset.MinValue || v.Enddatum == DateTimeOffset.MinValue))
                     .Where(v => !v.UserPropertyEquals("invalid", true))
                     .ToList();
-                if (UserProperties != null && UserProperties.TryGetValue(Verbrauch._SAP_PROFDECIMALS_KEY, out JToken profDecimalsRaw))
+                if (UserProperties != null && UserProperties.TryGetValue(Verbrauch.SapProfdecimalsKey, out var profDecimalsRaw))
                 {
                     var profDecimals = profDecimalsRaw.Value<int>();
                     if (profDecimals > 0)
                     {
-                        for (int i = 0; i < profDecimals; i++)
+                        for (var i = 0; i < profDecimals; i++)
                         {
                             // or should I import math.pow() for this purpose?
-                            foreach (Verbrauch v in Energieverbrauch.Where(v => v.UserProperties == null || !v.UserProperties.ContainsKey(Verbrauch._SAP_PROFDECIMALS_KEY)))
+                            foreach (var v in Energieverbrauch.Where(v => v.UserProperties == null || !v.UserProperties.ContainsKey(Verbrauch.SapProfdecimalsKey)))
                             {
                                 v.Wert /= 10.0M;
                             }
                         }
                     }
-                    UserProperties.Remove(Verbrauch._SAP_PROFDECIMALS_KEY);
+                    UserProperties.Remove(Verbrauch.SapProfdecimalsKey);
                 }
             }
         }
@@ -101,11 +101,11 @@ namespace BO4E.BO
             {
                 throw new InvalidOperationException($"You must not add the Energiemengen with different locations {em1.LokationsId} ({em1.LokationsTyp}) (v{em1.VersionStruktur}) vs. {em2.LokationsId} ({em2.LokationsTyp}) (v{em2.VersionStruktur})");
             }
-            Energiemenge result = new Energiemenge()
+            var result = new Energiemenge
             {
                 LokationsId = em1.LokationsId,
                 LokationsTyp = em1.LokationsTyp,
-                VersionStruktur = em1.VersionStruktur,
+                VersionStruktur = em1.VersionStruktur
             };
             if (em1.UserProperties == null)
             {

@@ -1,25 +1,25 @@
 namespace BO4E.ENUM
 {
-    /// <summary>Schwachlastfähigkeit Marktlokation</summary>
+    /// <summary>SchwachlastfÃ¤higkeit Marktlokation</summary>
     public enum AbgabeArt
     {
-        /// <summary>KAS: für alle konzessionsvertraglichen Sonderregelungen, die nicht in die Systematik der KAV eingegliedert sind</summary>
+        /// <summary>KAS: fÃ¼r alle konzessionsvertraglichen Sonderregelungen, die nicht in die Systematik der KAV eingegliedert sind</summary>
         KAS,
-        /// <summary>SA: Sondervertragskunden  1 kV, Preis nach § 2 (3) (für Strom 0,11 ct/kWh und für Gas 0,03 ct/kWh)</summary>
+        /// <summary>SA: Sondervertragskunden  1 kV, Preis nach Â§ 2 (3) (fÃ¼r Strom 0,11 ct/kWh und fÃ¼r Gas 0,03 ct/kWh)</summary>
         SA,
-        /// <summary>SAS: Kennzeichnung, dass ein abweichender Preis für Sondervertragskunden vorliegt</summary>
+        /// <summary>SAS: Kennzeichnung, dass ein abweichender Preis fÃ¼r Sondervertragskunden vorliegt</summary>
         SAS,
-        /// <summary>TA: Tarifkunden, für Strom § 2. (2) 1b HT bzw.ET(hohe KA) und für Gas § 2 (2) 2b</summary>
+        /// <summary>TA: Tarifkunden, fÃ¼r Strom Â§ 2. (2) 1b HT bzw.ET(hohe KA) und fÃ¼r Gas Â§ 2 (2) 2b</summary>
         TA,
-        /// <summary>TAS: Kennzeichnung, dass ein abweichender Preis für Tarifkunden vorliegt</summary>
+        /// <summary>TAS: Kennzeichnung, dass ein abweichender Preis fÃ¼r Tarifkunden vorliegt</summary>
         TAS,
-        /// <summary>TK: für Gas nach KAV § 2 (2) 2a bei ausschließlicher Nutzung zum Kochen und Warmwassererzeugung</summary>
+        /// <summary>TK: fÃ¼r Gas nach KAV Â§ 2 (2) 2a bei ausschlieÃŸlicher Nutzung zum Kochen und Warmwassererzeugung</summary>
         TK,
-        /// <summary>TKS: Kennzeichnung, wenn nach KAV § 2 (2) 2a ein anderen Preis zu verwenden ist</summary>
+        /// <summary>TKS: Kennzeichnung, wenn nach KAV Â§ 2 (2) 2a ein anderen Preis zu verwenden ist</summary>
         TKS,
-        /// <summary>TS: für Strom mit Schwachlast § 2. (2) 1a NT(niedrige KA, 0,61 ct/kWh)</summary>
+        /// <summary>TS: fÃ¼r Strom mit Schwachlast Â§ 2. (2) 1a NT(niedrige KA, 0,61 ct/kWh)</summary>
         TS,
-        /// <summary>TSS: Kennzeichnung, dass ein abweichender Preis für Schwachlast angewendet wird</summary>
-        TSS,
+        /// <summary>TSS: Kennzeichnung, dass ein abweichender Preis fÃ¼r Schwachlast angewendet wird</summary>
+        TSS
     }
 }

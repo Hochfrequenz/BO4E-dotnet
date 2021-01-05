@@ -7,12 +7,13 @@ namespace BO4E.meta.LenientConverters
     /// <summary>
     /// allows deserializing <see cref="Bo4eUri"/>s
     /// </summary>
+    // ReSharper disable once InconsistentNaming
     public class LenientBo4eUriConverter : JsonConverter
     {
         /// <inheritdoc cref="JsonConverter.CanConvert(Type)"/>
         public override bool CanConvert(Type objectType)
         {
-            return (objectType == typeof(Bo4eUri));
+            return objectType == typeof(Bo4eUri);
         }
 
         /// <inheritdoc cref="JsonConverter.ReadJson(JsonReader, Type, object, JsonSerializer)"/>
@@ -22,8 +23,8 @@ namespace BO4E.meta.LenientConverters
             {
                 return null;
             }
-            string rawString = (string)reader.Value;
-            if (rawString.Trim() == String.Empty)
+            var rawString = (string)reader.Value;
+            if (rawString.Trim() == string.Empty)
             {
                 return null;
             }

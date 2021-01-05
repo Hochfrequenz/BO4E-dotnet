@@ -17,9 +17,9 @@ namespace BO4E.ENUM
         SES,
         /// <summary>Standardlastsumme</summary>
         SLS,
-        /// <summary>Tagesparameterabh‰ngige Einspeiseprofilsumme</summary>
+        /// <summary>Tagesparameterabh√§ngige Einspeiseprofilsumme</summary>
         TES,
-        /// <summary>Tagesparameterabh‰ngige Lastprofilsumme</summary>
-        TLS,
+        /// <summary>Tagesparameterabh√§ngige Lastprofilsumme</summary>
+        TLS
     }
 }

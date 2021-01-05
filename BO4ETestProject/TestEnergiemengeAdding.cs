@@ -11,13 +11,13 @@ namespace TestBO4E
         [TestMethod]
         public void TestSimpleAdd()
         {
-            Energiemenge em1 = new Energiemenge()
+            var em1 = new Energiemenge
             {
                 LokationsId = "DE123",
                 LokationsTyp = BO4E.ENUM.Lokationstyp.MaLo,
-                Energieverbrauch = new List<BO4E.COM.Verbrauch>()
+                Energieverbrauch = new List<BO4E.COM.Verbrauch>
                 {
-                    new BO4E.COM.Verbrauch()
+                    new BO4E.COM.Verbrauch
                     {
                         Einheit = BO4E.ENUM.Mengeneinheit.ANZAHL,
                         Obiskennzahl = "1-2-3",
@@ -28,13 +28,13 @@ namespace TestBO4E
                     }
                 }
             };
-            Energiemenge em2 = new Energiemenge()
+            var em2 = new Energiemenge
             {
                 LokationsId = "DE123",
                 LokationsTyp = BO4E.ENUM.Lokationstyp.MaLo,
-                Energieverbrauch = new List<BO4E.COM.Verbrauch>()
+                Energieverbrauch = new List<BO4E.COM.Verbrauch>
                 {
-                    new BO4E.COM.Verbrauch()
+                    new BO4E.COM.Verbrauch
                     {
                         Einheit = BO4E.ENUM.Mengeneinheit.ANZAHL,
                         Obiskennzahl = "4-5-6",
@@ -45,7 +45,7 @@ namespace TestBO4E
                     }
                 }
             };
-            Energiemenge result = em1 + em2;
+            var result = em1 + em2;
             Assert.IsNotNull(result);
             Assert.AreEqual(2, result.Energieverbrauch.Count);
         }
@@ -53,12 +53,12 @@ namespace TestBO4E
         [TestMethod]
         public void TestIllegalAdd()
         {
-            Energiemenge em1 = new Energiemenge()
+            var em1 = new Energiemenge
             {
                 LokationsId = "DE456",
                 LokationsTyp = BO4E.ENUM.Lokationstyp.MeLo
             };
-            Energiemenge em2 = new Energiemenge()
+            var em2 = new Energiemenge
             {
                 LokationsId = "DE789",
                 LokationsTyp = BO4E.ENUM.Lokationstyp.MeLo

@@ -37,32 +37,36 @@ namespace TestBO4EExtensions
         [TestMethod]
         public void TestEnergiemengeObjects()
         {
-            foreach (string boFile in Directory.GetFiles("Energiemenge/", "*.json"))
+            foreach (var boFile in Directory.GetFiles("Energiemenge/", "*.json"))
             {
                 JObject json;
-                using (StreamReader r = new StreamReader(boFile))
+                using (var r = new StreamReader(boFile))
                 {
-                    string jsonString = r.ReadToEnd();
+                    var jsonString = r.ReadToEnd();
                     json = JsonConvert.DeserializeObject<JObject>(jsonString);
                 }
-                JObject assertions = (JObject)json["assertions"];
+                var assertions = (JObject)json["assertions"];
                 if (assertions == null)
                 {
                     continue;
                 }
                 //    Assert.IsNotNull(assertions, $"Your test file {boFile} is broken. It has no 'assertions' key on root level.");
-                JObject bo = (JObject)json["input"];
+                var bo = (JObject)json["input"];
                 Assert.IsNotNull(bo, $"Your test file {boFile} is broken. It has no 'input' key on root level.");
                 Energiemenge em;
                 try
                 {
                     if (boFile.Contains("wintertime2018.json"))
                     {
-                        em = BoMapper.MapObject<Energiemenge>(bo, LenientParsing.DateTime);
+#pragma warning disable 618
+                        em = BoMapper.MapObject<Energiemenge>(bo, LenientParsing.DATE_TIME);
+#pragma warning restore 618
                     }
                     else
                     {
+#pragma warning disable 618
                         em = BoMapper.MapObject<Energiemenge>(bo);
+#pragma warning restore 618
                     }
                 }
                 catch (JsonSerializationException e)
@@ -72,14 +76,14 @@ namespace TestBO4EExtensions
                 }
                 if (json.TryGetValue("fixSapCdsBug", out var fixSapCdsRaw))
                 {
-                    bool fixit = fixSapCdsRaw.Value<bool>();
+                    var fixit = fixSapCdsRaw.Value<bool>();
                     if (fixit)
                     {
                         em.FixSapCDSBug();
                     }
                 }
 
-                foreach (JProperty assertion in assertions.Properties())
+                foreach (var assertion in assertions.Properties())
                 {
                     switch (assertion.Name)
                     {
@@ -90,9 +94,9 @@ namespace TestBO4EExtensions
                             Assert.AreEqual(assertion.Value, em.GetConsumption(new TimeRange(new DateTime(2018, 01, 01), new DateTime(2019, 01, 01))).Item1);
                             break;
                         case "load-kW":
-                            foreach (JProperty dateAssertion in ((JObject)assertions["load-kW"]).Properties())
+                            foreach (var dateAssertion in ((JObject)assertions["load-kW"]).Properties())
                             {
-                                if (DateTime.TryParseExact(dateAssertion.Name, "yyyyMMddHHmmss", CultureInfo.InvariantCulture, DateTimeStyles.AssumeUniversal, out DateTime dt))
+                                if (DateTime.TryParseExact(dateAssertion.Name, "yyyyMMddHHmmss", CultureInfo.InvariantCulture, DateTimeStyles.AssumeUniversal, out var dt))
                                 {
                                     Assert.AreEqual(dateAssertion.Value, em.GetLoad(Mengeneinheit.KW, dt.ToUniversalTime()));
                                 }
@@ -143,7 +147,7 @@ namespace TestBO4EExtensions
                             Assert.AreEqual(assertion.Value, Math.Round(em.GetJointCoverage(GERMAN_APRIL_2018), 4), $"{assertion.Name}: {boFile}");
                             break;
                         case "isPure":
-                            Assert.AreEqual<bool>((bool)assertion.Value, em.IsPure(), boFile);
+                            Assert.AreEqual((bool)assertion.Value, em.IsPure(), boFile);
                             if (!(bool)assertion.Value)
                             {
                                 var pureEms = em.SplitInPureGroups();
@@ -160,7 +164,7 @@ namespace TestBO4EExtensions
                             }
                             break;
                         case "isPureUserProperties":
-                            Assert.AreEqual<bool>((bool)assertion.Value, em.IsPure(true), boFile);
+                            Assert.AreEqual((bool)assertion.Value, em.IsPure(true), boFile);
                             break;
                         default:
                             Assert.IsTrue(false, $"Unknown assertion type {assertion.Name} in {boFile}");
@@ -172,8 +176,8 @@ namespace TestBO4EExtensions
                 // test normalising for all Energiemenge objects
                 if (em.IsPure() && em.IsExtensive() && em.GetTotalConsumption().Item1 != 0.0M)
                 {
-                    decimal targetValue = 1000.0M;
-                    Energiemenge emNormalised = em.Normalise(targetValue);
+                    var targetValue = 1000.0M;
+                    var emNormalised = em.Normalise(targetValue);
                     Assert.AreEqual(Math.Round(targetValue, 12), Math.Round(emNormalised.GetTotalConsumption().Item1, 12));
                 }
 
@@ -187,7 +191,7 @@ namespace TestBO4EExtensions
         [TestMethod]
         public void TestDetangling()
         {
-            Energiemenge em = JsonConvert.DeserializeObject<Energiemenge>("{\"versionStruktur\":1,\"boTyp\":\"ENERGIEMENGE\",\"lokationsId\":\"DE0003604780400000000000012345678\",\"lokationstyp\":\"MeLo\",\"energieverbrauch\":[{\"startdatum\":\"2019-03-01T00:00:00Z\",\"enddatum\":\"2019-06-24T00:00:00Z\",\"wertermittlungsverfahren\":\"MESSUNG\",\"obiskennzahl\":\"1-0:1.8.0\",\"wert\":1,\"einheit\":\"KWH\",\"zaehlernummer\":\"10654212\"},{\"startdatum\":\"2019-03-01T00:00:00Z\",\"enddatum\":\"2019-06-24T00:00:00Z\",\"wertermittlungsverfahren\":\"MESSUNG\",\"obiskennzahl\":\"1-0:2.8.0\",\"wert\":1,\"einheit\":\"KWH\",\"zaehlernummer\":\"10654212\"}],\"anlagennummer\":\"50693510\",\"messlokationsId\":\"DE0003604780400000000000012345678\",\"marktlokationsId\":\"\",\"isMelo\":true,\"zaehlernummer\":\"10654212\"}");
+            var em = JsonConvert.DeserializeObject<Energiemenge>("{\"versionStruktur\":1,\"boTyp\":\"ENERGIEMENGE\",\"lokationsId\":\"DE0003604780400000000000012345678\",\"lokationstyp\":\"MeLo\",\"energieverbrauch\":[{\"startdatum\":\"2019-03-01T00:00:00Z\",\"enddatum\":\"2019-06-24T00:00:00Z\",\"wertermittlungsverfahren\":\"MESSUNG\",\"obiskennzahl\":\"1-0:1.8.0\",\"wert\":1,\"einheit\":\"KWH\",\"zaehlernummer\":\"10654212\"},{\"startdatum\":\"2019-03-01T00:00:00Z\",\"enddatum\":\"2019-06-24T00:00:00Z\",\"wertermittlungsverfahren\":\"MESSUNG\",\"obiskennzahl\":\"1-0:2.8.0\",\"wert\":1,\"einheit\":\"KWH\",\"zaehlernummer\":\"10654212\"}],\"anlagennummer\":\"50693510\",\"messlokationsId\":\"DE0003604780400000000000012345678\",\"marktlokationsId\":\"\",\"isMelo\":true,\"zaehlernummer\":\"10654212\"}");
             em.Detangle();
             Assert.AreEqual(2, em.Energieverbrauch.Count);
             // todo: add real test. this one is limited.

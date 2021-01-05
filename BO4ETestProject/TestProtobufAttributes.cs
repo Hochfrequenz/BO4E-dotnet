@@ -48,7 +48,7 @@ namespace TestBO4E
         protected void TestProtobufType(Type type, bool isDirectBase)
         {
             FieldInfo[] allFields;
-            System.Collections.Generic.IEnumerable<FieldInfo> fieldsWithProtoMemberAttribute;
+            IEnumerable<FieldInfo> fieldsWithProtoMemberAttribute;
             if (isDirectBase)
             {
                 allFields = type.GetFields(BindingFlags.Public | BindingFlags.Instance);
@@ -61,7 +61,7 @@ namespace TestBO4E
             }
 
             var nonOfficialFieldsWithProtoMember = allFields.Where(field => field.GetCustomAttributes(typeof(NonOfficialAttribute)).Any()) // those fields having an [NonOfficial(...)] attribute
-                .Where(field => ((NonOfficialAttribute)(field.GetCustomAttributes(typeof(NonOfficialAttribute)).First())).HasCategory(NonOfficialCategory.CUSTOMER_REQUIREMENTS)) // and the customer_requirements category
+                .Where(field => ((NonOfficialAttribute)field.GetCustomAttributes(typeof(NonOfficialAttribute)).First()).HasCategory(NonOfficialCategory.CUSTOMER_REQUIREMENTS)) // and the customer_requirements category
                 .Intersect(fieldsWithProtoMemberAttribute); // and a [ProtoMember(<id>)] attribute
 
             var wrongTagsNonOfficial = nonOfficialFieldsWithProtoMember.Where(f => ((ProtoMemberAttribute)f.GetCustomAttributes(typeof(ProtoMemberAttribute)).First()).Tag < 1000);
@@ -79,13 +79,13 @@ namespace TestBO4E
             catch (ArgumentOutOfRangeException aoore) when (aoore.ParamName == "tag")
             {
                 Assert.IsTrue(false, $"Do you have any ProtoMember attributes with an id<=0 in {type}?");
-                throw aoore;
+                throw;
             }
 
             if (isDirectBase) // because protobuf-net doesn't support multiple levels of inheritance
             {
                 var duplicateTags = fieldsWithProtoMemberAttribute
-                    .Select(f => f.GetCustomAttributes(typeof(ProtoMemberAttribute), inherit: true).First())
+                    .Select(f => f.GetCustomAttributes(typeof(ProtoMemberAttribute), true).First())
                     .Cast<ProtoMemberAttribute>()
                     .GroupBy(pma => pma.Tag)
                     .Where(g => g.Count() > 1)
@@ -153,7 +153,7 @@ namespace TestBO4E
                     Assert.AreEqual(enumType.Name + "_" + field.Name, pea.Name);
                     allValues.Add(new Tuple<Type, string>(enumType, pea.Name));
                 }
-                Assert.IsTrue(Enum.IsDefined(enumType, (int)0), $"Any enum must define a ZERO like value for Protobuf3 but {enumType} doesn't.");
+                Assert.IsTrue(Enum.IsDefined(enumType, 0), $"Any enum must define a ZERO like value for Protobuf3 but {enumType} doesn't.");
             }
             var nonDistinctValues = allValues
                 .GroupBy(tuple => tuple.Item2) // group by field/protoenum name
@@ -168,7 +168,7 @@ namespace TestBO4E
             var boTypesCrossProduct =
                 from baseType in businessObjectTypes
                 from inheritingType in businessObjectTypes
-                where (baseType.IsAssignableFrom(inheritingType) && baseType != inheritingType)
+                where baseType.IsAssignableFrom(inheritingType) && baseType != inheritingType
                 select new { baseType, inheritingType };
             // Background: https://github.com/protobuf-net/protobuf-net#inheritance
             // The base type must have an attribute that refers to the inherited type.

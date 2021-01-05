@@ -1,8 +1,6 @@
 using BO4E.meta;
 
 using Microsoft.Extensions.Logging;
-
-using System;
 using System.Linq;
 using System.Reflection;
 
@@ -18,15 +16,15 @@ namespace BO4E
         /// <summary>
         /// project wide logger
         /// </summary>
-        public static ILogger _logger = StaticLogger.Logger;
+        public static ILogger Logger = StaticLogger.Logger;
 
-        private static readonly string namespacePrefix = "BO4E.ENUM";
+        private const string NamespacePrefix = "BO4E.ENUM";
 
         /// <summary>
         /// transform an EDIFACT value of known type to a BO4E value
         /// </summary>
         /// <seealso cref="BoEdiMapper.ToEdi(string, string)"/>
-        /// <param name="objectName">name of the BO4E datatype<example>Netzebene</example></param>
+        /// <param name="objectName">name of the BO4E data type<example>Netzebene</example></param>
         /// <param name="objectValue">EDIFACT value<example>E06</example></param>
         /// <returns>
         /// <list type="bullet">
@@ -47,21 +45,21 @@ namespace BO4E
                 return null;
             }
 
-            if (_logger == null)
+            if (Logger == null)
             {
                 // ToDo: inject it instead of ugly workaround.
-                BO4E.StaticLogger.Logger = Microsoft.Extensions.Logging.Abstractions.NullLogger.Instance;
-                _logger = StaticLogger.Logger;
+                StaticLogger.Logger = Microsoft.Extensions.Logging.Abstractions.NullLogger.Instance;
+                Logger = StaticLogger.Logger;
             }
             //Type[] types = Assembly.GetExecutingAssembly().GetTypes();
-            Type clazz = Assembly.GetExecutingAssembly().GetType(namespacePrefix + "." + objectName);
-            Type ediClazz = Assembly.GetExecutingAssembly().GetType($"{namespacePrefix}.EDI.{objectName}Edi");
+            var clazz = Assembly.GetExecutingAssembly().GetType(NamespacePrefix + "." + objectName);
+            var ediClazz = Assembly.GetExecutingAssembly().GetType($"{NamespacePrefix}.EDI.{objectName}Edi");
 
-            bool useEdiClass = false;
-            FieldInfo field = clazz.GetField(objectValue);
+            var useEdiClass = false;
+            var field = clazz.GetField(objectValue);
             if (field == null)
             {
-                _logger.LogDebug("Class " + objectName + " has no field " + objectValue);
+                Logger.LogDebug("Class " + objectName + " has no field " + objectValue);
                 if (ediClazz != null)
                 {
                     field = ediClazz.GetField(objectValue);
@@ -69,14 +67,13 @@ namespace BO4E
 
                     if (field == null)
                     {
-                        _logger.LogDebug("Even ediClass of " + objectName + " has no such field.");
+                        Logger.LogDebug("Even ediClass of " + objectName + " has no such field.");
                         // now try with leading underscore, used for enum values that would normally
-                        // start with a number, e.g. _293 for Codelist "293"
+                        // start with a number, e.g. _293 for code list "293"
                         field = ediClazz.GetField("_" + objectValue);
-                        useEdiClass = true;
                         if (field == null)
                         {
-                            _logger.LogError("No matching field " + objectValue + " for " + objectName + "! returning null");
+                            Logger.LogError("No matching field " + objectValue + " for " + objectName + "! returning null");
                             return null;
                         }
                     }
@@ -84,26 +81,21 @@ namespace BO4E
             }
             if (!useEdiClass)
             {
-                try
+                if(field!=null)
                 {
                     return field.GetValue(null).ToString();
                 }
-                catch (Exception e) // ToDo: Fix pokemon catcher
-                {
-                    _logger.LogError($"No such field: {e.Message}");
-                    return null;
-                }
+                Logger?.LogError($"No such field: '{objectValue}'");
+                return null;
             }
             var attribute = field.GetCustomAttribute<MappingAttribute>();
             if (attribute == null || attribute.Mapping.Count == 0)
             {
-                _logger.LogError("Custom attribute not set, returning null");
+                Logger.LogError("Custom attribute not set, returning null");
                 return null;
             }
-            else
-            {
-                return attribute.Mapping.FirstOrDefault()?.ToString();
-            }
+
+            return attribute.Mapping.FirstOrDefault()?.ToString();
         }
     }
 }

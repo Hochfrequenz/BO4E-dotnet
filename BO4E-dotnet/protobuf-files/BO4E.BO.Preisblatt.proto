@@ -151,7 +151,7 @@ message Preisposition {
    Tarifzeit Tarifzeit = 9;
    BDEWArtikelnummer BdewArtikelnummer = 10;
    Bemessungsgroesse Zonungsgroesse = 11;
-   PositionsAufAbschlag Zu_abschlaege = 12;
+   PositionsAufAbschlag ZuAbschlaege = 12;
    repeated Preisstaffel Preisstaffeln = 13;
 }
 message Preisstaffel {

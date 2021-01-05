@@ -14,6 +14,6 @@ namespace BO4E.ENUM
         Z06,
         /// <summary>Z07: nicht vorhanden</summary>
         [Mapping(Fernschaltung.NICHT_VORHANDEN)]
-        Z07,       
+        Z07
     }
 }

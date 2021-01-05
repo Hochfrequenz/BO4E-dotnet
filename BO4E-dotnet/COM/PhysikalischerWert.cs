@@ -37,8 +37,8 @@ namespace BO4E.COM
         /// <param name="einheit">zugehörige Mengeneinheit</param>
         public PhysikalischerWert(decimal wert, Mengeneinheit einheit) : this()
         {
-            this.Wert = wert;
-            this.Einheit = einheit;
+            Wert = wert;
+            Einheit = einheit;
         }
 
         /// <summary>
@@ -55,16 +55,14 @@ namespace BO4E.COM
         /// <param name="einheitString">zugehörige Einheit als string (case insensitive)</param>
         public PhysikalischerWert(decimal wert, string einheitString) : this()
         {
-            this.Wert = wert;
+            Wert = wert;
 
-            if (!Enum.TryParse<Mengeneinheit>(einheitString, true, out Mengeneinheit einheit))
+            if (!Enum.TryParse<Mengeneinheit>(einheitString, true, out var einheit))
             {
                 throw new ArgumentException($"'{einheitString}' is not a valid Mengeneinheit");
             }
-            else
-            {
-                this.Einheit = einheit;
-            }
+
+            Einheit = einheit;
         }
     }
 }

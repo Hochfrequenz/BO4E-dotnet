@@ -11,7 +11,7 @@
             It primarily relies on the mapping defined by the <see cref="T:BO4E.meta.MappingAttribute"/>.
             <seealso cref="T:BO4E.EdiBoMapper"/>
         </member>
-        <member name="F:BO4E.BoEdiMapper._logger">
+        <member name="F:BO4E.BoEdiMapper.Logger">
             <summary>
             project wide logger
             </summary>
@@ -53,7 +53,7 @@
             This class maps generic JObjects to BO4E business objects.
             </summary>
         </member>
-        <member name="F:BO4E.BoMapper.packagePrefix">
+        <member name="F:BO4E.BoMapper.PackagePrefix">
             <summary>
             namespace.subnamespace for the BO4E package. maybe there's a more elegant way using self reflection.
             </summary>
@@ -72,7 +72,7 @@
             </summary>
             <param name="jobject">business object json</param>
             <param name="lenient">lenient parsing flags</param>
-            <param name="userPropertiesWhiteList">white list of non BO4E standard field you'd like to have de-serialised</param>
+            <param name="userPropertiesWhiteList">white list of non BO4E standard field you'd like to have de-serialized</param>
             <returns><see cref="M:BO4E.BoMapper.MapObject(System.String,Newtonsoft.Json.Linq.JObject,BO4E.meta.LenientConverters.LenientParsing)"/></returns>
         </member>
         <member name="M:BO4E.BoMapper.MapObject(System.String,Newtonsoft.Json.Linq.JObject,BO4E.meta.LenientConverters.LenientParsing)">
@@ -127,7 +127,7 @@
             <summary>
             <see cref="M:BO4E.BoMapper.MapObject(System.Type,Newtonsoft.Json.Linq.JObject,System.Collections.Generic.HashSet{System.String},BO4E.meta.LenientConverters.LenientParsing)"/>
             </summary>
-            <typeparam name="BusinessObjectType">type of return value</typeparam>
+            <typeparam name="TBusinessObjectType">type of return value</typeparam>
             <param name="jobject"><see cref="M:BO4E.BoMapper.MapObject(System.Type,Newtonsoft.Json.Linq.JObject,System.Collections.Generic.HashSet{System.String},BO4E.meta.LenientConverters.LenientParsing)"/></param>
             <param name="userPropertiesWhiteList"><see cref="M:BO4E.BoMapper.MapObject(System.Type,Newtonsoft.Json.Linq.JObject,System.Collections.Generic.HashSet{System.String},BO4E.meta.LenientConverters.LenientParsing)"/></param>
             <param name="lenient"><see cref="M:BO4E.BoMapper.MapObject(System.Type,Newtonsoft.Json.Linq.JObject,System.Collections.Generic.HashSet{System.String},BO4E.meta.LenientConverters.LenientParsing)"/></param>
@@ -912,12 +912,12 @@
              einer Messlokation zum Verbrauch einer Marktlokation beitrögt mit aufgeführt.
              Der Standard ist hier die Addition.
         </member>
-        <member name="F:BO4E.BO.Marktlokation.REGEX_VALIDATE">
+        <member name="F:BO4E.BO.Marktlokation.RegexValidate">
             <summary>
             Regular Expression used to validate 11 digit MarktlokationId
             </summary>
         </member>
-        <member name="F:BO4E.BO.Marktlokation.REGEX_NUMERIC_STRING">
+        <member name="F:BO4E.BO.Marktlokation.RegexNumericString">
             <summary>
             Regular Expression to check if a string consists only of numbers (is numeric)
             </summary>
@@ -1140,7 +1140,7 @@
             Die Variante des Preisblattmodells zur Abbildung von allgemeinen Abgaben
             </summary>
         </member>
-        <member name="P:BO4E.BO.PreisblattKonzessionsabgabe.sparte">
+        <member name="P:BO4E.BO.PreisblattKonzessionsabgabe.Sparte">
             <summary>
             Sparte, auf die sich die KA bezieht.
             </summary>
@@ -1449,11 +1449,6 @@
             </summary>
             <param name="context"></param>
         </member>
-        <member name="M:BO4E.BO.Vertrag.#ctor">
-            <summary>
-            empty constructor for deserialization
-            </summary>
-        </member>
         <member name="T:BO4E.BO.Zaehler">
             <summary>
             Mit diesem Geschäftsobjekt wird die Information zu einem Zähler abgebildet.
@@ -1611,7 +1606,7 @@
         <member name="P:BO4E.COM.AufAbschlag.AufAbschlagstyp">
             <summary>Typ des Aufabschlages (z.B. absolut oder prozentual). Details <see cref="T:BO4E.ENUM.AufAbschlagstyp" /></summary>
         </member>
-        <member name="P:BO4E.COM.AufAbschlag.aufAbschlagsziel">
+        <member name="P:BO4E.COM.AufAbschlag.AufAbschlagsziel">
             <summary>Diesem Preis oder den Kosten ist der Auf/Abschlag zugeordnet. Z.B. Arbeitspreis, Gesamtpreis etc.. Details <see cref="T:BO4E.ENUM.AufAbschlagsziel" /></summary>
         </member>
         <member name="P:BO4E.COM.AufAbschlag.Einheit">
@@ -1757,7 +1752,7 @@
         <member name="P:BO4E.COM.Ausschreibungslos.Wiederholungsintervall">
             <summary>Angabe, in welchem Intervall die Angebotsabgabe wiederholt werden darf. Angabe nur gesetzt für die 2. Phase bei öffentlich-rechtlichen Ausschreibungen, ansonsten NULL</summary> <see cref="T:BO4E.COM.Zeitraum" />
         </member>
-        <member name="P:BO4E.COM.Ausschreibungslos.lieferzeitraum">
+        <member name="P:BO4E.COM.Ausschreibungslos.Lieferzeitraum">
             <summary>Zeitraum, für den die in diesem Los enthaltenen Lieferstellen beliefert werden sollen</summary> <see cref="T:BO4E.COM.Zeitraum" />
         </member>
         <member name="P:BO4E.COM.Ausschreibungslos.WunschKuendingungsfrist">
@@ -1860,7 +1855,7 @@
         <member name="P:BO4E.COM.Energiemix.Atommuell">
             <summary>Höhe des erzeugten Atommülls in g/kWh.</summary>
         </member>
-        <member name="P:BO4E.COM.Energiemix.oekozertifikat">
+        <member name="P:BO4E.COM.Energiemix.Oekozertifikat">
             <summary>Zertifikat für den Energiemix. Details <see cref="T:BO4E.ENUM.Oekozertifikat" /></summary>
         </member>
         <member name="P:BO4E.COM.Energiemix.Oekolabel">
@@ -1993,7 +1988,7 @@
         <member name="T:BO4E.COM.Katasteradresse">
             <summary>Dient der Adressierung über die Liegenschaftsinformation.</summary>
         </member>
-        <member name="P:BO4E.COM.Katasteradresse.Gemarkung_flur">
+        <member name="P:BO4E.COM.Katasteradresse.GemarkungFlur">
             <summary>Die Gemarkung oder die Flur in der die Liegenschaft liegt</summary>
         </member>
         <member name="P:BO4E.COM.Katasteradresse.Flurstueck">
@@ -2261,7 +2256,7 @@
         <member name="P:BO4E.COM.Preisposition.Zonungsgroesse">
             <summary>Mit der Menge der hier angegebenen Größe wird die Staffelung/Zonung durchgeführt. Z.B. Vollbenutzungsstunden. <seealso cref="T:BO4E.ENUM.Bemessungsgroesse" /></summary>
         </member>
-        <member name="P:BO4E.COM.Preisposition.Zu_abschlaege">
+        <member name="P:BO4E.COM.Preisposition.ZuAbschlaege">
             <summary>Zuschläge oder Abschläge auf die Position. <seealso cref="T:BO4E.COM.PositionsAufAbschlag" /></summary>
         </member>
         <member name="P:BO4E.COM.Preisposition.Preisstaffeln">
@@ -2676,7 +2671,7 @@
         </member>
         <member name="P:BO4E.COM.Verbrauch.CENTRAL_EUROPE_STANDARD_TIME">
             <summary>
-            <inheritdoc cref="F:BO4E.meta.CentralEuropeStandardTime.CENTRAL_EUROPE_STANDARD_TIME"/>
+            <inheritdoc cref="F:BO4E.meta.CentralEuropeStandardTime.CentralEuropeStandardTimezoneInfo"/>
             </summary>
         </member>
         <member name="P:BO4E.COM.Verbrauch.Startdatum">
@@ -2931,7 +2926,7 @@
             It primarily relies on the mapping defined by the <see cref="T:BO4E.meta.MappingAttribute"/>.
             <seealso cref="T:BO4E.BoEdiMapper"/>
         </member>
-        <member name="F:BO4E.EdiBoMapper._logger">
+        <member name="F:BO4E.EdiBoMapper.Logger">
             <summary>
             project wide logger
             </summary>
@@ -2941,7 +2936,7 @@
             transform an EDIFACT value of known type to a BO4E value
             </summary>
             <seealso cref="M:BO4E.BoEdiMapper.ToEdi(System.String,System.String)"/>
-            <param name="objectName">name of the BO4E datatype<example>Netzebene</example></param>
+            <param name="objectName">name of the BO4E data type<example>Netzebene</example></param>
             <param name="objectValue">EDIFACT value<example>E06</example></param>
             <returns>
             <list type="bullet">
@@ -8071,7 +8066,7 @@
         </member>
         <member name="P:BO4E.meta.BusinessObjectSerializationBinder.BusinessObjectAndCOMTypes">
             <summary>
-            list of all known BusinessOjects inheriting from <see cref="T:BO4E.BO.BusinessObject"/> and components inheriting from <see cref="T:BO4E.COM.COM"/>
+            list of all known BusinessObjects inheriting from <see cref="T:BO4E.BO.BusinessObject"/> and components inheriting from <see cref="T:BO4E.COM.COM"/>
             </summary>
         </member>
         <member name="M:BO4E.meta.BusinessObjectSerializationBinder.BindToType(System.String,System.String)">
@@ -8082,10 +8077,15 @@
         </member>
         <member name="T:BO4E.meta.CentralEuropeStandardTime">
             <summary>
-            Holds a <see cref="T:System.TimeZoneInfo"/> object with the german time zone <see cref="F:BO4E.meta.CentralEuropeStandardTime.CENTRAL_EUROPE_STANDARD_TIME"/>
+            Holds a <see cref="T:System.TimeZoneInfo"/> object with the german time zone <see cref="F:BO4E.meta.CentralEuropeStandardTime.CentralEuropeStandardTimezoneInfo"/>
             </summary>
         </member>
-        <member name="F:BO4E.meta.CentralEuropeStandardTime.CENTRAL_EUROPE_STANDARD_TIME">
+        <member name="P:BO4E.meta.CentralEuropeStandardTime.CENTRAL_EUROPE_STANDARD_TIME">
+            <summary>
+            legacy time zone info object.
+            </summary>
+        </member>
+        <member name="F:BO4E.meta.CentralEuropeStandardTime.CentralEuropeStandardTimezoneInfo">
             <summary>
             Central Europe Standard Time as hard coded default time. Public to be used elsewhere ;)
             </summary>
@@ -8172,22 +8172,33 @@
             A Custom attribute for make fields and properties multilingual 
             </summary>
         </member>
-        <member name="P:BO4E.meta.FieldName.text">
+        <member name="P:BO4E.meta.FieldName.Text">
             <summary>
             "translated" field name
             </summary>
         </member>
-        <member name="P:BO4E.meta.FieldName.language">
+        <member name="P:BO4E.meta.FieldName.Language">
             <summary>
             language of the translation
             </summary>
         </member>
         <member name="M:BO4E.meta.FieldName.#ctor(System.String,BO4E.meta.Language)">
             <summary>
-            attribute is intialized by providing both language and translation
+            attribute is initialized by providing both language and translation
             </summary>
             <param name="text">translated field name</param>
             <param name="language">language of the translation</param>
+        </member>
+        <member name="T:BO4E.meta.IOptionalGuid">
+            <summary>
+            Our BO and COM objects all come with a nullable Guid <code>Guid?</code>.
+            This interface allows to define extensions methods namely for Entity Framework that use this Guid as key.
+            </summary>
+        </member>
+        <member name="P:BO4E.meta.IOptionalGuid.Guid">
+            <summary>
+            a nullable Guid that may be used as key in database tables.
+            </summary>
         </member>
         <member name="T:BO4E.meta.IUserProperties">
             <summary>
@@ -8203,7 +8214,7 @@
         </member>
         <member name="T:BO4E.meta.Language">
             <summary>
-            List of labguages for making translatedJson in JsonConvert.SerializeObject() function.
+            List of languages for making translatedJson in JsonConvert.SerializeObject() function.
             </summary>
         </member>
         <member name="F:BO4E.meta.Language.EN">
@@ -8218,7 +8229,7 @@
         </member>
         <member name="F:BO4E.meta.Language.FR">
             <summary>
-            Fransösisch
+            Französisch
             </summary>
         </member>
         <member name="F:BO4E.meta.Language.SP">
@@ -8315,33 +8326,33 @@
             are "slightly invalid". Slightly means, e.g. the date string format is wrong.
             </summary>
         </member>
-        <member name="F:BO4E.meta.LenientConverters.LenientParsing.Strict">
+        <member name="F:BO4E.meta.LenientConverters.LenientParsing.STRICT">
             <summary>
             strict parsing, no lenient behaviour
             </summary>
         </member>
-        <member name="F:BO4E.meta.LenientConverters.LenientParsing.DateTime">
+        <member name="F:BO4E.meta.LenientConverters.LenientParsing.DATE_TIME">
             <summary>
             allows automatic conversion of other date formats
             </summary>
         </member>
-        <member name="F:BO4E.meta.LenientConverters.LenientParsing.EnumList">
+        <member name="F:BO4E.meta.LenientConverters.LenientParsing.ENUM_LIST">
             <summary>
             allows list of objects with enum as value where a list of enums was expected
             (e.g. when mapping from a SAP CDS view)
             </summary>
         </member>
-        <member name="F:BO4E.meta.LenientConverters.LenientParsing.Bo4eUri">
+        <member name="F:BO4E.meta.LenientConverters.LenientParsing.BO4_E_URI">
             <summary>
             allow partly malformed BO4E URIs
             </summary>
         </member>
-        <member name="F:BO4E.meta.LenientConverters.LenientParsing.SetInitialDateIfNull">
+        <member name="F:BO4E.meta.LenientConverters.LenientParsing.SET_INITIAL_DATE_IF_NULL">
             <summary>
-            Set initial DateTimeOffset if date could not be parsed (only applies if <see cref="F:BO4E.meta.LenientConverters.LenientParsing.DateTime"/> is set)
+            Set initial DateTimeOffset if date could not be parsed (only applies if <see cref="F:BO4E.meta.LenientConverters.LenientParsing.DATE_TIME"/> is set)
             </summary>
         </member>
-        <member name="F:BO4E.meta.LenientConverters.LenientParsing.StringToInt">
+        <member name="F:BO4E.meta.LenientConverters.LenientParsing.STRING_TO_INT">
             <summary>
             Try to parse Strings as Integer if type doesn't fit
             </summary>
@@ -8354,7 +8365,7 @@
         <member name="T:BO4E.meta.LenientConverters.LenientStringToIntConverter">
             <summary>
             The lenient StringToIntConverter allows for int or int? objects have alphabetic characters.
-            If the string is not parsable as integer 0 is used in case of (int) and <c>null</c> in case of (int?).
+            If the string is not parseable as integer 0 is used in case of (int) and <c>null</c> in case of (int?).
             </summary>
             <example>(string)"12" will be parsed as (int)12 where an integer value is expected.</example>
         </member>
@@ -8372,7 +8383,7 @@
         </member>
         <member name="T:BO4E.meta.MultiLangResolver">
             <summary>
-            An ovverride function for JsonConvert.SerializeObject() that checks FieldName attribute and takes changes on translated field name.   
+            An override function for JsonConvert.SerializeObject() that checks FieldName attribute and takes changes on translated field name.   
             var settings = new JsonSerializerSettings
              {
                 ContractResolver = new MultiLangResolver(BO4E.ENUM.Language.EN),
@@ -8453,7 +8464,7 @@
         </member>
         <member name="F:BO4E.meta.NonOfficialCategory.PROPOSED_DELETION">
             <summary>
-            an information or field is no longer necessary or outdated (please use <see cref="T:System.ObsoleteAttribute"/> too). Hochfrequenz favours removal of this field from the official BO4E standard.
+            an information or field is no longer necessary or outdated (please use <see cref="T:System.ObsoleteAttribute"/> too). Hochfrequenz favors removal of this field from the official BO4E standard.
             </summary>
         </member>
         <member name="F:BO4E.meta.NonOfficialCategory.CUSTOMER_REQUIREMENTS">
@@ -8473,7 +8484,7 @@
         </member>
         <member name="M:BO4E.UserPropertiesDataContractResolver.#ctor(System.Collections.Generic.HashSet{System.String})">
             <summary>
-            The UserPropertiesDataContractResolver is initialised with a white list of allowed properties. Everything else is discarded.
+            The UserPropertiesDataContractResolver is initialized with a white list of allowed properties. Everything else is discarded.
             </summary>
             <param name="userPropertiesWhiteList">white list of properties (actually a white"set")</param>
         </member>
@@ -8524,7 +8535,7 @@
         </member>
         <member name="M:BO4E.UserPropertiesExtensions.EvaluateUserProperty``3(``2,System.String,System.Func{``0,``1})">
             <summary>
-            Apply <paramref name="evaluation"/> to the userproperty under <paramref name="userPropertyKey"/> if it exists
+            Apply <paramref name="evaluation"/> to the user property under <paramref name="userPropertyKey"/> if it exists
             </summary>
             <typeparam name="TUserProperty">type of the userproperty value</typeparam>
             <typeparam name="TEvaluationResult">type of the expected result</typeparam>

@@ -11,7 +11,7 @@ namespace BO4E.Extensions.BusinessObjects.Benachrichtigung
     public static partial class BenachrichtigungExtension
     {
         /// <summary>
-        /// checks if <see cref="BO4E.BO.Benachrichtigung.infos"/> contains a key value pair
+        /// checks if <see cref="BO4E.BO.Benachrichtigung.Infos"/> contains a key value pair
         /// </summary>
         /// <param name="b"></param>
         /// <param name="key"></param>
@@ -19,7 +19,7 @@ namespace BO4E.Extensions.BusinessObjects.Benachrichtigung
         /// <returns></returns>
         public static bool Has(this BO4E.BO.Benachrichtigung b, string key, string value)
         {
-            return Has(b, new BO4E.COM.GenericStringStringInfo()
+            return Has(b, new BO4E.COM.GenericStringStringInfo
             {
                 KeyColumn = key,
                 Value = value
@@ -27,7 +27,7 @@ namespace BO4E.Extensions.BusinessObjects.Benachrichtigung
         }
 
         /// <summary>
-        /// checks if <paramref name="b"/> contains a key value pair specified in <paramref name="gssi"/> in <see cref="BO4E.BO.Benachrichtigung.infos"/>
+        /// checks if <paramref name="b"/> contains a key value pair specified in <paramref name="gssi"/> in <see cref="BO4E.BO.Benachrichtigung.Infos"/>
         /// </summary>
         /// <param name="b"></param>
         /// <param name="gssi"></param>
@@ -38,7 +38,7 @@ namespace BO4E.Extensions.BusinessObjects.Benachrichtigung
             {
                 return false;
             }
-            // ToDo für Hamid: Bitte prüfen, warum Contains false zurückliefert.
+            // ToDo fÃ¼r Hamid: Bitte prÃ¼fen, warum Contains false zurÃ¼ckliefert.
             return b.Infos.Any(m => m.KeyColumn == gssi.KeyColumn && m.Value == gssi.Value);
         }
 
@@ -47,7 +47,7 @@ namespace BO4E.Extensions.BusinessObjects.Benachrichtigung
         /// </summary>
         /// <param name="b">Benachrichtigung</param>
         /// <param name="key">key to be checked</param>
-        /// <returns>true if key is in <see cref="BO4E.BO.Benachrichtigung.infos"/></returns>
+        /// <returns>true if key is in <see cref="BO4E.BO.Benachrichtigung.Infos"/></returns>
         public static bool Has(this BO4E.BO.Benachrichtigung b, string key)
         {
             if (b.Infos == null || b.Infos.Count == 0)
@@ -58,7 +58,7 @@ namespace BO4E.Extensions.BusinessObjects.Benachrichtigung
         }
 
         /// <summary>
-        /// checks if Benachrichtigung <paramref name="b"/> has an entry with key <paramref name="keyName"/> in <see cref="BO4E.BO.Benachrichtigung.infos"/> which fulfills a predicate
+        /// checks if Benachrichtigung <paramref name="b"/> has an entry with key <paramref name="keyName"/> in <see cref="BO4E.BO.Benachrichtigung.Infos"/> which fulfills a predicate
         /// </summary>
         /// <typeparam name="T">expected type of the info property</typeparam>
         /// <param name="b">Benachrichtigung object</param>
@@ -81,23 +81,21 @@ namespace BO4E.Extensions.BusinessObjects.Benachrichtigung
                     {
                         typeConverter = TypeDescriptor.GetConverter(typeof(T));
                     }
-                    if (typeConverter != null)
+
                     {
-                        T value = (T)typeConverter.ConvertFromString(info.Value);
+                        var value = (T)typeConverter.ConvertFromString(info.Value);
                         return predicate(value);
                     }
-                    continue;
                 }
                 catch (NotSupportedException)
                 {
-                    continue;
                 }
             }
             return false;
         }
 
         /// <summary>
-        /// moves key value pairs from <see cref="BO4E.BO.Benachrichtigung.infos"/> to <see cref="BO4E.BO.BusinessObject.UserProperties"/> for more conventient handling.
+        /// moves key value pairs from <see cref="BO4E.BO.Benachrichtigung.Infos"/> to <see cref="BO4E.BO.BusinessObject.UserProperties"/> for more convenient handling.
         /// </summary>
         /// <param name="b">Benachrichtigung</param>
         /// <param name="overwriteExistingKeys">set true to overwrite userProperties with same key</param>

@@ -18,8 +18,8 @@ namespace BO4E.Extensions.Encryption
 {
     public class X509AsymmetricEncrypter : Encrypter
     {
-        private readonly ISet<X509Certificate2> publicCerts;
-        private AsymmetricKeyParameter privateKey;
+        private readonly ISet<X509Certificate2> _publicCerts;
+        private AsymmetricKeyParameter _privateKey;
 
         /// <summary>
         /// Provide the constructor with an X509 certificate to use as encrypter.
@@ -27,8 +27,8 @@ namespace BO4E.Extensions.Encryption
         /// <param name="cert">X509 certificate must contain the public key.</param>
         public X509AsymmetricEncrypter(X509Certificate2 cert)
         {
-            this.publicCerts = new HashSet<X509Certificate2> { cert };
-            this.privateKey = null;
+            _publicCerts = new HashSet<X509Certificate2> { cert };
+            _privateKey = null;
         }
 
         /// <summary>
@@ -37,21 +37,21 @@ namespace BO4E.Extensions.Encryption
         /// <param name="certs">Collection of certificates</param>
         public X509AsymmetricEncrypter(ISet<X509Certificate2> certs)
         {
-            this.publicCerts = new HashSet<X509Certificate2>();
-            foreach (X509Certificate2 c in certs)
+            _publicCerts = new HashSet<X509Certificate2>();
+            foreach (var c in certs)
             {
-                this.publicCerts.Add(c);
+                _publicCerts.Add(c);
             }
-            this.privateKey = null;
+            _privateKey = null;
         }
 
         private List<string> GetPublicKeysBase64()
         {
-            List<string> result = new List<string>();
-            foreach (X509Certificate2 cert in publicCerts)
+            var result = new List<string>();
+            foreach (var cert in _publicCerts)
             {
                 // https://stackoverflow.com/a/4740292
-                StringBuilder builder = new StringBuilder();
+                var builder = new StringBuilder();
                 builder.AppendLine("-----BEGIN CERTIFICATE-----");
                 builder.AppendLine(Convert.ToBase64String(cert.Export(X509ContentType.Cert), Base64FormattingOptions.InsertLineBreaks));
                 builder.AppendLine("-----END CERTIFICATE-----");
@@ -66,54 +66,54 @@ namespace BO4E.Extensions.Encryption
         /// <param name="kp">AsymmetricKeyParamer, must contain the RSA private key.</param>
         public X509AsymmetricEncrypter(AsymmetricKeyParameter kp)
         {
-            this.publicCerts = null;
-            this.privateKey = kp;
+            _publicCerts = null;
+            _privateKey = kp;
         }
 
         public string Encrypt(string plainText)
         {
-            byte[] plainBytes = Encoding.UTF8.GetBytes(plainText);
-            CmsProcessableByteArray cpba = new CmsProcessableByteArray(plainBytes);
+            var plainBytes = Encoding.UTF8.GetBytes(plainText);
+            var cpba = new CmsProcessableByteArray(plainBytes);
 
-            CmsEnvelopedDataGenerator envelopedGen = new CmsEnvelopedDataGenerator();
-            foreach (X509Certificate2 cert in publicCerts)
+            var envelopedGen = new CmsEnvelopedDataGenerator();
+            foreach (var cert in _publicCerts)
             {
-                Org.BouncyCastle.X509.X509Certificate bouncyCert = DotNetUtilities.FromX509Certificate(cert);
-                AsymmetricKeyParameter keyParameter = bouncyCert.GetPublicKey();
+                var bouncyCert = DotNetUtilities.FromX509Certificate(cert);
+                bouncyCert.GetPublicKey();
                 envelopedGen.AddKeyTransRecipient(bouncyCert);
             }
 
-            CmsEnvelopedData envelopedData = envelopedGen.Generate(cpba, CmsEnvelopedGenerator.Aes256Cbc);
-            string cipherString = Convert.ToBase64String(envelopedData.GetEncoded());
+            var envelopedData = envelopedGen.Generate(cpba, CmsEnvelopedGenerator.Aes256Cbc);
+            var cipherString = Convert.ToBase64String(envelopedData.GetEncoded());
             return cipherString;
         }
 
         public EncryptedObject Encrypt(BusinessObject plainObject)
         {
-            string plainText = JsonConvert.SerializeObject(plainObject, settings: encryptionSerializerSettings);
-            string cipherString = Encrypt(plainText);
+            var plainText = JsonConvert.SerializeObject(plainObject, encryptionSerializerSettings);
+            var cipherString = Encrypt(plainText);
             return new EncryptedObjectPKCS7(cipherString, GetPublicKeysBase64());
         }
 
         public string Decrypt(string cipherText)
         {
-            byte[] cipherBytes = Convert.FromBase64String(cipherText);
+            var cipherBytes = Convert.FromBase64String(cipherText);
             var envelopedData = new CmsEnvelopedData(cipherBytes);
-            RecipientInformationStore recipientsStore = envelopedData.GetRecipientInfos();
-            ICollection recipientsCollection = recipientsStore.GetRecipients();
-            IList recipients = recipientsCollection as IList;
-            byte[] plainBytes = new byte[] { };
-            int index = 0;
+            var recipientsStore = envelopedData.GetRecipientInfos();
+            var recipientsCollection = recipientsStore.GetRecipients();
+            var recipients = recipientsCollection as IList;
+            var plainBytes = new byte[] { };
+            var index = 0;
             foreach (KeyTransRecipientInformation recipientInfo in recipients)
             {
                 // todo: better approach than catching n exceptions.
-                RecipientInformation recipient = recipientsStore.GetFirstRecipient(recipientInfo.RecipientID);
+                var recipient = recipientsStore.GetFirstRecipient(recipientInfo.RecipientID);
                 try
                 {
-                    plainBytes = recipient.GetContent(this.privateKey);
+                    plainBytes = recipient.GetContent(_privateKey);
                     break;
                 }
-                catch (CmsException e) when (index != recipientsStore.Count - 1)
+                catch (CmsException) when (index != recipientsStore.Count - 1)
                 {
                 }
                 index++;
@@ -139,23 +139,23 @@ namespace BO4E.Extensions.Encryption
             {
                 return null;
             }
-            string plainString = Decrypt(eo.CipherText);
-            return JsonConvert.DeserializeObject<BusinessObject>(plainString, settings: encryptionSerializerSettings);
+            var plainString = Decrypt(eo.CipherText);
+            return JsonConvert.DeserializeObject<BusinessObject>(plainString, encryptionSerializerSettings);
         }
 
         public override T Decrypt<T>(EncryptedObject encryptedObject)
         {
             if (!(encryptedObject is EncryptedObjectPKCS7 eo))
             {
-                return (T)null;
+                return null;
             }
-            string plainString = Decrypt(eo.CipherText);
-            return JsonConvert.DeserializeObject<T>(plainString, settings: encryptionSerializerSettings);
+            var plainString = Decrypt(eo.CipherText);
+            return JsonConvert.DeserializeObject<T>(plainString, encryptionSerializerSettings);
         }
 
         public override void Dispose()
         {
-            this.privateKey = null;
+            _privateKey = null;
         }
 
         ~X509AsymmetricEncrypter()

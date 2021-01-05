@@ -18,11 +18,12 @@ namespace BO4E.COM
     public class Verbrauch : COM
     {
         /// <summary>
-        /// <inheritdoc cref="CentralEuropeStandardTime.CENTRAL_EUROPE_STANDARD_TIME"/>
+        /// <inheritdoc cref="CentralEuropeStandardTime.CentralEuropeStandardTimezoneInfo"/>
         /// </summary>
         [ProtoIgnore]
-        [Obsolete("This property moved. Use the property BO4E.meta." + nameof(CentralEuropeStandardTime) + "." + nameof(CentralEuropeStandardTime.CENTRAL_EUROPE_STANDARD_TIME) + " instead.", true)]
-        public static TimeZoneInfo CENTRAL_EUROPE_STANDARD_TIME { get => CentralEuropeStandardTime.CENTRAL_EUROPE_STANDARD_TIME; }
+        [Obsolete("This property moved. Use the property BO4E.meta." + nameof(CentralEuropeStandardTime) + "." + nameof(CentralEuropeStandardTime.CentralEuropeStandardTimezoneInfo) + " instead.", true)]
+        // ReSharper disable once InconsistentNaming
+        public static TimeZoneInfo CENTRAL_EUROPE_STANDARD_TIME { get => CentralEuropeStandardTime.CentralEuropeStandardTimezoneInfo; }
 
         /// <summary>
         /// Beginn des Zeitraumes, für den der Verbrauch angegeben wird.
@@ -82,7 +83,7 @@ namespace BO4E.COM
         [OnDeserialized]
         protected void FixSapBugs(StreamingContext context)
         {
-            this.FixSapCdsBug();
+            FixSapCdsBug();
         }
 
         /// <summary>
@@ -98,7 +99,7 @@ namespace BO4E.COM
         }
 
         [ProtoIgnore]
-        internal const string _SAP_PROFDECIMALS_KEY = "sap_profdecimals";
+        internal const string SapProfdecimalsKey = "sap_profdecimals";
 
         /// <summary>
         /// Our SAP Core Data Service view definition reading the profile values has a bug: 
@@ -120,14 +121,10 @@ namespace BO4E.COM
             // {
             if (Startdatum != null && Enddatum != null && Startdatum > Enddatum)
             {
-                TimeSpan diff = Startdatum - Enddatum;
+                var diff = Startdatum - Enddatum;
                 if (diff.Hours <= 25 && diff.Hours >= 23 && diff.Minutes == 45 && Startdatum.Hour >= 22 && Enddatum.Hour == 0)
                 {
                     Enddatum += new TimeSpan(diff.Hours + 1, 0, 0);
-                }
-                else
-                {
-                    // something seems wrong but not sure how to fix it. 
                 }
             }
             Startdatum = DateTime.SpecifyKind(Startdatum, DateTimeKind.Utc);
@@ -135,9 +132,9 @@ namespace BO4E.COM
             if ((int)(Enddatum - Startdatum).TotalHours == 2)
             {
                 // check DST of start and enddatum
-                var startdatumLocal = TimeZoneInfo.ConvertTimeFromUtc(Startdatum, CentralEuropeStandardTime.CENTRAL_EUROPE_STANDARD_TIME);
-                var enddatumLocal = TimeZoneInfo.ConvertTimeFromUtc(Enddatum, CentralEuropeStandardTime.CENTRAL_EUROPE_STANDARD_TIME);
-                if (!CentralEuropeStandardTime.CENTRAL_EUROPE_STANDARD_TIME.IsDaylightSavingTime(startdatumLocal - new TimeSpan(0, 0, 1)) && CentralEuropeStandardTime.CENTRAL_EUROPE_STANDARD_TIME.IsDaylightSavingTime(enddatumLocal))
+                var startdatumLocal = TimeZoneInfo.ConvertTimeFromUtc(Startdatum, CentralEuropeStandardTime.CentralEuropeStandardTimezoneInfo);
+                var enddatumLocal = TimeZoneInfo.ConvertTimeFromUtc(Enddatum, CentralEuropeStandardTime.CentralEuropeStandardTimezoneInfo);
+                if (!CentralEuropeStandardTime.CentralEuropeStandardTimezoneInfo.IsDaylightSavingTime(startdatumLocal - new TimeSpan(0, 0, 1)) && CentralEuropeStandardTime.CentralEuropeStandardTimezoneInfo.IsDaylightSavingTime(enddatumLocal))
                 {
                     // change winter-->summer time (e.g. UTC+1-->UTC+2)
                     // this is an artefact of the sap enddatum computation
@@ -148,26 +145,26 @@ namespace BO4E.COM
             {
                 // check DST of start and enddatum
                 //var startdatumLocal = TimeZoneInfo.ConvertTimeFromUtc(startdatum, CentralEuropeStandardTime.CENTRAL_EUROPE_STANDARD_TIME);
-                var enddatumLocal = TimeZoneInfo.ConvertTimeFromUtc(Enddatum, CentralEuropeStandardTime.CENTRAL_EUROPE_STANDARD_TIME);
-                if (!CentralEuropeStandardTime.CENTRAL_EUROPE_STANDARD_TIME.IsDaylightSavingTime(enddatumLocal - new TimeSpan(1, 0, 0)) && CentralEuropeStandardTime.CENTRAL_EUROPE_STANDARD_TIME.IsDaylightSavingTime(enddatumLocal - new TimeSpan(1, 0, 1)))
+                var enddatumLocal = TimeZoneInfo.ConvertTimeFromUtc(Enddatum, CentralEuropeStandardTime.CentralEuropeStandardTimezoneInfo);
+                if (!CentralEuropeStandardTime.CentralEuropeStandardTimezoneInfo.IsDaylightSavingTime(enddatumLocal - new TimeSpan(1, 0, 0)) && CentralEuropeStandardTime.CentralEuropeStandardTimezoneInfo.IsDaylightSavingTime(enddatumLocal - new TimeSpan(1, 0, 1)))
                 {
                     // change winter-->summer time (e.g. UTC+1-->UTC+2)
                     // this is an artefact of the sap enddatum computation
                     Enddatum += new TimeSpan(1, 0, 0); // toDo: get offset from timezoneinfo->rules->dstOffset
                 }
             }
-            if (UserProperties != null && UserProperties.TryGetValue(_SAP_PROFDECIMALS_KEY, out JToken profDecimalsRaw))
+            if (UserProperties != null && UserProperties.TryGetValue(SapProfdecimalsKey, out var profDecimalsRaw))
             {
                 var profDecimals = profDecimalsRaw.Value<int>();
                 if (profDecimals > 0)
                 {
                     // or should I import math.pow() for this purpose?
-                    for (int i = 0; i < profDecimals; i++)
+                    for (var i = 0; i < profDecimals; i++)
                     {
                         Wert /= 10.0M;
                     }
                 }
-                UserProperties.Remove(_SAP_PROFDECIMALS_KEY);
+                UserProperties.Remove(SapProfdecimalsKey);
             }
         }
 

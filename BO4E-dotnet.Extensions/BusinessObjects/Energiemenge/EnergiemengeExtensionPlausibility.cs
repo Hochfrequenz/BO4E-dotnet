@@ -32,11 +32,11 @@ namespace BO4E.Extensions.BusinessObjects.Energiemenge
         {
             using (MiniProfiler.Current.Step(nameof(GetPlausibilityReport)))
             {
-                TimeRange trReference = emReference.GetTimeRange();
-                TimeRange trOther = emOther.GetTimeRange();
+                var trReference = emReference.GetTimeRange();
+                var trOther = emOther.GetTimeRange();
                 if (timeframe == null)
                 {
-                    ITimeRange overlap = trReference.GetIntersection(trOther);
+                    var overlap = trReference.GetIntersection(trOther);
                     if (!ignoreLocation)
                     {
                         if (!(emReference.LokationsId == emOther.LokationsId && emReference.LokationsTyp == emOther.LokationsTyp))
@@ -72,7 +72,7 @@ namespace BO4E.Extensions.BusinessObjects.Energiemenge
                     consumptionOther = consumptionOtherRaw;
                 }
 
-                decimal absoluteDeviation = consumptionOther.Item1 - consumptionReference.Item1;
+                var absoluteDeviation = consumptionOther.Item1 - consumptionReference.Item1;
                 decimal? relativeDeviation;
                 try
                 {
@@ -83,22 +83,22 @@ namespace BO4E.Extensions.BusinessObjects.Energiemenge
                     relativeDeviation = null;
                 }
 
-                Verbrauch vReference = emReference.Energieverbrauch.FirstOrDefault(); // copies obiskennzahl, wertermittlungsverfahren...
+                var vReference = emReference.Energieverbrauch.FirstOrDefault(); // copies obiskennzahl, wertermittlungsverfahren...
                 vReference.Wert = consumptionReference.Item1;
                 vReference.Einheit = consumptionReference.Item2;
                 vReference.Startdatum = timeframe.Start;
                 vReference.Enddatum = timeframe.End;
 
-                Verbrauch vOther = emOther.Energieverbrauch.FirstOrDefault(); // copies obiskennzahl, wertermittlungsverfahren...
+                var vOther = emOther.Energieverbrauch.FirstOrDefault(); // copies obiskennzahl, wertermittlungsverfahren...
                 vOther.Wert = consumptionOther.Item1;
                 vOther.Einheit = consumptionOther.Item2;
                 vOther.Startdatum = timeframe.Start;
                 vOther.Enddatum = timeframe.End;
 
-                var pr = new PlausibilityReport()
+                var pr = new PlausibilityReport
                 {
                     LokationsId = emReference.LokationsId,
-                    ReferenceTimeFrame = new BO4E.COM.Zeitraum() { Startdatum = new DateTimeOffset(timeframe.Start), Enddatum = new DateTimeOffset(timeframe.End) },
+                    ReferenceTimeFrame = new Zeitraum { Startdatum = new DateTimeOffset(timeframe.Start), Enddatum = new DateTimeOffset(timeframe.End) },
                     VerbrauchReference = vReference,
                     VerbrauchOther = vOther,
                     AbsoluteDeviation = Math.Abs(absoluteDeviation),
@@ -121,7 +121,7 @@ namespace BO4E.Extensions.BusinessObjects.Energiemenge
         /// </summary>
         /// <param name="config">container containing the relevant data</param>
         /// <returns></returns>
-        public static PlausibilityReport GetPlausibilityReport(this BO4E.BO.Energiemenge energiemenge, PlausibilityReport.PlausibilityReportConfiguration config)
+        public static PlausibilityReport GetPlausibilityReport(this BO4E.BO.Energiemenge energiemenge, PlausibilityReportConfiguration config)
         {
             return energiemenge.GetPlausibilityReport(config.Other, new TimeRange(config.Timeframe.Startdatum.Value.UtcDateTime, config.Timeframe.Enddatum.Value.UtcDateTime), config.IgnoreLocation);
         }
@@ -138,11 +138,11 @@ namespace BO4E.Extensions.BusinessObjects.Energiemenge
             {
                 throw new ArgumentNullException(nameof(ranges), "list of time ranges must not be null");
             }
-            Dictionary<ITimeRange, PlausibilityReport> result = new Dictionary<ITimeRange, PlausibilityReport>();
+            var result = new Dictionary<ITimeRange, PlausibilityReport>();
             foreach (var range in ranges)
             {
                 var localConfig = JsonConvert.DeserializeObject<PlausibilityReportConfiguration>(JsonConvert.SerializeObject(config));
-                localConfig.Timeframe = new Zeitraum()
+                localConfig.Timeframe = new Zeitraum
                 {
                     Startdatum = range.Start,
                     Enddatum = range.End
@@ -170,7 +170,7 @@ namespace BO4E.Extensions.BusinessObjects.Energiemenge
             {
                 throw new ArgumentNullException(nameof(config.Timeframe));
             }
-            var slices = GetLocalDailySlices(new TimeRange()
+            var slices = GetLocalDailySlices(new TimeRange
             {
                 Start = config.Timeframe.Startdatum.Value.UtcDateTime,
                 End = config.Timeframe.Enddatum.Value.UtcDateTime
@@ -194,7 +194,7 @@ namespace BO4E.Extensions.BusinessObjects.Energiemenge
             {
                 throw new ArgumentNullException(nameof(config.Timeframe));
             }
-            var slices = GetLocalMonthlySlices(new TimeRange()
+            var slices = GetLocalMonthlySlices(new TimeRange
             {
                 Start = config.Timeframe.Startdatum.Value.UtcDateTime,
                 End = config.Timeframe.Enddatum.Value.UtcDateTime

@@ -50,7 +50,7 @@ namespace BO4E.COM
         [OnDeserialized]
         public void CleanUpSapNotes(StreamingContext context)
         {
-            this.Inhalt = TrailingMinusRegex.Replace(Inhalt, string.Empty);
+            Inhalt = TrailingMinusRegex.Replace(Inhalt, string.Empty);
         }
     }
 }

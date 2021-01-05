@@ -21,7 +21,7 @@ namespace BO4E.Extensions.BusinessObjects.Energiemenge
             }
             if (tz == null)
             {
-                tz = CentralEuropeStandardTime.CENTRAL_EUROPE_STANDARD_TIME;
+                tz = CentralEuropeStandardTime.CentralEuropeStandardTimezoneInfo;
             }
             if (overallTimeRange.Start.Kind == DateTimeKind.Unspecified)
             {
@@ -35,14 +35,14 @@ namespace BO4E.Extensions.BusinessObjects.Energiemenge
             IList<ITimeRange> result = new List<ITimeRange>();
             if (!overallTimeRange.IsMoment)
             {
-                result.Add(new TimeRange()
+                result.Add(new TimeRange
                 {
                     Start = overallTimeRange.Start,
                     End = overallTimeRange.Start.AddDaysDST(1)
                 });
                 while (result.Last().End < overallTimeRange.End)
                 {
-                    result.Add(new TimeRange()
+                    result.Add(new TimeRange
                     {
                         Start = result.Last().Start.AddDaysDST(1),
                         End = result.Last().End.AddDaysDST(1)
@@ -62,7 +62,7 @@ namespace BO4E.Extensions.BusinessObjects.Energiemenge
             DateTime localEnd;
             if (tz == null)
             {
-                tz = CentralEuropeStandardTime.CENTRAL_EUROPE_STANDARD_TIME;
+                tz = CentralEuropeStandardTime.CentralEuropeStandardTimezoneInfo;
 
                 if (overallTimeRange.Start.Kind != DateTimeKind.Utc)
                 {
@@ -110,17 +110,17 @@ namespace BO4E.Extensions.BusinessObjects.Energiemenge
             IList<ITimeRange> result = new List<ITimeRange>();
             if (!overallTimeRange.IsMoment)
             {
-                DateTime initialStart = new DateTime(localStart.Year, localStart.Month, 1, 0, 0, 0, DateTimeKind.Unspecified);
-                DateTime initialEnd = initialStart.AddMonths(1);
-                result.Add(new TimeRange()
+                var initialStart = new DateTime(localStart.Year, localStart.Month, 1, 0, 0, 0, DateTimeKind.Unspecified);
+                var initialEnd = initialStart.AddMonths(1);
+                result.Add(new TimeRange
                 {
                     Start = initialStart,
                     End = initialEnd
                 });
                 while (result.Last().End < overallTimeRange.End)
                 {
-                    DateTime sliceStart = result.Last().Start.AddMonths(1);
-                    result.Add(new TimeRange()
+                    var sliceStart = result.Last().Start.AddMonths(1);
+                    result.Add(new TimeRange
                     {
                         Start = sliceStart,
                         End = sliceStart.AddMonths(1)
@@ -128,7 +128,7 @@ namespace BO4E.Extensions.BusinessObjects.Energiemenge
                 }
             }
             return result
-                .Select(tr => (ITimeRange)new TimeRange()
+                .Select(tr => (ITimeRange)new TimeRange
                 {
                     Start = TimeZoneInfo.ConvertTimeToUtc(tr.Start, tz),
                     End = TimeZoneInfo.ConvertTimeToUtc(tr.End, tz)
@@ -142,34 +142,32 @@ namespace BO4E.Extensions.BusinessObjects.Energiemenge
         /// </summary>
         /// <param name="dt">datetime (kind unspecified or Utc)</param>
         /// <param name="value">number of days to add</param>
-        /// <param name="tz">timezone <paramref name="dt"/> is meant to be iff dt.Kind == DateTimeKind.Unspecified, default (if null) is <see cref="CentralEuropeStandardTime.CENTRAL_EUROPE_STANDARD_TIME"/></param>
+        /// <param name="tz">timezone <paramref name="dt"/> is meant to be iff dt.Kind == DateTimeKind.Unspecified, default (if null) is <see cref="CentralEuropeStandardTime.CentralEuropeStandardTimezoneInfo"/></param>
         /// <returns></returns>
         public static DateTime AddDaysDST(this DateTime dt, double value, TimeZoneInfo tz = null)
         {
             if (tz == null)
             {
-                tz = CentralEuropeStandardTime.CENTRAL_EUROPE_STANDARD_TIME;
+                tz = CentralEuropeStandardTime.CentralEuropeStandardTimezoneInfo;
             }
             if (dt.Kind == DateTimeKind.Local)
             {
                 throw new ArgumentException("DateTime Kind must not be local", nameof(dt));
             }
-            else if (dt.Kind == DateTimeKind.Unspecified)
+
+            if (dt.Kind == DateTimeKind.Unspecified)
             {
                 return dt.AddDays(value); // doesn't take dst into account. that's just what we want! A day can have 23,24 or 25 hours
             }
-            else if (dt.Kind == DateTimeKind.Utc)
+            if (dt.Kind == DateTimeKind.Utc)
             {
                 // an utc day does always have 24 hours. not what humans expect!
-                DateTime dtLocal = DateTime.SpecifyKind(TimeZoneInfo.ConvertTimeFromUtc(dt, tz), DateTimeKind.Unspecified);
-                DateTime preResult = DateTime.SpecifyKind(dtLocal.AddDays(value), DateTimeKind.Unspecified);
-                DateTime result = TimeZoneInfo.ConvertTimeToUtc(preResult, tz);
+                var dtLocal = DateTime.SpecifyKind(TimeZoneInfo.ConvertTimeFromUtc(dt, tz), DateTimeKind.Unspecified);
+                var preResult = DateTime.SpecifyKind(dtLocal.AddDays(value), DateTimeKind.Unspecified);
+                var result = TimeZoneInfo.ConvertTimeToUtc(preResult, tz);
                 return result;
             }
-            else
-            {
-                throw new NotImplementedException($"DateTimeKind {dt.Kind} is not implemented.");
-            }
+            throw new NotImplementedException($"DateTimeKind {dt.Kind} is not implemented.");
         }
     }
 }

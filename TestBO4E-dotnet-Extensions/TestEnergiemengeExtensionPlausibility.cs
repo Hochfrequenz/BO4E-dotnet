@@ -20,12 +20,12 @@ namespace TestBO4EExtensions
         [TestMethod]
         public void TestPlausibilityReportGenerationSomeCustomer()
         {
-            foreach (string boFile in Directory.GetFiles("Energiemenge/plausibility", "somecustomer*.json"))
+            foreach (var boFile in Directory.GetFiles("Energiemenge/plausibility", "somecustomer*.json"))
             {
                 JObject json;
-                using (StreamReader r = new StreamReader(boFile))
+                using (var r = new StreamReader(boFile))
                 {
-                    string jsonString = r.ReadToEnd();
+                    var jsonString = r.ReadToEnd();
                     json = JsonConvert.DeserializeObject<JObject>(jsonString);
                 }
                 foreach (var key in new HashSet<string> { "reference", "other", "expectedResult" })
@@ -35,11 +35,11 @@ namespace TestBO4EExtensions
                         throw new ArgumentException($"Test file {boFile} has no key '{key}'.");
                     }
                 }
-                Energiemenge emReference = JsonConvert.DeserializeObject<Energiemenge>(json["reference"].ToString());
-                Energiemenge emOther = JsonConvert.DeserializeObject<Energiemenge>(json["other"].ToString());
+                var emReference = JsonConvert.DeserializeObject<Energiemenge>(json["reference"].ToString());
+                var emOther = JsonConvert.DeserializeObject<Energiemenge>(json["other"].ToString());
 
-                PlausibilityReport prActual = emReference.GetPlausibilityReport(emOther);
-                PlausibilityReport prExpected = JsonConvert.DeserializeObject<PlausibilityReport>(json["expectedResult"].ToString());
+                var prActual = emReference.GetPlausibilityReport(emOther);
+                var prExpected = JsonConvert.DeserializeObject<PlausibilityReport>(json["expectedResult"].ToString());
                 //Assert.AreEqual(prExpected, prActual);
             }
         }

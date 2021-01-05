@@ -10,9 +10,9 @@ namespace TestBO4E
         [TestMethod]
         public void TestVerbrauch()
         {
-            Verbrauch v1 = new Verbrauch();
+            var v1 = new Verbrauch();
             Assert.IsFalse(v1.IsValid());
-            Verbrauch v2 = new Verbrauch
+            var v2 = new Verbrauch
             {
                 Startdatum = new DateTime(),
                 Enddatum = new DateTime(),

@@ -1,7 +1,4 @@
-﻿using BO4E.COM;
-using Itenso.TimePeriod;
-
-namespace BO4E.Extensions.COM
+﻿namespace BO4E.Extensions.COM
 {
     public static class ZeitraumExtension
     {

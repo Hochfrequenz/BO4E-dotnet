@@ -16,7 +16,7 @@ namespace TestBO4E
         [TestMethod]
         public void TestDeserialization()
         {
-            string meloJson = @"{'messlokationsId': 'DE0123456789012345678901234567890', 'sparte': 'STROM', 'myCustomInfo': 'some_value_not_covered_by_bo4e', 'myCustomValue': 123.456}";
+            var meloJson = @"{'messlokationsId': 'DE0123456789012345678901234567890', 'sparte': 'STROM', 'myCustomInfo': 'some_value_not_covered_by_bo4e', 'myCustomValue': 123.456}";
             var melo = JsonConvert.DeserializeObject<Messlokation>(meloJson);
             Assert.IsTrue(melo.IsValid());
             Assert.IsNotNull(melo.UserProperties);
@@ -27,7 +27,7 @@ namespace TestBO4E
         [TestMethod]
         public void TestTryGetUserProperties()
         {
-            string meloJson = @"{'messlokationsId': 'DE0123456789012345678901234567890', 'sparte': 'STROM', 'myCustomInfo': 'some_value_not_covered_by_bo4e', 'myCustomValue': 123.456, 'myNullProp': null}";
+            var meloJson = @"{'messlokationsId': 'DE0123456789012345678901234567890', 'sparte': 'STROM', 'myCustomInfo': 'some_value_not_covered_by_bo4e', 'myCustomValue': 123.456, 'myNullProp': null}";
             var melo = JsonConvert.DeserializeObject<Messlokation>(meloJson);
             Assert.IsTrue(melo.TryGetUserProperty("myCustomInfo", out string myCustomValue));
             Assert.AreEqual("some_value_not_covered_by_bo4e", myCustomValue);
@@ -51,7 +51,7 @@ namespace TestBO4E
         [TestMethod]
         public void TestFlags()
         {
-            var melo = new Messlokation()
+            var melo = new Messlokation
             {
                 MesslokationsId = "DE0123456789012345678901234567890",
                 Sparte = BO4E.ENUM.Sparte.STROM
@@ -63,13 +63,13 @@ namespace TestBO4E
             Assert.IsTrue(melo.UserProperties.TryGetValue("foo", out var upValue) && upValue.Value<bool>());
             Assert.IsTrue(melo.HasFlagSet("foo"));
             Assert.IsFalse(melo.SetFlag<Messlokation>("foo"));
-            Assert.IsTrue(melo.SetFlag<Messlokation>("foo", flagValue: false));
+            Assert.IsTrue(melo.SetFlag<Messlokation>("foo", false));
             Assert.IsFalse(melo.HasFlagSet("foo"));
-            Assert.IsTrue(melo.SetFlag<Messlokation>("foo", flagValue: null));
+            Assert.IsTrue(melo.SetFlag<Messlokation>("foo", null));
             Assert.IsFalse(melo.UserProperties.TryGetValue("foo", out var _));
-            Assert.IsFalse(melo.SetFlag<Messlokation>("foo", flagValue: null));
+            Assert.IsFalse(melo.SetFlag<Messlokation>("foo", null));
             Assert.IsFalse(melo.HasFlagSet("foo"));
-            Assert.IsTrue(melo.SetFlag<Messlokation>("foo", flagValue: true));
+            Assert.IsTrue(melo.SetFlag<Messlokation>("foo"));
 
             melo.UserProperties["foo"] = null;
             Assert.IsFalse(melo.HasFlagSet("foo"));

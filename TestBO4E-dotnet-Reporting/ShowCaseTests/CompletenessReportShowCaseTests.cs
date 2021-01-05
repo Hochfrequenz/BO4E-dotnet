@@ -18,13 +18,13 @@ namespace TestBO4E.ShowCaseTests
         [TestMethod]
         public void ShowCaseTest()
         {
-            var em = new Energiemenge()
+            var em = new Energiemenge
             {
                 LokationsId = "DE0123456789012345678901234567890",
                 LokationsTyp = Lokationstyp.MeLo,
-                Energieverbrauch = new List<Verbrauch>()
+                Energieverbrauch = new List<Verbrauch>
                 {
-                   new Verbrauch()
+                   new Verbrauch
                    {
                        Einheit = Mengeneinheit.KWH,
                        Startdatum = new DateTimeOffset(2020,3,1,0,0,0,TimeSpan.Zero).UtcDateTime,
@@ -32,7 +32,7 @@ namespace TestBO4E.ShowCaseTests
                        Wert = 456.0M,
                        Wertermittlungsverfahren = Wertermittlungsverfahren.MESSUNG
                    },
-                   new Verbrauch()
+                   new Verbrauch
                    {
                        Einheit = Mengeneinheit.KWH,
                        Startdatum = new DateTimeOffset(2020,3,25,0,0,0,TimeSpan.Zero).UtcDateTime,
@@ -44,7 +44,7 @@ namespace TestBO4E.ShowCaseTests
             };
 
             var cr = em.GetCompletenessReport();
-            Debug.WriteLine($"{nameof(em)} has a coverage of {Decimal.Round(cr.Coverage.Value * 100.0M)}%.");
+            Debug.WriteLine($"{nameof(em)} has a coverage of {decimal.Round(cr.Coverage.Value * 100.0M)}%.");
             // em has a coverage of 45%.
 
             Debug.WriteLine($"{nameof(em)} has no values for the following intervals: {string.Join(", ", cr.Gaps.Select(g => g.Startdatum.ToString("yyyy-MM-dd") + " to " + g.Enddatum.ToString("yyyy-MM-dd")))}");

@@ -15,7 +15,7 @@ namespace BO4E.BO
         /// </summary>
         [JsonProperty(Required = Required.Always, Order = 7, PropertyName = "sparte")]
         //[ProtoMember(7)]
-        public Sparte sparte { get; set; }
+        public Sparte Sparte { get; set; }
 
         /// <summary>
         /// Kundegruppe anhand derer die Höhe der Konzessionsabgabe festgelegt ist.

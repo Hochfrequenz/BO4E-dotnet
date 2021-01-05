@@ -140,25 +140,18 @@ namespace BO4E.BO
         [OnDeserialized]
         protected void OnDeserialized(StreamingContext context)
         {
-            if ((Vertragsteile == null || Vertragsteile.Count == 0) && (UserProperties != null && UserProperties.ContainsKey("lokationsId")))
+            if ((Vertragsteile == null || Vertragsteile.Count == 0) && UserProperties != null && UserProperties.ContainsKey("lokationsId"))
             {
-                Vertragsteile = new List<Vertragsteil>()
+                Vertragsteile = new List<Vertragsteil>
                 {
-                    new Vertragsteil()
+                    new Vertragsteil
                     {
-                        Vertragsteilbeginn = this.Vertragsbeginn,
-                        Vertragsteilende = this.Vertragsende,
+                        Vertragsteilbeginn = Vertragsbeginn,
+                        Vertragsteilende = Vertragsende,
                         Lokation = UserProperties["lokationsId"].Value<string>()
                     }
                 };
             }
-        }
-
-        /// <summary>
-        /// empty constructor for deserialization
-        /// </summary>
-        public Vertrag()
-        {
         }
     }
 }

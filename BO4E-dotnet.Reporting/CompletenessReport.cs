@@ -6,6 +6,7 @@ using Newtonsoft.Json;
 
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
@@ -14,7 +15,7 @@ namespace BO4E.Reporting
 {
     /// <summary>
     /// A completeness report contains information about the completeness of a pure
-    /// <see cref="Energiemenge"/>. In this context "pure" means, that the Energiemenge
+    /// <see cref="BO4E.BO.Energiemenge"/>. In this context "pure" means, that the Energiemenge
     /// does only contain one distinct set of (<see cref="Verbrauch.Obiskennzahl"/>, <see cref="Verbrauch.Einheit"/>,
     /// <see cref="Verbrauch.Wertermittlungsverfahren"/>).
     /// </summary>
@@ -28,7 +29,7 @@ namespace BO4E.Reporting
         public Zeitraum ReferenceTimeFrame { get; set; }
 
         /// <summary>
-        /// <see cref="Energiemenge.lokationsId"/>
+        /// <see cref="BO4E.BO.Energiemenge.LokationsId"/>
         /// </summary>
         [DataCategory(DataCategory.POD)]
         [JsonProperty(PropertyName = "lokationsId", Required = Required.Always, Order = 8)]
@@ -50,7 +51,7 @@ namespace BO4E.Reporting
         /// <see cref="Verbrauch.Wertermittlungsverfahren"/>
         /// </summary>
         [JsonProperty(PropertyName = "wertermittlungsverfahren", Required = Required.Default, Order = 7)]
-        public Wertermittlungsverfahren wertermittlungsverfahren { get; set; }
+        public Wertermittlungsverfahren Wertermittlungsverfahren { get; set; }
 
         /// <summary>
         /// ratio of time with data present compared to <see cref="ReferenceTimeFrame"/>.
@@ -86,32 +87,30 @@ namespace BO4E.Reporting
         /// <returns></returns>
         public int CompareTo(CompletenessReport other)
         {
-            if (this.ReferenceTimeFrame == null && other.ReferenceTimeFrame == null)
+            if (ReferenceTimeFrame == null && other.ReferenceTimeFrame == null)
             {
                 return 0;
             }
-            if (this.ReferenceTimeFrame != null && other.ReferenceTimeFrame == null)
+            if (ReferenceTimeFrame != null && other.ReferenceTimeFrame == null)
             {
                 return 1;
             }
-            if (this.ReferenceTimeFrame == null && other.ReferenceTimeFrame != null)
+            if (ReferenceTimeFrame == null && other.ReferenceTimeFrame != null)
             {
                 return -1;
             }
-            if (this.ReferenceTimeFrame != null && other.ReferenceTimeFrame != null)
+            if (ReferenceTimeFrame != null && other.ReferenceTimeFrame != null)
             {
-                if (this.ReferenceTimeFrame.Startdatum.HasValue && other.ReferenceTimeFrame.Startdatum.HasValue)
+                if (ReferenceTimeFrame.Startdatum.HasValue && other.ReferenceTimeFrame.Startdatum.HasValue)
                 {
                     return Comparer<DateTimeOffset>.Default.Compare(ReferenceTimeFrame.Startdatum.Value, other.ReferenceTimeFrame.Startdatum.Value);
                 }
-                if (this.ReferenceTimeFrame.Startdatum.HasValue)
+                if (ReferenceTimeFrame.Startdatum.HasValue)
                 {
                     return 1;
                 }
-                else
-                {
-                    return -1;
-                }
+
+                return -1;
             }
             return 0;
         }
@@ -199,10 +198,10 @@ namespace BO4E.Reporting
         /// <returns></returns>
         public string ToCSV(string separator = ";", bool headerLine = true, string lineTerminator = "\\n")
         {
-            StringBuilder builder = new StringBuilder();
+            var builder = new StringBuilder();
             if (headerLine)
             {
-                var headerColumns = new List<string>()
+                var headerColumns = new List<string>
                 {
                     "Startdatum",
                     "Enddatum",
@@ -222,11 +221,11 @@ namespace BO4E.Reporting
             }
             var columns = new List<string>
             {
-                this.ReferenceTimeFrame.Startdatum.Value.ToString("yyyy-MM-ddTHH:mm:ssZ"),
-                this.ReferenceTimeFrame.Enddatum.Value.ToString("yyyy-MM-ddTHH:mm:ssZ")
+                ReferenceTimeFrame.Startdatum.Value.ToString("yyyy-MM-ddTHH:mm:ssZ"),
+                ReferenceTimeFrame.Enddatum.Value.ToString("yyyy-MM-ddTHH:mm:ssZ")
             };
 
-            if (BO4E.BO.Messlokation.ValidateId(LokationsId))
+            if (BO.Messlokation.ValidateId(LokationsId))
             {
                 columns.Add(LokationsId); // melo
                 columns.Add(string.Empty); // malo
@@ -245,7 +244,7 @@ namespace BO4E.Reporting
             columns.Add(imsysRegex.Match(Obiskennzahl).Success ? "IMS" : "RLM");// messung
             columns.Add("MSB"); // MSB
 
-            if (this.UserProperties.TryGetValue("profil", out var profil))
+            if (UserProperties.TryGetValue("profil", out var profil))
             {
                 columns.Add(profil.ToString());
             }
@@ -254,7 +253,7 @@ namespace BO4E.Reporting
                 columns.Add(string.Empty);
             }
 
-            if (this.UserProperties.TryGetValue("profilRolle", out var profilRolle))
+            if (UserProperties.TryGetValue("profilRolle", out var profilRolle))
             {
                 columns.Add(profilRolle.ToString());
             }
@@ -262,14 +261,14 @@ namespace BO4E.Reporting
             {
                 columns.Add(string.Empty);
             }
-            if (Gaps!=null && Gaps.Any())
+            if (Gaps != null && Gaps.Any())
             {
-                DateTime minGap = this.Gaps.Min(x => x.Startdatum);// OrderBy(x => x.Startdatum).First().Startdatum;
-                DateTime maxGap = this.Gaps.Max(x => x.Enddatum);// OrderByDescending(x => x.Enddatum).First().Enddatum;
+                var minGap = Gaps.Min(x => x.Startdatum);// OrderBy(x => x.Startdatum).First().Startdatum;
+                var maxGap = Gaps.Max(x => x.Enddatum);// OrderByDescending(x => x.Enddatum).First().Enddatum;
                 columns.Add(minGap.ToString("yyyy-MM-ddTHH:mm:ssZ"));
                 columns.Add(maxGap.ToString("yyyy-MM-ddTHH:mm:ssZ"));
                 var gapsHours = (maxGap - minGap).TotalHours;
-                columns.Add(((gapsHours * 4)).ToString());
+                columns.Add((gapsHours * 4).ToString(CultureInfo.InvariantCulture));
             }
             else
             {
@@ -277,16 +276,16 @@ namespace BO4E.Reporting
                 columns.Add(string.Empty);
                 columns.Add(string.Empty);
             }
-            if (this.Coverage.HasValue)
+            if (Coverage.HasValue)
             {
-                columns.Add((this.Coverage.Value * 100).ToString("0.####") + " %");
+                columns.Add((Coverage.Value * 100).ToString("0.####") + " %");
             }
             else
             {
                 columns.Add(string.Empty);
             }
             columns.Add("Status");
-            builder.Append(string.Join(separator, columns) + lineTerminator); ;
+            builder.Append(string.Join(separator, columns) + lineTerminator);
 
             return builder.ToString();
         }

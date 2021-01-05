@@ -1,11 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.IO;
 using BO4E.BO;
 using BO4E.meta;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
 
 namespace TestBO4E
 {
@@ -15,32 +13,32 @@ namespace TestBO4E
         public class NestedObject
         {
             [FieldName("internal_english", Language.EN)]
-            public string intern_deutsch;
+            public string InternDeutsch;
             [FieldName("int_english", Language.EN)]
-            public int int_deutsch;
+            public int IntDeutsch;
             [FieldName("bool_english", Language.EN)]
-            public bool bool_deutsch;
+            public bool BoolDeutsch;
         }
         public class MultiLangBo : BusinessObject
         {
             [FieldName("date_english", Language.EN)]
-            public DateTimeOffset datum_deutsch;
+            public DateTimeOffset DatumDeutsch;
             [FieldName("value_english", Language.EN)]
-            public string wert_deutsch;
+            public string WertDeutsch;
             [FieldName("internal Object", Language.EN)]
-            public NestedObject intern;
+            public NestedObject Intern;
             [FieldName("internal Object List", Language.EN)]
-            public List<NestedObject> internList;
+            public List<NestedObject> InternList;
 
         }
 
         [TestMethod]
         public void TestContractResolverSerialization()
         {
-            MultiLangBo mlb = new MultiLangBo()
+            var mlb = new MultiLangBo
             {
-                datum_deutsch = new DateTimeOffset(2018, 1, 1, 0, 0, 0, TimeSpan.Zero),
-                wert_deutsch = "Hallo Welt"
+                DatumDeutsch = new DateTimeOffset(2018, 1, 1, 0, 0, 0, TimeSpan.Zero),
+                WertDeutsch = "Hallo Welt"
             };
             var settings = new JsonSerializerSettings
             {
@@ -54,31 +52,31 @@ namespace TestBO4E
             Assert.IsFalse(json.Contains("datum_deutsch"));
             Assert.IsFalse(json.Contains("wert_deutsch"));
 
-            string DEjson = JsonConvert.SerializeObject(mlb);
-            Assert.IsFalse(DEjson.Contains("date_english"));
-            Assert.IsFalse(DEjson.Contains("value_english"));
-            Assert.IsTrue(DEjson.Contains("datum_deutsch"));
-            Assert.IsTrue(DEjson.Contains("wert_deutsch"));
+            var dEjson = JsonConvert.SerializeObject(mlb);
+            Assert.IsFalse(dEjson.Contains("date_english"));
+            Assert.IsFalse(dEjson.Contains("value_english"));
+            Assert.IsTrue(dEjson.Contains(nameof(MultiLangBo.DatumDeutsch)));
+            Assert.IsTrue(dEjson.Contains(nameof(MultiLangBo.WertDeutsch)));
         }
 
         [TestMethod]
         public void TestNestedContractResolverSerialization()
         {
-            MultiLangBo mlb = new MultiLangBo()
+            var mlb = new MultiLangBo
             {
-                datum_deutsch = new DateTimeOffset(2018, 1, 1, 0, 0, 0, TimeSpan.Zero),
-                wert_deutsch = "Hallo Welt",
-                intern = new NestedObject()
+                DatumDeutsch = new DateTimeOffset(2018, 1, 1, 0, 0, 0, TimeSpan.Zero),
+                WertDeutsch = "Hallo Welt",
+                Intern = new NestedObject
                 {
-                    bool_deutsch = true,
-                    intern_deutsch = "Hallo",
-                    int_deutsch = 33
+                    BoolDeutsch = true,
+                    InternDeutsch = "Hallo",
+                    IntDeutsch = 33
                 },
-                internList = new List<NestedObject>()
+                InternList = new List<NestedObject>
                 {
-                    new NestedObject(){bool_deutsch=false,int_deutsch=10,intern_deutsch="internalList1"},
-                    new NestedObject(){bool_deutsch=false,int_deutsch=35,intern_deutsch="internalList2"},
-                    new NestedObject(){bool_deutsch=true,int_deutsch=1200,intern_deutsch="internalList3"},
+                    new NestedObject {BoolDeutsch=false,IntDeutsch=10,InternDeutsch="internalList1"},
+                    new NestedObject {BoolDeutsch=false,IntDeutsch=35,InternDeutsch="internalList2"},
+                    new NestedObject {BoolDeutsch=true,IntDeutsch=1200,InternDeutsch="internalList3"}
                 }
             };
             var settings = new JsonSerializerSettings
@@ -96,17 +94,17 @@ namespace TestBO4E
             Assert.IsTrue(json.Contains("internal_english"));
             Assert.IsFalse(json.Contains("intern_deutsch"));
 
-            string DEjson = JsonConvert.SerializeObject(mlb);
-            Assert.IsFalse(DEjson.Contains("date_english"));
-            Assert.IsFalse(DEjson.Contains("value_english"));
-            Assert.IsTrue(DEjson.Contains("datum_deutsch"));
-            Assert.IsTrue(DEjson.Contains("wert_deutsch"));
-            Assert.IsTrue(DEjson.Contains("internList"));
-            Assert.IsTrue(DEjson.Contains("intern_deutsch"));
-            Assert.IsFalse(DEjson.Contains("internal_english"));
+            var deJson = JsonConvert.SerializeObject(mlb);
+            Assert.IsFalse(deJson.Contains("date_english"));
+            Assert.IsFalse(deJson.Contains("value_english"));
+            Assert.IsTrue(deJson.Contains(nameof(MultiLangBo.DatumDeutsch)));
+            Assert.IsTrue(deJson.Contains(nameof(MultiLangBo.WertDeutsch)));
+            Assert.IsTrue(deJson.Contains(nameof(MultiLangBo.InternList)));
+            Assert.IsTrue(deJson.Contains(nameof(NestedObject.InternDeutsch)));
+            Assert.IsFalse(deJson.Contains("internal_english"));
 
-            MultiLangBo ml = JsonConvert.DeserializeObject<MultiLangBo>(DEjson);
-            Assert.AreNotEqual(DateTime.MinValue, ml.datum_deutsch.UtcDateTime);
+            var ml = JsonConvert.DeserializeObject<MultiLangBo>(deJson);
+            Assert.AreNotEqual(DateTime.MinValue, ml.DatumDeutsch.UtcDateTime);
         }
 
         //[TestMethod]

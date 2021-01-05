@@ -1,9 +1,4 @@
-﻿using System;
-using BO4E.BO;
-using Newtonsoft.Json;
-using Sodium;
-
-namespace BO4E.Extensions.Encryption.BusinessObjects
+﻿namespace BO4E.Extensions.Encryption.BusinessObjects
 {
     /*
     public static class BusinessObjectExtensions

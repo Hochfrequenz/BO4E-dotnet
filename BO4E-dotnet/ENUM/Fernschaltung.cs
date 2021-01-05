@@ -7,6 +7,6 @@ namespace BO4E.ENUM
         /// <summary>Z06: vorhanden</summary>
         VORHANDEN,
         /// <summary>Z07: nicht vorhanden</summary>
-        NICHT_VORHANDEN,       
+        NICHT_VORHANDEN
     }
 }

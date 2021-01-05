@@ -12,18 +12,18 @@ namespace TestBO4EExtensions.Encryption
         public void TestAcDeserialization()
         {
             var ac = JsonConvert.DeserializeObject<AnonymizerConfiguration>("{\"operations\":{\"POD\":\"HASH\"},\"unaffectedUserProperties\":[\"asd\",\"xyz\"]}");
-            Assert.IsTrue(ac.operations.ContainsKey(DataCategory.POD));
-            Assert.AreEqual(AnonymizerApproach.HASH, ac.operations[DataCategory.POD]);
+            Assert.IsTrue(ac.Operations.ContainsKey(DataCategory.POD));
+            Assert.AreEqual(AnonymizerApproach.HASH, ac.Operations[DataCategory.POD]);
             Assert.IsTrue(ac.ContainsNonKeepingOperations());
-            Assert.IsNotNull(ac.unaffectedUserProperties);
-            Assert.IsTrue(ac.unaffectedUserProperties.Contains("asd"));
-            Assert.IsTrue(ac.unaffectedUserProperties.Contains("xyz"));
+            Assert.IsNotNull(ac.UnaffectedUserProperties);
+            Assert.IsTrue(ac.UnaffectedUserProperties.Contains("asd"));
+            Assert.IsTrue(ac.UnaffectedUserProperties.Contains("xyz"));
         }
 
         [TestMethod]
         public void TestAcInitial()
         {
-            AnonymizerConfiguration ac = new AnonymizerConfiguration();
+            var ac = new AnonymizerConfiguration();
             Assert.IsTrue(ac.IsInitial());
             Assert.IsFalse(ac.ContainsNonKeepingOperations());
             ac.SetOption(DataCategory.ADDRESS, AnonymizerApproach.ENCRYPT);
@@ -34,14 +34,14 @@ namespace TestBO4EExtensions.Encryption
         [TestMethod]
         public void TestAcSalt()
         {
-            AnonymizerConfiguration ac = new AnonymizerConfiguration
+            var ac = new AnonymizerConfiguration
             {
-                hashingSalt = "UG9seWZvbiB6d2l0c2NoZXJuZCBhw59lbiBNw6R4Y2hlbnMgVsO2Z2VsIFLDvGJlbiwgSm9naHVydCB1bmQgUXVhcms="
+                HashingSalt = "UG9seWZvbiB6d2l0c2NoZXJuZCBhw59lbiBNw6R4Y2hlbnMgVsO2Z2VsIFLDvGJlbiwgSm9naHVydCB1bmQgUXVhcms="
             };
             Assert.IsTrue(ac.GetSalt().Length>0);
-            ac.hashingSalt = "   ";
+            ac.HashingSalt = "   ";
             Assert.IsTrue(ac.GetSalt().Length == 0);
-            ac.hashingSalt = null;
+            ac.HashingSalt = null;
             Assert.IsTrue(ac.GetSalt().Length == 0);
         }
     }

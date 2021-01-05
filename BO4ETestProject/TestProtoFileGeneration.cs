@@ -15,7 +15,7 @@ namespace TestBO4E
     [TestClass]
     public class TestProtoFileGeneration
     {
-        static readonly HashSet<Type> PROTO_SERIALIZABLE_TYPES = new HashSet<Type>()
+        static readonly HashSet<Type> PROTO_SERIALIZABLE_TYPES = new HashSet<Type>
         {
             typeof(Angebot),
             typeof(Ansprechpartner),
@@ -38,12 +38,12 @@ namespace TestBO4E
         {
             foreach (var type in PROTO_SERIALIZABLE_TYPES)
             {
-                var method = typeof(Serializer).GetMethod(nameof(Serializer.GetProto), new Type[] { typeof(ProtoBuf.Meta.ProtoSyntax)});
+                var method = typeof(Serializer).GetMethod(nameof(Serializer.GetProto), new[] { typeof(ProtoBuf.Meta.ProtoSyntax)});
                 method = method.MakeGenericMethod(type);
                 Assert.IsNotNull(method);
-                string protoString = (string)method.Invoke(null, new object[] { ProtoBuf.Meta.ProtoSyntax.Proto3 });
+                var protoString = (string)method.Invoke(null, new object[] { ProtoBuf.Meta.ProtoSyntax.Proto3 });
                 Assert.IsFalse(string.IsNullOrWhiteSpace(protoString));
-                string path = $"../../../../BO4E-dotnet/protobuf-files/{type}.proto"; // not elegant but ok ;)
+                var path = $"../../../../BO4E-dotnet/protobuf-files/{type}.proto"; // not elegant but ok ;)
                 if (!File.Exists(path))
                 {
                     var stream = File.Create(path);

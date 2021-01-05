@@ -11,7 +11,7 @@ namespace BO4E.Extensions.Encryption
 {
     public class SymmetricEncrypter : Encrypter
     {
-        private readonly byte[] secretKey;
+        private readonly byte[] _secretKey;
 
         /// <summary>
         /// pass the secret encryption key to the constructor
@@ -19,8 +19,8 @@ namespace BO4E.Extensions.Encryption
         /// <param name="secretKey">secret key</param>
         public SymmetricEncrypter(byte[] secretKey)
         {
-            this.secretKey = new byte[secretKey.Length];
-            secretKey.CopyTo(this.secretKey, 0);
+            _secretKey = new byte[secretKey.Length];
+            secretKey.CopyTo(_secretKey, 0);
         }
         /// <summary>
         /// pass the secret key as base64 encoded string to the constructor
@@ -37,10 +37,10 @@ namespace BO4E.Extensions.Encryption
         /// <returns>the encrypted data as Base64 encoded string</returns>
         private string Encrypt(string plainText, string associatedDataString, byte[] nonce)
         {
-            byte[] plainBytes = Encoding.UTF8.GetBytes(plainText);
-            byte[] adBytes = Encoding.UTF8.GetBytes(associatedDataString);
-            byte[] cipherBytes = SecretAeadChaCha20Poly1305.Encrypt(plainBytes, nonce, secretKey, adBytes);
-            string cipherString = Convert.ToBase64String(cipherBytes);
+            var plainBytes = Encoding.UTF8.GetBytes(plainText);
+            var adBytes = Encoding.UTF8.GetBytes(associatedDataString);
+            var cipherBytes = SecretAeadChaCha20Poly1305.Encrypt(plainBytes, nonce, _secretKey, adBytes);
+            var cipherString = Convert.ToBase64String(cipherBytes);
             return cipherString;
         }
 
@@ -52,7 +52,7 @@ namespace BO4E.Extensions.Encryption
         /// <returns>Tuple of (cipherText, nonce); both as base64 encoded string</returns>
         public (string, string) Encrypt(string plainText, string associatedDataString)
         {
-            byte[] nonce = SecretAeadChaCha20Poly1305.GenerateNonce();
+            var nonce = SecretAeadChaCha20Poly1305.GenerateNonce();
             return (Encrypt(plainText, associatedDataString, nonce), Convert.ToBase64String(nonce));
         }
 
@@ -64,9 +64,9 @@ namespace BO4E.Extensions.Encryption
         /// <returns>an encrypted Business Object</returns>
         public EncryptedObjectAEAD Encrypt(BusinessObject plainObject, string associatedDataString)
         {
-            string plainText = JsonConvert.SerializeObject(plainObject, settings: encryptionSerializerSettings);
-            byte[] nonce = SecretAeadChaCha20Poly1305.GenerateNonce();
-            string cipherString = Encrypt(plainText, associatedDataString, nonce);
+            var plainText = JsonConvert.SerializeObject(plainObject, encryptionSerializerSettings);
+            var nonce = SecretAeadChaCha20Poly1305.GenerateNonce();
+            var cipherString = Encrypt(plainText, associatedDataString, nonce);
             return new EncryptedObjectAEAD(cipherString, associatedDataString, Convert.ToBase64String(nonce));
         }
         /// <summary>
@@ -78,48 +78,48 @@ namespace BO4E.Extensions.Encryption
         /// <returns>decrypted as an UTF-8 encoded string</returns>
         private string Decrypt(string cipherText, string associatedDataString, byte[] nonce)
         {
-            byte[] cipherBytes = Convert.FromBase64String(cipherText);
-            byte[] adBytes = Encoding.UTF8.GetBytes(associatedDataString);
-            byte[] plainBytes = SecretAeadChaCha20Poly1305.Decrypt(cipherBytes, nonce, secretKey, adBytes);
+            var cipherBytes = Convert.FromBase64String(cipherText);
+            var adBytes = Encoding.UTF8.GetBytes(associatedDataString);
+            var plainBytes = SecretAeadChaCha20Poly1305.Decrypt(cipherBytes, nonce, _secretKey, adBytes);
             return Encoding.UTF8.GetString(plainBytes);
         }
 
 
         public string Decrypt(string cipherText, string associatedData, string nonceString)
         {
-            byte[] nonceBytes = Convert.FromBase64String(nonceString);
+            var nonceBytes = Convert.FromBase64String(nonceString);
             return Decrypt(cipherText, associatedData, nonceBytes);
         }
 
         public override BusinessObject Decrypt(EncryptedObject encryptedObject)
         {
-            EncryptedObjectAEAD eo = (EncryptedObjectAEAD)encryptedObject;//(EncryptedObjectAEAD)BoMapper.MapObject("EncryptedObjectAEAD", JObject.FromObject(encryptedObject));
+            var eo = (EncryptedObjectAEAD)encryptedObject;//(EncryptedObjectAEAD)BoMapper.MapObject("EncryptedObjectAEAD", JObject.FromObject(encryptedObject));
             if (eo == null)
             {
                 return null;
             }
-            string plainString = Decrypt(eo.CipherText, eo.AssociatedData, eo.Nonce);
-            return JsonConvert.DeserializeObject<BusinessObject>(plainString, settings: encryptionSerializerSettings);
+            var plainString = Decrypt(eo.CipherText, eo.AssociatedData, eo.Nonce);
+            return JsonConvert.DeserializeObject<BusinessObject>(plainString, encryptionSerializerSettings);
         }
 
         public override T Decrypt<T>(EncryptedObject encryptedObject)
         {
-            EncryptedObjectAEAD eo = (EncryptedObjectAEAD)encryptedObject;
+            var eo = (EncryptedObjectAEAD)encryptedObject;
             if (eo == null)
             {
-                return (T)null;
+                return null;
             }
-            string plainString = Decrypt(eo.CipherText, eo.AssociatedData, eo.Nonce);
-            return JsonConvert.DeserializeObject<T>(plainString, settings: encryptionSerializerSettings);
+            var plainString = Decrypt(eo.CipherText, eo.AssociatedData, eo.Nonce);
+            return JsonConvert.DeserializeObject<T>(plainString, encryptionSerializerSettings);
         }
 
         public override void Dispose()
         {
-            if (secretKey != null)
+            if (_secretKey != null)
             {
-                for (int i = 0; i < secretKey.Length; i++)
+                for (var i = 0; i < _secretKey.Length; i++)
                 {
-                    secretKey[i] = 0x0;
+                    _secretKey[i] = 0x0;
                 }
             }
         }

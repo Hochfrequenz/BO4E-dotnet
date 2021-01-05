@@ -11,7 +11,7 @@ namespace BO4E.ENUM
         /// <summary>Z86: Mehrmindermbengenabrechnung</summary>
         MEHRMINDERMBENGENABRECHNUNG,
         /// <summary>Z47: Endkundenabrechnung</summary>
-        ENDKUNDENABRECHNUNG,
+        ENDKUNDENABRECHNUNG
     }
 
 }

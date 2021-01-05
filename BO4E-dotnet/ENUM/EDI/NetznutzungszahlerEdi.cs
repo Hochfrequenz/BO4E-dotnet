@@ -14,6 +14,6 @@ namespace BO4E.ENUM.EDI
 
         /// <summary>Z11: Lieferant</summary>
         [Mapping(Netznutzungszahler.LIEFERANT)]
-        Z11,
+        Z11
     }
 }

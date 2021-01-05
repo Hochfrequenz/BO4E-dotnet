@@ -52,10 +52,10 @@ namespace BO4E.Extensions.BusinessObjects.Energiemenge
                     errorMessage = $"Cannot use autoconfigured method because there are {combis.Count}>1 distinct (wertermittlungsverfahren, obis, einheit) tuple present: {JsonConvert.SerializeObject(combis, new StringEnumConverter())}";
                     coverage = null;
                 }
-                return new CompletenessReport()
+                return new CompletenessReport
                 {
                     LokationsId = em.LokationsId,
-                    ReferenceTimeFrame = new Zeitraum()
+                    ReferenceTimeFrame = new Zeitraum
                     {
                         Startdatum = new DateTimeOffset(reference.Start),
                         Enddatum = new DateTimeOffset(reference.End)
@@ -87,13 +87,13 @@ namespace BO4E.Extensions.BusinessObjects.Energiemenge
                     LokationsId = em.LokationsId,
                     Einheit = einheit,
                     Coverage = GetCoverage(em, reference, wev, obiskennzahl, einheit),
-                    wertermittlungsverfahren = wev,
+                    Wertermittlungsverfahren = wev,
                     Obiskennzahl = obiskennzahl,
                     ReferenceTimeFrame = new Zeitraum
                     {
                         Startdatum = new DateTimeOffset(DateTime.SpecifyKind(reference.Start, DateTimeKind.Utc)),
                         Enddatum = new DateTimeOffset(DateTime.SpecifyKind(reference.End, DateTimeKind.Utc))
-                    },
+                    }
                 };
             }
             if (em.Energieverbrauch != null && em.Energieverbrauch.Count > 0)
@@ -134,8 +134,8 @@ namespace BO4E.Extensions.BusinessObjects.Energiemenge
                     {
                         limits = null;
                     }
-                    var gaps = (new TimeGapCalculator<TimeRange>()).GetGaps(nonNullValues, limits: limits);
-                    result.Gaps = gaps.Select(gap => new CompletenessReport.BasicVerbrauch()
+                    var gaps = new TimeGapCalculator<TimeRange>().GetGaps(nonNullValues, limits);
+                    result.Gaps = gaps.Select(gap => new CompletenessReport.BasicVerbrauch
                     {
                         Startdatum = gap.Start,
                         Enddatum = gap.End,
@@ -147,7 +147,7 @@ namespace BO4E.Extensions.BusinessObjects.Energiemenge
                 {
                     result.values.Sort(new BasicVerbrauchDateTimeComparer());
                 }*/
-                if (em.IsPure(checkUserProperties: true))
+                if (em.IsPure(true))
                 {
                     try
                     {
@@ -192,11 +192,11 @@ namespace BO4E.Extensions.BusinessObjects.Energiemenge
             Verbrauch v;
             try
             {
-                v = em.Energieverbrauch.First<Verbrauch>();
+                v = em.Energieverbrauch.First();
             }
             catch (InvalidOperationException)
             {
-                return new CompletenessReport()
+                return new CompletenessReport
                 {
                     Coverage = null,
                     LokationsId = em.LokationsId,
@@ -225,15 +225,11 @@ namespace BO4E.Extensions.BusinessObjects.Energiemenge
                 {
                     return ranges.AsParallel().ToDictionary(r => r, r => GetCompletenessReport(em, r));
                 }
-                else
-                {
-                    return ranges.ToDictionary(r => r, r => GetCompletenessReport(em, r));
-                }
+
+                return ranges.ToDictionary(r => r, r => GetCompletenessReport(em, r));
             }
-            else
-            {
-                return new Dictionary<ITimeRange, CompletenessReport>();
-            }
+
+            return new Dictionary<ITimeRange, CompletenessReport>();
         }
 
         /// <summary>

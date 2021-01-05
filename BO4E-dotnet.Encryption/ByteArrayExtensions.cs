@@ -13,12 +13,12 @@ namespace BO4E.Extensions.Encryption
             {
                 throw new ArgumentException($"{nameof(alphabet)} must not be empty but was '{alphabet}'.");
             }
-            BigInteger dividend = new BigInteger(toConvert);
+            var dividend = new BigInteger(toConvert);
             var builder = new StringBuilder();
             while (dividend != 0)
             {
-                dividend = BigInteger.DivRem(dividend, alphabet.Length, out BigInteger remainder);
-                builder.Insert(0, alphabet[Math.Abs(((int)remainder))]);
+                dividend = BigInteger.DivRem(dividend, alphabet.Length, out var remainder);
+                builder.Insert(0, alphabet[Math.Abs((int)remainder)]);
             }
             return builder.ToString();
         }

@@ -47,7 +47,7 @@ namespace BO4E.COM
         /// <returns>true if externe referenz with name <paramref name="extRefName"/> was found</returns>
         public static bool TryGetExterneReferenz(this ICollection<ExterneReferenz> extReferences, string extRefName, out string extRefWert)
         {
-            if (extRefName == null) throw new System.ArgumentNullException(nameof(extRefName));
+            if (extRefName == null) throw new ArgumentNullException(nameof(extRefName));
             if (extReferences == null)
             {
                 extRefWert = null;
@@ -79,9 +79,10 @@ namespace BO4E.COM
             }
             if (extReferences == null)
             {
-                return new List<ExterneReferenz>() { extRef };
+                return new List<ExterneReferenz> { extRef };
             }
-            else if (extReferences.Any() && extReferences.TryGetExterneReferenz(extRef.ExRefName, out var existingRefWert))
+
+            if (extReferences.Any() && extReferences.TryGetExterneReferenz(extRef.ExRefName, out var existingRefWert))
             {
                 if (overwriteExisting)
                 {
@@ -93,10 +94,8 @@ namespace BO4E.COM
                     {
                         throw new InvalidOperationException($"There is already an with {nameof(extRef.ExRefName)}='{extRef.ExRefName}' having {nameof(extRef.ExRefWert)}='{existingRefWert}'!='{extRef.ExRefWert}'. Use {nameof(overwriteExisting)}=true to overwrite it.");
                     }
-                    else
-                    {
-                        return extReferences;
-                    }
+
+                    return extReferences;
                 }
             }
             extReferences.Add(extRef);

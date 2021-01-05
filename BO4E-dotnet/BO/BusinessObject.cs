@@ -114,7 +114,7 @@ namespace BO4E.BO
         /// return <see cref="BusinessObject.BoTyp"/> (as string, not as type)
         /// </summary>
         /// <returns></returns>
-        public string GetBoTyp() => this.BoTyp;
+        public string GetBoTyp() => BoTyp;
 
         /// <summary>
         /// This method is just to make sure the mapping actually makes sense.
@@ -150,8 +150,8 @@ namespace BO4E.BO
         protected virtual string guidSerialized
 #pragma warning restore IDE1006 // Naming Styles
         {
-            get => this.Guid.HasValue ? this.Guid.ToString() : string.Empty;
-            set { this.Guid = string.IsNullOrWhiteSpace(value) ? (Guid?)null : System.Guid.Parse(value.ToString()); }
+            get => Guid.HasValue ? Guid.ToString() : string.Empty;
+            set { Guid = string.IsNullOrWhiteSpace(value) ? (Guid?)null : System.Guid.Parse(value); }
         }
         /// <summary>
         /// Store the latest database update, is Datetime, because postgres doesn't handle datetimeoffset in a generated column gracefully
@@ -163,7 +163,7 @@ namespace BO4E.BO
 
 
         /// <summary>
-        /// Hier können IDs anderer Systeme hinterlegt werden (z.B. eine SAP-GP-Nummer) (Details siehe <see cref="ExterneReferenz"/>)
+        /// Hier kÃ¶nnen IDs anderer Systeme hinterlegt werden (z.B. eine SAP-GP-Nummer) (Details siehe <see cref="ExterneReferenz"/>)
         /// </summary>
         [JsonProperty(PropertyName = "externeReferenzen", Required = Required.Default)]
         [ProtoMember(4)]
@@ -173,13 +173,13 @@ namespace BO4E.BO
         /// <inheritdoc cref="ExterneReferenzExtensions.TryGetExterneReferenz(ICollection{ExterneReferenz}, string, out string)"/>
         /// </summary>
         public bool TryGetExterneReferenz(string extRefName, out string extRefWert)
-            => this.ExterneReferenzen.TryGetExterneReferenz(extRefName, out extRefWert);
+            => ExterneReferenzen.TryGetExterneReferenz(extRefName, out extRefWert);
 
         /// <summary>
         /// <inheritdoc cref="ExterneReferenzExtensions.SetExterneReferenz"/>
         /// </summary>
         public void SetExterneReferenz(ExterneReferenz extRef, bool overwriteExisting = false)
-            => this.ExterneReferenzen = this.ExterneReferenzen.SetExterneReferenz(extRef, overwriteExisting);
+            => ExterneReferenzen = ExterneReferenzen.SetExterneReferenz(extRef, overwriteExisting);
 
         /// <summary>
         /// checks if the BusinessObject has a flag set.
@@ -195,7 +195,7 @@ namespace BO4E.BO
             }
             try
             {
-                return this.UserProperties != null && this.UserPropertyEquals(flagKey, other: (bool?)true);
+                return UserProperties != null && this.UserPropertyEquals(flagKey, (bool?)true);
             }
             catch (ArgumentNullException ane) when (ane.ParamName == "value")
             {
@@ -211,48 +211,42 @@ namespace BO4E.BO
         /// <param name="flagKey">key in the userproperties that should hold the value <paramref name="flagValue"/></param>
         /// <param name="flagValue">flag value, use null to remove the flag</param>
         /// <returns>true iff userProperties had been modified, false if not</returns>
-        public bool SetFlag<TBusinessObject>(string flagKey, bool? flagValue = true) where TBusinessObject : BO4E.BO.BusinessObject, IUserProperties
+        public bool SetFlag<TBusinessObject>(string flagKey, bool? flagValue = true) where TBusinessObject : BusinessObject, IUserProperties
         {
             if (string.IsNullOrWhiteSpace(flagKey))
             {
                 throw new ArgumentNullException(nameof(flagKey));
             }
-            if (this.UserProperties == null)
+            if (UserProperties == null)
             {
-                this.UserProperties = new Dictionary<string, JToken>();
+                UserProperties = new Dictionary<string, JToken>();
                 if (!flagValue.HasValue)
                 {
                     return false;
                 }
             }
-            else if (flagValue.HasValue && flagValue.Value == this.HasFlagSet(flagKey))
+            else if (flagValue.HasValue && flagValue.Value == HasFlagSet(flagKey))
             {
                 return false;
             }
             if (!flagValue.HasValue)
             {
-                if (!this.UserProperties.ContainsKey(flagKey))
+                if (!UserProperties.ContainsKey(flagKey))
                 {
                     return false;
                 }
-                else
-                {
-                    this.UserProperties.Remove(flagKey);
-                    return true;
-                }
-            }
-            else
-            {
-                if (((TBusinessObject)this).TryGetUserProperty<bool?, TBusinessObject>(flagKey, out var existingValue) && existingValue == flagValue.Value)
-                {
-                    return false;
-                }
-                else
-                {
-                    this.UserProperties[flagKey] = flagValue.Value;
-                }
+
+                UserProperties.Remove(flagKey);
                 return true;
             }
+
+            if (((TBusinessObject)this).TryGetUserProperty<bool?, TBusinessObject>(flagKey, out var existingValue) && existingValue == flagValue.Value)
+            {
+                return false;
+            }
+
+            UserProperties[flagKey] = flagValue.Value;
+            return true;
         }
 
         /// <summary>
@@ -261,7 +255,7 @@ namespace BO4E.BO
         /// <returns>a JSON scheme</returns>
         public JSchema GetJsonScheme()
         {
-            return GetJsonSchema(this.GetType());
+            return GetJsonSchema(GetType());
         }
 
         /// <summary>
@@ -276,9 +270,9 @@ namespace BO4E.BO
             {
                 throw new ArgumentException($"You must only request JSON schemes for Business Objects. {boType} is not a valid Business Object type.");
             }
-            JSchemaGenerator generator = new JSchemaGenerator();
+            var generator = new JSchemaGenerator();
             generator.GenerationProviders.Add(new StringEnumGenerationProvider());
-            JSchema schema = generator.Generate(boType);
+            var schema = generator.Generate(boType);
             return schema;
         }
 
@@ -311,7 +305,7 @@ namespace BO4E.BO
         /// <seealso cref="GetBoKeyNames(Type)"/>
         public List<string> GetBoKeyNames()
         {
-            return GetBoKeyNames(this.GetType());
+            return GetBoKeyNames(GetType());
         }
 
         /// <summary>
@@ -321,17 +315,17 @@ namespace BO4E.BO
         /// <returns>A list just like the result of <see cref="GetBoKeyNames(Type)"/></returns>
         public static List<string> GetBoKeyNames(Type boType)
         {
-            List<string> result = new List<string>();
+            var result = new List<string>();
             foreach (var pi in GetBoKeyProps(boType))
             {
-                JsonPropertyAttribute jpa = pi.GetCustomAttribute<JsonPropertyAttribute>();
+                var jpa = pi.GetCustomAttribute<JsonPropertyAttribute>();
                 if (jpa?.PropertyName != null)
                 {
                     result.Add(jpa.PropertyName);
                 }
                 else
                 {
-                    result.Add(pi.Name.ToString());
+                    result.Add(pi.Name);
                 }
             }
             return result;
@@ -363,7 +357,7 @@ namespace BO4E.BO
         public static Dictionary<string, Type> GetExpandableFieldNames(string boTypeName)
         {
 #pragma warning disable CS0618 // Type or member is obsolete
-            Type clazz = Assembly.GetExecutingAssembly().GetType(BoMapper.packagePrefix + "." + boTypeName);
+            var clazz = Assembly.GetExecutingAssembly().GetType(BoMapper.PackagePrefix + "." + boTypeName);
 #pragma warning restore CS0618 // Type or member is obsolete
             if (clazz == null)
             {
@@ -383,15 +377,15 @@ namespace BO4E.BO
         /// <returns>HashSet of strings</returns>
         protected static Dictionary<string, Type> GetExpandablePropertyNames(Type type, bool rootLevel = true)
         {
-            if (rootLevel && !type.IsSubclassOf(typeof(BO.BusinessObject)))
+            if (rootLevel && !type.IsSubclassOf(typeof(BusinessObject)))
             {
                 throw new ArgumentException("Only allowed for BusinessObjects");
             }
-            Dictionary<string, Type> result = new Dictionary<string, Type>();
+            var result = new Dictionary<string, Type>();
             foreach (var prop in type.GetProperties())
             {
                 string fieldName;
-                JsonPropertyAttribute jpa = prop.GetCustomAttribute<JsonPropertyAttribute>();
+                var jpa = prop.GetCustomAttribute<JsonPropertyAttribute>();
                 if (jpa?.PropertyName != null)
                 {
                     fieldName = jpa.PropertyName;
@@ -400,12 +394,12 @@ namespace BO4E.BO
                 {
                     fieldName = prop.Name;
                 }
-                if (prop.PropertyType.IsSubclassOf(typeof(BO.BusinessObject)))
+                if (prop.PropertyType.IsSubclassOf(typeof(BusinessObject)))
                 {
-                    foreach (KeyValuePair<string, Type> subResult in GetExpandablePropertyNames(prop.PropertyType, false))
+                    foreach (var subResult in GetExpandablePropertyNames(prop.PropertyType, false))
 
                     {
-                        result.Add(string.Join(".", new string[] { fieldName, subResult.Key }), subResult.Value);
+                        result.Add(string.Join(".", new[] { fieldName, subResult.Key }), subResult.Value);
                     }
                     result.Add(fieldName, prop.PropertyType);
                 }
@@ -416,16 +410,12 @@ namespace BO4E.BO
                 }
                 else if (prop.PropertyType.IsGenericType && prop.PropertyType.GetGenericTypeDefinition() == typeof(List<>))
                 {
-                    Type listElementType = prop.PropertyType.GetGenericArguments()[0];
-                    foreach (KeyValuePair<string, Type> subResult in GetExpandablePropertyNames(listElementType, false))
+                    var listElementType = prop.PropertyType.GetGenericArguments()[0];
+                    foreach (var subResult in GetExpandablePropertyNames(listElementType, false))
                     {
-                        result.Add(string.Join(".", new string[] { fieldName, subResult.Key }), subResult.Value);
+                        result.Add(string.Join(".", new[] { fieldName, subResult.Key }), subResult.Value);
                     }
                     result.Add(fieldName, prop.PropertyType);
-                }
-                else
-                {
-                    // nada
                 }
             }
             return result;
@@ -440,10 +430,10 @@ namespace BO4E.BO
         /// <returns>A dictionary with key value pairs.</returns>
         public Dictionary<string, object> GetBoKeys()
         {
-            Dictionary<string, object> result = new Dictionary<string, object>();
-            foreach (var pi in GetBoKeyProps(this.GetType()))
+            var result = new Dictionary<string, object>();
+            foreach (var pi in GetBoKeyProps(GetType()))
             {
-                JsonPropertyAttribute jpa = pi.GetCustomAttribute<JsonPropertyAttribute>();
+                var jpa = pi.GetCustomAttribute<JsonPropertyAttribute>();
                 if (jpa?.PropertyName != null)
                 {
                     result.Add(jpa.PropertyName, pi.GetValue(this));
@@ -471,7 +461,7 @@ namespace BO4E.BO
             return boType.GetProperties()
                  .Where(p => p.GetCustomAttributes(typeof(BoKey), false).Length > 0)
                  .OrderBy(ap => ap.GetCustomAttribute<JsonPropertyAttribute>()?.Order)
-                 .ToList<PropertyInfo>();
+                 .ToList();
         }
 
         /// <summary>BO4E Business Objects are considered equal iff all of their elements/fields are equal.</summary>
@@ -479,11 +469,11 @@ namespace BO4E.BO
         /// <returns><code>true</code> iff b has the same type as this object and all elements of this and object b are equal; <code>false</code> otherwise</returns>
         public override bool Equals(object b)
         {
-            if (b == null || b.GetType() != this.GetType())
+            if (b == null || b.GetType() != GetType())
             {
                 return false;
             }
-            return this.Equals(b as BusinessObject);
+            return Equals(b as BusinessObject);
         }
 
         /// <summary>
@@ -498,7 +488,7 @@ namespace BO4E.BO
         /// </returns>
         public bool Equals(BusinessObject b)
         {
-            if (b == null || b.GetType() != this.GetType())
+            if (b == null || b.GetType() != GetType())
             {
                 return false;
             }
@@ -518,26 +508,21 @@ namespace BO4E.BO
         /// <returns>hash code as int</returns>
         public override int GetHashCode()
         {
-            int result = 31;  // I read online that a medium sized prime was a good choice ;)
+            var result = 31;  // I read online that a medium sized prime was a good choice ;)
             unchecked
             {
-                result *= this.GetType().GetHashCode();
-                foreach (var prop in this.GetType().GetProperties())
+                result *= GetType().GetHashCode();
+                foreach (var prop in GetType().GetProperties())
                 {
                     if (prop.GetValue(this) != null)
                     {
                         if (prop.GetValue(this).GetType().IsGenericType && prop.GetValue(this).GetType().GetGenericTypeDefinition() == typeof(List<>))
                         {
-                            IEnumerable enumerable = prop.GetValue(this) as IEnumerable;
-                            Type listElementType = prop.GetValue(this).GetType().GetGenericArguments()[0];
-                            Type listType = typeof(List<>).MakeGenericType(listElementType);
-                            int index = 0;
-                            foreach (object listItem in enumerable)
-                            {
-                                // the index/position inside the list is taken into account, because
-                                // if two lists contain the same items but in different order, they must not be considered equal.
-                                result *= 19 + (17 * (++index)) * listItem.GetHashCode();
-                            }
+                            var enumerable = prop.GetValue(this) as IEnumerable;
+                            //var listElementType = prop.GetValue(this).GetType().GetGenericArguments()[0];
+                            //var listType = typeof(List<>).MakeGenericType(listElementType);
+                            var index = 0;
+                            result = enumerable.Cast<object>().Aggregate(result, (current, listItem) => current * (19 + 17 * ++index * listItem.GetHashCode()));
                         }
                         else
                         {
@@ -589,7 +574,7 @@ namespace BO4E.BO
 
             public override bool CanConvert(Type objectType)
             {
-                return (objectType == typeof(BusinessObject));
+                return objectType == typeof(BusinessObject);
             }
 
             public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
@@ -600,9 +585,9 @@ namespace BO4E.BO
                 }
                 if (objectType.IsAbstract)
                 {
-                    JObject jo = JObject.Load(reader);
+                    var jo = JObject.Load(reader);
                     Type boType;
-                    if (serializer.TypeNameHandling.HasFlag(TypeNameHandling.Objects) && jo.TryGetValue("$type", out JToken typeToken))
+                    if (serializer.TypeNameHandling.HasFlag(TypeNameHandling.Objects) && jo.TryGetValue("$type", out var typeToken))
                     {
                         boType = BusinessObjectSerializationBinder.BusinessObjectAndCOMTypes.SingleOrDefault(t => typeToken.Value<string>().ToUpper().StartsWith(t.FullName.ToUpper()));
                     }
@@ -652,7 +637,7 @@ namespace BO4E.BO
                          .Select(x => x.Method)
                          .First()
                          .GetGenericMethodDefinition()
-                         .MakeGenericMethod(new Type[] { boType });
+                         .MakeGenericMethod(new[] { boType });
                     try
                     {
                         return deserializationMethod.Invoke(serializer, new object[] { jo.CreateReader() });
@@ -662,11 +647,9 @@ namespace BO4E.BO
                         throw tie.InnerException; // to hide the reflection to the outside.
                     }
                 }
-                else
-                {
-                    serializer.ContractResolver.ResolveContract(objectType).Converter = null;
-                    return serializer.Deserialize(JObject.Load(reader).CreateReader(), objectType);
-                }
+
+                serializer.ContractResolver.ResolveContract(objectType).Converter = null;
+                return serializer.Deserialize(JObject.Load(reader).CreateReader(), objectType);
             }
 
             public override bool CanWrite => false;

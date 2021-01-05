@@ -55,7 +55,7 @@ namespace BO4E.BO
         /// <summary>Zählerkonstante auf dem Zähler.</summary>
         [JsonProperty(Required = Required.Default, Order = 9, PropertyName = "zaehlerkonstante")]
         [ProtoMember(9)]
-        public Decimal Zaehlerkonstante { get; set; }
+        public decimal Zaehlerkonstante { get; set; }
 
         /// <summary>Bis zu diesem Datum ist der Zähler geeicht.</summary>
         [JsonProperty(Required = Required.Default, Order = 10, PropertyName = "eichungBis")]

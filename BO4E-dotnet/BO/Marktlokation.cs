@@ -134,7 +134,7 @@ namespace BO4E.BO
         [ProtoMember(1021)]
         [NonOfficial(NonOfficialCategory.CUSTOMER_REQUIREMENTS)]
         [Obsolete("I'm pretty sure the BO.Marktlokation is not the right place to store this information. Please evaluate!")]
-        public List<COM.MarktpartnerDetails> Marktrollen { get; set; } // ToDo: evaluate this
+        public List<MarktpartnerDetails> Marktrollen { get; set; } // ToDo: evaluate this
 
         /// <summary>
         /// für EDIFACT mapping
@@ -222,13 +222,13 @@ namespace BO4E.BO
         /// Regular Expression used to validate 11 digit MarktlokationId
         /// </summary>
         [JsonIgnore]
-        protected static readonly Regex REGEX_VALIDATE = new Regex(@"^[1-9][\d]{10}$", RegexOptions.Compiled);
+        protected static readonly Regex RegexValidate = new Regex(@"^[1-9][\d]{10}$", RegexOptions.Compiled);
 
         /// <summary>
         /// Regular Expression to check if a string consists only of numbers (is numeric)
         /// </summary>
         [JsonIgnore]
-        protected static readonly Regex REGEX_NUMERIC_STRING = new Regex(@"^\d+$", RegexOptions.Compiled);
+        protected static readonly Regex RegexNumericString = new Regex(@"^\d+$", RegexOptions.Compiled);
 
         /// <summary>
         /// Test if a <paramref name="id"/> is a valid Marktlokations ID.
@@ -241,12 +241,12 @@ namespace BO4E.BO
             {
                 return false;
             }
-            if (!REGEX_VALIDATE.IsMatch(id))
+            if (!RegexValidate.IsMatch(id))
             {
                 return false;
             }
-            string expectedChecksum = GetChecksum(id);
-            string actualChecksum = id.Substring(10, 1);
+            var expectedChecksum = GetChecksum(id);
+            var actualChecksum = id.Substring(10, 1);
             return actualChecksum == expectedChecksum;
         }
 
@@ -270,27 +270,27 @@ namespace BO4E.BO
             {
                 throw new ArgumentException($"Input '{nameof(input)}' must be a string with length 10 (to generate the checksum) or 11 (to validate the checksum).");
             }
-            if (!REGEX_NUMERIC_STRING.IsMatch(input))
+            if (!RegexNumericString.IsMatch(input))
             {
                 throw new ArgumentException($"Input '{nameof(input)}' must be numeric was '{input}'");
             }
-            int oddChecksum = 0;
-            int evenChecksum = 0;
+            var oddChecksum = 0;
+            var evenChecksum = 0;
 
             // start counting at 1 to be consistent with the above description of "even" and  "odd" but stop at tenth digit.
-            for (int i = 1; i < 11; i++)
+            for (var i = 1; i < 11; i++)
             {
-                string s = input.Substring(i - 1, 1);
+                var s = input.Substring(i - 1, 1);
                 if (i % 2 == 0)
                 {
-                    evenChecksum += 2 * Int32.Parse(s);
+                    evenChecksum += 2 * int.Parse(s);
                 }
                 else
                 {
-                    oddChecksum += Int32.Parse(s);
+                    oddChecksum += int.Parse(s);
                 }
             }
-            int result = (10 - ((evenChecksum + oddChecksum) % 10)) % 10;
+            var result = (10 - (evenChecksum + oddChecksum) % 10) % 10;
             return result.ToString();
         }
 
@@ -300,7 +300,7 @@ namespace BO4E.BO
         /// <returns>if marktlokaionsId matches the expected format</returns>
         public bool HasValidId()
         {
-            return ValidateId(this.MarktlokationsId);
+            return ValidateId(MarktlokationsId);
         }
 
         /// <summary>

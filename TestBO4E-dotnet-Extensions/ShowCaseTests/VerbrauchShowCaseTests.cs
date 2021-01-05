@@ -15,7 +15,7 @@ namespace TestBO4E.ShowCaseTests
         [TestMethod]
         public void ShowCaseTest()
         {
-            var verbrauchA = new Verbrauch()
+            var verbrauchA = new Verbrauch
             {
                 Startdatum = new DateTime(2020, 3, 1, 0, 0, 0,DateTimeKind.Utc),
                 Enddatum = new DateTime(2020, 3, 8, 0, 0, 0, DateTimeKind.Utc),
@@ -38,7 +38,7 @@ namespace TestBO4E.ShowCaseTests
                 // KW and TAG are not convertible into each other because they don't share the same dimension.
             }
 
-            var verbrauchB = new Verbrauch()
+            var verbrauchB = new Verbrauch
             {
                 Startdatum = new DateTime(2020, 3, 7, 0, 0, 0, DateTimeKind.Utc),
                 Enddatum = new DateTime(2020, 3, 14, 0, 0, 0, DateTimeKind.Utc),
@@ -47,7 +47,7 @@ namespace TestBO4E.ShowCaseTests
                 Wertermittlungsverfahren = Wertermittlungsverfahren.MESSUNG
             };
 
-            foreach (Verbrauch v in verbrauchA.Merge(verbrauchB))
+            foreach (var v in verbrauchA.Merge(verbrauchB))
             {
                 Debug.WriteLine($"{v.Startdatum.ToString("yyyy-MM-dd")} to {v.Enddatum.ToString("yyyy-MM-dd")}: {v.Wert}{v.Einheit}");
             }

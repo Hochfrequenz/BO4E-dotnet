@@ -1,5 +1,6 @@
 ﻿using BO4E.ENUM;
 using BO4E.meta;
+
 using Newtonsoft.Json;
 
 namespace BO4E.BO
@@ -22,7 +23,7 @@ namespace BO4E.BO
         public EncryptionScheme EncryptionScheme { get; set; }
 
         /// <summary>
-        /// base64 encoded cipher text of the original objects JSON serialisation
+        /// base64 encoded cipher text of the original objects JSON serialization
         /// </summary>
         [JsonProperty(PropertyName = "cipherText", Required = Required.Always, Order = 8)]
         [BoKey]
@@ -31,12 +32,12 @@ namespace BO4E.BO
         /// <summary>
         /// create a new EncryptedObject instance by providing both
         /// </summary>
-        /// <param name="_cipherText">the cipher text (bae64 encoded string)</param>
+        /// <param name="cipherText">the cipher text (bae64 encoded string)</param>
         /// <param name="es">the encryption scheme</param>
-        public EncryptedObject(string _cipherText, EncryptionScheme es) : base()
+        protected EncryptedObject(string cipherText, EncryptionScheme es)
         {
-            this.CipherText = _cipherText;
-            this.EncryptionScheme = es;
+            CipherText = cipherText;
+            EncryptionScheme = es;
         }
     }
 }

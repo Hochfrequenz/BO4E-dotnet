@@ -51,7 +51,7 @@ namespace BO4E.COM
         /// <summary>Zuschläge oder Abschläge auf die Position. <seealso cref="PositionsAufAbschlag" /></summary>
         [JsonProperty(PropertyName = "zu_abschlaege", Required = Required.Default)]
         [ProtoMember(12)]
-        public PositionsAufAbschlag Zu_abschlaege { get; set; }
+        public PositionsAufAbschlag ZuAbschlaege { get; set; }
         /// <summary>Preisstaffeln, die zu dieser Preisposition gehören. Details <see cref="Preisstaffel" /></summary>
         [JsonProperty(PropertyName = "preisstaffeln", Required = Required.Always)]
         [ProtoMember(13)]

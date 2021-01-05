@@ -17,14 +17,14 @@ namespace BO4E.Extensions.Encryption
     public class AnonymizerConfiguration
     {
 
-        [JsonProperty(Required = Required.Always)]
-        public Dictionary<DataCategory, AnonymizerApproach> operations { get; private set; }
+        [JsonProperty(Required = Required.Always, PropertyName = "operations")]
+        public Dictionary<DataCategory, AnonymizerApproach> Operations { get; private set; }
 
         /// <summary>
         /// set of key in <see cref="BO4E.BO.BusinessObject.UserProperties"/> / <see cref="BO4E.COM.COM.UserProperties"/> that should not be affected by the anonymizing operations
         /// </summary>
-        [JsonProperty(Required = Required.Default)]
-        public HashSet<string> unaffectedUserProperties;
+        [JsonProperty(Required = Required.Default, PropertyName = "unaffectedUserProperties")]
+        public HashSet<string> UnaffectedUserProperties;
 
         [JsonProperty(Required = Required.Default)]
         public string ConfigurationKey { get; private set; }
@@ -34,35 +34,28 @@ namespace BO4E.Extensions.Encryption
         /// </summary>
         public AnonymizerConfiguration()
         {
-            this.ConfigurationKey = null;
-            this.operations = new Dictionary<DataCategory, AnonymizerApproach>();
-            foreach (object ao in Enum.GetValues(typeof(DataCategory)))
+            ConfigurationKey = null;
+            Operations = new Dictionary<DataCategory, AnonymizerApproach>();
+            foreach (var ao in Enum.GetValues(typeof(DataCategory)))
             {
-                this.operations.Add((DataCategory)ao, AnonymizerApproach.KEEP);
+                Operations.Add((DataCategory)ao, AnonymizerApproach.KEEP);
             }
-            this.unaffectedUserProperties = new HashSet<string>();
+            UnaffectedUserProperties = new HashSet<string>();
         }
 
         /// <summary>
         /// base64 encoded bytes used to salt hashing (<see cref="AnonymizerApproach.HASH"/>
         /// </summary>
-        [JsonProperty(Required = Required.Default)]
-        public string hashingSalt;
+        [JsonProperty(Required = Required.Default, PropertyName = "hashingSalt")]
+        public string HashingSalt;
 
         /// <summary>
-        /// returns the base64 encoded bytes from <see cref="AnonymizerConfiguration.hashingSalt"/> as byte array
+        /// returns the base64 encoded bytes from <see cref="HashingSalt"/> as byte array
         /// </summary>
         /// <returns>byte array or empty byte array if hashing salt is not set.</returns>
         public byte[] GetSalt()
         {
-            if (string.IsNullOrWhiteSpace(hashingSalt))
-            {
-                return new byte[0];
-            }
-            else
-            {
-                return Convert.FromBase64String(hashingSalt);
-            }
+            return string.IsNullOrWhiteSpace(HashingSalt) ? new byte[0] : Convert.FromBase64String(HashingSalt);
         }
 
         /// <summary>
@@ -74,12 +67,12 @@ namespace BO4E.Extensions.Encryption
         {
             try
             {
-                this.operations.Add(anonymizerOption, anonymizerApproach);
+                Operations.Add(anonymizerOption, anonymizerApproach);
             }
             catch (ArgumentException)
             {
-                this.operations.Remove(anonymizerOption);
-                this.operations.Add(anonymizerOption, anonymizerApproach);
+                Operations.Remove(anonymizerOption);
+                Operations.Add(anonymizerOption, anonymizerApproach);
             }
         }
         /// <summary>
@@ -88,7 +81,7 @@ namespace BO4E.Extensions.Encryption
         /// <returns>true if configuration potentially changes something</returns>
         public bool ContainsNonKeepingOperations()
         {
-            return this.operations
+            return Operations
                 .Any(kvp => kvp.Value != AnonymizerApproach.KEEP);
         }
 

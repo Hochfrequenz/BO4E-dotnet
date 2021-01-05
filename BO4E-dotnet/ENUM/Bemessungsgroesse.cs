@@ -40,6 +40,6 @@ namespace BO4E.ENUM
         BENUTZUNGSDAUER,
         /// <summary>Darstellung einer Stückzahl</summary>
         [ProtoEnum(Name = nameof(Bemessungsgroesse) + "_" + nameof(ANZAHL))]
-        ANZAHL,
+        ANZAHL
     }
 }

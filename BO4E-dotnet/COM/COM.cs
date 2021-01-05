@@ -9,6 +9,7 @@ using ProtoBuf;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.Linq;
 
 namespace BO4E.COM
 {
@@ -90,11 +91,11 @@ namespace BO4E.COM
         /// <returns><code>true</code> iff all elements of this COM and COM b are equal; <code>false</code> otherwise</returns>
         public override bool Equals(object b)
         {
-            if (b == null || b.GetType() != this.GetType())
+            if (b == null || b.GetType() != GetType())
             {
                 return false;
             }
-            return this.Equals(b as COM);
+            return Equals(b as COM);
         }
 
         /// <summary>
@@ -104,7 +105,7 @@ namespace BO4E.COM
         /// <returns><code>true</code> iff all elements of this COM and COM b are equal; <code>false</code> otherwise</returns>
         public bool Equals(COM b)
         {
-            if (b == null || b.GetType() != this.GetType())
+            if (b == null || b.GetType() != GetType())
             {
                 return false;
             }
@@ -114,20 +115,11 @@ namespace BO4E.COM
         /// <inheritdoc/>
         public override int GetHashCode()
         {
-            int result = 31; // I read online that a medium sized prime was a good choice ;)
+            var result = 31; // I read online that a medium sized prime was a good choice ;)
             unchecked
             {
-                result *= this.GetType().GetHashCode();
-                foreach (var prop in this.GetType().GetProperties())
-                {
-                    if (prop.GetValue(this) != null)
-                    {
-                        // Using +19 because the default hash code of uninitialised enums is zero.
-                        // This would screw up the calculation such that all objects with at least one null value had the same hash code, namely 0.
-                        result *= 19 + prop.GetValue(this).GetHashCode();
-                    }
-                }
-                return result;
+                result *= GetType().GetHashCode();
+                return GetType().GetProperties().Where(prop => prop.GetValue(this) != null).Aggregate(result, (current, prop) => current * (19 + prop.GetValue(this).GetHashCode()));
             }
         }
 
@@ -156,11 +148,12 @@ namespace BO4E.COM
         // note that this inheritance protobuf thing doesn't work as expected. please see the comments in TestBO4E project->TestProfobufSerialization
         [ProtoMember(1)]
 #pragma warning disable IDE1006 // Naming Styles
+        // ReSharper disable once InconsistentNaming
         protected string guidSerialized
 #pragma warning restore IDE1006 // Naming Styles
         {
-            get => this.Guid.HasValue ? this.Guid.ToString() : string.Empty;
-            set { this.Guid = string.IsNullOrWhiteSpace(value) ? (Guid?)null : System.Guid.Parse(value.ToString()); }
+            get => Guid.HasValue ? Guid.ToString() : string.Empty;
+            set { Guid = string.IsNullOrWhiteSpace(value) ? (Guid?)null : System.Guid.Parse(value); }
         }
 
         /// <summary>

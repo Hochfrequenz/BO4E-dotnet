@@ -14,6 +14,6 @@ namespace BO4E.ENUM.EDI
 
         /// <summary>Z15: Arbeitspreis/Leistungspreis</summary>
         [Mapping(Netznutzungsabrechnungsvariante.ARBEITSPREIS_LEISTUNGSPREIS)]
-        Z15,
+        Z15
     }
 }

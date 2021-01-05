@@ -35,7 +35,7 @@ namespace BO4E.Extensions.BusinessObjects.Energiemenge
         {
             using (MiniProfiler.Current.Step(nameof(GetZeitraum)))
             {
-                Zeitraum zeitraum = new Zeitraum
+                var zeitraum = new Zeitraum
                 {
                     Startdatum = GetMinDate(menge),
                     Enddatum = GetMaxDate(menge)
@@ -45,7 +45,7 @@ namespace BO4E.Extensions.BusinessObjects.Energiemenge
         }
 
         /// <summary>
-        /// Get TimeRange covery by Energiemenge
+        /// Get TimeRange covered by Energiemenge
         /// </summary>
         /// <param name="menge">Energiemenge</param>
         /// <returns>TimeRange ranging from the earliest <see cref="Verbrauch.Startdatum"/> to the latest <see cref="Verbrauch.Enddatum"/></returns>
@@ -65,7 +65,7 @@ namespace BO4E.Extensions.BusinessObjects.Energiemenge
          * This usually happens if one tries to use the auto-configuration feature but the 
          * Energieverbrauch array is empty. The result is simply undefined. Returning null
          * would require all dependent methods to properly handle the null value. Since this 
-         * would propably lead to unspecific NullReferenceExceptions we'd better let the invalid
+         * would probably lead to unspecific NullReferenceExceptions we'd better let the invalid
          * operation exception bubble up from here as far as it's required.
          */
         private static DateTimeOffset GetMinDate(this BO4E.BO.Energiemenge em)
@@ -85,7 +85,7 @@ namespace BO4E.Extensions.BusinessObjects.Energiemenge
         }
 
         /// <summary>
-        /// Same as <see cref="GetTotalConsumption(BO.Energiemenge, Wertermittlungsverfahren, string, Mengeneinheit)"/> but without autodetected parameters. 
+        /// Same as <see cref="GetTotalConsumption(BO.Energiemenge, Wertermittlungsverfahren, string, Mengeneinheit)"/> but without auto-detected parameters. 
         /// By default a the full length of the Energiemenge is taken into account.
         /// </summary>
         /// <param name="em">Energiemenge</param>
@@ -125,7 +125,7 @@ namespace BO4E.Extensions.BusinessObjects.Energiemenge
                 }
                 if (em.Energieverbrauch.Count == 0)
                 {
-                    return Tuple.Create<decimal, Mengeneinheit>(0.0M, Mengeneinheit.ANZAHL);
+                    return Tuple.Create(0.0M, Mengeneinheit.ANZAHL);
                 }
                 ISet<Mengeneinheit> einheiten = new HashSet<Mengeneinheit>(em.Energieverbrauch.Select(x => x.Einheit));
                 if (einheiten.Count > 1)
@@ -133,9 +133,9 @@ namespace BO4E.Extensions.BusinessObjects.Energiemenge
                     // z.B. kWh und Wh oder Monat und Jahr... Die liefern IsPure==true.
                     throw new NotImplementedException("Converting different units of same type is not supported yet.");
                 }
-                Verbrauch v = em.Energieverbrauch.First<Verbrauch>();
+                var v = em.Energieverbrauch.First();
                 decimal consumption = em.GetConsumption(reference, v.Wertermittlungsverfahren, v.Obiskennzahl, v.Einheit);
-                return Tuple.Create<decimal, Mengeneinheit>(consumption, v.Einheit);
+                return Tuple.Create(consumption, v.Einheit);
             }
         }
 
@@ -177,7 +177,7 @@ namespace BO4E.Extensions.BusinessObjects.Energiemenge
                 using (MiniProfiler.Current.Step("Calculating total consumption and normalisation factor."))
                 {
                     totalConsumption = em.GetTotalConsumption();
-                    result = BusinessObjectExtensions.DeepClone<BO4E.BO.Energiemenge>(em);
+                    result = BusinessObjectExtensions.DeepClone(em);
                     if (totalConsumption.Item1 != 0.0M)
                     {
                         scalingFactor = target / totalConsumption.Item1;
@@ -189,7 +189,7 @@ namespace BO4E.Extensions.BusinessObjects.Energiemenge
                 }
                 using (MiniProfiler.Current.Step("Parallelised normalising of all values."))
                 {
-                    Parallel.ForEach<Verbrauch>(result.Energieverbrauch.Where(v => v.Einheit == totalConsumption.Item2), v =>
+                    Parallel.ForEach(result.Energieverbrauch.Where(v => v.Einheit == totalConsumption.Item2), v =>
                     {
                         v.Wert = scalingFactor * v.Wert;
                     });
@@ -212,7 +212,7 @@ namespace BO4E.Extensions.BusinessObjects.Energiemenge
                 throw new ArgumentException($"The Mengeneinheit {me} isn't intensive. Calculating the value for a specific point in time doesn't make sense.");
             }
             decimal? result = null;
-            foreach (Verbrauch v in em.Energieverbrauch.Where(v => v.Startdatum <= dt && dt < v.Enddatum))
+            foreach (var v in em.Energieverbrauch.Where(v => v.Startdatum <= dt && dt < v.Enddatum))
             {
                 if (result.HasValue)
                 {
@@ -239,15 +239,13 @@ namespace BO4E.Extensions.BusinessObjects.Energiemenge
             {
                 throw new ArgumentException("Energiemenge is not pure.");
             }
-            else if (em.Energieverbrauch.Count == 0)
+
+            if (em.Energieverbrauch.Count == 0)
             {
                 return Tuple.Create<decimal?, Mengeneinheit>(null, Mengeneinheit.KW);
             }
-            else
-            {
-                Verbrauch v = em.Energieverbrauch.First<Verbrauch>();
-                return Tuple.Create<decimal?, Mengeneinheit>(em.GetAverage(v.Wertermittlungsverfahren, v.Obiskennzahl, v.Einheit), v.Einheit);
-            }
+            var v = em.Energieverbrauch.First();
+            return Tuple.Create<decimal?, Mengeneinheit>(em.GetAverage(v.Wertermittlungsverfahren, v.Obiskennzahl, v.Einheit), v.Einheit);
         }
 
         /// <summary>
@@ -277,10 +275,10 @@ namespace BO4E.Extensions.BusinessObjects.Energiemenge
             Wertermittlungsverfahren wev, string obiskennzahl, Mengeneinheit me)
         {
             decimal? result = null;
-            decimal overallDenominator = 0.0M;
-            foreach (Verbrauch v in em.Energieverbrauch.Where(v => v.Einheit == me))
+            var overallDenominator = 0.0M;
+            foreach (var v in em.Energieverbrauch.Where(v => v.Einheit == me))
             {
-                decimal overlapFactor = GetOverlapFactor(new TimeRange(v.Startdatum, v.Enddatum), reference, true);
+                var overlapFactor = GetOverlapFactor(new TimeRange(v.Startdatum, v.Enddatum), reference, true);
                 if (result.HasValue)
                 {
                     result += overlapFactor * v.Wert;
@@ -295,10 +293,8 @@ namespace BO4E.Extensions.BusinessObjects.Energiemenge
             {
                 return result / overallDenominator;
             }
-            else
-            {
-                return result;
-            }
+
+            return null;
         }
 
         /// <summary>
@@ -315,7 +311,7 @@ namespace BO4E.Extensions.BusinessObjects.Energiemenge
         /// Get a list of those time ranges within a reference, where no energieverbrauch entries are defined.
         /// </summary>
         /// <param name="em">Energiemenge</param>
-        /// <param name="reference">reference timeframe</param>
+        /// <param name="reference">reference time frame</param>
         /// <param name="wev">Wertermittlungsverfahren</param>
         /// <param name="obis">OBIS-Kennzahl</param>
         /// <param name="me">Mengeneinheit</param>
@@ -328,7 +324,7 @@ namespace BO4E.Extensions.BusinessObjects.Energiemenge
                 using (MiniProfiler.Current.Step($"Filtering energieverbrauch on OBIS={obis}, WEV={wev}, Mengeneinheit={me}"))
                 {
                     filteredVerbrauch = em.Energieverbrauch
-                        .Where<Verbrauch>(v => v.Wertermittlungsverfahren == wev && v.Obiskennzahl == obis && v.Einheit == me)
+                        .Where(v => v.Wertermittlungsverfahren == wev && v.Obiskennzahl == obis && v.Einheit == me)
                         .ToDictionary(v => new Tuple<DateTime, DateTime>(v.Startdatum, v.Enddatum), v => v);
                 }
                 if (filteredVerbrauch.Count < 2)
@@ -339,17 +335,17 @@ namespace BO4E.Extensions.BusinessObjects.Energiemenge
                 {
                     throw new ArgumentException("The provided Energiemenge is not evenly spaced although gaps are allowed.");
                 }
-                TimeSpan periodicity = GetTimeSpans(em, wev, obis, me).Min<TimeSpan>();
+                var periodicity = GetTimeSpans(em, wev, obis, me).Min();
                 if (Math.Abs((reference.Start - em.GetMinDate()).TotalMilliseconds % periodicity.TotalMilliseconds) != 0)
                 {
                     throw new ArgumentException($"The absolute difference between reference.start ({reference.Start}) and the minimal date time in the Energiemenge ({em.GetMinDate()}) has to be an integer multiple of the periodicity {periodicity.TotalMilliseconds} but was {(reference.Start - em.GetMinDate()).TotalMilliseconds}.");
                 }
                 // since it's assured, that the energieverbrauch entries are evenly spaced it doesn't matter which entry we use to determine the duration.
-                TimeSpan duration = filteredVerbrauch.Values.Min(v => v.Enddatum) - filteredVerbrauch.Values.Min(v => v.Startdatum);
-                List<TimeRange> result = new List<TimeRange>();
+                var duration = filteredVerbrauch.Values.Min(v => v.Enddatum) - filteredVerbrauch.Values.Min(v => v.Startdatum);
+                var result = new List<TimeRange>();
                 using (MiniProfiler.Current.Step("Populating list with time slices in UTC"))
                 {
-                    for (DateTime dt = reference.Start; dt < reference.End; dt += periodicity)
+                    for (var dt = reference.Start; dt < reference.End; dt += periodicity)
                     {
                         // use a strict '==' instead of overlap. This is justified because all the other cases are considered beforehand
                         switch (dt.Kind)
@@ -387,7 +383,7 @@ namespace BO4E.Extensions.BusinessObjects.Energiemenge
             {
                 throw new ArgumentException("The Energiemenge you provided is not pure. Consider using the overloaded method.");
             }
-            Verbrauch v = em.Energieverbrauch.FirstOrDefault();
+            var v = em.Energieverbrauch.FirstOrDefault();
             return GetMissingTimeRanges(em, reference, v.Wertermittlungsverfahren, v.Obiskennzahl, v.Einheit);
         }
 
@@ -418,8 +414,8 @@ namespace BO4E.Extensions.BusinessObjects.Energiemenge
                 // each time difference must be a multiple of the smallest difference.
                 using (MiniProfiler.Current.Step("Iterating over all time spans"))
                 {
-                    double minDiff = startEndDatumPeriods.Min<TimeSpan>().TotalSeconds;
-                    foreach (TimeSpan ts in startEndDatumPeriods)
+                    var minDiff = startEndDatumPeriods.Min().TotalSeconds;
+                    foreach (var ts in startEndDatumPeriods)
                     {
                         if (Math.Abs(ts.TotalSeconds % minDiff) != 0)
                         {
@@ -433,11 +429,9 @@ namespace BO4E.Extensions.BusinessObjects.Energiemenge
                 }
                 return true;
             }
-            else
-            {
-                // there must be only 1 time difference between all the elements
-                return startEndDatumPeriods.Count <= 1;
-            }
+
+            // there must be only 1 time difference between all the elements
+            return startEndDatumPeriods.Count <= 1;
         }
 
         /// <summary>
@@ -454,8 +448,8 @@ namespace BO4E.Extensions.BusinessObjects.Energiemenge
                 // The Energiemenge is evenly spaced if each of the combinations is evenly spaced itself.
                 using (MiniProfiler.Current.Step("Check all Werte/Einheit/OBIS combinations"))
                 {
-                    ISet<Tuple<Wertermittlungsverfahren, string, Mengeneinheit>> combinations = GetWevObisMeCombinations(em);
-                    foreach (Tuple<Wertermittlungsverfahren, string, Mengeneinheit> combo in combinations)
+                    var combinations = GetWevObisMeCombinations(em);
+                    foreach (var combo in combinations)
                     {
                         if (!em.IsEvenlySpaced(em.GetTimeRange(), combo.Item1, combo.Item2, combo.Item3, allowGaps))
                         {
@@ -465,21 +459,19 @@ namespace BO4E.Extensions.BusinessObjects.Energiemenge
                 }
                 return true;
             }
-            else
-            {
-                Verbrauch v = em.Energieverbrauch.FirstOrDefault();
-                return em.IsEvenlySpaced(em.GetTimeRange(), v.Wertermittlungsverfahren, v.Obiskennzahl, v.Einheit, allowGaps);
-            }
+
+            var v = em.Energieverbrauch.FirstOrDefault();
+            return em.IsEvenlySpaced(em.GetTimeRange(), v.Wertermittlungsverfahren, v.Obiskennzahl, v.Einheit, allowGaps);
         }
 
 
 
         private static HashSet<TimeSpan> GetTimeSpans(this BO4E.BO.Energiemenge em)
         {
-            HashSet<TimeSpan> result = new HashSet<TimeSpan>();
-            List<Verbrauch> vlist = new List<Verbrauch>(em.Energieverbrauch);
+            var result = new HashSet<TimeSpan>();
+            var vlist = new List<Verbrauch>(em.Energieverbrauch);
             vlist.Sort(new VerbrauchDateTimeComparer());
-            for (int i = 1; i < vlist.Count; i++)
+            for (var i = 1; i < vlist.Count; i++)
             {
                 result.Add(vlist[i].Startdatum - vlist[i - 1].Startdatum);
                 result.Add(vlist[i].Enddatum - vlist[i - 1].Enddatum);
@@ -489,11 +481,11 @@ namespace BO4E.Extensions.BusinessObjects.Energiemenge
 
         private static HashSet<TimeSpan> GetTimeSpans(this BO4E.BO.Energiemenge em, Wertermittlungsverfahren wev, string obis, Mengeneinheit me)
         {
-            HashSet<TimeSpan> result = new HashSet<TimeSpan>();
-            List<Verbrauch> vlist = new List<Verbrauch>(em.Energieverbrauch);
+            var result = new HashSet<TimeSpan>();
+            var vlist = new List<Verbrauch>(em.Energieverbrauch);
             vlist.Sort(new VerbrauchDateTimeComparer());
-            vlist = vlist.Where<Verbrauch>(v => v.Wertermittlungsverfahren == wev && v.Obiskennzahl == obis && v.Einheit == me).ToList<Verbrauch>();
-            for (int i = 1; i < vlist.Count; i++)
+            vlist = vlist.Where(v => v.Wertermittlungsverfahren == wev && v.Obiskennzahl == obis && v.Einheit == me).ToList();
+            for (var i = 1; i < vlist.Count; i++)
             {
                 result.Add(vlist[i].Startdatum - vlist[i - 1].Startdatum);
                 result.Add(vlist[i].Enddatum - vlist[i - 1].Enddatum);
@@ -511,7 +503,7 @@ namespace BO4E.Extensions.BusinessObjects.Energiemenge
             return new HashSet<Tuple<Wertermittlungsverfahren, string, Mengeneinheit>>(
                 em.Energieverbrauch
                 //.AsParallel<Verbrauch>()
-                .Select(v => Tuple.Create<Wertermittlungsverfahren, string, Mengeneinheit>(v.Wertermittlungsverfahren, v.Obiskennzahl, v.Einheit)));
+                .Select(v => Tuple.Create(v.Wertermittlungsverfahren, v.Obiskennzahl, v.Einheit)));
         }
 
         /// <summary>
@@ -523,10 +515,10 @@ namespace BO4E.Extensions.BusinessObjects.Energiemenge
         /// <returns></returns>
         public static decimal GetJointCoverage(this BO4E.BO.Energiemenge em, TimeRange reference)
         {
-            ISet<Tuple<Wertermittlungsverfahren, string, Mengeneinheit>> combinations = GetWevObisMeCombinations(em);
-            decimal jointCoverage = em.Energieverbrauch
+            var combinations = GetWevObisMeCombinations(em);
+            var jointCoverage = em.Energieverbrauch
                 //.AsParallel<Verbrauch>()
-                .Where<Verbrauch>(v => combinations.Contains(Tuple.Create<Wertermittlungsverfahren, string, Mengeneinheit>(v.Wertermittlungsverfahren, v.Obiskennzahl, v.Einheit)))
+                .Where(v => combinations.Contains(Tuple.Create(v.Wertermittlungsverfahren, v.Obiskennzahl, v.Einheit)))
                 .Sum(v => GetOverlapFactor(new TimeRange(v.Startdatum, v.Enddatum), reference, true));
             return jointCoverage - (combinations.Count - 1);
         }
@@ -549,7 +541,7 @@ namespace BO4E.Extensions.BusinessObjects.Energiemenge
                 {
                     return 0.0M;
                 }
-                Verbrauch v = em.Energieverbrauch.First<Verbrauch>();
+                var v = em.Energieverbrauch.First();
                 return em.GetCoverage(reference, v.Wertermittlungsverfahren, v.Obiskennzahl, v.Einheit);
             }
         }
@@ -583,7 +575,7 @@ namespace BO4E.Extensions.BusinessObjects.Energiemenge
             {
                 exactResult = em.Energieverbrauch
                     //.AsParallel<Verbrauch>()
-                    .Where<Verbrauch>(v => v.Einheit == mengeneinheit && v.Obiskennzahl == obisKz && v.Wertermittlungsverfahren == wev)
+                    .Where(v => v.Einheit == mengeneinheit && v.Obiskennzahl == obisKz && v.Wertermittlungsverfahren == wev)
                     .Sum(v => GetOverlapFactor(new TimeRange(v.Startdatum, v.Enddatum), reference, true));
             }
             return Math.Round(exactResult, decimalRounding);
@@ -616,23 +608,21 @@ namespace BO4E.Extensions.BusinessObjects.Energiemenge
 
         private static decimal GetOverlapFactor(TimeRange period, ITimeRange reference, bool toReference)
         {
-            TimePeriodCollection periods = new TimePeriodCollection
+            var periods = new TimePeriodCollection
             {
                 reference,
                 period
             };
-            TimePeriodIntersector<TimeRange> periodIntersector = new TimePeriodIntersector<TimeRange>();
-            ITimePeriodCollection intersectedPeriods = periodIntersector.IntersectPeriods(periods);
+            var periodIntersector = new TimePeriodIntersector<TimeRange>();
+            var intersectedPeriods = periodIntersector.IntersectPeriods(periods);
             try
             {
                 if (toReference)
                 {
                     return (decimal)intersectedPeriods.TotalDuration.TotalSeconds / (decimal)reference.Duration.TotalSeconds;
                 }
-                else // to self
-                {
-                    return (decimal)intersectedPeriods.TotalDuration.TotalSeconds / (decimal)period.Duration.TotalSeconds;
-                }
+
+                return (decimal)intersectedPeriods.TotalDuration.TotalSeconds / (decimal)period.Duration.TotalSeconds;
             }
             catch (DivideByZeroException)
             {
@@ -658,10 +648,8 @@ namespace BO4E.Extensions.BusinessObjects.Energiemenge
                 bool upPurity = em.IsPureUserProperties();
                 return upPurity && basicPurity;
             }
-            else
-            {
-                return basicPurity;
-            }
+
+            return basicPurity;
         }
 
         /// <summary>
@@ -673,9 +661,7 @@ namespace BO4E.Extensions.BusinessObjects.Energiemenge
         {
             using (MiniProfiler.Current.Step(nameof(IsPureWertermittlungsverfahren)))
             {
-                ISet<Wertermittlungsverfahren> wefs = new HashSet<Wertermittlungsverfahren>();
-                em.Energieverbrauch.All<Verbrauch>(v => wefs.Add(v.Wertermittlungsverfahren));
-                return wefs.Count <= 1;
+                return em.Energieverbrauch.Select(v=>v.Wertermittlungsverfahren).Distinct().Count() <= 1;
             }
         }
 
@@ -688,9 +674,7 @@ namespace BO4E.Extensions.BusinessObjects.Energiemenge
         {
             using (MiniProfiler.Current.Step(nameof(IsPureObisKennzahl)))
             {
-                ISet<string> obisKzs = new HashSet<string>();
-                em.Energieverbrauch.All<Verbrauch>(v => obisKzs.Add(v.Obiskennzahl));
-                return obisKzs.Count <= 1;
+                return em.Energieverbrauch.Select(v=>v.Obiskennzahl).Distinct().Count() <= 1;
             }
         }
 
@@ -711,9 +695,9 @@ namespace BO4E.Extensions.BusinessObjects.Energiemenge
                 {
                     foreach (var key in upKeys)
                     {
-                        if (v.UserProperties.TryGetValue(key, out JToken rawValue))
+                        if (v.UserProperties.TryGetValue(key, out var rawValue))
                         {
-                            if (values.TryGetValue(key, out JToken onlyValue))
+                            if (values.TryGetValue(key, out var onlyValue))
                             {
                                 if (!rawValue.Equals(onlyValue))
                                 {
@@ -740,25 +724,14 @@ namespace BO4E.Extensions.BusinessObjects.Energiemenge
         {
             using (MiniProfiler.Current.Step(nameof(IsPureMengeneinheit)))
             {
-                ISet<Mengeneinheit> einheiten = new HashSet<Mengeneinheit>();
-                em.Energieverbrauch.All<Verbrauch>(v => einheiten.Add(v.Einheit));
+                
+                if (em.Energieverbrauch.Select(v=>v.Einheit).Distinct().Count() <= 1)
+                {
+                    return true;
+                }
 
-                if (einheiten.Count <= 1)
-                {
-                    return true;
-                }
-                else
-                {
-                    Mengeneinheit me1 = einheiten.First<Mengeneinheit>();
-                    foreach (Mengeneinheit me2 in einheiten)
-                    {
-                        if (!me1.IsConvertibleTo(me2))
-                        {
-                            return false;
-                        }
-                    }
-                    return true;
-                }
+                var me1 = em.Energieverbrauch.Select(v => v.Einheit).First();
+                return em.Energieverbrauch.Select(v => v.Einheit).All(me2 => me1.IsConvertibleTo(me2));
             }
         }
 
@@ -779,26 +752,24 @@ namespace BO4E.Extensions.BusinessObjects.Energiemenge
         /// <returns>true iff all <paramref name="em"/>-&gt;energieverbrauch entries are extensive</returns>
         public static bool IsExtensive(this BO4E.BO.Energiemenge em)
         {
-            return em.IsPureMengeneinheit() && em.Energieverbrauch.First<Verbrauch>().Einheit.IsExtensive();
+            return em.IsPureMengeneinheit() && em.Energieverbrauch.First().Einheit.IsExtensive();
         }
 
         public static List<BO.Energiemenge> SplitInPureGroups(this BO.Energiemenge em)
         {
             if (em.Energieverbrauch == null)
             {
-                return new List<BO.Energiemenge>() { em };
+                return new List<BO.Energiemenge> { em };
             }
-            else
+
+            var result = new List<BO.Energiemenge>();
+            foreach (var group in em.Energieverbrauch.GroupBy(PurityGrouper))
             {
-                var result = new List<BO.Energiemenge>();
-                foreach (var group in em.Energieverbrauch.GroupBy(PurityGrouper))
-                {
-                    BO.Energiemenge pureEm = em.DeepClone();
-                    pureEm.Energieverbrauch = group.ToList();
-                    result.Add(pureEm);
-                }
-                return result;
+                var pureEm = em.DeepClone();
+                pureEm.Energieverbrauch = @group.ToList();
+                result.Add(pureEm);
             }
+            return result;
         }
 
         /// <summary>
@@ -826,7 +797,7 @@ namespace BO4E.Extensions.BusinessObjects.Energiemenge
                              {
                                  var localEnd = DateTime.SpecifyKind(v.Enddatum, DateTimeKind.Unspecified); // ToDo: Check .UtcDateTime
                                  var localStart = DateTime.SpecifyKind(v.Startdatum, DateTimeKind.Unspecified);
-                                 return !CentralEuropeStandardTime.CENTRAL_EUROPE_STANDARD_TIME.IsDaylightSavingTime(localStart) && CentralEuropeStandardTime.CENTRAL_EUROPE_STANDARD_TIME.IsDaylightSavingTime(localEnd);
+                                 return !CentralEuropeStandardTime.CentralEuropeStandardTimezoneInfo.IsDaylightSavingTime(localStart) && CentralEuropeStandardTime.CentralEuropeStandardTimezoneInfo.IsDaylightSavingTime(localEnd);
                                  //return !localStart.IsDaylightSavingTime() && localEnd.IsDaylightSavingTime();
                              }).Select(v => v.Enddatum))
                         {
@@ -874,7 +845,7 @@ namespace BO4E.Extensions.BusinessObjects.Energiemenge
         private static bool HasBeenSanitized(this BO4E.BO.Energiemenge em)
         {
             bool sanitized;
-            if (em.UserProperties == null || !em.UserProperties.TryGetValue(SAP_SANITIZED_USERPROPERTY_KEY, out JToken sapSanitizedToken))
+            if (em.UserProperties == null || !em.UserProperties.TryGetValue(SAP_SANITIZED_USERPROPERTY_KEY, out var sapSanitizedToken))
             {
                 sanitized = false;
             }
@@ -897,15 +868,15 @@ namespace BO4E.Extensions.BusinessObjects.Energiemenge
         {
             int IComparer<CompletenessReport.BasicVerbrauch>.Compare(CompletenessReport.BasicVerbrauch x, CompletenessReport.BasicVerbrauch y)
             {
-                Verbrauch vx = new Verbrauch
+                var vx = new Verbrauch
                 {
                     Startdatum = x.Startdatum,
-                    Enddatum = x.Enddatum,
+                    Enddatum = x.Enddatum
                 };
-                Verbrauch vy = new Verbrauch
+                var vy = new Verbrauch
                 {
                     Startdatum = y.Startdatum,
-                    Enddatum = y.Enddatum,
+                    Enddatum = y.Enddatum
                 };
                 IComparer<Verbrauch> cv = new VerbrauchDateTimeComparer();
                 return cv.Compare(vx, vy);

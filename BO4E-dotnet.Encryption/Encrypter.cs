@@ -17,7 +17,7 @@ namespace BO4E.Extensions.Encryption
         /// <summary>
         /// serializer settings used in the encrypted objects
         /// </summary>
-        protected static JsonSerializerSettings encryptionSerializerSettings = new JsonSerializerSettings()
+        protected static readonly JsonSerializerSettings encryptionSerializerSettings = new JsonSerializerSettings
         {
             TypeNameHandling = TypeNameHandling.Objects,
             SerializationBinder = new BusinessObjectSerializationBinder()

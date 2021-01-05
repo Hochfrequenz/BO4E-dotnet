@@ -2,7 +2,7 @@ namespace BO4E.ENUM.EDI.UTILMD
 {
     /// <summary>
     /// Es erfolgt die Angabe, ob ein entsprechender Vertrag zwischen dem Anschlussnutzer und MSB vorliegt.
-    /// Zus‰tzlich kann auch noch angegeben werden, ob auch die Vertragsbeendigung mit dem vorigen Vertragspartner vor der
+    /// Zus√§tzlich kann auch noch angegeben werden, ob auch die Vertragsbeendigung mit dem vorigen Vertragspartner vor der
     /// Anmeldung beendet wurde und vorliegt.
     /// </summary>
     public enum UTILMD7433

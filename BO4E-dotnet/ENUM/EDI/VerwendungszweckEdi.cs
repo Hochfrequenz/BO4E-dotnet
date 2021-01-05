@@ -21,7 +21,7 @@ namespace BO4E.ENUM
         Z86,
         /// <summary>Z47: Endkundenabrechnung</summary>
         [Mapping(Verwendungszweck.ENDKUNDENABRECHNUNG)]
-        Z47,
+        Z47
     }
 
 }

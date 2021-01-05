@@ -20,12 +20,12 @@ namespace BO4E
     [Obsolete("The BoMapper is obsolete and should be replace with JsonConvert.DeserializeObject<T>(...) in the long run. It's not a good coding style but still thoroughly tested.")]
     public abstract class BoMapper
     {
-        private static readonly Regex BO_REGEX = new Regex(@"BO4E\.(?:Extensions\.)?BO\.\b(?<boName>\w+)\b", RegexOptions.Compiled);
+        private static readonly Regex BoRegex = new Regex(@"BO4E\.(?:Extensions\.)?BO\.\b(?<boName>\w+)\b", RegexOptions.Compiled);
 
         /// <summary>
         /// namespace.subnamespace for the BO4E package. maybe there's a more elegant way using self reflection.
         /// </summary>
-        public static readonly string packagePrefix = "BO4E.BO";
+        public const string PackagePrefix = "BO4E.BO";
 
         /// <summary>
         /// shortcut for MapObject with an empty userProperties white list
@@ -33,7 +33,7 @@ namespace BO4E
         /// <param name="jobject">business object json</param>
         /// <param name="lenient">lenient parsing flags</param>
         /// <returns><see cref="MapObject(string, JObject, LenientParsing)"/></returns>
-        public static BusinessObject MapObject(JObject jobject, LenientParsing lenient = LenientParsing.Strict)
+        public static BusinessObject MapObject(JObject jobject, LenientParsing lenient = LenientParsing.STRICT)
         {
             return MapObject(jobject, new HashSet<string>(), lenient);
         }
@@ -43,22 +43,22 @@ namespace BO4E
         /// </summary>
         /// <param name="jobject">business object json</param>
         /// <param name="lenient">lenient parsing flags</param>
-        /// <param name="userPropertiesWhiteList">white list of non BO4E standard field you'd like to have de-serialised</param>
+        /// <param name="userPropertiesWhiteList">white list of non BO4E standard field you'd like to have de-serialized</param>
         /// <returns><see cref="MapObject(string, JObject, LenientParsing)"/></returns>
-        public static BusinessObject MapObject(JObject jobject, HashSet<string> userPropertiesWhiteList, LenientParsing lenient = LenientParsing.Strict)
+        public static BusinessObject MapObject(JObject jobject, HashSet<string> userPropertiesWhiteList, LenientParsing lenient = LenientParsing.STRICT)
         {
             if (jobject["boTyp"] == null)
             {
-                throw new ArgumentNullException("boTyp", "Either call MapObject(JObject) with a Business Object containing the mandatory 'boTyp' key or explicitly name the Object");
+                throw new ArgumentNullException(nameof(jobject), "Either call MapObject(JObject) with a Business Object containing the mandatory 'boTyp' key or explicitly name the Object");
             }
-            Type businessObjectType = GetTypeForBoName(jobject["boTyp"].ToString());
+            var businessObjectType = GetTypeForBoName(jobject["boTyp"].ToString());
             return MapObject(businessObjectType, jobject, userPropertiesWhiteList, lenient);
         }
 
         /// <summary>
         /// <see cref="MapObject(string, JObject, HashSet{string}, LenientParsing)"/> with empty user properties white list
         /// </summary>
-        public static BusinessObject MapObject(string businessObjectName, JObject jobject, LenientParsing lenient = LenientParsing.Strict)
+        public static BusinessObject MapObject(string businessObjectName, JObject jobject, LenientParsing lenient = LenientParsing.STRICT)
         {
             return MapObject(GetTypeForBoName(businessObjectName), jobject, new HashSet<string>(), lenient);
         }
@@ -66,7 +66,7 @@ namespace BO4E
         /// <summary>
         /// <see cref="MapObject(Type, JObject, HashSet{string}, LenientParsing)"/> with empty user properties white list
         /// </summary>
-        public static BusinessObject MapObject(Type businessObjectType, JObject jobject, LenientParsing lenient = LenientParsing.Strict)
+        public static BusinessObject MapObject(Type businessObjectType, JObject jobject, LenientParsing lenient = LenientParsing.STRICT)
         {
             return MapObject(businessObjectType, jobject, new HashSet<string>(), lenient);
         }
@@ -74,9 +74,9 @@ namespace BO4E
         /// <summary>
         /// <see cref="MapObject(Type, JObject, HashSet{string}, LenientParsing)"/>
         /// </summary>
-        public static BusinessObjectType MapObject<BusinessObjectType>(JObject jobject, LenientParsing lenient = LenientParsing.Strict)
+        public static TBusinessObjectType MapObject<TBusinessObjectType>(JObject jobject, LenientParsing lenient = LenientParsing.STRICT)
         {
-            return (BusinessObjectType)Convert.ChangeType(MapObject(typeof(BusinessObjectType), jobject, lenient), typeof(BusinessObjectType));
+            return (TBusinessObjectType)Convert.ChangeType(MapObject(typeof(TBusinessObjectType), jobject, lenient), typeof(TBusinessObjectType));
         }
 
         /// <summary>
@@ -88,7 +88,7 @@ namespace BO4E
         /// <param name="lenient"></param>
         /// <returns></returns>
         [Obsolete("DEPRECATED! Please use the overloaded method MapObject<T>(...) or MapObject(Type t,...) that accept types, not strings.")]
-        public static BusinessObject MapObject(string businessObjectName, JObject jobject, HashSet<string> userPropertiesWhiteList, LenientParsing lenient = LenientParsing.Strict)
+        public static BusinessObject MapObject(string businessObjectName, JObject jobject, HashSet<string> userPropertiesWhiteList, LenientParsing lenient = LenientParsing.STRICT)
         {
             return MapObject(GetTypeForBoName(businessObjectName), jobject, userPropertiesWhiteList, lenient);
         }
@@ -115,42 +115,34 @@ namespace BO4E
         /// </list>
         /// </returns>
         [Obsolete("DEPRECATED! Please use the overloaded method MapObject<T>(...) or MapObject(Type t,...) that accept types, not strings.")]
-        public static BusinessObject MapObject(Type businessObjectType, JObject jobject, HashSet<string> userPropertiesWhiteList, LenientParsing lenient = LenientParsing.Strict)
+        public static BusinessObject MapObject(Type businessObjectType, JObject jobject, HashSet<string> userPropertiesWhiteList, LenientParsing lenient = LenientParsing.STRICT)
         {
             if (!businessObjectType.IsSubclassOf(typeof(BusinessObject)))
             {
                 throw new ArgumentException("Mapping is only allowed for types derived from BO4E.BO.BusinessObject");
             }
-            else if (businessObjectType != null)
+
+            if (lenient == LenientParsing.STRICT && userPropertiesWhiteList.Count == 0)
             {
-                if (lenient == LenientParsing.Strict && userPropertiesWhiteList.Count == 0)
-                {
-                    return (BusinessObject)jobject.ToObject(businessObjectType);
-                }
-                else
-                {
-                    var settings = lenient.GetJsonSerializerSettings();
-                    return (BusinessObject)JsonConvert.DeserializeObject(jobject.ToString(), businessObjectType, settings);
-                }
+                return (BusinessObject)jobject.ToObject(businessObjectType);
             }
-            else
-            {
-                return null;
-            }
+
+            var settings = lenient.GetJsonSerializerSettings();
+            return (BusinessObject)JsonConvert.DeserializeObject(jobject.ToString(), businessObjectType, settings);
         }
 
         /// <summary>
         /// <see cref="MapObject(Type, JObject, HashSet{string}, LenientParsing)"/>
         /// </summary>
-        /// <typeparam name="BusinessObjectType">type of return value</typeparam>
+        /// <typeparam name="TBusinessObjectType">type of return value</typeparam>
         /// <param name="jobject"><see cref="MapObject(Type, JObject, HashSet{string}, LenientParsing)"/></param>
         /// <param name="userPropertiesWhiteList"><see cref="MapObject(Type, JObject, HashSet{string}, LenientParsing)"/></param>
         /// <param name="lenient"><see cref="MapObject(Type, JObject, HashSet{string}, LenientParsing)"/></param>
         /// <returns><see cref="MapObject(Type, JObject, HashSet{string}, LenientParsing)"/></returns>
-        public static BusinessObjectType MapObject<BusinessObjectType>(JObject jobject, HashSet<string> userPropertiesWhiteList, LenientParsing lenient = LenientParsing.Strict)
+        public static TBusinessObjectType MapObject<TBusinessObjectType>(JObject jobject, HashSet<string> userPropertiesWhiteList, LenientParsing lenient = LenientParsing.STRICT)
         {
-            Type businessObjectType = typeof(BusinessObjectType);
-            return (BusinessObjectType)Convert.ChangeType(MapObject(businessObjectType, jobject, userPropertiesWhiteList, lenient), typeof(BusinessObjectType));
+            var businessObjectType = typeof(TBusinessObjectType);
+            return (TBusinessObjectType)Convert.ChangeType(MapObject(businessObjectType, jobject, userPropertiesWhiteList, lenient), typeof(TBusinessObjectType));
         }
 
         /// <summary>
@@ -159,14 +151,14 @@ namespace BO4E
         /// <returns>a list of valid BO4E names; upper/lower case sensitive</returns>
         public static HashSet<string> GetValidBoNames()
         {
-            HashSet<string> result = new HashSet<string>();
-            Type[] types = Assembly.GetExecutingAssembly().GetTypes();
-            foreach (Type t in types)
+            var result = new HashSet<string>();
+            var types = Assembly.GetExecutingAssembly().GetTypes();
+            foreach (var t in types)
             {
-                Match m = BO_REGEX.Match(t.ToString());
+                var m = BoRegex.Match(t.ToString());
                 if (m.Success)
                 {
-                    result.Add((m.Groups)["boName"].Value);
+                    result.Add(m.Groups["boName"].Value);
                 }
             }
             return result;
@@ -193,24 +185,10 @@ namespace BO4E
             }
 
             //Type[] types = Assembly.GetExecutingAssembly().GetTypes();
-            var clazz = Assembly.GetExecutingAssembly().GetType(packagePrefix + "." + businessObjectName);
-            if (clazz != null)
-            {
-                return clazz;
-            }
-            else
-            {
-                foreach (string boName in GetValidBoNames())
-                {
-                    // fallback.
-                    if (boName.ToUpper() == businessObjectName.ToUpper())
-                    {
-                        return Assembly.GetExecutingAssembly().GetType(packagePrefix + "." + boName);
-                    }
-                }
-            }
+            var clazz = Assembly.GetExecutingAssembly().GetType(PackagePrefix + "." + businessObjectName);
+            return clazz != null ? clazz : (from boName in GetValidBoNames() where string.Equals(boName, businessObjectName, StringComparison.CurrentCultureIgnoreCase) select Assembly.GetExecutingAssembly().GetType(PackagePrefix + "." + boName)).FirstOrDefault();
+
             //throw new ArgumentException($"No implemented BusinessObject type matches the name '{businessObjectName}'.");
-            return null;
         }
 
         /// <summary>
@@ -231,11 +209,7 @@ namespace BO4E
             {
                 return null;
             }
-            if (clazz == null)
-            {
-                return null;
-            }
-            return GetJsonSchemeFor(clazz);
+            return clazz == null ? null : GetJsonSchemeFor(clazz);
         }
 
         /// <summary>
@@ -251,7 +225,7 @@ namespace BO4E
             {
                 throw new ArgumentException($"The given type {businessObjectType} is not derived from BusinessObject.");
             }
-            BusinessObject bo = Activator.CreateInstance(businessObjectType) as BusinessObject;
+            var bo = Activator.CreateInstance(businessObjectType) as BusinessObject;
             return bo.GetJsonScheme();
         }
 
@@ -290,7 +264,7 @@ namespace BO4E
             return boType.GetFields()
                 .Where(f => f.GetCustomAttributes(attributeType, false).Length > 0)
                 .OrderBy(af => af.GetCustomAttribute<JsonPropertyAttribute>()?.Order)
-                .ToArray<FieldInfo>();
+                .ToArray();
         }
 
         /// <summary>
@@ -304,11 +278,11 @@ namespace BO4E
         public static FieldInfo[] GetAnnotatedFields(string boName, Type attributeType)
         {
             return Assembly.GetExecutingAssembly().GetTypes()
-                .Where(t => t.Name == boName || t.Name.ToUpper() == boName.ToUpper())
+                .Where(t => t.Name == boName || string.Equals(t.Name, boName, StringComparison.CurrentCultureIgnoreCase))
                 .SelectMany(t => t.GetFields()) // by type name
                 .Where(f => f.GetCustomAttributes(attributeType, false).Length > 0)
                 .OrderBy(af => af.GetCustomAttribute<JsonPropertyAttribute>()?.Order)
-                .ToArray<FieldInfo>();
+                .ToArray();
         }
     }
 }

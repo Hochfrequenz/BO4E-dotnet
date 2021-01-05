@@ -31,7 +31,7 @@ namespace BO4E.COM
         /// <returns></returns>
         public KeyValuePair<string, string> ToKeyValuePair()
         {
-            return new KeyValuePair<string, string>(this.KeyColumn, this.Value);
+            return new KeyValuePair<string, string>(KeyColumn, Value);
         }
     }
 }
