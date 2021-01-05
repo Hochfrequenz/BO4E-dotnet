@@ -30,17 +30,13 @@ namespace BO4E.meta.LenientConverters
             {
                 return intValue;
             }
-            else
+
+            if (objectType == typeof(int?))
             {
-                if (objectType == typeof(int?))
-                {
-                    return null;
-                }
-                else
-                {
-                    return 0;
-                }
+                return null;
             }
+
+            return 0;
         }
 
         /// <inheritdoc cref="JsonConverter.CanWrite"/>

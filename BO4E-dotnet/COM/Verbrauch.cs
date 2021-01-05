@@ -125,10 +125,6 @@ namespace BO4E.COM
                 {
                     Enddatum += new TimeSpan(diff.Hours + 1, 0, 0);
                 }
-                else
-                {
-                    // something seems wrong but not sure how to fix it. 
-                }
             }
             Startdatum = DateTime.SpecifyKind(Startdatum, DateTimeKind.Utc);
             Enddatum = DateTime.SpecifyKind(Enddatum, DateTimeKind.Utc);

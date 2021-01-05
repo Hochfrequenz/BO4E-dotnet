@@ -225,15 +225,11 @@ namespace BO4E.Extensions.BusinessObjects.Energiemenge
                 {
                     return ranges.AsParallel().ToDictionary(r => r, r => GetCompletenessReport(em, r));
                 }
-                else
-                {
-                    return ranges.ToDictionary(r => r, r => GetCompletenessReport(em, r));
-                }
+
+                return ranges.ToDictionary(r => r, r => GetCompletenessReport(em, r));
             }
-            else
-            {
-                return new Dictionary<ITimeRange, CompletenessReport>();
-            }
+
+            return new Dictionary<ITimeRange, CompletenessReport>();
         }
 
         /// <summary>

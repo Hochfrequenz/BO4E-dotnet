@@ -353,14 +353,12 @@ namespace BO4E.Extensions.COM
                 {
                     return DateTimeOffset.Compare(x.Startdatum, y.Startdatum);
                 }
-                else if (x.Enddatum != y.Enddatum)
+
+                if (x.Enddatum != y.Enddatum)
                 {
                     return DateTimeOffset.Compare(x.Enddatum, y.Enddatum);
                 }
-                else
-                {
-                    return 0;
-                }
+                return 0;
             }
         }
     }

@@ -501,10 +501,8 @@ namespace BO4E.Extensions.Encryption
             {
                 return string.Concat(Sha256HashBytes(value).Select(item => item.ToString("x2")));
             }
-            else
-            {
-                return Sha256HashBytes(value).ToBaseXString(alphabet);
-            }
+
+            return Sha256HashBytes(value).ToBaseXString(alphabet);
         }
 
         private const string Base36Alphabet = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ";

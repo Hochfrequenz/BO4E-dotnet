@@ -31,12 +31,13 @@ namespace BO4E.Extensions.Encryption
             {
                 return true;
             }
-            else if (property.PropertyType.IsGenericType && property.PropertyType.GetGenericTypeDefinition() == typeof(List<>))
+
+            if (property.PropertyType.IsGenericType && property.PropertyType.GetGenericTypeDefinition() == typeof(List<>))
             {
                 var listElementType = property.PropertyType.GetGenericArguments()[0];
                 return listElementType.IsSubclassOf(typeof(BO4E.COM.COM)) || listElementType.IsSubclassOf(typeof(BO.BusinessObject));
             }
-            else if (dataCategory.HasValue)
+            if (dataCategory.HasValue)
             {
                 foreach (var attribute in property.GetCustomAttributes().Where(a => a.GetType() == typeof(DataCategoryAttribute)))
                 {
@@ -48,6 +49,7 @@ namespace BO4E.Extensions.Encryption
                     return true;
                 }
             }
+
             return false;
         }
 

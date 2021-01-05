@@ -223,193 +223,191 @@ namespace BO4E.BO
                 {
                     continue;
                 }
+
+                var rp = new Rechnungsposition();
+                decimal zeitbezogeneMengeWert = 0;
+                if (belzart == "000001")
+                {
+                    rp.Positionstext = "ARBEITSPREIS";
+                }
+                else if (belzart == "000003")
+                {
+                    rp.Positionstext = "PAUSCHALE";
+                    mengeneinheit = Mengeneinheit.JAHR;
+                    zeitbezogeneMengeWert = (jrp["preisbtr"] ?? jrp["PREISBTR"]).Value<decimal>();
+                    rp.ZeitbezogeneMenge = new Menge { Einheit = Mengeneinheit.TAG, Wert = zeitbezogeneMengeWert };
+
+                    rp.Einzelpreis = new Preis
+                    {
+                        Wert = decimal.Parse((jrp["zeitant"] ?? jrp["ZEITANT"]).ToString()),
+                        Einheit = waehrungseinheit,
+                        Bezugswert = mengeneinheit
+                    };
+                }
+                else if (belzart == "000004")
+                    rp.Positionstext = "VERRECHNUNGSPREIS";
+                else if (belzart == "SUBT")
+                    rp.Positionstext = "zuzüglich Mehrwertsteuer 19,000%";
+                else if (belzart == "ZHFBP1" || belzart == "CITAX")
+                    rp.Positionstext = belzart;
+                else
+                    rp.Positionstext = "";
+
+                if ((jrp["massbill"] ?? jrp["MASSBILL"]) != null && !string.IsNullOrWhiteSpace((jrp["massbill"] ?? jrp["MASSBILL"]).Value<string>()))
+                {
+                    mengeneinheit = (Mengeneinheit)Enum.Parse(typeof(Mengeneinheit), (jrp["massbill"] ?? jrp["MASSBILL"]).Value<string>());
+                }
+                else if ((jrp["timbasis"] ?? jrp["TIMBASIS"]) != null && !string.IsNullOrWhiteSpace((jrp["timbasis"] ?? jrp["TIMBASIS"]).Value<string>()))
+                {
+                    if ((jrp["timbasis"] ?? jrp["TIMBASIS"]).Value<string>() == "365")
+                    {
+                        mengeneinheit = Mengeneinheit.JAHR;
+                        rp.ZeitbezogeneMenge = new Menge { Einheit = Mengeneinheit.TAG, Wert = zeitbezogeneMengeWert };
+                    }
+                }
                 else
                 {
-                    var rp = new Rechnungsposition();
-                    decimal zeitbezogeneMengeWert = 0;
-                    if (belzart == "000001")
-                    {
-                        rp.Positionstext = "ARBEITSPREIS";
-                    }
-                    else if (belzart == "000003")
-                    {
-                        rp.Positionstext = "PAUSCHALE";
-                        mengeneinheit = Mengeneinheit.JAHR;
-                        zeitbezogeneMengeWert = (jrp["preisbtr"] ?? jrp["PREISBTR"]).Value<decimal>();
-                        rp.ZeitbezogeneMenge = new Menge { Einheit = Mengeneinheit.TAG, Wert = zeitbezogeneMengeWert };
+                    mengeneinheit = Mengeneinheit.KWH;
+                }
 
+                if (rp.Einzelpreis == null)
+                {
+                    if ((jrp["preisbtr"] ?? jrp["PREISBTR"]) != null)
+                    {
                         rp.Einzelpreis = new Preis
                         {
-                            Wert = decimal.Parse((jrp["zeitant"] ?? jrp["ZEITANT"]).ToString()),
+                            Wert = decimal.Parse((jrp["preisbtr"] ?? jrp["PREISBTR"]).ToString()),
                             Einheit = waehrungseinheit,
                             Bezugswert = mengeneinheit
                         };
                     }
-                    else if (belzart == "000004")
-                        rp.Positionstext = "VERRECHNUNGSPREIS";
-                    else if (belzart == "SUBT")
-                        rp.Positionstext = "zuzüglich Mehrwertsteuer 19,000%";
-                    else if (belzart == "ZHFBP1" || belzart == "CITAX")
-                        rp.Positionstext = belzart;
                     else
-                        rp.Positionstext = "";
-
-                    if ((jrp["massbill"] ?? jrp["MASSBILL"]) != null && !string.IsNullOrWhiteSpace((jrp["massbill"] ?? jrp["MASSBILL"]).Value<string>()))
-                    {
-                        mengeneinheit = (Mengeneinheit)Enum.Parse(typeof(Mengeneinheit), (jrp["massbill"] ?? jrp["MASSBILL"]).Value<string>());
-                    }
-                    else if ((jrp["timbasis"] ?? jrp["TIMBASIS"]) != null && !string.IsNullOrWhiteSpace((jrp["timbasis"] ?? jrp["TIMBASIS"]).Value<string>()))
-                    {
-                        if ((jrp["timbasis"] ?? jrp["TIMBASIS"]).Value<string>() == "365")
+                        rp.Einzelpreis = new Preis
                         {
-                            mengeneinheit = Mengeneinheit.JAHR;
-                            rp.ZeitbezogeneMenge = new Menge { Einheit = Mengeneinheit.TAG, Wert = zeitbezogeneMengeWert };
-                        }
-                    }
-                    else
-                    {
-                        mengeneinheit = Mengeneinheit.KWH;
-                    }
+                            Wert = 0,
+                            Einheit = waehrungseinheit,
+                            Bezugswert = mengeneinheit
+                        };
+                }
 
-                    if (rp.Einzelpreis == null)
-                    {
-                        if ((jrp["preisbtr"] ?? jrp["PREISBTR"]) != null)
-                        {
-                            rp.Einzelpreis = new Preis
-                            {
-                                Wert = decimal.Parse((jrp["preisbtr"] ?? jrp["PREISBTR"]).ToString()),
-                                Einheit = waehrungseinheit,
-                                Bezugswert = mengeneinheit
-                            };
-                        }
-                        else
-                            rp.Einzelpreis = new Preis
-                            {
-                                Wert = 0,
-                                Einheit = waehrungseinheit,
-                                Bezugswert = mengeneinheit
-                            };
-                    }
-
-                    rp.Positionsnummer = (jrp["belzeile"] ?? jrp["BELZEILE"]).Value<int>();
-                    if ((jrp["bis"] ?? jrp["BIS"]) != null && (jrp["bis"] ?? jrp["BIS"]).Value<string>() != "0000-00-00")
-                    {
-                        rp.LieferungBis = new DateTimeOffset(TimeZoneInfo.ConvertTime((jrp["bis"] ?? jrp["BIS"]).Value<DateTime>(), CentralEuropeStandardTime.CENTRAL_EUROPE_STANDARD_TIME, TimeZoneInfo.Utc));
-                    }
-                    if ((jrp["ab"] ?? jrp["AB"]) != null && (jrp["ab"] ?? jrp["AB"]).Value<string>() != "0000-00-00")
-                    {
-                        rp.LieferungVon = new DateTimeOffset(TimeZoneInfo.ConvertTime((jrp["ab"] ?? jrp["AB"]).Value<DateTime>(), CentralEuropeStandardTime.CENTRAL_EUROPE_STANDARD_TIME, TimeZoneInfo.Utc));
-                    }
-                    if ((jrp["vertrag"] ?? jrp["VERTRAG"]) != null)
-                    {
+                rp.Positionsnummer = (jrp["belzeile"] ?? jrp["BELZEILE"]).Value<int>();
+                if ((jrp["bis"] ?? jrp["BIS"]) != null && (jrp["bis"] ?? jrp["BIS"]).Value<string>() != "0000-00-00")
+                {
+                    rp.LieferungBis = new DateTimeOffset(TimeZoneInfo.ConvertTime((jrp["bis"] ?? jrp["BIS"]).Value<DateTime>(), CentralEuropeStandardTime.CENTRAL_EUROPE_STANDARD_TIME, TimeZoneInfo.Utc));
+                }
+                if ((jrp["ab"] ?? jrp["AB"]) != null && (jrp["ab"] ?? jrp["AB"]).Value<string>() != "0000-00-00")
+                {
+                    rp.LieferungVon = new DateTimeOffset(TimeZoneInfo.ConvertTime((jrp["ab"] ?? jrp["AB"]).Value<DateTime>(), CentralEuropeStandardTime.CENTRAL_EUROPE_STANDARD_TIME, TimeZoneInfo.Utc));
+                }
+                if ((jrp["vertrag"] ?? jrp["VERTRAG"]) != null)
+                {
 #pragma warning disable CS0618 // Type or member is obsolete
-                        rp.VertragskontoId = (jrp["vertrag"] ?? jrp["VERTRAG"]).Value<string>();
+                    rp.VertragskontoId = (jrp["vertrag"] ?? jrp["VERTRAG"]).Value<string>();
 #pragma warning restore CS0618 // Type or member is obsolete
-                    }
+                }
 
-                    if ((jrp["iAbrmenge"] ?? jrp["I_ABRMENGE"]) != null)
+                if ((jrp["iAbrmenge"] ?? jrp["I_ABRMENGE"]) != null)
+                {
+                    rp.PositionsMenge = new Menge
                     {
-                        rp.PositionsMenge = new Menge
+                        Wert = (jrp["iAbrmenge"] ?? jrp["I_ABRMENGE"]).Value<decimal>(),
+                        Einheit = mengeneinheit
+                    };
+                }
+
+                if ((jrp["nettobtr"] ?? jrp["NETTOBTR"]) != null)
+                {
+                    if (belzart != "SUBT" && belzart != "CITAX")
+                    {
+                        rp.TeilsummeNetto = new Betrag
                         {
-                            Wert = (jrp["iAbrmenge"] ?? jrp["I_ABRMENGE"]).Value<decimal>(),
-                            Einheit = mengeneinheit
+                            Wert = (jrp["nettobtr"] ?? jrp["NETTOBTR"]).Value<decimal>(),
+                            Waehrung = waehrungscode
                         };
                     }
-
-                    if ((jrp["nettobtr"] ?? jrp["NETTOBTR"]) != null)
+                    else
                     {
-                        if (belzart != "SUBT" && belzart != "CITAX")
+                        rp.TeilsummeNetto = new Betrag
                         {
-                            rp.TeilsummeNetto = new Betrag
-                            {
-                                Wert = (jrp["nettobtr"] ?? jrp["NETTOBTR"]).Value<decimal>(),
-                                Waehrung = waehrungscode
-                            };
+                            Wert = (jrp["sbasw"] ?? jrp["SBASW"]).Value<decimal>(),
+                            Waehrung = waehrungscode
+                        };
+                        var steuerbetrag = new Steuerbetrag
+                        {
+                            Basiswert = (jrp["sbasw"] ?? jrp["SBASW"]).Value<decimal>(),
+                            Steuerwert = (jrp["sbetw"] ?? jrp["SBETW"]).Value<decimal>(),
+                            Waehrung = (Waehrungscode)Enum.Parse(typeof(Waehrungscode), (jrp["twaers"] ?? jrp["TWAERS"]).Value<string>())
+                        };
+                        decimal steuerProzent;
+                        if ((jrp["stprz"] ?? jrp["STPRZ"]) != null && !string.IsNullOrWhiteSpace((jrp["stprz"] ?? jrp["STPRZ"]).Value<string>()))
+                        {
+                            steuerProzent = decimal.Parse((jrp["stprz"] ?? jrp["STPRZ"]).Value<string>().Replace(",", ".").Trim(), CultureInfo.InvariantCulture);
                         }
                         else
                         {
-                            rp.TeilsummeNetto = new Betrag
-                            {
-                                Wert = (jrp["sbasw"] ?? jrp["SBASW"]).Value<decimal>(),
-                                Waehrung = waehrungscode
-                            };
-                            var steuerbetrag = new Steuerbetrag
-                            {
-                                Basiswert = (jrp["sbasw"] ?? jrp["SBASW"]).Value<decimal>(),
-                                Steuerwert = (jrp["sbetw"] ?? jrp["SBETW"]).Value<decimal>(),
-                                Waehrung = (Waehrungscode)Enum.Parse(typeof(Waehrungscode), (jrp["twaers"] ?? jrp["TWAERS"]).Value<string>())
-                            };
-                            decimal steuerProzent;
-                            if ((jrp["stprz"] ?? jrp["STPRZ"]) != null && !string.IsNullOrWhiteSpace((jrp["stprz"] ?? jrp["STPRZ"]).Value<string>()))
-                            {
-                                steuerProzent = decimal.Parse((jrp["stprz"] ?? jrp["STPRZ"]).Value<string>().Replace(",", ".").Trim(), CultureInfo.InvariantCulture);
-                            }
-                            else
-                            {
-                                steuerProzent = steuerbetrag.Steuerwert / steuerbetrag.Basiswert * 100.0M;
-                            }
-                            if ((int)steuerProzent == 19)
-                            {
-                                steuerbetrag.Steuerkennzeichen = Steuerkennzeichen.UST_19;
-                            }
-                            else if ((int)steuerProzent == 7)
-                            {
-                                steuerbetrag.Steuerkennzeichen = Steuerkennzeichen.UST_7;
-                            }
-                            else
-                            {
-                                throw new NotImplementedException($"Taxrate Internal '{jrp["taxrateInternal"]}' is not mapped.");
-                            }
-                            rp.TeilsummeSteuer = steuerbetrag;
+                            steuerProzent = steuerbetrag.Steuerwert / steuerbetrag.Basiswert * 100.0M;
                         }
-                        if ((jrp["nettobtr"] ?? jrp["NETTOBTR"]).Value<decimal>() <= 0)
+                        if ((int)steuerProzent == 19)
                         {
-                            Vorausgezahlt = new Betrag { Waehrung = waehrungscode, Wert = (jrp["nettobtr"] ?? jrp["NETTOBTR"]).Value<decimal>() };
+                            steuerbetrag.Steuerkennzeichen = Steuerkennzeichen.UST_19;
                         }
+                        else if ((int)steuerProzent == 7)
+                        {
+                            steuerbetrag.Steuerkennzeichen = Steuerkennzeichen.UST_7;
+                        }
+                        else
+                        {
+                            throw new NotImplementedException($"Taxrate Internal '{jrp["taxrateInternal"]}' is not mapped.");
+                        }
+                        rp.TeilsummeSteuer = steuerbetrag;
                     }
-
-                    rp.Zeiteinheit = mengeneinheit;
-                    rpList.Add(rp);
-
-                    var be = jrp["nettobtr"] ?? jrp["NETTOBTR"];
-                    if (be != null)
+                    if ((jrp["nettobtr"] ?? jrp["NETTOBTR"]).Value<decimal>() <= 0)
                     {
-                        if (belzart != "SUBT" && belzart != "CITAX") // this will lead to problems in the long run.
+                        Vorausgezahlt = new Betrag { Waehrung = waehrungscode, Wert = (jrp["nettobtr"] ?? jrp["NETTOBTR"]).Value<decimal>() };
+                    }
+                }
+
+                rp.Zeiteinheit = mengeneinheit;
+                rpList.Add(rp);
+
+                var be = jrp["nettobtr"] ?? jrp["NETTOBTR"];
+                if (be != null)
+                {
+                    if (belzart != "SUBT" && belzart != "CITAX") // this will lead to problems in the long run.
+                    {
+                        gNetto += be.Value<decimal>();
+                    }
+                    else
+                    {
+                        var steuerbetrag = new Steuerbetrag
                         {
-                            gNetto += be.Value<decimal>();
+                            Basiswert = (jrp["sbasw"] ?? jrp["SBASW"]).Value<decimal>(),
+                            Steuerwert = (jrp["sbetw"] ?? jrp["SBETW"]).Value<decimal>(),
+                            Waehrung = (Waehrungscode)Enum.Parse(typeof(Waehrungscode), (jrp["twaers"] ?? jrp["TWAERS"]).Value<string>())
+                        };
+                        decimal steuerProzent;
+                        if ((jrp["stprz"] ?? jrp["STPRZ"]) != null && !string.IsNullOrWhiteSpace((jrp["stprz"] ?? jrp["STPRZ"]).Value<string>()))
+                        {
+                            steuerProzent = decimal.Parse((jrp["stprz"] ?? jrp["STPRZ"]).Value<string>().Replace(",", ".").Trim(), CultureInfo.InvariantCulture);
                         }
                         else
                         {
-                            var steuerbetrag = new Steuerbetrag
-                            {
-                                Basiswert = (jrp["sbasw"] ?? jrp["SBASW"]).Value<decimal>(),
-                                Steuerwert = (jrp["sbetw"] ?? jrp["SBETW"]).Value<decimal>(),
-                                Waehrung = (Waehrungscode)Enum.Parse(typeof(Waehrungscode), (jrp["twaers"] ?? jrp["TWAERS"]).Value<string>())
-                            };
-                            decimal steuerProzent;
-                            if ((jrp["stprz"] ?? jrp["STPRZ"]) != null && !string.IsNullOrWhiteSpace((jrp["stprz"] ?? jrp["STPRZ"]).Value<string>()))
-                            {
-                                steuerProzent = decimal.Parse((jrp["stprz"] ?? jrp["STPRZ"]).Value<string>().Replace(",", ".").Trim(), CultureInfo.InvariantCulture);
-                            }
-                            else
-                            {
-                                steuerProzent = Math.Round(steuerbetrag.Steuerwert / steuerbetrag.Basiswert * 100.0M);
-                            }
-                            if (steuerProzent == 19.0M)
-                            {
-                                steuerbetrag.Steuerkennzeichen = Steuerkennzeichen.UST_19;
-                            }
-                            else if (steuerProzent == 7.0M)
-                            {
-                                steuerbetrag.Steuerkennzeichen = Steuerkennzeichen.UST_7;
-                            }
-                            else
-                            {
-                                throw new NotImplementedException($"Taxrate Internal '{jrp["taxrateInternal"] ?? jrp["TAXRATE_INTERNAL"]}' is not mapped.");
-                            }
-                            stList.Add(steuerbetrag);
-                            gSteure += be.Value<decimal>();
+                            steuerProzent = Math.Round(steuerbetrag.Steuerwert / steuerbetrag.Basiswert * 100.0M);
                         }
+                        if (steuerProzent == 19.0M)
+                        {
+                            steuerbetrag.Steuerkennzeichen = Steuerkennzeichen.UST_19;
+                        }
+                        else if (steuerProzent == 7.0M)
+                        {
+                            steuerbetrag.Steuerkennzeichen = Steuerkennzeichen.UST_7;
+                        }
+                        else
+                        {
+                            throw new NotImplementedException($"Taxrate Internal '{jrp["taxrateInternal"] ?? jrp["TAXRATE_INTERNAL"]}' is not mapped.");
+                        }
+                        stList.Add(steuerbetrag);
+                        gSteure += be.Value<decimal>();
                     }
                 }
             }

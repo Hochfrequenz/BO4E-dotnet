@@ -108,44 +108,38 @@ namespace BO4E.meta.LenientConverters
             {
                 return _defaultDateTime;
             }
-            else
+
+            try
             {
-                try
-                {
-                    return base.ReadJson(reader, objectType, existingValue, serializer);
-                }
-                catch (FormatException fe) when (fe.Message == "The UTC representation of the date '0001-01-01T00:00:00' falls outside the year range 1-9999.")
-                {
-                    if (objectType == typeof(DateTime))
-                    {
-                        return DateTime.MinValue;
-                    }
-                    else if (objectType == typeof(DateTime?) || objectType == typeof(DateTimeOffset?))
-                    {
-                        return null;
-                    }
-                    else
-                    {
-                        return DateTimeOffset.MinValue;
-                    }
-                }
-                catch (ArgumentOutOfRangeException ae) when (ae.Message == "The UTC time represented when the offset is applied must be between year 0 and 10,000. (Parameter 'offset')")
-                {
-                    if (objectType == typeof(DateTime))
-                    {
-                        return DateTime.MinValue;
-                    }
-                    else if (objectType == typeof(DateTime?) || objectType == typeof(DateTimeOffset?))
-                    {
-                        return null;
-                    }
-                    else
-                    {
-                        return DateTimeOffset.MinValue;
-                    }
-                }
-                //throw new JsonReaderException($"Couldn't convert {rawDate} to any of the allowed date time formats: {String.Join(";", ALLOWED_DATETIME_FORMATS)})");
+                return base.ReadJson(reader, objectType, existingValue, serializer);
             }
+            catch (FormatException fe) when (fe.Message == "The UTC representation of the date '0001-01-01T00:00:00' falls outside the year range 1-9999.")
+            {
+                if (objectType == typeof(DateTime))
+                {
+                    return DateTime.MinValue;
+                }
+
+                if (objectType == typeof(DateTime?) || objectType == typeof(DateTimeOffset?))
+                {
+                    return null;
+                }
+                return DateTimeOffset.MinValue;
+            }
+            catch (ArgumentOutOfRangeException ae) when (ae.Message == "The UTC time represented when the offset is applied must be between year 0 and 10,000. (Parameter 'offset')")
+            {
+                if (objectType == typeof(DateTime))
+                {
+                    return DateTime.MinValue;
+                }
+
+                if (objectType == typeof(DateTime?) || objectType == typeof(DateTimeOffset?))
+                {
+                    return null;
+                }
+                return DateTimeOffset.MinValue;
+            }
+            //throw new JsonReaderException($"Couldn't convert {rawDate} to any of the allowed date time formats: {String.Join(";", ALLOWED_DATETIME_FORMATS)})");
         }
 
         /// <inheritdoc cref="JsonConverter.CanWrite"/>

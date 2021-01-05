@@ -22,7 +22,8 @@ public static class JsonHelper
             }
             return copy;
         }
-        else if (token.Type == JTokenType.Array)
+
+        if (token.Type == JTokenType.Array)
         {
             var copy = new JArray();
             foreach (var item in token.Children())

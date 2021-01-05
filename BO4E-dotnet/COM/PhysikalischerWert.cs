@@ -61,10 +61,8 @@ namespace BO4E.COM
             {
                 throw new ArgumentException($"'{einheitString}' is not a valid Mengeneinheit");
             }
-            else
-            {
-                Einheit = einheit;
-            }
+
+            Einheit = einheit;
         }
     }
 }

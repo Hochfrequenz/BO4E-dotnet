@@ -190,15 +190,13 @@ namespace BO4E
             {
                 return clazz;
             }
-            else
+
+            foreach (var boName in GetValidBoNames())
             {
-                foreach (var boName in GetValidBoNames())
+                // fallback.
+                if (String.Equals(boName, businessObjectName, StringComparison.CurrentCultureIgnoreCase))
                 {
-                    // fallback.
-                    if (String.Equals(boName, businessObjectName, StringComparison.CurrentCultureIgnoreCase))
-                    {
-                        return Assembly.GetExecutingAssembly().GetType(PackagePrefix + "." + boName);
-                    }
+                    return Assembly.GetExecutingAssembly().GetType(PackagePrefix + "." + boName);
                 }
             }
             //throw new ArgumentException($"No implemented BusinessObject type matches the name '{businessObjectName}'.");

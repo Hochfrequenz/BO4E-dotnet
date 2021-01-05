@@ -110,7 +110,8 @@ namespace BO4E.Extensions.ENUM
             {
                 throw new InvalidOperationException("You must not use the artificial 'ZERO' value.");
             }
-            else if (me1 == me2)
+
+            if (me1 == me2)
             {
                 return 1.0M;
             }
@@ -122,10 +123,8 @@ namespace BO4E.Extensions.ENUM
             {
                 return (decimal)me1 / (decimal)me2;
             }
-            else
-            {
-                throw new InvalidOperationException($"{me1} and {me2} are not (trivially) convertible into each other.");
-            }
+
+            throw new InvalidOperationException($"{me1} and {me2} are not (trivially) convertible into each other.");
         }
     }
 }

@@ -270,7 +270,8 @@ namespace BO4E.Reporting
                 {
                     continue;
                 }
-                else if (field.FieldType.IsGenericType && field.FieldType.GetGenericTypeDefinition() == typeof(List<>))
+
+                if (field.FieldType.IsGenericType && field.FieldType.GetGenericTypeDefinition() == typeof(List<>))
                 {
                     if (field.GetValue(value) != null && field.Name == "gaps")
                     {

@@ -134,7 +134,8 @@ namespace TestBO4EExtensions.Encryption
                             {
                                 continue;
                             }
-                            else if (expectedResult == null && testResult != null)
+
+                            if (expectedResult == null && testResult != null)
                             {
                                 Assert.AreEqual(expectedResult, testResult.ToString(), $"Path {jsonpath} in {testFile} returned value {testResult} where null was expected.");
                             }

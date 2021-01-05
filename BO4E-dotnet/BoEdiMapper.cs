@@ -23,7 +23,9 @@ namespace BO4E
         /// project wide logger
         /// </summary>
         public static ILogger Logger = StaticLogger.Logger;
-        private static readonly string namespacePrefix = "BO4E.ENUM";
+
+        private const string NamespacePrefix = "BO4E.ENUM";
+
         /// <summary>
         /// transform a BO4E value of known type to an EDIFACT value
         /// </summary>
@@ -56,8 +58,8 @@ namespace BO4E
                 Logger = StaticLogger.Logger;
             }
             //Type[] types = Assembly.GetExecutingAssembly().GetTypes();
-            var clazz = Assembly.GetExecutingAssembly().GetType(namespacePrefix + "." + objectName);
-            var ediClazz = Assembly.GetExecutingAssembly().GetType($"{namespacePrefix}.EDI.{objectName}Edi");
+            var clazz = Assembly.GetExecutingAssembly().GetType(NamespacePrefix + "." + objectName);
+            var ediClazz = Assembly.GetExecutingAssembly().GetType($"{NamespacePrefix}.EDI.{objectName}Edi");
 
             var prop = clazz.GetField(objectValue);
             if (prop == null)
@@ -68,11 +70,9 @@ namespace BO4E
                 {
                     return objectValue;
                 }
-                else
-                {
-                    Logger.LogError($"Couldn't make any sense out of {objectName} / {objectValue}");
-                    return null;
-                }
+
+                Logger.LogError($"Couldn't make any sense out of {objectName} / {objectValue}");
+                return null;
             }
             if (ediClazz == null)
             {
@@ -140,7 +140,7 @@ namespace BO4E
                     var originalListItemType = originalType.GetGenericArguments()[0];
                     if (originalListItemType.ToString().StartsWith("BO4E.ENUM"))
                     {
-                        var listItemEdiType = Assembly.GetExecutingAssembly().GetType($"{namespacePrefix}.EDI.{originalListItemType.Name}Edi");
+                        var listItemEdiType = Assembly.GetExecutingAssembly().GetType($"{NamespacePrefix}.EDI.{originalListItemType.Name}Edi");
                         if (listItemEdiType != null)
                         {
                             var listType = typeof(List<>).MakeGenericType(listItemEdiType);
@@ -173,7 +173,7 @@ namespace BO4E
                         result[serializationName] = JToken.FromObject(newList);
                     }
                 }
-                var ediType = Assembly.GetExecutingAssembly().GetType($"{namespacePrefix}.EDI.{originalType.Name}Edi");
+                var ediType = Assembly.GetExecutingAssembly().GetType($"{NamespacePrefix}.EDI.{originalType.Name}Edi");
                 if (ediType != null)
                 {
                     var newValue = ToEdi(originalType.Name, oProp.GetValue(o).ToString());

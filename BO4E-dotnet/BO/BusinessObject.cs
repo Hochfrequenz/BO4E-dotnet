@@ -235,24 +235,18 @@ namespace BO4E.BO
                 {
                     return false;
                 }
-                else
-                {
-                    UserProperties.Remove(flagKey);
-                    return true;
-                }
-            }
-            else
-            {
-                if (((TBusinessObject)this).TryGetUserProperty<bool?, TBusinessObject>(flagKey, out var existingValue) && existingValue == flagValue.Value)
-                {
-                    return false;
-                }
-                else
-                {
-                    UserProperties[flagKey] = flagValue.Value;
-                }
+
+                UserProperties.Remove(flagKey);
                 return true;
             }
+
+            if (((TBusinessObject)this).TryGetUserProperty<bool?, TBusinessObject>(flagKey, out var existingValue) && existingValue == flagValue.Value)
+            {
+                return false;
+            }
+
+            UserProperties[flagKey] = flagValue.Value;
+            return true;
         }
 
         /// <summary>
@@ -422,10 +416,6 @@ namespace BO4E.BO
                         result.Add(string.Join(".", new[] { fieldName, subResult.Key }), subResult.Value);
                     }
                     result.Add(fieldName, prop.PropertyType);
-                }
-                else
-                {
-                    // nada
                 }
             }
             return result;
@@ -662,11 +652,9 @@ namespace BO4E.BO
                         throw tie.InnerException; // to hide the reflection to the outside.
                     }
                 }
-                else
-                {
-                    serializer.ContractResolver.ResolveContract(objectType).Converter = null;
-                    return serializer.Deserialize(JObject.Load(reader).CreateReader(), objectType);
-                }
+
+                serializer.ContractResolver.ResolveContract(objectType).Converter = null;
+                return serializer.Deserialize(JObject.Load(reader).CreateReader(), objectType);
             }
 
             public override bool CanWrite => false;

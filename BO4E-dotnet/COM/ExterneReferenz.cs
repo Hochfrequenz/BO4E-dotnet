@@ -81,7 +81,8 @@ namespace BO4E.COM
             {
                 return new List<ExterneReferenz> { extRef };
             }
-            else if (extReferences.Any() && extReferences.TryGetExterneReferenz(extRef.ExRefName, out var existingRefWert))
+
+            if (extReferences.Any() && extReferences.TryGetExterneReferenz(extRef.ExRefName, out var existingRefWert))
             {
                 if (overwriteExisting)
                 {
@@ -93,10 +94,8 @@ namespace BO4E.COM
                     {
                         throw new InvalidOperationException($"There is already an with {nameof(extRef.ExRefName)}='{extRef.ExRefName}' having {nameof(extRef.ExRefWert)}='{existingRefWert}'!='{extRef.ExRefWert}'. Use {nameof(overwriteExisting)}=true to overwrite it.");
                     }
-                    else
-                    {
-                        return extReferences;
-                    }
+
+                    return extReferences;
                 }
             }
             extReferences.Add(extRef);

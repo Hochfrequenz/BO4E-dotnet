@@ -83,14 +83,7 @@ namespace BO4E.meta
         public Type GetBoType()
         {
             var boName = GetBoName();
-            if (boName == null)
-            {
-                return null;
-            }
-            else
-            {
-                return Assembly.GetExecutingAssembly().GetTypes().FirstOrDefault(t => t.Name.Equals(boName));
-            }
+            return boName == null ? null : Assembly.GetExecutingAssembly().GetTypes().FirstOrDefault(t => t.Name.Equals(boName));
         }
 
         /// <summary>
@@ -206,10 +199,8 @@ namespace BO4E.meta
             {
                 return new Bo4eUri(resultUri.AbsoluteUri);
             }
-            else
-            {
-                return null;
-            }
+
+            return null;
         }
 
         private static IList<PropertyInfo> GetKeyFields(BusinessObject bo)
@@ -246,10 +237,8 @@ namespace BO4E.meta
             {
                 return ownKeyProps;
             }
-            else
-            {
-                return allKeyProperties.ToList();
-            }
+
+            return allKeyProperties.ToList();
         }
 
         /// <summary>
@@ -357,7 +346,7 @@ namespace BO4E.meta
             var query = System.Web.HttpUtility.ParseQueryString(Query);
             var filterString = string.Empty;
             var boFields = GetBoType().GetProperties().Select(p => p.Name);
-            var andString = " and ";
+            const string andString = " and ";
             foreach (var kvp in filterObject.Where(kvp => kvp.Value != null && boFields.Contains(kvp.Key, StringComparer.OrdinalIgnoreCase)))
             {
                 filterString += $"{andString}{kvp.Key} eq '{kvp.Value}'";

@@ -124,21 +124,6 @@ namespace TestBO4E
                         //}
                     }
                 }
-                else
-                {
-                    // non-strict test cases are designed such that they are not parseble in strict mode.
-                    // bool exceptionThrown;
-                    // try
-                    //{
-                    //    BusinessObject boStrict = BoMapper.MapObject(json["objectName"].ToString(), (JObject)json["input"], LenientParsing.Strict);
-                    //    exceptionThrown = false;
-                    //}
-                    //catch (Exception)
-                    //{
-                    //    exceptionThrown = true;
-                    // }
-                    //Assert.IsTrue(exceptionThrown);
-                }
             }
         }
 

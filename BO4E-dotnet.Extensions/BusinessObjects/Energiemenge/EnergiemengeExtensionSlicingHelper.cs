@@ -154,11 +154,12 @@ namespace BO4E.Extensions.BusinessObjects.Energiemenge
             {
                 throw new ArgumentException("DateTime Kind must not be local", nameof(dt));
             }
-            else if (dt.Kind == DateTimeKind.Unspecified)
+
+            if (dt.Kind == DateTimeKind.Unspecified)
             {
                 return dt.AddDays(value); // doesn't take dst into account. that's just what we want! A day can have 23,24 or 25 hours
             }
-            else if (dt.Kind == DateTimeKind.Utc)
+            if (dt.Kind == DateTimeKind.Utc)
             {
                 // an utc day does always have 24 hours. not what humans expect!
                 var dtLocal = DateTime.SpecifyKind(TimeZoneInfo.ConvertTimeFromUtc(dt, tz), DateTimeKind.Unspecified);
@@ -166,10 +167,7 @@ namespace BO4E.Extensions.BusinessObjects.Energiemenge
                 var result = TimeZoneInfo.ConvertTimeToUtc(preResult, tz);
                 return result;
             }
-            else
-            {
-                throw new NotImplementedException($"DateTimeKind {dt.Kind} is not implemented.");
-            }
+            throw new NotImplementedException($"DateTimeKind {dt.Kind} is not implemented.");
         }
     }
 }

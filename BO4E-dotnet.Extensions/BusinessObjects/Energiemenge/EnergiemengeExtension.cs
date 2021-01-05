@@ -239,15 +239,13 @@ namespace BO4E.Extensions.BusinessObjects.Energiemenge
             {
                 throw new ArgumentException("Energiemenge is not pure.");
             }
-            else if (em.Energieverbrauch.Count == 0)
+
+            if (em.Energieverbrauch.Count == 0)
             {
                 return Tuple.Create<decimal?, Mengeneinheit>(null, Mengeneinheit.KW);
             }
-            else
-            {
-                var v = em.Energieverbrauch.First();
-                return Tuple.Create<decimal?, Mengeneinheit>(em.GetAverage(v.Wertermittlungsverfahren, v.Obiskennzahl, v.Einheit), v.Einheit);
-            }
+            var v = em.Energieverbrauch.First();
+            return Tuple.Create<decimal?, Mengeneinheit>(em.GetAverage(v.Wertermittlungsverfahren, v.Obiskennzahl, v.Einheit), v.Einheit);
         }
 
         /// <summary>
@@ -295,10 +293,8 @@ namespace BO4E.Extensions.BusinessObjects.Energiemenge
             {
                 return result / overallDenominator;
             }
-            else
-            {
-                return null;
-            }
+
+            return null;
         }
 
         /// <summary>
@@ -433,11 +429,9 @@ namespace BO4E.Extensions.BusinessObjects.Energiemenge
                 }
                 return true;
             }
-            else
-            {
-                // there must be only 1 time difference between all the elements
-                return startEndDatumPeriods.Count <= 1;
-            }
+
+            // there must be only 1 time difference between all the elements
+            return startEndDatumPeriods.Count <= 1;
         }
 
         /// <summary>
@@ -465,11 +459,9 @@ namespace BO4E.Extensions.BusinessObjects.Energiemenge
                 }
                 return true;
             }
-            else
-            {
-                var v = em.Energieverbrauch.FirstOrDefault();
-                return em.IsEvenlySpaced(em.GetTimeRange(), v.Wertermittlungsverfahren, v.Obiskennzahl, v.Einheit, allowGaps);
-            }
+
+            var v = em.Energieverbrauch.FirstOrDefault();
+            return em.IsEvenlySpaced(em.GetTimeRange(), v.Wertermittlungsverfahren, v.Obiskennzahl, v.Einheit, allowGaps);
         }
 
 
@@ -629,10 +621,8 @@ namespace BO4E.Extensions.BusinessObjects.Energiemenge
                 {
                     return (decimal)intersectedPeriods.TotalDuration.TotalSeconds / (decimal)reference.Duration.TotalSeconds;
                 }
-                else // to self
-                {
-                    return (decimal)intersectedPeriods.TotalDuration.TotalSeconds / (decimal)period.Duration.TotalSeconds;
-                }
+
+                return (decimal)intersectedPeriods.TotalDuration.TotalSeconds / (decimal)period.Duration.TotalSeconds;
             }
             catch (DivideByZeroException)
             {
@@ -658,10 +648,8 @@ namespace BO4E.Extensions.BusinessObjects.Energiemenge
                 bool upPurity = em.IsPureUserProperties();
                 return upPurity && basicPurity;
             }
-            else
-            {
-                return basicPurity;
-            }
+
+            return basicPurity;
         }
 
         /// <summary>
@@ -747,18 +735,16 @@ namespace BO4E.Extensions.BusinessObjects.Energiemenge
                 {
                     return true;
                 }
-                else
+
+                var me1 = einheiten.First();
+                foreach (var me2 in einheiten)
                 {
-                    var me1 = einheiten.First();
-                    foreach (var me2 in einheiten)
+                    if (!me1.IsConvertibleTo(me2))
                     {
-                        if (!me1.IsConvertibleTo(me2))
-                        {
-                            return false;
-                        }
+                        return false;
                     }
-                    return true;
                 }
+                return true;
             }
         }
 
@@ -788,17 +774,15 @@ namespace BO4E.Extensions.BusinessObjects.Energiemenge
             {
                 return new List<BO.Energiemenge> { em };
             }
-            else
+
+            var result = new List<BO.Energiemenge>();
+            foreach (var group in em.Energieverbrauch.GroupBy(PurityGrouper))
             {
-                var result = new List<BO.Energiemenge>();
-                foreach (var group in em.Energieverbrauch.GroupBy(PurityGrouper))
-                {
-                    var pureEm = em.DeepClone();
-                    pureEm.Energieverbrauch = group.ToList();
-                    result.Add(pureEm);
-                }
-                return result;
+                var pureEm = em.DeepClone();
+                pureEm.Energieverbrauch = @group.ToList();
+                result.Add(pureEm);
             }
+            return result;
         }
 
         /// <summary>
