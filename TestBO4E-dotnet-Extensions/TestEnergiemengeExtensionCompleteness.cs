@@ -4,7 +4,6 @@ using BO4E.COM;
 using BO4E.ENUM;
 using BO4E.Extensions.BusinessObjects.Energiemenge;
 using BO4E.meta;
-using BO4E.meta.LenientConverters;
 using BO4E.Reporting;
 
 using Itenso.TimePeriod;

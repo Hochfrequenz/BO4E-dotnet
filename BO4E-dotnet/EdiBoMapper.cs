@@ -1,8 +1,6 @@
 using BO4E.meta;
 
 using Microsoft.Extensions.Logging;
-
-using System;
 using System.Linq;
 using System.Reflection;
 

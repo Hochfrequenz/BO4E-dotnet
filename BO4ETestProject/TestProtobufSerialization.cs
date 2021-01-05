@@ -1,7 +1,6 @@
 
 using System;
 using System.IO;
-using System.Linq;
 using BO4E.BO;
 using BO4E.COM;
 

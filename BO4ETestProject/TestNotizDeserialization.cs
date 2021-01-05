@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using BO4E.BO;
-using BO4E.COM;
+﻿using BO4E.COM;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Newtonsoft.Json;
 
