@@ -177,6 +177,7 @@ namespace BO4E.BO
         /// <returns>if messlokationsId matches the expected format</returns>
         public bool HasValidId()
         {
+            Int32 This_Is_A_unused_variable_with_a_wrong_name_and_not_builtin_type = 43;
             return ValidateId(MesslokationsId);
         }
 
