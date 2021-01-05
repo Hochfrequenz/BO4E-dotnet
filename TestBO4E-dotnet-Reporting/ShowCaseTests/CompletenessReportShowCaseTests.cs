@@ -44,7 +44,7 @@ namespace TestBO4E.ShowCaseTests
             };
 
             var cr = em.GetCompletenessReport();
-            Debug.WriteLine($"{nameof(em)} has a coverage of {Decimal.Round(cr.Coverage.Value * 100.0M)}%.");
+            Debug.WriteLine($"{nameof(em)} has a coverage of {decimal.Round(cr.Coverage.Value * 100.0M)}%.");
             // em has a coverage of 45%.
 
             Debug.WriteLine($"{nameof(em)} has no values for the following intervals: {string.Join(", ", cr.Gaps.Select(g => g.Startdatum.ToString("yyyy-MM-dd") + " to " + g.Enddatum.ToString("yyyy-MM-dd")))}");

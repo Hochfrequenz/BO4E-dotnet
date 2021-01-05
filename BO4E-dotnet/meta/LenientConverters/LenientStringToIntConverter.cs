@@ -25,7 +25,7 @@ namespace BO4E.meta.LenientConverters
             {
                 return null;
             }
-            var numeric = new String(reader.Value.ToString().Where(Char.IsDigit).ToArray());
+            var numeric = new string(reader.Value.ToString().Where(char.IsDigit).ToArray());
             if (int.TryParse(numeric, out var intValue))
             {
                 return intValue;

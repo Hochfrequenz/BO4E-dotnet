@@ -23,7 +23,7 @@ namespace BO4E.meta.LenientConverters
                 return null;
             }
             var rawString = (string)reader.Value;
-            if (rawString.Trim() == String.Empty)
+            if (rawString.Trim() == string.Empty)
             {
                 return null;
             }

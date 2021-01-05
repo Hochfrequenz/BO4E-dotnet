@@ -71,7 +71,7 @@ namespace TestBO4E
         {
             var uri = new Bo4eUri("bo4e://Energiemenge");
             var exceptionThrown = false;
-            var result = String.Empty;
+            var result = string.Empty;
             try
             {
                 result = uri.GetQueryObject().ToString();

@@ -117,7 +117,7 @@ namespace BO4E
         /// the WiMPiM.
         /// <param name="o">Valid Business Object or BO4E COMponent</param>
         /// <returns>JObject with same structure as original object</returns>
-        public static JObject ReplaceWithEdiValues(Object o)
+        public static JObject ReplaceWithEdiValues(object o)
         {
             var type = o.GetType();
             if (!type.IsSubclassOf(typeof(BusinessObject)) && !type.IsSubclassOf(typeof(BO4E.COM.COM)))

@@ -65,15 +65,8 @@ namespace BO4E.meta
         public string GetBoName()
         {
 #pragma warning disable CS0618 // Type or member is obsolete
-            foreach (var boName in BoMapper.GetValidBoNames())
+            return BoMapper.GetValidBoNames().FirstOrDefault(boName => boName.ToUpper().Equals(Host.ToUpper()));
 #pragma warning restore CS0618 // Type or member is obsolete
-            {
-                if (boName.ToUpper().Equals(Host.ToUpper()))
-                {
-                    return boName;
-                }
-            }
-            return null;
         }
 
         /// <summary>
@@ -195,12 +188,7 @@ namespace BO4E.meta
             }
 
             var relativeUri = new Uri(EscapeUriString(relativeUriBuilder.ToString()), UriKind.Relative);
-            if (TryCreate(baseUri, relativeUri, out var resultUri))
-            {
-                return new Bo4eUri(resultUri.AbsoluteUri);
-            }
-
-            return null;
+            return TryCreate(baseUri, relativeUri, out var resultUri) ? new Bo4eUri(resultUri.AbsoluteUri) : null;
         }
 
         private static IList<PropertyInfo> GetKeyFields(BusinessObject bo)
@@ -238,7 +226,9 @@ namespace BO4E.meta
                 return ownKeyProps;
             }
 
-            return allKeyProperties.ToList();
+            List<PropertyInfo> list = new List<PropertyInfo>();
+            foreach (var property in allKeyProperties) list.Add(property);
+            return list;
         }
 
         /// <summary>
@@ -301,7 +291,7 @@ namespace BO4E.meta
                         if( Enum.TryParse(keyValue, out var resultEnum);
                     }
                     else*/
-                    if (Int32.TryParse(keyValue, out var keyValueInt))
+                    if (int.TryParse(keyValue, out var keyValueInt))
                     {
                         result.Add(keyPropName, keyValueInt);
                     }
@@ -347,10 +337,7 @@ namespace BO4E.meta
             var filterString = string.Empty;
             var boFields = GetBoType().GetProperties().Select(p => p.Name);
             const string andString = " and ";
-            foreach (var kvp in filterObject.Where(kvp => kvp.Value != null && boFields.Contains(kvp.Key, StringComparer.OrdinalIgnoreCase)))
-            {
-                filterString += $"{andString}{kvp.Key} eq '{kvp.Value}'";
-            }
+            filterString = filterObject.Where(kvp => kvp.Value != null && boFields.Contains(kvp.Key, StringComparer.OrdinalIgnoreCase)).Aggregate(filterString, (current, kvp) => current + $"{andString}{kvp.Key} eq '{kvp.Value}'");
             if (filterString.StartsWith(andString))
             {
                 filterString = filterString.Substring(andString.Length);

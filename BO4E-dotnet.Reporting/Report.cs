@@ -183,7 +183,7 @@ namespace BO4E.Reporting
                     resultBuilder.Append(lineTerminator);
                     for (var z = 2; z < sortedHeaderNamesList.Count(); z++)
                         resultBuilder.Append(separator.ToString());
-                    resultBuilder.Append(String.Join(separator.ToString(), gapSortedResults));
+                    resultBuilder.Append(string.Join(separator.ToString(), gapSortedResults));
                 }
             }
             else

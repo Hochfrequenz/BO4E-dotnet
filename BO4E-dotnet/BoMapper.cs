@@ -191,16 +191,8 @@ namespace BO4E
                 return clazz;
             }
 
-            foreach (var boName in GetValidBoNames())
-            {
-                // fallback.
-                if (String.Equals(boName, businessObjectName, StringComparison.CurrentCultureIgnoreCase))
-                {
-                    return Assembly.GetExecutingAssembly().GetType(PackagePrefix + "." + boName);
-                }
-            }
+            return (from boName in GetValidBoNames() where string.Equals(boName, businessObjectName, StringComparison.CurrentCultureIgnoreCase) select Assembly.GetExecutingAssembly().GetType(PackagePrefix + "." + boName)).FirstOrDefault();
             //throw new ArgumentException($"No implemented BusinessObject type matches the name '{businessObjectName}'.");
-            return null;
         }
 
         /// <summary>
@@ -290,7 +282,7 @@ namespace BO4E
         public static FieldInfo[] GetAnnotatedFields(string boName, Type attributeType)
         {
             return Assembly.GetExecutingAssembly().GetTypes()
-                .Where(t => t.Name == boName || String.Equals(t.Name, boName, StringComparison.CurrentCultureIgnoreCase))
+                .Where(t => t.Name == boName || string.Equals(t.Name, boName, StringComparison.CurrentCultureIgnoreCase))
                 .SelectMany(t => t.GetFields()) // by type name
                 .Where(f => f.GetCustomAttributes(attributeType, false).Length > 0)
                 .OrderBy(af => af.GetCustomAttribute<JsonPropertyAttribute>()?.Order)

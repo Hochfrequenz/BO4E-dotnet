@@ -26,12 +26,12 @@ namespace BO4E.Extensions.COM
             return v1.Merge(v2, false, false);
         }
 
-        public static HashSet<Verbrauch> MergeRedundant(this Verbrauch v1, Verbrauch v2, Boolean biased)
+        public static HashSet<Verbrauch> MergeRedundant(this Verbrauch v1, Verbrauch v2, bool biased)
         {
             return v1.Merge(v2, true, biased);
         }
 
-        public static HashSet<Verbrauch> Merge(this Verbrauch v1, Verbrauch v2, bool redundant, Boolean biased)
+        public static HashSet<Verbrauch> Merge(this Verbrauch v1, Verbrauch v2, bool redundant, bool biased)
         {
             var result = new HashSet<Verbrauch>();
             if (v1.Obiskennzahl == v2.Obiskennzahl && v1.Wertermittlungsverfahren == v2.Wertermittlungsverfahren && v1.Einheit == v2.Einheit)

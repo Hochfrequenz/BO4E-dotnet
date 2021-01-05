@@ -283,11 +283,11 @@ namespace BO4E.BO
                 var s = input.Substring(i - 1, 1);
                 if (i % 2 == 0)
                 {
-                    evenChecksum += 2 * Int32.Parse(s);
+                    evenChecksum += 2 * int.Parse(s);
                 }
                 else
                 {
-                    oddChecksum += Int32.Parse(s);
+                    oddChecksum += int.Parse(s);
                 }
             }
             var result = (10 - (evenChecksum + oddChecksum) % 10) % 10;

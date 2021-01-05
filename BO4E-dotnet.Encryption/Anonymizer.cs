@@ -304,7 +304,7 @@ namespace BO4E.Extensions.Encryption
                 HashString(ref inputString, dataCategory);
                 input = JToken.FromObject(inputString);
             }*/
-            else if (inputType == typeof(Int32))
+            else if (inputType == typeof(int))
             {
                 _logger.LogWarning($"Hashing {inputType} is not supported.");
             }
