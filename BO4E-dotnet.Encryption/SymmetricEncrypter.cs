@@ -64,7 +64,7 @@ namespace BO4E.Extensions.Encryption
         /// <returns>an encrypted Business Object</returns>
         public EncryptedObjectAEAD Encrypt(BusinessObject plainObject, string associatedDataString)
         {
-            var plainText = JsonConvert.SerializeObject(plainObject, settings: encryptionSerializerSettings);
+            var plainText = JsonConvert.SerializeObject(plainObject, encryptionSerializerSettings);
             var nonce = SecretAeadChaCha20Poly1305.GenerateNonce();
             var cipherString = Encrypt(plainText, associatedDataString, nonce);
             return new EncryptedObjectAEAD(cipherString, associatedDataString, Convert.ToBase64String(nonce));
@@ -99,7 +99,7 @@ namespace BO4E.Extensions.Encryption
                 return null;
             }
             var plainString = Decrypt(eo.CipherText, eo.AssociatedData, eo.Nonce);
-            return JsonConvert.DeserializeObject<BusinessObject>(plainString, settings: encryptionSerializerSettings);
+            return JsonConvert.DeserializeObject<BusinessObject>(plainString, encryptionSerializerSettings);
         }
 
         public override T Decrypt<T>(EncryptedObject encryptedObject)
@@ -110,7 +110,7 @@ namespace BO4E.Extensions.Encryption
                 return null;
             }
             var plainString = Decrypt(eo.CipherText, eo.AssociatedData, eo.Nonce);
-            return JsonConvert.DeserializeObject<T>(plainString, settings: encryptionSerializerSettings);
+            return JsonConvert.DeserializeObject<T>(plainString, encryptionSerializerSettings);
         }
 
         public override void Dispose()

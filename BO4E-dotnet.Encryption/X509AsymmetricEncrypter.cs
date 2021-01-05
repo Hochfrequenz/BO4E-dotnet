@@ -90,7 +90,7 @@ namespace BO4E.Extensions.Encryption
 
         public EncryptedObject Encrypt(BusinessObject plainObject)
         {
-            var plainText = JsonConvert.SerializeObject(plainObject, settings: encryptionSerializerSettings);
+            var plainText = JsonConvert.SerializeObject(plainObject, encryptionSerializerSettings);
             var cipherString = Encrypt(plainText);
             return new EncryptedObjectPKCS7(cipherString, GetPublicKeysBase64());
         }
@@ -140,7 +140,7 @@ namespace BO4E.Extensions.Encryption
                 return null;
             }
             var plainString = Decrypt(eo.CipherText);
-            return JsonConvert.DeserializeObject<BusinessObject>(plainString, settings: encryptionSerializerSettings);
+            return JsonConvert.DeserializeObject<BusinessObject>(plainString, encryptionSerializerSettings);
         }
 
         public override T Decrypt<T>(EncryptedObject encryptedObject)
@@ -150,7 +150,7 @@ namespace BO4E.Extensions.Encryption
                 return null;
             }
             var plainString = Decrypt(eo.CipherText);
-            return JsonConvert.DeserializeObject<T>(plainString, settings: encryptionSerializerSettings);
+            return JsonConvert.DeserializeObject<T>(plainString, encryptionSerializerSettings);
         }
 
         public override void Dispose()

@@ -63,13 +63,13 @@ namespace TestBO4E
             Assert.IsTrue(melo.UserProperties.TryGetValue("foo", out var upValue) && upValue.Value<bool>());
             Assert.IsTrue(melo.HasFlagSet("foo"));
             Assert.IsFalse(melo.SetFlag<Messlokation>("foo"));
-            Assert.IsTrue(melo.SetFlag<Messlokation>("foo", flagValue: false));
+            Assert.IsTrue(melo.SetFlag<Messlokation>("foo", false));
             Assert.IsFalse(melo.HasFlagSet("foo"));
-            Assert.IsTrue(melo.SetFlag<Messlokation>("foo", flagValue: null));
+            Assert.IsTrue(melo.SetFlag<Messlokation>("foo", null));
             Assert.IsFalse(melo.UserProperties.TryGetValue("foo", out var _));
-            Assert.IsFalse(melo.SetFlag<Messlokation>("foo", flagValue: null));
+            Assert.IsFalse(melo.SetFlag<Messlokation>("foo", null));
             Assert.IsFalse(melo.HasFlagSet("foo"));
-            Assert.IsTrue(melo.SetFlag<Messlokation>("foo", flagValue: true));
+            Assert.IsTrue(melo.SetFlag<Messlokation>("foo", true));
 
             melo.UserProperties["foo"] = null;
             Assert.IsFalse(melo.HasFlagSet("foo"));

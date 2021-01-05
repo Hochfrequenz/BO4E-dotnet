@@ -195,7 +195,7 @@ namespace BO4E.BO
             }
             try
             {
-                return UserProperties != null && this.UserPropertyEquals(flagKey, other: (bool?)true);
+                return UserProperties != null && this.UserPropertyEquals(flagKey, (bool?)true);
             }
             catch (ArgumentNullException ane) when (ane.ParamName == "value")
             {

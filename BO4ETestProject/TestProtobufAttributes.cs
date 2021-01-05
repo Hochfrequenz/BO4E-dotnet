@@ -85,7 +85,7 @@ namespace TestBO4E
             if (isDirectBase) // because protobuf-net doesn't support multiple levels of inheritance
             {
                 var duplicateTags = fieldsWithProtoMemberAttribute
-                    .Select(f => f.GetCustomAttributes(typeof(ProtoMemberAttribute), inherit: true).First())
+                    .Select(f => f.GetCustomAttributes(typeof(ProtoMemberAttribute), true).First())
                     .Cast<ProtoMemberAttribute>()
                     .GroupBy(pma => pma.Tag)
                     .Where(g => g.Count() > 1)

@@ -51,7 +51,7 @@ namespace TestBO4E.ShowCaseTests
             // Yet it should still be possible to map the results back to my original data. So hashing seems like a good approach.
             var config = new AnonymizerConfiguration();
             config.SetOption(BO4E.meta.DataCategory.POD, AnonymizerApproach.HASH);
-            var salt = new Byte[100];
+            var salt = new byte[100];
             var rng = new RNGCryptoServiceProvider();
             rng.GetBytes(salt);
             config.HashingSalt = Convert.ToBase64String(salt); // Some random but not necessarily secret salt;

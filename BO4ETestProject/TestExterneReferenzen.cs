@@ -31,7 +31,7 @@ namespace TestBO4E
             Assert.ThrowsException<System.ArgumentNullException>(() => marktlokation.SetExterneReferenz(null), "must not add null");
 
             Assert.ThrowsException<System.InvalidOperationException>(() => marktlokation.SetExterneReferenz(new ExterneReferenz { ExRefName = "foo", ExRefWert = "nicht bar" }), "By default conflicting values are rejected");
-            marktlokation.SetExterneReferenz(new ExterneReferenz { ExRefName = "foo", ExRefWert = "nicht bar" }, overwriteExisting: true);
+            marktlokation.SetExterneReferenz(new ExterneReferenz { ExRefName = "foo", ExRefWert = "nicht bar" }, true);
             Assert.IsTrue(marktlokation.TryGetExterneReferenz("foo", out actualBar));
             Assert.AreNotEqual("bar", actualBar);
 

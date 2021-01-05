@@ -250,7 +250,7 @@ namespace TestBO4EExtensions
             }
         }
         [TestMethod]
-        public void TestMonthlySlices() => TestMonthlySlices(testFirstOnly: true, useParallelExecution: false);
+        public void TestMonthlySlices() => TestMonthlySlices(true, false);
 
 
         internal void TestMonthlySlices(bool testFirstOnly = true, bool useParallelExecution = false)
@@ -266,7 +266,7 @@ namespace TestBO4EExtensions
                         json = JsonConvert.DeserializeObject<JObject>(jsonString);
                     }
                     var em = BoMapper.MapObject<Energiemenge>(json, LenientParsing.STRICT);
-                    var result = em.GetMonthlyCompletenessReports(GERMAN_YEAR_2018, useParallelExecution: useParallelExecution);
+                    var result = em.GetMonthlyCompletenessReports(GERMAN_YEAR_2018, useParallelExecution);
                     Assert.AreEqual(12, result.Count); // don't care about values of coverage, just the start/end and count of reports generated.
                     if (testFirstOnly)
                     {
@@ -300,13 +300,13 @@ namespace TestBO4EExtensions
 
 
                 var mpLinear = MiniProfiler.StartNew("Non-Parallel");
-                em.GetMonthlyCompletenessReports(new TimeRange(new DateTime(2016, 1, 31, 23, 0, 0, DateTimeKind.Utc), new DateTime(2016, 12, 31, 23, 0, 0, DateTimeKind.Utc)), useParallelExecution: false);
+                em.GetMonthlyCompletenessReports(new TimeRange(new DateTime(2016, 1, 31, 23, 0, 0, DateTimeKind.Utc), new DateTime(2016, 12, 31, 23, 0, 0, DateTimeKind.Utc)), false);
                 mpLinear.Stop();
                 Console.Out.Write(mpLinear.RenderPlainText());
                 Assert.IsTrue(mpLinear.DurationMilliseconds < 4000, $"Linear completeness report generation was too slow. Expected less than 4 seconds but was {mpLinear.DurationMilliseconds}ms: {mpLinear.RenderPlainText()}");
 
                 var mpParallel = MiniProfiler.StartNew("Parallel");
-                em.GetMonthlyCompletenessReports(new TimeRange(new DateTime(2016, 1, 31, 23, 0, 0, DateTimeKind.Utc), new DateTime(2016, 12, 31, 23, 0, 0, DateTimeKind.Utc)), useParallelExecution: true);
+                em.GetMonthlyCompletenessReports(new TimeRange(new DateTime(2016, 1, 31, 23, 0, 0, DateTimeKind.Utc), new DateTime(2016, 12, 31, 23, 0, 0, DateTimeKind.Utc)), true);
                 mpParallel.Stop();
                 Console.Out.Write(mpParallel.RenderPlainText());
                 //Assert.IsTrue(mpParallel.DurationMilliseconds < 3000, $"Parallel completeness report generation was too slow. Expected less than 3 seconds but was {mpParallel.DurationMilliseconds}ms: {mpParallel.RenderPlainText()}");
@@ -338,13 +338,13 @@ namespace TestBO4EExtensions
             em.Energieverbrauch = listvb;
 
             var mpLinear = MiniProfiler.StartNew("Non-Parallel");
-            em.GetMonthlyCompletenessReports(new TimeRange(new DateTime(2015, 1, 1, 23, 00, 0, DateTimeKind.Utc), new DateTime(2019, 12, 31, 23, 0, 0, DateTimeKind.Utc)), useParallelExecution: false);
+            em.GetMonthlyCompletenessReports(new TimeRange(new DateTime(2015, 1, 1, 23, 00, 0, DateTimeKind.Utc), new DateTime(2019, 12, 31, 23, 0, 0, DateTimeKind.Utc)), false);
             mpLinear.Stop();
             Console.Out.Write(mpLinear.RenderPlainText());
             //Assert.IsTrue(mpLinear.DurationMilliseconds < 4000, $"Linear completeness report generation was too slow. Expected less than 4 seconds but was {mpLinear.DurationMilliseconds}ms: {mpLinear.RenderPlainText()}");
 
             var mpParallel = MiniProfiler.StartNew("Parallel");
-            em.GetDailyCompletenessReports(new TimeRange(new DateTime(2015, 1, 01, 23, 0, 0, DateTimeKind.Utc), new DateTime(2019, 12, 31, 23, 0, 0, DateTimeKind.Utc)), useParallelExecution: true);
+            em.GetDailyCompletenessReports(new TimeRange(new DateTime(2015, 1, 01, 23, 0, 0, DateTimeKind.Utc), new DateTime(2019, 12, 31, 23, 0, 0, DateTimeKind.Utc)), true);
             mpParallel.Stop();
             Console.Out.Write(mpParallel.RenderPlainText());
             //Assert.IsTrue(mpParallel.DurationMilliseconds < 3000, $"Parallel completeness report generation was too slow. Expected less than 3 seconds but was {mpParallel.DurationMilliseconds}ms: {mpParallel.RenderPlainText()}");
