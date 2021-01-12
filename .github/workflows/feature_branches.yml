@@ -1,4 +1,4 @@
-name: Nuget package push (pre-release from develop)
+name: Nuget package push from feature branch
 
 on:
   push:
@@ -23,11 +23,11 @@ jobs:
       with:
         dotnet-version: 3.1.100
     - name: Build/Check for compile errors (dotnet build)
-      run: dotnet build --configuration Release --version-suffix "${{github.ref}}${{ steps.current-time.outputs.formattedTime }}"
+      run: dotnet build --configuration Release --version-suffix "${{github.ref##*/}}${{ steps.current-time.outputs.formattedTime }}"
     - name: Run Unit Tests (dotnet test)
       run: dotnet test --configuration Release
     - name: Create Package (dotnet pack)
-      run: dotnet pack --configuration Release --version-suffix "${{github.ref}}${{ steps.current-time.outputs.formattedTime }}"
+      run: dotnet pack --configuration Release --version-suffix "${{github.ref##*/}}${{ steps.current-time.outputs.formattedTime }}"
     - name: Setup Nuget.exe
       uses: warrenbuckley/Setup-Nuget@v1
     - name: Nuget push core
