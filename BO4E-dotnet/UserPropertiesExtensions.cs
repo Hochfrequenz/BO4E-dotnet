@@ -1,6 +1,7 @@
 ﻿using BO4E.meta;
 using Newtonsoft.Json.Linq;
 using System;
+using System.Collections.Generic;
 
 namespace BO4E
 {
@@ -113,6 +114,81 @@ namespace BO4E
             return parent.TryGetUserProperty<TUserProperty, TParent>(userPropertyKey, out var value)
                 ? evaluation(value)
                 : default;
+        }
+
+        /// <summary>
+        /// set the value of flag <paramref name="flagKey"/> to <paramref name="flagValue"/>.
+        /// If there is no such flag or not user properties yet, they will be created.
+        /// </summary>
+        /// <remarks>"having a flag set" means that the Business Object has a UserProperty entry that has <paramref name="flagKey"/> as key and the value of the user property is true.</remarks>
+        /// <param name="parent">object that implements <see cref="IUserProperties"/> (so either inheriting from <see cref="BO4E.BO.BusinessObject"/> or <see cref="BO4E.COM.COM"/></param>
+        /// <param name="flagKey">key in the userproperties that should hold the value <paramref name="flagValue"/></param>
+        /// <param name="flagValue">flag value, use null to remove the flag</param>
+        /// <returns>true iff userProperties had been modified, false if not</returns>
+        public static bool SetFlag<TParent>(this TParent parent, string flagKey, bool? flagValue = true)
+            where TParent : class, IUserProperties
+        {
+            if (string.IsNullOrWhiteSpace(flagKey))
+            {
+                throw new ArgumentNullException(nameof(flagKey));
+            }
+
+            if (parent.UserProperties == null)
+            {
+                parent.UserProperties = new Dictionary<string, JToken>();
+                if (!flagValue.HasValue)
+                {
+                    return false;
+                }
+            }
+            else if (flagValue.HasValue && flagValue.Value == parent.HasFlagSet(flagKey))
+            {
+                return false;
+            }
+
+            if (!flagValue.HasValue)
+            {
+                if (!parent.UserProperties.ContainsKey(flagKey))
+                {
+                    return false;
+                }
+
+                parent.UserProperties.Remove(flagKey);
+                return true;
+            }
+
+            if (parent.TryGetUserProperty<bool?, TParent>(flagKey, out var existingValue) &&
+                existingValue == flagValue.Value)
+            {
+                return false;
+            }
+
+            parent.UserProperties[flagKey] = flagValue.Value;
+            return true;
+        }
+
+        /// <summary>
+        /// checks if the BusinessObject has a flag set.
+        /// </summary>
+        /// <param name="parent">object that implements <see cref="IUserProperties"/> (so either inheriting from <see cref="BO4E.BO.BusinessObject"/> or <see cref="BO4E.COM.COM"/></param>
+        /// <remarks>"having a flag set" means that the Business Object has a UserProperty entry that has <paramref name="flagKey"/> as key and the value of the user property is true.</remarks>
+        /// <param name="flagKey"></param>
+        /// <returns>true iff flag is set and has value true</returns>
+        public static bool HasFlagSet<TParent>(this TParent parent, string flagKey) where TParent : class, IUserProperties
+        {
+            if (string.IsNullOrWhiteSpace(flagKey))
+            {
+                throw new ArgumentNullException(nameof(flagKey));
+            }
+
+            try
+            {
+                return parent.UserProperties != null && parent.UserPropertyEquals(flagKey, (bool?) true);
+            }
+            catch (ArgumentNullException ane) when (ane.ParamName == "value")
+            {
+                return false;
+            }
         }
     }
 }

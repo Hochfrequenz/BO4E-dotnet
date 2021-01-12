@@ -180,75 +180,7 @@ namespace BO4E.BO
         /// </summary>
         public void SetExterneReferenz(ExterneReferenz extRef, bool overwriteExisting = false)
             => ExterneReferenzen = ExterneReferenzen.SetExterneReferenz(extRef, overwriteExisting);
-
-        /// <summary>
-        /// checks if the BusinessObject has a flag set.
-        /// </summary>
-        /// <remarks>"having a flag set" means that the Business Object has a UserProperty entry that has <paramref name="flagKey"/> as key and the value of the user property is true.</remarks>
-        /// <param name="flagKey"></param>
-        /// <returns>true iff flag is set and has value true</returns>
-        public bool HasFlagSet(string flagKey)
-        {
-            if (string.IsNullOrWhiteSpace(flagKey))
-            {
-                throw new ArgumentNullException(nameof(flagKey));
-            }
-            try
-            {
-                return UserProperties != null && this.UserPropertyEquals(flagKey, (bool?)true);
-            }
-            catch (ArgumentNullException ane) when (ane.ParamName == "value")
-            {
-                return false;
-            }
-        }
-
-        /// <summary>
-        /// set the value of flag <paramref name="flagKey"/> to <paramref name="flagValue"/>.
-        /// If there is no such flag or not user properties yet, they will be created.
-        /// </summary>
-        /// <remarks>"having a flag set" means that the Business Object has a UserProperty entry that has <paramref name="flagKey"/> as key and the value of the user property is true.</remarks>
-        /// <param name="flagKey">key in the userproperties that should hold the value <paramref name="flagValue"/></param>
-        /// <param name="flagValue">flag value, use null to remove the flag</param>
-        /// <returns>true iff userProperties had been modified, false if not</returns>
-        public bool SetFlag<TBusinessObject>(string flagKey, bool? flagValue = true) where TBusinessObject : BusinessObject, IUserProperties
-        {
-            if (string.IsNullOrWhiteSpace(flagKey))
-            {
-                throw new ArgumentNullException(nameof(flagKey));
-            }
-            if (UserProperties == null)
-            {
-                UserProperties = new Dictionary<string, JToken>();
-                if (!flagValue.HasValue)
-                {
-                    return false;
-                }
-            }
-            else if (flagValue.HasValue && flagValue.Value == HasFlagSet(flagKey))
-            {
-                return false;
-            }
-            if (!flagValue.HasValue)
-            {
-                if (!UserProperties.ContainsKey(flagKey))
-                {
-                    return false;
-                }
-
-                UserProperties.Remove(flagKey);
-                return true;
-            }
-
-            if (((TBusinessObject)this).TryGetUserProperty<bool?, TBusinessObject>(flagKey, out var existingValue) && existingValue == flagValue.Value)
-            {
-                return false;
-            }
-
-            UserProperties[flagKey] = flagValue.Value;
-            return true;
-        }
-
+        
         /// <summary>
         /// returns a JSON scheme for the Business Object
         /// </summary>
