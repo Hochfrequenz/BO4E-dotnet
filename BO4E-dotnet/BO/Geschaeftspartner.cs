@@ -19,6 +19,7 @@ namespace BO4E.BO
     /// Hinweis: Marktteilnehmer haben ein eigenes BO <see cref="Marktteilnehmer"/>, welches sich von diesem BO
     /// ableitet. Hier sollte daher keine Zuordnung zu Marktrollen erfolgen.
     [ProtoContract]
+    [System.ComponentModel.DataAnnotations.Schema.Table("bo4e_geschaeftspartner")]
     // [ProtoInclude(41, typeof(Marktteilnehmer))] multiple inheritance is not yet supported by protobuf-net
     public class Geschaeftspartner : BusinessObject
     {
