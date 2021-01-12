@@ -8855,7 +8855,7 @@
             If there is no such flag or not user properties yet, they will be created.
             </summary>
             <remarks>"having a flag set" means that the Business Object has a UserProperty entry that has <paramref name="flagKey"/> as key and the value of the user property is true.</remarks>
-            <param name="bocom">object that implements <see cref="T:BO4E.meta.IUserProperties"/> (so either inheriting from <see cref="T:BO4E.BO.BusinessObject"/> or <see cref="T:BO4E.COM.COM"/></param>
+            <param name="parent">object that implements <see cref="T:BO4E.meta.IUserProperties"/> (so either inheriting from <see cref="T:BO4E.BO.BusinessObject"/> or <see cref="T:BO4E.COM.COM"/></param>
             <param name="flagKey">key in the userproperties that should hold the value <paramref name="flagValue"/></param>
             <param name="flagValue">flag value, use null to remove the flag</param>
             <returns>true iff userProperties had been modified, false if not</returns>
@@ -8864,7 +8864,7 @@
             <summary>
             checks if the BusinessObject has a flag set.
             </summary>
-            <param name="bocom">object that implements <see cref="T:BO4E.meta.IUserProperties"/> (so either inheriting from <see cref="T:BO4E.BO.BusinessObject"/> or <see cref="T:BO4E.COM.COM"/></param>
+            <param name="parent">object that implements <see cref="T:BO4E.meta.IUserProperties"/> (so either inheriting from <see cref="T:BO4E.BO.BusinessObject"/> or <see cref="T:BO4E.COM.COM"/></param>
             <remarks>"having a flag set" means that the Business Object has a UserProperty entry that has <paramref name="flagKey"/> as key and the value of the user property is true.</remarks>
             <param name="flagKey"></param>
             <returns>true iff flag is set and has value true</returns>

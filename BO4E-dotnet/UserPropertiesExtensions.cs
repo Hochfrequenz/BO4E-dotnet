@@ -1,9 +1,9 @@
 ﻿using System;
+using System.Collections.Generic;
 
 using BO4E.meta;
 
 using Newtonsoft.Json.Linq;
-using System.Collections.Generic;
 
 namespace BO4E
 {
@@ -50,7 +50,7 @@ namespace BO4E
                 {
                     value = new JValue((bool)upToken).Value<TUserProperty>();
                 }
-                else if(upToken is JValue)
+                else if (upToken is JValue)
                 {
                     value = (upToken as JValue).Value<TUserProperty>();
                 }
@@ -165,7 +165,7 @@ namespace BO4E
 
             if (parent.UserProperties == null)
             {
-                parent.UserProperties = new Dictionary<string, JToken>();
+                parent.UserProperties = new Dictionary<string, object>();
                 if (!flagValue.HasValue)
                 {
                     return false;
@@ -213,7 +213,7 @@ namespace BO4E
 
             try
             {
-                return parent.UserProperties != null && parent.UserPropertyEquals(flagKey, (bool?) true);
+                return parent.UserProperties != null && parent.UserPropertyEquals(flagKey, (bool?)true);
             }
             catch (ArgumentNullException ane) when (ane.ParamName == "value")
             {
