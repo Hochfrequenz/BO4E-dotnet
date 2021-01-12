@@ -10,7 +10,7 @@ using BO4E.meta;
 using Newtonsoft.Json;
 
 using ProtoBuf;
-[module: CompatibilityLevel(CompatibilityLevel.Level300)]
+//[module: CompatibilityLevel(CompatibilityLevel.Level300)]
 namespace BO4E.BO
 {
 
