@@ -19,7 +19,7 @@ jobs:
         format: YYYYMMDDHHMMSS
     - name: Get the current branch name
       shell: bash
-      run: echo "::set-output name=branch::${GITHUB_REF#refs/heads/}"
+      run: echo "::set-output name=branch::(${GITHUB_REF#refs/heads/} | tr _ -)"
       id: myref
     - uses: actions/checkout@master
     - name: Setup .NET Core
