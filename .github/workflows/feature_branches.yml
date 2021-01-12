@@ -17,21 +17,17 @@ jobs:
       id: current-time
       with:
         format: YYYYMMDDHHMMSS
-    - name: Get the current branch name
-      shell: bash
-      run: echo "::set-output name=branch::(${GITHUB_REF#refs/heads/} | tr _ -)"
-      id: myref
     - uses: actions/checkout@master
     - name: Setup .NET Core
       uses: actions/setup-dotnet@v1
       with:
         dotnet-version: 3.1.100
     - name: Build/Check for compile errors (dotnet build)
-      run: dotnet build --configuration Release --version-suffix "${{ steps.myref.outputs.branch }}${{ steps.current-time.outputs.formattedTime }}"
+      run: dotnet build --configuration Release --version-suffix "${{github.sha}}"
     - name: Run Unit Tests (dotnet test)
       run: dotnet test --configuration Release
     - name: Create Package (dotnet pack)
-      run: dotnet pack --configuration Release --version-suffix "${{ steps.myref.outputs.branch }}${{ steps.current-time.outputs.formattedTime }}"
+      run: dotnet pack --configuration Release --version-suffix "${{github.sha}}"
     - name: Setup Nuget.exe
       uses: warrenbuckley/Setup-Nuget@v1
     - name: Nuget push core
