@@ -28,8 +28,6 @@ jobs:
       run: dotnet test --configuration Release
     - name: Create Package (dotnet pack)
       run: dotnet pack --configuration Release --version-suffix "${{github.sha}}"
-    - name: Setup Nuget.exe
-      uses: warrenbuckley/Setup-Nuget@v1
     - name: Nuget push core
       run: |
            for f in ./BO4E-dotnet/bin/Release/*.nupkg
