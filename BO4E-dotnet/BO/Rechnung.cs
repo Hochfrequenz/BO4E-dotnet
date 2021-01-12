@@ -1,4 +1,8 @@
-﻿using BO4E.COM;
+﻿using System;
+using System.Collections.Generic;
+using System.Globalization;
+
+using BO4E.COM;
 using BO4E.ENUM;
 using BO4E.meta;
 
@@ -6,10 +10,6 @@ using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 
 using ProtoBuf;
-
-using System;
-using System.Collections.Generic;
-using System.Globalization;
 
 namespace BO4E.BO
 {
@@ -57,7 +57,7 @@ namespace BO4E.BO
         /// Ausstellungsdatum der Rechnung.
         /// </summary>
         [JsonProperty(Required = Required.Always, Order = 8, PropertyName = "rechnungsdatum")]
-        [ProtoMember(8, DataFormat = DataFormat.WellKnown)]
+        [ProtoMember(8)]
         [FieldName("billDate", Language.EN)]
         public DateTimeOffset Rechnungsdatum { get; set; }
 
@@ -65,7 +65,7 @@ namespace BO4E.BO
         /// Zu diesem Datum ist die Zahlung fällig.
         /// </summary>
         [JsonProperty(Required = Required.Always, Order = 9, PropertyName = "faelligkeitsdatum")]
-        [ProtoMember(9, DataFormat = DataFormat.WellKnown)]
+        [ProtoMember(9)]
         [FieldName("dueDate", Language.EN)]
         public DateTimeOffset Faelligkeitsdatum { get; set; }
 

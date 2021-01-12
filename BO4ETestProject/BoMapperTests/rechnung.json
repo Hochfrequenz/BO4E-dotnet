@@ -1,5 +1,6 @@
 {
   "objectName": "Rechnung",
+  "lenientDateTime": true,
   "input": {
     "versionStruktur": 1,
     "boTyp": "RECHNUNG",

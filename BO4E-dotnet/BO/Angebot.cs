@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.Text.Json.Serialization;
 
 using BO4E.COM;
 using BO4E.ENUM;
@@ -9,9 +10,10 @@ using BO4E.meta;
 using Newtonsoft.Json;
 
 using ProtoBuf;
-
+[module: CompatibilityLevel(CompatibilityLevel.Level300)]
 namespace BO4E.BO
 {
+
     /// <summary>
     /// Mit diesem BO kann ein Versorgungsangebot zur Strom- oder Gasversorgung oder die Teilnahme an einer Ausschreibung übertragen werden.Es können verschiedene Varianten enthalten sein (z.B.ein- und mehrjährige Laufzeit). Innerhalb jeder Variante können Teile enthalten sein, die jeweils für eine oder mehrere Marktlokationen erstellt werden.
     /// </summary>
@@ -22,6 +24,7 @@ namespace BO4E.BO
         ///  Eindeutige Nummer des Angebotes.
         /// </summary>
         [JsonProperty(Required = Required.Always, Order = 4, PropertyName = "angebotsnummer")]
+        [JsonPropertyName("angebotsnummer")]
         [ProtoMember(4)]
         [DataCategory(DataCategory.FINANCE)]
         [BoKey]
@@ -42,7 +45,7 @@ namespace BO4E.BO
         /// 2017-12-24
         /// </example>
         [JsonProperty(Required = Required.Always, Order = 6, PropertyName = "angebotsdatum")]
-        [ProtoMember(6, DataFormat = DataFormat.WellKnown)]
+        [ProtoMember(6)]
         [DataCategory(DataCategory.FINANCE)]
         public DateTimeOffset Angebotsdatum { get; set; }
 
@@ -61,7 +64,7 @@ namespace BO4E.BO
         /// 2017-12-31 17:00:00
         /// </example>
         [JsonProperty(Required = Required.Default, Order = 8, PropertyName = "bindefrist")]
-        [ProtoMember(8, DataFormat = DataFormat.WellKnown)]
+        [ProtoMember(8)]
         [DataCategory(DataCategory.FINANCE)]
         public DateTimeOffset Bindefrist { get; set; }
 

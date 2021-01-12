@@ -1,3 +1,8 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+
 using BO4E.COM;
 using BO4E.ENUM;
 using BO4E.Extensions.COM;
@@ -10,11 +15,6 @@ using Itenso.TimePeriod;
 using Newtonsoft.Json.Linq;
 
 using StackExchange.Profiling;
-
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 using static BO4E.Extensions.COM.VerbrauchExtension;
 
@@ -661,7 +661,7 @@ namespace BO4E.Extensions.BusinessObjects.Energiemenge
         {
             using (MiniProfiler.Current.Step(nameof(IsPureWertermittlungsverfahren)))
             {
-                return em.Energieverbrauch.Select(v=>v.Wertermittlungsverfahren).Distinct().Count() <= 1;
+                return em.Energieverbrauch.Select(v => v.Wertermittlungsverfahren).Distinct().Count() <= 1;
             }
         }
 
@@ -674,7 +674,7 @@ namespace BO4E.Extensions.BusinessObjects.Energiemenge
         {
             using (MiniProfiler.Current.Step(nameof(IsPureObisKennzahl)))
             {
-                return em.Energieverbrauch.Select(v=>v.Obiskennzahl).Distinct().Count() <= 1;
+                return em.Energieverbrauch.Select(v => v.Obiskennzahl).Distinct().Count() <= 1;
             }
         }
 
@@ -689,7 +689,7 @@ namespace BO4E.Extensions.BusinessObjects.Energiemenge
             using (MiniProfiler.Current.Step(nameof(IsPureUserProperties)))
             {
                 ISet<string> upKeys = new HashSet<string>(em.Energieverbrauch.Where(v => v.UserProperties != null).SelectMany(v => v.UserProperties.Keys));
-                var values = new Dictionary<string, JToken>();
+                var values = new Dictionary<string, object>();
                 // ToDo: make it nice.
                 foreach (var v in em.Energieverbrauch.Where(v => v.UserProperties != null))
                 {
@@ -699,7 +699,9 @@ namespace BO4E.Extensions.BusinessObjects.Energiemenge
                         {
                             if (values.TryGetValue(key, out var onlyValue))
                             {
-                                if (!rawValue.Equals(onlyValue))
+                                if (rawValue == null && onlyValue != null)
+                                    return false;
+                                if (rawValue!=null && !rawValue.Equals(onlyValue))
                                 {
                                     return false;
                                 }
@@ -724,8 +726,8 @@ namespace BO4E.Extensions.BusinessObjects.Energiemenge
         {
             using (MiniProfiler.Current.Step(nameof(IsPureMengeneinheit)))
             {
-                
-                if (em.Energieverbrauch.Select(v=>v.Einheit).Distinct().Count() <= 1)
+
+                if (em.Energieverbrauch.Select(v => v.Einheit).Distinct().Count() <= 1)
                 {
                     return true;
                 }
@@ -829,7 +831,7 @@ namespace BO4E.Extensions.BusinessObjects.Energiemenge
                     }
                     if (em.UserProperties == null)
                     {
-                        em.UserProperties = new Dictionary<string, JToken>();
+                        em.UserProperties = new Dictionary<string, object>();
                     }
                     em.UserProperties[SAP_SANITIZED_USERPROPERTY_KEY] = true;
                 }
@@ -851,7 +853,17 @@ namespace BO4E.Extensions.BusinessObjects.Energiemenge
             }
             else
             {
-                sanitized = sapSanitizedToken.Value<bool>();
+                if (sapSanitizedToken is string)
+                {
+                    sanitized = Newtonsoft.Json.JsonConvert.DeserializeObject<JToken>(sapSanitizedToken as string).Value<bool>();
+                }
+                else if (sapSanitizedToken is bool)
+                    return (bool)sapSanitizedToken;
+                else
+                {
+                    sanitized = ((System.Text.Json.JsonElement)sapSanitizedToken).GetBoolean();
+                }
+
             }
             return sanitized;
         }

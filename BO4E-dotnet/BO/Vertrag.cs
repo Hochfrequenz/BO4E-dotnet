@@ -1,19 +1,21 @@
-﻿using BO4E.COM;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Runtime.Serialization;
+using System.Text.Json;
+
+using BO4E.COM;
 using BO4E.ENUM;
 using BO4E.meta;
 using BO4E.meta.LenientConverters;
 
 using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
 
 using ProtoBuf;
 
-using System;
-using System.Collections.Generic;
-using System.Runtime.Serialization;
-
 namespace BO4E.BO
 {
+
     /// <summary>
     /// Modell für die Abbildung von Vertragsbeziehungen. Das Objekt dient dazu, alle Arten von Verträgen, die in der Energiewirtschaft Verwendung finden, abzubilden.
     /// https://www.bo4e.de/dokumentation/geschaeftsobjekte/bo-vertrag
@@ -21,6 +23,15 @@ namespace BO4E.BO
     [ProtoContract]
     public class Vertrag : BusinessObject
     {
+        /// <summary>
+        /// static serializer options for Vertragsconverter
+        /// </summary>
+        public static JsonSerializerOptions VertragsSerializerOptions;
+        static Vertrag()
+        {
+            VertragsSerializerOptions = LenientParsing.MOST_LENIENT.GetJsonSerializerOptions();
+            VertragsSerializerOptions.Converters.Remove(VertragsSerializerOptions.Converters.Where(s => s.GetType() == typeof(VertragsConverter)).First());
+        }
         /// <summary>
         /// Eine im Verwendungskontext eindeutige Nummer für den Vertrag
         /// </summary>
@@ -61,7 +72,7 @@ namespace BO4E.BO
         /// Gibt an, wann der Vertrag beginnt.
         /// </summary>
         [JsonProperty(Required = Required.Always, Order = 9, PropertyName = "vertragsbeginn")]
-        [ProtoMember(9, DataFormat = DataFormat.WellKnown)]
+        [ProtoMember(9)]
         [JsonConverter(typeof(LenientDateTimeConverter))]
         public DateTimeOffset Vertragsbeginn { get; set; }
 
@@ -69,7 +80,7 @@ namespace BO4E.BO
         /// Gibt an, wann der Vertrag (voraussichtlich) endet oder beendet wurde.
         /// </summary>
         [JsonProperty(Required = Required.Always, Order = 10, PropertyName = "vertragsende")]
-        [ProtoMember(10, DataFormat = DataFormat.WellKnown)]
+        [ProtoMember(10)]
         [JsonConverter(typeof(LenientDateTimeConverter))]
         public DateTimeOffset Vertragsende { get; set; }
 
@@ -148,10 +159,54 @@ namespace BO4E.BO
                     {
                         Vertragsteilbeginn = Vertragsbeginn,
                         Vertragsteilende = Vertragsende,
-                        Lokation = UserProperties["lokationsId"].Value<string>()
+                        Lokation = (UserProperties["lokationsId"] as string)
                     }
                 };
             }
+        }
+
+    }
+    /// <summary>
+    /// 
+    /// </summary>
+    public class VertragsConverter : System.Text.Json.Serialization.JsonConverter<Vertrag>
+    {
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="reader"></param>
+        /// <param name="typeToConvert"></param>
+        /// <param name="options"></param>
+        /// <returns></returns>
+        public override Vertrag Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+        {
+
+            Vertrag v = System.Text.Json.JsonSerializer.Deserialize<Vertrag>(ref reader, Vertrag.VertragsSerializerOptions);
+            if ((v.Vertragsteile == null || v.Vertragsteile.Count == 0) && v.UserProperties != null && v.UserProperties.ContainsKey("lokationsId"))
+            {
+                v.Vertragsteile = new List<Vertragsteil>
+                {
+                    new Vertragsteil
+                    {
+                        Vertragsteilbeginn = v.Vertragsbeginn,
+                        Vertragsteilende = v.Vertragsende,
+                        Lokation = ((JsonElement)v.UserProperties["lokationsId"]).GetString()
+                    }
+                };
+            }
+            return v;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="writer"></param>
+        /// <param name="value"></param>
+        /// <param name="options"></param>
+        public override void Write(Utf8JsonWriter writer, Vertrag value, JsonSerializerOptions options)
+        {
+            System.Text.Json.JsonSerializer.Serialize(writer, value);
+
         }
     }
 }

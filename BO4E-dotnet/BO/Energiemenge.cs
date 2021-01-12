@@ -1,18 +1,19 @@
-using BO4E.COM;
-using BO4E.ENUM;
-using BO4E.meta;
-
-using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
-
-using ProtoBuf;
-
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Runtime.Serialization;
+using System.Text.Json;
+
+using BO4E.COM;
+using BO4E.ENUM;
+using BO4E.meta;
+using BO4E.meta.LenientConverters;
+
+using Newtonsoft.Json;
+
+using ProtoBuf;
 
 namespace BO4E.BO
 {
@@ -22,6 +23,15 @@ namespace BO4E.BO
     [ProtoContract]
     public class Energiemenge : BusinessObject
     {
+        /// <summary>
+        /// static serializer options for Energiemengenconverter
+        /// </summary>
+        public static System.Text.Json.JsonSerializerOptions EnergiemengeSerializerOptions;
+        static Energiemenge()
+        {
+            EnergiemengeSerializerOptions = LenientParsing.MOST_LENIENT.GetJsonSerializerOptions();
+            EnergiemengeSerializerOptions.Converters.Remove(EnergiemengeSerializerOptions.Converters.Where(s => s.GetType() == typeof(EnergiemengeConverter)).First());
+        }
         /// <summary>
         /// Eindeutige Nummer der Marktlokation bzw. der Messlokation, zu der die Energiemenge gehört
         /// </summary>
@@ -70,7 +80,11 @@ namespace BO4E.BO
                     .ToList();
                 if (UserProperties != null && UserProperties.TryGetValue(Verbrauch.SapProfdecimalsKey, out var profDecimalsRaw))
                 {
-                    var profDecimals = profDecimalsRaw.Value<int>();
+                    int profDecimals = 0;
+                    if (profDecimalsRaw is string)
+                        profDecimals = Int32.Parse(profDecimalsRaw as string);
+                    else
+                        profDecimals = ((System.Text.Json.JsonElement)(profDecimalsRaw)).GetInt32();
                     if (profDecimals > 0)
                     {
                         for (var i = 0; i < profDecimals; i++)
@@ -118,7 +132,7 @@ namespace BO4E.BO
             else
             {
                 // there's no consistency check on user properties!
-                result.UserProperties = new Dictionary<string, JToken>();
+                result.UserProperties = new Dictionary<string, object>();
                 foreach (var kvp1 in em1.UserProperties)
                 {
                     result.UserProperties.Add(kvp1);
@@ -146,6 +160,70 @@ namespace BO4E.BO
                 result.Energieverbrauch.AddRange(em2.Energieverbrauch);
             }
             return result;
+        }
+    }
+    /// <summary>
+    /// 
+    /// </summary>
+    public class EnergiemengeConverter : System.Text.Json.Serialization.JsonConverter<Energiemenge>
+    {
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="reader"></param>
+        /// <param name="typeToConvert"></param>
+        /// <param name="options"></param>
+        /// <returns></returns>
+        public override Energiemenge Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+        {
+
+            Energiemenge e = System.Text.Json.JsonSerializer.Deserialize<Energiemenge>(ref reader, Energiemenge.EnergiemengeSerializerOptions);
+            if (e.Energieverbrauch == null)
+            {
+                e.Energieverbrauch = new List<Verbrauch>();
+            }
+            else if (e.Energieverbrauch.Count > 0)
+            {
+                e.Energieverbrauch = e.Energieverbrauch
+                    .Select(Verbrauch.FixSapCdsBugSystemTextJson)
+                    .Where(v => !(v.Startdatum == DateTimeOffset.MinValue || v.Enddatum == DateTimeOffset.MinValue))
+                    .Where(v => !v.UserPropertyEquals("invalid", true))
+                    .ToList();
+                if (e.UserProperties != null && e.UserProperties.TryGetValue(Verbrauch.SapProfdecimalsKey, out var profDecimalsRaw))
+                {
+                    int profDecimals = 0;
+                    if (profDecimalsRaw is string)
+                        profDecimals = Int32.Parse(profDecimalsRaw as string);
+                    else
+                        profDecimals = System.Text.Json.JsonSerializer.Deserialize<int>(((System.Text.Json.JsonElement)(profDecimalsRaw)).GetRawText(), Energiemenge.EnergiemengeSerializerOptions);
+                    if (profDecimals > 0)
+                    {
+                        for (var i = 0; i < profDecimals; i++)
+                        {
+                            // or should I import math.pow() for this purpose?
+                            foreach (var v in e.Energieverbrauch.Where(v => v.UserProperties == null || !v.UserProperties.ContainsKey(Verbrauch.SapProfdecimalsKey)))
+                            {
+                                v.Wert /= 10.0M;
+                            }
+                        }
+                    }
+                    e.UserProperties.Remove(Verbrauch.SapProfdecimalsKey);
+                }
+
+            }
+            return e;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="writer"></param>
+        /// <param name="value"></param>
+        /// <param name="options"></param>
+        public override void Write(Utf8JsonWriter writer, Energiemenge value, JsonSerializerOptions options)
+        {
+            System.Text.Json.JsonSerializer.Serialize(writer, value);
+
         }
     }
 }

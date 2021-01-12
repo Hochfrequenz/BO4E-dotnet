@@ -26,7 +26,7 @@ namespace BO4E.BO
         /// date time at which the log event has been raised
         /// </summary>
         [JsonProperty(Required = Required.Always, Order = 5, PropertyName = "DateTime")]
-        [ProtoMember(5, DataFormat = DataFormat.WellKnown)]
+        [ProtoMember(5)]
         public DateTimeOffset DateTime { get; set; }
 
         /// <summary>

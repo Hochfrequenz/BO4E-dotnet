@@ -1,10 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+
 using BO4E.COM;
 using BO4E.ENUM;
 using BO4E.meta;
 using BO4E.meta.LenientConverters;
+
 using Newtonsoft.Json;
 
 using ProtoBuf;
@@ -58,7 +60,7 @@ namespace BO4E.BO
         /// </summary>
         // [DefaultValue(DateTimeOffset.UtcNow)] <-- doesn't work.
         [JsonProperty(Required = Required.Always, Order = 8, PropertyName = "erstellungsZeitpunkt")]
-        [ProtoMember(8, DataFormat = DataFormat.WellKnown)]
+        [ProtoMember(8)]
         [JsonConverter(typeof(LenientDateTimeConverter))]
         public DateTimeOffset ErstellungsZeitpunkt { get; set; }
         /*{
@@ -114,7 +116,7 @@ namespace BO4E.BO
         /// Zeitpunkt bis zu dem die Benachrichtigung bearbeitet worden sein muss.
         /// </summary>
         [JsonProperty(Required = Required.Default, Order = 12, PropertyName = "deadline")]
-        [ProtoMember(12, DataFormat = DataFormat.WellKnown)]
+        [ProtoMember(12)]
         [JsonConverter(typeof(LenientDateTimeConverter))]
         public DateTimeOffset? Deadline { get; set; }
 
@@ -131,5 +133,13 @@ namespace BO4E.BO
         [JsonProperty(Required = Required.Default, Order = 14, PropertyName = "infos")]
         [ProtoMember(14)]
         public List<GenericStringStringInfo> Infos { get; set; }
+
+        /// <summary>
+        /// Default constructor for json deserialization
+        /// </summary>
+        public Benachrichtigung()
+        {
+
+        }
     }
 }

@@ -50,6 +50,7 @@ namespace BO4E.COM
         /// Zeitpunkt zu dem die Aufgabe ausgeführt wurde. (Nur sinnvoll, wenn <c>ausgefuehrt==true</c>)
         /// </summary>
         [JsonConverter(typeof(LenientDateTimeConverter))]
+        [System.Text.Json.Serialization.JsonConverter(typeof(LenientSystemTextJsonNullableDateTimeOffsetConverter))]
         [JsonProperty(PropertyName = "ausfuehrungszeitpunkt", Required = Required.Default)]
         [ProtoMember(7)]
         public DateTimeOffset? Ausfuehrungszeitpunkt { get; set; }

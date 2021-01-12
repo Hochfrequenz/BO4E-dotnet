@@ -1,3 +1,10 @@
+using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.Linq;
+using System.Reflection;
+
 using BO4E.COM;
 using BO4E.meta;
 
@@ -9,12 +16,6 @@ using Newtonsoft.Json.Serialization;
 
 using ProtoBuf;
 
-using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Reflection;
 
 namespace BO4E.BO
 {
@@ -25,6 +26,7 @@ namespace BO4E.BO
     /// attribute which are obligatory for all BO4E business objects.
     /// <author>Hochfrequenz Unternehmensberatung GmbH</author>
     [JsonConverter(typeof(BusinessObjectBaseConverter))]
+    [System.Text.Json.Serialization.JsonConverter(typeof(BusinessObjectSystemTextJsonBaseConverter))]
     //[ProtoContract] // If I add this I get an error message: "System.InvalidOperationException: Duplicate field-number detected; 1 on: BO4E.BO.BusinessObject"
     [ProtoInclude(1, typeof(Angebot))]
     [ProtoInclude(2, typeof(Ansprechpartner))]
@@ -99,12 +101,15 @@ namespace BO4E.BO
         [JsonExtensionData]
         [ProtoMember(200)]
         [DataCategory(DataCategory.USER_PROPERTIES)]
-        public IDictionary<string, JToken> UserProperties { get; set; }
+        [System.Text.Json.Serialization.JsonExtensionData]
+        public IDictionary<string, object> UserProperties { get; set; }
+
 
         /// <summary>
         /// generates the BO4E boTyp attribute value (class name as upper case)
         /// </summary>
-        protected BusinessObject()
+        [System.Text.Json.Serialization.JsonConstructor]
+        public BusinessObject()
         {
             //BoTyp = this.GetType().Name.ToUpper();
             VersionStruktur = 1;
@@ -219,7 +224,7 @@ namespace BO4E.BO
             }
             if (UserProperties == null)
             {
-                UserProperties = new Dictionary<string, JToken>();
+                UserProperties = new Dictionary<string, object>();
                 if (!flagValue.HasValue)
                 {
                     return false;
@@ -657,6 +662,63 @@ namespace BO4E.BO
             public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
             {
                 throw new NotImplementedException("Serializing an abstract BusinessObject is not supported."); // won't be called because CanWrite returns false
+            }
+        }
+        internal class BusinessObjectSystemTextJsonBaseConverter : System.Text.Json.Serialization.JsonConverter<BusinessObject>
+        {
+            //private static readonly JsonSerializerSettings SpecifiedSubclassConversion = new JsonSerializerSettings() { ContractResolver = new BaseSpecifiedConcreteClassConverter() };
+
+            public override bool CanConvert(Type objectType)
+            {
+                return objectType == typeof(BusinessObject);
+            }
+
+            public override BusinessObject Read(ref System.Text.Json.Utf8JsonReader reader, Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+            {
+                if (reader.TokenType == System.Text.Json.JsonTokenType.Null)
+                {
+                    return null;
+                }
+                if (typeToConvert.IsAbstract)
+                {
+                    var jdoc = System.Text.Json.JsonDocument.ParseValue(ref reader);
+                    var boTypeString = jdoc.RootElement.GetProperty("boTyp").GetString();
+                    Type boType;
+#pragma warning disable CS0618 // Type or member is obsolete
+                    boType = BoMapper.GetTypeForBoName(boTypeString); // ToDo: catch exception if boTyp is not set and throw exception with descriptive error message
+#pragma warning restore CS0618 // Type or member is obsolete
+                    if (boType == null)
+                    {
+                        foreach (var assembley in AppDomain.CurrentDomain.GetAssemblies())
+                        {
+                            try
+                            {
+                                boType = assembley.GetTypes().FirstOrDefault(x => x.Name.ToUpper() == boTypeString.ToUpper());
+                            }
+                            catch (ReflectionTypeLoadException)
+                            {
+                                continue;
+                            }
+                            if (boType != null)
+                            {
+                                break;
+                            }
+                        }
+                        if (boType == null)
+                        {
+                            throw new NotImplementedException($"The type '{boTypeString}' does not exist in the BO4E standard.");
+                        }
+                    }
+                    return System.Text.Json.JsonSerializer.Deserialize(jdoc.RootElement.GetRawText(), boType, options) as BusinessObject;
+
+                }
+                return null;
+            }
+
+
+            public override void Write(System.Text.Json.Utf8JsonWriter writer, BusinessObject value, System.Text.Json.JsonSerializerOptions options)
+            {
+                throw new NotImplementedException();
             }
         }
     }

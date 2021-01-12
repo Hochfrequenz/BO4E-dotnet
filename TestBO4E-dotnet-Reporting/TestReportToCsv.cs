@@ -1,13 +1,13 @@
-﻿using BO4E.Reporting;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading;
+
+using BO4E.Reporting;
 
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 using Newtonsoft.Json;
-
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading;
 
 namespace TestBO4E.Reporting
 {
@@ -51,7 +51,7 @@ namespace TestBO4E.Reporting
             var decimalSeparator = Thread.CurrentThread.CurrentCulture.NumberFormat.NumberDecimalSeparator;
             Assert.AreEqual("DE12345;0" + decimalSeparator + "87;2019-01-01T00:00:00Z;2019-03-01T00:00:00Z;", lines[1]);
             var commaResult = cr.ToCsv(',', lineTerminator: Environment.NewLine, reihenfolge: reihenfolge);
-            Assert.AreEqual("DE12345,0" + decimalSeparator + "87,2019-01-01T00:00:00Z,2019-03-01T00:00:00Z,", commaResult.Split(Environment.NewLine)[1]);
+            Assert.AreEqual("DE12345,\"0" + decimalSeparator + "87\",2019-01-01T00:00:00Z,2019-03-01T00:00:00Z,", commaResult.Split(Environment.NewLine)[1]);
             var dpunktResult = cr.ToCsv(':', lineTerminator: Environment.NewLine, reihenfolge: reihenfolge);
             Assert.AreEqual("DE12345:0" + decimalSeparator + "87:\"2019-01-01T00:00:00Z\":\"2019-03-01T00:00:00Z\":", dpunktResult.Split(Environment.NewLine)[1]);
 

@@ -70,56 +70,18 @@
     <EmbeddedResource Include="meta\CentralEuropeStandardTime.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </EmbeddedResource>
-    <Content Include="protobuf-files\BO4E.BO.Angebot.proto">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="protobuf-files\BO4E.BO.Ansprechpartner.proto">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="protobuf-files\BO4E.BO.Benachrichtigung.proto">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="protobuf-files\BO4E.BO.Energiemenge.proto">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="protobuf-files\BO4E.BO.Geschaeftspartner.proto">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="protobuf-files\BO4E.BO.Kosten.proto">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="protobuf-files\BO4E.BO.Marktlokation.proto">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="protobuf-files\BO4E.BO.Messlokation.proto">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="protobuf-files\BO4E.BO.Preisblatt.proto">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="protobuf-files\BO4E.BO.Rechnung.proto">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="protobuf-files\BO4E.BO.Region.proto">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="protobuf-files\BO4E.BO.Vertrag.proto">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="protobuf-files\BO4E.BO.Zaehler.proto">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.Extensions.Logging" Version="3.1.3" />
-    <PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="3.1.3" />
-    <PackageReference Include="MiniProfiler.Shared" Version="4.1.0" />
+    <PackageReference Include="Microsoft.Extensions.Logging" Version="5.0.0" />
+    <PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="5.0.0" />
+    <PackageReference Include="MiniProfiler.Shared" Version="4.2.22" />
     <PackageReference Include="Newtonsoft.Json" Version="11.0.2" />
     <PackageReference Include="Newtonsoft.Json.Schema" Version="3.0.10" />
-    <PackageReference Include="protobuf-net" Version="2.4.6" />
+    <PackageReference Include="protobuf-net" Version="3.0.73" />
     <PackageReference Include="SourceLink.Copy.PdbFiles" Version="2.8.3" PrivateAssets="All" />
-    <PackageReference Include="System.ComponentModel.Annotations" Version="4.7.0" />
+    <PackageReference Include="System.ComponentModel.Annotations" Version="5.0.0" />
+    <PackageReference Include="System.Text.Json" Version="5.0.0" />
   </ItemGroup>
 
 </Project>

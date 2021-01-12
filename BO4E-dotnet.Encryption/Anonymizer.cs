@@ -1,3 +1,14 @@
+using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Diagnostics;
+using System.Linq;
+using System.Reflection;
+using System.Security.Cryptography;
+using System.Security.Cryptography.X509Certificates;
+using System.Text;
+
 using BO4E.BO;
 using BO4E.Extensions.BusinessObjects;
 using BO4E.meta;
@@ -11,17 +22,6 @@ using Newtonsoft.Json.Linq;
 
 using Org.BouncyCastle.Crypto;
 using Org.BouncyCastle.Security;
-
-using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Diagnostics;
-using System.Linq;
-using System.Reflection;
-using System.Security.Cryptography;
-using System.Security.Cryptography.X509Certificates;
-using System.Text;
 
 namespace BO4E.Extensions.Encryption
 {
@@ -324,14 +324,14 @@ namespace BO4E.Extensions.Encryption
                     inputList[i] = listItem;
                 }
             }
-            else if (typeof(IDictionary<string, JToken>).IsAssignableFrom(inputType)) // typeof BusinessObject.userProperties
+            else if (typeof(IDictionary<string, object>).IsAssignableFrom(inputType)) // typeof BusinessObject.userProperties
             {
-                dynamic dict = input as IDictionary<string, JToken>;
+                dynamic dict = input as IDictionary<string, object>;
                 foreach (var dictKey in ((ICollection<string>)dict.Keys).ToList().Where(key => !_configuration.UnaffectedUserProperties.Contains(key)))
                 {
                     if (dict[dictKey] != null)
                     {
-                        var inputString = ((JValue)dict[dictKey]).Value<string>();
+                        var inputString = ((string)dict[dictKey]);
                         HashString(ref inputString, dataCategory);
                         dict[dictKey] = JToken.FromObject(inputString);
                         /*//dict[dictKey].Set(dict[dictKey].ToString());

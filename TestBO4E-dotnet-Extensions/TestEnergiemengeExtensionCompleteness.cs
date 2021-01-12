@@ -1,9 +1,15 @@
+using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Linq;
+
 using BO4E;
 using BO4E.BO;
 using BO4E.COM;
 using BO4E.ENUM;
 using BO4E.Extensions.BusinessObjects.Energiemenge;
 using BO4E.meta;
+using BO4E.meta.LenientConverters;
 using BO4E.Reporting;
 
 using Itenso.TimePeriod;
@@ -15,11 +21,6 @@ using Newtonsoft.Json.Converters;
 using Newtonsoft.Json.Linq;
 
 using StackExchange.Profiling;
-
-using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
 
 namespace TestBO4EExtensions
 {
@@ -111,8 +112,8 @@ namespace TestBO4EExtensions
                     if (boFile.Contains("onshore.json"))
                     {
                         Assert.IsNotNull(cr.UserProperties);
-                        Assert.AreEqual("yippi yippi yeah", cr.UserProperties["meineUp0"].Value<string>());
-                        Assert.AreEqual("krawall und remmidemmi", cr.UserProperties["meineUp1"].Value<string>());
+                        Assert.AreEqual("yippi yippi yeah", (cr.UserProperties["meineUp0"] as string));
+                        Assert.AreEqual("krawall und remmidemmi", (cr.UserProperties["meineUp1"] as string));
                     }
                 }
             }
@@ -316,6 +317,45 @@ namespace TestBO4EExtensions
             }
             //int a = 0;
         }
+        [DoNotParallelize]
+        [TestMethod]
+        public async System.Threading.Tasks.Task TestParallizationSystemTextJson()
+        {
+            for (var i = 0; i < 10; i++)
+            {
+                Energiemenge em;
+                var r = Directory.GetFiles("Energiemenge/completeness", "threeyears.json").First();
+                using FileStream openStream = File.OpenRead(r);
+                em = await System.Text.Json.JsonSerializer.DeserializeAsync<Energiemenge>(openStream, LenientParsing.MOST_LENIENT.GetJsonSerializerOptions());
+
+                var mpFixSapCds = MiniProfiler.StartNew("Fix SAP CDS");
+                em.FixSapCDSBug();
+                mpFixSapCds.Stop();
+                Assert.IsTrue(mpFixSapCds.DurationMilliseconds < 500, mpFixSapCds.RenderPlainText());
+                Console.Out.WriteLine(mpFixSapCds.RenderPlainText());
+
+                var mpFixSapCds2 = MiniProfiler.StartNew("Fix SAP CDS");
+                em.FixSapCDSBug();
+                mpFixSapCds2.Stop();
+                Assert.IsTrue(mpFixSapCds2.DurationMilliseconds * 10 < mpFixSapCds.DurationMilliseconds);
+
+
+                var mpLinear = MiniProfiler.StartNew("Non-Parallel");
+                em.GetMonthlyCompletenessReports(new TimeRange(new DateTime(2016, 1, 31, 23, 0, 0, DateTimeKind.Utc), new DateTime(2016, 12, 31, 23, 0, 0, DateTimeKind.Utc)));
+                mpLinear.Stop();
+                Console.Out.Write(mpLinear.RenderPlainText());
+                Assert.IsTrue(mpLinear.DurationMilliseconds < 4000, $"Linear completeness report generation was too slow. Expected less than 4 seconds but was {mpLinear.DurationMilliseconds}ms: {mpLinear.RenderPlainText()}");
+
+                var mpParallel = MiniProfiler.StartNew("Parallel");
+                em.GetMonthlyCompletenessReports(new TimeRange(new DateTime(2016, 1, 31, 23, 0, 0, DateTimeKind.Utc), new DateTime(2016, 12, 31, 23, 0, 0, DateTimeKind.Utc)), true);
+                mpParallel.Stop();
+                Console.Out.Write(mpParallel.RenderPlainText());
+                //Assert.IsTrue(mpParallel.DurationMilliseconds < 3000, $"Parallel completeness report generation was too slow. Expected less than 3 seconds but was {mpParallel.DurationMilliseconds}ms: {mpParallel.RenderPlainText()}");
+                //Assert.IsTrue(mpParallel.DurationMilliseconds < (int)mpLinear.DurationMilliseconds * 1.25M, $"Parallel: {mpParallel.DurationMilliseconds}, Non-Parallel: {mpLinear.DurationMilliseconds}");
+            }
+        }
+        //int a = 0;
+
 
         [TestMethod]
         public void TestDailyParallization()
@@ -399,7 +439,7 @@ namespace TestBO4EExtensions
                 LokationsId = "MeinUnitTest123",
                 LokationsTyp = Lokationstyp.MeLo,
                 Energieverbrauch = verbrauchSlices.Select(vs => new Verbrauch
-                    {
+                {
                     Startdatum = vs.Start,
                     Enddatum = vs.End,
                     Einheit = Mengeneinheit.KWH,

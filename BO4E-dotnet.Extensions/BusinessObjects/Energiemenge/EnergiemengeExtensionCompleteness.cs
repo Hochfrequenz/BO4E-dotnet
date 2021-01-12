@@ -155,7 +155,7 @@ namespace BO4E.Extensions.BusinessObjects.Energiemenge
                         {
                             if (result.UserProperties == null)
                             {
-                                result.UserProperties = new Dictionary<string, JToken>();
+                                result.UserProperties = new Dictionary<string, object>();
                             }
                             if (!result.UserProperties.ContainsKey(kvp.Key))
                             {

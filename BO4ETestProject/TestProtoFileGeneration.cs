@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Text;
 
 using BO4E.BO;
@@ -34,23 +35,30 @@ namespace TestBO4E
         };
 
         [TestMethod]
-        public void TestProtoGenerationBo() 
+        public void TestProtoGenerationBo()
         {
-            foreach (var type in PROTO_SERIALIZABLE_TYPES)
+            //foreach (var type in PROTO_SERIALIZABLE_TYPES)
             {
-                var method = typeof(Serializer).GetMethod(nameof(Serializer.GetProto), new[] { typeof(ProtoBuf.Meta.ProtoSyntax)});
-                method = method.MakeGenericMethod(type);
+                var method = typeof(Serializer).GetMethod(nameof(Serializer.GetProto), new Type[] { typeof(ProtoBuf.Meta.SchemaGenerationOptions) });
+
                 Assert.IsNotNull(method);
-                var protoString = (string)method.Invoke(null, new object[] { ProtoBuf.Meta.ProtoSyntax.Proto3 });
+                var options = new ProtoBuf.Meta.SchemaGenerationOptions()
+                {
+                    Syntax = ProtoBuf.Meta.ProtoSyntax.Proto3,
+                    Flags = ProtoBuf.Meta.SchemaGenerationFlags.MultipleNamespaceSupport,
+                    Package = "bo4e",
+                };
+                options.Types.AddRange(PROTO_SERIALIZABLE_TYPES.ToList());
+                string protoString = (string)method.Invoke(null, new object[] { options });
                 Assert.IsFalse(string.IsNullOrWhiteSpace(protoString));
-                var path = $"../../../../BO4E-dotnet/protobuf-files/{type}.proto"; // not elegant but ok ;)
+                string path = $"../../../../BO4E-dotnet/protobuf-files/bo4e.proto";
                 if (!File.Exists(path))
                 {
                     var stream = File.Create(path);
                     stream.Close();
                 }
                 File.WriteAllText(path, protoString, Encoding.UTF8);
-                
+
             }
         }
     }

@@ -1,6 +1,8 @@
-﻿using BO4E.meta;
+﻿using System;
+
+using BO4E.meta;
+
 using Newtonsoft.Json.Linq;
-using System;
 
 namespace BO4E
 {
@@ -26,7 +28,35 @@ namespace BO4E
             if (string.IsNullOrWhiteSpace(userPropertyKey)) throw new ArgumentNullException(nameof(userPropertyKey));
             if (up != null && up.TryGetValue(userPropertyKey, out var upToken))
             {
-                value = upToken.Value<TUserProperty>();
+                if (upToken is null)
+                {
+                    value = default;
+                    return false;
+                }
+                if (upToken is string)
+                {
+                    value = new JValue(upToken as string).Value<TUserProperty>();
+                }
+                else if (upToken is double)
+                {
+                    value = new JValue((double)upToken).Value<TUserProperty>();
+                }
+                else if (upToken is long)
+                {
+                    value = new JValue((long)upToken).Value<TUserProperty>();
+                }
+                else if (upToken is bool)
+                {
+                    value = new JValue((bool)upToken).Value<TUserProperty>();
+                }
+                else if(upToken is JValue)
+                {
+                    value = (upToken as JValue).Value<TUserProperty>();
+                }
+                else
+                {
+                    value = System.Text.Json.JsonSerializer.Deserialize<TUserProperty>(((System.Text.Json.JsonElement)upToken).GetRawText());
+                }
                 return true;
             }
 
