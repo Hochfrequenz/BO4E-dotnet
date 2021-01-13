@@ -49,11 +49,7 @@ namespace BO4E.meta.LenientConverters
         public override DateTime Read(ref System.Text.Json.Utf8JsonReader reader, Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
         {
             string rawDate;
-            if (reader.TryGetDateTimeOffset(out var dto))
-            {
-                return DateTime.SpecifyKind(dto.DateTime, DateTimeKind.Utc);
 
-            }
             if (reader.TryGetDateTime(out var dt))
             {
                 return DateTime.SpecifyKind(dt, DateTimeKind.Utc);
@@ -299,6 +295,8 @@ namespace BO4E.meta.LenientConverters
             string rawDate;
             if (reader.TryGetDateTimeOffset(out var dto))
             {
+
+
                 return dto;
             }
 

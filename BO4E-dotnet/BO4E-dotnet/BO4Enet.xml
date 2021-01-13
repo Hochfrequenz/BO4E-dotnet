@@ -8510,6 +8510,40 @@
             <param name="value"></param>
             <param name="options"></param>
         </member>
+        <member name="T:BO4E.meta.LenientConverters.LenientSystemTextJsonNullableDateTimeConverter">
+            <summary>
+            The lenient DateTimeConverter allows for transforming strings into (nullable) DateTimeOffset(?) objects,
+            even if their formatting is somehow weird.
+            </summary>
+        </member>
+        <member name="M:BO4E.meta.LenientConverters.LenientSystemTextJsonNullableDateTimeConverter.#ctor(System.Nullable{System.DateTimeOffset})">
+            <summary>
+            initialize using a default date time
+            </summary>
+            <param name="defaultDateTime"></param>
+        </member>
+        <member name="M:BO4E.meta.LenientConverters.LenientSystemTextJsonNullableDateTimeConverter.#ctor">
+            <summary>
+            initialize using no default datetime
+            </summary>
+        </member>
+        <member name="M:BO4E.meta.LenientConverters.LenientSystemTextJsonNullableDateTimeConverter.Read(System.Text.Json.Utf8JsonReader@,System.Type,System.Text.Json.JsonSerializerOptions)">
+            <summary>
+            
+            </summary>
+            <param name="reader"></param>
+            <param name="typeToConvert"></param>
+            <param name="options"></param>
+            <returns></returns>
+        </member>
+        <member name="M:BO4E.meta.LenientConverters.LenientSystemTextJsonNullableDateTimeConverter.Write(System.Text.Json.Utf8JsonWriter,System.Nullable{System.DateTime},System.Text.Json.JsonSerializerOptions)">
+            <summary>
+            
+            </summary>
+            <param name="writer"></param>
+            <param name="value"></param>
+            <param name="options"></param>
+        </member>
         <member name="T:BO4E.meta.LenientConverters.LenientSystemTextJsonDateTimeOffsetConverter">
             <summary>
             The lenient DateTimeConverter allows for transforming strings into (nullable) DateTimeOffset(?) objects,

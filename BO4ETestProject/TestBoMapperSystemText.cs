@@ -139,6 +139,50 @@ namespace TestBO4E
             Assert.IsNotNull(v.Vertragsteile);
             Assert.AreEqual("DE54321", v.Vertragsteile.First().Lokation);
         }
+        [TestMethod]
+        public void TestVertragNullableDateTimeOffset()
+        {
+            JsonDocument json;
+            using (var r = new StreamReader("BoMapperTests/vertrag.json"))
+            {
+                var jsonString = r.ReadToEnd();
+                json = JsonSerializer.Deserialize<JsonDocument>(jsonString);
+            }
+            var v = JsonSerializer.Deserialize<Vertrag>(json.RootElement.GetProperty("input").GetRawText(), LenientParsing.MOST_LENIENT.GetJsonSerializerOptions());
+            Assert.IsNotNull(v.Vertragsteile);
+
+        }
+        protected class TestDateTime
+        {
+            /// <summary>
+            /// DateTime on which the event occured
+            /// </summary>
+            public DateTime EventOccured
+            {
+                get => eventOccured;
+                set
+                {
+                    if (value == DateTime.MinValue)
+                    {
+                        eventOccured = new DateTime(1, 1, 1, 0, 0, 0, DateTimeKind.Utc);
+                    }
+                    else
+                    {
+                        eventOccured = value;
+                    }
+                }
+            }
+
+            private DateTime eventOccured;
+        }
+        [TestMethod]
+        public void TestConversionFromMinSystemTextJson()
+        {
+            var options = LenientParsing.MOST_LENIENT.GetJsonSerializerOptions();
+            string json = "{\"EventOccured\": \"0001-01-01T00:00:00\"}"; // does contain a min value
+            var myEvent = System.Text.Json.JsonSerializer.Deserialize<TestDateTime>(json, options);
+            DateTimeOffset _ = myEvent.EventOccured;
+        }
 
         [TestMethod]
         public void TestSummerTimeBug()
