@@ -156,7 +156,7 @@ namespace TestBO4E
         public void TestZählerHerstellerKontaktweg()
         {
             JsonDocument json;
-            using (var r = new StreamReader("BoMapperTests/zähler.json"))
+            using (var r = new StreamReader("testjsons/zähler.json"))
             {
                 var jsonString = r.ReadToEnd();
                 var v = JsonSerializer.Deserialize<Zaehler>(jsonString, LenientParsing.MOST_LENIENT.GetJsonSerializerOptions());
