@@ -104,9 +104,9 @@ namespace BO4E.meta.LenientConverters
                 }
                 else if (rawItem is JsonElement)
                 {
-                    var rawDict = JsonSerializer.Deserialize<Dictionary<string, object>>(((JsonElement)rawItem).GetRawText());
-                    var rawObject = rawDict.Values.FirstOrDefault();
-                    var enumValue = Enum.Parse(expectedListElementType, rawObject.ToString());
+                    var stringVal = ((JsonElement)rawItem).GetString();
+
+                    var enumValue = Enum.Parse(expectedListElementType, stringVal);
                     ((IList)result).Add(enumValue);
                 }
                 else

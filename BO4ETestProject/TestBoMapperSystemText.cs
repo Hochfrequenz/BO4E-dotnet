@@ -152,6 +152,20 @@ namespace TestBO4E
             Assert.IsNotNull(v.Vertragsteile);
 
         }
+        [TestMethod]
+        public void TestZählerHerstellerKontaktweg()
+        {
+            JsonDocument json;
+            using (var r = new StreamReader("BoMapperTests/zähler.json"))
+            {
+                var jsonString = r.ReadToEnd();
+                var v = JsonSerializer.Deserialize<Zaehler>(jsonString, LenientParsing.MOST_LENIENT.GetJsonSerializerOptions());
+                Assert.IsNotNull(v.Zaehlerhersteller);
+            }
+
+
+
+        }
         protected class TestDateTime
         {
             /// <summary>

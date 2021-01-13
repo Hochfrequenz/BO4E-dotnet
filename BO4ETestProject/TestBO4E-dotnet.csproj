@@ -110,6 +110,9 @@
     <None Update="BoMapperTests\Vertrag_lenient_String.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Update="BoMapperTests\zähler.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
 
 </Project>
