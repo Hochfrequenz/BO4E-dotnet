@@ -56,10 +56,13 @@ namespace BO4E.meta.LenientConverters
                             {
                                 settings.Converters.Add(new LenientSystemTextJsonDateTimeConverter());
                                 settings.Converters.Add(new LenientSystemTextJsonDateTimeOffsetConverter());
+                                settings.Converters.Add(new LenientSystemTextJsonNullableDateTimeConverter());
+                                settings.Converters.Add(new LenientSystemTextJsonNullableDateTimeOffsetConverter());
                             }
                             else
                             {
                                 settings.Converters.Add(new LenientSystemTextJsonDateTimeConverter(new DateTimeOffset()));
+                                settings.Converters.Add(new LenientSystemTextJsonNullableDateTimeConverter(new DateTimeOffset()));
                                 settings.Converters.Add(new LenientSystemTextJsonDateTimeOffsetConverter(new DateTimeOffset()));
                                 settings.Converters.Add(new LenientSystemTextJsonNullableDateTimeOffsetConverter(new DateTimeOffset()));
                             }
