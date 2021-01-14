@@ -133,7 +133,12 @@ namespace BO4E.meta.LenientConverters
         /// <param name="options"></param>
         public override void Write(Utf8JsonWriter writer, T value, JsonSerializerOptions options)
         {
-            throw new NotImplementedException();
+            writer.WriteStartArray();
+            foreach (var val in value)
+            {
+                JsonSerializer.Serialize(val, typeof(E), options);
+            }
+            writer.WriteEndArray();
         }
     }
 }

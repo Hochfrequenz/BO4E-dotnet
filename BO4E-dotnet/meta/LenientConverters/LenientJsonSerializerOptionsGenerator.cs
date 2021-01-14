@@ -36,8 +36,7 @@ namespace BO4E.meta.LenientConverters
             var settings = new JsonSerializerOptions
             {
                 PropertyNameCaseInsensitive = true,
-                NumberHandling = JsonNumberHandling.AllowReadingFromString |
-        JsonNumberHandling.WriteAsString
+                NumberHandling = JsonNumberHandling.AllowReadingFromString
             };
             settings.Converters.Add(new System.Text.Json.Serialization.JsonStringEnumConverter());
             settings.Converters.Add(new VertragsConverter());
