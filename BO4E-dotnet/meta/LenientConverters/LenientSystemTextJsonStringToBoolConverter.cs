@@ -24,18 +24,15 @@ namespace BO4E.meta.LenientConverters
         /// <returns></returns>
         public override bool Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
         {
-            if (reader.TokenType == JsonTokenType.Null)
-                return false;
-            if (reader.TokenType == JsonTokenType.String)
+            switch (reader.TokenType)
             {
-
-                if (bool.TryParse(reader.GetString(), out bool boolValue))
-                {
+                case JsonTokenType.Null:
+                    return false;
+                case JsonTokenType.String when bool.TryParse(reader.GetString(), out bool boolValue):
                     return boolValue;
-                }
+                default:
+                    return false;
             }
-
-            return false;
         }
         /// <summary>
         /// 

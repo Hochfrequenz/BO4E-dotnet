@@ -27,23 +27,26 @@ namespace BO4E.meta.LenientConverters
         /// <returns></returns>
         public override int? Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
         {
-            if (reader.TokenType == JsonTokenType.Null)
-                return null;
-            if (reader.TokenType == JsonTokenType.String)
+            switch (reader.TokenType)
             {
-                var numeric = new string(reader.GetString().Where(char.IsDigit).ToArray());
-                if (int.TryParse(numeric, out var intValue))
+                case JsonTokenType.Null:
+                    return null;
+                case JsonTokenType.String:
                 {
-                    return intValue;
+                    var numeric = new string(reader.GetString().Where(char.IsDigit).ToArray());
+                    if (int.TryParse(numeric, out var intValue))
+                    {
+                        return intValue;
+                    }
+
+                    break;
                 }
-            }
-            else if (reader.TokenType == JsonTokenType.Number)
-            {
-                if (reader.TryGetInt32(out var int32Value))
+                case JsonTokenType.Number when reader.TryGetInt32(out var int32Value):
                     return int32Value;
-                if (reader.TryGetInt64(out var int64Value))
+                case JsonTokenType.Number when reader.TryGetInt64(out var int64Value):
                     return (int)int64Value;
             }
+
             return 0;
         }
         /// <summary>

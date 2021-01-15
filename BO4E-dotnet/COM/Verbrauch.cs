@@ -179,14 +179,21 @@ namespace BO4E.COM
             if (UserProperties != null && UserProperties.TryGetValue(SapProfdecimalsKey, out var profDecimalsRaw))
             {
                 int profDecimals = 0;
-                if (profDecimalsRaw is string raw)
-                    profDecimals = Int32.Parse(raw);
-                else if (profDecimalsRaw is long value)
-                    profDecimals = (int)value;
-                else if (profDecimalsRaw is int decimalsRaw)
-                    profDecimals = decimalsRaw;
-                else
-                    profDecimals = System.Text.Json.JsonSerializer.Deserialize<int>(((System.Text.Json.JsonElement)profDecimalsRaw).GetRawText(), Verbrauch.VerbrauchSerializerOptions);
+                switch (profDecimalsRaw)
+                {
+                    case string raw:
+                        profDecimals = Int32.Parse(raw);
+                        break;
+                    case long value:
+                        profDecimals = (int)value;
+                        break;
+                    case int decimalsRaw:
+                        profDecimals = decimalsRaw;
+                        break;
+                    default:
+                        profDecimals = System.Text.Json.JsonSerializer.Deserialize<int>(((System.Text.Json.JsonElement)profDecimalsRaw).GetRawText(), Verbrauch.VerbrauchSerializerOptions);
+                        break;
+                }
                 if (profDecimals > 0)
                 {
                     // or should I import math.pow() for this purpose?

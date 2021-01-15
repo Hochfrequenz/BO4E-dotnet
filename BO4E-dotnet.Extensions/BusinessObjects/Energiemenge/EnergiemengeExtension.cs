@@ -853,17 +853,17 @@ namespace BO4E.Extensions.BusinessObjects.Energiemenge
             }
             else
             {
-                if (sapSanitizedToken is string value)
+                switch (sapSanitizedToken)
                 {
-                    sanitized = Newtonsoft.Json.JsonConvert.DeserializeObject<JToken>(value).Value<bool>();
+                    case string value:
+                        sanitized = Newtonsoft.Json.JsonConvert.DeserializeObject<JToken>(value).Value<bool>();
+                        break;
+                    case bool token:
+                        return token;
+                    default:
+                        sanitized = ((System.Text.Json.JsonElement)sapSanitizedToken).GetBoolean();
+                        break;
                 }
-                else if (sapSanitizedToken is bool token)
-                    return token;
-                else
-                {
-                    sanitized = ((System.Text.Json.JsonElement)sapSanitizedToken).GetBoolean();
-                }
-
             }
             return sanitized;
         }

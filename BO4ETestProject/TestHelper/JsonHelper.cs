@@ -5,42 +5,45 @@ public static class JsonHelper
 {
     public static JToken RemoveEmptyChildren(JToken token)
     {
-        if (token.Type == JTokenType.Object)
+        switch (token.Type)
         {
-            var copy = new JObject();
-            foreach (var prop in token.Children<JProperty>())
+            case JTokenType.Object:
             {
-                var child = prop.Value;
-                if (child.HasValues)
+                var copy = new JObject();
+                foreach (var prop in token.Children<JProperty>())
                 {
-                    child = RemoveEmptyChildren(child);
+                    var child = prop.Value;
+                    if (child.HasValues)
+                    {
+                        child = RemoveEmptyChildren(child);
+                    }
+                    if (!IsEmpty(child))
+                    {
+                        copy.Add(prop.Name, child);
+                    }
                 }
-                if (!IsEmpty(child))
-                {
-                    copy.Add(prop.Name, child);
-                }
+                return copy;
             }
-            return copy;
-        }
-
-        if (token.Type == JTokenType.Array)
-        {
-            var copy = new JArray();
-            foreach (var item in token.Children())
+            case JTokenType.Array:
             {
-                var child = item;
-                if (child.HasValues)
+                var copy = new JArray();
+                foreach (var item in token.Children())
                 {
-                    child = RemoveEmptyChildren(child);
+                    var child = item;
+                    if (child.HasValues)
+                    {
+                        child = RemoveEmptyChildren(child);
+                    }
+                    if (!IsEmpty(child))
+                    {
+                        copy.Add(child);
+                    }
                 }
-                if (!IsEmpty(child))
-                {
-                    copy.Add(child);
-                }
+                return copy;
             }
-            return copy;
+            default:
+                return token;
         }
-        return token;
     }
 
     public static bool IsEmpty(JToken token)

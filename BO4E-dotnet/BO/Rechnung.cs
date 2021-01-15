@@ -226,32 +226,38 @@ namespace BO4E.BO
 
                 var rp = new Rechnungsposition();
                 decimal zeitbezogeneMengeWert = 0;
-                if (belzart == "000001")
+                switch (belzart)
                 {
-                    rp.Positionstext = "ARBEITSPREIS";
-                }
-                else if (belzart == "000003")
-                {
-                    rp.Positionstext = "PAUSCHALE";
-                    mengeneinheit = Mengeneinheit.JAHR;
-                    zeitbezogeneMengeWert = (jrp["preisbtr"] ?? jrp["PREISBTR"]).Value<decimal>();
-                    rp.ZeitbezogeneMenge = new Menge { Einheit = Mengeneinheit.TAG, Wert = zeitbezogeneMengeWert };
+                    case "000001":
+                        rp.Positionstext = "ARBEITSPREIS";
+                        break;
+                    case "000003":
+                        rp.Positionstext = "PAUSCHALE";
+                        mengeneinheit = Mengeneinheit.JAHR;
+                        zeitbezogeneMengeWert = (jrp["preisbtr"] ?? jrp["PREISBTR"]).Value<decimal>();
+                        rp.ZeitbezogeneMenge = new Menge { Einheit = Mengeneinheit.TAG, Wert = zeitbezogeneMengeWert };
 
-                    rp.Einzelpreis = new Preis
-                    {
-                        Wert = decimal.Parse((jrp["zeitant"] ?? jrp["ZEITANT"]).ToString()),
-                        Einheit = waehrungseinheit,
-                        Bezugswert = mengeneinheit
-                    };
+                        rp.Einzelpreis = new Preis
+                        {
+                            Wert = decimal.Parse((jrp["zeitant"] ?? jrp["ZEITANT"]).ToString()),
+                            Einheit = waehrungseinheit,
+                            Bezugswert = mengeneinheit
+                        };
+                        break;
+                    case "000004":
+                        rp.Positionstext = "VERRECHNUNGSPREIS";
+                        break;
+                    case "SUBT":
+                        rp.Positionstext = "zuzüglich Mehrwertsteuer 19,000%";
+                        break;
+                    case "ZHFBP1":
+                    case "CITAX":
+                        rp.Positionstext = belzart;
+                        break;
+                    default:
+                        rp.Positionstext = "";
+                        break;
                 }
-                else if (belzart == "000004")
-                    rp.Positionstext = "VERRECHNUNGSPREIS";
-                else if (belzart == "SUBT")
-                    rp.Positionstext = "zuzüglich Mehrwertsteuer 19,000%";
-                else if (belzart == "ZHFBP1" || belzart == "CITAX")
-                    rp.Positionstext = belzart;
-                else
-                    rp.Positionstext = "";
 
                 if ((jrp["massbill"] ?? jrp["MASSBILL"]) != null && !string.IsNullOrWhiteSpace((jrp["massbill"] ?? jrp["MASSBILL"]).Value<string>()))
                 {
@@ -347,17 +353,16 @@ namespace BO4E.BO
                         {
                             steuerProzent = steuerbetrag.Steuerwert / steuerbetrag.Basiswert * 100.0M;
                         }
-                        if ((int)steuerProzent == 19)
+                        switch ((int)steuerProzent)
                         {
-                            steuerbetrag.Steuerkennzeichen = Steuerkennzeichen.UST_19;
-                        }
-                        else if ((int)steuerProzent == 7)
-                        {
-                            steuerbetrag.Steuerkennzeichen = Steuerkennzeichen.UST_7;
-                        }
-                        else
-                        {
-                            throw new NotImplementedException($"Taxrate Internal '{jrp["taxrateInternal"]}' is not mapped.");
+                            case 19:
+                                steuerbetrag.Steuerkennzeichen = Steuerkennzeichen.UST_19;
+                                break;
+                            case 7:
+                                steuerbetrag.Steuerkennzeichen = Steuerkennzeichen.UST_7;
+                                break;
+                            default:
+                                throw new NotImplementedException($"Taxrate Internal '{jrp["taxrateInternal"]}' is not mapped.");
                         }
                         rp.TeilsummeSteuer = steuerbetrag;
                     }
@@ -394,17 +399,16 @@ namespace BO4E.BO
                         {
                             steuerProzent = Math.Round(steuerbetrag.Steuerwert / steuerbetrag.Basiswert * 100.0M);
                         }
-                        if (steuerProzent == 19.0M)
+                        switch (steuerProzent)
                         {
-                            steuerbetrag.Steuerkennzeichen = Steuerkennzeichen.UST_19;
-                        }
-                        else if (steuerProzent == 7.0M)
-                        {
-                            steuerbetrag.Steuerkennzeichen = Steuerkennzeichen.UST_7;
-                        }
-                        else
-                        {
-                            throw new NotImplementedException($"Taxrate Internal '{jrp["taxrateInternal"] ?? jrp["TAXRATE_INTERNAL"]}' is not mapped.");
+                            case 19.0M:
+                                steuerbetrag.Steuerkennzeichen = Steuerkennzeichen.UST_19;
+                                break;
+                            case 7.0M:
+                                steuerbetrag.Steuerkennzeichen = Steuerkennzeichen.UST_7;
+                                break;
+                            default:
+                                throw new NotImplementedException($"Taxrate Internal '{jrp["taxrateInternal"] ?? jrp["TAXRATE_INTERNAL"]}' is not mapped.");
                         }
                         stList.Add(steuerbetrag);
                         gSteure += be.Value<decimal>();

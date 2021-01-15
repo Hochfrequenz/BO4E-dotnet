@@ -96,30 +96,33 @@ namespace BO4E.meta.LenientConverters
             // First try to parse the List normally, in case it's formatted as expected
             foreach (var rawItem in rawList)
             {
-                if (rawItem is string && Enum.IsDefined(expectedListElementType, rawItem.ToString()))
+                switch (rawItem)
                 {
-                    // default. everything is as it should be :-)
-                    var enumValue = Enum.Parse(expectedListElementType, rawItem.ToString());
-                    ((IList)result).Add(enumValue);
-                }
-                else if (rawItem is JsonElement element)
-                {
-                    try
+                    case string _ when Enum.IsDefined(expectedListElementType, rawItem.ToString()):
                     {
-                        var rawDict = JsonSerializer.Deserialize<Dictionary<string, object>>(element.GetRawText());
-                        var rawObject = rawDict.Values.FirstOrDefault();
-                        var enumValue = Enum.Parse(expectedListElementType, rawObject.ToString());
+                        // default. everything is as it should be :-)
+                        var enumValue = Enum.Parse(expectedListElementType, rawItem.ToString());
                         ((IList)result).Add(enumValue);
+                        break;
                     }
-                    catch (Exception)
-                    {
-                        var enumValue = Enum.Parse(expectedListElementType, element.GetString());
-                        ((IList)result).Add(enumValue);
-                    }
-                }
-                else
-                {
-                    ((IList)result).Add(rawItem);
+                    case JsonElement element:
+                        try
+                        {
+                            var rawDict = JsonSerializer.Deserialize<Dictionary<string, object>>(element.GetRawText());
+                            var rawObject = rawDict.Values.FirstOrDefault();
+                            var enumValue = Enum.Parse(expectedListElementType, rawObject.ToString());
+                            ((IList)result).Add(enumValue);
+                        }
+                        catch (Exception)
+                        {
+                            var enumValue = Enum.Parse(expectedListElementType, element.GetString());
+                            ((IList)result).Add(enumValue);
+                        }
+
+                        break;
+                    default:
+                        ((IList)result).Add(rawItem);
+                        break;
                 }
             }
             return result as T;
