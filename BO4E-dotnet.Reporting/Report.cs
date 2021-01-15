@@ -63,7 +63,7 @@ namespace BO4E.Reporting
                                 {
                                     sortedHeaderNamesList.Add(reihenItem.Values.First());
                                     var curFieldName = reihenItem.Keys.First();
-                                    if (parallelItems.Where(g => g.Element == curFieldName).Count() > 0)
+                                    if (parallelItems.Where(g => g.Element == curFieldName).Any())
                                     {
                                         sortedResults.Add(result[index]);
                                         var indx = headerNames.IndexOf(curFieldName);
