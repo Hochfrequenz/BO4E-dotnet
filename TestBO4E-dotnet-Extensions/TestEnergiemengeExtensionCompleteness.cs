@@ -330,26 +330,26 @@ namespace TestBO4EExtensions
 
                 var mpFixSapCds = MiniProfiler.StartNew("Fix SAP CDS");
                 em.FixSapCDSBug();
-                mpFixSapCds.Stop();
+                await mpFixSapCds.StopAsync();
                 Assert.IsTrue(mpFixSapCds.DurationMilliseconds < 500, mpFixSapCds.RenderPlainText());
-                Console.Out.WriteLine(mpFixSapCds.RenderPlainText());
+                await Console.Out.WriteLineAsync(mpFixSapCds.RenderPlainText());
 
                 var mpFixSapCds2 = MiniProfiler.StartNew("Fix SAP CDS");
                 em.FixSapCDSBug();
-                mpFixSapCds2.Stop();
+                await mpFixSapCds2.StopAsync();
                 Assert.IsTrue(mpFixSapCds2.DurationMilliseconds * 10 < mpFixSapCds.DurationMilliseconds);
 
 
                 var mpLinear = MiniProfiler.StartNew("Non-Parallel");
                 em.GetMonthlyCompletenessReports(new TimeRange(new DateTime(2016, 1, 31, 23, 0, 0, DateTimeKind.Utc), new DateTime(2016, 12, 31, 23, 0, 0, DateTimeKind.Utc)));
-                mpLinear.Stop();
-                Console.Out.Write(mpLinear.RenderPlainText());
+                await mpLinear.StopAsync();
+                await Console.Out.WriteAsync(mpLinear.RenderPlainText());
                 Assert.IsTrue(mpLinear.DurationMilliseconds < 4000, $"Linear completeness report generation was too slow. Expected less than 4 seconds but was {mpLinear.DurationMilliseconds}ms: {mpLinear.RenderPlainText()}");
 
                 var mpParallel = MiniProfiler.StartNew("Parallel");
                 em.GetMonthlyCompletenessReports(new TimeRange(new DateTime(2016, 1, 31, 23, 0, 0, DateTimeKind.Utc), new DateTime(2016, 12, 31, 23, 0, 0, DateTimeKind.Utc)), true);
-                mpParallel.Stop();
-                Console.Out.Write(mpParallel.RenderPlainText());
+                await mpParallel.StopAsync();
+                await Console.Out.WriteAsync(mpParallel.RenderPlainText());
                 //Assert.IsTrue(mpParallel.DurationMilliseconds < 3000, $"Parallel completeness report generation was too slow. Expected less than 3 seconds but was {mpParallel.DurationMilliseconds}ms: {mpParallel.RenderPlainText()}");
                 //Assert.IsTrue(mpParallel.DurationMilliseconds < (int)mpLinear.DurationMilliseconds * 1.25M, $"Parallel: {mpParallel.DurationMilliseconds}, Non-Parallel: {mpLinear.DurationMilliseconds}");
             }
