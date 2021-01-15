@@ -21,7 +21,7 @@ namespace TestBO4E
         [TestMethod]
         public void TestUriConstructionAndKeyDeconstruction()
         {
-            var files = Directory.GetFiles($"bo4eURITests/", "*.json");
+            var files = Directory.GetFiles("bo4eURITests/", "*.json");
             foreach (var file in files)
             {
                 JObject json;

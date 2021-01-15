@@ -25,11 +25,11 @@ namespace BO4E.Extensions.BusinessObjects.Energiemenge
             }
             if (overallTimeRange.Start.Kind == DateTimeKind.Unspecified)
             {
-                throw new ArgumentException($"TimeRange start must not have DateTimeKind.Unspecified", nameof(overallTimeRange));
+                throw new ArgumentException("TimeRange start must not have DateTimeKind.Unspecified", nameof(overallTimeRange));
             }
             if (overallTimeRange.End.Kind == DateTimeKind.Unspecified)
             {
-                throw new ArgumentException($"TimeRange end must not have DateTimeKind.Unspecified", nameof(overallTimeRange));
+                throw new ArgumentException("TimeRange end must not have DateTimeKind.Unspecified", nameof(overallTimeRange));
             }
 
             IList<ITimeRange> result = new List<ITimeRange>();

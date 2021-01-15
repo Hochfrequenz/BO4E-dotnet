@@ -44,7 +44,7 @@ namespace BO4E.Extensions.BusinessObjects.Energiemenge
                 decimal? coverage;
                 if (combis.Count == 0)
                 {
-                    errorMessage = $"Cannot use autoconfigured method because there are no values.";
+                    errorMessage = "Cannot use autoconfigured method because there are no values.";
                     coverage = 0;
                 }
                 else

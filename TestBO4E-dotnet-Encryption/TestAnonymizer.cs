@@ -31,7 +31,7 @@ namespace TestBO4EExtensions.Encryption
         public void TestOperations()
         {
             BO4E.StaticLogger.Logger = Microsoft.Extensions.Logging.Abstractions.NullLogger.Instance;
-            var files = Directory.GetFiles($"anonymizerTests/masterdata/", "*.json"); // 
+            var files = Directory.GetFiles("anonymizerTests/masterdata/", "*.json"); // 
             foreach (var testFile in files)
             {
                 JObject json;
