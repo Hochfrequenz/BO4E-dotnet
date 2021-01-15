@@ -325,7 +325,7 @@ namespace TestBO4EExtensions
             {
                 Energiemenge em;
                 var r = Directory.GetFiles("Energiemenge/completeness", "threeyears.json").First();
-                using FileStream openStream = File.OpenRead(r);
+                await using FileStream openStream = File.OpenRead(r);
                 em = await System.Text.Json.JsonSerializer.DeserializeAsync<Energiemenge>(openStream, LenientParsing.MOST_LENIENT.GetJsonSerializerOptions());
 
                 var mpFixSapCds = MiniProfiler.StartNew("Fix SAP CDS");
