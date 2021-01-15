@@ -102,18 +102,18 @@ namespace BO4E.meta.LenientConverters
                     var enumValue = Enum.Parse(expectedListElementType, rawItem.ToString());
                     ((IList)result).Add(enumValue);
                 }
-                else if (rawItem is JsonElement)
+                else if (rawItem is JsonElement element)
                 {
                     try
                     {
-                        var rawDict = JsonSerializer.Deserialize<Dictionary<string, object>>(((JsonElement)rawItem).GetRawText());
+                        var rawDict = JsonSerializer.Deserialize<Dictionary<string, object>>(element.GetRawText());
                         var rawObject = rawDict.Values.FirstOrDefault();
                         var enumValue = Enum.Parse(expectedListElementType, rawObject.ToString());
                         ((IList)result).Add(enumValue);
                     }
                     catch (Exception)
                     {
-                        var enumValue = Enum.Parse(expectedListElementType, ((JsonElement)rawItem).GetString());
+                        var enumValue = Enum.Parse(expectedListElementType, element.GetString());
                         ((IList)result).Add(enumValue);
                     }
                 }

@@ -179,12 +179,12 @@ namespace BO4E.COM
             if (UserProperties != null && UserProperties.TryGetValue(SapProfdecimalsKey, out var profDecimalsRaw))
             {
                 int profDecimals = 0;
-                if (profDecimalsRaw is string)
-                    profDecimals = Int32.Parse(profDecimalsRaw as string);
-                else if (profDecimalsRaw is long)
-                    profDecimals = (int)(long)profDecimalsRaw;
-                else if (profDecimalsRaw is int)
-                    profDecimals = (int)profDecimalsRaw;
+                if (profDecimalsRaw is string raw)
+                    profDecimals = Int32.Parse(raw);
+                else if (profDecimalsRaw is long value)
+                    profDecimals = (int)value;
+                else if (profDecimalsRaw is int decimalsRaw)
+                    profDecimals = decimalsRaw;
                 else
                     profDecimals = System.Text.Json.JsonSerializer.Deserialize<int>(((System.Text.Json.JsonElement)(profDecimalsRaw)).GetRawText(), Verbrauch.VerbrauchSerializerOptions);
                 if (profDecimals > 0)
