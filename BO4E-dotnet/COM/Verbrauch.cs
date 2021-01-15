@@ -182,7 +182,7 @@ namespace BO4E.COM
                 switch (profDecimalsRaw)
                 {
                     case string raw:
-                        profDecimals = Int32.Parse(raw);
+                        profDecimals = int.Parse(raw);
                         break;
                     case long value:
                         profDecimals = (int)value;

@@ -82,7 +82,7 @@ namespace BO4E.BO
                 {
                     int profDecimals = 0;
                     if (profDecimalsRaw is string raw)
-                        profDecimals = Int32.Parse(raw);
+                        profDecimals = int.Parse(raw);
                     else
                         profDecimals = ((System.Text.Json.JsonElement)profDecimalsRaw).GetInt32();
                     if (profDecimals > 0)
@@ -193,7 +193,7 @@ namespace BO4E.BO
                 {
                     int profDecimals = 0;
                     if (profDecimalsRaw is string raw)
-                        profDecimals = Int32.Parse(raw);
+                        profDecimals = int.Parse(raw);
                     else
                         profDecimals = System.Text.Json.JsonSerializer.Deserialize<int>(((System.Text.Json.JsonElement)profDecimalsRaw).GetRawText(), Energiemenge.EnergiemengeSerializerOptions);
                     if (profDecimals > 0)
