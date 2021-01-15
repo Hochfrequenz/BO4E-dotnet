@@ -16,7 +16,7 @@ namespace TestBO4EExtensions
                 MesslokationsId = "DE345"
 
             };
-            var cloneBo = BusinessObjectExtensions.DeepClone(bo);
+            var cloneBo = bo.DeepClone();
             Assert.AreNotSame(bo, cloneBo);
             // Assert.AreEqual<Messlokation>((Messlokation)bo, cloneBo); <--- keine ahnung warum das failed. vllt. auch mit json patch/diff arbeiten wie im hubnet projekt
 

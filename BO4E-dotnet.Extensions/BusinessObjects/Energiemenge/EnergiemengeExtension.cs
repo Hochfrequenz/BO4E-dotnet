@@ -177,7 +177,7 @@ namespace BO4E.Extensions.BusinessObjects.Energiemenge
                 using (MiniProfiler.Current.Step("Calculating total consumption and normalisation factor."))
                 {
                     totalConsumption = em.GetTotalConsumption();
-                    result = BusinessObjectExtensions.DeepClone(em);
+                    result = em.DeepClone();
                     if (totalConsumption.Item1 != 0.0M)
                     {
                         scalingFactor = target / totalConsumption.Item1;
