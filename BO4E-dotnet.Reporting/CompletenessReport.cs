@@ -187,7 +187,7 @@ namespace BO4E.Reporting
         /// <summary>
         /// matches a OBIS-Kennzahl that stands for an intelligentes messsystem for power.
         /// </summary>
-        private static Regex imsysRegex = new Regex(@"(1)-(65):((?:[1-8]|99))\.((?:6|8|9|29))\.([0-9]{1,2})", RegexOptions.Compiled);
+        private static readonly Regex imsysRegex = new Regex(@"(1)-(65):((?:[1-8]|99))\.((?:6|8|9|29))\.([0-9]{1,2})", RegexOptions.Compiled);
 
         /// <summary>
         /// Convert CompletenessReport to CSV string

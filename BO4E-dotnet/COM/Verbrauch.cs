@@ -26,7 +26,7 @@ namespace BO4E.COM
         static Verbrauch()
         {
             VerbrauchSerializerOptions = LenientParsing.MOST_LENIENT.GetJsonSerializerOptions();
-            VerbrauchSerializerOptions.Converters.Remove(VerbrauchSerializerOptions.Converters.Where(s => s.GetType() == typeof(VerbrauchConverter)).First());
+            VerbrauchSerializerOptions.Converters.Remove(VerbrauchSerializerOptions.Converters.First(s => s.GetType() == typeof(VerbrauchConverter)));
         }
         /// <summary>
         /// <inheritdoc cref="CentralEuropeStandardTime.CentralEuropeStandardTimezoneInfo"/>
@@ -179,14 +179,21 @@ namespace BO4E.COM
             if (UserProperties != null && UserProperties.TryGetValue(SapProfdecimalsKey, out var profDecimalsRaw))
             {
                 int profDecimals = 0;
-                if (profDecimalsRaw is string)
-                    profDecimals = Int32.Parse(profDecimalsRaw as string);
-                else if (profDecimalsRaw is long)
-                    profDecimals = (int)(long)profDecimalsRaw;
-                else if (profDecimalsRaw is int)
-                    profDecimals = (int)profDecimalsRaw;
-                else
-                    profDecimals = System.Text.Json.JsonSerializer.Deserialize<int>(((System.Text.Json.JsonElement)(profDecimalsRaw)).GetRawText(), Verbrauch.VerbrauchSerializerOptions);
+                switch (profDecimalsRaw)
+                {
+                    case string raw:
+                        profDecimals = int.Parse(raw);
+                        break;
+                    case long value:
+                        profDecimals = (int)value;
+                        break;
+                    case int decimalsRaw:
+                        profDecimals = decimalsRaw;
+                        break;
+                    default:
+                        profDecimals = System.Text.Json.JsonSerializer.Deserialize<int>(((System.Text.Json.JsonElement)profDecimalsRaw).GetRawText(), Verbrauch.VerbrauchSerializerOptions);
+                        break;
+                }
                 if (profDecimals > 0)
                 {
                     // or should I import math.pow() for this purpose?

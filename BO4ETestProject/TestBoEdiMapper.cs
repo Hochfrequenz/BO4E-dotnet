@@ -75,7 +75,7 @@ namespace TestBO4E
         [TestMethod]
         public void TestBoEdiReplacement()
         {
-            var files = Directory.GetFiles($"BoEdiMapper/", "*.json");
+            var files = Directory.GetFiles("BoEdiMapper/", "*.json");
             foreach (var file in files)
             {
                 JObject json;

@@ -62,7 +62,7 @@ namespace TestBO4E.ShowCaseTests
             }
             Debug.WriteLine($"No one knowing only {anonymizedEm.LokationsId} actually means {em.LokationsId}");
             Assert.AreNotEqual(em.LokationsId, anonymizedEm.LokationsId);
-            Debug.WriteLine($"But it won't cause any problems in satellite systems because the data is still there (!=null) and the business object is still valid.");
+            Debug.WriteLine("But it won't cause any problems in satellite systems because the data is still there (!=null) and the business object is still valid.");
             Assert.IsNotNull(anonymizedEm.LokationsId);
             Assert.IsTrue(anonymizedEm.IsValid());
         }

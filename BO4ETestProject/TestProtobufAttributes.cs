@@ -73,7 +73,7 @@ namespace TestBO4E
             {
                 if (isDirectBase)
                 {
-                    Assert.AreEqual(allFields.Count(), fieldsWithProtoMemberAttribute.Count(), $"Missing protobuf attributes for {type} for: " + string.Join(", ", allFields.Except(fieldsWithProtoMemberAttribute)));
+                    Assert.AreEqual(allFields.Length, fieldsWithProtoMemberAttribute.Count(), $"Missing protobuf attributes for {type} for: " + string.Join(", ", allFields.Except(fieldsWithProtoMemberAttribute)));
                 }
             }
             catch (ArgumentOutOfRangeException aoore) when (aoore.ParamName == "tag")

@@ -544,7 +544,7 @@ namespace BO4E.BO
                         {
                             try
                             {
-                                boType = assembley.GetTypes().FirstOrDefault(x => x.Name.ToUpper() == jo["boTyp"].Value<string>().ToUpper());
+                                boType = assembley.GetTypes().FirstOrDefault(x => string.Equals(x.Name, jo["boTyp"].Value<string>(), StringComparison.CurrentCultureIgnoreCase));
                             }
                             catch (ReflectionTypeLoadException)
                             {
@@ -615,9 +615,8 @@ namespace BO4E.BO
                 {
                     var jdoc = System.Text.Json.JsonDocument.ParseValue(ref reader);
                     var boTypeString = jdoc.RootElement.GetProperty("boTyp").GetString();
-                    Type boType;
 #pragma warning disable CS0618 // Type or member is obsolete
-                    boType = BoMapper.GetTypeForBoName(boTypeString); // ToDo: catch exception if boTyp is not set and throw exception with descriptive error message
+                    var boType = BoMapper.GetTypeForBoName(boTypeString);
 #pragma warning restore CS0618 // Type or member is obsolete
                     if (boType == null)
                     {
@@ -625,7 +624,7 @@ namespace BO4E.BO
                         {
                             try
                             {
-                                boType = assembley.GetTypes().FirstOrDefault(x => x.Name.ToUpper() == boTypeString.ToUpper());
+                                boType = assembley.GetTypes().FirstOrDefault(x => string.Equals(x.Name, boTypeString, StringComparison.CurrentCultureIgnoreCase));
                             }
                             catch (ReflectionTypeLoadException)
                             {

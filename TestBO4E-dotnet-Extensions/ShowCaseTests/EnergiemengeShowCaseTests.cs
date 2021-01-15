@@ -44,7 +44,7 @@ namespace TestBO4E.ShowCaseTests
                    }
                 }
             };
-            Debug.WriteLine($"You got Verbrauch data for {decimal.Round(em.GetCoverage() * 100.0M)}% of the time in between {em.Energieverbrauch.Select(v => v.Startdatum).Min().ToString("yyyy-MM-dd")} and {em.Energieverbrauch.Select(v => v.Enddatum).Max().ToString("yyyy-MM-dd")}");
+            Debug.WriteLine($"You got Verbrauch data for {decimal.Round(em.GetCoverage() * 100.0M)}% of the time in between {em.Energieverbrauch.Select(v => v.Startdatum).Min():yyyy-MM-dd} and {em.Energieverbrauch.Select(v => v.Enddatum).Max():yyyy-MM-dd}");
             // You got Verbrauch data for 45% of the time in between 2020-03-01 and 2020-04-01
 
             var consumption = em.GetTotalConsumption();

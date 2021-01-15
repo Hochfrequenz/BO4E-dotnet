@@ -48,14 +48,12 @@ namespace BO4E.meta.LenientConverters
         /// <returns></returns>
         public override DateTime Read(ref System.Text.Json.Utf8JsonReader reader, Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
         {
-            string rawDate;
-
             if (reader.TryGetDateTime(out var dt))
             {
                 return DateTime.SpecifyKind(dt, DateTimeKind.Utc);
             }
 
-            rawDate = reader.GetString();
+            var rawDate = reader.GetString();
             // First try to parse the date string as is (in case it is correctly formatted)
             if (typeToConvert == typeof(DateTimeOffset) || typeToConvert == typeof(DateTimeOffset?))
             {
@@ -168,7 +166,6 @@ namespace BO4E.meta.LenientConverters
         /// <returns></returns>
         public override DateTime? Read(ref System.Text.Json.Utf8JsonReader reader, Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
         {
-            string rawDate;
             if (reader.TryGetDateTimeOffset(out var dto))
             {
                 return DateTime.SpecifyKind(dto.DateTime, DateTimeKind.Utc);
@@ -179,7 +176,7 @@ namespace BO4E.meta.LenientConverters
                 return DateTime.SpecifyKind(dt, DateTimeKind.Utc);
             }
 
-            rawDate = reader.GetString();
+            var rawDate = reader.GetString();
             // First try to parse the date string as is (in case it is correctly formatted)
             if (typeToConvert == typeof(DateTimeOffset) || typeToConvert == typeof(DateTimeOffset?))
             {
@@ -292,7 +289,6 @@ namespace BO4E.meta.LenientConverters
         /// <returns></returns>
         public override DateTimeOffset Read(ref System.Text.Json.Utf8JsonReader reader, Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
         {
-            string rawDate;
             if (reader.TryGetDateTimeOffset(out var dto))
             {
 
@@ -301,7 +297,7 @@ namespace BO4E.meta.LenientConverters
             }
 
 
-            rawDate = reader.GetString();
+            var rawDate = reader.GetString();
             // First try to parse the date string as is (in case it is correctly formatted)
             if (typeToConvert == typeof(DateTimeOffset) || typeToConvert == typeof(DateTimeOffset?))
             {
@@ -417,14 +413,13 @@ namespace BO4E.meta.LenientConverters
         /// <returns></returns>
         public override DateTimeOffset? Read(ref System.Text.Json.Utf8JsonReader reader, Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
         {
-            string rawDate;
             if (reader.TryGetDateTimeOffset(out var dto))
             {
                 return dto;
             }
 
 
-            rawDate = reader.GetString();
+            var rawDate = reader.GetString();
             // First try to parse the date string as is (in case it is correctly formatted)
             if (typeToConvert == typeof(DateTimeOffset) || typeToConvert == typeof(DateTimeOffset?))
             {

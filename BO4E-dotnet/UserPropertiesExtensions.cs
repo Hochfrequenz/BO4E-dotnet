@@ -29,35 +29,31 @@ namespace BO4E
             if (string.IsNullOrWhiteSpace(userPropertyKey)) throw new ArgumentNullException(nameof(userPropertyKey));
             if (up != null && up.TryGetValue(userPropertyKey, out var upToken))
             {
-                if (upToken is null)
+                switch (upToken)
                 {
-                    value = default;
-                    return false;
+                    case null:
+                        value = default;
+                        return false;
+                    case string token:
+                        value = new JValue(token).Value<TUserProperty>();
+                        break;
+                    case double d:
+                        value = new JValue(d).Value<TUserProperty>();
+                        break;
+                    case long l:
+                        value = new JValue(l).Value<TUserProperty>();
+                        break;
+                    case bool b:
+                        value = new JValue(b).Value<TUserProperty>();
+                        break;
+                    case JValue jValue:
+                        value = jValue.Value<TUserProperty>();
+                        break;
+                    default:
+                        value = System.Text.Json.JsonSerializer.Deserialize<TUserProperty>(((System.Text.Json.JsonElement)upToken).GetRawText());
+                        break;
                 }
-                if (upToken is string)
-                {
-                    value = new JValue(upToken as string).Value<TUserProperty>();
-                }
-                else if (upToken is double)
-                {
-                    value = new JValue((double)upToken).Value<TUserProperty>();
-                }
-                else if (upToken is long)
-                {
-                    value = new JValue((long)upToken).Value<TUserProperty>();
-                }
-                else if (upToken is bool)
-                {
-                    value = new JValue((bool)upToken).Value<TUserProperty>();
-                }
-                else if (upToken is JValue)
-                {
-                    value = (upToken as JValue).Value<TUserProperty>();
-                }
-                else
-                {
-                    value = System.Text.Json.JsonSerializer.Deserialize<TUserProperty>(((System.Text.Json.JsonElement)upToken).GetRawText());
-                }
+
                 return true;
             }
 

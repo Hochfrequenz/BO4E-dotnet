@@ -46,7 +46,7 @@ namespace BO4E.Reporting
                 .Select(y => new { Element = y.Key, Counter = y.Count() })
                 .ToList();
 
-            if (parallelItems.Count() > 0)
+            if (parallelItems.Count > 0)
             {
                 for (var i = 0; i < parallelItems.First().Counter; i++)
                 {
@@ -63,7 +63,7 @@ namespace BO4E.Reporting
                                 {
                                     sortedHeaderNamesList.Add(reihenItem.Values.First());
                                     var curFieldName = reihenItem.Keys.First();
-                                    if (parallelItems.Where(g => g.Element == curFieldName).Count() > 0)
+                                    if (parallelItems.Where(g => g.Element == curFieldName).Any())
                                     {
                                         sortedResults.Add(result[index]);
                                         var indx = headerNames.IndexOf(curFieldName);
@@ -181,7 +181,7 @@ namespace BO4E.Reporting
                     var curValues = gapdata.Skip(valueIndex).Take(2);
                     gapSortedResults.AddRange(curValues);
                     resultBuilder.Append(lineTerminator);
-                    for (var z = 2; z < sortedHeaderNamesList.Count(); z++)
+                    for (var z = 2; z < sortedHeaderNamesList.Count; z++)
                         resultBuilder.Append(separator.ToString());
                     resultBuilder.Append(string.Join(separator.ToString(), gapSortedResults));
                 }

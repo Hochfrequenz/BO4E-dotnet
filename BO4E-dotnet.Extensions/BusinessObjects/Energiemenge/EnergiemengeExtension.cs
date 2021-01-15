@@ -24,7 +24,7 @@ namespace BO4E.Extensions.BusinessObjects.Energiemenge
     /// <summary>Do calculations on top of an Energiemenge BO4E.</summary>
     public static partial class EnergiemengeExtension
     {
-        private static readonly decimal QUASI_ZERO = 0.00000000001M;
+        private const decimal QUASI_ZERO = 0.00000000001M;
 
         /// <summary>
         /// Get Zeitraum covered by Energiemenge.
@@ -177,7 +177,7 @@ namespace BO4E.Extensions.BusinessObjects.Energiemenge
                 using (MiniProfiler.Current.Step("Calculating total consumption and normalisation factor."))
                 {
                     totalConsumption = em.GetTotalConsumption();
-                    result = BusinessObjectExtensions.DeepClone(em);
+                    result = em.DeepClone();
                     if (totalConsumption.Item1 != 0.0M)
                     {
                         scalingFactor = target / totalConsumption.Item1;
@@ -768,7 +768,7 @@ namespace BO4E.Extensions.BusinessObjects.Energiemenge
             foreach (var group in em.Energieverbrauch.GroupBy(PurityGrouper))
             {
                 var pureEm = em.DeepClone();
-                pureEm.Energieverbrauch = @group.ToList();
+                pureEm.Energieverbrauch = group.ToList();
                 result.Add(pureEm);
             }
             return result;
@@ -853,17 +853,17 @@ namespace BO4E.Extensions.BusinessObjects.Energiemenge
             }
             else
             {
-                if (sapSanitizedToken is string)
+                switch (sapSanitizedToken)
                 {
-                    sanitized = Newtonsoft.Json.JsonConvert.DeserializeObject<JToken>(sapSanitizedToken as string).Value<bool>();
+                    case string value:
+                        sanitized = Newtonsoft.Json.JsonConvert.DeserializeObject<JToken>(value).Value<bool>();
+                        break;
+                    case bool token:
+                        return token;
+                    default:
+                        sanitized = ((System.Text.Json.JsonElement)sapSanitizedToken).GetBoolean();
+                        break;
                 }
-                else if (sapSanitizedToken is bool)
-                    return (bool)sapSanitizedToken;
-                else
-                {
-                    sanitized = ((System.Text.Json.JsonElement)sapSanitizedToken).GetBoolean();
-                }
-
             }
             return sanitized;
         }

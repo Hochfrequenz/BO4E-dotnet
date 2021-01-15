@@ -32,7 +32,7 @@ namespace TestBO4EExtensions
         public void TestCompletenessReportGenerationSomeCustomer()
         {
             var files = Directory.GetFiles("Energiemenge/completeness", "somecustomer*.json");
-            Assert.AreEqual(5, files.Count()); // this is just to make sure the files haven't moved 
+            Assert.AreEqual(5, files.Length); // this is just to make sure the files haven't moved 
             foreach (var boFile in files)
             {
                 JObject json;
@@ -112,8 +112,8 @@ namespace TestBO4EExtensions
                     if (boFile.Contains("onshore.json"))
                     {
                         Assert.IsNotNull(cr.UserProperties);
-                        Assert.AreEqual("yippi yippi yeah", (cr.UserProperties["meineUp0"] as string));
-                        Assert.AreEqual("krawall und remmidemmi", (cr.UserProperties["meineUp1"] as string));
+                        Assert.AreEqual("yippi yippi yeah", cr.UserProperties["meineUp0"] as string);
+                        Assert.AreEqual("krawall und remmidemmi", cr.UserProperties["meineUp1"] as string);
                     }
                 }
             }
@@ -139,7 +139,7 @@ namespace TestBO4EExtensions
                 End = new DateTimeOffset(2018, 1, 31, 23, 0, 0, 0, TimeSpan.Zero).UtcDateTime
             });
             Assert.AreEqual(1.0M, cr.Coverage.Value);
-            Assert.AreEqual(0, cr.Gaps.Count());
+            Assert.AreEqual(0, cr.Gaps.Count);
 
             var dailies = em.GetDailyCompletenessReports(new TimeRange
             {
@@ -182,7 +182,7 @@ namespace TestBO4EExtensions
             };
 
             var cr = em.GetCompletenessReport(new TimeRange(new DateTime(2018, 12, 29, 0, 0, 0, DateTimeKind.Utc), new DateTime(2019, 1, 10, 0, 0, 0, DateTimeKind.Utc)));
-            Assert.AreEqual(2, cr.Gaps.Count());
+            Assert.AreEqual(2, cr.Gaps.Count);
             Assert.AreEqual(new DateTimeOffset(2018, 12, 29, 0, 0, 0, TimeSpan.Zero), cr.Gaps.First().Startdatum);
             Assert.AreEqual(new DateTimeOffset(2019, 1, 1, 0, 0, 0, TimeSpan.Zero), cr.Gaps.First().Enddatum);
             Assert.AreEqual(new DateTimeOffset(2019, 1, 7, 0, 0, 0, TimeSpan.Zero), cr.Gaps.Last().Startdatum);
@@ -325,31 +325,31 @@ namespace TestBO4EExtensions
             {
                 Energiemenge em;
                 var r = Directory.GetFiles("Energiemenge/completeness", "threeyears.json").First();
-                using FileStream openStream = File.OpenRead(r);
+                await using FileStream openStream = File.OpenRead(r);
                 em = await System.Text.Json.JsonSerializer.DeserializeAsync<Energiemenge>(openStream, LenientParsing.MOST_LENIENT.GetJsonSerializerOptions());
 
                 var mpFixSapCds = MiniProfiler.StartNew("Fix SAP CDS");
                 em.FixSapCDSBug();
-                mpFixSapCds.Stop();
+                await mpFixSapCds.StopAsync();
                 Assert.IsTrue(mpFixSapCds.DurationMilliseconds < 500, mpFixSapCds.RenderPlainText());
-                Console.Out.WriteLine(mpFixSapCds.RenderPlainText());
+                await Console.Out.WriteLineAsync(mpFixSapCds.RenderPlainText());
 
                 var mpFixSapCds2 = MiniProfiler.StartNew("Fix SAP CDS");
                 em.FixSapCDSBug();
-                mpFixSapCds2.Stop();
+                await mpFixSapCds2.StopAsync();
                 Assert.IsTrue(mpFixSapCds2.DurationMilliseconds * 10 < mpFixSapCds.DurationMilliseconds);
 
 
                 var mpLinear = MiniProfiler.StartNew("Non-Parallel");
                 em.GetMonthlyCompletenessReports(new TimeRange(new DateTime(2016, 1, 31, 23, 0, 0, DateTimeKind.Utc), new DateTime(2016, 12, 31, 23, 0, 0, DateTimeKind.Utc)));
-                mpLinear.Stop();
-                Console.Out.Write(mpLinear.RenderPlainText());
+                await mpLinear.StopAsync();
+                await Console.Out.WriteAsync(mpLinear.RenderPlainText());
                 Assert.IsTrue(mpLinear.DurationMilliseconds < 4000, $"Linear completeness report generation was too slow. Expected less than 4 seconds but was {mpLinear.DurationMilliseconds}ms: {mpLinear.RenderPlainText()}");
 
                 var mpParallel = MiniProfiler.StartNew("Parallel");
                 em.GetMonthlyCompletenessReports(new TimeRange(new DateTime(2016, 1, 31, 23, 0, 0, DateTimeKind.Utc), new DateTime(2016, 12, 31, 23, 0, 0, DateTimeKind.Utc)), true);
-                mpParallel.Stop();
-                Console.Out.Write(mpParallel.RenderPlainText());
+                await mpParallel.StopAsync();
+                await Console.Out.WriteAsync(mpParallel.RenderPlainText());
                 //Assert.IsTrue(mpParallel.DurationMilliseconds < 3000, $"Parallel completeness report generation was too slow. Expected less than 3 seconds but was {mpParallel.DurationMilliseconds}ms: {mpParallel.RenderPlainText()}");
                 //Assert.IsTrue(mpParallel.DurationMilliseconds < (int)mpLinear.DurationMilliseconds * 1.25M, $"Parallel: {mpParallel.DurationMilliseconds}, Non-Parallel: {mpLinear.DurationMilliseconds}");
             }

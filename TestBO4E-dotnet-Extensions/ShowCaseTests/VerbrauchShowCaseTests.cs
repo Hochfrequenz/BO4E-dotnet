@@ -49,7 +49,7 @@ namespace TestBO4E.ShowCaseTests
 
             foreach (var v in verbrauchA.Merge(verbrauchB))
             {
-                Debug.WriteLine($"{v.Startdatum.ToString("yyyy-MM-dd")} to {v.Enddatum.ToString("yyyy-MM-dd")}: {v.Wert}{v.Einheit}");
+                Debug.WriteLine($"{v.Startdatum:yyyy-MM-dd} to {v.Enddatum:yyyy-MM-dd}: {v.Wert}{v.Einheit}");
             }
             // 2020-03-01 to 2020-03-07: 456,000KW
             // 2020-03-07 to 2020-03-08: 456,100KW

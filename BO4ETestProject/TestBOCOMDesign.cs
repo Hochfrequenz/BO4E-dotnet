@@ -83,9 +83,8 @@ namespace TestBO4E
 
         private static readonly HashSet<Type> NO_KEYS_WHITELIST = new HashSet<Type>
         {
-            {
-                typeof(Kosten)
-            } };
+            typeof(Kosten)
+        };
 
         [TestMethod]
         public void TestBoKeys()

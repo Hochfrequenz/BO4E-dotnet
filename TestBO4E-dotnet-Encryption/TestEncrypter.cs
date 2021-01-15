@@ -55,7 +55,7 @@ namespace TestBO4EExtensions.Encryption
         [TestMethod]
         public void TestBOEncryption()
         {
-            var files = Directory.GetFiles($"encrypterTests/bo/", "*.json"); // 
+            var files = Directory.GetFiles("encrypterTests/bo/", "*.json"); // 
 
             foreach (var testFile in files)
             {

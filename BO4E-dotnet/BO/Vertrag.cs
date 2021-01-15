@@ -30,7 +30,7 @@ namespace BO4E.BO
         static Vertrag()
         {
             VertragsSerializerOptions = LenientParsing.MOST_LENIENT.GetJsonSerializerOptions();
-            VertragsSerializerOptions.Converters.Remove(VertragsSerializerOptions.Converters.Where(s => s.GetType() == typeof(VertragsConverter)).First());
+            VertragsSerializerOptions.Converters.Remove(VertragsSerializerOptions.Converters.First(s => s.GetType() == typeof(VertragsConverter)));
         }
         /// <summary>
         /// Eine im Verwendungskontext eindeutige Nummer für den Vertrag
@@ -159,7 +159,7 @@ namespace BO4E.BO
                     {
                         Vertragsteilbeginn = Vertragsbeginn,
                         Vertragsteilende = Vertragsende,
-                        Lokation = (UserProperties["lokationsId"] as string)
+                        Lokation = UserProperties["lokationsId"] as string
                     }
                 };
             }

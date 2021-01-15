@@ -23,7 +23,7 @@ namespace TestBO4E
         [TestMethod]
         public void TestBoMapping()
         {
-            var files = Directory.GetFiles($"BoMapperTests/", "*.json");
+            var files = Directory.GetFiles("BoMapperTests/", "*.json");
             foreach (var file in files)
             {
                 JObject json;
