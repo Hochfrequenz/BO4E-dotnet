@@ -544,7 +544,7 @@ namespace BO4E.BO
                         {
                             try
                             {
-                                boType = assembley.GetTypes().FirstOrDefault(x => x.Name.ToUpper() == jo["boTyp"].Value<string>().ToUpper());
+                                boType = assembley.GetTypes().FirstOrDefault(x => string.Equals(x.Name, jo["boTyp"].Value<string>(), StringComparison.CurrentCultureIgnoreCase));
                             }
                             catch (ReflectionTypeLoadException)
                             {
@@ -624,7 +624,7 @@ namespace BO4E.BO
                         {
                             try
                             {
-                                boType = assembley.GetTypes().FirstOrDefault(x => x.Name.ToUpper() == boTypeString.ToUpper());
+                                boType = assembley.GetTypes().FirstOrDefault(x => string.Equals(x.Name, boTypeString, StringComparison.CurrentCultureIgnoreCase));
                             }
                             catch (ReflectionTypeLoadException)
                             {
