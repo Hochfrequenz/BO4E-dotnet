@@ -30,7 +30,7 @@ namespace BO4E.BO
         static Energiemenge()
         {
             EnergiemengeSerializerOptions = LenientParsing.MOST_LENIENT.GetJsonSerializerOptions();
-            EnergiemengeSerializerOptions.Converters.Remove(EnergiemengeSerializerOptions.Converters.Where(s => s.GetType() == typeof(EnergiemengeConverter)).First());
+            EnergiemengeSerializerOptions.Converters.Remove(EnergiemengeSerializerOptions.Converters.First(s => s.GetType() == typeof(EnergiemengeConverter)));
         }
         /// <summary>
         /// Eindeutige Nummer der Marktlokation bzw. der Messlokation, zu der die Energiemenge gehört

@@ -26,7 +26,7 @@ namespace BO4E.COM
         static Verbrauch()
         {
             VerbrauchSerializerOptions = LenientParsing.MOST_LENIENT.GetJsonSerializerOptions();
-            VerbrauchSerializerOptions.Converters.Remove(VerbrauchSerializerOptions.Converters.Where(s => s.GetType() == typeof(VerbrauchConverter)).First());
+            VerbrauchSerializerOptions.Converters.Remove(VerbrauchSerializerOptions.Converters.First(s => s.GetType() == typeof(VerbrauchConverter)));
         }
         /// <summary>
         /// <inheritdoc cref="CentralEuropeStandardTime.CentralEuropeStandardTimezoneInfo"/>
