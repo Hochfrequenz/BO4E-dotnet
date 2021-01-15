@@ -768,7 +768,7 @@ namespace BO4E.Extensions.BusinessObjects.Energiemenge
             foreach (var group in em.Energieverbrauch.GroupBy(PurityGrouper))
             {
                 var pureEm = em.DeepClone();
-                pureEm.Energieverbrauch = @group.ToList();
+                pureEm.Energieverbrauch = group.ToList();
                 result.Add(pureEm);
             }
             return result;
