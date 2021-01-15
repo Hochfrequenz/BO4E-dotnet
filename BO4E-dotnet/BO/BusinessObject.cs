@@ -615,9 +615,8 @@ namespace BO4E.BO
                 {
                     var jdoc = System.Text.Json.JsonDocument.ParseValue(ref reader);
                     var boTypeString = jdoc.RootElement.GetProperty("boTyp").GetString();
-                    Type boType;
 #pragma warning disable CS0618 // Type or member is obsolete
-                    boType = BoMapper.GetTypeForBoName(boTypeString); // ToDo: catch exception if boTyp is not set and throw exception with descriptive error message
+                    var boType = BoMapper.GetTypeForBoName(boTypeString);
 #pragma warning restore CS0618 // Type or member is obsolete
                     if (boType == null)
                     {

@@ -207,7 +207,7 @@ namespace BO4E.BO
             Faelligkeitsdatum = new DateTimeOffset(TimeZoneInfo.ConvertTime((infoToken["faedn"] ?? infoToken["FAEDN"]).Value<DateTime>(), CentralEuropeStandardTime.CentralEuropeStandardTimezoneInfo, TimeZoneInfo.Utc));
             Storno = false;
 
-            decimal gSteure, gBrutto, vGezahlt, rBrutto;
+            decimal gSteure, vGezahlt, rBrutto;
             var gNetto = gSteure = _ = vGezahlt = rBrutto = 0.00M;
             var waehrungscode = (Waehrungscode)Enum.Parse(typeof(Waehrungscode), (infoToken["totalWaer"] ?? infoToken["TOTAL_WAER"]).Value<string>());
             var waehrungseinheit = (Waehrungseinheit)Enum.Parse(typeof(Waehrungseinheit), (infoToken["totalWaer"] ?? infoToken["TOTAL_WAER"]).Value<string>());
@@ -413,7 +413,7 @@ namespace BO4E.BO
             }
             Steuerbetraege = stList;
             Rechnungspositionen = rpList;
-            gBrutto = gNetto + gSteure;
+            var gBrutto = gNetto + gSteure;
             var zZahlen = gBrutto - vGezahlt - rBrutto;
             Gesamtnetto = new Betrag { Wert = gNetto, Waehrung = waehrungscode };
             Gesamtsteuer = new Betrag { Wert = gSteure, Waehrung = waehrungscode };
