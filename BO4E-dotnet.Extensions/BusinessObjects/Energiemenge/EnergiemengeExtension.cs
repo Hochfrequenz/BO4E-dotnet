@@ -24,7 +24,7 @@ namespace BO4E.Extensions.BusinessObjects.Energiemenge
     /// <summary>Do calculations on top of an Energiemenge BO4E.</summary>
     public static partial class EnergiemengeExtension
     {
-        private static readonly decimal QUASI_ZERO = 0.00000000001M;
+        private const decimal QUASI_ZERO = 0.00000000001M;
 
         /// <summary>
         /// Get Zeitraum covered by Energiemenge.
