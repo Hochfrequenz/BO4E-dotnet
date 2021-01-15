@@ -136,11 +136,11 @@ namespace TestBO4EExtensions.Encryption
                                 continue;
                             }
 
-                            if (expectedResult == null && testResult != null)
+                            if (expectedResult == null)
                             {
                                 Assert.AreEqual(expectedResult, testResult.ToString(), $"Path {jsonpath} in {testFile} returned value {testResult} where null was expected.");
                             }
-                            else if (expectedResult != null && testResult == null)
+                            else if (testResult == null)
                             {
                                 Assert.AreEqual(expectedResult.ToString(), testResult, $"Path {jsonpath} in {testFile} returned null where {expectedResult} was expected.");
                             }
