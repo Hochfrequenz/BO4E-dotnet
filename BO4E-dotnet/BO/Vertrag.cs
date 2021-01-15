@@ -159,7 +159,7 @@ namespace BO4E.BO
                     {
                         Vertragsteilbeginn = Vertragsbeginn,
                         Vertragsteilende = Vertragsende,
-                        Lokation = (UserProperties["lokationsId"] as string)
+                        Lokation = UserProperties["lokationsId"] as string
                     }
                 };
             }

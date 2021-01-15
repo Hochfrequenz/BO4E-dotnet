@@ -186,7 +186,7 @@ namespace BO4E.COM
                 else if (profDecimalsRaw is int decimalsRaw)
                     profDecimals = decimalsRaw;
                 else
-                    profDecimals = System.Text.Json.JsonSerializer.Deserialize<int>(((System.Text.Json.JsonElement)(profDecimalsRaw)).GetRawText(), Verbrauch.VerbrauchSerializerOptions);
+                    profDecimals = System.Text.Json.JsonSerializer.Deserialize<int>(((System.Text.Json.JsonElement)profDecimalsRaw).GetRawText(), Verbrauch.VerbrauchSerializerOptions);
                 if (profDecimals > 0)
                 {
                     // or should I import math.pow() for this purpose?

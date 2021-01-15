@@ -331,7 +331,7 @@ namespace BO4E.Extensions.Encryption
                 {
                     if (dict[dictKey] != null)
                     {
-                        var inputString = ((string)dict[dictKey]);
+                        var inputString = (string)dict[dictKey];
                         HashString(ref inputString, dataCategory);
                         dict[dictKey] = JToken.FromObject(inputString);
                         /*//dict[dictKey].Set(dict[dictKey].ToString());

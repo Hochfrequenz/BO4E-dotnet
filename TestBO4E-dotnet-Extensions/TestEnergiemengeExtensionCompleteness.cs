@@ -112,8 +112,8 @@ namespace TestBO4EExtensions
                     if (boFile.Contains("onshore.json"))
                     {
                         Assert.IsNotNull(cr.UserProperties);
-                        Assert.AreEqual("yippi yippi yeah", (cr.UserProperties["meineUp0"] as string));
-                        Assert.AreEqual("krawall und remmidemmi", (cr.UserProperties["meineUp1"] as string));
+                        Assert.AreEqual("yippi yippi yeah", cr.UserProperties["meineUp0"] as string);
+                        Assert.AreEqual("krawall und remmidemmi", cr.UserProperties["meineUp1"] as string);
                     }
                 }
             }

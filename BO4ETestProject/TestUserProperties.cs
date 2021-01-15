@@ -19,8 +19,8 @@ namespace TestBO4E
             var melo = JsonConvert.DeserializeObject<Messlokation>(meloJson);
             Assert.IsTrue(melo.IsValid());
             Assert.IsNotNull(melo.UserProperties);
-            Assert.AreEqual("some_value_not_covered_by_bo4e", (melo.UserProperties["myCustomInfo"] as string));
-            Assert.AreEqual(123.456M, (decimal)((double)melo.UserProperties["myCustomValue"]));
+            Assert.AreEqual("some_value_not_covered_by_bo4e", melo.UserProperties["myCustomInfo"] as string);
+            Assert.AreEqual(123.456M, (decimal)(double)melo.UserProperties["myCustomValue"]);
         }
 
         [TestMethod]
@@ -59,7 +59,7 @@ namespace TestBO4E
             Assert.IsFalse(melo.HasFlagSet("foo"));
             Assert.IsTrue(melo.SetFlag<Messlokation>("foo"));
             Assert.IsNotNull(melo.UserProperties);
-            Assert.IsTrue(melo.UserProperties.TryGetValue("foo", out var upValue) && ((bool)upValue));
+            Assert.IsTrue(melo.UserProperties.TryGetValue("foo", out var upValue) && (bool)upValue);
             Assert.IsTrue(melo.HasFlagSet("foo"));
             Assert.IsFalse(melo.SetFlag<Messlokation>("foo"));
             Assert.IsTrue(melo.SetFlag<Messlokation>("foo", false));
