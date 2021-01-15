@@ -89,7 +89,7 @@ namespace BO4E.meta.LenientConverters
             var expectedListElementType = typeToConvert.GetGenericArguments()[0];
             var expectedListType = typeof(List<>).MakeGenericType(expectedListElementType);
             var result = Activator.CreateInstance(expectedListType);
-            if (rawList == null || rawList.Count() == 0)
+            if (rawList == null || rawList.Count == 0)
             {
                 return result as T;
             }

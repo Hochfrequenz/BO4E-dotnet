@@ -32,7 +32,7 @@ namespace TestBO4EExtensions
         public void TestCompletenessReportGenerationSomeCustomer()
         {
             var files = Directory.GetFiles("Energiemenge/completeness", "somecustomer*.json");
-            Assert.AreEqual(5, files.Count()); // this is just to make sure the files haven't moved 
+            Assert.AreEqual(5, files.Length); // this is just to make sure the files haven't moved 
             foreach (var boFile in files)
             {
                 JObject json;
@@ -139,7 +139,7 @@ namespace TestBO4EExtensions
                 End = new DateTimeOffset(2018, 1, 31, 23, 0, 0, 0, TimeSpan.Zero).UtcDateTime
             });
             Assert.AreEqual(1.0M, cr.Coverage.Value);
-            Assert.AreEqual(0, cr.Gaps.Count());
+            Assert.AreEqual(0, cr.Gaps.Count);
 
             var dailies = em.GetDailyCompletenessReports(new TimeRange
             {
@@ -182,7 +182,7 @@ namespace TestBO4EExtensions
             };
 
             var cr = em.GetCompletenessReport(new TimeRange(new DateTime(2018, 12, 29, 0, 0, 0, DateTimeKind.Utc), new DateTime(2019, 1, 10, 0, 0, 0, DateTimeKind.Utc)));
-            Assert.AreEqual(2, cr.Gaps.Count());
+            Assert.AreEqual(2, cr.Gaps.Count);
             Assert.AreEqual(new DateTimeOffset(2018, 12, 29, 0, 0, 0, TimeSpan.Zero), cr.Gaps.First().Startdatum);
             Assert.AreEqual(new DateTimeOffset(2019, 1, 1, 0, 0, 0, TimeSpan.Zero), cr.Gaps.First().Enddatum);
             Assert.AreEqual(new DateTimeOffset(2019, 1, 7, 0, 0, 0, TimeSpan.Zero), cr.Gaps.Last().Startdatum);
