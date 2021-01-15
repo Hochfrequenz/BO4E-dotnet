@@ -34,25 +34,25 @@ namespace BO4E
                     value = default;
                     return false;
                 }
-                if (upToken is string)
+                if (upToken is string token)
                 {
-                    value = new JValue(upToken as string).Value<TUserProperty>();
+                    value = new JValue(token).Value<TUserProperty>();
                 }
-                else if (upToken is double)
+                else if (upToken is double d)
                 {
-                    value = new JValue((double)upToken).Value<TUserProperty>();
+                    value = new JValue(d).Value<TUserProperty>();
                 }
-                else if (upToken is long)
+                else if (upToken is long l)
                 {
-                    value = new JValue((long)upToken).Value<TUserProperty>();
+                    value = new JValue(l).Value<TUserProperty>();
                 }
-                else if (upToken is bool)
+                else if (upToken is bool b)
                 {
-                    value = new JValue((bool)upToken).Value<TUserProperty>();
+                    value = new JValue(b).Value<TUserProperty>();
                 }
-                else if (upToken is JValue)
+                else if (upToken is JValue jValue)
                 {
-                    value = (upToken as JValue).Value<TUserProperty>();
+                    value = jValue.Value<TUserProperty>();
                 }
                 else
                 {

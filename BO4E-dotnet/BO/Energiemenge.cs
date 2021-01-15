@@ -81,8 +81,8 @@ namespace BO4E.BO
                 if (UserProperties != null && UserProperties.TryGetValue(Verbrauch.SapProfdecimalsKey, out var profDecimalsRaw))
                 {
                     int profDecimals = 0;
-                    if (profDecimalsRaw is string)
-                        profDecimals = Int32.Parse(profDecimalsRaw as string);
+                    if (profDecimalsRaw is string raw)
+                        profDecimals = Int32.Parse(raw);
                     else
                         profDecimals = ((System.Text.Json.JsonElement)(profDecimalsRaw)).GetInt32();
                     if (profDecimals > 0)
@@ -192,8 +192,8 @@ namespace BO4E.BO
                 if (e.UserProperties != null && e.UserProperties.TryGetValue(Verbrauch.SapProfdecimalsKey, out var profDecimalsRaw))
                 {
                     int profDecimals = 0;
-                    if (profDecimalsRaw is string)
-                        profDecimals = Int32.Parse(profDecimalsRaw as string);
+                    if (profDecimalsRaw is string raw)
+                        profDecimals = Int32.Parse(raw);
                     else
                         profDecimals = System.Text.Json.JsonSerializer.Deserialize<int>(((System.Text.Json.JsonElement)(profDecimalsRaw)).GetRawText(), Energiemenge.EnergiemengeSerializerOptions);
                     if (profDecimals > 0)

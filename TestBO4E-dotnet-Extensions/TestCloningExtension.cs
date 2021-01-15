@@ -57,7 +57,7 @@ namespace TestBO4EExtensions
             var cloned2 = em.DeepClone();
             Assert.AreEqual(em.Energieverbrauch.Count, cloned2.Energieverbrauch.Count);
 
-            var cloned3 = (em as BusinessObject).DeepClone();
+            var cloned3 = ((BusinessObject) em).DeepClone();
             Assert.AreEqual(em.Energieverbrauch.Count, (cloned3 as Energiemenge).Energieverbrauch.Count);
         }
     }
