@@ -140,6 +140,30 @@ namespace TestBO4E
             Assert.AreEqual("DE54321", v.Vertragsteile.First().Lokation);
         }
         [TestMethod]
+        public void TestMesslokation()
+        {
+            JsonDocument json;
+            using (var r = new StreamReader("BoMapperTests/messlokation_userProps.json"))
+            {
+                var jsonString = r.ReadToEnd();
+                json = JsonSerializer.Deserialize<JsonDocument>(jsonString);
+            }
+            var m = JsonSerializer.Deserialize<Messlokation>(json.RootElement.GetProperty("input").GetRawText(), LenientParsing.MOST_LENIENT.GetJsonSerializerOptions());
+            Assert.AreEqual(true, m.Abrechnungmessstellenbetriebnna);
+        }
+        [TestMethod]
+        public void TestMarktlokation()
+        {
+            JsonDocument json;
+            using (var r = new StreamReader("BoMapperTests/marktlokation_simple.json"))
+            {
+                var jsonString = r.ReadToEnd();
+                json = JsonSerializer.Deserialize<JsonDocument>(jsonString);
+            }
+            var m = JsonSerializer.Deserialize<Marktlokation>(json.RootElement.GetProperty("input").GetRawText(), LenientParsing.MOST_LENIENT.GetJsonSerializerOptions());
+            Assert.AreEqual(BO4E.ENUM.Gebiettyp.VERTEILNETZ, m.GebietTyp);
+        }
+        [TestMethod]
         public void TestVertragNullableDateTimeOffset()
         {
             JsonDocument json;

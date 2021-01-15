@@ -99,12 +99,12 @@ namespace BO4E.meta.LenientConverters
                 switch (rawItem)
                 {
                     case string _ when Enum.IsDefined(expectedListElementType, rawItem.ToString()):
-                    {
-                        // default. everything is as it should be :-)
-                        var enumValue = Enum.Parse(expectedListElementType, rawItem.ToString());
-                        ((IList)result).Add(enumValue);
-                        break;
-                    }
+                        {
+                            // default. everything is as it should be :-)
+                            var enumValue = Enum.Parse(expectedListElementType, rawItem.ToString());
+                            ((IList)result).Add(enumValue);
+                            break;
+                        }
                     case JsonElement element:
                         try
                         {
@@ -136,12 +136,17 @@ namespace BO4E.meta.LenientConverters
         /// <param name="options"></param>
         public override void Write(Utf8JsonWriter writer, T value, JsonSerializerOptions options)
         {
-            writer.WriteStartArray();
-            foreach (var val in value)
+            if (value.Any())
             {
-                JsonSerializer.Serialize(val, typeof(E), options);
+                writer.WriteStartArray();
+                foreach (var val in value)
+                {
+                    JsonSerializer.Serialize(val, typeof(E), options);
+                }
+                writer.WriteEndArray();
             }
-            writer.WriteEndArray();
+            else
+                writer.WriteNullValue();
         }
     }
 }

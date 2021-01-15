@@ -28,6 +28,10 @@ namespace BO4E.meta.LenientConverters
             {
                 case JsonTokenType.Null:
                     return false;
+                case JsonTokenType.True:
+                    return true;
+                case JsonTokenType.False:
+                    return false;
                 case JsonTokenType.String when bool.TryParse(reader.GetString(), out bool boolValue):
                     return boolValue;
                 default:

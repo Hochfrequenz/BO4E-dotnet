@@ -8,6 +8,7 @@
     "sparte": "STROM",
     "netzebeneMessung": "MSP",
     "messgebietNr": null,
+    "abrechnungmessstellenbetriebnna": true,
     "grundzustaendigerMSBCodeNr": null,
     "grundzustaendigerMSBIMCodeNr": null,
     "grundzustaendigerMDLodeNr": null,

@@ -29,6 +29,7 @@
     <IncludeSymbols>true</IncludeSymbols>
     <DebugType>Embedded</DebugType>
     <EmbedAllSources>True</EmbedAllSources>
+    <LangVersion>8.0</LangVersion>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">

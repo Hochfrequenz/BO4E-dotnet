@@ -38,11 +38,12 @@ namespace BO4E.meta.LenientConverters
                 PropertyNameCaseInsensitive = true,
                 NumberHandling = JsonNumberHandling.AllowReadingFromString
             };
-            settings.Converters.Add(new System.Text.Json.Serialization.JsonStringEnumConverter());
+
             settings.Converters.Add(new VertragsConverter());
             settings.Converters.Add(new EnergiemengeConverter());
             settings.Converters.Add(new VerbrauchConverter());
             settings.Converters.Add(new LenientSystemTextJsonStringToBoolConverter());
+            settings.Converters.Add(new System.Text.Json.Serialization.JsonStringEnumConverter());
             foreach (LenientParsing lp in Enum.GetValues(typeof(LenientParsing)))
             {
                 if (lenient.HasFlag(lp))

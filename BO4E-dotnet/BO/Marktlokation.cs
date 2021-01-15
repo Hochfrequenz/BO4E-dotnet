@@ -1,3 +1,8 @@
+using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Text.RegularExpressions;
+
 using BO4E.COM;
 using BO4E.ENUM;
 using BO4E.meta;
@@ -5,11 +10,6 @@ using BO4E.meta;
 using Newtonsoft.Json;
 
 using ProtoBuf;
-
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Text.RegularExpressions;
 
 namespace BO4E.BO
 {
@@ -81,7 +81,7 @@ namespace BO4E.BO
         /// https://github.com/Hochfrequenz/energy-service-hub/issues/11
         [JsonProperty(PropertyName = "gebietTyp", Order = 12, Required = Required.Default)]
         [ProtoMember(12)]
-        public Gebiettyp? GebietType { get; set; }
+        public Gebiettyp? GebietTyp { get; set; }
 
         /// <summary>Die Nummer des Netzgebietes in der ene't-Datenbank.</summary>
         [JsonProperty(PropertyName = "netzgebietNr", Order = 13, Required = Required.Default)]

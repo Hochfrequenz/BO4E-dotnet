@@ -839,7 +839,7 @@
             angeschlossen ist.
             </summary>
         </member>
-        <member name="P:BO4E.BO.Marktlokation.GebietType">
+        <member name="P:BO4E.BO.Marktlokation.GebietTyp">
             <summary>Typ des Netzgebietes,z.B.Verteilnetz.</summary>
             https://github.com/Hochfrequenz/energy-service-hub/issues/11
         </member>
@@ -8713,6 +8713,77 @@
         <member name="M:BO4E.meta.LenientConverters.LenientSystemTextJsonStringToIntConverter.Write(System.Text.Json.Utf8JsonWriter,System.Nullable{System.Int32},System.Text.Json.JsonSerializerOptions)">
             <summary>
             
+            </summary>
+            <param name="writer"></param>
+            <param name="value"></param>
+            <param name="options"></param>
+        </member>
+        <member name="T:BO4E.meta.LenientConverters.StringNullableEnumConverter">
+            <summary>
+            A custom enum converter that uses an array for containing bit flags.
+            </summary>
+        </member>
+        <member name="M:BO4E.meta.LenientConverters.StringNullableEnumConverter.#ctor">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:BO4E.meta.LenientConverters.StringNullableEnumConverter.CanConvert(System.Type)">
+            <summary>
+            
+            </summary>
+            <param name="typeToConvert"></param>
+            <returns></returns>
+        </member>
+        <member name="M:BO4E.meta.LenientConverters.StringNullableEnumConverter.CreateConverter(System.Type,System.Text.Json.JsonSerializerOptions)">
+            <summary>
+            
+            </summary>
+            <param name="typeToConvert"></param>
+            <param name="options"></param>
+            <returns></returns>
+        </member>
+        <member name="T:BO4E.meta.LenientConverters.StringNullableEnumConverter`1">
+            <summary>
+            A converter to also allow parsing of nullable enums (not included in system.text.json yet)
+            </summary>
+            <typeparam name="T"></typeparam>
+        </member>
+        <member name="P:BO4E.meta.LenientConverters.StringNullableEnumConverter`1.HandleNull">
+            <summary>
+            Also handles null values
+            </summary>
+        </member>
+        <member name="M:BO4E.meta.LenientConverters.StringNullableEnumConverter`1.#ctor">
+            <summary>
+            constructor
+            </summary>
+        </member>
+        <member name="M:BO4E.meta.LenientConverters.StringNullableEnumConverter`1.#ctor(System.Text.Json.JsonSerializerOptions)">
+            <summary>
+            Construct a converter (reuse if possible)
+            </summary>
+            <param name="options"></param>
+        </member>
+        <member name="M:BO4E.meta.LenientConverters.StringNullableEnumConverter`1.CanConvert(System.Type)">
+            <summary>
+            Check if we can convert this type
+            </summary>
+            <param name="typeToConvert"></param>
+            <returns></returns>
+        </member>
+        <member name="M:BO4E.meta.LenientConverters.StringNullableEnumConverter`1.Read(System.Text.Json.Utf8JsonReader@,System.Type,System.Text.Json.JsonSerializerOptions)">
+            <summary>
+            Read from the json reader. <see cref="M:System.Text.Json.Serialization.JsonConverter`1.Read(System.Text.Json.Utf8JsonReader@,System.Type,System.Text.Json.JsonSerializerOptions)"/>
+            </summary>
+            <param name="reader"></param>
+            <param name="typeToConvert"></param>
+            <param name="options"></param>
+            <returns></returns>
+        </member>
+        <member name="M:BO4E.meta.LenientConverters.StringNullableEnumConverter`1.Write(System.Text.Json.Utf8JsonWriter,`0,System.Text.Json.JsonSerializerOptions)">
+            <summary>
+            Write to the json writer <see cref="M:System.Text.Json.Serialization.JsonConverter`1.Write(System.Text.Json.Utf8JsonWriter,`0,System.Text.Json.JsonSerializerOptions)"/>
             </summary>
             <param name="writer"></param>
             <param name="value"></param>
