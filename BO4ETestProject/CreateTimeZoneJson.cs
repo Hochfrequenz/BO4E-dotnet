@@ -27,7 +27,7 @@ namespace TestBO4E
                 return;
             }
             Assert.IsTrue(tzi.SupportsDaylightSavingTime);
-            var json = JsonConvert.SerializeObject(tzi);
+            var json = System.Text.Json.JsonSerializer.Serialize(tzi);
             Console.WriteLine(json);
         }
     }
