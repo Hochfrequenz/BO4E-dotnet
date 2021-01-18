@@ -1,7 +1,4 @@
 ﻿using BO4E.BO;
-
-using Newtonsoft.Json.Linq;
-
 using System.Collections.Generic;
 
 namespace BO4E.meta

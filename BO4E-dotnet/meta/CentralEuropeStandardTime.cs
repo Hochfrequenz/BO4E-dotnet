@@ -25,19 +25,17 @@ namespace BO4E.meta
             var assembly = typeof(CentralEuropeStandardTime).Assembly;
             // load serialized time zone from json resource file:
             const string resourceFileName = "BO4E.meta.CentralEuropeStandardTime.json";
-            using (var stream = assembly.GetManifestResourceStream(resourceFileName))
+            using var stream = assembly.GetManifestResourceStream(resourceFileName);
+            if (stream == null)
             {
-                if (stream == null)
-                {
-                    // this should never ever happen
-                    throw new FileNotFoundException($"The file resource {resourceFileName} was not found.");
-                }
-                using (var jsonReader = new StreamReader(stream))
-                {
-                    var jsonString = jsonReader.ReadToEnd();
-                    //Console.WriteLine(jsonString);
-                    CentralEuropeStandardTimezoneInfo = JsonConvert.DeserializeObject<TimeZoneInfo>(jsonString);
-                }
+                // this should never ever happen
+                throw new FileNotFoundException($"The file resource {resourceFileName} was not found.");
+            }
+            using (var jsonReader = new StreamReader(stream))
+            {
+                var jsonString = jsonReader.ReadToEnd();
+                //Console.WriteLine(jsonString);
+                CentralEuropeStandardTimezoneInfo = JsonConvert.DeserializeObject<TimeZoneInfo>(jsonString);
             }
         }
     }

@@ -59,7 +59,7 @@ namespace BO4E.meta.LenientConverters
     /// <summary>
     /// allows to deserialize a list of enums (see tests)
     /// </summary>
-    public class LenientSystemTextJsonEnumListConverter<T, E> : System.Text.Json.Serialization.JsonConverter<T>
+    public class LenientSystemTextJsonEnumListConverter<T, E> : JsonConverter<T>
          where T : List<E> where E : struct, Enum
     {
         /// <inheritdoc cref=" JsonConverter.CanConvert(Type)"/>

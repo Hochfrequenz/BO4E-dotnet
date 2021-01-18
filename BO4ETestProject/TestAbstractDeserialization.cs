@@ -6,6 +6,7 @@ using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 
 using System.IO;
+using JsonSerializer = System.Text.Json.JsonSerializer;
 
 namespace TestBO4E
 {
@@ -49,5 +50,27 @@ namespace TestBO4E
             Assert.IsNotNull(bo);
             Assert.IsInstanceOfType(bo, typeof(Marktlokation));
         }
+
+        /// <summary>
+        /// similar to <see cref="TestMaLoDeserialization"/> but with .NET5
+        /// </summary>
+        [TestMethod]
+        public void TestMaLoDeserializationNet5()
+        {
+            JObject json;
+            using (var r = new StreamReader("BoMapperTests/marktlokation_simple.json"))
+            {
+                var jsonString = r.ReadToEnd();
+                json = JObject.Parse(jsonString);
+            }
+            var maloString = json["input"].ToString();
+            var malo = JsonSerializer.Deserialize<Marktlokation>(maloString);
+            Assert.IsNotNull(malo);
+            var bo = JsonSerializer.Deserialize<BusinessObject>(maloString);
+            Assert.IsNotNull(bo);
+            Assert.IsInstanceOfType(bo, typeof(Marktlokation));
+        }
+        
+        // no typename handling test in .NET as this is a JsonConvert feature 
     }
 }

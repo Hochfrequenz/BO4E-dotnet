@@ -11,7 +11,7 @@ namespace TestBO4E
     [TestClass]
     public class CreateTimeZoneJson
     {
-        public static readonly string resxName = "western_europe_standard_time.resx";
+        public const string ResxName = "western_europe_standard_time.resx";
 
         [TestMethod]
         public void SerializeAsJson()
@@ -27,7 +27,7 @@ namespace TestBO4E
                 return;
             }
             Assert.IsTrue(tzi.SupportsDaylightSavingTime);
-            var json = JsonConvert.SerializeObject(tzi);
+            var json = System.Text.Json.JsonSerializer.Serialize(tzi);
             Console.WriteLine(json);
         }
     }

@@ -8242,6 +8242,16 @@
             </summary>
             <param name="enums"></param>
         </member>
+        <member name="T:BO4E.meta.Defaults">
+            <summary>
+            Static class to store default values (e.g. json serializer options)
+            </summary>
+        </member>
+        <member name="P:BO4E.meta.Defaults.JsonSerializerDefaultOptions">
+            <summary>
+            Basic json serializer options if no separate options (e.g. lenient) are used
+            </summary>
+        </member>
         <member name="T:BO4E.meta.FieldName">
             <summary>
             A Custom attribute for make fields and properties multilingual 

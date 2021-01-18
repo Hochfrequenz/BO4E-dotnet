@@ -12,6 +12,7 @@ namespace BO4E
     /// </summary>
     public static class UserPropertiesExtensions
     {
+
         /// <summary>
         /// try to get the Userproperty with key <paramref name="userPropertyKey"/> from <paramref name="parent"/> if <paramref name="parent"/>.UserProperties is not null and the key is present.
         /// </summary>
@@ -50,7 +51,14 @@ namespace BO4E
                         value = jValue.Value<TUserProperty>();
                         break;
                     default:
-                        value = System.Text.Json.JsonSerializer.Deserialize<TUserProperty>(((System.Text.Json.JsonElement)upToken).GetRawText());
+                        try
+                        {
+                            value = System.Text.Json.JsonSerializer.Deserialize<TUserProperty>(((System.Text.Json.JsonElement)upToken).GetRawText(), Defaults.JsonSerializerDefaultOptions);
+                        }
+                        catch (System.Text.Json.JsonException)
+                        {
+                            throw new FormatException($"Could not convert {((System.Text.Json.JsonElement)upToken).GetRawText()} to { typeof(TUserProperty).Name}");
+                        }
                         break;
                 }
 

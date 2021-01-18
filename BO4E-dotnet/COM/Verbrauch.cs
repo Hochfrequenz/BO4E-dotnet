@@ -22,7 +22,7 @@ namespace BO4E.COM
         /// <summary>
         /// static serializer options for Verbracuhconverter
         /// </summary>
-        public static System.Text.Json.JsonSerializerOptions VerbrauchSerializerOptions;
+        public static JsonSerializerOptions VerbrauchSerializerOptions;
         static Verbrauch()
         {
             VerbrauchSerializerOptions = LenientParsing.MOST_LENIENT.GetJsonSerializerOptions();
@@ -191,7 +191,7 @@ namespace BO4E.COM
                         profDecimals = decimalsRaw;
                         break;
                     default:
-                        profDecimals = System.Text.Json.JsonSerializer.Deserialize<int>(((System.Text.Json.JsonElement)profDecimalsRaw).GetRawText(), Verbrauch.VerbrauchSerializerOptions);
+                        profDecimals = System.Text.Json.JsonSerializer.Deserialize<int>(((JsonElement)profDecimalsRaw).GetRawText(), VerbrauchSerializerOptions);
                         break;
                 }
                 if (profDecimals > 0)

@@ -105,7 +105,7 @@ namespace BO4E.meta.LenientConverters
 
             string value = reader.GetString();
 
-            if (String.IsNullOrEmpty(value)) return default;
+            if (string.IsNullOrEmpty(value)) return default;
 
             // for performance, parse with ignoreCase:false first.
             var result = Enum.Parse(_underlyingType, value);
