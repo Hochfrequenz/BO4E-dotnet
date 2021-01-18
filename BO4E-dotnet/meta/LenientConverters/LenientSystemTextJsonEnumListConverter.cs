@@ -60,7 +60,7 @@ namespace BO4E.meta.LenientConverters
     /// allows to deserialize a list of enums (see tests)
     /// </summary>
     public class LenientSystemTextJsonEnumListConverter<T, E> : System.Text.Json.Serialization.JsonConverter<T>
-         where T : List<E>
+         where T : List<E> where E : struct, Enum
     {
         /// <inheritdoc cref=" JsonConverter.CanConvert(Type)"/>
         public override bool CanConvert(Type objectType)
@@ -98,11 +98,11 @@ namespace BO4E.meta.LenientConverters
             {
                 switch (rawItem)
                 {
-                    case string _ when Enum.IsDefined(expectedListElementType, rawItem.ToString()):
+                    case object _ when Enum.TryParse<E>(rawItem.ToString(), out E enumResult):
                         {
                             // default. everything is as it should be :-)
-                            var enumValue = Enum.Parse(expectedListElementType, rawItem.ToString());
-                            ((IList)result).Add(enumValue);
+
+                            ((IList)result).Add(enumResult);
                             break;
                         }
                     case JsonElement element:
