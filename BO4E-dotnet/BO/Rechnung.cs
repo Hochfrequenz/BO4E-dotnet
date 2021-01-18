@@ -353,17 +353,14 @@ namespace BO4E.BO
                         {
                             steuerProzent = steuerbetrag.Steuerwert / steuerbetrag.Basiswert * 100.0M;
                         }
-                        switch ((int)steuerProzent)
+
+                        steuerbetrag.Steuerkennzeichen = (int) steuerProzent switch
                         {
-                            case 19:
-                                steuerbetrag.Steuerkennzeichen = Steuerkennzeichen.UST_19;
-                                break;
-                            case 7:
-                                steuerbetrag.Steuerkennzeichen = Steuerkennzeichen.UST_7;
-                                break;
-                            default:
-                                throw new NotImplementedException($"Taxrate Internal '{jrp["taxrateInternal"]}' is not mapped.");
-                        }
+                            19 => Steuerkennzeichen.UST_19,
+                            7 => Steuerkennzeichen.UST_7,
+                            _ => throw new NotImplementedException(
+                                $"Taxrate Internal '{jrp["taxrateInternal"]}' is not mapped.")
+                        };
                         rp.TeilsummeSteuer = steuerbetrag;
                     }
                     if ((jrp["nettobtr"] ?? jrp["NETTOBTR"]).Value<decimal>() <= 0)
@@ -399,17 +396,14 @@ namespace BO4E.BO
                         {
                             steuerProzent = Math.Round(steuerbetrag.Steuerwert / steuerbetrag.Basiswert * 100.0M);
                         }
-                        switch (steuerProzent)
+
+                        steuerbetrag.Steuerkennzeichen = steuerProzent switch
                         {
-                            case 19.0M:
-                                steuerbetrag.Steuerkennzeichen = Steuerkennzeichen.UST_19;
-                                break;
-                            case 7.0M:
-                                steuerbetrag.Steuerkennzeichen = Steuerkennzeichen.UST_7;
-                                break;
-                            default:
-                                throw new NotImplementedException($"Taxrate Internal '{jrp["taxrateInternal"] ?? jrp["TAXRATE_INTERNAL"]}' is not mapped.");
-                        }
+                            19.0M => Steuerkennzeichen.UST_19,
+                            7.0M => Steuerkennzeichen.UST_7,
+                            _ => throw new NotImplementedException(
+                                $"Taxrate Internal '{jrp["taxrateInternal"] ?? jrp["TAXRATE_INTERNAL"]}' is not mapped.")
+                        };
                         stList.Add(steuerbetrag);
                         gSteure += be.Value<decimal>();
                     }
