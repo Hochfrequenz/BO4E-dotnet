@@ -265,7 +265,7 @@ namespace BO4E.COM
         /// <param name="options"></param>
         public override void Write(Utf8JsonWriter writer, Verbrauch value, JsonSerializerOptions options)
         {
-
+            System.Text.Json.JsonSerializer.Serialize(writer, value, Verbrauch.VerbrauchSerializerOptions);
 
         }
     }

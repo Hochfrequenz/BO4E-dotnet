@@ -19,7 +19,11 @@
       "einheit": "KWH",
       "kennzahl": null,
       "schwachlastfaehig": "SCHWACHLASTFAEHIG",
-      "verwendungszwecke": null,
+      "verwendungszwecke": [
+        "ENDKUNDENABRECHNUNG",
+        "NETZNUTZUNGSABRECHNUNG",
+        "MEHRMINDERMBENGENABRECHNUNG"
+      ],
       "verbrauchsart": null,
       "unterbrechbarkeit": "NUV",
       "waermenutzung": null,
