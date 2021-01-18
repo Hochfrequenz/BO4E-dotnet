@@ -38,14 +38,9 @@ namespace BO4E.meta.LenientConverters
                     switch (lp)
                     {
                         case LenientParsing.DATE_TIME:
-                            if (!lenient.HasFlag(LenientParsing.SET_INITIAL_DATE_IF_NULL))
-                            {
-                                converters.Add(new LenientDateTimeConverter());
-                            }
-                            else
-                            {
-                                converters.Add(new LenientDateTimeConverter(new DateTimeOffset()));
-                            }
+                            converters.Add(!lenient.HasFlag(LenientParsing.SET_INITIAL_DATE_IF_NULL)
+                                ? new LenientDateTimeConverter()
+                                : new LenientDateTimeConverter(new DateTimeOffset()));
                             break;
 
                         case LenientParsing.ENUM_LIST:
@@ -68,14 +63,7 @@ namespace BO4E.meta.LenientConverters
                 }
             }
             IContractResolver contractResolver;
-            if (userPropertiesWhiteList.Count > 0)
-            {
-                contractResolver = new UserPropertiesDataContractResolver(userPropertiesWhiteList);
-            }
-            else
-            {
-                contractResolver = new DefaultContractResolver();
-            }
+            contractResolver = userPropertiesWhiteList.Count > 0 ? new UserPropertiesDataContractResolver(userPropertiesWhiteList) : new DefaultContractResolver();
             var settings = new JsonSerializerSettings
             {
                 Converters = converters,

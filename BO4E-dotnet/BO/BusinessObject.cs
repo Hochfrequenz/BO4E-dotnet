@@ -256,14 +256,7 @@ namespace BO4E.BO
             foreach (var pi in GetBoKeyProps(boType))
             {
                 var jpa = pi.GetCustomAttribute<JsonPropertyAttribute>();
-                if (jpa?.PropertyName != null)
-                {
-                    result.Add(jpa.PropertyName);
-                }
-                else
-                {
-                    result.Add(pi.Name);
-                }
+                result.Add(jpa?.PropertyName != null ? jpa.PropertyName : pi.Name);
             }
             return result;
         }
@@ -336,7 +329,7 @@ namespace BO4E.BO
                     foreach (var subResult in GetExpandablePropertyNames(prop.PropertyType, false))
 
                     {
-                        result.Add(string.Join(".", new[] { fieldName, subResult.Key }), subResult.Value);
+                        result.Add(string.Join(".", fieldName, subResult.Key), subResult.Value);
                     }
                     result.Add(fieldName, prop.PropertyType);
                 }
@@ -371,14 +364,7 @@ namespace BO4E.BO
             foreach (var pi in GetBoKeyProps(GetType()))
             {
                 var jpa = pi.GetCustomAttribute<JsonPropertyAttribute>();
-                if (jpa?.PropertyName != null)
-                {
-                    result.Add(jpa.PropertyName, pi.GetValue(this));
-                }
-                else
-                {
-                    result.Add(pi.Name, pi.GetValue(this));
-                }
+                result.Add(jpa?.PropertyName != null ? jpa.PropertyName : pi.Name, pi.GetValue(this));
             }
             return result;
         }
