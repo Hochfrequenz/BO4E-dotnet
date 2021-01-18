@@ -1,20 +1,8 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Reflection;
-
-using BO4E.COM;
-using BO4E.meta;
-
-using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
-using Newtonsoft.Json.Schema;
-using Newtonsoft.Json.Schema.Generation;
-using Newtonsoft.Json.Serialization;
-
-using ProtoBuf;
 
 
 namespace BO4E.BO
@@ -185,7 +173,7 @@ namespace BO4E.BO
         /// </summary>
         public void SetExterneReferenz(ExterneReferenz extRef, bool overwriteExisting = false)
             => ExterneReferenzen = ExterneReferenzen.SetExterneReferenz(extRef, overwriteExisting);
-        
+
         /// <summary>
         /// returns a JSON scheme for the Business Object
         /// </summary>
@@ -635,7 +623,11 @@ namespace BO4E.BO
 
             public override void Write(System.Text.Json.Utf8JsonWriter writer, BusinessObject value, System.Text.Json.JsonSerializerOptions options)
             {
-                throw new NotImplementedException();
+                string boTypeString = value.GetBoTyp();
+#pragma warning disable CS0618 // Type or member is obsolete
+                var boType = BoMapper.GetTypeForBoName(boTypeString);
+#pragma warning restore CS0618 // Type or member is obsolete
+                System.Text.Json.JsonSerializer.Serialize(writer, boType, options);
             }
         }
     }
