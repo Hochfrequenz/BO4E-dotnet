@@ -141,7 +141,7 @@ namespace BO4E.meta.LenientConverters
                 writer.WriteStartArray();
                 foreach (var val in value)
                 {
-                    JsonSerializer.Serialize(val, typeof(E), options);
+                    JsonSerializer.Serialize(writer, val, typeof(E), options);
                 }
                 writer.WriteEndArray();
             }
