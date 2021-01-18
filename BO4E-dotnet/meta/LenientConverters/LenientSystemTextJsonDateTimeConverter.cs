@@ -46,7 +46,7 @@ namespace BO4E.meta.LenientConverters
         /// <param name="typeToConvert"></param>
         /// <param name="options"></param>
         /// <returns></returns>
-        public override DateTime Read(ref System.Text.Json.Utf8JsonReader reader, Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+        public override DateTime Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
         {
             if (reader.TryGetDateTime(out var dt))
             {
@@ -61,7 +61,7 @@ namespace BO4E.meta.LenientConverters
                 {
                     return dateTimeOffset.DateTime;
                 }
-                foreach ((var dtf, var asUniversal) in _allowedDatetimeFormats)
+                foreach (var (dtf, asUniversal) in _allowedDatetimeFormats)
                 {
                     if (DateTimeOffset.TryParseExact(rawDate, dtf, CultureInfo.InvariantCulture, asUniversal ? DateTimeStyles.AssumeUniversal : DateTimeStyles.None, out dateTimeOffset))
                     {
@@ -90,7 +90,6 @@ namespace BO4E.meta.LenientConverters
             try
             {
                 return JsonSerializer.Deserialize<DateTime>(ref reader);
-
             }
             catch (FormatException fe) when (fe.Message == "The UTC representation of the date '0001-01-01T00:00:00' falls outside the year range 1-9999.")
             {
@@ -98,8 +97,6 @@ namespace BO4E.meta.LenientConverters
                 {
                     return DateTime.MinValue;
                 }
-
-
                 return DateTime.MinValue;
             }
             catch (ArgumentOutOfRangeException ae) when (ae.Message == "The UTC time represented when the offset is applied must be between year 0 and 10,000. (Parameter 'offset')")
@@ -108,8 +105,6 @@ namespace BO4E.meta.LenientConverters
                 {
                     return DateTime.MinValue;
                 }
-
-
                 return DateTime.MinValue;
             }
         }
@@ -119,9 +114,9 @@ namespace BO4E.meta.LenientConverters
         /// <param name="writer"></param>
         /// <param name="value"></param>
         /// <param name="options"></param>
-        public override void Write(System.Text.Json.Utf8JsonWriter writer, DateTime value, System.Text.Json.JsonSerializerOptions options)
+        public override void Write(Utf8JsonWriter writer, DateTime value, JsonSerializerOptions options)
         {
-            System.Text.Json.JsonSerializer.Serialize(writer, value);
+            JsonSerializer.Serialize(writer, value);
         }
     }
     /// <summary>
@@ -164,7 +159,7 @@ namespace BO4E.meta.LenientConverters
         /// <param name="typeToConvert"></param>
         /// <param name="options"></param>
         /// <returns></returns>
-        public override DateTime? Read(ref System.Text.Json.Utf8JsonReader reader, Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+        public override DateTime? Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
         {
             if (reader.TryGetDateTimeOffset(out var dto))
             {
@@ -241,9 +236,9 @@ namespace BO4E.meta.LenientConverters
         /// <param name="writer"></param>
         /// <param name="value"></param>
         /// <param name="options"></param>
-        public override void Write(System.Text.Json.Utf8JsonWriter writer, DateTime? value, System.Text.Json.JsonSerializerOptions options)
+        public override void Write(Utf8JsonWriter writer, DateTime? value, JsonSerializerOptions options)
         {
-            System.Text.Json.JsonSerializer.Serialize(writer, value);
+            JsonSerializer.Serialize(writer, value);
         }
     }
     /// <summary>
@@ -287,7 +282,7 @@ namespace BO4E.meta.LenientConverters
         /// <param name="typeToConvert"></param>
         /// <param name="options"></param>
         /// <returns></returns>
-        public override DateTimeOffset Read(ref System.Text.Json.Utf8JsonReader reader, Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+        public override DateTimeOffset Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
         {
             if (reader.TryGetDateTimeOffset(out var dto))
             {
@@ -365,9 +360,9 @@ namespace BO4E.meta.LenientConverters
         /// <param name="writer"></param>
         /// <param name="value"></param>
         /// <param name="options"></param>
-        public override void Write(System.Text.Json.Utf8JsonWriter writer, DateTimeOffset value, System.Text.Json.JsonSerializerOptions options)
+        public override void Write(Utf8JsonWriter writer, DateTimeOffset value, JsonSerializerOptions options)
         {
-            System.Text.Json.JsonSerializer.Serialize(writer, value);
+            JsonSerializer.Serialize(writer, value);
         }
     }
     /// <summary>
@@ -411,7 +406,7 @@ namespace BO4E.meta.LenientConverters
         /// <param name="typeToConvert"></param>
         /// <param name="options"></param>
         /// <returns></returns>
-        public override DateTimeOffset? Read(ref System.Text.Json.Utf8JsonReader reader, Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+        public override DateTimeOffset? Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
         {
             if (reader.TryGetDateTimeOffset(out var dto))
             {
@@ -487,9 +482,9 @@ namespace BO4E.meta.LenientConverters
         /// <param name="writer"></param>
         /// <param name="value"></param>
         /// <param name="options"></param>
-        public override void Write(System.Text.Json.Utf8JsonWriter writer, DateTimeOffset? value, System.Text.Json.JsonSerializerOptions options)
+        public override void Write(Utf8JsonWriter writer, DateTimeOffset? value, JsonSerializerOptions options)
         {
-            System.Text.Json.JsonSerializer.Serialize(writer, value);
+            JsonSerializer.Serialize(writer, value);
         }
     }
 }

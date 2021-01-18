@@ -46,7 +46,7 @@ namespace BO4E.meta.LenientConverters
         /// <param name="options"></param>
         public override void Write(Utf8JsonWriter writer, bool value, JsonSerializerOptions options)
         {
-            System.Text.Json.JsonSerializer.Serialize(writer, value);
+            JsonSerializer.Serialize(writer, value);
         }
     }
 }

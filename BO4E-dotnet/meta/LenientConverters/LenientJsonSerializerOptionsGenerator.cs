@@ -43,7 +43,7 @@ namespace BO4E.meta.LenientConverters
             settings.Converters.Add(new EnergiemengeConverter());
             settings.Converters.Add(new VerbrauchConverter());
             settings.Converters.Add(new LenientSystemTextJsonStringToBoolConverter());
-            settings.Converters.Add(new System.Text.Json.Serialization.JsonStringEnumConverter());
+            settings.Converters.Add(new JsonStringEnumConverter());
             foreach (LenientParsing lp in Enum.GetValues(typeof(LenientParsing)))
             {
                 if (lenient.HasFlag(lp))

@@ -53,7 +53,7 @@ namespace BO4E
                     default:
                         try
                         {
-                            value = System.Text.Json.JsonSerializer.Deserialize<TUserProperty>(((System.Text.Json.JsonElement)upToken).GetRawText(), BO4E.meta.Defaults.JsonSerializerDefaultOptions);
+                            value = System.Text.Json.JsonSerializer.Deserialize<TUserProperty>(((System.Text.Json.JsonElement)upToken).GetRawText(), Defaults.JsonSerializerDefaultOptions);
                         }
                         catch (System.Text.Json.JsonException)
                         {

@@ -26,7 +26,7 @@ namespace BO4E.BO
         /// <summary>
         /// static serializer options for Energiemengenconverter
         /// </summary>
-        public static System.Text.Json.JsonSerializerOptions EnergiemengeSerializerOptions;
+        public static JsonSerializerOptions EnergiemengeSerializerOptions;
         static Energiemenge()
         {
             EnergiemengeSerializerOptions = LenientParsing.MOST_LENIENT.GetJsonSerializerOptions();
@@ -84,7 +84,7 @@ namespace BO4E.BO
                     if (profDecimalsRaw is string raw)
                         profDecimals = int.Parse(raw);
                     else
-                        profDecimals = ((System.Text.Json.JsonElement)profDecimalsRaw).GetInt32();
+                        profDecimals = ((JsonElement)profDecimalsRaw).GetInt32();
                     if (profDecimals > 0)
                     {
                         for (var i = 0; i < profDecimals; i++)
@@ -195,7 +195,7 @@ namespace BO4E.BO
                     if (profDecimalsRaw is string raw)
                         profDecimals = int.Parse(raw);
                     else
-                        profDecimals = System.Text.Json.JsonSerializer.Deserialize<int>(((System.Text.Json.JsonElement)profDecimalsRaw).GetRawText(), Energiemenge.EnergiemengeSerializerOptions);
+                        profDecimals = System.Text.Json.JsonSerializer.Deserialize<int>(((JsonElement)profDecimalsRaw).GetRawText(), Energiemenge.EnergiemengeSerializerOptions);
                     if (profDecimals > 0)
                     {
                         for (var i = 0; i < profDecimals; i++)
