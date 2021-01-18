@@ -638,7 +638,7 @@ namespace BO4E.BO
 #pragma warning disable CS0618 // Type or member is obsolete
                 var boType = BoMapper.GetTypeForBoName(boTypeString);
 #pragma warning restore CS0618 // Type or member is obsolete
-                System.Text.Json.JsonSerializer.Serialize(writer, boType, options);
+                System.Text.Json.JsonSerializer.Serialize(writer, value, boType, options);
             }
         }
     }
