@@ -179,7 +179,7 @@ namespace BO4E.meta.LenientConverters
                 {
                     return dateTimeOffset.DateTime;
                 }
-                foreach ((var dtf, var asUniversal) in _allowedDatetimeFormats)
+                foreach (var (dtf, asUniversal) in _allowedDatetimeFormats)
                 {
                     if (DateTimeOffset.TryParseExact(rawDate, dtf, CultureInfo.InvariantCulture, asUniversal ? DateTimeStyles.AssumeUniversal : DateTimeStyles.None, out dateTimeOffset))
                     {
@@ -300,7 +300,7 @@ namespace BO4E.meta.LenientConverters
                 {
                     return dateTimeOffset;
                 }
-                foreach ((var dtf, var asUniversal) in _allowedDatetimeFormats)
+                foreach (var (dtf, asUniversal) in _allowedDatetimeFormats)
                 {
                     if (DateTimeOffset.TryParseExact(rawDate, dtf, CultureInfo.InvariantCulture, asUniversal ? DateTimeStyles.AssumeUniversal : DateTimeStyles.None, out dateTimeOffset))
                     {
@@ -422,7 +422,7 @@ namespace BO4E.meta.LenientConverters
                 {
                     return dateTimeOffset;
                 }
-                foreach ((var dtf, var asUniversal) in _allowedDatetimeFormats)
+                foreach (var (dtf, asUniversal) in _allowedDatetimeFormats)
                 {
                     if (DateTimeOffset.TryParseExact(rawDate, dtf, CultureInfo.InvariantCulture, asUniversal ? DateTimeStyles.AssumeUniversal : DateTimeStyles.None, out dateTimeOffset))
                     {
