@@ -12,9 +12,5 @@
         {
             NumberHandling = System.Text.Json.Serialization.JsonNumberHandling.AllowReadingFromString
         };
-        static Defaults()
-        {
-
-        }
     }
 }
