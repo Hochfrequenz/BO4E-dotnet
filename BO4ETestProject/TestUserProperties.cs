@@ -23,11 +23,8 @@ namespace TestBO4E
             Assert.AreEqual(123.456M, (decimal)(double)melo.UserProperties["myCustomValue"]);
         }
 
-        [TestMethod]
-        public void TestTryGetUserProperties()
+        private void _AssertUserProperties(Messlokation melo)
         {
-            var meloJson = @"{'messlokationsId': 'DE0123456789012345678901234567890', 'sparte': 'STROM', 'myCustomInfo': 'some_value_not_covered_by_bo4e', 'myCustomValue': 123.456, 'myNullProp': null}";
-            var melo = JsonConvert.DeserializeObject<Messlokation>(meloJson);
             Assert.IsTrue(melo.TryGetUserProperty("myCustomInfo", out string myCustomValue));
             Assert.AreEqual("some_value_not_covered_by_bo4e", myCustomValue);
             Assert.IsTrue(melo.UserPropertyEquals("myCustomValue", 123.456M));
@@ -45,6 +42,22 @@ namespace TestBO4E
             Assert.IsFalse(melo.TryGetUserProperty("there are no user properties", out string _));
             Assert.ThrowsException<ArgumentNullException>(() => melo.EvaluateUserProperty<string, bool, Messlokation>("there are no user properties", _ => default));
             Assert.IsFalse(melo.UserPropertyEquals("myNullProp", true));
+        }
+
+        private const string meloJson =@"{""messlokationsId"": ""DE0123456789012345678901234567890"", ""sparte"": ""STROM"", ""myCustomInfo"": ""some_value_not_covered_by_bo4e"", ""myCustomValue"": 123.456, ""myNullProp"": null}";
+
+        [TestMethod]
+        public void TestTryGetUserProperties()
+        { 
+            var melo = JsonConvert.DeserializeObject<Messlokation>(meloJson);
+            _AssertUserProperties(melo);
+        }
+
+        [TestMethod]
+        public void TestTryGetUserPropertiesNet5()
+        {
+            var melo = System.Text.Json.JsonSerializer.Deserialize<Messlokation>(meloJson);
+           _AssertUserProperties(melo);
         }
 
         [TestMethod]
