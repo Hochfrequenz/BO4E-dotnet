@@ -1,12 +1,12 @@
 ﻿
 
+using BO4E.BO;
+using BO4E.COM;
+
 using System;
 using System.Collections.Generic;
 using System.Text.Json;
 using System.Text.Json.Serialization;
-
-using BO4E.BO;
-using BO4E.COM;
 
 namespace BO4E.meta.LenientConverters
 {
@@ -43,6 +43,7 @@ namespace BO4E.meta.LenientConverters
             settings.Converters.Add(new EnergiemengeConverter());
             settings.Converters.Add(new VerbrauchConverter());
             settings.Converters.Add(new LenientSystemTextJsonStringToBoolConverter());
+            settings.Converters.Add(new StringNullableEnumConverter());
             settings.Converters.Add(new JsonStringEnumConverter());
             foreach (LenientParsing lp in Enum.GetValues(typeof(LenientParsing)))
             {
