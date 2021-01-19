@@ -102,15 +102,29 @@ namespace BO4E.meta.LenientConverters
             {
                 return _converter.Read(ref reader, _underlyingType, options);
             }
+            if (reader.TokenType == JsonTokenType.Null)
+                return default(T);
+            if (reader.TokenType == JsonTokenType.String)
+            {
+                string value = reader.GetString();
+                if (string.IsNullOrEmpty(value)) return default;
+                // for performance, parse with ignoreCase:false first.
+                try
+                {
+                    var result = Enum.Parse(_underlyingType, value);
+                    return (T)result;
+                }
+                catch (Exception)
+                {
+                    return default(T);
+                }
+            }
+            else if (reader.TokenType == JsonTokenType.Number)
+            {
+                return (T)Enum.ToObject(_underlyingType, reader.GetInt32());
+            }
+            return default(T);
 
-            string value = reader.GetString();
-
-            if (string.IsNullOrEmpty(value)) return default;
-
-            // for performance, parse with ignoreCase:false first.
-            var result = Enum.Parse(_underlyingType, value);
-
-            return (T)result;
         }
         /// <summary>
         /// Write to the json writer <see cref="System.Text.Json.Serialization.JsonConverter{T}.Write(Utf8JsonWriter, T, JsonSerializerOptions)"/>
