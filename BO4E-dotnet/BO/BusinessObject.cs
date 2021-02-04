@@ -1,10 +1,3 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Reflection;
-
 using BO4E.COM;
 using BO4E.meta;
 
@@ -15,6 +8,13 @@ using Newtonsoft.Json.Schema.Generation;
 using Newtonsoft.Json.Serialization;
 
 using ProtoBuf;
+
+using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.Linq;
+using System.Reflection;
 
 namespace BO4E.BO
 {
@@ -599,7 +599,11 @@ namespace BO4E.BO
                 if (typeToConvert.IsAbstract)
                 {
                     var jdoc = System.Text.Json.JsonDocument.ParseValue(ref reader);
-                    var boTypeString = jdoc.RootElement.GetProperty("boTyp").GetString();
+                    if (!jdoc.RootElement.TryGetProperty("BoTyp", out var boTypeProp))
+                    {
+                        boTypeProp = jdoc.RootElement.GetProperty("boTyp");
+                    }
+                    var boTypeString = boTypeProp.GetString();
 #pragma warning disable CS0618 // Type or member is obsolete
                     var boType = BoMapper.GetTypeForBoName(boTypeString);
 #pragma warning restore CS0618 // Type or member is obsolete
