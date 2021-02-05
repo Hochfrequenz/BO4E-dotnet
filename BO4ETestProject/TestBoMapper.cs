@@ -226,9 +226,8 @@ namespace TestBO4E
         
 
         [TestMethod]
-        public void TestProfDecimalsEnergiemengeBug()
+        public void TestProfDecimalsEnergiemengeBugNewtonsoft()
         {
-            // first test serialization of complete business object
             JObject json;
             using (var r = new StreamReader("BoMapperTests/energiemenge_profdecimal_em_bug.json"))
             {
@@ -239,7 +238,23 @@ namespace TestBO4E
             Assert.AreEqual(1.375000M, em.Energieverbrauch.First().Wert);
             Assert.AreEqual(1.2130000M, em.Energieverbrauch.Last().Wert);
         }
-
+        
+        [TestMethod]
+        public void TestProfDecimalsEnergiemengeBug()
+        {
+            JsonDocument json;
+            using (var r = new StreamReader("BoMapperTests/energiemenge_profdecimal_em_bug.json"))
+            {
+                var jsonString = r.ReadToEnd();
+                json = JsonDocument.Parse(jsonString);
+            }
+            var jsonInput = System.Text.Json.JsonSerializer.Serialize(json.RootElement.GetProperty("input"));
+            var em = System.Text.Json.JsonSerializer.Deserialize<Energiemenge>(jsonInput, LenientParsing.MOST_LENIENT.GetJsonSerializerOptions());
+            Assert.IsNotNull(em);
+            Assert.AreEqual(1.375000M, em.Energieverbrauch.First().Wert);
+            Assert.AreEqual(1.2130000M, em.Energieverbrauch.Last().Wert);
+        }
+        
         [TestMethod]
         public void TestSapTimeZoneUserProperties()
         {
