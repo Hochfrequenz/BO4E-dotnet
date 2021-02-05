@@ -1,9 +1,6 @@
 ﻿using BO4E.BO;
-
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-
 using Newtonsoft.Json.Schema;
-
 using System;
 using System.IO;
 using System.Linq;
@@ -30,7 +27,8 @@ namespace TestBO4E
         [TestMethod]
         public void NegativeTest()
         {
-            Assert.ThrowsException<ArgumentException>(() => BusinessObject.GetJsonSchema(typeof(string)), "Illegal types must result in a ArgumentException.");
+            Assert.ThrowsException<ArgumentException>(() => BusinessObject.GetJsonSchema(typeof(string)),
+                "Illegal types must result in a ArgumentException.");
         }
 
         [TestMethod]
@@ -38,7 +36,8 @@ namespace TestBO4E
         {
             try
             {
-                foreach (var type in typeof(BusinessObject).Assembly.GetTypes().Where(t => t.IsSubclassOf(typeof(BusinessObject))).Reverse())
+                foreach (var type in typeof(BusinessObject).Assembly.GetTypes()
+                    .Where(t => t.IsSubclassOf(typeof(BusinessObject))).Reverse())
                 {
                     var schema = BusinessObject.GetJsonSchema(type);
                     Assert.IsNotNull(schema);
@@ -48,6 +47,7 @@ namespace TestBO4E
                         var stream = File.Create(path);
                         stream.Close();
                     }
+
                     File.WriteAllText(path, schema.ToString(SchemaVersion.Draft7), Encoding.UTF8);
                 }
             }

@@ -14,22 +14,27 @@ namespace TestBO4E
         {
             [FieldName("internal_english", Language.EN)]
             public string InternDeutsch;
+
             [FieldName("int_english", Language.EN)]
             public int IntDeutsch;
+
             [FieldName("bool_english", Language.EN)]
             public bool BoolDeutsch;
         }
+
         public class MultiLangBo : BusinessObject
         {
             [FieldName("date_english", Language.EN)]
             public DateTimeOffset DatumDeutsch;
+
             [FieldName("value_english", Language.EN)]
             public string WertDeutsch;
+
             [FieldName("internal Object", Language.EN)]
             public NestedObject Intern;
+
             [FieldName("internal Object List", Language.EN)]
             public List<NestedObject> InternList;
-
         }
 
         [TestMethod]
@@ -74,9 +79,9 @@ namespace TestBO4E
                 },
                 InternList = new List<NestedObject>
                 {
-                    new NestedObject {BoolDeutsch=false,IntDeutsch=10,InternDeutsch="internalList1"},
-                    new NestedObject {BoolDeutsch=false,IntDeutsch=35,InternDeutsch="internalList2"},
-                    new NestedObject {BoolDeutsch=true,IntDeutsch=1200,InternDeutsch="internalList3"}
+                    new NestedObject {BoolDeutsch = false, IntDeutsch = 10, InternDeutsch = "internalList1"},
+                    new NestedObject {BoolDeutsch = false, IntDeutsch = 35, InternDeutsch = "internalList2"},
+                    new NestedObject {BoolDeutsch = true, IntDeutsch = 1200, InternDeutsch = "internalList3"}
                 }
             };
             var settings = new JsonSerializerSettings
@@ -128,6 +133,5 @@ namespace TestBO4E
         //        var json = JsonConvert.SerializeObject(rechnung, settings);
         //    }
         //}
-
     }
 }
