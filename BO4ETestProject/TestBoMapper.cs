@@ -146,7 +146,6 @@ namespace TestBO4E
         [TestMethod]
         public void TestSummerTimeBug()
         {
-            // first test serialization of complete business object
             JObject json;
             using (var r = new StreamReader("BoMapperTests/energiemenge_sommerzeit_bug.json"))
             {
@@ -163,7 +162,6 @@ namespace TestBO4E
         [TestMethod]
         public void TestVertragStringToIntNewtonsoft()
         {
-            // first test serialization of complete business object
             JObject json;
             using (var r = new StreamReader("BoMapperTests/Vertrag_lenient_String.json"))
             {
@@ -178,7 +176,6 @@ namespace TestBO4E
         [TestMethod]
         public void TestVertragStringToInt()
         {
-            // first test serialization of complete business object
             JsonDocument json;
             using (var r = new StreamReader("BoMapperTests/Vertrag_lenient_String.json"))
             {
@@ -194,7 +191,6 @@ namespace TestBO4E
         [TestMethod]
         public void TestProfDecimalsVerbrauchBugNewtonsoft()
         {
-            // first test serialization of complete business object
             JObject json;
             using (var r = new StreamReader("BoMapperTests/energiemenge_profdecimal_verbrauch_bug.json"))
             {
@@ -212,7 +208,6 @@ namespace TestBO4E
         [TestMethod]
         public void TestProfDecimalsVerbrauchBug()
         {
-            // first test serialization of complete business object
             JsonDocument json;
             using (var r = new StreamReader("BoMapperTests/energiemenge_profdecimal_verbrauch_bug.json"))
             {
@@ -221,6 +216,7 @@ namespace TestBO4E
             }
             var jsonInput = System.Text.Json.JsonSerializer.Serialize(json.RootElement.GetProperty("input"));
             var em = System.Text.Json.JsonSerializer.Deserialize<Energiemenge>(jsonInput, LenientParsing.MOST_LENIENT.GetJsonSerializerOptions());
+            Assert.IsNotNull(em);
             Assert.AreEqual(4, em.Energieverbrauch.Count);
             Assert.AreEqual(59.0M, em.Energieverbrauch[0].Wert);
             Assert.AreEqual(58.0M, em.Energieverbrauch[1].Wert);
