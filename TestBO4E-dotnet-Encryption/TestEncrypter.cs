@@ -4,6 +4,7 @@ using System.IO;
 using System.Security.Cryptography.X509Certificates;
 
 using BO4E.BO;
+using BO4E.BO.LogObject;
 using BO4E.Extensions.Encryption;
 
 using Microsoft.VisualStudio.TestTools.UnitTesting;

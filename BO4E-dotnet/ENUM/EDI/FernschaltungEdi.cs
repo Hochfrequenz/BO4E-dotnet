@@ -1,6 +1,6 @@
 using BO4E.meta;
 
-namespace BO4E.ENUM
+namespace BO4E.ENUM.EDI
 {
     /// <summary>
     /// Fernschaltung
