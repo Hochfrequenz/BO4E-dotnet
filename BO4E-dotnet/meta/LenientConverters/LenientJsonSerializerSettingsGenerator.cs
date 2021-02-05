@@ -7,9 +7,10 @@ using System.Collections.Generic;
 namespace BO4E.meta.LenientConverters
 {
     /// <summary>
-    /// Extensions to simplify the usage of the Lenient parser
+    /// Extensions to simplify the usage of the Lenient parser for <see cref="Newtonsoft.Json.JsonSerializer"/> (newtonsoft)
     /// </summary>
-    public static class LenientParsingExtensions
+    /// <seealso cref="BO4E.meta.LenientConverters.LenientSystemTextJsonParsingExtensions"/>
+    public static class LenientParsingExtensionsNewtonsoft
     {
         /// <summary>
         /// <inheritdoc cref="GetJsonSerializerSettings(LenientParsing, HashSet{string})"/>
@@ -22,7 +23,7 @@ namespace BO4E.meta.LenientConverters
         }
 
         /// <summary>
-        /// Generates JsonSerializerSettings for given lenient parsing setting
+        /// Generates <see cref="Newtonsoft.Json.JsonSerializerSettings"/> (Newtonsoft) for given lenient parsing setting
         /// </summary>
         /// <param name="lenient"></param>
         /// <param name="userPropertiesWhiteList"></param>
@@ -62,8 +63,8 @@ namespace BO4E.meta.LenientConverters
                     }
                 }
             }
-            IContractResolver contractResolver;
-            contractResolver = userPropertiesWhiteList.Count > 0 ? new UserPropertiesDataContractResolver(userPropertiesWhiteList) : new DefaultContractResolver();
+
+            IContractResolver contractResolver = userPropertiesWhiteList.Count > 0 ? new UserPropertiesDataContractResolver(userPropertiesWhiteList) : new DefaultContractResolver();
             var settings = new JsonSerializerSettings
             {
                 Converters = converters,

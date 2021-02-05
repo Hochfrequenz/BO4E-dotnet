@@ -1,8 +1,5 @@
-﻿
-
-using BO4E.BO;
+﻿using BO4E.BO;
 using BO4E.COM;
-
 using System;
 using System.Collections.Generic;
 using System.Text.Json;
@@ -11,8 +8,9 @@ using System.Text.Json.Serialization;
 namespace BO4E.meta.LenientConverters
 {
     /// <summary>
-    /// Extensions to simplify the usage of the Lenient parser
+    /// Extensions to simplify the usage of the Lenient parser using <see cref="System.Text.Json.JsonSerializer"/> (.NET5)
     /// </summary>
+    /// <seealso cref="LenientParsingExtensionsNewtonsoft"/>
     public static class LenientSystemTextJsonParsingExtensions
     {
         /// <summary>
@@ -26,12 +24,13 @@ namespace BO4E.meta.LenientConverters
         }
 
         /// <summary>
-        /// Generates JsonSerializerSettings for given lenient parsing setting
+        /// Generates JsonSerializerSettings (.NET5) for given lenient parsing setting
         /// </summary>
         /// <param name="lenient"></param>
         /// <param name="userPropertiesWhiteList"></param>
         /// <returns></returns>
-        public static JsonSerializerOptions GetJsonSerializerOptions(this LenientParsing lenient, HashSet<string> userPropertiesWhiteList)
+        public static JsonSerializerOptions GetJsonSerializerOptions(this LenientParsing lenient,
+            HashSet<string> userPropertiesWhiteList)
         {
             var settings = new JsonSerializerOptions
             {
@@ -62,11 +61,16 @@ namespace BO4E.meta.LenientConverters
                             }
                             else
                             {
-                                settings.Converters.Add(new LenientSystemTextJsonDateTimeConverter(new DateTimeOffset()));
-                                settings.Converters.Add(new LenientSystemTextJsonNullableDateTimeConverter(new DateTimeOffset()));
-                                settings.Converters.Add(new LenientSystemTextJsonDateTimeOffsetConverter(new DateTimeOffset()));
-                                settings.Converters.Add(new LenientSystemTextJsonNullableDateTimeOffsetConverter(new DateTimeOffset()));
+                                settings.Converters.Add(
+                                    new LenientSystemTextJsonDateTimeConverter(new DateTimeOffset()));
+                                settings.Converters.Add(
+                                    new LenientSystemTextJsonNullableDateTimeConverter(new DateTimeOffset()));
+                                settings.Converters.Add(
+                                    new LenientSystemTextJsonDateTimeOffsetConverter(new DateTimeOffset()));
+                                settings.Converters.Add(
+                                    new LenientSystemTextJsonNullableDateTimeOffsetConverter(new DateTimeOffset()));
                             }
+
                             break;
 
                         case LenientParsing.ENUM_LIST:
@@ -80,11 +84,11 @@ namespace BO4E.meta.LenientConverters
                         case LenientParsing.STRING_TO_INT:
                             settings.Converters.Add(new LenientSystemTextJsonStringToIntConverter());
                             break;
-                            // case LenientParsing.EmptyLists:
-                            // converters.Add(new LenientRequiredListConverter());
-                            // break;
+                        // case LenientParsing.EmptyLists:
+                        // converters.Add(new LenientRequiredListConverter());
+                        // break;
 
-                            // no default case because NONE and MOST_LENIENT do not come up with more converters
+                        // no default case because NONE and MOST_LENIENT do not come up with more converters
                     }
                 }
             }
