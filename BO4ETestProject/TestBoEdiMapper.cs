@@ -1,13 +1,9 @@
 ﻿using BO4E;
 using BO4E.BO;
-
 using JsonDiffPatchDotNet;
-
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
-
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -17,7 +13,9 @@ namespace TestBO4E
     [TestClass]
     public class TestBoEdiMapper
     {
-        private readonly Dictionary<string, Dictionary<string, string>> expectedResults = new Dictionary<string, Dictionary<string, string>>();
+        private readonly Dictionary<string, Dictionary<string, string>> expectedResults =
+            new Dictionary<string, Dictionary<string, string>>();
+
         public TestBoEdiMapper()
         {
             // all in all very similar to EdiBoMapper...
@@ -25,7 +23,7 @@ namespace TestBO4E
             {
                 {"NSP", "E06"}, // BO4E -> EDI (power)
                 {"E05", "E05"}, // EDI preserving
-                {"MD", "Y02" } // EDI -> BO4E (gas)
+                {"MD", "Y02"} // EDI -> BO4E (gas)
             });
             expectedResults.Add("Zaehlerauspraegung", new Dictionary<string, string>
             {
@@ -47,6 +45,7 @@ namespace TestBO4E
                 {"MESSUNG", "220"}
             });
         }
+
         [TestMethod]
         public void TestSimpleEnums()
         {
@@ -84,8 +83,10 @@ namespace TestBO4E
                     var jsonString = r.ReadToEnd();
                     json = JsonConvert.DeserializeObject<JObject>(jsonString);
                 }
+
                 Assert.IsNotNull(json["input"], $"You have to specify an 'input' in test file {file}");
-                Assert.IsNotNull(json["expectedResult"], $"You have to specify an 'expectedOutput' in test file {file}");
+                Assert.IsNotNull(json["expectedResult"],
+                    $"You have to specify an 'expectedOutput' in test file {file}");
                 BusinessObject bo;
                 try
                 {
@@ -93,8 +94,9 @@ namespace TestBO4E
                 }
                 catch (ArgumentException)
                 {
-                    bo = BoMapper.MapObject(json["input"]["boTyp"].ToString(), (JObject)json["input"]);
+                    bo = BoMapper.MapObject(json["input"]["boTyp"].ToString(), (JObject) json["input"]);
                 }
+
                 var result = BoEdiMapper.ReplaceWithEdiValues(bo);
                 //JObject result = JsonConvert.DeserializeObject<JObject>(JsonConvert.SerializeObject(, new StringEnumConverter()));
                 var jdp = new JsonDiffPatch();
@@ -104,13 +106,17 @@ namespace TestBO4E
                 var additionalMessage = string.Empty;
                 if (patch != null)
                 {
-                    additionalMessage = $";\r\n Diff: { patch}";
+                    additionalMessage = $";\r\n Diff: {patch}";
                 }
+
                 try
                 {
                     Assert.IsNull(patch, additionalMessage);
                 }
-                catch (AssertFailedException) when (patch != null && additionalMessage.Contains("HGAS") && additionalMessage.Contains("H_GAS")) { }
+                catch (AssertFailedException) when (patch != null && additionalMessage.Contains("HGAS") &&
+                                                    additionalMessage.Contains("H_GAS"))
+                {
+                }
             }
         }
     }
