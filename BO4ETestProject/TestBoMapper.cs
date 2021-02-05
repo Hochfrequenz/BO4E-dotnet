@@ -333,13 +333,25 @@ namespace TestBO4E
         */
 
         [TestMethod]
-        public void TestNullableDateTimeDeserialization()
+        public void TestNullableDateTimeDeserializationNewtonsoft()
         {
             var a = JsonConvert.DeserializeObject<Aufgabe>("{\"ccat\":\"ZE01\",\"casenr\":\"470272\",\"objtype\":\"ZISUPROFIL\",\"aufgabenId\":\"REIMPORT\",\"ausgefuehrt\":\"false\",\"ausfuehrender\":\"\",\"ausfuehrungszeitpunkt\":\"0000-00-00T00:00:00Z\"}");
             Assert.IsNotNull(a);
             Assert.IsFalse(a.Ausfuehrungszeitpunkt.HasValue);
 
             var b = JsonConvert.DeserializeObject<Aufgabe>("{\"ccat\":\"ZE01\",\"casenr\":\"470272\",\"objtype\":\"ZISUPROFIL\",\"aufgabenId\":\"REIMPORT\",\"ausgefuehrt\":\"false\",\"ausfuehrender\":\"\",\"ausfuehrungszeitpunkt\":\"2019-07-10T11:52:59Z\"}");
+            Assert.IsNotNull(b);
+            Assert.IsTrue(b.Ausfuehrungszeitpunkt.HasValue);
+        }
+        
+        [TestMethod]
+        public void TestNullableDateTimeDeserialization()
+        {
+            var a = System.Text.Json.JsonSerializer.Deserialize<Aufgabe>("{\"ccat\":\"ZE01\",\"casenr\":\"470272\",\"objtype\":\"ZISUPROFIL\",\"aufgabenId\":\"REIMPORT\",\"ausgefuehrt\":\"false\",\"ausfuehrender\":\"\",\"ausfuehrungszeitpunkt\":\"0000-00-00T00:00:00Z\"}");
+            Assert.IsNotNull(a);
+            Assert.IsFalse(a.Ausfuehrungszeitpunkt.HasValue);
+
+            var b = System.Text.Json.JsonSerializer.Deserialize<Aufgabe>("{\"ccat\":\"ZE01\",\"casenr\":\"470272\",\"objtype\":\"ZISUPROFIL\",\"aufgabenId\":\"REIMPORT\",\"ausgefuehrt\":\"false\",\"ausfuehrender\":\"\",\"ausfuehrungszeitpunkt\":\"2019-07-10T11:52:59Z\"}");
             Assert.IsNotNull(b);
             Assert.IsTrue(b.Ausfuehrungszeitpunkt.HasValue);
         }
