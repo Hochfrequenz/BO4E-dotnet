@@ -3,6 +3,7 @@ using BO4E.BO;
 using BO4E.COM;
 using BO4E.meta;
 using BO4E.meta.LenientConverters;
+
 //using BO4E.Extensions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
@@ -14,6 +15,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Text.Json;
 
 namespace TestBO4E
 {
@@ -159,7 +161,7 @@ namespace TestBO4E
         }
 
         [TestMethod]
-        public void TestVertragStringToInt()
+        public void TestVertragStringToIntNewtonsoft()
         {
             // first test serialization of complete business object
             JObject json;
@@ -168,13 +170,29 @@ namespace TestBO4E
                 var jsonString = r.ReadToEnd();
                 json = JsonConvert.DeserializeObject<JObject>(jsonString);
             }
-            var lenients = LenientParsing.STRING_TO_INT;
+            const LenientParsing lenients = LenientParsing.STRING_TO_INT;
             var v = JsonConvert.DeserializeObject<Vertrag>(json["input"].ToString(), lenients.GetJsonSerializerSettings());
+            Assert.AreEqual(v.Vertragskonditionen.AnzahlAbschlaege, 12);
+        }
+        
+        [TestMethod]
+        public void TestVertragStringToInt()
+        {
+            // first test serialization of complete business object
+            JsonDocument json;
+            using (var r = new StreamReader("BoMapperTests/Vertrag_lenient_String.json"))
+            {
+                var jsonString = r.ReadToEnd();
+                json = JsonDocument.Parse(jsonString);
+            }
+            const LenientParsing lenients = LenientParsing.STRING_TO_INT;
+            var jsonInput = System.Text.Json.JsonSerializer.Serialize(json.RootElement.GetProperty("input"));
+            var v = System.Text.Json.JsonSerializer.Deserialize<Vertrag>(jsonInput, lenients.GetJsonSerializerOptions());
             Assert.AreEqual(v.Vertragskonditionen.AnzahlAbschlaege, 12);
         }
 
         [TestMethod]
-        public void TestProfDecimalsVerbrauchBug()
+        public void TestProfDecimalsVerbrauchBugNewtonsoft()
         {
             // first test serialization of complete business object
             JObject json;
@@ -190,6 +208,26 @@ namespace TestBO4E
             Assert.AreEqual(57.0M, em.Energieverbrauch[2].Wert);
             Assert.AreEqual(57.123M, em.Energieverbrauch[3].Wert);
         }
+        
+        [TestMethod]
+        public void TestProfDecimalsVerbrauchBug()
+        {
+            // first test serialization of complete business object
+            JsonDocument json;
+            using (var r = new StreamReader("BoMapperTests/energiemenge_profdecimal_verbrauch_bug.json"))
+            {
+                var jsonString = r.ReadToEnd();
+                json = JsonDocument.Parse(jsonString);
+            }
+            var jsonInput = System.Text.Json.JsonSerializer.Serialize(json.RootElement.GetProperty("input"));
+            var em = System.Text.Json.JsonSerializer.Deserialize<Energiemenge>(jsonInput, LenientParsing.MOST_LENIENT.GetJsonSerializerOptions());
+            Assert.AreEqual(4, em.Energieverbrauch.Count);
+            Assert.AreEqual(59.0M, em.Energieverbrauch[0].Wert);
+            Assert.AreEqual(58.0M, em.Energieverbrauch[1].Wert);
+            Assert.AreEqual(57.0M, em.Energieverbrauch[2].Wert);
+            Assert.AreEqual(57.123M, em.Energieverbrauch[3].Wert);
+        }
+        
 
         [TestMethod]
         public void TestProfDecimalsEnergiemengeBug()
