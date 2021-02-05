@@ -1,6 +1,4 @@
-﻿
-
-using System;
+﻿using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -18,7 +16,9 @@ namespace BO4E.meta.LenientConverters
         /// <summary>
         /// 
         /// </summary>
-        public LenientSystemTextJsonEnumListConverter() { }
+        public LenientSystemTextJsonEnumListConverter()
+        {
+        }
 
         /// <summary>
         /// 
@@ -31,13 +31,16 @@ namespace BO4E.meta.LenientConverters
             {
                 return false;
             }
+
             if (typeToConvert.GetGenericTypeDefinition() != typeof(List<>))
             {
                 return false;
             }
+
             var expectedListElementType = typeToConvert.GetGenericArguments()[0];
             return expectedListElementType.ToString().StartsWith("BO4E.ENUM");
         }
+
         /// <summary>
         /// 
         /// </summary>
@@ -46,8 +49,9 @@ namespace BO4E.meta.LenientConverters
         /// <returns></returns>
         public override JsonConverter CreateConverter(Type typeToConvert, JsonSerializerOptions options)
         {
-            JsonConverter converter = (JsonConverter)Activator.CreateInstance(
-                typeof(LenientSystemTextJsonEnumListConverter<,>).MakeGenericType(typeToConvert, typeToConvert.GetGenericArguments().First()),
+            JsonConverter converter = (JsonConverter) Activator.CreateInstance(
+                typeof(LenientSystemTextJsonEnumListConverter<,>).MakeGenericType(typeToConvert,
+                    typeToConvert.GetGenericArguments().First()),
                 BindingFlags.Instance | BindingFlags.Public,
                 binder: null,
                 args: null,
@@ -56,11 +60,12 @@ namespace BO4E.meta.LenientConverters
             return converter;
         }
     }
+
     /// <summary>
     /// allows to deserialize a list of enums (see tests)
     /// </summary>
-    public class LenientSystemTextJsonEnumListConverter<T, E> : JsonConverter<T>
-         where T : List<E> where E : struct, Enum
+    public class LenientSystemTextJsonEnumListConverter<T, TE> : JsonConverter<T>
+        where T : List<TE> where TE : struct, Enum
     {
         /// <inheritdoc cref=" JsonConverter.CanConvert(Type)"/>
         public override bool CanConvert(Type objectType)
@@ -69,13 +74,16 @@ namespace BO4E.meta.LenientConverters
             {
                 return false;
             }
+
             if (objectType.GetGenericTypeDefinition() != typeof(List<>))
             {
                 return false;
             }
+
             var expectedListElementType = objectType.GetGenericArguments()[0];
             return expectedListElementType.ToString().StartsWith("BO4E.ENUM");
         }
+
         /// <summary>
         /// 
         /// </summary>
@@ -93,38 +101,40 @@ namespace BO4E.meta.LenientConverters
             {
                 return result as T;
             }
+
             // First try to parse the List normally, in case it's formatted as expected
             foreach (var rawItem in rawList)
             {
                 switch (rawItem)
                 {
-                    case object _ when Enum.TryParse<E>(rawItem.ToString(), out E enumResult):
-                        {
-                            // default. everything is as it should be :-)
+                    case object _ when Enum.TryParse(rawItem.ToString(), out TE enumResult):
+                    {
+                        // default. everything is as it should be :-)
 
-                            ((IList)result).Add(enumResult);
-                            break;
-                        }
+                        ((IList) result).Add(enumResult);
+                        break;
+                    }
                     case JsonElement element:
                         try
                         {
                             var rawDict = JsonSerializer.Deserialize<Dictionary<string, object>>(element.GetRawText());
                             var rawObject = rawDict.Values.FirstOrDefault();
                             var enumValue = Enum.Parse(expectedListElementType, rawObject.ToString());
-                            ((IList)result).Add(enumValue);
+                            ((IList) result).Add(enumValue);
                         }
                         catch (Exception)
                         {
                             var enumValue = Enum.Parse(expectedListElementType, element.GetString());
-                            ((IList)result).Add(enumValue);
+                            ((IList) result).Add(enumValue);
                         }
 
                         break;
                     default:
-                        ((IList)result).Add(rawItem);
+                        ((IList) result).Add(rawItem);
                         break;
                 }
             }
+
             return result as T;
         }
 
@@ -141,8 +151,9 @@ namespace BO4E.meta.LenientConverters
                 writer.WriteStartArray();
                 foreach (var val in value)
                 {
-                    JsonSerializer.Serialize(writer, val, typeof(E), options);
+                    JsonSerializer.Serialize(writer, val, typeof(TE), options);
                 }
+
                 writer.WriteEndArray();
             }
             else
