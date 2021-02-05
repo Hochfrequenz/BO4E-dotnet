@@ -80,7 +80,7 @@ namespace TestBO4E
         }
 
         /// <summary>
-        /// similar to <see cref="TestMaLoDeserialization"/> but with .NET5
+        /// similar to <see cref="TestMaLoDeserializationNewtonsoft"/> but with .NET5
         /// </summary>
         [TestMethod]
         public void TestMaLoDeserializationNet5()
