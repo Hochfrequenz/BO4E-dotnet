@@ -6,6 +6,7 @@ using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 
 using System.IO;
+using System.Text.Json;
 using JsonSerializer = System.Text.Json.JsonSerializer;
 
 namespace TestBO4E
@@ -13,8 +14,12 @@ namespace TestBO4E
     [TestClass]
     public class TestAbstractDeserialization
     {
+        /// <summary>
+        /// Tests Abstract Deserialization using Newtonsoft.Json
+        /// </summary>
+        /// <seealso cref="TestAbstractDeserializationSystemText"/>
         [TestMethod]
-        public void TestMaLoDeserialization()
+        public void TestMaLoDeserializationNewtonsoft()
         {
             JObject json;
             using (var r = new StreamReader("BoMapperTests/marktlokation_simple.json"))
@@ -26,6 +31,29 @@ namespace TestBO4E
             var malo = JsonConvert.DeserializeObject<Marktlokation>(maloString);
             Assert.IsNotNull(malo);
             var bo = JsonConvert.DeserializeObject<BusinessObject>(maloString);
+            Assert.IsNotNull(bo);
+            Assert.IsInstanceOfType(bo, typeof(Marktlokation));
+        }
+
+        /// <summary>
+        /// Tests Abstract Deserialization using System.Text
+        /// </summary>
+        /// <seealso cref="TestMaLoDeserializationNewtonsoft"/>
+        [TestMethod]
+        public void TestMaLoDeserializationSystemText()
+        {
+            JsonDocument json;
+            using (var r = new StreamReader("BoMapperTests/marktlokation_simple.json"))
+            {
+                var jsonString = r.ReadToEnd();
+                json = JsonDocument.Parse(jsonString);
+            }
+
+            var maloString = JsonSerializer.Serialize(json.RootElement.GetProperty("input"));
+            Assert.IsNotNull(maloString);
+            var malo =  System.Text.Json.JsonSerializer.Deserialize<Marktlokation>(maloString);
+            Assert.IsNotNull(malo);
+            var bo = JsonSerializer.Deserialize<BusinessObject>(maloString);
             Assert.IsNotNull(bo);
             Assert.IsInstanceOfType(bo, typeof(Marktlokation));
         }
