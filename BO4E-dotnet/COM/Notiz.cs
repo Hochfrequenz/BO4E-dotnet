@@ -32,25 +32,28 @@ namespace BO4E.COM
         [ProtoMember(4)]
         public DateTimeOffset Zeitpunkt { get; set; }
 
+
+        private string _inhalt;
+        
         /// <summary>
         /// Inhalt der Notiz (Freitext)
         /// </summary>
         [JsonProperty(PropertyName = "inhalt", Required = Required.Always, Order = 5)]
+        [System.Text.Json.Serialization.JsonPropertyName("inhalt")]
         [ProtoMember(5)]
-        public string Inhalt { get; set; }
-
-
-        [JsonIgnore]
-        private static readonly Regex TrailingMinusRegex = new Regex(@"(?:\\n|\n)?-*$", RegexOptions.Compiled);
+        public string Inhalt
+        {
+            get => _inhalt;
+            set
+            {
+                this._inhalt = TrailingMinusRegex.Replace(value, string.Empty);
+            }
+        }
 
         /// <summary>
         /// method remove trailing minuses ('----') from notiz content. Those are artefact from SAPs internal note structure 
         /// </summary>
-        /// <param name="context"></param>
-        [OnDeserialized]
-        public void CleanUpSapNotes(StreamingContext context)
-        {
-            Inhalt = TrailingMinusRegex.Replace(Inhalt, string.Empty);
-        }
+        [JsonIgnore]
+        private static readonly Regex TrailingMinusRegex = new Regex(@"\r?(?:\\n|\n)?-*$", RegexOptions.Compiled);
     }
 }

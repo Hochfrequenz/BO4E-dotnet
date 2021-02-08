@@ -20,7 +20,7 @@ namespace TestBO4E
         public void TestMinusRemoval()
         {
             var n = System.Text.Json.JsonSerializer.Deserialize<Notiz>(
-                "{\"klaerfallnummer\":\"468982\",\"autor\":\"Max Mustermann\",\"zeitpunkt\":\"2019-05-24T14:05:00Z\",\"inhalt\":\"hallo. das ist eine notiz mit einem lustigen emoji 🥝\n------------------------------------------------------------------------\",\"tdid\":\"0002\",\"tdname\":\"0000468982\",\"tdobject\":\"EMMA_CASE\"}");
+                "{\"klaerfallnummer\":\"468982\",\"autor\":\"Max Mustermann\",\"zeitpunkt\":\"2019-05-24T14:05:00Z\",\"inhalt\":\"hallo. das ist eine notiz mit einem lustigen emoji 🥝\\n------------------------------------------------------------------------\",\"tdid\":\"0002\",\"tdname\":\"0000468982\",\"tdobject\":\"EMMA_CASE\"}");
             Assert.IsNotNull(n);
             Assert.AreEqual("hallo. das ist eine notiz mit einem lustigen emoji 🥝", n.Inhalt);
         }
