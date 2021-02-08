@@ -1,12 +1,11 @@
-﻿using System;
-using System.Runtime.Serialization;
-using System.Text.RegularExpressions;
-
-using BO4E.meta;
+﻿using BO4E.meta;
 
 using Newtonsoft.Json;
 
 using ProtoBuf;
+
+using System;
+using System.Text.RegularExpressions;
 
 namespace BO4E.COM
 {
@@ -38,13 +37,12 @@ namespace BO4E.COM
 
 
         private string _inhalt;
-        
+
         /// <summary>
         /// Inhalt der Notiz (Freitext)
         /// </summary>
         [JsonProperty(PropertyName = "inhalt", Required = Required.Always, Order = 5)]
 
-        [System.Text.Json.Serialization.JsonPropertyName("inhalt")]
         [System.Text.Json.Serialization.JsonPropertyName("inhalt")]
         [ProtoMember(5)]
         public string Inhalt
