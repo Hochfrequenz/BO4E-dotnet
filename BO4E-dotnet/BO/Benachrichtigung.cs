@@ -26,6 +26,8 @@ namespace BO4E.BO
         /// Entspricht z.B. der Klärfallnummer in einem SAP-System oder der Task-ID im Salesforce
         /// </summary>
         [JsonProperty(Required = Required.Always, Order = 4, PropertyName = "benachrichtigungsId")]
+
+        [System.Text.Json.Serialization.JsonPropertyName("benachrichtigungsId")]
         [ProtoMember(4)]
         [BoKey]
         public string BenachrichtigungsId { get; set; }
@@ -35,6 +37,8 @@ namespace BO4E.BO
         /// </summary>
         [DefaultValue(Prioritaet.NORMAL)]
         [JsonProperty(Required = Required.Always, Order = 5, PropertyName = "prioritaet")]
+
+        [System.Text.Json.Serialization.JsonPropertyName("prioritaet")]
         [ProtoMember(5)]
         public Prioritaet Prioritaet { get; set; }
 
@@ -43,6 +47,8 @@ namespace BO4E.BO
         /// </summary>
         [DefaultValue(Bearbeitungsstatus.OFFEN)]
         [JsonProperty(Required = Required.Always, Order = 6, PropertyName = "bearbeitungsstatus")]
+
+        [System.Text.Json.Serialization.JsonPropertyName("bearbeitungsstatus")]
         [ProtoMember(6)]
         public Bearbeitungsstatus Bearbeitungsstatus { get; set; }
 
@@ -50,6 +56,8 @@ namespace BO4E.BO
         /// Kurzbeschreibung des Fehlers (Klärfall-Überschrift im SAP, Subject im SFDC)
         /// </summary>
         [JsonProperty(Required = Required.Always, Order = 7, PropertyName = "kurztext")]
+
+        [System.Text.Json.Serialization.JsonPropertyName("kurztext")]
         [ProtoMember(7)]
         public string Kurztext { get; set; }
 
@@ -60,6 +68,8 @@ namespace BO4E.BO
         /// </summary>
         // [DefaultValue(DateTimeOffset.UtcNow)] <-- doesn't work.
         [JsonProperty(Required = Required.Always, Order = 8, PropertyName = "erstellungsZeitpunkt")]
+
+        [System.Text.Json.Serialization.JsonPropertyName("erstellungsZeitpunkt")]
         [ProtoMember(8)]
         [JsonConverter(typeof(LenientDateTimeConverter))]
         public DateTimeOffset ErstellungsZeitpunkt { get; set; }
@@ -83,6 +93,8 @@ namespace BO4E.BO
         /// (Entspricht z.B. der Klärfallkategorie in SAP)
         /// </summary>
         [JsonProperty(Required = Required.Default, Order = 9, PropertyName = "kategorie")]
+
+        [System.Text.Json.Serialization.JsonPropertyName("kategorie")]
         [ProtoMember(9)]
         public string Kategorie { get; set; }
 
@@ -92,6 +104,8 @@ namespace BO4E.BO
         /// Kann auch <c>null</c> sein, wenn es keinen festen Bearbeiter gibt.
         /// </summary>
         [JsonProperty(Required = Required.Default, Order = 10, PropertyName = "bearbeiter")]
+
+        [System.Text.Json.Serialization.JsonPropertyName("bearbeiter")]
         [ProtoMember(10)]
         public string Bearbeiter { get; set; }
 
@@ -99,6 +113,8 @@ namespace BO4E.BO
         /// Detaillierte Beschreibung (Klärfall-Notizen im SAP, Description im SFDC)
         /// </summary>
         [JsonProperty(Required = Required.Default, Order = 11, PropertyName = "notizen")]
+
+        [System.Text.Json.Serialization.JsonPropertyName("notizen")]
         [ProtoMember(11)]
         public List<Notiz> Notizen { get; set; }
 
@@ -116,6 +132,8 @@ namespace BO4E.BO
         /// Zeitpunkt bis zu dem die Benachrichtigung bearbeitet worden sein muss.
         /// </summary>
         [JsonProperty(Required = Required.Default, Order = 12, PropertyName = "deadline")]
+
+        [System.Text.Json.Serialization.JsonPropertyName("deadline")]
         [ProtoMember(12)]
         [JsonConverter(typeof(LenientDateTimeConverter))]
         public DateTimeOffset? Deadline { get; set; }
@@ -124,6 +142,8 @@ namespace BO4E.BO
         /// Liste von Aktivitäten, die der Bearbeiter ausführen kann.
         /// </summary>
         [JsonProperty(Required = Required.Default, Order = 13, PropertyName = "aufgaben")]
+
+        [System.Text.Json.Serialization.JsonPropertyName("aufgaben")]
         [ProtoMember(13)]
         public List<Aufgabe> Aufgaben { get; set; }
 
@@ -131,6 +151,8 @@ namespace BO4E.BO
         /// list of additional information built in a customer dependet implementation
         /// </summary>
         [JsonProperty(Required = Required.Default, Order = 14, PropertyName = "infos")]
+
+        [System.Text.Json.Serialization.JsonPropertyName("infos")]
         [ProtoMember(14)]
         public List<GenericStringStringInfo> Infos { get; set; }
 

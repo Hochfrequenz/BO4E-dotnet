@@ -37,6 +37,8 @@ namespace BO4E.BO
         /// </summary>
         [DefaultValue("|null|")]
         [JsonProperty(PropertyName = "lokationsId", Required = Required.Always, Order = 4)]
+
+        [System.Text.Json.Serialization.JsonPropertyName("lokationsId")]
         [ProtoMember(4)]
         [DataCategory(DataCategory.POD)]
         [BoKey]
@@ -47,6 +49,8 @@ namespace BO4E.BO
         /// </summary>
         /// <see cref="Lokationstyp"/>
         [JsonProperty(PropertyName = "lokationsTyp", Required = Required.Always, Order = 5)]
+
+        [System.Text.Json.Serialization.JsonPropertyName("lokationsTyp")]
         [ProtoMember(5)]
         [DataCategory(DataCategory.POD)]
         public Lokationstyp LokationsTyp { get; set; }
@@ -55,6 +59,8 @@ namespace BO4E.BO
         /// Gibt den <see cref="Verbrauch"/> in einer Zeiteinheit an.
         /// </summary>
         [JsonProperty(Order = 6, PropertyName = "energieverbrauch")]
+
+        [System.Text.Json.Serialization.JsonPropertyName("energieverbrauch")]
         [ProtoMember(6)]
         [DataCategory(DataCategory.METER_READING)]
         [MinLength(1)]

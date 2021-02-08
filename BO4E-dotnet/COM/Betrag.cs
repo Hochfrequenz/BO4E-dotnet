@@ -13,11 +13,15 @@ namespace BO4E.COM
     {
         /// <summary>Gibt den Betrag des Preises an.</summary>
         [JsonProperty(PropertyName = "wert", Required = Required.Always)]
+
+        [System.Text.Json.Serialization.JsonPropertyName("wert")]
         [FieldName("value", Language.EN)]
         [ProtoMember(3)]
         public decimal Wert { get; set; }
         /// <summary><seealso cref="Waehrungscode" /></summary>
         [JsonProperty(PropertyName = "waehrung", Required = Required.Always)]
+
+        [System.Text.Json.Serialization.JsonPropertyName("waehrung")]
         [FieldName("currency", Language.EN)]
         [ProtoMember(4)]
         public Waehrungscode Waehrung { get; set; }

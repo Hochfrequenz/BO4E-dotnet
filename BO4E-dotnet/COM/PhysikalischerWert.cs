@@ -21,6 +21,8 @@ namespace BO4E.COM
         /// </summary>
         [ProtoMember(3)]
         [JsonProperty(Required = Required.Always, PropertyName = "wert")]
+
+        [System.Text.Json.Serialization.JsonPropertyName("wert")]
         public decimal Wert { get; set; }
 
         /// <summary>
@@ -28,6 +30,8 @@ namespace BO4E.COM
         /// </summary>
         [ProtoMember(4)]
         [JsonProperty(Required = Required.Always, PropertyName = "einheit")]
+
+        [System.Text.Json.Serialization.JsonPropertyName("einheit")]
         public Mengeneinheit Einheit { get; set; }
 
         /// <summary>

@@ -10,10 +10,14 @@ namespace BO4E.COM
     {
         /// <summary>Gibt den Breitengrad eines entsprechenden Ortes an.</summary>
         [JsonProperty(PropertyName = "breitengrad", Required = Required.Always)]
+
+        [System.Text.Json.Serialization.JsonPropertyName("breitengrad")]
         [ProtoMember(3)]
         public decimal Breitengrad { get; set; }
         /// <summary>Gibt den Längengrad eines entsprechenden Ortes an.</summary>
         [JsonProperty(PropertyName = "laengengrad", Required = Required.Always)]
+
+        [System.Text.Json.Serialization.JsonPropertyName("laengengrad")]
         [ProtoMember(4)]
         public decimal Laengengrad { get; set; }
     }

@@ -14,6 +14,8 @@ namespace BO4E.BO
         /// Hier kann der Preis noch auf bestimmte Dienstleistungsbereiche eingegrenzt werden. Z.B. Sperrung/Entsperrung.
         /// </summary>
         [JsonProperty(Required = Required.Always, Order = 7, PropertyName = "dienstleistungsdetails")]
+
+        [System.Text.Json.Serialization.JsonPropertyName("dienstleistungsdetails")]
         //[ProtoMember(7)]
         public Dienstleistungstyp Dienstleistungsdetails { get; set; }
 
@@ -21,6 +23,8 @@ namespace BO4E.BO
         /// Hier kann der Preis auf bestimmte Geräte eingegrenzt werden. Z.B. auf die Zählergröße. 
         /// </summary>
         [JsonProperty(Required = Required.Default, Order = 8, PropertyName = "geraetedetails")]
+
+        [System.Text.Json.Serialization.JsonPropertyName("geraetedetails")]
         //[ProtoMember(8)]
         public Bilanzierungsmethode? Geraetedetails { get; set; }
 
@@ -28,6 +32,8 @@ namespace BO4E.BO
         /// Der Netzbetreiber oder Messstellenbetreiber, der die Preise veröffentlicht hat. 
         /// </summary>
         [JsonProperty(Required = Required.Always, Order = 9, PropertyName = "herausgeber")]
+
+        [System.Text.Json.Serialization.JsonPropertyName("herausgeber")]
         //[ProtoMember(9)]
         public Marktteilnehmer Herausgeber { get; set; }
     }

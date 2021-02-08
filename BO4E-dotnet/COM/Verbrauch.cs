@@ -40,6 +40,8 @@ namespace BO4E.COM
         /// Beginn des Zeitraumes, für den der Verbrauch angegeben wird.
         /// </summary>
         [JsonProperty(PropertyName = "startdatum", Required = Required.Default, Order = 7)]
+
+        [System.Text.Json.Serialization.JsonPropertyName("startdatum")]
         [ProtoMember(3)]
         public DateTime Startdatum { get; set; } // ToDo: use datetimeoffset as well
 
@@ -47,6 +49,8 @@ namespace BO4E.COM
         /// Ende des Zeitraumes, für den der Verbrauch angegeben wird.
         /// </summary>
         [JsonProperty(PropertyName = "enddatum", Required = Required.Default, Order = 8)]
+
+        [System.Text.Json.Serialization.JsonPropertyName("enddatum")]
         [ProtoMember(4)]
         public DateTime Enddatum { get; set; } // ToDo: use datetimeoffset as well
 
@@ -55,6 +59,8 @@ namespace BO4E.COM
         /// </summary>
         /// <see cref="ENUM.Wertermittlungsverfahren" />
         [JsonProperty(PropertyName = "wertermittlungsverfahren", Required = Required.Always, Order = 5)]
+
+        [System.Text.Json.Serialization.JsonPropertyName("wertermittlungsverfahren")]
         [ProtoMember(5)]
         public Wertermittlungsverfahren Wertermittlungsverfahren { get; set; }
 
@@ -65,6 +71,8 @@ namespace BO4E.COM
         /// 1-0:1.8.1
         /// </example>
         [JsonProperty(PropertyName = "obiskennzahl", Required = Required.Always, Order = 6)]
+
+        [System.Text.Json.Serialization.JsonPropertyName("obiskennzahl")]
         [ProtoMember(6)]
         public string Obiskennzahl { get; set; }
 
@@ -72,6 +80,8 @@ namespace BO4E.COM
         /// Gibt den absoluten Wert der Menge an.
         /// </summary>
         [JsonProperty(PropertyName = "wert", Required = Required.Always, Order = 7)]
+
+        [System.Text.Json.Serialization.JsonPropertyName("wert")]
         [ProtoMember(7)]
         public decimal Wert { get; set; }
 
@@ -80,6 +90,8 @@ namespace BO4E.COM
         /// </summary>
         /// <see cref="Mengeneinheit" />
         [JsonProperty(PropertyName = "einheit", Required = Required.Always, Order = 8)]
+
+        [System.Text.Json.Serialization.JsonPropertyName("einheit")]
         [ProtoMember(8)]
         public Mengeneinheit Einheit { get; set; }
 
@@ -87,6 +99,8 @@ namespace BO4E.COM
         /// <example>arbeitleistungtagesparameterabhmalo | veranschlagtejahresmenge | TUMKundenwert</example>
         [NonOfficial(NonOfficialCategory.UNSPECIFIED)]
         [JsonProperty(PropertyName = "type", Required = Required.Default)]
+
+        [System.Text.Json.Serialization.JsonPropertyName("type")]
         [ProtoMember(9)]
         public Verbrauchsmengetyp? Type { get; set; }
 

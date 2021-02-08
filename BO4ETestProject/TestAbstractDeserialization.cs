@@ -1,4 +1,5 @@
-﻿using BO4E.BO;
+﻿using System.Collections.Generic;
+using BO4E.BO;
 
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
@@ -7,6 +8,7 @@ using Newtonsoft.Json.Linq;
 
 using System.IO;
 using System.Text.Json;
+using System.Text.Json.Serialization;
 using JsonSerializer = System.Text.Json.JsonSerializer;
 
 namespace TestBO4E
@@ -49,9 +51,9 @@ namespace TestBO4E
                 json = JsonDocument.Parse(jsonString);
             }
 
-            var maloString = JsonSerializer.Serialize(json.RootElement.GetProperty("input"));
+            var maloString = JsonSerializer.Serialize(json.RootElement.GetProperty("input").GetRawText());
             Assert.IsNotNull(maloString);
-            var malo =  System.Text.Json.JsonSerializer.Deserialize<Marktlokation>(maloString);
+            var malo = System.Text.Json.JsonSerializer.Deserialize<Marktlokation>(maloString);
             Assert.IsNotNull(malo);
             var bo = JsonSerializer.Deserialize<BusinessObject>(maloString);
             Assert.IsNotNull(bo);
@@ -59,7 +61,7 @@ namespace TestBO4E
         }
 
         [TestMethod]
-        public void TestMaLoTypeNameHandlingDeserialization()
+        public void TestMaLoTypeNameHandlingDeserializationNewtonsoft()
         {
             JObject json;
             using (var r = new StreamReader("BoMapperTests/marktlokation_with_typenamehandling.json"))
@@ -85,20 +87,24 @@ namespace TestBO4E
         [TestMethod]
         public void TestMaLoDeserializationNet5()
         {
-            JObject json;
+            JsonDocument json;
             using (var r = new StreamReader("BoMapperTests/marktlokation_simple.json"))
             {
                 var jsonString = r.ReadToEnd();
-                json = JObject.Parse(jsonString);
+                json = JsonDocument.Parse(jsonString);
             }
-            var maloString = json["input"].ToString();
-            var malo = JsonSerializer.Deserialize<Marktlokation>(maloString);
+            var options = new JsonSerializerOptions()
+            {
+                Converters = { new JsonStringEnumConverter()}
+            };
+            var maloString = json.RootElement.GetProperty("input").GetRawText();
+            var malo = JsonSerializer.Deserialize<Marktlokation>(maloString, options);
             Assert.IsNotNull(malo);
             var bo = JsonSerializer.Deserialize<BusinessObject>(maloString);
             Assert.IsNotNull(bo);
             Assert.IsInstanceOfType(bo, typeof(Marktlokation));
         }
-        
+
         // no typename handling test in .NET as this is a JsonConvert feature 
     }
 }

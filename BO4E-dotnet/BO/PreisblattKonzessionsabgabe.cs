@@ -14,6 +14,8 @@ namespace BO4E.BO
         /// Sparte, auf die sich die KA bezieht.
         /// </summary>
         [JsonProperty(Required = Required.Always, Order = 7, PropertyName = "sparte")]
+
+        [System.Text.Json.Serialization.JsonPropertyName("sparte")]
         //[ProtoMember(7)]
         public Sparte Sparte { get; set; }
 
@@ -21,6 +23,8 @@ namespace BO4E.BO
         /// Kundegruppe anhand derer die Höhe der Konzessionsabgabe festgelegt ist.
         /// </summary>
         [JsonProperty(Required = Required.Always, Order = 8, PropertyName = "kundengruppeKA")]
+
+        [System.Text.Json.Serialization.JsonPropertyName("kundengruppeKA")]
         //[ProtoMember(8)]
         public KundengruppeKA KundengruppeKA { get; set; }
     }

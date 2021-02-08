@@ -17,18 +17,24 @@ namespace BO4E.COM
     {
         /// <summary>Die Einheit in der die Dauer angeben ist. Z.B. Monate. <seealso cref="Zeiteinheit" /></summary>
         [JsonProperty(PropertyName = "einheit", Required = Required.Default)]
+
+        [System.Text.Json.Serialization.JsonPropertyName("einheit")]
         [FieldName("unit", Language.EN)]
         [ProtoMember(3)]
         public Zeiteinheit? Einheit { get; set; }
 
         /// <summary>Gibt die Anzahl der Zeiteinheiten an, z.B. 3 (Monate).</summary>
         [JsonProperty(PropertyName = "dauer", Required = Required.Default)]
+
+        [System.Text.Json.Serialization.JsonPropertyName("dauer")]
         [FieldName("duration", Language.EN)]
         [ProtoMember(4)]
         public decimal? Dauer { get; set; }
 
         /// <summary>Gibt Tag und Uhrzeit (falls vorhanden) an, wann der Zeitraum startet.</summary>
         [JsonProperty(PropertyName = "startdatum", Required = Required.Default)]
+
+        [System.Text.Json.Serialization.JsonPropertyName("startdatum")]
         [FieldName("startDate", Language.EN)]
         [ProtoMember(5)]
         [JsonConverter(typeof(LenientDateTimeConverter))]
@@ -36,6 +42,8 @@ namespace BO4E.COM
 
         /// <summary>Gibt Tag und Uhrzeit (falls vorhanden) an, wann der Zeitraum endet.</summary>
         [JsonProperty(PropertyName = "enddatum", Required = Required.Default)]
+
+        [System.Text.Json.Serialization.JsonPropertyName("enddatum")]
         [FieldName("endDate", Language.EN)]
         [ProtoMember(6)]
         [JsonConverter(typeof(LenientDateTimeConverter))]

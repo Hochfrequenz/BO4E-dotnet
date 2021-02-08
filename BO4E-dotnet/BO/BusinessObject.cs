@@ -52,6 +52,8 @@ namespace BO4E.BO
         /// 'MARKTLOKATION'
         /// </example>
         [JsonProperty(Required = Required.Default, Order = 1, PropertyName = "boTyp")]
+
+        [System.Text.Json.Serialization.JsonPropertyName("boTyp")]
         [ProtoMember(1)]
         public string BoTyp
         {
@@ -136,6 +138,8 @@ namespace BO4E.BO
         /// 1
         /// </example>
         [JsonProperty(PropertyName = "versionStruktur", Required = Required.Default, Order = 2)]
+
+        [System.Text.Json.Serialization.JsonPropertyName("versionStruktur")]
         [ProtoMember(2)]
         public int VersionStruktur { get; set; }
 
@@ -143,6 +147,8 @@ namespace BO4E.BO
         /// allows adding a GUID to Business Objects for tracking across systems
         /// </summary>
         [JsonProperty(PropertyName = "guid", NullValueHandling = NullValueHandling.Ignore, Required = Required.Default)]
+
+        [System.Text.Json.Serialization.JsonPropertyName("guid")]
         public virtual Guid? Guid { get; set; }
 
         /// <summary>
@@ -161,6 +167,8 @@ namespace BO4E.BO
         /// Store the latest database update, is Datetime, because postgres doesn't handle datetimeoffset in a generated column gracefully
         /// </summary>
         [JsonProperty(PropertyName = "timestamp", NullValueHandling = NullValueHandling.Ignore, Required = Required.Default, Order = 2)]
+
+        [System.Text.Json.Serialization.JsonPropertyName("timestamp")]
         [Timestamp]
         public DateTime? Timestamp { get; set; }
 
@@ -170,6 +178,8 @@ namespace BO4E.BO
         /// Hier können IDs anderer Systeme hinterlegt werden (z.B. eine SAP-GP-Nummer) (Details siehe <see cref="ExterneReferenz"/>)
         /// </summary>
         [JsonProperty(PropertyName = "externeReferenzen", Required = Required.Default)]
+
+        [System.Text.Json.Serialization.JsonPropertyName("externeReferenzen")]
         [ProtoMember(4)]
         public List<ExterneReferenz> ExterneReferenzen { get; set; }
 

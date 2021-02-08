@@ -19,6 +19,8 @@ namespace BO4E.COM
         /// Start der Gültigkeit des Vertragsteils.
         /// </summary>
         [JsonProperty(PropertyName = "vertragsteilbeginn", Required = Required.Always)]
+
+        [System.Text.Json.Serialization.JsonPropertyName("vertragsteilbeginn")]
         [ProtoMember(3)]
         [JsonConverter(typeof(LenientDateTimeConverter))]
         public DateTimeOffset Vertragsteilbeginn { get; set; }
@@ -27,6 +29,8 @@ namespace BO4E.COM
         /// Ende der Gültigkeit des Vertragsteils.
         /// </summary>
         [JsonProperty(PropertyName = "vertragsteilende", Required = Required.Always)]
+
+        [System.Text.Json.Serialization.JsonPropertyName("vertragsteilende")]
         [ProtoMember(4)]
         [JsonConverter(typeof(LenientDateTimeConverter))]
         public DateTimeOffset Vertragsteilende { get; set; }
@@ -37,12 +41,16 @@ namespace BO4E.COM
         /// </summary>
         [ProtoMember(5)]
         [JsonProperty(PropertyName = "lokation", Required = Required.Default)]
+
+        [System.Text.Json.Serialization.JsonPropertyName("lokation")]
         public string Lokation { get; set; }
 
         /// <summary>
         /// Für die Lokation festgeschriebene Abnahmemenge. Siehe COM Menge
         /// </summary>
         [JsonProperty(PropertyName = "vertraglichFixierteMenge", Required = Required.Default)]
+
+        [System.Text.Json.Serialization.JsonPropertyName("vertraglichFixierteMenge")]
         [ProtoMember(6)]
         public Menge VertraglichFixierteMenge { get; set; }
 
@@ -50,6 +58,8 @@ namespace BO4E.COM
         /// Für die Lokation festgelegte Mindestabnahmemenge. Siehe COM Menge
         /// </summary>
         [JsonProperty(PropertyName = "minimaleAbnahmemenge", Required = Required.Default)]
+
+        [System.Text.Json.Serialization.JsonPropertyName("minimaleAbnahmemenge")]
         [ProtoMember(7)]
         public Menge MinimaleAbnahmemenge { get; set; }
 
@@ -57,6 +67,8 @@ namespace BO4E.COM
         /// Für die Lokation festgelegte maximale Abnahmemenge. Siehe COM Menge
         /// </summary>
         [JsonProperty(PropertyName = "maximaleAbnahmemenge", Required = Required.Default)]
+
+        [System.Text.Json.Serialization.JsonPropertyName("maximaleAbnahmemenge")]
         [ProtoMember(8)]
         public Menge MaximaleAbnahmemenge { get; set; }
 
@@ -64,6 +76,8 @@ namespace BO4E.COM
         /// jahresverbrauchsprognose für EDIFACT mapping
         /// </summary>
         [JsonProperty(PropertyName = "jahresverbrauchsprognose", Required = Required.Default)]
+
+        [System.Text.Json.Serialization.JsonPropertyName("jahresverbrauchsprognose")]
         [NonOfficial(NonOfficialCategory.CUSTOMER_REQUIREMENTS)]
         [ProtoMember(1009)]
         public Menge Jahresverbrauchsprognose { get; set; }
@@ -72,6 +86,8 @@ namespace BO4E.COM
         /// kundenwert für EDIFACT mapping
         /// </summary>
         [JsonProperty(PropertyName = "kundenwert", Required = Required.Default)]
+
+        [System.Text.Json.Serialization.JsonPropertyName("kundenwert")]
         [NonOfficial(NonOfficialCategory.CUSTOMER_REQUIREMENTS)]
         [ProtoMember(1010)]
         public Menge Kundenwert { get; set; }
@@ -80,6 +96,8 @@ namespace BO4E.COM
         /// verbrauchsaufteilung für EDIFACT mapping
         /// </summary>
         [JsonProperty(PropertyName = "verbrauchsaufteilung", Required = Required.Default)]
+
+        [System.Text.Json.Serialization.JsonPropertyName("verbrauchsaufteilung")]
         [NonOfficial(NonOfficialCategory.CUSTOMER_REQUIREMENTS)]
         [ProtoMember(1011)]
         public string Verbrauchsaufteilung { get; set; } // ToDo: evaluate if this actually should be an enum
