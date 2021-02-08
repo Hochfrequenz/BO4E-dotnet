@@ -1,7 +1,10 @@
-﻿using System;
-using BO4E.meta;
+﻿using BO4E.meta;
+
 using Newtonsoft.Json;
+
 using ProtoBuf;
+
+using System;
 
 namespace BO4E.BO.LogObject
 {
