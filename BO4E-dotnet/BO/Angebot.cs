@@ -1,15 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Text.Json.Serialization;
-
-using BO4E.COM;
+﻿using BO4E.COM;
 using BO4E.ENUM;
 using BO4E.meta;
 
 using Newtonsoft.Json;
 
 using ProtoBuf;
+
+using System;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 //[module: CompatibilityLevel(CompatibilityLevel.Level300)]
 namespace BO4E.BO
 {
@@ -24,9 +23,7 @@ namespace BO4E.BO
         ///  Eindeutige Nummer des Angebotes.
         /// </summary>
         [JsonProperty(Required = Required.Always, Order = 4, PropertyName = "angebotsnummer")]
-
         [System.Text.Json.Serialization.JsonPropertyName("angebotsnummer")]
-        [JsonPropertyName("angebotsnummer")]
         [ProtoMember(4)]
         [DataCategory(DataCategory.FINANCE)]
         [BoKey]
