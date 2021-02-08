@@ -25,12 +25,14 @@ namespace BO4E.BO
         /// Base64 encoded unique nonce / initialisation vector (IV)
         /// </summary>
         [JsonProperty(PropertyName = "nonce", Required = Required.Always, Order = 8)]
+        [System.Text.Json.Serialization.JsonPropertyName("nonce")]
         public string Nonce { get; set; }
 
         /// <summary>
         /// base64 encoded public key of the message sender
         /// </summary>
         [JsonProperty(PropertyName = "publicKey", Required = Required.Always, Order = 5)]
+        [System.Text.Json.Serialization.JsonPropertyName("publicKey")]
         public string PublicKey { get; set; }
     }
 }
