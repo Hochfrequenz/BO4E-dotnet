@@ -1,4 +1,5 @@
-﻿using BO4E.BO;
+﻿using System.Collections.Generic;
+using BO4E.BO;
 
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
@@ -7,7 +8,7 @@ using Newtonsoft.Json.Linq;
 
 using System.IO;
 using System.Text.Json;
-
+using System.Text.Json.Serialization;
 using JsonSerializer = System.Text.Json.JsonSerializer;
 
 namespace TestBO4E
@@ -92,8 +93,12 @@ namespace TestBO4E
                 var jsonString = r.ReadToEnd();
                 json = JsonDocument.Parse(jsonString);
             }
+            var options = new JsonSerializerOptions()
+            {
+                Converters = { new JsonStringEnumConverter()}
+            };
             var maloString = json.RootElement.GetProperty("input").GetRawText();
-            var malo = JsonSerializer.Deserialize<Marktlokation>(maloString);
+            var malo = JsonSerializer.Deserialize<Marktlokation>(maloString, options);
             Assert.IsNotNull(malo);
             var bo = JsonSerializer.Deserialize<BusinessObject>(maloString);
             Assert.IsNotNull(bo);
