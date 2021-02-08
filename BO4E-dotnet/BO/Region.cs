@@ -19,6 +19,8 @@ namespace BO4E.BO
         ///  Bezeichnung der Region.
         /// </summary>
         [JsonProperty(Required = Required.Always, Order = 4, PropertyName = "bezeichnung")]
+
+        [System.Text.Json.Serialization.JsonPropertyName("bezeichnung")]
         [ProtoMember(4)]
         [BoKey]
         public string Bezeichnung { get; set; }
@@ -27,6 +29,8 @@ namespace BO4E.BO
         /// Positivliste der Kriterien zur Definition der Region.
         /// </summary>
         [JsonProperty(Required = Required.Always, Order = 5, PropertyName = "positivListe")]
+
+        [System.Text.Json.Serialization.JsonPropertyName("positivListe")]
         [ProtoMember(5)]
         public List<Regionskriterium> PositivListe { get; set; }
 
@@ -34,6 +38,8 @@ namespace BO4E.BO
         /// Negativliste der Kriterien zur Definition der Region. 
         /// </summary>
         [JsonProperty(Required = Required.Default, Order = 6, PropertyName = "negativListe")]
+
+        [System.Text.Json.Serialization.JsonPropertyName("negativListe")]
         [ProtoMember(6)]
         public List<Regionskriterium> NegativListe { get; set; }
     }

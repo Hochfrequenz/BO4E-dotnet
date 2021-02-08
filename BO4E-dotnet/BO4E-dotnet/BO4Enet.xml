@@ -780,22 +780,22 @@
             Alliander Netz Heinsberg GmbH, 01.02.2018, 31.12.2018, Arbeitspreis HT, 3.660 kWh, 5,8200 ct/kWh, 213,01 €. Details siehe COM Kostenposition
             </summary>
         </member>
-        <member name="T:BO4E.BO.LogObject">
+        <member name="T:BO4E.BO.LogObject.LogObject">
             <summary>
              a log objects allows to log things
             </summary>
         </member>
-        <member name="P:BO4E.BO.LogObject.Id">
+        <member name="P:BO4E.BO.LogObject.LogObject.Id">
             <summary>
             unique id of the log event
             </summary>
         </member>
-        <member name="P:BO4E.BO.LogObject.DateTime">
+        <member name="P:BO4E.BO.LogObject.LogObject.DateTime">
             <summary>
             date time at which the log event has been raised
             </summary>
         </member>
-        <member name="P:BO4E.BO.LogObject.LogMessage">
+        <member name="P:BO4E.BO.LogObject.LogObject.LogMessage">
             <summary>
             actual log message
             </summary>
@@ -2178,11 +2178,10 @@
             Inhalt der Notiz (Freitext)
             </summary>
         </member>
-        <member name="M:BO4E.COM.Notiz.CleanUpSapNotes(System.Runtime.Serialization.StreamingContext)">
+        <member name="F:BO4E.COM.Notiz.TrailingMinusRegex">
             <summary>
             method remove trailing minuses ('----') from notiz content. Those are artefact from SAPs internal note structure 
             </summary>
-            <param name="context"></param>
         </member>
         <member name="T:BO4E.COM.PhysikalischerWert">
             <summary>
@@ -3810,6 +3809,19 @@
         <member name="F:BO4E.ENUM.EDI.EnergierichtungEdi.Z07">
             <summary>Verbrauch</summary>
         </member>
+        <member name="T:BO4E.ENUM.EDI.FernschaltungEdi">
+            <summary>
+            Fernschaltung
+            EDIFACT values of <see cref="T:BO4E.ENUM.Fernschaltung"/>
+            </summary>
+            <author>Hochfrequenz Unternehmensberatung GmbH</author>
+        </member>
+        <member name="F:BO4E.ENUM.EDI.FernschaltungEdi.Z06">
+            <summary>Z06: vorhanden</summary>
+        </member>
+        <member name="F:BO4E.ENUM.EDI.FernschaltungEdi.Z07">
+            <summary>Z07: nicht vorhanden</summary>
+        </member>
         <member name="T:BO4E.ENUM.EDI.GeraetetypEdi">
             <summary>
             EDIFACT values of <see cref="T:BO4E.ENUM.Geraetetyp"/>
@@ -3920,6 +3932,19 @@
             Handy
             </summary>
         </member>
+        <member name="T:BO4E.ENUM.EDI.MesswerterfassungEdi">
+            <summary>
+            Messwerterfassung
+            EDIFACT values of <see cref="T:BO4E.ENUM.Messwerterfassung"/>
+            </summary>
+            <author>Hochfrequenz Unternehmensberatung GmbH</author>
+        </member>
+        <member name="F:BO4E.ENUM.EDI.MesswerterfassungEdi.AMR">
+            <summary>AMR: fernauslesbare Zähler</summary>
+        </member>
+        <member name="F:BO4E.ENUM.EDI.MesswerterfassungEdi.MMR">
+            <summary>MMR: manuell ausgelesene Zähler</summary>
+        </member>
         <member name="T:BO4E.ENUM.EDI.NetzebeneEdi">
             <summary>
             EDIFACT values of <see cref="T:BO4E.ENUM.Netzebene"/>
@@ -4015,6 +4040,16 @@
         <member name="F:BO4E.ENUM.EDI.RollencodetypEdi._332">
             <summary>DE, DVGW Service &amp; Consult GmbH</summary>
         </member>
+        <member name="T:BO4E.ENUM.EDI.SchwachlastfaehigEdi">
+            <summary>SchwachlastfaehigEdi Marktlokation</summary>
+            <author>Hochfrequenz Unternehmensberatung GmbH</author>
+        </member>
+        <member name="F:BO4E.ENUM.EDI.SchwachlastfaehigEdi.Z59">
+            <summary>Z59: Nicht-Schwachlastfähig</summary>
+        </member>
+        <member name="F:BO4E.ENUM.EDI.SchwachlastfaehigEdi.Z60">
+            <summary>Z60: Schwachlast fähig</summary>
+        </member>
         <member name="T:BO4E.ENUM.EDI.TarifartEdi">
             <summary>
             EDIFACT values of <see cref="T:BO4E.ENUM.Tarifart"/>
@@ -4029,6 +4064,19 @@
         </member>
         <member name="F:BO4E.ENUM.EDI.TarifartEdi.NTZ">
             <summary>Mehrtarif</summary>
+        </member>
+        <member name="T:BO4E.ENUM.EDI.UnterbrechbarkeitEdi">
+            <summary>
+            Stromverbrauchsart/Unterbrechbarkeit Marktlokation
+            EDIFACT values of <see cref="T:BO4E.ENUM.Unterbrechbarkeit"/>
+            </summary>
+            <author>Hochfrequenz Unternehmensberatung GmbH</author>
+        </member>
+        <member name="F:BO4E.ENUM.EDI.UnterbrechbarkeitEdi.Unterbrechbare_Verbrauchseinrichtung">
+            <summary>Z62: unterbrechbare Verbrauchseinrichtung</summary>
+        </member>
+        <member name="F:BO4E.ENUM.EDI.UnterbrechbarkeitEdi.Nicht_Unterbrechbare_Verbrauchseinrichtung">
+            <summary>Z63: nicht unterbrechbare Verbrauchseinrichtung</summary>
         </member>
         <member name="T:BO4E.ENUM.EDI.UTILMD.UTILMD9013">
             <summary>
@@ -4146,6 +4194,25 @@
             als auch zur Wärmebedarfsdeckung eingesetzt. Bei diesem kombinierten Verbrauchsverhalten
             ist dieser Qualifier zu nutzen.
         </member>
+        <member name="T:BO4E.ENUM.EDI.VerwendungszweckEdi">
+            <summary>
+            Verwendungungszweck der Werte Marktlokation
+            EDIFACT values of <see cref="T:BO4E.ENUM.Verwendungszweck"/>
+            </summary>
+            <author>Hochfrequenz Unternehmensberatung GmbH</author>
+        </member>
+        <member name="F:BO4E.ENUM.EDI.VerwendungszweckEdi.Z84">
+            <summary>Z84: Netznutzungsabrechnung</summary>
+        </member>
+        <member name="F:BO4E.ENUM.EDI.VerwendungszweckEdi.Z85">
+            <summary>Z85: Bilanzkreisabrechnung</summary>
+        </member>
+        <member name="F:BO4E.ENUM.EDI.VerwendungszweckEdi.Z86">
+            <summary>Z86: Mehrmindermbengenabrechnung</summary>
+        </member>
+        <member name="F:BO4E.ENUM.EDI.VerwendungszweckEdi.Z47">
+            <summary>Z47: Endkundenabrechnung</summary>
+        </member>
         <member name="T:BO4E.ENUM.EDI.WaehrungseinheitEdi">
             <summary>
             EDIFACT values of <see cref="T:BO4E.ENUM.Waehrungseinheit"/>
@@ -4154,6 +4221,22 @@
         </member>
         <member name="F:BO4E.ENUM.EDI.WaehrungseinheitEdi.EUR">
             <summary>Euro</summary>
+        </member>
+        <member name="T:BO4E.ENUM.EDI.WaermenutzungEdi">
+            <summary>
+            Stromverbrauchsart/Wärmenutzung Marktlokation
+            EDIFACT values of <see cref="T:BO4E.ENUM.Waermenutzung"/>
+            </summary>
+            <author>Hochfrequenz Unternehmensberatung GmbH</author>
+        </member>
+        <member name="F:BO4E.ENUM.EDI.WaermenutzungEdi.Z56">
+            <summary>Z56: Speicherheizung</summary>
+        </member>
+        <member name="F:BO4E.ENUM.EDI.WaermenutzungEdi.Z57">
+            <summary>Z57: Wärmepumpe</summary>
+        </member>
+        <member name="F:BO4E.ENUM.EDI.WaermenutzungEdi.Z61">
+            <summary>Z61: Direktheizung</summary>
         </member>
         <member name="T:BO4E.ENUM.EDI.WertermittlungsverfahrenEdi">
             <summary>
@@ -4245,90 +4328,6 @@
         </member>
         <member name="F:BO4E.ENUM.EDI.ZeiteinheitEdi.ANN">
             <summary>Jahr</summary>
-        </member>
-        <member name="T:BO4E.ENUM.FernschaltungEdi">
-            <summary>
-            Fernschaltung
-            EDIFACT values of <see cref="T:BO4E.ENUM.Fernschaltung"/>
-            </summary>
-            <author>Hochfrequenz Unternehmensberatung GmbH</author>
-        </member>
-        <member name="F:BO4E.ENUM.FernschaltungEdi.Z06">
-            <summary>Z06: vorhanden</summary>
-        </member>
-        <member name="F:BO4E.ENUM.FernschaltungEdi.Z07">
-            <summary>Z07: nicht vorhanden</summary>
-        </member>
-        <member name="T:BO4E.ENUM.MesswerterfassungEdi">
-            <summary>
-            Messwerterfassung
-            EDIFACT values of <see cref="T:BO4E.ENUM.Messwerterfassung"/>
-            </summary>
-            <author>Hochfrequenz Unternehmensberatung GmbH</author>
-        </member>
-        <member name="F:BO4E.ENUM.MesswerterfassungEdi.AMR">
-            <summary>AMR: fernauslesbare Zähler</summary>
-        </member>
-        <member name="F:BO4E.ENUM.MesswerterfassungEdi.MMR">
-            <summary>MMR: manuell ausgelesene Zähler</summary>
-        </member>
-        <member name="T:BO4E.ENUM.SchwachlastfaehigEdi">
-            <summary>SchwachlastfaehigEdi Marktlokation</summary>
-            <author>Hochfrequenz Unternehmensberatung GmbH</author>
-        </member>
-        <member name="F:BO4E.ENUM.SchwachlastfaehigEdi.Z59">
-            <summary>Z59: Nicht-Schwachlastfähig</summary>
-        </member>
-        <member name="F:BO4E.ENUM.SchwachlastfaehigEdi.Z60">
-            <summary>Z60: Schwachlast fähig</summary>
-        </member>
-        <member name="T:BO4E.ENUM.UnterbrechbarkeitEdi">
-            <summary>
-            Stromverbrauchsart/Unterbrechbarkeit Marktlokation
-            EDIFACT values of <see cref="T:BO4E.ENUM.Unterbrechbarkeit"/>
-            </summary>
-            <author>Hochfrequenz Unternehmensberatung GmbH</author>
-        </member>
-        <member name="F:BO4E.ENUM.UnterbrechbarkeitEdi.Unterbrechbare_Verbrauchseinrichtung">
-            <summary>Z62: unterbrechbare Verbrauchseinrichtung</summary>
-        </member>
-        <member name="F:BO4E.ENUM.UnterbrechbarkeitEdi.Nicht_Unterbrechbare_Verbrauchseinrichtung">
-            <summary>Z63: nicht unterbrechbare Verbrauchseinrichtung</summary>
-        </member>
-        <member name="T:BO4E.ENUM.VerwendungszweckEdi">
-            <summary>
-            Verwendungungszweck der Werte Marktlokation
-            EDIFACT values of <see cref="T:BO4E.ENUM.Verwendungszweck"/>
-            </summary>
-            <author>Hochfrequenz Unternehmensberatung GmbH</author>
-        </member>
-        <member name="F:BO4E.ENUM.VerwendungszweckEdi.Z84">
-            <summary>Z84: Netznutzungsabrechnung</summary>
-        </member>
-        <member name="F:BO4E.ENUM.VerwendungszweckEdi.Z85">
-            <summary>Z85: Bilanzkreisabrechnung</summary>
-        </member>
-        <member name="F:BO4E.ENUM.VerwendungszweckEdi.Z86">
-            <summary>Z86: Mehrmindermbengenabrechnung</summary>
-        </member>
-        <member name="F:BO4E.ENUM.VerwendungszweckEdi.Z47">
-            <summary>Z47: Endkundenabrechnung</summary>
-        </member>
-        <member name="T:BO4E.ENUM.WaermenutzungEdi">
-            <summary>
-            Stromverbrauchsart/Wärmenutzung Marktlokation
-            EDIFACT values of <see cref="T:BO4E.ENUM.Waermenutzung"/>
-            </summary>
-            <author>Hochfrequenz Unternehmensberatung GmbH</author>
-        </member>
-        <member name="F:BO4E.ENUM.WaermenutzungEdi.Z56">
-            <summary>Z56: Speicherheizung</summary>
-        </member>
-        <member name="F:BO4E.ENUM.WaermenutzungEdi.Z57">
-            <summary>Z57: Wärmepumpe</summary>
-        </member>
-        <member name="F:BO4E.ENUM.WaermenutzungEdi.Z61">
-            <summary>Z61: Direktheizung</summary>
         </member>
         <member name="T:BO4E.ENUM.EncryptionScheme">
             <summary>
@@ -8387,8 +8386,9 @@
         </member>
         <member name="T:BO4E.meta.LenientConverters.LenientSystemTextJsonParsingExtensions">
             <summary>
-            Extensions to simplify the usage of the Lenient parser
+            Extensions to simplify the usage of the Lenient parser using <see cref="T:System.Text.Json.JsonSerializer"/> (.NET5)
             </summary>
+            <seealso cref="T:BO4E.meta.LenientConverters.LenientParsingExtensionsNewtonsoft"/>
         </member>
         <member name="M:BO4E.meta.LenientConverters.LenientSystemTextJsonParsingExtensions.GetJsonSerializerOptions(BO4E.meta.LenientConverters.LenientParsing)">
             <summary>
@@ -8399,27 +8399,28 @@
         </member>
         <member name="M:BO4E.meta.LenientConverters.LenientSystemTextJsonParsingExtensions.GetJsonSerializerOptions(BO4E.meta.LenientConverters.LenientParsing,System.Collections.Generic.HashSet{System.String})">
             <summary>
-            Generates JsonSerializerSettings for given lenient parsing setting
+            Generates JsonSerializerSettings (.NET5) for given lenient parsing setting
             </summary>
             <param name="lenient"></param>
             <param name="userPropertiesWhiteList"></param>
             <returns></returns>
         </member>
-        <member name="T:BO4E.meta.LenientConverters.LenientParsingExtensions">
+        <member name="T:BO4E.meta.LenientConverters.LenientParsingExtensionsNewtonsoft">
             <summary>
-            Extensions to simplify the usage of the Lenient parser
+            Extensions to simplify the usage of the Lenient parser for <see cref="T:Newtonsoft.Json.JsonSerializer"/> (newtonsoft)
             </summary>
+            <seealso cref="T:BO4E.meta.LenientConverters.LenientSystemTextJsonParsingExtensions"/>
         </member>
-        <member name="M:BO4E.meta.LenientConverters.LenientParsingExtensions.GetJsonSerializerSettings(BO4E.meta.LenientConverters.LenientParsing)">
+        <member name="M:BO4E.meta.LenientConverters.LenientParsingExtensionsNewtonsoft.GetJsonSerializerSettings(BO4E.meta.LenientConverters.LenientParsing)">
             <summary>
-            <inheritdoc cref="M:BO4E.meta.LenientConverters.LenientParsingExtensions.GetJsonSerializerSettings(BO4E.meta.LenientConverters.LenientParsing,System.Collections.Generic.HashSet{System.String})"/>
+            <inheritdoc cref="M:BO4E.meta.LenientConverters.LenientParsingExtensionsNewtonsoft.GetJsonSerializerSettings(BO4E.meta.LenientConverters.LenientParsing,System.Collections.Generic.HashSet{System.String})"/>
             </summary>
             <param name="lenient"></param>
             <returns></returns>
         </member>
-        <member name="M:BO4E.meta.LenientConverters.LenientParsingExtensions.GetJsonSerializerSettings(BO4E.meta.LenientConverters.LenientParsing,System.Collections.Generic.HashSet{System.String})">
+        <member name="M:BO4E.meta.LenientConverters.LenientParsingExtensionsNewtonsoft.GetJsonSerializerSettings(BO4E.meta.LenientConverters.LenientParsing,System.Collections.Generic.HashSet{System.String})">
             <summary>
-            Generates JsonSerializerSettings for given lenient parsing setting
+            Generates <see cref="T:Newtonsoft.Json.JsonSerializerSettings"/> (Newtonsoft) for given lenient parsing setting
             </summary>
             <param name="lenient"></param>
             <param name="userPropertiesWhiteList"></param>

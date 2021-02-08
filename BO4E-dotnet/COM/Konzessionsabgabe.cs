@@ -17,6 +17,8 @@ namespace BO4E.COM
         /// Art der Abgabe
         /// </summary>
         [JsonProperty(PropertyName = "satz", Required = Required.Always, Order = 8)]
+
+        [System.Text.Json.Serialization.JsonPropertyName("satz")]
         [ProtoMember(3)]
         public AbgabeArt Satz { get; set; }
 
@@ -24,6 +26,8 @@ namespace BO4E.COM
         /// Konzessionsabgabe in E/kWh
         /// </summary>
         [JsonProperty(PropertyName = "kosten", Required = Required.Always, Order = 5)]
+
+        [System.Text.Json.Serialization.JsonPropertyName("kosten")]
         [ProtoMember(4)]
         public decimal Kosten { get; set; }
 
@@ -31,6 +35,8 @@ namespace BO4E.COM
         /// Gebührenkategorie der Konzessionsabgabe
         /// </summary>
         [JsonProperty(PropertyName = "kategorie", Required = Required.Always, Order = 6)]
+
+        [System.Text.Json.Serialization.JsonPropertyName("kategorie")]
         [ProtoMember(5)]
         public string Kategorie { get; set; }
     }

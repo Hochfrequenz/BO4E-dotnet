@@ -16,6 +16,8 @@ namespace BO4E.COM
         /// Hier steht, für welches Kriterium der Wert gilt. Z.B. Postleitzahlen.
         /// </summary>
         [JsonProperty(PropertyName = "kriterium", Required = Required.Always)]
+
+        [System.Text.Json.Serialization.JsonPropertyName("kriterium")]
         [ProtoMember(3)]
         public Tarifregionskriterium Kriterium { get; set; }
 
@@ -23,6 +25,8 @@ namespace BO4E.COM
         /// Ein Wert, passend zum Kriterium. Z.B. eine Postleitzahl.
         /// </summary>
         [JsonProperty(PropertyName = "wert", Required = Required.Always)]
+
+        [System.Text.Json.Serialization.JsonPropertyName("wert")]
         [ProtoMember(4)]
         public string Wert { get; set; }
     }

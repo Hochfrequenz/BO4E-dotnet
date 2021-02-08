@@ -27,6 +27,8 @@ namespace BO4E.COM
         /// rollencodenummer von Marktrolle
         /// </summary>
         [JsonProperty(PropertyName = "rollencodenummer", Required = Required.Default)]
+
+        [System.Text.Json.Serialization.JsonPropertyName("rollencodenummer")]
         [ProtoMember(3)]
         [Obsolete("Use " + nameof(Marktteilnehmer) + "." + nameof(Marktteilnehmer.Rollencodenummer) + " instead")]
         public string Rollencodenummer { get; set; }
@@ -35,6 +37,8 @@ namespace BO4E.COM
         /// code von Marktrolle
         /// </summary>
         [JsonProperty(PropertyName = "code", Required = Required.Default)]
+
+        [System.Text.Json.Serialization.JsonPropertyName("code")]
         [NonOfficial(NonOfficialCategory.UNSPECIFIED)]
         [Obsolete("Use " + nameof(Marktteilnehmer) + "." + nameof(Marktteilnehmer.Rollencodetyp) + " instead")]
         [ProtoMember(4)]

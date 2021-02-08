@@ -17,12 +17,16 @@ namespace BO4E.COM
         /// </summary>
         [ProtoMember(3)]
         [JsonProperty(PropertyName = "keyColumn")]
+
+        [System.Text.Json.Serialization.JsonPropertyName("keyColumn")]
         public string KeyColumn { get; set; }
         /// <summary>
         /// value
         /// </summary>
         [ProtoMember(4)]
         [JsonProperty(PropertyName = "value")]
+
+        [System.Text.Json.Serialization.JsonPropertyName("value")]
         public string Value { get; set; }
 
         /// <summary>

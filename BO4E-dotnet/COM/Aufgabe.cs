@@ -21,6 +21,8 @@ namespace BO4E.COM
         /// Eindeutige Kennzeichnung der Aufgabe
         /// </summary>
         [JsonProperty(PropertyName = "aufgabenId", Required = Required.Always)]
+
+        [System.Text.Json.Serialization.JsonPropertyName("aufgabenId")]
         [ProtoMember(3)]
         public string AufgabenId { get; set; }
 
@@ -28,6 +30,8 @@ namespace BO4E.COM
         /// Optionale Beschreibung der Aufgabe
         /// </summary>
         [JsonProperty(PropertyName = "beschreibung", Required = Required.Default)]
+
+        [System.Text.Json.Serialization.JsonPropertyName("beschreibung")]
         [ProtoMember(4)]
         public string Beschreibung { get; set; }
 
@@ -36,6 +40,8 @@ namespace BO4E.COM
         /// sinnvoll ist.
         /// </summary>
         [JsonProperty(PropertyName = "deadline", Required = Required.Default)]
+
+        [System.Text.Json.Serialization.JsonPropertyName("deadline")]
         [ProtoMember(5)]
         public DateTimeOffset? Deadline { get; set; }
 
@@ -43,6 +49,8 @@ namespace BO4E.COM
         /// Wurde diese Aufgabe schon ausgeführt (true)? Steht sie noch zur Bearbeitung an (false)?
         /// </summary>
         [JsonProperty(PropertyName = "ausgefuehrt", Required = Required.Always)]
+
+        [System.Text.Json.Serialization.JsonPropertyName("ausgefuehrt")]
         [ProtoMember(6)]
         public bool Ausgefuehrt { get; set; }
 
@@ -52,6 +60,8 @@ namespace BO4E.COM
         [JsonConverter(typeof(LenientDateTimeConverter))]
         [System.Text.Json.Serialization.JsonConverter(typeof(LenientSystemTextJsonNullableDateTimeOffsetConverter))]
         [JsonProperty(PropertyName = "ausfuehrungszeitpunkt", Required = Required.Default)]
+
+        [System.Text.Json.Serialization.JsonPropertyName("ausfuehrungszeitpunkt")]
         [ProtoMember(7)]
         public DateTimeOffset? Ausfuehrungszeitpunkt { get; set; }
 
@@ -60,6 +70,8 @@ namespace BO4E.COM
         /// (Nur sinnvoll, wenn <c>ausgefuehrt==true</c>)
         /// </summary>
         [JsonProperty(PropertyName = "ausfuehrender", Required = Required.Default)]
+
+        [System.Text.Json.Serialization.JsonPropertyName("ausfuehrender")]
         [ProtoMember(8)]
         public string Ausfuehrender { get; set; }
     }

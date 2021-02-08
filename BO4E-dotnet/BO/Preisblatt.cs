@@ -25,6 +25,8 @@ namespace BO4E.BO
         /// Eine Bezeichnung für das Preisblatt.
         /// </summary>
         [JsonProperty(Required = Required.Always, Order = 4, PropertyName = "bezeichnung")]
+
+        [System.Text.Json.Serialization.JsonPropertyName("bezeichnung")]
         [ProtoMember(4)]
         [DataCategory(DataCategory.FINANCE)]
         [BoKey]
@@ -34,6 +36,8 @@ namespace BO4E.BO
         /// Der Zeitraum für den der Preis festgelegt ist. Details siehe <see cref="Zeitraum"/>
         /// </summary>
         [JsonProperty(Required = Required.Always, Order = 5, PropertyName = "gueltigkeit")]
+
+        [System.Text.Json.Serialization.JsonPropertyName("gueltigkeit")]
         [ProtoMember(5)]
         [DataCategory(DataCategory.FINANCE)]
         public Zeitraum Gueltigkeit { get; set; }
@@ -42,6 +46,8 @@ namespace BO4E.BO
         /// Die einzelnen Positionen, die mit dem Preisblatt abgerechnet werden können. Z.B. Arbeitspreis, Grundpreis etc. Details siehe <see cref="Preisposition"/>
         /// </summary>
         [JsonProperty(Required = Required.Always, Order = 6, PropertyName = "preispositionen")] // at least one entry
+
+        [System.Text.Json.Serialization.JsonPropertyName("preispositionen")]
         [DataCategory(DataCategory.FINANCE)]
         [ProtoMember(6)]
         public List<Preisposition> Preispositionen { get; set; }

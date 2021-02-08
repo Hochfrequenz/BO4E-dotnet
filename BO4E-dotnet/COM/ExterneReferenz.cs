@@ -22,6 +22,8 @@ namespace BO4E.COM
         /// Bezeichnung der externen Referenz (z.B. "hochfrequenz integration services")
         /// </summary>
         [JsonProperty(PropertyName = "exRefName", Required = Required.Always)]
+
+        [System.Text.Json.Serialization.JsonPropertyName("exRefName")]
         [ProtoMember(1)]
         public string ExRefName { get; set; }
 
@@ -29,6 +31,8 @@ namespace BO4E.COM
         /// Wert der externen Referenz (z.B. "123456"; "4711")
         /// </summary>
         [JsonProperty(PropertyName = "exRefWert", Required = Required.Always)]
+
+        [System.Text.Json.Serialization.JsonPropertyName("exRefWert")]
         [ProtoMember(2)]
         public string ExRefWert { get; set; }
     }

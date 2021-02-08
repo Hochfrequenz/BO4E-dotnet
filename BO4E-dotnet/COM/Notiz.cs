@@ -22,6 +22,8 @@ namespace BO4E.COM
         /// Person oder System, das die Notiz angelegt hat.
         /// </summary>
         [JsonProperty(PropertyName = "autor", Required = Required.Always, Order = 7)]
+
+        [System.Text.Json.Serialization.JsonPropertyName("autor")]
         [ProtoMember(3)]
         public string Autor { get; set; }
 
@@ -29,6 +31,8 @@ namespace BO4E.COM
         /// Zeitpunkt zu dem die Notiz angelegt wurde
         /// </summary>
         [JsonProperty(PropertyName = "zeitpunkt", Required = Required.Always, Order = 8)]
+
+        [System.Text.Json.Serialization.JsonPropertyName("zeitpunkt")]
         [ProtoMember(4)]
         public DateTimeOffset Zeitpunkt { get; set; }
 
@@ -39,6 +43,8 @@ namespace BO4E.COM
         /// Inhalt der Notiz (Freitext)
         /// </summary>
         [JsonProperty(PropertyName = "inhalt", Required = Required.Always, Order = 5)]
+
+        [System.Text.Json.Serialization.JsonPropertyName("inhalt")]
         [System.Text.Json.Serialization.JsonPropertyName("inhalt")]
         [ProtoMember(5)]
         public string Inhalt

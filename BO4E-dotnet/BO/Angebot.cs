@@ -24,6 +24,8 @@ namespace BO4E.BO
         ///  Eindeutige Nummer des Angebotes.
         /// </summary>
         [JsonProperty(Required = Required.Always, Order = 4, PropertyName = "angebotsnummer")]
+
+        [System.Text.Json.Serialization.JsonPropertyName("angebotsnummer")]
         [JsonPropertyName("angebotsnummer")]
         [ProtoMember(4)]
         [DataCategory(DataCategory.FINANCE)]
@@ -34,6 +36,8 @@ namespace BO4E.BO
         /// Referenz auf eine Anfrage oder Ausschreibung.Kann dem Empfänger des Angebotes bei Zuordnung des Angebotes zur Anfrage bzw.Ausschreibung helfen.
         /// </summary>
         [JsonProperty(Required = Required.Default, Order = 5, PropertyName = "anfragereferenz")]
+
+        [System.Text.Json.Serialization.JsonPropertyName("anfragereferenz")]
         [ProtoMember(5)]
         [DataCategory(DataCategory.FINANCE)]
         public string Anfragereferenz { get; set; }
@@ -45,6 +49,8 @@ namespace BO4E.BO
         /// 2017-12-24
         /// </example>
         [JsonProperty(Required = Required.Always, Order = 6, PropertyName = "angebotsdatum")]
+
+        [System.Text.Json.Serialization.JsonPropertyName("angebotsdatum")]
         [ProtoMember(6)]
         [DataCategory(DataCategory.FINANCE)]
         public DateTimeOffset Angebotsdatum { get; set; }
@@ -54,6 +60,8 @@ namespace BO4E.BO
         /// </summary>
         /// <see cref="Sparte"/>
         [JsonProperty(Required = Required.Always, Order = 7, PropertyName = "sparte")]
+
+        [System.Text.Json.Serialization.JsonPropertyName("sparte")]
         [ProtoMember(7)]
         public Sparte Sparte { get; set; }
 
@@ -64,6 +72,8 @@ namespace BO4E.BO
         /// 2017-12-31 17:00:00
         /// </example>
         [JsonProperty(Required = Required.Default, Order = 8, PropertyName = "bindefrist")]
+
+        [System.Text.Json.Serialization.JsonPropertyName("bindefrist")]
         [ProtoMember(8)]
         [DataCategory(DataCategory.FINANCE)]
         public DateTimeOffset Bindefrist { get; set; }
@@ -73,6 +83,8 @@ namespace BO4E.BO
         /// </summary>
         /// <see cref="Geschaeftspartner"/>
         [JsonProperty(Required = Required.Always, Order = 9, PropertyName = "angebotgeber")]
+
+        [System.Text.Json.Serialization.JsonPropertyName("angebotgeber")]
         [ProtoMember(9)]
         [DataCategory(DataCategory.FINANCE)]
         public Geschaeftspartner Angebotgeber { get; set; }
@@ -82,6 +94,8 @@ namespace BO4E.BO
         /// </summary>
         /// <see cref="Geschaeftspartner"/>
         [JsonProperty(Required = Required.Always, Order = 10, PropertyName = "angebotnehmer")]
+
+        [System.Text.Json.Serialization.JsonPropertyName("angebotnehmer")]
         [ProtoMember(10)]
         [DataCategory(DataCategory.FINANCE)]
         public Geschaeftspartner Angebotnehmer { get; set; }
@@ -91,6 +105,8 @@ namespace BO4E.BO
         /// </summary>
         /// <see cref="Ansprechpartner"/>
         [JsonProperty(Required = Required.Default, Order = 11, PropertyName = "unterzeichnerAngebotsnehmer")]
+
+        [System.Text.Json.Serialization.JsonPropertyName("unterzeichnerAngebotsnehmer")]
         [ProtoMember(11)]
         [DataCategory(DataCategory.NAME)]
         public Ansprechpartner UnterzeichnerAngebotsnehmer { get; set; }
@@ -100,6 +116,8 @@ namespace BO4E.BO
         /// </summary>
         /// <see cref="Ansprechpartner"/>
         [JsonProperty(Required = Required.Default, Order = 12, PropertyName = "unterzeichnerAngebotsgeber")]
+
+        [System.Text.Json.Serialization.JsonPropertyName("unterzeichnerAngebotsgeber")]
         [ProtoMember(12)]
         [DataCategory(DataCategory.NAME)]
         public Ansprechpartner UnterzeichnerAngebotsgeber { get; set; }
@@ -109,6 +127,8 @@ namespace BO4E.BO
         /// </summary>
         /// <see cref="Angebotsvariante"/>
         [JsonProperty(Required = Required.Default, Order = 13, PropertyName = "varianten")]
+
+        [System.Text.Json.Serialization.JsonPropertyName("varianten")]
         [ProtoMember(13)]
         [DataCategory(DataCategory.FINANCE)]
         [MinLength(1)]

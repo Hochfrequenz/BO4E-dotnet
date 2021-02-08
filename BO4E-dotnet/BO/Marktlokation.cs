@@ -30,6 +30,8 @@ namespace BO4E.BO
         /// </summary>
         [DefaultValue("|null|")]
         [JsonProperty(Required = Required.Always, Order = 4, PropertyName = "marktlokationsId")]
+
+        [System.Text.Json.Serialization.JsonPropertyName("marktlokationsId")]
         [DataCategory(DataCategory.POD)]
         [BoKey]
         [ProtoMember(4)]
@@ -37,26 +39,36 @@ namespace BO4E.BO
 
         /// <summary>Sparte der Messlokation, z.B. Gas oder Strom.</summary>
         [JsonProperty(Required = Required.Always, Order = 5, PropertyName = "sparte")]
+
+        [System.Text.Json.Serialization.JsonPropertyName("sparte")]
         [ProtoMember(5)]
         public Sparte Sparte { get; set; }
 
         /// <summary>Kennzeichnung, ob Energie eingespeist oder entnommen (ausgespeist) wird.</summary>
         [JsonProperty(Required = Required.Always, Order = 6, PropertyName = "energierichtung")]
+
+        [System.Text.Json.Serialization.JsonPropertyName("energierichtung")]
         [ProtoMember(6)]
         public Energierichtung Energierichtung { get; set; }
 
         /// <summary>Kennzeichnung, ob Energie eingespeist oder entnommen (ausgespeist) wird.</summary>
         [JsonProperty(Required = Required.Always, Order = 7, PropertyName = "bilanzierungsmethode")]
+
+        [System.Text.Json.Serialization.JsonPropertyName("bilanzierungsmethode")]
         [ProtoMember(7)]
         public Bilanzierungsmethode Bilanzierungsmethode { get; set; }
 
         /// <summary>Verbrauchsart der Marktlokation</summary>
         [JsonProperty(Required = Required.Default, Order = 8, PropertyName = "verbrauchsart")]
+
+        [System.Text.Json.Serialization.JsonPropertyName("verbrauchsart")]
         [ProtoMember(8)]
         public Verbrauchsart? Verbrauchsart { get; set; }
 
         /// <summary>Gibt an, ob es sich um eine unterbrechbare Belieferung handelt.</summary>
         [JsonProperty(Required = Required.Default, Order = 9, PropertyName = "unterbrechbar")]
+
+        [System.Text.Json.Serialization.JsonPropertyName("unterbrechbar")]
         [ProtoMember(9)]
         public bool? Unterbrechbar { get; set; }
 
@@ -66,6 +78,8 @@ namespace BO4E.BO
         /// Niederdruck.
         /// <seealso cref="ENUM.Netzebene" /></summary>
         [JsonProperty(Required = Required.Always, Order = 10, PropertyName = "netzebene")]
+
+        [System.Text.Json.Serialization.JsonPropertyName("netzebene")]
         [ProtoMember(10)]
         public Netzebene Netzebene { get; set; }
 
@@ -74,55 +88,75 @@ namespace BO4E.BO
         /// angeschlossen ist.
         /// </summary>
         [JsonProperty(PropertyName = "netzbetreiberCodeNr", Required = Required.Default, Order = 11)]
+
+        [System.Text.Json.Serialization.JsonPropertyName("netzbetreiberCodeNr")]
         [ProtoMember(11)]
         public string NetzbetreiberCodeNr { get; set; }
 
         /// <summary>Typ des Netzgebietes,z.B.Verteilnetz.</summary>
         /// https://github.com/Hochfrequenz/energy-service-hub/issues/11
         [JsonProperty(PropertyName = "gebietTyp", Order = 12, Required = Required.Default)]
+
+        [System.Text.Json.Serialization.JsonPropertyName("gebietTyp")]
         [ProtoMember(12)]
         public Gebiettyp? GebietTyp { get; set; }
 
         /// <summary>Die Nummer des Netzgebietes in der ene't-Datenbank.</summary>
         [JsonProperty(PropertyName = "netzgebietNr", Order = 13, Required = Required.Default)]
+
+        [System.Text.Json.Serialization.JsonPropertyName("netzgebietNr")]
         [ProtoMember(13)]
         public string NetzgebietNr { get; set; }
 
         /// <summary>Bilanzierungsgebiet, dem das Netzgebiet zugeordnet ist - im Falle eines Strom Netzes.</summary>
         [JsonProperty(Required = Required.Default, Order = 14, PropertyName = "bilanzierungsgebiet")]
+
+        [System.Text.Json.Serialization.JsonPropertyName("bilanzierungsgebiet")]
         [ProtoMember(14)]
         public string Bilanzierungsgebiet { get; set; }
 
         /// <summary>CodeNummer des Grundversorgers, der für diese Marktlokation zuständig ist.</summary>
         [JsonProperty(PropertyName = "grundversorgerCodeNr", Order = 15, Required = Required.Default)]
+
+        [System.Text.Json.Serialization.JsonPropertyName("grundversorgerCodeNr")]
         [ProtoMember(15)]
         public string GrundversorgerCodeNr { get; set; }
 
         ///<summary>Die Gasqualität in diesem Netzgebiet. H-Gas oder L-Gas. Im Falle eines Gas-Netzes.<seealso cref="ENUM.Gasqualitaet" /></summary> */
         [JsonProperty(Required = Required.Default, Order = 16, PropertyName = "gasqualitaet")]
+
+        [System.Text.Json.Serialization.JsonPropertyName("gasqualitaet")]
         [ProtoMember(16)]
         public Gasqualitaet? Gasqualitaet { get; set; }
 
         /// <summary>Link zum Geschäftspartner, dem diese Marktlokation gehört.</summary>
         [JsonProperty(Required = Required.Default, Order = 17, NullValueHandling = NullValueHandling.Ignore, PropertyName = "endkunde")]
+
+        [System.Text.Json.Serialization.JsonPropertyName("endkunde")]
         [ProtoMember(17)]
         public Geschaeftspartner Endkunde { get; set; }
 
         /// <summary>Die Adresse, an der die Energie-Lieferung oder -Einspeisung erfolgt. <seealso cref="Adresse" /></summary> */
         [DataCategory(DataCategory.ADDRESS)]
         [JsonProperty(Required = Required.Default, Order = 18, PropertyName = "lokationsadresse")]
+
+        [System.Text.Json.Serialization.JsonPropertyName("lokationsadresse")]
         [ProtoMember(18)]
         public Adresse Lokationsadresse { get; set; }
 
         /// <summary>Alternativ zu einer postalischen Adresse kann hier ein Ort mittels Geokoordinaten angegeben werden (z.B. zur Identifikation von Sendemasten).<seealso cref="Geokoordinaten" /></summary> */
         [DataCategory(DataCategory.ADDRESS)]
         [JsonProperty(Required = Required.Default, Order = 19, PropertyName = "geoadresse")]
+
+        [System.Text.Json.Serialization.JsonPropertyName("geoadresse")]
         [ProtoMember(19)]
         public Geokoordinaten Geoadresse { get; set; }
 
         /// <summary>Alternativ zu einer postalischen Adresse und Geokoordinaten kann hier eine  Ortsangabe mittels Gemarkung und Flurstück erfolgen. <seealso cref="Katasteradresse" /></summary>
         [DataCategory(DataCategory.ADDRESS)]
         [JsonProperty(Required = Required.Default, Order = 20, PropertyName = "katasterinformation")]
+
+        [System.Text.Json.Serialization.JsonPropertyName("katasterinformation")]
         [ProtoMember(20)]
         public Katasteradresse Katasterinformation { get; set; }
 
@@ -131,6 +165,8 @@ namespace BO4E.BO
         /// </summary>
         // ToDo: specify docstring / evaluate if necessary
         [JsonProperty(Required = Required.Default, Order = 21, PropertyName = "marktrollen")]
+
+        [System.Text.Json.Serialization.JsonPropertyName("marktrollen")]
         [ProtoMember(1021)]
         [NonOfficial(NonOfficialCategory.CUSTOMER_REQUIREMENTS)]
         [Obsolete("I'm pretty sure the BO.Marktlokation is not the right place to store this information. Please evaluate!")]
@@ -141,6 +177,8 @@ namespace BO4E.BO
         /// </summary>
         // ToDo: specify docstring.
         [JsonProperty(Required = Required.Default, Order = 22, PropertyName = "regelzone")]
+
+        [System.Text.Json.Serialization.JsonPropertyName("regelzone")]
         [ProtoMember(1022)]
         [NonOfficial(NonOfficialCategory.CUSTOMER_REQUIREMENTS)]
         public string Regelzone { get; set; }
@@ -150,6 +188,8 @@ namespace BO4E.BO
         /// </summary>
         // ToDo: specify docstring.
         [JsonProperty(Required = Required.Default, Order = 23, PropertyName = "marktgebiet")]
+
+        [System.Text.Json.Serialization.JsonPropertyName("marktgebiet")]
         [ProtoMember(1023)]
         [NonOfficial(NonOfficialCategory.CUSTOMER_REQUIREMENTS)]
         public string Marktgebiet { get; set; }
@@ -159,6 +199,8 @@ namespace BO4E.BO
         /// </summary>
         // ToDo: specify docstring.
         [JsonProperty(Required = Required.Default, Order = 24, PropertyName = "zeitreihentyp")]
+
+        [System.Text.Json.Serialization.JsonPropertyName("zeitreihentyp")]
         [ProtoMember(1024)]
         [NonOfficial(NonOfficialCategory.CUSTOMER_REQUIREMENTS)]
         public Zeitreihentyp? Zeitreihentyp { get; set; }
@@ -168,6 +210,8 @@ namespace BO4E.BO
         /// </summary>
         // ToDo: specify docstring.
         [JsonProperty(Required = Required.Default, Order = 25, PropertyName = "zaehlwerke")]
+
+        [System.Text.Json.Serialization.JsonPropertyName("zaehlwerke")]
         [ProtoMember(1025)]
         [NonOfficial(NonOfficialCategory.CUSTOMER_REQUIREMENTS)]
         public List<Zaehlwerk> Zaehlwerke { get; set; }
@@ -177,6 +221,8 @@ namespace BO4E.BO
         /// </summary>
         // ToDo: specify docstring / check if needed
         [JsonProperty(Required = Required.Default, Order = 26, PropertyName = "verbrauchsmenge")]
+
+        [System.Text.Json.Serialization.JsonPropertyName("verbrauchsmenge")]
         [ProtoMember(1026)]
         [NonOfficial(NonOfficialCategory.CUSTOMER_REQUIREMENTS)]
         [Obsolete("Consider if this is really the right place to store the information. I think Energiemenge->energieverbrauch is better suited.")]
@@ -187,6 +233,8 @@ namespace BO4E.BO
         /// </summary>
         // ToDo: specify docstring.
         [JsonProperty(Required = Required.Default, Order = 27, PropertyName = "messlokationen")]
+
+        [System.Text.Json.Serialization.JsonPropertyName("messlokationen")]
         [ProtoMember(1027)]
         [NonOfficial(NonOfficialCategory.CUSTOMER_REQUIREMENTS)]
         public List<Messlokation> Messlokationen { get; set; }
@@ -215,6 +263,8 @@ namespace BO4E.BO
         /// Der Standard ist hier die Addition.
         [DataCategory(DataCategory.POD)]
         [JsonProperty(Required = Required.Default, Order = 28, PropertyName = "zugehoerigeMesslokationen")]
+
+        [System.Text.Json.Serialization.JsonPropertyName("zugehoerigeMesslokationen")]
         [ProtoMember(28)]
         public List<Messlokationszuordnung> ZugehoerigeMesslokationen { get; set; }
 
