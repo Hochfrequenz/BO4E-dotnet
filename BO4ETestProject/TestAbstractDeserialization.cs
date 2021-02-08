@@ -51,7 +51,7 @@ namespace TestBO4E
                 json = JsonDocument.Parse(jsonString);
             }
 
-            var maloString = JsonSerializer.Serialize(json.RootElement.GetProperty("input"));
+            var maloString = JsonSerializer.Serialize(json.RootElement.GetProperty("input").GetRawText());
             Assert.IsNotNull(maloString);
             var malo = System.Text.Json.JsonSerializer.Deserialize<Marktlokation>(maloString);
             Assert.IsNotNull(malo);
@@ -61,7 +61,7 @@ namespace TestBO4E
         }
 
         [TestMethod]
-        public void TestMaLoTypeNameHandlingDeserialization()
+        public void TestMaLoTypeNameHandlingDeserializationNewtonsoft()
         {
             JObject json;
             using (var r = new StreamReader("BoMapperTests/marktlokation_with_typenamehandling.json"))
