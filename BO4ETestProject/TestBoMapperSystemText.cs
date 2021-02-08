@@ -129,67 +129,50 @@ namespace TestBO4E
         [TestMethod]
         public void TestVertragQuickFix()
         {
-            JsonDocument json;
-            using (var r = new StreamReader("BoMapperTests/vertragLokationsIdUp.json"))
-            {
-                var jsonString = r.ReadToEnd();
-                json = JsonSerializer.Deserialize<JsonDocument>(jsonString);
-            }
-            var v = JsonSerializer.Deserialize<Vertrag>(json.RootElement.GetProperty("input").GetRawText(), LenientParsing.MOST_LENIENT.GetJsonSerializerOptions());
-            Assert.IsNotNull(v.Vertragsteile);
-            Assert.AreEqual("DE54321", v.Vertragsteile.First().Lokation);
+            var jsonInput = GetInputNodeAsJson("BoMapperTests/vertragLokationsIdUp.json");
+            var vertrag = JsonSerializer.Deserialize<Vertrag>(jsonInput, LenientParsing.MOST_LENIENT.GetJsonSerializerOptions());
+            Assert.IsNotNull(vertrag);
+            Assert.IsNotNull(vertrag.Vertragsteile);
+            Assert.AreEqual("DE54321", vertrag.Vertragsteile.First().Lokation);
         }
+        
         [TestMethod]
         public void TestMesslokation()
         {
-            JsonDocument json;
-            using (var r = new StreamReader("BoMapperTests/messlokation_userProps.json"))
-            {
-                var jsonString = r.ReadToEnd();
-                json = JsonSerializer.Deserialize<JsonDocument>(jsonString);
-            }
-            var m = JsonSerializer.Deserialize<Messlokation>(json.RootElement.GetProperty("input").GetRawText(), LenientParsing.MOST_LENIENT.GetJsonSerializerOptions());
-            Assert.AreEqual(true, m.Abrechnungmessstellenbetriebnna);
+            var jsonInput = GetInputNodeAsJson("BoMapperTests/messlokation_userProps.json");
+            var melo = JsonSerializer.Deserialize<Messlokation>(jsonInput, LenientParsing.MOST_LENIENT.GetJsonSerializerOptions());
+            Assert.IsNotNull(melo);
+            Assert.AreEqual(true, melo.Abrechnungmessstellenbetriebnna);
         }
+        
         [TestMethod]
         public void TestMarktlokation()
         {
-            JsonDocument json;
-            using (var r = new StreamReader("BoMapperTests/marktlokation_simple.json"))
-            {
-                var jsonString = r.ReadToEnd();
-                json = JsonSerializer.Deserialize<JsonDocument>(jsonString);
-            }
-            var m = JsonSerializer.Deserialize<Marktlokation>(json.RootElement.GetProperty("input").GetRawText(), LenientParsing.MOST_LENIENT.GetJsonSerializerOptions());
-            Assert.AreEqual(BO4E.ENUM.Gebiettyp.VERTEILNETZ, m.GebietTyp);
+            var jsonInput = GetInputNodeAsJson("BoMapperTests/marktlokation_simple.json");
+            var malo = JsonSerializer.Deserialize<Marktlokation>(jsonInput, LenientParsing.MOST_LENIENT.GetJsonSerializerOptions());
+            Assert.IsNotNull(malo);
+            Assert.AreEqual(BO4E.ENUM.Gebiettyp.VERTEILNETZ, malo.GebietTyp);
         }
+        
         [TestMethod]
         public void TestVertragNullableDateTimeOffset()
         {
-            JsonDocument json;
-            using (var r = new StreamReader("BoMapperTests/vertrag.json"))
-            {
-                var jsonString = r.ReadToEnd();
-                json = JsonSerializer.Deserialize<JsonDocument>(jsonString);
-            }
-            var v = JsonSerializer.Deserialize<Vertrag>(json.RootElement.GetProperty("input").GetRawText(), LenientParsing.MOST_LENIENT.GetJsonSerializerOptions());
+            var jsonInput = GetInputNodeAsJson("BoMapperTests/vertrag.json");
+            var v = JsonSerializer.Deserialize<Vertrag>(jsonInput, LenientParsing.MOST_LENIENT.GetJsonSerializerOptions());
+            Assert.IsNotNull(v);
             Assert.IsNotNull(v.Vertragsteile);
-
         }
+        
         [TestMethod]
         public void TestZählerHerstellerKontaktweg()
         {
-            JsonDocument json;
-            using (var r = new StreamReader("testjsons/zähler.json"))
-            {
-                var jsonString = r.ReadToEnd();
-                var v = JsonSerializer.Deserialize<Zaehler>(jsonString, LenientParsing.MOST_LENIENT.GetJsonSerializerOptions());
-                Assert.IsNotNull(v.Zaehlerhersteller);
-            }
-
-
-
+            using var r = new StreamReader("testjsons/zähler.json");
+            var jsonString = r.ReadToEnd();
+            var zaehler = JsonSerializer.Deserialize<Zaehler>(jsonString, LenientParsing.MOST_LENIENT.GetJsonSerializerOptions());
+            Assert.IsNotNull(zaehler);
+            Assert.IsNotNull(zaehler.Zaehlerhersteller);
         }
+        
         protected class TestDateTime
         {
             /// <summary>
@@ -213,6 +196,7 @@ namespace TestBO4E
 
             private DateTime eventOccured;
         }
+        
         [TestMethod]
         public void TestConversionFromMinSystemTextJson()
         {
@@ -225,14 +209,8 @@ namespace TestBO4E
         [TestMethod]
         public void TestSummerTimeBug()
         {
-            // first test serialization of complete business object
-            JsonDocument json;
-            using (var r = new StreamReader("BoMapperTests/energiemenge_sommerzeit_bug.json"))
-            {
-                var jsonString = r.ReadToEnd();
-                json = JsonSerializer.Deserialize<JsonDocument>(jsonString);
-            }
-            var em = JsonSerializer.Deserialize<Energiemenge>(json.RootElement.GetProperty("input").GetRawText(), LenientParsing.MOST_LENIENT.GetJsonSerializerOptions());
+            var jsonInput = GetInputNodeAsJson("BoMapperTests/energiemenge_sommerzeit_bug.json");
+            var em = JsonSerializer.Deserialize<Energiemenge>(jsonInput, LenientParsing.MOST_LENIENT.GetJsonSerializerOptions());
             if (TimeZoneInfo.Local == CentralEuropeStandardTime.CentralEuropeStandardTimezoneInfo)
             {
                 Assert.AreEqual(2, em.Energieverbrauch.Count); // weil 2 verschiedene status
@@ -242,29 +220,18 @@ namespace TestBO4E
         [TestMethod]
         public void TestVertragStringToInt()
         {
-            // first test serialization of complete business object
-            JsonDocument json;
-            using (var r = new StreamReader("BoMapperTests/Vertrag_lenient_String.json"))
-            {
-                var jsonString = r.ReadToEnd();
-                json = JsonSerializer.Deserialize<JsonDocument>(jsonString);
-            }
+            var jsonInput = GetInputNodeAsJson("BoMapperTests/Vertrag_lenient_String.json");
             var lenients = LenientParsing.STRING_TO_INT;
-            var v = JsonSerializer.Deserialize<Vertrag>(json.RootElement.GetProperty("input").GetRawText(), lenients.GetJsonSerializerOptions());
+            var v = JsonSerializer.Deserialize<Vertrag>(jsonInput, lenients.GetJsonSerializerOptions());
             Assert.AreEqual(v.Vertragskonditionen.AnzahlAbschlaege, 12);
         }
 
         [TestMethod]
         public void TestProfDecimalsVerbrauchBug()
         {
-            // first test serialization of complete business object
-            JsonDocument json;
-            using (var r = new StreamReader("BoMapperTests/energiemenge_profdecimal_verbrauch_bug.json"))
-            {
-                var jsonString = r.ReadToEnd();
-                json = JsonSerializer.Deserialize<JsonDocument>(jsonString);
-            }
-            var em = JsonSerializer.Deserialize<Energiemenge>(json.RootElement.GetProperty("input").GetRawText(), LenientParsing.MOST_LENIENT.GetJsonSerializerOptions());
+            var jsonInput = GetInputNodeAsJson("BoMapperTests/energiemenge_profdecimal_verbrauch_bug.json");
+            var em = JsonSerializer.Deserialize<Energiemenge>(jsonInput, LenientParsing.MOST_LENIENT.GetJsonSerializerOptions());
+            Assert.IsNotNull(em);
             Assert.AreEqual(4, em.Energieverbrauch.Count);
             Assert.AreEqual(59.0M, em.Energieverbrauch[0].Wert);
             Assert.AreEqual(58.0M, em.Energieverbrauch[1].Wert);
@@ -275,14 +242,9 @@ namespace TestBO4E
         [TestMethod]
         public void TestProfDecimalsEnergiemengeBug()
         {
-            // first test serialization of complete business object
-            JsonDocument json;
-            using (var r = new StreamReader("BoMapperTests/energiemenge_profdecimal_em_bug.json"))
-            {
-                var jsonString = r.ReadToEnd();
-                json = JsonSerializer.Deserialize<JsonDocument>(jsonString);
-            }
-            var em = JsonSerializer.Deserialize<Energiemenge>(json.RootElement.GetProperty("input").GetRawText(), LenientParsing.MOST_LENIENT.GetJsonSerializerOptions());
+            var jsonInput = GetInputNodeAsJson("BoMapperTests/energiemenge_profdecimal_em_bug.json");
+            var em = JsonSerializer.Deserialize<Energiemenge>(jsonInput, LenientParsing.MOST_LENIENT.GetJsonSerializerOptions());
+            Assert.IsNotNull(em);
             Assert.AreEqual(1.375000M, em.Energieverbrauch.First().Wert);
             Assert.AreEqual(1.2130000M, em.Energieverbrauch.Last().Wert);
         }
@@ -333,19 +295,7 @@ namespace TestBO4E
                 LenientParsing.DATE_TIME.GetJsonSerializerOptions());
             Assert.AreEqual(new DateTimeOffset(2019, 1, 31, 3, 0, 0, TimeSpan.Zero), v3.Enddatum);
         }
-
-
-        [TestMethod]
-        public void TestBoNames()
-        {
-            var testResult = BoMapper.GetValidBoNames();
-            Assert.IsTrue(testResult.Contains("Messlokation"));
-            Assert.IsTrue(testResult.Contains("Energiemenge"));
-            Assert.IsFalse(testResult.Contains("Verbrauch"), "No COM");
-            Assert.IsFalse(testResult.Contains("CompletenessReport")); // has moved to extensions
-            Assert.IsFalse(testResult.Contains("Mengeneinheit"), "No enums");
-        }
-
+        
         [TestMethod]
         public void TestBoNameTyping()
         {
@@ -378,6 +328,24 @@ namespace TestBO4E
             var b = JsonSerializer.Deserialize<Aufgabe>("{\"ccat\":\"ZE01\",\"casenr\":\"470272\",\"objtype\":\"ZISUPROFIL\",\"aufgabenId\":\"REIMPORT\",\"ausgefuehrt\":\"false\",\"ausfuehrender\":\"\",\"ausfuehrungszeitpunkt\":\"2019-07-10T11:52:59Z\"}", LenientParsing.DATE_TIME.GetJsonSerializerOptions());
             Assert.IsNotNull(b);
             Assert.IsTrue(b.Ausfuehrungszeitpunkt.HasValue);
+        }
+        
+                
+        /// <summary>
+        /// Parses the file at <paramref name="filepath"/> as json object, extracts the "input" node.
+        /// </summary>
+        /// <remarks>Somehow the test had been setup this way.</remarks>
+        /// <returns></returns>
+        private static string GetInputNodeAsJson(string filepath)
+        {
+            JsonDocument json;
+            using (var r = new StreamReader(filepath))
+            {
+                var jsonString = r.ReadToEnd();
+                json = JsonDocument.Parse(jsonString);
+            }
+            var result = json.RootElement.GetProperty("input").GetRawText();
+            return result;
         }
     }
 }
