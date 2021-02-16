@@ -40,7 +40,7 @@ namespace BO4E.meta.LenientConverters
                 NumberHandling = JsonNumberHandling.AllowReadingFromString,
                 Encoder = JavaScriptEncoder.UnsafeRelaxedJsonEscaping
             };
-            settings.Converters.Add(new LenientDictionaryConverter());
+
             settings.Converters.Add(new VertragsConverter());
             settings.Converters.Add(new EnergiemengeConverter());
             settings.Converters.Add(new VerbrauchConverter());

@@ -82,7 +82,7 @@ namespace BO4E.COM
         [JsonExtensionData]
         [System.Text.Json.Serialization.JsonExtensionData]
         [DataCategory(DataCategory.USER_PROPERTIES)]
-        public Dictionary<string, object> UserProperties { get; set; }
+        public IDictionary<string, object> UserProperties { get; set; }
 
         /// <summary>
         /// BO4E components are considered equal iff all of their elements/fields are equal.

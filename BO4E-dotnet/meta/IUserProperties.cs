@@ -14,6 +14,6 @@ namespace BO4E.meta
         /// <summary>
         /// <see cref="BusinessObject.UserProperties"/>, <see cref="BO4E.COM.COM.UserProperties"/>
         /// </summary>
-        Dictionary<string, object> UserProperties { get; set; }
+        IDictionary<string, object> UserProperties { get; set; }
     }
 }
