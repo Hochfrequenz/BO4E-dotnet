@@ -49,7 +49,7 @@ namespace BO4E.meta.LenientConverters
         /// <returns></returns>
         public override JsonConverter CreateConverter(Type typeToConvert, JsonSerializerOptions options)
         {
-            JsonConverter converter = (JsonConverter) Activator.CreateInstance(
+            JsonConverter converter = (JsonConverter)Activator.CreateInstance(
                 typeof(LenientSystemTextJsonEnumListConverter<,>).MakeGenericType(typeToConvert,
                     typeToConvert.GetGenericArguments().First()),
                 BindingFlags.Instance | BindingFlags.Public,
@@ -107,30 +107,30 @@ namespace BO4E.meta.LenientConverters
             {
                 switch (rawItem)
                 {
-                    case object _ when Enum.TryParse(rawItem.ToString(), out TE enumResult):
-                    {
-                        // default. everything is as it should be :-)
+                    case object _ when Enum.TryParse(rawItem.ToString(), true, out TE enumResult):
+                        {
+                            // default. everything is as it should be :-)
 
-                        ((IList) result).Add(enumResult);
-                        break;
-                    }
+                            ((IList)result).Add(enumResult);
+                            break;
+                        }
                     case JsonElement element:
                         try
                         {
                             var rawDict = JsonSerializer.Deserialize<Dictionary<string, object>>(element.GetRawText());
                             var rawObject = rawDict.Values.FirstOrDefault();
-                            var enumValue = Enum.Parse(expectedListElementType, rawObject.ToString());
-                            ((IList) result).Add(enumValue);
+                            var enumValue = Enum.Parse(expectedListElementType, rawObject.ToString(), true);
+                            ((IList)result).Add(enumValue);
                         }
                         catch (Exception)
                         {
-                            var enumValue = Enum.Parse(expectedListElementType, element.GetString());
-                            ((IList) result).Add(enumValue);
+                            var enumValue = Enum.Parse(expectedListElementType, element.GetString(), true);
+                            ((IList)result).Add(enumValue);
                         }
 
                         break;
                     default:
-                        ((IList) result).Add(rawItem);
+                        ((IList)result).Add(rawItem);
                         break;
                 }
             }
