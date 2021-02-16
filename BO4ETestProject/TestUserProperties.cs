@@ -1,6 +1,4 @@
-﻿using System;
-
-using BO4E;
+﻿using BO4E;
 using BO4E.BO;
 using BO4E.meta.LenientConverters;
 
@@ -8,11 +6,32 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 using Newtonsoft.Json;
 
+using System;
+using System.Collections.Generic;
+using System.IO;
+
 namespace TestBO4E
 {
     [TestClass]
     public class TestUserProperties
     {
+        public class WeatherForecastWithExtensionData
+        {
+            public DateTimeOffset Date { get; set; }
+            public int TemperatureCelsius { get; set; }
+            public string Summary { get; set; }
+            [System.Text.Json.Serialization.JsonExtensionData]
+            public Dictionary<string, object> ExtensionData { get; set; }
+        }
+
+        [TestMethod]
+        public void TestNetExample()
+        {
+            using var r = new StreamReader("testjsons/weatherforecast.json");
+            var jsonString = r.ReadToEnd();
+            var zaehler = System.Text.Json.JsonSerializer.Deserialize<WeatherForecastWithExtensionData>(jsonString);
+
+        }
         [TestMethod]
         public void TestDeserialization()
         {
@@ -22,6 +41,18 @@ namespace TestBO4E
             Assert.IsNotNull(melo.UserProperties);
             Assert.AreEqual("some_value_not_covered_by_bo4e", melo.UserProperties["myCustomInfo"] as string);
             Assert.AreEqual(123.456M, (decimal)(double)melo.UserProperties["myCustomValue"]);
+        }
+
+        [TestMethod]
+        public void TestDeserializationSystemTextJson()
+        {
+            var options = LenientParsing.MOST_LENIENT.GetJsonSerializerOptions();
+            var meloJson = @"{""messlokationsId"": ""DE0123456789012345678901234567890"", ""sparte"": ""STROM"", ""myCustomInfo"": ""some_value_not_covered_by_bo4e"", ""myCustomValue"": 123.456}";
+            var melo = System.Text.Json.JsonSerializer.Deserialize<Messlokation>(meloJson, options);
+            Assert.IsTrue(melo.IsValid());
+            Assert.IsNotNull(melo.UserProperties);
+            Assert.AreEqual("some_value_not_covered_by_bo4e", melo.UserProperties["myCustomInfo"].ToString());
+            Assert.AreEqual(123.456M, ((System.Text.Json.JsonElement)melo.UserProperties["myCustomValue"]).GetDecimal());
         }
 
         private void _AssertUserProperties(Messlokation melo)

@@ -1,14 +1,14 @@
-using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-
 using BO4E.BO;
 using BO4E.meta;
 
 using Newtonsoft.Json;
 
 using ProtoBuf;
+
+using System;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.Linq;
 
 namespace BO4E.COM
 {
@@ -82,7 +82,7 @@ namespace BO4E.COM
         [JsonExtensionData]
         [System.Text.Json.Serialization.JsonExtensionData]
         [DataCategory(DataCategory.USER_PROPERTIES)]
-        public IDictionary<string, object> UserProperties { get; set; }
+        public Dictionary<string, object> UserProperties { get; set; }
 
         /// <summary>
         /// BO4E components are considered equal iff all of their elements/fields are equal.

@@ -1,4 +1,5 @@
 ﻿using BO4E.BO;
+
 using System.Collections.Generic;
 
 namespace BO4E.meta
@@ -13,6 +14,6 @@ namespace BO4E.meta
         /// <summary>
         /// <see cref="BusinessObject.UserProperties"/>, <see cref="BO4E.COM.COM.UserProperties"/>
         /// </summary>
-        IDictionary<string, object> UserProperties { get; set; }
+        Dictionary<string, object> UserProperties { get; set; }
     }
 }

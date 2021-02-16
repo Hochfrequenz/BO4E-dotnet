@@ -8367,6 +8367,35 @@
         <member name="M:BO4E.meta.LenientConverters.LenientDateTimeConverter.WriteJson(Newtonsoft.Json.JsonWriter,System.Object,Newtonsoft.Json.JsonSerializer)">
             <inheritdoc cref="M:Newtonsoft.Json.JsonConverter.WriteJson(Newtonsoft.Json.JsonWriter,System.Object,Newtonsoft.Json.JsonSerializer)"/>
         </member>
+        <member name="T:BO4E.meta.LenientConverters.LenientDictionaryConverter">
+            <summary>
+            A custom converter following the code on joseftw/JOS.SystemTextJsonDictionaryStringObjectJsonConverter
+            </summary>
+        </member>
+        <member name="M:BO4E.meta.LenientConverters.LenientDictionaryConverter.CanConvert(System.Type)">
+            <summary>
+            Can only convert dictionaries
+            </summary>
+            <param name="typeToConvert"></param>
+            <returns></returns>
+        </member>
+        <member name="M:BO4E.meta.LenientConverters.LenientDictionaryConverter.Read(System.Text.Json.Utf8JsonReader@,System.Type,System.Text.Json.JsonSerializerOptions)">
+            <summary>
+            Read the Dicitionary from a JSON reader
+            </summary>
+            <param name="reader">the json reader passed by the converter</param>
+            <param name="typeToConvert">The type we want to construct</param>
+            <param name="options">any json serializer options</param>
+            <returns></returns>
+        </member>
+        <member name="M:BO4E.meta.LenientConverters.LenientDictionaryConverter.Write(System.Text.Json.Utf8JsonWriter,System.Collections.Generic.Dictionary{System.String,System.Object},System.Text.Json.JsonSerializerOptions)">
+            <summary>
+            Write the dictionary to json
+            </summary>
+            <param name="writer">a json writer to write to</param>
+            <param name="value">the value of the dictionary we want to write to</param>
+            <param name="options">a jsonserializeroptions object to give custom options</param>
+        </member>
         <member name="T:BO4E.meta.LenientConverters.LenientEnumListConverter">
             <summary>
             allows to deserialize a list of enums (see tests)

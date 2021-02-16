@@ -1,7 +1,9 @@
 ﻿using BO4E.BO;
 using BO4E.COM;
+
 using System;
 using System.Collections.Generic;
+using System.Text.Encodings.Web;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
@@ -35,15 +37,17 @@ namespace BO4E.meta.LenientConverters
             var settings = new JsonSerializerOptions
             {
                 PropertyNameCaseInsensitive = true,
-                NumberHandling = JsonNumberHandling.AllowReadingFromString
+                NumberHandling = JsonNumberHandling.AllowReadingFromString,
+                Encoder = JavaScriptEncoder.UnsafeRelaxedJsonEscaping
             };
-
+            settings.Converters.Add(new LenientDictionaryConverter());
             settings.Converters.Add(new VertragsConverter());
             settings.Converters.Add(new EnergiemengeConverter());
             settings.Converters.Add(new VerbrauchConverter());
             settings.Converters.Add(new LenientSystemTextJsonStringToBoolConverter());
             settings.Converters.Add(new StringNullableEnumConverter());
             settings.Converters.Add(new JsonStringEnumConverter());
+
             foreach (LenientParsing lp in Enum.GetValues(typeof(LenientParsing)))
             {
                 if (lenient.HasFlag(lp))
@@ -84,11 +88,11 @@ namespace BO4E.meta.LenientConverters
                         case LenientParsing.STRING_TO_INT:
                             settings.Converters.Add(new LenientSystemTextJsonStringToIntConverter());
                             break;
-                        // case LenientParsing.EmptyLists:
-                        // converters.Add(new LenientRequiredListConverter());
-                        // break;
+                            // case LenientParsing.EmptyLists:
+                            // converters.Add(new LenientRequiredListConverter());
+                            // break;
 
-                        // no default case because NONE and MOST_LENIENT do not come up with more converters
+                            // no default case because NONE and MOST_LENIENT do not come up with more converters
                     }
                 }
             }

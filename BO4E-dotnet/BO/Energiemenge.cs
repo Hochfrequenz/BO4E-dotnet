@@ -1,11 +1,3 @@
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Runtime.Serialization;
-using System.Text.Json;
-
 using BO4E.COM;
 using BO4E.ENUM;
 using BO4E.meta;
@@ -14,6 +6,14 @@ using BO4E.meta.LenientConverters;
 using Newtonsoft.Json;
 
 using ProtoBuf;
+
+using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
+using System.Linq;
+using System.Runtime.Serialization;
+using System.Text.Json;
 
 namespace BO4E.BO
 {
@@ -141,13 +141,13 @@ namespace BO4E.BO
                 result.UserProperties = new Dictionary<string, object>();
                 foreach (var kvp1 in em1.UserProperties)
                 {
-                    result.UserProperties.Add(kvp1);
+                    result.UserProperties.Add(kvp1.Key, kvp1.Value);
                 }
                 foreach (var kvp2 in em2.UserProperties)
                 {
                     if (!result.UserProperties.ContainsKey(kvp2.Key))
                     {
-                        result.UserProperties.Add(kvp2);
+                        result.UserProperties.Add(kvp2.Key, kvp2.Value);
                     }
                 }
             }

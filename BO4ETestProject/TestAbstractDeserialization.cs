@@ -1,5 +1,5 @@
-﻿using System.Collections.Generic;
-using BO4E.BO;
+﻿using BO4E.BO;
+using BO4E.meta.LenientConverters;
 
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
@@ -8,7 +8,7 @@ using Newtonsoft.Json.Linq;
 
 using System.IO;
 using System.Text.Json;
-using System.Text.Json.Serialization;
+
 using JsonSerializer = System.Text.Json.JsonSerializer;
 
 namespace TestBO4E
@@ -50,12 +50,13 @@ namespace TestBO4E
                 var jsonString = r.ReadToEnd();
                 json = JsonDocument.Parse(jsonString);
             }
+            var options = LenientParsing.MOST_LENIENT.GetJsonSerializerOptions();
 
-            var maloString = JsonSerializer.Serialize(json.RootElement.GetProperty("input").GetRawText());
+            var maloString = json.RootElement.GetProperty("input").GetRawText();
             Assert.IsNotNull(maloString);
-            var malo = System.Text.Json.JsonSerializer.Deserialize<Marktlokation>(maloString);
+            var malo = System.Text.Json.JsonSerializer.Deserialize<Marktlokation>(maloString, options);
             Assert.IsNotNull(malo);
-            var bo = JsonSerializer.Deserialize<BusinessObject>(maloString);
+            var bo = System.Text.Json.JsonSerializer.Deserialize<BusinessObject>(maloString, options);
             Assert.IsNotNull(bo);
             Assert.IsInstanceOfType(bo, typeof(Marktlokation));
         }
@@ -93,14 +94,11 @@ namespace TestBO4E
                 var jsonString = r.ReadToEnd();
                 json = JsonDocument.Parse(jsonString);
             }
-            var options = new JsonSerializerOptions()
-            {
-                Converters = { new JsonStringEnumConverter()}
-            };
+            var options = BO4E.meta.LenientConverters.LenientParsing.MOST_LENIENT.GetJsonSerializerOptions();
             var maloString = json.RootElement.GetProperty("input").GetRawText();
             var malo = JsonSerializer.Deserialize<Marktlokation>(maloString, options);
             Assert.IsNotNull(malo);
-            var bo = JsonSerializer.Deserialize<BusinessObject>(maloString);
+            var bo = JsonSerializer.Deserialize<BusinessObject>(maloString, options);
             Assert.IsNotNull(bo);
             Assert.IsInstanceOfType(bo, typeof(Marktlokation));
         }
