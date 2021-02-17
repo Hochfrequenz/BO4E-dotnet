@@ -111,7 +111,7 @@ namespace BO4E.meta.LenientConverters
                 // for performance, parse with ignoreCase:false first.
                 try
                 {
-                    var result = Enum.Parse(_underlyingType, value);
+                    var result = Enum.Parse(_underlyingType, value, true);
                     return (T)result;
                 }
                 catch (Exception)

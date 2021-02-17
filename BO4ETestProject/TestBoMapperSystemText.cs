@@ -1,17 +1,17 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.IO;
-using System.Linq;
-using System.Text.Json;
-
-using BO4E;
+﻿using BO4E;
 using BO4E.BO;
 using BO4E.COM;
 using BO4E.meta;
 using BO4E.meta.LenientConverters;
 //using BO4E.Extensions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+
+using System;
+using System.Collections.Generic;
+using System.Diagnostics;
+using System.IO;
+using System.Linq;
+using System.Text.Json;
 
 namespace TestBO4E
 {
@@ -135,7 +135,7 @@ namespace TestBO4E
             Assert.IsNotNull(vertrag.Vertragsteile);
             Assert.AreEqual("DE54321", vertrag.Vertragsteile.First().Lokation);
         }
-        
+
         [TestMethod]
         public void TestMesslokation()
         {
@@ -144,7 +144,7 @@ namespace TestBO4E
             Assert.IsNotNull(melo);
             Assert.AreEqual(true, melo.Abrechnungmessstellenbetriebnna);
         }
-        
+
         [TestMethod]
         public void TestMarktlokation()
         {
@@ -153,7 +153,7 @@ namespace TestBO4E
             Assert.IsNotNull(malo);
             Assert.AreEqual(BO4E.ENUM.Gebiettyp.VERTEILNETZ, malo.GebietTyp);
         }
-        
+
         [TestMethod]
         public void TestVertragNullableDateTimeOffset()
         {
@@ -162,7 +162,7 @@ namespace TestBO4E
             Assert.IsNotNull(v);
             Assert.IsNotNull(v.Vertragsteile);
         }
-        
+
         [TestMethod]
         public void TestZählerHerstellerKontaktweg()
         {
@@ -172,7 +172,7 @@ namespace TestBO4E
             Assert.IsNotNull(zaehler);
             Assert.IsNotNull(zaehler.Zaehlerhersteller);
         }
-        
+
         protected class TestDateTime
         {
             /// <summary>
@@ -196,7 +196,7 @@ namespace TestBO4E
 
             private DateTime eventOccured;
         }
-        
+
         [TestMethod]
         public void TestConversionFromMinSystemTextJson()
         {
@@ -223,6 +223,7 @@ namespace TestBO4E
             var jsonInput = GetInputNodeAsJson("BoMapperTests/Vertrag_lenient_String.json");
             var lenients = LenientParsing.STRING_TO_INT;
             var v = JsonSerializer.Deserialize<Vertrag>(jsonInput, lenients.GetJsonSerializerOptions());
+            Assert.AreEqual(BO4E.ENUM.Vertragstatus.AKTIV, v.Vertragstatus);
             Assert.AreEqual(v.Vertragskonditionen.AnzahlAbschlaege, 12);
         }
 
@@ -295,7 +296,7 @@ namespace TestBO4E
                 LenientParsing.DATE_TIME.GetJsonSerializerOptions());
             Assert.AreEqual(new DateTimeOffset(2019, 1, 31, 3, 0, 0, TimeSpan.Zero), v3.Enddatum);
         }
-        
+
         [TestMethod]
         public void TestBoNameTyping()
         {
@@ -329,8 +330,8 @@ namespace TestBO4E
             Assert.IsNotNull(b);
             Assert.IsTrue(b.Ausfuehrungszeitpunkt.HasValue);
         }
-        
-                
+
+
         /// <summary>
         /// Parses the file at <paramref name="filepath"/> as json object, extracts the "input" node.
         /// </summary>
