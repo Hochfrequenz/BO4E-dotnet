@@ -1,4 +1,8 @@
-﻿using BO4E.COM;
+﻿using System;
+using System.Collections.Generic;
+using System.Globalization;
+
+using BO4E.COM;
 using BO4E.ENUM;
 using BO4E.meta;
 
@@ -6,10 +10,6 @@ using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 
 using ProtoBuf;
-
-using System;
-using System.Collections.Generic;
-using System.Globalization;
 
 namespace BO4E.BO
 {
@@ -24,6 +24,8 @@ namespace BO4E.BO
         /// Bezeichnung für die vorliegende Rechnung.
         /// </summary>
         [JsonProperty(Required = Required.Default, Order = 4, PropertyName = "rechnungstitel")]
+
+        [System.Text.Json.Serialization.JsonPropertyName("rechnungstitel")]
         [FieldName("billTitle", Language.EN)]
         [ProtoMember(4)]
         public string Rechnungstitel { get; set; }
@@ -32,6 +34,8 @@ namespace BO4E.BO
         /// Status der Rechnung zur Kennzeichnung des Bearbeitungsstandes. Details siehe ENUM Rechnungsstatus
         /// </summary>
         [JsonProperty(Required = Required.Default, Order = 5, PropertyName = "rechnungsstatus")]
+
+        [System.Text.Json.Serialization.JsonPropertyName("rechnungsstatus")]
         [FieldName("billStatus", Language.EN)]
         [ProtoMember(5)]
         public Rechnungsstatus? Rechnungsstatus { get; set; }
@@ -40,6 +44,8 @@ namespace BO4E.BO
         /// Kennzeichnung, ob es sich um eine Stornorechnung handelt. Im Falle "true" findet sich im Attribut "originalrechnungsnummer" die Nummer der Originalrechnung.
         /// </summary>
         [JsonProperty(Required = Required.Always, Order = 6, PropertyName = "storno")]
+
+        [System.Text.Json.Serialization.JsonPropertyName("storno")]
         [FieldName("isCancellation", Language.EN)]
         [ProtoMember(6)]
         public bool Storno { get; set; }
@@ -48,6 +54,8 @@ namespace BO4E.BO
         /// Eine im Verwendungskontext eindeutige Nummer für die Rechnung.
         /// </summary>
         [JsonProperty(Required = Required.Always, Order = 7, PropertyName = "rechnungsnummer")]
+
+        [System.Text.Json.Serialization.JsonPropertyName("rechnungsnummer")]
         [ProtoMember(7)]
         [BoKey]
         [FieldName("billNumber", Language.EN)]
@@ -57,7 +65,9 @@ namespace BO4E.BO
         /// Ausstellungsdatum der Rechnung.
         /// </summary>
         [JsonProperty(Required = Required.Always, Order = 8, PropertyName = "rechnungsdatum")]
-        [ProtoMember(8, DataFormat = DataFormat.WellKnown)]
+
+        [System.Text.Json.Serialization.JsonPropertyName("rechnungsdatum")]
+        [ProtoMember(8)]
         [FieldName("billDate", Language.EN)]
         public DateTimeOffset Rechnungsdatum { get; set; }
 
@@ -65,7 +75,9 @@ namespace BO4E.BO
         /// Zu diesem Datum ist die Zahlung fällig.
         /// </summary>
         [JsonProperty(Required = Required.Always, Order = 9, PropertyName = "faelligkeitsdatum")]
-        [ProtoMember(9, DataFormat = DataFormat.WellKnown)]
+
+        [System.Text.Json.Serialization.JsonPropertyName("faelligkeitsdatum")]
+        [ProtoMember(9)]
         [FieldName("dueDate", Language.EN)]
         public DateTimeOffset Faelligkeitsdatum { get; set; }
 
@@ -73,6 +85,8 @@ namespace BO4E.BO
         /// Ein kontextbezogender Rechnungstyp, z.B. Netznutzungsrechnung. Details siehe ENUM Rechnungstyp
         /// </summary>
         [JsonProperty(Required = Required.Always, Order = 10, PropertyName = "rechnungstyp")]
+
+        [System.Text.Json.Serialization.JsonPropertyName("rechnungstyp")]
         [ProtoMember(10)]
         [FieldName("billType", Language.EN)]
         public Rechnungstyp Rechnungsstyp { get; set; }
@@ -81,6 +95,8 @@ namespace BO4E.BO
         /// Im Falle einer Stornorechnung (storno = true) steht hier die Rechnungsnummer der stornierten Rechnung.
         /// </summary>
         [JsonProperty(Required = Required.Default, Order = 11, PropertyName = "originalRechnungsnummer")]
+
+        [System.Text.Json.Serialization.JsonPropertyName("originalRechnungsnummer")]
         [ProtoMember(11)]
         public string OriginalRechnungsnummer { get; set; }
 
@@ -88,6 +104,8 @@ namespace BO4E.BO
         /// Der Zeitraum der zugrunde liegenden Lieferung zur Rechnung. In der COM Zeitraum können diese angegeben werden.
         /// </summary>
         [JsonProperty(Required = Required.Always, Order = 12, PropertyName = "rechnungsperiode")]
+
+        [System.Text.Json.Serialization.JsonPropertyName("rechnungsperiode")]
         [ProtoMember(12)]
         [FieldName("billPeriod", Language.EN)]
         public Zeitraum Rechnungsperiode { get; set; }
@@ -96,6 +114,8 @@ namespace BO4E.BO
         /// Der Aussteller der Rechnung. Details <see cref="Geschaeftspartner"/>
         /// </summary>
         [JsonProperty(Required = Required.Always, Order = 13, PropertyName = "rechnungsersteller")]
+
+        [System.Text.Json.Serialization.JsonPropertyName("rechnungsersteller")]
         [ProtoMember(13)]
         [FieldName("issuer", Language.EN)]
         public Geschaeftspartner Rechnungsersteller { get; set; }
@@ -104,6 +124,8 @@ namespace BO4E.BO
         /// Der Empfänger der Rechnung. Details <see cref="Geschaeftspartner"/>
         /// </summary>
         [JsonProperty(Required = Required.Always, Order = 14, PropertyName = "rechnungsempfaenger")]
+
+        [System.Text.Json.Serialization.JsonPropertyName("rechnungsempfaenger")]
         [ProtoMember(14)]
         [FieldName("recipient", Language.EN)]
         public Geschaeftspartner Rechnungsempfaenger { get; set; }
@@ -112,6 +134,8 @@ namespace BO4E.BO
         /// Die Summe der Nettobeträge der Rechnungsteile. Details <see cref="Betrag"/>
         /// </summary>
         [JsonProperty(Required = Required.Always, Order = 15, PropertyName = "gesamtnetto")]
+
+        [System.Text.Json.Serialization.JsonPropertyName("gesamtnetto")]
         [ProtoMember(15)]
         [FieldName("totalNet", Language.EN)]
         public Betrag Gesamtnetto { get; set; }
@@ -120,6 +144,8 @@ namespace BO4E.BO
         /// Die Summe der Steuerbeträge der Rechnungsteile. Details <see cref="Betrag"/>
         /// </summary>
         [JsonProperty(Required = Required.Always, Order = 16, PropertyName = "gesamtsteuer")]
+
+        [System.Text.Json.Serialization.JsonPropertyName("gesamtsteuer")]
         [ProtoMember(16)]
         [FieldName("totalTax", Language.EN)]
         public Betrag Gesamtsteuer { get; set; }
@@ -128,6 +154,8 @@ namespace BO4E.BO
         /// Die Summe aus Netto- und Steuerbetrag. Details <see cref="Betrag"/>
         /// </summary>
         [JsonProperty(Required = Required.Always, Order = 17, PropertyName = "gesamtbrutto")]
+
+        [System.Text.Json.Serialization.JsonPropertyName("gesamtbrutto")]
         [ProtoMember(17)]
         [FieldName("totalGross", Language.EN)]
         public Betrag Gesamtbrutto { get; set; }
@@ -136,6 +164,8 @@ namespace BO4E.BO
         /// Die Summe evtl. vorausgezahlter Beträge, z.B. Abschläge. Angabe als Bruttowert. Details <see cref="Betrag"/>
         /// </summary>
         [JsonProperty(Required = Required.Default, Order = 18, PropertyName = "vorausgezahlt")]
+
+        [System.Text.Json.Serialization.JsonPropertyName("vorausgezahlt")]
         [ProtoMember(18)]
         [FieldName("prepaid", Language.EN)]
         public Betrag Vorausgezahlt { get; set; }
@@ -144,6 +174,8 @@ namespace BO4E.BO
         /// Gesamtrabatt auf den Bruttobetrag. Details <see cref="Betrag"/>
         /// </summary>
         [JsonProperty(Required = Required.Default, Order = 19, PropertyName = "rabattBrutto")]
+
+        [System.Text.Json.Serialization.JsonPropertyName("rabattBrutto")]
         [ProtoMember(19)]
         [FieldName("discountGross", Language.EN)]
         public Betrag RabattBrutto { get; set; }
@@ -152,6 +184,8 @@ namespace BO4E.BO
         /// Der zu zahlende Betrag, der sich aus (<see cref="Gesamtbrutto"/> - <see cref="Vorausgezahlt"/> - <see cref="RabattBrutto"/>) ergibt. Details <see cref="Betrag"/>
         /// /// </summary>
         [JsonProperty(Required = Required.Always, Order = 20, PropertyName = "zuzahlen")]
+
+        [System.Text.Json.Serialization.JsonPropertyName("zuzahlen")]
         [ProtoMember(20)]
         [FieldName("toPay", Language.EN)]
         public Betrag Zuzahlen { get; set; }
@@ -160,6 +194,8 @@ namespace BO4E.BO
         /// Eine Liste mit Steuerbeträgen pro Steuerkennzeichen/Steuersatz. Die Summe dieser Beträge ergibt den Wert für gesamtsteuer. Details <see cref="Steuerbetrag"/>
         /// </summary>
         [JsonProperty(Required = Required.Default, Order = 21, PropertyName = "steuerbetraege")]
+
+        [System.Text.Json.Serialization.JsonPropertyName("steuerbetraege")]
         [ProtoMember(21)]
         [FieldName("taxList", Language.EN)]
         public List<Steuerbetrag> Steuerbetraege { get; set; }
@@ -169,6 +205,8 @@ namespace BO4E.BO
         /// </summary>
         [ProtoMember(22)]
         [JsonProperty(Required = Required.Always, Order = 22, PropertyName = "rechnungspositionen")]
+
+        [System.Text.Json.Serialization.JsonPropertyName("rechnungspositionen")]
         [FieldName("invoiceItemList", Language.EN)]
         public List<Rechnungsposition> Rechnungspositionen { get; set; }
 
@@ -207,7 +245,7 @@ namespace BO4E.BO
             Faelligkeitsdatum = new DateTimeOffset(TimeZoneInfo.ConvertTime((infoToken["faedn"] ?? infoToken["FAEDN"]).Value<DateTime>(), CentralEuropeStandardTime.CentralEuropeStandardTimezoneInfo, TimeZoneInfo.Utc));
             Storno = false;
 
-            decimal gSteure, gBrutto, vGezahlt, rBrutto;
+            decimal gSteure, vGezahlt, rBrutto;
             var gNetto = gSteure = _ = vGezahlt = rBrutto = 0.00M;
             var waehrungscode = (Waehrungscode)Enum.Parse(typeof(Waehrungscode), (infoToken["totalWaer"] ?? infoToken["TOTAL_WAER"]).Value<string>());
             var waehrungseinheit = (Waehrungseinheit)Enum.Parse(typeof(Waehrungseinheit), (infoToken["totalWaer"] ?? infoToken["TOTAL_WAER"]).Value<string>());
@@ -226,32 +264,38 @@ namespace BO4E.BO
 
                 var rp = new Rechnungsposition();
                 decimal zeitbezogeneMengeWert = 0;
-                if (belzart == "000001")
+                switch (belzart)
                 {
-                    rp.Positionstext = "ARBEITSPREIS";
-                }
-                else if (belzart == "000003")
-                {
-                    rp.Positionstext = "PAUSCHALE";
-                    mengeneinheit = Mengeneinheit.JAHR;
-                    zeitbezogeneMengeWert = (jrp["preisbtr"] ?? jrp["PREISBTR"]).Value<decimal>();
-                    rp.ZeitbezogeneMenge = new Menge { Einheit = Mengeneinheit.TAG, Wert = zeitbezogeneMengeWert };
+                    case "000001":
+                        rp.Positionstext = "ARBEITSPREIS";
+                        break;
+                    case "000003":
+                        rp.Positionstext = "PAUSCHALE";
+                        mengeneinheit = Mengeneinheit.JAHR;
+                        zeitbezogeneMengeWert = (jrp["preisbtr"] ?? jrp["PREISBTR"]).Value<decimal>();
+                        rp.ZeitbezogeneMenge = new Menge { Einheit = Mengeneinheit.TAG, Wert = zeitbezogeneMengeWert };
 
-                    rp.Einzelpreis = new Preis
-                    {
-                        Wert = decimal.Parse((jrp["zeitant"] ?? jrp["ZEITANT"]).ToString()),
-                        Einheit = waehrungseinheit,
-                        Bezugswert = mengeneinheit
-                    };
+                        rp.Einzelpreis = new Preis
+                        {
+                            Wert = decimal.Parse((jrp["zeitant"] ?? jrp["ZEITANT"]).ToString()),
+                            Einheit = waehrungseinheit,
+                            Bezugswert = mengeneinheit
+                        };
+                        break;
+                    case "000004":
+                        rp.Positionstext = "VERRECHNUNGSPREIS";
+                        break;
+                    case "SUBT":
+                        rp.Positionstext = "zuzüglich Mehrwertsteuer 19,000%";
+                        break;
+                    case "ZHFBP1":
+                    case "CITAX":
+                        rp.Positionstext = belzart;
+                        break;
+                    default:
+                        rp.Positionstext = "";
+                        break;
                 }
-                else if (belzart == "000004")
-                    rp.Positionstext = "VERRECHNUNGSPREIS";
-                else if (belzart == "SUBT")
-                    rp.Positionstext = "zuzüglich Mehrwertsteuer 19,000%";
-                else if (belzart == "ZHFBP1" || belzart == "CITAX")
-                    rp.Positionstext = belzart;
-                else
-                    rp.Positionstext = "";
 
                 if ((jrp["massbill"] ?? jrp["MASSBILL"]) != null && !string.IsNullOrWhiteSpace((jrp["massbill"] ?? jrp["MASSBILL"]).Value<string>()))
                 {
@@ -347,18 +391,14 @@ namespace BO4E.BO
                         {
                             steuerProzent = steuerbetrag.Steuerwert / steuerbetrag.Basiswert * 100.0M;
                         }
-                        if ((int)steuerProzent == 19)
+
+                        steuerbetrag.Steuerkennzeichen = (int) steuerProzent switch
                         {
-                            steuerbetrag.Steuerkennzeichen = Steuerkennzeichen.UST_19;
-                        }
-                        else if ((int)steuerProzent == 7)
-                        {
-                            steuerbetrag.Steuerkennzeichen = Steuerkennzeichen.UST_7;
-                        }
-                        else
-                        {
-                            throw new NotImplementedException($"Taxrate Internal '{jrp["taxrateInternal"]}' is not mapped.");
-                        }
+                            19 => Steuerkennzeichen.UST_19,
+                            7 => Steuerkennzeichen.UST_7,
+                            _ => throw new NotImplementedException(
+                                $"Taxrate Internal '{jrp["taxrateInternal"]}' is not mapped.")
+                        };
                         rp.TeilsummeSteuer = steuerbetrag;
                     }
                     if ((jrp["nettobtr"] ?? jrp["NETTOBTR"]).Value<decimal>() <= 0)
@@ -394,18 +434,14 @@ namespace BO4E.BO
                         {
                             steuerProzent = Math.Round(steuerbetrag.Steuerwert / steuerbetrag.Basiswert * 100.0M);
                         }
-                        if (steuerProzent == 19.0M)
+
+                        steuerbetrag.Steuerkennzeichen = steuerProzent switch
                         {
-                            steuerbetrag.Steuerkennzeichen = Steuerkennzeichen.UST_19;
-                        }
-                        else if (steuerProzent == 7.0M)
-                        {
-                            steuerbetrag.Steuerkennzeichen = Steuerkennzeichen.UST_7;
-                        }
-                        else
-                        {
-                            throw new NotImplementedException($"Taxrate Internal '{jrp["taxrateInternal"] ?? jrp["TAXRATE_INTERNAL"]}' is not mapped.");
-                        }
+                            19.0M => Steuerkennzeichen.UST_19,
+                            7.0M => Steuerkennzeichen.UST_7,
+                            _ => throw new NotImplementedException(
+                                $"Taxrate Internal '{jrp["taxrateInternal"] ?? jrp["TAXRATE_INTERNAL"]}' is not mapped.")
+                        };
                         stList.Add(steuerbetrag);
                         gSteure += be.Value<decimal>();
                     }
@@ -413,7 +449,7 @@ namespace BO4E.BO
             }
             Steuerbetraege = stList;
             Rechnungspositionen = rpList;
-            gBrutto = gNetto + gSteure;
+            var gBrutto = gNetto + gSteure;
             var zZahlen = gBrutto - vGezahlt - rBrutto;
             Gesamtnetto = new Betrag { Wert = gNetto, Waehrung = waehrungscode };
             Gesamtsteuer = new Betrag { Wert = gSteure, Waehrung = waehrungscode };

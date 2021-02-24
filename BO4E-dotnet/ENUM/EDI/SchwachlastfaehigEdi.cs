@@ -1,6 +1,6 @@
 using BO4E.meta;
 
-namespace BO4E.ENUM
+namespace BO4E.ENUM.EDI
 {
     /// <summary>SchwachlastfaehigEdi Marktlokation</summary>
     /// <author>Hochfrequenz Unternehmensberatung GmbH</author>

@@ -1,9 +1,9 @@
 using BO4E.COM;
 using BO4E.ENUM;
 using BO4E.meta;
+using BO4E.meta.LenientConverters;
 
 using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
 
 using ProtoBuf;
 
@@ -13,6 +13,7 @@ using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Runtime.Serialization;
+using System.Text.Json;
 
 namespace BO4E.BO
 {
@@ -23,10 +24,21 @@ namespace BO4E.BO
     public class Energiemenge : BusinessObject
     {
         /// <summary>
+        /// static serializer options for Energiemengenconverter
+        /// </summary>
+        public static JsonSerializerOptions EnergiemengeSerializerOptions;
+        static Energiemenge()
+        {
+            EnergiemengeSerializerOptions = LenientParsing.MOST_LENIENT.GetJsonSerializerOptions();
+            EnergiemengeSerializerOptions.Converters.Remove(EnergiemengeSerializerOptions.Converters.First(s => s.GetType() == typeof(EnergiemengeConverter)));
+        }
+        /// <summary>
         /// Eindeutige Nummer der Marktlokation bzw. der Messlokation, zu der die Energiemenge gehört
         /// </summary>
         [DefaultValue("|null|")]
         [JsonProperty(PropertyName = "lokationsId", Required = Required.Always, Order = 4)]
+
+        [System.Text.Json.Serialization.JsonPropertyName("lokationsId")]
         [ProtoMember(4)]
         [DataCategory(DataCategory.POD)]
         [BoKey]
@@ -37,6 +49,8 @@ namespace BO4E.BO
         /// </summary>
         /// <see cref="Lokationstyp"/>
         [JsonProperty(PropertyName = "lokationsTyp", Required = Required.Always, Order = 5)]
+
+        [System.Text.Json.Serialization.JsonPropertyName("lokationsTyp")]
         [ProtoMember(5)]
         [DataCategory(DataCategory.POD)]
         public Lokationstyp LokationsTyp { get; set; }
@@ -45,6 +59,8 @@ namespace BO4E.BO
         /// Gibt den <see cref="Verbrauch"/> in einer Zeiteinheit an.
         /// </summary>
         [JsonProperty(Order = 6, PropertyName = "energieverbrauch")]
+
+        [System.Text.Json.Serialization.JsonPropertyName("energieverbrauch")]
         [ProtoMember(6)]
         [DataCategory(DataCategory.METER_READING)]
         [MinLength(1)]
@@ -70,7 +86,11 @@ namespace BO4E.BO
                     .ToList();
                 if (UserProperties != null && UserProperties.TryGetValue(Verbrauch.SapProfdecimalsKey, out var profDecimalsRaw))
                 {
-                    var profDecimals = profDecimalsRaw.Value<int>();
+                    int profDecimals = 0;
+                    if (profDecimalsRaw is string raw)
+                        profDecimals = int.Parse(raw);
+                    else
+                        profDecimals = ((JsonElement)profDecimalsRaw).GetInt32();
                     if (profDecimals > 0)
                     {
                         for (var i = 0; i < profDecimals; i++)
@@ -118,16 +138,16 @@ namespace BO4E.BO
             else
             {
                 // there's no consistency check on user properties!
-                result.UserProperties = new Dictionary<string, JToken>();
+                result.UserProperties = new Dictionary<string, object>();
                 foreach (var kvp1 in em1.UserProperties)
                 {
-                    result.UserProperties.Add(kvp1);
+                    result.UserProperties.Add(kvp1.Key, kvp1.Value);
                 }
                 foreach (var kvp2 in em2.UserProperties)
                 {
                     if (!result.UserProperties.ContainsKey(kvp2.Key))
                     {
-                        result.UserProperties.Add(kvp2);
+                        result.UserProperties.Add(kvp2.Key, kvp2.Value);
                     }
                 }
             }
@@ -146,6 +166,70 @@ namespace BO4E.BO
                 result.Energieverbrauch.AddRange(em2.Energieverbrauch);
             }
             return result;
+        }
+    }
+    /// <summary>
+    /// 
+    /// </summary>
+    public class EnergiemengeConverter : System.Text.Json.Serialization.JsonConverter<Energiemenge>
+    {
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="reader"></param>
+        /// <param name="typeToConvert"></param>
+        /// <param name="options"></param>
+        /// <returns></returns>
+        public override Energiemenge Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+        {
+
+            Energiemenge e = System.Text.Json.JsonSerializer.Deserialize<Energiemenge>(ref reader, Energiemenge.EnergiemengeSerializerOptions);
+            if (e.Energieverbrauch == null)
+            {
+                e.Energieverbrauch = new List<Verbrauch>();
+            }
+            else if (e.Energieverbrauch.Count > 0)
+            {
+                e.Energieverbrauch = e.Energieverbrauch
+                    .Select(Verbrauch.FixSapCdsBugSystemTextJson)
+                    .Where(v => !(v.Startdatum == DateTimeOffset.MinValue || v.Enddatum == DateTimeOffset.MinValue))
+                    .Where(v => !v.UserPropertyEquals("invalid", true))
+                    .ToList();
+                if (e.UserProperties != null && e.UserProperties.TryGetValue(Verbrauch.SapProfdecimalsKey, out var profDecimalsRaw))
+                {
+                    int profDecimals = 0;
+                    if (profDecimalsRaw is string raw)
+                        profDecimals = int.Parse(raw);
+                    else
+                        profDecimals = System.Text.Json.JsonSerializer.Deserialize<int>(((JsonElement)profDecimalsRaw).GetRawText(), Energiemenge.EnergiemengeSerializerOptions);
+                    if (profDecimals > 0)
+                    {
+                        for (var i = 0; i < profDecimals; i++)
+                        {
+                            // or should I import math.pow() for this purpose?
+                            foreach (var v in e.Energieverbrauch.Where(v => v.UserProperties == null || !v.UserProperties.ContainsKey(Verbrauch.SapProfdecimalsKey)))
+                            {
+                                v.Wert /= 10.0M;
+                            }
+                        }
+                    }
+                    e.UserProperties.Remove(Verbrauch.SapProfdecimalsKey);
+                }
+
+            }
+            return e;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="writer"></param>
+        /// <param name="value"></param>
+        /// <param name="options"></param>
+        public override void Write(Utf8JsonWriter writer, Energiemenge value, JsonSerializerOptions options)
+        {
+            System.Text.Json.JsonSerializer.Serialize(writer, value);
+
         }
     }
 }

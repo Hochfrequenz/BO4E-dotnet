@@ -78,7 +78,7 @@ namespace TestBO4E.ShowCaseTests
             {
                 encryptedBo = aliceEncrypter.Encrypt(maLo, Convert.ToBase64String(bobKeyPair.PublicKey));
             }
-            Debug.WriteLine($"Alice: Hey @Bob: This is my signed and encrypted BusinssObject: ");
+            Debug.WriteLine("Alice: Hey @Bob: This is my signed and encrypted BusinssObject: ");
             Debug.WriteLine(JsonConvert.SerializeObject(encryptedBo, new StringEnumConverter()));
             //{
             //  "boTyp": "ENCRYPTEDOBJECTPUBLICKEYBOX",
@@ -88,7 +88,7 @@ namespace TestBO4E.ShowCaseTests
             //  "nonce": "KdNf7rQlQzOyajX+nMKBROce9odVuJqF",
             //  "cipherText": "VIYM7nZU9yTSj2tT...zWUuGbp4HphTlBlzgK"
             //}
-            Debug.WriteLine($"Alice: And by the way, I hope you verified my fingerprint or the key itself.");
+            Debug.WriteLine("Alice: And by the way, I hope you verified my fingerprint or the key itself.");
             Assert.AreEqual(Convert.ToBase64String(aliceKeyPair.PublicKey), ((EncryptedObjectPublicKeyBox)encryptedBo).PublicKey, "Bob: I did, otherwise this would fail");
 
             Marktlokation decryptedMaLo;

@@ -1,4 +1,11 @@
-﻿using BO4E.BO;
+﻿using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Linq;
+using System.Security.Cryptography.X509Certificates;
+
+using BO4E;
+using BO4E.BO;
 using BO4E.COM;
 using BO4E.Extensions.Encryption;
 using BO4E.meta;
@@ -14,12 +21,6 @@ using Newtonsoft.Json.Linq;
 using Org.BouncyCastle.Crypto;
 using Org.BouncyCastle.OpenSsl;
 
-using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Security.Cryptography.X509Certificates;
-
 namespace TestBO4EExtensions.Encryption
 {
     [TestClass]
@@ -30,7 +31,7 @@ namespace TestBO4EExtensions.Encryption
         public void TestOperations()
         {
             BO4E.StaticLogger.Logger = Microsoft.Extensions.Logging.Abstractions.NullLogger.Instance;
-            var files = Directory.GetFiles($"anonymizerTests/masterdata/", "*.json"); // 
+            var files = Directory.GetFiles("anonymizerTests/masterdata/", "*.json"); // 
             foreach (var testFile in files)
             {
                 JObject json;
@@ -135,11 +136,11 @@ namespace TestBO4EExtensions.Encryption
                                 continue;
                             }
 
-                            if (expectedResult == null && testResult != null)
+                            if (expectedResult == null)
                             {
                                 Assert.AreEqual(expectedResult, testResult.ToString(), $"Path {jsonpath} in {testFile} returned value {testResult} where null was expected.");
                             }
-                            else if (expectedResult != null && testResult == null)
+                            else if (testResult == null)
                             {
                                 Assert.AreEqual(expectedResult.ToString(), testResult, $"Path {jsonpath} in {testFile} returned null where {expectedResult} was expected.");
                             }
@@ -187,8 +188,9 @@ namespace TestBO4EExtensions.Encryption
             Assert.AreNotEqual(em.LokationsId, result.LokationsId);
             Assert.IsTrue(Messlokation.ValidateId(result.LokationsId));
             Assert.AreEqual(em.Energieverbrauch.Count, result.Energieverbrauch.Count);
-            Assert.IsNotNull(result.Energieverbrauch[1].UserProperties["zw"]);
-            Assert.AreNotEqual(em.Energieverbrauch[1].UserProperties["zw"].Value<string>(), result.Energieverbrauch[1].UserProperties["zw"].Value<string>());
+            Assert.IsTrue(result.Energieverbrauch[1].TryGetUserProperty("zw", out string hashed_zw));
+            em.Energieverbrauch[1].TryGetUserProperty("zw", out string hashed_em_zw);
+            Assert.AreNotEqual(hashed_zw, hashed_em_zw);
             Assert.IsTrue(Anonymizer.HasHashedKey(result));
 
             // do not hash zw user property
@@ -198,8 +200,9 @@ namespace TestBO4EExtensions.Encryption
             Assert.AreNotEqual(em.LokationsId, result.LokationsId);
             Assert.IsTrue(Messlokation.ValidateId(result.LokationsId));
             Assert.AreEqual(em.Energieverbrauch.Count, result.Energieverbrauch.Count);
-            Assert.IsNotNull(result.Energieverbrauch[1].UserProperties["zw"]);
-            Assert.AreEqual(em.Energieverbrauch[1].UserProperties["zw"].Value<string>(), result.Energieverbrauch[1].UserProperties["zw"].Value<string>());
+            Assert.IsTrue(result.Energieverbrauch[1].TryGetUserProperty("zw", out string zw));
+            em.Energieverbrauch[1].TryGetUserProperty("zw", out string em_zw);
+            Assert.AreEqual(zw, em_zw);
             Assert.IsTrue(Anonymizer.HasHashedKey(result));
         }
 
@@ -284,7 +287,7 @@ namespace TestBO4EExtensions.Encryption
                 Coverage = 0.9M,
                 Einheit = BO4E.ENUM.Mengeneinheit.MWH,
                 Wertermittlungsverfahren = BO4E.ENUM.Wertermittlungsverfahren.MESSUNG,
-                UserProperties = new Dictionary<string, JToken>
+                UserProperties = new Dictionary<string, object>
                 {
                     { "anlage", "5012345678" },
                     { "profil", "123456" }
@@ -303,9 +306,13 @@ namespace TestBO4EExtensions.Encryption
             Assert.AreNotEqual(cr.LokationsId, hashedReport.LokationsId);
             Assert.IsTrue(Marktlokation.ValidateId(hashedReport.LokationsId));
             Assert.IsNotNull(cr.UserProperties["anlage"]);
-            Assert.AreNotEqual(cr.UserProperties["anlage"].Value<string>(), hashedReport.UserProperties["anlage"].Value<string>());
+            cr.TryGetUserProperty("anlage", out string cr_anlage);
+            hashedReport.TryGetUserProperty("anlage", out string hashed_anlage);
+            Assert.AreNotEqual(cr_anlage, hashed_anlage);
+            cr.TryGetUserProperty("profil", out string cr_profil);
+            hashedReport.TryGetUserProperty("profil", out string hashed_profil);
             Assert.IsNotNull(cr.UserProperties["profil"]);
-            Assert.AreNotEqual(cr.UserProperties["profil"].Value<string>(), hashedReport.UserProperties["profil"].Value<string>());
+            Assert.AreNotEqual(cr_profil, hashed_profil);
 
             conf.HashingSalt = "TWFuIGlzIGRpc3Rpbmd1aXNoZWQsIG5vdCBvbmx5IGJ5IGhpcyByZWFzb24sIGJ1dCBieSB0aGlzIHNpbmd1bGFyIHBhc3Npb24gZnJvbSBvdGhlciBhbmltYWxzLCB3aGljaCBpcyBhIGx1c3Qgb2YgdGhlIG1pbmQsIHRoYXQgYnkgYSBwZXJzZXZlcmFuY2Ugb2YgZGVsaWdodCBpbiB0aGUgY29udGludWVkIGFuZCBpbmRlZmF0aWdhYmxlIGdlbmVyYXRpb24gb2Yga25vd2xlZGdlLCBleGNlZWRzIHRoZSBzaG9ydCB2ZWhlbWVuY2Ugb2YgYW55IGNhcm5hbCBwbGVhc3VyZS4=";
             CompletenessReport saltedReport;

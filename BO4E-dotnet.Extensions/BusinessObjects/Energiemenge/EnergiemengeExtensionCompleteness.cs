@@ -44,7 +44,7 @@ namespace BO4E.Extensions.BusinessObjects.Energiemenge
                 decimal? coverage;
                 if (combis.Count == 0)
                 {
-                    errorMessage = $"Cannot use autoconfigured method because there are no values.";
+                    errorMessage = "Cannot use autoconfigured method because there are no values.";
                     coverage = 0;
                 }
                 else
@@ -126,7 +126,7 @@ namespace BO4E.Extensions.BusinessObjects.Energiemenge
                 {
                     var nonNullValues = new TimePeriodCollection(em.Energieverbrauch.Select(v => new TimeRange(v.Startdatum, v.Enddatum)));
                     ITimeRange limits;
-                    if (result.ReferenceTimeFrame != null && result.ReferenceTimeFrame.Startdatum.HasValue && result.ReferenceTimeFrame.Enddatum.HasValue)
+                    if (result.ReferenceTimeFrame != null && result.ReferenceTimeFrame.Startdatum.HasValue)
                     {
                         limits = new TimeRange(result.ReferenceTimeFrame.Startdatum.Value.UtcDateTime, result.ReferenceTimeFrame.Enddatum.Value.UtcDateTime);
                     }
@@ -155,7 +155,7 @@ namespace BO4E.Extensions.BusinessObjects.Energiemenge
                         {
                             if (result.UserProperties == null)
                             {
-                                result.UserProperties = new Dictionary<string, JToken>();
+                                result.UserProperties = new Dictionary<string, object>();
                             }
                             if (!result.UserProperties.ContainsKey(kvp.Key))
                             {

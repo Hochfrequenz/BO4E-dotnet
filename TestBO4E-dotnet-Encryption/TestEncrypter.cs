@@ -4,6 +4,7 @@ using System.IO;
 using System.Security.Cryptography.X509Certificates;
 
 using BO4E.BO;
+using BO4E.BO.LogObject;
 using BO4E.Extensions.Encryption;
 
 using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -55,7 +56,7 @@ namespace TestBO4EExtensions.Encryption
         [TestMethod]
         public void TestBOEncryption()
         {
-            var files = Directory.GetFiles($"encrypterTests/bo/", "*.json"); // 
+            var files = Directory.GetFiles("encrypterTests/bo/", "*.json"); // 
 
             foreach (var testFile in files)
             {

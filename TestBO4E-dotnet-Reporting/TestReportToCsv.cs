@@ -1,13 +1,13 @@
-﻿using BO4E.Reporting;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading;
+
+using BO4E.Reporting;
 
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 using Newtonsoft.Json;
-
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading;
 
 namespace TestBO4E.Reporting
 {
@@ -51,7 +51,10 @@ namespace TestBO4E.Reporting
             var decimalSeparator = Thread.CurrentThread.CurrentCulture.NumberFormat.NumberDecimalSeparator;
             Assert.AreEqual("DE12345;0" + decimalSeparator + "87;2019-01-01T00:00:00Z;2019-03-01T00:00:00Z;", lines[1]);
             var commaResult = cr.ToCsv(',', lineTerminator: Environment.NewLine, reihenfolge: reihenfolge);
-            Assert.AreEqual("DE12345,0" + decimalSeparator + "87,2019-01-01T00:00:00Z,2019-03-01T00:00:00Z,", commaResult.Split(Environment.NewLine)[1]);
+            var separator = "";
+            if (decimalSeparator == ",")
+                separator = "\"";
+            Assert.AreEqual($"DE12345,{separator}0" + decimalSeparator + $"87{separator},2019-01-01T00:00:00Z,2019-03-01T00:00:00Z,", commaResult.Split(Environment.NewLine)[1]);
             var dpunktResult = cr.ToCsv(':', lineTerminator: Environment.NewLine, reihenfolge: reihenfolge);
             Assert.AreEqual("DE12345:0" + decimalSeparator + "87:\"2019-01-01T00:00:00Z\":\"2019-03-01T00:00:00Z\":", dpunktResult.Split(Environment.NewLine)[1]);
 
@@ -173,52 +176,54 @@ namespace TestBO4E.Reporting
                 LokationsId = "DE12345",
                 Coverage = 0.87M, // 87%
                 Wertermittlungsverfahren = BO4E.ENUM.Wertermittlungsverfahren.PROGNOSE,
-                ReferenceTimeFrame = new BO4E.COM.Zeitraum
+                ReferenceTimeFrame =
+                    new BO4E.COM.Zeitraum
+                    {
+                        Startdatum = new DateTimeOffset(2019, 1, 1, 0, 0, 0, TimeSpan.Zero),
+                        Enddatum = new DateTimeOffset(2019, 3, 1, 0, 0, 0, TimeSpan.Zero)
+                    },
+                Values =
+                    new List<CompletenessReport.BasicVerbrauch>
+                    {
+                        new CompletenessReport.BasicVerbrauch
+                        {
+                            Wert = 17,
+                            Startdatum = new DateTimeOffset(2019, 1, 1, 0, 0, 0, TimeSpan.Zero).UtcDateTime,
+                            Enddatum = new DateTimeOffset(2019, 1, 2, 0, 0, 0, TimeSpan.Zero).UtcDateTime
+                        },
+                        new CompletenessReport.BasicVerbrauch
+                        {
+                            Wert = 21,
+                            Startdatum = new DateTimeOffset(2019, 1, 7, 0, 0, 0, TimeSpan.Zero).UtcDateTime,
+                            Enddatum = new DateTimeOffset(2019, 1, 8, 0, 0, 0, TimeSpan.Zero).UtcDateTime
+                        },
+                        new CompletenessReport.BasicVerbrauch
+                        {
+                            Wert = 35,
+                            Startdatum = new DateTimeOffset(2019, 1, 12, 0, 0, 0, TimeSpan.Zero).UtcDateTime,
+                            Enddatum = new DateTimeOffset(2019, 1, 13, 0, 0, 0, TimeSpan.Zero).UtcDateTime
+                        }
+                    },
+                Gaps = new List<CompletenessReport.BasicVerbrauch>
                 {
-                    Startdatum = new DateTimeOffset(2019, 1, 1, 0, 0, 0, TimeSpan.Zero),
-                    Enddatum = new DateTimeOffset(2019, 3, 1, 0, 0, 0, TimeSpan.Zero)
-                }
-            };
-            cr.Values = new List<CompletenessReport.BasicVerbrauch>
-            {
-                new CompletenessReport.BasicVerbrauch
-                {
-                    Wert = 17,
-                    Startdatum = new DateTimeOffset(2019,1,1,0,0,0, TimeSpan.Zero).UtcDateTime,
-                    Enddatum = new DateTimeOffset(2019,1,2,0,0,0, TimeSpan.Zero).UtcDateTime
-                },
-                new CompletenessReport.BasicVerbrauch
-                {
-                    Wert = 21,
-                    Startdatum = new DateTimeOffset(2019,1,7,0,0,0, TimeSpan.Zero).UtcDateTime,
-                    Enddatum = new DateTimeOffset(2019,1,8,0,0,0, TimeSpan.Zero).UtcDateTime
-                },
-                new CompletenessReport.BasicVerbrauch
-                {
-                    Wert = 35,
-                    Startdatum = new DateTimeOffset(2019,1,12,0,0,0, TimeSpan.Zero).UtcDateTime,
-                    Enddatum = new DateTimeOffset(2019,1,13,0,0,0, TimeSpan.Zero).UtcDateTime
-                }
-            };
-            cr.Gaps = new List<CompletenessReport.BasicVerbrauch>
-            {
-                new CompletenessReport.BasicVerbrauch
-                {
-                    Wert = 0,
-                    Startdatum = new DateTimeOffset(2017,1,1,0,0,0, TimeSpan.Zero).UtcDateTime,
-                    Enddatum = new DateTimeOffset(2017,1,2,0,0,0, TimeSpan.Zero).UtcDateTime
-                },
-                new CompletenessReport.BasicVerbrauch
-                {
-                    Wert = 0,
-                    Startdatum = new DateTimeOffset(2017,1,7,0,0,0, TimeSpan.Zero).UtcDateTime,
-                    Enddatum = new DateTimeOffset(2017,1,8,0,0,0, TimeSpan.Zero).UtcDateTime
-                },
-                new CompletenessReport.BasicVerbrauch
-                {
-                    Wert = 0,
-                    Startdatum = new DateTimeOffset(2017,1,12,0,0,0, TimeSpan.Zero).UtcDateTime,
-                    Enddatum = new DateTimeOffset(2017,1,13,0,0,0, TimeSpan.Zero).UtcDateTime
+                    new CompletenessReport.BasicVerbrauch
+                    {
+                        Wert = 0,
+                        Startdatum = new DateTimeOffset(2017, 1, 1, 0, 0, 0, TimeSpan.Zero).UtcDateTime,
+                        Enddatum = new DateTimeOffset(2017, 1, 2, 0, 0, 0, TimeSpan.Zero).UtcDateTime
+                    },
+                    new CompletenessReport.BasicVerbrauch
+                    {
+                        Wert = 0,
+                        Startdatum = new DateTimeOffset(2017, 1, 7, 0, 0, 0, TimeSpan.Zero).UtcDateTime,
+                        Enddatum = new DateTimeOffset(2017, 1, 8, 0, 0, 0, TimeSpan.Zero).UtcDateTime
+                    },
+                    new CompletenessReport.BasicVerbrauch
+                    {
+                        Wert = 0,
+                        Startdatum = new DateTimeOffset(2017, 1, 12, 0, 0, 0, TimeSpan.Zero).UtcDateTime,
+                        Enddatum = new DateTimeOffset(2017, 1, 13, 0, 0, 0, TimeSpan.Zero).UtcDateTime
+                    }
                 }
             };
             var multiplicityResult = cr.ToCsv(lineTerminator: Environment.NewLine);

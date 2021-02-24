@@ -1,7 +1,5 @@
 ﻿using BO4E.BO;
 
-using Newtonsoft.Json.Linq;
-
 using System.Collections.Generic;
 
 namespace BO4E.meta
@@ -16,6 +14,6 @@ namespace BO4E.meta
         /// <summary>
         /// <see cref="BusinessObject.UserProperties"/>, <see cref="BO4E.COM.COM.UserProperties"/>
         /// </summary>
-        IDictionary<string, JToken> UserProperties { get; set; }
+        IDictionary<string, object> UserProperties { get; set; }
     }
 }

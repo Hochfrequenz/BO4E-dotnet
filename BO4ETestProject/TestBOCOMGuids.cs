@@ -7,6 +7,7 @@ using Newtonsoft.Json;
 
 using System;
 using System.Collections.Generic;
+using JsonSerializer = System.Text.Json.JsonSerializer;
 
 namespace TestBO4E
 {
@@ -14,7 +15,7 @@ namespace TestBO4E
     public class TestBOCOMGuids
     {
         [TestMethod]
-        public void TestBOGuids()
+        public void TestBOGuidsNewtonsoft()
         {
             var em = new Energiemenge
             {
@@ -36,19 +37,28 @@ namespace TestBO4E
             var gpJson = JsonConvert.SerializeObject(gp);
             Assert.AreEqual(gp.Guid.Value, JsonConvert.DeserializeObject<Geschaeftspartner>(gpJson).Guid.Value);
         }
-        /*
+        
         [TestMethod]
-        public void TestCOMGuids()
+        public void TestBOGuids()
         {
-            Rechnungsposition rp = new Rechnungsposition()
+            var em = new Energiemenge
             {
-                lokationsId = "De123456",
-                positionsnummer = 1,
-                guid = Guid.NewGuid().ToString()
+                LokationsId = "DE123456",
+                LokationsTyp = BO4E.ENUM.Lokationstyp.MaLo,
+                Energieverbrauch = new List<Verbrauch>(),
+                Guid = Guid.NewGuid()
             };
 
-            string jsonString = JsonConvert.SerializeObject(rp);
-        }*/
+            var emJson = JsonSerializer.Serialize(em);
+            Assert.AreEqual(em.Guid.Value, JsonSerializer.Deserialize<Energiemenge>(emJson).Guid.Value);
+            var gp = new Geschaeftspartner
+            {
+                Gewerbekennzeichnung = true,
+                Guid = Guid.NewGuid()
+            };
 
+            var gpJson = JsonSerializer.Serialize(gp);
+            Assert.AreEqual(gp.Guid.Value, JsonSerializer.Deserialize<Geschaeftspartner>(gpJson).Guid.Value);
+        }
     }
 }

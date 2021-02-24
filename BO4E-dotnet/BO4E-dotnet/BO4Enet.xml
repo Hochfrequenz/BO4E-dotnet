@@ -373,6 +373,11 @@
             list of additional information built in a customer dependet implementation
             </summary>
         </member>
+        <member name="M:BO4E.BO.Benachrichtigung.#ctor">
+            <summary>
+            Default constructor for json deserialization
+            </summary>
+        </member>
         <member name="T:BO4E.BO.BusinessObject">
             <summary>
             General abstract class for Business Objects for Energy (BO4E)
@@ -613,6 +618,11 @@
             Abbildung von Mengen, die Lokationen zugeordnet sind.
             </summary>
         </member>
+        <member name="F:BO4E.BO.Energiemenge.EnergiemengeSerializerOptions">
+            <summary>
+            static serializer options for Energiemengenconverter
+            </summary>
+        </member>
         <member name="P:BO4E.BO.Energiemenge.LokationsId">
             <summary>
             Eindeutige Nummer der Marktlokation bzw. der Messlokation, zu der die Energiemenge gehört
@@ -644,6 +654,28 @@
             <param name="em1"></param>
             <param name="em2"></param>
             <returns>new Energiemenge object</returns>
+        </member>
+        <member name="T:BO4E.BO.EnergiemengeConverter">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:BO4E.BO.EnergiemengeConverter.Read(System.Text.Json.Utf8JsonReader@,System.Type,System.Text.Json.JsonSerializerOptions)">
+            <summary>
+            
+            </summary>
+            <param name="reader"></param>
+            <param name="typeToConvert"></param>
+            <param name="options"></param>
+            <returns></returns>
+        </member>
+        <member name="M:BO4E.BO.EnergiemengeConverter.Write(System.Text.Json.Utf8JsonWriter,BO4E.BO.Energiemenge,System.Text.Json.JsonSerializerOptions)">
+            <summary>
+            
+            </summary>
+            <param name="writer"></param>
+            <param name="value"></param>
+            <param name="options"></param>
         </member>
         <member name="T:BO4E.BO.Geschaeftspartner">
             <summary>
@@ -748,22 +780,22 @@
             Alliander Netz Heinsberg GmbH, 01.02.2018, 31.12.2018, Arbeitspreis HT, 3.660 kWh, 5,8200 ct/kWh, 213,01 €. Details siehe COM Kostenposition
             </summary>
         </member>
-        <member name="T:BO4E.BO.LogObject">
+        <member name="T:BO4E.BO.LogObject.LogObject">
             <summary>
              a log objects allows to log things
             </summary>
         </member>
-        <member name="P:BO4E.BO.LogObject.Id">
+        <member name="P:BO4E.BO.LogObject.LogObject.Id">
             <summary>
             unique id of the log event
             </summary>
         </member>
-        <member name="P:BO4E.BO.LogObject.DateTime">
+        <member name="P:BO4E.BO.LogObject.LogObject.DateTime">
             <summary>
             date time at which the log event has been raised
             </summary>
         </member>
-        <member name="P:BO4E.BO.LogObject.LogMessage">
+        <member name="P:BO4E.BO.LogObject.LogObject.LogMessage">
             <summary>
             actual log message
             </summary>
@@ -807,7 +839,7 @@
             angeschlossen ist.
             </summary>
         </member>
-        <member name="P:BO4E.BO.Marktlokation.GebietType">
+        <member name="P:BO4E.BO.Marktlokation.GebietTyp">
             <summary>Typ des Netzgebietes,z.B.Verteilnetz.</summary>
             https://github.com/Hochfrequenz/energy-service-hub/issues/11
         </member>
@@ -1350,6 +1382,11 @@
             https://www.bo4e.de/dokumentation/geschaeftsobjekte/bo-vertrag
             </summary>
         </member>
+        <member name="F:BO4E.BO.Vertrag.VertragsSerializerOptions">
+            <summary>
+            static serializer options for Vertragsconverter
+            </summary>
+        </member>
         <member name="P:BO4E.BO.Vertrag.Vertragsnummer">
             <summary>
             Eine im Verwendungskontext eindeutige Nummer für den Vertrag
@@ -1430,6 +1467,28 @@
             moves lokationsId from userProperties to vertragsteil if relevant
             </summary>
             <param name="context"></param>
+        </member>
+        <member name="T:BO4E.BO.VertragsConverter">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:BO4E.BO.VertragsConverter.Read(System.Text.Json.Utf8JsonReader@,System.Type,System.Text.Json.JsonSerializerOptions)">
+            <summary>
+            
+            </summary>
+            <param name="reader"></param>
+            <param name="typeToConvert"></param>
+            <param name="options"></param>
+            <returns></returns>
+        </member>
+        <member name="M:BO4E.BO.VertragsConverter.Write(System.Text.Json.Utf8JsonWriter,BO4E.BO.Vertrag,System.Text.Json.JsonSerializerOptions)">
+            <summary>
+            
+            </summary>
+            <param name="writer"></param>
+            <param name="value"></param>
+            <param name="options"></param>
         </member>
         <member name="T:BO4E.BO.Zaehler">
             <summary>
@@ -2119,11 +2178,10 @@
             Inhalt der Notiz (Freitext)
             </summary>
         </member>
-        <member name="M:BO4E.COM.Notiz.CleanUpSapNotes(System.Runtime.Serialization.StreamingContext)">
+        <member name="F:BO4E.COM.Notiz.TrailingMinusRegex">
             <summary>
             method remove trailing minuses ('----') from notiz content. Those are artefact from SAPs internal note structure 
             </summary>
-            <param name="context"></param>
         </member>
         <member name="T:BO4E.COM.PhysikalischerWert">
             <summary>
@@ -2651,6 +2709,11 @@
             Abbildung eines zeitlich abgegrenzten Verbrauchs.
             </summary>
         </member>
+        <member name="F:BO4E.COM.Verbrauch.VerbrauchSerializerOptions">
+            <summary>
+            static serializer options for Verbracuhconverter
+            </summary>
+        </member>
         <member name="P:BO4E.COM.Verbrauch.CENTRAL_EUROPE_STANDARD_TIME">
             <summary>
             <inheritdoc cref="F:BO4E.meta.CentralEuropeStandardTime.CentralEuropeStandardTimezoneInfo"/>
@@ -2699,6 +2762,13 @@
             <param name="context"></param>
         </member>
         <member name="M:BO4E.COM.Verbrauch.FixSapCdsBug(BO4E.COM.Verbrauch)">
+            <summary>
+            static version of <see cref="M:BO4E.COM.Verbrauch.FixSapCdsBug"/> 
+            </summary>
+            <param name="v">verbrauch to be fixed</param>
+            <returns>new Verbrauch instance with fixed bugs</returns>
+        </member>
+        <member name="M:BO4E.COM.Verbrauch.FixSapCdsBugSystemTextJson(BO4E.COM.Verbrauch)">
             <summary>
             static version of <see cref="M:BO4E.COM.Verbrauch.FixSapCdsBug"/> 
             </summary>
@@ -2756,6 +2826,28 @@
             <summary>
             Central European Summer Time ("MittelEuropäische SommerZeit")
             </summary>
+        </member>
+        <member name="T:BO4E.COM.VerbrauchConverter">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:BO4E.COM.VerbrauchConverter.Read(System.Text.Json.Utf8JsonReader@,System.Type,System.Text.Json.JsonSerializerOptions)">
+            <summary>
+            
+            </summary>
+            <param name="reader"></param>
+            <param name="typeToConvert"></param>
+            <param name="options"></param>
+            <returns></returns>
+        </member>
+        <member name="M:BO4E.COM.VerbrauchConverter.Write(System.Text.Json.Utf8JsonWriter,BO4E.COM.Verbrauch,System.Text.Json.JsonSerializerOptions)">
+            <summary>
+            
+            </summary>
+            <param name="writer"></param>
+            <param name="value"></param>
+            <param name="options"></param>
         </member>
         <member name="T:BO4E.COM.Vertragskonditionen">
             <summary>Abbildung für Vertragskonditionen. Die Komponente wird sowohl im Vertrag als auch im Tarif verwendet.</summary>
@@ -3717,6 +3809,19 @@
         <member name="F:BO4E.ENUM.EDI.EnergierichtungEdi.Z07">
             <summary>Verbrauch</summary>
         </member>
+        <member name="T:BO4E.ENUM.EDI.FernschaltungEdi">
+            <summary>
+            Fernschaltung
+            EDIFACT values of <see cref="T:BO4E.ENUM.Fernschaltung"/>
+            </summary>
+            <author>Hochfrequenz Unternehmensberatung GmbH</author>
+        </member>
+        <member name="F:BO4E.ENUM.EDI.FernschaltungEdi.Z06">
+            <summary>Z06: vorhanden</summary>
+        </member>
+        <member name="F:BO4E.ENUM.EDI.FernschaltungEdi.Z07">
+            <summary>Z07: nicht vorhanden</summary>
+        </member>
         <member name="T:BO4E.ENUM.EDI.GeraetetypEdi">
             <summary>
             EDIFACT values of <see cref="T:BO4E.ENUM.Geraetetyp"/>
@@ -3827,6 +3932,19 @@
             Handy
             </summary>
         </member>
+        <member name="T:BO4E.ENUM.EDI.MesswerterfassungEdi">
+            <summary>
+            Messwerterfassung
+            EDIFACT values of <see cref="T:BO4E.ENUM.Messwerterfassung"/>
+            </summary>
+            <author>Hochfrequenz Unternehmensberatung GmbH</author>
+        </member>
+        <member name="F:BO4E.ENUM.EDI.MesswerterfassungEdi.AMR">
+            <summary>AMR: fernauslesbare Zähler</summary>
+        </member>
+        <member name="F:BO4E.ENUM.EDI.MesswerterfassungEdi.MMR">
+            <summary>MMR: manuell ausgelesene Zähler</summary>
+        </member>
         <member name="T:BO4E.ENUM.EDI.NetzebeneEdi">
             <summary>
             EDIFACT values of <see cref="T:BO4E.ENUM.Netzebene"/>
@@ -3922,6 +4040,16 @@
         <member name="F:BO4E.ENUM.EDI.RollencodetypEdi._332">
             <summary>DE, DVGW Service &amp; Consult GmbH</summary>
         </member>
+        <member name="T:BO4E.ENUM.EDI.SchwachlastfaehigEdi">
+            <summary>SchwachlastfaehigEdi Marktlokation</summary>
+            <author>Hochfrequenz Unternehmensberatung GmbH</author>
+        </member>
+        <member name="F:BO4E.ENUM.EDI.SchwachlastfaehigEdi.Z59">
+            <summary>Z59: Nicht-Schwachlastfähig</summary>
+        </member>
+        <member name="F:BO4E.ENUM.EDI.SchwachlastfaehigEdi.Z60">
+            <summary>Z60: Schwachlast fähig</summary>
+        </member>
         <member name="T:BO4E.ENUM.EDI.TarifartEdi">
             <summary>
             EDIFACT values of <see cref="T:BO4E.ENUM.Tarifart"/>
@@ -3936,6 +4064,19 @@
         </member>
         <member name="F:BO4E.ENUM.EDI.TarifartEdi.NTZ">
             <summary>Mehrtarif</summary>
+        </member>
+        <member name="T:BO4E.ENUM.EDI.UnterbrechbarkeitEdi">
+            <summary>
+            Stromverbrauchsart/Unterbrechbarkeit Marktlokation
+            EDIFACT values of <see cref="T:BO4E.ENUM.Unterbrechbarkeit"/>
+            </summary>
+            <author>Hochfrequenz Unternehmensberatung GmbH</author>
+        </member>
+        <member name="F:BO4E.ENUM.EDI.UnterbrechbarkeitEdi.Unterbrechbare_Verbrauchseinrichtung">
+            <summary>Z62: unterbrechbare Verbrauchseinrichtung</summary>
+        </member>
+        <member name="F:BO4E.ENUM.EDI.UnterbrechbarkeitEdi.Nicht_Unterbrechbare_Verbrauchseinrichtung">
+            <summary>Z63: nicht unterbrechbare Verbrauchseinrichtung</summary>
         </member>
         <member name="T:BO4E.ENUM.EDI.UTILMD.UTILMD9013">
             <summary>
@@ -4053,6 +4194,25 @@
             als auch zur Wärmebedarfsdeckung eingesetzt. Bei diesem kombinierten Verbrauchsverhalten
             ist dieser Qualifier zu nutzen.
         </member>
+        <member name="T:BO4E.ENUM.EDI.VerwendungszweckEdi">
+            <summary>
+            Verwendungungszweck der Werte Marktlokation
+            EDIFACT values of <see cref="T:BO4E.ENUM.Verwendungszweck"/>
+            </summary>
+            <author>Hochfrequenz Unternehmensberatung GmbH</author>
+        </member>
+        <member name="F:BO4E.ENUM.EDI.VerwendungszweckEdi.Z84">
+            <summary>Z84: Netznutzungsabrechnung</summary>
+        </member>
+        <member name="F:BO4E.ENUM.EDI.VerwendungszweckEdi.Z85">
+            <summary>Z85: Bilanzkreisabrechnung</summary>
+        </member>
+        <member name="F:BO4E.ENUM.EDI.VerwendungszweckEdi.Z86">
+            <summary>Z86: Mehrmindermbengenabrechnung</summary>
+        </member>
+        <member name="F:BO4E.ENUM.EDI.VerwendungszweckEdi.Z47">
+            <summary>Z47: Endkundenabrechnung</summary>
+        </member>
         <member name="T:BO4E.ENUM.EDI.WaehrungseinheitEdi">
             <summary>
             EDIFACT values of <see cref="T:BO4E.ENUM.Waehrungseinheit"/>
@@ -4061,6 +4221,22 @@
         </member>
         <member name="F:BO4E.ENUM.EDI.WaehrungseinheitEdi.EUR">
             <summary>Euro</summary>
+        </member>
+        <member name="T:BO4E.ENUM.EDI.WaermenutzungEdi">
+            <summary>
+            Stromverbrauchsart/Wärmenutzung Marktlokation
+            EDIFACT values of <see cref="T:BO4E.ENUM.Waermenutzung"/>
+            </summary>
+            <author>Hochfrequenz Unternehmensberatung GmbH</author>
+        </member>
+        <member name="F:BO4E.ENUM.EDI.WaermenutzungEdi.Z56">
+            <summary>Z56: Speicherheizung</summary>
+        </member>
+        <member name="F:BO4E.ENUM.EDI.WaermenutzungEdi.Z57">
+            <summary>Z57: Wärmepumpe</summary>
+        </member>
+        <member name="F:BO4E.ENUM.EDI.WaermenutzungEdi.Z61">
+            <summary>Z61: Direktheizung</summary>
         </member>
         <member name="T:BO4E.ENUM.EDI.WertermittlungsverfahrenEdi">
             <summary>
@@ -4152,90 +4328,6 @@
         </member>
         <member name="F:BO4E.ENUM.EDI.ZeiteinheitEdi.ANN">
             <summary>Jahr</summary>
-        </member>
-        <member name="T:BO4E.ENUM.FernschaltungEdi">
-            <summary>
-            Fernschaltung
-            EDIFACT values of <see cref="T:BO4E.ENUM.Fernschaltung"/>
-            </summary>
-            <author>Hochfrequenz Unternehmensberatung GmbH</author>
-        </member>
-        <member name="F:BO4E.ENUM.FernschaltungEdi.Z06">
-            <summary>Z06: vorhanden</summary>
-        </member>
-        <member name="F:BO4E.ENUM.FernschaltungEdi.Z07">
-            <summary>Z07: nicht vorhanden</summary>
-        </member>
-        <member name="T:BO4E.ENUM.MesswerterfassungEdi">
-            <summary>
-            Messwerterfassung
-            EDIFACT values of <see cref="T:BO4E.ENUM.Messwerterfassung"/>
-            </summary>
-            <author>Hochfrequenz Unternehmensberatung GmbH</author>
-        </member>
-        <member name="F:BO4E.ENUM.MesswerterfassungEdi.AMR">
-            <summary>AMR: fernauslesbare Zähler</summary>
-        </member>
-        <member name="F:BO4E.ENUM.MesswerterfassungEdi.MMR">
-            <summary>MMR: manuell ausgelesene Zähler</summary>
-        </member>
-        <member name="T:BO4E.ENUM.SchwachlastfaehigEdi">
-            <summary>SchwachlastfaehigEdi Marktlokation</summary>
-            <author>Hochfrequenz Unternehmensberatung GmbH</author>
-        </member>
-        <member name="F:BO4E.ENUM.SchwachlastfaehigEdi.Z59">
-            <summary>Z59: Nicht-Schwachlastfähig</summary>
-        </member>
-        <member name="F:BO4E.ENUM.SchwachlastfaehigEdi.Z60">
-            <summary>Z60: Schwachlast fähig</summary>
-        </member>
-        <member name="T:BO4E.ENUM.UnterbrechbarkeitEdi">
-            <summary>
-            Stromverbrauchsart/Unterbrechbarkeit Marktlokation
-            EDIFACT values of <see cref="T:BO4E.ENUM.Unterbrechbarkeit"/>
-            </summary>
-            <author>Hochfrequenz Unternehmensberatung GmbH</author>
-        </member>
-        <member name="F:BO4E.ENUM.UnterbrechbarkeitEdi.Unterbrechbare_Verbrauchseinrichtung">
-            <summary>Z62: unterbrechbare Verbrauchseinrichtung</summary>
-        </member>
-        <member name="F:BO4E.ENUM.UnterbrechbarkeitEdi.Nicht_Unterbrechbare_Verbrauchseinrichtung">
-            <summary>Z63: nicht unterbrechbare Verbrauchseinrichtung</summary>
-        </member>
-        <member name="T:BO4E.ENUM.VerwendungszweckEdi">
-            <summary>
-            Verwendungungszweck der Werte Marktlokation
-            EDIFACT values of <see cref="T:BO4E.ENUM.Verwendungszweck"/>
-            </summary>
-            <author>Hochfrequenz Unternehmensberatung GmbH</author>
-        </member>
-        <member name="F:BO4E.ENUM.VerwendungszweckEdi.Z84">
-            <summary>Z84: Netznutzungsabrechnung</summary>
-        </member>
-        <member name="F:BO4E.ENUM.VerwendungszweckEdi.Z85">
-            <summary>Z85: Bilanzkreisabrechnung</summary>
-        </member>
-        <member name="F:BO4E.ENUM.VerwendungszweckEdi.Z86">
-            <summary>Z86: Mehrmindermbengenabrechnung</summary>
-        </member>
-        <member name="F:BO4E.ENUM.VerwendungszweckEdi.Z47">
-            <summary>Z47: Endkundenabrechnung</summary>
-        </member>
-        <member name="T:BO4E.ENUM.WaermenutzungEdi">
-            <summary>
-            Stromverbrauchsart/Wärmenutzung Marktlokation
-            EDIFACT values of <see cref="T:BO4E.ENUM.Waermenutzung"/>
-            </summary>
-            <author>Hochfrequenz Unternehmensberatung GmbH</author>
-        </member>
-        <member name="F:BO4E.ENUM.WaermenutzungEdi.Z56">
-            <summary>Z56: Speicherheizung</summary>
-        </member>
-        <member name="F:BO4E.ENUM.WaermenutzungEdi.Z57">
-            <summary>Z57: Wärmepumpe</summary>
-        </member>
-        <member name="F:BO4E.ENUM.WaermenutzungEdi.Z61">
-            <summary>Z61: Direktheizung</summary>
         </member>
         <member name="T:BO4E.ENUM.EncryptionScheme">
             <summary>
@@ -8149,6 +8241,16 @@
             </summary>
             <param name="enums"></param>
         </member>
+        <member name="T:BO4E.meta.Defaults">
+            <summary>
+            Static class to store default values (e.g. json serializer options)
+            </summary>
+        </member>
+        <member name="P:BO4E.meta.Defaults.JsonSerializerDefaultOptions">
+            <summary>
+            Basic json serializer options if no separate options (e.g. lenient) are used
+            </summary>
+        </member>
         <member name="T:BO4E.meta.FieldName">
             <summary>
             A Custom attribute for make fields and properties multilingual 
@@ -8265,6 +8367,35 @@
         <member name="M:BO4E.meta.LenientConverters.LenientDateTimeConverter.WriteJson(Newtonsoft.Json.JsonWriter,System.Object,Newtonsoft.Json.JsonSerializer)">
             <inheritdoc cref="M:Newtonsoft.Json.JsonConverter.WriteJson(Newtonsoft.Json.JsonWriter,System.Object,Newtonsoft.Json.JsonSerializer)"/>
         </member>
+        <member name="T:BO4E.meta.LenientConverters.LenientDictionaryConverter">
+            <summary>
+            A custom converter following the code on joseftw/JOS.SystemTextJsonDictionaryStringObjectJsonConverter
+            </summary>
+        </member>
+        <member name="M:BO4E.meta.LenientConverters.LenientDictionaryConverter.CanConvert(System.Type)">
+            <summary>
+            Can only convert dictionaries
+            </summary>
+            <param name="typeToConvert"></param>
+            <returns></returns>
+        </member>
+        <member name="M:BO4E.meta.LenientConverters.LenientDictionaryConverter.Read(System.Text.Json.Utf8JsonReader@,System.Type,System.Text.Json.JsonSerializerOptions)">
+            <summary>
+            Read the Dicitionary from a JSON reader
+            </summary>
+            <param name="reader">the json reader passed by the converter</param>
+            <param name="typeToConvert">The type we want to construct</param>
+            <param name="options">any json serializer options</param>
+            <returns></returns>
+        </member>
+        <member name="M:BO4E.meta.LenientConverters.LenientDictionaryConverter.Write(System.Text.Json.Utf8JsonWriter,System.Collections.Generic.Dictionary{System.String,System.Object},System.Text.Json.JsonSerializerOptions)">
+            <summary>
+            Write the dictionary to json
+            </summary>
+            <param name="writer">a json writer to write to</param>
+            <param name="value">the value of the dictionary we want to write to</param>
+            <param name="options">a jsonserializeroptions object to give custom options</param>
+        </member>
         <member name="T:BO4E.meta.LenientConverters.LenientEnumListConverter">
             <summary>
             allows to deserialize a list of enums (see tests)
@@ -8282,21 +8413,43 @@
         <member name="M:BO4E.meta.LenientConverters.LenientEnumListConverter.WriteJson(Newtonsoft.Json.JsonWriter,System.Object,Newtonsoft.Json.JsonSerializer)">
             <inheritdoc cref="M:Newtonsoft.Json.JsonConverter.WriteJson(Newtonsoft.Json.JsonWriter,System.Object,Newtonsoft.Json.JsonSerializer)"/>
         </member>
-        <member name="T:BO4E.meta.LenientConverters.LenientParsingExtensions">
+        <member name="T:BO4E.meta.LenientConverters.LenientSystemTextJsonParsingExtensions">
             <summary>
-            Extensions to simplify the usage of the Lenient parser
+            Extensions to simplify the usage of the Lenient parser using <see cref="T:System.Text.Json.JsonSerializer"/> (.NET5)
             </summary>
+            <seealso cref="T:BO4E.meta.LenientConverters.LenientParsingExtensionsNewtonsoft"/>
         </member>
-        <member name="M:BO4E.meta.LenientConverters.LenientParsingExtensions.GetJsonSerializerSettings(BO4E.meta.LenientConverters.LenientParsing)">
+        <member name="M:BO4E.meta.LenientConverters.LenientSystemTextJsonParsingExtensions.GetJsonSerializerOptions(BO4E.meta.LenientConverters.LenientParsing)">
             <summary>
-            <inheritdoc cref="M:BO4E.meta.LenientConverters.LenientParsingExtensions.GetJsonSerializerSettings(BO4E.meta.LenientConverters.LenientParsing,System.Collections.Generic.HashSet{System.String})"/>
+            <inheritdoc cref="M:BO4E.meta.LenientConverters.LenientSystemTextJsonParsingExtensions.GetJsonSerializerOptions(BO4E.meta.LenientConverters.LenientParsing,System.Collections.Generic.HashSet{System.String})"/>
             </summary>
             <param name="lenient"></param>
             <returns></returns>
         </member>
-        <member name="M:BO4E.meta.LenientConverters.LenientParsingExtensions.GetJsonSerializerSettings(BO4E.meta.LenientConverters.LenientParsing,System.Collections.Generic.HashSet{System.String})">
+        <member name="M:BO4E.meta.LenientConverters.LenientSystemTextJsonParsingExtensions.GetJsonSerializerOptions(BO4E.meta.LenientConverters.LenientParsing,System.Collections.Generic.HashSet{System.String})">
             <summary>
-            Generates JsonSerializerSettings for given lenient parsing setting
+            Generates JsonSerializerSettings (.NET5) for given lenient parsing setting
+            </summary>
+            <param name="lenient"></param>
+            <param name="userPropertiesWhiteList"></param>
+            <returns></returns>
+        </member>
+        <member name="T:BO4E.meta.LenientConverters.LenientParsingExtensionsNewtonsoft">
+            <summary>
+            Extensions to simplify the usage of the Lenient parser for <see cref="T:Newtonsoft.Json.JsonSerializer"/> (newtonsoft)
+            </summary>
+            <seealso cref="T:BO4E.meta.LenientConverters.LenientSystemTextJsonParsingExtensions"/>
+        </member>
+        <member name="M:BO4E.meta.LenientConverters.LenientParsingExtensionsNewtonsoft.GetJsonSerializerSettings(BO4E.meta.LenientConverters.LenientParsing)">
+            <summary>
+            <inheritdoc cref="M:BO4E.meta.LenientConverters.LenientParsingExtensionsNewtonsoft.GetJsonSerializerSettings(BO4E.meta.LenientConverters.LenientParsing,System.Collections.Generic.HashSet{System.String})"/>
+            </summary>
+            <param name="lenient"></param>
+            <returns></returns>
+        </member>
+        <member name="M:BO4E.meta.LenientConverters.LenientParsingExtensionsNewtonsoft.GetJsonSerializerSettings(BO4E.meta.LenientConverters.LenientParsing,System.Collections.Generic.HashSet{System.String})">
+            <summary>
+            Generates <see cref="T:Newtonsoft.Json.JsonSerializerSettings"/> (Newtonsoft) for given lenient parsing setting
             </summary>
             <param name="lenient"></param>
             <param name="userPropertiesWhiteList"></param>
@@ -8362,6 +8515,319 @@
         </member>
         <member name="M:BO4E.meta.LenientConverters.LenientStringToIntConverter.WriteJson(Newtonsoft.Json.JsonWriter,System.Object,Newtonsoft.Json.JsonSerializer)">
             <inheritdoc cref="M:Newtonsoft.Json.JsonConverter.WriteJson(Newtonsoft.Json.JsonWriter,System.Object,Newtonsoft.Json.JsonSerializer)"/>
+        </member>
+        <member name="T:BO4E.meta.LenientConverters.LenientSystemTextJsonDateTimeConverter">
+            <summary>
+            The lenient DateTimeConverter allows for transforming strings into (nullable) DateTimeOffset(?) objects,
+            even if their formatting is somehow weird.
+            </summary>
+        </member>
+        <member name="M:BO4E.meta.LenientConverters.LenientSystemTextJsonDateTimeConverter.#ctor(System.Nullable{System.DateTimeOffset})">
+            <summary>
+            initialize using a default date time
+            </summary>
+            <param name="defaultDateTime"></param>
+        </member>
+        <member name="M:BO4E.meta.LenientConverters.LenientSystemTextJsonDateTimeConverter.#ctor">
+            <summary>
+            initialize using no default datetime
+            </summary>
+        </member>
+        <member name="M:BO4E.meta.LenientConverters.LenientSystemTextJsonDateTimeConverter.Read(System.Text.Json.Utf8JsonReader@,System.Type,System.Text.Json.JsonSerializerOptions)">
+            <summary>
+            
+            </summary>
+            <param name="reader"></param>
+            <param name="typeToConvert"></param>
+            <param name="options"></param>
+            <returns></returns>
+        </member>
+        <member name="M:BO4E.meta.LenientConverters.LenientSystemTextJsonDateTimeConverter.Write(System.Text.Json.Utf8JsonWriter,System.DateTime,System.Text.Json.JsonSerializerOptions)">
+            <summary>
+            
+            </summary>
+            <param name="writer"></param>
+            <param name="value"></param>
+            <param name="options"></param>
+        </member>
+        <member name="T:BO4E.meta.LenientConverters.LenientSystemTextJsonNullableDateTimeConverter">
+            <summary>
+            The lenient DateTimeConverter allows for transforming strings into (nullable) DateTimeOffset(?) objects,
+            even if their formatting is somehow weird.
+            </summary>
+        </member>
+        <member name="M:BO4E.meta.LenientConverters.LenientSystemTextJsonNullableDateTimeConverter.#ctor(System.Nullable{System.DateTimeOffset})">
+            <summary>
+            initialize using a default date time
+            </summary>
+            <param name="defaultDateTime"></param>
+        </member>
+        <member name="M:BO4E.meta.LenientConverters.LenientSystemTextJsonNullableDateTimeConverter.#ctor">
+            <summary>
+            initialize using no default datetime
+            </summary>
+        </member>
+        <member name="M:BO4E.meta.LenientConverters.LenientSystemTextJsonNullableDateTimeConverter.Read(System.Text.Json.Utf8JsonReader@,System.Type,System.Text.Json.JsonSerializerOptions)">
+            <summary>
+            
+            </summary>
+            <param name="reader"></param>
+            <param name="typeToConvert"></param>
+            <param name="options"></param>
+            <returns></returns>
+        </member>
+        <member name="M:BO4E.meta.LenientConverters.LenientSystemTextJsonNullableDateTimeConverter.Write(System.Text.Json.Utf8JsonWriter,System.Nullable{System.DateTime},System.Text.Json.JsonSerializerOptions)">
+            <summary>
+            
+            </summary>
+            <param name="writer"></param>
+            <param name="value"></param>
+            <param name="options"></param>
+        </member>
+        <member name="T:BO4E.meta.LenientConverters.LenientSystemTextJsonDateTimeOffsetConverter">
+            <summary>
+            The lenient DateTimeConverter allows for transforming strings into (nullable) DateTimeOffset(?) objects,
+            even if their formatting is somehow weird.
+            </summary>
+        </member>
+        <member name="M:BO4E.meta.LenientConverters.LenientSystemTextJsonDateTimeOffsetConverter.#ctor(System.Nullable{System.DateTimeOffset})">
+            <summary>
+            initialize using a default date time
+            </summary>
+            <param name="defaultDateTime"></param>
+        </member>
+        <member name="M:BO4E.meta.LenientConverters.LenientSystemTextJsonDateTimeOffsetConverter.#ctor">
+            <summary>
+            initialize using no default datetime
+            </summary>
+        </member>
+        <member name="M:BO4E.meta.LenientConverters.LenientSystemTextJsonDateTimeOffsetConverter.Read(System.Text.Json.Utf8JsonReader@,System.Type,System.Text.Json.JsonSerializerOptions)">
+            <summary>
+            
+            </summary>
+            <param name="reader"></param>
+            <param name="typeToConvert"></param>
+            <param name="options"></param>
+            <returns></returns>
+        </member>
+        <member name="M:BO4E.meta.LenientConverters.LenientSystemTextJsonDateTimeOffsetConverter.Write(System.Text.Json.Utf8JsonWriter,System.DateTimeOffset,System.Text.Json.JsonSerializerOptions)">
+            <summary>
+            
+            </summary>
+            <param name="writer"></param>
+            <param name="value"></param>
+            <param name="options"></param>
+        </member>
+        <member name="T:BO4E.meta.LenientConverters.LenientSystemTextJsonNullableDateTimeOffsetConverter">
+            <summary>
+            The lenient DateTimeConverter allows for transforming strings into (nullable) DateTimeOffset(?) objects,
+            even if their formatting is somehow weird.
+            </summary>
+        </member>
+        <member name="M:BO4E.meta.LenientConverters.LenientSystemTextJsonNullableDateTimeOffsetConverter.#ctor(System.Nullable{System.DateTimeOffset})">
+            <summary>
+            initialize using a default date time
+            </summary>
+            <param name="defaultDateTime"></param>
+        </member>
+        <member name="M:BO4E.meta.LenientConverters.LenientSystemTextJsonNullableDateTimeOffsetConverter.#ctor">
+            <summary>
+            initialize using no default datetime
+            </summary>
+        </member>
+        <member name="M:BO4E.meta.LenientConverters.LenientSystemTextJsonNullableDateTimeOffsetConverter.Read(System.Text.Json.Utf8JsonReader@,System.Type,System.Text.Json.JsonSerializerOptions)">
+            <summary>
+            
+            </summary>
+            <param name="reader"></param>
+            <param name="typeToConvert"></param>
+            <param name="options"></param>
+            <returns></returns>
+        </member>
+        <member name="M:BO4E.meta.LenientConverters.LenientSystemTextJsonNullableDateTimeOffsetConverter.Write(System.Text.Json.Utf8JsonWriter,System.Nullable{System.DateTimeOffset},System.Text.Json.JsonSerializerOptions)">
+            <summary>
+            
+            </summary>
+            <param name="writer"></param>
+            <param name="value"></param>
+            <param name="options"></param>
+        </member>
+        <member name="T:BO4E.meta.LenientConverters.LenientSystemTextJsonEnumListConverter">
+            <summary>
+            A custom enum converter that uses an array for containing bit flags.
+            </summary>
+        </member>
+        <member name="M:BO4E.meta.LenientConverters.LenientSystemTextJsonEnumListConverter.#ctor">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:BO4E.meta.LenientConverters.LenientSystemTextJsonEnumListConverter.CanConvert(System.Type)">
+            <summary>
+            
+            </summary>
+            <param name="typeToConvert"></param>
+            <returns></returns>
+        </member>
+        <member name="M:BO4E.meta.LenientConverters.LenientSystemTextJsonEnumListConverter.CreateConverter(System.Type,System.Text.Json.JsonSerializerOptions)">
+            <summary>
+            
+            </summary>
+            <param name="typeToConvert"></param>
+            <param name="options"></param>
+            <returns></returns>
+        </member>
+        <member name="T:BO4E.meta.LenientConverters.LenientSystemTextJsonEnumListConverter`2">
+            <summary>
+            allows to deserialize a list of enums (see tests)
+            </summary>
+        </member>
+        <member name="M:BO4E.meta.LenientConverters.LenientSystemTextJsonEnumListConverter`2.CanConvert(System.Type)">
+            <inheritdoc cref="M:System.Text.Json.Serialization.JsonConverter.CanConvert(System.Type)"/>
+        </member>
+        <member name="M:BO4E.meta.LenientConverters.LenientSystemTextJsonEnumListConverter`2.Read(System.Text.Json.Utf8JsonReader@,System.Type,System.Text.Json.JsonSerializerOptions)">
+            <summary>
+            
+            </summary>
+            <param name="reader"></param>
+            <param name="typeToConvert"></param>
+            <param name="options"></param>
+            <returns></returns>
+        </member>
+        <member name="M:BO4E.meta.LenientConverters.LenientSystemTextJsonEnumListConverter`2.Write(System.Text.Json.Utf8JsonWriter,`0,System.Text.Json.JsonSerializerOptions)">
+            <summary>
+            
+            </summary>
+            <param name="writer"></param>
+            <param name="value"></param>
+            <param name="options"></param>
+        </member>
+        <member name="T:BO4E.meta.LenientConverters.LenientSystemTextJsonStringToBoolConverter">
+            <summary>
+            The lenient StringToBoolConverter allows for bool or bool? objects to be serialized as strings
+            </summary>
+        </member>
+        <member name="P:BO4E.meta.LenientConverters.LenientSystemTextJsonStringToBoolConverter.HandleNull">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:BO4E.meta.LenientConverters.LenientSystemTextJsonStringToBoolConverter.Read(System.Text.Json.Utf8JsonReader@,System.Type,System.Text.Json.JsonSerializerOptions)">
+            <summary>
+            
+            </summary>
+            <param name="reader"></param>
+            <param name="typeToConvert"></param>
+            <param name="options"></param>
+            <returns></returns>
+        </member>
+        <member name="M:BO4E.meta.LenientConverters.LenientSystemTextJsonStringToBoolConverter.Write(System.Text.Json.Utf8JsonWriter,System.Boolean,System.Text.Json.JsonSerializerOptions)">
+            <summary>
+            
+            </summary>
+            <param name="writer"></param>
+            <param name="value"></param>
+            <param name="options"></param>
+        </member>
+        <member name="T:BO4E.meta.LenientConverters.LenientSystemTextJsonStringToIntConverter">
+            <summary>
+            The lenient StringToIntConverter allows for int or int? objects have alphabetic characters.
+            If the string is not parseable as integer 0 is used in case of (int) and <c>null</c> in case of (int?).
+            </summary>
+            <example>(string)"12" will be parsed as (int)12 where an integer value is expected.</example>
+        </member>
+        <member name="P:BO4E.meta.LenientConverters.LenientSystemTextJsonStringToIntConverter.HandleNull">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:BO4E.meta.LenientConverters.LenientSystemTextJsonStringToIntConverter.Read(System.Text.Json.Utf8JsonReader@,System.Type,System.Text.Json.JsonSerializerOptions)">
+            <summary>
+            
+            </summary>
+            <param name="reader"></param>
+            <param name="typeToConvert"></param>
+            <param name="options"></param>
+            <returns></returns>
+        </member>
+        <member name="M:BO4E.meta.LenientConverters.LenientSystemTextJsonStringToIntConverter.Write(System.Text.Json.Utf8JsonWriter,System.Nullable{System.Int32},System.Text.Json.JsonSerializerOptions)">
+            <summary>
+            
+            </summary>
+            <param name="writer"></param>
+            <param name="value"></param>
+            <param name="options"></param>
+        </member>
+        <member name="T:BO4E.meta.LenientConverters.StringNullableEnumConverter">
+            <summary>
+            A custom enum converter that uses an array for containing bit flags.
+            </summary>
+        </member>
+        <member name="M:BO4E.meta.LenientConverters.StringNullableEnumConverter.#ctor">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:BO4E.meta.LenientConverters.StringNullableEnumConverter.CanConvert(System.Type)">
+            <summary>
+            
+            </summary>
+            <param name="typeToConvert"></param>
+            <returns></returns>
+        </member>
+        <member name="M:BO4E.meta.LenientConverters.StringNullableEnumConverter.CreateConverter(System.Type,System.Text.Json.JsonSerializerOptions)">
+            <summary>
+            
+            </summary>
+            <param name="typeToConvert"></param>
+            <param name="options"></param>
+            <returns></returns>
+        </member>
+        <member name="T:BO4E.meta.LenientConverters.StringNullableEnumConverter`1">
+            <summary>
+            A converter to also allow parsing of nullable enums (not included in system.text.json yet)
+            </summary>
+            <typeparam name="T"></typeparam>
+        </member>
+        <member name="P:BO4E.meta.LenientConverters.StringNullableEnumConverter`1.HandleNull">
+            <summary>
+            Also handles null values
+            </summary>
+        </member>
+        <member name="M:BO4E.meta.LenientConverters.StringNullableEnumConverter`1.#ctor">
+            <summary>
+            constructor
+            </summary>
+        </member>
+        <member name="M:BO4E.meta.LenientConverters.StringNullableEnumConverter`1.#ctor(System.Text.Json.JsonSerializerOptions)">
+            <summary>
+            Construct a converter (reuse if possible)
+            </summary>
+            <param name="options"></param>
+        </member>
+        <member name="M:BO4E.meta.LenientConverters.StringNullableEnumConverter`1.CanConvert(System.Type)">
+            <summary>
+            Check if we can convert this type
+            </summary>
+            <param name="typeToConvert"></param>
+            <returns></returns>
+        </member>
+        <member name="M:BO4E.meta.LenientConverters.StringNullableEnumConverter`1.Read(System.Text.Json.Utf8JsonReader@,System.Type,System.Text.Json.JsonSerializerOptions)">
+            <summary>
+            Read from the json reader. <see cref="M:System.Text.Json.Serialization.JsonConverter`1.Read(System.Text.Json.Utf8JsonReader@,System.Type,System.Text.Json.JsonSerializerOptions)"/>
+            </summary>
+            <param name="reader"></param>
+            <param name="typeToConvert"></param>
+            <param name="options"></param>
+            <returns></returns>
+        </member>
+        <member name="M:BO4E.meta.LenientConverters.StringNullableEnumConverter`1.Write(System.Text.Json.Utf8JsonWriter,`0,System.Text.Json.JsonSerializerOptions)">
+            <summary>
+            Write to the json writer <see cref="M:System.Text.Json.Serialization.JsonConverter`1.Write(System.Text.Json.Utf8JsonWriter,`0,System.Text.Json.JsonSerializerOptions)"/>
+            </summary>
+            <param name="writer"></param>
+            <param name="value"></param>
+            <param name="options"></param>
         </member>
         <member name="T:BO4E.meta.MultiLangResolver">
             <summary>
@@ -8534,7 +9000,7 @@
             If there is no such flag or not user properties yet, they will be created.
             </summary>
             <remarks>"having a flag set" means that the Business Object has a UserProperty entry that has <paramref name="flagKey"/> as key and the value of the user property is true.</remarks>
-            <param name="bocom">object that implements <see cref="T:BO4E.meta.IUserProperties"/> (so either inheriting from <see cref="T:BO4E.BO.BusinessObject"/> or <see cref="T:BO4E.COM.COM"/></param>
+            <param name="parent">object that implements <see cref="T:BO4E.meta.IUserProperties"/> (so either inheriting from <see cref="T:BO4E.BO.BusinessObject"/> or <see cref="T:BO4E.COM.COM"/></param>
             <param name="flagKey">key in the userproperties that should hold the value <paramref name="flagValue"/></param>
             <param name="flagValue">flag value, use null to remove the flag</param>
             <returns>true iff userProperties had been modified, false if not</returns>
@@ -8543,7 +9009,7 @@
             <summary>
             checks if the BusinessObject has a flag set.
             </summary>
-            <param name="bocom">object that implements <see cref="T:BO4E.meta.IUserProperties"/> (so either inheriting from <see cref="T:BO4E.BO.BusinessObject"/> or <see cref="T:BO4E.COM.COM"/></param>
+            <param name="parent">object that implements <see cref="T:BO4E.meta.IUserProperties"/> (so either inheriting from <see cref="T:BO4E.BO.BusinessObject"/> or <see cref="T:BO4E.COM.COM"/></param>
             <remarks>"having a flag set" means that the Business Object has a UserProperty entry that has <paramref name="flagKey"/> as key and the value of the user property is true.</remarks>
             <param name="flagKey"></param>
             <returns>true iff flag is set and has value true</returns>

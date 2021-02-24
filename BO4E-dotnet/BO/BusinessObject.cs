@@ -25,6 +25,7 @@ namespace BO4E.BO
     /// attribute which are obligatory for all BO4E business objects.
     /// <author>Hochfrequenz Unternehmensberatung GmbH</author>
     [JsonConverter(typeof(BusinessObjectBaseConverter))]
+    [System.Text.Json.Serialization.JsonConverter(typeof(BusinessObjectSystemTextJsonBaseConverter))]
     //[ProtoContract] // If I add this I get an error message: "System.InvalidOperationException: Duplicate field-number detected; 1 on: BO4E.BO.BusinessObject"
     [ProtoInclude(1, typeof(Angebot))]
     [ProtoInclude(2, typeof(Ansprechpartner))]
@@ -40,7 +41,7 @@ namespace BO4E.BO
     [ProtoInclude(12, typeof(Region))]
     [ProtoInclude(13, typeof(Vertrag))]
     [ProtoInclude(14, typeof(Zaehler))]
-    [ProtoInclude(15, typeof(LogObject))]
+    [ProtoInclude(15, typeof(LogObject.LogObject))]
     public abstract class BusinessObject : IEquatable<BusinessObject>, IUserProperties, IOptionalGuid
     {
         /// <summary>
@@ -51,6 +52,8 @@ namespace BO4E.BO
         /// 'MARKTLOKATION'
         /// </example>
         [JsonProperty(Required = Required.Default, Order = 1, PropertyName = "boTyp")]
+
+        [System.Text.Json.Serialization.JsonPropertyName("boTyp")]
         [ProtoMember(1)]
         public string BoTyp
         {
@@ -99,12 +102,15 @@ namespace BO4E.BO
         [JsonExtensionData]
         [ProtoMember(200)]
         [DataCategory(DataCategory.USER_PROPERTIES)]
-        public IDictionary<string, JToken> UserProperties { get; set; }
+        [System.Text.Json.Serialization.JsonExtensionData]
+        public IDictionary<string, object> UserProperties { get; set; }
+
 
         /// <summary>
         /// generates the BO4E boTyp attribute value (class name as upper case)
         /// </summary>
-        protected BusinessObject()
+        [System.Text.Json.Serialization.JsonConstructor]
+        public BusinessObject()
         {
             //BoTyp = this.GetType().Name.ToUpper();
             VersionStruktur = 1;
@@ -132,6 +138,8 @@ namespace BO4E.BO
         /// 1
         /// </example>
         [JsonProperty(PropertyName = "versionStruktur", Required = Required.Default, Order = 2)]
+
+        [System.Text.Json.Serialization.JsonPropertyName("versionStruktur")]
         [ProtoMember(2)]
         public int VersionStruktur { get; set; }
 
@@ -139,6 +147,8 @@ namespace BO4E.BO
         /// allows adding a GUID to Business Objects for tracking across systems
         /// </summary>
         [JsonProperty(PropertyName = "guid", NullValueHandling = NullValueHandling.Ignore, Required = Required.Default)]
+
+        [System.Text.Json.Serialization.JsonPropertyName("guid")]
         public virtual Guid? Guid { get; set; }
 
         /// <summary>
@@ -157,6 +167,8 @@ namespace BO4E.BO
         /// Store the latest database update, is Datetime, because postgres doesn't handle datetimeoffset in a generated column gracefully
         /// </summary>
         [JsonProperty(PropertyName = "timestamp", NullValueHandling = NullValueHandling.Ignore, Required = Required.Default, Order = 2)]
+
+        [System.Text.Json.Serialization.JsonPropertyName("timestamp")]
         [Timestamp]
         public DateTime? Timestamp { get; set; }
 
@@ -166,6 +178,8 @@ namespace BO4E.BO
         /// Hier können IDs anderer Systeme hinterlegt werden (z.B. eine SAP-GP-Nummer) (Details siehe <see cref="ExterneReferenz"/>)
         /// </summary>
         [JsonProperty(PropertyName = "externeReferenzen", Required = Required.Default)]
+
+        [System.Text.Json.Serialization.JsonPropertyName("externeReferenzen")]
         [ProtoMember(4)]
         public List<ExterneReferenz> ExterneReferenzen { get; set; }
 
@@ -180,7 +194,7 @@ namespace BO4E.BO
         /// </summary>
         public void SetExterneReferenz(ExterneReferenz extRef, bool overwriteExisting = false)
             => ExterneReferenzen = ExterneReferenzen.SetExterneReferenz(extRef, overwriteExisting);
-        
+
         /// <summary>
         /// returns a JSON scheme for the Business Object
         /// </summary>
@@ -251,14 +265,7 @@ namespace BO4E.BO
             foreach (var pi in GetBoKeyProps(boType))
             {
                 var jpa = pi.GetCustomAttribute<JsonPropertyAttribute>();
-                if (jpa?.PropertyName != null)
-                {
-                    result.Add(jpa.PropertyName);
-                }
-                else
-                {
-                    result.Add(pi.Name);
-                }
+                result.Add(jpa?.PropertyName != null ? jpa.PropertyName : pi.Name);
             }
             return result;
         }
@@ -331,7 +338,7 @@ namespace BO4E.BO
                     foreach (var subResult in GetExpandablePropertyNames(prop.PropertyType, false))
 
                     {
-                        result.Add(string.Join(".", new[] { fieldName, subResult.Key }), subResult.Value);
+                        result.Add(string.Join(".", fieldName, subResult.Key), subResult.Value);
                     }
                     result.Add(fieldName, prop.PropertyType);
                 }
@@ -366,14 +373,7 @@ namespace BO4E.BO
             foreach (var pi in GetBoKeyProps(GetType()))
             {
                 var jpa = pi.GetCustomAttribute<JsonPropertyAttribute>();
-                if (jpa?.PropertyName != null)
-                {
-                    result.Add(jpa.PropertyName, pi.GetValue(this));
-                }
-                else
-                {
-                    result.Add(pi.Name, pi.GetValue(this));
-                }
+                result.Add(jpa?.PropertyName != null ? jpa.PropertyName : pi.Name, pi.GetValue(this));
             }
             return result;
         }
@@ -539,7 +539,7 @@ namespace BO4E.BO
                         {
                             try
                             {
-                                boType = assembley.GetTypes().FirstOrDefault(x => x.Name.ToUpper() == jo["boTyp"].Value<string>().ToUpper());
+                                boType = assembley.GetTypes().FirstOrDefault(x => string.Equals(x.Name, jo["boTyp"].Value<string>(), StringComparison.CurrentCultureIgnoreCase));
                             }
                             catch (ReflectionTypeLoadException)
                             {
@@ -589,6 +589,70 @@ namespace BO4E.BO
             public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
             {
                 throw new NotImplementedException("Serializing an abstract BusinessObject is not supported."); // won't be called because CanWrite returns false
+            }
+        }
+        internal class BusinessObjectSystemTextJsonBaseConverter : System.Text.Json.Serialization.JsonConverter<BusinessObject>
+        {
+            //private static readonly JsonSerializerSettings SpecifiedSubclassConversion = new JsonSerializerSettings() { ContractResolver = new BaseSpecifiedConcreteClassConverter() };
+
+            public override bool CanConvert(Type objectType)
+            {
+                return objectType == typeof(BusinessObject);
+            }
+
+            public override BusinessObject Read(ref System.Text.Json.Utf8JsonReader reader, Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+            {
+                if (reader.TokenType == System.Text.Json.JsonTokenType.Null)
+                {
+                    return null;
+                }
+                if (typeToConvert.IsAbstract)
+                {
+                    var jdoc = System.Text.Json.JsonDocument.ParseValue(ref reader);
+                    if (!jdoc.RootElement.TryGetProperty("BoTyp", out var boTypeProp))
+                    {
+                        boTypeProp = jdoc.RootElement.GetProperty("boTyp");
+                    }
+                    var boTypeString = boTypeProp.GetString();
+#pragma warning disable CS0618 // Type or member is obsolete
+                    var boType = BoMapper.GetTypeForBoName(boTypeString);
+#pragma warning restore CS0618 // Type or member is obsolete
+                    if (boType == null)
+                    {
+                        foreach (var assembley in AppDomain.CurrentDomain.GetAssemblies())
+                        {
+                            try
+                            {
+                                boType = assembley.GetTypes().FirstOrDefault(x => string.Equals(x.Name, boTypeString, StringComparison.CurrentCultureIgnoreCase));
+                            }
+                            catch (ReflectionTypeLoadException)
+                            {
+                                continue;
+                            }
+                            if (boType != null)
+                            {
+                                break;
+                            }
+                        }
+                        if (boType == null)
+                        {
+                            throw new NotImplementedException($"The type '{boTypeString}' does not exist in the BO4E standard.");
+                        }
+                    }
+                    return System.Text.Json.JsonSerializer.Deserialize(jdoc.RootElement.GetRawText(), boType, options) as BusinessObject;
+
+                }
+                return null;
+            }
+
+
+            public override void Write(System.Text.Json.Utf8JsonWriter writer, BusinessObject value, System.Text.Json.JsonSerializerOptions options)
+            {
+                string boTypeString = value.GetBoTyp();
+#pragma warning disable CS0618 // Type or member is obsolete
+                var boType = BoMapper.GetTypeForBoName(boTypeString);
+#pragma warning restore CS0618 // Type or member is obsolete
+                System.Text.Json.JsonSerializer.Serialize(writer, value, boType, options);
             }
         }
     }

@@ -14,10 +14,14 @@ namespace BO4E.COM
     {
         /// <summary>Unterscheidung ob Positivliste oder Negativliste übertragen wird. Details <see cref="ENUM.Gueltigkeitstyp" /></summary>
         [JsonProperty(PropertyName = "gueltigkeitstyp", Required = Required.Always)]
+
+        [System.Text.Json.Serialization.JsonPropertyName("gueltigkeitstyp")]
         [ProtoMember(3)]
         public Gueltigkeitstyp Gueltigkeitstyp { get; set; }
         /// <summary>Hier steht, für welches Kriterium die Liste gilt. Z.B. Postleitzahlen. Details <see cref="Tarifregionskriterium" /></summary>
         [JsonProperty(PropertyName = "kriteriumsWerte", Required = Required.Always)]
+
+        [System.Text.Json.Serialization.JsonPropertyName("kriteriumsWerte")]
         [ProtoMember(4)]
         public List<KriteriumsWert> KriteriumsWerte { get; set; }
     }

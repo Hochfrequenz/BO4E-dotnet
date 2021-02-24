@@ -21,18 +21,24 @@ namespace BO4E.COM
     {
         /// <inheritdoc cref="Rechnungsposition.Positionsnummer"/>
         [JsonProperty(PropertyName = "positionsnummer", Required = Required.Always)]
+
+        [System.Text.Json.Serialization.JsonPropertyName("positionsnummer")]
         [ProtoMember(3)]
         public int Positionsnummer { get; set; }
 
         /// <inheritdoc cref="Rechnungsposition.LieferungVon"/>
         [JsonProperty(PropertyName = "lieferungVon", Required = Required.Always)]
-        [ProtoMember(4, DataFormat = DataFormat.WellKnown)]
+
+        [System.Text.Json.Serialization.JsonPropertyName("lieferungVon")]
+        [ProtoMember(4)]
         [JsonConverter(typeof(LenientDateTimeConverter))]
         public DateTimeOffset LieferungVon { get; set; }
 
         /// <inheritdoc cref="Rechnungsposition.LieferungBis"/>
         [JsonProperty(PropertyName = "lieferungBis", Required = Required.Always)]
-        [ProtoMember(5, DataFormat = DataFormat.WellKnown)]
+
+        [System.Text.Json.Serialization.JsonPropertyName("lieferungBis")]
+        [ProtoMember(5)]
         [JsonConverter(typeof(LenientDateTimeConverter))]
         public DateTimeOffset LieferungBis { get; set; }
 
@@ -41,16 +47,22 @@ namespace BO4E.COM
         /// <seealso cref="Rechnungsposition.Positionstext"/>
         /// </summary>
         [JsonProperty(PropertyName = "positionstext", Required = Required.Always)]
+
+        [System.Text.Json.Serialization.JsonPropertyName("positionstext")]
         [ProtoMember(6)]
         public string Positionstext { get; set; }
 
         /// <inheritdoc cref="Rechnungsposition.LokationsId"/>>
         [JsonProperty(PropertyName = "lokationsId", Required = Required.Always)]
+
+        [System.Text.Json.Serialization.JsonPropertyName("lokationsId")]
         [ProtoMember(7)]
         public string LokationsId { get; set; }
 
         /// <inheritdoc cref="Rechnungsposition.VertragskontoId"/>>
         [JsonProperty(PropertyName = "vertragskontoId", Required = Required.Always)]
+
+        [System.Text.Json.Serialization.JsonPropertyName("vertragskontoId")]
         [ProtoMember(8)]
         public string VertragskontoId { get; set; }
 
@@ -58,6 +70,8 @@ namespace BO4E.COM
         /// <see cref="Rechnungsposition.Einzelpreis"/> and <see cref="Preis.Wert"/>
         /// </summary>
         [JsonProperty(PropertyName = "preisWert", Required = Required.Always)]
+
+        [System.Text.Json.Serialization.JsonPropertyName("preisWert")]
         [ProtoMember(9)]
         public decimal PreisWert { get; set; }
 
@@ -65,6 +79,8 @@ namespace BO4E.COM
         /// <see cref="Rechnungsposition.Einzelpreis"/> and <see cref="Preis.Einheit"/>
         /// </summary>
         [JsonProperty(PropertyName = "preisEinheit", Required = Required.Always)]
+
+        [System.Text.Json.Serialization.JsonPropertyName("preisEinheit")]
         [ProtoMember(10)]
         public Waehrungseinheit PreisEinheit { get; set; }
 
@@ -72,6 +88,8 @@ namespace BO4E.COM
         /// <see cref="Rechnungsposition.Einzelpreis"/> and <see cref="Preis.Bezugswert"/>
         /// </summary>
         [JsonProperty(PropertyName = "preisBezugswert", Required = Required.Always)]
+
+        [System.Text.Json.Serialization.JsonPropertyName("preisBezugswert")]
         [ProtoMember(11)]
         public Mengeneinheit PreisBezugswert { get; set; }
 
@@ -79,6 +97,8 @@ namespace BO4E.COM
         /// <see cref="Rechnungsposition.Einzelpreis"/> and <see cref="Preis.Status"/>
         /// </summary>
         [JsonProperty(PropertyName = "preisStatus", Required = Required.Default)]
+
+        [System.Text.Json.Serialization.JsonPropertyName("preisStatus")]
         [ProtoMember(12)]
         public Preisstatus? PreisStatus { get; set; }
 
@@ -87,6 +107,8 @@ namespace BO4E.COM
         /// <see cref="Rechnungsposition.PositionsMenge"/> and <see cref="Menge.Wert"/>
         /// </summary>
         [JsonProperty(PropertyName = "positionsMengeWert", Required = Required.Always)]
+
+        [System.Text.Json.Serialization.JsonPropertyName("positionsMengeWert")]
         [ProtoMember(13)]
         public decimal? PositionsMengeWert { get; set; }
 
@@ -95,11 +117,15 @@ namespace BO4E.COM
         /// <see cref="Rechnungsposition.PositionsMenge"/> and <see cref="Menge.Einheit"/>
         /// </summary>
         [JsonProperty(PropertyName = "positionsMengeEinheit", Required = Required.Always)]
+
+        [System.Text.Json.Serialization.JsonPropertyName("positionsMengeEinheit")]
         [ProtoMember(14)]
         public Mengeneinheit? PositionsMengeEinheit { get; set; }
 
         /// <inheritdoc cref="Rechnungsposition.VertragsId"/>
         [JsonProperty(PropertyName = "vertragsId", Required = Required.Default)]
+
+        [System.Text.Json.Serialization.JsonPropertyName("vertragsId")]
         [ProtoMember(15)]
         public string VertragsId { get; set; }
 
@@ -108,6 +134,8 @@ namespace BO4E.COM
         /// (Ergänzung von Hochfrequenz Unternehmensberatung GmbH)
         /// </summary>
         [JsonProperty(PropertyName = "status", Required = Required.Default)]
+
+        [System.Text.Json.Serialization.JsonPropertyName("status")]
         [ProtoMember(16)]
         public RechnungspositionsStatus? Status { get; set; }
 

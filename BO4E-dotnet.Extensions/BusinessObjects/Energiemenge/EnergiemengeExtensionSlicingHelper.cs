@@ -25,11 +25,11 @@ namespace BO4E.Extensions.BusinessObjects.Energiemenge
             }
             if (overallTimeRange.Start.Kind == DateTimeKind.Unspecified)
             {
-                throw new ArgumentException($"TimeRange start must not have DateTimeKind.Unspecified", nameof(overallTimeRange));
+                throw new ArgumentException("TimeRange start must not have DateTimeKind.Unspecified", nameof(overallTimeRange));
             }
             if (overallTimeRange.End.Kind == DateTimeKind.Unspecified)
             {
-                throw new ArgumentException($"TimeRange end must not have DateTimeKind.Unspecified", nameof(overallTimeRange));
+                throw new ArgumentException("TimeRange end must not have DateTimeKind.Unspecified", nameof(overallTimeRange));
             }
 
             IList<ITimeRange> result = new List<ITimeRange>();
@@ -150,24 +150,23 @@ namespace BO4E.Extensions.BusinessObjects.Energiemenge
             {
                 tz = CentralEuropeStandardTime.CentralEuropeStandardTimezoneInfo;
             }
-            if (dt.Kind == DateTimeKind.Local)
+            switch (dt.Kind)
             {
-                throw new ArgumentException("DateTime Kind must not be local", nameof(dt));
+                case DateTimeKind.Local:
+                    throw new ArgumentException("DateTime Kind must not be local", nameof(dt));
+                case DateTimeKind.Unspecified:
+                    return dt.AddDays(value); // doesn't take dst into account. that's just what we want! A day can have 23,24 or 25 hours
+                case DateTimeKind.Utc:
+                {
+                    // an utc day does always have 24 hours. not what humans expect!
+                    var dtLocal = DateTime.SpecifyKind(TimeZoneInfo.ConvertTimeFromUtc(dt, tz), DateTimeKind.Unspecified);
+                    var preResult = DateTime.SpecifyKind(dtLocal.AddDays(value), DateTimeKind.Unspecified);
+                    var result = TimeZoneInfo.ConvertTimeToUtc(preResult, tz);
+                    return result;
+                }
+                default:
+                    throw new NotImplementedException($"DateTimeKind {dt.Kind} is not implemented.");
             }
-
-            if (dt.Kind == DateTimeKind.Unspecified)
-            {
-                return dt.AddDays(value); // doesn't take dst into account. that's just what we want! A day can have 23,24 or 25 hours
-            }
-            if (dt.Kind == DateTimeKind.Utc)
-            {
-                // an utc day does always have 24 hours. not what humans expect!
-                var dtLocal = DateTime.SpecifyKind(TimeZoneInfo.ConvertTimeFromUtc(dt, tz), DateTimeKind.Unspecified);
-                var preResult = DateTime.SpecifyKind(dtLocal.AddDays(value), DateTimeKind.Unspecified);
-                var result = TimeZoneInfo.ConvertTimeToUtc(preResult, tz);
-                return result;
-            }
-            throw new NotImplementedException($"DateTimeKind {dt.Kind} is not implemented.");
         }
     }
 }

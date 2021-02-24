@@ -49,4 +49,5 @@ namespace BO4E.meta.LenientConverters
         /// </summary>
         MOST_LENIENT = ~0
     }
+
 }

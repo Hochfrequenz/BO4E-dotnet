@@ -19,6 +19,7 @@ namespace BO4E.BO
         /// encryption scheme used
         /// </summary>
         [JsonProperty(PropertyName = "encryptionScheme", Required = Required.Always, Order = 7)]
+        [System.Text.Json.Serialization.JsonPropertyName("encryptionScheme")]
         [BoKey]
         public EncryptionScheme EncryptionScheme { get; set; }
 
@@ -26,6 +27,7 @@ namespace BO4E.BO
         /// base64 encoded cipher text of the original objects JSON serialization
         /// </summary>
         [JsonProperty(PropertyName = "cipherText", Required = Required.Always, Order = 8)]
+        [System.Text.Json.Serialization.JsonPropertyName("cipherText")]
         [BoKey]
         public string CipherText { get; set; }
 

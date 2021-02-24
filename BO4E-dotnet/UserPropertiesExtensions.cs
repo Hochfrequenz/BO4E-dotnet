@@ -1,7 +1,9 @@
-﻿using BO4E.meta;
-using Newtonsoft.Json.Linq;
-using System;
+﻿using System;
 using System.Collections.Generic;
+
+using BO4E.meta;
+
+using Newtonsoft.Json.Linq;
 
 namespace BO4E
 {
@@ -10,6 +12,7 @@ namespace BO4E
     /// </summary>
     public static class UserPropertiesExtensions
     {
+
         /// <summary>
         /// try to get the Userproperty with key <paramref name="userPropertyKey"/> from <paramref name="parent"/> if <paramref name="parent"/>.UserProperties is not null and the key is present.
         /// </summary>
@@ -27,7 +30,38 @@ namespace BO4E
             if (string.IsNullOrWhiteSpace(userPropertyKey)) throw new ArgumentNullException(nameof(userPropertyKey));
             if (up != null && up.TryGetValue(userPropertyKey, out var upToken))
             {
-                value = upToken.Value<TUserProperty>();
+                switch (upToken)
+                {
+                    case null:
+                        value = default;
+                        return false;
+                    case string token:
+                        value = new JValue(token).Value<TUserProperty>();
+                        break;
+                    case double d:
+                        value = new JValue(d).Value<TUserProperty>();
+                        break;
+                    case long l:
+                        value = new JValue(l).Value<TUserProperty>();
+                        break;
+                    case bool b:
+                        value = new JValue(b).Value<TUserProperty>();
+                        break;
+                    case JValue jValue:
+                        value = jValue.Value<TUserProperty>();
+                        break;
+                    default:
+                        try
+                        {
+                            value = System.Text.Json.JsonSerializer.Deserialize<TUserProperty>(((System.Text.Json.JsonElement)upToken).GetRawText(), Defaults.JsonSerializerDefaultOptions);
+                        }
+                        catch (System.Text.Json.JsonException)
+                        {
+                            throw new FormatException($"Could not convert {((System.Text.Json.JsonElement)upToken).GetRawText()} to { typeof(TUserProperty).Name}");
+                        }
+                        break;
+                }
+
                 return true;
             }
 
@@ -135,7 +169,7 @@ namespace BO4E
 
             if (parent.UserProperties == null)
             {
-                parent.UserProperties = new Dictionary<string, JToken>();
+                parent.UserProperties = new Dictionary<string, object>();
                 if (!flagValue.HasValue)
                 {
                     return false;
@@ -183,7 +217,7 @@ namespace BO4E
 
             try
             {
-                return parent.UserProperties != null && parent.UserPropertyEquals(flagKey, (bool?) true);
+                return parent.UserProperties != null && parent.UserPropertyEquals(flagKey, (bool?)true);
             }
             catch (ArgumentNullException ane) when (ane.ParamName == "value")
             {

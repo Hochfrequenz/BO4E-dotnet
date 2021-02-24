@@ -28,6 +28,8 @@ namespace BO4E.BO
         /// z.B. DE 47108151234567</summary>
         [DefaultValue("|null|")]
         [JsonProperty(PropertyName = "messlokationsId", Required = Required.Always, Order = 4)]
+
+        [System.Text.Json.Serialization.JsonPropertyName("messlokationsId")]
         [DataCategory(DataCategory.POD)]
         [BoKey]
         [ProtoMember(4)]
@@ -36,16 +38,22 @@ namespace BO4E.BO
         /// <summary>* Sparte der Messlokation, z.B. Gas oder Strom.
         /// <seealso cref="ENUM.Sparte" /></summary>
         [JsonProperty(PropertyName = "sparte", Required = Required.Always, Order = 5)]
+
+        [System.Text.Json.Serialization.JsonPropertyName("sparte")]
         [ProtoMember(5)]
         public Sparte Sparte { get; set; }
 
         ///<summary> Spannungsebene der Messung. <seealso cref="Netzebene" /></summary>
         [JsonProperty(PropertyName = "netzebeneMessung", Required = Required.Default, Order = 6)] //explicitly set NOT required.
+
+        [System.Text.Json.Serialization.JsonPropertyName("netzebeneMessung")]
         [ProtoMember(6)]
         public Netzebene? NetzebeneMessung { get; set; }
 
         /// <summary>Die Nummer des Messgebietes in der ene't-Datenbank.</summary>
         [JsonProperty(PropertyName = "messgebietNr", Required = Required.Default, Order = 7)]
+
+        [System.Text.Json.Serialization.JsonPropertyName("messgebietNr")]
         [ProtoMember(7)]
         public string MessgebietNr { get; set; }
 
@@ -53,6 +61,8 @@ namespace BO4E.BO
         /// Messlokation zuständig ist.( Dieser ist immer dann Messstellenbetreiber, wenn
         /// kein anderer MSB die Einrichtungen an der Messlokation betreibt.)</summary>
         [JsonProperty(PropertyName = "grundzustaendigerMSBCodeNr", Required = Required.Default, Order = 8)]
+
+        [System.Text.Json.Serialization.JsonPropertyName("grundzustaendigerMSBCodeNr")]
         [ProtoMember(8)]
         public string GrundzustaendigerMSBCodeNr { get; set; }
 
@@ -61,6 +71,8 @@ namespace BO4E.BO
         /// Messstellenbetreiber, wenn kein anderer MSB die Einrichtungen an der
         /// Messlokation betreibt.)</summary>
         [JsonProperty(PropertyName = "grundzustaendigerMSBIMCodeNr", Required = Required.Default, Order = 9)]
+
+        [System.Text.Json.Serialization.JsonPropertyName("grundzustaendigerMSBIMCodeNr")]
         [ProtoMember(9)]
         public string GrundzustaendigerMSBIMCodeNr { get; set; }// grundzustaendigerMSB_IMCodenr;  https://github.com/Hochfrequenz/energy-service-hub/issues/11
 
@@ -69,6 +81,8 @@ namespace BO4E.BO
         /// Messlokation abliest.)
         /// </summary>
         [JsonProperty(PropertyName = "grundzustaendigerMDLCodeNr", Order = 10, Required = Required.Default)]
+
+        [System.Text.Json.Serialization.JsonPropertyName("grundzustaendigerMDLCodeNr")]
 #pragma warning disable CS0618 // Type or member is obsolete
         [NonOfficial(NonOfficialCategory.PROPOSED_DELETION)]
 #pragma warning restore CS0618 // Type or member is obsolete
@@ -82,6 +96,8 @@ namespace BO4E.BO
         /// eine Adresse oder eine GeoKoordinate oder eine Katasteradresse.
         ///</summary>
         [JsonProperty(PropertyName = "messadresse", Required = Required.Default, Order = 11)]
+
+        [System.Text.Json.Serialization.JsonPropertyName("messadresse")]
         [DataCategory(DataCategory.ADDRESS)]
         [ProtoMember(11)]
         public Adresse Messadresse { get; set; }
@@ -91,6 +107,8 @@ namespace BO4E.BO
         /// Achtung: Es darf immer nur eine Art der Ortsangabe vorhanden sein (entweder
         /// eine Adresse oder eine GeoKoordinate oder eine Katasteradresse.</summary>
         [JsonProperty(PropertyName = "geoadresse", Required = Required.Default, Order = 12)]
+
+        [System.Text.Json.Serialization.JsonPropertyName("geoadresse")]
         [DataCategory(DataCategory.ADDRESS)]
         [ProtoMember(12)]
         public Geokoordinaten Geoadresse { get; set; }
@@ -100,22 +118,30 @@ namespace BO4E.BO
         /// Achtung: Es darf immer nur eine Art der Ortsangabe vorhanden sein (entweder
         /// eine Adresse oder eine GeoKoordinate oder eine Katasteradresse.</summary> */
         [JsonProperty(PropertyName = "katasterinformation", Required = Required.Default, Order = 13)]
+
+        [System.Text.Json.Serialization.JsonPropertyName("katasterinformation")]
         [ProtoMember(13)]
         [DataCategory(DataCategory.ADDRESS)]
         public Katasteradresse Katasterinformation { get; set; }
 
         /// <summary>Liste der Hardware, die zu dieser Messstelle gehört.</summary>
         [JsonProperty(PropertyName = "geraete", Required = Required.Default, Order = 14)]
+
+        [System.Text.Json.Serialization.JsonPropertyName("geraete")]
         [ProtoMember(14)]
         public List<Hardware> Geraete { get; set; }
 
         /// <summary>Liste der Messdienstleistungen, die zu dieser Messstelle gehört.</summary>
         [JsonProperty(PropertyName = "messdienstleistung", Required = Required.Default, Order = 15)]
+
+        [System.Text.Json.Serialization.JsonPropertyName("messdienstleistung")]
         [ProtoMember(15)]
         public List<Dienstleistung> Messdienstleistung { get; set; }
 
         /// <summary> Zähler, die zu dieser Messlokation gehören. Details</summary>
         [JsonProperty(PropertyName = "messlokationszaehler", Required = Required.Default, Order = 16)]
+
+        [System.Text.Json.Serialization.JsonPropertyName("messlokationszaehler")]
         [ProtoMember(16)]
         public List<Zaehler> Messlokationszaehler { get; set; }
 
@@ -123,11 +149,15 @@ namespace BO4E.BO
         /// <see cref="Marktlokation.Bilanzierungsmethode"/>
         /// </summary>
         [JsonProperty(PropertyName = "bilanzierungsmethode", Required = Required.Default, Order = 17)]
+
+        [System.Text.Json.Serialization.JsonPropertyName("bilanzierungsmethode")]
         [ProtoMember(17)]
         public Bilanzierungsmethode? Bilanzierungsmethode { get; set; }
 
         /// <summary>Dieser Wert ist true, falls die Abrechnungs des Messstellenbetriebs die Netznutzungsabrechnung enthält. false andernfalls</summary>
         [JsonProperty(PropertyName = "abrechnungmessstellenbetriebnna", Required = Required.Default, Order = 18)]
+
+        [System.Text.Json.Serialization.JsonPropertyName("abrechnungmessstellenbetriebnna")]
         [ProtoMember(1018)]
         [NonOfficial(NonOfficialCategory.CUSTOMER_REQUIREMENTS)]
         public bool? Abrechnungmessstellenbetriebnna { get; set; }
@@ -136,6 +166,8 @@ namespace BO4E.BO
         /// marktrollen für EDIFACT mapping
         /// </summary>
         [JsonProperty(Required = Required.Default, Order = 19, PropertyName = "marktrollen")]
+
+        [System.Text.Json.Serialization.JsonPropertyName("marktrollen")]
         [ProtoMember(1019)]
         [NonOfficial(NonOfficialCategory.CUSTOMER_REQUIREMENTS)]
         [Obsolete("This isn't the right place for this information")] // ToDo: check
@@ -145,6 +177,8 @@ namespace BO4E.BO
         /// gasqualitaet für EDIFACT mapping
         /// </summary>
         [JsonProperty(PropertyName = "gasqualitaet", Required = Required.Default, Order = 20, NullValueHandling = NullValueHandling.Ignore)]
+
+        [System.Text.Json.Serialization.JsonPropertyName("gasqualitaet")]
         [ProtoMember(1020)]
         [NonOfficial(NonOfficialCategory.CUSTOMER_REQUIREMENTS)]
         public Gasqualitaet? Gasqualitaet { get; set; }
@@ -154,6 +188,8 @@ namespace BO4E.BO
         /// </summary>
         // ToDo: so does this mean that a factor of 0.0M has no losses?
         [JsonProperty(PropertyName = "verlustfaktor", Required = Required.Default, Order = 21)]
+
+        [System.Text.Json.Serialization.JsonPropertyName("verlustfaktor")]
         [NonOfficial(NonOfficialCategory.CUSTOMER_REQUIREMENTS)]
         [ProtoMember(1021)]
         public decimal? Verlustfaktor { get; set; }

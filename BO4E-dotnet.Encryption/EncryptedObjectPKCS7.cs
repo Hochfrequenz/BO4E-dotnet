@@ -23,6 +23,7 @@ namespace BO4E.BO
         /// list of public keys for which the object is decrypt-able 
         /// </summary>
         [JsonProperty(PropertyName = "publicKeys", Required = Required.Default)]
+        [System.Text.Json.Serialization.JsonPropertyName("publicKeys")]
         public List<string> PublicKeys { get; set; }
     }
 }

@@ -23,8 +23,8 @@ namespace TestBO4E
                         Obiskennzahl = "1-2-3",
                         Enddatum = new DateTime(),
                         Startdatum = new DateTime(),
-                        Wert = (decimal)123.456,
-                        Wertermittlungsverfahren= BO4E.ENUM.Wertermittlungsverfahren.PROGNOSE
+                        Wert = (decimal) 123.456,
+                        Wertermittlungsverfahren = BO4E.ENUM.Wertermittlungsverfahren.PROGNOSE
                     }
                 }
             };
@@ -40,8 +40,8 @@ namespace TestBO4E
                         Obiskennzahl = "4-5-6",
                         Enddatum = new DateTime(),
                         Startdatum = new DateTime(),
-                        Wert = (decimal)123.456,
-                        Wertermittlungsverfahren= BO4E.ENUM.Wertermittlungsverfahren.PROGNOSE
+                        Wert = (decimal) 123.456,
+                        Wertermittlungsverfahren = BO4E.ENUM.Wertermittlungsverfahren.PROGNOSE
                     }
                 }
             };
@@ -66,6 +66,4 @@ namespace TestBO4E
             Assert.ThrowsException<InvalidOperationException>(() => em1 + em2);
         }
     }
-
-
 }

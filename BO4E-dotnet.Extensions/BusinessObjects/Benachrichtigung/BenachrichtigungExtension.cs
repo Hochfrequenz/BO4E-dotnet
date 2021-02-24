@@ -1,4 +1,3 @@
-using Newtonsoft.Json.Linq;
 
 using System;
 using System.Collections.Generic;
@@ -106,7 +105,7 @@ namespace BO4E.Extensions.BusinessObjects.Benachrichtigung
             {
                 if (b.UserProperties == null)
                 {
-                    b.UserProperties = new Dictionary<string, JToken>();
+                    b.UserProperties = new Dictionary<string, object>();
                 }
                 foreach (var info in b.Infos)
                 {

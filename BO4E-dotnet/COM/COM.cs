@@ -2,7 +2,6 @@ using BO4E.BO;
 using BO4E.meta;
 
 using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
 
 using ProtoBuf;
 
@@ -81,8 +80,9 @@ namespace BO4E.COM
         [JsonProperty(PropertyName = BusinessObject.USER_PROPERTIES_NAME, Required = Required.Default, Order = 2, DefaultValueHandling = DefaultValueHandling.Ignore)]
         [ProtoMember(2)]
         [JsonExtensionData]
+        [System.Text.Json.Serialization.JsonExtensionData]
         [DataCategory(DataCategory.USER_PROPERTIES)]
-        public IDictionary<string, JToken> UserProperties { get; set; }
+        public IDictionary<string, object> UserProperties { get; set; }
 
         /// <summary>
         /// BO4E components are considered equal iff all of their elements/fields are equal.
@@ -141,6 +141,8 @@ namespace BO4E.COM
         /// allows adding a GUID to COM objects for tracking across systems
         /// </summary>
         [JsonProperty(PropertyName = "guid", NullValueHandling = NullValueHandling.Ignore, Required = Required.Default, Order = 1)]
+
+        [System.Text.Json.Serialization.JsonPropertyName("guid")]
         public Guid? Guid { get; set; }
 
         /// <inheritdoc cref="BO.BusinessObject.guidSerialized"/>
@@ -160,6 +162,8 @@ namespace BO4E.COM
         /// Store the latest timestamp (update from the database)
         /// </summary>
         [JsonProperty(PropertyName = "timestamp", NullValueHandling = NullValueHandling.Ignore, Required = Required.Default, Order = 2)]
+
+        [System.Text.Json.Serialization.JsonPropertyName("timestamp")]
         [Timestamp]
         public DateTime? Timestamp { get; set; }
 

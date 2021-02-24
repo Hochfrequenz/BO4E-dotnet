@@ -7,7 +7,7 @@
     "vertragsnummer": "cb32fb41-8bb1-436a-9465-76447b478480",
     "beschreibung": "Grund- oder Ersatzversorgung",
     "vertragsart": 0,
-    "vertragstatus": 3,
+    "vertragstatus": "aktiv",
     "sparte": 1,
     "vertragsbeginn": "2020-02-18T00:00:00",
     "vertragsende": "0001-01-01T00:00:00",

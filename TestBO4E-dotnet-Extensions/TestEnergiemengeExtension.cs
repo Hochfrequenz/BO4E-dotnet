@@ -176,7 +176,7 @@ namespace TestBO4EExtensions
                 // test normalising for all Energiemenge objects
                 if (em.IsPure() && em.IsExtensive() && em.GetTotalConsumption().Item1 != 0.0M)
                 {
-                    var targetValue = 1000.0M;
+                    const decimal targetValue = 1000.0M;
                     var emNormalised = em.Normalise(targetValue);
                     Assert.AreEqual(Math.Round(targetValue, 12), Math.Round(emNormalised.GetTotalConsumption().Item1, 12));
                 }

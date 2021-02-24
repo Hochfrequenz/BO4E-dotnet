@@ -33,15 +33,15 @@ namespace TestBO4E.Reporting
             };
             var crList = new List<BO4E.Reporting.CompletenessReport> { cr2, cr3, cr1 };
             // before sorting
-            Assert.IsTrue(crList.First().ReferenceTimeFrame.Startdatum.Value.Year == 2002);
-            Assert.IsTrue(crList[1].ReferenceTimeFrame.Startdatum.Value.Year == 2003);
-            Assert.IsTrue(crList.Last().ReferenceTimeFrame.Startdatum.Value.Year == 2001);
+            Assert.AreEqual(2002, crList.First().ReferenceTimeFrame.Startdatum.Value.Year);
+            Assert.AreEqual(2003, crList[1].ReferenceTimeFrame.Startdatum.Value.Year);
+            Assert.AreEqual(2001, crList.Last().ReferenceTimeFrame.Startdatum.Value.Year);
 
             crList.Sort();
             //after sorting
-            Assert.IsTrue(crList.First().ReferenceTimeFrame.Startdatum.Value.Year == 2001);
-            Assert.IsTrue(crList[1].ReferenceTimeFrame.Startdatum.Value.Year == 2002);
-            Assert.IsTrue(crList.Last().ReferenceTimeFrame.Startdatum.Value.Year == 2003);
+            Assert.AreEqual(2001, crList.First().ReferenceTimeFrame.Startdatum.Value.Year);
+            Assert.AreEqual(2002, crList[1].ReferenceTimeFrame.Startdatum.Value.Year);
+            Assert.AreEqual(2003, crList.Last().ReferenceTimeFrame.Startdatum.Value.Year);
 
             var crNull = new BO4E.Reporting.CompletenessReport();
             crList.Add(crNull);
@@ -55,7 +55,7 @@ namespace TestBO4E.Reporting
             crList.Add(cr0);
             crList.Sort();
             Assert.IsNull(crList.First().ReferenceTimeFrame);
-            Assert.IsTrue(crList[1].ReferenceTimeFrame.Startdatum.Value.Year == 1999);
+            Assert.AreEqual(1999, crList[1].ReferenceTimeFrame.Startdatum.Value.Year);
         }
     }
 }

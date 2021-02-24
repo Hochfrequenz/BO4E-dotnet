@@ -22,12 +22,14 @@ namespace BO4E.BO
         /// base64 encoded unique nonce / initialisation vector
         /// </summary>
         [JsonProperty(PropertyName = "nonce", Required = Required.Always, Order = 8)]
+        [System.Text.Json.Serialization.JsonPropertyName("nonce")]
         public string Nonce { get; set; }
 
         /// <summary>
         /// associated data string (UTF-8); might be an empty string but not null
         /// </summary>
         [JsonProperty(PropertyName = "AssociatedData", Required = Required.Always, Order = 5)]
+        [System.Text.Json.Serialization.JsonPropertyName("AssociatedData")]
         public string AssociatedData { get; set; }
     }
 }

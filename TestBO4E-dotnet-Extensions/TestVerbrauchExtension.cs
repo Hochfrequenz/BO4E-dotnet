@@ -363,8 +363,8 @@ namespace TestBO4EExtensions
         public void TestHfSapDataDetangle()
         {
             var testList = JsonConvert.DeserializeObject<List<Verbrauch>>("[{\"startdatum\":\"2000-01-01T00:00:00Z\",\"enddatum\":\"2018-09-01T00:00:00Z\",\"wertermittlungsverfahren\":1,\"obiskennzahl\":\"1-1:1.8.0\",\"wert\":50,\"einheit\":2,\"zaehlernummer\":\"10000548\"},{\"startdatum\":\"2000-01-01T00:00:00Z\",\"enddatum\":\"2018-12-25T16:22:00Z\",\"wertermittlungsverfahren\":0,\"obiskennzahl\":\"1-1:1.8.0\",\"wert\":961,\"einheit\":2,\"zaehlernummer\":\"10000548\"},{\"startdatum\":\"2000-01-01T00:00:00Z\",\"enddatum\":\"2019-12-25T08:20:00Z\",\"wertermittlungsverfahren\":1,\"obiskennzahl\":\"1-1:1.8.0\",\"wert\":2500,\"einheit\":2,\"zaehlernummer\":\"10000548\"},{\"startdatum\":\"2018-09-01T00:00:00Z\",\"enddatum\":\"2018-12-25T16:22:00Z\",\"wertermittlungsverfahren\":0,\"obiskennzahl\":\"1-1:1.8.0\",\"wert\":911,\"einheit\":2,\"zaehlernummer\":\"10000548\"},{\"startdatum\":\"2018-09-01T00:00:00Z\",\"enddatum\":\"2019-12-25T08:20:00Z\",\"wertermittlungsverfahren\":1,\"obiskennzahl\":\"1-1:1.8.0\",\"wert\":2450,\"einheit\":2,\"zaehlernummer\":\"10000548\"},{\"startdatum\":\"2018-12-25T16:22:00Z\",\"enddatum\":\"2019-12-25T08:20:00Z\",\"wertermittlungsverfahren\":0,\"obiskennzahl\":\"1-1:1.8.0\",\"wert\":1539,\"einheit\":2,\"zaehlernummer\":\"10000548\"}]");
-            Assert.AreEqual(3, testList.Where(v => v.Wertermittlungsverfahren == Wertermittlungsverfahren.MESSUNG).Count());
-            Assert.AreEqual(3, testList.Where(v => v.Wertermittlungsverfahren == Wertermittlungsverfahren.PROGNOSE).Count());
+            Assert.AreEqual(3, testList.Count(v => v.Wertermittlungsverfahren == Wertermittlungsverfahren.MESSUNG));
+            Assert.AreEqual(3, testList.Count(v => v.Wertermittlungsverfahren == Wertermittlungsverfahren.PROGNOSE));
             var result = Detangle(testList);
             result.Sort(new VerbrauchDateTimeComparer());
             //Assert.AreEqual(5, result.Count);

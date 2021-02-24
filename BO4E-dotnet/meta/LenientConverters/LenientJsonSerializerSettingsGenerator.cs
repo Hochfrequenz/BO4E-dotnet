@@ -7,9 +7,10 @@ using System.Collections.Generic;
 namespace BO4E.meta.LenientConverters
 {
     /// <summary>
-    /// Extensions to simplify the usage of the Lenient parser
+    /// Extensions to simplify the usage of the Lenient parser for <see cref="Newtonsoft.Json.JsonSerializer"/> (newtonsoft)
     /// </summary>
-    public static class LenientParsingExtensions
+    /// <seealso cref="BO4E.meta.LenientConverters.LenientSystemTextJsonParsingExtensions"/>
+    public static class LenientParsingExtensionsNewtonsoft
     {
         /// <summary>
         /// <inheritdoc cref="GetJsonSerializerSettings(LenientParsing, HashSet{string})"/>
@@ -22,7 +23,7 @@ namespace BO4E.meta.LenientConverters
         }
 
         /// <summary>
-        /// Generates JsonSerializerSettings for given lenient parsing setting
+        /// Generates <see cref="Newtonsoft.Json.JsonSerializerSettings"/> (Newtonsoft) for given lenient parsing setting
         /// </summary>
         /// <param name="lenient"></param>
         /// <param name="userPropertiesWhiteList"></param>
@@ -38,14 +39,9 @@ namespace BO4E.meta.LenientConverters
                     switch (lp)
                     {
                         case LenientParsing.DATE_TIME:
-                            if (!lenient.HasFlag(LenientParsing.SET_INITIAL_DATE_IF_NULL))
-                            {
-                                converters.Add(new LenientDateTimeConverter());
-                            }
-                            else
-                            {
-                                converters.Add(new LenientDateTimeConverter(new DateTimeOffset()));
-                            }
+                            converters.Add(!lenient.HasFlag(LenientParsing.SET_INITIAL_DATE_IF_NULL)
+                                ? new LenientDateTimeConverter()
+                                : new LenientDateTimeConverter(new DateTimeOffset()));
                             break;
 
                         case LenientParsing.ENUM_LIST:
@@ -67,15 +63,8 @@ namespace BO4E.meta.LenientConverters
                     }
                 }
             }
-            IContractResolver contractResolver;
-            if (userPropertiesWhiteList.Count > 0)
-            {
-                contractResolver = new UserPropertiesDataContractResolver(userPropertiesWhiteList);
-            }
-            else
-            {
-                contractResolver = new DefaultContractResolver();
-            }
+
+            IContractResolver contractResolver = userPropertiesWhiteList.Count > 0 ? new UserPropertiesDataContractResolver(userPropertiesWhiteList) : new DefaultContractResolver();
             var settings = new JsonSerializerSettings
             {
                 Converters = converters,

@@ -1,12 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-
 using BO4E.BO;
 using BO4E.COM;
 using BO4E.ENUM;
-
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-
 using Newtonsoft.Json;
 
 namespace TestBO4E
@@ -19,7 +16,8 @@ namespace TestBO4E
         {
             var v1 = new Verbrauch();
             var v2 = new Verbrauch();
-            Assert.ThrowsException<JsonSerializationException>(() => v1.Equals(v2), "You must not compare invalid/incomplete COMs");
+            Assert.ThrowsException<JsonSerializationException>(() => v1.Equals(v2),
+                "You must not compare invalid/incomplete COMs");
             Assert.AreEqual(v1.GetHashCode(), v2.GetHashCode());
 
 
@@ -88,8 +86,8 @@ namespace TestBO4E
                 Enddatum = new DateTime(2018, 12, 31),
                 Wert = 123.456M
             };
-            em1.Energieverbrauch = new List<Verbrauch> { v3 };
-            em2.Energieverbrauch = new List<Verbrauch> { v3 };
+            em1.Energieverbrauch = new List<Verbrauch> {v3};
+            em2.Energieverbrauch = new List<Verbrauch> {v3};
             Assert.AreEqual(em1, em2);
             //Assert.AreEqual(em1.GetHashCode(), em2.GetHashCode());
             Assert.IsFalse(em1 == em2);
@@ -102,12 +100,11 @@ namespace TestBO4E
             em2.Energieverbrauch.Add(v4);
             Assert.AreEqual(em1, em2);
 
-            em1.Energieverbrauch = new List<Verbrauch> { v3, v4 };
-            em2.Energieverbrauch = new List<Verbrauch> { v4, v3 };
+            em1.Energieverbrauch = new List<Verbrauch> {v3, v4};
+            em2.Energieverbrauch = new List<Verbrauch> {v4, v3};
 
             Assert.AreNotEqual(em1, em2);
             //Assert.AreNotEqual(em1.GetHashCode(), em2.GetHashCode());
         }
-
     }
 }

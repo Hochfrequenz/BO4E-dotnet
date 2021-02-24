@@ -1,19 +1,21 @@
-﻿using BO4E.COM;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Runtime.Serialization;
+using System.Text.Json;
+
+using BO4E.COM;
 using BO4E.ENUM;
 using BO4E.meta;
 using BO4E.meta.LenientConverters;
 
 using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
 
 using ProtoBuf;
 
-using System;
-using System.Collections.Generic;
-using System.Runtime.Serialization;
-
 namespace BO4E.BO
 {
+
     /// <summary>
     /// Modell für die Abbildung von Vertragsbeziehungen. Das Objekt dient dazu, alle Arten von Verträgen, die in der Energiewirtschaft Verwendung finden, abzubilden.
     /// https://www.bo4e.de/dokumentation/geschaeftsobjekte/bo-vertrag
@@ -22,10 +24,21 @@ namespace BO4E.BO
     public class Vertrag : BusinessObject
     {
         /// <summary>
+        /// static serializer options for Vertragsconverter
+        /// </summary>
+        public static JsonSerializerOptions VertragsSerializerOptions;
+        static Vertrag()
+        {
+            VertragsSerializerOptions = LenientParsing.MOST_LENIENT.GetJsonSerializerOptions();
+            VertragsSerializerOptions.Converters.Remove(VertragsSerializerOptions.Converters.First(s => s.GetType() == typeof(VertragsConverter)));
+        }
+        /// <summary>
         /// Eine im Verwendungskontext eindeutige Nummer für den Vertrag
         /// </summary>
         [BoKey]
         [JsonProperty(Required = Required.Always, Order = 4, PropertyName = "vertragsnummer")]
+
+        [System.Text.Json.Serialization.JsonPropertyName("vertragsnummer")]
         [ProtoMember(4)]
         public string Vertragsnummer { get; set; }
 
@@ -33,6 +46,8 @@ namespace BO4E.BO
         /// Beschreibung zum Vertrag
         /// </summary>
         [JsonProperty(Required = Required.Default, Order = 5, PropertyName = "beschreibung")]
+
+        [System.Text.Json.Serialization.JsonPropertyName("beschreibung")]
         [ProtoMember(5)]
         public string Beschreibung { get; set; }
 
@@ -40,6 +55,8 @@ namespace BO4E.BO
         /// Hier ist festgelegt, um welche Art von Vertrag es sich handelt. Z.B. Netznutzungvertrag. Details siehe ENUM Vertragsart
         /// </summary>
         [JsonProperty(Required = Required.Always, Order = 6, PropertyName = "vertragsart")]
+
+        [System.Text.Json.Serialization.JsonPropertyName("vertragsart")]
         [ProtoMember(6)]
         public Vertragsart Vertragsart { get; set; }
 
@@ -47,6 +64,8 @@ namespace BO4E.BO
         /// Gibt den Status des Vertrags an. Siehe ENUM Vertragsstatus
         /// </summary>
         [JsonProperty(Required = Required.Always, Order = 7, PropertyName = "vertragstatus")]
+
+        [System.Text.Json.Serialization.JsonPropertyName("vertragstatus")]
         [ProtoMember(7)]
         public Vertragstatus Vertragstatus { get; set; } // ToDo: shouldn't this be vertragsstatus with "ss"?
 
@@ -54,6 +73,8 @@ namespace BO4E.BO
         /// Unterscheidungsmöglichkeiten für die Sparte. Siehe ENUM Sparte
         /// </summary>
         [JsonProperty(Required = Required.Always, Order = 8, PropertyName = "sparte")]
+
+        [System.Text.Json.Serialization.JsonPropertyName("sparte")]
         [ProtoMember(8)]
         public Sparte Sparte { get; set; }
 
@@ -61,7 +82,9 @@ namespace BO4E.BO
         /// Gibt an, wann der Vertrag beginnt.
         /// </summary>
         [JsonProperty(Required = Required.Always, Order = 9, PropertyName = "vertragsbeginn")]
-        [ProtoMember(9, DataFormat = DataFormat.WellKnown)]
+
+        [System.Text.Json.Serialization.JsonPropertyName("vertragsbeginn")]
+        [ProtoMember(9)]
         [JsonConverter(typeof(LenientDateTimeConverter))]
         public DateTimeOffset Vertragsbeginn { get; set; }
 
@@ -69,7 +92,9 @@ namespace BO4E.BO
         /// Gibt an, wann der Vertrag (voraussichtlich) endet oder beendet wurde.
         /// </summary>
         [JsonProperty(Required = Required.Always, Order = 10, PropertyName = "vertragsende")]
-        [ProtoMember(10, DataFormat = DataFormat.WellKnown)]
+
+        [System.Text.Json.Serialization.JsonPropertyName("vertragsende")]
+        [ProtoMember(10)]
         [JsonConverter(typeof(LenientDateTimeConverter))]
         public DateTimeOffset Vertragsende { get; set; }
 
@@ -77,6 +102,8 @@ namespace BO4E.BO
         /// Der "erstgenannte" Vertragspartner. In der Regel der Aussteller des Vertrags. Beispiel: "Vertrag zwischen Vertagspartner 1 ..." Siehe BO Geschaeftspartner
         /// </summary>
         [JsonProperty(Required = Required.Default, Order = 11, PropertyName = "vertragspartner1")] // TODO: should be required but our CDS is missing the association
+
+        [System.Text.Json.Serialization.JsonPropertyName("vertragspartner1")]
         [ProtoMember(11)]
         public Geschaeftspartner Vertragspartner1 { get; set; }
 
@@ -84,6 +111,8 @@ namespace BO4E.BO
         /// Der "zweitgenannte" Vertragspartner. In der Regel der Empfänger des Vertrags. Beispiel "Vertrag zwischen Vertagspartner 1 und Vertragspartner 2". Siehe BO Geschaeftspartner
         /// </summary>
         [JsonProperty(Required = Required.Default, Order = 12, PropertyName = "vertragspartner2")] // TODO: should be required but our CDS is missing the association
+
+        [System.Text.Json.Serialization.JsonPropertyName("vertragspartner2")]
         [ProtoMember(12)]
         public Geschaeftspartner Vertragspartner2 { get; set; }
 
@@ -91,6 +120,8 @@ namespace BO4E.BO
         /// Unterzeichner des Vertragspartners1. Siehe COM Unterschrift
         /// </summary>
         [JsonProperty(Required = Required.Default, Order = 13, PropertyName = "unterzeichnervp1")]
+
+        [System.Text.Json.Serialization.JsonPropertyName("unterzeichnervp1")]
         [ProtoMember(13)]
         public List<Unterschrift> Unterzeichnervp1 { get; set; }
 
@@ -98,6 +129,8 @@ namespace BO4E.BO
         /// Unterzeichner des Vertragspartners2. Siehe COM Unterschrift
         /// </summary>
         [JsonProperty(Required = Required.Default, Order = 14, PropertyName = "unterzeichnervp2")]
+
+        [System.Text.Json.Serialization.JsonPropertyName("unterzeichnervp2")]
         [ProtoMember(14)]
         public List<Unterschrift> Unterzeichnervp2 { get; set; }
 
@@ -105,6 +138,8 @@ namespace BO4E.BO
         /// Festlegungen zu Laufzeiten und Kündigungsfristen. Details siehe COM Vertragskonditionen
         /// </summary>
         [JsonProperty(Required = Required.Default, Order = 15, PropertyName = "vertragskonditionen")]
+
+        [System.Text.Json.Serialization.JsonPropertyName("vertragskonditionen")]
         [ProtoMember(15)]
         public Vertragskonditionen Vertragskonditionen { get; set; }
 
@@ -112,6 +147,8 @@ namespace BO4E.BO
         /// Der Vertragsteil wird dazu verwendet, eine vertragliche Leistung in Bezug zu einer Lokation (Markt- oder Messlokation) festzulegen. Details siehe COM Vertragsteil
         /// </summary>
         [JsonProperty(Required = Required.Default, Order = 16, PropertyName = "vertragsteile")] // TODO: should be required always but our CDS is missing the association
+
+        [System.Text.Json.Serialization.JsonPropertyName("vertragsteile")]
         [ProtoMember(16)]
         public List<Vertragsteil> Vertragsteile { get; set; }
 
@@ -120,6 +157,8 @@ namespace BO4E.BO
         /// </summary>
         // ToDo: What is the unit? is 1.0 = 100% discount?
         [JsonProperty(Required = Required.Default, Order = 17, PropertyName = "gemeinderabatt")]
+
+        [System.Text.Json.Serialization.JsonPropertyName("gemeinderabatt")]
         [NonOfficial(NonOfficialCategory.CUSTOMER_REQUIREMENTS)]
         [ProtoMember(1017)]
         public decimal? Gemeinderabatt { get; set; }
@@ -128,6 +167,8 @@ namespace BO4E.BO
         /// korrespondenzpartner für EDIFACT mapping
         /// </summary>
         [JsonProperty(Required = Required.Default, Order = 18, PropertyName = "korrespondenzpartner")]
+
+        [System.Text.Json.Serialization.JsonPropertyName("korrespondenzpartner")]
         [NonOfficial(NonOfficialCategory.CUSTOMER_REQUIREMENTS)]
         [ProtoMember(1018)]
         // ToDO: isn't an Ansprechpartner the better choice than a Geschaeftspartner?
@@ -148,10 +189,54 @@ namespace BO4E.BO
                     {
                         Vertragsteilbeginn = Vertragsbeginn,
                         Vertragsteilende = Vertragsende,
-                        Lokation = UserProperties["lokationsId"].Value<string>()
+                        Lokation = UserProperties["lokationsId"] as string
                     }
                 };
             }
+        }
+
+    }
+    /// <summary>
+    /// 
+    /// </summary>
+    public class VertragsConverter : System.Text.Json.Serialization.JsonConverter<Vertrag>
+    {
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="reader"></param>
+        /// <param name="typeToConvert"></param>
+        /// <param name="options"></param>
+        /// <returns></returns>
+        public override Vertrag Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+        {
+
+            Vertrag v = System.Text.Json.JsonSerializer.Deserialize<Vertrag>(ref reader, Vertrag.VertragsSerializerOptions);
+            if ((v.Vertragsteile == null || v.Vertragsteile.Count == 0) && v.UserProperties != null && v.UserProperties.ContainsKey("lokationsId"))
+            {
+                v.Vertragsteile = new List<Vertragsteil>
+                {
+                    new Vertragsteil
+                    {
+                        Vertragsteilbeginn = v.Vertragsbeginn,
+                        Vertragsteilende = v.Vertragsende,
+                        Lokation = ((JsonElement)v.UserProperties["lokationsId"]).GetString()
+                    }
+                };
+            }
+            return v;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="writer"></param>
+        /// <param name="value"></param>
+        /// <param name="options"></param>
+        public override void Write(Utf8JsonWriter writer, Vertrag value, JsonSerializerOptions options)
+        {
+            System.Text.Json.JsonSerializer.Serialize(writer, value);
+
         }
     }
 }
