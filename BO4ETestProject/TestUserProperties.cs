@@ -139,7 +139,7 @@ namespace TestBO4E
             melo.SetUserProperty("foo", new Bar() { FooBar = value1 });
             Assert.IsNotNull(melo.UserProperties);
             Assert.IsTrue(melo.UserProperties.TryGetValue("foo", out var upValue));
-            AssertIsInstanceOfType(upValue, typeof(Bar));
+            Assert.IsInstanceOfType(upValue, typeof(Bar));
             Assert.AreEqual(value1, (upValue as Bar)?.FooBar);
 
             // Update the value
