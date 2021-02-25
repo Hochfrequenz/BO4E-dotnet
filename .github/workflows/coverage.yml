@@ -13,3 +13,10 @@ jobs:
         dotnet-version: 3.1.100
     - name: Run Tests  
       run: dotnet test /p:CollectCoverage=true /p:CoverletOutput=TestResults/ /p:CoverletOutputFormat=lcov --configuration Release
+    - name: what is the filename
+      run: ls
+    - name: Enforce Min Coverage
+      uses: VeryGoodOpenSource/very_good_coverage@v1.1.1
+      with:
+        path: "coverage.lcov"
+        min_coverage: 60
