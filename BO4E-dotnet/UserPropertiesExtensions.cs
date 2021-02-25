@@ -124,13 +124,11 @@ namespace BO4E
         /// <summary>
         /// Removes the Value of a UserProperty.
         /// </summary>
-        /// <typeparam name="TUserProperty">type expected to be found in the User Property with key <paramref name="userPropertyKey"/></typeparam>
         /// <param name="userPropertyKey">key of the <paramref name="parent"/>.UserProperties dictionary</param>
         /// <typeparam name="TParent">class implementing <see cref="IUserProperties"/></typeparam>
         /// <param name="parent">object implementing <see cref="IUserProperties"/></param>
-        /// <param name="value">Value of the property</param>
         /// <returns></returns>
-        public static void RemoveUserProperty<TUserProperty, TParent>(this TParent parent, string userPropertyKey, TUserProperty value) where TParent : IUserProperties
+        public static void RemoveUserProperty<TParent>(this TParent parent, string userPropertyKey) where TParent : IUserProperties
         {
             // if user properties don't exist we cannot remove anything
             if (parent.UserProperties == null)
