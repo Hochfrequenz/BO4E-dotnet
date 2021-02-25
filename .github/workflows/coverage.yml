@@ -26,5 +26,5 @@ jobs:
     - name: Enforce Min Coverage
       uses: VeryGoodOpenSource/very_good_coverage@v1.1.1
       with:
-        path: "coverage.lcov"
+        path: "TestResults/coverage.info"
         min_coverage: 60
