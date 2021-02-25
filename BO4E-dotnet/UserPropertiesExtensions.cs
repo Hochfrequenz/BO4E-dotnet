@@ -96,7 +96,7 @@ namespace BO4E
         }
 
         /// <summary>
-        /// Sets the Value of a UserProperty. If a property already exists, the value is overwritten, else a new property is created
+        /// Sets the <paramref name="value"/> as a UserProperty. If a property already exists, the value is overwritten, else a new property is created
         /// </summary>
         /// <typeparam name="TUserProperty">type expected to be found in the User Property with key <paramref name="userPropertyKey"/></typeparam>
         /// <param name="userPropertyKey">key of the <paramref name="parent"/>.UserProperties dictionary</param>
