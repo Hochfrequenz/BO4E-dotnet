@@ -1,4 +1,4 @@
-name: Measure Coverage
+name: Measure Code Coverage
 
 on: [push]
 
@@ -6,15 +6,10 @@ jobs:
   unittest:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v1
-      - name: Setup .NET Core
-        uses: actions/setup-dotnet@v1
-        with:
-          dotnet-version: 3.1.100
-      - name: runt tests
-        uses: b3b00/coverlet-action@1.1.0
-        with:
-          testProject: "BO4ETestProject/TestBO4E-dotnet.csproj"
-          output: "lcov.info"
-          outputFormat: "lcov"
-          excludes: "[program]*,[test]test.*"
+    - uses: actions/checkout@v1
+    - name: Setup .NET Core
+      uses: actions/setup-dotnet@v1
+      with:
+        dotnet-version: 3.1.100
+    - name: Run Tests  
+      run: dotnet test /p:CollectCoverage=true /p:CoverletOutput=TestResults/ /p:CoverletOutputFormat=lcov --configuration Release
