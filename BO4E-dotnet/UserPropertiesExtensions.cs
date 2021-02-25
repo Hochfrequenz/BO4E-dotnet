@@ -12,7 +12,6 @@ namespace BO4E
     /// </summary>
     public static class UserPropertiesExtensions
     {
-
         /// <summary>
         /// try to get the Userproperty with key <paramref name="userPropertyKey"/> from <paramref name="parent"/> if <paramref name="parent"/>.UserProperties is not null and the key is present.
         /// </summary>
@@ -35,21 +34,27 @@ namespace BO4E
                     case null:
                         value = default;
                         return false;
+
                     case string token:
                         value = new JValue(token).Value<TUserProperty>();
                         break;
+
                     case double d:
                         value = new JValue(d).Value<TUserProperty>();
                         break;
+
                     case long l:
                         value = new JValue(l).Value<TUserProperty>();
                         break;
+
                     case bool b:
                         value = new JValue(b).Value<TUserProperty>();
                         break;
+
                     case JValue jValue:
                         value = jValue.Value<TUserProperty>();
                         break;
+
                     default:
                         try
                         {
@@ -88,6 +93,55 @@ namespace BO4E
             }
 
             return defaultValue;
+        }
+
+        /// <summary>
+        /// Sets the Value of a UserProperty. If a property already exists, the value is overwritten, else a new property is created
+        /// </summary>
+        /// <typeparam name="TUserProperty">type expected to be found in the User Property with key <paramref name="userPropertyKey"/></typeparam>
+        /// <param name="userPropertyKey">key of the <paramref name="parent"/>.UserProperties dictionary</param>
+        /// <typeparam name="TParent">class implementing <see cref="IUserProperties"/></typeparam>
+        /// <param name="parent">object implementing <see cref="IUserProperties"/></param>
+        /// <param name="value">Value of the property</param>
+        /// <returns></returns>
+        public static void SetUserProperty<TUserProperty, TParent>(this TParent parent, string userPropertyKey, TUserProperty value) where TParent : IUserProperties
+        {
+            // if user properties don't exist already, create them
+            if (parent.UserProperties == null)
+            {
+                parent.UserProperties = new Dictionary<string, object>();
+            }
+            // if there is already an value for the property, delete ist first
+            if (parent.UserProperties.ContainsKey(userPropertyKey))
+            {
+                parent.UserProperties.Remove(userPropertyKey);
+            }
+
+            // set the value
+            parent.UserProperties.Add(userPropertyKey, value);
+        }
+
+        /// <summary>
+        /// Removes the Value of a UserProperty.
+        /// </summary>
+        /// <typeparam name="TUserProperty">type expected to be found in the User Property with key <paramref name="userPropertyKey"/></typeparam>
+        /// <param name="userPropertyKey">key of the <paramref name="parent"/>.UserProperties dictionary</param>
+        /// <typeparam name="TParent">class implementing <see cref="IUserProperties"/></typeparam>
+        /// <param name="parent">object implementing <see cref="IUserProperties"/></param>
+        /// <param name="value">Value of the property</param>
+        /// <returns></returns>
+        public static void RemoveUserProperty<TUserProperty, TParent>(this TParent parent, string userPropertyKey, TUserProperty value) where TParent : IUserProperties
+        {
+            // if user properties don't exist we cannot remove anything
+            if (parent.UserProperties == null)
+            {
+                return;
+            }
+            // if there is already an value for the property, delete it
+            if (parent.UserProperties.ContainsKey(userPropertyKey))
+            {
+                parent.UserProperties.Remove(userPropertyKey);
+            }
         }
 
         /// <summary>
