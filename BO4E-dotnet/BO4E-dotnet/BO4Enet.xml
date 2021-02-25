@@ -8968,6 +8968,26 @@
             <returns>the value stored in the userproperty or the default <paramref name="defaultValue"/></returns>
             <exception cref="T:System.ArgumentNullException">iff <paramref name="userPropertyKey"/> is null or whitespace</exception>
         </member>
+        <member name="M:BO4E.UserPropertiesExtensions.SetUserProperty``2(``1,System.String,``0)">
+            <summary>
+            Sets the Value of a UserProperty. If a property already exists, the value is overwritten, else a new property is created
+            </summary>
+            <typeparam name="TUserProperty">type expected to be found in the User Property with key <paramref name="userPropertyKey"/></typeparam>
+            <param name="userPropertyKey">key of the <paramref name="parent"/>.UserProperties dictionary</param>
+            <typeparam name="TParent">class implementing <see cref="T:BO4E.meta.IUserProperties"/></typeparam>
+            <param name="parent">object implementing <see cref="T:BO4E.meta.IUserProperties"/></param>
+            <param name="value">Value of the property</param>
+            <returns></returns>
+        </member>
+        <member name="M:BO4E.UserPropertiesExtensions.RemoveUserProperty``1(``0,System.String)">
+            <summary>
+            Removes the Value of a UserProperty.
+            </summary>
+            <param name="userPropertyKey">key of the <paramref name="parent"/>.UserProperties dictionary</param>
+            <typeparam name="TParent">class implementing <see cref="T:BO4E.meta.IUserProperties"/></typeparam>
+            <param name="parent">object implementing <see cref="T:BO4E.meta.IUserProperties"/></param>
+            <returns></returns>
+        </member>
         <member name="M:BO4E.UserPropertiesExtensions.UserPropertyEquals``2(``1,System.String,``0,System.Boolean)">
             <summary>
             test if the <paramref name="parent"/>.UserProperty value under key <paramref name="userPropertyKey"/> equals <paramref name="other"/>.

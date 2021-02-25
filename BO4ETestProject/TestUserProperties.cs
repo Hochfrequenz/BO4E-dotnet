@@ -20,6 +20,7 @@ namespace TestBO4E
             public DateTimeOffset Date { get; set; }
             public int TemperatureCelsius { get; set; }
             public string Summary { get; set; }
+
             [System.Text.Json.Serialization.JsonExtensionData]
             public Dictionary<string, object> ExtensionData { get; set; }
         }
@@ -30,8 +31,8 @@ namespace TestBO4E
             using var r = new StreamReader("testjsons/weatherforecast.json");
             var jsonString = r.ReadToEnd();
             var zaehler = System.Text.Json.JsonSerializer.Deserialize<WeatherForecastWithExtensionData>(jsonString);
-
         }
+
         [TestMethod]
         public void TestDeserialization()
         {
@@ -118,6 +119,66 @@ namespace TestBO4E
 
             melo.UserProperties["foo"] = null;
             Assert.IsFalse(melo.HasFlagSet("foo"));
+        }
+
+        /// <summary>
+        /// Tests to set and get a UserProperty
+        /// </summary>
+        [TestMethod]
+        public void TestSetterGetter()
+        {
+            var melo = new Messlokation
+            {
+                MesslokationsId = "DE0123456789012345678901234567890",
+                Sparte = BO4E.ENUM.Sparte.STROM
+            };
+            Assert.IsNull(melo.UserProperties);
+
+            var value1 = "BarFoo";
+            var value2 = "BigFoot";
+            melo.SetUserProperty("foo", new Bar() { FooBar = value1 });
+            Assert.IsNotNull(melo.UserProperties);
+            Assert.IsTrue(melo.UserProperties.TryGetValue("foo", out var upValue));
+            Assert.IsInstanceOfType(upValue, typeof(Bar));
+            Assert.AreEqual(value1, (upValue as Bar)?.FooBar);
+
+            // Update the value
+            melo.SetUserProperty("foo", new Bar() { FooBar = value2 });
+            Assert.IsTrue(melo.UserProperties.TryGetValue("foo", out upValue));
+            Assert.AreEqual(value2, (upValue as Bar)?.FooBar);
+        }
+
+        /// <summary>
+        /// Tests to remove UserProperty
+        /// </summary>
+        [TestMethod]
+        public void TestDeletion()
+        {
+            var melo = new Messlokation
+            {
+                MesslokationsId = "DE0123456789012345678901234567890",
+                Sparte = BO4E.ENUM.Sparte.STROM
+            };
+            Assert.IsNull(melo.UserProperties);
+
+            var value1 = "BarFoo";
+            // Add a value
+            melo.SetUserProperty("foo", new Bar() { FooBar = value1 });
+            Assert.IsNotNull(melo.UserProperties);
+            Assert.IsTrue(melo.UserProperties.TryGetValue("foo", out var upValue));
+            Assert.AreEqual(value1, (upValue as Bar)?.FooBar);
+            // remove it again
+            melo.RemoveUserProperty("foo");
+            Assert.IsFalse(melo.UserProperties.TryGetValue("foo", out upValue));
+            Assert.IsNotNull(melo.UserProperties);
+        }
+
+        /// <summary>
+        /// Test Class to append a UserProperty
+        /// </summary>
+        private class Bar
+        {
+            public string FooBar;
         }
     }
 }
