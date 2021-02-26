@@ -19,28 +19,5 @@ jobs:
         run: cd TestBO4E-dotnet-Extensions && dotnet add package coverlet.msbuild
       - name: Install coverlet.msbuild in TestBO4E-dotnet-Reporting
         run: cd TestBO4E-dotnet-Reporting && dotnet add package coverlet.msbuild
-      - name: Run Tests
-        run: dotnet test /p:CollectCoverage=true /p:CoverletOutput=TestResults/ /p:CoverletOutputFormat=lcov --configuration Release
-        # todo: maybe add the /p:Threshold=60 parameter
-      - name: what is the filename
-        run: ls
-      - name: Enforce Min Coverage for BO4ETestProject
-        uses: VeryGoodOpenSource/very_good_coverage@v1.1.1
-        with:
-          path: "BO4ETestProject/TestResults/coverage.info"
-          min_coverage: 55
-      - name: Enforce Min Coverage for TestBO4E-dotnet-Encryption
-        uses: VeryGoodOpenSource/very_good_coverage@v1.1.1
-        with:
-          path: "TestBO4E-dotnet-Encryption/TestResults/coverage.info"
-          min_coverage: 60
-      - name: Enforce Min Coverage for TestBO4E-dotnet-Extensions
-        uses: VeryGoodOpenSource/very_good_coverage@v1.1.1
-        with:
-          path: "TestBO4E-dotnet-Extensions/TestResults/coverage.info"
-          min_coverage: 60
-      - name: Enforce Min Coverage for TestBO4E-dotnet-Reporting
-        uses: VeryGoodOpenSource/very_good_coverage@v1.1.1
-        with:
-          path: "TestBO4E-dotnet-Reporting/TestResults/coverage.info"
-          min_coverage: 60
+      - name: Measure BO4E Coverage
+        run: dotnet test /p:CollectCoverage=true /p:CoverletOutput=TestResults/ /p:Include="[BO4E-dotnet]*," /p:CoverletOutputFormat=lcov /p:Threshold=57  --configuration Release
