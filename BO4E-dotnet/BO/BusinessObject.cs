@@ -170,7 +170,7 @@ namespace BO4E.BO
 
         [System.Text.Json.Serialization.JsonPropertyName("timestamp")]
         [Timestamp]
-        public DateTimeOffset? Timestamp { get; set; }
+        public DateTime? Timestamp { get; set; }
 
 
 
