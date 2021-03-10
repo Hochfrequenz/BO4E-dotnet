@@ -1,4 +1,4 @@
-name: Run Unit Tests (BO4E) as Check
+name: Unittests
 
 on: [push]
 
