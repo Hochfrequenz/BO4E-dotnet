@@ -1,4 +1,8 @@
 # BO4E-dotnet
+![Unittests Status Badge](https://github.com/Hochfrequenz/BO4E-dotnet/workflows/Unittests/badge.svg)
+![Nuget Pre-Release Package](https://github.com/Hochfrequenz/BO4E-dotnet/workflows/Nuget%20Develop%20Prerelease/badge.svg)
+![Nuget Release Package](https://github.com/Hochfrequenz/BO4E-dotnet/workflows/Nuget%20Master%20Release/badge.svg)
+
 BO4E-dotnet is a C# implementation of **B**usiness **O**bjects for **E**nergy ([BO4E](https://www.bo4e.de/)), a standard used to model business objects in the German energy market. This repository contains class definitions and enumerations for most of the Business Objects, however as of today it's not complete yet and pull requests are very welcome. [JSON.net](https://github.com/JamesNK/Newtonsoft.Json) attributes are used to model obligatory and optional fields of the single business objects and components.
 
 The source code in this repository is Open Source and available under a MIT license; see [the license file](LICENSE).
