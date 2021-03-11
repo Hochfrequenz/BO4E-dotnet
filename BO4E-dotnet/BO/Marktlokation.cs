@@ -277,7 +277,7 @@ namespace BO4E.BO
         [System.Text.Json.Serialization.JsonPropertyName("messtechnischeEinordnung")]
         [ProtoMember(1029)]
         [NonOfficial(NonOfficialCategory.CUSTOMER_REQUIREMENTS)]
-        public MesstechnischeEinordnung MesstechnischeEinordnung { get; set; }
+        public MesstechnischeEinordnung? MesstechnischeEinordnung { get; set; }
 
 
         /// <summary>
