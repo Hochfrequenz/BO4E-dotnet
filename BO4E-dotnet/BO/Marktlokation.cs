@@ -1,8 +1,3 @@
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Text.RegularExpressions;
-
 using BO4E.COM;
 using BO4E.ENUM;
 using BO4E.meta;
@@ -10,6 +5,11 @@ using BO4E.meta;
 using Newtonsoft.Json;
 
 using ProtoBuf;
+
+using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Text.RegularExpressions;
 
 namespace BO4E.BO
 {
@@ -239,6 +239,7 @@ namespace BO4E.BO
         [NonOfficial(NonOfficialCategory.CUSTOMER_REQUIREMENTS)]
         public List<Messlokation> Messlokationen { get; set; }
 
+
         /// <summary>Aufzählung der Messlokationen, die zu dieser Marktlokation gehören.</summary>
         /// Es können 3 verschiedene Konstrukte auftreten:
         /// <ol>
@@ -267,6 +268,17 @@ namespace BO4E.BO
         [System.Text.Json.Serialization.JsonPropertyName("zugehoerigeMesslokationen")]
         [ProtoMember(28)]
         public List<Messlokationszuordnung> ZugehoerigeMesslokationen { get; set; }
+
+        /// <summary>
+        /// Messtechnische Einordnung aus der UTILMD (IMS, KME_MME, KEINE_MESSUNG)
+        /// </summary>       
+        [JsonProperty(Required = Required.Default, Order = 29, PropertyName = "messtechnischeEinordnung")]
+
+        [System.Text.Json.Serialization.JsonPropertyName("messtechnischeEinordnung")]
+        [ProtoMember(1029)]
+        [NonOfficial(NonOfficialCategory.CUSTOMER_REQUIREMENTS)]
+        public MesstechnischeEinordnung MesstechnischeEinordnung { get; set; }
+
 
         /// <summary>
         /// Regular Expression used to validate 11 digit MarktlokationId

@@ -926,6 +926,11 @@
              einer Messlokation zum Verbrauch einer Marktlokation beitrögt mit aufgeführt.
              Der Standard ist hier die Addition.
         </member>
+        <member name="P:BO4E.BO.Marktlokation.MesstechnischeEinordnung">
+            <summary>
+            Messtechnische Einordnung aus der UTILMD (IMS, KME_MME, KEINE_MESSUNG)
+            </summary>       
+        </member>
         <member name="F:BO4E.BO.Marktlokation.RegexValidate">
             <summary>
             Regular Expression used to validate 11 digit MarktlokationId
@@ -6155,6 +6160,20 @@
         </member>
         <member name="F:BO4E.ENUM.Messpreistyp.AUFSCHLAG_TARIFSCHALTUNG">
             <summary>AufschlagTarifschaltung</summary>
+        </member>
+        <member name="T:BO4E.ENUM.MesstechnischeEinordnung">
+            <summary>Messtechnische Einordnung</summary>
+        </member>
+        <member name="F:BO4E.ENUM.MesstechnischeEinordnung.IMS">
+            <summary>Z52: IMS</summary>
+        </member>
+        <member name="F:BO4E.ENUM.MesstechnischeEinordnung.KME_MME">
+            <summary>Z53: KME_MME</summary>
+        </member>
+        <member name="F:BO4E.ENUM.MesstechnischeEinordnung.KEINE_MESSUNG">
+            <summary>
+            Z68: KEINE_MESSUNG
+            </summary>
         </member>
         <member name="T:BO4E.ENUM.Messwerterfassung">
             <summary>Messwerterfassung</summary>
