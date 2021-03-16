@@ -1093,6 +1093,11 @@
             verlustfaktor für EDIFACT mapping
             </summary>
         </member>
+        <member name="P:BO4E.BO.Messlokation.Zaehlwerke">
+            <summary>
+            OBIS-Daten der Messlokation
+            </summary>
+        </member>
         <member name="M:BO4E.BO.Messlokation.ValidateId(System.String)">
             <summary>
             Test if a <paramref name="id"/> is a valid messlokations ID.

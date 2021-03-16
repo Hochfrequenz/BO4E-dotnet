@@ -194,6 +194,18 @@ namespace BO4E.BO
         [ProtoMember(1021)]
         public decimal? Verlustfaktor { get; set; }
 
+        /// <summary>
+        /// OBIS-Daten der Messlokation
+        /// </summary>
+        // ToDo: specify docstring.
+        [JsonProperty(Required = Required.Default, Order = 25, PropertyName = "zaehlwerke")]
+
+        [System.Text.Json.Serialization.JsonPropertyName("zaehlwerke")]
+        [ProtoMember(1022)]
+        [NonOfficial(NonOfficialCategory.CUSTOMER_REQUIREMENTS)]
+        public List<Zaehlwerk> Zaehlwerke { get; set; }
+
+
         [JsonIgnore]
         private static readonly Regex RegexValidate = new Regex(@"[A-Z\d]{33}", RegexOptions.Compiled);
 
