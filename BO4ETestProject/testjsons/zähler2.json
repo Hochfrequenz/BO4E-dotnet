@@ -41,9 +41,7 @@
     "gewerbekennzeichnung": true,
     "hrnummer": null,
     "amtsgericht": null,
-    "kontaktweg": [
-      "FAX"
-    ],
+    "kontaktweg": ["FAX"],
     "umsatzsteuerId": null,
     "glaeubigerId": null,
     "eMailAdresse": null,

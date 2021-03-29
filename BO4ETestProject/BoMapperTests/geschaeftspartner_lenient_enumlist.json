@@ -5,9 +5,7 @@
     "versionStruktur": 1,
     "boTyp": "GESCHAEFTSPARTNER",
     "name1": "Ernest",
-    "kontaktweg": [
-      { "kontaktweg": "TELEFONAT" }
-    ],
+    "kontaktweg": [{ "kontaktweg": "TELEFONAT" }],
     "geschaeftspartnerrolle": [
       { "dein key interessiert mich nen 💩dreck": "INTERESSENT" },
       { "rolle": "KUNDE" }

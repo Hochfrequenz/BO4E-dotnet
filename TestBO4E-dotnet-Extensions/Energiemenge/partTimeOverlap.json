@@ -1,6 +1,6 @@
 ﻿{
   "assertions": {
-    "totalConsumption-2018": 3153.6000,
+    "totalConsumption-2018": 3153.6,
     "isContinuous": true
   },
   "input": {
@@ -14,7 +14,7 @@
         "enddatum": "2020-01-01 00:00:00",
         "wertermittlungsverfahren": "PROGNOSE",
         "obiskennzahl": "1–0:1.8.1",
-        "wert": 6307.2000,
+        "wert": 6307.2,
         "einheit": "KWH"
       }
     ]

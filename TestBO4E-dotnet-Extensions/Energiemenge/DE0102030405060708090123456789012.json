@@ -1,5 +1,4 @@
 {
-
   "fixSapCdsBug": true,
   "assertions": {
     "isContinuous": true,
