@@ -38,7 +38,7 @@ namespace TestBO4EExtensions.Encryption
             {
                 HashingSalt = "UG9seWZvbiB6d2l0c2NoZXJuZCBhw59lbiBNw6R4Y2hlbnMgVsO2Z2VsIFLDvGJlbiwgSm9naHVydCB1bmQgUXVhcms="
             };
-            Assert.IsTrue(ac.GetSalt().Length>0);
+            Assert.IsTrue(ac.GetSalt().Length > 0);
             ac.HashingSalt = "   ";
             Assert.IsTrue(ac.GetSalt().Length == 0);
             ac.HashingSalt = null;

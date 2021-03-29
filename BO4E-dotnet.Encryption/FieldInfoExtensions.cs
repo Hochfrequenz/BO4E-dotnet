@@ -22,7 +22,7 @@ namespace BO4E.Extensions.Encryption
                     return false;
             }
         }
-    
+
         internal static bool IsHashingRelevant(this PropertyInfo property, DataCategory? dataCategory)
         {
             if (property.PropertyType.IsSubclassOf(typeof(BO4E.COM.COM)) || property.PropertyType.IsSubclassOf(typeof(BO.BusinessObject)))

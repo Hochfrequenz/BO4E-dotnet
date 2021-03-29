@@ -22,13 +22,13 @@ namespace TestBO4E
             var jsonString = JsonConvert.SerializeObject(einheiten, new StringEnumConverter());
             Assert.IsTrue(jsonString.Contains("TAG"));
         }
-        
+
         [TestMethod]
         public void TestMengeneinheit()
         {
             var options = new JsonSerializerOptions()
             {
-                Converters = {new StringNullableEnumConverter()}
+                Converters = { new StringNullableEnumConverter() }
             };
             var jsonString = System.Text.Json.JsonSerializer.Serialize(einheiten, options);
             Assert.IsTrue(jsonString.Contains("TAG"));

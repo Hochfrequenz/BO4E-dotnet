@@ -54,7 +54,7 @@ namespace BO4E
             if (Logger == null)
             {
                 // ToDo: inject it instead of ugly workaround.
-                StaticLogger.Logger = Microsoft.Extensions.Logging.Abstractions.NullLogger.Instance; 
+                StaticLogger.Logger = Microsoft.Extensions.Logging.Abstractions.NullLogger.Instance;
                 Logger = StaticLogger.Logger;
             }
             //Type[] types = Assembly.GetExecutingAssembly().GetTypes();
@@ -126,7 +126,7 @@ namespace BO4E
             }
             var boString = JsonConvert.SerializeObject(o, new StringEnumConverter());
             var result = (JObject)JsonConvert.DeserializeObject(boString);
-            foreach (var oProp in o.GetType().GetProperties().Where(p=>p.GetValue(o)!=null))
+            foreach (var oProp in o.GetType().GetProperties().Where(p => p.GetValue(o) != null))
             {
                 var serializationName = oProp.GetCustomAttribute<JsonPropertyAttribute>().PropertyName ?? oProp.Name;
                 var originalType = Nullable.GetUnderlyingType(oProp.PropertyType) ?? oProp.PropertyType;

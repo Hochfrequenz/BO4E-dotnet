@@ -9,12 +9,12 @@ namespace BO4E.ENUM
         /// <summary>
         /// Sekunde
         /// </summary>
-        [ProtoEnum(Name=nameof(Zeiteinheit)+"_"+nameof(SEKUNDE))]
+        [ProtoEnum(Name = nameof(Zeiteinheit) + "_" + nameof(SEKUNDE))]
         SEKUNDE,
         /// <summary>
         /// Minute
         /// </summary>
-        [ProtoEnum(Name=nameof(Zeiteinheit)+"_"+nameof(MINUTE))]
+        [ProtoEnum(Name = nameof(Zeiteinheit) + "_" + nameof(MINUTE))]
         MINUTE,
         /// <summary>
         /// Stunde

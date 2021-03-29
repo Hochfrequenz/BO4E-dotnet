@@ -35,7 +35,7 @@ namespace TestBO4EExtensions.Encryption
 
             try
             {
-                _  = new SymmetricEncrypter("Not a valid base64 code triggering an exception!");
+                _ = new SymmetricEncrypter("Not a valid base64 code triggering an exception!");
             }
             catch (FormatException)
             {

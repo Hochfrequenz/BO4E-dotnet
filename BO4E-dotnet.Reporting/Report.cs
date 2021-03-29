@@ -77,7 +77,7 @@ namespace BO4E.Reporting
                                 }
                                 else
                                 {
-                                    throw new ArgumentException("invalid values", nameof(reihenfolge) );
+                                    throw new ArgumentException("invalid values", nameof(reihenfolge));
                                 }
                             }
                             else

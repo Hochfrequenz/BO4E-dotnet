@@ -8,39 +8,39 @@ public static class JsonHelper
         switch (token.Type)
         {
             case JTokenType.Object:
-            {
-                var copy = new JObject();
-                foreach (var prop in token.Children<JProperty>())
                 {
-                    var child = prop.Value;
-                    if (child.HasValues)
+                    var copy = new JObject();
+                    foreach (var prop in token.Children<JProperty>())
                     {
-                        child = RemoveEmptyChildren(child);
+                        var child = prop.Value;
+                        if (child.HasValues)
+                        {
+                            child = RemoveEmptyChildren(child);
+                        }
+                        if (!IsEmpty(child))
+                        {
+                            copy.Add(prop.Name, child);
+                        }
                     }
-                    if (!IsEmpty(child))
-                    {
-                        copy.Add(prop.Name, child);
-                    }
+                    return copy;
                 }
-                return copy;
-            }
             case JTokenType.Array:
-            {
-                var copy = new JArray();
-                foreach (var item in token.Children())
                 {
-                    var child = item;
-                    if (child.HasValues)
+                    var copy = new JArray();
+                    foreach (var item in token.Children())
                     {
-                        child = RemoveEmptyChildren(child);
+                        var child = item;
+                        if (child.HasValues)
+                        {
+                            child = RemoveEmptyChildren(child);
+                        }
+                        if (!IsEmpty(child))
+                        {
+                            copy.Add(child);
+                        }
                     }
-                    if (!IsEmpty(child))
-                    {
-                        copy.Add(child);
-                    }
+                    return copy;
                 }
-                return copy;
-            }
             default:
                 return token;
         }

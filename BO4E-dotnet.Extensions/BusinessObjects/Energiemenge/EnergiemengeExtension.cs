@@ -701,7 +701,7 @@ namespace BO4E.Extensions.BusinessObjects.Energiemenge
                             {
                                 if (rawValue == null && onlyValue != null)
                                     return false;
-                                if (rawValue!=null && !rawValue.Equals(onlyValue))
+                                if (rawValue != null && !rawValue.Equals(onlyValue))
                                 {
                                     return false;
                                 }

@@ -17,7 +17,7 @@ namespace TestBO4E.ShowCaseTests
         {
             var verbrauchA = new Verbrauch
             {
-                Startdatum = new DateTime(2020, 3, 1, 0, 0, 0,DateTimeKind.Utc),
+                Startdatum = new DateTime(2020, 3, 1, 0, 0, 0, DateTimeKind.Utc),
                 Enddatum = new DateTime(2020, 3, 8, 0, 0, 0, DateTimeKind.Utc),
                 Wert = 0.456M,
                 Einheit = Mengeneinheit.MW,

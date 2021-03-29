@@ -32,7 +32,7 @@ namespace BO4E.ENUM
         /// <summary>
         /// abgelehnt
         /// </summary>
-        [ProtoEnum(Name=nameof(Angebotsstatus)+"_"+nameof(ABGELEHNT))]
+        [ProtoEnum(Name = nameof(Angebotsstatus) + "_" + nameof(ABGELEHNT))]
         ABGELEHNT,
 
         /// <summary>

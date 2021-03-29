@@ -81,7 +81,7 @@ namespace BO4E
             }
             if (!useEdiClass)
             {
-                if(field!=null)
+                if (field != null)
                 {
                     return field.GetValue(null).ToString();
                 }

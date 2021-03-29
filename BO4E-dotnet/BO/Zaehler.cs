@@ -46,7 +46,7 @@ namespace BO4E.BO
         /// <seealso cref="ENUM.Zaehlertyp" />
         /// </summary>
         [JsonProperty(
-            Required=Required.AllowNull, //Required = Required.Always, 
+            Required = Required.AllowNull, //Required = Required.Always, 
             Order = 7, PropertyName = "zaehlertyp")]
         [ProtoMember(7)]
         [NonOfficial(NonOfficialCategory.REGULATORY_REQUIREMENTS)] // this is ALWAYS required in BO4E standard; Maybe nullable if you as a LIEFERANT don't care about the type of Zähler, othern than in the grid

@@ -13,7 +13,7 @@ namespace BO4E.meta
         /// <summary>
         /// legacy time zone info object.
         /// </summary>
-        [Obsolete("Use "+nameof(CentralEuropeStandardTimezoneInfo)+" instead.")]
+        [Obsolete("Use " + nameof(CentralEuropeStandardTimezoneInfo) + " instead.")]
         // ReSharper disable once InconsistentNaming
         public static TimeZoneInfo CENTRAL_EUROPE_STANDARD_TIME => CentralEuropeStandardTimezoneInfo;
         /// <summary>

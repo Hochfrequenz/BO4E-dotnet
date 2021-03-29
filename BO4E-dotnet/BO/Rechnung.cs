@@ -392,7 +392,7 @@ namespace BO4E.BO
                             steuerProzent = steuerbetrag.Steuerwert / steuerbetrag.Basiswert * 100.0M;
                         }
 
-                        steuerbetrag.Steuerkennzeichen = (int) steuerProzent switch
+                        steuerbetrag.Steuerkennzeichen = (int)steuerProzent switch
                         {
                             19 => Steuerkennzeichen.UST_19,
                             7 => Steuerkennzeichen.UST_7,

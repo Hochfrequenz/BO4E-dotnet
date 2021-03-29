@@ -9,5 +9,5 @@ namespace BO4E.ENUM
         /// <summary>Z63: nicht unterbrechbare Verbrauchseinrichtung</summary>
         NUV
     }
-    
+
 }
