@@ -19,7 +19,7 @@ namespace BO4E.COM
         /// <summary>
         /// rollencodenummer von Marktrolle
         /// </summary>
-        [JsonProperty(PropertyName = "marktrolle", Required = Required.Default)]
+        [JsonProperty(PropertyName = "marktrolle", Required = Required.Always)]
 
         [System.Text.Json.Serialization.JsonPropertyName("marktrolle")]
         [ProtoMember(3)]

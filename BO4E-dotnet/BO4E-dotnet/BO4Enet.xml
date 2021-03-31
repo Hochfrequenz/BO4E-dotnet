@@ -2932,6 +2932,21 @@
             verbrauchsaufteilung für EDIFACT mapping
             </summary>
         </member>
+        <member name="T:BO4E.COM.Verwendungszweck">
+            <summary>
+            Marktrolle
+            </summary>
+        </member>
+        <member name="P:BO4E.COM.Verwendungszweck.Marktrolle">
+            <summary>
+            rollencodenummer von Marktrolle
+            </summary>
+        </member>
+        <member name="P:BO4E.COM.Verwendungszweck.Zweck">
+            <summary>
+            code von Marktrolle
+            </summary>
+        </member>
         <member name="T:BO4E.COM.Zaehlwerk">
             <summary>Mit dieser Komponente werden Zählwerke modelliert.</summary>
         </member>
@@ -2970,9 +2985,6 @@
         </member>
         <member name="P:BO4E.COM.Zaehlwerk.Waermenutzung">
             <summary>Stromverbrauchsart/Wärmenutzung Marktlokation</summary>
-        </member>
-        <member name="P:BO4E.COM.Zaehlwerk.Marktrollen">
-            <summary>Relevant für Marktrollen</summary>
         </member>
         <member name="T:BO4E.COM.Zeitraum">
             <summary>Diese Komponente wird zur Abbildung von Zeiträumen in Form von Dauern oder der Angabe von Start und Ende verwendet.</summary>

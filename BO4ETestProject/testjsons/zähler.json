@@ -20,9 +20,11 @@
       "kennzahl": null,
       "schwachlastfaehig": "SCHWACHLASTFAEHIG",
       "verwendungszwecke": [
-        "ENDKUNDENABRECHNUNG",
-        "NETZNUTZUNGSABRECHNUNG",
-        "MEHRMINDERMBENGENABRECHNUNG"
+        {
+          "marktrolle": "MSB",
+          "zweck": [ "ENDKUNDENABRECHNUNG" ]
+        }
+        
       ],
       "verbrauchsart": null,
       "unterbrechbarkeit": "NUV",
