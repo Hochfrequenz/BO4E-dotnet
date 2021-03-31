@@ -2971,6 +2971,9 @@
         <member name="P:BO4E.COM.Zaehlwerk.Waermenutzung">
             <summary>Stromverbrauchsart/Wärmenutzung Marktlokation</summary>
         </member>
+        <member name="P:BO4E.COM.Zaehlwerk.Marktrollen">
+            <summary>Relevant für Marktrollen</summary>
+        </member>
         <member name="T:BO4E.COM.Zeitraum">
             <summary>Diese Komponente wird zur Abbildung von Zeiträumen in Form von Dauern oder der Angabe von Start und Ende verwendet.</summary>
         </member>

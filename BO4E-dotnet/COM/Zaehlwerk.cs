@@ -151,6 +151,14 @@ namespace BO4E.COM
         // Todo @hamid: add a docstring
         public bool? Abrechnungsrelevant { get; set; }
 
+        /// <summary>Relevant für Marktrollen</summary>
+        [JsonProperty(PropertyName = "marktrollen", Required = Required.Default)]
+
+        [System.Text.Json.Serialization.JsonPropertyName("marktrollen")]
+        [NonOfficial(NonOfficialCategory.CUSTOMER_REQUIREMENTS)]
+        [ProtoMember(1020)]
+        public List<BO4E.ENUM.Marktrolle> Marktrollen { get; set; }
+
 #pragma warning restore CS1591 // Missing XML comment for publicly visible type or member
     }
 }
