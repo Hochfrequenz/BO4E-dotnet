@@ -157,13 +157,13 @@ namespace BO4E.Extensions.BusinessObjects.Energiemenge
                 case DateTimeKind.Unspecified:
                     return dt.AddDays(value); // doesn't take dst into account. that's just what we want! A day can have 23,24 or 25 hours
                 case DateTimeKind.Utc:
-                {
-                    // an utc day does always have 24 hours. not what humans expect!
-                    var dtLocal = DateTime.SpecifyKind(TimeZoneInfo.ConvertTimeFromUtc(dt, tz), DateTimeKind.Unspecified);
-                    var preResult = DateTime.SpecifyKind(dtLocal.AddDays(value), DateTimeKind.Unspecified);
-                    var result = TimeZoneInfo.ConvertTimeToUtc(preResult, tz);
-                    return result;
-                }
+                    {
+                        // an utc day does always have 24 hours. not what humans expect!
+                        var dtLocal = DateTime.SpecifyKind(TimeZoneInfo.ConvertTimeFromUtc(dt, tz), DateTimeKind.Unspecified);
+                        var preResult = DateTime.SpecifyKind(dtLocal.AddDays(value), DateTimeKind.Unspecified);
+                        var result = TimeZoneInfo.ConvertTimeToUtc(preResult, tz);
+                        return result;
+                    }
                 default:
                     throw new NotImplementedException($"DateTimeKind {dt.Kind} is not implemented.");
             }

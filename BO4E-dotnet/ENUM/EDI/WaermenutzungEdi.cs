@@ -10,7 +10,7 @@ namespace BO4E.ENUM.EDI
     public enum WaermenutzungEdi
     {
         /// <summary>Z56: Speicherheizung</summary>
-        [Mapping(Waermenutzung.SPEICHERHEIZUNG)] 
+        [Mapping(Waermenutzung.SPEICHERHEIZUNG)]
         Z56,
         /// <summary>Z57: Wärmepumpe</summary>
         [Mapping(Waermenutzung.WAERMEPUMPE)]

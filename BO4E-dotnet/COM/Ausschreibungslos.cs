@@ -80,13 +80,13 @@ namespace BO4E.COM
         public Menge Gesamtmenge { get; set; }
         /// <summary>Mindestmenge Toleranzband (kWh, %)</summary> <see cref="Menge"/> 
         [JsonProperty(PropertyName = "wunschMindestmenge", Required = Required.Default)]
- 
+
         [System.Text.Json.Serialization.JsonPropertyName("wunschMindestmenge")]
         [ProtoMember(14)]
         public Menge WunschMindestmenge { get; set; }
         /// <summary>Maximalmenge Toleranzband (kWh, %)</summary> <see cref="Menge"/> 
         [JsonProperty(PropertyName = "wunschMaximalmenge", Required = Required.Default)]
- 
+
         [System.Text.Json.Serialization.JsonPropertyName("wunschMaximalmenge")]
         [ProtoMember(15)]
         public Menge WunschMaximalmenge { get; set; }

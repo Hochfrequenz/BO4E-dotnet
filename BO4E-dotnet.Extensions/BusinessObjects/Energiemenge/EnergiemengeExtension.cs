@@ -157,7 +157,6 @@ namespace BO4E.Extensions.BusinessObjects.Energiemenge
             }
             return em.Energieverbrauch
                 .Where(v => v.Wertermittlungsverfahren == wev && v.Obiskennzahl == obiskennzahl && v.Einheit == me)
-                //.AsParallel<Verbrauch>()
                 .Sum(v => GetOverlapFactor(new TimeRange(v.Startdatum, v.Enddatum), reference, false) * v.Wert);
         }
 
@@ -502,7 +501,6 @@ namespace BO4E.Extensions.BusinessObjects.Energiemenge
         {
             return new HashSet<Tuple<Wertermittlungsverfahren, string, Mengeneinheit>>(
                 em.Energieverbrauch
-                //.AsParallel<Verbrauch>()
                 .Select(v => Tuple.Create(v.Wertermittlungsverfahren, v.Obiskennzahl, v.Einheit)));
         }
 
@@ -517,7 +515,6 @@ namespace BO4E.Extensions.BusinessObjects.Energiemenge
         {
             var combinations = GetWevObisMeCombinations(em);
             var jointCoverage = em.Energieverbrauch
-                //.AsParallel<Verbrauch>()
                 .Where(v => combinations.Contains(Tuple.Create(v.Wertermittlungsverfahren, v.Obiskennzahl, v.Einheit)))
                 .Sum(v => GetOverlapFactor(new TimeRange(v.Startdatum, v.Enddatum), reference, true));
             return jointCoverage - (combinations.Count - 1);
@@ -574,7 +571,6 @@ namespace BO4E.Extensions.BusinessObjects.Energiemenge
             using (MiniProfiler.Current.Step($"calculating coverage for list with {em.Energieverbrauch.Count} entries."))
             {
                 exactResult = em.Energieverbrauch
-                    //.AsParallel<Verbrauch>()
                     .Where(v => v.Einheit == mengeneinheit && v.Obiskennzahl == obisKz && v.Wertermittlungsverfahren == wev)
                     .Sum(v => GetOverlapFactor(new TimeRange(v.Startdatum, v.Enddatum), reference, true));
             }
@@ -701,7 +697,7 @@ namespace BO4E.Extensions.BusinessObjects.Energiemenge
                             {
                                 if (rawValue == null && onlyValue != null)
                                     return false;
-                                if (rawValue!=null && !rawValue.Equals(onlyValue))
+                                if (rawValue != null && !rawValue.Equals(onlyValue))
                                 {
                                     return false;
                                 }

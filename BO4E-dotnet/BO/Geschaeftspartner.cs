@@ -85,7 +85,7 @@ namespace BO4E.BO
         /// oder eine Privatperson handelt. (gewerbeKennzeichnung = false)
         /// </summary> 
         [JsonProperty(Required = Required.Always, Order = 9, PropertyName = "gewerbekennzeichnung")]
- 
+
         [System.Text.Json.Serialization.JsonPropertyName("gewerbekennzeichnung")]
         [ProtoMember(9)]
         [FieldName("isCommercial", Language.EN)]

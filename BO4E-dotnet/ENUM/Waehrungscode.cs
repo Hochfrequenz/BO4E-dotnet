@@ -187,7 +187,7 @@ namespace BO4E.ENUM
         /// <summary>Moroccan Dirham</summary>
         MAD,
         /// <summary>Moldovan Leu</summary>
-        [ProtoEnum(Name=nameof(Waehrungscode)+"_"+nameof(MDL))]
+        [ProtoEnum(Name = nameof(Waehrungscode) + "_" + nameof(MDL))]
         MDL,
         /// <summary>Malagasy Ariary</summary>
         MGA,

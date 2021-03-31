@@ -16,5 +16,5 @@ namespace BO4E.ENUM.EDI
         [Mapping(Unterbrechbarkeit.NUV)]
         Nicht_Unterbrechbare_Verbrauchseinrichtung
     }
-    
+
 }
