@@ -5,13 +5,8 @@
     "versionStruktur": 1,
     "boTyp": "GESCHAEFTSPARTNER",
     "name1": "Ernest",
-    "kontaktweg": [
-      "TELEFONAT"
-    ],
-    "geschaeftspartnerrolle": [
-      "INTERESSENT",
-      "KUNDE"
-    ],
+    "kontaktweg": ["TELEFONAT"],
+    "geschaeftspartnerrolle": ["INTERESSENT", "KUNDE"],
     "gewerbekennzeichnung": false
   }
 }

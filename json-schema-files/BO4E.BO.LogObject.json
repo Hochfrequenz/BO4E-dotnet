@@ -3,16 +3,10 @@
   "type": "object",
   "properties": {
     "guid": {
-      "type": [
-        "string",
-        "null"
-      ]
+      "type": ["string", "null"]
     },
     "boTyp": {
-      "type": [
-        "string",
-        "null"
-      ]
+      "type": ["string", "null"]
     },
     "versionStruktur": {
       "type": "integer"
@@ -28,9 +22,5 @@
       "type": "string"
     }
   },
-  "required": [
-    "id",
-    "datetime",
-    "logMessage"
-  ]
+  "required": ["id", "datetime", "logMessage"]
 }

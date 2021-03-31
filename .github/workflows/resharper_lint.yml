@@ -9,7 +9,7 @@ jobs:
     steps:
       - name: checkout
         uses: actions/checkout@v2
-      
+
       - name: resharper
         uses: glassechidna/resharper-action@master
         with:

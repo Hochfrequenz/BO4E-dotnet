@@ -25,16 +25,12 @@
       "gewerbekennzeichnung": false,
       "hrnummer": "",
       "amtsgericht": "",
-      "kontaktweg": [
-        "EM"
-      ],
+      "kontaktweg": ["EM"],
       "umsatzsteuerId": "",
       "glaeubigerId": "",
       "eMailAdresse": "susi@sorglos.de",
       "website": "DUCKDUCKGO.COM",
-      "geschaeftspartnerrolle": [
-        "UD"
-      ],
+      "geschaeftspartnerrolle": ["UD"],
       "partneradresse": {
         "postleitzahl": "71254",
         "ort": "Ditzingen",
@@ -83,16 +79,12 @@
       "gewerbekennzeichnung": false,
       "hrnummer": "",
       "amtsgericht": "",
-      "kontaktweg": [
-        "E_MAIL"
-      ],
+      "kontaktweg": ["E_MAIL"],
       "umsatzsteuerId": "",
       "glaeubigerId": "",
       "eMailAdresse": "susi@sorglos.de",
       "website": "DUCKDUCKGO.COM",
-      "geschaeftspartnerrolle": [
-        "KUNDE"
-      ],
+      "geschaeftspartnerrolle": ["KUNDE"],
       "partneradresse": {
         "postleitzahl": "71254",
         "ort": "Ditzingen",
