@@ -1561,6 +1561,12 @@
             Messwerterfassung am Zählpunkt
             </summary>
         </member>
+        <member name="P:BO4E.BO.Zaehler.ZaehlertypSpezifikation">
+            <summary>
+            Typisierung des Zählers (spezifikation für EHZ und MME)
+            <seealso cref="T:BO4E.ENUM.ZaehlertypSpezifikation" />
+            </summary>
+        </member>
         <member name="T:BO4E.COM.Adresse">
             <summary>Enthält eine Adresse, die für die meisten Zwecke verwendbar ist.</summary>
         </member>
@@ -8003,6 +8009,26 @@
         </member>
         <member name="F:BO4E.ENUM.Zaehlertyp.WECHSELSTROMZAEHLER">
             <summary>Wechselstromzähler</summary>
+        </member>
+        <member name="T:BO4E.ENUM.ZaehlertypSpezifikation">
+            <summary>
+            Bei diesem Enum handelt es sich die Abbildung von Zählertypen der Sparten Strom und Gas.
+            </summary>
+        </member>
+        <member name="F:BO4E.ENUM.ZaehlertypSpezifikation.EDL40">
+            <summary>Z01</summary>
+        </member>
+        <member name="F:BO4E.ENUM.ZaehlertypSpezifikation.EDL21">
+            <summary>Z02</summary>
+        </member>
+        <member name="F:BO4E.ENUM.ZaehlertypSpezifikation.SONSTIGER_EHZ">
+            <summary>Z03</summary>
+        </member>
+        <member name="F:BO4E.ENUM.ZaehlertypSpezifikation.MME_STANDARD">
+            <summary>Z04</summary>
+        </member>
+        <member name="F:BO4E.ENUM.ZaehlertypSpezifikation.MME_MEDA">
+            <summary>Z05</summary>
         </member>
         <member name="T:BO4E.ENUM.Zeiteinheit">
             <summary>Auflistung möglicher Einheiten zur Verwendung in zeitbezogenen Angaben.</summary>

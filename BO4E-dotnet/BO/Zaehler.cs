@@ -1,7 +1,3 @@
-using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-
 using BO4E.COM;
 using BO4E.ENUM;
 using BO4E.meta;
@@ -9,6 +5,10 @@ using BO4E.meta;
 using Newtonsoft.Json;
 
 using ProtoBuf;
+
+using System;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
 namespace BO4E.BO
 {
@@ -49,6 +49,7 @@ namespace BO4E.BO
             Required = Required.AllowNull, //Required = Required.Always, 
             Order = 7, PropertyName = "zaehlertyp")]
         [ProtoMember(7)]
+        [System.Text.Json.Serialization.JsonPropertyName("zaehlertyp")]
         [NonOfficial(NonOfficialCategory.REGULATORY_REQUIREMENTS)] // this is ALWAYS required in BO4E standard; Maybe nullable if you as a LIEFERANT don't care about the type of Zähler, othern than in the grid
         public Zaehlertyp? Zaehlertyp { get; set; }
 
@@ -126,5 +127,17 @@ namespace BO4E.BO
         [ProtoMember(1016)]
         [NonOfficial(NonOfficialCategory.CUSTOMER_REQUIREMENTS)]
         public Messwerterfassung? Messwerterfassung { get; set; }
+
+        /// <summary>
+        /// Typisierung des Zählers (spezifikation für EHZ und MME)
+        /// <seealso cref="ENUM.ZaehlertypSpezifikation" />
+        /// </summary>
+        [JsonProperty(
+            Required = Required.Default, //Required = Required.Always, 
+            PropertyName = "zaehlertypSpezfikation")]
+        [ProtoMember(1017)]
+        [System.Text.Json.Serialization.JsonPropertyName("zaehlertypSpezfikation")]
+        [NonOfficial(NonOfficialCategory.REGULATORY_REQUIREMENTS)]
+        public ZaehlertypSpezifikation? ZaehlertypSpezifikation { get; set; }
     }
 }
