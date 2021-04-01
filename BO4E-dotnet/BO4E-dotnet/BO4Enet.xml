@@ -1567,6 +1567,11 @@
             <seealso cref="T:BO4E.ENUM.ZaehlertypSpezifikation" />
             </summary>
         </member>
+        <member name="P:BO4E.BO.Zaehler.Befestigungsart">
+            <summary>
+            Befestigungsart
+            </summary>
+        </member>
         <member name="T:BO4E.COM.Adresse">
             <summary>Enthält eine Adresse, die für die meisten Zwecke verwendbar ist.</summary>
         </member>
@@ -3453,6 +3458,24 @@
             <summary>
             Benachrichtigung ist auf Wunsch des Users standardmäßig ausgeblendet.
             </summary>
+        </member>
+        <member name="T:BO4E.ENUM.Befestigungsart">
+            <summary>Befestigungsart</summary>
+        </member>
+        <member name="F:BO4E.ENUM.Befestigungsart.STECKTECHNIK">
+            <summary>BKE</summary>
+        </member>
+        <member name="F:BO4E.ENUM.Befestigungsart.DREIPUNKT">
+            <summary>DPA</summary>
+        </member>
+        <member name="F:BO4E.ENUM.Befestigungsart.HUTSCHIENE">
+            <summary>HUT</summary>
+        </member>
+        <member name="F:BO4E.ENUM.Befestigungsart.EINSTUTZEN">
+            <summary>Z31</summary>
+        </member>
+        <member name="F:BO4E.ENUM.Befestigungsart.ZWEISTUTZEN">
+            <summary>Z32</summary>
         </member>
         <member name="T:BO4E.ENUM.Bemessungsgroesse">
             <summary>Zur Abbildung von Messgrössen und zur Verwendung in energiewirtschaftlichen Berechnungen.</summary>

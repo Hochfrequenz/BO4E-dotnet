@@ -942,6 +942,20 @@
         "FERNAUSLESBAR",
         "MANUELL_AUSGELESENE"
       ]
+    },
+    "befestigungsart": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "enum": [
+        null,
+        "STECKTECHNIK",
+        "DREIPUNKT",
+        "HUTSCHIENE",
+        "EINSTUTZEN",
+        "ZWEISTUTZEN"
+      ]
     }
   },
   "required": [

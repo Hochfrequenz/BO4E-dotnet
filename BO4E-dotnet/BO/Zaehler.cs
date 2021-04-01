@@ -139,5 +139,16 @@ namespace BO4E.BO
         [System.Text.Json.Serialization.JsonPropertyName("zaehlertypSpezfikation")]
         [NonOfficial(NonOfficialCategory.REGULATORY_REQUIREMENTS)]
         public ZaehlertypSpezifikation? ZaehlertypSpezifikation { get; set; }
+
+
+        /// <summary>
+        /// Befestigungsart
+        /// </summary>
+        [JsonProperty(Required = Required.Default, Order = 18, PropertyName = "befestigungsart")]
+
+        [System.Text.Json.Serialization.JsonPropertyName("befestigungsart")]
+        [ProtoMember(1018)]
+        [NonOfficial(NonOfficialCategory.REGULATORY_REQUIREMENTS)]
+        public Befestigungsart? Befestigungsart { get; set; }
     }
 }
