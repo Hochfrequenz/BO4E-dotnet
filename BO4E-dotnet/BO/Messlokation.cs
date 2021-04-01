@@ -206,6 +206,16 @@ namespace BO4E.BO
         public List<Zaehlwerk> Zaehlwerke { get; set; }
 
 
+        /// <summary>
+        /// gasqualitaet für EDIFACT mapping
+        /// </summary>
+        [JsonProperty(PropertyName = "betriebszustand", Required = Required.Default, Order = 26, NullValueHandling = NullValueHandling.Ignore)]
+
+        [System.Text.Json.Serialization.JsonPropertyName("betriebszustand")]
+        [ProtoMember(1023)]
+        [NonOfficial(NonOfficialCategory.CUSTOMER_REQUIREMENTS)]
+        public Betriebszustand? Betriebszustand { get; set; }
+
         [JsonIgnore]
         private static readonly Regex RegexValidate = new Regex(@"[A-Z\d]{33}", RegexOptions.Compiled);
 

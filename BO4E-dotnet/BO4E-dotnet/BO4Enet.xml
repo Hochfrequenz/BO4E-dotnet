@@ -1098,6 +1098,11 @@
             OBIS-Daten der Messlokation
             </summary>
         </member>
+        <member name="P:BO4E.BO.Messlokation.Betriebszustand">
+            <summary>
+            gasqualitaet für EDIFACT mapping
+            </summary>
+        </member>
         <member name="M:BO4E.BO.Messlokation.ValidateId(System.String)">
             <summary>
             Test if a <paramref name="id"/> is a valid messlokations ID.
@@ -3481,6 +3486,18 @@
         </member>
         <member name="F:BO4E.ENUM.Bemessungsgroesse.ANZAHL">
             <summary>Darstellung einer Stückzahl</summary>
+        </member>
+        <member name="T:BO4E.ENUM.Betriebszustand">
+            <summary>Betriebszustand der Messlokation</summary>
+        </member>
+        <member name="F:BO4E.ENUM.Betriebszustand.GESPERRT_NICHT_ENTSPERREN">
+            <summary>ZC1</summary>
+        </member>
+        <member name="F:BO4E.ENUM.Betriebszustand.GESPERRT">
+            <summary>ZC2</summary>
+        </member>
+        <member name="F:BO4E.ENUM.Betriebszustand.REGELBETRIEB">
+            <summary>ZC3</summary>
         </member>
         <member name="T:BO4E.ENUM.Bilanzierungsmethode">
             <summary>Mit dieser Aufzählung kann zwischen den Bilanzierungsmethoden bzw. -Grundlagen unterschieden werden.</summary>
