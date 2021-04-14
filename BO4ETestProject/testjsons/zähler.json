@@ -22,9 +22,8 @@
       "verwendungszwecke": [
         {
           "marktrolle": "MSB",
-          "zweck": [ "ENDKUNDENABRECHNUNG" ]
+          "zweck": ["ENDKUNDENABRECHNUNG"]
         }
-        
       ],
       "verbrauchsart": null,
       "unterbrechbarkeit": "NUV",
