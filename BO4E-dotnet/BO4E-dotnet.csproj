@@ -8,7 +8,7 @@
     <Authors>Hochfrequenz Untenehmensberatung GmbH</Authors>
     <Product>BO4E .net core bindings</Product>
     <RepositoryUrl>https://github.com/Hochfrequenz/BO4E-dotnet/</RepositoryUrl>
-    <VersionPrefix>0.2.3</VersionPrefix>
+    <VersionPrefix>0.2.4</VersionPrefix>
     <VersionSuffix>$(VersionSuffix)</VersionSuffix>
     <AssemblyName>BO4Enet</AssemblyName>
     <GeneratePackageOnBuild>false</GeneratePackageOnBuild>
@@ -22,8 +22,8 @@
     <PackageProjectUrl>https://github.com/Hochfrequenz/BO4E-dotnet/</PackageProjectUrl>
     <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
     <PackageLicenseFile>LICENSE.txt</PackageLicenseFile>
-    <AssemblyVersion>0.2.3.0</AssemblyVersion>
-    <FileVersion>0.2.3.0</FileVersion>
+    <AssemblyVersion>0.2.4.0</AssemblyVersion>
+    <FileVersion>0.2.4.0</FileVersion>
 
     <RepositoryType>git</RepositoryType>
     <IncludeSymbols>true</IncludeSymbols>
