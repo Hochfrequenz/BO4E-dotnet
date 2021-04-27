@@ -133,7 +133,7 @@ namespace BO4E.BO
         /// <seealso cref="ENUM.ZaehlertypSpezifikation" />
         /// </summary>
         [JsonProperty(
-            Required = Required.Default, //Required = Required.Always, 
+            Required = Required.Default,
             PropertyName = "zaehlertypspezifikation", Order = 17)]
         [ProtoMember(1017)]
         [System.Text.Json.Serialization.JsonPropertyName("zaehlertypspezifikation")]
