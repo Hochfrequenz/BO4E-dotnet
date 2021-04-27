@@ -134,11 +134,11 @@ namespace BO4E.BO
         /// </summary>
         [JsonProperty(
             Required = Required.Default, //Required = Required.Always, 
-            PropertyName = "zaehlertypSpezifikation")]
+            PropertyName = "zaehlertypspezifikation", Order = 17)]
         [ProtoMember(1017)]
-        [System.Text.Json.Serialization.JsonPropertyName("zaehlertypSpezifikation")]
+        [System.Text.Json.Serialization.JsonPropertyName("zaehlertypspezifikation")]
         [NonOfficial(NonOfficialCategory.REGULATORY_REQUIREMENTS)]
-        public ZaehlertypSpezifikation? ZaehlertypSpezifikation { get; set; }
+        public ZaehlertypSpezifikation? Zaehlertypspezifikation { get; set; }
 
 
         /// <summary>
