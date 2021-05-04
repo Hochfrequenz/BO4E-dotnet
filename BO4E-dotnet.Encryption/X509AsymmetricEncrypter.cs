@@ -66,6 +66,11 @@ namespace BO4E.Encryption
             return result;
         }
 
+        /// <summary>
+        /// encrypts the <paramref name="plainText"/>
+        /// </summary>
+        /// <param name="plainText"></param>
+        /// <returns></returns>
         public string Encrypt(string plainText)
         {
             var plainBytes = Encoding.UTF8.GetBytes(plainText);
@@ -84,6 +89,11 @@ namespace BO4E.Encryption
             return cipherString;
         }
 
+        /// <summary>
+        /// Encrypts the 
+        /// </summary>
+        /// <param name="plainObject"></param>
+        /// <returns></returns>
         public EncryptedObject Encrypt(BusinessObject plainObject)
         {
             var plainText = JsonConvert.SerializeObject(plainObject, encryptionSerializerSettings);
@@ -91,6 +101,11 @@ namespace BO4E.Encryption
             return new EncryptedObjectPKCS7(cipherString, GetPublicKeysBase64());
         }
 
+        /// <summary>
+        /// <inheritdoc cref="Encrypter.Decrypt"/>
+        /// </summary>
+        /// <param name="cipherText"></param>
+        /// <returns></returns>
         public string Decrypt(string cipherText)
         {
             var cipherBytes = Convert.FromBase64String(cipherText);
@@ -119,6 +134,11 @@ namespace BO4E.Encryption
             return Encoding.UTF8.GetString(plainBytes);
         }
 
+        /// <summary>
+        /// Converts a base64 string <paramref name="pemKeyBase64"/> in PEM format to a <see cref="AsymmetricCipherKeyPair"/>.
+        /// </summary>
+        /// <param name="pemKeyBase64"></param>
+        /// <returns></returns>
         public static AsymmetricCipherKeyPair PrivateBase64KeyToACKP(string pemKeyBase64)
         {
             if (!pemKeyBase64.StartsWith("-----"))
@@ -129,6 +149,11 @@ namespace BO4E.Encryption
             }
         }
 
+        /// <summary>
+        /// <inheritdoc cref="Encrypter.Decrypt"/>
+        /// </summary>
+        /// <param name="encryptedObject"></param>
+        /// <returns></returns>
         public override BusinessObject Decrypt(EncryptedObject encryptedObject)
         {
             if (!(encryptedObject is EncryptedObjectPKCS7 eo)) return null;
@@ -136,6 +161,12 @@ namespace BO4E.Encryption
             return JsonConvert.DeserializeObject<BusinessObject>(plainString, encryptionSerializerSettings);
         }
 
+        /// <summary>
+        /// <inheritdoc cref="Encrypter.Decrypt{T}"/>
+        /// </summary>
+        /// <param name="encryptedObject"></param>
+        /// <typeparam name="T"></typeparam>
+        /// <returns></returns>
         public override T Decrypt<T>(EncryptedObject encryptedObject)
         {
             if (!(encryptedObject is EncryptedObjectPKCS7 eo)) return null;
@@ -143,11 +174,17 @@ namespace BO4E.Encryption
             return JsonConvert.DeserializeObject<T>(plainString, encryptionSerializerSettings);
         }
 
+        /// <summary>
+        /// <inheritdoc cref="Encrypter.Dispose"/>
+        /// </summary>
         public override void Dispose()
         {
             _privateKey = null;
         }
-
+    
+        /// <summary>
+        /// calls the dispose method.
+        /// </summary>
         ~X509AsymmetricEncrypter()
         {
             Dispose();

@@ -45,6 +45,9 @@ namespace BO4E.Encryption
         /// <returns>decrypted object</returns>
         public abstract T Decrypt<T>(EncryptedObject encryptedObject) where T : BusinessObject;
 
+        /// <summary>
+        /// calls the <see cref="Dispose"/> method.
+        /// </summary>
         ~Encrypter()
         {
             Dispose();
