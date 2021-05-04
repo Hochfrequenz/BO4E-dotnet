@@ -126,6 +126,7 @@ namespace BO4E.Extensions.BusinessObjects.Energiemenge
         ///     but with a strongly typed container as input.
         /// </summary>
         /// <param name="config">container containing the relevant data</param>
+        /// <param name="energiemenge"></param>
         /// <returns></returns>
         public static PlausibilityReport GetPlausibilityReport(this BO.Energiemenge energiemenge,
             PlausibilityReportConfiguration config)
@@ -139,6 +140,7 @@ namespace BO4E.Extensions.BusinessObjects.Energiemenge
         ///     creates a dictionary of completeness reports for a given list of reference time ranges.
         /// </summary>
         /// <param name="em">Energiemenge</param>
+        /// <param name="config">container containing the relevant data</param>
         /// <param name="ranges">list of ranges for which the completeness reports are generated</param>
         /// <returns></returns>
         public static IDictionary<ITimeRange, PlausibilityReport> GetSlicedPlausibilityReports(this BO.Energiemenge em,
