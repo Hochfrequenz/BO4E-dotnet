@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <doc>
     <assembly>
-        <name>BO4E-dotnet.Extensions</name>
+        <name>BO4E.Extensions</name>
     </assembly>
     <members>
         <member name="T:BO4E.Extensions.BusinessObjects.Benachrichtigung.BenachrichtigungExtension">

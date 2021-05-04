@@ -51,7 +51,7 @@
 //                options.Types.AddRange(PROTO_SERIALIZABLE_TYPES.ToList());
 //                string protoString = (string)method.Invoke(null, new object[] { options });
 //                Assert.IsFalse(string.IsNullOrWhiteSpace(protoString));
-//                string path = $"../../../../BO4E-dotnet/protobuf-files/bo4e.proto";
+//                string path = $"../../../../BO4E/protobuf-files/bo4e.proto";
 //                if (!File.Exists(path))
 //                {
 //                    var stream = File.Create(path);

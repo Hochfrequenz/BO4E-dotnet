@@ -25,7 +25,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\BO4E-dotnet\BO4E-dotnet.csproj" />
+    <ProjectReference Include="..\BO4E\BO4E.csproj" />
   </ItemGroup>
 
   <ItemGroup>
