@@ -16,7 +16,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BO4E.Reporting", "BO4E.Repo
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestBO4E-dotnet-Reporting", "TestBO4E-dotnet-Reporting\TestBO4E-dotnet-Reporting.csproj", "{86795BD1-038B-437E-B723-9E3AEDF2F53E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestBO4E-dotnet-Extensions", "TestBO4E-dotnet-Extensions\TestBO4E-dotnet-Extensions.csproj", "{BDA5224F-3C83-44F7-B96F-B873247E3245}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestBO4E.Extensions", "TestBO4E.Extensions\TestBO4E.Extensions.csproj", "{BDA5224F-3C83-44F7-B96F-B873247E3245}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BO4E.Encryption", "BO4E-dotnet.Encryption\BO4E.Encryption.csproj", "{09AF8879-127A-4724-B874-0EDAA1C180B3}"
 EndProject
