@@ -133,19 +133,18 @@ namespace BO4E.BO
         /// <seealso cref="ENUM.ZaehlertypSpezifikation" />
         /// </summary>
         [JsonProperty(
-            Required = Required.Default, //Required = Required.Always, 
-            PropertyName = "zaehlertypSpezifikation")]
+            Required = Required.Default,
+            PropertyName = "zaehlertypspezifikation", Order = 17)]
         [ProtoMember(1017)]
-        [System.Text.Json.Serialization.JsonPropertyName("zaehlertypSpezifikation")]
+        [System.Text.Json.Serialization.JsonPropertyName("zaehlertypspezifikation")]
         [NonOfficial(NonOfficialCategory.REGULATORY_REQUIREMENTS)]
-        public ZaehlertypSpezifikation? ZaehlertypSpezifikation { get; set; }
+        public ZaehlertypSpezifikation? Zaehlertypspezifikation { get; set; }
 
 
         /// <summary>
         /// Befestigungsart
         /// </summary>
         [JsonProperty(Required = Required.Default, Order = 18, PropertyName = "befestigungsart")]
-
         [System.Text.Json.Serialization.JsonPropertyName("befestigungsart")]
         [ProtoMember(1018)]
         [NonOfficial(NonOfficialCategory.REGULATORY_REQUIREMENTS)]

@@ -291,6 +291,8 @@ namespace BO4E.meta.LenientConverters
                 return dto;
             }
 
+            if (reader.TokenType == JsonTokenType.Null)
+                return DateTimeOffset.MinValue;
 
             var rawDate = reader.GetString();
             // First try to parse the date string as is (in case it is correctly formatted)
