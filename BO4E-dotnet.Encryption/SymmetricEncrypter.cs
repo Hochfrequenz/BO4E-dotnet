@@ -138,7 +138,7 @@ namespace BO4E.Encryption
                 for (var i = 0; i < _secretKey.Length; i++)
                     _secretKey[i] = 0x0;
         }
-    
+
         /// <summary>
         /// <inheritdoc cref="Encrypter.Dispose"/>
         /// </summary>

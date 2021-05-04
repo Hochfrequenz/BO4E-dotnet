@@ -184,7 +184,7 @@ namespace BO4E.Encryption
         {
             _privateKey = null;
         }
-    
+
         /// <summary>
         /// calls the dispose method.
         /// </summary>
