@@ -22,6 +22,9 @@ using Org.BouncyCastle.Security;
 
 namespace BO4E.Encryption
 {
+    /// <summary>
+    /// An Anonymizer removes privacy relevant data from business objects.
+    /// </summary>
     public class Anonymizer : IDisposable
     {
         /// <summary>

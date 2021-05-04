@@ -20,7 +20,14 @@ namespace BO4E.Encryption
             SerializationBinder = new BusinessObjectSerializationBinder()
         };
 
+        /// <summary>
+        /// logger.
+        /// </summary>
+        // ToDo: inject properly
         public ILogger _logger { get; set; }
+        /// <summary>
+        /// Each encrypter has to define a Dispose method that cleans up stuff.
+        /// </summary>
         public abstract void Dispose();
 
         /// <summary>
@@ -30,6 +37,12 @@ namespace BO4E.Encryption
         /// <returns>a decrypted Business Object</returns>
         public abstract BusinessObject Decrypt(EncryptedObject encryptedObject);
 
+        /// <summary>
+        /// Decrypt <paramref name="encryptedObject"/>
+        /// </summary>
+        /// <param name="encryptedObject"></param>
+        /// <typeparam name="T">expected type</typeparam>
+        /// <returns>decrypted object</returns>
         public abstract T Decrypt<T>(EncryptedObject encryptedObject) where T : BusinessObject;
 
         ~Encrypter()
