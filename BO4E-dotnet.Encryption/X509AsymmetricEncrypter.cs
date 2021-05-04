@@ -13,6 +13,9 @@ using Org.BouncyCastle.Security;
 
 namespace BO4E.Encryption
 {
+    /// <summary>
+    /// Assymmetic Encryption in X509 standard.
+    /// </summary>
     public class X509AsymmetricEncrypter : Encrypter
     {
         private readonly ISet<X509Certificate2> _publicCerts;
