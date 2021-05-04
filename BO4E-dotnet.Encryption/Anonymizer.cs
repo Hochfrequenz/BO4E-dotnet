@@ -135,7 +135,7 @@ namespace BO4E.Encryption
         /// <param name="jobject"></param>
         /// <typeparam name="T"></typeparam>
         /// <returns></returns>
-        public T ApplyOperations<T>(JObject jobject) where T:BusinessObject
+        public T ApplyOperations<T>(JObject jobject) where T : BusinessObject
         {
             var bo = BoMapper.MapObject(jobject, LenientParsing.MOST_LENIENT);
             return ApplyOperations<T>(bo);
