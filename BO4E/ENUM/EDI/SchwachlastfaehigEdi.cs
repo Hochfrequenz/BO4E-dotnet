@@ -9,6 +9,7 @@ namespace BO4E.ENUM.EDI
         /// <summary>Z59: Nicht-Schwachlastfähig</summary>
         [Mapping(Schwachlastfaehig.NICHT_SCHWACHLASTFAEHIG)]
         Z59,
+
         /// <summary>Z60: Schwachlast fähig</summary>
         [Mapping(Schwachlastfaehig.SCHWACHLASTFAEHIG)]
         Z60

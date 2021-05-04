@@ -1,17 +1,17 @@
 ﻿using System.Collections.Generic;
-
+using System.Text.Json.Serialization;
 using BO4E.COM;
 using BO4E.meta;
-
 using Newtonsoft.Json;
-
 using ProtoBuf;
 
 namespace BO4E.BO
 {
     /// <summary>
-    /// Das allgemeine Modell zur Abbildung von Preisen. Davon abgeleitet können, über die Zuordnung identifizierender Merkmale, spezielle Preisblatt-Varianten modelliert werden.
-    /// Die jeweiligen Sätze von Merkmalen sind in der Grafik ergänzt worden und stellen jeweils eine Ausprägung für die verschiedenen Anwendungsfälle der Preisblätter dar.
+    ///     Das allgemeine Modell zur Abbildung von Preisen. Davon abgeleitet können, über die Zuordnung identifizierender
+    ///     Merkmale, spezielle Preisblatt-Varianten modelliert werden.
+    ///     Die jeweiligen Sätze von Merkmalen sind in der Grafik ergänzt worden und stellen jeweils eine Ausprägung für die
+    ///     verschiedenen Anwendungsfälle der Preisblätter dar.
     /// </summary>
     [ProtoContract]
     // [ProtoInclude(30, typeof(PreisblattDienstleistung))] // protobuf-net doesn't support multiple levels of inheritance yet
@@ -22,32 +22,30 @@ namespace BO4E.BO
     public class Preisblatt : BusinessObject
     {
         /// <summary>
-        /// Eine Bezeichnung für das Preisblatt.
+        ///     Eine Bezeichnung für das Preisblatt.
         /// </summary>
         [JsonProperty(Required = Required.Always, Order = 4, PropertyName = "bezeichnung")]
-
-        [System.Text.Json.Serialization.JsonPropertyName("bezeichnung")]
+        [JsonPropertyName("bezeichnung")]
         [ProtoMember(4)]
         [DataCategory(DataCategory.FINANCE)]
         [BoKey]
         public string Bezeichnung { get; set; }
 
         /// <summary>
-        /// Der Zeitraum für den der Preis festgelegt ist. Details siehe <see cref="Zeitraum"/>
+        ///     Der Zeitraum für den der Preis festgelegt ist. Details siehe <see cref="Zeitraum" />
         /// </summary>
         [JsonProperty(Required = Required.Always, Order = 5, PropertyName = "gueltigkeit")]
-
-        [System.Text.Json.Serialization.JsonPropertyName("gueltigkeit")]
+        [JsonPropertyName("gueltigkeit")]
         [ProtoMember(5)]
         [DataCategory(DataCategory.FINANCE)]
         public Zeitraum Gueltigkeit { get; set; }
 
         /// <summary>
-        /// Die einzelnen Positionen, die mit dem Preisblatt abgerechnet werden können. Z.B. Arbeitspreis, Grundpreis etc. Details siehe <see cref="Preisposition"/>
+        ///     Die einzelnen Positionen, die mit dem Preisblatt abgerechnet werden können. Z.B. Arbeitspreis, Grundpreis etc.
+        ///     Details siehe <see cref="Preisposition" />
         /// </summary>
         [JsonProperty(Required = Required.Always, Order = 6, PropertyName = "preispositionen")] // at least one entry
-
-        [System.Text.Json.Serialization.JsonPropertyName("preispositionen")]
+        [JsonPropertyName("preispositionen")]
         [DataCategory(DataCategory.FINANCE)]
         [ProtoMember(6)]
         public List<Preisposition> Preispositionen { get; set; }

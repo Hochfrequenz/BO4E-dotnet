@@ -7,7 +7,9 @@ namespace TestBO4E
     [TestClass]
     public class TestEdiBOMapper
     {
-        private readonly Dictionary<string, Dictionary<string, string>> expectedResults = new Dictionary<string, Dictionary<string, string>>();
+        private readonly Dictionary<string, Dictionary<string, string>> expectedResults =
+            new Dictionary<string, Dictionary<string, string>>();
+
         public TestEdiBOMapper()
         {
             expectedResults.Add("Netzebene", new Dictionary<string, string>
@@ -18,16 +20,16 @@ namespace TestBO4E
             });
             expectedResults.Add("Zaehlertyp", new Dictionary<string, string>
             {
-                {"BGZ", "BALGENGASZAEHLER" }, // EDI -> BO4E
+                {"BGZ", "BALGENGASZAEHLER"}, // EDI -> BO4E
                 {"MAZ", "MAXIMUMZAEHLER"},
                 {"IVA", null} // what to do?
             });
             expectedResults.Add("Geraetetyp", new Dictionary<string, string>
             {
-                {"DKZ", "DREHKOLBENGASZAEHLER" }, // EDI -> BO4E
+                {"DKZ", "DREHKOLBENGASZAEHLER"}, // EDI -> BO4E
                 {"MME", "MODERNE_MESSEINRICHTUNG"},
                 {"ELEKTRONISCHER_HAUSHALTSZAEHLER", "ELEKTRONISCHER_HAUSHALTSZAEHLER"},
-                {"IVA", null  }
+                {"IVA", null}
             });
             expectedResults.Add("Zaehlerauspraegung", new Dictionary<string, string>
             {
@@ -62,9 +64,10 @@ namespace TestBO4E
             expectedResults.Add("BDEWArtikelnummer", new Dictionary<string, string>
             {
                 {"9990001000152", "NOTSTROMLIEFERUNG_LEISTUNG"},
-                {"9990001000798", "MSB_INKL_MESSUNG" }
+                {"9990001000798", "MSB_INKL_MESSUNG"}
             });
         }
+
         [TestMethod]
         public void TestSimpleEnums()
         {

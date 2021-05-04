@@ -5,10 +5,13 @@ namespace BO4E.ENUM
     {
         /// <summary>Es wird addiert</summary>
         ADDITION,
+
         /// <summary>Es wird subtrahiert</summary>
         SUBTRAKTION,
+
         /// <summary>Es wird multipliziert</summary>
         MULTIPLIKATION,
+
         /// <summary>Es wird dividiert</summary>
         DIVISION
     }

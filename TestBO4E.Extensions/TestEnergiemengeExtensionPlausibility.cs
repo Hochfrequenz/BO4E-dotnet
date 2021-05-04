@@ -13,7 +13,6 @@ namespace TestBO4E.Extensions
     [TestClass]
     public class TestEnergiemengeExtensionPlausibility
     {
-
         [TestMethod]
         public void TestPlausibilityReportGenerationSomeCustomer()
         {
@@ -25,13 +24,10 @@ namespace TestBO4E.Extensions
                     var jsonString = r.ReadToEnd();
                     json = JsonConvert.DeserializeObject<JObject>(jsonString);
                 }
-                foreach (var key in new HashSet<string> { "reference", "other", "expectedResult" })
-                {
+
+                foreach (var key in new HashSet<string> {"reference", "other", "expectedResult"})
                     if (!json.ContainsKey(key))
-                    {
                         throw new ArgumentException($"Test file {boFile} has no key '{key}'.");
-                    }
-                }
                 var emReference = JsonConvert.DeserializeObject<Energiemenge>(json["reference"].ToString());
                 var emOther = JsonConvert.DeserializeObject<Energiemenge>(json["other"].ToString());
 

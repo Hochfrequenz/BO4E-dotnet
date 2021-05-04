@@ -4,12 +4,12 @@ using Newtonsoft.Json;
 namespace BO4E.Extensions.BusinessObjects
 {
     /// <summary>
-    /// common extensions for all BusinessObjects
+    ///     common extensions for all BusinessObjects
     /// </summary>
     public static class BusinessObjectExtensions
     {
         /// <summary>
-        /// Create a deep copy of a Business Object
+        ///     Create a deep copy of a Business Object
         /// </summary>
         /// <typeparam name="T">Type of the BusinessObject</typeparam>
         /// <param name="source">the BO that is copied</param>

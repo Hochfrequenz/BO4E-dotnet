@@ -1,8 +1,6 @@
-using BO4E.meta;
-
-using ProtoBuf;
-
 using System;
+using BO4E.meta;
+using ProtoBuf;
 
 namespace BO4E.ENUM
 {
@@ -25,31 +23,31 @@ namespace BO4E.ENUM
         INDIVIDUELL,
 
         /// <summary>
-        /// Familien
+        ///     Familien
         /// </summary>
         [NonOfficial(NonOfficialCategory.CUSTOMER_REQUIREMENTS)]
         FAMILIE,
 
         /// <summary>
-        /// Erbengemeinschaft
+        ///     Erbengemeinschaft
         /// </summary>
         [NonOfficial(NonOfficialCategory.CUSTOMER_REQUIREMENTS)]
         ERBENGEMEINSCHAFT,
 
         /// <summary>
-        /// WG
+        ///     WG
         /// </summary>
         [NonOfficial(NonOfficialCategory.CUSTOMER_REQUIREMENTS)]
         WOHNGEMEINSCHAFT,
 
         /// <summary>
-        /// Grundstückgemeinschaft
+        ///     Grundstückgemeinschaft
         /// </summary>
         [NonOfficial(NonOfficialCategory.CUSTOMER_REQUIREMENTS)]
         GRUNDSTUECKGEMEINSCHAFT,
 
         /// <summary>
-        /// Doktor
+        ///     Doktor
         /// </summary>
         [NonOfficial(NonOfficialCategory.CUSTOMER_REQUIREMENTS)]
         [Obsolete("Use BO4E.ENUM.Titel instead", true)]

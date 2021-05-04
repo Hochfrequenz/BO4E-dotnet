@@ -1,20 +1,18 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-
+using System.Text.Json.Serialization;
 using BO4E.COM;
 using BO4E.ENUM;
 using BO4E.meta;
 using BO4E.meta.LenientConverters;
-
 using Newtonsoft.Json;
-
 using ProtoBuf;
 
 namespace BO4E.BO
 {
     /// <summary>
-    /// Eine Benachrichtigung ist die BO-Entsprechung eines "Klärfall"s im SAP oder eines "Task"s im Salesforce
+    ///     Eine Benachrichtigung ist die BO-Entsprechung eines "Klärfall"s im SAP oder eines "Task"s im Salesforce
     /// </summary>
     /// <author>Hochfrequenz Unternehmensberatung GmbH</author>
     [ProtoContract]
@@ -22,56 +20,51 @@ namespace BO4E.BO
     public class Benachrichtigung : BusinessObject
     {
         /// <summary>
-        /// Eine eindeutige ID der Benachrichtigung.
-        /// Entspricht z.B. der Klärfallnummer in einem SAP-System oder der Task-ID im Salesforce
+        ///     Eine eindeutige ID der Benachrichtigung.
+        ///     Entspricht z.B. der Klärfallnummer in einem SAP-System oder der Task-ID im Salesforce
         /// </summary>
         [JsonProperty(Required = Required.Always, Order = 4, PropertyName = "benachrichtigungsId")]
-
-        [System.Text.Json.Serialization.JsonPropertyName("benachrichtigungsId")]
+        [JsonPropertyName("benachrichtigungsId")]
         [ProtoMember(4)]
         [BoKey]
         public string BenachrichtigungsId { get; set; }
 
         /// <summary>
-        /// Priorität der Benachrichtigung
+        ///     Priorität der Benachrichtigung
         /// </summary>
         [DefaultValue(Prioritaet.NORMAL)]
         [JsonProperty(Required = Required.Always, Order = 5, PropertyName = "prioritaet")]
-
-        [System.Text.Json.Serialization.JsonPropertyName("prioritaet")]
+        [JsonPropertyName("prioritaet")]
         [ProtoMember(5)]
         public Prioritaet Prioritaet { get; set; }
 
         /// <summary>
-        /// Status der Benachrichtigung
+        ///     Status der Benachrichtigung
         /// </summary>
         [DefaultValue(Bearbeitungsstatus.OFFEN)]
         [JsonProperty(Required = Required.Always, Order = 6, PropertyName = "bearbeitungsstatus")]
-
-        [System.Text.Json.Serialization.JsonPropertyName("bearbeitungsstatus")]
+        [JsonPropertyName("bearbeitungsstatus")]
         [ProtoMember(6)]
         public Bearbeitungsstatus Bearbeitungsstatus { get; set; }
 
         /// <summary>
-        /// Kurzbeschreibung des Fehlers (Klärfall-Überschrift im SAP, Subject im SFDC)
+        ///     Kurzbeschreibung des Fehlers (Klärfall-Überschrift im SAP, Subject im SFDC)
         /// </summary>
         [JsonProperty(Required = Required.Always, Order = 7, PropertyName = "kurztext")]
-
-        [System.Text.Json.Serialization.JsonPropertyName("kurztext")]
+        [JsonPropertyName("kurztext")]
         [ProtoMember(7)]
         public string Kurztext { get; set; }
 
         //[JsonIgnore]
         //private DateTimeOffset _erstellungsZeitpunkt;
         /// <summary>
-        /// Zeitpunkt zu dem die Benachrichtigung erstellt wurde (UTC).
+        ///     Zeitpunkt zu dem die Benachrichtigung erstellt wurde (UTC).
         /// </summary>
         // [DefaultValue(DateTimeOffset.UtcNow)] <-- doesn't work.
         [JsonProperty(Required = Required.Always, Order = 8, PropertyName = "erstellungsZeitpunkt")]
-
-        [System.Text.Json.Serialization.JsonPropertyName("erstellungsZeitpunkt")]
+        [JsonPropertyName("erstellungsZeitpunkt")]
         [ProtoMember(8)]
-        [JsonConverter(typeof(LenientDateTimeConverter))]
+        [Newtonsoft.Json.JsonConverter(typeof(LenientDateTimeConverter))]
         public DateTimeOffset ErstellungsZeitpunkt { get; set; }
         /*{
             get { return _erstellungsZeitpunkt; }
@@ -89,32 +82,29 @@ namespace BO4E.BO
         }*/
 
         /// <summary>
-        /// Optionale Kategorisierung der Benachrichtigung. 
-        /// (Entspricht z.B. der Klärfallkategorie in SAP)
+        ///     Optionale Kategorisierung der Benachrichtigung.
+        ///     (Entspricht z.B. der Klärfallkategorie in SAP)
         /// </summary>
         [JsonProperty(Required = Required.Default, Order = 9, PropertyName = "kategorie")]
-
-        [System.Text.Json.Serialization.JsonPropertyName("kategorie")]
+        [JsonPropertyName("kategorie")]
         [ProtoMember(9)]
         public string Kategorie { get; set; }
 
         /// <summary>
-        /// Eindeutige Kennung des Benutzers, der die Benachrichtigung erhält oder sie bearbeiten
-        /// muss; analog dem Klärfallbearbeiter im SAP oder dem Owner im Salesforce.
-        /// Kann auch <c>null</c> sein, wenn es keinen festen Bearbeiter gibt.
+        ///     Eindeutige Kennung des Benutzers, der die Benachrichtigung erhält oder sie bearbeiten
+        ///     muss; analog dem Klärfallbearbeiter im SAP oder dem Owner im Salesforce.
+        ///     Kann auch <c>null</c> sein, wenn es keinen festen Bearbeiter gibt.
         /// </summary>
         [JsonProperty(Required = Required.Default, Order = 10, PropertyName = "bearbeiter")]
-
-        [System.Text.Json.Serialization.JsonPropertyName("bearbeiter")]
+        [JsonPropertyName("bearbeiter")]
         [ProtoMember(10)]
         public string Bearbeiter { get; set; }
 
         /// <summary>
-        /// Detaillierte Beschreibung (Klärfall-Notizen im SAP, Description im SFDC)
+        ///     Detaillierte Beschreibung (Klärfall-Notizen im SAP, Description im SFDC)
         /// </summary>
         [JsonProperty(Required = Required.Default, Order = 11, PropertyName = "notizen")]
-
-        [System.Text.Json.Serialization.JsonPropertyName("notizen")]
+        [JsonPropertyName("notizen")]
         [ProtoMember(11)]
         public List<Notiz> Notizen { get; set; }
 
@@ -129,39 +119,28 @@ namespace BO4E.BO
 
 
         /// <summary>
-        /// Zeitpunkt bis zu dem die Benachrichtigung bearbeitet worden sein muss.
+        ///     Zeitpunkt bis zu dem die Benachrichtigung bearbeitet worden sein muss.
         /// </summary>
         [JsonProperty(Required = Required.Default, Order = 12, PropertyName = "deadline")]
-
-        [System.Text.Json.Serialization.JsonPropertyName("deadline")]
+        [JsonPropertyName("deadline")]
         [ProtoMember(12)]
-        [JsonConverter(typeof(LenientDateTimeConverter))]
+        [Newtonsoft.Json.JsonConverter(typeof(LenientDateTimeConverter))]
         public DateTimeOffset? Deadline { get; set; }
 
         /// <summary>
-        /// Liste von Aktivitäten, die der Bearbeiter ausführen kann.
+        ///     Liste von Aktivitäten, die der Bearbeiter ausführen kann.
         /// </summary>
         [JsonProperty(Required = Required.Default, Order = 13, PropertyName = "aufgaben")]
-
-        [System.Text.Json.Serialization.JsonPropertyName("aufgaben")]
+        [JsonPropertyName("aufgaben")]
         [ProtoMember(13)]
         public List<Aufgabe> Aufgaben { get; set; }
 
         /// <summary>
-        /// list of additional information built in a customer dependet implementation
+        ///     list of additional information built in a customer dependet implementation
         /// </summary>
         [JsonProperty(Required = Required.Default, Order = 14, PropertyName = "infos")]
-
-        [System.Text.Json.Serialization.JsonPropertyName("infos")]
+        [JsonPropertyName("infos")]
         [ProtoMember(14)]
         public List<GenericStringStringInfo> Infos { get; set; }
-
-        /// <summary>
-        /// Default constructor for json deserialization
-        /// </summary>
-        public Benachrichtigung()
-        {
-
-        }
     }
 }

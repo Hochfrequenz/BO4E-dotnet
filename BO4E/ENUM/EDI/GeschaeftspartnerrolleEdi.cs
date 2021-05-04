@@ -4,39 +4,42 @@ using BO4E.meta;
 namespace BO4E.ENUM.EDI
 {
     /// <summary>
-    /// EDIFACT values of <see cref="Geschaeftspartnerrolle"/>.
+    ///     EDIFACT values of <see cref="Geschaeftspartnerrolle" />.
     /// </summary>
     public enum GeschaeftspartnerrolleEdi
     {
         /// <summary>
-        /// Lieferant / SUpplier
+        ///     Lieferant / SUpplier
         /// </summary>
         [Mapping(Geschaeftspartnerrolle.LIEFERANT)]
         SU,
+
         /// <summary>
-        /// Messstellenbetreiber / Dienstleister
+        ///     Messstellenbetreiber / Dienstleister
         /// </summary>
         [Mapping(Geschaeftspartnerrolle.DIENSTLEISTER)]
         DEB,
+
         /// <summary>
-        /// Letztverbraucher / Kunde
+        ///     Letztverbraucher / Kunde
         /// </summary>
         [Mapping(Geschaeftspartnerrolle.KUNDE)]
         UD,
+
         /// <summary>
-        /// Absender / Marktpartner
+        ///     Absender / Marktpartner
         /// </summary>
-        [Mapping(Geschaeftspartnerrolle.MARKTPARTNER)]
-        [Obsolete("Not biunique!")]
+        [Mapping(Geschaeftspartnerrolle.MARKTPARTNER)] [Obsolete("Not biunique!")]
         MS,
+
         /// <summary>
-        /// Empfänger / Marktpartner
+        ///     Empfänger / Marktpartner
         /// </summary>
-        [Mapping(Geschaeftspartnerrolle.MARKTPARTNER)]
-        [Obsolete("Not biunique!")]
+        [Mapping(Geschaeftspartnerrolle.MARKTPARTNER)] [Obsolete("Not biunique!")]
         MR,
+
         /// <summary>
-        /// andere zugehörige Partei / Interessent
+        ///     andere zugehörige Partei / Interessent
         /// </summary>
         [Mapping(Geschaeftspartnerrolle.INTERESSENT)]
         VY

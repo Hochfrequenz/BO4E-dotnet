@@ -5,6 +5,7 @@ namespace BO4E.ENUM
     {
         /// <summary>prozentualer AufAbschlag</summary>
         RELATIV,
+
         /// <summary>Absoluter AufAbschlag</summary>
         ABSOLUT
     }

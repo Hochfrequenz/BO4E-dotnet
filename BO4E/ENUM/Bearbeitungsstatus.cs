@@ -1,32 +1,37 @@
 namespace BO4E.ENUM
 {
     /// <summary>
-    /// Gibt den Bearbeitungsstatus, z.b. einer <see cref="BO4E.BO.Benachrichtigung"/> an.
+    ///     Gibt den Bearbeitungsstatus, z.b. einer <see cref="BO4E.BO.Benachrichtigung" /> an.
     /// </summary>
     public enum Bearbeitungsstatus
     {
         /// <summary>
-        /// offen oder neu
+        ///     offen oder neu
         /// </summary>
         OFFEN,
+
         /// <summary>
-        /// in Bearbeitung
+        ///     in Bearbeitung
         /// </summary>
         IN_BEARBEITUNG,
+
         /// <summary>
-        /// abgeschlossen
+        ///     abgeschlossen
         /// </summary>
         ABGESCHLOSSEN,
+
         /// <summary>
-        /// storniert
+        ///     storniert
         /// </summary>
         STORNIERT,
+
         /// <summary>
-        /// quittiert
+        ///     quittiert
         /// </summary>
         QUITTIERT,
+
         /// <summary>
-        /// Benachrichtigung ist auf Wunsch des Users standardm‰ﬂig ausgeblendet.
+        ///     Benachrichtigung ist auf Wunsch des Users standardm√§√üig ausgeblendet.
         /// </summary>
         IGNORIERT
     }

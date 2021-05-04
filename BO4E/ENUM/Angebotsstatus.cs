@@ -2,51 +2,52 @@ using ProtoBuf;
 
 namespace BO4E.ENUM
 {
-
     /// <summary>Gibt den Status eines Angebotes an.</summary>
     public enum Angebotsstatus
     {
         /// <summary>
-        /// Konzeption
+        ///     Konzeption
         /// </summary>
         KONZEPTION,
 
         /// <summary>
-        /// unverbindlich
+        ///     unverbindlich
         /// </summary>
         UNVERBINDLICH,
 
         /// <summary>
-        /// verbindlich
+        ///     verbindlich
         /// </summary>
         VERBINDLICH,
+
         /// <summary>
-        /// beauftragt
+        ///     beauftragt
         /// </summary>
         BEAUFTRAGT,
+
         /// <summary>
-        /// ungültig
+        ///     ungÃ¼ltig
         /// </summary>
         UNGUELTIG,
 
         /// <summary>
-        /// abgelehnt
+        ///     abgelehnt
         /// </summary>
         [ProtoEnum(Name = nameof(Angebotsstatus) + "_" + nameof(ABGELEHNT))]
         ABGELEHNT,
 
         /// <summary>
-        /// nachgefasst
+        ///     nachgefasst
         /// </summary>
         NACHGEFASST,
 
         /// <summary>
-        /// ausstehend
+        ///     ausstehend
         /// </summary>
         AUSSTEHEND,
 
         /// <summary>
-        /// erledigt
+        ///     erledigt
         /// </summary>
         ERLEDIGT
     }

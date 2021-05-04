@@ -1,110 +1,132 @@
 ﻿namespace BO4E.ENUM
 {
-
     /// <summary>
-    /// Klassifizierung der Kriterien für eine regionale Eingrenzung.
+    ///     Klassifizierung der Kriterien für eine regionale Eingrenzung.
     /// </summary>
     public enum Regionskriteriumtyp
     {
         /// <summary>
-        /// offizielle Bundeslandkennziffer
+        ///     offizielle Bundeslandkennziffer
         /// </summary>
         BUNDESLANDKENNZIFFER,
+
         /// <summary>
-        /// Bundesland Name
+        ///     Bundesland Name
         /// </summary>
         BUNDESLAND_NAME,
+
         /// <summary>
-        /// offizielle Marktgebiet-Codenummer
+        ///     offizielle Marktgebiet-Codenummer
         /// </summary>
         MARKTGEBIET_NUMMER,
+
         /// <summary>
-        /// Marktgebiet Name
+        ///     Marktgebiet Name
         /// </summary>
         MARKTGEBIET_NAME,
+
         /// <summary>
-        /// offizielle Regelgebiet Nummer
+        ///     offizielle Regelgebiet Nummer
         /// </summary>
         REGELGEBIET_NUMMER,
+
         /// <summary>
-        /// Regelgebiet Name
+        ///     Regelgebiet Name
         /// </summary>
         REGELGEBIET_NAME,
+
         /// <summary>
-        /// offizielle Netzbetreiber-Codenummer
+        ///     offizielle Netzbetreiber-Codenummer
         /// </summary>
         NETZBETREIBER_NUMMER,
+
         /// <summary>
-        /// Netzbetreiber Name
+        ///     Netzbetreiber Name
         /// </summary>
         NETZBETREIBER_NAME,
+
         /// <summary>
-        /// Strom: Bilanzierungsgebietsnummer, Gas: Netzkontonummer
+        ///     Strom: Bilanzierungsgebietsnummer, Gas: Netzkontonummer
         /// </summary>
         BILANZIERUNGS_GEBIET_NUMMER,
+
         /// <summary>
-        /// offizielle Messstellenbetreiber-Codenummer
+        ///     offizielle Messstellenbetreiber-Codenummer
         /// </summary>
         MSB_NUMMER,
+
         /// <summary>
-        /// Name des MSB
+        ///     Name des MSB
         /// </summary>
         MSB_NAME,
 
         /// <summary>
-        /// offizielle Lieferanten-Codenummer eines Versorgers
+        ///     offizielle Lieferanten-Codenummer eines Versorgers
         /// </summary>
         VERSORGER_NUMMER,
+
         /// <summary>
-        /// Name eines Versorgers
+        ///     Name eines Versorgers
         /// </summary>
         VERSORGER_NAME,
+
         /// <summary>
-        /// offizielle Lieferanten-Codenummer des Grundversorgers
+        ///     offizielle Lieferanten-Codenummer des Grundversorgers
         /// </summary>
         GRUNDVERSORGER_NUMMER,
+
         /// <summary>
-        /// Name des Grundversorger
+        ///     Name des Grundversorger
         /// </summary>
         GRUNDVERSORGER_NAME,
+
         /// <summary>
-        /// Kreis
+        ///     Kreis
         /// </summary>
         KREIS_NAME,
+
         /// <summary>
-        /// offizielle Kreiskennziffer
+        ///     offizielle Kreiskennziffer
         /// </summary>
         KREISKENNZIFFER,
+
         /// <summary>
-        /// Gemeinde
+        ///     Gemeinde
         /// </summary>
         GEMEINDE_NAME,
+
         /// <summary>
-        /// offizielle Gemeindekennziffer
+        ///     offizielle Gemeindekennziffer
         /// </summary>
         GEMEINDEKENNZIFFER,
+
         /// <summary>
-        /// Postleitzahl
+        ///     Postleitzahl
         /// </summary>
         POSTLEITZAHL,
+
         /// <summary>
-        /// Ort
+        ///     Ort
         /// </summary>
         ORT,
+
         /// <summary>
-        /// Einwohnerzahl Gemeinde
+        ///     Einwohnerzahl Gemeinde
         /// </summary>
         EINWOHNERZAHL_GEMEINDE,
+
         /// <summary>
-        /// Einwohnerzahl Ort
+        ///     Einwohnerzahl Ort
         /// </summary>
         EINWOHNERZAHL_ORT,
+
         /// <summary>
-        /// km Umkreis
+        ///     km Umkreis
         /// </summary>
         KM_UMKREIS,
+
         /// <summary>
-        /// bundesweite Betrachtung
+        ///     bundesweite Betrachtung
         /// </summary>
         BUNDESWEIT
     }

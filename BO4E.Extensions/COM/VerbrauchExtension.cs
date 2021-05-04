@@ -12,8 +12,8 @@ namespace BO4E.Extensions.COM
     public static class VerbrauchExtension
     {
         /// <summary>
-        /// Merging two Verbrauch instances means adding their values whenever it's possible.
-        /// But generally the result is going to contain multiple Verbrauchs.
+        ///     Merging two Verbrauch instances means adding their values whenever it's possible.
+        ///     But generally the result is going to contain multiple Verbrauchs.
         /// </summary>
         /// <param name="v1"></param>
         /// <param name="v2"></param>
@@ -31,7 +31,8 @@ namespace BO4E.Extensions.COM
         public static HashSet<Verbrauch> Merge(this Verbrauch v1, Verbrauch v2, bool redundant, bool biased)
         {
             var result = new HashSet<Verbrauch>();
-            if (v1.Obiskennzahl == v2.Obiskennzahl && v1.Wertermittlungsverfahren == v2.Wertermittlungsverfahren && v1.Einheit == v2.Einheit)
+            if (v1.Obiskennzahl == v2.Obiskennzahl && v1.Wertermittlungsverfahren == v2.Wertermittlungsverfahren &&
+                v1.Einheit == v2.Einheit)
             {
                 if (v1.OverlapsWith(v2))
                 {
@@ -40,7 +41,7 @@ namespace BO4E.Extensions.COM
                     //Debug.Assert(v2.enddatum >= v2.startdatum);
                     var tr1 = new TimeRange(v1.Startdatum, v1.Enddatum);
                     var tr2 = new TimeRange(v2.Startdatum, v2.Enddatum);
-                    ITimeRange overlap = v1.GetIntersection(v2);
+                    var overlap = v1.GetIntersection(v2);
                     if (v1.Einheit.IsExtensive())
                     {
                         var vmerge = new Verbrauch
@@ -51,23 +52,26 @@ namespace BO4E.Extensions.COM
                         };
                         if (redundant)
                         {
-                            var exclusiveV1Wert = (decimal)(tr1.Duration.TotalSeconds - overlap.Duration.TotalSeconds) * v1.Wert / (decimal)tr1.Duration.TotalSeconds;
-                            var exclusiveV2Wert = (decimal)(tr2.Duration.TotalSeconds - overlap.Duration.TotalSeconds) * v2.Wert / (decimal)tr2.Duration.TotalSeconds;
-                            var overlapV1Wert = (decimal)overlap.Duration.TotalSeconds * v1.Wert / (decimal)tr1.Duration.TotalSeconds;
-                            var overlapV2Wert = (decimal)overlap.Duration.TotalSeconds * v2.Wert / (decimal)tr2.Duration.TotalSeconds;
+                            var exclusiveV1Wert =
+                                (decimal) (tr1.Duration.TotalSeconds - overlap.Duration.TotalSeconds) * v1.Wert /
+                                (decimal) tr1.Duration.TotalSeconds;
+                            var exclusiveV2Wert =
+                                (decimal) (tr2.Duration.TotalSeconds - overlap.Duration.TotalSeconds) * v2.Wert /
+                                (decimal) tr2.Duration.TotalSeconds;
+                            var overlapV1Wert = (decimal) overlap.Duration.TotalSeconds * v1.Wert /
+                                                (decimal) tr1.Duration.TotalSeconds;
+                            var overlapV2Wert = (decimal) overlap.Duration.TotalSeconds * v2.Wert /
+                                                (decimal) tr2.Duration.TotalSeconds;
                             if (biased)
                             {
                                 // biased ==> assume that v2 is contained in v1
                                 vmerge.Startdatum = v1.Startdatum;
                                 vmerge.Enddatum = v1.Enddatum;
-                                if (exclusiveV1Wert == 0.0M && exclusiveV2Wert == 0.0M && overlapV1Wert == overlapV2Wert)
-                                {
+                                if (exclusiveV1Wert == 0.0M && exclusiveV2Wert == 0.0M &&
+                                    overlapV1Wert == overlapV2Wert)
                                     vmerge.Wert = overlapV1Wert;
-                                }
                                 else
-                                {
                                     vmerge.Wert = v1.Wert - overlapV2Wert; // overlapV1Wert;
-                                }
                             }
                             else
                             {
@@ -82,6 +86,7 @@ namespace BO4E.Extensions.COM
                             vmerge.Enddatum = v1.Enddatum > v2.Enddatum ? v1.Enddatum : v2.Enddatum;
                             vmerge.Wert = v1.Wert + v2.Wert;
                         }
+
                         result.Add(vmerge);
                     }
                     else
@@ -106,15 +111,15 @@ namespace BO4E.Extensions.COM
                         if (redundant)
                         {
                             if (v1.Wert != v2.Wert)
-                            {
-                                throw new ArgumentException($"Data cannot be redundant if values ({v1.Wert}{v1.Einheit} vs. {v2.Wert}{v2.Einheit}) don't match for interval [{vmerge2.Startdatum}, {vmerge2.Enddatum}).");
-                            }
+                                throw new ArgumentException(
+                                    $"Data cannot be redundant if values ({v1.Wert}{v1.Einheit} vs. {v2.Wert}{v2.Einheit}) don't match for interval [{vmerge2.Startdatum}, {vmerge2.Enddatum}).");
                             vmerge2.Wert = v1.Wert;
                         }
                         else
                         {
                             vmerge2.Wert = v1.Wert + v2.Wert;
                         }
+
                         var vmerge3 = new Verbrauch
                         {
                             Obiskennzahl = v1.Obiskennzahl,
@@ -171,12 +176,14 @@ namespace BO4E.Extensions.COM
                 result.Add(v1);
                 result.Add(v2);
             }
-            result.RemoveWhere(v => v.Einheit.IsIntensive() && new TimeRange(v.Startdatum, v.Enddatum).Duration.TotalMilliseconds == 0);
+
+            result.RemoveWhere(v =>
+                v.Einheit.IsIntensive() && new TimeRange(v.Startdatum, v.Enddatum).Duration.TotalMilliseconds == 0);
             return result;
         }
 
         /// <summary>
-        /// returns time range from <see cref="Verbrauch.Startdatum"/>, <see cref="Verbrauch.Enddatum"/>
+        ///     returns time range from <see cref="Verbrauch.Startdatum" />, <see cref="Verbrauch.Enddatum" />
         /// </summary>
         /// <param name="v">Verbrauch</param>
         /// <returns></returns>
@@ -192,16 +199,16 @@ namespace BO4E.Extensions.COM
         }
 
         /// <summary>
-        /// De-tangles a list of overlapping Verbrauch entries where entries can be subsets of other entries.
+        ///     De-tangles a list of overlapping Verbrauch entries where entries can be subsets of other entries.
         /// </summary>
         /// <example>
-        /// [---v1---)
-        /// [-----v2------)
-        /// [---------v3---------)
-        /// is transformed into
-        /// [--v1---)
-        /// ........[-v2--)
-        /// ..............[--v3--)
+        ///     [---v1---)
+        ///     [-----v2------)
+        ///     [---------v3---------)
+        ///     is transformed into
+        ///     [--v1---)
+        ///     ........[-v2--)
+        ///     ..............[--v3--)
         /// </example>
         /// <param name="input"></param>
         /// <returns></returns>
@@ -209,12 +216,13 @@ namespace BO4E.Extensions.COM
         {
             //var filteredInput = KeepShortestSlices(input);
             var resultSet = new HashSet<Verbrauch>();
-            var groups = input.OrderBy(v => (v.Startdatum, v.Wertermittlungsverfahren, v.Obiskennzahl, v.Einheit)).GroupBy(v => new Tuple<Wertermittlungsverfahren, string, Mengeneinheit>
-              (
-                  v.Wertermittlungsverfahren,
-                  v.Obiskennzahl,
-                  v.Einheit
-              ));
+            var groups = input.OrderBy(v => (v.Startdatum, v.Wertermittlungsverfahren, v.Obiskennzahl, v.Einheit))
+                .GroupBy(v => new Tuple<Wertermittlungsverfahren, string, Mengeneinheit>
+                (
+                    v.Wertermittlungsverfahren,
+                    v.Obiskennzahl,
+                    v.Einheit
+                ));
             foreach (var vGroup in groups)
             {
                 var subResult = new HashSet<Verbrauch>();
@@ -222,7 +230,8 @@ namespace BO4E.Extensions.COM
                 // find pairs (x,y) where x.end == y.start:
                 // |----x----|--------y--------|
                 //var adjacentVerbrauchs = from x in vGroup join y in vGroup on x.enddatum equals y.startdatum select new { x, y };
-                var adjacentVerbrauchs = from x in vGroup join y in vGroup on x.Enddatum equals y.Startdatum select new { x, y };
+                var adjacentVerbrauchs =
+                    from x in vGroup join y in vGroup on x.Enddatum equals y.Startdatum select new {x, y};
                 foreach (var av in adjacentVerbrauchs)
                 {
                     subResult.Add(av.x);
@@ -233,13 +242,14 @@ namespace BO4E.Extensions.COM
                 // |-------------z-------------|
                 // ==> delete z from result where z.start == x.start and z.end == y.end
                 //var fullyRedundantVerbrauchs = from av in adjacentVerbrauchs join z in vGroup on new { av.x.startdatum, av.y.enddatum } equals new { z.startdatum, z.enddatum } select new { av, z };
-                var fullyRedundantVerbrauchs = from av in adjacentVerbrauchs join z in vGroup on new { av.x.Startdatum, av.y.Enddatum } equals new { z.Startdatum, z.Enddatum } select new { av, z };
+                var fullyRedundantVerbrauchs = from av in adjacentVerbrauchs
+                    join z in vGroup on new {av.x.Startdatum, av.y.Enddatum} equals new {z.Startdatum, z.Enddatum}
+                    select new {av, z};
                 foreach (var frv in fullyRedundantVerbrauchs)
                 {
                     if (frv.av.x.Wert + frv.av.y.Wert != frv.z.Wert)
-                    {
-                        throw new ArgumentException($"Inconsistent data detected: {JsonConvert.SerializeObject(frv.av.x)} + {JsonConvert.SerializeObject(frv.av.y)} ≠ {JsonConvert.SerializeObject(frv.z)}");
-                    }
+                        throw new ArgumentException(
+                            $"Inconsistent data detected: {JsonConvert.SerializeObject(frv.av.x)} + {JsonConvert.SerializeObject(frv.av.y)} ≠ {JsonConvert.SerializeObject(frv.z)}");
                     subResult.Remove(frv.z);
                 }
 
@@ -260,7 +270,7 @@ namespace BO4E.Extensions.COM
                     if (ys.Any())
                     {
                         var tps = new TimePeriodSubtractor<TimeRange>();
-                        var source = new TimePeriodCollection { z.GetTimeRange() };
+                        var source = new TimePeriodCollection {z.GetTimeRange()};
                         var subtract = new TimePeriodCollection();
                         subtract.AddAll(ys.Select(y => y.GetTimeRange()));
                         var subtractionResult = tps.SubtractPeriods(source, subtract);
@@ -277,25 +287,26 @@ namespace BO4E.Extensions.COM
                             };
                             xs.Add(v);
                         }
+
                         var totalXWert = z.Wert - ys.Select(y => y.Wert).Sum();
                         var totalXDuration = xs.Select(x => x.GetDuration().TotalSeconds).Sum();
                         foreach (var x in xs)
-                        {
-                            x.Wert = totalXWert * (decimal)x.GetDuration().TotalSeconds / (decimal)totalXDuration;
-                        }
+                            x.Wert = totalXWert * (decimal) x.GetDuration().TotalSeconds / (decimal) totalXDuration;
                         subResult.Remove(z);
                         subResult.UnionWith(xs);
                     }
                 }
+
                 resultSet.UnionWith(subResult);
             }
+
             var result = new List<Verbrauch>(resultSet);
             result.Sort(new VerbrauchDateTimeComparer());
             return result;
         }
 
         /// <summary>
-        /// convert to another unit if possible
+        ///     convert to another unit if possible
         /// </summary>
         /// <param name="v">Verbrauch</param>
         /// <param name="mengeneinheit">Mengeneinheit</param>
@@ -309,11 +320,14 @@ namespace BO4E.Extensions.COM
         }
 
         /// <summary>
-        /// Test if the time ranges [startdatum, enddatum) overlap.
+        ///     Test if the time ranges [startdatum, enddatum) overlap.
         /// </summary>
         /// <param name="v1"></param>
         /// <param name="v2"></param>
-        /// <returns>true iff [<paramref name="v1"/>.startdatum, <paramref name="v1"/>.enddatum) and [<paramref name="v2"/>.startdatum, <paramref name="v2"/>.enddatum) overlap</returns>
+        /// <returns>
+        ///     true iff [<paramref name="v1" />.startdatum, <paramref name="v1" />.enddatum) and [<paramref name="v2" />
+        ///     .startdatum, <paramref name="v2" />.enddatum) overlap
+        /// </returns>
         public static bool OverlapsWith(this Verbrauch v1, Verbrauch v2)
         {
             return v1.OverlapsWith(new TimeRange(v2.Startdatum, v2.Enddatum, true));
@@ -340,21 +354,16 @@ namespace BO4E.Extensions.COM
         }
 
         /// <summary>
-        /// Allows to sort lists of <see cref="Verbrauch"/> by <see cref="Verbrauch.Startdatum"/>, <see cref="Verbrauch.Enddatum"/> ascending
+        ///     Allows to sort lists of <see cref="Verbrauch" /> by <see cref="Verbrauch.Startdatum" />,
+        ///     <see cref="Verbrauch.Enddatum" /> ascending
         /// </summary>
         public class VerbrauchDateTimeComparer : IComparer<Verbrauch>
         {
             int IComparer<Verbrauch>.Compare(Verbrauch x, Verbrauch y)
             {
-                if (x.Startdatum != y.Startdatum)
-                {
-                    return DateTimeOffset.Compare(x.Startdatum, y.Startdatum);
-                }
+                if (x.Startdatum != y.Startdatum) return DateTimeOffset.Compare(x.Startdatum, y.Startdatum);
 
-                if (x.Enddatum != y.Enddatum)
-                {
-                    return DateTimeOffset.Compare(x.Enddatum, y.Enddatum);
-                }
+                if (x.Enddatum != y.Enddatum) return DateTimeOffset.Compare(x.Enddatum, y.Enddatum);
                 return 0;
             }
         }

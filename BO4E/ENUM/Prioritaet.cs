@@ -1,32 +1,32 @@
 namespace BO4E.ENUM
 {
     /// <summary>
-    /// Gibt die Priorität, z.b. einer <see cref="BO.Benachrichtigung"/> an.
+    ///     Gibt die Priorität, z.b. einer <see cref="BO.Benachrichtigung" /> an.
     /// </summary>
     public enum Prioritaet
     {
         /// <summary>
-        /// sehr niedrig Priorität
+        ///     sehr niedrig Priorität
         /// </summary>
         SEHR_NIEDRIG,
 
         /// <summary>
-        /// niedrige Priorität
+        ///     niedrige Priorität
         /// </summary>
         NIEDRIG,
 
         /// <summary>
-        /// normale Priorität
+        ///     normale Priorität
         /// </summary>
         NORMAL,
 
         /// <summary>
-        /// hohe Priorität
+        ///     hohe Priorität
         /// </summary>
         HOCH,
 
         /// <summary>
-        /// sehr hohe Priorität
+        ///     sehr hohe Priorität
         /// </summary>
         SEHR_HOCH
     }

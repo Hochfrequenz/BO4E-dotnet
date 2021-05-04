@@ -1,6 +1,5 @@
 namespace BO4E.ENUM
 {
-
     /// <summary>Übersicht der verschiedenen Gültigkeiten zur Umsetzung von Positiv- bzw. Negativlisten.</summary>
     public enum Gueltigkeitstyp
     {

@@ -5,8 +5,10 @@ namespace BO4E.ENUM
     {
         /// <summary>Arbeitleistungtagesparameterabhmalo</summary>
         ARBEITLEISTUNGTAGESPARAMETERABHMALO,
+
         /// <summary>Veranschlagtejahresmenge</summary>
         VERANSCHLAGTEJAHRESMENGE,
+
         /// <summary>TUMKundenwert</summary>
         TUMKUNDENWERT
     }

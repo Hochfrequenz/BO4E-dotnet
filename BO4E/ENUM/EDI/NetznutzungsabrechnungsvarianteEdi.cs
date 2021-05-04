@@ -3,7 +3,7 @@ using BO4E.meta;
 namespace BO4E.ENUM.EDI
 {
     /// <summary>
-    /// EDIFACT values of <see cref="Netznutzungsabrechnungsvariante"/>
+    ///     EDIFACT values of <see cref="Netznutzungsabrechnungsvariante" />
     /// </summary>
     /// <author>Hochfrequenz Unternehmensberatung GmbH</author>
     public enum NetznutzungsabrechnungsvarianteEdi

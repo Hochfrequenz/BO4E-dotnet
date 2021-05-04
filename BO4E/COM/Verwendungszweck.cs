@@ -1,38 +1,32 @@
-﻿using BO4E.meta;
-
+﻿using System.Collections.Generic;
+using System.Text.Json.Serialization;
+using BO4E.meta;
 using Newtonsoft.Json;
-
 using ProtoBuf;
-
-using System.Collections.Generic;
 
 namespace BO4E.COM
 {
-
     /// <summary>
-    /// Marktrolle
+    ///     Marktrolle
     /// </summary>
     [ProtoContract]
     [NonOfficial(NonOfficialCategory.REGULATORY_REQUIREMENTS)]
     public class Verwendungszweck : COM
     {
         /// <summary>
-        /// rollencodenummer von Marktrolle
+        ///     rollencodenummer von Marktrolle
         /// </summary>
         [JsonProperty(PropertyName = "marktrolle", Required = Required.Always)]
-
-        [System.Text.Json.Serialization.JsonPropertyName("marktrolle")]
+        [JsonPropertyName("marktrolle")]
         [ProtoMember(3)]
-        public BO4E.ENUM.Marktrolle Marktrolle { get; set; }
+        public ENUM.Marktrolle Marktrolle { get; set; }
 
         /// <summary>
-        /// code von Marktrolle
+        ///     code von Marktrolle
         /// </summary>
         [JsonProperty(PropertyName = "zweck", Required = Required.Default)]
-
-        [System.Text.Json.Serialization.JsonPropertyName("zweck")]
+        [JsonPropertyName("zweck")]
         [ProtoMember(4)]
-        public List<BO4E.ENUM.Verwendungszweck> Zweck { get; set; }
-
+        public List<ENUM.Verwendungszweck> Zweck { get; set; }
     }
 }

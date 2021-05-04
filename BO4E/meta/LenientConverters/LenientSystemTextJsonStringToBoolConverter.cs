@@ -1,22 +1,19 @@
-﻿
-
-using System;
+﻿using System;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
 namespace BO4E.meta.LenientConverters
 {
     /// <summary>
-    /// The lenient StringToBoolConverter allows for bool or bool? objects to be serialized as strings
+    ///     The lenient StringToBoolConverter allows for bool or bool? objects to be serialized as strings
     /// </summary>
     public class LenientSystemTextJsonStringToBoolConverter : JsonConverter<bool>
     {
         /// <summary>
-        /// 
         /// </summary>
         public override bool HandleNull => true;
+
         /// <summary>
-        /// 
         /// </summary>
         /// <param name="reader"></param>
         /// <param name="typeToConvert"></param>
@@ -32,14 +29,14 @@ namespace BO4E.meta.LenientConverters
                     return true;
                 case JsonTokenType.False:
                     return false;
-                case JsonTokenType.String when bool.TryParse(reader.GetString(), out bool boolValue):
+                case JsonTokenType.String when bool.TryParse(reader.GetString(), out var boolValue):
                     return boolValue;
                 default:
                     return false;
             }
         }
+
         /// <summary>
-        /// 
         /// </summary>
         /// <param name="writer"></param>
         /// <param name="value"></param>

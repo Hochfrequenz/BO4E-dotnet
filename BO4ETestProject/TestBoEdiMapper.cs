@@ -1,12 +1,12 @@
-﻿using BO4E;
+﻿using System;
+using System.Collections.Generic;
+using System.IO;
+using BO4E;
 using BO4E.BO;
 using JsonDiffPatchDotNet;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
-using System;
-using System.Collections.Generic;
-using System.IO;
 
 namespace TestBO4E
 {
@@ -94,7 +94,7 @@ namespace TestBO4E
                 }
                 catch (ArgumentException)
                 {
-                    bo = BoMapper.MapObject(json["input"]["boTyp"].ToString(), (JObject)json["input"]);
+                    bo = BoMapper.MapObject(json["input"]["boTyp"].ToString(), (JObject) json["input"]);
                 }
 
                 var result = BoEdiMapper.ReplaceWithEdiValues(bo);
@@ -104,10 +104,7 @@ namespace TestBO4E
                 var right = JsonHelper.RemoveEmptyChildren(result);
                 var patch = jdp.Diff(left, right);
                 var additionalMessage = string.Empty;
-                if (patch != null)
-                {
-                    additionalMessage = $";\r\n Diff: {patch}";
-                }
+                if (patch != null) additionalMessage = $";\r\n Diff: {patch}";
 
                 try
                 {

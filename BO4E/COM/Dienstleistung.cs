@@ -1,7 +1,6 @@
+using System.Text.Json.Serialization;
 using BO4E.ENUM;
-
 using Newtonsoft.Json;
-
 using ProtoBuf;
 
 namespace BO4E.COM
@@ -12,12 +11,13 @@ namespace BO4E.COM
     {
         /// <summary>Eindeutige Nummer der Dienstleistung. Details <see cref="ENUM.Dienstleistungstyp" /></summary>
         [JsonProperty(PropertyName = "dienstleistungstyp", Required = Required.Always)]
-        [System.Text.Json.Serialization.JsonPropertyName("dienstleistungstyp")]
+        [JsonPropertyName("dienstleistungstyp")]
         [ProtoMember(3)]
         public Dienstleistungstyp Dienstleistungstyp { get; set; }
+
         /// <summary>Bezeichnung der Dienstleistung.</summary>
         [JsonProperty(PropertyName = "bezeichnung", Required = Required.Always)]
-        [System.Text.Json.Serialization.JsonPropertyName("bezeichnung")]
+        [JsonPropertyName("bezeichnung")]
         [ProtoMember(4)]
         public string Bezeichnung { get; set; }
     }

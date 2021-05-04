@@ -4,34 +4,33 @@ using BO4E.meta;
 namespace BO4E.ENUM.EDI
 {
     /// <summary>
-    /// EDIFACT values of <see cref="Kontaktart"/>
+    ///     EDIFACT values of <see cref="Kontaktart" />
     /// </summary>
     public enum KontaktartEdi
     {
         /// <summary>
-        /// Email
+        ///     Email
         /// </summary>
-        [Mapping(Kontaktart.E_MAIL)]
-        EM,
+        [Mapping(Kontaktart.E_MAIL)] EM,
+
         /// <summary>
-        /// Fax
+        ///     Fax
         /// </summary>
-        [Mapping(Kontaktart.FAX)]
-        FX,
+        [Mapping(Kontaktart.FAX)] FX,
+
         /// <summary>
-        /// Telefon
+        ///     Telefon
         /// </summary>
-        [Mapping(Kontaktart.TELEFONAT)]
-        TE,
+        [Mapping(Kontaktart.TELEFONAT)] TE,
+
         /// <summary>
-        /// weiteres Telefon
+        ///     weiteres Telefon
         /// </summary>
-        [Obsolete("No Mapping defined yet!")]
-        AJ,
+        [Obsolete("No Mapping defined yet!")] AJ,
+
         /// <summary>
-        /// Handy
+        ///     Handy
         /// </summary>
-        [Mapping(Kontaktart.SMS)]
-        AL
+        [Mapping(Kontaktart.SMS)] AL
     }
 }

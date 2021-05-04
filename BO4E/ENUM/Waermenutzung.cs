@@ -1,13 +1,14 @@
 namespace BO4E.ENUM
 {
-
-    /// <summary>Stromverbrauchsart/Wärmenutzung Marktlokation</summary>
+    /// <summary>Stromverbrauchsart/WÃ¤rmenutzung Marktlokation</summary>
     public enum Waermenutzung
     {
         /// <summary>Z56: Speicherheizung</summary>
         SPEICHERHEIZUNG,
-        /// <summary>Z57: Wärmepumpe</summary>
+
+        /// <summary>Z57: WÃ¤rmepumpe</summary>
         WAERMEPUMPE,
+
         ///Z61: Direktheizung
         DIREKTHEIZUNG
     }

@@ -1,8 +1,6 @@
-using Newtonsoft.Json;
-
-using ProtoBuf;
-
 using System;
+using Newtonsoft.Json;
+using ProtoBuf;
 
 namespace BO4E.ENUM
 {
@@ -25,12 +23,10 @@ namespace BO4E.ENUM
         /// <summary>Low Caloric Gas</summary>
         L_GAS = 2,
 
-        /// <inheritdoc cref="H_GAS"/>
-        [JsonIgnore]
-        HGAS = 1, // do not remove, they're needed as workaround for bad sap values
+        /// <inheritdoc cref="H_GAS" />
+        [JsonIgnore] HGAS = 1, // do not remove, they're needed as workaround for bad sap values
 
-        /// <inheritdoc cref="L_GAS"/>
-        [JsonIgnore]
-        LGAS = 2// do not remove, they're needed as workaround for bad sap values
+        /// <inheritdoc cref="L_GAS" />
+        [JsonIgnore] LGAS = 2 // do not remove, they're needed as workaround for bad sap values
     }
 }

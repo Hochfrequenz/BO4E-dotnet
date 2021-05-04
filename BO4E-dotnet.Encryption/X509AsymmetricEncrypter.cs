@@ -19,27 +19,34 @@ namespace BO4E.Encryption
         private AsymmetricKeyParameter _privateKey;
 
         /// <summary>
-        /// Provide the constructor with an X509 certificate to use as encrypter.
+        ///     Provide the constructor with an X509 certificate to use as encrypter.
         /// </summary>
         /// <param name="cert">X509 certificate must contain the public key.</param>
         public X509AsymmetricEncrypter(X509Certificate2 cert)
         {
-            _publicCerts = new HashSet<X509Certificate2> { cert };
+            _publicCerts = new HashSet<X509Certificate2> {cert};
             _privateKey = null;
         }
 
         /// <summary>
-        /// Provide the constructor a set of X509 certificates to use for encryption
+        ///     Provide the constructor a set of X509 certificates to use for encryption
         /// </summary>
         /// <param name="certs">Collection of certificates</param>
         public X509AsymmetricEncrypter(ISet<X509Certificate2> certs)
         {
             _publicCerts = new HashSet<X509Certificate2>();
-            foreach (var c in certs)
-            {
-                _publicCerts.Add(c);
-            }
+            foreach (var c in certs) _publicCerts.Add(c);
             _privateKey = null;
+        }
+
+        /// <summary>
+        ///     Provide the constructor with an AsymmetricKeyParameter to use as decrypter.
+        /// </summary>
+        /// <param name="kp">AsymmetricKeyParamer, must contain the RSA private key.</param>
+        public X509AsymmetricEncrypter(AsymmetricKeyParameter kp)
+        {
+            _publicCerts = null;
+            _privateKey = kp;
         }
 
         private List<string> GetPublicKeysBase64()
@@ -50,21 +57,13 @@ namespace BO4E.Encryption
                 // https://stackoverflow.com/a/4740292
                 var builder = new StringBuilder();
                 builder.AppendLine("-----BEGIN CERTIFICATE-----");
-                builder.AppendLine(Convert.ToBase64String(cert.Export(X509ContentType.Cert), Base64FormattingOptions.InsertLineBreaks));
+                builder.AppendLine(Convert.ToBase64String(cert.Export(X509ContentType.Cert),
+                    Base64FormattingOptions.InsertLineBreaks));
                 builder.AppendLine("-----END CERTIFICATE-----");
                 result.Add(builder.ToString());
             }
-            return result;
-        }
 
-        /// <summary>
-        /// Provide the constructor with an AsymmetricKeyParameter to use as decrypter.
-        /// </summary>
-        /// <param name="kp">AsymmetricKeyParamer, must contain the RSA private key.</param>
-        public X509AsymmetricEncrypter(AsymmetricKeyParameter kp)
-        {
-            _publicCerts = null;
-            _privateKey = kp;
+            return result;
         }
 
         public string Encrypt(string plainText)
@@ -113,39 +112,33 @@ namespace BO4E.Encryption
                 catch (CmsException) when (index != recipientsStore.Count - 1)
                 {
                 }
+
                 index++;
             }
+
             return Encoding.UTF8.GetString(plainBytes);
         }
 
         public static AsymmetricCipherKeyPair PrivateBase64KeyToACKP(string pemKeyBase64)
         {
             if (!pemKeyBase64.StartsWith("-----"))
-            {
                 pemKeyBase64 = "-----BEGIN RSA PRIVATE KEY-----\n" + pemKeyBase64 + "\n-----END RSA PRIVATE KEY-----";
-            }
             using (var reader = new StringReader(pemKeyBase64))
             {
-                return (AsymmetricCipherKeyPair)new PemReader(reader).ReadObject();
+                return (AsymmetricCipherKeyPair) new PemReader(reader).ReadObject();
             }
         }
 
         public override BusinessObject Decrypt(EncryptedObject encryptedObject)
         {
-            if (!(encryptedObject is EncryptedObjectPKCS7 eo))
-            {
-                return null;
-            }
+            if (!(encryptedObject is EncryptedObjectPKCS7 eo)) return null;
             var plainString = Decrypt(eo.CipherText);
             return JsonConvert.DeserializeObject<BusinessObject>(plainString, encryptionSerializerSettings);
         }
 
         public override T Decrypt<T>(EncryptedObject encryptedObject)
         {
-            if (!(encryptedObject is EncryptedObjectPKCS7 eo))
-            {
-                return null;
-            }
+            if (!(encryptedObject is EncryptedObjectPKCS7 eo)) return null;
             var plainString = Decrypt(eo.CipherText);
             return JsonConvert.DeserializeObject<T>(plainString, encryptionSerializerSettings);
         }

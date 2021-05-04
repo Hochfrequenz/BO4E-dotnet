@@ -1,22 +1,21 @@
-﻿using BO4E.BO;
-using BO4E.COM;
-
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Text.Encodings.Web;
 using System.Text.Json;
 using System.Text.Json.Serialization;
+using BO4E.BO;
+using BO4E.COM;
 
 namespace BO4E.meta.LenientConverters
 {
     /// <summary>
-    /// Extensions to simplify the usage of the Lenient parser using <see cref="System.Text.Json.JsonSerializer"/> (.NET5)
+    ///     Extensions to simplify the usage of the Lenient parser using <see cref="System.Text.Json.JsonSerializer" /> (.NET5)
     /// </summary>
-    /// <seealso cref="LenientParsingExtensionsNewtonsoft"/>
+    /// <seealso cref="LenientParsingExtensionsNewtonsoft" />
     public static class LenientSystemTextJsonParsingExtensions
     {
         /// <summary>
-        /// <inheritdoc cref="GetJsonSerializerOptions(LenientParsing, HashSet{string})"/>
+        ///     <inheritdoc cref="GetJsonSerializerOptions(LenientParsing, HashSet{string})" />
         /// </summary>
         /// <param name="lenient"></param>
         /// <returns></returns>
@@ -26,7 +25,7 @@ namespace BO4E.meta.LenientConverters
         }
 
         /// <summary>
-        /// Generates JsonSerializerSettings (.NET5) for given lenient parsing setting
+        ///     Generates JsonSerializerSettings (.NET5) for given lenient parsing setting
         /// </summary>
         /// <param name="lenient"></param>
         /// <param name="userPropertiesWhiteList"></param>
@@ -49,9 +48,7 @@ namespace BO4E.meta.LenientConverters
             settings.Converters.Add(new JsonStringEnumConverter());
 
             foreach (LenientParsing lp in Enum.GetValues(typeof(LenientParsing)))
-            {
                 if (lenient.HasFlag(lp))
-                {
                     // ReSharper disable once SwitchStatementMissingSomeEnumCasesNoDefault
                     switch (lp)
                     {
@@ -88,14 +85,12 @@ namespace BO4E.meta.LenientConverters
                         case LenientParsing.STRING_TO_INT:
                             settings.Converters.Add(new LenientSystemTextJsonStringToIntConverter());
                             break;
-                            // case LenientParsing.EmptyLists:
-                            // converters.Add(new LenientRequiredListConverter());
-                            // break;
+                        // case LenientParsing.EmptyLists:
+                        // converters.Add(new LenientRequiredListConverter());
+                        // break;
 
-                            // no default case because NONE and MOST_LENIENT do not come up with more converters
+                        // no default case because NONE and MOST_LENIENT do not come up with more converters
                     }
-                }
-            }
             //IContractResolver contractResolver;
             //if (userPropertiesWhiteList.Count > 0)
             //{

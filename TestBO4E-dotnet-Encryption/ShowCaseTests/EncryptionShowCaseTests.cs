@@ -1,12 +1,14 @@
 ﻿using System;
 using System.Diagnostics;
+using System.Security.Cryptography;
 using BO4E.BO;
 using BO4E.COM;
-using BO4E.ENUM;
 using BO4E.Encryption;
+using BO4E.ENUM;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
+using Sodium;
 
 namespace TestBO4E.Encryption.ShowCaseTests
 {
@@ -33,14 +35,16 @@ namespace TestBO4E.Encryption.ShowCaseTests
         [TestMethod]
         public void ShowCaseTestSymmetric()
         {
-            Assert.IsTrue(maLo.IsValid()); // as the encryption relies on serializing the BO invalid BOs cannot be encrypted.
+            Assert.IsTrue(maLo
+                .IsValid()); // as the encryption relies on serializing the BO invalid BOs cannot be encrypted.
 
-            var sharedSecret = Sodium.SecretBox.GenerateKey();
+            var sharedSecret = SecretBox.GenerateKey();
             EncryptedObject encryptedBo;
             using (var encrypter = new SymmetricEncrypter(sharedSecret))
             {
                 encryptedBo = encrypter.Encrypt(maLo, "test case");
             }
+
             Debug.Write(JsonConvert.SerializeObject(encryptedBo, new StringEnumConverter()));
             //{
             //  "boTyp": "ENCRYPTEDOBJECTAEAD",
@@ -56,18 +60,21 @@ namespace TestBO4E.Encryption.ShowCaseTests
             {
                 decryptedMaLo = decrypter.Decrypt<Marktlokation>(encryptedBo);
             }
+
             Assert.AreEqual(maLo.Lokationsadresse, decryptedMaLo.Lokationsadresse);
         }
 
         [TestMethod]
         public void ShowCaseTestAsymmetric()
         {
-            Assert.IsTrue(maLo.IsValid()); // as the encryption relies on serializing the BO invalid BOs cannot be encrypted.
+            Assert.IsTrue(maLo
+                .IsValid()); // as the encryption relies on serializing the BO invalid BOs cannot be encrypted.
 
-            var aliceKeyPair = Sodium.PublicKeyBox.GenerateKeyPair();
-            var bobKeyPair = Sodium.PublicKeyBox.GenerateKeyPair();
+            var aliceKeyPair = PublicKeyBox.GenerateKeyPair();
+            var bobKeyPair = PublicKeyBox.GenerateKeyPair();
 
-            Debug.WriteLine($"Bob: Hey @Alice, this is my public key: {Convert.ToBase64String(bobKeyPair.PublicKey).Substring(10)}...");
+            Debug.WriteLine(
+                $"Bob: Hey @Alice, this is my public key: {Convert.ToBase64String(bobKeyPair.PublicKey).Substring(10)}...");
             // Bob: Hey @Alice, this is my public key: HsGsYigFqgDouUvUW3uMYpy54DqsAxXxQ=...
 
             EncryptedObject encryptedBo;
@@ -75,6 +82,7 @@ namespace TestBO4E.Encryption.ShowCaseTests
             {
                 encryptedBo = aliceEncrypter.Encrypt(maLo, Convert.ToBase64String(bobKeyPair.PublicKey));
             }
+
             Debug.WriteLine("Alice: Hey @Bob: This is my signed and encrypted BusinssObject: ");
             Debug.WriteLine(JsonConvert.SerializeObject(encryptedBo, new StringEnumConverter()));
             //{
@@ -86,35 +94,42 @@ namespace TestBO4E.Encryption.ShowCaseTests
             //  "cipherText": "VIYM7nZU9yTSj2tT...zWUuGbp4HphTlBlzgK"
             //}
             Debug.WriteLine("Alice: And by the way, I hope you verified my fingerprint or the key itself.");
-            Assert.AreEqual(Convert.ToBase64String(aliceKeyPair.PublicKey), ((EncryptedObjectPublicKeyBox)encryptedBo).PublicKey, "Bob: I did, otherwise this would fail");
+            Assert.AreEqual(Convert.ToBase64String(aliceKeyPair.PublicKey),
+                ((EncryptedObjectPublicKeyBox) encryptedBo).PublicKey, "Bob: I did, otherwise this would fail");
 
             Marktlokation decryptedMaLo;
             using (var bobsDecrypter = new AsymmetricEncrypter(bobKeyPair.PrivateKey))
             {
                 var decryptedBo = bobsDecrypter.Decrypt(encryptedBo); // In case Bob had no idea what alice sent him...
                 Assert.IsInstanceOfType(decryptedBo, typeof(Marktlokation)); // ...now he knows.
-                decryptedMaLo = bobsDecrypter.Decrypt<Marktlokation>(encryptedBo); // Bob knows at compile time it's a MaLo.
+                decryptedMaLo =
+                    bobsDecrypter.Decrypt<Marktlokation>(encryptedBo); // Bob knows at compile time it's a MaLo.
             }
+
             Assert.AreEqual(maLo, decryptedMaLo);
 
-            var eveKeyPair = Sodium.PublicKeyBox.GenerateKeyPair();
+            var eveKeyPair = PublicKeyBox.GenerateKeyPair();
             // Eve entered the chat
             EncryptedObjectPublicKeyBox manipulatedBo;
             using (var eveEncrypter = new AsymmetricEncrypter(eveKeyPair))
             {
                 manipulatedBo = eveEncrypter.Encrypt(maLo, Convert.ToBase64String(bobKeyPair.PublicKey));
             }
-            manipulatedBo.PublicKey = Convert.ToBase64String(aliceKeyPair.PublicKey); // Eve: Never will Bob know this message is not from Alice!
+
+            manipulatedBo.PublicKey =
+                Convert.ToBase64String(aliceKeyPair
+                    .PublicKey); // Eve: Never will Bob know this message is not from Alice!
             Debug.WriteLine("Eve: Hey @Bob, Alice asked me to give you this BO");
 
-            Assert.AreEqual(Convert.ToBase64String(aliceKeyPair.PublicKey), manipulatedBo.PublicKey, "Bob: Hrm, seems like it's from Alice, indeed...");
+            Assert.AreEqual(Convert.ToBase64String(aliceKeyPair.PublicKey), manipulatedBo.PublicKey,
+                "Bob: Hrm, seems like it's from Alice, indeed...");
             using (var bobsDecrypter = new AsymmetricEncrypter(bobKeyPair.PrivateKey))
             {
                 try
                 {
                     bobsDecrypter.Decrypt(manipulatedBo);
                 }
-                catch (System.Security.Cryptography.CryptographicException ce)
+                catch (CryptographicException ce)
                 {
                     Debug.WriteLine($"Bob: @Eve: You tried to fool me! {ce.Message}");
                     // As long as Bob checks that the public key stored in the Encrypted Business Object matches the public key of the expected sender he'll be fine.

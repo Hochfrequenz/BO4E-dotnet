@@ -14,23 +14,29 @@ namespace BO4E.Extensions.BusinessObjects.Energiemenge
     public static partial class EnergiemengeExtension
     {
         /// <summary>
-        /// Generate a <see cref="CompletenessReport"/> for the given configuration. Same as <see cref="GetCompletenessReport(BO.Energiemenge, TimeRange, Wertermittlungsverfahren, string, Mengeneinheit)"/> but with all parameters in a configuration container instead of loose arguments.
+        ///     Generate a <see cref="CompletenessReport" /> for the given configuration. Same as
+        ///     <see cref="GetCompletenessReport(BO.Energiemenge, TimeRange, Wertermittlungsverfahren, string, Mengeneinheit)" />
+        ///     but with all parameters in a configuration container instead of loose arguments.
         /// </summary>
         /// <param name="em">Energiemenge</param>
         /// <param name="config">configuration container</param>
         /// <returns></returns>
-        public static CompletenessReport GetCompletenessReport(this BO4E.BO.Energiemenge em, CompletenessReport.CompletenessReportConfiguration config)
+        public static CompletenessReport GetCompletenessReport(this BO.Energiemenge em,
+            CompletenessReport.CompletenessReportConfiguration config)
         {
-            return em.GetCompletenessReport(new TimeRange(config.ReferenceTimeFrame.Startdatum.Value.UtcDateTime, config.ReferenceTimeFrame.Enddatum.Value.UtcDateTime), config.Wertermittlungsverfahren, config.Obis, config.Einheit);
+            return em.GetCompletenessReport(
+                new TimeRange(config.ReferenceTimeFrame.Startdatum.Value.UtcDateTime,
+                    config.ReferenceTimeFrame.Enddatum.Value.UtcDateTime), config.Wertermittlungsverfahren, config.Obis,
+                config.Einheit);
         }
 
         /// <summary>
-        /// Generate a <see cref="CompletenessReport"/> for the given refenrence time frame <paramref name="reference"/>
+        ///     Generate a <see cref="CompletenessReport" /> for the given refenrence time frame <paramref name="reference" />
         /// </summary>
         /// <param name="em">Energiemenge</param>
         /// <param name="reference">reference time frame</param>
         /// <returns></returns>
-        public static CompletenessReport GetCompletenessReport(this BO4E.BO.Energiemenge em, ITimeRange reference)
+        public static CompletenessReport GetCompletenessReport(this BO.Energiemenge em, ITimeRange reference)
         {
             var combis = em.GetWevObisMeCombinations();
             if (combis.Count != 1)
@@ -44,9 +50,11 @@ namespace BO4E.Extensions.BusinessObjects.Energiemenge
                 }
                 else
                 {
-                    errorMessage = $"Cannot use autoconfigured method because there are {combis.Count}>1 distinct (wertermittlungsverfahren, obis, einheit) tuple present: {JsonConvert.SerializeObject(combis, new StringEnumConverter())}";
+                    errorMessage =
+                        $"Cannot use autoconfigured method because there are {combis.Count}>1 distinct (wertermittlungsverfahren, obis, einheit) tuple present: {JsonConvert.SerializeObject(combis, new StringEnumConverter())}";
                     coverage = null;
                 }
+
                 return new CompletenessReport
                 {
                     LokationsId = em.LokationsId,
@@ -59,12 +67,13 @@ namespace BO4E.Extensions.BusinessObjects.Energiemenge
                     ErrorMessage = errorMessage
                 };
             }
+
             var combi = combis.First();
             return em.GetCompletenessReport(reference, combi.Item1, combi.Item2, combi.Item3);
         }
 
         /// <summary>
-        /// Generate a <see cref="CompletenessReport"/> for the given parameters.
+        ///     Generate a <see cref="CompletenessReport" /> for the given parameters.
         /// </summary>
         /// <param name="em">Energiemenge</param>
         /// <param name="reference">reference time frame</param>
@@ -72,7 +81,8 @@ namespace BO4E.Extensions.BusinessObjects.Energiemenge
         /// <param name="obiskennzahl">OBIS Kennzahl</param>
         /// <param name="einheit">Mengeneinheit</param>
         /// <returns>the completeness report</returns>
-        public static CompletenessReport GetCompletenessReport(this BO4E.BO.Energiemenge em, ITimeRange reference, Wertermittlungsverfahren wev, string obiskennzahl, Mengeneinheit einheit)
+        public static CompletenessReport GetCompletenessReport(this BO.Energiemenge em, ITimeRange reference,
+            Wertermittlungsverfahren wev, string obiskennzahl, Mengeneinheit einheit)
         {
             CompletenessReport result;
             using (MiniProfiler.Current.Step("create completeness report skeleton + find the coverage"))
@@ -91,6 +101,7 @@ namespace BO4E.Extensions.BusinessObjects.Energiemenge
                     }
                 };
             }
+
             if (em.Energieverbrauch != null && em.Energieverbrauch.Count > 0)
             {
                 /*using (MiniProfiler.Current.Step("populating time slices of/with missing/null values"))
@@ -119,16 +130,15 @@ namespace BO4E.Extensions.BusinessObjects.Energiemenge
                 }*/
                 using (MiniProfiler.Current.Step("Setting aggregated gaps"))
                 {
-                    var nonNullValues = new TimePeriodCollection(em.Energieverbrauch.Select(v => new TimeRange(v.Startdatum, v.Enddatum)));
+                    var nonNullValues =
+                        new TimePeriodCollection(
+                            em.Energieverbrauch.Select(v => new TimeRange(v.Startdatum, v.Enddatum)));
                     ITimeRange limits;
                     if (result.ReferenceTimeFrame != null && result.ReferenceTimeFrame.Startdatum.HasValue)
-                    {
-                        limits = new TimeRange(result.ReferenceTimeFrame.Startdatum.Value.UtcDateTime, result.ReferenceTimeFrame.Enddatum.Value.UtcDateTime);
-                    }
+                        limits = new TimeRange(result.ReferenceTimeFrame.Startdatum.Value.UtcDateTime,
+                            result.ReferenceTimeFrame.Enddatum.Value.UtcDateTime);
                     else
-                    {
                         limits = null;
-                    }
                     var gaps = new TimeGapCalculator<TimeRange>().GetGaps(nonNullValues, limits);
                     result.Gaps = gaps.Select(gap => new CompletenessReport.BasicVerbrauch
                     {
@@ -136,34 +146,29 @@ namespace BO4E.Extensions.BusinessObjects.Energiemenge
                         Enddatum = gap.End,
                         Wert = null
                     }).ToList();
-
                 }
+
                 /*using (MiniProfiler.Current.Step("sorting result"))
                 {
                     result.values.Sort(new BasicVerbrauchDateTimeComparer());
                 }*/
                 if (em.IsPure(true))
-                {
                     try
                     {
-                        foreach (var kvp in em.Energieverbrauch.Where(v => v.UserProperties != null).SelectMany(v => v.UserProperties))
+                        foreach (var kvp in em.Energieverbrauch.Where(v => v.UserProperties != null)
+                            .SelectMany(v => v.UserProperties))
                         {
-                            if (result.UserProperties == null)
-                            {
-                                result.UserProperties = new Dictionary<string, object>();
-                            }
+                            if (result.UserProperties == null) result.UserProperties = new Dictionary<string, object>();
                             if (!result.UserProperties.ContainsKey(kvp.Key))
-                            {
                                 result.UserProperties.Add(kvp.Key, kvp.Value);
-                            }
                         }
                     }
                     catch (InvalidOperationException)
                     {
                         // ok, there's no Verbrauch with user properties.
                     }
-                }
             }
+
             /*else
             {
                 result.coverage = null;
@@ -173,17 +178,20 @@ namespace BO4E.Extensions.BusinessObjects.Energiemenge
         }
 
         /// <summary>
-        /// <see cref="GetCompletenessReport(BO4E.BO.Energiemenge,Itenso.TimePeriod.ITimeRange,BO4E.ENUM.Wertermittlungsverfahren,string,BO4E.ENUM.Mengeneinheit)"/>
-        /// for pure Energiemengen within their own time range.
+        ///     <see
+        ///         cref="GetCompletenessReport(BO4E.BO.Energiemenge,Itenso.TimePeriod.ITimeRange,BO4E.ENUM.Wertermittlungsverfahren,string,BO4E.ENUM.Mengeneinheit)" />
+        ///     for pure Energiemengen within their own time range.
         /// </summary>
         /// <param name="em">Energiemenge</param>
-        /// <returns><see cref="GetCompletenessReport(BO4E.BO.Energiemenge,Itenso.TimePeriod.ITimeRange,BO4E.ENUM.Wertermittlungsverfahren,string,BO4E.ENUM.Mengeneinheit)"/></returns>
-        public static CompletenessReport GetCompletenessReport(this BO4E.BO.Energiemenge em)
+        /// <returns>
+        ///     <see
+        ///         cref="GetCompletenessReport(BO4E.BO.Energiemenge,Itenso.TimePeriod.ITimeRange,BO4E.ENUM.Wertermittlungsverfahren,string,BO4E.ENUM.Mengeneinheit)" />
+        /// </returns>
+        public static CompletenessReport GetCompletenessReport(this BO.Energiemenge em)
         {
             if (!em.IsPure())
-            {
-                throw new ArgumentException("The provided Energiemenge is not pure. Please use overloaded method GetCompletenessReport(... , wertermittlungsverfahren, obiskennzahl, mengeneinheit).");
-            }
+                throw new ArgumentException(
+                    "The provided Energiemenge is not pure. Please use overloaded method GetCompletenessReport(... , wertermittlungsverfahren, obiskennzahl, mengeneinheit).");
             Verbrauch v;
             try
             {
@@ -198,28 +206,25 @@ namespace BO4E.Extensions.BusinessObjects.Energiemenge
                     ErrorMessage = "energieverbrauch is empty"
                 };
             }
+
             return em.GetCompletenessReport(em.GetTimeRange(), v.Wertermittlungsverfahren, v.Obiskennzahl, v.Einheit);
         }
 
         /// <summary>
-        /// creates a dictionary of completeness reports for a given list of reference time ranges.
+        ///     creates a dictionary of completeness reports for a given list of reference time ranges.
         /// </summary>
         /// <param name="em">Energiemenge</param>
         /// <param name="ranges">list of ranges for which the completeness reports are generated</param>
         /// <param name="useParallelExecution">set true to internally use parallel linq</param>
         /// <returns></returns>
-        public static IDictionary<ITimeRange, CompletenessReport> GetSlicedCompletenessReports(this BO4E.BO.Energiemenge em, IEnumerable<ITimeRange> ranges, bool useParallelExecution = false)
+        public static IDictionary<ITimeRange, CompletenessReport> GetSlicedCompletenessReports(this BO.Energiemenge em,
+            IEnumerable<ITimeRange> ranges, bool useParallelExecution = false)
         {
-            if (ranges == null)
-            {
-                throw new ArgumentNullException(nameof(ranges), "list of time ranges must not be null");
-            }
+            if (ranges == null) throw new ArgumentNullException(nameof(ranges), "list of time ranges must not be null");
             if (ranges.Any())
             {
                 if (useParallelExecution)
-                {
                     return ranges.AsParallel().ToDictionary(r => r, r => GetCompletenessReport(em, r));
-                }
 
                 return ranges.ToDictionary(r => r, r => GetCompletenessReport(em, r));
             }
@@ -228,26 +233,29 @@ namespace BO4E.Extensions.BusinessObjects.Energiemenge
         }
 
         /// <summary>
-        /// Get Daily Completeness Reports for <paramref name="overallTimeRange"/>. The magic is, that it takes DST into account!
+        ///     Get Daily Completeness Reports for <paramref name="overallTimeRange" />. The magic is, that it takes DST into
+        ///     account!
         /// </summary>
         /// <param name="em">Energiemenge</param>
         /// <param name="overallTimeRange">overall time frame. Beginning and end must have same hour/minute/second</param>
         /// <param name="useParallelExecution">set true to internally use parallel linq</param>
         /// <returns></returns>
-        public static IDictionary<ITimeRange, CompletenessReport> GetDailyCompletenessReports(this BO4E.BO.Energiemenge em, ITimeRange overallTimeRange, bool useParallelExecution = false)
+        public static IDictionary<ITimeRange, CompletenessReport> GetDailyCompletenessReports(this BO.Energiemenge em,
+            ITimeRange overallTimeRange, bool useParallelExecution = false)
         {
             var slices = GetLocalDailySlices(overallTimeRange);
             return em.GetSlicedCompletenessReports(slices, useParallelExecution);
         }
 
         /// <summary>
-        /// Get Monthly Completeness Reports for <paramref name="overallTimeRange"/>. 
+        ///     Get Monthly Completeness Reports for <paramref name="overallTimeRange" />.
         /// </summary>
         /// <param name="em">Energiemenge</param>
         /// <param name="overallTimeRange"></param>
         /// <param name="useParallelExecution">set true to internally use parallel linq</param>
         /// <returns></returns>
-        public static IDictionary<ITimeRange, CompletenessReport> GetMonthlyCompletenessReports(this BO4E.BO.Energiemenge em, ITimeRange overallTimeRange, bool useParallelExecution = false)
+        public static IDictionary<ITimeRange, CompletenessReport> GetMonthlyCompletenessReports(this BO.Energiemenge em,
+            ITimeRange overallTimeRange, bool useParallelExecution = false)
         {
             var slices = GetLocalMonthlySlices(overallTimeRange);
             return em.GetSlicedCompletenessReports(slices, useParallelExecution);

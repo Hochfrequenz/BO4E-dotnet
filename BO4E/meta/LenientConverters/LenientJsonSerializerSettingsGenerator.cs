@@ -1,19 +1,19 @@
-﻿using Newtonsoft.Json;
-using Newtonsoft.Json.Serialization;
-
-using System;
+﻿using System;
 using System.Collections.Generic;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Serialization;
 
 namespace BO4E.meta.LenientConverters
 {
     /// <summary>
-    /// Extensions to simplify the usage of the Lenient parser for <see cref="Newtonsoft.Json.JsonSerializer"/> (newtonsoft)
+    ///     Extensions to simplify the usage of the Lenient parser for <see cref="Newtonsoft.Json.JsonSerializer" />
+    ///     (newtonsoft)
     /// </summary>
-    /// <seealso cref="BO4E.meta.LenientConverters.LenientSystemTextJsonParsingExtensions"/>
+    /// <seealso cref="BO4E.meta.LenientConverters.LenientSystemTextJsonParsingExtensions" />
     public static class LenientParsingExtensionsNewtonsoft
     {
         /// <summary>
-        /// <inheritdoc cref="GetJsonSerializerSettings(LenientParsing, HashSet{string})"/>
+        ///     <inheritdoc cref="GetJsonSerializerSettings(LenientParsing, HashSet{string})" />
         /// </summary>
         /// <param name="lenient"></param>
         /// <returns></returns>
@@ -23,18 +23,17 @@ namespace BO4E.meta.LenientConverters
         }
 
         /// <summary>
-        /// Generates <see cref="Newtonsoft.Json.JsonSerializerSettings"/> (Newtonsoft) for given lenient parsing setting
+        ///     Generates <see cref="Newtonsoft.Json.JsonSerializerSettings" /> (Newtonsoft) for given lenient parsing setting
         /// </summary>
         /// <param name="lenient"></param>
         /// <param name="userPropertiesWhiteList"></param>
         /// <returns></returns>
-        public static JsonSerializerSettings GetJsonSerializerSettings(this LenientParsing lenient, HashSet<string> userPropertiesWhiteList)
+        public static JsonSerializerSettings GetJsonSerializerSettings(this LenientParsing lenient,
+            HashSet<string> userPropertiesWhiteList)
         {
             var converters = new List<JsonConverter>();
             foreach (LenientParsing lp in Enum.GetValues(typeof(LenientParsing)))
-            {
                 if (lenient.HasFlag(lp))
-                {
                     // ReSharper disable once SwitchStatementMissingSomeEnumCasesNoDefault
                     switch (lp)
                     {
@@ -55,16 +54,16 @@ namespace BO4E.meta.LenientConverters
                         case LenientParsing.STRING_TO_INT:
                             converters.Add(new LenientStringToIntConverter());
                             break;
-                            // case LenientParsing.EmptyLists:
-                            // converters.Add(new LenientRequiredListConverter());
-                            // break;
+                        // case LenientParsing.EmptyLists:
+                        // converters.Add(new LenientRequiredListConverter());
+                        // break;
 
-                            // no default case because NONE and MOST_LENIENT do not come up with more converters
+                        // no default case because NONE and MOST_LENIENT do not come up with more converters
                     }
-                }
-            }
 
-            IContractResolver contractResolver = userPropertiesWhiteList.Count > 0 ? new UserPropertiesDataContractResolver(userPropertiesWhiteList) : new DefaultContractResolver();
+            IContractResolver contractResolver = userPropertiesWhiteList.Count > 0
+                ? new UserPropertiesDataContractResolver(userPropertiesWhiteList)
+                : new DefaultContractResolver();
             var settings = new JsonSerializerSettings
             {
                 Converters = converters,

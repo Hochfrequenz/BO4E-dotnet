@@ -2,57 +2,65 @@ using ProtoBuf;
 
 namespace BO4E.ENUM
 {
-
     /// <summary>Auflistung möglicher Einheiten zur Verwendung in zeitbezogenen Angaben.</summary>
     public enum Zeiteinheit
     {
         /// <summary>
-        /// Sekunde
+        ///     Sekunde
         /// </summary>
         [ProtoEnum(Name = nameof(Zeiteinheit) + "_" + nameof(SEKUNDE))]
         SEKUNDE,
+
         /// <summary>
-        /// Minute
+        ///     Minute
         /// </summary>
         [ProtoEnum(Name = nameof(Zeiteinheit) + "_" + nameof(MINUTE))]
         MINUTE,
+
         /// <summary>
-        /// Stunde
+        ///     Stunde
         /// </summary>
         [ProtoEnum(Name = nameof(Zeiteinheit) + "_" + nameof(STUNDE))]
         STUNDE,
+
         /// <summary>
-        /// Viertelstunde
+        ///     Viertelstunde
         /// </summary>
         [ProtoEnum(Name = nameof(Zeiteinheit) + "_" + nameof(VIERTEL_STUNDE))]
         VIERTEL_STUNDE,
+
         /// <summary>
-        /// Tag
+        ///     Tag
         /// </summary>
         [ProtoEnum(Name = nameof(Zeiteinheit) + "_" + nameof(TAG))]
         TAG,
+
         /// <summary>
-        /// Woche
+        ///     Woche
         /// </summary>
         [ProtoEnum(Name = nameof(Zeiteinheit) + "_" + nameof(WOCHE))]
         WOCHE,
+
         /// <summary>
-        /// Monat
+        ///     Monat
         /// </summary>
         [ProtoEnum(Name = nameof(Zeiteinheit) + "_" + nameof(MONAT))]
         MONAT,
+
         /// <summary>
-        /// Quartal
+        ///     Quartal
         /// </summary>
         [ProtoEnum(Name = nameof(Zeiteinheit) + "_" + nameof(QUARTAL))]
         QUARTAL,
+
         /// <summary>
-        /// Halbjahr
+        ///     Halbjahr
         /// </summary>
         [ProtoEnum(Name = nameof(Zeiteinheit) + "_" + nameof(HALBJAHR))]
         HALBJAHR,
+
         /// <summary>
-        /// Jahr
+        ///     Jahr
         /// </summary>
         [ProtoEnum(Name = nameof(Zeiteinheit) + "_" + nameof(JAHR))]
         JAHR

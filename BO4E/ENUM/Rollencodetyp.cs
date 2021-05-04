@@ -1,8 +1,6 @@
-using Newtonsoft.Json;
-
-using ProtoBuf;
-
 using System;
+using Newtonsoft.Json;
+using ProtoBuf;
 
 namespace BO4E.ENUM
 {

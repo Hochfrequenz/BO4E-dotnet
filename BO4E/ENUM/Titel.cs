@@ -5,8 +5,10 @@ namespace BO4E.ENUM
     {
         /// <summary>Doktor</summary>
         DR,
+
         /// <summary>Professor</summary>
         PROF,
+
         /// <summary>Professor Dr.</summary>
         PROF_DR
     }

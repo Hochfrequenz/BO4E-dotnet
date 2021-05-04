@@ -1,5 +1,8 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using BO4E.BO;
+using BO4E.COM;
+using BO4E.ENUM;
 using BO4E.Extensions.BusinessObjects;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
@@ -14,12 +17,10 @@ namespace TestBO4E.Extensions
             var bo = new Messlokation
             {
                 MesslokationsId = "DE345"
-
             };
             var cloneBo = bo.DeepClone();
             Assert.AreNotSame(bo, cloneBo);
             // Assert.AreEqual<Messlokation>((Messlokation)bo, cloneBo); <--- keine ahnung warum das failed. vllt. auch mit json patch/diff arbeiten wie im hubnet projekt
-
         }
 
         [TestMethod]
@@ -28,26 +29,26 @@ namespace TestBO4E.Extensions
             var em = new Energiemenge
             {
                 LokationsId = "De12345",
-                LokationsTyp = BO4E.ENUM.Lokationstyp.MaLo,
-                Energieverbrauch = new List<BO4E.COM.Verbrauch>
+                LokationsTyp = Lokationstyp.MaLo,
+                Energieverbrauch = new List<Verbrauch>
                 {
-                    new BO4E.COM.Verbrauch
+                    new Verbrauch
                     {
-                        Einheit = BO4E.ENUM.Mengeneinheit.KWH,
+                        Einheit = Mengeneinheit.KWH,
                         Wert = 123.456M,
                         Obiskennzahl = "dei vadder",
-                        Wertermittlungsverfahren = BO4E.ENUM.Wertermittlungsverfahren.MESSUNG,
-                        Startdatum = new System.DateTime(2018,12,31,23,0,0,0, System.DateTimeKind.Utc),
-                        Enddatum = new System.DateTime(2019,12,31,23,0,0,0,System.DateTimeKind.Utc)
+                        Wertermittlungsverfahren = Wertermittlungsverfahren.MESSUNG,
+                        Startdatum = new DateTime(2018, 12, 31, 23, 0, 0, 0, DateTimeKind.Utc),
+                        Enddatum = new DateTime(2019, 12, 31, 23, 0, 0, 0, DateTimeKind.Utc)
                     },
-                    new BO4E.COM.Verbrauch
+                    new Verbrauch
                     {
-                        Einheit = BO4E.ENUM.Mengeneinheit.KWH,
+                        Einheit = Mengeneinheit.KWH,
                         Wert = 789.123M,
                         Obiskennzahl = "dei mudder",
-                        Wertermittlungsverfahren = BO4E.ENUM.Wertermittlungsverfahren.MESSUNG,
-                        Startdatum = new System.DateTime(2019,12,31,23,0,0,0, System.DateTimeKind.Utc),
-                        Enddatum = new System.DateTime(2020,12,31,23,0,0,0,System.DateTimeKind.Utc)
+                        Wertermittlungsverfahren = Wertermittlungsverfahren.MESSUNG,
+                        Startdatum = new DateTime(2019, 12, 31, 23, 0, 0, 0, DateTimeKind.Utc),
+                        Enddatum = new DateTime(2020, 12, 31, 23, 0, 0, 0, DateTimeKind.Utc)
                     }
                 }
             };
@@ -57,7 +58,7 @@ namespace TestBO4E.Extensions
             var cloned2 = em.DeepClone();
             Assert.AreEqual(em.Energieverbrauch.Count, cloned2.Energieverbrauch.Count);
 
-            var cloned3 = ((BusinessObject)em).DeepClone();
+            var cloned3 = ((BusinessObject) em).DeepClone();
             Assert.IsTrue(cloned3 is Energiemenge);
             Assert.AreEqual(em.Energieverbrauch.Count, (cloned3 as Energiemenge).Energieverbrauch.Count);
         }

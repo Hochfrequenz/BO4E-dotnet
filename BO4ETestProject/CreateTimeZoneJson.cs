@@ -1,11 +1,12 @@
 ﻿using System;
+using System.Text.Json;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace TestBO4E
 {
     /// <summary>
-    /// This class is just used to create a .resx file containing a serialized TimeZoneInfo object.
-    /// Details: https://docs.microsoft.com/en-us/dotnet/standard/datetime/save-time-zones-to-an-embedded-resource
+    ///     This class is just used to create a .resx file containing a serialized TimeZoneInfo object.
+    ///     Details: https://docs.microsoft.com/en-us/dotnet/standard/datetime/save-time-zones-to-an-embedded-resource
     /// </summary>
     [TestClass]
     public class CreateTimeZoneJson
@@ -27,7 +28,7 @@ namespace TestBO4E
             }
 
             Assert.IsTrue(tzi.SupportsDaylightSavingTime);
-            var json = System.Text.Json.JsonSerializer.Serialize(tzi);
+            var json = JsonSerializer.Serialize(tzi);
             Console.WriteLine(json);
         }
     }

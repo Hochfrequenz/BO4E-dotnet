@@ -8,6 +8,7 @@ namespace BO4E.ENUM
         /// <summary>Z10: Kunde</summary>
         [ProtoEnum(Name = nameof(Netznutzungszahler) + "_" + nameof(KUNDE))]
         KUNDE,
+
         /// <summary>Z11: Lieferant</summary>
         [ProtoEnum(Name = nameof(Netznutzungszahler) + "_" + nameof(LIEFERANT))]
         LIEFERANT

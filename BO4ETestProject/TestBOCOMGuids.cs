@@ -1,12 +1,10 @@
-﻿using BO4E.BO;
-using BO4E.COM;
-
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-
-using Newtonsoft.Json;
-
-using System;
+﻿using System;
 using System.Collections.Generic;
+using BO4E.BO;
+using BO4E.COM;
+using BO4E.ENUM;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Newtonsoft.Json;
 using JsonSerializer = System.Text.Json.JsonSerializer;
 
 namespace TestBO4E
@@ -20,7 +18,7 @@ namespace TestBO4E
             var em = new Energiemenge
             {
                 LokationsId = "DE123456",
-                LokationsTyp = BO4E.ENUM.Lokationstyp.MaLo,
+                LokationsTyp = Lokationstyp.MaLo,
                 Energieverbrauch = new List<Verbrauch>(),
                 Guid = Guid.NewGuid()
             };
@@ -44,7 +42,7 @@ namespace TestBO4E
             var em = new Energiemenge
             {
                 LokationsId = "DE123456",
-                LokationsTyp = BO4E.ENUM.Lokationstyp.MaLo,
+                LokationsTyp = Lokationstyp.MaLo,
                 Energieverbrauch = new List<Verbrauch>(),
                 Guid = Guid.NewGuid()
             };

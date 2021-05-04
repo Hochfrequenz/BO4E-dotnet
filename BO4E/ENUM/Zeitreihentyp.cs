@@ -9,16 +9,22 @@ namespace BO4E.ENUM
     {
         /// <summary>Einspeisegangsumme</summary>
         EGS,
+
         /// <summary>Lastgangsumme</summary>
         LGS,
+
         /// <summary>Netzzeitreihe</summary>
         NZR,
+
         /// <summary>Standardeinspeiseprofilsumme</summary>
         SES,
+
         /// <summary>Standardlastsumme</summary>
         SLS,
+
         /// <summary>Tagesparameterabhängige Einspeiseprofilsumme</summary>
         TES,
+
         /// <summary>Tagesparameterabhängige Lastprofilsumme</summary>
         TLS
     }

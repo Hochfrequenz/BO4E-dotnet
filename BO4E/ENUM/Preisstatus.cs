@@ -1,15 +1,15 @@
 namespace BO4E.ENUM
 {
-    /// <summary>Statusinformation für Preise</summary>
+    /// <summary>Statusinformation fÃ¼r Preise</summary>
     public enum Preisstatus
     {
         /// <summary>
-        /// vorläufig
+        ///     vorlÃ¤ufig
         /// </summary>
         VORLAEUFIG,
 
         /// <summary>
-        /// endgültig
+        ///     endgÃ¼ltig
         /// </summary>
         ENDGUELTIG
     }

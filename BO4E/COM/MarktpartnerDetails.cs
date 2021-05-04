@@ -1,22 +1,24 @@
-﻿using BO4E.BO;
+﻿using System;
+using System.Text.Json.Serialization;
+using BO4E.BO;
 using BO4E.meta;
-
 using Newtonsoft.Json;
-
 using ProtoBuf;
-
-using System;
 
 namespace BO4E.COM
 {
-    [Obsolete("This class has been renamed to COM." + nameof(MarktpartnerDetails) + " to avoid further naming confusion.", true)]
+    [Obsolete(
+        "This class has been renamed to COM." + nameof(MarktpartnerDetails) + " to avoid further naming confusion.",
+        true)]
 #pragma warning disable CS1591 // Missing XML comment for publicly visible type or member
-    public class Marktrolle : MarktpartnerDetails { }
+    public class Marktrolle : MarktpartnerDetails
+    {
+    }
 
 #pragma warning restore CS1591 // Missing XML comment for publicly visible type or member
 
     /// <summary>
-    /// Marktrolle
+    ///     Marktrolle
     /// </summary>
     [ProtoContract]
     [NonOfficial(NonOfficialCategory.UNSPECIFIED)]
@@ -24,28 +26,26 @@ namespace BO4E.COM
     public class MarktpartnerDetails : COM
     {
         /// <summary>
-        /// rollencodenummer von Marktrolle
+        ///     rollencodenummer von Marktrolle
         /// </summary>
         [JsonProperty(PropertyName = "rollencodenummer", Required = Required.Default)]
-
-        [System.Text.Json.Serialization.JsonPropertyName("rollencodenummer")]
+        [JsonPropertyName("rollencodenummer")]
         [ProtoMember(3)]
         [Obsolete("Use " + nameof(Marktteilnehmer) + "." + nameof(Marktteilnehmer.Rollencodenummer) + " instead")]
         public string Rollencodenummer { get; set; }
 
         /// <summary>
-        /// code von Marktrolle
+        ///     code von Marktrolle
         /// </summary>
         [JsonProperty(PropertyName = "code", Required = Required.Default)]
-
-        [System.Text.Json.Serialization.JsonPropertyName("code")]
+        [JsonPropertyName("code")]
         [NonOfficial(NonOfficialCategory.UNSPECIFIED)]
         [Obsolete("Use " + nameof(Marktteilnehmer) + "." + nameof(Marktteilnehmer.Rollencodetyp) + " instead")]
         [ProtoMember(4)]
         public string Code { get; set; }
 
         /// <summary>
-        /// List of Marktrolle. Details siehe <see cref="ENUM.Marktrolle"/>
+        ///     List of Marktrolle. Details siehe <see cref="ENUM.Marktrolle" />
         /// </summary>
         [JsonProperty(Required = Required.Always)]
         [ProtoMember(5)]

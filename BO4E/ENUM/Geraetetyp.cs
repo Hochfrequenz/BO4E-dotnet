@@ -1,6 +1,5 @@
-using ProtoBuf;
-
 using System;
+using ProtoBuf;
 
 namespace BO4E.ENUM
 {
@@ -24,7 +23,7 @@ namespace BO4E.ENUM
         RLM_ZAEHLER,
 
         /// <summary>
-        /// Zähler eines Intelligenten Messsystems
+        ///     Zähler eines Intelligenten Messsystems
         /// </summary>
         [ProtoEnum(Name = nameof(Geraetetyp) + "_" + nameof(IMS_ZAEHLER))]
         IMS_ZAEHLER,
@@ -90,8 +89,8 @@ namespace BO4E.ENUM
         MODEM,
 
         /// <summary>
-        /// vom Messstellenbetreiber beigestellte Telekommunikationseinrichtung (Telefonanschluss)
-        ///</summary>
+        ///     vom Messstellenbetreiber beigestellte Telekommunikationseinrichtung (Telefonanschluss)
+        /// </summary>
         [ProtoEnum(Name = nameof(Geraetetyp) + "_" + nameof(TELEKOMMUNIKATIONSEINRICHTUNG))]
         TELEKOMMUNIKATIONSEINRICHTUNG,
 

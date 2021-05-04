@@ -24,17 +24,12 @@ namespace BO4E.meta
     {
         public MappingAttribute(params object[] enums)
         {
-            if (enums.Any(r => r.GetType().BaseType != typeof(Enum)))
-            {
-                throw new ArgumentException("enums");
-            }
+            if (enums.Any(r => r.GetType().BaseType != typeof(Enum))) throw new ArgumentException("enums");
 
             Mapping = new List<Enum>();
-            foreach (Enum e in enums)
-            {
-                Mapping.Add(e);
-            }
+            foreach (Enum e in enums) Mapping.Add(e);
         }
+
         public List<Enum> Mapping { get; set; }
     }
 }

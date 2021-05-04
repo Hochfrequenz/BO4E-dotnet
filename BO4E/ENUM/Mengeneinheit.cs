@@ -1,15 +1,13 @@
-using Newtonsoft.Json;
-
-using ProtoBuf;
-
 using System;
+using Newtonsoft.Json;
+using ProtoBuf;
 
 namespace BO4E.ENUM
 {
-    /// <summary>
-    /// Einheit: Messgrößen, die per Messung oder Vorgabe ermittelt werden können.
-    /// </summary>
-    public enum Mengeneinheit
+        /// <summary>
+        ///     Einheit: Messgrößen, die per Messung oder Vorgabe ermittelt werden können.
+        /// </summary>
+        public enum Mengeneinheit
     {
         [Obsolete("This value is only a workaround for the proto3 syntax generation. You shouldn't actually use it")]
 #pragma warning disable CS0618 // Type or member is obsolete
@@ -55,22 +53,22 @@ namespace BO4E.ENUM
         JAHR = 12 * MONAT,
 
         /// <summary>
-        /// Var (Blindleistung)
+        ///     Var (Blindleistung)
         /// </summary>
         VAR = 23,
 
         /// <summary>
-        /// kilovar <seealso cref="VAR"/>
+        ///     kilovar <seealso cref="VAR" />
         /// </summary>
         KVAR = 1000 * VAR,
 
         /// <summary>
-        /// var stunde
+        ///     var stunde
         /// </summary>
         VARH = 29,
 
         /// <summary>
-        /// kilovar stunde
+        ///     kilovar stunde
         /// </summary>
         KVARH = 1000 * VARH
     }

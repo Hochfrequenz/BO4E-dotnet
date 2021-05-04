@@ -5,6 +5,7 @@ namespace BO4E.ENUM
     {
         /// <summary>Ausspeisung</summary>
         AUSSP,
+
         /// <summary>Einspeisung</summary>
         EINSP
     }

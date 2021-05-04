@@ -7,8 +7,10 @@ namespace BO4E.ENUM
     {
         /// <summary>Online</summary>
         ONLINE,
+
         /// <summary>Direkt</summary>
         DIREKT,
+
         /// <summary>Auftragsfax</summary>
         [ProtoEnum(Name = nameof(Vertragsform) + "_" + nameof(FAX))]
         FAX

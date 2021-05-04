@@ -1,28 +1,32 @@
 ﻿namespace BO4E.ENUM
 {
     /// <summary>
-    /// Aufzählung der Vertragsarten
+    ///     Aufzählung der Vertragsarten
     /// </summary>
     public enum Vertragsart
     {
         /// <summary>
-        /// Energieliefervertrag
+        ///     Energieliefervertrag
         /// </summary>
         ENERGIELIEFERVERTRAG,
+
         /// <summary>
-        /// Netznutzungsvertrag
+        ///     Netznutzungsvertrag
         /// </summary>
         NETZNUTZUNGSVERTRAG,
+
         /// <summary>
-        /// Bilanzierungsvertrag
+        ///     Bilanzierungsvertrag
         /// </summary>
         BILANZIERUNGSVERTRAG,
+
         /// <summary>
-        /// Messstellenabetriebsvertrag
+        ///     Messstellenabetriebsvertrag
         /// </summary>
         MESSSTELLENBETRIEBSVERTRAG,
+
         /// <summary>
-        /// Bündelvertrag
+        ///     Bündelvertrag
         /// </summary>
         BUENDELVERTRAG
     }
