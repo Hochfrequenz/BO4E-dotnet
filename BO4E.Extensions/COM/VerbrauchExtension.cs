@@ -21,7 +21,7 @@ namespace BO4E.Extensions.COM
         /// <param name="v1"></param>
         /// <param name="v2"></param>
         /// <returns></returns>
-        public static HashSet<Verbrauch> Merge(this Verbrauch v1, Verbrauch v2) => 
+        public static HashSet<Verbrauch> Merge(this Verbrauch v1, Verbrauch v2) =>
             v1.Merge(v2, false, false);
 
         /// <summary>
