@@ -33,7 +33,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\BO4E-dotnet.Extensions\BO4E-dotnet.Extensions.csproj" />
+    <ProjectReference Include="..\BO4E.Extensions\BO4E.Extensions.csproj" />
     <ProjectReference Include="..\BO4E\BO4E.csproj" />
   </ItemGroup>
 

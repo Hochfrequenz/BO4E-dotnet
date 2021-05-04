@@ -10,7 +10,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TestBO4E-dotnet", "BO4ETest
 		{0A0EEC4F-20C5-4470-BBF7-7187191C0D31} = {0A0EEC4F-20C5-4470-BBF7-7187191C0D31}
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BO4E-dotnet.Extensions", "BO4E-dotnet.Extensions\BO4E-dotnet.Extensions.csproj", "{AD33396B-CE0B-4230-8D77-457C888E5E9B}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BO4E.Extensions", "BO4E.Extensions\BO4E.Extensions.csproj", "{AD33396B-CE0B-4230-8D77-457C888E5E9B}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BO4E-dotnet.Reporting", "BO4E-dotnet.Reporting\BO4E-dotnet.Reporting.csproj", "{3D0BBA2B-67E3-4FA7-9BE9-8708648E0FF5}"
 EndProject
