@@ -8,11 +8,10 @@ using System.Reflection;
 using System.Security.Cryptography;
 using System.Security.Cryptography.X509Certificates;
 using System.Text;
-using BO4E;
 using BO4E.BO;
+using BO4E.Extensions.BusinessObjects;
 using BO4E.meta;
 using BO4E.meta.LenientConverters;
-using BO4E.Extensions.BusinessObjects;
 using Microsoft.CSharp.RuntimeBinder;
 using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
@@ -24,23 +23,43 @@ namespace BO4E.Encryption
 {
     public class Anonymizer : IDisposable
     {
+        /// <summary>
+        ///     instead of 'DE' oder another country code messlokationIds that are a hashed/pseudonymized value do start with this
+        ///     prefix.
+        /// </summary>
+        protected const string HashedMesslokationPrefix = "XX";
+
+        /// <summary>
+        ///     instead of '5' or '4' marktlokationIds that are a hashed/pseudonymized value do start with this prefix.
+        /// </summary>
+        protected const string HashedMarktlokationPrefix = "9";
+
+        private const string Base36Alphabet = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+        private const string Base10Alphabet = "0123456789";
         private static readonly ILogger _logger = StaticLogger.Logger;
         private readonly AnonymizerConfiguration _configuration;
-        public X509Certificate2 PublicKeyX509 { get; set; }
-        private AsymmetricKeyParameter _privateKey;
         private byte[] _hashingSalt;
+        private AsymmetricKeyParameter _privateKey;
 
         public Anonymizer(AnonymizerConfiguration configuration)
         {
             _configuration = configuration;
-            if (_configuration.HashingSalt != null)
-            {
-                SetHashingSalt(configuration.GetSalt());
-            }
+            if (_configuration.HashingSalt != null) SetHashingSalt(configuration.GetSalt());
+        }
+
+        public X509Certificate2 PublicKeyX509 { get; set; }
+
+        /// <inheritdoc />
+        public void Dispose()
+        {
+            _privateKey = null;
+            if (_hashingSalt != null)
+                for (var i = 0; i < _hashingSalt.Length; i++)
+                    _hashingSalt[i] = 0x0;
         }
 
         /// <summary>
-        /// Set the receivers public X509 certificate if ENCRYPT is used as anonymizing approach.
+        ///     Set the receivers public X509 certificate if ENCRYPT is used as anonymizing approach.
         /// </summary>
         /// <param name="x509Certificate">X509 certificate</param>
         public void SetPublicKey(X509Certificate2 x509Certificate)
@@ -49,7 +68,7 @@ namespace BO4E.Encryption
         }
 
         /// <summary>
-        /// Set the private key if DECRYPT is used as anonymizing approach.
+        ///     Set the private key if DECRYPT is used as anonymizing approach.
         /// </summary>
         /// <param name="privateKey">Bouncy Castle compatible private key</param>
         public void SetPrivateKey(AsymmetricKeyParameter privateKey)
@@ -58,17 +77,18 @@ namespace BO4E.Encryption
         }
 
         /// <summary>
-        /// Set a salt used when hashing values.
+        ///     Set a salt used when hashing values.
         /// </summary>
         /// <remarks>
-        /// Note that the same salt is used multiple times, at least within the same processed JObject!
-        /// This is a considerable security weakness that allows for attacks, especially when the origin
-        /// domain is finite (e.g. when ENUM based values are hashed). This design decision was made because
-        /// handling a separate salt for each hashed field is impractical. Please opt for the <see cref="AnonymizerApproach.ENCRYPT"/>
-        /// option in case of doubt. The use of a salt is enforced by throwing a ArgumentNullException when
-        /// trying to hash ENUM based values without having set a salt before.
+        ///     Note that the same salt is used multiple times, at least within the same processed JObject!
+        ///     This is a considerable security weakness that allows for attacks, especially when the origin
+        ///     domain is finite (e.g. when ENUM based values are hashed). This design decision was made because
+        ///     handling a separate salt for each hashed field is impractical. Please opt for the
+        ///     <see cref="AnonymizerApproach.ENCRYPT" />
+        ///     option in case of doubt. The use of a salt is enforced by throwing a ArgumentNullException when
+        ///     trying to hash ENUM based values without having set a salt before.
         /// </remarks>
-        /// <seealso cref="GenerateHashingSalt"/>
+        /// <seealso cref="GenerateHashingSalt" />
         /// <param name="salt">random salt as byte array</param>
         public void SetHashingSalt(byte[] salt)
         {
@@ -76,7 +96,7 @@ namespace BO4E.Encryption
         }
 
         /// <summary>
-        /// passes the result of <see cref="GenerateHashingSalt"/> to <see cref="SetHashingSalt(byte[])"/>
+        ///     passes the result of <see cref="GenerateHashingSalt" /> to <see cref="SetHashingSalt(byte[])" />
         /// </summary>
         public void SetNewHashingSalt()
         {
@@ -84,7 +104,7 @@ namespace BO4E.Encryption
         }
 
         /// <summary>
-        /// Generates a 32 byte long salt to be used as input for <see cref="SetHashingSalt(byte[])"/>.
+        ///     Generates a 32 byte long salt to be used as input for <see cref="SetHashingSalt(byte[])" />.
         /// </summary>
         /// <returns>a 32 byte long securely random salt</returns>
         public static byte[] GenerateHashingSalt()
@@ -94,6 +114,7 @@ namespace BO4E.Encryption
             {
                 random.GetNonZeroBytes(salt);
             }
+
             return salt;
         }
 
@@ -104,16 +125,13 @@ namespace BO4E.Encryption
         }
 
         /// <summary>
-        /// Apply the configuration set in the constructor to the JObject set in the constructor.
+        ///     Apply the configuration set in the constructor to the JObject set in the constructor.
         /// </summary>
-        /// <see cref="Anonymizer(AnonymizerConfiguration)"/>
+        /// <see cref="Anonymizer(AnonymizerConfiguration)" />
         /// <returns>A modified JObject with the configuration applied.</returns>
         public T ApplyOperations<T>(BusinessObject bo)
         {
-            if (bo == null)
-            {
-                throw new ArgumentNullException(nameof(bo));
-            }
+            if (bo == null) throw new ArgumentNullException(nameof(bo));
             var mapping = _configuration.Operations;
             var result = bo.DeepClone();
             foreach (var dataCategory in mapping.Keys)
@@ -125,10 +143,7 @@ namespace BO4E.Encryption
                     .ToArray();
                 foreach (var affectedProp in affectedProps)
                 {
-                    if (!affectedProp.IsAnonymizerRelevant(approach, dataCategory))
-                    {
-                        continue;
-                    }
+                    if (!affectedProp.IsAnonymizerRelevant(approach, dataCategory)) continue;
                     switch (approach)
                     {
                         case AnonymizerApproach.HASH:
@@ -140,8 +155,10 @@ namespace BO4E.Encryption
                             }
                             catch (RuntimeBinderException e)
                             {
-                                _logger.LogWarning($"Catched RuntimeBinderException in Object {bo.GetBoTyp()}. Probably due to trying to get the type of a null object BO: {e.Message}");
+                                _logger.LogWarning(
+                                    $"Catched RuntimeBinderException in Object {bo.GetBoTyp()}. Probably due to trying to get the type of a null object BO: {e.Message}");
                             }
+
                             break;
                         case AnonymizerApproach.DELETE:
                             /* We'd like to set the value to null, but the business object might not allow
@@ -150,20 +167,22 @@ namespace BO4E.Encryption
                              * annotated default value, otherwise we can safely set null. */
                             var isRequired = false;
                             Attribute defaultValueAttribute = null;
-                            var jsonPropertyAttribute = affectedProp.GetCustomAttributes().FirstOrDefault(a => a is JsonPropertyAttribute);
+                            var jsonPropertyAttribute = affectedProp.GetCustomAttributes()
+                                .FirstOrDefault(a => a is JsonPropertyAttribute);
                             if (jsonPropertyAttribute != null)
                             {
-                                var jpa = (JsonPropertyAttribute)jsonPropertyAttribute;
+                                var jpa = (JsonPropertyAttribute) jsonPropertyAttribute;
                                 if (jpa.Required == Required.Always)
                                 {
                                     isRequired = true;
-                                    defaultValueAttribute = affectedProp.GetCustomAttributes().FirstOrDefault(a => a.GetType() == typeof(DefaultValueAttribute));
+                                    defaultValueAttribute = affectedProp.GetCustomAttributes()
+                                        .FirstOrDefault(a => a.GetType() == typeof(DefaultValueAttribute));
                                 }
                             }
 
                             if (isRequired && defaultValueAttribute != null)
                             {
-                                var dva = (DefaultValueAttribute)defaultValueAttribute;
+                                var dva = (DefaultValueAttribute) defaultValueAttribute;
                                 affectedProp.SetValue(result, dva.Value);
                             }
                             else if (bo.GetType().IsSubclassOf(typeof(BusinessObject)))
@@ -174,7 +193,8 @@ namespace BO4E.Encryption
                                 {
                                     try
                                     {
-                                        if (boSubObject.GetType().IsGenericType && boSubObject.GetType().GetGenericTypeDefinition() == typeof(List<>))
+                                        if (boSubObject.GetType().IsGenericType &&
+                                            boSubObject.GetType().GetGenericTypeDefinition() == typeof(List<>))
                                         {
                                             var listElementType = boSubObject.GetType().GetGenericArguments()[0];
                                             var listType = typeof(List<>).MakeGenericType(listElementType);
@@ -190,6 +210,7 @@ namespace BO4E.Encryption
                                     {
                                         _logger.LogError($"Couldn't null BO field!: {e.Message}");
                                     }
+
                                     affectedProp.SetValue(result, boSubObject);
                                 }
                             }
@@ -198,30 +219,29 @@ namespace BO4E.Encryption
                                 // strings, integers, elementary
                                 affectedProp.SetValue(result, null);
                             }
+
                             break;
                         case AnonymizerApproach.ENCRYPT:
                             if (PublicKeyX509 == null)
-                            {
-                                throw new ArgumentNullException(nameof(PublicKeyX509), "To use the encryption feature you have to provide a public X509 certificate using the SetPublicKey method.");
-                            }
+                                throw new ArgumentNullException(nameof(PublicKeyX509),
+                                    "To use the encryption feature you have to provide a public X509 certificate using the SetPublicKey method.");
                             using (var xasyncenc = new X509AsymmetricEncrypter(PublicKeyX509))
                             {
                                 if (affectedProp.GetValue(bo) is string)
                                 {
                                     if (affectedProp.GetValue(bo) != null)
-                                    {
-                                        affectedProp.SetValue(result, xasyncenc.Encrypt(affectedProp.GetValue(bo).ToString()));
-                                    }
+                                        affectedProp.SetValue(result,
+                                            xasyncenc.Encrypt(affectedProp.GetValue(bo).ToString()));
                                 }
-                                else if (affectedProp.GetValue(bo).GetType().IsSubclassOf(typeof(BO4E.COM.COM)))
+                                else if (affectedProp.GetValue(bo).GetType().IsSubclassOf(typeof(COM.COM)))
                                 {
                                     var comObject = affectedProp.GetValue(bo);
                                     dynamic comFields = comObject.GetType().GetProperties();
                                     foreach (var comField in comFields)
-                                    {
                                         try
                                         {
-                                            comField.SetValue(comObject, xasyncenc.Encrypt(comField.GetValue(comObject)).ToString());
+                                            comField.SetValue(comObject,
+                                                xasyncenc.Encrypt(comField.GetValue(comObject)).ToString());
                                         }
                                         catch (ArgumentException e)
                                         {
@@ -233,34 +253,40 @@ namespace BO4E.Encryption
                                             // das sollte passieren, wenn das Argument ein enum
                                             _logger.LogError($"Couldn't encrypt COM field!: {f.Message}");
                                         }
-                                    }
+
                                     affectedProp.SetValue(result, comObject);
                                 }
                                 else if (affectedProp.PropertyType.IsSubclassOf(typeof(BusinessObject)))
                                 {
-                                    affectedProp.SetValue(result, xasyncenc.Encrypt((BusinessObject)affectedProp.GetValue(bo)));
+                                    affectedProp.SetValue(result,
+                                        xasyncenc.Encrypt((BusinessObject) affectedProp.GetValue(bo)));
                                 }
-                                else if (affectedProp.PropertyType.ToString().StartsWith("BO4E.ENUM")) // todo: check for namespace instead of strinyfied comparison
+                                else if (affectedProp.PropertyType.ToString()
+                                    .StartsWith(
+                                        "BO4E.ENUM")) // todo: check for namespace instead of strinyfied comparison
                                 {
                                     //affectedField.SetValue(mappedObject, Sha256HashEnum(affectedField.GetValue(mappedObject).ToString()));
-                                    _logger.LogWarning($"Encrypting {affectedProp.PropertyType} is not supported, since the result would not be a valid ENUM value.");
+                                    _logger.LogWarning(
+                                        $"Encrypting {affectedProp.PropertyType} is not supported, since the result would not be a valid ENUM value.");
                                     //throw new NotSupportedException($"Hashing {affectedField.FieldType} is not supported, since the result would not be a valid ENUM value.");
                                 }
                                 else
                                 {
-                                    throw new NotImplementedException($"Encrypting {affectedProp.PropertyType} is not implemented yet.");
+                                    throw new NotImplementedException(
+                                        $"Encrypting {affectedProp.PropertyType} is not implemented yet.");
                                 }
                             }
+
                             break;
                         case AnonymizerApproach.DECRYPT:
                             if (_privateKey == null)
-                            {
-                                throw new ArgumentNullException(nameof(PrivateKeyFactory), "To use the decryption feature you have to provide a private key using the SetPrivateKey method.");
-                            }
+                                throw new ArgumentNullException(nameof(PrivateKeyFactory),
+                                    "To use the decryption feature you have to provide a private key using the SetPrivateKey method.");
                             using (var xasydec = new X509AsymmetricEncrypter(_privateKey))
                             {
                                 affectedProp.SetValue(result, xasydec.Decrypt(affectedProp.GetValue(bo).ToString()));
                             }
+
                             continue;
                         case AnonymizerApproach.KEEP:
                             // do nothing
@@ -270,28 +296,24 @@ namespace BO4E.Encryption
                     }
                 }
             }
-            if (typeof(T) == typeof(JObject))
-            {
-                return (T)(object)JObject.FromObject(result);
-            }
-            return (T)(object)result;
+
+            if (typeof(T) == typeof(JObject)) return (T) (object) JObject.FromObject(result);
+            return (T) (object) result;
         }
 
         /// <summary>
-        /// Applies recursive Hashing on <paramref name="input"/> for all fields of given DataCategory <paramref name="dataCategory"/>
+        ///     Applies recursive Hashing on <paramref name="input" /> for all fields of given DataCategory
+        ///     <paramref name="dataCategory" />
         /// </summary>
         /// <param name="input">object to be hashed (will be modified by reference)</param>
         /// <param name="dataCategory">Category of fields to be modified</param>
         protected void HashObject(ref object input, DataCategory? dataCategory = null)
         {
-            if (input == null)
-            {
-                return;
-            }
+            if (input == null) return;
             var inputType = input.GetType();
             if (inputType == typeof(string))
             {
-                var inputString = (string)input;
+                var inputString = (string) input;
                 HashString(ref inputString, dataCategory);
                 input = inputString;
             }
@@ -308,7 +330,8 @@ namespace BO4E.Encryption
             else if (inputType.ToString().StartsWith("BO4E.ENUM"))
             {
                 //affectedField.SetValue(mappedObject, Sha256HashEnum(affectedField.GetValue(mappedObject).ToString()));
-                _logger.LogWarning($"Hashing {inputType} is not supported, since the result would not be a valid ENUM value.");
+                _logger.LogWarning(
+                    $"Hashing {inputType} is not supported, since the result would not be a valid ENUM value.");
                 //throw new NotSupportedException($"Hashing {affectedField.FieldType} is not supported, since the result would not be a valid ENUM value.");
             }
             else if (inputType.IsGenericType && inputType.GetGenericTypeDefinition() == typeof(List<>))
@@ -321,14 +344,15 @@ namespace BO4E.Encryption
                     inputList[i] = listItem;
                 }
             }
-            else if (typeof(IDictionary<string, object>).IsAssignableFrom(inputType)) // typeof BusinessObject.userProperties
+            else if (
+                typeof(IDictionary<string, object>).IsAssignableFrom(inputType)) // typeof BusinessObject.userProperties
             {
                 dynamic dict = input as IDictionary<string, object>;
-                foreach (var dictKey in ((ICollection<string>)dict.Keys).ToList().Where(key => !_configuration.UnaffectedUserProperties.Contains(key)))
-                {
+                foreach (var dictKey in ((ICollection<string>) dict.Keys).ToList()
+                    .Where(key => !_configuration.UnaffectedUserProperties.Contains(key)))
                     if (dict[dictKey] != null)
                     {
-                        var inputString = (string)dict[dictKey];
+                        var inputString = (string) dict[dictKey];
                         HashString(ref inputString, dataCategory);
                         dict[dictKey] = JToken.FromObject(inputString);
                         /*//dict[dictKey].Set(dict[dictKey].ToString());
@@ -337,7 +361,7 @@ namespace BO4E.Encryption
                         dict.Remove(dictKey);
                         dict.Add(dictKey, newValue);*/
                     }
-                }
+
                 input = dict;
             }
             else
@@ -345,10 +369,7 @@ namespace BO4E.Encryption
                 var properties = inputType.GetProperties();
                 foreach (var prop in properties)
                 {
-                    if (prop.GetValue(input) == null || !prop.IsHashingRelevant(dataCategory))
-                    {
-                        continue;
-                    }
+                    if (prop.GetValue(input) == null || !prop.IsHashingRelevant(dataCategory)) continue;
                     try
                     {
                         var o = prop.GetValue(input);
@@ -360,28 +381,20 @@ namespace BO4E.Encryption
                         throw new ArgumentException($"Couldn't hash field {prop.Name}: {f.Message}");
                     }
                 }
+
                 if (!properties.Any())
-                {
-                    throw new NotImplementedException($"Type {inputType} with value '{input}' has no subfields but is not handled separately.");
-                }
+                    throw new NotImplementedException(
+                        $"Type {inputType} with value '{input}' has no subfields but is not handled separately.");
             }
         }
 
         /// <summary>
-        /// instead of 'DE' oder another country code messlokationIds that are a hashed/pseudonymized value do start with this prefix.
-        /// </summary>
-        protected const string HashedMesslokationPrefix = "XX";
-
-        /// <summary>
-        /// instead of '5' or '4' marktlokationIds that are a hashed/pseudonymized value do start with this prefix.
-        /// </summary>
-        protected const string HashedMarktlokationPrefix = "9";
-
-        /// <summary>
-        /// Applies hashing on string value
+        ///     Applies hashing on string value
         /// </summary>
         /// <param name="input">string that is going to be hashed</param>
-        /// <param name="dataCategory"><see cref="DataCategory"/></param>
+        /// <param name="dataCategory">
+        ///     <see cref="DataCategory" />
+        /// </param>
         /// <returns>new string containing hashed content</returns>
         protected void HashString(ref string input, DataCategory? dataCategory)
         {
@@ -411,57 +424,56 @@ namespace BO4E.Encryption
             {
                 hashedValue = Sha256Hash(input);
             }
+
             input = hashedValue;
         }
 
         /// <summary>
-        /// check if a Marktlokation has been pseudonymized using <see cref="AnonymizerApproach.HASH"/>.
-        /// As of 2019 it's impossible for a "real" Marktlokation to fulfill this condition. 
+        ///     check if a Marktlokation has been pseudonymized using <see cref="AnonymizerApproach.HASH" />.
+        ///     As of 2019 it's impossible for a "real" Marktlokation to fulfill this condition.
         /// </summary>
         /// <param name="ma">Marktlokation</param>
-        /// <returns>true if the <see cref="Marktlokation.MarktlokationsId"/> fulfills the requirements of a hashed key</returns>
+        /// <returns>true if the <see cref="Marktlokation.MarktlokationsId" /> fulfills the requirements of a hashed key</returns>
         public static bool HasHashedKey(Marktlokation ma)
         {
-            return !string.IsNullOrWhiteSpace(ma.MarktlokationsId) && ma.MarktlokationsId.StartsWith(HashedMarktlokationPrefix);
-        }
-        /// <summary>
-        /// check if a Messlokation has been pseudonymized using <see cref="AnonymizerApproach.HASH"/>
-        /// As of 2019 it's impossible for a "real" Messlokation to fulfill this condition.
-        /// </summary>
-        /// <param name="me">Messlokation</param>
-        /// <returns>true if the <see cref="Messlokation.MesslokationsId"/> fulfills the requirements of a hashed key</returns>
-        public static bool HasHashedKey(Messlokation me)
-        {
-            return !string.IsNullOrWhiteSpace(me.MesslokationsId) && me.MesslokationsId.StartsWith(HashedMesslokationPrefix);
+            return !string.IsNullOrWhiteSpace(ma.MarktlokationsId) &&
+                   ma.MarktlokationsId.StartsWith(HashedMarktlokationPrefix);
         }
 
         /// <summary>
-        /// check if an Energiemenge been pseudonymized using <see cref="AnonymizerApproach.HASH"/>.
-        /// Calls <see cref="IsHashedKey(string)"/> for <see cref="Energiemenge.LokationsId"/>.
+        ///     check if a Messlokation has been pseudonymized using <see cref="AnonymizerApproach.HASH" />
+        ///     As of 2019 it's impossible for a "real" Messlokation to fulfill this condition.
+        /// </summary>
+        /// <param name="me">Messlokation</param>
+        /// <returns>true if the <see cref="Messlokation.MesslokationsId" /> fulfills the requirements of a hashed key</returns>
+        public static bool HasHashedKey(Messlokation me)
+        {
+            return !string.IsNullOrWhiteSpace(me.MesslokationsId) &&
+                   me.MesslokationsId.StartsWith(HashedMesslokationPrefix);
+        }
+
+        /// <summary>
+        ///     check if an Energiemenge been pseudonymized using <see cref="AnonymizerApproach.HASH" />.
+        ///     Calls <see cref="IsHashedKey(string)" /> for <see cref="Energiemenge.LokationsId" />.
         /// </summary>
         /// <param name="em">Energiemenge</param>
-        /// <returns>true if the <see cref="Energiemenge.LokationsId"/> fulfills the requirements of a hashed key</returns>
+        /// <returns>true if the <see cref="Energiemenge.LokationsId" /> fulfills the requirements of a hashed key</returns>
         public static bool HasHashedKey(Energiemenge em)
         {
             return IsHashedKey(em.LokationsId);
         }
 
         /// <summary>
-        /// Checks if a stright might originate from <see cref="AnonymizerApproach.HASH"/>
+        ///     Checks if a stright might originate from <see cref="AnonymizerApproach.HASH" />
         /// </summary>
         /// <param name="key">a string, e.g. '54321012345'</param>
-        /// <returns>true if the <paramref name="key"/> could originate from hashing.</returns>
+        /// <returns>true if the <paramref name="key" /> could originate from hashing.</returns>
         public static bool IsHashedKey(string key)
         {
-            if (string.IsNullOrWhiteSpace(key))
-            {
-                return false;
-            }
+            if (string.IsNullOrWhiteSpace(key)) return false;
             if (Marktlokation.ValidateId(key) && key.StartsWith(HashedMarktlokationPrefix) ||
                 Messlokation.ValidateId(key) && key.StartsWith(HashedMesslokationPrefix))
-            {
                 return true;
-            }
             try
             {
                 _ = Convert.FromBase64String(key);
@@ -470,6 +482,7 @@ namespace BO4E.Encryption
             {
                 return false;
             }
+
             return true; // Todo: fix this
             //return bytes.Length == 256 / 8; // sha256 = 256 bits
         }
@@ -481,42 +494,21 @@ namespace BO4E.Encryption
             using (var hash = SHA256.Create())
             {
                 if (_hashingSalt != null)
-                {
-                    hashedByteArray = hash.ComputeHash(Encoding.UTF8.GetBytes(value + Convert.ToBase64String(_hashingSalt)));
-                }
+                    hashedByteArray =
+                        hash.ComputeHash(Encoding.UTF8.GetBytes(value + Convert.ToBase64String(_hashingSalt)));
                 else
-                {
                     //_logger.LogWarning("Hashing without a salt.");
                     hashedByteArray = hash.ComputeHash(Encoding.UTF8.GetBytes(value));
-                }
             }
+
             return hashedByteArray;
         }
 
         private string Sha256Hash(string value, string alphabet = null)
         {
-            if (alphabet == null)
-            {
-                return string.Concat(Sha256HashBytes(value).Select(item => item.ToString("x2")));
-            }
+            if (alphabet == null) return string.Concat(Sha256HashBytes(value).Select(item => item.ToString("x2")));
 
             return Sha256HashBytes(value).ToBaseXString(alphabet);
-        }
-
-        private const string Base36Alphabet = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-        private const string Base10Alphabet = "0123456789";
-
-        /// <inheritdoc/>
-        public void Dispose()
-        {
-            _privateKey = null;
-            if (_hashingSalt != null)
-            {
-                for (var i = 0; i < _hashingSalt.Length; i++)
-                {
-                    _hashingSalt[i] = 0x0;
-                }
-            }
         }
 
         ~Anonymizer()

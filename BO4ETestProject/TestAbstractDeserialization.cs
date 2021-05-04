@@ -1,14 +1,10 @@
-﻿using BO4E.BO;
+﻿using System.IO;
+using System.Text.Json;
+using BO4E.BO;
 using BO4E.meta.LenientConverters;
-
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
-
-using System.IO;
-using System.Text.Json;
-
 using JsonSerializer = System.Text.Json.JsonSerializer;
 
 namespace TestBO4E
@@ -17,9 +13,9 @@ namespace TestBO4E
     public class TestAbstractDeserialization
     {
         /// <summary>
-        /// Tests Abstract Deserialization using Newtonsoft.Json
+        ///     Tests Abstract Deserialization using Newtonsoft.Json
         /// </summary>
-        /// <seealso cref="TestAbstractDeserializationSystemText"/>
+        /// <seealso cref="TestAbstractDeserializationSystemText" />
         [TestMethod]
         public void TestMaLoDeserializationNewtonsoft()
         {
@@ -29,6 +25,7 @@ namespace TestBO4E
                 var jsonString = r.ReadToEnd();
                 json = JObject.Parse(jsonString);
             }
+
             var maloString = json["input"].ToString();
             var malo = JsonConvert.DeserializeObject<Marktlokation>(maloString);
             Assert.IsNotNull(malo);
@@ -38,9 +35,9 @@ namespace TestBO4E
         }
 
         /// <summary>
-        /// Tests Abstract Deserialization using System.Text
+        ///     Tests Abstract Deserialization using System.Text
         /// </summary>
-        /// <seealso cref="TestMaLoDeserializationNewtonsoft"/>
+        /// <seealso cref="TestMaLoDeserializationNewtonsoft" />
         [TestMethod]
         public void TestMaLoDeserializationSystemText()
         {
@@ -50,13 +47,14 @@ namespace TestBO4E
                 var jsonString = r.ReadToEnd();
                 json = JsonDocument.Parse(jsonString);
             }
+
             var options = LenientParsing.MOST_LENIENT.GetJsonSerializerOptions();
 
             var maloString = json.RootElement.GetProperty("input").GetRawText();
             Assert.IsNotNull(maloString);
-            var malo = System.Text.Json.JsonSerializer.Deserialize<Marktlokation>(maloString, options);
+            var malo = JsonSerializer.Deserialize<Marktlokation>(maloString, options);
             Assert.IsNotNull(malo);
-            var bo = System.Text.Json.JsonSerializer.Deserialize<BusinessObject>(maloString, options);
+            var bo = JsonSerializer.Deserialize<BusinessObject>(maloString, options);
             Assert.IsNotNull(bo);
             Assert.IsInstanceOfType(bo, typeof(Marktlokation));
         }
@@ -70,6 +68,7 @@ namespace TestBO4E
                 var jsonString = r.ReadToEnd();
                 json = JObject.Parse(jsonString);
             }
+
             var settings = new JsonSerializerSettings
             {
                 TypeNameHandling = TypeNameHandling.Objects
@@ -83,7 +82,7 @@ namespace TestBO4E
         }
 
         /// <summary>
-        /// similar to <see cref="TestMaLoDeserializationNewtonsoft"/> but with .NET5
+        ///     similar to <see cref="TestMaLoDeserializationNewtonsoft" /> but with .NET5
         /// </summary>
         [TestMethod]
         public void TestMaLoDeserializationNet5()
@@ -94,7 +93,8 @@ namespace TestBO4E
                 var jsonString = r.ReadToEnd();
                 json = JsonDocument.Parse(jsonString);
             }
-            var options = BO4E.meta.LenientConverters.LenientParsing.MOST_LENIENT.GetJsonSerializerOptions();
+
+            var options = LenientParsing.MOST_LENIENT.GetJsonSerializerOptions();
             var maloString = json.RootElement.GetProperty("input").GetRawText();
             var malo = JsonSerializer.Deserialize<Marktlokation>(maloString, options);
             Assert.IsNotNull(malo);
