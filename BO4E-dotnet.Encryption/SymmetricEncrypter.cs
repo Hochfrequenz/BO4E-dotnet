@@ -6,6 +6,9 @@ using Sodium;
 
 namespace BO4E.Encryption
 {
+    /// <summary>
+    /// An encrypter using symmetric encryption.
+    /// </summary>
     public class SymmetricEncrypter : Encrypter
     {
         private readonly byte[] _secretKey;
@@ -85,13 +88,24 @@ namespace BO4E.Encryption
             return Encoding.UTF8.GetString(plainBytes);
         }
 
-
+        /// <summary>
+        /// <inheritdoc cref="Encrypter.Decrypt"/>
+        /// </summary>
+        /// <param name="cipherText"></param>
+        /// <param name="associatedData"></param>
+        /// <param name="nonceString"></param>
+        /// <returns></returns>
         public string Decrypt(string cipherText, string associatedData, string nonceString)
         {
             var nonceBytes = Convert.FromBase64String(nonceString);
             return Decrypt(cipherText, associatedData, nonceBytes);
         }
 
+        /// <summary>
+        /// <inheritdoc cref="Encrypter.Decrypt"/>
+        /// </summary>
+        /// <param name="encryptedObject"></param>
+        /// <returns></returns>
         public override BusinessObject Decrypt(EncryptedObject encryptedObject)
         {
             var
@@ -101,6 +115,12 @@ namespace BO4E.Encryption
             return JsonConvert.DeserializeObject<BusinessObject>(plainString, encryptionSerializerSettings);
         }
 
+        /// <summary>
+        /// <inheritdoc cref="Encrypter.Decrypt{T}"/>
+        /// </summary>
+        /// <param name="encryptedObject"></param>
+        /// <typeparam name="T"></typeparam>
+        /// <returns></returns>
         public override T Decrypt<T>(EncryptedObject encryptedObject)
         {
             var eo = (EncryptedObjectAEAD)encryptedObject;
@@ -109,6 +129,9 @@ namespace BO4E.Encryption
             return JsonConvert.DeserializeObject<T>(plainString, encryptionSerializerSettings);
         }
 
+        /// <summary>
+        /// <inheritdoc cref="Encrypter.Dispose"/>
+        /// </summary>
         public override void Dispose()
         {
             if (_secretKey != null)
@@ -116,6 +139,9 @@ namespace BO4E.Encryption
                     _secretKey[i] = 0x0;
         }
 
+        /// <summary>
+        /// <inheritdoc cref="Encrypter.Dispose"/>
+        /// </summary>
         ~SymmetricEncrypter()
         {
             Dispose();

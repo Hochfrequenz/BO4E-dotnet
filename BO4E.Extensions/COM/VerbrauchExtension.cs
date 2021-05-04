@@ -9,6 +9,9 @@ using Newtonsoft.Json;
 
 namespace BO4E.Extensions.COM
 {
+    /// <summary>
+    /// Extension Methods for <see cref="BO4E.COM.Verbrauch"/>
+    /// </summary>
     public static class VerbrauchExtension
     {
         /// <summary>
@@ -18,16 +21,32 @@ namespace BO4E.Extensions.COM
         /// <param name="v1"></param>
         /// <param name="v2"></param>
         /// <returns></returns>
-        public static HashSet<Verbrauch> Merge(this Verbrauch v1, Verbrauch v2)
-        {
-            return v1.Merge(v2, false, false);
-        }
+        public static HashSet<Verbrauch> Merge(this Verbrauch v1, Verbrauch v2) =>
+            v1.Merge(v2, false, false);
 
-        public static HashSet<Verbrauch> MergeRedundant(this Verbrauch v1, Verbrauch v2, bool biased)
-        {
-            return v1.Merge(v2, true, biased);
-        }
+        /// <summary>
+        /// Apply <see cref="Merge(BO4E.COM.Verbrauch,BO4E.COM.Verbrauch)"/> to the provided Verbräuche.
+        /// But remove identical entries that occur in both <paramref name="v1"/> and <paramref name="v2"/> 
+        /// </summary>
+        /// <param name="v1"></param>
+        /// <param name="v2"></param>
+        /// <param name="biased"></param>
+        /// <returns></returns>
+        public static HashSet<Verbrauch> MergeRedundant(this Verbrauch v1, Verbrauch v2, bool biased) =>
+            v1.Merge(v2, true, biased);
 
+        /// <summary>
+        /// merge two <see cref="Verbrauch"/> entities.
+        /// Merging means that two entites are moved into one entites that has the same properties as the two combined.
+        /// Depending on the unit this could mean adding their values or averaging them.
+        /// See the unittests for details.
+        /// </summary>
+        /// <param name="v1"></param>
+        /// <param name="v2"></param>
+        /// <param name="redundant"></param>
+        /// <param name="biased"></param>
+        /// <returns></returns>
+        /// <exception cref="ArgumentException"></exception>
         public static HashSet<Verbrauch> Merge(this Verbrauch v1, Verbrauch v2, bool redundant, bool biased)
         {
             var result = new HashSet<Verbrauch>();
@@ -192,11 +211,13 @@ namespace BO4E.Extensions.COM
             return new TimeRange(v.Startdatum, v.Enddatum);
         }
 
-        public static TimeSpan GetDuration(this Verbrauch v)
-        {
-            ITimeRange tr = v.GetTimeRange();
-            return tr.Duration;
-        }
+        /// <summary>
+        /// <see cref="ITimePeriod.GetDuration"/>
+        /// </summary>
+        /// <param name="v"></param>
+        /// <returns></returns>
+        public static TimeSpan GetDuration(this Verbrauch v) => v.GetTimeRange().Duration;
+
 
         /// <summary>
         ///     De-tangles a list of overlapping Verbrauch entries where entries can be subsets of other entries.
@@ -333,21 +354,45 @@ namespace BO4E.Extensions.COM
             return v1.OverlapsWith(new TimeRange(v2.Startdatum, v2.Enddatum, true));
         }
 
+        /// <summary>
+        /// <inheritdoc cref="ITimePeriod.OverlapsWith"/>
+        /// </summary>
+        /// <param name="v1"></param>
+        /// <param name="tr2"></param>
+        /// <returns></returns>
         public static bool OverlapsWith(this Verbrauch v1, ITimeRange tr2)
         {
             return new TimeRange(v1.Startdatum, v1.Enddatum).OverlapsWith(tr2);
         }
 
+        /// <summary>
+        /// <inheritdoc cref="ITimeRange.GetIntersection"/>
+        /// </summary>
+        /// <param name="v1"></param>
+        /// <param name="tr2"></param>
+        /// <returns></returns>
         public static ITimeRange GetIntersection(this Verbrauch v1, ITimeRange tr2)
         {
             return new TimeRange(v1.Startdatum, v1.Enddatum).GetIntersection(tr2);
         }
 
+        /// <summary>
+        /// <inheritdoc cref="ITimeRange.GetIntersection"/>
+        /// </summary>
+        /// <param name="v1"></param>
+        /// <param name="v2"></param>
+        /// <returns></returns>
         public static ITimeRange GetIntersection(this Verbrauch v1, Verbrauch v2)
         {
             return v1.GetIntersection(new TimeRange(v2.Startdatum, v2.Enddatum));
         }
 
+        /// <summary>
+        /// <inheritdoc cref="ITimePeriod.OverlapsWith"/>
+        /// </summary>
+        /// <param name="v1"></param>
+        /// <param name="v2"></param>
+        /// <returns></returns>
         public static bool Contains(this Verbrauch v1, Verbrauch v2)
         {
             return v1.OverlapsWith(v2) && v1.Startdatum <= v2.Startdatum && v1.Enddatum >= v2.Enddatum;

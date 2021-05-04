@@ -15,7 +15,7 @@ namespace BO4E.Extensions.BusinessObjects.Energiemenge
     {
         /// <summary>
         ///     Generate a <see cref="CompletenessReport" /> for the given configuration. Same as
-        ///     <see cref="GetCompletenessReport(BO.Energiemenge, TimeRange, Wertermittlungsverfahren, string, Mengeneinheit)" />
+        ///     <see cref="GetCompletenessReport(BO4E.BO.Energiemenge,BO4E.Reporting.CompletenessReport.CompletenessReportConfiguration)" />
         ///     but with all parameters in a configuration container instead of loose arguments.
         /// </summary>
         /// <param name="em">Energiemenge</param>
@@ -102,7 +102,7 @@ namespace BO4E.Extensions.BusinessObjects.Energiemenge
                 };
             }
 
-            if (em.Energieverbrauch != null && em.Energieverbrauch.Count > 0)
+            if (em.Energieverbrauch != null && em.Energieverbrauch.Any())
             {
                 /*using (MiniProfiler.Current.Step("populating time slices of/with missing/null values"))
                 {

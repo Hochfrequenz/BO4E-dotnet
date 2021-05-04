@@ -18,9 +18,13 @@ using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using Org.BouncyCastle.Crypto;
 using Org.BouncyCastle.Security;
+#pragma warning disable 618
 
 namespace BO4E.Encryption
 {
+    /// <summary>
+    /// An Anonymizer removes privacy relevant data from business objects.
+    /// </summary>
     public class Anonymizer : IDisposable
     {
         /// <summary>
@@ -41,12 +45,19 @@ namespace BO4E.Encryption
         private byte[] _hashingSalt;
         private AsymmetricKeyParameter _privateKey;
 
+        /// <summary>
+        /// initialize the Anonymizer by providing a configuration.
+        /// </summary>
+        /// <param name="configuration"></param>
         public Anonymizer(AnonymizerConfiguration configuration)
         {
             _configuration = configuration;
             if (_configuration.HashingSalt != null) SetHashingSalt(configuration.GetSalt());
         }
 
+        /// <summary>
+        /// a public key in X509 format.
+        /// </summary>
         public X509Certificate2 PublicKeyX509 { get; set; }
 
         /// <inheritdoc />
@@ -118,7 +129,13 @@ namespace BO4E.Encryption
             return salt;
         }
 
-        public T ApplyOperations<T>(JObject jobject)
+        /// <summary>
+        /// Apply the operations from the configuration provided in the constructor to <paramref name="jobject"/>.
+        /// </summary>
+        /// <param name="jobject"></param>
+        /// <typeparam name="T"></typeparam>
+        /// <returns></returns>
+        public T ApplyOperations<T>(JObject jobject) where T : BusinessObject
         {
             var bo = BoMapper.MapObject(jobject, LenientParsing.MOST_LENIENT);
             return ApplyOperations<T>(bo);
@@ -511,6 +528,9 @@ namespace BO4E.Encryption
             return Sha256HashBytes(value).ToBaseXString(alphabet);
         }
 
+        /// <summary>
+        /// dispose on destruction
+        /// </summary>
         ~Anonymizer()
         {
             Dispose();

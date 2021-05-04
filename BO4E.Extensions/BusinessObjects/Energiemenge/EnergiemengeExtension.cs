@@ -123,10 +123,7 @@ namespace BO4E.Extensions.BusinessObjects.Energiemenge
         }
 
         /// <summary>
-        ///     Get consumption in given time reference frame. Trying to automatically determine parameters and forward to
-        ///     <see
-        ///         cref="BO4E.BO.Energiemenge.GetConsumption(BO.Energiemenge, TimeRange, Wertermittlungsverfahren, string, Mengeneinheit)" />
-        ///     .
+        ///     Get consumption in given time reference frame.
         /// </summary>
         /// <param name="em">Energiemenge</param>
         /// <param name="reference">time reference frame</param>
@@ -229,7 +226,7 @@ namespace BO4E.Extensions.BusinessObjects.Energiemenge
         ///     )
         ///     for a pure Energiemenge with automatically found parameters.
         /// </summary>
-        /// <seealso cref="IsPure(BO4E.BO.Energiemenge)" />
+        /// <seealso cref="IsPure"/>
         /// <param name="em">Energiemenge</param>
         /// <returns>Tuple of average value and unit of measurement</returns>
         public static Tuple<decimal?, Mengeneinheit> GetAverage(this BO.Energiemenge em)
@@ -242,7 +239,7 @@ namespace BO4E.Extensions.BusinessObjects.Energiemenge
         }
 
         /// <summary>
-        ///     Same as <see cref="GetAverage(Mengeneinheit, DateTime, DateTime)" /> but without specifying a time slice.
+        ///     Same as <see cref="GetAverage(BO4E.BO.Energiemenge)" /> but without specifying a time slice.
         /// </summary>
         /// <param name="em">Energiemenge</param>
         /// <param name="wev">type of measurement</param>
@@ -366,7 +363,7 @@ namespace BO4E.Extensions.BusinessObjects.Energiemenge
         }
 
         /// <summary>
-        ///     <see cref="GetMissingTimeRanges(BO.Energiemenge, TimeRange, Wertermittlungsverfahren, string, Mengeneinheit)" />
+        ///     <see cref="GetMissingTimeRanges(BO4E.BO.Energiemenge)"/>
         /// </summary>
         /// <param name="em">Energiemenge</param>
         /// <param name="reference">reference time frame</param>
@@ -427,7 +424,7 @@ namespace BO4E.Extensions.BusinessObjects.Energiemenge
         }
 
         /// <summary>
-        ///     <see cref="IsEvenlySpaced(BO.Energiemenge, TimeRange, Wertermittlungsverfahren, string, Mengeneinheit, bool)" />
+        ///     <see cref="IsEvenlySpaced(BO4E.BO.Energiemenge,Itenso.TimePeriod.ITimeRange,BO4E.ENUM.Wertermittlungsverfahren,string,BO4E.ENUM.Mengeneinheit,bool)"/>
         /// </summary>
         /// <param name="em">Energiemenge</param>
         /// <param name="allowGaps"></param>
@@ -545,7 +542,7 @@ namespace BO4E.Extensions.BusinessObjects.Energiemenge
 
         /// <summary>
         ///     Get ratio of overlap between given Energiemenge and a reference.
-        ///     Method is basically just another name for <see cref="GetOverlapFactor(TimeRange, TimeRange, bool)" />
+        ///     Method is basically just another name for <see cref="GetOverlapFactor"/>
         /// </summary>
         /// <param name="em">Energiemenge</param>
         /// <param name="reference">reference time range</param>
@@ -744,6 +741,15 @@ namespace BO4E.Extensions.BusinessObjects.Energiemenge
             return em.IsPureMengeneinheit() && em.Energieverbrauch.First().Einheit.IsExtensive();
         }
 
+        /// <summary>
+        /// Splits the energy menge in groups that share the same:
+        /// * <see cref="Verbrauch.Wertermittlungsverfahren"/>,
+        /// * <see cref="Verbrauch.Einheit"/>,
+        /// * <see cref="Verbrauch.Obiskennzahl"/>
+        /// and are considered "pure".
+        /// </summary>
+        /// <param name="em"></param>
+        /// <returns>a list of pure energiemengen (<see cref="IsPure"/>)</returns>
         public static List<BO.Energiemenge> SplitInPureGroups(this BO.Energiemenge em)
         {
             if (em.Energieverbrauch == null) return new List<BO.Energiemenge> { em };
@@ -824,7 +830,7 @@ namespace BO4E.Extensions.BusinessObjects.Energiemenge
         }
 
         /// <summary>
-        ///     tests if the method <see cref="Verbrauch.FixSapCdsBug" /> has been executed yet.
+        ///     tests if the method <see cref="Verbrauch.FixSapBugs"/> has been executed yet.
         /// </summary>
         /// <returns>true if Energiemenge has been sanitized</returns>
         private static bool HasBeenSanitized(this BO.Energiemenge em)
@@ -849,6 +855,10 @@ namespace BO4E.Extensions.BusinessObjects.Energiemenge
             return sanitized;
         }
 
+        /// <summary>
+        /// Apply <see cref="VerbrauchExtension.Detangle"/> to the <see cref="BO4E.BO.Energiemenge.Energieverbrauch"/>.
+        /// </summary>
+        /// <param name="em"></param>
         public static void Detangle(this BO.Energiemenge em)
         {
             if (em.Energieverbrauch != null) em.Energieverbrauch = VerbrauchExtension.Detangle(em.Energieverbrauch);
