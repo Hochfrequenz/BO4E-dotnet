@@ -10,33 +10,6 @@ namespace TestBO4E
     [TestClass]
     public class TestMultiLangJson
     {
-        public class NestedObject
-        {
-            [FieldName("internal_english", Language.EN)]
-            public string InternDeutsch;
-
-            [FieldName("int_english", Language.EN)]
-            public int IntDeutsch;
-
-            [FieldName("bool_english", Language.EN)]
-            public bool BoolDeutsch;
-        }
-
-        public class MultiLangBo : BusinessObject
-        {
-            [FieldName("date_english", Language.EN)]
-            public DateTimeOffset DatumDeutsch;
-
-            [FieldName("value_english", Language.EN)]
-            public string WertDeutsch;
-
-            [FieldName("internal Object", Language.EN)]
-            public NestedObject Intern;
-
-            [FieldName("internal Object List", Language.EN)]
-            public List<NestedObject> InternList;
-        }
-
         [TestMethod]
         public void TestContractResolverSerialization()
         {
@@ -110,6 +83,33 @@ namespace TestBO4E
 
             var ml = JsonConvert.DeserializeObject<MultiLangBo>(deJson);
             Assert.AreNotEqual(DateTime.MinValue, ml.DatumDeutsch.UtcDateTime);
+        }
+
+        public class NestedObject
+        {
+            [FieldName("bool_english", Language.EN)]
+            public bool BoolDeutsch;
+
+            [FieldName("int_english", Language.EN)]
+            public int IntDeutsch;
+
+            [FieldName("internal_english", Language.EN)]
+            public string InternDeutsch;
+        }
+
+        public class MultiLangBo : BusinessObject
+        {
+            [FieldName("date_english", Language.EN)]
+            public DateTimeOffset DatumDeutsch;
+
+            [FieldName("internal Object", Language.EN)]
+            public NestedObject Intern;
+
+            [FieldName("internal Object List", Language.EN)]
+            public List<NestedObject> InternList;
+
+            [FieldName("value_english", Language.EN)]
+            public string WertDeutsch;
         }
 
         //[TestMethod]

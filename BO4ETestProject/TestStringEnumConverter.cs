@@ -5,6 +5,7 @@ using BO4E.meta.LenientConverters;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
+using JsonSerializer = System.Text.Json.JsonSerializer;
 
 namespace TestBO4E
 {
@@ -15,10 +16,10 @@ namespace TestBO4E
         {
             Mengeneinheit.TAG
         };
+
         [TestMethod]
         public void TestMengeneinheitNewtonsoft()
         {
-
             var jsonString = JsonConvert.SerializeObject(einheiten, new StringEnumConverter());
             Assert.IsTrue(jsonString.Contains("TAG"));
         }
@@ -26,11 +27,11 @@ namespace TestBO4E
         [TestMethod]
         public void TestMengeneinheit()
         {
-            var options = new JsonSerializerOptions()
+            var options = new JsonSerializerOptions
             {
                 Converters = { new StringNullableEnumConverter() }
             };
-            var jsonString = System.Text.Json.JsonSerializer.Serialize(einheiten, options);
+            var jsonString = JsonSerializer.Serialize(einheiten, options);
             Assert.IsTrue(jsonString.Contains("TAG"));
         }
     }

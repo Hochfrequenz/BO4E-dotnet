@@ -1,20 +1,17 @@
-﻿using BO4E.BO;
-
+﻿using System;
+using System.Text;
+using BO4E.BO;
 using Newtonsoft.Json;
-
 using Sodium;
 
-using System;
-using System.Text;
-
-namespace BO4E.Extensions.Encryption
+namespace BO4E.Encryption
 {
     public class SymmetricEncrypter : Encrypter
     {
         private readonly byte[] _secretKey;
 
         /// <summary>
-        /// pass the secret encryption key to the constructor
+        ///     pass the secret encryption key to the constructor
         /// </summary>
         /// <param name="secretKey">secret key</param>
         public SymmetricEncrypter(byte[] secretKey)
@@ -22,14 +19,17 @@ namespace BO4E.Extensions.Encryption
             _secretKey = new byte[secretKey.Length];
             secretKey.CopyTo(_secretKey, 0);
         }
-        /// <summary>
-        /// pass the secret key as base64 encoded string to the constructor
-        /// </summary>
-        /// <param name="secretKey">secret key as base64 encoded string</param>
-        public SymmetricEncrypter(string secretKey) : this(Convert.FromBase64String(secretKey)) { }
 
         /// <summary>
-        /// Encrypt a given plain text and add associated data.
+        ///     pass the secret key as base64 encoded string to the constructor
+        /// </summary>
+        /// <param name="secretKey">secret key as base64 encoded string</param>
+        public SymmetricEncrypter(string secretKey) : this(Convert.FromBase64String(secretKey))
+        {
+        }
+
+        /// <summary>
+        ///     Encrypt a given plain text and add associated data.
         /// </summary>
         /// <param name="plainText">UTF-8 encoded string containing the plain text to be encrypted</param>
         /// <param name="associatedDataString">max. 16 character long string (not secret)</param>
@@ -45,7 +45,7 @@ namespace BO4E.Extensions.Encryption
         }
 
         /// <summary>
-        /// Encrypt a given plain text and add associated data.
+        ///     Encrypt a given plain text and add associated data.
         /// </summary>
         /// <param name="plainText">UTF-8 encoded string containing the plain text to be encrypted</param>
         /// <param name="associatedDataString">max. 16 character long string (not secret)</param>
@@ -57,7 +57,7 @@ namespace BO4E.Extensions.Encryption
         }
 
         /// <summary>
-        /// Encrypt a Business Object
+        ///     Encrypt a Business Object
         /// </summary>
         /// <param name="plainObject">unencrypted Business Object</param>
         /// <param name="associatedDataString">max. 16 character long string (not secret)</param>
@@ -69,8 +69,9 @@ namespace BO4E.Extensions.Encryption
             var cipherString = Encrypt(plainText, associatedDataString, nonce);
             return new EncryptedObjectAEAD(cipherString, associatedDataString, Convert.ToBase64String(nonce));
         }
+
         /// <summary>
-        /// Decrypts a given cipher texts and checks if it corresponds to the associated data.
+        ///     Decrypts a given cipher texts and checks if it corresponds to the associated data.
         /// </summary>
         /// <param name="cipherText">Base64 encoded encrypted bytes</param>
         /// <param name="associatedDataString">max. 16 character long string (not secret)</param>
@@ -93,11 +94,9 @@ namespace BO4E.Extensions.Encryption
 
         public override BusinessObject Decrypt(EncryptedObject encryptedObject)
         {
-            var eo = (EncryptedObjectAEAD)encryptedObject;//(EncryptedObjectAEAD)BoMapper.MapObject("EncryptedObjectAEAD", JObject.FromObject(encryptedObject));
-            if (eo == null)
-            {
-                return null;
-            }
+            var
+                eo = (EncryptedObjectAEAD)encryptedObject; //(EncryptedObjectAEAD)BoMapper.MapObject("EncryptedObjectAEAD", JObject.FromObject(encryptedObject));
+            if (eo == null) return null;
             var plainString = Decrypt(eo.CipherText, eo.AssociatedData, eo.Nonce);
             return JsonConvert.DeserializeObject<BusinessObject>(plainString, encryptionSerializerSettings);
         }
@@ -105,10 +104,7 @@ namespace BO4E.Extensions.Encryption
         public override T Decrypt<T>(EncryptedObject encryptedObject)
         {
             var eo = (EncryptedObjectAEAD)encryptedObject;
-            if (eo == null)
-            {
-                return null;
-            }
+            if (eo == null) return null;
             var plainString = Decrypt(eo.CipherText, eo.AssociatedData, eo.Nonce);
             return JsonConvert.DeserializeObject<T>(plainString, encryptionSerializerSettings);
         }
@@ -116,12 +112,8 @@ namespace BO4E.Extensions.Encryption
         public override void Dispose()
         {
             if (_secretKey != null)
-            {
                 for (var i = 0; i < _secretKey.Length; i++)
-                {
                     _secretKey[i] = 0x0;
-                }
-            }
         }
 
         ~SymmetricEncrypter()

@@ -1,7 +1,8 @@
-﻿using BO4E.BO;
+﻿using System;
+using System.Collections.Generic;
+using BO4E.BO;
 using BO4E.COM;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System.Collections.Generic;
 
 namespace TestBO4E
 {
@@ -22,16 +23,16 @@ namespace TestBO4E
             Assert.IsTrue(marktlokation.TryGetExterneReferenz("foo", out var actualBar));
             Assert.AreEqual("bar", actualBar);
 
-            Assert.ThrowsException<System.ArgumentException>(
+            Assert.ThrowsException<ArgumentException>(
                 () => marktlokation.SetExterneReferenz(new ExterneReferenz { ExRefName = null, ExRefWert = "nicht bar" }),
                 "must not add invalid values");
-            Assert.ThrowsException<System.ArgumentException>(
+            Assert.ThrowsException<ArgumentException>(
                 () => marktlokation.SetExterneReferenz(new ExterneReferenz { ExRefName = "foo", ExRefWert = null }),
                 "must not add invalid values");
-            Assert.ThrowsException<System.ArgumentNullException>(() => marktlokation.SetExterneReferenz(null),
+            Assert.ThrowsException<ArgumentNullException>(() => marktlokation.SetExterneReferenz(null),
                 "must not add null");
 
-            Assert.ThrowsException<System.InvalidOperationException>(
+            Assert.ThrowsException<InvalidOperationException>(
                 () => marktlokation.SetExterneReferenz(new ExterneReferenz
                 { ExRefName = "foo", ExRefWert = "nicht bar" }), "By default conflicting values are rejected");
             marktlokation.SetExterneReferenz(new ExterneReferenz { ExRefName = "foo", ExRefWert = "nicht bar" }, true);

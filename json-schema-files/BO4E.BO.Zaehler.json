@@ -330,14 +330,14 @@
     "Geschaeftspartner": {
       "type": ["object", "null"],
       "properties": {
-        "guid": {
-          "type": ["string", "null"]
-        },
         "externeReferenzen": {
           "type": ["array", "null"],
           "items": {
             "$ref": "#/definitions/ExterneReferenz"
           }
+        },
+        "guid": {
+          "type": ["string", "null"]
         },
         "boTyp": {
           "type": ["string", "null"]
@@ -591,25 +591,14 @@
   },
   "type": "object",
   "properties": {
-    "zaehlertypSpezfikation": {
-      "type": ["string", "null"],
-      "enum": [
-        null,
-        "EDL40",
-        "EDL21",
-        "SONSTIGER_EHZ",
-        "MME_STANDARD",
-        "MME_MEDA"
-      ]
-    },
-    "guid": {
-      "type": ["string", "null"]
-    },
     "externeReferenzen": {
       "type": ["array", "null"],
       "items": {
         "$ref": "#/definitions/ExterneReferenz"
       }
+    },
+    "guid": {
+      "type": ["string", "null"]
     },
     "boTyp": {
       "type": ["string", "null"]
@@ -688,6 +677,17 @@
     "messwerterfassung": {
       "type": ["string", "null"],
       "enum": [null, "FERNAUSLESBAR", "MANUELL_AUSGELESENE"]
+    },
+    "zaehlertypspezifikation": {
+      "type": ["string", "null"],
+      "enum": [
+        null,
+        "EDL40",
+        "EDL21",
+        "SONSTIGER_EHZ",
+        "MME_STANDARD",
+        "MME_MEDA"
+      ]
     },
     "befestigungsart": {
       "type": ["string", "null"],

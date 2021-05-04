@@ -330,14 +330,14 @@
     "Geschaeftspartner": {
       "type": ["object", "null"],
       "properties": {
-        "guid": {
-          "type": ["string", "null"]
-        },
         "externeReferenzen": {
           "type": ["array", "null"],
           "items": {
             "$ref": "#/definitions/ExterneReferenz"
           }
+        },
+        "guid": {
+          "type": ["string", "null"]
         },
         "boTyp": {
           "type": ["string", "null"]
@@ -637,14 +637,14 @@
   },
   "type": "object",
   "properties": {
-    "guid": {
-      "type": ["string", "null"]
-    },
     "externeReferenzen": {
       "type": ["array", "null"],
       "items": {
         "$ref": "#/definitions/ExterneReferenz"
       }
+    },
+    "guid": {
+      "type": ["string", "null"]
     },
     "boTyp": {
       "type": ["string", "null"]

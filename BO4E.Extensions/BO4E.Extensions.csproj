@@ -1,0 +1,34 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <RootNamespace>BO4E_dotnet.Extensions</RootNamespace>
+    <VersionPrefix>0.2.3</VersionPrefix>
+    <VersionSuffix>$(VersionSuffix)</VersionSuffix>
+	<PackageLicenseFile>LICENSE.txt</PackageLicenseFile>
+    <PackageProjectUrl>https://github.com/Hochfrequenz/BO4E-dotnet/</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/Hochfrequenz/BO4E-dotnet/</RepositoryUrl>
+    <PackageId>Hochfrequenz.BO4E.Extensions</PackageId>
+    <Authors>Hochfrequenz Unternehmensberatung GmbH</Authors>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <Optimize>true</Optimize>
+    <DocumentationFile></DocumentationFile>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="TimePeriodLibrary.NET" Version="2.1.1" />
+	<None Include="..\LICENSE.txt">
+      <Pack>True</Pack>
+      <PackagePath></PackagePath>
+    </None>
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\BO4E.Reporting\BO4E.Reporting.csproj" />
+    <ProjectReference Include="..\BO4E\BO4E.csproj" />
+  </ItemGroup>
+
+</Project>
