@@ -16,7 +16,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\BO4E-dotnet.Encryption\BO4E-dotnet.Extensions.Encryption.csproj" />
+    <ProjectReference Include="..\BO4E-dotnet.Encryption\BO4E.Encryption.csproj" />
     <ProjectReference Include="..\BO4ETestProject\TestBO4E-dotnet.csproj" />
   </ItemGroup>
 
