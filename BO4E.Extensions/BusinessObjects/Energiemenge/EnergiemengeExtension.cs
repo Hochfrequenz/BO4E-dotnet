@@ -363,7 +363,7 @@ namespace BO4E.Extensions.BusinessObjects.Energiemenge
         }
 
         /// <summary>
-        ///     <see cref="GetMissingTimeRanges(BO.Energiemenge, TimeRange, Wertermittlungsverfahren, string, Mengeneinheit)" />
+        ///     <see cref="GetMissingTimeRanges(BO4E.BO.Energiemenge)"/>
         /// </summary>
         /// <param name="em">Energiemenge</param>
         /// <param name="reference">reference time frame</param>
@@ -830,7 +830,7 @@ namespace BO4E.Extensions.BusinessObjects.Energiemenge
         }
 
         /// <summary>
-        ///     tests if the method <see cref="Verbrauch.FixSapCdsBug" /> has been executed yet.
+        ///     tests if the method <see cref="Verbrauch.FixSapBugs"/> has been executed yet.
         /// </summary>
         /// <returns>true if Energiemenge has been sanitized</returns>
         private static bool HasBeenSanitized(this BO.Energiemenge em)
