@@ -145,7 +145,6 @@ namespace BO4E.BO
         /// Befestigungsart
         /// </summary>
         [JsonProperty(Required = Required.Default, Order = 18, PropertyName = "befestigungsart")]
-
         [System.Text.Json.Serialization.JsonPropertyName("befestigungsart")]
         [ProtoMember(1018)]
         [NonOfficial(NonOfficialCategory.REGULATORY_REQUIREMENTS)]

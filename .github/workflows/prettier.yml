@@ -19,5 +19,5 @@ jobs:
           github_token: "${{ secrets.github_token }}"
           eslint: false
           prettier: true
-          auto_fix: true
+          auto_fix: false
           prettier_args: --ignore-path .prettierignore
