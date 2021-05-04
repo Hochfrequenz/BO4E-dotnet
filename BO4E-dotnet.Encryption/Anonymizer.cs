@@ -171,7 +171,7 @@ namespace BO4E.Encryption
                                 .FirstOrDefault(a => a is JsonPropertyAttribute);
                             if (jsonPropertyAttribute != null)
                             {
-                                var jpa = (JsonPropertyAttribute) jsonPropertyAttribute;
+                                var jpa = (JsonPropertyAttribute)jsonPropertyAttribute;
                                 if (jpa.Required == Required.Always)
                                 {
                                     isRequired = true;
@@ -182,7 +182,7 @@ namespace BO4E.Encryption
 
                             if (isRequired && defaultValueAttribute != null)
                             {
-                                var dva = (DefaultValueAttribute) defaultValueAttribute;
+                                var dva = (DefaultValueAttribute)defaultValueAttribute;
                                 affectedProp.SetValue(result, dva.Value);
                             }
                             else if (bo.GetType().IsSubclassOf(typeof(BusinessObject)))
@@ -259,7 +259,7 @@ namespace BO4E.Encryption
                                 else if (affectedProp.PropertyType.IsSubclassOf(typeof(BusinessObject)))
                                 {
                                     affectedProp.SetValue(result,
-                                        xasyncenc.Encrypt((BusinessObject) affectedProp.GetValue(bo)));
+                                        xasyncenc.Encrypt((BusinessObject)affectedProp.GetValue(bo)));
                                 }
                                 else if (affectedProp.PropertyType.ToString()
                                     .StartsWith(
@@ -297,8 +297,8 @@ namespace BO4E.Encryption
                 }
             }
 
-            if (typeof(T) == typeof(JObject)) return (T) (object) JObject.FromObject(result);
-            return (T) (object) result;
+            if (typeof(T) == typeof(JObject)) return (T)(object)JObject.FromObject(result);
+            return (T)(object)result;
         }
 
         /// <summary>
@@ -313,7 +313,7 @@ namespace BO4E.Encryption
             var inputType = input.GetType();
             if (inputType == typeof(string))
             {
-                var inputString = (string) input;
+                var inputString = (string)input;
                 HashString(ref inputString, dataCategory);
                 input = inputString;
             }
@@ -348,11 +348,11 @@ namespace BO4E.Encryption
                 typeof(IDictionary<string, object>).IsAssignableFrom(inputType)) // typeof BusinessObject.userProperties
             {
                 dynamic dict = input as IDictionary<string, object>;
-                foreach (var dictKey in ((ICollection<string>) dict.Keys).ToList()
+                foreach (var dictKey in ((ICollection<string>)dict.Keys).ToList()
                     .Where(key => !_configuration.UnaffectedUserProperties.Contains(key)))
                     if (dict[dictKey] != null)
                     {
-                        var inputString = (string) dict[dictKey];
+                        var inputString = (string)dict[dictKey];
                         HashString(ref inputString, dataCategory);
                         dict[dictKey] = JToken.FromObject(inputString);
                         /*//dict[dictKey].Set(dict[dictKey].ToString());

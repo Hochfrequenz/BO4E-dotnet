@@ -34,7 +34,7 @@ namespace TestBO4E.Reporting
                     Startdatum = new DateTime(2003, 1, 1, 0, 0, 0, DateTimeKind.Utc)
                 }
             };
-            var crList = new List<CompletenessReport> {cr2, cr3, cr1};
+            var crList = new List<CompletenessReport> { cr2, cr3, cr1 };
             // before sorting
             Assert.AreEqual(2002, crList.First().ReferenceTimeFrame.Startdatum.Value.Year);
             Assert.AreEqual(2003, crList[1].ReferenceTimeFrame.Startdatum.Value.Year);

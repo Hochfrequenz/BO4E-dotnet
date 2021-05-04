@@ -83,9 +83,9 @@ namespace TestBO4E.Reporting
                 }
             };
 
-            reihenfolge.Add(new Dictionary<string, string> {["Wert"] = "V.wert"});
-            reihenfolge.Add(new Dictionary<string, string> {["Startdatum"] = "V.startdatum"});
-            reihenfolge.Add(new Dictionary<string, string> {["Enddatum"] = "V.enddatum"});
+            reihenfolge.Add(new Dictionary<string, string> { ["Wert"] = "V.wert" });
+            reihenfolge.Add(new Dictionary<string, string> { ["Startdatum"] = "V.startdatum" });
+            reihenfolge.Add(new Dictionary<string, string> { ["Enddatum"] = "V.enddatum" });
 
             var multiplicityResult = cr.ToCsv(lineTerminator: Environment.NewLine, reihenfolge: reihenfolge);
             Assert.AreEqual(2 + cr.Values.Count, new List<string>(multiplicityResult.Split(Environment.NewLine)).Count);

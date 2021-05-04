@@ -95,7 +95,7 @@ namespace BO4E.Encryption
         public override BusinessObject Decrypt(EncryptedObject encryptedObject)
         {
             var
-                eo = (EncryptedObjectAEAD) encryptedObject; //(EncryptedObjectAEAD)BoMapper.MapObject("EncryptedObjectAEAD", JObject.FromObject(encryptedObject));
+                eo = (EncryptedObjectAEAD)encryptedObject; //(EncryptedObjectAEAD)BoMapper.MapObject("EncryptedObjectAEAD", JObject.FromObject(encryptedObject));
             if (eo == null) return null;
             var plainString = Decrypt(eo.CipherText, eo.AssociatedData, eo.Nonce);
             return JsonConvert.DeserializeObject<BusinessObject>(plainString, encryptionSerializerSettings);
@@ -103,7 +103,7 @@ namespace BO4E.Encryption
 
         public override T Decrypt<T>(EncryptedObject encryptedObject)
         {
-            var eo = (EncryptedObjectAEAD) encryptedObject;
+            var eo = (EncryptedObjectAEAD)encryptedObject;
             if (eo == null) return null;
             var plainString = Decrypt(eo.CipherText, eo.AssociatedData, eo.Nonce);
             return JsonConvert.DeserializeObject<T>(plainString, encryptionSerializerSettings);

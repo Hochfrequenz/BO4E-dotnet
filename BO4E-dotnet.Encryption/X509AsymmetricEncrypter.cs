@@ -24,7 +24,7 @@ namespace BO4E.Encryption
         /// <param name="cert">X509 certificate must contain the public key.</param>
         public X509AsymmetricEncrypter(X509Certificate2 cert)
         {
-            _publicCerts = new HashSet<X509Certificate2> {cert};
+            _publicCerts = new HashSet<X509Certificate2> { cert };
             _privateKey = null;
         }
 
@@ -125,7 +125,7 @@ namespace BO4E.Encryption
                 pemKeyBase64 = "-----BEGIN RSA PRIVATE KEY-----\n" + pemKeyBase64 + "\n-----END RSA PRIVATE KEY-----";
             using (var reader = new StringReader(pemKeyBase64))
             {
-                return (AsymmetricCipherKeyPair) new PemReader(reader).ReadObject();
+                return (AsymmetricCipherKeyPair)new PemReader(reader).ReadObject();
             }
         }
 

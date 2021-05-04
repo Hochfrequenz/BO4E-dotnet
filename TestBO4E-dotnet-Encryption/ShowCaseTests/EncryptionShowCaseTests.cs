@@ -95,7 +95,7 @@ namespace TestBO4E.Encryption.ShowCaseTests
             //}
             Debug.WriteLine("Alice: And by the way, I hope you verified my fingerprint or the key itself.");
             Assert.AreEqual(Convert.ToBase64String(aliceKeyPair.PublicKey),
-                ((EncryptedObjectPublicKeyBox) encryptedBo).PublicKey, "Bob: I did, otherwise this would fail");
+                ((EncryptedObjectPublicKeyBox)encryptedBo).PublicKey, "Bob: I did, otherwise this would fail");
 
             Marktlokation decryptedMaLo;
             using (var bobsDecrypter = new AsymmetricEncrypter(bobKeyPair.PrivateKey))

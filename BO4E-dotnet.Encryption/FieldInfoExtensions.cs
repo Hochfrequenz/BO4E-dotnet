@@ -55,7 +55,7 @@ namespace BO4E.Encryption
                 foreach (var attribute in property.GetCustomAttributes()
                     .Where(a => a.GetType() == typeof(DataCategoryAttribute)))
                 {
-                    var dataCategoryAttribute = (DataCategoryAttribute) attribute;
+                    var dataCategoryAttribute = (DataCategoryAttribute)attribute;
                     if (!dataCategoryAttribute.Mapping.Contains(dataCategory.Value)) continue;
                     return true;
                 }

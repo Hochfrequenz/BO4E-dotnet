@@ -66,7 +66,7 @@ namespace TestBO4E.Encryption
 
                 Assert.IsNotNull(json, $"The content of file {testFile} seems to be no valid JSON.");
 
-                var boType = (string) json["boTyp"];
+                var boType = (string)json["boTyp"];
                 Assert.IsNotNull(boType,
                     $"The JSON content of file {testFile} is missing the obligatory 'boTyp' attribute.");
 
@@ -123,7 +123,7 @@ namespace TestBO4E.Encryption
                 using (var
                     reader = File.OpenText(@"encrypterTests/privatekey.pem")) // file containing RSA PKCS1 private key
                 {
-                    keyPair = (AsymmetricCipherKeyPair) new PemReader(reader).ReadObject();
+                    keyPair = (AsymmetricCipherKeyPair)new PemReader(reader).ReadObject();
                 }
 
                 // openssl genrsa -out privatekey.pem 2048
@@ -153,7 +153,7 @@ namespace TestBO4E.Encryption
                 using (var
                     reader = File.OpenText(@"encrypterTests/privatekey2.pem")) // file containing RSA PKCS1 private key
                 {
-                    keyPair2 = (AsymmetricCipherKeyPair) new PemReader(reader).ReadObject();
+                    keyPair2 = (AsymmetricCipherKeyPair)new PemReader(reader).ReadObject();
                 }
 
                 using (var xasydecMultiple = new X509AsymmetricEncrypter(keyPair.Private))
@@ -179,7 +179,7 @@ namespace TestBO4E.Encryption
             using (var
                 reader = File.OpenText(@"encrypterTests/privatekey2.pem")) // file containing RSA PKCS1 private key
             {
-                expectedPrivate = (AsymmetricCipherKeyPair) new PemReader(reader).ReadObject();
+                expectedPrivate = (AsymmetricCipherKeyPair)new PemReader(reader).ReadObject();
             }
 
             var actualPrivate = X509AsymmetricEncrypter.PrivateBase64KeyToACKP(

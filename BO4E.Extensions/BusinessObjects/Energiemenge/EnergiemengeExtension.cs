@@ -609,10 +609,10 @@ namespace BO4E.Extensions.BusinessObjects.Energiemenge
             try
             {
                 if (toReference)
-                    return (decimal) intersectedPeriods.TotalDuration.TotalSeconds /
-                           (decimal) reference.Duration.TotalSeconds;
+                    return (decimal)intersectedPeriods.TotalDuration.TotalSeconds /
+                           (decimal)reference.Duration.TotalSeconds;
 
-                return (decimal) intersectedPeriods.TotalDuration.TotalSeconds / (decimal) period.Duration.TotalSeconds;
+                return (decimal)intersectedPeriods.TotalDuration.TotalSeconds / (decimal)period.Duration.TotalSeconds;
             }
             catch (DivideByZeroException)
             {
@@ -689,20 +689,20 @@ namespace BO4E.Extensions.BusinessObjects.Energiemenge
                 var values = new Dictionary<string, object>();
                 // ToDo: make it nice.
                 foreach (var v in em.Energieverbrauch.Where(v => v.UserProperties != null))
-                foreach (var key in upKeys)
-                    if (v.UserProperties.TryGetValue(key, out var rawValue))
-                    {
-                        if (values.TryGetValue(key, out var onlyValue))
+                    foreach (var key in upKeys)
+                        if (v.UserProperties.TryGetValue(key, out var rawValue))
                         {
-                            if (rawValue == null && onlyValue != null)
-                                return false;
-                            if (rawValue != null && !rawValue.Equals(onlyValue)) return false;
+                            if (values.TryGetValue(key, out var onlyValue))
+                            {
+                                if (rawValue == null && onlyValue != null)
+                                    return false;
+                                if (rawValue != null && !rawValue.Equals(onlyValue)) return false;
+                            }
+                            else
+                            {
+                                values.Add(key, rawValue);
+                            }
                         }
-                        else
-                        {
-                            values.Add(key, rawValue);
-                        }
-                    }
 
                 return true;
             }
@@ -746,7 +746,7 @@ namespace BO4E.Extensions.BusinessObjects.Energiemenge
 
         public static List<BO.Energiemenge> SplitInPureGroups(this BO.Energiemenge em)
         {
-            if (em.Energieverbrauch == null) return new List<BO.Energiemenge> {em};
+            if (em.Energieverbrauch == null) return new List<BO.Energiemenge> { em };
 
             var result = new List<BO.Energiemenge>();
             foreach (var group in em.Energieverbrauch.GroupBy(PurityGrouper))
@@ -842,7 +842,7 @@ namespace BO4E.Extensions.BusinessObjects.Energiemenge
                     case bool token:
                         return token;
                     default:
-                        sanitized = ((JsonElement) sapSanitizedToken).GetBoolean();
+                        sanitized = ((JsonElement)sapSanitizedToken).GetBoolean();
                         break;
                 }
 

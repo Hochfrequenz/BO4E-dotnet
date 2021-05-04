@@ -47,12 +47,12 @@ namespace TestBO4E.Extensions
                     json = JsonConvert.DeserializeObject<JObject>(jsonString);
                 }
 
-                var em = (Energiemenge) BoMapper.MapObject((JObject) json["input"]);
+                var em = (Energiemenge)BoMapper.MapObject((JObject)json["input"]);
                 CompletenessReport cr;
                 if (boFile.EndsWith("somecustomer1.json"))
                 {
                     cr = em.GetCompletenessReport();
-                    Assert.AreEqual((decimal) 0.9601, Math.Round(cr.Coverage.Value, 4));
+                    Assert.AreEqual((decimal)0.9601, Math.Round(cr.Coverage.Value, 4));
                     Assert.AreEqual("4-5-6-7", cr.Obiskennzahl);
                     Assert.AreEqual(Wertermittlungsverfahren.MESSUNG, cr.Wertermittlungsverfahren);
                     Assert.AreEqual(Mengeneinheit.KWH, cr.Einheit);
@@ -112,7 +112,7 @@ namespace TestBO4E.Extensions
                         json = JsonConvert.DeserializeObject<JObject>(jsonString);
                     }
 
-                    var em = (Energiemenge) BoMapper.MapObject(json);
+                    var em = (Energiemenge)BoMapper.MapObject(json);
                     var cr = em.GetCompletenessReport();
                     crlist.Add(cr);
                     if (boFile.Contains("onshore.json"))
@@ -139,7 +139,7 @@ namespace TestBO4E.Extensions
                 json = JsonConvert.DeserializeObject<JObject>(jsonString);
             }
 
-            var em = (Energiemenge) BoMapper.MapObject(JObject.FromObject(json["input"]));
+            var em = (Energiemenge)BoMapper.MapObject(JObject.FromObject(json["input"]));
             var cr = em.GetCompletenessReport(new TimeRange
             {
                 Start = new DateTimeOffset(2017, 12, 31, 23, 0, 0, 0, TimeSpan.Zero).UtcDateTime,
@@ -387,7 +387,7 @@ namespace TestBO4E.Extensions
                 var endDateTime = dateTime.AddMinutes(15);
 
                 listvb.Add(new Verbrauch
-                    {Startdatum = dateTime, Enddatum = endDateTime, Einheit = Mengeneinheit.JAHR, Wert = 12});
+                { Startdatum = dateTime, Enddatum = endDateTime, Einheit = Mengeneinheit.JAHR, Wert = 12 });
                 dateTime = endDateTime;
             }
 
@@ -467,13 +467,13 @@ namespace TestBO4E.Extensions
                 LokationsId = "MeinUnitTest123",
                 LokationsTyp = Lokationstyp.MeLo,
                 Energieverbrauch = verbrauchSlices.Select(vs => new Verbrauch
-                    {
-                        Startdatum = vs.Start,
-                        Enddatum = vs.End,
-                        Einheit = Mengeneinheit.KWH,
-                        Wert = (decimal) 123.456,
-                        Wertermittlungsverfahren = Wertermittlungsverfahren.MESSUNG
-                    }
+                {
+                    Startdatum = vs.Start,
+                    Enddatum = vs.End,
+                    Einheit = Mengeneinheit.KWH,
+                    Wert = (decimal)123.456,
+                    Wertermittlungsverfahren = Wertermittlungsverfahren.MESSUNG
+                }
                 ).ToList()
             };
             var result = em.GetDailyCompletenessReports(new TimeRange(utcStart.UtcDateTime, utcEnd.UtcDateTime));

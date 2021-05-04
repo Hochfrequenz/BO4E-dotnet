@@ -50,10 +50,10 @@ namespace TestBO4E.Extensions
                     json = JsonConvert.DeserializeObject<JObject>(jsonString);
                 }
 
-                var assertions = (JObject) json["assertions"];
+                var assertions = (JObject)json["assertions"];
                 if (assertions == null) continue;
                 //    Assert.IsNotNull(assertions, $"Your test file {boFile} is broken. It has no 'assertions' key on root level.");
-                var bo = (JObject) json["input"];
+                var bo = (JObject)json["input"];
                 Assert.IsNotNull(bo, $"Your test file {boFile} is broken. It has no 'input' key on root level.");
                 Energiemenge em;
                 try
@@ -95,7 +95,7 @@ namespace TestBO4E.Extensions
                                     .Item1);
                             break;
                         case "load-kW":
-                            foreach (var dateAssertion in ((JObject) assertions["load-kW"]).Properties())
+                            foreach (var dateAssertion in ((JObject)assertions["load-kW"]).Properties())
                                 if (DateTime.TryParseExact(dateAssertion.Name, "yyyyMMddHHmmss",
                                     CultureInfo.InvariantCulture, DateTimeStyles.AssumeUniversal, out var dt))
                                     Assert.AreEqual(dateAssertion.Value,
@@ -107,8 +107,8 @@ namespace TestBO4E.Extensions
                         case "average":
                             try
                             {
-                                Assert.AreEqual(Math.Round((decimal) assertion.Value, 12),
-                                    Math.Round((decimal) em.GetAverage().Item1, 12));
+                                Assert.AreEqual(Math.Round((decimal)assertion.Value, 12),
+                                    Math.Round((decimal)em.GetAverage().Item1, 12));
                             }
                             catch (ArgumentException)
                             {
@@ -155,8 +155,8 @@ namespace TestBO4E.Extensions
                                 $"{assertion.Name}: {boFile}");
                             break;
                         case "isPure":
-                            Assert.AreEqual((bool) assertion.Value, em.IsPure(), boFile);
-                            if (!(bool) assertion.Value)
+                            Assert.AreEqual((bool)assertion.Value, em.IsPure(), boFile);
+                            if (!(bool)assertion.Value)
                             {
                                 var pureEms = em.SplitInPureGroups();
                                 var emptyEm = em.DeepClone();
@@ -174,7 +174,7 @@ namespace TestBO4E.Extensions
 
                             break;
                         case "isPureUserProperties":
-                            Assert.AreEqual((bool) assertion.Value, em.IsPure(true), boFile);
+                            Assert.AreEqual((bool)assertion.Value, em.IsPure(true), boFile);
                             break;
                         default:
                             Assert.IsTrue(false, $"Unknown assertion type {assertion.Name} in {boFile}");

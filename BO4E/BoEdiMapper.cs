@@ -140,7 +140,7 @@ namespace BO4E
                 throw new ArgumentException(
                     $"Please pass a Business Object or BO4E COMpontent instead of {o.GetType()} with value '{o}'.");
             var boString = JsonConvert.SerializeObject(o, new StringEnumConverter());
-            var result = (JObject) JsonConvert.DeserializeObject(boString);
+            var result = (JObject)JsonConvert.DeserializeObject(boString);
             foreach (var oProp in o.GetType().GetProperties().Where(p => p.GetValue(o) != null))
             {
                 var serializationName = oProp.GetCustomAttribute<JsonPropertyAttribute>().PropertyName ?? oProp.Name;
@@ -148,7 +148,7 @@ namespace BO4E
                 if (originalType.IsSubclassOf(typeof(COM.COM)) || originalType.IsSubclassOf(typeof(BusinessObject)))
                 {
                     object newValue = ReplaceWithEdiValues(oProp.GetValue(o));
-                    result[serializationName] = (JToken) newValue;
+                    result[serializationName] = (JToken)newValue;
                 }
                 else if (originalType.IsGenericType && originalType.GetGenericTypeDefinition() == typeof(List<>))
                 {
@@ -162,10 +162,10 @@ namespace BO4E
                             var listType = typeof(List<>).MakeGenericType(listItemEdiType);
                             var newList = Activator.CreateInstance(listType);
                             var miAdd = listType.GetMethod("Add");
-                            foreach (var listItem in (IEnumerable) oProp.GetValue(o))
+                            foreach (var listItem in (IEnumerable)oProp.GetValue(o))
                             {
                                 var newValue = ToEdi(originalListItemType.Name, listItem.ToString());
-                                miAdd.Invoke(newList, new[] {Enum.Parse(listItemEdiType, newValue)});
+                                miAdd.Invoke(newList, new[] { Enum.Parse(listItemEdiType, newValue) });
                             }
 
                             var js = new JsonSerializer();
@@ -183,10 +183,10 @@ namespace BO4E
                         var listType = typeof(List<>).MakeGenericType(typeof(JObject));
                         var newList = Activator.CreateInstance(listType);
                         var miAdd = listType.GetMethod("Add");
-                        foreach (var listItem in (IEnumerable) oProp.GetValue(o))
+                        foreach (var listItem in (IEnumerable)oProp.GetValue(o))
                         {
                             object newListItem = ReplaceWithEdiValues(listItem);
-                            miAdd.Invoke(newList, new[] {newListItem});
+                            miAdd.Invoke(newList, new[] { newListItem });
                         }
 
                         result[serializationName] = JToken.FromObject(newList);

@@ -29,18 +29,18 @@ namespace BO4E.Reporting
             var resultBuilder = new StringBuilder();
             var result = new List<string>();
             var headerNames = new List<string>();
-            var reterned = new Dictionary<List<string>, List<string>> {[headerNames] = result};
+            var reterned = new Dictionary<List<string>, List<string>> { [headerNames] = result };
             reterned = Detect(type, separator, this, reterned);
 
             headerNames = reterned.Keys.First();
-            headerNames.AddRange(new List<string> {"gap.startDatum", "gap.endDatum"});
+            headerNames.AddRange(new List<string> { "gap.startDatum", "gap.endDatum" });
             result = reterned.Values.First();
 
             var sortedResults = new List<string>();
             var sortedHeaderNamesList = new List<string>();
             var parallelItems = headerNames.GroupBy(x => x)
                 .Where(g => g.Count() > 1)
-                .Select(y => new {Element = y.Key, Counter = y.Count()})
+                .Select(y => new { Element = y.Key, Counter = y.Count() })
                 .ToList();
 
             if (parallelItems.Count > 0)
@@ -164,13 +164,13 @@ namespace BO4E.Reporting
 
             var gapdata = new List<string>();
             var gapHeaderNames = new List<string>();
-            var gapReterned = new Dictionary<List<string>, List<string>> {[gapHeaderNames] = gapdata};
+            var gapReterned = new Dictionary<List<string>, List<string>> { [gapHeaderNames] = gapdata };
             _ = DetectGaps(type, separator, this, gapReterned);
 
             var gapSortedResults = new List<string>();
             var gapParallelItems = gapHeaderNames.GroupBy(x => x)
                 .Where(g => g.Count() > 1)
-                .Select(y => new {Element = y.Key, Counter = y.Count()})
+                .Select(y => new { Element = y.Key, Counter = y.Count() })
                 .ToList();
             if (gapParallelItems.Any())
             {
@@ -216,7 +216,7 @@ namespace BO4E.Reporting
                     {
                         //var ItemType = field.GetValue(value).GetType().GetGenericArguments()[0];
                         var list = field.GetValue(value);
-                        var a = (IList) list;
+                        var a = (IList)list;
                         foreach (var s in a) returnData = Detect(s.GetType(), separator, s, returnData);
                     }
                 }
@@ -230,21 +230,21 @@ namespace BO4E.Reporting
                         var val = nestedValue.ToString();
                         if (field.PropertyType == typeof(DateTime?))
                         {
-                            if (((DateTime?) nestedValue).HasValue)
-                                val = ((DateTime?) nestedValue).Value.ToString("yyyy-MM-ddTHH:mm:ssZ");
+                            if (((DateTime?)nestedValue).HasValue)
+                                val = ((DateTime?)nestedValue).Value.ToString("yyyy-MM-ddTHH:mm:ssZ");
                         }
                         else if (field.PropertyType == typeof(DateTimeOffset?))
                         {
-                            if (((DateTimeOffset?) nestedValue).HasValue)
-                                val = ((DateTimeOffset?) nestedValue).Value.ToString("yyyy-MM-ddTHH:mm:ssZ");
+                            if (((DateTimeOffset?)nestedValue).HasValue)
+                                val = ((DateTimeOffset?)nestedValue).Value.ToString("yyyy-MM-ddTHH:mm:ssZ");
                         }
                         else if (field.PropertyType == typeof(DateTime))
                         {
-                            val = ((DateTime) nestedValue).ToString("yyyy-MM-ddTHH:mm:ssZ");
+                            val = ((DateTime)nestedValue).ToString("yyyy-MM-ddTHH:mm:ssZ");
                         }
                         else if (field.PropertyType == typeof(DateTimeOffset))
                         {
-                            val = ((DateTimeOffset) nestedValue).ToString("yyyy-MM-ddTHH:mm:ssZ");
+                            val = ((DateTimeOffset)nestedValue).ToString("yyyy-MM-ddTHH:mm:ssZ");
                         }
 
                         h.Add(muterType + field.Name);
@@ -271,7 +271,7 @@ namespace BO4E.Reporting
                     {
                         var itemType = field.GetValue(value).GetType().GetGenericArguments()[0];
                         var list = field.GetValue(value);
-                        var a = (IList) list;
+                        var a = (IList)list;
                         foreach (var s in a) returnData = DetectGaps(s.GetType(), separator, s, returnData);
                     }
                 }
@@ -287,14 +287,14 @@ namespace BO4E.Reporting
                             var val = nestedValue.ToString();
                             if (field.FieldType == typeof(DateTime?))
                             {
-                                if (((DateTime?) nestedValue).HasValue)
-                                    val = ((DateTime?) nestedValue).Value.ToString("yyyy-MM-ddTHH:mm:ssZ");
+                                if (((DateTime?)nestedValue).HasValue)
+                                    val = ((DateTime?)nestedValue).Value.ToString("yyyy-MM-ddTHH:mm:ssZ");
                                 h.Add(muterType + field.Name);
                                 d.Add(val.Contains(separator) ? "\"" + val + "\"" : val);
                             }
                             else if (field.FieldType == typeof(DateTime))
                             {
-                                val = ((DateTime) nestedValue).ToString("yyyy-MM-ddTHH:mm:ssZ");
+                                val = ((DateTime)nestedValue).ToString("yyyy-MM-ddTHH:mm:ssZ");
                                 h.Add(muterType + field.Name);
                                 d.Add(val.Contains(separator) ? "\"" + val + "\"" : val);
                             }

@@ -36,7 +36,7 @@ namespace BO4E.Encryption
             ConfigurationKey = null;
             Operations = new Dictionary<DataCategory, AnonymizerApproach>();
             foreach (var ao in Enum.GetValues(typeof(DataCategory)))
-                Operations.Add((DataCategory) ao, AnonymizerApproach.KEEP);
+                Operations.Add((DataCategory)ao, AnonymizerApproach.KEEP);
             UnaffectedUserProperties = new HashSet<string>();
         }
 

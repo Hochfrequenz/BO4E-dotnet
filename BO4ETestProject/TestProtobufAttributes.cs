@@ -83,16 +83,16 @@ namespace TestBO4E
                     field.GetCustomAttributes(typeof(NonOfficialAttribute))
                         .Any()) // those fields having an [NonOfficial(...)] attribute
                 .Where(field =>
-                    ((NonOfficialAttribute) field.GetCustomAttributes(typeof(NonOfficialAttribute)).First())
+                    ((NonOfficialAttribute)field.GetCustomAttributes(typeof(NonOfficialAttribute)).First())
                     .HasCategory(NonOfficialCategory.CUSTOMER_REQUIREMENTS)) // and the customer_requirements category
                 .Intersect(fieldsWithProtoMemberAttribute); // and a [ProtoMember(<id>)] attribute
 
             var wrongTagsNonOfficial = nonOfficialFieldsWithProtoMember.Where(f =>
-                ((ProtoMemberAttribute) f.GetCustomAttributes(typeof(ProtoMemberAttribute)).First()).Tag < 1000);
+                ((ProtoMemberAttribute)f.GetCustomAttributes(typeof(ProtoMemberAttribute)).First()).Tag < 1000);
             Assert.AreEqual(0, wrongTagsNonOfficial.Count(),
                 $"Fields in {type} are non official and do not have proto tags >= 1000: {string.Join(", ", wrongTagsNonOfficial.Select(f => f.Name))}");
             var wrongTagsOfficial = fieldsWithProtoMemberAttribute.Except(nonOfficialFieldsWithProtoMember).Where(f =>
-                ((ProtoMemberAttribute) f.GetCustomAttributes(typeof(ProtoMemberAttribute)).First()).Tag > 1000);
+                ((ProtoMemberAttribute)f.GetCustomAttributes(typeof(ProtoMemberAttribute)).First()).Tag > 1000);
             Assert.AreEqual(0, wrongTagsOfficial.Count(),
                 $"Fields in {type} are official but have proto tags >= 1000: {string.Join(", ", wrongTagsOfficial.Select(f => f.Name))}");
 
@@ -207,7 +207,7 @@ namespace TestBO4E
                 from baseType in businessObjectTypes
                 from inheritingType in businessObjectTypes
                 where baseType.IsAssignableFrom(inheritingType) && baseType != inheritingType
-                select new {baseType, inheritingType};
+                select new { baseType, inheritingType };
             // Background: https://github.com/protobuf-net/protobuf-net#inheritance
             // The base type must have an attribute that refers to the inherited type.
             // Both types need to carry the ProtoContract attribute.

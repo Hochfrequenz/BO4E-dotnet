@@ -104,7 +104,8 @@ namespace BO4E.Extensions.BusinessObjects.Energiemenge
                     LokationsId = emReference.LokationsId,
                     ReferenceTimeFrame = new Zeitraum
                     {
-                        Startdatum = new DateTimeOffset(timeframe.Start), Enddatum = new DateTimeOffset(timeframe.End)
+                        Startdatum = new DateTimeOffset(timeframe.Start),
+                        Enddatum = new DateTimeOffset(timeframe.End)
                     },
                     VerbrauchReference = vReference,
                     VerbrauchOther = vOther,

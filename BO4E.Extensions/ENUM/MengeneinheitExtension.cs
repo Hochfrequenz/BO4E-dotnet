@@ -114,7 +114,7 @@ namespace BO4E.Extensions.ENUM
             if (!me1.IsConvertibleTo(me2))
                 throw new InvalidOperationException(
                     $"{me1} and {me2} are not convertible into each other because they don't share the same dimension.");
-            if ((int) me1 % (int) me2 == 0 || (int) me2 % (int) me2 == 0) return (decimal) me1 / (decimal) me2;
+            if ((int)me1 % (int)me2 == 0 || (int)me2 % (int)me2 == 0) return (decimal)me1 / (decimal)me2;
 
             throw new InvalidOperationException($"{me1} and {me2} are not (trivially) convertible into each other.");
         }

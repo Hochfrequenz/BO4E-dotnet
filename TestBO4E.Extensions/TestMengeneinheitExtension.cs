@@ -22,7 +22,7 @@ namespace TestBO4E.Extensions
         {
             foreach (Mengeneinheit me in Enum.GetValues(typeof(Mengeneinheit)))
             {
-                if ((int) me == 0) continue;
+                if ((int)me == 0) continue;
                 Assert.AreEqual(1.0M, me.GetConversionFactor(me));
                 Assert.IsTrue(me.IsConvertibleTo(me));
             }
@@ -34,10 +34,10 @@ namespace TestBO4E.Extensions
             Assert.AreEqual(0.001M, Mengeneinheit.KW.GetConversionFactor(Mengeneinheit.MW));
 
             foreach (Mengeneinheit me1 in Enum.GetValues(typeof(Mengeneinheit)))
-            foreach (Mengeneinheit me2 in Enum.GetValues(typeof(Mengeneinheit)))
-                if (!me1.IsConvertibleTo(me2))
-                    Assert.ThrowsException<InvalidOperationException>(() => me1.GetConversionFactor(me2),
-                        $"Conversion {me1}-->{me2} should throw an exception!");
+                foreach (Mengeneinheit me2 in Enum.GetValues(typeof(Mengeneinheit)))
+                    if (!me1.IsConvertibleTo(me2))
+                        Assert.ThrowsException<InvalidOperationException>(() => me1.GetConversionFactor(me2),
+                            $"Conversion {me1}-->{me2} should throw an exception!");
         }
     }
 }

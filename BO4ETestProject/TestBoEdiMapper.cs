@@ -94,7 +94,7 @@ namespace TestBO4E
                 }
                 catch (ArgumentException)
                 {
-                    bo = BoMapper.MapObject(json["input"]["boTyp"].ToString(), (JObject) json["input"]);
+                    bo = BoMapper.MapObject(json["input"]["boTyp"].ToString(), (JObject)json["input"]);
                 }
 
                 var result = BoEdiMapper.ReplaceWithEdiValues(bo);

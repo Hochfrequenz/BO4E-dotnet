@@ -66,7 +66,7 @@ namespace TestBO4E.Extensions
             var result = v1.Merge(v2);
             Assert.AreEqual(2, result.Count);
 
-            Assert.IsTrue(result.SetEquals(new HashSet<Verbrauch> {v1, v2}));
+            Assert.IsTrue(result.SetEquals(new HashSet<Verbrauch> { v1, v2 }));
         }
 
         [TestMethod]
@@ -330,7 +330,7 @@ namespace TestBO4E.Extensions
         [TestMethod]
         public void TestDetangleTwofold()
         {
-            var result = Detangle(new List<Verbrauch> {dtV1, dtV2});
+            var result = Detangle(new List<Verbrauch> { dtV1, dtV2 });
             result.Sort(new VerbrauchDateTimeComparer());
             Assert.AreEqual(2, result.Count);
             Assert.AreEqual(new DateTimeOffset(2017, 12, 31, 23, 0, 0, TimeSpan.Zero), result.First().Startdatum);
@@ -344,7 +344,7 @@ namespace TestBO4E.Extensions
         [TestMethod]
         public void TestDetangleThreefold()
         {
-            var result = Detangle(new List<Verbrauch> {dtV1, dtV2, dtV3});
+            var result = Detangle(new List<Verbrauch> { dtV1, dtV2, dtV3 });
             result.Sort(new VerbrauchDateTimeComparer());
             Assert.AreEqual(3, result.Count);
             Assert.AreEqual(new DateTimeOffset(2017, 12, 31, 23, 0, 0, 0, TimeSpan.Zero), result[0].Startdatum);
