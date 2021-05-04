@@ -1,20 +1,17 @@
-using BO4E.BO;
-
-using Newtonsoft.Json;
-
-using Org.BouncyCastle.Cms;
-using Org.BouncyCastle.Crypto;
-using Org.BouncyCastle.OpenSsl;
-using Org.BouncyCastle.Security;
-
 using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using System.Security.Cryptography.X509Certificates;
 using System.Text;
+using BO4E.BO;
+using Newtonsoft.Json;
+using Org.BouncyCastle.Cms;
+using Org.BouncyCastle.Crypto;
+using Org.BouncyCastle.OpenSsl;
+using Org.BouncyCastle.Security;
 
-namespace BO4E.Extensions.Encryption
+namespace BO4E.Encryption
 {
     public class X509AsymmetricEncrypter : Encrypter
     {

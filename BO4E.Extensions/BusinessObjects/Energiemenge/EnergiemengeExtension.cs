@@ -2,20 +2,15 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-
 using BO4E.COM;
 using BO4E.ENUM;
 using BO4E.Extensions.COM;
-using BO4E.Extensions.ENUM;
 using BO4E.meta;
 using BO4E.Reporting;
-
+using BO4E.Extensions.ENUM;
 using Itenso.TimePeriod;
-
 using Newtonsoft.Json.Linq;
-
 using StackExchange.Profiling;
-
 using static BO4E.Extensions.COM.VerbrauchExtension;
 
 
@@ -85,7 +80,7 @@ namespace BO4E.Extensions.BusinessObjects.Energiemenge
         }
 
         /// <summary>
-        /// Same as <see cref="GetTotalConsumption(BO.Energiemenge, Wertermittlungsverfahren, string, Mengeneinheit)"/> but without auto-detected parameters. 
+        /// Same as <see cref="GetTotalConsumption(BO4E.BO.Energiemenge,BO4E.ENUM.Wertermittlungsverfahren,string,BO4E.ENUM.Mengeneinheit)"/> but without auto-detected parameters. 
         /// By default a the full length of the Energiemenge is taken into account.
         /// </summary>
         /// <param name="em">Energiemenge</param>
@@ -469,7 +464,7 @@ namespace BO4E.Extensions.BusinessObjects.Energiemenge
         {
             var result = new HashSet<TimeSpan>();
             var vlist = new List<Verbrauch>(em.Energieverbrauch);
-            vlist.Sort(new VerbrauchDateTimeComparer());
+            vlist.Sort(new VerbrauchExtension.VerbrauchDateTimeComparer());
             for (var i = 1; i < vlist.Count; i++)
             {
                 result.Add(vlist[i].Startdatum - vlist[i - 1].Startdatum);
@@ -482,7 +477,7 @@ namespace BO4E.Extensions.BusinessObjects.Energiemenge
         {
             var result = new HashSet<TimeSpan>();
             var vlist = new List<Verbrauch>(em.Energieverbrauch);
-            vlist.Sort(new VerbrauchDateTimeComparer());
+            vlist.Sort(new VerbrauchExtension.VerbrauchDateTimeComparer());
             vlist = vlist.Where(v => v.Wertermittlungsverfahren == wev && v.Obiskennzahl == obis && v.Einheit == me).ToList();
             for (var i = 1; i < vlist.Count; i++)
             {
@@ -579,7 +574,7 @@ namespace BO4E.Extensions.BusinessObjects.Energiemenge
 
         /// <summary>
         /// Test, if the Energiemenge is continuous within its own min/max range.
-        /// <see cref="IsContinuous(BO.Energiemenge, TimeRange)"/>
+        /// <see cref="IsContinuous(BO4E.BO.Energiemenge,Itenso.TimePeriod.TimeRange)"/>
         /// </summary>
         /// <param name="em">Energiemenge</param>
         /// <returns>true iff Energiemenge has defined value for every point in time t in
@@ -627,12 +622,12 @@ namespace BO4E.Extensions.BusinessObjects.Energiemenge
         }
 
         /// <summary>
-        /// shortcut for <see cref="IsPureMengeneinheit(BO.Energiemenge)"/> &amp;&amp; <see cref="IsPureObisKennzahl(BO.Energiemenge)"/> &amp;&amp; <see cref="IsPureWertermittlungsverfahren(BO.Energiemenge)"/>
+        /// shortcut for <see cref="IsPureMengeneinheit"/> &amp;&amp; <see cref="IsPureObisKennzahl"/> &amp;&amp; <see cref="IsPureWertermittlungsverfahren"/>
         /// </summary>
         /// <param name="em">Energiemenge</param>
         /// <param name="checkUserProperties">set true, to additionally check if user properties of all entries in energieverbrauch are equal.</param>
         /// <returns>true iff the Energiemenge is pure in all OBIS-Kennzahl, Wertermittlungsverfahren and Mengeneinheit</returns>
-        public static bool IsPure(this BO.Energiemenge em, bool checkUserProperties = false)
+        public static bool IsPure(this BO4E.BO.Energiemenge em, bool checkUserProperties = false)
         {
             bool basicPurity;
             using (MiniProfiler.Current.Step(nameof(IsPure)))
@@ -734,7 +729,7 @@ namespace BO4E.Extensions.BusinessObjects.Energiemenge
         }
 
         /// <summary>
-        /// opposite of <see cref="IsExtensive(BO.Energiemenge)"/>
+        /// opposite of <see cref="IsExtensive"/>
         /// </summary>
         /// <param name="em">Energiemenge</param>
         /// <returns>true iff all <paramref name="em"/>-&gt;energieverbrauch entries are intensive</returns>
@@ -753,14 +748,14 @@ namespace BO4E.Extensions.BusinessObjects.Energiemenge
             return em.IsPureMengeneinheit() && em.Energieverbrauch.First().Einheit.IsExtensive();
         }
 
-        public static List<BO.Energiemenge> SplitInPureGroups(this BO.Energiemenge em)
+        public static List<BO4E.BO.Energiemenge> SplitInPureGroups(this BO4E.BO.Energiemenge em)
         {
             if (em.Energieverbrauch == null)
             {
-                return new List<BO.Energiemenge> { em };
+                return new List<BO4E.BO.Energiemenge> { em };
             }
 
-            var result = new List<BO.Energiemenge>();
+            var result = new List<BO4E.BO.Energiemenge>();
             foreach (var group in em.Energieverbrauch.GroupBy(PurityGrouper))
             {
                 var pureEm = em.DeepClone();
@@ -886,7 +881,7 @@ namespace BO4E.Extensions.BusinessObjects.Energiemenge
                     Startdatum = y.Startdatum,
                     Enddatum = y.Enddatum
                 };
-                IComparer<Verbrauch> cv = new VerbrauchDateTimeComparer();
+                IComparer<Verbrauch> cv = new VerbrauchExtension.VerbrauchDateTimeComparer();
                 return cv.Compare(vx, vy);
             }
         }

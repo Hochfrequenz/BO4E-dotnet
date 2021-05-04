@@ -2,7 +2,7 @@
 using System.Numerics;
 using System.Text;
 
-namespace BO4E.Extensions.Encryption
+namespace BO4E.Encryption
 {
     internal static class ByteArrayExtensions
     {

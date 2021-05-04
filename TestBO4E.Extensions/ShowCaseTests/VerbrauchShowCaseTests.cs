@@ -1,13 +1,11 @@
 using System;
 using System.Diagnostics;
-
 using BO4E.COM;
 using BO4E.ENUM;
 using BO4E.Extensions.COM;
-
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace TestBO4E.ShowCaseTests
+namespace TestBO4E.Extensions.ShowCaseTests
 {
     [TestClass]
     public class VerbrauchShowCaseTests

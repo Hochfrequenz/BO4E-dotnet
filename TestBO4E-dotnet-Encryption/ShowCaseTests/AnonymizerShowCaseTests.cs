@@ -2,15 +2,13 @@
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Security.Cryptography;
-
 using BO4E.BO;
 using BO4E.COM;
 using BO4E.ENUM;
-using BO4E.Extensions.Encryption;
-
+using BO4E.Encryption;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace TestBO4E.ShowCaseTests
+namespace TestBO4E.Encryption.ShowCaseTests
 {
     [TestClass]
     public class AnonymizerShowCaseTests

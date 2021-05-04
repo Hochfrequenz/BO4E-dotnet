@@ -1,12 +1,10 @@
-﻿using BO4E.meta;
-
-using Newtonsoft.Json;
-
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using BO4E.meta;
+using Newtonsoft.Json;
 
-namespace BO4E.Extensions.Encryption
+namespace BO4E.Encryption
 {
     /// <summary>
     /// The Class AnonymizerConfiguration represents a complete configuration for the

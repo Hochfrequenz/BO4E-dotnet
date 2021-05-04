@@ -2,22 +2,17 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Security.Cryptography.X509Certificates;
-
 using BO4E.BO;
 using BO4E.BO.LogObject;
-using BO4E.Extensions.Encryption;
-
+using BO4E.Encryption;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
-
 using Org.BouncyCastle.Crypto;
 using Org.BouncyCastle.OpenSsl;
-
 using Sodium;
 
-namespace TestBO4EExtensions.Encryption
+namespace TestBO4E.Encryption
 {
     [TestClass]
     public class TestEncrypter

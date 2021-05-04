@@ -2,17 +2,14 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
-
 using BO4E.BO;
 using BO4E.COM;
 using BO4E.ENUM;
 using BO4E.Extensions.BusinessObjects.Energiemenge;
-
 using Itenso.TimePeriod;
-
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace TestBO4E.ShowCaseTests
+namespace TestBO4E.Extensions.ShowCaseTests
 {
     [TestClass]
     public class EnergiemengeShowCaseTests

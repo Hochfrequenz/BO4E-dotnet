@@ -1,13 +1,10 @@
-﻿using BO4E.BO;
-
+﻿using System;
+using System.Text;
+using BO4E.BO;
 using Newtonsoft.Json;
-
 using Sodium;
 
-using System;
-using System.Text;
-
-namespace BO4E.Extensions.Encryption
+namespace BO4E.Encryption
 {
     public class SymmetricEncrypter : Encrypter
     {

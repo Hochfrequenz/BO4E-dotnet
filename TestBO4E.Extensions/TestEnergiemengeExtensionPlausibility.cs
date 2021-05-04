@@ -1,17 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
-
 using BO4E.BO;
 using BO4E.Extensions.BusinessObjects.Energiemenge;
 using BO4E.Reporting;
-
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 
-namespace TestBO4EExtensions
+namespace TestBO4E.Extensions
 {
     [TestClass]
     public class TestEnergiemengeExtensionPlausibility

@@ -3,25 +3,20 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Security.Cryptography.X509Certificates;
-
 using BO4E;
 using BO4E.BO;
 using BO4E.COM;
-using BO4E.Extensions.Encryption;
 using BO4E.meta;
+using BO4E.Encryption;
 using BO4E.Reporting;
-
 using JsonDiffPatchDotNet;
-
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
-
 using Org.BouncyCastle.Crypto;
 using Org.BouncyCastle.OpenSsl;
 
-namespace TestBO4EExtensions.Encryption
+namespace TestBO4E.Encryption
 {
     [TestClass]
     public class TestAnonymizer

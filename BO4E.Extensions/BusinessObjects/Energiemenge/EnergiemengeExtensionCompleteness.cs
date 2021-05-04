@@ -1,18 +1,13 @@
-﻿using BO4E.COM;
-using BO4E.ENUM;
-using BO4E.Reporting;
-
-using Itenso.TimePeriod;
-
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
-using Newtonsoft.Json.Linq;
-
-using StackExchange.Profiling;
-
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using BO4E.COM;
+using BO4E.ENUM;
+using BO4E.Reporting;
+using Itenso.TimePeriod;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Converters;
+using StackExchange.Profiling;
 
 namespace BO4E.Extensions.BusinessObjects.Energiemenge
 {
@@ -178,11 +173,11 @@ namespace BO4E.Extensions.BusinessObjects.Energiemenge
         }
 
         /// <summary>
-        /// <see cref="GetCompletenessReport(BO.Energiemenge, ITimeRange, Wertermittlungsverfahren, string, Mengeneinheit)"/>
+        /// <see cref="GetCompletenessReport(BO4E.BO.Energiemenge,Itenso.TimePeriod.ITimeRange,BO4E.ENUM.Wertermittlungsverfahren,string,BO4E.ENUM.Mengeneinheit)"/>
         /// for pure Energiemengen within their own time range.
         /// </summary>
         /// <param name="em">Energiemenge</param>
-        /// <returns><see cref="GetCompletenessReport(BO.Energiemenge, ITimeRange, Wertermittlungsverfahren, string, Mengeneinheit)"/></returns>
+        /// <returns><see cref="GetCompletenessReport(BO4E.BO.Energiemenge,Itenso.TimePeriod.ITimeRange,BO4E.ENUM.Wertermittlungsverfahren,string,BO4E.ENUM.Mengeneinheit)"/></returns>
         public static CompletenessReport GetCompletenessReport(this BO4E.BO.Energiemenge em)
         {
             if (!em.IsPure())
@@ -213,7 +208,7 @@ namespace BO4E.Extensions.BusinessObjects.Energiemenge
         /// <param name="ranges">list of ranges for which the completeness reports are generated</param>
         /// <param name="useParallelExecution">set true to internally use parallel linq</param>
         /// <returns></returns>
-        public static IDictionary<ITimeRange, CompletenessReport> GetSlicedCompletenessReports(this BO.Energiemenge em, IEnumerable<ITimeRange> ranges, bool useParallelExecution = false)
+        public static IDictionary<ITimeRange, CompletenessReport> GetSlicedCompletenessReports(this BO4E.BO.Energiemenge em, IEnumerable<ITimeRange> ranges, bool useParallelExecution = false)
         {
             if (ranges == null)
             {

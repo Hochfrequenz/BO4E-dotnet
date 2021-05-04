@@ -3,7 +3,7 @@ using System.Linq;
 using System.Reflection;
 using BO4E.meta;
 
-namespace BO4E.Extensions.Encryption
+namespace BO4E.Encryption
 {
     internal static class FieldInfoExtensions
     {
@@ -25,7 +25,7 @@ namespace BO4E.Extensions.Encryption
 
         internal static bool IsHashingRelevant(this PropertyInfo property, DataCategory? dataCategory)
         {
-            if (property.PropertyType.IsSubclassOf(typeof(BO4E.COM.COM)) || property.PropertyType.IsSubclassOf(typeof(BO.BusinessObject)))
+            if (property.PropertyType.IsSubclassOf(typeof(BO4E.COM.COM)) || property.PropertyType.IsSubclassOf(typeof(BO4E.BO.BusinessObject)))
             {
                 return true;
             }
@@ -33,7 +33,7 @@ namespace BO4E.Extensions.Encryption
             if (property.PropertyType.IsGenericType && property.PropertyType.GetGenericTypeDefinition() == typeof(List<>))
             {
                 var listElementType = property.PropertyType.GetGenericArguments()[0];
-                return listElementType.IsSubclassOf(typeof(BO4E.COM.COM)) || listElementType.IsSubclassOf(typeof(BO.BusinessObject));
+                return listElementType.IsSubclassOf(typeof(BO4E.COM.COM)) || listElementType.IsSubclassOf(typeof(BO4E.BO.BusinessObject));
             }
             if (dataCategory.HasValue)
             {
@@ -45,7 +45,7 @@ namespace BO4E.Extensions.Encryption
 
         internal static bool IsEncryptionRelevant(this PropertyInfo property, DataCategory? dataCategory)
         {
-            if (property.PropertyType.IsSubclassOf(typeof(BO4E.COM.COM)) || property.PropertyType.IsSubclassOf(typeof(BO.BusinessObject)) || property.PropertyType.IsEnum)
+            if (property.PropertyType.IsSubclassOf(typeof(BO4E.COM.COM)) || property.PropertyType.IsSubclassOf(typeof(BO4E.BO.BusinessObject)) || property.PropertyType.IsEnum)
             {
                 return false; // not yet supported for encryption
             }

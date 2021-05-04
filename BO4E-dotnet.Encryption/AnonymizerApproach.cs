@@ -1,4 +1,4 @@
-﻿namespace BO4E.Extensions.Encryption
+﻿namespace BO4E.Encryption
 {
 
     /// <summary>

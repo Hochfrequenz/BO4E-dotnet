@@ -1,8 +1,7 @@
-﻿using BO4E.ENUM;
-
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using BO4E.ENUM;
 
 namespace BO4E.Extensions.ENUM
 {

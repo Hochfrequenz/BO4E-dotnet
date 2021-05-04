@@ -8,22 +8,19 @@ using System.Reflection;
 using System.Security.Cryptography;
 using System.Security.Cryptography.X509Certificates;
 using System.Text;
-
+using BO4E;
 using BO4E.BO;
-using BO4E.Extensions.BusinessObjects;
 using BO4E.meta;
 using BO4E.meta.LenientConverters;
-
+using BO4E.Extensions.BusinessObjects;
 using Microsoft.CSharp.RuntimeBinder;
 using Microsoft.Extensions.Logging;
-
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
-
 using Org.BouncyCastle.Crypto;
 using Org.BouncyCastle.Security;
 
-namespace BO4E.Extensions.Encryption
+namespace BO4E.Encryption
 {
     public class Anonymizer : IDisposable
     {

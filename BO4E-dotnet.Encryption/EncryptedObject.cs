@@ -1,9 +1,9 @@
-﻿using BO4E.ENUM;
+﻿using BO4E.BO;
+using BO4E.ENUM;
 using BO4E.meta;
-
 using Newtonsoft.Json;
 
-namespace BO4E.BO
+namespace BO4E.Encryption
 {
     /// <summary>
     /// An EncryptedObject does not contain any plain text but only information necessary to 

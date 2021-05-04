@@ -1,5 +1,4 @@
 ﻿using BO4E.BO;
-
 using Newtonsoft.Json;
 
 namespace BO4E.Extensions.BusinessObjects

@@ -1,8 +1,7 @@
 ﻿using BO4E.ENUM;
-
 using Newtonsoft.Json;
 
-namespace BO4E.BO
+namespace BO4E.Encryption
 {
     /// <summary>
     /// Encrypted Object using the Public Key Box Algorithm of libsodium

@@ -1,16 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
-
 using BO4E.BO;
 using BO4E.COM;
 using BO4E.Extensions.BusinessObjects.Benachrichtigung;
-
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-
 using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
 
-namespace TestBO4EExtensions
+namespace TestBO4E.Extensions
 {
     [TestClass]
     public class TestBenachrichtigungExtension

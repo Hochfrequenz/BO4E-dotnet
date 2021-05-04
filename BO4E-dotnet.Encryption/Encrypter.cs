@@ -1,13 +1,10 @@
-﻿using BO4E.BO;
+﻿using System;
+using BO4E.BO;
 using BO4E.meta;
-
 using Microsoft.Extensions.Logging;
-
 using Newtonsoft.Json;
 
-using System;
-
-namespace BO4E.Extensions.Encryption
+namespace BO4E.Encryption
 {
     /// <summary>
     /// abstract base class of all encryption classes; provides useful methods for derived encryption classes

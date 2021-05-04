@@ -1,15 +1,13 @@
-﻿using BO4E.COM;
-using BO4E.ENUM;
-using BO4E.meta;
-
-using Newtonsoft.Json;
-
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
+using BO4E.COM;
+using BO4E.ENUM;
+using BO4E.meta;
+using Newtonsoft.Json;
 
 namespace BO4E.Reporting
 {
@@ -225,12 +223,12 @@ namespace BO4E.Reporting
                 ReferenceTimeFrame.Enddatum.Value.ToString("yyyy-MM-ddTHH:mm:ssZ")
             };
 
-            if (BO.Messlokation.ValidateId(LokationsId))
+            if (BO4E.BO.Messlokation.ValidateId(LokationsId))
             {
                 columns.Add(LokationsId); // melo
                 columns.Add(string.Empty); // malo
             }
-            else if (BO.Marktlokation.ValidateId(LokationsId))
+            else if (BO4E.BO.Marktlokation.ValidateId(LokationsId))
             {
                 columns.Add(string.Empty);//melo
                 columns.Add(LokationsId);//malo

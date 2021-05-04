@@ -1,9 +1,9 @@
-﻿using BO4E.Extensions.Encryption;
-using BO4E.meta;
+﻿using BO4E.meta;
+using BO4E.Encryption;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Newtonsoft.Json;
 
-namespace TestBO4EExtensions.Encryption
+namespace TestBO4E.Encryption
 {
     [TestClass]
     public class TestAnonymizerConfiguration

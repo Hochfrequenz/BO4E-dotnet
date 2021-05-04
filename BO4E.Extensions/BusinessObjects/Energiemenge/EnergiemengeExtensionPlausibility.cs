@@ -1,17 +1,12 @@
-﻿using BO4E.COM;
-using BO4E.ENUM;
-using BO4E.Reporting;
-
-using Itenso.TimePeriod;
-
-using Newtonsoft.Json;
-
-using StackExchange.Profiling;
-
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-
+using BO4E.COM;
+using BO4E.ENUM;
+using BO4E.Reporting;
+using Itenso.TimePeriod;
+using Newtonsoft.Json;
+using StackExchange.Profiling;
 using static BO4E.Extensions.ENUM.MengeneinheitExtenion;
 using static BO4E.Reporting.PlausibilityReport;
 
@@ -117,11 +112,11 @@ namespace BO4E.Extensions.BusinessObjects.Energiemenge
         }
 
         /// <summary>
-        /// same as <see cref="GetPlausibilityReport(BO.Energiemenge, BO.Energiemenge, ITimeRange, bool)"/> but with a strongly typed container as input.
+        /// same as <see cref="GetPlausibilityReport(BO4E.BO.Energiemenge,BO4E.BO.Energiemenge,Itenso.TimePeriod.ITimeRange,bool)"/> but with a strongly typed container as input.
         /// </summary>
         /// <param name="config">container containing the relevant data</param>
         /// <returns></returns>
-        public static PlausibilityReport GetPlausibilityReport(this BO4E.BO.Energiemenge energiemenge, PlausibilityReportConfiguration config)
+        public static PlausibilityReport GetPlausibilityReport(this BO4E.BO.Energiemenge energiemenge, PlausibilityReport.PlausibilityReportConfiguration config)
         {
             return energiemenge.GetPlausibilityReport(config.Other, new TimeRange(config.Timeframe.Startdatum.Value.UtcDateTime, config.Timeframe.Enddatum.Value.UtcDateTime), config.IgnoreLocation);
         }
@@ -132,7 +127,7 @@ namespace BO4E.Extensions.BusinessObjects.Energiemenge
         /// <param name="em">Energiemenge</param>
         /// <param name="ranges">list of ranges for which the completeness reports are generated</param>
         /// <returns></returns>
-        public static IDictionary<ITimeRange, PlausibilityReport> GetSlicedPlausibilityReports(this BO4E.BO.Energiemenge em, PlausibilityReportConfiguration config, IEnumerable<ITimeRange> ranges)
+        public static IDictionary<ITimeRange, PlausibilityReport> GetSlicedPlausibilityReports(this BO4E.BO.Energiemenge em, PlausibilityReport.PlausibilityReportConfiguration config, IEnumerable<ITimeRange> ranges)
         {
             if (ranges == null)
             {
@@ -141,7 +136,7 @@ namespace BO4E.Extensions.BusinessObjects.Energiemenge
             var result = new Dictionary<ITimeRange, PlausibilityReport>();
             foreach (var range in ranges)
             {
-                var localConfig = JsonConvert.DeserializeObject<PlausibilityReportConfiguration>(JsonConvert.SerializeObject(config));
+                var localConfig = JsonConvert.DeserializeObject<PlausibilityReport.PlausibilityReportConfiguration>(JsonConvert.SerializeObject(config));
                 localConfig.Timeframe = new Zeitraum
                 {
                     Startdatum = range.Start,
@@ -158,9 +153,9 @@ namespace BO4E.Extensions.BusinessObjects.Energiemenge
         /// The magic is, that it takes DST into account!
         /// </summary>
         /// <param name="em">Energiemenge</param>
-        /// <param name="config">configuration that contains the overall time range in <see cref="PlausibilityReportConfiguration.Timeframe"/></param>
+        /// <param name="config">configuration that contains the overall time range in <see cref="PlausibilityReport.PlausibilityReportConfiguration.Timeframe"/></param>
         /// <returns></returns>
-        public static IDictionary<ITimeRange, PlausibilityReport> GetDailyPlausibilityReports(this BO.Energiemenge em, PlausibilityReportConfiguration config)
+        public static IDictionary<ITimeRange, PlausibilityReport> GetDailyPlausibilityReports(this BO4E.BO.Energiemenge em, PlausibilityReport.PlausibilityReportConfiguration config)
         {
             if (config == null)
             {
@@ -182,9 +177,9 @@ namespace BO4E.Extensions.BusinessObjects.Energiemenge
         /// Get Monthly Completeness Reports for overall time range defined in <paramref name="config"/>. 
         /// </summary>
         /// <param name="em">Energiemenge</param>
-        /// <param name="config">configuration that contains the overall time range in <see cref="PlausibilityReportConfiguration.Timeframe"/></param>
+        /// <param name="config">configuration that contains the overall time range in <see cref="PlausibilityReport.PlausibilityReportConfiguration.Timeframe"/></param>
         /// <returns></returns>
-        public static IDictionary<ITimeRange, PlausibilityReport> GetMonthlyPlausibilityReports(this BO4E.BO.Energiemenge em, PlausibilityReportConfiguration config)
+        public static IDictionary<ITimeRange, PlausibilityReport> GetMonthlyPlausibilityReports(this BO4E.BO.Energiemenge em, PlausibilityReport.PlausibilityReportConfiguration config)
         {
             if (config == null)
             {

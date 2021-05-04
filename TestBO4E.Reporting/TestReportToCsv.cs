@@ -2,11 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
-
 using BO4E.Reporting;
-
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-
 using Newtonsoft.Json;
 
 namespace TestBO4E.Reporting

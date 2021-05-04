@@ -2,27 +2,22 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-
 using BO4E;
 using BO4E.BO;
 using BO4E.COM;
 using BO4E.ENUM;
-using BO4E.Extensions.BusinessObjects.Energiemenge;
 using BO4E.meta;
 using BO4E.meta.LenientConverters;
+using BO4E.Extensions.BusinessObjects.Energiemenge;
 using BO4E.Reporting;
-
 using Itenso.TimePeriod;
-
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 using Newtonsoft.Json.Linq;
-
 using StackExchange.Profiling;
 
-namespace TestBO4EExtensions
+namespace TestBO4E.Extensions
 {
     [TestClass]
     public class TestEnergiemengeExtensionCompleteness

@@ -3,12 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using BO4E.COM;
 using BO4E.ENUM;
-using BO4E.Extensions.COM;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Newtonsoft.Json;
 using static BO4E.Extensions.COM.VerbrauchExtension;
 
-namespace TestBO4EExtensions
+namespace TestBO4E.Extensions
 {
     [TestClass]
     public class TestVerbrauchExtension

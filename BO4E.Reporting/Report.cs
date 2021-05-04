@@ -1,11 +1,9 @@
-﻿using BO4E.BO;
-
-using System;
+﻿using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-
+using BO4E.BO;
 using static BO4E.Reporting.CompletenessReport;
 
 namespace BO4E.Reporting
@@ -293,7 +291,7 @@ namespace BO4E.Reporting
                         {
                             continue;
                         }
-                        if (field.DeclaringType == typeof(BasicVerbrauch))
+                        if (field.DeclaringType == typeof(CompletenessReport.BasicVerbrauch))
                         {
                             var muterType = "gap.";
                             var val = nestedValue.ToString();

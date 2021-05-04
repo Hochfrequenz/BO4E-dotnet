@@ -3,7 +3,7 @@ using BO4E.BO;
 using BO4E.Extensions.BusinessObjects;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace TestBO4EExtensions
+namespace TestBO4E.Extensions
 {
     [TestClass]
     public class TestCloningExtension

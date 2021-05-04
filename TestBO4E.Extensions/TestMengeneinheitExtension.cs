@@ -3,7 +3,7 @@ using BO4E.ENUM;
 using BO4E.Extensions.ENUM;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace TestBO4EExtensions
+namespace TestBO4E.Extensions
 {
     [TestClass]
     public class TestMengeneinheitExtension
