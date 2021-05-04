@@ -6,6 +6,9 @@ using Sodium;
 
 namespace BO4E.Encryption
 {
+    /// <summary>
+    /// An encrypter that uses asymmetric encryption.
+    /// </summary>
     public class AsymmetricEncrypter : Encrypter
     {
         private readonly byte[] _ownPublicKey;
@@ -107,6 +110,11 @@ namespace BO4E.Encryption
             return Decrypt(cipherText, sendersPublicKey, Convert.FromBase64String(nonce));
         }
 
+        /// <summary>
+        /// <inheritdoc cref="Encrypter.Decrypt"/>
+        /// </summary>
+        /// <param name="encryptedObject"></param>
+        /// <returns></returns>
         public override BusinessObject Decrypt(EncryptedObject encryptedObject)
         {
             var
@@ -117,6 +125,12 @@ namespace BO4E.Encryption
             return JsonConvert.DeserializeObject<BusinessObject>(plainString, encryptionSerializerSettings);
         }
 
+        /// <summary>
+        /// <inheritdoc cref="Encrypter.Decrypt{T}"/>
+        /// </summary>
+        /// <param name="encryptedObject"></param>
+        /// <typeparam name="T"></typeparam>
+        /// <returns></returns>
         public override T Decrypt<T>(EncryptedObject encryptedObject)
         {
             var
@@ -127,6 +141,9 @@ namespace BO4E.Encryption
             return JsonConvert.DeserializeObject<T>(plainString, encryptionSerializerSettings);
         }
 
+        /// <summary>
+        /// <inheritdoc cref="Encrypter.Dispose"/>
+        /// </summary>
         public override void Dispose()
         {
             if (_privateKey != null)
@@ -134,6 +151,9 @@ namespace BO4E.Encryption
                     _privateKey[i] = 0x0;
         }
 
+        /// <summary>
+        /// <inheritdoc cref="Encrypter.Dispose"/>
+        /// </summary>
         ~AsymmetricEncrypter()
         {
             Dispose();
