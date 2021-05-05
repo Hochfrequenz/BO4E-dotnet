@@ -1,14 +1,14 @@
 {
-  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$schema":  "http://json-schema.org/draft-07/schema#",
   "definitions": {
     "Adresse": {
       "type": ["object", "null"],
       "properties": {
         "postleitzahl": {
-          "type": "string"
+          "type":  "string"
         },
         "ort": {
-          "type": "string"
+          "type":  "string"
         },
         "strasse": {
           "type": ["string", "null"]
@@ -314,7 +314,7 @@
           "type": ["string", "null"]
         },
         "versionStruktur": {
-          "type": "integer"
+          "type":  "integer"
         },
         "anrede": {
           "type": ["string", "null"],
@@ -339,7 +339,7 @@
           "type": ["string", "null"]
         },
         "nachname": {
-          "type": "string"
+          "type":  "string"
         },
         "eMailAdresse": {
           "type": ["string", "null"]
@@ -348,28 +348,28 @@
           "type": ["string", "null"]
         },
         "geschaeftspartner": {
-          "$ref": "#/definitions/Geschaeftspartner"
+          "$ref":  "#/definitions/Geschaeftspartner"
         },
         "adresse": {
-          "$ref": "#/definitions/Adresse"
+          "$ref":  "#/definitions/Adresse"
         },
         "rufnummer": {
           "type": ["array", "null"],
           "items": {
-            "$ref": "#/definitions/Rufnummer"
+            "$ref":  "#/definitions/Rufnummer"
           }
         },
         "zustaendigkeit": {
           "type": ["array", "null"],
           "items": {
-            "$ref": "#/definitions/Zustaendigkeit"
+            "$ref":  "#/definitions/Zustaendigkeit"
           }
         }
       },
       "required": ["nachname", "geschaeftspartner"]
     },
     "Geschaeftspartner": {
-      "type": "object",
+      "type":  "object",
       "properties": {
         "guid": {
           "type": ["string", "null"]
@@ -378,7 +378,7 @@
           "type": ["string", "null"]
         },
         "versionStruktur": {
-          "type": "integer"
+          "type":  "integer"
         },
         "anrede": {
           "type": ["string", "null"],
@@ -405,7 +405,7 @@
           "type": ["string", "null"]
         },
         "gewerbekennzeichnung": {
-          "type": "boolean"
+          "type":  "boolean"
         },
         "hrnummer": {
           "type": ["string", "null"]
@@ -416,7 +416,7 @@
         "kontaktweg": {
           "type": ["array", "null"],
           "items": {
-            "type": "string",
+            "type":  "string",
             "enum": ["ANSCHREIBEN", "TELEFONAT", "FAX", "E_MAIL", "SMS"]
           }
         },
@@ -435,7 +435,7 @@
         "geschaeftspartnerrolle": {
           "type": ["array", "null"],
           "items": {
-            "type": "string",
+            "type":  "string",
             "enum": [
               "LIEFERANT",
               "DIENSTLEISTER",
@@ -446,7 +446,7 @@
           }
         },
         "partneradresse": {
-          "$ref": "#/definitions/Adresse"
+          "$ref":  "#/definitions/Adresse"
         }
       },
       "required": ["gewerbekennzeichnung"]
@@ -455,7 +455,7 @@
       "type": ["object", "null"],
       "properties": {
         "nummerntyp": {
-          "type": "string",
+          "type":  "string",
           "enum": [
             "RUF_ZENTRALE",
             "FAX_ZENTRALE",
@@ -469,7 +469,7 @@
           ]
         },
         "rufnummer": {
-          "type": "string"
+          "type":  "string"
         },
         "guid": {
           "type": ["string", "null"]
@@ -495,7 +495,7 @@
       }
     }
   },
-  "type": "object",
+  "type":  "object",
   "properties": {
     "guid": {
       "type": ["string", "null"]
@@ -504,7 +504,7 @@
       "type": ["string", "null"]
     },
     "versionStruktur": {
-      "type": "integer"
+      "type":  "integer"
     },
     "anrede": {
       "type": ["string", "null"],
@@ -523,7 +523,7 @@
       "type": ["string", "null"]
     },
     "gewerbekennzeichnung": {
-      "type": "boolean"
+      "type":  "boolean"
     },
     "hrnummer": {
       "type": ["string", "null"]
@@ -534,7 +534,7 @@
     "kontaktweg": {
       "type": ["array", "null"],
       "items": {
-        "type": "string",
+        "type":  "string",
         "enum": ["ANSCHREIBEN", "TELEFONAT", "FAX", "E_MAIL", "SMS"]
       }
     },
@@ -553,7 +553,7 @@
     "geschaeftspartnerrolle": {
       "type": ["array", "null"],
       "items": {
-        "type": "string",
+        "type":  "string",
         "enum": [
           "LIEFERANT",
           "DIENSTLEISTER",
@@ -564,10 +564,10 @@
       }
     },
     "partneradresse": {
-      "$ref": "#/definitions/Adresse"
+      "$ref":  "#/definitions/Adresse"
     },
     "marktrolle": {
-      "type": "string",
+      "type":  "string",
       "enum": [
         "NB",
         "LF",
@@ -586,17 +586,17 @@
       ]
     },
     "rollencodenummer": {
-      "type": "string"
+      "type":  "string"
     },
     "rollencodetyp": {
-      "type": "string",
+      "type":  "string",
       "enum": ["BDEW", "DVGW", "GLN"]
     },
     "makoadresse": {
-      "type": "string"
+      "type":  "string"
     },
     "ansprechpartner": {
-      "$ref": "#/definitions/Ansprechpartner"
+      "$ref":  "#/definitions/Ansprechpartner"
     }
   },
   "required": [

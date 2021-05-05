@@ -1,24 +1,24 @@
 {
-  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$schema":  "http://json-schema.org/draft-07/schema#",
   "definitions": {
     "PositionsAufAbschlag": {
       "type": ["object", "null"],
       "properties": {
         "bezeichnung": {
-          "type": "string"
+          "type":  "string"
         },
         "beschreibung": {
-          "type": "string"
+          "type":  "string"
         },
         "aufAbschlagstyp": {
-          "type": "string",
+          "type":  "string",
           "enum": ["RELATIV", "ABSOLUT"]
         },
         "aufAbschlagswert": {
-          "type": "number"
+          "type":  "number"
         },
         "aufAbschlagswaehrung": {
-          "type": "string",
+          "type":  "string",
           "enum": ["EUR", "CT"]
         },
         "guid": {
@@ -37,7 +37,7 @@
       "type": ["object", "null"],
       "properties": {
         "berechnungsmethode": {
-          "type": "string",
+          "type":  "string",
           "enum": [
             "KEINE",
             "STAFFELN",
@@ -58,7 +58,7 @@
           ]
         },
         "leistungstyp": {
-          "type": "string",
+          "type":  "string",
           "enum": [
             "ARBEITSPREIS_WIRKARBEIT",
             "LEISTUNGSPREIS_WIRKLEISTUNG",
@@ -86,14 +86,14 @@
           ]
         },
         "leistungsbezeichung": {
-          "type": "string"
+          "type":  "string"
         },
         "preiseinheit": {
-          "type": "string",
+          "type":  "string",
           "enum": ["EUR", "CT"]
         },
         "bezugsgroesse": {
-          "type": "string",
+          "type":  "string",
           "enum": [
             "WH",
             "KW",
@@ -202,12 +202,12 @@
           ]
         },
         "zu_abschlaege": {
-          "$ref": "#/definitions/PositionsAufAbschlag"
+          "$ref":  "#/definitions/PositionsAufAbschlag"
         },
         "preisstaffeln": {
-          "type": "array",
+          "type":  "array",
           "items": {
-            "$ref": "#/definitions/Preisstaffel"
+            "$ref":  "#/definitions/Preisstaffel"
           }
         },
         "guid": {
@@ -227,16 +227,16 @@
       "type": ["object", "null"],
       "properties": {
         "einheitspreis": {
-          "type": "number"
+          "type":  "number"
         },
         "staffelgrenzeVon": {
-          "type": "number"
+          "type":  "number"
         },
         "staffelgrenzeBis": {
-          "type": "number"
+          "type":  "number"
         },
         "sigmoidparameter": {
-          "$ref": "#/definitions/Sigmoidparameter"
+          "$ref":  "#/definitions/Sigmoidparameter"
         },
         "guid": {
           "type": ["string", "null"]
@@ -248,16 +248,16 @@
       "type": ["object", "null"],
       "properties": {
         "A": {
-          "type": "number"
+          "type":  "number"
         },
         "B": {
-          "type": "number"
+          "type":  "number"
         },
         "C": {
-          "type": "number"
+          "type":  "number"
         },
         "D": {
-          "type": "number"
+          "type":  "number"
         },
         "guid": {
           "type": ["string", "null"]
@@ -266,7 +266,7 @@
       "required": ["A", "B", "C", "D"]
     },
     "Zeitraum": {
-      "type": "object",
+      "type":  "object",
       "properties": {
         "einheit": {
           "type": ["string", "null"],
@@ -289,11 +289,11 @@
         },
         "startdatum": {
           "type": ["string", "null"],
-          "format": "date-time"
+          "format":  "date-time"
         },
         "enddatum": {
           "type": ["string", "null"],
-          "format": "date-time"
+          "format":  "date-time"
         },
         "guid": {
           "type": ["string", "null"]
@@ -301,7 +301,7 @@
       }
     }
   },
-  "type": "object",
+  "type":  "object",
   "properties": {
     "guid": {
       "type": ["string", "null"]
@@ -310,26 +310,26 @@
       "type": ["string", "null"]
     },
     "versionStruktur": {
-      "type": "integer"
+      "type":  "integer"
     },
     "bezeichnung": {
-      "type": "string"
+      "type":  "string"
     },
     "gueltigkeit": {
-      "$ref": "#/definitions/Zeitraum"
+      "$ref":  "#/definitions/Zeitraum"
     },
     "preispositionen": {
-      "type": "array",
+      "type":  "array",
       "items": {
-        "$ref": "#/definitions/Preisposition"
+        "$ref":  "#/definitions/Preisposition"
       }
     },
     "sparte": {
-      "type": "string",
+      "type":  "string",
       "enum": ["STROM", "GAS", "FERNWAERME", "NAHWAERME", "WASSER", "ABWASSER"]
     },
     "kundengruppeKA": {
-      "type": "string",
+      "type":  "string",
       "enum": [
         "S_TARIF_25000",
         "S_TARIF_100000",

@@ -1,10 +1,10 @@
 {
-  "objectName": "Geschaeftspartner",
+  "objectName":  "Geschaeftspartner",
   "lenientEnumList": false,
   "input": {
     "versionStruktur": 1,
-    "boTyp": "GESCHAEFTSPARTNER",
-    "name1": "Ernest",
+    "boTyp":  "GESCHAEFTSPARTNER",
+    "name1":  "Ernest",
     "kontaktweg": ["TELEFONAT"],
     "geschaeftspartnerrolle": ["INTERESSENT", "KUNDE"],
     "gewerbekennzeichnung": false

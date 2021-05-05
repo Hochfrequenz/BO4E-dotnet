@@ -1,14 +1,14 @@
 {
-  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$schema":  "http://json-schema.org/draft-07/schema#",
   "definitions": {
     "Adresse": {
       "type": ["object", "null"],
       "properties": {
         "postleitzahl": {
-          "type": "string"
+          "type":  "string"
         },
         "ort": {
-          "type": "string"
+          "type":  "string"
         },
         "strasse": {
           "type": ["string", "null"]
@@ -308,16 +308,16 @@
       "type": ["object", "null"],
       "properties": {
         "positionsbezeichung": {
-          "type": "string"
+          "type":  "string"
         },
         "positionsmenge": {
-          "$ref": "#/definitions/Menge"
+          "$ref":  "#/definitions/Menge"
         },
         "positionspreis": {
-          "$ref": "#/definitions/Preis"
+          "$ref":  "#/definitions/Preis"
         },
         "positionsbetrag": {
-          "$ref": "#/definitions/Betrag"
+          "$ref":  "#/definitions/Betrag"
         },
         "guid": {
           "type": ["string", "null"]
@@ -334,19 +334,19 @@
         "lieferstellenangebotsteil": {
           "type": ["array", "null"],
           "items": {
-            "$ref": "#/definitions/Marktlokation"
+            "$ref":  "#/definitions/Marktlokation"
           }
         },
         "gesamtmengeangebotsteil": {
-          "$ref": "#/definitions/Menge"
+          "$ref":  "#/definitions/Menge"
         },
         "gesamtkostenangebotsteil": {
-          "$ref": "#/definitions/Betrag"
+          "$ref":  "#/definitions/Betrag"
         },
         "positionen": {
-          "type": "array",
+          "type":  "array",
           "items": {
-            "$ref": "#/definitions/Angebotsposition"
+            "$ref":  "#/definitions/Angebotsposition"
           }
         },
         "guid": {
@@ -359,7 +359,7 @@
       "type": ["object", "null"],
       "properties": {
         "angebotsstatus": {
-          "type": "string",
+          "type":  "string",
           "enum": [
             "KONZEPTION",
             "UNVERBINDLICH",
@@ -376,23 +376,23 @@
           "type": ["string", "null"]
         },
         "erstelldatum": {
-          "type": "string",
-          "format": "date-time"
+          "type":  "string",
+          "format":  "date-time"
         },
         "bindefrist": {
-          "type": "string",
-          "format": "date-time"
+          "type":  "string",
+          "format":  "date-time"
         },
         "gesamtmenge": {
-          "$ref": "#/definitions/Menge"
+          "$ref":  "#/definitions/Menge"
         },
         "gesamtkosten": {
-          "$ref": "#/definitions/Betrag"
+          "$ref":  "#/definitions/Betrag"
         },
         "teile": {
-          "type": "array",
+          "type":  "array",
           "items": {
-            "$ref": "#/definitions/Angebotsteil"
+            "$ref":  "#/definitions/Angebotsteil"
           }
         },
         "guid": {
@@ -411,7 +411,7 @@
           "type": ["string", "null"]
         },
         "versionStruktur": {
-          "type": "integer"
+          "type":  "integer"
         },
         "anrede": {
           "type": ["string", "null"],
@@ -436,7 +436,7 @@
           "type": ["string", "null"]
         },
         "nachname": {
-          "type": "string"
+          "type":  "string"
         },
         "eMailAdresse": {
           "type": ["string", "null"]
@@ -445,21 +445,21 @@
           "type": ["string", "null"]
         },
         "geschaeftspartner": {
-          "$ref": "#/definitions/Geschaeftspartner"
+          "$ref":  "#/definitions/Geschaeftspartner"
         },
         "adresse": {
-          "$ref": "#/definitions/Adresse"
+          "$ref":  "#/definitions/Adresse"
         },
         "rufnummer": {
           "type": ["array", "null"],
           "items": {
-            "$ref": "#/definitions/Rufnummer"
+            "$ref":  "#/definitions/Rufnummer"
           }
         },
         "zustaendigkeit": {
           "type": ["array", "null"],
           "items": {
-            "$ref": "#/definitions/Zustaendigkeit"
+            "$ref":  "#/definitions/Zustaendigkeit"
           }
         }
       },
@@ -469,10 +469,10 @@
       "type": ["object", "null"],
       "properties": {
         "wert": {
-          "type": "number"
+          "type":  "number"
         },
         "waehrung": {
-          "type": "string",
+          "type":  "string",
           "enum": [
             "AFN",
             "ALL",
@@ -667,7 +667,7 @@
       "type": ["object", "null"],
       "properties": {
         "dienstleistungstyp": {
-          "type": "string",
+          "type":  "string",
           "enum": [
             "DATENBEREITSTELLUNG_TAEGLICH",
             "DATENBEREITSTELLUNG_WOECHENTLICH",
@@ -711,7 +711,7 @@
           ]
         },
         "bezeichnung": {
-          "type": "string"
+          "type":  "string"
         },
         "guid": {
           "type": ["string", "null"]
@@ -723,10 +723,10 @@
       "type": ["object", "null"],
       "properties": {
         "breitengrad": {
-          "type": "number"
+          "type":  "number"
         },
         "laengengrad": {
-          "type": "number"
+          "type":  "number"
         },
         "guid": {
           "type": ["string", "null"]
@@ -738,7 +738,7 @@
       "type": ["object", "null"],
       "properties": {
         "geraetetyp": {
-          "type": "string",
+          "type":  "string",
           "enum": [
             "WECHSELSTROMZAEHLER",
             "DREHSTROMZAEHLER",
@@ -842,7 +842,7 @@
       "required": ["geraetetyp"]
     },
     "Geschaeftspartner": {
-      "type": "object",
+      "type":  "object",
       "properties": {
         "guid": {
           "type": ["string", "null"]
@@ -851,7 +851,7 @@
           "type": ["string", "null"]
         },
         "versionStruktur": {
-          "type": "integer"
+          "type":  "integer"
         },
         "anrede": {
           "type": ["string", "null"],
@@ -878,7 +878,7 @@
           "type": ["string", "null"]
         },
         "gewerbekennzeichnung": {
-          "type": "boolean"
+          "type":  "boolean"
         },
         "hrnummer": {
           "type": ["string", "null"]
@@ -889,7 +889,7 @@
         "kontaktweg": {
           "type": ["array", "null"],
           "items": {
-            "type": "string",
+            "type":  "string",
             "enum": ["ANSCHREIBEN", "TELEFONAT", "FAX", "E_MAIL", "SMS"]
           }
         },
@@ -908,7 +908,7 @@
         "geschaeftspartnerrolle": {
           "type": ["array", "null"],
           "items": {
-            "type": "string",
+            "type":  "string",
             "enum": [
               "LIEFERANT",
               "DIENSTLEISTER",
@@ -919,7 +919,7 @@
           }
         },
         "partneradresse": {
-          "$ref": "#/definitions/Adresse"
+          "$ref":  "#/definitions/Adresse"
         }
       },
       "required": ["gewerbekennzeichnung"]
@@ -934,7 +934,7 @@
           "type": ["string", "null"]
         },
         "versionStruktur": {
-          "type": "integer"
+          "type":  "integer"
         },
         "anrede": {
           "type": ["string", "null"],
@@ -961,7 +961,7 @@
           "type": ["string", "null"]
         },
         "gewerbekennzeichnung": {
-          "type": "boolean"
+          "type":  "boolean"
         },
         "hrnummer": {
           "type": ["string", "null"]
@@ -972,7 +972,7 @@
         "kontaktweg": {
           "type": ["array", "null"],
           "items": {
-            "type": "string",
+            "type":  "string",
             "enum": ["ANSCHREIBEN", "TELEFONAT", "FAX", "E_MAIL", "SMS"]
           }
         },
@@ -991,7 +991,7 @@
         "geschaeftspartnerrolle": {
           "type": ["array", "null"],
           "items": {
-            "type": "string",
+            "type":  "string",
             "enum": [
               "LIEFERANT",
               "DIENSTLEISTER",
@@ -1002,7 +1002,7 @@
           }
         },
         "partneradresse": {
-          "$ref": "#/definitions/Adresse"
+          "$ref":  "#/definitions/Adresse"
         }
       },
       "required": ["gewerbekennzeichnung"]
@@ -1011,7 +1011,7 @@
       "type": ["object", "null"],
       "properties": {
         "geraetetyp": {
-          "type": "string",
+          "type":  "string",
           "enum": [
             "WECHSELSTROMZAEHLER",
             "DREHSTROMZAEHLER",
@@ -1059,10 +1059,10 @@
           ]
         },
         "bezeichnung": {
-          "type": "string"
+          "type":  "string"
         },
         "geraeteeigenschaften": {
-          "$ref": "#/definitions/Geraeteeigenschaften"
+          "$ref":  "#/definitions/Geraeteeigenschaften"
         },
         "geraetenummer": {
           "type": ["string", "null"]
@@ -1080,10 +1080,10 @@
       "type": ["object", "null"],
       "properties": {
         "gemarkung_flur": {
-          "type": "string"
+          "type":  "string"
         },
         "flurstueck": {
-          "type": "string"
+          "type":  "string"
         },
         "guid": {
           "type": ["string", "null"]
@@ -1098,13 +1098,13 @@
           "type": ["string", "null"]
         },
         "kosten": {
-          "type": "number"
+          "type":  "number"
         },
         "kategorie": {
-          "type": "string"
+          "type":  "string"
         },
         "satz": {
-          "type": "string",
+          "type":  "string",
           "enum": ["KAS", "SA", "SAS", "TA", "TAS", "TK", "TKS", "TS", "TSS"]
         }
       },
@@ -1120,14 +1120,14 @@
           "type": ["string", "null"]
         },
         "versionStruktur": {
-          "type": "integer"
+          "type":  "integer"
         },
         "marktlokationsId": {
-          "type": "string",
-          "default": "|null|"
+          "type":  "string",
+          "default":  "|null|"
         },
         "sparte": {
-          "type": "string",
+          "type":  "string",
           "enum": [
             "STROM",
             "GAS",
@@ -1138,11 +1138,11 @@
           ]
         },
         "energierichtung": {
-          "type": "string",
+          "type":  "string",
           "enum": ["AUSSP", "EINSP"]
         },
         "bilanzierungsmethode": {
-          "type": "string",
+          "type":  "string",
           "enum": [
             "RLM",
             "SLP",
@@ -1160,7 +1160,7 @@
           "type": ["boolean", "null"]
         },
         "netzebene": {
-          "type": "string",
+          "type":  "string",
           "enum": [
             "NSP",
             "MSP",
@@ -1206,21 +1206,21 @@
           "enum": [null, "H_GAS", "H_GAS", "L_GAS", "L_GAS"]
         },
         "endkunde": {
-          "$ref": "#/definitions/Geschaeftspartner-1"
+          "$ref":  "#/definitions/Geschaeftspartner-1"
         },
         "lokationsadresse": {
-          "$ref": "#/definitions/Adresse"
+          "$ref":  "#/definitions/Adresse"
         },
         "geoadresse": {
-          "$ref": "#/definitions/Geokoordinaten"
+          "$ref":  "#/definitions/Geokoordinaten"
         },
         "katasterinformation": {
-          "$ref": "#/definitions/Katasteradresse"
+          "$ref":  "#/definitions/Katasteradresse"
         },
         "marktrollen": {
           "type": ["array", "null"],
           "items": {
-            "$ref": "#/definitions/Marktrolle"
+            "$ref":  "#/definitions/Marktrolle"
           }
         },
         "regelzone": {
@@ -1236,25 +1236,25 @@
         "zaehlwerke": {
           "type": ["array", "null"],
           "items": {
-            "$ref": "#/definitions/Zaehlwerk"
+            "$ref":  "#/definitions/Zaehlwerk"
           }
         },
         "verbauchsmenge": {
           "type": ["array", "null"],
           "items": {
-            "$ref": "#/definitions/Verbrauch"
+            "$ref":  "#/definitions/Verbrauch"
           }
         },
         "messlokationen": {
           "type": ["array", "null"],
           "items": {
-            "$ref": "#/definitions/Messlokation"
+            "$ref":  "#/definitions/Messlokation"
           }
         },
         "zugehoerigeMesslokationen": {
           "type": ["array", "null"],
           "items": {
-            "$ref": "#/definitions/Messlokationszuordnung"
+            "$ref":  "#/definitions/Messlokationszuordnung"
           }
         }
       },
@@ -1276,7 +1276,7 @@
           "type": ["string", "null"]
         },
         "marktrolle": {
-          "type": "string",
+          "type":  "string",
           "enum": [
             "NB",
             "LF",
@@ -1304,10 +1304,10 @@
       "type": ["object", "null"],
       "properties": {
         "wert": {
-          "type": "number"
+          "type":  "number"
         },
         "einheit": {
-          "type": "string",
+          "type":  "string",
           "enum": [
             "WH",
             "KW",
@@ -1342,14 +1342,14 @@
           "type": ["string", "null"]
         },
         "versionStruktur": {
-          "type": "integer"
+          "type":  "integer"
         },
         "messLokationsId": {
-          "type": "string",
-          "default": "|null|"
+          "type":  "string",
+          "default":  "|null|"
         },
         "sparte": {
-          "type": "string",
+          "type":  "string",
           "enum": [
             "STROM",
             "GAS",
@@ -1388,30 +1388,30 @@
           "type": ["string", "null"]
         },
         "messadresse": {
-          "$ref": "#/definitions/Adresse"
+          "$ref":  "#/definitions/Adresse"
         },
         "geoadresse": {
-          "$ref": "#/definitions/Geokoordinaten"
+          "$ref":  "#/definitions/Geokoordinaten"
         },
         "katasterinformation": {
-          "$ref": "#/definitions/Katasteradresse"
+          "$ref":  "#/definitions/Katasteradresse"
         },
         "geraete": {
           "type": ["array", "null"],
           "items": {
-            "$ref": "#/definitions/Hardware"
+            "$ref":  "#/definitions/Hardware"
           }
         },
         "messdienstleistung": {
           "type": ["array", "null"],
           "items": {
-            "$ref": "#/definitions/Dienstleistung"
+            "$ref":  "#/definitions/Dienstleistung"
           }
         },
         "messlokationszaehler": {
           "type": ["array", "null"],
           "items": {
-            "$ref": "#/definitions/Zaehler"
+            "$ref":  "#/definitions/Zaehler"
           }
         },
         "bilanzierungsmethode": {
@@ -1432,7 +1432,7 @@
         "marktrollen": {
           "type": ["array", "null"],
           "items": {
-            "$ref": "#/definitions/Marktrolle"
+            "$ref":  "#/definitions/Marktrolle"
           }
         },
         "gasqualitaet": {
@@ -1449,7 +1449,7 @@
       "type": ["object", "null"],
       "properties": {
         "messlokationsId": {
-          "type": "string"
+          "type":  "string"
         },
         "arithmetik": {
           "type": ["string", "null"],
@@ -1463,11 +1463,11 @@
         },
         "gueltigSeit": {
           "type": ["string", "null"],
-          "format": "date-time"
+          "format":  "date-time"
         },
         "gueltigBis": {
           "type": ["string", "null"],
-          "format": "date-time"
+          "format":  "date-time"
         },
         "guid": {
           "type": ["string", "null"]
@@ -1476,17 +1476,17 @@
       "required": ["messlokationsId"]
     },
     "Preis": {
-      "type": "object",
+      "type":  "object",
       "properties": {
         "wert": {
-          "type": "number"
+          "type":  "number"
         },
         "einheit": {
-          "type": "string",
+          "type":  "string",
           "enum": ["EUR", "CT"]
         },
         "bezugswert": {
-          "type": "string",
+          "type":  "string",
           "enum": [
             "WH",
             "KW",
@@ -1519,7 +1519,7 @@
       "type": ["object", "null"],
       "properties": {
         "nummerntyp": {
-          "type": "string",
+          "type":  "string",
           "enum": [
             "RUF_ZENTRALE",
             "FAX_ZENTRALE",
@@ -1533,7 +1533,7 @@
           ]
         },
         "rufnummer": {
-          "type": "string"
+          "type":  "string"
         },
         "guid": {
           "type": ["string", "null"]
@@ -1557,25 +1557,25 @@
           "type": ["string", "null"]
         },
         "wertermittlungsverfahren": {
-          "type": "string",
+          "type":  "string",
           "enum": ["PROGNOSE", "MESSUNG"]
         },
         "obiskennzahl": {
-          "type": "string"
+          "type":  "string"
         },
         "startdatum": {
-          "type": "string",
-          "format": "date-time"
+          "type":  "string",
+          "format":  "date-time"
         },
         "wert": {
-          "type": "number"
+          "type":  "number"
         },
         "enddatum": {
-          "type": "string",
-          "format": "date-time"
+          "type":  "string",
+          "format":  "date-time"
         },
         "einheit": {
-          "type": "string",
+          "type":  "string",
           "enum": [
             "WH",
             "KW",
@@ -1612,13 +1612,13 @@
           "type": ["string", "null"]
         },
         "versionStruktur": {
-          "type": "integer"
+          "type":  "integer"
         },
         "zaehlernummer": {
-          "type": "string"
+          "type":  "string"
         },
         "sparte": {
-          "type": "string",
+          "type":  "string",
           "enum": [
             "STROM",
             "GAS",
@@ -1629,11 +1629,11 @@
           ]
         },
         "zaehlerauspraegung": {
-          "type": "string",
+          "type":  "string",
           "enum": ["EINRICHTUNGSZAEHLER", "ZWEIRICHTUNGSZAEHLER"]
         },
         "zaehlertyp": {
-          "type": "string",
+          "type":  "string",
           "enum": [
             "DREHSTROMZAEHLER",
             "BALGENGASZAEHLER",
@@ -1647,7 +1647,7 @@
           ]
         },
         "tarifart": {
-          "type": "string",
+          "type":  "string",
           "enum": [
             "EINTARIF",
             "ZWEITARIF",
@@ -1657,25 +1657,25 @@
           ]
         },
         "zaehlerkonstante": {
-          "type": "number"
+          "type":  "number"
         },
         "eichungBis": {
           "type": ["string", "null"],
-          "format": "date-time"
+          "format":  "date-time"
         },
         "letzteEichung": {
           "type": ["string", "null"],
-          "format": "date-time"
+          "format":  "date-time"
         },
         "zaehlwerke": {
-          "type": "array",
+          "type":  "array",
           "items": {
-            "$ref": "#/definitions/Zaehlwerk"
+            "$ref":  "#/definitions/Zaehlwerk"
           },
           "minItems": 1
         },
         "zaehlerhersteller": {
-          "$ref": "#/definitions/Geschaeftspartner-1"
+          "$ref":  "#/definitions/Geschaeftspartner-1"
         },
         "gateway": {
           "type": ["string", "null"]
@@ -1702,23 +1702,23 @@
       "type": ["object", "null"],
       "properties": {
         "zaehlwerkId": {
-          "type": "string"
+          "type":  "string"
         },
         "bezeichnung": {
-          "type": "string"
+          "type":  "string"
         },
         "richtung": {
-          "type": "string",
+          "type":  "string",
           "enum": ["AUSSP", "EINSP"]
         },
         "obisKennzahl": {
-          "type": "string"
+          "type":  "string"
         },
         "wandlerfaktor": {
-          "type": "number"
+          "type":  "number"
         },
         "einheit": {
-          "type": "string",
+          "type":  "string",
           "enum": [
             "WH",
             "KW",
@@ -1747,7 +1747,7 @@
         "verwendungszwecke": {
           "type": ["array", "null"],
           "items": {
-            "type": "string",
+            "type":  "string",
             "enum": [
               "NETZNUTZUNGSABRECHNUNG",
               "BILANZKREISABRECHNUNG",
@@ -1769,7 +1769,7 @@
           "enum": [null, "SPEICHERHEIZUNG", "WAERMEPUMPE", "DIREKTHEIZUNG"]
         },
         "konzessionsabgabe": {
-          "$ref": "#/definitions/Konzessionsabgabe"
+          "$ref":  "#/definitions/Konzessionsabgabe"
         },
         "steuerbefreit": {
           "type": ["boolean", "null"]
@@ -1811,7 +1811,7 @@
       }
     }
   },
-  "type": "object",
+  "type":  "object",
   "properties": {
     "guid": {
       "type": ["string", "null"]
@@ -1820,41 +1820,41 @@
       "type": ["string", "null"]
     },
     "versionStruktur": {
-      "type": "integer"
+      "type":  "integer"
     },
     "angebotsnummer": {
-      "type": "string"
+      "type":  "string"
     },
     "anfragereferenz": {
       "type": ["string", "null"]
     },
     "angebotsdatum": {
-      "type": "string"
+      "type":  "string"
     },
     "sparte": {
-      "type": "string",
+      "type":  "string",
       "enum": ["STROM", "GAS", "FERNWAERME", "NAHWAERME", "WASSER", "ABWASSER"]
     },
     "bindefrist": {
-      "type": "string",
-      "format": "date-time"
+      "type":  "string",
+      "format":  "date-time"
     },
     "angebotgeber": {
-      "$ref": "#/definitions/Geschaeftspartner"
+      "$ref":  "#/definitions/Geschaeftspartner"
     },
     "angebotnehmer": {
-      "$ref": "#/definitions/Geschaeftspartner"
+      "$ref":  "#/definitions/Geschaeftspartner"
     },
     "unterzeichnerAngebotsnehmer": {
-      "$ref": "#/definitions/Ansprechpartner"
+      "$ref":  "#/definitions/Ansprechpartner"
     },
     "unterzeichnerAngebotsgeber": {
-      "$ref": "#/definitions/Ansprechpartner"
+      "$ref":  "#/definitions/Ansprechpartner"
     },
     "varianten": {
       "type": ["array", "null"],
       "items": {
-        "$ref": "#/definitions/Angebotsvariante"
+        "$ref":  "#/definitions/Angebotsvariante"
       },
       "minItems": 1
     }

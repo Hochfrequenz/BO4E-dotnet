@@ -1,42 +1,42 @@
 {
-  "objectName": "Vertrag",
+  "objectName":  "Vertrag",
   "lenientEnumList": true,
   "lenientDateTime": true,
   "lenientBo4eUri": true,
   "lenientEmptyList": true,
   "input": {
-    "vertragsnummer": "1",
-    "beschreibung": "0",
-    "vertragsart": "ENERGIELIEFERVERTRAG",
-    "vertragstatus": "IN_ARBEIT",
-    "sparte": "STROM",
-    "vertragsbeginn": "2017-05-17T00:00:00Z",
-    "vertragsende": "2018-05-17T00:00:00Z",
+    "vertragsnummer":  "1",
+    "beschreibung":  "0",
+    "vertragsart":  "ENERGIELIEFERVERTRAG",
+    "vertragstatus":  "IN_ARBEIT",
+    "sparte":  "STROM",
+    "vertragsbeginn":  "2017-05-17T00:00:00Z",
+    "vertragsende":  "2018-05-17T00:00:00Z",
     "vertragspartner1": {
       "versionStruktur": 1,
-      "boTyp": "GESCHAEFTSPARTNER",
-      "name1": "Ernest",
-      "kontaktweg": [{ "kontaktweg": "TELEFONAT" }],
+      "boTyp":  "GESCHAEFTSPARTNER",
+      "name1":  "Ernest",
+      "kontaktweg": [{ "kontaktweg":  "TELEFONAT" }],
       "geschaeftspartnerrolle": [
-        { "dein key interessiert mich nen 💩dreck": "INTERESSENT" },
-        { "rolle": "KUNDE" }
+        { "dein key interessiert mich nen 💩dreck":  "INTERESSENT" },
+        { "rolle":  "KUNDE" }
       ],
       "gewerbekennzeichnung": true
     },
     "vertragspartner2": {
       "versionStruktur": 1,
-      "boTyp": "GESCHAEFTSPARTNER",
-      "name1": "Ernest",
-      "kontaktweg": [{ "kontaktweg": "TELEFONAT" }],
+      "boTyp":  "GESCHAEFTSPARTNER",
+      "name1":  "Ernest",
+      "kontaktweg": [{ "kontaktweg":  "TELEFONAT" }],
       "geschaeftspartnerrolle": [
-        { "dein key interessiert mich nen 💩dreck": "INTERESSENT" },
-        { "rolle": "KUNDE" }
+        { "dein key interessiert mich nen 💩dreck":  "INTERESSENT" },
+        { "rolle":  "KUNDE" }
       ],
       "gewerbekennzeichnung": true
     },
     "unterzeichnervp1": null,
     "unterzeichnervp2": null,
     "Vertragskonditionen": null,
-    "lokationsId": "DE54321"
+    "lokationsId":  "DE54321"
   }
 }

@@ -1,14 +1,14 @@
 ﻿{
-  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$schema":  "http://json-schema.org/draft-07/schema#",
   "definitions": {
     "Adresse": {
       "type": ["object", "null"],
       "properties": {
         "postleitzahl": {
-          "type": "string"
+          "type":  "string"
         },
         "ort": {
-          "type": "string"
+          "type":  "string"
         },
         "strasse": {
           "type": ["string", "null"]
@@ -303,7 +303,7 @@
         },
         "timestamp": {
           "type": ["string", "null"],
-          "format": "date-time"
+          "format":  "date-time"
         }
       },
       "required": ["postleitzahl", "ort"]
@@ -317,18 +317,18 @@
         "externeReferenzen": {
           "type": ["array", "null"],
           "items": {
-            "$ref": "#/definitions/ExterneReferenz"
+            "$ref":  "#/definitions/ExterneReferenz"
           }
         },
         "boTyp": {
           "type": ["string", "null"]
         },
         "versionStruktur": {
-          "type": "integer"
+          "type":  "integer"
         },
         "timestamp": {
           "type": ["string", "null"],
-          "format": "date-time"
+          "format":  "date-time"
         },
         "anrede": {
           "type": ["string", "null"],
@@ -357,7 +357,7 @@
           "type": ["string", "null"]
         },
         "nachname": {
-          "type": "string"
+          "type":  "string"
         },
         "eMailAdresse": {
           "type": ["string", "null"]
@@ -366,21 +366,21 @@
           "type": ["string", "null"]
         },
         "geschaeftspartner": {
-          "$ref": "#/definitions/Geschaeftspartner"
+          "$ref":  "#/definitions/Geschaeftspartner"
         },
         "adresse": {
-          "$ref": "#/definitions/Adresse"
+          "$ref":  "#/definitions/Adresse"
         },
         "rufnummern": {
           "type": ["array", "null"],
           "items": {
-            "$ref": "#/definitions/Rufnummer"
+            "$ref":  "#/definitions/Rufnummer"
           }
         },
         "zustaendigkeit": {
           "type": ["array", "null"],
           "items": {
-            "$ref": "#/definitions/Zustaendigkeit"
+            "$ref":  "#/definitions/Zustaendigkeit"
           }
         }
       },
@@ -390,26 +390,26 @@
       "type": ["object", "null"],
       "properties": {
         "exRefName": {
-          "type": "string"
+          "type":  "string"
         },
         "exRefWert": {
-          "type": "string"
+          "type":  "string"
         },
         "guid": {
           "type": ["string", "null"]
         },
         "timestamp": {
           "type": ["string", "null"],
-          "format": "date-time"
+          "format":  "date-time"
         }
       },
       "required": ["exRefName", "exRefWert"]
     },
     "Geraeteeigenschaften": {
-      "type": "object",
+      "type":  "object",
       "properties": {
         "geraetetyp": {
-          "type": "string",
+          "type":  "string",
           "enum": [
             "WECHSELSTROMZAEHLER",
             "DREHSTROMZAEHLER",
@@ -512,7 +512,7 @@
         },
         "timestamp": {
           "type": ["string", "null"],
-          "format": "date-time"
+          "format":  "date-time"
         }
       },
       "required": ["geraetetyp"]
@@ -521,7 +521,7 @@
       "type": ["object", "null"],
       "properties": {
         "geraetetyp": {
-          "type": "string",
+          "type":  "string",
           "enum": [
             "WECHSELSTROMZAEHLER",
             "DREHSTROMZAEHLER",
@@ -624,7 +624,7 @@
         },
         "timestamp": {
           "type": ["string", "null"],
-          "format": "date-time"
+          "format":  "date-time"
         }
       },
       "required": ["geraetetyp"]
@@ -638,18 +638,18 @@
         "externeReferenzen": {
           "type": ["array", "null"],
           "items": {
-            "$ref": "#/definitions/ExterneReferenz"
+            "$ref":  "#/definitions/ExterneReferenz"
           }
         },
         "boTyp": {
           "type": ["string", "null"]
         },
         "versionStruktur": {
-          "type": "integer"
+          "type":  "integer"
         },
         "timestamp": {
           "type": ["string", "null"],
-          "format": "date-time"
+          "format":  "date-time"
         },
         "anrede": {
           "type": ["string", "null"],
@@ -680,7 +680,7 @@
           "type": ["string", "null"]
         },
         "gewerbekennzeichnung": {
-          "type": "boolean"
+          "type":  "boolean"
         },
         "hrnummer": {
           "type": ["string", "null"]
@@ -691,7 +691,7 @@
         "kontaktweg": {
           "type": ["array", "null"],
           "items": {
-            "type": "string",
+            "type":  "string",
             "enum": ["ANSCHREIBEN", "TELEFONAT", "FAX", "E_MAIL", "SMS"]
           }
         },
@@ -710,7 +710,7 @@
         "geschaeftspartnerrolle": {
           "type": ["array", "null"],
           "items": {
-            "type": "string",
+            "type":  "string",
             "enum": [
               "LIEFERANT",
               "DIENSTLEISTER",
@@ -721,13 +721,13 @@
           }
         },
         "partneradresse": {
-          "$ref": "#/definitions/Adresse"
+          "$ref":  "#/definitions/Adresse"
         }
       },
       "required": ["gewerbekennzeichnung"]
     },
     "Marktteilnehmer": {
-      "type": "object",
+      "type":  "object",
       "properties": {
         "guid": {
           "type": ["string", "null"]
@@ -735,18 +735,18 @@
         "externeReferenzen": {
           "type": ["array", "null"],
           "items": {
-            "$ref": "#/definitions/ExterneReferenz"
+            "$ref":  "#/definitions/ExterneReferenz"
           }
         },
         "boTyp": {
           "type": ["string", "null"]
         },
         "versionStruktur": {
-          "type": "integer"
+          "type":  "integer"
         },
         "timestamp": {
           "type": ["string", "null"],
-          "format": "date-time"
+          "format":  "date-time"
         },
         "anrede": {
           "type": ["string", "null"],
@@ -777,7 +777,7 @@
           "type": ["string", "null"]
         },
         "gewerbekennzeichnung": {
-          "type": "boolean"
+          "type":  "boolean"
         },
         "hrnummer": {
           "type": ["string", "null"]
@@ -788,7 +788,7 @@
         "kontaktweg": {
           "type": ["array", "null"],
           "items": {
-            "type": "string",
+            "type":  "string",
             "enum": ["ANSCHREIBEN", "TELEFONAT", "FAX", "E_MAIL", "SMS"]
           }
         },
@@ -807,7 +807,7 @@
         "geschaeftspartnerrolle": {
           "type": ["array", "null"],
           "items": {
-            "type": "string",
+            "type":  "string",
             "enum": [
               "LIEFERANT",
               "DIENSTLEISTER",
@@ -818,10 +818,10 @@
           }
         },
         "partneradresse": {
-          "$ref": "#/definitions/Adresse"
+          "$ref":  "#/definitions/Adresse"
         },
         "marktrolle": {
-          "type": "string",
+          "type":  "string",
           "enum": [
             "NB",
             "LF",
@@ -840,17 +840,17 @@
           ]
         },
         "rollencodenummer": {
-          "type": "string"
+          "type":  "string"
         },
         "rollencodetyp": {
-          "type": "string",
+          "type":  "string",
           "enum": ["ZERO", "GLN", "BDEW", "DVGW"]
         },
         "makoadresse": {
           "type": ["string", "null"]
         },
         "ansprechpartner": {
-          "$ref": "#/definitions/Ansprechpartner"
+          "$ref":  "#/definitions/Ansprechpartner"
         }
       },
       "required": [
@@ -864,20 +864,20 @@
       "type": ["object", "null"],
       "properties": {
         "bezeichnung": {
-          "type": "string"
+          "type":  "string"
         },
         "beschreibung": {
-          "type": "string"
+          "type":  "string"
         },
         "aufAbschlagstyp": {
-          "type": "string",
+          "type":  "string",
           "enum": ["RELATIV", "ABSOLUT"]
         },
         "aufAbschlagswert": {
-          "type": "number"
+          "type":  "number"
         },
         "aufAbschlagswaehrung": {
-          "type": "string",
+          "type":  "string",
           "enum": ["EUR", "CT"]
         },
         "guid": {
@@ -885,7 +885,7 @@
         },
         "timestamp": {
           "type": ["string", "null"],
-          "format": "date-time"
+          "format":  "date-time"
         }
       },
       "required": [
@@ -900,7 +900,7 @@
       "type": ["object", "null"],
       "properties": {
         "berechnungsmethode": {
-          "type": "string",
+          "type":  "string",
           "enum": [
             "KEINE",
             "STAFFELN",
@@ -921,7 +921,7 @@
           ]
         },
         "leistungstyp": {
-          "type": "string",
+          "type":  "string",
           "enum": [
             "ARBEITSPREIS_WIRKARBEIT",
             "LEISTUNGSPREIS_WIRKLEISTUNG",
@@ -949,14 +949,14 @@
           ]
         },
         "leistungsbezeichung": {
-          "type": "string"
+          "type":  "string"
         },
         "preiseinheit": {
-          "type": "string",
+          "type":  "string",
           "enum": ["EUR", "CT"]
         },
         "bezugsgroesse": {
-          "type": "string",
+          "type":  "string",
           "enum": [
             "ZERO",
             "WH",
@@ -1066,12 +1066,12 @@
           ]
         },
         "zu_abschlaege": {
-          "$ref": "#/definitions/PositionsAufAbschlag"
+          "$ref":  "#/definitions/PositionsAufAbschlag"
         },
         "preisstaffeln": {
-          "type": "array",
+          "type":  "array",
           "items": {
-            "$ref": "#/definitions/Preisstaffel"
+            "$ref":  "#/definitions/Preisstaffel"
           }
         },
         "guid": {
@@ -1079,7 +1079,7 @@
         },
         "timestamp": {
           "type": ["string", "null"],
-          "format": "date-time"
+          "format":  "date-time"
         }
       },
       "required": [
@@ -1095,23 +1095,23 @@
       "type": ["object", "null"],
       "properties": {
         "einheitspreis": {
-          "type": "number"
+          "type":  "number"
         },
         "staffelgrenzeVon": {
-          "type": "number"
+          "type":  "number"
         },
         "staffelgrenzeBis": {
-          "type": "number"
+          "type":  "number"
         },
         "sigmoidparameter": {
-          "$ref": "#/definitions/Sigmoidparameter"
+          "$ref":  "#/definitions/Sigmoidparameter"
         },
         "guid": {
           "type": ["string", "null"]
         },
         "timestamp": {
           "type": ["string", "null"],
-          "format": "date-time"
+          "format":  "date-time"
         }
       },
       "required": ["einheitspreis", "staffelgrenzeVon", "staffelgrenzeBis"]
@@ -1120,7 +1120,7 @@
       "type": ["object", "null"],
       "properties": {
         "nummerntyp": {
-          "type": "string",
+          "type":  "string",
           "enum": [
             "RUF_ZENTRALE",
             "FAX_ZENTRALE",
@@ -1134,14 +1134,14 @@
           ]
         },
         "rufnummer": {
-          "type": "string"
+          "type":  "string"
         },
         "guid": {
           "type": ["string", "null"]
         },
         "timestamp": {
           "type": ["string", "null"],
-          "format": "date-time"
+          "format":  "date-time"
         }
       },
       "required": ["nummerntyp", "rufnummer"]
@@ -1150,29 +1150,29 @@
       "type": ["object", "null"],
       "properties": {
         "A": {
-          "type": "number"
+          "type":  "number"
         },
         "B": {
-          "type": "number"
+          "type":  "number"
         },
         "C": {
-          "type": "number"
+          "type":  "number"
         },
         "D": {
-          "type": "number"
+          "type":  "number"
         },
         "guid": {
           "type": ["string", "null"]
         },
         "timestamp": {
           "type": ["string", "null"],
-          "format": "date-time"
+          "format":  "date-time"
         }
       },
       "required": ["A", "B", "C", "D"]
     },
     "Zeitraum": {
-      "type": "object",
+      "type":  "object",
       "properties": {
         "einheit": {
           "type": ["string", "null"],
@@ -1195,18 +1195,18 @@
         },
         "startdatum": {
           "type": ["string", "null"],
-          "format": "date-time"
+          "format":  "date-time"
         },
         "enddatum": {
           "type": ["string", "null"],
-          "format": "date-time"
+          "format":  "date-time"
         },
         "guid": {
           "type": ["string", "null"]
         },
         "timestamp": {
           "type": ["string", "null"],
-          "format": "date-time"
+          "format":  "date-time"
         }
       }
     },
@@ -1227,12 +1227,12 @@
         },
         "timestamp": {
           "type": ["string", "null"],
-          "format": "date-time"
+          "format":  "date-time"
         }
       }
     }
   },
-  "type": "object",
+  "type":  "object",
   "properties": {
     "guid": {
       "type": ["string", "null"]
@@ -1240,41 +1240,41 @@
     "externeReferenzen": {
       "type": ["array", "null"],
       "items": {
-        "$ref": "#/definitions/ExterneReferenz"
+        "$ref":  "#/definitions/ExterneReferenz"
       }
     },
     "boTyp": {
       "type": ["string", "null"]
     },
     "versionStruktur": {
-      "type": "integer"
+      "type":  "integer"
     },
     "timestamp": {
       "type": ["string", "null"],
-      "format": "date-time"
+      "format":  "date-time"
     },
     "bezeichnung": {
-      "type": "string"
+      "type":  "string"
     },
     "gueltigkeit": {
-      "$ref": "#/definitions/Zeitraum"
+      "$ref":  "#/definitions/Zeitraum"
     },
     "preispositionen": {
-      "type": "array",
+      "type":  "array",
       "items": {
-        "$ref": "#/definitions/Preisposition"
+        "$ref":  "#/definitions/Preisposition"
       }
     },
     "sparte": {
-      "type": "string",
+      "type":  "string",
       "enum": ["STROM", "GAS", "FERNWAERME", "NAHWAERME", "WASSER", "ABWASSER"]
     },
     "bilanzierungsmethode": {
-      "type": "string",
+      "type":  "string",
       "enum": ["RLM", "SLP", "TLP_GEMEINSAM", "TLP_GETRENNT", "PAUSCHAL", "IMS"]
     },
     "messebene": {
-      "type": "string",
+      "type":  "string",
       "enum": [
         "NSP",
         "MSP",
@@ -1291,7 +1291,7 @@
     "inklusiveDienstleistung": {
       "type": ["array", "null"],
       "items": {
-        "type": "string",
+        "type":  "string",
         "enum": [
           "DATENBEREITSTELLUNG_TAEGLICH",
           "DATENBEREITSTELLUNG_WOECHENTLICH",
@@ -1336,16 +1336,16 @@
       }
     },
     "basisgeraet": {
-      "$ref": "#/definitions/Geraeteeigenschaften"
+      "$ref":  "#/definitions/Geraeteeigenschaften"
     },
     "inklusiveGeraete": {
       "type": ["array", "null"],
       "items": {
-        "$ref": "#/definitions/Geraeteeigenschaften-1"
+        "$ref":  "#/definitions/Geraeteeigenschaften-1"
       }
     },
     "herausgeber": {
-      "$ref": "#/definitions/Marktteilnehmer"
+      "$ref":  "#/definitions/Marktteilnehmer"
     }
   },
   "required": [

@@ -1,14 +1,14 @@
 {
-  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$schema":  "http://json-schema.org/draft-07/schema#",
   "definitions": {
     "Adresse": {
       "type": ["object", "null"],
       "properties": {
         "postleitzahl": {
-          "type": "string"
+          "type":  "string"
         },
         "ort": {
-          "type": "string"
+          "type":  "string"
         },
         "strasse": {
           "type": ["string", "null"]
@@ -308,7 +308,7 @@
       "type": ["object", "null"],
       "properties": {
         "dienstleistungstyp": {
-          "type": "string",
+          "type":  "string",
           "enum": [
             "DATENBEREITSTELLUNG_TAEGLICH",
             "DATENBEREITSTELLUNG_WOECHENTLICH",
@@ -352,7 +352,7 @@
           ]
         },
         "bezeichnung": {
-          "type": "string"
+          "type":  "string"
         },
         "guid": {
           "type": ["string", "null"]
@@ -364,10 +364,10 @@
       "type": ["object", "null"],
       "properties": {
         "breitengrad": {
-          "type": "number"
+          "type":  "number"
         },
         "laengengrad": {
-          "type": "number"
+          "type":  "number"
         },
         "guid": {
           "type": ["string", "null"]
@@ -379,7 +379,7 @@
       "type": ["object", "null"],
       "properties": {
         "geraetetyp": {
-          "type": "string",
+          "type":  "string",
           "enum": [
             "WECHSELSTROMZAEHLER",
             "DREHSTROMZAEHLER",
@@ -492,7 +492,7 @@
           "type": ["string", "null"]
         },
         "versionStruktur": {
-          "type": "integer"
+          "type":  "integer"
         },
         "anrede": {
           "type": ["string", "null"],
@@ -519,7 +519,7 @@
           "type": ["string", "null"]
         },
         "gewerbekennzeichnung": {
-          "type": "boolean"
+          "type":  "boolean"
         },
         "hrnummer": {
           "type": ["string", "null"]
@@ -530,7 +530,7 @@
         "kontaktweg": {
           "type": ["array", "null"],
           "items": {
-            "type": "string",
+            "type":  "string",
             "enum": ["ANSCHREIBEN", "TELEFONAT", "FAX", "E_MAIL", "SMS"]
           }
         },
@@ -549,7 +549,7 @@
         "geschaeftspartnerrolle": {
           "type": ["array", "null"],
           "items": {
-            "type": "string",
+            "type":  "string",
             "enum": [
               "LIEFERANT",
               "DIENSTLEISTER",
@@ -560,7 +560,7 @@
           }
         },
         "partneradresse": {
-          "$ref": "#/definitions/Adresse"
+          "$ref":  "#/definitions/Adresse"
         }
       },
       "required": ["gewerbekennzeichnung"]
@@ -569,7 +569,7 @@
       "type": ["object", "null"],
       "properties": {
         "geraetetyp": {
-          "type": "string",
+          "type":  "string",
           "enum": [
             "WECHSELSTROMZAEHLER",
             "DREHSTROMZAEHLER",
@@ -617,10 +617,10 @@
           ]
         },
         "bezeichnung": {
-          "type": "string"
+          "type":  "string"
         },
         "geraeteeigenschaften": {
-          "$ref": "#/definitions/Geraeteeigenschaften"
+          "$ref":  "#/definitions/Geraeteeigenschaften"
         },
         "geraetenummer": {
           "type": ["string", "null"]
@@ -638,10 +638,10 @@
       "type": ["object", "null"],
       "properties": {
         "gemarkung_flur": {
-          "type": "string"
+          "type":  "string"
         },
         "flurstueck": {
-          "type": "string"
+          "type":  "string"
         },
         "guid": {
           "type": ["string", "null"]
@@ -656,13 +656,13 @@
           "type": ["string", "null"]
         },
         "kosten": {
-          "type": "number"
+          "type":  "number"
         },
         "kategorie": {
-          "type": "string"
+          "type":  "string"
         },
         "satz": {
-          "type": "string",
+          "type":  "string",
           "enum": ["KAS", "SA", "SAS", "TA", "TAS", "TK", "TKS", "TS", "TSS"]
         }
       },
@@ -678,7 +678,7 @@
           "type": ["string", "null"]
         },
         "marktrolle": {
-          "type": "string",
+          "type":  "string",
           "enum": [
             "NB",
             "LF",
@@ -712,13 +712,13 @@
           "type": ["string", "null"]
         },
         "versionStruktur": {
-          "type": "integer"
+          "type":  "integer"
         },
         "zaehlernummer": {
-          "type": "string"
+          "type":  "string"
         },
         "sparte": {
-          "type": "string",
+          "type":  "string",
           "enum": [
             "STROM",
             "GAS",
@@ -729,11 +729,11 @@
           ]
         },
         "zaehlerauspraegung": {
-          "type": "string",
+          "type":  "string",
           "enum": ["EINRICHTUNGSZAEHLER", "ZWEIRICHTUNGSZAEHLER"]
         },
         "zaehlertyp": {
-          "type": "string",
+          "type":  "string",
           "enum": [
             "DREHSTROMZAEHLER",
             "BALGENGASZAEHLER",
@@ -747,7 +747,7 @@
           ]
         },
         "tarifart": {
-          "type": "string",
+          "type":  "string",
           "enum": [
             "EINTARIF",
             "ZWEITARIF",
@@ -757,25 +757,25 @@
           ]
         },
         "zaehlerkonstante": {
-          "type": "number"
+          "type":  "number"
         },
         "eichungBis": {
           "type": ["string", "null"],
-          "format": "date-time"
+          "format":  "date-time"
         },
         "letzteEichung": {
           "type": ["string", "null"],
-          "format": "date-time"
+          "format":  "date-time"
         },
         "zaehlwerke": {
-          "type": "array",
+          "type":  "array",
           "items": {
-            "$ref": "#/definitions/Zaehlwerk"
+            "$ref":  "#/definitions/Zaehlwerk"
           },
           "minItems": 1
         },
         "zaehlerhersteller": {
-          "$ref": "#/definitions/Geschaeftspartner"
+          "$ref":  "#/definitions/Geschaeftspartner"
         },
         "gateway": {
           "type": ["string", "null"]
@@ -802,23 +802,23 @@
       "type": ["object", "null"],
       "properties": {
         "zaehlwerkId": {
-          "type": "string"
+          "type":  "string"
         },
         "bezeichnung": {
-          "type": "string"
+          "type":  "string"
         },
         "richtung": {
-          "type": "string",
+          "type":  "string",
           "enum": ["AUSSP", "EINSP"]
         },
         "obisKennzahl": {
-          "type": "string"
+          "type":  "string"
         },
         "wandlerfaktor": {
-          "type": "number"
+          "type":  "number"
         },
         "einheit": {
-          "type": "string",
+          "type":  "string",
           "enum": [
             "WH",
             "KW",
@@ -847,7 +847,7 @@
         "verwendungszwecke": {
           "type": ["array", "null"],
           "items": {
-            "type": "string",
+            "type":  "string",
             "enum": [
               "NETZNUTZUNGSABRECHNUNG",
               "BILANZKREISABRECHNUNG",
@@ -869,7 +869,7 @@
           "enum": [null, "SPEICHERHEIZUNG", "WAERMEPUMPE", "DIREKTHEIZUNG"]
         },
         "konzessionsabgabe": {
-          "$ref": "#/definitions/Konzessionsabgabe"
+          "$ref":  "#/definitions/Konzessionsabgabe"
         },
         "steuerbefreit": {
           "type": ["boolean", "null"]
@@ -894,7 +894,7 @@
       ]
     }
   },
-  "type": "object",
+  "type":  "object",
   "properties": {
     "guid": {
       "type": ["string", "null"]
@@ -903,14 +903,14 @@
       "type": ["string", "null"]
     },
     "versionStruktur": {
-      "type": "integer"
+      "type":  "integer"
     },
     "messLokationsId": {
-      "type": "string",
-      "default": "|null|"
+      "type":  "string",
+      "default":  "|null|"
     },
     "sparte": {
-      "type": "string",
+      "type":  "string",
       "enum": ["STROM", "GAS", "FERNWAERME", "NAHWAERME", "WASSER", "ABWASSER"]
     },
     "netzebeneMessung": {
@@ -942,30 +942,30 @@
       "type": ["string", "null"]
     },
     "messadresse": {
-      "$ref": "#/definitions/Adresse"
+      "$ref":  "#/definitions/Adresse"
     },
     "geoadresse": {
-      "$ref": "#/definitions/Geokoordinaten"
+      "$ref":  "#/definitions/Geokoordinaten"
     },
     "katasterinformation": {
-      "$ref": "#/definitions/Katasteradresse"
+      "$ref":  "#/definitions/Katasteradresse"
     },
     "geraete": {
       "type": ["array", "null"],
       "items": {
-        "$ref": "#/definitions/Hardware"
+        "$ref":  "#/definitions/Hardware"
       }
     },
     "messdienstleistung": {
       "type": ["array", "null"],
       "items": {
-        "$ref": "#/definitions/Dienstleistung"
+        "$ref":  "#/definitions/Dienstleistung"
       }
     },
     "messlokationszaehler": {
       "type": ["array", "null"],
       "items": {
-        "$ref": "#/definitions/Zaehler"
+        "$ref":  "#/definitions/Zaehler"
       }
     },
     "bilanzierungsmethode": {
@@ -986,7 +986,7 @@
     "marktrollen": {
       "type": ["array", "null"],
       "items": {
-        "$ref": "#/definitions/Marktrolle"
+        "$ref":  "#/definitions/Marktrolle"
       }
     },
     "gasqualitaet": {

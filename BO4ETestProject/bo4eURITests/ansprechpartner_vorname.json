@@ -1,30 +1,30 @@
 {
   "expectedQueryObject": {
-    "boTyp": "ANSPRECHPARTNER",
-    "vorname": "Max",
-    "nachname": "Maier",
+    "boTyp":  "ANSPRECHPARTNER",
+    "vorname":  "Max",
+    "nachname":  "Maier",
     "geschaeftspartner": {
-      "boTyp": "GESCHAEFTSPARTNER",
-      "name1": "Unternehmen XYZ GmbH"
+      "boTyp":  "GESCHAEFTSPARTNER",
+      "name1":  "Unternehmen XYZ GmbH"
     }
   },
-  "expectedUri": "bo4e://ansprechpartner/Max/Maier/Unternehmen%2520XYZ%2520GmbH/",
+  "expectedUri":  "bo4e://ansprechpartner/Max/Maier/Unternehmen%2520XYZ%2520GmbH/",
   "input": {
     "versionStruktur": 1,
-    "boTyp": "ANSPRECHPARTNER",
-    "nachname": "Maier",
-    "vorname": "Max",
+    "boTyp":  "ANSPRECHPARTNER",
+    "nachname":  "Maier",
+    "vorname":  "Max",
     "geschaeftspartner": {
       "versionStruktur": 1,
-      "boTyp": "GESCHAEFTSPARTNER",
-      "name1": "Unternehmen XYZ GmbH",
+      "boTyp":  "GESCHAEFTSPARTNER",
+      "name1":  "Unternehmen XYZ GmbH",
       "gewerbekennzeichnung": true,
       "geschaeftspartnerrolle": ["DIENSTLEISTER"],
       "partneradresse": {
         "postleitzahl": 87968,
-        "ort": "EinOrt",
-        "strasse": "Eine Strasse",
-        "hausnummer": "867"
+        "ort":  "EinOrt",
+        "strasse":  "Eine Strasse",
+        "hausnummer":  "867"
       }
     }
   }

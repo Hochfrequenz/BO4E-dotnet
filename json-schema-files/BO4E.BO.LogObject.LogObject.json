@@ -1,32 +1,32 @@
 {
-  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$schema":  "http://json-schema.org/draft-07/schema#",
   "definitions": {
     "ExterneReferenz": {
       "type": ["object", "null"],
       "properties": {
         "exRefName": {
-          "type": "string"
+          "type":  "string"
         },
         "exRefWert": {
-          "type": "string"
+          "type":  "string"
         },
         "guid": {
           "type": ["string", "null"]
         },
         "timestamp": {
           "type": ["string", "null"],
-          "format": "date-time"
+          "format":  "date-time"
         }
       },
       "required": ["exRefName", "exRefWert"]
     }
   },
-  "type": "object",
+  "type":  "object",
   "properties": {
     "externeReferenzen": {
       "type": ["array", "null"],
       "items": {
-        "$ref": "#/definitions/ExterneReferenz"
+        "$ref":  "#/definitions/ExterneReferenz"
       }
     },
     "guid": {
@@ -36,21 +36,21 @@
       "type": ["string", "null"]
     },
     "versionStruktur": {
-      "type": "integer"
+      "type":  "integer"
     },
     "timestamp": {
       "type": ["string", "null"],
-      "format": "date-time"
+      "format":  "date-time"
     },
     "id": {
-      "type": "string"
+      "type":  "string"
     },
     "DateTime": {
-      "type": "string",
-      "format": "date-time"
+      "type":  "string",
+      "format":  "date-time"
     },
     "logMessage": {
-      "type": "string"
+      "type":  "string"
     }
   },
   "required": ["id", "DateTime", "logMessage"]

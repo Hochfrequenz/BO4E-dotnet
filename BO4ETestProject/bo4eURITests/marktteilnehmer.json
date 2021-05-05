@@ -1,38 +1,38 @@
 {
   "expectedQueryObject": {
-    "boTyp": "MARKTTEILNEHMER",
-    "rollencodenummer": "9900130000006"
+    "boTyp":  "MARKTTEILNEHMER",
+    "rollencodenummer":  "9900130000006"
   },
-  "expectedUri": "bo4e://marktteilnehmer/9900130000006/",
+  "expectedUri":  "bo4e://marktteilnehmer/9900130000006/",
   "input": {
     "versionStruktur": 1,
-    "boTyp": "MARKTTEILNEHMER",
-    "anrede": "FIRMA",
-    "name1": "Stadtwerke Coesfeld GmbH",
+    "boTyp":  "MARKTTEILNEHMER",
+    "anrede":  "FIRMA",
+    "name1":  "Stadtwerke Coesfeld GmbH",
     "name2": null,
     "name3": null,
     "gewerbekennzeichnung": true,
     "hrnummer": null,
     "amtsgericht": null,
     "kontaktweg": null,
-    "umsatzsteuerId": "DE124468709",
+    "umsatzsteuerId":  "DE124468709",
     "glaeubigerId": null,
-    "eMailAdresse": "edifact.stromnetz@stadtwerke-coesfeld.de",
-    "website": "www.stadtwerke-coesfeld.de",
+    "eMailAdresse":  "edifact.stromnetz@stadtwerke-coesfeld.de",
+    "website":  "www.stadtwerke-coesfeld.de",
     "geschaeftspartnerrolle": ["MARKTPARTNER"],
     "partneradresse": {
-      "postleitzahl": "48653",
-      "ort": "Coesfeld",
-      "strasse": "Dülmener Straße",
-      "hausnummer": "80",
+      "postleitzahl":  "48653",
+      "ort":  "Coesfeld",
+      "strasse":  "Dülmener Straße",
+      "hausnummer":  "80",
       "postfach": null,
       "adresszusatz": null,
       "coErgaenzung": null,
       "landescode": null
     },
-    "marktrolle": "NB",
-    "rollencodenummer": "9900130000006",
-    "rollencodetyp": "BDEW",
-    "makoadresse": "edifact.stromnetz@stadtwerke-coesfeld.de"
+    "marktrolle":  "NB",
+    "rollencodenummer":  "9900130000006",
+    "rollencodetyp":  "BDEW",
+    "makoadresse":  "edifact.stromnetz@stadtwerke-coesfeld.de"
   }
 }

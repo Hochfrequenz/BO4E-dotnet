@@ -1,14 +1,14 @@
 {
-  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$schema":  "http://json-schema.org/draft-07/schema#",
   "definitions": {
     "Adresse": {
       "type": ["object", "null"],
       "properties": {
         "postleitzahl": {
-          "type": "string"
+          "type":  "string"
         },
         "ort": {
-          "type": "string"
+          "type":  "string"
         },
         "strasse": {
           "type": ["string", "null"]
@@ -305,7 +305,7 @@
       "required": ["postleitzahl", "ort"]
     }
   },
-  "type": "object",
+  "type":  "object",
   "properties": {
     "guid": {
       "type": ["string", "null"]
@@ -314,7 +314,7 @@
       "type": ["string", "null"]
     },
     "versionStruktur": {
-      "type": "integer"
+      "type":  "integer"
     },
     "anrede": {
       "type": ["string", "null"],
@@ -333,7 +333,7 @@
       "type": ["string", "null"]
     },
     "gewerbekennzeichnung": {
-      "type": "boolean"
+      "type":  "boolean"
     },
     "hrnummer": {
       "type": ["string", "null"]
@@ -344,7 +344,7 @@
     "kontaktweg": {
       "type": ["array", "null"],
       "items": {
-        "type": "string",
+        "type":  "string",
         "enum": ["ANSCHREIBEN", "TELEFONAT", "FAX", "E_MAIL", "SMS"]
       }
     },
@@ -363,7 +363,7 @@
     "geschaeftspartnerrolle": {
       "type": ["array", "null"],
       "items": {
-        "type": "string",
+        "type":  "string",
         "enum": [
           "LIEFERANT",
           "DIENSTLEISTER",
@@ -374,7 +374,7 @@
       }
     },
     "partneradresse": {
-      "$ref": "#/definitions/Adresse"
+      "$ref":  "#/definitions/Adresse"
     }
   },
   "required": ["gewerbekennzeichnung"]

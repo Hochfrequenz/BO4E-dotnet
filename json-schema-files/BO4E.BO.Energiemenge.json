@@ -1,5 +1,5 @@
 {
-  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$schema":  "http://json-schema.org/draft-07/schema#",
   "definitions": {
     "Verbrauch": {
       "type": ["object", "null"],
@@ -17,25 +17,25 @@
           "type": ["string", "null"]
         },
         "wertermittlungsverfahren": {
-          "type": "string",
+          "type":  "string",
           "enum": ["PROGNOSE", "MESSUNG"]
         },
         "obiskennzahl": {
-          "type": "string"
+          "type":  "string"
         },
         "startdatum": {
-          "type": "string",
-          "format": "date-time"
+          "type":  "string",
+          "format":  "date-time"
         },
         "wert": {
-          "type": "number"
+          "type":  "number"
         },
         "enddatum": {
-          "type": "string",
-          "format": "date-time"
+          "type":  "string",
+          "format":  "date-time"
         },
         "einheit": {
-          "type": "string",
+          "type":  "string",
           "enum": [
             "WH",
             "KW",
@@ -63,7 +63,7 @@
       ]
     }
   },
-  "type": "object",
+  "type":  "object",
   "properties": {
     "guid": {
       "type": ["string", "null"]
@@ -72,20 +72,20 @@
       "type": ["string", "null"]
     },
     "versionStruktur": {
-      "type": "integer"
+      "type":  "integer"
     },
     "lokationsId": {
-      "type": "string",
-      "default": "|null|"
+      "type":  "string",
+      "default":  "|null|"
     },
     "lokationstyp": {
-      "type": "string",
+      "type":  "string",
       "enum": ["MaLo", "MeLo"]
     },
     "energieverbrauch": {
       "type": ["array", "null"],
       "items": {
-        "$ref": "#/definitions/Verbrauch"
+        "$ref":  "#/definitions/Verbrauch"
       },
       "minItems": 1
     }

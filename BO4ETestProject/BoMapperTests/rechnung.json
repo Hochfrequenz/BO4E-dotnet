@@ -1,241 +1,241 @@
 {
-  "objectName": "Rechnung",
+  "objectName":  "Rechnung",
   "lenientDateTime": true,
   "input": {
     "versionStruktur": 1,
-    "boTyp": "RECHNUNG",
-    "rechnungsstatus": "GEPRUEFT_OK",
+    "boTyp":  "RECHNUNG",
+    "rechnungsstatus":  "GEPRUEFT_OK",
     "storno": false,
-    "rechnungsnummer": "003000000007",
-    "rechnungsdatum": "2019-08-27T22:00:00Z",
-    "faelligkeitsdatum": "2019-08-27T22:00:00Z",
-    "rechnungstyp": "ABSCHLAGSRECHNUNG",
+    "rechnungsnummer":  "003000000007",
+    "rechnungsdatum":  "2019-08-27T22:00:00Z",
+    "faelligkeitsdatum":  "2019-08-27T22:00:00Z",
+    "rechnungstyp":  "ABSCHLAGSRECHNUNG",
     "rechnungsperiode": {
-      "startdatum": "2019-01-10T23:00:00Z",
-      "enddatum": "2019-12-24T23:00:00Z"
+      "startdatum":  "2019-01-10T23:00:00Z",
+      "enddatum":  "2019-12-24T23:00:00Z"
     },
     "rechnungsersteller": {
       "versionStruktur": 1,
-      "boTyp": "GESCHAEFTSPARTNER",
-      "anrede": "HERR",
-      "name1": "Mein super Lieferant",
+      "boTyp":  "GESCHAEFTSPARTNER",
+      "anrede":  "HERR",
+      "name1":  "Mein super Lieferant",
       "gewerbekennzeichnung": true,
       "geschaeftspartnerrolle": ["LIEFERANT"],
       "partneradresse": {
-        "postleitzahl": "90190",
-        "ort": "Walldorf",
-        "strasse": "Max-Plank-Strasse",
-        "hausnummer": "8",
-        "landescode": "DE"
+        "postleitzahl":  "90190",
+        "ort":  "Walldorf",
+        "strasse":  "Max-Plank-Strasse",
+        "hausnummer":  "8",
+        "landescode":  "DE"
       }
     },
     "rechnungsempfaenger": {
       "versionStruktur": 1,
-      "boTyp": "GESCHAEFTSPARTNER",
-      "anrede": "HERR",
-      "name1": "Lustig",
-      "name2": "Peter",
+      "boTyp":  "GESCHAEFTSPARTNER",
+      "anrede":  "HERR",
+      "name1":  "Lustig",
+      "name2":  "Peter",
       "gewerbekennzeichnung": false,
       "geschaeftspartnerrolle": ["KUNDE"],
       "partneradresse": {
-        "postleitzahl": "50672",
-        "ort": "Köln",
-        "strasse": "Magnusstraße",
-        "hausnummer": "20",
-        "landescode": "DE"
+        "postleitzahl":  "50672",
+        "ort":  "Köln",
+        "strasse":  "Magnusstraße",
+        "hausnummer":  "20",
+        "landescode":  "DE"
       }
     },
     "gesamtnetto": {
       "wert": 520.56,
-      "waehrung": "EUR"
+      "waehrung":  "EUR"
     },
     "gesamtsteuer": {
       "wert": 98.91,
-      "waehrung": "EUR"
+      "waehrung":  "EUR"
     },
     "gesamtbrutto": {
       "wert": 619.47,
-      "waehrung": "EUR"
+      "waehrung":  "EUR"
     },
     "zuzahlen": {
       "wert": 619.47,
-      "waehrung": "EUR"
+      "waehrung":  "EUR"
     },
     "steuerbetraege": [
       {
-        "steuerkennzeichen": "UST_19",
+        "steuerkennzeichen":  "UST_19",
         "basiswert": 490.46,
         "steuerwert": 93.19,
-        "waehrung": "EUR"
+        "waehrung":  "EUR"
       },
       {
-        "steuerkennzeichen": "UST_19",
+        "steuerkennzeichen":  "UST_19",
         "basiswert": 30.1,
         "steuerwert": 5.72,
-        "waehrung": "EUR"
+        "waehrung":  "EUR"
       }
     ],
     "rechnungspositionen": [
       {
         "positionsnummer": 2,
-        "lieferungVon": "2019-01-10T23:00:00Z",
-        "lieferungBis": "2019-12-24T23:00:00Z",
-        "positionstext": "ARBEITSPREIS",
-        "zeiteinheit": "KWH",
+        "lieferungVon":  "2019-01-10T23:00:00Z",
+        "lieferungBis":  "2019-12-24T23:00:00Z",
+        "positionstext":  "ARBEITSPREIS",
+        "zeiteinheit":  "KWH",
         "positionsMenge": {
           "wert": 956,
-          "einheit": "KWH"
+          "einheit":  "KWH"
         },
         "einzelpreis": {
           "wert": 0.023,
-          "einheit": "EUR",
-          "bezugswert": "KWH",
-          "status": "VORLAEUFIG"
+          "einheit":  "EUR",
+          "bezugswert":  "KWH",
+          "status":  "VORLAEUFIG"
         },
         "teilsummeNetto": {
           "wert": 21.99,
-          "waehrung": "EUR"
+          "waehrung":  "EUR"
         },
-        "vertragskontoId": "3000000023"
+        "vertragskontoId":  "3000000023"
       },
       {
         "positionsnummer": 3,
-        "lieferungVon": "2019-01-10T23:00:00Z",
-        "lieferungBis": "2019-12-24T23:00:00Z",
-        "positionstext": "ARBEITSPREIS",
-        "zeiteinheit": "KWH",
+        "lieferungVon":  "2019-01-10T23:00:00Z",
+        "lieferungBis":  "2019-12-24T23:00:00Z",
+        "positionstext":  "ARBEITSPREIS",
+        "zeiteinheit":  "KWH",
         "positionsMenge": {
           "wert": 1434,
-          "einheit": "KWH"
+          "einheit":  "KWH"
         },
         "einzelpreis": {
           "wert": 0.2,
-          "einheit": "EUR",
-          "bezugswert": "KWH",
-          "status": "VORLAEUFIG"
+          "einheit":  "EUR",
+          "bezugswert":  "KWH",
+          "status":  "VORLAEUFIG"
         },
         "teilsummeNetto": {
           "wert": 286.8,
-          "waehrung": "EUR"
+          "waehrung":  "EUR"
         },
-        "vertragskontoId": "3000000023"
+        "vertragskontoId":  "3000000023"
       },
       {
         "positionsnummer": 4,
-        "lieferungVon": "2019-01-10T23:00:00Z",
-        "lieferungBis": "2019-12-24T23:00:00Z",
-        "positionstext": "PAUSCHALE",
-        "zeiteinheit": "KWH",
+        "lieferungVon":  "2019-01-10T23:00:00Z",
+        "lieferungBis":  "2019-12-24T23:00:00Z",
+        "positionstext":  "PAUSCHALE",
+        "zeiteinheit":  "KWH",
         "positionsMenge": {
           "wert": 1,
-          "einheit": "KWH"
+          "einheit":  "KWH"
         },
         "einzelpreis": {
           "wert": 180,
-          "einheit": "EUR",
-          "bezugswert": "KWH",
-          "status": "VORLAEUFIG"
+          "einheit":  "EUR",
+          "bezugswert":  "KWH",
+          "status":  "VORLAEUFIG"
         },
         "teilsummeNetto": {
           "wert": 172.11,
-          "waehrung": "EUR"
+          "waehrung":  "EUR"
         },
-        "vertragskontoId": "3000000023"
+        "vertragskontoId":  "3000000023"
       },
       {
         "positionsnummer": 5,
-        "lieferungVon": "2019-01-10T23:00:00Z",
-        "lieferungBis": "2019-12-24T23:00:00Z",
-        "positionstext": "PAUSCHALE",
-        "zeiteinheit": "KWH",
+        "lieferungVon":  "2019-01-10T23:00:00Z",
+        "lieferungBis":  "2019-12-24T23:00:00Z",
+        "positionstext":  "PAUSCHALE",
+        "zeiteinheit":  "KWH",
         "positionsMenge": {
           "wert": 1,
-          "einheit": "KWH"
+          "einheit":  "KWH"
         },
         "einzelpreis": {
           "wert": -60,
-          "einheit": "EUR",
-          "bezugswert": "KWH",
-          "status": "VORLAEUFIG"
+          "einheit":  "EUR",
+          "bezugswert":  "KWH",
+          "status":  "VORLAEUFIG"
         },
         "teilsummeNetto": {
           "wert": -57.37,
-          "waehrung": "EUR"
+          "waehrung":  "EUR"
         },
-        "vertragskontoId": "3000000023"
+        "vertragskontoId":  "3000000023"
       },
       {
         "positionsnummer": 6,
-        "lieferungVon": "2019-01-10T23:00:00Z",
-        "lieferungBis": "2019-12-24T23:00:00Z",
-        "positionstext": "VERRECHNUNGSPREIS",
-        "zeiteinheit": "KWH",
+        "lieferungVon":  "2019-01-10T23:00:00Z",
+        "lieferungBis":  "2019-12-24T23:00:00Z",
+        "positionstext":  "VERRECHNUNGSPREIS",
+        "zeiteinheit":  "KWH",
         "positionsMenge": {
           "wert": 1,
-          "einheit": "KWH"
+          "einheit":  "KWH"
         },
         "einzelpreis": {
           "wert": 70,
-          "einheit": "EUR",
-          "bezugswert": "KWH",
-          "status": "VORLAEUFIG"
+          "einheit":  "EUR",
+          "bezugswert":  "KWH",
+          "status":  "VORLAEUFIG"
         },
         "teilsummeNetto": {
           "wert": 66.93,
-          "waehrung": "EUR"
+          "waehrung":  "EUR"
         },
-        "vertragskontoId": "3000000023"
+        "vertragskontoId":  "3000000023"
       },
       {
         "positionsnummer": 7,
-        "lieferungVon": "2019-01-10T23:00:00Z",
-        "lieferungBis": "2019-12-24T23:00:00Z",
-        "positionstext": "zuzüglich Mehrwertsteuer 19,000%",
-        "zeiteinheit": "KWH",
+        "lieferungVon":  "2019-01-10T23:00:00Z",
+        "lieferungBis":  "2019-12-24T23:00:00Z",
+        "positionstext":  "zuzüglich Mehrwertsteuer 19,000%",
+        "zeiteinheit":  "KWH",
         "einzelpreis": {
           "wert": 0,
-          "einheit": "EUR",
-          "bezugswert": "KWH",
-          "status": "VORLAEUFIG"
+          "einheit":  "EUR",
+          "bezugswert":  "KWH",
+          "status":  "VORLAEUFIG"
         },
         "teilsummeNetto": {
           "wert": 93.19,
-          "waehrung": "EUR"
+          "waehrung":  "EUR"
         },
-        "vertragskontoId": "3000000023"
+        "vertragskontoId":  "3000000023"
       },
       {
         "positionsnummer": 8,
-        "lieferungVon": "2018-12-31T23:00:00Z",
-        "lieferungBis": "2019-02-28T23:00:00Z",
-        "positionstext": "ZHFBP1",
-        "zeiteinheit": "KWH",
+        "lieferungVon":  "2018-12-31T23:00:00Z",
+        "lieferungBis":  "2019-02-28T23:00:00Z",
+        "positionstext":  "ZHFBP1",
+        "zeiteinheit":  "KWH",
         "einzelpreis": {
           "wert": 0,
-          "einheit": "EUR",
-          "bezugswert": "KWH",
-          "status": "VORLAEUFIG"
+          "einheit":  "EUR",
+          "bezugswert":  "KWH",
+          "status":  "VORLAEUFIG"
         },
         "teilsummeNetto": {
           "wert": 30.1,
-          "waehrung": "EUR"
+          "waehrung":  "EUR"
         }
       },
       {
         "positionsnummer": 9,
-        "lieferungVon": "0001-01-01T00:00:00",
-        "lieferungBis": "0001-01-01T00:00:00",
-        "positionstext": "CITAX",
-        "zeiteinheit": "KWH",
+        "lieferungVon":  "0001-01-01T00:00:00",
+        "lieferungBis":  "0001-01-01T00:00:00",
+        "positionstext":  "CITAX",
+        "zeiteinheit":  "KWH",
         "einzelpreis": {
           "wert": 0,
-          "einheit": "EUR",
-          "bezugswert": "KWH",
-          "status": "VORLAEUFIG"
+          "einheit":  "EUR",
+          "bezugswert":  "KWH",
+          "status":  "VORLAEUFIG"
         },
         "teilsummeNetto": {
           "wert": 5.72,
-          "waehrung": "EUR"
+          "waehrung":  "EUR"
         }
       }
     ]

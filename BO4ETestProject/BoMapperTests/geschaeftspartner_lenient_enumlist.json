@@ -1,14 +1,14 @@
 {
-  "objectName": "Geschaeftspartner",
+  "objectName":  "Geschaeftspartner",
   "lenientEnumList": true,
   "input": {
     "versionStruktur": 1,
-    "boTyp": "GESCHAEFTSPARTNER",
-    "name1": "Ernest",
-    "kontaktweg": [{ "kontaktweg": "TELEFONAT" }],
+    "boTyp":  "GESCHAEFTSPARTNER",
+    "name1":  "Ernest",
+    "kontaktweg": [{ "kontaktweg":  "TELEFONAT" }],
     "geschaeftspartnerrolle": [
-      { "dein key interessiert mich nen 💩dreck": "INTERESSENT" },
-      { "rolle": "KUNDE" }
+      { "dein key interessiert mich nen 💩dreck":  "INTERESSENT" },
+      { "rolle":  "KUNDE" }
     ],
     "gewerbekennzeichnung": true
   }
