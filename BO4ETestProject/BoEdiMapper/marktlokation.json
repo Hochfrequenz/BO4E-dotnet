@@ -1,27 +1,27 @@
 {
-  "note":  "these testdata are copied from bo4e.de",
+  "note": "these testdata are copied from bo4e.de",
   "expectedResult": {
     "versionStruktur": 1,
-    "boTyp":  "MARKTLOKATION",
-    "marktlokationsId":  "Malo4711_0916",
-    "sparte":  "GAS",
-    "energierichtung":  "Z07",
-    "bilanzierungsmethode":  "SLP",
+    "boTyp": "MARKTLOKATION",
+    "marktlokationsId": "Malo4711_0916",
+    "sparte": "GAS",
+    "energierichtung": "Z07",
+    "bilanzierungsmethode": "SLP",
     "verbrauchsart": null,
     "unterbrechbar": false,
-    "netzebene":  "Y03",
-    "netzbetreiberCodeNr":  "978574737",
-    "gebietTyp":  "VERTEILNETZ",
-    "netzgebietNr":  "4711",
+    "netzebene": "Y03",
+    "netzbetreiberCodeNr": "978574737",
+    "gebietTyp": "VERTEILNETZ",
+    "netzgebietNr": "4711",
     "bilanzierungsgebiet": null,
-    "grundversorgerCodeNr":  "968483721",
-    "gasqualitaet":  "H_GAS",
+    "grundversorgerCodeNr": "968483721",
+    "gasqualitaet": "H_GAS",
     "endkunde": null,
     "lokationsadresse": {
-      "postleitzahl":  "12345",
-      "ort":  "EineStadt",
-      "strasse":  "Eine Straße",
-      "hausnummer":  "11",
+      "postleitzahl": "12345",
+      "ort": "EineStadt",
+      "strasse": "Eine Straße",
+      "hausnummer": "11",
       "postfach": null,
       "adresszusatz": null,
       "coErgaenzung": null,
@@ -32,40 +32,40 @@
       "laengengrad": 6.206580000000031
     },
     "katasterinformation": {
-      "gemarkung_flur":  "Gemeinde XYZ",
-      "flurstueck":  "102/01"
+      "gemarkung_flur": "Gemeinde XYZ",
+      "flurstueck": "102/01"
     },
     "zugehoerigeMesslokationen": [
       {
-        "messlokationsId":  "DE46381937837",
-        "arithmetik":  "ADDITION",
-        "gueltigSeit":  "2010-01-01T00:00:00Z",
-        "gueltigBis":  "2099-12-31T00:00:00Z"
+        "messlokationsId": "DE46381937837",
+        "arithmetik": "ADDITION",
+        "gueltigSeit": "2010-01-01T00:00:00Z",
+        "gueltigBis": "2099-12-31T00:00:00Z"
       }
     ]
   },
   "input": {
     "versionStruktur": 1,
-    "boTyp":  "MARKTLOKATION",
-    "marktlokationsId":  "Malo4711_0916",
-    "sparte":  "GAS",
-    "energierichtung":  "AUSSP",
-    "bilanzierungsmethode":  "SLP",
+    "boTyp": "MARKTLOKATION",
+    "marktlokationsId": "Malo4711_0916",
+    "sparte": "GAS",
+    "energierichtung": "AUSSP",
+    "bilanzierungsmethode": "SLP",
     "verbrauchsart": null,
     "unterbrechbar": false,
-    "netzebene":  "ND",
-    "netzbetreiberCodeNr":  "978574737",
-    "gebietTyp":  "VERTEILNETZ",
-    "netzgebietNr":  "4711",
+    "netzebene": "ND",
+    "netzbetreiberCodeNr": "978574737",
+    "gebietTyp": "VERTEILNETZ",
+    "netzgebietNr": "4711",
     "bilanzierungsgebiet": null,
-    "grundversorgerCodeNr":  "968483721",
-    "gasqualitaet":  "H_GAS",
+    "grundversorgerCodeNr": "968483721",
+    "gasqualitaet": "H_GAS",
     "endkunde": null,
     "lokationsadresse": {
-      "postleitzahl":  "12345",
-      "ort":  "EineStadt",
-      "strasse":  "Eine Straße",
-      "hausnummer":  "11",
+      "postleitzahl": "12345",
+      "ort": "EineStadt",
+      "strasse": "Eine Straße",
+      "hausnummer": "11",
       "postfach": null,
       "adresszusatz": null,
       "coErgaenzung": null,
@@ -76,15 +76,15 @@
       "laengengrad": 6.206580000000031
     },
     "katasterinformation": {
-      "gemarkung_flur":  "Gemeinde XYZ",
-      "flurstueck":  "102/01"
+      "gemarkung_flur": "Gemeinde XYZ",
+      "flurstueck": "102/01"
     },
     "zugehoerigeMesslokationen": [
       {
-        "messlokationsId":  "DE46381937837",
-        "arithmetik":  "ADDITION",
-        "gueltigSeit":  "2010-01-01",
-        "gueltigBis":  "2099-12-31"
+        "messlokationsId": "DE46381937837",
+        "arithmetik": "ADDITION",
+        "gueltigSeit": "2010-01-01",
+        "gueltigBis": "2099-12-31"
       }
     ]
   }

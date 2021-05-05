@@ -1,17 +1,17 @@
 {
-  "objectName":  "Benachrichtigung",
+  "objectName": "Benachrichtigung",
   "lenientDateTime": true,
   "lenientBo4eUri": true,
   "lenientEmptyList": true,
   "input": {
-    "benachrichtigungsId":  "1",
-    "prioritaet":  "HOCH",
-    "bearbeitungsstatus":  "QUITTIERT",
-    "kurztext":  "IDXGC-Ausnahmefall mit Ausnahmecode: /IDXGC/GENERAL",
+    "benachrichtigungsId": "1",
+    "prioritaet": "HOCH",
+    "bearbeitungsstatus": "QUITTIERT",
+    "kurztext": "IDXGC-Ausnahmefall mit Ausnahmecode: /IDXGC/GENERAL",
     "langtexte": null,
-    "erstellungsZeitpunkt":  "20181115183254",
-    "kategorie":  "IDX1",
-    "bearbeiter":  "MUSTERMANNMAX",
-    "betroffenesObjekt":  "bo4e://marktlokation/?backendId=10000001305"
+    "erstellungsZeitpunkt": "20181115183254",
+    "kategorie": "IDX1",
+    "bearbeiter": "MUSTERMANNMAX",
+    "betroffenesObjekt": "bo4e://marktlokation/?backendId=10000001305"
   }
 }

@@ -1,22 +1,22 @@
 {
-  "objectName":  "Marktlokation",
+  "objectName": "Marktlokation",
   "lenientDateTime": false,
   "input": {
-    "$type":  "BO4E.BO.Marktlokation, BO4Enet",
+    "$type": "BO4E.BO.Marktlokation, BO4Enet",
     "versionStruktur": 1,
-    "marktlokationsId":  "54321098765",
-    "sparte":  "STROM",
-    "energierichtung":  "AUSSP",
-    "bilanzierungsmethode":  "SLP",
-    "verbrauchsart":  "KL",
+    "marktlokationsId": "54321098765",
+    "sparte": "STROM",
+    "energierichtung": "AUSSP",
+    "bilanzierungsmethode": "SLP",
+    "verbrauchsart": "KL",
     "unterbrechbar": false,
-    "netzebene":  "NSP",
-    "gebietTyp":  "VERTEILNETZ",
+    "netzebene": "NSP",
+    "gebietTyp": "VERTEILNETZ",
     "lokationsadresse": {
-      "postleitzahl":  "12345",
-      "ort":  "EineStadt",
-      "strasse":  "Eine Straße",
-      "hausnummer":  "11"
+      "postleitzahl": "12345",
+      "ort": "EineStadt",
+      "strasse": "Eine Straße",
+      "hausnummer": "11"
     }
   }
 }

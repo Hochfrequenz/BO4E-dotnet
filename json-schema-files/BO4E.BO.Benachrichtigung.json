@@ -1,25 +1,25 @@
 {
-  "$schema":  "http://json-schema.org/draft-07/schema#",
+  "$schema": "http://json-schema.org/draft-07/schema#",
   "definitions": {
     "Aufgabe": {
       "type": ["object", "null"],
       "properties": {
         "aufgabenId": {
-          "type":  "string"
+          "type": "string"
         },
         "beschreibung": {
           "type": ["string", "null"]
         },
         "deadline": {
           "type": ["string", "null"],
-          "format":  "date-time"
+          "format": "date-time"
         },
         "ausgefuehrt": {
-          "type":  "boolean"
+          "type": "boolean"
         },
         "ausfuehrungszeitpunkt": {
           "type": ["string", "null"],
-          "format":  "date-time"
+          "format": "date-time"
         },
         "ausfuehrender": {
           "type": ["string", "null"]
@@ -52,20 +52,20 @@
           "type": ["string", "null"]
         },
         "inhalt": {
-          "type":  "string"
+          "type": "string"
         },
         "autor": {
-          "type":  "string"
+          "type": "string"
         },
         "zeitpunkt": {
-          "type":  "string",
-          "format":  "date-time"
+          "type": "string",
+          "format": "date-time"
         }
       },
       "required": ["inhalt", "autor", "zeitpunkt"]
     }
   },
-  "type":  "object",
+  "type": "object",
   "properties": {
     "guid": {
       "type": ["string", "null"]
@@ -74,19 +74,19 @@
       "type": ["string", "null"]
     },
     "versionStruktur": {
-      "type":  "integer"
+      "type": "integer"
     },
     "benachrichtigungsId": {
-      "type":  "string"
+      "type": "string"
     },
     "prioritaet": {
-      "type":  "string",
-      "default":  "NORMAL",
+      "type": "string",
+      "default": "NORMAL",
       "enum": ["SEHR_NIEDRIG", "NIEDRIG", "NORMAL", "HOCH", "SEHR_HOCH"]
     },
     "bearbeitungsstatus": {
-      "type":  "string",
-      "default":  "OFFEN",
+      "type": "string",
+      "default": "OFFEN",
       "enum": [
         "OFFEN",
         "IN_BEARBEITUNG",
@@ -97,11 +97,11 @@
       ]
     },
     "kurztext": {
-      "type":  "string"
+      "type": "string"
     },
     "erstellungsZeitpunkt": {
-      "type":  "string",
-      "format":  "date-time"
+      "type": "string",
+      "format": "date-time"
     },
     "kategorie": {
       "type": ["string", "null"]
@@ -112,23 +112,23 @@
     "notizen": {
       "type": ["array", "null"],
       "items": {
-        "$ref":  "#/definitions/Notiz"
+        "$ref": "#/definitions/Notiz"
       }
     },
     "deadline": {
       "type": ["string", "null"],
-      "format":  "date-time"
+      "format": "date-time"
     },
     "aufgaben": {
       "type": ["array", "null"],
       "items": {
-        "$ref":  "#/definitions/Aufgabe"
+        "$ref": "#/definitions/Aufgabe"
       }
     },
     "infos": {
       "type": ["array", "null"],
       "items": {
-        "$ref":  "#/definitions/GenericStringStringInfo"
+        "$ref": "#/definitions/GenericStringStringInfo"
       }
     }
   },
