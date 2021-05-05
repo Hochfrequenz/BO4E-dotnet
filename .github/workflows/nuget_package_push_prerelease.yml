@@ -5,6 +5,8 @@ on:
     branches:
       - develop
       - protobuf3
+      - prettier
+      
 jobs:
   pushprerelease:
     runs-on: windows-latest
