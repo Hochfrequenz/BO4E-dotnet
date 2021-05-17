@@ -1,0 +1,37 @@
+﻿{
+  "assertions": {
+    "isPure": false,
+    "isPureUserProperties": false
+  },
+  "input": {
+    "versionStruktur": 1,
+    "boTyp": "ENERGIEMENGE",
+    "lokationsId": "DE0003604780400000000000012345678",
+    "lokationstyp": "MeLo",
+    "energieverbrauch": [
+      {
+        "startdatum": "2019-03-01T00:00:00Z",
+        "enddatum": "2019-06-24T00:00:00Z",
+        "wertermittlungsverfahren": "MESSUNG",
+        "obiskennzahl": "1-0:1.8.0",
+        "wert": 1.0,
+        "einheit": "KWH",
+        "zaehlernummer": "10654212"
+      },
+      {
+        "startdatum": "2019-03-01T00:00:00Z",
+        "enddatum": "2019-06-24T00:00:00Z",
+        "wertermittlungsverfahren": "MESSUNG",
+        "obiskennzahl": "1-0:2.8.0",
+        "wert": 1.0,
+        "einheit": "KWH",
+        "zaehlernummer": "10654212"
+      }
+    ],
+    "anlagennummer": "50693510",
+    "messlokationsId": "DE0003604780400000000000012345678",
+    "marktlokationsId": "",
+    "isMelo": true,
+    "zaehlernummer": "10654212"
+  }
+}

@@ -1,4 +1,9 @@
 # BO4E-dotnet
+
+![Unittests Status Badge](https://github.com/Hochfrequenz/BO4E-dotnet/workflows/Unittests/badge.svg)
+![Nuget Pre-Release Package](https://github.com/Hochfrequenz/BO4E-dotnet/workflows/Nuget%20Develop%20Prerelease/badge.svg)
+![Nuget Release Package](https://github.com/Hochfrequenz/BO4E-dotnet/workflows/Nuget%20Master%20Release/badge.svg)
+
 BO4E-dotnet is a C# implementation of **B**usiness **O**bjects for **E**nergy ([BO4E](https://www.bo4e.de/)), a standard used to model business objects in the German energy market. This repository contains class definitions and enumerations for most of the Business Objects, however as of today it's not complete yet and pull requests are very welcome. [JSON.net](https://github.com/JamesNK/Newtonsoft.Json) attributes are used to model obligatory and optional fields of the single business objects and components.
 
 The source code in this repository is Open Source and available under a MIT license; see [the license file](LICENSE).
@@ -6,31 +11,37 @@ The source code in this repository is Open Source and available under a MIT lice
 See also our (still very alpha) [Python Implementation of BO4E](https://github.com/Hochfrequenz/BO4E-python) ([pypi](https://pypi.org/project/bo4e/)).
 
 ## Nuget Packages and Usage of BO4E-dotnet
+
 The content of this repository is used to build the following nuget packages:
 
-|**Package Name**|**Description**|**Stability & Maturity**|
-|----------------|---------------|------------------------|
-|[Hochfrequenz.BO4Enet](https://www.nuget.org/packages/Hochfrequenz.BO4Enet)|Definitions of the business objects (namespace `BO4E.BO`), compontents (namespace `BO4E.COM`) and enumerations (namespace `BO4E.ENUM`)|not feature complete but stable and widely used in production for JSON serialization; still alpha for GRPC serialization|
-|[Hochfrequenz.BO4E.Extensions](https://www.nuget.org/packages/Hochfrequenz.BO4E.Extensions/)|Contains extension methods for business objects and components (as of now mostly `BO.Energiemenge` and `COM.Verbrauch`, which are heavily used by Hochfrequenz cloud solutions).|stable, high test coverage, production use|
-|[Hochfrequenz.BO4E.Reporting](https://www.nuget.org/packages/Hochfrequenz.BO4E.Extensions/)|Contains tools to analyse single business objects and sets of objects|stable, high test coverage, production use|
-|[Hochfrequenz.BO4E.Extensions.Encryption](https://www.nuget.org/packages/Hochfrequenz.BO4E.Extensions.Encryption/)|Provides methods to encrypt and anonymize business objects and compontents using [libsodium](https://libsodium.org)/[`Sodium`](https://github.com/tabrath/libsodium-core/) and [Bouncy Castle](https://bouncycastle.org/csharp/)/`Org.BouncyCastle` APIs|high test coverage, so far missing real world usage|
+| **Package Name**                                                                                                   | **Description**                                                                                                                                                                                                                                          | **Stability & Maturity**                                                                                                 |
+| ------------------------------------------------------------------------------------------------------------------ | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------ |
+| [Hochfrequenz.BO4Enet](https://www.nuget.org/packages/Hochfrequenz.BO4Enet)                                        | Definitions of the business objects (namespace `BO4E.BO`), compontents (namespace `BO4E.COM`) and enumerations (namespace `BO4E.ENUM`)                                                                                                                   | not feature complete but stable and widely used in production for JSON serialization; still alpha for GRPC serialization |
+| [Hochfrequenz.BO4E.Extensions](https://www.nuget.org/packages/Hochfrequenz.BO4E.Extensions/)                       | Contains extension methods for business objects and components (as of now mostly `BO.Energiemenge` and `COM.Verbrauch`, which are heavily used by Hochfrequenz cloud solutions).                                                                         | stable, high test coverage, production use                                                                               |
+| [Hochfrequenz.BO4E.Reporting](https://www.nuget.org/packages/Hochfrequenz.BO4E.Extensions/)                        | Contains tools to analyse single business objects and sets of objects                                                                                                                                                                                    | stable, high test coverage, production use                                                                               |
+| [Hochfrequenz.BO4E.Extensions.Encryption](https://www.nuget.org/packages/Hochfrequenz.BO4E.Extensions.Encryption/) | Provides methods to encrypt and anonymize business objects and compontents using [libsodium](https://libsodium.org)/[`Sodium`](https://github.com/tabrath/libsodium-core/) and [Bouncy Castle](https://bouncycastle.org/csharp/)/`Org.BouncyCastle` APIs | high test coverage, so far missing real world usage                                                                      |
 
 ## This Repository Is Not Feature Complete Yet
-Please see [Issue #29](https://github.com/Hochfrequenz/BO4E-dotnet/issues/29) for a list of Business Objects, that are not yet implemented. Your contributions are very welcome. 
 
+Please see [Issue #29](https://github.com/Hochfrequenz/BO4E-dotnet/issues/29) for a list of Business Objects, that are not yet implemented. Your contributions are very welcome.
 
 ## Detailed Documentation
+
 The docstrings from within the source code are used to automatically generate a [doc.fx based documentation](https://hochfrequenz.github.io/bo4e-livedocs/api/BO4E.BO.html). Please also consider the [official documentation](https://www.bo4e.de/dokumentation) maintained by Interessengemeinschaft Geschäftsobjekte Energiewirtschaft e.V. from which most of the source code docstrings are copied/derived.
 
 ## Getting Started / Basic Examples
+
 1. install the nuget package [Hochfrequenz.BO4Enet](https://www.nuget.org/packages/Hochfrequenz.BO4Enet)
 2. import it
+
 ```c#
 using BO4E;
 ```
-3. start developing applications based on Business Objects for Energy (BO4E) 
+
+3. start developing applications based on Business Objects for Energy (BO4E)
 
 ### Create BusinessObjects
+
 ```c#
 using BO4E.BO;
 using BO4E.ENUM;
@@ -42,7 +53,9 @@ var energiemenge = new Energiemenge()
     Energieverbrauch = new List<Verbrauch>()
 };
 ```
+
 ### Make Use of Built in Validation Methods for German Location IDs
+
 ```c#
 using BO4E.BO;
 using BO4E.ENUM;
@@ -62,6 +75,7 @@ Assert.IsTrue(malo.IsValid());
 ```
 
 ### Add Custom Fields on the Fly via UserProperties
+
 ```c#
 using BO4E.BO;
 using Newtonsoft.Json;
@@ -75,6 +89,7 @@ Assert.AreEqual(123.456M, melo.UserProperties["myCustomValue"].ToObject<decimal>
 ```
 
 ### Don't Write Your Own Logic for Basic Operations
+
 ```c#
 using BO4E.COM;
 using BO4E.ENUM;
@@ -101,34 +116,43 @@ Assert.IsFalse(v1 == v2);
 ```
 
 ### Feature Rich Extension Packages
+
 Using the [Hochfrequenz.BO4E.Extensions](https://www.nuget.org/packages/Hochfrequenz.BO4E.Extensions/) gives you access to powerful analysis methods for Business Objects. We present them directly as minimal working examples in executable show case tests.
 
-* [Energiemenge](/TestBO4E-dotnet-Extensions/ShowCaseTests/EnergiemengeShowCaseTests.cs)
-* [Verbrauch](/TestBO4E-dotnet-Extensions/ShowCaseTests/VerbrauchShowCaseTests.cs)
-* [CompletenessReport](/TestBO4E-dotnet-Reporting/ShowCaseTests/CompletenessReportShowCaseTests.cs)
-* [Encrypted Business Objects](/TestBO4E-dotnet-Encryption/ShowCaseTests/EncryptionShowCaseTests.cs)
-* [(Partially) Anonymized Business Objects](/TestBO4E-dotnet-Encryption/ShowCaseTests/AnonymizerShowCaseTests.cs)
+- [Energiemenge](/TestBO4E-dotnet-Extensions/ShowCaseTests/EnergiemengeShowCaseTests.cs)
+- [Verbrauch](/TestBO4E-dotnet-Extensions/ShowCaseTests/VerbrauchShowCaseTests.cs)
+- [CompletenessReport](/TestBO4E-dotnet-Reporting/ShowCaseTests/CompletenessReportShowCaseTests.cs)
+- [Encrypted Business Objects](/TestBO4E-dotnet-Encryption/ShowCaseTests/EncryptionShowCaseTests.cs)
+- [(Partially) Anonymized Business Objects](/TestBO4E-dotnet-Encryption/ShowCaseTests/AnonymizerShowCaseTests.cs)
 
 ### Stable and Reliable Due to Good Test Coverage
+
 (branch coverage as of 2020-04-09, not yet automated)
+
 - ~54% in BO4E main project
 - ~69% in the extensions package
-- ~66% in the reporting package 
+- ~66% in the reporting package
 
 ## Batteries Included
+
 We try to make the usage of BO4E in general and this library in particular as smooth as possible. Therefore it not only includes bare C\# files but also some extra ressources that might be usefule to you.
 
 ### PlantUML files
+
 The folder [puml-files](puml-files) contains autogenerated PlantUML definitions for Business Objects, COMponents and ENUMs that are currently implemented in this repository. You can use the files provided in this repository or generate them on your own using [PlantUmlClassDiagramGenerator](https://github.com/pierre3/PlantUmlClassDiagramGenerator) by Hirotada Kobayashi aka pierre3. Please find instructions on how to use the tool in their repository. Please especially note that [include.puml](puml-files/include.puml) includes _all_ definitions inside just one file.
 
 ### Easy Validation using Json.NET Schema (JSchema)
+
 The folder [json-schema-files](json-schema-files) contains autogenerated JSON.net schemas for all Business Objects that are currently implemented in this repository. Using these schemas allows for easy, transparent and cross plattform validation of your Business Objects. (Find out more about [Json Schema](https://www.newtonsoft.com/jsonschema).)
 
 ### Protocol-Buffer Definitions
+
 In the folder [BO4E-dotnet/protobuf-files](BO4E-dotnet/protobuf-files) you can find autogenerated `.proto` files for all implemented Business Objects (except for those with multiple inheritance like e.g. `BO.Marktteilnehmer` or those derived from `BO.Preisblatt` which still causes headache using [protobuf-net](https://github.com/protobuf-net/protobuf-net)). The proto files are embedded into the BO4E nuget package as content files. This allows you to reference them.
 
 ## Contributing
+
 Contributions are welcome. Feel free to open a Pull Request against the develop branch of this repository. Please provide unit tests if you contribute logic beyond bare bare business object definitions. We do track our modification proposals to the official BO4E standard in a separate repository: [BO4E-modification-proposals](https://github.com/Hochfrequenz/bo4e-modification-proposals).
 
 ## Hochfrequenz
+
 [Hochfrequenz Unternehmensberatung GmbH](https://www.hochfrequenz.de) is a Grünwald (near Munich) based consulting company with offices in Berlin and Bremen. We're not only the main contributor to open source BO4E software but, according to [Kununu ratings](https://www.kununu.com/de/hochfrequenz-unternehmensberatung1), also among the most attractive employers within the German energy market. Applications of talented developers are welcome at any time! Please consider visiting our [career page](https://www.hochfrequenz.de/index.php/karriere/aktuelle-stellenausschreibungen/full-stack-entwickler) (German only) and our [Stack Overflow profile](https://stackoverflow.com/jobs/companies/hochfrequenz-unternehmensberatung-gmbh) that also contains job openings.

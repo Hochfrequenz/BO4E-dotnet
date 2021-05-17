@@ -1,4 +1,4 @@
-﻿{
+{
   "objectName": "Vertrag",
   "lenientEnumList": true,
   "lenientDateTime": true,
@@ -11,14 +11,12 @@
     "vertragstatus": "IN_ARBEIT",
     "sparte": "STROM",
     "vertragsbeginn": "2017-05-17T00:00:00Z",
-    "vertragsende": "2018-05-17T00:00:00Z",
+    "vertragsende": "0001-01-01T00:00:00+00:00",
     "vertragspartner1": {
       "versionStruktur": 1,
       "boTyp": "GESCHAEFTSPARTNER",
       "name1": "Ernest",
-      "kontaktweg": [
-        { "kontaktweg": "TELEFONAT" }
-      ],
+      "kontaktweg": [{ "kontaktweg": "TELEFONAT" }],
       "geschaeftspartnerrolle": [
         { "dein key interessiert mich nen 💩dreck": "INTERESSENT" },
         { "rolle": "KUNDE" }
@@ -29,9 +27,7 @@
       "versionStruktur": 1,
       "boTyp": "GESCHAEFTSPARTNER",
       "name1": "Ernest",
-      "kontaktweg": [
-        { "kontaktweg": "TELEFONAT" }
-      ],
+      "kontaktweg": [{ "kontaktweg": "TELEFONAT" }],
       "geschaeftspartnerrolle": [
         { "dein key interessiert mich nen 💩dreck": "INTERESSENT" },
         { "rolle": "KUNDE" }
@@ -44,7 +40,7 @@
     "vertragsteile": [
       {
         "vertragsteilbeginn": "2019-07-17T00:00:00Z",
-        "vertragsteilende": "2019-08-17T00:00:00Z",
+        "vertragsteilende": "0001-01-01T00:00:00+00:00",
         "lokation": "DE1234567890123456789012345678901"
       }
     ]

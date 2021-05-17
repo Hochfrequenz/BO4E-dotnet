@@ -1,5 +1,6 @@
 {
   "objectName": "Rechnung",
+  "lenientDateTime": true,
   "input": {
     "versionStruktur": 1,
     "boTyp": "RECHNUNG",
@@ -19,9 +20,7 @@
       "anrede": "HERR",
       "name1": "Mein super Lieferant",
       "gewerbekennzeichnung": true,
-      "geschaeftspartnerrolle": [
-        "LIEFERANT"
-      ],
+      "geschaeftspartnerrolle": ["LIEFERANT"],
       "partneradresse": {
         "postleitzahl": "90190",
         "ort": "Walldorf",
@@ -37,9 +36,7 @@
       "name1": "Lustig",
       "name2": "Peter",
       "gewerbekennzeichnung": false,
-      "geschaeftspartnerrolle": [
-        "KUNDE"
-      ],
+      "geschaeftspartnerrolle": ["KUNDE"],
       "partneradresse": {
         "postleitzahl": "50672",
         "ort": "Köln",

@@ -1,4 +1,4 @@
-﻿{
+{
   "expectedUri": "bo4e://ansprechpartner/~/Maier/Unternehmen%2520XYZ%2520GmbH/",
   "expectedQueryObject": {
     "boTyp": "ANSPRECHPARTNER",
@@ -18,9 +18,7 @@
       "boTyp": "GESCHAEFTSPARTNER",
       "name1": "Unternehmen XYZ GmbH",
       "gewerbekennzeichnung": true,
-      "geschaeftspartnerrolle": [
-        "DIENSTLEISTER"
-      ],
+      "geschaeftspartnerrolle": ["DIENSTLEISTER"],
       "partneradresse": {
         "postleitzahl": 87968,
         "ort": "EinOrt",

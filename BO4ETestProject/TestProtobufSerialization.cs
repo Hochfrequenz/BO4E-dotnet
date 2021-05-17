@@ -1,12 +1,10 @@
-
 using System;
+using System.Collections.Generic;
 using System.IO;
-using System.Linq;
 using BO4E.BO;
 using BO4E.COM;
-
+using BO4E.ENUM;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-
 using ProtoBuf;
 
 namespace TestBO4E
@@ -19,29 +17,29 @@ namespace TestBO4E
         {
             //Guid emGuid = Guid.NewGuid();
             //Guid v1Guid = Guid.NewGuid();
-            Energiemenge em = new Energiemenge()
+            var em = new Energiemenge
             {
                 LokationsId = "54321012345",
-                LokationsTyp = BO4E.ENUM.Lokationstyp.MaLo,
+                LokationsTyp = Lokationstyp.MaLo,
                 //Guid = emGuid,
-                Energieverbrauch = new System.Collections.Generic.List<Verbrauch>()
+                Energieverbrauch = new List<Verbrauch>
                 {
-                    new Verbrauch()
+                    new Verbrauch
                     {
-                        Einheit = BO4E.ENUM.Mengeneinheit.KWH,
+                        Einheit = Mengeneinheit.KWH,
                         Wert = 10.0M,
                         Startdatum = new DateTime(2019, 1, 1, 0, 0, 0, DateTimeKind.Utc),
                         Enddatum = new DateTime(2019, 1, 2, 0, 0, 0, DateTimeKind.Utc),
-                        Obiskennzahl =  "1-0:1.8.1",
+                        Obiskennzahl = "1-0:1.8.1"
                         //Guid = v1Guid
                     },
-                    new Verbrauch()
+                    new Verbrauch
                     {
-                        Einheit = BO4E.ENUM.Mengeneinheit.MWH,
+                        Einheit = Mengeneinheit.MWH,
                         Wert = 23.0M,
                         Startdatum = new DateTime(2019, 1, 2, 0, 0, 0, DateTimeKind.Utc),
                         Enddatum = new DateTime(2019, 1, 3, 0, 0, 0, DateTimeKind.Utc),
-                        Obiskennzahl =  "1-0:1.8.1",
+                        Obiskennzahl = "1-0:1.8.1"
                         //Guid = null
                     }
                 }
@@ -50,10 +48,11 @@ namespace TestBO4E
             string emBase64;
             using (var stream = new MemoryStream())
             {
-                Serializer.Serialize<Energiemenge>(stream, em);
+                Serializer.Serialize(stream, em);
                 using var reader = new BinaryReader(stream);
                 emBase64 = Convert.ToBase64String(stream.ToArray());
             }
+
             Assert.IsFalse(string.IsNullOrWhiteSpace(emBase64));
 
             // now use base64 string to get back the original energiemenge
@@ -63,6 +62,7 @@ namespace TestBO4E
                 backStream.Seek(0, SeekOrigin.Begin);
                 emRoundTrip = Serializer.Deserialize<Energiemenge>(backStream);
             }
+
             Assert.IsNotNull(emRoundTrip.LokationsId);
             Assert.IsTrue(emRoundTrip.IsValid());
             /*

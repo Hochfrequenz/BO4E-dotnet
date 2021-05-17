@@ -1,0 +1,48 @@
+﻿{
+  "assertions": {
+    "isContinuous": false,
+    "isEvenlySpaced": false,
+    "isEvenlySpacedWithinDefinition": true,
+    "missingTimeRangeCount": 1
+  },
+  "input": {
+    "versionStruktur": 1,
+    "boTyp": "ENERGIEMENGE",
+    "lokationsId": "DE47108155927",
+    "lokationstyp": "MELO",
+    "energieverbrauch": [
+      {
+        "startdatum": "2018-01-05 00:00:00",
+        "enddatum": "2018-01-06 00:00:00",
+        "wertermittlungsverfahren": "PROGNOSE",
+        "obiskennzahl": "1–0:1.8.1",
+        "wert": 101112,
+        "einheit": "KW"
+      },
+      {
+        "startdatum": "2018-01-01 00:00:00",
+        "enddatum": "2018-01-02 00:00:00",
+        "wertermittlungsverfahren": "PROGNOSE",
+        "obiskennzahl": "1–0:1.8.1",
+        "wert": 123,
+        "einheit": "KW"
+      },
+      {
+        "startdatum": "2018-01-03 00:00:00",
+        "enddatum": "2018-01-04 00:00:00",
+        "wertermittlungsverfahren": "PROGNOSE",
+        "obiskennzahl": "1–0:1.8.1",
+        "wert": 789,
+        "einheit": "KW"
+      },
+      {
+        "startdatum": "2018-01-02 00:00:00",
+        "enddatum": "2018-01-03 00:00:00",
+        "wertermittlungsverfahren": "PROGNOSE",
+        "obiskennzahl": "1–0:1.8.1",
+        "wert": 456,
+        "einheit": "KW"
+      }
+    ]
+  }
+}

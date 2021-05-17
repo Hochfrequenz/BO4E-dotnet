@@ -1,0 +1,94 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <RootNamespace>BO4E</RootNamespace>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <PackageId>Hochfrequenz.BO4Enet</PackageId>
+    <Authors>Hochfrequenz Untenehmensberatung GmbH</Authors>
+    <Product>BO4E .net core bindings</Product>
+    <RepositoryUrl>https://github.com/Hochfrequenz/BO4E-dotnet/</RepositoryUrl>
+    <VersionPrefix>0.2.4</VersionPrefix>
+    <VersionSuffix>$(VersionSuffix)</VersionSuffix>
+    <AssemblyName>BO4Enet</AssemblyName>
+    <GeneratePackageOnBuild>false</GeneratePackageOnBuild>
+    <PublishRepositoryUrl>true</PublishRepositoryUrl>
+
+    <!-- Optional: Embed source files that are not tracked by the source control manager to the PDB -->
+    <EmbedUntrackedSources>true</EmbedUntrackedSources>
+
+    <!-- Optional: Include PDB in the built .nupkg -->
+    <AllowedOutputExtensionsInPackageBuildOutputFolder>$(AllowedOutputExtensionsInPackageBuildOutputFolder);.pdb</AllowedOutputExtensionsInPackageBuildOutputFolder>
+    <PackageProjectUrl>https://github.com/Hochfrequenz/BO4E-dotnet/</PackageProjectUrl>
+    <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
+    <PackageLicenseFile>LICENSE.txt</PackageLicenseFile>
+    <AssemblyVersion>0.2.4.0</AssemblyVersion>
+    <FileVersion>0.2.4.0</FileVersion>
+
+    <RepositoryType>git</RepositoryType>
+    <IncludeSymbols>true</IncludeSymbols>
+    <DebugType>Embedded</DebugType>
+    <EmbedAllSources>True</EmbedAllSources>
+    <LangVersion>8.0</LangVersion>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <DocumentationFile>BO4E-dotnet\BO4Enet.xml</DocumentationFile>
+    <Optimize>false</Optimize>
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+    <DefineConstants>DEBUG</DefineConstants>
+    <DocumentationFile>BO4Enet.xml</DocumentationFile>
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="BO\NewFolder\**" />
+    <Compile Remove="json-schema-files\**" />
+    <EmbeddedResource Remove="BO\NewFolder\**" />
+    <EmbeddedResource Remove="json-schema-files\**" />
+    <None Remove="BO\NewFolder\**" />
+    <None Remove="json-schema-files\**" />
+    <None Include="..\LICENSE.txt">
+      <Pack>True</Pack>
+      <PackagePath></PackagePath>
+    </None>
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Remove="CentralEuropeStandardTime.json" />
+    <None Remove="protobuf-files\BO4E.BO.Angebot.proto" />
+    <None Remove="protobuf-files\BO4E.BO.Ansprechpartner.proto" />
+    <None Remove="protobuf-files\BO4E.BO.Benachrichtigung.proto" />
+    <None Remove="protobuf-files\BO4E.BO.Energiemenge.proto" />
+    <None Remove="protobuf-files\BO4E.BO.Geschaeftspartner.proto" />
+    <None Remove="protobuf-files\BO4E.BO.Kosten.proto" />
+    <None Remove="protobuf-files\BO4E.BO.Marktlokation.proto" />
+    <None Remove="protobuf-files\BO4E.BO.Messlokation.proto" />
+    <None Remove="protobuf-files\BO4E.BO.Preisblatt.proto" />
+    <None Remove="protobuf-files\BO4E.BO.Rechnung.proto" />
+    <None Remove="protobuf-files\BO4E.BO.Region.proto" />
+    <None Remove="protobuf-files\BO4E.BO.Vertrag.proto" />
+    <None Remove="protobuf-files\BO4E.BO.Zaehler.proto" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="meta\CentralEuropeStandardTime.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.Extensions.Logging" Version="5.0.0" />
+    <PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="5.0.0" />
+    <PackageReference Include="MiniProfiler.Shared" Version="4.2.22" />
+    <PackageReference Include="Newtonsoft.Json" Version="11.0.2" />
+    <PackageReference Include="Newtonsoft.Json.Schema" Version="3.0.10" />
+    <PackageReference Include="protobuf-net" Version="2.4.6" />
+    <PackageReference Include="SourceLink.Copy.PdbFiles" Version="2.8.3" PrivateAssets="All" />
+    <PackageReference Include="System.ComponentModel.Annotations" Version="5.0.0" />
+    <PackageReference Include="System.Text.Encodings.Web" Version="5.0.0" />
+    <PackageReference Include="System.Text.Json" Version="5.0.0" />
+  </ItemGroup>
+
+</Project>

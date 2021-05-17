@@ -1,0 +1,1615 @@
+﻿syntax = "proto3";
+package bo4e;
+import "google/protobuf/timestamp.proto";
+import "protobuf-net/protogen.proto"; // custom protobuf-net options
+
+enum AbgabeArt {
+   option (.protobuf_net.enumopt).namespace = "BO4E.ENUM";
+   KAS = 0;
+   SA = 1;
+   SAS = 2;
+   TA = 3;
+   TAS = 4;
+   TK = 5;
+   TKS = 6;
+   TS = 7;
+   TSS = 8;
+}
+message Adresse {
+   option (.protobuf_net.msgopt).namespace = "BO4E.COM";
+   string Postleitzahl = 3;
+   string Ort = 4;
+   string Strasse = 5;
+   string Hausnummer = 6;
+   string Postfach = 7;
+   string Adresszusatz = 8;
+   string CoErgaenzung = 9;
+   Landescode Landescode = 10;
+}
+message Angebot {
+   option (.protobuf_net.msgopt).namespace = "BO4E.BO";
+   string Angebotsnummer = 4;
+   string Anfragereferenz = 5;
+   DateTimeOffset Angebotsdatum = 6;
+   Sparte Sparte = 7;
+   DateTimeOffset Bindefrist = 8;
+   Geschaeftspartner Angebotgeber = 9;
+   Geschaeftspartner Angebotnehmer = 10;
+   Ansprechpartner UnterzeichnerAngebotsnehmer = 11;
+   Ansprechpartner UnterzeichnerAngebotsgeber = 12;
+   repeated Angebotsvariante Varianten = 13;
+}
+message Angebotsposition {
+   option (.protobuf_net.msgopt).namespace = "BO4E.COM";
+   string Positionsbezeichung = 3;
+   Menge Positionsmenge = 4;
+   Preis Positionspreis = 5;
+   Betrag Positionsbetrag = 6;
+}
+enum Angebotsstatus {
+   option (.protobuf_net.enumopt).namespace = "BO4E.ENUM";
+   KONZEPTION = 0;
+   UNVERBINDLICH = 1;
+   VERBINDLICH = 2;
+   BEAUFTRAGT = 3;
+   UNGUELTIG = 4;
+   Angebotsstatus_ABGELEHNT = 5;
+   NACHGEFASST = 6;
+   AUSSTEHEND = 7;
+   ERLEDIGT = 8;
+}
+message Angebotsteil {
+   option (.protobuf_net.msgopt).namespace = "BO4E.COM";
+   string AnfrageSubreferenz = 3;
+   repeated Marktlokation Lieferstellenangebotsteil = 4;
+   Menge Gesamtmengeangebotsteil = 5;
+   Betrag Gesamtkostenangebotsteil = 6;
+   repeated Angebotsposition Positionen = 7;
+}
+message Angebotsvariante {
+   option (.protobuf_net.msgopt).namespace = "BO4E.COM";
+   Angebotsstatus Angebotsstatus = 4;
+   string Beschreibung = 5;
+   DateTimeOffset Erstelldatum = 6;
+   DateTimeOffset Bindefrist = 7;
+   Menge Gesamtmenge = 8;
+   Betrag Gesamtkosten = 9;
+   repeated Angebotsteil Teile = 10;
+}
+enum Anrede {
+   option (.protobuf_net.enumopt).namespace = "BO4E.ENUM";
+   HERR = 0;
+   FRAU = 1;
+   EHELEUTE = 2;
+   FIRMA = 3;
+   INDIVIDUELL = 4;
+   FAMILIE = 5;
+   ERBENGEMEINSCHAFT = 6;
+   WOHNGEMEINSCHAFT = 7;
+   GRUNDSTUECKGEMEINSCHAFT = 8;
+   Anrede_DR = 9;
+}
+message Ansprechpartner {
+   option (.protobuf_net.msgopt).namespace = "BO4E.BO";
+   Anrede Anrede = 4;
+   string IndividuelleAnrede = 5;
+   Titel Titel = 6;
+   string Vorname = 7;
+   string Nachname = 8;
+   string EMailAdresse = 9;
+   string Kommentar = 10;
+   Geschaeftspartner Geschaeftspartner = 11;
+   Adresse Adresse = 12;
+   repeated Rufnummer Rufnummern = 13;
+   repeated Zustaendigkeit Zustaendigkeit = 14;
+}
+enum ArithmetischeOperation {
+   option (.protobuf_net.enumopt).namespace = "BO4E.ENUM";
+   ADDITION = 0;
+   SUBTRAKTION = 1;
+   MULTIPLIKATION = 2;
+   DIVISION = 3;
+}
+enum AufAbschlagstyp {
+   option (.protobuf_net.enumopt).namespace = "BO4E.ENUM";
+   RELATIV = 0;
+   ABSOLUT = 1;
+}
+message Aufgabe {
+   option (.protobuf_net.msgopt).namespace = "BO4E.COM";
+   string AufgabenId = 3;
+   string Beschreibung = 4;
+   DateTimeOffset Deadline = 5;
+   bool Ausgefuehrt = 6;
+   DateTimeOffset Ausfuehrungszeitpunkt = 7;
+   string Ausfuehrender = 8;
+}
+enum BDEWArtikelnummer {
+   option (.protobuf_net.enumopt).namespace = "BO4E.ENUM";
+   BDEWArtikelnummer_LEISTUNG = 0;
+   BDEWArtikelnummer_LEISTUNG_PAUSCHAL = 1;
+   BDEWArtikelnummer_GRUNDPREIS = 2;
+   BDEWArtikelnummer_REGELENERGIE_ARBEIT = 3;
+   BDEWArtikelnummer_REGELENERGIE_LEISTUNG = 4;
+   BDEWArtikelnummer_NOTSTROMLIEFERUNG_ARBEIT = 5;
+   BDEWArtikelnummer_NOTSTROMLIEFERUNG_LEISTUNG = 6;
+   BDEWArtikelnummer_RESERVENETZKAPAZITAET = 7;
+   BDEWArtikelnummer_RESERVELEISTUNG = 8;
+   BDEWArtikelnummer_ZUSAETZLICHE_ABLESUNG = 9;
+   BDEWArtikelnummer_PRUEFGEBUEHREN_AUSSERPLANMAESSIG = 10;
+   BDEWArtikelnummer_WIRKARBEIT = 11;
+   BDEWArtikelnummer_SINGULAER_GENUTZTE_BETRIEBSMITTEL = 12;
+   BDEWArtikelnummer_ABGABE_KWKG = 13;
+   BDEWArtikelnummer_ABSCHLAG = 14;
+   BDEWArtikelnummer_KONZESSIONSABGABE = 15;
+   BDEWArtikelnummer_ENTGELT_FERNAUSLESUNG = 16;
+   BDEWArtikelnummer_UNTERMESSUNG = 17;
+   BDEWArtikelnummer_BLINDMEHRARBEIT = 18;
+   BDEWArtikelnummer_ENTGELT_ABRECHNUNG = 19;
+   BDEWArtikelnummer_SPERRKOSTEN = 20;
+   BDEWArtikelnummer_ENTSPERRKOSTEN = 21;
+   BDEWArtikelnummer_MAHNKOSTEN = 22;
+   BDEWArtikelnummer_MEHR_MINDERMENGEN = 23;
+   BDEWArtikelnummer_INKASSOKOSTEN = 24;
+   BDEWArtikelnummer_BLINDMEHRLEISTUNG = 25;
+   BDEWArtikelnummer_ENTGELT_MESSUNG_ABLESUNG = 26;
+   BDEWArtikelnummer_ENTGELT_EINBAU_BETRIEB_WARTUNG_MESSTECHNIK = 27;
+   BDEWArtikelnummer_AUSGLEICHSENERGIE = 28;
+   BDEWArtikelnummer_ZAEHLEINRICHTUNG = 29;
+   BDEWArtikelnummer_WANDLER_MENGENUMWERTER = 30;
+   BDEWArtikelnummer_KOMMUNIKATIONSEINRICHTUNG = 31;
+   BDEWArtikelnummer_TECHNISCHE_STEUEREINRICHTUNG = 32;
+   BDEWArtikelnummer_PARAGRAF_19_STROM_NEV_UMLAGE = 33;
+   BDEWArtikelnummer_BEFESTIGUNGSEINRICHTUNG = 34;
+   BDEWArtikelnummer_OFFSHORE_HAFTUNGSUMLAGE = 35;
+   BDEWArtikelnummer_FIXE_ARBEITSENTGELTKOMPONENTE = 36;
+   BDEWArtikelnummer_FIXE_LEISTUNGSENTGELTKOMPONENTE = 37;
+   BDEWArtikelnummer_UMLAGE_ABSCHALTBARE_LASTEN = 38;
+   BDEWArtikelnummer_MEHRMENGE = 39;
+   BDEWArtikelnummer_MINDERMENGE = 40;
+   BDEWArtikelnummer_ENERGIESTEUER = 41;
+   BDEWArtikelnummer_SMARTMETER_GATEWAY = 42;
+   BDEWArtikelnummer_STEUERBOX = 43;
+   BDEWArtikelnummer_MSB_INKL_MESSUNG = 44;
+}
+enum Bearbeitungsstatus {
+   option (.protobuf_net.enumopt).namespace = "BO4E.ENUM";
+   OFFEN = 0;
+   IN_BEARBEITUNG = 1;
+   ABGESCHLOSSEN = 2;
+   STORNIERT = 3;
+   QUITTIERT = 4;
+   IGNORIERT = 5;
+}
+enum Bemessungsgroesse {
+   option (.protobuf_net.enumopt).namespace = "BO4E.ENUM";
+   Bemessungsgroesse_WIRKARBEIT_EL = 0;
+   Bemessungsgroesse_LEISTUNG_EL = 1;
+   Bemessungsgroesse_BLINDARBEIT_KAP = 2;
+   Bemessungsgroesse_BLINDARBEIT_IND = 3;
+   Bemessungsgroesse_BLINDLEISTUNG_KAP = 4;
+   Bemessungsgroesse_BLINDLEISTUNG_IND = 5;
+   Bemessungsgroesse_WIRKARBEIT_TH = 6;
+   Bemessungsgroesse_LEISTUNG_TH = 7;
+   Bemessungsgroesse_VOLUMEN = 8;
+   Bemessungsgroesse_VOLUMENSTROM = 9;
+   Bemessungsgroesse_BENUTZUNGSDAUER = 10;
+   Bemessungsgroesse_ANZAHL = 11;
+}
+message Benachrichtigung {
+   option (.protobuf_net.msgopt).namespace = "BO4E.BO";
+   string BenachrichtigungsId = 4;
+   Prioritaet Prioritaet = 5; // default value could not be applied: NORMAL
+   Bearbeitungsstatus Bearbeitungsstatus = 6;
+   string Kurztext = 7;
+   DateTimeOffset ErstellungsZeitpunkt = 8;
+   string Kategorie = 9;
+   string Bearbeiter = 10;
+   repeated Notiz Notizen = 11;
+   DateTimeOffset Deadline = 12;
+   repeated Aufgabe Aufgaben = 13;
+   repeated GenericStringStringInfo Infos = 14;
+}
+message Betrag {
+   option (.protobuf_net.msgopt).namespace = "BO4E.COM";
+   string Wert = 3;
+   Waehrungscode Waehrung = 4;
+}
+enum Bilanzierungsmethode {
+   option (.protobuf_net.enumopt).namespace = "BO4E.ENUM";
+   Bilanzierungsmethode_RLM = 0;
+   Bilanzierungsmethode_SLP = 1;
+   Bilanzierungsmethode_TLP_GEMEINSAM = 2;
+   Bilanzierungsmethode_TLP_GETRENNT = 3;
+   Bilanzierungsmethode_PAUSCHAL = 4;
+   Bilanzierungsmethode_IMS = 5;
+}
+message DateTimeOffset {
+   option (.protobuf_net.msgopt).namespace = "System";
+}
+message Dienstleistung {
+   option (.protobuf_net.msgopt).namespace = "BO4E.COM";
+   Dienstleistungstyp Dienstleistungstyp = 3;
+   string Bezeichnung = 4;
+}
+enum Dienstleistungstyp {
+   option (.protobuf_net.enumopt).namespace = "BO4E.ENUM";
+   Dienstleistungstyp_DATENBEREITSTELLUNG_TAEGLICH = 0;
+   Dienstleistungstyp_DATENBEREITSTELLUNG_WOECHENTLICH = 1;
+   Dienstleistungstyp_DATENBEREITSTELLUNG_MONATLICH = 2;
+   Dienstleistungstyp_DATENBEREITSTELLUNG_JAEHRLICH = 3;
+   Dienstleistungstyp_DATENBEREITSTELLUNG_HISTORISCHE_LG = 4;
+   Dienstleistungstyp_DATENBEREITSTELLUNG_STUENDLICH = 5;
+   Dienstleistungstyp_DATENBEREITSTELLUNG_VIERTELJAEHRLICH = 6;
+   Dienstleistungstyp_DATENBEREITSTELLUNG_HALBJAEHRLICH = 7;
+   Dienstleistungstyp_DATENBEREITSTELLUNG_MONATLICH_ZUSAETZLICH = 8;
+   Dienstleistungstyp_DATENBEREITSTELLUNG_EINMALIG = 9;
+   Dienstleistungstyp_AUSLESUNG_2X_TAEGLICH_FERNAUSLESUNG = 10;
+   Dienstleistungstyp_AUSLESUNG_TAEGLICH_FERNAUSLESUNG = 11;
+   Dienstleistungstyp_AUSLESUNG_LGK_MANUELL_MSB = 12;
+   Dienstleistungstyp_AUSLESUNG_MONATLICH_SLP_FERNAUSLESUNG = 13;
+   Dienstleistungstyp_AUSLESUNG_JAEHRLICH_SLP_FERNAUSLESUNG = 14;
+   Dienstleistungstyp_AUSLESUNG_MDE_SLP = 15;
+   Dienstleistungstyp_ABLESUNG_MONATLICH_SLP = 16;
+   Dienstleistungstyp_ABLESUNG_VIERTELJAEHRLICH_SLP = 17;
+   Dienstleistungstyp_ABLESUNG_HALBJAEHRLICH_SLP = 18;
+   Dienstleistungstyp_ABLESUNG_JAEHRLICH_SLP = 19;
+   Dienstleistungstyp_AUSLESUNG_SLP_FERNAUSLESUNG = 20;
+   Dienstleistungstyp_ABLESUNG_SLP_ZUSAETZLICH_MSB = 21;
+   Dienstleistungstyp_ABLESUNG_SLP_ZUSAETZLICH_KUNDE = 22;
+   Dienstleistungstyp_AUSLESUNG_LGK_FERNAUSLESUNG_ZUSAETZLICH_MSB = 23;
+   Dienstleistungstyp_AUSLESUNG_MOATLICH_FERNAUSLESUNG = 24;
+   Dienstleistungstyp_AUSLESUNG_STUENDLICH_FERNAUSLESUNG = 25;
+   Dienstleistungstyp_ABLESUNG_MONATLICH_LGK = 26;
+   Dienstleistungstyp_AUSLESUNG_TEMERATURMENGENUMWERTER = 27;
+   Dienstleistungstyp_AUSLESUNG_ZUSTANDSMENGENUMWERTER = 28;
+   Dienstleistungstyp_AUSLESUNG_SYSTEMMENGENUMWERTER = 29;
+   Dienstleistungstyp_AUSLESUNG_VORGANG_SLP = 30;
+   Dienstleistungstyp_AUSLESUUNG_KOMPAKTMENGENUMWERTER = 31;
+   Dienstleistungstyp_AUSLESUNG_MDE_LGK = 32;
+   Dienstleistungstyp_SPERRUNG_SLP = 33;
+   Dienstleistungstyp_ENTSPERRUNG_SLP = 34;
+   Dienstleistungstyp_SPERRUNG_RLM = 35;
+   Dienstleistungstyp_ENTSPERRUNG_RLM = 36;
+   Dienstleistungstyp_MAHNKOSTEN = 37;
+   Dienstleistungstyp_INKASSOKOSTEN = 38;
+}
+message Energiemenge {
+   option (.protobuf_net.msgopt).namespace = "BO4E.BO";
+   string LokationsId = 4; // default value could not be applied: |null|
+   Lokationstyp LokationsTyp = 5;
+   repeated Verbrauch Energieverbrauch = 6;
+}
+enum Energierichtung {
+   option (.protobuf_net.enumopt).namespace = "BO4E.ENUM";
+   AUSSP = 0;
+   EINSP = 1;
+}
+enum Fernschaltung {
+   option (.protobuf_net.enumopt).namespace = "BO4E.ENUM";
+   VORHANDEN = 0;
+   NICHT_VORHANDEN = 1;
+}
+enum Gasqualitaet {
+   option (.protobuf_net.enumopt).namespace = "BO4E.ENUM";
+   option allow_alias = true;
+   Gasqualitaet_ZERO = 0;
+   H_GAS = 1;
+   L_GAS = 2;
+   HGAS = 1;
+   LGAS = 2;
+}
+enum Gebiettyp {
+   option (.protobuf_net.enumopt).namespace = "BO4E.ENUM";
+   REGELZONE = 0;
+   MARKTGEBIET = 1;
+   BILANZIERUNGSGEBIET = 2;
+   VERTEILNETZ = 3;
+   TRANSPORTNETZ = 4;
+   REGIONALNETZ = 5;
+   AREALNETZ = 6;
+   GRUNDVERSORGUNGSGEBIET = 7;
+   VERSORGUNGSGEBIET = 8;
+}
+message GenericStringStringInfo {
+   option (.protobuf_net.msgopt).namespace = "BO4E.COM";
+   string KeyColumn = 3;
+   string Value = 4;
+}
+message Geokoordinaten {
+   option (.protobuf_net.msgopt).namespace = "BO4E.COM";
+   string Breitengrad = 3;
+   string Laengengrad = 4;
+}
+message Geraeteeigenschaften {
+   option (.protobuf_net.msgopt).namespace = "BO4E.COM";
+   Geraetetyp Geraetetyp = 3;
+   Geraetemerkmal Geraetemerkmal = 4;
+   map<string,string> Parameter = 1005;
+}
+enum Geraetemerkmal {
+   option (.protobuf_net.enumopt).namespace = "BO4E.ENUM";
+   Geraetemerkmal_EINTARIF = 0;
+   Geraetemerkmal_ZWEITARIF = 1;
+   Geraetemerkmal_MEHRTARIF = 2;
+   Geraetemerkmal_GAS_G2P5 = 3;
+   Geraetemerkmal_GAS_G4 = 4;
+   Geraetemerkmal_GAS_G6 = 5;
+   Geraetemerkmal_GAS_G10 = 6;
+   Geraetemerkmal_GAS_G16 = 7;
+   Geraetemerkmal_GAS_G25 = 8;
+   Geraetemerkmal_GAS_G40 = 9;
+   Geraetemerkmal_GAS_G65 = 10;
+   Geraetemerkmal_GAS_G100 = 11;
+   Geraetemerkmal_GAS_G160 = 12;
+   Geraetemerkmal_GAS_G250 = 13;
+   Geraetemerkmal_GAS_G400 = 14;
+   Geraetemerkmal_GAS_G650 = 15;
+   Geraetemerkmal_GAS_G1000 = 16;
+   Geraetemerkmal_GAS_G1600 = 17;
+   Geraetemerkmal_GAS_G2500 = 18;
+   Geraetemerkmal_IMPULSGEBER_G4_G100 = 19;
+   Geraetemerkmal_IMPULSGEBER_G100 = 20;
+   Geraetemerkmal_MODEM_GSM = 21;
+   Geraetemerkmal_MODEM_GPRS = 22;
+   Geraetemerkmal_MODEM_FUNK = 23;
+   Geraetemerkmal_MODEM_GSM_O_LG = 24;
+   Geraetemerkmal_MODEM_GSM_M_LG = 25;
+   Geraetemerkmal_MODEM_FESTNETZ = 26;
+   Geraetemerkmal_MODEM_GPRS_M_LG = 27;
+   Geraetemerkmal_PLC_COM = 28;
+   Geraetemerkmal_ETHERNET_KOM = 29;
+   Geraetemerkmal_DSL_KOM = 30;
+   Geraetemerkmal_LTE_KOM = 31;
+   Geraetemerkmal_RUNDSTEUEREMPFAENGER = 32;
+   Geraetemerkmal_TARIFSCHALTGERAET = 33;
+   Geraetemerkmal_ZUSTANDS_MU = 34;
+   Geraetemerkmal_TEMPERATUR_MU = 35;
+   Geraetemerkmal_KOMPAKT_MU = 36;
+   Geraetemerkmal_SYSTEM_MU = 37;
+   Geraetemerkmal_UNBESTIMMT = 38;
+}
+enum Geraetetyp {
+   option (.protobuf_net.enumopt).namespace = "BO4E.ENUM";
+   Geraetetyp_WECHSELSTROMZAEHLER = 0;
+   Geraetetyp_DREHSTROMZAEHLER = 1;
+   Geraetetyp_ZWEIRICHTUNGSZAEHLER = 2;
+   Geraetetyp_RLM_ZAEHLER = 3;
+   Geraetetyp_IMS_ZAEHLER = 4;
+   Geraetetyp_BALGENGASZAEHLER = 5;
+   Geraetetyp_MAXIMUMZAEHLER = 6;
+   Geraetetyp_MULTIPLEXANLAGE = 7;
+   Geraetetyp_PAUSCHALANLAGE = 8;
+   Geraetetyp_VERSTAERKERANLAGE = 9;
+   Geraetetyp_SUMMATIONSGERAET = 10;
+   Geraetetyp_IMPULSGEBER = 11;
+   Geraetetyp_EDL_21_ZAEHLERAUFSATZ = 12;
+   Geraetetyp_VIER_QUADRANTEN_LASTGANGZAEHLER = 13;
+   Geraetetyp_MENGENUMWERTER = 14;
+   Geraetetyp_STROMWANDLER = 15;
+   Geraetetyp_SPANNUNGSWANDLER = 16;
+   Geraetetyp_DATENLOGGER = 17;
+   Geraetetyp_KOMMUNIKATIONSANSCHLUSS = 18;
+   Geraetetyp_MODEM = 19;
+   Geraetetyp_TELEKOMMUNIKATIONSEINRICHTUNG = 20;
+   Geraetetyp_DREHKOLBENGASZAEHLER = 21;
+   Geraetetyp_TURBINENRADGASZAEHLER = 22;
+   Geraetetyp_ULTRASCHALLZAEHLER = 23;
+   Geraetetyp_WIRBELGASZAEHLER = 24;
+   Geraetetyp_MODERNE_MESSEINRICHTUNG = 25;
+   Geraetetyp_ELEKTRONISCHER_HAUSHALTSZAEHLER = 26;
+   Geraetetyp_STEUEREINRICHTUNG = 27;
+   Geraetetyp_TECHNISCHESTEUEREINRICHTUNG = 28;
+   Geraetetyp_TARIFSCHALTGERAET = 29;
+   Geraetetyp_RUNDSTEUEREMPFAENGER = 30;
+   Geraetetyp_OPTIONALE_ZUS_ZAEHLEINRICHTUNG = 31;
+   Geraetetyp_MESSWANDLERSATZ_IMS_MME = 32;
+   Geraetetyp_KOMBIMESSWANDLER_IMS_MME = 33;
+   Geraetetyp_TARIFSCHALTGERAET_IMS_MME = 34;
+   Geraetetyp_RUNDSTEUEREMPFAENGER_IMS_MME = 35;
+   Geraetetyp_TEMPERATUR_KOMPENSATION = 36;
+   Geraetetyp_HOECHSTBELASTUNGS_ANZEIGER = 37;
+   Geraetetyp_SONSTIGES_GERAET = 38;
+   Geraetetyp_SMARTMETERGATEWAY = 39;
+   Geraetetyp_STEUERBOX = 40;
+   Geraetetyp_BLOCKSTROMWANDLER = 41;
+   Geraetetyp_KOMBIMESSWANDLER = 42;
+}
+message Geschaeftspartner {
+   option (.protobuf_net.msgopt).namespace = "BO4E.BO";
+   Anrede Anrede = 4;
+   string Name1 = 6;
+   string Name2 = 7;
+   string Name3 = 8;
+   bool Gewerbekennzeichnung = 9;
+   string Hrnummer = 10;
+   string Amtsgericht = 11;
+   repeated Kontaktart Kontaktweg = 12 [packed = false];
+   string UmsatzsteuerId = 13;
+   string GlaeubigerId = 14;
+   string EMailAdresse = 15;
+   string Website = 16;
+   repeated Geschaeftspartnerrolle Geschaeftspartnerrolle = 17 [packed = false];
+   Adresse Partneradresse = 18;
+   string Title = 1001;
+}
+enum Geschaeftspartnerrolle {
+   option (.protobuf_net.enumopt).namespace = "BO4E.ENUM";
+   Geschaeftspartnerrolle_LIEFERANT = 0;
+   Geschaeftspartnerrolle_DIENSTLEISTER = 1;
+   Geschaeftspartnerrolle_KUNDE = 2;
+   Geschaeftspartnerrolle_INTERESSENT = 3;
+   Geschaeftspartnerrolle_MARKTPARTNER = 4;
+}
+enum Gueltigkeitstyp {
+   option (.protobuf_net.enumopt).namespace = "BO4E.ENUM";
+   NICHT_IN = 0;
+}
+message Hardware {
+   option (.protobuf_net.msgopt).namespace = "BO4E.COM";
+   Geraetetyp Geraetetyp = 3;
+   string Bezeichnung = 4;
+   Geraeteeigenschaften Geraeteeigenschaften = 1005;
+   string Geraetenummer = 1006;
+   string Geraetereferenz = 1007;
+}
+enum Kalkulationsmethode {
+   option (.protobuf_net.enumopt).namespace = "BO4E.ENUM";
+   KEINE = 0;
+   STAFFELN = 1;
+   ZONEN = 2;
+   VORZONEN_GP = 3;
+   SIGMOID = 4;
+   BLINDARBEIT_GT_50_PROZENT = 5;
+   BLINDARBEIT_GT_40_PROZENT = 6;
+   AP_GP_ZONEN = 7;
+   LP_INSTALL_LEISTUNG = 8;
+   AP_TRANSPORT_ODER_VERTEILNETZ = 9;
+   AP_TRANSPORT_ODER_VERTEILNETZ_ORTSVERTEILNETZ_SIGMOID = 10;
+   LP_JAHRESVERBRAUCH = 11;
+   LP_TRANSPORT_ODER_VERTEILNETZ = 12;
+   LP_TRANSPORT_ODER_VERTEILNETZ_ORTSVERTEILNETZ_SIGMOID = 13;
+   FUNKTIONEN = 14;
+   VERBRAUCH_UEBER_SLP_GRENZE_FUNKTIONSBEZOGEN_WEITERE_BERECHNUNG_ALS_LGK = 15;
+}
+message Katasteradresse {
+   option (.protobuf_net.msgopt).namespace = "BO4E.COM";
+   string GemarkungFlur = 3;
+   string Flurstueck = 4;
+}
+enum Kontaktart {
+   option (.protobuf_net.enumopt).namespace = "BO4E.ENUM";
+   ANSCHREIBEN = 0;
+   TELEFONAT = 1;
+   FAX = 2;
+   E_MAIL = 3;
+   SMS = 4;
+}
+message Konzessionsabgabe {
+   option (.protobuf_net.msgopt).namespace = "BO4E.COM";
+   AbgabeArt Satz = 3;
+   string Kosten = 4;
+   string Kategorie = 5;
+}
+message Kosten {
+   option (.protobuf_net.msgopt).namespace = "BO4E.BO";
+   Kostenklasse Kostenklasse = 4;
+   Zeitraum Gueltigkeit = 5;
+   repeated Betrag SummeKosten = 6;
+   repeated Kostenblock Kostenbloecke = 7;
+   repeated Kostenposition Kostenpositionen = 8;
+}
+message Kostenblock {
+   option (.protobuf_net.msgopt).namespace = "BO4E.COM";
+   string Kostenblockbezeichnung = 3;
+   Betrag SummeKostenblock = 4;
+   repeated Kostenposition Kostenpositionen = 5;
+}
+enum Kostenklasse {
+   option (.protobuf_net.enumopt).namespace = "BO4E.ENUM";
+   Kostenklasse_ZERO = 0;
+}
+message Kostenposition {
+   option (.protobuf_net.msgopt).namespace = "BO4E.COM";
+   string Positionstitel = 3;
+   DateTimeOffset Von = 4;
+   DateTimeOffset Bis = 5;
+   string Artikelbezeichnung = 6;
+   string Artikeldetail = 7;
+   Menge Menge = 8;
+   Menge Zeitmenge = 9;
+   Preis Einzelpreis = 10;
+   Betrag BetragKostenposition = 11;
+}
+enum Landescode {
+   option (.protobuf_net.enumopt).namespace = "BO4E.ENUM";
+   Landescode_AC = 0;
+   Landescode_AD = 1;
+   Landescode_AE = 2;
+   Landescode_AF = 3;
+   Landescode_AG = 4;
+   Landescode_AI = 5;
+   Landescode_AL = 6;
+   Landescode_AM = 7;
+   Landescode_AN = 8;
+   Landescode_AO = 9;
+   Landescode_AQ = 10;
+   Landescode_AR = 11;
+   Landescode_AS = 12;
+   Landescode_AT = 13;
+   Landescode_AU = 14;
+   Landescode_AW = 15;
+   Landescode_AX = 16;
+   Landescode_AZ = 17;
+   Landescode_BA = 18;
+   Landescode_BB = 19;
+   Landescode_BD = 20;
+   Landescode_BE = 21;
+   Landescode_BF = 22;
+   Landescode_BG = 23;
+   Landescode_BH = 24;
+   Landescode_BI = 25;
+   Landescode_BJ = 26;
+   Landescode_BL = 27;
+   Landescode_BM = 28;
+   Landescode_BN = 29;
+   Landescode_BO = 30;
+   Landescode_BQ = 31;
+   Landescode_BR = 32;
+   Landescode_BS = 33;
+   Landescode_BT = 34;
+   Landescode_BU = 35;
+   Landescode_BV = 36;
+   Landescode_BW = 37;
+   Landescode_BY = 38;
+   Landescode_BZ = 39;
+   Landescode_CA = 40;
+   Landescode_CC = 41;
+   Landescode_CD = 42;
+   Landescode_CF = 43;
+   Landescode_CG = 44;
+   Landescode_CH = 45;
+   Landescode_CI = 46;
+   Landescode_CK = 47;
+   Landescode_CL = 48;
+   Landescode_CM = 49;
+   Landescode_CN = 50;
+   Landescode_CO = 51;
+   Landescode_CP = 52;
+   Landescode_CR = 53;
+   Landescode_CS = 54;
+   Landescode_CU = 55;
+   Landescode_CV = 56;
+   Landescode_CW = 57;
+   Landescode_CX = 58;
+   Landescode_CY = 59;
+   Landescode_CZ = 60;
+   Landescode_DE = 61;
+   Landescode_DG = 62;
+   Landescode_DJ = 63;
+   Landescode_DK = 64;
+   Landescode_DM = 65;
+   Landescode_DO = 66;
+   Landescode_DZ = 67;
+   Landescode_EA = 68;
+   Landescode_EC = 69;
+   Landescode_EE = 70;
+   Landescode_EG = 71;
+   Landescode_EH = 72;
+   Landescode_ER = 73;
+   Landescode_ES = 74;
+   Landescode_ET = 75;
+   Landescode_EU = 76;
+   Landescode_FI = 77;
+   Landescode_FJ = 78;
+   Landescode_FK = 79;
+   Landescode_FM = 80;
+   Landescode_FO = 81;
+   Landescode_FR = 82;
+   Landescode_FX = 83;
+   Landescode_GA = 84;
+   Landescode_GB = 85;
+   Landescode_GD = 86;
+   Landescode_GE = 87;
+   Landescode_GF = 88;
+   Landescode_GG = 89;
+   Landescode_GH = 90;
+   Landescode_GI = 91;
+   Landescode_GL = 92;
+   Landescode_GM = 93;
+   Landescode_GN = 94;
+   Landescode_GP = 95;
+   Landescode_GQ = 96;
+   Landescode_GR = 97;
+   Landescode_GS = 98;
+   Landescode_GT = 99;
+   Landescode_GU = 100;
+   Landescode_GW = 101;
+   Landescode_GY = 102;
+   Landescode_HK = 103;
+   Landescode_HM = 104;
+   Landescode_HN = 105;
+   Landescode_HR = 106;
+   Landescode_HT = 107;
+   Landescode_HU = 108;
+   Landescode_IC = 109;
+   Landescode_ID = 110;
+   Landescode_IE = 111;
+   Landescode_IL = 112;
+   Landescode_IM = 113;
+   Landescode_IN = 114;
+   Landescode_IO = 115;
+   Landescode_IQ = 116;
+   Landescode_IR = 117;
+   Landescode_IS = 118;
+   Landescode_IT = 119;
+   Landescode_JE = 120;
+   Landescode_JM = 121;
+   Landescode_JO = 122;
+   Landescode_JP = 123;
+   Landescode_KE = 124;
+   Landescode_KG = 125;
+   Landescode_KH = 126;
+   Landescode_KI = 127;
+   Landescode_KM = 128;
+   Landescode_KN = 129;
+   Landescode_KP = 130;
+   Landescode_KR = 131;
+   Landescode_KW = 132;
+   Landescode_KY = 133;
+   Landescode_KZ = 134;
+   Landescode_LA = 135;
+   Landescode_LB = 136;
+   Landescode_LC = 137;
+   Landescode_LI = 138;
+   Landescode_LK = 139;
+   Landescode_LR = 140;
+   Landescode_LS = 141;
+   Landescode_LT = 142;
+   Landescode_LU = 143;
+   Landescode_LV = 144;
+   Landescode_LY = 145;
+   Landescode_MA = 146;
+   Landescode_MC = 147;
+   Landescode_MD = 148;
+   Landescode_ME = 149;
+   Landescode_MF = 150;
+   Landescode_MG = 151;
+   Landescode_MH = 152;
+   Landescode_MK = 153;
+   Landescode_ML = 154;
+   Landescode_MM = 155;
+   Landescode_MN = 156;
+   Landescode_MO = 157;
+   Landescode_MP = 158;
+   Landescode_MQ = 159;
+   Landescode_MR = 160;
+   Landescode_MS = 161;
+   Landescode_MT = 162;
+   Landescode_MU = 163;
+   Landescode_MV = 164;
+   Landescode_MW = 165;
+   Landescode_MX = 166;
+   Landescode_MY = 167;
+   Landescode_MZ = 168;
+   Landescode_NA = 169;
+   Landescode_NC = 170;
+   Landescode_NE = 171;
+   Landescode_NF = 172;
+   Landescode_NG = 173;
+   Landescode_NI = 174;
+   Landescode_NL = 175;
+   Landescode_NO = 176;
+   Landescode_NP = 177;
+   Landescode_NR = 178;
+   Landescode_NT = 179;
+   Landescode_NU = 180;
+   Landescode_NZ = 181;
+   Landescode_OM = 182;
+   Landescode_PA = 183;
+   Landescode_PE = 184;
+   Landescode_PF = 185;
+   Landescode_PG = 186;
+   Landescode_PH = 187;
+   Landescode_PK = 188;
+   Landescode_PL = 189;
+   Landescode_PM = 190;
+   Landescode_PN = 191;
+   Landescode_PR = 192;
+   Landescode_PS = 193;
+   Landescode_PT = 194;
+   Landescode_PW = 195;
+   Landescode_PY = 196;
+   Landescode_QA = 197;
+   Landescode_RE = 198;
+   Landescode_RO = 199;
+   Landescode_RS = 200;
+   Landescode_RU = 201;
+   Landescode_RW = 202;
+   Landescode_SA = 203;
+   Landescode_SB = 204;
+   Landescode_SC = 205;
+   Landescode_SD = 206;
+   Landescode_SE = 207;
+   Landescode_SF = 208;
+   Landescode_SG = 209;
+   Landescode_SH = 210;
+   Landescode_SI = 211;
+   Landescode_SJ = 212;
+   Landescode_SK = 213;
+   Landescode_SL = 214;
+   Landescode_SM = 215;
+   Landescode_SN = 216;
+   Landescode_SO = 217;
+   Landescode_SR = 218;
+   Landescode_SS = 219;
+   Landescode_ST = 220;
+   Landescode_SU = 221;
+   Landescode_SV = 222;
+   Landescode_SX = 223;
+   Landescode_SY = 224;
+   Landescode_SZ = 225;
+   Landescode_TA = 226;
+   Landescode_TC = 227;
+   Landescode_TD = 228;
+   Landescode_TF = 229;
+   Landescode_TG = 230;
+   Landescode_TJ = 231;
+   Landescode_TK = 232;
+   Landescode_TL = 233;
+   Landescode_TM = 234;
+   Landescode_TN = 235;
+   Landescode_TO = 236;
+   Landescode_TP = 237;
+   Landescode_TR = 238;
+   Landescode_TT = 239;
+   Landescode_TV = 240;
+   Landescode_TW = 241;
+   Landescode_TZ = 242;
+   Landescode_UA = 243;
+   Landescode_UG = 244;
+   Landescode_UK = 245;
+   Landescode_UM = 246;
+   Landescode_US = 247;
+   Landescode_UY = 248;
+   Landescode_UZ = 249;
+   Landescode_VA = 250;
+   Landescode_VC = 251;
+   Landescode_VE = 252;
+   Landescode_VG = 253;
+   Landescode_VI = 254;
+   Landescode_VN = 255;
+   Landescode_VU = 256;
+   Landescode_WF = 257;
+   Landescode_WS = 258;
+   Landescode_XK = 259;
+   Landescode_YE = 260;
+   Landescode_YT = 261;
+   Landescode_YU = 262;
+   Landescode_ZA = 263;
+   Landescode_ZM = 264;
+   Landescode_ZR = 265;
+   Landescode_ZW = 266;
+}
+enum Leistungstyp {
+   option (.protobuf_net.enumopt).namespace = "BO4E.ENUM";
+   ARBEITSPREIS_WIRKARBEIT = 0;
+   LEISTUNGSPREIS_WIRKLEISTUNG = 1;
+   ARBEITSPREIS_BLINDARBEIT_IND = 2;
+   ARBEITSPREIS_BLINDARBEIT_KAP = 3;
+   GRUNDPREIS = 4;
+   MEHRMINDERMENGE = 5;
+   MESSSTELLENBETRIEB = 6;
+   MESSDIENSTLEISTUNG = 7;
+   MESSDIENSTLEISTUNG_INKL_MESSUNG = 8;
+   ABRECHNUNG = 9;
+   KONZESSIONS_ABGABE = 10;
+   KWK_UMLAGE = 11;
+   OFFSHORE_UMLAGE = 12;
+   ABLAV_UMLAGE = 13;
+   REGELENERGIE_UMLAGE = 14;
+   BILANZIERUNG_UMLAGE = 15;
+   AUSLESUNG_ZUSAETZLICH = 16;
+   ABLESUNG_ZUSAETZLICH = 17;
+   ABRECHNUNG_ZUSAETZLICH = 18;
+   SPERRUNG = 19;
+   ENTSPERRUNG = 20;
+   MAHNKOSTEN = 21;
+   INKASSOKOSTEN = 22;
+}
+enum Lokationstyp {
+   option (.protobuf_net.enumopt).namespace = "BO4E.ENUM";
+   MaLo = 0;
+   MeLo = 1;
+}
+message Marktlokation {
+   option (.protobuf_net.msgopt).namespace = "BO4E.BO";
+   string MarktlokationsId = 4; // default value could not be applied: |null|
+   Sparte Sparte = 5;
+   Energierichtung Energierichtung = 6;
+   Bilanzierungsmethode Bilanzierungsmethode = 7;
+   Verbrauchsart Verbrauchsart = 8;
+   bool Unterbrechbar = 9;
+   Netzebene Netzebene = 10;
+   string NetzbetreiberCodeNr = 11;
+   Gebiettyp GebietType = 12;
+   string NetzgebietNr = 13;
+   string Bilanzierungsgebiet = 14;
+   string GrundversorgerCodeNr = 15;
+   Gasqualitaet Gasqualitaet = 16;
+   Geschaeftspartner Endkunde = 17;
+   Adresse Lokationsadresse = 18;
+   Geokoordinaten Geoadresse = 19;
+   Katasteradresse Katasterinformation = 20;
+   repeated Messlokationszuordnung ZugehoerigeMesslokationen = 28;
+   repeated MarktpartnerDetails Marktrollen = 1021;
+   string Regelzone = 1022;
+   string Marktgebiet = 1023;
+   Zeitreihentyp Zeitreihentyp = 1024;
+   repeated Zaehlwerk Zaehlwerke = 1025;
+   repeated Verbrauch Verbrauchsmenge = 1026;
+   repeated Messlokation Messlokationen = 1027;
+}
+message MarktpartnerDetails {
+   option (.protobuf_net.msgopt).namespace = "BO4E.COM";
+   string Rollencodenummer = 3;
+   string Code = 4;
+   Marktrolle marktrolle = 5;
+}
+enum Marktrolle {
+   option (.protobuf_net.enumopt).namespace = "BO4E.ENUM";
+   NB = 0;
+   LF = 1;
+   MSB = 2;
+   MDL = 3;
+   DL = 4;
+   BKV = 5;
+   BIKO = 6;
+   UENB = 7;
+   KUNDE_SELBST_NN = 8;
+   MGV = 9;
+   EIV = 10;
+   RB = 11;
+   KUNDE = 12;
+   INTERESSENT = 13;
+}
+message Menge {
+   option (.protobuf_net.msgopt).namespace = "BO4E.COM";
+   string Wert = 3;
+   Mengeneinheit Einheit = 4;
+}
+enum Mengeneinheit {
+   option (.protobuf_net.enumopt).namespace = "BO4E.ENUM";
+   Mengeneinheit_ZERO = 0;
+   WH = 2;
+   KW = 3;
+   KWH = 2000;
+   MW = 3000;
+   MWH = 2000000;
+   ANZAHL = 7;
+   KUBIKMETER = 11;
+   STUNDE = 13;
+   TAG = 17;
+   MONAT = 19;
+   JAHR = 228;
+   VAR = 23;
+   KVAR = 23000;
+   VARH = 29;
+   KVARH = 29000;
+}
+enum Mengenoperator {
+   option (.protobuf_net.enumopt).namespace = "BO4E.ENUM";
+   KLEINER_ALS = 0;
+   GROESSER_ALS = 1;
+   GLEICH = 2;
+}
+message Messlokation {
+   option (.protobuf_net.msgopt).namespace = "BO4E.BO";
+   string MesslokationsId = 4; // default value could not be applied: |null|
+   Sparte Sparte = 5;
+   Netzebene NetzebeneMessung = 6;
+   string MessgebietNr = 7;
+   string GrundzustaendigerMSBCodeNr = 8;
+   string GrundzustaendigerMSBIMCodeNr = 9;
+   string GrundzustaendigerMDLCodeNr = 10;
+   Adresse Messadresse = 11;
+   Geokoordinaten Geoadresse = 12;
+   Katasteradresse Katasterinformation = 13;
+   repeated Hardware Geraete = 14;
+   repeated Dienstleistung Messdienstleistung = 15;
+   repeated Zaehler Messlokationszaehler = 16;
+   Bilanzierungsmethode Bilanzierungsmethode = 17;
+   bool Abrechnungmessstellenbetriebnna = 1018;
+   repeated MarktpartnerDetails Marktrollen = 1019;
+   Gasqualitaet Gasqualitaet = 1020;
+   string Verlustfaktor = 1021;
+}
+message Messlokationszuordnung {
+   option (.protobuf_net.msgopt).namespace = "BO4E.COM";
+   string MesslokationsId = 3;
+   ArithmetischeOperation Arithmetik = 4;
+   DateTimeOffset GueltigSeit = 5;
+   DateTimeOffset GueltigBis = 6;
+}
+enum Messwerterfassung {
+   option (.protobuf_net.enumopt).namespace = "BO4E.ENUM";
+   FERNAUSLESBAR = 0;
+   MANUELL_AUSGELESENE = 1;
+}
+enum Netzebene {
+   option (.protobuf_net.enumopt).namespace = "BO4E.ENUM";
+   NSP = 0;
+   MSP = 1;
+   HSP = 2;
+   HSS = 3;
+   MSP_NSP_UMSP = 4;
+   HSP_MSP_UMSP = 5;
+   HSS_HSP_UMSP = 6;
+   HD = 7;
+   MD = 8;
+   ND = 9;
+}
+enum NetznutzungsVertrag {
+   option (.protobuf_net.enumopt).namespace = "BO4E.ENUM";
+   KUNDEN_NB = 0;
+   LIEFERANTEN_NB = 1;
+}
+enum Netznutzungsabrechnungsgrundlage {
+   option (.protobuf_net.enumopt).namespace = "BO4E.ENUM";
+   LIEFERSCHEIN = 0;
+   ABWEICHENDE_GRUNDLAGE = 1;
+}
+enum Netznutzungsabrechnungsvariante {
+   option (.protobuf_net.enumopt).namespace = "BO4E.ENUM";
+   ARBEITSPREIS_GRUNDPREIS = 0;
+   ARBEITSPREIS_LEISTUNGSPREIS = 1;
+}
+enum Netznutzungszahler {
+   option (.protobuf_net.enumopt).namespace = "BO4E.ENUM";
+   Netznutzungszahler_KUNDE = 0;
+   Netznutzungszahler_LIEFERANT = 1;
+}
+message Notiz {
+   option (.protobuf_net.msgopt).namespace = "BO4E.COM";
+   string Autor = 3;
+   DateTimeOffset Zeitpunkt = 4;
+   string Inhalt = 5;
+}
+message PositionsAufAbschlag {
+   option (.protobuf_net.msgopt).namespace = "BO4E.COM";
+   string Bezeichnung = 3;
+   string Beschreibung = 4;
+   AufAbschlagstyp AufAbschlagstyp = 5;
+   string AufAbschlagswert = 6;
+   Waehrungseinheit AufAbschlagswaehrung = 7;
+}
+message Preis {
+   option (.protobuf_net.msgopt).namespace = "BO4E.COM";
+   string Wert = 3;
+   Waehrungseinheit Einheit = 4;
+   Mengeneinheit Bezugswert = 5;
+   Preisstatus Status = 6;
+}
+message Preisblatt {
+   option (.protobuf_net.msgopt).namespace = "BO4E.BO";
+   string Bezeichnung = 4;
+   Zeitraum Gueltigkeit = 5;
+   repeated Preisposition Preispositionen = 6;
+}
+message Preisposition {
+   option (.protobuf_net.msgopt).namespace = "BO4E.COM";
+   Kalkulationsmethode Berechnungsmethode = 3;
+   Leistungstyp Leistungstyp = 4;
+   string Leistungsbezeichung = 5;
+   Waehrungseinheit Preiseinheit = 6;
+   Mengeneinheit Bezugsgroesse = 7;
+   Zeiteinheit Zeitbasis = 8;
+   Tarifzeit Tarifzeit = 9;
+   BDEWArtikelnummer BdewArtikelnummer = 10;
+   Bemessungsgroesse Zonungsgroesse = 11;
+   PositionsAufAbschlag ZuAbschlaege = 12;
+   repeated Preisstaffel Preisstaffeln = 13;
+}
+message Preisstaffel {
+   option (.protobuf_net.msgopt).namespace = "BO4E.COM";
+   string Einheitspreis = 3;
+   string StaffelgrenzeVon = 4;
+   string StaffelgrenzeBis = 5;
+   Sigmoidparameter Sigmoidparameter = 6;
+}
+enum Preisstatus {
+   option (.protobuf_net.enumopt).namespace = "BO4E.ENUM";
+   VORLAEUFIG = 0;
+   ENDGUELTIG = 1;
+}
+enum Prioritaet {
+   option (.protobuf_net.enumopt).namespace = "BO4E.ENUM";
+   SEHR_NIEDRIG = 0;
+   NIEDRIG = 1;
+   NORMAL = 2;
+   HOCH = 3;
+   SEHR_HOCH = 4;
+}
+message Rechnung {
+   option (.protobuf_net.msgopt).namespace = "BO4E.BO";
+   string Rechnungstitel = 4;
+   Rechnungsstatus Rechnungsstatus = 5;
+   bool Storno = 6;
+   string Rechnungsnummer = 7;
+   DateTimeOffset Rechnungsdatum = 8;
+   DateTimeOffset Faelligkeitsdatum = 9;
+   Rechnungstyp Rechnungsstyp = 10;
+   string OriginalRechnungsnummer = 11;
+   Zeitraum Rechnungsperiode = 12;
+   Geschaeftspartner Rechnungsersteller = 13;
+   Geschaeftspartner Rechnungsempfaenger = 14;
+   Betrag Gesamtnetto = 15;
+   Betrag Gesamtsteuer = 16;
+   Betrag Gesamtbrutto = 17;
+   Betrag Vorausgezahlt = 18;
+   Betrag RabattBrutto = 19;
+   Betrag Zuzahlen = 20;
+   repeated Steuerbetrag Steuerbetraege = 21;
+   repeated Rechnungsposition Rechnungspositionen = 22;
+}
+message Rechnungsposition {
+   option (.protobuf_net.msgopt).namespace = "BO4E.COM";
+   int32 Positionsnummer = 3;
+   DateTimeOffset LieferungVon = 4;
+   DateTimeOffset LieferungBis = 5;
+   string Positionstext = 6;
+   Mengeneinheit Zeiteinheit = 7;
+   BDEWArtikelnummer Artikelnummer = 8;
+   string LokationsId = 9;
+   Menge PositionsMenge = 10;
+   Menge ZeitbezogeneMenge = 11;
+   Preis Einzelpreis = 12;
+   Betrag TeilsummeNetto = 13;
+   Betrag TeilrabattNetto = 14;
+   Steuerbetrag TeilsummeSteuer = 15;
+   string VertragskontoId = 16;
+   string VertragsId = 1017;
+   RechnungspositionsStatus Status = 1018;
+}
+enum RechnungspositionsStatus {
+   option (.protobuf_net.enumopt).namespace = "BO4E.ENUM";
+   ROH = 0;
+   ROH_AUSGENOMMEN = 1;
+   ABRECHENBAR = 2;
+   ABRECHENBAR_AUSGENOMMEN = 3;
+   ABGERECHNET = 4;
+}
+enum Rechnungsstatus {
+   option (.protobuf_net.enumopt).namespace = "BO4E.ENUM";
+   GEPRUEFT_OK = 0;
+   GEPRUEFT_FEHLERHAFT = 1;
+   GEBUCHT = 2;
+   BEZAHLT = 3;
+}
+enum Rechnungstyp {
+   option (.protobuf_net.enumopt).namespace = "BO4E.ENUM";
+   ABSCHLAGSRECHNUNG = 0;
+   TURNUSRECHNUNG = 1;
+   MONATSRECHNUNG = 2;
+   WIMRECHNUNG = 3;
+   ZWISCHENRECHNUNG = 4;
+   INTEGRIERTE_13TE_RECHNUNG = 5;
+   ZUSAETZLICHE_13TE_RECHNUNG = 6;
+   MEHRMINDERMENGENRECHNUNG = 7;
+}
+message Region {
+   option (.protobuf_net.msgopt).namespace = "BO4E.BO";
+   string Bezeichnung = 4;
+   repeated Regionskriterium PositivListe = 5;
+   repeated Regionskriterium NegativListe = 6;
+}
+message Regionskriterium {
+   option (.protobuf_net.msgopt).namespace = "BO4E.COM";
+   Gueltigkeitstyp Gueltigkeitstyp = 3;
+   Sparte Sparte = 4;
+   Mengenoperator Mengenoperator = 5;
+   Regionskriteriumtyp Regionskriteriumtyp = 6;
+   string Wert = 7;
+}
+enum Regionskriteriumtyp {
+   option (.protobuf_net.enumopt).namespace = "BO4E.ENUM";
+   BUNDESLANDKENNZIFFER = 0;
+   BUNDESLAND_NAME = 1;
+   MARKTGEBIET_NUMMER = 2;
+   MARKTGEBIET_NAME = 3;
+   REGELGEBIET_NUMMER = 4;
+   REGELGEBIET_NAME = 5;
+   NETZBETREIBER_NUMMER = 6;
+   NETZBETREIBER_NAME = 7;
+   BILANZIERUNGS_GEBIET_NUMMER = 8;
+   MSB_NUMMER = 9;
+   MSB_NAME = 10;
+   VERSORGER_NUMMER = 11;
+   VERSORGER_NAME = 12;
+   GRUNDVERSORGER_NUMMER = 13;
+   GRUNDVERSORGER_NAME = 14;
+   KREIS_NAME = 15;
+   KREISKENNZIFFER = 16;
+   GEMEINDE_NAME = 17;
+   GEMEINDEKENNZIFFER = 18;
+   POSTLEITZAHL = 19;
+   ORT = 20;
+   EINWOHNERZAHL_GEMEINDE = 21;
+   EINWOHNERZAHL_ORT = 22;
+   KM_UMKREIS = 23;
+   BUNDESWEIT = 24;
+}
+message Rufnummer {
+   option (.protobuf_net.msgopt).namespace = "BO4E.COM";
+   Rufnummernart Nummerntyp = 3;
+   string rufnummer = 4;
+}
+enum Rufnummernart {
+   option (.protobuf_net.enumopt).namespace = "BO4E.ENUM";
+   RUF_ZENTRALE = 0;
+   FAX_ZENTRALE = 1;
+   SAMMELRUF = 2;
+   SAMMELFAX = 3;
+   ABTEILUNGRUF = 4;
+   ABTEILUNGFAX = 5;
+   RUF_DURCHWAHL = 6;
+   FAX_DURCHWAHL = 7;
+   MOBIL_NUMMER = 8;
+}
+enum Schwachlastfaehig {
+   option (.protobuf_net.enumopt).namespace = "BO4E.ENUM";
+   NICHT_SCHWACHLASTFAEHIG = 0;
+   SCHWACHLASTFAEHIG = 1;
+}
+message Sigmoidparameter {
+   option (.protobuf_net.msgopt).namespace = "BO4E.COM";
+   string A = 3;
+   string B = 4;
+   string C = 5;
+   string D = 6;
+}
+enum Sparte {
+   option (.protobuf_net.enumopt).namespace = "BO4E.ENUM";
+   Sparte_STROM = 0;
+   Sparte_GAS = 1;
+   Sparte_FERNWAERME = 2;
+   Sparte_NAHWAERME = 3;
+   Sparte_WASSER = 4;
+   Sparte_ABWASSER = 5;
+}
+message Steuerbetrag {
+   option (.protobuf_net.msgopt).namespace = "BO4E.COM";
+   Steuerkennzeichen Steuerkennzeichen = 3;
+   string Basiswert = 4;
+   string Steuerwert = 5;
+   Waehrungscode Waehrung = 6;
+}
+enum Steuerkennzeichen {
+   option (.protobuf_net.enumopt).namespace = "BO4E.ENUM";
+   UST_19 = 0;
+   UST_7 = 1;
+   VST_0 = 2;
+   VST_19 = 3;
+   VST_7 = 4;
+   RCV = 5;
+}
+enum Tarifart {
+   option (.protobuf_net.enumopt).namespace = "BO4E.ENUM";
+   EINTARIF = 0;
+   ZWEITARIF = 1;
+   MEHRTARIF = 2;
+   SMART_METER = 3;
+   LEISTUNGSGEMESSEN = 4;
+}
+enum Tarifzeit {
+   option (.protobuf_net.enumopt).namespace = "BO4E.ENUM";
+   TZ_STANDARD = 0;
+   TZ_HT = 1;
+   TZ_NT = 2;
+}
+enum Titel {
+   option (.protobuf_net.enumopt).namespace = "BO4E.ENUM";
+   DR = 0;
+   PROF = 1;
+   PROF_DR = 2;
+}
+enum Unterbrechbarkeit {
+   option (.protobuf_net.enumopt).namespace = "BO4E.ENUM";
+   UV = 0;
+   NUV = 1;
+}
+message Unterschrift {
+   option (.protobuf_net.msgopt).namespace = "BO4E.COM";
+   string Ort = 3;
+   DateTimeOffset Datum = 4;
+   string Name = 5;
+}
+message Verbrauch {
+   option (.protobuf_net.msgopt).namespace = "BO4E.COM";
+   .google.protobuf.Timestamp Startdatum = 3;
+   .google.protobuf.Timestamp Enddatum = 4;
+   Wertermittlungsverfahren Wertermittlungsverfahren = 5;
+   string Obiskennzahl = 6;
+   string Wert = 7;
+   Mengeneinheit Einheit = 8;
+   Verbrauchsmengetyp Type = 9;
+}
+enum Verbrauchsart {
+   option (.protobuf_net.enumopt).namespace = "BO4E.ENUM";
+   KL = 0;
+   KLW = 1;
+   KLWS = 2;
+   W = 3;
+   WS = 4;
+}
+enum Verbrauchsmengetyp {
+   option (.protobuf_net.enumopt).namespace = "BO4E.ENUM";
+   ARBEITLEISTUNGTAGESPARAMETERABHMALO = 0;
+   VERANSCHLAGTEJAHRESMENGE = 1;
+   TUMKUNDENWERT = 2;
+}
+message Vertrag {
+   option (.protobuf_net.msgopt).namespace = "BO4E.BO";
+   string Vertragsnummer = 4;
+   string Beschreibung = 5;
+   Vertragsart Vertragsart = 6;
+   Vertragstatus Vertragstatus = 7;
+   Sparte Sparte = 8;
+   DateTimeOffset Vertragsbeginn = 9;
+   DateTimeOffset Vertragsende = 10;
+   Geschaeftspartner Vertragspartner1 = 11;
+   Geschaeftspartner Vertragspartner2 = 12;
+   repeated Unterschrift Unterzeichnervp1 = 13;
+   repeated Unterschrift Unterzeichnervp2 = 14;
+   Vertragskonditionen Vertragskonditionen = 15;
+   repeated Vertragsteil Vertragsteile = 16;
+   string Gemeinderabatt = 1017;
+   Geschaeftspartner Korrespondenzpartner = 1018;
+}
+enum Vertragsart {
+   option (.protobuf_net.enumopt).namespace = "BO4E.ENUM";
+   ENERGIELIEFERVERTRAG = 0;
+   NETZNUTZUNGSVERTRAG = 1;
+   BILANZIERUNGSVERTRAG = 2;
+   MESSSTELLENBETRIEBSVERTRAG = 3;
+   BUENDELVERTRAG = 4;
+}
+message Vertragskonditionen {
+   option (.protobuf_net.msgopt).namespace = "BO4E.COM";
+   string Beschreibung = 3;
+   int32 AnzahlAbschlaege = 4;
+   Zeitraum Vertragslaufzeit = 5;
+   Zeitraum Kuendigungsfrist = 6;
+   Zeitraum Vertragsverlaengerung = 7;
+   Zeitraum Abschlagszyklus = 8;
+   DateTimeOffset StartAbrechnungsjahr = 1009;
+   Zeitraum GeplanteTurnusablesung = 1010;
+   int32 TurnusablesungIntervall = 1011;
+   Zeitraum Netznutzungsabrechnung = 1012;
+   int32 NetznutzungsabrechnungIntervall = 1013;
+   bool Haushaltskunde = 1014;
+   NetznutzungsVertrag Netznutzungsvertrag = 1015;
+   Netznutzungszahler Netznutzungszahler = 1016;
+   Netznutzungsabrechnungsvariante Netznutzungsabrechnungsvariante = 1017;
+   Netznutzungsabrechnungsgrundlage Netznutzungsabrechnungsgrundlage = 1018;
+}
+enum Vertragstatus {
+   option (.protobuf_net.enumopt).namespace = "BO4E.ENUM";
+   Vertragstatus_IN_ARBEIT = 0;
+   Vertragstatus_UEBERMITTELT = 1;
+   Vertragstatus_ANGENOMMEN = 2;
+   Vertragstatus_AKTIV = 3;
+   Vertragstatus_ABGELEHNT = 4;
+   Vertragstatus_WIDERRUFEN = 5;
+   Vertragstatus_STORNIERT = 6;
+   Vertragstatus_GEKUENDIGT = 7;
+   Vertragstatus_BEENDET = 8;
+}
+message Vertragsteil {
+   option (.protobuf_net.msgopt).namespace = "BO4E.COM";
+   DateTimeOffset Vertragsteilbeginn = 3;
+   DateTimeOffset Vertragsteilende = 4;
+   string Lokation = 5;
+   Menge VertraglichFixierteMenge = 6;
+   Menge MinimaleAbnahmemenge = 7;
+   Menge MaximaleAbnahmemenge = 8;
+   Menge Jahresverbrauchsprognose = 1009;
+   Menge Kundenwert = 1010;
+   string Verbrauchsaufteilung = 1011;
+}
+enum Verwendungszweck {
+   option (.protobuf_net.enumopt).namespace = "BO4E.ENUM";
+   NETZNUTZUNGSABRECHNUNG = 0;
+   BILANZKREISABRECHNUNG = 1;
+   MEHRMINDERMBENGENABRECHNUNG = 2;
+   ENDKUNDENABRECHNUNG = 3;
+}
+enum Waehrungscode {
+   option (.protobuf_net.enumopt).namespace = "BO4E.ENUM";
+   AFN = 0;
+   ALL = 1;
+   AMD = 2;
+   ANG = 3;
+   AOA = 4;
+   ARS = 5;
+   AUD = 6;
+   AWG = 7;
+   AZN = 8;
+   BAM = 9;
+   BBD = 10;
+   BDT = 11;
+   BGN = 12;
+   BHD = 13;
+   BIF = 14;
+   BMD = 15;
+   BND = 16;
+   BOB = 17;
+   BOV = 18;
+   BRL = 19;
+   BSD = 20;
+   BTN = 21;
+   BWP = 22;
+   BYN = 23;
+   BYR = 24;
+   BZD = 25;
+   CAD = 26;
+   CDF = 27;
+   CHE = 28;
+   CHF = 29;
+   CHW = 30;
+   CLF = 31;
+   CLP = 32;
+   CNY = 33;
+   COP = 34;
+   COU = 35;
+   CRC = 36;
+   CUC = 37;
+   CUP = 38;
+   CVE = 39;
+   CZK = 40;
+   DJF = 41;
+   DKK = 42;
+   DOP = 43;
+   DZD = 44;
+   EGP = 45;
+   ERN = 46;
+   ETB = 47;
+   EUR = 48;
+   FJD = 49;
+   FKP = 50;
+   GBP = 51;
+   GEL = 52;
+   GHS = 53;
+   GIP = 54;
+   GMD = 55;
+   GNF = 56;
+   GTQ = 57;
+   GYD = 58;
+   HKD = 59;
+   HNL = 60;
+   HRK = 61;
+   HTG = 62;
+   HUF = 63;
+   IDR = 64;
+   ILS = 65;
+   INR = 66;
+   IQD = 67;
+   IRR = 68;
+   ISK = 69;
+   JMD = 70;
+   JOD = 71;
+   JPY = 72;
+   KES = 73;
+   KGS = 74;
+   KHR = 75;
+   KMF = 76;
+   KPW = 77;
+   KRW = 78;
+   KWD = 79;
+   KYD = 80;
+   KZT = 81;
+   LAK = 82;
+   LBP = 83;
+   LKR = 84;
+   LRD = 85;
+   LSL = 86;
+   LTL = 87;
+   LYD = 88;
+   MAD = 89;
+   Waehrungscode_MDL = 90;
+   MGA = 91;
+   MKD = 92;
+   MMK = 93;
+   MNT = 94;
+   MOP = 95;
+   MRO = 96;
+   MUR = 97;
+   MVR = 98;
+   MWK = 99;
+   MXN = 100;
+   MXV = 101;
+   MYR = 102;
+   MZN = 103;
+   NAD = 104;
+   NGN = 105;
+   NIO = 106;
+   NOK = 107;
+   NPR = 108;
+   NZD = 109;
+   OMR = 110;
+   PAB = 111;
+   PEN = 112;
+   PGK = 113;
+   PHP = 114;
+   PKR = 115;
+   PLN = 116;
+   PYG = 117;
+   QAR = 118;
+   RON = 119;
+   RSD = 120;
+   RUB = 121;
+   RUR = 122;
+   RWF = 123;
+   SAR = 124;
+   SBD = 125;
+   SCR = 126;
+   SDG = 127;
+   SEK = 128;
+   SGD = 129;
+   SHP = 130;
+   SLL = 131;
+   SOS = 132;
+   SRD = 133;
+   SSP = 134;
+   STD = 135;
+   SVC = 136;
+   SYP = 137;
+   SZL = 138;
+   THB = 139;
+   TJS = 140;
+   TMT = 141;
+   TND = 142;
+   TOP = 143;
+   TRY = 144;
+   TTD = 145;
+   TWD = 146;
+   TZS = 147;
+   UAH = 148;
+   UGX = 149;
+   USD = 150;
+   USN = 151;
+   USS = 152;
+   UYI = 153;
+   UYU = 154;
+   UZS = 155;
+   VEF = 156;
+   VND = 157;
+   VUV = 158;
+   WST = 159;
+   XAF = 160;
+   XAG = 161;
+   XAU = 162;
+   XBA = 163;
+   XBB = 164;
+   XBC = 165;
+   XBD = 166;
+   XCD = 167;
+   XDR = 168;
+   XOF = 169;
+   XPD = 170;
+   XPF = 171;
+   XPT = 172;
+   XSU = 173;
+   XTS = 174;
+   XUA = 175;
+   XXX = 176;
+   YER = 177;
+   ZAR = 178;
+   ZMW = 179;
+   ZWL = 180;
+}
+enum Waehrungseinheit {
+   option (.protobuf_net.enumopt).namespace = "BO4E.ENUM";
+   Waehrungseinheit_EUR = 0;
+   CT = 1;
+}
+enum Waermenutzung {
+   option (.protobuf_net.enumopt).namespace = "BO4E.ENUM";
+   SPEICHERHEIZUNG = 0;
+   WAERMEPUMPE = 1;
+   DIREKTHEIZUNG = 2;
+}
+enum Wertermittlungsverfahren {
+   option (.protobuf_net.enumopt).namespace = "BO4E.ENUM";
+   PROGNOSE = 0;
+   MESSUNG = 1;
+}
+message Zaehler {
+   option (.protobuf_net.msgopt).namespace = "BO4E.BO";
+   string Zaehlernummer = 4;
+   Sparte Sparte = 5;
+   Zaehlerauspraegung Zaehlerauspraegung = 6;
+   Zaehlertyp Zaehlertyp = 7;
+   Tarifart Tarifart = 8;
+   string Zaehlerkonstante = 9;
+   DateTimeOffset EichungBis = 10;
+   DateTimeOffset LetzteEichung = 11;
+   repeated Zaehlwerk Zaehlwerke = 12;
+   Geschaeftspartner Zaehlerhersteller = 13;
+   string Gateway = 1014;
+   Fernschaltung Fernschaltung = 1015;
+   Messwerterfassung Messwerterfassung = 1016;
+}
+enum Zaehlerauspraegung {
+   option (.protobuf_net.enumopt).namespace = "BO4E.ENUM";
+   EINRICHTUNGSZAEHLER = 0;
+   ZWEIRICHTUNGSZAEHLER = 1;
+}
+enum Zaehlertyp {
+   option (.protobuf_net.enumopt).namespace = "BO4E.ENUM";
+   DREHSTROMZAEHLER = 0;
+   BALGENGASZAEHLER = 1;
+   DREHKOLBENZAEHLER = 2;
+   SMARTMETER = 3;
+   LEISTUNGSZAEHLER = 4;
+   MAXIMUMZAEHLER = 5;
+   TURBINENRADGASZAEHLER = 6;
+   ULTRASCHALLGASZAEHLER = 7;
+   WECHSELSTROMZAEHLER = 8;
+}
+message Zaehlwerk {
+   option (.protobuf_net.msgopt).namespace = "BO4E.COM";
+   string ZaehlwerkId = 3;
+   string Bezeichnung = 4;
+   Energierichtung Richtung = 5;
+   string ObisKennzahl = 6;
+   string Wandlerfaktor = 7;
+   Mengeneinheit Einheit = 8;
+   string Kennzahl = 1009;
+   Schwachlastfaehig Schwachlastfaehig = 1010;
+   repeated Verwendungszweck Verwendungszwecke = 1011 [packed = false];
+   Verbrauchsart Verbrauchsart = 1012;
+   Unterbrechbarkeit Unterbrechbarkeit = 1013;
+   Waermenutzung Waermenutzung = 1014;
+   Konzessionsabgabe Konzessionsabgabe = 1015;
+   bool Steuerbefreit = 1016;
+   int32 Vorkommastelle = 1017;
+   int32 Nachkommastelle = 1018;
+   bool Abrechnungsrelevant = 1019;
+}
+enum Zeiteinheit {
+   option (.protobuf_net.enumopt).namespace = "BO4E.ENUM";
+   Zeiteinheit_SEKUNDE = 0;
+   Zeiteinheit_MINUTE = 1;
+   Zeiteinheit_STUNDE = 2;
+   Zeiteinheit_VIERTEL_STUNDE = 3;
+   Zeiteinheit_TAG = 4;
+   Zeiteinheit_WOCHE = 5;
+   Zeiteinheit_MONAT = 6;
+   Zeiteinheit_QUARTAL = 7;
+   Zeiteinheit_HALBJAHR = 8;
+   Zeiteinheit_JAHR = 9;
+}
+message Zeitraum {
+   option (.protobuf_net.msgopt).namespace = "BO4E.COM";
+   Zeiteinheit Einheit = 3;
+   string Dauer = 4;
+   DateTimeOffset Startdatum = 5;
+   DateTimeOffset Enddatum = 6;
+}
+enum Zeitreihentyp {
+   option (.protobuf_net.enumopt).namespace = "BO4E.ENUM";
+   EGS = 0;
+   LGS = 1;
+   NZR = 2;
+   SES = 3;
+   SLS = 4;
+   TES = 5;
+   TLS = 6;
+}
+message Zustaendigkeit {
+   option (.protobuf_net.msgopt).namespace = "BO4E.COM";
+   string Jobtitel = 3;
+   string Abteilung = 4;
+   string Themengebiet = 5;
+}

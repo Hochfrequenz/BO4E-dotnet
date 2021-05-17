@@ -1,35 +1,38 @@
-﻿using BO4E.BO;
-
+﻿using System;
+using System.Text;
+using BO4E.BO;
 using Newtonsoft.Json;
-
 using Sodium;
 
-using System;
-using System.Text;
-
-namespace BO4E.Extensions.Encryption
+namespace BO4E.Encryption
 {
+    /// <summary>
+    /// An encrypter using symmetric encryption.
+    /// </summary>
     public class SymmetricEncrypter : Encrypter
     {
-        private readonly byte[] secretKey;
+        private readonly byte[] _secretKey;
 
         /// <summary>
-        /// pass the secret encryption key to the constructor
+        ///     pass the secret encryption key to the constructor
         /// </summary>
         /// <param name="secretKey">secret key</param>
         public SymmetricEncrypter(byte[] secretKey)
         {
-            this.secretKey = new byte[secretKey.Length];
-            secretKey.CopyTo(this.secretKey, 0);
+            _secretKey = new byte[secretKey.Length];
+            secretKey.CopyTo(_secretKey, 0);
         }
-        /// <summary>
-        /// pass the secret key as base64 encoded string to the constructor
-        /// </summary>
-        /// <param name="secretKey">secret key as base64 encoded string</param>
-        public SymmetricEncrypter(string secretKey) : this(Convert.FromBase64String(secretKey)) { }
 
         /// <summary>
-        /// Encrypt a given plain text and add associated data.
+        ///     pass the secret key as base64 encoded string to the constructor
+        /// </summary>
+        /// <param name="secretKey">secret key as base64 encoded string</param>
+        public SymmetricEncrypter(string secretKey) : this(Convert.FromBase64String(secretKey))
+        {
+        }
+
+        /// <summary>
+        ///     Encrypt a given plain text and add associated data.
         /// </summary>
         /// <param name="plainText">UTF-8 encoded string containing the plain text to be encrypted</param>
         /// <param name="associatedDataString">max. 16 character long string (not secret)</param>
@@ -37,40 +40,41 @@ namespace BO4E.Extensions.Encryption
         /// <returns>the encrypted data as Base64 encoded string</returns>
         private string Encrypt(string plainText, string associatedDataString, byte[] nonce)
         {
-            byte[] plainBytes = Encoding.UTF8.GetBytes(plainText);
-            byte[] adBytes = Encoding.UTF8.GetBytes(associatedDataString);
-            byte[] cipherBytes = SecretAeadChaCha20Poly1305.Encrypt(plainBytes, nonce, secretKey, adBytes);
-            string cipherString = Convert.ToBase64String(cipherBytes);
+            var plainBytes = Encoding.UTF8.GetBytes(plainText);
+            var adBytes = Encoding.UTF8.GetBytes(associatedDataString);
+            var cipherBytes = SecretAeadChaCha20Poly1305.Encrypt(plainBytes, nonce, _secretKey, adBytes);
+            var cipherString = Convert.ToBase64String(cipherBytes);
             return cipherString;
         }
 
         /// <summary>
-        /// Encrypt a given plain text and add associated data.
+        ///     Encrypt a given plain text and add associated data.
         /// </summary>
         /// <param name="plainText">UTF-8 encoded string containing the plain text to be encrypted</param>
         /// <param name="associatedDataString">max. 16 character long string (not secret)</param>
         /// <returns>Tuple of (cipherText, nonce); both as base64 encoded string</returns>
         public (string, string) Encrypt(string plainText, string associatedDataString)
         {
-            byte[] nonce = SecretAeadChaCha20Poly1305.GenerateNonce();
+            var nonce = SecretAeadChaCha20Poly1305.GenerateNonce();
             return (Encrypt(plainText, associatedDataString, nonce), Convert.ToBase64String(nonce));
         }
 
         /// <summary>
-        /// Encrypt a Business Object
+        ///     Encrypt a Business Object
         /// </summary>
         /// <param name="plainObject">unencrypted Business Object</param>
         /// <param name="associatedDataString">max. 16 character long string (not secret)</param>
         /// <returns>an encrypted Business Object</returns>
         public EncryptedObjectAEAD Encrypt(BusinessObject plainObject, string associatedDataString)
         {
-            string plainText = JsonConvert.SerializeObject(plainObject, settings: encryptionSerializerSettings);
-            byte[] nonce = SecretAeadChaCha20Poly1305.GenerateNonce();
-            string cipherString = Encrypt(plainText, associatedDataString, nonce);
+            var plainText = JsonConvert.SerializeObject(plainObject, encryptionSerializerSettings);
+            var nonce = SecretAeadChaCha20Poly1305.GenerateNonce();
+            var cipherString = Encrypt(plainText, associatedDataString, nonce);
             return new EncryptedObjectAEAD(cipherString, associatedDataString, Convert.ToBase64String(nonce));
         }
+
         /// <summary>
-        /// Decrypts a given cipher texts and checks if it corresponds to the associated data.
+        ///     Decrypts a given cipher texts and checks if it corresponds to the associated data.
         /// </summary>
         /// <param name="cipherText">Base64 encoded encrypted bytes</param>
         /// <param name="associatedDataString">max. 16 character long string (not secret)</param>
@@ -78,52 +82,66 @@ namespace BO4E.Extensions.Encryption
         /// <returns>decrypted as an UTF-8 encoded string</returns>
         private string Decrypt(string cipherText, string associatedDataString, byte[] nonce)
         {
-            byte[] cipherBytes = Convert.FromBase64String(cipherText);
-            byte[] adBytes = Encoding.UTF8.GetBytes(associatedDataString);
-            byte[] plainBytes = SecretAeadChaCha20Poly1305.Decrypt(cipherBytes, nonce, secretKey, adBytes);
+            var cipherBytes = Convert.FromBase64String(cipherText);
+            var adBytes = Encoding.UTF8.GetBytes(associatedDataString);
+            var plainBytes = SecretAeadChaCha20Poly1305.Decrypt(cipherBytes, nonce, _secretKey, adBytes);
             return Encoding.UTF8.GetString(plainBytes);
         }
 
-
+        /// <summary>
+        /// <inheritdoc cref="Encrypter.Decrypt"/>
+        /// </summary>
+        /// <param name="cipherText"></param>
+        /// <param name="associatedData"></param>
+        /// <param name="nonceString"></param>
+        /// <returns></returns>
         public string Decrypt(string cipherText, string associatedData, string nonceString)
         {
-            byte[] nonceBytes = Convert.FromBase64String(nonceString);
+            var nonceBytes = Convert.FromBase64String(nonceString);
             return Decrypt(cipherText, associatedData, nonceBytes);
         }
 
+        /// <summary>
+        /// <inheritdoc cref="Encrypter.Decrypt"/>
+        /// </summary>
+        /// <param name="encryptedObject"></param>
+        /// <returns></returns>
         public override BusinessObject Decrypt(EncryptedObject encryptedObject)
         {
-            EncryptedObjectAEAD eo = (EncryptedObjectAEAD)encryptedObject;//(EncryptedObjectAEAD)BoMapper.MapObject("EncryptedObjectAEAD", JObject.FromObject(encryptedObject));
-            if (eo == null)
-            {
-                return null;
-            }
-            string plainString = Decrypt(eo.CipherText, eo.AssociatedData, eo.Nonce);
-            return JsonConvert.DeserializeObject<BusinessObject>(plainString, settings: encryptionSerializerSettings);
+            var
+                eo = (EncryptedObjectAEAD)encryptedObject; //(EncryptedObjectAEAD)BoMapper.MapObject("EncryptedObjectAEAD", JObject.FromObject(encryptedObject));
+            if (eo == null) return null;
+            var plainString = Decrypt(eo.CipherText, eo.AssociatedData, eo.Nonce);
+            return JsonConvert.DeserializeObject<BusinessObject>(plainString, encryptionSerializerSettings);
         }
 
+        /// <summary>
+        /// <inheritdoc cref="Encrypter.Decrypt{T}"/>
+        /// </summary>
+        /// <param name="encryptedObject"></param>
+        /// <typeparam name="T"></typeparam>
+        /// <returns></returns>
         public override T Decrypt<T>(EncryptedObject encryptedObject)
         {
-            EncryptedObjectAEAD eo = (EncryptedObjectAEAD)encryptedObject;
-            if (eo == null)
-            {
-                return (T)null;
-            }
-            string plainString = Decrypt(eo.CipherText, eo.AssociatedData, eo.Nonce);
-            return JsonConvert.DeserializeObject<T>(plainString, settings: encryptionSerializerSettings);
+            var eo = (EncryptedObjectAEAD)encryptedObject;
+            if (eo == null) return null;
+            var plainString = Decrypt(eo.CipherText, eo.AssociatedData, eo.Nonce);
+            return JsonConvert.DeserializeObject<T>(plainString, encryptionSerializerSettings);
         }
 
+        /// <summary>
+        /// <inheritdoc cref="Encrypter.Dispose"/>
+        /// </summary>
         public override void Dispose()
         {
-            if (secretKey != null)
-            {
-                for (int i = 0; i < secretKey.Length; i++)
-                {
-                    secretKey[i] = 0x0;
-                }
-            }
+            if (_secretKey != null)
+                for (var i = 0; i < _secretKey.Length; i++)
+                    _secretKey[i] = 0x0;
         }
 
+        /// <summary>
+        /// <inheritdoc cref="Encrypter.Dispose"/>
+        /// </summary>
         ~SymmetricEncrypter()
         {
             Dispose();

@@ -1,22 +1,23 @@
 ﻿using System;
 using BO4E.COM;
+using BO4E.ENUM;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace TestBO4E
 {
     [TestClass]
-    public class TestCOMValidity
+    public class TestComValidity
     {
         [TestMethod]
         public void TestVerbrauch()
         {
-            Verbrauch v1 = new Verbrauch();
+            var v1 = new Verbrauch();
             Assert.IsFalse(v1.IsValid());
-            Verbrauch v2 = new Verbrauch
+            var v2 = new Verbrauch
             {
                 Startdatum = new DateTime(),
                 Enddatum = new DateTime(),
-                Einheit = BO4E.ENUM.Mengeneinheit.ANZAHL,
+                Einheit = Mengeneinheit.ANZAHL,
                 Wert = (decimal)123.456,
                 Obiskennzahl = "asd"
             };

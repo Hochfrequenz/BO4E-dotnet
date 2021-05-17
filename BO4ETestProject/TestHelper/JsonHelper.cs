@@ -5,45 +5,39 @@ public static class JsonHelper
 {
     public static JToken RemoveEmptyChildren(JToken token)
     {
-        if (token.Type == JTokenType.Object)
+        switch (token.Type)
         {
-            JObject copy = new JObject();
-            foreach (JProperty prop in token.Children<JProperty>())
-            {
-                JToken child = prop.Value;
-                if (child.HasValues)
+            case JTokenType.Object:
                 {
-                    child = RemoveEmptyChildren(child);
+                    var copy = new JObject();
+                    foreach (var prop in token.Children<JProperty>())
+                    {
+                        var child = prop.Value;
+                        if (child.HasValues) child = RemoveEmptyChildren(child);
+                        if (!IsEmpty(child)) copy.Add(prop.Name, child);
+                    }
+
+                    return copy;
                 }
-                if (!IsEmpty(child))
+            case JTokenType.Array:
                 {
-                    copy.Add(prop.Name, child);
+                    var copy = new JArray();
+                    foreach (var item in token.Children())
+                    {
+                        var child = item;
+                        if (child.HasValues) child = RemoveEmptyChildren(child);
+                        if (!IsEmpty(child)) copy.Add(child);
+                    }
+
+                    return copy;
                 }
-            }
-            return copy;
+            default:
+                return token;
         }
-        else if (token.Type == JTokenType.Array)
-        {
-            JArray copy = new JArray();
-            foreach (JToken item in token.Children())
-            {
-                JToken child = item;
-                if (child.HasValues)
-                {
-                    child = RemoveEmptyChildren(child);
-                }
-                if (!IsEmpty(child))
-                {
-                    copy.Add(child);
-                }
-            }
-            return copy;
-        }
-        return token;
     }
 
     public static bool IsEmpty(JToken token)
     {
-        return (token.Type == JTokenType.Null);
+        return token.Type == JTokenType.Null;
     }
 }

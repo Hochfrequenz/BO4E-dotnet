@@ -1,11 +1,8 @@
-﻿{
+{
   "$schema": "http://json-schema.org/draft-07/schema#",
   "definitions": {
     "PositionsAufAbschlag": {
-      "type": [
-        "object",
-        "null"
-      ],
+      "type": ["object", "null"],
       "properties": {
         "bezeichnung": {
           "type": "string"
@@ -15,26 +12,17 @@
         },
         "aufAbschlagstyp": {
           "type": "string",
-          "enum": [
-            "RELATIV",
-            "ABSOLUT"
-          ]
+          "enum": ["RELATIV", "ABSOLUT"]
         },
         "aufAbschlagswert": {
           "type": "number"
         },
         "aufAbschlagswaehrung": {
           "type": "string",
-          "enum": [
-            "EUR",
-            "CT"
-          ]
+          "enum": ["EUR", "CT"]
         },
         "guid": {
-          "type": [
-            "string",
-            "null"
-          ]
+          "type": ["string", "null"]
         }
       },
       "required": [
@@ -46,10 +34,7 @@
       ]
     },
     "Preisposition": {
-      "type": [
-        "object",
-        "null"
-      ],
+      "type": ["object", "null"],
       "properties": {
         "berechnungsmethode": {
           "type": "string",
@@ -105,10 +90,7 @@
         },
         "preiseinheit": {
           "type": "string",
-          "enum": [
-            "EUR",
-            "CT"
-          ]
+          "enum": ["EUR", "CT"]
         },
         "bezugsgroesse": {
           "type": "string",
@@ -131,10 +113,7 @@
           ]
         },
         "zeitbasis": {
-          "type": [
-            "string",
-            "null"
-          ],
+          "type": ["string", "null"],
           "enum": [
             null,
             "SEKUNDE",
@@ -150,22 +129,11 @@
           ]
         },
         "tarifzeit": {
-          "type": [
-            "string",
-            "null"
-          ],
-          "enum": [
-            null,
-            "TZ_STANDARD",
-            "TZ_HT",
-            "TZ_NT"
-          ]
+          "type": ["string", "null"],
+          "enum": [null, "TZ_STANDARD", "TZ_HT", "TZ_NT"]
         },
         "bdewArtikelnummer": {
-          "type": [
-            "string",
-            "null"
-          ],
+          "type": ["string", "null"],
           "enum": [
             null,
             "LEISTUNG",
@@ -216,10 +184,7 @@
           ]
         },
         "zonungsgroesse": {
-          "type": [
-            "string",
-            "null"
-          ],
+          "type": ["string", "null"],
           "enum": [
             null,
             "WIRKARBEIT_EL",
@@ -246,10 +211,7 @@
           }
         },
         "guid": {
-          "type": [
-            "string",
-            "null"
-          ]
+          "type": ["string", "null"]
         }
       },
       "required": [
@@ -262,10 +224,7 @@
       ]
     },
     "Preisstaffel": {
-      "type": [
-        "object",
-        "null"
-      ],
+      "type": ["object", "null"],
       "properties": {
         "einheitspreis": {
           "type": "number"
@@ -280,23 +239,13 @@
           "$ref": "#/definitions/Sigmoidparameter"
         },
         "guid": {
-          "type": [
-            "string",
-            "null"
-          ]
+          "type": ["string", "null"]
         }
       },
-      "required": [
-        "einheitspreis",
-        "staffelgrenzeVon",
-        "staffelgrenzeBis"
-      ]
+      "required": ["einheitspreis", "staffelgrenzeVon", "staffelgrenzeBis"]
     },
     "Sigmoidparameter": {
-      "type": [
-        "object",
-        "null"
-      ],
+      "type": ["object", "null"],
       "properties": {
         "A": {
           "type": "number"
@@ -311,27 +260,16 @@
           "type": "number"
         },
         "guid": {
-          "type": [
-            "string",
-            "null"
-          ]
+          "type": ["string", "null"]
         }
       },
-      "required": [
-        "A",
-        "B",
-        "C",
-        "D"
-      ]
+      "required": ["A", "B", "C", "D"]
     },
     "Zeitraum": {
       "type": "object",
       "properties": {
         "einheit": {
-          "type": [
-            "string",
-            "null"
-          ],
+          "type": ["string", "null"],
           "enum": [
             null,
             "SEKUNDE",
@@ -347,30 +285,18 @@
           ]
         },
         "dauer": {
-          "type": [
-            "number",
-            "null"
-          ]
+          "type": ["number", "null"]
         },
         "startdatum": {
-          "type": [
-            "string",
-            "null"
-          ],
+          "type": ["string", "null"],
           "format": "date-time"
         },
         "enddatum": {
-          "type": [
-            "string",
-            "null"
-          ],
+          "type": ["string", "null"],
           "format": "date-time"
         },
         "guid": {
-          "type": [
-            "string",
-            "null"
-          ]
+          "type": ["string", "null"]
         }
       }
     }
@@ -378,16 +304,10 @@
   "type": "object",
   "properties": {
     "guid": {
-      "type": [
-        "string",
-        "null"
-      ]
+      "type": ["string", "null"]
     },
     "boTyp": {
-      "type": [
-        "string",
-        "null"
-      ]
+      "type": ["string", "null"]
     },
     "versionStruktur": {
       "type": "integer"
@@ -405,9 +325,5 @@
       }
     }
   },
-  "required": [
-    "bezeichnung",
-    "gueltigkeit",
-    "preispositionen"
-  ]
+  "required": ["bezeichnung", "gueltigkeit", "preispositionen"]
 }

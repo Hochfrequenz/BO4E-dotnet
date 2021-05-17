@@ -1,12 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-
 using BO4E.BO;
 using BO4E.COM;
 using BO4E.ENUM;
-
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-
 using Newtonsoft.Json;
 
 namespace TestBO4E
@@ -17,20 +14,21 @@ namespace TestBO4E
         [TestMethod]
         public void TestEqualsCOM()
         {
-            Verbrauch v1 = new Verbrauch();
-            Verbrauch v2 = new Verbrauch();
-            Assert.ThrowsException<JsonSerializationException>(() => v1.Equals(v2), "You must not compare invalid/incomplete COMs");
+            var v1 = new Verbrauch();
+            var v2 = new Verbrauch();
+            Assert.ThrowsException<JsonSerializationException>(() => v1.Equals(v2),
+                "You must not compare invalid/incomplete COMs");
             Assert.AreEqual(v1.GetHashCode(), v2.GetHashCode());
 
 
-            v1 = new Verbrauch()
+            v1 = new Verbrauch
             {
                 Einheit = Mengeneinheit.KWH,
                 Obiskennzahl = "1-1:1.8.0",
                 Startdatum = new DateTime(2019, 1, 1, 0, 0, 0, DateTimeKind.Utc),
                 Enddatum = new DateTime(2020, 1, 1, 0, 0, 0, DateTimeKind.Utc)
             };
-            v2 = new Verbrauch()
+            v2 = new Verbrauch
             {
                 Einheit = Mengeneinheit.KWH,
                 Obiskennzahl = "1-1:1.8.0",
@@ -45,32 +43,32 @@ namespace TestBO4E
 
             v2.Obiskennzahl = "1-1:1.8.1";
             Assert.AreNotEqual(v1, v2);
-            Assert.AreNotEqual<int>(v1.GetHashCode(), v2.GetHashCode());
+            Assert.AreNotEqual(v1.GetHashCode(), v2.GetHashCode());
             Assert.AreNotEqual(new Preis(), new Menge());
         }
 
         [TestMethod]
         public void TestEqualsBO()
         {
-            Energiemenge em1 = new Energiemenge();
-            Energiemenge em2 = new Energiemenge();
+            var em1 = new Energiemenge();
+            var em2 = new Energiemenge();
             Assert.ThrowsException<ArgumentException>(() => em1.Equals(em2));
             Assert.AreEqual(em1.GetHashCode(), em2.GetHashCode());
 
             em1.LokationsId = "DE1234";
             em2.LokationsId = "DE1234";
 
-            em1.LokationsTyp = BO4E.ENUM.Lokationstyp.MeLo;
-            em2.LokationsTyp = BO4E.ENUM.Lokationstyp.MeLo;
+            em1.LokationsTyp = Lokationstyp.MeLo;
+            em2.LokationsTyp = Lokationstyp.MeLo;
 
             em1.Energieverbrauch = new List<Verbrauch>();
-            Verbrauch v1 = new Verbrauch
+            var v1 = new Verbrauch
             {
                 Obiskennzahl = "1-2-3-4-5"
             };
             em1.Energieverbrauch.Add(v1);
             em2.Energieverbrauch = new List<Verbrauch>();
-            Verbrauch v2 = new Verbrauch
+            var v2 = new Verbrauch
             {
                 Obiskennzahl = "1-2-3-4-5"
             };
@@ -80,9 +78,9 @@ namespace TestBO4E
             //Assert.AreEqual(em1.GetHashCode(), em2.GetHashCode());
             Assert.IsFalse(em1 == em2);
 
-            Verbrauch v3 = new Verbrauch
+            var v3 = new Verbrauch
             {
-                Einheit = BO4E.ENUM.Mengeneinheit.KWH,
+                Einheit = Mengeneinheit.KWH,
                 Obiskennzahl = "ABC",
                 Startdatum = new DateTime(2018, 1, 1),
                 Enddatum = new DateTime(2018, 12, 31),
@@ -94,7 +92,7 @@ namespace TestBO4E
             //Assert.AreEqual(em1.GetHashCode(), em2.GetHashCode());
             Assert.IsFalse(em1 == em2);
 
-            Verbrauch v4 = JsonConvert.DeserializeObject<Verbrauch>(JsonConvert.SerializeObject(v1));
+            var v4 = JsonConvert.DeserializeObject<Verbrauch>(JsonConvert.SerializeObject(v1));
             v4.Wert = 789.012M;
             em1.Energieverbrauch.Add(v4);
             Assert.AreNotEqual(em1, em2);
@@ -108,6 +106,5 @@ namespace TestBO4E
             Assert.AreNotEqual(em1, em2);
             //Assert.AreNotEqual(em1.GetHashCode(), em2.GetHashCode());
         }
-
     }
 }

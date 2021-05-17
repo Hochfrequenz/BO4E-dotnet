@@ -1,4 +1,4 @@
-﻿{
+{
   "expectedQueryObject": {
     "boTyp": "MARKTTEILNEHMER",
     "rollencodenummer": "9900130000006"
@@ -19,9 +19,7 @@
     "glaeubigerId": null,
     "eMailAdresse": "edifact.stromnetz@stadtwerke-coesfeld.de",
     "website": "www.stadtwerke-coesfeld.de",
-    "geschaeftspartnerrolle": [
-      "MARKTPARTNER"
-    ],
+    "geschaeftspartnerrolle": ["MARKTPARTNER"],
     "partneradresse": {
       "postleitzahl": "48653",
       "ort": "Coesfeld",
