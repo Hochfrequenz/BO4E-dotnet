@@ -32,4 +32,4 @@ jobs:
       - name: Nuget push
         run: |
           nuget setApiKey ${{ secrets.BO4E_NUGET_ORG_PUSH_TOKEN }}
-          nuget push .\**\bin\Release\*.nupkg -Source https://api.nuget.org/v3/index.json -SkipDuplicate -NoSymbols
+          nuget push .\**\**\bin\Release\*.nupkg -Source https://api.nuget.org/v3/index.json -SkipDuplicate -NoSymbols

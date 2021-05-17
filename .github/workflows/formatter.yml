@@ -3,7 +3,7 @@ name: dotnet-format
 on: [push, pull_request]
 
 jobs:
-  unittest:
+  format:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
