@@ -20,7 +20,7 @@ jobs:
       - name: Setup .NET Core
         uses: actions/setup-dotnet@v1
         with:
-          dotnet-version: 3.1.100
+          dotnet-version: 5.0.100
       - name: Build/Check for compile errors (dotnet build)
         run: dotnet build --configuration Release --version-suffix "beta${{ steps.current-time.outputs.formattedTime }}"
       - name: Run Unit Tests (dotnet test)

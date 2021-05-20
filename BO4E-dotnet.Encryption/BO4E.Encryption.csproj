@@ -1,7 +1,7 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>netstandard2.0</TargetFramework>
+    <TargetFramework>net5.0</TargetFramework>
     <RootNamespace>BO4E_dotnet.Encryption</RootNamespace>
 	<VersionPrefix>0.2.3</VersionPrefix>
 	<VersionSuffix>$(VersionSuffix)</VersionSuffix>
@@ -12,6 +12,8 @@
     <Authors />
     <Company>Hochfrequenz Unternehmensberatung GmbH</Company>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <LangVersion>9</LangVersion>
+    <PackageVersion>0.2.5</PackageVersion>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">

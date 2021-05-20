@@ -154,7 +154,7 @@ namespace BO4E.COM
         {
             //using (MiniProfiler.Current.Step("FixSapCdsBug (Verbrauch)")) // don't do this. it slows down everything !
             // {
-            if (Startdatum != null && Enddatum != null && Startdatum > Enddatum)
+            if (Startdatum > Enddatum)
             {
                 var diff = Startdatum - Enddatum;
                 if (diff.Hours <= 25 && diff.Hours >= 23 && diff.Minutes == 45 && Startdatum.Hour >= 22 &&
