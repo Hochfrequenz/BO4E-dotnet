@@ -30,7 +30,7 @@ jobs:
         run: dotnet pack --configuration Release --version-suffix "${{github.sha}}"
       - name: Nuget push core
         run: |
-          for f in ./BO4E-dotnet/BO4E/bin/Release/*.nupkg
+          for f in /home/runner/work/BO4E-dotnet/BO4E-dotnet/BO4E/bin/Release/*.nupkg
           do
             curl -vX PUT -u "[user]:${{ secrets.GITHUB_TOKEN }}" -F package=@$f https://nuget.pkg.github.com/hochfrequenz/
           done
