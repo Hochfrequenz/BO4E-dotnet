@@ -1,7 +1,6 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>netstandard2.0</TargetFramework>
     <RootNamespace>BO4E_dotnet.Extensions</RootNamespace>
     <VersionPrefix>0.2.3</VersionPrefix>
     <VersionSuffix>$(VersionSuffix)</VersionSuffix>
@@ -13,6 +12,7 @@
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <LangVersion>9</LangVersion>
     <PackageVersion>0.2.5</PackageVersion>
+    <TargetFramework>net5.0</TargetFramework>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
