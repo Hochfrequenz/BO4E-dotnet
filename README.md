@@ -119,9 +119,9 @@ Assert.IsFalse(v1 == v2);
 
 Using the [Hochfrequenz.BO4E.Extensions](https://www.nuget.org/packages/Hochfrequenz.BO4E.Extensions/) gives you access to powerful analysis methods for Business Objects. We present them directly as minimal working examples in executable show case tests.
 
-- [Energiemenge](/TestBO4E-dotnet-Extensions/ShowCaseTests/EnergiemengeShowCaseTests.cs)
-- [Verbrauch](/TestBO4E-dotnet-Extensions/ShowCaseTests/VerbrauchShowCaseTests.cs)
-- [CompletenessReport](/TestBO4E-dotnet-Reporting/ShowCaseTests/CompletenessReportShowCaseTests.cs)
+- [Energiemenge](/TestBO4E.Extensions/ShowCaseTests/EnergiemengeShowCaseTests.cs)
+- [Verbrauch](TestBO4E.Extensions/ShowCaseTests/VerbrauchShowCaseTests.cs)
+- [CompletenessReport](/TestBO4E.Reporting/ShowCaseTests/CompletenessReportShowCaseTests.cs)
 - [Encrypted Business Objects](/TestBO4E-dotnet-Encryption/ShowCaseTests/EncryptionShowCaseTests.cs)
 - [(Partially) Anonymized Business Objects](/TestBO4E-dotnet-Encryption/ShowCaseTests/AnonymizerShowCaseTests.cs)
 
