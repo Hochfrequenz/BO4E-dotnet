@@ -150,7 +150,7 @@ namespace BO4E.meta
                     }
                     else if (keyProp.GetValue(bo).GetType().IsSubclassOf(typeof(BusinessObject)))
                     {
-                        var innerBo = (BusinessObject) keyProp.GetValue(bo);
+                        var innerBo = (BusinessObject)keyProp.GetValue(bo);
                         relativeUriBuilder.Append(GetUri(innerBo)
                             .GetComponents(UriComponents.Path, UriFormat.UriEscaped));
                     }

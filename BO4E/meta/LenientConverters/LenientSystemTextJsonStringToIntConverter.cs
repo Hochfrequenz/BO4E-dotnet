@@ -29,16 +29,16 @@ namespace BO4E.meta.LenientConverters
                 case JsonTokenType.Null:
                     return null;
                 case JsonTokenType.String:
-                {
-                    var numeric = new string(reader.GetString().Where(char.IsDigit).ToArray());
-                    if (int.TryParse(numeric, out var intValue)) return intValue;
+                    {
+                        var numeric = new string(reader.GetString().Where(char.IsDigit).ToArray());
+                        if (int.TryParse(numeric, out var intValue)) return intValue;
 
-                    break;
-                }
+                        break;
+                    }
                 case JsonTokenType.Number when reader.TryGetInt32(out var int32Value):
                     return int32Value;
                 case JsonTokenType.Number when reader.TryGetInt64(out var int64Value):
-                    return (int) int64Value;
+                    return (int)int64Value;
             }
 
             return 0;

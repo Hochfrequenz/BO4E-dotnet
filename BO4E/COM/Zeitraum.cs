@@ -58,22 +58,22 @@ namespace BO4E.COM
                 var ts = Enddatum.Value - Startdatum.Value;
                 if (ts.TotalSeconds < 60)
                 {
-                    Dauer = (decimal) ts.TotalSeconds;
+                    Dauer = (decimal)ts.TotalSeconds;
                     Einheit = Zeiteinheit.SEKUNDE;
                 }
                 else if (ts.TotalSeconds < 3600)
                 {
-                    Dauer = (decimal) ts.TotalMinutes;
+                    Dauer = (decimal)ts.TotalMinutes;
                     Einheit = Zeiteinheit.MINUTE;
                 }
                 else if (ts.TotalSeconds < 24 * 3600)
                 {
-                    Dauer = (decimal) ts.TotalHours;
+                    Dauer = (decimal)ts.TotalHours;
                     Einheit = Zeiteinheit.STUNDE;
                 }
                 else // if (ts.TotalDays < 31)
                 {
-                    Dauer = (decimal) ts.TotalDays;
+                    Dauer = (decimal)ts.TotalDays;
                     Einheit = Zeiteinheit.TAG;
                 }
             }

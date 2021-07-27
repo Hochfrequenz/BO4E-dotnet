@@ -63,16 +63,16 @@ namespace BO4E.BO
 
             decimal gSteure, vGezahlt, rBrutto;
             var gNetto = gSteure = _ = vGezahlt = rBrutto = 0.00M;
-            var waehrungscode = (Waehrungscode) Enum.Parse(typeof(Waehrungscode),
+            var waehrungscode = (Waehrungscode)Enum.Parse(typeof(Waehrungscode),
                 (infoToken["totalWaer"] ?? infoToken["TOTAL_WAER"]).Value<string>());
-            var waehrungseinheit = (Waehrungseinheit) Enum.Parse(typeof(Waehrungseinheit),
+            var waehrungseinheit = (Waehrungseinheit)Enum.Parse(typeof(Waehrungseinheit),
                 (infoToken["totalWaer"] ?? infoToken["TOTAL_WAER"]).Value<string>());
-            var mengeneinheit = (Mengeneinheit) Enum.Parse(typeof(Mengeneinheit),
+            var mengeneinheit = (Mengeneinheit)Enum.Parse(typeof(Mengeneinheit),
                 (tErdzToken[0]["massbill"] ?? tErdzToken[0]["MASSBILL"]).Value<string>());
 
             var rpList = new List<Rechnungsposition>();
             var stList = new List<Steuerbetrag>();
-            Vorausgezahlt = new Betrag {Waehrung = waehrungscode, Wert = 0};
+            Vorausgezahlt = new Betrag { Waehrung = waehrungscode, Wert = 0 };
             foreach (var jrp in tErdzToken)
             {
                 var belzart = (jrp["belzart"] ?? jrp["BELZART"]).ToString();
@@ -89,7 +89,7 @@ namespace BO4E.BO
                         rp.Positionstext = "PAUSCHALE";
                         mengeneinheit = Mengeneinheit.JAHR;
                         zeitbezogeneMengeWert = (jrp["preisbtr"] ?? jrp["PREISBTR"]).Value<decimal>();
-                        rp.ZeitbezogeneMenge = new Menge {Einheit = Mengeneinheit.TAG, Wert = zeitbezogeneMengeWert};
+                        rp.ZeitbezogeneMenge = new Menge { Einheit = Mengeneinheit.TAG, Wert = zeitbezogeneMengeWert };
 
                         rp.Einzelpreis = new Preis
                         {
@@ -116,7 +116,7 @@ namespace BO4E.BO
                 if ((jrp["massbill"] ?? jrp["MASSBILL"]) != null &&
                     !string.IsNullOrWhiteSpace((jrp["massbill"] ?? jrp["MASSBILL"]).Value<string>()))
                 {
-                    mengeneinheit = (Mengeneinheit) Enum.Parse(typeof(Mengeneinheit),
+                    mengeneinheit = (Mengeneinheit)Enum.Parse(typeof(Mengeneinheit),
                         (jrp["massbill"] ?? jrp["MASSBILL"]).Value<string>());
                 }
                 else if ((jrp["timbasis"] ?? jrp["TIMBASIS"]) != null &&
@@ -125,7 +125,7 @@ namespace BO4E.BO
                     if ((jrp["timbasis"] ?? jrp["TIMBASIS"]).Value<string>() == "365")
                     {
                         mengeneinheit = Mengeneinheit.JAHR;
-                        rp.ZeitbezogeneMenge = new Menge {Einheit = Mengeneinheit.TAG, Wert = zeitbezogeneMengeWert};
+                        rp.ZeitbezogeneMenge = new Menge { Einheit = Mengeneinheit.TAG, Wert = zeitbezogeneMengeWert };
                     }
                 }
                 else
@@ -195,7 +195,7 @@ namespace BO4E.BO
                         {
                             Basiswert = (jrp["sbasw"] ?? jrp["SBASW"]).Value<decimal>(),
                             Steuerwert = (jrp["sbetw"] ?? jrp["SBETW"]).Value<decimal>(),
-                            Waehrung = (Waehrungscode) Enum.Parse(typeof(Waehrungscode),
+                            Waehrung = (Waehrungscode)Enum.Parse(typeof(Waehrungscode),
                                 (jrp["twaers"] ?? jrp["TWAERS"]).Value<string>())
                         };
                         decimal steuerProzent;
@@ -207,7 +207,7 @@ namespace BO4E.BO
                         else
                             steuerProzent = steuerbetrag.Steuerwert / steuerbetrag.Basiswert * 100.0M;
 
-                        steuerbetrag.Steuerkennzeichen = (int) steuerProzent switch
+                        steuerbetrag.Steuerkennzeichen = (int)steuerProzent switch
                         {
                             19 => Steuerkennzeichen.UST_19,
                             7 => Steuerkennzeichen.UST_7,
@@ -219,7 +219,7 @@ namespace BO4E.BO
 
                     if ((jrp["nettobtr"] ?? jrp["NETTOBTR"]).Value<decimal>() <= 0)
                         Vorausgezahlt = new Betrag
-                            {Waehrung = waehrungscode, Wert = (jrp["nettobtr"] ?? jrp["NETTOBTR"]).Value<decimal>()};
+                        { Waehrung = waehrungscode, Wert = (jrp["nettobtr"] ?? jrp["NETTOBTR"]).Value<decimal>() };
                 }
 
                 rp.Zeiteinheit = mengeneinheit;
@@ -238,7 +238,7 @@ namespace BO4E.BO
                         {
                             Basiswert = (jrp["sbasw"] ?? jrp["SBASW"]).Value<decimal>(),
                             Steuerwert = (jrp["sbetw"] ?? jrp["SBETW"]).Value<decimal>(),
-                            Waehrung = (Waehrungscode) Enum.Parse(typeof(Waehrungscode),
+                            Waehrung = (Waehrungscode)Enum.Parse(typeof(Waehrungscode),
                                 (jrp["twaers"] ?? jrp["TWAERS"]).Value<string>())
                         };
                         decimal steuerProzent;
@@ -267,14 +267,14 @@ namespace BO4E.BO
             Rechnungspositionen = rpList;
             var gBrutto = gNetto + gSteure;
             var zZahlen = gBrutto - vGezahlt - rBrutto;
-            Gesamtnetto = new Betrag {Wert = gNetto, Waehrung = waehrungscode};
-            Gesamtsteuer = new Betrag {Wert = gSteure, Waehrung = waehrungscode};
-            Gesamtbrutto = new Betrag {Wert = gBrutto, Waehrung = waehrungscode};
-            Zuzahlen = new Betrag {Wert = zZahlen, Waehrung = waehrungscode};
+            Gesamtnetto = new Betrag { Wert = gNetto, Waehrung = waehrungscode };
+            Gesamtsteuer = new Betrag { Wert = gSteure, Waehrung = waehrungscode };
+            Gesamtbrutto = new Betrag { Wert = gBrutto, Waehrung = waehrungscode };
+            Zuzahlen = new Betrag { Wert = zZahlen, Waehrung = waehrungscode };
 
             Rechnungsersteller = new Geschaeftspartner
             {
-                Geschaeftspartnerrolle = new List<Geschaeftspartnerrolle> {Geschaeftspartnerrolle.LIEFERANT},
+                Geschaeftspartnerrolle = new List<Geschaeftspartnerrolle> { Geschaeftspartnerrolle.LIEFERANT },
                 Gewerbekennzeichnung = true,
                 Anrede = Anrede.HERR,
                 Name1 = "Mein super Lieferant",
@@ -289,7 +289,7 @@ namespace BO4E.BO
             };
             Rechnungsempfaenger = new Geschaeftspartner
             {
-                Geschaeftspartnerrolle = new List<Geschaeftspartnerrolle> {Geschaeftspartnerrolle.KUNDE},
+                Geschaeftspartnerrolle = new List<Geschaeftspartnerrolle> { Geschaeftspartnerrolle.KUNDE },
                 Gewerbekennzeichnung = false,
                 Anrede = Anrede.HERR,
                 Name1 = "Lustig",
