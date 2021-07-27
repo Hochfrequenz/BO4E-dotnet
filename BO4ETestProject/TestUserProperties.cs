@@ -35,7 +35,7 @@ namespace TestBO4E
             Assert.IsTrue(melo.IsValid());
             Assert.IsNotNull(melo.UserProperties);
             Assert.AreEqual("some_value_not_covered_by_bo4e", melo.UserProperties["myCustomInfo"] as string);
-            Assert.AreEqual(123.456M, (decimal)(double)melo.UserProperties["myCustomValue"]);
+            Assert.AreEqual(123.456M, (decimal) (double) melo.UserProperties["myCustomValue"]);
         }
 
         [TestMethod]
@@ -48,7 +48,7 @@ namespace TestBO4E
             Assert.IsTrue(melo.IsValid());
             Assert.IsNotNull(melo.UserProperties);
             Assert.AreEqual("some_value_not_covered_by_bo4e", melo.UserProperties["myCustomInfo"].ToString());
-            Assert.AreEqual(123.456M, ((JsonElement)melo.UserProperties["myCustomValue"]).GetDecimal());
+            Assert.AreEqual(123.456M, ((JsonElement) melo.UserProperties["myCustomValue"]).GetDecimal());
         }
 
         private void _AssertUserProperties(Messlokation melo)
@@ -101,7 +101,7 @@ namespace TestBO4E
             Assert.IsFalse(melo.HasFlagSet("foo"));
             Assert.IsTrue(melo.SetFlag("foo"));
             Assert.IsNotNull(melo.UserProperties);
-            Assert.IsTrue(melo.UserProperties.TryGetValue("foo", out var upValue) && (bool)upValue);
+            Assert.IsTrue(melo.UserProperties.TryGetValue("foo", out var upValue) && (bool) upValue);
             Assert.IsTrue(melo.HasFlagSet("foo"));
             Assert.IsFalse(melo.SetFlag("foo"));
             Assert.IsTrue(melo.SetFlag("foo", false));
@@ -131,14 +131,14 @@ namespace TestBO4E
 
             var value1 = "BarFoo";
             var value2 = "BigFoot";
-            melo.SetUserProperty("foo", new Bar { FooBar = value1 });
+            melo.SetUserProperty("foo", new Bar {FooBar = value1});
             Assert.IsNotNull(melo.UserProperties);
             Assert.IsTrue(melo.UserProperties.TryGetValue("foo", out var upValue));
             Assert.IsInstanceOfType(upValue, typeof(Bar));
             Assert.AreEqual(value1, (upValue as Bar)?.FooBar);
 
             // Update the value
-            melo.SetUserProperty("foo", new Bar { FooBar = value2 });
+            melo.SetUserProperty("foo", new Bar {FooBar = value2});
             Assert.IsTrue(melo.UserProperties.TryGetValue("foo", out upValue));
             Assert.AreEqual(value2, (upValue as Bar)?.FooBar);
         }
@@ -158,7 +158,7 @@ namespace TestBO4E
 
             var value1 = "BarFoo";
             // Add a value
-            melo.SetUserProperty("foo", new Bar { FooBar = value1 });
+            melo.SetUserProperty("foo", new Bar {FooBar = value1});
             Assert.IsNotNull(melo.UserProperties);
             Assert.IsTrue(melo.UserProperties.TryGetValue("foo", out var upValue));
             Assert.AreEqual(value1, (upValue as Bar)?.FooBar);

@@ -91,7 +91,7 @@ namespace BO4E.BO
                     if (profDecimalsRaw is string raw)
                         profDecimals = int.Parse(raw);
                     else
-                        profDecimals = ((JsonElement)profDecimalsRaw).GetInt32();
+                        profDecimals = ((JsonElement) profDecimalsRaw).GetInt32();
                     if (profDecimals > 0)
                         for (var i = 0; i < profDecimals; i++)
                             // or should I import math.pow() for this purpose?
@@ -192,7 +192,7 @@ namespace BO4E.BO
                     if (profDecimalsRaw is string raw)
                         profDecimals = int.Parse(raw);
                     else
-                        profDecimals = JsonSerializer.Deserialize<int>(((JsonElement)profDecimalsRaw).GetRawText(),
+                        profDecimals = JsonSerializer.Deserialize<int>(((JsonElement) profDecimalsRaw).GetRawText(),
                             Energiemenge.EnergiemengeSerializerOptions);
                     if (profDecimals > 0)
                         for (var i = 0; i < profDecimals; i++)

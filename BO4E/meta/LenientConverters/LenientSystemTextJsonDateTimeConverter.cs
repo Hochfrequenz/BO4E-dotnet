@@ -13,7 +13,7 @@ namespace BO4E.meta.LenientConverters
     /// </summary>
     public class LenientSystemTextJsonDateTimeConverter : JsonConverter<DateTime>
     {
-        private readonly List<(string, bool)> _allowedDatetimeFormats = new List<(string, bool)>
+        private readonly List<(string, bool)> _allowedDatetimeFormats = new()
         {
             ("yyyy-MM-ddTHH:mm:ss", false),
             ("yyyy-MM-ddTHH:mm:sszzzz", true),
@@ -107,7 +107,7 @@ namespace BO4E.meta.LenientConverters
     /// </summary>
     public class LenientSystemTextJsonNullableDateTimeConverter : JsonConverter<DateTime?>
     {
-        private readonly List<(string, bool)> _allowedDatetimeFormats = new List<(string, bool)>
+        private readonly List<(string, bool)> _allowedDatetimeFormats = new()
         {
             ("yyyy-MM-ddTHH:mm:ss", false),
             ("yyyy-MM-ddTHH:mm:sszzzz", true),
@@ -205,7 +205,7 @@ namespace BO4E.meta.LenientConverters
     /// </summary>
     public class LenientSystemTextJsonDateTimeOffsetConverter : JsonConverter<DateTimeOffset>
     {
-        private readonly List<(string, bool)> _allowedDatetimeFormats = new List<(string, bool)>
+        private readonly List<(string, bool)> _allowedDatetimeFormats = new()
         {
             ("yyyy-MM-ddTHH:mm:ss", false),
             ("yyyy-MM-ddTHH:mm:sszzzz", true),
@@ -308,7 +308,7 @@ namespace BO4E.meta.LenientConverters
     /// </summary>
     public class LenientSystemTextJsonNullableDateTimeOffsetConverter : JsonConverter<DateTimeOffset?>
     {
-        private readonly List<(string, bool)> _allowedDatetimeFormats = new List<(string, bool)>
+        private readonly List<(string, bool)> _allowedDatetimeFormats = new()
         {
             ("yyyy-MM-ddTHH:mm:ss", false),
             ("yyyy-MM-ddTHH:mm:sszzzz", true),

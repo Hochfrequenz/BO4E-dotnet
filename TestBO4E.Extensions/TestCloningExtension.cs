@@ -32,7 +32,7 @@ namespace TestBO4E.Extensions
                 LokationsTyp = Lokationstyp.MaLo,
                 Energieverbrauch = new List<Verbrauch>
                 {
-                    new Verbrauch
+                    new()
                     {
                         Einheit = Mengeneinheit.KWH,
                         Wert = 123.456M,
@@ -41,7 +41,7 @@ namespace TestBO4E.Extensions
                         Startdatum = new DateTime(2018, 12, 31, 23, 0, 0, 0, DateTimeKind.Utc),
                         Enddatum = new DateTime(2019, 12, 31, 23, 0, 0, 0, DateTimeKind.Utc)
                     },
-                    new Verbrauch
+                    new()
                     {
                         Einheit = Mengeneinheit.KWH,
                         Wert = 789.123M,
@@ -58,7 +58,7 @@ namespace TestBO4E.Extensions
             var cloned2 = em.DeepClone();
             Assert.AreEqual(em.Energieverbrauch.Count, cloned2.Energieverbrauch.Count);
 
-            var cloned3 = ((BusinessObject)em).DeepClone();
+            var cloned3 = ((BusinessObject) em).DeepClone();
             Assert.IsTrue(cloned3 is Energiemenge);
             Assert.AreEqual(em.Energieverbrauch.Count, (cloned3 as Energiemenge).Energieverbrauch.Count);
         }

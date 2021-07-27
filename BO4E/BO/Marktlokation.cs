@@ -26,13 +26,13 @@ namespace BO4E.BO
         ///     Regular Expression used to validate 11 digit MarktlokationId
         /// </summary>
         [Newtonsoft.Json.JsonIgnore]
-        protected static readonly Regex RegexValidate = new Regex(@"^[1-9][\d]{10}$", RegexOptions.Compiled);
+        protected static readonly Regex RegexValidate = new(@"^[1-9][\d]{10}$", RegexOptions.Compiled);
 
         /// <summary>
         ///     Regular Expression to check if a string consists only of numbers (is numeric)
         /// </summary>
         [Newtonsoft.Json.JsonIgnore]
-        protected static readonly Regex RegexNumericString = new Regex(@"^\d+$", RegexOptions.Compiled);
+        protected static readonly Regex RegexNumericString = new(@"^\d+$", RegexOptions.Compiled);
 
         /// <summary>
         ///     Identifikationsnummer einer Marktlokation, an der Energie entweder

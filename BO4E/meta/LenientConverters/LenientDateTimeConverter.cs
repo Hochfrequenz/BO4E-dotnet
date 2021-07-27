@@ -13,7 +13,7 @@ namespace BO4E.meta.LenientConverters
     /// </summary>
     public class LenientDateTimeConverter : IsoDateTimeConverter
     {
-        private readonly List<(string, bool)> _allowedDatetimeFormats = new List<(string, bool)>
+        private readonly List<(string, bool)> _allowedDatetimeFormats = new()
         {
             ("yyyy-MM-ddTHH:mm:ss", false),
             ("yyyy-MM-ddTHH:mm:sszzzz", true),

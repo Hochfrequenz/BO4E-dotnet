@@ -86,7 +86,7 @@ namespace BO4E.COM
                 throw new ArgumentException(
                     $"The external reference with {nameof(extRef.ExRefName)}='{extRef.ExRefName}' and {nameof(extRef.ExRefWert)}='{extRef.ExRefWert}' you tried to add is invalid.",
                     nameof(extRef));
-            if (extReferences == null) return new List<ExterneReferenz> { extRef };
+            if (extReferences == null) return new List<ExterneReferenz> {extRef};
 
             if (extReferences.Any() && extReferences.TryGetExterneReferenz(extRef.ExRefName, out var existingRefWert))
             {

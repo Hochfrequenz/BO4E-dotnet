@@ -14,7 +14,7 @@ using Org.BouncyCastle.Security;
 namespace BO4E.Encryption
 {
     /// <summary>
-    /// Assymmetic Encryption in X509 standard.
+    ///     Assymmetic Encryption in X509 standard.
     /// </summary>
     public class X509AsymmetricEncrypter : Encrypter
     {
@@ -27,7 +27,7 @@ namespace BO4E.Encryption
         /// <param name="cert">X509 certificate must contain the public key.</param>
         public X509AsymmetricEncrypter(X509Certificate2 cert)
         {
-            _publicCerts = new HashSet<X509Certificate2> { cert };
+            _publicCerts = new HashSet<X509Certificate2> {cert};
             _privateKey = null;
         }
 
@@ -70,7 +70,7 @@ namespace BO4E.Encryption
         }
 
         /// <summary>
-        /// encrypts the <paramref name="plainText"/>
+        ///     encrypts the <paramref name="plainText" />
         /// </summary>
         /// <param name="plainText"></param>
         /// <returns></returns>
@@ -93,7 +93,7 @@ namespace BO4E.Encryption
         }
 
         /// <summary>
-        /// Encrypts the 
+        ///     Encrypts the
         /// </summary>
         /// <param name="plainObject"></param>
         /// <returns></returns>
@@ -105,7 +105,7 @@ namespace BO4E.Encryption
         }
 
         /// <summary>
-        /// <inheritdoc cref="Encrypter.Decrypt"/>
+        ///     <inheritdoc cref="Encrypter.Decrypt" />
         /// </summary>
         /// <param name="cipherText"></param>
         /// <returns></returns>
@@ -138,7 +138,8 @@ namespace BO4E.Encryption
         }
 
         /// <summary>
-        /// Converts a base64 string <paramref name="pemKeyBase64"/> in PEM format to a <see cref="AsymmetricCipherKeyPair"/>.
+        ///     Converts a base64 string <paramref name="pemKeyBase64" /> in PEM format to a <see cref="AsymmetricCipherKeyPair" />
+        ///     .
         /// </summary>
         /// <param name="pemKeyBase64"></param>
         /// <returns></returns>
@@ -148,12 +149,12 @@ namespace BO4E.Encryption
                 pemKeyBase64 = "-----BEGIN RSA PRIVATE KEY-----\n" + pemKeyBase64 + "\n-----END RSA PRIVATE KEY-----";
             using (var reader = new StringReader(pemKeyBase64))
             {
-                return (AsymmetricCipherKeyPair)new PemReader(reader).ReadObject();
+                return (AsymmetricCipherKeyPair) new PemReader(reader).ReadObject();
             }
         }
 
         /// <summary>
-        /// <inheritdoc cref="Encrypter.Decrypt"/>
+        ///     <inheritdoc cref="Encrypter.Decrypt" />
         /// </summary>
         /// <param name="encryptedObject"></param>
         /// <returns></returns>
@@ -165,7 +166,7 @@ namespace BO4E.Encryption
         }
 
         /// <summary>
-        /// <inheritdoc cref="Encrypter.Decrypt{T}"/>
+        ///     <inheritdoc cref="Encrypter.Decrypt{T}" />
         /// </summary>
         /// <param name="encryptedObject"></param>
         /// <typeparam name="T"></typeparam>
@@ -178,7 +179,7 @@ namespace BO4E.Encryption
         }
 
         /// <summary>
-        /// <inheritdoc cref="Encrypter.Dispose"/>
+        ///     <inheritdoc cref="Encrypter.Dispose" />
         /// </summary>
         public override void Dispose()
         {
@@ -186,7 +187,7 @@ namespace BO4E.Encryption
         }
 
         /// <summary>
-        /// calls the dispose method.
+        ///     calls the dispose method.
         /// </summary>
         ~X509AsymmetricEncrypter()
         {

@@ -14,7 +14,7 @@ namespace TestBO4E
     public class TestBoEdiMapper
     {
         private readonly Dictionary<string, Dictionary<string, string>> _expectedResults =
-            new Dictionary<string, Dictionary<string, string>>();
+            new();
 
         public TestBoEdiMapper()
         {
@@ -94,7 +94,7 @@ namespace TestBO4E
                 }
                 catch (ArgumentException)
                 {
-                    bo = BoMapper.MapObject(json["input"]["boTyp"].ToString(), (JObject)json["input"]);
+                    bo = BoMapper.MapObject(json["input"]["boTyp"].ToString(), (JObject) json["input"]);
                 }
 
                 var result = BoEdiMapper.ReplaceWithEdiValues(bo);

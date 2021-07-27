@@ -29,7 +29,7 @@ namespace TestBO4E
         {
             var options = new JsonSerializerOptions
             {
-                Converters = { new StringNullableEnumConverter() }
+                Converters = {new StringNullableEnumConverter()}
             };
             var jsonString = JsonSerializer.Serialize(einheiten, options);
             Assert.IsTrue(jsonString.Contains("TAG"));

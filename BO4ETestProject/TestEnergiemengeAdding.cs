@@ -19,7 +19,7 @@ namespace TestBO4E
                 LokationsTyp = Lokationstyp.MaLo,
                 Energieverbrauch = new List<Verbrauch>
                 {
-                    new Verbrauch
+                    new()
                     {
                         Einheit = Mengeneinheit.ANZAHL,
                         Obiskennzahl = "1-2-3",
@@ -36,7 +36,7 @@ namespace TestBO4E
                 LokationsTyp = Lokationstyp.MaLo,
                 Energieverbrauch = new List<Verbrauch>
                 {
-                    new Verbrauch
+                    new()
                     {
                         Einheit = Mengeneinheit.ANZAHL,
                         Obiskennzahl = "4-5-6",

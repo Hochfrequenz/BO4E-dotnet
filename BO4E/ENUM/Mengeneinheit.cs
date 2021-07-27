@@ -4,10 +4,10 @@ using ProtoBuf;
 
 namespace BO4E.ENUM
 {
-    /// <summary>
-    ///     Einheit: Messgrößen, die per Messung oder Vorgabe ermittelt werden können.
-    /// </summary>
-    public enum Mengeneinheit
+        /// <summary>
+        ///     Einheit: Messgrößen, die per Messung oder Vorgabe ermittelt werden können.
+        /// </summary>
+        public enum Mengeneinheit
     {
         [Obsolete("This value is only a workaround for the proto3 syntax generation. You shouldn't actually use it")]
 #pragma warning disable CS0618 // Type or member is obsolete

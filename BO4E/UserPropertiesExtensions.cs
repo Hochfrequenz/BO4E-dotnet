@@ -64,13 +64,13 @@ namespace BO4E
                     default:
                         try
                         {
-                            value = JsonSerializer.Deserialize<TUserProperty>(((JsonElement)upToken).GetRawText(),
+                            value = JsonSerializer.Deserialize<TUserProperty>(((JsonElement) upToken).GetRawText(),
                                 Defaults.JsonSerializerDefaultOptions);
                         }
                         catch (JsonException)
                         {
                             throw new FormatException(
-                                $"Could not convert {((JsonElement)upToken).GetRawText()} to {typeof(TUserProperty).Name}");
+                                $"Could not convert {((JsonElement) upToken).GetRawText()} to {typeof(TUserProperty).Name}");
                         }
 
                         break;
@@ -280,7 +280,7 @@ namespace BO4E
 
             try
             {
-                return parent.UserProperties != null && parent.UserPropertyEquals(flagKey, (bool?)true);
+                return parent.UserProperties != null && parent.UserPropertyEquals(flagKey, (bool?) true);
             }
             catch (ArgumentNullException ane) when (ane.ParamName == "value")
             {

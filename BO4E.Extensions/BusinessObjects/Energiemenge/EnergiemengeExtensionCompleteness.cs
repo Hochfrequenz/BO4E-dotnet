@@ -15,7 +15,8 @@ namespace BO4E.Extensions.BusinessObjects.Energiemenge
     {
         /// <summary>
         ///     Generate a <see cref="CompletenessReport" /> for the given configuration. Same as
-        ///     <see cref="GetCompletenessReport(BO4E.BO.Energiemenge,BO4E.Reporting.CompletenessReport.CompletenessReportConfiguration)" />
+        ///     <see
+        ///         cref="GetCompletenessReport(BO4E.BO.Energiemenge,BO4E.Reporting.CompletenessReport.CompletenessReportConfiguration)" />
         ///     but with all parameters in a configuration container instead of loose arguments.
         /// </summary>
         /// <param name="em">Energiemenge</param>

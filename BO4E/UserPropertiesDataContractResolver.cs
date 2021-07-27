@@ -14,7 +14,7 @@ namespace BO4E
         ///     easily accessible instance of this converter
         /// </summary>
         public static readonly UserPropertiesDataContractResolver Instance =
-            new UserPropertiesDataContractResolver(new HashSet<string>());
+            new(new HashSet<string>());
 
         private readonly HashSet<string> _allowList;
 

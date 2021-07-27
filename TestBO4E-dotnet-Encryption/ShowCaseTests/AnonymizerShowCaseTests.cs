@@ -16,13 +16,13 @@ namespace TestBO4E.Encryption.ShowCaseTests
     [TestClass]
     public class AnonymizerShowCaseTests
     {
-        protected static readonly Energiemenge em = new Energiemenge
+        protected static readonly Energiemenge em = new()
         {
             LokationsId = "DE0123456789012345678901234567890",
             LokationsTyp = Lokationstyp.MeLo,
             Energieverbrauch = new List<Verbrauch>
             {
-                new Verbrauch
+                new()
                 {
                     Einheit = Mengeneinheit.KWH,
                     Startdatum = new DateTimeOffset(2020, 3, 1, 0, 0, 0, TimeSpan.Zero).UtcDateTime,
@@ -31,7 +31,7 @@ namespace TestBO4E.Encryption.ShowCaseTests
                     Obiskennzahl = "1-2-3-4",
                     Wertermittlungsverfahren = Wertermittlungsverfahren.MESSUNG
                 },
-                new Verbrauch
+                new()
                 {
                     Einheit = Mengeneinheit.KWH,
                     Startdatum = new DateTimeOffset(2020, 3, 25, 0, 0, 0, TimeSpan.Zero).UtcDateTime,

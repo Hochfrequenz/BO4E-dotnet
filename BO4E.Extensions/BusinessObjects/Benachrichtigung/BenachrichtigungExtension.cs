@@ -75,7 +75,7 @@ namespace BO4E.Extensions.BusinessObjects.Benachrichtigung
                     if (typeConverter == null) typeConverter = TypeDescriptor.GetConverter(typeof(T));
 
                     {
-                        var value = (T)typeConverter.ConvertFromString(info.Value);
+                        var value = (T) typeConverter.ConvertFromString(info.Value);
                         return predicate(value);
                     }
                 }

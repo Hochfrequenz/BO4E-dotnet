@@ -82,7 +82,7 @@ namespace BO4E.COM
 #pragma warning restore IDE1006 // Naming Styles
         {
             get => Guid.HasValue ? Guid.ToString() : string.Empty;
-            set { Guid = string.IsNullOrWhiteSpace(value) ? (Guid?)null : System.Guid.Parse(value); }
+            set { Guid = string.IsNullOrWhiteSpace(value) ? null : System.Guid.Parse(value); }
         }
 
         /// <summary>

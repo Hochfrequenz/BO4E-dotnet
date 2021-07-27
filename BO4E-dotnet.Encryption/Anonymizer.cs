@@ -18,12 +18,13 @@ using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using Org.BouncyCastle.Crypto;
 using Org.BouncyCastle.Security;
+
 #pragma warning disable 618
 
 namespace BO4E.Encryption
 {
     /// <summary>
-    /// An Anonymizer removes privacy relevant data from business objects.
+    ///     An Anonymizer removes privacy relevant data from business objects.
     /// </summary>
     public class Anonymizer : IDisposable
     {
@@ -46,7 +47,7 @@ namespace BO4E.Encryption
         private AsymmetricKeyParameter _privateKey;
 
         /// <summary>
-        /// initialize the Anonymizer by providing a configuration.
+        ///     initialize the Anonymizer by providing a configuration.
         /// </summary>
         /// <param name="configuration"></param>
         public Anonymizer(AnonymizerConfiguration configuration)
@@ -56,7 +57,7 @@ namespace BO4E.Encryption
         }
 
         /// <summary>
-        /// a public key in X509 format.
+        ///     a public key in X509 format.
         /// </summary>
         public X509Certificate2 PublicKeyX509 { get; set; }
 
@@ -130,7 +131,7 @@ namespace BO4E.Encryption
         }
 
         /// <summary>
-        /// Apply the operations from the configuration provided in the constructor to <paramref name="jobject"/>.
+        ///     Apply the operations from the configuration provided in the constructor to <paramref name="jobject" />.
         /// </summary>
         /// <param name="jobject"></param>
         /// <typeparam name="T"></typeparam>
@@ -188,7 +189,7 @@ namespace BO4E.Encryption
                                 .FirstOrDefault(a => a is JsonPropertyAttribute);
                             if (jsonPropertyAttribute != null)
                             {
-                                var jpa = (JsonPropertyAttribute)jsonPropertyAttribute;
+                                var jpa = (JsonPropertyAttribute) jsonPropertyAttribute;
                                 if (jpa.Required == Required.Always)
                                 {
                                     isRequired = true;
@@ -199,7 +200,7 @@ namespace BO4E.Encryption
 
                             if (isRequired && defaultValueAttribute != null)
                             {
-                                var dva = (DefaultValueAttribute)defaultValueAttribute;
+                                var dva = (DefaultValueAttribute) defaultValueAttribute;
                                 affectedProp.SetValue(result, dva.Value);
                             }
                             else if (bo.GetType().IsSubclassOf(typeof(BusinessObject)))
@@ -276,7 +277,7 @@ namespace BO4E.Encryption
                                 else if (affectedProp.PropertyType.IsSubclassOf(typeof(BusinessObject)))
                                 {
                                     affectedProp.SetValue(result,
-                                        xasyncenc.Encrypt((BusinessObject)affectedProp.GetValue(bo)));
+                                        xasyncenc.Encrypt((BusinessObject) affectedProp.GetValue(bo)));
                                 }
                                 else if (affectedProp.PropertyType.ToString()
                                     .StartsWith(
@@ -314,8 +315,8 @@ namespace BO4E.Encryption
                 }
             }
 
-            if (typeof(T) == typeof(JObject)) return (T)(object)JObject.FromObject(result);
-            return (T)(object)result;
+            if (typeof(T) == typeof(JObject)) return (T) (object) JObject.FromObject(result);
+            return (T) (object) result;
         }
 
         /// <summary>
@@ -330,7 +331,7 @@ namespace BO4E.Encryption
             var inputType = input.GetType();
             if (inputType == typeof(string))
             {
-                var inputString = (string)input;
+                var inputString = (string) input;
                 HashString(ref inputString, dataCategory);
                 input = inputString;
             }
@@ -365,11 +366,11 @@ namespace BO4E.Encryption
                 typeof(IDictionary<string, object>).IsAssignableFrom(inputType)) // typeof BusinessObject.userProperties
             {
                 dynamic dict = input as IDictionary<string, object>;
-                foreach (var dictKey in ((ICollection<string>)dict.Keys).ToList()
+                foreach (var dictKey in ((ICollection<string>) dict.Keys).ToList()
                     .Where(key => !_configuration.UnaffectedUserProperties.Contains(key)))
                     if (dict[dictKey] != null)
                     {
-                        var inputString = (string)dict[dictKey];
+                        var inputString = (string) dict[dictKey];
                         HashString(ref inputString, dataCategory);
                         dict[dictKey] = JToken.FromObject(inputString);
                         /*//dict[dictKey].Set(dict[dictKey].ToString());
@@ -529,7 +530,7 @@ namespace BO4E.Encryption
         }
 
         /// <summary>
-        /// dispose on destruction
+        ///     dispose on destruction
         /// </summary>
         ~Anonymizer()
         {

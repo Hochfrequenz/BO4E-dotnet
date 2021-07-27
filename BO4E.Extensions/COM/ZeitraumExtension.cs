@@ -1,7 +1,7 @@
 ﻿namespace BO4E.Extensions.COM
 {
     /// <summary>
-    /// Extension methods for <see cref="BO4E.COM.Zeitraum"/>
+    ///     Extension methods for <see cref="BO4E.COM.Zeitraum" />
     /// </summary>
     public static class ZeitraumExtension
     {

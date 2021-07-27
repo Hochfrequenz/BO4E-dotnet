@@ -179,7 +179,7 @@ namespace BO4E.BO
                 UserProperties.ContainsKey("lokationsId"))
                 Vertragsteile = new List<Vertragsteil>
                 {
-                    new Vertragsteil
+                    new()
                     {
                         Vertragsteilbeginn = Vertragsbeginn,
                         Vertragsteilende = Vertragsende,
@@ -206,7 +206,7 @@ namespace BO4E.BO
                 v.UserProperties.ContainsKey("lokationsId"))
                 v.Vertragsteile = new List<Vertragsteil>
                 {
-                    new Vertragsteil
+                    new()
                     {
                         Vertragsteilbeginn = v.Vertragsbeginn,
                         Vertragsteilende = v.Vertragsende,

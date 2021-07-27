@@ -23,7 +23,7 @@ namespace BO4E.meta
         private const string NullKeyPlaceholder = "~"; // an allowed character in URLs that is not escaped
 
         private static readonly Regex FilterAndPattern =
-            new Regex(@"\s*(?<key>\w+)\s*(?:=|eq)\s*(['""]|)(?<value>\w+)\1\s*(?:and)?\s*",
+            new(@"\s*(?<key>\w+)\s*(?:=|eq)\s*(['""]|)(?<value>\w+)\1\s*(?:and)?\s*",
                 RegexOptions.IgnoreCase |
                 RegexOptions.Compiled); // \1 backreferences the '" group (in c#, would be \2 in other parsers)
 
@@ -50,7 +50,7 @@ namespace BO4E.meta
         /// <param name="input">string </param>
         public static implicit operator Bo4eUri(string input)
         {
-            return new Bo4eUri(input);
+            return new(input);
         }
 
         /// <summary>
@@ -150,7 +150,7 @@ namespace BO4E.meta
                     }
                     else if (keyProp.GetValue(bo).GetType().IsSubclassOf(typeof(BusinessObject)))
                     {
-                        var innerBo = (BusinessObject)keyProp.GetValue(bo);
+                        var innerBo = (BusinessObject) keyProp.GetValue(bo);
                         relativeUriBuilder.Append(GetUri(innerBo)
                             .GetComponents(UriComponents.Path, UriFormat.UriEscaped));
                     }

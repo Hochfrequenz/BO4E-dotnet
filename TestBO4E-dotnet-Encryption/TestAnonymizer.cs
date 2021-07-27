@@ -47,7 +47,7 @@ namespace TestBO4E.Encryption
                 var ac = new AnonymizerConfiguration();
                 var allApproaches = new HashSet<AnonymizerApproach>();
                 var operations =
-                    JsonConvert.DeserializeObject<Dictionary<string, string>>(((JObject)json["operations"])
+                    JsonConvert.DeserializeObject<Dictionary<string, string>>(((JObject) json["operations"])
                         .ToString());
                 //Assert.AreEqual(json["input"].ToString(), resultJobject.ToString(), "Anonymizer without configuration should return the original message");
                 foreach (var key in operations.Keys)
@@ -100,7 +100,7 @@ namespace TestBO4E.Encryption
                                     @"anonymizerTests/certificates/privateKey.pem")) // file containing RSA PKCS1 private key
                             {
                                 //Org.BouncyCastle.Crypto.Parameters.RsaPrivateCrtKeyParameters rpk = (Org.BouncyCastle.Crypto.Parameters.RsaPrivateCrtKeyParameters)new PemReader(reader).ReadObject();
-                                keyPair = (AsymmetricCipherKeyPair)new PemReader(reader).ReadObject();
+                                keyPair = (AsymmetricCipherKeyPair) new PemReader(reader).ReadObject();
                             }
 
                             d.SetPrivateKey(keyPair.Private);
@@ -156,7 +156,7 @@ namespace TestBO4E.Encryption
                 LokationsTyp = Lokationstyp.MeLo,
                 Energieverbrauch = new List<Verbrauch>
                 {
-                    new Verbrauch
+                    new()
                     {
                         Wert = 123.456M,
                         Wertermittlungsverfahren = Wertermittlungsverfahren.MESSUNG,
@@ -209,7 +209,7 @@ namespace TestBO4E.Encryption
                 LokationsTyp = Lokationstyp.MeLo,
                 Energieverbrauch = new List<Verbrauch>
                 {
-                    new Verbrauch
+                    new()
                     {
                         Wert = 123.456M,
                         Wertermittlungsverfahren = Wertermittlungsverfahren.MESSUNG,
@@ -243,7 +243,7 @@ namespace TestBO4E.Encryption
                     File.OpenText(
                         @"anonymizerTests/certificates/privateKey.pem")) // file containing RSA PKCS1 private key
                 {
-                    keyPair = (AsymmetricCipherKeyPair)new PemReader(reader).ReadObject();
+                    keyPair = (AsymmetricCipherKeyPair) new PemReader(reader).ReadObject();
                 }
 
                 decryptingAnonymizer.SetPrivateKey(keyPair.Private);
@@ -341,7 +341,7 @@ namespace TestBO4E.Encryption
                 LokationsTyp = Lokationstyp.MeLo,
                 Energieverbrauch = new List<Verbrauch>
                 {
-                    new Verbrauch
+                    new()
                     {
                         Wert = 123.456M,
                         Wertermittlungsverfahren = Wertermittlungsverfahren.MESSUNG,

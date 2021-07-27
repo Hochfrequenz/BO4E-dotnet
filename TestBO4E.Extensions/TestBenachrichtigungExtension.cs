@@ -20,8 +20,8 @@ namespace TestBO4E.Extensions
                 Bearbeiter = "dei mudder",
                 Infos = new List<GenericStringStringInfo>
                 {
-                    new GenericStringStringInfo {KeyColumn = "ads", Value = "xyz"},
-                    new GenericStringStringInfo {KeyColumn = "null", Value = null}
+                    new() {KeyColumn = "ads", Value = "xyz"},
+                    new() {KeyColumn = "null", Value = null}
                 }
             };
 
@@ -32,7 +32,7 @@ namespace TestBO4E.Extensions
             Assert.IsFalse(b.Has("someothervalue"));
             Assert.IsTrue(b.Has("ads"));
             Assert.IsTrue(b.Has("null"));
-            Assert.IsFalse(b.Has((string)null));
+            Assert.IsFalse(b.Has((string) null));
 
             Assert.IsFalse(new Benachrichtigung().Has("abc"));
         }
@@ -65,9 +65,9 @@ namespace TestBO4E.Extensions
             var b = JsonConvert.DeserializeObject<Benachrichtigung>(
                 "{\"versionStruktur\":1,\"boTyp\":\"BENACHRICHTIGUNG\",\"benachrichtigungsId\":\"469568\",\"prioritaet\":2,\"bearbeitungsstatus\":1,\"kurztext\":\"Manuelles \u00dcberschreiben von Profilwerten\",\"erstellungsZeitpunkt\":\"2019-04-02T13:35:03Z\",\"kategorie\":\"ZE01\",\"bearbeiter\":\"SCHLEBDA\",\"notizen\":[],\"deadline\":null,\"aufgaben\":[{\"aufgabenId\":\"OVERWRITE\",\"beschreibung\":null,\"deadline\":null,\"ausgefuehrt\":true,\"ausfuehrungsdatum\":null,\"ausfuehrender\":null,\"ccat\":\"ZE01\",\"objtype\":\"ZISUPROFIL\"},{\"aufgabenId\":\"DISPLAY\",\"beschreibung\":null,\"deadline\":null,\"ausgefuehrt\":true,\"ausfuehrungsdatum\":null,\"ausfuehrender\":null,\"ccat\":\"ZE01\",\"objtype\":\"ZISUPROFIL\"}],\"infos\":null,\"MESS\":\"9977768000005\",\"MESSLOKATIONSID\":\"DE0003604763800000000000010376811\",\"TIMESPAN_FROM\":\"2019-03-11T23:30:00Z\",\"TIMESPAN_TO\":\"2019-03-12T22:59:59Z\"}");
             Assert.IsTrue(b.UserProperties.TryGetValue("TIMESPAN_FROM", out var jtLower));
-            _ = (DateTime)jtLower;
+            _ = (DateTime) jtLower;
             Assert.IsTrue(b.UserProperties.TryGetValue("TIMESPAN_TO", out var jtUpper));
-            _ = (DateTime)jtUpper;
+            _ = (DateTime) jtUpper;
         }
     }
 }

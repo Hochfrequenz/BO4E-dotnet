@@ -24,7 +24,7 @@ namespace TestBO4E
                 //Guid = emGuid,
                 Energieverbrauch = new List<Verbrauch>
                 {
-                    new Verbrauch
+                    new()
                     {
                         Einheit = Mengeneinheit.KWH,
                         Wert = 10.0M,
@@ -33,7 +33,7 @@ namespace TestBO4E
                         Obiskennzahl = "1-0:1.8.1"
                         //Guid = v1Guid
                     },
-                    new Verbrauch
+                    new()
                     {
                         Einheit = Mengeneinheit.MWH,
                         Wert = 23.0M,

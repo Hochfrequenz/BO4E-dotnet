@@ -12,7 +12,7 @@ namespace BO4E.meta
         ///     Basic json serializer options if no separate options (e.g. lenient) are used
         /// </summary>
         public static JsonSerializerOptions JsonSerializerDefaultOptions =>
-            new JsonSerializerOptions(JsonSerializerDefaults.Web)
+            new(JsonSerializerDefaults.Web)
             {
                 NumberHandling = JsonNumberHandling.AllowReadingFromString
             };

@@ -10,7 +10,9 @@ using BO4E.meta.LenientConverters;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
-using Newtonsoft.Json.Linq; //using BO4E.Extensions;
+using Newtonsoft.Json.Linq;
+
+//using BO4E.Extensions;
 
 namespace TestBO4E
 {
@@ -32,16 +34,16 @@ namespace TestBO4E
 
                 Assert.IsNotNull(json["objectName"], $"You have to specify the object name in test file {file}");
                 var lenients = LenientParsing.STRICT; // default
-                if (json["lenientDateTime"] != null && (bool)json["lenientDateTime"])
+                if (json["lenientDateTime"] != null && (bool) json["lenientDateTime"])
                     lenients |= LenientParsing.DATE_TIME;
 
-                if (json["lenientEnumList"] != null && (bool)json["lenientEnumList"])
+                if (json["lenientEnumList"] != null && (bool) json["lenientEnumList"])
                     lenients |= LenientParsing.ENUM_LIST;
 
-                if (json["lenientBo4eUri"] != null && (bool)json["lenientBo4eUri"])
+                if (json["lenientBo4eUri"] != null && (bool) json["lenientBo4eUri"])
                     lenients |= LenientParsing.BO4_E_URI;
 
-                if (json["lenientStringToInt"] != null && (bool)json["lenientStringToInt"])
+                if (json["lenientStringToInt"] != null && (bool) json["lenientStringToInt"])
                     lenients |= LenientParsing.STRING_TO_INT;
 
                 BusinessObject bo;
@@ -52,7 +54,7 @@ namespace TestBO4E
                 }
                 catch (Exception e) when (e is ArgumentException || e is JsonSerializationException)
                 {
-                    bo = BoMapper.MapObject(json["objectName"].ToString(), (JObject)json["input"], lenients);
+                    bo = BoMapper.MapObject(json["objectName"].ToString(), (JObject) json["input"], lenients);
                 }
 
                 var regularOutputString = JsonConvert.SerializeObject(bo, new StringEnumConverter());
@@ -96,7 +98,7 @@ namespace TestBO4E
                         }
                         catch (ArgumentException)
                         {
-                            boLenient = BoMapper.MapObject(json["objectName"].ToString(), (JObject)json["input"],
+                            boLenient = BoMapper.MapObject(json["objectName"].ToString(), (JObject) json["input"],
                                 whitelist, lenient);
                         }
                         catch (JsonSerializationException jse)

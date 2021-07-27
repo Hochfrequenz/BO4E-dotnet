@@ -23,7 +23,7 @@ namespace BO4E.meta.LenientConverters
             JsonSerializer serializer)
         {
             if (reader.Value == null) return null;
-            var rawString = (string)reader.Value;
+            var rawString = (string) reader.Value;
             if (rawString.Trim() == string.Empty) return null;
             return new Bo4eUri(rawString);
         }

@@ -74,8 +74,7 @@ namespace BO4E.BO
         ///     This keeps the Business Object simple but allows for user specific arguments beyond
         ///     the BO4E standard to be passed along.
         /// </example>
-        [Newtonsoft.Json.JsonIgnore]
-        [ProtoIgnore]
+        [Newtonsoft.Json.JsonIgnore] [ProtoIgnore]
         public const string USER_PROPERTIES_NAME = "userProperties";
 
 
@@ -126,7 +125,7 @@ namespace BO4E.BO
 #pragma warning restore IDE1006 // Naming Styles
         {
             get => Guid.HasValue ? Guid.ToString() : string.Empty;
-            set { Guid = string.IsNullOrWhiteSpace(value) ? (Guid?)null : System.Guid.Parse(value); }
+            set { Guid = string.IsNullOrWhiteSpace(value) ? null : System.Guid.Parse(value); }
         }
 
         /// <summary>
@@ -582,7 +581,7 @@ namespace BO4E.BO
                         .MakeGenericMethod(boType);
                     try
                     {
-                        return deserializationMethod.Invoke(serializer, new object[] { jo.CreateReader() });
+                        return deserializationMethod.Invoke(serializer, new object[] {jo.CreateReader()});
                     }
                     catch (TargetInvocationException tie) when (tie.InnerException != null)
                     {

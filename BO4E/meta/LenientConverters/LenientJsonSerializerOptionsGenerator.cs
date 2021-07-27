@@ -85,11 +85,11 @@ namespace BO4E.meta.LenientConverters
                         case LenientParsing.STRING_TO_INT:
                             settings.Converters.Add(new LenientSystemTextJsonStringToIntConverter());
                             break;
-                            // case LenientParsing.EmptyLists:
-                            // converters.Add(new LenientRequiredListConverter());
-                            // break;
+                        // case LenientParsing.EmptyLists:
+                        // converters.Add(new LenientRequiredListConverter());
+                        // break;
 
-                            // no default case because NONE and MOST_LENIENT do not come up with more converters
+                        // no default case because NONE and MOST_LENIENT do not come up with more converters
                     }
             //IContractResolver contractResolver;
             //if (userPropertiesWhiteList.Count > 0)

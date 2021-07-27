@@ -8,29 +8,29 @@ public static class JsonHelper
         switch (token.Type)
         {
             case JTokenType.Object:
+            {
+                var copy = new JObject();
+                foreach (var prop in token.Children<JProperty>())
                 {
-                    var copy = new JObject();
-                    foreach (var prop in token.Children<JProperty>())
-                    {
-                        var child = prop.Value;
-                        if (child.HasValues) child = RemoveEmptyChildren(child);
-                        if (!IsEmpty(child)) copy.Add(prop.Name, child);
-                    }
-
-                    return copy;
+                    var child = prop.Value;
+                    if (child.HasValues) child = RemoveEmptyChildren(child);
+                    if (!IsEmpty(child)) copy.Add(prop.Name, child);
                 }
+
+                return copy;
+            }
             case JTokenType.Array:
+            {
+                var copy = new JArray();
+                foreach (var item in token.Children())
                 {
-                    var copy = new JArray();
-                    foreach (var item in token.Children())
-                    {
-                        var child = item;
-                        if (child.HasValues) child = RemoveEmptyChildren(child);
-                        if (!IsEmpty(child)) copy.Add(child);
-                    }
-
-                    return copy;
+                    var child = item;
+                    if (child.HasValues) child = RemoveEmptyChildren(child);
+                    if (!IsEmpty(child)) copy.Add(child);
                 }
+
+                return copy;
+            }
             default:
                 return token;
         }

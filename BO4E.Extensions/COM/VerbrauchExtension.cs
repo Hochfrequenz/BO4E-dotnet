@@ -10,7 +10,7 @@ using Newtonsoft.Json;
 namespace BO4E.Extensions.COM
 {
     /// <summary>
-    /// Extension Methods for <see cref="BO4E.COM.Verbrauch"/>
+    ///     Extension Methods for <see cref="BO4E.COM.Verbrauch" />
     /// </summary>
     public static class VerbrauchExtension
     {
@@ -21,25 +21,29 @@ namespace BO4E.Extensions.COM
         /// <param name="v1"></param>
         /// <param name="v2"></param>
         /// <returns></returns>
-        public static HashSet<Verbrauch> Merge(this Verbrauch v1, Verbrauch v2) =>
-            v1.Merge(v2, false, false);
+        public static HashSet<Verbrauch> Merge(this Verbrauch v1, Verbrauch v2)
+        {
+            return v1.Merge(v2, false, false);
+        }
 
         /// <summary>
-        /// Apply <see cref="Merge(BO4E.COM.Verbrauch,BO4E.COM.Verbrauch)"/> to the provided Verbräuche.
-        /// But remove identical entries that occur in both <paramref name="v1"/> and <paramref name="v2"/> 
+        ///     Apply <see cref="Merge(BO4E.COM.Verbrauch,BO4E.COM.Verbrauch)" /> to the provided Verbräuche.
+        ///     But remove identical entries that occur in both <paramref name="v1" /> and <paramref name="v2" />
         /// </summary>
         /// <param name="v1"></param>
         /// <param name="v2"></param>
         /// <param name="biased"></param>
         /// <returns></returns>
-        public static HashSet<Verbrauch> MergeRedundant(this Verbrauch v1, Verbrauch v2, bool biased) =>
-            v1.Merge(v2, true, biased);
+        public static HashSet<Verbrauch> MergeRedundant(this Verbrauch v1, Verbrauch v2, bool biased)
+        {
+            return v1.Merge(v2, true, biased);
+        }
 
         /// <summary>
-        /// merge two <see cref="Verbrauch"/> entities.
-        /// Merging means that two entites are moved into one entites that has the same properties as the two combined.
-        /// Depending on the unit this could mean adding their values or averaging them.
-        /// See the unittests for details.
+        ///     merge two <see cref="Verbrauch" /> entities.
+        ///     Merging means that two entites are moved into one entites that has the same properties as the two combined.
+        ///     Depending on the unit this could mean adding their values or averaging them.
+        ///     See the unittests for details.
         /// </summary>
         /// <param name="v1"></param>
         /// <param name="v2"></param>
@@ -72,15 +76,15 @@ namespace BO4E.Extensions.COM
                         if (redundant)
                         {
                             var exclusiveV1Wert =
-                                (decimal)(tr1.Duration.TotalSeconds - overlap.Duration.TotalSeconds) * v1.Wert /
-                                (decimal)tr1.Duration.TotalSeconds;
+                                (decimal) (tr1.Duration.TotalSeconds - overlap.Duration.TotalSeconds) * v1.Wert /
+                                (decimal) tr1.Duration.TotalSeconds;
                             var exclusiveV2Wert =
-                                (decimal)(tr2.Duration.TotalSeconds - overlap.Duration.TotalSeconds) * v2.Wert /
-                                (decimal)tr2.Duration.TotalSeconds;
-                            var overlapV1Wert = (decimal)overlap.Duration.TotalSeconds * v1.Wert /
-                                                (decimal)tr1.Duration.TotalSeconds;
-                            var overlapV2Wert = (decimal)overlap.Duration.TotalSeconds * v2.Wert /
-                                                (decimal)tr2.Duration.TotalSeconds;
+                                (decimal) (tr2.Duration.TotalSeconds - overlap.Duration.TotalSeconds) * v2.Wert /
+                                (decimal) tr2.Duration.TotalSeconds;
+                            var overlapV1Wert = (decimal) overlap.Duration.TotalSeconds * v1.Wert /
+                                                (decimal) tr1.Duration.TotalSeconds;
+                            var overlapV2Wert = (decimal) overlap.Duration.TotalSeconds * v2.Wert /
+                                                (decimal) tr2.Duration.TotalSeconds;
                             if (biased)
                             {
                                 // biased ==> assume that v2 is contained in v1
@@ -208,15 +212,18 @@ namespace BO4E.Extensions.COM
         /// <returns></returns>
         public static TimeRange GetTimeRange(this Verbrauch v)
         {
-            return new TimeRange(v.Startdatum, v.Enddatum);
+            return new(v.Startdatum, v.Enddatum);
         }
 
         /// <summary>
-        /// <see cref="ITimePeriod.GetDuration"/>
+        ///     <see cref="ITimePeriod.GetDuration" />
         /// </summary>
         /// <param name="v"></param>
         /// <returns></returns>
-        public static TimeSpan GetDuration(this Verbrauch v) => v.GetTimeRange().Duration;
+        public static TimeSpan GetDuration(this Verbrauch v)
+        {
+            return v.GetTimeRange().Duration;
+        }
 
 
         /// <summary>
@@ -252,7 +259,7 @@ namespace BO4E.Extensions.COM
                 // |----x----|--------y--------|
                 //var adjacentVerbrauchs = from x in vGroup join y in vGroup on x.enddatum equals y.startdatum select new { x, y };
                 var adjacentVerbrauchs =
-                    from x in vGroup join y in vGroup on x.Enddatum equals y.Startdatum select new { x, y };
+                    from x in vGroup join y in vGroup on x.Enddatum equals y.Startdatum select new {x, y};
                 foreach (var av in adjacentVerbrauchs)
                 {
                     subResult.Add(av.x);
@@ -264,8 +271,8 @@ namespace BO4E.Extensions.COM
                 // ==> delete z from result where z.start == x.start and z.end == y.end
                 //var fullyRedundantVerbrauchs = from av in adjacentVerbrauchs join z in vGroup on new { av.x.startdatum, av.y.enddatum } equals new { z.startdatum, z.enddatum } select new { av, z };
                 var fullyRedundantVerbrauchs = from av in adjacentVerbrauchs
-                                               join z in vGroup on new { av.x.Startdatum, av.y.Enddatum } equals new { z.Startdatum, z.Enddatum }
-                                               select new { av, z };
+                    join z in vGroup on new {av.x.Startdatum, av.y.Enddatum} equals new {z.Startdatum, z.Enddatum}
+                    select new {av, z};
                 foreach (var frv in fullyRedundantVerbrauchs)
                 {
                     if (frv.av.x.Wert + frv.av.y.Wert != frv.z.Wert)
@@ -291,7 +298,7 @@ namespace BO4E.Extensions.COM
                     if (ys.Any())
                     {
                         var tps = new TimePeriodSubtractor<TimeRange>();
-                        var source = new TimePeriodCollection { z.GetTimeRange() };
+                        var source = new TimePeriodCollection {z.GetTimeRange()};
                         var subtract = new TimePeriodCollection();
                         subtract.AddAll(ys.Select(y => y.GetTimeRange()));
                         var subtractionResult = tps.SubtractPeriods(source, subtract);
@@ -312,7 +319,7 @@ namespace BO4E.Extensions.COM
                         var totalXWert = z.Wert - ys.Select(y => y.Wert).Sum();
                         var totalXDuration = xs.Select(x => x.GetDuration().TotalSeconds).Sum();
                         foreach (var x in xs)
-                            x.Wert = totalXWert * (decimal)x.GetDuration().TotalSeconds / (decimal)totalXDuration;
+                            x.Wert = totalXWert * (decimal) x.GetDuration().TotalSeconds / (decimal) totalXDuration;
                         subResult.Remove(z);
                         subResult.UnionWith(xs);
                     }
@@ -355,7 +362,7 @@ namespace BO4E.Extensions.COM
         }
 
         /// <summary>
-        /// <inheritdoc cref="ITimePeriod.OverlapsWith"/>
+        ///     <inheritdoc cref="ITimePeriod.OverlapsWith" />
         /// </summary>
         /// <param name="v1"></param>
         /// <param name="tr2"></param>
@@ -366,7 +373,7 @@ namespace BO4E.Extensions.COM
         }
 
         /// <summary>
-        /// <inheritdoc cref="ITimeRange.GetIntersection"/>
+        ///     <inheritdoc cref="ITimeRange.GetIntersection" />
         /// </summary>
         /// <param name="v1"></param>
         /// <param name="tr2"></param>
@@ -377,7 +384,7 @@ namespace BO4E.Extensions.COM
         }
 
         /// <summary>
-        /// <inheritdoc cref="ITimeRange.GetIntersection"/>
+        ///     <inheritdoc cref="ITimeRange.GetIntersection" />
         /// </summary>
         /// <param name="v1"></param>
         /// <param name="v2"></param>
@@ -388,7 +395,7 @@ namespace BO4E.Extensions.COM
         }
 
         /// <summary>
-        /// <inheritdoc cref="ITimePeriod.OverlapsWith"/>
+        ///     <inheritdoc cref="ITimePeriod.OverlapsWith" />
         /// </summary>
         /// <param name="v1"></param>
         /// <param name="v2"></param>

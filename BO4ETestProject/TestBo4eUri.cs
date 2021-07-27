@@ -14,7 +14,7 @@ namespace TestBO4E
     [TestClass]
     public class TestBo4eURI
     {
-        private static readonly Dictionary<string, string> boNameResults = new Dictionary<string, string>
+        private static readonly Dictionary<string, string> boNameResults = new()
         {
             {"bo4e://Marktlokation/987654321098", "Marktlokation"},
             {"bo4e://hurzelasdanoafi/123456", null},
@@ -25,7 +25,7 @@ namespace TestBO4E
             {"bo4e://Marktlokation/?backendId=10000001308", "Marktlokation"}
         };
 
-        private static readonly Dictionary<Type, List<string>> boKeyNamesResults = new Dictionary<Type, List<string>>
+        private static readonly Dictionary<Type, List<string>> boKeyNamesResults = new()
         {
             {typeof(Marktlokation), new List<string> {"marktlokationsId"}},
             {
@@ -33,7 +33,7 @@ namespace TestBO4E
             } //<-- should be the json property name if annotated 
         };
 
-        private static readonly Dictionary<string, bool> validationResults = new Dictionary<string, bool>
+        private static readonly Dictionary<string, bool> validationResults = new()
         {
             {"bo4e://Marktlokation/987654321098", true},
             // {"   bo4e://Leerzeichen/987654321098", false },

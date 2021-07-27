@@ -29,15 +29,13 @@ namespace BO4E.ENUM.EDI
         /// <summary>
         ///     Absender / Marktpartner
         /// </summary>
-        [Mapping(Geschaeftspartnerrolle.MARKTPARTNER)]
-        [Obsolete("Not biunique!")]
+        [Mapping(Geschaeftspartnerrolle.MARKTPARTNER)] [Obsolete("Not biunique!")]
         MS,
 
         /// <summary>
         ///     Empfänger / Marktpartner
         /// </summary>
-        [Mapping(Geschaeftspartnerrolle.MARKTPARTNER)]
-        [Obsolete("Not biunique!")]
+        [Mapping(Geschaeftspartnerrolle.MARKTPARTNER)] [Obsolete("Not biunique!")]
         MR,
 
         /// <summary>

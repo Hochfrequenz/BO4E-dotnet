@@ -22,7 +22,7 @@ namespace TestBO4E.Reporting.ShowCaseTests
                 LokationsTyp = Lokationstyp.MeLo,
                 Energieverbrauch = new List<Verbrauch>
                 {
-                    new Verbrauch
+                    new()
                     {
                         Einheit = Mengeneinheit.KWH,
                         Startdatum = new DateTimeOffset(2020, 3, 1, 0, 0, 0, TimeSpan.Zero).UtcDateTime,
@@ -30,7 +30,7 @@ namespace TestBO4E.Reporting.ShowCaseTests
                         Wert = 456.0M,
                         Wertermittlungsverfahren = Wertermittlungsverfahren.MESSUNG
                     },
-                    new Verbrauch
+                    new()
                     {
                         Einheit = Mengeneinheit.KWH,
                         Startdatum = new DateTimeOffset(2020, 3, 25, 0, 0, 0, TimeSpan.Zero).UtcDateTime,

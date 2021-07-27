@@ -28,7 +28,7 @@ namespace BO4E.meta.LenientConverters
         /// <returns></returns>
         public override JsonConverter CreateConverter(Type typeToConvert, JsonSerializerOptions options)
         {
-            var converter = (JsonConverter)Activator.CreateInstance(
+            var converter = (JsonConverter) Activator.CreateInstance(
                 typeof(StringNullableEnumConverter<>).MakeGenericType(typeToConvert),
                 BindingFlags.Instance | BindingFlags.Public,
                 null,
@@ -62,7 +62,7 @@ namespace BO4E.meta.LenientConverters
         public StringNullableEnumConverter(JsonSerializerOptions options)
         {
             // for performance, use the existing converter if available
-            if (options != null) _converter = (JsonConverter<T>)options.GetConverter(typeof(T));
+            if (options != null) _converter = (JsonConverter<T>) options.GetConverter(typeof(T));
 
             // cache the underlying type
             _underlyingType = Nullable.GetUnderlyingType(typeof(T));
@@ -107,7 +107,7 @@ namespace BO4E.meta.LenientConverters
                 try
                 {
                     var result = Enum.Parse(_underlyingType, value, true);
-                    return (T)result;
+                    return (T) result;
                 }
                 catch (Exception)
                 {
@@ -115,10 +115,7 @@ namespace BO4E.meta.LenientConverters
                 }
             }
 
-            if (reader.TokenType == JsonTokenType.Number)
-            {
-                return (T)Enum.ToObject(_underlyingType, reader.GetInt32());
-            }
+            if (reader.TokenType == JsonTokenType.Number) return (T) Enum.ToObject(_underlyingType, reader.GetInt32());
 
             return default;
         }

@@ -23,7 +23,7 @@ namespace BO4E.BO
     public class Messlokation : BusinessObject
     {
         [Newtonsoft.Json.JsonIgnore]
-        private static readonly Regex RegexValidate = new Regex(@"[A-Z\d]{33}", RegexOptions.Compiled);
+        private static readonly Regex RegexValidate = new(@"[A-Z\d]{33}", RegexOptions.Compiled);
 
         /// <summary>
         ///     Die Messlokations-Identifikation. Das ist die frühere Zählpunktbezeichnung,

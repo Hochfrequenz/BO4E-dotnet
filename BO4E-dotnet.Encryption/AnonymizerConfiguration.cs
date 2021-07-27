@@ -36,18 +36,18 @@ namespace BO4E.Encryption
             ConfigurationKey = null;
             Operations = new Dictionary<DataCategory, AnonymizerApproach>();
             foreach (var ao in Enum.GetValues(typeof(DataCategory)))
-                Operations.Add((DataCategory)ao, AnonymizerApproach.KEEP);
+                Operations.Add((DataCategory) ao, AnonymizerApproach.KEEP);
             UnaffectedUserProperties = new HashSet<string>();
         }
 
         /// <summary>
-        /// The operations ("approaches") to by performed per data category.
+        ///     The operations ("approaches") to by performed per data category.
         /// </summary>
         [JsonProperty(Required = Required.Always, PropertyName = "operations")]
         public Dictionary<DataCategory, AnonymizerApproach> Operations { get; private set; }
 
         /// <summary>
-        /// name of the configuration.
+        ///     name of the configuration.
         /// </summary>
         [JsonProperty(Required = Required.Default)]
         public string ConfigurationKey { get; private set; }

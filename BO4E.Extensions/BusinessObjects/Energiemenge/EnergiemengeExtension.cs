@@ -226,7 +226,7 @@ namespace BO4E.Extensions.BusinessObjects.Energiemenge
         ///     )
         ///     for a pure Energiemenge with automatically found parameters.
         /// </summary>
-        /// <seealso cref="IsPure"/>
+        /// <seealso cref="IsPure" />
         /// <param name="em">Energiemenge</param>
         /// <returns>Tuple of average value and unit of measurement</returns>
         public static Tuple<decimal?, Mengeneinheit> GetAverage(this BO.Energiemenge em)
@@ -363,7 +363,7 @@ namespace BO4E.Extensions.BusinessObjects.Energiemenge
         }
 
         /// <summary>
-        ///     <see cref="GetMissingTimeRanges(BO4E.BO.Energiemenge)"/>
+        ///     <see cref="GetMissingTimeRanges(BO4E.BO.Energiemenge)" />
         /// </summary>
         /// <param name="em">Energiemenge</param>
         /// <param name="reference">reference time frame</param>
@@ -424,7 +424,8 @@ namespace BO4E.Extensions.BusinessObjects.Energiemenge
         }
 
         /// <summary>
-        ///     <see cref="IsEvenlySpaced(BO4E.BO.Energiemenge,Itenso.TimePeriod.ITimeRange,BO4E.ENUM.Wertermittlungsverfahren,string,BO4E.ENUM.Mengeneinheit,bool)"/>
+        ///     <see
+        ///         cref="IsEvenlySpaced(BO4E.BO.Energiemenge,Itenso.TimePeriod.ITimeRange,BO4E.ENUM.Wertermittlungsverfahren,string,BO4E.ENUM.Mengeneinheit,bool)" />
         /// </summary>
         /// <param name="em">Energiemenge</param>
         /// <param name="allowGaps"></param>
@@ -542,7 +543,7 @@ namespace BO4E.Extensions.BusinessObjects.Energiemenge
 
         /// <summary>
         ///     Get ratio of overlap between given Energiemenge and a reference.
-        ///     Method is basically just another name for <see cref="GetOverlapFactor"/>
+        ///     Method is basically just another name for <see cref="GetOverlapFactor" />
         /// </summary>
         /// <param name="em">Energiemenge</param>
         /// <param name="reference">reference time range</param>
@@ -606,10 +607,10 @@ namespace BO4E.Extensions.BusinessObjects.Energiemenge
             try
             {
                 if (toReference)
-                    return (decimal)intersectedPeriods.TotalDuration.TotalSeconds /
-                           (decimal)reference.Duration.TotalSeconds;
+                    return (decimal) intersectedPeriods.TotalDuration.TotalSeconds /
+                           (decimal) reference.Duration.TotalSeconds;
 
-                return (decimal)intersectedPeriods.TotalDuration.TotalSeconds / (decimal)period.Duration.TotalSeconds;
+                return (decimal) intersectedPeriods.TotalDuration.TotalSeconds / (decimal) period.Duration.TotalSeconds;
             }
             catch (DivideByZeroException)
             {
@@ -686,20 +687,20 @@ namespace BO4E.Extensions.BusinessObjects.Energiemenge
                 var values = new Dictionary<string, object>();
                 // ToDo: make it nice.
                 foreach (var v in em.Energieverbrauch.Where(v => v.UserProperties != null))
-                    foreach (var key in upKeys)
-                        if (v.UserProperties.TryGetValue(key, out var rawValue))
+                foreach (var key in upKeys)
+                    if (v.UserProperties.TryGetValue(key, out var rawValue))
+                    {
+                        if (values.TryGetValue(key, out var onlyValue))
                         {
-                            if (values.TryGetValue(key, out var onlyValue))
-                            {
-                                if (rawValue == null && onlyValue != null)
-                                    return false;
-                                if (rawValue != null && !rawValue.Equals(onlyValue)) return false;
-                            }
-                            else
-                            {
-                                values.Add(key, rawValue);
-                            }
+                            if (rawValue == null && onlyValue != null)
+                                return false;
+                            if (rawValue != null && !rawValue.Equals(onlyValue)) return false;
                         }
+                        else
+                        {
+                            values.Add(key, rawValue);
+                        }
+                    }
 
                 return true;
             }
@@ -742,17 +743,17 @@ namespace BO4E.Extensions.BusinessObjects.Energiemenge
         }
 
         /// <summary>
-        /// Splits the energy menge in groups that share the same:
-        /// * <see cref="Verbrauch.Wertermittlungsverfahren"/>,
-        /// * <see cref="Verbrauch.Einheit"/>,
-        /// * <see cref="Verbrauch.Obiskennzahl"/>
-        /// and are considered "pure".
+        ///     Splits the energy menge in groups that share the same:
+        ///     * <see cref="Verbrauch.Wertermittlungsverfahren" />,
+        ///     * <see cref="Verbrauch.Einheit" />,
+        ///     * <see cref="Verbrauch.Obiskennzahl" />
+        ///     and are considered "pure".
         /// </summary>
         /// <param name="em"></param>
-        /// <returns>a list of pure energiemengen (<see cref="IsPure"/>)</returns>
+        /// <returns>a list of pure energiemengen (<see cref="IsPure" />)</returns>
         public static List<BO.Energiemenge> SplitInPureGroups(this BO.Energiemenge em)
         {
-            if (em.Energieverbrauch == null) return new List<BO.Energiemenge> { em };
+            if (em.Energieverbrauch == null) return new List<BO.Energiemenge> {em};
 
             var result = new List<BO.Energiemenge>();
             foreach (var group in em.Energieverbrauch.GroupBy(PurityGrouper))
@@ -830,7 +831,7 @@ namespace BO4E.Extensions.BusinessObjects.Energiemenge
         }
 
         /// <summary>
-        ///     tests if the method <see cref="Verbrauch.FixSapBugs"/> has been executed yet.
+        ///     tests if the method <see cref="Verbrauch.FixSapBugs" /> has been executed yet.
         /// </summary>
         /// <returns>true if Energiemenge has been sanitized</returns>
         private static bool HasBeenSanitized(this BO.Energiemenge em)
@@ -848,7 +849,7 @@ namespace BO4E.Extensions.BusinessObjects.Energiemenge
                     case bool token:
                         return token;
                     default:
-                        sanitized = ((JsonElement)sapSanitizedToken).GetBoolean();
+                        sanitized = ((JsonElement) sapSanitizedToken).GetBoolean();
                         break;
                 }
 
@@ -856,7 +857,7 @@ namespace BO4E.Extensions.BusinessObjects.Energiemenge
         }
 
         /// <summary>
-        /// Apply <see cref="VerbrauchExtension.Detangle"/> to the <see cref="BO4E.BO.Energiemenge.Energieverbrauch"/>.
+        ///     Apply <see cref="VerbrauchExtension.Detangle" /> to the <see cref="BO4E.BO.Energiemenge.Energieverbrauch" />.
         /// </summary>
         /// <param name="em"></param>
         public static void Detangle(this BO.Energiemenge em)

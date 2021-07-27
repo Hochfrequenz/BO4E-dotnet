@@ -52,9 +52,9 @@ namespace TestBO4E
                 },
                 InternList = new List<NestedObject>
                 {
-                    new NestedObject {BoolDeutsch = false, IntDeutsch = 10, InternDeutsch = "internalList1"},
-                    new NestedObject {BoolDeutsch = false, IntDeutsch = 35, InternDeutsch = "internalList2"},
-                    new NestedObject {BoolDeutsch = true, IntDeutsch = 1200, InternDeutsch = "internalList3"}
+                    new() {BoolDeutsch = false, IntDeutsch = 10, InternDeutsch = "internalList1"},
+                    new() {BoolDeutsch = false, IntDeutsch = 35, InternDeutsch = "internalList2"},
+                    new() {BoolDeutsch = true, IntDeutsch = 1200, InternDeutsch = "internalList3"}
                 }
             };
             var settings = new JsonSerializerSettings

@@ -7,7 +7,7 @@ using Sodium;
 namespace BO4E.Encryption
 {
     /// <summary>
-    /// An encrypter using symmetric encryption.
+    ///     An encrypter using symmetric encryption.
     /// </summary>
     public class SymmetricEncrypter : Encrypter
     {
@@ -89,7 +89,7 @@ namespace BO4E.Encryption
         }
 
         /// <summary>
-        /// <inheritdoc cref="Encrypter.Decrypt"/>
+        ///     <inheritdoc cref="Encrypter.Decrypt" />
         /// </summary>
         /// <param name="cipherText"></param>
         /// <param name="associatedData"></param>
@@ -102,35 +102,35 @@ namespace BO4E.Encryption
         }
 
         /// <summary>
-        /// <inheritdoc cref="Encrypter.Decrypt"/>
+        ///     <inheritdoc cref="Encrypter.Decrypt" />
         /// </summary>
         /// <param name="encryptedObject"></param>
         /// <returns></returns>
         public override BusinessObject Decrypt(EncryptedObject encryptedObject)
         {
             var
-                eo = (EncryptedObjectAEAD)encryptedObject; //(EncryptedObjectAEAD)BoMapper.MapObject("EncryptedObjectAEAD", JObject.FromObject(encryptedObject));
+                eo = (EncryptedObjectAEAD) encryptedObject; //(EncryptedObjectAEAD)BoMapper.MapObject("EncryptedObjectAEAD", JObject.FromObject(encryptedObject));
             if (eo == null) return null;
             var plainString = Decrypt(eo.CipherText, eo.AssociatedData, eo.Nonce);
             return JsonConvert.DeserializeObject<BusinessObject>(plainString, encryptionSerializerSettings);
         }
 
         /// <summary>
-        /// <inheritdoc cref="Encrypter.Decrypt{T}"/>
+        ///     <inheritdoc cref="Encrypter.Decrypt{T}" />
         /// </summary>
         /// <param name="encryptedObject"></param>
         /// <typeparam name="T"></typeparam>
         /// <returns></returns>
         public override T Decrypt<T>(EncryptedObject encryptedObject)
         {
-            var eo = (EncryptedObjectAEAD)encryptedObject;
+            var eo = (EncryptedObjectAEAD) encryptedObject;
             if (eo == null) return null;
             var plainString = Decrypt(eo.CipherText, eo.AssociatedData, eo.Nonce);
             return JsonConvert.DeserializeObject<T>(plainString, encryptionSerializerSettings);
         }
 
         /// <summary>
-        /// <inheritdoc cref="Encrypter.Dispose"/>
+        ///     <inheritdoc cref="Encrypter.Dispose" />
         /// </summary>
         public override void Dispose()
         {
@@ -140,7 +140,7 @@ namespace BO4E.Encryption
         }
 
         /// <summary>
-        /// <inheritdoc cref="Encrypter.Dispose"/>
+        ///     <inheritdoc cref="Encrypter.Dispose" />
         /// </summary>
         ~SymmetricEncrypter()
         {

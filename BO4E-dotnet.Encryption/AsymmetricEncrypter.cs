@@ -7,7 +7,7 @@ using Sodium;
 namespace BO4E.Encryption
 {
     /// <summary>
-    /// An encrypter that uses asymmetric encryption.
+    ///     An encrypter that uses asymmetric encryption.
     /// </summary>
     public class AsymmetricEncrypter : Encrypter
     {
@@ -111,7 +111,7 @@ namespace BO4E.Encryption
         }
 
         /// <summary>
-        /// <inheritdoc cref="Encrypter.Decrypt"/>
+        ///     <inheritdoc cref="Encrypter.Decrypt" />
         /// </summary>
         /// <param name="encryptedObject"></param>
         /// <returns></returns>
@@ -126,7 +126,7 @@ namespace BO4E.Encryption
         }
 
         /// <summary>
-        /// <inheritdoc cref="Encrypter.Decrypt{T}"/>
+        ///     <inheritdoc cref="Encrypter.Decrypt{T}" />
         /// </summary>
         /// <param name="encryptedObject"></param>
         /// <typeparam name="T"></typeparam>
@@ -142,7 +142,7 @@ namespace BO4E.Encryption
         }
 
         /// <summary>
-        /// <inheritdoc cref="Encrypter.Dispose"/>
+        ///     <inheritdoc cref="Encrypter.Dispose" />
         /// </summary>
         public override void Dispose()
         {
@@ -152,7 +152,7 @@ namespace BO4E.Encryption
         }
 
         /// <summary>
-        /// <inheritdoc cref="Encrypter.Dispose"/>
+        ///     <inheritdoc cref="Encrypter.Dispose" />
         /// </summary>
         ~AsymmetricEncrypter()
         {

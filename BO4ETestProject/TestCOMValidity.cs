@@ -18,7 +18,7 @@ namespace TestBO4E
                 Startdatum = new DateTime(),
                 Enddatum = new DateTime(),
                 Einheit = Mengeneinheit.ANZAHL,
-                Wert = (decimal)123.456,
+                Wert = (decimal) 123.456,
                 Obiskennzahl = "asd"
             };
             Assert.IsTrue(v2.IsValid());

@@ -24,7 +24,7 @@ namespace BO4E
         /// </summary>
         public const string PackagePrefix = "BO4E.BO";
 
-        private static readonly Regex BoRegex = new Regex(@"BO4E\.(?:Extensions\.)?BO\.\b(?<boName>\w+)\b",
+        private static readonly Regex BoRegex = new(@"BO4E\.(?:Extensions\.)?BO\.\b(?<boName>\w+)\b",
             RegexOptions.Compiled);
 
         /// <summary>
@@ -84,7 +84,7 @@ namespace BO4E
         public static TBusinessObjectType MapObject<TBusinessObjectType>(JObject jobject,
             LenientParsing lenient = LenientParsing.STRICT)
         {
-            return (TBusinessObjectType)Convert.ChangeType(MapObject(typeof(TBusinessObjectType), jobject, lenient),
+            return (TBusinessObjectType) Convert.ChangeType(MapObject(typeof(TBusinessObjectType), jobject, lenient),
                 typeof(TBusinessObjectType));
         }
 
@@ -143,10 +143,10 @@ namespace BO4E
                 throw new ArgumentException("Mapping is only allowed for types derived from BO4E.BO.BusinessObject");
 
             if (lenient == LenientParsing.STRICT && userPropertiesWhiteList.Count == 0)
-                return (BusinessObject)jobject.ToObject(businessObjectType);
+                return (BusinessObject) jobject.ToObject(businessObjectType);
 
             var settings = lenient.GetJsonSerializerSettings();
-            return (BusinessObject)JsonConvert.DeserializeObject(jobject.ToString(), businessObjectType, settings);
+            return (BusinessObject) JsonConvert.DeserializeObject(jobject.ToString(), businessObjectType, settings);
         }
 
         /// <summary>
@@ -169,7 +169,7 @@ namespace BO4E
             HashSet<string> userPropertiesWhiteList, LenientParsing lenient = LenientParsing.STRICT)
         {
             var businessObjectType = typeof(TBusinessObjectType);
-            return (TBusinessObjectType)Convert.ChangeType(
+            return (TBusinessObjectType) Convert.ChangeType(
                 MapObject(businessObjectType, jobject, userPropertiesWhiteList, lenient), typeof(TBusinessObjectType));
         }
 
@@ -212,8 +212,8 @@ namespace BO4E
             return clazz != null
                 ? clazz
                 : (from boName in GetValidBoNames()
-                   where string.Equals(boName, businessObjectName, StringComparison.CurrentCultureIgnoreCase)
-                   select Assembly.GetExecutingAssembly().GetType(PackagePrefix + "." + boName)).FirstOrDefault();
+                    where string.Equals(boName, businessObjectName, StringComparison.CurrentCultureIgnoreCase)
+                    select Assembly.GetExecutingAssembly().GetType(PackagePrefix + "." + boName)).FirstOrDefault();
 
             //throw new ArgumentException($"No implemented BusinessObject type matches the name '{businessObjectName}'.");
         }
@@ -260,7 +260,8 @@ namespace BO4E
         /// <summary>
         ///     Shortcut for <see cref="GetAnnotatedFields(string, Type)" /> with DataCategoryAttribute as default.
         /// </summary>
-        /// <param name="boName">name of the business object in title case
+        /// <param name="boName">
+        ///     name of the business object in title case
         ///     <example>Messlokation</example>
         /// </param>
         /// <returns>Array of FieldInfos</returns>
@@ -286,7 +287,8 @@ namespace BO4E
         ///     The result is ordered by the JsonProperty->Order value (assuming 0 if null).
         /// </summary>
         /// <param name="boType">type of the business object</param>
-        /// <param name="attributeType">type of the attribute/annotation you're interested in
+        /// <param name="attributeType">
+        ///     type of the attribute/annotation you're interested in
         ///     <example>typeof(DataCategoryAttribute)</example>
         /// </param>
         /// <returns>Array of FieldInfos</returns>
@@ -303,10 +305,12 @@ namespace BO4E
         ///     Get those fields of a business object that do have attributes/annotations.
         ///     The result is ordered by the JsonProperty->Order value (assuming 0 if null).
         /// </summary>
-        /// <param name="boName">name of the business object in title case
+        /// <param name="boName">
+        ///     name of the business object in title case
         ///     <example>Messlokation</example>
         /// </param>
-        /// <param name="attributeType">type of the attribute/annotation you're interested in
+        /// <param name="attributeType">
+        ///     type of the attribute/annotation you're interested in
         ///     <example>typeof(DataCategoryAttribute)</example>
         /// </param>
         /// <returns>Array of FieldInfos</returns>

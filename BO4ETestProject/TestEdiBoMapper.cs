@@ -8,7 +8,7 @@ namespace TestBO4E
     public class TestEdiBOMapper
     {
         private readonly Dictionary<string, Dictionary<string, string>> expectedResults =
-            new Dictionary<string, Dictionary<string, string>>();
+            new();
 
         public TestEdiBOMapper()
         {
