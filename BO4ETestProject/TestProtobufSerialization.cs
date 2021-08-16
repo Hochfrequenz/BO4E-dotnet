@@ -25,7 +25,7 @@ namespace TestBO4E
             var unterschriftRoundTrip = SerializeAsBase64RoundTrip(unterschrift);
             Assert.AreEqual(unterschrift.Datum, unterschriftRoundTrip.Datum);
         }
-        
+
         [TestMethod]
         public void TestProtobufRoundTripEnergiemenge()
         {
@@ -88,6 +88,7 @@ namespace TestBO4E
                 using var reader = new BinaryReader(stream);
                 base64String = Convert.ToBase64String(stream.ToArray());
             }
+
             Assert.IsFalse(string.IsNullOrWhiteSpace(base64String));
 
             // now use base64 string to get back the original
@@ -97,6 +98,7 @@ namespace TestBO4E
                 backStream.Seek(0, SeekOrigin.Begin);
                 deserializedObject = Serializer.Deserialize<TContract>(backStream);
             }
+
             return deserializedObject;
         }
     }
