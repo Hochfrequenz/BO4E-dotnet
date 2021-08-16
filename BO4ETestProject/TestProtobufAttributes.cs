@@ -145,6 +145,15 @@ namespace TestBO4E
                         $"The property {dtProperty.Name} of type {relevantType.Name} is missing the ProtoMemberAttribute.");
                     //Assert.AreEqual(DataFormat.WellKnown, pma.DataFormat, $"The property {dtProperty.Name} of type {relevantType.Name} has the wrong dataformat in the protomember attribute");
                 }
+                var nullableDtProperties = relevantType.GetProperties().Where(p =>
+                    p.PropertyType == typeof(DateTime?) || p.PropertyType == typeof(DateTimeOffset?));
+                foreach (var nullableDtProperty in nullableDtProperties)
+                {
+                    // there must be an attribute like described in https://github.com/protobuf-net/protobuf-net.Grpc/issues/56#issuecomment-580509687
+                    var pma = nullableDtProperty.GetCustomAttributes<ProtoIgnoreAttribute>().FirstOrDefault();
+                    Assert.IsNotNull(pma,
+                        $"The property {nullableDtProperty.Name} of type {relevantType.Name} is missing the ProtoIgnoreAttribute.");
+                }
             }
         }
 

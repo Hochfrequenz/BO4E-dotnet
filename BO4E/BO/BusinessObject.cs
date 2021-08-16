@@ -128,6 +128,16 @@ namespace BO4E.BO
             get => Guid.HasValue ? Guid.ToString() : string.Empty;
             set { Guid = string.IsNullOrWhiteSpace(value) ? (Guid?)null : System.Guid.Parse(value); }
         }
+        
+        /// <summary>
+        /// a protobuf serializable datetime
+        /// </summary>
+        [ProtoMember(2)]
+        protected string dateTimeSerialized
+        {
+            get => Timestamp.HasValue ? Timestamp.Value.ToString("O") : string.Empty;
+            set => Timestamp = string.IsNullOrWhiteSpace(value) ? null : DateTime.Parse(value);
+        }
 
         /// <summary>
         ///     Store the latest database update, is Datetime, because postgres doesn't handle datetimeoffset in a generated column
@@ -137,6 +147,7 @@ namespace BO4E.BO
             Required = Required.Default, Order = 2)]
         [JsonPropertyName("timestamp")]
         [Timestamp]
+        [ProtoIgnore]
         public DateTime? Timestamp { get; set; }
 
 

@@ -84,6 +84,16 @@ namespace BO4E.COM
             get => Guid.HasValue ? Guid.ToString() : string.Empty;
             set { Guid = string.IsNullOrWhiteSpace(value) ? (Guid?)null : System.Guid.Parse(value); }
         }
+        
+        /// <summary>
+        /// a protobuf serializable datetime
+        /// </summary>
+        [ProtoMember(2)]
+        protected string dateTimeSerialized
+        {
+            get => Timestamp.HasValue ? Timestamp.Value.ToString("O") : string.Empty;
+            set => Timestamp = string.IsNullOrWhiteSpace(value) ? null : DateTime.Parse(value);
+        }
 
         /// <summary>
         ///     Store the latest timestamp (update from the database)
@@ -91,6 +101,7 @@ namespace BO4E.COM
         [JsonProperty(PropertyName = "timestamp", NullValueHandling = NullValueHandling.Ignore,
             Required = Required.Default, Order = 2)]
         [JsonPropertyName("timestamp")]
+        [ProtoIgnore]
         [Timestamp]
         public DateTime? Timestamp { get; set; }
 
