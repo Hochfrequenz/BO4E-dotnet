@@ -13,7 +13,21 @@ namespace TestBO4E
     public class TestProtobufSerialization
     {
         [TestMethod]
-        public void TestProtobufRoundTrip()
+        public void TestProtobufRoundTripUnterschrift()
+        {
+            var unterschrift = new Unterschrift
+            {
+                Datum = new DateTimeOffset(2021, 1, 1, 0, 0, 0, TimeSpan.Zero),
+                Name = "Hans Wurst",
+                Ort = "Musterstadt"
+            };
+            Assert.IsTrue(unterschrift.IsValid(), "Must not serialize invalid COM");
+            var unterschriftRoundTrip = SerializeAsBase64RoundTrip(unterschrift);
+            Assert.AreEqual(unterschrift.Datum, unterschriftRoundTrip.Datum);
+        }
+        
+        [TestMethod]
+        public void TestProtobufRoundTripEnergiemenge()
         {
             //Guid emGuid = Guid.NewGuid();
             //Guid v1Guid = Guid.NewGuid();
@@ -45,24 +59,7 @@ namespace TestBO4E
                 }
             };
             Assert.IsTrue(em.IsValid(), "Must not serialize invalid Business Objects.");
-            string emBase64;
-            using (var stream = new MemoryStream())
-            {
-                Serializer.Serialize(stream, em);
-                using var reader = new BinaryReader(stream);
-                emBase64 = Convert.ToBase64String(stream.ToArray());
-            }
-
-            Assert.IsFalse(string.IsNullOrWhiteSpace(emBase64));
-
-            // now use base64 string to get back the original energiemenge
-            Energiemenge emRoundTrip;
-            using (var backStream = new MemoryStream(Convert.FromBase64String(emBase64)))
-            {
-                backStream.Seek(0, SeekOrigin.Begin);
-                emRoundTrip = Serializer.Deserialize<Energiemenge>(backStream);
-            }
-
+            var emRoundTrip = SerializeAsBase64RoundTrip(em);
             Assert.IsNotNull(emRoundTrip.LokationsId);
             Assert.IsTrue(emRoundTrip.IsValid());
             /*
@@ -74,6 +71,33 @@ namespace TestBO4E
             */
 
             Assert.AreEqual(em, emRoundTrip);
+        }
+
+        /// <summary>
+        /// Serializes <paramref name="protoObject"/> as base64 (protobuf) string and deserializes it again
+        /// </summary>
+        /// <param name="protoObject"></param>
+        /// <typeparam name="TContract"></typeparam>
+        /// <returns></returns>
+        protected static TContract SerializeAsBase64RoundTrip<TContract>(TContract protoObject)
+        {
+            string base64String;
+            using (var stream = new MemoryStream())
+            {
+                Serializer.Serialize(stream, protoObject);
+                using var reader = new BinaryReader(stream);
+                base64String = Convert.ToBase64String(stream.ToArray());
+            }
+            Assert.IsFalse(string.IsNullOrWhiteSpace(base64String));
+
+            // now use base64 string to get back the original
+            TContract deserializedObject;
+            using (var backStream = new MemoryStream(Convert.FromBase64String(base64String)))
+            {
+                backStream.Seek(0, SeekOrigin.Begin);
+                deserializedObject = Serializer.Deserialize<TContract>(backStream);
+            }
+            return deserializedObject;
         }
     }
 }
