@@ -128,7 +128,7 @@ namespace BO4E.BO
             get => Guid.HasValue ? Guid.ToString() : string.Empty;
             set { Guid = string.IsNullOrWhiteSpace(value) ? (Guid?)null : System.Guid.Parse(value); }
         }
-        
+
         /// <summary>
         /// a protobuf serializable datetime
         /// </summary>
