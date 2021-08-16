@@ -3081,6 +3081,11 @@
                 Ort, an dem die Unterschrift geleistet wird
             </summary>
         </member>
+        <member name="P:BO4E.COM.Unterschrift.dateTimeOffsetSerialized">
+            <summary>
+            a protobuf serializable datetim
+            </summary>
+        </member>
         <member name="P:BO4E.COM.Unterschrift.Datum">
             <summary>
                 Datum der Unterschrift

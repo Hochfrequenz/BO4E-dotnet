@@ -20,12 +20,26 @@ namespace BO4E.COM
         [ProtoMember(3)]
         public string Ort { get; set; }
 
+
+        /// <summary>
+        /// a protobuf serializable datetim
+        /// </summary>
+        [ProtoMember(4)]
+#pragma warning disable IDE1006 // Naming Styles
+        // ReSharper disable once InconsistentNaming
+        protected string dateTimeOffsetSerialized
+#pragma warning restore IDE1006 // Naming Styles
+        {
+            get => Datum.HasValue ? Datum.Value.ToString("O") : string.Empty;
+            set { Datum = string.IsNullOrWhiteSpace(value) ? (DateTimeOffset?)null : DateTimeOffset.Parse(value); }
+        }
+
         /// <summary>
         ///     Datum der Unterschrift
         /// </summary>
         [JsonProperty(PropertyName = "datum", Required = Required.Default)]
         [JsonPropertyName("datum")]
-        [ProtoMember(4)]
+        [ProtoIgnore]
         public DateTimeOffset? Datum { get; set; }
 
         /// <summary>
