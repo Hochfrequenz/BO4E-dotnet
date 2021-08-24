@@ -145,14 +145,20 @@ namespace TestBO4E
                         $"The property {dtProperty.Name} of type {relevantType.Name} is missing the ProtoMemberAttribute.");
                     //Assert.AreEqual(DataFormat.WellKnown, pma.DataFormat, $"The property {dtProperty.Name} of type {relevantType.Name} has the wrong dataformat in the protomember attribute");
                 }
+
                 var nullableDtProperties = relevantType.GetProperties().Where(p =>
                     p.PropertyType == typeof(DateTime?) || p.PropertyType == typeof(DateTimeOffset?));
                 foreach (var nullableDtProperty in nullableDtProperties)
                 {
-                    // there must be an attribute like described in https://github.com/protobuf-net/protobuf-net.Grpc/issues/56#issuecomment-580509687
-                    var pma = nullableDtProperty.GetCustomAttributes<ProtoIgnoreAttribute>().FirstOrDefault();
-                    Assert.IsNotNull(pma,
-                        $"The property {nullableDtProperty.Name} of type {relevantType.Name} is missing the ProtoIgnoreAttribute.");
+                    // as long as protobuf-net is not able to handle nullable native types this is required. see f.e. https://github.com/protobuf-net/protobuf-net/issues/742
+                    var pia = nullableDtProperty.GetCustomAttributes<ProtoIgnoreAttribute>().FirstOrDefault();
+                    Assert.IsNotNull(pia,
+                        $"The property {nullableDtProperty.Name} of type {relevantType.Name} is missing the {nameof(ProtoIgnoreAttribute)}.");
+                    Assert.IsTrue(relevantType.GetProperties( BindingFlags.NonPublic | BindingFlags.Instance).Any(p => p.GetCustomAttributes<ProtoMemberAttribute>().Any(pma => pma.Name == nullableDtProperty.Name)
+                                                                                                                       && p.GetCustomAttributes<System.Text.Json.Serialization.JsonIgnoreAttribute>().Any()
+                                                                                                                       && p.GetCustomAttributes<Newtonsoft.Json.JsonIgnoreAttribute>().Any()
+                                                                                                                       && p.GetCustomAttributes<CompatibilityLevelAttribute>().Any(cla=>cla.Level==CompatibilityLevel.Level240)),
+                        $"There is no workaround property for {relevantType.FullName}.{nullableDtProperty.Name} that has a {nameof(ProtoMemberAttribute)} with the same 'Name={nullableDtProperty.Name}' and the expected Compatability Level and JsonIgnore Attributes.");
                 }
             }
         }

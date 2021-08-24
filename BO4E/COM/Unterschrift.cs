@@ -21,12 +21,22 @@ namespace BO4E.COM
         [ProtoMember(3)]
         public string Ort { get; set; }
 
+        [System.Text.Json.Serialization.JsonIgnore]
+        [Newtonsoft.Json.JsonIgnore]
+        [ProtoMember(4, Name = nameof(Datum))]
+        [CompatibilityLevel(CompatibilityLevel.Level240)]
+        private DateTime _Datum
+        {
+            get => Datum?.UtcDateTime ?? default;
+            set => Datum = value == default ? null : DateTime.SpecifyKind(value, DateTimeKind.Utc);
+        }
+
         /// <summary>
         ///     Datum der Unterschrift
         /// </summary>
         [JsonProperty(PropertyName = "datum", Required = Required.Default)]
         [JsonPropertyName("datum")]
-        [ProtoMember(4)]
+        [ProtoIgnore]
         public DateTimeOffset? Datum { get; set; }
 
         /// <summary>

@@ -494,9 +494,9 @@
                 protobuf serilization requires the <see cref="P:BO4E.BO.BusinessObject.Guid" /> as string.
             </summary>
         </member>
-        <member name="P:BO4E.BO.BusinessObject.dateTimeSerialized">
+        <member name="P:BO4E.BO.BusinessObject._TimeStamp">
             <summary>
-            a protobuf serializable datetime
+            a protobuf serializable TimeStamp
             </summary>
         </member>
         <member name="P:BO4E.BO.BusinessObject.Timestamp">
@@ -2049,9 +2049,9 @@
         <member name="P:BO4E.COM.COM.guidSerialized">
             <inheritdoc cref="P:BO4E.BO.BusinessObject.guidSerialized" />
         </member>
-        <member name="P:BO4E.COM.COM.dateTimeSerialized">
+        <member name="P:BO4E.COM.COM._TimeStamp">
             <summary>
-            a protobuf serializable datetime
+            a protobuf serializable TimeStamp
             </summary>
         </member>
         <member name="P:BO4E.COM.COM.Timestamp">
@@ -3089,11 +3089,6 @@
         <member name="P:BO4E.COM.Unterschrift.Ort">
             <summary>
                 Ort, an dem die Unterschrift geleistet wird
-            </summary>
-        </member>
-        <member name="P:BO4E.COM.Unterschrift.dateTimeOffsetSerialized">
-            <summary>
-            a protobuf serializable datetim
             </summary>
         </member>
         <member name="P:BO4E.COM.Unterschrift.Datum">
