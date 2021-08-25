@@ -20,4 +20,6 @@ jobs:
       - name: Install coverlet.msbuild in TestBO4E.Reporting
         run: cd TestBO4E.Reporting && dotnet add package coverlet.msbuild
       - name: Measure BO4E Coverage
-        run: dotnet test /p:Include="[BO4E-dotnet]*"  /p:CollectCoverage=true /p:CoverletOutput=TestResults/ /p:SkipAutoProps=true /p:CoverletOutputFormat=lcov /p:Threshold=57 --configuration Release
+        run: dotnet test /p:Include="[*]BO4E.*"  /p:CollectCoverage=true /p:CoverletOutput=TestResults/ /p:SkipAutoProps=true /p:CoverletOutputFormat=lcov /p:Threshold=57 --configuration Release
+      - name: Measure BO4E.Encryption
+        run: dotnet test /p:Include="[*]BO4E.Encryption*"  /p:CollectCoverage=true /p:CoverletOutput=TestResults/ /p:SkipAutoProps=true /p:CoverletOutputFormat=lcov /p:Threshold=57 --configuration Release
