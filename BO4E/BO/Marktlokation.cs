@@ -348,12 +348,14 @@ namespace BO4E.BO
         /// </summary>
         /// <param name="checkId">validate the <see cref="MarktlokationsId" />, too</param>
         /// <param name="checkRegelZone">check if the <see cref="Regelzone"/> is a German Regelzone if set</param>
+        /// <param name="checkBilanzierungsgebiet">check if the <see cref="Bilanzierungsgebiet"/> is a valid German Bilanzierungsgebiet if set</param>
         /// <returns>true if the marktlokation is valid</returns>
-        public bool IsValid(bool checkId = true, bool checkRegelZone = true)
+        public bool IsValid(bool checkId = true, bool checkRegelZone = true, bool checkBilanzierungsgebiet = true)
         {
             return base.IsValid()
                    && (!checkId || HasValidId())
-                   && (!checkRegelZone || (string.IsNullOrWhiteSpace(Regelzone) || Regelzone.IsGermanControlArea()));
+                   && (!checkRegelZone || (string.IsNullOrWhiteSpace(Regelzone) || Regelzone.IsGermanControlArea()))
+                   && (!checkBilanzierungsgebiet || (string.IsNullOrWhiteSpace(Bilanzierungsgebiet) || Bilanzierungsgebiet.IsValidBilanzierungsGebietId()));
         }
     }
 }

@@ -52,7 +52,11 @@ namespace TestBO4E
             Assert.IsTrue(malo.IsValid());
             malo.Regelzone = "invalid bullshit";
             Assert.IsFalse(malo.IsValid());
-            malo.Regelzone = "10YDE-ENBW-----N";
+            malo.Regelzone = "10YDE-EON------1";
+            Assert.IsTrue(malo.IsValid());
+            malo.Bilanzierungsgebiet = "foo bar";
+            Assert.IsFalse(malo.IsValid());
+            malo.Bilanzierungsgebiet = "11YN10000762-01E";
             Assert.IsTrue(malo.IsValid());
         }
     }
