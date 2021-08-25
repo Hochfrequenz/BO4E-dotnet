@@ -336,7 +336,7 @@ namespace BO4E.BO
         /// <summary>
         ///     Test if the <see cref="MarktlokationsId" /> is valid.
         /// </summary>
-        /// <returns>if marktlokaionsId matches the expected format</returns>
+        /// <returns>if <see cref="MarktlokationsId"/> matches the expected format</returns>
         public bool HasValidId()
         {
             return ValidateId(MarktlokationsId);
@@ -347,11 +347,13 @@ namespace BO4E.BO
         ///     checks if the <see cref="MarktlokationsId" /> is valid using <see cref="HasValidId" />.
         /// </summary>
         /// <param name="checkId">validate the <see cref="MarktlokationsId" />, too</param>
-        /// <param name="checkRegelZone">check if the Regelzone is a German Regelzone if set</param>
+        /// <param name="checkRegelZone">check if the <see cref="Regelzone"/> is a German Regelzone if set</param>
         /// <returns>true if the marktlokation is valid</returns>
         public bool IsValid(bool checkId = true, bool checkRegelZone = true)
         {
-            return base.IsValid() && (!checkId || HasValidId()) && (!checkRegelZone || (string.IsNullOrWhiteSpace(Regelzone) || Regelzone.IsGermanControlArea()));
+            return base.IsValid() 
+                   && (!checkId || HasValidId()) 
+                   && (!checkRegelZone || (string.IsNullOrWhiteSpace(Regelzone) || Regelzone.IsGermanControlArea()));
         }
     }
 }

@@ -1050,7 +1050,7 @@
             <summary>
                 Test if the <see cref="P:BO4E.BO.Marktlokation.MarktlokationsId" /> is valid.
             </summary>
-            <returns>if marktlokaionsId matches the expected format</returns>
+            <returns>if <see cref="P:BO4E.BO.Marktlokation.MarktlokationsId"/> matches the expected format</returns>
         </member>
         <member name="M:BO4E.BO.Marktlokation.IsValid(System.Boolean,System.Boolean)">
             <summary>
@@ -1058,7 +1058,7 @@
                 checks if the <see cref="P:BO4E.BO.Marktlokation.MarktlokationsId" /> is valid using <see cref="M:BO4E.BO.Marktlokation.HasValidId" />.
             </summary>
             <param name="checkId">validate the <see cref="P:BO4E.BO.Marktlokation.MarktlokationsId" />, too</param>
-            <param name="checkRegelZone">check if the Regelzone is a German Regelzone if set</param>
+            <param name="checkRegelZone">check if the <see cref="P:BO4E.BO.Marktlokation.Regelzone"/> is a German Regelzone if set</param>
             <returns>true if the marktlokation is valid</returns>
         </member>
         <member name="T:BO4E.BO.Marktteilnehmer">
