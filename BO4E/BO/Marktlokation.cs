@@ -351,8 +351,8 @@ namespace BO4E.BO
         /// <returns>true if the marktlokation is valid</returns>
         public bool IsValid(bool checkId = true, bool checkRegelZone = true)
         {
-            return base.IsValid() 
-                   && (!checkId || HasValidId()) 
+            return base.IsValid()
+                   && (!checkId || HasValidId())
                    && (!checkRegelZone || (string.IsNullOrWhiteSpace(Regelzone) || Regelzone.IsGermanControlArea()));
         }
     }
