@@ -1,4 +1,4 @@
-﻿{
+{
   "expectedQueryObject": {
     "boTyp": "ANSPRECHPARTNER",
     "vorname": "Max",
@@ -19,9 +19,7 @@
       "boTyp": "GESCHAEFTSPARTNER",
       "name1": "Unternehmen XYZ GmbH",
       "gewerbekennzeichnung": true,
-      "geschaeftspartnerrolle": [
-        "DIENSTLEISTER"
-      ],
+      "geschaeftspartnerrolle": ["DIENSTLEISTER"],
       "partneradresse": {
         "postleitzahl": 87968,
         "ort": "EinOrt",

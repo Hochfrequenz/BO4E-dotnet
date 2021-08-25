@@ -1,0 +1,38 @@
+﻿{
+  "assertions": {
+    "load-kW": {
+      "20171231235959": null,
+      "20180101000000": 123.0,
+      "20180131235859": 123.0,
+      "20180131235900": null,
+      "20180115100000": 579.0,
+      "20180115120000": 123.0
+    },
+    "average": 128.28583081637602239908287221,
+    "isContinuous": false
+  },
+  "input": {
+    "versionStruktur": 1,
+    "boTyp": "ENERGIEMENGE",
+    "lokationsId": "DE47108155927",
+    "lokationstyp": "MELO",
+    "energieverbrauch": [
+      {
+        "startdatum": "2018-01-01 00:00:00",
+        "enddatum": "2018-01-31 23:59:00",
+        "wertermittlungsverfahren": "PROGNOSE",
+        "obiskennzahl": "1–0:1.8.1",
+        "wert": 123,
+        "einheit": "KW"
+      },
+      {
+        "startdatum": "2018-01-15 00:00:00",
+        "enddatum": "2018-01-15 12:00:00",
+        "wertermittlungsverfahren": "PROGNOSE",
+        "obiskennzahl": "1–0:1.8.1",
+        "wert": 456,
+        "einheit": "KW"
+      }
+    ]
+  }
+}

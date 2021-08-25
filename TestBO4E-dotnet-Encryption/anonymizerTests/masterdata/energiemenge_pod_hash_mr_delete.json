@@ -48,5 +48,4 @@
     "$['ENERGIEMENGE'][0]['energieverbrauch'][1]['startdatum']": null,
     "$['ENERGIEMENGE'][0]['energieverbrauch'][2]['einheit']": "kWh"
   }
-
 }

@@ -1,5 +1,6 @@
 ﻿using System;
 using BO4E.COM;
+using BO4E.ENUM;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace TestBO4E
@@ -16,7 +17,7 @@ namespace TestBO4E
             {
                 Startdatum = new DateTime(),
                 Enddatum = new DateTime(),
-                Einheit = BO4E.ENUM.Mengeneinheit.ANZAHL,
+                Einheit = Mengeneinheit.ANZAHL,
                 Wert = (decimal)123.456,
                 Obiskennzahl = "asd"
             };

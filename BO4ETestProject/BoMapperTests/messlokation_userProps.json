@@ -1,5 +1,5 @@
-﻿{
-  "userPropWhiteList": [ "rolle" ],
+{
+  "userPropWhiteList": ["rolle"],
   "objectName": "Messlokation",
   "input": {
     "versionStruktur": 1,
@@ -44,7 +44,7 @@
             "bezeichnung": "01",
             "richtung": "AUSSP",
             "obisKennzahl": "1-1:1.8.0",
-            "wandlerfaktor": 1.00000,
+            "wandlerfaktor": 1.0,
             "einheit": "KWH",
             "rolle": "MESSUNG"
           }

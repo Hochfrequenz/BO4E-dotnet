@@ -1,4 +1,4 @@
-name: Nuget package push (release master)
+name: Nuget Master Release
 
 on:
   push:
@@ -9,24 +9,23 @@ jobs:
   pushrelease:
     runs-on: windows-latest
     env:
-      ACTIONS_ALLOW_UNSECURE_COMMANDS: 'true'
+      ACTIONS_ALLOW_UNSECURE_COMMANDS: "true"
     steps:
-    - uses: actions/checkout@master
-    - name: Setup .NET Core
-      uses: actions/setup-dotnet@v1
-      with:
-        dotnet-version: 3.1.100
-    - name: Build/Check for compile errors (dotnet build)
-      run: dotnet build --configuration Release
-    - name: Run Unit Tests (dotnet test)
-      run: dotnet test --configuration Release
-    - name: Create Package (dotnet pack)
-      run: |
-       dotnet pack --configuration Release
-    - name: Setup Nuget.exe
-      uses: warrenbuckley/Setup-Nuget@v1
-    - name: Nuget push
-      run:  | 
-              nuget setApiKey ${{ secrets.BO4E_NUGET_ORG_PUSH_TOKEN }}
-              nuget push .\**\bin\Release\*.nupkg -Source https://api.nuget.org/v3/index.json -SkipDuplicate -NoSymbols
-              
+      - uses: actions/checkout@master
+      - name: Setup .NET Core
+        uses: actions/setup-dotnet@v1
+        with:
+          dotnet-version: 5.0.100
+      - name: Build/Check for compile errors (dotnet build)
+        run: dotnet build --configuration Release
+      - name: Run Unit Tests (dotnet test)
+        run: dotnet test --configuration Release
+      - name: Create Package (dotnet pack)
+        run: |
+          dotnet pack --configuration Release
+      - name: Setup Nuget.exe
+        uses: warrenbuckley/Setup-Nuget@v1
+      - name: Nuget push
+        run: |
+          nuget setApiKey ${{ secrets.BO4E_NUGET_ORG_PUSH_TOKEN }}
+          nuget push .\**\bin\Release\*.nupkg -Source https://api.nuget.org/v3/index.json -SkipDuplicate -NoSymbols

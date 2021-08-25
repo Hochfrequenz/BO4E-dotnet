@@ -1,0 +1,22 @@
+﻿{
+  "assertions": {
+    "totalConsumption-2018": 3153.6,
+    "isContinuous": true
+  },
+  "input": {
+    "versionStruktur": 1,
+    "boTyp": "ENERGIEMENGE",
+    "lokationsId": "DE47108155927",
+    "lokationstyp": "MELO",
+    "energieverbrauch": [
+      {
+        "startdatum": "2018-01-01 00:00:00",
+        "enddatum": "2020-01-01 00:00:00",
+        "wertermittlungsverfahren": "PROGNOSE",
+        "obiskennzahl": "1–0:1.8.1",
+        "wert": 6307.2,
+        "einheit": "KWH"
+      }
+    ]
+  }
+}

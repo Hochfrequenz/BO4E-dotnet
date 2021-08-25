@@ -1,11 +1,8 @@
-﻿{
+{
   "$schema": "http://json-schema.org/draft-07/schema#",
   "definitions": {
     "Betrag": {
-      "type": [
-        "object",
-        "null"
-      ],
+      "type": ["object", "null"],
       "properties": {
         "wert": {
           "type": "number"
@@ -197,16 +194,10 @@
           ]
         },
         "guid": {
-          "type": [
-            "string",
-            "null"
-          ]
+          "type": ["string", "null"]
         }
       },
-      "required": [
-        "wert",
-        "waehrung"
-      ]
+      "required": ["wert", "waehrung"]
     },
     "Betrag-1": {
       "type": "object",
@@ -401,22 +392,13 @@
           ]
         },
         "guid": {
-          "type": [
-            "string",
-            "null"
-          ]
+          "type": ["string", "null"]
         }
       },
-      "required": [
-        "wert",
-        "waehrung"
-      ]
+      "required": ["wert", "waehrung"]
     },
     "Kostenblock": {
-      "type": [
-        "object",
-        "null"
-      ],
+      "type": ["object", "null"],
       "properties": {
         "kostenblockbezeichnung": {
           "type": "string"
@@ -425,56 +407,36 @@
           "$ref": "#/definitions/Betrag"
         },
         "kostenpositionen": {
-          "type": [
-            "array",
-            "null"
-          ],
+          "type": ["array", "null"],
           "items": {
             "$ref": "#/definitions/Kostenposition"
           }
         },
         "guid": {
-          "type": [
-            "string",
-            "null"
-          ]
+          "type": ["string", "null"]
         }
       },
-      "required": [
-        "kostenblockbezeichnung"
-      ]
+      "required": ["kostenblockbezeichnung"]
     },
     "Kostenposition": {
-      "type": [
-        "object",
-        "null"
-      ],
+      "type": ["object", "null"],
       "properties": {
         "positionstitel": {
           "type": "string"
         },
         "von": {
-          "type": [
-            "string",
-            "null"
-          ],
+          "type": ["string", "null"],
           "format": "date-time"
         },
         "bis": {
-          "type": [
-            "string",
-            "null"
-          ],
+          "type": ["string", "null"],
           "format": "date-time"
         },
         "artikelbezeichnung": {
           "type": "string"
         },
         "artikeldetail": {
-          "type": [
-            "string",
-            "null"
-          ]
+          "type": ["string", "null"]
         },
         "menge": {
           "$ref": "#/definitions/Menge"
@@ -489,10 +451,7 @@
           "$ref": "#/definitions/Betrag-1"
         },
         "guid": {
-          "type": [
-            "string",
-            "null"
-          ]
+          "type": ["string", "null"]
         }
       },
       "required": [
@@ -503,10 +462,7 @@
       ]
     },
     "Menge": {
-      "type": [
-        "object",
-        "null"
-      ],
+      "type": ["object", "null"],
       "properties": {
         "wert": {
           "type": "number"
@@ -532,16 +488,10 @@
           ]
         },
         "guid": {
-          "type": [
-            "string",
-            "null"
-          ]
+          "type": ["string", "null"]
         }
       },
-      "required": [
-        "wert",
-        "einheit"
-      ]
+      "required": ["wert", "einheit"]
     },
     "Preis": {
       "type": "object",
@@ -551,10 +501,7 @@
         },
         "einheit": {
           "type": "string",
-          "enum": [
-            "EUR",
-            "CT"
-          ]
+          "enum": ["EUR", "CT"]
         },
         "bezugswert": {
           "type": "string",
@@ -577,37 +524,20 @@
           ]
         },
         "status": {
-          "type": [
-            "string",
-            "null"
-          ],
-          "enum": [
-            null,
-            "VORLAEUFIG",
-            "ENDGUELTIG"
-          ]
+          "type": ["string", "null"],
+          "enum": [null, "VORLAEUFIG", "ENDGUELTIG"]
         },
         "guid": {
-          "type": [
-            "string",
-            "null"
-          ]
+          "type": ["string", "null"]
         }
       },
-      "required": [
-        "wert",
-        "einheit",
-        "bezugswert"
-      ]
+      "required": ["wert", "einheit", "bezugswert"]
     },
     "Zeitraum": {
       "type": "object",
       "properties": {
         "einheit": {
-          "type": [
-            "string",
-            "null"
-          ],
+          "type": ["string", "null"],
           "enum": [
             null,
             "SEKUNDE",
@@ -623,30 +553,18 @@
           ]
         },
         "dauer": {
-          "type": [
-            "number",
-            "null"
-          ]
+          "type": ["number", "null"]
         },
         "startdatum": {
-          "type": [
-            "string",
-            "null"
-          ],
+          "type": ["string", "null"],
           "format": "date-time"
         },
         "enddatum": {
-          "type": [
-            "string",
-            "null"
-          ],
+          "type": ["string", "null"],
           "format": "date-time"
         },
         "guid": {
-          "type": [
-            "string",
-            "null"
-          ]
+          "type": ["string", "null"]
         }
       }
     }
@@ -654,16 +572,10 @@
   "type": "object",
   "properties": {
     "guid": {
-      "type": [
-        "string",
-        "null"
-      ]
+      "type": ["string", "null"]
     },
     "boTyp": {
-      "type": [
-        "string",
-        "null"
-      ]
+      "type": ["string", "null"]
     },
     "versionStruktur": {
       "type": "integer"
@@ -675,10 +587,7 @@
       "$ref": "#/definitions/Zeitraum"
     },
     "summeKosten": {
-      "type": [
-        "array",
-        "null"
-      ],
+      "type": ["array", "null"],
       "items": {
         "$ref": "#/definitions/Betrag"
       }
@@ -691,18 +600,11 @@
       "minItems": 1
     },
     "kostenpositionen": {
-      "type": [
-        "array",
-        "null"
-      ],
+      "type": ["array", "null"],
       "items": {
         "$ref": "#/definitions/Kostenposition"
       }
     }
   },
-  "required": [
-    "kostenklasse",
-    "gueltigkeit",
-    "kostenbloecke"
-  ]
+  "required": ["kostenklasse", "gueltigkeit", "kostenbloecke"]
 }

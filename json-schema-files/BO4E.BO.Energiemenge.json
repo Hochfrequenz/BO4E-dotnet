@@ -1,17 +1,11 @@
-﻿{
+{
   "$schema": "http://json-schema.org/draft-07/schema#",
   "definitions": {
     "Verbrauch": {
-      "type": [
-        "object",
-        "null"
-      ],
+      "type": ["object", "null"],
       "properties": {
         "type": {
-          "type": [
-            "string",
-            "null"
-          ],
+          "type": ["string", "null"],
           "enum": [
             null,
             "ARBEITLEISTUNGTAGESPARAMETERABHMALO",
@@ -20,17 +14,11 @@
           ]
         },
         "guid": {
-          "type": [
-            "string",
-            "null"
-          ]
+          "type": ["string", "null"]
         },
         "wertermittlungsverfahren": {
           "type": "string",
-          "enum": [
-            "PROGNOSE",
-            "MESSUNG"
-          ]
+          "enum": ["PROGNOSE", "MESSUNG"]
         },
         "obiskennzahl": {
           "type": "string"
@@ -78,16 +66,10 @@
   "type": "object",
   "properties": {
     "guid": {
-      "type": [
-        "string",
-        "null"
-      ]
+      "type": ["string", "null"]
     },
     "boTyp": {
-      "type": [
-        "string",
-        "null"
-      ]
+      "type": ["string", "null"]
     },
     "versionStruktur": {
       "type": "integer"
@@ -98,25 +80,15 @@
     },
     "lokationstyp": {
       "type": "string",
-      "enum": [
-        "MaLo",
-        "MeLo"
-      ]
+      "enum": ["MaLo", "MeLo"]
     },
     "energieverbrauch": {
-      "type": [
-        "array",
-        "null"
-      ],
+      "type": ["array", "null"],
       "items": {
         "$ref": "#/definitions/Verbrauch"
       },
       "minItems": 1
     }
   },
-  "required": [
-    "lokationsId",
-    "lokationstyp",
-    "energieverbrauch"
-  ]
+  "required": ["lokationsId", "lokationstyp", "energieverbrauch"]
 }

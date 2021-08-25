@@ -1,4 +1,4 @@
-﻿{
+{
   "boTyp": "ZAEHLER",
   "versionStruktur": 1,
   "zaehlernummer": "000000000123456",
@@ -41,9 +41,7 @@
     "gewerbekennzeichnung": true,
     "hrnummer": null,
     "amtsgericht": null,
-    "kontaktweg": [
-      "FAX"
-    ],
+    "kontaktweg": ["FAX"],
     "umsatzsteuerId": null,
     "glaeubigerId": null,
     "eMailAdresse": null,

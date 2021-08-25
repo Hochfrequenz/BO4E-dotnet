@@ -1,10 +1,10 @@
-﻿using BO4E.BO;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Newtonsoft.Json.Schema;
-using System;
+﻿using System;
 using System.IO;
 using System.Linq;
 using System.Text;
+using BO4E.BO;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Newtonsoft.Json.Schema;
 
 namespace TestBO4E
 {

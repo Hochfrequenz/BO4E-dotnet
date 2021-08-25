@@ -1,0 +1,4 @@
+* text eol=crlf
+*.md eol=lf
+*.yml eol=lf
+*.json eol=lf

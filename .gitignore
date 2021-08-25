@@ -45,3 +45,21 @@ TestBO4E-dotnet-Reporting/TestResults/
 .idea/.idea.BO4E-dotnet/.idea/
 
 BO4E-dotnet.sln.DotSettings.user
+
+BO4E/obj/
+
+BO4E.Extensions/obj/
+BO4E.Extensions/bin/
+
+BO4E.Reporting/obj/
+BO4E.Reporting/bin/
+
+TestBO4E.Extensions/obj/
+TestBO4E.Extensions/bin/
+
+TestBO4E.Reporting/obj/
+TestBO4E.Reporting/bin/
+
+BO4E/bin/Debug/netstandard2.0/
+
+BO4E/bin/Debug/net5.0/

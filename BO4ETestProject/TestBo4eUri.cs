@@ -1,19 +1,51 @@
-﻿using BO4E.BO;
+﻿using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Linq;
+using BO4E.BO;
 using BO4E.meta;
 using JsonDiffPatchDotNet;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
-using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
 
 namespace TestBO4E
 {
     [TestClass]
     public class TestBo4eURI
     {
+        private static readonly Dictionary<string, string> boNameResults = new Dictionary<string, string>
+        {
+            {"bo4e://Marktlokation/987654321098", "Marktlokation"},
+            {"bo4e://hurzelasdanoafi/123456", null},
+            {"bo4e://Energiemenge/123456", "Energiemenge"},
+            {"bo4e://Ansprechpartner/123467/adsadad/aafe4rq3rqr/", "Ansprechpartner"},
+            {"bo4e://ansprechpartner/mitlowercase/", "Ansprechpartner"},
+            {"bo4e://MaRkTLoKaTiOn/mitlowercase/", "Marktlokation"},
+            {"bo4e://Marktlokation/?backendId=10000001308", "Marktlokation"}
+        };
+
+        private static readonly Dictionary<Type, List<string>> boKeyNamesResults = new Dictionary<Type, List<string>>
+        {
+            {typeof(Marktlokation), new List<string> {"marktlokationsId"}},
+            {
+                typeof(Messlokation), new List<string> {"messlokationsId"}
+            } //<-- should be the json property name if annotated 
+        };
+
+        private static readonly Dictionary<string, bool> validationResults = new Dictionary<string, bool>
+        {
+            {"bo4e://Marktlokation/987654321098", true},
+            // {"   bo4e://Leerzeichen/987654321098", false },
+            {"keinProtokoll/123456", false},
+            {"falschesProtokoll://asdadadl/123456", false},
+            {"bo4e://Marktlokation/123467/adsadad/aafe4rq3rqr/", true},
+            {"bo4e://kf56@Marktlokation:100/adadsadad", true},
+            {"bo4e://kf56:pw@Marktlokation:100/adadsadad?dasd=asd", true},
+            {"bo4e://Marktlokation/123467/adsadad/aafe4rq3rqr?asdasda=3r343&adasdas=2334#341", true},
+            {"bo4e://Marktteilnehmer/?backendId=1234", true}
+        };
+
         [TestMethod]
         public void TestUriConstructionAndKeyDeconstruction()
         {
@@ -53,9 +85,7 @@ namespace TestBO4E
                         .Replace("\n", "")
                         .Replace("\r", "")
                         .Replace(" ", "") == "{\"vorname\":[null,null]}")
-                    {
                         continue;
-                    }
 
                     Assert.IsNull(patch, patch.ToString());
                 }
@@ -94,22 +124,10 @@ namespace TestBO4E
             Assert.IsNotNull(uri);
         }
 
-        private static readonly Dictionary<string, string> boNameResults = new Dictionary<string, string>
-        {
-            {"bo4e://Marktlokation/987654321098", "Marktlokation"},
-            {"bo4e://hurzelasdanoafi/123456", null},
-            {"bo4e://Energiemenge/123456", "Energiemenge"},
-            {"bo4e://Ansprechpartner/123467/adsadad/aafe4rq3rqr/", "Ansprechpartner"},
-            {"bo4e://ansprechpartner/mitlowercase/", "Ansprechpartner"},
-            {"bo4e://MaRkTLoKaTiOn/mitlowercase/", "Marktlokation"},
-            {"bo4e://Marktlokation/?backendId=10000001308", "Marktlokation"}
-        };
-
         [TestMethod]
         public void TestBoNamesAndTypes()
         {
             foreach (var testString in boNameResults.Keys)
-            {
                 try
                 {
                     var uri = new Bo4eUri(testString);
@@ -121,16 +139,7 @@ namespace TestBO4E
                 {
                     Assert.IsNull(boNameResults[testString]);
                 }
-            }
         }
-
-        private static readonly Dictionary<Type, List<string>> boKeyNamesResults = new Dictionary<Type, List<string>>
-        {
-            {typeof(Marktlokation), new List<string> {"marktlokationsId"}},
-            {
-                typeof(Messlokation), new List<string> {"messlokationsId"}
-            } //<-- should be the json property name if annotated 
-        };
 
         [TestMethod]
         public void TestBoKeyNames()
@@ -144,27 +153,12 @@ namespace TestBO4E
             }
         }
 
-        private static readonly Dictionary<string, bool> validationResults = new Dictionary<string, bool>
-        {
-            {"bo4e://Marktlokation/987654321098", true},
-            // {"   bo4e://Leerzeichen/987654321098", false },
-            {"keinProtokoll/123456", false},
-            {"falschesProtokoll://asdadadl/123456", false},
-            {"bo4e://Marktlokation/123467/adsadad/aafe4rq3rqr/", true},
-            {"bo4e://kf56@Marktlokation:100/adadsadad", true},
-            {"bo4e://kf56:pw@Marktlokation:100/adadsadad?dasd=asd", true},
-            {"bo4e://Marktlokation/123467/adsadad/aafe4rq3rqr?asdasda=3r343&adasdas=2334#341", true},
-            {"bo4e://Marktteilnehmer/?backendId=1234", true}
-        };
-
         [TestMethod]
         public void TestValidity()
         {
             foreach (var testString in validationResults.Keys)
-            {
                 Assert.AreEqual(validationResults[testString], Bo4eUri.IsValid(testString),
                     $"URI validation failed for {testString} .");
-            }
         }
 
         [TestMethod]
