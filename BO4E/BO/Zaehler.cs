@@ -91,7 +91,7 @@ namespace BO4E.BO
         [CompatibilityLevel(CompatibilityLevel.Level240)]
         private DateTime _LetzteEichung
         {
-            get => LetzteEichung?.UtcDateTime ?? default; 
+            get => LetzteEichung?.UtcDateTime ?? default;
             set => LetzteEichung = value == default ? null : DateTime.SpecifyKind(value, DateTimeKind.Utc);
         }
         /// <summary>Zu diesem Datum fand die letzte Eichprüfung des Zählers statt.</summary>

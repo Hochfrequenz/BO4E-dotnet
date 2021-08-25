@@ -80,7 +80,7 @@ namespace BO4E.BO
                 }
             }
         }*/
-      
+
         /// <summary>
         ///     Optionale Kategorisierung der Benachrichtigung.
         ///     (Entspricht z.B. der Klärfallkategorie in SAP)
