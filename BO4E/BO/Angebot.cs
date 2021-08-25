@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Text.Json.Serialization;
@@ -60,6 +60,15 @@ namespace BO4E.BO
         [ProtoMember(7)]
         public Sparte Sparte { get; set; }
 
+        [System.Text.Json.Serialization.JsonIgnore]
+        [Newtonsoft.Json.JsonIgnore]
+        [ProtoMember(8, Name = nameof(Bindefrist))]
+        [CompatibilityLevel(CompatibilityLevel.Level240)]
+        private DateTime _Bindefrist
+        {
+            get => Bindefrist?.UtcDateTime ?? default;
+            set => Bindefrist = value == default ? null : DateTime.SpecifyKind(value, DateTimeKind.Utc);
+        }
         /// <summary>
         ///     Bis zu diesem Zeitpunkt(Tag/Uhrzeit) inklusive gilt das Angebot
         /// </summary>
@@ -68,9 +77,9 @@ namespace BO4E.BO
         /// </example>
         [JsonProperty(Required = Required.Default, Order = 8, PropertyName = "bindefrist")]
         [JsonPropertyName("bindefrist")]
-        [ProtoMember(8)]
+        [ProtoIgnore]
         [DataCategory(DataCategory.FINANCE)]
-        public DateTimeOffset Bindefrist { get; set; }
+        public DateTimeOffset? Bindefrist { get; set; }
 
         /// <summary>
         ///     Link auf den Ersteller des Angebots.

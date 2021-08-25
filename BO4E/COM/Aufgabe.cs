@@ -31,13 +31,23 @@ namespace BO4E.COM
         [ProtoMember(4)]
         public string Beschreibung { get; set; }
 
+
+        [System.Text.Json.Serialization.JsonIgnore]
+        [Newtonsoft.Json.JsonIgnore]
+        [ProtoMember(5, Name = nameof(Deadline))]
+        [CompatibilityLevel(CompatibilityLevel.Level240)]
+        private DateTime _Deadline
+        {
+            get => Deadline?.UtcDateTime ?? default;
+            set => Deadline = value == default ? null : DateTime.SpecifyKind(value, DateTimeKind.Utc);
+        }
         /// <summary>
         ///     Optionale Deadline bis zu der die Aufgabe ausführt werden kann oder ihre Ausführung
         ///     sinnvoll ist.
         /// </summary>
         [JsonProperty(PropertyName = "deadline", Required = Required.Default)]
         [JsonPropertyName("deadline")]
-        [ProtoMember(5)]
+        [ProtoIgnore]
         public DateTimeOffset? Deadline { get; set; }
 
         /// <summary>
@@ -48,6 +58,16 @@ namespace BO4E.COM
         [ProtoMember(6)]
         public bool Ausgefuehrt { get; set; }
 
+
+        [System.Text.Json.Serialization.JsonIgnore]
+        [Newtonsoft.Json.JsonIgnore]
+        [ProtoMember(7, Name = nameof(Ausfuehrungszeitpunkt))]
+        [CompatibilityLevel(CompatibilityLevel.Level240)]
+        private DateTime _Ausfuehrungszeitpunkt
+        {
+            get => Ausfuehrungszeitpunkt?.UtcDateTime ?? default;
+            set => Ausfuehrungszeitpunkt = value == default ? null : DateTime.SpecifyKind(value, DateTimeKind.Utc);
+        }
         /// <summary>
         ///     Zeitpunkt zu dem die Aufgabe ausgeführt wurde. (Nur sinnvoll, wenn <c>ausgefuehrt==true</c>)
         /// </summary>
@@ -55,7 +75,7 @@ namespace BO4E.COM
         [System.Text.Json.Serialization.JsonConverter(typeof(LenientSystemTextJsonNullableDateTimeOffsetConverter))]
         [JsonProperty(PropertyName = "ausfuehrungszeitpunkt", Required = Required.Default)]
         [JsonPropertyName("ausfuehrungszeitpunkt")]
-        [ProtoMember(7)]
+        [ProtoIgnore]
         public DateTimeOffset? Ausfuehrungszeitpunkt { get; set; }
 
         /// <summary>

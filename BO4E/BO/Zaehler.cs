@@ -66,16 +66,38 @@ namespace BO4E.BO
         [ProtoMember(9)]
         public decimal Zaehlerkonstante { get; set; }
 
+
+
+        [System.Text.Json.Serialization.JsonIgnore]
+        [Newtonsoft.Json.JsonIgnore]
+        [ProtoMember(10, Name = nameof(EichungBis))]
+        [CompatibilityLevel(CompatibilityLevel.Level240)]
+        private DateTime _EichungBis
+        {
+            get => EichungBis?.UtcDateTime ?? default;
+            set => EichungBis = value == default ? null : DateTime.SpecifyKind(value, DateTimeKind.Utc);
+        }
         /// <summary>Bis zu diesem Datum ist der Zähler geeicht.</summary>
         [JsonProperty(Required = Required.Default, Order = 10, PropertyName = "eichungBis")]
         [JsonPropertyName("eichungBis")]
-        [ProtoMember(10)]
+        [ProtoIgnore]
         public DateTimeOffset? EichungBis { get; set; } // ToDO implement date
 
+
+
+        [System.Text.Json.Serialization.JsonIgnore]
+        [Newtonsoft.Json.JsonIgnore]
+        [ProtoMember(11, Name = nameof(LetzteEichung))]
+        [CompatibilityLevel(CompatibilityLevel.Level240)]
+        private DateTime _LetzteEichung
+        {
+            get => LetzteEichung?.UtcDateTime ?? default; 
+            set => LetzteEichung = value == default ? null : DateTime.SpecifyKind(value, DateTimeKind.Utc);
+        }
         /// <summary>Zu diesem Datum fand die letzte Eichprüfung des Zählers statt.</summary>
         [JsonProperty(Required = Required.Default, Order = 11, PropertyName = "letzteEichung")]
         [JsonPropertyName("letzteEichung")]
-        [ProtoMember(11)]
+        [ProtoIgnore]
         public DateTimeOffset? LetzteEichung { get; set; }
 
         /// <summary>

@@ -33,7 +33,7 @@ message Angebot {
    string Anfragereferenz = 5;
    DateTimeOffset Angebotsdatum = 6;
    Sparte Sparte = 7;
-   DateTimeOffset Bindefrist = 8;
+   .google.protobuf.Timestamp Bindefrist = 8;
    Geschaeftspartner Angebotgeber = 9;
    Geschaeftspartner Angebotnehmer = 10;
    Ansprechpartner UnterzeichnerAngebotsnehmer = 11;
@@ -71,7 +71,7 @@ message Angebotsvariante {
    option (.protobuf_net.msgopt).namespace = "BO4E.COM";
    Angebotsstatus Angebotsstatus = 4;
    string Beschreibung = 5;
-   DateTimeOffset Erstelldatum = 6;
+   .google.protobuf.Timestamp Erstelldatum = 6;
    DateTimeOffset Bindefrist = 7;
    Menge Gesamtmenge = 8;
    Betrag Gesamtkosten = 9;
@@ -120,9 +120,9 @@ message Aufgabe {
    option (.protobuf_net.msgopt).namespace = "BO4E.COM";
    string AufgabenId = 3;
    string Beschreibung = 4;
-   DateTimeOffset Deadline = 5;
+   .google.protobuf.Timestamp Deadline = 5;
    bool Ausgefuehrt = 6;
-   DateTimeOffset Ausfuehrungszeitpunkt = 7;
+   .google.protobuf.Timestamp Ausfuehrungszeitpunkt = 7;
    string Ausfuehrender = 8;
 }
 enum BDEWArtikelnummer {
@@ -527,8 +527,8 @@ enum Kostenklasse {
 message Kostenposition {
    option (.protobuf_net.msgopt).namespace = "BO4E.COM";
    string Positionstitel = 3;
-   DateTimeOffset Von = 4;
-   DateTimeOffset Bis = 5;
+   .google.protobuf.Timestamp Von = 4;
+   .google.protobuf.Timestamp Bis = 5;
    string Artikelbezeichnung = 6;
    string Artikeldetail = 7;
    Menge Menge = 8;
@@ -946,8 +946,8 @@ message Messlokationszuordnung {
    option (.protobuf_net.msgopt).namespace = "BO4E.COM";
    string MesslokationsId = 3;
    ArithmetischeOperation Arithmetik = 4;
-   DateTimeOffset GueltigSeit = 5;
-   DateTimeOffset GueltigBis = 6;
+   .google.protobuf.Timestamp GueltigSeit = 5;
+   .google.protobuf.Timestamp GueltigBis = 6;
 }
 enum MesstechnischeEinordnung {
    option (.protobuf_net.enumopt).namespace = "BO4E.ENUM";
@@ -996,7 +996,7 @@ enum Netznutzungszahler {
 message Notiz {
    option (.protobuf_net.msgopt).namespace = "BO4E.COM";
    string Autor = 3;
-   DateTimeOffset Zeitpunkt = 4;
+   .google.protobuf.Timestamp Zeitpunkt = 4;
    string Inhalt = 5;
 }
 message PositionsAufAbschlag {
@@ -1306,7 +1306,7 @@ message Vertragskonditionen {
    Zeitraum Kuendigungsfrist = 6;
    Zeitraum Vertragsverlaengerung = 7;
    Zeitraum Abschlagszyklus = 8;
-   DateTimeOffset StartAbrechnungsjahr = 1009;
+   .google.protobuf.Timestamp StartAbrechnungsjahr = 1009;
    Zeitraum GeplanteTurnusablesung = 1010;
    int32 TurnusablesungIntervall = 1011;
    Zeitraum Netznutzungsabrechnung = 1012;
@@ -1561,8 +1561,8 @@ message Zaehler {
    Zaehlertyp Zaehlertyp = 7;
    Tarifart Tarifart = 8;
    .bcl.Decimal Zaehlerkonstante = 9;
-   DateTimeOffset EichungBis = 10;
-   DateTimeOffset LetzteEichung = 11;
+   .google.protobuf.Timestamp EichungBis = 10;
+   .google.protobuf.Timestamp LetzteEichung = 11;
    repeated Zaehlwerk Zaehlwerke = 12;
    Geschaeftspartner Zaehlerhersteller = 13;
    string Gateway = 1014;
@@ -1633,8 +1633,8 @@ message Zeitraum {
    option (.protobuf_net.msgopt).namespace = "BO4E.COM";
    Zeiteinheit Einheit = 3;
    .bcl.Decimal Dauer = 4;
-   DateTimeOffset Startdatum = 5;
-   DateTimeOffset Enddatum = 6;
+   .google.protobuf.Timestamp Startdatum = 5;
+   .google.protobuf.Timestamp Enddatum = 6;
 }
 enum Zeitreihentyp {
    option (.protobuf_net.enumopt).namespace = "BO4E.ENUM";

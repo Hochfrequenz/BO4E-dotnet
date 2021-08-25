@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Text.Json.Serialization;
@@ -80,7 +80,7 @@ namespace BO4E.BO
                 }
             }
         }*/
-
+      
         /// <summary>
         ///     Optionale Kategorisierung der Benachrichtigung.
         ///     (Entspricht z.B. der Klärfallkategorie in SAP)
@@ -117,13 +117,21 @@ namespace BO4E.BO
         public Bo4eUri betroffenesObjekt { get;set; }
         */
 
-
+        [System.Text.Json.Serialization.JsonIgnore]
+        [Newtonsoft.Json.JsonIgnore]
+        [ProtoMember(12, Name = nameof(Deadline))]
+        [CompatibilityLevel(CompatibilityLevel.Level240)]
+        private DateTime _Deadline
+        {
+            get => Deadline?.UtcDateTime ?? default;
+            set => Deadline = value == default ? null : DateTime.SpecifyKind(value, DateTimeKind.Utc);
+        }
         /// <summary>
         ///     Zeitpunkt bis zu dem die Benachrichtigung bearbeitet worden sein muss.
         /// </summary>
         [JsonProperty(Required = Required.Default, Order = 12, PropertyName = "deadline")]
         [JsonPropertyName("deadline")]
-        [ProtoMember(12)]
+        [ProtoIgnore]
         [Newtonsoft.Json.JsonConverter(typeof(LenientDateTimeConverter))]
         public DateTimeOffset? Deadline { get; set; }
 
