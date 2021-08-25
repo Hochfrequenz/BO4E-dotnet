@@ -57,13 +57,23 @@ namespace BO4E.BO
 
         //[JsonIgnore]
         //private DateTimeOffset _erstellungsZeitpunkt;
+
+        [System.Text.Json.Serialization.JsonIgnore]
+        [Newtonsoft.Json.JsonIgnore]
+        [ProtoMember(8, Name = nameof(ErstellungsZeitpunkt))]
+        [CompatibilityLevel(CompatibilityLevel.Level240)]
+        private DateTime _ErstellungsZeitpunkt
+        {
+            get => ErstellungsZeitpunkt.UtcDateTime;
+            set => ErstellungsZeitpunkt = DateTime.SpecifyKind(value, DateTimeKind.Utc);
+        }
         /// <summary>
         ///     Zeitpunkt zu dem die Benachrichtigung erstellt wurde (UTC).
         /// </summary>
         // [DefaultValue(DateTimeOffset.UtcNow)] <-- doesn't work.
         [JsonProperty(Required = Required.Always, Order = 8, PropertyName = "erstellungsZeitpunkt")]
         [JsonPropertyName("erstellungsZeitpunkt")]
-        [ProtoMember(8)]
+        [ProtoIgnore]
         [Newtonsoft.Json.JsonConverter(typeof(LenientDateTimeConverter))]
         public DateTimeOffset ErstellungsZeitpunkt { get; set; }
         /*{

@@ -76,21 +76,40 @@ namespace BO4E.BO
         [ProtoMember(8)]
         public Sparte Sparte { get; set; }
 
+        [System.Text.Json.Serialization.JsonIgnore]
+        [Newtonsoft.Json.JsonIgnore]
+        [ProtoMember(9, Name = nameof(Vertragsbeginn))]
+        [CompatibilityLevel(CompatibilityLevel.Level240)]
+        private DateTime _Vertragsbeginn
+        {
+            get => Vertragsbeginn.UtcDateTime;
+            set => Vertragsbeginn = DateTime.SpecifyKind(value, DateTimeKind.Utc);
+        }
         /// <summary>
         ///     Gibt an, wann der Vertrag beginnt.
         /// </summary>
         [JsonProperty(Required = Required.Always, Order = 9, PropertyName = "vertragsbeginn")]
         [JsonPropertyName("vertragsbeginn")]
-        [ProtoMember(9)]
+        [ProtoIgnore]
         [Newtonsoft.Json.JsonConverter(typeof(LenientDateTimeConverter))]
         public DateTimeOffset Vertragsbeginn { get; set; }
 
+
+        [System.Text.Json.Serialization.JsonIgnore]
+        [Newtonsoft.Json.JsonIgnore]
+        [ProtoMember(10, Name = nameof(Vertragsende))]
+        [CompatibilityLevel(CompatibilityLevel.Level240)]
+        private DateTime _Vertragsende
+        {
+            get => Vertragsende.UtcDateTime;
+            set => Vertragsende = DateTime.SpecifyKind(value, DateTimeKind.Utc);
+        }
         /// <summary>
         ///     Gibt an, wann der Vertrag (voraussichtlich) endet oder beendet wurde.
         /// </summary>
         [JsonProperty(Required = Required.Always, Order = 10, PropertyName = "vertragsende")]
         [JsonPropertyName("vertragsende")]
-        [ProtoMember(10)]
+        [ProtoIgnore]
         [Newtonsoft.Json.JsonConverter(typeof(LenientDateTimeConverter))]
         public DateTimeOffset Vertragsende { get; set; }
 

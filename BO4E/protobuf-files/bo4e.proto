@@ -31,7 +31,7 @@ message Angebot {
    option (.protobuf_net.msgopt).namespace = "BO4E.BO";
    string Angebotsnummer = 4;
    string Anfragereferenz = 5;
-   DateTimeOffset Angebotsdatum = 6;
+   .google.protobuf.Timestamp Angebotsdatum = 6;
    Sparte Sparte = 7;
    .google.protobuf.Timestamp Bindefrist = 8;
    Geschaeftspartner Angebotgeber = 9;
@@ -72,7 +72,7 @@ message Angebotsvariante {
    Angebotsstatus Angebotsstatus = 4;
    string Beschreibung = 5;
    .google.protobuf.Timestamp Erstelldatum = 6;
-   DateTimeOffset Bindefrist = 7;
+   .google.protobuf.Timestamp Bindefrist = 7;
    Menge Gesamtmenge = 8;
    Betrag Gesamtkosten = 9;
    repeated Angebotsteil Teile = 10;
@@ -211,11 +211,11 @@ message Benachrichtigung {
    Prioritaet Prioritaet = 5; // default value could not be applied: NORMAL
    Bearbeitungsstatus Bearbeitungsstatus = 6;
    string Kurztext = 7;
-   DateTimeOffset ErstellungsZeitpunkt = 8;
+   .google.protobuf.Timestamp ErstellungsZeitpunkt = 8;
    string Kategorie = 9;
    string Bearbeiter = 10;
    repeated Notiz Notizen = 11;
-   DateTimeOffset Deadline = 12;
+   .google.protobuf.Timestamp Deadline = 12;
    repeated Aufgabe Aufgaben = 13;
    repeated GenericStringStringInfo Infos = 14;
 }
@@ -238,9 +238,6 @@ enum Bilanzierungsmethode {
    Bilanzierungsmethode_TLP_GETRENNT = 3;
    Bilanzierungsmethode_PAUSCHAL = 4;
    Bilanzierungsmethode_IMS = 5;
-}
-message DateTimeOffset {
-   option (.protobuf_net.msgopt).namespace = "System";
 }
 message Dienstleistung {
    option (.protobuf_net.msgopt).namespace = "BO4E.COM";
@@ -1060,8 +1057,8 @@ message Rechnung {
    Rechnungsstatus Rechnungsstatus = 5;
    bool Storno = 6;
    string Rechnungsnummer = 7;
-   DateTimeOffset Rechnungsdatum = 8;
-   DateTimeOffset Faelligkeitsdatum = 9;
+   .google.protobuf.Timestamp Rechnungsdatum = 8;
+   .google.protobuf.Timestamp Faelligkeitsdatum = 9;
    Rechnungstyp Rechnungsstyp = 10;
    string OriginalRechnungsnummer = 11;
    Zeitraum Rechnungsperiode = 12;
@@ -1079,8 +1076,8 @@ message Rechnung {
 message Rechnungsposition {
    option (.protobuf_net.msgopt).namespace = "BO4E.COM";
    int32 Positionsnummer = 3;
-   DateTimeOffset LieferungVon = 4;
-   DateTimeOffset LieferungBis = 5;
+   .google.protobuf.Timestamp LieferungVon = 4;
+   .google.protobuf.Timestamp LieferungBis = 5;
    string Positionstext = 6;
    Mengeneinheit Zeiteinheit = 7;
    BDEWArtikelnummer Artikelnummer = 8;
@@ -1250,8 +1247,8 @@ message Unterschrift {
 }
 message Verbrauch {
    option (.protobuf_net.msgopt).namespace = "BO4E.COM";
-   .bcl.DateTime Startdatum = 3;
-   .bcl.DateTime Enddatum = 4;
+   .google.protobuf.Timestamp Startdatum = 3;
+   .google.protobuf.Timestamp Enddatum = 4;
    Wertermittlungsverfahren Wertermittlungsverfahren = 5;
    string Obiskennzahl = 6;
    .bcl.Decimal Wert = 7;
@@ -1279,8 +1276,8 @@ message Vertrag {
    Vertragsart Vertragsart = 6;
    Vertragstatus Vertragstatus = 7;
    Sparte Sparte = 8;
-   DateTimeOffset Vertragsbeginn = 9;
-   DateTimeOffset Vertragsende = 10;
+   .google.protobuf.Timestamp Vertragsbeginn = 9;
+   .google.protobuf.Timestamp Vertragsende = 10;
    Geschaeftspartner Vertragspartner1 = 11;
    Geschaeftspartner Vertragspartner2 = 12;
    repeated Unterschrift Unterzeichnervp1 = 13;
@@ -1331,8 +1328,8 @@ enum Vertragstatus {
 }
 message Vertragsteil {
    option (.protobuf_net.msgopt).namespace = "BO4E.COM";
-   DateTimeOffset Vertragsteilbeginn = 3;
-   DateTimeOffset Vertragsteilende = 4;
+   .google.protobuf.Timestamp Vertragsteilbeginn = 3;
+   .google.protobuf.Timestamp Vertragsteilende = 4;
    string Lokation = 5;
    Menge VertraglichFixierteMenge = 6;
    Menge MinimaleAbnahmemenge = 7;
@@ -1341,17 +1338,17 @@ message Vertragsteil {
    Menge Kundenwert = 1010;
    string Verbrauchsaufteilung = 1011;
 }
-message Verwendungszweck {
-   option (.protobuf_net.msgopt).namespace = "BO4E.COM";
-   Marktrolle Marktrolle = 3;
-   repeated Verwendungszweck Zweck = 4 [packed = false];
-}
 enum Verwendungszweck {
    option (.protobuf_net.enumopt).namespace = "BO4E.ENUM";
    NETZNUTZUNGSABRECHNUNG = 0;
    BILANZKREISABRECHNUNG = 1;
    MEHRMINDERMBENGENABRECHNUNG = 2;
    ENDKUNDENABRECHNUNG = 3;
+}
+message Verwendungszweck {
+   option (.protobuf_net.msgopt).namespace = "BO4E.COM";
+   Marktrolle Marktrolle = 3;
+   repeated Verwendungszweck Zweck = 4 [packed = false];
 }
 enum Waehrungscode {
    option (.protobuf_net.enumopt).namespace = "BO4E.ENUM";

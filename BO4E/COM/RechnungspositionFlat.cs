@@ -70,17 +70,35 @@ namespace BO4E.COM
         [ProtoMember(3)]
         public int Positionsnummer { get; set; }
 
+        [System.Text.Json.Serialization.JsonIgnore]
+        [Newtonsoft.Json.JsonIgnore]
+        [ProtoMember(4, Name = nameof(LieferungVon))]
+        [CompatibilityLevel(CompatibilityLevel.Level240)]
+        private DateTime _LieferungVon
+        {
+            get => LieferungVon.UtcDateTime;
+            set => LieferungVon = DateTime.SpecifyKind(value, DateTimeKind.Utc);
+        }
         /// <inheritdoc cref="Rechnungsposition.LieferungVon" />
         [JsonProperty(PropertyName = "lieferungVon", Required = Required.Always)]
         [JsonPropertyName("lieferungVon")]
-        [ProtoMember(4)]
+        [ProtoIgnore]
         [Newtonsoft.Json.JsonConverter(typeof(LenientDateTimeConverter))]
         public DateTimeOffset LieferungVon { get; set; }
 
+        [System.Text.Json.Serialization.JsonIgnore]
+        [Newtonsoft.Json.JsonIgnore]
+        [ProtoMember(5, Name = nameof(LieferungBis))]
+        [CompatibilityLevel(CompatibilityLevel.Level240)]
+        private DateTime _LieferungBis
+        {
+            get => LieferungBis.UtcDateTime;
+            set => LieferungBis = DateTime.SpecifyKind(value, DateTimeKind.Utc);
+        }
         /// <inheritdoc cref="Rechnungsposition.LieferungBis" />
         [JsonProperty(PropertyName = "lieferungBis", Required = Required.Always)]
         [JsonPropertyName("lieferungBis")]
-        [ProtoMember(5)]
+        [ProtoIgnore]
         [Newtonsoft.Json.JsonConverter(typeof(LenientDateTimeConverter))]
         public DateTimeOffset LieferungBis { get; set; }
 

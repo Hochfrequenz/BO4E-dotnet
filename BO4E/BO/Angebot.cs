@@ -39,6 +39,15 @@ namespace BO4E.BO
         [DataCategory(DataCategory.FINANCE)]
         public string Anfragereferenz { get; set; }
 
+        [System.Text.Json.Serialization.JsonIgnore]
+        [Newtonsoft.Json.JsonIgnore]
+        [ProtoMember(6, Name = nameof(Angebotsdatum))]
+        [CompatibilityLevel(CompatibilityLevel.Level240)]
+        private DateTime _Angebotsdatum
+        {
+            get => Angebotsdatum.UtcDateTime;
+            set => Angebotsdatum = DateTime.SpecifyKind(value, DateTimeKind.Utc);
+        }
         /// <summary>
         ///     Erstellungsdatum des Angebots,
         /// </summary>
@@ -47,7 +56,7 @@ namespace BO4E.BO
         /// </example>
         [JsonProperty(Required = Required.Always, Order = 6, PropertyName = "angebotsdatum")]
         [JsonPropertyName("angebotsdatum")]
-        [ProtoMember(6)]
+        [ProtoIgnore]
         [DataCategory(DataCategory.FINANCE)]
         public DateTimeOffset Angebotsdatum { get; set; }
 
