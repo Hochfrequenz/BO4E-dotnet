@@ -136,18 +136,19 @@ namespace TestBO4E
             foreach (var relevantType in relevantTypes)
             {
                 var dtProperties = relevantType.GetProperties().Where(p =>
-                    p.PropertyType == typeof(DateTime) || p.PropertyType == typeof(DateTimeOffset));
+                    p.PropertyType == typeof(DateTime));
                 foreach (var dtProperty in dtProperties)
                 {
                     // there must be an attribute like described in https://github.com/protobuf-net/protobuf-net.Grpc/issues/56#issuecomment-580509687
                     var pma = dtProperty.GetCustomAttributes<ProtoMemberAttribute>().FirstOrDefault();
                     Assert.IsNotNull(pma,
                         $"The property {dtProperty.Name} of type {relevantType.Name} is missing the ProtoMemberAttribute.");
-                    //Assert.AreEqual(DataFormat.WellKnown, pma.DataFormat, $"The property {dtProperty.Name} of type {relevantType.Name} has the wrong dataformat in the protomember attribute");
+                    var cla = dtProperty.GetCustomAttributes<CompatibilityLevelAttribute>().FirstOrDefault();
+                    Assert.AreEqual(CompatibilityLevel.Level240, cla?.Level, $"The property {dtProperty.Name} of type {relevantType.Name} does not have the Compatability Level Attribute or the wrong value");
                 }
 
                 var nullableDtProperties = relevantType.GetProperties().Where(p =>
-                    p.PropertyType == typeof(DateTime?) || p.PropertyType == typeof(DateTimeOffset?));
+                    p.PropertyType == typeof(DateTime?) || p.PropertyType == typeof(DateTimeOffset) || p.PropertyType == typeof(DateTimeOffset?));
                 foreach (var nullableDtProperty in nullableDtProperties)
                 {
                     // as long as protobuf-net is not able to handle nullable native types this is required. see f.e. https://github.com/protobuf-net/protobuf-net/issues/742
