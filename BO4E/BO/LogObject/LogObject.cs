@@ -21,12 +21,21 @@ namespace BO4E.BO.LogObject
         [ProtoMember(4)]
         public string Id { get; set; }
 
+        [System.Text.Json.Serialization.JsonIgnore]
+        [Newtonsoft.Json.JsonIgnore]
+        [ProtoMember(5, Name = nameof(DateTime))]
+        [CompatibilityLevel(CompatibilityLevel.Level240)]
+        private DateTime _DateTime
+        {
+            get => DateTime.UtcDateTime;
+            set => DateTime = System.DateTime.SpecifyKind(value, DateTimeKind.Utc);
+        }
         /// <summary>
         ///     date time at which the log event has been raised
         /// </summary>
         [JsonProperty(Required = Required.Always, Order = 5, PropertyName = "DateTime")]
         [JsonPropertyName("DateTime")]
-        [ProtoMember(5)]
+        [ProtoIgnore]
         public DateTimeOffset DateTime { get; set; }
 
         /// <summary>
