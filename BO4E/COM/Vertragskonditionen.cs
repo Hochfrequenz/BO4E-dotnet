@@ -55,11 +55,20 @@ namespace BO4E.COM
         [ProtoMember(8)]
         public Zeitraum Abschlagszyklus { get; set; }
 
+        [System.Text.Json.Serialization.JsonIgnore]
+        [Newtonsoft.Json.JsonIgnore]
+        [ProtoMember(1009, Name = nameof(StartAbrechnungsjahr))]
+        [CompatibilityLevel(CompatibilityLevel.Level240)]
+        private DateTime _StartAbrechnungsjahr
+        {
+            get => StartAbrechnungsjahr?.UtcDateTime ?? default;
+            set => StartAbrechnungsjahr = value == default ? null : DateTime.SpecifyKind(value, DateTimeKind.Utc);
+        }
         // ToDo: Docstring!
         [JsonProperty(PropertyName = "startAbrechnungsjahr", Required = Required.Default)]
         [JsonPropertyName("startAbrechnungsjahr")]
         [NonOfficial(NonOfficialCategory.CUSTOMER_REQUIREMENTS)]
-        [ProtoMember(1009)]
+        [ProtoIgnore]
         [Newtonsoft.Json.JsonConverter(typeof(LenientDateTimeConverter))]
 #pragma warning disable CS1591 // Missing XML comment for publicly visible type or member
         // todo @hamid: add a docstring

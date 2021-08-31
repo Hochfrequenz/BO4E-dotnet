@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Text.Json.Serialization;
@@ -39,6 +39,15 @@ namespace BO4E.BO
         [DataCategory(DataCategory.FINANCE)]
         public string Anfragereferenz { get; set; }
 
+        [System.Text.Json.Serialization.JsonIgnore]
+        [Newtonsoft.Json.JsonIgnore]
+        [ProtoMember(6, Name = nameof(Angebotsdatum))]
+        [CompatibilityLevel(CompatibilityLevel.Level240)]
+        private DateTime _Angebotsdatum
+        {
+            get => Angebotsdatum.UtcDateTime;
+            set => Angebotsdatum = DateTime.SpecifyKind(value, DateTimeKind.Utc);
+        }
         /// <summary>
         ///     Erstellungsdatum des Angebots,
         /// </summary>
@@ -47,7 +56,7 @@ namespace BO4E.BO
         /// </example>
         [JsonProperty(Required = Required.Always, Order = 6, PropertyName = "angebotsdatum")]
         [JsonPropertyName("angebotsdatum")]
-        [ProtoMember(6)]
+        [ProtoIgnore]
         [DataCategory(DataCategory.FINANCE)]
         public DateTimeOffset Angebotsdatum { get; set; }
 
@@ -60,6 +69,15 @@ namespace BO4E.BO
         [ProtoMember(7)]
         public Sparte Sparte { get; set; }
 
+        [System.Text.Json.Serialization.JsonIgnore]
+        [Newtonsoft.Json.JsonIgnore]
+        [ProtoMember(8, Name = nameof(Bindefrist))]
+        [CompatibilityLevel(CompatibilityLevel.Level240)]
+        private DateTime _Bindefrist
+        {
+            get => Bindefrist?.UtcDateTime ?? default;
+            set => Bindefrist = value == default ? null : DateTime.SpecifyKind(value, DateTimeKind.Utc);
+        }
         /// <summary>
         ///     Bis zu diesem Zeitpunkt(Tag/Uhrzeit) inklusive gilt das Angebot
         /// </summary>
@@ -68,9 +86,9 @@ namespace BO4E.BO
         /// </example>
         [JsonProperty(Required = Required.Default, Order = 8, PropertyName = "bindefrist")]
         [JsonPropertyName("bindefrist")]
-        [ProtoMember(8)]
+        [ProtoIgnore]
         [DataCategory(DataCategory.FINANCE)]
-        public DateTimeOffset Bindefrist { get; set; }
+        public DateTimeOffset? Bindefrist { get; set; }
 
         /// <summary>
         ///     Link auf den Ersteller des Angebots.

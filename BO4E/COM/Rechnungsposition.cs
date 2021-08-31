@@ -22,19 +22,39 @@ namespace BO4E.COM
         [ProtoMember(3)]
         public int Positionsnummer { get; set; }
 
+
+        [System.Text.Json.Serialization.JsonIgnore]
+        [Newtonsoft.Json.JsonIgnore]
+        [ProtoMember(4, Name = nameof(LieferungVon))]
+        [CompatibilityLevel(CompatibilityLevel.Level240)]
+        private DateTime _LieferungVon
+        {
+            get => LieferungVon.UtcDateTime;
+            set => LieferungVon = DateTime.SpecifyKind(value, DateTimeKind.Utc);
+        }
         /// <summary>Start der Lieferung für die abgerechnete Leistung.</summary>
         [JsonProperty(PropertyName = "lieferungVon", Required = Required.Always)]
         [JsonPropertyName("lieferungVon")]
         [FieldName("deliveryStart", Language.EN)]
-        [ProtoMember(4)]
+        [ProtoIgnore]
         [Newtonsoft.Json.JsonConverter(typeof(LenientDateTimeConverter))]
         public DateTimeOffset LieferungVon { get; set; }
 
+
+        [System.Text.Json.Serialization.JsonIgnore]
+        [Newtonsoft.Json.JsonIgnore]
+        [ProtoMember(5, Name = nameof(LieferungBis))]
+        [CompatibilityLevel(CompatibilityLevel.Level240)]
+        private DateTime _LieferungBis
+        {
+            get => LieferungBis.UtcDateTime;
+            set => LieferungBis = DateTime.SpecifyKind(value, DateTimeKind.Utc);
+        }
         /// <summary>Ende der Lieferung für die abgerechnete Leistung.</summary>
         [JsonProperty(PropertyName = "lieferungBis", Required = Required.Always)]
         [JsonPropertyName("lieferungBis")]
         [FieldName("deliveryEnd", Language.EN)]
-        [ProtoMember(5)]
+        [ProtoIgnore]
         [Newtonsoft.Json.JsonConverter(typeof(LenientDateTimeConverter))]
         public DateTimeOffset LieferungBis { get; set; }
 

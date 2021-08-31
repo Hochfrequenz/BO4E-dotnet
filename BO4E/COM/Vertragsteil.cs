@@ -15,21 +15,40 @@ namespace BO4E.COM
     [ProtoContract]
     public class Vertragsteil : COM
     {
+        [System.Text.Json.Serialization.JsonIgnore]
+        [Newtonsoft.Json.JsonIgnore]
+        [ProtoMember(3, Name = nameof(Vertragsteilbeginn))]
+        [CompatibilityLevel(CompatibilityLevel.Level240)]
+        private DateTime _Vertragsteilbeginn
+        {
+            get => Vertragsteilbeginn.UtcDateTime;
+            set => Vertragsteilbeginn = DateTime.SpecifyKind(value, DateTimeKind.Utc);
+        }
         /// <summary>
         ///     Start der Gültigkeit des Vertragsteils.
         /// </summary>
         [JsonProperty(PropertyName = "vertragsteilbeginn", Required = Required.Always)]
         [JsonPropertyName("vertragsteilbeginn")]
-        [ProtoMember(3)]
+        [ProtoIgnore]
         [Newtonsoft.Json.JsonConverter(typeof(LenientDateTimeConverter))]
         public DateTimeOffset Vertragsteilbeginn { get; set; }
 
+
+        [System.Text.Json.Serialization.JsonIgnore]
+        [Newtonsoft.Json.JsonIgnore]
+        [ProtoMember(4, Name = nameof(Vertragsteilende))]
+        [CompatibilityLevel(CompatibilityLevel.Level240)]
+        private DateTime _Vertragsteilende
+        {
+            get => Vertragsteilende.UtcDateTime;
+            set => Vertragsteilende = DateTime.SpecifyKind(value, DateTimeKind.Utc);
+        }
         /// <summary>
         ///     Ende der Gültigkeit des Vertragsteils.
         /// </summary>
         [JsonProperty(PropertyName = "vertragsteilende", Required = Required.Always)]
         [JsonPropertyName("vertragsteilende")]
-        [ProtoMember(4)]
+        [ProtoIgnore]
         [Newtonsoft.Json.JsonConverter(typeof(LenientDateTimeConverter))]
         public DateTimeOffset Vertragsteilende { get; set; }
 

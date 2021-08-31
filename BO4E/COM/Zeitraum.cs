@@ -30,19 +30,39 @@ namespace BO4E.COM
         [ProtoMember(4)]
         public decimal? Dauer { get; set; }
 
+
+        [System.Text.Json.Serialization.JsonIgnore]
+        [Newtonsoft.Json.JsonIgnore]
+        [ProtoMember(5, Name = nameof(Startdatum))]
+        [CompatibilityLevel(CompatibilityLevel.Level240)]
+        private DateTime _Startdatum
+        {
+            get => Startdatum?.UtcDateTime ?? default;
+            set => Startdatum = value == default ? null : DateTime.SpecifyKind(value, DateTimeKind.Utc);
+        }
         /// <summary>Gibt Tag und Uhrzeit (falls vorhanden) an, wann der Zeitraum startet.</summary>
         [JsonProperty(PropertyName = "startdatum", Required = Required.Default)]
         [JsonPropertyName("startdatum")]
         [FieldName("startDate", Language.EN)]
-        [ProtoMember(5)]
+        [ProtoIgnore]
         [Newtonsoft.Json.JsonConverter(typeof(LenientDateTimeConverter))]
         public DateTimeOffset? Startdatum { get; set; }
 
+
+        [System.Text.Json.Serialization.JsonIgnore]
+        [Newtonsoft.Json.JsonIgnore]
+        [ProtoMember(6, Name = nameof(Enddatum))]
+        [CompatibilityLevel(CompatibilityLevel.Level240)]
+        private DateTime _Enddatum
+        {
+            get => Enddatum?.UtcDateTime ?? default;
+            set => Enddatum = value == default ? null : DateTime.SpecifyKind(value, DateTimeKind.Utc);
+        }
         /// <summary>Gibt Tag und Uhrzeit (falls vorhanden) an, wann der Zeitraum endet.</summary>
         [JsonProperty(PropertyName = "enddatum", Required = Required.Default)]
         [JsonPropertyName("enddatum")]
         [FieldName("endDate", Language.EN)]
-        [ProtoMember(6)]
+        [ProtoIgnore]
         [Newtonsoft.Json.JsonConverter(typeof(LenientDateTimeConverter))]
         public DateTimeOffset? Enddatum { get; set; }
 

@@ -23,16 +23,35 @@ namespace BO4E.COM
         [ProtoMember(5)]
         public string Beschreibung { get; set; }
 
+
+        [System.Text.Json.Serialization.JsonIgnore]
+        [Newtonsoft.Json.JsonIgnore]
+        [ProtoMember(6, Name = nameof(Erstelldatum))]
+        [CompatibilityLevel(CompatibilityLevel.Level240)]
+        private DateTime _Erstelldatum
+        {
+            get => Erstelldatum?.UtcDateTime ?? default;
+            set => Erstelldatum = value == default ? null : DateTime.SpecifyKind(value, DateTimeKind.Utc);
+        }
         /// <summary>Datum der Erstellung der Angebotsvariante</summary>
         [JsonProperty(PropertyName = "erstelldatum", Required = Required.Default)]
         [JsonPropertyName("erstelldatum")]
-        [ProtoMember(6)]
-        public DateTimeOffset Erstelldatum { get; set; }
+        [ProtoIgnore]
+        public DateTimeOffset? Erstelldatum { get; set; }
 
+        [System.Text.Json.Serialization.JsonIgnore]
+        [Newtonsoft.Json.JsonIgnore]
+        [ProtoMember(7, Name = nameof(Bindefrist))]
+        [CompatibilityLevel(CompatibilityLevel.Level240)]
+        private DateTime _Bindefrist
+        {
+            get => Bindefrist.UtcDateTime;
+            set => Bindefrist = DateTime.SpecifyKind(value, DateTimeKind.Utc);
+        }
         /// <summary>Bis zu diesem Zeitpunkt (Tag/Uhrzeit) inklusive gilt die Angebotsvariante, z.B. 31.12.2017, 17:00 Uhr.</summary>
         [JsonProperty(PropertyName = "bindefrist", Required = Required.Always)]
         [JsonPropertyName("bindefrist")]
-        [ProtoMember(7)]
+        [ProtoIgnore]
         public DateTimeOffset Bindefrist { get; set; }
 
         /// <summary>Aufsummierte Wirkarbeitsmenge aller Angebotsteile. <seealso cref="Menge" /></summary>

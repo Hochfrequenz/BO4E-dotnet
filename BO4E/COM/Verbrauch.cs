@@ -46,7 +46,8 @@ namespace BO4E.COM
         /// <summary>
         ///     Beginn des Zeitraumes, für den der Verbrauch angegeben wird.
         /// </summary>
-        [JsonProperty(PropertyName = "startdatum", Required = Required.Default, Order = 7)]
+        [CompatibilityLevel(CompatibilityLevel.Level240)]
+        [JsonProperty(PropertyName = "startdatum", Required = Required.Default, Order = 7)] // hier required.default, DateTime aber nicht nullable, laut bo4e doku wäre es optional
         [JsonPropertyName("startdatum")]
         [ProtoMember(3)]
         public DateTime Startdatum { get; set; } // ToDo: use datetimeoffset as well
@@ -54,6 +55,7 @@ namespace BO4E.COM
         /// <summary>
         ///     Ende des Zeitraumes, für den der Verbrauch angegeben wird.
         /// </summary>
+        [CompatibilityLevel(CompatibilityLevel.Level240)]
         [JsonProperty(PropertyName = "enddatum", Required = Required.Default, Order = 8)]
         [JsonPropertyName("enddatum")]
         [ProtoMember(4)]

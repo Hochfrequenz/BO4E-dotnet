@@ -130,6 +130,19 @@ namespace BO4E.BO
         }
 
         /// <summary>
+        /// a protobuf serializable TimeStamp
+        /// </summary>
+        [Newtonsoft.Json.JsonIgnore]
+        [System.Text.Json.Serialization.JsonIgnore]
+        [ProtoMember(4, Name = nameof(Timestamp))]
+        [CompatibilityLevel(CompatibilityLevel.Level240)]
+        protected DateTime _TimeStamp
+        {
+            get => Timestamp ?? default;
+            set => Timestamp = value == default ? null : DateTime.SpecifyKind(value, DateTimeKind.Utc);
+        }
+
+        /// <summary>
         ///     Store the latest database update, is Datetime, because postgres doesn't handle datetimeoffset in a generated column
         ///     gracefully
         /// </summary>
@@ -137,6 +150,7 @@ namespace BO4E.BO
             Required = Required.Default, Order = 2)]
         [JsonPropertyName("timestamp")]
         [Timestamp]
+        [ProtoIgnore]
         public DateTime? Timestamp { get; set; }
 
 

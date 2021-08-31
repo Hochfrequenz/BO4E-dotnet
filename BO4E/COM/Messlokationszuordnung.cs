@@ -33,16 +33,34 @@ namespace BO4E.COM
         [ProtoMember(4)]
         public ArithmetischeOperation? Arithmetik { get; set; }
 
+        [System.Text.Json.Serialization.JsonIgnore]
+        [Newtonsoft.Json.JsonIgnore]
+        [ProtoMember(5, Name = nameof(GueltigSeit))]
+        [CompatibilityLevel(CompatibilityLevel.Level240)]
+        private DateTime _GueltigSeit
+        {
+            get => GueltigSeit?.UtcDateTime ?? default;
+            set => GueltigSeit = value == default ? null : DateTime.SpecifyKind(value, DateTimeKind.Utc);
+        }
         /// <summary>Zeitpunkt, ab dem die Messlokation zur Marktlokation gehört</summary>
         [JsonProperty(PropertyName = "gueltigSeit", Required = Required.Default)]
         [JsonPropertyName("gueltigSeit")]
-        [ProtoMember(5)]
+        [ProtoIgnore]
         public DateTimeOffset? GueltigSeit { get; set; }
 
+        [System.Text.Json.Serialization.JsonIgnore]
+        [Newtonsoft.Json.JsonIgnore]
+        [ProtoMember(6, Name = nameof(GueltigBis))]
+        [CompatibilityLevel(CompatibilityLevel.Level240)]
+        private DateTime _GueltigBis
+        {
+            get => GueltigBis?.UtcDateTime ?? default;
+            set => GueltigBis = value == default ? null : DateTime.SpecifyKind(value, DateTimeKind.Utc);
+        }
         /// <summary>Zeitpunkt, bis zu dem die Messlokation zur Marktlokation gehört</summary>
         [JsonProperty(PropertyName = "gueltigBis", Required = Required.Default)]
         [JsonPropertyName("gueltigBis")]
-        [ProtoMember(6)]
+        [ProtoIgnore]
         public DateTimeOffset? GueltigBis { get; set; }
     }
 }
