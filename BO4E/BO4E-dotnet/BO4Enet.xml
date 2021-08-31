@@ -1055,14 +1055,15 @@
             <summary>
                 Test if the <see cref="P:BO4E.BO.Marktlokation.MarktlokationsId" /> is valid.
             </summary>
-            <returns>if marktlokaionsId matches the expected format</returns>
+            <returns>if <see cref="P:BO4E.BO.Marktlokation.MarktlokationsId"/> matches the expected format</returns>
         </member>
-        <member name="M:BO4E.BO.Marktlokation.IsValid(System.Boolean)">
+        <member name="M:BO4E.BO.Marktlokation.IsValid(System.Boolean,System.Boolean)">
             <summary>
                 same as <see cref="M:BO4E.BO.BusinessObject.IsValid" /> if <paramref name="checkId" /> is false but by default additionally
                 checks if the <see cref="P:BO4E.BO.Marktlokation.MarktlokationsId" /> is valid using <see cref="M:BO4E.BO.Marktlokation.HasValidId" />.
             </summary>
             <param name="checkId">validate the <see cref="P:BO4E.BO.Marktlokation.MarktlokationsId" />, too</param>
+            <param name="checkRegelZone">check if the <see cref="P:BO4E.BO.Marktlokation.Regelzone"/> is a German Regelzone if set</param>
             <returns>true if the marktlokation is valid</returns>
         </member>
         <member name="T:BO4E.BO.Marktteilnehmer">
@@ -3476,6 +3477,118 @@
             string bo4eValue = EdiBoMapper.fromEdi("Netzebene", "E06"); // returns "NSP"
             </code>
             </example>
+        </member>
+        <member name="T:BO4E.EnergyIdentificationCodes.EicType">
+            <summary>
+            Types of the EIC codes
+            </summary>
+            <remarks>See https://eepublicdownloads.entsoe.eu/clean-documents/EDI/Library/EIC_Short_Guide_and_FAQ_V3_Approved%20April%202016.pdf line 15</remarks>
+        </member>
+        <member name="F:BO4E.EnergyIdentificationCodes.EicType.AREA">
+            <summary>
+            object type “Y”, Areas for inter System Operator data interchange 
+            </summary>
+        </member>
+        <member name="F:BO4E.EnergyIdentificationCodes.EicType.MEASURING_POINT">
+            <summary>
+            object type “Z”, Energy Metering points
+            </summary>
+        </member>
+        <member name="F:BO4E.EnergyIdentificationCodes.EicType.RESOURCE_OBJECT">
+            <summary>
+            object type "W", such as Production plants, consumption units, etc.
+            </summary>
+        </member>
+        <member name="F:BO4E.EnergyIdentificationCodes.EicType.TIE_LINES">
+            <summary>
+            object type "T", International tie lines between areas
+            </summary>
+        </member>
+        <member name="F:BO4E.EnergyIdentificationCodes.EicType.LOCATION">
+            <summary>
+            object type "V", Physical or logical place where a market participant or IT system is located
+            </summary>
+        </member>
+        <member name="F:BO4E.EnergyIdentificationCodes.EicType.SUBSTATION">
+            <summary>
+            object type "A"
+            </summary>
+        </member>
+        <member name="F:BO4E.EnergyIdentificationCodes.EicType.MARKET_PARTICIPANT">
+            <summary>
+            Parties - object type "X"
+            </summary>
+        </member>
+        <member name="T:BO4E.EnergyIdentificationCodes.EnergyIdentificationCodeExtensions">
+            <summary>
+            Extension class to validate strings that are thought to be Energy Identification Codes (EIC)
+            </summary>
+        </member>
+        <member name="F:BO4E.EnergyIdentificationCodes.EnergyIdentificationCodeExtensions.EicRegex">
+            <summary>
+            Energy Identification Code Regular Expression
+            </summary>
+            <remarks>https://regex101.com/r/LpyuKX/1</remarks>
+        </member>
+        <member name="M:BO4E.EnergyIdentificationCodes.EnergyIdentificationCodeExtensions.GetEICType(System.String)">
+            <summary>
+            Converts a object type string <paramref name="type"/> to a <see cref="T:BO4E.EnergyIdentificationCodes.EicType"/>
+            </summary>
+            <param name="type">character specifying the type. e.g. 'X' or 'A'</param>
+            <returns></returns>
+        </member>
+        <member name="M:BO4E.EnergyIdentificationCodes.EnergyIdentificationCodeExtensions.IsValidEIC(System.String)">
+            <summary>
+            returns true iff <paramref name="eicCandidate"/> obeys the "Bildungsvorschrift" according to https://bdew-codes.de/Content/Files/EIC/Awh_20171218_EIC-Vergabe_V1-0.pdf section 2.2.1
+            </summary>
+            <param name="eicCandidate"></param>
+            <returns>true iff it obeys the "Allgemeine Bildungsvorschrift"</returns>
+        </member>
+        <member name="M:BO4E.EnergyIdentificationCodes.EnergyIdentificationCodeExtensions.IsValidEICBDEW(System.String)">
+            <summary>
+            returns true iff <paramref name="eicCandidate"/> adheres <see cref="M:BO4E.EnergyIdentificationCodes.EnergyIdentificationCodeExtensions.IsValidEIC(System.String)"/> and the "Vergabestelle" is 11=BDEW
+            </summary>
+            <param name="eicCandidate"></param>
+            <returns>true iff BDEW is the "Vergeber"</returns>
+        </member>
+        <member name="M:BO4E.EnergyIdentificationCodes.EnergyIdentificationCodeExtensions.IsValidBilanzierungsGebietId(System.String)">
+            <summary>
+            returns true iff the <paramref name="bilanzierungsGebietEic"/> is valid EIC by BDEW (<see cref="M:BO4E.EnergyIdentificationCodes.EnergyIdentificationCodeExtensions.IsValidEICBDEW(System.String)"/>) and does obey the rules for Bilanzierungsgebiete.
+            </summary>
+            <param name="bilanzierungsGebietEic"></param>
+            <returns></returns>
+            <remarks>See https://bdew-codes.de/Content/Files/EIC/Awh_20171218_EIC-Vergabe_V1-0.pdf section 2.2.2</remarks>
+        </member>
+        <member name="M:BO4E.EnergyIdentificationCodes.EnergyIdentificationCodeExtensions.IsGermanControlArea(System.String)">
+            <summary>
+            returns true if <paramref name="eicCode"/> is a German Control Area / Regelzone
+            </summary>
+            <param name="eicCode"></param>
+            <returns></returns>
+        </member>
+        <member name="M:BO4E.EnergyIdentificationCodes.EnergyIdentificationCodeExtensions.GetEICCheckCharacter(System.String)">
+            <summary>
+            calculates the check character according to the EIC rules (ENTSO-E)
+            </summary>
+            <param name="eicWithoutChecksum"></param>
+            <remarks>See https://eepublicdownloads.entsoe.eu/clean-documents/EDI/Library/cim_based/02%20EIC%20Code%20implementation%20guide_final.pdf line 461 (section 7.1)</remarks>
+            <returns></returns>
+        </member>
+        <member name="M:BO4E.EnergyIdentificationCodes.EnergyIdentificationCodeExtensions.CharacterToNumberEic(System.Char)">
+            <summary>
+            converts the character <paramref name="character"/> to a number according to the ENTSO-E/EIC algorithm
+            </summary>
+            <param name="character"></param>
+            <returns></returns>
+            <exception cref="T:System.ArgumentOutOfRangeException">if the character is not A-Z or "-"</exception>
+        </member>
+        <member name="M:BO4E.EnergyIdentificationCodes.EnergyIdentificationCodeExtensions.NumberToEicCharacter(System.Int32)">
+            <summary>
+            converts the number <paramref name="number"/> to a character accordint to the ENTSO-E/EIC algorithm,
+            </summary>
+            <remarks>basically reverts <see cref="M:BO4E.EnergyIdentificationCodes.EnergyIdentificationCodeExtensions.CharacterToNumberEic(System.Char)"/></remarks>
+            <param name="number"></param>
+            <returns></returns>
         </member>
         <member name="T:BO4E.ENUM.AbgabeArt">
             <summary>Schwachlastfähigkeit Marktlokation</summary>

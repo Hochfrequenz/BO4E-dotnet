@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.Text.Json.Serialization;
 using System.Text.RegularExpressions;
 using BO4E.COM;
+using BO4E.EnergyIdentificationCodes;
 using BO4E.ENUM;
 using BO4E.meta;
 using Newtonsoft.Json;
@@ -25,14 +26,12 @@ namespace BO4E.BO
         /// <summary>
         ///     Regular Expression used to validate 11 digit MarktlokationId
         /// </summary>
-        [Newtonsoft.Json.JsonIgnore]
-        protected static readonly Regex RegexValidate = new Regex(@"^[1-9][\d]{10}$", RegexOptions.Compiled);
+        [Newtonsoft.Json.JsonIgnore] protected static readonly Regex RegexValidate = new Regex(@"^[1-9][\d]{10}$", RegexOptions.Compiled);
 
         /// <summary>
         ///     Regular Expression to check if a string consists only of numbers (is numeric)
         /// </summary>
-        [Newtonsoft.Json.JsonIgnore]
-        protected static readonly Regex RegexNumericString = new Regex(@"^\d+$", RegexOptions.Compiled);
+        [Newtonsoft.Json.JsonIgnore] protected static readonly Regex RegexNumericString = new Regex(@"^\d+$", RegexOptions.Compiled);
 
         /// <summary>
         ///     Identifikationsnummer einer Marktlokation, an der Energie entweder
@@ -312,7 +311,7 @@ namespace BO4E.BO
         {
             if (string.IsNullOrWhiteSpace(input))
                 throw new ArgumentException($"Input '{nameof(input)}' must not be empty but was '{input}'");
-            if (input.Length < 10 || input.Length > 11)
+            if (input.Length is < 10 or > 11)
                 throw new ArgumentException(
                     $"Input '{nameof(input)}' must be a string with length 10 (to generate the checksum) or 11 (to validate the checksum).");
             if (!RegexNumericString.IsMatch(input))
@@ -337,7 +336,7 @@ namespace BO4E.BO
         /// <summary>
         ///     Test if the <see cref="MarktlokationsId" /> is valid.
         /// </summary>
-        /// <returns>if marktlokaionsId matches the expected format</returns>
+        /// <returns>if <see cref="MarktlokationsId"/> matches the expected format</returns>
         public bool HasValidId()
         {
             return ValidateId(MarktlokationsId);
@@ -348,10 +347,15 @@ namespace BO4E.BO
         ///     checks if the <see cref="MarktlokationsId" /> is valid using <see cref="HasValidId" />.
         /// </summary>
         /// <param name="checkId">validate the <see cref="MarktlokationsId" />, too</param>
+        /// <param name="checkRegelZone">check if the <see cref="Regelzone"/> is a German Regelzone if set</param>
+        /// <param name="checkBilanzierungsgebiet">check if the <see cref="Bilanzierungsgebiet"/> is a valid German Bilanzierungsgebiet if set</param>
         /// <returns>true if the marktlokation is valid</returns>
-        public bool IsValid(bool checkId = true)
+        public bool IsValid(bool checkId = true, bool checkRegelZone = true, bool checkBilanzierungsgebiet = true)
         {
-            return base.IsValid() && (!checkId || HasValidId());
+            return base.IsValid()
+                   && (!checkId || HasValidId())
+                   && (!checkRegelZone || (string.IsNullOrWhiteSpace(Regelzone) || Regelzone.IsGermanControlArea()))
+                   && (!checkBilanzierungsgebiet || (string.IsNullOrWhiteSpace(Bilanzierungsgebiet) || Bilanzierungsgebiet.IsValidBilanzierungsGebietId()));
         }
     }
 }
