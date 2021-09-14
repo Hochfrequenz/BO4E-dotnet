@@ -29,7 +29,7 @@
     <DebugType>Embedded</DebugType>
     <EmbedAllSources>True</EmbedAllSources>
     <LangVersion>9</LangVersion>
-    <PackageVersion>0.2.6</PackageVersion>
+    <PackageVersion>0.2.7</PackageVersion>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
