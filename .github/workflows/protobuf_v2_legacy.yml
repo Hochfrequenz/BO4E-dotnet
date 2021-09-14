@@ -4,6 +4,7 @@ on:
   push:
     branches:
       - "protobuf_net_v2_legacy_branch"
+jobs:
   pushfeature:
     runs-on: ubuntu-latest
     env:
