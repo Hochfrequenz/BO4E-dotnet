@@ -1,0 +1,33 @@
+name: Nuget package push from protobuf net v2 legacy branch
+
+on:
+  push:
+    branches:
+      - "protobuf_net_v2_legacy_branch"
+  pushfeature:
+    runs-on: ubuntu-latest
+    env:
+      ACTIONS_ALLOW_UNSECURE_COMMANDS: "true"
+    steps:
+      - name: Get current time
+        uses: srfrnk/current-time@master
+        id: current-time
+        with:
+          format: YYYYMMDDHHMMSS
+      - uses: actions/checkout@master
+      - name: Setup .NET Core
+        uses: actions/setup-dotnet@v1
+        with:
+          dotnet-version: 5.0.100
+      - name: Build/Check for compile errors (dotnet build)
+        run: dotnet build --configuration Release --version-suffix "protobuf-v2-${{github.sha}}"
+      - name: Run Unit Tests (dotnet test)
+        run: dotnet test --configuration Release
+      - name: Create Package (dotnet pack)
+        run: dotnet pack --configuration Release --version-suffix "protobuf-v2-${{github.sha}}"
+      - name: Nuget push core
+        run: |
+          for f in /home/runner/work/BO4E-dotnet/BO4E-dotnet/BO4E/bin/Release/*.nupkg
+          do
+            curl -vX PUT -u "[user]:${{ secrets.GITHUB_TOKEN }}" -F package=@$f https://nuget.pkg.github.com/hochfrequenz/
+          done
