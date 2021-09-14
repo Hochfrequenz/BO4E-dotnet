@@ -35,19 +35,28 @@ namespace TestBO4E
         }
 
         [TestMethod]
-        public void TestMeLoValidity()
+        public void TestMaLoValidity()
         {
             var malo = new Marktlokation
             {
                 MarktlokationsId = "1235678901",
                 Sparte = Sparte.STROM,
-                Energierichtung = Energierichtung.AUSSP
+                Energierichtung = Energierichtung.AUSSP,
+                Regelzone = null
             };
             Assert.IsFalse(malo.IsValid()); // because the obligatory bilanzierungsmethode is not set
             malo.Bilanzierungsmethode = Bilanzierungsmethode.SLP;
             Assert.IsTrue(malo.IsValid(false)); // because all obligatory fields are set
             Assert.IsFalse(malo.IsValid()); // but the marklokationsId is wrong
             malo.MarktlokationsId = "51238696781"; // matches the appropriate regex and has the right check sum
+            Assert.IsTrue(malo.IsValid());
+            malo.Regelzone = "invalid bullshit";
+            Assert.IsFalse(malo.IsValid());
+            malo.Regelzone = "10YDE-EON------1";
+            Assert.IsTrue(malo.IsValid());
+            malo.Bilanzierungsgebiet = "foo bar";
+            Assert.IsFalse(malo.IsValid());
+            malo.Bilanzierungsgebiet = "11YN10000762-01E";
             Assert.IsTrue(malo.IsValid());
         }
     }

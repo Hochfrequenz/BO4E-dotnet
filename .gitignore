@@ -59,3 +59,7 @@ TestBO4E.Extensions/bin/
 
 TestBO4E.Reporting/obj/
 TestBO4E.Reporting/bin/
+
+BO4E/bin/Debug/netstandard2.0/
+
+BO4E/bin/Debug/net5.0/
