@@ -15,7 +15,7 @@ jobs:
         uses: srfrnk/current-time@master
         id: current-time
         with:
-          format: YYYYMMDDHHMMSS
+          format: YYYYMMDDHHmmss
       - uses: actions/checkout@master
       - name: Setup .NET Core
         uses: actions/setup-dotnet@v1
