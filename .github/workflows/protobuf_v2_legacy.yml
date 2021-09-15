@@ -29,7 +29,7 @@ jobs:
       - name: Nuget push core
         run: |
           nuget setApiKey ${{ secrets.GITHUB_TOKEN }}
-          nuget push /home/runner/work/BO4E-dotnet/BO4E-dotnet/BO4E/bin/Release/*.nupkg --source https://nuget.pkg.github.com/hochfrequenz/
-          nuget push /home/runner/work/BO4E-dotnet/BO4E-dotnet/BO4E.Extensions/bin/Release/*.nupkg --source https://nuget.pkg.github.com/hochfrequenz/
-          nuget push /home/runner/work/BO4E-dotnet/BO4E-dotnet/BO4E.Reporting/bin/Release/*.nupkg --source https://nuget.pkg.github.com/hochfrequenz/
-          nuget push /home/runner/work/BO4E-dotnet/BO4E-dotnet/BO4E-dotnet.Encryption/bin/Release/*.nupkg --source https://nuget.pkg.github.com/hochfrequenz/
+          nuget push /home/runner/work/BO4E-dotnet/BO4E-dotnet/BO4E/bin/Release/*.nupkg -Source https://nuget.pkg.github.com/hochfrequenz/
+          nuget push /home/runner/work/BO4E-dotnet/BO4E-dotnet/BO4E.Extensions/bin/Release/*.nupkg -Source https://nuget.pkg.github.com/hochfrequenz/
+          nuget push /home/runner/work/BO4E-dotnet/BO4E-dotnet/BO4E.Reporting/bin/Release/*.nupkg -Source https://nuget.pkg.github.com/hochfrequenz/
+          nuget push /home/runner/work/BO4E-dotnet/BO4E-dotnet/BO4E-dotnet.Encryption/bin/Release/*.nupkg -Source https://nuget.pkg.github.com/hochfrequenz/
