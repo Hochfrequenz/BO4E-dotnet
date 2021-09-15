@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <RootNamespace>BO4E_dotnet.Extensions</RootNamespace>
-    <VersionPrefix>0.2.3</VersionPrefix>
+    <VersionPrefix>0.4.0</VersionPrefix>
     <VersionSuffix>$(VersionSuffix)</VersionSuffix>
 	<PackageLicenseFile>LICENSE.txt</PackageLicenseFile>
     <PackageProjectUrl>https://github.com/Hochfrequenz/BO4E-dotnet/</PackageProjectUrl>
@@ -11,7 +11,6 @@
     <Authors>Hochfrequenz Unternehmensberatung GmbH</Authors>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <LangVersion>9</LangVersion>
-    <PackageVersion>0.2.5</PackageVersion>
     <TargetFramework>net5.0</TargetFramework>
   </PropertyGroup>
 

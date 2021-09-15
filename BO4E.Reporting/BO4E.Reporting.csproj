@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <RootNamespace>BO4E_dotnet.Reporting</RootNamespace>
-    <VersionPrefix>0.2.3</VersionPrefix>
+    <VersionPrefix>0.4.0</VersionPrefix>
     <VersionSuffix>$(VersionSuffix)</VersionSuffix>
     <PackageLicenseFile>LICENSE.txt</PackageLicenseFile>
     <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
@@ -19,7 +19,6 @@
     <AllowedOutputExtensionsInPackageBuildOutputFolder>$(AllowedOutputExtensionsInPackageBuildOutputFolder);.pdb</AllowedOutputExtensionsInPackageBuildOutputFolder>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <LangVersion>9</LangVersion>
-    <PackageVersion>0.2.5</PackageVersion>
     <TargetFramework>net5.0</TargetFramework>
 
   </PropertyGroup>
@@ -46,4 +45,3 @@
     <ProjectReference Include="..\BO4E\BO4E.csproj" />
   </ItemGroup>
 </Project>
-
