@@ -15,7 +15,7 @@ namespace BO4E.COM
     public class Lastprofil : COM
     {
         /// <summary>
-        /// Bezeichnung des Profils (z.B. H0)
+        /// Bezeichnung des Profils, durch DVGW bzw. den Netzbetreiber vergeben (z.B. H0)
         /// </summary>
         [JsonProperty(PropertyName = "bezeichnung", Required = Required.Default)]
         [JsonPropertyName("bezeichnung")]
@@ -33,7 +33,7 @@ namespace BO4E.COM
         public Profilverfahren? Verfahren { get; set; }
 
         /// <summary>
-        /// Handelt es sich um ein Einspeiseprofil?
+        /// true, falls es sich um ein Einspeiseprofil handelt 
         /// </summary>
         [JsonProperty(PropertyName = "einspeisung", Required = Required.Default)]
         [JsonPropertyName("einspeisung")]
@@ -50,8 +50,6 @@ namespace BO4E.COM
         [NonOfficial(NonOfficialCategory.CUSTOMER_REQUIREMENTS)]
         [ProtoMember(1004)]
         public Tagesparameter Tagesparameter { get; set; }
-
-
 
     }
 }

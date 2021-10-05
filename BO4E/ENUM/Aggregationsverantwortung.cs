@@ -2,14 +2,14 @@ using BO4E.meta;
 
 namespace BO4E.ENUM
 {
-    /// <summary>Prognosegrundlage (WERTE, PROFILE)</summary>
+    /// <summary>Mögliche Qualifier für die Aggregationsverantwortung</summary>
     [NonOfficial(NonOfficialCategory.REGULATORY_REQUIREMENTS)]
-    public enum Prognosegrundlage
+    public enum Aggregationsverantwortung
     {
-        /// <summary>Prognose auf der Basis von Werten</summary>
-        WERTE,
+        /// <summary>Übertragungsnetzbetreiber</summary>
+        UENB,
 
-        /// <summary>Prognose auf der Basis von Profilen</summary>
-        PROFILE
+        /// <summary>Netzbetreiber</summary>
+        VNB
     }
 }

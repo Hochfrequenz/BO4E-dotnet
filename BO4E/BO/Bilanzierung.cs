@@ -27,7 +27,7 @@ namespace BO4E.BO
         [ProtoMember(1001)]
         public List<Lastprofil> Lastprofile { get; set; }
         /// <summary>
-        /// Start der Bilanzierung
+        /// Inklusiver Start der Bilanzierung
         /// </summary>
         [JsonProperty(PropertyName = "bilanzierungsbeginn", Required = Required.Default)]
         [JsonPropertyName("bilanzierungsbeginn")]
@@ -35,7 +35,7 @@ namespace BO4E.BO
         [ProtoMember(1002)]
         public DateTimeOffset Bilanzierungsbeginn { get; set; }
         /// <summary>
-        /// Ende der Bilanzierung
+        /// Exklusives Ende der Bilanzierung
         /// </summary>
         [JsonProperty(PropertyName = "bilanzierungsende", Required = Required.Default)]
         [JsonPropertyName("bilanzierungsende")]
@@ -53,7 +53,7 @@ namespace BO4E.BO
         public string Bilanzkreis { get; set; }
 
         /// <summary>
-        ///     jahresverbrauchsprognose
+        /// Jahresverbrauchsprognose
         /// </summary>
         [JsonProperty(PropertyName = "jahresverbrauchsprognose", Required = Required.Default)]
         [JsonPropertyName("jahresverbrauchsprognose")]
@@ -71,16 +71,16 @@ namespace BO4E.BO
         public Menge Kundenwert { get; set; }
 
         /// <summary>
-        ///     verbrauchsaufteilung
+        ///     Verbrauchsaufteilung in % zwischen SLP und TLP-Profil
         /// </summary>
         [JsonProperty(PropertyName = "verbrauchsaufteilung", Required = Required.Default)]
         [JsonPropertyName("verbrauchsaufteilung")]
         [NonOfficial(NonOfficialCategory.CUSTOMER_REQUIREMENTS)]
         [ProtoMember(1011)]
-        public double Verbrauchsaufteilung { get; set; }
+        public double? Verbrauchsaufteilung { get; set; }
 
         /// <summary>
-        ///     verbrauchsaufteilung
+        ///     Zeitreihentyp (SLS, TLS, etc.)
         /// </summary>
         [JsonProperty(PropertyName = "zeitreihentyp", Required = Required.Default)]
         [JsonPropertyName("zeitreihentyp")]
@@ -132,6 +132,15 @@ namespace BO4E.BO
         [NonOfficial(NonOfficialCategory.CUSTOMER_REQUIREMENTS)]
         [ProtoMember(1016)]
         public Fallgruppenzuordnung? Fallgruppenzuordnung { get; set; }
+
+        /// <summary>
+        ///   Priorität des Bilanzkreises (für Gas)
+        /// </summary>
+        [JsonProperty(PropertyName = "prioritaet", Required = Required.Default)]
+        [JsonPropertyName("prioritaet")]
+        [NonOfficial(NonOfficialCategory.CUSTOMER_REQUIREMENTS)]
+        [ProtoMember(1017)]
+        public int Prioritaet { get; set; }
 
     }
 }
