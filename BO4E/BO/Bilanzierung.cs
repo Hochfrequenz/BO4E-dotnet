@@ -6,6 +6,7 @@ using ProtoBuf;
 using System;
 using System.Collections.Generic;
 using System.Text.Json.Serialization;
+using BO4E.EnergyIdentificationCodes;
 
 namespace BO4E.BO
 {
@@ -43,7 +44,7 @@ namespace BO4E.BO
         public DateTimeOffset Bilanzierungsende { get; set; }
 
         /// <summary>
-        /// Bilanzkreis
+        /// Bilanzkreis, should obey <see cref="EnergyIdentificationCodeExtensions.IsValidEIC"/>
         /// </summary>
         [JsonProperty(PropertyName = "bilanzkreis", Required = Required.Default)]
         [JsonPropertyName("bilanzkreis")]
@@ -61,7 +62,7 @@ namespace BO4E.BO
         public Menge Jahresverbrauchsprognose { get; set; }
 
         /// <summary>
-        ///     kundenwert
+        /// Kundenwert
         /// </summary>
         [JsonProperty(PropertyName = "kundenwert", Required = Required.Default)]
         [JsonPropertyName("kundenwert")]
@@ -70,7 +71,7 @@ namespace BO4E.BO
         public Menge Kundenwert { get; set; }
 
         /// <summary>
-        ///     Verbrauchsaufteilung in % zwischen SLP und TLP-Profil
+        ///  Verbrauchsaufteilung in % zwischen SLP und TLP-Profil
         /// </summary>
         [JsonProperty(PropertyName = "verbrauchsaufteilung", Required = Required.Default)]
         [JsonPropertyName("verbrauchsaufteilung")]
