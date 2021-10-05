@@ -1,11 +1,8 @@
 ﻿using BO4E.COM;
 using BO4E.ENUM;
 using BO4E.meta;
-
 using Newtonsoft.Json;
-
 using ProtoBuf;
-
 using System;
 using System.Collections.Generic;
 using System.Text.Json.Serialization;
@@ -26,6 +23,7 @@ namespace BO4E.BO
         [NonOfficial(NonOfficialCategory.CUSTOMER_REQUIREMENTS)]
         [ProtoMember(1001)]
         public List<Lastprofil> Lastprofile { get; set; }
+
         /// <summary>
         /// Inklusiver Start der Bilanzierung
         /// </summary>
@@ -34,6 +32,7 @@ namespace BO4E.BO
         [NonOfficial(NonOfficialCategory.CUSTOMER_REQUIREMENTS)]
         [ProtoMember(1002)]
         public DateTimeOffset Bilanzierungsbeginn { get; set; }
+
         /// <summary>
         /// Exklusives Ende der Bilanzierung
         /// </summary>
@@ -141,6 +140,5 @@ namespace BO4E.BO
         [NonOfficial(NonOfficialCategory.CUSTOMER_REQUIREMENTS)]
         [ProtoMember(1017)]
         public int Prioritaet { get; set; }
-
     }
 }
