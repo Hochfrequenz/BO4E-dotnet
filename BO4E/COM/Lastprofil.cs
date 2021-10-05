@@ -1,16 +1,13 @@
 ﻿using BO4E.ENUM;
 using BO4E.meta;
-
 using Newtonsoft.Json;
-
 using ProtoBuf;
-
 using System.Text.Json.Serialization;
 
 namespace BO4E.COM
 {
     /// <summary>
-    /// Lastprofil COM
+    /// Lastprofil
     /// </summary>
     public class Lastprofil : COM
     {
@@ -50,6 +47,5 @@ namespace BO4E.COM
         [NonOfficial(NonOfficialCategory.CUSTOMER_REQUIREMENTS)]
         [ProtoMember(1004)]
         public Tagesparameter Tagesparameter { get; set; }
-
     }
 }
