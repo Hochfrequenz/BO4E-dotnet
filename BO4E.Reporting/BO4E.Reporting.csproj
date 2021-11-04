@@ -19,7 +19,7 @@
     <AllowedOutputExtensionsInPackageBuildOutputFolder>$(AllowedOutputExtensionsInPackageBuildOutputFolder);.pdb</AllowedOutputExtensionsInPackageBuildOutputFolder>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <LangVersion>9</LangVersion>
-    <PackageVersion>0.2.5</PackageVersion>
+    <PackageVersion>0.2.7</PackageVersion>
     <TargetFramework>net5.0</TargetFramework>
 
   </PropertyGroup>
