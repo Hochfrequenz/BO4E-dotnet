@@ -28,20 +28,45 @@ namespace BO4E.BO
         /// <summary>
         /// Inklusiver Start der Bilanzierung
         /// </summary>
+        [System.Text.Json.Serialization.JsonIgnore]
+        [Newtonsoft.Json.JsonIgnore]
+        [ProtoMember(1002, Name = nameof(Bilanzierungsbeginn))]
+        [CompatibilityLevel(CompatibilityLevel.Level240)]
+        private DateTime _Bilanzierungsbeginn
+        {
+            get => Bilanzierungsbeginn?.UtcDateTime ?? DateTime.MinValue;
+            set => Bilanzierungsbeginn = DateTime.SpecifyKind(value, DateTimeKind.Utc);
+        }
+        /// <summary>
+        /// Inklusiver Start der Bilanzierung
+        /// </summary>
         [JsonProperty(PropertyName = "bilanzierungsbeginn", Required = Required.Default)]
         [JsonPropertyName("bilanzierungsbeginn")]
         [NonOfficial(NonOfficialCategory.CUSTOMER_REQUIREMENTS)]
-        [ProtoMember(1002)]
-        public DateTimeOffset Bilanzierungsbeginn { get; set; }
+        [ProtoIgnore]
+        public DateTimeOffset? Bilanzierungsbeginn { get; set; }
 
+
+        /// <summary>
+        /// Exklusives Ende der Bilanzierung
+        /// </summary>
+        [System.Text.Json.Serialization.JsonIgnore]
+        [Newtonsoft.Json.JsonIgnore]
+        [ProtoMember(1003, Name = nameof(Bilanzierungsende))]
+        [CompatibilityLevel(CompatibilityLevel.Level240)]
+        private DateTime _Bilanzierungsende
+        {
+            get => Bilanzierungsende?.UtcDateTime ?? DateTime.MinValue;
+            set => Bilanzierungsende = DateTime.SpecifyKind(value, DateTimeKind.Utc);
+        }
         /// <summary>
         /// Exklusives Ende der Bilanzierung
         /// </summary>
         [JsonProperty(PropertyName = "bilanzierungsende", Required = Required.Default)]
         [JsonPropertyName("bilanzierungsende")]
         [NonOfficial(NonOfficialCategory.CUSTOMER_REQUIREMENTS)]
-        [ProtoMember(1003)]
-        public DateTimeOffset Bilanzierungsende { get; set; }
+        [ProtoIgnore]
+        public DateTimeOffset? Bilanzierungsende { get; set; }
 
         /// <summary>
         /// Bilanzkreis, should obey <see cref="EnergyIdentificationCodeExtensions.IsValidEIC"/>
@@ -50,6 +75,7 @@ namespace BO4E.BO
         [JsonPropertyName("bilanzkreis")]
         [NonOfficial(NonOfficialCategory.CUSTOMER_REQUIREMENTS)]
         [ProtoMember(1004)]
+        [BoKey]
         public string Bilanzkreis { get; set; }
 
         /// <summary>
@@ -72,6 +98,11 @@ namespace BO4E.BO
 
         /// <summary>
         ///  Verbrauchsaufteilung in % zwischen SLP und TLP-Profil
+        ///  1. [Gemessene Energiemenge der OBIS "nicht Schwachlast"] * [Verbrauchsaufteilung in % / 100%] = [zu verlagernde Energiemenge] 
+        ///  2. [Gemessene Energiemenge der OBIS "Schwachlast"] - [zu verlagernde Energiemenge] = [Ermittelte Energiemenge für
+        ///     Schwachlast]
+        ///  3. [Gemessene Energiemenge der OBIS "nicht Schwachlast"] + [zu verlagernde Energiemenge] = [Ermittelte Energiemenge für nicht
+        ///     Schwachlast]
         /// </summary>
         [JsonProperty(PropertyName = "verbrauchsaufteilung", Required = Required.Default)]
         [JsonPropertyName("verbrauchsaufteilung")]
@@ -140,6 +171,6 @@ namespace BO4E.BO
         [JsonPropertyName("prioritaet")]
         [NonOfficial(NonOfficialCategory.CUSTOMER_REQUIREMENTS)]
         [ProtoMember(1017)]
-        public int Prioritaet { get; set; }
+        public int? Prioritaet { get; set; }
     }
 }
