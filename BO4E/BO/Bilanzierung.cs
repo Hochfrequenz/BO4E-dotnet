@@ -14,6 +14,7 @@ namespace BO4E.BO
     /// Bilanzierungs BO
     /// </summary>
     [ProtoContract]
+    [NonOfficial(NonOfficialCategory.MISSING)]
     public class Bilanzierung : BusinessObject
     {
         /// <summary>
@@ -21,7 +22,7 @@ namespace BO4E.BO
         /// </summary>
         [JsonProperty(PropertyName = "lastprofile", Required = Required.Default)]
         [JsonPropertyName("lastprofile")]
-        [NonOfficial(NonOfficialCategory.CUSTOMER_REQUIREMENTS)]
+        [NonOfficial(NonOfficialCategory.MISSING)]
         [ProtoMember(1001)]
         public List<Lastprofil> Lastprofile { get; set; }
 
@@ -42,7 +43,7 @@ namespace BO4E.BO
         /// </summary>
         [JsonProperty(PropertyName = "bilanzierungsbeginn", Required = Required.Default)]
         [JsonPropertyName("bilanzierungsbeginn")]
-        [NonOfficial(NonOfficialCategory.CUSTOMER_REQUIREMENTS)]
+        [NonOfficial(NonOfficialCategory.MISSING)]
         [ProtoIgnore]
         public DateTimeOffset? Bilanzierungsbeginn { get; set; }
 
@@ -64,7 +65,7 @@ namespace BO4E.BO
         /// </summary>
         [JsonProperty(PropertyName = "bilanzierungsende", Required = Required.Default)]
         [JsonPropertyName("bilanzierungsende")]
-        [NonOfficial(NonOfficialCategory.CUSTOMER_REQUIREMENTS)]
+        [NonOfficial(NonOfficialCategory.MISSING)]
         [ProtoIgnore]
         public DateTimeOffset? Bilanzierungsende { get; set; }
 
@@ -73,7 +74,7 @@ namespace BO4E.BO
         /// </summary>
         [JsonProperty(PropertyName = "bilanzkreis", Required = Required.Default)]
         [JsonPropertyName("bilanzkreis")]
-        [NonOfficial(NonOfficialCategory.CUSTOMER_REQUIREMENTS)]
+        [NonOfficial(NonOfficialCategory.MISSING)]
         [ProtoMember(1004)]
         [BoKey]
         public string Bilanzkreis { get; set; }
@@ -83,7 +84,7 @@ namespace BO4E.BO
         /// </summary>
         [JsonProperty(PropertyName = "jahresverbrauchsprognose", Required = Required.Default)]
         [JsonPropertyName("jahresverbrauchsprognose")]
-        [NonOfficial(NonOfficialCategory.CUSTOMER_REQUIREMENTS)]
+        [NonOfficial(NonOfficialCategory.MISSING)]
         [ProtoMember(1005)]
         public Menge Jahresverbrauchsprognose { get; set; }
 
@@ -92,7 +93,7 @@ namespace BO4E.BO
         /// </summary>
         [JsonProperty(PropertyName = "kundenwert", Required = Required.Default)]
         [JsonPropertyName("kundenwert")]
-        [NonOfficial(NonOfficialCategory.CUSTOMER_REQUIREMENTS)]
+        [NonOfficial(NonOfficialCategory.MISSING)]
         [ProtoMember(1006)]
         public Menge Kundenwert { get; set; }
 
@@ -106,7 +107,7 @@ namespace BO4E.BO
         /// </summary>
         [JsonProperty(PropertyName = "verbrauchsaufteilung", Required = Required.Default)]
         [JsonPropertyName("verbrauchsaufteilung")]
-        [NonOfficial(NonOfficialCategory.CUSTOMER_REQUIREMENTS)]
+        [NonOfficial(NonOfficialCategory.MISSING)]
         [ProtoMember(1011)]
         public double? Verbrauchsaufteilung { get; set; }
 
@@ -115,7 +116,7 @@ namespace BO4E.BO
         /// </summary>
         [JsonProperty(PropertyName = "zeitreihentyp", Required = Required.Default)]
         [JsonPropertyName("zeitreihentyp")]
-        [NonOfficial(NonOfficialCategory.CUSTOMER_REQUIREMENTS)]
+        [NonOfficial(NonOfficialCategory.MISSING)]
         [ProtoMember(1012)]
         public Zeitreihentyp? Zeitreihentyp { get; set; }
 
@@ -124,7 +125,7 @@ namespace BO4E.BO
         /// </summary>
         [JsonProperty(PropertyName = "aggregationsverantwortung", Required = Required.Default)]
         [JsonPropertyName("aggregationsverantwortung")]
-        [NonOfficial(NonOfficialCategory.CUSTOMER_REQUIREMENTS)]
+        [NonOfficial(NonOfficialCategory.MISSING)]
         [ProtoMember(1013)]
         public Aggregationsverantwortung? Aggregationsverantwortung { get; set; }
 
@@ -133,7 +134,7 @@ namespace BO4E.BO
         /// </summary>
         [JsonProperty(PropertyName = "prognosegrundlage", Required = Required.Default)]
         [JsonPropertyName("prognosegrundlage")]
-        [NonOfficial(NonOfficialCategory.CUSTOMER_REQUIREMENTS)]
+        [NonOfficial(NonOfficialCategory.MISSING)]
         [ProtoMember(1013)]
         public Prognosegrundlage? Prognosegrundlage { get; set; }
 
@@ -142,7 +143,7 @@ namespace BO4E.BO
         /// </summary>
         [JsonProperty(PropertyName = "detailsprognosegrundlage", Required = Required.Default)]
         [JsonPropertyName("detailsprognosegrundlage")]
-        [NonOfficial(NonOfficialCategory.CUSTOMER_REQUIREMENTS)]
+        [NonOfficial(NonOfficialCategory.MISSING)]
         [ProtoMember(1014)]
         public List<Profiltyp> DetailsPrognosegrundlage { get; set; }
 
@@ -151,7 +152,7 @@ namespace BO4E.BO
         /// </summary>
         [JsonProperty(PropertyName = "wahlrechtprognosegrundlage", Required = Required.Default)]
         [JsonPropertyName("wahlrechtprognosegrundlage")]
-        [NonOfficial(NonOfficialCategory.CUSTOMER_REQUIREMENTS)]
+        [NonOfficial(NonOfficialCategory.MISSING)]
         [ProtoMember(1015)]
         public bool? WahlrechtPrognosegrundlage { get; set; }
 
@@ -160,7 +161,7 @@ namespace BO4E.BO
         /// </summary>
         [JsonProperty(PropertyName = "fallgruppenzuordnung", Required = Required.Default)]
         [JsonPropertyName("fallgruppenzuordnung")]
-        [NonOfficial(NonOfficialCategory.CUSTOMER_REQUIREMENTS)]
+        [NonOfficial(NonOfficialCategory.MISSING)]
         [ProtoMember(1016)]
         public Fallgruppenzuordnung? Fallgruppenzuordnung { get; set; }
 
@@ -169,7 +170,7 @@ namespace BO4E.BO
         /// </summary>
         [JsonProperty(PropertyName = "prioritaet", Required = Required.Default)]
         [JsonPropertyName("prioritaet")]
-        [NonOfficial(NonOfficialCategory.CUSTOMER_REQUIREMENTS)]
+        [NonOfficial(NonOfficialCategory.MISSING)]
         [ProtoMember(1017)]
         public int? Prioritaet { get; set; }
     }
