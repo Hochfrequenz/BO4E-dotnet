@@ -1057,13 +1057,14 @@
             </summary>
             <returns>if <see cref="P:BO4E.BO.Marktlokation.MarktlokationsId"/> matches the expected format</returns>
         </member>
-        <member name="M:BO4E.BO.Marktlokation.IsValid(System.Boolean,System.Boolean)">
+        <member name="M:BO4E.BO.Marktlokation.IsValid(System.Boolean,System.Boolean,System.Boolean)">
             <summary>
                 same as <see cref="M:BO4E.BO.BusinessObject.IsValid" /> if <paramref name="checkId" /> is false but by default additionally
                 checks if the <see cref="P:BO4E.BO.Marktlokation.MarktlokationsId" /> is valid using <see cref="M:BO4E.BO.Marktlokation.HasValidId" />.
             </summary>
             <param name="checkId">validate the <see cref="P:BO4E.BO.Marktlokation.MarktlokationsId" />, too</param>
             <param name="checkRegelZone">check if the <see cref="P:BO4E.BO.Marktlokation.Regelzone"/> is a German Regelzone if set</param>
+            <param name="checkBilanzierungsgebiet">check if the <see cref="P:BO4E.BO.Marktlokation.Bilanzierungsgebiet"/> is a valid German Bilanzierungsgebiet if set</param>
             <returns>true if the marktlokation is valid</returns>
         </member>
         <member name="T:BO4E.BO.Marktteilnehmer">

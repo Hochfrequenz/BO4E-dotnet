@@ -1,5 +1,4 @@
 using System;
-using Newtonsoft.Json;
 using ProtoBuf;
 
 namespace BO4E.ENUM
@@ -13,7 +12,8 @@ namespace BO4E.ENUM
 #pragma warning disable CS0618 // Type or member is obsolete
         [ProtoEnum(Name = nameof(Mengeneinheit) + "_" + nameof(ZERO))]
 #pragma warning restore CS0618 // Type or member is obsolete
-        [JsonIgnore]
+        [Newtonsoft.Json.JsonIgnore]
+        [System.Text.Json.Serialization.JsonIgnore]
 #pragma warning disable CS1591 // Missing XML comment for publicly visible type or member
         ZERO = 0,
 
