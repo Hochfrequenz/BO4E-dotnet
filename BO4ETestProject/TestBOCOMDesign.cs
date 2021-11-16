@@ -21,8 +21,7 @@ namespace TestBO4E
         [TestMethod]
         public void TestNoBOFields()
         {
-            foreach (var type in typeof(BusinessObject).Assembly.GetTypes()
-                .Where(t => typeof(BusinessObject).IsAssignableFrom(t)))
+            foreach (var type in typeof(BusinessObject).Assembly.GetTypes().Where(t => typeof(BusinessObject).IsAssignableFrom(t)))
             {
                 var fields = type.GetFields().Where(f => f.IsPublic && !f.IsLiteral && !f.IsStatic);
                 Assert.IsFalse(fields.Any(),
@@ -127,8 +126,7 @@ namespace TestBO4E
         [TestMethod]
         public void TestBoKeys()
         {
-            foreach (var type in typeof(BusinessObject).Assembly.GetTypes().Where(t =>
-                t.BaseType == typeof(BusinessObject) && !t.IsAbstract && !NO_KEYS_WHITELIST.Contains(t)))
+            foreach (var type in typeof(BusinessObject).Assembly.GetTypes().Where(t => t.BaseType == typeof(BusinessObject) && !t.IsAbstract && !NO_KEYS_WHITELIST.Contains(t)))
             {
                 var keyProps = type.GetProperties()
                     .Where(p => p.GetCustomAttributes(typeof(BoKey), false).Length > 0)
@@ -146,13 +144,8 @@ namespace TestBO4E
         [TestMethod]
         public void NullableDefaultEnums()
         {
-            foreach (var boType in typeof(BusinessObject).Assembly.GetTypes().Where(t =>
-                (t.BaseType == typeof(BusinessObject) || t.BaseType == typeof(COM)) && !t.IsAbstract))
-            foreach (var obligDefaultField in boType
-                .GetProperties(BindingFlags.DeclaredOnly | BindingFlags.Public | BindingFlags.Instance)
-                .Where(field => field.GetCustomAttributes(typeof(JsonPropertyAttribute), true)
-                    .Cast<JsonPropertyAttribute>()
-                    .Any(jpa => jpa.Required == Required.Default)))
+            foreach (var boType in typeof(BusinessObject).Assembly.GetTypes().Where(t => (t.BaseType == typeof(BusinessObject) || t.BaseType == typeof(COM)) && !t.IsAbstract))
+            foreach (var obligDefaultField in boType.GetProperties(BindingFlags.DeclaredOnly | BindingFlags.Public | BindingFlags.Instance).Where(field => field.GetCustomAttributes(typeof(JsonPropertyAttribute), true).Cast<JsonPropertyAttribute>().Any(jpa => jpa.Required == Required.Default)))
             {
                 if (Nullable.GetUnderlyingType(obligDefaultField.PropertyType) != null ||
                     obligDefaultField.PropertyType == typeof(string))
