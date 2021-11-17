@@ -2,7 +2,7 @@
   "objectName": "Geschaeftspartner",
   "lenientEnumList": true,
   "input": {
-    "versionStruktur": 1,
+    "versionStruktur": "1",
     "boTyp": "GESCHAEFTSPARTNER",
     "name1": "Ernest",
     "kontaktweg": [{ "kontaktweg": "TELEFONAT" }],

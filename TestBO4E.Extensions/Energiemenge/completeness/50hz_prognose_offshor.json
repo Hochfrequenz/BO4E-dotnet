@@ -1,5 +1,5 @@
 {
-  "versionStruktur": 1,
+  "versionStruktur": "1",
   "boTyp": "ENERGIEMENGE",
   "lokationsId": "Wind Offshore[MWh]",
   "lokationstyp": "MELO",

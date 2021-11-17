@@ -10,11 +10,11 @@
     }
   },
   "input": {
-    "versionStruktur": 1,
+    "versionStruktur": "1",
     "boTyp": "ANSPRECHPARTNER",
     "nachname": "Maier",
     "geschaeftspartner": {
-      "versionStruktur": 1,
+      "versionStruktur": "1",
       "boTyp": "GESCHAEFTSPARTNER",
       "name1": "Unternehmen XYZ GmbH",
       "gewerbekennzeichnung": true,

@@ -1,3 +1,14 @@
+using BO4E.COM;
+using BO4E.meta;
+
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
+using Newtonsoft.Json.Schema;
+using Newtonsoft.Json.Schema.Generation;
+using Newtonsoft.Json.Serialization;
+
+using ProtoBuf;
+
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -6,14 +17,7 @@ using System.Linq;
 using System.Reflection;
 using System.Text.Json;
 using System.Text.Json.Serialization;
-using BO4E.COM;
-using BO4E.meta;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
-using Newtonsoft.Json.Schema;
-using Newtonsoft.Json.Schema.Generation;
-using Newtonsoft.Json.Serialization;
-using ProtoBuf;
+
 using JsonConverter = Newtonsoft.Json.JsonConverter;
 using JsonSerializer = Newtonsoft.Json.JsonSerializer;
 
@@ -87,7 +91,7 @@ namespace BO4E.BO
         public BusinessObject()
         {
             //BoTyp = this.GetType().Name.ToUpper();
-            VersionStruktur = 1;
+            VersionStruktur = "1";
         }
 
         /// <summary>
@@ -115,7 +119,7 @@ namespace BO4E.BO
         [JsonProperty(PropertyName = "versionStruktur", Required = Required.Default, Order = 2)]
         [JsonPropertyName("versionStruktur")]
         [ProtoMember(2)]
-        public int VersionStruktur { get; set; }
+        public string VersionStruktur { get; set; }
 
         /// <summary>
         ///     protobuf serilization requires the <see cref="Guid" /> as string.
