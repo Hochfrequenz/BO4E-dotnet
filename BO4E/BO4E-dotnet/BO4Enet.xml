@@ -476,6 +476,11 @@
         <member name="P:BO4E.BO.Bilanzierung.Verbrauchsaufteilung">
             <summary>
              Verbrauchsaufteilung in % zwischen SLP und TLP-Profil
+             1. [Gemessene Energiemenge der OBIS "nicht Schwachlast"] * [Verbrauchsaufteilung in % / 100%] = [zu verlagernde Energiemenge] 
+             2. [Gemessene Energiemenge der OBIS "Schwachlast"] - [zu verlagernde Energiemenge] = [Ermittelte Energiemenge für
+                Schwachlast]
+             3. [Gemessene Energiemenge der OBIS "nicht Schwachlast"] + [zu verlagernde Energiemenge] = [Ermittelte Energiemenge für nicht
+                Schwachlast]
             </summary>
         </member>
         <member name="P:BO4E.BO.Bilanzierung.Zeitreihentyp">
@@ -496,6 +501,8 @@
         <member name="P:BO4E.BO.Bilanzierung.DetailsPrognosegrundlage">
             <summary>
                 Prognosegrundlage
+                Besteht der Bedarf ein tagesparameteräbhängiges Lastprofil mit gemeinsamer Messung anzugeben, so ist dies über die 2 -malige
+                Wiederholung des CAV Segments mit der Angabe der Codes E02 und E14 möglich.
             </summary>
         </member>
         <member name="P:BO4E.BO.Bilanzierung.WahlrechtPrognosegrundlage">
