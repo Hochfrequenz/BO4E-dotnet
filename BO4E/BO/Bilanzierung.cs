@@ -21,6 +21,15 @@ namespace BO4E.BO
     public class Bilanzierung : BusinessObject
     {
         /// <summary>
+        /// Für welche Marktlokation getlen diese Bilanzierungsdaten
+        /// </summary>
+        [JsonProperty(PropertyName = "marktlokationsId", Required = Required.Default)]
+        [JsonPropertyName("marktlokationsId")]
+        [NonOfficial(NonOfficialCategory.MISSING)]
+        [ProtoMember(1000)]
+        [BoKey]
+        public string MarktlokationsId { get; set; }
+        /// <summary>
         /// Eine Liste der verwendeten Lastprofile (SLP, SLP/TLP, ALP etc.)
         /// </summary>
         [JsonProperty(PropertyName = "lastprofile", Required = Required.Default)]
