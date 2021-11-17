@@ -1,12 +1,15 @@
 ﻿using BO4E.COM;
+using BO4E.EnergyIdentificationCodes;
 using BO4E.ENUM;
 using BO4E.meta;
+
 using Newtonsoft.Json;
+
 using ProtoBuf;
+
 using System;
 using System.Collections.Generic;
 using System.Text.Json.Serialization;
-using BO4E.EnergyIdentificationCodes;
 
 namespace BO4E.BO
 {
@@ -140,9 +143,11 @@ namespace BO4E.BO
 
         /// <summary>
         ///     Prognosegrundlage
+        ///     Besteht der Bedarf ein tagesparameteräbhängiges Lastprofil mit gemeinsamer Messung anzugeben, so ist dies über die 2 -malige
+        ///     Wiederholung des CAV Segments mit der Angabe der Codes E02 und E14 möglich.
         /// </summary>
-        [JsonProperty(PropertyName = "detailsprognosegrundlage", Required = Required.Default)]
-        [JsonPropertyName("detailsprognosegrundlage")]
+        [JsonProperty(PropertyName = "detailsPrognosegrundlage", Required = Required.Default)]
+        [JsonPropertyName("detailsPrognosegrundlage")]
         [NonOfficial(NonOfficialCategory.MISSING)]
         [ProtoMember(1014)]
         public List<Profiltyp> DetailsPrognosegrundlage { get; set; }
@@ -150,8 +155,8 @@ namespace BO4E.BO
         /// <summary>
         ///     Wahlrecht der Prognosegrundlage (true = Wahlrecht beim Lieferanten vorhanden)
         /// </summary>
-        [JsonProperty(PropertyName = "wahlrechtprognosegrundlage", Required = Required.Default)]
-        [JsonPropertyName("wahlrechtprognosegrundlage")]
+        [JsonProperty(PropertyName = "wahlrechtPrognosegrundlage", Required = Required.Default)]
+        [JsonPropertyName("wahlrechtPrognosegrundlage")]
         [NonOfficial(NonOfficialCategory.MISSING)]
         [ProtoMember(1015)]
         public bool? WahlrechtPrognosegrundlage { get; set; }
