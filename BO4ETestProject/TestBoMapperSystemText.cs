@@ -18,6 +18,7 @@ namespace TestBO4E
     public class TestBoMapperSystemText
     {
         [TestMethod]
+        [Obsolete]
         public void TestBoMapping()
         {
             var files = Directory.GetFiles("BoMapperTests/", "*.json");
@@ -51,7 +52,7 @@ namespace TestBO4E
                     bo = JsonSerializer.Deserialize<BusinessObject>(json.RootElement.GetProperty("input").GetRawText(),
                         lenients.GetJsonSerializerOptions());
                 }
-                catch (Exception e)
+                catch (Exception)
                 {
                     bo = JsonSerializer.Deserialize(json.RootElement.GetProperty("input").GetRawText(),
                         BoMapper.GetTypeForBoName(json.RootElement.GetProperty("objectName").GetString()),
@@ -278,6 +279,7 @@ namespace TestBO4E
         }
 
         [TestMethod]
+        [Obsolete]
         public void TestBoNameTyping()
         {
             Assert.AreEqual(typeof(Benachrichtigung), BoMapper.GetTypeForBoName("Benachrichtigung"));

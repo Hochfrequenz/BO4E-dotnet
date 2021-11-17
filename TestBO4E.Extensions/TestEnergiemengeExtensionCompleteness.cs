@@ -34,6 +34,7 @@ namespace TestBO4E.Extensions
             new DateTimeOffset(2018, 12, 31, 23, 0, 0, TimeSpan.Zero).UtcDateTime);
 
         [TestMethod]
+        [Obsolete]
         public void TestCompletenessReportGenerationSomeCustomer()
         {
             var files = Directory.GetFiles("Energiemenge/completeness", "somecustomer*.json");
@@ -98,6 +99,7 @@ namespace TestBO4E.Extensions
         }
 
         [TestMethod]
+        [Obsolete]
         public void TestCompletenessReportGenerationSmard()
         {
             var profiler = MiniProfiler.StartNew(nameof(TestCompletenessReportGenerationSmard));
@@ -129,6 +131,7 @@ namespace TestBO4E.Extensions
         }
 
         [TestMethod]
+        [Obsolete]
         public void TestRounding()
         {
             var boFile = Directory.GetFiles("Energiemenge/completeness", "gas_januar_2018.json").First();
@@ -256,7 +259,7 @@ namespace TestBO4E.Extensions
             TestMonthlySlices(true);
         }
 
-
+        [Obsolete]
         internal void TestMonthlySlices(bool testFirstOnly = true, bool useParallelExecution = false)
         {
             foreach (var boFile in Directory.GetFiles("Energiemenge/completeness", "50hz_prognose*.json"))
