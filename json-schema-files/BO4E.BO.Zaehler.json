@@ -1,4 +1,4 @@
-{
+﻿{
   "$schema": "http://json-schema.org/draft-07/schema#",
   "definitions": {
     "Adresse": {
@@ -511,8 +511,9 @@
           "type": "number"
         },
         "einheit": {
-          "type": "string",
+          "type": ["string", "null"],
           "enum": [
+            null,
             "ZERO",
             "WH",
             "KW",
@@ -584,8 +585,7 @@
         "bezeichnung",
         "richtung",
         "obisKennzahl",
-        "wandlerfaktor",
-        "einheit"
+        "wandlerfaktor"
       ]
     }
   },

@@ -428,6 +428,98 @@
                 list of additional information built in a customer dependet implementation
             </summary>
         </member>
+        <member name="T:BO4E.BO.Bilanzierung">
+            <summary>
+            Bilanzierungs BO
+            </summary>
+        </member>
+        <member name="P:BO4E.BO.Bilanzierung.Lastprofile">
+            <summary>
+            Eine Liste der verwendeten Lastprofile (SLP, SLP/TLP, ALP etc.)
+            </summary>
+        </member>
+        <member name="P:BO4E.BO.Bilanzierung._Bilanzierungsbeginn">
+            <summary>
+            Inklusiver Start der Bilanzierung
+            </summary>
+        </member>
+        <member name="P:BO4E.BO.Bilanzierung.Bilanzierungsbeginn">
+            <summary>
+            Inklusiver Start der Bilanzierung
+            </summary>
+        </member>
+        <member name="P:BO4E.BO.Bilanzierung._Bilanzierungsende">
+            <summary>
+            Exklusives Ende der Bilanzierung
+            </summary>
+        </member>
+        <member name="P:BO4E.BO.Bilanzierung.Bilanzierungsende">
+            <summary>
+            Exklusives Ende der Bilanzierung
+            </summary>
+        </member>
+        <member name="P:BO4E.BO.Bilanzierung.Bilanzkreis">
+            <summary>
+            Bilanzkreis, should obey <see cref="M:BO4E.EnergyIdentificationCodes.EnergyIdentificationCodeExtensions.IsValidEIC(System.String)"/>
+            </summary>
+        </member>
+        <member name="P:BO4E.BO.Bilanzierung.Jahresverbrauchsprognose">
+            <summary>
+            Jahresverbrauchsprognose
+            </summary>
+        </member>
+        <member name="P:BO4E.BO.Bilanzierung.Kundenwert">
+            <summary>
+            Kundenwert
+            </summary>
+        </member>
+        <member name="P:BO4E.BO.Bilanzierung.Verbrauchsaufteilung">
+            <summary>
+             Verbrauchsaufteilung in % zwischen SLP und TLP-Profil
+             1. [Gemessene Energiemenge der OBIS "nicht Schwachlast"] * [Verbrauchsaufteilung in % / 100%] = [zu verlagernde Energiemenge] 
+             2. [Gemessene Energiemenge der OBIS "Schwachlast"] - [zu verlagernde Energiemenge] = [Ermittelte Energiemenge für
+                Schwachlast]
+             3. [Gemessene Energiemenge der OBIS "nicht Schwachlast"] + [zu verlagernde Energiemenge] = [Ermittelte Energiemenge für nicht
+                Schwachlast]
+            </summary>
+        </member>
+        <member name="P:BO4E.BO.Bilanzierung.Zeitreihentyp">
+            <summary>
+                Zeitreihentyp (SLS, TLS, etc.)
+            </summary>
+        </member>
+        <member name="P:BO4E.BO.Bilanzierung.Aggregationsverantwortung">
+            <summary>
+                Aggregationsverantwortung
+            </summary>
+        </member>
+        <member name="P:BO4E.BO.Bilanzierung.Prognosegrundlage">
+            <summary>
+                Prognosegrundlage
+            </summary>
+        </member>
+        <member name="P:BO4E.BO.Bilanzierung.DetailsPrognosegrundlage">
+            <summary>
+                Prognosegrundlage
+                Besteht der Bedarf ein tagesparameteräbhängiges Lastprofil mit gemeinsamer Messung anzugeben, so ist dies über die 2 -malige
+                Wiederholung des CAV Segments mit der Angabe der Codes E02 und E14 möglich.
+            </summary>
+        </member>
+        <member name="P:BO4E.BO.Bilanzierung.WahlrechtPrognosegrundlage">
+            <summary>
+                Wahlrecht der Prognosegrundlage (true = Wahlrecht beim Lieferanten vorhanden)
+            </summary>
+        </member>
+        <member name="P:BO4E.BO.Bilanzierung.Fallgruppenzuordnung">
+            <summary>
+                Fallgruppenzuordnung (für gas RLM)
+            </summary>
+        </member>
+        <member name="P:BO4E.BO.Bilanzierung.Prioritaet">
+            <summary>
+              Priorität des Bilanzkreises (für Gas)
+            </summary>
+        </member>
         <member name="T:BO4E.BO.BusinessObject">
             <summary>
                 General abstract class for Business Objects for Energy (BO4E)
@@ -1057,13 +1149,14 @@
             </summary>
             <returns>if <see cref="P:BO4E.BO.Marktlokation.MarktlokationsId"/> matches the expected format</returns>
         </member>
-        <member name="M:BO4E.BO.Marktlokation.IsValid(System.Boolean,System.Boolean)">
+        <member name="M:BO4E.BO.Marktlokation.IsValid(System.Boolean,System.Boolean,System.Boolean)">
             <summary>
                 same as <see cref="M:BO4E.BO.BusinessObject.IsValid" /> if <paramref name="checkId" /> is false but by default additionally
                 checks if the <see cref="P:BO4E.BO.Marktlokation.MarktlokationsId" /> is valid using <see cref="M:BO4E.BO.Marktlokation.HasValidId" />.
             </summary>
             <param name="checkId">validate the <see cref="P:BO4E.BO.Marktlokation.MarktlokationsId" />, too</param>
             <param name="checkRegelZone">check if the <see cref="P:BO4E.BO.Marktlokation.Regelzone"/> is a German Regelzone if set</param>
+            <param name="checkBilanzierungsgebiet">check if the <see cref="P:BO4E.BO.Marktlokation.Bilanzierungsgebiet"/> is a valid German Bilanzierungsgebiet if set</param>
             <returns>true if the marktlokation is valid</returns>
         </member>
         <member name="T:BO4E.BO.Marktteilnehmer">
@@ -2377,6 +2470,31 @@
                 Ein Wert, passend zum Kriterium. Z.B. eine Postleitzahl.
             </summary>
         </member>
+        <member name="T:BO4E.COM.Lastprofil">
+            <summary>
+            Lastprofil
+            </summary>
+        </member>
+        <member name="P:BO4E.COM.Lastprofil.Bezeichnung">
+            <summary>
+            Bezeichnung des Profils, durch DVGW bzw. den Netzbetreiber vergeben (z.B. H0)
+            </summary>
+        </member>
+        <member name="P:BO4E.COM.Lastprofil.Verfahren">
+            <summary>
+            Verfahren des Profils (analytisch oder synthetisch)
+            </summary>
+        </member>
+        <member name="P:BO4E.COM.Lastprofil.Einspeisung">
+            <summary>
+            true, falls es sich um ein Einspeiseprofil handelt 
+            </summary>
+        </member>
+        <member name="P:BO4E.COM.Lastprofil.Tagesparameter">
+            <summary>
+            Klimazone / Temperaturmessstelle
+            </summary>
+        </member>
         <member name="T:BO4E.COM.MarktpartnerDetails">
             <summary>
                 Marktrolle
@@ -2994,6 +3112,29 @@
         </member>
         <member name="P:BO4E.COM.Steuerbetrag.Waehrung">
             <summary>Währung. Z.B. Euro. <seealso cref="T:BO4E.ENUM.Waehrungscode" /></summary>
+        </member>
+        <member name="T:BO4E.COM.Tagesparameter">
+            <summary>
+                Speichert Informationen zu einer tagesparameter abhängigen Messstelle. z.B. den Namen einer Klimazone oder die ID der Wetterstation für die Temperaturmessstelle
+            </summary>
+        </member>
+        <member name="P:BO4E.COM.Tagesparameter.Klimazone">
+            <summary>
+                Qualifier der Klimazone
+            </summary>
+            <example>7624q</example>
+        </member>
+        <member name="P:BO4E.COM.Tagesparameter.Temperaturmessstelle">
+            <summary>
+                Qualifier der Temperaturmessstelle
+            </summary>
+            <example>1234x</example>
+        </member>
+        <member name="P:BO4E.COM.Tagesparameter.Dienstanbieter">
+            <summary>
+               Dienstanbieter (bei Temperaturmessstellen)
+            </summary>
+            <example>ZT1</example>
         </member>
         <member name="T:BO4E.COM.Tarifberechnungsparameter">
             <summary>In dieser Komponente sind die Berechnungsparameter für die Ermittlung der Tarifkosten zusammengefasst.</summary>
@@ -3622,6 +3763,15 @@
         </member>
         <member name="F:BO4E.ENUM.AbgabeArt.TSS">
             <summary>TSS: Kennzeichnung, dass ein abweichender Preis für Schwachlast angewendet wird</summary>
+        </member>
+        <member name="T:BO4E.ENUM.Aggregationsverantwortung">
+            <summary>Mögliche Qualifier für die Aggregationsverantwortung</summary>
+        </member>
+        <member name="F:BO4E.ENUM.Aggregationsverantwortung.UENB">
+            <summary>Übertragungsnetzbetreiber</summary>
+        </member>
+        <member name="F:BO4E.ENUM.Aggregationsverantwortung.VNB">
+            <summary>Netzbetreiber</summary>
         </member>
         <member name="T:BO4E.ENUM.Angebotsstatus">
             <summary>Gibt den Status eines Angebotes an.</summary>
@@ -4991,6 +5141,18 @@
         </member>
         <member name="F:BO4E.ENUM.Erzeugungsart.SONSTIGE_EEG">
             <summary>Sonstige nach EEG</summary>
+        </member>
+        <member name="T:BO4E.ENUM.Fallgruppenzuordnung">
+            <summary>Fallgruppenzuordnung nach edi@energy </summary>
+        </member>
+        <member name="F:BO4E.ENUM.Fallgruppenzuordnung.GABI_RLMmT">
+            <summary>RLM mit Tagesband</summary>
+        </member>
+        <member name="F:BO4E.ENUM.Fallgruppenzuordnung.GABI_RLMoT">
+            <summary>RLM ohne Tagesband</summary>
+        </member>
+        <member name="F:BO4E.ENUM.Fallgruppenzuordnung.GABI_RLMNEV">
+            <summary>RLM im Nominierungsersatzverfahren</summary>
         </member>
         <member name="T:BO4E.ENUM.Fernschaltung">
             <summary>Fernschaltung</summary>
@@ -7071,6 +7233,33 @@
             <summary>
                 sehr hohe Priorität
             </summary>
+        </member>
+        <member name="T:BO4E.ENUM.Profiltyp">
+            <summary>Profiltyp (temperaturabhängig / standardlastprofil)</summary>
+        </member>
+        <member name="F:BO4E.ENUM.Profiltyp.SLP_SEP">
+            <summary>SLP/SEP</summary>
+        </member>
+        <member name="F:BO4E.ENUM.Profiltyp.TLP_TEP">
+            <summary>TLP/TEP</summary>
+        </member>
+        <member name="T:BO4E.ENUM.Profilverfahren">
+            <summary>Profilverfahren (synthetisch/ analytisch)</summary>
+        </member>
+        <member name="F:BO4E.ENUM.Profilverfahren.SYNTHETISCH">
+            <summary>SLP</summary>
+        </member>
+        <member name="F:BO4E.ENUM.Profilverfahren.ANALYTISCH">
+            <summary>ALP</summary>
+        </member>
+        <member name="T:BO4E.ENUM.Prognosegrundlage">
+            <summary>Prognosegrundlage (WERTE, PROFILE)</summary>
+        </member>
+        <member name="F:BO4E.ENUM.Prognosegrundlage.WERTE">
+            <summary>Prognose auf der Basis von Werten</summary>
+        </member>
+        <member name="F:BO4E.ENUM.Prognosegrundlage.PROFILE">
+            <summary>Prognose auf der Basis von Profilen</summary>
         </member>
         <member name="T:BO4E.ENUM.Rechnungslegung">
             <summary>Aufzählung der Möglichkeiten zur Rechnungslegung in Ausschreibungen.</summary>
