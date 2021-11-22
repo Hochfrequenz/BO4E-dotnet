@@ -26,7 +26,7 @@ namespace BO4E.ENUM
         /// <summary> Prognosewert: 187 </summary>
         PROGNOSEWERT,
 
-        /// <summary> PrognoEnergiemenge summiertsewert: 79 </summary>
+        /// <summary> Energiemenge summiert: 79 </summary>
         ENERGIEMENGE_SUMMIERT,
     }
 }
