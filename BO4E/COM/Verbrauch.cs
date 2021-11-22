@@ -76,6 +76,8 @@ namespace BO4E.COM
         /// <see cref="ENUM.Wertermittlungsverfahren" />
         [JsonProperty(PropertyName = "mengenzusatzinformation", Required = Required.Always, Order = 5)]
         [JsonPropertyName("mengenzusatzinformation")]
+        [NonOfficial(NonOfficialCategory.UNSPECIFIED)] // it's always required in BO4E, changed it to default 2020-08-31 KK
+
         [ProtoMember(10)]
         public MengenZusatzInformation MengenZusatzInformation { get; set; }
 
