@@ -71,10 +71,10 @@ namespace BO4E.COM
         public Wertermittlungsverfahren Wertermittlungsverfahren { get; set; }
 
         /// <summary>
-        ///     Gibt an, ob es sich um eine PROGNOSE oder eine MESSUNG handelt.
+        ///     Enthält die Gültigkeit des angegebenen Wertes
         /// </summary>
         /// <see cref="ENUM.Wertermittlungsverfahren" />
-        [JsonProperty(PropertyName = "wertermittlungsverfahren", Required = Required.Always, Order = 5)]
+        [JsonProperty(PropertyName = "mengenzusatzinformation", Required = Required.Always, Order = 5)]
         [JsonPropertyName("mengenzusatzinformation")]
         [ProtoMember(10)]
         public MengenZusatzInformation MengenZusatzInformation { get; set; }

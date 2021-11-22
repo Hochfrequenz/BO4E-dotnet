@@ -1,7 +1,7 @@
 namespace BO4E.ENUM
 {
     /// <summary>
-    /// SG10 QTY 6063
+    /// Gibt auskunft über die Gültigkeit des angegebenen Verbrauchswertes. Bildet MSCONS SG10 QTY 6063 ab. 
     /// </summary>
     public enum MengenZusatzInformation
     {
