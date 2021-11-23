@@ -1,9 +1,12 @@
+using BO4E.meta;
+
 namespace BO4E.ENUM
 {
     /// <summary>
     /// Gibt auskunft über die Gültigkeit des angegebenen Verbrauchswertes. Bildet MSCONS SG10 QTY 6063 ab. 
     /// </summary>
-    public enum MengenZusatzInformation
+    [NonOfficial(NonOfficialCategory.UNSPECIFIED)]
+    public enum WertStatus
     {
         /// <summary> Wahrer Wert: 220 </summary>
         WAHRER_WERT,
