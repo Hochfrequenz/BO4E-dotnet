@@ -34,7 +34,7 @@ namespace TestBO4E
         public void TestProtoGenerationBo()
         {
             var method = typeof(Serializer).GetMethod(nameof(Serializer.GetProto),
-                new[] {typeof(ProtoBuf.Meta.SchemaGenerationOptions)});
+                new[] { typeof(ProtoBuf.Meta.SchemaGenerationOptions) });
 
             Assert.IsNotNull(method);
             var options = new ProtoBuf.Meta.SchemaGenerationOptions()
@@ -44,7 +44,7 @@ namespace TestBO4E
                 Package = "bo4e",
             };
             options.Types.AddRange(ProtoSerializableTypes);
-            var protoString = (string) method.Invoke(null, new object[] {options});
+            var protoString = (string)method.Invoke(null, new object[] { options });
             Assert.IsFalse(string.IsNullOrWhiteSpace(protoString));
             var path = $"../../../../BO4E/protobuf-files/bo4e.proto";
             if (!File.Exists(path))

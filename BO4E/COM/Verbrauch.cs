@@ -50,7 +50,7 @@ namespace BO4E.COM
         /// <c>Required = Required.Default</c>, DateTime aber nicht nullable, laut bo4e doku wäre es optional
         ///</remarks>
         [CompatibilityLevel(CompatibilityLevel.Level240)]
-        [JsonProperty(PropertyName = "startdatum", Required = Required.Default, Order = 7)] 
+        [JsonProperty(PropertyName = "startdatum", Required = Required.Default, Order = 7)]
         [JsonPropertyName("startdatum")]
         [ProtoMember(3)]
         public DateTime Startdatum { get; set; } // ToDo: use datetimeoffset as well
@@ -77,7 +77,7 @@ namespace BO4E.COM
         ///     Enthält die Gültigkeit des angegebenen Wertes
         /// </summary>
         /// <see cref="ENUM.WertStatus" />
-        [JsonProperty(PropertyName = "wertestatus", Required = Required.Default,  Order = 5)]
+        [JsonProperty(PropertyName = "wertestatus", Required = Required.Default, Order = 5)]
         [JsonPropertyName("wertestatus")]
         [NonOfficial(NonOfficialCategory.UNSPECIFIED)]
         [ProtoMember(10)]
@@ -201,7 +201,7 @@ namespace BO4E.COM
 
             Startdatum = DateTime.SpecifyKind(Startdatum, DateTimeKind.Utc);
             Enddatum = DateTime.SpecifyKind(Enddatum, DateTimeKind.Utc);
-            if ((int) (Enddatum - Startdatum).TotalHours == 2)
+            if ((int)(Enddatum - Startdatum).TotalHours == 2)
             {
                 // check DST of start and enddatum
                 var startdatumLocal = TimeZoneInfo.ConvertTimeFromUtc(Startdatum,
@@ -215,7 +215,7 @@ namespace BO4E.COM
                     // this is an artefact of the sap enddatum computation
                     Enddatum -= new TimeSpan(1, 0, 0); // toDo: get offset from timezoneinfo->rules->dstOffset
             }
-            else if ((int) (Enddatum - Startdatum).TotalMinutes == -45)
+            else if ((int)(Enddatum - Startdatum).TotalMinutes == -45)
             {
                 // check DST of start and enddatum
                 //var startdatumLocal = TimeZoneInfo.ConvertTimeFromUtc(startdatum, CentralEuropeStandardTime.CENTRAL_EUROPE_STANDARD_TIME);
@@ -240,13 +240,13 @@ namespace BO4E.COM
                         profDecimals = int.Parse(raw);
                         break;
                     case long value:
-                        profDecimals = (int) value;
+                        profDecimals = (int)value;
                         break;
                     case int decimalsRaw:
                         profDecimals = decimalsRaw;
                         break;
                     default:
-                        profDecimals = JsonSerializer.Deserialize<int>(((JsonElement) profDecimalsRaw).GetRawText(),
+                        profDecimals = JsonSerializer.Deserialize<int>(((JsonElement)profDecimalsRaw).GetRawText(),
                             VerbrauchSerializerOptions);
                         break;
                 }

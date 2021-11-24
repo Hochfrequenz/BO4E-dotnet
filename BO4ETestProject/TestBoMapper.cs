@@ -247,7 +247,7 @@ namespace TestBO4E
                 new LenientDateTimeConverter());
             v1.Enddatum.Should().Be(new DateTimeOffset(2019, 3, 31, 2, 0, 0, TimeSpan.Zero).DateTime);
         }
-        
+
         [TestMethod]
         public void LenientDateTimeConverterMesz()
         {
@@ -257,7 +257,7 @@ namespace TestBO4E
                 new LenientDateTimeConverter());
             v2.Enddatum.Should().Be(new DateTimeOffset(2019, 5, 31, 3, 0, 0, TimeSpan.Zero).DateTime);
         }
-        
+
         [TestMethod]
         public void LenientDateTimeConverterMez()
         {
