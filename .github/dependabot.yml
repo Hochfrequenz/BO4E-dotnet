@@ -7,3 +7,8 @@ updates:
       time: "00:37"
     reviewers:
       - "Hochfrequenz/BO4E-dotnet"
+    ignore:
+      - dependency-name: "System.Text.*"
+        update-types: ["version-update:semver-major"]
+      - dependency-name: "Microsoft.Extensions.Logging.*"
+        update-types: ["version-update:semver-major"]
