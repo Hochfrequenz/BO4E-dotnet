@@ -1,9 +1,12 @@
-﻿namespace BO4E.ENUM
+﻿using BO4E.meta;
+
+namespace BO4E.ENUM
 {
     /// <summary>
     /// Der Sperrauftragsstatus beschreibt den Status eines <see cref="BO.Auftrag"/>s
     /// </summary>
     /// <remarks>Diese Information kann in der EDIFACT-Nachricht des Typs 21039 verwendet werden</remarks>
+    [NonOfficial(NonOfficialCategory.REGULATORY_REQUIREMENTS)]
     public enum Sperrauftragsstatus
     {
         /// <summary>
@@ -22,6 +25,18 @@
         /// Der Auftrag ist gescheitert
         /// </summary>
         /// <remarks>EDIFACT DE4405: Z13</remarks>
-        GESCHEITERT
+        GESCHEITERT,
+
+        /// <summary>
+        /// Die (Ent)sperrung ist geplant
+        /// </summary>
+        /// <remarks>EDIFACT DE4405: Z17</remarks>
+        GEPLANT,
+
+        /// <summary>
+        /// Die (Ent)sperrung wurde zugestimmmt (aber noch nicht durchgeführt)
+        /// </summary>
+        /// <remarks>EDIFACT DE4405: Z30</remarks>
+        ZUGESTIMMT,
     }
 }

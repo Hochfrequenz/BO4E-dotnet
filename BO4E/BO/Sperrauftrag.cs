@@ -2,6 +2,7 @@
 using System.Text.Json.Serialization;
 using BO4E.COM;
 using BO4E.ENUM;
+using BO4E.meta;
 using Newtonsoft.Json;
 
 namespace BO4E.BO
@@ -13,6 +14,7 @@ namespace BO4E.BO
     /// Ein Sperrauftrag wird typischerweise in EDIFACt-Nachrichten des Typs 17115 oder 17116 kommuniziert.
     /// Die Entsperrung erfolgt in einem ähnlich aufgebauten <seealso cref="Entsperrauftrag"/>.
     /// </remarks>
+    [NonOfficial(NonOfficialCategory.REGULATORY_REQUIREMENTS)]
     public class Sperrauftrag : Auftrag
     {
         /// <summary>

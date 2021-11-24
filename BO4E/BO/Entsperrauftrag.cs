@@ -32,7 +32,5 @@ namespace BO4E.BO
         [JsonProperty("istNurInnerhalbDerArbeitszeitZuEntsperren", Required = Required.Default)]
         [JsonPropertyName("istNurInnerhalbDerArbeitszeitZuEntsperren")]
         public bool IstNurInnerhalbDerArbeitszeitZuEntsperren { get; set; }
-
-
     }
 }
