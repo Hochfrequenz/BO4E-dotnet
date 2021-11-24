@@ -12,7 +12,7 @@ namespace BO4E.ENUM
         VERTRAG,
 
         /// <summary> 8 </summary>
-        MESSWERTQUALITÄT,
+        MESSWERTQUALITAET,
 
         /// <summary> 10 </summary>
         MESSKLASSIFIZIERUNG,
@@ -27,6 +27,6 @@ namespace BO4E.ENUM
         KORREKTURGRUND,
 
         /// <summary> Z31 </summary>
-        GASQUALITÄT,
+        GASQUALITAET,
     }
 }

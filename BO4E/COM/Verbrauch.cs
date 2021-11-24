@@ -76,7 +76,7 @@ namespace BO4E.COM
         /// <summary>
         ///     Enthält die Gültigkeit des angegebenen Wertes
         /// </summary>
-        /// <see cref="ENUM.Wertermittlungsverfahren" />
+        /// <see cref="ENUM.WertStatus" />
         [JsonProperty(PropertyName = "wertestatus", Required = Required.Default,  Order = 5)]
         [JsonPropertyName("wertestatus")]
         [NonOfficial(NonOfficialCategory.UNSPECIFIED)]
@@ -86,7 +86,7 @@ namespace BO4E.COM
         /// <summary>
         ///     Enthält die Zusatzinformation Art des angegebenen Wertes
         /// </summary>
-        /// <see cref="ENUM.Wertermittlungsverfahren" />
+        /// <see cref="ENUM.WertBedeutung" />
         [JsonProperty(PropertyName = "wertbedeutung", Required = Required.Default, Order = 5)]
         [JsonPropertyName("wertbedeutung")]
         [NonOfficial(NonOfficialCategory.UNSPECIFIED)]
@@ -96,7 +96,7 @@ namespace BO4E.COM
         /// <summary>
         ///     Enthält die Zusatzinformation Status des angegebenen Wertes
         /// </summary>
-        /// <see cref="ENUM.Wertermittlungsverfahren" />
+        /// <see cref="ENUM.WertBedeutungZusatz" />
         [JsonProperty(PropertyName = "wertbedeutungzusatz", Required = Required.Default, Order = 5)]
         [JsonPropertyName("wertbedeutungzusatz")]
         [NonOfficial(NonOfficialCategory.UNSPECIFIED)]
