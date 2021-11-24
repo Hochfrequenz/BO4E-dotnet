@@ -77,7 +77,7 @@ namespace BO4E.COM
         ///     Enthält die Gültigkeit des angegebenen Wertes
         /// </summary>
         /// <see cref="ENUM.Wertermittlungsverfahren" />
-        [JsonProperty(PropertyName = "wertestatus", Required = Required.Always, Order = 5)]
+        [JsonProperty(PropertyName = "wertestatus", Required = Required.AllowNull, Order = 5)]
         [JsonPropertyName("wertestatus")]
         [NonOfficial(NonOfficialCategory.UNSPECIFIED)]
         [ProtoMember(10)]
@@ -87,8 +87,8 @@ namespace BO4E.COM
         ///     Enthält die Zusatzinformation Art des angegebenen Wertes
         /// </summary>
         /// <see cref="ENUM.Wertermittlungsverfahren" />
-        [JsonProperty(PropertyName = "wertzusatzinformationart", Required = Required.Always, Order = 5)]
-        [JsonPropertyName("wertzusatzinformationart")]
+        [JsonProperty(PropertyName = "wertbedeutung", Required = Required.AllowNull, Order = 5)]
+        [JsonPropertyName("wertbedeutung")]
         [NonOfficial(NonOfficialCategory.UNSPECIFIED)]
         [ProtoMember(10)]
         public WertBedeutung? WertBedeutung { get; set; }
@@ -97,8 +97,8 @@ namespace BO4E.COM
         ///     Enthält die Zusatzinformation Status des angegebenen Wertes
         /// </summary>
         /// <see cref="ENUM.Wertermittlungsverfahren" />
-        [JsonProperty(PropertyName = "wertzusatzinformationstatus", Required = Required.Always, Order = 5)]
-        [JsonPropertyName("wertzusatzinformationstatus")]
+        [JsonProperty(PropertyName = "wertbedeutungzusatz", Required = Required.AllowNull, Order = 5)]
+        [JsonPropertyName("wertbedeutungzusatz")]
         [NonOfficial(NonOfficialCategory.UNSPECIFIED)]
         [ProtoMember(10)]
         public WertBedeutungZusatz? WertBedeutungZusatz { get; set; }
