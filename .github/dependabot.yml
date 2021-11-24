@@ -12,4 +12,3 @@ updates:
         update-types: ["version-update:semver-major"]
       - dependency-name: "Microsoft.Extensions.Logging.*"
         update-types: ["version-update:semver-major"]
-        
