@@ -433,6 +433,11 @@
             Bilanzierungs BO
             </summary>
         </member>
+        <member name="P:BO4E.BO.Bilanzierung.MarktlokationsId">
+            <summary>
+            Für welche Marktlokation getlen diese Bilanzierungsdaten
+            </summary>
+        </member>
         <member name="P:BO4E.BO.Bilanzierung.Lastprofile">
             <summary>
             Eine Liste der verwendeten Lastprofile (SLP, SLP/TLP, ALP etc.)
@@ -3259,9 +3264,12 @@
             </summary>
         </member>
         <member name="P:BO4E.COM.Verbrauch.Startdatum">
-            <summary>
-                Beginn des Zeitraumes, für den der Verbrauch angegeben wird.
-            </summary>
+             <summary>
+                 Beginn des Zeitraumes, für den der Verbrauch angegeben wird.
+             </summary>
+             <remarks>
+             <c>Required = Required.Default</c>, DateTime aber nicht nullable, laut bo4e doku wäre es optional
+            </remarks>
         </member>
         <member name="P:BO4E.COM.Verbrauch.Enddatum">
             <summary>
@@ -3273,6 +3281,24 @@
                 Gibt an, ob es sich um eine PROGNOSE oder eine MESSUNG handelt.
             </summary>
             <see cref="T:BO4E.ENUM.Wertermittlungsverfahren" />
+        </member>
+        <member name="P:BO4E.COM.Verbrauch.Wertestatus">
+            <summary>
+                Enthält die Gültigkeit des angegebenen Wertes
+            </summary>
+            <see cref="T:BO4E.ENUM.WertStatus" />
+        </member>
+        <member name="P:BO4E.COM.Verbrauch.WertBedeutung">
+            <summary>
+                Enthält die Zusatzinformation Art des angegebenen Wertes
+            </summary>
+            <see cref="T:BO4E.ENUM.WertBedeutung" />
+        </member>
+        <member name="P:BO4E.COM.Verbrauch.WertBedeutungZusatz">
+            <summary>
+                Enthält die Zusatzinformation Status des angegebenen Wertes
+            </summary>
+            <see cref="T:BO4E.ENUM.WertBedeutungZusatz" />
         </member>
         <member name="P:BO4E.COM.Verbrauch.Obiskennzahl">
             <summary>
@@ -8720,6 +8746,76 @@
         <member name="F:BO4E.ENUM.Waermenutzung.DIREKTHEIZUNG">
             Z61: Direktheizung
         </member>
+        <member name="T:BO4E.ENUM.WertBedeutung">
+            <summary>
+            Represents the Type of Wert (SG10 STS 9015)
+            </summary>
+        </member>
+        <member name="F:BO4E.ENUM.WertBedeutung.VERTRAG">
+            <summary> 6 </summary>
+        </member>
+        <member name="F:BO4E.ENUM.WertBedeutung.MESSWERTQUALITAET">
+            <summary> 8 </summary>
+        </member>
+        <member name="F:BO4E.ENUM.WertBedeutung.MESSKLASSIFIZIERUNG">
+            <summary> 10 </summary>
+        </member>
+        <member name="F:BO4E.ENUM.WertBedeutung.PLAUSIBILISIERUNGSHINWEIS">
+            <summary> Z33 </summary>
+        </member>
+        <member name="F:BO4E.ENUM.WertBedeutung.ERSATZWERTBILDUNGSVERFAHREN">
+            <summary> Z32 </summary>
+        </member>
+        <member name="F:BO4E.ENUM.WertBedeutung.KORREKTURGRUND">
+            <summary>Z34 </summary>
+        </member>
+        <member name="F:BO4E.ENUM.WertBedeutung.GASQUALITAET">
+            <summary> Z31 </summary>
+        </member>
+        <member name="T:BO4E.ENUM.WertBedeutungZusatz">
+            <summary>
+            Represents the Status Code (SG10 SGS 4405) 
+            </summary>
+        </member>
+        <member name="F:BO4E.ENUM.WertBedeutungZusatz.TARIF_1">
+            <summary> T1 </summary>
+        </member>
+        <member name="F:BO4E.ENUM.WertBedeutungZusatz.TARIF_2">
+            <summary> T2 </summary>
+        </member>
+        <member name="F:BO4E.ENUM.WertBedeutungZusatz.TARIF_3">
+            <summary> T3 </summary>
+        </member>
+        <member name="F:BO4E.ENUM.WertBedeutungZusatz.TARIF_4">
+            <summary> T4 </summary>
+        </member>
+        <member name="F:BO4E.ENUM.WertBedeutungZusatz.TARIF_5">
+            <summary> T5 </summary>
+        </member>
+        <member name="F:BO4E.ENUM.WertBedeutungZusatz.TARIF_6">
+            <summary> T6 </summary>
+        </member>
+        <member name="F:BO4E.ENUM.WertBedeutungZusatz.TARIF_7">
+            <summary> T7 </summary>
+        </member>
+        <member name="F:BO4E.ENUM.WertBedeutungZusatz.TARIF_8">
+            <summary> T8 </summary>
+        </member>
+        <member name="F:BO4E.ENUM.WertBedeutungZusatz.TARIF_9">
+            <summary> T9 </summary>
+        </member>
+        <member name="F:BO4E.ENUM.WertBedeutungZusatz.ZAEHLERSTAND_ZUM_BEGINN_DER_ANGEGEBENEN_ENERGIEMENGE_VORHANDEN_UND_KOMMUNIZIERT">
+            <summary> Z36 </summary>
+        </member>
+        <member name="F:BO4E.ENUM.WertBedeutungZusatz.ZAEHLERSTAND_ZUM_ENDE_DER_ANGEGEBENEN_ENERGIEMENGE_VORHANDEN_UND_KOMMUNIZIERT">
+            <summary> Z37 </summary>
+        </member>
+        <member name="F:BO4E.ENUM.WertBedeutungZusatz.ZAEHLERSTAND_ZUM_BEGINN_DER_ANGEGEBENEN_ENERGIEMENGE_NICHT_VORHANDEN_DA">
+            <summary> Z38 </summary>
+        </member>
+        <member name="F:BO4E.ENUM.WertBedeutungZusatz.ZAEHLERSTAND_ZUM_ENDE_DER_ANGEGEBENEN_ENERGIEMENGE_NICHT_VORHANDEN_DA_MENGENABGRENZUNG">
+            <summary> Z39 </summary>
+        </member>
         <member name="T:BO4E.ENUM.Wertermittlungsverfahren">
             <summary>
                 Gibt an, ob es sich um eine Prognose oder eine Messung handelt, beispielsweise bei der Abbildung eines Verbrauchs.
@@ -8734,6 +8830,35 @@
             <summary>
                 Messung
             </summary>
+        </member>
+        <member name="T:BO4E.ENUM.WertStatus">
+            <summary>
+            Gibt auskunft über die Gültigkeit des angegebenen Verbrauchswertes. Bildet MSCONS SG10 QTY 6063 ab. 
+            </summary>
+        </member>
+        <member name="F:BO4E.ENUM.WertStatus.WAHRER_WERT">
+            <summary> Wahrer Wert: 220 </summary>
+        </member>
+        <member name="F:BO4E.ENUM.WertStatus.ERSATZWERT">
+            <summary> Ersatzwert: 67 </summary>
+        </member>
+        <member name="F:BO4E.ENUM.WertStatus.VORLAUUFIGER_WERT">
+            <summary> Vorläufiger Wert: Z18 </summary>
+        </member>
+        <member name="F:BO4E.ENUM.WertStatus.ANGABE_FUER_LIEFERSCHEIN">
+            <summary> Angabe für Lieferschein: Z31 </summary>
+        </member>
+        <member name="F:BO4E.ENUM.WertStatus.VORSCHLAGSWERT">
+            <summary> Vorschlagswert: 201 </summary>
+        </member>
+        <member name="F:BO4E.ENUM.WertStatus.NICHT_VERWENDBARER_WERT">
+            <summary> Nicht verwendbarer Wert: 20 </summary>
+        </member>
+        <member name="F:BO4E.ENUM.WertStatus.PROGNOSEWERT">
+            <summary> Prognosewert: 187 </summary>
+        </member>
+        <member name="F:BO4E.ENUM.WertStatus.ENERGIEMENGE_SUMMIERT">
+            <summary> Energiemenge summiert: 79 </summary>
         </member>
         <member name="T:BO4E.ENUM.Zaehlerauspraegung">
             <summary>* Gibt an, ob es sich um einen Einrichtungs- oder Zweirichtungszähler handelt.</summary>
@@ -9179,6 +9304,26 @@
         <member name="F:BO4E.meta.Language.SP">
             <summary>
                 Spanisch
+            </summary>
+        </member>
+        <member name="T:BO4E.meta.LenientConverters.AutoNumberToStringConverter">
+            <summary>
+            Helps reading a number that should be converted to a string (e.g. VersionsStruktur)
+            </summary>
+        </member>
+        <member name="M:BO4E.meta.LenientConverters.AutoNumberToStringConverter.CanConvert(System.Type)">
+            <summary>
+            <inheritdoc cref="M:System.Text.Json.Serialization.JsonConverter`1.CanConvert(System.Type)"/>
+            </summary>
+        </member>
+        <member name="M:BO4E.meta.LenientConverters.AutoNumberToStringConverter.Read(System.Text.Json.Utf8JsonReader@,System.Type,System.Text.Json.JsonSerializerOptions)">
+            <summary>
+            <inheritdoc cref="M:System.Text.Json.Serialization.JsonConverter`1.Read(System.Text.Json.Utf8JsonReader@,System.Type,System.Text.Json.JsonSerializerOptions)"/>
+            </summary>
+        </member>
+        <member name="M:BO4E.meta.LenientConverters.AutoNumberToStringConverter.Write(System.Text.Json.Utf8JsonWriter,System.String,System.Text.Json.JsonSerializerOptions)">
+            <summary>
+            <inheritdoc cref="M:System.Text.Json.Serialization.JsonConverter`1.Write(System.Text.Json.Utf8JsonWriter,`0,System.Text.Json.JsonSerializerOptions)"/>
             </summary>
         </member>
         <member name="T:BO4E.meta.LenientConverters.LenientBo4eUriConverter">
