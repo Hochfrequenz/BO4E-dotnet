@@ -2,7 +2,7 @@
   "objectName": "Vertrag",
   "lenientStringToInt": true,
   "input": {
-    "versionStruktur": 1,
+    "versionStruktur": "1",
     "boTyp": "VERTRAG",
     "vertragsnummer": "cb32fb41-8bb1-436a-9465-76447b478480",
     "beschreibung": "Grund- oder Ersatzversorgung",
@@ -12,7 +12,7 @@
     "vertragsbeginn": "2020-02-18T00:00:00",
     "vertragsende": "0001-01-01T00:00:00",
     "vertragspartner1": {
-      "versionStruktur": 1,
+      "versionStruktur": "1",
       "anrede": null,
       "boTyp": "MARKTTEILNEHMER",
       "title": null,
@@ -36,7 +36,7 @@
       "ansprechpartner": null
     },
     "vertragspartner2": {
-      "versionStruktur": 1,
+      "versionStruktur": "1",
       "anrede": null,
       "boTyp": "GESCHAEFTSPARTNER",
       "title": null,
@@ -108,7 +108,7 @@
     ],
     "gemeinderabatt": 0.0,
     "korrespondenzpartner": {
-      "versionStruktur": 1,
+      "versionStruktur": "1",
       "anrede": null,
       "boTyp": "GESCHAEFTSPARTNER",
       "title": null,

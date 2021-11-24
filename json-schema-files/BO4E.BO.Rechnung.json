@@ -1,4 +1,4 @@
-{
+﻿{
   "$schema": "http://json-schema.org/draft-07/schema#",
   "definitions": {
     "Adresse": {
@@ -747,7 +747,7 @@
           "type": ["string", "null"]
         },
         "versionStruktur": {
-          "type": "integer"
+          "type": ["string", "null"]
         },
         "timestamp": {
           "type": ["string", "null"],
@@ -835,8 +835,9 @@
           "type": "number"
         },
         "einheit": {
-          "type": "string",
+          "type": ["string", "null"],
           "enum": [
+            null,
             "ZERO",
             "WH",
             "KW",
@@ -863,7 +864,7 @@
           "format": "date-time"
         }
       },
-      "required": ["wert", "einheit"]
+      "required": ["wert"]
     },
     "Preis": {
       "type": "object",
@@ -1318,7 +1319,7 @@
       "type": ["string", "null"]
     },
     "versionStruktur": {
-      "type": "integer"
+      "type": ["string", "null"]
     },
     "timestamp": {
       "type": ["string", "null"],

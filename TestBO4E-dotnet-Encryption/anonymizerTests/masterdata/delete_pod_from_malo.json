@@ -3,7 +3,7 @@
     "POD": "DELETE"
   },
   "input": {
-    "versionStruktur": 1,
+    "versionStruktur": "1",
     "boTyp": "MARKTLOKATION",
     "marktlokationsId": "5432109875",
     "sparte": "STROM",

@@ -1,4 +1,4 @@
-{
+﻿{
   "$schema": "http://json-schema.org/draft-07/schema#",
   "definitions": {
     "Adresse": {
@@ -343,7 +343,7 @@
           "type": ["string", "null"]
         },
         "versionStruktur": {
-          "type": "integer"
+          "type": ["string", "null"]
         },
         "timestamp": {
           "type": ["string", "null"],
@@ -511,8 +511,9 @@
           "type": "number"
         },
         "einheit": {
-          "type": "string",
+          "type": ["string", "null"],
           "enum": [
+            null,
             "ZERO",
             "WH",
             "KW",
@@ -584,8 +585,7 @@
         "bezeichnung",
         "richtung",
         "obisKennzahl",
-        "wandlerfaktor",
-        "einheit"
+        "wandlerfaktor"
       ]
     }
   },
@@ -604,7 +604,7 @@
       "type": ["string", "null"]
     },
     "versionStruktur": {
-      "type": "integer"
+      "type": ["string", "null"]
     },
     "timestamp": {
       "type": ["string", "null"],

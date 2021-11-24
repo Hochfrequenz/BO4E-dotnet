@@ -6,7 +6,7 @@
     "isEvenlySpacedWithinDefinition": true
   },
   "input": {
-    "versionStruktur": 1,
+    "versionStruktur": "1",
     "boTyp": "ENERGIEMENGE",
     "lokationsId": "DE0102030405060708090123456789012",
     "lokationstyp": 1,

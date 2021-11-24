@@ -5,7 +5,7 @@
     "isEvenlySpacedWithinDefinition": false
   },
   "input": {
-    "versionStruktur": 1,
+    "versionStruktur": "1",
     "boTyp": "ENERGIEMENGE",
     "lokationsId": "DE47108155927",
     "lokationstyp": "MELO",

@@ -13,7 +13,7 @@
     "vertragsbeginn": "2017-05-17T00:00:00Z",
     "vertragsende": "0001-01-01T00:00:00+00:00",
     "vertragspartner1": {
-      "versionStruktur": 1,
+      "versionStruktur": "1",
       "boTyp": "GESCHAEFTSPARTNER",
       "name1": "Ernest",
       "kontaktweg": [{ "kontaktweg": "TELEFONAT" }],
@@ -24,7 +24,7 @@
       "gewerbekennzeichnung": true
     },
     "vertragspartner2": {
-      "versionStruktur": 1,
+      "versionStruktur": "1",
       "boTyp": "GESCHAEFTSPARTNER",
       "name1": "Ernest",
       "kontaktweg": [{ "kontaktweg": "TELEFONAT" }],

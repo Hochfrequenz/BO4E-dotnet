@@ -1,6 +1,6 @@
 {
   "expectedResult": {
-    "versionStruktur": 1,
+    "versionStruktur": "1",
     "boTyp": "MARKTLOKATION",
     "marktlokationsId": "10000001304",
     "sparte": "STROM",
@@ -16,7 +16,7 @@
     "grundversorgerCodeNr": "99000000011",
     "gasqualitaet": null,
     "endkunde": {
-      "versionStruktur": 1,
+      "versionStruktur": "1",
       "boTyp": "GESCHAEFTSPARTNER",
       "anrede": "FRAU",
       "name1": "Sorglos",
@@ -54,7 +54,7 @@
     }
   },
   "input": {
-    "versionStruktur": 1,
+    "versionStruktur": "1",
     "boTyp": "MARKTLOKATION",
     "marktlokationsId": "10000001304",
     "sparte": "STROM",
@@ -70,7 +70,7 @@
     "grundversorgerCodeNr": "99000000011",
     "gasqualitaet": null,
     "endkunde": {
-      "versionStruktur": 1,
+      "versionStruktur": "1",
       "boTyp": "GESCHAEFTSPARTNER",
       "anrede": "FRAU",
       "name1": "Sorglos",

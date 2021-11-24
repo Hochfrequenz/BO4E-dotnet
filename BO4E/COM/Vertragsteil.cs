@@ -1,9 +1,12 @@
-﻿using System;
-using System.Text.Json.Serialization;
-using BO4E.meta;
+﻿using BO4E.meta;
 using BO4E.meta.LenientConverters;
+
 using Newtonsoft.Json;
+
 using ProtoBuf;
+
+using System;
+using System.Text.Json.Serialization;
 
 namespace BO4E.COM
 {
@@ -108,7 +111,6 @@ namespace BO4E.COM
         /// </summary>
         [JsonProperty(PropertyName = "verbrauchsaufteilung", Required = Required.Default)]
         [JsonPropertyName("verbrauchsaufteilung")]
-        [NonOfficial(NonOfficialCategory.CUSTOMER_REQUIREMENTS)]
         [ProtoMember(1011)]
         public string Verbrauchsaufteilung { get; set; } // ToDo: evaluate if this actually should be an enum
     }

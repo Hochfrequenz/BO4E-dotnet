@@ -40,14 +40,17 @@ namespace BO4E.COM
             "This property moved. Use the property BO4E.meta." + nameof(CentralEuropeStandardTime) + "." +
             nameof(CentralEuropeStandardTime.CentralEuropeStandardTimezoneInfo) + " instead.", true)]
         // ReSharper disable once InconsistentNaming
-        public static TimeZoneInfo CENTRAL_EUROPE_STANDARD_TIME =>
-            CentralEuropeStandardTime.CentralEuropeStandardTimezoneInfo;
+        public static TimeZoneInfo CENTRAL_EUROPE_STANDARD_TIME
+            => CentralEuropeStandardTime.CentralEuropeStandardTimezoneInfo;
 
         /// <summary>
         ///     Beginn des Zeitraumes, für den der Verbrauch angegeben wird.
         /// </summary>
+        /// <remarks>
+        /// <c>Required = Required.Default</c>, DateTime aber nicht nullable, laut bo4e doku wäre es optional
+        ///</remarks>
         [CompatibilityLevel(CompatibilityLevel.Level240)]
-        [JsonProperty(PropertyName = "startdatum", Required = Required.Default, Order = 7)] // hier required.default, DateTime aber nicht nullable, laut bo4e doku wäre es optional
+        [JsonProperty(PropertyName = "startdatum", Required = Required.Default, Order = 7)]
         [JsonPropertyName("startdatum")]
         [ProtoMember(3)]
         public DateTime Startdatum { get; set; } // ToDo: use datetimeoffset as well
@@ -69,6 +72,36 @@ namespace BO4E.COM
         [JsonPropertyName("wertermittlungsverfahren")]
         [ProtoMember(5)]
         public Wertermittlungsverfahren Wertermittlungsverfahren { get; set; }
+
+        /// <summary>
+        ///     Enthält die Gültigkeit des angegebenen Wertes
+        /// </summary>
+        /// <see cref="ENUM.WertStatus" />
+        [JsonProperty(PropertyName = "wertestatus", Required = Required.Default, Order = 5)]
+        [JsonPropertyName("wertestatus")]
+        [NonOfficial(NonOfficialCategory.UNSPECIFIED)]
+        [ProtoMember(10)]
+        public WertStatus? Wertestatus { get; set; }
+
+        /// <summary>
+        ///     Enthält die Zusatzinformation Art des angegebenen Wertes
+        /// </summary>
+        /// <see cref="ENUM.WertBedeutung" />
+        [JsonProperty(PropertyName = "wertbedeutung", Required = Required.Default, Order = 5)]
+        [JsonPropertyName("wertbedeutung")]
+        [NonOfficial(NonOfficialCategory.UNSPECIFIED)]
+        [ProtoMember(11)]
+        public WertBedeutung? WertBedeutung { get; set; }
+
+        /// <summary>
+        ///     Enthält die Zusatzinformation Status des angegebenen Wertes
+        /// </summary>
+        /// <see cref="ENUM.WertBedeutungZusatz" />
+        [JsonProperty(PropertyName = "wertbedeutungzusatz", Required = Required.Default, Order = 5)]
+        [JsonPropertyName("wertbedeutungzusatz")]
+        [NonOfficial(NonOfficialCategory.UNSPECIFIED)]
+        [ProtoMember(12)]
+        public WertBedeutungZusatz? WertBedeutungZusatz { get; set; }
 
         /// <summary>
         ///     Die OBIS-Kennzahl für den Wert, die festlegt, welche Größe mit dem Stand gemeldet wird.
@@ -159,8 +192,11 @@ namespace BO4E.COM
             if (Startdatum > Enddatum)
             {
                 var diff = Startdatum - Enddatum;
-                if (diff.Hours <= 25 && diff.Hours >= 23 && diff.Minutes == 45 && Startdatum.Hour >= 22 &&
-                    Enddatum.Hour == 0) Enddatum += new TimeSpan(diff.Hours + 1, 0, 0);
+                if (diff.Hours <= 25
+                    && diff.Hours >= 23
+                    && diff.Minutes == 45
+                    && Startdatum.Hour >= 22
+                    && Enddatum.Hour == 0) Enddatum += new TimeSpan(diff.Hours + 1, 0, 0);
             }
 
             Startdatum = DateTime.SpecifyKind(Startdatum, DateTimeKind.Utc);
@@ -173,8 +209,8 @@ namespace BO4E.COM
                 var enddatumLocal = TimeZoneInfo.ConvertTimeFromUtc(Enddatum,
                     CentralEuropeStandardTime.CentralEuropeStandardTimezoneInfo);
                 if (!CentralEuropeStandardTime.CentralEuropeStandardTimezoneInfo.IsDaylightSavingTime(startdatumLocal -
-                        new TimeSpan(0, 0, 1)) &&
-                    CentralEuropeStandardTime.CentralEuropeStandardTimezoneInfo.IsDaylightSavingTime(enddatumLocal))
+                        new TimeSpan(0, 0, 1))
+                    && CentralEuropeStandardTime.CentralEuropeStandardTimezoneInfo.IsDaylightSavingTime(enddatumLocal))
                     // change winter-->summer time (e.g. UTC+1-->UTC+2)
                     // this is an artefact of the sap enddatum computation
                     Enddatum -= new TimeSpan(1, 0, 0); // toDo: get offset from timezoneinfo->rules->dstOffset
@@ -186,15 +222,16 @@ namespace BO4E.COM
                 var enddatumLocal = TimeZoneInfo.ConvertTimeFromUtc(Enddatum,
                     CentralEuropeStandardTime.CentralEuropeStandardTimezoneInfo);
                 if (!CentralEuropeStandardTime.CentralEuropeStandardTimezoneInfo.IsDaylightSavingTime(enddatumLocal -
-                        new TimeSpan(1, 0, 0)) &&
-                    CentralEuropeStandardTime.CentralEuropeStandardTimezoneInfo.IsDaylightSavingTime(enddatumLocal -
+                        new TimeSpan(1, 0, 0))
+                    && CentralEuropeStandardTime.CentralEuropeStandardTimezoneInfo.IsDaylightSavingTime(enddatumLocal -
                         new TimeSpan(1, 0, 1)))
                     // change winter-->summer time (e.g. UTC+1-->UTC+2)
                     // this is an artefact of the sap enddatum computation
                     Enddatum += new TimeSpan(1, 0, 0); // toDo: get offset from timezoneinfo->rules->dstOffset
             }
 
-            if (UserProperties != null && UserProperties.TryGetValue(SapProfdecimalsKey, out var profDecimalsRaw))
+            if (UserProperties != null
+                && UserProperties.TryGetValue(SapProfdecimalsKey, out var profDecimalsRaw))
             {
                 var profDecimals = 0;
                 switch (profDecimalsRaw)
