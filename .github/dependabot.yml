@@ -1,0 +1,9 @@
+version: 2
+updates:
+  - package-ecosystem: nuget
+    directory: "/"
+    schedule:
+      interval: daily
+      time: "00:37"
+      reviewers:
+        - "Hochfrequenz/BO4E-dotnet"
