@@ -5,5 +5,5 @@ updates:
     schedule:
       interval: daily
       time: "00:37"
-      reviewers:
-        - "Hochfrequenz/BO4E-dotnet"
+    reviewers:
+      - "Hochfrequenz/BO4E-dotnet"
