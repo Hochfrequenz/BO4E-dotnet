@@ -3,17 +3,17 @@ using BO4E.meta;
 namespace BO4E.ENUM.EDI
 {
     /// <summary>
-    ///     EDIFACT values of <see cref="NetznutzungsVertrag" />
+    ///     EDIFACT values of <see cref="Netznutzungsvertragsart" />
     /// </summary>
     /// <author>Hochfrequenz Unternehmensberatung GmbH</author>
     public enum NetznutzungsvertragEdi
     {
         /// <summary>Z08: Direkter Vertrag zwischen Kunden und NB</summary>
-        [Mapping(NetznutzungsVertrag.KUNDEN_NB)]
+        [Mapping(Netznutzungsvertragsart.KUNDEN_NB)]
         Z08,
 
         /// <summary>Z09: Vertrag zwischen Lieferanten und NB</summary>
-        [Mapping(NetznutzungsVertrag.LIEFERANTEN_NB)]
+        [Mapping(Netznutzungsvertragsart.LIEFERANTEN_NB)]
         Z09
     }
 }
