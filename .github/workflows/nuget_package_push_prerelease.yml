@@ -26,10 +26,10 @@ jobs:
       - name: Run Unit Tests (dotnet test)
         run: dotnet test --configuration Release
       - name: Create Package (dotnet pack)
-        run: dotnet pack --configuration Release --version-suffix "beta${{ steps.current-time.outputs.formattedTime }}"
+        run: dotnet pack --output packages --configuration Release --version-suffix "beta${{ steps.current-time.outputs.formattedTime }}"
       - name: Setup Nuget.exe
         uses: warrenbuckley/Setup-Nuget@v1
       - name: Nuget push
         run: |
           nuget setApiKey ${{ secrets.BO4E_NUGET_ORG_PUSH_TOKEN }}
-          nuget push .\**\**\bin\Release\*.nupkg -Source https://api.nuget.org/v3/index.json -SkipDuplicate -NoSymbols
+          nuget push .\packages\*.nupkg -Source https://api.nuget.org/v3/index.json -SkipDuplicate -NoSymbols
