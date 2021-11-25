@@ -1014,10 +1014,10 @@
     "bemerkung": {
       "type": ["string", "null"]
     },
-    "minKosten": {
+    "mindestkosten": {
       "$ref": "#/definitions/Kosten"
     },
-    "maxKosten": {
+    "hoechstkosten": {
       "$ref": "#/definitions/Kosten"
     },
     "externeReferenzen": {

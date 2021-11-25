@@ -84,17 +84,17 @@ namespace BO4E.BO
         /// <summary>
         /// Die Mindestkosten eines Auftrags (z.B. für eine Sperrung)
         /// </summary>
-        [JsonProperty("minKosten", Required = Required.Default)]
-        [JsonPropertyName("minKosten")]
+        [JsonProperty("mindestkosten", Required = Required.Default)]
+        [JsonPropertyName("mindestkosten")]
         [ProtoMember(9)]
-        public Kosten MinKosten { get; set; }
+        public Kosten Mindestkosten { get; set; }
 
         /// <summary>
         /// Die Höchstkosten eines Auftrags (z.B. für eine Sperrung)
         /// </summary>
-        [JsonProperty("maxKosten", Required = Required.Default)]
-        [JsonPropertyName("maxKosten")]
+        [JsonProperty("hoechstkosten", Required = Required.Default)]
+        [JsonPropertyName("hoechstkosten")]
         [ProtoMember(10)]
-        public Kosten MaxKosten { get; set; }
+        public Kosten Hoechstkosten { get; set; }
     }
 }
