@@ -5,7 +5,7 @@ namespace BO4E.ENUM
     /// <summary>
     /// Der Sperrauftragsstatus beschreibt den Status eines <see cref="BO.Auftrag"/>s
     /// </summary>
-    /// <remarks>Diese Information kann in der EDIFACT-Nachricht des Typs 21039 verwendet werden</remarks>
+    /// <remarks>Diese Information kann in der EDIFACT-Nachricht des Typs 21039/21040 verwendet werden</remarks>
     [NonOfficial(NonOfficialCategory.REGULATORY_REQUIREMENTS)]
     public enum Sperrauftragsstatus
     {
