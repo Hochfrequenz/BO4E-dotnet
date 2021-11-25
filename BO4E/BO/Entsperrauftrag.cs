@@ -29,7 +29,7 @@ namespace BO4E.BO
         /// Ist true, falls die Entsperrung innerhalb der Arbeitszeit zu erfolgen hat.
         /// </summary>
         /// <remarks>Falls true ist in EDIFACT Z53 zu verwenden, falls false dann Z54</remarks>
-        [JsonProperty("istNurInnerhalbDerArbeitszeitZuEntsperren", Required = Required.Default)]
+        [JsonProperty("istNurInnerhalbDerArbeitszeitZuEntsperren", Required = Required.Always)]
         [JsonPropertyName("istNurInnerhalbDerArbeitszeitZuEntsperren")]
         public bool IstNurInnerhalbDerArbeitszeitZuEntsperren { get; set; }
     }
