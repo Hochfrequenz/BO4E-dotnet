@@ -1254,6 +1254,9 @@ message Verbrauch {
    .bcl.Decimal Wert = 7;
    Mengeneinheit Einheit = 8;
    Verbrauchsmengetyp Type = 9;
+   WertStatus Wertestatus = 10;
+   WertBedeutung WertBedeutung = 11;
+   WertBedeutungZusatz WertBedeutungZusatz = 12;
 }
 enum Verbrauchsart {
    option (.protobuf_net.enumopt).namespace = "BO4E.ENUM";
@@ -1544,6 +1547,43 @@ enum Waermenutzung {
    SPEICHERHEIZUNG = 0;
    WAERMEPUMPE = 1;
    DIREKTHEIZUNG = 2;
+}
+enum WertBedeutung {
+   option (.protobuf_net.enumopt).namespace = "BO4E.ENUM";
+   VERTRAG = 0;
+   MESSWERTQUALITAET = 1;
+   MESSKLASSIFIZIERUNG = 2;
+   PLAUSIBILISIERUNGSHINWEIS = 3;
+   ERSATZWERTBILDUNGSVERFAHREN = 4;
+   KORREKTURGRUND = 5;
+   GASQUALITAET = 6;
+}
+enum WertBedeutungZusatz {
+   option (.protobuf_net.enumopt).namespace = "BO4E.ENUM";
+   TARIF_1 = 0;
+   TARIF_2 = 1;
+   TARIF_3 = 2;
+   TARIF_4 = 3;
+   TARIF_5 = 4;
+   TARIF_6 = 5;
+   TARIF_7 = 6;
+   TARIF_8 = 7;
+   TARIF_9 = 8;
+   ZAEHLERSTAND_ZUM_BEGINN_DER_ANGEGEBENEN_ENERGIEMENGE_VORHANDEN_UND_KOMMUNIZIERT = 9;
+   ZAEHLERSTAND_ZUM_ENDE_DER_ANGEGEBENEN_ENERGIEMENGE_VORHANDEN_UND_KOMMUNIZIERT = 10;
+   ZAEHLERSTAND_ZUM_BEGINN_DER_ANGEGEBENEN_ENERGIEMENGE_NICHT_VORHANDEN_DA = 11;
+   ZAEHLERSTAND_ZUM_ENDE_DER_ANGEGEBENEN_ENERGIEMENGE_NICHT_VORHANDEN_DA_MENGENABGRENZUNG = 12;
+}
+enum WertStatus {
+   option (.protobuf_net.enumopt).namespace = "BO4E.ENUM";
+   WAHRER_WERT = 0;
+   ERSATZWERT = 1;
+   VORLAUUFIGER_WERT = 2;
+   ANGABE_FUER_LIEFERSCHEIN = 3;
+   VORSCHLAGSWERT = 4;
+   NICHT_VERWENDBARER_WERT = 5;
+   PROGNOSEWERT = 6;
+   ENERGIEMENGE_SUMMIERT = 7;
 }
 enum Wertermittlungsverfahren {
    option (.protobuf_net.enumopt).namespace = "BO4E.ENUM";
