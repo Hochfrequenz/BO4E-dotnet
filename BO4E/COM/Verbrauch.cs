@@ -76,32 +76,42 @@ namespace BO4E.COM
         /// <summary>
         ///     Enthält die Gültigkeit des angegebenen Wertes
         /// </summary>
-        /// <see cref="ENUM.WertStatus" />
-        [JsonProperty(PropertyName = "wertestatus", Required = Required.Default, Order = 5)]
-        [JsonPropertyName("wertestatus")]
+        /// <see cref="ENUM.WertMengeArt" />
+        [JsonProperty(PropertyName = "wertmengeart", Required = Required.Default, Order = 5)]
+        [JsonPropertyName("wertmengeart")]
         [NonOfficial(NonOfficialCategory.UNSPECIFIED)]
         [ProtoMember(10)]
-        public WertStatus? Wertestatus { get; set; }
+        public WertMengeArt? WertMengeArt { get; set; }
 
         /// <summary>
         ///     Enthält die Zusatzinformation Art des angegebenen Wertes
         /// </summary>
-        /// <see cref="ENUM.WertBedeutung" />
-        [JsonProperty(PropertyName = "wertbedeutung", Required = Required.Default, Order = 5)]
-        [JsonPropertyName("wertbedeutung")]
+        /// <see cref="ENUM.WertStatuskategorie" />
+        [JsonProperty(PropertyName = "wertstatuskategorie", Required = Required.Default, Order = 5)]
+        [JsonPropertyName("wertstatuskategorie")]
         [NonOfficial(NonOfficialCategory.UNSPECIFIED)]
         [ProtoMember(11)]
-        public WertBedeutung? WertBedeutung { get; set; }
+        public WertStatuskategorie? WertStatuskategorie { get; set; }
 
         /// <summary>
         ///     Enthält die Zusatzinformation Status des angegebenen Wertes
         /// </summary>
-        /// <see cref="ENUM.WertBedeutungZusatz" />
-        [JsonProperty(PropertyName = "wertbedeutungzusatz", Required = Required.Default, Order = 5)]
-        [JsonPropertyName("wertbedeutungzusatz")]
+        /// <see cref="ENUM.WertStatus" />
+        [JsonProperty(PropertyName = "wertstatus", Required = Required.Default, Order = 5)]
+        [JsonPropertyName("wertstatus")]
         [NonOfficial(NonOfficialCategory.UNSPECIFIED)]
         [ProtoMember(12)]
-        public WertBedeutungZusatz? WertBedeutungZusatz { get; set; }
+        public WertStatus? WertStatus { get; set; }
+
+        /// <summary>
+        ///     Enthält die Zusatzinformation Status des angegebenen Wertes
+        /// </summary>
+        /// <see cref="ENUM.WertStatus" />
+        [JsonProperty(PropertyName = "wertstatusanlass", Required = Required.Default, Order = 5)]
+        [JsonPropertyName("wertstatusanlass")]
+        [NonOfficial(NonOfficialCategory.UNSPECIFIED)]
+        [ProtoMember(13)]
+        public WertStatusanlass? WertStatusanlass { get; set; }
 
         /// <summary>
         ///     Die OBIS-Kennzahl für den Wert, die festlegt, welche Größe mit dem Stand gemeldet wird.
