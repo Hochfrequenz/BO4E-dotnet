@@ -111,7 +111,8 @@ namespace BO4E.COM
         [JsonPropertyName("netznutzungsvertrag")]
         [NonOfficial(NonOfficialCategory.CUSTOMER_REQUIREMENTS)]
         [ProtoMember(1015)]
-        public NetznutzungsVertrag? Netznutzungsvertrag { get; set; }
+        public Netznutzungsvertragsart? Netznutzungsvertragsart { get; set; }
+
 
         // ToDo: Docstring!
         // todo @hamid: add a docstring
