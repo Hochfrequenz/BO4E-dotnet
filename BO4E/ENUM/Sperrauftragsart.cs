@@ -12,13 +12,13 @@ namespace BO4E.ENUM
         /// <summary>
         /// Ein Zähler soll gesperrt werden
         /// </summary>
-        /// <remarks>EDIFACT Z51 in Nachricht 17115/17116/17117</remarks>
+        /// <remarks>EDIFACT Z51 in Nachricht 17115/17116</remarks>
         SPERREN,
 
         /// <summary>
         /// Ein Zähler soll entsperrt werden
         /// </summary>
-        /// <remarks>EDIFACT Z52 in Nachricht 17115/17116/17117</remarks>
+        /// <remarks>EDIFACT Z52 in Nachricht 17117</remarks>
         ENTSPERREN
     }
 }
