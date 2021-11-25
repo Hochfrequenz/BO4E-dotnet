@@ -11,7 +11,7 @@ namespace BO4E.BO
     /// Ein Sperrauftrag ist das BO, das die Aufforderung des Lieferanten an den Netzbetreiber bzw. Netzstellenbetreiber beschreibt einen Zähler zu sperren.
     /// </summary>
     /// <remarks>
-    /// Ein Sperrauftrag wird typischerweise in EDIFACt-Nachrichten des Typs 17115 oder 17116 kommuniziert.
+    /// Ein Sperrauftrag wird typischerweise in EDIFACT-Nachrichten des Typs 17115 oder 17116 kommuniziert.
     /// Die Entsperrung erfolgt in einem ähnlich aufgebauten <seealso cref="Entsperrauftrag"/>.
     /// </remarks>
     [NonOfficial(NonOfficialCategory.REGULATORY_REQUIREMENTS)]
