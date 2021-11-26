@@ -647,7 +647,10 @@
       ]
     },
     "zaehlerkonstante": {
-      "type": "number"
+      "type": [
+        "number",
+        "null"
+      ]
     },
     "eichungBis": {
       "type": ["string", "null"],
