@@ -15,7 +15,7 @@ namespace BO4E.ENUM
 
         /// <summary>Mitteldruck</summary>
         Y02,
-        
+
         /// <summary>Niederdruck</summary>
         Y03
     }

@@ -239,7 +239,7 @@ namespace BO4E.BO
         [ProtoMember(1027)]
         [NonOfficial(NonOfficialCategory.CUSTOMER_REQUIREMENTS)]
         public List<Messlokation> Messlokationen { get; set; }
-        
+
         /// <summary>
         ///     für EDIFACT mapping of Druckebene
         /// </summary>
