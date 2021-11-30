@@ -239,6 +239,16 @@ namespace BO4E.BO
         [ProtoMember(1027)]
         [NonOfficial(NonOfficialCategory.CUSTOMER_REQUIREMENTS)]
         public List<Messlokation> Messlokationen { get; set; }
+        
+        /// <summary>
+        ///     für EDIFACT mapping of Druckebene
+        /// </summary>
+        // ToDo: specify docstring.
+        [JsonProperty(Required = Required.Default, Order = 28, PropertyName = "druckebene")]
+        [JsonPropertyName("druckebene")]
+        [ProtoMember(1028)]
+        [NonOfficial(NonOfficialCategory.CUSTOMER_REQUIREMENTS)]
+        public Druckebene? Druckebene { get; set; }
 
 
         /// <summary>Aufzählung der Messlokationen, die zu dieser Marktlokation gehören.</summary>
