@@ -1,13 +1,16 @@
-﻿using System;
+﻿using BO4E.COM;
+using BO4E.ENUM;
+using BO4E.meta;
+
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
+
+using ProtoBuf;
+
+using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Text.Json.Serialization;
-using BO4E.COM;
-using BO4E.ENUM;
-using BO4E.meta;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
-using ProtoBuf;
 
 namespace BO4E.BO
 {
@@ -499,5 +502,15 @@ namespace BO4E.BO
         [JsonPropertyName("rechnungspositionen")]
         [FieldName("invoiceItemList", Language.EN)]
         public List<Rechnungsposition> Rechnungspositionen { get; set; }
+
+        /// <summary>
+        ///     Eine Liste mit Steuerbeträgen pro Steuerkennzeichen/Steuersatz. Die Summe dieser Beträge ergibt den Wert für
+        ///     gesamtsteuer. Details <see cref="Steuerbetrag" />
+        /// </summary>
+        [JsonProperty(Required = Required.Default, Order = 21, PropertyName = "steuerbetraegeVorausgezahlt")]
+        [JsonPropertyName("steuerbetraegeVorausgezahlt")]
+        [ProtoMember(21)]
+        [FieldName("taxList", Language.EN)]
+        public List<Steuerbetrag> SteuerbetraegeVorausgezahlt { get; set; }
     }
 }
