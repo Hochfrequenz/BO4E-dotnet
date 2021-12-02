@@ -28,6 +28,8 @@ namespace BO4E.ENUM
         MEHRMINDERMENGENRECHNUNG,
 
         /// <summary>Abschlussrechnung</summary>
-        ABSCHLUSSRECHNUNG
+        ABSCHLUSSRECHNUNG,
+        /// <summary>Rechnung für Messstellenbetrieb</summary>
+        MSBRECHNUNG
     }
 }
