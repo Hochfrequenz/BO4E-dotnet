@@ -25,6 +25,9 @@ namespace BO4E.ENUM
         ZUSAETZLICHE_13TE_RECHNUNG,
 
         /// <summary>Mehr/Mindermengenabrechnung</summary>
-        MEHRMINDERMENGENRECHNUNG
+        MEHRMINDERMENGENRECHNUNG,
+
+        /// <summary>Abschlussrechnung</summary>
+        ABSCHLUSSRECHNUNG
     }
 }
