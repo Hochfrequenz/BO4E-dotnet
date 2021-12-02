@@ -509,7 +509,7 @@ namespace BO4E.BO
         /// </summary>
         [JsonProperty(Required = Required.Default, Order = 21, PropertyName = "steuerbetraegeVorausgezahlt")]
         [JsonPropertyName("steuerbetraegeVorausgezahlt")]
-        [ProtoMember(21)]
+        [ProtoMember(23)]
         [FieldName("taxList", Language.EN)]
         public List<Steuerbetrag> SteuerbetraegeVorausgezahlt { get; set; }
     }
