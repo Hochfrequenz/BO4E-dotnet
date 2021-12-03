@@ -1452,6 +1452,18 @@
             "ZWL"
           ]
         },
+        "basiswertVorausgezahlt": {
+          "type": [
+            "number",
+            "null"
+          ]
+        },
+        "steuerwertVorausgezahlt": {
+          "type": [
+            "number",
+            "null"
+          ]
+        },
         "guid": {
           "type": [
             "string",
@@ -1649,15 +1661,6 @@
       "$ref": "#/definitions/Betrag"
     },
     "steuerbetraege": {
-      "type": [
-        "array",
-        "null"
-      ],
-      "items": {
-        "$ref": "#/definitions/Steuerbetrag"
-      }
-    },
-    "steuerbetraegeVorausgezahlt": {
       "type": [
         "array",
         "null"

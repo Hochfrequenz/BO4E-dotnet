@@ -45,14 +45,14 @@ namespace BO4E.COM
         [JsonProperty(PropertyName = "basiswertVorausgezahlt", Required = Required.Default)]
         [JsonPropertyName("basiswertVorausgezahlt")]
         [FieldName("baseValuePrepaid", Language.EN)]
-        [ProtoMember(4)]
-        public decimal BasiswertVorausgezahlt { get; set; }
+        [ProtoMember(7)]
+        public decimal? BasiswertVorausgezahlt { get; set; }
 
         /// <summary>Aus dem Basiswert (vorausgezahlt) berechnete Steuer. Z.B. 19 (bei UST_19)</summary>
         [JsonProperty(PropertyName = "steuerwertVorausgezahlt", Required = Required.Default)]
         [JsonPropertyName("steuerwertVorausgezahlt")]
         [FieldName("taxValuePrepaid", Language.EN)]
-        [ProtoMember(5)]
-        public decimal SteuerwertVorausgezahlt { get; set; }
+        [ProtoMember(8)]
+        public decimal? SteuerwertVorausgezahlt { get; set; }
     }
 }

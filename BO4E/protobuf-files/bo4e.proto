@@ -1072,7 +1072,6 @@ message Rechnung {
    Betrag Zuzahlen = 20;
    repeated Steuerbetrag Steuerbetraege = 21;
    repeated Rechnungsposition Rechnungspositionen = 22;
-   repeated Steuerbetrag SteuerbetraegeVorausgezahlt = 23;
 }
 message Rechnungsposition {
    option (.protobuf_net.msgopt).namespace = "BO4E.COM";
@@ -1207,6 +1206,8 @@ message Steuerbetrag {
    .bcl.Decimal Basiswert = 4;
    .bcl.Decimal Steuerwert = 5;
    Waehrungscode Waehrung = 6;
+   .bcl.Decimal BasiswertVorausgezahlt = 7;
+   .bcl.Decimal SteuerwertVorausgezahlt = 8;
 }
 enum Steuerkennzeichen {
    option (.protobuf_net.enumopt).namespace = "BO4E.ENUM";
