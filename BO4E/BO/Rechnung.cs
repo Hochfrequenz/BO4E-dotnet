@@ -503,14 +503,5 @@ namespace BO4E.BO
         [FieldName("invoiceItemList", Language.EN)]
         public List<Rechnungsposition> Rechnungspositionen { get; set; }
 
-        /// <summary>
-        ///     Eine Liste mit Steuerbeträgen pro Steuerkennzeichen/Steuersatz. Die Summe dieser Beträge ergibt den Wert für
-        ///     gesamtsteuer. Details <see cref="Steuerbetrag" />
-        /// </summary>
-        [JsonProperty(Required = Required.Default, Order = 21, PropertyName = "steuerbetraegeVorausgezahlt")]
-        [JsonPropertyName("steuerbetraegeVorausgezahlt")]
-        [ProtoMember(23)]
-        [FieldName("taxList", Language.EN)]
-        public List<Steuerbetrag> SteuerbetraegeVorausgezahlt { get; set; }
     }
 }
