@@ -89,8 +89,8 @@ namespace BO4E.COM
         /// Enthält die Auflistung der STS Segmente Plausibilisierungshinweis, Ersatzwertbildungsverfahren,
         /// Korrekturgrund, Gasqualität, Tarif, Grundlage der Energiemenge
         /// </summary>
-        [JsonProperty(PropertyName = "stauszusatzinformationen", Required = Required.Default, Order = 5)]
-        [JsonPropertyName("stauszusatzinformationen")]
+        [JsonProperty(PropertyName = "statuszusatzinformationen", Required = Required.Default, Order = 5)]
+        [JsonPropertyName("statuszusatzinformationen")]
         [NonOfficial(NonOfficialCategory.UNSPECIFIED)]
         [ProtoMember(11)]
         public List<StatusZusatzInformation> StatusZusatzInformationen { get; set; }
