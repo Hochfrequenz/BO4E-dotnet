@@ -104,7 +104,7 @@ namespace BO4E.COM
         [JsonProperty(PropertyName = "obiskennzahl", Required = Required.Always, Order = 6)]
         [JsonPropertyName("obiskennzahl")]
         [ProtoMember(6)]
-        public string Obiskennzahl { get; set; } 
+        public string Obiskennzahl { get; set; }
 
         /// <summary>
         ///     Gibt den absoluten Wert der Menge an.
