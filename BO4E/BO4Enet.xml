@@ -388,6 +388,11 @@
             Das Fertigstellungsdatum beschreibt zu welchem Zeitpunkt ein Auftrag ausgeführt wurde/wird.
             </summary>
         </member>
+        <member name="P:BO4E.BO.Auftrag.Sparte">
+            <summary>
+            Die Sparte in der der Auftrag relevant ist
+            </summary>
+        </member>
         <member name="P:BO4E.BO.Auftrag.Lieferanschrift">
             <summary>
             Die Adresse, die sich in Belieferung befindet.
@@ -403,12 +408,12 @@
             Ein zusätzlicher Freitext
             </summary>
         </member>
-        <member name="P:BO4E.BO.Auftrag.Mindestkosten">
+        <member name="P:BO4E.BO.Auftrag.Mindestpreis">
             <summary>
-            Die Mindestkosten eines Auftrags (z.B. für eine Sperrung)
+            Die Mindestpreis eines Auftrags (z.B. für eine Sperrung)
             </summary>
         </member>
-        <member name="P:BO4E.BO.Auftrag.Hoechstkosten">
+        <member name="P:BO4E.BO.Auftrag.Hoechstpreis">
             <summary>
             Die Höchstkosten eines Auftrags (z.B. für eine Sperrung)
             </summary>
@@ -905,6 +910,11 @@
         <member name="P:BO4E.BO.Entsperrauftrag.Sperrauftragsstatus">
             <summary>
             <see cref="T:BO4E.ENUM.Sperrauftragsstatus"/>
+            </summary>
+        </member>
+        <member name="P:BO4E.BO.Entsperrauftrag.Zaehlernummer">
+            <summary>
+            Die Nummer des zu sperrenden Zählers
             </summary>
         </member>
         <member name="P:BO4E.BO.Entsperrauftrag.IstNurInnerhalbDerArbeitszeitZuEntsperren">
@@ -1699,6 +1709,11 @@
         <member name="P:BO4E.BO.Sperrauftrag.Sperrauftragsstatus">
             <summary>
             <see cref="T:BO4E.ENUM.Sperrauftragsstatus"/>
+            </summary>
+        </member>
+        <member name="P:BO4E.BO.Sperrauftrag.Zaehlernummer">
+            <summary>
+            Die Nummer des zu sperrenden Zählers
             </summary>
         </member>
         <member name="P:BO4E.BO.Sperrauftrag.IstVomGerichtsvollzieherAngeordnet">

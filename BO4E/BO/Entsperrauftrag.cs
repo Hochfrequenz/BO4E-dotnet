@@ -26,6 +26,13 @@ namespace BO4E.BO
         public Sperrauftragsstatus? Sperrauftragsstatus { get; set; }
 
         /// <summary>
+        /// Die Nummer des zu sperrenden Zählers
+        /// </summary>
+        [JsonProperty("zaehlernummer", Required = Required.Default)]
+        [JsonPropertyName("zaehlernummer")]
+        public string Zaehlernummer { get; set; }
+
+        /// <summary>
         /// Ist true, falls die Entsperrung innerhalb der Arbeitszeit zu erfolgen hat.
         /// </summary>
         /// <remarks>Falls true ist in EDIFACT Z53 zu verwenden, falls false dann Z54</remarks>

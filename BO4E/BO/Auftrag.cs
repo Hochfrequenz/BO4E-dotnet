@@ -57,6 +57,13 @@ namespace BO4E.BO
         public DateTimeOffset Fertigstellungsdatum { get; set; }
 
         /// <summary>
+        /// Die Sparte in der der Auftrag relevant ist
+        /// </summary>
+        [JsonProperty("sparte", Required = Required.Default)]
+        [JsonPropertyName("spate")]
+        public ENUM.Sparte? Sparte { get; set; }
+
+        /// <summary>
         /// Die Adresse, die sich in Belieferung befindet.
         /// </summary>
         [JsonProperty("lieferanschrift", Required = Required.Default)]
@@ -81,12 +88,12 @@ namespace BO4E.BO
         public string Bemerkung { get; set; }
 
         /// <summary>
-        /// Die Mindestkosten eines Auftrags (z.B. für eine Sperrung)
+        /// Die Mindestpreis eines Auftrags (z.B. für eine Sperrung)
         /// </summary>
         [JsonProperty("mindestkosten", Required = Required.Default)]
         [JsonPropertyName("mindestkosten")]
         [ProtoMember(9)]
-        public Kosten Mindestkosten { get; set; }
+        public Preis Mindestpreis { get; set; }
 
         /// <summary>
         /// Die Höchstkosten eines Auftrags (z.B. für eine Sperrung)
@@ -94,6 +101,6 @@ namespace BO4E.BO
         [JsonProperty("hoechstkosten", Required = Required.Default)]
         [JsonPropertyName("hoechstkosten")]
         [ProtoMember(10)]
-        public Kosten Hoechstkosten { get; set; }
+        public Preis Hoechstpreis { get; set; }
     }
 }

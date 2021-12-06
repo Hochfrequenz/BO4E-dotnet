@@ -1,4 +1,5 @@
 ﻿using System;
+using System.ComponentModel.DataAnnotations;
 using System.Text.Json.Serialization;
 using BO4E.COM;
 using BO4E.ENUM;
@@ -30,6 +31,20 @@ namespace BO4E.BO
         [JsonProperty("sperrauftragsstatus", Required = Required.Default)]
         [JsonPropertyName("sperrauftragsstatus")]
         public Sperrauftragsstatus? Sperrauftragsstatus { get; set; }
+
+        /// <summary>
+        /// Falls <see cref="Sperrauftragsstatus"/> = <see cref="ENUM.Sperrauftragsstatus.ABGELEHNT"/>
+        /// </summary>
+        [JsonProperty("sperrauftragsablehngrund", Required = Required.Default)]
+        [JsonPropertyName("sperrauftragsablehngrund")]
+        public Sperrauftragsablehngrund? Sperrauftragsablehnungsgrund;
+
+        /// <summary>
+        /// Die Nummer des zu sperrenden Zählers
+        /// </summary>
+        [JsonProperty("zaehlernummer", Required = Required.Default)]
+        [JsonPropertyName("zaehlernummer")]
+        public string Zaehlernummer { get; set; }
 
         /// <summary>
         /// True, falls die Sperrung vom Gerichtsvollzieher angeordnet ist.

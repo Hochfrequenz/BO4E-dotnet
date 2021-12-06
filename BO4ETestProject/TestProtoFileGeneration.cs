@@ -12,7 +12,7 @@ namespace TestBO4E
     [TestClass]
     public class TestProtoFileGeneration
     {
-        private static readonly IReadOnlyCollection<Type> ProtoSerializableTypes = new List<Type>()
+        private static readonly IReadOnlyCollection<Type> ProtoSerializableTypes = new List<Type>
         {
             typeof(Angebot),
             typeof(Ansprechpartner),
@@ -37,7 +37,7 @@ namespace TestBO4E
                 new[] { typeof(ProtoBuf.Meta.SchemaGenerationOptions) });
 
             Assert.IsNotNull(method);
-            var options = new ProtoBuf.Meta.SchemaGenerationOptions()
+            var options = new ProtoBuf.Meta.SchemaGenerationOptions
             {
                 Syntax = ProtoBuf.Meta.ProtoSyntax.Proto3,
                 Flags = ProtoBuf.Meta.SchemaGenerationFlags.MultipleNamespaceSupport,
