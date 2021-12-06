@@ -3,7 +3,7 @@ using BO4E.meta;
 namespace BO4E.ENUM
 {
     /// <summary>
-    /// Represents the Status Code (SG10 STS 4405) 
+    /// Represents the Status Code (MSCONS SG10 STS 4405) 
     /// </summary>
     [NonOfficial(NonOfficialCategory.UNSPECIFIED)]
     public enum Status
@@ -52,7 +52,7 @@ namespace BO4E.ENUM
         /// <remarks>Z37</remarks>
         ZAEHLERSTAND_ZUM_ENDE_DER_ANGEGEBENEN_ENERGIEMENGE_VORHANDEN_UND_KOMMUNIZIERT,
 
-        /// <summary> ZAEHLERSTAND_ZUM_BEGINN_DER_ANGEGEBENEN_ENERGIEMENGE_NICHT_VORHANDEN_DA </summary>
+        /// <summary> ZAEHLERSTAND_ZUM_BEGINN_DER_ANGEGEBENEN_ENERGIEMENGE_NICHT_VORHANDEN_DA_MENGENABGRENZUNG </summary>
         /// <remarks>Z38</remarks>
         ZAEHLERSTAND_ZUM_BEGINN_DER_ANGEGEBENEN_ENERGIEMENGE_NICHT_VORHANDEN_DA,
 

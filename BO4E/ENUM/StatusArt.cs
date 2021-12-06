@@ -4,7 +4,7 @@ using BO4E.meta;
 namespace BO4E.ENUM
 {
     /// <summary>
-    /// Represents the Type of Wert (SG10 STS 9015)
+    /// Represents the Type of Wert (MSCONS SG10 STS 9015)
     /// </summary>
     /// <see cref="StatusZusatzInformation"/>
     [NonOfficial(NonOfficialCategory.UNSPECIFIED)]
@@ -14,7 +14,7 @@ namespace BO4E.ENUM
         /// <remarks>6</remarks>
         VERTRAG,
 
-        /// <summary> MESSWERTQUALITAET: 8 </summary>
+        /// <summary> MESSWERTQUALITAET </summary>
         /// <remarks>8</remarks>
         MESSWERTQUALITAET,
 
