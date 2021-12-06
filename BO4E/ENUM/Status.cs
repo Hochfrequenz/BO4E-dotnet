@@ -72,7 +72,7 @@ namespace BO4E.ENUM
         /// <remarks>Z85</remarks>
         REALER_ZAEHLERUEBERLAUF_GEPRUEFT,
 
-        /// <summary> REALER_ZAEHLERUEBERLAUF_GEPRUEFT </summary>
+        /// <summary> PLAUSIBEL_WG_KONTROLLABLESUNG </summary>
         /// <remarks>Z86</remarks>
         PLAUSIBEL_WG_KONTROLLABLESUNG,
 
