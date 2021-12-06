@@ -6,7 +6,7 @@ namespace BO4E.ENUM
     /// Represents the Type of Wert (SG10 STS 9015)
     /// </summary>
     [NonOfficial(NonOfficialCategory.UNSPECIFIED)]
-    public enum WertStatuskategorie
+    public enum StatusArt
     {
         /// <summary> 6 </summary>
         VERTRAG,

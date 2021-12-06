@@ -10,37 +10,27 @@ namespace BO4E.COM
     /// Enhält das STS Segemt
     /// </summary>
     [NonOfficial(NonOfficialCategory.UNSPECIFIED)]
-    public class StatusZusatzInformation
+    public class StatusZusatzInformation : COM
     {
         /// <summary>
         ///     Enthält die Zusatzinformation Art des angegebenen Wertes
         /// </summary>
-        /// <see cref="ENUM.WertStatuskategorie" />
-        [JsonProperty(PropertyName = "wertstatuskategorie", Required = Required.Default, Order = 1)]
-        [JsonPropertyName("wertstatuskategorie")]
+        /// <see cref="StatusArt" />
+        [JsonProperty(PropertyName = "art", Required = Required.Default, Order = 1)]
+        [JsonPropertyName("art")]
         [NonOfficial(NonOfficialCategory.UNSPECIFIED)]
         [ProtoMember(1)]
-        public WertStatuskategorie? WertStatuskategorie { get; set; }
+        public StatusArt? Art { get; set; }
 
 
         /// <summary>
         ///     Enthält die Zusatzinformation Status des angegebenen Wertes
         /// </summary>
-        /// <see cref="ENUM.WertStatus" />
-        [JsonProperty(PropertyName = "wertstatus", Required = Required.Default, Order = 2)]
-        [JsonPropertyName("wertstatus")]
+        /// <see cref="Status" />
+        [JsonProperty(PropertyName = "status", Required = Required.Default, Order = 2)]
+        [JsonPropertyName("status")]
         [NonOfficial(NonOfficialCategory.UNSPECIFIED)]
         [ProtoMember(2)]
-        public WertStatus? WertStatus { get; set; }
-
-        /// <summary>
-        ///     Enthält die Zusatzinformation Status des angegebenen Wertes
-        /// </summary>
-        /// <see cref="ENUM.WertStatus" />
-        [JsonProperty(PropertyName = "wertstatusanlass", Required = Required.Default, Order = 3)]
-        [JsonPropertyName("wertstatusanlass")]
-        [NonOfficial(NonOfficialCategory.UNSPECIFIED)]
-        [ProtoMember(3)]
-        public WertStatusanlass? WertStatusanlass { get; set; }
+        public Status? Status { get; set; }
     }
 }

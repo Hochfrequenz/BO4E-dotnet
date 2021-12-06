@@ -6,7 +6,7 @@ namespace BO4E.ENUM
     /// Represents the Status Code (SG10 STS 4405) 
     /// </summary>
     [NonOfficial(NonOfficialCategory.UNSPECIFIED)]
-    public enum WertStatus
+    public enum Status
     {
         /// <summary> T1 </summary>
         TARIF_1,
@@ -45,6 +45,24 @@ namespace BO4E.ENUM
         ZAEHLERSTAND_ZUM_BEGINN_DER_ANGEGEBENEN_ENERGIEMENGE_NICHT_VORHANDEN_DA,
 
         /// <summary> Z39 </summary>
-        ZAEHLERSTAND_ZUM_ENDE_DER_ANGEGEBENEN_ENERGIEMENGE_NICHT_VORHANDEN_DA_MENGENABGRENZUNG
+        ZAEHLERSTAND_ZUM_ENDE_DER_ANGEGEBENEN_ENERGIEMENGE_NICHT_VORHANDEN_DA_MENGENABGRENZUNG,
+
+        /// <summary> Z83 </summary>
+        KUNDENSELBSTABLESUNG,
+
+        /// <summary> Z84 </summary>
+        LEERSTAND,
+
+        /// <summary> Z85 </summary>
+        REALER_ZAEHLERUEBERLAUF_GEPRUEFT,
+
+        /// <summary> Z86 </summary>
+        PLAUSIBEL_WG_KONTROLLABLESUNG,
+
+        /// <summary> Z87 </summary>
+        PLAUSIBEL_WG_KUNDENHINWIES,
+
+        /// <summary>ZC3 </summary>
+        AUSTAUSCH_DES_ERSATZWERTES,
     }
 }
