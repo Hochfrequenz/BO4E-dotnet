@@ -12,6 +12,7 @@ namespace BO4E.COM
     /// </summary>
     /// <remarks>Immer daran denken diesen Kommentar zu pflegen, wenn dich <see cref="StatusArt"/> ändert.</remarks>
     /// <seealso cref="StatusArt"/>
+    [ProtoContract]
     [NonOfficial(NonOfficialCategory.UNSPECIFIED)]
     public class StatusZusatzInformation : COM
     {
