@@ -93,7 +93,7 @@ namespace BO4E.COM
         [JsonPropertyName("stauszusatzinformationen")]
         [NonOfficial(NonOfficialCategory.UNSPECIFIED)]
         [ProtoMember(11)]
-        public IReadOnlyCollection<StatusZusatzInformation> StatusZusatzInformationen { get; set; }
+        public List<StatusZusatzInformation> StatusZusatzInformationen { get; set; }
 
         /// <summary>
         ///     Die OBIS-Kennzahl für den Wert, die festlegt, welche Größe mit dem Stand gemeldet wird.
