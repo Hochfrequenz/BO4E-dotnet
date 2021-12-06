@@ -8,61 +8,80 @@ namespace BO4E.ENUM
     [NonOfficial(NonOfficialCategory.UNSPECIFIED)]
     public enum Status
     {
-        /// <summary> T1 </summary>
+        /// <summary> TARIF_1 </summary>
+        /// <remarks>T1</remarks>
         TARIF_1,
 
-        /// <summary> T2 </summary>
+        /// <summary> TARIF_2 </summary>
+        /// <remarks>T2</remarks>
         TARIF_2,
 
-        /// <summary> T3 </summary>
+        /// <summary> TARIF_3 </summary>
+        /// <remarks>T3</remarks>
         TARIF_3,
 
-        /// <summary> T4 </summary>
+        /// <summary> TARIF_4 </summary>
+        /// <remarks>T4</remarks>
         TARIF_4,
 
-        /// <summary> T5 </summary>
+        /// <summary> TARIF_5 </summary>
+        /// <remarks>T5</remarks>
         TARIF_5,
 
-        /// <summary> T6 </summary>
+        /// <summary> TARIF_6 </summary>
+        /// <remarks>T6</remarks>
         TARIF_6,
 
-        /// <summary> T7 </summary>
+        /// <summary> TARIF_7 </summary>
+        /// <remarks>T7</remarks>
         TARIF_7,
 
-        /// <summary> T8 </summary>
+        /// <summary> TARIF_8 </summary>
+        /// <remarks>T8</remarks>
         TARIF_8,
 
-        /// <summary> T9 </summary>
+        /// <summary> TARIF_9 </summary>
+        /// <remarks>T9</remarks>
         TARIF_9,
 
-        /// <summary> Z36 </summary>
+        /// <summary> ZAEHLERSTAND_ZUM_BEGINN_DER_ANGEGEBENEN_ENERGIEMENGE_VORHANDEN_UND_KOMMUNIZIERT </summary>
+        /// <remarks>Z36</remarks>
         ZAEHLERSTAND_ZUM_BEGINN_DER_ANGEGEBENEN_ENERGIEMENGE_VORHANDEN_UND_KOMMUNIZIERT,
 
-        /// <summary> Z37 </summary>
+        /// <summary> ZAEHLERSTAND_ZUM_ENDE_DER_ANGEGEBENEN_ENERGIEMENGE_VORHANDEN_UND_KOMMUNIZIERT </summary>
+        /// <remarks>Z37</remarks>
         ZAEHLERSTAND_ZUM_ENDE_DER_ANGEGEBENEN_ENERGIEMENGE_VORHANDEN_UND_KOMMUNIZIERT,
 
-        /// <summary> Z38 </summary>
+        /// <summary> ZAEHLERSTAND_ZUM_BEGINN_DER_ANGEGEBENEN_ENERGIEMENGE_NICHT_VORHANDEN_DA </summary>
+        /// <remarks>Z38</remarks>
         ZAEHLERSTAND_ZUM_BEGINN_DER_ANGEGEBENEN_ENERGIEMENGE_NICHT_VORHANDEN_DA,
 
-        /// <summary> Z39 </summary>
+        /// <summary> ZAEHLERSTAND_ZUM_ENDE_DER_ANGEGEBENEN_ENERGIEMENGE_NICHT_VORHANDEN_DA_MENGENABGRENZUNG </summary>
+        /// <remarks>Z39</remarks>
         ZAEHLERSTAND_ZUM_ENDE_DER_ANGEGEBENEN_ENERGIEMENGE_NICHT_VORHANDEN_DA_MENGENABGRENZUNG,
 
-        /// <summary> Z83 </summary>
+        /// <summary> KUNDENSELBSTABLESUNG </summary>
+        /// <remarks>Z83</remarks>
         KUNDENSELBSTABLESUNG,
 
-        /// <summary> Z84 </summary>
+        /// <summary> LEERSTAND </summary>
+        /// <remarks>Z84</remarks>
         LEERSTAND,
 
-        /// <summary> Z85 </summary>
+        /// <summary> REALER_ZAEHLERUEBERLAUF_GEPRUEFT </summary>
+        /// <remarks>Z85</remarks>
         REALER_ZAEHLERUEBERLAUF_GEPRUEFT,
 
-        /// <summary> Z86 </summary>
+        /// <summary> REALER_ZAEHLERUEBERLAUF_GEPRUEFT </summary>
+        /// <remarks>Z86</remarks>
         PLAUSIBEL_WG_KONTROLLABLESUNG,
 
-        /// <summary> Z87 </summary>
+        /// <summary> PLAUSIBEL_WG_KUNDENHINWIES </summary>
+        /// <remarks>Z87</remarks>
         PLAUSIBEL_WG_KUNDENHINWIES,
 
-        /// <summary>ZC3 </summary>
+        /// <summary> AUSTAUSCH_DES_ERSATZWERTES </summary>
+        /// <remarks>ZC3</remarks>
         AUSTAUSCH_DES_ERSATZWERTES,
     }
 }

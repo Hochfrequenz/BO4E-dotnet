@@ -1,3 +1,4 @@
+using BO4E.COM;
 using BO4E.meta;
 
 namespace BO4E.ENUM
@@ -5,28 +6,36 @@ namespace BO4E.ENUM
     /// <summary>
     /// Represents the Type of Wert (SG10 STS 9015)
     /// </summary>
+    /// <see cref="StatusZusatzInformation"/>
     [NonOfficial(NonOfficialCategory.UNSPECIFIED)]
     public enum StatusArt
     {
-        /// <summary> 6 </summary>
+        /// <summary> VERTRAG </summary>
+        /// <remarks>6</remarks>
         VERTRAG,
 
-        /// <summary> 8 </summary>
+        /// <summary> MESSWERTQUALITAET: 8 </summary>
+        /// <remarks>8</remarks>
         MESSWERTQUALITAET,
 
-        /// <summary> 10 </summary>
+        /// <summary> MESSKLASSIFIZIERUNG </summary>
+        /// <remarks>10</remarks>
         MESSKLASSIFIZIERUNG,
 
-        /// <summary> Z33 </summary>
+        /// <summary> PLAUSIBILISIERUNGSHINWEIS </summary>
+        /// <remarks>Z33</remarks>
         PLAUSIBILISIERUNGSHINWEIS,
 
-        /// <summary> Z32 </summary>
+        /// <summary> ERSATZWERTBILDUNGSVERFAHREN </summary>
+        /// <remarks>Z32</remarks>
         ERSATZWERTBILDUNGSVERFAHREN,
 
-        /// <summary>Z34 </summary>
+        /// <summary> KORREKTURGRUND </summary>
+        /// <remarks>Z34</remarks>
         KORREKTURGRUND,
 
-        /// <summary> Z31 </summary>
+        /// <summary> GASQUALITAET </summary>
+        /// <remarks>Z31</remarks>
         GASQUALITAET,
     }
 }
