@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.Serialization;
 using System.Text.Json;
@@ -67,7 +68,7 @@ namespace BO4E.COM
         /// <summary>
         ///     Gibt an, ob es sich um eine PROGNOSE oder eine MESSUNG handelt.
         /// </summary>
-        /// <see cref="ENUM.Wertermittlungsverfahren" />
+        /// <seealso cref="ENUM.Wertermittlungsverfahren" />
         [JsonProperty(PropertyName = "wertermittlungsverfahren", Required = Required.Always, Order = 5)]
         [JsonPropertyName("wertermittlungsverfahren")]
         [ProtoMember(5)]
@@ -76,42 +77,23 @@ namespace BO4E.COM
         /// <summary>
         ///     Enthält die Gültigkeit des angegebenen Wertes
         /// </summary>
-        /// <see cref="ENUM.WertMengeArt" />
+        /// <seealso cref="ENUM.WertMengeArt" />
         [JsonProperty(PropertyName = "wertmengeart", Required = Required.Default, Order = 5)]
         [JsonPropertyName("wertmengeart")]
         [NonOfficial(NonOfficialCategory.UNSPECIFIED)]
         [ProtoMember(10)]
         public WertMengeArt? WertMengeArt { get; set; }
 
+
         /// <summary>
-        ///     Enthält die Zusatzinformation Art des angegebenen Wertes
+        /// Enthält die Auflistung der STS Segmente Plausibilisierungshinweis, Ersatzwertbildungsverfahren,
+        /// Korrekturgrund, Gasqualität, Tarif, Grundlage der Energiemenge
         /// </summary>
-        /// <see cref="ENUM.WertStatuskategorie" />
-        [JsonProperty(PropertyName = "wertstatuskategorie", Required = Required.Default, Order = 5)]
-        [JsonPropertyName("wertstatuskategorie")]
+        [JsonProperty(PropertyName = "stauszusatzinformationen", Required = Required.Default, Order = 5)]
+        [JsonPropertyName("stauszusatzinformationen")]
         [NonOfficial(NonOfficialCategory.UNSPECIFIED)]
         [ProtoMember(11)]
-        public WertStatuskategorie? WertStatuskategorie { get; set; }
-
-        /// <summary>
-        ///     Enthält die Zusatzinformation Status des angegebenen Wertes
-        /// </summary>
-        /// <see cref="ENUM.WertStatus" />
-        [JsonProperty(PropertyName = "wertstatus", Required = Required.Default, Order = 5)]
-        [JsonPropertyName("wertstatus")]
-        [NonOfficial(NonOfficialCategory.UNSPECIFIED)]
-        [ProtoMember(12)]
-        public WertStatus? WertStatus { get; set; }
-
-        /// <summary>
-        ///     Enthält die Zusatzinformation Status des angegebenen Wertes
-        /// </summary>
-        /// <see cref="ENUM.WertStatus" />
-        [JsonProperty(PropertyName = "wertstatusanlass", Required = Required.Default, Order = 5)]
-        [JsonPropertyName("wertstatusanlass")]
-        [NonOfficial(NonOfficialCategory.UNSPECIFIED)]
-        [ProtoMember(13)]
-        public WertStatusanlass? WertStatusanlass { get; set; }
+        public IReadOnlyCollection<StatusZusatzInformation> StatusZusatzInformationen { get; set; }
 
         /// <summary>
         ///     Die OBIS-Kennzahl für den Wert, die festlegt, welche Größe mit dem Stand gemeldet wird.
@@ -135,7 +117,7 @@ namespace BO4E.COM
         /// <summary>
         ///     Gibt die Einheit zum jeweiligen Wert an.
         /// </summary>
-        /// <see cref="Mengeneinheit" />
+        /// <seealso cref="Mengeneinheit" />
         [JsonProperty(PropertyName = "einheit", Required = Required.Always, Order = 8)]
         [JsonPropertyName("einheit")]
         [ProtoMember(8)]
