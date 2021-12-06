@@ -1200,6 +1200,9 @@ enum Sparte {
    Sparte_WASSER = 4;
    Sparte_ABWASSER = 5;
 }
+message StatusZusatzInformation {
+   option (.protobuf_net.msgopt).namespace = "BO4E.COM";
+}
 message Steuerbetrag {
    option (.protobuf_net.msgopt).namespace = "BO4E.COM";
    Steuerkennzeichen Steuerkennzeichen = 3;
@@ -1261,9 +1264,7 @@ message Verbrauch {
    Mengeneinheit Einheit = 8;
    Verbrauchsmengetyp Type = 9;
    WertMengeArt WertMengeArt = 10;
-   WertStatuskategorie WertStatuskategorie = 11;
-   WertStatus WertStatus = 12;
-   WertStatusanlass WertStatusanlass = 13;
+   repeated StatusZusatzInformation StausZusatzInformationen = 11;
 }
 enum Verbrauchsart {
    option (.protobuf_net.enumopt).namespace = "BO4E.ENUM";
@@ -1348,17 +1349,17 @@ message Vertragsteil {
    Menge Kundenwert = 1010;
    string Verbrauchsaufteilung = 1011;
 }
+message Verwendungszweck {
+   option (.protobuf_net.msgopt).namespace = "BO4E.COM";
+   Marktrolle Marktrolle = 3;
+   repeated Verwendungszweck Zweck = 4 [packed = false];
+}
 enum Verwendungszweck {
    option (.protobuf_net.enumopt).namespace = "BO4E.ENUM";
    NETZNUTZUNGSABRECHNUNG = 0;
    BILANZKREISABRECHNUNG = 1;
    MEHRMINDERMBENGENABRECHNUNG = 2;
    ENDKUNDENABRECHNUNG = 3;
-}
-message Verwendungszweck {
-   option (.protobuf_net.msgopt).namespace = "BO4E.COM";
-   Marktrolle Marktrolle = 3;
-   repeated Verwendungszweck Zweck = 4 [packed = false];
 }
 enum Waehrungscode {
    option (.protobuf_net.enumopt).namespace = "BO4E.ENUM";
@@ -1565,41 +1566,6 @@ enum WertMengeArt {
    NICHT_VERWENDBARER_WERT = 5;
    PROGNOSEWERT = 6;
    ENERGIEMENGE_SUMMIERT = 7;
-}
-enum WertStatus {
-   option (.protobuf_net.enumopt).namespace = "BO4E.ENUM";
-   TARIF_1 = 0;
-   TARIF_2 = 1;
-   TARIF_3 = 2;
-   TARIF_4 = 3;
-   TARIF_5 = 4;
-   TARIF_6 = 5;
-   TARIF_7 = 6;
-   TARIF_8 = 7;
-   TARIF_9 = 8;
-   ZAEHLERSTAND_ZUM_BEGINN_DER_ANGEGEBENEN_ENERGIEMENGE_VORHANDEN_UND_KOMMUNIZIERT = 9;
-   ZAEHLERSTAND_ZUM_ENDE_DER_ANGEGEBENEN_ENERGIEMENGE_VORHANDEN_UND_KOMMUNIZIERT = 10;
-   ZAEHLERSTAND_ZUM_BEGINN_DER_ANGEGEBENEN_ENERGIEMENGE_NICHT_VORHANDEN_DA = 11;
-   ZAEHLERSTAND_ZUM_ENDE_DER_ANGEGEBENEN_ENERGIEMENGE_NICHT_VORHANDEN_DA_MENGENABGRENZUNG = 12;
-}
-enum WertStatusanlass {
-   option (.protobuf_net.enumopt).namespace = "BO4E.ENUM";
-   KUNDENSELBSTABLESUNG = 0;
-   LEERSTAND = 1;
-   REALER_ZAEHLERUEBERLAUF_GEPRUEFT = 2;
-   PLAUSIBEL_WG_KONTROLLABLESUNG = 3;
-   PLAUSIBEL_WG_KUNDENHINWIES = 4;
-   AUSTAUSCH_DES_ERSATZWERTES = 5;
-}
-enum WertStatuskategorie {
-   option (.protobuf_net.enumopt).namespace = "BO4E.ENUM";
-   VERTRAG = 0;
-   MESSWERTQUALITAET = 1;
-   MESSKLASSIFIZIERUNG = 2;
-   PLAUSIBILISIERUNGSHINWEIS = 3;
-   ERSATZWERTBILDUNGSVERFAHREN = 4;
-   KORREKTURGRUND = 5;
-   GASQUALITAET = 6;
 }
 enum Wertermittlungsverfahren {
    option (.protobuf_net.enumopt).namespace = "BO4E.ENUM";

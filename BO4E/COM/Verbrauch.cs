@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.Serialization;
 using System.Text.Json;
@@ -83,36 +84,16 @@ namespace BO4E.COM
         [ProtoMember(10)]
         public WertMengeArt? WertMengeArt { get; set; }
 
+
         /// <summary>
-        ///     Enthält die Zusatzinformation Art des angegebenen Wertes
+        /// Enthält die Auflistung der STS Segmente
         /// </summary>
-        /// <see cref="ENUM.WertStatuskategorie" />
-        [JsonProperty(PropertyName = "wertstatuskategorie", Required = Required.Default, Order = 5)]
-        [JsonPropertyName("wertstatuskategorie")]
+        [JsonProperty(PropertyName = "stauszusatzinformationen", Required = Required.Default, Order = 5)]
+        [JsonPropertyName("stauszusatzinformationen")]
         [NonOfficial(NonOfficialCategory.UNSPECIFIED)]
         [ProtoMember(11)]
-        public WertStatuskategorie? WertStatuskategorie { get; set; }
-
-        /// <summary>
-        ///     Enthält die Zusatzinformation Status des angegebenen Wertes
-        /// </summary>
-        /// <see cref="ENUM.WertStatus" />
-        [JsonProperty(PropertyName = "wertstatus", Required = Required.Default, Order = 5)]
-        [JsonPropertyName("wertstatus")]
-        [NonOfficial(NonOfficialCategory.UNSPECIFIED)]
-        [ProtoMember(12)]
-        public WertStatus? WertStatus { get; set; }
-
-        /// <summary>
-        ///     Enthält die Zusatzinformation Status des angegebenen Wertes
-        /// </summary>
-        /// <see cref="ENUM.WertStatus" />
-        [JsonProperty(PropertyName = "wertstatusanlass", Required = Required.Default, Order = 5)]
-        [JsonPropertyName("wertstatusanlass")]
-        [NonOfficial(NonOfficialCategory.UNSPECIFIED)]
-        [ProtoMember(13)]
-        public WertStatusanlass? WertStatusanlass { get; set; }
-
+        public IReadOnlyCollection<StatusZusatzInformation> StausZusatzInformationen { get; set; }
+        
         /// <summary>
         ///     Die OBIS-Kennzahl für den Wert, die festlegt, welche Größe mit dem Stand gemeldet wird.
         /// </summary>
