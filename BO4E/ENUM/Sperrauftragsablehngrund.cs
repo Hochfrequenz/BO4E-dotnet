@@ -30,7 +30,7 @@ namespace BO4E.ENUM
         /// <summary>
         /// Mindestens eine weitere Marktlokation ist von der Sperrung betroffen. 
         /// </summary>
-        ///< remarks>EBD 0470 A04</remarks>
+        /// <remarks>EBD 0470 A04</remarks>
         WEITERE_MALO_BETROFFEN,
 
         /// <summary>
