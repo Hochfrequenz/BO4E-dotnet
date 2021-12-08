@@ -418,6 +418,16 @@
             Die Höchstkosten eines Auftrags (z.B. für eine Sperrung)
             </summary>
         </member>
+        <member name="T:BO4E.BO.AuftragsStorno">
+            <summary>
+            Ein AuftragsStorno beschreibt die Stornierung eines <see cref="T:BO4E.BO.Auftrag"/>s. 
+            </summary>
+        </member>
+        <member name="P:BO4E.BO.AuftragsStorno.AuftragsId">
+            <summary>
+            Eindeutige Kennung des zu stornierenden <see cref="T:BO4E.BO.Auftrag"/>s
+            </summary>
+        </member>
         <member name="T:BO4E.BO.Benachrichtigung">
             <summary>
                 Eine Benachrichtigung ist die BO-Entsprechung eines "Klärfall"s im SAP oder eines "Task"s im Salesforce
@@ -1711,6 +1721,11 @@
             <see cref="T:BO4E.ENUM.Sperrauftragsstatus"/>
             </summary>
         </member>
+        <member name="F:BO4E.BO.Sperrauftrag.Sperrauftragsablehnungsgrund">
+            <summary>
+            Falls <see cref="P:BO4E.BO.Sperrauftrag.Sperrauftragsstatus"/> = <see cref="F:BO4E.ENUM.Sperrauftragsstatus.ABGELEHNT"/>
+            </summary>
+        </member>
         <member name="P:BO4E.BO.Sperrauftrag.Zaehlernummer">
             <summary>
             Die Nummer des zu sperrenden Zählers
@@ -1724,6 +1739,16 @@
             Wenn true, dann ist das <see cref="P:BO4E.BO.Auftrag.Ausfuehrungsdatum"/> in DTM+469 zu übermitteln.
             Wenn false, dann ist das <see cref="P:BO4E.BO.Auftrag.Ausfuehrungsdatum"/> in DTM+203 zu übermitteln.
             </remarks>
+        </member>
+        <member name="T:BO4E.BO.SperrauftragsStorno">
+            <summary>
+            Das Storno eines <see cref="T:BO4E.BO.Sperrauftrag"/>s oder <see cref="T:BO4E.BO.Entsperrauftrag"/>
+            </summary>
+        </member>
+        <member name="P:BO4E.BO.SperrauftragsStorno.OriginalSperrauftragsart">
+            <summary>
+            Handelt es sich beim zu stornierenden Auftrag um einen Auftrag zum <see cref="F:BO4E.ENUM.Sperrauftragsart.SPERREN"/> oder <see cref="F:BO4E.ENUM.Sperrauftragsart.ENTSPERREN"/>?
+            </summary>
         </member>
         <member name="T:BO4E.BO.Vertrag">
             <summary>
@@ -3218,6 +3243,26 @@
         <member name="P:BO4E.COM.Sigmoidparameter.D">
             <summary>Briefmarke Transportnetz</summary>
         </member>
+        <member name="T:BO4E.COM.StatusZusatzInformation">
+            <summary>
+            Enthält die Auflistung der STS Segmente Plausibilisierungshinweis, Ersatzwertbildungsverfahren,
+            Korrekturgrund, Gasqualität, Tarif, Grundlage der Energiemenge.
+            </summary>
+            <remarks>Immer daran denken diesen Kommentar zu pflegen, wenn dich <see cref="T:BO4E.ENUM.StatusArt"/> ändert.</remarks>
+            <seealso cref="T:BO4E.ENUM.StatusArt"/>
+        </member>
+        <member name="P:BO4E.COM.StatusZusatzInformation.Art">
+            <summary>
+                Enthält die Zusatzinformation Art des angegebenen Wertes
+            </summary>
+            <seealso cref="T:BO4E.ENUM.StatusArt" />
+        </member>
+        <member name="P:BO4E.COM.StatusZusatzInformation.Status">
+            <summary>
+                Enthält die Zusatzinformation Status des angegebenen Wertes
+            </summary>
+            <seealso cref="P:BO4E.COM.StatusZusatzInformation.Status" />
+        </member>
         <member name="T:BO4E.COM.Steuerbetrag">
             <summary>Abbildung eines Steuerbetrages.</summary>
         </member>
@@ -3232,6 +3277,12 @@
         </member>
         <member name="P:BO4E.COM.Steuerbetrag.Waehrung">
             <summary>Währung. Z.B. Euro. <seealso cref="T:BO4E.ENUM.Waehrungscode" /></summary>
+        </member>
+        <member name="P:BO4E.COM.Steuerbetrag.BasiswertVorausgezahlt">
+            <summary>Nettobetrag (vorausgezahlt) für den die Steuer berechnet wurde. Z.B. 100</summary>
+        </member>
+        <member name="P:BO4E.COM.Steuerbetrag.SteuerwertVorausgezahlt">
+            <summary>Aus dem Basiswert (vorausgezahlt) berechnete Steuer. Z.B. 19 (bei UST_19)</summary>
         </member>
         <member name="T:BO4E.COM.Tagesparameter">
             <summary>
@@ -3395,31 +3446,19 @@
             <summary>
                 Gibt an, ob es sich um eine PROGNOSE oder eine MESSUNG handelt.
             </summary>
-            <see cref="T:BO4E.ENUM.Wertermittlungsverfahren" />
+            <seealso cref="T:BO4E.ENUM.Wertermittlungsverfahren" />
         </member>
         <member name="P:BO4E.COM.Verbrauch.WertMengeArt">
             <summary>
                 Enthält die Gültigkeit des angegebenen Wertes
             </summary>
-            <see cref="T:BO4E.ENUM.WertMengeArt" />
+            <seealso cref="T:BO4E.ENUM.WertMengeArt" />
         </member>
-        <member name="P:BO4E.COM.Verbrauch.WertStatuskategorie">
+        <member name="P:BO4E.COM.Verbrauch.StatusZusatzInformationen">
             <summary>
-                Enthält die Zusatzinformation Art des angegebenen Wertes
+            Enthält die Auflistung der STS Segmente Plausibilisierungshinweis, Ersatzwertbildungsverfahren,
+            Korrekturgrund, Gasqualität, Tarif, Grundlage der Energiemenge
             </summary>
-            <see cref="T:BO4E.ENUM.WertStatuskategorie" />
-        </member>
-        <member name="P:BO4E.COM.Verbrauch.WertStatus">
-            <summary>
-                Enthält die Zusatzinformation Status des angegebenen Wertes
-            </summary>
-            <see cref="T:BO4E.ENUM.WertStatus" />
-        </member>
-        <member name="P:BO4E.COM.Verbrauch.WertStatusanlass">
-            <summary>
-                Enthält die Zusatzinformation Status des angegebenen Wertes
-            </summary>
-            <see cref="T:BO4E.ENUM.WertStatus" />
         </member>
         <member name="P:BO4E.COM.Verbrauch.Obiskennzahl">
             <summary>
@@ -3438,7 +3477,7 @@
             <summary>
                 Gibt die Einheit zum jeweiligen Wert an.
             </summary>
-            <see cref="T:BO4E.ENUM.Mengeneinheit" />
+            <seealso cref="T:BO4E.ENUM.Mengeneinheit" />
         </member>
         <member name="P:BO4E.COM.Verbrauch.Type">
             <summary>type</summary>
@@ -7474,6 +7513,12 @@
         <member name="F:BO4E.ENUM.Rechnungstyp.MEHRMINDERMENGENRECHNUNG">
             <summary>Mehr/Mindermengenabrechnung</summary>
         </member>
+        <member name="F:BO4E.ENUM.Rechnungstyp.ABSCHLUSSRECHNUNG">
+            <summary>Abschlussrechnung</summary>
+        </member>
+        <member name="F:BO4E.ENUM.Rechnungstyp.MSBRECHNUNG">
+            <summary>Rechnung für Messstellenbetrieb</summary>
+        </member>
         <member name="T:BO4E.ENUM.Regionskriteriumtyp">
             <summary>
                 Klassifizierung der Kriterien für eine regionale Eingrenzung.
@@ -7709,6 +7754,60 @@
         <member name="F:BO4E.ENUM.Sparte.ABWASSER">
             <summary>Abwasserentsorgung</summary>
         </member>
+        <member name="T:BO4E.ENUM.Sperrauftragsablehngrund">
+            <summary>
+            Gründe aus denen ein <see cref="T:BO4E.BO.Sperrauftrag"/> abgelehnt werden kann.
+            </summary>
+            <remarks>Diese Information kann in der EDIFACT-Nachricht des Typs 19117 verwendet werden</remarks>
+        </member>
+        <member name="F:BO4E.ENUM.Sperrauftragsablehngrund.DUPLIKAT">
+            <summary>
+            Sperrauftrag für Marktlokation liegt bereits vor bzw. ist bereits gesperrt.
+            </summary>
+            <remarks>EBD 0470 A01</remarks>
+        </member>
+        <member name="F:BO4E.ENUM.Sperrauftragsablehngrund.FALSCHER_MSB">
+            <summary>
+            An mindestens einer Messlokation ist ein anderer MSB zugeordnet als an der Marktlokation. 
+            </summary>
+            <remarks>EBD 0470 A02</remarks>
+        </member>
+        <member name="F:BO4E.ENUM.Sperrauftragsablehngrund.FALSCHE_SPANNUNGSEBENE">
+            <summary>
+            Marktlokation ist bspw. nicht <see cref="F:BO4E.ENUM.Netzebene.NSP"/>
+            </summary>
+            <remarks>EBD 0470 A03</remarks>
+        </member>
+        <member name="F:BO4E.ENUM.Sperrauftragsablehngrund.WEITERE_MALO_BETROFFEN">
+            <summary>
+            Mindestens eine weitere Marktlokation ist von der Sperrung betroffen. 
+            </summary>
+            <remarks>EBD 0470 A04</remarks>
+        </member>
+        <member name="F:BO4E.ENUM.Sperrauftragsablehngrund.ANDERER_VERHINDERUNGSGRUND">
+            <summary>
+            Ein Verhinderungsgrund liegt vor und wird in <see cref="P:BO4E.BO.Auftrag.Bemerkung"/> genauer spezifiziert.
+            </summary>
+            <remarks>EBD 0470 A05</remarks>
+        </member>
+        <member name="F:BO4E.ENUM.Sperrauftragsablehngrund.FRISTVERLETZUNG_TERMINGEBUNDEN">
+            <summary>
+            Fristverletzung bei einem termingebundenen Sperrauftrag
+            </summary>
+            <remarks>EBD 0470 A06</remarks>
+        </member>
+        <member name="F:BO4E.ENUM.Sperrauftragsablehngrund.FRISTVERLETZUNG_NICHT_TERMINGEBUNDEN">
+            <summary>
+            Fristverletzung bei einem nicht termingebundenen Sperrauftrag
+            </summary>
+            <remarks>EBD 0470 A07</remarks>
+        </member>
+        <member name="F:BO4E.ENUM.Sperrauftragsablehngrund.ANDERER_FEHLER">
+            <summary>
+            Ein Fehler liegt vor und wird in <see cref="P:BO4E.BO.Auftrag.Bemerkung"/> genauer spezifiziert.
+            </summary>
+            <remarks>EBD 0470 A99</remarks>
+        </member>
         <member name="T:BO4E.ENUM.Sperrauftragsart">
             <summary>
             Der Sperrauftragsstatus beschreibt die Art eines <see cref="T:BO4E.BO.Sperrauftrag"/>s.
@@ -7777,11 +7876,129 @@
             Der Zähler ist gesperrt
             </summary>
         </member>
+        <member name="T:BO4E.ENUM.Status">
+            <summary>
+            Represents the Status Code (MSCONS SG10 STS 4405) 
+            </summary>
+        </member>
+        <member name="F:BO4E.ENUM.Status.TARIF_1">
+            <summary> TARIF_1 </summary>
+            <remarks>T1</remarks>
+        </member>
+        <member name="F:BO4E.ENUM.Status.TARIF_2">
+            <summary> TARIF_2 </summary>
+            <remarks>T2</remarks>
+        </member>
+        <member name="F:BO4E.ENUM.Status.TARIF_3">
+            <summary> TARIF_3 </summary>
+            <remarks>T3</remarks>
+        </member>
+        <member name="F:BO4E.ENUM.Status.TARIF_4">
+            <summary> TARIF_4 </summary>
+            <remarks>T4</remarks>
+        </member>
+        <member name="F:BO4E.ENUM.Status.TARIF_5">
+            <summary> TARIF_5 </summary>
+            <remarks>T5</remarks>
+        </member>
+        <member name="F:BO4E.ENUM.Status.TARIF_6">
+            <summary> TARIF_6 </summary>
+            <remarks>T6</remarks>
+        </member>
+        <member name="F:BO4E.ENUM.Status.TARIF_7">
+            <summary> TARIF_7 </summary>
+            <remarks>T7</remarks>
+        </member>
+        <member name="F:BO4E.ENUM.Status.TARIF_8">
+            <summary> TARIF_8 </summary>
+            <remarks>T8</remarks>
+        </member>
+        <member name="F:BO4E.ENUM.Status.TARIF_9">
+            <summary> TARIF_9 </summary>
+            <remarks>T9</remarks>
+        </member>
+        <member name="F:BO4E.ENUM.Status.ZAEHLERSTAND_ZUM_BEGINN_DER_ANGEGEBENEN_ENERGIEMENGE_VORHANDEN_UND_KOMMUNIZIERT">
+            <summary> ZAEHLERSTAND_ZUM_BEGINN_DER_ANGEGEBENEN_ENERGIEMENGE_VORHANDEN_UND_KOMMUNIZIERT </summary>
+            <remarks>Z36</remarks>
+        </member>
+        <member name="F:BO4E.ENUM.Status.ZAEHLERSTAND_ZUM_ENDE_DER_ANGEGEBENEN_ENERGIEMENGE_VORHANDEN_UND_KOMMUNIZIERT">
+            <summary> ZAEHLERSTAND_ZUM_ENDE_DER_ANGEGEBENEN_ENERGIEMENGE_VORHANDEN_UND_KOMMUNIZIERT </summary>
+            <remarks>Z37</remarks>
+        </member>
+        <member name="F:BO4E.ENUM.Status.ZAEHLERSTAND_ZUM_BEGINN_DER_ANGEGEBENEN_ENERGIEMENGE_NICHT_VORHANDEN_DA">
+            <summary> ZAEHLERSTAND_ZUM_BEGINN_DER_ANGEGEBENEN_ENERGIEMENGE_NICHT_VORHANDEN_DA_MENGENABGRENZUNG </summary>
+            <remarks>Z38</remarks>
+        </member>
+        <member name="F:BO4E.ENUM.Status.ZAEHLERSTAND_ZUM_ENDE_DER_ANGEGEBENEN_ENERGIEMENGE_NICHT_VORHANDEN_DA_MENGENABGRENZUNG">
+            <summary> ZAEHLERSTAND_ZUM_ENDE_DER_ANGEGEBENEN_ENERGIEMENGE_NICHT_VORHANDEN_DA_MENGENABGRENZUNG </summary>
+            <remarks>Z39</remarks>
+        </member>
+        <member name="F:BO4E.ENUM.Status.KUNDENSELBSTABLESUNG">
+            <summary> KUNDENSELBSTABLESUNG </summary>
+            <remarks>Z83</remarks>
+        </member>
+        <member name="F:BO4E.ENUM.Status.LEERSTAND">
+            <summary> LEERSTAND </summary>
+            <remarks>Z84</remarks>
+        </member>
+        <member name="F:BO4E.ENUM.Status.REALER_ZAEHLERUEBERLAUF_GEPRUEFT">
+            <summary> REALER_ZAEHLERUEBERLAUF_GEPRUEFT </summary>
+            <remarks>Z85</remarks>
+        </member>
+        <member name="F:BO4E.ENUM.Status.PLAUSIBEL_WG_KONTROLLABLESUNG">
+            <summary> PLAUSIBEL_WG_KONTROLLABLESUNG </summary>
+            <remarks>Z86</remarks>
+        </member>
+        <member name="F:BO4E.ENUM.Status.PLAUSIBEL_WG_KUNDENHINWIES">
+            <summary> PLAUSIBEL_WG_KUNDENHINWIES </summary>
+            <remarks>Z87</remarks>
+        </member>
+        <member name="F:BO4E.ENUM.Status.AUSTAUSCH_DES_ERSATZWERTES">
+            <summary> AUSTAUSCH_DES_ERSATZWERTES </summary>
+            <remarks>ZC3</remarks>
+        </member>
+        <member name="T:BO4E.ENUM.StatusArt">
+            <summary>
+            Represents the Type of Wert (MSCONS SG10 STS 9015)
+            </summary>
+            <see cref="T:BO4E.COM.StatusZusatzInformation"/>
+        </member>
+        <member name="F:BO4E.ENUM.StatusArt.VERTRAG">
+            <summary> VERTRAG </summary>
+            <remarks>6</remarks>
+        </member>
+        <member name="F:BO4E.ENUM.StatusArt.MESSWERTQUALITAET">
+            <summary> MESSWERTQUALITAET </summary>
+            <remarks>8</remarks>
+        </member>
+        <member name="F:BO4E.ENUM.StatusArt.MESSKLASSIFIZIERUNG">
+            <summary> MESSKLASSIFIZIERUNG </summary>
+            <remarks>10</remarks>
+        </member>
+        <member name="F:BO4E.ENUM.StatusArt.PLAUSIBILISIERUNGSHINWEIS">
+            <summary> PLAUSIBILISIERUNGSHINWEIS </summary>
+            <remarks>Z33</remarks>
+        </member>
+        <member name="F:BO4E.ENUM.StatusArt.ERSATZWERTBILDUNGSVERFAHREN">
+            <summary> ERSATZWERTBILDUNGSVERFAHREN </summary>
+            <remarks>Z32</remarks>
+        </member>
+        <member name="F:BO4E.ENUM.StatusArt.KORREKTURGRUND">
+            <summary> KORREKTURGRUND </summary>
+            <remarks>Z34</remarks>
+        </member>
+        <member name="F:BO4E.ENUM.StatusArt.GASQUALITAET">
+            <summary> GASQUALITAET </summary>
+            <remarks>Z31</remarks>
+        </member>
         <member name="T:BO4E.ENUM.Steuerkennzeichen">
             <summary> </summary>
         </member>
         <member name="F:BO4E.ENUM.Steuerkennzeichen.UST_19">
             <summary>Umsatzsteuer 19%</summary>
+        </member>
+        <member name="F:BO4E.ENUM.Steuerkennzeichen.UST_16">
+            <summary>Umsatzsteuer 16%</summary>
         </member>
         <member name="F:BO4E.ENUM.Steuerkennzeichen.UST_7">
             <summary>Umsatzsteuer 7%</summary>
@@ -7791,6 +8008,9 @@
         </member>
         <member name="F:BO4E.ENUM.Steuerkennzeichen.VST_19">
             <summary>Vorsteuer 19%</summary>
+        </member>
+        <member name="F:BO4E.ENUM.Steuerkennzeichen.VST_16">
+            <summary>Vorsteuer 16%</summary>
         </member>
         <member name="F:BO4E.ENUM.Steuerkennzeichen.VST_7">
             <summary>Vorsteuer 7%</summary>
@@ -8978,99 +9198,6 @@
         </member>
         <member name="F:BO4E.ENUM.WertMengeArt.ENERGIEMENGE_SUMMIERT">
             <summary> Energiemenge summiert: 79 </summary>
-        </member>
-        <member name="T:BO4E.ENUM.WertStatus">
-            <summary>
-            Represents the Status Code (SG10 STS 4405) 
-            </summary>
-        </member>
-        <member name="F:BO4E.ENUM.WertStatus.TARIF_1">
-            <summary> T1 </summary>
-        </member>
-        <member name="F:BO4E.ENUM.WertStatus.TARIF_2">
-            <summary> T2 </summary>
-        </member>
-        <member name="F:BO4E.ENUM.WertStatus.TARIF_3">
-            <summary> T3 </summary>
-        </member>
-        <member name="F:BO4E.ENUM.WertStatus.TARIF_4">
-            <summary> T4 </summary>
-        </member>
-        <member name="F:BO4E.ENUM.WertStatus.TARIF_5">
-            <summary> T5 </summary>
-        </member>
-        <member name="F:BO4E.ENUM.WertStatus.TARIF_6">
-            <summary> T6 </summary>
-        </member>
-        <member name="F:BO4E.ENUM.WertStatus.TARIF_7">
-            <summary> T7 </summary>
-        </member>
-        <member name="F:BO4E.ENUM.WertStatus.TARIF_8">
-            <summary> T8 </summary>
-        </member>
-        <member name="F:BO4E.ENUM.WertStatus.TARIF_9">
-            <summary> T9 </summary>
-        </member>
-        <member name="F:BO4E.ENUM.WertStatus.ZAEHLERSTAND_ZUM_BEGINN_DER_ANGEGEBENEN_ENERGIEMENGE_VORHANDEN_UND_KOMMUNIZIERT">
-            <summary> Z36 </summary>
-        </member>
-        <member name="F:BO4E.ENUM.WertStatus.ZAEHLERSTAND_ZUM_ENDE_DER_ANGEGEBENEN_ENERGIEMENGE_VORHANDEN_UND_KOMMUNIZIERT">
-            <summary> Z37 </summary>
-        </member>
-        <member name="F:BO4E.ENUM.WertStatus.ZAEHLERSTAND_ZUM_BEGINN_DER_ANGEGEBENEN_ENERGIEMENGE_NICHT_VORHANDEN_DA">
-            <summary> Z38 </summary>
-        </member>
-        <member name="F:BO4E.ENUM.WertStatus.ZAEHLERSTAND_ZUM_ENDE_DER_ANGEGEBENEN_ENERGIEMENGE_NICHT_VORHANDEN_DA_MENGENABGRENZUNG">
-            <summary> Z39 </summary>
-        </member>
-        <member name="T:BO4E.ENUM.WertStatusanlass">
-            <summary>
-            Represents the Type of Wert (SG10 STS 9013)
-            </summary>
-        </member>
-        <member name="F:BO4E.ENUM.WertStatusanlass.KUNDENSELBSTABLESUNG">
-            <summary> Z83 </summary>
-        </member>
-        <member name="F:BO4E.ENUM.WertStatusanlass.LEERSTAND">
-            <summary> Z84 </summary>
-        </member>
-        <member name="F:BO4E.ENUM.WertStatusanlass.REALER_ZAEHLERUEBERLAUF_GEPRUEFT">
-            <summary> Z85 </summary>
-        </member>
-        <member name="F:BO4E.ENUM.WertStatusanlass.PLAUSIBEL_WG_KONTROLLABLESUNG">
-            <summary> Z86 </summary>
-        </member>
-        <member name="F:BO4E.ENUM.WertStatusanlass.PLAUSIBEL_WG_KUNDENHINWIES">
-            <summary> Z87 </summary>
-        </member>
-        <member name="F:BO4E.ENUM.WertStatusanlass.AUSTAUSCH_DES_ERSATZWERTES">
-            <summary>ZC3 </summary>
-        </member>
-        <member name="T:BO4E.ENUM.WertStatuskategorie">
-            <summary>
-            Represents the Type of Wert (SG10 STS 9015)
-            </summary>
-        </member>
-        <member name="F:BO4E.ENUM.WertStatuskategorie.VERTRAG">
-            <summary> 6 </summary>
-        </member>
-        <member name="F:BO4E.ENUM.WertStatuskategorie.MESSWERTQUALITAET">
-            <summary> 8 </summary>
-        </member>
-        <member name="F:BO4E.ENUM.WertStatuskategorie.MESSKLASSIFIZIERUNG">
-            <summary> 10 </summary>
-        </member>
-        <member name="F:BO4E.ENUM.WertStatuskategorie.PLAUSIBILISIERUNGSHINWEIS">
-            <summary> Z33 </summary>
-        </member>
-        <member name="F:BO4E.ENUM.WertStatuskategorie.ERSATZWERTBILDUNGSVERFAHREN">
-            <summary> Z32 </summary>
-        </member>
-        <member name="F:BO4E.ENUM.WertStatuskategorie.KORREKTURGRUND">
-            <summary>Z34 </summary>
-        </member>
-        <member name="F:BO4E.ENUM.WertStatuskategorie.GASQUALITAET">
-            <summary> Z31 </summary>
         </member>
         <member name="T:BO4E.ENUM.Zaehlerauspraegung">
             <summary>* Gibt an, ob es sich um einen Einrichtungs- oder Zweirichtungszähler handelt.</summary>
