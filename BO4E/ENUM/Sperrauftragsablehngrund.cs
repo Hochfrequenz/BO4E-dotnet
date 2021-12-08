@@ -1,5 +1,4 @@
-﻿using BO4E.BO;
-using BO4E.meta;
+﻿using BO4E.meta;
 
 namespace BO4E.ENUM
 {
