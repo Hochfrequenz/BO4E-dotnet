@@ -1,8 +1,11 @@
-using System.Text.Json.Serialization;
 using BO4E.ENUM;
 using BO4E.meta;
+
 using Newtonsoft.Json;
+
 using ProtoBuf;
+
+using System.Text.Json.Serialization;
 
 namespace BO4E.COM
 {
@@ -37,5 +40,19 @@ namespace BO4E.COM
         [FieldName("currency", Language.EN)]
         [ProtoMember(6)]
         public Waehrungscode Waehrung { get; set; }
+
+        /// <summary>Nettobetrag (vorausgezahlt) für den die Steuer berechnet wurde. Z.B. 100</summary>
+        [JsonProperty(PropertyName = "basiswertVorausgezahlt", Required = Required.Default)]
+        [JsonPropertyName("basiswertVorausgezahlt")]
+        [FieldName("baseValuePrepaid", Language.EN)]
+        [ProtoMember(7)]
+        public decimal? BasiswertVorausgezahlt { get; set; }
+
+        /// <summary>Aus dem Basiswert (vorausgezahlt) berechnete Steuer. Z.B. 19 (bei UST_19)</summary>
+        [JsonProperty(PropertyName = "steuerwertVorausgezahlt", Required = Required.Default)]
+        [JsonPropertyName("steuerwertVorausgezahlt")]
+        [FieldName("taxValuePrepaid", Language.EN)]
+        [ProtoMember(8)]
+        public decimal? SteuerwertVorausgezahlt { get; set; }
     }
 }
