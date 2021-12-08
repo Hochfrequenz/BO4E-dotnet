@@ -34,7 +34,7 @@ namespace BO4E.ENUM
         WEITERE_MALO_BETROFFEN,
 
         /// <summary>
-        /// Ein Verhinderungsgrund liegt vor und wird in <see cref="Auftrag.Bemerkung"/> genauer spezifiziert.
+        /// Ein Verhinderungsgrund liegt vor und wird in <see cref="BO.Auftrag.Bemerkung"/> genauer spezifiziert.
         /// </summary>
         /// <remarks>EBD 0470 A05</remarks>
         ANDERER_VERHINDERUNGSGRUND,
@@ -51,9 +51,8 @@ namespace BO4E.ENUM
         /// <remarks>EBD 0470 A07</remarks>
         FRISTVERLETZUNG_NICHT_TERMINGEBUNDEN,
 
-
         /// <summary>
-        /// Ein Fehler liegt vor und wird in <see cref="Auftrag.Bemerkung"/> genauer spezifiziert.
+        /// Ein Fehler liegt vor und wird in <see cref="BO.Auftrag.Bemerkung"/> genauer spezifiziert.
         /// </summary>
         /// <remarks>EBD 0470 A99</remarks>
         ANDERER_FEHLER
