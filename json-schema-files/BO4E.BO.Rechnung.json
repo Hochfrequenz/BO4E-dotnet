@@ -1060,7 +1060,16 @@
       "properties": {
         "steuerkennzeichen": {
           "type": "string",
-          "enum": ["UST_19", "UST_7", "VST_0", "VST_19", "VST_7", "RCV"]
+          "enum": [
+            "UST_19",
+            "UST_16",
+            "UST_7",
+            "VST_0",
+            "VST_19",
+            "VST_16",
+            "VST_7",
+            "RCV"
+          ]
         },
         "basiswert": {
           "type": "number"
@@ -1254,6 +1263,12 @@
             "ZWL"
           ]
         },
+        "basiswertVorausgezahlt": {
+          "type": ["number", "null"]
+        },
+        "steuerwertVorausgezahlt": {
+          "type": ["number", "null"]
+        },
         "guid": {
           "type": ["string", "null"]
         },
@@ -1356,7 +1371,9 @@
         "ZWISCHENRECHNUNG",
         "INTEGRIERTE_13TE_RECHNUNG",
         "ZUSAETZLICHE_13TE_RECHNUNG",
-        "MEHRMINDERMENGENRECHNUNG"
+        "MEHRMINDERMENGENRECHNUNG",
+        "ABSCHLUSSRECHNUNG",
+        "MSBRECHNUNG"
       ]
     },
     "originalRechnungsnummer": {

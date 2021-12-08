@@ -1,13 +1,16 @@
-﻿using System;
+﻿using BO4E.COM;
+using BO4E.ENUM;
+using BO4E.meta;
+
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
+
+using ProtoBuf;
+
+using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Text.Json.Serialization;
-using BO4E.COM;
-using BO4E.ENUM;
-using BO4E.meta;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
-using ProtoBuf;
 
 namespace BO4E.BO
 {
@@ -499,5 +502,6 @@ namespace BO4E.BO
         [JsonPropertyName("rechnungspositionen")]
         [FieldName("invoiceItemList", Language.EN)]
         public List<Rechnungsposition> Rechnungspositionen { get; set; }
+
     }
 }

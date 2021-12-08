@@ -8,7 +8,7 @@
     <Product>BO4E .net core bindings</Product>
     <RepositoryUrl>https://github.com/Hochfrequenz/BO4E-dotnet/</RepositoryUrl>
 
-    <VersionPrefix>0.2.11</VersionPrefix>
+    <VersionPrefix>0.2.19</VersionPrefix>
     
     <AssemblyName>BO4Enet</AssemblyName>
     <GeneratePackageOnBuild>false</GeneratePackageOnBuild>
