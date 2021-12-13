@@ -60,7 +60,7 @@ namespace BO4E.BO
         /// Die Sparte in der der Auftrag relevant ist
         /// </summary>
         [JsonProperty("sparte", Required = Required.Default)]
-        [JsonPropertyName("spate")]
+        [JsonPropertyName("sparte")]
         public ENUM.Sparte? Sparte { get; set; }
 
         /// <summary>

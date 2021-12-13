@@ -1200,8 +1200,42 @@ enum Sparte {
    Sparte_WASSER = 4;
    Sparte_ABWASSER = 5;
 }
+enum Status {
+   option (.protobuf_net.enumopt).namespace = "BO4E.ENUM";
+   TARIF_1 = 0;
+   TARIF_2 = 1;
+   TARIF_3 = 2;
+   TARIF_4 = 3;
+   TARIF_5 = 4;
+   TARIF_6 = 5;
+   TARIF_7 = 6;
+   TARIF_8 = 7;
+   TARIF_9 = 8;
+   ZAEHLERSTAND_ZUM_BEGINN_DER_ANGEGEBENEN_ENERGIEMENGE_VORHANDEN_UND_KOMMUNIZIERT = 9;
+   ZAEHLERSTAND_ZUM_ENDE_DER_ANGEGEBENEN_ENERGIEMENGE_VORHANDEN_UND_KOMMUNIZIERT = 10;
+   ZAEHLERSTAND_ZUM_BEGINN_DER_ANGEGEBENEN_ENERGIEMENGE_NICHT_VORHANDEN_DA = 11;
+   ZAEHLERSTAND_ZUM_ENDE_DER_ANGEGEBENEN_ENERGIEMENGE_NICHT_VORHANDEN_DA_MENGENABGRENZUNG = 12;
+   KUNDENSELBSTABLESUNG = 13;
+   LEERSTAND = 14;
+   REALER_ZAEHLERUEBERLAUF_GEPRUEFT = 15;
+   PLAUSIBEL_WG_KONTROLLABLESUNG = 16;
+   PLAUSIBEL_WG_KUNDENHINWIES = 17;
+   AUSTAUSCH_DES_ERSATZWERTES = 18;
+}
+enum StatusArt {
+   option (.protobuf_net.enumopt).namespace = "BO4E.ENUM";
+   VERTRAG = 0;
+   MESSWERTQUALITAET = 1;
+   MESSKLASSIFIZIERUNG = 2;
+   PLAUSIBILISIERUNGSHINWEIS = 3;
+   ERSATZWERTBILDUNGSVERFAHREN = 4;
+   KORREKTURGRUND = 5;
+   GASQUALITAET = 6;
+}
 message StatusZusatzInformation {
    option (.protobuf_net.msgopt).namespace = "BO4E.COM";
+   StatusArt Art = 1;
+   Status Status = 2;
 }
 message Steuerbetrag {
    option (.protobuf_net.msgopt).namespace = "BO4E.COM";
@@ -1264,7 +1298,7 @@ message Verbrauch {
    Mengeneinheit Einheit = 8;
    Verbrauchsmengetyp Type = 9;
    WertMengeArt WertMengeArt = 10;
-   repeated StatusZusatzInformation StausZusatzInformationen = 11;
+   repeated StatusZusatzInformation StatusZusatzInformationen = 11;
 }
 enum Verbrauchsart {
    option (.protobuf_net.enumopt).namespace = "BO4E.ENUM";

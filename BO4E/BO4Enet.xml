@@ -1721,9 +1721,14 @@
             <see cref="T:BO4E.ENUM.Sperrauftragsstatus"/>
             </summary>
         </member>
-        <member name="F:BO4E.BO.Sperrauftrag.Sperrauftragsablehnungsgrund">
+        <member name="P:BO4E.BO.Sperrauftrag.Sperrauftragsablehnungsgrund">
             <summary>
             Falls <see cref="P:BO4E.BO.Sperrauftrag.Sperrauftragsstatus"/> = <see cref="F:BO4E.ENUM.Sperrauftragsstatus.ABGELEHNT"/>
+            </summary>
+        </member>
+        <member name="P:BO4E.BO.Sperrauftrag.Sperrauftragsverhinderungsgrund">
+            <summary>
+            Falls <see cref="P:BO4E.BO.Sperrauftrag.Sperrauftragsstatus"/> = <see cref="F:BO4E.ENUM.Sperrauftragsstatus.GESCHEITERT"/>
             </summary>
         </member>
         <member name="P:BO4E.BO.Sperrauftrag.Zaehlernummer">
@@ -7860,6 +7865,51 @@
             Die (Ent)sperrung wurde zugestimmmt (aber noch nicht durchgeführt)
             </summary>
             <remarks>EDIFACT DE4405: Z30</remarks>
+        </member>
+        <member name="T:BO4E.ENUM.Sperrauftragsverhinderungsgrund">
+            <summary>
+            Gründe aus denen ein <see cref="T:BO4E.BO.Sperrauftrag"/> nicht durchgeführt wird/wurde.
+            </summary>
+            <remarks>Diese Information kann in der EDIFACT-Nachricht des Typs 21039 verwendet werden</remarks>
+        </member>
+        <member name="F:BO4E.ENUM.Sperrauftragsverhinderungsgrund.RECHTLICHER_GRUND_FEHLT">
+            <summary>
+            Eine Sperrung ist aus rechtlichen Gründen nicht möglich
+            </summary>
+            <remarks>EBD 0472 A01</remarks>
+        </member>
+        <member name="F:BO4E.ENUM.Sperrauftragsverhinderungsgrund.AKTIVE_ZUTRITTSVERWEIGERUNG">
+            <summary>
+            Es lag eine aktive Zutrittsverweigerung vor
+            </summary>
+            <remarks>EBD 0472 A02</remarks>
+        </member>
+        <member name="F:BO4E.ENUM.Sperrauftragsverhinderungsgrund.PASSIVE_ZUTRITTSVERWEIGERUNG">
+            <summary>
+            Es lag eine passive Zutrittsverweigerung vor
+            </summary>
+            <remarks>EBD 0472 A03</remarks>
+        </member>
+        <member name="F:BO4E.ENUM.Sperrauftragsverhinderungsgrund.ANDERER_VERHINDERUNGSGRUND">
+            <summary>
+            Anderer Verhinderungsgrund (z.B. Betrieb lebensnotwendiger Geräte)
+            Details werden im Freitext <see cref="P:BO4E.BO.Auftrag.Bemerkung"/> vermerkt.
+            </summary>
+            <remarks>EBD 0472 A04</remarks>
+        </member>
+        <member name="F:BO4E.ENUM.Sperrauftragsverhinderungsgrund.TATSAECHLICHER_VERHINDERUNGSGRUND">
+            <summary>
+            Ein tatsächlicher Verhinderungsgrund liegt vor, wenn z.B. die MaLo nicht identifizierbar, der Zugang nicht möglich war oder ein Kundenwechsel festgestellt wurde
+            Details werden im Freitext <see cref="P:BO4E.BO.Auftrag.Bemerkung"/> vermerkt.        
+            </summary>
+            <remarks>EBD 0472 A05</remarks>
+        </member>
+        <member name="F:BO4E.ENUM.Sperrauftragsverhinderungsgrund.TECHNISCHER_VERHINDERUNGSGRUND">
+            <summary>
+            Ein technischer Grund (z.B. andere betroffene MaLo) hat das Sperren verhindert.
+            Details werden im Freitext <see cref="P:BO4E.BO.Auftrag.Bemerkung"/> vermerkt.
+            </summary>
+            <remarks>EBD 0472 A06</remarks>
         </member>
         <member name="T:BO4E.ENUM.Sperrstatus">
             <summary>

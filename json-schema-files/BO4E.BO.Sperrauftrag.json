@@ -2,7 +2,10 @@
   "$schema": "http://json-schema.org/draft-07/schema#",
   "definitions": {
     "Adresse": {
-      "type": ["object", "null"],
+      "type": [
+        "object",
+        "null"
+      ],
       "properties": {
         "postleitzahl": {
           "type": "string"
@@ -11,22 +14,40 @@
           "type": "string"
         },
         "strasse": {
-          "type": ["string", "null"]
+          "type": [
+            "string",
+            "null"
+          ]
         },
         "hausnummer": {
-          "type": ["string", "null"]
+          "type": [
+            "string",
+            "null"
+          ]
         },
         "postfach": {
-          "type": ["string", "null"]
+          "type": [
+            "string",
+            "null"
+          ]
         },
         "adresszusatz": {
-          "type": ["string", "null"]
+          "type": [
+            "string",
+            "null"
+          ]
         },
         "coErgaenzung": {
-          "type": ["string", "null"]
+          "type": [
+            "string",
+            "null"
+          ]
         },
         "landescode": {
-          "type": ["string", "null"],
+          "type": [
+            "string",
+            "null"
+          ],
           "enum": [
             null,
             "AC",
@@ -299,421 +320,29 @@
           ]
         },
         "guid": {
-          "type": ["string", "null"]
-        },
-        "timestamp": {
-          "type": ["string", "null"],
-          "format": "date-time"
-        }
-      },
-      "required": ["postleitzahl", "ort"]
-    },
-    "Betrag": {
-      "type": ["object", "null"],
-      "properties": {
-        "wert": {
-          "type": "number"
-        },
-        "waehrung": {
-          "type": "string",
-          "enum": [
-            "AFN",
-            "ALL",
-            "AMD",
-            "ANG",
-            "AOA",
-            "ARS",
-            "AUD",
-            "AWG",
-            "AZN",
-            "BAM",
-            "BBD",
-            "BDT",
-            "BGN",
-            "BHD",
-            "BIF",
-            "BMD",
-            "BND",
-            "BOB",
-            "BOV",
-            "BRL",
-            "BSD",
-            "BTN",
-            "BWP",
-            "BYN",
-            "BYR",
-            "BZD",
-            "CAD",
-            "CDF",
-            "CHE",
-            "CHF",
-            "CHW",
-            "CLF",
-            "CLP",
-            "CNY",
-            "COP",
-            "COU",
-            "CRC",
-            "CUC",
-            "CUP",
-            "CVE",
-            "CZK",
-            "DJF",
-            "DKK",
-            "DOP",
-            "DZD",
-            "EGP",
-            "ERN",
-            "ETB",
-            "EUR",
-            "FJD",
-            "FKP",
-            "GBP",
-            "GEL",
-            "GHS",
-            "GIP",
-            "GMD",
-            "GNF",
-            "GTQ",
-            "GYD",
-            "HKD",
-            "HNL",
-            "HRK",
-            "HTG",
-            "HUF",
-            "IDR",
-            "ILS",
-            "INR",
-            "IQD",
-            "IRR",
-            "ISK",
-            "JMD",
-            "JOD",
-            "JPY",
-            "KES",
-            "KGS",
-            "KHR",
-            "KMF",
-            "KPW",
-            "KRW",
-            "KWD",
-            "KYD",
-            "KZT",
-            "LAK",
-            "LBP",
-            "LKR",
-            "LRD",
-            "LSL",
-            "LTL",
-            "LYD",
-            "MAD",
-            "MDL",
-            "MGA",
-            "MKD",
-            "MMK",
-            "MNT",
-            "MOP",
-            "MRO",
-            "MUR",
-            "MVR",
-            "MWK",
-            "MXN",
-            "MXV",
-            "MYR",
-            "MZN",
-            "NAD",
-            "NGN",
-            "NIO",
-            "NOK",
-            "NPR",
-            "NZD",
-            "OMR",
-            "PAB",
-            "PEN",
-            "PGK",
-            "PHP",
-            "PKR",
-            "PLN",
-            "PYG",
-            "QAR",
-            "RON",
-            "RSD",
-            "RUB",
-            "RUR",
-            "RWF",
-            "SAR",
-            "SBD",
-            "SCR",
-            "SDG",
-            "SEK",
-            "SGD",
-            "SHP",
-            "SLL",
-            "SOS",
-            "SRD",
-            "SSP",
-            "STD",
-            "SVC",
-            "SYP",
-            "SZL",
-            "THB",
-            "TJS",
-            "TMT",
-            "TND",
-            "TOP",
-            "TRY",
-            "TTD",
-            "TWD",
-            "TZS",
-            "UAH",
-            "UGX",
-            "USD",
-            "USN",
-            "USS",
-            "UYI",
-            "UYU",
-            "UZS",
-            "VEF",
-            "VND",
-            "VUV",
-            "WST",
-            "XAF",
-            "XAG",
-            "XAU",
-            "XBA",
-            "XBB",
-            "XBC",
-            "XBD",
-            "XCD",
-            "XDR",
-            "XOF",
-            "XPD",
-            "XPF",
-            "XPT",
-            "XSU",
-            "XTS",
-            "XUA",
-            "XXX",
-            "YER",
-            "ZAR",
-            "ZMW",
-            "ZWL"
+          "type": [
+            "string",
+            "null"
           ]
         },
-        "guid": {
-          "type": ["string", "null"]
-        },
         "timestamp": {
-          "type": ["string", "null"],
+          "type": [
+            "string",
+            "null"
+          ],
           "format": "date-time"
         }
       },
-      "required": ["wert", "waehrung"]
-    },
-    "Betrag-1": {
-      "type": "object",
-      "properties": {
-        "wert": {
-          "type": "number"
-        },
-        "waehrung": {
-          "type": "string",
-          "enum": [
-            "AFN",
-            "ALL",
-            "AMD",
-            "ANG",
-            "AOA",
-            "ARS",
-            "AUD",
-            "AWG",
-            "AZN",
-            "BAM",
-            "BBD",
-            "BDT",
-            "BGN",
-            "BHD",
-            "BIF",
-            "BMD",
-            "BND",
-            "BOB",
-            "BOV",
-            "BRL",
-            "BSD",
-            "BTN",
-            "BWP",
-            "BYN",
-            "BYR",
-            "BZD",
-            "CAD",
-            "CDF",
-            "CHE",
-            "CHF",
-            "CHW",
-            "CLF",
-            "CLP",
-            "CNY",
-            "COP",
-            "COU",
-            "CRC",
-            "CUC",
-            "CUP",
-            "CVE",
-            "CZK",
-            "DJF",
-            "DKK",
-            "DOP",
-            "DZD",
-            "EGP",
-            "ERN",
-            "ETB",
-            "EUR",
-            "FJD",
-            "FKP",
-            "GBP",
-            "GEL",
-            "GHS",
-            "GIP",
-            "GMD",
-            "GNF",
-            "GTQ",
-            "GYD",
-            "HKD",
-            "HNL",
-            "HRK",
-            "HTG",
-            "HUF",
-            "IDR",
-            "ILS",
-            "INR",
-            "IQD",
-            "IRR",
-            "ISK",
-            "JMD",
-            "JOD",
-            "JPY",
-            "KES",
-            "KGS",
-            "KHR",
-            "KMF",
-            "KPW",
-            "KRW",
-            "KWD",
-            "KYD",
-            "KZT",
-            "LAK",
-            "LBP",
-            "LKR",
-            "LRD",
-            "LSL",
-            "LTL",
-            "LYD",
-            "MAD",
-            "MDL",
-            "MGA",
-            "MKD",
-            "MMK",
-            "MNT",
-            "MOP",
-            "MRO",
-            "MUR",
-            "MVR",
-            "MWK",
-            "MXN",
-            "MXV",
-            "MYR",
-            "MZN",
-            "NAD",
-            "NGN",
-            "NIO",
-            "NOK",
-            "NPR",
-            "NZD",
-            "OMR",
-            "PAB",
-            "PEN",
-            "PGK",
-            "PHP",
-            "PKR",
-            "PLN",
-            "PYG",
-            "QAR",
-            "RON",
-            "RSD",
-            "RUB",
-            "RUR",
-            "RWF",
-            "SAR",
-            "SBD",
-            "SCR",
-            "SDG",
-            "SEK",
-            "SGD",
-            "SHP",
-            "SLL",
-            "SOS",
-            "SRD",
-            "SSP",
-            "STD",
-            "SVC",
-            "SYP",
-            "SZL",
-            "THB",
-            "TJS",
-            "TMT",
-            "TND",
-            "TOP",
-            "TRY",
-            "TTD",
-            "TWD",
-            "TZS",
-            "UAH",
-            "UGX",
-            "USD",
-            "USN",
-            "USS",
-            "UYI",
-            "UYU",
-            "UZS",
-            "VEF",
-            "VND",
-            "VUV",
-            "WST",
-            "XAF",
-            "XAG",
-            "XAU",
-            "XBA",
-            "XBB",
-            "XBC",
-            "XBD",
-            "XCD",
-            "XDR",
-            "XOF",
-            "XPD",
-            "XPF",
-            "XPT",
-            "XSU",
-            "XTS",
-            "XUA",
-            "XXX",
-            "YER",
-            "ZAR",
-            "ZMW",
-            "ZWL"
-          ]
-        },
-        "guid": {
-          "type": ["string", "null"]
-        },
-        "timestamp": {
-          "type": ["string", "null"],
-          "format": "date-time"
-        }
-      },
-      "required": ["wert", "waehrung"]
+      "required": [
+        "postleitzahl",
+        "ort"
+      ]
     },
     "ExterneReferenz": {
-      "type": ["object", "null"],
+      "type": [
+        "object",
+        "null"
+      ],
       "properties": {
         "exRefName": {
           "type": "string"
@@ -722,185 +351,39 @@
           "type": "string"
         },
         "guid": {
-          "type": ["string", "null"]
+          "type": [
+            "string",
+            "null"
+          ]
         },
         "timestamp": {
-          "type": ["string", "null"],
-          "format": "date-time"
-        }
-      },
-      "required": ["exRefName", "exRefWert"]
-    },
-    "Kosten": {
-      "type": ["object", "null"],
-      "properties": {
-        "externeReferenzen": {
-          "type": ["array", "null"],
-          "items": {
-            "$ref": "#/definitions/ExterneReferenz"
-          }
-        },
-        "guid": {
-          "type": ["string", "null"]
-        },
-        "boTyp": {
-          "type": ["string", "null"]
-        },
-        "versionStruktur": {
-          "type": ["string", "null"]
-        },
-        "timestamp": {
-          "type": ["string", "null"],
-          "format": "date-time"
-        },
-        "kostenklasse": {
-          "type": "string",
-          "enum": ["ZERO"]
-        },
-        "gueltigkeit": {
-          "$ref": "#/definitions/Zeitraum"
-        },
-        "summeKosten": {
-          "type": ["array", "null"],
-          "items": {
-            "$ref": "#/definitions/Betrag"
-          }
-        },
-        "kostenbloecke": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/Kostenblock"
-          },
-          "minItems": 1
-        },
-        "kostenpositionen": {
-          "type": ["array", "null"],
-          "items": {
-            "$ref": "#/definitions/Kostenposition"
-          }
-        }
-      },
-      "required": ["kostenklasse", "gueltigkeit", "kostenbloecke"]
-    },
-    "Kostenblock": {
-      "type": ["object", "null"],
-      "properties": {
-        "kostenblockbezeichnung": {
-          "type": "string"
-        },
-        "summeKostenblock": {
-          "$ref": "#/definitions/Betrag"
-        },
-        "kostenpositionen": {
-          "type": ["array", "null"],
-          "items": {
-            "$ref": "#/definitions/Kostenposition"
-          }
-        },
-        "guid": {
-          "type": ["string", "null"]
-        },
-        "timestamp": {
-          "type": ["string", "null"],
-          "format": "date-time"
-        }
-      },
-      "required": ["kostenblockbezeichnung"]
-    },
-    "Kostenposition": {
-      "type": ["object", "null"],
-      "properties": {
-        "positionstitel": {
-          "type": "string"
-        },
-        "von": {
-          "type": ["string", "null"],
-          "format": "date-time"
-        },
-        "bis": {
-          "type": ["string", "null"],
-          "format": "date-time"
-        },
-        "artikelbezeichnung": {
-          "type": "string"
-        },
-        "artikeldetail": {
-          "type": ["string", "null"]
-        },
-        "menge": {
-          "$ref": "#/definitions/Menge"
-        },
-        "zeitmenge": {
-          "$ref": "#/definitions/Menge"
-        },
-        "einzelpreis": {
-          "$ref": "#/definitions/Preis"
-        },
-        "betragKostenposition": {
-          "$ref": "#/definitions/Betrag-1"
-        },
-        "guid": {
-          "type": ["string", "null"]
-        },
-        "timestamp": {
-          "type": ["string", "null"],
+          "type": [
+            "string",
+            "null"
+          ],
           "format": "date-time"
         }
       },
       "required": [
-        "positionstitel",
-        "artikelbezeichnung",
-        "einzelpreis",
-        "betragKostenposition"
+        "exRefName",
+        "exRefWert"
       ]
     },
-    "Menge": {
-      "type": ["object", "null"],
-      "properties": {
-        "wert": {
-          "type": "number"
-        },
-        "einheit": {
-          "type": ["string", "null"],
-          "enum": [
-            null,
-            "ZERO",
-            "WH",
-            "KW",
-            "ANZAHL",
-            "KUBIKMETER",
-            "STUNDE",
-            "TAG",
-            "MONAT",
-            "VAR",
-            "VARH",
-            "JAHR",
-            "KWH",
-            "MW",
-            "KVAR",
-            "KVARH",
-            "MWH"
-          ]
-        },
-        "guid": {
-          "type": ["string", "null"]
-        },
-        "timestamp": {
-          "type": ["string", "null"],
-          "format": "date-time"
-        }
-      },
-      "required": ["wert"]
-    },
     "Preis": {
-      "type": "object",
+      "type": [
+        "object",
+        "null"
+      ],
       "properties": {
         "wert": {
           "type": "number"
         },
         "einheit": {
           "type": "string",
-          "enum": ["EUR", "CT"]
+          "enum": [
+            "EUR",
+            "CT"
+          ]
         },
         "bezugswert": {
           "type": "string",
@@ -924,67 +407,51 @@
           ]
         },
         "status": {
-          "type": ["string", "null"],
-          "enum": [null, "VORLAEUFIG", "ENDGUELTIG"]
+          "type": [
+            "string",
+            "null"
+          ],
+          "enum": [
+            null,
+            "VORLAEUFIG",
+            "ENDGUELTIG"
+          ]
         },
         "guid": {
-          "type": ["string", "null"]
+          "type": [
+            "string",
+            "null"
+          ]
         },
         "timestamp": {
-          "type": ["string", "null"],
+          "type": [
+            "string",
+            "null"
+          ],
           "format": "date-time"
         }
       },
-      "required": ["wert", "einheit", "bezugswert"]
-    },
-    "Zeitraum": {
-      "type": "object",
-      "properties": {
-        "einheit": {
-          "type": ["string", "null"],
-          "enum": [
-            null,
-            "SEKUNDE",
-            "MINUTE",
-            "STUNDE",
-            "VIERTEL_STUNDE",
-            "TAG",
-            "WOCHE",
-            "MONAT",
-            "QUARTAL",
-            "HALBJAHR",
-            "JAHR"
-          ]
-        },
-        "dauer": {
-          "type": ["number", "null"]
-        },
-        "startdatum": {
-          "type": ["string", "null"],
-          "format": "date-time"
-        },
-        "enddatum": {
-          "type": ["string", "null"],
-          "format": "date-time"
-        },
-        "guid": {
-          "type": ["string", "null"]
-        },
-        "timestamp": {
-          "type": ["string", "null"],
-          "format": "date-time"
-        }
-      }
+      "required": [
+        "wert",
+        "einheit",
+        "bezugswert"
+      ]
     }
   },
   "type": "object",
   "properties": {
     "sperrauftragsart": {
       "type": "string",
-      "enum": ["SPERREN", "ENTSPERREN"]
+      "enum": [
+        "SPERREN",
+        "ENTSPERREN"
+      ]
     },
     "sperrauftragsstatus": {
-      "type": ["string", "null"],
+      "type": [
+        "string",
+        "null"
+      ],
       "enum": [
         null,
         "ERFOLGREICH",
@@ -992,6 +459,44 @@
         "GESCHEITERT",
         "GEPLANT",
         "ZUGESTIMMT"
+      ]
+    },
+    "sperrauftragsablehngrund": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "enum": [
+        null,
+        "DUPLIKAT",
+        "FALSCHER_MSB",
+        "FALSCHE_SPANNUNGSEBENE",
+        "WEITERE_MALO_BETROFFEN",
+        "ANDERER_VERHINDERUNGSGRUND",
+        "FRISTVERLETZUNG_TERMINGEBUNDEN",
+        "FRISTVERLETZUNG_NICHT_TERMINGEBUNDEN",
+        "ANDERER_FEHLER"
+      ]
+    },
+    "sperrauftragsverhinderungsgrund": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "enum": [
+        null,
+        "RECHTLICHER_GRUND_FEHLT",
+        "AKTIVE_ZUTRITTSVERWEIGERUNG",
+        "PASSIVE_ZUTRITTSVERWEIGERUNG",
+        "ANDERER_VERHINDERUNGSGRUND",
+        "TATSAECHLICHER_VERHINDERUNGSGRUND",
+        "TECHNISCHER_VERHINDERUNGSGRUND"
+      ]
+    },
+    "zaehlernummer": {
+      "type": [
+        "string",
+        "null"
       ]
     },
     "istVomGerichtsvollzieherAngeordnet": {
@@ -1005,6 +510,21 @@
       "type": "string",
       "format": "date-time"
     },
+    "sparte": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "enum": [
+        null,
+        "STROM",
+        "GAS",
+        "FERNWAERME",
+        "NAHWAERME",
+        "WASSER",
+        "ABWASSER"
+      ]
+    },
     "lieferanschrift": {
       "$ref": "#/definitions/Adresse"
     },
@@ -1012,31 +532,49 @@
       "type": "string"
     },
     "bemerkung": {
-      "type": ["string", "null"]
+      "type": [
+        "string",
+        "null"
+      ]
     },
     "mindestkosten": {
-      "$ref": "#/definitions/Kosten"
+      "$ref": "#/definitions/Preis"
     },
     "hoechstkosten": {
-      "$ref": "#/definitions/Kosten"
+      "$ref": "#/definitions/Preis"
     },
     "externeReferenzen": {
-      "type": ["array", "null"],
+      "type": [
+        "array",
+        "null"
+      ],
       "items": {
         "$ref": "#/definitions/ExterneReferenz"
       }
     },
     "guid": {
-      "type": ["string", "null"]
+      "type": [
+        "string",
+        "null"
+      ]
     },
     "boTyp": {
-      "type": ["string", "null"]
+      "type": [
+        "string",
+        "null"
+      ]
     },
     "versionStruktur": {
-      "type": ["string", "null"]
+      "type": [
+        "string",
+        "null"
+      ]
     },
     "timestamp": {
-      "type": ["string", "null"],
+      "type": [
+        "string",
+        "null"
+      ],
       "format": "date-time"
     }
   },

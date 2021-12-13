@@ -37,7 +37,22 @@ namespace BO4E.BO
         /// </summary>
         [JsonProperty("sperrauftragsablehngrund", Required = Required.Default)]
         [JsonPropertyName("sperrauftragsablehngrund")]
-        public Sperrauftragsablehngrund? Sperrauftragsablehnungsgrund;
+        public Sperrauftragsablehngrund? Sperrauftragsablehnungsgrund { get; set; }
+
+        /// <summary>
+        /// Falls <see cref="Sperrauftragsstatus"/> = <see cref="ENUM.Sperrauftragsstatus.GESCHEITERT"/>
+        /// </summary>
+        [JsonProperty("sperrauftragsverhinderungsgrund", Required = Required.Default)]
+        [JsonPropertyName("sperrauftragsverhinderungsgrund")]
+        public Sperrauftragsverhinderungsgrund? Sperrauftragsverhinderungsgrund { get; set; }
+
+
+        /*
+        /// <summary>
+        /// True, falls der Netzbetreiber die Ansicht des MSB teilt, dass sich gesperrt werden darf.
+        /// </summary>
+        public bool? NetzbetreiberTeiltClearingEntscheidungDesMsb { get; set; }
+        */
 
         /// <summary>
         /// Die Nummer des zu sperrenden Zählers

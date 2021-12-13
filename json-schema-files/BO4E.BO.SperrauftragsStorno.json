@@ -35,6 +35,16 @@
   },
   "type": "object",
   "properties": {
+    "originalSperrauftragsart": {
+      "type": "string",
+      "enum": [
+        "SPERREN",
+        "ENTSPERREN"
+      ]
+    },
+    "auftragsId": {
+      "type": "string"
+    },
     "externeReferenzen": {
       "type": [
         "array",
@@ -68,21 +78,10 @@
         "null"
       ],
       "format": "date-time"
-    },
-    "id": {
-      "type": "string"
-    },
-    "DateTime": {
-      "type": "string",
-      "format": "date-time"
-    },
-    "logMessage": {
-      "type": "string"
     }
   },
   "required": [
-    "id",
-    "DateTime",
-    "logMessage"
+    "originalSperrauftragsart",
+    "auftragsId"
   ]
 }
