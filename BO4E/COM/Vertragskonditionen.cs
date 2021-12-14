@@ -147,6 +147,17 @@ namespace BO4E.COM
         [ProtoMember(1018)]
         public Netznutzungsabrechnungsgrundlage? Netznutzungsabrechnungsgrundlage { get; set; }
 
+        /// <summary>
+        ///     Singulär genutzte Betriebsmittel in der Netznutzungsabrechnung für EDIFACT mapping
+        ///     Hier wird angegeben, ob in der Netznutzungsabrechnung der verbrauchenden Marktlokation singulär 
+        ///     genutzte Betriebsmittel abgerechnet werden.
+        /// </summary>
+        [JsonProperty(PropertyName = "singulaerGenutzteBetriebsmittel", Required = Required.Default)]
+        [JsonPropertyName("singulaerGenutzteBetriebsmittel")]
+        [NonOfficial(NonOfficialCategory.CUSTOMER_REQUIREMENTS)]
+        [ProtoMember(1019)]
+        public bool? SingulaerGenutzteBetriebsmittel { get; set; }
+
 #pragma warning restore CS1591 // Missing XML comment for publicly visible type or member
     }
 }
