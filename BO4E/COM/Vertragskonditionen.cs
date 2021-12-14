@@ -153,11 +153,11 @@ namespace BO4E.COM
         ///     genutzte Betriebsmittel abgerechnet werden.
         /// </summary>
         /// <remarks>für EDIFACT mapping</remarks>
-        [JsonProperty(PropertyName = "singulaerGenutzteBetriebsmittel", Required = Required.Default)]
-        [JsonPropertyName("singulaerGenutzteBetriebsmittel")]
+        [JsonProperty(PropertyName = "beinhaltetSingulaerGenutzteBetriebsmittel", Required = Required.Default)]
+        [JsonPropertyName("beinhaltetSingulaerGenutzteBetriebsmittel")]
         [NonOfficial(NonOfficialCategory.CUSTOMER_REQUIREMENTS)]
         [ProtoMember(1019)]
-        public bool? SingulaerGenutzteBetriebsmittel { get; set; }
+        public bool? BeinhaltetSingulaerGenutzteBetriebsmittel { get; set; }
 
 #pragma warning restore CS1591 // Missing XML comment for publicly visible type or member
     }
