@@ -152,6 +152,7 @@ In the folder [BO4E-dotnet/protobuf-files](BO4E-dotnet/protobuf-files) you can f
 - [Golang](https://github.com/Hochfrequenz/go-bo4e/)
 - [Kotlin](https://github.com/openEnWi/ktBO4E-lib)
 - [Python](https://github.com/Hochfrequenz/BO4E-python/)
+- [TypeScript](https://github.com/openEnWi/tsBO4E-lib)
 
 ## Contributing
 
