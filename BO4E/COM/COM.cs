@@ -1,12 +1,15 @@
+using BO4E.BO;
+using BO4E.meta;
+
+using Newtonsoft.Json;
+
+using ProtoBuf;
+
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text.Json.Serialization;
-using BO4E.BO;
-using BO4E.meta;
-using Newtonsoft.Json;
-using ProtoBuf;
 
 namespace BO4E.COM
 {
@@ -162,7 +165,7 @@ namespace BO4E.COM
         }
 
         /// <inheritdoc cref="BO4E.BO.BusinessObject.IsValid" />
-        public bool IsValid()
+        public virtual bool IsValid()
         {
             try
             {

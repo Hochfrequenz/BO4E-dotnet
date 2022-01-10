@@ -36,6 +36,14 @@ namespace BO4E.COM
         [JsonPropertyName("exRefWert")]
         [ProtoMember(2)]
         public string ExRefWert { get; set; }
+        /// <summary>
+        /// Ist das Objekt valide
+        /// </summary>
+        /// <returns></returns>
+        public override bool IsValid()
+        {
+            return !string.IsNullOrWhiteSpace(ExRefName) && !string.IsNullOrWhiteSpace(ExRefWert);
+        }
     }
 
     /// <summary>
@@ -111,4 +119,5 @@ namespace BO4E.COM
             return extReferences;
         }
     }
+
 }
