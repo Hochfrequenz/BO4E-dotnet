@@ -43,6 +43,7 @@ namespace BO4E.BO
     [ProtoInclude(13, typeof(Vertrag))]
     [ProtoInclude(14, typeof(Zaehler))]
     [ProtoInclude(15, typeof(LogObject.LogObject))]
+    [ProtoInclude(16, typeof(Bilanzierung))]
     public abstract class BusinessObject : IEquatable<BusinessObject>, IUserProperties, IOptionalGuid
     {
         /// <summary>
