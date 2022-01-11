@@ -3,7 +3,7 @@
   <PropertyGroup>
     <TargetFramework>net5.0</TargetFramework>
     <RootNamespace>BO4E_dotnet.Encryption</RootNamespace>
-	<VersionPrefix>0.4.1</VersionPrefix>
+	<VersionPrefix>0.4.2</VersionPrefix>
 	<VersionSuffix>$(VersionSuffix)</VersionSuffix>
 	<PackageLicenseFile>LICENSE.txt</PackageLicenseFile>
     <PackageProjectUrl>https://github.com/HFInnovation/BO4E-dotnet</PackageProjectUrl>
