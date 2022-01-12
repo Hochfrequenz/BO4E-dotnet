@@ -1,15 +1,19 @@
-﻿using System;
+﻿using BO4E.COM;
+using BO4E.ENUM;
+using BO4E.meta;
+using BO4E.meta.LenientConverters;
+
+using Newtonsoft.Json;
+
+using ProtoBuf;
+
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.Serialization;
 using System.Text.Json;
 using System.Text.Json.Serialization;
-using BO4E.COM;
-using BO4E.ENUM;
-using BO4E.meta;
-using BO4E.meta.LenientConverters;
-using Newtonsoft.Json;
-using ProtoBuf;
+
 using JsonSerializer = System.Text.Json.JsonSerializer;
 
 namespace BO4E.BO
@@ -30,6 +34,8 @@ namespace BO4E.BO
         static Vertrag()
         {
             VertragsSerializerOptions = LenientParsing.MOST_LENIENT.GetJsonSerializerOptions();
+            VertragsSerializerOptions.DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingDefault;
+            VertragsSerializerOptions.WriteIndented = true;
             VertragsSerializerOptions.Converters.Remove(
                 VertragsSerializerOptions.Converters.First(s => s.GetType() == typeof(VertragsConverter)));
         }
