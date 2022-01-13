@@ -229,7 +229,7 @@ namespace BO4E.BO
         /// <param name="options"></param>
         public override void Write(Utf8JsonWriter writer, Vertrag value, JsonSerializerOptions options)
         {
-            JsonSerializer.Serialize(writer, value);
+            JsonSerializer.Serialize(writer, value, Vertrag.VertragsSerializerOptions);
         }
     }
 }
