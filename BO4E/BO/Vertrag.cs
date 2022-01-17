@@ -38,6 +38,7 @@ namespace BO4E.BO
             VertragsSerializerOptions.WriteIndented = true;
             VertragsSerializerOptions.Converters.Remove(
                 VertragsSerializerOptions.Converters.First(s => s.GetType() == typeof(VertragsConverter)));
+            VertragsSerializerOptions.Converters.Add(new JsonStringEnumConverter());
         }
 
         /// <summary>
