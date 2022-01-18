@@ -6,7 +6,7 @@ namespace BO4E.ENUM
     /// Gibt auskunft über die Gültigkeit des angegebenen Verbrauchswertes. Bildet MSCONS SG10 QTY 6063 ab. 
     /// </summary>
     [NonOfficial(NonOfficialCategory.UNSPECIFIED)]
-    public enum WertStatus
+    public enum WertMengeArt
     {
         /// <summary> Wahrer Wert: 220 </summary>
         WAHRER_WERT,
@@ -15,7 +15,7 @@ namespace BO4E.ENUM
         ERSATZWERT,
 
         /// <summary> Vorläufiger Wert: Z18 </summary>
-        VORLAUUFIGER_WERT,
+        VORLAEUFIGER_WERT,
 
         /// <summary> Angabe für Lieferschein: Z31 </summary>
         ANGABE_FUER_LIEFERSCHEIN,

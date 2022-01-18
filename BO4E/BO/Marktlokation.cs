@@ -85,10 +85,10 @@ namespace BO4E.BO
         ///     Niederdruck.
         ///     <seealso cref="ENUM.Netzebene" />
         /// </summary>
-        [JsonProperty(Required = Required.Always, Order = 10, PropertyName = "netzebene")]
+        [JsonProperty(Required = Required.Default, Order = 10, PropertyName = "netzebene")]
         [JsonPropertyName("netzebene")]
         [ProtoMember(10)]
-        public Netzebene Netzebene { get; set; }
+        public Netzebene? Netzebene { get; set; }
 
         /// <summary>
         ///     Codenummer des Netzbetreibers, an dessen Netz diese Marktlokation

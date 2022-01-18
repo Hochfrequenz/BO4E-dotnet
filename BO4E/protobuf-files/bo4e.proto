@@ -26,6 +26,7 @@ message Adresse {
    string Adresszusatz = 8;
    string CoErgaenzung = 9;
    Landescode Landescode = 10;
+   string Ortsteil = 1011;
 }
 message Angebot {
    option (.protobuf_net.msgopt).namespace = "BO4E.BO";
@@ -970,11 +971,6 @@ enum Netzebene {
    MD = 8;
    ND = 9;
 }
-enum NetznutzungsVertrag {
-   option (.protobuf_net.enumopt).namespace = "BO4E.ENUM";
-   KUNDEN_NB = 0;
-   LIEFERANTEN_NB = 1;
-}
 enum Netznutzungsabrechnungsgrundlage {
    option (.protobuf_net.enumopt).namespace = "BO4E.ENUM";
    LIEFERSCHEIN = 0;
@@ -984,6 +980,11 @@ enum Netznutzungsabrechnungsvariante {
    option (.protobuf_net.enumopt).namespace = "BO4E.ENUM";
    ARBEITSPREIS_GRUNDPREIS = 0;
    ARBEITSPREIS_LEISTUNGSPREIS = 1;
+}
+enum Netznutzungsvertragsart {
+   option (.protobuf_net.enumopt).namespace = "BO4E.ENUM";
+   KUNDEN_NB = 0;
+   LIEFERANTEN_NB = 1;
 }
 enum Netznutzungszahler {
    option (.protobuf_net.enumopt).namespace = "BO4E.ENUM";
@@ -1117,6 +1118,8 @@ enum Rechnungstyp {
    INTEGRIERTE_13TE_RECHNUNG = 5;
    ZUSAETZLICHE_13TE_RECHNUNG = 6;
    MEHRMINDERMENGENRECHNUNG = 7;
+   ABSCHLUSSRECHNUNG = 8;
+   MSBRECHNUNG = 9;
 }
 message Region {
    option (.protobuf_net.msgopt).namespace = "BO4E.BO";
@@ -1198,21 +1201,62 @@ enum Sparte {
    Sparte_WASSER = 4;
    Sparte_ABWASSER = 5;
 }
+enum Status {
+   option (.protobuf_net.enumopt).namespace = "BO4E.ENUM";
+   TARIF_1 = 0;
+   TARIF_2 = 1;
+   TARIF_3 = 2;
+   TARIF_4 = 3;
+   TARIF_5 = 4;
+   TARIF_6 = 5;
+   TARIF_7 = 6;
+   TARIF_8 = 7;
+   TARIF_9 = 8;
+   ZAEHLERSTAND_ZUM_BEGINN_DER_ANGEGEBENEN_ENERGIEMENGE_VORHANDEN_UND_KOMMUNIZIERT = 9;
+   ZAEHLERSTAND_ZUM_ENDE_DER_ANGEGEBENEN_ENERGIEMENGE_VORHANDEN_UND_KOMMUNIZIERT = 10;
+   ZAEHLERSTAND_ZUM_BEGINN_DER_ANGEGEBENEN_ENERGIEMENGE_NICHT_VORHANDEN_DA = 11;
+   ZAEHLERSTAND_ZUM_ENDE_DER_ANGEGEBENEN_ENERGIEMENGE_NICHT_VORHANDEN_DA_MENGENABGRENZUNG = 12;
+   KUNDENSELBSTABLESUNG = 13;
+   LEERSTAND = 14;
+   REALER_ZAEHLERUEBERLAUF_GEPRUEFT = 15;
+   PLAUSIBEL_WG_KONTROLLABLESUNG = 16;
+   PLAUSIBEL_WG_KUNDENHINWIES = 17;
+   AUSTAUSCH_DES_ERSATZWERTES = 18;
+}
+enum StatusArt {
+   option (.protobuf_net.enumopt).namespace = "BO4E.ENUM";
+   VERTRAG = 0;
+   MESSWERTQUALITAET = 1;
+   MESSKLASSIFIZIERUNG = 2;
+   PLAUSIBILISIERUNGSHINWEIS = 3;
+   ERSATZWERTBILDUNGSVERFAHREN = 4;
+   KORREKTURGRUND = 5;
+   GASQUALITAET = 6;
+}
+message StatusZusatzInformation {
+   option (.protobuf_net.msgopt).namespace = "BO4E.COM";
+   StatusArt Art = 1;
+   Status Status = 2;
+}
 message Steuerbetrag {
    option (.protobuf_net.msgopt).namespace = "BO4E.COM";
    Steuerkennzeichen Steuerkennzeichen = 3;
    .bcl.Decimal Basiswert = 4;
    .bcl.Decimal Steuerwert = 5;
    Waehrungscode Waehrung = 6;
+   .bcl.Decimal BasiswertVorausgezahlt = 7;
+   .bcl.Decimal SteuerwertVorausgezahlt = 8;
 }
 enum Steuerkennzeichen {
    option (.protobuf_net.enumopt).namespace = "BO4E.ENUM";
    UST_19 = 0;
-   UST_7 = 1;
-   VST_0 = 2;
-   VST_19 = 3;
-   VST_7 = 4;
-   RCV = 5;
+   UST_16 = 1;
+   UST_7 = 2;
+   VST_0 = 3;
+   VST_19 = 4;
+   VST_16 = 5;
+   VST_7 = 6;
+   RCV = 7;
 }
 enum Tarifart {
    option (.protobuf_net.enumopt).namespace = "BO4E.ENUM";
@@ -1254,9 +1298,8 @@ message Verbrauch {
    .bcl.Decimal Wert = 7;
    Mengeneinheit Einheit = 8;
    Verbrauchsmengetyp Type = 9;
-   WertStatus Wertestatus = 10;
-   WertBedeutung WertBedeutung = 11;
-   WertBedeutungZusatz WertBedeutungZusatz = 12;
+   WertMengeArt WertMengeArt = 10;
+   repeated StatusZusatzInformation StatusZusatzInformationen = 11;
 }
 enum Verbrauchsart {
    option (.protobuf_net.enumopt).namespace = "BO4E.ENUM";
@@ -1312,10 +1355,11 @@ message Vertragskonditionen {
    Zeitraum Netznutzungsabrechnung = 1012;
    int32 NetznutzungsabrechnungIntervall = 1013;
    bool Haushaltskunde = 1014;
-   NetznutzungsVertrag Netznutzungsvertrag = 1015;
+   Netznutzungsvertragsart Netznutzungsvertragsart = 1015;
    Netznutzungszahler Netznutzungszahler = 1016;
    Netznutzungsabrechnungsvariante Netznutzungsabrechnungsvariante = 1017;
    Netznutzungsabrechnungsgrundlage Netznutzungsabrechnungsgrundlage = 1018;
+   bool BeinhaltetSingulaerGenutzteBetriebsmittel = 1019;
 }
 enum Vertragstatus {
    option (.protobuf_net.enumopt).namespace = "BO4E.ENUM";
@@ -1341,17 +1385,17 @@ message Vertragsteil {
    Menge Kundenwert = 1010;
    string Verbrauchsaufteilung = 1011;
 }
+message Verwendungszweck {
+   option (.protobuf_net.msgopt).namespace = "BO4E.COM";
+   Marktrolle Marktrolle = 3;
+   repeated Verwendungszweck Zweck = 4 [packed = false];
+}
 enum Verwendungszweck {
    option (.protobuf_net.enumopt).namespace = "BO4E.ENUM";
    NETZNUTZUNGSABRECHNUNG = 0;
    BILANZKREISABRECHNUNG = 1;
    MEHRMINDERMBENGENABRECHNUNG = 2;
    ENDKUNDENABRECHNUNG = 3;
-}
-message Verwendungszweck {
-   option (.protobuf_net.msgopt).namespace = "BO4E.COM";
-   Marktrolle Marktrolle = 3;
-   repeated Verwendungszweck Zweck = 4 [packed = false];
 }
 enum Waehrungscode {
    option (.protobuf_net.enumopt).namespace = "BO4E.ENUM";
@@ -1548,37 +1592,11 @@ enum Waermenutzung {
    WAERMEPUMPE = 1;
    DIREKTHEIZUNG = 2;
 }
-enum WertBedeutung {
-   option (.protobuf_net.enumopt).namespace = "BO4E.ENUM";
-   VERTRAG = 0;
-   MESSWERTQUALITAET = 1;
-   MESSKLASSIFIZIERUNG = 2;
-   PLAUSIBILISIERUNGSHINWEIS = 3;
-   ERSATZWERTBILDUNGSVERFAHREN = 4;
-   KORREKTURGRUND = 5;
-   GASQUALITAET = 6;
-}
-enum WertBedeutungZusatz {
-   option (.protobuf_net.enumopt).namespace = "BO4E.ENUM";
-   TARIF_1 = 0;
-   TARIF_2 = 1;
-   TARIF_3 = 2;
-   TARIF_4 = 3;
-   TARIF_5 = 4;
-   TARIF_6 = 5;
-   TARIF_7 = 6;
-   TARIF_8 = 7;
-   TARIF_9 = 8;
-   ZAEHLERSTAND_ZUM_BEGINN_DER_ANGEGEBENEN_ENERGIEMENGE_VORHANDEN_UND_KOMMUNIZIERT = 9;
-   ZAEHLERSTAND_ZUM_ENDE_DER_ANGEGEBENEN_ENERGIEMENGE_VORHANDEN_UND_KOMMUNIZIERT = 10;
-   ZAEHLERSTAND_ZUM_BEGINN_DER_ANGEGEBENEN_ENERGIEMENGE_NICHT_VORHANDEN_DA = 11;
-   ZAEHLERSTAND_ZUM_ENDE_DER_ANGEGEBENEN_ENERGIEMENGE_NICHT_VORHANDEN_DA_MENGENABGRENZUNG = 12;
-}
-enum WertStatus {
+enum WertMengeArt {
    option (.protobuf_net.enumopt).namespace = "BO4E.ENUM";
    WAHRER_WERT = 0;
    ERSATZWERT = 1;
-   VORLAUUFIGER_WERT = 2;
+   VORLAEUFIGER_WERT = 2;
    ANGABE_FUER_LIEFERSCHEIN = 3;
    VORSCHLAGSWERT = 4;
    NICHT_VERWENDBARER_WERT = 5;
@@ -1607,6 +1625,7 @@ message Zaehler {
    Messwerterfassung Messwerterfassung = 1016;
    ZaehlertypSpezifikation Zaehlertypspezifikation = 1017;
    Befestigungsart Befestigungsart = 1018;
+   Geraetemerkmal Zaehlergroesse = 1019;
 }
 enum Zaehlerauspraegung {
    option (.protobuf_net.enumopt).namespace = "BO4E.ENUM";

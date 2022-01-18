@@ -1,12 +1,15 @@
+using BO4E.COM;
+using BO4E.ENUM;
+using BO4E.meta;
+
+using Newtonsoft.Json;
+
+using ProtoBuf;
+
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Text.Json.Serialization;
-using BO4E.COM;
-using BO4E.ENUM;
-using BO4E.meta;
-using Newtonsoft.Json;
-using ProtoBuf;
 
 namespace BO4E.BO
 {
@@ -64,7 +67,7 @@ namespace BO4E.BO
         [JsonProperty(Required = Required.Default, Order = 9, PropertyName = "zaehlerkonstante")]
         [JsonPropertyName("zaehlerkonstante")]
         [ProtoMember(9)]
-        public decimal Zaehlerkonstante { get; set; }
+        public decimal? Zaehlerkonstante { get; set; }
 
 
 
@@ -165,5 +168,14 @@ namespace BO4E.BO
         [ProtoMember(1018)]
         [NonOfficial(NonOfficialCategory.REGULATORY_REQUIREMENTS)]
         public Befestigungsart? Befestigungsart { get; set; }
+
+        /// <summary>
+        ///     Zaehlergroesse
+        /// </summary>
+        [JsonProperty(Required = Required.Default, Order = 19, PropertyName = "zaehlergroesse")]
+        [JsonPropertyName("zaehlergroesse")]
+        [ProtoMember(1019)]
+        [NonOfficial(NonOfficialCategory.REGULATORY_REQUIREMENTS)]
+        public Geraetemerkmal? Zaehlergroesse { get; set; }
     }
 }
