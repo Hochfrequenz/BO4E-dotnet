@@ -80,6 +80,7 @@ namespace BO4E.BO
         ///     the BO4E standard to be passed along.
         /// </example>
         [Newtonsoft.Json.JsonIgnore]
+        [System.Text.Json.Serialization.JsonIgnore]
         [ProtoIgnore]
         public const string USER_PROPERTIES_NAME = "userProperties";
 
