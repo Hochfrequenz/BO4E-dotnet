@@ -1,0 +1,217 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>BO4E.Reporting</name>
+    </assembly>
+    <members>
+        <member name="T:BO4E.Reporting.CompletenessReport">
+            <summary>
+                A completeness report contains information about the completeness of a pure
+                <see cref="T:BO4E.BO.Energiemenge" />. In this context "pure" means, that the Energiemenge
+                does only contain one distinct set of (<see cref="P:BO4E.COM.Verbrauch.Obiskennzahl" />, <see cref="P:BO4E.COM.Verbrauch.Einheit" />,
+                <see cref="P:BO4E.COM.Verbrauch.Wertermittlungsverfahren" />).
+            </summary>
+        </member>
+        <member name="F:BO4E.Reporting.CompletenessReport.imsysRegex">
+            <summary>
+                matches a OBIS-Kennzahl that stands for an intelligentes messsystem for power.
+            </summary>
+        </member>
+        <member name="P:BO4E.Reporting.CompletenessReport.ReferenceTimeFrame">
+            <summary>
+                all information like e.g. <see cref="P:BO4E.Reporting.CompletenessReport.Coverage" /> is normalised to this reference time frame.
+                Must only be null if an error occurred and <see cref="P:BO4E.Reporting.CompletenessReport.ErrorMessage" /> is not null.
+            </summary>
+        </member>
+        <member name="P:BO4E.Reporting.CompletenessReport.LokationsId">
+            <summary>
+                <see cref="P:BO4E.BO.Energiemenge.LokationsId" />
+            </summary>
+        </member>
+        <member name="P:BO4E.Reporting.CompletenessReport.Obiskennzahl">
+            <summary>
+                <see cref="P:BO4E.COM.Verbrauch.Obiskennzahl" />
+            </summary>
+        </member>
+        <member name="P:BO4E.Reporting.CompletenessReport.Einheit">
+            <summary>
+                <see cref="P:BO4E.COM.Verbrauch.Einheit" />
+            </summary>
+        </member>
+        <member name="P:BO4E.Reporting.CompletenessReport.Wertermittlungsverfahren">
+            <summary>
+                <see cref="P:BO4E.COM.Verbrauch.Wertermittlungsverfahren" />
+            </summary>
+        </member>
+        <member name="P:BO4E.Reporting.CompletenessReport.Coverage">
+            <summary>
+                ratio of time with data present compared to <see cref="P:BO4E.Reporting.CompletenessReport.ReferenceTimeFrame" />.
+                1.0 means 100% coverage.
+            </summary>
+        </member>
+        <member name="P:BO4E.Reporting.CompletenessReport.Values">
+            <summary>
+                values
+            </summary>
+        </member>
+        <member name="P:BO4E.Reporting.CompletenessReport.Gaps">
+            <summary>
+                gaps are continous values (<see cref="P:BO4E.Reporting.CompletenessReport.Values" />) with value null.
+            </summary>
+        </member>
+        <member name="P:BO4E.Reporting.CompletenessReport.ErrorMessage">
+            <summary>
+                optional field for storing error messages
+            </summary>
+        </member>
+        <member name="M:BO4E.Reporting.CompletenessReport.CompareTo(BO4E.Reporting.CompletenessReport)">
+            <summary>
+                sorts two completeness reports such that those with earlier reference time are before others
+            </summary>
+            <param name="other"></param>
+            <returns></returns>
+        </member>
+        <member name="M:BO4E.Reporting.CompletenessReport.ToCSV(System.String,System.Boolean,System.String)">
+            <summary>
+                Convert CompletenessReport to CSV string
+            </summary>
+            <param name="separator">Seperatur char for CSV items. By default is ';'</param>
+            <param name="headerLine">Shows header of columns in return string?</param>
+            <param name="lineTerminator">This value goes to end of every line. By default is "\\n"</param>
+            <returns></returns>
+        </member>
+        <member name="T:BO4E.Reporting.CompletenessReport.BasicVerbrauch">
+            <summary>
+                similar to <see cref="T:BO4E.COM.Verbrauch" /> but with less obligatory values.
+            </summary>
+        </member>
+        <member name="P:BO4E.Reporting.CompletenessReport.BasicVerbrauch.Startdatum">
+            <summary>
+                <see cref="P:BO4E.COM.Verbrauch.Startdatum" />
+            </summary>
+        </member>
+        <member name="P:BO4E.Reporting.CompletenessReport.BasicVerbrauch.Enddatum">
+            <summary>
+                <see cref="P:BO4E.COM.Verbrauch.Enddatum" />
+            </summary>
+        </member>
+        <member name="P:BO4E.Reporting.CompletenessReport.BasicVerbrauch.Wert">
+            <summary>
+                <see cref="P:BO4E.COM.Verbrauch.Wert" />. Make it null to express no value present.
+            </summary>
+        </member>
+        <member name="T:BO4E.Reporting.CompletenessReport.CompletenessReportConfiguration">
+            <summary>
+                This data class contains all the parameters required to start the CompletenessReport generation.
+                It's easier to handle than four single parameters passed to the constructor of the CompletenessReport.
+            </summary>
+        </member>
+        <member name="P:BO4E.Reporting.CompletenessReport.CompletenessReportConfiguration.ReferenceTimeFrame">
+            <summary>
+                reference time frame to be analysed
+            </summary>
+        </member>
+        <member name="P:BO4E.Reporting.CompletenessReport.CompletenessReportConfiguration.Wertermittlungsverfahren">
+            <summary>
+                Wertermittlungsverfahren (<see cref="P:BO4E.COM.Verbrauch.Wertermittlungsverfahren" />) to be taken into account.
+            </summary>
+        </member>
+        <member name="P:BO4E.Reporting.CompletenessReport.CompletenessReportConfiguration.Obis">
+            <summary>
+                OBIS ID (<see cref="P:BO4E.COM.Verbrauch.Obiskennzahl" />) to be taken into account.
+            </summary>
+        </member>
+        <member name="P:BO4E.Reporting.CompletenessReport.CompletenessReportConfiguration.Einheit">
+            <summary>
+                Unit (<see cref="P:BO4E.COM.Verbrauch.Einheit" />) to be taken into account.
+            </summary>
+        </member>
+        <member name="T:BO4E.Reporting.PlausibilityReport">
+            <summary>
+                A plausibility report contains information about how likely it is that two objects of
+                of the type <see cref="T:BO4E.BO.Energiemenge" /> are actually from the same source. Typically
+                you'd like to compare Energiemenge from meter readings with different graining.
+                E.g. values that are transmitted periodically in 15minute intervals and isolated
+                readings.
+            </summary>
+        </member>
+        <member name="P:BO4E.Reporting.PlausibilityReport.ReferenceTimeFrame">
+            <summary>
+                all information is normalised to this reference time frame
+            </summary>
+        </member>
+        <member name="P:BO4E.Reporting.PlausibilityReport.LokationsId">
+            <summary>
+                refers to a <see cref="P:BO4E.BO.Energiemenge.LokationsId" />
+            </summary>
+        </member>
+        <member name="P:BO4E.Reporting.PlausibilityReport.RelativeDeviation">
+            <summary>
+                relative deviation of both Energiemengen within <see cref="P:BO4E.Reporting.PlausibilityReport.ReferenceTimeFrame" />.
+                Null iff the <see cref="P:BO4E.COM.Verbrauch.Wert" /> of <see cref="P:BO4E.Reporting.PlausibilityReport.VerbrauchReference" /> is 0.
+            </summary>
+            <example>
+                0 = equal consumption
+                +1 = other Energiemenge has twice the consumption of the reference
+                -1 = other Energiemenge has 0 consumption
+            </example>
+        </member>
+        <member name="P:BO4E.Reporting.PlausibilityReport.VerbrauchReference">
+            <summary>
+                Verbrauch of the reference Energiemenge
+            </summary>
+        </member>
+        <member name="P:BO4E.Reporting.PlausibilityReport.VerbrauchOther">
+            <summary>
+                Verbrauch of another Energiemenge
+            </summary>
+        </member>
+        <member name="P:BO4E.Reporting.PlausibilityReport.AbsoluteDeviation">
+            <summary>
+                absolute value of the difference between <see cref="P:BO4E.COM.Verbrauch.Wert" /> of <see cref="P:BO4E.Reporting.PlausibilityReport.VerbrauchReference" /> and
+                <see cref="P:BO4E.Reporting.PlausibilityReport.VerbrauchOther" />
+            </summary>
+        </member>
+        <member name="P:BO4E.Reporting.PlausibilityReport.AbsoluteDeviationEinheit">
+            <summary>
+                unit of <see cref="P:BO4E.Reporting.PlausibilityReport.AbsoluteDeviation" />
+            </summary>
+        </member>
+        <member name="T:BO4E.Reporting.PlausibilityReport.PlausibilityReportConfiguration">
+            <summary>
+                This data class contains all the data required to start the PlausibilityReport generation.
+                It's easier to handle than four single parameters passed to the constructor of the Plausibility Report.
+            </summary>
+        </member>
+        <member name="P:BO4E.Reporting.PlausibilityReport.PlausibilityReportConfiguration.Timeframe">
+            <summary>
+                reference time frame
+            </summary>
+        </member>
+        <member name="P:BO4E.Reporting.PlausibilityReport.PlausibilityReportConfiguration.Other">
+            <summary>
+                Energiemenge to be compared with the reference Energiemenge
+            </summary>
+        </member>
+        <member name="P:BO4E.Reporting.PlausibilityReport.PlausibilityReportConfiguration.IgnoreLocation">
+            <summary>
+                set true to ignore if Energiemenge do have different <see cref="P:BO4E.BO.Energiemenge.LokationsId" /> or
+                <see cref="P:BO4E.BO.Energiemenge.LokationsTyp" />
+            </summary>
+        </member>
+        <member name="T:BO4E.Reporting.Report">
+            <summary>
+                The base class of all reports.
+                The idea behind this BusinessObject and all derived classes is that heavy calculations
+                of interesting metrics is separated from displaying the data. Report BO acts as a intermediate
+                format between a BusinessObject extension methods and e.g. a Notification- or Plotting
+                service that can easily rely on the pre calculated values stored in a Report Object.
+            </summary>
+        </member>
+        <member name="M:BO4E.Reporting.Report.ToCsv(System.Char,System.Boolean,System.String,System.Collections.Generic.List{System.Collections.Generic.Dictionary{System.String,System.String}})">
+            <summary>
+            </summary>
+            <returns>return report as CSV string</returns>
+        </member>
+    </members>
+</doc>

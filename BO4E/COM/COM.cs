@@ -148,7 +148,7 @@ namespace BO4E.COM
         }
 
         /// <inheritdoc cref="BO4E.BO.BusinessObject.IsValid" />
-        public bool IsValid()
+        public virtual bool IsValid()
         {
             try
             {

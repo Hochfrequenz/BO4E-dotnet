@@ -1,0 +1,611 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>BO4E.Encryption</name>
+    </assembly>
+    <members>
+        <member name="T:BO4E.Encryption.Anonymizer">
+            <summary>
+            An Anonymizer removes privacy relevant data from business objects.
+            </summary>
+        </member>
+        <member name="F:BO4E.Encryption.Anonymizer.HashedMesslokationPrefix">
+            <summary>
+                instead of 'DE' oder another country code messlokationIds that are a hashed/pseudonymized value do start with this
+                prefix.
+            </summary>
+        </member>
+        <member name="F:BO4E.Encryption.Anonymizer.HashedMarktlokationPrefix">
+            <summary>
+                instead of '5' or '4' marktlokationIds that are a hashed/pseudonymized value do start with this prefix.
+            </summary>
+        </member>
+        <member name="M:BO4E.Encryption.Anonymizer.#ctor(BO4E.Encryption.AnonymizerConfiguration)">
+            <summary>
+            initialize the Anonymizer by providing a configuration.
+            </summary>
+            <param name="configuration"></param>
+        </member>
+        <member name="P:BO4E.Encryption.Anonymizer.PublicKeyX509">
+            <summary>
+            a public key in X509 format.
+            </summary>
+        </member>
+        <member name="M:BO4E.Encryption.Anonymizer.Dispose">
+            <inheritdoc />
+        </member>
+        <member name="M:BO4E.Encryption.Anonymizer.SetPublicKey(System.Security.Cryptography.X509Certificates.X509Certificate2)">
+            <summary>
+                Set the receivers public X509 certificate if ENCRYPT is used as anonymizing approach.
+            </summary>
+            <param name="x509Certificate">X509 certificate</param>
+        </member>
+        <member name="M:BO4E.Encryption.Anonymizer.SetPrivateKey(Org.BouncyCastle.Crypto.AsymmetricKeyParameter)">
+            <summary>
+                Set the private key if DECRYPT is used as anonymizing approach.
+            </summary>
+            <param name="privateKey">Bouncy Castle compatible private key</param>
+        </member>
+        <member name="M:BO4E.Encryption.Anonymizer.SetHashingSalt(System.Byte[])">
+            <summary>
+                Set a salt used when hashing values.
+            </summary>
+            <remarks>
+                Note that the same salt is used multiple times, at least within the same processed JObject!
+                This is a considerable security weakness that allows for attacks, especially when the origin
+                domain is finite (e.g. when ENUM based values are hashed). This design decision was made because
+                handling a separate salt for each hashed field is impractical. Please opt for the
+                <see cref="F:BO4E.Encryption.AnonymizerApproach.ENCRYPT" />
+                option in case of doubt. The use of a salt is enforced by throwing a ArgumentNullException when
+                trying to hash ENUM based values without having set a salt before.
+            </remarks>
+            <seealso cref="M:BO4E.Encryption.Anonymizer.GenerateHashingSalt" />
+            <param name="salt">random salt as byte array</param>
+        </member>
+        <member name="M:BO4E.Encryption.Anonymizer.SetNewHashingSalt">
+            <summary>
+                passes the result of <see cref="M:BO4E.Encryption.Anonymizer.GenerateHashingSalt" /> to <see cref="M:BO4E.Encryption.Anonymizer.SetHashingSalt(System.Byte[])" />
+            </summary>
+        </member>
+        <member name="M:BO4E.Encryption.Anonymizer.GenerateHashingSalt">
+            <summary>
+                Generates a 32 byte long salt to be used as input for <see cref="M:BO4E.Encryption.Anonymizer.SetHashingSalt(System.Byte[])" />.
+            </summary>
+            <returns>a 32 byte long securely random salt</returns>
+        </member>
+        <member name="M:BO4E.Encryption.Anonymizer.ApplyOperations``1(Newtonsoft.Json.Linq.JObject)">
+            <summary>
+            Apply the operations from the configuration provided in the constructor to <paramref name="jobject"/>.
+            </summary>
+            <param name="jobject"></param>
+            <typeparam name="T"></typeparam>
+            <returns></returns>
+        </member>
+        <member name="M:BO4E.Encryption.Anonymizer.ApplyOperations``1(BO4E.BO.BusinessObject)">
+            <summary>
+                Apply the configuration set in the constructor to the JObject set in the constructor.
+            </summary>
+            <see cref="M:BO4E.Encryption.Anonymizer.#ctor(BO4E.Encryption.AnonymizerConfiguration)" />
+            <returns>A modified JObject with the configuration applied.</returns>
+        </member>
+        <member name="M:BO4E.Encryption.Anonymizer.HashObject(System.Object@,System.Nullable{BO4E.meta.DataCategory})">
+            <summary>
+                Applies recursive Hashing on <paramref name="input" /> for all fields of given DataCategory
+                <paramref name="dataCategory" />
+            </summary>
+            <param name="input">object to be hashed (will be modified by reference)</param>
+            <param name="dataCategory">Category of fields to be modified</param>
+        </member>
+        <member name="M:BO4E.Encryption.Anonymizer.HashString(System.String@,System.Nullable{BO4E.meta.DataCategory})">
+            <summary>
+                Applies hashing on string value
+            </summary>
+            <param name="input">string that is going to be hashed</param>
+            <param name="dataCategory">
+                <see cref="T:BO4E.meta.DataCategory" />
+            </param>
+            <returns>new string containing hashed content</returns>
+        </member>
+        <member name="M:BO4E.Encryption.Anonymizer.HasHashedKey(BO4E.BO.Marktlokation)">
+            <summary>
+                check if a Marktlokation has been pseudonymized using <see cref="F:BO4E.Encryption.AnonymizerApproach.HASH" />.
+                As of 2019 it's impossible for a "real" Marktlokation to fulfill this condition.
+            </summary>
+            <param name="ma">Marktlokation</param>
+            <returns>true if the <see cref="P:BO4E.BO.Marktlokation.MarktlokationsId" /> fulfills the requirements of a hashed key</returns>
+        </member>
+        <member name="M:BO4E.Encryption.Anonymizer.HasHashedKey(BO4E.BO.Messlokation)">
+            <summary>
+                check if a Messlokation has been pseudonymized using <see cref="F:BO4E.Encryption.AnonymizerApproach.HASH" />
+                As of 2019 it's impossible for a "real" Messlokation to fulfill this condition.
+            </summary>
+            <param name="me">Messlokation</param>
+            <returns>true if the <see cref="P:BO4E.BO.Messlokation.MesslokationsId" /> fulfills the requirements of a hashed key</returns>
+        </member>
+        <member name="M:BO4E.Encryption.Anonymizer.HasHashedKey(BO4E.BO.Energiemenge)">
+            <summary>
+                check if an Energiemenge been pseudonymized using <see cref="F:BO4E.Encryption.AnonymizerApproach.HASH" />.
+                Calls <see cref="M:BO4E.Encryption.Anonymizer.IsHashedKey(System.String)" /> for <see cref="P:BO4E.BO.Energiemenge.LokationsId" />.
+            </summary>
+            <param name="em">Energiemenge</param>
+            <returns>true if the <see cref="P:BO4E.BO.Energiemenge.LokationsId" /> fulfills the requirements of a hashed key</returns>
+        </member>
+        <member name="M:BO4E.Encryption.Anonymizer.IsHashedKey(System.String)">
+            <summary>
+                Checks if a stright might originate from <see cref="F:BO4E.Encryption.AnonymizerApproach.HASH" />
+            </summary>
+            <param name="key">a string, e.g. '54321012345'</param>
+            <returns>true if the <paramref name="key" /> could originate from hashing.</returns>
+        </member>
+        <member name="M:BO4E.Encryption.Anonymizer.Finalize">
+            <summary>
+            dispose on destruction
+            </summary>
+        </member>
+        <member name="T:BO4E.Encryption.AnonymizerApproach">
+            <summary>
+                The class AnonymizerApproach defines how an affected path is handled during anonymization.
+            </summary>
+        </member>
+        <member name="F:BO4E.Encryption.AnonymizerApproach.DELETE">
+            <summary>
+                Simply delete the data by replacing them with null values in the JSON
+                representation. In most cases this results in invalid BO4E object as well
+                as not well formed EDIFCAT messages.
+            </summary>
+        </member>
+        <member name="F:BO4E.Encryption.AnonymizerApproach.HASH">
+            <summary>
+                Hashes the original data using SHA256.
+            </summary>
+            When converting back to EDIFACT the hashed are cropped to the maximum length
+            allowance by EdiLibrary Host. Using the hash option allows for keeping data
+            integrity while maintaining privacy (via pseudonymity) at the same time. The
+            same information hashed with the same salt always results in the same hash.
+            Null values are not hashed. ENUM based values are not hashed.
+        </member>
+        <member name="F:BO4E.Encryption.AnonymizerApproach.ENCRYPT">
+            <summary>
+                Asymmetrically encrypt strings or COM objects.
+            </summary>
+            Null values are not encrypted. ENUM based values are not encrypted.
+        </member>
+        <member name="F:BO4E.Encryption.AnonymizerApproach.DECRYPT">
+            <summary>
+                Reverts the encryption. <seealso cref="F:BO4E.Encryption.AnonymizerApproach.ENCRYPT" />
+            </summary>
+        </member>
+        <member name="F:BO4E.Encryption.AnonymizerApproach.KEEP">
+            <summary>
+                Do not do anything with the data. This is similar to not setting the options
+                connected to the path at all but more explicit.
+            </summary>
+        </member>
+        <member name="T:BO4E.Encryption.AnonymizerConfiguration">
+            <summary>
+                The Class AnonymizerConfiguration represents a complete configuration for the
+                <see cref="T:BO4E.Encryption.Anonymizer" /> class. For each possible <see cref="T:BO4E.meta.DataCategory" /> an <see cref="T:BO4E.Encryption.AnonymizerApproach" />
+                is
+                set to indicate whether the paths related to this option are to be scrambled
+                or removed from the message.
+            </summary>
+        </member>
+        <member name="F:BO4E.Encryption.AnonymizerConfiguration.HashingSalt">
+            <summary>
+                base64 encoded bytes used to salt hashing (<see cref="F:BO4E.Encryption.AnonymizerApproach.HASH" />
+            </summary>
+        </member>
+        <member name="F:BO4E.Encryption.AnonymizerConfiguration.UnaffectedUserProperties">
+            <summary>
+                set of key in <see cref="P:BO4E.BO.BusinessObject.UserProperties" /> / <see cref="P:BO4E.COM.COM.UserProperties" />
+                that should not be affected by the anonymizing operations
+            </summary>
+        </member>
+        <member name="M:BO4E.Encryption.AnonymizerConfiguration.#ctor">
+            <summary>
+                This constructor initialises all options with KEEP by default =&gt; leaves the Business Object unchanged.
+            </summary>
+        </member>
+        <member name="P:BO4E.Encryption.AnonymizerConfiguration.Operations">
+            <summary>
+            The operations ("approaches") to by performed per data category.
+            </summary>
+        </member>
+        <member name="P:BO4E.Encryption.AnonymizerConfiguration.ConfigurationKey">
+            <summary>
+            name of the configuration.
+            </summary>
+        </member>
+        <member name="M:BO4E.Encryption.AnonymizerConfiguration.GetSalt">
+            <summary>
+                returns the base64 encoded bytes from <see cref="F:BO4E.Encryption.AnonymizerConfiguration.HashingSalt" /> as byte array
+            </summary>
+            <returns>byte array or empty byte array if hashing salt is not set.</returns>
+        </member>
+        <member name="M:BO4E.Encryption.AnonymizerConfiguration.SetOption(BO4E.meta.DataCategory,BO4E.Encryption.AnonymizerApproach)">
+            <summary>
+                Sets the passed <paramref name="anonymizerOption" /> <paramref name="anonymizerApproach" />
+            </summary>
+            <param name="anonymizerOption">the passed DataCategory to</param>
+            <param name="anonymizerApproach">t</param>
+        </member>
+        <member name="M:BO4E.Encryption.AnonymizerConfiguration.ContainsNonKeepingOperations">
+            <summary>
+                check if there are any operations in the configuration that actually change the object if an anonymizer with this
+                configuration is applied.
+            </summary>
+            <returns>true if configuration potentially changes something</returns>
+        </member>
+        <member name="M:BO4E.Encryption.AnonymizerConfiguration.IsInitial">
+            <summary>
+                opposite of <see cref="M:BO4E.Encryption.AnonymizerConfiguration.ContainsNonKeepingOperations" />
+            </summary>
+            <returns>opposite of <see cref="M:BO4E.Encryption.AnonymizerConfiguration.ContainsNonKeepingOperations" /></returns>
+        </member>
+        <member name="T:BO4E.Encryption.AsymmetricEncrypter">
+            <summary>
+            An encrypter that uses asymmetric encryption.
+            </summary>
+        </member>
+        <member name="M:BO4E.Encryption.AsymmetricEncrypter.#ctor(System.Byte[],System.Byte[])">
+            <summary>
+                Instantiate with private and public key
+            </summary>
+            <param name="privateKey">private key</param>
+            <param name="publicKey">public key</param>
+        </member>
+        <member name="M:BO4E.Encryption.AsymmetricEncrypter.#ctor(System.String,System.String)">
+            <summary>
+                Instantiate with private and public key
+            </summary>
+            <param name="privateKey">base64 encoded private key</param>
+            <param name="publicKey">base64 encoded public key</param>
+        </member>
+        <member name="M:BO4E.Encryption.AsymmetricEncrypter.#ctor(Sodium.KeyPair)">
+            <summary>
+                Instantiate with libsodium KeyPair
+            </summary>
+            <param name="kp">key pair</param>
+        </member>
+        <member name="M:BO4E.Encryption.AsymmetricEncrypter.#ctor(System.Byte[])">
+            <summary>
+                instantiate with own private key only
+            </summary>
+            <param name="privateKey">private key</param>
+        </member>
+        <member name="M:BO4E.Encryption.AsymmetricEncrypter.Encrypt(System.String,System.String)">
+            <summary>
+                Encrypt a plain text with a public key
+            </summary>
+            <param name="plainText">UTF-8 encoded string containing the plain text to be encrypted</param>
+            <param name="recipientsPublicKey">public key of receiver</param>
+            <returns>Tuple of (cipherText, nonce); both as base64 encoded string</returns>
+        </member>
+        <member name="M:BO4E.Encryption.AsymmetricEncrypter.Encrypt(BO4E.BO.BusinessObject,System.String)">
+            <summary>
+                Encrypt a Business Object for a given public key
+            </summary>
+            <param name="plainObject">unencrypted Business Object</param>
+            <param name="publicKey">recipients public key</param>
+            <returns>An encrypted Business Object</returns>
+        </member>
+        <member name="M:BO4E.Encryption.AsymmetricEncrypter.Decrypt(System.String,System.String,System.String)">
+            <summary>
+                decrypt and authenticate a cipher text
+            </summary>
+            <param name="cipherText">encrypted message as base64 encoded string</param>
+            <param name="sendersPublicKey">public key of sender for authentication as base64 encoded string</param>
+            <param name="nonce">non-secret nonce as base64 encoded string</param>
+            <returns>decrypted plain text</returns>
+        </member>
+        <member name="M:BO4E.Encryption.AsymmetricEncrypter.Decrypt(BO4E.Encryption.EncryptedObject)">
+            <summary>
+            <inheritdoc cref="M:BO4E.Encryption.Encrypter.Decrypt(BO4E.Encryption.EncryptedObject)"/>
+            </summary>
+            <param name="encryptedObject"></param>
+            <returns></returns>
+        </member>
+        <member name="M:BO4E.Encryption.AsymmetricEncrypter.Decrypt``1(BO4E.Encryption.EncryptedObject)">
+            <summary>
+            <inheritdoc cref="M:BO4E.Encryption.Encrypter.Decrypt``1(BO4E.Encryption.EncryptedObject)"/>
+            </summary>
+            <param name="encryptedObject"></param>
+            <typeparam name="T"></typeparam>
+            <returns></returns>
+        </member>
+        <member name="M:BO4E.Encryption.AsymmetricEncrypter.Dispose">
+            <summary>
+            <inheritdoc cref="M:BO4E.Encryption.Encrypter.Dispose"/>
+            </summary>
+        </member>
+        <member name="M:BO4E.Encryption.AsymmetricEncrypter.Finalize">
+            <summary>
+            <inheritdoc cref="M:BO4E.Encryption.Encrypter.Dispose"/>
+            </summary>
+        </member>
+        <member name="T:BO4E.Encryption.EncryptedObject">
+            <summary>
+                An EncryptedObject does not contain any plain text but only information necessary to
+                decrypt and authenticate the original data. The decrypted cipher text contains the
+                original objects JSON serialization. The abstract class EncryptedObject contains
+                mandatory attributes for all encrypted object types. Please see <see cref="T:BO4E.Encryption.EncryptedObjectAEAD" />,
+                <see cref="T:BO4E.Encryption.EncryptedObjectPublicKeyBox" />, <see cref="T:BO4E.Encryption.EncryptedObjectPKCS7" />.
+            </summary>
+            <author>Hochfrequenz Unternehmensberatung GmbH</author>
+        </member>
+        <member name="M:BO4E.Encryption.EncryptedObject.#ctor(System.String,BO4E.ENUM.EncryptionScheme)">
+            <summary>
+                create a new EncryptedObject instance by providing both
+            </summary>
+            <param name="cipherText">the cipher text (bae64 encoded string)</param>
+            <param name="es">the encryption scheme</param>
+        </member>
+        <member name="P:BO4E.Encryption.EncryptedObject.EncryptionScheme">
+            <summary>
+                encryption scheme used
+            </summary>
+        </member>
+        <member name="P:BO4E.Encryption.EncryptedObject.CipherText">
+            <summary>
+                base64 encoded cipher text of the original objects JSON serialization
+            </summary>
+        </member>
+        <member name="T:BO4E.Encryption.EncryptedObjectAEAD">
+            <summary>
+                Encrypted Object using libsodium AEAD algorithm with a shared secret/private key
+            </summary>
+        </member>
+        <member name="M:BO4E.Encryption.EncryptedObjectAEAD.#ctor(System.String,System.String,System.String)">
+            <param name="cipherText">base64 encoded cipher text</param>
+            <param name="associatedData">associated data (UTF-8), &lt;=16 characters</param>
+            <param name="nonce">unique nonce / initialisation vector (base 64 encoded, must not be used twice)</param>
+        </member>
+        <member name="P:BO4E.Encryption.EncryptedObjectAEAD.Nonce">
+            <summary>
+                base64 encoded unique nonce / initialisation vector
+            </summary>
+        </member>
+        <member name="P:BO4E.Encryption.EncryptedObjectAEAD.AssociatedData">
+            <summary>
+                associated data string (UTF-8); might be an empty string but not null
+            </summary>
+        </member>
+        <member name="T:BO4E.Encryption.EncryptedObjectPKCS7">
+            <summary>
+                Bouncy Castle CMS encrypted object
+            </summary>
+        </member>
+        <member name="M:BO4E.Encryption.EncryptedObjectPKCS7.#ctor(System.String,System.Collections.Generic.List{System.String})">
+            <param name="cipherText">base64 encoded cipher text</param>
+            <param name="publicKeys">list of public keys for which the object is decrypt-able </param>
+        </member>
+        <member name="P:BO4E.Encryption.EncryptedObjectPKCS7.PublicKeys">
+            <summary>
+                list of public keys for which the object is decrypt-able
+            </summary>
+        </member>
+        <member name="T:BO4E.Encryption.EncryptedObjectPublicKeyBox">
+            <summary>
+                Encrypted Object using the Public Key Box Algorithm of libsodium
+            </summary>
+        </member>
+        <member name="M:BO4E.Encryption.EncryptedObjectPublicKeyBox.#ctor(System.String,System.String,System.String)">
+            <summary>
+            </summary>
+            <param name="cipherText">base64 encoded cipher text</param>
+            <param name="publicKey">public key of the sender (base64 encoded)</param>
+            <param name="nonce">unique nonce / initialisation vector (base 64 encoded, must not be used twice)</param>
+        </member>
+        <member name="P:BO4E.Encryption.EncryptedObjectPublicKeyBox.Nonce">
+            <summary>
+                Base64 encoded unique nonce / initialisation vector (IV)
+            </summary>
+        </member>
+        <member name="P:BO4E.Encryption.EncryptedObjectPublicKeyBox.PublicKey">
+            <summary>
+                base64 encoded public key of the message sender
+            </summary>
+        </member>
+        <member name="T:BO4E.Encryption.Encrypter">
+            <summary>
+                abstract base class of all encryption classes; provides useful methods for derived encryption classes
+            </summary>
+        </member>
+        <member name="F:BO4E.Encryption.Encrypter.encryptionSerializerSettings">
+            <summary>
+                serializer settings used in the encrypted objects
+            </summary>
+        </member>
+        <member name="P:BO4E.Encryption.Encrypter._logger">
+            <summary>
+            logger.
+            </summary>
+        </member>
+        <member name="M:BO4E.Encryption.Encrypter.Dispose">
+            <summary>
+            Each encrypter has to define a Dispose method that cleans up stuff.
+            </summary>
+        </member>
+        <member name="M:BO4E.Encryption.Encrypter.Decrypt(BO4E.Encryption.EncryptedObject)">
+            <summary>
+                decrypt an encrypted Business Object
+            </summary>
+            <param name="encryptedObject">an encrypted Business Object</param>
+            <returns>a decrypted Business Object</returns>
+        </member>
+        <member name="M:BO4E.Encryption.Encrypter.Decrypt``1(BO4E.Encryption.EncryptedObject)">
+            <summary>
+            Decrypt <paramref name="encryptedObject"/>
+            </summary>
+            <param name="encryptedObject"></param>
+            <typeparam name="T">expected type</typeparam>
+            <returns>decrypted object</returns>
+        </member>
+        <member name="M:BO4E.Encryption.Encrypter.Finalize">
+            <summary>
+            calls the <see cref="M:BO4E.Encryption.Encrypter.Dispose"/> method.
+            </summary>
+        </member>
+        <member name="T:BO4E.Encryption.SymmetricEncrypter">
+            <summary>
+            An encrypter using symmetric encryption.
+            </summary>
+        </member>
+        <member name="M:BO4E.Encryption.SymmetricEncrypter.#ctor(System.Byte[])">
+            <summary>
+                pass the secret encryption key to the constructor
+            </summary>
+            <param name="secretKey">secret key</param>
+        </member>
+        <member name="M:BO4E.Encryption.SymmetricEncrypter.#ctor(System.String)">
+            <summary>
+                pass the secret key as base64 encoded string to the constructor
+            </summary>
+            <param name="secretKey">secret key as base64 encoded string</param>
+        </member>
+        <member name="M:BO4E.Encryption.SymmetricEncrypter.Encrypt(System.String,System.String,System.Byte[])">
+            <summary>
+                Encrypt a given plain text and add associated data.
+            </summary>
+            <param name="plainText">UTF-8 encoded string containing the plain text to be encrypted</param>
+            <param name="associatedDataString">max. 16 character long string (not secret)</param>
+            <param name="nonce">unique nonce; not secret but must never be used with the same private key before</param>
+            <returns>the encrypted data as Base64 encoded string</returns>
+        </member>
+        <member name="M:BO4E.Encryption.SymmetricEncrypter.Encrypt(System.String,System.String)">
+            <summary>
+                Encrypt a given plain text and add associated data.
+            </summary>
+            <param name="plainText">UTF-8 encoded string containing the plain text to be encrypted</param>
+            <param name="associatedDataString">max. 16 character long string (not secret)</param>
+            <returns>Tuple of (cipherText, nonce); both as base64 encoded string</returns>
+        </member>
+        <member name="M:BO4E.Encryption.SymmetricEncrypter.Encrypt(BO4E.BO.BusinessObject,System.String)">
+            <summary>
+                Encrypt a Business Object
+            </summary>
+            <param name="plainObject">unencrypted Business Object</param>
+            <param name="associatedDataString">max. 16 character long string (not secret)</param>
+            <returns>an encrypted Business Object</returns>
+        </member>
+        <member name="M:BO4E.Encryption.SymmetricEncrypter.Decrypt(System.String,System.String,System.Byte[])">
+            <summary>
+                Decrypts a given cipher texts and checks if it corresponds to the associated data.
+            </summary>
+            <param name="cipherText">Base64 encoded encrypted bytes</param>
+            <param name="associatedDataString">max. 16 character long string (not secret)</param>
+            <param name="nonce">unique nonce used during encryption (not secret)</param>
+            <returns>decrypted as an UTF-8 encoded string</returns>
+        </member>
+        <member name="M:BO4E.Encryption.SymmetricEncrypter.Decrypt(System.String,System.String,System.String)">
+            <summary>
+            <inheritdoc cref="M:BO4E.Encryption.Encrypter.Decrypt(BO4E.Encryption.EncryptedObject)"/>
+            </summary>
+            <param name="cipherText"></param>
+            <param name="associatedData"></param>
+            <param name="nonceString"></param>
+            <returns></returns>
+        </member>
+        <member name="M:BO4E.Encryption.SymmetricEncrypter.Decrypt(BO4E.Encryption.EncryptedObject)">
+            <summary>
+            <inheritdoc cref="M:BO4E.Encryption.Encrypter.Decrypt(BO4E.Encryption.EncryptedObject)"/>
+            </summary>
+            <param name="encryptedObject"></param>
+            <returns></returns>
+        </member>
+        <member name="M:BO4E.Encryption.SymmetricEncrypter.Decrypt``1(BO4E.Encryption.EncryptedObject)">
+            <summary>
+            <inheritdoc cref="M:BO4E.Encryption.Encrypter.Decrypt``1(BO4E.Encryption.EncryptedObject)"/>
+            </summary>
+            <param name="encryptedObject"></param>
+            <typeparam name="T"></typeparam>
+            <returns></returns>
+        </member>
+        <member name="M:BO4E.Encryption.SymmetricEncrypter.Dispose">
+            <summary>
+            <inheritdoc cref="M:BO4E.Encryption.Encrypter.Dispose"/>
+            </summary>
+        </member>
+        <member name="M:BO4E.Encryption.SymmetricEncrypter.Finalize">
+            <summary>
+            <inheritdoc cref="M:BO4E.Encryption.Encrypter.Dispose"/>
+            </summary>
+        </member>
+        <member name="T:BO4E.Encryption.X509AsymmetricEncrypter">
+            <summary>
+            Assymmetic Encryption in X509 standard.
+            </summary>
+        </member>
+        <member name="M:BO4E.Encryption.X509AsymmetricEncrypter.#ctor(System.Security.Cryptography.X509Certificates.X509Certificate2)">
+            <summary>
+                Provide the constructor with an X509 certificate to use as encrypter.
+            </summary>
+            <param name="cert">X509 certificate must contain the public key.</param>
+        </member>
+        <member name="M:BO4E.Encryption.X509AsymmetricEncrypter.#ctor(System.Collections.Generic.ISet{System.Security.Cryptography.X509Certificates.X509Certificate2})">
+            <summary>
+                Provide the constructor a set of X509 certificates to use for encryption
+            </summary>
+            <param name="certs">Collection of certificates</param>
+        </member>
+        <member name="M:BO4E.Encryption.X509AsymmetricEncrypter.#ctor(Org.BouncyCastle.Crypto.AsymmetricKeyParameter)">
+            <summary>
+                Provide the constructor with an AsymmetricKeyParameter to use as decrypter.
+            </summary>
+            <param name="kp">AsymmetricKeyParamer, must contain the RSA private key.</param>
+        </member>
+        <member name="M:BO4E.Encryption.X509AsymmetricEncrypter.Encrypt(System.String)">
+            <summary>
+            encrypts the <paramref name="plainText"/>
+            </summary>
+            <param name="plainText"></param>
+            <returns></returns>
+        </member>
+        <member name="M:BO4E.Encryption.X509AsymmetricEncrypter.Encrypt(BO4E.BO.BusinessObject)">
+            <summary>
+            Encrypts the 
+            </summary>
+            <param name="plainObject"></param>
+            <returns></returns>
+        </member>
+        <member name="M:BO4E.Encryption.X509AsymmetricEncrypter.Decrypt(System.String)">
+            <summary>
+            <inheritdoc cref="M:BO4E.Encryption.Encrypter.Decrypt(BO4E.Encryption.EncryptedObject)"/>
+            </summary>
+            <param name="cipherText"></param>
+            <returns></returns>
+        </member>
+        <member name="M:BO4E.Encryption.X509AsymmetricEncrypter.PrivateBase64KeyToACKP(System.String)">
+            <summary>
+            Converts a base64 string <paramref name="pemKeyBase64"/> in PEM format to a <see cref="T:Org.BouncyCastle.Crypto.AsymmetricCipherKeyPair"/>.
+            </summary>
+            <param name="pemKeyBase64"></param>
+            <returns></returns>
+        </member>
+        <member name="M:BO4E.Encryption.X509AsymmetricEncrypter.Decrypt(BO4E.Encryption.EncryptedObject)">
+            <summary>
+            <inheritdoc cref="M:BO4E.Encryption.Encrypter.Decrypt(BO4E.Encryption.EncryptedObject)"/>
+            </summary>
+            <param name="encryptedObject"></param>
+            <returns></returns>
+        </member>
+        <member name="M:BO4E.Encryption.X509AsymmetricEncrypter.Decrypt``1(BO4E.Encryption.EncryptedObject)">
+            <summary>
+            <inheritdoc cref="M:BO4E.Encryption.Encrypter.Decrypt``1(BO4E.Encryption.EncryptedObject)"/>
+            </summary>
+            <param name="encryptedObject"></param>
+            <typeparam name="T"></typeparam>
+            <returns></returns>
+        </member>
+        <member name="M:BO4E.Encryption.X509AsymmetricEncrypter.Dispose">
+            <summary>
+            <inheritdoc cref="M:BO4E.Encryption.Encrypter.Dispose"/>
+            </summary>
+        </member>
+        <member name="M:BO4E.Encryption.X509AsymmetricEncrypter.Finalize">
+            <summary>
+            calls the dispose method.
+            </summary>
+        </member>
+    </members>
+</doc>
