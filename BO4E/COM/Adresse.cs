@@ -77,5 +77,15 @@ namespace BO4E.COM
         [FieldName("countryCode", Language.EN)]
         [ProtoMember(10)]
         public Landescode? Landescode { get; set; }
+
+        /// <summary>
+        ///     Ortsteil für EDIFACT mapping
+        /// </summary>
+        [JsonProperty(PropertyName = "ortsteil", Required = Required.Default,
+            NullValueHandling = NullValueHandling.Ignore)]
+        [JsonPropertyName("ortsteil")]
+        [ProtoMember(1011)]
+        [NonOfficial(NonOfficialCategory.MISSING)]
+        public string Ortsteil { get; set; }
     }
 }

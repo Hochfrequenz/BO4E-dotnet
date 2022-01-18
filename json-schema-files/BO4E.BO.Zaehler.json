@@ -1,4 +1,4 @@
-{
+﻿{
   "$schema": "http://json-schema.org/draft-07/schema#",
   "definitions": {
     "Adresse": {
@@ -298,6 +298,9 @@
             "ZW"
           ]
         },
+        "ortsteil": {
+          "type": ["string", "null"]
+        },
         "guid": {
           "type": ["string", "null"]
         },
@@ -312,10 +315,10 @@
       "type": ["object", "null"],
       "properties": {
         "exRefName": {
-          "type": "string"
+          "type": ["string", "null"]
         },
         "exRefWert": {
-          "type": "string"
+          "type": ["string", "null"]
         },
         "guid": {
           "type": ["string", "null"]
@@ -324,8 +327,7 @@
           "type": ["string", "null"],
           "format": "date-time"
         }
-      },
-      "required": ["exRefName", "exRefWert"]
+      }
     },
     "Geschaeftspartner": {
       "type": ["object", "null"],
@@ -438,14 +440,14 @@
           "type": "number"
         },
         "kategorie": {
-          "type": "string"
+          "type": ["string", "null"]
         },
         "satz": {
           "type": "string",
           "enum": ["KAS", "SA", "SAS", "TA", "TAS", "TK", "TKS", "TS", "TSS"]
         }
       },
-      "required": ["kosten", "kategorie", "satz"]
+      "required": ["satz"]
     },
     "Verwendungszweck": {
       "type": ["object", "null"],
@@ -698,6 +700,51 @@
         "HUTSCHIENE",
         "EINSTUTZEN",
         "ZWEISTUTZEN"
+      ]
+    },
+    "zaehlergroesse": {
+      "type": ["string", "null"],
+      "enum": [
+        null,
+        "EINTARIF",
+        "ZWEITARIF",
+        "MEHRTARIF",
+        "GAS_G2P5",
+        "GAS_G4",
+        "GAS_G6",
+        "GAS_G10",
+        "GAS_G16",
+        "GAS_G25",
+        "GAS_G40",
+        "GAS_G65",
+        "GAS_G100",
+        "GAS_G160",
+        "GAS_G250",
+        "GAS_G400",
+        "GAS_G650",
+        "GAS_G1000",
+        "GAS_G1600",
+        "GAS_G2500",
+        "IMPULSGEBER_G4_G100",
+        "IMPULSGEBER_G100",
+        "MODEM_GSM",
+        "MODEM_GPRS",
+        "MODEM_FUNK",
+        "MODEM_GSM_O_LG",
+        "MODEM_GSM_M_LG",
+        "MODEM_FESTNETZ",
+        "MODEM_GPRS_M_LG",
+        "PLC_COM",
+        "ETHERNET_KOM",
+        "DSL_KOM",
+        "LTE_KOM",
+        "RUNDSTEUEREMPFAENGER",
+        "TARIFSCHALTGERAET",
+        "ZUSTANDS_MU",
+        "TEMPERATUR_MU",
+        "KOMPAKT_MU",
+        "SYSTEM_MU",
+        "UNBESTIMMT"
       ]
     }
   },
