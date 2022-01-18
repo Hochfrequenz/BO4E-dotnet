@@ -1,7 +1,7 @@
 namespace BO4E.ENUM
 {
-    /// <summary>Netznutzungsvertrag</summary>
-    public enum NetznutzungsVertrag
+    /// <summary>Art des Netznutzungsvertrags</summary>
+    public enum Netznutzungsvertragsart
     {
         /// <summary>Z08: Direkter Vertrag zwischen Kunden und NB</summary>
         KUNDEN_NB,
