@@ -70,6 +70,11 @@ namespace BO4E.ENUM
         /// <summary>
         ///     kilovar stunde
         /// </summary>
-        KVARH = 1000 * VARH
+        KVARH = 1000 * VARH,
+
+        /// <summary>
+        ///     kWh/K (Kilowatt-Stunde pro Kelvin)
+        /// </summary>
+        KWHK = 40,
     }
 }
