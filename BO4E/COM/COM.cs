@@ -97,8 +97,8 @@ namespace BO4E.COM
         [CompatibilityLevel(CompatibilityLevel.Level240)]
         protected DateTime _TimeStamp
         {
-            get => Timestamp ?? default;
-            set => Timestamp = value == default ? null : DateTime.SpecifyKind(value, DateTimeKind.Utc);
+            get => Timestamp?.DateTime ?? default;
+            set => Timestamp = value == default ? null : new DateTimeOffset(value);
         }
 
         /// <summary>
@@ -109,7 +109,7 @@ namespace BO4E.COM
         [JsonPropertyName("timestamp")]
         [ProtoIgnore]
         [Timestamp]
-        public DateTime? Timestamp { get; set; }
+        public DateTimeOffset? Timestamp { get; set; }
 
         /// <summary>
         ///     BO4E components are considered equal iff all of their elements/fields are equal.

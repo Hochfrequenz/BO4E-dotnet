@@ -910,6 +910,7 @@ enum Mengeneinheit {
    KVAR = 23000;
    VARH = 29;
    KVARH = 29000;
+   KWHK = 40;
 }
 enum Mengenoperator {
    option (.protobuf_net.enumopt).namespace = "BO4E.ENUM";
