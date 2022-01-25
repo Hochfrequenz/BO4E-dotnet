@@ -155,7 +155,6 @@ namespace BO4E.BO
         [JsonProperty(PropertyName = "timestamp", NullValueHandling = NullValueHandling.Ignore,
             Required = Required.Default, Order = 2)]
         [JsonPropertyName("timestamp")]
-        [Timestamp]
         [ProtoIgnore]
         public DateTime? Timestamp { get; set; }
 

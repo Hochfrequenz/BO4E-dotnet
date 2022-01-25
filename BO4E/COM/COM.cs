@@ -108,7 +108,6 @@ namespace BO4E.COM
             Required = Required.Default, Order = 2)]
         [JsonPropertyName("timestamp")]
         [ProtoIgnore]
-        [Timestamp]
         public DateTimeOffset? Timestamp { get; set; }
 
         /// <summary>
