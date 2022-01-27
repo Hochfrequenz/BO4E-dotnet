@@ -254,6 +254,7 @@ namespace TestBO4E.Extensions
         }
 
         [TestMethod]
+        [Obsolete]
         public void TestMonthlySlices()
         {
             TestMonthlySlices(true);

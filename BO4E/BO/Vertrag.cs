@@ -29,11 +29,11 @@ namespace BO4E.BO
         /// <summary>
         ///     static serializer options for Vertragsconverter
         /// </summary>
-        public static JsonSerializerOptions  VertragsSerializerOptions = null;
+        public static JsonSerializerOptions VertragsSerializerOptions = null;
 
         static Vertrag()
         {
-            
+
         }
 
         /// <summary>
@@ -222,11 +222,11 @@ namespace BO4E.BO
         /// <returns></returns>
         public override Vertrag Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
         {
-            if(Vertrag.VertragsSerializerOptions==null)
+            if (Vertrag.VertragsSerializerOptions == null)
             {
                 Vertrag.VertragsSerializerOptions = new JsonSerializerOptions(options);
                 Vertrag.VertragsSerializerOptions.Converters.Remove(
-                    Vertrag.VertragsSerializerOptions.Converters.First(s => s.GetType() == typeof(VertragsConverter)));                
+                    Vertrag.VertragsSerializerOptions.Converters.First(s => s.GetType() == typeof(VertragsConverter)));
             }
             var v = JsonSerializer.Deserialize<Vertrag>(ref reader, Vertrag.VertragsSerializerOptions);
             if ((v.Vertragsteile == null || v.Vertragsteile.Count == 0) && v.UserProperties != null &&
