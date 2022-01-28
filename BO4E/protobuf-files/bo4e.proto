@@ -26,6 +26,7 @@ message Adresse {
    string Adresszusatz = 8;
    string CoErgaenzung = 9;
    Landescode Landescode = 10;
+   string Ortsteil = 1011;
 }
 message Angebot {
    option (.protobuf_net.msgopt).namespace = "BO4E.BO";
@@ -909,6 +910,7 @@ enum Mengeneinheit {
    KVAR = 23000;
    VARH = 29;
    KVARH = 29000;
+   KWHK = 40;
 }
 enum Mengenoperator {
    option (.protobuf_net.enumopt).namespace = "BO4E.ENUM";
@@ -1358,6 +1360,7 @@ message Vertragskonditionen {
    Netznutzungszahler Netznutzungszahler = 1016;
    Netznutzungsabrechnungsvariante Netznutzungsabrechnungsvariante = 1017;
    Netznutzungsabrechnungsgrundlage Netznutzungsabrechnungsgrundlage = 1018;
+   bool BeinhaltetSingulaerGenutzteBetriebsmittel = 1019;
 }
 enum Vertragstatus {
    option (.protobuf_net.enumopt).namespace = "BO4E.ENUM";
@@ -1623,6 +1626,7 @@ message Zaehler {
    Messwerterfassung Messwerterfassung = 1016;
    ZaehlertypSpezifikation Zaehlertypspezifikation = 1017;
    Befestigungsart Befestigungsart = 1018;
+   Geraetemerkmal Zaehlergroesse = 1019;
 }
 enum Zaehlerauspraegung {
    option (.protobuf_net.enumopt).namespace = "BO4E.ENUM";

@@ -23,7 +23,7 @@ namespace BO4E.COM
         /// <summary>
         ///     Konzessionsabgabe in E/kWh
         /// </summary>
-        [JsonProperty(PropertyName = "kosten", Required = Required.Always, Order = 5)]
+        [JsonProperty(PropertyName = "kosten", Required = Required.Default, Order = 5)]
         [JsonPropertyName("kosten")]
         [ProtoMember(4)]
         public decimal Kosten { get; set; }
@@ -31,7 +31,7 @@ namespace BO4E.COM
         /// <summary>
         ///     Gebührenkategorie der Konzessionsabgabe
         /// </summary>
-        [JsonProperty(PropertyName = "kategorie", Required = Required.Always, Order = 6)]
+        [JsonProperty(PropertyName = "kategorie", Required = Required.Default, Order = 6)]
         [JsonPropertyName("kategorie")]
         [ProtoMember(5)]
         public string Kategorie { get; set; }

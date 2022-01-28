@@ -81,6 +81,7 @@ namespace BO4E.BO
         ///     the BO4E standard to be passed along.
         /// </example>
         [Newtonsoft.Json.JsonIgnore]
+        [System.Text.Json.Serialization.JsonIgnore]
         [ProtoIgnore]
         public const string USER_PROPERTIES_NAME = "userProperties";
 
@@ -155,7 +156,6 @@ namespace BO4E.BO
         [JsonProperty(PropertyName = "timestamp", NullValueHandling = NullValueHandling.Ignore,
             Required = Required.Default, Order = 2)]
         [JsonPropertyName("timestamp")]
-        [Timestamp]
         [ProtoIgnore]
         public DateTime? Timestamp { get; set; }
 

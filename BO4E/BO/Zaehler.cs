@@ -168,5 +168,14 @@ namespace BO4E.BO
         [ProtoMember(1018)]
         [NonOfficial(NonOfficialCategory.REGULATORY_REQUIREMENTS)]
         public Befestigungsart? Befestigungsart { get; set; }
+
+        /// <summary>
+        ///     Zaehlergroesse
+        /// </summary>
+        [JsonProperty(Required = Required.Default, Order = 19, PropertyName = "zaehlergroesse")]
+        [JsonPropertyName("zaehlergroesse")]
+        [ProtoMember(1019)]
+        [NonOfficial(NonOfficialCategory.REGULATORY_REQUIREMENTS)]
+        public Geraetemerkmal? Zaehlergroesse { get; set; }
     }
 }

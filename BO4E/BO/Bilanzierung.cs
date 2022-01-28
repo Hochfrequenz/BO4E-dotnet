@@ -103,6 +103,15 @@ namespace BO4E.BO
         /// <summary>
         /// Kundenwert
         /// </summary>
+        [JsonProperty(PropertyName = "temperaturarbeit", Required = Required.Default)]
+        [JsonPropertyName("temperaturarbeit")]
+        [NonOfficial(NonOfficialCategory.MISSING)]
+        [ProtoMember(1018)]
+        public Menge TemperaturArbeit { get; set; }
+
+        /// <summary>
+        /// Kundenwert
+        /// </summary>
         [JsonProperty(PropertyName = "kundenwert", Required = Required.Default)]
         [JsonPropertyName("kundenwert")]
         [NonOfficial(NonOfficialCategory.MISSING)]

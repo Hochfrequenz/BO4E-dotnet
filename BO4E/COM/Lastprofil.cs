@@ -21,6 +21,14 @@ namespace BO4E.COM
         public string Bezeichnung { get; set; }
 
         /// <summary>
+        /// Optionale Bezeichnung der Profilschar, durch DVGW bzw. den Netzbetreiber vergeben (z.B. H0)
+        /// </summary>
+        [JsonProperty(PropertyName = "profilschar", Required = Required.Default)]
+        [JsonPropertyName("profilschar")]
+        [NonOfficial(NonOfficialCategory.CUSTOMER_REQUIREMENTS)]
+        [ProtoMember(1005)]
+        public string Profilschar { get; set; }
+        /// <summary>
         /// Verfahren des Profils (analytisch oder synthetisch)
         /// </summary>
         [JsonProperty(PropertyName = "verfahren", Required = Required.Default)]
