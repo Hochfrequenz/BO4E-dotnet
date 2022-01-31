@@ -1,10 +1,11 @@
-name: Nuget Master Release
+name: Nuget Release (on Tagging)
 
 on:
-  push:
-    branches:
-      - master
-      - main
+  release:
+    types:
+      - created
+    tags:
+      - "v\\d+\\.\\d+\\.\\d+"
 
 jobs:
   pushrelease:
