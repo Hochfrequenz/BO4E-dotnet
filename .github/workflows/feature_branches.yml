@@ -6,6 +6,7 @@ on:
       - "*"
       - "!develop"
       - "!master"
+      - "!main"
 jobs:
   pushfeature:
     runs-on: ubuntu-latest
