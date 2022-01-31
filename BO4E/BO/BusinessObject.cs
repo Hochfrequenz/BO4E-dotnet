@@ -34,11 +34,12 @@ namespace BO4E.BO
     //[ProtoContract] // If I add this I get an error message: "System.InvalidOperationException: Duplicate field-number detected; 1 on: BO4E.BO.BusinessObject"
     [ProtoInclude(1, typeof(Angebot))]
     [ProtoInclude(2, typeof(Ansprechpartner))]
-    [ProtoInclude(3, typeof(Benachrichtigung))]
-    [ProtoInclude(4, typeof(Energiemenge))]
-    [ProtoInclude(5, typeof(Geschaeftspartner))]
-    [ProtoInclude(6, typeof(Kosten))]
-    [ProtoInclude(7, typeof(Marktlokation))]
+    [ProtoInclude(3, typeof(Auftrag))]
+    [ProtoInclude(4, typeof(Benachrichtigung))]
+    [ProtoInclude(5, typeof(Energiemenge))]
+    [ProtoInclude(6, typeof(Geschaeftspartner))]
+    [ProtoInclude(7, typeof(Kosten))]
+    [ProtoInclude(8, typeof(Marktlokation))]
     //[ProtoInclude(8, typeof(Marktteilnehmer))] // https://stackoverflow.com/a/13791539/10009545
     [ProtoInclude(9, typeof(Messlokation))]
     [ProtoInclude(10, typeof(Preisblatt))]
@@ -48,6 +49,9 @@ namespace BO4E.BO
     [ProtoInclude(14, typeof(Zaehler))]
     [ProtoInclude(15, typeof(LogObject.LogObject))]
     [ProtoInclude(16, typeof(Bilanzierung))]
+    [ProtoInclude(17, typeof(Sperrauftrag))]
+    [ProtoInclude(18, typeof(Entsperrauftrag))]
+    [ProtoInclude(19, typeof(AuftragsStorno))]
     public abstract class BusinessObject : IEquatable<BusinessObject>, IUserProperties, IOptionalGuid
     {
         /// <summary>

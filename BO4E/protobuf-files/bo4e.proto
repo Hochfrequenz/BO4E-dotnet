@@ -227,9 +227,9 @@ message Betrag {
 }
 enum Betriebszustand {
    option (.protobuf_net.enumopt).namespace = "BO4E.ENUM";
-   GESPERRT_NICHT_ENTSPERREN = 0;
-   GESPERRT = 1;
-   REGELBETRIEB = 2;
+   Betriebszustand_GESPERRT_NICHT_ENTSPERREN = 0;
+   Betriebszustand_GESPERRT = 1;
+   Betriebszustand_REGELBETRIEB = 2;
 }
 enum Bilanzierungsmethode {
    option (.protobuf_net.enumopt).namespace = "BO4E.ENUM";
