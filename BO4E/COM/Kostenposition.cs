@@ -18,16 +18,35 @@ namespace BO4E.COM
         [ProtoMember(3)]
         public string Positionstitel { get; set; }
 
+        [System.Text.Json.Serialization.JsonIgnore]
+        [Newtonsoft.Json.JsonIgnore]
+        [ProtoMember(4, Name = nameof(Von))]
+        [CompatibilityLevel(CompatibilityLevel.Level240)]
+        private DateTime _Von
+        {
+            get => Von?.UtcDateTime ?? default;
+            set => Von = value == default ? null : DateTime.SpecifyKind(value, DateTimeKind.Utc);
+        }
         /// <summary>von-Datum der Kostenzeitscheibe. Z.B. 2017-01-01</summary>
         [JsonProperty(PropertyName = "von", Required = Required.Default)]
         [JsonPropertyName("von")]
-        [ProtoMember(4)]
+        [ProtoIgnore]
         public DateTimeOffset? Von { get; set; }
 
+
+        [System.Text.Json.Serialization.JsonIgnore]
+        [Newtonsoft.Json.JsonIgnore]
+        [ProtoMember(5, Name = nameof(Bis))]
+        [CompatibilityLevel(CompatibilityLevel.Level240)]
+        private DateTime _Bis
+        {
+            get => Bis?.UtcDateTime ?? default;
+            set => Bis = value == default ? null : DateTime.SpecifyKind(value, DateTimeKind.Utc);
+        }
         /// <summary>bis-Datum der Kostenzeitscheibe. Z.B. 2017-12-31</summary>
         [JsonProperty(PropertyName = "bis", Required = Required.Default)]
         [JsonPropertyName("bis")]
-        [ProtoMember(5)]
+        [ProtoIgnore]
         public DateTimeOffset? Bis { get; set; }
 
         /// <summary>Bezeichnung für den Artikel für den die Kosten ermittelt wurden. Beispiel: Arbeitspreis HT</summary>

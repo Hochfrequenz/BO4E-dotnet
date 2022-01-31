@@ -1,10 +1,13 @@
+using BO4E.BO;
+
+using Newtonsoft.Json;
+
+using ProtoBuf;
+
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text.Json.Serialization;
-using BO4E.BO;
-using Newtonsoft.Json;
-using ProtoBuf;
 
 namespace BO4E.COM
 {
@@ -21,7 +24,7 @@ namespace BO4E.COM
         /// <summary>
         ///     Bezeichnung der externen Referenz (z.B. "hochfrequenz integration services")
         /// </summary>
-        [JsonProperty(PropertyName = "exRefName", Required = Required.Always)]
+        [JsonProperty(PropertyName = "exRefName", Required = Required.Default)]
         [JsonPropertyName("exRefName")]
         [ProtoMember(1)]
         public string ExRefName { get; set; }
@@ -29,10 +32,18 @@ namespace BO4E.COM
         /// <summary>
         ///     Wert der externen Referenz (z.B. "123456"; "4711")
         /// </summary>
-        [JsonProperty(PropertyName = "exRefWert", Required = Required.Always)]
+        [JsonProperty(PropertyName = "exRefWert", Required = Required.Default)]
         [JsonPropertyName("exRefWert")]
         [ProtoMember(2)]
         public string ExRefWert { get; set; }
+        /// <summary>
+        /// Ist das Objekt valide
+        /// </summary>
+        /// <returns></returns>
+        public override bool IsValid()
+        {
+            return !string.IsNullOrWhiteSpace(ExRefName) && !string.IsNullOrWhiteSpace(ExRefWert);
+        }
     }
 
     /// <summary>
@@ -108,4 +119,5 @@ namespace BO4E.COM
             return extReferences;
         }
     }
+
 }

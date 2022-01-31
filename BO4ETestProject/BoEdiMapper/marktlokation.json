@@ -1,7 +1,7 @@
 {
   "note": "these testdata are copied from bo4e.de",
   "expectedResult": {
-    "versionStruktur": 1,
+    "versionStruktur": "1",
     "boTyp": "MARKTLOKATION",
     "marktlokationsId": "Malo4711_0916",
     "sparte": "GAS",
@@ -45,7 +45,7 @@
     ]
   },
   "input": {
-    "versionStruktur": 1,
+    "versionStruktur": "1",
     "boTyp": "MARKTLOKATION",
     "marktlokationsId": "Malo4711_0916",
     "sparte": "GAS",

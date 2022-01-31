@@ -2,7 +2,7 @@
   "objectName": "Rechnung",
   "lenientDateTime": true,
   "input": {
-    "versionStruktur": 1,
+    "versionStruktur": "1",
     "boTyp": "RECHNUNG",
     "rechnungsstatus": "GEPRUEFT_OK",
     "storno": false,
@@ -15,7 +15,7 @@
       "enddatum": "2019-12-24T23:00:00Z"
     },
     "rechnungsersteller": {
-      "versionStruktur": 1,
+      "versionStruktur": "1",
       "boTyp": "GESCHAEFTSPARTNER",
       "anrede": "HERR",
       "name1": "Mein super Lieferant",
@@ -30,7 +30,7 @@
       }
     },
     "rechnungsempfaenger": {
-      "versionStruktur": 1,
+      "versionStruktur": "1",
       "boTyp": "GESCHAEFTSPARTNER",
       "anrede": "HERR",
       "name1": "Lustig",

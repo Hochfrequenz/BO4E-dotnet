@@ -1,10 +1,11 @@
-﻿using System;
+﻿using BO4E.BO;
+using BO4E.COM;
+
+using System;
 using System.Collections.Generic;
 using System.Text.Encodings.Web;
 using System.Text.Json;
 using System.Text.Json.Serialization;
-using BO4E.BO;
-using BO4E.COM;
 
 namespace BO4E.meta.LenientConverters
 {
@@ -39,7 +40,7 @@ namespace BO4E.meta.LenientConverters
                 NumberHandling = JsonNumberHandling.AllowReadingFromString,
                 Encoder = JavaScriptEncoder.UnsafeRelaxedJsonEscaping
             };
-
+            settings.Converters.Add(new AutoNumberToStringConverter());
             settings.Converters.Add(new VertragsConverter());
             settings.Converters.Add(new EnergiemengeConverter());
             settings.Converters.Add(new VerbrauchConverter());

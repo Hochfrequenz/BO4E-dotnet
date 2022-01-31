@@ -1,10 +1,13 @@
+using BO4E.ENUM;
+using BO4E.meta;
+
+using Newtonsoft.Json;
+
+using ProtoBuf;
+
 using System;
 using System.Collections.Generic;
 using System.Text.Json.Serialization;
-using BO4E.ENUM;
-using BO4E.meta;
-using Newtonsoft.Json;
-using ProtoBuf;
 
 namespace BO4E.COM
 {
@@ -53,10 +56,10 @@ namespace BO4E.COM
         public decimal Wandlerfaktor { get; set; }
 
         /// <summary>Die Einheit der gemessenen Größe, z.B. kWh. Details <see cref="Mengeneinheit" /></summary>
-        [JsonProperty(PropertyName = "einheit", Required = Required.Always)]
+        [JsonProperty(PropertyName = "einheit", Required = Required.Default)]
         [JsonPropertyName("einheit")]
         [ProtoMember(8)]
-        public Mengeneinheit Einheit { get; set; }
+        public Mengeneinheit? Einheit { get; set; }
 
         /// <summary>Obis kennzahl</summary>
         [JsonProperty(PropertyName = "kennzahl", Required = Required.Default)]

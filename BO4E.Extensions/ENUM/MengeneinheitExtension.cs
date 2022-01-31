@@ -23,7 +23,8 @@ namespace BO4E.Extensions.ENUM
             new HashSet<Mengeneinheit> {Mengeneinheit.ANZAHL},
             new HashSet<Mengeneinheit> {Mengeneinheit.KUBIKMETER},
             new HashSet<Mengeneinheit> {Mengeneinheit.VAR, Mengeneinheit.KVAR},
-            new HashSet<Mengeneinheit> {Mengeneinheit.VARH, Mengeneinheit.KVARH}
+            new HashSet<Mengeneinheit> {Mengeneinheit.VARH, Mengeneinheit.KVARH},
+            new HashSet<Mengeneinheit> {Mengeneinheit.KWHK}
         };
 
         /// <summary>

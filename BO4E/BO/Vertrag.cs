@@ -1,15 +1,19 @@
-﻿using System;
+﻿using BO4E.COM;
+using BO4E.ENUM;
+using BO4E.meta;
+using BO4E.meta.LenientConverters;
+
+using Newtonsoft.Json;
+
+using ProtoBuf;
+
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.Serialization;
 using System.Text.Json;
 using System.Text.Json.Serialization;
-using BO4E.COM;
-using BO4E.ENUM;
-using BO4E.meta;
-using BO4E.meta.LenientConverters;
-using Newtonsoft.Json;
-using ProtoBuf;
+
 using JsonSerializer = System.Text.Json.JsonSerializer;
 
 namespace BO4E.BO
@@ -25,13 +29,14 @@ namespace BO4E.BO
         /// <summary>
         ///     static serializer options for Vertragsconverter
         /// </summary>
-        public static JsonSerializerOptions VertragsSerializerOptions;
-
+        public static JsonSerializerOptions VertragsSerializerOptions = null;
+        /// <summary>
+        /// Semaphore to protect access to the serializer
+        /// </summary>
+        public static System.Threading.SemaphoreSlim SerializerSemaphore = new System.Threading.SemaphoreSlim(1);
         static Vertrag()
         {
-            VertragsSerializerOptions = LenientParsing.MOST_LENIENT.GetJsonSerializerOptions();
-            VertragsSerializerOptions.Converters.Remove(
-                VertragsSerializerOptions.Converters.First(s => s.GetType() == typeof(VertragsConverter)));
+
         }
 
         /// <summary>
@@ -76,21 +81,40 @@ namespace BO4E.BO
         [ProtoMember(8)]
         public Sparte Sparte { get; set; }
 
+        [System.Text.Json.Serialization.JsonIgnore]
+        [Newtonsoft.Json.JsonIgnore]
+        [ProtoMember(9, Name = nameof(Vertragsbeginn))]
+        [CompatibilityLevel(CompatibilityLevel.Level240)]
+        private DateTime _Vertragsbeginn
+        {
+            get => Vertragsbeginn.UtcDateTime;
+            set => Vertragsbeginn = DateTime.SpecifyKind(value, DateTimeKind.Utc);
+        }
         /// <summary>
         ///     Gibt an, wann der Vertrag beginnt.
         /// </summary>
         [JsonProperty(Required = Required.Always, Order = 9, PropertyName = "vertragsbeginn")]
         [JsonPropertyName("vertragsbeginn")]
-        [ProtoMember(9)]
+        [ProtoIgnore]
         [Newtonsoft.Json.JsonConverter(typeof(LenientDateTimeConverter))]
         public DateTimeOffset Vertragsbeginn { get; set; }
 
+
+        [System.Text.Json.Serialization.JsonIgnore]
+        [Newtonsoft.Json.JsonIgnore]
+        [ProtoMember(10, Name = nameof(Vertragsende))]
+        [CompatibilityLevel(CompatibilityLevel.Level240)]
+        private DateTime _Vertragsende
+        {
+            get => Vertragsende.UtcDateTime;
+            set => Vertragsende = DateTime.SpecifyKind(value, DateTimeKind.Utc);
+        }
         /// <summary>
         ///     Gibt an, wann der Vertrag (voraussichtlich) endet oder beendet wurde.
         /// </summary>
         [JsonProperty(Required = Required.Always, Order = 10, PropertyName = "vertragsende")]
         [JsonPropertyName("vertragsende")]
-        [ProtoMember(10)]
+        [ProtoIgnore]
         [Newtonsoft.Json.JsonConverter(typeof(LenientDateTimeConverter))]
         public DateTimeOffset Vertragsende { get; set; }
 
@@ -201,6 +225,14 @@ namespace BO4E.BO
         /// <returns></returns>
         public override Vertrag Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
         {
+            Vertrag.SerializerSemaphore.Wait();
+            if (Vertrag.VertragsSerializerOptions == null)
+            {
+                Vertrag.VertragsSerializerOptions = new JsonSerializerOptions(options);
+                Vertrag.VertragsSerializerOptions.Converters.Remove(
+                    Vertrag.VertragsSerializerOptions.Converters.First(s => s.GetType() == typeof(VertragsConverter)));
+            }
+            Vertrag.SerializerSemaphore.Release();
             var v = JsonSerializer.Deserialize<Vertrag>(ref reader, Vertrag.VertragsSerializerOptions);
             if ((v.Vertragsteile == null || v.Vertragsteile.Count == 0) && v.UserProperties != null &&
                 v.UserProperties.ContainsKey("lokationsId"))
@@ -214,6 +246,7 @@ namespace BO4E.BO
                     }
                 };
             return v;
+
         }
 
         /// <summary>
@@ -223,7 +256,15 @@ namespace BO4E.BO
         /// <param name="options"></param>
         public override void Write(Utf8JsonWriter writer, Vertrag value, JsonSerializerOptions options)
         {
-            JsonSerializer.Serialize(writer, value);
+            Vertrag.SerializerSemaphore.Wait();
+            if (Vertrag.VertragsSerializerOptions == null)
+            {
+                Vertrag.VertragsSerializerOptions = new JsonSerializerOptions(options);
+                Vertrag.VertragsSerializerOptions.Converters.Remove(
+                    Vertrag.VertragsSerializerOptions.Converters.First(s => s.GetType() == typeof(VertragsConverter)));
+            }
+            Vertrag.SerializerSemaphore.Release();
+            JsonSerializer.Serialize(writer, value, Vertrag.VertragsSerializerOptions);
         }
     }
 }

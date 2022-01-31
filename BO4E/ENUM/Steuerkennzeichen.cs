@@ -5,6 +5,8 @@ namespace BO4E.ENUM
     {
         /// <summary>Umsatzsteuer 19%</summary>
         UST_19,
+        /// <summary>Umsatzsteuer 16%</summary>
+        UST_16,
 
         /// <summary>Umsatzsteuer 7%</summary>
         UST_7,
@@ -14,6 +16,8 @@ namespace BO4E.ENUM
 
         /// <summary>Vorsteuer 19%</summary>
         VST_19,
+        /// <summary>Vorsteuer 16%</summary>
+        VST_16,
 
         /// <summary>Vorsteuer 7%</summary>
         VST_7,

@@ -1,14 +1,14 @@
-{
+﻿{
   "$schema": "http://json-schema.org/draft-07/schema#",
   "definitions": {
     "ExterneReferenz": {
       "type": ["object", "null"],
       "properties": {
         "exRefName": {
-          "type": "string"
+          "type": ["string", "null"]
         },
         "exRefWert": {
-          "type": "string"
+          "type": ["string", "null"]
         },
         "guid": {
           "type": ["string", "null"]
@@ -17,8 +17,7 @@
           "type": ["string", "null"],
           "format": "date-time"
         }
-      },
-      "required": ["exRefName", "exRefWert"]
+      }
     },
     "PositionsAufAbschlag": {
       "type": ["object", "null"],
@@ -128,6 +127,7 @@
             "MONAT",
             "VAR",
             "VARH",
+            "KWHK",
             "JAHR",
             "KWH",
             "MW",
@@ -356,7 +356,7 @@
       "type": ["string", "null"]
     },
     "versionStruktur": {
-      "type": "integer"
+      "type": ["string", "null"]
     },
     "timestamp": {
       "type": ["string", "null"],

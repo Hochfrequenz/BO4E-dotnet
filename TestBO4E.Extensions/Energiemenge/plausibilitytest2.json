@@ -4,7 +4,7 @@
     "isPureUserProperties": false
   },
   "input": {
-    "versionStruktur": 1,
+    "versionStruktur": "1",
     "boTyp": "ENERGIEMENGE",
     "lokationsId": "DE0003604780400000000000012345678",
     "lokationstyp": "MeLo",

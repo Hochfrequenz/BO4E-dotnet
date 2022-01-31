@@ -1,6 +1,7 @@
 ﻿syntax = "proto3";
 package bo4e;
 import "google/protobuf/timestamp.proto";
+import "protobuf-net/bcl.proto"; // schema for protobuf-net's handling of core .NET types
 import "protobuf-net/protogen.proto"; // custom protobuf-net options
 
 enum AbgabeArt {
@@ -25,14 +26,15 @@ message Adresse {
    string Adresszusatz = 8;
    string CoErgaenzung = 9;
    Landescode Landescode = 10;
+   string Ortsteil = 1011;
 }
 message Angebot {
    option (.protobuf_net.msgopt).namespace = "BO4E.BO";
    string Angebotsnummer = 4;
    string Anfragereferenz = 5;
-   DateTimeOffset Angebotsdatum = 6;
+   .google.protobuf.Timestamp Angebotsdatum = 6;
    Sparte Sparte = 7;
-   DateTimeOffset Bindefrist = 8;
+   .google.protobuf.Timestamp Bindefrist = 8;
    Geschaeftspartner Angebotgeber = 9;
    Geschaeftspartner Angebotnehmer = 10;
    Ansprechpartner UnterzeichnerAngebotsnehmer = 11;
@@ -70,8 +72,8 @@ message Angebotsvariante {
    option (.protobuf_net.msgopt).namespace = "BO4E.COM";
    Angebotsstatus Angebotsstatus = 4;
    string Beschreibung = 5;
-   DateTimeOffset Erstelldatum = 6;
-   DateTimeOffset Bindefrist = 7;
+   .google.protobuf.Timestamp Erstelldatum = 6;
+   .google.protobuf.Timestamp Bindefrist = 7;
    Menge Gesamtmenge = 8;
    Betrag Gesamtkosten = 9;
    repeated Angebotsteil Teile = 10;
@@ -119,9 +121,9 @@ message Aufgabe {
    option (.protobuf_net.msgopt).namespace = "BO4E.COM";
    string AufgabenId = 3;
    string Beschreibung = 4;
-   DateTimeOffset Deadline = 5;
+   .google.protobuf.Timestamp Deadline = 5;
    bool Ausgefuehrt = 6;
-   DateTimeOffset Ausfuehrungszeitpunkt = 7;
+   .google.protobuf.Timestamp Ausfuehrungszeitpunkt = 7;
    string Ausfuehrender = 8;
 }
 enum BDEWArtikelnummer {
@@ -181,6 +183,14 @@ enum Bearbeitungsstatus {
    QUITTIERT = 4;
    IGNORIERT = 5;
 }
+enum Befestigungsart {
+   option (.protobuf_net.enumopt).namespace = "BO4E.ENUM";
+   STECKTECHNIK = 0;
+   DREIPUNKT = 1;
+   HUTSCHIENE = 2;
+   EINSTUTZEN = 3;
+   ZWEISTUTZEN = 4;
+}
 enum Bemessungsgroesse {
    option (.protobuf_net.enumopt).namespace = "BO4E.ENUM";
    Bemessungsgroesse_WIRKARBEIT_EL = 0;
@@ -202,18 +212,24 @@ message Benachrichtigung {
    Prioritaet Prioritaet = 5; // default value could not be applied: NORMAL
    Bearbeitungsstatus Bearbeitungsstatus = 6;
    string Kurztext = 7;
-   DateTimeOffset ErstellungsZeitpunkt = 8;
+   .google.protobuf.Timestamp ErstellungsZeitpunkt = 8;
    string Kategorie = 9;
    string Bearbeiter = 10;
    repeated Notiz Notizen = 11;
-   DateTimeOffset Deadline = 12;
+   .google.protobuf.Timestamp Deadline = 12;
    repeated Aufgabe Aufgaben = 13;
    repeated GenericStringStringInfo Infos = 14;
 }
 message Betrag {
    option (.protobuf_net.msgopt).namespace = "BO4E.COM";
-   string Wert = 3;
+   .bcl.Decimal Wert = 3;
    Waehrungscode Waehrung = 4;
+}
+enum Betriebszustand {
+   option (.protobuf_net.enumopt).namespace = "BO4E.ENUM";
+   Betriebszustand_GESPERRT_NICHT_ENTSPERREN = 0;
+   Betriebszustand_GESPERRT = 1;
+   Betriebszustand_REGELBETRIEB = 2;
 }
 enum Bilanzierungsmethode {
    option (.protobuf_net.enumopt).namespace = "BO4E.ENUM";
@@ -223,9 +239,6 @@ enum Bilanzierungsmethode {
    Bilanzierungsmethode_TLP_GETRENNT = 3;
    Bilanzierungsmethode_PAUSCHAL = 4;
    Bilanzierungsmethode_IMS = 5;
-}
-message DateTimeOffset {
-   option (.protobuf_net.msgopt).namespace = "System";
 }
 message Dienstleistung {
    option (.protobuf_net.msgopt).namespace = "BO4E.COM";
@@ -318,8 +331,8 @@ message GenericStringStringInfo {
 }
 message Geokoordinaten {
    option (.protobuf_net.msgopt).namespace = "BO4E.COM";
-   string Breitengrad = 3;
-   string Laengengrad = 4;
+   .bcl.Decimal Breitengrad = 3;
+   .bcl.Decimal Laengengrad = 4;
 }
 message Geraeteeigenschaften {
    option (.protobuf_net.msgopt).namespace = "BO4E.COM";
@@ -488,7 +501,7 @@ enum Kontaktart {
 message Konzessionsabgabe {
    option (.protobuf_net.msgopt).namespace = "BO4E.COM";
    AbgabeArt Satz = 3;
-   string Kosten = 4;
+   .bcl.Decimal Kosten = 4;
    string Kategorie = 5;
 }
 message Kosten {
@@ -512,8 +525,8 @@ enum Kostenklasse {
 message Kostenposition {
    option (.protobuf_net.msgopt).namespace = "BO4E.COM";
    string Positionstitel = 3;
-   DateTimeOffset Von = 4;
-   DateTimeOffset Bis = 5;
+   .google.protobuf.Timestamp Von = 4;
+   .google.protobuf.Timestamp Bis = 5;
    string Artikelbezeichnung = 6;
    string Artikeldetail = 7;
    Menge Menge = 8;
@@ -832,7 +845,7 @@ message Marktlokation {
    bool Unterbrechbar = 9;
    Netzebene Netzebene = 10;
    string NetzbetreiberCodeNr = 11;
-   Gebiettyp GebietType = 12;
+   Gebiettyp GebietTyp = 12;
    string NetzgebietNr = 13;
    string Bilanzierungsgebiet = 14;
    string GrundversorgerCodeNr = 15;
@@ -849,6 +862,7 @@ message Marktlokation {
    repeated Zaehlwerk Zaehlwerke = 1025;
    repeated Verbrauch Verbrauchsmenge = 1026;
    repeated Messlokation Messlokationen = 1027;
+   MesstechnischeEinordnung MesstechnischeEinordnung = 1029;
 }
 message MarktpartnerDetails {
    option (.protobuf_net.msgopt).namespace = "BO4E.COM";
@@ -875,7 +889,7 @@ enum Marktrolle {
 }
 message Menge {
    option (.protobuf_net.msgopt).namespace = "BO4E.COM";
-   string Wert = 3;
+   .bcl.Decimal Wert = 3;
    Mengeneinheit Einheit = 4;
 }
 enum Mengeneinheit {
@@ -896,6 +910,7 @@ enum Mengeneinheit {
    KVAR = 23000;
    VARH = 29;
    KVARH = 29000;
+   KWHK = 40;
 }
 enum Mengenoperator {
    option (.protobuf_net.enumopt).namespace = "BO4E.ENUM";
@@ -922,14 +937,22 @@ message Messlokation {
    bool Abrechnungmessstellenbetriebnna = 1018;
    repeated MarktpartnerDetails Marktrollen = 1019;
    Gasqualitaet Gasqualitaet = 1020;
-   string Verlustfaktor = 1021;
+   .bcl.Decimal Verlustfaktor = 1021;
+   repeated Zaehlwerk Zaehlwerke = 1022;
+   Betriebszustand Betriebszustand = 1023;
 }
 message Messlokationszuordnung {
    option (.protobuf_net.msgopt).namespace = "BO4E.COM";
    string MesslokationsId = 3;
    ArithmetischeOperation Arithmetik = 4;
-   DateTimeOffset GueltigSeit = 5;
-   DateTimeOffset GueltigBis = 6;
+   .google.protobuf.Timestamp GueltigSeit = 5;
+   .google.protobuf.Timestamp GueltigBis = 6;
+}
+enum MesstechnischeEinordnung {
+   option (.protobuf_net.enumopt).namespace = "BO4E.ENUM";
+   IMS = 0;
+   KME_MME = 1;
+   KEINE_MESSUNG = 2;
 }
 enum Messwerterfassung {
    option (.protobuf_net.enumopt).namespace = "BO4E.ENUM";
@@ -949,11 +972,6 @@ enum Netzebene {
    MD = 8;
    ND = 9;
 }
-enum NetznutzungsVertrag {
-   option (.protobuf_net.enumopt).namespace = "BO4E.ENUM";
-   KUNDEN_NB = 0;
-   LIEFERANTEN_NB = 1;
-}
 enum Netznutzungsabrechnungsgrundlage {
    option (.protobuf_net.enumopt).namespace = "BO4E.ENUM";
    LIEFERSCHEIN = 0;
@@ -964,6 +982,11 @@ enum Netznutzungsabrechnungsvariante {
    ARBEITSPREIS_GRUNDPREIS = 0;
    ARBEITSPREIS_LEISTUNGSPREIS = 1;
 }
+enum Netznutzungsvertragsart {
+   option (.protobuf_net.enumopt).namespace = "BO4E.ENUM";
+   KUNDEN_NB = 0;
+   LIEFERANTEN_NB = 1;
+}
 enum Netznutzungszahler {
    option (.protobuf_net.enumopt).namespace = "BO4E.ENUM";
    Netznutzungszahler_KUNDE = 0;
@@ -972,7 +995,7 @@ enum Netznutzungszahler {
 message Notiz {
    option (.protobuf_net.msgopt).namespace = "BO4E.COM";
    string Autor = 3;
-   DateTimeOffset Zeitpunkt = 4;
+   .google.protobuf.Timestamp Zeitpunkt = 4;
    string Inhalt = 5;
 }
 message PositionsAufAbschlag {
@@ -980,12 +1003,12 @@ message PositionsAufAbschlag {
    string Bezeichnung = 3;
    string Beschreibung = 4;
    AufAbschlagstyp AufAbschlagstyp = 5;
-   string AufAbschlagswert = 6;
+   .bcl.Decimal AufAbschlagswert = 6;
    Waehrungseinheit AufAbschlagswaehrung = 7;
 }
 message Preis {
    option (.protobuf_net.msgopt).namespace = "BO4E.COM";
-   string Wert = 3;
+   .bcl.Decimal Wert = 3;
    Waehrungseinheit Einheit = 4;
    Mengeneinheit Bezugswert = 5;
    Preisstatus Status = 6;
@@ -1012,9 +1035,9 @@ message Preisposition {
 }
 message Preisstaffel {
    option (.protobuf_net.msgopt).namespace = "BO4E.COM";
-   string Einheitspreis = 3;
-   string StaffelgrenzeVon = 4;
-   string StaffelgrenzeBis = 5;
+   .bcl.Decimal Einheitspreis = 3;
+   .bcl.Decimal StaffelgrenzeVon = 4;
+   .bcl.Decimal StaffelgrenzeBis = 5;
    Sigmoidparameter Sigmoidparameter = 6;
 }
 enum Preisstatus {
@@ -1036,8 +1059,8 @@ message Rechnung {
    Rechnungsstatus Rechnungsstatus = 5;
    bool Storno = 6;
    string Rechnungsnummer = 7;
-   DateTimeOffset Rechnungsdatum = 8;
-   DateTimeOffset Faelligkeitsdatum = 9;
+   .google.protobuf.Timestamp Rechnungsdatum = 8;
+   .google.protobuf.Timestamp Faelligkeitsdatum = 9;
    Rechnungstyp Rechnungsstyp = 10;
    string OriginalRechnungsnummer = 11;
    Zeitraum Rechnungsperiode = 12;
@@ -1055,8 +1078,8 @@ message Rechnung {
 message Rechnungsposition {
    option (.protobuf_net.msgopt).namespace = "BO4E.COM";
    int32 Positionsnummer = 3;
-   DateTimeOffset LieferungVon = 4;
-   DateTimeOffset LieferungBis = 5;
+   .google.protobuf.Timestamp LieferungVon = 4;
+   .google.protobuf.Timestamp LieferungBis = 5;
    string Positionstext = 6;
    Mengeneinheit Zeiteinheit = 7;
    BDEWArtikelnummer Artikelnummer = 8;
@@ -1096,6 +1119,8 @@ enum Rechnungstyp {
    INTEGRIERTE_13TE_RECHNUNG = 5;
    ZUSAETZLICHE_13TE_RECHNUNG = 6;
    MEHRMINDERMENGENRECHNUNG = 7;
+   ABSCHLUSSRECHNUNG = 8;
+   MSBRECHNUNG = 9;
 }
 message Region {
    option (.protobuf_net.msgopt).namespace = "BO4E.BO";
@@ -1163,10 +1188,10 @@ enum Schwachlastfaehig {
 }
 message Sigmoidparameter {
    option (.protobuf_net.msgopt).namespace = "BO4E.COM";
-   string A = 3;
-   string B = 4;
-   string C = 5;
-   string D = 6;
+   .bcl.Decimal A = 3;
+   .bcl.Decimal B = 4;
+   .bcl.Decimal C = 5;
+   .bcl.Decimal D = 6;
 }
 enum Sparte {
    option (.protobuf_net.enumopt).namespace = "BO4E.ENUM";
@@ -1177,21 +1202,62 @@ enum Sparte {
    Sparte_WASSER = 4;
    Sparte_ABWASSER = 5;
 }
+enum Status {
+   option (.protobuf_net.enumopt).namespace = "BO4E.ENUM";
+   TARIF_1 = 0;
+   TARIF_2 = 1;
+   TARIF_3 = 2;
+   TARIF_4 = 3;
+   TARIF_5 = 4;
+   TARIF_6 = 5;
+   TARIF_7 = 6;
+   TARIF_8 = 7;
+   TARIF_9 = 8;
+   ZAEHLERSTAND_ZUM_BEGINN_DER_ANGEGEBENEN_ENERGIEMENGE_VORHANDEN_UND_KOMMUNIZIERT = 9;
+   ZAEHLERSTAND_ZUM_ENDE_DER_ANGEGEBENEN_ENERGIEMENGE_VORHANDEN_UND_KOMMUNIZIERT = 10;
+   ZAEHLERSTAND_ZUM_BEGINN_DER_ANGEGEBENEN_ENERGIEMENGE_NICHT_VORHANDEN_DA = 11;
+   ZAEHLERSTAND_ZUM_ENDE_DER_ANGEGEBENEN_ENERGIEMENGE_NICHT_VORHANDEN_DA_MENGENABGRENZUNG = 12;
+   KUNDENSELBSTABLESUNG = 13;
+   LEERSTAND = 14;
+   REALER_ZAEHLERUEBERLAUF_GEPRUEFT = 15;
+   PLAUSIBEL_WG_KONTROLLABLESUNG = 16;
+   PLAUSIBEL_WG_KUNDENHINWIES = 17;
+   AUSTAUSCH_DES_ERSATZWERTES = 18;
+}
+enum StatusArt {
+   option (.protobuf_net.enumopt).namespace = "BO4E.ENUM";
+   VERTRAG = 0;
+   MESSWERTQUALITAET = 1;
+   MESSKLASSIFIZIERUNG = 2;
+   PLAUSIBILISIERUNGSHINWEIS = 3;
+   ERSATZWERTBILDUNGSVERFAHREN = 4;
+   KORREKTURGRUND = 5;
+   GASQUALITAET = 6;
+}
+message StatusZusatzInformation {
+   option (.protobuf_net.msgopt).namespace = "BO4E.COM";
+   StatusArt Art = 1;
+   Status Status = 2;
+}
 message Steuerbetrag {
    option (.protobuf_net.msgopt).namespace = "BO4E.COM";
    Steuerkennzeichen Steuerkennzeichen = 3;
-   string Basiswert = 4;
-   string Steuerwert = 5;
+   .bcl.Decimal Basiswert = 4;
+   .bcl.Decimal Steuerwert = 5;
    Waehrungscode Waehrung = 6;
+   .bcl.Decimal BasiswertVorausgezahlt = 7;
+   .bcl.Decimal SteuerwertVorausgezahlt = 8;
 }
 enum Steuerkennzeichen {
    option (.protobuf_net.enumopt).namespace = "BO4E.ENUM";
    UST_19 = 0;
-   UST_7 = 1;
-   VST_0 = 2;
-   VST_19 = 3;
-   VST_7 = 4;
-   RCV = 5;
+   UST_16 = 1;
+   UST_7 = 2;
+   VST_0 = 3;
+   VST_19 = 4;
+   VST_16 = 5;
+   VST_7 = 6;
+   RCV = 7;
 }
 enum Tarifart {
    option (.protobuf_net.enumopt).namespace = "BO4E.ENUM";
@@ -1221,7 +1287,7 @@ enum Unterbrechbarkeit {
 message Unterschrift {
    option (.protobuf_net.msgopt).namespace = "BO4E.COM";
    string Ort = 3;
-   DateTimeOffset Datum = 4;
+   .google.protobuf.Timestamp Datum = 4;
    string Name = 5;
 }
 message Verbrauch {
@@ -1230,9 +1296,11 @@ message Verbrauch {
    .google.protobuf.Timestamp Enddatum = 4;
    Wertermittlungsverfahren Wertermittlungsverfahren = 5;
    string Obiskennzahl = 6;
-   string Wert = 7;
+   .bcl.Decimal Wert = 7;
    Mengeneinheit Einheit = 8;
    Verbrauchsmengetyp Type = 9;
+   WertMengeArt WertMengeArt = 10;
+   repeated StatusZusatzInformation StatusZusatzInformationen = 11;
 }
 enum Verbrauchsart {
    option (.protobuf_net.enumopt).namespace = "BO4E.ENUM";
@@ -1255,15 +1323,15 @@ message Vertrag {
    Vertragsart Vertragsart = 6;
    Vertragstatus Vertragstatus = 7;
    Sparte Sparte = 8;
-   DateTimeOffset Vertragsbeginn = 9;
-   DateTimeOffset Vertragsende = 10;
+   .google.protobuf.Timestamp Vertragsbeginn = 9;
+   .google.protobuf.Timestamp Vertragsende = 10;
    Geschaeftspartner Vertragspartner1 = 11;
    Geschaeftspartner Vertragspartner2 = 12;
    repeated Unterschrift Unterzeichnervp1 = 13;
    repeated Unterschrift Unterzeichnervp2 = 14;
    Vertragskonditionen Vertragskonditionen = 15;
    repeated Vertragsteil Vertragsteile = 16;
-   string Gemeinderabatt = 1017;
+   .bcl.Decimal Gemeinderabatt = 1017;
    Geschaeftspartner Korrespondenzpartner = 1018;
 }
 enum Vertragsart {
@@ -1282,16 +1350,17 @@ message Vertragskonditionen {
    Zeitraum Kuendigungsfrist = 6;
    Zeitraum Vertragsverlaengerung = 7;
    Zeitraum Abschlagszyklus = 8;
-   DateTimeOffset StartAbrechnungsjahr = 1009;
+   .google.protobuf.Timestamp StartAbrechnungsjahr = 1009;
    Zeitraum GeplanteTurnusablesung = 1010;
    int32 TurnusablesungIntervall = 1011;
    Zeitraum Netznutzungsabrechnung = 1012;
    int32 NetznutzungsabrechnungIntervall = 1013;
    bool Haushaltskunde = 1014;
-   NetznutzungsVertrag Netznutzungsvertrag = 1015;
+   Netznutzungsvertragsart Netznutzungsvertragsart = 1015;
    Netznutzungszahler Netznutzungszahler = 1016;
    Netznutzungsabrechnungsvariante Netznutzungsabrechnungsvariante = 1017;
    Netznutzungsabrechnungsgrundlage Netznutzungsabrechnungsgrundlage = 1018;
+   bool BeinhaltetSingulaerGenutzteBetriebsmittel = 1019;
 }
 enum Vertragstatus {
    option (.protobuf_net.enumopt).namespace = "BO4E.ENUM";
@@ -1307,8 +1376,8 @@ enum Vertragstatus {
 }
 message Vertragsteil {
    option (.protobuf_net.msgopt).namespace = "BO4E.COM";
-   DateTimeOffset Vertragsteilbeginn = 3;
-   DateTimeOffset Vertragsteilende = 4;
+   .google.protobuf.Timestamp Vertragsteilbeginn = 3;
+   .google.protobuf.Timestamp Vertragsteilende = 4;
    string Lokation = 5;
    Menge VertraglichFixierteMenge = 6;
    Menge MinimaleAbnahmemenge = 7;
@@ -1316,6 +1385,11 @@ message Vertragsteil {
    Menge Jahresverbrauchsprognose = 1009;
    Menge Kundenwert = 1010;
    string Verbrauchsaufteilung = 1011;
+}
+message Verwendungszweck {
+   option (.protobuf_net.msgopt).namespace = "BO4E.COM";
+   Marktrolle Marktrolle = 3;
+   repeated Verwendungszweck Zweck = 4 [packed = false];
 }
 enum Verwendungszweck {
    option (.protobuf_net.enumopt).namespace = "BO4E.ENUM";
@@ -1519,6 +1593,17 @@ enum Waermenutzung {
    WAERMEPUMPE = 1;
    DIREKTHEIZUNG = 2;
 }
+enum WertMengeArt {
+   option (.protobuf_net.enumopt).namespace = "BO4E.ENUM";
+   WAHRER_WERT = 0;
+   ERSATZWERT = 1;
+   VORLAEUFIGER_WERT = 2;
+   ANGABE_FUER_LIEFERSCHEIN = 3;
+   VORSCHLAGSWERT = 4;
+   NICHT_VERWENDBARER_WERT = 5;
+   PROGNOSEWERT = 6;
+   ENERGIEMENGE_SUMMIERT = 7;
+}
 enum Wertermittlungsverfahren {
    option (.protobuf_net.enumopt).namespace = "BO4E.ENUM";
    PROGNOSE = 0;
@@ -1531,14 +1616,17 @@ message Zaehler {
    Zaehlerauspraegung Zaehlerauspraegung = 6;
    Zaehlertyp Zaehlertyp = 7;
    Tarifart Tarifart = 8;
-   string Zaehlerkonstante = 9;
-   DateTimeOffset EichungBis = 10;
-   DateTimeOffset LetzteEichung = 11;
+   .bcl.Decimal Zaehlerkonstante = 9;
+   .google.protobuf.Timestamp EichungBis = 10;
+   .google.protobuf.Timestamp LetzteEichung = 11;
    repeated Zaehlwerk Zaehlwerke = 12;
    Geschaeftspartner Zaehlerhersteller = 13;
    string Gateway = 1014;
    Fernschaltung Fernschaltung = 1015;
    Messwerterfassung Messwerterfassung = 1016;
+   ZaehlertypSpezifikation Zaehlertypspezifikation = 1017;
+   Befestigungsart Befestigungsart = 1018;
+   Geraetemerkmal Zaehlergroesse = 1019;
 }
 enum Zaehlerauspraegung {
    option (.protobuf_net.enumopt).namespace = "BO4E.ENUM";
@@ -1557,17 +1645,25 @@ enum Zaehlertyp {
    ULTRASCHALLGASZAEHLER = 7;
    WECHSELSTROMZAEHLER = 8;
 }
+enum ZaehlertypSpezifikation {
+   option (.protobuf_net.enumopt).namespace = "BO4E.ENUM";
+   EDL40 = 0;
+   EDL21 = 1;
+   SONSTIGER_EHZ = 2;
+   MME_STANDARD = 3;
+   MME_MEDA = 4;
+}
 message Zaehlwerk {
    option (.protobuf_net.msgopt).namespace = "BO4E.COM";
    string ZaehlwerkId = 3;
    string Bezeichnung = 4;
    Energierichtung Richtung = 5;
    string ObisKennzahl = 6;
-   string Wandlerfaktor = 7;
+   .bcl.Decimal Wandlerfaktor = 7;
    Mengeneinheit Einheit = 8;
    string Kennzahl = 1009;
    Schwachlastfaehig Schwachlastfaehig = 1010;
-   repeated Verwendungszweck Verwendungszwecke = 1011 [packed = false];
+   repeated Verwendungszweck Verwendungszwecke = 1011;
    Verbrauchsart Verbrauchsart = 1012;
    Unterbrechbarkeit Unterbrechbarkeit = 1013;
    Waermenutzung Waermenutzung = 1014;
@@ -1593,9 +1689,9 @@ enum Zeiteinheit {
 message Zeitraum {
    option (.protobuf_net.msgopt).namespace = "BO4E.COM";
    Zeiteinheit Einheit = 3;
-   string Dauer = 4;
-   DateTimeOffset Startdatum = 5;
-   DateTimeOffset Enddatum = 6;
+   .bcl.Decimal Dauer = 4;
+   .google.protobuf.Timestamp Startdatum = 5;
+   .google.protobuf.Timestamp Enddatum = 6;
 }
 enum Zeitreihentyp {
    option (.protobuf_net.enumopt).namespace = "BO4E.ENUM";

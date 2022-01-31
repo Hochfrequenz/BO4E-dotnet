@@ -19,7 +19,8 @@ namespace BO4E.COM
         ///     method remove trailing minuses ('----') from notiz content. Those are artefact from SAPs internal note structure
         /// </summary>
         [Newtonsoft.Json.JsonIgnore]
-        private static readonly Regex TrailingMinusRegex = new Regex(@"\r?(?:\\n|\n)?-*$", RegexOptions.Compiled);
+        [System.Text.Json.Serialization.JsonIgnore]
+        private static readonly Regex TrailingMinusRegex = new(@"\r?(?:\\n|\n)?-*$", RegexOptions.Compiled);
 
 
         private string _inhalt;
@@ -32,12 +33,22 @@ namespace BO4E.COM
         [ProtoMember(3)]
         public string Autor { get; set; }
 
+
+        [System.Text.Json.Serialization.JsonIgnore]
+        [Newtonsoft.Json.JsonIgnore]
+        [ProtoMember(4, Name = nameof(Zeitpunkt))]
+        [CompatibilityLevel(CompatibilityLevel.Level240)]
+        private DateTime _Zeitpunkt
+        {
+            get => Zeitpunkt.UtcDateTime;
+            set => Zeitpunkt = DateTime.SpecifyKind(value, DateTimeKind.Utc);
+        }
         /// <summary>
         ///     Zeitpunkt zu dem die Notiz angelegt wurde
         /// </summary>
         [JsonProperty(PropertyName = "zeitpunkt", Required = Required.Always, Order = 8)]
         [JsonPropertyName("zeitpunkt")]
-        [ProtoMember(4)]
+        [ProtoIgnore]
         public DateTimeOffset Zeitpunkt { get; set; }
 
         /// <summary>

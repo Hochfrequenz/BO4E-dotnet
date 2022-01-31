@@ -1,12 +1,15 @@
+using BO4E.BO;
+using BO4E.meta;
+
+using Newtonsoft.Json;
+
+using ProtoBuf;
+
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text.Json.Serialization;
-using BO4E.BO;
-using BO4E.meta;
-using Newtonsoft.Json;
-using ProtoBuf;
 
 namespace BO4E.COM
 {
@@ -86,13 +89,26 @@ namespace BO4E.COM
         }
 
         /// <summary>
+        /// a protobuf serializable TimeStamp
+        /// </summary>
+        [Newtonsoft.Json.JsonIgnore]
+        [System.Text.Json.Serialization.JsonIgnore]
+        [ProtoMember(2, Name = nameof(Timestamp))]
+        [CompatibilityLevel(CompatibilityLevel.Level240)]
+        protected DateTime _TimeStamp
+        {
+            get => Timestamp?.DateTime ?? default;
+            set => Timestamp = value == default ? null : new DateTimeOffset(value);
+        }
+
+        /// <summary>
         ///     Store the latest timestamp (update from the database)
         /// </summary>
         [JsonProperty(PropertyName = "timestamp", NullValueHandling = NullValueHandling.Ignore,
             Required = Required.Default, Order = 2)]
         [JsonPropertyName("timestamp")]
-        [Timestamp]
-        public DateTime? Timestamp { get; set; }
+        [ProtoIgnore]
+        public DateTimeOffset? Timestamp { get; set; }
 
         /// <summary>
         ///     BO4E components are considered equal iff all of their elements/fields are equal.
@@ -148,7 +164,7 @@ namespace BO4E.COM
         }
 
         /// <inheritdoc cref="BO4E.BO.BusinessObject.IsValid" />
-        public bool IsValid()
+        public virtual bool IsValid()
         {
             try
             {

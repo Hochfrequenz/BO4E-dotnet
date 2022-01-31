@@ -2,7 +2,7 @@
   "objectName": "Energiemenge",
   "lenientDateTime": true,
   "input": {
-    "versionStruktur": 1,
+    "versionStruktur": "1",
     "boTyp": "ENERGIEMENGE",
     "lokationsId": "XX2CVJCCSW6WR5DHCJ14PF7R3X5ZNE7AC",
     "lokationstyp": "MeLo",

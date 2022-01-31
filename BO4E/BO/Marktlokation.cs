@@ -26,12 +26,16 @@ namespace BO4E.BO
         /// <summary>
         ///     Regular Expression used to validate 11 digit MarktlokationId
         /// </summary>
-        [Newtonsoft.Json.JsonIgnore] protected static readonly Regex RegexValidate = new Regex(@"^[1-9][\d]{10}$", RegexOptions.Compiled);
+        //[Newtonsoft.Json.JsonIgnore]
+        [System.Text.Json.Serialization.JsonIgnore]
+        protected static readonly Regex RegexValidate = new(@"^[1-9][\d]{10}$", RegexOptions.Compiled);
 
         /// <summary>
         ///     Regular Expression to check if a string consists only of numbers (is numeric)
         /// </summary>
-        [Newtonsoft.Json.JsonIgnore] protected static readonly Regex RegexNumericString = new Regex(@"^\d+$", RegexOptions.Compiled);
+        [Newtonsoft.Json.JsonIgnore]
+        [System.Text.Json.Serialization.JsonIgnore]
+        protected static readonly Regex RegexNumericString = new(@"^\d+$", RegexOptions.Compiled);
 
         /// <summary>
         ///     Identifikationsnummer einer Marktlokation, an der Energie entweder
@@ -81,10 +85,10 @@ namespace BO4E.BO
         ///     Niederdruck.
         ///     <seealso cref="ENUM.Netzebene" />
         /// </summary>
-        [JsonProperty(Required = Required.Always, Order = 10, PropertyName = "netzebene")]
+        [JsonProperty(Required = Required.Default, Order = 10, PropertyName = "netzebene")]
         [JsonPropertyName("netzebene")]
         [ProtoMember(10)]
-        public Netzebene Netzebene { get; set; }
+        public Netzebene? Netzebene { get; set; }
 
         /// <summary>
         ///     Codenummer des Netzbetreibers, an dessen Netz diese Marktlokation

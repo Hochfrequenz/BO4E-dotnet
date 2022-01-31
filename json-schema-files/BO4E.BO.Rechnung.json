@@ -1,4 +1,4 @@
-{
+﻿{
   "$schema": "http://json-schema.org/draft-07/schema#",
   "definitions": {
     "Adresse": {
@@ -297,6 +297,9 @@
             "ZR",
             "ZW"
           ]
+        },
+        "ortsteil": {
+          "type": ["string", "null"]
         },
         "guid": {
           "type": ["string", "null"]
@@ -716,10 +719,10 @@
       "type": ["object", "null"],
       "properties": {
         "exRefName": {
-          "type": "string"
+          "type": ["string", "null"]
         },
         "exRefWert": {
-          "type": "string"
+          "type": ["string", "null"]
         },
         "guid": {
           "type": ["string", "null"]
@@ -728,8 +731,7 @@
           "type": ["string", "null"],
           "format": "date-time"
         }
-      },
-      "required": ["exRefName", "exRefWert"]
+      }
     },
     "Geschaeftspartner": {
       "type": "object",
@@ -747,7 +749,7 @@
           "type": ["string", "null"]
         },
         "versionStruktur": {
-          "type": "integer"
+          "type": ["string", "null"]
         },
         "timestamp": {
           "type": ["string", "null"],
@@ -835,8 +837,9 @@
           "type": "number"
         },
         "einheit": {
-          "type": "string",
+          "type": ["string", "null"],
           "enum": [
+            null,
             "ZERO",
             "WH",
             "KW",
@@ -847,6 +850,7 @@
             "MONAT",
             "VAR",
             "VARH",
+            "KWHK",
             "JAHR",
             "KWH",
             "MW",
@@ -863,7 +867,7 @@
           "format": "date-time"
         }
       },
-      "required": ["wert", "einheit"]
+      "required": ["wert"]
     },
     "Preis": {
       "type": "object",
@@ -888,6 +892,7 @@
             "MONAT",
             "VAR",
             "VARH",
+            "KWHK",
             "JAHR",
             "KWH",
             "MW",
@@ -941,6 +946,7 @@
             "MONAT",
             "VAR",
             "VARH",
+            "KWHK",
             "JAHR",
             "KWH",
             "MW",
@@ -1059,7 +1065,16 @@
       "properties": {
         "steuerkennzeichen": {
           "type": "string",
-          "enum": ["UST_19", "UST_7", "VST_0", "VST_19", "VST_7", "RCV"]
+          "enum": [
+            "UST_19",
+            "UST_16",
+            "UST_7",
+            "VST_0",
+            "VST_19",
+            "VST_16",
+            "VST_7",
+            "RCV"
+          ]
         },
         "basiswert": {
           "type": "number"
@@ -1253,6 +1268,12 @@
             "ZWL"
           ]
         },
+        "basiswertVorausgezahlt": {
+          "type": ["number", "null"]
+        },
+        "steuerwertVorausgezahlt": {
+          "type": ["number", "null"]
+        },
         "guid": {
           "type": ["string", "null"]
         },
@@ -1318,7 +1339,7 @@
       "type": ["string", "null"]
     },
     "versionStruktur": {
-      "type": "integer"
+      "type": ["string", "null"]
     },
     "timestamp": {
       "type": ["string", "null"],
@@ -1355,7 +1376,9 @@
         "ZWISCHENRECHNUNG",
         "INTEGRIERTE_13TE_RECHNUNG",
         "ZUSAETZLICHE_13TE_RECHNUNG",
-        "MEHRMINDERMENGENRECHNUNG"
+        "MEHRMINDERMENGENRECHNUNG",
+        "ABSCHLUSSRECHNUNG",
+        "MSBRECHNUNG"
       ]
     },
     "originalRechnungsnummer": {

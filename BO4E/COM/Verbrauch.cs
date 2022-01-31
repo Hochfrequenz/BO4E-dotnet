@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.Serialization;
 using System.Text.Json;
@@ -40,12 +41,16 @@ namespace BO4E.COM
             "This property moved. Use the property BO4E.meta." + nameof(CentralEuropeStandardTime) + "." +
             nameof(CentralEuropeStandardTime.CentralEuropeStandardTimezoneInfo) + " instead.", true)]
         // ReSharper disable once InconsistentNaming
-        public static TimeZoneInfo CENTRAL_EUROPE_STANDARD_TIME =>
-            CentralEuropeStandardTime.CentralEuropeStandardTimezoneInfo;
+        public static TimeZoneInfo CENTRAL_EUROPE_STANDARD_TIME
+            => CentralEuropeStandardTime.CentralEuropeStandardTimezoneInfo;
 
         /// <summary>
         ///     Beginn des Zeitraumes, für den der Verbrauch angegeben wird.
         /// </summary>
+        /// <remarks>
+        /// <c>Required = Required.Default</c>, DateTime aber nicht nullable, laut bo4e doku wäre es optional
+        ///</remarks>
+        [CompatibilityLevel(CompatibilityLevel.Level240)]
         [JsonProperty(PropertyName = "startdatum", Required = Required.Default, Order = 7)]
         [JsonPropertyName("startdatum")]
         [ProtoMember(3)]
@@ -54,6 +59,7 @@ namespace BO4E.COM
         /// <summary>
         ///     Ende des Zeitraumes, für den der Verbrauch angegeben wird.
         /// </summary>
+        [CompatibilityLevel(CompatibilityLevel.Level240)]
         [JsonProperty(PropertyName = "enddatum", Required = Required.Default, Order = 8)]
         [JsonPropertyName("enddatum")]
         [ProtoMember(4)]
@@ -62,11 +68,32 @@ namespace BO4E.COM
         /// <summary>
         ///     Gibt an, ob es sich um eine PROGNOSE oder eine MESSUNG handelt.
         /// </summary>
-        /// <see cref="ENUM.Wertermittlungsverfahren" />
+        /// <seealso cref="ENUM.Wertermittlungsverfahren" />
         [JsonProperty(PropertyName = "wertermittlungsverfahren", Required = Required.Always, Order = 5)]
         [JsonPropertyName("wertermittlungsverfahren")]
         [ProtoMember(5)]
         public Wertermittlungsverfahren Wertermittlungsverfahren { get; set; }
+
+        /// <summary>
+        ///     Enthält die Gültigkeit des angegebenen Wertes
+        /// </summary>
+        /// <seealso cref="ENUM.WertMengeArt" />
+        [JsonProperty(PropertyName = "wertmengeart", Required = Required.Default, Order = 5)]
+        [JsonPropertyName("wertmengeart")]
+        [NonOfficial(NonOfficialCategory.UNSPECIFIED)]
+        [ProtoMember(10)]
+        public WertMengeArt? WertMengeArt { get; set; }
+
+
+        /// <summary>
+        /// Enthält die Auflistung der STS Segmente Plausibilisierungshinweis, Ersatzwertbildungsverfahren,
+        /// Korrekturgrund, Gasqualität, Tarif, Grundlage der Energiemenge
+        /// </summary>
+        [JsonProperty(PropertyName = "statuszusatzinformationen", Required = Required.Default, Order = 5)]
+        [JsonPropertyName("statuszusatzinformationen")]
+        [NonOfficial(NonOfficialCategory.UNSPECIFIED)]
+        [ProtoMember(11)]
+        public List<StatusZusatzInformation> StatusZusatzInformationen { get; set; }
 
         /// <summary>
         ///     Die OBIS-Kennzahl für den Wert, die festlegt, welche Größe mit dem Stand gemeldet wird.
@@ -90,7 +117,7 @@ namespace BO4E.COM
         /// <summary>
         ///     Gibt die Einheit zum jeweiligen Wert an.
         /// </summary>
-        /// <see cref="Mengeneinheit" />
+        /// <seealso cref="Mengeneinheit" />
         [JsonProperty(PropertyName = "einheit", Required = Required.Always, Order = 8)]
         [JsonPropertyName("einheit")]
         [ProtoMember(8)]
@@ -157,8 +184,11 @@ namespace BO4E.COM
             if (Startdatum > Enddatum)
             {
                 var diff = Startdatum - Enddatum;
-                if (diff.Hours <= 25 && diff.Hours >= 23 && diff.Minutes == 45 && Startdatum.Hour >= 22 &&
-                    Enddatum.Hour == 0) Enddatum += new TimeSpan(diff.Hours + 1, 0, 0);
+                if (diff.Hours <= 25
+                    && diff.Hours >= 23
+                    && diff.Minutes == 45
+                    && Startdatum.Hour >= 22
+                    && Enddatum.Hour == 0) Enddatum += new TimeSpan(diff.Hours + 1, 0, 0);
             }
 
             Startdatum = DateTime.SpecifyKind(Startdatum, DateTimeKind.Utc);
@@ -171,8 +201,8 @@ namespace BO4E.COM
                 var enddatumLocal = TimeZoneInfo.ConvertTimeFromUtc(Enddatum,
                     CentralEuropeStandardTime.CentralEuropeStandardTimezoneInfo);
                 if (!CentralEuropeStandardTime.CentralEuropeStandardTimezoneInfo.IsDaylightSavingTime(startdatumLocal -
-                        new TimeSpan(0, 0, 1)) &&
-                    CentralEuropeStandardTime.CentralEuropeStandardTimezoneInfo.IsDaylightSavingTime(enddatumLocal))
+                        new TimeSpan(0, 0, 1))
+                    && CentralEuropeStandardTime.CentralEuropeStandardTimezoneInfo.IsDaylightSavingTime(enddatumLocal))
                     // change winter-->summer time (e.g. UTC+1-->UTC+2)
                     // this is an artefact of the sap enddatum computation
                     Enddatum -= new TimeSpan(1, 0, 0); // toDo: get offset from timezoneinfo->rules->dstOffset
@@ -184,15 +214,16 @@ namespace BO4E.COM
                 var enddatumLocal = TimeZoneInfo.ConvertTimeFromUtc(Enddatum,
                     CentralEuropeStandardTime.CentralEuropeStandardTimezoneInfo);
                 if (!CentralEuropeStandardTime.CentralEuropeStandardTimezoneInfo.IsDaylightSavingTime(enddatumLocal -
-                        new TimeSpan(1, 0, 0)) &&
-                    CentralEuropeStandardTime.CentralEuropeStandardTimezoneInfo.IsDaylightSavingTime(enddatumLocal -
+                        new TimeSpan(1, 0, 0))
+                    && CentralEuropeStandardTime.CentralEuropeStandardTimezoneInfo.IsDaylightSavingTime(enddatumLocal -
                         new TimeSpan(1, 0, 1)))
                     // change winter-->summer time (e.g. UTC+1-->UTC+2)
                     // this is an artefact of the sap enddatum computation
                     Enddatum += new TimeSpan(1, 0, 0); // toDo: get offset from timezoneinfo->rules->dstOffset
             }
 
-            if (UserProperties != null && UserProperties.TryGetValue(SapProfdecimalsKey, out var profDecimalsRaw))
+            if (UserProperties != null
+                && UserProperties.TryGetValue(SapProfdecimalsKey, out var profDecimalsRaw))
             {
                 var profDecimals = 0;
                 switch (profDecimalsRaw)

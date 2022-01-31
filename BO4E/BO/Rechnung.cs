@@ -1,13 +1,16 @@
-﻿using System;
+﻿using BO4E.COM;
+using BO4E.ENUM;
+using BO4E.meta;
+
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
+
+using ProtoBuf;
+
+using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Text.Json.Serialization;
-using BO4E.COM;
-using BO4E.ENUM;
-using BO4E.meta;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
-using ProtoBuf;
 
 namespace BO4E.BO
 {
@@ -343,21 +346,41 @@ namespace BO4E.BO
         [FieldName("billNumber", Language.EN)]
         public string Rechnungsnummer { get; set; }
 
+
+        [System.Text.Json.Serialization.JsonIgnore]
+        [Newtonsoft.Json.JsonIgnore]
+        [ProtoMember(8, Name = nameof(Rechnungsdatum))]
+        [CompatibilityLevel(CompatibilityLevel.Level240)]
+        private DateTime _Rechnungsdatum
+        {
+            get => Rechnungsdatum.UtcDateTime;
+            set => Rechnungsdatum = DateTime.SpecifyKind(value, DateTimeKind.Utc);
+        }
         /// <summary>
         ///     Ausstellungsdatum der Rechnung.
         /// </summary>
         [JsonProperty(Required = Required.Always, Order = 8, PropertyName = "rechnungsdatum")]
         [JsonPropertyName("rechnungsdatum")]
-        [ProtoMember(8)]
+        [ProtoIgnore]
         [FieldName("billDate", Language.EN)]
         public DateTimeOffset Rechnungsdatum { get; set; }
 
+
+        [System.Text.Json.Serialization.JsonIgnore]
+        [Newtonsoft.Json.JsonIgnore]
+        [ProtoMember(9, Name = nameof(Faelligkeitsdatum))]
+        [CompatibilityLevel(CompatibilityLevel.Level240)]
+        private DateTime _Faelligkeitsdatum
+        {
+            get => Faelligkeitsdatum.UtcDateTime;
+            set => Faelligkeitsdatum = DateTime.SpecifyKind(value, DateTimeKind.Utc);
+        }
         /// <summary>
         ///     Zu diesem Datum ist die Zahlung fällig.
         /// </summary>
         [JsonProperty(Required = Required.Always, Order = 9, PropertyName = "faelligkeitsdatum")]
         [JsonPropertyName("faelligkeitsdatum")]
-        [ProtoMember(9)]
+        [ProtoIgnore]
         [FieldName("dueDate", Language.EN)]
         public DateTimeOffset Faelligkeitsdatum { get; set; }
 
@@ -479,5 +502,6 @@ namespace BO4E.BO
         [JsonPropertyName("rechnungspositionen")]
         [FieldName("invoiceItemList", Language.EN)]
         public List<Rechnungsposition> Rechnungspositionen { get; set; }
+
     }
 }

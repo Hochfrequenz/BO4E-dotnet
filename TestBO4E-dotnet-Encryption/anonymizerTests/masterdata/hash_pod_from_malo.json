@@ -3,7 +3,7 @@
     "POD": "HASH"
   },
   "input": {
-    "versionStruktur": 1,
+    "versionStruktur": "1",
     "boTyp": "MARKTLOKATION",
     "marktlokationsId": "52935155442",
     "sparte": "STROM",

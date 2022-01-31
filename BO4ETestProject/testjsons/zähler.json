@@ -37,7 +37,7 @@
   ],
   "zaehlerhersteller": {
     "boTyp": "GESCHAEFTSPARTNER",
-    "versionStruktur": 1,
+    "versionStruktur": "1",
     "anrede": null,
     "title": null,
     "name1": "Zaehlermanufaktur Mustermann & Söhne",

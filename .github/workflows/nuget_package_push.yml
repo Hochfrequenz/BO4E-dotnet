@@ -1,9 +1,11 @@
-name: Nuget Master Release
+name: Nuget Release (on Tagging)
 
 on:
-  push:
-    branches:
-      - master
+  release:
+    types:
+      - created
+    tags:
+      - "v\\d+\\.\\d+\\.\\d+"
 
 jobs:
   pushrelease:
@@ -22,10 +24,10 @@ jobs:
         run: dotnet test --configuration Release
       - name: Create Package (dotnet pack)
         run: |
-          dotnet pack --configuration Release
+          dotnet pack --configuration Release --output packages
       - name: Setup Nuget.exe
         uses: warrenbuckley/Setup-Nuget@v1
       - name: Nuget push
         run: |
           nuget setApiKey ${{ secrets.BO4E_NUGET_ORG_PUSH_TOKEN }}
-          nuget push .\**\bin\Release\*.nupkg -Source https://api.nuget.org/v3/index.json -SkipDuplicate -NoSymbols
+          nuget push .\packages\*.nupkg -Source https://api.nuget.org/v3/index.json -SkipDuplicate -NoSymbols

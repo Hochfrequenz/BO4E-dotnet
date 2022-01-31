@@ -55,11 +55,20 @@ namespace BO4E.COM
         [ProtoMember(8)]
         public Zeitraum Abschlagszyklus { get; set; }
 
+        [System.Text.Json.Serialization.JsonIgnore]
+        [Newtonsoft.Json.JsonIgnore]
+        [ProtoMember(1009, Name = nameof(StartAbrechnungsjahr))]
+        [CompatibilityLevel(CompatibilityLevel.Level240)]
+        private DateTime _StartAbrechnungsjahr
+        {
+            get => StartAbrechnungsjahr?.UtcDateTime ?? default;
+            set => StartAbrechnungsjahr = value == default ? null : DateTime.SpecifyKind(value, DateTimeKind.Utc);
+        }
         // ToDo: Docstring!
         [JsonProperty(PropertyName = "startAbrechnungsjahr", Required = Required.Default)]
         [JsonPropertyName("startAbrechnungsjahr")]
         [NonOfficial(NonOfficialCategory.CUSTOMER_REQUIREMENTS)]
-        [ProtoMember(1009)]
+        [ProtoIgnore]
         [Newtonsoft.Json.JsonConverter(typeof(LenientDateTimeConverter))]
 #pragma warning disable CS1591 // Missing XML comment for publicly visible type or member
         // todo @hamid: add a docstring
@@ -111,7 +120,8 @@ namespace BO4E.COM
         [JsonPropertyName("netznutzungsvertrag")]
         [NonOfficial(NonOfficialCategory.CUSTOMER_REQUIREMENTS)]
         [ProtoMember(1015)]
-        public NetznutzungsVertrag? Netznutzungsvertrag { get; set; }
+        public Netznutzungsvertragsart? Netznutzungsvertragsart { get; set; }
+
 
         // ToDo: Docstring!
         // todo @hamid: add a docstring
@@ -136,6 +146,18 @@ namespace BO4E.COM
         [NonOfficial(NonOfficialCategory.CUSTOMER_REQUIREMENTS)]
         [ProtoMember(1018)]
         public Netznutzungsabrechnungsgrundlage? Netznutzungsabrechnungsgrundlage { get; set; }
+
+        /// <summary>
+        ///     Singulär genutzte Betriebsmittel in der Netznutzungsabrechnung
+        ///     Hier wird angegeben, ob in der Netznutzungsabrechnung der verbrauchenden Marktlokation singulär 
+        ///     genutzte Betriebsmittel abgerechnet werden.
+        /// </summary>
+        /// <remarks>für EDIFACT mapping</remarks>
+        [JsonProperty(PropertyName = "beinhaltetSingulaerGenutzteBetriebsmittel", Required = Required.Default)]
+        [JsonPropertyName("beinhaltetSingulaerGenutzteBetriebsmittel")]
+        [NonOfficial(NonOfficialCategory.CUSTOMER_REQUIREMENTS)]
+        [ProtoMember(1019)]
+        public bool? BeinhaltetSingulaerGenutzteBetriebsmittel { get; set; }
 
 #pragma warning restore CS1591 // Missing XML comment for publicly visible type or member
     }

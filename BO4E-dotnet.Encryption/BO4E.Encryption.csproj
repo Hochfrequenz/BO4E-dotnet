@@ -3,8 +3,7 @@
   <PropertyGroup>
     <TargetFramework>net5.0</TargetFramework>
     <RootNamespace>BO4E_dotnet.Encryption</RootNamespace>
-	<VersionPrefix>0.2.3</VersionPrefix>
-	<VersionSuffix>$(VersionSuffix)</VersionSuffix>
+	<VersionPrefix>0.2.7</VersionPrefix>
 	<PackageLicenseFile>LICENSE.txt</PackageLicenseFile>
     <PackageProjectUrl>https://github.com/HFInnovation/BO4E-dotnet</PackageProjectUrl>
     <RepositoryUrl>https://github.com/HFInnovation/BO4E-dotnet</RepositoryUrl>
@@ -13,18 +12,19 @@
     <Company>Hochfrequenz Unternehmensberatung GmbH</Company>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <LangVersion>9</LangVersion>
-    <PackageVersion>0.2.5</PackageVersion>
   </PropertyGroup>
 
+  <PropertyGroup>
+    <DocumentationFile>BO4E.Encryption.xml</DocumentationFile>
+  </PropertyGroup>
+  
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
     <Optimize>true</Optimize>
-    <DocumentationFile>bin\Debug\BO4E.Encryption.xml</DocumentationFile>
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
     <NoWarn>1701;1702;NU1701;</NoWarn>
   </PropertyGroup>
 
   <PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
-    <DocumentationFile>bin\Release\BO4E.Encryption.xml</DocumentationFile>
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
     <NoWarn>1701;1702;NU1701;</NoWarn>
     <WarningsAsErrors>;NU1605;</WarningsAsErrors>

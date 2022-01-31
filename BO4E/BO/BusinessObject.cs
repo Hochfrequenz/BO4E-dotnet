@@ -1,3 +1,14 @@
+using BO4E.COM;
+using BO4E.meta;
+
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
+using Newtonsoft.Json.Schema;
+using Newtonsoft.Json.Schema.Generation;
+using Newtonsoft.Json.Serialization;
+
+using ProtoBuf;
+
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -6,14 +17,7 @@ using System.Linq;
 using System.Reflection;
 using System.Text.Json;
 using System.Text.Json.Serialization;
-using BO4E.COM;
-using BO4E.meta;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
-using Newtonsoft.Json.Schema;
-using Newtonsoft.Json.Schema.Generation;
-using Newtonsoft.Json.Serialization;
-using ProtoBuf;
+
 using JsonConverter = Newtonsoft.Json.JsonConverter;
 using JsonSerializer = Newtonsoft.Json.JsonSerializer;
 
@@ -30,11 +34,12 @@ namespace BO4E.BO
     //[ProtoContract] // If I add this I get an error message: "System.InvalidOperationException: Duplicate field-number detected; 1 on: BO4E.BO.BusinessObject"
     [ProtoInclude(1, typeof(Angebot))]
     [ProtoInclude(2, typeof(Ansprechpartner))]
-    [ProtoInclude(3, typeof(Benachrichtigung))]
-    [ProtoInclude(4, typeof(Energiemenge))]
-    [ProtoInclude(5, typeof(Geschaeftspartner))]
-    [ProtoInclude(6, typeof(Kosten))]
-    [ProtoInclude(7, typeof(Marktlokation))]
+    [ProtoInclude(3, typeof(Auftrag))]
+    [ProtoInclude(4, typeof(Benachrichtigung))]
+    [ProtoInclude(5, typeof(Energiemenge))]
+    [ProtoInclude(6, typeof(Geschaeftspartner))]
+    [ProtoInclude(7, typeof(Kosten))]
+    [ProtoInclude(8, typeof(Marktlokation))]
     //[ProtoInclude(8, typeof(Marktteilnehmer))] // https://stackoverflow.com/a/13791539/10009545
     [ProtoInclude(9, typeof(Messlokation))]
     [ProtoInclude(10, typeof(Preisblatt))]
@@ -43,6 +48,10 @@ namespace BO4E.BO
     [ProtoInclude(13, typeof(Vertrag))]
     [ProtoInclude(14, typeof(Zaehler))]
     [ProtoInclude(15, typeof(LogObject.LogObject))]
+    [ProtoInclude(16, typeof(Bilanzierung))]
+    [ProtoInclude(17, typeof(Sperrauftrag))]
+    [ProtoInclude(18, typeof(Entsperrauftrag))]
+    [ProtoInclude(19, typeof(AuftragsStorno))]
     public abstract class BusinessObject : IEquatable<BusinessObject>, IUserProperties, IOptionalGuid
     {
         /// <summary>
@@ -75,6 +84,7 @@ namespace BO4E.BO
         ///     the BO4E standard to be passed along.
         /// </example>
         [Newtonsoft.Json.JsonIgnore]
+        [System.Text.Json.Serialization.JsonIgnore]
         [ProtoIgnore]
         public const string USER_PROPERTIES_NAME = "userProperties";
 
@@ -86,7 +96,7 @@ namespace BO4E.BO
         public BusinessObject()
         {
             //BoTyp = this.GetType().Name.ToUpper();
-            VersionStruktur = 1;
+            VersionStruktur = "1";
         }
 
         /// <summary>
@@ -114,7 +124,7 @@ namespace BO4E.BO
         [JsonProperty(PropertyName = "versionStruktur", Required = Required.Default, Order = 2)]
         [JsonPropertyName("versionStruktur")]
         [ProtoMember(2)]
-        public int VersionStruktur { get; set; }
+        public string VersionStruktur { get; set; }
 
         /// <summary>
         ///     protobuf serilization requires the <see cref="Guid" /> as string.
@@ -130,13 +140,26 @@ namespace BO4E.BO
         }
 
         /// <summary>
+        /// a protobuf serializable TimeStamp
+        /// </summary>
+        [Newtonsoft.Json.JsonIgnore]
+        [System.Text.Json.Serialization.JsonIgnore]
+        [ProtoMember(4, Name = nameof(Timestamp))]
+        [CompatibilityLevel(CompatibilityLevel.Level240)]
+        protected DateTime _TimeStamp
+        {
+            get => Timestamp ?? default;
+            set => Timestamp = value == default ? null : DateTime.SpecifyKind(value, DateTimeKind.Utc);
+        }
+
+        /// <summary>
         ///     Store the latest database update, is Datetime, because postgres doesn't handle datetimeoffset in a generated column
         ///     gracefully
         /// </summary>
         [JsonProperty(PropertyName = "timestamp", NullValueHandling = NullValueHandling.Ignore,
             Required = Required.Default, Order = 2)]
         [JsonPropertyName("timestamp")]
-        [Timestamp]
+        [ProtoIgnore]
         public DateTime? Timestamp { get; set; }
 
 
