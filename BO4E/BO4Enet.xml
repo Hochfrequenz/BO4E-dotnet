@@ -538,6 +538,11 @@
             Jahresverbrauchsprognose
             </summary>
         </member>
+        <member name="P:BO4E.BO.Bilanzierung.TemperaturArbeit">
+            <summary>
+            Kundenwert
+            </summary>
+        </member>
         <member name="P:BO4E.BO.Bilanzierung.Kundenwert">
             <summary>
             Kundenwert
@@ -1767,6 +1772,11 @@
                 static serializer options for Vertragsconverter
             </summary>
         </member>
+        <member name="F:BO4E.BO.Vertrag.SerializerSemaphore">
+            <summary>
+            Semaphore to protect access to the serializer
+            </summary>
+        </member>
         <member name="P:BO4E.BO.Vertrag.Vertragsnummer">
             <summary>
                 Eine im Verwendungskontext eindeutige Nummer für den Vertrag
@@ -1944,6 +1954,11 @@
                 Befestigungsart
             </summary>
         </member>
+        <member name="P:BO4E.BO.Zaehler.Zaehlergroesse">
+            <summary>
+                Zaehlergroesse
+            </summary>
+        </member>
         <member name="T:BO4E.COM.Adresse">
             <summary>Enthält eine Adresse, die für die meisten Zwecke verwendbar ist.</summary>
         </member>
@@ -1977,6 +1992,11 @@
         </member>
         <member name="P:BO4E.COM.Adresse.Landescode">
             <summary>Offizieller ISO-Landescode. Z.B. NL, Details <see cref="T:BO4E.ENUM.Landescode" /></summary>
+        </member>
+        <member name="P:BO4E.COM.Adresse.Ortsteil">
+            <summary>
+                Ortsteil für EDIFACT mapping
+            </summary>
         </member>
         <member name="T:BO4E.COM.Angebotsposition">
             <summary>
@@ -2409,6 +2429,12 @@
                 Wert der externen Referenz (z.B. "123456"; "4711")
             </summary>
         </member>
+        <member name="M:BO4E.COM.ExterneReferenz.IsValid">
+            <summary>
+            Ist das Objekt valide
+            </summary>
+            <returns></returns>
+        </member>
         <member name="T:BO4E.COM.ExterneReferenzExtensions">
             <summary>
                 easy access methods for <see cref="T:System.Collections.Generic.List`1" /> to allow easier setting and getting.
@@ -2628,6 +2654,11 @@
         <member name="P:BO4E.COM.Lastprofil.Bezeichnung">
             <summary>
             Bezeichnung des Profils, durch DVGW bzw. den Netzbetreiber vergeben (z.B. H0)
+            </summary>
+        </member>
+        <member name="P:BO4E.COM.Lastprofil.Profilschar">
+            <summary>
+            Optionale Bezeichnung der Profilschar, durch DVGW bzw. den Netzbetreiber vergeben (z.B. H0)
             </summary>
         </member>
         <member name="P:BO4E.COM.Lastprofil.Verfahren">
@@ -3602,6 +3633,14 @@
                 In diesen Zyklen werden Abschläge gestellt. Details <see cref="T:BO4E.COM.Zeitraum" />. Alternativ kann auch die Anzahl
                 in den Konditionen angeben werden."
             </summary>
+        </member>
+        <member name="P:BO4E.COM.Vertragskonditionen.BeinhaltetSingulaerGenutzteBetriebsmittel">
+            <summary>
+                Singulär genutzte Betriebsmittel in der Netznutzungsabrechnung
+                Hier wird angegeben, ob in der Netznutzungsabrechnung der verbrauchenden Marktlokation singulär 
+                genutzte Betriebsmittel abgerechnet werden.
+            </summary>
+            <remarks>für EDIFACT mapping</remarks>
         </member>
         <member name="T:BO4E.COM.Vertragsteil">
             <summary>
@@ -7027,6 +7066,11 @@
                 kilovar stunde
             </summary>
         </member>
+        <member name="F:BO4E.ENUM.Mengeneinheit.KWHK">
+            <summary>
+                kWh/K (Kilowatt-Stunde pro Kelvin)
+            </summary>
+        </member>
         <member name="T:BO4E.ENUM.Mengenoperator">
             <summary>
                 Angabe, wie eine Menge in Bezug auf einen Wert zu bilden ist.
@@ -7789,7 +7833,7 @@
             </summary>
             <remarks>EBD 0470 A04</remarks>
         </member>
-        <member name="F:BO4E.ENUM.Sperrauftragsablehngrund.ANDERER_VERHINDERUNGSGRUND">
+        <member name="F:BO4E.ENUM.Sperrauftragsablehngrund.ANDERER_ABLEHNGRUND">
             <summary>
             Ein Verhinderungsgrund liegt vor und wird in <see cref="P:BO4E.BO.Auftrag.Bemerkung"/> genauer spezifiziert.
             </summary>

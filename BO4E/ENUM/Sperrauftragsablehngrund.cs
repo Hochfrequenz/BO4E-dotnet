@@ -37,7 +37,7 @@ namespace BO4E.ENUM
         /// Ein Verhinderungsgrund liegt vor und wird in <see cref="BO.Auftrag.Bemerkung"/> genauer spezifiziert.
         /// </summary>
         /// <remarks>EBD 0470 A05</remarks>
-        ANDERER_VERHINDERUNGSGRUND,
+        ANDERER_ABLEHNGRUND,
 
         /// <summary>
         /// Fristverletzung bei einem termingebundenen Sperrauftrag

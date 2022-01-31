@@ -49,6 +49,9 @@ namespace BO4E.BO
     [ProtoInclude(14, typeof(Zaehler))]
     [ProtoInclude(15, typeof(LogObject.LogObject))]
     [ProtoInclude(16, typeof(Bilanzierung))]
+    [ProtoInclude(17, typeof(Sperrauftrag))]
+    [ProtoInclude(18, typeof(Entsperrauftrag))]
+    [ProtoInclude(19, typeof(AuftragsStorno))]
     public abstract class BusinessObject : IEquatable<BusinessObject>, IUserProperties, IOptionalGuid
     {
         /// <summary>
