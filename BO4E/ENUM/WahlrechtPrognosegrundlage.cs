@@ -8,7 +8,7 @@ namespace BO4E.ENUM
         /// <summary>
         /// Wahlrecht durch LF gegeben
         /// </summary>
-        LF,
+        DURCH_LF,
 
         /// <summary>
         /// Wahlrecht nicht vorhanden wegen Verbrauch > 10.000 kWh/a
