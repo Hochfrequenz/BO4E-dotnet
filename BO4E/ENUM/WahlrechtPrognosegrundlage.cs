@@ -13,7 +13,7 @@ namespace BO4E.ENUM
         /// <summary>
         /// Wahlrecht nicht vorhanden wegen Verbrauch > 10.000 kWh/a
         /// </summary>
-        NICHT_WEGEN_GROSSER_VERBRAUCH,
+        NICHT_WEGEN_GROSSEN_VERBRAUCHS,
 
         /// <summary>
         /// Wahlrecht nicht vorhanden wegen Eigenverbrauch
