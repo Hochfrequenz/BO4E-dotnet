@@ -177,7 +177,7 @@ namespace BO4E.BO
         [JsonPropertyName("wahlrechtPrognosegrundlage")]
         [NonOfficial(NonOfficialCategory.MISSING)]
         [ProtoMember(1015)]
-        public bool? WahlrechtPrognosegrundlage { get; set; }
+        public WahlrechtPrognosegrundlage? WahlrechtPrognosegrundlage { get; set; }
 
         /// <summary>
         ///     Fallgruppenzuordnung (für gas RLM)
