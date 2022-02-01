@@ -50,10 +50,10 @@ namespace BO4E.COM
         ///     Mit diesem Faktor wird eine Zählerstandsdifferenz multipliziert, um zum eigentlichen Verbrauch im Zeitraum zu
         ///     kommen.
         /// </summary>
-        [JsonProperty(PropertyName = "wandlerfaktor", Required = Required.Always)]
+        [JsonProperty(PropertyName = "wandlerfaktor", Required = Required.Default)]
         [JsonPropertyName("wandlerfaktor")]
         [ProtoMember(7)]
-        public decimal Wandlerfaktor { get; set; }
+        public decimal? Wandlerfaktor { get; set; }
 
         /// <summary>Die Einheit der gemessenen Größe, z.B. kWh. Details <see cref="Mengeneinheit" /></summary>
         [JsonProperty(PropertyName = "einheit", Required = Required.Default)]
