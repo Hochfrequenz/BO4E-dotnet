@@ -22,10 +22,10 @@ namespace BO4E.BO
 
         /// <summary>Gibt im Klartext die Bezeichnung der Marktrolle an.</summary>
         /// <example>LF</example>
-        [JsonProperty(Required = Required.Always, Order = 19, PropertyName = "marktrolle")]
+        [JsonProperty(Required = Required.Default, Order = 19, PropertyName = "marktrolle")]
         [JsonPropertyName("marktrolle")]
         //[ProtoMember(19)]
-        public Marktrolle Marktrolle { get; set; }
+        public Marktrolle? Marktrolle { get; set; }
 
         /// <summary>Gibt die Codenummer der Marktrolle an.</summary>
         /// <example>"9903100000006"</example>
