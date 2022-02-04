@@ -21,7 +21,7 @@ namespace BO4E.BO
     public class Bilanzierung : BusinessObject
     {
         /// <summary>
-        /// Für welche Marktlokation getlen diese Bilanzierungsdaten
+        /// Für welche Marktlokation gelten diese Bilanzierungsdaten
         /// </summary>
         [JsonProperty(PropertyName = "marktlokationsId", Required = Required.Default)]
         [JsonPropertyName("marktlokationsId")]
