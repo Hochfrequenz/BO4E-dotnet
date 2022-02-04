@@ -23,7 +23,7 @@ namespace BO4E.BO
         /// <summary>
         /// OBIS-Kennzahl
         /// </summary>
-         /// <example>
+        /// <example>
         ///     1-0:1.8.1
         /// </example>
         [JsonProperty(PropertyName = "obiskennzahl", Required = Required.Always)]
