@@ -54,7 +54,7 @@ namespace BO4E.ENUM
         /// <summary>
         /// Marktlokation nicht gefunden
         /// </summary>
-        MARKTLOKATION_UNBEKANNT, 
+        MARKTLOKATION_UNBEKANNT,
         /// <summary>
         /// Messlokation nicht gefunden
         /// </summary>
@@ -84,7 +84,7 @@ namespace BO4E.ENUM
         /// </summary>
         GESCHAEFTSVORFALL_ABSENDER
 
-            
+
 
     }
 }
