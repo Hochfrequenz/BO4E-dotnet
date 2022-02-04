@@ -7,7 +7,7 @@ using ProtoBuf;
 namespace BO4E.COM
 {
     /// <summary>
-    ///     Die Komponente wird dazu verwendet Fehler innerhalb eines Statusberichtes abzubilden
+    ///     Die Komponente wird dazu verwendet Fehler innerhalb eines <see cref="BO4E.BO.Statusbericht"/>s abzubilden
     /// </summary>
     [ProtoContract]
     public class Fehler : COM

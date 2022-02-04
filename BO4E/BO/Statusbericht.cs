@@ -44,7 +44,7 @@ namespace BO4E.BO
             set => DatumPruefung = DateTime.SpecifyKind(value, DateTimeKind.Utc);
         }
         /// <summary>
-        ///     Pruefdatum (wann wurde der Pruefgegenstand geprüft)
+        ///     Pruefdatum (wann wurde der <see cref="Pruefgegenstand" /> geprüft)
         /// </summary>
         /// <example>
         ///     2017-12-24

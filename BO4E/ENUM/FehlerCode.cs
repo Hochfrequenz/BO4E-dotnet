@@ -1,6 +1,6 @@
 namespace BO4E.ENUM
 {
-    /// <summary>verschiedene Fehler-Codes, vor allem für Statusberichte</summary>
+    /// <summary>verschiedene Fehler-Codes, vor allem fÃ¼r Statusberichte</summary>
     public enum FehlerCode
     {
         /// <summary>
@@ -44,7 +44,7 @@ namespace BO4E.ENUM
         /// </summary>
         ZU_VIELE_STELLEN,
         /// <summary>
-        /// Zeitreihe ist unvollständig
+        /// Zeitreihe ist unvollstÃ¤ndig
         /// </summary>
         ZEITREIHE_UNVOLLSTAENDIG,
         /// <summary>
@@ -64,11 +64,11 @@ namespace BO4E.ENUM
         /// </summary>
         MELDEPUNKT_NICHT_MEHR_IM_NETZ,
         /// <summary>
-        /// Pflichtfeld nicht gefüllt
+        /// Pflichtfeld nicht gefÃ¼llt
         /// </summary>
         ERFORDERLICHE_ANGABE_FEHLT,
         /// <summary>
-        /// Geschaeftsvorfall wurde zurückgewiesen
+        /// Geschaeftsvorfall wurde zurÃ¼ckgewiesen
         /// </summary>
         GESCHAEFTSVORFALL_ZURUECKGEWIESEN,
         /// <summary>
@@ -83,8 +83,5 @@ namespace BO4E.ENUM
         /// Geschaeftsvorfall darf vom Absender nicht benutzt werden
         /// </summary>
         GESCHAEFTSVORFALL_ABSENDER
-
-
-
     }
 }
