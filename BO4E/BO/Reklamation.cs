@@ -28,7 +28,7 @@ namespace BO4E.BO
         [NonOfficial(NonOfficialCategory.MISSING)]
         [ProtoMember(1000)]
         public string LokationsId { get; set; }
-        
+
         /// <summary>
         /// Gibt an, ob es sich um eine Markt- oder Messlokation handelt.
         /// </summary>
@@ -37,8 +37,8 @@ namespace BO4E.BO
         [JsonPropertyName("lokationsTyp")]
         [ProtoMember(1001)]
         public Lokationstyp LokationsTyp { get; set; }
-        
-        
+
+
         /// <summary>
         /// OBIS-Kennzahl
         /// </summary>
@@ -51,7 +51,7 @@ namespace BO4E.BO
         [ProtoMember(1002)]
         [BoKey]
         public string Obiskennzahl { get; set; }
-        
+
         /// <summary>
         /// Sollablesetermin / Zeitangabe für Messwertanfrage. Details <see cref="Zeitraum" />
         /// </summary>
