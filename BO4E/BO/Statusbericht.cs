@@ -60,6 +60,5 @@ namespace BO4E.BO
         [JsonProperty(Required = Required.Default, Order = 4, PropertyName = "fehler")]
         [JsonPropertyName("fehler")]
         public Fehler Fehler { get; set; }
-
     }
 }
