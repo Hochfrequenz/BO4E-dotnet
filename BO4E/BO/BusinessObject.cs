@@ -53,6 +53,7 @@ namespace BO4E.BO
     [ProtoInclude(18, typeof(Entsperrauftrag))]
     [ProtoInclude(19, typeof(AuftragsStorno))]
     [ProtoInclude(20, typeof(Statusbericht))]
+    [ProtoInclude(21, typeof(Reklamation))]
     public abstract class BusinessObject : IEquatable<BusinessObject>, IUserProperties, IOptionalGuid
     {
         /// <summary>
