@@ -1767,17 +1767,17 @@
         </member>
         <member name="P:BO4E.BO.Statusbericht.Status">
             <summary>
-                Eindeutige Nummer des Angebotes.
+                Status des Berichtes (Fehlerhaft, Erfolgreich)
             </summary>
         </member>
-        <member name="P:BO4E.BO.Statusbericht.PruefGegenstand">
+        <member name="P:BO4E.BO.Statusbericht.Pruefgegenstand">
             <summary>
-               Das geprüfte Dokument
+               Das geprüfte Dokument, z.B. die Referenz auf die EDIFACT-Nachricht die geprüft / beanstandet wurde
             </summary>
         </member>
         <member name="P:BO4E.BO.Statusbericht.DatumPruefung">
             <summary>
-                Pruefdatum (wann wurde der Pruefgegenstand geprüft)
+                Pruefdatum (wann wurde der <see cref="P:BO4E.BO.Statusbericht.Pruefgegenstand" /> geprüft)
             </summary>
             <example>
                 2017-12-24
@@ -2491,7 +2491,7 @@
         </member>
         <member name="T:BO4E.COM.Fehler">
             <summary>
-                Die Komponente wird dazu verwendet Fehler innerhalb eines Statusberichtes abzubilden
+                Die Komponente wird dazu verwendet Fehler innerhalb eines <see cref="T:BO4E.BO.Statusbericht"/>s abzubilden
             </summary>
         </member>
         <member name="P:BO4E.COM.Fehler.Typ">
@@ -2513,7 +2513,7 @@
         <member name="P:BO4E.COM.FehlerDetail.Beschreibung">
             <summary>Eine Beschreibung des Fehlers.</summary>
         </member>
-        <member name="P:BO4E.COM.FehlerDetail.Herkunft">
+        <member name="P:BO4E.COM.FehlerDetail.Ursache">
             <summary>
                 Herkunft / Ursache des Fehlers
             </summary>
@@ -2532,10 +2532,10 @@
         <member name="P:BO4E.COM.FehlerUrsache.Transaktion">
             <summary>Die Transaktion (im EDIFACT das BGM/IDE-Segment).</summary>
         </member>
-        <member name="P:BO4E.COM.FehlerUrsache.gruppe">
+        <member name="P:BO4E.COM.FehlerUrsache.Gruppe">
             <summary>Die Gruppe (im EDIFACT Segment-Gruppe).</summary>
         </member>
-        <member name="P:BO4E.COM.FehlerUrsache.segment">
+        <member name="P:BO4E.COM.FehlerUrsache.Segment">
             <summary>Das Segment (im EDIFACT Segment).</summary>
         </member>
         <member name="P:BO4E.COM.FehlerUrsache.Beschreibung">
@@ -5523,7 +5523,7 @@
             Empfaenger zum Zeitpunkt dem Tupel nicht zugeordnet
             </summary>
         </member>
-        <member name="F:BO4E.ENUM.FehlerCode.ZU_VIELE_STELLEN">
+        <member name="F:BO4E.ENUM.FehlerCode.VORKOMMA_ZU_VIELE_STELLEN">
             <summary>
             Vorkommastellen zu lang
             </summary>

@@ -34,13 +34,13 @@ namespace BO4E.COM
         [JsonProperty(PropertyName = "gruppe", Required = Required.Default)]
         [JsonPropertyName("gruppe")]
         [ProtoMember(4)]
-        public string gruppe { get; set; }
+        public string Gruppe { get; set; }
 
         /// <summary>Das Segment (im EDIFACT Segment).</summary>
         [JsonProperty(PropertyName = "segment", Required = Required.Default)]
         [JsonPropertyName("segment")]
         [ProtoMember(5)]
-        public string segment { get; set; }
+        public string Segment { get; set; }
 
         /// <summary>Zusätzliche Fehlerbeschreibung.</summary>
         [JsonProperty(PropertyName = "beschreibung", Required = Required.Default)]

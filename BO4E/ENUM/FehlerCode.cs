@@ -42,7 +42,7 @@ namespace BO4E.ENUM
         /// <summary>
         /// Vorkommastellen zu lang
         /// </summary>
-        ZU_VIELE_STELLEN,
+        VORKOMMA_ZU_VIELE_STELLEN,
         /// <summary>
         /// Zeitreihe ist unvollständig
         /// </summary>

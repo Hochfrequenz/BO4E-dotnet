@@ -18,7 +18,7 @@ namespace BO4E.BO
     public class Statusbericht : BusinessObject
     {
         /// <summary>
-        ///     Eindeutige Nummer des Angebotes.
+        ///     Status des Berichtes (Fehlerhaft, Erfolgreich)
         /// </summary>
         [JsonProperty(Required = Required.Always, Order = 1, PropertyName = "status")]
         [JsonPropertyName("status")]
@@ -26,13 +26,13 @@ namespace BO4E.BO
         public BO4E.ENUM.BerichtStatus Status { get; set; }
 
         /// <summary>
-        ///    Das geprüfte Dokument
+        ///    Das geprüfte Dokument, z.B. die Referenz auf die EDIFACT-Nachricht die geprüft / beanstandet wurde
         /// </summary>
-        [JsonProperty(Required = Required.Default, Order = 2, PropertyName = "pruefGegenstand")]
-        [JsonPropertyName("pruefGegenstand")]
+        [JsonProperty(Required = Required.Default, Order = 2, PropertyName = "pruefgegenstand")]
+        [JsonPropertyName("pruefgegenstand")]
         [ProtoMember(2)]
         [BoKey]
-        public string PruefGegenstand { get; set; }
+        public string Pruefgegenstand { get; set; }
 
         [System.Text.Json.Serialization.JsonIgnore]
         [Newtonsoft.Json.JsonIgnore]

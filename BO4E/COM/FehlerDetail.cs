@@ -27,9 +27,9 @@ namespace BO4E.COM
         /// <summary>
         ///     Herkunft / Ursache des Fehlers
         /// </summary>
-        [JsonProperty(PropertyName = "herkunft", Required = Required.Default)]
-        [JsonPropertyName("herkunft")]
+        [JsonProperty(PropertyName = "ursache", Required = Required.Default)]
+        [JsonPropertyName("ursache")]
         [ProtoMember(3)]
-        public FehlerUrsache Herkunft { get; set; }
+        public FehlerUrsache Ursache { get; set; }
     }
 }
