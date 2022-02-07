@@ -21,6 +21,25 @@ namespace BO4E.BO
     public class Reklamation : BusinessObject
     {
         /// <summary>
+        /// Für welche Markt- oder Messlokation gilt diese Reklamation.
+        /// </summary>
+        [JsonProperty(PropertyName = "lokationsId", Required = Required.Always)]
+        [JsonPropertyName("lokationsId")]
+        [NonOfficial(NonOfficialCategory.MISSING)]
+        [ProtoMember(1000)]
+        public string LokationsId { get; set; }
+        
+        /// <summary>
+        /// Gibt an, ob es sich um eine Markt- oder Messlokation handelt.
+        /// </summary>
+        /// <see cref="Lokationstyp" />
+        [JsonProperty(PropertyName = "lokationsTyp", Required = Required.Always)]
+        [JsonPropertyName("lokationsTyp")]
+        [ProtoMember(1001)]
+        public Lokationstyp LokationsTyp { get; set; }
+        
+        
+        /// <summary>
         /// OBIS-Kennzahl
         /// </summary>
         /// <example>
@@ -29,56 +48,17 @@ namespace BO4E.BO
         [JsonProperty(PropertyName = "obiskennzahl", Required = Required.Always)]
         [JsonPropertyName("obiskennzahl")]
         [NonOfficial(NonOfficialCategory.MISSING)]
-        [ProtoMember(1000)]
+        [ProtoMember(1002)]
         [BoKey]
         public string Obiskennzahl { get; set; }
-
+        
         /// <summary>
-        /// Sollablesetermin / Zeitangabe für Messwertanfrage
-        /// Verarbeitung, Beginndatum/-zeit
+        /// Sollablesetermin / Zeitangabe für Messwertanfrage. Details <see cref="Zeitraum" />
         /// </summary>
-        [System.Text.Json.Serialization.JsonIgnore]
-        [Newtonsoft.Json.JsonIgnore]
-        [ProtoMember(1002, Name = nameof(Startdatum))]
-        [CompatibilityLevel(CompatibilityLevel.Level240)]
-        private DateTime _Startdatum
-        {
-            get => Startdatum?.UtcDateTime ?? DateTime.MinValue;
-            set => Startdatum = DateTime.SpecifyKind(value, DateTimeKind.Utc);
-        }
-        /// <summary>
-        /// Sollablesetermin / Zeitangabe für Messwertanfrage
-        /// Verarbeitung, Beginndatum/-zeit
-        /// </summary>
-        [JsonProperty(PropertyName = "startdatum", Required = Required.Default)]
-        [JsonPropertyName("startdatum")]
-        [NonOfficial(NonOfficialCategory.MISSING)]
-        [ProtoIgnore]
-        public DateTimeOffset? Startdatum { get; set; }
-
-
-        /// <summary>
-        /// Sollablesetermin / Zeitangabe für Messwertanfrage
-        /// Verarbeitung, Endedatum/-zeit
-        /// </summary>
-        [System.Text.Json.Serialization.JsonIgnore]
-        [Newtonsoft.Json.JsonIgnore]
-        [ProtoMember(1003, Name = nameof(Enddatum))]
-        [CompatibilityLevel(CompatibilityLevel.Level240)]
-        private DateTime _Enddatum
-        {
-            get => Enddatum?.UtcDateTime ?? DateTime.MinValue;
-            set => Enddatum = DateTime.SpecifyKind(value, DateTimeKind.Utc);
-        }
-        /// <summary>
-        /// Sollablesetermin / Zeitangabe für Messwertanfrage
-        /// Verarbeitung, Endedatum/-zeit
-        /// </summary>
-        [JsonProperty(PropertyName = "enddatum", Required = Required.Default)]
-        [JsonPropertyName("enddatum")]
-        [NonOfficial(NonOfficialCategory.MISSING)]
-        [ProtoIgnore]
-        public DateTimeOffset? Enddatum { get; set; }
+        [JsonProperty(PropertyName = "ZeitraumMesswertanfrage", Required = Required.Default)]
+        [JsonPropertyName("ZeitraumMesswertanfrage")]
+        [ProtoMember(1003)]
+        public Zeitraum ZeitraumMesswertanfrage { get; set; }
 
         /// <summary>
         /// Hier wird für die Reklamation von Werten der Reklamationsgrund angegeben.
