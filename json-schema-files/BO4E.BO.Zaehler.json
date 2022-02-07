@@ -510,7 +510,7 @@
           "type": "string"
         },
         "wandlerfaktor": {
-          "type": "number"
+          "type": ["number", "null"]
         },
         "einheit": {
           "type": ["string", "null"],
@@ -583,13 +583,7 @@
           "format": "date-time"
         }
       },
-      "required": [
-        "zaehlwerkId",
-        "bezeichnung",
-        "richtung",
-        "obisKennzahl",
-        "wandlerfaktor"
-      ]
+      "required": ["zaehlwerkId", "bezeichnung", "richtung", "obisKennzahl"]
     }
   },
   "type": "object",
