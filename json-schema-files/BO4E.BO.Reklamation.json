@@ -1,0 +1,171 @@
+﻿{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "definitions": {
+    "ExterneReferenz": {
+      "type": [
+        "object",
+        "null"
+      ],
+      "properties": {
+        "exRefName": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "exRefWert": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "guid": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "timestamp": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "format": "date-time"
+        }
+      }
+    },
+    "Zeitraum": {
+      "type": [
+        "object",
+        "null"
+      ],
+      "properties": {
+        "einheit": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "enum": [
+            null,
+            "SEKUNDE",
+            "MINUTE",
+            "STUNDE",
+            "VIERTEL_STUNDE",
+            "TAG",
+            "WOCHE",
+            "MONAT",
+            "QUARTAL",
+            "HALBJAHR",
+            "JAHR"
+          ]
+        },
+        "dauer": {
+          "type": [
+            "number",
+            "null"
+          ]
+        },
+        "startdatum": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "format": "date-time"
+        },
+        "enddatum": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "format": "date-time"
+        },
+        "guid": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "timestamp": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "format": "date-time"
+        }
+      }
+    }
+  },
+  "type": "object",
+  "properties": {
+    "lokationsId": {
+      "type": "string"
+    },
+    "lokationsTyp": {
+      "type": "string",
+      "enum": [
+        "MaLo",
+        "MeLo"
+      ]
+    },
+    "obiskennzahl": {
+      "type": "string"
+    },
+    "ZeitraumMesswertanfrage": {
+      "$ref": "#/definitions/Zeitraum"
+    },
+    "reklamationsgrund": {
+      "type": "string",
+      "enum": [
+        "WERTE_ZU_HOCH",
+        "WERTE_ZU_NIEDRIG",
+        "WERTE_FEHLEN"
+      ]
+    },
+    "reklamationsgrundBemerkung": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "externeReferenzen": {
+      "type": [
+        "array",
+        "null"
+      ],
+      "items": {
+        "$ref": "#/definitions/ExterneReferenz"
+      }
+    },
+    "guid": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "boTyp": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "versionStruktur": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "timestamp": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "format": "date-time"
+    }
+  },
+  "required": [
+    "lokationsId",
+    "lokationsTyp",
+    "obiskennzahl",
+    "reklamationsgrund"
+  ]
+}

@@ -3638,6 +3638,10 @@
             <summary>type</summary>
             <example>arbeitleistungtagesparameterabhmalo | veranschlagtejahresmenge | TUMKundenwert</example>
         </member>
+        <member name="P:BO4E.COM.Verbrauch.Tarifstufe">
+            <summary>Tarifstufe</summary>
+            <seealso cref="T:BO4E.ENUM.Tarifstufe" />
+        </member>
         <member name="M:BO4E.COM.Verbrauch.FixSapBugs(System.Runtime.Serialization.StreamingContext)">
             <param name="context"></param>
         </member>
@@ -8623,6 +8627,51 @@
         </member>
         <member name="F:BO4E.ENUM.Tarifregionskriterium.GRUNDVERSORGER_NUMMER">
             <summary>Nummer des Grundversorgers</summary>
+        </member>
+        <member name="T:BO4E.ENUM.Tarifstufe">
+            <summary>
+            In IFTSTA 21035 "Rückmeldung auf Lieferschein" (IFTSTA SG16 QTY 6063) 
+            </summary>
+        </member>
+        <member name="F:BO4E.ENUM.Tarifstufe.TARIFSTUFE_0">
+            <summary> TARIFSTUFE_0 </summary>
+            <remarks>Z20</remarks>
+        </member>
+        <member name="F:BO4E.ENUM.Tarifstufe.TARIFSTUFE_1">
+            <summary> TARIFSTUFE_1 </summary>
+            <remarks>Z21</remarks>
+        </member>
+        <member name="F:BO4E.ENUM.Tarifstufe.TARIFSTUFE_2">
+            <summary> TARIFSTUFE_2 </summary>
+            <remarks>Z22</remarks>
+        </member>
+        <member name="F:BO4E.ENUM.Tarifstufe.TARIFSTUFE_3">
+            <summary> TARIFSTUFE_3 </summary>
+            <remarks>Z23</remarks>
+        </member>
+        <member name="F:BO4E.ENUM.Tarifstufe.TARIFSTUFE_4">
+            <summary> TARIFSTUFE_4 </summary>
+            <remarks>Z24</remarks>
+        </member>
+        <member name="F:BO4E.ENUM.Tarifstufe.TARIFSTUFE_5">
+            <summary> TARIFSTUFE_5 </summary>
+            <remarks>Z25</remarks>
+        </member>
+        <member name="F:BO4E.ENUM.Tarifstufe.TARIFSTUFE_6">
+            <summary> TARIFSTUFE_6 </summary>
+            <remarks>Z26</remarks>
+        </member>
+        <member name="F:BO4E.ENUM.Tarifstufe.TARIFSTUFE_7">
+            <summary> TARIFSTUFE_7 </summary>
+            <remarks>Z27</remarks>
+        </member>
+        <member name="F:BO4E.ENUM.Tarifstufe.TARIFSTUFE_8">
+            <summary> TARIFSTUFE_8 </summary>
+            <remarks>Z28</remarks>
+        </member>
+        <member name="F:BO4E.ENUM.Tarifstufe.TARIFSTUFE_9">
+            <summary> TARIFSTUFE_9 </summary>
+            <remarks>Z29</remarks>
         </member>
         <member name="T:BO4E.ENUM.Tariftyp">
             <summary>
