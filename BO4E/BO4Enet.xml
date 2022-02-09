@@ -500,7 +500,7 @@
         </member>
         <member name="P:BO4E.BO.Bilanzierung.MarktlokationsId">
             <summary>
-            Für welche Marktlokation getlen diese Bilanzierungsdaten
+            Für welche Marktlokation gelten diese Bilanzierungsdaten
             </summary>
         </member>
         <member name="P:BO4E.BO.Bilanzierung.Lastprofile">
@@ -1705,6 +1705,45 @@
         <member name="P:BO4E.BO.Region.NegativListe">
             <summary>
                 Negativliste der Kriterien zur Definition der Region.
+            </summary>
+        </member>
+        <member name="T:BO4E.BO.Reklamation">
+            <summary>
+            Reklamations BO
+            </summary>
+        </member>
+        <member name="P:BO4E.BO.Reklamation.LokationsId">
+            <summary>
+            Für welche Markt- oder Messlokation gilt diese Reklamation.
+            </summary>
+        </member>
+        <member name="P:BO4E.BO.Reklamation.LokationsTyp">
+            <summary>
+            Gibt an, ob es sich um eine Markt- oder Messlokation handelt.
+            </summary>
+            <see cref="T:BO4E.ENUM.Lokationstyp" />
+        </member>
+        <member name="P:BO4E.BO.Reklamation.Obiskennzahl">
+            <summary>
+            OBIS-Kennzahl
+            </summary>
+            <example>
+                1-0:1.8.1
+            </example>
+        </member>
+        <member name="P:BO4E.BO.Reklamation.ZeitraumMesswertanfrage">
+            <summary>
+            Sollablesetermin / Zeitangabe für Messwertanfrage. Details <see cref="T:BO4E.COM.Zeitraum" />
+            </summary>
+        </member>
+        <member name="P:BO4E.BO.Reklamation.Reklamationsgrund">
+            <summary>
+            Hier wird für die Reklamation von Werten der Reklamationsgrund angegeben.
+            </summary>
+        </member>
+        <member name="P:BO4E.BO.Reklamation.ReklamationsgrundBemerkung">
+            <summary>
+            Freitext für eine weitere Beschreibung des Reklamationsgrunds
             </summary>
         </member>
         <member name="T:BO4E.BO.Sperrauftrag">
@@ -7903,6 +7942,18 @@
                 bundesweite Betrachtung
             </summary>
         </member>
+        <member name="T:BO4E.ENUM.Reklamationsgrund">
+            <summary>Reklamationsgrund</summary>
+        </member>
+        <member name="F:BO4E.ENUM.Reklamationsgrund.WERTE_ZU_HOCH">
+            <summary>Werte zu hoch im angegebenen Zeitintervall</summary>
+        </member>
+        <member name="F:BO4E.ENUM.Reklamationsgrund.WERTE_ZU_NIEDRIG">
+            <summary>Werte zu niedrig im angegebenen Zeitintervall</summary>
+        </member>
+        <member name="F:BO4E.ENUM.Reklamationsgrund.WERTE_FEHLEN">
+            <summary>Werte fehlen im angegebenen Zeitintervall</summary>
+        </member>
         <member name="T:BO4E.ENUM.Rollencodetyp">
             <summary>Gibt den Codetyp einer Rolle, beispielsweise einer Marktrolle, an.</summary>
         </member>
@@ -8232,6 +8283,38 @@
             <summary> ZAEHLERSTAND_ZUM_ENDE_DER_ANGEGEBENEN_ENERGIEMENGE_NICHT_VORHANDEN_DA_MENGENABGRENZUNG </summary>
             <remarks>Z39</remarks>
         </member>
+        <member name="F:BO4E.ENUM.Status.KEIN_ZUGANG">
+            <summary> KEIN_ZUGANG </summary>
+            <remarks>Z74</remarks>
+        </member>
+        <member name="F:BO4E.ENUM.Status.KOMMUNIKATIONSSTOERUNG">
+            <summary> KOMMUNIKATIONSSTOERUNG </summary>
+            <remarks>Z75</remarks>
+        </member>
+        <member name="F:BO4E.ENUM.Status.NETZAUSFALL">
+            <summary> NETZAUSFALL </summary>
+            <remarks>Z76</remarks>
+        </member>
+        <member name="F:BO4E.ENUM.Status.GERAETEWECHSEL">
+            <summary> GERAETEWECHSEL </summary>
+            <remarks>Z78</remarks>
+        </member>
+        <member name="F:BO4E.ENUM.Status.KALIBRIERUNG">
+            <summary> KALIBRIERUNG </summary>
+            <remarks>Z79</remarks>
+        </member>
+        <member name="F:BO4E.ENUM.Status.GERAET_ARBEITET_AUSSERHALB_DER_BETRIEBSBEDINGUNGEN">
+            <summary> GERAET_ARBEITET_AUSSERHALB_DER_BETRIEBSBEDINGUNGEN </summary>
+            <remarks>Z80</remarks>
+        </member>
+        <member name="F:BO4E.ENUM.Status.MESSEINRICHTUNG_GESTOERT_DEFEKT">
+            <summary> MESSEINRICHTUNG_GESTOERT_DEFEKT </summary>
+            <remarks>Z81</remarks>
+        </member>
+        <member name="F:BO4E.ENUM.Status.UNSICHERHEIT_MESSUNG">
+            <summary> UNSICHERHEIT_MESSUNG </summary>
+            <remarks>Z82</remarks>
+        </member>
         <member name="F:BO4E.ENUM.Status.KUNDENSELBSTABLESUNG">
             <summary> KUNDENSELBSTABLESUNG </summary>
             <remarks>Z83</remarks>
@@ -8252,9 +8335,149 @@
             <summary> PLAUSIBEL_WG_KUNDENHINWIES </summary>
             <remarks>Z87</remarks>
         </member>
+        <member name="F:BO4E.ENUM.Status.VERGLEICHSMESSUNG_GEEICHT">
+            <summary> VERGLEICHSMESSUNG_GEEICHT </summary>
+            <remarks>Z88</remarks>
+        </member>
+        <member name="F:BO4E.ENUM.Status.VERGLEICHSMESSUNG_NICHT_GEEICHT">
+            <summary> VERGLEICHSMESSUNG_NICHT_GEEICHT </summary>
+            <remarks>Z89</remarks>
+        </member>
+        <member name="F:BO4E.ENUM.Status.MESSWERTNACHBILDUNG_AUS_GEEICHTEN_WERTEN">
+            <summary> MESSWERTNACHBILDUNG_AUS_GEEICHTEN_WERTEN </summary>
+            <remarks>Z90</remarks>
+        </member>
+        <member name="F:BO4E.ENUM.Status.MESSWERTNACHBILDUNG_AUS_NICHT_GEEICHTEN_WERTEN">
+            <summary> MESSWERTNACHBILDUNG_AUS_NICHT_GEEICHTEN_WERTEN </summary>
+            <remarks>Z91</remarks>
+        </member>
+        <member name="F:BO4E.ENUM.Status.INTERPOLATION">
+            <summary> INTERPOLATION </summary>
+            <remarks>Z92</remarks>
+        </member>
+        <member name="F:BO4E.ENUM.Status.HALTEWERT">
+            <summary> HALTEWERT </summary>
+            <remarks>Z93</remarks>
+        </member>
+        <member name="F:BO4E.ENUM.Status.BILANZIERUNG_NETZABSCHNITT">
+            <summary> BILANZIERUNG_NETZABSCHNITT </summary>
+            <remarks>Z94</remarks>
+        </member>
+        <member name="F:BO4E.ENUM.Status.HISTORISCHE_MESSWERTE">
+            <summary> HISTORISCHE_MESSWERTE </summary>
+            <remarks>Z95</remarks>
+        </member>
+        <member name="F:BO4E.ENUM.Status.BERUECKSICHTIGUNG_STOERMENGENZAEHLWERK">
+            <summary> BERUECKSICHTIGUNG_STOERMENGENZAEHLWERK </summary>
+            <remarks>Z98</remarks>
+        </member>
+        <member name="F:BO4E.ENUM.Status.MENGENUMWERTUNG_VOLLSTAENDIG">
+            <summary> MENGENUMWERTUNG_VOLLSTAENDIG </summary>
+            <remarks>Z99</remarks>
+        </member>
+        <member name="F:BO4E.ENUM.Status.UHRZEIT_GESTELLT_SYNCHRONISATION">
+            <summary> UHRZEIT_GESTELLT_SYNCHRONISATION </summary>
+            <remarks>ZA0</remarks>
+        </member>
+        <member name="F:BO4E.ENUM.Status.MESSWERT_UNPLAUSIBEL">
+            <summary> MESSWERT_UNPLAUSIBEL </summary>
+            <remarks>ZA1</remarks>
+        </member>
+        <member name="F:BO4E.ENUM.Status.FALSCHER_WANDLERFAKTOR">
+            <summary> FALSCHER_WANDLERFAKTOR </summary>
+            <remarks>ZA3</remarks>
+        </member>
+        <member name="F:BO4E.ENUM.Status.FEHLERHAFTE_ABLESUNG">
+            <summary> FEHLERHAFTE_ABLESUNG </summary>
+            <remarks>ZA4</remarks>
+        </member>
+        <member name="F:BO4E.ENUM.Status.AENDERUNG_DER_BERECHNUNG">
+            <summary> AENDERUNG_DER_BERECHNUNG </summary>
+            <remarks>ZA5</remarks>
+        </member>
+        <member name="F:BO4E.ENUM.Status.UMBAU_DER_MESSLOKATION">
+            <summary> UMBAU_DER_MESSLOKATION </summary>
+            <remarks>ZA6</remarks>
+        </member>
+        <member name="F:BO4E.ENUM.Status.DATENBEARBEITUNGSFEHLER">
+            <summary> DATENBEARBEITUNGSFEHLER </summary>
+            <remarks>ZA7</remarks>
+        </member>
+        <member name="F:BO4E.ENUM.Status.BRENNWERTKORREKTUR">
+            <summary> BRENNWERTKORREKTUR </summary>
+            <remarks>ZA8</remarks>
+        </member>
+        <member name="F:BO4E.ENUM.Status.Z_ZAHL_KORREKTUR">
+            <summary> Z_ZAHL_KORREKTUR </summary>
+            <remarks>ZA9</remarks>
+        </member>
+        <member name="F:BO4E.ENUM.Status.STOERUNG_DEFEKT_MESSEINRICHTUNG">
+            <summary> STOERUNG_DEFEKT_MESSEINRICHTUNG </summary>
+            <remarks>ZB0</remarks>
+        </member>
+        <member name="F:BO4E.ENUM.Status.AENDERUNG_TARIFSCHALTZEITEN">
+            <summary> AENDERUNG_TARIFSCHALTZEITEN </summary>
+            <remarks>ZB9</remarks>
+        </member>
+        <member name="F:BO4E.ENUM.Status.TARIFSCHALTGERAET_DEFEKT">
+            <summary> TARIFSCHALTGERAET_DEFEKT </summary>
+            <remarks>ZC2</remarks>
+        </member>
         <member name="F:BO4E.ENUM.Status.AUSTAUSCH_DES_ERSATZWERTES">
             <summary> AUSTAUSCH_DES_ERSATZWERTES </summary>
             <remarks>ZC3</remarks>
+        </member>
+        <member name="F:BO4E.ENUM.Status.IMPULSWERTIGKEIT_NICHT_AUSREICHEND">
+            <summary> IMPULSWERTIGKEIT_NICHT_AUSREICHEND </summary>
+            <remarks>ZC4</remarks>
+        </member>
+        <member name="F:BO4E.ENUM.Status.UMSTELLUNG_GASQUALITAET">
+            <summary> UMSTELLUNG_GASQUALITAET </summary>
+            <remarks>ZG3</remarks>
+        </member>
+        <member name="F:BO4E.ENUM.Status.STATISTISCHE_METHODE">
+            <summary> STATISTISCHE_METHODE </summary>
+            <remarks>ZJ2</remarks>
+        </member>
+        <member name="F:BO4E.ENUM.Status.ENERGIEMENGE_IN_UNGEMESSENEM_ZEITINTERVALL">
+            <summary> ENERGIEMENGE_IN_UNGEMESSENEM_ZEITINTERVALL </summary>
+            <remarks>ZJ8</remarks>
+        </member>
+        <member name="F:BO4E.ENUM.Status.ENERGIEMENGE_AUS_DEM_UNGEPAIRTEN_ZEITINTERVALL">
+            <summary> ENERGIEMENGE_AUS_DEM_UNGEPAIRTEN_ZEITINTERVALL </summary>
+            <remarks>ZJ9</remarks>
+        </member>
+        <member name="F:BO4E.ENUM.Status.AUFTEILUNG">
+            <summary> AUFTEILUNG </summary>
+            <remarks>ZQ8</remarks>
+        </member>
+        <member name="F:BO4E.ENUM.Status.VERWENDUNG_VON_WERTEN_DES_STOERMENGENZAEHLWERKS">
+            <summary> VERWENDUNG_VON_WERTEN_DES_STOERMENGENZAEHLWERKS </summary>
+            <remarks>ZQ9</remarks>
+        </member>
+        <member name="F:BO4E.ENUM.Status.UMGANGS_UND_KORREKTURMENGEN">
+            <summary> UMGANGS_UND_KORREKTURMENGEN </summary>
+            <remarks>ZR0</remarks>
+        </member>
+        <member name="F:BO4E.ENUM.Status.WARTUNGSARBEITEN_AN_GEEICHTEM_MESSGERAET">
+            <summary> WARTUNGSARBEITEN_AN_GEEICHTEM_MESSGERAET </summary>
+            <remarks>ZR1</remarks>
+        </member>
+        <member name="F:BO4E.ENUM.Status.GESTOERTE_WERTE">
+            <summary> GESTOERTE_WERTE </summary>
+            <remarks>ZR2</remarks>
+        </member>
+        <member name="F:BO4E.ENUM.Status.WARTUNGSARBEITEN_AN_EICHRECHTSKONFORMEN_MESSGERAETEN">
+            <summary> WARTUNGSARBEITEN_AN_EICHRECHTSKONFORMEN_MESSGERAETEN </summary>
+            <remarks>ZR3</remarks>
+        </member>
+        <member name="F:BO4E.ENUM.Status.KONSISTENZ_UND_SYNCHRONPRUEFUNG">
+            <summary> KONSISTENZ_UND_SYNCHRONPRUEFUNG </summary>
+            <remarks>ZR4</remarks>
+        </member>
+        <member name="F:BO4E.ENUM.Status.RECHENWERT">
+            <summary> RECHENWERT </summary>
+            <remarks>ZR5</remarks>
         </member>
         <member name="T:BO4E.ENUM.StatusArt">
             <summary>
