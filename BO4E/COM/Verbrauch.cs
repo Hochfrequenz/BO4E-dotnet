@@ -136,7 +136,7 @@ namespace BO4E.COM
         [NonOfficial(NonOfficialCategory.UNSPECIFIED)]
         [JsonProperty(PropertyName = "tarifstufe", Required = Required.Default)]
         [JsonPropertyName("tarifstufe")]
-        [ProtoMember(9)]
+        [ProtoMember(10)]
         public Tarifstufe? Tarifstufe { get; set; }
 
         /// <param name="context"></param>
