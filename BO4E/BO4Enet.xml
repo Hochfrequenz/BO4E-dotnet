@@ -8295,8 +8295,9 @@
             <summary> NETZAUSFALL </summary>
             <remarks>Z76</remarks>
         </member>
-        <member name="F:BO4E.ENUM.Status.GERAETEWECHSEL">
-            <summary> GERAETEWECHSEL </summary>
+        <member name="F:BO4E.ENUM.Status.STATUS_GERAETEWECHSEL">
+            <summary> STATUS_GERAETEWECHSEL </summary>
+            <remarks>Needs to have a prefix, because this is also an enum value in <see cref="T:BO4E.ENUM.Themengebiet" /></remarks>
             <remarks>Z78</remarks>
         </member>
         <member name="F:BO4E.ENUM.Status.KALIBRIERUNG">
