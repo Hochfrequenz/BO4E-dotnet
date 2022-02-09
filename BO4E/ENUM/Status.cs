@@ -72,9 +72,10 @@ namespace BO4E.ENUM
         /// <remarks>Z76</remarks>
         NETZAUSFALL,
 
-        /// <summary> GERAETEWECHSEL </summary>
+        /// <summary> STATUS_GERAETEWECHSEL </summary>
+        /// <remarks>Needs to have a prefix, because this is also an enum value in <see cref="Themengebiet" /></remarks>
         /// <remarks>Z78</remarks>
-        GERAETEWECHSEL,
+        STATUS_GERAETEWECHSEL,
 
         /// <summary> KALIBRIERUNG </summary>
         /// <remarks>Z79</remarks>
