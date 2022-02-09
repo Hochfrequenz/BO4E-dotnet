@@ -131,6 +131,14 @@ namespace BO4E.COM
         [ProtoMember(9)]
         public Verbrauchsmengetyp? Type { get; set; }
 
+        /// <summary>Tarifstufe</summary>
+        /// <seealso cref="ENUM.Tarifstufe" />
+        [NonOfficial(NonOfficialCategory.UNSPECIFIED)]
+        [JsonProperty(PropertyName = "tarifstufe", Required = Required.Default)]
+        [JsonPropertyName("tarifstufe")]
+        [ProtoMember(12)]
+        public Tarifstufe? Tarifstufe { get; set; }
+
         /// <param name="context"></param>
         [OnDeserialized]
         protected void FixSapBugs(StreamingContext context)

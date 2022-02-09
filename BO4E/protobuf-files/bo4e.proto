@@ -1311,6 +1311,19 @@ enum Tarifart {
    SMART_METER = 3;
    LEISTUNGSGEMESSEN = 4;
 }
+enum Tarifstufe {
+   option (.protobuf_net.enumopt).namespace = "BO4E.ENUM";
+   TARIFSTUFE_0 = 0;
+   TARIFSTUFE_1 = 1;
+   TARIFSTUFE_2 = 2;
+   TARIFSTUFE_3 = 3;
+   TARIFSTUFE_4 = 4;
+   TARIFSTUFE_5 = 5;
+   TARIFSTUFE_6 = 6;
+   TARIFSTUFE_7 = 7;
+   TARIFSTUFE_8 = 8;
+   TARIFSTUFE_9 = 9;
+}
 enum Tarifzeit {
    option (.protobuf_net.enumopt).namespace = "BO4E.ENUM";
    TZ_STANDARD = 0;
@@ -1345,6 +1358,7 @@ message Verbrauch {
    Verbrauchsmengetyp Type = 9;
    WertMengeArt WertMengeArt = 10;
    repeated StatusZusatzInformation StatusZusatzInformationen = 11;
+   Tarifstufe Tarifstufe = 12;
 }
 enum Verbrauchsart {
    option (.protobuf_net.enumopt).namespace = "BO4E.ENUM";
