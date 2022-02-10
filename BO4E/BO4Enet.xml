@@ -8279,7 +8279,7 @@
             <summary> ZAEHLERSTAND_ZUM_ENDE_DER_ANGEGEBENEN_ENERGIEMENGE_VORHANDEN_UND_KOMMUNIZIERT </summary>
             <remarks>Z37</remarks>
         </member>
-        <member name="F:BO4E.ENUM.Status.ZAEHLERSTAND_ZUM_BEGINN_DER_ANGEGEBENEN_ENERGIEMENGE_NICHT_VORHANDEN_DA">
+        <member name="F:BO4E.ENUM.Status.ZAEHLERSTAND_ZUM_BEGINN_DER_ANGEGEBENEN_ENERGIEMENGE_NICHT_VORHANDEN_DA_MENGENABGRENZUNG">
             <summary> ZAEHLERSTAND_ZUM_BEGINN_DER_ANGEGEBENEN_ENERGIEMENGE_NICHT_VORHANDEN_DA_MENGENABGRENZUNG </summary>
             <remarks>Z38</remarks>
         </member>
@@ -8340,8 +8340,8 @@
             <summary> PLAUSIBEL_WG_KONTROLLABLESUNG </summary>
             <remarks>Z86</remarks>
         </member>
-        <member name="F:BO4E.ENUM.Status.PLAUSIBEL_WG_KUNDENHINWIES">
-            <summary> PLAUSIBEL_WG_KUNDENHINWIES </summary>
+        <member name="F:BO4E.ENUM.Status.PLAUSIBEL_WG_KUNDENHINWEIS">
+            <summary> PLAUSIBEL_WG_KUNDENHINWEIS </summary>
             <remarks>Z87</remarks>
         </member>
         <member name="F:BO4E.ENUM.Status.VERGLEICHSMESSUNG_GEEICHT">
