@@ -473,6 +473,11 @@
             Jahresverbrauchsprognose
             </summary>
         </member>
+        <member name="P:BO4E.BO.Bilanzierung.TemperaturArbeit">
+            <summary>
+            Kundenwert
+            </summary>
+        </member>
         <member name="P:BO4E.BO.Bilanzierung.Kundenwert">
             <summary>
             Kundenwert
@@ -4773,7 +4778,7 @@
         </member>
         <member name="T:BO4E.ENUM.EDI.NetznutzungsvertragEdi">
             <summary>
-                EDIFACT values of <see cref="T:BO4E.ENUM.NetznutzungsVertrag" />
+                EDIFACT values of <see cref="T:BO4E.ENUM.Netznutzungsvertragsart" />
             </summary>
             <author>Hochfrequenz Unternehmensberatung GmbH</author>
         </member>
@@ -7021,13 +7026,13 @@
         <member name="F:BO4E.ENUM.Netznutzungsabrechnungsvariante.ARBEITSPREIS_LEISTUNGSPREIS">
             <summary>Z15: Arbeitspreis/Leistungspreis</summary>
         </member>
-        <member name="T:BO4E.ENUM.NetznutzungsVertrag">
-            <summary>Netznutzungsvertrag</summary>
+        <member name="T:BO4E.ENUM.Netznutzungsvertragsart">
+            <summary>Art des Netznutzungsvertrags</summary>
         </member>
-        <member name="F:BO4E.ENUM.NetznutzungsVertrag.KUNDEN_NB">
+        <member name="F:BO4E.ENUM.Netznutzungsvertragsart.KUNDEN_NB">
             <summary>Z08: Direkter Vertrag zwischen Kunden und NB</summary>
         </member>
-        <member name="F:BO4E.ENUM.NetznutzungsVertrag.LIEFERANTEN_NB">
+        <member name="F:BO4E.ENUM.Netznutzungsvertragsart.LIEFERANTEN_NB">
             <summary>Z09: Vertrag zwischen Lieferanten und NB</summary>
         </member>
         <member name="T:BO4E.ENUM.Netznutzungszahler">

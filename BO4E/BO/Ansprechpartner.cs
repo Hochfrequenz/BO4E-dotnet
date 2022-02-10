@@ -50,7 +50,7 @@ namespace BO4E.BO
         public string Vorname { get; set; }
 
         /// <summary>Nachname (Familienname) des Ansprechpartners</summary>
-        [JsonProperty(Required = Required.Always, Order = 8, PropertyName = "nachname")]
+        [JsonProperty(Required = Required.Default, Order = 8, PropertyName = "nachname")]
         [JsonPropertyName("nachname")]
         [ProtoMember(8)]
         [DataCategory(DataCategory.NAME)]
