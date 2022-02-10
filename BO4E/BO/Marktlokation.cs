@@ -52,16 +52,16 @@ namespace BO4E.BO
         public Sparte Sparte { get; set; }
 
         /// <summary>Kennzeichnung, ob Energie eingespeist oder entnommen (ausgespeist) wird.</summary>
-        [JsonProperty(Required = Required.Always, Order = 6, PropertyName = "energierichtung")]
+        [JsonProperty(Required = Required.Default, Order = 6, PropertyName = "energierichtung")]
         [JsonPropertyName("energierichtung")]
         [ProtoMember(6)]
-        public Energierichtung Energierichtung { get; set; }
+        public Energierichtung? Energierichtung { get; set; }
 
         /// <summary>Kennzeichnung, ob Energie eingespeist oder entnommen (ausgespeist) wird.</summary>
-        [JsonProperty(Required = Required.Always, Order = 7, PropertyName = "bilanzierungsmethode")]
+        [JsonProperty(Required = Required.Default, Order = 7, PropertyName = "bilanzierungsmethode")]
         [JsonPropertyName("bilanzierungsmethode")]
         [ProtoMember(7)]
-        public Bilanzierungsmethode Bilanzierungsmethode { get; set; }
+        public Bilanzierungsmethode? Bilanzierungsmethode { get; set; }
 
         /// <summary>Verbrauchsart der Marktlokation</summary>
         [JsonProperty(Required = Required.Default, Order = 8, PropertyName = "verbrauchsart")]
@@ -264,7 +264,7 @@ namespace BO4E.BO
         /// erfolgt, werden nie beide Marktlokationen gemeinsam betrachtet. Daher lässt
         /// sich dieses Konstrukt auf zwei 1:1-Beziehung zurückführen, wobei die
         /// Messlokation in beiden Fällen die gleiche ist.
-        /// 
+        ///
         /// In den Zuordnungen sind ist die arithmetische Operation mit der der Verbrauch
         /// einer Messlokation zum Verbrauch einer Marktlokation beitrögt mit aufgeführt.
         /// Der Standard ist hier die Addition.

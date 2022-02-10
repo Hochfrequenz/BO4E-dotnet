@@ -27,11 +27,11 @@ namespace BO4E.COM
         /// <summary>
         ///     Ende der Gültigkeit des Vertragsteils.
         /// </summary>
-        [JsonProperty(PropertyName = "vertragsteilende", Required = Required.Always)]
+        [JsonProperty(PropertyName = "vertragsteilende", Required = Required.Default)]
         [JsonPropertyName("vertragsteilende")]
         [ProtoMember(4)]
         [Newtonsoft.Json.JsonConverter(typeof(LenientDateTimeConverter))]
-        public DateTimeOffset Vertragsteilende { get; set; }
+        public DateTimeOffset? Vertragsteilende { get; set; }
 
         /// <summary>
         ///     Der Identifier für diejenigen Markt- oder Messlokation, die zu diesem Vertragsteil gehören.

@@ -33,17 +33,17 @@ namespace BO4E.BO
         ///     Spezifikation die Richtung des Zählers betreffend.
         ///     <seealso cref="ENUM.Zaehlerauspraegung" />
         /// </summary>
-        [JsonProperty(Required = Required.Always, Order = 6, PropertyName = "zaehlerauspraegung")]
+        [JsonProperty(Required = Required.Default, Order = 6, PropertyName = "zaehlerauspraegung")]
         [JsonPropertyName("zaehlerauspraegung")]
         [ProtoMember(6)]
-        public Zaehlerauspraegung Zaehlerauspraegung { get; set; }
+        public Zaehlerauspraegung? Zaehlerauspraegung { get; set; }
 
         /// <summary>
         ///     Typisierung des Zählers
         ///     <seealso cref="ENUM.Zaehlertyp" />
         /// </summary>
         [JsonProperty(
-            Required = Required.AllowNull, //Required = Required.Always, 
+            Required = Required.AllowNull, //Required = Required.Always,
             Order = 7, PropertyName = "zaehlertyp")]
         [ProtoMember(7)]
         [JsonPropertyName("zaehlertyp")]
@@ -55,10 +55,10 @@ namespace BO4E.BO
         ///     Spezifikation bezüglich unterstützter Tarifarten.
         ///     <seealso cref="ENUM.Tarifart" />
         /// </summary>
-        [JsonProperty(Required = Required.Always, Order = 8, PropertyName = "tarifart")]
+        [JsonProperty(Required = Required.Default, Order = 8, PropertyName = "tarifart")]
         [JsonPropertyName("tarifart")]
         [ProtoMember(8)]
-        public Tarifart Tarifart { get; set; }
+        public Tarifart? Tarifart { get; set; }
 
         /// <summary>Zählerkonstante auf dem Zähler.</summary>
         [JsonProperty(Required = Required.Default, Order = 9, PropertyName = "zaehlerkonstante")]

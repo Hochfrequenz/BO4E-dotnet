@@ -69,10 +69,10 @@ namespace BO4E.BO
         /// <summary>
         ///     Gibt den Status des Vertrags an. Siehe ENUM Vertragsstatus
         /// </summary>
-        [JsonProperty(Required = Required.Always, Order = 7, PropertyName = "vertragstatus")]
+        [JsonProperty(Required = Required.Default, Order = 7, PropertyName = "vertragstatus")]
         [JsonPropertyName("vertragstatus")]
         [ProtoMember(7)]
-        public Vertragstatus Vertragstatus { get; set; } // ToDo: shouldn't this be vertragsstatus with "ss"?
+        public Vertragstatus? Vertragstatus { get; set; } // ToDo: shouldn't this be vertragsstatus with "ss"?
 
         /// <summary>
         ///     Unterscheidungsmöglichkeiten für die Sparte. Siehe ENUM Sparte
@@ -94,11 +94,11 @@ namespace BO4E.BO
         /// <summary>
         ///     Gibt an, wann der Vertrag (voraussichtlich) endet oder beendet wurde.
         /// </summary>
-        [JsonProperty(Required = Required.Always, Order = 10, PropertyName = "vertragsende")]
+        [JsonProperty(Required = Required.Default, Order = 10, PropertyName = "vertragsende")]
         [JsonPropertyName("vertragsende")]
         [ProtoMember(10)]
         [Newtonsoft.Json.JsonConverter(typeof(LenientDateTimeConverter))]
-        public DateTimeOffset Vertragsende { get; set; }
+        public DateTimeOffset? Vertragsende { get; set; }
 
         /// <summary>
         ///     Der "erstgenannte" Vertragspartner. In der Regel der Aussteller des Vertrags. Beispiel: "Vertrag zwischen
