@@ -58,10 +58,10 @@ namespace BO4E.BO
         public Energierichtung? Energierichtung { get; set; }
 
         /// <summary>Kennzeichnung, ob Energie eingespeist oder entnommen (ausgespeist) wird.</summary>
-        [JsonProperty(Required = Required.Always, Order = 7, PropertyName = "bilanzierungsmethode")]
+        [JsonProperty(Required = Required.Default, Order = 7, PropertyName = "bilanzierungsmethode")]
         [JsonPropertyName("bilanzierungsmethode")]
         [ProtoMember(7)]
-        public Bilanzierungsmethode Bilanzierungsmethode { get; set; }
+        public Bilanzierungsmethode? Bilanzierungsmethode { get; set; }
 
         /// <summary>Verbrauchsart der Marktlokation</summary>
         [JsonProperty(Required = Required.Default, Order = 8, PropertyName = "verbrauchsart")]
