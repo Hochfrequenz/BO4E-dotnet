@@ -56,7 +56,7 @@ namespace BO4E.COM
         [JsonProperty(PropertyName = "einheit", Required = Required.Default)]
         [JsonPropertyName("einheit")]
         [ProtoMember(8)]
-        public Mengeneinheit Einheit { get; set; }
+        public Mengeneinheit?Einheit { get; set; }
 
         /// <summary>Obis kennzahl</summary>
         [JsonProperty(PropertyName = "kennzahl", Required = Required.Default)]

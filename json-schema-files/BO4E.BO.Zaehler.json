@@ -497,24 +497,25 @@
       "type": ["object", "null"],
       "properties": {
         "zaehlwerkId": {
-          "type": "string"
+          "type": ["string", "null"]
         },
         "bezeichnung": {
-          "type": "string"
+          "type": ["string", "null"]
         },
         "richtung": {
           "type": "string",
           "enum": ["AUSSP", "EINSP"]
         },
         "obisKennzahl": {
-          "type": "string"
+          "type": ["string", "null"]
         },
         "wandlerfaktor": {
           "type": "number"
         },
         "einheit": {
-          "type": "string",
+          "type": ["string", "null"],
           "enum": [
+            null,
             "ZERO",
             "WH",
             "KW",
@@ -581,14 +582,7 @@
           "format": "date-time"
         }
       },
-      "required": [
-        "zaehlwerkId",
-        "bezeichnung",
-        "richtung",
-        "obisKennzahl",
-        "wandlerfaktor",
-        "einheit"
-      ]
+      "required": ["richtung", "wandlerfaktor"]
     }
   },
   "type": "object",

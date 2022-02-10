@@ -433,8 +433,9 @@
           "type": "number"
         },
         "einheit": {
-          "type": "string",
+          "type": ["string", "null"],
           "enum": [
+            null,
             "ZERO",
             "WH",
             "KW",
@@ -461,7 +462,7 @@
           "format": "date-time"
         }
       },
-      "required": ["wert", "einheit"]
+      "required": ["wert"]
     },
     "Unterschrift": {
       "type": ["object", "null"],
@@ -662,7 +663,7 @@
       "format": "date-time"
     },
     "vertragsnummer": {
-      "type": "string"
+      "type": ["string", "null"]
     },
     "beschreibung": {
       "type": ["string", "null"]
@@ -738,7 +739,6 @@
     }
   },
   "required": [
-    "vertragsnummer",
     "vertragsart",
     "vertragstatus",
     "sparte",

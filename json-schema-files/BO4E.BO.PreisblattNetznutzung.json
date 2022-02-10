@@ -360,7 +360,7 @@
           "type": ["string", "null"]
         },
         "nachname": {
-          "type": "string"
+          "type": ["string", "null"]
         },
         "eMailAdresse": {
           "type": ["string", "null"]
@@ -386,8 +386,7 @@
             "$ref": "#/definitions/Zustaendigkeit"
           }
         }
-      },
-      "required": ["nachname"]
+      }
     },
     "ExterneReferenz": {
       "type": ["object", "null"],
