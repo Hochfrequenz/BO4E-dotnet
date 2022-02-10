@@ -28,10 +28,10 @@ namespace BO4E.COM
         public string Bezeichnung { get; set; }
 
         /// <summary>Die Energierichtung, Einspeisung oder Ausspeisung. Details <see cref="Energierichtung" /></summary>
-        [JsonProperty(PropertyName = "richtung", Required = Required.Always)]
+        [JsonProperty(PropertyName = "richtung", Required = Required.Default)]
         [JsonPropertyName("richtung")]
         [ProtoMember(5)]
-        public Energierichtung Richtung { get; set; }
+        public Energierichtung? Richtung { get; set; }
 
         /// <summary>
         ///     Die OBIS-Kennzahl für das Zählwerk, die festlegt, welche auf die gemessene Größe mit dem Stand gemeldet wird.
