@@ -54,7 +54,7 @@ namespace BO4E.ENUM
 
         /// <summary> ZAEHLERSTAND_ZUM_BEGINN_DER_ANGEGEBENEN_ENERGIEMENGE_NICHT_VORHANDEN_DA_MENGENABGRENZUNG </summary>
         /// <remarks>Z38</remarks>
-        ZAEHLERSTAND_ZUM_BEGINN_DER_ANGEGEBENEN_ENERGIEMENGE_NICHT_VORHANDEN_DA,
+        ZAEHLERSTAND_ZUM_BEGINN_DER_ANGEGEBENEN_ENERGIEMENGE_NICHT_VORHANDEN_DA_MENGENABGRENZUNG,
 
         /// <summary> ZAEHLERSTAND_ZUM_ENDE_DER_ANGEGEBENEN_ENERGIEMENGE_NICHT_VORHANDEN_DA_MENGENABGRENZUNG </summary>
         /// <remarks>Z39</remarks>
@@ -113,9 +113,9 @@ namespace BO4E.ENUM
         /// <remarks>Z86</remarks>
         PLAUSIBEL_WG_KONTROLLABLESUNG,
 
-        /// <summary> PLAUSIBEL_WG_KUNDENHINWIES </summary>
+        /// <summary> PLAUSIBEL_WG_KUNDENHINWEIS </summary>
         /// <remarks>Z87</remarks>
-        PLAUSIBEL_WG_KUNDENHINWIES,
+        PLAUSIBEL_WG_KUNDENHINWEIS,
 
         /// <summary> VERGLEICHSMESSUNG_GEEICHT </summary>
         /// <remarks>Z88</remarks>
