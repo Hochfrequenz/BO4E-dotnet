@@ -44,7 +44,7 @@ namespace BO4E.BO
         ///     Eine im Verwendungskontext eindeutige Nummer für den Vertrag
         /// </summary>
         [BoKey]
-        [JsonProperty(Required = Required.Always, Order = 4, PropertyName = "vertragsnummer")]
+        [JsonProperty(Required = Required.Default, Order = 4, PropertyName = "vertragsnummer")]
         [JsonPropertyName("vertragsnummer")]
         [ProtoMember(4)]
         public string Vertragsnummer { get; set; }
