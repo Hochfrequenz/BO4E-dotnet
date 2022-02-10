@@ -69,10 +69,10 @@ namespace BO4E.BO
         /// <summary>
         ///     Gibt den Status des Vertrags an. Siehe ENUM Vertragsstatus
         /// </summary>
-        [JsonProperty(Required = Required.Always, Order = 7, PropertyName = "vertragstatus")]
+        [JsonProperty(Required = Required.Default, Order = 7, PropertyName = "vertragstatus")]
         [JsonPropertyName("vertragstatus")]
         [ProtoMember(7)]
-        public Vertragstatus Vertragstatus { get; set; } // ToDo: shouldn't this be vertragsstatus with "ss"?
+        public Vertragstatus? Vertragstatus { get; set; } // ToDo: shouldn't this be vertragsstatus with "ss"?
 
         /// <summary>
         ///     Unterscheidungsmöglichkeiten für die Sparte. Siehe ENUM Sparte
