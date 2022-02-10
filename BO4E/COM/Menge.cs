@@ -22,6 +22,6 @@ namespace BO4E.COM
         [JsonPropertyName("einheit")]
         [FieldName("unit", Language.EN)]
         [ProtoMember(4)]
-        public Mengeneinheit Einheit { get; set; }
+        public Mengeneinheit? Einheit { get; set; }
     }
 }
