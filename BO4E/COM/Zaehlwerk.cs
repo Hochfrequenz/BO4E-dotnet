@@ -16,13 +16,13 @@ namespace BO4E.COM
         ///     Identifikation des Zählwerks (Registers) innerhalb des Zählers. Oftmals eine laufende Nummer hinter der
         ///     Zählernummer. Z.B. 47110815_1
         /// </summary>
-        [JsonProperty(PropertyName = "zaehlwerkId", Required = Required.Always)]
+        [JsonProperty(PropertyName = "zaehlwerkId", Required = Required.Default)]
         [JsonPropertyName("zaehlwerkId")]
         [ProtoMember(3)]
         public string ZaehlwerkId { get; set; }
 
         /// <summary>Zusätzliche Bezeichnung, z.B. Zählwerk_Wirkarbeit.</summary>
-        [JsonProperty(PropertyName = "bezeichnung", Required = Required.Always)]
+        [JsonProperty(PropertyName = "bezeichnung", Required = Required.Default)]
         [JsonPropertyName("bezeichnung")]
         [ProtoMember(4)]
         public string Bezeichnung { get; set; }
@@ -38,7 +38,7 @@ namespace BO4E.COM
         ///     Nur Zählwerkstände mit dieser OBIS-Kennzahl werden an diesem Zählwerk registriert. Beispiel:1-0:1.8.1 für
         ///     elektrische Wirkarbeit.
         /// </summary>
-        [JsonProperty(PropertyName = "obisKennzahl", Required = Required.Always)]
+        [JsonProperty(PropertyName = "obisKennzahl", Required = Required.Default)]
         [JsonPropertyName("obisKennzahl")]
         [ProtoMember(6)]
         public string ObisKennzahl { get; set; }
@@ -53,7 +53,7 @@ namespace BO4E.COM
         public decimal Wandlerfaktor { get; set; }
 
         /// <summary>Die Einheit der gemessenen Größe, z.B. kWh. Details <see cref="Mengeneinheit" /></summary>
-        [JsonProperty(PropertyName = "einheit", Required = Required.Always)]
+        [JsonProperty(PropertyName = "einheit", Required = Required.Default)]
         [JsonPropertyName("einheit")]
         [ProtoMember(8)]
         public Mengeneinheit Einheit { get; set; }
