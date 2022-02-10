@@ -18,7 +18,7 @@ namespace BO4E.COM
         public decimal Wert { get; set; }
 
         /// <summary>Gibt die Einheit zum jeweiligen Wert an. Details <see cref="Mengeneinheit" /></summary>
-        [JsonProperty(PropertyName = "einheit", Required = Required.Always)]
+        [JsonProperty(PropertyName = "einheit", Required = Required.Default)]
         [JsonPropertyName("einheit")]
         [FieldName("unit", Language.EN)]
         [ProtoMember(4)]
