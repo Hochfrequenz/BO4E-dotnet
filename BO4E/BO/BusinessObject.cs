@@ -54,6 +54,7 @@ namespace BO4E.BO
     [ProtoInclude(19, typeof(AuftragsStorno))]
     [ProtoInclude(20, typeof(Statusbericht))]
     [ProtoInclude(21, typeof(Reklamation))]
+    [ProtoInclude(22, typeof(Avis))]
     public abstract class BusinessObject : IEquatable<BusinessObject>, IUserProperties, IOptionalGuid
     {
         /// <summary>

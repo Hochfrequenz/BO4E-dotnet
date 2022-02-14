@@ -428,6 +428,32 @@
             Eindeutige Kennung des zu stornierenden <see cref="T:BO4E.BO.Auftrag"/>s
             </summary>
         </member>
+        <member name="T:BO4E.BO.Avis">
+            <summary>
+            Avis BO
+            </summary>
+        </member>
+        <member name="P:BO4E.BO.Avis.AvisNummer">
+            <summary>
+            Eine im Verwendungskontext eindeutige Nummer für das Avis.
+            </summary>
+        </member>
+        <member name="P:BO4E.BO.Avis.AvisTyp">
+            <summary>
+            Gibt den Typ des Avis an.
+            </summary>
+            <see cref="P:BO4E.BO.Avis.AvisTyp" />
+        </member>
+        <member name="P:BO4E.BO.Avis.Positionen">
+            <summary>
+            Avispositionen
+            </summary>
+        </member>
+        <member name="P:BO4E.BO.Avis.ZuZahlen">
+            <summary>
+            Summenbetrag
+            </summary>
+        </member>
         <member name="T:BO4E.BO.Benachrichtigung">
             <summary>
                 Eine Benachrichtigung ist die BO-Entsprechung eines "Klärfall"s im SAP oder eines "Task"s im Salesforce
@@ -2026,6 +2052,26 @@
                 Zaehlergroesse
             </summary>
         </member>
+        <member name="T:BO4E.COM.Abweichung">
+            <summary>
+            Zur Angabe einer Abweichung bei Ablehnung einer COMDIS. (REMADV SG5 RFF und SG7 AJT/FTX)
+            </summary>
+        </member>
+        <member name="P:BO4E.COM.Abweichung.Referenz">
+            <summary>
+            Referenzierung auf eine vorherige COMDIS-Nachricht
+            </summary>
+        </member>
+        <member name="P:BO4E.COM.Abweichung.Abweichungsgrund">
+            <summary>
+            Angabe des Abweichungsgrunds
+            </summary>
+        </member>
+        <member name="P:BO4E.COM.Abweichung.AbweichungsgrundBemerkung">
+            <summary>
+            Nähere Erläuterung zum Abweichungsgrund
+            </summary>
+        </member>
         <member name="T:BO4E.COM.Adresse">
             <summary>Enthält eine Adresse, die für die meisten Zwecke verwendbar ist.</summary>
         </member>
@@ -2357,6 +2403,47 @@
         <member name="P:BO4E.COM.Ausschreibungslos.WunschZahlungsziel">
             <summary>Kundenwunsch zum Zahlungsziel in der Ausschreibung.</summary>
             <see cref="T:BO4E.COM.Zeitraum" />
+        </member>
+        <member name="T:BO4E.COM.Avisposition">
+            <summary>
+            Die Positionen eines Avis.
+            </summary>
+        </member>
+        <member name="P:BO4E.COM.Avisposition.RechnungsNummer">
+            <summary>
+            Die Rechnungsnummer der Rechnung, auf die sich das Avis bezieht.
+            </summary>
+        </member>
+        <member name="P:BO4E.COM.Avisposition._RechnungsDatum">
+            <summary>
+            workaround
+            </summary>
+        </member>
+        <member name="P:BO4E.COM.Avisposition.RechnungsDatum">
+            <summary>
+            Das Rechnungsdatum der Rechnung, auf die sich das Avis bezieht.
+            </summary>
+        </member>
+        <member name="P:BO4E.COM.Avisposition.IstStorno">
+            <summary>
+            Kennzeichnung, ob es sich bei der Rechnung auf die sich das Avis bezieht, um eine Stornorechnung handelt.
+            </summary>
+        </member>
+        <member name="P:BO4E.COM.Avisposition.GesamtBrutto">
+            <summary>
+            Überweisungsbetrag
+            </summary>
+        </member>
+        <member name="P:BO4E.COM.Avisposition.ZuZahlen">
+            <summary>
+            Geforderter Rechnungsbetrag
+            </summary>
+        </member>
+        <member name="P:BO4E.COM.Avisposition.Abweichung">
+            <summary>
+            Abweichung bei Ablehnung einer COMDIS
+            </summary>
+            <see cref="P:BO4E.COM.Avisposition.Abweichung" />
         </member>
         <member name="T:BO4E.COM.Betrag">
             <summary>
@@ -4117,6 +4204,123 @@
         <member name="F:BO4E.ENUM.AbgabeArt.TSS">
             <summary>TSS: Kennzeichnung, dass ein abweichender Preis für Schwachlast angewendet wird</summary>
         </member>
+        <member name="T:BO4E.ENUM.Abweichungsgrund">
+            <summary>
+            Gibt einen Abweichungsgrund bei Ablehung einer COMDIS an. (REMADV SG7 AJT 4465)
+            </summary>
+        </member>
+        <member name="F:BO4E.ENUM.Abweichungsgrund.PREIS_RECHENREGEL_FALSCH">
+            <summary> PREIS_RECHENREGEL_FALSCH </summary>
+            <remarks>5</remarks>
+        </member>
+        <member name="F:BO4E.ENUM.Abweichungsgrund.FALSCHER_ABRECHNUNGSZEITRAUM">
+            <summary> FALSCHER_ABRECHNUNGSZEITRAUM </summary>
+            <remarks>9</remarks>
+        </member>
+        <member name="F:BO4E.ENUM.Abweichungsgrund.UNBEKANNTE_MARKTLOKATION_MESSLOKATION">
+            <summary> UNBEKANNTE_MARKTLOKATION_MESSLOKATION </summary>
+            <remarks>14</remarks>
+        </member>
+        <member name="F:BO4E.ENUM.Abweichungsgrund.SONSTIGER_ABWEICHUNGSGRUND">
+            <summary> SONSTIGER_ABWEICHUNGSGRUND </summary>
+            <remarks>28</remarks>
+        </member>
+        <member name="F:BO4E.ENUM.Abweichungsgrund.DOPPELTE_RECHNUNG">
+            <summary> DOPPELTE_RECHNUNG </summary>
+            <remarks>53</remarks>
+        </member>
+        <member name="F:BO4E.ENUM.Abweichungsgrund.ABRECHNUNGSBEGINN_UNGLEICH_VERTRAGSBEGINN">
+            <summary> ABRECHNUNGSBEGINN_UNGLEICH_VERTRAGSBEGINN </summary>
+            <remarks>Z01</remarks>
+        </member>
+        <member name="F:BO4E.ENUM.Abweichungsgrund.ABRECHNUNGSENDE_UNGLEICH_VERTRAGSENDE">
+            <summary> ABRECHNUNGSENDE_UNGLEICH_VERTRAGSENDE </summary>
+            <remarks>Z02</remarks>
+        </member>
+        <member name="F:BO4E.ENUM.Abweichungsgrund.BETRAG_DER_ABSCHLAGSRECHNUNG_FALSCH">
+            <summary> BETRAG_DER_ABSCHLAGSRECHNUNG_FALSCH </summary>
+            <remarks>Z03</remarks>
+        </member>
+        <member name="F:BO4E.ENUM.Abweichungsgrund.VORAUSBEZAHLTER_BETRAG_FALSCH">
+            <summary> VORAUSBEZAHLTER_BETRAG_FALSCH </summary>
+            <remarks>Z04</remarks>
+        </member>
+        <member name="F:BO4E.ENUM.Abweichungsgrund.ARTIKEL_NICHT_VEREINBART">
+            <summary> ARTIKEL_NICHT_VEREINBART </summary>
+            <remarks>Z06</remarks>
+        </member>
+        <member name="F:BO4E.ENUM.Abweichungsgrund.NETZNUTZUNGSMESSWERTE_ENERGIEMENGEN_FEHLEN">
+            <summary> NETZNUTZUNGSMESSWERTE_ENERGIEMENGEN_FEHLEN </summary>
+            <remarks>Z07</remarks>
+        </member>
+        <member name="F:BO4E.ENUM.Abweichungsgrund.RECHNUNGSNUMMER_BEREITS_ERHALTEN">
+            <summary> RECHNUNGSNUMMER_BEREITS_ERHALTEN </summary>
+            <remarks>Z08</remarks>
+        </member>
+        <member name="F:BO4E.ENUM.Abweichungsgrund.NETZNUTZUNGSMESSWERTE_ENERGIEMENGEN_FALSCH">
+            <summary> NETZNUTZUNGSMESSWERTE_ENERGIEMENGEN_FALSCH </summary>
+            <remarks>Z10</remarks>
+        </member>
+        <member name="F:BO4E.ENUM.Abweichungsgrund.ZEITLICHE_MENGENANGABE_FEHLERHAFT">
+            <summary> ZEITLICHE_MENGENANGABE_FEHLERHAFT </summary>
+            <remarks>Z33</remarks>
+        </member>
+        <member name="F:BO4E.ENUM.Abweichungsgrund.FALSCHER_BILANZIERUNGSBEGINN">
+            <summary> FALSCHER_BILANZIERUNGSBEGINN </summary>
+            <remarks>Z35</remarks>
+        </member>
+        <member name="F:BO4E.ENUM.Abweichungsgrund.FALSCHES_NETZNUTZUNGSENDE">
+            <summary> FALSCHES_NETZNUTZUNGSENDE </summary>
+            <remarks>Z36</remarks>
+        </member>
+        <member name="F:BO4E.ENUM.Abweichungsgrund.BILANZIERTE_MENGE_FEHLT">
+            <summary> BILANZIERTE_MENGE_FEHLT </summary>
+            <remarks>Z37</remarks>
+        </member>
+        <member name="F:BO4E.ENUM.Abweichungsgrund.BILANZIERTE_MENGE_FALSCH">
+            <summary> BILANZIERTE_MENGE_FALSCH </summary>
+            <remarks>Z38</remarks>
+        </member>
+        <member name="F:BO4E.ENUM.Abweichungsgrund.NETZNUTZUNGSABRECHNUNG_FEHLT">
+            <summary> NETZNUTZUNGSABRECHNUNG_FEHLT </summary>
+            <remarks>Z39</remarks>
+        </member>
+        <member name="F:BO4E.ENUM.Abweichungsgrund.REVERSE_CHARGE_ANWENDUNG_FEHLT_ODER_FEHLERHAFT">
+            <summary> REVERSE_CHARGE_ANWENDUNG_FEHLT_ODER_FEHLERHAFT </summary>
+            <remarks>Z40</remarks>
+        </member>
+        <member name="F:BO4E.ENUM.Abweichungsgrund.ALLOKATIONSLISTE_FEHLT">
+            <summary> ALLOKATIONSLISTE_FEHLT </summary>
+            <remarks>Z41</remarks>
+        </member>
+        <member name="F:BO4E.ENUM.Abweichungsgrund.MEHR_MINDERMENGE_FALSCH">
+            <summary> MEHR_MINDERMENGE_FALSCH </summary>
+            <remarks>Z42</remarks>
+        </member>
+        <member name="F:BO4E.ENUM.Abweichungsgrund.UNGUELTIGES_RECHNUNGSDATUM">
+            <summary> UNGUELTIGES_RECHNUNGSDATUM </summary>
+            <remarks>Z43</remarks>
+        </member>
+        <member name="F:BO4E.ENUM.Abweichungsgrund.ZEITINTERVALL_DER_BILANZIERTEN_MENGE_INKONSISTENT">
+            <summary> ZEITINTERVALL_DER_BILANZIERTEN_MENGE_INKONSISTENT </summary>
+            <remarks>Z44</remarks>
+        </member>
+        <member name="F:BO4E.ENUM.Abweichungsgrund.RECHNUNGSEMPFAENGER_WIDERSPRICHT_DER_STEUERRECHTLICHEN_EINSCHAETZUNG_DES_RECHNUNGSSTELLERS">
+            <summary> RECHNUNGSEMPFAENGER_WIDERSPRICHT_DER_STEUERRECHTLICHEN_EINSCHAETZUNG_DES_RECHNUNGSSTELLERS </summary>
+            <remarks>Z45</remarks>
+        </member>
+        <member name="F:BO4E.ENUM.Abweichungsgrund.ANGEGEBENE_QUOTES_AN_MARKTLOKATION_NICHT_VORHANDEN">
+            <summary> ANGEGEBENE_QUOTES_AN_MARKTLOKATION_NICHT_VORHANDEN </summary>
+            <remarks>Z52</remarks>
+        </member>
+        <member name="F:BO4E.ENUM.Abweichungsgrund.RECHNUNGSABWICKLUNG_NICHT_VEREINBART">
+            <summary> RECHNUNGSABWICKLUNG_NICHT_VEREINBART </summary>
+            <remarks>Z53</remarks>
+        </member>
+        <member name="F:BO4E.ENUM.Abweichungsgrund.COMDIS_WIRD_ABGELEHNT">
+            <summary> COMDIS_WIRD_ABGELEHNT </summary>
+            <remarks>Z63</remarks>
+        </member>
         <member name="T:BO4E.ENUM.Aggregationsverantwortung">
             <summary>Mögliche Qualifier für die Aggregationsverantwortung</summary>
         </member>
@@ -4315,6 +4519,19 @@
         </member>
         <member name="F:BO4E.ENUM.Ausschreibungstyp.EUROPAWEIT">
             <summary>Europaweit</summary>
+        </member>
+        <member name="T:BO4E.ENUM.AvisTyp">
+            <summary>
+            Gibt den Typ des Avis an. (REMADV BGM 1001)
+            </summary>
+        </member>
+        <member name="F:BO4E.ENUM.AvisTyp.ABGELEHNTE_FORDERUNG">
+            <summary> ABGELEHNTE_FORDERUNG </summary>
+            <remarks>239</remarks>
+        </member>
+        <member name="F:BO4E.ENUM.AvisTyp.ZAHLUNGSAVIS">
+            <summary> ZAHLUNGSAVIS </summary>
+            <remarks>481</remarks>
         </member>
         <member name="T:BO4E.ENUM.BDEWArtikelnummer">
             <summary>BDEWArtikelnummer</summary>
@@ -4596,6 +4813,9 @@
             <summary>Auflistung sämtlicher existierender Geschäftsobjekte.</summary>
         </member>
         <member name="F:BO4E.ENUM.BoTyp.ANSPRECHPARTNER">
+            <summary>1</summary>
+        </member>
+        <member name="F:BO4E.ENUM.BoTyp.AVIS">
             <summary>1</summary>
         </member>
         <member name="F:BO4E.ENUM.BoTyp.ENERGIEMENGE">

@@ -7,6 +7,9 @@ namespace BO4E.ENUM
         ANSPRECHPARTNER,
 
         /// <summary>1</summary>
+        AVIS,
+
+        /// <summary>1</summary>
         ENERGIEMENGE,
 
         /// <summary>1</summary>
