@@ -46,11 +46,11 @@ namespace BO4E.COM
         /// <summary>
         /// Kennzeichnung, ob es sich bei der Rechnung auf die sich das Avis bezieht, um eine Stornorechnung handelt.
         /// </summary>
-        [JsonProperty(PropertyName = "storno", Required = Required.Always, Order = 3)]
-        [JsonPropertyName("storno")]
+        [JsonProperty(PropertyName = "istStorno", Required = Required.Always, Order = 3)]
+        [JsonPropertyName("istStorno")]
         [NonOfficial(NonOfficialCategory.MISSING)]
         [ProtoMember(3)]
-        public bool Storno { get; set; }
+        public bool IstStorno { get; set; }
 
         /// <summary>
         /// Überweisungsbetrag
