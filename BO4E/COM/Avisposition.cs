@@ -37,8 +37,8 @@ namespace BO4E.COM
         /// <summary>
         /// Das Rechnungsdatum der Rechnung, auf die sich das Avis bezieht.
         /// </summary>
-        [JsonProperty(PropertyName = "RechnungsDatum", Required = Required.Always, Order = 2)]
-        [JsonPropertyName("avisRechnungsDatum")]
+        [JsonProperty(PropertyName = "rechnungsDatum", Required = Required.Always, Order = 2)]
+        [JsonPropertyName("rechnungsDatum")]
         [NonOfficial(NonOfficialCategory.MISSING)]
         [ProtoIgnore]
         public DateTimeOffset RechnungsDatum { get; set; }
