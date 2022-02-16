@@ -8,17 +8,17 @@ namespace BO4E.ENUM
     [NonOfficial(NonOfficialCategory.MISSING)]
     public enum Handelsunstimmigkeitsgrund
     {
-        /// <summary> ANMDELDUNG_BESTAETIGT</summary>
+        /// <summary> ANMELDUNG_BESTAETIGT</summary>
         /// <remarks>Z58</remarks>
-        ANMDELDUNG_BESTAETIGT,
+        ANMELDUNG_BESTAETIGT,
 
         /// <summary> ABRECHNUNGSBEGINN_GLEICH_BESTAETIGTEM_VERTRAGSBEGINN</summary>
         /// <remarks>Z59</remarks>
         ABRECHNUNGSBEGINN_GLEICH_BESTAETIGTEM_VERTRAGSBEGINN,
 
-        /// <summary> ABRECHNUNGSENDE_GLEICH_BESTAETIGTEM_VERTRAGSBEGINN</summary>
+        /// <summary> ABRECHNUNGSENDE_GLEICH_BESTAETIGTEM_VERTRAGSENDE</summary>
         /// <remarks>Z60</remarks>
-        ABRECHNUNGSENDE_GLEICH_BESTAETIGTEM_VERTRAGSBEGINN,
+        ABRECHNUNGSENDE_GLEICH_BESTAETIGTEM_VERTRAGSENDE,
 
         /// <summary> NN_MSCONS_UEBERSENDET</summary>
         /// <remarks>Z61</remarks>
