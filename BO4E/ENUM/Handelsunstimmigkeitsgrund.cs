@@ -8,9 +8,9 @@ namespace BO4E.ENUM
     [NonOfficial(NonOfficialCategory.MISSING)]
     public enum Handelsunstimmigkeitsgrund
     {
-        /// <summary> ANMDELDUNG_BESTAETIGT</summary>
+        /// <summary> ANMELDUNG_BESTAETIGT</summary>
         /// <remarks>Z58</remarks>
-        ANMDELDUNG_BESTAETIGT,
+        ANMELDUNG_BESTAETIGT,
 
         /// <summary> ABRECHNUNGSBEGINN_GLEICH_BESTAETIGTEM_VERTRAGSBEGINN</summary>
         /// <remarks>Z59</remarks>
