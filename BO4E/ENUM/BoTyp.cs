@@ -18,11 +18,8 @@ namespace BO4E.ENUM
         /// <summary>1</summary>
         GESCHAEFTSPARTNER,
 
-        /// <summary>1</summary>
-        HANDELSUNSTIMMIGKEIT,
-
-        /// <summary>1</summary>
-        MARKTLOKATION,
+    /// <summary>1</summary>
+    MARKTLOKATION,
 
         /// <summary>1</summary>
         MARKTTEILNEHMER,
@@ -60,7 +57,10 @@ namespace BO4E.ENUM
         /// <summary>1</summary>
         ZEITREIHE,
 
-        /// <summary>1</summary>
-        LASTGANG
-    }
+    /// <summary>1</summary>
+    LASTGANG,
+
+    /// <summary>1</summary>
+    HANDELSUNSTIMMIGKEIT
+  }
 }
