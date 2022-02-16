@@ -15,7 +15,7 @@ namespace BO4E.COM
     public class Handelsunstimmigkeitsbegruendung : COM
     {
         /// <summary>
-        /// Referenzen auf vorherige Nachricht
+        /// Referenzen auf vorherige Nachrichten
         /// </summary>
         [JsonProperty(PropertyName = "referenzen", Required = Required.Default, Order = 1)]
         [JsonPropertyName("referenzen")]

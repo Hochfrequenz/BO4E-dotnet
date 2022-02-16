@@ -41,7 +41,7 @@ namespace BO4E.BO
         public Handelsunstimmigkeitstyp Typ { get; set; }
 
         /// <summary>
-        /// Handelsunstimmigekeitsbegründung
+        /// Handelsunstimmigskeitsbegründung
         /// </summary>
         /// <see cref="Handelsunstimmigkeitsbegruendung" />
         [JsonProperty(PropertyName = "begruendung", Required = Required.Always)]

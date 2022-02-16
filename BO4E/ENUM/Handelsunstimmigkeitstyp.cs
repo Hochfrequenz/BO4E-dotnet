@@ -23,6 +23,5 @@ namespace BO4E.ENUM
         /// <summary> LIEFERSCHEIN_ARBEITS_LEISTUNGSPREIS </summary>
         /// <remarks>Z42</remarks>
         LIEFERSCHEIN_ARBEITS_LEISTUNGSPREIS,
-
     }
 }
