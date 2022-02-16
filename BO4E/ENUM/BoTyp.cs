@@ -58,6 +58,9 @@ namespace BO4E.ENUM
         ZEITREIHE,
 
         /// <summary>1</summary>
-        LASTGANG
+        LASTGANG,
+
+        /// <summary>1</summary>
+        HANDELSUNSTIMMIGKEIT
     }
 }

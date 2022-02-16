@@ -1039,6 +1039,33 @@
                 Adresse des Geschäftspartners, an der sich der Hauptsitz befindet. Details <seealso cref="T:BO4E.COM.Adresse" />
             </summary>
         </member>
+        <member name="T:BO4E.BO.Handelsunstimmigkeit">
+            <summary>
+            Handelsunstimmigkeit BO
+            </summary>
+        </member>
+        <member name="P:BO4E.BO.Handelsunstimmigkeit.Nummer">
+            <summary>
+            Handelsunstimmigkeitsnummer
+            </summary>
+        </member>
+        <member name="P:BO4E.BO.Handelsunstimmigkeit.Typ">
+            <summary>
+            Gibt den Typ der Handelsunstimmigkeit an.
+            </summary>
+            <see cref="T:BO4E.ENUM.Handelsunstimmigkeitstyp" />
+        </member>
+        <member name="P:BO4E.BO.Handelsunstimmigkeit.Begruendung">
+            <summary>
+            Handelsunstimmigekeitsbegründung
+            </summary>
+            <see cref="T:BO4E.COM.Handelsunstimmigkeitsbegruendung" />
+        </member>
+        <member name="P:BO4E.BO.Handelsunstimmigkeit.ZuZahlen">
+            <summary>
+            angeforderter Betrag
+            </summary>
+        </member>
         <member name="T:BO4E.BO.Kosten">
             <summary>
                 Dieses BO wird zur Übertagung von hierarchischen Kostenstrukturen verwendet. Die Kosten werden dabei in
@@ -2726,6 +2753,21 @@
         <member name="P:BO4E.COM.Geraeteeigenschaften.Parameter">
             <summary>
                 Für nicht feste Fields, bsw: 'faktor'
+            </summary>
+        </member>
+        <member name="T:BO4E.COM.Handelsunstimmigkeitsbegruendung">
+            <summary>
+            Begründung der Korrektheit der Rechnung oder des Lieferscheins (COMDIS SG3 AJT)
+            </summary>
+        </member>
+        <member name="P:BO4E.COM.Handelsunstimmigkeitsbegruendung.Referenzen">
+            <summary>
+            Referenzen auf vorherige Nachricht
+            </summary>
+        </member>
+        <member name="P:BO4E.COM.Handelsunstimmigkeitsbegruendung.Grund">
+            <summary>
+            Angabe des Handelsunstimmigkeitsgrunds
             </summary>
         </member>
         <member name="T:BO4E.COM.Hardware">
@@ -4827,6 +4869,9 @@
         <member name="F:BO4E.ENUM.BoTyp.GESCHAEFTSPARTNER">
             <summary>1</summary>
         </member>
+        <member name="F:BO4E.ENUM.BoTyp.HANDELSUNSTIMMIGKEIT">
+            <summary>1</summary>
+        </member>
         <member name="F:BO4E.ENUM.BoTyp.MARKTLOKATION">
             <summary>1</summary>
         </member>
@@ -6263,6 +6308,56 @@
         </member>
         <member name="F:BO4E.ENUM.Gueltigkeitstyp.NICHT_IN">
             <summary>Ein so eingeschränktes Merkmal gilt nicht mit den angegebenen Werten</summary>
+        </member>
+        <member name="T:BO4E.ENUM.Handelsunstimmigkeitsgrund">
+            <summary>
+            Begründung der Korrektheit der Rechnung oder des Lieferscheins(COMDIS SG3 AJT 4465)
+            </summary>
+        </member>
+        <member name="F:BO4E.ENUM.Handelsunstimmigkeitsgrund.ANMDELDUNG_BESTAETIGT">
+            <summary> ANMDELDUNG_BESTAETIGT</summary>
+            <remarks>Z58</remarks>
+        </member>
+        <member name="F:BO4E.ENUM.Handelsunstimmigkeitsgrund.ABRECHNUNGSBEGINN_GLECIH_BESTAETIGTEM_VERTRAGSBEGINN">
+            <summary> ABRECHNUNGSBEGINN_GLECIH_BESTAETIGTEM_VERTRAGSBEGINN</summary>
+            <remarks>Z59</remarks>
+        </member>
+        <member name="F:BO4E.ENUM.Handelsunstimmigkeitsgrund.ABRECHNUNGSENDE_GLECIH_BESTAETIGTEM_VERTRAGSBEGINN">
+            <summary> ABRECHNUNGSENDE_GLECIH_BESTAETIGTEM_VERTRAGSBEGINN</summary>
+            <remarks>Z60</remarks>
+        </member>
+        <member name="F:BO4E.ENUM.Handelsunstimmigkeitsgrund.NN_MSCONS_UEBERSENDET">
+            <summary> NN_MSCONS_UEBERSENDET</summary>
+            <remarks>Z61</remarks>
+        </member>
+        <member name="F:BO4E.ENUM.Handelsunstimmigkeitsgrund.RICHTIGE_MESSWERTE_ENERGIEMENGEN_UEBERSENDET">
+            <summary> RICHTIGE_MESSWERTE_ENERGIEMENGEN_UEBERSENDET </summary>
+            <remarks>Z62</remarks>
+        </member>
+        <member name="F:BO4E.ENUM.Handelsunstimmigkeitsgrund.SONSTIGES_SIEHE_FTX">
+            <summary> SONSTIGES_SIEHE_FTX </summary>
+            <remarks>28</remarks>
+        </member>
+        <member name="T:BO4E.ENUM.Handelsunstimmigkeitstyp">
+            <summary>
+            Gibt den Typ der Handelsunstimmigkeit an (COMDIS DOC 1001)
+            </summary>
+        </member>
+        <member name="F:BO4E.ENUM.Handelsunstimmigkeitstyp.HANDELSRECHNUNG">
+            <summary> HANDELSRECHNUNG </summary>
+            <remarks>380</remarks>
+        </member>
+        <member name="F:BO4E.ENUM.Handelsunstimmigkeitstyp.LIEFERSCHEIN_HANDELSUNSTIMMIGKEITSTYP">
+            <summary> LIEFERSCHEIN_HANDELSUNSTIMMIGKEITSTYP </summary>
+            <remarks>270</remarks>
+        </member>
+        <member name="F:BO4E.ENUM.Handelsunstimmigkeitstyp.LIEFERSCHEIN_GRUND_ARBEITSPREIS">
+            <summary> LIEFERSCHEIN_GRUND_ARBEITSPREIS</summary>
+            <remarks>Z41</remarks>
+        </member>
+        <member name="F:BO4E.ENUM.Handelsunstimmigkeitstyp.LIEFERSCHEIN_ARBEITS_LEISTUNGSPREIS">
+            <summary> LIEFERSCHEIN_ARBEITS_LEISTUNGSPREIS </summary>
+            <remarks>Z42</remarks>
         </member>
         <member name="T:BO4E.ENUM.Kalkulationsmethode">
             <summary>Aulistung der verschiedenen Berechnungsmethoden für ein Preisblatt.</summary>
