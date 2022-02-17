@@ -6,7 +6,7 @@ updates:
       interval: daily
       time: "00:37"
     reviewers:
-      - "Hochfrequenz/BO4E-dotnet"
+      - "@Hochfrequenz/c-developers-review-team"
     ignore:
       - dependency-name: "System.Text.*"
         update-types: ["version-update:semver-major"]
