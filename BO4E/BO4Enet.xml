@@ -1057,7 +1057,7 @@
         </member>
         <member name="P:BO4E.BO.Handelsunstimmigkeit.Begruendung">
             <summary>
-            Handelsunstimmigekeitsbegründung
+            Handelsunstimmigskeitsbegründung
             </summary>
             <see cref="T:BO4E.COM.Handelsunstimmigkeitsbegruendung" />
         </member>
@@ -2762,7 +2762,7 @@
         </member>
         <member name="P:BO4E.COM.Handelsunstimmigkeitsbegruendung.Referenzen">
             <summary>
-            Referenzen auf vorherige Nachricht
+            Referenzen auf vorherige Nachrichten
             </summary>
         </member>
         <member name="P:BO4E.COM.Handelsunstimmigkeitsbegruendung.Grund">
@@ -4805,6 +4805,40 @@
         <member name="F:BO4E.ENUM.Bemessungsgroesse.ANZAHL">
             <summary>Darstellung einer Stückzahl</summary>
         </member>
+        <member name="T:BO4E.ENUM.BerechnungsformelAblehngrund">
+            <summary>
+            Beschreibt den Grund aus dem eine Berechnungsformel abgelehnt werden kann.
+            </summary>
+            <remarks>Orientiert sich am Entscheidungsbaum E_0218 (Cluster Ablehnung)</remarks>
+        </member>
+        <member name="F:BO4E.ENUM.BerechnungsformelAblehngrund.FALSCHE_LIEFERRICHTUNG_DER_MARKTLOKATION">
+            <summary>Lieferrichtung der Marktlokation ist nicht korrekt</summary>
+            <remarks>E_0218: A01</remarks>
+        </member>
+        <member name="F:BO4E.ENUM.BerechnungsformelAblehngrund.START_DATUM_UNPLAUSIBEL">
+            <summary>Gültig-Ab Datum der Berechnungsformel ist unplausibel</summary>
+            <remarks>E_0218: A02</remarks>
+        </member>
+        <member name="F:BO4E.ENUM.BerechnungsformelAblehngrund.ZU_VIELE_MESSLOKATIONEN">
+            <summary>Es sind zu viele Messlokationen in der Berechnungformel vorhanden</summary>
+            <remarks>E_0218: A04</remarks>
+        </member>
+        <member name="F:BO4E.ENUM.BerechnungsformelAblehngrund.FEHLENDE_MESSLOKATIONEN">
+            <summary>Es fehlen Messlokationen in der Berechnungsformel</summary>
+            <remarks>E_0218: A05</remarks>
+        </member>
+        <member name="F:BO4E.ENUM.BerechnungsformelAblehngrund.FALSCHE_MESSLOKATION">
+            <summary>ID der Messlokationen stimmen nicht überein</summary>
+            <remarks>E_0218: A06</remarks>
+        </member>
+        <member name="F:BO4E.ENUM.BerechnungsformelAblehngrund.FALSCHE_FLUSSRICHTUNG_DER_MESSLOKATION">
+            <summary>Die Flussrichtung mindestens einer Messlokation ist nicht korrekt angegeben</summary>
+            <remarks>E_0218: A07</remarks>
+        </member>
+        <member name="F:BO4E.ENUM.BerechnungsformelAblehngrund.MARKTLOKATION_IST_NICHT_GENAU_DER_MESSLOKATION_ZUGEORDNET">
+            <summary>Der Marktlokation ist nicht genau eine Messlokation zugeordnet</summary>
+            <remarks>E_0218: A10</remarks>
+        </member>
         <member name="T:BO4E.ENUM.BerichtStatus">
             <summary>Status des Statusbericht</summary>
         </member>
@@ -4869,9 +4903,6 @@
         <member name="F:BO4E.ENUM.BoTyp.GESCHAEFTSPARTNER">
             <summary>1</summary>
         </member>
-        <member name="F:BO4E.ENUM.BoTyp.HANDELSUNSTIMMIGKEIT">
-            <summary>1</summary>
-        </member>
         <member name="F:BO4E.ENUM.BoTyp.MARKTLOKATION">
             <summary>1</summary>
         </member>
@@ -4912,6 +4943,9 @@
             <summary>1</summary>
         </member>
         <member name="F:BO4E.ENUM.BoTyp.LASTGANG">
+            <summary>1</summary>
+        </member>
+        <member name="F:BO4E.ENUM.BoTyp.HANDELSUNSTIMMIGKEIT">
             <summary>1</summary>
         </member>
         <member name="T:BO4E.ENUM.Dienstleistungstyp">
@@ -6311,19 +6345,19 @@
         </member>
         <member name="T:BO4E.ENUM.Handelsunstimmigkeitsgrund">
             <summary>
-            Begründung der Korrektheit der Rechnung oder des Lieferscheins(COMDIS SG3 AJT 4465)
+            Begründung der Korrektheit der Rechnung oder des Lieferscheins (COMDIS SG3 AJT 4465)
             </summary>
         </member>
-        <member name="F:BO4E.ENUM.Handelsunstimmigkeitsgrund.ANMDELDUNG_BESTAETIGT">
-            <summary> ANMDELDUNG_BESTAETIGT</summary>
+        <member name="F:BO4E.ENUM.Handelsunstimmigkeitsgrund.ANMELDUNG_BESTAETIGT">
+            <summary> ANMELDUNG_BESTAETIGT</summary>
             <remarks>Z58</remarks>
         </member>
-        <member name="F:BO4E.ENUM.Handelsunstimmigkeitsgrund.ABRECHNUNGSBEGINN_GLECIH_BESTAETIGTEM_VERTRAGSBEGINN">
-            <summary> ABRECHNUNGSBEGINN_GLECIH_BESTAETIGTEM_VERTRAGSBEGINN</summary>
+        <member name="F:BO4E.ENUM.Handelsunstimmigkeitsgrund.ABRECHNUNGSBEGINN_GLEICH_BESTAETIGTEM_VERTRAGSBEGINN">
+            <summary> ABRECHNUNGSBEGINN_GLEICH_BESTAETIGTEM_VERTRAGSBEGINN</summary>
             <remarks>Z59</remarks>
         </member>
-        <member name="F:BO4E.ENUM.Handelsunstimmigkeitsgrund.ABRECHNUNGSENDE_GLECIH_BESTAETIGTEM_VERTRAGSBEGINN">
-            <summary> ABRECHNUNGSENDE_GLECIH_BESTAETIGTEM_VERTRAGSBEGINN</summary>
+        <member name="F:BO4E.ENUM.Handelsunstimmigkeitsgrund.ABRECHNUNGSENDE_GLEICH_BESTAETIGTEM_VERTRAGSENDE">
+            <summary> ABRECHNUNGSENDE_GLEICH_BESTAETIGTEM_VERTRAGSENDE</summary>
             <remarks>Z60</remarks>
         </member>
         <member name="F:BO4E.ENUM.Handelsunstimmigkeitsgrund.NN_MSCONS_UEBERSENDET">
@@ -6334,8 +6368,8 @@
             <summary> RICHTIGE_MESSWERTE_ENERGIEMENGEN_UEBERSENDET </summary>
             <remarks>Z62</remarks>
         </member>
-        <member name="F:BO4E.ENUM.Handelsunstimmigkeitsgrund.SONSTIGES_SIEHE_FTX">
-            <summary> SONSTIGES_SIEHE_FTX </summary>
+        <member name="F:BO4E.ENUM.Handelsunstimmigkeitsgrund.SONSTIGES_SIEHE_BEGRUENDUNG">
+            <summary> SONSTIGES_SIEHE_BEGRUENDUNG </summary>
             <remarks>28</remarks>
         </member>
         <member name="T:BO4E.ENUM.Handelsunstimmigkeitstyp">
