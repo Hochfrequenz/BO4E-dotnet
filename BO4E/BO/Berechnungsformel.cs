@@ -6,6 +6,7 @@ using BO4E.ENUM;
 using BO4E.meta;
 using Newtonsoft.Json;
 using ProtoBuf;
+using Verwendungszweck = BO4E.COM.Verwendungszweck;
 
 namespace BO4E.BO
 {
@@ -36,13 +37,22 @@ namespace BO4E.BO
         [JsonPropertyName("notwendigkeit")]
         [ProtoMember(6)]
         public BerechnungsformelNotwendigkeit Notwendigkeit { get; set; }
-        
+
+        /// <summary>
+        /// Verwendungszweck der Werte
+        /// </summary>
+        /// <remarks>SG9 CAV 7111</remarks>
+        [JsonProperty(Required = Required.Always, Order = 4, PropertyName = "verwendungszweck")]
+        [JsonPropertyName("verwendungszweck")]
+        public Verwendungszweck Verwendungszweck { get; set; }
+
+        // todo: verlustfaktoren adden
         /// <summary>
         /// Eine Berechnungsformel enthält, falls sie notwendig ist <see cref="BerechnungsformelNotwendigkeit.BERECHNUNGSFORMEL_NOTWENDIG"/>,
-        /// einen oder mehrere Berechnungschritte
+        /// einen oder mehrere Berechnungschritte, die hier rekursiv abgebildet werden.
         /// </summary>
-        [JsonProperty(Required = Required.Default, Order = 4, PropertyName = "rechenschritte")]
-        [JsonPropertyName("rechenschritte")]
-        public List<Rechenschritt> Rechenschritte { get; set; }
+        [JsonProperty(Required = Required.Default, Order = 4, PropertyName = "rechenschritt")]
+        [JsonPropertyName("rechenschritt")]
+        public Rechenschritt Rechenschritt { get; set; }
     }
 }

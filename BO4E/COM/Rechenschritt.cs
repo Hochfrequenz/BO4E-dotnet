@@ -28,15 +28,13 @@ namespace BO4E.COM
         [ProtoMember(4)]
         public ArithmetischeOperation Operation { get; set; }
 
+        // todo: add verlustfaktor
+        // todo: add leistung
+        // todo: add verweis auf messlokations id
+
         /// <summary>
-        /// Verwendungszweck der Werte
+        /// rekursive verschachtelung weiterer rechenschritte
         /// </summary>
-        /// <remarks>SG9 CAV 7111</remarks>
-        [JsonProperty(Required = Required.Always, Order = 4, PropertyName = "verwendungszweck")]
-        [JsonPropertyName("verwendungszweck")]
-        public Verwendungszweck Verwendungszweck { get; set; }
-
-        // todo: verlustfaktoren adden
-
+        public Rechenschritt WeitererRechenschritt { get; set; }
     }
 }
