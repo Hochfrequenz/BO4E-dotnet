@@ -14,19 +14,27 @@ namespace BO4E.BO
     /// Eine Berechnungsformel beschreibt, wie komplexe MaLo-MeLo-Konstrukte rechnerisch behandelt werden.
     /// </summary>
     /// <remarks>Berechnungsformeln werden in der Marktkommunikation mit Prüfidentifikator 25001 (UTILTS) übermittelt</remarks>
+    [ProtoContract]
     public class Berechnungsformel : BusinessObject
     {
-        // beziehung zur marktlokation wird über die links abgebildet
         // lieferrichtung is part of the marktlokations-bo
-        // beziehung zur messlokation wird über die links abgebildet
-
+        
+        [System.Text.Json.Serialization.JsonIgnore]
+        [Newtonsoft.Json.JsonIgnore]
+        [ProtoMember(6, Name = nameof(Beginndatum))]
+        [CompatibilityLevel(CompatibilityLevel.Level240)]
+        private DateTime _Beginndatum
+        {
+            get => Beginndatum.UtcDateTime;
+            set => Beginndatum = DateTime.SpecifyKind(value, DateTimeKind.Utc);
+        }
         /// <summary>
         /// Der inklusive Zeitpunkt ab dem die Berechnungsformel gültig ist
         /// </summary>
-        /// <returns></returns>
         [JsonProperty(Required = Required.Always, Order = 5, PropertyName = "beginndatum")]
         [JsonPropertyName("beginndatum")]
-        [ProtoMember(5)]
+        [ProtoIgnore]
+        [DataCategory(DataCategory.FINANCE)]
         public DateTimeOffset Beginndatum { get; set; }
 
         /// <summary>
@@ -37,21 +45,29 @@ namespace BO4E.BO
         [JsonPropertyName("notwendigkeit")]
         [ProtoMember(6)]
         public BerechnungsformelNotwendigkeit Notwendigkeit { get; set; }
-
+        
+        /// <summary>
+        /// ID des Rechenschritts [1 - 99999]
+        /// </summary>
+        [JsonProperty(Required = Required.Default, Order = 7, PropertyName = "rechenschrittId")]
+        [JsonPropertyName("rechenschrittId")]
+        [ProtoMember(7)]
+        [BoKey()]
+        public int? RechenschrittId { get; set; }
+        
         /// <summary>
         /// Verwendungszweck der Werte
         /// </summary>
         /// <remarks>SG9 CAV 7111</remarks>
-        [JsonProperty(Required = Required.Always, Order = 4, PropertyName = "verwendungszweck")]
+        [JsonProperty(Required = Required.Always, Order = 8, PropertyName = "verwendungszweck")]
         [JsonPropertyName("verwendungszweck")]
         public Verwendungszweck Verwendungszweck { get; set; }
-
-        // todo: verlustfaktoren adden
+        
         /// <summary>
         /// Eine Berechnungsformel enthält, falls sie notwendig ist <see cref="BerechnungsformelNotwendigkeit.BERECHNUNGSFORMEL_NOTWENDIG"/>,
         /// einen oder mehrere Berechnungschritte, die hier rekursiv abgebildet werden.
         /// </summary>
-        [JsonProperty(Required = Required.Default, Order = 4, PropertyName = "rechenschritt")]
+        [JsonProperty(Required = Required.Default, Order = 9, PropertyName = "rechenschritt")]
         [JsonPropertyName("rechenschritt")]
         public Rechenschritt Rechenschritt { get; set; }
     }
