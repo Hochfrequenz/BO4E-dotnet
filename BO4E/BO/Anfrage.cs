@@ -59,7 +59,7 @@ namespace BO4E.BO
     /// <summary>
     /// Kategorie der Anfrage (ORDERS ORDRSP BGM 1001)
     /// </summary>
-    [JsonProperty(PropertyName = "anfragekategorie", Required = Required.Default)]
+    [JsonProperty(PropertyName = "anfragekategorie", Required = Required.Always)]
     [JsonPropertyName("anfragekategorie")]
     [NonOfficial(NonOfficialCategory.MISSING)]
     [ProtoMember(1004)]
@@ -69,11 +69,10 @@ namespace BO4E.BO
     /// <summary>
     /// Typ/Art der Anfrage (ORDERS ORDRSP IMD 7081)
     /// </summary>
-    [JsonProperty(PropertyName = "anfragetyp", Required = Required.Default)]
+    [JsonProperty(PropertyName = "anfragetyp", Required = Required.Always)]
     [JsonPropertyName("anfragetyp")]
     [NonOfficial(NonOfficialCategory.MISSING)]
     [ProtoMember(1005)]
-    [BoKey]
     public Anfragetyp Anfragetyp { get; set; }
   }
 }
