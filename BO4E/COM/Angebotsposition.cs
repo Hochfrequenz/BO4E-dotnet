@@ -1,4 +1,6 @@
 using System.Text.Json.Serialization;
+using BO4E.ENUM;
+using BO4E.meta;
 using Newtonsoft.Json;
 using ProtoBuf;
 
@@ -26,7 +28,7 @@ namespace BO4E.COM
         public Menge Positionsmenge { get; set; }
 
         /// <summary>Preis pro Einheit/Stückpreis der jeweiligen Angebotsposition. Details <see cref="Preis" /></summary>
-        [JsonProperty(PropertyName = "positionspreis", Required = Required.Always)]
+        [JsonProperty(PropertyName = "positionspreis", Required = Required.Default)]
         [JsonPropertyName("positionspreis")]
         [ProtoMember(5)]
         public Preis Positionspreis { get; set; }
@@ -38,5 +40,22 @@ namespace BO4E.COM
         [JsonPropertyName("positionsbetrag")]
         [ProtoMember(6)]
         public Betrag Positionsbetrag { get; set; } // or positionskosten??
+
+        /// <summary>Preisschlüsselstamm als Alternative zum Preis/></summary>
+        [JsonProperty(PropertyName = "preisschluesselstamm", Required = Required.Default)]
+        [JsonPropertyName("preisschluesselstamm")]
+        [NonOfficial(NonOfficialCategory.MISSING)]
+        [ProtoMember(7)]
+        public string Preisschluesselstamm { get; set; }
+
+        /// <summary>
+        ///     Eine vom BDEW standardisierte Bezeichnung für die abgerechnete Leistungserbringung. Diese Artikelnummer wird
+        ///     auch im Rechnungsteil der INVOIC verwendet. <seealso cref="BDEWArtikelnummer" />
+        /// </summary>
+        [JsonProperty(PropertyName = "bdewArtikelnummer", Required = Required.Default)]
+        [JsonPropertyName("bdewArtikelnummer")]
+        [NonOfficial(NonOfficialCategory.MISSING)]
+        [ProtoMember(8)]
+        public BDEWArtikelnummer? BdewArtikelnummer { get; set; }
     }
 }
