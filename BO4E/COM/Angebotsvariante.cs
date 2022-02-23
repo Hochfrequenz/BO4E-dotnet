@@ -49,7 +49,7 @@ namespace BO4E.COM
             set => Bindefrist = DateTime.SpecifyKind(value, DateTimeKind.Utc);
         }
         /// <summary>Bis zu diesem Zeitpunkt (Tag/Uhrzeit) inklusive gilt die Angebotsvariante, z.B. 31.12.2017, 17:00 Uhr.</summary>
-        [JsonProperty(PropertyName = "bindefrist", Required = Required.Always)]
+        [JsonProperty(PropertyName = "bindefrist", Required = Required.Default)]
         [JsonPropertyName("bindefrist")]
         [ProtoIgnore]
         public DateTimeOffset Bindefrist { get; set; }
