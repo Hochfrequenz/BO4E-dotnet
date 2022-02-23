@@ -55,7 +55,7 @@ namespace BO4E.COM
         [JsonProperty(PropertyName = "bdewArtikelnummer", Required = Required.Default)]
         [JsonPropertyName("bdewArtikelnummer")]
         [NonOfficial(NonOfficialCategory.MISSING)]
-        [ProtoMember(10)]
+        [ProtoMember(8)]
         public BDEWArtikelnummer? BdewArtikelnummer { get; set; }
     }
 }

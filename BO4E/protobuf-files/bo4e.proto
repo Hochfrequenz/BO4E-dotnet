@@ -48,7 +48,7 @@ message Angebotsposition {
    Preis Positionspreis = 5;
    Betrag Positionsbetrag = 6;
    string Preisschlüsselstamm = 7;
-   BDEWArtikelnummer BdewArtikelnummer = 10;
+   BDEWArtikelnummer BdewArtikelnummer = 8;
 }
 enum Angebotsstatus {
    option (.protobuf_net.enumopt).namespace = "BO4E.ENUM";
