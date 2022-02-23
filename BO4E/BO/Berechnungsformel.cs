@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Text.Json.Serialization;
+using BO4E.COM;
 using BO4E.ENUM;
 using BO4E.meta;
 using Newtonsoft.Json;
@@ -21,6 +22,7 @@ namespace BO4E.BO
         [BoKey]
         [ProtoMember(4)]
         public string MarktlokationsId { get; set; }
+        // wird über die links abgebildet, mal schauen ob wir das hier schreiben
 
         /// <summary>
         /// Der inklusive Zeitpunkt ab dem die Berechnungsformel gültig ist
@@ -40,6 +42,8 @@ namespace BO4E.BO
         [ProtoMember(6)]
         public BerechnungsformelNotwendigkeit Notwendigkeit { get; set; }
 
-        // lieferrichtung
+        // lieferrichtung is part of the marktlokation
+
+        public List<Rechenschritt> Rechenschritte { get; set; }
     }
 }
