@@ -18,7 +18,7 @@ namespace BO4E.BO
     public class Berechnungsformel : BusinessObject
     {
         // lieferrichtung is part of the marktlokations-bo
-        
+
         [System.Text.Json.Serialization.JsonIgnore]
         [Newtonsoft.Json.JsonIgnore]
         [ProtoMember(6, Name = nameof(Beginndatum))]
@@ -45,7 +45,7 @@ namespace BO4E.BO
         [JsonPropertyName("notwendigkeit")]
         [ProtoMember(6)]
         public BerechnungsformelNotwendigkeit Notwendigkeit { get; set; }
-        
+
         /// <summary>
         /// ID des Rechenschritts [1 - 99999]
         /// </summary>
@@ -54,7 +54,7 @@ namespace BO4E.BO
         [ProtoMember(7)]
         [BoKey()]
         public int? RechenschrittId { get; set; }
-        
+
         /// <summary>
         /// Verwendungszweck der Werte
         /// </summary>
@@ -62,7 +62,7 @@ namespace BO4E.BO
         [JsonProperty(Required = Required.Always, Order = 8, PropertyName = "verwendungszweck")]
         [JsonPropertyName("verwendungszweck")]
         public Verwendungszweck Verwendungszweck { get; set; }
-        
+
         /// <summary>
         /// Eine Berechnungsformel enthält, falls sie notwendig ist <see cref="BerechnungsformelNotwendigkeit.BERECHNUNGSFORMEL_NOTWENDIG"/>,
         /// einen oder mehrere Berechnungschritte, die hier rekursiv abgebildet werden.

@@ -14,7 +14,7 @@ namespace BO4E.ENUM
 
         /// <summary>Z47: Endkundenabrechnung</summary>
         ENDKUNDENABRECHNUNG,
-        
+
         /// <summary>
         /// Übermittlung an das Herkunftsnachweisregister (HKNR)
         /// </summary>

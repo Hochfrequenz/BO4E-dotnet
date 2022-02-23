@@ -19,7 +19,7 @@ namespace BO4E.COM
         [JsonProperty(Required = Required.Always, PropertyName = "rechenschrittBestandteilId")]
         [JsonPropertyName("rechenschrittBestandteilId")]
         public int RechenschrittBestandteilId { get; set; }
-        
+
         /// <summary>
         /// Die ReferenzID des Rechenschritt (1-99999)
         /// </summary>
@@ -36,7 +36,7 @@ namespace BO4E.COM
         [BoKey]
         [ProtoMember(3)]
         public ArithmetischeOperation Operation { get; set; }
-        
+
         /// <summary>
         /// Ein möglicher Trafoverlust
         /// </summary>
@@ -44,7 +44,7 @@ namespace BO4E.COM
         [JsonPropertyName("verlustTrafo")]
         [ProtoMember(4)]
         public decimal? VerlustTrafo { get; set; }
-        
+
         /// <summary>
         /// Ein möglicher Leitungsverlust
         /// </summary>
@@ -52,7 +52,7 @@ namespace BO4E.COM
         [JsonPropertyName("verlustLeitung")]
         [ProtoMember(5)]
         public decimal? VerlustLeitung { get; set; }
-        
+
         /// <summary>
         /// Verweis auf MesslokationsId
         /// </summary>
@@ -60,7 +60,7 @@ namespace BO4E.COM
         [JsonPropertyName("referenzMesslokationId")]
         [ProtoMember(6)]
         public string ReferenzMesslokationId { get; set; }
-        
+
         /// <summary>
         /// rekursive Verschachtelung weiterer rechenschritte
         /// </summary>
