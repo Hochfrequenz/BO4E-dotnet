@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Text.Json.Serialization;
 using BO4E.COM;
 using BO4E.ENUM;
@@ -14,15 +15,9 @@ namespace BO4E.BO
     /// <remarks>Berechnungsformeln werden in der Marktkommunikation mit Prüfidentifikator 25001 (UTILTS) übermittelt</remarks>
     public class Berechnungsformel : BusinessObject
     {
-        /// <summary>
-        /// Die ID der Marktlokation, für die diese Berechnungsformel gilt
-        /// </summary>
-        [JsonProperty(Required = Required.Default, Order = 4, PropertyName = "marktlokationsId")]
-        [JsonPropertyName("marktlokationsId")]
-        [BoKey]
-        [ProtoMember(4)]
-        public string MarktlokationsId { get; set; }
-        // wird über die links abgebildet, mal schauen ob wir das hier schreiben
+        // beziehung zur marktlokation wird über die links abgebildet
+        // lieferrichtung is part of the marktlokations-bo
+        // beziehung zur messlokation wird über die links abgebildet
 
         /// <summary>
         /// Der inklusive Zeitpunkt ab dem die Berechnungsformel gültig ist
@@ -41,9 +36,13 @@ namespace BO4E.BO
         [JsonPropertyName("notwendigkeit")]
         [ProtoMember(6)]
         public BerechnungsformelNotwendigkeit Notwendigkeit { get; set; }
-
-        // lieferrichtung is part of the marktlokation
-
+        
+        /// <summary>
+        /// Eine Berechnungsformel enthält, falls sie notwendig ist <see cref="BerechnungsformelNotwendigkeit.BERECHNUNGSFORMEL_NOTWENDIG"/>,
+        /// einen oder mehrere Berechnungschritte
+        /// </summary>
+        [JsonProperty(Required = Required.Default, Order = 4, PropertyName = "rechenschritte")]
+        [JsonPropertyName("rechenschritte")]
         public List<Rechenschritt> Rechenschritte { get; set; }
     }
 }

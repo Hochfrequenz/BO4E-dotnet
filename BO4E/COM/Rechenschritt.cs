@@ -16,6 +16,7 @@ namespace BO4E.COM
         /// Die ID des Rechenschritt (1-99999)
         /// </summary>
         /// <remarks>UTILTS SG8 RFF 1154 / SG</remarks>
+        [JsonProperty(Required = Required.Always, PropertyName = "rechenschrittId")]
         public int RechenschrittId { get; set; }
 
         /// <summary>
@@ -28,8 +29,14 @@ namespace BO4E.COM
         public ArithmetischeOperation Operation { get; set; }
 
         /// <summary>
-        /// todo
+        /// Verwendungszweck der Werte
         /// </summary>
+        /// <remarks>SG9 CAV 7111</remarks>
+        [JsonProperty(Required = Required.Always, Order = 4, PropertyName = "verwendungszweck")]
+        [JsonPropertyName("verwendungszweck")]
         public Verwendungszweck Verwendungszweck { get; set; }
+
+        // todo: verlustfaktoren adden
+
     }
 }
