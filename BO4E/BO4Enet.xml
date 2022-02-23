@@ -1057,7 +1057,7 @@
         </member>
         <member name="P:BO4E.BO.Handelsunstimmigkeit.Begruendung">
             <summary>
-            Handelsunstimmigekeitsbegründung
+            Handelsunstimmigskeitsbegründung
             </summary>
             <see cref="T:BO4E.COM.Handelsunstimmigkeitsbegruendung" />
         </member>
@@ -2160,6 +2160,15 @@
                 Kosten (PositionsPreis * PositionsStückzahl) für diese Angebotsposition. Details <see cref="T:BO4E.COM.Betrag" />
             </summary>
         </member>
+        <member name="P:BO4E.COM.Angebotsposition.Preisschlüsselstamm">
+            <summary>Preisschlüsselstamm als Alternative zum Preis/></summary>
+        </member>
+        <member name="P:BO4E.COM.Angebotsposition.BdewArtikelnummer">
+            <summary>
+                Eine vom BDEW standardisierte Bezeichnung für die abgerechnete Leistungserbringung. Diese Artikelnummer wird
+                auch im Rechnungsteil der INVOIC verwendet. <seealso cref="T:BO4E.ENUM.BDEWArtikelnummer" />
+            </summary>
+        </member>
         <member name="T:BO4E.COM.Angebotsteil">
             <summary>
                 Mit dieser Komponente wird ein Teil einer Angebotsvariante abgebildet. Hier werden alle Angebotspositionen
@@ -2762,7 +2771,7 @@
         </member>
         <member name="P:BO4E.COM.Handelsunstimmigkeitsbegruendung.Referenzen">
             <summary>
-            Referenzen auf vorherige Nachricht
+            Referenzen auf vorherige Nachrichten
             </summary>
         </member>
         <member name="P:BO4E.COM.Handelsunstimmigkeitsbegruendung.Grund">
@@ -4869,9 +4878,6 @@
         <member name="F:BO4E.ENUM.BoTyp.GESCHAEFTSPARTNER">
             <summary>1</summary>
         </member>
-        <member name="F:BO4E.ENUM.BoTyp.HANDELSUNSTIMMIGKEIT">
-            <summary>1</summary>
-        </member>
         <member name="F:BO4E.ENUM.BoTyp.MARKTLOKATION">
             <summary>1</summary>
         </member>
@@ -4912,6 +4918,9 @@
             <summary>1</summary>
         </member>
         <member name="F:BO4E.ENUM.BoTyp.LASTGANG">
+            <summary>1</summary>
+        </member>
+        <member name="F:BO4E.ENUM.BoTyp.HANDELSUNSTIMMIGKEIT">
             <summary>1</summary>
         </member>
         <member name="T:BO4E.ENUM.Dienstleistungstyp">
@@ -6311,19 +6320,19 @@
         </member>
         <member name="T:BO4E.ENUM.Handelsunstimmigkeitsgrund">
             <summary>
-            Begründung der Korrektheit der Rechnung oder des Lieferscheins(COMDIS SG3 AJT 4465)
+            Begründung der Korrektheit der Rechnung oder des Lieferscheins (COMDIS SG3 AJT 4465)
             </summary>
         </member>
-        <member name="F:BO4E.ENUM.Handelsunstimmigkeitsgrund.ANMDELDUNG_BESTAETIGT">
-            <summary> ANMDELDUNG_BESTAETIGT</summary>
+        <member name="F:BO4E.ENUM.Handelsunstimmigkeitsgrund.ANMELDUNG_BESTAETIGT">
+            <summary> ANMELDUNG_BESTAETIGT</summary>
             <remarks>Z58</remarks>
         </member>
-        <member name="F:BO4E.ENUM.Handelsunstimmigkeitsgrund.ABRECHNUNGSBEGINN_GLECIH_BESTAETIGTEM_VERTRAGSBEGINN">
-            <summary> ABRECHNUNGSBEGINN_GLECIH_BESTAETIGTEM_VERTRAGSBEGINN</summary>
+        <member name="F:BO4E.ENUM.Handelsunstimmigkeitsgrund.ABRECHNUNGSBEGINN_GLEICH_BESTAETIGTEM_VERTRAGSBEGINN">
+            <summary> ABRECHNUNGSBEGINN_GLEICH_BESTAETIGTEM_VERTRAGSBEGINN</summary>
             <remarks>Z59</remarks>
         </member>
-        <member name="F:BO4E.ENUM.Handelsunstimmigkeitsgrund.ABRECHNUNGSENDE_GLECIH_BESTAETIGTEM_VERTRAGSBEGINN">
-            <summary> ABRECHNUNGSENDE_GLECIH_BESTAETIGTEM_VERTRAGSBEGINN</summary>
+        <member name="F:BO4E.ENUM.Handelsunstimmigkeitsgrund.ABRECHNUNGSENDE_GLEICH_BESTAETIGTEM_VERTRAGSENDE">
+            <summary> ABRECHNUNGSENDE_GLEICH_BESTAETIGTEM_VERTRAGSENDE</summary>
             <remarks>Z60</remarks>
         </member>
         <member name="F:BO4E.ENUM.Handelsunstimmigkeitsgrund.NN_MSCONS_UEBERSENDET">
@@ -6334,8 +6343,8 @@
             <summary> RICHTIGE_MESSWERTE_ENERGIEMENGEN_UEBERSENDET </summary>
             <remarks>Z62</remarks>
         </member>
-        <member name="F:BO4E.ENUM.Handelsunstimmigkeitsgrund.SONSTIGES_SIEHE_FTX">
-            <summary> SONSTIGES_SIEHE_FTX </summary>
+        <member name="F:BO4E.ENUM.Handelsunstimmigkeitsgrund.SONSTIGES_SIEHE_BEGRUENDUNG">
+            <summary> SONSTIGES_SIEHE_BEGRUENDUNG </summary>
             <remarks>28</remarks>
         </member>
         <member name="T:BO4E.ENUM.Handelsunstimmigkeitstyp">
