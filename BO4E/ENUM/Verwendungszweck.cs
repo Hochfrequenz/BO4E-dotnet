@@ -13,6 +13,12 @@ namespace BO4E.ENUM
         MEHRMINDERMBENGENABRECHNUNG,
 
         /// <summary>Z47: Endkundenabrechnung</summary>
-        ENDKUNDENABRECHNUNG
+        ENDKUNDENABRECHNUNG,
+
+        /// <summary>
+        /// Übermittlung an der Herkunftsnachweisregister (HKNR)
+        /// </summary>
+        /// <remarks>Z92</remarks>
+        UEBERMITTLUNG_AN_DAS_HKNR,
     }
 }
