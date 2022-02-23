@@ -47,7 +47,7 @@ message Angebotsposition {
    Menge Positionsmenge = 4;
    Preis Positionspreis = 5;
    Betrag Positionsbetrag = 6;
-   string Preisschlüsselstamm = 7;
+   string Preisschluesselstamm = 7;
    BDEWArtikelnummer BdewArtikelnummer = 8;
 }
 enum Angebotsstatus {

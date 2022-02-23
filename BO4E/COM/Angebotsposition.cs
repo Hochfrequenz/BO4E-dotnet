@@ -42,11 +42,11 @@ namespace BO4E.COM
         public Betrag Positionsbetrag { get; set; } // or positionskosten??
 
         /// <summary>Preisschlüsselstamm als Alternative zum Preis/></summary>
-        [JsonProperty(PropertyName = "preisschlüsselstamm", Required = Required.Default)]
-        [JsonPropertyName("preisschlüsselstamm")]
+        [JsonProperty(PropertyName = "preisschluesselstamm", Required = Required.Default)]
+        [JsonPropertyName("preisschluesselstamm")]
         [NonOfficial(NonOfficialCategory.MISSING)]
         [ProtoMember(7)]
-        public string Preisschlüsselstamm { get; set; }
+        public string Preisschluesselstamm { get; set; }
 
         /// <summary>
         ///     Eine vom BDEW standardisierte Bezeichnung für die abgerechnete Leistungserbringung. Diese Artikelnummer wird
