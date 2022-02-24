@@ -3,7 +3,7 @@ using BO4E.meta;
 namespace BO4E.ENUM
 {
     /// <summary>
-    /// Typ/Art der Anfrage (ORDERS ORDRSP IMD 7081)
+    /// Typ/Art der Anfrage (ORDERS/ORDRSP/QUOTES IMD 7081)
     /// Segment heißt entweder Produkt-/ Leistungsbeschreibung, Abonnement oder Lieferrichtung.
     /// </summary>
     [NonOfficial(NonOfficialCategory.MISSING)]
