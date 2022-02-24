@@ -113,6 +113,8 @@ enum ArithmetischeOperation {
    SUBTRAKTION = 1;
    MULTIPLIKATION = 2;
    DIVISION = 3;
+   DIVIDEND = 4;
+   POSITIVWERT = 5;
 }
 enum AufAbschlagstyp {
    option (.protobuf_net.enumopt).namespace = "BO4E.ENUM";
@@ -1457,6 +1459,7 @@ enum Verwendungszweck {
    BILANZKREISABRECHNUNG = 1;
    MEHRMINDERMBENGENABRECHNUNG = 2;
    ENDKUNDENABRECHNUNG = 3;
+   UEBERMITTLUNG_AN_DAS_HKNR = 4;
 }
 enum Waehrungscode {
    option (.protobuf_net.enumopt).namespace = "BO4E.ENUM";
