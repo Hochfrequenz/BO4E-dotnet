@@ -27,7 +27,7 @@ namespace BO4E.BO
         public string LokationsId { get; set; }
 
         /// <summary>
-        /// Gibt an, ob es sich um eine Markt- oder Messlokation handelt.
+        /// Gibt an, ob es sich um eine Markt- oder Messlokation handelt
         /// </summary>
         /// <see cref="Lokationstyp" />
         [JsonProperty(PropertyName = "lokationsTyp", Required = Required.Always)]
