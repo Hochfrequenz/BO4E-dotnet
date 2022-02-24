@@ -40,18 +40,18 @@ namespace BO4E.COM
         /// <summary>
         /// Ein möglicher Trafoverlust
         /// </summary>
-        [JsonProperty(Required = Required.AllowNull, Order = 4, PropertyName = "verlustTrafo")]
-        [JsonPropertyName("verlustTrafo")]
+        [JsonProperty(Required = Required.AllowNull, Order = 4, PropertyName = "verlustfaktorTrafo")]
+        [JsonPropertyName("verlustfaktorTrafo")]
         [ProtoMember(4)]
-        public decimal? VerlustTrafo { get; set; }
+        public decimal? VerlustfaktorTrafo { get; set; }
 
         /// <summary>
         /// Ein möglicher Leitungsverlust
         /// </summary>
-        [JsonProperty(Required = Required.AllowNull, Order = 5, PropertyName = "verlustLeitung")]
-        [JsonPropertyName("verlustLeitung")]
+        [JsonProperty(Required = Required.AllowNull, Order = 5, PropertyName = "verlustfaktorLeitung")]
+        [JsonPropertyName("verlustfaktorLeitung")]
         [ProtoMember(5)]
-        public decimal? VerlustLeitung { get; set; }
+        public decimal? VerlustfaktorLeitung { get; set; }
 
         /// <summary>
         /// Verweis auf MesslokationsId
