@@ -17,7 +17,8 @@ namespace BO4E.BO
     [ProtoContract]
     public class Berechnungsformel : BusinessObject
     {
-        // lieferrichtung is part of the marktlokations-bo
+        // The UTILTS "Lieferrichtung der Marktlokation" is contained in the marktlokations-bo
+        // Also the relation between Berechnungsformel↔ Marktlokation is modelled as "link"
 
         [System.Text.Json.Serialization.JsonIgnore]
         [Newtonsoft.Json.JsonIgnore]
@@ -31,13 +32,14 @@ namespace BO4E.BO
         /// <summary>
         /// Der inklusive Zeitpunkt ab dem die Berechnungsformel gültig ist
         /// </summary>
+        /// <remarks>UTILTS SG5 DTM+157</remarks>
         [JsonProperty(Required = Required.Always, Order = 5, PropertyName = "beginndatum")]
         [JsonPropertyName("beginndatum")]
         [ProtoIgnore]
         public DateTimeOffset Beginndatum { get; set; }
 
         /// <summary>
-        /// beschreibt ob eine Berechnungsformel notwendig ist
+        /// Beschreibt ob eine Berechnungsformel notwendig ist
         /// </summary>
         /// <remarks>UTILTS SG5 STS 4405</remarks>
         [JsonProperty(Required = Required.Always, Order = 6, PropertyName = "notwendigkeit")]
@@ -48,16 +50,17 @@ namespace BO4E.BO
         /// <summary>
         /// ID des Rechenschritts [1 - 99999]
         /// </summary>
+        /// <remarks>UTILTS SG8 SEQ Z37</remarks>
         [JsonProperty(Required = Required.Default, Order = 7, PropertyName = "rechenschrittId")]
         [JsonPropertyName("rechenschrittId")]
         [ProtoMember(7)]
-        [BoKey()]
+        [BoKey]
         public int? RechenschrittId { get; set; }
 
         /// <summary>
         /// Verwendungszweck der Werte
         /// </summary>
-        /// <remarks>SG9 CAV 7111</remarks>
+        /// <remarks>UTILTS SG9 CAV 7111</remarks>
         [JsonProperty(Required = Required.Always, Order = 8, PropertyName = "verwendungszweck")]
         [JsonPropertyName("verwendungszweck")]
         public Verwendungszweck Verwendungszweck { get; set; }

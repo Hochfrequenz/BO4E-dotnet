@@ -29,7 +29,7 @@ namespace BO4E.COM
         public int ReferenzRechenschrittId { get; set; }
 
         /// <summary>
-        /// Die Rechenoperation
+        /// Die Rechenoperation dieses Schrittes
         /// </summary>
         [JsonProperty(Required = Required.Always, Order = 3, PropertyName = "operation")]
         [JsonPropertyName("operation")]
@@ -40,6 +40,7 @@ namespace BO4E.COM
         /// <summary>
         /// Ein möglicher Trafoverlust
         /// </summary>
+        /// <remarks>UTILTS SG9 CCI Z16</remarks>
         [JsonProperty(Required = Required.AllowNull, Order = 4, PropertyName = "verlustfaktorTrafo")]
         [JsonPropertyName("verlustfaktorTrafo")]
         [ProtoMember(4)]
@@ -48,6 +49,7 @@ namespace BO4E.COM
         /// <summary>
         /// Ein möglicher Leitungsverlust
         /// </summary>
+        /// <remarks>UTILTS SG9 CCI ZB2</remarks>
         [JsonProperty(Required = Required.AllowNull, Order = 5, PropertyName = "verlustfaktorLeitung")]
         [JsonPropertyName("verlustfaktorLeitung")]
         [ProtoMember(5)]
