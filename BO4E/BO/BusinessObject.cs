@@ -56,7 +56,8 @@ namespace BO4E.BO
     [ProtoInclude(21, typeof(Reklamation))]
     [ProtoInclude(22, typeof(Avis))]
     [ProtoInclude(23, typeof(Handelsunstimmigkeit))]
-    [ProtoInclude(24, typeof(Anfrage))]
+    [ProtoInclude(24, typeof(Berechnungsformel))]
+    [ProtoInclude(25, typeof(Anfrage))]
     public abstract class BusinessObject : IEquatable<BusinessObject>, IUserProperties, IOptionalGuid
     {
         /// <summary>
