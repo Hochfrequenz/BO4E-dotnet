@@ -2160,6 +2160,15 @@
                 Kosten (PositionsPreis * PositionsStückzahl) für diese Angebotsposition. Details <see cref="T:BO4E.COM.Betrag" />
             </summary>
         </member>
+        <member name="P:BO4E.COM.Angebotsposition.Preisschluesselstamm">
+            <summary>Preisschlüsselstamm als Alternative zum Preis/></summary>
+        </member>
+        <member name="P:BO4E.COM.Angebotsposition.BdewArtikelnummer">
+            <summary>
+                Eine vom BDEW standardisierte Bezeichnung für die abgerechnete Leistungserbringung. Diese Artikelnummer wird
+                auch im Rechnungsteil der INVOIC verwendet. <seealso cref="T:BO4E.ENUM.BDEWArtikelnummer" />
+            </summary>
+        </member>
         <member name="T:BO4E.COM.Angebotsteil">
             <summary>
                 Mit dieser Komponente wird ein Teil einer Angebotsvariante abgebildet. Hier werden alle Angebotspositionen
