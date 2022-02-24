@@ -2198,6 +2198,9 @@
         <member name="P:BO4E.COM.Angebotsteil.Positionen">
             <summary>Einzelne Positionen, die zu diesem Angebotsteil gehören. Details <see cref="T:BO4E.COM.Angebotsposition" /></summary>
         </member>
+        <member name="P:BO4E.COM.Angebotsteil.Lieferzeitraum">
+            <summary>Hier kann der Belieferungszeitraum angegeben werden, für den dieser Angebotsteil gilt. Details <see cref="T:BO4E.COM.Zeitraum" /></summary>
+        </member>
         <member name="T:BO4E.COM.Angebotsvariante">
             <summary>Führt die verschiedenen Ausprägungen der Angebotsberechnung auf.</summary>
         </member>
