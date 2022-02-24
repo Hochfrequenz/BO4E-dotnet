@@ -24,8 +24,8 @@ namespace BO4E.COM
         /// Die ReferenzID des Rechenschritt (1-99999)
         /// </summary>
         /// <remarks>UTILTS SG8 RFF 1154 / SG</remarks>
-        [JsonProperty(Required = Required.Always, PropertyName = "referenzRechensschrittID")]
-        [JsonPropertyName("referenzRechensschrittID")]
+        [JsonProperty(Required = Required.Always, PropertyName = "referenzRechenschrittID")]
+        [JsonPropertyName("referenzRechenschrittID")]
         public int ReferenzRechenschrittId { get; set; }
 
         /// <summary>
