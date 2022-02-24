@@ -249,6 +249,45 @@
             </param>
             <returns>Array of FieldInfos</returns>
         </member>
+        <member name="T:BO4E.BO.Anfrage">
+            <summary>
+            Anfrage BO
+            </summary>
+        </member>
+        <member name="P:BO4E.BO.Anfrage.LokationsId">
+            <summary>
+            Für welche Markt- oder Messlokation gilt diese Anfrage.
+            </summary>
+        </member>
+        <member name="P:BO4E.BO.Anfrage.LokationsTyp">
+            <summary>
+            Gibt an, ob es sich um eine Markt- oder Messlokation handelt.
+            </summary>
+            <see cref="T:BO4E.ENUM.Lokationstyp" />
+        </member>
+        <member name="P:BO4E.BO.Anfrage.Obiskennzahl">
+            <summary>
+            OBIS-Kennzahl
+            </summary>
+            <example>
+                1-0:1.8.1
+            </example>
+        </member>
+        <member name="P:BO4E.BO.Anfrage.ZeitraumMesswertanfrage">
+            <summary>
+            Sollablesetermin / Zeitangabe für Messwertanfrage. Details <see cref="T:BO4E.COM.Zeitraum" />
+            </summary>
+        </member>
+        <member name="P:BO4E.BO.Anfrage.Anfragekategorie">
+            <summary>
+            Kategorie der Anfrage (ORDERS ORDRSP BGM 1001)
+            </summary>
+        </member>
+        <member name="P:BO4E.BO.Anfrage.Anfragetyp">
+            <summary>
+            Typ/Art der Anfrage (ORDERS ORDRSP IMD 7081)
+            </summary>
+        </member>
         <member name="T:BO4E.BO.Angebot">
             <summary>
                 Mit diesem BO kann ein Versorgungsangebot zur Strom- oder Gasversorgung oder die Teilnahme an einer Ausschreibung
@@ -4384,6 +4423,121 @@
         <member name="F:BO4E.ENUM.Aggregationsverantwortung.VNB">
             <summary>Netzbetreiber</summary>
         </member>
+        <member name="T:BO4E.ENUM.Anfragekategorie">
+            <summary>
+            Kategorie der Anfrage (ORDERS ORDRSP BGM 1001)
+            </summary>
+        </member>
+        <member name="F:BO4E.ENUM.Anfragekategorie.PROZESSDATENBERICHT">
+            <summary>PROZESSDATENBERICHT</summary>
+            <remarks>7</remarks>
+        </member>
+        <member name="F:BO4E.ENUM.Anfragekategorie.GERAETEUEBERNAHME">
+            <summary>GERAETEUEBERNAHME</summary>
+            <remarks>Z10</remarks>
+        </member>
+        <member name="F:BO4E.ENUM.Anfragekategorie.WEITERVERPFLICHTUNG_BETRIEB_MELO">
+            <summary>WEITERVERPFLICHTUNG_BETRIEB_MELO</summary>
+            <remarks>Z11</remarks>
+        </member>
+        <member name="F:BO4E.ENUM.Anfragekategorie.AENDERUNG_MELO">
+            <summary>AENDERUNG_MELO</summary>
+            <remarks>Z12</remarks>
+        </member>
+        <member name="F:BO4E.ENUM.Anfragekategorie.STAMMDATEN_MALO_ODER_MELO">
+            <summary>STAMMDATEN_MALO_ODER_MELO</summary>
+            <remarks>Z14</remarks>
+        </member>
+        <member name="F:BO4E.ENUM.Anfragekategorie.BILANZIERTE_MENGE_MEHR_MINDER_MENGEN">
+            <summary>BILANZIERTE_MENGE_MEHR_MINDER_MENGEN</summary>
+            <remarks>Z23</remarks>
+        </member>
+        <member name="F:BO4E.ENUM.Anfragekategorie.ALLOKATIONSLISTE_MEHR_MINDER_MENGEN">
+            <summary>ALLOKATIONSLISTE_MEHR_MINDER_MENGEN</summary>
+            <remarks>Z24</remarks>
+        </member>
+        <member name="F:BO4E.ENUM.Anfragekategorie.ENERGIEMENGE_UND_LEISTUNGSMAXIMUM">
+            <summary>ENERGIEMENGE_UND_LEISTUNGSMAXIMUM</summary>
+            <remarks>Z28</remarks>
+        </member>
+        <member name="F:BO4E.ENUM.Anfragekategorie.ABRECHNUNG_MESSSTELLENBETRIEB_MSB_AN_LF">
+            <summary>ABRECHNUNG_MESSSTELLENBETRIEB_MSB_AN_LF</summary>
+            <remarks>Z29</remarks>
+        </member>
+        <member name="F:BO4E.ENUM.Anfragekategorie.AENDERUNG_PROGNOSEGRUNDLAGE_GERAETEKONFIGURATION">
+            <summary> AENDERUNG_PROGNOSEGRUNDLAGE_GERAETEKONFIGURATION</summary>
+            <remarks>Z30</remarks>
+        </member>
+        <member name="F:BO4E.ENUM.Anfragekategorie.AENDERUNG_GERAETEKONFIGURATION">
+            <summary> AENDERUNG_GERAETEKONFIGURATION</summary>
+            <remarks>Z31</remarks>
+        </member>
+        <member name="F:BO4E.ENUM.Anfragekategorie.REKLAMATION_VON_WERTEN">
+            <summary> REKLAMATION_VON_WERTEN</summary>
+            <remarks>Z34</remarks>
+        </member>
+        <member name="F:BO4E.ENUM.Anfragekategorie.LASTGANG_MALO_TRANCHE">
+            <summary>LASTGANG_MALO_TRANCHE</summary>
+            <remarks>Z48</remarks>
+        </member>
+        <member name="T:BO4E.ENUM.Anfragetyp">
+            <summary>
+            Typ/Art der Anfrage (ORDERS ORDRSP IMD 7081)
+            Segment heißt entweder Produkt-/ Leistungsbeschreibung, Abonnement oder Lieferrichtung.
+            </summary>
+        </member>
+        <member name="F:BO4E.ENUM.Anfragetyp.START_ABO">
+            <summary>START_ABO</summary>
+            <remarks>Z01</remarks>
+        </member>
+        <member name="F:BO4E.ENUM.Anfragetyp.ENDE_ABO">
+            <summary>ENDE_ABO</summary>
+            <remarks>Z02</remarks>
+        </member>
+        <member name="F:BO4E.ENUM.Anfragetyp.KAUF">
+            <summary>KAUF</summary>
+            <remarks>Z07</remarks>
+        </member>
+        <member name="F:BO4E.ENUM.Anfragetyp.NUTZUNGSUEBERLASSUNG">
+            <summary>NUTZUNGSUEBERLASSUNG</summary>
+            <remarks>Z08</remarks>
+        </member>
+        <member name="F:BO4E.ENUM.Anfragetyp.KANN_NICHT_ANGEBOTEN_WERDEN">
+            <summary>KANN_NICHT_ANGEBOTEN_WERDEN</summary>
+            <remarks>Z09</remarks>
+        </member>
+        <member name="F:BO4E.ENUM.Anfragetyp.ABRECHNUNGSBRENNWERT_UND_ZUSTANDSZAHL">
+            <summary>ABRECHNUNGSBRENNWERT_UND_ZUSTANDSZAHL</summary>
+            <remarks>Z10</remarks>
+        </member>
+        <member name="F:BO4E.ENUM.Anfragetyp.LASTGANGDATEN">
+            <summary>LASTGANGDATEN</summary>
+            <remarks>Z11</remarks>
+        </member>
+        <member name="F:BO4E.ENUM.Anfragetyp.ZAEHLERSTAENDE">
+            <summary>ZAEHLERSTAENDE</summary>
+            <remarks>Z12</remarks>
+        </member>
+        <member name="F:BO4E.ENUM.Anfragetyp.WERTEERMITTLUNG">
+            <summary>WERTEERMITTLUNG</summary>
+            <remarks>Z13</remarks>
+        </member>
+        <member name="F:BO4E.ENUM.Anfragetyp.LIEFERRICHTUNG">
+            <summary>LIEFERRICHTUNG</summary>
+            <remarks>Z14</remarks>
+        </member>
+        <member name="F:BO4E.ENUM.Anfragetyp.ANGEBOT_AUF_BASIS_PREISBLATT">
+            <summary>ANGEBOT_AUF_BASIS_PREISBLATT</summary>
+            <remarks>Z33</remarks>
+        </member>
+        <member name="F:BO4E.ENUM.Anfragetyp.INDIVIDUELLES_ANGEBOT">
+            <summary>INDIVIDUELLES_ANGEBOT</summary>
+            <remarks>Z34</remarks>
+        </member>
+        <member name="F:BO4E.ENUM.Anfragetyp.ENERGIEMENGE_EINZELWERT">
+            <summary>ENERGIEMENGE_EINZELWERT</summary>
+            <remarks>Z35</remarks>
+        </member>
         <member name="T:BO4E.ENUM.Angebotsstatus">
             <summary>Gibt den Status eines Angebotes an.</summary>
         </member>
@@ -4958,6 +5112,9 @@
             <summary>1</summary>
         </member>
         <member name="F:BO4E.ENUM.BoTyp.HANDELSUNSTIMMIGKEIT">
+            <summary>1</summary>
+        </member>
+        <member name="F:BO4E.ENUM.BoTyp.ANFRAGE">
             <summary>1</summary>
         </member>
         <member name="T:BO4E.ENUM.Dienstleistungstyp">

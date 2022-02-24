@@ -61,6 +61,9 @@ namespace BO4E.ENUM
         LASTGANG,
 
         /// <summary>1</summary>
-        HANDELSUNSTIMMIGKEIT
+        HANDELSUNSTIMMIGKEIT,
+
+        /// <summary>1</summary>
+        ANFRAGE
     }
 }
