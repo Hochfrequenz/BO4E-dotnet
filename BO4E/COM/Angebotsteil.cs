@@ -55,6 +55,6 @@ namespace BO4E.COM
         [JsonProperty(PropertyName = "lieferzeitraum", Required = Required.Default)]
         [JsonPropertyName("lieferzeitraum")]
         [ProtoMember(8)]
-        public Zeitraum Lieferzeitraum { get; set; }
+        public Zeitraum? Lieferzeitraum { get; set; }
     }
 }
