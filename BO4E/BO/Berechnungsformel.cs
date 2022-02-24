@@ -34,7 +34,6 @@ namespace BO4E.BO
         [JsonProperty(Required = Required.Always, Order = 5, PropertyName = "beginndatum")]
         [JsonPropertyName("beginndatum")]
         [ProtoIgnore]
-        [DataCategory(DataCategory.FINANCE)]
         public DateTimeOffset Beginndatum { get; set; }
 
         /// <summary>
