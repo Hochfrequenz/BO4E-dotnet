@@ -50,5 +50,11 @@ namespace BO4E.COM
         [JsonPropertyName("positionen")]
         [ProtoMember(7)]
         public List<Angebotsposition> Positionen { get; set; }
+        
+        /// <summary>Hier kann der Belieferungszeitraum angegeben werden, für den dieser Angebotsteil gilt. Details <see cref="Zeitraum" /></summary>
+        [JsonProperty(PropertyName = "lieferzeitraum", Required = Required.Default)]
+        [JsonPropertyName("lieferzeitraum")]
+        [ProtoMember(8)]
+        public Zeitraum Lieferzeitraum { get; set; }
     }
 }

@@ -69,6 +69,7 @@ message Angebotsteil {
    Menge Gesamtmengeangebotsteil = 5;
    Betrag Gesamtkostenangebotsteil = 6;
    repeated Angebotsposition Positionen = 7;
+   Zeitraum Lieferzeitraum = 8;
 }
 message Angebotsvariante {
    option (.protobuf_net.msgopt).namespace = "BO4E.COM";
