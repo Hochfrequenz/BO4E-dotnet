@@ -1,6 +1,4 @@
 using System.Text.Json.Serialization;
-using BO4E.ENUM;
-using BO4E.meta;
 using Newtonsoft.Json;
 using ProtoBuf;
 
@@ -42,7 +40,7 @@ namespace BO4E.COM
         [ProtoMember(5)]
         public string Segment { get; set; }
 
-        /// <summary>Zus‰tzliche Fehlerbeschreibung.</summary>
+        /// <summary>Zus√§tzliche Fehlerbeschreibung.</summary>
         [JsonProperty(PropertyName = "beschreibung", Required = Required.Default)]
         [JsonPropertyName("beschreibung")]
         [ProtoMember(5)]
