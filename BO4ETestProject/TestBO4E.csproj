@@ -44,15 +44,6 @@
         <None Update="bo4eURITests\marktteilnehmer.json">
             <CopyToOutputDirectory>Always</CopyToOutputDirectory>
         </None>
-        <None Update="BoEdiMapper\marktlokation.json">
-            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-        </None>
-        <None Update="BoEdiMapper\messlokation.json">
-            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-        </None>
-        <None Update="BoEdiMapper\nested_marktlokation.json">
-            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-        </None>
         <None Update="BoMapperTests\energiemenge_profdecimal_em_bug.json">
             <CopyToOutputDirectory>Always</CopyToOutputDirectory>
         </None>
