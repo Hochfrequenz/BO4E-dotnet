@@ -4,70 +4,6 @@
         <name>BO4Enet</name>
     </assembly>
     <members>
-        <member name="T:BO4E.BoEdiMapper">
-            <summary>
-                This class performs the mapping of BO4E values to the corresponding EDIFACT values.
-            </summary>
-            It primarily relies on the mapping defined by the
-            <see cref="T:BO4E.meta.MappingAttribute" />
-            .
-            <seealso cref="T:BO4E.EdiBoMapper" />
-        </member>
-        <member name="F:BO4E.BoEdiMapper.Logger">
-            <summary>
-                project wide logger
-            </summary>
-        </member>
-        <member name="M:BO4E.BoEdiMapper.ToEdi(System.String,System.String)">
-            <summary>
-                transform a BO4E value of known type to an EDIFACT value
-            </summary>
-            <seealso cref="M:BO4E.EdiBoMapper.FromEdi(System.String,System.String)" />
-            <param name="objectName">
-                name of the BO4E datatype
-                <example>Netzebene</example>
-            </param>
-            <param name="objectValue">
-                BO4E value
-                <example>HSP</example>
-            </param>
-            <returns>
-                <list type="bullet">
-                    <item>
-                        <description>
-                            <code>null</code> if the objectValue is null or no mapping is specified for the given
-                            type/value combination
-                        </description>
-                    </item>
-                    <item>
-                        <description>the corresponding EDIFACT value</description>
-                    </item>
-                    <item>
-                        <description>
-                            objectValue iff no mapping was defined but objectValue is already a valid EDIFACT value (e.g.
-                            for "Landescode"s)
-                        </description>
-                    </item>
-                </list>
-            </returns>
-            <example>
-                <code>
-            string ediValue = BoEdiMapper.toEdi("Netzebene", "NSP"); // returns "E06"
-            </code>
-            </example>
-        </member>
-        <member name="M:BO4E.BoEdiMapper.ReplaceWithEdiValues(System.Object)">
-            <summary>
-                Consumes a BusinessObject or BO4E COMponent and replaces all ENUM values with
-                corresponding EDIFACT values. The result is a JObject with a similar structure as the
-                original BO/COM but contains EDIFACT compliant string values where the original BO had
-                BO4E compliant enum values.
-            </summary>
-            This method is useful if you'd like to process the BO in/for an environment like
-            the WiMPiM.
-            <param name="o">Valid Business Object or BO4E COMponent</param>
-            <returns>JObject with same structure as original object</returns>
-        </member>
         <member name="T:BO4E.BoMapper">
             <summary>
                 This class maps generic JObjects to BO4E business objects.
@@ -261,7 +197,7 @@
         </member>
         <member name="P:BO4E.BO.Anfrage.LokationsTyp">
             <summary>
-            Gibt an, ob es sich um eine Markt- oder Messlokation handelt.
+            Gibt an, ob es sich um eine Markt- oder Messlokation handelt
             </summary>
             <see cref="T:BO4E.ENUM.Lokationstyp" />
         </member>
@@ -556,6 +492,42 @@
         <member name="P:BO4E.BO.Benachrichtigung.Infos">
             <summary>
                 list of additional information built in a customer dependet implementation
+            </summary>
+        </member>
+        <member name="T:BO4E.BO.Berechnungsformel">
+            <summary>
+            Eine Berechnungsformel beschreibt, wie komplexe MaLo-MeLo-Konstrukte rechnerisch behandelt werden.
+            </summary>
+            <remarks>Berechnungsformeln werden in der Marktkommunikation mit Prüfidentifikator 25001 (UTILTS) übermittelt</remarks>
+        </member>
+        <member name="P:BO4E.BO.Berechnungsformel.Beginndatum">
+            <summary>
+            Der inklusive Zeitpunkt ab dem die Berechnungsformel gültig ist
+            </summary>
+            <remarks>UTILTS SG5 DTM+157</remarks>
+        </member>
+        <member name="P:BO4E.BO.Berechnungsformel.Notwendigkeit">
+            <summary>
+            Beschreibt ob eine Berechnungsformel notwendig ist
+            </summary>
+            <remarks>UTILTS SG5 STS 4405</remarks>
+        </member>
+        <member name="P:BO4E.BO.Berechnungsformel.RechenschrittId">
+            <summary>
+            ID des Rechenschritts [1 - 99999]
+            </summary>
+            <remarks>UTILTS SG8 SEQ Z37</remarks>
+        </member>
+        <member name="P:BO4E.BO.Berechnungsformel.Verwendungszweck">
+            <summary>
+            Verwendungszweck der Werte
+            </summary>
+            <remarks>UTILTS SG9 CAV 7111</remarks>
+        </member>
+        <member name="P:BO4E.BO.Berechnungsformel.Rechenschritt">
+            <summary>
+            Eine Berechnungsformel enthält, falls sie notwendig ist <see cref="F:BO4E.ENUM.BerechnungsformelNotwendigkeit.BERECHNUNGSFORMEL_NOTWENDIG"/>,
+            einen oder mehrere Berechnungschritte, die hier rekursiv abgebildet werden.
             </summary>
         </member>
         <member name="T:BO4E.BO.Bilanzierung">
@@ -3219,6 +3191,51 @@
                 <seealso cref="T:BO4E.COM.Sigmoidparameter" />
             </summary>
         </member>
+        <member name="T:BO4E.COM.Rechenschritt">
+            <summary>
+            Ein Berechnungsschritt ist Teil einer <see cref="T:BO4E.BO.Berechnungsformel"/>
+            </summary>
+            <remarks>Entspricht der SG9 in UTILTS</remarks>
+        </member>
+        <member name="P:BO4E.COM.Rechenschritt.RechenschrittBestandteilId">
+            <summary>
+            Die BestandteilID des Rechenschritt (1-99999)
+            </summary>
+            <remarks>UTILTS SG8 RFF 1154 / SG</remarks>
+        </member>
+        <member name="P:BO4E.COM.Rechenschritt.ReferenzRechenschrittId">
+            <summary>
+            Die ReferenzID des Rechenschritt (1-99999)
+            </summary>
+            <remarks>UTILTS SG8 RFF 1154 / SG</remarks>
+        </member>
+        <member name="P:BO4E.COM.Rechenschritt.Operation">
+            <summary>
+            Die Rechenoperation dieses Schrittes
+            </summary>
+        </member>
+        <member name="P:BO4E.COM.Rechenschritt.VerlustfaktorTrafo">
+            <summary>
+            Ein möglicher Trafoverlust
+            </summary>
+            <remarks>UTILTS SG9 CCI Z16</remarks>
+        </member>
+        <member name="P:BO4E.COM.Rechenschritt.VerlustfaktorLeitung">
+            <summary>
+            Ein möglicher Leitungsverlust
+            </summary>
+            <remarks>UTILTS SG9 CCI ZB2</remarks>
+        </member>
+        <member name="P:BO4E.COM.Rechenschritt.MesslokationId">
+            <summary>
+            Verweis auf MesslokationsId
+            </summary>
+        </member>
+        <member name="P:BO4E.COM.Rechenschritt.WeitererRechenschritt">
+            <summary>
+            rekursive Verschachtelung weiterer rechenschritte
+            </summary>
+        </member>
         <member name="T:BO4E.COM.Rechnungsposition">
             <summary>
                 Abbildung einer Rechnungsposition. Über Rechnungspositionen werden Rechnungen strukturiert. In einem
@@ -4100,58 +4117,6 @@
                 Hier kann eine thematische Zuordnung des APs angegeben werden. Details <see cref="T:BO4E.ENUM.Themengebiet" />
             </summary>
         </member>
-        <member name="T:BO4E.EdiBoMapper">
-            <summary>
-                This class performs the mapping of EDIFACT values to the corresponding BO4E values.
-            </summary>
-            It primarily relies on the mapping defined by the
-            <see cref="T:BO4E.meta.MappingAttribute" />
-            .
-            <seealso cref="T:BO4E.BoEdiMapper" />
-        </member>
-        <member name="F:BO4E.EdiBoMapper.Logger">
-            <summary>
-                project wide logger
-            </summary>
-        </member>
-        <member name="M:BO4E.EdiBoMapper.FromEdi(System.String,System.String)">
-            <summary>
-                transform an EDIFACT value of known type to a BO4E value
-            </summary>
-            <seealso cref="M:BO4E.BoEdiMapper.ToEdi(System.String,System.String)" />
-            <param name="objectName">
-                name of the BO4E data type
-                <example>Netzebene</example>
-            </param>
-            <param name="objectValue">
-                EDIFACT value
-                <example>E06</example>
-            </param>
-            <returns>
-                <list type="bullet">
-                    <item>
-                        <description>
-                            <code>null</code> if the objectValue is null or no mapping is specified for the given
-                            type/value combination
-                        </description>
-                    </item>
-                    <item>
-                        <description>the corresponding BO4E value</description>
-                    </item>
-                    <item>
-                        <description>
-                            objectValue iff no mapping was defined but objectValue is already a valid BO4E value (e.g. for
-                            "Landescode"s)
-                        </description>
-                    </item>
-                </list>
-            </returns>
-            <example>
-                <code>
-            string bo4eValue = EdiBoMapper.fromEdi("Netzebene", "E06"); // returns "NSP"
-            </code>
-            </example>
-        </member>
         <member name="T:BO4E.EnergyIdentificationCodes.EicType">
             <summary>
             Types of the EIC codes
@@ -4482,7 +4447,7 @@
         </member>
         <member name="T:BO4E.ENUM.Anfragetyp">
             <summary>
-            Typ/Art der Anfrage (ORDERS ORDRSP IMD 7081)
+            Typ/Art der Anfrage (ORDERS/ORDRSP/QUOTES IMD 7081)
             Segment heißt entweder Produkt-/ Leistungsbeschreibung, Abonnement oder Lieferrichtung.
             </summary>
         </member>
@@ -4631,18 +4596,31 @@
         </member>
         <member name="T:BO4E.ENUM.ArithmetischeOperation">
             <summary>Mit dieser Aufzählung können arithmetische Operationen festgelegt werden.</summary>
+            <remarks>Das wird z.B. in der UTILTS SG9+CAV Datenelement 7111 verwendet</remarks>
         </member>
         <member name="F:BO4E.ENUM.ArithmetischeOperation.ADDITION">
             <summary>Es wird addiert</summary>
+            <remarks>UTILTS SG9 CAV Z69</remarks>
         </member>
         <member name="F:BO4E.ENUM.ArithmetischeOperation.SUBTRAKTION">
             <summary>Es wird subtrahiert</summary>
+            <remarks>UTILTS SG9 CAV Z70</remarks>
         </member>
         <member name="F:BO4E.ENUM.ArithmetischeOperation.MULTIPLIKATION">
             <summary>Es wird multipliziert</summary>
+            <remarks>UTILTS SG9 CAV Z82</remarks>
         </member>
         <member name="F:BO4E.ENUM.ArithmetischeOperation.DIVISION">
-            <summary>Es wird dividiert</summary>
+            <summary>Es wird dividiert (Divisor)</summary>
+            <remarks>UTILTS SG9 CAV Z80</remarks>
+        </member>
+        <member name="F:BO4E.ENUM.ArithmetischeOperation.DIVIDEND">
+            <summary>Es wird dividiert (Divident)</summary>
+            <remarks>UTILTS SG9 CAV Z81</remarks>
+        </member>
+        <member name="F:BO4E.ENUM.ArithmetischeOperation.POSITIVWERT">
+            <summary>Positivwert</summary>
+            <remarks>UTILTS SG9 CAV Z83</remarks>
         </member>
         <member name="T:BO4E.ENUM.AufAbschlagstyp">
             <summary>Festlegung, ob der Auf- oder Abschlag mit relativen oder absoluten Werten erfolgt.</summary>
@@ -5005,6 +4983,35 @@
             <summary>Der Marktlokation ist nicht genau eine Messlokation zugeordnet</summary>
             <remarks>E_0218: A10</remarks>
         </member>
+        <member name="T:BO4E.ENUM.BerechnungsformelNotwendigkeit">
+            <summary>
+            Beschreibt, ob eine Berechnungsformel notwendig ist
+            </summary>
+            <remarks>Enspricht dem UTILTS SG5+STS Datenelement 4405 "Status der Berechnungsformel"</remarks>
+        </member>
+        <member name="F:BO4E.ENUM.BerechnungsformelNotwendigkeit.BERECHNUNGSFORMEL_NOTWENDIG">
+            <summary>
+            Berechnungsformel angefügt
+            </summary>
+            <remarks>Z33</remarks>
+        </member>
+        <member name="F:BO4E.ENUM.BerechnungsformelNotwendigkeit.BERECHNUNGSFORMEL_MUSS_ANGEFRAGT_WERDEN">
+            <summary>
+            Berechnungsformel muss beim Absender angefragt werden
+            </summary>
+            <remarks>Z34</remarks>
+        </member>
+        <member name="F:BO4E.ENUM.BerechnungsformelNotwendigkeit.BERECHNUNGSFORMEL_TRIVIAL">
+            <summary>
+            Berechnungsformel besitzt keine Rechenoperation
+            </summary>
+            <remarks>Z40</remarks>
+        </member>
+        <member name="F:BO4E.ENUM.BerechnungsformelNotwendigkeit.BERECHNUNGSFORMEL_NICHT_NOTWENDIG">
+            <summary>
+            Berechnungsformel ist nicht erforderlich
+            </summary>
+        </member>
         <member name="T:BO4E.ENUM.BerichtStatus">
             <summary>Status des Statusbericht</summary>
         </member>
@@ -5237,678 +5244,6 @@
         <member name="F:BO4E.ENUM.Dienstleistungstyp.INKASSOKOSTEN">
             <summary>Inkassokosten</summary>
         </member>
-        <member name="T:BO4E.ENUM.EDI.BDEWArtikelnummerEdi">
-            <summary>
-                EDIFACT values of <see cref="T:BO4E.ENUM.BDEWArtikelnummer" />
-            </summary>
-            <author>Hochfrequenz Unternehmensberatung GmbH</author>
-        </member>
-        <member name="F:BO4E.ENUM.EDI.BDEWArtikelnummerEdi._9990001000053">
-            <inheritdoc cref="F:BO4E.ENUM.BDEWArtikelnummer.LEISTUNG" />
-        </member>
-        <member name="F:BO4E.ENUM.EDI.BDEWArtikelnummerEdi._9990001000079">
-            <inheritdoc cref="F:BO4E.ENUM.BDEWArtikelnummer.LEISTUNG_PAUSCHAL" />
-        </member>
-        <member name="F:BO4E.ENUM.EDI.BDEWArtikelnummerEdi._9990001000087">
-            <inheritdoc cref="F:BO4E.ENUM.BDEWArtikelnummer.GRUNDPREIS" />
-        </member>
-        <member name="F:BO4E.ENUM.EDI.BDEWArtikelnummerEdi._9990001000128">
-            <inheritdoc cref="F:BO4E.ENUM.BDEWArtikelnummer.REGELENERGIE_ARBEIT" />
-        </member>
-        <member name="F:BO4E.ENUM.EDI.BDEWArtikelnummerEdi._9990001000136">
-            <inheritdoc cref="F:BO4E.ENUM.BDEWArtikelnummer.REGELENERGIE_LEISTUNG" />
-        </member>
-        <member name="F:BO4E.ENUM.EDI.BDEWArtikelnummerEdi._9990001000144">
-            <inheritdoc cref="F:BO4E.ENUM.BDEWArtikelnummer.NOTSTROMLIEFERUNG_ARBEIT" />
-        </member>
-        <member name="F:BO4E.ENUM.EDI.BDEWArtikelnummerEdi._9990001000152">
-            <inheritdoc cref="F:BO4E.ENUM.BDEWArtikelnummer.NOTSTROMLIEFERUNG_LEISTUNG" />
-        </member>
-        <member name="F:BO4E.ENUM.EDI.BDEWArtikelnummerEdi._9990001000160">
-            <inheritdoc cref="F:BO4E.ENUM.BDEWArtikelnummer.RESERVENETZKAPAZITAET" />
-        </member>
-        <member name="F:BO4E.ENUM.EDI.BDEWArtikelnummerEdi._9990001000178">
-            <inheritdoc cref="F:BO4E.ENUM.BDEWArtikelnummer.RESERVELEISTUNG" />
-        </member>
-        <member name="F:BO4E.ENUM.EDI.BDEWArtikelnummerEdi._9990001000186">
-            <inheritdoc cref="F:BO4E.ENUM.BDEWArtikelnummer.ZUSAETZLICHE_ABLESUNG" />
-        </member>
-        <member name="F:BO4E.ENUM.EDI.BDEWArtikelnummerEdi._9990001000219">
-            <inheritdoc cref="F:BO4E.ENUM.BDEWArtikelnummer.PRUEFGEBUEHREN_AUSSERPLANMAESSIG" />
-        </member>
-        <member name="F:BO4E.ENUM.EDI.BDEWArtikelnummerEdi._9990001000269">
-            <inheritdoc cref="F:BO4E.ENUM.BDEWArtikelnummer.WIRKARBEIT" />
-        </member>
-        <member name="F:BO4E.ENUM.EDI.BDEWArtikelnummerEdi._9990001000285">
-            <inheritdoc cref="F:BO4E.ENUM.BDEWArtikelnummer.SINGULAER_GENUTZTE_BETRIEBSMITTEL" />
-        </member>
-        <member name="F:BO4E.ENUM.EDI.BDEWArtikelnummerEdi._9990001000334">
-            <inheritdoc cref="F:BO4E.ENUM.BDEWArtikelnummer.ABGABE_KWKG" />
-        </member>
-        <member name="F:BO4E.ENUM.EDI.BDEWArtikelnummerEdi._9990001000376">
-            <inheritdoc cref="F:BO4E.ENUM.BDEWArtikelnummer.ABSCHLAG" />
-        </member>
-        <member name="F:BO4E.ENUM.EDI.BDEWArtikelnummerEdi._9990001000417">
-            <inheritdoc cref="F:BO4E.ENUM.BDEWArtikelnummer.KONZESSIONSABGABE" />
-        </member>
-        <member name="F:BO4E.ENUM.EDI.BDEWArtikelnummerEdi._9990001000433">
-            <inheritdoc cref="F:BO4E.ENUM.BDEWArtikelnummer.ENTGELT_FERNAUSLESUNG" />
-        </member>
-        <member name="F:BO4E.ENUM.EDI.BDEWArtikelnummerEdi._9990001000475">
-            <inheritdoc cref="F:BO4E.ENUM.BDEWArtikelnummer.UNTERMESSUNG" />
-        </member>
-        <member name="F:BO4E.ENUM.EDI.BDEWArtikelnummerEdi._9990001000508">
-            <inheritdoc cref="F:BO4E.ENUM.BDEWArtikelnummer.BLINDMEHRARBEIT" />
-        </member>
-        <member name="F:BO4E.ENUM.EDI.BDEWArtikelnummerEdi._9990001000532">
-            <inheritdoc cref="F:BO4E.ENUM.BDEWArtikelnummer.ENTGELT_ABRECHNUNG" />
-        </member>
-        <member name="F:BO4E.ENUM.EDI.BDEWArtikelnummerEdi._9990001000540">
-            <inheritdoc cref="F:BO4E.ENUM.BDEWArtikelnummer.SPERRKOSTEN" />
-        </member>
-        <member name="F:BO4E.ENUM.EDI.BDEWArtikelnummerEdi._9990001000558">
-            <inheritdoc cref="F:BO4E.ENUM.BDEWArtikelnummer.ENTSPERRKOSTEN" />
-        </member>
-        <member name="F:BO4E.ENUM.EDI.BDEWArtikelnummerEdi._9990001000566">
-            <inheritdoc cref="F:BO4E.ENUM.BDEWArtikelnummer.MAHNKOSTEN" />
-        </member>
-        <member name="F:BO4E.ENUM.EDI.BDEWArtikelnummerEdi._9990001000574">
-            <inheritdoc cref="F:BO4E.ENUM.BDEWArtikelnummer.MEHR_MINDERMENGEN" />
-        </member>
-        <member name="F:BO4E.ENUM.EDI.BDEWArtikelnummerEdi._9990001000582">
-            <inheritdoc cref="F:BO4E.ENUM.BDEWArtikelnummer.INKASSOKOSTEN" />
-        </member>
-        <member name="F:BO4E.ENUM.EDI.BDEWArtikelnummerEdi._9990001000590">
-            <inheritdoc cref="F:BO4E.ENUM.BDEWArtikelnummer.BLINDMEHRLEISTUNG" />
-        </member>
-        <member name="F:BO4E.ENUM.EDI.BDEWArtikelnummerEdi._9990001000615">
-            <inheritdoc cref="F:BO4E.ENUM.BDEWArtikelnummer.ENTGELT_MESSUNG_ABLESUNG" />
-        </member>
-        <member name="F:BO4E.ENUM.EDI.BDEWArtikelnummerEdi._9990001000623">
-            <inheritdoc cref="F:BO4E.ENUM.BDEWArtikelnummer.ENTGELT_EINBAU_BETRIEB_WARTUNG_MESSTECHNIK" />
-        </member>
-        <member name="F:BO4E.ENUM.EDI.BDEWArtikelnummerEdi._9990001000631">
-            <inheritdoc cref="F:BO4E.ENUM.BDEWArtikelnummer.AUSGLEICHSENERGIE" />
-        </member>
-        <member name="F:BO4E.ENUM.EDI.BDEWArtikelnummerEdi._9990001000649">
-            <inheritdoc cref="F:BO4E.ENUM.BDEWArtikelnummer.ZAEHLEINRICHTUNG" />
-        </member>
-        <member name="F:BO4E.ENUM.EDI.BDEWArtikelnummerEdi._9990001000657">
-            <inheritdoc cref="F:BO4E.ENUM.BDEWArtikelnummer.WANDLER_MENGENUMWERTER" />
-        </member>
-        <member name="F:BO4E.ENUM.EDI.BDEWArtikelnummerEdi._9990001000665">
-            <inheritdoc cref="F:BO4E.ENUM.BDEWArtikelnummer.KOMMUNIKATIONSEINRICHTUNG" />
-        </member>
-        <member name="F:BO4E.ENUM.EDI.BDEWArtikelnummerEdi._9990001000673">
-            <inheritdoc cref="F:BO4E.ENUM.BDEWArtikelnummer.TECHNISCHE_STEUEREINRICHTUNG" />
-        </member>
-        <member name="F:BO4E.ENUM.EDI.BDEWArtikelnummerEdi._9990001000681">
-            <inheritdoc cref="F:BO4E.ENUM.BDEWArtikelnummer.PARAGRAF_19_STROM_NEV_UMLAGE" />
-        </member>
-        <member name="F:BO4E.ENUM.EDI.BDEWArtikelnummerEdi._9990001000699">
-            <inheritdoc cref="F:BO4E.ENUM.BDEWArtikelnummer.BEFESTIGUNGSEINRICHTUNG" />
-        </member>
-        <member name="F:BO4E.ENUM.EDI.BDEWArtikelnummerEdi._9990001000706">
-            <inheritdoc cref="F:BO4E.ENUM.BDEWArtikelnummer.OFFSHORE_HAFTUNGSUMLAGE" />
-        </member>
-        <member name="F:BO4E.ENUM.EDI.BDEWArtikelnummerEdi._9990001000714">
-            <inheritdoc cref="F:BO4E.ENUM.BDEWArtikelnummer.FIXE_ARBEITSENTGELTKOMPONENTE" />
-        </member>
-        <member name="F:BO4E.ENUM.EDI.BDEWArtikelnummerEdi._9990001000722">
-            <inheritdoc cref="F:BO4E.ENUM.BDEWArtikelnummer.FIXE_LEISTUNGSENTGELTKOMPONENTE" />
-        </member>
-        <member name="F:BO4E.ENUM.EDI.BDEWArtikelnummerEdi._9990001000730">
-            <inheritdoc cref="F:BO4E.ENUM.BDEWArtikelnummer.UMLAGE_ABSCHALTBARE_LASTEN" />
-        </member>
-        <member name="F:BO4E.ENUM.EDI.BDEWArtikelnummerEdi._9990001000748">
-            <inheritdoc cref="F:BO4E.ENUM.BDEWArtikelnummer.MEHRMENGE" />
-        </member>
-        <member name="F:BO4E.ENUM.EDI.BDEWArtikelnummerEdi._9990001000756">
-            <inheritdoc cref="F:BO4E.ENUM.BDEWArtikelnummer.MINDERMENGE" />
-        </member>
-        <member name="F:BO4E.ENUM.EDI.BDEWArtikelnummerEdi._9990001000764">
-            <inheritdoc cref="F:BO4E.ENUM.BDEWArtikelnummer.ENERGIESTEUER" />
-        </member>
-        <member name="F:BO4E.ENUM.EDI.BDEWArtikelnummerEdi._9990001000772">
-            <inheritdoc cref="F:BO4E.ENUM.BDEWArtikelnummer.SMARTMETER_GATEWAY" />
-        </member>
-        <member name="F:BO4E.ENUM.EDI.BDEWArtikelnummerEdi._9990001000780">
-            <inheritdoc cref="F:BO4E.ENUM.BDEWArtikelnummer.STEUERBOX" />
-        </member>
-        <member name="F:BO4E.ENUM.EDI.BDEWArtikelnummerEdi._9990001000798">
-            <inheritdoc cref="F:BO4E.ENUM.BDEWArtikelnummer.MSB_INKL_MESSUNG" />
-        </member>
-        <member name="T:BO4E.ENUM.EDI.EnergierichtungEdi">
-            <summary>
-                EDIFACT values of <see cref="T:BO4E.ENUM.Energierichtung" />
-            </summary>
-        </member>
-        <member name="F:BO4E.ENUM.EDI.EnergierichtungEdi.Z06">
-            <summary>Erzeugung</summary>
-        </member>
-        <member name="F:BO4E.ENUM.EDI.EnergierichtungEdi.Z07">
-            <summary>Verbrauch</summary>
-        </member>
-        <member name="T:BO4E.ENUM.EDI.FernschaltungEdi">
-            <summary>
-                Fernschaltung
-                EDIFACT values of <see cref="T:BO4E.ENUM.Fernschaltung" />
-            </summary>
-            <author>Hochfrequenz Unternehmensberatung GmbH</author>
-        </member>
-        <member name="F:BO4E.ENUM.EDI.FernschaltungEdi.Z06">
-            <summary>Z06: vorhanden</summary>
-        </member>
-        <member name="F:BO4E.ENUM.EDI.FernschaltungEdi.Z07">
-            <summary>Z07: nicht vorhanden</summary>
-        </member>
-        <member name="T:BO4E.ENUM.EDI.GeraetetypEdi">
-            <summary>
-                EDIFACT values of <see cref="T:BO4E.ENUM.Geraetetyp" />
-            </summary>
-            <author>Hochfrequenz Unternehmensberatung GmbH</author>
-        </member>
-        <member name="F:BO4E.ENUM.EDI.GeraetetypEdi.AHZ">
-            <summary>Analoger Haushaltszähler (Drehstrom)</summary>
-        </member>
-        <member name="F:BO4E.ENUM.EDI.GeraetetypEdi.WSZ">
-            <summary>analoger Wechselstromzähler</summary>
-        </member>
-        <member name="F:BO4E.ENUM.EDI.GeraetetypEdi.LAZ">
-            <summary>Lastgangzähler</summary>
-        </member>
-        <member name="F:BO4E.ENUM.EDI.GeraetetypEdi.MAZ">
-            <summary>Maximumzähler</summary>
-        </member>
-        <member name="F:BO4E.ENUM.EDI.GeraetetypEdi.MME">
-            <summary>moderne Messeinrichtung nach MsbG</summary>
-        </member>
-        <member name="F:BO4E.ENUM.EDI.GeraetetypEdi.DKZ">
-            <summary>Drehkolbengaszähler</summary>
-        </member>
-        <member name="F:BO4E.ENUM.EDI.GeraetetypEdi.BGZ">
-            <summary>Balgengaszähler</summary>
-        </member>
-        <member name="F:BO4E.ENUM.EDI.GeraetetypEdi.TRZ">
-            <summary>Turbinenradgaszähler</summary>
-        </member>
-        <member name="F:BO4E.ENUM.EDI.GeraetetypEdi.UGZ">
-            <summary>Ultraschallgaszähler</summary>
-        </member>
-        <member name="F:BO4E.ENUM.EDI.GeraetetypEdi.WGZ">
-            <summary>Wirbelgaszähler</summary>
-        </member>
-        <member name="F:BO4E.ENUM.EDI.GeraetetypEdi.MRG">
-            <summary>Messdatenregistriergerät</summary>
-        </member>
-        <member name="F:BO4E.ENUM.EDI.GeraetetypEdi.EHZ">
-            <summary>Elektronischer Haushalszähler</summary>
-        </member>
-        <member name="F:BO4E.ENUM.EDI.GeraetetypEdi.IVA">
-            <summary>Individuelle Abstimmung (Sonderausstattung)</summary>
-        </member>
-        <member name="T:BO4E.ENUM.EDI.GeschaeftspartnerrolleEdi">
-            <summary>
-                EDIFACT values of <see cref="T:BO4E.ENUM.Geschaeftspartnerrolle" />.
-            </summary>
-        </member>
-        <member name="F:BO4E.ENUM.EDI.GeschaeftspartnerrolleEdi.SU">
-            <summary>
-                Lieferant / SUpplier
-            </summary>
-        </member>
-        <member name="F:BO4E.ENUM.EDI.GeschaeftspartnerrolleEdi.DEB">
-            <summary>
-                Messstellenbetreiber / Dienstleister
-            </summary>
-        </member>
-        <member name="F:BO4E.ENUM.EDI.GeschaeftspartnerrolleEdi.UD">
-            <summary>
-                Letztverbraucher / Kunde
-            </summary>
-        </member>
-        <member name="F:BO4E.ENUM.EDI.GeschaeftspartnerrolleEdi.MS">
-            <summary>
-                Absender / Marktpartner
-            </summary>
-        </member>
-        <member name="F:BO4E.ENUM.EDI.GeschaeftspartnerrolleEdi.MR">
-            <summary>
-                Empfänger / Marktpartner
-            </summary>
-        </member>
-        <member name="F:BO4E.ENUM.EDI.GeschaeftspartnerrolleEdi.VY">
-            <summary>
-                andere zugehörige Partei / Interessent
-            </summary>
-        </member>
-        <member name="T:BO4E.ENUM.EDI.KontaktartEdi">
-            <summary>
-                EDIFACT values of <see cref="T:BO4E.ENUM.Kontaktart" />
-            </summary>
-        </member>
-        <member name="F:BO4E.ENUM.EDI.KontaktartEdi.EM">
-            <summary>
-                Email
-            </summary>
-        </member>
-        <member name="F:BO4E.ENUM.EDI.KontaktartEdi.FX">
-            <summary>
-                Fax
-            </summary>
-        </member>
-        <member name="F:BO4E.ENUM.EDI.KontaktartEdi.TE">
-            <summary>
-                Telefon
-            </summary>
-        </member>
-        <member name="F:BO4E.ENUM.EDI.KontaktartEdi.AJ">
-            <summary>
-                weiteres Telefon
-            </summary>
-        </member>
-        <member name="F:BO4E.ENUM.EDI.KontaktartEdi.AL">
-            <summary>
-                Handy
-            </summary>
-        </member>
-        <member name="T:BO4E.ENUM.EDI.MesswerterfassungEdi">
-            <summary>
-                Messwerterfassung
-                EDIFACT values of <see cref="T:BO4E.ENUM.Messwerterfassung" />
-            </summary>
-            <author>Hochfrequenz Unternehmensberatung GmbH</author>
-        </member>
-        <member name="F:BO4E.ENUM.EDI.MesswerterfassungEdi.AMR">
-            <summary>AMR: fernauslesbare Zähler</summary>
-        </member>
-        <member name="F:BO4E.ENUM.EDI.MesswerterfassungEdi.MMR">
-            <summary>MMR: manuell ausgelesene Zähler</summary>
-        </member>
-        <member name="T:BO4E.ENUM.EDI.NetzebeneEdi">
-            <summary>
-                EDIFACT values of <see cref="T:BO4E.ENUM.Netzebene" />
-            </summary>
-        </member>
-        <member name="F:BO4E.ENUM.EDI.NetzebeneEdi.E03">
-            <summary>Höchstspannung</summary>
-        </member>
-        <member name="F:BO4E.ENUM.EDI.NetzebeneEdi.E04">
-            <summary>Hochspannung</summary>
-        </member>
-        <member name="F:BO4E.ENUM.EDI.NetzebeneEdi.E05">
-            <summary>Mittelspannung</summary>
-        </member>
-        <member name="F:BO4E.ENUM.EDI.NetzebeneEdi.E06">
-            <summary>Niederspannung</summary>
-        </member>
-        <member name="F:BO4E.ENUM.EDI.NetzebeneEdi.E07">
-            <summary>Nös/HS Umspannung</summary>
-        </member>
-        <member name="F:BO4E.ENUM.EDI.NetzebeneEdi.E08">
-            <summary>HS/MS Umspannung</summary>
-        </member>
-        <member name="F:BO4E.ENUM.EDI.NetzebeneEdi.E09">
-            <summary>MS/NS Umspannung</summary>
-        </member>
-        <member name="F:BO4E.ENUM.EDI.NetzebeneEdi.Y01">
-            <summary>Hochdruck</summary>
-        </member>
-        <member name="F:BO4E.ENUM.EDI.NetzebeneEdi.Y02">
-            <summary>Mitteldruck</summary>
-        </member>
-        <member name="F:BO4E.ENUM.EDI.NetzebeneEdi.Y03">
-            <summary>Niederdruck</summary>
-        </member>
-        <member name="T:BO4E.ENUM.EDI.NetznutzungsabrechnungsgrundlageEdi">
-            <summary>
-                EDIFACT values of <see cref="T:BO4E.ENUM.Netznutzungsabrechnungsgrundlage" />
-            </summary>
-            <author>Netznutzungsabrechnungsgrundlage</author>
-        </member>
-        <member name="F:BO4E.ENUM.EDI.NetznutzungsabrechnungsgrundlageEdi.Z12">
-            <summary>Z12: Lieferschein</summary>
-        </member>
-        <member name="F:BO4E.ENUM.EDI.NetznutzungsabrechnungsgrundlageEdi.Z13">
-            <summary>Z13: Abweichend vertraglich mit Anschlussnutzer vereinbarte Grundlage</summary>
-        </member>
-        <member name="T:BO4E.ENUM.EDI.NetznutzungsabrechnungsvarianteEdi">
-            <summary>
-                EDIFACT values of <see cref="T:BO4E.ENUM.Netznutzungsabrechnungsvariante" />
-            </summary>
-            <author>Hochfrequenz Unternehmensberatung GmbH</author>
-        </member>
-        <member name="F:BO4E.ENUM.EDI.NetznutzungsabrechnungsvarianteEdi.Z14">
-            <summary>Z14: Arbeitspreis/Grundpreis</summary>
-        </member>
-        <member name="F:BO4E.ENUM.EDI.NetznutzungsabrechnungsvarianteEdi.Z15">
-            <summary>Z15: Arbeitspreis/Leistungspreis</summary>
-        </member>
-        <member name="T:BO4E.ENUM.EDI.NetznutzungsvertragEdi">
-            <summary>
-                EDIFACT values of <see cref="T:BO4E.ENUM.Netznutzungsvertragsart" />
-            </summary>
-            <author>Hochfrequenz Unternehmensberatung GmbH</author>
-        </member>
-        <member name="F:BO4E.ENUM.EDI.NetznutzungsvertragEdi.Z08">
-            <summary>Z08: Direkter Vertrag zwischen Kunden und NB</summary>
-        </member>
-        <member name="F:BO4E.ENUM.EDI.NetznutzungsvertragEdi.Z09">
-            <summary>Z09: Vertrag zwischen Lieferanten und NB</summary>
-        </member>
-        <member name="T:BO4E.ENUM.EDI.NetznutzungszahlerEdi">
-            <summary>
-                EDIFACT values of <see cref="T:BO4E.ENUM.Netznutzungszahler" />
-            </summary>
-            <author>Hochfrequenz Unternehmensberatung GmbH</author>
-        </member>
-        <member name="F:BO4E.ENUM.EDI.NetznutzungszahlerEdi.Z10">
-            <summary>Z10: Kunde</summary>
-        </member>
-        <member name="F:BO4E.ENUM.EDI.NetznutzungszahlerEdi.Z11">
-            <summary>Z11: Lieferant</summary>
-        </member>
-        <member name="T:BO4E.ENUM.EDI.RollencodetypEdi">
-            <summary>
-                EDIFACT values of <see cref="T:BO4E.ENUM.Rollencodetyp" />
-            </summary>
-            <author>Hochfrequenz Unternehmensberatung GmbH</author>
-        </member>
-        <member name="F:BO4E.ENUM.EDI.RollencodetypEdi._293">
-            <summary>DE, BDEW (Bundesverband der Energie und Wasserwirtschaft e.V.)</summary>
-        </member>
-        <member name="F:BO4E.ENUM.EDI.RollencodetypEdi._332">
-            <summary>DE, DVGW Service &amp; Consult GmbH</summary>
-        </member>
-        <member name="T:BO4E.ENUM.EDI.SchwachlastfaehigEdi">
-            <summary>SchwachlastfaehigEdi Marktlokation</summary>
-            <author>Hochfrequenz Unternehmensberatung GmbH</author>
-        </member>
-        <member name="F:BO4E.ENUM.EDI.SchwachlastfaehigEdi.Z59">
-            <summary>Z59: Nicht-Schwachlastfähig</summary>
-        </member>
-        <member name="F:BO4E.ENUM.EDI.SchwachlastfaehigEdi.Z60">
-            <summary>Z60: Schwachlast fähig</summary>
-        </member>
-        <member name="T:BO4E.ENUM.EDI.TarifartEdi">
-            <summary>
-                EDIFACT values of <see cref="T:BO4E.ENUM.Tarifart" />
-            </summary>
-            <author>Hochfrequenz Unternehmensberatung GmbH</author>
-        </member>
-        <member name="F:BO4E.ENUM.EDI.TarifartEdi.ETZ">
-            <summary>Eintarif</summary>
-        </member>
-        <member name="F:BO4E.ENUM.EDI.TarifartEdi.ZTZ">
-            <summary>Zweitarif</summary>
-        </member>
-        <member name="F:BO4E.ENUM.EDI.TarifartEdi.NTZ">
-            <summary>Mehrtarif</summary>
-        </member>
-        <member name="T:BO4E.ENUM.EDI.UnterbrechbarkeitEdi">
-            <summary>
-                Stromverbrauchsart/Unterbrechbarkeit Marktlokation
-                EDIFACT values of <see cref="T:BO4E.ENUM.Unterbrechbarkeit" />
-            </summary>
-            <author>Hochfrequenz Unternehmensberatung GmbH</author>
-        </member>
-        <member name="F:BO4E.ENUM.EDI.UnterbrechbarkeitEdi.Unterbrechbare_Verbrauchseinrichtung">
-            <summary>Z62: unterbrechbare Verbrauchseinrichtung</summary>
-        </member>
-        <member name="F:BO4E.ENUM.EDI.UnterbrechbarkeitEdi.Nicht_Unterbrechbare_Verbrauchseinrichtung">
-            <summary>Z63: nicht unterbrechbare Verbrauchseinrichtung</summary>
-        </member>
-        <member name="T:BO4E.ENUM.EDI.UTILMD.UTILMD9013">
-            <summary>
-                Zur Angabe eines Status. Dieses Segment wird benutzt um den Transaktionsgrund mitzuteilen.
-                Der Transaktionsgrund beschreibt den Geschäftsvorfall zur Kategorie genauer. Dies dient der
-                Plausibilisierung und Prozesssteuerung.Die Erläuterung zu den einzelnen Transaktionsgründen
-                ist im DE9013 beschrieben
-            </summary>
-        </member>
-        <member name="F:BO4E.ENUM.EDI.UTILMD.UTILMD9013.E01">
-            <summary>Ein/Auszug (Umzug)</summary>
-            Kunde verlässt oder bezieht eine schon bestehende Marktlokation
-        </member>
-        <member name="F:BO4E.ENUM.EDI.UTILMD.UTILMD9013.E02">
-            <summary>Einzug/Neuanlage</summary>
-            Kunde bezieht erstmals eine Marktlokation (z.B. Neubau)
-        </member>
-        <member name="F:BO4E.ENUM.EDI.UTILMD.UTILMD9013.E03">
-            <summary>Wechsel</summary>
-            <list type="bullet">
-                <item>Kunde bleibt an der Marktlokation, hat nur den Marktpartner gewechselt</item>
-                <item>Marktpartner hat den Kunden gekündigt</item>
-            </list>
-        </member>
-        <member name="F:BO4E.ENUM.EDI.UTILMD.UTILMD9013.E11">
-            <summary>Ablehnung (Messproblem)</summary>
-            Der Absender lehnt die Transaktion ab. Der Marktpartner fordert ein Messverfahren, was in diesem Fall nicht möglich ist bzw. nicht mit dem Leistungsumfang vereinbar ist.
-        </member>
-        <member name="F:BO4E.ENUM.EDI.UTILMD.UTILMD9013.E15">
-            <summary>Zustimmung ohne Korrekturen</summary>
-            Der Absender stimmt der Meldung und den Inhalten des Vorgangs voll zu. Er hat keine Änderungen an den gesendeten Daten vorgenommen. Er kann allerdings Daten gem. seiner Aufgabe im Prozess vervollständigt haben (z.B. der NB bei einer Anmeldung mit dem Standardlastprofil). In diesen Fällen ist Z43 oder Z44 nicht zu verwenden
-        </member>
-        <member name="F:BO4E.ENUM.EDI.UTILMD.UTILMD9013.E17">
-            <summary>Ablehnung wg. Fristüberschreitung</summary>
-            Der Absender lehnt die Transaktion ab. Eine einzuhaltende Frist ist überschritten worden. Bei der Übermittlung von bilanzierungsrelevanten Stammdatenänderungen wird auch eine Ablehnung erfolgen, wenn das Änderungsdatum kein Monatserster ist.
-        </member>
-        <member name="F:BO4E.ENUM.EDI.UTILMD.UTILMD9013.Z01">
-            <summary>
-                Zustimmung mit Terminänderung
-            </summary>
-            Der Absender stimmt der Meldung zu einem abweichenden Termin zu. Mit dieser Kennzeichnung übermittelt der Absender dem Sender der ursprünglichen Meldung, dass diese abgelehnt wurde (Ablehnung zum alten Termin), jedoch eine Zustimmung zu einem abweichenden Termin erfolgte.
-        </member>
-        <member name="F:BO4E.ENUM.EDI.UTILMD.UTILMD9013.Z09">
-            <summary>
-                Ablehnung (Transaktionsgrund unplausibel)
-            </summary>
-            Der Absender lehnt die Transaktion ab. Transaktionsgrund und mitgelieferte Daten passen nicht zusammen.
-        </member>
-        <member name="F:BO4E.ENUM.EDI.UTILMD.UTILMD9013.Z29">
-            <summary>
-                Ablehnung (kein Vertragsverhältnis mehr vorhanden)
-            </summary>
-            Der Absender lehnt die Transaktion ab. Der Kunde wurde zur betreffenden Marktlokation, Messlokation bzw. Tranche identifiziert, das Vertragsverhältnis wurde bereits zu einem früheren Zeitpunkt schon beendet.
-        </member>
-        <member name="F:BO4E.ENUM.EDI.UTILMD.UTILMD9013.Z44">
-            <summary>
-                Zustimmung mit Korrektur von nicht bilanzierungsrel. Daten
-            </summary>
-            Die Zustimmung erfolgt mit Korrektur von nicht bilanzierungsrelevanten Daten in der Antwortnachricht. Die Bilanzierungsrelevanz leitet sich aus der Übersicht der Änderungsmeldungen ab.
-        </member>
-        <member name="F:BO4E.ENUM.EDI.UTILMD.UTILMD9013.ZB6">
-            <summary>
-                Erforderliche Versicherung fehlt
-            </summary>
-        </member>
-        <member name="F:BO4E.ENUM.EDI.UTILMD.UTILMD9013.ZJ4">
-            <summary>
-                Übernahme aufgrund nicht erfolgtem iMS-Einbau
-            </summary>
-        </member>
-        <member name="T:BO4E.ENUM.EDI.UTILMD.UTILMD7433">
-            <summary>
-                Es erfolgt die Angabe, ob ein entsprechender Vertrag zwischen dem Anschlussnutzer und MSB vorliegt.
-                Zusätzlich kann auch noch angegeben werden, ob auch die Vertragsbeendigung mit dem vorigen Vertragspartner vor der
-                Anmeldung beendet wurde und vorliegt.
-            </summary>
-        </member>
-        <member name="F:BO4E.ENUM.EDI.UTILMD.UTILMD7433.Z04">
-            <summary>
-                Vertrag zwischen AN MSB
-            </summary>
-        </member>
-        <member name="F:BO4E.ENUM.EDI.UTILMD.UTILMD7433.Z06">
-            <summary>
-                Vertragsbeendigung liegt vor
-            </summary>
-        </member>
-        <member name="T:BO4E.ENUM.EDI.VerbrauchsartEdi">
-            <summary>
-                EDIFACT values of <see cref="T:BO4E.ENUM.Verbrauchsart" />
-            </summary>
-            <author>Hochfrequenz Unternehmensberatung GmbH</author>
-        </member>
-        <member name="F:BO4E.ENUM.EDI.VerbrauchsartEdi.Z64">
-            <summary>
-                Kraft/Licht
-            </summary>
-            Hierunter ist Strom zu verstehen, der ausschließlich zum Betrieb von
-            Endverbrauchsgeräten (z.B. Radio, Fernseher, Kühlschrank, Beleuchtung...)
-            genutzt wird.
-        </member>
-        <member name="F:BO4E.ENUM.EDI.VerbrauchsartEdi.Z65">
-            <summary>Wärme</summary>
-            Hierunter ist Strom zu verstehen, der zur Wärmebedarfsdeckung (z.B. 
-            Standspeicherheizung, Fußbodenspeicherheizungen, Wärmepumpe....) eingesetzt
-            wird. Bei Nutzung dieses Qualifiers dient die OBIS ausschließlich diesem Zweck. 
-            Hierunter fallen Marktlokationen, bei den die Wärme in aller Regel mit einer 
-            separaten Messung erfasst werden
-        </member>
-        <member name="F:BO4E.ENUM.EDI.VerbrauchsartEdi.Z66">
-            <summary>
-                Kraft/Licht/Wärme
-            </summary>
-            Bei gemeinsam gemessenen Marktlokationen wird Strom sowohl für Endverbrauchsgeräte
-            als auch zur Wärmebedarfsdeckung eingesetzt. Bei diesem kombinierten Verbrauchsverhalten
-            ist dieser Qualifier zu nutzen.
-        </member>
-        <member name="T:BO4E.ENUM.EDI.VerwendungszweckEdi">
-            <summary>
-                Verwendungungszweck der Werte Marktlokation
-                EDIFACT values of <see cref="T:BO4E.ENUM.Verwendungszweck" />
-            </summary>
-            <author>Hochfrequenz Unternehmensberatung GmbH</author>
-        </member>
-        <member name="F:BO4E.ENUM.EDI.VerwendungszweckEdi.Z84">
-            <summary>Z84: Netznutzungsabrechnung</summary>
-        </member>
-        <member name="F:BO4E.ENUM.EDI.VerwendungszweckEdi.Z85">
-            <summary>Z85: Bilanzkreisabrechnung</summary>
-        </member>
-        <member name="F:BO4E.ENUM.EDI.VerwendungszweckEdi.Z86">
-            <summary>Z86: Mehrmindermbengenabrechnung</summary>
-        </member>
-        <member name="F:BO4E.ENUM.EDI.VerwendungszweckEdi.Z47">
-            <summary>Z47: Endkundenabrechnung</summary>
-        </member>
-        <member name="T:BO4E.ENUM.EDI.WaehrungseinheitEdi">
-            <summary>
-                EDIFACT values of <see cref="T:BO4E.ENUM.Waehrungseinheit" />
-            </summary>
-            <author>Hochfrequenz Unternehmensberatung GmbH</author>
-        </member>
-        <member name="F:BO4E.ENUM.EDI.WaehrungseinheitEdi.EUR">
-            <summary>Euro</summary>
-        </member>
-        <member name="T:BO4E.ENUM.EDI.WaermenutzungEdi">
-            <summary>
-                Stromverbrauchsart/Wärmenutzung Marktlokation
-                EDIFACT values of <see cref="T:BO4E.ENUM.Waermenutzung" />
-            </summary>
-            <author>Hochfrequenz Unternehmensberatung GmbH</author>
-        </member>
-        <member name="F:BO4E.ENUM.EDI.WaermenutzungEdi.Z56">
-            <summary>Z56: Speicherheizung</summary>
-        </member>
-        <member name="F:BO4E.ENUM.EDI.WaermenutzungEdi.Z57">
-            <summary>Z57: Wärmepumpe</summary>
-        </member>
-        <member name="F:BO4E.ENUM.EDI.WaermenutzungEdi.Z61">
-            <summary>Z61: Direktheizung</summary>
-        </member>
-        <member name="T:BO4E.ENUM.EDI.WertermittlungsverfahrenEdi">
-            <summary>
-                EDIFACT values of <see cref="T:BO4E.ENUM.Wertermittlungsverfahren" />
-            </summary>
-        </member>
-        <member name="F:BO4E.ENUM.EDI.WertermittlungsverfahrenEdi._220">
-            <summary>
-                Abgelesener Wert (wahrer Wert, abrechnungsrelevant)
-            </summary>
-        </member>
-        <member name="F:BO4E.ENUM.EDI.WertermittlungsverfahrenEdi._67">
-            <summary>
-                Ersatzwert - geschätzt, veranschlagt
-            </summary>
-        </member>
-        <member name="F:BO4E.ENUM.EDI.WertermittlungsverfahrenEdi._201">
-            <summary>
-                Vorschlagswert (nicht abrechnungsrelevant)
-            </summary>
-        </member>
-        <member name="F:BO4E.ENUM.EDI.WertermittlungsverfahrenEdi._20">
-            <summary>
-                Nicht verwendbarer Wert (nicht abrechnungsrelevant)
-            </summary>
-        </member>
-        <member name="T:BO4E.ENUM.EDI.ZaehlerauspraegungEdi">
-            <summary>
-                EDIFACT values of <see cref="T:BO4E.ENUM.Zaehlerauspraegung" />
-            </summary>
-            <author>Hochfrequenz Unternehmensberatung GmbH</author>
-        </member>
-        <member name="F:BO4E.ENUM.EDI.ZaehlerauspraegungEdi.ERZ">
-            <summary>Einrichtungszähler</summary>
-        </member>
-        <member name="F:BO4E.ENUM.EDI.ZaehlerauspraegungEdi.ZRZ">
-            <summary>Zweirichtungszähler</summary>
-        </member>
-        <member name="T:BO4E.ENUM.EDI.ZaehlertypEdi">
-            <summary>
-                EDIFACT values of <see cref="T:BO4E.ENUM.Zaehlertyp" />
-            </summary>
-            <author>Hochfrequenz Unternehmensberatung GmbH</author>
-        </member>
-        <member name="F:BO4E.ENUM.EDI.ZaehlertypEdi.AHZ">
-            <summary>Analoger Haushaltszähler (Drehstrom)</summary>
-        </member>
-        <member name="F:BO4E.ENUM.EDI.ZaehlertypEdi.WSZ">
-            <summary>analoger Wechselstromzähler</summary>
-        </member>
-        <member name="F:BO4E.ENUM.EDI.ZaehlertypEdi.LAZ">
-            <summary>Lastgangzähler</summary>
-        </member>
-        <member name="F:BO4E.ENUM.EDI.ZaehlertypEdi.MAZ">
-            <summary>Maximumzähler</summary>
-        </member>
-        <member name="F:BO4E.ENUM.EDI.ZaehlertypEdi.MME">
-            <summary>moderne Messeinrichtung nach MsbG</summary>
-        </member>
-        <member name="F:BO4E.ENUM.EDI.ZaehlertypEdi.DKZ">
-            <summary>Drehkolbengaszähler</summary>
-        </member>
-        <member name="F:BO4E.ENUM.EDI.ZaehlertypEdi.BGZ">
-            <summary>Balgengaszähler</summary>
-        </member>
-        <member name="F:BO4E.ENUM.EDI.ZaehlertypEdi.TRZ">
-            <summary>Turbinenradgaszähler</summary>
-        </member>
-        <member name="F:BO4E.ENUM.EDI.ZaehlertypEdi.UGZ">
-            <summary>Ultraschallgaszähler</summary>
-        </member>
-        <member name="F:BO4E.ENUM.EDI.ZaehlertypEdi.WGZ">
-            <summary>Wirbelgaszähler</summary>
-        </member>
-        <member name="F:BO4E.ENUM.EDI.ZaehlertypEdi.MRG">
-            <summary>Messdatenregistriergerät</summary>
-        </member>
-        <member name="F:BO4E.ENUM.EDI.ZaehlertypEdi.EHZ">
-            <summary>Elektronischer Haushalszähler</summary>
-        </member>
-        <member name="F:BO4E.ENUM.EDI.ZaehlertypEdi.IVA">
-            <summary>Individuelle Abstimmung (Sonderausstattung)</summary>
-        </member>
-        <member name="T:BO4E.ENUM.EDI.ZeiteinheitEdi">
-            <summary>
-                EDIFACT values of <see cref="T:BO4E.ENUM.Zeiteinheit" />
-            </summary>
-            <author>Hochfrequenz Unternehmensberatung GmbH</author>
-        </member>
-        <member name="F:BO4E.ENUM.EDI.ZeiteinheitEdi.ANN">
-            <summary>Jahr</summary>
-        </member>
         <member name="T:BO4E.ENUM.EncryptionScheme">
             <summary>
                 Available Encryption Schemes
@@ -5934,9 +5269,11 @@
         </member>
         <member name="F:BO4E.ENUM.Energierichtung.AUSSP">
             <summary>Ausspeisung</summary>
+            <remarks>UTILTS DE7037 Z07: Verbrauch</remarks>
         </member>
         <member name="F:BO4E.ENUM.Energierichtung.EINSP">
             <summary>Einspeisung</summary>
+            <remarks>UTILTS DE7037 Z06: Erzeugung</remarks>
         </member>
         <member name="T:BO4E.ENUM.Erzeugungsart">
             <summary>Auflistung der Erzeugungsarten von Energie.</summary>
@@ -9558,6 +8895,12 @@
         </member>
         <member name="F:BO4E.ENUM.Verwendungszweck.ENDKUNDENABRECHNUNG">
             <summary>Z47: Endkundenabrechnung</summary>
+        </member>
+        <member name="F:BO4E.ENUM.Verwendungszweck.UEBERMITTLUNG_AN_DAS_HKNR">
+            <summary>
+            Übermittlung an das Herkunftsnachweisregister (HKNR)
+            </summary>
+            <remarks>Z92</remarks>
         </member>
         <member name="T:BO4E.ENUM.Voraussetzungen">
             <summary>Voraussetzungen, die erfüllt sein müssen, damit dieser Tarif zur Anwendung kommen kann.</summary>
