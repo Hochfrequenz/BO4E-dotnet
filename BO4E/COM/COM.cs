@@ -140,29 +140,6 @@ namespace BO4E.COM
         [DataCategory(DataCategory.USER_PROPERTIES)]
         public IDictionary<string, object> UserProperties { get; set; }
 
-        /// <summary>
-        ///     BO4E components are considered equal iff all of their elements/fields are equal.
-        /// </summary>
-        /// <param name="b">another object</param>
-        /// <returns><code>true</code> iff all elements of this COM and COM b are equal; <code>false</code> otherwise</returns>
-        public override bool Equals(object b)
-        {
-            if (b == null || b.GetType() != GetType()) return false;
-            return Equals(b as COM);
-        }
-
-        /// <inheritdoc />
-        public override int GetHashCode()
-        {
-            var result = 31; // I read online that a medium sized prime was a good choice ;)
-            unchecked
-            {
-                result *= GetType().GetHashCode();
-                return GetType().GetProperties().Where(prop => prop.GetValue(this) != null).Aggregate(result,
-                    (current, prop) => current * (19 + prop.GetValue(this).GetHashCode()));
-            }
-        }
-
         /// <inheritdoc cref="BO4E.BO.BusinessObject.IsValid" />
         public virtual bool IsValid()
         {
