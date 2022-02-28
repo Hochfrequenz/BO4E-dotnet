@@ -58,7 +58,7 @@ namespace BO4E.BO
     [ProtoInclude(23, typeof(Handelsunstimmigkeit))]
     [ProtoInclude(24, typeof(Berechnungsformel))]
     [ProtoInclude(25, typeof(Anfrage))]
-    public abstract class BusinessObject : IEquatable<BusinessObject>, IUserProperties, IOptionalGuid
+    public abstract class BusinessObject : IUserProperties, IOptionalGuid
     {
         /// <summary>
         ///     Fields that are not part of the BO4E-definition are stored in a element, that is

@@ -73,7 +73,7 @@ namespace BO4E.COM
     [ProtoInclude(51, typeof(Zaehlwerk))]
     [ProtoInclude(52, typeof(Zeitraum))]
     [ProtoInclude(53, typeof(Zustaendigkeit))]
-    public abstract class COM : IEquatable<COM>, IUserProperties, IOptionalGuid
+    public abstract class COM : IUserProperties, IOptionalGuid
     {
         /// <inheritdoc cref="BO.BusinessObject.guidSerialized" />
 
