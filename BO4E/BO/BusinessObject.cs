@@ -57,7 +57,7 @@ namespace BO4E.BO
     [ProtoInclude(23, typeof(Handelsunstimmigkeit))]
     [ProtoInclude(24, typeof(Berechnungsformel))]
     [ProtoInclude(25, typeof(Anfrage))]
-    public abstract class BusinessObject : IEquatable<BusinessObject>, IUserProperties, IOptionalGuid
+    public abstract class BusinessObject : IUserProperties, IOptionalGuid
     {
         /// <summary>
         ///     Fields that are not part of the BO4E-definition are stored in a element, that is
@@ -176,30 +176,6 @@ namespace BO4E.BO
         [JsonPropertyName("externeReferenzen")]
         [ProtoMember(4)]
         public List<ExterneReferenz> ExterneReferenzen { get; set; }
-
-        /// <summary>
-        ///     BO4E Business Objects are considered equal iff all of their elements/fields are equal.
-        /// </summary>
-        /// The method throws an argument exception if you try to test invalid BO4E objects for
-        /// equality, e.g. when at least one of the compared objects does lack mandatory fields.
-        /// <param name="b">another Business Object</param>
-        /// <returns>
-        ///     <code>true</code> iff b has the same type as this object and all elements
-        ///     of this and object b are equal; <code>false</code> otherwise
-        /// </returns>
-        public bool Equals(BusinessObject b)
-        {
-            if (b == null || b.GetType() != GetType()) return false;
-            try
-            {
-                return JsonConvert.SerializeObject(this) == JsonConvert.SerializeObject(b);
-            }
-            catch (JsonSerializationException e)
-            {
-                throw new ArgumentException(
-                    $"You must not compare/call equals() on invalid Business Objects: {e.Message}");
-            }
-        }
 
         /// <summary>
         ///     allows adding a GUID to Business Objects for tracking across systems
@@ -454,53 +430,6 @@ namespace BO4E.BO
                 .Where(p => p.GetCustomAttributes(typeof(BoKey), false).Length > 0)
                 .OrderBy(ap => ap.GetCustomAttribute<JsonPropertyAttribute>()?.Order)
                 .ToList();
-        }
-
-        /// <summary>BO4E Business Objects are considered equal iff all of their elements/fields are equal.</summary>
-        /// <param name="b">another object</param>
-        /// <returns>
-        ///     <code>true</code> iff b has the same type as this object and all elements of this and object b are equal;
-        ///     <code>false</code> otherwise
-        /// </returns>
-        public override bool Equals(object b)
-        {
-            if (b == null || b.GetType() != GetType()) return false;
-            return Equals(b as BusinessObject);
-        }
-
-        /// <summary>
-        ///     override hash code generation
-        /// </summary>
-        /// <returns>hash code as int</returns>
-        public override int GetHashCode()
-        {
-            var result = 31; // I read online that a medium sized prime was a good choice ;)
-            unchecked
-            {
-                result *= GetType().GetHashCode();
-                foreach (var prop in GetType().GetProperties())
-                    if (prop.GetValue(this) != null)
-                    {
-                        if (prop.GetValue(this).GetType().IsGenericType &&
-                            prop.GetValue(this).GetType().GetGenericTypeDefinition() == typeof(List<>))
-                        {
-                            var enumerable = prop.GetValue(this) as IEnumerable;
-                            //var listElementType = prop.GetValue(this).GetType().GetGenericArguments()[0];
-                            //var listType = typeof(List<>).MakeGenericType(listElementType);
-                            var index = 0;
-                            result = enumerable.Cast<object>().Aggregate(result,
-                                (current, listItem) => current * (19 + 17 * ++index * listItem.GetHashCode()));
-                        }
-                        else
-                        {
-                            // Using + 19 because the default hash code of uninitialised enums is zero.
-                            // This would screw up the calculation such that all objects with at least one null value had the same hash code, namely 0.
-                            result *= 19 + prop.GetValue(this).GetHashCode();
-                        }
-                    }
-
-                return result;
-            }
         }
 
         /// <summary>
