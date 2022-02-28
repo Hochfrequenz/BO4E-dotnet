@@ -4,6 +4,7 @@ using System.IO;
 using BO4E.BO;
 using BO4E.COM;
 using BO4E.ENUM;
+using FluentAssertions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using ProtoBuf;
 
@@ -70,7 +71,7 @@ namespace TestBO4E
             Assert.IsFalse(emRoundTrip.Energieverbrauch.Last().Guid.HasValue);
             */
 
-            Assert.AreEqual(em, emRoundTrip);
+            em.Should().BeEquivalentTo(emRoundTrip, opts => opts.ComparingByMembers<Energiemenge>());
         }
 
         /// <summary>
