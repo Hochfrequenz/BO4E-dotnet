@@ -51,7 +51,6 @@ namespace TestBO4E.Encryption
         }
 
         [TestMethod]
-        [Obsolete]
         public void TestBOEncryption()
         {
             var files = Directory.GetFiles("encrypterTests/bo/", "*.json"); // 

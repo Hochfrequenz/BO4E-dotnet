@@ -72,7 +72,6 @@ namespace TestBO4E
         }
 
         [TestMethod]
-        [Obsolete]
         public void TestBoEdiReplacement()
         {
             var files = Directory.GetFiles("BoEdiMapper/", "*.json");

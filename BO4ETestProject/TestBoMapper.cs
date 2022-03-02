@@ -18,7 +18,6 @@ namespace TestBO4E
     public class TestBoMapper
     {
         [TestMethod]
-        [Obsolete]
         public void TestBoMapping()
         {
             var files = Directory.GetFiles("BoMapperTests/", "*.json");
@@ -261,7 +260,6 @@ namespace TestBO4E
 
 
         [TestMethod]
-        [Obsolete]
         public void TestBoNames()
         {
             var testResult = BoMapper.GetValidBoNames();
@@ -273,7 +271,6 @@ namespace TestBO4E
         }
 
         [TestMethod]
-        [Obsolete]
         public void TestBoNameTyping()
         {
             Assert.AreEqual(typeof(Benachrichtigung), BoMapper.GetTypeForBoName("Benachrichtigung"));
