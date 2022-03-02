@@ -6,12 +6,16 @@ using System.Linq;
 using System.Runtime.Serialization;
 using System.Text.Json;
 using System.Text.Json.Serialization;
+
 using BO4E.COM;
 using BO4E.ENUM;
 using BO4E.meta;
 using BO4E.meta.LenientConverters;
+
 using Newtonsoft.Json;
+
 using ProtoBuf;
+
 using JsonSerializer = System.Text.Json.JsonSerializer;
 
 namespace BO4E.BO
@@ -26,12 +30,13 @@ namespace BO4E.BO
         ///     static serializer options for Energiemengenconverter
         /// </summary>
         public static JsonSerializerOptions EnergiemengeSerializerOptions;
-
+        /// <summary>
+        /// Semaphore to protect access to the serializer
+        /// </summary>
+        public static System.Threading.SemaphoreSlim SerializerSemaphore = new System.Threading.SemaphoreSlim(1);
         static Energiemenge()
         {
-            EnergiemengeSerializerOptions = LenientParsing.MOST_LENIENT.GetJsonSerializerOptions();
-            EnergiemengeSerializerOptions.Converters.Remove(
-                EnergiemengeSerializerOptions.Converters.First(s => s.GetType() == typeof(EnergiemengeConverter)));
+
         }
 
         /// <summary>
@@ -173,6 +178,14 @@ namespace BO4E.BO
         /// <returns></returns>
         public override Energiemenge Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
         {
+            Energiemenge.SerializerSemaphore.Wait();
+            if (Energiemenge.EnergiemengeSerializerOptions == null)
+            {
+                Energiemenge.EnergiemengeSerializerOptions = new JsonSerializerOptions(options);
+                Energiemenge.EnergiemengeSerializerOptions.Converters.Remove(
+                    Energiemenge.EnergiemengeSerializerOptions.Converters.First(s => s.GetType() == typeof(EnergiemengeConverter)));
+            }
+            Energiemenge.SerializerSemaphore.Release();
             var e = JsonSerializer.Deserialize<Energiemenge>(ref reader, Energiemenge.EnergiemengeSerializerOptions);
             if (e.Energieverbrauch == null)
             {
@@ -215,7 +228,15 @@ namespace BO4E.BO
         /// <param name="options"></param>
         public override void Write(Utf8JsonWriter writer, Energiemenge value, JsonSerializerOptions options)
         {
-            JsonSerializer.Serialize(writer, value);
+            Energiemenge.SerializerSemaphore.Wait();
+            if (Energiemenge.EnergiemengeSerializerOptions == null)
+            {
+                Energiemenge.EnergiemengeSerializerOptions = new JsonSerializerOptions(options);
+                Energiemenge.EnergiemengeSerializerOptions.Converters.Remove(
+                    Energiemenge.EnergiemengeSerializerOptions.Converters.First(s => s.GetType() == typeof(EnergiemengeConverter)));
+            }
+            Energiemenge.SerializerSemaphore.Release();
+            JsonSerializer.Serialize(writer, value, Energiemenge.EnergiemengeSerializerOptions);
         }
     }
 }

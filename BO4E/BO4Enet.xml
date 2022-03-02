@@ -870,6 +870,11 @@
                 static serializer options for Energiemengenconverter
             </summary>
         </member>
+        <member name="F:BO4E.BO.Energiemenge.SerializerSemaphore">
+            <summary>
+            Semaphore to protect access to the serializer
+            </summary>
+        </member>
         <member name="P:BO4E.BO.Energiemenge.LokationsId">
             <summary>
                 Eindeutige Nummer der Marktlokation bzw. der Messlokation, zu der die Energiemenge gehört
