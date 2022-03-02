@@ -29,8 +29,11 @@ namespace BO4E.BO
         /// <summary>
         ///     static serializer options for Vertragsconverter
         /// </summary>
-        public static JsonSerializerOptions VertragsSerializerOptions;
-
+        public static JsonSerializerOptions VertragsSerializerOptions = null;
+        /// <summary>
+        /// Semaphore to protect access to the serializer
+        /// </summary>
+        public static System.Threading.SemaphoreSlim SerializerSemaphore = new System.Threading.SemaphoreSlim(1);
         static Vertrag()
         {
             VertragsSerializerOptions = LenientParsing.MOST_LENIENT.GetJsonSerializerOptions();
@@ -207,6 +210,14 @@ namespace BO4E.BO
         /// <returns></returns>
         public override Vertrag Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
         {
+            Vertrag.SerializerSemaphore.Wait();
+            if (Vertrag.VertragsSerializerOptions == null)
+            {
+                Vertrag.VertragsSerializerOptions = new JsonSerializerOptions(options);
+                Vertrag.VertragsSerializerOptions.Converters.Remove(
+                    Vertrag.VertragsSerializerOptions.Converters.First(s => s.GetType() == typeof(VertragsConverter)));
+            }
+            Vertrag.SerializerSemaphore.Release();
             var v = JsonSerializer.Deserialize<Vertrag>(ref reader, Vertrag.VertragsSerializerOptions);
             if ((v.Vertragsteile == null || v.Vertragsteile.Count == 0) && v.UserProperties != null &&
                 v.UserProperties.ContainsKey("lokationsId"))
@@ -220,6 +231,7 @@ namespace BO4E.BO
                     }
                 };
             return v;
+
         }
 
         /// <summary>
@@ -229,6 +241,14 @@ namespace BO4E.BO
         /// <param name="options"></param>
         public override void Write(Utf8JsonWriter writer, Vertrag value, JsonSerializerOptions options)
         {
+            Vertrag.SerializerSemaphore.Wait();
+            if (Vertrag.VertragsSerializerOptions == null)
+            {
+                Vertrag.VertragsSerializerOptions = new JsonSerializerOptions(options);
+                Vertrag.VertragsSerializerOptions.Converters.Remove(
+                    Vertrag.VertragsSerializerOptions.Converters.First(s => s.GetType() == typeof(VertragsConverter)));
+            }
+            Vertrag.SerializerSemaphore.Release();
             JsonSerializer.Serialize(writer, value, Vertrag.VertragsSerializerOptions);
         }
     }
