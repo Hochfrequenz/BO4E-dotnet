@@ -35,12 +35,7 @@ namespace BO4E.BO
         /// </summary>
         public static System.Threading.SemaphoreSlim SerializerSemaphore = new System.Threading.SemaphoreSlim(1);
         static Vertrag()
-        {
-            VertragsSerializerOptions = LenientParsing.MOST_LENIENT.GetJsonSerializerOptions();
-            VertragsSerializerOptions.DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingDefault;
-            VertragsSerializerOptions.WriteIndented = true;
-            VertragsSerializerOptions.Converters.Remove(
-                VertragsSerializerOptions.Converters.First(s => s.GetType() == typeof(VertragsConverter)));
+        {         
         }
 
         /// <summary>
