@@ -18,7 +18,6 @@ namespace TestBO4E
     public class TestBoMapperSystemText
     {
         [TestMethod]
-        [Obsolete]
         public void TestBoMapping()
         {
             var files = Directory.GetFiles("BoMapperTests/", "*.json");
@@ -56,7 +55,7 @@ namespace TestBO4E
                 {
                     bo = JsonSerializer.Deserialize(json.RootElement.GetProperty("input").GetRawText(),
                         BoMapper.GetTypeForBoName(json.RootElement.GetProperty("objectName").GetString()),
-                        lenients.GetJsonSerializerOptions()) as BusinessObject;
+                        LenientParsing.MOST_LENIENT.GetJsonSerializerOptions()) as BusinessObject;
                 }
 
                 var regularOutputString = JsonSerializer.Serialize(bo, bo.GetType());

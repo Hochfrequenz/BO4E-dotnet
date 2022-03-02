@@ -715,18 +715,6 @@
                 <see cref="T:BO4E.COM.ExterneReferenz" />)
             </summary>
         </member>
-        <member name="M:BO4E.BO.BusinessObject.Equals(BO4E.BO.BusinessObject)">
-            <summary>
-                BO4E Business Objects are considered equal iff all of their elements/fields are equal.
-            </summary>
-            The method throws an argument exception if you try to test invalid BO4E objects for
-            equality, e.g. when at least one of the compared objects does lack mandatory fields.
-            <param name="b">another Business Object</param>
-            <returns>
-                <code>true</code> iff b has the same type as this object and all elements
-                of this and object b are equal; <code>false</code> otherwise
-            </returns>
-        </member>
         <member name="P:BO4E.BO.BusinessObject.Guid">
             <summary>
                 allows adding a GUID to Business Objects for tracking across systems
@@ -862,20 +850,6 @@
             </summary>
             <param name="boType">Business Object type</param>
             <returns>A list of FieldInfos to be used for accessing the key values.</returns>
-        </member>
-        <member name="M:BO4E.BO.BusinessObject.Equals(System.Object)">
-            <summary>BO4E Business Objects are considered equal iff all of their elements/fields are equal.</summary>
-            <param name="b">another object</param>
-            <returns>
-                <code>true</code> iff b has the same type as this object and all elements of this and object b are equal;
-                <code>false</code> otherwise
-            </returns>
-        </member>
-        <member name="M:BO4E.BO.BusinessObject.GetHashCode">
-            <summary>
-                override hash code generation
-            </summary>
-            <returns>hash code as int</returns>
         </member>
         <member name="M:BO4E.BO.BusinessObject.IsValid">
             <summary>
@@ -2543,16 +2517,6 @@
             <summary>
                 User properties (non bo4e standard)
             </summary>
-        </member>
-        <member name="M:BO4E.COM.COM.Equals(System.Object)">
-            <summary>
-                BO4E components are considered equal iff all of their elements/fields are equal.
-            </summary>
-            <param name="b">another object</param>
-            <returns><code>true</code> iff all elements of this COM and COM b are equal; <code>false</code> otherwise</returns>
-        </member>
-        <member name="M:BO4E.COM.COM.GetHashCode">
-            <inheritdoc />
         </member>
         <member name="M:BO4E.COM.COM.IsValid">
             <inheritdoc cref="M:BO4E.BO.BusinessObject.IsValid" />
