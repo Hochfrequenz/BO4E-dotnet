@@ -256,7 +256,6 @@ namespace TestBO4E.Extensions
             TestMonthlySlices(true);
         }
 
-
         internal void TestMonthlySlices(bool testFirstOnly = true, bool useParallelExecution = false)
         {
             foreach (var boFile in Directory.GetFiles("Energiemenge/completeness", "50hz_prognose*.json"))
