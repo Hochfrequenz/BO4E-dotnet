@@ -56,10 +56,10 @@ namespace BO4E.COM
         /// <summary>
         /// Verweis auf MesslokationsId
         /// </summary>
-        [JsonProperty(Required = Required.Default, Order = 6, PropertyName = "referenzMesslokationId")]
-        [JsonPropertyName("referenzMesslokationId")]
+        [JsonProperty(Required = Required.Default, Order = 6, PropertyName = "messlokationsId")]
+        [JsonPropertyName("messlokationsId")]
         [ProtoMember(6)]
-        public string ReferenzMesslokationId { get; set; }
+        public string MesslokationsId { get; set; }
         
         /// <summary>
         /// rekursive Verschachtelung weiterer rechenschritte
