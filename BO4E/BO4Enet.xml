@@ -4066,6 +4066,16 @@
         <member name="P:BO4E.COM.Zeitraum.Enddatum">
             <summary>Gibt Tag und Uhrzeit (falls vorhanden) an, wann der Zeitraum endet.</summary>
         </member>
+        <member name="P:BO4E.COM.Zeitraum.Startzeitpunkt">
+            <summary>
+            The same value as <see cref="P:BO4E.COM.Zeitraum.Startdatum"/>
+            </summary>
+        </member>
+        <member name="P:BO4E.COM.Zeitraum.Endzeitpunkt">
+            <summary>
+            The same value as <see cref="P:BO4E.COM.Zeitraum.Enddatum"/>
+            </summary>
+        </member>
         <member name="M:BO4E.COM.Zeitraum.FillNullValues(System.Runtime.Serialization.StreamingContext)">
             <summary>
                 sets <see cref="P:BO4E.COM.Zeitraum.Dauer" /> and <see cref="P:BO4E.COM.Zeitraum.Einheit" /> iff <see cref="P:BO4E.COM.Zeitraum.Startdatum" /> and <see cref="P:BO4E.COM.Zeitraum.Enddatum" /> are

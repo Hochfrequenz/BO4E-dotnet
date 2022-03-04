@@ -153,6 +153,10 @@ namespace TestBO4E
                 {
                     // as long as protobuf-net is not able to handle nullable native types this is required. see f.e. https://github.com/protobuf-net/protobuf-net/issues/742
                     var pia = nullableDtProperty.GetCustomAttributes<ProtoIgnoreAttribute>().FirstOrDefault();
+                    if (relevantType == typeof(Zeitraum) && new HashSet<string> { "startzeitpunkt", "endzeitpunkt" }.Contains(nullableDtProperty.Name.ToLower()))
+                    {
+                        continue;
+                    }
                     Assert.IsNotNull(pia,
                         $"The property {nullableDtProperty.Name} of type {relevantType.Name} is missing the {nameof(ProtoIgnoreAttribute)}.");
                     Assert.IsTrue(relevantType.GetProperties(BindingFlags.NonPublic | BindingFlags.Instance).Any(p => p.GetCustomAttributes<ProtoMemberAttribute>().Any(pma => pma.Name == nullableDtProperty.Name)
@@ -243,9 +247,9 @@ namespace TestBO4E
                     typePair.baseType != typeof(BusinessObject))
                 {
                     // remove the if-block around this statement as soon as protobuf-net supports multiple levels of inheritance
-                    // Symptomes: 
+                    // Symptomes:
                     // 1: ProtoBuf.ProtoException: Type 'BO4E.COM.Preisgarantie' can only participate in one inheritance hierarchy (BO4E.COM.Verbrauch) ---> System.InvalidOperationException: Type 'BO4E.COM.Preisgarantie' can only participate in one inheritance hierarchy
-                    // 2: System.InvalidOperationException: Duplicate field-number detected; 
+                    // 2: System.InvalidOperationException: Duplicate field-number detected;
                     var typesReferencedByBase = typePair.baseType
                         .GetCustomAttributes(typeof(ProtoIncludeAttribute), false).Cast<ProtoIncludeAttribute>()
                         .Select(pia => pia.KnownType);
