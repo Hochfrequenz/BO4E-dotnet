@@ -21,16 +21,13 @@ namespace TestBO4E
             {
                 Startdatum = new DateTimeOffset(2022, 1, 1, 0, 0, 0, TimeSpan.Zero),
                 Enddatum = new DateTimeOffset(2022, 1, 2, 0, 0, 0, TimeSpan.Zero),
-                Dauer = 1,
-                Einheit = Zeiteinheit.TAG,
             };
             var jsonString = serializer(zeitraum);
-            var jsonDict = System.Text.Json.JsonSerializer.Deserialize<Dictionary<string, object>>(jsonString); // we deserialize into an anonymous dict just to be decoupled from the json hacks, it is not important that we use system.text for that
-            // excuse the .ToStrings() but i couldnt deserialize into Dict<string,string> because of the "Dauer" which is itself part of a not so glorious hack ;)
-            jsonDict["startdatum"].ToString().Should().NotBeNull();
-            jsonDict["enddatum"].ToString().Should().NotBeNull();
-            jsonDict["startzeitpunkt"].ToString().Should().BeEquivalentTo(jsonDict["startdatum"].ToString());
-            jsonDict["endzeitpunkt"].ToString().Should().BeEquivalentTo(jsonDict["endzeitpunkt"].ToString());
+            var jsonDict = System.Text.Json.JsonSerializer.Deserialize<Dictionary<string, string>>(jsonString); // we deserialize into an anonymous dict just to be decoupled from the json hacks, it is not important that we use system.text for that
+            jsonDict["startdatum"].Should().NotBeNull();
+            jsonDict["enddatum"].Should().NotBeNull();
+            jsonDict["startzeitpunkt"].Should().BeEquivalentTo(jsonDict["startdatum"]);
+            jsonDict["endzeitpunkt"].Should().BeEquivalentTo(jsonDict["endzeitpunkt"]);
 
             // now we remove the datümer and deserialize again into a zeitraum
             jsonDict.Remove("startdatum");
@@ -38,7 +35,8 @@ namespace TestBO4E
 
             jsonString = System.Text.Json.JsonSerializer.Serialize(jsonDict);
             var deserializedZeitraum = deserializer(jsonString);
-            deserializedZeitraum.Should().BeEquivalentTo(zeitraum);
+            deserializedZeitraum.Should().BeEquivalentTo(zeitraum, opts => opts.Excluding(zr => zr.Dauer).Excluding(zr => zr.Einheit));
+            // excluding the two props because they are part of a not so glorious hack `FillNullValues` in the Zeitraum class which I don't want to touch here.
         }
 
         [TestMethod]
