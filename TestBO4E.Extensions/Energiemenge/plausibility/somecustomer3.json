@@ -1,4 +1,4 @@
- "comment": "Das ist Beispiel 2 ID 1 aus Anhang 9 zu Kapitel 5 des Lastenhefts.",
+{ "comment": "Das ist Beispiel 2 ID 1 aus Anhang 9 zu Kapitel 5 des Lastenhefts.",
   "reference": {
     "boTyp": "ENERGIEMENGE",
     "lokationsId": "123456789",
