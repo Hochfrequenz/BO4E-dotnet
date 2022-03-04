@@ -1,6 +1,6 @@
 {
   "boTyp": "ZAEHLER",
-  "versionStruktur": 1,
+  "versionStruktur": "1",
   "zaehlernummer": "000000000123456",
   "sparte": "STROM",
   "zaehlerauspraegung": "EINRICHTUNGSZAEHLER",

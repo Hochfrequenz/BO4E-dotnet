@@ -1,6 +1,6 @@
 {
   "expectedResult": {
-    "versionStruktur": 1,
+    "versionStruktur": "1",
     "boTyp": "MESSLOKATION",
     "messlokationsId": "DE1234567889",
     "sparte": "STROM",
@@ -17,7 +17,7 @@
     "messlokationszaehler": null
   },
   "input": {
-    "versionStruktur": 1,
+    "versionStruktur": "1",
     "boTyp": "MESSLOKATION",
     "messlokationsId": "DE1234567889",
     "sparte": "STROM",
