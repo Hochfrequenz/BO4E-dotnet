@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using System.Text.Json;
 using BO4E.ENUM;
 using BO4E.meta.LenientConverters;

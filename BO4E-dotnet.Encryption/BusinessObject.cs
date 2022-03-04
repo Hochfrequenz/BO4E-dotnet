@@ -1,4 +1,4 @@
-﻿namespace BO4E.Encryption
+namespace BO4E.Encryption
 {
     /*
     public static class BusinessObjectExtensions

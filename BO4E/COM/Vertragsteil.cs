@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Text.Json.Serialization;
 using BO4E.meta;
 using BO4E.meta.LenientConverters;

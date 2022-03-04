@@ -1,4 +1,4 @@
-﻿namespace BO4E.ENUM
+namespace BO4E.ENUM
 {
     /// <summary>
     ///     Aufzählung der Vertragsarten

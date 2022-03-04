@@ -1,4 +1,4 @@
-﻿namespace BO4E.meta
+namespace BO4E.meta
 {
     /// <summary>
     ///     List of languages for making translatedJson in JsonConvert.SerializeObject() function.

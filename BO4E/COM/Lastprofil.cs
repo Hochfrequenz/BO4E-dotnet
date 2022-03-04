@@ -1,4 +1,4 @@
-﻿using BO4E.ENUM;
+using BO4E.ENUM;
 using BO4E.meta;
 using Newtonsoft.Json;
 using ProtoBuf;

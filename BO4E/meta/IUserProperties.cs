@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using BO4E.BO;
 
 namespace BO4E.meta

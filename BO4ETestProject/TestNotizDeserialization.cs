@@ -1,4 +1,4 @@
-﻿using BO4E.COM;
+using BO4E.COM;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Newtonsoft.Json;
 using JsonSerializer = System.Text.Json.JsonSerializer;

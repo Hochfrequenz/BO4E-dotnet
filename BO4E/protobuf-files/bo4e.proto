@@ -1,4 +1,4 @@
-﻿syntax = "proto3";
+syntax = "proto3";
 package bo4e;
 import "google/protobuf/timestamp.proto";
 import "protobuf-net/protogen.proto"; // custom protobuf-net options

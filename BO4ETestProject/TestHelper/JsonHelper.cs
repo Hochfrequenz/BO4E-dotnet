@@ -1,4 +1,4 @@
-﻿using Newtonsoft.Json.Linq;
+using Newtonsoft.Json.Linq;
 
 // copy pasted from https://stackoverflow.com/a/33028482
 public static class JsonHelper

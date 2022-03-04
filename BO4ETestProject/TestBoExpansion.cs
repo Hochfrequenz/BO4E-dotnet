@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using BO4E.BO;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
