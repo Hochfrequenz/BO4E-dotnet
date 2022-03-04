@@ -43,7 +43,7 @@ namespace TestBO4E.Extensions
             foreach (var boFile in files)
             {
                 JObject json;
-                using (var r = new StreamReader(boFile, encoding:new UTF8Encoding(false)))
+                using (var r = new StreamReader(boFile, new UTF8Encoding(false)))
                 {
                     var jsonString = r.ReadToEnd();
                     json = JsonConvert.DeserializeObject<JObject>(jsonString);
@@ -291,7 +291,7 @@ namespace TestBO4E.Extensions
             {
                 Energiemenge em;
                 using (var r =
-                    new StreamReader(Directory.GetFiles("Energiemenge/completeness", "threeyears.json").First()))
+                       new StreamReader(Directory.GetFiles("Energiemenge/completeness", "threeyears.json").First()))
                 {
                     var jsonString = r.ReadToEnd();
                     em = JsonConvert.DeserializeObject<Energiemenge>(jsonString);
@@ -392,7 +392,7 @@ namespace TestBO4E.Extensions
                 var endDateTime = dateTime.AddMinutes(15);
 
                 listvb.Add(new Verbrauch
-                { Startdatum = dateTime, Enddatum = endDateTime, Einheit = Mengeneinheit.JAHR, Wert = 12 });
+                    { Startdatum = dateTime, Enddatum = endDateTime, Einheit = Mengeneinheit.JAHR, Wert = 12 });
                 dateTime = endDateTime;
             }
 
@@ -472,13 +472,13 @@ namespace TestBO4E.Extensions
                 LokationsId = "MeinUnitTest123",
                 LokationsTyp = Lokationstyp.MeLo,
                 Energieverbrauch = verbrauchSlices.Select(vs => new Verbrauch
-                {
-                    Startdatum = vs.Start,
-                    Enddatum = vs.End,
-                    Einheit = Mengeneinheit.KWH,
-                    Wert = (decimal)123.456,
-                    Wertermittlungsverfahren = Wertermittlungsverfahren.MESSUNG
-                }
+                    {
+                        Startdatum = vs.Start,
+                        Enddatum = vs.End,
+                        Einheit = Mengeneinheit.KWH,
+                        Wert = (decimal)123.456,
+                        Wertermittlungsverfahren = Wertermittlungsverfahren.MESSUNG
+                    }
                 ).ToList()
             };
             var result = em.GetDailyCompletenessReports(new TimeRange(utcStart.UtcDateTime, utcEnd.UtcDateTime));
