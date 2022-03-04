@@ -1,4 +1,4 @@
-﻿namespace BO4E.Extensions.COM
+namespace BO4E.Extensions.COM
 {
     /// <summary>
     /// Extension methods for <see cref="BO4E.COM.Zeitraum"/>

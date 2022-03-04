@@ -1,4 +1,4 @@
-﻿namespace BO4E.meta
+namespace BO4E.meta
 {
     /// <summary>
     ///     The DataCategory is supposed to be used as an attribute on Business Object fields to specify what type of data they

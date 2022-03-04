@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Text;
 using BO4E.BO;
 using Newtonsoft.Json;
