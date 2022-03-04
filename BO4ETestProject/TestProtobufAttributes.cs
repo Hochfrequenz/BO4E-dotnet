@@ -143,8 +143,6 @@ namespace TestBO4E
                     var pma = dtProperty.GetCustomAttributes<ProtoMemberAttribute>().FirstOrDefault();
                     Assert.IsNotNull(pma,
                         $"The property {dtProperty.Name} of type {relevantType.Name} is missing the ProtoMemberAttribute.");
-                    var cla = dtProperty.GetCustomAttributes<CompatibilityLevelAttribute>().FirstOrDefault();
-                    Assert.AreEqual(CompatibilityLevel.Level240, cla?.Level, $"The property {dtProperty.Name} of type {relevantType.Name} does not have the Compatability Level Attribute or the wrong value");
                 }
 
                 var nullableDtProperties = relevantType.GetProperties().Where(p =>
@@ -161,9 +159,8 @@ namespace TestBO4E
                         $"The property {nullableDtProperty.Name} of type {relevantType.Name} is missing the {nameof(ProtoIgnoreAttribute)}.");
                     Assert.IsTrue(relevantType.GetProperties(BindingFlags.NonPublic | BindingFlags.Instance).Any(p => p.GetCustomAttributes<ProtoMemberAttribute>().Any(pma => pma.Name == nullableDtProperty.Name)
                                                                                                                       && p.GetCustomAttributes<System.Text.Json.Serialization.JsonIgnoreAttribute>().Any()
-                                                                                                                      && p.GetCustomAttributes<Newtonsoft.Json.JsonIgnoreAttribute>().Any()
-                                                                                                                      && p.GetCustomAttributes<CompatibilityLevelAttribute>().Any(cla => cla.Level == CompatibilityLevel.Level240)),
-                        $"There is no workaround property for {relevantType.FullName}.{nullableDtProperty.Name} that has a {nameof(ProtoMemberAttribute)} with the same 'Name={nullableDtProperty.Name}' and the expected Compatability Level and JsonIgnore Attributes.");
+                                                                                                                      && p.GetCustomAttributes<Newtonsoft.Json.JsonIgnoreAttribute>().Any()),
+                    $"There is no workaround property for {relevantType.FullName}.{nullableDtProperty.Name} that has a {nameof(ProtoMemberAttribute)} with the same 'Name={nullableDtProperty.Name}' and the expected Compatability Level and JsonIgnore Attributes.");
                 }
             }
         }

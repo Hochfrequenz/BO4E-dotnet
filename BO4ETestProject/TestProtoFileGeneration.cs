@@ -29,6 +29,7 @@ namespace TestBO4E
             typeof(Zaehler)
         };
 
+        /*
         [TestMethod]
         public void TestProtoGenerationBo()
         {
@@ -54,5 +55,6 @@ namespace TestBO4E
 
             File.WriteAllText(path, protoString, Encoding.UTF8);
         }
+        */
     }
 }

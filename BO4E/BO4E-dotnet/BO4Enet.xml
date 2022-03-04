@@ -1096,33 +1096,33 @@
             </summary>
         </member>
         <member name="P:BO4E.BO.Marktlokation.ZugehoerigeMesslokationen">
-            <summary>Aufzählung der Messlokationen, die zu dieser Marktlokation gehören.</summary>
-            Es können 3 verschiedene Konstrukte auftreten:
-            <ol>
-                <li>
-                    Beziehung 1 : 0 : Hier handelt es sich um Pauschalanlagen ohne Messung.
-                    D.h. die Verbrauchsdaten sind direkt über die Marktlokation abgreifbar.
-                </li>
-                <li>
-                    Beziehung 1 : 1 : Das ist die Standard-Beziehung für die meisten Fälle.
-                    In diesem Fall gibt es zu einer Marktlokation genau eine Messlokation.
-                </li>
-                <li>
-                    Beziehung 1 : N : Hier liegt beispielsweise eine Untermessung vor. Der
-                    Verbrauch einer Marklokation berechnet sich hier aus mehreren Messungen.
-                </li>
-            </ol>
-            Es gibt praktisch auch noch die Beziehung N : 1, beispielsweise bei einer
-            Zweirichtungsmessung bei der durch eine Messeinrichtung die Messung sowohl
-            für die Einspreiseseite als auch für die Aussspeiseseite erfolgt. Da
-            Abrechnung und Bilanzierung jedoch für beide Marktlokationen getrennt
-            erfolgt, werden nie beide Marktlokationen gemeinsam betrachtet. Daher lässt
-            sich dieses Konstrukt auf zwei 1:1-Beziehung zurückführen, wobei die
-            Messlokation in beiden Fällen die gleiche ist.
+             <summary>Aufzählung der Messlokationen, die zu dieser Marktlokation gehören.</summary>
+             Es können 3 verschiedene Konstrukte auftreten:
+             <ol>
+                 <li>
+                     Beziehung 1 : 0 : Hier handelt es sich um Pauschalanlagen ohne Messung.
+                     D.h. die Verbrauchsdaten sind direkt über die Marktlokation abgreifbar.
+                 </li>
+                 <li>
+                     Beziehung 1 : 1 : Das ist die Standard-Beziehung für die meisten Fälle.
+                     In diesem Fall gibt es zu einer Marktlokation genau eine Messlokation.
+                 </li>
+                 <li>
+                     Beziehung 1 : N : Hier liegt beispielsweise eine Untermessung vor. Der
+                     Verbrauch einer Marklokation berechnet sich hier aus mehreren Messungen.
+                 </li>
+             </ol>
+             Es gibt praktisch auch noch die Beziehung N : 1, beispielsweise bei einer
+             Zweirichtungsmessung bei der durch eine Messeinrichtung die Messung sowohl
+             für die Einspreiseseite als auch für die Aussspeiseseite erfolgt. Da
+             Abrechnung und Bilanzierung jedoch für beide Marktlokationen getrennt
+             erfolgt, werden nie beide Marktlokationen gemeinsam betrachtet. Daher lässt
+             sich dieses Konstrukt auf zwei 1:1-Beziehung zurückführen, wobei die
+             Messlokation in beiden Fällen die gleiche ist.
             
-            In den Zuordnungen sind ist die arithmetische Operation mit der der Verbrauch
-            einer Messlokation zum Verbrauch einer Marktlokation beitrögt mit aufgeführt.
-            Der Standard ist hier die Addition.
+             In den Zuordnungen sind ist die arithmetische Operation mit der der Verbrauch
+             einer Messlokation zum Verbrauch einer Marktlokation beitrögt mit aufgeführt.
+             Der Standard ist hier die Addition.
         </member>
         <member name="P:BO4E.BO.Marktlokation.MesstechnischeEinordnung">
             <summary>
@@ -1620,6 +1620,11 @@
         <member name="F:BO4E.BO.Vertrag.VertragsSerializerOptions">
             <summary>
                 static serializer options for Vertragsconverter
+            </summary>
+        </member>
+        <member name="F:BO4E.BO.Vertrag.SerializerSemaphore">
+            <summary>
+            Semaphore to protect access to the serializer
             </summary>
         </member>
         <member name="P:BO4E.BO.Vertrag.Vertragsnummer">
@@ -8743,6 +8748,42 @@
         </member>
         <member name="F:BO4E.ENUM.Waermenutzung.DIREKTHEIZUNG">
             Z61: Direktheizung
+        </member>
+        <member name="T:BO4E.ENUM.WahlrechtPrognosegrundlage">
+            <summary>
+            Wahlrecht der Prognosegrundlage der Marktlokation
+            </summary>
+            <remarks> SG10 CAV </remarks>
+        </member>
+        <member name="F:BO4E.ENUM.WahlrechtPrognosegrundlage.DURCH_LF">
+            <summary>
+            Wahlrecht durch LF gegeben
+            </summary>
+            <remarks> CAV+Z54 </remarks>
+        </member>
+        <member name="F:BO4E.ENUM.WahlrechtPrognosegrundlage.NICHT_WEGEN_GROSSEN_VERBRAUCHS">
+            <summary>
+            Wahlrecht nicht vorhanden wegen Verbrauch > 10.000 kWh/a
+            </summary>
+            <remarks> CAV+Z55 </remarks>
+        </member>
+        <member name="F:BO4E.ENUM.WahlrechtPrognosegrundlage.NICHT_WEGEN_EIGENVERBRAUCH">
+            <summary>
+            Wahlrecht nicht vorhanden wegen Eigenverbrauch
+            </summary>
+            <remarks> CAV+ZC1 </remarks>
+        </member>
+        <member name="F:BO4E.ENUM.WahlrechtPrognosegrundlage.NICHT_WEGEN_TAGES_VERBRAUCH">
+            <summary>
+            Wahlrecht nicht vorhanden wegen tagesparameterabhängigem Verbrauch
+            </summary>
+            <remarks> CAV+ZD2 </remarks>
+        </member>
+        <member name="F:BO4E.ENUM.WahlrechtPrognosegrundlage.NICHT_WEGEN_ENWG">
+            <summary>
+            Wahlrecht nicht vorhanden wegen §14a EnWG
+            </summary>
+            <remarks> CAV+ZE3 </remarks>
         </member>
         <member name="T:BO4E.ENUM.Wertermittlungsverfahren">
             <summary>
