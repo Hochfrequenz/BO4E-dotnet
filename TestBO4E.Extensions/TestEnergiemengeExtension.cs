@@ -45,7 +45,7 @@ namespace TestBO4E.Extensions
             foreach (var boFile in Directory.GetFiles("Energiemenge/", "*.json"))
             {
                 JObject json;
-                using (var r = new StreamReader(boFile, encoding:new UTF8Encoding(false)))
+                using (var r = new StreamReader(boFile, encoding: new UTF8Encoding(false)))
                 {
                     var jsonString = r.ReadToEnd();
                     json = JsonConvert.DeserializeObject<JObject>(jsonString);
