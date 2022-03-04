@@ -1,4 +1,4 @@
-﻿using BO4E.Encryption;
+using BO4E.Encryption;
 using BO4E.meta;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Newtonsoft.Json;
