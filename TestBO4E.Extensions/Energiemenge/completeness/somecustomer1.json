@@ -1,4 +1,5 @@
- "hinweis": "Die Rechnung des Kunden stimmt nicht, sie haben die Uhrzeiten bei ihren Beispieldaten vertauscht.",
+{
+  "hinweis": "Die Rechnung des Kunden stimmt nicht, sie haben die Uhrzeiten bei ihren Beispieldaten vertauscht.",
   "assertions": {
     "coverage201804": 0.9601,
     "isContinuous": false,
