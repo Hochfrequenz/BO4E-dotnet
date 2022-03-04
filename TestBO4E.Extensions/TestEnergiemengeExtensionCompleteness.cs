@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
+using System.Text;
 using System.Threading.Tasks;
 using BO4E;
 using BO4E.BO;
@@ -38,11 +39,11 @@ namespace TestBO4E.Extensions
         public void TestCompletenessReportGenerationSomeCustomer()
         {
             var files = Directory.GetFiles("Energiemenge/completeness", "somecustomer*.json");
-            Assert.AreEqual(5, files.Length); // this is just to make sure the files haven't moved 
+            Assert.AreEqual(5, files.Length); // this is just to make sure the files haven't moved
             foreach (var boFile in files)
             {
                 JObject json;
-                using (var r = new StreamReader(boFile))
+                using (var r = new StreamReader(boFile, encoding:new UTF8Encoding(false)))
                 {
                     var jsonString = r.ReadToEnd();
                     json = JsonConvert.DeserializeObject<JObject>(jsonString);

@@ -2,6 +2,7 @@ using System;
 using System.Globalization;
 using System.IO;
 using System.Linq;
+using System.Text;
 using BO4E;
 using BO4E.BO;
 using BO4E.COM;
@@ -46,7 +47,7 @@ namespace TestBO4E.Extensions
             foreach (var boFile in Directory.GetFiles("Energiemenge/", "*.json"))
             {
                 JObject json;
-                using (var r = new StreamReader(boFile))
+                using (var r = new StreamReader(boFile, encoding:new UTF8Encoding(false)))
                 {
                     var jsonString = r.ReadToEnd();
                     json = JsonConvert.DeserializeObject<JObject>(jsonString);
