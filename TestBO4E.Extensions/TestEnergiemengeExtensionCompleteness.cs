@@ -137,7 +137,7 @@ namespace TestBO4E.Extensions
         {
             var boFile = Directory.GetFiles("Energiemenge/completeness", "gas_januar_2018.json").First();
             JObject json;
-            using (var r = new StreamReader(boFile))
+            using (var r = new StreamReader(boFile, new UTF8Encoding(false)))
             {
                 var jsonString = r.ReadToEnd();
                 json = JsonConvert.DeserializeObject<JObject>(jsonString);
