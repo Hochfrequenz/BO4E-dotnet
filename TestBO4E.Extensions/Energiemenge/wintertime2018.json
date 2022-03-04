@@ -1,4 +1,4 @@
-﻿{
+{
   "fixSapCdsBug": true,
   "assertions": {
     "isEvenlySpaced": true,

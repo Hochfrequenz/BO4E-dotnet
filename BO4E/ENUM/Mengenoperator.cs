@@ -1,4 +1,4 @@
-﻿namespace BO4E.ENUM
+namespace BO4E.ENUM
 {
     /// <summary>
     ///     Angabe, wie eine Menge in Bezug auf einen Wert zu bilden ist.

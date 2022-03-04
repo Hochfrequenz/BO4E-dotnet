@@ -1,4 +1,4 @@
-﻿using BO4E.EnergyIdentificationCodes;
+using BO4E.EnergyIdentificationCodes;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace TestBO4E

@@ -1,4 +1,4 @@
-﻿namespace BO4E.Encryption
+namespace BO4E.Encryption
 {
     /// <summary>
     ///     The class AnonymizerApproach defines how an affected path is handled during anonymization.

@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using BO4E.ENUM;
 using BO4E.Extensions.ENUM;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
