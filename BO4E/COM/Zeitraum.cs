@@ -66,6 +66,45 @@ namespace BO4E.COM
         [Newtonsoft.Json.JsonConverter(typeof(LenientDateTimeConverter))]
         public DateTimeOffset? Enddatum { get; set; }
 
+
+        // we disagree with the official bo4e standard that there should be 2xtwo separate properties where one property does contain a date and the other one contains a datetime.
+        // we only want datetimes and we already have them present in start- and enddatum above. They are, to be honest, also not ideal because their name ends with "datum".
+        // To be compatible with libraries that provide a start or end ZEITPUNKT we introduce properties that always hold the same value as their "datum" neighbours.
+
+        /// <summary>
+        /// The same value as <see cref="Startdatum"/>
+        /// </summary>
+        [JsonPropertyName("startzeitpunkt")]
+        [JsonProperty(PropertyName = "startzeitpunkt")]
+        public DateTimeOffset? Startzeitpunkt
+        {
+            get => Startdatum;
+            set
+            {
+                if (value != null)
+                {
+                    Startdatum = value;
+                }
+            }
+        }
+
+        /// <summary>
+        /// The same value as <see cref="Enddatum"/>
+        /// </summary>
+        [JsonPropertyName("endzeitpunkt")]
+        [JsonProperty(PropertyName = "endzeitpunkt")]
+        public DateTimeOffset? Endzeitpunkt
+        {
+            get => Enddatum;
+            set
+            {
+                if (value != null)
+                {
+                    Enddatum = value;
+                }
+            }
+        }
+
         /// <summary>
         ///     sets <see cref="Dauer" /> and <see cref="Einheit" /> iff <see cref="Startdatum" /> and <see cref="Enddatum" /> are
         ///     given.
