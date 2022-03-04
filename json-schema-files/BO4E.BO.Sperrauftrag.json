@@ -2,10 +2,7 @@
   "$schema": "http://json-schema.org/draft-07/schema#",
   "definitions": {
     "Adresse": {
-      "type": [
-        "object",
-        "null"
-      ],
+      "type": ["object", "null"],
       "properties": {
         "postleitzahl": {
           "type": "string"
@@ -14,40 +11,22 @@
           "type": "string"
         },
         "strasse": {
-          "type": [
-            "string",
-            "null"
-          ]
+          "type": ["string", "null"]
         },
         "hausnummer": {
-          "type": [
-            "string",
-            "null"
-          ]
+          "type": ["string", "null"]
         },
         "postfach": {
-          "type": [
-            "string",
-            "null"
-          ]
+          "type": ["string", "null"]
         },
         "adresszusatz": {
-          "type": [
-            "string",
-            "null"
-          ]
+          "type": ["string", "null"]
         },
         "coErgaenzung": {
-          "type": [
-            "string",
-            "null"
-          ]
+          "type": ["string", "null"]
         },
         "landescode": {
-          "type": [
-            "string",
-            "null"
-          ],
+          "type": ["string", "null"],
           "enum": [
             null,
             "AC",
@@ -320,78 +299,45 @@
           ]
         },
         "ortsteil": {
-          "type": [
-            "string",
-            "null"
-          ]
+          "type": ["string", "null"]
         },
         "guid": {
-          "type": [
-            "string",
-            "null"
-          ]
+          "type": ["string", "null"]
         },
         "timestamp": {
-          "type": [
-            "string",
-            "null"
-          ],
+          "type": ["string", "null"],
           "format": "date-time"
         }
       },
-      "required": [
-        "postleitzahl",
-        "ort"
-      ]
+      "required": ["postleitzahl", "ort"]
     },
     "ExterneReferenz": {
-      "type": [
-        "object",
-        "null"
-      ],
+      "type": ["object", "null"],
       "properties": {
         "exRefName": {
-          "type": [
-            "string",
-            "null"
-          ]
+          "type": ["string", "null"]
         },
         "exRefWert": {
-          "type": [
-            "string",
-            "null"
-          ]
+          "type": ["string", "null"]
         },
         "guid": {
-          "type": [
-            "string",
-            "null"
-          ]
+          "type": ["string", "null"]
         },
         "timestamp": {
-          "type": [
-            "string",
-            "null"
-          ],
+          "type": ["string", "null"],
           "format": "date-time"
         }
       }
     },
     "Preis": {
-      "type": [
-        "object",
-        "null"
-      ],
+      "type": ["object", "null"],
       "properties": {
         "wert": {
           "type": "number"
         },
         "einheit": {
           "type": "string",
-          "enum": [
-            "EUR",
-            "CT"
-          ]
+          "enum": ["EUR", "CT"]
         },
         "bezugswert": {
           "type": "string",
@@ -416,51 +362,28 @@
           ]
         },
         "status": {
-          "type": [
-            "string",
-            "null"
-          ],
-          "enum": [
-            null,
-            "VORLAEUFIG",
-            "ENDGUELTIG"
-          ]
+          "type": ["string", "null"],
+          "enum": [null, "VORLAEUFIG", "ENDGUELTIG"]
         },
         "guid": {
-          "type": [
-            "string",
-            "null"
-          ]
+          "type": ["string", "null"]
         },
         "timestamp": {
-          "type": [
-            "string",
-            "null"
-          ],
+          "type": ["string", "null"],
           "format": "date-time"
         }
       },
-      "required": [
-        "wert",
-        "einheit",
-        "bezugswert"
-      ]
+      "required": ["wert", "einheit", "bezugswert"]
     }
   },
   "type": "object",
   "properties": {
     "sperrauftragsart": {
       "type": "string",
-      "enum": [
-        "SPERREN",
-        "ENTSPERREN"
-      ]
+      "enum": ["SPERREN", "ENTSPERREN"]
     },
     "sperrauftragsstatus": {
-      "type": [
-        "string",
-        "null"
-      ],
+      "type": ["string", "null"],
       "enum": [
         null,
         "ERFOLGREICH",
@@ -471,10 +394,7 @@
       ]
     },
     "sperrauftragsablehngrund": {
-      "type": [
-        "string",
-        "null"
-      ],
+      "type": ["string", "null"],
       "enum": [
         null,
         "DUPLIKAT",
@@ -488,10 +408,7 @@
       ]
     },
     "sperrauftragsverhinderungsgrund": {
-      "type": [
-        "string",
-        "null"
-      ],
+      "type": ["string", "null"],
       "enum": [
         null,
         "RECHTLICHER_GRUND_FEHLT",
@@ -503,10 +420,7 @@
       ]
     },
     "zaehlernummer": {
-      "type": [
-        "string",
-        "null"
-      ]
+      "type": ["string", "null"]
     },
     "istVomGerichtsvollzieherAngeordnet": {
       "type": "boolean"
@@ -520,10 +434,7 @@
       "format": "date-time"
     },
     "sparte": {
-      "type": [
-        "string",
-        "null"
-      ],
+      "type": ["string", "null"],
       "enum": [
         null,
         "STROM",
@@ -541,10 +452,7 @@
       "type": "string"
     },
     "bemerkung": {
-      "type": [
-        "string",
-        "null"
-      ]
+      "type": ["string", "null"]
     },
     "mindestkosten": {
       "$ref": "#/definitions/Preis"
@@ -553,37 +461,22 @@
       "$ref": "#/definitions/Preis"
     },
     "externeReferenzen": {
-      "type": [
-        "array",
-        "null"
-      ],
+      "type": ["array", "null"],
       "items": {
         "$ref": "#/definitions/ExterneReferenz"
       }
     },
     "guid": {
-      "type": [
-        "string",
-        "null"
-      ]
+      "type": ["string", "null"]
     },
     "boTyp": {
-      "type": [
-        "string",
-        "null"
-      ]
+      "type": ["string", "null"]
     },
     "versionStruktur": {
-      "type": [
-        "string",
-        "null"
-      ]
+      "type": ["string", "null"]
     },
     "timestamp": {
-      "type": [
-        "string",
-        "null"
-      ],
+      "type": ["string", "null"],
       "format": "date-time"
     }
   },
