@@ -1,4 +1,5 @@
- "assertions": {
+{
+  "assertions": {
     "totalConsumption": 300.0,
     "average": 300.0,
     "isContinuous": true,

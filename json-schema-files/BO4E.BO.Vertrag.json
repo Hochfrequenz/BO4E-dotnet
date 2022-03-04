@@ -863,6 +863,20 @@
           ],
           "format": "date-time"
         },
+        "startzeitpunkt": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "format": "date-time"
+        },
+        "endzeitpunkt": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "format": "date-time"
+        },
         "guid": {
           "type": [
             "string",
@@ -876,7 +890,11 @@
           ],
           "format": "date-time"
         }
-      }
+      },
+      "required": [
+        "startzeitpunkt",
+        "endzeitpunkt"
+      ]
     }
   },
   "type": "object",
