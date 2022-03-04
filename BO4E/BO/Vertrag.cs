@@ -35,7 +35,7 @@ namespace BO4E.BO
         /// </summary>
         public static System.Threading.SemaphoreSlim SerializerSemaphore = new System.Threading.SemaphoreSlim(1);
         static Vertrag()
-        {         
+        {
         }
 
         /// <summary>
