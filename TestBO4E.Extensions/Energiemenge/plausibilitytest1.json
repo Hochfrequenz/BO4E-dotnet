@@ -1,9 +1,10 @@
- "assertions": {
+{
+  "assertions": {
     "isPure": true,
     "isPureUserProperties": false
   },
   "input": {
-    "versionStruktur": 1,
+    "versionStruktur": "1",
     "boTyp": "ENERGIEMENGE",
     "lokationsId": "50791234567",
     "lokationstyp": "MaLo",

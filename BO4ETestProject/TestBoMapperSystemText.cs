@@ -278,6 +278,7 @@ namespace TestBO4E
         }
 
         [TestMethod]
+        [Obsolete]
         public void TestBoNameTyping()
         {
             Assert.AreEqual(typeof(Benachrichtigung), BoMapper.GetTypeForBoName("Benachrichtigung"));

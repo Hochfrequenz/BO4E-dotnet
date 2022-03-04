@@ -1,9 +1,10 @@
- "assertions": {
+{
+  "assertions": {
     "totalConsumption-2018": 3153.6,
     "isContinuous": true
   },
   "input": {
-    "versionStruktur": 1,
+    "versionStruktur": "1",
     "boTyp": "ENERGIEMENGE",
     "lokationsId": "DE47108155927",
     "lokationstyp": "MELO",

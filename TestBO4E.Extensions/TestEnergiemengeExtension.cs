@@ -5,10 +5,12 @@ using System.Linq;
 using System.Text;
 using BO4E;
 using BO4E.BO;
+using BO4E.COM;
 using BO4E.ENUM;
 using BO4E.Extensions.BusinessObjects;
 using BO4E.Extensions.BusinessObjects.Energiemenge;
 using BO4E.meta.LenientConverters;
+using FluentAssertions;
 using Itenso.TimePeriod;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Newtonsoft.Json;
@@ -169,7 +171,7 @@ namespace TestBO4E.Extensions
                                     Assert.IsTrue(pureEm.IsPure());
                                     var emptyPureEm = pureEm.DeepClone();
                                     emptyPureEm.Energieverbrauch = null;
-                                    Assert.AreEqual(emptyEm, emptyPureEm);
+                                    emptyEm.Should().BeEquivalentTo(emptyPureEm, opts => opts.ComparingByMembers<Energiemenge>().ComparingByMembers<Verbrauch>());
                                 }
                             }
 

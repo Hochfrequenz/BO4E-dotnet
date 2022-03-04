@@ -3,7 +3,7 @@
   "lenientDateTime": false,
   "input": {
     "$type": "BO4E.BO.Marktlokation, BO4Enet",
-    "versionStruktur": 1,
+    "versionStruktur": "1",
     "marktlokationsId": "54321098765",
     "sparte": "STROM",
     "energierichtung": "AUSSP",

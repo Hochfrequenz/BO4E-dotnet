@@ -10,6 +10,7 @@ using BO4E.Encryption;
 using BO4E.ENUM;
 using BO4E.meta;
 using BO4E.Reporting;
+using FluentAssertions;
 using JsonDiffPatchDotNet;
 using Microsoft.Extensions.Logging.Abstractions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -27,7 +28,7 @@ namespace TestBO4E.Encryption
         public void TestOperations()
         {
             StaticLogger.Logger = NullLogger.Instance;
-            var files = Directory.GetFiles("anonymizerTests/masterdata/", "*.json"); // 
+            var files = Directory.GetFiles("anonymizerTests/masterdata/", "*.json"); //
             foreach (var testFile in files)
             {
                 JObject json;
@@ -41,7 +42,7 @@ namespace TestBO4E.Encryption
                 using (var a = new Anonymizer(new AnonymizerConfiguration()))
                 {
                     bo = JsonConvert.DeserializeObject<BusinessObject>(json["input"].ToString());
-                    Assert.IsTrue(bo.Equals(a.ApplyOperations<BusinessObject>(bo)));
+                    bo.Should().BeEquivalentTo(a.ApplyOperations<BusinessObject>(bo), opts => opts.ComparingByMembers<BusinessObject>());
                 }
 
                 var ac = new AnonymizerConfiguration();

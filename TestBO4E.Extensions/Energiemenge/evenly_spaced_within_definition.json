@@ -1,11 +1,12 @@
- "assertions": {
+{
+  "assertions": {
     "isContinuous": false,
     "isEvenlySpaced": false,
     "isEvenlySpacedWithinDefinition": true,
     "missingTimeRangeCount": 1
   },
   "input": {
-    "versionStruktur": 1,
+    "versionStruktur": "1",
     "boTyp": "ENERGIEMENGE",
     "lokationsId": "DE47108155927",
     "lokationstyp": "MELO",

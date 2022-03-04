@@ -2,7 +2,7 @@
   "userPropWhiteList": ["rolle"],
   "objectName": "Messlokation",
   "input": {
-    "versionStruktur": 1,
+    "versionStruktur": "1",
     "boTyp": "MESSLOKATION",
     "messlokationsId": "DE0000000000000000000000010000397",
     "sparte": "STROM",
@@ -28,7 +28,7 @@
     "messdienstleistung": null,
     "messlokationszaehler": [
       {
-        "versionStruktur": 1,
+        "versionStruktur": "1",
         "boTyp": "ZAEHLER",
         "zaehlernummer": "10000548",
         "sparte": "STROM",

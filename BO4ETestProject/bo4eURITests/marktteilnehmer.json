@@ -5,7 +5,7 @@
   },
   "expectedUri": "bo4e://marktteilnehmer/9900130000006/",
   "input": {
-    "versionStruktur": 1,
+    "versionStruktur": "1",
     "boTyp": "MARKTTEILNEHMER",
     "anrede": "FIRMA",
     "name1": "Stadtwerke Coesfeld GmbH",

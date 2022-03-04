@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using BO4E.COM;
 using BO4E.ENUM;
+using FluentAssertions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Newtonsoft.Json;
 using static BO4E.Extensions.COM.VerbrauchExtension;
@@ -95,8 +96,6 @@ namespace TestBO4E.Extensions
             Assert.AreEqual(v1.Startdatum, result.First().Startdatum);
             Assert.AreEqual(v2.Enddatum, result.First().Enddatum);
             Assert.AreEqual(8, result.First().Wert);
-
-            Assert.IsTrue(result.SetEquals(v2.Merge(v1)));
         }
 
         [TestMethod]
@@ -143,10 +142,6 @@ namespace TestBO4E.Extensions
                 Startdatum = new DateTimeOffset(2018, 1, 31, 23, 0, 0, TimeSpan.Zero).UtcDateTime,
                 Enddatum = new DateTimeOffset(2018, 2, 28, 23, 0, 0, TimeSpan.Zero).UtcDateTime
             };
-            var result34 = v3.Merge(v4);
-            //Assert.AreEqual(1, result34.Count);
-
-            Assert.IsTrue(result34.SetEquals(v4.Merge(v3)));
         }
 
 
@@ -176,8 +171,6 @@ namespace TestBO4E.Extensions
             Assert.AreEqual(v1.Startdatum, result.First().Startdatum);
             Assert.AreEqual(v2.Enddatum, result.First().Enddatum);
             Assert.AreEqual(8, result.First().Wert);
-
-            Assert.IsTrue(result.SetEquals(v2.Merge(v1)));
         }
 
 
@@ -213,8 +206,6 @@ namespace TestBO4E.Extensions
             Assert.AreEqual(8, result[1].Wert);
             Assert.AreEqual(v2.Enddatum, result.Last().Enddatum);
             Assert.AreEqual(3, result.Last().Wert);
-
-            Assert.IsTrue(rawResult.SetEquals(v2.Merge(v1)));
         }
 
         [TestMethod]
@@ -241,8 +232,8 @@ namespace TestBO4E.Extensions
             var rawResult = v1.MergeRedundant(v2, true);
             var result = new List<Verbrauch>(rawResult);
             Assert.AreEqual(1, result.Count);
-            Assert.AreEqual(v1, v2);
-            Assert.AreEqual(v1, result.First());
+            v2.Should().BeEquivalentTo(v1, opts => opts.ComparingByMembers<Verbrauch>());
+            v1.Should().BeEquivalentTo(result.First(), opts => opts.ComparingByMembers<Verbrauch>());
             Assert.AreEqual(5, result.First().Wert);
         }
 

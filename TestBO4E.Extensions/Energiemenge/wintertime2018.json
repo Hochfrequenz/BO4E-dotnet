@@ -1,10 +1,11 @@
- "fixSapCdsBug": true,
+{
+  "fixSapCdsBug": true,
   "assertions": {
     "isEvenlySpaced": true,
     "isContinuous": true
   },
   "input": {
-    "versionStruktur": 1,
+    "versionStruktur": "1",
     "boTyp": "ENERGIEMENGE",
     "lokationsId": "DE0001234569876543211234567896541",
     "lokationstyp": "MeLo",

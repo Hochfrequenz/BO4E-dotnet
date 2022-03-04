@@ -1,11 +1,12 @@
- "assertions": {
+{
+  "assertions": {
     "totalConsumption": 300.0,
     "average": 300.0,
     "isContinuous": true,
     "isEvenlySpaced": true
   },
   "input": {
-    "versionStruktur": 1,
+    "versionStruktur": "1",
     "boTyp": "ENERGIEMENGE",
     "lokationsId": "DE47108155927",
     "lokationstyp": "MELO",

@@ -1,4 +1,5 @@
- "hinweis": "Es gibt bei der Coverage eine floating ungenauigkeit.",
+{
+  "hinweis": "Es gibt bei der Coverage eine floating ungenauigkeit.",
   "assertions": {
     "coverage201804": 1.0,
     "isContinuous": true,
@@ -6,7 +7,7 @@
     "isEvenlySpacedWithinDefinition": true
   },
   "input": {
-    "versionStruktur": 1,
+    "versionStruktur": "1",
     "boTyp": "ENERGIEMENGE",
     "lokationsId": "DE70111368167MA000000000050006480",
     "lokationstyp": 1,

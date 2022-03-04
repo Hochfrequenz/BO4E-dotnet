@@ -136,14 +136,34 @@ namespace TestBO4E
             foreach (var relevantType in relevantTypes)
             {
                 var dtProperties = relevantType.GetProperties().Where(p =>
-                    p.PropertyType == typeof(DateTime) || p.PropertyType == typeof(DateTimeOffset));
+                    p.PropertyType == typeof(DateTime));
                 foreach (var dtProperty in dtProperties)
                 {
                     // there must be an attribute like described in https://github.com/protobuf-net/protobuf-net.Grpc/issues/56#issuecomment-580509687
                     var pma = dtProperty.GetCustomAttributes<ProtoMemberAttribute>().FirstOrDefault();
                     Assert.IsNotNull(pma,
                         $"The property {dtProperty.Name} of type {relevantType.Name} is missing the ProtoMemberAttribute.");
-                    //Assert.AreEqual(DataFormat.WellKnown, pma.DataFormat, $"The property {dtProperty.Name} of type {relevantType.Name} has the wrong dataformat in the protomember attribute");
+                    var cla = dtProperty.GetCustomAttributes<CompatibilityLevelAttribute>().FirstOrDefault();
+                    Assert.AreEqual(CompatibilityLevel.Level240, cla?.Level, $"The property {dtProperty.Name} of type {relevantType.Name} does not have the Compatability Level Attribute or the wrong value");
+                }
+
+                var nullableDtProperties = relevantType.GetProperties().Where(p =>
+                    p.PropertyType == typeof(DateTime?) || p.PropertyType == typeof(DateTimeOffset) || p.PropertyType == typeof(DateTimeOffset?));
+                foreach (var nullableDtProperty in nullableDtProperties)
+                {
+                    // as long as protobuf-net is not able to handle nullable native types this is required. see f.e. https://github.com/protobuf-net/protobuf-net/issues/742
+                    var pia = nullableDtProperty.GetCustomAttributes<ProtoIgnoreAttribute>().FirstOrDefault();
+                    if (relevantType == typeof(Zeitraum) && new HashSet<string> { "startzeitpunkt", "endzeitpunkt" }.Contains(nullableDtProperty.Name.ToLower()))
+                    {
+                        continue;
+                    }
+                    Assert.IsNotNull(pia,
+                        $"The property {nullableDtProperty.Name} of type {relevantType.Name} is missing the {nameof(ProtoIgnoreAttribute)}.");
+                    Assert.IsTrue(relevantType.GetProperties(BindingFlags.NonPublic | BindingFlags.Instance).Any(p => p.GetCustomAttributes<ProtoMemberAttribute>().Any(pma => pma.Name == nullableDtProperty.Name)
+                                                                                                                      && p.GetCustomAttributes<System.Text.Json.Serialization.JsonIgnoreAttribute>().Any()
+                                                                                                                      && p.GetCustomAttributes<Newtonsoft.Json.JsonIgnoreAttribute>().Any()
+                                                                                                                      && p.GetCustomAttributes<CompatibilityLevelAttribute>().Any(cla => cla.Level == CompatibilityLevel.Level240)),
+                        $"There is no workaround property for {relevantType.FullName}.{nullableDtProperty.Name} that has a {nameof(ProtoMemberAttribute)} with the same 'Name={nullableDtProperty.Name}' and the expected Compatability Level and JsonIgnore Attributes.");
                 }
             }
         }
@@ -227,9 +247,9 @@ namespace TestBO4E
                     typePair.baseType != typeof(BusinessObject))
                 {
                     // remove the if-block around this statement as soon as protobuf-net supports multiple levels of inheritance
-                    // Symptomes: 
+                    // Symptomes:
                     // 1: ProtoBuf.ProtoException: Type 'BO4E.COM.Preisgarantie' can only participate in one inheritance hierarchy (BO4E.COM.Verbrauch) ---> System.InvalidOperationException: Type 'BO4E.COM.Preisgarantie' can only participate in one inheritance hierarchy
-                    // 2: System.InvalidOperationException: Duplicate field-number detected; 
+                    // 2: System.InvalidOperationException: Duplicate field-number detected;
                     var typesReferencedByBase = typePair.baseType
                         .GetCustomAttributes(typeof(ProtoIncludeAttribute), false).Cast<ProtoIncludeAttribute>()
                         .Select(pia => pia.KnownType);
