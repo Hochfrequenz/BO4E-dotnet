@@ -1,5 +1,4 @@
-{
-  "assertions": {
+ "assertions": {
     "totalConsumption": 123.456,
     "isContinuous": true,
     "isEvenlySpaced": true

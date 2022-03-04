@@ -1,5 +1,4 @@
-{
-  "fixSapCdsBug": true,
+ "fixSapCdsBug": true,
   "assertions": {
     "isEvenlySpaced": true,
     "isContinuous": true

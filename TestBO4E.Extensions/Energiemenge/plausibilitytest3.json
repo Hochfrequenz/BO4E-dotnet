@@ -1,5 +1,4 @@
-{
-  "assertions": {
+ "assertions": {
     "isPure": true,
     "isPureUserProperties": true
   },

@@ -1,5 +1,4 @@
-{
-  "assertions": {
+ "assertions": {
     "coverage201804-KWHPROGNOSE1234": 0.9986,
     "coverage201804-KWHMESSUNG5678": 0.9993,
     "jointCoverage": 0.9979,
