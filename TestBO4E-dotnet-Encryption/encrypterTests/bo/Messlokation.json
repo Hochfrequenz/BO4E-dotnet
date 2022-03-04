@@ -1,5 +1,10 @@
+<<<<<<< HEAD
 ﻿{
   "versionStruktur": 1,
+=======
+{
+  "versionStruktur": "1",
+>>>>>>> 183ff0f... 👷‍♂️Add GH Action to Prevent BOMs in the Future (#155)
   "boTyp": "Messlokation",
   "messlokationsId": "DE1234567889",
   "sparte": "STROM"

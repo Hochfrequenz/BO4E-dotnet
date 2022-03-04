@@ -1,5 +1,4 @@
-﻿{
-  "hinweis": "Es gibt bei der Coverage eine floating ungenauigkeit.",
+ "hinweis": "Es gibt bei der Coverage eine floating ungenauigkeit.",
   "assertions": {
     "coverage201804": 1.0,
     "isContinuous": true,
