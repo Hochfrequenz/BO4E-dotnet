@@ -168,7 +168,7 @@ namespace TestBO4E.Extensions
             var em = new Energiemenge
             {
                 LokationsId = "DE123455",
-                LokationsTyp = Lokationstyp.MeLo,
+                LokationsTyp = Lokationstyp.MELO,
                 Energieverbrauch = new List<Verbrauch>
                 {
                     new Verbrauch
@@ -205,7 +205,7 @@ namespace TestBO4E.Extensions
             var em1 = new Energiemenge
             {
                 LokationsId = "DE123456789DieseEmhatkeineVerbräuche",
-                LokationsTyp = Lokationstyp.MeLo,
+                LokationsTyp = Lokationstyp.MELO,
                 Energieverbrauch = new List<Verbrauch>() //empty list
             };
             var cr1 = em1.GetCompletenessReport();
@@ -216,7 +216,7 @@ namespace TestBO4E.Extensions
             var em2 = new Energiemenge
             {
                 LokationsId = "54321012345DieseEmhatkeineVerbräuche",
-                LokationsTyp = Lokationstyp.MeLo,
+                LokationsTyp = Lokationstyp.MELO,
                 Energieverbrauch = new List<Verbrauch>() //empty list
             };
             var cr2 = em2.GetCompletenessReport(CHRISTMAS_2018, Wertermittlungsverfahren.MESSUNG, "1-2-3-4",
@@ -470,7 +470,7 @@ namespace TestBO4E.Extensions
             var em = new Energiemenge
             {
                 LokationsId = "MeinUnitTest123",
-                LokationsTyp = Lokationstyp.MeLo,
+                LokationsTyp = Lokationstyp.MELO,
                 Energieverbrauch = verbrauchSlices.Select(vs => new Verbrauch
                 {
                     Startdatum = vs.Start,

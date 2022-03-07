@@ -7039,10 +7039,10 @@
         <member name="T:BO4E.ENUM.Lokationstyp">
             <summary>Gibt an, ob es sich um eine Markt- oder Messlokation handelt.</summary>
         </member>
-        <member name="F:BO4E.ENUM.Lokationstyp.MaLo">
+        <member name="F:BO4E.ENUM.Lokationstyp.MALO">
             <summary>Marktlokation</summary>
         </member>
-        <member name="F:BO4E.ENUM.Lokationstyp.MeLo">
+        <member name="F:BO4E.ENUM.Lokationstyp.MELO">
             <summary>Messlokation</summary>
         </member>
         <member name="T:BO4E.ENUM.Marktrolle">
