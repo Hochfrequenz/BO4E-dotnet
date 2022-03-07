@@ -24,7 +24,7 @@ jobs:
         run: dotnet test --configuration Release
       - name: Create Package (dotnet pack)
         run: |
-          dotnet pack --configuration Release --output packages -p:VersionPrefix={{github.event.release.tag_name}}
+          dotnet pack --configuration Release --output packages --property:VersionPrefix={{github.event.release.tag_name}}
       - name: Setup Nuget.exe
         uses: warrenbuckley/Setup-Nuget@v1
       - name: Nuget push
