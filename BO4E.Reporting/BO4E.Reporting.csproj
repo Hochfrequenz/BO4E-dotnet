@@ -2,9 +2,9 @@
 
   <PropertyGroup>
     <RootNamespace>BO4E_dotnet.Reporting</RootNamespace>
-    
-    <VersionPrefix>0.2.7</VersionPrefix>
-    
+
+    <VersionPrefix>0.2.22</VersionPrefix>
+
     <PackageLicenseFile>LICENSE.txt</PackageLicenseFile>
     <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
     <PackageProjectUrl>https://github.com/Hochfrequenz/BO4E-dotnet</PackageProjectUrl>
@@ -12,7 +12,7 @@
     <PackageId>Hochfrequenz.BO4E.Reporting</PackageId>
     <Authors>Hochfrequenz Unternehmensberatung GmbH</Authors>
     <Company>Hochfrequenz Unternehmensberatung GmbH</Company>
-    
+
     <!-- Optional: Embed source files that are not tracked by the source control manager to the PDB -->
     <EmbedUntrackedSources>true</EmbedUntrackedSources>
 
@@ -22,7 +22,7 @@
     <LangVersion>9</LangVersion>
     <TargetFramework>net5.0</TargetFramework>
   </PropertyGroup>
-  
+
   <PropertyGroup>
     <DocumentationFile>BO4E.Reporting.xml</DocumentationFile>
   </PropertyGroup>
@@ -47,4 +47,3 @@
     <ProjectReference Include="..\BO4E\BO4E.csproj" />
   </ItemGroup>
 </Project>
-

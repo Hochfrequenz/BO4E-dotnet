@@ -3,7 +3,7 @@
   <PropertyGroup>
     <TargetFramework>net5.0</TargetFramework>
     <RootNamespace>BO4E_dotnet.Encryption</RootNamespace>
-	<VersionPrefix>0.2.7</VersionPrefix>
+	<VersionPrefix>0.2.22</VersionPrefix>
 	<PackageLicenseFile>LICENSE.txt</PackageLicenseFile>
     <PackageProjectUrl>https://github.com/HFInnovation/BO4E-dotnet</PackageProjectUrl>
     <RepositoryUrl>https://github.com/HFInnovation/BO4E-dotnet</RepositoryUrl>
@@ -17,7 +17,7 @@
   <PropertyGroup>
     <DocumentationFile>BO4E.Encryption.xml</DocumentationFile>
   </PropertyGroup>
-  
+
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
     <Optimize>true</Optimize>
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
