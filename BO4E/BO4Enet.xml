@@ -2021,6 +2021,51 @@
         <member name="F:BO4E.COM.Preisstaffel.sigmoidparameter">
             <summary>Parameter zur Berechnung des Preises anhand der Jahresmenge und weiterer netzbezogener Parameter. <seealso cref="T:BO4E.COM.Sigmoidparameter" /></summary>
         </member>
+        <member name="T:BO4E.COM.Rechenschritt">
+            <summary>
+            Ein Berechnungsschritt ist Teil einer <see cref="T:BO4E.BO.Berechnungsformel"/>
+            </summary>
+            <remarks>Entspricht der SG9 in UTILTS</remarks>
+        </member>
+        <member name="P:BO4E.COM.Rechenschritt.RechenschrittBestandteilId">
+            <summary>
+            Die BestandteilID des Rechenschritt (1-99999)
+            </summary>
+            <remarks>UTILTS SG8 RFF 1154 / SG</remarks>
+        </member>
+        <member name="P:BO4E.COM.Rechenschritt.ReferenzRechenschrittId">
+            <summary>
+            Die ReferenzID des Rechenschritt (1-99999)
+            </summary>
+            <remarks>UTILTS SG8 RFF 1154 / SG</remarks>
+        </member>
+        <member name="P:BO4E.COM.Rechenschritt.Operation">
+            <summary>
+            Die Rechenoperation dieses Schrittes
+            </summary>
+        </member>
+        <member name="P:BO4E.COM.Rechenschritt.VerlustfaktorTrafo">
+            <summary>
+            Ein möglicher Trafoverlust
+            </summary>
+            <remarks>UTILTS SG9 CCI Z16</remarks>
+        </member>
+        <member name="P:BO4E.COM.Rechenschritt.VerlustfaktorLeitung">
+            <summary>
+            Ein möglicher Leitungsverlust
+            </summary>
+            <remarks>UTILTS SG9 CCI ZB2</remarks>
+        </member>
+        <member name="P:BO4E.COM.Rechenschritt.MesslokationId">
+            <summary>
+            Verweis auf MesslokationsId
+            </summary>
+        </member>
+        <member name="P:BO4E.COM.Rechenschritt.WeitererRechenschritt">
+            <summary>
+            rekursive Verschachtelung weiterer rechenschritte
+            </summary>
+        </member>
         <member name="T:BO4E.COM.Rechnungsposition">
             <summary>Abbildung einer Rechnungsposition. Über Rechnungspositionen werden Rechnungen strukturiert. In einem Rechnungsteil wird jeweils eine in sich geschlossene Leistung abgerechnet.</summary>
         </member>
@@ -2726,18 +2771,31 @@
         </member>
         <member name="T:BO4E.ENUM.ArithmetischeOperation">
             <summary>Mit dieser Aufzählung können arithmetische Operationen festgelegt werden.</summary>
+            <remarks>Das wird z.B. in der UTILTS SG9+CAV Datenelement 7111 verwendet</remarks>
         </member>
         <member name="F:BO4E.ENUM.ArithmetischeOperation.ADDITION">
             <summary>Es wird addiert</summary>
+            <remarks>UTILTS SG9 CAV Z69</remarks>
         </member>
         <member name="F:BO4E.ENUM.ArithmetischeOperation.SUBTRAKTION">
             <summary>Es wird subtrahiert</summary>
+            <remarks>UTILTS SG9 CAV Z70</remarks>
         </member>
         <member name="F:BO4E.ENUM.ArithmetischeOperation.MULTIPLIKATION">
             <summary>Es wird multipliziert</summary>
+            <remarks>UTILTS SG9 CAV Z82</remarks>
         </member>
         <member name="F:BO4E.ENUM.ArithmetischeOperation.DIVISION">
-            <summary>Es wird dividiert</summary>
+            <summary>Es wird dividiert (Divisor)</summary>
+            <remarks>UTILTS SG9 CAV Z80</remarks>
+        </member>
+        <member name="F:BO4E.ENUM.ArithmetischeOperation.DIVIDEND">
+            <summary>Es wird dividiert (Divident)</summary>
+            <remarks>UTILTS SG9 CAV Z81</remarks>
+        </member>
+        <member name="F:BO4E.ENUM.ArithmetischeOperation.POSITIVWERT">
+            <summary>Positivwert</summary>
+            <remarks>UTILTS SG9 CAV Z83</remarks>
         </member>
         <member name="T:BO4E.ENUM.AufAbschlagstyp">
             <summary>Festlegung, ob der Auf- oder Abschlag mit relativen oder absoluten Werten erfolgt.</summary>
@@ -3665,9 +3723,11 @@
         </member>
         <member name="F:BO4E.ENUM.Energierichtung.AUSSP">
             <summary>Ausspeisung</summary>
+            <remarks>UTILTS DE7037 Z07: Verbrauch</remarks>
         </member>
         <member name="F:BO4E.ENUM.Energierichtung.EINSP">
             <summary>Einspeisung</summary>
+            <remarks>UTILTS DE7037 Z06: Erzeugung</remarks>
         </member>
         <member name="T:BO4E.ENUM.Erzeugungsart">
             <summary>Auflistung der Erzeugungsarten von Energie.</summary>
