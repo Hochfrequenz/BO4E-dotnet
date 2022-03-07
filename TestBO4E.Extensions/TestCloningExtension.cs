@@ -29,7 +29,7 @@ namespace TestBO4E.Extensions
             var em = new Energiemenge
             {
                 LokationsId = "De12345",
-                LokationsTyp = Lokationstyp.MaLo,
+                LokationsTyp = Lokationstyp.MALO,
                 Energieverbrauch = new List<Verbrauch>
                 {
                     new Verbrauch

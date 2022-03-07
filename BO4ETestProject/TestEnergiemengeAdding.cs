@@ -16,7 +16,7 @@ namespace TestBO4E
             var em1 = new Energiemenge
             {
                 LokationsId = "DE123",
-                LokationsTyp = Lokationstyp.MaLo,
+                LokationsTyp = Lokationstyp.MALO,
                 Energieverbrauch = new List<Verbrauch>
                 {
                     new Verbrauch
@@ -33,7 +33,7 @@ namespace TestBO4E
             var em2 = new Energiemenge
             {
                 LokationsId = "DE123",
-                LokationsTyp = Lokationstyp.MaLo,
+                LokationsTyp = Lokationstyp.MALO,
                 Energieverbrauch = new List<Verbrauch>
                 {
                     new Verbrauch
@@ -58,12 +58,12 @@ namespace TestBO4E
             var em1 = new Energiemenge
             {
                 LokationsId = "DE456",
-                LokationsTyp = Lokationstyp.MeLo
+                LokationsTyp = Lokationstyp.MELO
             };
             var em2 = new Energiemenge
             {
                 LokationsId = "DE789",
-                LokationsTyp = Lokationstyp.MeLo
+                LokationsTyp = Lokationstyp.MELO
             };
             Assert.ThrowsException<InvalidOperationException>(() => em1 + em2);
         }

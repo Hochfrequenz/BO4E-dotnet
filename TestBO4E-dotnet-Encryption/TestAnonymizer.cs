@@ -154,7 +154,7 @@ namespace TestBO4E.Encryption
             var em = new Energiemenge
             {
                 LokationsId = "DE0123456789012345678901234567890",
-                LokationsTyp = Lokationstyp.MeLo,
+                LokationsTyp = Lokationstyp.MELO,
                 Energieverbrauch = new List<Verbrauch>
                 {
                     new Verbrauch
@@ -207,7 +207,7 @@ namespace TestBO4E.Encryption
             var em = new Energiemenge
             {
                 LokationsId = "DE0123456789012345678901234567890",
-                LokationsTyp = Lokationstyp.MeLo,
+                LokationsTyp = Lokationstyp.MELO,
                 Energieverbrauch = new List<Verbrauch>
                 {
                     new Verbrauch
@@ -262,7 +262,7 @@ namespace TestBO4E.Encryption
             var em = new Energiemenge
             {
                 LokationsId = "asdkasldkmaslkdmas", // not identifyable as lokationsId
-                LokationsTyp = Lokationstyp.MeLo,
+                LokationsTyp = Lokationstyp.MELO,
                 Energieverbrauch = new List<Verbrauch>()
             };
             Assert.IsFalse(Anonymizer.HasHashedKey(em));
@@ -339,7 +339,7 @@ namespace TestBO4E.Encryption
             var em = new Energiemenge
             {
                 LokationsId = "DE0123456789012345678901234567890",
-                LokationsTyp = Lokationstyp.MeLo,
+                LokationsTyp = Lokationstyp.MELO,
                 Energieverbrauch = new List<Verbrauch>
                 {
                     new Verbrauch

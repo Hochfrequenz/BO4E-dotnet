@@ -4,9 +4,9 @@ namespace BO4E.ENUM
     public enum Lokationstyp
     {
         /// <summary>Marktlokation</summary>
-        MaLo,
+        MALO,
 
         /// <summary>Messlokation</summary>
-        MeLo
+        MELO
     }
 }
