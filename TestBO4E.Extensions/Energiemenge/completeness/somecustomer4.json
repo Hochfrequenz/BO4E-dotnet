@@ -1,4 +1,4 @@
-﻿{
+{
   "assertions": {
     "coverage201803": 0.98384926
   },
@@ -23400,6 +23400,6 @@
     ],
     "lokationsId": "DEXXX4",
     "lokationstyp": "MELO",
-    "versionStruktur": 1
+    "versionStruktur": "1"
   }
 }

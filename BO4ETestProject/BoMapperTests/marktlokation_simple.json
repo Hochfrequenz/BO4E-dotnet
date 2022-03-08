@@ -2,7 +2,7 @@
   "objectName": "Marktlokation",
   "lenientDateTime": false,
   "input": {
-    "versionStruktur": 1,
+    "versionStruktur": "1",
     "boTyp": "MARKTLOKATION",
     "marktlokationsId": "54321098765",
     "sparte": "STROM",

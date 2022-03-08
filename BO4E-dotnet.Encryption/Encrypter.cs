@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using BO4E.BO;
 using BO4E.meta;
 using Microsoft.Extensions.Logging;

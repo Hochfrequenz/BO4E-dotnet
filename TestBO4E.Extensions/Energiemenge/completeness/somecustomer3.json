@@ -1,4 +1,4 @@
-﻿{
+{
   "assertions": {
     "coverage201804": 1.0
   },
@@ -23048,6 +23048,6 @@
     ],
     "lokationsId": "DEXX9999",
     "lokationstyp": "MELO",
-    "versionStruktur": 1
+    "versionStruktur": "1"
   }
 }

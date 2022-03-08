@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
@@ -278,6 +278,7 @@ namespace TestBO4E
         }
 
         [TestMethod]
+        [Obsolete]
         public void TestBoNameTyping()
         {
             Assert.AreEqual(typeof(Benachrichtigung), BoMapper.GetTypeForBoName("Benachrichtigung"));

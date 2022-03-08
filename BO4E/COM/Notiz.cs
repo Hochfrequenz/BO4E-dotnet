@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Text.Json.Serialization;
 using System.Text.RegularExpressions;
 using BO4E.meta;

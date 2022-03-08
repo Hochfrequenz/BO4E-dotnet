@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Security.Cryptography.X509Certificates;
@@ -51,6 +51,7 @@ namespace TestBO4E.Encryption
         }
 
         [TestMethod]
+        [Obsolete]
         public void TestBOEncryption()
         {
             var files = Directory.GetFiles("encrypterTests/bo/", "*.json"); // 

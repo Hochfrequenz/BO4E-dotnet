@@ -13,7 +13,7 @@ namespace TestBO4E
     [TestClass]
     public class TestBOCOMDesign
     {
-        private static readonly HashSet<Type> NO_KEYS_WHITELIST = new HashSet<Type>
+        private static readonly HashSet<Type> NO_KEYS_WHITELIST = new()
         {
             typeof(Kosten)
         };
@@ -21,8 +21,7 @@ namespace TestBO4E
         [TestMethod]
         public void TestNoBOFields()
         {
-            foreach (var type in typeof(BusinessObject).Assembly.GetTypes()
-                .Where(t => typeof(BusinessObject).IsAssignableFrom(t)))
+            foreach (var type in typeof(BusinessObject).Assembly.GetTypes().Where(t => typeof(BusinessObject).IsAssignableFrom(t)))
             {
                 var fields = type.GetFields().Where(f => f.IsPublic && !f.IsLiteral && !f.IsStatic);
                 Assert.IsFalse(fields.Any(),
@@ -33,10 +32,50 @@ namespace TestBO4E
         [TestMethod]
         public void TestBoAllPublic()
         {
-            foreach (var type in typeof(BusinessObject).Assembly.GetTypes()
-                .Where(t => t.BaseType == typeof(BusinessObject)))
+            foreach (var type in typeof(BusinessObject).Assembly.GetTypes().Where(t => t.BaseType == typeof(BusinessObject)))
                 Assert.IsTrue(type.IsPublic,
                     $"Type {type} is derived from {nameof(BusinessObject)} but is not public.");
+        }
+
+        private static void AssertConsistentIgnores(Type type)
+        {
+            if (type.IsEnum)
+            {
+                // todo: write a test here
+            }
+            else
+            {
+                var newtonSoftIgnoredProperties = type.GetProperties(BindingFlags.NonPublic | BindingFlags.Instance)
+                    .Where(p => p.GetCustomAttributes(typeof(Newtonsoft.Json.JsonIgnoreAttribute)).Any()).ToHashSet();
+                var systemTextIgnoreProperties = type.GetProperties(BindingFlags.NonPublic | BindingFlags.Instance)
+                    .Where(p => p.GetCustomAttributes(typeof(System.Text.Json.Serialization.JsonIgnoreAttribute)).Any()).ToHashSet();
+                Assert.AreEqual(newtonSoftIgnoredProperties.Count, systemTextIgnoreProperties.Count, $"Type {type} has inconsistent JsonIgnores");
+                // todo: name the properties in a useful error message
+
+                var newtonSoftIgnoredFields = type.GetFields(BindingFlags.NonPublic | BindingFlags.Instance)
+                    .Where(p => p.GetCustomAttributes(typeof(Newtonsoft.Json.JsonIgnoreAttribute)).Any()).ToHashSet();
+                var systemTextIgnoreFields = type.GetFields(BindingFlags.NonPublic | BindingFlags.Instance)
+                    .Where(p => p.GetCustomAttributes(typeof(System.Text.Json.Serialization.JsonIgnoreAttribute)).Any()).ToHashSet();
+                Assert.AreEqual(newtonSoftIgnoredFields.Count, systemTextIgnoreFields.Count, $"Type {type} has inconsistent JsonIgnores");
+            }
+        }
+
+        [TestMethod]
+        public void TestConsistentIgnoresBo()
+        {
+            foreach (var type in typeof(BusinessObject).Assembly.GetTypes().Where(t => t.BaseType == typeof(BusinessObject)))
+            {
+                AssertConsistentIgnores(type);
+            }
+        }
+
+        [TestMethod]
+        public void TestConsistentIgnoresCom()
+        {
+            foreach (var type in typeof(COM).Assembly.GetTypes().Where(t => t.BaseType == typeof(COM)))
+            {
+                AssertConsistentIgnores(type);
+            }
         }
 
         [TestMethod]
@@ -87,8 +126,7 @@ namespace TestBO4E
         [TestMethod]
         public void TestBoKeys()
         {
-            foreach (var type in typeof(BusinessObject).Assembly.GetTypes().Where(t =>
-                t.BaseType == typeof(BusinessObject) && !t.IsAbstract && !NO_KEYS_WHITELIST.Contains(t)))
+            foreach (var type in typeof(BusinessObject).Assembly.GetTypes().Where(t => t.BaseType == typeof(BusinessObject) && !t.IsAbstract && !NO_KEYS_WHITELIST.Contains(t)))
             {
                 var keyProps = type.GetProperties()
                     .Where(p => p.GetCustomAttributes(typeof(BoKey), false).Length > 0)
@@ -106,23 +144,23 @@ namespace TestBO4E
         [TestMethod]
         public void NullableDefaultEnums()
         {
-            foreach (var boType in typeof(BusinessObject).Assembly.GetTypes().Where(t =>
-                (t.BaseType == typeof(BusinessObject) || t.BaseType == typeof(COM)) && !t.IsAbstract))
-                foreach (var obligDefaultField in boType
-                    .GetProperties(BindingFlags.DeclaredOnly | BindingFlags.Public | BindingFlags.Instance)
-                    .Where(field => field.GetCustomAttributes(typeof(JsonPropertyAttribute), true)
-                        .Cast<JsonPropertyAttribute>()
-                        .Any(jpa => jpa.Required == Required.Default)))
+            foreach (var boType in typeof(BusinessObject).Assembly.GetTypes().Where(t => (t.BaseType == typeof(BusinessObject) || t.BaseType == typeof(COM)) && !t.IsAbstract))
+            {
+                foreach (var obligDefaultField in boType.GetProperties(BindingFlags.DeclaredOnly | BindingFlags.Public | BindingFlags.Instance).Where(field => field.GetCustomAttributes(typeof(JsonPropertyAttribute), true).Cast<JsonPropertyAttribute>().Any(jpa => jpa.Required == Required.Default)))
                 {
-                    if (Nullable.GetUnderlyingType(obligDefaultField.PropertyType) != null ||
-                        obligDefaultField.PropertyType == typeof(string))
+                    if (Nullable.GetUnderlyingType(obligDefaultField.PropertyType) != null || obligDefaultField.PropertyType == typeof(string))
+                    {
                         // it is already nullable. 
                         continue;
-                    if (!obligDefaultField.PropertyType.IsPrimitive && !obligDefaultField.PropertyType.IsEnum) continue;
-                    Assert.IsTrue(false,
-                        $"The type {obligDefaultField.PropertyType} of {boType.FullName}.{obligDefaultField.Name} is not nullable but not marked as obligatory.");
+                    }
+                    if (!obligDefaultField.PropertyType.IsPrimitive && !obligDefaultField.PropertyType.IsEnum)
+                    {
+                        continue;
+                    }
+                    Assert.IsTrue(false, $"The type {obligDefaultField.PropertyType} of {boType.FullName}.{obligDefaultField.Name} is not nullable but not marked as obligatory.");
                     // this is a problem because e.g. for integers you can't distinguish between no value (null) or initial value (0). Same is true for Enum values
                 }
+            }
         }
     }
 }

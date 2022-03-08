@@ -1,10 +1,11 @@
-﻿using System;
+using System;
 using System.Diagnostics;
 using System.Security.Cryptography;
 using BO4E.BO;
 using BO4E.COM;
 using BO4E.Encryption;
 using BO4E.ENUM;
+using FluentAssertions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
@@ -61,7 +62,7 @@ namespace TestBO4E.Encryption.ShowCaseTests
                 decryptedMaLo = decrypter.Decrypt<Marktlokation>(encryptedBo);
             }
 
-            Assert.AreEqual(maLo.Lokationsadresse, decryptedMaLo.Lokationsadresse);
+            maLo.Lokationsadresse.Should().BeEquivalentTo(decryptedMaLo.Lokationsadresse, opts => opts.ComparingByMembers<Adresse>());
         }
 
         [TestMethod]
@@ -106,7 +107,7 @@ namespace TestBO4E.Encryption.ShowCaseTests
                     bobsDecrypter.Decrypt<Marktlokation>(encryptedBo); // Bob knows at compile time it's a MaLo.
             }
 
-            Assert.AreEqual(maLo, decryptedMaLo);
+            maLo.Should().BeEquivalentTo(decryptedMaLo, opts => opts.ComparingByMembers<Marktlokation>());
 
             var eveKeyPair = PublicKeyBox.GenerateKeyPair();
             // Eve entered the chat

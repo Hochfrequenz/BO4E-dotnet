@@ -1,4 +1,4 @@
-﻿using BO4E.BO;
+using BO4E.BO;
 using BO4E.COM;
 using BO4E.ENUM;
 using BO4E.meta;

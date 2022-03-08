@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -47,8 +47,8 @@ namespace TestBO4E
                         var stream = File.Create(path);
                         stream.Close();
                     }
-
-                    File.WriteAllText(path, schema.ToString(SchemaVersion.Draft7), Encoding.UTF8);
+                    var utf8WithoutByteOrderMark = new UTF8Encoding(false);
+                    File.WriteAllText(path, schema.ToString(SchemaVersion.Draft7), utf8WithoutByteOrderMark);
                 }
             }
             catch (JSchemaException)

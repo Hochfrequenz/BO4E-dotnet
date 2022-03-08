@@ -1,4 +1,4 @@
-﻿{
+{
   "hinweis": "Die Rechnung des Kunden stimmt nicht, sie haben die Uhrzeiten bei ihren Beispieldaten vertauscht.",
   "assertions": {
     "coverage201804": 0.9601,
@@ -22132,6 +22132,6 @@
     ],
     "lokationsId": "DEXXX",
     "lokationstyp": "MELO",
-    "versionStruktur": 1
+    "versionStruktur": "1"
   }
 }

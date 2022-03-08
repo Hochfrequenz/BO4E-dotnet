@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
+using System.Text;
 using System.Threading.Tasks;
 using BO4E;
 using BO4E.BO;
@@ -34,14 +35,15 @@ namespace TestBO4E.Extensions
             new DateTimeOffset(2018, 12, 31, 23, 0, 0, TimeSpan.Zero).UtcDateTime);
 
         [TestMethod]
+        [Obsolete]
         public void TestCompletenessReportGenerationSomeCustomer()
         {
             var files = Directory.GetFiles("Energiemenge/completeness", "somecustomer*.json");
-            Assert.AreEqual(5, files.Length); // this is just to make sure the files haven't moved 
+            Assert.AreEqual(5, files.Length); // this is just to make sure the files haven't moved
             foreach (var boFile in files)
             {
                 JObject json;
-                using (var r = new StreamReader(boFile))
+                using (var r = new StreamReader(boFile, new UTF8Encoding(false)))
                 {
                     var jsonString = r.ReadToEnd();
                     json = JsonConvert.DeserializeObject<JObject>(jsonString);
@@ -98,6 +100,7 @@ namespace TestBO4E.Extensions
         }
 
         [TestMethod]
+        [Obsolete]
         public void TestCompletenessReportGenerationSmard()
         {
             var profiler = MiniProfiler.StartNew(nameof(TestCompletenessReportGenerationSmard));
@@ -129,11 +132,12 @@ namespace TestBO4E.Extensions
         }
 
         [TestMethod]
+        [Obsolete]
         public void TestRounding()
         {
             var boFile = Directory.GetFiles("Energiemenge/completeness", "gas_januar_2018.json").First();
             JObject json;
-            using (var r = new StreamReader(boFile))
+            using (var r = new StreamReader(boFile, new UTF8Encoding(false)))
             {
                 var jsonString = r.ReadToEnd();
                 json = JsonConvert.DeserializeObject<JObject>(jsonString);
@@ -251,11 +255,13 @@ namespace TestBO4E.Extensions
         }
 
         [TestMethod]
+        [Obsolete]
         public void TestMonthlySlices()
         {
             TestMonthlySlices(true);
         }
 
+        [Obsolete]
         internal void TestMonthlySlices(bool testFirstOnly = true, bool useParallelExecution = false)
         {
             foreach (var boFile in Directory.GetFiles("Energiemenge/completeness", "50hz_prognose*.json"))
@@ -285,7 +291,7 @@ namespace TestBO4E.Extensions
             {
                 Energiemenge em;
                 using (var r =
-                    new StreamReader(Directory.GetFiles("Energiemenge/completeness", "threeyears.json").First()))
+                       new StreamReader(Directory.GetFiles("Energiemenge/completeness", "threeyears.json").First()))
                 {
                     var jsonString = r.ReadToEnd();
                     em = JsonConvert.DeserializeObject<Energiemenge>(jsonString);
