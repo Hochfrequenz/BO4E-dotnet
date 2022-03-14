@@ -1,4 +1,4 @@
-﻿syntax = "proto3";
+syntax = "proto3";
 package bo4e;
 import "google/protobuf/timestamp.proto";
 import "protobuf-net/bcl.proto"; // schema for protobuf-net's handling of core .NET types

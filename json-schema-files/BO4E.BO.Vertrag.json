@@ -769,7 +769,10 @@
           "format": "date-time"
         },
         "vertragsteilende": {
-          "type": "string",
+          "type": [
+            "string",
+            "null"
+          ],
           "format": "date-time"
         },
         "lokation": {
@@ -814,8 +817,7 @@
         }
       },
       "required": [
-        "vertragsteilbeginn",
-        "vertragsteilende"
+        "vertragsteilbeginn"
       ]
     },
     "Zeitraum": {
