@@ -1,4 +1,4 @@
-syntax = "proto3";
+﻿syntax = "proto3";
 package bo4e;
 import "google/protobuf/timestamp.proto";
 import "protobuf-net/bcl.proto"; // schema for protobuf-net's handling of core .NET types
@@ -837,8 +837,8 @@ enum Leistungstyp {
 }
 enum Lokationstyp {
    option (.protobuf_net.enumopt).namespace = "BO4E.ENUM";
-   MaLo = 0;
-   MeLo = 1;
+   MALO = 0;
+   MELO = 1;
 }
 message Marktlokation {
    option (.protobuf_net.msgopt).namespace = "BO4E.BO";
