@@ -52,7 +52,7 @@ namespace TestBO4E
                 stream.Close();
             }
 
-            File.WriteAllText(path, protoString, Encoding.UTF8);
+            File.WriteAllText(path, protoString, new UTF8Encoding(false));
         }
     }
 }

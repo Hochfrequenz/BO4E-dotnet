@@ -43,17 +43,17 @@ namespace BO4E.COM
         [CompatibilityLevel(CompatibilityLevel.Level240)]
         private DateTime _Vertragsteilende
         {
-            get => Vertragsteilende.UtcDateTime;
+            get => Vertragsteilende?.UtcDateTime ?? DateTime.MinValue;
             set => Vertragsteilende = DateTime.SpecifyKind(value, DateTimeKind.Utc);
         }
         /// <summary>
         ///     Ende der Gültigkeit des Vertragsteils.
         /// </summary>
-        [JsonProperty(PropertyName = "vertragsteilende", Required = Required.Always)]
+        [JsonProperty(PropertyName = "vertragsteilende", Required = Required.Default)]
         [JsonPropertyName("vertragsteilende")]
         [ProtoIgnore]
         [Newtonsoft.Json.JsonConverter(typeof(LenientDateTimeConverter))]
-        public DateTimeOffset Vertragsteilende { get; set; }
+        public DateTimeOffset? Vertragsteilende { get; set; }
 
         /// <summary>
         ///     Der Identifier für diejenigen Markt- oder Messlokation, die zu diesem Vertragsteil gehören.
