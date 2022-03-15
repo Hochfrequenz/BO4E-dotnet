@@ -43,10 +43,10 @@ namespace BO4E.BO
         ///     Eine im Verwendungskontext eindeutige Nummer für den Vertrag
         /// </summary>
         [BoKey]
-        [JsonProperty(Required = Required.Always, Order = 4, PropertyName = "vertragsnummer")]
+        [JsonProperty(Required = Required.Default, Order = 4, PropertyName = "vertragsnummer")]
         [JsonPropertyName("vertragsnummer")]
         [ProtoMember(4)]
-        public string Vertragsnummer { get; set; }
+        public string? Vertragsnummer { get; set; }
 
         /// <summary>
         ///     Beschreibung zum Vertrag
@@ -54,16 +54,16 @@ namespace BO4E.BO
         [JsonProperty(Required = Required.Default, Order = 5, PropertyName = "beschreibung")]
         [JsonPropertyName("beschreibung")]
         [ProtoMember(5)]
-        public string Beschreibung { get; set; }
+        public string? Beschreibung { get; set; }
 
         /// <summary>
         ///     Hier ist festgelegt, um welche Art von Vertrag es sich handelt. Z.B. Netznutzungvertrag. Details siehe ENUM
         ///     Vertragsart
         /// </summary>
-        [JsonProperty(Required = Required.Always, Order = 6, PropertyName = "vertragsart")]
+        [JsonProperty(Required = Required.Default, Order = 6, PropertyName = "vertragsart")]
         [JsonPropertyName("vertragsart")]
         [ProtoMember(6)]
-        public Vertragsart Vertragsart { get; set; }
+        public Vertragsart? Vertragsart { get; set; }
 
         /// <summary>
         ///     Gibt den Status des Vertrags an. Siehe ENUM Vertragsstatus
@@ -126,7 +126,7 @@ namespace BO4E.BO
             PropertyName = "vertragspartner1")] // TODO: should be required but our CDS is missing the association
         [JsonPropertyName("vertragspartner1")]
         [ProtoMember(11)]
-        public Geschaeftspartner Vertragspartner1 { get; set; }
+        public Geschaeftspartner? Vertragspartner1 { get; set; }
 
         /// <summary>
         ///     Der "zweitgenannte" Vertragspartner. In der Regel der Empfänger des Vertrags. Beispiel "Vertrag zwischen
@@ -136,7 +136,7 @@ namespace BO4E.BO
             PropertyName = "vertragspartner2")] // TODO: should be required but our CDS is missing the association
         [JsonPropertyName("vertragspartner2")]
         [ProtoMember(12)]
-        public Geschaeftspartner Vertragspartner2 { get; set; }
+        public Geschaeftspartner? Vertragspartner2 { get; set; }
 
         /// <summary>
         ///     Unterzeichner des Vertragspartners1. Siehe COM Unterschrift
@@ -160,7 +160,7 @@ namespace BO4E.BO
         [JsonProperty(Required = Required.Default, Order = 15, PropertyName = "vertragskonditionen")]
         [JsonPropertyName("vertragskonditionen")]
         [ProtoMember(15)]
-        public Vertragskonditionen Vertragskonditionen { get; set; }
+        public Vertragskonditionen? Vertragskonditionen { get; set; }
 
         /// <summary>
         ///     Der Vertragsteil wird dazu verwendet, eine vertragliche Leistung in Bezug zu einer Lokation (Markt- oder
@@ -190,7 +190,7 @@ namespace BO4E.BO
         [NonOfficial(NonOfficialCategory.CUSTOMER_REQUIREMENTS)]
         [ProtoMember(1018)]
         // ToDO: isn't an Ansprechpartner the better choice than a Geschaeftspartner?
-        public Geschaeftspartner Korrespondenzpartner { get; set; }
+        public Geschaeftspartner? Korrespondenzpartner { get; set; }
 
         /// <summary>
         ///     moves lokationsId from userProperties to vertragsteil if relevant

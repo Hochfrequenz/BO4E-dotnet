@@ -936,7 +936,10 @@
       "format": "date-time"
     },
     "vertragsnummer": {
-      "type": "string"
+      "type": [
+        "string",
+        "null"
+      ]
     },
     "beschreibung": {
       "type": [
@@ -945,8 +948,12 @@
       ]
     },
     "vertragsart": {
-      "type": "string",
+      "type": [
+        "string",
+        "null"
+      ],
       "enum": [
+        null,
         "ENERGIELIEFERVERTRAG",
         "NETZNUTZUNGSVERTRAG",
         "BILANZIERUNGSVERTRAG",
@@ -1041,8 +1048,6 @@
     }
   },
   "required": [
-    "vertragsnummer",
-    "vertragsart",
     "sparte",
     "vertragsbeginn"
   ]
