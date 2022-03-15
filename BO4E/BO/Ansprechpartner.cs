@@ -47,29 +47,29 @@ namespace BO4E.BO
         [ProtoMember(7)]
         [DataCategory(DataCategory.NAME)]
         [BoKey]
-        public string Vorname { get; set; }
+        public string? Vorname { get; set; }
 
         /// <summary>Nachname (Familienname) des Ansprechpartners</summary>
-        [JsonProperty(Required = Required.Always, Order = 8, PropertyName = "nachname")]
+        [JsonProperty(Required = Required.Default, Order = 8, PropertyName = "nachname")]
         [JsonPropertyName("nachname")]
         [ProtoMember(8)]
         [DataCategory(DataCategory.NAME)]
         [BoKey]
-        public string Nachname { get; set; }
+        public string? Nachname { get; set; }
 
         /// <summary>E-Mail Adresse</summary>
         [JsonProperty(Required = Required.Default, Order = 9, PropertyName = "eMailAdresse")]
         [JsonPropertyName("eMailAdresse")]
         [ProtoMember(9)]
         [DataCategory(DataCategory.ADDRESS)]
-        public string EMailAdresse { get; set; }
+        public string? EMailAdresse { get; set; }
 
         /// <summary>Weitere Informationen zum Ansprechpartner</summary>
         [JsonProperty(Required = Required.Default, Order = 10, PropertyName = "kommentar")]
         [JsonPropertyName("kommentar")]
         [ProtoMember(10)]
         [DataCategory(DataCategory.NAME)]
-        public string Kommentar { get; set; }
+        public string? Kommentar { get; set; }
 
         /// <summary>Der Geschäftspartner, für den dieser Ansprechpartner modelliert wird.</summary>
         [JsonProperty(Required = Required.Default, Order = 11, PropertyName = "geschaeftspartner")]
@@ -78,14 +78,14 @@ namespace BO4E.BO
             .UNSPECIFIED)] // it's always required in BO4E, changed it to default 2020-08-31 KK
         [ProtoMember(11)]
         [BoKey]
-        public Geschaeftspartner Geschaeftspartner { get; set; }
+        public Geschaeftspartner? Geschaeftspartner { get; set; }
 
         /// <summary> Adresse des Ansprechpartners, falls diese von der Adresse des Geschäftspartners abweicht.</summary>
         [JsonProperty(Required = Required.Default, Order = 12, PropertyName = "adresse")]
         [JsonPropertyName("adresse")]
         [ProtoMember(12)]
         [DataCategory(DataCategory.ADDRESS)]
-        public Adresse Adresse { get; set; }
+        public Adresse? Adresse { get; set; }
 
         /// <summary>Liste der Telefonnummern, unter denen der Ansprechpartner erreichbar ist.</summary>
         [NonOfficial(NonOfficialCategory
