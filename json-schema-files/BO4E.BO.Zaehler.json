@@ -652,20 +652,33 @@
       ],
       "properties": {
         "zaehlwerkId": {
-          "type": "string"
+          "type": [
+            "string",
+            "null"
+          ]
         },
         "bezeichnung": {
-          "type": "string"
+          "type": [
+            "string",
+            "null"
+          ]
         },
         "richtung": {
-          "type": "string",
+          "type": [
+            "string",
+            "null"
+          ],
           "enum": [
+            null,
             "AUSSP",
             "EINSP"
           ]
         },
         "obisKennzahl": {
-          "type": "string"
+          "type": [
+            "string",
+            "null"
+          ]
         },
         "wandlerfaktor": {
           "type": [
@@ -802,13 +815,7 @@
           ],
           "format": "date-time"
         }
-      },
-      "required": [
-        "zaehlwerkId",
-        "bezeichnung",
-        "richtung",
-        "obisKennzahl"
-      ]
+      }
     }
   },
   "type": "object",

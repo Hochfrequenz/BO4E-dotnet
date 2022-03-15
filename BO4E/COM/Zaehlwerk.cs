@@ -19,32 +19,32 @@ namespace BO4E.COM
         ///     Identifikation des Zählwerks (Registers) innerhalb des Zählers. Oftmals eine laufende Nummer hinter der
         ///     Zählernummer. Z.B. 47110815_1
         /// </summary>
-        [JsonProperty(PropertyName = "zaehlwerkId", Required = Required.Always)]
+        [JsonProperty(PropertyName = "zaehlwerkId", Required = Required.Default)]
         [JsonPropertyName("zaehlwerkId")]
         [ProtoMember(3)]
-        public string ZaehlwerkId { get; set; }
+        public string? ZaehlwerkId { get; set; }
 
         /// <summary>Zusätzliche Bezeichnung, z.B. Zählwerk_Wirkarbeit.</summary>
-        [JsonProperty(PropertyName = "bezeichnung", Required = Required.Always)]
+        [JsonProperty(PropertyName = "bezeichnung", Required = Required.Default)]
         [JsonPropertyName("bezeichnung")]
         [ProtoMember(4)]
-        public string Bezeichnung { get; set; }
+        public string? Bezeichnung { get; set; }
 
         /// <summary>Die Energierichtung, Einspeisung oder Ausspeisung. Details <see cref="Energierichtung" /></summary>
-        [JsonProperty(PropertyName = "richtung", Required = Required.Always)]
+        [JsonProperty(PropertyName = "richtung", Required = Required.Default)]
         [JsonPropertyName("richtung")]
         [ProtoMember(5)]
-        public Energierichtung Richtung { get; set; }
+        public Energierichtung? Richtung { get; set; }
 
         /// <summary>
         ///     Die OBIS-Kennzahl für das Zählwerk, die festlegt, welche auf die gemessene Größe mit dem Stand gemeldet wird.
         ///     Nur Zählwerkstände mit dieser OBIS-Kennzahl werden an diesem Zählwerk registriert. Beispiel:1-0:1.8.1 für
         ///     elektrische Wirkarbeit.
         /// </summary>
-        [JsonProperty(PropertyName = "obisKennzahl", Required = Required.Always)]
+        [JsonProperty(PropertyName = "obisKennzahl", Required = Required.Default)]
         [JsonPropertyName("obisKennzahl")]
         [ProtoMember(6)]
-        public string ObisKennzahl { get; set; }
+        public string? ObisKennzahl { get; set; }
 
         /// <summary>
         ///     Mit diesem Faktor wird eine Zählerstandsdifferenz multipliziert, um zum eigentlichen Verbrauch im Zeitraum zu
@@ -67,7 +67,7 @@ namespace BO4E.COM
         [NonOfficial(NonOfficialCategory.CUSTOMER_REQUIREMENTS)]
         [Obsolete("Use existing obisKennzahl instead.", true)]
         [ProtoMember(1009)]
-        public string Kennzahl { get; set; }
+        public string? Kennzahl { get; set; }
 
         /// <summary>schwachlastfaehig</summary>
         [JsonProperty(PropertyName = "schwachlastfaehig", Required = Required.Default)]
@@ -110,7 +110,7 @@ namespace BO4E.COM
         [ProtoMember(1015)]
 #pragma warning disable CS1591 // Missing XML comment for publicly visible type or member
         // Todo @hamid: add a docstring
-        public Konzessionsabgabe Konzessionsabgabe { get; set; }
+        public Konzessionsabgabe? Konzessionsabgabe { get; set; }
 
         [JsonProperty(PropertyName = "steuerbefreit", Required = Required.Default)]
         [JsonPropertyName("steuerbefreit")]

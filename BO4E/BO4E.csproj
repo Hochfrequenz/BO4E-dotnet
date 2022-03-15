@@ -29,6 +29,7 @@
     <EmbedAllSources>True</EmbedAllSources>
     <LangVersion>9</LangVersion>
     <DocumentationFile>BO4Enet.xml</DocumentationFile>
+	 <Nullable>annotations</Nullable>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
