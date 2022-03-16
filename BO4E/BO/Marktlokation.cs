@@ -56,16 +56,16 @@ namespace BO4E.BO
         public Sparte Sparte { get; set; }
 
         /// <summary>Kennzeichnung, ob Energie eingespeist oder entnommen (ausgespeist) wird.</summary>
-        [JsonProperty(Required = Required.Always, Order = 6, PropertyName = "energierichtung")]
+        [JsonProperty(Required = Required.Default, Order = 6, PropertyName = "energierichtung")]
         [JsonPropertyName("energierichtung")]
         [ProtoMember(6)]
-        public Energierichtung Energierichtung { get; set; }
+        public Energierichtung? Energierichtung { get; set; }
 
         /// <summary>Kennzeichnung, ob Energie eingespeist oder entnommen (ausgespeist) wird.</summary>
-        [JsonProperty(Required = Required.Always, Order = 7, PropertyName = "bilanzierungsmethode")]
+        [JsonProperty(Required = Required.Default, Order = 7, PropertyName = "bilanzierungsmethode")]
         [JsonPropertyName("bilanzierungsmethode")]
         [ProtoMember(7)]
-        public Bilanzierungsmethode Bilanzierungsmethode { get; set; }
+        public Bilanzierungsmethode? Bilanzierungsmethode { get; set; }
 
         /// <summary>Verbrauchsart der Marktlokation</summary>
         [JsonProperty(Required = Required.Default, Order = 8, PropertyName = "verbrauchsart")]
@@ -97,7 +97,7 @@ namespace BO4E.BO
         [JsonProperty(PropertyName = "netzbetreiberCodeNr", Required = Required.Default, Order = 11)]
         [JsonPropertyName("netzbetreiberCodeNr")]
         [ProtoMember(11)]
-        public string NetzbetreiberCodeNr { get; set; }
+        public string? NetzbetreiberCodeNr { get; set; }
 
         /// <summary>Typ des Netzgebietes,z.B.Verteilnetz.</summary>
         /// https://github.com/Hochfrequenz/energy-service-hub/issues/11
@@ -110,19 +110,19 @@ namespace BO4E.BO
         [JsonProperty(PropertyName = "netzgebietNr", Order = 13, Required = Required.Default)]
         [JsonPropertyName("netzgebietNr")]
         [ProtoMember(13)]
-        public string NetzgebietNr { get; set; }
+        public string? NetzgebietNr { get; set; }
 
         /// <summary>Bilanzierungsgebiet, dem das Netzgebiet zugeordnet ist - im Falle eines Strom Netzes.</summary>
         [JsonProperty(Required = Required.Default, Order = 14, PropertyName = "bilanzierungsgebiet")]
         [JsonPropertyName("bilanzierungsgebiet")]
         [ProtoMember(14)]
-        public string Bilanzierungsgebiet { get; set; }
+        public string? Bilanzierungsgebiet { get; set; }
 
         /// <summary>CodeNummer des Grundversorgers, der für diese Marktlokation zuständig ist.</summary>
         [JsonProperty(PropertyName = "grundversorgerCodeNr", Order = 15, Required = Required.Default)]
         [JsonPropertyName("grundversorgerCodeNr")]
         [ProtoMember(15)]
-        public string GrundversorgerCodeNr { get; set; }
+        public string? GrundversorgerCodeNr { get; set; }
 
         /// <summary>
         ///     Die Gasqualität in diesem Netzgebiet. H-Gas oder L-Gas. Im Falle eines Gas-Netzes.
@@ -139,7 +139,7 @@ namespace BO4E.BO
             PropertyName = "endkunde")]
         [JsonPropertyName("endkunde")]
         [ProtoMember(17)]
-        public Geschaeftspartner Endkunde { get; set; }
+        public Geschaeftspartner? Endkunde { get; set; }
 
         /// <summary>Die Adresse, an der die Energie-Lieferung oder -Einspeisung erfolgt. <seealso cref="Adresse" /></summary>
         /// */
@@ -147,7 +147,7 @@ namespace BO4E.BO
         [JsonProperty(Required = Required.Default, Order = 18, PropertyName = "lokationsadresse")]
         [JsonPropertyName("lokationsadresse")]
         [ProtoMember(18)]
-        public Adresse Lokationsadresse { get; set; }
+        public Adresse? Lokationsadresse { get; set; }
 
         /// <summary>
         ///     Alternativ zu einer postalischen Adresse kann hier ein Ort mittels Geokoordinaten angegeben werden (z.B. zur
@@ -158,7 +158,7 @@ namespace BO4E.BO
         [JsonProperty(Required = Required.Default, Order = 19, PropertyName = "geoadresse")]
         [JsonPropertyName("geoadresse")]
         [ProtoMember(19)]
-        public Geokoordinaten Geoadresse { get; set; }
+        public Geokoordinaten? Geoadresse { get; set; }
 
         /// <summary>
         ///     Alternativ zu einer postalischen Adresse und Geokoordinaten kann hier eine  Ortsangabe mittels Gemarkung und
@@ -168,7 +168,7 @@ namespace BO4E.BO
         [JsonProperty(Required = Required.Default, Order = 20, PropertyName = "katasterinformation")]
         [JsonPropertyName("katasterinformation")]
         [ProtoMember(20)]
-        public Katasteradresse Katasterinformation { get; set; }
+        public Katasteradresse? Katasterinformation { get; set; }
 
         /// <summary>
         ///     für EDIFACT mapping
@@ -190,7 +190,7 @@ namespace BO4E.BO
         [JsonPropertyName("regelzone")]
         [ProtoMember(1022)]
         [NonOfficial(NonOfficialCategory.CUSTOMER_REQUIREMENTS)]
-        public string Regelzone { get; set; }
+        public string? Regelzone { get; set; }
 
         /// <summary>
         ///     für EDIFACT mapping
@@ -200,7 +200,7 @@ namespace BO4E.BO
         [JsonPropertyName("marktgebiet")]
         [ProtoMember(1023)]
         [NonOfficial(NonOfficialCategory.CUSTOMER_REQUIREMENTS)]
-        public string Marktgebiet { get; set; }
+        public string? Marktgebiet { get; set; }
 
         /// <summary>
         ///     für EDIFACT mapping
