@@ -32,7 +32,7 @@ namespace BO4E.COM
         [JsonPropertyName("strasse")]
         [FieldName("street", Language.EN)]
         [ProtoMember(5)]
-        public string Strasse { get; set; }
+        public string? Strasse { get; set; }
 
         /// <summary>Hausnummer inkl. Zusatz. Beispiel. 3, 4a etc.</summary>
         [DataCategory(DataCategory.ADDRESS)]
@@ -40,7 +40,7 @@ namespace BO4E.COM
         [JsonPropertyName("hausnummer")]
         [FieldName("houseNumber", Language.EN)]
         [ProtoMember(6)]
-        public string Hausnummer { get; set; }
+        public string? Hausnummer { get; set; }
 
         /// <summary>
         ///     Im Falle einer Postfachadresse das Postfach. Damit werden Straße und
@@ -50,14 +50,14 @@ namespace BO4E.COM
         [JsonProperty(PropertyName = "postfach", Required = Required.Default)]
         [JsonPropertyName("postfach")]
         [ProtoMember(7)]
-        public string Postfach { get; set; }
+        public string? Postfach { get; set; }
 
         /// <summary>Zusatzhinweis zum Auffinden der Adresse, z.B. "3. Stock linke Wohnung"</summary>
         [DataCategory(DataCategory.ADDRESS)]
         [JsonProperty(PropertyName = "adresszusatz", Required = Required.Default)]
         [JsonPropertyName("adresszusatz")]
         [ProtoMember(8)]
-        public string Adresszusatz { get; set; }
+        public string? Adresszusatz { get; set; }
 
         /// <summary>
         ///     Im Falle einer c/o-Adresse steht in diesem Attribut die Anrede. Z.B. c/o
@@ -68,7 +68,7 @@ namespace BO4E.COM
         [JsonProperty(PropertyName = "coErgaenzung", Required = Required.Default)]
         [JsonPropertyName("coErgaenzung")]
         [ProtoMember(9)]
-        public string CoErgaenzung { get; set; }
+        public string? CoErgaenzung { get; set; }
 
         /// <summary>Offizieller ISO-Landescode. Z.B. NL, Details <see cref="ENUM.Landescode" /></summary>
         [DataCategory(DataCategory.ADDRESS)]
@@ -86,6 +86,6 @@ namespace BO4E.COM
         [JsonPropertyName("ortsteil")]
         [ProtoMember(1011)]
         [NonOfficial(NonOfficialCategory.MISSING)]
-        public string Ortsteil { get; set; }
+        public string? Ortsteil { get; set; }
     }
 }

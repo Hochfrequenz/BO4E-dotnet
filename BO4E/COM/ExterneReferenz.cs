@@ -27,7 +27,7 @@ namespace BO4E.COM
         [JsonProperty(PropertyName = "exRefName", Required = Required.Default)]
         [JsonPropertyName("exRefName")]
         [ProtoMember(1)]
-        public string ExRefName { get; set; }
+        public string? ExRefName { get; set; }
 
         /// <summary>
         ///     Wert der externen Referenz (z.B. "123456"; "4711")
@@ -35,7 +35,7 @@ namespace BO4E.COM
         [JsonProperty(PropertyName = "exRefWert", Required = Required.Default)]
         [JsonPropertyName("exRefWert")]
         [ProtoMember(2)]
-        public string ExRefWert { get; set; }
+        public string? ExRefWert { get; set; }
         /// <summary>
         /// Ist das Objekt valide
         /// </summary>
