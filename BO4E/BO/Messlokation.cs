@@ -58,7 +58,7 @@ namespace BO4E.BO
         [JsonProperty(PropertyName = "messgebietNr", Required = Required.Default, Order = 7)]
         [JsonPropertyName("messgebietNr")]
         [ProtoMember(7)]
-        public string MessgebietNr { get; set; }
+        public string? MessgebietNr { get; set; }
 
         /// <summary>
         ///     Codenummer des grundzuständigen Messstellenbetreibers, der für diese
@@ -68,7 +68,7 @@ namespace BO4E.BO
         [JsonProperty(PropertyName = "grundzustaendigerMSBCodeNr", Required = Required.Default, Order = 8)]
         [JsonPropertyName("grundzustaendigerMSBCodeNr")]
         [ProtoMember(8)]
-        public string GrundzustaendigerMSBCodeNr { get; set; }
+        public string? GrundzustaendigerMSBCodeNr { get; set; }
 
         /// <summary>
         ///     Codenummer des grundzuständigen Messstellenbetreibers für intelligente
@@ -79,7 +79,7 @@ namespace BO4E.BO
         [JsonProperty(PropertyName = "grundzustaendigerMSBIMCodeNr", Required = Required.Default, Order = 9)]
         [JsonPropertyName("grundzustaendigerMSBIMCodeNr")]
         [ProtoMember(9)]
-        public string
+        public string?
             GrundzustaendigerMSBIMCodeNr
         {
             get;
@@ -98,7 +98,7 @@ namespace BO4E.BO
 #pragma warning restore CS0618 // Type or member is obsolete
         [ProtoMember(10)]
         [Obsolete("MDL is deprecated.", true)]
-        public string GrundzustaendigerMDLCodeNr { get; set; }
+        public string? GrundzustaendigerMDLCodeNr { get; set; }
 
         /// <summary>
         ///     Die Adresse, an der die Messeinrichtungen zu finden sind.( Nur angeben, wenn
@@ -110,7 +110,7 @@ namespace BO4E.BO
         [JsonPropertyName("messadresse")]
         [DataCategory(DataCategory.ADDRESS)]
         [ProtoMember(11)]
-        public Adresse Messadresse { get; set; }
+        public Adresse? Messadresse { get; set; }
 
         /// <summary>
         ///     Alternativ zu einer postalischen Adresse kann hier ein Ort mittels
@@ -122,7 +122,7 @@ namespace BO4E.BO
         [JsonPropertyName("geoadresse")]
         [DataCategory(DataCategory.ADDRESS)]
         [ProtoMember(12)]
-        public Geokoordinaten Geoadresse { get; set; }
+        public Geokoordinaten? Geoadresse { get; set; }
 
         /// <summary>
         ///     Alternativ zu einer postalischen Adresse und Geokoordinaten kann hier eine
@@ -135,25 +135,25 @@ namespace BO4E.BO
         [JsonPropertyName("katasterinformation")]
         [ProtoMember(13)]
         [DataCategory(DataCategory.ADDRESS)]
-        public Katasteradresse Katasterinformation { get; set; }
+        public Katasteradresse? Katasterinformation { get; set; }
 
         /// <summary>Liste der Hardware, die zu dieser Messstelle gehört.</summary>
         [JsonProperty(PropertyName = "geraete", Required = Required.Default, Order = 14)]
         [JsonPropertyName("geraete")]
         [ProtoMember(14)]
-        public List<Hardware> Geraete { get; set; }
+        public List<Hardware>? Geraete { get; set; }
 
         /// <summary>Liste der Messdienstleistungen, die zu dieser Messstelle gehört.</summary>
         [JsonProperty(PropertyName = "messdienstleistung", Required = Required.Default, Order = 15)]
         [JsonPropertyName("messdienstleistung")]
         [ProtoMember(15)]
-        public List<Dienstleistung> Messdienstleistung { get; set; }
+        public List<Dienstleistung>? Messdienstleistung { get; set; }
 
         /// <summary> Zähler, die zu dieser Messlokation gehören. Details</summary>
         [JsonProperty(PropertyName = "messlokationszaehler", Required = Required.Default, Order = 16)]
         [JsonPropertyName("messlokationszaehler")]
         [ProtoMember(16)]
-        public List<Zaehler> Messlokationszaehler { get; set; }
+        public List<Zaehler>? Messlokationszaehler { get; set; }
 
         /// <summary>
         ///     <see cref="Marktlokation.Bilanzierungsmethode" />
@@ -181,7 +181,7 @@ namespace BO4E.BO
         [ProtoMember(1019)]
         [NonOfficial(NonOfficialCategory.CUSTOMER_REQUIREMENTS)]
         [Obsolete("This isn't the right place for this information")] // ToDo: check
-        public List<MarktpartnerDetails> Marktrollen { get; set; }
+        public List<MarktpartnerDetails>? Marktrollen { get; set; }
 
         /// <summary>
         ///     gasqualitaet für EDIFACT mapping
@@ -211,7 +211,7 @@ namespace BO4E.BO
         [JsonPropertyName("zaehlwerke")]
         [ProtoMember(1022)]
         [NonOfficial(NonOfficialCategory.CUSTOMER_REQUIREMENTS)]
-        public List<Zaehlwerk> Zaehlwerke { get; set; }
+        public List<Zaehlwerk>? Zaehlwerke { get; set; }
 
 
         /// <summary>

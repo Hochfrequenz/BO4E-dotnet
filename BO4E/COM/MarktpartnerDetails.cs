@@ -32,7 +32,7 @@ namespace BO4E.COM
         [JsonPropertyName("rollencodenummer")]
         [ProtoMember(3)]
         [Obsolete("Use " + nameof(Marktteilnehmer) + "." + nameof(Marktteilnehmer.Rollencodenummer) + " instead")]
-        public string Rollencodenummer { get; set; }
+        public string? Rollencodenummer { get; set; }
 
         /// <summary>
         ///     code von Marktrolle
@@ -42,17 +42,17 @@ namespace BO4E.COM
         [NonOfficial(NonOfficialCategory.UNSPECIFIED)]
         [Obsolete("Use " + nameof(Marktteilnehmer) + "." + nameof(Marktteilnehmer.Rollencodetyp) + " instead")]
         [ProtoMember(4)]
-        public string Code { get; set; }
+        public string? Code { get; set; }
 
         /// <summary>
         ///     List of Marktrolle. Details siehe <see cref="ENUM.Marktrolle" />
         /// </summary>
-        [JsonProperty(Required = Required.Always)]
+        [JsonProperty(Required = Required.Default)]
         [ProtoMember(5)]
         [Obsolete("Use " + nameof(Marktteilnehmer) + "." + nameof(Marktteilnehmer.Marktrolle) + " instead")]
 #pragma warning disable IDE1006 // Naming Styles because Marktrolle is already the name of the enum
         // ReSharper disable once InconsistentNaming
-        public ENUM.Marktrolle marktrolle { get; set; }
+        public ENUM.Marktrolle? marktrolle { get; set; }
 
 #pragma warning restore IDE1006 // Naming Styles
     }

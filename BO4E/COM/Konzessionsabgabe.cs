@@ -26,7 +26,7 @@ namespace BO4E.COM
         [JsonProperty(PropertyName = "kosten", Required = Required.Default, Order = 5)]
         [JsonPropertyName("kosten")]
         [ProtoMember(4)]
-        public decimal Kosten { get; set; }
+        public decimal? Kosten { get; set; }
 
         /// <summary>
         ///     Gebührenkategorie der Konzessionsabgabe
@@ -34,6 +34,6 @@ namespace BO4E.COM
         [JsonProperty(PropertyName = "kategorie", Required = Required.Default, Order = 6)]
         [JsonPropertyName("kategorie")]
         [ProtoMember(5)]
-        public string Kategorie { get; set; }
+        public string? Kategorie { get; set; }
     }
 }

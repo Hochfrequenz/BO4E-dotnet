@@ -118,7 +118,7 @@ namespace BO4E.BO
             PropertyName = "zaehlerhersteller")]
         [JsonPropertyName("zaehlerhersteller")]
         [ProtoMember(13)]
-        public Geschaeftspartner Zaehlerhersteller { get; set; }
+        public Geschaeftspartner? Zaehlerhersteller { get; set; }
 
         /// <summary>
         ///     Referenz auf das Smartmeter-Gateway
@@ -127,7 +127,7 @@ namespace BO4E.BO
         [JsonPropertyName("gateway")]
         [NonOfficial(NonOfficialCategory.CUSTOMER_REQUIREMENTS)]
         [ProtoMember(1014)]
-        public string Gateway { get; set; }
+        public string? Gateway { get; set; }
 
         /// <summary>
         ///     Fernschaltung
