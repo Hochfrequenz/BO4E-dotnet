@@ -69,7 +69,7 @@ namespace BO4E.COM
         ///     Gibt an, ob es sich um eine PROGNOSE oder eine MESSUNG handelt.
         /// </summary>
         /// <seealso cref="ENUM.Wertermittlungsverfahren" />
-        [JsonProperty(PropertyName = "wertermittlungsverfahren", Required = Required.Always, Order = 5)]
+        [JsonProperty(PropertyName = "wertermittlungsverfahren", Required = Required.Default, Order = 5)]
         [JsonPropertyName("wertermittlungsverfahren")]
         [ProtoMember(5)]
         public Wertermittlungsverfahren? Wertermittlungsverfahren { get; set; }
