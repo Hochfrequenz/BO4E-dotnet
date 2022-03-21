@@ -81,7 +81,7 @@ namespace BO4E.COM
         [JsonPropertyName("verwendungszwecke")]
         [NonOfficial(NonOfficialCategory.CUSTOMER_REQUIREMENTS)]
         [ProtoMember(1011)]
-        public List<Verwendungszweck> Verwendungszwecke { get; set; }
+        public List<Verwendungszweck>? Verwendungszwecke { get; set; }
 
         /// <summary>Stromverbrauchsart/Verbrauchsart Marktlokation</summary>
         [JsonProperty(PropertyName = "verbrauchsart", Required = Required.Default)]

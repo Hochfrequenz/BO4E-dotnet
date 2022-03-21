@@ -175,7 +175,7 @@ namespace BO4E.BO
         [JsonProperty(PropertyName = "externeReferenzen", Required = Required.Default)]
         [JsonPropertyName("externeReferenzen")]
         [ProtoMember(4)]
-        public List<ExterneReferenz> ExterneReferenzen { get; set; }
+        public List<ExterneReferenz>? ExterneReferenzen { get; set; }
 
         /// <summary>
         ///     allows adding a GUID to Business Objects for tracking across systems
