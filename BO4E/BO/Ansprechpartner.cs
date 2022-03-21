@@ -94,12 +94,12 @@ namespace BO4E.BO
         [JsonPropertyName("rufnummern")]
         [ProtoMember(13)]
         [DataCategory(DataCategory.ADDRESS)]
-        public List<Rufnummer> Rufnummern { get; set; }
+        public List<Rufnummer>? Rufnummern { get; set; }
 
         /// <summary>Liste der Abteilungen und Zuständigkeiten des Ansprechpartners.</summary>
         [JsonProperty(Required = Required.Default, Order = 14, PropertyName = "zustaendigkeit")]
         [JsonPropertyName("zustaendigkeit")]
         [ProtoMember(14)]
-        public List<Zustaendigkeit> Zustaendigkeit { get; set; }
+        public List<Zustaendigkeit>? Zustaendigkeit { get; set; }
     }
 }

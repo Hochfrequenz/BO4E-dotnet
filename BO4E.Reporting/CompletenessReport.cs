@@ -56,7 +56,7 @@ namespace BO4E.Reporting
         ///     <see cref="Verbrauch.Wertermittlungsverfahren" />
         /// </summary>
         [JsonProperty(PropertyName = "wertermittlungsverfahren", Required = Required.Default, Order = 7)]
-        public Wertermittlungsverfahren Wertermittlungsverfahren { get; set; }
+        public Wertermittlungsverfahren? Wertermittlungsverfahren { get; set; }
 
         /// <summary>
         ///     ratio of time with data present compared to <see cref="ReferenceTimeFrame" />.
@@ -256,7 +256,7 @@ namespace BO4E.Reporting
             ///     Wertermittlungsverfahren (<see cref="Verbrauch.Wertermittlungsverfahren" />) to be taken into account.
             /// </summary>
             [JsonProperty(PropertyName = "wertermittlungsverfahren", Required = Required.Default, Order = 8)]
-            public Wertermittlungsverfahren Wertermittlungsverfahren { get; set; }
+            public Wertermittlungsverfahren? Wertermittlungsverfahren { get; set; }
 
             /// <summary>
             ///     OBIS ID (<see cref="Verbrauch.Obiskennzahl" />) to be taken into account.

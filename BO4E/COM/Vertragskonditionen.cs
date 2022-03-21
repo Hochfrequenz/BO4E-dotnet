@@ -17,7 +17,7 @@ namespace BO4E.COM
         [JsonProperty(PropertyName = "beschreibung", Required = Required.Default)]
         [JsonPropertyName("beschreibung")]
         [ProtoMember(3)]
-        public string Beschreibung { get; set; }
+        public string? Beschreibung { get; set; }
 
         /// <summary>Anzahl der vereinbarten Abschläge pro Jahr, z.B. 12</summary>
         [JsonProperty(PropertyName = "anzahlAbschlaege", Required = Required.Default)]
@@ -29,13 +29,13 @@ namespace BO4E.COM
         [JsonProperty(PropertyName = "vertragslaufzeit", Required = Required.Default)]
         [JsonPropertyName("vertragslaufzeit")]
         [ProtoMember(5)]
-        public Zeitraum Vertragslaufzeit { get; set; }
+        public Zeitraum? Vertragslaufzeit { get; set; }
 
         /// <summary>Innerhalb dieser Frist kann der Vertrag gekündigt werden. Details <see cref="Zeitraum" /></summary>
         [JsonProperty(PropertyName = "kuendigungsfrist", Required = Required.Default)]
         [JsonPropertyName("kuendigungsfrist")]
         [ProtoMember(6)]
-        public Zeitraum Kuendigungsfrist { get; set; }
+        public Zeitraum? Kuendigungsfrist { get; set; }
 
         /// <summary>
         ///     Falls der Vertrag nicht gekündigt wird, verlängert er sich automatisch um die hier angegebene Zeit. Details
@@ -44,7 +44,7 @@ namespace BO4E.COM
         [JsonProperty(PropertyName = "vertragsverlaengerung", Required = Required.Default)]
         [JsonPropertyName("vertragsverlaengerung")]
         [ProtoMember(7)]
-        public Zeitraum Vertragsverlaengerung { get; set; }
+        public Zeitraum? Vertragsverlaengerung { get; set; }
 
         /// <summary>
         ///     In diesen Zyklen werden Abschläge gestellt. Details <see cref="Zeitraum" />. Alternativ kann auch die Anzahl
@@ -53,7 +53,7 @@ namespace BO4E.COM
         [JsonProperty(PropertyName = "abschlagszyklus", Required = Required.Default)]
         [JsonPropertyName("abschlagszyklus")]
         [ProtoMember(8)]
-        public Zeitraum Abschlagszyklus { get; set; }
+        public Zeitraum? Abschlagszyklus { get; set; }
 
         [System.Text.Json.Serialization.JsonIgnore]
         [Newtonsoft.Json.JsonIgnore]
@@ -80,7 +80,7 @@ namespace BO4E.COM
         [NonOfficial(NonOfficialCategory.CUSTOMER_REQUIREMENTS)]
         [ProtoMember(1010)]
         // todo @hamid: add a docstring
-        public Zeitraum GeplanteTurnusablesung { get; set; }
+        public Zeitraum? GeplanteTurnusablesung { get; set; }
 
         // ToDo: Docstring! what is the unit? days? why don't you use zeitraum?
         // todo @hamid: add a docstring
@@ -96,7 +96,7 @@ namespace BO4E.COM
         [JsonPropertyName("netznutzungsabrechnung")]
         [NonOfficial(NonOfficialCategory.CUSTOMER_REQUIREMENTS)]
         [ProtoMember(1012)]
-        public Zeitraum Netznutzungsabrechnung { get; set; }
+        public Zeitraum? Netznutzungsabrechnung { get; set; }
 
         // ToDo: Docstring! what is the unit? days? why dont you use zeitraum?
         // todo @hamid: add a docstring

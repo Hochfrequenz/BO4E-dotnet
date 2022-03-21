@@ -62,7 +62,7 @@ namespace BO4E.COM
         [ProtoMember(5)]
         [JsonProperty(PropertyName = "lokation", Required = Required.Default)]
         [JsonPropertyName("lokation")]
-        public string Lokation { get; set; }
+        public string? Lokation { get; set; }
 
         /// <summary>
         ///     Für die Lokation festgeschriebene Abnahmemenge. Siehe COM Menge
@@ -70,7 +70,7 @@ namespace BO4E.COM
         [JsonProperty(PropertyName = "vertraglichFixierteMenge", Required = Required.Default)]
         [JsonPropertyName("vertraglichFixierteMenge")]
         [ProtoMember(6)]
-        public Menge VertraglichFixierteMenge { get; set; }
+        public Menge? VertraglichFixierteMenge { get; set; }
 
         /// <summary>
         ///     Für die Lokation festgelegte Mindestabnahmemenge. Siehe COM Menge
@@ -78,7 +78,7 @@ namespace BO4E.COM
         [JsonProperty(PropertyName = "minimaleAbnahmemenge", Required = Required.Default)]
         [JsonPropertyName("minimaleAbnahmemenge")]
         [ProtoMember(7)]
-        public Menge MinimaleAbnahmemenge { get; set; }
+        public Menge? MinimaleAbnahmemenge { get; set; }
 
         /// <summary>
         ///     Für die Lokation festgelegte maximale Abnahmemenge. Siehe COM Menge
@@ -86,7 +86,7 @@ namespace BO4E.COM
         [JsonProperty(PropertyName = "maximaleAbnahmemenge", Required = Required.Default)]
         [JsonPropertyName("maximaleAbnahmemenge")]
         [ProtoMember(8)]
-        public Menge MaximaleAbnahmemenge { get; set; }
+        public Menge? MaximaleAbnahmemenge { get; set; }
 
         /// <summary>
         ///     jahresverbrauchsprognose für EDIFACT mapping
@@ -95,7 +95,7 @@ namespace BO4E.COM
         [JsonPropertyName("jahresverbrauchsprognose")]
         [NonOfficial(NonOfficialCategory.CUSTOMER_REQUIREMENTS)]
         [ProtoMember(1009)]
-        public Menge Jahresverbrauchsprognose { get; set; }
+        public Menge? Jahresverbrauchsprognose { get; set; }
 
         /// <summary>
         ///     kundenwert für EDIFACT mapping
@@ -104,7 +104,7 @@ namespace BO4E.COM
         [JsonPropertyName("kundenwert")]
         [NonOfficial(NonOfficialCategory.CUSTOMER_REQUIREMENTS)]
         [ProtoMember(1010)]
-        public Menge Kundenwert { get; set; }
+        public Menge? Kundenwert { get; set; }
 
         /// <summary>
         ///     verbrauchsaufteilung für EDIFACT mapping
@@ -112,6 +112,6 @@ namespace BO4E.COM
         [JsonProperty(PropertyName = "verbrauchsaufteilung", Required = Required.Default)]
         [JsonPropertyName("verbrauchsaufteilung")]
         [ProtoMember(1011)]
-        public string Verbrauchsaufteilung { get; set; } // ToDo: evaluate if this actually should be an enum
+        public string? Verbrauchsaufteilung { get; set; } // ToDo: evaluate if this actually should be an enum
     }
 }

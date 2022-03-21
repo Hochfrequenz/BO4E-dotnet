@@ -27,7 +27,7 @@ namespace BO4E.COM
         [JsonPropertyName("geraeteeigenschaften")]
         [NonOfficial(NonOfficialCategory.CUSTOMER_REQUIREMENTS)]
         [ProtoMember(1005)]
-        public Geraeteeigenschaften Geraeteeigenschaften { get; set; }
+        public Geraeteeigenschaften? Geraeteeigenschaften { get; set; }
 
         /// <summary>
         ///     Gerätenummer des Wandlers
@@ -36,7 +36,7 @@ namespace BO4E.COM
         [JsonPropertyName("geraetenummer")]
         [NonOfficial(NonOfficialCategory.CUSTOMER_REQUIREMENTS)]
         [ProtoMember(1006)]
-        public string Geraetenummer { get; set; }
+        public string? Geraetenummer { get; set; }
 
         /// <summary>
         ///     Referenz auf die Gerätenummer des Zählers
@@ -45,6 +45,6 @@ namespace BO4E.COM
         [JsonPropertyName("geraetereferenz")]
         [NonOfficial(NonOfficialCategory.CUSTOMER_REQUIREMENTS)]
         [ProtoMember(1007)]
-        public string Geraetereferenz { get; set; }
+        public string? Geraetereferenz { get; set; }
     }
 }

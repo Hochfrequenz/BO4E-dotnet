@@ -18,7 +18,7 @@ namespace BO4E.COM
         [JsonProperty(PropertyName = "ort", Required = Required.Default)]
         [JsonPropertyName("ort")]
         [ProtoMember(3)]
-        public string Ort { get; set; }
+        public string? Ort { get; set; }
 
         [System.Text.Json.Serialization.JsonIgnore]
         [Newtonsoft.Json.JsonIgnore]
@@ -44,6 +44,6 @@ namespace BO4E.COM
         [JsonProperty(PropertyName = "name", Required = Required.Always)]
         [JsonPropertyName("name")]
         [ProtoMember(5)]
-        public string Name { get; set; }
+        public string? Name { get; set; }
     }
 }

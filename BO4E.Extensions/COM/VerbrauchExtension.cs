@@ -238,7 +238,7 @@ namespace BO4E.Extensions.COM
             //var filteredInput = KeepShortestSlices(input);
             var resultSet = new HashSet<Verbrauch>();
             var groups = input.OrderBy(v => (v.Startdatum, v.Wertermittlungsverfahren, v.Obiskennzahl, v.Einheit))
-                .GroupBy(v => new Tuple<Wertermittlungsverfahren, string, Mengeneinheit>
+                .GroupBy(v => new Tuple<Wertermittlungsverfahren?, string, Mengeneinheit>
                 (
                     v.Wertermittlungsverfahren,
                     v.Obiskennzahl,

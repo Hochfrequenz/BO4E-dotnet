@@ -26,8 +26,8 @@ namespace BO4E.Extensions.BusinessObjects.Energiemenge
 
         private const string SAP_SANITIZED_USERPROPERTY_KEY = "sapSanitized";
 
-        private static readonly Func<Verbrauch, Tuple<Wertermittlungsverfahren, Mengeneinheit, string>> PurityGrouper =
-            v => new Tuple<Wertermittlungsverfahren, Mengeneinheit, string>(v.Wertermittlungsverfahren, v.Einheit,
+        private static readonly Func<Verbrauch, Tuple<Wertermittlungsverfahren?, Mengeneinheit, string>> PurityGrouper =
+            v => new Tuple<Wertermittlungsverfahren?, Mengeneinheit, string>(v.Wertermittlungsverfahren, v.Einheit,
                 v.Obiskennzahl);
 
         /// <summary>
@@ -157,7 +157,7 @@ namespace BO4E.Extensions.BusinessObjects.Energiemenge
         ///     <paramref name="me" />
         /// </returns>
         public static decimal GetConsumption(this BO.Energiemenge em, ITimeRange reference,
-            Wertermittlungsverfahren wev, string obiskennzahl, Mengeneinheit me)
+            Wertermittlungsverfahren? wev, string obiskennzahl, Mengeneinheit me)
         {
             if (!me.IsExtensive())
                 throw new ArgumentException(
@@ -222,7 +222,7 @@ namespace BO4E.Extensions.BusinessObjects.Energiemenge
         }
 
         /// <summary>
-        ///     Get Average (<see cref="GetAverage(BO.Energiemenge, TimeRange, Wertermittlungsverfahren, string, Mengeneinheit)" />
+        ///     Get Average (<see cref="GetAverage(BO.Energiemenge, TimeRange, Wertermittlungsverfahren?, string, Mengeneinheit)" />
         ///     )
         ///     for a pure Energiemenge with automatically found parameters.
         /// </summary>
@@ -250,7 +250,7 @@ namespace BO4E.Extensions.BusinessObjects.Energiemenge
         ///     given Mengeneinheit.
         /// </returns>
         public static decimal? GetAverage(this BO.Energiemenge em,
-            Wertermittlungsverfahren wev, string obiskennzahl, Mengeneinheit me)
+            Wertermittlungsverfahren? wev, string obiskennzahl, Mengeneinheit me)
         {
             return em.GetAverage(em.GetTimeRange(), wev, obiskennzahl, me);
         }
@@ -265,7 +265,7 @@ namespace BO4E.Extensions.BusinessObjects.Energiemenge
         /// <param name="me">an extensive or intensive unit</param>
         /// <returns>the average value or null if no Verbrauch overlapped with the specified time interval</returns>
         public static decimal? GetAverage(this BO.Energiemenge em, TimeRange reference,
-            Wertermittlungsverfahren wev, string obiskennzahl, Mengeneinheit me)
+            Wertermittlungsverfahren? wev, string obiskennzahl, Mengeneinheit me)
         {
             decimal? result = null;
             var overallDenominator = 0.0M;
@@ -304,7 +304,7 @@ namespace BO4E.Extensions.BusinessObjects.Energiemenge
         /// <param name="me">Mengeneinheit</param>
         /// <returns></returns>
         public static List<TimeRange> GetMissingTimeRanges(this BO.Energiemenge em, ITimeRange reference,
-            Wertermittlungsverfahren wev, string obis, Mengeneinheit me)
+            Wertermittlungsverfahren? wev, string obis, Mengeneinheit me)
         {
             using (MiniProfiler.Current.Step(nameof(GetMissingTimeRanges)))
             {
@@ -390,7 +390,7 @@ namespace BO4E.Extensions.BusinessObjects.Energiemenge
         ///     True, if all energieverbrauch entries have the same length and their start and enddatum are evenly spaced.
         ///     Also true, if there less than 2 entries in the energieverbrauch array.
         /// </returns>
-        public static bool IsEvenlySpaced(this BO.Energiemenge em, ITimeRange reference, Wertermittlungsverfahren wev,
+        public static bool IsEvenlySpaced(this BO.Energiemenge em, ITimeRange reference, Wertermittlungsverfahren? wev,
             string obis, Mengeneinheit me, bool allowGaps = false)
         {
             HashSet<TimeSpan> startEndDatumPeriods;
@@ -424,7 +424,7 @@ namespace BO4E.Extensions.BusinessObjects.Energiemenge
         }
 
         /// <summary>
-        ///     <see cref="IsEvenlySpaced(BO4E.BO.Energiemenge,Itenso.TimePeriod.ITimeRange,BO4E.ENUM.Wertermittlungsverfahren,string,BO4E.ENUM.Mengeneinheit,bool)"/>
+        ///     <see cref="IsEvenlySpaced(BO4E.BO.Energiemenge,Itenso.TimePeriod.ITimeRange,BO4E.ENUM.Wertermittlungsverfahren?,string,BO4E.ENUM.Mengeneinheit,bool)"/>
         /// </summary>
         /// <param name="em">Energiemenge</param>
         /// <param name="allowGaps"></param>
@@ -466,7 +466,7 @@ namespace BO4E.Extensions.BusinessObjects.Energiemenge
             return result;
         }
 
-        private static HashSet<TimeSpan> GetTimeSpans(this BO.Energiemenge em, Wertermittlungsverfahren wev,
+        private static HashSet<TimeSpan> GetTimeSpans(this BO.Energiemenge em, Wertermittlungsverfahren? wev,
             string obis, Mengeneinheit me)
         {
             var result = new HashSet<TimeSpan>();
@@ -488,10 +488,10 @@ namespace BO4E.Extensions.BusinessObjects.Energiemenge
         /// </summary>
         /// <param name="em">em</param>
         /// <returns>A Set of tuples of all (Wertermittlungsverfahren, OBIS, Mengeneinheit) combinations</returns>
-        public static ISet<Tuple<Wertermittlungsverfahren, string, Mengeneinheit>> GetWevObisMeCombinations(
+        public static ISet<Tuple<Wertermittlungsverfahren?, string, Mengeneinheit>> GetWevObisMeCombinations(
             this BO.Energiemenge em)
         {
-            return new HashSet<Tuple<Wertermittlungsverfahren, string, Mengeneinheit>>(
+            return new HashSet<Tuple<Wertermittlungsverfahren?, string, Mengeneinheit>>(
                 em.Energieverbrauch
                     .Select(v => Tuple.Create(v.Wertermittlungsverfahren, v.Obiskennzahl, v.Einheit)));
         }
@@ -552,7 +552,7 @@ namespace BO4E.Extensions.BusinessObjects.Energiemenge
         /// <param name="decimalRounding">post decimals</param>
         /// <returns>value between 0 (no overlap) and 1.0 (100% overlap)</returns>
         public static decimal GetCoverage(this BO.Energiemenge em, ITimeRange reference,
-            Wertermittlungsverfahren wev, string obisKz, Mengeneinheit mengeneinheit, int decimalRounding = 10)
+            Wertermittlungsverfahren? wev, string obisKz, Mengeneinheit mengeneinheit, int decimalRounding = 10)
         {
             decimal exactResult;
             using (MiniProfiler.Current.Step(

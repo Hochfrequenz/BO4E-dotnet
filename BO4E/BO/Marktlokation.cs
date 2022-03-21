@@ -180,7 +180,7 @@ namespace BO4E.BO
         [NonOfficial(NonOfficialCategory.CUSTOMER_REQUIREMENTS)]
         [Obsolete(
             "I'm pretty sure the BO.Marktlokation is not the right place to store this information. Please evaluate!")]
-        public List<MarktpartnerDetails> Marktrollen { get; set; } // ToDo: evaluate this
+        public List<MarktpartnerDetails>? Marktrollen { get; set; } // ToDo: evaluate this
 
         /// <summary>
         ///     für EDIFACT mapping
@@ -220,7 +220,7 @@ namespace BO4E.BO
         [JsonPropertyName("zaehlwerke")]
         [ProtoMember(1025)]
         [NonOfficial(NonOfficialCategory.CUSTOMER_REQUIREMENTS)]
-        public List<Zaehlwerk> Zaehlwerke { get; set; }
+        public List<Zaehlwerk>? Zaehlwerke { get; set; }
 
         /// <summary>
         ///     für EDIFACT mapping
@@ -232,7 +232,7 @@ namespace BO4E.BO
         [NonOfficial(NonOfficialCategory.CUSTOMER_REQUIREMENTS)]
         [Obsolete(
             "Consider if this is really the right place to store the information. I think Energiemenge->energieverbrauch is better suited.")]
-        public List<Verbrauch> Verbrauchsmenge { get; set; }
+        public List<Verbrauch>? Verbrauchsmenge { get; set; }
 
         /// <summary>
         ///     für EDIFACT mapping
@@ -242,7 +242,7 @@ namespace BO4E.BO
         [JsonPropertyName("messlokationen")]
         [ProtoMember(1027)]
         [NonOfficial(NonOfficialCategory.CUSTOMER_REQUIREMENTS)]
-        public List<Messlokation> Messlokationen { get; set; }
+        public List<Messlokation>? Messlokationen { get; set; }
 
 
         /// <summary>Aufzählung der Messlokationen, die zu dieser Marktlokation gehören.</summary>

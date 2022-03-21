@@ -559,7 +559,10 @@
           "format": "date-time"
         },
         "kosten": {
-          "type": "number"
+          "type": [
+            "number",
+            "null"
+          ]
         },
         "kategorie": {
           "type": [

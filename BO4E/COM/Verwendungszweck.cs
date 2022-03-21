@@ -27,6 +27,6 @@ namespace BO4E.COM
         [JsonProperty(PropertyName = "zweck", Required = Required.Default)]
         [JsonPropertyName("zweck")]
         [ProtoMember(4)]
-        public List<ENUM.Verwendungszweck> Zweck { get; set; }
+        public List<ENUM.Verwendungszweck>? Zweck { get; set; }
     }
 }
