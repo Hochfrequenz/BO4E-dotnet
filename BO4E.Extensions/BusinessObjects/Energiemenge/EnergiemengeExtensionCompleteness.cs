@@ -82,7 +82,7 @@ namespace BO4E.Extensions.BusinessObjects.Energiemenge
         /// <param name="einheit">Mengeneinheit</param>
         /// <returns>the completeness report</returns>
         public static CompletenessReport GetCompletenessReport(this BO.Energiemenge em, ITimeRange reference,
-            Wertermittlungsverfahren wev, string obiskennzahl, Mengeneinheit einheit)
+            Wertermittlungsverfahren? wev, string obiskennzahl, Mengeneinheit einheit)
         {
             CompletenessReport result;
             using (MiniProfiler.Current.Step("create completeness report skeleton + find the coverage"))
@@ -179,13 +179,13 @@ namespace BO4E.Extensions.BusinessObjects.Energiemenge
 
         /// <summary>
         ///     <see
-        ///         cref="GetCompletenessReport(BO4E.BO.Energiemenge,Itenso.TimePeriod.ITimeRange,BO4E.ENUM.Wertermittlungsverfahren,string,BO4E.ENUM.Mengeneinheit)" />
+        ///         cref="GetCompletenessReport(BO4E.BO.Energiemenge,Itenso.TimePeriod.ITimeRange,BO4E.ENUM.Wertermittlungsverfahren?,string,BO4E.ENUM.Mengeneinheit)" />
         ///     for pure Energiemengen within their own time range.
         /// </summary>
         /// <param name="em">Energiemenge</param>
         /// <returns>
         ///     <see
-        ///         cref="GetCompletenessReport(BO4E.BO.Energiemenge,Itenso.TimePeriod.ITimeRange,BO4E.ENUM.Wertermittlungsverfahren,string,BO4E.ENUM.Mengeneinheit)" />
+        ///         cref="GetCompletenessReport(BO4E.BO.Energiemenge,Itenso.TimePeriod.ITimeRange,BO4E.ENUM.Wertermittlungsverfahren?,string,BO4E.ENUM.Mengeneinheit)" />
         /// </returns>
         public static CompletenessReport GetCompletenessReport(this BO.Energiemenge em)
         {
