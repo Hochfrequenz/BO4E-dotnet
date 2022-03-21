@@ -276,7 +276,7 @@ namespace BO4E.BO
         [JsonProperty(Required = Required.Default, Order = 28, PropertyName = "zugehoerigeMesslokationen")]
         [JsonPropertyName("zugehoerigeMesslokationen")]
         [ProtoMember(28)]
-        public List<Messlokationszuordnung> ZugehoerigeMesslokationen { get; set; }
+        public List<Messlokationszuordnung>? ZugehoerigeMesslokationen { get; set; }
 
         /// <summary>
         ///     Messtechnische Einordnung aus der UTILMD (IMS, KME_MME, KEINE_MESSUNG)
