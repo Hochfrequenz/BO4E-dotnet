@@ -137,7 +137,7 @@ namespace BO4E.COM
         [Newtonsoft.Json.JsonExtensionData]
         [System.Text.Json.Serialization.JsonExtensionData]
         [DataCategory(DataCategory.USER_PROPERTIES)]
-        public IDictionary<string, object> UserProperties { get; set; }
+        public IDictionary<string, object>? UserProperties { get; set; }
 
         /// <inheritdoc cref="BO4E.BO.BusinessObject.IsValid" />
         public virtual bool IsValid()
