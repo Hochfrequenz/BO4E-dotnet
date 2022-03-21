@@ -37,7 +37,7 @@ namespace BO4E.BO
         [ProtoMember(1001)]
         [Obsolete("Please use anrede instead or Ansprechpartner.individuelleAnrede", true)]
         [NonOfficial(NonOfficialCategory.CUSTOMER_REQUIREMENTS)]
-        public string Title { get; set; }
+        public string? Title { get; set; }
 
         /// <summary>
         ///     Erster Teil des Namens. Hier kann der Firmenname oder bei Privatpersonen
@@ -49,7 +49,7 @@ namespace BO4E.BO
         [ProtoMember(6)]
         [DataCategory(DataCategory.NAME)]
         [BoKey]
-        public string Name1 { get; set; }
+        public string? Name1 { get; set; }
 
         /// <summary>
         ///     Zweiter Teil des Namens. Hier kann der eine Erweiterung zum Firmennamen oder
@@ -60,7 +60,7 @@ namespace BO4E.BO
         [JsonPropertyName("name2")]
         [ProtoMember(7)]
         [DataCategory(DataCategory.NAME)]
-        public string Name2 { get; set; }
+        public string? Name2 { get; set; }
 
         /// <summary>
         ///     Dritter Teil des Namens. Hier können weitere Ergänzungen zum Firmennamen oder
@@ -71,7 +71,7 @@ namespace BO4E.BO
         [JsonPropertyName("name3")]
         [ProtoMember(8)]
         [DataCategory(DataCategory.NAME)]
-        public string Name3 { get; set; }
+        public string? Name3 { get; set; }
 
         /// <summary>
         ///     Kennzeichnung ob es sich um einen Gewerbe/Unternehmen (gewerbeKennzeichnung = true)
@@ -88,7 +88,7 @@ namespace BO4E.BO
         [JsonPropertyName("hrnummer")]
         [ProtoMember(10)]
         [DataCategory(DataCategory.LEGAL)]
-        public string Hrnummer { get; set; }
+        public string? Hrnummer { get; set; }
 
 
         /// <summary> Amtsgericht bzw Handelsregistergericht, das die Handelsregisternummer herausgegeben hat</summary>
@@ -96,7 +96,7 @@ namespace BO4E.BO
         [JsonPropertyName("amtsgericht")]
         [ProtoMember(11)]
         [DataCategory(DataCategory.LEGAL)]
-        public string Amtsgericht { get; set; }
+        public string? Amtsgericht { get; set; }
 
         /// <summary>Bevorzugter Kontaktweg des Geschäftspartners.</summary>
         [JsonProperty(Required = Required.Default, Order = 12, PropertyName = "kontaktweg")]
@@ -109,28 +109,28 @@ namespace BO4E.BO
         [JsonPropertyName("umsatzsteuerId")]
         [ProtoMember(13)]
         [DataCategory(DataCategory.LEGAL)]
-        public string UmsatzsteuerId { get; set; }
+        public string? UmsatzsteuerId { get; set; }
 
         /// <summary>* Die Gläubiger-ID welche im Zahlungsverkehr verwendet wird- Z.B. DE 47116789</summary>
         [JsonProperty(Required = Required.Default, Order = 14, PropertyName = "glaeubigerId")]
         [JsonPropertyName("glaeubigerId")]
         [ProtoMember(14)]
         [DataCategory(DataCategory.FINANCE)]
-        public string GlaeubigerId { get; set; }
+        public string? GlaeubigerId { get; set; }
 
         /// <summary>E-Mail-Adresse des Ansprechpartners. Z.B. info@mp-energie.de</summary>
         [JsonProperty(Required = Required.Default, Order = 15, PropertyName = "eMailAdresse")]
         [JsonPropertyName("eMailAdresse")]
         [ProtoMember(15)]
         [DataCategory(DataCategory.ADDRESS)]
-        public string EMailAdresse { get; set; }
+        public string? EMailAdresse { get; set; }
 
         /// <summary>Internetseite des Marktpartners. Beispiel: www.mp-energie.de</summary>
         [JsonProperty(Required = Required.Default, Order = 16, PropertyName = "website")]
         [JsonPropertyName("website")]
         [ProtoMember(16)]
         [DataCategory(DataCategory.ADDRESS)]
-        public string Website { get; set; }
+        public string? Website { get; set; }
 
         /// <summary>Rolle, die der Geschäftspartner hat (z.B. Interessent, Kunde).</summary>
         [JsonProperty(Required = Required.Default, Order = 17,
@@ -147,6 +147,6 @@ namespace BO4E.BO
         [JsonPropertyName("partneradresse")]
         [ProtoMember(18)]
         [FieldName("partnerAddress", Language.EN)]
-        public Adresse Partneradresse { get; set; }
+        public Adresse? Partneradresse { get; set; }
     }
 }
