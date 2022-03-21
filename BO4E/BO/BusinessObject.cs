@@ -193,7 +193,7 @@ namespace BO4E.BO
         [ProtoMember(200)]
         [DataCategory(DataCategory.USER_PROPERTIES)]
         [System.Text.Json.Serialization.JsonExtensionData]
-        public IDictionary<string, object> UserProperties { get; set; }
+        public IDictionary<string, object>? UserProperties { get; set; }
 
         /// <summary>
         ///     return <see cref="BusinessObject.BoTyp" /> (as string, not as type)

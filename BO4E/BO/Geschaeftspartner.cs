@@ -102,7 +102,7 @@ namespace BO4E.BO
         [JsonProperty(Required = Required.Default, Order = 12, PropertyName = "kontaktweg")]
         [JsonPropertyName("kontaktweg")]
         [ProtoMember(12)]
-        public List<Kontaktart> Kontaktweg { get; set; }
+        public List<Kontaktart>? Kontaktweg { get; set; }
 
         /// <summary>Die Steuer-ID des Geschäftspartners. Beispiel: DE 813281825</summary>
         [JsonProperty(Required = Required.Default, Order = 13, PropertyName = "umsatzsteuerId")]
@@ -138,7 +138,7 @@ namespace BO4E.BO
         [JsonPropertyName("geschaeftspartnerrolle")]
         [FieldName("role", Language.EN)]
         [ProtoMember(17)]
-        public List<Geschaeftspartnerrolle> Geschaeftspartnerrolle { get; set; }
+        public List<Geschaeftspartnerrolle>? Geschaeftspartnerrolle { get; set; }
 
         /// <summary>
         ///     Adresse des Geschäftspartners, an der sich der Hauptsitz befindet. Details <seealso cref="Adresse" />
