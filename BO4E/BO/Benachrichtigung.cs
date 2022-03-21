@@ -98,7 +98,7 @@ namespace BO4E.BO
         [JsonProperty(Required = Required.Default, Order = 9, PropertyName = "kategorie")]
         [JsonPropertyName("kategorie")]
         [ProtoMember(9)]
-        public string Kategorie { get; set; }
+        public string? Kategorie { get; set; }
 
         /// <summary>
         ///     Eindeutige Kennung des Benutzers, der die Benachrichtigung erhält oder sie bearbeiten
@@ -108,7 +108,7 @@ namespace BO4E.BO
         [JsonProperty(Required = Required.Default, Order = 10, PropertyName = "bearbeiter")]
         [JsonPropertyName("bearbeiter")]
         [ProtoMember(10)]
-        public string Bearbeiter { get; set; }
+        public string? Bearbeiter { get; set; }
 
         /// <summary>
         ///     Detaillierte Beschreibung (Klärfall-Notizen im SAP, Description im SFDC)
@@ -116,7 +116,7 @@ namespace BO4E.BO
         [JsonProperty(Required = Required.Default, Order = 11, PropertyName = "notizen")]
         [JsonPropertyName("notizen")]
         [ProtoMember(11)]
-        public List<Notiz> Notizen { get; set; }
+        public List<Notiz>? Notizen { get; set; }
 
         /*
         /// <summary>
@@ -151,7 +151,7 @@ namespace BO4E.BO
         [JsonProperty(Required = Required.Default, Order = 13, PropertyName = "aufgaben")]
         [JsonPropertyName("aufgaben")]
         [ProtoMember(13)]
-        public List<Aufgabe> Aufgaben { get; set; }
+        public List<Aufgabe>? Aufgaben { get; set; }
 
         /// <summary>
         ///     list of additional information built in a customer dependet implementation
@@ -159,6 +159,6 @@ namespace BO4E.BO
         [JsonProperty(Required = Required.Default, Order = 14, PropertyName = "infos")]
         [JsonPropertyName("infos")]
         [ProtoMember(14)]
-        public List<GenericStringStringInfo> Infos { get; set; }
+        public List<GenericStringStringInfo>? Infos { get; set; }
     }
 }

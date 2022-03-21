@@ -36,6 +36,6 @@ namespace BO4E.BO
         [JsonProperty(Required = Required.Default, Order = 6, PropertyName = "negativListe")]
         [JsonPropertyName("negativListe")]
         [ProtoMember(6)]
-        public List<Regionskriterium> NegativListe { get; set; }
+        public List<Regionskriterium>? NegativListe { get; set; }
     }
 }

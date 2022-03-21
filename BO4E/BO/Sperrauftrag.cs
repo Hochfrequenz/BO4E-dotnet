@@ -56,7 +56,7 @@ namespace BO4E.BO
         /// </summary>
         [JsonProperty("zaehlernummer", Required = Required.Default)]
         [JsonPropertyName("zaehlernummer")]
-        public string Zaehlernummer { get; set; }
+        public string? Zaehlernummer { get; set; }
 
         /// <summary>
         /// True, falls die Sperrung vom Gerichtsvollzieher angeordnet ist.

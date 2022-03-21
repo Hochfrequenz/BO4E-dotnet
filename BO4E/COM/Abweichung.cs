@@ -20,7 +20,7 @@ namespace BO4E.COM
         [JsonPropertyName("referenz")]
         [NonOfficial(NonOfficialCategory.MISSING)]
         [ProtoMember(1)]
-        public string Referenz { get; set; }
+        public string? Referenz { get; set; }
 
 
         /// <summary>
@@ -39,6 +39,6 @@ namespace BO4E.COM
         [JsonPropertyName("abweichungsgrundBemerkung")]
         [NonOfficial(NonOfficialCategory.MISSING)]
         [ProtoMember(3)]
-        public string AbweichungsgrundBemerkung { get; set; }
+        public string? AbweichungsgrundBemerkung { get; set; }
     }
 }

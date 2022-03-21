@@ -59,7 +59,7 @@ namespace BO4E.COM
         [JsonProperty(PropertyName = "artikeldetail", Required = Required.Default)]
         [JsonPropertyName("artikeldetail")]
         [ProtoMember(7)]
-        public string Artikeldetail { get; set; }
+        public string? Artikeldetail { get; set; }
 
         /// <summary>
         ///     Die Menge, die in die Kostenberechnung eingeflossen ist. Beispiel: 3.660 kWh. Details
@@ -68,7 +68,7 @@ namespace BO4E.COM
         [JsonProperty(PropertyName = "menge", Required = Required.Default)]
         [JsonPropertyName("menge")]
         [ProtoMember(8)]
-        public Menge Menge { get; set; }
+        public Menge? Menge { get; set; }
 
         /// <summary>
         ///     Wenn es einen zeitbasierten Preis gibt (z.B. €/Jahr), dann ist hier die Menge angegeben mit der die Kosten
@@ -77,7 +77,7 @@ namespace BO4E.COM
         [JsonProperty(PropertyName = "zeitmenge", Required = Required.Default)]
         [JsonPropertyName("zeitmenge")]
         [ProtoMember(9)]
-        public Menge Zeitmenge { get; set; }
+        public Menge? Zeitmenge { get; set; }
 
         /// <summary>Der Preis für eine Einheit. Beispiele: 5,8200 ct/kWh oder 55 €/Jahr. Details <see cref="Preis" /></summary>
         [JsonProperty(PropertyName = "einzelpreis", Required = Required.Always)]

@@ -14,37 +14,37 @@ namespace BO4E.COM
         [JsonProperty(PropertyName = "dokument", Required = Required.Default)]
         [JsonPropertyName("dokument")]
         [ProtoMember(1)]
-        public string Dokument { get; set; }
+        public string? Dokument { get; set; }
 
         /// <summary>Die Nachricht (im EDIFACT das UNH-Segment).</summary>
         [JsonProperty(PropertyName = "nachricht", Required = Required.Default)]
         [JsonPropertyName("nachricht")]
         [ProtoMember(2)]
-        public string Nachricht { get; set; }
+        public string? Nachricht { get; set; }
 
         /// <summary>Die Transaktion (im EDIFACT das BGM/IDE-Segment).</summary>
         [JsonProperty(PropertyName = "transaktion", Required = Required.Default)]
         [JsonPropertyName("transaktion")]
         [ProtoMember(3)]
-        public string Transaktion { get; set; }
+        public string? Transaktion { get; set; }
 
         /// <summary>Die Gruppe (im EDIFACT Segment-Gruppe).</summary>
         [JsonProperty(PropertyName = "gruppe", Required = Required.Default)]
         [JsonPropertyName("gruppe")]
         [ProtoMember(4)]
-        public string Gruppe { get; set; }
+        public string? Gruppe { get; set; }
 
         /// <summary>Das Segment (im EDIFACT Segment).</summary>
         [JsonProperty(PropertyName = "segment", Required = Required.Default)]
         [JsonPropertyName("segment")]
         [ProtoMember(5)]
-        public string Segment { get; set; }
+        public string? Segment { get; set; }
 
         /// <summary>Zusätzliche Fehlerbeschreibung.</summary>
         [JsonProperty(PropertyName = "beschreibung", Required = Required.Default)]
         [JsonPropertyName("beschreibung")]
         [ProtoMember(5)]
-        public string Beschreibung { get; set; }
+        public string? Beschreibung { get; set; }
 
 
     }

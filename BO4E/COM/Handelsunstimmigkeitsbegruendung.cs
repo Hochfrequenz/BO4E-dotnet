@@ -22,7 +22,7 @@ namespace BO4E.COM
         [NonOfficial(NonOfficialCategory.MISSING)]
         [ProtoMember(1)]
 
-        public List<string> Referenzen { get; set; }
+        public List<string>? Referenzen { get; set; }
 
 
         /// <summary>

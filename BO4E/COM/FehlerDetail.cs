@@ -20,7 +20,7 @@ namespace BO4E.COM
         [JsonProperty(PropertyName = "beschreibung", Required = Required.Default)]
         [JsonPropertyName("beschreibung")]
         [ProtoMember(2)]
-        public string Beschreibung { get; set; }
+        public string? Beschreibung { get; set; }
 
         /// <summary>
         ///     Herkunft / Ursache des Fehlers
@@ -28,6 +28,6 @@ namespace BO4E.COM
         [JsonProperty(PropertyName = "ursache", Required = Required.Default)]
         [JsonPropertyName("ursache")]
         [ProtoMember(3)]
-        public FehlerUrsache Ursache { get; set; }
+        public FehlerUrsache? Ursache { get; set; }
     }
 }

@@ -144,7 +144,7 @@ namespace BO4E.BO
         [JsonProperty(Required = Required.Default, Order = 13, PropertyName = "unterzeichnervp1")]
         [JsonPropertyName("unterzeichnervp1")]
         [ProtoMember(13)]
-        public List<Unterschrift> Unterzeichnervp1 { get; set; }
+        public List<Unterschrift>? Unterzeichnervp1 { get; set; }
 
         /// <summary>
         ///     Unterzeichner des Vertragspartners2. Siehe COM Unterschrift
@@ -152,7 +152,7 @@ namespace BO4E.BO
         [JsonProperty(Required = Required.Default, Order = 14, PropertyName = "unterzeichnervp2")]
         [JsonPropertyName("unterzeichnervp2")]
         [ProtoMember(14)]
-        public List<Unterschrift> Unterzeichnervp2 { get; set; }
+        public List<Unterschrift>? Unterzeichnervp2 { get; set; }
 
         /// <summary>
         ///     Festlegungen zu Laufzeiten und Kündigungsfristen. Details siehe COM Vertragskonditionen
@@ -170,7 +170,7 @@ namespace BO4E.BO
             PropertyName = "vertragsteile")] // TODO: should be required always but our CDS is missing the association
         [JsonPropertyName("vertragsteile")]
         [ProtoMember(16)]
-        public List<Vertragsteil> Vertragsteile { get; set; }
+        public List<Vertragsteil>? Vertragsteile { get; set; }
 
         /// <summary>
         ///     gemeinderabatt für EDIFACT mapping.

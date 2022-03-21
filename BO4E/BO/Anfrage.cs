@@ -46,7 +46,7 @@ namespace BO4E.BO
         [NonOfficial(NonOfficialCategory.MISSING)]
         [ProtoMember(1002)]
         [BoKey]
-        public string Obiskennzahl { get; set; }
+        public string? Obiskennzahl { get; set; }
 
         /// <summary>
         /// Sollablesetermin / Zeitangabe für Messwertanfrage. Details <see cref="Zeitraum" />
@@ -54,7 +54,7 @@ namespace BO4E.BO
         [JsonProperty(PropertyName = "ZeitraumMesswertanfrage", Required = Required.Default)]
         [JsonPropertyName("ZeitraumMesswertanfrage")]
         [ProtoMember(1003)]
-        public Zeitraum ZeitraumMesswertanfrage { get; set; }
+        public Zeitraum? ZeitraumMesswertanfrage { get; set; }
 
         /// <summary>
         /// Kategorie der Anfrage (ORDERS ORDRSP BGM 1001)

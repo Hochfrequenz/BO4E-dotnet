@@ -34,6 +34,6 @@ namespace BO4E.COM
         [JsonProperty(PropertyName = "sigmoidparameter", Required = Required.Default)]
         [JsonPropertyName("sigmoidparameter")]
         [ProtoMember(6)]
-        public Sigmoidparameter Sigmoidparameter { get; set; }
+        public Sigmoidparameter? Sigmoidparameter { get; set; }
     }
 }

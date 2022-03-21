@@ -16,7 +16,7 @@ namespace BO4E.COM
         [JsonProperty(PropertyName = "beschreibung", Required = Required.Default)]
         [JsonPropertyName("beschreibung")]
         [ProtoMember(3)]
-        public string Beschreibung { get; set; }
+        public string? Beschreibung { get; set; }
 
         /// <summary>
         ///     Festlegung, auf welche Preisbestandteile die Garantie gewährt wird. Details

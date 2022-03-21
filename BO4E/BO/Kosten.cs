@@ -41,7 +41,7 @@ namespace BO4E.BO
         [JsonPropertyName("summeKosten")]
         [ProtoMember(6)]
         [DataCategory(DataCategory.FINANCE)]
-        public List<Betrag> SummeKosten { get; set; }
+        public List<Betrag>? SummeKosten { get; set; }
 
         /// <summary>
         ///     Eine Liste mit Kostenblöcken. In Kostenblöcken werden Kostenpositionen zusammengefasst. Beispiele: Netzkosten,
@@ -62,6 +62,6 @@ namespace BO4E.BO
         [JsonPropertyName("kostenpositionen")]
         [ProtoMember(8)]
         [DataCategory(DataCategory.FINANCE)]
-        public List<Kostenposition> Kostenpositionen { get; set; }
+        public List<Kostenposition>? Kostenpositionen { get; set; }
     }
 }

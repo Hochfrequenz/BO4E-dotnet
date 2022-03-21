@@ -49,6 +49,6 @@ namespace BO4E.COM
         [JsonProperty(PropertyName = "preisstaffeln", Required = Required.Default)]
         [JsonPropertyName("preisstaffeln")]
         [ProtoMember(7)]
-        public List<RegionalePreisstaffel> Preisstaffeln { get; set; }
+        public List<RegionalePreisstaffel>? Preisstaffeln { get; set; }
     }
 }

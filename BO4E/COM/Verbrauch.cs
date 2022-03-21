@@ -50,20 +50,40 @@ namespace BO4E.COM
         /// <remarks>
         /// <c>Required = Required.Default</c>, DateTime aber nicht nullable, laut bo4e doku wäre es optional
         ///</remarks>
+        [System.Text.Json.Serialization.JsonIgnore]
+        [Newtonsoft.Json.JsonIgnore]
+        [ProtoMember(2, Name = nameof(Startdatum))]
         [CompatibilityLevel(CompatibilityLevel.Level240)]
-        [JsonProperty(PropertyName = "startdatum", Required = Required.Default, Order = 7)]
+        private DateTime _Startdatum
+        {
+            get => Startdatum?.UtcDateTime ?? default;
+            set => Startdatum = value == default ? null : DateTime.SpecifyKind(value, DateTimeKind.Utc);
+        }
+        /// <summary>Gibt Tag und Uhrzeit (falls vorhanden) an, wann der Zeitraum startet.</summary>
+        [JsonProperty(PropertyName = "startdatum", Required = Required.Default)]
         [JsonPropertyName("startdatum")]
-        [ProtoMember(3)]
-        public DateTime Startdatum { get; set; } // ToDo: use datetimeoffset as well
+        [FieldName("startDate", Language.EN)]
+        [ProtoIgnore]
+        [Newtonsoft.Json.JsonConverter(typeof(LenientDateTimeConverter))]
+        public DateTimeOffset? Startdatum { get; set; }
 
-        /// <summary>
-        ///     Ende des Zeitraumes, für den der Verbrauch angegeben wird.
-        /// </summary>
+
+        [System.Text.Json.Serialization.JsonIgnore]
+        [Newtonsoft.Json.JsonIgnore]
+        [ProtoMember(3, Name = nameof(Enddatum))]
         [CompatibilityLevel(CompatibilityLevel.Level240)]
-        [JsonProperty(PropertyName = "enddatum", Required = Required.Default, Order = 8)]
+        private DateTime _Enddatum
+        {
+            get => Enddatum?.UtcDateTime ?? default;
+            set => Enddatum = value == default ? null : DateTime.SpecifyKind(value, DateTimeKind.Utc);
+        }
+        /// <summary>Gibt Tag und Uhrzeit (falls vorhanden) an, wann der Zeitraum endet.</summary>
+        [JsonProperty(PropertyName = "enddatum", Required = Required.Default)]
         [JsonPropertyName("enddatum")]
-        [ProtoMember(4)]
-        public DateTime Enddatum { get; set; } // ToDo: use datetimeoffset as well
+        [FieldName("endDate", Language.EN)]
+        [ProtoIgnore]
+        [Newtonsoft.Json.JsonConverter(typeof(LenientDateTimeConverter))]
+        public DateTimeOffset? Enddatum { get; set; }
 
         /// <summary>
         ///     Gibt an, ob es sich um eine PROGNOSE oder eine MESSUNG handelt.
@@ -192,21 +212,21 @@ namespace BO4E.COM
             if (Startdatum > Enddatum)
             {
                 var diff = Startdatum - Enddatum;
-                if (diff.Hours <= 25
-                    && diff.Hours >= 23
-                    && diff.Minutes == 45
-                    && Startdatum.Hour >= 22
-                    && Enddatum.Hour == 0) Enddatum += new TimeSpan(diff.Hours + 1, 0, 0);
+                if (diff is not null && diff?.Hours <= 25
+                    && diff?.Hours >= 23
+                    && diff?.Minutes == 45
+                    && Startdatum?.Hour >= 22
+                    && Enddatum?.Hour == 0) Enddatum += new TimeSpan(diff?.Hours + 1??0, 0, 0);
             }
 
-            Startdatum = DateTime.SpecifyKind(Startdatum, DateTimeKind.Utc);
-            Enddatum = DateTime.SpecifyKind(Enddatum, DateTimeKind.Utc);
-            if ((int)(Enddatum - Startdatum).TotalHours == 2)
+            Startdatum = DateTime.SpecifyKind(Startdatum?.DateTime??DateTime.MinValue, DateTimeKind.Utc);
+            Enddatum = DateTime.SpecifyKind(Enddatum?.DateTime??DateTime.MinValue, DateTimeKind.Utc);
+            if ((int)(Enddatum - Startdatum)?.TotalHours == 2)
             {
                 // check DST of start and enddatum
-                var startdatumLocal = TimeZoneInfo.ConvertTimeFromUtc(Startdatum,
+                var startdatumLocal = TimeZoneInfo.ConvertTimeFromUtc(Startdatum?.DateTime??DateTime.MinValue,
                     CentralEuropeStandardTime.CentralEuropeStandardTimezoneInfo);
-                var enddatumLocal = TimeZoneInfo.ConvertTimeFromUtc(Enddatum,
+                var enddatumLocal = TimeZoneInfo.ConvertTimeFromUtc(Enddatum?.DateTime??DateTime.MinValue,
                     CentralEuropeStandardTime.CentralEuropeStandardTimezoneInfo);
                 if (!CentralEuropeStandardTime.CentralEuropeStandardTimezoneInfo.IsDaylightSavingTime(startdatumLocal -
                         new TimeSpan(0, 0, 1))
@@ -215,11 +235,11 @@ namespace BO4E.COM
                     // this is an artefact of the sap enddatum computation
                     Enddatum -= new TimeSpan(1, 0, 0); // toDo: get offset from timezoneinfo->rules->dstOffset
             }
-            else if ((int)(Enddatum - Startdatum).TotalMinutes == -45)
+            else if ((int)(Enddatum - Startdatum)?.TotalMinutes == -45)
             {
                 // check DST of start and enddatum
                 //var startdatumLocal = TimeZoneInfo.ConvertTimeFromUtc(startdatum, CentralEuropeStandardTime.CENTRAL_EUROPE_STANDARD_TIME);
-                var enddatumLocal = TimeZoneInfo.ConvertTimeFromUtc(Enddatum,
+                var enddatumLocal = TimeZoneInfo.ConvertTimeFromUtc(Enddatum?.DateTime ?? DateTime.MinValue,
                     CentralEuropeStandardTime.CentralEuropeStandardTimezoneInfo);
                 if (!CentralEuropeStandardTime.CentralEuropeStandardTimezoneInfo.IsDaylightSavingTime(enddatumLocal -
                         new TimeSpan(1, 0, 0))

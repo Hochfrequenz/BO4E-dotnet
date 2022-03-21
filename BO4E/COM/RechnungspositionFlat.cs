@@ -179,7 +179,7 @@ namespace BO4E.COM
         [JsonProperty(PropertyName = "vertragsId", Required = Required.Default)]
         [JsonPropertyName("vertragsId")]
         [ProtoMember(15)]
-        public string VertragsId { get; set; }
+        public string? VertragsId { get; set; }
 
         /// <summary>
         ///     status einer Rechnungsposition in SAP Convergent Invoicing

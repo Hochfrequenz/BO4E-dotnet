@@ -58,8 +58,8 @@ namespace BO4E.Extensions.COM
                     // don't wanna deal with time running backwards.
                     //Debug.Assert(v1.enddatum >= v1.startdatum);
                     //Debug.Assert(v2.enddatum >= v2.startdatum);
-                    var tr1 = new TimeRange(v1.Startdatum, v1.Enddatum);
-                    var tr2 = new TimeRange(v2.Startdatum, v2.Enddatum);
+                    var tr1 = new TimeRange((v1.Startdatum ?? DateTimeOffset.MinValue).DateTime, (v1.Enddatum ?? DateTimeOffset.MinValue).DateTime);
+                    var tr2 = new TimeRange((v2.Startdatum ?? DateTimeOffset.MinValue).DateTime, (v2.Enddatum ?? DateTimeOffset.MinValue).DateTime);
                     var overlap = v1.GetIntersection(v2);
                     if (v1.Einheit.IsExtensive())
                     {
@@ -197,7 +197,7 @@ namespace BO4E.Extensions.COM
             }
 
             result.RemoveWhere(v =>
-                v.Einheit.IsIntensive() && new TimeRange(v.Startdatum, v.Enddatum).Duration.TotalMilliseconds == 0);
+                v.Einheit.IsIntensive() && new TimeRange((v.Startdatum ?? DateTimeOffset.MinValue).DateTime, (v.Enddatum ?? DateTimeOffset.MinValue).DateTime).Duration.TotalMilliseconds == 0);
             return result;
         }
 
@@ -208,7 +208,7 @@ namespace BO4E.Extensions.COM
         /// <returns></returns>
         public static TimeRange GetTimeRange(this Verbrauch v)
         {
-            return new TimeRange(v.Startdatum, v.Enddatum);
+            return new TimeRange((v.Startdatum ?? DateTimeOffset.MinValue).DateTime, (v.Enddatum ?? DateTimeOffset.MinValue).DateTime);
         }
 
         /// <summary>
@@ -351,7 +351,7 @@ namespace BO4E.Extensions.COM
         /// </returns>
         public static bool OverlapsWith(this Verbrauch v1, Verbrauch v2)
         {
-            return v1.OverlapsWith(new TimeRange(v2.Startdatum, v2.Enddatum, true));
+            return v1.OverlapsWith(new TimeRange((v2.Startdatum??DateTimeOffset.MinValue).DateTime, (v2.Enddatum ?? DateTimeOffset.MinValue).DateTime, true));
         }
 
         /// <summary>
@@ -362,7 +362,7 @@ namespace BO4E.Extensions.COM
         /// <returns></returns>
         public static bool OverlapsWith(this Verbrauch v1, ITimeRange tr2)
         {
-            return new TimeRange(v1.Startdatum, v1.Enddatum).OverlapsWith(tr2);
+            return new TimeRange((v1.Startdatum ?? DateTimeOffset.MinValue).DateTime, (v1.Enddatum ?? DateTimeOffset.MinValue).DateTime).OverlapsWith(tr2);
         }
 
         /// <summary>
@@ -373,7 +373,7 @@ namespace BO4E.Extensions.COM
         /// <returns></returns>
         public static ITimeRange GetIntersection(this Verbrauch v1, ITimeRange tr2)
         {
-            return new TimeRange(v1.Startdatum, v1.Enddatum).GetIntersection(tr2);
+            return new TimeRange((v1.Startdatum ?? DateTimeOffset.MinValue).DateTime, (v1.Enddatum ?? DateTimeOffset.MinValue).DateTime).GetIntersection(tr2);
         }
 
         /// <summary>
@@ -384,7 +384,7 @@ namespace BO4E.Extensions.COM
         /// <returns></returns>
         public static ITimeRange GetIntersection(this Verbrauch v1, Verbrauch v2)
         {
-            return v1.GetIntersection(new TimeRange(v2.Startdatum, v2.Enddatum));
+            return v1.GetIntersection(new TimeRange((v2.Startdatum ?? DateTimeOffset.MinValue).DateTime, (v2.Enddatum ?? DateTimeOffset.MinValue).DateTime));
         }
 
         /// <summary>
@@ -406,9 +406,9 @@ namespace BO4E.Extensions.COM
         {
             int IComparer<Verbrauch>.Compare(Verbrauch x, Verbrauch y)
             {
-                if (x.Startdatum != y.Startdatum) return DateTimeOffset.Compare(x.Startdatum, y.Startdatum);
+                if (x.Startdatum != y.Startdatum) return DateTimeOffset.Compare(x.Startdatum??DateTimeOffset.MinValue, y.Startdatum ?? DateTimeOffset.MinValue);
 
-                if (x.Enddatum != y.Enddatum) return DateTimeOffset.Compare(x.Enddatum, y.Enddatum);
+                if (x.Enddatum != y.Enddatum) return DateTimeOffset.Compare(x.Enddatum ?? DateTimeOffset.MinValue, y.Enddatum ?? DateTimeOffset.MinValue);
                 return 0;
             }
         }

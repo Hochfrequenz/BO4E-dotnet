@@ -3750,7 +3750,7 @@
                 <inheritdoc cref="F:BO4E.meta.CentralEuropeStandardTime.CentralEuropeStandardTimezoneInfo" />
             </summary>
         </member>
-        <member name="P:BO4E.COM.Verbrauch.Startdatum">
+        <member name="P:BO4E.COM.Verbrauch._Startdatum">
              <summary>
                  Beginn des Zeitraumes, für den der Verbrauch angegeben wird.
              </summary>
@@ -3758,10 +3758,11 @@
              <c>Required = Required.Default</c>, DateTime aber nicht nullable, laut bo4e doku wäre es optional
             </remarks>
         </member>
+        <member name="P:BO4E.COM.Verbrauch.Startdatum">
+            <summary>Gibt Tag und Uhrzeit (falls vorhanden) an, wann der Zeitraum startet.</summary>
+        </member>
         <member name="P:BO4E.COM.Verbrauch.Enddatum">
-            <summary>
-                Ende des Zeitraumes, für den der Verbrauch angegeben wird.
-            </summary>
+            <summary>Gibt Tag und Uhrzeit (falls vorhanden) an, wann der Zeitraum endet.</summary>
         </member>
         <member name="P:BO4E.COM.Verbrauch.Wertermittlungsverfahren">
             <summary>

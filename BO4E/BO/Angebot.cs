@@ -37,7 +37,7 @@ namespace BO4E.BO
         [JsonPropertyName("anfragereferenz")]
         [ProtoMember(5)]
         [DataCategory(DataCategory.FINANCE)]
-        public string Anfragereferenz { get; set; }
+        public string? Anfragereferenz { get; set; }
 
         [System.Text.Json.Serialization.JsonIgnore]
         [Newtonsoft.Json.JsonIgnore]
@@ -118,7 +118,7 @@ namespace BO4E.BO
         [JsonPropertyName("unterzeichnerAngebotsnehmer")]
         [ProtoMember(11)]
         [DataCategory(DataCategory.NAME)]
-        public Ansprechpartner UnterzeichnerAngebotsnehmer { get; set; }
+        public Ansprechpartner? UnterzeichnerAngebotsnehmer { get; set; }
 
         /// <summary>
         ///     Link auf die Person, die als Angebotsgeber das Angebots ausgestellt hat.
@@ -128,7 +128,7 @@ namespace BO4E.BO
         [JsonPropertyName("unterzeichnerAngebotsgeber")]
         [ProtoMember(12)]
         [DataCategory(DataCategory.NAME)]
-        public Ansprechpartner UnterzeichnerAngebotsgeber { get; set; }
+        public Ansprechpartner? UnterzeichnerAngebotsgeber { get; set; }
 
         /// <summary>
         ///     Eine oder mehrere Varianten des Angebots mit den Angebotsteilen. Ein Angebot besteht mindestens aus einer Variante.
@@ -139,6 +139,6 @@ namespace BO4E.BO
         [ProtoMember(13)]
         [DataCategory(DataCategory.FINANCE)]
         [MinLength(1)]
-        public List<Angebotsvariante> Varianten { get; set; }
+        public List<Angebotsvariante>? Varianten { get; set; }
     }
 }

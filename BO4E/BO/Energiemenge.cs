@@ -68,7 +68,7 @@ namespace BO4E.BO
         [ProtoMember(6)]
         [DataCategory(DataCategory.METER_READING)]
         [MinLength(1)]
-        public List<Verbrauch> Energieverbrauch { get; set; }
+        public List<Verbrauch>? Energieverbrauch { get; set; }
 
         /// <summary>
         ///     If energieverbrauch is null or not present, it is initialised with an empty list for easier handling (less null

@@ -85,7 +85,7 @@ namespace BO4E.COM
         [JsonProperty(PropertyName = "zu_abschlaege", Required = Required.Default)]
         [JsonPropertyName("zu_abschlaege")]
         [ProtoMember(12)]
-        public PositionsAufAbschlag ZuAbschlaege { get; set; }
+        public PositionsAufAbschlag? ZuAbschlaege { get; set; }
 
         /// <summary>Preisstaffeln, die zu dieser Preisposition gehören. Details <see cref="Preisstaffel" /></summary>
         [JsonProperty(PropertyName = "preisstaffeln", Required = Required.Always)]

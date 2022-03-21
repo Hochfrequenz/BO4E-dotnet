@@ -40,6 +40,6 @@ namespace BO4E.COM
         [JsonProperty(PropertyName = "dienstanbieter", Required = Required.Default)]
         [JsonPropertyName("dienstanbieter")]
         [ProtoMember(5)]
-        public string Dienstanbieter { get; set; }
+        public string? Dienstanbieter { get; set; }
     }
 }

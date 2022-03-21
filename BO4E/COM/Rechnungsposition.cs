@@ -88,14 +88,14 @@ namespace BO4E.COM
         [JsonProperty(PropertyName = "lokationsId", Required = Required.Default)]
         [JsonPropertyName("lokationsId")]
         [ProtoMember(9)]
-        public string LokationsId { get; set; }
+        public string? LokationsId { get; set; }
 
         /// <summary>Die abgerechnete Menge mit Einheit. Z.B. 4372 kWh. Details <see cref="Menge" /></summary>
         [JsonProperty(PropertyName = "positionsMenge", Required = Required.Default)]
         [JsonPropertyName("positionsMenge")]
         [FieldName("amount", Language.EN)]
         [ProtoMember(10)]
-        public Menge PositionsMenge { get; set; }
+        public Menge? PositionsMenge { get; set; }
 
         /// <summary>
         ///     Eine auf die Zeiteinheit bezogene Untermenge. Z.B. bei einem Jahrespreis, 3 Monate oder 146 Tage. Basierend
@@ -105,7 +105,7 @@ namespace BO4E.COM
         [JsonPropertyName("zeitbezogeneMenge")]
         [FieldName("timeBasedAmount", Language.EN)]
         [ProtoMember(11)]
-        public Menge ZeitbezogeneMenge { get; set; }
+        public Menge? ZeitbezogeneMenge { get; set; }
 
         /// <summary>Der Preis für eine Einheit der energetischen Menge. Details <see cref="Preis" /></summary>
         [JsonProperty(PropertyName = "einzelpreis", Required = Required.Always)]
@@ -122,14 +122,14 @@ namespace BO4E.COM
         [JsonPropertyName("teilsummeNetto")]
         [FieldName("subtotalNet", Language.EN)]
         [ProtoMember(13)]
-        public Betrag TeilsummeNetto { get; set; }
+        public Betrag? TeilsummeNetto { get; set; }
 
         /// <summary>Nettobetrag für den Rabatt dieser Position. Details <see cref="Betrag" /></summary>
         [JsonProperty(PropertyName = "teilrabattNetto", Required = Required.Default)]
         [JsonPropertyName("teilrabattNetto")]
         [FieldName("someDiscountNet", Language.EN)]
         [ProtoMember(14)]
-        public Betrag TeilrabattNetto { get; set; }
+        public Betrag? TeilrabattNetto { get; set; }
 
         /// <summary>
         ///     Auf die Position entfallende Steuer, bestehend aus Steuersatz und Betrag. Details <see cref="Steuerbetrag" />
@@ -138,7 +138,7 @@ namespace BO4E.COM
         [JsonPropertyName("teilsummeSteuer")]
         [FieldName("subtotalTax", Language.EN)]
         [ProtoMember(15)]
-        public Steuerbetrag TeilsummeSteuer { get; set; }
+        public Steuerbetrag? TeilsummeSteuer { get; set; }
 
         /// <summary>
         ///     Möglichkeit die Rechnungsposition einem Vertragskonto zuzuordnen, um die Rechnungsposition mittels SAP Convergent
@@ -150,7 +150,7 @@ namespace BO4E.COM
         [Obsolete("Please use vertragsId instead of vertragskontoId", false)]
         [FieldName("contractAccountId", Language.EN)]
         [ProtoMember(16)]
-        public string VertragskontoId { get; set; }
+        public string? VertragskontoId { get; set; }
 
         /// <summary>
         ///     Möglichkeit die Rechnungsposition einem Vertragskonto zuzuordnen, um die Rechnungsposition mittels SAP Convergent
@@ -161,7 +161,7 @@ namespace BO4E.COM
         [JsonPropertyName("vertragsId")]
         [ProtoMember(1017)]
         [NonOfficial(NonOfficialCategory.CUSTOMER_REQUIREMENTS)]
-        public string VertragsId { get; set; }
+        public string? VertragsId { get; set; }
 
         /// <summary>
         ///     status einer Rechnungsposition in SAP Convergent Invoicing

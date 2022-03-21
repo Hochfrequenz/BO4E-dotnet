@@ -54,7 +54,7 @@ namespace BO4E.BO
         [JsonProperty(PropertyName = "ZeitraumMesswertanfrage", Required = Required.Default)]
         [JsonPropertyName("ZeitraumMesswertanfrage")]
         [ProtoMember(1003)]
-        public Zeitraum ZeitraumMesswertanfrage { get; set; }
+        public Zeitraum? ZeitraumMesswertanfrage { get; set; }
 
         /// <summary>
         /// Hier wird für die Reklamation von Werten der Reklamationsgrund angegeben.
@@ -73,6 +73,6 @@ namespace BO4E.BO
         [JsonPropertyName("reklamationsgrundBemerkung")]
         [NonOfficial(NonOfficialCategory.MISSING)]
         [ProtoMember(1005)]
-        public string ReklamationsgrundBemerkung { get; set; }
+        public string? ReklamationsgrundBemerkung { get; set; }
     }
 }
