@@ -43,21 +43,6 @@
     <None Update="Energiemenge\completeness\gas_januar_2018.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="Energiemenge\completeness\somecustomer1.json">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Update="Energiemenge\completeness\somecustomer2.json">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Update="Energiemenge\completeness\somecustomer3.json">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Update="Energiemenge\completeness\somecustomer4.json">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Update="Energiemenge\completeness\somecustomer4zoom.json">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
     <None Update="Energiemenge\completeness\threeyears.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
@@ -104,12 +89,6 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Update="Energiemenge\simple2.json">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Update="Energiemenge\summertime2019.json">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Update="Energiemenge\wintertime2018.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
   </ItemGroup>
