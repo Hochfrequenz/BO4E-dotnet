@@ -26,7 +26,7 @@ namespace BO4E.COM
         [JsonProperty(PropertyName = "bemerkung", Required = Required.Default)]
         [JsonPropertyName("bemerkung")]
         [ProtoMember(5)]
-        public string Bemerkung { get; set; }
+        public string? Bemerkung { get; set; }
 
         /// <summary>
         ///     Bezeichnung der Preismodelle in Ausschreibungen für die Energielieferung. Details
@@ -82,21 +82,21 @@ namespace BO4E.COM
         [JsonProperty(PropertyName = "gesamtmenge", Required = Required.Default)]
         [JsonPropertyName("gesamtmenge")]
         [ProtoMember(13)]
-        public Menge Gesamtmenge { get; set; }
+        public Menge? Gesamtmenge { get; set; }
 
         /// <summary>Mindestmenge Toleranzband (kWh, %)</summary>
         /// <see cref="Menge" />
         [JsonProperty(PropertyName = "wunschMindestmenge", Required = Required.Default)]
         [JsonPropertyName("wunschMindestmenge")]
         [ProtoMember(14)]
-        public Menge WunschMindestmenge { get; set; }
+        public Menge? WunschMindestmenge { get; set; }
 
         /// <summary>Maximalmenge Toleranzband (kWh, %)</summary>
         /// <see cref="Menge" />
         [JsonProperty(PropertyName = "wunschMaximalmenge", Required = Required.Default)]
         [JsonPropertyName("wunschMaximalmenge")]
         [ProtoMember(15)]
-        public Menge WunschMaximalmenge { get; set; }
+        public Menge? WunschMaximalmenge { get; set; }
 
         /// <summary>
         ///     Angabe, in welchem Intervall die Angebotsabgabe wiederholt werden darf. Angabe nur gesetzt für die 2. Phase
@@ -106,27 +106,27 @@ namespace BO4E.COM
         [JsonProperty(PropertyName = "wiederholungsintervall", Required = Required.Default)]
         [JsonPropertyName("wiederholungsintervall")]
         [ProtoMember(16)]
-        public Zeitraum Wiederholungsintervall { get; set; }
+        public Zeitraum? Wiederholungsintervall { get; set; }
 
         /// <summary>Zeitraum, für den die in diesem Los enthaltenen Lieferstellen beliefert werden sollen</summary>
         /// <see cref="Zeitraum" />
         [JsonProperty(PropertyName = "lieferzeitraum", Required = Required.Default)]
         [JsonPropertyName("lieferzeitraum")]
         [ProtoMember(17)]
-        public Zeitraum Lieferzeitraum { get; set; }
+        public Zeitraum? Lieferzeitraum { get; set; }
 
         /// <summary>Kundenwunsch zur Kündigungsfrist in der Ausschreibung.</summary>
         /// <see cref="Zeitraum" />
         [JsonProperty(PropertyName = "wunschKuendingungsfrist", Required = Required.Default)]
         [JsonPropertyName("wunschKuendingungsfrist")]
         [ProtoMember(18)]
-        public Zeitraum WunschKuendingungsfrist { get; set; }
+        public Zeitraum? WunschKuendingungsfrist { get; set; }
 
         /// <summary>Kundenwunsch zum Zahlungsziel in der Ausschreibung.</summary>
         /// <see cref="Zeitraum" />
         [JsonProperty(PropertyName = "wunschZahlungsziel", Required = Required.Default)]
         [JsonPropertyName("wunschZahlungsziel")]
         [ProtoMember(19)]
-        public Zeitraum WunschZahlungsziel { get; set; }
+        public Zeitraum? WunschZahlungsziel { get; set; }
     }
 }

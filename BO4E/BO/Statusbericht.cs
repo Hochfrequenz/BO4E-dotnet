@@ -29,7 +29,7 @@ namespace BO4E.BO
         [JsonPropertyName("pruefgegenstand")]
         [ProtoMember(2)]
         [BoKey]
-        public string Pruefgegenstand { get; set; }
+        public string? Pruefgegenstand { get; set; }
 
         [System.Text.Json.Serialization.JsonIgnore]
         [Newtonsoft.Json.JsonIgnore]
@@ -56,6 +56,6 @@ namespace BO4E.BO
         /// </summary>
         [JsonProperty(Required = Required.Default, Order = 4, PropertyName = "fehler")]
         [JsonPropertyName("fehler")]
-        public Fehler Fehler { get; set; }
+        public Fehler? Fehler { get; set; }
     }
 }

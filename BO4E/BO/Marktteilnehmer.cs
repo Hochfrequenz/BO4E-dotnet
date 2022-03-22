@@ -50,7 +50,7 @@ namespace BO4E.BO
             PropertyName = "makoadresse")] // relaxed from always to default to make COM.Marktrolle obsolete.
         [JsonPropertyName("makoadresse")]
         //[ProtoMember(22)]
-        public string Makoadresse { get; set; }
+        public string? Makoadresse { get; set; }
 
         /// <summary>
         ///     Ansprechpartner as in EDIFACT NAD+MS, that includes e.g. the email address of a natural person.
@@ -59,6 +59,6 @@ namespace BO4E.BO
         [JsonProperty(Required = Required.Default, Order = 23, PropertyName = "ansprechpartner")]
         [JsonPropertyName("ansprechpartner")]
         //[ProtoMember(23)]
-        public Ansprechpartner Ansprechpartner { get; set; }
+        public Ansprechpartner? Ansprechpartner { get; set; }
     }
 }

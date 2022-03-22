@@ -28,7 +28,7 @@ namespace BO4E.BO
         [NonOfficial(NonOfficialCategory.MISSING)]
         [ProtoMember(1000)]
         [BoKey]
-        public string MarktlokationsId { get; set; }
+        public string? MarktlokationsId { get; set; }
         /// <summary>
         /// Eine Liste der verwendeten Lastprofile (SLP, SLP/TLP, ALP etc.)
         /// </summary>
@@ -36,7 +36,7 @@ namespace BO4E.BO
         [JsonPropertyName("lastprofile")]
         [NonOfficial(NonOfficialCategory.MISSING)]
         [ProtoMember(1001)]
-        public List<Lastprofil> Lastprofile { get; set; }
+        public List<Lastprofil>? Lastprofile { get; set; }
 
         /// <summary>
         /// Inklusiver Start der Bilanzierung
@@ -89,7 +89,7 @@ namespace BO4E.BO
         [NonOfficial(NonOfficialCategory.MISSING)]
         [ProtoMember(1004)]
         [BoKey]
-        public string Bilanzkreis { get; set; }
+        public string? Bilanzkreis { get; set; }
 
         /// <summary>
         /// Jahresverbrauchsprognose
@@ -98,7 +98,7 @@ namespace BO4E.BO
         [JsonPropertyName("jahresverbrauchsprognose")]
         [NonOfficial(NonOfficialCategory.MISSING)]
         [ProtoMember(1005)]
-        public Menge Jahresverbrauchsprognose { get; set; }
+        public Menge? Jahresverbrauchsprognose { get; set; }
 
         /// <summary>
         /// Kundenwert
@@ -107,7 +107,7 @@ namespace BO4E.BO
         [JsonPropertyName("temperaturarbeit")]
         [NonOfficial(NonOfficialCategory.MISSING)]
         [ProtoMember(1018)]
-        public Menge TemperaturArbeit { get; set; }
+        public Menge? TemperaturArbeit { get; set; }
 
         /// <summary>
         /// Kundenwert
@@ -116,7 +116,7 @@ namespace BO4E.BO
         [JsonPropertyName("kundenwert")]
         [NonOfficial(NonOfficialCategory.MISSING)]
         [ProtoMember(1006)]
-        public Menge Kundenwert { get; set; }
+        public Menge? Kundenwert { get; set; }
 
         /// <summary>
         ///  Verbrauchsaufteilung in % zwischen SLP und TLP-Profil
@@ -168,7 +168,7 @@ namespace BO4E.BO
         [JsonPropertyName("detailsPrognosegrundlage")]
         [NonOfficial(NonOfficialCategory.MISSING)]
         [ProtoMember(1014)]
-        public List<Profiltyp> DetailsPrognosegrundlage { get; set; }
+        public List<Profiltyp>? DetailsPrognosegrundlage { get; set; }
 
         /// <summary>
         ///     Wahlrecht der Prognosegrundlage (true = Wahlrecht beim Lieferanten vorhanden)

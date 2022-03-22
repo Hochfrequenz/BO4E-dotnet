@@ -180,8 +180,9 @@ namespace BO4E.meta
                     n += 1;
                 }
             }
-
+#pragma warning disable SYSLIB0013
             var relativeUri = new Uri(EscapeUriString(relativeUriBuilder.ToString()), UriKind.Relative);
+#pragma warning restore SYSLIB0013
             return TryCreate(baseUri, relativeUri, out var resultUri) ? new Bo4eUri(resultUri.AbsoluteUri) : null;
         }
 

@@ -68,7 +68,7 @@ namespace BO4E.BO
         [ProtoMember(6)]
         [DataCategory(DataCategory.METER_READING)]
         [MinLength(1)]
-        public List<Verbrauch> Energieverbrauch { get; set; }
+        public List<Verbrauch>? Energieverbrauch { get; set; }
 
         /// <summary>
         ///     Adding two Energiemenge objects is allowed for Energiemenge with the same location Id and location type.

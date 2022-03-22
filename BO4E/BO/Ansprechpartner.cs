@@ -32,7 +32,7 @@ namespace BO4E.BO
         [JsonPropertyName("inviduelleAnrede")]
         [ProtoMember(5)]
         [DataCategory(DataCategory.NAME)]
-        public string IndividuelleAnrede { get; set; }
+        public string? IndividuelleAnrede { get; set; }
 
         /// <summary>Möglicher Titel des Ansprechpartners</summary>
         [JsonProperty(Required = Required.Default, Order = 6, PropertyName = "titel")]

@@ -19,7 +19,7 @@ namespace BO4E.COM
         [JsonProperty(PropertyName = "summeKostenblock", Required = Required.Default)]
         [JsonPropertyName("summeKostenblock")]
         [ProtoMember(4)]
-        public Betrag SummeKostenblock { get; set; }
+        public Betrag? SummeKostenblock { get; set; }
 
         /// <summary>
         ///     Hier sind die Details zu einer Kostenposition aufgeführt. Z.B.:Alliander Netz Heinsberg GmbH, 01.02.2018,
@@ -28,6 +28,6 @@ namespace BO4E.COM
         [JsonProperty(PropertyName = "kostenpositionen", Required = Required.Default)]
         [JsonPropertyName("kostenpositionen")]
         [ProtoMember(5)]
-        public List<Kostenposition> Kostenpositionen { get; set; }
+        public List<Kostenposition>? Kostenpositionen { get; set; }
     }
 }

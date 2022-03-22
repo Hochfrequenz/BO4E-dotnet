@@ -14,7 +14,7 @@ namespace BO4E.COM
         [JsonProperty(PropertyName = "zusatzprodukte", Required = Required.Default)]
         [JsonPropertyName("zusatzprodukte")]
         [ProtoMember(3)]
-        public List<string> Zusatzprodukte { get; set; }
+        public List<string>? Zusatzprodukte { get; set; }
 
         /// <summary>
         ///     Voraussetzungen, die erfüllt sein müssen, damit dieser Tarif zur Anwendung kommen kann. Details
@@ -23,7 +23,7 @@ namespace BO4E.COM
         [JsonProperty(PropertyName = "voraussetzungen", Required = Required.Default)]
         [JsonPropertyName("voraussetzungen")]
         [ProtoMember(4)]
-        public List<Voraussetzungen> Voraussetzungen { get; set; }
+        public List<Voraussetzungen>? Voraussetzungen { get; set; }
 
         /// <summary>
         ///     Liste der Zähler/Geräte, die erforderlich sind, damit dieser Tarif zur Anwendung gelangen kann.(Falls keine
@@ -33,7 +33,7 @@ namespace BO4E.COM
         [JsonProperty(PropertyName = "einschraenkungzaehler", Required = Required.Default)]
         [JsonPropertyName("einschraenkungzaehler")]
         [ProtoMember(5)]
-        public Geraet Einschraenkungzaehler { get; set; }
+        public Geraet? Einschraenkungzaehler { get; set; }
 
         /// <summary>
         ///     Die vereinbarte Leistung, die (näherungsweise) abgenommen wird. Insbesondere Gastarife können daran gebunden
@@ -42,6 +42,6 @@ namespace BO4E.COM
         [JsonProperty(PropertyName = "einschraenkungleistung", Required = Required.Default)]
         [JsonPropertyName("einschraenkungleistung")]
         [ProtoMember(6)]
-        public Menge Einschraenkungleistung { get; set; }
+        public Menge? Einschraenkungleistung { get; set; }
     }
 }

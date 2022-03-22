@@ -17,7 +17,7 @@ namespace BO4E.COM
         [ProtoMember(3)]
         [JsonProperty(PropertyName = "keyColumn")]
         [JsonPropertyName("keyColumn")]
-        public string KeyColumn { get; set; }
+        public string? KeyColumn { get; set; }
 
         /// <summary>
         ///     value
@@ -25,7 +25,7 @@ namespace BO4E.COM
         [ProtoMember(4)]
         [JsonProperty(PropertyName = "value")]
         [JsonPropertyName("value")]
-        public string Value { get; set; }
+        public string? Value { get; set; }
 
         /// <summary>
         ///     convert object to a key value pair

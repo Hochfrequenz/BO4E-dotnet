@@ -23,7 +23,7 @@ namespace BO4E.COM
         [JsonProperty(PropertyName = "beschreibung", Required = Required.Default)]
         [JsonPropertyName("beschreibung")]
         [ProtoMember(4)]
-        public string Beschreibung { get; set; }
+        public string? Beschreibung { get; set; }
 
         /// <summary>Typ des Aufabschlages (z.B. absolut oder prozentual). Details <see cref="ENUM.AufAbschlagstyp" /></summary>
         [JsonProperty(PropertyName = "aufAbschlagstyp", Required = Required.Default)]
@@ -53,13 +53,13 @@ namespace BO4E.COM
         [JsonProperty(PropertyName = "website", Required = Required.Default)]
         [JsonPropertyName("website")]
         [ProtoMember(8)]
-        public string Website { get; set; }
+        public string? Website { get; set; }
 
         /// <summary>Zeitraum, in dem der Abschlag zur Anwendung kommen kann. Details <see cref="Zeitraum" /></summary>
         [JsonProperty(PropertyName = "gueltigkeitszeitraum", Required = Required.Default)]
         [JsonPropertyName("gueltigkeitszeitraum")]
         [ProtoMember(9)]
-        public Zeitraum Gueltigkeitszeitraum { get; set; }
+        public Zeitraum? Gueltigkeitszeitraum { get; set; }
 
         /// <summary>Werte für die gestaffelten Auf/Abschläge. Details <see cref="Preisstaffel" /></summary>
         [JsonProperty(PropertyName = "staffeln", Required = Required.Always)]

@@ -32,7 +32,7 @@ namespace BO4E.COM
         [JsonProperty(PropertyName = "bemerkung", Required = Required.Default)]
         [JsonPropertyName("bemerkung")]
         [ProtoMember(6)]
-        public string Bemerkung { get; set; }
+        public string? Bemerkung { get; set; }
 
         /// <summary>Jahr, für das der Energiemix gilt.</summary>
         [JsonProperty(PropertyName = "gueltigkeitsjahr", Required = Required.Always)]
@@ -56,13 +56,13 @@ namespace BO4E.COM
         [JsonProperty(PropertyName = "oekozertifikat", Required = Required.Default)]
         [JsonPropertyName("oekozertifikat")]
         [ProtoMember(10)]
-        public List<Oekozertifikat> Oekozertifikat { get; set; }
+        public List<Oekozertifikat>? Oekozertifikat { get; set; }
 
         /// <summary>Ökolabel für den Energiemix. Details <see cref="ENUM.Oekolabel" /></summary>
         [JsonProperty(PropertyName = "oekolabel", Required = Required.Default)]
         [JsonPropertyName("oekolabel")]
         [ProtoMember(11)]
-        public List<Oekolabel> Oekolabel { get; set; }
+        public List<Oekolabel>? Oekolabel { get; set; }
 
         /// <summary>Kennzeichen, ob der Versorger zu den Öko Top Ten gehört.</summary>
         [JsonProperty(PropertyName = "oekoTopTen", Required = Required.Default)]
@@ -74,7 +74,7 @@ namespace BO4E.COM
         [JsonProperty(PropertyName = "website", Required = Required.Default)]
         [JsonPropertyName("website")]
         [ProtoMember(13)]
-        public string Website { get; set; }
+        public string? Website { get; set; }
 
         /// <summary>Anteile der jeweiligen Erzeugungsart. Details <see cref="Energieherkunft" /></summary>
         [JsonProperty(PropertyName = "anteil", Required = Required.Always)]

@@ -22,7 +22,7 @@ namespace BO4E.COM
         [JsonProperty(PropertyName = "lokationsbezeichung", Required = Required.Default)]
         [JsonPropertyName("lokationsbezeichung")]
         [ProtoMember(4)]
-        public string Lokationsbezeichung { get; set; }
+        public string? Lokationsbezeichung { get; set; }
 
         /// <summary>
         ///     In der angegebenen Netzebene wird die Marktlokation versorgt, z.B. MSP für Mittelspanung. Details
@@ -46,19 +46,19 @@ namespace BO4E.COM
         [JsonProperty(PropertyName = "netzbetreiber", Required = Required.Default)]
         [JsonPropertyName("netzbetreiber")]
         [ProtoMember(7)]
-        public string Netzbetreiber { get; set; }
+        public string? Netzbetreiber { get; set; }
 
         /// <summary>Bezeichnung des Kunden, der die Marktlokation nutzt.</summary>
         [JsonProperty(PropertyName = "kunde", Required = Required.Default)]
         [JsonPropertyName("kunde")]
         [ProtoMember(8)]
-        public string Kunde { get; set; }
+        public string? Kunde { get; set; }
 
         /// <summary>Die Bezeichnung des Zählers an der Marktlokation</summary>
         [JsonProperty(PropertyName = "zaehlernummer", Required = Required.Default)]
         [JsonPropertyName("zaehlernummer")]
         [ProtoMember(9)]
-        public string Zaehlernummer { get; set; }
+        public string? Zaehlernummer { get; set; }
 
         /// <summary>
         ///     Spezifikation, um welche Zählertechnik es sich im vorliegenden Fall handelt, z.B. Leistungsmessung. Details
@@ -88,13 +88,13 @@ namespace BO4E.COM
         [JsonProperty(PropertyName = "rechnungsadresse", Required = Required.Default)]
         [JsonPropertyName("rechnungsadresse")]
         [ProtoMember(13)]
-        public Adresse Rechnungsadresse { get; set; }
+        public Adresse? Rechnungsadresse { get; set; }
 
         /// <summary>Prognosewert für die Jahresarbeit der ausgeschriebenen Lokation. Struktur <seealso cref="Menge" /></summary>
         [JsonProperty(PropertyName = "prognoseJahresarbeit", Required = Required.Default)]
         [JsonPropertyName("prognoseJahresarbeit")]
         [ProtoMember(14)]
-        public Menge PrognoseJahresarbeit { get; set; }
+        public Menge? PrognoseJahresarbeit { get; set; }
 
         /// <summary>
         ///     Ein Prognosewert für die Arbeit innerhalb des angefragten Lieferzeitraums der ausgeschriebenen Lokation.
@@ -103,7 +103,7 @@ namespace BO4E.COM
         [JsonProperty(PropertyName = "prognoseArbeitLieferzeitraum", Required = Required.Default)]
         [JsonPropertyName("prognoseArbeitLieferzeitraum")]
         [ProtoMember(15)]
-        public Menge PrognoseArbeitLieferzeitraum { get; set; }
+        public Menge? PrognoseArbeitLieferzeitraum { get; set; }
 
         /// <summary>
         ///     Prognosewert für die abgenommene maximale Leistung der ausgeschriebenen Lokation. Struktur
@@ -112,12 +112,12 @@ namespace BO4E.COM
         [JsonProperty(PropertyName = "prognoseLeistung", Required = Required.Default)]
         [JsonPropertyName("prognoseLeistung")]
         [ProtoMember(16)]
-        public Menge PrognoseLeistung { get; set; }
+        public Menge? PrognoseLeistung { get; set; }
 
         /// <summary>Angefragter Zeitraum für die ausgeschriebene Belieferung. <seealso cref="Zeitraum" /></summary>
         [JsonProperty(PropertyName = "lieferzeitraum", Required = Required.Default)]
         [JsonPropertyName("lieferzeitraum")]
         [ProtoMember(17)]
-        public Zeitraum Lieferzeitraum { get; set; }
+        public Zeitraum? Lieferzeitraum { get; set; }
     }
 }

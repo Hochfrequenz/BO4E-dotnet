@@ -315,7 +315,7 @@ namespace BO4E.BO
         [JsonPropertyName("rechnungstitel")]
         [FieldName("billTitle", Language.EN)]
         [ProtoMember(4)]
-        public string Rechnungstitel { get; set; }
+        public string? Rechnungstitel { get; set; }
 
         /// <summary>
         ///     Status der Rechnung zur Kennzeichnung des Bearbeitungsstandes. Details siehe ENUM Rechnungsstatus
@@ -399,7 +399,7 @@ namespace BO4E.BO
         [JsonProperty(Required = Required.Default, Order = 11, PropertyName = "originalRechnungsnummer")]
         [JsonPropertyName("originalRechnungsnummer")]
         [ProtoMember(11)]
-        public string OriginalRechnungsnummer { get; set; }
+        public string? OriginalRechnungsnummer { get; set; }
 
         /// <summary>
         ///     Der Zeitraum der zugrunde liegenden Lieferung zur Rechnung. In der COM Zeitraum können diese angegeben werden.
@@ -462,7 +462,7 @@ namespace BO4E.BO
         [JsonPropertyName("vorausgezahlt")]
         [ProtoMember(18)]
         [FieldName("prepaid", Language.EN)]
-        public Betrag Vorausgezahlt { get; set; }
+        public Betrag? Vorausgezahlt { get; set; }
 
         /// <summary>
         ///     Gesamtrabatt auf den Bruttobetrag. Details <see cref="Betrag" />
@@ -471,7 +471,7 @@ namespace BO4E.BO
         [JsonPropertyName("rabattBrutto")]
         [ProtoMember(19)]
         [FieldName("discountGross", Language.EN)]
-        public Betrag RabattBrutto { get; set; }
+        public Betrag? RabattBrutto { get; set; }
 
         /// <summary>
         ///     Der zu zahlende Betrag, der sich aus (<see cref="Gesamtbrutto" /> - <see cref="Vorausgezahlt" /> -
@@ -492,7 +492,7 @@ namespace BO4E.BO
         [JsonPropertyName("steuerbetraege")]
         [ProtoMember(21)]
         [FieldName("taxList", Language.EN)]
-        public List<Steuerbetrag> Steuerbetraege { get; set; }
+        public List<Steuerbetrag>? Steuerbetraege { get; set; }
 
         /// <summary>
         ///     Die Rechnungspositionen. Details siehe <see cref="Rechnungsposition" />

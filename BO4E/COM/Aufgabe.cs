@@ -29,7 +29,7 @@ namespace BO4E.COM
         [JsonProperty(PropertyName = "beschreibung", Required = Required.Default)]
         [JsonPropertyName("beschreibung")]
         [ProtoMember(4)]
-        public string Beschreibung { get; set; }
+        public string? Beschreibung { get; set; }
 
 
         [System.Text.Json.Serialization.JsonIgnore]
@@ -85,6 +85,6 @@ namespace BO4E.COM
         [JsonProperty(PropertyName = "ausfuehrender", Required = Required.Default)]
         [JsonPropertyName("ausfuehrender")]
         [ProtoMember(8)]
-        public string Ausfuehrender { get; set; }
+        public string? Ausfuehrender { get; set; }
     }
 }

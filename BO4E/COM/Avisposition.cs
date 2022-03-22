@@ -78,6 +78,6 @@ namespace BO4E.COM
         [JsonPropertyName("abweichung")]
         [NonOfficial(NonOfficialCategory.MISSING)]
         [ProtoMember(6)]
-        public Abweichung Abweichung { get; set; }
+        public Abweichung? Abweichung { get; set; }
     }
 }

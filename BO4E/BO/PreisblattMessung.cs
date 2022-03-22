@@ -43,7 +43,7 @@ namespace BO4E.BO
         [JsonProperty(Required = Required.Default, Order = 10, PropertyName = "inklusiveDienstleistung")]
         [JsonPropertyName("inklusiveDienstleistung")]
         //[ProtoMember(10)]
-        public List<Dienstleistungstyp> InklusiveDienstleistung { get; set; }
+        public List<Dienstleistungstyp>? InklusiveDienstleistung { get; set; }
 
         /// <summary>
         ///     Der Preis betrifft das hier angegebene Geräte, z.B. einen Drehstromzähler.
@@ -59,7 +59,7 @@ namespace BO4E.BO
         [JsonProperty(Required = Required.Default, Order = 12, PropertyName = "inklusiveGeraete")]
         [JsonPropertyName("inklusiveGeraete")]
         //[ProtoMember(12)]
-        public List<Geraeteeigenschaften> InklusiveGeraete { get; set; }
+        public List<Geraeteeigenschaften>? InklusiveGeraete { get; set; }
 
         /// <summary>
         ///     Der Netzbetreiber oder Messstellenbetreiber, der die Preise veröffentlicht hat.

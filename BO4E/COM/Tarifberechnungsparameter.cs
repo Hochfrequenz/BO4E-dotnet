@@ -21,7 +21,7 @@ namespace BO4E.COM
         [JsonProperty(PropertyName = "messpreisInGPEnthalten", Required = Required.Default)]
         [JsonPropertyName("messpreisInGPEnthalten")]
         [ProtoMember(4)]
-        public string MesspreisInGPEnthalten { get; set; }
+        public string? MesspreisInGPEnthalten { get; set; }
 
         /// <summary>Typ des Messpreises. Details <see cref="ENUM.Messpreistyp" /></summary>
         [ProtoMember(5)]
@@ -58,19 +58,19 @@ namespace BO4E.COM
         [JsonPropertyName("hoechstpreisNT")]
         [ProtoMember(10)]
         // ReSharper disable once InconsistentNaming
-        public Preis HoechstpreisNT { get; set; }
+        public Preis? HoechstpreisNT { get; set; }
 
         /// <summary>Höchstpreis für den Durchschnitts-Arbeitspreis HT. Details <see cref="Preis" /></summary>
         [JsonProperty(PropertyName = "hoechstpreisHT", Required = Required.Default)]
         [JsonPropertyName("hoechstpreisHT")]
         [ProtoMember(11)]
         // ReSharper disable once InconsistentNaming
-        public Preis HoechstpreisHT { get; set; }
+        public Preis? HoechstpreisHT { get; set; }
 
         /// <summary>Mindestpreis für den Durchschnitts-Arbeitspreis. Details <see cref="Preis" /></summary>
         [JsonProperty(PropertyName = "mindestpreis", Required = Required.Default)]
         [JsonPropertyName("mindestpreis")]
         [ProtoMember(12)]
-        public Preis Mindestpreis { get; set; }
+        public Preis? Mindestpreis { get; set; }
     }
 }

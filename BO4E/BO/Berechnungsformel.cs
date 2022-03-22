@@ -70,6 +70,6 @@ namespace BO4E.BO
         /// </summary>
         [JsonProperty(Required = Required.Default, Order = 9, PropertyName = "rechenschritt")]
         [JsonPropertyName("rechenschritt")]
-        public Rechenschritt Rechenschritt { get; set; }
+        public Rechenschritt? Rechenschritt { get; set; }
     }
 }

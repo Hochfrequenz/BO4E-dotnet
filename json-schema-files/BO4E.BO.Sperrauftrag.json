@@ -516,7 +516,10 @@
       "format": "date-time"
     },
     "fertigstellungsdatum": {
-      "type": "string",
+      "type": [
+        "string",
+        "null"
+      ],
       "format": "date-time"
     },
     "sparte": {

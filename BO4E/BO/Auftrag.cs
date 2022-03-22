@@ -1,8 +1,11 @@
 using System;
 using System.Text.Json.Serialization;
+
 using BO4E.COM;
 using BO4E.meta;
+
 using Newtonsoft.Json;
+
 using ProtoBuf;
 
 namespace BO4E.BO
@@ -44,8 +47,8 @@ namespace BO4E.BO
         [CompatibilityLevel(CompatibilityLevel.Level240)]
         protected DateTime _Fertigstellungsdatum
         {
-            get => Fertigstellungsdatum.UtcDateTime;
-            set => Fertigstellungsdatum = DateTime.SpecifyKind(value, DateTimeKind.Utc);
+            get => Fertigstellungsdatum?.UtcDateTime ?? DateTime.MinValue;
+            set => Fertigstellungsdatum = value == default ? null : DateTime.SpecifyKind(value, DateTimeKind.Utc);
         }
 
         /// <summary>
@@ -54,7 +57,7 @@ namespace BO4E.BO
         [JsonProperty("fertigstellungsdatum", Required = Required.Default)]
         [JsonPropertyName("fertigstellungsdatum")]
         [ProtoIgnore]
-        public DateTimeOffset Fertigstellungsdatum { get; set; }
+        public DateTimeOffset? Fertigstellungsdatum { get; set; }
 
         /// <summary>
         /// Die Sparte in der der Auftrag relevant ist
@@ -69,7 +72,7 @@ namespace BO4E.BO
         [JsonProperty("lieferanschrift", Required = Required.Default)]
         [JsonPropertyName("lieferanschrift")]
         [ProtoMember(6)]
-        public Adresse Lieferanschrift { get; set; }
+        public Adresse? Lieferanschrift { get; set; }
 
         /// <summary>
         /// Die ID der Marktlokation der der zu sperrende Zähler zugeordnet ist.
@@ -85,7 +88,7 @@ namespace BO4E.BO
         [JsonProperty("bemerkung", Required = Required.Default)]
         [JsonPropertyName("bemerkung")]
         [ProtoMember(8)]
-        public string Bemerkung { get; set; }
+        public string? Bemerkung { get; set; }
 
         /// <summary>
         /// Die Mindestpreis eines Auftrags (z.B. für eine Sperrung)
@@ -93,7 +96,7 @@ namespace BO4E.BO
         [JsonProperty("mindestkosten", Required = Required.Default)]
         [JsonPropertyName("mindestkosten")]
         [ProtoMember(9)]
-        public Preis Mindestpreis { get; set; }
+        public Preis? Mindestpreis { get; set; }
 
         /// <summary>
         /// Die Höchstkosten eines Auftrags (z.B. für eine Sperrung)
@@ -101,6 +104,6 @@ namespace BO4E.BO
         [JsonProperty("hoechstkosten", Required = Required.Default)]
         [JsonPropertyName("hoechstkosten")]
         [ProtoMember(10)]
-        public Preis Hoechstpreis { get; set; }
+        public Preis? Hoechstpreis { get; set; }
     }
 }

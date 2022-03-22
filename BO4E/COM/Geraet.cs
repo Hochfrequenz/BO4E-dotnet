@@ -12,7 +12,7 @@ namespace BO4E.COM
         [JsonProperty(PropertyName = "geraetenummer", Required = Required.Default)]
         [JsonPropertyName("geraetenummer")]
         [ProtoMember(3)]
-        public string Geraetenummer { get; set; }
+        public string? Geraetenummer { get; set; }
 
         /// <summary>
         ///     Festlegung der Eigenschaften des Gerätes. Z.B. Wandler MS/NS. Details
@@ -21,6 +21,6 @@ namespace BO4E.COM
         [JsonProperty(PropertyName = "geraeteeigenschaften", Required = Required.Default)]
         [JsonPropertyName("geraeteeigenschaften")]
         [ProtoMember(4)]
-        public Geraeteeigenschaften Geraeteeigenschaften { get; set; }
+        public Geraeteeigenschaften? Geraeteeigenschaften { get; set; }
     }
 }

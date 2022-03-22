@@ -17,7 +17,7 @@ namespace BO4E.COM
         [JsonProperty(PropertyName = "anfrageSubreferenz", Required = Required.Default)]
         [JsonPropertyName("anfrageSubreferenz")]
         [ProtoMember(3)]
-        public string AnfrageSubreferenz { get; set; }
+        public string? AnfrageSubreferenz { get; set; }
 
         /// <summary>
         ///     Marktlokationen, für die dieses Angebotsteil gilt, falls vorhanden. Durch die Marktlokation ist auch die
@@ -26,7 +26,7 @@ namespace BO4E.COM
         [JsonProperty(PropertyName = "lieferstellenangebotsteil", Required = Required.Default)]
         [JsonPropertyName("lieferstellenangebotsteil")]
         [ProtoMember(4)]
-        public List<Marktlokation> Lieferstellenangebotsteil { get; set; }
+        public List<Marktlokation>? Lieferstellenangebotsteil { get; set; }
 
         /// <summary>
         ///     Summe der Verbräuche aller in diesem Angebotsteil eingeschlossenen Lieferstellen. Details <see cref="Menge" />
@@ -34,7 +34,7 @@ namespace BO4E.COM
         [JsonProperty(PropertyName = "gesamtmengeangebotsteil", Required = Required.Default)]
         [JsonPropertyName("gesamtmengeangebotsteil")]
         [ProtoMember(5)]
-        public Menge Gesamtmengeangebotsteil { get; set; }
+        public Menge? Gesamtmengeangebotsteil { get; set; }
 
         /// <summary>
         ///     Summe der Jahresenergiekosten aller in diesem Angebotsteil enthaltenen Lieferstellen. Details
@@ -43,7 +43,7 @@ namespace BO4E.COM
         [JsonProperty(PropertyName = "gesamtkostenangebotsteil", Required = Required.Default)]
         [JsonPropertyName("gesamtkostenangebotsteil")]
         [ProtoMember(6)]
-        public Betrag Gesamtkostenangebotsteil { get; set; }
+        public Betrag? Gesamtkostenangebotsteil { get; set; }
 
         /// <summary>Einzelne Positionen, die zu diesem Angebotsteil gehören. Details <see cref="Angebotsposition" /></summary>
         [JsonProperty(PropertyName = "positionen", Required = Required.Always)]
@@ -55,6 +55,6 @@ namespace BO4E.COM
         [JsonProperty(PropertyName = "lieferzeitraum", Required = Required.Default)]
         [JsonPropertyName("lieferzeitraum")]
         [ProtoMember(8)]
-        public Zeitraum Lieferzeitraum { get; set; }
+        public Zeitraum? Lieferzeitraum { get; set; }
     }
 }

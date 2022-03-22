@@ -61,13 +61,13 @@ namespace BO4E.COM
         [JsonProperty(Required = Required.Default, Order = 6, PropertyName = "messlokationId")]
         [JsonPropertyName("messlokationId")]
         [ProtoMember(6)]
-        public string MesslokationId { get; set; }
+        public string? MesslokationId { get; set; }
 
         /// <summary>
         /// rekursive Verschachtelung weiterer rechenschritte
         /// </summary>
         [JsonProperty(Required = Required.Default, Order = 6, PropertyName = "weitererRechenschritt")]
         [JsonPropertyName("weitererRechenschritt")]
-        public Rechenschritt WeitererRechenschritt { get; set; }
+        public Rechenschritt? WeitererRechenschritt { get; set; }
     }
 }

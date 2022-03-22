@@ -48,20 +48,40 @@ namespace BO4E.COM
         /// <remarks>
         /// <c>Required = Required.Default</c>, DateTime aber nicht nullable, laut bo4e doku wäre es optional
         ///</remarks>
+        [System.Text.Json.Serialization.JsonIgnore]
+        [Newtonsoft.Json.JsonIgnore]
+        [ProtoMember(2, Name = nameof(Startdatum))]
         [CompatibilityLevel(CompatibilityLevel.Level240)]
-        [JsonProperty(PropertyName = "startdatum", Required = Required.Default, Order = 7)]
+        private DateTime _Startdatum
+        {
+            get => Startdatum?.UtcDateTime ?? default;
+            set => Startdatum = value == default ? null : DateTime.SpecifyKind(value, DateTimeKind.Utc);
+        }
+        /// <summary>Gibt Tag und Uhrzeit (falls vorhanden) an, wann der Zeitraum startet.</summary>
+        [JsonProperty(PropertyName = "startdatum", Required = Required.Default)]
         [JsonPropertyName("startdatum")]
-        [ProtoMember(3)]
-        public DateTime Startdatum { get; set; } // ToDo: use datetimeoffset as well
+        [FieldName("startDate", Language.EN)]
+        [ProtoIgnore]
+        [Newtonsoft.Json.JsonConverter(typeof(LenientDateTimeConverter))]
+        public DateTimeOffset? Startdatum { get; set; }
 
-        /// <summary>
-        ///     Ende des Zeitraumes, für den der Verbrauch angegeben wird.
-        /// </summary>
+
+        [System.Text.Json.Serialization.JsonIgnore]
+        [Newtonsoft.Json.JsonIgnore]
+        [ProtoMember(3, Name = nameof(Enddatum))]
         [CompatibilityLevel(CompatibilityLevel.Level240)]
-        [JsonProperty(PropertyName = "enddatum", Required = Required.Default, Order = 8)]
+        private DateTime _Enddatum
+        {
+            get => Enddatum?.UtcDateTime ?? default;
+            set => Enddatum = value == default ? null : DateTime.SpecifyKind(value, DateTimeKind.Utc);
+        }
+        /// <summary>Gibt Tag und Uhrzeit (falls vorhanden) an, wann der Zeitraum endet.</summary>
+        [JsonProperty(PropertyName = "enddatum", Required = Required.Default)]
         [JsonPropertyName("enddatum")]
-        [ProtoMember(4)]
-        public DateTime Enddatum { get; set; } // ToDo: use datetimeoffset as well
+        [FieldName("endDate", Language.EN)]
+        [ProtoIgnore]
+        [Newtonsoft.Json.JsonConverter(typeof(LenientDateTimeConverter))]
+        public DateTimeOffset? Enddatum { get; set; }
 
         /// <summary>
         ///     Gibt an, ob es sich um eine PROGNOSE oder eine MESSUNG handelt.

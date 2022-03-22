@@ -82,7 +82,7 @@ namespace BO4E.Extensions.BusinessObjects.Energiemenge
         {
             using (MiniProfiler.Current.Step(nameof(GetMinDate)))
             {
-                return em.Energieverbrauch.Min(ev => ev.Startdatum); // don't catch!
+                return em.Energieverbrauch.Min(ev => ev.Startdatum ?? DateTimeOffset.MinValue); // don't catch!
             }
         }
 
@@ -90,7 +90,7 @@ namespace BO4E.Extensions.BusinessObjects.Energiemenge
         {
             using (MiniProfiler.Current.Step(nameof(GetMinDate)))
             {
-                return em.Energieverbrauch.Max(ev => ev.Enddatum); // don't catch!
+                return em.Energieverbrauch.Max(ev => ev.Enddatum ?? DateTimeOffset.MaxValue); // don't catch!
             }
         }
 
@@ -164,7 +164,7 @@ namespace BO4E.Extensions.BusinessObjects.Energiemenge
                     $"The Mengeneinheit {me} isn't extensive. Calculating a consumption doesn't make sense.");
             return em.Energieverbrauch
                 .Where(v => v.Wertermittlungsverfahren == wev && v.Obiskennzahl == obiskennzahl && v.Einheit == me)
-                .Sum(v => GetOverlapFactor(new TimeRange(v.Startdatum, v.Enddatum), reference, false) * v.Wert);
+                .Sum(v => GetOverlapFactor(new TimeRange((v.Startdatum ?? DateTimeOffset.MinValue).DateTime, (v.Enddatum ?? DateTimeOffset.MinValue).DateTime), reference, false) * v.Wert);
         }
 
         /// <summary>
@@ -271,7 +271,7 @@ namespace BO4E.Extensions.BusinessObjects.Energiemenge
             var overallDenominator = 0.0M;
             foreach (var v in em.Energieverbrauch.Where(v => v.Einheit == me))
             {
-                var overlapFactor = GetOverlapFactor(new TimeRange(v.Startdatum, v.Enddatum), reference, true);
+                var overlapFactor = GetOverlapFactor(new TimeRange((v.Startdatum ?? DateTimeOffset.MinValue).DateTime, (v.Enddatum ?? DateTimeOffset.MinValue).DateTime), reference, true);
                 if (result.HasValue)
                     result += overlapFactor * v.Wert;
                 else
@@ -308,13 +308,13 @@ namespace BO4E.Extensions.BusinessObjects.Energiemenge
         {
             using (MiniProfiler.Current.Step(nameof(GetMissingTimeRanges)))
             {
-                IDictionary<Tuple<DateTime, DateTime>, Verbrauch> filteredVerbrauch;
+                IDictionary<Tuple<DateTimeOffset?, DateTimeOffset?>, Verbrauch> filteredVerbrauch;
                 using (MiniProfiler.Current.Step(
                     $"Filtering energieverbrauch on OBIS={obis}, WEV={wev}, Mengeneinheit={me}"))
                 {
                     filteredVerbrauch = em.Energieverbrauch
                         .Where(v => v.Wertermittlungsverfahren == wev && v.Obiskennzahl == obis && v.Einheit == me)
-                        .ToDictionary(v => new Tuple<DateTime, DateTime>(v.Startdatum, v.Enddatum), v => v);
+                        .ToDictionary(v => new Tuple<DateTimeOffset?, DateTimeOffset?>(v.Startdatum, v.Enddatum), v => v);
                 }
 
                 if (filteredVerbrauch.Count < 2)
@@ -351,9 +351,9 @@ namespace BO4E.Extensions.BusinessObjects.Energiemenge
                         //using (MiniProfiler.Current.Step("linq where on filtered verbrauch"))
                         //{
                         if (!filteredVerbrauch.ContainsKey(
-                            new Tuple<DateTime, DateTime>(dt,
+                            new Tuple<DateTimeOffset?, DateTimeOffset?>(dt,
                                 dt + duration))) //   Where<Verbrauch>(v => v.startdatum == dt && v.enddatum == dt + duration).Any())
-                            result.Add(new TimeRange(dt, dt + duration));
+                            result.Add(new TimeRange(dt, (dt + duration).Value));
                         //}
                     }
                 }
@@ -459,8 +459,8 @@ namespace BO4E.Extensions.BusinessObjects.Energiemenge
             vlist.Sort(new VerbrauchDateTimeComparer());
             for (var i = 1; i < vlist.Count; i++)
             {
-                result.Add(vlist[i].Startdatum - vlist[i - 1].Startdatum);
-                result.Add(vlist[i].Enddatum - vlist[i - 1].Enddatum);
+                result.Add((vlist[i].Startdatum ?? DateTimeOffset.MinValue) - (vlist[i - 1].Startdatum ?? DateTimeOffset.MinValue));
+                result.Add((vlist[i].Enddatum ?? DateTimeOffset.MinValue) - (vlist[i - 1].Enddatum ?? DateTimeOffset.MinValue));
             }
 
             return result;
@@ -476,8 +476,8 @@ namespace BO4E.Extensions.BusinessObjects.Energiemenge
                 .ToList();
             for (var i = 1; i < vlist.Count; i++)
             {
-                result.Add(vlist[i].Startdatum - vlist[i - 1].Startdatum);
-                result.Add(vlist[i].Enddatum - vlist[i - 1].Enddatum);
+                result.Add((vlist[i].Startdatum ?? DateTimeOffset.MinValue) - (vlist[i - 1].Startdatum ?? DateTimeOffset.MinValue));
+                result.Add((vlist[i].Enddatum ?? DateTimeOffset.MinValue) - (vlist[i - 1].Enddatum ?? DateTimeOffset.MinValue));
             }
 
             return result;
@@ -508,7 +508,7 @@ namespace BO4E.Extensions.BusinessObjects.Energiemenge
             var combinations = GetWevObisMeCombinations(em);
             var jointCoverage = em.Energieverbrauch
                 .Where(v => combinations.Contains(Tuple.Create(v.Wertermittlungsverfahren, v.Obiskennzahl, v.Einheit)))
-                .Sum(v => GetOverlapFactor(new TimeRange(v.Startdatum, v.Enddatum), reference, true));
+                .Sum(v => GetOverlapFactor(new TimeRange((v.Startdatum ?? DateTimeOffset.MinValue).DateTime, (v.Enddatum ?? DateTimeOffset.MinValue).DateTime), reference, true));
             return jointCoverage - (combinations.Count - 1);
         }
 
@@ -561,7 +561,7 @@ namespace BO4E.Extensions.BusinessObjects.Energiemenge
                 exactResult = em.Energieverbrauch
                     .Where(v => v.Einheit == mengeneinheit && v.Obiskennzahl == obisKz &&
                                 v.Wertermittlungsverfahren == wev)
-                    .Sum(v => GetOverlapFactor(new TimeRange(v.Startdatum, v.Enddatum), reference, true));
+                    .Sum(v => GetOverlapFactor(new TimeRange((v.Startdatum ?? DateTimeOffset.MinValue).DateTime, (v.Enddatum ?? DateTimeOffset.MinValue).DateTime), reference, true));
             }
 
             return Math.Round(exactResult, decimalRounding);
@@ -591,7 +591,7 @@ namespace BO4E.Extensions.BusinessObjects.Energiemenge
         public static bool IsContinuous(this BO.Energiemenge em, TimeRange reference)
         {
             return Math.Abs(em.Energieverbrauch.Sum(v =>
-                GetOverlapFactor(new TimeRange(v.Startdatum, v.Enddatum), reference, true)) - 1.0M) < QUASI_ZERO;
+                GetOverlapFactor(new TimeRange((v.Startdatum ?? DateTimeOffset.MinValue).DateTime, (v.Enddatum ?? DateTimeOffset.MinValue).DateTime), reference, true)) - 1.0M) < QUASI_ZERO;
         }
 
         private static decimal GetOverlapFactor(TimeRange period, ITimeRange reference, bool toReference)

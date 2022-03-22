@@ -114,7 +114,7 @@ namespace BO4E.BO
         [JsonProperty(Required = Required.Default, Order = 1, PropertyName = "boTyp")]
         [JsonPropertyName("boTyp")]
         [ProtoMember(1)]
-        public string BoTyp
+        public string? BoTyp
         {
             get => GetType().Name.ToUpper();
             set { }
@@ -129,7 +129,7 @@ namespace BO4E.BO
         [JsonProperty(PropertyName = "versionStruktur", Required = Required.Default, Order = 2)]
         [JsonPropertyName("versionStruktur")]
         [ProtoMember(2)]
-        public string VersionStruktur { get; set; }
+        public string? VersionStruktur { get; set; }
 
         /// <summary>
         ///     protobuf serilization requires the <see cref="Guid" /> as string.

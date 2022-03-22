@@ -53,7 +53,7 @@ namespace BO4E.BO
         [JsonPropertyName("zuZahlen")]
         [NonOfficial(NonOfficialCategory.MISSING)]
         [ProtoMember(1003)]
-        public Betrag ZuZahlen { get; set; }
+        public Betrag? ZuZahlen { get; set; }
 
     }
 }

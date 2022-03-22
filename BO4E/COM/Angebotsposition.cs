@@ -25,13 +25,13 @@ namespace BO4E.COM
         [JsonProperty(PropertyName = "positionsmenge", Required = Required.Default)]
         [JsonPropertyName("positionsmenge")]
         [ProtoMember(4)]
-        public Menge Positionsmenge { get; set; }
+        public Menge? Positionsmenge { get; set; }
 
         /// <summary>Preis pro Einheit/Stückpreis der jeweiligen Angebotsposition. Details <see cref="Preis" /></summary>
         [JsonProperty(PropertyName = "positionspreis", Required = Required.Default)]
         [JsonPropertyName("positionspreis")]
         [ProtoMember(5)]
-        public Preis Positionspreis { get; set; }
+        public Preis? Positionspreis { get; set; }
 
         /// <summary>
         ///     Kosten (PositionsPreis * PositionsStückzahl) für diese Angebotsposition. Details <see cref="Betrag" />
@@ -39,14 +39,14 @@ namespace BO4E.COM
         [JsonProperty(PropertyName = "positionsbetrag", Required = Required.Default)]
         [JsonPropertyName("positionsbetrag")]
         [ProtoMember(6)]
-        public Betrag Positionsbetrag { get; set; } // or positionskosten??
+        public Betrag? Positionsbetrag { get; set; } // or positionskosten??
 
         /// <summary>Preisschlüsselstamm als Alternative zum Preis/></summary>
         [JsonProperty(PropertyName = "preisschluesselstamm", Required = Required.Default)]
         [JsonPropertyName("preisschluesselstamm")]
         [NonOfficial(NonOfficialCategory.MISSING)]
         [ProtoMember(7)]
-        public string Preisschluesselstamm { get; set; }
+        public string? Preisschluesselstamm { get; set; }
 
         /// <summary>
         ///     Eine vom BDEW standardisierte Bezeichnung für die abgerechnete Leistungserbringung. Diese Artikelnummer wird
