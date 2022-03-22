@@ -29,11 +29,11 @@ namespace BO4E.BO
         /// <summary>
         ///     static serializer options for Energiemengenconverter
         /// </summary>
-        public static JsonSerializerOptions EnergiemengeSerializerOptions;
+        public static JsonSerializerOptions? EnergiemengeSerializerOptions;
         /// <summary>
         /// Semaphore to protect access to the serializer
         /// </summary>
-        public static System.Threading.SemaphoreSlim SerializerSemaphore = new System.Threading.SemaphoreSlim(1);
+        public static readonly System.Threading.SemaphoreSlim SerializerSemaphore = new(1);
         static Energiemenge()
         {
 
@@ -69,45 +69,6 @@ namespace BO4E.BO
         [DataCategory(DataCategory.METER_READING)]
         [MinLength(1)]
         public List<Verbrauch>? Energieverbrauch { get; set; }
-
-        /// <summary>
-        ///     If energieverbrauch is null or not present, it is initialised with an empty list for easier handling (less null
-        ///     checks) elsewhere.
-        /// </summary>
-        /// <param name="context"></param>
-        [OnDeserialized]
-        protected void OnDeserialized(StreamingContext context)
-        {
-            if (Energieverbrauch == null)
-            {
-                Energieverbrauch = new List<Verbrauch>();
-            }
-            else if (Energieverbrauch.Count > 0)
-            {
-                Energieverbrauch = Energieverbrauch
-                    //.Select(Verbrauch.FixSapCdsBug)
-                    .Where(v => !(v.Startdatum == DateTimeOffset.MinValue || v.Enddatum == DateTimeOffset.MinValue))
-                    .Where(v => !v.UserPropertyEquals("invalid", true))
-                    .ToList();
-                if (UserProperties != null &&
-                    UserProperties.TryGetValue(Verbrauch.SapProfdecimalsKey, out var profDecimalsRaw))
-                {
-                    var profDecimals = 0;
-                    if (profDecimalsRaw is string raw)
-                        profDecimals = int.Parse(raw);
-                    else
-                        profDecimals = ((JsonElement)profDecimalsRaw).GetInt32();
-                    if (profDecimals > 0)
-                        for (var i = 0; i < profDecimals; i++)
-                            // or should I import math.pow() for this purpose?
-                            foreach (var v in Energieverbrauch.Where(v =>
-                                v.UserProperties == null ||
-                                !v.UserProperties.ContainsKey(Verbrauch.SapProfdecimalsKey)))
-                                v.Wert /= 10.0M;
-                    UserProperties.Remove(Verbrauch.SapProfdecimalsKey);
-                }
-            }
-        }
 
         /// <summary>
         ///     Adding two Energiemenge objects is allowed for Energiemenge with the same location Id and location type.
@@ -171,6 +132,7 @@ namespace BO4E.BO
     public class EnergiemengeConverter : System.Text.Json.Serialization.JsonConverter<Energiemenge>
     {
         /// <summary>
+        /// <inheritdoc cref="System.Text.Json.Serialization.JsonConverter{T}.Read"/>
         /// </summary>
         /// <param name="reader"></param>
         /// <param name="typeToConvert"></param>
@@ -178,64 +140,40 @@ namespace BO4E.BO
         /// <returns></returns>
         public override Energiemenge Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
         {
-            Energiemenge.SerializerSemaphore.Wait();
-            if (Energiemenge.EnergiemengeSerializerOptions == null)
+            using (Energiemenge.SerializerSemaphore)
             {
-                Energiemenge.EnergiemengeSerializerOptions = new JsonSerializerOptions(options);
-                Energiemenge.EnergiemengeSerializerOptions.Converters.Remove(
-                    Energiemenge.EnergiemengeSerializerOptions.Converters.First(s => s.GetType() == typeof(EnergiemengeConverter)));
+                if (Energiemenge.EnergiemengeSerializerOptions == null)
+                {
+                    Energiemenge.EnergiemengeSerializerOptions = new JsonSerializerOptions(options);
+                    Energiemenge.EnergiemengeSerializerOptions.Converters.Remove(
+                        Energiemenge.EnergiemengeSerializerOptions.Converters.First(s => s.GetType() == typeof(EnergiemengeConverter)));
+                }
             }
-            Energiemenge.SerializerSemaphore.Release();
             var e = JsonSerializer.Deserialize<Energiemenge>(ref reader, Energiemenge.EnergiemengeSerializerOptions);
             if (e.Energieverbrauch == null)
             {
                 e.Energieverbrauch = new List<Verbrauch>();
             }
-            else if (e.Energieverbrauch.Count > 0)
-            {
-                e.Energieverbrauch = e.Energieverbrauch
-                    .Select(Verbrauch.FixSapCdsBugSystemTextJson)
-                    .Where(v => !(v.Startdatum == DateTimeOffset.MinValue || v.Enddatum == DateTimeOffset.MinValue))
-                    .Where(v => !v.UserPropertyEquals("invalid", true))
-                    .ToList();
-                if (e.UserProperties != null &&
-                    e.UserProperties.TryGetValue(Verbrauch.SapProfdecimalsKey, out var profDecimalsRaw))
-                {
-                    var profDecimals = 0;
-                    if (profDecimalsRaw is string raw)
-                        profDecimals = int.Parse(raw);
-                    else
-                        profDecimals = JsonSerializer.Deserialize<int>(((JsonElement)profDecimalsRaw).GetRawText(),
-                            Energiemenge.EnergiemengeSerializerOptions);
-                    if (profDecimals > 0)
-                        for (var i = 0; i < profDecimals; i++)
-                            // or should I import math.pow() for this purpose?
-                            foreach (var v in e.Energieverbrauch.Where(v =>
-                                v.UserProperties == null ||
-                                !v.UserProperties.ContainsKey(Verbrauch.SapProfdecimalsKey)))
-                                v.Wert /= 10.0M;
-                    e.UserProperties.Remove(Verbrauch.SapProfdecimalsKey);
-                }
-            }
-
             return e;
         }
 
         /// <summary>
+        /// <inheritdoc cref="System.Text.Json.Serialization.JsonConverter{T}.Write"/>
         /// </summary>
         /// <param name="writer"></param>
         /// <param name="value"></param>
         /// <param name="options"></param>
         public override void Write(Utf8JsonWriter writer, Energiemenge value, JsonSerializerOptions options)
         {
-            Energiemenge.SerializerSemaphore.Wait();
-            if (Energiemenge.EnergiemengeSerializerOptions == null)
+            using (Energiemenge.SerializerSemaphore)
             {
-                Energiemenge.EnergiemengeSerializerOptions = new JsonSerializerOptions(options);
-                Energiemenge.EnergiemengeSerializerOptions.Converters.Remove(
-                    Energiemenge.EnergiemengeSerializerOptions.Converters.First(s => s.GetType() == typeof(EnergiemengeConverter)));
+                if (Energiemenge.EnergiemengeSerializerOptions == null)
+                {
+                    Energiemenge.EnergiemengeSerializerOptions = new JsonSerializerOptions(options);
+                    Energiemenge.EnergiemengeSerializerOptions.Converters.Remove(
+                        Energiemenge.EnergiemengeSerializerOptions.Converters.First(s => s.GetType() == typeof(EnergiemengeConverter)));
+                }
             }
-            Energiemenge.SerializerSemaphore.Release();
             JsonSerializer.Serialize(writer, value, Energiemenge.EnergiemengeSerializerOptions);
         }
     }

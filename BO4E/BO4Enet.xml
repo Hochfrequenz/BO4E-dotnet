@@ -891,13 +891,6 @@
                 Gibt den <see cref="T:BO4E.COM.Verbrauch" /> in einer Zeiteinheit an.
             </summary>
         </member>
-        <member name="M:BO4E.BO.Energiemenge.OnDeserialized(System.Runtime.Serialization.StreamingContext)">
-            <summary>
-                If energieverbrauch is null or not present, it is initialised with an empty list for easier handling (less null
-                checks) elsewhere.
-            </summary>
-            <param name="context"></param>
-        </member>
         <member name="M:BO4E.BO.Energiemenge.op_Addition(BO4E.BO.Energiemenge,BO4E.BO.Energiemenge)">
             <summary>
                 Adding two Energiemenge objects is allowed for Energiemenge with the same location Id and location type.
@@ -914,6 +907,7 @@
         </member>
         <member name="M:BO4E.BO.EnergiemengeConverter.Read(System.Text.Json.Utf8JsonReader@,System.Type,System.Text.Json.JsonSerializerOptions)">
             <summary>
+            <inheritdoc cref="M:System.Text.Json.Serialization.JsonConverter`1.Read(System.Text.Json.Utf8JsonReader@,System.Type,System.Text.Json.JsonSerializerOptions)"/>
             </summary>
             <param name="reader"></param>
             <param name="typeToConvert"></param>
@@ -922,6 +916,7 @@
         </member>
         <member name="M:BO4E.BO.EnergiemengeConverter.Write(System.Text.Json.Utf8JsonWriter,BO4E.BO.Energiemenge,System.Text.Json.JsonSerializerOptions)">
             <summary>
+            <inheritdoc cref="M:System.Text.Json.Serialization.JsonConverter`1.Write(System.Text.Json.Utf8JsonWriter,`0,System.Text.Json.JsonSerializerOptions)"/>
             </summary>
             <param name="writer"></param>
             <param name="value"></param>
@@ -1978,6 +1973,7 @@
         </member>
         <member name="M:BO4E.BO.VertragsConverter.Read(System.Text.Json.Utf8JsonReader@,System.Type,System.Text.Json.JsonSerializerOptions)">
             <summary>
+            <inheritdoc cref="M:System.Text.Json.Serialization.JsonConverter`1.Read(System.Text.Json.Utf8JsonReader@,System.Type,System.Text.Json.JsonSerializerOptions)"/>
             </summary>
             <param name="reader"></param>
             <param name="typeToConvert"></param>
@@ -1986,6 +1982,7 @@
         </member>
         <member name="M:BO4E.BO.VertragsConverter.Write(System.Text.Json.Utf8JsonWriter,BO4E.BO.Vertrag,System.Text.Json.JsonSerializerOptions)">
             <summary>
+            <inheritdoc cref="M:System.Text.Json.Serialization.JsonConverter`1.Write(System.Text.Json.Utf8JsonWriter,`0,System.Text.Json.JsonSerializerOptions)"/>
             </summary>
             <param name="writer"></param>
             <param name="value"></param>
@@ -3808,94 +3805,6 @@
         <member name="P:BO4E.COM.Verbrauch.Tarifstufe">
             <summary>Tarifstufe</summary>
             <seealso cref="T:BO4E.ENUM.Tarifstufe" />
-        </member>
-        <member name="M:BO4E.COM.Verbrauch.FixSapBugs(System.Runtime.Serialization.StreamingContext)">
-            <param name="context"></param>
-        </member>
-        <member name="M:BO4E.COM.Verbrauch.FixSapCdsBug(BO4E.COM.Verbrauch)">
-            <summary>
-                static version of <see cref="M:BO4E.COM.Verbrauch.FixSapCdsBug" />
-            </summary>
-            <param name="v">verbrauch to be fixed</param>
-            <returns>new Verbrauch instance with fixed bugs</returns>
-        </member>
-        <member name="M:BO4E.COM.Verbrauch.FixSapCdsBugSystemTextJson(BO4E.COM.Verbrauch)">
-            <summary>
-                static version of <see cref="M:BO4E.COM.Verbrauch.FixSapCdsBug" />
-            </summary>
-            <param name="v">verbrauch to be fixed</param>
-            <returns>new Verbrauch instance with fixed bugs</returns>
-        </member>
-        <member name="M:BO4E.COM.Verbrauch.FixSapCdsBug">
-            <summary>
-                Our SAP Core Data Service view definition reading the profile values has a bug:
-                The time stamp of both start- and enddatum is simply a concatenated string using the
-                date (defining the table row) and the time (determining the column). The design of
-                the table eprofval is pure PITA but we've got to deal with it anyway. Since it's
-                impossible to artificially increment the date directly in the definition of the
-                ABAP/SQL view (as of SAP 7.51), we're attempting to fix it here. On 363 days a year
-                the symptom is easy to detect: The last time slice of the day ranges from 23:45 of
-                the current day and has the enddatum t 00:00 still on the same day instead of the
-                following. What makes it difficult are the edge cases. What happens on the day we
-                switch from daylight saving time to non-daylight saving time? The time difference
-                could be in the order of magnitude of 22 to 25 hours. Please add new unit tests for
-                every edge case.
-            </summary>
-        </member>
-        <member name="T:BO4E.COM.Verbrauch.SapTimezone">
-            <summary>
-                SAP systems are bad in date time and time zone handling. That's why we do it here, properly.
-                Time zones in SAP are customizing. We can only hope that our enum contains the actual customer values.
-            </summary>
-        </member>
-        <member name="F:BO4E.COM.Verbrauch.SapTimezone.UTC">
-            <summary>
-                universal time coordinated
-            </summary>
-        </member>
-        <member name="F:BO4E.COM.Verbrauch.SapTimezone.GMT">
-            <summary>
-                Greenwich Mean Time
-            </summary>
-        </member>
-        <member name="F:BO4E.COM.Verbrauch.SapTimezone.CET">
-            <summary>
-                Central European Time
-            </summary>
-        </member>
-        <member name="F:BO4E.COM.Verbrauch.SapTimezone.MEZ">
-            <summary>
-                Central European Time ("MittelEuropäische Zeit")
-            </summary>
-        </member>
-        <member name="F:BO4E.COM.Verbrauch.SapTimezone.CEST">
-            <summary>
-                Central European Summer Time
-            </summary>
-        </member>
-        <member name="F:BO4E.COM.Verbrauch.SapTimezone.MESZ">
-            <summary>
-                Central European Summer Time ("MittelEuropäische SommerZeit")
-            </summary>
-        </member>
-        <member name="T:BO4E.COM.VerbrauchConverter">
-            <summary>
-            </summary>
-        </member>
-        <member name="M:BO4E.COM.VerbrauchConverter.Read(System.Text.Json.Utf8JsonReader@,System.Type,System.Text.Json.JsonSerializerOptions)">
-            <summary>
-            </summary>
-            <param name="reader"></param>
-            <param name="typeToConvert"></param>
-            <param name="options"></param>
-            <returns></returns>
-        </member>
-        <member name="M:BO4E.COM.VerbrauchConverter.Write(System.Text.Json.Utf8JsonWriter,BO4E.COM.Verbrauch,System.Text.Json.JsonSerializerOptions)">
-            <summary>
-            </summary>
-            <param name="writer"></param>
-            <param name="value"></param>
-            <param name="options"></param>
         </member>
         <member name="T:BO4E.COM.Vertragskonditionen">
             <summary>Abbildung für Vertragskonditionen. Die Komponente wird sowohl im Vertrag als auch im Tarif verwendet.</summary>

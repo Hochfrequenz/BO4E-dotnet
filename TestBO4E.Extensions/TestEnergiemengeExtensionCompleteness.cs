@@ -1,9 +1,7 @@
 using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.IO;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using BO4E;
 using BO4E.BO;
@@ -12,11 +10,9 @@ using BO4E.ENUM;
 using BO4E.Extensions.BusinessObjects.Energiemenge;
 using BO4E.meta;
 using BO4E.meta.LenientConverters;
-using BO4E.Reporting;
 using Itenso.TimePeriod;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
 using Newtonsoft.Json.Linq;
 using StackExchange.Profiling;
 using JsonSerializer = System.Text.Json.JsonSerializer;
@@ -34,133 +30,6 @@ namespace TestBO4E.Extensions
             new DateTimeOffset(2017, 12, 31, 23, 0, 0, TimeSpan.Zero).UtcDateTime,
             new DateTimeOffset(2018, 12, 31, 23, 0, 0, TimeSpan.Zero).UtcDateTime);
 
-        [TestMethod]
-        [Obsolete]
-        public void TestCompletenessReportGenerationSomeCustomer()
-        {
-            var files = Directory.GetFiles("Energiemenge/completeness", "somecustomer*.json");
-            Assert.AreEqual(5, files.Length); // this is just to make sure the files haven't moved
-            foreach (var boFile in files)
-            {
-                JObject json;
-                using (var r = new StreamReader(boFile, new UTF8Encoding(false)))
-                {
-                    var jsonString = r.ReadToEnd();
-                    json = JsonConvert.DeserializeObject<JObject>(jsonString);
-                }
-
-                var em = (Energiemenge)BoMapper.MapObject((JObject)json["input"]);
-                CompletenessReport cr;
-                if (boFile.EndsWith("somecustomer1.json"))
-                {
-                    cr = em.GetCompletenessReport();
-                    Assert.AreEqual((decimal)0.9601, Math.Round(cr.Coverage.Value, 4));
-                    Assert.AreEqual("4-5-6-7", cr.Obiskennzahl);
-                    Assert.AreEqual(Wertermittlungsverfahren.MESSUNG, cr.Wertermittlungsverfahren);
-                    Assert.AreEqual(Mengeneinheit.KWH, cr.Einheit);
-                    Assert.AreEqual("DEXXX", cr.LokationsId);
-                    //Assert.AreEqual(15, cr.values[0].wert);
-                    //Assert.AreEqual(TestEnergiemengeExtension.GERMAN_APRIL_2018.Start, cr.values[0].startdatum);
-                    _ = JsonConvert.SerializeObject(cr, new StringEnumConverter());
-
-                    Assert.IsNotNull(cr.Gaps);
-                    Assert.AreEqual(1, cr.Gaps.Count);
-                    Assert.AreEqual(new DateTimeOffset(2018, 4, 1, 1, 45, 0, TimeSpan.Zero),
-                        cr.Gaps.First().Startdatum);
-                    Assert.AreEqual(new DateTimeOffset(2018, 4, 2, 6, 30, 0, TimeSpan.Zero), cr.Gaps.First().Enddatum);
-                }
-                else if (boFile.EndsWith("somecustomer2.json"))
-                {
-                    foreach (var combi in em.GetWevObisMeCombinations())
-                    {
-                        cr = em.GetCompletenessReport(TestEnergiemengeExtension.GERMAN_APRIL_2018, combi.Item1,
-                            combi.Item2, combi.Item3);
-                        var resultString = JsonConvert.SerializeObject(cr, new StringEnumConverter());
-                        var cr2 = em.GetCompletenessReport(new CompletenessReport.CompletenessReportConfiguration
-                        {
-                            Einheit = combi.Item3,
-                            Obis = combi.Item2,
-                            Wertermittlungsverfahren = combi.Item1,
-                            ReferenceTimeFrame = new Zeitraum
-                            {
-                                Startdatum = TestEnergiemengeExtension.GERMAN_APRIL_2018.Start,
-                                Enddatum = TestEnergiemengeExtension.GERMAN_APRIL_2018.End
-                            }
-                        });
-                        //Assert.AreEqual(cr, cr2, "calling report with configuration instead of loose parameters doesn't work.");
-                    }
-                }
-                else if (boFile.EndsWith("somecustomer3.json"))
-                {
-                }
-                else if (boFile.EndsWith("somecustomer4.json"))
-                {
-                }
-            }
-        }
-
-        [TestMethod]
-        [Obsolete]
-        public void TestCompletenessReportGenerationSmard()
-        {
-            var profiler = MiniProfiler.StartNew(nameof(TestCompletenessReportGenerationSmard));
-            IList<CompletenessReport> crlist = new List<CompletenessReport>();
-            foreach (var boFile in Directory.GetFiles("Energiemenge/completeness", "50hz_prognose*.json"))
-                using (MiniProfiler.Current.Step($"Processing file {boFile}"))
-                {
-                    JObject json;
-                    using (var r = new StreamReader(boFile))
-                    {
-                        var jsonString = r.ReadToEnd();
-                        json = JsonConvert.DeserializeObject<JObject>(jsonString);
-                    }
-
-                    var em = (Energiemenge)BoMapper.MapObject(json);
-                    var cr = em.GetCompletenessReport();
-                    crlist.Add(cr);
-                    if (boFile.Contains("onshore.json"))
-                    {
-                        Assert.IsNotNull(cr.UserProperties);
-                        Assert.AreEqual("yippi yippi yeah", cr.UserProperties["meineUp0"] as string);
-                        Assert.AreEqual("krawall und remmidemmi", cr.UserProperties["meineUp1"] as string);
-                    }
-                }
-
-            var resultString = JsonConvert.SerializeObject(crlist, new StringEnumConverter());
-            profiler.Stop();
-            Debug.WriteLine($"Profiler results: {profiler.RenderPlainText()}");
-        }
-
-        [TestMethod]
-        [Obsolete]
-        public void TestRounding()
-        {
-            var boFile = Directory.GetFiles("Energiemenge/completeness", "gas_januar_2018.json").First();
-            JObject json;
-            using (var r = new StreamReader(boFile, new UTF8Encoding(false)))
-            {
-                var jsonString = r.ReadToEnd();
-                json = JsonConvert.DeserializeObject<JObject>(jsonString);
-            }
-
-            var em = (Energiemenge)BoMapper.MapObject(JObject.FromObject(json["input"]));
-            var cr = em.GetCompletenessReport(new TimeRange
-            {
-                Start = new DateTimeOffset(2017, 12, 31, 23, 0, 0, 0, TimeSpan.Zero).UtcDateTime,
-                End = new DateTimeOffset(2018, 1, 31, 23, 0, 0, 0, TimeSpan.Zero).UtcDateTime
-            });
-            Assert.AreEqual(1.0M, cr.Coverage.Value);
-            Assert.AreEqual(0, cr.Gaps.Count);
-
-            var dailies = em.GetDailyCompletenessReports(new TimeRange
-            {
-                Start = new DateTimeOffset(2017, 12, 31, 23, 0, 0, 0, TimeSpan.Zero).UtcDateTime,
-                End = new DateTimeOffset(2018, 1, 2, 23, 0, 0, 0, TimeSpan.Zero).UtcDateTime
-            });
-            foreach (var crDaily in dailies)
-                Assert.AreEqual(1.0M, crDaily.Value.Coverage.Value, $"error in slice {crDaily.Key}");
-            Assert.AreEqual(1.0M, cr.Coverage.Value);
-        }
 
         [TestMethod]
         public void TestFirstLastGap()
@@ -297,18 +166,6 @@ namespace TestBO4E.Extensions
                     em = JsonConvert.DeserializeObject<Energiemenge>(jsonString);
                 }
 
-                var mpFixSapCds = MiniProfiler.StartNew("Fix SAP CDS");
-                em.FixSapCDSBug();
-                mpFixSapCds.Stop();
-                Assert.IsTrue(mpFixSapCds.DurationMilliseconds < 500, mpFixSapCds.RenderPlainText());
-                Console.Out.WriteLine(mpFixSapCds.RenderPlainText());
-
-                var mpFixSapCds2 = MiniProfiler.StartNew("Fix SAP CDS");
-                em.FixSapCDSBug();
-                mpFixSapCds2.Stop();
-                Assert.IsTrue(mpFixSapCds2.DurationMilliseconds * 10 < mpFixSapCds.DurationMilliseconds);
-
-
                 var mpLinear = MiniProfiler.StartNew("Non-Parallel");
                 em.GetMonthlyCompletenessReports(new TimeRange(new DateTime(2016, 1, 31, 23, 0, 0, DateTimeKind.Utc),
                     new DateTime(2016, 12, 31, 23, 0, 0, DateTimeKind.Utc)));
@@ -340,18 +197,6 @@ namespace TestBO4E.Extensions
                 await using var openStream = File.OpenRead(r);
                 em = await JsonSerializer.DeserializeAsync<Energiemenge>(openStream,
                     LenientParsing.MOST_LENIENT.GetJsonSerializerOptions());
-
-                var mpFixSapCds = MiniProfiler.StartNew("Fix SAP CDS");
-                em.FixSapCDSBug();
-                await mpFixSapCds.StopAsync();
-                Assert.IsTrue(mpFixSapCds.DurationMilliseconds < 500, mpFixSapCds.RenderPlainText());
-                await Console.Out.WriteLineAsync(mpFixSapCds.RenderPlainText());
-
-                var mpFixSapCds2 = MiniProfiler.StartNew("Fix SAP CDS");
-                em.FixSapCDSBug();
-                await mpFixSapCds2.StopAsync();
-                Assert.IsTrue(mpFixSapCds2.DurationMilliseconds * 10 < mpFixSapCds.DurationMilliseconds);
-
 
                 var mpLinear = MiniProfiler.StartNew("Non-Parallel");
                 em.GetMonthlyCompletenessReports(new TimeRange(new DateTime(2016, 1, 31, 23, 0, 0, DateTimeKind.Utc),

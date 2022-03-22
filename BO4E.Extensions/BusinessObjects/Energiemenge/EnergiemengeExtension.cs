@@ -69,12 +69,12 @@ namespace BO4E.Extensions.BusinessObjects.Energiemenge
         }
 
 
-        /* 
-         * If GetMinDate() or GetMaxDate() throws an InvalidOperationException you shouldn't catch 
+        /*
+         * If GetMinDate() or GetMaxDate() throws an InvalidOperationException you shouldn't catch
          * it here but allow the programmer to handle it higher up in the stack trace.
-         * This usually happens if one tries to use the auto-configuration feature but the 
+         * This usually happens if one tries to use the auto-configuration feature but the
          * Energieverbrauch array is empty. The result is simply undefined. Returning null
-         * would require all dependent methods to properly handle the null value. Since this 
+         * would require all dependent methods to properly handle the null value. Since this
          * would probably lead to unspecific NullReferenceExceptions we'd better let the invalid
          * operation exception bubble up from here as far as it's required.
          */
@@ -765,95 +765,6 @@ namespace BO4E.Extensions.BusinessObjects.Energiemenge
             return result;
         }
 
-        /// <summary>
-        ///     Our SAP CDS has a bug: When there's a change from non-DST to DST the <see cref="Verbrauch.Enddatum" /> is set
-        ///     to the first second of the DST period. To
-        /// </summary>
-        /// <param name="em"></param>
-        public static void FixSapCDSBug(this BO.Energiemenge em)
-        {
-            using (MiniProfiler.Current.Step("Fix SAP CDS Bug (Energiemenge)"))
-            {
-                if (em.Energieverbrauch != null && !em.HasBeenSanitized())
-                {
-                    using (MiniProfiler.Current.Step($"for each Verbrauch entry: {nameof(FixSapCDSBug)}"))
-                    {
-                        foreach (var v in em.Energieverbrauch) v.FixSapCdsBug();
-                        //em.energieverbrauch = em.energieverbrauch.Select(v => Verbrauch.FixSapCdsBug(v)).ToList();
-                    }
-
-                    using (MiniProfiler.Current.Step("for list as a whole"))
-                    {
-                        foreach (var relevantEnddatum in em.Energieverbrauch.Where(v =>
-                        {
-                            var localEnd =
-                                DateTime.SpecifyKind((v.Enddatum??DateTimeOffset.MinValue).DateTime, DateTimeKind.Unspecified); // ToDo: Check .UtcDateTime
-                            var localStart = DateTime.SpecifyKind((v.Startdatum ?? DateTimeOffset.MinValue).DateTime, DateTimeKind.Unspecified);
-                            return !CentralEuropeStandardTime.CentralEuropeStandardTimezoneInfo.IsDaylightSavingTime(
-                                       localStart) &&
-                                   CentralEuropeStandardTime.CentralEuropeStandardTimezoneInfo.IsDaylightSavingTime(
-                                       localEnd);
-                            //return !localStart.IsDaylightSavingTime() && localEnd.IsDaylightSavingTime();
-                        }).Select(v => v.Enddatum))
-                        {
-                            var intervalSize = em.Energieverbrauch.Where(v => v.Enddatum == relevantEnddatum)
-                                .Select(v => (v.Enddatum - v.Startdatum)?.TotalSeconds).Min();
-                            foreach (var v in em.Energieverbrauch.Where(v => v.Enddatum == relevantEnddatum))
-                                v.Enddatum = v.Startdatum?.AddSeconds(intervalSize??0);
-                        }
-
-                        if (em.Energieverbrauch.Count(v => (v.Enddatum - v.Startdatum)?.TotalMinutes == -45) > 1)
-                        {
-                            /*foreach (var dstAffected in em.energieverbrauch.Where(v => (v.enddatum - v.startdatum).TotalMinutes != -45))                          
-                            {
-                                Verbrauch anythingButEnddatum = dstAffected.DeepClone<Verbrauch>();
-                                anythingButEnddatum.enddatum = DateTime.MinValue;
-                                anythingButEnddatum.wert = 0;
-                                foreach(var v in em.energieverbrauch.Where(v=>
-                                {
-                                    var comp = v.DeepClone<Verbrauch>();
-                                    comp.enddatum = DateTime.MinValue;
-                                    comp.wert = 0;
-                                    return comp.Equals(anythingButEnddatum);
-                                }))
-                                {
-                                    int a = 0;
-                                }
-                            }*/
-                        }
-                    }
-
-                    if (em.UserProperties == null) em.UserProperties = new Dictionary<string, object>();
-                    em.UserProperties[SAP_SANITIZED_USERPROPERTY_KEY] = true;
-                }
-            }
-        }
-
-        /// <summary>
-        ///     tests if the method <see cref="Verbrauch.FixSapBugs"/> has been executed yet.
-        /// </summary>
-        /// <returns>true if Energiemenge has been sanitized</returns>
-        private static bool HasBeenSanitized(this BO.Energiemenge em)
-        {
-            bool sanitized;
-            if (em.UserProperties == null ||
-                !em.UserProperties.TryGetValue(SAP_SANITIZED_USERPROPERTY_KEY, out var sapSanitizedToken))
-                sanitized = false;
-            else
-                switch (sapSanitizedToken)
-                {
-                    case string value:
-                        sanitized = JsonConvert.DeserializeObject<JToken>(value).Value<bool>();
-                        break;
-                    case bool token:
-                        return token;
-                    default:
-                        sanitized = ((JsonElement)sapSanitizedToken).GetBoolean();
-                        break;
-                }
-
-            return sanitized;
-        }
 
         /// <summary>
         /// Apply <see cref="VerbrauchExtension.Detangle"/> to the <see cref="BO4E.BO.Energiemenge.Energieverbrauch"/>.
