@@ -60,8 +60,8 @@ namespace BO4E.Extensions.BusinessObjects.Energiemenge
                     LokationsId = em.LokationsId,
                     ReferenceTimeFrame = new Zeitraum
                     {
-                        Startdatum = new DateTimeOffset(reference.Start),
-                        Enddatum = new DateTimeOffset(reference.End)
+                        Startdatum = new DateTimeOffset(reference.Start, TimeSpan.Zero),
+                        Enddatum = new DateTimeOffset(reference.End, TimeSpan.Zero)
                     },
                     Coverage = coverage,
                     ErrorMessage = errorMessage
@@ -142,8 +142,8 @@ namespace BO4E.Extensions.BusinessObjects.Energiemenge
                     var gaps = new TimeGapCalculator<TimeRange>().GetGaps(nonNullValues, limits);
                     result.Gaps = gaps.Select(gap => new CompletenessReport.BasicVerbrauch
                     {
-                        Startdatum = gap.Start,
-                        Enddatum = gap.End,
+                        Startdatum = DateTime.SpecifyKind(gap.Start,DateTimeKind.Utc),
+                        Enddatum = DateTime.SpecifyKind(gap.End,DateTimeKind.Utc),
                         Wert = null
                     }).ToList();
                 }

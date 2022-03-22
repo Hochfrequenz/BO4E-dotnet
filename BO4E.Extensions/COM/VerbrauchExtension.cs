@@ -58,8 +58,8 @@ namespace BO4E.Extensions.COM
                     // don't wanna deal with time running backwards.
                     //Debug.Assert(v1.enddatum >= v1.startdatum);
                     //Debug.Assert(v2.enddatum >= v2.startdatum);
-                    var tr1 = new TimeRange((v1.Startdatum ?? DateTimeOffset.MinValue).DateTime, (v1.Enddatum ?? DateTimeOffset.MinValue).DateTime);
-                    var tr2 = new TimeRange((v2.Startdatum ?? DateTimeOffset.MinValue).DateTime, (v2.Enddatum ?? DateTimeOffset.MinValue).DateTime);
+                    var tr1 = new TimeRange((v1.Startdatum ?? DateTimeOffset.MinValue).UtcDateTime, (v1.Enddatum ?? DateTimeOffset.MinValue).UtcDateTime);
+                    var tr2 = new TimeRange((v2.Startdatum ?? DateTimeOffset.MinValue).UtcDateTime, (v2.Enddatum ?? DateTimeOffset.MinValue).UtcDateTime);
                     var overlap = v1.GetIntersection(v2);
                     if (v1.Einheit.IsExtensive())
                     {
@@ -116,7 +116,7 @@ namespace BO4E.Extensions.COM
                             Einheit = v1.Einheit,
                             Wertermittlungsverfahren = v1.Wertermittlungsverfahren,
                             Startdatum = v1.Startdatum < v2.Startdatum ? v1.Startdatum : v2.Startdatum,
-                            Enddatum = overlap.Start,
+                            Enddatum = new DateTimeOffset(overlap.Start,TimeSpan.Zero),
                             Wert = v1.Startdatum < v2.Startdatum ? v1.Wert : v2.Wert
                         };
                         var vmerge2 = new Verbrauch
@@ -124,8 +124,8 @@ namespace BO4E.Extensions.COM
                             Obiskennzahl = v1.Obiskennzahl,
                             Einheit = v1.Einheit,
                             Wertermittlungsverfahren = v1.Wertermittlungsverfahren,
-                            Startdatum = overlap.Start,
-                            Enddatum = overlap.End
+                            Startdatum = new DateTimeOffset(overlap.Start,TimeSpan.Zero),
+                            Enddatum = new DateTimeOffset(overlap.End,TimeSpan.Zero),
                         };
                         if (redundant)
                         {
@@ -303,8 +303,8 @@ namespace BO4E.Extensions.COM
                                 Einheit = z.Einheit,
                                 Wertermittlungsverfahren = z.Wertermittlungsverfahren,
                                 Obiskennzahl = z.Obiskennzahl,
-                                Startdatum = tr.Start,
-                                Enddatum = tr.End
+                                Startdatum = new DateTimeOffset(tr.Start,TimeSpan.Zero),
+                                Enddatum = new DateTimeOffset(tr.End, TimeSpan.Zero)
                             };
                             xs.Add(v);
                         }
