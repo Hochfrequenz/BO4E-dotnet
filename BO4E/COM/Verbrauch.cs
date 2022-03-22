@@ -29,8 +29,6 @@ namespace BO4E.COM
         static Verbrauch()
         {
             VerbrauchSerializerOptions = LenientParsing.MOST_LENIENT.GetJsonSerializerOptions();
-            VerbrauchSerializerOptions.Converters.Remove(
-                VerbrauchSerializerOptions.Converters.First(s => s.GetType() == typeof(VerbrauchConverter)));
         }
 
         /// <summary>
@@ -138,33 +136,5 @@ namespace BO4E.COM
         [JsonPropertyName("tarifstufe")]
         [ProtoMember(12)]
         public Tarifstufe? Tarifstufe { get; set; }
-
-    }
-
-    /// <summary>
-    /// </summary>
-    public class VerbrauchConverter : System.Text.Json.Serialization.JsonConverter<Verbrauch> // todo: do we still need this? or does it cause more harm than benefit?
-    {
-        /// <summary>
-        /// </summary>
-        /// <param name="reader"></param>
-        /// <param name="typeToConvert"></param>
-        /// <param name="options"></param>
-        /// <returns></returns>
-        public override Verbrauch Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
-        {
-            var result = JsonSerializer.Deserialize<Verbrauch>(ref reader, Verbrauch.VerbrauchSerializerOptions);
-            return result;
-        }
-
-        /// <summary>
-        /// </summary>
-        /// <param name="writer"></param>
-        /// <param name="value"></param>
-        /// <param name="options"></param>
-        public override void Write(Utf8JsonWriter writer, Verbrauch value, JsonSerializerOptions options)
-        {
-            JsonSerializer.Serialize(writer, value, Verbrauch.VerbrauchSerializerOptions);
-        }
     }
 }

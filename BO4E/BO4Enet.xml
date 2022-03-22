@@ -3805,25 +3805,6 @@
             <summary>Tarifstufe</summary>
             <seealso cref="T:BO4E.ENUM.Tarifstufe" />
         </member>
-        <member name="T:BO4E.COM.VerbrauchConverter">
-            <summary>
-            </summary>
-        </member>
-        <member name="M:BO4E.COM.VerbrauchConverter.Read(System.Text.Json.Utf8JsonReader@,System.Type,System.Text.Json.JsonSerializerOptions)">
-            <summary>
-            </summary>
-            <param name="reader"></param>
-            <param name="typeToConvert"></param>
-            <param name="options"></param>
-            <returns></returns>
-        </member>
-        <member name="M:BO4E.COM.VerbrauchConverter.Write(System.Text.Json.Utf8JsonWriter,BO4E.COM.Verbrauch,System.Text.Json.JsonSerializerOptions)">
-            <summary>
-            </summary>
-            <param name="writer"></param>
-            <param name="value"></param>
-            <param name="options"></param>
-        </member>
         <member name="T:BO4E.COM.Vertragskonditionen">
             <summary>Abbildung für Vertragskonditionen. Die Komponente wird sowohl im Vertrag als auch im Tarif verwendet.</summary>
         </member>
