@@ -15,8 +15,8 @@ namespace TestBO4E
             Assert.IsFalse(v1.IsValid());
             var v2 = new Verbrauch
             {
-                Startdatum = new DateTime(),
-                Enddatum = new DateTime(),
+                Startdatum = new DateTimeOffset(),
+                Enddatum = new DateTimeOffset(),
                 Einheit = Mengeneinheit.ANZAHL,
                 Wert = (decimal)123.456,
                 Obiskennzahl = "asd"

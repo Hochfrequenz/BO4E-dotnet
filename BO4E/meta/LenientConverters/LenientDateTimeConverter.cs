@@ -77,7 +77,7 @@ namespace BO4E.meta.LenientConverters
             // First try to parse the date string as is (in case it is correctly formatted)
             if (objectType == typeof(DateTimeOffset) || objectType == typeof(DateTimeOffset?))
             {
-                if (DateTimeOffset.TryParse(rawDate, out var dateTimeOffset)) return dateTimeOffset;
+                if (DateTimeOffset.TryParse(rawDate, CultureInfo.CurrentCulture, DateTimeStyles.AssumeUniversal, out var dateTimeOffset)) return dateTimeOffset;
                 foreach (var (dtf, asUniversal) in _allowedDatetimeFormats)
                     if (DateTimeOffset.TryParseExact(rawDate, dtf, CultureInfo.InvariantCulture,
                         asUniversal ? DateTimeStyles.AssumeUniversal : DateTimeStyles.None, out dateTimeOffset))

@@ -219,36 +219,36 @@ namespace BO4E.COM
                     && Enddatum?.Hour == 0) Enddatum += new TimeSpan(diff?.Hours + 1??0, 0, 0);
             }
 
-            Startdatum = DateTime.SpecifyKind(Startdatum?.DateTime??DateTime.MinValue, DateTimeKind.Utc);
-            Enddatum = DateTime.SpecifyKind(Enddatum?.DateTime??DateTime.MinValue, DateTimeKind.Utc);
-            if ((int)(Enddatum - Startdatum)?.TotalHours == 2)
-            {
-                // check DST of start and enddatum
-                var startdatumLocal = TimeZoneInfo.ConvertTimeFromUtc(Startdatum?.DateTime??DateTime.MinValue,
-                    CentralEuropeStandardTime.CentralEuropeStandardTimezoneInfo);
-                var enddatumLocal = TimeZoneInfo.ConvertTimeFromUtc(Enddatum?.DateTime??DateTime.MinValue,
-                    CentralEuropeStandardTime.CentralEuropeStandardTimezoneInfo);
-                if (!CentralEuropeStandardTime.CentralEuropeStandardTimezoneInfo.IsDaylightSavingTime(startdatumLocal -
-                        new TimeSpan(0, 0, 1))
-                    && CentralEuropeStandardTime.CentralEuropeStandardTimezoneInfo.IsDaylightSavingTime(enddatumLocal))
-                    // change winter-->summer time (e.g. UTC+1-->UTC+2)
-                    // this is an artefact of the sap enddatum computation
-                    Enddatum -= new TimeSpan(1, 0, 0); // toDo: get offset from timezoneinfo->rules->dstOffset
-            }
-            else if ((int)(Enddatum - Startdatum)?.TotalMinutes == -45)
-            {
-                // check DST of start and enddatum
-                //var startdatumLocal = TimeZoneInfo.ConvertTimeFromUtc(startdatum, CentralEuropeStandardTime.CENTRAL_EUROPE_STANDARD_TIME);
-                var enddatumLocal = TimeZoneInfo.ConvertTimeFromUtc(Enddatum?.DateTime ?? DateTime.MinValue,
-                    CentralEuropeStandardTime.CentralEuropeStandardTimezoneInfo);
-                if (!CentralEuropeStandardTime.CentralEuropeStandardTimezoneInfo.IsDaylightSavingTime(enddatumLocal -
-                        new TimeSpan(1, 0, 0))
-                    && CentralEuropeStandardTime.CentralEuropeStandardTimezoneInfo.IsDaylightSavingTime(enddatumLocal -
-                        new TimeSpan(1, 0, 1)))
-                    // change winter-->summer time (e.g. UTC+1-->UTC+2)
-                    // this is an artefact of the sap enddatum computation
-                    Enddatum += new TimeSpan(1, 0, 0); // toDo: get offset from timezoneinfo->rules->dstOffset
-            }
+            //Startdatum = DateTime.SpecifyKind(Startdatum?.DateTime??DateTime.MinValue, DateTimeKind.Utc);
+            //Enddatum = DateTime.SpecifyKind(Enddatum?.DateTime??DateTime.MinValue, DateTimeKind.Utc);
+            //if (Enddatum is not null && (int)(Enddatum - Startdatum)?.TotalHours == 2)
+            //{
+            //    // check DST of start and enddatum
+            //    var startdatumLocal = TimeZoneInfo.ConvertTimeFromUtc(Startdatum?.DateTime??DateTime.MinValue,
+            //        CentralEuropeStandardTime.CentralEuropeStandardTimezoneInfo);
+            //    var enddatumLocal = TimeZoneInfo.ConvertTimeFromUtc(Enddatum?.DateTime??DateTime.MinValue,
+            //        CentralEuropeStandardTime.CentralEuropeStandardTimezoneInfo);
+            //    if (!CentralEuropeStandardTime.CentralEuropeStandardTimezoneInfo.IsDaylightSavingTime(startdatumLocal -
+            //            new TimeSpan(0, 0, 1))
+            //        && CentralEuropeStandardTime.CentralEuropeStandardTimezoneInfo.IsDaylightSavingTime(enddatumLocal))
+            //        // change winter-->summer time (e.g. UTC+1-->UTC+2)
+            //        // this is an artefact of the sap enddatum computation
+            //        Enddatum -= new TimeSpan(1, 0, 0); // toDo: get offset from timezoneinfo->rules->dstOffset
+            //}
+            //else if (Enddatum is not null && (int)(Enddatum - Startdatum)?.TotalMinutes == -45)
+            //{
+            //    // check DST of start and enddatum
+            //    //var startdatumLocal = TimeZoneInfo.ConvertTimeFromUtc(startdatum, CentralEuropeStandardTime.CENTRAL_EUROPE_STANDARD_TIME);
+            //    var enddatumLocal = TimeZoneInfo.ConvertTimeFromUtc(Enddatum?.DateTime ?? DateTime.MinValue,
+            //        CentralEuropeStandardTime.CentralEuropeStandardTimezoneInfo);
+            //    if (!CentralEuropeStandardTime.CentralEuropeStandardTimezoneInfo.IsDaylightSavingTime(enddatumLocal -
+            //            new TimeSpan(1, 0, 0))
+            //        && CentralEuropeStandardTime.CentralEuropeStandardTimezoneInfo.IsDaylightSavingTime(enddatumLocal -
+            //            new TimeSpan(1, 0, 1)))
+            //        // change winter-->summer time (e.g. UTC+1-->UTC+2)
+            //        // this is an artefact of the sap enddatum computation
+            //        Enddatum += new TimeSpan(1, 0, 0); // toDo: get offset from timezoneinfo->rules->dstOffset
+            //}
 
             if (UserProperties != null
                 && UserProperties.TryGetValue(SapProfdecimalsKey, out var profDecimalsRaw))

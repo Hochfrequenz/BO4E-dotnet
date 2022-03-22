@@ -23,8 +23,8 @@ namespace TestBO4E
                     {
                         Einheit = Mengeneinheit.ANZAHL,
                         Obiskennzahl = "1-2-3",
-                        Enddatum = new DateTime(),
-                        Startdatum = new DateTime(),
+                        Enddatum = new DateTimeOffset(),
+                        Startdatum = new DateTimeOffset(),
                         Wert = (decimal) 123.456,
                         Wertermittlungsverfahren = Wertermittlungsverfahren.PROGNOSE
                     }
@@ -40,8 +40,8 @@ namespace TestBO4E
                     {
                         Einheit = Mengeneinheit.ANZAHL,
                         Obiskennzahl = "4-5-6",
-                        Enddatum = new DateTime(),
-                        Startdatum = new DateTime(),
+                        Enddatum = new DateTimeOffset(),
+                        Startdatum = new DateTimeOffset(),
                         Wert = (decimal) 123.456,
                         Wertermittlungsverfahren = Wertermittlungsverfahren.PROGNOSE
                     }
