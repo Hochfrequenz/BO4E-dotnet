@@ -27,7 +27,7 @@ namespace TestBO4E
             TestNullableAttributesFromAbstract(typeof(COM));
         }
 
-     
+
         [TestMethod]
         public void TestNullableAttributesFromBO()
         {
@@ -61,7 +61,7 @@ namespace TestBO4E
                     }
                 }
 
-              
+
             }
         }
 

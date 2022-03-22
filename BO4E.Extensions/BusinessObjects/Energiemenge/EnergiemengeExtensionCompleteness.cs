@@ -132,7 +132,7 @@ namespace BO4E.Extensions.BusinessObjects.Energiemenge
                 {
                     var nonNullValues =
                         new TimePeriodCollection(
-                            em.Energieverbrauch.Select(v => new TimeRange((v.Startdatum??DateTimeOffset.MinValue).DateTime, (v.Enddatum??DateTimeOffset.MinValue).DateTime)));
+                            em.Energieverbrauch.Select(v => new TimeRange((v.Startdatum ?? DateTimeOffset.MinValue).DateTime, (v.Enddatum ?? DateTimeOffset.MinValue).DateTime)));
                     ITimeRange limits;
                     if (result.ReferenceTimeFrame != null && result.ReferenceTimeFrame.Startdatum.HasValue)
                         limits = new TimeRange(result.ReferenceTimeFrame.Startdatum.Value.UtcDateTime,
@@ -142,8 +142,8 @@ namespace BO4E.Extensions.BusinessObjects.Energiemenge
                     var gaps = new TimeGapCalculator<TimeRange>().GetGaps(nonNullValues, limits);
                     result.Gaps = gaps.Select(gap => new CompletenessReport.BasicVerbrauch
                     {
-                        Startdatum = DateTime.SpecifyKind(gap.Start,DateTimeKind.Utc),
-                        Enddatum = DateTime.SpecifyKind(gap.End,DateTimeKind.Utc),
+                        Startdatum = DateTime.SpecifyKind(gap.Start, DateTimeKind.Utc),
+                        Enddatum = DateTime.SpecifyKind(gap.End, DateTimeKind.Utc),
                         Wert = null
                     }).ToList();
                 }

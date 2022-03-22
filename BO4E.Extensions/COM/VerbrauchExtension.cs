@@ -116,7 +116,7 @@ namespace BO4E.Extensions.COM
                             Einheit = v1.Einheit,
                             Wertermittlungsverfahren = v1.Wertermittlungsverfahren,
                             Startdatum = v1.Startdatum < v2.Startdatum ? v1.Startdatum : v2.Startdatum,
-                            Enddatum = new DateTimeOffset(overlap.Start,TimeSpan.Zero),
+                            Enddatum = new DateTimeOffset(overlap.Start, TimeSpan.Zero),
                             Wert = v1.Startdatum < v2.Startdatum ? v1.Wert : v2.Wert
                         };
                         var vmerge2 = new Verbrauch
@@ -124,8 +124,8 @@ namespace BO4E.Extensions.COM
                             Obiskennzahl = v1.Obiskennzahl,
                             Einheit = v1.Einheit,
                             Wertermittlungsverfahren = v1.Wertermittlungsverfahren,
-                            Startdatum = new DateTimeOffset(overlap.Start,TimeSpan.Zero),
-                            Enddatum = new DateTimeOffset(overlap.End,TimeSpan.Zero),
+                            Startdatum = new DateTimeOffset(overlap.Start, TimeSpan.Zero),
+                            Enddatum = new DateTimeOffset(overlap.End, TimeSpan.Zero),
                         };
                         if (redundant)
                         {
@@ -303,7 +303,7 @@ namespace BO4E.Extensions.COM
                                 Einheit = z.Einheit,
                                 Wertermittlungsverfahren = z.Wertermittlungsverfahren,
                                 Obiskennzahl = z.Obiskennzahl,
-                                Startdatum = new DateTimeOffset(tr.Start,TimeSpan.Zero),
+                                Startdatum = new DateTimeOffset(tr.Start, TimeSpan.Zero),
                                 Enddatum = new DateTimeOffset(tr.End, TimeSpan.Zero)
                             };
                             xs.Add(v);
@@ -351,7 +351,7 @@ namespace BO4E.Extensions.COM
         /// </returns>
         public static bool OverlapsWith(this Verbrauch v1, Verbrauch v2)
         {
-            return v1.OverlapsWith(new TimeRange((v2.Startdatum??DateTimeOffset.MinValue).DateTime, (v2.Enddatum ?? DateTimeOffset.MinValue).DateTime, true));
+            return v1.OverlapsWith(new TimeRange((v2.Startdatum ?? DateTimeOffset.MinValue).DateTime, (v2.Enddatum ?? DateTimeOffset.MinValue).DateTime, true));
         }
 
         /// <summary>
@@ -406,7 +406,7 @@ namespace BO4E.Extensions.COM
         {
             int IComparer<Verbrauch>.Compare(Verbrauch x, Verbrauch y)
             {
-                if (x.Startdatum != y.Startdatum) return DateTimeOffset.Compare(x.Startdatum??DateTimeOffset.MinValue, y.Startdatum ?? DateTimeOffset.MinValue);
+                if (x.Startdatum != y.Startdatum) return DateTimeOffset.Compare(x.Startdatum ?? DateTimeOffset.MinValue, y.Startdatum ?? DateTimeOffset.MinValue);
 
                 if (x.Enddatum != y.Enddatum) return DateTimeOffset.Compare(x.Enddatum ?? DateTimeOffset.MinValue, y.Enddatum ?? DateTimeOffset.MinValue);
                 return 0;

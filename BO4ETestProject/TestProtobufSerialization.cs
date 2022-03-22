@@ -61,7 +61,7 @@ namespace TestBO4E
             };
             Assert.IsTrue(em.IsValid(), "Must not serialize invalid Business Objects.");
             var emRoundTrip = SerializeAsBase64RoundTrip(em);
-             Assert.IsNotNull(emRoundTrip.LokationsId);
+            Assert.IsNotNull(emRoundTrip.LokationsId);
             Assert.IsTrue(emRoundTrip.IsValid());
             /*
             Assert.IsTrue(emRoundTrip.Guid.HasValue);

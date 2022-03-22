@@ -120,7 +120,7 @@ namespace BO4E.Encryption
         /// <returns>a 32 byte long securely random salt</returns>
         public static byte[] GenerateHashingSalt()
         {
-             return   RandomNumberGenerator.GetBytes(32);
+            return RandomNumberGenerator.GetBytes(32);
         }
 
         /// <summary>
