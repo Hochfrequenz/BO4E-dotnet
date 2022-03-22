@@ -114,17 +114,6 @@ namespace TestBO4E
         }
 
         [TestMethod]
-        public void TestVertragQuickFix()
-        {
-            var jsonInput = GetInputNodeAsJson("BoMapperTests/vertragLokationsIdUp.json");
-            var vertrag =
-                JsonSerializer.Deserialize<Vertrag>(jsonInput, LenientParsing.MOST_LENIENT.GetJsonSerializerOptions());
-            Assert.IsNotNull(vertrag);
-            Assert.IsNotNull(vertrag.Vertragsteile);
-            Assert.AreEqual("DE54321", vertrag.Vertragsteile.First().Lokation);
-        }
-
-        [TestMethod]
         public void TestMesslokation()
         {
             var jsonInput = GetInputNodeAsJson("BoMapperTests/messlokation_userProps.json");
@@ -142,16 +131,6 @@ namespace TestBO4E
                 LenientParsing.MOST_LENIENT.GetJsonSerializerOptions());
             Assert.IsNotNull(malo);
             Assert.AreEqual(Gebiettyp.VERTEILNETZ, malo.GebietTyp);
-        }
-
-        [TestMethod]
-        public void TestVertragNullableDateTimeOffset()
-        {
-            var jsonInput = GetInputNodeAsJson("BoMapperTests/vertrag.json");
-            var v = JsonSerializer.Deserialize<Vertrag>(jsonInput,
-                LenientParsing.MOST_LENIENT.GetJsonSerializerOptions());
-            Assert.IsNotNull(v);
-            Assert.IsNotNull(v.Vertragsteile);
         }
 
         [TestMethod]
@@ -175,16 +154,6 @@ namespace TestBO4E
         }
 
         [TestMethod]
-        public void TestSummerTimeBug()
-        {
-            var jsonInput = GetInputNodeAsJson("BoMapperTests/energiemenge_sommerzeit_bug.json");
-            var em = JsonSerializer.Deserialize<Energiemenge>(jsonInput,
-                LenientParsing.MOST_LENIENT.GetJsonSerializerOptions());
-            if (TimeZoneInfo.Local == CentralEuropeStandardTime.CentralEuropeStandardTimezoneInfo)
-                Assert.AreEqual(2, em.Energieverbrauch.Count); // weil 2 verschiedene status
-        }
-
-        [TestMethod]
         public void TestVertragStringToInt()
         {
             var jsonInput = GetInputNodeAsJson("BoMapperTests/Vertrag_lenient_String.json");
@@ -192,89 +161,6 @@ namespace TestBO4E
             var v = JsonSerializer.Deserialize<Vertrag>(jsonInput, lenients.GetJsonSerializerOptions());
             Assert.AreEqual(Vertragstatus.AKTIV, v.Vertragstatus);
             Assert.AreEqual(v.Vertragskonditionen.AnzahlAbschlaege, 12);
-        }
-
-        [TestMethod]
-        public void TestProfDecimalsVerbrauchBug()
-        {
-            var jsonInput = GetInputNodeAsJson("BoMapperTests/energiemenge_profdecimal_verbrauch_bug.json");
-            var em = JsonSerializer.Deserialize<Energiemenge>(jsonInput,
-                LenientParsing.MOST_LENIENT.GetJsonSerializerOptions());
-            Assert.IsNotNull(em);
-            Assert.AreEqual(4, em.Energieverbrauch.Count);
-            Assert.AreEqual(59.0M, em.Energieverbrauch[0].Wert);
-            Assert.AreEqual(58.0M, em.Energieverbrauch[1].Wert);
-            Assert.AreEqual(57.0M, em.Energieverbrauch[2].Wert);
-            Assert.AreEqual(57.123M, em.Energieverbrauch[3].Wert);
-        }
-
-        [TestMethod]
-        public void TestProfDecimalsEnergiemengeBug()
-        {
-            var jsonInput = GetInputNodeAsJson("BoMapperTests/energiemenge_profdecimal_em_bug.json");
-            var em = JsonSerializer.Deserialize<Energiemenge>(jsonInput,
-                LenientParsing.MOST_LENIENT.GetJsonSerializerOptions());
-            Assert.IsNotNull(em);
-            Assert.AreEqual(1.375000M, em.Energieverbrauch.First().Wert);
-            Assert.AreEqual(1.2130000M, em.Energieverbrauch.Last().Wert);
-        }
-
-        [TestMethod]
-        public void TestSapTimeZoneUserProperties()
-        {
-            var v1 = JsonSerializer.Deserialize<Verbrauch>(
-                "{\"startdatum\":\"2019-03-30T02:45:00\",\"enddatum\":\"2019-03-30T03:15:00\",\"wertermittlungsverfahren\":1,\"obiskennzahl\":\"1-0:1.29.0\",\"wert\":0.0,\"einheit\":1,\"zw\":\"000000000030000301\",\"Status\":\"IU015\",\"sap_timezone\":\"CET\"}",
-                LenientParsing.DATE_TIME.GetJsonSerializerOptions());
-            Assert.AreEqual(DateTimeKind.Utc, v1.Startdatum.Kind);
-            Assert.AreEqual(DateTimeKind.Utc, v1.Enddatum.Kind);
-            Assert.AreEqual(2.75, v1.Startdatum.TimeOfDay.TotalHours);
-            Assert.AreEqual(3.25, v1.Enddatum.TimeOfDay.TotalHours);
-
-            var v2 = JsonSerializer.Deserialize<Verbrauch>(
-                "{\"startdatum\":\"2019-03-30T02:45:00\",\"enddatum\":\"2019-03-30T03:15:00\",\"wertermittlungsverfahren\":1,\"obiskennzahl\":\"1-0:1.29.0\",\"wert\":0.0,\"einheit\":1,\"zw\":\"000000000030000301\",\"Status\":\"IU015\",\"sap_timezone\":\"UTC\"}",
-                LenientParsing.DATE_TIME.GetJsonSerializerOptions());
-            Assert.AreEqual(DateTimeKind.Utc, v2.Startdatum.Kind);
-            Assert.AreEqual(DateTimeKind.Utc, v2.Enddatum.Kind);
-            Assert.AreEqual(2.75, v2.Startdatum.TimeOfDay.TotalHours);
-            Assert.AreEqual(3.25, v2.Enddatum.TimeOfDay.TotalHours);
-
-            var v3 = JsonSerializer.Deserialize<Verbrauch>(
-                "{\"startdatum\":\"2019-10-27T02:30:00\",\"enddatum\":\"2019-10-27T02:45:00\",\"wertermittlungsverfahren\":1,\"obiskennzahl\":\"1-0:1.29.0\",\"wert\":0.0,\"einheit\":1,\"zw\":\"000000000030000301\",\"Status\":\"IU015\",\"sap_timezone\":\"CEST\"}",
-                LenientParsing.DATE_TIME.GetJsonSerializerOptions());
-            Assert.AreEqual(DateTimeKind.Utc, v3.Startdatum.Kind);
-            Assert.AreEqual(DateTimeKind.Utc, v3.Enddatum.Kind);
-            Assert.AreEqual(2.5, v3.Startdatum.TimeOfDay.TotalHours);
-            Assert.AreEqual(2.75, v3.Enddatum.TimeOfDay.TotalHours);
-
-            var v4 = JsonSerializer.Deserialize<Verbrauch>(
-                "{\"startdatum\":\"2019-10-27T02:45:00\",\"enddatum\":\"2019-10-27T03:15:00\",\"wertermittlungsverfahren\":1,\"obiskennzahl\":\"1-0:1.29.0\",\"wert\":0.0,\"einheit\":1,\"zw\":\"000000000030000301\",\"Status\":\"IU015\",\"sap_timezone\":\"CEST\"}",
-                LenientParsing.DATE_TIME.GetJsonSerializerOptions());
-            Assert.AreEqual(DateTimeKind.Utc, v4.Startdatum.Kind);
-            Assert.AreEqual(DateTimeKind.Utc, v4.Enddatum.Kind);
-            Assert.AreEqual(2.75, v4.Startdatum.TimeOfDay.TotalHours);
-            Assert.AreEqual(3.25, v4.Enddatum.TimeOfDay.TotalHours);
-        }
-
-        [TestMethod]
-        public void TestSommerzeitumstellung()
-        {
-            // endzeitpunkt wird im sap aus startzeitpunkt + 1 std zusammengesetzt. bei umstellung auf sommerzeit entsteht als artefakt ein shift
-            var v1 = JsonSerializer.Deserialize<Verbrauch>(
-                "{\"zw\":\"000000000020720475\",\"startdatum\":\"201903310100\",\"enddatum\":\"201903310300\",\"wert\":263,\"status\":\"IU021\",\"obiskennzahl\":\"7-10:99.33.17\",\"wertermittlungsverfahren\":\"MESSUNG\",\"einheit\":\"KWH\",\"sap_timezone\":\"CET\"}",
-                LenientParsing.DATE_TIME.GetJsonSerializerOptions());
-            Assert.AreEqual(new DateTimeOffset(2019, 3, 31, 2, 0, 0, TimeSpan.Zero), v1.Enddatum);
-
-            // negativ test: nur in der sommerzeit soll das nicht passieren
-            var v2 = JsonSerializer.Deserialize<Verbrauch>(
-                "{\"zw\":\"000000000020720475\",\"startdatum\":\"201905310100\",\"enddatum\":\"201905310300\",\"wert\":263,\"status\":\"IU021\",\"obiskennzahl\":\"7-10:99.33.17\",\"wertermittlungsverfahren\":\"MESSUNG\",\"einheit\":\"KWH\",\"sap_timezone\":\"CET\"}",
-                LenientParsing.DATE_TIME.GetJsonSerializerOptions());
-            Assert.AreEqual(new DateTimeOffset(2019, 5, 31, 3, 0, 0, TimeSpan.Zero), v2.Enddatum);
-
-            // negativ test: nur in der winterzeit soll das nicht passieren
-            var v3 = JsonSerializer.Deserialize<Verbrauch>(
-                "{\"zw\":\"000000000020720475\",\"startdatum\":\"201901310100\",\"enddatum\":\"201901310300\",\"wert\":263,\"status\":\"IU021\",\"obiskennzahl\":\"7-10:99.33.17\",\"wertermittlungsverfahren\":\"MESSUNG\",\"einheit\":\"KWH\",\"sap_timezone\":\"CET\"}",
-                LenientParsing.DATE_TIME.GetJsonSerializerOptions());
-            Assert.AreEqual(new DateTimeOffset(2019, 1, 31, 3, 0, 0, TimeSpan.Zero), v3.Enddatum);
         }
 
         [TestMethod]

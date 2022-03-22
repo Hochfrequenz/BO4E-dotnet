@@ -71,45 +71,6 @@ namespace BO4E.BO
         public List<Verbrauch> Energieverbrauch { get; set; }
 
         /// <summary>
-        ///     If energieverbrauch is null or not present, it is initialised with an empty list for easier handling (less null
-        ///     checks) elsewhere.
-        /// </summary>
-        /// <param name="context"></param>
-        [OnDeserialized]
-        protected void OnDeserialized(StreamingContext context)
-        {
-            if (Energieverbrauch == null)
-            {
-                Energieverbrauch = new List<Verbrauch>();
-            }
-            else if (Energieverbrauch.Count > 0)
-            {
-                Energieverbrauch = Energieverbrauch
-                    .Select(Verbrauch.FixSapCdsBug)
-                    .Where(v => !(v.Startdatum == DateTimeOffset.MinValue || v.Enddatum == DateTimeOffset.MinValue))
-                    .Where(v => !v.UserPropertyEquals("invalid", true))
-                    .ToList();
-                if (UserProperties != null &&
-                    UserProperties.TryGetValue(Verbrauch.SapProfdecimalsKey, out var profDecimalsRaw))
-                {
-                    var profDecimals = 0;
-                    if (profDecimalsRaw is string raw)
-                        profDecimals = int.Parse(raw);
-                    else
-                        profDecimals = ((JsonElement)profDecimalsRaw).GetInt32();
-                    if (profDecimals > 0)
-                        for (var i = 0; i < profDecimals; i++)
-                            // or should I import math.pow() for this purpose?
-                            foreach (var v in Energieverbrauch.Where(v =>
-                                v.UserProperties == null ||
-                                !v.UserProperties.ContainsKey(Verbrauch.SapProfdecimalsKey)))
-                                v.Wert /= 10.0M;
-                    UserProperties.Remove(Verbrauch.SapProfdecimalsKey);
-                }
-            }
-        }
-
-        /// <summary>
         ///     Adding two Energiemenge objects is allowed for Energiemenge with the same location Id and location type.
         ///     The operation basically merges both energieverbrauch lists. Non-standard attributes (userProperties) are
         ///     not contained in the result.
@@ -193,33 +154,6 @@ namespace BO4E.BO
             {
                 e.Energieverbrauch = new List<Verbrauch>();
             }
-            else if (e.Energieverbrauch.Count > 0)
-            {
-                e.Energieverbrauch = e.Energieverbrauch
-                    .Select(Verbrauch.FixSapCdsBugSystemTextJson)
-                    .Where(v => !(v.Startdatum == DateTimeOffset.MinValue || v.Enddatum == DateTimeOffset.MinValue))
-                    .Where(v => !v.UserPropertyEquals("invalid", true))
-                    .ToList();
-                if (e.UserProperties != null &&
-                    e.UserProperties.TryGetValue(Verbrauch.SapProfdecimalsKey, out var profDecimalsRaw))
-                {
-                    var profDecimals = 0;
-                    if (profDecimalsRaw is string raw)
-                        profDecimals = int.Parse(raw);
-                    else
-                        profDecimals = JsonSerializer.Deserialize<int>(((JsonElement)profDecimalsRaw).GetRawText(),
-                            Energiemenge.EnergiemengeSerializerOptions);
-                    if (profDecimals > 0)
-                        for (var i = 0; i < profDecimals; i++)
-                            // or should I import math.pow() for this purpose?
-                            foreach (var v in e.Energieverbrauch.Where(v =>
-                                v.UserProperties == null ||
-                                !v.UserProperties.ContainsKey(Verbrauch.SapProfdecimalsKey)))
-                                v.Wert /= 10.0M;
-                    e.UserProperties.Remove(Verbrauch.SapProfdecimalsKey);
-                }
-            }
-
             return e;
         }
 

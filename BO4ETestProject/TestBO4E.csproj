@@ -44,12 +44,6 @@
         <None Update="bo4eURITests\marktteilnehmer.json">
             <CopyToOutputDirectory>Always</CopyToOutputDirectory>
         </None>
-        <None Update="BoMapperTests\energiemenge_profdecimal_em_bug.json">
-            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-        </None>
-        <None Update="BoMapperTests\energiemenge_profdecimal_verbrauch_bug.json">
-            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-        </None>
         <None Update="BoMapperTests\geschaeftspartner_non_lenient_enumlist.json">
             <CopyToOutputDirectory>Always</CopyToOutputDirectory>
         </None>
@@ -57,27 +51,6 @@
             <CopyToOutputDirectory>Always</CopyToOutputDirectory>
         </None>
         <None Update="BoMapperTests\rechnung.json">
-            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-        </None>
-        <None Update="BoMapperTests\vertragLokationsIdUp.json">
-            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-        </None>
-        <None Update="BoMapperTests\vertrag.json">
-            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-        </None>
-        <None Update="BoMapperTests\benachrichtigung_fucked_up_datetime.json">
-            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-        </None>
-        <None Update="BoMapperTests\benachrichtigung_hf_sap.json">
-            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-        </None>
-        <None Update="BoMapperTests\energiemenge_local_timezone_bug.json">
-            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-        </None>
-        <None Update="BoMapperTests\energiemenge_sommerzeit_bug.json">
-            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-        </None>
-        <None Update="BoMapperTests\energiemenge_tageswechsel_bug.json">
             <CopyToOutputDirectory>Always</CopyToOutputDirectory>
         </None>
         <None Update="BoMapperTests\energiemenge_empty_verbrauch.json">
