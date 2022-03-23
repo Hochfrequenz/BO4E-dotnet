@@ -1,20 +1,14 @@
 using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 
 using BO4E.BO;
 using BO4E.COM;
-using BO4E.ENUM;
-using BO4E.meta;
-
 using FluentAssertions;
 
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 using Newtonsoft.Json;
-
-using ProtoBuf;
 
 namespace TestBO4E
 {
@@ -34,7 +28,7 @@ namespace TestBO4E
             TestNullableAttributesFromAbstract(typeof(BusinessObject));
         }
 
-        private NullabilityInfoContext _nullabilityContext = new NullabilityInfoContext();
+        private NullabilityInfoContext _nullabilityContext = new();
 
 
         protected void TestNullableAttributesFromAbstract(Type abstractBaseType)
@@ -64,7 +58,5 @@ namespace TestBO4E
 
             }
         }
-
-
     }
 }
