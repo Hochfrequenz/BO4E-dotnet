@@ -10,7 +10,6 @@ using Newtonsoft.Json.Serialization;
 using ProtoBuf;
 
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
@@ -113,6 +112,7 @@ namespace BO4E.BO
         /// </example>
         [JsonProperty(Required = Required.Default, Order = 1, PropertyName = "boTyp")]
         [JsonPropertyName("boTyp")]
+        [JsonPropertyOrder(1)]
         [ProtoMember(1)]
         public string? BoTyp
         {
@@ -128,6 +128,7 @@ namespace BO4E.BO
         /// </example>
         [JsonProperty(PropertyName = "versionStruktur", Required = Required.Default, Order = 2)]
         [JsonPropertyName("versionStruktur")]
+        [JsonPropertyOrder(2)]
         [ProtoMember(2)]
         public string? VersionStruktur { get; set; }
 
@@ -162,8 +163,9 @@ namespace BO4E.BO
         ///     gracefully
         /// </summary>
         [JsonProperty(PropertyName = "timestamp", NullValueHandling = NullValueHandling.Ignore,
-            Required = Required.Default, Order = 2)]
+            Required = Required.Default, Order = 3)]
         [JsonPropertyName("timestamp")]
+        [JsonPropertyOrder(3)]
         [ProtoIgnore]
         public DateTime? Timestamp { get; set; }
 
@@ -172,16 +174,18 @@ namespace BO4E.BO
         ///     Hier können IDs anderer Systeme hinterlegt werden (z.B. eine SAP-GP-Nummer) (Details siehe
         ///     <see cref="ExterneReferenz" />)
         /// </summary>
-        [JsonProperty(PropertyName = "externeReferenzen", Required = Required.Default)]
+        [JsonProperty(PropertyName = "externeReferenzen", Required = Required.Default, Order = 4)]
         [JsonPropertyName("externeReferenzen")]
+        [JsonPropertyOrder(4)]
         [ProtoMember(4)]
         public List<ExterneReferenz>? ExterneReferenzen { get; set; }
 
         /// <summary>
         ///     allows adding a GUID to Business Objects for tracking across systems
         /// </summary>
-        [JsonProperty(PropertyName = "guid", NullValueHandling = NullValueHandling.Ignore, Required = Required.Default)]
+        [JsonProperty(PropertyName = "guid", NullValueHandling = NullValueHandling.Ignore, Required = Required.Default, Order = 5)]
         [JsonPropertyName("guid")]
+        [JsonPropertyOrder(5)]
         public virtual Guid? Guid { get; set; }
 
         /// <summary>
@@ -191,6 +195,7 @@ namespace BO4E.BO
             DefaultValueHandling = DefaultValueHandling.Ignore, Order = 200)]
         [Newtonsoft.Json.JsonExtensionData]
         [ProtoMember(200)]
+        [JsonPropertyOrder(200)]
         [DataCategory(DataCategory.USER_PROPERTIES)]
         [System.Text.Json.Serialization.JsonExtensionData]
         public IDictionary<string, object>? UserProperties { get; set; }

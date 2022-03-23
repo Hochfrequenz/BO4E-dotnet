@@ -48,14 +48,11 @@ namespace TestBO4E
                     {
                         if (jpA.Required != Required.Always) // all not required fields have to be nullable
                         {
-
                             var nullabilityInfo = _nullabilityContext.Create(dtProperty);
                             nullabilityInfo.ReadState.Should().Be(NullabilityState.Nullable, $"The property {dtProperty.Name} of type {relevantType.Name} has to be nullable");
                         }
                     }
                 }
-
-
             }
         }
     }

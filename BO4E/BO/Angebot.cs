@@ -22,9 +22,10 @@ namespace BO4E.BO
         /// <summary>
         ///     Eindeutige Nummer des Angebotes.
         /// </summary>
-        [JsonProperty(Required = Required.Always, Order = 4, PropertyName = "angebotsnummer")]
+        [JsonProperty(Required = Required.Always, Order = 6, PropertyName = "angebotsnummer")]
         [JsonPropertyName("angebotsnummer")]
         [ProtoMember(4)]
+        [JsonPropertyOrder(6)]
         [DataCategory(DataCategory.FINANCE)]
         [BoKey]
         public string Angebotsnummer { get; set; }
@@ -33,9 +34,10 @@ namespace BO4E.BO
         ///     Referenz auf eine Anfrage oder Ausschreibung.Kann dem Empfänger des Angebotes bei Zuordnung des Angebotes zur
         ///     Anfrage bzw.Ausschreibung helfen.
         /// </summary>
-        [JsonProperty(Required = Required.Default, Order = 5, PropertyName = "anfragereferenz")]
+        [JsonProperty(Required = Required.Default, Order = 7, PropertyName = "anfragereferenz")]
         [JsonPropertyName("anfragereferenz")]
         [ProtoMember(5)]
+        [JsonPropertyOrder(7)]
         [DataCategory(DataCategory.FINANCE)]
         public string? Anfragereferenz { get; set; }
 
