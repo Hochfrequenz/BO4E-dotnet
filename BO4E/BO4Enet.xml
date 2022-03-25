@@ -7464,6 +7464,21 @@
                 sehr hohe Priorität
             </summary>
         </member>
+        <member name="T:BO4E.ENUM.Profilart">
+            <summary>Profilart (temperaturabhängig / standardlastprofil)</summary>
+        </member>
+        <member name="F:BO4E.ENUM.Profilart.ART_STANDARDLASTPROFIL">
+            <summary>ART_STANDARDLASTPROFIL</summary>
+            <remarks>Z02</remarks>
+        </member>
+        <member name="F:BO4E.ENUM.Profilart.ART_TAGESPARAMETERABHAENGIGES_LASTPROFIL">
+            <summary>ART_TAGESPARAMETERABHAENGIGES_LASTPROFIL</summary>
+            <remarks>Z03</remarks>
+        </member>
+        <member name="F:BO4E.ENUM.Profilart.ART_LASTPROFIL">
+            <summary>ART_LASTPROFIL</summary>
+            <remarks>Z12</remarks>
+        </member>
         <member name="T:BO4E.ENUM.Profiltyp">
             <summary>Profiltyp (temperaturabhängig / standardlastprofil)</summary>
         </member>
