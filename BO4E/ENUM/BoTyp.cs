@@ -64,6 +64,9 @@ namespace BO4E.ENUM
         HANDELSUNSTIMMIGKEIT,
 
         /// <summary>1</summary>
-        ANFRAGE
+        ANFRAGE,
+
+        /// <summary>1</summary>
+        HARDWARE
     }
 }
