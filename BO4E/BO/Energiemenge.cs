@@ -145,8 +145,11 @@ namespace BO4E.BO
                 if (Energiemenge.EnergiemengeSerializerOptions == null)
                 {
                     Energiemenge.EnergiemengeSerializerOptions = new JsonSerializerOptions(options);
-                    Energiemenge.EnergiemengeSerializerOptions.Converters.Remove(
+                    while (Energiemenge.EnergiemengeSerializerOptions.Converters.Any(s => s.GetType() == typeof(EnergiemengeConverter)))
+                    {
+                        Energiemenge.EnergiemengeSerializerOptions.Converters.Remove(
                         Energiemenge.EnergiemengeSerializerOptions.Converters.First(s => s.GetType() == typeof(EnergiemengeConverter)));
+                    }
                 }
             }
             var e = JsonSerializer.Deserialize<Energiemenge>(ref reader, Energiemenge.EnergiemengeSerializerOptions);
@@ -170,8 +173,11 @@ namespace BO4E.BO
                 if (Energiemenge.EnergiemengeSerializerOptions == null)
                 {
                     Energiemenge.EnergiemengeSerializerOptions = new JsonSerializerOptions(options);
-                    Energiemenge.EnergiemengeSerializerOptions.Converters.Remove(
+                    while (Energiemenge.EnergiemengeSerializerOptions.Converters.Any(s => s.GetType() == typeof(EnergiemengeConverter)))
+                    {
+                        Energiemenge.EnergiemengeSerializerOptions.Converters.Remove(
                         Energiemenge.EnergiemengeSerializerOptions.Converters.First(s => s.GetType() == typeof(EnergiemengeConverter)));
+                    }
                 }
             }
             JsonSerializer.Serialize(writer, value, Energiemenge.EnergiemengeSerializerOptions);

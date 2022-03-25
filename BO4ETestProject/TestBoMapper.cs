@@ -138,10 +138,11 @@ namespace TestBO4E
                 json = JsonConvert.DeserializeObject<JObject>(jsonString);
             }
 
-            const LenientParsing lenients = LenientParsing.STRING_TO_INT;
+            const LenientParsing lenients = LenientParsing.MOST_LENIENT;
             var v = JsonConvert.DeserializeObject<Vertrag>(json["input"].ToString(),
                 lenients.GetJsonSerializerSettings());
             Assert.AreEqual(v.Vertragskonditionen.AnzahlAbschlaege, 12);
+            v.Vertragsende.Should().Be(DateTimeOffset.MinValue);
         }
 
 
