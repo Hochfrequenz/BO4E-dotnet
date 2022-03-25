@@ -5013,6 +5013,9 @@
         <member name="F:BO4E.ENUM.BoTyp.ANFRAGE">
             <summary>1</summary>
         </member>
+        <member name="F:BO4E.ENUM.BoTyp.HARDWARE">
+            <summary>1</summary>
+        </member>
         <member name="T:BO4E.ENUM.Dienstleistungstyp">
             <summary>Auflistung möglicher abzurechnender Dienstleistungen.</summary>
         </member>
