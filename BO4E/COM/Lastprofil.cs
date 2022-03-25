@@ -55,5 +55,24 @@ namespace BO4E.COM
         [NonOfficial(NonOfficialCategory.CUSTOMER_REQUIREMENTS)]
         [ProtoMember(1004)]
         public Tagesparameter? Tagesparameter { get; set; }
+
+        /// <summary>
+        ///    Profilart des Lastprofils
+        /// </summary>
+        /// <example>ART_STANDARDLASTPROFIL</example>
+        [JsonProperty(PropertyName = "profilart", Required = Required.Default)]
+        [JsonPropertyName("profilart")]
+        [ProtoMember(1005)]
+        public Profilart? Profilart { get; set; }
+
+        /// <summary>
+        ///    Herausgeber des Lastprofil-Codes
+        /// </summary>
+        /// <example>BDEW</example>
+        [JsonProperty(PropertyName = "herausgeber", Required = Required.Default)]
+        [JsonPropertyName("herausgeber")]
+        [ProtoMember(1006)]
+        public string? Herausgeber { get; set; }
+
     }
 }
