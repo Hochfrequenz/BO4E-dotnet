@@ -2913,6 +2913,18 @@
             Klimazone / Temperaturmessstelle
             </summary>
         </member>
+        <member name="P:BO4E.COM.Lastprofil.Profilart">
+            <summary>
+               Profilart des Lastprofils
+            </summary>
+            <example>ART_STANDARDLASTPROFIL</example>
+        </member>
+        <member name="P:BO4E.COM.Lastprofil.Herausgeber">
+            <summary>
+               Herausgeber des Lastprofil-Codes
+            </summary>
+            <example>BDEW</example>
+        </member>
         <member name="T:BO4E.COM.MarktpartnerDetails">
             <summary>
                 Marktrolle
