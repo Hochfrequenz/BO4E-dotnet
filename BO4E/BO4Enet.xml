@@ -3637,6 +3637,12 @@
             </summary>
             <example>ZT1</example>
         </member>
+        <member name="P:BO4E.COM.Tagesparameter.Herausgeber">
+            <summary>
+               Herausgeber des Lastprofil-Codes
+            </summary>
+            <example>BDEW</example>
+        </member>
         <member name="T:BO4E.COM.Tarifberechnungsparameter">
             <summary>In dieser Komponente sind die Berechnungsparameter für die Ermittlung der Tarifkosten zusammengefasst.</summary>
         </member>

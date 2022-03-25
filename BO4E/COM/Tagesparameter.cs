@@ -41,5 +41,15 @@ namespace BO4E.COM
         [JsonPropertyName("dienstanbieter")]
         [ProtoMember(5)]
         public string? Dienstanbieter { get; set; }
+
+        /// <summary>
+        ///    Herausgeber des Lastprofil-Codes
+        /// </summary>
+        /// <example>BDEW</example>
+        [JsonProperty(PropertyName = "herausgeber", Required = Required.Default)]
+        [JsonPropertyName("herausgeber")]
+        [ProtoMember(6)]
+        public string? Herausgeber { get; set; }
+
     }
 }
