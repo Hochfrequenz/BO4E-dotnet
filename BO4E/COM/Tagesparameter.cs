@@ -19,19 +19,19 @@ namespace BO4E.COM
         ///     Qualifier der Klimazone
         /// </summary>
         /// <example>7624q</example>
-        [JsonProperty(PropertyName = "klimazone", Required = Required.Always)]
+        [JsonProperty(PropertyName = "klimazone", Required = Required.Default)]
         [JsonPropertyName("klimazone")]
         [ProtoMember(3)]
-        public string Klimazone { get; set; }
+        public string? Klimazone { get; set; }
 
         /// <summary>
         ///     Qualifier der Temperaturmessstelle
         /// </summary>
         /// <example>1234x</example>
-        [JsonProperty(PropertyName = "temperaturmessstelle", Required = Required.Always)]
+        [JsonProperty(PropertyName = "temperaturmessstelle", Required = Required.Default)]
         [JsonPropertyName("temperaturmessstelle")]
         [ProtoMember(4)]
-        public string Temperaturmessstelle { get; set; }
+        public string? Temperaturmessstelle { get; set; }
 
         /// <summary>
         ///    Dienstanbieter (bei Temperaturmessstellen)
