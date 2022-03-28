@@ -2913,6 +2913,18 @@
             Klimazone / Temperaturmessstelle
             </summary>
         </member>
+        <member name="P:BO4E.COM.Lastprofil.Profilart">
+            <summary>
+               Profilart des Lastprofils
+            </summary>
+            <example>ART_STANDARDLASTPROFIL</example>
+        </member>
+        <member name="P:BO4E.COM.Lastprofil.Herausgeber">
+            <summary>
+               Herausgeber des Lastprofil-Codes
+            </summary>
+            <example>BDEW</example>
+        </member>
         <member name="T:BO4E.COM.MarktpartnerDetails">
             <summary>
                 Marktrolle
@@ -3624,6 +3636,12 @@
                Dienstanbieter (bei Temperaturmessstellen)
             </summary>
             <example>ZT1</example>
+        </member>
+        <member name="P:BO4E.COM.Tagesparameter.Herausgeber">
+            <summary>
+               Herausgeber des Lastprofil-Codes
+            </summary>
+            <example>BDEW</example>
         </member>
         <member name="T:BO4E.COM.Tarifberechnungsparameter">
             <summary>In dieser Komponente sind die Berechnungsparameter für die Ermittlung der Tarifkosten zusammengefasst.</summary>
@@ -7460,6 +7478,21 @@
             <summary>
                 sehr hohe Priorität
             </summary>
+        </member>
+        <member name="T:BO4E.ENUM.Profilart">
+            <summary>Profilart (temperaturabhängig / standardlastprofil)</summary>
+        </member>
+        <member name="F:BO4E.ENUM.Profilart.ART_STANDARDLASTPROFIL">
+            <summary>ART_STANDARDLASTPROFIL</summary>
+            <remarks>Z02</remarks>
+        </member>
+        <member name="F:BO4E.ENUM.Profilart.ART_TAGESPARAMETERABHAENGIGES_LASTPROFIL">
+            <summary>ART_TAGESPARAMETERABHAENGIGES_LASTPROFIL</summary>
+            <remarks>Z03</remarks>
+        </member>
+        <member name="F:BO4E.ENUM.Profilart.ART_LASTPROFIL">
+            <summary>ART_LASTPROFIL</summary>
+            <remarks>Z12</remarks>
         </member>
         <member name="T:BO4E.ENUM.Profiltyp">
             <summary>Profiltyp (temperaturabhängig / standardlastprofil)</summary>
