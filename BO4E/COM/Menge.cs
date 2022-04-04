@@ -14,11 +14,11 @@ namespace BO4E.COM
     public class Menge : COM
     {
         /// <summary>Gibt den absoluten Wert der Menge an.</summary>
-        [JsonProperty(PropertyName = "wert", Required = Required.Always)]
+        [JsonProperty(PropertyName = "wert", Required = Required.Default)]
         [JsonPropertyName("wert")]
         [FieldName("value", Language.EN)]
         [ProtoMember(3)]
-        public decimal Wert { get; set; }
+        public decimal? Wert { get; set; }
 
         /// <summary>Gibt die Einheit zum jeweiligen Wert an. Details <see cref="Mengeneinheit" /></summary>
         [JsonProperty(PropertyName = "einheit", Required = Required.Default)]

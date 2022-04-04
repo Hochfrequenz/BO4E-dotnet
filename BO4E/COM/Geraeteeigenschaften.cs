@@ -16,10 +16,10 @@ namespace BO4E.COM
     public class Geraeteeigenschaften : COM
     {
         /// <summary>Der Typ eines Gerätes, beispielsweise Drehstromzähler. Details <see cref="ENUM.Geraetetyp" /></summary>
-        [JsonProperty(PropertyName = "geraetetyp", Required = Required.Always)]
+        [JsonProperty(PropertyName = "geraetetyp", Required = Required.Default)]
         [JsonPropertyName("geraetetyp")]
         [ProtoMember(3)]
-        public Geraetetyp Geraetetyp { get; set; }
+        public Geraetetyp? Geraetetyp { get; set; }
 
         /// <summary>
         ///     Weitere Merkmale des Geräts, zum Beispiel Mehrtarif, Eintarif etc.. Details <see cref="ENUM.Geraetemerkmal" />

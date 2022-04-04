@@ -15,10 +15,10 @@ namespace BO4E.COM
         ///     Hier wird festgelegt, ob es sich um ein einschließendes oder ausschließendes Kriterium handelt.Details siehe
         ///     <see cref="ENUM.Gueltigkeitstyp" />
         /// </summary>
-        [JsonProperty(PropertyName = "gueltigkeitstyp", Required = Required.Always)]
+        [JsonProperty(PropertyName = "gueltigkeitstyp", Required = Required.Default)]
         [JsonPropertyName("gueltigkeitstyp")]
         [ProtoMember(3)]
-        public Gueltigkeitstyp Gueltigkeitstyp { get; set; }
+        public Gueltigkeitstyp? Gueltigkeitstyp { get; set; }
 
         /// <summary>
         ///     Das Kriterium gilt in der angegebenen Sparte.Details siehe <see cref="ENUM.Sparte" />
@@ -32,26 +32,26 @@ namespace BO4E.COM
         ///     Unterscheidung, wie der Wert angewendet werden soll, z.B.kleiner, größer, gleich.Details siehe
         ///     <see cref="ENUM.Mengenoperator" />
         /// </summary>
-        [JsonProperty(PropertyName = "mengenoperator", Required = Required.Always)]
+        [JsonProperty(PropertyName = "mengenoperator", Required = Required.Default)]
         [JsonPropertyName("mengenoperator")]
         [ProtoMember(5)]
-        public Mengenoperator Mengenoperator { get; set; }
+        public Mengenoperator? Mengenoperator { get; set; }
 
         /// <summary>
         ///     Hier wird das Kriterium selbst angegeben, z.B.Bundesland. Details siehe <see cref="ENUM.Regionskriteriumtyp" />
         /// </summary>
-        [JsonProperty(PropertyName = "regionskriteriumtyp", Required = Required.Always)]
+        [JsonProperty(PropertyName = "regionskriteriumtyp", Required = Required.Default)]
         [JsonPropertyName("regionskriteriumtyp")]
         [ProtoMember(6)]
-        public Regionskriteriumtyp Regionskriteriumtyp { get; set; }
+        public Regionskriteriumtyp? Regionskriteriumtyp { get; set; }
 
         /// <summary>
         ///     Der Wert, den das Kriterium annehmen kann, z.B.NRW.Im Falle des Regionskriteriumstyp BUNDESWEIT spielt dieser Wert
         ///     keine Rolle.
         /// </summary>
-        [JsonProperty(PropertyName = "wert", Required = Required.Always)]
+        [JsonProperty(PropertyName = "wert", Required = Required.Default)]
         [JsonPropertyName("wert")]
         [ProtoMember(7)]
-        public string Wert { get; set; }
+        public string? Wert { get; set; }
     }
 }

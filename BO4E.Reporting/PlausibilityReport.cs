@@ -37,7 +37,7 @@ namespace BO4E.Reporting
         ///     +1 = other Energiemenge has twice the consumption of the reference
         ///     -1 = other Energiemenge has 0 consumption
         /// </example>
-        [JsonProperty(PropertyName = "relativeDeviation", Required = Required.AllowNull, Order = 5)]
+        [JsonProperty(PropertyName = "relativeDeviation", Required = Required.Default, Order = 5)]
         public decimal? RelativeDeviation { get; set; }
 
         /// <summary>
@@ -76,7 +76,7 @@ namespace BO4E.Reporting
             /// <summary>
             ///     reference time frame
             /// </summary>
-            [JsonProperty(PropertyName = "timeframe", Required = Required.AllowNull)]
+            [JsonProperty(PropertyName = "timeframe", Required = Required.Default)]
             public Zeitraum Timeframe { get; set; }
 
             /// <summary>
