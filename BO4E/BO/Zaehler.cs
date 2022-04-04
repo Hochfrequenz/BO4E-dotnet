@@ -46,7 +46,7 @@ namespace BO4E.BO
         ///     <seealso cref="ENUM.Zaehlertyp" />
         /// </summary>
         [JsonProperty(
-            Required = Required.AllowNull, //Required = Required.Always, 
+            Required = Required.Default, //Required = Required.Always,
             Order = 7, PropertyName = "zaehlertyp")]
         [ProtoMember(7)]
         [JsonPropertyName("zaehlertyp")]
