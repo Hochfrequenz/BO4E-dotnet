@@ -46,10 +46,10 @@ namespace BO4E.COM
         public Betrag? Gesamtkostenangebotsteil { get; set; }
 
         /// <summary>Einzelne Positionen, die zu diesem Angebotsteil gehören. Details <see cref="Angebotsposition" /></summary>
-        [JsonProperty(PropertyName = "positionen", Required = Required.Always)]
+        [JsonProperty(PropertyName = "positionen", Required = Required.Default)]
         [JsonPropertyName("positionen")]
         [ProtoMember(7)]
-        public List<Angebotsposition> Positionen { get; set; }
+        public List<Angebotsposition>? Positionen { get; set; }
 
         /// <summary>Hier kann der Belieferungszeitraum angegeben werden, für den dieser Angebotsteil gilt. Details <see cref="Zeitraum" /></summary>
         [JsonProperty(PropertyName = "lieferzeitraum", Required = Required.Default)]

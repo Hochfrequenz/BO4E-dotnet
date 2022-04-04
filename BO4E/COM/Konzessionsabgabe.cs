@@ -15,10 +15,10 @@ namespace BO4E.COM
         /// <summary>
         ///     Art der Abgabe
         /// </summary>
-        [JsonProperty(PropertyName = "satz", Required = Required.Always, Order = 8)]
+        [JsonProperty(PropertyName = "satz", Required = Required.Default, Order = 8)]
         [JsonPropertyName("satz")]
         [ProtoMember(3)]
-        public AbgabeArt Satz { get; set; }
+        public AbgabeArt? Satz { get; set; }
 
         /// <summary>
         ///     Konzessionsabgabe in E/kWh

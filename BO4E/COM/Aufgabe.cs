@@ -18,7 +18,7 @@ namespace BO4E.COM
         /// <summary>
         ///     Eindeutige Kennzeichnung der Aufgabe
         /// </summary>
-        [JsonProperty(PropertyName = "aufgabenId", Required = Required.Always)]
+        [JsonProperty(PropertyName = "aufgabenId", Required = Required.Default)]
         [JsonPropertyName("aufgabenId")]
         [ProtoMember(3)]
         public string AufgabenId { get; set; }
@@ -53,10 +53,10 @@ namespace BO4E.COM
         /// <summary>
         ///     Wurde diese Aufgabe schon ausgeführt (true)? Steht sie noch zur Bearbeitung an (false)?
         /// </summary>
-        [JsonProperty(PropertyName = "ausgefuehrt", Required = Required.Always)]
+        [JsonProperty(PropertyName = "ausgefuehrt", Required = Required.Default)]
         [JsonPropertyName("ausgefuehrt")]
         [ProtoMember(6)]
-        public bool Ausgefuehrt { get; set; }
+        public bool? Ausgefuehrt { get; set; }
 
 
         [System.Text.Json.Serialization.JsonIgnore]
