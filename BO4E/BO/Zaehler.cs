@@ -46,7 +46,7 @@ namespace BO4E.BO
         ///     <seealso cref="ENUM.Zaehlertyp" />
         /// </summary>
         [JsonProperty(
-            Required = Required.AllowNull, //Required = Required.Always, 
+            Required = Required.Default, //Required = Required.Always,
             Order = 7, PropertyName = "zaehlertyp")]
         [ProtoMember(7)]
         [JsonPropertyName("zaehlertyp")]
@@ -107,11 +107,11 @@ namespace BO4E.BO
         ///     Die Zählwerke des Zählers.
         ///     <seealso cref="Zaehlwerk" />
         /// </summary>
-        [JsonProperty(Required = Required.Always, Order = 12, PropertyName = "zaehlwerke")]
+        [JsonProperty(Required = Required.Default, Order = 12, PropertyName = "zaehlwerke")]
         [JsonPropertyName("zaehlwerke")]
         [MinLength(1)]
         [ProtoMember(12)]
-        public List<Zaehlwerk> Zaehlwerke { get; set; }
+        public List<Zaehlwerk>? Zaehlwerke { get; set; }
 
         /// <summary>Der Hersteller des Zählers. Details <see cref="Geschaeftspartner" /></summary>
         [JsonProperty(Required = Required.Default, Order = 13, NullValueHandling = NullValueHandling.Ignore,

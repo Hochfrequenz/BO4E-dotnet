@@ -41,7 +41,7 @@ namespace BO4E.COM
         /// Ein möglicher Trafoverlust
         /// </summary>
         /// <remarks>UTILTS SG9 CCI Z16</remarks>
-        [JsonProperty(Required = Required.AllowNull, Order = 4, PropertyName = "verlustfaktorTrafo")]
+        [JsonProperty(Required = Required.Default, Order = 4, PropertyName = "verlustfaktorTrafo")]
         [JsonPropertyName("verlustfaktorTrafo")]
         [ProtoMember(4)]
         public decimal? VerlustfaktorTrafo { get; set; }
@@ -50,7 +50,7 @@ namespace BO4E.COM
         /// Ein möglicher Leitungsverlust
         /// </summary>
         /// <remarks>UTILTS SG9 CCI ZB2</remarks>
-        [JsonProperty(Required = Required.AllowNull, Order = 5, PropertyName = "verlustfaktorLeitung")]
+        [JsonProperty(Required = Required.Default, Order = 5, PropertyName = "verlustfaktorLeitung")]
         [JsonPropertyName("verlustfaktorLeitung")]
         [ProtoMember(5)]
         public decimal? VerlustfaktorLeitung { get; set; }
