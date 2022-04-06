@@ -20,5 +20,11 @@ namespace BO4E.ENUM
         /// </summary>
         /// <remarks>Z92</remarks>
         UEBERMITTLUNG_AN_DAS_HKNR,
+
+        /// <summary>
+        /// Zur Ermittlung der Ausgeglichenheit von Bilanzkreisen
+        ///</summary>
+        /// <remarks>ZB5</remarks>
+        ERMITTLUNG_AUSGEGLICHENHEIT_BILANZKREIS,
     }
 }
