@@ -50,14 +50,10 @@ namespace TestBO4E
             typeof(Bilanzierung),
             typeof(Energiemenge),
             typeof(Entsperrauftrag),
-            typeof(Geschaeftspartner),
             typeof(Marktteilnehmer),
             typeof(Handelsunstimmigkeit),
             typeof(Kosten),
             typeof(LogObject),
-            typeof(Marktlokation),
-            typeof(Marktteilnehmer), // <-- this should be fixed better sooner than later
-            typeof(Messlokation),
             typeof(Preisblatt),
             typeof(PreisblattDienstleistung),
             typeof(PreisblattKonzessionsabgabe),
@@ -70,7 +66,6 @@ namespace TestBO4E
             typeof(Sperrauftrag),
             typeof(SperrauftragsStorno),
             typeof(Statusbericht),
-            typeof(Vertrag),
             typeof(Zaehler),
 
             // COMponents
