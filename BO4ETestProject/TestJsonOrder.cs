@@ -54,8 +54,6 @@ namespace TestBO4E
             typeof(Handelsunstimmigkeit),
             typeof(Kosten),
             typeof(LogObject),
-            typeof(Marktlokation),
-            typeof(Messlokation),
             typeof(Preisblatt),
             typeof(PreisblattDienstleistung),
             typeof(PreisblattKonzessionsabgabe),
