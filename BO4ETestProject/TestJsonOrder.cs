@@ -66,7 +66,6 @@ namespace TestBO4E
             typeof(Sperrauftrag),
             typeof(SperrauftragsStorno),
             typeof(Statusbericht),
-            typeof(Vertrag),
             typeof(Zaehler),
 
             // COMponents
