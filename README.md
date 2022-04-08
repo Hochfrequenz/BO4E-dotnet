@@ -152,6 +152,8 @@ In the folder [BO4E-dotnet/protobuf-files](BO4E-dotnet/protobuf-files) you can f
 Click on ["Draft a new Release"](https://github.com/Hochfrequenz/BO4E-dotnet/releases/new), then create a new tag **without a `v` prefix**, e.g. `0.2.34`.
 This should trigger the [nuget Github Action](https://github.com/Hochfrequenz/BO4E-dotnet/blob/58fcbd224f5de59c6380c96b7af6f698d85ffcf3/.github/workflows/nuget_package_push.yml#L8).
 
+Find previous workflow runs [here](https://github.com/Hochfrequenz/BO4E-dotnet/actions/workflows/nuget_package_push.yml).
+
 ## Other Noteworthy BO4E Implementations
 
 - [Golang](https://github.com/Hochfrequenz/go-bo4e/)
