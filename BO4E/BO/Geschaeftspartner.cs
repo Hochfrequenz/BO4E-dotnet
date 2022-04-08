@@ -22,8 +22,9 @@ namespace BO4E.BO
     public class Geschaeftspartner : BusinessObject
     {
         /// <summary>Die Anrede für den GePa, Z.B. Herr. <seealso cref="Anrede" /></summary>
-        [JsonProperty(Required = Required.Default, Order = 4, PropertyName = "anrede")]
+        [JsonProperty(Required = Required.Default, Order = 6, PropertyName = "anrede")]
         [JsonPropertyName("anrede")]
+        [JsonPropertyOrder(6)]
         [ProtoMember(4)]
         [FieldName("salutation", Language.EN)]
         public Anrede? Anrede { get; set; }
@@ -32,8 +33,9 @@ namespace BO4E.BO
         ///     title of name
         /// </summary>
         /// <example>Dr.</example>
-        [JsonProperty(Required = Required.Default, Order = 5, PropertyName = "title")]
+        [JsonProperty(Required = Required.Default, Order = 7, PropertyName = "title")]
         [JsonPropertyName("title")]
+        [JsonPropertyOrder(7)]
         [ProtoMember(1001)]
         [Obsolete("Please use anrede instead or Ansprechpartner.individuelleAnrede", true)]
         [NonOfficial(NonOfficialCategory.CUSTOMER_REQUIREMENTS)]
@@ -44,8 +46,9 @@ namespace BO4E.BO
         ///     beispielsweise der Nachname dargestellt werden. Beispiele: Yellow Strom GmbH
         ///     oder Hagen
         /// </summary>
-        [JsonProperty(Required = Required.Default, Order = 6, PropertyName = "name1")]
+        [JsonProperty(Required = Required.Default, Order = 8, PropertyName = "name1")]
         [JsonPropertyName("name1")]
+        [JsonPropertyOrder(8)]
         [ProtoMember(6)]
         [DataCategory(DataCategory.NAME)]
         [BoKey]
@@ -56,8 +59,9 @@ namespace BO4E.BO
         ///     bei Privatpersonen beispielsweise der Vorname dargestellt werden. Beispiele:
         ///     Bereich Süd oder Nina
         /// </summary>
-        [JsonProperty(Required = Required.Default, Order = 7, PropertyName = "name2")]
+        [JsonProperty(Required = Required.Default, Order = 9, PropertyName = "name2")]
         [JsonPropertyName("name2")]
+        [JsonPropertyOrder(9)]
         [ProtoMember(7)]
         [DataCategory(DataCategory.NAME)]
         public string? Name2 { get; set; }
@@ -67,8 +71,9 @@ namespace BO4E.BO
         ///     bei Privatpersonen Zusätze zum Namen dargestellt werden. Beispiele: und Afrika
         ///     oder Sängerin
         /// </summary>
-        [JsonProperty(Required = Required.Default, Order = 8, PropertyName = "name3")]
+        [JsonProperty(Required = Required.Default, Order = 10, PropertyName = "name3")]
         [JsonPropertyName("name3")]
+        [JsonPropertyOrder(10)]
         [ProtoMember(8)]
         [DataCategory(DataCategory.NAME)]
         public string? Name3 { get; set; }
@@ -77,14 +82,16 @@ namespace BO4E.BO
         ///     Kennzeichnung ob es sich um einen Gewerbe/Unternehmen (gewerbeKennzeichnung = true)
         ///     oder eine Privatperson handelt. (gewerbeKennzeichnung = false)
         /// </summary>
-        [JsonProperty(Required = Required.Always, Order = 9, PropertyName = "gewerbekennzeichnung")]
+        [JsonProperty(Required = Required.Always, Order = 11, PropertyName = "gewerbekennzeichnung")]
         [JsonPropertyName("gewerbekennzeichnung")]
+        [JsonPropertyOrder(11)]
         [ProtoMember(9)]
         [FieldName("isCommercial", Language.EN)]
         public bool Gewerbekennzeichnung { get; set; }
 
         /// <summary>Handelsregisternummer des Geschäftspartners</summary>
-        [JsonProperty(Required = Required.Default, Order = 10, PropertyName = "hrnummer")]
+        [JsonProperty(Required = Required.Default, Order = 12, PropertyName = "hrnummer")]
+        [JsonPropertyOrder(12)]
         [JsonPropertyName("hrnummer")]
         [ProtoMember(10)]
         [DataCategory(DataCategory.LEGAL)]
@@ -92,50 +99,57 @@ namespace BO4E.BO
 
 
         /// <summary> Amtsgericht bzw Handelsregistergericht, das die Handelsregisternummer herausgegeben hat</summary>
-        [JsonProperty(Required = Required.Default, Order = 11, PropertyName = "amtsgericht")]
+        [JsonProperty(Required = Required.Default, Order = 13, PropertyName = "amtsgericht")]
+        [JsonPropertyOrder(13)]
         [JsonPropertyName("amtsgericht")]
         [ProtoMember(11)]
         [DataCategory(DataCategory.LEGAL)]
         public string? Amtsgericht { get; set; }
 
         /// <summary>Bevorzugter Kontaktweg des Geschäftspartners.</summary>
-        [JsonProperty(Required = Required.Default, Order = 12, PropertyName = "kontaktweg")]
+        [JsonProperty(Required = Required.Default, Order = 14, PropertyName = "kontaktweg")]
+        [JsonPropertyOrder(14)]
         [JsonPropertyName("kontaktweg")]
         [ProtoMember(12)]
         public List<Kontaktart>? Kontaktweg { get; set; }
 
         /// <summary>Die Steuer-ID des Geschäftspartners. Beispiel: DE 813281825</summary>
-        [JsonProperty(Required = Required.Default, Order = 13, PropertyName = "umsatzsteuerId")]
+        [JsonProperty(Required = Required.Default, Order = 15, PropertyName = "umsatzsteuerId")]
+        [JsonPropertyOrder(15)]
         [JsonPropertyName("umsatzsteuerId")]
         [ProtoMember(13)]
         [DataCategory(DataCategory.LEGAL)]
         public string? UmsatzsteuerId { get; set; }
 
         /// <summary>* Die Gläubiger-ID welche im Zahlungsverkehr verwendet wird- Z.B. DE 47116789</summary>
-        [JsonProperty(Required = Required.Default, Order = 14, PropertyName = "glaeubigerId")]
+        [JsonProperty(Required = Required.Default, Order = 16, PropertyName = "glaeubigerId")]
+        [JsonPropertyOrder(16)]
         [JsonPropertyName("glaeubigerId")]
         [ProtoMember(14)]
         [DataCategory(DataCategory.FINANCE)]
         public string? GlaeubigerId { get; set; }
 
         /// <summary>E-Mail-Adresse des Ansprechpartners. Z.B. info@mp-energie.de</summary>
-        [JsonProperty(Required = Required.Default, Order = 15, PropertyName = "eMailAdresse")]
+        [JsonProperty(Required = Required.Default, Order = 17, PropertyName = "eMailAdresse")]
+        [JsonPropertyOrder(17)]
         [JsonPropertyName("eMailAdresse")]
         [ProtoMember(15)]
         [DataCategory(DataCategory.ADDRESS)]
         public string? EMailAdresse { get; set; }
 
         /// <summary>Internetseite des Marktpartners. Beispiel: www.mp-energie.de</summary>
-        [JsonProperty(Required = Required.Default, Order = 16, PropertyName = "website")]
+        [JsonProperty(Required = Required.Default, Order = 18, PropertyName = "website")]
         [JsonPropertyName("website")]
+        [JsonPropertyOrder(18)]
         [ProtoMember(16)]
         [DataCategory(DataCategory.ADDRESS)]
         public string? Website { get; set; }
 
         /// <summary>Rolle, die der Geschäftspartner hat (z.B. Interessent, Kunde).</summary>
-        [JsonProperty(Required = Required.Default, Order = 17,
+        [JsonProperty(Required = Required.Default, Order = 19,
             PropertyName = "geschaeftspartnerrolle")] // ToDo: it's actually required but I need it to work quickly
         [JsonPropertyName("geschaeftspartnerrolle")]
+        [JsonPropertyOrder(19)]
         [FieldName("role", Language.EN)]
         [ProtoMember(17)]
         public List<Geschaeftspartnerrolle>? Geschaeftspartnerrolle { get; set; }
@@ -143,9 +157,10 @@ namespace BO4E.BO
         /// <summary>
         ///     Adresse des Geschäftspartners, an der sich der Hauptsitz befindet. Details <seealso cref="Adresse" />
         /// </summary>
-        [JsonProperty(Required = Required.Default, Order = 18, PropertyName = "partneradresse")]
+        [JsonProperty(Required = Required.Default, Order = 20, PropertyName = "partneradresse")]
         [JsonPropertyName("partneradresse")]
         [ProtoMember(18)]
+        [JsonPropertyOrder(20)]
         [FieldName("partnerAddress", Language.EN)]
         public Adresse? Partneradresse { get; set; }
     }
