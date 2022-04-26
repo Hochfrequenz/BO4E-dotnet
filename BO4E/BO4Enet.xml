@@ -1231,33 +1231,33 @@
             </summary>
         </member>
         <member name="P:BO4E.BO.Marktlokation.ZugehoerigeMesslokationen">
-            <summary>Aufzählung der Messlokationen, die zu dieser Marktlokation gehören.</summary>
-            Es können 3 verschiedene Konstrukte auftreten:
-            <ol>
-                <li>
-                    Beziehung 1 : 0 : Hier handelt es sich um Pauschalanlagen ohne Messung.
-                    D.h. die Verbrauchsdaten sind direkt über die Marktlokation abgreifbar.
-                </li>
-                <li>
-                    Beziehung 1 : 1 : Das ist die Standard-Beziehung für die meisten Fälle.
-                    In diesem Fall gibt es zu einer Marktlokation genau eine Messlokation.
-                </li>
-                <li>
-                    Beziehung 1 : N : Hier liegt beispielsweise eine Untermessung vor. Der
-                    Verbrauch einer Marklokation berechnet sich hier aus mehreren Messungen.
-                </li>
-            </ol>
-            Es gibt praktisch auch noch die Beziehung N : 1, beispielsweise bei einer
-            Zweirichtungsmessung bei der durch eine Messeinrichtung die Messung sowohl
-            für die Einspreiseseite als auch für die Aussspeiseseite erfolgt. Da
-            Abrechnung und Bilanzierung jedoch für beide Marktlokationen getrennt
-            erfolgt, werden nie beide Marktlokationen gemeinsam betrachtet. Daher lässt
-            sich dieses Konstrukt auf zwei 1:1-Beziehung zurückführen, wobei die
-            Messlokation in beiden Fällen die gleiche ist.
+             <summary>Aufzählung der Messlokationen, die zu dieser Marktlokation gehören.</summary>
+             Es können 3 verschiedene Konstrukte auftreten:
+             <ol>
+                 <li>
+                     Beziehung 1 : 0 : Hier handelt es sich um Pauschalanlagen ohne Messung.
+                     D.h. die Verbrauchsdaten sind direkt über die Marktlokation abgreifbar.
+                 </li>
+                 <li>
+                     Beziehung 1 : 1 : Das ist die Standard-Beziehung für die meisten Fälle.
+                     In diesem Fall gibt es zu einer Marktlokation genau eine Messlokation.
+                 </li>
+                 <li>
+                     Beziehung 1 : N : Hier liegt beispielsweise eine Untermessung vor. Der
+                     Verbrauch einer Marklokation berechnet sich hier aus mehreren Messungen.
+                 </li>
+             </ol>
+             Es gibt praktisch auch noch die Beziehung N : 1, beispielsweise bei einer
+             Zweirichtungsmessung bei der durch eine Messeinrichtung die Messung sowohl
+             für die Einspreiseseite als auch für die Aussspeiseseite erfolgt. Da
+             Abrechnung und Bilanzierung jedoch für beide Marktlokationen getrennt
+             erfolgt, werden nie beide Marktlokationen gemeinsam betrachtet. Daher lässt
+             sich dieses Konstrukt auf zwei 1:1-Beziehung zurückführen, wobei die
+             Messlokation in beiden Fällen die gleiche ist.
             
-            In den Zuordnungen sind ist die arithmetische Operation mit der der Verbrauch
-            einer Messlokation zum Verbrauch einer Marktlokation beitrögt mit aufgeführt.
-            Der Standard ist hier die Addition.
+             In den Zuordnungen sind ist die arithmetische Operation mit der der Verbrauch
+             einer Messlokation zum Verbrauch einer Marktlokation beitrögt mit aufgeführt.
+             Der Standard ist hier die Addition.
         </member>
         <member name="P:BO4E.BO.Marktlokation.MesstechnischeEinordnung">
             <summary>
@@ -8823,6 +8823,12 @@
             Übermittlung an das Herkunftsnachweisregister (HKNR)
             </summary>
             <remarks>Z92</remarks>
+        </member>
+        <member name="F:BO4E.ENUM.Verwendungszweck.ERMITTLUNG_AUSGEGLICHENHEIT_BILANZKREIS">
+             <summary>
+             Zur Ermittlung der Ausgeglichenheit von Bilanzkreisen
+            </summary>
+             <remarks>ZB5</remarks>
         </member>
         <member name="T:BO4E.ENUM.Voraussetzungen">
             <summary>Voraussetzungen, die erfüllt sein müssen, damit dieser Tarif zur Anwendung kommen kann.</summary>

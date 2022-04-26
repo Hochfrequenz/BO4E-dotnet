@@ -135,7 +135,7 @@ namespace TestBO4E
             typeof(Vertragskonditionen),
             typeof(Verwendungszweck),
             typeof(Vertragsteil),
-            typeof(Zaehlwerk),
+            
             typeof(Zeitraum),
             typeof(Zustaendigkeit)
         };

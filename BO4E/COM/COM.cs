@@ -78,6 +78,7 @@ namespace BO4E.COM
 
         // note that this inheritance protobuf thing doesn't work as expected. please see the comments in TestBO4E project->TestProfobufSerialization
         [ProtoMember(1)]
+
 #pragma warning disable IDE1006 // Naming Styles
         // ReSharper disable once InconsistentNaming
         protected string guidSerialized
@@ -104,9 +105,10 @@ namespace BO4E.COM
         ///     Store the latest timestamp (update from the database)
         /// </summary>
         [JsonProperty(PropertyName = "timestamp", NullValueHandling = NullValueHandling.Ignore,
-            Required = Required.Default, Order = 2)]
+            Required = Required.Default, Order = 0)]
         [JsonPropertyName("timestamp")]
         [ProtoIgnore]
+        [JsonPropertyOrder(0)]
         public DateTimeOffset? Timestamp { get; set; }
 
         /// <summary>
@@ -123,9 +125,10 @@ namespace BO4E.COM
         /// <summary>
         ///     allows adding a GUID to COM objects for tracking across systems
         /// </summary>
-        [JsonProperty(PropertyName = "guid", NullValueHandling = NullValueHandling.Ignore, Required = Required.Default,
+        [JsonProperty(PropertyName = "guid",NullValueHandling = NullValueHandling.Ignore, Required = Required.Default,
             Order = 1)]
         [JsonPropertyName("guid")]
+        [JsonPropertyOrder(1)]
         public Guid? Guid { get; set; }
 
         /// <summary>
@@ -137,6 +140,7 @@ namespace BO4E.COM
         [Newtonsoft.Json.JsonExtensionData]
         [System.Text.Json.Serialization.JsonExtensionData]
         [DataCategory(DataCategory.USER_PROPERTIES)]
+        [JsonPropertyOrder(2)]
         public IDictionary<string, object>? UserProperties { get; set; }
 
         /// <inheritdoc cref="BO4E.BO.BusinessObject.IsValid" />
