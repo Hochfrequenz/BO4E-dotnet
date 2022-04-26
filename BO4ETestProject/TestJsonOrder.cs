@@ -30,8 +30,8 @@ namespace TestBO4E
 
         /// <summary>
         /// contains those types where the order of the json elements/properties should _not_ be enforced for now
-        /// </summary>
-        private static HashSet<Type> IgnoreOrderTypes = new()
+        /// </summary>        
+        static readonly HashSet<Type> IgnoreOrderTypes = new()
         {
             // todo: make this list smaller, step by step.
             // we could for example assign these as "Strafarbeiten" for commits on dev/main that broke the tests
@@ -135,7 +135,7 @@ namespace TestBO4E
             typeof(Vertragskonditionen),
             typeof(Verwendungszweck),
             typeof(Vertragsteil),
-            typeof(Zaehlwerk),
+
             typeof(Zeitraum),
             typeof(Zustaendigkeit)
         };
