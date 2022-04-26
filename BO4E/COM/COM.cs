@@ -125,7 +125,7 @@ namespace BO4E.COM
         /// <summary>
         ///     allows adding a GUID to COM objects for tracking across systems
         /// </summary>
-        [JsonProperty(PropertyName = "guid",NullValueHandling = NullValueHandling.Ignore, Required = Required.Default,
+        [JsonProperty(PropertyName = "guid", NullValueHandling = NullValueHandling.Ignore, Required = Required.Default,
             Order = 1)]
         [JsonPropertyName("guid")]
         [JsonPropertyOrder(1)]

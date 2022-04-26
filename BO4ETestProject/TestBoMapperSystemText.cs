@@ -18,6 +18,7 @@ namespace TestBO4E
     public class TestBoMapperSystemText
     {
         [TestMethod]
+        [Obsolete]
         public void TestBoMapping()
         {
             var files = Directory.GetFiles("BoMapperTests/", "*.json");
