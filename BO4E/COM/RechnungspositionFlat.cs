@@ -131,7 +131,7 @@ namespace BO4E.COM
         [JsonProperty(PropertyName = "preisWert", Required = Required.Always)]
         [JsonPropertyName("preisWert")]
         [ProtoMember(9)]
-        public decimal PreisWert { get; set; }
+        public decimal? PreisWert { get; set; }
 
         /// <summary>
         ///     <see cref="Rechnungsposition.Einzelpreis" /> and <see cref="Preis.Einheit" />
@@ -139,7 +139,7 @@ namespace BO4E.COM
         [JsonProperty(PropertyName = "preisEinheit", Required = Required.Always)]
         [JsonPropertyName("preisEinheit")]
         [ProtoMember(10)]
-        public Waehrungseinheit PreisEinheit { get; set; }
+        public Waehrungseinheit? PreisEinheit { get; set; }
 
         /// <summary>
         ///     <see cref="Rechnungsposition.Einzelpreis" /> and <see cref="Preis.Bezugswert" />
@@ -147,7 +147,7 @@ namespace BO4E.COM
         [JsonProperty(PropertyName = "preisBezugswert", Required = Required.Always)]
         [JsonPropertyName("preisBezugswert")]
         [ProtoMember(11)]
-        public Mengeneinheit PreisBezugswert { get; set; }
+        public Mengeneinheit? PreisBezugswert { get; set; }
 
         /// <summary>
         ///     <see cref="Rechnungsposition.Einzelpreis" /> and <see cref="Preis.Status" />
