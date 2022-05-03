@@ -48,7 +48,6 @@ namespace TestBO4E
             typeof(Bilanzierung),
             typeof(Berechnungsformel),
             typeof(Bilanzierung),
-            typeof(Energiemenge),
             typeof(Entsperrauftrag),
             typeof(Marktteilnehmer),
             typeof(Handelsunstimmigkeit),

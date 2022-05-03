@@ -19,18 +19,18 @@
             "null"
           ]
         },
-        "guid": {
-          "type": [
-            "string",
-            "null"
-          ]
-        },
         "timestamp": {
           "type": [
             "string",
             "null"
           ],
           "format": "date-time"
+        },
+        "guid": {
+          "type": [
+            "string",
+            "null"
+          ]
         }
       }
     }
@@ -46,21 +46,6 @@
     },
     "auftragsId": {
       "type": "string"
-    },
-    "externeReferenzen": {
-      "type": [
-        "array",
-        "null"
-      ],
-      "items": {
-        "$ref": "#/definitions/ExterneReferenz"
-      }
-    },
-    "guid": {
-      "type": [
-        "string",
-        "null"
-      ]
     },
     "boTyp": {
       "type": [
@@ -80,6 +65,21 @@
         "null"
       ],
       "format": "date-time"
+    },
+    "externeReferenzen": {
+      "type": [
+        "array",
+        "null"
+      ],
+      "items": {
+        "$ref": "#/definitions/ExterneReferenz"
+      }
+    },
+    "guid": {
+      "type": [
+        "string",
+        "null"
+      ]
     }
   },
   "required": [

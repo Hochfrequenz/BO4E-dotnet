@@ -325,18 +325,18 @@
             "null"
           ]
         },
-        "guid": {
-          "type": [
-            "string",
-            "null"
-          ]
-        },
         "timestamp": {
           "type": [
             "string",
             "null"
           ],
           "format": "date-time"
+        },
+        "guid": {
+          "type": [
+            "string",
+            "null"
+          ]
         }
       },
       "required": [
@@ -362,18 +362,18 @@
             "null"
           ]
         },
-        "guid": {
-          "type": [
-            "string",
-            "null"
-          ]
-        },
         "timestamp": {
           "type": [
             "string",
             "null"
           ],
           "format": "date-time"
+        },
+        "guid": {
+          "type": [
+            "string",
+            "null"
+          ]
         }
       }
     },
@@ -383,21 +383,6 @@
         "null"
       ],
       "properties": {
-        "externeReferenzen": {
-          "type": [
-            "array",
-            "null"
-          ],
-          "items": {
-            "$ref": "#/definitions/ExterneReferenz"
-          }
-        },
-        "guid": {
-          "type": [
-            "string",
-            "null"
-          ]
-        },
         "boTyp": {
           "type": [
             "string",
@@ -416,6 +401,21 @@
             "null"
           ],
           "format": "date-time"
+        },
+        "externeReferenzen": {
+          "type": [
+            "array",
+            "null"
+          ],
+          "items": {
+            "$ref": "#/definitions/ExterneReferenz"
+          }
+        },
+        "guid": {
+          "type": [
+            "string",
+            "null"
+          ]
         },
         "anrede": {
           "type": [
@@ -574,18 +574,18 @@
             "MWH"
           ]
         },
-        "guid": {
-          "type": [
-            "string",
-            "null"
-          ]
-        },
         "timestamp": {
           "type": [
             "string",
             "null"
           ],
           "format": "date-time"
+        },
+        "guid": {
+          "type": [
+            "string",
+            "null"
+          ]
         }
       },
       "required": [
@@ -614,18 +614,18 @@
         "name": {
           "type": "string"
         },
-        "guid": {
-          "type": [
-            "string",
-            "null"
-          ]
-        },
         "timestamp": {
           "type": [
             "string",
             "null"
           ],
           "format": "date-time"
+        },
+        "guid": {
+          "type": [
+            "string",
+            "null"
+          ]
         }
       },
       "required": [
@@ -743,18 +743,18 @@
             "null"
           ]
         },
-        "guid": {
-          "type": [
-            "string",
-            "null"
-          ]
-        },
         "timestamp": {
           "type": [
             "string",
             "null"
           ],
           "format": "date-time"
+        },
+        "guid": {
+          "type": [
+            "string",
+            "null"
+          ]
         }
       }
     },
@@ -802,18 +802,18 @@
             "null"
           ]
         },
-        "guid": {
-          "type": [
-            "string",
-            "null"
-          ]
-        },
         "timestamp": {
           "type": [
             "string",
             "null"
           ],
           "format": "date-time"
+        },
+        "guid": {
+          "type": [
+            "string",
+            "null"
+          ]
         }
       },
       "required": [
@@ -879,18 +879,18 @@
           ],
           "format": "date-time"
         },
-        "guid": {
-          "type": [
-            "string",
-            "null"
-          ]
-        },
         "timestamp": {
           "type": [
             "string",
             "null"
           ],
           "format": "date-time"
+        },
+        "guid": {
+          "type": [
+            "string",
+            "null"
+          ]
         }
       },
       "required": [
@@ -901,21 +901,6 @@
   },
   "type": "object",
   "properties": {
-    "externeReferenzen": {
-      "type": [
-        "array",
-        "null"
-      ],
-      "items": {
-        "$ref": "#/definitions/ExterneReferenz"
-      }
-    },
-    "guid": {
-      "type": [
-        "string",
-        "null"
-      ]
-    },
     "boTyp": {
       "type": [
         "string",
@@ -934,6 +919,21 @@
         "null"
       ],
       "format": "date-time"
+    },
+    "externeReferenzen": {
+      "type": [
+        "array",
+        "null"
+      ],
+      "items": {
+        "$ref": "#/definitions/ExterneReferenz"
+      }
+    },
+    "guid": {
+      "type": [
+        "string",
+        "null"
+      ]
     },
     "vertragsnummer": {
       "type": [
