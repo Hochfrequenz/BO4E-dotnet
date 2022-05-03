@@ -1361,7 +1361,7 @@ message Verbrauch {
    .bcl.Decimal Wert = 7;
    Mengeneinheit Einheit = 8;
    Verbrauchsmengetyp Type = 9;
-   WertMengeArt WertMengeArt = 10;
+   Messwertstatus Messwertstatus = 10;
    repeated StatusZusatzInformation StatusZusatzInformationen = 11;
    Tarifstufe Tarifstufe = 12;
 }
@@ -1658,7 +1658,7 @@ enum Waermenutzung {
    WAERMEPUMPE = 1;
    DIREKTHEIZUNG = 2;
 }
-enum WertMengeArt {
+enum Messwertstatus {
    option (.protobuf_net.enumopt).namespace = "BO4E.ENUM";
    WAHRER_WERT = 0;
    ERSATZWERT = 1;

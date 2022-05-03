@@ -95,12 +95,12 @@ namespace BO4E.COM
         /// <summary>
         ///     Enthält die Gültigkeit des angegebenen Wertes
         /// </summary>
-        /// <seealso cref="ENUM.WertMengeArt" />
-        [JsonProperty(PropertyName = "wertmengeart", Required = Required.Default, Order = 5)]
-        [JsonPropertyName("wertmengeart")]
+        /// <seealso cref="ENUM.Messwertstatus" />
+        [JsonProperty(PropertyName = "messwertstatus", Required = Required.Default, Order = 5)]
+        [JsonPropertyName("messwertstatus")]
         [NonOfficial(NonOfficialCategory.UNSPECIFIED)]
         [ProtoMember(10)]
-        public WertMengeArt? WertMengeArt { get; set; }
+        public Messwertstatus? Messwertstatus { get; set; }
 
 
         /// <summary>
