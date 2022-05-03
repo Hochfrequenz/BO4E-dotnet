@@ -5,31 +5,34 @@ namespace BO4E.ENUM
     /// <summary>
     /// Gibt auskunft über die Gültigkeit des angegebenen Verbrauchswertes. Bildet MSCONS SG10 QTY 6063 ab. 
     /// </summary>
-    [NonOfficial(NonOfficialCategory.UNSPECIFIED)]
-    public enum WertMengeArt
+    public enum Messwertstatus
     {
         /// <summary> Wahrer Wert: 220 </summary>
-        WAHRER_WERT,
+        ABGELESEN,
 
         /// <summary> Ersatzwert: 67 </summary>
         ERSATZWERT,
 
         /// <summary> Vorläufiger Wert: Z18 </summary>
-        VORLAEUFIGER_WERT,
+        VOLAEUFIGERWERT,
 
         /// <summary> Angabe für Lieferschein: Z31 </summary>
+        [NonOfficial(NonOfficialCategory.UNSPECIFIED)]
         ANGABE_FUER_LIEFERSCHEIN,
 
         /// <summary> Vorschlagswert: 201 </summary>
         VORSCHLAGSWERT,
 
         /// <summary> Nicht verwendbarer Wert: 20 </summary>
-        NICHT_VERWENDBARER_WERT,
+        NICHT_VERWENDBAR,
 
         /// <summary> Prognosewert: 187 </summary>
         PROGNOSEWERT,
 
         /// <summary> Energiemenge summiert: 79 </summary>
-        ENERGIEMENGE_SUMMIERT,
+        ENERGIEMENGESUMMIERT,
+
+        /// <summary> Fehlender Wert: Z30 </summary>
+        FEHLT
     }
 }
