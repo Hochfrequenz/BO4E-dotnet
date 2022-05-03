@@ -19,18 +19,18 @@
             "null"
           ]
         },
-        "guid": {
-          "type": [
-            "string",
-            "null"
-          ]
-        },
         "timestamp": {
           "type": [
             "string",
             "null"
           ],
           "format": "date-time"
+        },
+        "guid": {
+          "type": [
+            "string",
+            "null"
+          ]
         }
       }
     },
@@ -56,18 +56,18 @@
             "$ref": "#/definitions/FehlerDetail"
           }
         },
-        "guid": {
-          "type": [
-            "string",
-            "null"
-          ]
-        },
         "timestamp": {
           "type": [
             "string",
             "null"
           ],
           "format": "date-time"
+        },
+        "guid": {
+          "type": [
+            "string",
+            "null"
+          ]
         }
       },
       "required": [
@@ -114,18 +114,18 @@
         "ursache": {
           "$ref": "#/definitions/FehlerUrsache"
         },
-        "guid": {
-          "type": [
-            "string",
-            "null"
-          ]
-        },
         "timestamp": {
           "type": [
             "string",
             "null"
           ],
           "format": "date-time"
+        },
+        "guid": {
+          "type": [
+            "string",
+            "null"
+          ]
         }
       },
       "required": [
@@ -174,39 +174,24 @@
             "null"
           ]
         },
-        "guid": {
-          "type": [
-            "string",
-            "null"
-          ]
-        },
         "timestamp": {
           "type": [
             "string",
             "null"
           ],
           "format": "date-time"
+        },
+        "guid": {
+          "type": [
+            "string",
+            "null"
+          ]
         }
       }
     }
   },
   "type": "object",
   "properties": {
-    "externeReferenzen": {
-      "type": [
-        "array",
-        "null"
-      ],
-      "items": {
-        "$ref": "#/definitions/ExterneReferenz"
-      }
-    },
-    "guid": {
-      "type": [
-        "string",
-        "null"
-      ]
-    },
     "status": {
       "type": "string",
       "enum": [
@@ -232,6 +217,10 @@
         "null"
       ]
     },
+    "datumPruefung": {
+      "type": "string",
+      "format": "date-time"
+    },
     "timestamp": {
       "type": [
         "string",
@@ -239,12 +228,23 @@
       ],
       "format": "date-time"
     },
-    "datumPruefung": {
-      "type": "string",
-      "format": "date-time"
-    },
     "fehler": {
       "$ref": "#/definitions/Fehler"
+    },
+    "externeReferenzen": {
+      "type": [
+        "array",
+        "null"
+      ],
+      "items": {
+        "$ref": "#/definitions/ExterneReferenz"
+      }
+    },
+    "guid": {
+      "type": [
+        "string",
+        "null"
+      ]
     }
   },
   "required": [

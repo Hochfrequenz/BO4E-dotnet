@@ -19,39 +19,24 @@
             "null"
           ]
         },
-        "guid": {
-          "type": [
-            "string",
-            "null"
-          ]
-        },
         "timestamp": {
           "type": [
             "string",
             "null"
           ],
           "format": "date-time"
+        },
+        "guid": {
+          "type": [
+            "string",
+            "null"
+          ]
         }
       }
     }
   },
   "type": "object",
   "properties": {
-    "externeReferenzen": {
-      "type": [
-        "array",
-        "null"
-      ],
-      "items": {
-        "$ref": "#/definitions/ExterneReferenz"
-      }
-    },
-    "guid": {
-      "type": [
-        "string",
-        "null"
-      ]
-    },
     "boTyp": {
       "type": [
         "string",
@@ -74,9 +59,24 @@
     "id": {
       "type": "string"
     },
+    "externeReferenzen": {
+      "type": [
+        "array",
+        "null"
+      ],
+      "items": {
+        "$ref": "#/definitions/ExterneReferenz"
+      }
+    },
     "DateTime": {
       "type": "string",
       "format": "date-time"
+    },
+    "guid": {
+      "type": [
+        "string",
+        "null"
+      ]
     },
     "logMessage": {
       "type": "string"
