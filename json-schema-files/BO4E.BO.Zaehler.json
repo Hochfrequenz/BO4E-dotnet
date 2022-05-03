@@ -325,18 +325,18 @@
             "null"
           ]
         },
-        "guid": {
-          "type": [
-            "string",
-            "null"
-          ]
-        },
         "timestamp": {
           "type": [
             "string",
             "null"
           ],
           "format": "date-time"
+        },
+        "guid": {
+          "type": [
+            "string",
+            "null"
+          ]
         }
       },
       "required": [
@@ -362,18 +362,18 @@
             "null"
           ]
         },
-        "guid": {
-          "type": [
-            "string",
-            "null"
-          ]
-        },
         "timestamp": {
           "type": [
             "string",
             "null"
           ],
           "format": "date-time"
+        },
+        "guid": {
+          "type": [
+            "string",
+            "null"
+          ]
         }
       }
     },
@@ -383,21 +383,6 @@
         "null"
       ],
       "properties": {
-        "externeReferenzen": {
-          "type": [
-            "array",
-            "null"
-          ],
-          "items": {
-            "$ref": "#/definitions/ExterneReferenz"
-          }
-        },
-        "guid": {
-          "type": [
-            "string",
-            "null"
-          ]
-        },
         "boTyp": {
           "type": [
             "string",
@@ -416,6 +401,21 @@
             "null"
           ],
           "format": "date-time"
+        },
+        "externeReferenzen": {
+          "type": [
+            "array",
+            "null"
+          ],
+          "items": {
+            "$ref": "#/definitions/ExterneReferenz"
+          }
+        },
+        "guid": {
+          "type": [
+            "string",
+            "null"
+          ]
         },
         "anrede": {
           "type": [
@@ -545,18 +545,18 @@
         "null"
       ],
       "properties": {
-        "guid": {
-          "type": [
-            "string",
-            "null"
-          ]
-        },
         "timestamp": {
           "type": [
             "string",
             "null"
           ],
           "format": "date-time"
+        },
+        "guid": {
+          "type": [
+            "string",
+            "null"
+          ]
         },
         "kosten": {
           "type": [
@@ -626,15 +626,10 @@
               "BILANZKREISABRECHNUNG",
               "MEHRMINDERMBENGENABRECHNUNG",
               "ENDKUNDENABRECHNUNG",
-              "UEBERMITTLUNG_AN_DAS_HKNR"
+              "UEBERMITTLUNG_AN_DAS_HKNR",
+              "ERMITTLUNG_AUSGEGLICHENHEIT_BILANZKREIS"
             ]
           }
-        },
-        "guid": {
-          "type": [
-            "string",
-            "null"
-          ]
         },
         "timestamp": {
           "type": [
@@ -642,6 +637,12 @@
             "null"
           ],
           "format": "date-time"
+        },
+        "guid": {
+          "type": [
+            "string",
+            "null"
+          ]
         }
       },
       "required": [
@@ -654,6 +655,19 @@
         "null"
       ],
       "properties": {
+        "timestamp": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "format": "date-time"
+        },
+        "guid": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
         "zaehlwerkId": {
           "type": [
             "string",
@@ -804,40 +818,12 @@
             "boolean",
             "null"
           ]
-        },
-        "guid": {
-          "type": [
-            "string",
-            "null"
-          ]
-        },
-        "timestamp": {
-          "type": [
-            "string",
-            "null"
-          ],
-          "format": "date-time"
         }
       }
     }
   },
   "type": "object",
   "properties": {
-    "externeReferenzen": {
-      "type": [
-        "array",
-        "null"
-      ],
-      "items": {
-        "$ref": "#/definitions/ExterneReferenz"
-      }
-    },
-    "guid": {
-      "type": [
-        "string",
-        "null"
-      ]
-    },
     "boTyp": {
       "type": [
         "string",
@@ -860,6 +846,15 @@
     "zaehlernummer": {
       "type": "string"
     },
+    "externeReferenzen": {
+      "type": [
+        "array",
+        "null"
+      ],
+      "items": {
+        "$ref": "#/definitions/ExterneReferenz"
+      }
+    },
     "sparte": {
       "type": "string",
       "enum": [
@@ -869,6 +864,12 @@
         "NAHWAERME",
         "WASSER",
         "ABWASSER"
+      ]
+    },
+    "guid": {
+      "type": [
+        "string",
+        "null"
       ]
     },
     "zaehlerauspraegung": {
@@ -935,7 +936,10 @@
       "format": "date-time"
     },
     "zaehlwerke": {
-      "type": "array",
+      "type": [
+        "array",
+        "null"
+      ],
       "items": {
         "$ref": "#/definitions/Zaehlwerk"
       },
@@ -1051,8 +1055,6 @@
   },
   "required": [
     "zaehlernummer",
-    "sparte",
-    "zaehlertyp",
-    "zaehlwerke"
+    "sparte"
   ]
 }

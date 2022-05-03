@@ -43,9 +43,10 @@ namespace BO4E.BO
         ///     Eindeutige Nummer der Marktlokation bzw. der Messlokation, zu der die Energiemenge gehört
         /// </summary>
         [DefaultValue("|null|")]
-        [JsonProperty(PropertyName = "lokationsId", Required = Required.Always, Order = 4)]
+        [JsonProperty(PropertyName = "lokationsId", Required = Required.Always, Order = 10)]
         [JsonPropertyName("lokationsId")]
-        [ProtoMember(4)]
+        [JsonPropertyOrder(10)]
+        [ProtoMember(10)]
         [DataCategory(DataCategory.POD)]
         [BoKey]
         public string LokationsId { get; set; }
@@ -54,18 +55,20 @@ namespace BO4E.BO
         ///     Gibt an, ob es sich um eine Markt- oder Messlokation handelt.
         /// </summary>
         /// <see cref="Lokationstyp" />
-        [JsonProperty(PropertyName = "lokationsTyp", Required = Required.Always, Order = 5)]
+        [JsonProperty(PropertyName = "lokationsTyp", Required = Required.Always, Order = 11)]
         [JsonPropertyName("lokationsTyp")]
-        [ProtoMember(5)]
+        [JsonPropertyOrder(11)]
+        [ProtoMember(11)]
         [DataCategory(DataCategory.POD)]
         public Lokationstyp LokationsTyp { get; set; }
 
         /// <summary>
         ///     Gibt den <see cref="Verbrauch" /> in einer Zeiteinheit an.
         /// </summary>
-        [JsonProperty(Order = 6, PropertyName = "energieverbrauch")]
+        [JsonProperty(Order = 12, PropertyName = "energieverbrauch")]
         [JsonPropertyName("energieverbrauch")]
-        [ProtoMember(6)]
+        [JsonPropertyOrder(12)]
+        [ProtoMember(12)]
         [DataCategory(DataCategory.METER_READING)]
         [MinLength(1)]
         public List<Verbrauch>? Energieverbrauch { get; set; }
