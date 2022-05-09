@@ -503,5 +503,12 @@ namespace BO4E.BO
         [FieldName("invoiceItemList", Language.EN)]
         public List<Rechnungsposition> Rechnungspositionen { get; set; }
 
-    }
+        /// <summary>
+        ///     Kennzeichen, ob es sich um eine selbstausgestellte Rechnung handelt
+        /// </summary>
+        [ProtoMember(23)]
+        [JsonProperty(Required = Required.Default, Order = 23, PropertyName = "selbstausgestellt")]
+        [JsonPropertyName("selbstausgestellt")]
+        [FieldName("isSelfissued", Language.EN)]
+        public bool Selbstausgestellt { get; set; }
 }
