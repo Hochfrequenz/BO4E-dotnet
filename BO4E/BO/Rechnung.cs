@@ -509,6 +509,14 @@ namespace BO4E.BO
         [ProtoMember(23)]
         [JsonProperty(Required = Required.Default, Order = 23, PropertyName = "selbstausgestellt")]
         [JsonPropertyName("selbstausgestellt")]
-        [FieldName("isSelfissued", Language.EN)]
-        public bool Selbstausgestellt { get; set; }
+        public bool IstSelbstausgestellt { get; set; }
+
+        /// <summary>
+        ///     Kennzeichen, ob bei der Rechnung das Reverse Charge verfahren angewendet wird
+        /// </summary>
+        [ProtoMember(24)]
+        [JsonProperty(Required = Required.Default, Order = 24, PropertyName = "reverse_charge")]
+        [JsonPropertyName("reverse_charge")]
+        public bool IstReverseCharge { get; set; }
+    }
 }
