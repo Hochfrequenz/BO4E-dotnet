@@ -503,5 +503,20 @@ namespace BO4E.BO
         [FieldName("invoiceItemList", Language.EN)]
         public List<Rechnungsposition> Rechnungspositionen { get; set; }
 
+        /// <summary>
+        ///     Kennzeichen, ob es sich um eine selbstausgestellte Rechnung handelt
+        /// </summary>
+        [ProtoMember(23)]
+        [JsonProperty(Required = Required.Default, Order = 23, PropertyName = "istSelbstausgestellt")]
+        [JsonPropertyName("istSelbstausgestellt")]
+        public bool? IstSelbstausgestellt { get; set; }
+
+        /// <summary>
+        ///     Kennzeichen, ob bei der Rechnung das Reverse Charge verfahren angewendet wird
+        /// </summary>
+        [ProtoMember(24)]
+        [JsonProperty(Required = Required.Default, Order = 24, PropertyName = "istReverseCharge")]
+        [JsonPropertyName("istReverseCharge")]
+        public bool? IstReverseCharge { get; set; }
     }
 }
