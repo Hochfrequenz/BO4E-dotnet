@@ -40,7 +40,6 @@ namespace TestBO4E
 
             // BusinessObjects
             typeof(Angebot),
-            typeof(Ansprechpartner),
             typeof(Auftrag),
             typeof(AuftragsStorno),
             typeof(Avis),
