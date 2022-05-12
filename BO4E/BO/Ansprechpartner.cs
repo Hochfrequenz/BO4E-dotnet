@@ -19,6 +19,7 @@ namespace BO4E.BO
         /// </summary>
         [JsonProperty(Required = Required.Default, Order = 4, PropertyName = "anrede")]
         [JsonPropertyName("anrede")]
+        [JsonPropertyOrder(4)]
         [ProtoMember(4)]
         [DataCategory(DataCategory.NAME)]
         public Anrede? Anrede { get; set; }
@@ -30,6 +31,7 @@ namespace BO4E.BO
         /// </summary>
         [JsonProperty(Required = Required.Default, Order = 5, PropertyName = "inviduelleAnrede")]
         [JsonPropertyName("inviduelleAnrede")]
+        [JsonPropertyOrder(5)]
         [ProtoMember(5)]
         [DataCategory(DataCategory.NAME)]
         public string? IndividuelleAnrede { get; set; }
@@ -37,6 +39,7 @@ namespace BO4E.BO
         /// <summary>Möglicher Titel des Ansprechpartners</summary>
         [JsonProperty(Required = Required.Default, Order = 6, PropertyName = "titel")]
         [JsonPropertyName("titel")]
+        [JsonPropertyOrder(6)]
         [ProtoMember(6)]
         [DataCategory(DataCategory.NAME)]
         public Titel? Titel { get; set; }
@@ -44,6 +47,7 @@ namespace BO4E.BO
         /// <summary>Vorname des Ansprechpartners</summary>
         [JsonProperty(Required = Required.Default, Order = 7, PropertyName = "vorname")]
         [JsonPropertyName("vorname")]
+        [JsonPropertyOrder(7)]
         [ProtoMember(7)]
         [DataCategory(DataCategory.NAME)]
         [BoKey]
@@ -52,6 +56,7 @@ namespace BO4E.BO
         /// <summary>Nachname (Familienname) des Ansprechpartners</summary>
         [JsonProperty(Required = Required.Default, Order = 8, PropertyName = "nachname")]
         [JsonPropertyName("nachname")]
+        [JsonPropertyOrder(8)]
         [ProtoMember(8)]
         [DataCategory(DataCategory.NAME)]
         [BoKey]
@@ -60,6 +65,7 @@ namespace BO4E.BO
         /// <summary>E-Mail Adresse</summary>
         [JsonProperty(Required = Required.Default, Order = 9, PropertyName = "eMailAdresse")]
         [JsonPropertyName("eMailAdresse")]
+        [JsonPropertyOrder(9)]
         [ProtoMember(9)]
         [DataCategory(DataCategory.ADDRESS)]
         public string? EMailAdresse { get; set; }
@@ -67,6 +73,7 @@ namespace BO4E.BO
         /// <summary>Weitere Informationen zum Ansprechpartner</summary>
         [JsonProperty(Required = Required.Default, Order = 10, PropertyName = "kommentar")]
         [JsonPropertyName("kommentar")]
+        [JsonPropertyOrder(10)]
         [ProtoMember(10)]
         [DataCategory(DataCategory.NAME)]
         public string? Kommentar { get; set; }
@@ -74,6 +81,7 @@ namespace BO4E.BO
         /// <summary>Der Geschäftspartner, für den dieser Ansprechpartner modelliert wird.</summary>
         [JsonProperty(Required = Required.Default, Order = 11, PropertyName = "geschaeftspartner")]
         [JsonPropertyName("geschaeftspartner")]
+        [JsonPropertyOrder(11)]
         [NonOfficial(NonOfficialCategory
             .UNSPECIFIED)] // it's always required in BO4E, changed it to default 2020-08-31 KK
         [ProtoMember(11)]
@@ -83,6 +91,7 @@ namespace BO4E.BO
         /// <summary> Adresse des Ansprechpartners, falls diese von der Adresse des Geschäftspartners abweicht.</summary>
         [JsonProperty(Required = Required.Default, Order = 12, PropertyName = "adresse")]
         [JsonPropertyName("adresse")]
+        [JsonPropertyOrder(12)]
         [ProtoMember(12)]
         [DataCategory(DataCategory.ADDRESS)]
         public Adresse? Adresse { get; set; }
@@ -92,6 +101,7 @@ namespace BO4E.BO
             .UNSPECIFIED)] //  We suggest to name it "rufnummern" instead of "rufnummer" because it's a list")]
         [JsonProperty(Required = Required.Default, Order = 13, PropertyName = "rufnummern")]
         [JsonPropertyName("rufnummern")]
+        [JsonPropertyOrder(13)]
         [ProtoMember(13)]
         [DataCategory(DataCategory.ADDRESS)]
         public List<Rufnummer>? Rufnummern { get; set; }
@@ -99,6 +109,7 @@ namespace BO4E.BO
         /// <summary>Liste der Abteilungen und Zuständigkeiten des Ansprechpartners.</summary>
         [JsonProperty(Required = Required.Default, Order = 14, PropertyName = "zustaendigkeit")]
         [JsonPropertyName("zustaendigkeit")]
+        [JsonPropertyOrder(14)]
         [ProtoMember(14)]
         public List<Zustaendigkeit>? Zustaendigkeit { get; set; }
     }
