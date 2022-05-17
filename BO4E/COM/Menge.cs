@@ -27,4 +27,11 @@ namespace BO4E.COM
         [ProtoMember(4)]
         public Mengeneinheit? Einheit { get; set; }
     }
+
+       /// <summary>Gibt ggf. einen Korrekturfaktor für die Menge an.</summary>
+        [JsonProperty(PropertyName = "korrekturfaktor", Required = Required.Default)]
+        [JsonPropertyName("korrekturfaktor")]
+        [ProtoMember(5)]
+        public decimal? Korrekturfaktor { get; set; }
+    }
 }
