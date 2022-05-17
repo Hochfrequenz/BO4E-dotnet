@@ -143,18 +143,17 @@ namespace BO4E.BO
         /// <returns></returns>
         public override Energiemenge Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
         {
-            using (Energiemenge.SerializerSemaphore)
+            Energiemenge.SerializerSemaphore.Wait();
+            if (Energiemenge.EnergiemengeSerializerOptions == null)
             {
-                if (Energiemenge.EnergiemengeSerializerOptions == null)
+                Energiemenge.EnergiemengeSerializerOptions = new JsonSerializerOptions(options);
+                while (Energiemenge.EnergiemengeSerializerOptions.Converters.Any(s => s.GetType() == typeof(EnergiemengeConverter)))
                 {
-                    Energiemenge.EnergiemengeSerializerOptions = new JsonSerializerOptions(options);
-                    while (Energiemenge.EnergiemengeSerializerOptions.Converters.Any(s => s.GetType() == typeof(EnergiemengeConverter)))
-                    {
-                        Energiemenge.EnergiemengeSerializerOptions.Converters.Remove(
-                        Energiemenge.EnergiemengeSerializerOptions.Converters.First(s => s.GetType() == typeof(EnergiemengeConverter)));
-                    }
+                    Energiemenge.EnergiemengeSerializerOptions.Converters.Remove(
+                    Energiemenge.EnergiemengeSerializerOptions.Converters.First(s => s.GetType() == typeof(EnergiemengeConverter)));
                 }
             }
+            Energiemenge.SerializerSemaphore.Release();
             var e = JsonSerializer.Deserialize<Energiemenge>(ref reader, Energiemenge.EnergiemengeSerializerOptions);
             if (e.Energieverbrauch == null)
             {
@@ -171,18 +170,17 @@ namespace BO4E.BO
         /// <param name="options"></param>
         public override void Write(Utf8JsonWriter writer, Energiemenge value, JsonSerializerOptions options)
         {
-            using (Energiemenge.SerializerSemaphore)
+            Energiemenge.SerializerSemaphore.Wait();
+            if (Energiemenge.EnergiemengeSerializerOptions == null)
             {
-                if (Energiemenge.EnergiemengeSerializerOptions == null)
+                Energiemenge.EnergiemengeSerializerOptions = new JsonSerializerOptions(options);
+                while (Energiemenge.EnergiemengeSerializerOptions.Converters.Any(s => s.GetType() == typeof(EnergiemengeConverter)))
                 {
-                    Energiemenge.EnergiemengeSerializerOptions = new JsonSerializerOptions(options);
-                    while (Energiemenge.EnergiemengeSerializerOptions.Converters.Any(s => s.GetType() == typeof(EnergiemengeConverter)))
-                    {
-                        Energiemenge.EnergiemengeSerializerOptions.Converters.Remove(
-                        Energiemenge.EnergiemengeSerializerOptions.Converters.First(s => s.GetType() == typeof(EnergiemengeConverter)));
-                    }
+                    Energiemenge.EnergiemengeSerializerOptions.Converters.Remove(
+                    Energiemenge.EnergiemengeSerializerOptions.Converters.First(s => s.GetType() == typeof(EnergiemengeConverter)));
                 }
             }
+            Energiemenge.SerializerSemaphore.Release();
             JsonSerializer.Serialize(writer, value, Energiemenge.EnergiemengeSerializerOptions);
         }
     }
