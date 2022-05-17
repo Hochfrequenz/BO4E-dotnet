@@ -101,7 +101,6 @@ namespace TestBO4E
             //            typeof(BO4E.COM.Marktrolle),
             //#pragma warning disable CS0619
             typeof(MarktpartnerDetails),
-            typeof(Menge),
             typeof(Messlokationszuordnung),
             typeof(Notiz),
             typeof(PhysikalischerWert),

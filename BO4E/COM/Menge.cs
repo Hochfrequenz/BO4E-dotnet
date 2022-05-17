@@ -14,22 +14,25 @@ namespace BO4E.COM
     public class Menge : COM
     {
         /// <summary>Gibt den absoluten Wert der Menge an.</summary>
-        [JsonProperty(PropertyName = "wert", Required = Required.Always)]
+        [JsonProperty(PropertyName = "wert", Required = Required.Always, Order = 10)]
         [JsonPropertyName("wert")]
         [FieldName("value", Language.EN)]
+        [JsonPropertyOrder(10)]
         [ProtoMember(3)]
         public decimal Wert { get; set; }
 
         /// <summary>Gibt die Einheit zum jeweiligen Wert an. Details <see cref="Mengeneinheit" /></summary>
-        [JsonProperty(PropertyName = "einheit", Required = Required.Default)]
+        [JsonProperty(PropertyName = "einheit", Required = Required.Default, Order = 11)]
         [JsonPropertyName("einheit")]
         [FieldName("unit", Language.EN)]
+        [JsonPropertyOrder(11)]
         [ProtoMember(4)]
         public Mengeneinheit? Einheit { get; set; }
 
         /// <summary>Gibt ggf. einen Korrekturfaktor für die Menge an.</summary>
-        [JsonProperty(PropertyName = "korrekturfaktor", Required = Required.Default)]
+        [JsonProperty(PropertyName = "korrekturfaktor", Required = Required.Default, Order = 12)]
         [JsonPropertyName("korrekturfaktor")]
+        [JsonPropertyOrder(12)]
         [ProtoMember(5)]
         public decimal? Korrekturfaktor { get; set; }
     }
