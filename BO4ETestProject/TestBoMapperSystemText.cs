@@ -4,12 +4,15 @@ using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Text.Json;
+using System.Threading.Tasks;
+
 using BO4E;
 using BO4E.BO;
 using BO4E.COM;
 using BO4E.ENUM;
 using BO4E.meta;
 using BO4E.meta.LenientConverters;
+
 using Microsoft.VisualStudio.TestTools.UnitTesting; //using BO4E.Extensions;
 
 namespace TestBO4E
@@ -158,10 +161,32 @@ namespace TestBO4E
         public void TestVertragStringToInt()
         {
             var jsonInput = GetInputNodeAsJson("BoMapperTests/Vertrag_lenient_String.json");
-            var lenients = LenientParsing.STRING_TO_INT;
+            var lenients = LenientParsing.MOST_LENIENT;
             var v = JsonSerializer.Deserialize<Vertrag>(jsonInput, lenients.GetJsonSerializerOptions());
             Assert.AreEqual(Vertragstatus.AKTIV, v.Vertragstatus);
             Assert.AreEqual(v.Vertragskonditionen.AnzahlAbschlaege, 12);
+        }
+
+        [TestMethod]
+        public async Task TestVertragSerializerParallel()
+        {
+            var jsonInput = GetInputNodeAsJson("BoMapperTests/Vertrag_lenient_String.json");
+            var lenients = LenientParsing.MOST_LENIENT;
+            var serializeOptions = lenients.GetJsonSerializerOptions();
+            serializeOptions.Converters.Add(new VertragsConverter());
+            var v = JsonSerializer.Deserialize<Vertrag>(jsonInput, serializeOptions);
+            Assert.AreEqual(Vertragstatus.AKTIV, v.Vertragstatus);
+            Assert.AreEqual(v.Vertragskonditionen.AnzahlAbschlaege, 12);
+            Vertrag.VertragsSerializerOptions = null;
+            var taskList = new List<Task>();
+            for (int i = 0; i < 10; i++)
+            {
+                taskList.Add(Task.Run(() =>
+                {
+                    JsonSerializer.Serialize<Vertrag>(v, serializeOptions);
+                }));
+            }
+            await Task.WhenAll(taskList);
         }
 
         [TestMethod]

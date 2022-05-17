@@ -240,18 +240,16 @@ namespace BO4E.BO
         /// <returns></returns>
         public override Vertrag Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
         {
-            using (Vertrag.SerializerSemaphore)
+            Vertrag.SerializerSemaphore.Wait();
+            try
             {
-                if (Vertrag.VertragsSerializerOptions == null)
-                {
-                    Vertrag.VertragsSerializerOptions = new JsonSerializerOptions(options);
-                    while (Vertrag.VertragsSerializerOptions.Converters.Any(s => s.GetType() == typeof(VertragsConverter)))
-                    {
-                        Vertrag.VertragsSerializerOptions.Converters.Remove(
-                        Vertrag.VertragsSerializerOptions.Converters.First(s => s.GetType() == typeof(VertragsConverter)));
-                    }
-                }
+                RemoveDuplicateVertragsConverter(options);
             }
+            finally
+            {
+                Vertrag.SerializerSemaphore.Release();
+            }
+
             var v = JsonSerializer.Deserialize<Vertrag>(ref reader, Vertrag.VertragsSerializerOptions);
             if ((v.Vertragsteile == null || v.Vertragsteile.Count == 0) && v.UserProperties != null &&
                 v.UserProperties.ContainsKey("lokationsId"))
@@ -265,7 +263,19 @@ namespace BO4E.BO
                     }
                 };
             return v;
+        }
 
+        private static void RemoveDuplicateVertragsConverter(JsonSerializerOptions options)
+        {
+            if (Vertrag.VertragsSerializerOptions == null)
+            {
+                Vertrag.VertragsSerializerOptions = new JsonSerializerOptions(options);
+                while (Vertrag.VertragsSerializerOptions.Converters.Any(s => s.GetType() == typeof(VertragsConverter)))
+                {
+                    Vertrag.VertragsSerializerOptions.Converters.Remove(
+                        Vertrag.VertragsSerializerOptions.Converters.First(s => s.GetType() == typeof(VertragsConverter)));
+                }
+            }
         }
 
         /// <summary>
@@ -276,17 +286,14 @@ namespace BO4E.BO
         /// <param name="options"></param>
         public override void Write(Utf8JsonWriter writer, Vertrag value, JsonSerializerOptions options)
         {
-            using (Vertrag.SerializerSemaphore)
+            Vertrag.SerializerSemaphore.Wait();
+            try
             {
-                if (Vertrag.VertragsSerializerOptions == null)
-                {
-                    Vertrag.VertragsSerializerOptions = new JsonSerializerOptions(options);
-                    while (Vertrag.VertragsSerializerOptions.Converters.Any(s => s.GetType() == typeof(VertragsConverter)))
-                    {
-                        Vertrag.VertragsSerializerOptions.Converters.Remove(
-                        Vertrag.VertragsSerializerOptions.Converters.First(s => s.GetType() == typeof(VertragsConverter)));
-                    }
-                }
+                RemoveDuplicateVertragsConverter(options);
+            }
+            finally
+            {
+                Vertrag.SerializerSemaphore.Release();
             }
             JsonSerializer.Serialize(writer, value, Vertrag.VertragsSerializerOptions);
         }
