@@ -26,6 +26,14 @@ namespace BO4E.ENUM
         TES,
 
         /// <summary>Tagesparameterabhängige Lastprofilsumme</summary>
-        TLS
+        TLS,
+        /// <summary>
+        /// gemeinsame Messung aus SLS und TLS
+        /// </summary>
+        SLS_TLS,
+        /// <summary>
+        /// Gemeinsame Messung aus SES und TES
+        /// </summary>
+        SES_TES,
     }
 }

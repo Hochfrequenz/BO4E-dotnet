@@ -294,9 +294,9 @@ enum Dienstleistungstyp {
 }
 message Energiemenge {
    option (.protobuf_net.msgopt).namespace = "BO4E.BO";
-   string LokationsId = 4; // default value could not be applied: |null|
-   Lokationstyp LokationsTyp = 5;
-   repeated Verbrauch Energieverbrauch = 6;
+   string LokationsId = 10; // default value could not be applied: |null|
+   Lokationstyp LokationsTyp = 11;
+   repeated Verbrauch Energieverbrauch = 12;
 }
 enum Energierichtung {
    option (.protobuf_net.enumopt).namespace = "BO4E.ENUM";
@@ -964,6 +964,18 @@ enum Messwerterfassung {
    FERNAUSLESBAR = 0;
    MANUELL_AUSGELESENE = 1;
 }
+enum Messwertstatus {
+   option (.protobuf_net.enumopt).namespace = "BO4E.ENUM";
+   ABGELESEN = 0;
+   ERSATZWERT = 1;
+   VOLAEUFIGERWERT = 2;
+   ANGABE_FUER_LIEFERSCHEIN = 3;
+   VORSCHLAGSWERT = 4;
+   NICHT_VERWENDBAR = 5;
+   PROGNOSEWERT = 6;
+   ENERGIEMENGESUMMIERT = 7;
+   FEHLT = 8;
+}
 enum Netzebene {
    option (.protobuf_net.enumopt).namespace = "BO4E.ENUM";
    NSP = 0;
@@ -1079,6 +1091,8 @@ message Rechnung {
    Betrag Zuzahlen = 20;
    repeated Steuerbetrag Steuerbetraege = 21;
    repeated Rechnungsposition Rechnungspositionen = 22;
+   bool IstSelbstausgestellt = 23;
+   bool IstReverseCharge = 24;
 }
 message Rechnungsposition {
    option (.protobuf_net.msgopt).namespace = "BO4E.COM";
@@ -1658,17 +1672,6 @@ enum Waermenutzung {
    WAERMEPUMPE = 1;
    DIREKTHEIZUNG = 2;
 }
-enum Messwertstatus {
-   option (.protobuf_net.enumopt).namespace = "BO4E.ENUM";
-   WAHRER_WERT = 0;
-   ERSATZWERT = 1;
-   VORLAEUFIGER_WERT = 2;
-   ANGABE_FUER_LIEFERSCHEIN = 3;
-   VORSCHLAGSWERT = 4;
-   NICHT_VERWENDBARER_WERT = 5;
-   PROGNOSEWERT = 6;
-   ENERGIEMENGE_SUMMIERT = 7;
-}
 enum Wertermittlungsverfahren {
    option (.protobuf_net.enumopt).namespace = "BO4E.ENUM";
    PROGNOSE = 0;
@@ -1767,6 +1770,8 @@ enum Zeitreihentyp {
    SLS = 4;
    TES = 5;
    TLS = 6;
+   SLS_TLS = 7;
+   SES_TES = 8;
 }
 message Zustaendigkeit {
    option (.protobuf_net.msgopt).namespace = "BO4E.COM";

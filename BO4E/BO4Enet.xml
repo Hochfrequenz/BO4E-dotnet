@@ -588,7 +588,7 @@
         <member name="P:BO4E.BO.Bilanzierung.Verbrauchsaufteilung">
             <summary>
              Verbrauchsaufteilung in % zwischen SLP und TLP-Profil
-             1. [Gemessene Energiemenge der OBIS "nicht Schwachlast"] * [Verbrauchsaufteilung in % / 100%] = [zu verlagernde Energiemenge] 
+             1. [Gemessene Energiemenge der OBIS "nicht Schwachlast"] * [Verbrauchsaufteilung in % / 100%] = [zu verlagernde Energiemenge]
              2. [Gemessene Energiemenge der OBIS "Schwachlast"] - [zu verlagernde Energiemenge] = [Ermittelte Energiemenge für
                 Schwachlast]
              3. [Gemessene Energiemenge der OBIS "nicht Schwachlast"] + [zu verlagernde Energiemenge] = [Ermittelte Energiemenge für nicht
@@ -1723,6 +1723,16 @@
         <member name="P:BO4E.BO.Rechnung.Rechnungspositionen">
             <summary>
                 Die Rechnungspositionen. Details siehe <see cref="T:BO4E.COM.Rechnungsposition" />
+            </summary>
+        </member>
+        <member name="P:BO4E.BO.Rechnung.IstSelbstausgestellt">
+            <summary>
+                Kennzeichen, ob es sich um eine selbstausgestellte Rechnung handelt
+            </summary>
+        </member>
+        <member name="P:BO4E.BO.Rechnung.IstReverseCharge">
+            <summary>
+                Kennzeichen, ob bei der Rechnung das Reverse Charge verfahren angewendet wird
             </summary>
         </member>
         <member name="T:BO4E.BO.Region">
@@ -3785,11 +3795,11 @@
             </summary>
             <seealso cref="T:BO4E.ENUM.Wertermittlungsverfahren" />
         </member>
-        <member name="P:BO4E.COM.Verbrauch.WertMengeArt">
+        <member name="P:BO4E.COM.Verbrauch.Messwertstatus">
             <summary>
                 Enthält die Gültigkeit des angegebenen Wertes
             </summary>
-            <seealso cref="T:BO4E.ENUM.WertMengeArt" />
+            <seealso cref="T:BO4E.ENUM.Messwertstatus" />
         </member>
         <member name="P:BO4E.COM.Verbrauch.StatusZusatzInformationen">
             <summary>
@@ -7196,6 +7206,38 @@
         <member name="F:BO4E.ENUM.Messwerterfassung.MANUELL_AUSGELESENE">
             <summary>MMR: manuell ausgelesene Zähler</summary>
         </member>
+        <member name="T:BO4E.ENUM.Messwertstatus">
+            <summary>
+            Gibt auskunft über die Gültigkeit des angegebenen Verbrauchswertes. Bildet MSCONS SG10 QTY 6063 ab. 
+            </summary>
+        </member>
+        <member name="F:BO4E.ENUM.Messwertstatus.ABGELESEN">
+            <summary> Wahrer Wert: 220 </summary>
+        </member>
+        <member name="F:BO4E.ENUM.Messwertstatus.ERSATZWERT">
+            <summary> Ersatzwert: 67 </summary>
+        </member>
+        <member name="F:BO4E.ENUM.Messwertstatus.VOLAEUFIGERWERT">
+            <summary> Vorläufiger Wert: Z18 </summary>
+        </member>
+        <member name="F:BO4E.ENUM.Messwertstatus.ANGABE_FUER_LIEFERSCHEIN">
+            <summary> Angabe für Lieferschein: Z31 </summary>
+        </member>
+        <member name="F:BO4E.ENUM.Messwertstatus.VORSCHLAGSWERT">
+            <summary> Vorschlagswert: 201 </summary>
+        </member>
+        <member name="F:BO4E.ENUM.Messwertstatus.NICHT_VERWENDBAR">
+            <summary> Nicht verwendbarer Wert: 20 </summary>
+        </member>
+        <member name="F:BO4E.ENUM.Messwertstatus.PROGNOSEWERT">
+            <summary> Prognosewert: 187 </summary>
+        </member>
+        <member name="F:BO4E.ENUM.Messwertstatus.ENERGIEMENGESUMMIERT">
+            <summary> Energiemenge summiert: 79 </summary>
+        </member>
+        <member name="F:BO4E.ENUM.Messwertstatus.FEHLT">
+            <summary> Fehlender Wert: Z30 </summary>
+        </member>
         <member name="T:BO4E.ENUM.Netzebene">
             <summary>Auflistung möglicher Netzebenen innerhalb der Energiearten Strom und Gas.</summary>
         </member>
@@ -9571,35 +9613,6 @@
                 Messung
             </summary>
         </member>
-        <member name="T:BO4E.ENUM.WertMengeArt">
-            <summary>
-            Gibt auskunft über die Gültigkeit des angegebenen Verbrauchswertes. Bildet MSCONS SG10 QTY 6063 ab. 
-            </summary>
-        </member>
-        <member name="F:BO4E.ENUM.WertMengeArt.WAHRER_WERT">
-            <summary> Wahrer Wert: 220 </summary>
-        </member>
-        <member name="F:BO4E.ENUM.WertMengeArt.ERSATZWERT">
-            <summary> Ersatzwert: 67 </summary>
-        </member>
-        <member name="F:BO4E.ENUM.WertMengeArt.VORLAEUFIGER_WERT">
-            <summary> Vorläufiger Wert: Z18 </summary>
-        </member>
-        <member name="F:BO4E.ENUM.WertMengeArt.ANGABE_FUER_LIEFERSCHEIN">
-            <summary> Angabe für Lieferschein: Z31 </summary>
-        </member>
-        <member name="F:BO4E.ENUM.WertMengeArt.VORSCHLAGSWERT">
-            <summary> Vorschlagswert: 201 </summary>
-        </member>
-        <member name="F:BO4E.ENUM.WertMengeArt.NICHT_VERWENDBARER_WERT">
-            <summary> Nicht verwendbarer Wert: 20 </summary>
-        </member>
-        <member name="F:BO4E.ENUM.WertMengeArt.PROGNOSEWERT">
-            <summary> Prognosewert: 187 </summary>
-        </member>
-        <member name="F:BO4E.ENUM.WertMengeArt.ENERGIEMENGE_SUMMIERT">
-            <summary> Energiemenge summiert: 79 </summary>
-        </member>
         <member name="T:BO4E.ENUM.Zaehlerauspraegung">
             <summary>* Gibt an, ob es sich um einen Einrichtungs- oder Zweirichtungszähler handelt.</summary>
         </member>
@@ -9737,6 +9750,16 @@
         </member>
         <member name="F:BO4E.ENUM.Zeitreihentyp.TLS">
             <summary>Tagesparameterabhängige Lastprofilsumme</summary>
+        </member>
+        <member name="F:BO4E.ENUM.Zeitreihentyp.SLS_TLS">
+            <summary>
+            gemeinsame Messung aus SLS und TLS
+            </summary>
+        </member>
+        <member name="F:BO4E.ENUM.Zeitreihentyp.SES_TES">
+            <summary>
+            Gemeinsame Messung aus SES und TES
+            </summary>
         </member>
         <member name="T:BO4E.meta.Bo4eUri">
             <summary>
