@@ -1096,20 +1096,21 @@ message Rechnung {
 }
 message Rechnungsposition {
    option (.protobuf_net.msgopt).namespace = "BO4E.COM";
-   int32 Positionsnummer = 3;
-   .google.protobuf.Timestamp LieferungVon = 4;
-   .google.protobuf.Timestamp LieferungBis = 5;
-   string Positionstext = 6;
-   Mengeneinheit Zeiteinheit = 7;
-   BDEWArtikelnummer Artikelnummer = 8;
-   string LokationsId = 9;
-   Menge PositionsMenge = 10;
-   Menge ZeitbezogeneMenge = 11;
-   Preis Einzelpreis = 12;
-   Betrag TeilsummeNetto = 13;
-   Betrag TeilrabattNetto = 14;
-   Steuerbetrag TeilsummeSteuer = 15;
-   string VertragskontoId = 16;
+   int32 Positionsnummer = 1;
+   .google.protobuf.Timestamp LieferungVon = 2;
+   .google.protobuf.Timestamp LieferungBis = 3;
+   string Positionstext = 4;
+   Mengeneinheit Zeiteinheit = 5;
+   BDEWArtikelnummer Artikelnummer = 6;
+   string LokationsId = 7;
+   Menge PositionsMenge = 8;
+   Menge ZeitbezogeneMenge = 9;
+   .bcl.Decimal Korrekturfaktor = 10;
+   Preis Einzelpreis = 11;
+   Betrag TeilsummeNetto = 12;
+   Betrag TeilrabattNetto = 13;
+   Steuerbetrag TeilsummeSteuer = 14;
+   string VertragskontoId = 15;
    string VertragsId = 1017;
    RechnungspositionsStatus Status = 1018;
 }
