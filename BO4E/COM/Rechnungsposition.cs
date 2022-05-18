@@ -18,14 +18,15 @@ namespace BO4E.COM
         /// <summary>Fortlaufende Nummer für die Rechnungsposition.</summary>
         [JsonProperty(PropertyName = "positionsnummer", Required = Required.Always)]
         [JsonPropertyName("positionsnummer")]
+        [JsonPropertyOrder(1)]
         [FieldName("invoiceItemNumber", Language.EN)]
-        [ProtoMember(3)]
+        [ProtoMember(1)]
         public int Positionsnummer { get; set; }
 
 
         [System.Text.Json.Serialization.JsonIgnore]
         [Newtonsoft.Json.JsonIgnore]
-        [ProtoMember(4, Name = nameof(LieferungVon))]
+        [ProtoMember(2, Name = nameof(LieferungVon))]
         [CompatibilityLevel(CompatibilityLevel.Level240)]
         private DateTime _LieferungVon
         {
@@ -35,6 +36,7 @@ namespace BO4E.COM
         /// <summary>Start der Lieferung für die abgerechnete Leistung.</summary>
         [JsonProperty(PropertyName = "lieferungVon", Required = Required.Always)]
         [JsonPropertyName("lieferungVon")]
+        [JsonPropertyOrder(2)]
         [FieldName("deliveryStart", Language.EN)]
         [ProtoIgnore]
         [Newtonsoft.Json.JsonConverter(typeof(LenientDateTimeConverter))]
@@ -43,7 +45,7 @@ namespace BO4E.COM
 
         [System.Text.Json.Serialization.JsonIgnore]
         [Newtonsoft.Json.JsonIgnore]
-        [ProtoMember(5, Name = nameof(LieferungBis))]
+        [ProtoMember(3, Name = nameof(LieferungBis))]
         [CompatibilityLevel(CompatibilityLevel.Level240)]
         private DateTime _LieferungBis
         {
@@ -53,6 +55,7 @@ namespace BO4E.COM
         /// <summary>Ende der Lieferung für die abgerechnete Leistung.</summary>
         [JsonProperty(PropertyName = "lieferungBis", Required = Required.Always)]
         [JsonPropertyName("lieferungBis")]
+        [JsonPropertyOrder(3)]
         [FieldName("deliveryEnd", Language.EN)]
         [ProtoIgnore]
         [Newtonsoft.Json.JsonConverter(typeof(LenientDateTimeConverter))]
@@ -61,8 +64,9 @@ namespace BO4E.COM
         /// <summary>Bezeichnung für die abgerechnete Position.</summary>
         [JsonProperty(PropertyName = "positionstext", Required = Required.Always)]
         [JsonPropertyName("positionstext")]
+        [JsonPropertyOrder(4)]
         [FieldName("invoiceItemText", Language.EN)]
-        [ProtoMember(6)]
+        [ProtoMember(4)]
         public string Positionstext { get; set; }
 
         /// <summary>
@@ -71,8 +75,9 @@ namespace BO4E.COM
         /// </summary>
         [JsonProperty(PropertyName = "zeiteinheit", Required = Required.Default)]
         [JsonPropertyName("zeiteinheit")]
+        [JsonPropertyOrder(5)]
         [FieldName("unit", Language.EN)]
-        [ProtoMember(7)]
+        [ProtoMember(5)]
         public Mengeneinheit? Zeiteinheit { get; set; }
 
         /// <summary>
@@ -81,20 +86,23 @@ namespace BO4E.COM
         /// </summary>
         [JsonProperty(PropertyName = "artikelnummer", Required = Required.Default)]
         [JsonPropertyName("artikelnummer")]
-        [ProtoMember(8)]
+        [JsonPropertyOrder(6)]
+        [ProtoMember(6)]
         public BDEWArtikelnummer? Artikelnummer { get; set; }
 
         /// <summary>Marktlokation, die zu dieser Position gehört.</summary>
         [JsonProperty(PropertyName = "lokationsId", Required = Required.Default)]
         [JsonPropertyName("lokationsId")]
-        [ProtoMember(9)]
+        [JsonPropertyOrder(7)]
+        [ProtoMember(7)]
         public string? LokationsId { get; set; }
 
         /// <summary>Die abgerechnete Menge mit Einheit. Z.B. 4372 kWh. Details <see cref="Menge" /></summary>
         [JsonProperty(PropertyName = "positionsMenge", Required = Required.Default)]
         [JsonPropertyName("positionsMenge")]
+        [JsonPropertyOrder(8)]
         [FieldName("amount", Language.EN)]
-        [ProtoMember(10)]
+        [ProtoMember(8)]
         public Menge? PositionsMenge { get; set; }
 
         /// <summary>
@@ -103,15 +111,25 @@ namespace BO4E.COM
         /// </summary>
         [JsonProperty(PropertyName = "zeitbezogeneMenge", Required = Required.Default)]
         [JsonPropertyName("zeitbezogeneMenge")]
+        [JsonPropertyOrder(9)]
         [FieldName("timeBasedAmount", Language.EN)]
-        [ProtoMember(11)]
+        [ProtoMember(9)]
         public Menge? ZeitbezogeneMenge { get; set; }
+
+        /// <summary>Gibt ggf. einen Korrekturfaktor für die Menge an.</summary>
+        [JsonProperty(PropertyName = "korrekturfaktor", Required = Required.Default, Order = 12)]
+        [JsonPropertyName("korrekturfaktor")]
+        [JsonPropertyOrder(10)]
+        [ProtoMember(10)]
+        [NonOfficial(NonOfficialCategory.CUSTOMER_REQUIREMENTS)]
+        public decimal? Korrekturfaktor { get; set; }
 
         /// <summary>Der Preis für eine Einheit der energetischen Menge. Details <see cref="Preis" /></summary>
         [JsonProperty(PropertyName = "einzelpreis", Required = Required.Always)]
         [JsonPropertyName("einzelpreis")]
+        [JsonPropertyOrder(11)]
         [FieldName("unitCost", Language.EN)]
-        [ProtoMember(12)]
+        [ProtoMember(11)]
         public Preis Einzelpreis { get; set; }
 
         /// <summary>
@@ -120,15 +138,17 @@ namespace BO4E.COM
         /// </summary>
         [JsonProperty(PropertyName = "teilsummeNetto", Required = Required.Default)]
         [JsonPropertyName("teilsummeNetto")]
+        [JsonPropertyOrder(12)]
         [FieldName("subtotalNet", Language.EN)]
-        [ProtoMember(13)]
+        [ProtoMember(12)]
         public Betrag? TeilsummeNetto { get; set; }
 
         /// <summary>Nettobetrag für den Rabatt dieser Position. Details <see cref="Betrag" /></summary>
         [JsonProperty(PropertyName = "teilrabattNetto", Required = Required.Default)]
         [JsonPropertyName("teilrabattNetto")]
+        [JsonPropertyOrder(13)]
         [FieldName("someDiscountNet", Language.EN)]
-        [ProtoMember(14)]
+        [ProtoMember(13)]
         public Betrag? TeilrabattNetto { get; set; }
 
         /// <summary>
@@ -136,8 +156,9 @@ namespace BO4E.COM
         /// </summary>
         [JsonProperty(PropertyName = "teilsummeSteuer", Required = Required.Default)]
         [JsonPropertyName("teilsummeSteuer")]
+        [JsonPropertyOrder(14)]
         [FieldName("subtotalTax", Language.EN)]
-        [ProtoMember(15)]
+        [ProtoMember(14)]
         public Steuerbetrag? TeilsummeSteuer { get; set; }
 
         /// <summary>
@@ -147,9 +168,10 @@ namespace BO4E.COM
         /// </summary>
         [JsonProperty(PropertyName = "vertragskontoId", Required = Required.Default)]
         [JsonPropertyName("vertragskontoId")]
+        [JsonPropertyOrder(15)]
         [Obsolete("Please use vertragsId instead of vertragskontoId", false)]
         [FieldName("contractAccountId", Language.EN)]
-        [ProtoMember(16)]
+        [ProtoMember(15)]
         public string? VertragskontoId { get; set; }
 
         /// <summary>
@@ -159,6 +181,7 @@ namespace BO4E.COM
         /// </summary>
         [JsonProperty(PropertyName = "vertragsId", Required = Required.Default)]
         [JsonPropertyName("vertragsId")]
+        [JsonPropertyOrder(16)]
         [ProtoMember(1017)]
         [NonOfficial(NonOfficialCategory.CUSTOMER_REQUIREMENTS)]
         public string? VertragsId { get; set; }
@@ -169,6 +192,7 @@ namespace BO4E.COM
         /// </summary>
         [JsonProperty(PropertyName = "status", Required = Required.Default)]
         [JsonPropertyName("status")]
+        [JsonPropertyOrder(17)]
         [NonOfficial(NonOfficialCategory.CUSTOMER_REQUIREMENTS)]
         [ProtoMember(1018)]
         public RechnungspositionsStatus? Status { get; set; }
