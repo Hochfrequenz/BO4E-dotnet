@@ -110,7 +110,6 @@ namespace TestBO4E
             typeof(Preisposition),
             typeof(Preisstaffel),
             typeof(Rechenschritt),
-            typeof(Rechnungsposition),
             typeof(RechnungspositionFlat),
             typeof(RegionaleGueltigkeit),
             typeof(RegionalePreisgarantie),
