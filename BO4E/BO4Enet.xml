@@ -3266,6 +3266,9 @@
                 darauf wird der Preis aufgeteilt. Details <see cref="T:BO4E.COM.Menge" />
             </summary>
         </member>
+        <member name="P:BO4E.COM.Rechnungsposition.Korrekturfaktor">
+            <summary>Gibt ggf. einen Korrekturfaktor für die Menge an.</summary>
+        </member>
         <member name="P:BO4E.COM.Rechnungsposition.Einzelpreis">
             <summary>Der Preis für eine Einheit der energetischen Menge. Details <see cref="T:BO4E.COM.Preis" /></summary>
         </member>
