@@ -1696,6 +1696,7 @@ message Zaehler {
    ZaehlertypSpezifikation Zaehlertypspezifikation = 1017;
    Befestigungsart Befestigungsart = 1018;
    Geraetemerkmal Zaehlergroesse = 1019;
+   repeated Hardware Geraete = 1020;
 }
 enum Zaehlerauspraegung {
    option (.protobuf_net.enumopt).namespace = "BO4E.ENUM";
