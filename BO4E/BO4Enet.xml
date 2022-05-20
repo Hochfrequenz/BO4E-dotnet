@@ -2076,6 +2076,9 @@
                 Zaehlergroesse
             </summary>
         </member>
+        <member name="P:BO4E.BO.Zaehler.Geraete">
+            <summary>Liste der Hardware, die zu diesem Zähler gehören.</summary>
+        </member>
         <member name="T:BO4E.COM.Abweichung">
             <summary>
             Zur Angabe einer Abweichung bei Ablehnung einer COMDIS. (REMADV SG5 RFF und SG7 AJT/FTX)
