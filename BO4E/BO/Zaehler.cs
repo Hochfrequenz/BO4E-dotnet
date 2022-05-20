@@ -177,11 +177,11 @@ namespace BO4E.BO
         [ProtoMember(1019)]
         [NonOfficial(NonOfficialCategory.REGULATORY_REQUIREMENTS)]
         public Geraetemerkmal? Zaehlergroesse { get; set; }
-        /// <summary>Liste der Hardware, die zu diesem Zähler gehören.</summary>
+        /// <summary>Liste der Geräte, die zu diesem Zähler gehören.</summary>
         [JsonProperty(PropertyName = "geraete", Required = Required.Default, Order = 20)]
         [JsonPropertyOrder(20)]
         [JsonPropertyName("geraete")]
         [ProtoMember(1020)]
-        public List<Hardware>? Geraete { get; set; }
+        public List<Geraet>? Geraete { get; set; }
     }
 }
