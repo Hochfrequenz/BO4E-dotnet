@@ -59,7 +59,6 @@ namespace TestBO4E
             typeof(PreisblattUmlagen),
             typeof(Rechnung),
             typeof(Region),
-            typeof(Reklamation),
             typeof(Sperrauftrag),
             typeof(SperrauftragsStorno),
             typeof(Statusbericht),
