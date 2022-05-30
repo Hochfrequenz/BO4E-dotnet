@@ -4,187 +4,6 @@
         <name>BO4Enet</name>
     </assembly>
     <members>
-        <member name="T:BO4E.BoMapper">
-            <summary>
-                This class maps generic JObjects to BO4E business objects.
-            </summary>
-        </member>
-        <member name="F:BO4E.BoMapper.PackagePrefix">
-            <summary>
-                namespace.subnamespace for the BO4E package. maybe there's a more elegant way using self reflection.
-            </summary>
-        </member>
-        <member name="M:BO4E.BoMapper.MapObject(Newtonsoft.Json.Linq.JObject,BO4E.meta.LenientConverters.LenientParsing)">
-            <summary>
-                shortcut for MapObject with an empty userProperties white list
-            </summary>
-            <param name="jobject">business object json</param>
-            <param name="lenient">lenient parsing flags</param>
-            <returns>
-                <see cref="M:BO4E.BoMapper.MapObject(System.String,Newtonsoft.Json.Linq.JObject,BO4E.meta.LenientConverters.LenientParsing)" />
-            </returns>
-        </member>
-        <member name="M:BO4E.BoMapper.MapObject(Newtonsoft.Json.Linq.JObject,System.Collections.Generic.HashSet{System.String},BO4E.meta.LenientConverters.LenientParsing)">
-            <summary>
-                shortcut for <see cref="M:BO4E.BoMapper.MapObject(System.String,Newtonsoft.Json.Linq.JObject,BO4E.meta.LenientConverters.LenientParsing)" /> iff <paramref name="jobject" /> has key
-                'boTyp'
-            </summary>
-            <param name="jobject">business object json</param>
-            <param name="lenient">lenient parsing flags</param>
-            <param name="userPropertiesWhiteList">white list of non BO4E standard field you'd like to have de-serialized</param>
-            <returns>
-                <see cref="M:BO4E.BoMapper.MapObject(System.String,Newtonsoft.Json.Linq.JObject,BO4E.meta.LenientConverters.LenientParsing)" />
-            </returns>
-        </member>
-        <member name="M:BO4E.BoMapper.MapObject(System.String,Newtonsoft.Json.Linq.JObject,BO4E.meta.LenientConverters.LenientParsing)">
-            <summary>
-                <see cref="M:BO4E.BoMapper.MapObject(System.String,Newtonsoft.Json.Linq.JObject,System.Collections.Generic.HashSet{System.String},BO4E.meta.LenientConverters.LenientParsing)" /> with empty user properties white list
-            </summary>
-        </member>
-        <member name="M:BO4E.BoMapper.MapObject(System.Type,Newtonsoft.Json.Linq.JObject,BO4E.meta.LenientConverters.LenientParsing)">
-            <summary>
-                <see cref="M:BO4E.BoMapper.MapObject(System.Type,Newtonsoft.Json.Linq.JObject,System.Collections.Generic.HashSet{System.String},BO4E.meta.LenientConverters.LenientParsing)" /> with empty user properties white list
-            </summary>
-        </member>
-        <member name="M:BO4E.BoMapper.MapObject``1(Newtonsoft.Json.Linq.JObject,BO4E.meta.LenientConverters.LenientParsing)">
-            <summary>
-                <see cref="M:BO4E.BoMapper.MapObject(System.Type,Newtonsoft.Json.Linq.JObject,System.Collections.Generic.HashSet{System.String},BO4E.meta.LenientConverters.LenientParsing)" />
-            </summary>
-        </member>
-        <member name="M:BO4E.BoMapper.MapObject(System.String,Newtonsoft.Json.Linq.JObject,System.Collections.Generic.HashSet{System.String},BO4E.meta.LenientConverters.LenientParsing)">
-            <summary>
-                <see cref="M:BO4E.BoMapper.MapObject(System.Type,Newtonsoft.Json.Linq.JObject,System.Collections.Generic.HashSet{System.String},BO4E.meta.LenientConverters.LenientParsing)" />
-            </summary>
-            <param name="businessObjectName"></param>
-            <param name="jobject"></param>
-            <param name="userPropertiesWhiteList"></param>
-            <param name="lenient"></param>
-            <returns></returns>
-        </member>
-        <member name="M:BO4E.BoMapper.MapObject(System.Type,Newtonsoft.Json.Linq.JObject,System.Collections.Generic.HashSet{System.String},BO4E.meta.LenientConverters.LenientParsing)">
-            <summary>
-                This method tries to map the given jobject to a BO4E style
-                Business Object of a given type. It works using reflection.
-            </summary>
-            If the mapping fails, there either is no BO with the given name or
-            you mixed up or forgot some attributes. Most of assertion errors
-            are likely to happen due to misspelled and case sensitive attributes.
-            The assertion error message should be a good hint to what is wrong.
-            If the method passes without an assertion error, there are at
-            least no unknown or wrong attributes.
-            <param name="jobject">JObject that should be mapped to a BO4E business object.</param>
-            <param name="userPropertiesWhiteList">white list of non BO4E standard field you'd like to have de-serialised</param>
-            <param name="businessObjectType">type of the business object</param>
-            <param name="lenient">allow less strict input objects</param>
-            <returns>
-                <list type="bullet">
-                    <item>
-                        <description>
-                            null iff there is no BO4E Business Object that matches the provided businessObjectName. Check
-                            the case sensitive spelling of the business object name
-                        </description>
-                    </item>
-                    <item>
-                        <description>
-                            a BO4E business object (<see cref="T:BO4E.BO.BusinessObject" />) of the type provided in
-                            businessObjectName
-                        </description>
-                    </item>
-                </list>
-            </returns>
-        </member>
-        <member name="M:BO4E.BoMapper.MapObject``1(Newtonsoft.Json.Linq.JObject,System.Collections.Generic.HashSet{System.String},BO4E.meta.LenientConverters.LenientParsing)">
-            <summary>
-                <see cref="M:BO4E.BoMapper.MapObject(System.Type,Newtonsoft.Json.Linq.JObject,System.Collections.Generic.HashSet{System.String},BO4E.meta.LenientConverters.LenientParsing)" />
-            </summary>
-            <typeparam name="TBusinessObjectType">type of return value</typeparam>
-            <param name="jobject">
-                <see cref="M:BO4E.BoMapper.MapObject(System.Type,Newtonsoft.Json.Linq.JObject,System.Collections.Generic.HashSet{System.String},BO4E.meta.LenientConverters.LenientParsing)" />
-            </param>
-            <param name="userPropertiesWhiteList">
-                <see cref="M:BO4E.BoMapper.MapObject(System.Type,Newtonsoft.Json.Linq.JObject,System.Collections.Generic.HashSet{System.String},BO4E.meta.LenientConverters.LenientParsing)" />
-            </param>
-            <param name="lenient">
-                <see cref="M:BO4E.BoMapper.MapObject(System.Type,Newtonsoft.Json.Linq.JObject,System.Collections.Generic.HashSet{System.String},BO4E.meta.LenientConverters.LenientParsing)" />
-            </param>
-            <returns>
-                <see cref="M:BO4E.BoMapper.MapObject(System.Type,Newtonsoft.Json.Linq.JObject,System.Collections.Generic.HashSet{System.String},BO4E.meta.LenientConverters.LenientParsing)" />
-            </returns>
-        </member>
-        <member name="M:BO4E.BoMapper.GetValidBoNames">
-            <summary>
-                Get a list of those strings that are known BO4E types (e.g. "Messlokation", "Energiemenge"...)
-            </summary>
-            <returns>a list of valid BO4E names; upper/lower case sensitive</returns>
-        </member>
-        <member name="M:BO4E.BoMapper.GetTypeForBoName(System.String)">
-            <summary>
-                Returns a Type for given Business Object name. This method is useful to avoid stringified code.
-            </summary>
-            <param name="businessObjectName">name of a business object; is lenient regarding upper/lower case</param>
-            <returns>a BusinessObjectType or null if no matching type was found</returns>
-            <exception cref="T:System.ArgumentNullException">if argument is null</exception>
-            <example>
-                <code>
-            BoMapper.GetTypeForBoName("Energiemenge"); // returns typeof(BO4E.BO.Energiemenge)
-            BoMapper.GetTypeForBoName("eNeRgIeMENgE"); // returns typeof(BO4E.BO.Energiemenge)
-            BoMapper.GetTypeForBoName("non existent BO"); // returns null
-            </code>
-            </example>
-        </member>
-        <member name="M:BO4E.BoMapper.GetJsonSchemeFor(System.String)">
-            <summary>
-                Get JSON Scheme for given Business Object name
-            </summary>
-            See
-            <see cref="M:BO4E.BoMapper.GetValidBoNames" />
-            for a list of valid arguments.
-            <param name="businessObjectName">Business Object name (e.g. "Messlokation")</param>
-            <returns>A JSON scheme to be used for validation purposes or null for invalid arguments.</returns>
-            <seealso cref="M:BO4E.BoMapper.GetJsonSchemeFor(System.Type)" />
-        </member>
-        <member name="M:BO4E.BoMapper.GetJsonSchemeFor(System.Type)">
-            <summary>
-                Get JSON Scheme for given Business Object type
-            </summary>
-            <param name="businessObjectType">Business Object type (e.g. typeof(BO4E.BO.Messlokation)</param>
-            <returns>A JSON scheme to be used for validation purposes.</returns>
-            <exception cref="T:System.ArgumentException">if given type is not derived from BusinessObject</exception>
-            <seealso cref="M:BO4E.BoMapper.GetJsonSchemeFor(System.String)" />
-        </member>
-        <member name="M:BO4E.BoMapper.GetAnnotatedFields(System.String)">
-            <summary>
-                Shortcut for <see cref="M:BO4E.BoMapper.GetAnnotatedFields(System.String,System.Type)" /> with DataCategoryAttribute as default.
-            </summary>
-            <param name="boName">name of the business object in title case
-                <example>Messlokation</example>
-            </param>
-            <returns>Array of FieldInfos</returns>
-        </member>
-        <member name="M:BO4E.BoMapper.GetAnnotatedFields(System.Type,System.Type)">
-            <summary>
-                Get those fields of a business object that do have attributes/annotations.
-                The result is ordered by the JsonProperty->Order value (assuming 0 if null).
-            </summary>
-            <param name="boType">type of the business object</param>
-            <param name="attributeType">type of the attribute/annotation you're interested in
-                <example>typeof(DataCategoryAttribute)</example>
-            </param>
-            <returns>Array of FieldInfos</returns>
-        </member>
-        <member name="M:BO4E.BoMapper.GetAnnotatedFields(System.String,System.Type)">
-            <summary>
-                Get those fields of a business object that do have attributes/annotations.
-                The result is ordered by the JsonProperty->Order value (assuming 0 if null).
-            </summary>
-            <param name="boName">name of the business object in title case
-                <example>Messlokation</example>
-            </param>
-            <param name="attributeType">type of the attribute/annotation you're interested in
-                <example>typeof(DataCategoryAttribute)</example>
-            </param>
-            <returns>Array of FieldInfos</returns>
-        </member>
         <member name="T:BO4E.BO.Anfrage">
             <summary>
             Anfrage BO
@@ -1220,6 +1039,11 @@
                 für EDIFACT mapping
             </summary>
         </member>
+        <member name="P:BO4E.BO.Marktlokation.ZaehlwerkeBeteiligteMarktrolle">
+            <summary>
+                Liste für Zählwerke der beteiligten Martrolle
+            </summary>
+        </member>
         <member name="P:BO4E.BO.Marktlokation.Verbrauchsmenge">
             <summary>
                 für EDIFACT mapping
@@ -2077,7 +1901,188 @@
             </summary>
         </member>
         <member name="P:BO4E.BO.Zaehler.Geraete">
-            <summary>Liste der Hardware, die zu diesem Zähler gehören.</summary>
+            <summary>Liste der Geräte, die zu diesem Zähler gehören.</summary>
+        </member>
+        <member name="T:BO4E.BoMapper">
+            <summary>
+                This class maps generic JObjects to BO4E business objects.
+            </summary>
+        </member>
+        <member name="F:BO4E.BoMapper.PackagePrefix">
+            <summary>
+                namespace.subnamespace for the BO4E package. maybe there's a more elegant way using self reflection.
+            </summary>
+        </member>
+        <member name="M:BO4E.BoMapper.MapObject(Newtonsoft.Json.Linq.JObject,BO4E.meta.LenientConverters.LenientParsing)">
+            <summary>
+                shortcut for MapObject with an empty userProperties white list
+            </summary>
+            <param name="jobject">business object json</param>
+            <param name="lenient">lenient parsing flags</param>
+            <returns>
+                <see cref="M:BO4E.BoMapper.MapObject(System.String,Newtonsoft.Json.Linq.JObject,BO4E.meta.LenientConverters.LenientParsing)" />
+            </returns>
+        </member>
+        <member name="M:BO4E.BoMapper.MapObject(Newtonsoft.Json.Linq.JObject,System.Collections.Generic.HashSet{System.String},BO4E.meta.LenientConverters.LenientParsing)">
+            <summary>
+                shortcut for <see cref="M:BO4E.BoMapper.MapObject(System.String,Newtonsoft.Json.Linq.JObject,BO4E.meta.LenientConverters.LenientParsing)" /> iff <paramref name="jobject" /> has key
+                'boTyp'
+            </summary>
+            <param name="jobject">business object json</param>
+            <param name="lenient">lenient parsing flags</param>
+            <param name="userPropertiesWhiteList">white list of non BO4E standard field you'd like to have de-serialized</param>
+            <returns>
+                <see cref="M:BO4E.BoMapper.MapObject(System.String,Newtonsoft.Json.Linq.JObject,BO4E.meta.LenientConverters.LenientParsing)" />
+            </returns>
+        </member>
+        <member name="M:BO4E.BoMapper.MapObject(System.String,Newtonsoft.Json.Linq.JObject,BO4E.meta.LenientConverters.LenientParsing)">
+            <summary>
+                <see cref="M:BO4E.BoMapper.MapObject(System.String,Newtonsoft.Json.Linq.JObject,System.Collections.Generic.HashSet{System.String},BO4E.meta.LenientConverters.LenientParsing)" /> with empty user properties white list
+            </summary>
+        </member>
+        <member name="M:BO4E.BoMapper.MapObject(System.Type,Newtonsoft.Json.Linq.JObject,BO4E.meta.LenientConverters.LenientParsing)">
+            <summary>
+                <see cref="M:BO4E.BoMapper.MapObject(System.Type,Newtonsoft.Json.Linq.JObject,System.Collections.Generic.HashSet{System.String},BO4E.meta.LenientConverters.LenientParsing)" /> with empty user properties white list
+            </summary>
+        </member>
+        <member name="M:BO4E.BoMapper.MapObject``1(Newtonsoft.Json.Linq.JObject,BO4E.meta.LenientConverters.LenientParsing)">
+            <summary>
+                <see cref="M:BO4E.BoMapper.MapObject(System.Type,Newtonsoft.Json.Linq.JObject,System.Collections.Generic.HashSet{System.String},BO4E.meta.LenientConverters.LenientParsing)" />
+            </summary>
+        </member>
+        <member name="M:BO4E.BoMapper.MapObject(System.String,Newtonsoft.Json.Linq.JObject,System.Collections.Generic.HashSet{System.String},BO4E.meta.LenientConverters.LenientParsing)">
+            <summary>
+                <see cref="M:BO4E.BoMapper.MapObject(System.Type,Newtonsoft.Json.Linq.JObject,System.Collections.Generic.HashSet{System.String},BO4E.meta.LenientConverters.LenientParsing)" />
+            </summary>
+            <param name="businessObjectName"></param>
+            <param name="jobject"></param>
+            <param name="userPropertiesWhiteList"></param>
+            <param name="lenient"></param>
+            <returns></returns>
+        </member>
+        <member name="M:BO4E.BoMapper.MapObject(System.Type,Newtonsoft.Json.Linq.JObject,System.Collections.Generic.HashSet{System.String},BO4E.meta.LenientConverters.LenientParsing)">
+            <summary>
+                This method tries to map the given jobject to a BO4E style
+                Business Object of a given type. It works using reflection.
+            </summary>
+            If the mapping fails, there either is no BO with the given name or
+            you mixed up or forgot some attributes. Most of assertion errors
+            are likely to happen due to misspelled and case sensitive attributes.
+            The assertion error message should be a good hint to what is wrong.
+            If the method passes without an assertion error, there are at
+            least no unknown or wrong attributes.
+            <param name="jobject">JObject that should be mapped to a BO4E business object.</param>
+            <param name="userPropertiesWhiteList">white list of non BO4E standard field you'd like to have de-serialised</param>
+            <param name="businessObjectType">type of the business object</param>
+            <param name="lenient">allow less strict input objects</param>
+            <returns>
+                <list type="bullet">
+                    <item>
+                        <description>
+                            null iff there is no BO4E Business Object that matches the provided businessObjectName. Check
+                            the case sensitive spelling of the business object name
+                        </description>
+                    </item>
+                    <item>
+                        <description>
+                            a BO4E business object (<see cref="T:BO4E.BO.BusinessObject" />) of the type provided in
+                            businessObjectName
+                        </description>
+                    </item>
+                </list>
+            </returns>
+        </member>
+        <member name="M:BO4E.BoMapper.MapObject``1(Newtonsoft.Json.Linq.JObject,System.Collections.Generic.HashSet{System.String},BO4E.meta.LenientConverters.LenientParsing)">
+            <summary>
+                <see cref="M:BO4E.BoMapper.MapObject(System.Type,Newtonsoft.Json.Linq.JObject,System.Collections.Generic.HashSet{System.String},BO4E.meta.LenientConverters.LenientParsing)" />
+            </summary>
+            <typeparam name="TBusinessObjectType">type of return value</typeparam>
+            <param name="jobject">
+                <see cref="M:BO4E.BoMapper.MapObject(System.Type,Newtonsoft.Json.Linq.JObject,System.Collections.Generic.HashSet{System.String},BO4E.meta.LenientConverters.LenientParsing)" />
+            </param>
+            <param name="userPropertiesWhiteList">
+                <see cref="M:BO4E.BoMapper.MapObject(System.Type,Newtonsoft.Json.Linq.JObject,System.Collections.Generic.HashSet{System.String},BO4E.meta.LenientConverters.LenientParsing)" />
+            </param>
+            <param name="lenient">
+                <see cref="M:BO4E.BoMapper.MapObject(System.Type,Newtonsoft.Json.Linq.JObject,System.Collections.Generic.HashSet{System.String},BO4E.meta.LenientConverters.LenientParsing)" />
+            </param>
+            <returns>
+                <see cref="M:BO4E.BoMapper.MapObject(System.Type,Newtonsoft.Json.Linq.JObject,System.Collections.Generic.HashSet{System.String},BO4E.meta.LenientConverters.LenientParsing)" />
+            </returns>
+        </member>
+        <member name="M:BO4E.BoMapper.GetValidBoNames">
+            <summary>
+                Get a list of those strings that are known BO4E types (e.g. "Messlokation", "Energiemenge"...)
+            </summary>
+            <returns>a list of valid BO4E names; upper/lower case sensitive</returns>
+        </member>
+        <member name="M:BO4E.BoMapper.GetTypeForBoName(System.String)">
+            <summary>
+                Returns a Type for given Business Object name. This method is useful to avoid stringified code.
+            </summary>
+            <param name="businessObjectName">name of a business object; is lenient regarding upper/lower case</param>
+            <returns>a BusinessObjectType or null if no matching type was found</returns>
+            <exception cref="T:System.ArgumentNullException">if argument is null</exception>
+            <example>
+                <code>
+            BoMapper.GetTypeForBoName("Energiemenge"); // returns typeof(BO4E.BO.Energiemenge)
+            BoMapper.GetTypeForBoName("eNeRgIeMENgE"); // returns typeof(BO4E.BO.Energiemenge)
+            BoMapper.GetTypeForBoName("non existent BO"); // returns null
+            </code>
+            </example>
+        </member>
+        <member name="M:BO4E.BoMapper.GetJsonSchemeFor(System.String)">
+            <summary>
+                Get JSON Scheme for given Business Object name
+            </summary>
+            See
+            <see cref="M:BO4E.BoMapper.GetValidBoNames" />
+            for a list of valid arguments.
+            <param name="businessObjectName">Business Object name (e.g. "Messlokation")</param>
+            <returns>A JSON scheme to be used for validation purposes or null for invalid arguments.</returns>
+            <seealso cref="M:BO4E.BoMapper.GetJsonSchemeFor(System.Type)" />
+        </member>
+        <member name="M:BO4E.BoMapper.GetJsonSchemeFor(System.Type)">
+            <summary>
+                Get JSON Scheme for given Business Object type
+            </summary>
+            <param name="businessObjectType">Business Object type (e.g. typeof(BO4E.BO.Messlokation)</param>
+            <returns>A JSON scheme to be used for validation purposes.</returns>
+            <exception cref="T:System.ArgumentException">if given type is not derived from BusinessObject</exception>
+            <seealso cref="M:BO4E.BoMapper.GetJsonSchemeFor(System.String)" />
+        </member>
+        <member name="M:BO4E.BoMapper.GetAnnotatedFields(System.String)">
+            <summary>
+                Shortcut for <see cref="M:BO4E.BoMapper.GetAnnotatedFields(System.String,System.Type)" /> with DataCategoryAttribute as default.
+            </summary>
+            <param name="boName">name of the business object in title case
+                <example>Messlokation</example>
+            </param>
+            <returns>Array of FieldInfos</returns>
+        </member>
+        <member name="M:BO4E.BoMapper.GetAnnotatedFields(System.Type,System.Type)">
+            <summary>
+                Get those fields of a business object that do have attributes/annotations.
+                The result is ordered by the JsonProperty->Order value (assuming 0 if null).
+            </summary>
+            <param name="boType">type of the business object</param>
+            <param name="attributeType">type of the attribute/annotation you're interested in
+                <example>typeof(DataCategoryAttribute)</example>
+            </param>
+            <returns>Array of FieldInfos</returns>
+        </member>
+        <member name="M:BO4E.BoMapper.GetAnnotatedFields(System.String,System.Type)">
+            <summary>
+                Get those fields of a business object that do have attributes/annotations.
+                The result is ordered by the JsonProperty->Order value (assuming 0 if null).
+            </summary>
+            <param name="boName">name of the business object in title case
+                <example>Messlokation</example>
+            </param>
+            <param name="attributeType">type of the attribute/annotation you're interested in
+                <example>typeof(DataCategoryAttribute)</example>
+            </param>
+            <returns>Array of FieldInfos</returns>
         </member>
         <member name="T:BO4E.COM.Abweichung">
             <summary>
