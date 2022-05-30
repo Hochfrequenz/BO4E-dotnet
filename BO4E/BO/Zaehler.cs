@@ -30,7 +30,7 @@ namespace BO4E.BO
         /// <summary>Strom oder Gas. <seealso cref="ENUM.Sparte" /></summary>
         [JsonProperty(Required = Required.Always, Order = 11, PropertyName = "sparte")]
         [JsonPropertyName("sparte")]
-        [ProtoMember(11)]
+        [ProtoMember(5)]
         [JsonPropertyOrder(11)]
         public Sparte Sparte { get; set; }
 
@@ -40,7 +40,7 @@ namespace BO4E.BO
         /// </summary>
         [JsonProperty(Required = Required.Default, Order = 12, PropertyName = "zaehlerauspraegung")]
         [JsonPropertyName("zaehlerauspraegung")]
-        [ProtoMember(12)]
+        [ProtoMember(6)]
         [JsonPropertyOrder(12)]
         public Zaehlerauspraegung? Zaehlerauspraegung { get; set; }
 
@@ -51,7 +51,7 @@ namespace BO4E.BO
         [JsonProperty(
             Required = Required.Default, //Required = Required.Always,
             Order = 13, PropertyName = "zaehlertyp")]
-        [ProtoMember(13)]
+        [ProtoMember(7)]
         [JsonPropertyOrder(13)]
         [JsonPropertyName("zaehlertyp")]
         [NonOfficial(NonOfficialCategory
