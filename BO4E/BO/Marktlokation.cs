@@ -252,7 +252,7 @@ namespace BO4E.BO
         [ProtoMember(1026)]
         [JsonPropertyOrder(32)]
         [NonOfficial(NonOfficialCategory.CUSTOMER_REQUIREMENTS)]
-        public List<Zaehlwerk>? ZählwerkeBeteiligteMarktrolle { get; set; }
+        public List<Zaehlwerk>? ZaehlwerkeBeteiligteMarktrolle { get; set; }
 
         
         /// <summary>

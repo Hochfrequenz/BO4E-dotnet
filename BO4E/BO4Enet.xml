@@ -1039,7 +1039,7 @@
                 für EDIFACT mapping
             </summary>
         </member>
-        <member name="P:BO4E.BO.Marktlokation.ZählwerkeBeteiligteMarktrolle">
+        <member name="P:BO4E.BO.Marktlokation.ZaehlwerkeBeteiligteMarktrolle">
             <summary>
                 Liste für Zählwerke der beteiligten Martrolle
             </summary>
