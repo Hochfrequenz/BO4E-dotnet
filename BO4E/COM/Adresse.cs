@@ -12,34 +12,38 @@ namespace BO4E.COM
     {
         /// <summary>Die Postleitzahl. Beispiel: 41836</summary>
         [DataCategory(DataCategory.ADDRESS)]
-        [JsonProperty(PropertyName = "postleitzahl", Required = Required.Always)]
+        [JsonProperty(PropertyName = "postleitzahl", Required = Required.Always, Order = 11)]
         [JsonPropertyName("postleitzahl")]
         [FieldName("zipCode", Language.EN)]
         [ProtoMember(3)]
+        [JsonPropertyOrder(11)]
         public string Postleitzahl { get; set; }
 
         /// <summary>Bezeichnung der Stadt. Beispiel Hückelhoven</summary>
         [DataCategory(DataCategory.ADDRESS)]
-        [JsonProperty(PropertyName = "ort", Required = Required.Always)]
+        [JsonProperty(PropertyName = "ort", Required = Required.Always, Order = 12)]
         [JsonPropertyName("ort")]
         [FieldName("city", Language.EN)]
         [ProtoMember(4)]
+        [JsonPropertyOrder(12)]
         public string Ort { get; set; }
 
         /// <summary>Bezeichnung der Straße. Beispiel: Weserstraße</summary>
         [DataCategory(DataCategory.ADDRESS)]
-        [JsonProperty(PropertyName = "strasse", Required = Required.Default)]
+        [JsonProperty(PropertyName = "strasse", Required = Required.Default, Order = 13)]
         [JsonPropertyName("strasse")]
         [FieldName("street", Language.EN)]
         [ProtoMember(5)]
+        [JsonPropertyOrder(13)]
         public string? Strasse { get; set; }
 
         /// <summary>Hausnummer inkl. Zusatz. Beispiel. 3, 4a etc.</summary>
         [DataCategory(DataCategory.ADDRESS)]
-        [JsonProperty(PropertyName = "hausnummer", Required = Required.Default)]
+        [JsonProperty(PropertyName = "hausnummer", Required = Required.Default, Order = 14)]
         [JsonPropertyName("hausnummer")]
         [FieldName("houseNumber", Language.EN)]
         [ProtoMember(6)]
+        [JsonPropertyOrder(14)]
         public string? Hausnummer { get; set; }
 
         /// <summary>
@@ -47,16 +51,18 @@ namespace BO4E.COM
         ///     Hausnummer nicht berücksichtigt.Beispiel: Postfach 4711
         /// </summary>
         [DataCategory(DataCategory.ADDRESS)]
-        [JsonProperty(PropertyName = "postfach", Required = Required.Default)]
+        [JsonProperty(PropertyName = "postfach", Required = Required.Default, Order = 15)]
         [JsonPropertyName("postfach")]
         [ProtoMember(7)]
+        [JsonPropertyOrder(15)]
         public string? Postfach { get; set; }
 
         /// <summary>Zusatzhinweis zum Auffinden der Adresse, z.B. "3. Stock linke Wohnung"</summary>
         [DataCategory(DataCategory.ADDRESS)]
-        [JsonProperty(PropertyName = "adresszusatz", Required = Required.Default)]
+        [JsonProperty(PropertyName = "adresszusatz", Required = Required.Default, Order = 16)]
         [JsonPropertyName("adresszusatz")]
         [ProtoMember(8)]
+        [JsonPropertyOrder(16)]
         public string? Adresszusatz { get; set; }
 
         /// <summary>
@@ -65,27 +71,30 @@ namespace BO4E.COM
         ///     der in c/o adressierten Person oder Firma.
         /// </summary>
         [DataCategory(DataCategory.ADDRESS)]
-        [JsonProperty(PropertyName = "coErgaenzung", Required = Required.Default)]
+        [JsonProperty(PropertyName = "coErgaenzung", Required = Required.Default, Order = 17)]
         [JsonPropertyName("coErgaenzung")]
         [ProtoMember(9)]
+        [JsonPropertyOrder(17)]
         public string? CoErgaenzung { get; set; }
 
         /// <summary>Offizieller ISO-Landescode. Z.B. NL, Details <see cref="ENUM.Landescode" /></summary>
         [DataCategory(DataCategory.ADDRESS)]
-        [JsonProperty(PropertyName = "landescode", Required = Required.Default)]
+        [JsonProperty(PropertyName = "landescode", Required = Required.Default, Order = 18)]
         [JsonPropertyName("landescode")]
         [FieldName("countryCode", Language.EN)]
         [ProtoMember(10)]
+        [JsonPropertyOrder(18)]
         public Landescode? Landescode { get; set; }
 
         /// <summary>
         ///     Ortsteil für EDIFACT mapping
         /// </summary>
         [JsonProperty(PropertyName = "ortsteil", Required = Required.Default,
-            NullValueHandling = NullValueHandling.Ignore)]
+            NullValueHandling = NullValueHandling.Ignore, Order = 19)]
         [JsonPropertyName("ortsteil")]
         [ProtoMember(1011)]
         [NonOfficial(NonOfficialCategory.MISSING)]
+        [JsonPropertyOrder(19)]
         public string? Ortsteil { get; set; }
     }
 }
