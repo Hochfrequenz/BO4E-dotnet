@@ -66,7 +66,6 @@ namespace TestBO4E
 
             // COMponents
             typeof(Abweichung),
-            typeof(Adresse),
             typeof(Angebotsposition),
             typeof(Angebotsteil),
             typeof(Angebotsvariante),
@@ -86,8 +85,6 @@ namespace TestBO4E
             typeof(FehlerUrsache),
             typeof(GenericStringStringInfo),
             typeof(Geokoordinaten),
-            typeof(Geraet),
-            typeof(Geraeteeigenschaften),
             typeof(Handelsunstimmigkeitsbegruendung),
             typeof(Hardware),
             typeof(Katasteradresse),
