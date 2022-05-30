@@ -339,6 +339,11 @@ message Geokoordinaten {
    .bcl.Decimal Breitengrad = 3;
    .bcl.Decimal Laengengrad = 4;
 }
+message Geraet {
+   option (.protobuf_net.msgopt).namespace = "BO4E.COM";
+   string Geraetenummer = 3;
+   Geraeteeigenschaften Geraeteeigenschaften = 4;
+}
 message Geraeteeigenschaften {
    option (.protobuf_net.msgopt).namespace = "BO4E.COM";
    Geraetetyp Geraetetyp = 3;
@@ -865,8 +870,9 @@ message Marktlokation {
    string Marktgebiet = 1023;
    Zeitreihentyp Zeitreihentyp = 1024;
    repeated Zaehlwerk Zaehlwerke = 1025;
-   repeated Verbrauch Verbrauchsmenge = 1026;
-   repeated Messlokation Messlokationen = 1027;
+   repeated Zaehlwerk ZählwerkeBeteiligteMarktrolle = 1026;
+   repeated Verbrauch Verbrauchsmenge = 1027;
+   repeated Messlokation Messlokationen = 1028;
    MesstechnischeEinordnung MesstechnischeEinordnung = 1029;
 }
 message MarktpartnerDetails {
@@ -1464,11 +1470,6 @@ message Vertragsteil {
    Menge Kundenwert = 1010;
    string Verbrauchsaufteilung = 1011;
 }
-message Verwendungszweck {
-   option (.protobuf_net.msgopt).namespace = "BO4E.COM";
-   Marktrolle Marktrolle = 3;
-   repeated Verwendungszweck Zweck = 4 [packed = false];
-}
 enum Verwendungszweck {
    option (.protobuf_net.enumopt).namespace = "BO4E.ENUM";
    NETZNUTZUNGSABRECHNUNG = 0;
@@ -1477,6 +1478,11 @@ enum Verwendungszweck {
    ENDKUNDENABRECHNUNG = 3;
    UEBERMITTLUNG_AN_DAS_HKNR = 4;
    ERMITTLUNG_AUSGEGLICHENHEIT_BILANZKREIS = 5;
+}
+message Verwendungszweck {
+   option (.protobuf_net.msgopt).namespace = "BO4E.COM";
+   Marktrolle Marktrolle = 3;
+   repeated Verwendungszweck Zweck = 4 [packed = false];
 }
 enum Waehrungscode {
    option (.protobuf_net.enumopt).namespace = "BO4E.ENUM";
@@ -1696,7 +1702,7 @@ message Zaehler {
    ZaehlertypSpezifikation Zaehlertypspezifikation = 1017;
    Befestigungsart Befestigungsart = 1018;
    Geraetemerkmal Zaehlergroesse = 1019;
-   repeated Hardware Geraete = 1020;
+   repeated Geraet Geraete = 1020;
 }
 enum Zaehlerauspraegung {
    option (.protobuf_net.enumopt).namespace = "BO4E.ENUM";

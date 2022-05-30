@@ -115,36 +115,6 @@
   },
   "type": "object",
   "properties": {
-    "lokationsId": {
-      "type": "string"
-    },
-    "lokationsTyp": {
-      "type": "string",
-      "enum": [
-        "MALO",
-        "MELO"
-      ]
-    },
-    "obiskennzahl": {
-      "type": "string"
-    },
-    "ZeitraumMesswertanfrage": {
-      "$ref": "#/definitions/Zeitraum"
-    },
-    "reklamationsgrund": {
-      "type": "string",
-      "enum": [
-        "WERTE_ZU_HOCH",
-        "WERTE_ZU_NIEDRIG",
-        "WERTE_FEHLEN"
-      ]
-    },
-    "reklamationsgrundBemerkung": {
-      "type": [
-        "string",
-        "null"
-      ]
-    },
     "boTyp": {
       "type": [
         "string",
@@ -174,6 +144,36 @@
       }
     },
     "guid": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "lokationsId": {
+      "type": "string"
+    },
+    "lokationsTyp": {
+      "type": "string",
+      "enum": [
+        "MALO",
+        "MELO"
+      ]
+    },
+    "obiskennzahl": {
+      "type": "string"
+    },
+    "ZeitraumMesswertanfrage": {
+      "$ref": "#/definitions/Zeitraum"
+    },
+    "reklamationsgrund": {
+      "type": "string",
+      "enum": [
+        "WERTE_ZU_HOCH",
+        "WERTE_ZU_NIEDRIG",
+        "WERTE_FEHLEN"
+      ]
+    },
+    "reklamationsgrundBemerkung": {
       "type": [
         "string",
         "null"

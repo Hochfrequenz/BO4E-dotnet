@@ -377,6 +377,36 @@
         }
       }
     },
+    "Geraet": {
+      "type": [
+        "object",
+        "null"
+      ],
+      "properties": {
+        "geraetenummer": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "geraeteeigenschaften": {
+          "$ref": "#/definitions/Geraeteeigenschaften"
+        },
+        "timestamp": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "format": "date-time"
+        },
+        "guid": {
+          "type": [
+            "string",
+            "null"
+          ]
+        }
+      }
+    },
     "Geraeteeigenschaften": {
       "type": [
         "object",
@@ -669,97 +699,6 @@
       },
       "required": [
         "gewerbekennzeichnung"
-      ]
-    },
-    "Hardware": {
-      "type": [
-        "object",
-        "null"
-      ],
-      "properties": {
-        "geraetetyp": {
-          "type": "string",
-          "enum": [
-            "WECHSELSTROMZAEHLER",
-            "DREHSTROMZAEHLER",
-            "ZWEIRICHTUNGSZAEHLER",
-            "RLM_ZAEHLER",
-            "IMS_ZAEHLER",
-            "BALGENGASZAEHLER",
-            "MAXIMUMZAEHLER",
-            "MULTIPLEXANLAGE",
-            "PAUSCHALANLAGE",
-            "VERSTAERKERANLAGE",
-            "SUMMATIONSGERAET",
-            "IMPULSGEBER",
-            "EDL_21_ZAEHLERAUFSATZ",
-            "VIER_QUADRANTEN_LASTGANGZAEHLER",
-            "MENGENUMWERTER",
-            "STROMWANDLER",
-            "SPANNUNGSWANDLER",
-            "DATENLOGGER",
-            "KOMMUNIKATIONSANSCHLUSS",
-            "MODEM",
-            "TELEKOMMUNIKATIONSEINRICHTUNG",
-            "DREHKOLBENGASZAEHLER",
-            "TURBINENRADGASZAEHLER",
-            "ULTRASCHALLZAEHLER",
-            "WIRBELGASZAEHLER",
-            "MODERNE_MESSEINRICHTUNG",
-            "ELEKTRONISCHER_HAUSHALTSZAEHLER",
-            "STEUEREINRICHTUNG",
-            "TECHNISCHESTEUEREINRICHTUNG",
-            "TARIFSCHALTGERAET",
-            "RUNDSTEUEREMPFAENGER",
-            "OPTIONALE_ZUS_ZAEHLEINRICHTUNG",
-            "MESSWANDLERSATZ_IMS_MME",
-            "KOMBIMESSWANDLER_IMS_MME",
-            "TARIFSCHALTGERAET_IMS_MME",
-            "RUNDSTEUEREMPFAENGER_IMS_MME",
-            "TEMPERATUR_KOMPENSATION",
-            "HOECHSTBELASTUNGS_ANZEIGER",
-            "SONSTIGES_GERAET",
-            "SMARTMETERGATEWAY",
-            "STEUERBOX",
-            "BLOCKSTROMWANDLER",
-            "KOMBIMESSWANDLER"
-          ]
-        },
-        "bezeichnung": {
-          "type": "string"
-        },
-        "geraeteeigenschaften": {
-          "$ref": "#/definitions/Geraeteeigenschaften"
-        },
-        "geraetenummer": {
-          "type": [
-            "string",
-            "null"
-          ]
-        },
-        "geraetereferenz": {
-          "type": [
-            "string",
-            "null"
-          ]
-        },
-        "timestamp": {
-          "type": [
-            "string",
-            "null"
-          ],
-          "format": "date-time"
-        },
-        "guid": {
-          "type": [
-            "string",
-            "null"
-          ]
-        }
-      },
-      "required": [
-        "geraetetyp",
-        "bezeichnung"
       ]
     },
     "Konzessionsabgabe": {
@@ -1281,7 +1220,7 @@
         "null"
       ],
       "items": {
-        "$ref": "#/definitions/Hardware"
+        "$ref": "#/definitions/Geraet"
       }
     }
   },
