@@ -62,11 +62,9 @@ namespace TestBO4E
             typeof(Sperrauftrag),
             typeof(SperrauftragsStorno),
             typeof(Statusbericht),
-            typeof(Zaehler),
 
             // COMponents
             typeof(Abweichung),
-            typeof(Adresse),
             typeof(Angebotsposition),
             typeof(Angebotsteil),
             typeof(Angebotsvariante),
@@ -86,8 +84,6 @@ namespace TestBO4E
             typeof(FehlerUrsache),
             typeof(GenericStringStringInfo),
             typeof(Geokoordinaten),
-            typeof(Geraet),
-            typeof(Geraeteeigenschaften),
             typeof(Handelsunstimmigkeitsbegruendung),
             typeof(Hardware),
             typeof(Katasteradresse),
