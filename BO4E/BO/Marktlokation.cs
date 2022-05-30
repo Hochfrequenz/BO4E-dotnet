@@ -245,7 +245,7 @@ namespace BO4E.BO
         public List<Zaehlwerk>? Zaehlwerke { get; set; }
 
         /// <summary>
-        ///     Liste für Zählwerke der beteiligten Martrolle
+        ///     Liste der Zählwerke der beteiligten Martrolle
         /// </summary>
         [JsonProperty(Required = Required.Default, Order = 32, PropertyName = "zaehlwerkeBeteiligteMarktrolle")]
         [JsonPropertyName("zaehlwerkeBeteiligteMarktrolle")]
