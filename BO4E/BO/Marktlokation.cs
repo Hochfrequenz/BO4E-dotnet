@@ -245,13 +245,24 @@ namespace BO4E.BO
         public List<Zaehlwerk>? Zaehlwerke { get; set; }
 
         /// <summary>
+        ///     Liste für Zählwerke der beteiligten Martrolle
+        /// </summary>
+        [JsonProperty(Required = Required.Default, Order = 32, PropertyName = "zaehlwerkeBeteiligteMarktrolle")]
+        [JsonPropertyName("zaehlwerkeBeteiligteMarktrolle")]
+        [ProtoMember(1026)]
+        [JsonPropertyOrder(32)]
+        [NonOfficial(NonOfficialCategory.CUSTOMER_REQUIREMENTS)]
+        public List<Zaehlwerk>? ZählwerkeBeteiligteMarktrolle { get; set; }
+
+        
+        /// <summary>
         ///     für EDIFACT mapping
         /// </summary>
         // ToDo: specify docstring / check if needed
-        [JsonProperty(Required = Required.Default, Order = 32, PropertyName = "verbrauchsmenge")]
+        [JsonProperty(Required = Required.Default, Order = 33, PropertyName = "verbrauchsmenge")]
         [JsonPropertyName("verbrauchsmenge")]
-        [JsonPropertyOrder(32)]
-        [ProtoMember(1026)]
+        [JsonPropertyOrder(33)]
+        [ProtoMember(1027)]
         [NonOfficial(NonOfficialCategory.CUSTOMER_REQUIREMENTS)]
         [Obsolete(
             "Consider if this is really the right place to store the information. I think Energiemenge->energieverbrauch is better suited.")]
@@ -261,10 +272,10 @@ namespace BO4E.BO
         ///     für EDIFACT mapping
         /// </summary>
         // ToDo: specify docstring.
-        [JsonProperty(Required = Required.Default, Order = 33, PropertyName = "messlokationen")]
+        [JsonProperty(Required = Required.Default, Order = 34, PropertyName = "messlokationen")]
         [JsonPropertyName("messlokationen")]
-        [JsonPropertyOrder(33)]
-        [ProtoMember(1027)]
+        [JsonPropertyOrder(34)]
+        [ProtoMember(1028)]
         [NonOfficial(NonOfficialCategory.CUSTOMER_REQUIREMENTS)]
         public List<Messlokation>? Messlokationen { get; set; }
 
@@ -297,18 +308,18 @@ namespace BO4E.BO
         /// einer Messlokation zum Verbrauch einer Marktlokation beitrögt mit aufgeführt.
         /// Der Standard ist hier die Addition.
         [DataCategory(DataCategory.POD)]
-        [JsonProperty(Required = Required.Default, Order = 34, PropertyName = "zugehoerigeMesslokationen")]
+        [JsonProperty(Required = Required.Default, Order = 35, PropertyName = "zugehoerigeMesslokationen")]
         [JsonPropertyName("zugehoerigeMesslokationen")]
-        [JsonPropertyOrder(34)]
+        [JsonPropertyOrder(35)]
         [ProtoMember(28)]
         public List<Messlokationszuordnung>? ZugehoerigeMesslokationen { get; set; }
 
         /// <summary>
         ///     Messtechnische Einordnung aus der UTILMD (IMS, KME_MME, KEINE_MESSUNG)
         /// </summary>
-        [JsonProperty(Required = Required.Default, Order = 35, PropertyName = "messtechnischeEinordnung")]
+        [JsonProperty(Required = Required.Default, Order = 36, PropertyName = "messtechnischeEinordnung")]
         [JsonPropertyName("messtechnischeEinordnung")]
-        [JsonPropertyOrder(35)]
+        [JsonPropertyOrder(36)]
         [ProtoMember(1029)]
         [NonOfficial(NonOfficialCategory.CUSTOMER_REQUIREMENTS)]
         public MesstechnischeEinordnung? MesstechnischeEinordnung { get; set; }
