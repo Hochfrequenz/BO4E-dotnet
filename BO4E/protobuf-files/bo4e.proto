@@ -870,7 +870,7 @@ message Marktlokation {
    string Marktgebiet = 1023;
    Zeitreihentyp Zeitreihentyp = 1024;
    repeated Zaehlwerk Zaehlwerke = 1025;
-   repeated Zaehlwerk ZählwerkeBeteiligteMarktrolle = 1026;
+   repeated Zaehlwerk ZaehlwerkeBeteiligteMarktrolle = 1026;
    repeated Verbrauch Verbrauchsmenge = 1027;
    repeated Messlokation Messlokationen = 1028;
    MesstechnischeEinordnung MesstechnischeEinordnung = 1029;

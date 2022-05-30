@@ -254,7 +254,7 @@ namespace BO4E.BO
         [NonOfficial(NonOfficialCategory.CUSTOMER_REQUIREMENTS)]
         public List<Zaehlwerk>? ZaehlwerkeBeteiligteMarktrolle { get; set; }
 
-        
+
         /// <summary>
         ///     für EDIFACT mapping
         /// </summary>
