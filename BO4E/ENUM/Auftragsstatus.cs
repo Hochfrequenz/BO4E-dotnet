@@ -36,7 +36,7 @@ namespace BO4E.ENUM
         /// <summary>
         /// Dem Auftrag wurde widersprochen
         /// </summary>
-        /// <remarks>EDIFACT DE4405: Z30</remarks>
+        /// <remarks>EDIFACT DE4405: Z31</remarks>
         WIDERSPROCHEN,
 
         /// <summary>
