@@ -3,7 +3,7 @@ using BO4E.meta;
 namespace BO4E.ENUM
 {
     /// <summary>
-    /// Der Sperrauftragsstatus beschreibt die Art eines <see cref="BO.Sperrauftrag"/>s.
+    /// Die Sperrauftragsart beschreibt die Art eines <see cref="BO.Sperrauftrag"/>s.
     /// </summary>
     [NonOfficial(NonOfficialCategory.REGULATORY_REQUIREMENTS)]
     public enum Sperrauftragsart

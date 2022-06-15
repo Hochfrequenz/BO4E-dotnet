@@ -49,7 +49,7 @@ namespace TestBO4E
                         ExRefWert = Guid.NewGuid().ToString(),
                     }
                 },
-                Sperrauftragsstatus = Sperrauftragsstatus.ZUGESTIMMT,
+                Sperrauftragsstatus = Auftragsstatus.ZUGESTIMMT,
                 Mindestpreis = new Preis
                 {
                     Bezugswert = Mengeneinheit.ANZAHL,
