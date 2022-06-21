@@ -39,7 +39,6 @@ namespace TestBO4E
             // DON'T ADD NEW ENTRIES TO THE LIST
 
             // BusinessObjects
-            typeof(Angebot),
             typeof(Auftrag),
             typeof(AuftragsStorno),
             typeof(Avis),
@@ -66,7 +65,6 @@ namespace TestBO4E
             typeof(Abweichung),
             typeof(Angebotsposition),
             typeof(Angebotsteil),
-            typeof(Angebotsvariante),
             typeof(AufAbschlag),
             typeof(Aufgabe),
             typeof(Ausschreibungsdetail),
