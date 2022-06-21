@@ -48,9 +48,9 @@ namespace BO4E.BO
         /// <example>
         ///     2017-12-24
         /// </example>
-        [JsonProperty(Required = Required.Always, Order = 13, PropertyName = "datumPruefung")]
+        [JsonProperty(Required = Required.Always, Order = 12, PropertyName = "datumPruefung")]
         [JsonPropertyName("datumPruefung")]
-        [JsonPropertyOrder(13)]
+        [JsonPropertyOrder(12)]
         [ProtoIgnore]
         public DateTimeOffset DatumPruefung { get; set; }
 
