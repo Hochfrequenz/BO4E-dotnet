@@ -101,7 +101,6 @@ namespace BO4E.COM
         [ProtoMember(14)]
         public string? Preisschluesselstamm { get; set; }
 
-
         /// <summary>Fortlaufende Nummer für die Preisposition</summary>
         [JsonProperty(PropertyName = "positionsnummer", Required = Required.Default, Order = 15)]
         [JsonPropertyName("positionsnummer")]
@@ -116,6 +115,5 @@ namespace BO4E.COM
         [NonOfficial(NonOfficialCategory.MISSING)]
         [ProtoMember(16)]
         public Netzebene? Messebene { get; set; }
-
     }
 }

@@ -37,24 +37,5 @@ namespace BO4E.ENUM
         POG_ERZEUGUNG_IMS_OPTIONAL,
         /// <summary>Z41 Zusatzleistung</summary>
         ZUSATZLEISTUNG,
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
     }
 }
