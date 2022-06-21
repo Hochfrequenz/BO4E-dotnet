@@ -19,7 +19,7 @@ namespace BO4E.ENUM
         POG_ERZEUGUNG_IMS_7_BIS_15,
         /// <summary>Z22 POG bei erzeugender Marktlokation [15 kW; 30kW] mit iMS</summary>
         POG_ERZEUGUNG_IMS_15_BIS_30,
-        /// <summary>Z23 POG bei erzeugender Marktlokation [30 kW;100 kW] mit iMS</summary>
+        /// <summary>Z23 POG bei erzeugender Marktlokation [30 kW; 100 kW] mit iMS</summary>
         POG_ERZEUGUNG_IMS_30_BIS_100,
         /// <summary>Z24 POG bei erzeugender Marktlokation > 100 kW mit iMS</summary>
         POG_ERZEUGUNG_IMS_UEBER_100,
