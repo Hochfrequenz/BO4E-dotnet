@@ -31,7 +31,7 @@ namespace BO4E.ENUM
         POG_VERBRAUCH_IMS_3K_BIS_4K,
         /// <summary>Z30 POG bei verbrauchender Marktlokation [2.000kWh/a; 3.000 kWh/a] mit iMS</summary>
         POG_VERBRAUCH_IMS_2K_BIS_3K,
-        /// <summary>Z31 POG bei verbrauchender Marktlokation [0 kWh/a;2.000 kWh/a] mit iMS</summary>
+        /// <summary>Z31 POG bei verbrauchender Marktlokation [0 kWh/a; 2.000 kWh/a] mit iMS</summary>
         POG_VERBRAUCH_IMS_0_BIS_2K,
         /// <summary>Z32 POG bei optionaler Ausstattung mit iMS von Neuanlagen von erzeugender Marktlokation</summary>
         POG_ERZEUGUNG_IMS_OPTIONAL,
