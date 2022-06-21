@@ -26,10 +26,10 @@ namespace BO4E.COM
         public Leistungstyp Leistungstyp { get; set; }
 
         /// <summary>Bezeichnung für die in der Position abgebildete Leistungserbringung</summary>
-        [JsonProperty(PropertyName = "leistungsbezeichung", Required = Required.Always)]
-        [JsonPropertyName("leistungsbezeichung")]
+        [JsonProperty(PropertyName = "leistungsbezeichnung", Required = Required.Always)]
+        [JsonPropertyName("leistungsbezeichnung")]
         [ProtoMember(5)]
-        public string Leistungsbezeichung { get; set; }
+        public string Leistungsbezeichnung { get; set; }
 
         /// <summary>
         ///     Festlegung, mit welcher Preiseinheit abgerechnet wird, z.B. Ct. oder €. Details
