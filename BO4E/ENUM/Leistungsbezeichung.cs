@@ -7,7 +7,7 @@ namespace BO4E.ENUM
         POG_VERBRAUCH_IMS_UEBER_100K,
         /// <summary>Z16 POG bei verbrauchender Marktlokation [50.000 kWh/a; 100.000 kWh/a] mit iMS</summary>
         POG_VERBRAUCH_IMS_50K_BIS_100K,
-        /// <summary>Z17 POG bei verbrauchender Marktlokation [20.000kWh/a; 50.000 kWh/a] mit iMS</summary>
+        /// <summary>Z17 POG bei verbrauchender Marktlokation [20.000 kWh/a; 50.000 kWh/a] mit iMS</summary>
         POG_VERBRAUCH_IMS_20K_BIS_50K,
         /// <summary>Z18 POG bei verbrauchender Marktlokation [10.000 kWh/a; 20.000 kWh/a] mit iMS</summary>
         POG_VERBRAUCH_IMS_10K_BIS_20K,
