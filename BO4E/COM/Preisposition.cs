@@ -94,15 +94,15 @@ namespace BO4E.COM
         [ProtoMember(13)]
         public List<Preisstaffel> Preisstaffeln { get; set; }
 
-          /// <summary>Preisschlüsselstamm></summary>
+        /// <summary>Preisschlüsselstamm></summary>
         [JsonProperty(PropertyName = "preisschluesselstamm", Required = Required.Default)]
         [JsonPropertyName("preisschluesselstamm")]
         [NonOfficial(NonOfficialCategory.MISSING)]
         [ProtoMember(14)]
         public string? Preisschluesselstamm { get; set; }
 
-             
-       /// <summary>Fortlaufende Nummer für die Preisposition</summary>
+
+        /// <summary>Fortlaufende Nummer für die Preisposition</summary>
         [JsonProperty(PropertyName = "positionsnummer", Required = Required.Default, Order = 15)]
         [JsonPropertyName("positionsnummer")]
         [JsonPropertyOrder(15)]
@@ -116,6 +116,6 @@ namespace BO4E.COM
         [NonOfficial(NonOfficialCategory.MISSING)]
         [ProtoMember(16)]
         public Netzebene? Messebene { get; set; }
-       
+
     }
 }
