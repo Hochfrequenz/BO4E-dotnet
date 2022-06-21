@@ -57,9 +57,9 @@ namespace BO4E.BO
         /// <summary>
         ///    Liste der Fehler
         /// </summary>
-        [JsonProperty(Required = Required.Default, Order = 14, PropertyName = "fehler")]
+        [JsonProperty(Required = Required.Default, Order = 13, PropertyName = "fehler")]
         [JsonPropertyName("fehler")]
-        [JsonPropertyOrder(14)]
+        [JsonPropertyOrder(13)]
         public Fehler? Fehler { get; set; }
     }
 }
