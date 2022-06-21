@@ -17,17 +17,19 @@ namespace BO4E.BO
         /// <summary>
         ///     Status des Berichtes (Fehlerhaft, Erfolgreich)
         /// </summary>
-        [JsonProperty(Required = Required.Always, Order = 1, PropertyName = "status")]
+        [JsonProperty(Required = Required.Always, Order = 10, PropertyName = "status")]
         [JsonPropertyName("status")]
+        [JsonPropertyOrder(10)]
         [ProtoMember(1)]
         public BO4E.ENUM.BerichtStatus Status { get; set; }
 
         /// <summary>
         ///    Das geprüfte Dokument, z.B. die Referenz auf die EDIFACT-Nachricht die geprüft / beanstandet wurde
         /// </summary>
-        [JsonProperty(Required = Required.Default, Order = 2, PropertyName = "pruefgegenstand")]
+        [JsonProperty(Required = Required.Default, Order = 11, PropertyName = "pruefgegenstand")]
         [JsonPropertyName("pruefgegenstand")]
         [ProtoMember(2)]
+        [JsonPropertyOrder(11)]
         [BoKey]
         public string? Pruefgegenstand { get; set; }
 
@@ -46,16 +48,18 @@ namespace BO4E.BO
         /// <example>
         ///     2017-12-24
         /// </example>
-        [JsonProperty(Required = Required.Always, Order = 3, PropertyName = "datumPruefung")]
+        [JsonProperty(Required = Required.Always, Order = 12, PropertyName = "datumPruefung")]
         [JsonPropertyName("datumPruefung")]
+        [JsonPropertyOrder(12)]
         [ProtoIgnore]
         public DateTimeOffset DatumPruefung { get; set; }
 
         /// <summary>
         ///    Liste der Fehler
         /// </summary>
-        [JsonProperty(Required = Required.Default, Order = 4, PropertyName = "fehler")]
+        [JsonProperty(Required = Required.Default, Order = 13, PropertyName = "fehler")]
         [JsonPropertyName("fehler")]
+        [JsonPropertyOrder(13)]
         public Fehler? Fehler { get; set; }
     }
 }

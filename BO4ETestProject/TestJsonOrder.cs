@@ -60,7 +60,6 @@ namespace TestBO4E
             typeof(Region),
             typeof(Sperrauftrag),
             typeof(SperrauftragsStorno),
-            typeof(Statusbericht),
 
             // COMponents
             typeof(Abweichung),
