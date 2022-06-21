@@ -27,7 +27,7 @@ namespace BO4E.ENUM
         POG_MME,
         /// <summary>Z28 POG bei verbrauchender Marktlokation [4.000 kWh/a; 6.000 kWh/a] mit iMS</summary>
         POG_VERBRAUCH_IMS_4K_BIS_6K,
-        /// <summary>Z29 POG bei verbrauchender Marktlokation [3.000kWh/a; 4.000 kWh/a] mit iMS</summary>
+        /// <summary>Z29 POG bei verbrauchender Marktlokation [3.000 kWh/a; 4.000 kWh/a] mit iMS</summary>
         POG_VERBRAUCH_IMS_3K_BIS_4K,
         /// <summary>Z30 POG bei verbrauchender Marktlokation [2.000kWh/a; 3.000 kWh/a] mit iMS</summary>
         POG_VERBRAUCH_IMS_2K_BIS_3K,
