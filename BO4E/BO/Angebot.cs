@@ -37,7 +37,7 @@ namespace BO4E.BO
         [JsonProperty(Required = Required.Default, Order = 11, PropertyName = "anfragereferenz")]
         [JsonPropertyName("anfragereferenz")]
         [ProtoMember(5)]
-        [JsonPropertyOrder(12)]
+        [JsonPropertyOrder(11)]
         [DataCategory(DataCategory.FINANCE)]
         public string? Anfragereferenz { get; set; }
 
