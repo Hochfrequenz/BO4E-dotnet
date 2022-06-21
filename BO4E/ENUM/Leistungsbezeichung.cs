@@ -13,7 +13,7 @@ namespace BO4E.ENUM
         POG_VERBRAUCH_IMS_10K_BIS_20K,
         /// <summary>Z19 POG bei verbrauchender Marktlokation mit unterbrechbaren Verbrauchseinrichtung nach § 14a EnWG mit iMS</summary>
         POG_VERBRAUCH_IMS_UNTERBRECHBAR,
-        /// <summary>Z20 POG bei verbrauchender Marktlokation [6.000kWh/a; 10.000 kWh/a] mit iMS</summary>
+        /// <summary>Z20 POG bei verbrauchender Marktlokation [6.000 kWh/a; 10.000 kWh/a] mit iMS</summary>
         POG_VERBRAUCH_IMS_6K_BIS_10K,
         /// <summary>Z21 POG bei erzeugender Marktlokation [7 kW; 15kW] mit iMS</summary>
         POG_ERZEUGUNG_IMS_7_BIS_15,
