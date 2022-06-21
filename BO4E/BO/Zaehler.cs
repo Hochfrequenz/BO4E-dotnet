@@ -75,8 +75,6 @@ namespace BO4E.BO
         [JsonPropertyOrder(15)]
         public decimal? Zaehlerkonstante { get; set; }
 
-
-
         [System.Text.Json.Serialization.JsonIgnore]
         [Newtonsoft.Json.JsonIgnore]
         [ProtoMember(10, Name = nameof(EichungBis))]
