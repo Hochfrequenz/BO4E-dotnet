@@ -44,10 +44,10 @@ namespace BO4E.COM
         ///     Hier wird festgelegt, auf welche Bezugsgröße sich der Preis bezieht, z.B. kWh oder Stück. Details
         ///     <see cref="Mengeneinheit" />
         /// </summary>
-        [JsonProperty(PropertyName = "bezugsgroesse", Required = Required.Always)]
+        [JsonProperty(PropertyName = "bezugsgroesse", Required = Required.Default)]
         [JsonPropertyName("bezugsgroesse")]
         [ProtoMember(7)]
-        public Mengeneinheit Bezugsgroesse { get; set; }
+        public Mengeneinheit? Bezugsgroesse { get; set; }
 
         /// <summary>
         ///     Die Zeit(dauer) auf die sich der Preis bezieht. Z.B. ein Jahr für einen Leistungspreis der in €/kW/Jahr
