@@ -110,11 +110,11 @@ namespace BO4E.COM
         public int? Positionsnummer { get; set; }
 
         /// <summary>Vgl. PRICAT IMD 7009</summary>
-        [JsonProperty(Required = Required.Default, Order = 16, PropertyName = "spannungsebene")]
-        [JsonPropertyName("spannungsebene")]
+        [JsonProperty(Required = Required.Default, Order = 16, PropertyName = "messebene")]
+        [JsonPropertyName("messebene")]
         [NonOfficial(NonOfficialCategory.MISSING)]
         [ProtoMember(16)]
-        public Spannungsebene? Spannungsebene { get; set; }
+        public Netzebene? Messebene { get; set; }
 
         /// <summary>
         ///     Produkt-/Leistungsbeschreibung, wenn IMD+X vorhanden Vgl. PRICAT IMD 7008
