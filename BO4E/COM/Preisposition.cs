@@ -124,5 +124,15 @@ namespace BO4E.COM
         [NonOfficial(NonOfficialCategory.MISSING)]
         [ProtoMember(17)]
         public string? Beschreibung { get; set; }
+
+        /// <summary>
+        /// Verarbeitungszeitraum. Details <see cref="Zeitraum" />
+        /// </summary>
+        [JsonProperty(PropertyName = "Verarbeitungszeitraum", Required = Required.Default, Order = 18)]
+        [JsonPropertyName("Verarbeitungszeitraum")]
+        [NonOfficial(NonOfficialCategory.MISSING)]
+        [ProtoMember(18)]
+        [JsonPropertyOrder(18)]
+        public Zeitraum? Verarbeitungszeitraum { get; set; }
     }
 }
