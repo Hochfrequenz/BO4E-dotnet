@@ -26,10 +26,10 @@ namespace BO4E.COM
         public Leistungstyp Leistungstyp { get; set; }
 
         /// <summary>Bezeichnung für die in der Position abgebildete Leistungserbringung</summary>
-        [JsonProperty(PropertyName = "leistungsbezeichung", Required = Required.Always)]
-        [JsonPropertyName("leistungsbezeichung")]
+        [JsonProperty(PropertyName = "leistungsbezeichnung", Required = Required.Always)]
+        [JsonPropertyName("leistungsbezeichnung")]
         [ProtoMember(5)]
-        public string Leistungsbezeichung { get; set; }
+        public string Leistungsbezeichnung { get; set; }
 
         /// <summary>
         ///     Festlegung, mit welcher Preiseinheit abgerechnet wird, z.B. Ct. oder €. Details
@@ -44,10 +44,10 @@ namespace BO4E.COM
         ///     Hier wird festgelegt, auf welche Bezugsgröße sich der Preis bezieht, z.B. kWh oder Stück. Details
         ///     <see cref="Mengeneinheit" />
         /// </summary>
-        [JsonProperty(PropertyName = "bezugsgroesse", Required = Required.Always)]
+        [JsonProperty(PropertyName = "bezugsgroesse", Required = Required.Default)]
         [JsonPropertyName("bezugsgroesse")]
         [ProtoMember(7)]
-        public Mengeneinheit Bezugsgroesse { get; set; }
+        public Mengeneinheit? Bezugsgroesse { get; set; }
 
         /// <summary>
         ///     Die Zeit(dauer) auf die sich der Preis bezieht. Z.B. ein Jahr für einen Leistungspreis der in €/kW/Jahr
@@ -115,5 +115,24 @@ namespace BO4E.COM
         [NonOfficial(NonOfficialCategory.MISSING)]
         [ProtoMember(16)]
         public Netzebene? Messebene { get; set; }
+
+        /// <summary>
+        ///     Produkt-/Leistungsbeschreibung, wenn IMD+X vorhanden Vgl. PRICAT IMD 7008
+        /// </summary>
+        [JsonProperty(PropertyName = "beschreibung", Required = Required.Default, Order = 17)]
+        [JsonPropertyName("beschreibung")]
+        [NonOfficial(NonOfficialCategory.MISSING)]
+        [ProtoMember(17)]
+        public string? Beschreibung { get; set; }
+
+        /// <summary>
+        /// Verarbeitungszeitraum. Details <see cref="Zeitraum" />
+        /// </summary>
+        [JsonProperty(PropertyName = "Verarbeitungszeitraum", Required = Required.Default, Order = 18)]
+        [JsonPropertyName("Verarbeitungszeitraum")]
+        [NonOfficial(NonOfficialCategory.MISSING)]
+        [ProtoMember(18)]
+        [JsonPropertyOrder(18)]
+        public Zeitraum? Verarbeitungszeitraum { get; set; }
     }
 }

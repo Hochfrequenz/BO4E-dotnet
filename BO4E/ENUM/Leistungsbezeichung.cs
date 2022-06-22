@@ -1,7 +1,7 @@
 namespace BO4E.ENUM
 {
     /// <summary> </summary>
-    public enum Leistungsbezeichung
+    public enum Leistungsbezeichnung
     {
         /// <summary>Z15 POG bei verbrauchender Marktlokation > 100.000 kWh/a mit iMS</summary>
         POG_VERBRAUCH_IMS_UEBER_100K,

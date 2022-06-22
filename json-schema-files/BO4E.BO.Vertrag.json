@@ -7,6 +7,19 @@
         "null"
       ],
       "properties": {
+        "timestamp": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "format": "date-time"
+        },
+        "guid": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
         "postleitzahl": {
           "type": "string"
         },
@@ -320,19 +333,6 @@
           ]
         },
         "ortsteil": {
-          "type": [
-            "string",
-            "null"
-          ]
-        },
-        "timestamp": {
-          "type": [
-            "string",
-            "null"
-          ],
-          "format": "date-time"
-        },
-        "guid": {
           "type": [
             "string",
             "null"
