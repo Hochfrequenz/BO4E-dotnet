@@ -37,8 +37,8 @@ namespace BO4E.BO
         /// </summary>
         [JsonProperty(Required = Required.Always, Order = 11, PropertyName = "gueltigkeit")]
         [JsonPropertyName("gueltigkeit")]
-        [JsonPropertyOrder(5)]
-        [ProtoMember(11)]
+        [JsonPropertyOrder(11)]
+        [ProtoMember(5)]
         [DataCategory(DataCategory.FINANCE)]
         public Zeitraum Gueltigkeit { get; set; }
 
