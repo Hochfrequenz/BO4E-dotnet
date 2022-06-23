@@ -64,7 +64,6 @@ namespace TestBO4E
             // COMponents
             typeof(Abweichung),
             typeof(Angebotsposition),
-            typeof(Angebotsteil),
             typeof(AufAbschlag),
             typeof(Aufgabe),
             typeof(Ausschreibungsdetail),
