@@ -31,7 +31,7 @@ namespace BO4E.ENUM
 
         /// <summary>Wechselstromzähler</summary>
         WECHSELSTROMZAEHLER,
-        
+
         /// <summary>Wirbelgaszähler</summary>
         WIRBELGASZAEHLER,
 
