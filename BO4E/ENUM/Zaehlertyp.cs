@@ -30,6 +30,18 @@ namespace BO4E.ENUM
         ULTRASCHALLGASZAEHLER,
 
         /// <summary>Wechselstromzähler</summary>
-        WECHSELSTROMZAEHLER
+        WECHSELSTROMZAEHLER,
+
+        /// <summary>Wirbelgaszähler</summary>
+        WIRBELGASZAEHLER,
+
+        /// <summary>Messdatenregistriergerät</summary>
+        MESSDATENREGISTRIERGERAET,
+
+        /// <summary>elektronischer Haushaltszähler</summary>
+        ELEKTRONISCHERHAUSHALTSZAEHLER,
+
+        /// <summary>Individuelle Abstimmung (Sonderausstattung)</summary>
+        SONDERAUSSTATTUNG,
     }
 }
