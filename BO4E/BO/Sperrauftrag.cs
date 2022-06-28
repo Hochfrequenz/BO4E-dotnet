@@ -23,21 +23,21 @@ namespace BO4E.BO
         public Sperrauftragsart Sperrauftragsart => Sperrauftragsart.SPERREN;
 
         /// <summary>
-        /// <see cref="ENUM.Sperrauftragsstatus"/>
+        /// <see cref="ENUM.Auftragsstatus"/>
         /// </summary>
         [JsonProperty("sperrauftragsstatus", Required = Required.Default)]
         [JsonPropertyName("sperrauftragsstatus")]
-        public Sperrauftragsstatus? Sperrauftragsstatus { get; set; }
+        public Auftragsstatus? Sperrauftragsstatus { get; set; }
 
         /// <summary>
-        /// Falls <see cref="Sperrauftragsstatus"/> = <see cref="ENUM.Sperrauftragsstatus.ABGELEHNT"/>
+        /// Falls <see cref="Sperrauftragsstatus"/> = <see cref="ENUM.Auftragsstatus.ABGELEHNT"/>
         /// </summary>
         [JsonProperty("sperrauftragsablehngrund", Required = Required.Default)]
         [JsonPropertyName("sperrauftragsablehngrund")]
         public Sperrauftragsablehngrund? Sperrauftragsablehnungsgrund { get; set; }
 
         /// <summary>
-        /// Falls <see cref="Sperrauftragsstatus"/> = <see cref="ENUM.Sperrauftragsstatus.GESCHEITERT"/>
+        /// Falls <see cref="Sperrauftragsstatus"/> = <see cref="ENUM.Auftragsstatus.GESCHEITERT"/>
         /// </summary>
         [JsonProperty("sperrauftragsverhinderungsgrund", Required = Required.Default)]
         [JsonPropertyName("sperrauftragsverhinderungsgrund")]

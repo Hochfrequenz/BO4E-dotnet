@@ -118,8 +118,14 @@ namespace BO4E.ENUM
         ENTGELT_EINBAU_BETRIEB_WARTUNG_MESSTECHNIK,
 
         /// <summary>9990001000631</summary>
+        /// <remarks>Ausgleichsenergie Überdeckung</remarks>
         [ProtoEnum(Name = nameof(BDEWArtikelnummer) + "_" + nameof(AUSGLEICHSENERGIE))]
         AUSGLEICHSENERGIE,
+
+        /// <summary>9990001000805</summary>
+        /// <remarks>Ausgleichsenergie Unterdeckung</remarks>
+        [ProtoEnum(Name = nameof(BDEWArtikelnummer) + "_" + nameof(AUSGLEICHSENERGIE_UNTERDECKUNG))]
+        AUSGLEICHSENERGIE_UNTERDECKUNG,
 
         /// <summary>9990001000649</summary>
         [ProtoEnum(Name = nameof(BDEWArtikelnummer) + "_" + nameof(ZAEHLEINRICHTUNG))]
@@ -182,7 +188,38 @@ namespace BO4E.ENUM
         STEUERBOX,
 
         /// <summary>9990001000798</summary>
+        /// <remarks>Entgelt für  Messstellenbetrieb</remarks>
         [ProtoEnum(Name = nameof(BDEWArtikelnummer) + "_" + nameof(MSB_INKL_MESSUNG))]
-        MSB_INKL_MESSUNG
+        MSB_INKL_MESSUNG,
+
+        /// <summary>9990001000813</summary>
+        /// <remarks>Zusatzdienstleistung nach § 35 Abs. 2 Nr. 1 MsbG</remarks>
+        [ProtoEnum(Name = nameof(BDEWArtikelnummer) + "_" + nameof(ZUSATZDIENSTLEISTUNG_PARAGRAPH_35_2_1_MSBG))]
+        ZUSATZDIENSTLEISTUNG_PARAGRAPH_35_2_1_MSBG,
+
+        /// <summary>9990001000821</summary>
+        /// <remarks>Zusatzdienstleistung nach § 35 Abs. 2 Nr. 2 MsbG</remarks>
+        [ProtoEnum(Name = nameof(BDEWArtikelnummer) + "_" + nameof(ZUSATZDIENSTLEISTUNG_PARAGRAPH_35_2_2_MSBG))]
+        ZUSATZDIENSTLEISTUNG_PARAGRAPH_35_2_2_MSBG,
+
+        /// <summary>9990001000839</summary>
+        /// <remarks>Zusatzdienstleistung nach § 35 Abs. 2 Nr. 3 MsbG</remarks>
+        [ProtoEnum(Name = nameof(BDEWArtikelnummer) + "_" + nameof(ZUSATZDIENSTLEISTUNG_PARAGRAPH_35_2_3_MSBG))]
+        ZUSATZDIENSTLEISTUNG_PARAGRAPH_35_2_3_MSBG,
+
+        /// <summary>9990001000847</summary>
+        /// <remarks>Zusatzdienstleistung nach § 35 Abs. 2 Nr. 4 MsbG</remarks>
+        [ProtoEnum(Name = nameof(BDEWArtikelnummer) + "_" + nameof(ZUSATZDIENSTLEISTUNG_PARAGRAPH_35_2_4_MSBG))]
+        ZUSATZDIENSTLEISTUNG_PARAGRAPH_35_2_4_MSBG,
+
+        /// <summary>9990001000855</summary>
+        /// <remarks>Zusatzdienstleistung nach § 35 Abs. 2 Nr. 5 MsbG</remarks>
+        [ProtoEnum(Name = nameof(BDEWArtikelnummer) + "_" + nameof(ZUSATZDIENSTLEISTUNG_PARAGRAPH_35_2_5_MSBG))]
+        ZUSATZDIENSTLEISTUNG_PARAGRAPH_35_2_5_MSBG,
+
+        /// <summary>9990001000863</summary>
+        /// <remarks>Zusatzdienstleistung nach § 35 Abs. 3 MsbG</remarks>
+        [ProtoEnum(Name = nameof(BDEWArtikelnummer) + "_" + nameof(ZUSATZDIENSTLEISTUNG_PARAGRAPH_35_3_MSBG))]
+        ZUSATZDIENSTLEISTUNG_PARAGRAPH_35_3_MSBG,
     }
 }

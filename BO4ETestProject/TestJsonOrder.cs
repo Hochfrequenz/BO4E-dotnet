@@ -39,7 +39,6 @@ namespace TestBO4E
             // DON'T ADD NEW ENTRIES TO THE LIST
 
             // BusinessObjects
-            typeof(Angebot),
             typeof(Auftrag),
             typeof(AuftragsStorno),
             typeof(Avis),
@@ -51,7 +50,6 @@ namespace TestBO4E
             typeof(Handelsunstimmigkeit),
             typeof(Kosten),
             typeof(LogObject),
-            typeof(Preisblatt),
             typeof(PreisblattDienstleistung),
             typeof(PreisblattKonzessionsabgabe),
             typeof(PreisblattMessung),
@@ -61,13 +59,10 @@ namespace TestBO4E
             typeof(Region),
             typeof(Sperrauftrag),
             typeof(SperrauftragsStorno),
-            typeof(Statusbericht),
 
             // COMponents
             typeof(Abweichung),
             typeof(Angebotsposition),
-            typeof(Angebotsteil),
-            typeof(Angebotsvariante),
             typeof(AufAbschlag),
             typeof(Aufgabe),
             typeof(Ausschreibungsdetail),
@@ -102,7 +97,6 @@ namespace TestBO4E
             typeof(PositionsAufAbschlag),
             typeof(Preis),
             typeof(Preisgarantie),
-            typeof(Preisposition),
             typeof(Preisstaffel),
             typeof(Rechenschritt),
             typeof(RechnungspositionFlat),

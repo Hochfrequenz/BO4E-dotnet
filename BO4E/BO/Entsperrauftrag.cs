@@ -18,11 +18,11 @@ namespace BO4E.BO
         public Sperrauftragsart Sperrauftragsart => Sperrauftragsart.ENTSPERREN;
 
         /// <summary>
-        /// <see cref="ENUM.Sperrauftragsstatus"/>
+        /// <see cref="ENUM.Auftragsstatus"/>
         /// </summary>
         [JsonProperty("sperrauftragsstatus", Required = Required.Default)]
         [JsonPropertyName("sperrauftragsstatus")]
-        public Sperrauftragsstatus? Sperrauftragsstatus { get; set; }
+        public Auftragsstatus? Sperrauftragsstatus { get; set; }
 
         /// <summary>
         /// Die Nummer des zu sperrenden Zählers

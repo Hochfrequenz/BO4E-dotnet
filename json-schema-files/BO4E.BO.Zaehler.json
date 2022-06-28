@@ -7,6 +7,19 @@
         "null"
       ],
       "properties": {
+        "timestamp": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "format": "date-time"
+        },
+        "guid": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
         "postleitzahl": {
           "type": "string"
         },
@@ -324,19 +337,6 @@
             "string",
             "null"
           ]
-        },
-        "timestamp": {
-          "type": [
-            "string",
-            "null"
-          ],
-          "format": "date-time"
-        },
-        "guid": {
-          "type": [
-            "string",
-            "null"
-          ]
         }
       },
       "required": [
@@ -383,15 +383,6 @@
         "null"
       ],
       "properties": {
-        "geraetenummer": {
-          "type": [
-            "string",
-            "null"
-          ]
-        },
-        "geraeteeigenschaften": {
-          "$ref": "#/definitions/Geraeteeigenschaften"
-        },
         "timestamp": {
           "type": [
             "string",
@@ -404,6 +395,15 @@
             "string",
             "null"
           ]
+        },
+        "geraetenummer": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "geraeteeigenschaften": {
+          "$ref": "#/definitions/Geraeteeigenschaften"
         }
       }
     },
@@ -413,6 +413,19 @@
         "null"
       ],
       "properties": {
+        "timestamp": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "format": "date-time"
+        },
+        "guid": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
         "geraetetyp": {
           "type": "string",
           "enum": [
@@ -520,19 +533,6 @@
               "null"
             ]
           }
-        },
-        "timestamp": {
-          "type": [
-            "string",
-            "null"
-          ],
-          "format": "date-time"
-        },
-        "guid": {
-          "type": [
-            "string",
-            "null"
-          ]
         }
       },
       "required": [
@@ -1005,9 +1005,6 @@
       ],
       "format": "date-time"
     },
-    "zaehlernummer": {
-      "type": "string"
-    },
     "externeReferenzen": {
       "type": [
         "array",
@@ -1016,6 +1013,15 @@
       "items": {
         "$ref": "#/definitions/ExterneReferenz"
       }
+    },
+    "guid": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "zaehlernummer": {
+      "type": "string"
     },
     "sparte": {
       "type": "string",
@@ -1026,12 +1032,6 @@
         "NAHWAERME",
         "WASSER",
         "ABWASSER"
-      ]
-    },
-    "guid": {
-      "type": [
-        "string",
-        "null"
       ]
     },
     "zaehlerauspraegung": {

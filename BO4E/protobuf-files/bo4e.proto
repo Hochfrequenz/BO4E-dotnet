@@ -162,22 +162,29 @@ enum BDEWArtikelnummer {
    BDEWArtikelnummer_ENTGELT_MESSUNG_ABLESUNG = 26;
    BDEWArtikelnummer_ENTGELT_EINBAU_BETRIEB_WARTUNG_MESSTECHNIK = 27;
    BDEWArtikelnummer_AUSGLEICHSENERGIE = 28;
-   BDEWArtikelnummer_ZAEHLEINRICHTUNG = 29;
-   BDEWArtikelnummer_WANDLER_MENGENUMWERTER = 30;
-   BDEWArtikelnummer_KOMMUNIKATIONSEINRICHTUNG = 31;
-   BDEWArtikelnummer_TECHNISCHE_STEUEREINRICHTUNG = 32;
-   BDEWArtikelnummer_PARAGRAF_19_STROM_NEV_UMLAGE = 33;
-   BDEWArtikelnummer_BEFESTIGUNGSEINRICHTUNG = 34;
-   BDEWArtikelnummer_OFFSHORE_HAFTUNGSUMLAGE = 35;
-   BDEWArtikelnummer_FIXE_ARBEITSENTGELTKOMPONENTE = 36;
-   BDEWArtikelnummer_FIXE_LEISTUNGSENTGELTKOMPONENTE = 37;
-   BDEWArtikelnummer_UMLAGE_ABSCHALTBARE_LASTEN = 38;
-   BDEWArtikelnummer_MEHRMENGE = 39;
-   BDEWArtikelnummer_MINDERMENGE = 40;
-   BDEWArtikelnummer_ENERGIESTEUER = 41;
-   BDEWArtikelnummer_SMARTMETER_GATEWAY = 42;
-   BDEWArtikelnummer_STEUERBOX = 43;
-   BDEWArtikelnummer_MSB_INKL_MESSUNG = 44;
+   BDEWArtikelnummer_AUSGLEICHSENERGIE_UNTERDECKUNG = 29;
+   BDEWArtikelnummer_ZAEHLEINRICHTUNG = 30;
+   BDEWArtikelnummer_WANDLER_MENGENUMWERTER = 31;
+   BDEWArtikelnummer_KOMMUNIKATIONSEINRICHTUNG = 32;
+   BDEWArtikelnummer_TECHNISCHE_STEUEREINRICHTUNG = 33;
+   BDEWArtikelnummer_PARAGRAF_19_STROM_NEV_UMLAGE = 34;
+   BDEWArtikelnummer_BEFESTIGUNGSEINRICHTUNG = 35;
+   BDEWArtikelnummer_OFFSHORE_HAFTUNGSUMLAGE = 36;
+   BDEWArtikelnummer_FIXE_ARBEITSENTGELTKOMPONENTE = 37;
+   BDEWArtikelnummer_FIXE_LEISTUNGSENTGELTKOMPONENTE = 38;
+   BDEWArtikelnummer_UMLAGE_ABSCHALTBARE_LASTEN = 39;
+   BDEWArtikelnummer_MEHRMENGE = 40;
+   BDEWArtikelnummer_MINDERMENGE = 41;
+   BDEWArtikelnummer_ENERGIESTEUER = 42;
+   BDEWArtikelnummer_SMARTMETER_GATEWAY = 43;
+   BDEWArtikelnummer_STEUERBOX = 44;
+   BDEWArtikelnummer_MSB_INKL_MESSUNG = 45;
+   BDEWArtikelnummer_ZUSATZDIENSTLEISTUNG_PARAGRAPH_35_2_1_MSBG = 46;
+   BDEWArtikelnummer_ZUSATZDIENSTLEISTUNG_PARAGRAPH_35_2_2_MSBG = 47;
+   BDEWArtikelnummer_ZUSATZDIENSTLEISTUNG_PARAGRAPH_35_2_3_MSBG = 48;
+   BDEWArtikelnummer_ZUSATZDIENSTLEISTUNG_PARAGRAPH_35_2_4_MSBG = 49;
+   BDEWArtikelnummer_ZUSATZDIENSTLEISTUNG_PARAGRAPH_35_2_5_MSBG = 50;
+   BDEWArtikelnummer_ZUSATZDIENSTLEISTUNG_PARAGRAPH_35_3_MSBG = 51;
 }
 enum Bearbeitungsstatus {
    option (.protobuf_net.enumopt).namespace = "BO4E.ENUM";
@@ -1046,7 +1053,7 @@ message Preisposition {
    option (.protobuf_net.msgopt).namespace = "BO4E.COM";
    Kalkulationsmethode Berechnungsmethode = 3;
    Leistungstyp Leistungstyp = 4;
-   string Leistungsbezeichung = 5;
+   string Leistungsbezeichnung = 5;
    Waehrungseinheit Preiseinheit = 6;
    Mengeneinheit Bezugsgroesse = 7;
    Zeiteinheit Zeitbasis = 8;
@@ -1055,6 +1062,11 @@ message Preisposition {
    Bemessungsgroesse Zonungsgroesse = 11;
    PositionsAufAbschlag ZuAbschlaege = 12;
    repeated Preisstaffel Preisstaffeln = 13;
+   string Preisschluesselstamm = 14;
+   int32 Positionsnummer = 15;
+   Netzebene Messebene = 16;
+   string Beschreibung = 17;
+   Zeitraum Verarbeitungszeitraum = 18;
 }
 message Preisstaffel {
    option (.protobuf_net.msgopt).namespace = "BO4E.COM";

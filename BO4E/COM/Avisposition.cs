@@ -53,31 +53,40 @@ namespace BO4E.COM
         public bool IstStorno { get; set; }
 
         /// <summary>
-        /// Überweisungsbetrag
+        /// Kennzeichnung, ob es sich bei der Rechnung auf die sich das Avis bezieht, um eine Stornorechnung handelt.
         /// </summary>
-        [JsonProperty(PropertyName = "gesamtBrutto", Required = Required.Always, Order = 4)]
-        [JsonPropertyName("gesamtBrutto")]
+        [JsonProperty(PropertyName = "istSelbstausgestellt", Required = Required.Default, Order = 4)]
+        [JsonPropertyName("istSelbstausgestellt")]
         [NonOfficial(NonOfficialCategory.MISSING)]
         [ProtoMember(4)]
+        public bool? IstSelbstausgestellt { get; set; }
+
+        /// <summary>
+        /// Überweisungsbetrag
+        /// </summary>
+        [JsonProperty(PropertyName = "gesamtBrutto", Required = Required.Always, Order = 5)]
+        [JsonPropertyName("gesamtBrutto")]
+        [NonOfficial(NonOfficialCategory.MISSING)]
+        [ProtoMember(5)]
         public Betrag GesamtBrutto { get; set; }
 
         /// <summary>
         /// Geforderter Rechnungsbetrag
         /// </summary>
-        [JsonProperty(PropertyName = "zuZahlen", Required = Required.Always, Order = 5)]
+        [JsonProperty(PropertyName = "zuZahlen", Required = Required.Always, Order = 6)]
         [JsonPropertyName("zuZahlen")]
         [NonOfficial(NonOfficialCategory.MISSING)]
-        [ProtoMember(5)]
+        [ProtoMember(6)]
         public Betrag ZuZahlen { get; set; }
 
         /// <summary>
         /// Abweichung bei Ablehnung einer COMDIS
         /// </summary>
         /// <see cref="Abweichung" />
-        [JsonProperty(PropertyName = "abweichung", Required = Required.Default, Order = 6)]
+        [JsonProperty(PropertyName = "abweichung", Required = Required.Default, Order = 7)]
         [JsonPropertyName("abweichung")]
         [NonOfficial(NonOfficialCategory.MISSING)]
-        [ProtoMember(6)]
+        [ProtoMember(7)]
         public Abweichung? Abweichung { get; set; }
     }
 }

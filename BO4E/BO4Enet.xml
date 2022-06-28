@@ -4,6 +4,187 @@
         <name>BO4Enet</name>
     </assembly>
     <members>
+        <member name="T:BO4E.BoMapper">
+            <summary>
+                This class maps generic JObjects to BO4E business objects.
+            </summary>
+        </member>
+        <member name="F:BO4E.BoMapper.PackagePrefix">
+            <summary>
+                namespace.subnamespace for the BO4E package. maybe there's a more elegant way using self reflection.
+            </summary>
+        </member>
+        <member name="M:BO4E.BoMapper.MapObject(Newtonsoft.Json.Linq.JObject,BO4E.meta.LenientConverters.LenientParsing)">
+            <summary>
+                shortcut for MapObject with an empty userProperties white list
+            </summary>
+            <param name="jobject">business object json</param>
+            <param name="lenient">lenient parsing flags</param>
+            <returns>
+                <see cref="M:BO4E.BoMapper.MapObject(System.String,Newtonsoft.Json.Linq.JObject,BO4E.meta.LenientConverters.LenientParsing)" />
+            </returns>
+        </member>
+        <member name="M:BO4E.BoMapper.MapObject(Newtonsoft.Json.Linq.JObject,System.Collections.Generic.HashSet{System.String},BO4E.meta.LenientConverters.LenientParsing)">
+            <summary>
+                shortcut for <see cref="M:BO4E.BoMapper.MapObject(System.String,Newtonsoft.Json.Linq.JObject,BO4E.meta.LenientConverters.LenientParsing)" /> iff <paramref name="jobject" /> has key
+                'boTyp'
+            </summary>
+            <param name="jobject">business object json</param>
+            <param name="lenient">lenient parsing flags</param>
+            <param name="userPropertiesWhiteList">white list of non BO4E standard field you'd like to have de-serialized</param>
+            <returns>
+                <see cref="M:BO4E.BoMapper.MapObject(System.String,Newtonsoft.Json.Linq.JObject,BO4E.meta.LenientConverters.LenientParsing)" />
+            </returns>
+        </member>
+        <member name="M:BO4E.BoMapper.MapObject(System.String,Newtonsoft.Json.Linq.JObject,BO4E.meta.LenientConverters.LenientParsing)">
+            <summary>
+                <see cref="M:BO4E.BoMapper.MapObject(System.String,Newtonsoft.Json.Linq.JObject,System.Collections.Generic.HashSet{System.String},BO4E.meta.LenientConverters.LenientParsing)" /> with empty user properties white list
+            </summary>
+        </member>
+        <member name="M:BO4E.BoMapper.MapObject(System.Type,Newtonsoft.Json.Linq.JObject,BO4E.meta.LenientConverters.LenientParsing)">
+            <summary>
+                <see cref="M:BO4E.BoMapper.MapObject(System.Type,Newtonsoft.Json.Linq.JObject,System.Collections.Generic.HashSet{System.String},BO4E.meta.LenientConverters.LenientParsing)" /> with empty user properties white list
+            </summary>
+        </member>
+        <member name="M:BO4E.BoMapper.MapObject``1(Newtonsoft.Json.Linq.JObject,BO4E.meta.LenientConverters.LenientParsing)">
+            <summary>
+                <see cref="M:BO4E.BoMapper.MapObject(System.Type,Newtonsoft.Json.Linq.JObject,System.Collections.Generic.HashSet{System.String},BO4E.meta.LenientConverters.LenientParsing)" />
+            </summary>
+        </member>
+        <member name="M:BO4E.BoMapper.MapObject(System.String,Newtonsoft.Json.Linq.JObject,System.Collections.Generic.HashSet{System.String},BO4E.meta.LenientConverters.LenientParsing)">
+            <summary>
+                <see cref="M:BO4E.BoMapper.MapObject(System.Type,Newtonsoft.Json.Linq.JObject,System.Collections.Generic.HashSet{System.String},BO4E.meta.LenientConverters.LenientParsing)" />
+            </summary>
+            <param name="businessObjectName"></param>
+            <param name="jobject"></param>
+            <param name="userPropertiesWhiteList"></param>
+            <param name="lenient"></param>
+            <returns></returns>
+        </member>
+        <member name="M:BO4E.BoMapper.MapObject(System.Type,Newtonsoft.Json.Linq.JObject,System.Collections.Generic.HashSet{System.String},BO4E.meta.LenientConverters.LenientParsing)">
+            <summary>
+                This method tries to map the given jobject to a BO4E style
+                Business Object of a given type. It works using reflection.
+            </summary>
+            If the mapping fails, there either is no BO with the given name or
+            you mixed up or forgot some attributes. Most of assertion errors
+            are likely to happen due to misspelled and case sensitive attributes.
+            The assertion error message should be a good hint to what is wrong.
+            If the method passes without an assertion error, there are at
+            least no unknown or wrong attributes.
+            <param name="jobject">JObject that should be mapped to a BO4E business object.</param>
+            <param name="userPropertiesWhiteList">white list of non BO4E standard field you'd like to have de-serialised</param>
+            <param name="businessObjectType">type of the business object</param>
+            <param name="lenient">allow less strict input objects</param>
+            <returns>
+                <list type="bullet">
+                    <item>
+                        <description>
+                            null iff there is no BO4E Business Object that matches the provided businessObjectName. Check
+                            the case sensitive spelling of the business object name
+                        </description>
+                    </item>
+                    <item>
+                        <description>
+                            a BO4E business object (<see cref="T:BO4E.BO.BusinessObject" />) of the type provided in
+                            businessObjectName
+                        </description>
+                    </item>
+                </list>
+            </returns>
+        </member>
+        <member name="M:BO4E.BoMapper.MapObject``1(Newtonsoft.Json.Linq.JObject,System.Collections.Generic.HashSet{System.String},BO4E.meta.LenientConverters.LenientParsing)">
+            <summary>
+                <see cref="M:BO4E.BoMapper.MapObject(System.Type,Newtonsoft.Json.Linq.JObject,System.Collections.Generic.HashSet{System.String},BO4E.meta.LenientConverters.LenientParsing)" />
+            </summary>
+            <typeparam name="TBusinessObjectType">type of return value</typeparam>
+            <param name="jobject">
+                <see cref="M:BO4E.BoMapper.MapObject(System.Type,Newtonsoft.Json.Linq.JObject,System.Collections.Generic.HashSet{System.String},BO4E.meta.LenientConverters.LenientParsing)" />
+            </param>
+            <param name="userPropertiesWhiteList">
+                <see cref="M:BO4E.BoMapper.MapObject(System.Type,Newtonsoft.Json.Linq.JObject,System.Collections.Generic.HashSet{System.String},BO4E.meta.LenientConverters.LenientParsing)" />
+            </param>
+            <param name="lenient">
+                <see cref="M:BO4E.BoMapper.MapObject(System.Type,Newtonsoft.Json.Linq.JObject,System.Collections.Generic.HashSet{System.String},BO4E.meta.LenientConverters.LenientParsing)" />
+            </param>
+            <returns>
+                <see cref="M:BO4E.BoMapper.MapObject(System.Type,Newtonsoft.Json.Linq.JObject,System.Collections.Generic.HashSet{System.String},BO4E.meta.LenientConverters.LenientParsing)" />
+            </returns>
+        </member>
+        <member name="M:BO4E.BoMapper.GetValidBoNames">
+            <summary>
+                Get a list of those strings that are known BO4E types (e.g. "Messlokation", "Energiemenge"...)
+            </summary>
+            <returns>a list of valid BO4E names; upper/lower case sensitive</returns>
+        </member>
+        <member name="M:BO4E.BoMapper.GetTypeForBoName(System.String)">
+            <summary>
+                Returns a Type for given Business Object name. This method is useful to avoid stringified code.
+            </summary>
+            <param name="businessObjectName">name of a business object; is lenient regarding upper/lower case</param>
+            <returns>a BusinessObjectType or null if no matching type was found</returns>
+            <exception cref="T:System.ArgumentNullException">if argument is null</exception>
+            <example>
+                <code>
+            BoMapper.GetTypeForBoName("Energiemenge"); // returns typeof(BO4E.BO.Energiemenge)
+            BoMapper.GetTypeForBoName("eNeRgIeMENgE"); // returns typeof(BO4E.BO.Energiemenge)
+            BoMapper.GetTypeForBoName("non existent BO"); // returns null
+            </code>
+            </example>
+        </member>
+        <member name="M:BO4E.BoMapper.GetJsonSchemeFor(System.String)">
+            <summary>
+                Get JSON Scheme for given Business Object name
+            </summary>
+            See
+            <see cref="M:BO4E.BoMapper.GetValidBoNames" />
+            for a list of valid arguments.
+            <param name="businessObjectName">Business Object name (e.g. "Messlokation")</param>
+            <returns>A JSON scheme to be used for validation purposes or null for invalid arguments.</returns>
+            <seealso cref="M:BO4E.BoMapper.GetJsonSchemeFor(System.Type)" />
+        </member>
+        <member name="M:BO4E.BoMapper.GetJsonSchemeFor(System.Type)">
+            <summary>
+                Get JSON Scheme for given Business Object type
+            </summary>
+            <param name="businessObjectType">Business Object type (e.g. typeof(BO4E.BO.Messlokation)</param>
+            <returns>A JSON scheme to be used for validation purposes.</returns>
+            <exception cref="T:System.ArgumentException">if given type is not derived from BusinessObject</exception>
+            <seealso cref="M:BO4E.BoMapper.GetJsonSchemeFor(System.String)" />
+        </member>
+        <member name="M:BO4E.BoMapper.GetAnnotatedFields(System.String)">
+            <summary>
+                Shortcut for <see cref="M:BO4E.BoMapper.GetAnnotatedFields(System.String,System.Type)" /> with DataCategoryAttribute as default.
+            </summary>
+            <param name="boName">name of the business object in title case
+                <example>Messlokation</example>
+            </param>
+            <returns>Array of FieldInfos</returns>
+        </member>
+        <member name="M:BO4E.BoMapper.GetAnnotatedFields(System.Type,System.Type)">
+            <summary>
+                Get those fields of a business object that do have attributes/annotations.
+                The result is ordered by the JsonProperty->Order value (assuming 0 if null).
+            </summary>
+            <param name="boType">type of the business object</param>
+            <param name="attributeType">type of the attribute/annotation you're interested in
+                <example>typeof(DataCategoryAttribute)</example>
+            </param>
+            <returns>Array of FieldInfos</returns>
+        </member>
+        <member name="M:BO4E.BoMapper.GetAnnotatedFields(System.String,System.Type)">
+            <summary>
+                Get those fields of a business object that do have attributes/annotations.
+                The result is ordered by the JsonProperty->Order value (assuming 0 if null).
+            </summary>
+            <param name="boName">name of the business object in title case
+                <example>Messlokation</example>
+            </param>
+            <param name="attributeType">type of the attribute/annotation you're interested in
+                <example>typeof(DataCategoryAttribute)</example>
+            </param>
+            <returns>Array of FieldInfos</returns>
+        </member>
         <member name="T:BO4E.BO.Anfrage">
             <summary>
             Anfrage BO
@@ -754,7 +935,7 @@
         </member>
         <member name="P:BO4E.BO.Entsperrauftrag.Sperrauftragsstatus">
             <summary>
-            <see cref="T:BO4E.ENUM.Sperrauftragsstatus"/>
+            <see cref="T:BO4E.ENUM.Auftragsstatus"/>
             </summary>
         </member>
         <member name="P:BO4E.BO.Entsperrauftrag.Zaehlernummer">
@@ -1041,7 +1222,7 @@
         </member>
         <member name="P:BO4E.BO.Marktlokation.ZaehlwerkeBeteiligteMarktrolle">
             <summary>
-                Liste für Zählwerke der beteiligten Martrolle
+                Liste der Zählwerke der beteiligten Martrolle
             </summary>
         </member>
         <member name="P:BO4E.BO.Marktlokation.Verbrauchsmenge">
@@ -1634,17 +1815,17 @@
         </member>
         <member name="P:BO4E.BO.Sperrauftrag.Sperrauftragsstatus">
             <summary>
-            <see cref="T:BO4E.ENUM.Sperrauftragsstatus"/>
+            <see cref="T:BO4E.ENUM.Auftragsstatus"/>
             </summary>
         </member>
         <member name="P:BO4E.BO.Sperrauftrag.Sperrauftragsablehnungsgrund">
             <summary>
-            Falls <see cref="P:BO4E.BO.Sperrauftrag.Sperrauftragsstatus"/> = <see cref="F:BO4E.ENUM.Sperrauftragsstatus.ABGELEHNT"/>
+            Falls <see cref="P:BO4E.BO.Sperrauftrag.Sperrauftragsstatus"/> = <see cref="F:BO4E.ENUM.Auftragsstatus.ABGELEHNT"/>
             </summary>
         </member>
         <member name="P:BO4E.BO.Sperrauftrag.Sperrauftragsverhinderungsgrund">
             <summary>
-            Falls <see cref="P:BO4E.BO.Sperrauftrag.Sperrauftragsstatus"/> = <see cref="F:BO4E.ENUM.Sperrauftragsstatus.GESCHEITERT"/>
+            Falls <see cref="P:BO4E.BO.Sperrauftrag.Sperrauftragsstatus"/> = <see cref="F:BO4E.ENUM.Auftragsstatus.GESCHEITERT"/>
             </summary>
         </member>
         <member name="P:BO4E.BO.Sperrauftrag.Zaehlernummer">
@@ -1902,187 +2083,6 @@
         </member>
         <member name="P:BO4E.BO.Zaehler.Geraete">
             <summary>Liste der Geräte, die zu diesem Zähler gehören.</summary>
-        </member>
-        <member name="T:BO4E.BoMapper">
-            <summary>
-                This class maps generic JObjects to BO4E business objects.
-            </summary>
-        </member>
-        <member name="F:BO4E.BoMapper.PackagePrefix">
-            <summary>
-                namespace.subnamespace for the BO4E package. maybe there's a more elegant way using self reflection.
-            </summary>
-        </member>
-        <member name="M:BO4E.BoMapper.MapObject(Newtonsoft.Json.Linq.JObject,BO4E.meta.LenientConverters.LenientParsing)">
-            <summary>
-                shortcut for MapObject with an empty userProperties white list
-            </summary>
-            <param name="jobject">business object json</param>
-            <param name="lenient">lenient parsing flags</param>
-            <returns>
-                <see cref="M:BO4E.BoMapper.MapObject(System.String,Newtonsoft.Json.Linq.JObject,BO4E.meta.LenientConverters.LenientParsing)" />
-            </returns>
-        </member>
-        <member name="M:BO4E.BoMapper.MapObject(Newtonsoft.Json.Linq.JObject,System.Collections.Generic.HashSet{System.String},BO4E.meta.LenientConverters.LenientParsing)">
-            <summary>
-                shortcut for <see cref="M:BO4E.BoMapper.MapObject(System.String,Newtonsoft.Json.Linq.JObject,BO4E.meta.LenientConverters.LenientParsing)" /> iff <paramref name="jobject" /> has key
-                'boTyp'
-            </summary>
-            <param name="jobject">business object json</param>
-            <param name="lenient">lenient parsing flags</param>
-            <param name="userPropertiesWhiteList">white list of non BO4E standard field you'd like to have de-serialized</param>
-            <returns>
-                <see cref="M:BO4E.BoMapper.MapObject(System.String,Newtonsoft.Json.Linq.JObject,BO4E.meta.LenientConverters.LenientParsing)" />
-            </returns>
-        </member>
-        <member name="M:BO4E.BoMapper.MapObject(System.String,Newtonsoft.Json.Linq.JObject,BO4E.meta.LenientConverters.LenientParsing)">
-            <summary>
-                <see cref="M:BO4E.BoMapper.MapObject(System.String,Newtonsoft.Json.Linq.JObject,System.Collections.Generic.HashSet{System.String},BO4E.meta.LenientConverters.LenientParsing)" /> with empty user properties white list
-            </summary>
-        </member>
-        <member name="M:BO4E.BoMapper.MapObject(System.Type,Newtonsoft.Json.Linq.JObject,BO4E.meta.LenientConverters.LenientParsing)">
-            <summary>
-                <see cref="M:BO4E.BoMapper.MapObject(System.Type,Newtonsoft.Json.Linq.JObject,System.Collections.Generic.HashSet{System.String},BO4E.meta.LenientConverters.LenientParsing)" /> with empty user properties white list
-            </summary>
-        </member>
-        <member name="M:BO4E.BoMapper.MapObject``1(Newtonsoft.Json.Linq.JObject,BO4E.meta.LenientConverters.LenientParsing)">
-            <summary>
-                <see cref="M:BO4E.BoMapper.MapObject(System.Type,Newtonsoft.Json.Linq.JObject,System.Collections.Generic.HashSet{System.String},BO4E.meta.LenientConverters.LenientParsing)" />
-            </summary>
-        </member>
-        <member name="M:BO4E.BoMapper.MapObject(System.String,Newtonsoft.Json.Linq.JObject,System.Collections.Generic.HashSet{System.String},BO4E.meta.LenientConverters.LenientParsing)">
-            <summary>
-                <see cref="M:BO4E.BoMapper.MapObject(System.Type,Newtonsoft.Json.Linq.JObject,System.Collections.Generic.HashSet{System.String},BO4E.meta.LenientConverters.LenientParsing)" />
-            </summary>
-            <param name="businessObjectName"></param>
-            <param name="jobject"></param>
-            <param name="userPropertiesWhiteList"></param>
-            <param name="lenient"></param>
-            <returns></returns>
-        </member>
-        <member name="M:BO4E.BoMapper.MapObject(System.Type,Newtonsoft.Json.Linq.JObject,System.Collections.Generic.HashSet{System.String},BO4E.meta.LenientConverters.LenientParsing)">
-            <summary>
-                This method tries to map the given jobject to a BO4E style
-                Business Object of a given type. It works using reflection.
-            </summary>
-            If the mapping fails, there either is no BO with the given name or
-            you mixed up or forgot some attributes. Most of assertion errors
-            are likely to happen due to misspelled and case sensitive attributes.
-            The assertion error message should be a good hint to what is wrong.
-            If the method passes without an assertion error, there are at
-            least no unknown or wrong attributes.
-            <param name="jobject">JObject that should be mapped to a BO4E business object.</param>
-            <param name="userPropertiesWhiteList">white list of non BO4E standard field you'd like to have de-serialised</param>
-            <param name="businessObjectType">type of the business object</param>
-            <param name="lenient">allow less strict input objects</param>
-            <returns>
-                <list type="bullet">
-                    <item>
-                        <description>
-                            null iff there is no BO4E Business Object that matches the provided businessObjectName. Check
-                            the case sensitive spelling of the business object name
-                        </description>
-                    </item>
-                    <item>
-                        <description>
-                            a BO4E business object (<see cref="T:BO4E.BO.BusinessObject" />) of the type provided in
-                            businessObjectName
-                        </description>
-                    </item>
-                </list>
-            </returns>
-        </member>
-        <member name="M:BO4E.BoMapper.MapObject``1(Newtonsoft.Json.Linq.JObject,System.Collections.Generic.HashSet{System.String},BO4E.meta.LenientConverters.LenientParsing)">
-            <summary>
-                <see cref="M:BO4E.BoMapper.MapObject(System.Type,Newtonsoft.Json.Linq.JObject,System.Collections.Generic.HashSet{System.String},BO4E.meta.LenientConverters.LenientParsing)" />
-            </summary>
-            <typeparam name="TBusinessObjectType">type of return value</typeparam>
-            <param name="jobject">
-                <see cref="M:BO4E.BoMapper.MapObject(System.Type,Newtonsoft.Json.Linq.JObject,System.Collections.Generic.HashSet{System.String},BO4E.meta.LenientConverters.LenientParsing)" />
-            </param>
-            <param name="userPropertiesWhiteList">
-                <see cref="M:BO4E.BoMapper.MapObject(System.Type,Newtonsoft.Json.Linq.JObject,System.Collections.Generic.HashSet{System.String},BO4E.meta.LenientConverters.LenientParsing)" />
-            </param>
-            <param name="lenient">
-                <see cref="M:BO4E.BoMapper.MapObject(System.Type,Newtonsoft.Json.Linq.JObject,System.Collections.Generic.HashSet{System.String},BO4E.meta.LenientConverters.LenientParsing)" />
-            </param>
-            <returns>
-                <see cref="M:BO4E.BoMapper.MapObject(System.Type,Newtonsoft.Json.Linq.JObject,System.Collections.Generic.HashSet{System.String},BO4E.meta.LenientConverters.LenientParsing)" />
-            </returns>
-        </member>
-        <member name="M:BO4E.BoMapper.GetValidBoNames">
-            <summary>
-                Get a list of those strings that are known BO4E types (e.g. "Messlokation", "Energiemenge"...)
-            </summary>
-            <returns>a list of valid BO4E names; upper/lower case sensitive</returns>
-        </member>
-        <member name="M:BO4E.BoMapper.GetTypeForBoName(System.String)">
-            <summary>
-                Returns a Type for given Business Object name. This method is useful to avoid stringified code.
-            </summary>
-            <param name="businessObjectName">name of a business object; is lenient regarding upper/lower case</param>
-            <returns>a BusinessObjectType or null if no matching type was found</returns>
-            <exception cref="T:System.ArgumentNullException">if argument is null</exception>
-            <example>
-                <code>
-            BoMapper.GetTypeForBoName("Energiemenge"); // returns typeof(BO4E.BO.Energiemenge)
-            BoMapper.GetTypeForBoName("eNeRgIeMENgE"); // returns typeof(BO4E.BO.Energiemenge)
-            BoMapper.GetTypeForBoName("non existent BO"); // returns null
-            </code>
-            </example>
-        </member>
-        <member name="M:BO4E.BoMapper.GetJsonSchemeFor(System.String)">
-            <summary>
-                Get JSON Scheme for given Business Object name
-            </summary>
-            See
-            <see cref="M:BO4E.BoMapper.GetValidBoNames" />
-            for a list of valid arguments.
-            <param name="businessObjectName">Business Object name (e.g. "Messlokation")</param>
-            <returns>A JSON scheme to be used for validation purposes or null for invalid arguments.</returns>
-            <seealso cref="M:BO4E.BoMapper.GetJsonSchemeFor(System.Type)" />
-        </member>
-        <member name="M:BO4E.BoMapper.GetJsonSchemeFor(System.Type)">
-            <summary>
-                Get JSON Scheme for given Business Object type
-            </summary>
-            <param name="businessObjectType">Business Object type (e.g. typeof(BO4E.BO.Messlokation)</param>
-            <returns>A JSON scheme to be used for validation purposes.</returns>
-            <exception cref="T:System.ArgumentException">if given type is not derived from BusinessObject</exception>
-            <seealso cref="M:BO4E.BoMapper.GetJsonSchemeFor(System.String)" />
-        </member>
-        <member name="M:BO4E.BoMapper.GetAnnotatedFields(System.String)">
-            <summary>
-                Shortcut for <see cref="M:BO4E.BoMapper.GetAnnotatedFields(System.String,System.Type)" /> with DataCategoryAttribute as default.
-            </summary>
-            <param name="boName">name of the business object in title case
-                <example>Messlokation</example>
-            </param>
-            <returns>Array of FieldInfos</returns>
-        </member>
-        <member name="M:BO4E.BoMapper.GetAnnotatedFields(System.Type,System.Type)">
-            <summary>
-                Get those fields of a business object that do have attributes/annotations.
-                The result is ordered by the JsonProperty->Order value (assuming 0 if null).
-            </summary>
-            <param name="boType">type of the business object</param>
-            <param name="attributeType">type of the attribute/annotation you're interested in
-                <example>typeof(DataCategoryAttribute)</example>
-            </param>
-            <returns>Array of FieldInfos</returns>
-        </member>
-        <member name="M:BO4E.BoMapper.GetAnnotatedFields(System.String,System.Type)">
-            <summary>
-                Get those fields of a business object that do have attributes/annotations.
-                The result is ordered by the JsonProperty->Order value (assuming 0 if null).
-            </summary>
-            <param name="boName">name of the business object in title case
-                <example>Messlokation</example>
-            </param>
-            <param name="attributeType">type of the attribute/annotation you're interested in
-                <example>typeof(DataCategoryAttribute)</example>
-            </param>
-            <returns>Array of FieldInfos</returns>
         </member>
         <member name="T:BO4E.COM.Abweichung">
             <summary>
@@ -2469,6 +2469,11 @@
             </summary>
         </member>
         <member name="P:BO4E.COM.Avisposition.IstStorno">
+            <summary>
+            Kennzeichnung, ob es sich bei der Rechnung auf die sich das Avis bezieht, um eine Stornorechnung handelt.
+            </summary>
+        </member>
+        <member name="P:BO4E.COM.Avisposition.IstSelbstausgestellt">
             <summary>
             Kennzeichnung, ob es sich bei der Rechnung auf die sich das Avis bezieht, um eine Stornorechnung handelt.
             </summary>
@@ -3127,7 +3132,7 @@
                 Standardisierte Bezeichnung für die abgerechnete Leistungserbringung. Details <see cref="T:BO4E.ENUM.Leistungstyp" />
             </summary>
         </member>
-        <member name="P:BO4E.COM.Preisposition.Leistungsbezeichung">
+        <member name="P:BO4E.COM.Preisposition.Leistungsbezeichnung">
             <summary>Bezeichnung für die in der Position abgebildete Leistungserbringung</summary>
         </member>
         <member name="P:BO4E.COM.Preisposition.Preiseinheit">
@@ -3168,6 +3173,25 @@
         </member>
         <member name="P:BO4E.COM.Preisposition.Preisstaffeln">
             <summary>Preisstaffeln, die zu dieser Preisposition gehören. Details <see cref="T:BO4E.COM.Preisstaffel" /></summary>
+        </member>
+        <member name="P:BO4E.COM.Preisposition.Preisschluesselstamm">
+            <summary>Preisschlüsselstamm></summary>
+        </member>
+        <member name="P:BO4E.COM.Preisposition.Positionsnummer">
+            <summary>Fortlaufende Nummer für die Preisposition</summary>
+        </member>
+        <member name="P:BO4E.COM.Preisposition.Messebene">
+            <summary>Vgl. PRICAT IMD 7009</summary>
+        </member>
+        <member name="P:BO4E.COM.Preisposition.Beschreibung">
+            <summary>
+                Produkt-/Leistungsbeschreibung, wenn IMD+X vorhanden Vgl. PRICAT IMD 7008
+            </summary>
+        </member>
+        <member name="P:BO4E.COM.Preisposition.Verarbeitungszeitraum">
+            <summary>
+            Verarbeitungszeitraum. Details <see cref="T:BO4E.COM.Zeitraum" />
+            </summary>
         </member>
         <member name="T:BO4E.COM.Preisstaffel">
             <summary>Gibt die Staffelgrenzen der jeweiligen Preise an.</summary>
@@ -4577,6 +4601,48 @@
         <member name="F:BO4E.ENUM.AufAbschlagsziel.GESAMTPREIS">
             <summary>Auf/Abschlag auf den Gesamtpreis</summary>
         </member>
+        <member name="T:BO4E.ENUM.Auftragsstatus">
+            <summary>
+            Auftragststatus (Planungsstatus in IFTSTA STS 4405 (21029) and Sperrauftragsstatus in IFTSTA STS 4405 (21039/21040))
+            Der Sperrauftragsstatus beschreibt den Status eines <see cref="T:BO4E.BO.Sperrauftrag"/>s
+            </summary>
+        </member>
+        <member name="F:BO4E.ENUM.Auftragsstatus.GESCHEITERT">
+            <summary>
+            Der Auftrag ist gescheitert
+            </summary>
+            <remarks>EDIFACT DE4405: Z13</remarks>
+        </member>
+        <member name="F:BO4E.ENUM.Auftragsstatus.ERFOLGREICH">
+            <summary>
+            Der Auftrag wurde erfolgreich bearbeitet
+            </summary>
+            <remarks>EDIFACT DE4405: Z14</remarks>
+        </member>
+        <member name="F:BO4E.ENUM.Auftragsstatus.GEPLANT">
+            <summary>
+            Der Auftrag ist geplant
+            </summary>
+            <remarks>EDIFACT DE4405: Z17</remarks>
+        </member>
+        <member name="F:BO4E.ENUM.Auftragsstatus.ZUGESTIMMT">
+            <summary>
+            Dem Auftrag wurde zugestimmmt (aber noch nicht durchgeführt)
+            </summary>
+            <remarks>EDIFACT DE4405: Z30</remarks>
+        </member>
+        <member name="F:BO4E.ENUM.Auftragsstatus.WIDERSPROCHEN">
+            <summary>
+            Dem Auftrag wurde widersprochen
+            </summary>
+            <remarks>EDIFACT DE4405: Z31</remarks>
+        </member>
+        <member name="F:BO4E.ENUM.Auftragsstatus.ABGELEHNT">
+            <summary>
+            Der Auftrag wurde abgelehnt
+            </summary>
+            <remarks>EDIFACT DE4405: Z32</remarks>
+        </member>
         <member name="T:BO4E.ENUM.Ausschreibungsportal">
             <summary>Aufzählung der unterstützten Ausschreibungsportale.</summary>
         </member>
@@ -4736,6 +4802,11 @@
         </member>
         <member name="F:BO4E.ENUM.BDEWArtikelnummer.AUSGLEICHSENERGIE">
             <summary>9990001000631</summary>
+            <remarks>Ausgleichsenergie Überdeckung</remarks>
+        </member>
+        <member name="F:BO4E.ENUM.BDEWArtikelnummer.AUSGLEICHSENERGIE_UNTERDECKUNG">
+            <summary>9990001000805</summary>
+            <remarks>Ausgleichsenergie Unterdeckung</remarks>
         </member>
         <member name="F:BO4E.ENUM.BDEWArtikelnummer.ZAEHLEINRICHTUNG">
             <summary>9990001000649</summary>
@@ -4784,6 +4855,31 @@
         </member>
         <member name="F:BO4E.ENUM.BDEWArtikelnummer.MSB_INKL_MESSUNG">
             <summary>9990001000798</summary>
+            <remarks>Entgelt für  Messstellenbetrieb</remarks>
+        </member>
+        <member name="F:BO4E.ENUM.BDEWArtikelnummer.ZUSATZDIENSTLEISTUNG_PARAGRAPH_35_2_1_MSBG">
+            <summary>9990001000813</summary>
+            <remarks>Zusatzdienstleistung nach § 35 Abs. 2 Nr. 1 MsbG</remarks>
+        </member>
+        <member name="F:BO4E.ENUM.BDEWArtikelnummer.ZUSATZDIENSTLEISTUNG_PARAGRAPH_35_2_2_MSBG">
+            <summary>9990001000821</summary>
+            <remarks>Zusatzdienstleistung nach § 35 Abs. 2 Nr. 2 MsbG</remarks>
+        </member>
+        <member name="F:BO4E.ENUM.BDEWArtikelnummer.ZUSATZDIENSTLEISTUNG_PARAGRAPH_35_2_3_MSBG">
+            <summary>9990001000839</summary>
+            <remarks>Zusatzdienstleistung nach § 35 Abs. 2 Nr. 3 MsbG</remarks>
+        </member>
+        <member name="F:BO4E.ENUM.BDEWArtikelnummer.ZUSATZDIENSTLEISTUNG_PARAGRAPH_35_2_4_MSBG">
+            <summary>9990001000847</summary>
+            <remarks>Zusatzdienstleistung nach § 35 Abs. 2 Nr. 4 MsbG</remarks>
+        </member>
+        <member name="F:BO4E.ENUM.BDEWArtikelnummer.ZUSATZDIENSTLEISTUNG_PARAGRAPH_35_2_5_MSBG">
+            <summary>9990001000855</summary>
+            <remarks>Zusatzdienstleistung nach § 35 Abs. 2 Nr. 5 MsbG</remarks>
+        </member>
+        <member name="F:BO4E.ENUM.BDEWArtikelnummer.ZUSATZDIENSTLEISTUNG_PARAGRAPH_35_3_MSBG">
+            <summary>9990001000863</summary>
+            <remarks>Zusatzdienstleistung nach § 35 Abs. 3 MsbG</remarks>
         </member>
         <member name="T:BO4E.ENUM.Bearbeitungsstatus">
             <summary>
@@ -6913,6 +7009,60 @@
         <member name="F:BO4E.ENUM.Landescode.ZW">
             <summary>Zimbabwe</summary>
         </member>
+        <member name="T:BO4E.ENUM.Leistungsbezeichnung">
+            <summary> </summary>
+        </member>
+        <member name="F:BO4E.ENUM.Leistungsbezeichnung.POG_VERBRAUCH_IMS_UEBER_100K">
+            <summary>Z15 POG bei verbrauchender Marktlokation > 100.000 kWh/a mit iMS</summary>
+        </member>
+        <member name="F:BO4E.ENUM.Leistungsbezeichnung.POG_VERBRAUCH_IMS_50K_BIS_100K">
+            <summary>Z16 POG bei verbrauchender Marktlokation [50.000 kWh/a; 100.000 kWh/a] mit iMS</summary>
+        </member>
+        <member name="F:BO4E.ENUM.Leistungsbezeichnung.POG_VERBRAUCH_IMS_20K_BIS_50K">
+            <summary>Z17 POG bei verbrauchender Marktlokation [20.000 kWh/a; 50.000 kWh/a] mit iMS</summary>
+        </member>
+        <member name="F:BO4E.ENUM.Leistungsbezeichnung.POG_VERBRAUCH_IMS_10K_BIS_20K">
+            <summary>Z18 POG bei verbrauchender Marktlokation [10.000 kWh/a; 20.000 kWh/a] mit iMS</summary>
+        </member>
+        <member name="F:BO4E.ENUM.Leistungsbezeichnung.POG_VERBRAUCH_IMS_UNTERBRECHBAR">
+            <summary>Z19 POG bei verbrauchender Marktlokation mit unterbrechbaren Verbrauchseinrichtung nach § 14a EnWG mit iMS</summary>
+        </member>
+        <member name="F:BO4E.ENUM.Leistungsbezeichnung.POG_VERBRAUCH_IMS_6K_BIS_10K">
+            <summary>Z20 POG bei verbrauchender Marktlokation [6.000 kWh/a; 10.000 kWh/a] mit iMS</summary>
+        </member>
+        <member name="F:BO4E.ENUM.Leistungsbezeichnung.POG_ERZEUGUNG_IMS_7_BIS_15">
+            <summary>Z21 POG bei erzeugender Marktlokation [7 kW; 15kW] mit iMS</summary>
+        </member>
+        <member name="F:BO4E.ENUM.Leistungsbezeichnung.POG_ERZEUGUNG_IMS_15_BIS_30">
+            <summary>Z22 POG bei erzeugender Marktlokation [15 kW; 30kW] mit iMS</summary>
+        </member>
+        <member name="F:BO4E.ENUM.Leistungsbezeichnung.POG_ERZEUGUNG_IMS_30_BIS_100">
+            <summary>Z23 POG bei erzeugender Marktlokation [30 kW; 100 kW] mit iMS</summary>
+        </member>
+        <member name="F:BO4E.ENUM.Leistungsbezeichnung.POG_ERZEUGUNG_IMS_UEBER_100">
+            <summary>Z24 POG bei erzeugender Marktlokation > 100 kW mit iMS</summary>
+        </member>
+        <member name="F:BO4E.ENUM.Leistungsbezeichnung.POG_MME">
+            <summary>Z25 POG bei Marktlokation mit mME</summary>
+        </member>
+        <member name="F:BO4E.ENUM.Leistungsbezeichnung.POG_VERBRAUCH_IMS_4K_BIS_6K">
+            <summary>Z28 POG bei verbrauchender Marktlokation [4.000 kWh/a; 6.000 kWh/a] mit iMS</summary>
+        </member>
+        <member name="F:BO4E.ENUM.Leistungsbezeichnung.POG_VERBRAUCH_IMS_3K_BIS_4K">
+            <summary>Z29 POG bei verbrauchender Marktlokation [3.000 kWh/a; 4.000 kWh/a] mit iMS</summary>
+        </member>
+        <member name="F:BO4E.ENUM.Leistungsbezeichnung.POG_VERBRAUCH_IMS_2K_BIS_3K">
+            <summary>Z30 POG bei verbrauchender Marktlokation [2.000 kWh/a; 3.000 kWh/a] mit iMS</summary>
+        </member>
+        <member name="F:BO4E.ENUM.Leistungsbezeichnung.POG_VERBRAUCH_IMS_0_BIS_2K">
+            <summary>Z31 POG bei verbrauchender Marktlokation [0 kWh/a; 2.000 kWh/a] mit iMS</summary>
+        </member>
+        <member name="F:BO4E.ENUM.Leistungsbezeichnung.POG_ERZEUGUNG_IMS_OPTIONAL">
+            <summary>Z32 POG bei optionaler Ausstattung mit iMS von Neuanlagen von erzeugender Marktlokation</summary>
+        </member>
+        <member name="F:BO4E.ENUM.Leistungsbezeichnung.ZUSATZLEISTUNG">
+            <summary>Z41 Zusatzleistung</summary>
+        </member>
         <member name="T:BO4E.ENUM.Leistungstyp">
             <summary> </summary>
         </member>
@@ -7949,7 +8099,7 @@
         </member>
         <member name="T:BO4E.ENUM.Sperrauftragsart">
             <summary>
-            Der Sperrauftragsstatus beschreibt die Art eines <see cref="T:BO4E.BO.Sperrauftrag"/>s.
+            Die Sperrauftragsart beschreibt die Art eines <see cref="T:BO4E.BO.Sperrauftrag"/>s.
             </summary>
         </member>
         <member name="F:BO4E.ENUM.Sperrauftragsart.SPERREN">
@@ -7963,42 +8113,6 @@
             Ein Zähler soll entsperrt werden
             </summary>
             <remarks>EDIFACT Z52 in Nachricht 17117</remarks>
-        </member>
-        <member name="T:BO4E.ENUM.Sperrauftragsstatus">
-            <summary>
-            Der Sperrauftragsstatus beschreibt den Status eines <see cref="T:BO4E.BO.Auftrag"/>s
-            </summary>
-            <remarks>Diese Information kann in der EDIFACT-Nachricht des Typs 21039/21040 verwendet werden</remarks>
-        </member>
-        <member name="F:BO4E.ENUM.Sperrauftragsstatus.ERFOLGREICH">
-            <summary>
-            Der Auftrag wurde erfolgreich bearbeitet
-            </summary>
-            <remarks>EDIFACT DE4405: Z14</remarks>
-        </member>
-        <member name="F:BO4E.ENUM.Sperrauftragsstatus.ABGELEHNT">
-            <summary>
-            Der Auftrag wurde abgelehnt
-            </summary>
-            <remarks>EDIFACT DE4405: Z32</remarks>
-        </member>
-        <member name="F:BO4E.ENUM.Sperrauftragsstatus.GESCHEITERT">
-            <summary>
-            Der Auftrag ist gescheitert
-            </summary>
-            <remarks>EDIFACT DE4405: Z13</remarks>
-        </member>
-        <member name="F:BO4E.ENUM.Sperrauftragsstatus.GEPLANT">
-            <summary>
-            Die (Ent)sperrung ist geplant
-            </summary>
-            <remarks>EDIFACT DE4405: Z17</remarks>
-        </member>
-        <member name="F:BO4E.ENUM.Sperrauftragsstatus.ZUGESTIMMT">
-            <summary>
-            Die (Ent)sperrung wurde zugestimmmt (aber noch nicht durchgeführt)
-            </summary>
-            <remarks>EDIFACT DE4405: Z30</remarks>
         </member>
         <member name="T:BO4E.ENUM.Sperrauftragsverhinderungsgrund">
             <summary>

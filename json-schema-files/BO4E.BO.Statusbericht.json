@@ -192,20 +192,7 @@
   },
   "type": "object",
   "properties": {
-    "status": {
-      "type": "string",
-      "enum": [
-        "ERFOLGREICH",
-        "FEHLER"
-      ]
-    },
     "boTyp": {
-      "type": [
-        "string",
-        "null"
-      ]
-    },
-    "pruefgegenstand": {
       "type": [
         "string",
         "null"
@@ -217,19 +204,12 @@
         "null"
       ]
     },
-    "datumPruefung": {
-      "type": "string",
-      "format": "date-time"
-    },
     "timestamp": {
       "type": [
         "string",
         "null"
       ],
       "format": "date-time"
-    },
-    "fehler": {
-      "$ref": "#/definitions/Fehler"
     },
     "externeReferenzen": {
       "type": [
@@ -245,6 +225,26 @@
         "string",
         "null"
       ]
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "ERFOLGREICH",
+        "FEHLER"
+      ]
+    },
+    "pruefgegenstand": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "datumPruefung": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "fehler": {
+      "$ref": "#/definitions/Fehler"
     }
   },
   "required": [

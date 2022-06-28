@@ -7,6 +7,19 @@
         "null"
       ],
       "properties": {
+        "timestamp": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "format": "date-time"
+        },
+        "guid": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
         "postleitzahl": {
           "type": "string"
         },
@@ -324,19 +337,6 @@
             "string",
             "null"
           ]
-        },
-        "timestamp": {
-          "type": [
-            "string",
-            "null"
-          ],
-          "format": "date-time"
-        },
-        "guid": {
-          "type": [
-            "string",
-            "null"
-          ]
         }
       },
       "required": [
@@ -463,11 +463,12 @@
       ],
       "enum": [
         null,
-        "ERFOLGREICH",
-        "ABGELEHNT",
         "GESCHEITERT",
+        "ERFOLGREICH",
         "GEPLANT",
-        "ZUGESTIMMT"
+        "ZUGESTIMMT",
+        "WIDERSPROCHEN",
+        "ABGELEHNT"
       ]
     },
     "sperrauftragsablehngrund": {
