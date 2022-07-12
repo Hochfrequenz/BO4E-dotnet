@@ -52,6 +52,28 @@ namespace TestBO4E
             result.Merkmal.Should().Be(Geraetemerkmal.GAS_G4);
         }
 
+        [TestMethod]
+        public void TestSystemText_Success_NonNullable()
+        {
+            var settings = new System.Text.Json.JsonSerializerOptions()
+            {
+                Converters = { new LenientSystemTextGeraetemerkmalGasConverter() }
+            };
+            var result = System.Text.Json.JsonSerializer.Deserialize<SomethingWithAGeraetemerkmal>(JsonString, settings);
+            result.Merkmal.Should().Be(Geraetemerkmal.GAS_G4);
+        }
+
+        [TestMethod]
+        public void TestSystemText_Success_Nullable()
+        {
+            var settings = new System.Text.Json.JsonSerializerOptions()
+            {
+                Converters = { new LenientSystemTextNullableGeraetemerkmalGasConverter() }
+            };
+            var result = System.Text.Json.JsonSerializer.Deserialize<SomethingWithANullableGeraetemerkmal>(JsonString, settings);
+            result.Merkmal.Should().Be(Geraetemerkmal.GAS_G4);
+        }
+
         // todo: someone should write the system.text equivalent once there's time.
     }
 }
