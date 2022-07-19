@@ -31,6 +31,7 @@ namespace TestBO4E
         /// <summary>
         /// contains those types where the order of the json elements/properties should _not_ be enforced for now
         /// </summary>
+        [Obsolete]
         static readonly HashSet<Type> IgnoreOrderTypes = new()
         {
             // todo: make this list smaller, step by step.
