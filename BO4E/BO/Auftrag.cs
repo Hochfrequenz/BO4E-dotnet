@@ -86,8 +86,8 @@ namespace BO4E.BO
         /// <summary>
         /// Ein zusätzlicher Freitext
         /// </summary>
-        [JsonProperty("bemerkung", Required = Required.Default)]
-        [JsonPropertyName("bemerkung")]
+        [JsonProperty("bemerkungen", Required = Required.Default)]
+        [JsonPropertyName("bemerkungen")]
         [ProtoMember(11)]
         public List<string>? Bemerkungen { get; set; }
 

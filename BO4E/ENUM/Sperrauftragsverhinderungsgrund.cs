@@ -30,21 +30,21 @@ namespace BO4E.ENUM
 
         /// <summary>
         /// Anderer Verhinderungsgrund (z.B. Betrieb lebensnotwendiger Geräte)
-        /// Details werden im Freitext <see cref="Auftrag.Bemerkung"/> vermerkt.
+        /// Details werden im Freitext <see cref="Auftrag.Bemerkungen"/> vermerkt.
         /// </summary>
         /// <remarks>EBD 0472 A04</remarks>
         ANDERER_VERHINDERUNGSGRUND,
 
         /// <summary>
         /// Ein tatsächlicher Verhinderungsgrund liegt vor, wenn z.B. die MaLo nicht identifizierbar, der Zugang nicht möglich war oder ein Kundenwechsel festgestellt wurde
-        /// Details werden im Freitext <see cref="Auftrag.Bemerkung"/> vermerkt.        
+        /// Details werden im Freitext <see cref="Auftrag.Bemerkungen"/> vermerkt.        
         /// </summary>
         /// <remarks>EBD 0472 A05</remarks>
         TATSAECHLICHER_VERHINDERUNGSGRUND,
 
         /// <summary>
         /// Ein technischer Grund (z.B. andere betroffene MaLo) hat das Sperren verhindert.
-        /// Details werden im Freitext <see cref="Auftrag.Bemerkung"/> vermerkt.
+        /// Details werden im Freitext <see cref="Auftrag.Bemerkungen"/> vermerkt.
         /// </summary>
         /// <remarks>EBD 0472 A06</remarks>
         TECHNISCHER_VERHINDERUNGSGRUND,
