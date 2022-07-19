@@ -544,11 +544,17 @@
     "marktlokationsId": {
       "type": "string"
     },
-    "bemerkung": {
+    "bemerkungen": {
       "type": [
-        "string",
+        "array",
         "null"
-      ]
+      ],
+      "items": {
+        "type": [
+          "string",
+          "null"
+        ]
+      }
     },
     "mindestkosten": {
       "$ref": "#/definitions/Preis"
