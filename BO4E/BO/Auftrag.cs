@@ -89,7 +89,7 @@ namespace BO4E.BO
         [JsonProperty("bemerkung", Required = Required.Default)]
         [JsonPropertyName("bemerkung")]
         [ProtoMember(11)]
-        public List<string> Bemerkung { get; set; }
+        public List<string>? Bemerkung { get; set; }
 
         /// <summary>
         /// Die Mindestpreis eines Auftrags (z.B. für eine Sperrung)
