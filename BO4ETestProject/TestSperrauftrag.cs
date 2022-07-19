@@ -28,7 +28,7 @@ namespace TestBO4E
             var sperrauftrag = new Sperrauftrag
             {
                 Ausfuehrungsdatum = new DateTimeOffset(2022, 1, 5, 1, 1, 1, TimeSpan.Zero),
-                Bemerkung = "Der Typ erwartet uns mit Baseballschläger am Zähler",
+                Bemerkungen = new List<string> { "Der Typ erwartet uns mit Baseballschläger am Zähler" },
                 Sparte = Sparte.STROM,
                 Zaehlernummer = "1YSE29183123",
                 Lieferanschrift = new Adresse
@@ -98,7 +98,7 @@ namespace TestBO4E
             var entsperrauftrag = new Entsperrauftrag
             {
                 Ausfuehrungsdatum = new DateTimeOffset(2022, 6, 15, 1, 1, 1, TimeSpan.Zero),
-                Bemerkung = "Der Typ erwartet uns mit Blumenstrauß am Eingang",
+                Bemerkungen = new List<string> { "Der Typ erwartet uns mit Blumenstrauß am Eingang" },
                 Lieferanschrift = new Adresse
                 {
                     Strasse = "Rathausgasse",

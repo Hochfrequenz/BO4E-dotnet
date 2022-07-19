@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Text.Json.Serialization;
 
 using BO4E.COM;
@@ -85,10 +86,10 @@ namespace BO4E.BO
         /// <summary>
         /// Ein zusätzlicher Freitext
         /// </summary>
-        [JsonProperty("bemerkung", Required = Required.Default)]
-        [JsonPropertyName("bemerkung")]
-        [ProtoMember(8)]
-        public string? Bemerkung { get; set; }
+        [JsonProperty("bemerkungen", Required = Required.Default)]
+        [JsonPropertyName("bemerkungen")]
+        [ProtoMember(11)]
+        public List<string>? Bemerkungen { get; set; }
 
         /// <summary>
         /// Die Mindestpreis eines Auftrags (z.B. für eine Sperrung)
