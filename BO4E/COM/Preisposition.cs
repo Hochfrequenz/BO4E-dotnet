@@ -157,6 +157,6 @@ namespace BO4E.COM
         [JsonPropertyName("ArtikelID")]
         [NonOfficial(NonOfficialCategory.MISSING)]
         [JsonPropertyOrder(26)]
-        public string ArtikelID { get; set; }
+        public string? ArtikelID { get; set; }
     }
 }
