@@ -148,5 +148,15 @@ namespace BO4E.COM
         [ProtoMember(18)]
         [JsonPropertyOrder(25)]
         public Zeitraum? Verarbeitungszeitraum { get; set; }
+
+        /// <summary>
+        ///  Die genauen Bedeutungen der einzelnen Artikel-IDs sind in der EDI@Energy Codeliste der Artikelnummern 
+        /// und Artikel-IDs zu finden, die in der Spalte "PRICAT Codeverwendung" ein X haben
+        /// </summary>
+        [JsonProperty(PropertyName = "ArtikelID", Order = 26, Required = Required.Default)]
+        [JsonPropertyName("ArtikelID")]
+        [NonOfficial(NonOfficialCategory.MISSING)]
+        [JsonPropertyOrder(26)]
+        public string? ArtikelID { get; set; }
     }
 }
