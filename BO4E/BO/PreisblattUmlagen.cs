@@ -10,12 +10,6 @@ namespace BO4E.BO
     //[ProtoContract]
     public class PreisblattUmlagen : Preisblatt
     {
-        /// <summary>
-        ///     Sparte, auf die sich die Umlage bezieht.
-        /// </summary>
-        [JsonProperty(Required = Required.Always, Order = 7, PropertyName = "sparte")]
-        [JsonPropertyName("sparte")]
-        //[ProtoMember(7)]
-        public Sparte Sparte { get; set; }
+      
     }
 }

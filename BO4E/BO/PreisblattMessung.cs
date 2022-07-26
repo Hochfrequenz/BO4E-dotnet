@@ -14,14 +14,6 @@ namespace BO4E.BO
     public class PreisblattMessung : Preisblatt
     {
         /// <summary>
-        ///     Preisblatt gilt für die angegebene Sparte.
-        /// </summary>
-        [JsonProperty(Required = Required.Always, Order = 7, PropertyName = "sparte")]
-        [JsonPropertyName("sparte")]
-        //[ProtoMember(7)]
-        public Sparte Sparte { get; set; }
-
-        /// <summary>
         ///     Die Preise gelten für Marktlokationen der angegebenen Bilanzierungsmethode.
         /// </summary>
         [JsonProperty(Required = Required.Always, Order = 8, PropertyName = "bilanzierungsmethode")]
