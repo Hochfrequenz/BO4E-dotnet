@@ -10,6 +10,6 @@ namespace BO4E.BO
     //[ProtoContract]
     public class PreisblattUmlagen : Preisblatt
     {
-      
+
     }
 }
