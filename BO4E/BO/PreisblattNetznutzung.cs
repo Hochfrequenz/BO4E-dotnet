@@ -10,13 +10,6 @@ namespace BO4E.BO
     //[ProtoContract]
     public class PreisblattNetznutzung : Preisblatt
     {
-        /// <summary>
-        ///     Preisblatt gilt für angegebene Sparte.
-        /// </summary>
-        [JsonProperty(Required = Required.Always, Order = 7, PropertyName = "sparte")]
-        [JsonPropertyName("sparte")]
-        //[ProtoMember(7)]
-        public Sparte Sparte { get; set; }
 
         /// <summary>
         ///     Die Preise gelten für Marktlokationen der angegebenen Bilanzierungsmethode.

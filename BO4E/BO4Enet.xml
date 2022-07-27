@@ -1316,6 +1316,14 @@
                 Details siehe <see cref="T:BO4E.COM.Preisposition" />
             </summary>
         </member>
+        <member name="P:BO4E.BO.Preisblatt.preisstatus">
+            <summary>
+                Gibt den Status des veröffentlichten Preises an
+            </summary>
+        </member>
+        <member name="P:BO4E.BO.Preisblatt.Sparte">
+            <summary>Strom oder Gas. <seealso cref="T:BO4E.ENUM.Sparte" /></summary>
+        </member>
         <member name="T:BO4E.BO.PreisblattDienstleistung">
             <summary>
                 Die Variante des Preisblattmodells zur Abbildung der Preise für wahlfreie Dienstleistungen.
@@ -1341,11 +1349,6 @@
                 Die Variante des Preisblattmodells zur Abbildung von allgemeinen Abgaben
             </summary>
         </member>
-        <member name="P:BO4E.BO.PreisblattKonzessionsabgabe.Sparte">
-            <summary>
-                Sparte, auf die sich die KA bezieht.
-            </summary>
-        </member>
         <member name="P:BO4E.BO.PreisblattKonzessionsabgabe.KundengruppeKA">
             <summary>
                 Kundegruppe anhand derer die Höhe der Konzessionsabgabe festgelegt ist.
@@ -1355,11 +1358,6 @@
             <summary>
                 Die Variante des Preisblattmodells zur Abbildung der Preise für den Messstellenbetrieb und damit verbundene
                 Leistungen.
-            </summary>
-        </member>
-        <member name="P:BO4E.BO.PreisblattMessung.Sparte">
-            <summary>
-                Preisblatt gilt für die angegebene Sparte.
             </summary>
         </member>
         <member name="P:BO4E.BO.PreisblattMessung.Bilanzierungsmethode">
@@ -1397,11 +1395,6 @@
                 Die Variante des Preisblattmodells zur Abbildung der Netznutzungspreise.
             </summary>
         </member>
-        <member name="P:BO4E.BO.PreisblattNetznutzung.Sparte">
-            <summary>
-                Preisblatt gilt für angegebene Sparte.
-            </summary>
-        </member>
         <member name="P:BO4E.BO.PreisblattNetznutzung.Bilanzierungsmethode">
             <summary>
                 Die Preise gelten für Marktlokationen der angegebenen Bilanzierungsmethode.
@@ -1425,11 +1418,6 @@
         <member name="T:BO4E.BO.PreisblattUmlagen">
             <summary>
                 Die Variante des Preisblattmodells zur Abbildung von allgemeinen Abgaben.
-            </summary>
-        </member>
-        <member name="P:BO4E.BO.PreisblattUmlagen.Sparte">
-            <summary>
-                Sparte, auf die sich die Umlage bezieht.
             </summary>
         </member>
         <member name="T:BO4E.BO.Rechnung">

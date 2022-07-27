@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using System.Text.Json.Serialization;
 using BO4E.COM;
+using BO4E.ENUM;
 using BO4E.meta;
 using Newtonsoft.Json;
 using ProtoBuf;
@@ -60,5 +61,19 @@ namespace BO4E.BO
         [DataCategory(DataCategory.FINANCE)]
         public List<Preisstaffel> preisstaffeln { get;set; }*/
         // https://github.com/Hochfrequenz/energy-service-hub/issues/11
+
+        /// <summary>
+        ///     Gibt den Status des veröffentlichten Preises an
+        /// </summary>
+        [JsonProperty(PropertyName = "preisstatus", Order = 14, Required = Required.Default)]
+        [JsonPropertyName("preisstatus")]
+        [JsonPropertyOrder(14)]
+        public Preisstatus? preisstatus { get; set; }
+
+        /// <summary>Strom oder Gas. <seealso cref="ENUM.Sparte" /></summary>
+        [JsonProperty(Required = Required.Default, Order = 15, PropertyName = "sparte")]
+        [JsonPropertyName("sparte")]
+        [JsonPropertyOrder(15)]
+        public Sparte? Sparte { get; set; }
     }
 }

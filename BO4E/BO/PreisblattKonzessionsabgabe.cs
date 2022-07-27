@@ -11,14 +11,6 @@ namespace BO4E.BO
     public class PreisblattKonzessionsabgabe : Preisblatt
     {
         /// <summary>
-        ///     Sparte, auf die sich die KA bezieht.
-        /// </summary>
-        [JsonProperty(Required = Required.Always, Order = 7, PropertyName = "sparte")]
-        [JsonPropertyName("sparte")]
-        //[ProtoMember(7)]
-        public Sparte Sparte { get; set; }
-
-        /// <summary>
         ///     Kundegruppe anhand derer die Höhe der Konzessionsabgabe festgelegt ist.
         /// </summary>
         [JsonProperty(Required = Required.Always, Order = 8, PropertyName = "kundengruppeKA")]
