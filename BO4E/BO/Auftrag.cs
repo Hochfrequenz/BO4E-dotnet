@@ -25,19 +25,19 @@ namespace BO4E.BO
         [Newtonsoft.Json.JsonIgnore]
         [ProtoMember(4, Name = nameof(Ausfuehrungsdatum))]
         [CompatibilityLevel(CompatibilityLevel.Level240)]
-        protected DateTime _Ausfuehrungsdatum
+        protected DateTime? _Ausfuehrungsdatum
         {
-            get => Ausfuehrungsdatum.UtcDateTime;
-            set => Ausfuehrungsdatum = DateTime.SpecifyKind(value, DateTimeKind.Utc);
+            get => Ausfuehrungsdatum?.UtcDateTime;
+            set => Ausfuehrungsdatum = value != null ? DateTime.SpecifyKind(value.Value, DateTimeKind.Utc) : null;
         }
 
         /// <summary>
         /// Das Ausführungsdatum beschreibt zu welchem Zeitpunkt ein Auftrag ausgeführt werden soll.
         /// </summary>
-        [JsonProperty("ausfuehrungsdatum", Required = Required.Always)]
+        [JsonProperty("ausfuehrungsdatum", Required = Required.Default)]
         [JsonPropertyName("ausfuehrungsdatum")]
         [ProtoIgnore]
-        public DateTimeOffset Ausfuehrungsdatum { get; set; }
+        public DateTimeOffset? Ausfuehrungsdatum { get; set; }
 
         /// <summary>
         /// workaround
