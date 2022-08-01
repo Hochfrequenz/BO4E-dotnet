@@ -24,17 +24,17 @@ namespace BO4E.COM
         [CompatibilityLevel(CompatibilityLevel.Level240)]
         private DateTime _Vertragsteilbeginn
         {
-            get => Vertragsteilbeginn.UtcDateTime;
+            get => Vertragsteilbeginn?.UtcDateTime ?? DateTime.MinValue;
             set => Vertragsteilbeginn = DateTime.SpecifyKind(value, DateTimeKind.Utc);
         }
         /// <summary>
         ///     Start der Gültigkeit des Vertragsteils.
         /// </summary>
-        [JsonProperty(PropertyName = "vertragsteilbeginn", Required = Required.Always)]
+        [JsonProperty(PropertyName = "vertragsteilbeginn", Required = Required.Default)]
         [JsonPropertyName("vertragsteilbeginn")]
         [ProtoIgnore]
         [Newtonsoft.Json.JsonConverter(typeof(LenientDateTimeConverter))]
-        public DateTimeOffset Vertragsteilbeginn { get; set; }
+        public DateTimeOffset? Vertragsteilbeginn { get; set; }
 
 
         [System.Text.Json.Serialization.JsonIgnore]
