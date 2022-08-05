@@ -62,12 +62,11 @@ namespace BO4E.ENUM
         /// <remarks>Z48</remarks>
         LASTGANG_MALO_TRANCHE,
 
-
-        /// <summary>Sperrprozess Sperrung</summary>
+        /// <summary>SPERRUNG</summary>
         /// <remarks>Z51</remarks>
         SPERRUNG,
 
-        /// <summary>Sperrprozess Entsperrung</summary>
+        /// <summary>ENTSPERRUNG</summary>
         /// <remarks>Z52</remarks>
         ENTSPERRUNG
 
