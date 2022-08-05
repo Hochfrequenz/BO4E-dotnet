@@ -1,4 +1,5 @@
 using BO4E.meta;
+using ProtoBuf;
 
 namespace BO4E.ENUM
 {
@@ -61,6 +62,16 @@ namespace BO4E.ENUM
         /// <summary>LASTGANG_MALO_TRANCHE</summary>
         /// <remarks>Z48</remarks>
         LASTGANG_MALO_TRANCHE,
+
+        /// <summary>SPERRUNG</summary>
+        /// <remarks>Z51</remarks>
+        [ProtoEnum(Name = "Anfragekategorie_SPERRUNG")]
+        SPERRUNG,
+
+        /// <summary>ENTSPERRUNG</summary>
+        /// <remarks>Z52</remarks>
+        [ProtoEnum(Name = "Anfragekategorie_ENTSPERRUNG")]
+        ENTSPERRUNG
 
     }
 }
