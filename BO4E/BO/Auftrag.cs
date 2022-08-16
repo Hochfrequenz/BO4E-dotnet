@@ -34,8 +34,9 @@ namespace BO4E.BO
         /// <summary>
         /// Das Ausführungsdatum beschreibt zu welchem Zeitpunkt ein Auftrag ausgeführt werden soll.
         /// </summary>
-        [JsonProperty("ausfuehrungsdatum", Required = Required.Default)]
+        [JsonProperty("ausfuehrungsdatum", Order = 1, Required = Required.Default)]
         [JsonPropertyName("ausfuehrungsdatum")]
+        [JsonPropertyOrder(1)]
         [ProtoIgnore]
         public DateTimeOffset? Ausfuehrungsdatum { get; set; }
 
@@ -55,55 +56,62 @@ namespace BO4E.BO
         /// <summary>
         /// Das Fertigstellungsdatum beschreibt zu welchem Zeitpunkt ein Auftrag ausgeführt wurde/wird.
         /// </summary>
-        [JsonProperty("fertigstellungsdatum", Required = Required.Default)]
+        [JsonProperty("fertigstellungsdatum", Order = 2, Required = Required.Default)]
         [JsonPropertyName("fertigstellungsdatum")]
+        [JsonPropertyOrder(2)]
         [ProtoIgnore]
         public DateTimeOffset? Fertigstellungsdatum { get; set; }
 
         /// <summary>
         /// Die Sparte in der der Auftrag relevant ist
         /// </summary>
-        [JsonProperty("sparte", Required = Required.Default)]
+        [JsonProperty("sparte", Order = 3, Required = Required.Default)]
         [JsonPropertyName("sparte")]
+        [JsonPropertyOrder(3)]
         public ENUM.Sparte? Sparte { get; set; }
 
         /// <summary>
         /// Die Adresse, die sich in Belieferung befindet.
         /// </summary>
-        [JsonProperty("lieferanschrift", Required = Required.Default)]
+        [JsonProperty("lieferanschrift", Order = 4, Required = Required.Default)]
         [JsonPropertyName("lieferanschrift")]
+        [JsonPropertyOrder(4)]
         [ProtoMember(6)]
         public Adresse? Lieferanschrift { get; set; }
 
         /// <summary>
         /// Die ID der Marktlokation der der zu sperrende Zähler zugeordnet ist.
         /// </summary>
-        [JsonProperty("marktlokationsId", Required = Required.Always)]
+        [JsonProperty("marktlokationsId", Order = 5, Required = Required.Always)]
         [JsonPropertyName("marktlokationsId")]
+        [JsonPropertyOrder(5)]
         [ProtoMember(7)]
         public string MarktlokationsId { get; set; }
 
         /// <summary>
         /// Ein zusätzlicher Freitext
         /// </summary>
-        [JsonProperty("bemerkungen", Required = Required.Default)]
+        [JsonProperty("bemerkungen", Order = 6, Required = Required.Default)]
         [JsonPropertyName("bemerkungen")]
+        [JsonPropertyOrder(6)]
         [ProtoMember(11)]
         public List<string>? Bemerkungen { get; set; }
 
         /// <summary>
-        /// Die Mindestpreis eines Auftrags (z.B. für eine Sperrung)
+        /// Der Mindestpreis eines Auftrags (z.B. für eine Sperrung)
         /// </summary>
-        [JsonProperty("mindestkosten", Required = Required.Default)]
-        [JsonPropertyName("mindestkosten")]
+        [JsonProperty("mindestpreis", Order = 7, Required = Required.Default)]
+        [JsonPropertyName("mindestpreis")]
+        [JsonPropertyOrder(7)]
         [ProtoMember(9)]
         public Preis? Mindestpreis { get; set; }
 
         /// <summary>
-        /// Die Höchstkosten eines Auftrags (z.B. für eine Sperrung)
+        /// Der Höchstpreis eines Auftrags (z.B. für eine Sperrung)
         /// </summary>
-        [JsonProperty("hoechstkosten", Required = Required.Default)]
-        [JsonPropertyName("hoechstkosten")]
+        [JsonProperty("hoechstpreis", Order = 8, Required = Required.Default)]
+        [JsonPropertyName("hoechstpreis")]
+        [JsonPropertyOrder(8)]
         [ProtoMember(10)]
         public Preis? Hoechstpreis { get; set; }
     }
