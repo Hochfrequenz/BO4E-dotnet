@@ -34,7 +34,7 @@ namespace BO4E.BO
         /// <summary>
         /// Das Ausführungsdatum beschreibt zu welchem Zeitpunkt ein Auftrag ausgeführt werden soll.
         /// </summary>
-        [JsonProperty("ausfuehrungsdatum",Order = 1, Required = Required.Default)]
+        [JsonProperty("ausfuehrungsdatum", Order = 1, Required = Required.Default)]
         [JsonPropertyName("ausfuehrungsdatum")]
         [JsonPropertyOrder(1)]
         [ProtoIgnore]
@@ -56,7 +56,7 @@ namespace BO4E.BO
         /// <summary>
         /// Das Fertigstellungsdatum beschreibt zu welchem Zeitpunkt ein Auftrag ausgeführt wurde/wird.
         /// </summary>
-        [JsonProperty("fertigstellungsdatum",Order = 2, Required = Required.Default)]
+        [JsonProperty("fertigstellungsdatum", Order = 2, Required = Required.Default)]
         [JsonPropertyName("fertigstellungsdatum")]
         [JsonPropertyOrder(2)]
         [ProtoIgnore]
@@ -65,7 +65,7 @@ namespace BO4E.BO
         /// <summary>
         /// Die Sparte in der der Auftrag relevant ist
         /// </summary>
-        [JsonProperty("sparte",Order = 3, Required = Required.Default)]
+        [JsonProperty("sparte", Order = 3, Required = Required.Default)]
         [JsonPropertyName("sparte")]
         [JsonPropertyOrder(3)]
         public ENUM.Sparte? Sparte { get; set; }
@@ -73,7 +73,7 @@ namespace BO4E.BO
         /// <summary>
         /// Die Adresse, die sich in Belieferung befindet.
         /// </summary>
-        [JsonProperty("lieferanschrift",Order=4, Required = Required.Default)]
+        [JsonProperty("lieferanschrift", Order = 4, Required = Required.Default)]
         [JsonPropertyName("lieferanschrift")]
         [JsonPropertyOrder(4)]
         [ProtoMember(6)]
@@ -82,7 +82,7 @@ namespace BO4E.BO
         /// <summary>
         /// Die ID der Marktlokation der der zu sperrende Zähler zugeordnet ist.
         /// </summary>
-        [JsonProperty("marktlokationsId",Order = 5, Required = Required.Always)]
+        [JsonProperty("marktlokationsId", Order = 5, Required = Required.Always)]
         [JsonPropertyName("marktlokationsId")]
         [JsonPropertyOrder(5)]
         [ProtoMember(7)]
@@ -91,7 +91,7 @@ namespace BO4E.BO
         /// <summary>
         /// Ein zusätzlicher Freitext
         /// </summary>
-        [JsonProperty("bemerkungen", Order = 6,Required = Required.Default)]
+        [JsonProperty("bemerkungen", Order = 6, Required = Required.Default)]
         [JsonPropertyName("bemerkungen")]
         [JsonPropertyOrder(6)]
         [ProtoMember(11)]
