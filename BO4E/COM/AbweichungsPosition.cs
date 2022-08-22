@@ -21,18 +21,20 @@ namespace BO4E.COM
         /// <summary>
         /// Angabe des Abweichungsgrunds (Code)
         /// </summary>
-        [JsonProperty(PropertyName = "abweichungsgrundCode", Required = Required.Always, Order = 2)]
+        [JsonProperty(PropertyName = "abweichungsgrundCode", Required = Required.Default, Order = 7)]
         [JsonPropertyName("abweichungsgrundCode")]
         [NonOfficial(NonOfficialCategory.MISSING)]
-        [ProtoMember(2)]
+        [ProtoMember(7)]
+        [JsonPropertyOrder(7)]
         public string? AbweichungsgrundCode { get; set; }
         /// <summary>
         /// Angabe des Abweichungsgrunds (Codeliste)
         /// </summary>
-        [JsonProperty(PropertyName = "abweichungsgrundCodeliste", Required = Required.Always, Order = 3)]
+        [JsonProperty(PropertyName = "abweichungsgrundCodeliste", Required = Required.Default, Order = 3)]
         [JsonPropertyName("abweichungsgrundCodeliste")]
         [NonOfficial(NonOfficialCategory.MISSING)]
         [ProtoMember(3)]
+        [JsonPropertyOrder(3)]
         public string? AbweichungsgrundCodeliste { get; set; }
 
         /// <summary>
@@ -42,6 +44,7 @@ namespace BO4E.COM
         [JsonPropertyName("abweichungsgrundBemerkung")]
         [NonOfficial(NonOfficialCategory.MISSING)]
         [ProtoMember(4)]
+        [JsonPropertyOrder(4)]
         public string? AbweichungsgrundBemerkung { get; set; }
 
         /// <summary>
@@ -51,6 +54,7 @@ namespace BO4E.COM
         [JsonPropertyName("zugehoerigeRechnung")]
         [NonOfficial(NonOfficialCategory.MISSING)]
         [ProtoMember(5)]
+        [JsonPropertyOrder(5)]
         public string? ZugehoerigeRechnung { get; set; }
 
         /// <summary>
@@ -60,6 +64,7 @@ namespace BO4E.COM
         [JsonPropertyName("zugehoerigeBestellung")]
         [NonOfficial(NonOfficialCategory.MISSING)]
         [ProtoMember(6)]
+        [JsonPropertyOrder(6)]
         public string? ZugehoerigeBestellung { get; set; }
 
     }
