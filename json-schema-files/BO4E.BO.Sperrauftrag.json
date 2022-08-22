@@ -513,8 +513,17 @@
       "type": "boolean"
     },
     "ausfuehrungsdatum": {
-      "type": "string",
+      "type": [
+        "string",
+        "null"
+      ],
       "format": "date-time"
+    },
+    "boTyp": {
+      "type": [
+        "string",
+        "null"
+      ]
     },
     "fertigstellungsdatum": {
       "type": [
@@ -522,6 +531,12 @@
         "null"
       ],
       "format": "date-time"
+    },
+    "versionStruktur": {
+      "type": [
+        "string",
+        "null"
+      ]
     },
     "sparte": {
       "type": [
@@ -538,11 +553,33 @@
         "ABWASSER"
       ]
     },
+    "timestamp": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "format": "date-time"
+    },
     "lieferanschrift": {
       "$ref": "#/definitions/Adresse"
     },
+    "externeReferenzen": {
+      "type": [
+        "array",
+        "null"
+      ],
+      "items": {
+        "$ref": "#/definitions/ExterneReferenz"
+      }
+    },
     "marktlokationsId": {
       "type": "string"
+    },
+    "guid": {
+      "type": [
+        "string",
+        "null"
+      ]
     },
     "bemerkungen": {
       "type": [
@@ -556,51 +593,16 @@
         ]
       }
     },
-    "mindestkosten": {
+    "mindestpreis": {
       "$ref": "#/definitions/Preis"
     },
-    "hoechstkosten": {
+    "hoechstpreis": {
       "$ref": "#/definitions/Preis"
-    },
-    "boTyp": {
-      "type": [
-        "string",
-        "null"
-      ]
-    },
-    "versionStruktur": {
-      "type": [
-        "string",
-        "null"
-      ]
-    },
-    "timestamp": {
-      "type": [
-        "string",
-        "null"
-      ],
-      "format": "date-time"
-    },
-    "externeReferenzen": {
-      "type": [
-        "array",
-        "null"
-      ],
-      "items": {
-        "$ref": "#/definitions/ExterneReferenz"
-      }
-    },
-    "guid": {
-      "type": [
-        "string",
-        "null"
-      ]
     }
   },
   "required": [
     "sperrauftragsart",
     "istVomGerichtsvollzieherAngeordnet",
-    "ausfuehrungsdatum",
     "marktlokationsId"
   ]
 }

@@ -9,7 +9,6 @@
     <RepositoryUrl>https://github.com/Hochfrequenz/BO4E-dotnet/</RepositoryUrl>
 
     <VersionPrefix>0.2.50</VersionPrefix>
-
     <AssemblyName>BO4Enet</AssemblyName>
     <GeneratePackageOnBuild>false</GeneratePackageOnBuild>
     <PublishRepositoryUrl>true</PublishRepositoryUrl>

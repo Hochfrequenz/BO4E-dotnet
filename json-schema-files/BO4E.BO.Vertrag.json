@@ -765,7 +765,10 @@
       ],
       "properties": {
         "vertragsteilbeginn": {
-          "type": "string",
+          "type": [
+            "string",
+            "null"
+          ],
           "format": "date-time"
         },
         "vertragsteilende": {
@@ -815,10 +818,7 @@
             "null"
           ]
         }
-      },
-      "required": [
-        "vertragsteilbeginn"
-      ]
+      }
     },
     "Zeitraum": {
       "type": [
