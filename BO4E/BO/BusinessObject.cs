@@ -49,7 +49,9 @@ namespace BO4E.BO
     [ProtoInclude(16, typeof(Bilanzierung))]
     [ProtoInclude(17, typeof(Sperrauftrag))]
     [ProtoInclude(18, typeof(Entsperrauftrag))]
+#pragma warning disable CS0618 // Type or member is obsolete
     [ProtoInclude(19, typeof(AuftragsStorno))]
+#pragma warning restore CS0618 // Type or member is obsolete
     [ProtoInclude(20, typeof(Statusbericht))]
     [ProtoInclude(21, typeof(Reklamation))]
     [ProtoInclude(22, typeof(Avis))]

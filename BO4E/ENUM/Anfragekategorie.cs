@@ -4,7 +4,7 @@ using ProtoBuf;
 namespace BO4E.ENUM
 {
     /// <summary>
-    /// Kategorie der Anfrage (ORDERS ORDRSP BGM 1001)
+    /// Kategorie der Anfrage (ORDERS ORDRSP ORDCHG BGM 1001)
     /// </summary>
     [NonOfficial(NonOfficialCategory.MISSING)]
     public enum Anfragekategorie
