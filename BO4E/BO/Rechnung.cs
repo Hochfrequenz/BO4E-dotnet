@@ -528,5 +528,14 @@ namespace BO4E.BO
         [FieldName("prepaids", Language.EN)]
         [JsonPropertyOrder(25)]
         public List<Vorauszahlung>? Vorauszahlungen { get; set; }
+
+        /// <summary>
+        ///     Sonderrechnungsart
+        /// </summary>
+        [JsonProperty(Required = Required.Default, Order = 26, PropertyName = "sonderrechnungsart")]
+        [JsonPropertyName("sonderrechnungsart")]
+        [ProtoMember(26)]
+        [JsonPropertyOrder(26)]
+        public Sonderrechnungsart? Sonderrechnungsart { get; set; }
     }
 }
