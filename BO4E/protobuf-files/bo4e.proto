@@ -252,6 +252,9 @@ enum Bilanzierungsmethode {
    Bilanzierungsmethode_PAUSCHAL = 4;
    Bilanzierungsmethode_IMS = 5;
 }
+message DateTimeOffset {
+   option (.protobuf_net.msgopt).namespace = "System";
+}
 message Dienstleistung {
    option (.protobuf_net.msgopt).namespace = "BO4E.COM";
    Dienstleistungstyp Dienstleistungstyp = 3;
@@ -1111,6 +1114,7 @@ message Rechnung {
    repeated Rechnungsposition Rechnungspositionen = 22;
    bool IstSelbstausgestellt = 23;
    bool IstReverseCharge = 24;
+   repeated Vorauszahlung Vorauszahlungen = 25;
 }
 message Rechnungsposition {
    option (.protobuf_net.msgopt).namespace = "BO4E.COM";
@@ -1129,6 +1133,7 @@ message Rechnungsposition {
    Betrag TeilrabattNetto = 13;
    Steuerbetrag TeilsummeSteuer = 14;
    string VertragskontoId = 15;
+   string ArtikelId = 28;
    string VertragsId = 1017;
    RechnungspositionsStatus Status = 1018;
 }
@@ -1159,6 +1164,11 @@ enum Rechnungstyp {
    MEHRMINDERMENGENRECHNUNG = 7;
    ABSCHLUSSRECHNUNG = 8;
    MSBRECHNUNG = 9;
+   KAPAZITAETSRECHNUNG = 10;
+   SPERRUNG_INBETRIEBNAHME = 11;
+   VERZUGSKOSTEN = 12;
+   BLINDARBEIT = 13;
+   SONDERRECHNUNG = 14;
 }
 message Region {
    option (.protobuf_net.msgopt).namespace = "BO4E.BO";
@@ -1482,6 +1492,11 @@ message Vertragsteil {
    Menge Kundenwert = 1010;
    string Verbrauchsaufteilung = 1011;
 }
+message Verwendungszweck {
+   option (.protobuf_net.msgopt).namespace = "BO4E.COM";
+   Marktrolle Marktrolle = 3;
+   repeated Verwendungszweck Zweck = 4 [packed = false];
+}
 enum Verwendungszweck {
    option (.protobuf_net.enumopt).namespace = "BO4E.ENUM";
    NETZNUTZUNGSABRECHNUNG = 0;
@@ -1491,10 +1506,11 @@ enum Verwendungszweck {
    UEBERMITTLUNG_AN_DAS_HKNR = 4;
    ERMITTLUNG_AUSGEGLICHENHEIT_BILANZKREIS = 5;
 }
-message Verwendungszweck {
+message Vorauszahlung {
    option (.protobuf_net.msgopt).namespace = "BO4E.COM";
-   Marktrolle Marktrolle = 3;
-   repeated Verwendungszweck Zweck = 4 [packed = false];
+   Betrag Betrag = 3;
+   string Referenz = 4;
+   DateTimeOffset ReferenzDatum = 5;
 }
 enum Waehrungscode {
    option (.protobuf_net.enumopt).namespace = "BO4E.ENUM";

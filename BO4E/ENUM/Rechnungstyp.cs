@@ -30,6 +30,22 @@ namespace BO4E.ENUM
         /// <summary>Abschlussrechnung</summary>
         ABSCHLUSSRECHNUNG,
         /// <summary>Rechnung für Messstellenbetrieb</summary>
-        MSBRECHNUNG
+        MSBRECHNUNG,
+        /// <summary>Kapazitätsrechnung</summary>
+        KAPAZITAETSRECHNUNG,
+        /// <summary>Rechnung für Sperren und Wiederinbetriebnahme</summary>
+        SPERRUNG_INBETRIEBNAHME,
+        /// <summary>
+        /// Verzugskostenrechnung
+        /// </summary>
+        VERZUGSKOSTEN,
+        /// <summary>
+        /// Blindarbeitsrechnung
+        /// </summary>
+        BLINDARBEIT,
+        /// <summary>
+        /// Sonderrechnung
+        /// </summary>
+        SONDERRECHNUNG
     }
 }

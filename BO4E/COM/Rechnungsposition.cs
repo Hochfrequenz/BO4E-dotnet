@@ -1,10 +1,13 @@
-using System;
-using System.Text.Json.Serialization;
 using BO4E.ENUM;
 using BO4E.meta;
 using BO4E.meta.LenientConverters;
+
 using Newtonsoft.Json;
+
 using ProtoBuf;
+
+using System;
+using System.Text.Json.Serialization;
 
 namespace BO4E.COM
 {
@@ -196,5 +199,15 @@ namespace BO4E.COM
         [NonOfficial(NonOfficialCategory.CUSTOMER_REQUIREMENTS)]
         [ProtoMember(1018)]
         public RechnungspositionsStatus? Status { get; set; }
+
+        /// <summary>
+        ///     Artikel-ID (ab 1.10.2022)
+        /// </summary>
+        [JsonProperty(PropertyName = "artikelId", Required = Required.Default, Order = 28)]
+        [JsonPropertyName("artikelId")]
+        [JsonPropertyOrder(28)]
+        [NonOfficial(NonOfficialCategory.CUSTOMER_REQUIREMENTS)]
+        [ProtoMember(28)]
+        public string? ArtikelId { get; set; }
     }
 }

@@ -518,5 +518,15 @@ namespace BO4E.BO
         [JsonProperty(Required = Required.Default, Order = 24, PropertyName = "istReverseCharge")]
         [JsonPropertyName("istReverseCharge")]
         public bool? IstReverseCharge { get; set; }
+
+        /// <summary>
+        ///     evtl. vorausgezahlte Beträge, z.B. Abschläge. Angabe als Bruttowert. Details <see cref="Betrag" />
+        /// </summary>
+        [JsonProperty(Required = Required.Default, Order = 25, PropertyName = "vorauszahlungen")]
+        [JsonPropertyName("vorauszahlungen")]
+        [ProtoMember(25)]
+        [FieldName("prepaids", Language.EN)]
+        [JsonPropertyOrder(25)]
+        public List<Vorauszahlung>? Vorauszahlungen { get; set; }
     }
 }
