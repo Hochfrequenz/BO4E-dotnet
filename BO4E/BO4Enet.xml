@@ -1728,6 +1728,16 @@
                 Kennzeichen, ob bei der Rechnung das Reverse Charge verfahren angewendet wird
             </summary>
         </member>
+        <member name="P:BO4E.BO.Rechnung.Vorauszahlungen">
+            <summary>
+                evtl. vorausgezahlte Beträge, z.B. Abschläge. Angabe als Bruttowert. Details <see cref="T:BO4E.COM.Betrag" />
+            </summary>
+        </member>
+        <member name="P:BO4E.BO.Rechnung.Sonderrechnungsart">
+            <summary>
+                Sonderrechnungsart
+            </summary>
+        </member>
         <member name="T:BO4E.BO.Region">
             <summary>
                 Modellierung einer Region als Menge von Kriterien, die eine Region beschreiben.
@@ -3387,6 +3397,11 @@
                 (Ergänzung von Hochfrequenz Unternehmensberatung GmbH)
             </summary>
         </member>
+        <member name="P:BO4E.COM.Rechnungsposition.ArtikelId">
+            <summary>
+                Artikel-ID (ab 1.10.2022)
+            </summary>
+        </member>
         <member name="T:BO4E.COM.RechnungspositionFlat">
             <summary>
                 Diese Klasse ist der <see cref="T:BO4E.COM.Rechnungsposition" /> nachempfunden und dieser ähnlich.
@@ -4034,6 +4049,29 @@
         <member name="P:BO4E.COM.Verwendungszweck.Zweck">
             <summary>
                 code von Marktrolle
+            </summary>
+        </member>
+        <member name="T:BO4E.COM.Vorauszahlung">
+            <summary>
+                Die Komponente wird dazu verwendet Vorauszahlungen einer Rechnung abzubilden (inkl. Referenz auf die bezahlte Rechnung)
+            </summary>
+        </member>
+        <member name="P:BO4E.COM.Vorauszahlung.Betrag">
+            <summary>Gibt den Betrag des Preises an.</summary>
+        </member>
+        <member name="P:BO4E.COM.Vorauszahlung.Referenz">
+            <summary>
+                Referenz auf die Rechnungsnummer, die durch diesen Betrag bezahlt wurde
+            </summary>
+        </member>
+        <member name="P:BO4E.COM.Vorauszahlung.ReferenzDatum">
+            <summary>
+                Referenz auf das Datum der Rechnung, die durch diesen Betrag bezahlt wurde
+            </summary>
+        </member>
+        <member name="P:BO4E.COM.Vorauszahlung._ReferenzDatum">
+            <summary>
+             Referenz auf das Datum der Rechnung, die durch diesen Betrag bezahlt wurde
             </summary>
         </member>
         <member name="T:BO4E.COM.Zaehlwerk">
@@ -7868,6 +7906,27 @@
         <member name="F:BO4E.ENUM.Rechnungstyp.MSBRECHNUNG">
             <summary>Rechnung für Messstellenbetrieb</summary>
         </member>
+        <member name="F:BO4E.ENUM.Rechnungstyp.KAPAZITAETSRECHNUNG">
+            <summary>Kapazitätsrechnung</summary>
+        </member>
+        <member name="F:BO4E.ENUM.Rechnungstyp.SPERRUNG_INBETRIEBNAHME">
+            <summary>Rechnung für Sperren und Wiederinbetriebnahme</summary>
+        </member>
+        <member name="F:BO4E.ENUM.Rechnungstyp.VERZUGSKOSTEN">
+            <summary>
+            Verzugskostenrechnung
+            </summary>
+        </member>
+        <member name="F:BO4E.ENUM.Rechnungstyp.BLINDARBEIT">
+            <summary>
+            Blindarbeitsrechnung
+            </summary>
+        </member>
+        <member name="F:BO4E.ENUM.Rechnungstyp.SONDERRECHNUNG">
+            <summary>
+            Sonderrechnung
+            </summary>
+        </member>
         <member name="T:BO4E.ENUM.Regionskriteriumtyp">
             <summary>
                 Klassifizierung der Kriterien für eine regionale Eingrenzung.
@@ -8092,6 +8151,49 @@
         <member name="F:BO4E.ENUM.Servicetyp.GAS_LIEF">
             <summary>
                 Lieferung Gas
+            </summary>
+        </member>
+        <member name="T:BO4E.ENUM.Sonderrechnungsart">
+            <summary> </summary>
+        </member>
+        <member name="F:BO4E.ENUM.Sonderrechnungsart.KONZESSIONSABGABE_TESTAT">
+            <summary>
+             Konzessionsabgabe (Testat)
+            </summary>
+        </member>
+        <member name="F:BO4E.ENUM.Sonderrechnungsart.INDIVIDUELL_ATYPISCH">
+            <summary>
+            Individuelle Vereinbarung für atypische und energieintensive Netznutzung
+            </summary>
+        </member>
+        <member name="F:BO4E.ENUM.Sonderrechnungsart.INDIVIDUELL_SINGULAER">
+            <summary>
+            Individuelle Vereinbarung für singuläre Netznutzung
+            </summary>
+        </member>
+        <member name="F:BO4E.ENUM.Sonderrechnungsart.KWKG_UMLAGE">
+            <summary>
+            KWKG-Umlage
+            </summary>
+        </member>
+        <member name="F:BO4E.ENUM.Sonderrechnungsart.OFFSHORE_UMLAGE">
+            <summary>
+            Offshore-Netzumlage
+            </summary>
+        </member>
+        <member name="F:BO4E.ENUM.Sonderrechnungsart.P19_STROM_NEV_UMLAGE">
+            <summary>
+            § 19 StromNEV-Umlage
+            </summary>
+        </member>
+        <member name="F:BO4E.ENUM.Sonderrechnungsart.P18_ABLAV">
+            <summary>
+            §18 AbLaV
+            </summary>
+        </member>
+        <member name="F:BO4E.ENUM.Sonderrechnungsart.KONZESSIONSABGABE_WECHSEL_RLM">
+            <summary>
+            Konzessionsabgabe (Wechsel auf Lastgangmessung)
             </summary>
         </member>
         <member name="T:BO4E.ENUM.Sparte">
