@@ -395,7 +395,7 @@
         </member>
         <member name="T:BO4E.BO.AuftragsStorno">
             <summary>
-            Ein AuftragsStorno beschreibt die Stornierung eines <see cref="T:BO4E.BO.Auftrag"/>s. 
+            DEPRECATED Ein AuftragsStorno beschreibt die Stornierung eines <see cref="T:BO4E.BO.Auftrag"/>s. 
             </summary>
         </member>
         <member name="P:BO4E.BO.AuftragsStorno.AuftragsId">
@@ -4406,7 +4406,7 @@
         </member>
         <member name="T:BO4E.ENUM.Anfragekategorie">
             <summary>
-            Kategorie der Anfrage (ORDERS ORDRSP BGM 1001)
+            Kategorie der Anfrage (ORDERS ORDRSP ORDCHG BGM 1001)
             </summary>
         </member>
         <member name="F:BO4E.ENUM.Anfragekategorie.PROZESSDATENBERICHT">
@@ -4714,6 +4714,24 @@
             Der Auftrag wurde abgelehnt
             </summary>
             <remarks>EDIFACT DE4405: Z32</remarks>
+        </member>
+        <member name="T:BO4E.ENUM.Auftragsstornogrund">
+            <summary>Auftragsstornogrund für Sperr- bzw. Entsperrauftragsstornoantworten for 19128 and 19129</summary>
+        </member>
+        <member name="F:BO4E.ENUM.Auftragsstornogrund.STORNIERUNG_DER_ENTSPERRUNG_NICHT_MEHR_MOEGLICH">
+            <summary>A02</summary>
+        </member>
+        <member name="F:BO4E.ENUM.Auftragsstornogrund.STORNIERUNG_DER_SPERRUNG_NICHT_MEHR_MOEGLICH">
+            <summary>A05</summary>
+        </member>
+        <member name="F:BO4E.ENUM.Auftragsstornogrund.STORNIERUNG_DER_ENTSPERRUNG_ERFOLGT">
+            <summary>A01</summary>
+        </member>
+        <member name="F:BO4E.ENUM.Auftragsstornogrund.STORNIERUNG_DER_SPERRUNG_ERFOLGT">
+            <summary>A04</summary>
+        </member>
+        <member name="F:BO4E.ENUM.Auftragsstornogrund.STORNIERUNG_DER_SPERRUNG_BIS_ZUM_VORTAG_ERFOLGT">
+            <summary>A03</summary>
         </member>
         <member name="T:BO4E.ENUM.Ausschreibungsportal">
             <summary>Aufzählung der unterstützten Ausschreibungsportale.</summary>

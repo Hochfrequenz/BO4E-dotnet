@@ -1,3 +1,4 @@
+using System;
 using System.Text.Json.Serialization;
 using BO4E.ENUM;
 using BO4E.meta;
@@ -9,6 +10,7 @@ namespace BO4E.BO
     /// Das Storno eines <see cref="Sperrauftrag"/>s oder <see cref="Entsperrauftrag"/>
     /// </summary>
     [NonOfficial(NonOfficialCategory.REGULATORY_REQUIREMENTS)]
+    [Obsolete("This is not used in the implementation of the blocking process - we use the enum Auftragsstornogrund instead")]
     public class SperrauftragsStorno : AuftragsStorno
     {
         /// <summary>
