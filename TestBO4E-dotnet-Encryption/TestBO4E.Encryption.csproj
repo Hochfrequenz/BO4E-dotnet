@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>net6.0</TargetFramework>
+    <TargetFramework>net6.0</TargetFramework> 
     <RootNamespace>TestBO4E_dotnet_Encryption</RootNamespace>
 
     <IsPackable>false</IsPackable>

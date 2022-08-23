@@ -1,7 +1,7 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <RootNamespace>BO4E_dotnet.Reporting</RootNamespace>
+    <RootNamespace>BO4E_dotnet.Reporting</RootNamespace> 
 
     <VersionPrefix>0.2.22</VersionPrefix>
 

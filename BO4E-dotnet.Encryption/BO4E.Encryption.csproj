@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>net6.0</TargetFramework>
+    <TargetFramework>net6.0</TargetFramework> 
     <RootNamespace>BO4E_dotnet.Encryption</RootNamespace>
 	<VersionPrefix>0.2.22</VersionPrefix>
 	<PackageLicenseFile>LICENSE.txt</PackageLicenseFile>
