@@ -4064,6 +4064,11 @@
                 Referenz auf das Datum der Rechnung, die durch diesen Betrag bezahlt wurde
             </summary>
         </member>
+        <member name="P:BO4E.COM.Vorauszahlung._ReferenzDatum">
+            <summary>
+             Referenz auf das Datum der Rechnung, die durch diesen Betrag bezahlt wurde
+            </summary>
+        </member>
         <member name="T:BO4E.COM.Zaehlwerk">
             <summary>Mit dieser Komponente werden Zählwerke modelliert.</summary>
         </member>

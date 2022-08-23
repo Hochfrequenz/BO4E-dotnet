@@ -252,9 +252,6 @@ enum Bilanzierungsmethode {
    Bilanzierungsmethode_PAUSCHAL = 4;
    Bilanzierungsmethode_IMS = 5;
 }
-message DateTimeOffset {
-   option (.protobuf_net.msgopt).namespace = "System";
-}
 message Dienstleistung {
    option (.protobuf_net.msgopt).namespace = "BO4E.COM";
    Dienstleistungstyp Dienstleistungstyp = 3;
@@ -1492,11 +1489,6 @@ message Vertragsteil {
    Menge Kundenwert = 1010;
    string Verbrauchsaufteilung = 1011;
 }
-message Verwendungszweck {
-   option (.protobuf_net.msgopt).namespace = "BO4E.COM";
-   Marktrolle Marktrolle = 3;
-   repeated Verwendungszweck Zweck = 4 [packed = false];
-}
 enum Verwendungszweck {
    option (.protobuf_net.enumopt).namespace = "BO4E.ENUM";
    NETZNUTZUNGSABRECHNUNG = 0;
@@ -1506,11 +1498,15 @@ enum Verwendungszweck {
    UEBERMITTLUNG_AN_DAS_HKNR = 4;
    ERMITTLUNG_AUSGEGLICHENHEIT_BILANZKREIS = 5;
 }
+message Verwendungszweck {
+   option (.protobuf_net.msgopt).namespace = "BO4E.COM";
+   Marktrolle Marktrolle = 3;
+   repeated Verwendungszweck Zweck = 4 [packed = false];
+}
 message Vorauszahlung {
    option (.protobuf_net.msgopt).namespace = "BO4E.COM";
    Betrag Betrag = 3;
    string Referenz = 4;
-   DateTimeOffset ReferenzDatum = 5;
 }
 enum Waehrungscode {
    option (.protobuf_net.enumopt).namespace = "BO4E.ENUM";

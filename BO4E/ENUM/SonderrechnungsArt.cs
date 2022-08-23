@@ -1,3 +1,7 @@
+using ProtoBuf;
+
+using System.Xml.Linq;
+
 namespace BO4E.ENUM
 {
     /// <summary> </summary>
@@ -22,6 +26,7 @@ namespace BO4E.ENUM
         /// <summary>
         /// Offshore-Netzumlage
         /// </summary>
+        [ProtoEnum(Name = nameof(Sonderrechnungsart) + "_" + nameof(OFFSHORE_UMLAGE))]
         OFFSHORE_UMLAGE,
         /// <summary>
         /// § 19 StromNEV-Umlage

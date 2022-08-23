@@ -42,5 +42,18 @@ namespace BO4E.COM
         [JsonPropertyName("referenzDatum")]
         [JsonPropertyOrder(5)]
         public DateTimeOffset? ReferenzDatum { get; set; }
+
+        /// <summary>
+        ///  Referenz auf das Datum der Rechnung, die durch diesen Betrag bezahlt wurde
+        /// </summary>
+        [System.Text.Json.Serialization.JsonIgnore]
+        [Newtonsoft.Json.JsonIgnore]
+        [ProtoMember(1005, Name = nameof(ReferenzDatum))]
+        [CompatibilityLevel(CompatibilityLevel.Level240)]
+        private DateTime _ReferenzDatum
+        {
+            get => ReferenzDatum?.UtcDateTime ?? DateTime.MinValue;
+            set => ReferenzDatum = DateTime.SpecifyKind(value, DateTimeKind.Utc);
+        }
     }
 }
