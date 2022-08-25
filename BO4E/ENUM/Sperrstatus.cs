@@ -1,4 +1,5 @@
 using BO4E.meta;
+
 using ProtoBuf;
 
 
@@ -8,7 +9,7 @@ namespace BO4E.ENUM
     /// Der Sperrstatus beschreibt, ob ein Zähler gesperrt ist oder nicht.
     /// </summary>
     [NonOfficial(NonOfficialCategory.REGULATORY_REQUIREMENTS)]
-    enum Sperrstatus
+    public enum Sperrstatus
     {
         /// <summary>
         /// Der Zähler ist nicht gesperrt

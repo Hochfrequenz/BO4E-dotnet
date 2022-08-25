@@ -1,14 +1,17 @@
+using BO4E.COM;
+using BO4E.EnergyIdentificationCodes;
+using BO4E.ENUM;
+using BO4E.meta;
+
+using Newtonsoft.Json;
+
+using ProtoBuf;
+
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Text.Json.Serialization;
 using System.Text.RegularExpressions;
-using BO4E.COM;
-using BO4E.EnergyIdentificationCodes;
-using BO4E.ENUM;
-using BO4E.meta;
-using Newtonsoft.Json;
-using ProtoBuf;
 
 namespace BO4E.BO
 {
@@ -324,6 +327,23 @@ namespace BO4E.BO
         [NonOfficial(NonOfficialCategory.CUSTOMER_REQUIREMENTS)]
         public MesstechnischeEinordnung? MesstechnischeEinordnung { get; set; }
 
+        /// <summary>
+        /// Daten für die Prüfung der Netznutzungsabrechnung
+        /// </summary>
+        [JsonProperty(Required = Required.Default, Order = 37, PropertyName = "netznutzungsabrechnungsdaten")]
+        [JsonPropertyName("netznutzungsabrechnungsdaten")]
+        [JsonPropertyOrder(37)]
+        [ProtoMember(37)]
+        public List<Netznutzungsabrechnungsdaten>? Netznutzungsabrechnungsdaten { get; set; }
+
+        /// <summary>
+        /// Sperrstatus
+        /// </summary>
+        [JsonProperty(Required = Required.Default, Order = 38, PropertyName = "sperrstatus")]
+        [JsonPropertyName("sperrstatus")]
+        [JsonPropertyOrder(38)]
+        [ProtoMember(38)]
+        public Sperrstatus? Sperrstatus { get; set; }
         /// <summary>
         ///     Test if a <paramref name="id" /> is a valid Marktlokations ID.
         /// </summary>

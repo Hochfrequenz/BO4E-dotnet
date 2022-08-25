@@ -1,9 +1,12 @@
-using System;
-using System.Text.Json.Serialization;
 using BO4E.BO;
 using BO4E.meta;
+
 using Newtonsoft.Json;
+
 using ProtoBuf;
+
+using System;
+using System.Text.Json.Serialization;
 
 namespace BO4E.COM
 {
@@ -53,6 +56,16 @@ namespace BO4E.COM
 #pragma warning disable IDE1006 // Naming Styles because Marktrolle is already the name of the enum
         // ReSharper disable once InconsistentNaming
         public ENUM.Marktrolle? marktrolle { get; set; }
+
+
+        /// <summary>
+        ///     Weiterverpflichtung des MSB />
+        /// </summary>
+        [JsonProperty(PropertyName = "weiterverpflichtet", Required = Required.Default, Order = 10)]
+        [JsonPropertyName("weiterverpflichtet")]
+        [ProtoMember(10)]
+        [JsonPropertyOrder(10)]
+        public bool? Weiterverpflichtet { get; set; }
 
 #pragma warning restore IDE1006 // Naming Styles
     }

@@ -1269,6 +1269,16 @@
                 Messtechnische Einordnung aus der UTILMD (IMS, KME_MME, KEINE_MESSUNG)
             </summary>
         </member>
+        <member name="P:BO4E.BO.Marktlokation.Netznutzungsabrechnungsdaten">
+            <summary>
+            Daten für die Prüfung der Netznutzungsabrechnung
+            </summary>
+        </member>
+        <member name="P:BO4E.BO.Marktlokation.Sperrstatus">
+            <summary>
+            Sperrstatus
+            </summary>
+        </member>
         <member name="M:BO4E.BO.Marktlokation.ValidateId(System.String)">
             <summary>
                 Test if a <paramref name="id" /> is a valid Marktlokations ID.
@@ -3021,6 +3031,11 @@
                 List of Marktrolle. Details siehe <see cref="T:BO4E.ENUM.Marktrolle" />
             </summary>
         </member>
+        <member name="P:BO4E.COM.MarktpartnerDetails.Weiterverpflichtet">
+            <summary>
+                Weiterverpflichtung des MSB />
+            </summary>
+        </member>
         <member name="T:BO4E.COM.Menge">
             <summary>Abbildung einer Menge mit Wert und Einheit.</summary>
         </member>
@@ -3052,6 +3067,51 @@
         </member>
         <member name="P:BO4E.COM.Messlokationszuordnung.GueltigBis">
             <summary>Zeitpunkt, bis zu dem die Messlokation zur Marktlokation gehört</summary>
+        </member>
+        <member name="T:BO4E.COM.Netznutzungsabrechnungsdaten">
+            <summary>
+                Netznutzungsabrechnungsdaten
+            </summary>
+        </member>
+        <member name="P:BO4E.COM.Netznutzungsabrechnungsdaten.ArtikelId">
+            <summary>
+                Artikel oder Gruppen-ArtikelId
+            </summary>
+        </member>
+        <member name="P:BO4E.COM.Netznutzungsabrechnungsdaten.ArtikelIdTyp">
+            <summary>
+                Typ der ArtikelId (Einzel oder Gruppe)
+            </summary>
+        </member>
+        <member name="P:BO4E.COM.Netznutzungsabrechnungsdaten.Anzahl">
+            <summary>
+                Anzahl der Positionen für diese ArtikelId
+            </summary>
+        </member>
+        <member name="P:BO4E.COM.Netznutzungsabrechnungsdaten.Gemeinderabatt">
+            <summary>
+                Gemeinderabatt
+            </summary>
+        </member>
+        <member name="P:BO4E.COM.Netznutzungsabrechnungsdaten.Zuschlag">
+            <summary>
+                Zuschlag
+            </summary>
+        </member>
+        <member name="P:BO4E.COM.Netznutzungsabrechnungsdaten.Abschlag">
+            <summary>
+                Abschlag
+            </summary>
+        </member>
+        <member name="P:BO4E.COM.Netznutzungsabrechnungsdaten.SingulaereBetriebsmittel">
+            <summary>
+                Singuläre Betriebsmittel
+            </summary>
+        </member>
+        <member name="P:BO4E.COM.Netznutzungsabrechnungsdaten.PreisSingulaereBetriebsmittel">
+            <summary>
+                Preis für singuläre Betriebsmittel
+            </summary>
         </member>
         <member name="T:BO4E.COM.Notiz">
             <summary>
@@ -4123,6 +4183,26 @@
         <member name="P:BO4E.COM.Zaehlwerk.Waermenutzung">
             <summary>Stromverbrauchsart/Wärmenutzung Marktlokation</summary>
         </member>
+        <member name="P:BO4E.COM.Zaehlwerk.Konfiguration">
+            <summary>
+            Konfiguration (iMSys) des Zählwerks
+            </summary>
+        </member>
+        <member name="T:BO4E.COM.Zaehlzeit">
+            <summary>
+                Zaehlzeit
+            </summary>
+        </member>
+        <member name="P:BO4E.COM.Zaehlzeit.ZaehlzeitDefinition">
+            <summary>
+             Zählzeitdefinition
+            </summary>
+        </member>
+        <member name="P:BO4E.COM.Zaehlzeit.ZaehlzeitRegister">
+            <summary>
+                Zählzeitregister
+            </summary>
+        </member>
         <member name="T:BO4E.COM.Zeitraum">
             <summary>
                 Diese Komponente wird zur Abbildung von Zeiträumen in Form von Dauern oder der Angabe von Start und Ende
@@ -4683,6 +4763,15 @@
         <member name="F:BO4E.ENUM.ArithmetischeOperation.POSITIVWERT">
             <summary>Positivwert</summary>
             <remarks>UTILTS SG9 CAV Z83</remarks>
+        </member>
+        <member name="T:BO4E.ENUM.ArtikelIdTyp">
+            <summary>Unterscheidung zwischen ArtikelId und GruppenArtikelId</summary>
+        </member>
+        <member name="F:BO4E.ENUM.ArtikelIdTyp.ARTIKELID">
+            <summary>Übertragungsnetzbetreiber</summary>
+        </member>
+        <member name="F:BO4E.ENUM.ArtikelIdTyp.GRUPPENARTIKELID">
+            <summary>Netzbetreiber</summary>
         </member>
         <member name="T:BO4E.ENUM.AufAbschlagstyp">
             <summary>Festlegung, ob der Auf- oder Abschlag mit relativen oder absoluten Werten erfolgt.</summary>
@@ -7316,6 +7405,11 @@
         </member>
         <member name="F:BO4E.ENUM.Marktrolle.INTERESSENT">
             <summary>Interessent</summary>
+        </member>
+        <member name="F:BO4E.ENUM.Marktrolle.GMSB">
+            <summary>
+            grundzuständiger MSB
+            </summary>
         </member>
         <member name="T:BO4E.ENUM.Mengeneinheit">
             <summary>
