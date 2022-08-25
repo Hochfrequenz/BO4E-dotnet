@@ -30,6 +30,10 @@ namespace BO4E.ENUM
         /// <remarks>Z32</remarks>
         ERSATZWERTBILDUNGSVERFAHREN,
 
+        /// <summary> GRUND_ERSATZWERTBILDUNGSVERFAHREN </summary>
+        /// <remarks>Z40</remarks>
+        GRUND_ERSATZWERTBILDUNGSVERFAHREN,
+
         /// <summary> KORREKTURGRUND </summary>
         /// <remarks>Z34</remarks>
         KORREKTURGRUND,

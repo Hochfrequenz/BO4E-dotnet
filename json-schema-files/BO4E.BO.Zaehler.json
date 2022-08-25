@@ -773,7 +773,8 @@
             "EIV",
             "RB",
             "KUNDE",
-            "INTERESSENT"
+            "INTERESSENT",
+            "GMSB"
           ]
         },
         "zweck": {
@@ -978,6 +979,54 @@
         "abrechnungsrelevant": {
           "type": [
             "boolean",
+            "null"
+          ]
+        },
+        "anzahlAblesungen": {
+          "type": [
+            "integer",
+            "null"
+          ]
+        },
+        "zaehlzeiten": {
+          "$ref": "#/definitions/Zaehlzeit"
+        },
+        "konfiguration": {
+          "type": [
+            "string",
+            "null"
+          ]
+        }
+      }
+    },
+    "Zaehlzeit": {
+      "type": [
+        "object",
+        "null"
+      ],
+      "properties": {
+        "timestamp": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "format": "date-time"
+        },
+        "guid": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "zaehlzeitDefinition": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "zaehlzeitRegister": {
+          "type": [
+            "string",
             "null"
           ]
         }

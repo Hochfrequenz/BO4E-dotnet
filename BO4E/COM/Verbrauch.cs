@@ -1,14 +1,20 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Runtime.Serialization;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using BO4E.BO;
 using BO4E.ENUM;
 using BO4E.meta;
 using BO4E.meta.LenientConverters;
+
 using Newtonsoft.Json;
+
 using ProtoBuf;
+
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Runtime.ConstrainedExecution;
+using System.Runtime.Serialization;
+using System.Text.Json;
+using System.Text.Json.Serialization;
+
 using JsonSerializer = System.Text.Json.JsonSerializer;
 
 namespace BO4E.COM
@@ -156,5 +162,41 @@ namespace BO4E.COM
         [JsonPropertyName("tarifstufe")]
         [ProtoMember(12)]
         public Tarifstufe? Tarifstufe { get; set; }
+
+        [System.Text.Json.Serialization.JsonIgnore]
+        [Newtonsoft.Json.JsonIgnore]
+        [ProtoMember(13, Name = nameof(Nutzungszeitpunkt))]
+        [CompatibilityLevel(CompatibilityLevel.Level240)]
+        private DateTime _Nutzungszeitpunkt
+        {
+            get => Nutzungszeitpunkt?.UtcDateTime ?? default;
+            set => Nutzungszeitpunkt = value == default ? null : DateTime.SpecifyKind(value, DateTimeKind.Utc);
+        }
+        /// <summary>Wird verwendet, um einen Zählerstand eindeutig einem Prozesszeitpunkt zuzuordnen. Dieser Prozesszeitpunkt kann entweder ein Zeitpunkt einer Stammdatenänderung sein(z. B.bei einem Gerätewechsel, in der die Änderung vor dem Versand des Zählerstandes übermittelt wurde) oder die Bestellung eines Wertes aufgrund eines eingetretenen Ereignisses(z.B. Lieferantenwechsel). Der  Nutzungszeitpunkt ist für den Zählerstand der Zeitpunkt der für die weitere Verarbeitung relevant ist(z.B.Zuordnung bei Empfänger anhand der Zuordnungstupel).</summary>
+        [JsonProperty(PropertyName = "nutzungszeitpunkt", Required = Required.Default, Order = 13)]
+        [JsonPropertyName("nutzungszeitpunkt")]
+        [ProtoIgnore]
+        [JsonPropertyOrder(13)]
+        [Newtonsoft.Json.JsonConverter(typeof(LenientDateTimeConverter))]
+        public DateTimeOffset? Nutzungszeitpunkt { get; set; }
+
+        [System.Text.Json.Serialization.JsonIgnore]
+        [Newtonsoft.Json.JsonIgnore]
+        [ProtoMember(14, Name = nameof(Ausfuehrungszeitpunkt))]
+        [CompatibilityLevel(CompatibilityLevel.Level240)]
+        private DateTime _Ausfuehrungszeitpunkt
+        {
+            get => Ausfuehrungszeitpunkt?.UtcDateTime ?? default;
+            set => Ausfuehrungszeitpunkt = value == default ? null : DateTime.SpecifyKind(value, DateTimeKind.Utc);
+        }
+        /// <summary>Wird verwendet, um einen Zählerstand eindeutig einer tatsächlichen Änderung zuzuordnen, z.B.bei einem Gerätewechsel oder Geräteparameteränderung der tatsächliche Zeitpunkt an dem die Änderung an der Messlokation durchgeführt wurde.Der Nutzungszeitpunkt ist für den Zählerstand der Zeitpunkt der für die weitere Verarbeitung relevant ist(z.B. Zuordnung bei Empfänger anhand der Zuordnungstupel).</summary>
+        [JsonProperty(PropertyName = "ausfuehrungszeitpunkt", Required = Required.Default, Order = 14)]
+        [JsonPropertyName("ausfuehrungszeitpunkt")]
+        [ProtoIgnore]
+        [JsonPropertyOrder(14)]
+        [Newtonsoft.Json.JsonConverter(typeof(LenientDateTimeConverter))]
+        public DateTimeOffset? Ausfuehrungszeitpunkt { get; set; }
+
+
     }
 }

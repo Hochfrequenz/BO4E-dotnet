@@ -157,6 +157,30 @@ namespace BO4E.COM
         // Todo @hamid: add a docstring
         public bool? Abrechnungsrelevant { get; set; }
 
+        [JsonProperty(PropertyName = "anzahlAblesungen", Order = 1020, Required = Required.Default)]
+        [JsonPropertyName("anzahlAblesungen")]
+        [NonOfficial(NonOfficialCategory.CUSTOMER_REQUIREMENTS)]
+        [ProtoMember(1020)]
+        [JsonPropertyOrder(1020)]
+        public int? AnzahlAblesungen { get; set; }
+
+        [JsonProperty(PropertyName = "zaehlzeiten", Order = 1021, Required = Required.Default)]
+        [JsonPropertyName("zaehlzeiten")]
+        [NonOfficial(NonOfficialCategory.CUSTOMER_REQUIREMENTS)]
+        [ProtoMember(1021)]
+        [JsonPropertyOrder(1021)]
+        public Zaehlzeit? Zaehlzeiten { get; set; }
+
+        /// <summary>
+        /// Konfiguration (iMSys) des Zählwerks
+        /// </summary>
+        [JsonProperty(PropertyName = "konfiguration", Order = 1022, Required = Required.Default)]
+        [JsonPropertyName("konfiguration")]
+        [NonOfficial(NonOfficialCategory.CUSTOMER_REQUIREMENTS)]
+        [ProtoMember(1022)]
+        [JsonPropertyOrder(1022)]
+        public string? Konfiguration { get; set; }
+
 
 #pragma warning restore CS1591 // Missing XML comment for publicly visible type or member
     }

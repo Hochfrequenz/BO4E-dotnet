@@ -117,6 +117,11 @@ enum ArithmetischeOperation {
    DIVIDEND = 4;
    POSITIVWERT = 5;
 }
+enum ArtikelIdTyp {
+   option (.protobuf_net.enumopt).namespace = "BO4E.ENUM";
+   ArtikelIdTyp_ARTIKELID = 0;
+   ArtikelIdTyp_GRUPPENARTIKELID = 1;
+}
 enum AufAbschlagstyp {
    option (.protobuf_net.enumopt).namespace = "BO4E.ENUM";
    RELATIV = 0;
@@ -872,6 +877,8 @@ message Marktlokation {
    Geokoordinaten Geoadresse = 19;
    Katasteradresse Katasterinformation = 20;
    repeated Messlokationszuordnung ZugehoerigeMesslokationen = 28;
+   repeated Netznutzungsabrechnungsdaten Netznutzungsabrechnungsdaten = 37;
+   Sperrstatus Sperrstatus = 38;
    repeated MarktpartnerDetails Marktrollen = 1021;
    string Regelzone = 1022;
    string Marktgebiet = 1023;
@@ -887,6 +894,7 @@ message MarktpartnerDetails {
    string Rollencodenummer = 3;
    string Code = 4;
    Marktrolle marktrolle = 5;
+   bool Weiterverpflichtet = 10;
 }
 enum Marktrolle {
    option (.protobuf_net.enumopt).namespace = "BO4E.ENUM";
@@ -904,6 +912,7 @@ enum Marktrolle {
    RB = 11;
    KUNDE = 12;
    INTERESSENT = 13;
+   GMSB = 14;
 }
 message Menge {
    option (.protobuf_net.msgopt).namespace = "BO4E.COM";
@@ -1001,6 +1010,17 @@ enum Netzebene {
    HD = 7;
    MD = 8;
    ND = 9;
+}
+message Netznutzungsabrechnungsdaten {
+   option (.protobuf_net.msgopt).namespace = "BO4E.COM";
+   string ArtikelId = 4;
+   ArtikelIdTyp ArtikelIdTyp = 5;
+   int32 Anzahl = 6;
+   .bcl.Decimal Gemeinderabatt = 7;
+   .bcl.Decimal Zuschlag = 8;
+   .bcl.Decimal Abschlag = 9;
+   Menge SingulaereBetriebsmittel = 10;
+   Preis PreisSingulaereBetriebsmittel = 11;
 }
 enum Netznutzungsabrechnungsgrundlage {
    option (.protobuf_net.enumopt).namespace = "BO4E.ENUM";
@@ -1259,6 +1279,11 @@ enum Sparte {
    Sparte_WASSER = 4;
    Sparte_ABWASSER = 5;
 }
+enum Sperrstatus {
+   option (.protobuf_net.enumopt).namespace = "BO4E.ENUM";
+   Sperrstatus_ENTSPERRT = 0;
+   Sperrstatus_GESPERRT = 1;
+}
 enum Status {
    option (.protobuf_net.enumopt).namespace = "BO4E.ENUM";
    TARIF_1 = 0;
@@ -1324,6 +1349,9 @@ enum Status {
    WARTUNGSARBEITEN_AN_EICHRECHTSKONFORMEN_MESSGERAETEN = 60;
    KONSISTENZ_UND_SYNCHRONPRUEFUNG = 61;
    RECHENWERT = 62;
+   ANGABEN_MESSLOKATION = 63;
+   BASIS_MME = 64;
+   GRUND_ANGABEN_MESSLOKATION = 65;
 }
 enum StatusArt {
    option (.protobuf_net.enumopt).namespace = "BO4E.ENUM";
@@ -1332,8 +1360,9 @@ enum StatusArt {
    MESSKLASSIFIZIERUNG = 2;
    PLAUSIBILISIERUNGSHINWEIS = 3;
    ERSATZWERTBILDUNGSVERFAHREN = 4;
-   KORREKTURGRUND = 5;
-   GASQUALITAET = 6;
+   GRUND_ERSATZWERTBILDUNGSVERFAHREN = 5;
+   KORREKTURGRUND = 6;
+   GASQUALITAET = 7;
 }
 message StatusZusatzInformation {
    option (.protobuf_net.msgopt).namespace = "BO4E.COM";
@@ -1416,6 +1445,8 @@ message Verbrauch {
    Messwertstatus Messwertstatus = 10;
    repeated StatusZusatzInformation StatusZusatzInformationen = 11;
    Tarifstufe Tarifstufe = 12;
+   .google.protobuf.Timestamp Nutzungszeitpunkt = 13;
+   .google.protobuf.Timestamp Ausfuehrungszeitpunkt = 14;
 }
 enum Verbrauchsart {
    option (.protobuf_net.enumopt).namespace = "BO4E.ENUM";
@@ -1789,6 +1820,14 @@ message Zaehlwerk {
    int32 Vorkommastelle = 1017;
    int32 Nachkommastelle = 1018;
    bool Abrechnungsrelevant = 1019;
+   int32 AnzahlAblesungen = 1020;
+   Zaehlzeit Zaehlzeiten = 1021;
+   string Konfiguration = 1022;
+}
+message Zaehlzeit {
+   option (.protobuf_net.msgopt).namespace = "BO4E.COM";
+   string ZaehlzeitDefinition = 4;
+   string ZaehlzeitRegister = 5;
 }
 enum Zeiteinheit {
    option (.protobuf_net.enumopt).namespace = "BO4E.ENUM";

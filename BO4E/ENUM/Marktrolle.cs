@@ -43,6 +43,10 @@ namespace BO4E.ENUM
         KUNDE,
 
         /// <summary>Interessent</summary>
-        INTERESSENT
+        INTERESSENT,
+        /// <summary>
+        /// grundzuständiger MSB
+        /// </summary>
+        GMSB
     }
 }
