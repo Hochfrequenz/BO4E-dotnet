@@ -260,5 +260,15 @@ namespace BO4E.ENUM
         /// <summary> RECHENWERT </summary>
         /// <remarks>ZR5</remarks>
         RECHENWERT,
+
+        /// <summary> ANGABEN_MESSLOKATION </summary>
+        /// <remarks>ZS0</remarks>
+        ANGABEN_MESSLOKATION,
+        /// <summary> BASIS_MME </summary>
+        /// <remarks>ZS2</remarks>
+        BASIS_MME,
+        /// <summary> GRUND_ANGABEN_MESSLOKATION </summary>
+        /// <remarks>ZS9</remarks>
+        GRUND_ANGABEN_MESSLOKATION,
     }
 }

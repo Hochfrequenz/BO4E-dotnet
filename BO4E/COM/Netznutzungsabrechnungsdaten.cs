@@ -19,11 +19,11 @@ namespace BO4E.COM
         /// <summary>
         ///     Artikel oder Gruppen-ArtikelId
         /// </summary>
-        [JsonProperty(PropertyName = "artikelId", Order = 4, Required = Required.Always)]
+        [JsonProperty(PropertyName = "artikelId", Order = 4, Required = Required.Default)]
         [JsonPropertyOrder(4)]
         [JsonPropertyName("artikelId")]
         [ProtoMember(4)]
-        public string ArtikelId { get; set; }
+        public string? ArtikelId { get; set; }
 
 
         /// <summary>
@@ -33,15 +33,15 @@ namespace BO4E.COM
         [JsonPropertyName("artikelIdTyp")]
         [JsonPropertyOrder(5)]
         [ProtoMember(5)]
-        public ENUM.ArtikelIdTyp ArtikelIdTyp { get; set; }
+        public ENUM.ArtikelIdTyp? ArtikelIdTyp { get; set; }
 
         /// <summary>
         ///     Anzahl der Positionen für diese ArtikelId
         /// </summary>
         [JsonProperty(PropertyName = "anzahl", Order = 6, Required = Required.Default)]
-        [JsonPropertyOrder(5)]
+        [JsonPropertyOrder(6)]
         [JsonPropertyName("anzahl")]
-        [ProtoMember(5)]
+        [ProtoMember(6)]
         public int? Anzahl { get; set; }
 
         /// <summary>

@@ -4008,6 +4008,12 @@
             <summary>Tarifstufe</summary>
             <seealso cref="T:BO4E.ENUM.Tarifstufe" />
         </member>
+        <member name="P:BO4E.COM.Verbrauch.Nutzungszeitpunkt">
+            <summary>Wird verwendet, um einen Zählerstand eindeutig einem Prozesszeitpunkt zuzuordnen. Dieser Prozesszeitpunkt kann entweder ein Zeitpunkt einer Stammdatenänderung sein(z. B.bei einem Gerätewechsel, in der die Änderung vor dem Versand des Zählerstandes übermittelt wurde) oder die Bestellung eines Wertes aufgrund eines eingetretenen Ereignisses(z.B. Lieferantenwechsel). Der  Nutzungszeitpunkt ist für den Zählerstand der Zeitpunkt der für die weitere Verarbeitung relevant ist(z.B.Zuordnung bei Empfänger anhand der Zuordnungstupel).</summary>
+        </member>
+        <member name="P:BO4E.COM.Verbrauch.Ausfuehrungszeitpunkt">
+            <summary>Wird verwendet, um einen Zählerstand eindeutig einer tatsächlichen Änderung zuzuordnen, z.B.bei einem Gerätewechsel oder Geräteparameteränderung der tatsächliche Zeitpunkt an dem die Änderung an der Messlokation durchgeführt wurde.Der Nutzungszeitpunkt ist für den Zählerstand der Zeitpunkt der für die weitere Verarbeitung relevant ist(z.B. Zuordnung bei Empfänger anhand der Zuordnungstupel).</summary>
+        </member>
         <member name="T:BO4E.COM.Vertragskonditionen">
             <summary>Abbildung für Vertragskonditionen. Die Komponente wird sowohl im Vertrag als auch im Tarif verwendet.</summary>
         </member>
@@ -8718,6 +8724,18 @@
             <summary> RECHENWERT </summary>
             <remarks>ZR5</remarks>
         </member>
+        <member name="F:BO4E.ENUM.Status.ANGABEN_MESSLOKATION">
+            <summary> ANGABEN_MESSLOKATION </summary>
+            <remarks>ZS0</remarks>
+        </member>
+        <member name="F:BO4E.ENUM.Status.BASIS_MME">
+            <summary> BASIS_MME </summary>
+            <remarks>ZS2</remarks>
+        </member>
+        <member name="F:BO4E.ENUM.Status.GRUND_ANGABEN_MESSLOKATION">
+            <summary> GRUND_ANGABEN_MESSLOKATION </summary>
+            <remarks>ZS9</remarks>
+        </member>
         <member name="T:BO4E.ENUM.StatusArt">
             <summary>
             Represents the Type of Wert (MSCONS SG10 STS 9015)
@@ -8743,6 +8761,10 @@
         <member name="F:BO4E.ENUM.StatusArt.ERSATZWERTBILDUNGSVERFAHREN">
             <summary> ERSATZWERTBILDUNGSVERFAHREN </summary>
             <remarks>Z32</remarks>
+        </member>
+        <member name="F:BO4E.ENUM.StatusArt.GRUND_ERSATZWERTBILDUNGSVERFAHREN">
+            <summary> GRUND_ERSATZWERTBILDUNGSVERFAHREN </summary>
+            <remarks>Z40</remarks>
         </member>
         <member name="F:BO4E.ENUM.StatusArt.KORREKTURGRUND">
             <summary> KORREKTURGRUND </summary>

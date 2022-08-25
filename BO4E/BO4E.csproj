@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <TargetFramework>net6.0</TargetFramework>
     <RootNamespace>BO4E</RootNamespace>
@@ -9,6 +9,7 @@
     <RepositoryUrl>https://github.com/Hochfrequenz/BO4E-dotnet/</RepositoryUrl>
  
     <VersionPrefix>0.2.50</VersionPrefix>
+	<VersionSuffix>beta16</VersionSuffix>
     <AssemblyName>BO4Enet</AssemblyName>
     <GeneratePackageOnBuild>false</GeneratePackageOnBuild>
     <PublishRepositoryUrl>true</PublishRepositoryUrl>
