@@ -18,6 +18,8 @@ namespace BO4E.BO
     /// <summary>
     /// Der NB bzw. LF nutzt Zählzeitdefinitionen für die Tarifierung von Werten.
     /// <remarks>Zaehlzeitdefinitionen werden in der Marktkommunikation mit Prüfidentifikator 25001 (UTILTS) übermittelt</remarks>
+    /// Eine Zählzeitdefinition umfasst dabei eine Liste von möglichen Zählzeiten, 
+    /// den dazugehörigen Registern und der tatsächlich ausgerollten Zählzeit (wenn diese elektronisch übermittelt wird)
     /// </summary>
     [ProtoContract]
     public class Zaehlzeitdefinition : BusinessObject
