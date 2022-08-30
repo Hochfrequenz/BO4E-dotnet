@@ -54,13 +54,13 @@ namespace BO4E.COM
         public ErmittlungLeistungsmaximum? ErmittlungLeistungsmaximum { get; set; }
 
         /// <summary>
-        ///     Bestellbar
+        ///     Ist die Zählzeit bestellbar?
         /// </summary>
-        [JsonProperty(PropertyName = "bestellbar", Order = 8, Required = Required.Default)]
-        [JsonPropertyName("bestellbar")]
+        [JsonProperty(PropertyName = "istBestellbar", Order = 8, Required = Required.Default)]
+        [JsonPropertyName("istBestellbar")]
         [JsonPropertyOrder(8)]
         [ProtoMember(8)]
-        public bool? Bestellbar { get; set; }
+        public bool? IstBestellbar { get; set; }
 
         /// <summary>
         ///     ZählzeitdefinitionTyp
