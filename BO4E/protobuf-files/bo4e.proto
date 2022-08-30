@@ -1743,9 +1743,9 @@ enum Waehrungseinheit {
 }
 enum Waermenutzung {
    option (.protobuf_net.enumopt).namespace = "BO4E.ENUM";
-   SPEICHERHEIZUNG = 0;
-   WAERMEPUMPE = 1;
-   DIREKTHEIZUNG = 2;
+   Waermenutzung_SPEICHERHEIZUNG = 0;
+   Waermenutzung_WAERMEPUMPE = 1;
+   Waermenutzung_DIREKTHEIZUNG = 2;
 }
 enum Wertermittlungsverfahren {
    option (.protobuf_net.enumopt).namespace = "BO4E.ENUM";
@@ -1821,13 +1821,14 @@ message Zaehlwerk {
    int32 Nachkommastelle = 1018;
    bool Abrechnungsrelevant = 1019;
    int32 AnzahlAblesungen = 1020;
-   Zaehlzeit Zaehlzeiten = 1021;
+   Zaehlzeitregister Zaehlzeiten = 1021;
    string Konfiguration = 1022;
 }
-message Zaehlzeit {
+message Zaehlzeitregister {
    option (.protobuf_net.msgopt).namespace = "BO4E.COM";
    string ZaehlzeitDefinition = 4;
-   string ZaehlzeitRegister = 5;
+   string Register = 5;
+   Schwachlastfaehig Schwachlastfaehig = 6;
 }
 enum Zeiteinheit {
    option (.protobuf_net.enumopt).namespace = "BO4E.ENUM";

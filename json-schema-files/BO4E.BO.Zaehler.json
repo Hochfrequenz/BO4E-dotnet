@@ -989,7 +989,7 @@
           ]
         },
         "zaehlzeiten": {
-          "$ref": "#/definitions/Zaehlzeit"
+          "$ref": "#/definitions/Zaehlzeitregister"
         },
         "konfiguration": {
           "type": [
@@ -999,7 +999,7 @@
         }
       }
     },
-    "Zaehlzeit": {
+    "Zaehlzeitregister": {
       "type": [
         "object",
         "null"
@@ -1024,10 +1024,21 @@
             "null"
           ]
         },
-        "zaehlzeitRegister": {
+        "register": {
           "type": [
             "string",
             "null"
+          ]
+        },
+        "schwachlastfaehig": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "enum": [
+            null,
+            "NICHT_SCHWACHLASTFAEHIG",
+            "SCHWACHLASTFAEHIG"
           ]
         }
       }

@@ -2092,6 +2092,50 @@
         <member name="P:BO4E.BO.Zaehler.Geraete">
             <summary>Liste der Geräte, die zu diesem Zähler gehören.</summary>
         </member>
+        <member name="T:BO4E.BO.Zaehlzeitdefinition">
+            <summary>
+            Der NB bzw. LF nutzt Zählzeitdefinitionen für die Tarifierung von Werten.
+            <remarks>Zaehlzeitdefinitionen werden in der Marktkommunikation mit Prüfidentifikator 25001 (UTILTS) übermittelt</remarks>
+            </summary>
+        </member>
+        <member name="P:BO4E.BO.Zaehlzeitdefinition.Beginndatum">
+            <summary>
+            Der inklusive Zeitpunkt ab dem die Zaehlzeitdefinitionen gültig ist
+            </summary>
+            <remarks>UTILTS SG5 DTM+Z34</remarks>
+        </member>
+        <member name="P:BO4E.BO.Zaehlzeitdefinition.Endedatum">
+            <summary>
+            Der exklusive Zeitpunkt bis zu dem die Zaehlzeitdefinitionen gültig ist
+            </summary>
+            <remarks>UTILTS SG5 DTM+Z35</remarks>
+        </member>
+        <member name="P:BO4E.BO.Zaehlzeitdefinition.Version">
+             <summary>
+             Version der Zählzeitdefinition als Datum
+            </summary>
+        </member>
+        <member name="P:BO4E.BO.Zaehlzeitdefinition.Notwendigkeit">
+            <summary>
+            Beschreibt ob eine Zaehlzeitdefinitionen notwendig ist
+            </summary>
+            <remarks>UTILTS SG5 STS 4405</remarks>
+        </member>
+        <member name="P:BO4E.BO.Zaehlzeitdefinition.Zaehlzeiten">
+            <summary>
+            Liste der Zählzeiten [1 - 99999]
+            </summary>
+        </member>
+        <member name="P:BO4E.BO.Zaehlzeitdefinition.Zaehlzeitregister">
+            <summary>
+            Liste der Zählzeitregister
+            </summary>
+        </member>
+        <member name="P:BO4E.BO.Zaehlzeitdefinition.AusgerollteZaehlzeiten">
+            <summary>
+            Liste der ausgerollten Zählzeiten
+            </summary>
+        </member>
         <member name="T:BO4E.COM.Abweichung">
             <summary>
             Zur Angabe einer Abweichung bei Ablehnung einer COMDIS. (REMADV SG5 RFF und SG7 AJT/FTX)
@@ -2369,6 +2413,22 @@
             <summary>
                 Eindeutige Kennung des Benutzers, der diese Aufgabe ausführt hat.
                 (Nur sinnvoll, wenn <c>ausgefuehrt==true</c>)
+            </summary>
+        </member>
+        <member name="T:BO4E.COM.AusgerollteZaehlzeit">
+            <summary>
+                Ausgerollte Zaehlzeit
+            </summary>
+        </member>
+        <member name="P:BO4E.COM.AusgerollteZaehlzeit.Aenderungszeitpunkt">
+            <summary>
+            Angabe eines Zeitpunktes, zu dem der Wechsel auf ein neues aktives Zählzeitregister erfolgt.
+            </summary>
+            <remarks>UTILTS SG5 DTM+Z34</remarks>
+        </member>
+        <member name="P:BO4E.COM.AusgerollteZaehlzeit.Register">
+            <summary>
+                Zählzeitregister
             </summary>
         </member>
         <member name="T:BO4E.COM.Ausschreibungsdetail">
@@ -4199,14 +4259,59 @@
                 Zaehlzeit
             </summary>
         </member>
-        <member name="P:BO4E.COM.Zaehlzeit.ZaehlzeitDefinition">
+        <member name="P:BO4E.COM.Zaehlzeit.Code">
             <summary>
              Zählzeitdefinition
             </summary>
         </member>
-        <member name="P:BO4E.COM.Zaehlzeit.ZaehlzeitRegister">
+        <member name="P:BO4E.COM.Zaehlzeit.Haeufigkeit">
+            <summary>
+                Häufigkeit der Übermittlung
+            </summary>
+        </member>
+        <member name="P:BO4E.COM.Zaehlzeit.Uebermittelbarkeit">
+            <summary>
+                Art der Übermittlung
+            </summary>
+        </member>
+        <member name="P:BO4E.COM.Zaehlzeit.ErmittlungLeistungsmaximum">
+            <summary>
+                Ermittlung Leistungsmaximum
+            </summary>
+        </member>
+        <member name="P:BO4E.COM.Zaehlzeit.Bestellbar">
+            <summary>
+                Bestellbar
+            </summary>
+        </member>
+        <member name="P:BO4E.COM.Zaehlzeit.Typ">
+            <summary>
+                ZählzeitdefinitionTyp
+            </summary>
+        </member>
+        <member name="P:BO4E.COM.Zaehlzeit.BeschreibungTyp">
+            <summary>
+                Beschreibung des ZählzeitdefinitionTyp
+            </summary>
+        </member>
+        <member name="T:BO4E.COM.Zaehlzeitregister">
+            <summary>
+                Zaehlzeit
+            </summary>
+        </member>
+        <member name="P:BO4E.COM.Zaehlzeitregister.ZaehlzeitDefinition">
+            <summary>
+             Zählzeitdefinition
+            </summary>
+        </member>
+        <member name="P:BO4E.COM.Zaehlzeitregister.Register">
             <summary>
                 Zählzeitregister
+            </summary>
+        </member>
+        <member name="P:BO4E.COM.Zaehlzeitregister.Schwachlastfaehig">
+            <summary>
+                Schwachlastfähigkeit des Registers
             </summary>
         </member>
         <member name="T:BO4E.COM.Zeitraum">
@@ -5522,6 +5627,15 @@
             <summary>Einspeisung</summary>
             <remarks>UTILTS DE7037 Z06: Erzeugung</remarks>
         </member>
+        <member name="T:BO4E.ENUM.ErmittlungLeistungsmaximum">
+            <summary>Ermittlung des Leistungsmaximums bei atypischer Netznutzung</summary>
+        </member>
+        <member name="F:BO4E.ENUM.ErmittlungLeistungsmaximum.VERWENDUNG_HOCHLASTFENSTER">
+            <summary>Verwendung des Hochlastzeitfensters</summary>
+        </member>
+        <member name="F:BO4E.ENUM.ErmittlungLeistungsmaximum.KEINE_VERWENDUNG_HOCHLASTFENSTER">
+            <summary>keine Verwendung des Hochlastzeitfensters</summary>
+        </member>
         <member name="T:BO4E.ENUM.Erzeugungsart">
             <summary>Auflistung der Erzeugungsarten von Energie.</summary>
         </member>
@@ -5671,6 +5785,26 @@
         <member name="F:BO4E.ENUM.FehlerCode.GESCHAEFTSVORFALL_ABSENDER">
             <summary>
             Geschaeftsvorfall darf vom Absender nicht benutzt werden
+            </summary>
+        </member>
+        <member name="F:BO4E.ENUM.FehlerCode.KONFIGURATIONSID_UNBEKANNT">
+            <summary>
+            Konfigurations-ID zum angegebenen Zeitpunkt nicht bekannt
+            </summary>
+        </member>
+        <member name="F:BO4E.ENUM.FehlerCode.SEGMENTWIEDERHOLUNG_UEBERSCHRITTEN">
+            <summary>
+            Maximale Segmentwiederholung überschritten
+            </summary>
+        </member>
+        <member name="F:BO4E.ENUM.FehlerCode.ANZAHLCODES_UEBERSCHRITTEN">
+            <summary>
+            Anzahl der Codes überschreitet Paketdefinition
+            </summary>
+        </member>
+        <member name="F:BO4E.ENUM.FehlerCode.ZEITANGABE_UNPLAUSIBEL">
+            <summary>
+            Zeitangabe unplausibel
             </summary>
         </member>
         <member name="T:BO4E.ENUM.FehlerTyp">
@@ -6095,6 +6229,15 @@
         </member>
         <member name="F:BO4E.ENUM.Gueltigkeitstyp.NICHT_IN">
             <summary>Ein so eingeschränktes Merkmal gilt nicht mit den angegebenen Werten</summary>
+        </member>
+        <member name="T:BO4E.ENUM.HaeufigkeitZaehlzeit">
+            <summary>Häufigkeit der Übermittlung der Zählzeit</summary>
+        </member>
+        <member name="F:BO4E.ENUM.HaeufigkeitZaehlzeit.EINMALIG">
+            <summary>Einmalig</summary>
+        </member>
+        <member name="F:BO4E.ENUM.HaeufigkeitZaehlzeit.JAEHRLICH">
+            <summary>Jährlich</summary>
         </member>
         <member name="T:BO4E.ENUM.Handelsunstimmigkeitsgrund">
             <summary>
@@ -9147,6 +9290,15 @@
         <member name="F:BO4E.ENUM.Titel.PROF_DR">
             <summary>Professor Dr.</summary>
         </member>
+        <member name="T:BO4E.ENUM.UebermittelbarkeitZaehlzeit">
+            <summary>Übermittelbarkeit der ausgerollten Zählzeit</summary>
+        </member>
+        <member name="F:BO4E.ENUM.UebermittelbarkeitZaehlzeit.ELEKTRONISCH">
+            <summary>Der LF bzw. NB übermittelt die ausgerollte Zählzeit per EDIFACT mit dem Nachrichtenformat UTILTS.</summary>
+        </member>
+        <member name="F:BO4E.ENUM.UebermittelbarkeitZaehlzeit.NICHT_ELEKTRONISCH">
+            <summary>Der NB übermittelt die ausgerollte Zählzeit auf einem bilateral vereinbarten Weg. Dieser Weg wird hier nicht weiter beschrieben</summary>
+        </member>
         <member name="T:BO4E.ENUM.Unterbrechbarkeit">
             <summary>Stromverbrauchsart/Unterbrechbarkeit Marktlokation</summary>
         </member>
@@ -9993,7 +10145,8 @@
             <summary>Z57: Wärmepumpe</summary>
         </member>
         <member name="F:BO4E.ENUM.Waermenutzung.DIREKTHEIZUNG">
-            Z61: Direktheizung
+            Z61: Direktheizung <summary>        
+             </summary>
         </member>
         <member name="T:BO4E.ENUM.WahlrechtPrognosegrundlage">
             <summary>
@@ -10118,6 +10271,59 @@
         </member>
         <member name="F:BO4E.ENUM.ZaehlertypSpezifikation.MME_MEDA">
             <summary>Z05</summary>
+        </member>
+        <member name="T:BO4E.ENUM.ZaehlzeitdefinitionNotwendigkeit">
+            <summary>
+            Beschreibt, ob eine Zählzeitdefinition notwendig ist
+            </summary>
+            <remarks>Enspricht dem UTILTS SG5+STS Datenelement 4405 "Status der Nutzung von Zählzeitdefinitione"</remarks>
+        </member>
+        <member name="F:BO4E.ENUM.ZaehlzeitdefinitionNotwendigkeit.ZAEHLZEITDEFINITIONEN_WERDEN_VERWENDET">
+            <summary>
+            Berechnungsformel angefügt
+            </summary>
+            <remarks>Z02</remarks>
+        </member>
+        <member name="F:BO4E.ENUM.ZaehlzeitdefinitionNotwendigkeit.ZAEHLZEITDEFINITIONEN_WERDEN_NICHT_VERWENDET">
+            <summary>
+            Berechnungsformel muss beim Absender angefragt werden
+            </summary>
+            <remarks>Z03</remarks>
+        </member>
+        <member name="T:BO4E.ENUM.ZaehlzeitdefinitionTyp">
+            <summary>
+            Zählzeitdefinitionstyp
+            </summary>
+        </member>
+        <member name="F:BO4E.ENUM.ZaehlzeitdefinitionTyp.WAERMEPUMPE">
+            <summary>
+            Wärmepumpe
+            </summary>
+            <remarks>Z29</remarks>
+        </member>
+        <member name="F:BO4E.ENUM.ZaehlzeitdefinitionTyp.NACHTSPEICHERHEIZUNG">
+            <summary>
+            Nachtspeicherheizung
+            </summary>
+            <remarks>Z30</remarks>
+        </member>
+        <member name="F:BO4E.ENUM.ZaehlzeitdefinitionTyp.SCHWACHLASTZEITFENSTER">
+            <summary>
+            Schwachlastzeifenster
+            </summary>
+            <remarks>Z31</remarks>
+        </member>
+        <member name="F:BO4E.ENUM.ZaehlzeitdefinitionTyp.SONSTIGE">
+            <summary>
+            Nachtspeicherheizung
+            </summary>
+            <remarks>Z32</remarks>
+        </member>
+        <member name="F:BO4E.ENUM.ZaehlzeitdefinitionTyp.HOCHLASTZEITFENSTER">
+            <summary>
+            Nachtspeicherheizung
+            </summary>
+            <remarks>Z35</remarks>
         </member>
         <member name="T:BO4E.ENUM.Zeiteinheit">
             <summary>Auflistung möglicher Einheiten zur Verwendung in zeitbezogenen Angaben.</summary>
