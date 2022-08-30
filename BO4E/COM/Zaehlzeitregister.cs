@@ -11,7 +11,7 @@ using System.Text.Json.Serialization;
 namespace BO4E.COM
 {
     /// <summary>
-    ///     Zaehlzeit
+    ///     Ein Zählzeitregister beschreibt eine erweiterte Definition der Zählzeit in Bezug auf ein Register. Dabei werden alle Codes dazu vom Netzbetreiber vergeben.
     /// </summary>
     [ProtoContract]
     [NonOfficial(NonOfficialCategory.REGULATORY_REQUIREMENTS)]
