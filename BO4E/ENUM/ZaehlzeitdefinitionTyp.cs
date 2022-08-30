@@ -21,12 +21,12 @@ namespace BO4E.ENUM
         /// <remarks>Z31</remarks>
         SCHWACHLASTZEITFENSTER,
         /// <summary>
-        /// Nachtspeicherheizung
+        /// sonstige Zaehlzeitdefinition
         /// </summary>
         /// <remarks>Z32</remarks>
         SONSTIGE,
         /// <summary>
-        /// Nachtspeicherheizung
+        /// Hochlastzeitfenster
         /// </summary>
         /// <remarks>Z35</remarks>
         HOCHLASTZEITFENSTER,
