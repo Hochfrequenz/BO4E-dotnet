@@ -82,6 +82,22 @@ namespace BO4E.ENUM
         /// <summary>
         /// Geschaeftsvorfall darf vom Absender nicht benutzt werden
         /// </summary>
-        GESCHAEFTSVORFALL_ABSENDER
+        GESCHAEFTSVORFALL_ABSENDER,
+        /// <summary>
+        /// Konfigurations-ID zum angegebenen Zeitpunkt nicht bekannt
+        /// </summary>
+        KONFIGURATIONSID_UNBEKANNT,
+        /// <summary>
+        /// Maximale Segmentwiederholung überschritten
+        /// </summary>
+        SEGMENTWIEDERHOLUNG_UEBERSCHRITTEN,
+        /// <summary>
+        /// Anzahl der Codes überschreitet Paketdefinition
+        /// </summary>
+        ANZAHLCODES_UEBERSCHRITTEN,
+        /// <summary>
+        /// Zeitangabe unplausibel
+        /// </summary>
+        ZEITANGABE_UNPLAUSIBEL
     }
 }

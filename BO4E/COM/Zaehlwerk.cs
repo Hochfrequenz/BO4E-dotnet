@@ -169,7 +169,7 @@ namespace BO4E.COM
         [NonOfficial(NonOfficialCategory.CUSTOMER_REQUIREMENTS)]
         [ProtoMember(1021)]
         [JsonPropertyOrder(1021)]
-        public Zaehlzeit? Zaehlzeiten { get; set; }
+        public Zaehlzeitregister? Zaehlzeiten { get; set; }
 
         /// <summary>
         /// Konfiguration (iMSys) des Zählwerks
