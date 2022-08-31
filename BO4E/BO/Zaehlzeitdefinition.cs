@@ -33,18 +33,18 @@ namespace BO4E.BO
         [CompatibilityLevel(CompatibilityLevel.Level240)]
         private DateTime _Beginndatum
         {
-            get => Beginndatum.UtcDateTime;
+            get => Beginndatum?.UtcDateTime ?? DateTime.MinValue;
             set => Beginndatum = DateTime.SpecifyKind(value, DateTimeKind.Utc);
         }
         /// <summary>
-        /// Der inklusive Zeitpunkt ab dem die Zaehlzeitdefinitionen gültig ist
+        /// Der inklusive Zeitpunkt ab dem die Zaehlzeitdefinitionen ausgerollt sind
         /// </summary>
         /// <remarks>UTILTS SG5 DTM+Z34</remarks>
-        [JsonProperty(Required = Required.Always, Order = 6, PropertyName = "beginndatum")]
+        [JsonProperty(Required = Required.Default, Order = 6, PropertyName = "beginndatum")]
         [JsonPropertyName("beginndatum")]
         [JsonPropertyOrder(6)]
         [ProtoIgnore]
-        public DateTimeOffset Beginndatum { get; set; }
+        public DateTimeOffset? Beginndatum { get; set; }
 
         [System.Text.Json.Serialization.JsonIgnore]
         [Newtonsoft.Json.JsonIgnore]
@@ -52,18 +52,18 @@ namespace BO4E.BO
         [CompatibilityLevel(CompatibilityLevel.Level240)]
         private DateTime _Endedatum
         {
-            get => Endedatum.UtcDateTime;
+            get => Endedatum?.UtcDateTime ?? DateTime.MinValue;
             set => Endedatum = DateTime.SpecifyKind(value, DateTimeKind.Utc);
         }
         /// <summary>
-        /// Der exklusive Zeitpunkt bis zu dem die Zaehlzeitdefinitionen gültig ist
+        /// Der exklusive Zeitpunkt bis zu dem die Zaehlzeitdefinitionen ausgerollt sind
         /// </summary>
         /// <remarks>UTILTS SG5 DTM+Z35</remarks>
-        [JsonProperty(Required = Required.Always, Order = 7, PropertyName = "endedatum")]
+        [JsonProperty(Required = Required.Default, Order = 7, PropertyName = "endedatum")]
         [JsonPropertyName("endedatum")]
         [ProtoIgnore]
         [JsonPropertyOrder(7)]
-        public DateTimeOffset Endedatum { get; set; }
+        public DateTimeOffset? Endedatum { get; set; }
 
         [System.Text.Json.Serialization.JsonIgnore]
         [Newtonsoft.Json.JsonIgnore]
@@ -88,11 +88,11 @@ namespace BO4E.BO
         /// Beschreibt ob eine Zaehlzeitdefinitionen notwendig ist
         /// </summary>
         /// <remarks>UTILTS SG5 STS 4405</remarks>
-        [JsonProperty(Required = Required.Always, Order = 9, PropertyName = "notwendigkeit")]
+        [JsonProperty(Required = Required.Default, Order = 9, PropertyName = "notwendigkeit")]
         [JsonPropertyName("notwendigkeit")]
         [ProtoMember(9)]
         [JsonPropertyOrder(9)]
-        public ZaehlzeitdefinitionNotwendigkeit Notwendigkeit { get; set; }
+        public ZaehlzeitdefinitionNotwendigkeit? Notwendigkeit { get; set; }
 
         /// <summary>
         /// Liste der Zählzeiten [1 - 99999]
