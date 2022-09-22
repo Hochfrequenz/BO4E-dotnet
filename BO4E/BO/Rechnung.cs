@@ -526,7 +526,7 @@ namespace BO4E.BO
         ///     Kennzeichen, ob es sich um eine selbstausgestellte Rechnung handelt
         /// </summary>
         [ProtoMember(23)]
-        [JsonProperty(Required = Required.Default, Order =25, PropertyName = "istSelbstausgestellt")]
+        [JsonProperty(Required = Required.Default, Order = 25, PropertyName = "istSelbstausgestellt")]
         [JsonPropertyName("istSelbstausgestellt")]
         [JsonPropertyOrder(25)]
         public bool? IstSelbstausgestellt { get; set; }
