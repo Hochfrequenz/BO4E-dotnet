@@ -565,17 +565,17 @@ namespace BO4E.BO
         [CompatibilityLevel(CompatibilityLevel.Level240)]
         private DateTime _Buchungsdatum
         {
-            get => Buchungsdatum.UtcDateTime;
+            get => Buchungsdatum?.UtcDateTime ?? DateTime.MinValue;
             set => Buchungsdatum = DateTime.SpecifyKind(value, DateTimeKind.Utc);
         }
         /// <summary>
         ///     Zu diesem Datum ist die Zahlung fällig.
         /// </summary>
-        [JsonProperty(Required = Required.Always, Order = 29, PropertyName = "buchungsdatum")]
+        [JsonProperty(Required = Required.Default, Order = 29, PropertyName = "buchungsdatum")]
         [JsonPropertyName("buchungsdatum")]
         [ProtoIgnore]
         [FieldName("bookingDate", Language.EN)]
         [JsonPropertyOrder(29)]
-        public DateTimeOffset Buchungsdatum { get; set; }
+        public DateTimeOffset? Buchungsdatum { get; set; }
     }
 }
