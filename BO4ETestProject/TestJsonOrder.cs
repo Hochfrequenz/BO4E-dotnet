@@ -55,7 +55,6 @@ namespace TestBO4E
             typeof(PreisblattMessung),
             typeof(PreisblattNetznutzung),
             typeof(PreisblattUmlagen),
-            typeof(Rechnung),
             typeof(Region),
             typeof(Sperrauftrag),
             typeof(SperrauftragsStorno),
