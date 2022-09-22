@@ -315,6 +315,7 @@ namespace BO4E.BO
         [JsonPropertyName("rechnungstitel")]
         [FieldName("billTitle", Language.EN)]
         [ProtoMember(4)]
+        [JsonPropertyOrder(4)]
         public string? Rechnungstitel { get; set; }
 
         /// <summary>
@@ -324,6 +325,7 @@ namespace BO4E.BO
         [JsonPropertyName("rechnungsstatus")]
         [FieldName("billStatus", Language.EN)]
         [ProtoMember(5)]
+        [JsonPropertyOrder(5)]
         public Rechnungsstatus? Rechnungsstatus { get; set; }
 
         /// <summary>
@@ -334,6 +336,7 @@ namespace BO4E.BO
         [JsonPropertyName("storno")]
         [FieldName("isCancellation", Language.EN)]
         [ProtoMember(6)]
+        [JsonPropertyOrder(6)]
         public bool Storno { get; set; }
 
         /// <summary>
@@ -342,6 +345,7 @@ namespace BO4E.BO
         [JsonProperty(Required = Required.Always, Order = 7, PropertyName = "rechnungsnummer")]
         [JsonPropertyName("rechnungsnummer")]
         [ProtoMember(7)]
+        [JsonPropertyOrder(7)]
         [BoKey]
         [FieldName("billNumber", Language.EN)]
         public string Rechnungsnummer { get; set; }
@@ -362,6 +366,7 @@ namespace BO4E.BO
         [JsonProperty(Required = Required.Always, Order = 8, PropertyName = "rechnungsdatum")]
         [JsonPropertyName("rechnungsdatum")]
         [ProtoIgnore]
+        [JsonPropertyOrder(8)]
         [FieldName("billDate", Language.EN)]
         public DateTimeOffset Rechnungsdatum { get; set; }
 
@@ -381,6 +386,7 @@ namespace BO4E.BO
         [JsonProperty(Required = Required.Always, Order = 9, PropertyName = "faelligkeitsdatum")]
         [JsonPropertyName("faelligkeitsdatum")]
         [ProtoIgnore]
+        [JsonPropertyOrder(9)]
         [FieldName("dueDate", Language.EN)]
         public DateTimeOffset Faelligkeitsdatum { get; set; }
 
@@ -390,6 +396,7 @@ namespace BO4E.BO
         [JsonProperty(Required = Required.Always, Order = 10, PropertyName = "rechnungstyp")]
         [JsonPropertyName("rechnungstyp")]
         [ProtoMember(10)]
+        [JsonPropertyOrder(10)]
         [FieldName("billType", Language.EN)]
         public Rechnungstyp Rechnungsstyp { get; set; }
 
@@ -399,6 +406,7 @@ namespace BO4E.BO
         [JsonProperty(Required = Required.Default, Order = 11, PropertyName = "originalRechnungsnummer")]
         [JsonPropertyName("originalRechnungsnummer")]
         [ProtoMember(11)]
+        [JsonPropertyOrder(11)]
         public string? OriginalRechnungsnummer { get; set; }
 
         /// <summary>
@@ -407,6 +415,7 @@ namespace BO4E.BO
         [JsonProperty(Required = Required.Always, Order = 12, PropertyName = "rechnungsperiode")]
         [JsonPropertyName("rechnungsperiode")]
         [ProtoMember(12)]
+        [JsonPropertyOrder(12)]
         [FieldName("billPeriod", Language.EN)]
         public Zeitraum Rechnungsperiode { get; set; }
 
@@ -416,6 +425,7 @@ namespace BO4E.BO
         [JsonProperty(Required = Required.Always, Order = 13, PropertyName = "rechnungsersteller")]
         [JsonPropertyName("rechnungsersteller")]
         [ProtoMember(13)]
+        [JsonPropertyOrder(13)]
         [FieldName("issuer", Language.EN)]
         public Geschaeftspartner Rechnungsersteller { get; set; }
 
@@ -425,6 +435,7 @@ namespace BO4E.BO
         [JsonProperty(Required = Required.Always, Order = 14, PropertyName = "rechnungsempfaenger")]
         [JsonPropertyName("rechnungsempfaenger")]
         [ProtoMember(14)]
+        [JsonPropertyOrder(14)]
         [FieldName("recipient", Language.EN)]
         public Geschaeftspartner Rechnungsempfaenger { get; set; }
 
@@ -434,6 +445,7 @@ namespace BO4E.BO
         [JsonProperty(Required = Required.Always, Order = 15, PropertyName = "gesamtnetto")]
         [JsonPropertyName("gesamtnetto")]
         [ProtoMember(15)]
+        [JsonPropertyOrder(15)]
         [FieldName("totalNet", Language.EN)]
         public Betrag Gesamtnetto { get; set; }
 
@@ -443,6 +455,7 @@ namespace BO4E.BO
         [JsonProperty(Required = Required.Always, Order = 16, PropertyName = "gesamtsteuer")]
         [JsonPropertyName("gesamtsteuer")]
         [ProtoMember(16)]
+        [JsonPropertyOrder(16)]
         [FieldName("totalTax", Language.EN)]
         public Betrag Gesamtsteuer { get; set; }
 
@@ -452,6 +465,7 @@ namespace BO4E.BO
         [JsonProperty(Required = Required.Always, Order = 17, PropertyName = "gesamtbrutto")]
         [JsonPropertyName("gesamtbrutto")]
         [ProtoMember(17)]
+        [JsonPropertyOrder(17)]
         [FieldName("totalGross", Language.EN)]
         public Betrag Gesamtbrutto { get; set; }
 
@@ -461,6 +475,7 @@ namespace BO4E.BO
         [JsonProperty(Required = Required.Default, Order = 18, PropertyName = "vorausgezahlt")]
         [JsonPropertyName("vorausgezahlt")]
         [ProtoMember(18)]
+        [JsonPropertyOrder(18)]
         [FieldName("prepaid", Language.EN)]
         public Betrag? Vorausgezahlt { get; set; }
 
@@ -470,6 +485,7 @@ namespace BO4E.BO
         [JsonProperty(Required = Required.Default, Order = 19, PropertyName = "rabattBrutto")]
         [JsonPropertyName("rabattBrutto")]
         [ProtoMember(19)]
+        [JsonPropertyOrder(19)]
         [FieldName("discountGross", Language.EN)]
         public Betrag? RabattBrutto { get; set; }
 
@@ -481,6 +497,7 @@ namespace BO4E.BO
         [JsonProperty(Required = Required.Always, Order = 20, PropertyName = "zuzahlen")]
         [JsonPropertyName("zuzahlen")]
         [ProtoMember(20)]
+        [JsonPropertyOrder(20)]
         [FieldName("toPay", Language.EN)]
         public Betrag Zuzahlen { get; set; }
 
@@ -491,6 +508,7 @@ namespace BO4E.BO
         [JsonProperty(Required = Required.Default, Order = 21, PropertyName = "steuerbetraege")]
         [JsonPropertyName("steuerbetraege")]
         [ProtoMember(21)]
+        [JsonPropertyOrder(21)]
         [FieldName("taxList", Language.EN)]
         public List<Steuerbetrag>? Steuerbetraege { get; set; }
 
@@ -501,6 +519,7 @@ namespace BO4E.BO
         [JsonProperty(Required = Required.Always, Order = 22, PropertyName = "rechnungspositionen")]
         [JsonPropertyName("rechnungspositionen")]
         [FieldName("invoiceItemList", Language.EN)]
+        [JsonPropertyOrder(22)]
         public List<Rechnungsposition> Rechnungspositionen { get; set; }
 
         /// <summary>
@@ -509,6 +528,7 @@ namespace BO4E.BO
         [ProtoMember(23)]
         [JsonProperty(Required = Required.Default, Order = 23, PropertyName = "istSelbstausgestellt")]
         [JsonPropertyName("istSelbstausgestellt")]
+        [JsonPropertyOrder(23)]
         public bool? IstSelbstausgestellt { get; set; }
 
         /// <summary>
@@ -517,6 +537,7 @@ namespace BO4E.BO
         [ProtoMember(24)]
         [JsonProperty(Required = Required.Default, Order = 24, PropertyName = "istReverseCharge")]
         [JsonPropertyName("istReverseCharge")]
+        [JsonPropertyOrder(24)]
         public bool? IstReverseCharge { get; set; }
 
         /// <summary>
@@ -554,6 +575,7 @@ namespace BO4E.BO
         [JsonPropertyName("buchungsdatum")]
         [ProtoIgnore]
         [FieldName("bookingDate", Language.EN)]
+        [JsonPropertyOrder(27)]
         public DateTimeOffset Buchungsdatum { get; set; }
     }
 }
