@@ -11,6 +11,11 @@ namespace BO4E.ENUM
         /// </summary>
         /// <remarks> CAV+Z54 </remarks>
         DURCH_LF,
+        /// <summary>
+        /// Wahlrecht durch LF gegeben
+        /// </summary>
+        /// <remarks> CAV+ZE2 </remarks>
+        DURCH_LF_NICHT_GEGEBEN,
 
         /// <summary>
         /// Wahlrecht nicht vorhanden wegen Verbrauch > 10.000 kWh/a
