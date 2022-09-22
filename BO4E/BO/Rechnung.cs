@@ -537,5 +537,23 @@ namespace BO4E.BO
         [ProtoMember(26)]
         [JsonPropertyOrder(26)]
         public Sonderrechnungsart? Sonderrechnungsart { get; set; }
+
+        [System.Text.Json.Serialization.JsonIgnore]
+        [Newtonsoft.Json.JsonIgnore]
+        [ProtoMember(27, Name = nameof(Buchungsdatum))]
+        [CompatibilityLevel(CompatibilityLevel.Level240)]
+        private DateTime _Buchungsdatum
+        {
+            get => Buchungsdatum.UtcDateTime;
+            set => Buchungsdatum = DateTime.SpecifyKind(value, DateTimeKind.Utc);
+        }
+        /// <summary>
+        ///     Zu diesem Datum ist die Zahlung fällig.
+        /// </summary>
+        [JsonProperty(Required = Required.Always, Order = 27, PropertyName = "buchungsdatum")]
+        [JsonPropertyName("buchungsdatum")]
+        [ProtoIgnore]
+        [FieldName("bookingDate", Language.EN)]
+        public DateTimeOffset Buchungsdatum { get; set; }
     }
 }
