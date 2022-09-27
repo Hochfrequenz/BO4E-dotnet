@@ -632,6 +632,11 @@
               Priorität des Bilanzkreises (für Gas)
             </summary>
         </member>
+        <member name="P:BO4E.BO.Bilanzierung.GrundWahlrechtPrognosegrundlage">
+            <summary>
+                Grund Wahlrecht der Prognosegrundlage (true = Wahlrecht beim Lieferanten vorhanden)
+            </summary>
+        </member>
         <member name="T:BO4E.BO.BusinessObject">
             <summary>
                 General abstract class for Business Objects for Energy (BO4E)
@@ -1748,6 +1753,11 @@
                 Sonderrechnungsart
             </summary>
         </member>
+        <member name="P:BO4E.BO.Rechnung.Buchungsdatum">
+            <summary>
+                Zu diesem Datum ist die Zahlung fällig.
+            </summary>
+        </member>
         <member name="T:BO4E.BO.Region">
             <summary>
                 Modellierung einer Region als Menge von Kriterien, die eine Region beschreiben.
@@ -2096,17 +2106,19 @@
             <summary>
             Der NB bzw. LF nutzt Zählzeitdefinitionen für die Tarifierung von Werten.
             <remarks>Zaehlzeitdefinitionen werden in der Marktkommunikation mit Prüfidentifikator 25001 (UTILTS) übermittelt</remarks>
+            Eine Zählzeitdefinition umfasst dabei eine Liste von möglichen Zählzeiten, 
+            den dazugehörigen Registern und der tatsächlich ausgerollten Zählzeit (wenn diese elektronisch übermittelt wird)
             </summary>
         </member>
         <member name="P:BO4E.BO.Zaehlzeitdefinition.Beginndatum">
             <summary>
-            Der inklusive Zeitpunkt ab dem die Zaehlzeitdefinitionen gültig ist
+            Der inklusive Zeitpunkt ab dem die Zaehlzeitdefinitionen ausgerollt sind
             </summary>
             <remarks>UTILTS SG5 DTM+Z34</remarks>
         </member>
         <member name="P:BO4E.BO.Zaehlzeitdefinition.Endedatum">
             <summary>
-            Der exklusive Zeitpunkt bis zu dem die Zaehlzeitdefinitionen gültig ist
+            Der exklusive Zeitpunkt bis zu dem die Zaehlzeitdefinitionen ausgerollt sind
             </summary>
             <remarks>UTILTS SG5 DTM+Z35</remarks>
         </member>
@@ -4279,9 +4291,9 @@
                 Ermittlung Leistungsmaximum
             </summary>
         </member>
-        <member name="P:BO4E.COM.Zaehlzeit.Bestellbar">
+        <member name="P:BO4E.COM.Zaehlzeit.IstBestellbar">
             <summary>
-                Bestellbar
+                Ist die Zählzeit bestellbar?
             </summary>
         </member>
         <member name="P:BO4E.COM.Zaehlzeit.Typ">
@@ -4296,7 +4308,7 @@
         </member>
         <member name="T:BO4E.COM.Zaehlzeitregister">
             <summary>
-                Zaehlzeit
+                Ein Zählzeitregister beschreibt eine erweiterte Definition der Zählzeit in Bezug auf ein Register. Dabei werden alle Codes dazu vom Netzbetreiber vergeben.
             </summary>
         </member>
         <member name="P:BO4E.COM.Zaehlzeitregister.ZaehlzeitDefinition">
@@ -10160,6 +10172,12 @@
             </summary>
             <remarks> CAV+Z54 </remarks>
         </member>
+        <member name="F:BO4E.ENUM.WahlrechtPrognosegrundlage.DURCH_LF_NICHT_GEGEBEN">
+            <summary>
+            Wahlrecht durch LF gegeben
+            </summary>
+            <remarks> CAV+ZE2 </remarks>
+        </member>
         <member name="F:BO4E.ENUM.WahlrechtPrognosegrundlage.NICHT_WEGEN_GROSSEN_VERBRAUCHS">
             <summary>
             Wahlrecht nicht vorhanden wegen Verbrauch > 10.000 kWh/a
@@ -10315,13 +10333,13 @@
         </member>
         <member name="F:BO4E.ENUM.ZaehlzeitdefinitionTyp.SONSTIGE">
             <summary>
-            Nachtspeicherheizung
+            sonstige Zaehlzeitdefinition
             </summary>
             <remarks>Z32</remarks>
         </member>
         <member name="F:BO4E.ENUM.ZaehlzeitdefinitionTyp.HOCHLASTZEITFENSTER">
             <summary>
-            Nachtspeicherheizung
+            Hochlastzeitfenster
             </summary>
             <remarks>Z35</remarks>
         </member>

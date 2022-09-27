@@ -212,5 +212,15 @@ namespace BO4E.BO
         [NonOfficial(NonOfficialCategory.MISSING)]
         [ProtoMember(1017)]
         public int? Prioritaet { get; set; }
+
+        /// <summary>
+        ///     Grund Wahlrecht der Prognosegrundlage (true = Wahlrecht beim Lieferanten vorhanden)
+        /// </summary>
+        [JsonProperty(PropertyName = "grundWahlrechtPrognosegrundlage", Required = Required.Default, Order = 26)]
+        [JsonPropertyName("grundWahlrechtPrognosegrundlage")]
+        [JsonPropertyOrder(26)]
+        [NonOfficial(NonOfficialCategory.MISSING)]
+        [ProtoMember(1018)]
+        public WahlrechtPrognosegrundlage? GrundWahlrechtPrognosegrundlage { get; set; }
     }
 }
