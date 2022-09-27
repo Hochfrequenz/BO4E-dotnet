@@ -126,7 +126,7 @@
             "KEINE_VERWENDUNG_HOCHLASTFENSTER"
           ]
         },
-        "bestellbar": {
+        "istBestellbar": {
           "type": [
             "boolean",
             "null"
@@ -236,11 +236,17 @@
       ]
     },
     "beginndatum": {
-      "type": "string",
+      "type": [
+        "string",
+        "null"
+      ],
       "format": "date-time"
     },
     "endedatum": {
-      "type": "string",
+      "type": [
+        "string",
+        "null"
+      ],
       "format": "date-time"
     },
     "version": {
@@ -248,8 +254,12 @@
       "format": "date-time"
     },
     "notwendigkeit": {
-      "type": "string",
+      "type": [
+        "string",
+        "null"
+      ],
       "enum": [
+        null,
         "ZAEHLZEITDEFINITIONEN_WERDEN_VERWENDET",
         "ZAEHLZEITDEFINITIONEN_WERDEN_NICHT_VERWENDET"
       ]
@@ -277,10 +287,7 @@
     }
   },
   "required": [
-    "beginndatum",
-    "endedatum",
     "version",
-    "notwendigkeit",
     "zaehlzeitregister",
     "ausgerollteZaehlzeiten"
   ]
