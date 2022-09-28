@@ -45,7 +45,7 @@ namespace BO4E.ENUM
         KORREKTE_ARTIKEL_ID_IN_RECHNUNG,
 
         /// <summary> KORREKTER_PREIS_ZU_GUELTIGEM_PREISBLATT_IN_RECHNUNG </summary>
-        /// <remarks>A05</remarks>
+        /// <remarks>A04</remarks>
         KORREKTER_PREIS_ZU_GUELTIGEM_PREISBLATT_IN_RECHNUNG,
 
         /// <summary> GUELTIGES_PREISBLATT_FRISTGERECHT_VERSENDET </summary>
