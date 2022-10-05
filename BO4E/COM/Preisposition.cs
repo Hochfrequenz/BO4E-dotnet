@@ -142,8 +142,8 @@ namespace BO4E.COM
         /// <summary>
         /// Verarbeitungszeitraum. Details <see cref="Zeitraum" />
         /// </summary>
-        [JsonProperty(PropertyName = "Verarbeitungszeitraum", Required = Required.Default, Order = 25)]
-        [JsonPropertyName("Verarbeitungszeitraum")]
+        [JsonProperty(PropertyName = "verarbeitungszeitraum", Required = Required.Default, Order = 25)]
+        [JsonPropertyName("verarbeitungszeitraum")]
         [NonOfficial(NonOfficialCategory.MISSING)]
         [ProtoMember(18)]
         [JsonPropertyOrder(25)]
