@@ -14,7 +14,7 @@ jobs:
       - name: Install Prettier
         run: npm install prettier
       - name: Run Prettier
-        uses: wearerequired/lint-action@v1
+        uses: wearerequired/lint-action@v2
         with:
           github_token: "${{ secrets.github_token }}"
           eslint: false
