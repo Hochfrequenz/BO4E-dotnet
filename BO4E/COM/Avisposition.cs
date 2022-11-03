@@ -81,14 +81,14 @@ namespace BO4E.COM
         public Betrag ZuZahlen { get; set; }
 
         /// <summary>
-        /// Abweichung bei Ablehnung einer COMDIS
+        /// Abweichungen bei Ablehnung einer COMDIS
         /// </summary>
-        /// <see cref="Abweichung" />
-        [JsonProperty(PropertyName = "abweichung", Required = Required.Default, Order = 7)]
-        [JsonPropertyName("abweichung")]
+        /// <see cref="Abweichungen" />
+        [JsonProperty(PropertyName = "abweichungen", Required = Required.Default, Order = 7)]
+        [JsonPropertyName("abweichungen")]
         [NonOfficial(NonOfficialCategory.MISSING)]
         [ProtoMember(7)]
-        public Abweichung? Abweichung { get; set; }
+        public List<Abweichung>? Abweichungen { get; set; }
         
         /// <summary>
         /// Rückmeldungspositionen

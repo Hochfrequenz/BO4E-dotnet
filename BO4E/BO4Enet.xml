@@ -2618,11 +2618,11 @@
             Geforderter Rechnungsbetrag
             </summary>
         </member>
-        <member name="P:BO4E.COM.Avisposition.Abweichung">
+        <member name="P:BO4E.COM.Avisposition.Abweichungen">
             <summary>
-            Abweichung bei Ablehnung einer COMDIS
+            Abweichungen bei Ablehnung einer COMDIS
             </summary>
-            <see cref="P:BO4E.COM.Avisposition.Abweichung" />
+            <see cref="P:BO4E.COM.Avisposition.Abweichungen" />
         </member>
         <member name="P:BO4E.COM.Avisposition.Positionen">
             <summary>
