@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Text.Json.Serialization;
 using BO4E.meta;
 using Newtonsoft.Json;
@@ -88,5 +89,14 @@ namespace BO4E.COM
         [NonOfficial(NonOfficialCategory.MISSING)]
         [ProtoMember(7)]
         public Abweichung? Abweichung { get; set; }
+        
+        /// <summary>
+        /// Rückmeldungspositionen
+        /// </summary>
+        [JsonProperty(PropertyName = "positionen", Required = Required.Default, Order = 8)]
+        [JsonPropertyName("positionen")]
+        [NonOfficial(NonOfficialCategory.MISSING)]
+        [ProtoMember(8)]
+        public List<Rueckmeldungsposition>? Positionen { get; set; }
     }
 }

@@ -2178,11 +2178,6 @@
             Abschlagsrechnungen
             </summary>
         </member>
-        <member name="P:BO4E.COM.Abweichung.Positionen">
-            <summary>
-            Rückmeldungspositionen
-            </summary>
-        </member>
         <member name="P:BO4E.COM.Abweichung.AbweichungsgrundCode">
             <summary>
             Angabe des Abweichungsgrunds (Code)
@@ -2628,6 +2623,11 @@
             Abweichung bei Ablehnung einer COMDIS
             </summary>
             <see cref="P:BO4E.COM.Avisposition.Abweichung" />
+        </member>
+        <member name="P:BO4E.COM.Avisposition.Positionen">
+            <summary>
+            Rückmeldungspositionen
+            </summary>
         </member>
         <member name="T:BO4E.COM.Betrag">
             <summary>
