@@ -63,15 +63,6 @@ namespace BO4E.COM
         public List<string>? Abschlagsrechnungen { get; set; }
 
         /// <summary>
-        /// Rückmeldungspositionen
-        /// </summary>
-        [JsonProperty(PropertyName = "positionen", Required = Required.Default, Order = 7)]
-        [JsonPropertyName("positionen")]
-        [NonOfficial(NonOfficialCategory.MISSING)]
-        [ProtoMember(7)]
-        public List<Rueckmeldungsposition>? Positionen { get; set; }
-
-        /// <summary>
         /// Angabe des Abweichungsgrunds (Code)
         /// </summary>
         [JsonProperty(PropertyName = "abweichungsgrundCode", Required = Required.Always, Order = 8)]

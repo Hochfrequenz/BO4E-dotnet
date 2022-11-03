@@ -2178,11 +2178,6 @@
             Abschlagsrechnungen
             </summary>
         </member>
-        <member name="P:BO4E.COM.Abweichung.Positionen">
-            <summary>
-            Rückmeldungspositionen
-            </summary>
-        </member>
         <member name="P:BO4E.COM.Abweichung.AbweichungsgrundCode">
             <summary>
             Angabe des Abweichungsgrunds (Code)
@@ -2623,11 +2618,16 @@
             Geforderter Rechnungsbetrag
             </summary>
         </member>
-        <member name="P:BO4E.COM.Avisposition.Abweichung">
+        <member name="P:BO4E.COM.Avisposition.Abweichungen">
             <summary>
-            Abweichung bei Ablehnung einer COMDIS
+            Abweichungen bei Ablehnung einer COMDIS
             </summary>
-            <see cref="P:BO4E.COM.Avisposition.Abweichung" />
+            <see cref="P:BO4E.COM.Avisposition.Abweichungen" />
+        </member>
+        <member name="P:BO4E.COM.Avisposition.Positionen">
+            <summary>
+            Rückmeldungspositionen
+            </summary>
         </member>
         <member name="T:BO4E.COM.Betrag">
             <summary>
@@ -6279,6 +6279,42 @@
         <member name="F:BO4E.ENUM.Handelsunstimmigkeitsgrund.SONSTIGES_SIEHE_BEGRUENDUNG">
             <summary> SONSTIGES_SIEHE_BEGRUENDUNG </summary>
             <remarks>28</remarks>
+        </member>
+        <member name="F:BO4E.ENUM.Handelsunstimmigkeitsgrund.GUELTIGES_PREISBLATT_VERSENDET">
+            <summary> GUELTIGES_PREISBLATT_VERSENDET </summary>
+            <remarks>A01</remarks>
+        </member>
+        <member name="F:BO4E.ENUM.Handelsunstimmigkeitsgrund.GUELTIGER_SPERRAUFTRAG_VORHANDEN">
+            <summary> GUELTIGER_SPERRAUFTRAG_VORHANDEN </summary>
+            <remarks>A02</remarks>
+        </member>
+        <member name="F:BO4E.ENUM.Handelsunstimmigkeitsgrund.KORREKTE_ARTIKEL_ID_IN_RECHNUNG">
+            <summary> KORREKTE_ARTIKEL_ID_IN_RECHNUNG </summary>
+            <remarks>A03</remarks>
+        </member>
+        <member name="F:BO4E.ENUM.Handelsunstimmigkeitsgrund.KORREKTER_PREIS_ZU_GUELTIGEM_PREISBLATT_IN_RECHNUNG">
+            <summary> KORREKTER_PREIS_ZU_GUELTIGEM_PREISBLATT_IN_RECHNUNG </summary>
+            <remarks>A04</remarks>
+        </member>
+        <member name="F:BO4E.ENUM.Handelsunstimmigkeitsgrund.GUELTIGES_PREISBLATT_FRISTGERECHT_VERSENDET">
+            <summary> GUELTIGES_PREISBLATT_FRISTGERECHT_VERSENDET </summary>
+            <remarks>A06</remarks>
+        </member>
+        <member name="F:BO4E.ENUM.Handelsunstimmigkeitsgrund.GUELTIGE_RECHNUNG_VORHANDEN">
+            <summary> GUELTIGE_RECHNUNG_VORHANDEN </summary>
+            <remarks>A07</remarks>
+        </member>
+        <member name="F:BO4E.ENUM.Handelsunstimmigkeitsgrund.KORREKTER_PREIS_IN_RECHNUNG_ABGERECHNET">
+            <summary> KORREKTER_PREIS_IN_RECHNUNG_ABGERECHNET </summary>
+            <remarks>A09</remarks>
+        </member>
+        <member name="F:BO4E.ENUM.Handelsunstimmigkeitsgrund.GUELTIGES_PREISBLATT_BLINDARBEIT_VERSENDET">
+            <summary> GUELTIGES_PREISBLATT_BLINDARBEIT_VERSENDET </summary>
+            <remarks>A12</remarks>
+        </member>
+        <member name="F:BO4E.ENUM.Handelsunstimmigkeitsgrund.KORREKTE_ARTIKEL_ID_FUER_ABRECHNUNG_STORNIERTER_SPERRAUFTRAG_ANGEGEBEN">
+            <summary> KORREKTE_ARTIKEL_ID_FUER_ABRECHNUNG_STORNIERTER_SPERRAUFTRAG_ANGEGEBEN </summary>
+            <remarks>A15</remarks>
         </member>
         <member name="T:BO4E.ENUM.Handelsunstimmigkeitstyp">
             <summary>
