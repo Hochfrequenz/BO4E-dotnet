@@ -89,7 +89,7 @@ namespace BO4E.COM
         [NonOfficial(NonOfficialCategory.MISSING)]
         [ProtoMember(7)]
         public List<Abweichung>? Abweichungen { get; set; }
-        
+
         /// <summary>
         /// Rückmeldungspositionen
         /// </summary>
