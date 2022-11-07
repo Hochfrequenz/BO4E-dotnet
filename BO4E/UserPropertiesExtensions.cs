@@ -256,13 +256,14 @@ namespace BO4E
 
             try
             {
-                if (parent.TryGetUserProperty<bool?, TParent>(flagKey, out var existingValue) &&
-                    existingValue == flagValue.Value)
+                if (parent.TryGetUserProperty<bool?, TParent>(flagKey, out var existingValue) && existingValue == flagValue.Value)
+                {
                     return false;
+                }
             }
-            catch (FormatException)
+            catch (FormatException fe) when (fe.Message.StartsWith("Could not convert"))
             {
-
+                // see unittest TestConvertingUserPropertyToBoolean
             }
             parent.UserProperties[flagKey] = flagValue.Value;
             return true;
