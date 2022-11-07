@@ -1,8 +1,10 @@
+using BO4E.meta;
+
+using Newtonsoft.Json.Linq;
+
 using System;
 using System.Collections.Generic;
 using System.Text.Json;
-using BO4E.meta;
-using Newtonsoft.Json.Linq;
 
 namespace BO4E
 {
@@ -252,10 +254,16 @@ namespace BO4E
                 return true;
             }
 
-            if (parent.TryGetUserProperty<bool?, TParent>(flagKey, out var existingValue) &&
-                existingValue == flagValue.Value)
-                return false;
+            try
+            {
+                if (parent.TryGetUserProperty<bool?, TParent>(flagKey, out var existingValue) &&
+                    existingValue == flagValue.Value)
+                    return false;
+            }
+            catch (FormatException)
+            {
 
+            }
             parent.UserProperties[flagKey] = flagValue.Value;
             return true;
         }
