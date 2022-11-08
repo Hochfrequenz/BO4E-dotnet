@@ -18,15 +18,6 @@ namespace BO4E.COM
     public class Abweichung : COM
     {
         /// <summary>
-        /// Referenzierung auf eine vorherige COMDIS-Nachricht
-        /// </summary>
-        [JsonProperty(PropertyName = "referenz", Required = Required.Default, Order = 1)]
-        [JsonPropertyName("referenz")]
-        [NonOfficial(NonOfficialCategory.MISSING)]
-        [ProtoMember(1)]
-        public string? Referenz { get; set; }
-
-        /// <summary>
         /// Angabe des Abweichungsgrunds
         /// </summary>
         [JsonProperty(PropertyName = "abweichungsgrund", Required = Required.Default, Order = 3)]

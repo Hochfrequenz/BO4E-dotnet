@@ -2153,11 +2153,6 @@
             Zur Angabe einer Abweichung bei Ablehnung einer COMDIS. (REMADV SG5 RFF und SG7 AJT/FTX)
             </summary>
         </member>
-        <member name="P:BO4E.COM.Abweichung.Referenz">
-            <summary>
-            Referenzierung auf eine vorherige COMDIS-Nachricht
-            </summary>
-        </member>
         <member name="P:BO4E.COM.Abweichung.Abweichungsgrund">
             <summary>
             Angabe des Abweichungsgrunds
@@ -2616,6 +2611,11 @@
         <member name="P:BO4E.COM.Avisposition.ZuZahlen">
             <summary>
             Geforderter Rechnungsbetrag
+            </summary>
+        </member>
+        <member name="P:BO4E.COM.Avisposition.Referenz">
+            <summary>
+            Referenzierung auf eine vorherige COMDIS-Nachricht
             </summary>
         </member>
         <member name="P:BO4E.COM.Avisposition.Abweichungen">
