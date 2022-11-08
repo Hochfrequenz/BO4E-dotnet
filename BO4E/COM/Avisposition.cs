@@ -81,10 +81,19 @@ namespace BO4E.COM
         public Betrag ZuZahlen { get; set; }
 
         /// <summary>
+        /// Referenzierung auf eine vorherige COMDIS-Nachricht
+        /// </summary>
+        [JsonProperty(PropertyName = "referenz", Required = Required.Default, Order = 7)]
+        [JsonPropertyName("referenz")]
+        [NonOfficial(NonOfficialCategory.MISSING)]
+        [ProtoMember(1)]
+        public string? Referenz { get; set; }
+
+        /// <summary>
         /// Abweichungen bei Ablehnung einer COMDIS
         /// </summary>
         /// <see cref="Abweichungen" />
-        [JsonProperty(PropertyName = "abweichungen", Required = Required.Default, Order = 7)]
+        [JsonProperty(PropertyName = "abweichungen", Required = Required.Default, Order = 8)]
         [JsonPropertyName("abweichungen")]
         [NonOfficial(NonOfficialCategory.MISSING)]
         [ProtoMember(7)]
@@ -93,7 +102,7 @@ namespace BO4E.COM
         /// <summary>
         /// Rückmeldungspositionen
         /// </summary>
-        [JsonProperty(PropertyName = "positionen", Required = Required.Default, Order = 8)]
+        [JsonProperty(PropertyName = "positionen", Required = Required.Default, Order = 9)]
         [JsonPropertyName("positionen")]
         [NonOfficial(NonOfficialCategory.MISSING)]
         [ProtoMember(8)]
