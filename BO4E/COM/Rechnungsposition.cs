@@ -33,17 +33,17 @@ namespace BO4E.COM
         [CompatibilityLevel(CompatibilityLevel.Level240)]
         private DateTime _LieferungVon
         {
-            get => LieferungVon.UtcDateTime;
+            get => LieferungVon?.UtcDateTime ?? DateTime.MinValue;
             set => LieferungVon = DateTime.SpecifyKind(value, DateTimeKind.Utc);
         }
         /// <summary>Start der Lieferung für die abgerechnete Leistung.</summary>
-        [JsonProperty(PropertyName = "lieferungVon", Required = Required.Always, Order = 12)]
+        [JsonProperty(PropertyName = "lieferungVon", Required = Required.Default, Order = 12)]
         [JsonPropertyName("lieferungVon")]
         [JsonPropertyOrder(12)]
         [FieldName("deliveryStart", Language.EN)]
         [ProtoIgnore]
         [Newtonsoft.Json.JsonConverter(typeof(LenientDateTimeConverter))]
-        public DateTimeOffset LieferungVon { get; set; }
+        public DateTimeOffset? LieferungVon { get; set; }
 
 
         [System.Text.Json.Serialization.JsonIgnore]
@@ -52,17 +52,17 @@ namespace BO4E.COM
         [CompatibilityLevel(CompatibilityLevel.Level240)]
         private DateTime _LieferungBis
         {
-            get => LieferungBis.UtcDateTime;
+            get => LieferungBis?.UtcDateTime ?? DateTime.MinValue;
             set => LieferungBis = DateTime.SpecifyKind(value, DateTimeKind.Utc);
         }
         /// <summary>Ende der Lieferung für die abgerechnete Leistung.</summary>
-        [JsonProperty(PropertyName = "lieferungBis", Required = Required.Always, Order = 13)]
+        [JsonProperty(PropertyName = "lieferungBis", Required = Required.Default, Order = 13)]
         [JsonPropertyName("lieferungBis")]
         [JsonPropertyOrder(13)]
         [FieldName("deliveryEnd", Language.EN)]
         [ProtoIgnore]
         [Newtonsoft.Json.JsonConverter(typeof(LenientDateTimeConverter))]
-        public DateTimeOffset LieferungBis { get; set; }
+        public DateTimeOffset? LieferungBis { get; set; }
 
         /// <summary>Bezeichnung für die abgerechnete Position.</summary>
         [JsonProperty(PropertyName = "positionstext", Required = Required.Always, Order = 14)]
