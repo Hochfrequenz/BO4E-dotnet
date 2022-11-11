@@ -3,8 +3,6 @@ using BO4E.meta;
 using Newtonsoft.Json;
 
 using ProtoBuf;
-
-using System.Collections.Generic;
 using System.Text.Json.Serialization;
 
 namespace BO4E.COM
@@ -71,7 +69,7 @@ namespace BO4E.COM
         [ProtoMember(9)]
         public decimal? Abschlag { get; set; }
         /// <summary>
-        ///     Singul�re Betriebsmittel
+        ///     Singuläre Betriebsmittel
         /// </summary>
         [JsonProperty(PropertyName = "singulaereBetriebsmittel", Order = 10, Required = Required.Default)]
         [JsonPropertyOrder(10)]
@@ -80,7 +78,7 @@ namespace BO4E.COM
         public Menge? SingulaereBetriebsmittel { get; set; }
 
         /// <summary>
-        ///     Preis f�r singul�re Betriebsmittel
+        ///     Preis für singulöre Betriebsmittel
         /// </summary>
         [JsonProperty(PropertyName = "preisSingulaereBetriebsmittel", Order = 11, Required = Required.Default)]
         [JsonPropertyOrder(11)]
