@@ -11,22 +11,25 @@ namespace BO4E.COM
     public class FehlerDetail : COM
     {
         /// <summary>Gibt den Code des Fehlers an.</summary>
-        [JsonProperty(PropertyName = "code", Required = Required.Always)]
+        [JsonProperty(PropertyName = "code", Required = Required.Always, Order = 10)]
         [JsonPropertyName("code")]
+        [JsonPropertyOrder(10)]
         [ProtoMember(1)]
         public BO4E.ENUM.FehlerCode Code { get; set; }
 
         /// <summary>Eine Beschreibung des Fehlers.</summary>
-        [JsonProperty(PropertyName = "beschreibung", Required = Required.Default)]
+        [JsonProperty(PropertyName = "beschreibung", Required = Required.Default, Order = 11)]
         [JsonPropertyName("beschreibung")]
+        [JsonPropertyOrder(11)]
         [ProtoMember(2)]
         public string? Beschreibung { get; set; }
 
         /// <summary>
         ///     Herkunft / Ursache des Fehlers
         /// </summary>
-        [JsonProperty(PropertyName = "ursache", Required = Required.Default)]
+        [JsonProperty(PropertyName = "ursache", Required = Required.Default, Order = 12)]
         [JsonPropertyName("ursache")]
+        [JsonPropertyOrder(12)]
         [ProtoMember(3)]
         public FehlerUrsache? Ursache { get; set; }
     }
