@@ -3378,7 +3378,7 @@
             Verarbeitungszeitraum. Details <see cref="T:BO4E.COM.Zeitraum" />
             </summary>
         </member>
-        <member name="P:BO4E.COM.Preisposition.ArtikelID">
+        <member name="P:BO4E.COM.Preisposition.ArtikelId">
             <summary>
              Die genauen Bedeutungen der einzelnen Artikel-IDs sind in der EDI@Energy Codeliste der Artikelnummern 
             und Artikel-IDs zu finden, die in der Spalte "PRICAT Codeverwendung" ein X haben
@@ -3532,6 +3532,16 @@
         <member name="P:BO4E.COM.Rechnungsposition.ArtikelId">
             <summary>
                 Artikel-ID (ab 1.10.2022)
+            </summary>
+        </member>
+        <member name="P:BO4E.COM.Rechnungsposition._Ausfuehrungsdatum">
+            <summary>
+                Um Qualifier 203 Ausführungsdatum/-zeit abzubilden
+            </summary>
+        </member>
+        <member name="P:BO4E.COM.Rechnungsposition.Ausfuehrungsdatum">
+            <summary>
+            Das Datum an dem die Leistung erbracht wurde.
             </summary>
         </member>
         <member name="T:BO4E.COM.RechnungspositionFlat">

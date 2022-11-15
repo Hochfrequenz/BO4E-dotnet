@@ -1153,6 +1153,7 @@ message Rechnungsposition {
    Steuerbetrag TeilsummeSteuer = 14;
    string VertragskontoId = 15;
    string ArtikelId = 28;
+   .google.protobuf.Timestamp Ausfuehrungsdatum = 29;
    string VertragsId = 1017;
    RechnungspositionsStatus Status = 1018;
 }

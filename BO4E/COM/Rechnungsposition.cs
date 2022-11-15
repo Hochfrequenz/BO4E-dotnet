@@ -209,5 +209,28 @@ namespace BO4E.COM
         [NonOfficial(NonOfficialCategory.CUSTOMER_REQUIREMENTS)]
         [ProtoMember(28)]
         public string? ArtikelId { get; set; }
+
+        /// <summary>
+        ///     Um Qualifier 203 Ausführungsdatum/-zeit abzubilden
+        /// </summary>
+        [System.Text.Json.Serialization.JsonIgnore]
+        [Newtonsoft.Json.JsonIgnore]
+        [ProtoMember(29, Name = nameof(Ausfuehrungsdatum))]
+        [CompatibilityLevel(CompatibilityLevel.Level240)]
+        protected DateTime? _Ausfuehrungsdatum
+        {
+            get => Ausfuehrungsdatum?.UtcDateTime;
+            set => Ausfuehrungsdatum = value != null ? DateTime.SpecifyKind(value.Value, DateTimeKind.Utc) : null;
+        }
+
+        /// <summary>
+        /// Das Datum an dem die Leistung erbracht wurde.
+        /// </summary>
+        [JsonProperty("ausfuehrungsdatum", Order = 29, Required = Required.Default)]
+        [JsonPropertyName("ausfuehrungsdatum")]
+        [JsonPropertyOrder(29)]
+        [ProtoIgnore]
+        public DateTimeOffset? Ausfuehrungsdatum { get; set; }
+
     }
 }

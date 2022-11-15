@@ -80,6 +80,19 @@
         "null"
       ],
       "properties": {
+        "timestamp": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "format": "date-time"
+        },
+        "guid": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
         "code": {
           "type": "string",
           "enum": [
@@ -117,19 +130,6 @@
         },
         "ursache": {
           "$ref": "#/definitions/FehlerUrsache"
-        },
-        "timestamp": {
-          "type": [
-            "string",
-            "null"
-          ],
-          "format": "date-time"
-        },
-        "guid": {
-          "type": [
-            "string",
-            "null"
-          ]
         }
       },
       "required": [
