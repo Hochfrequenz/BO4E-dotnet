@@ -43,7 +43,7 @@ namespace BO4E.ENUM
 
         /// <summary>Individuelle Abstimmung (Sonderausstattung)</summary>
         SONDERAUSSTATTUNG,
-        
+
         ///<summary>Wasserzähler</summary>
         WASSERZAEHLER
     }
