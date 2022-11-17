@@ -243,6 +243,12 @@ namespace BO4E.ENUM
         ///  Wasserzähler Größe MWZW
         /// </summary>
         [ProtoEnum(Name = nameof(Geraetemerkmal) + "_" + nameof(WASSER_MWZW))]
-        WASSER_MWZW
+        WASSER_MWZW,
+
+        /// <summary>
+        ///  Wasserzähler Größe WZ01
+        /// </summary>
+        [ProtoEnum(Name = nameof(Geraetemerkmal) + "_" + nameof(WASSER_WZ01))]
+        WASSER_WZ01
     }
 }
