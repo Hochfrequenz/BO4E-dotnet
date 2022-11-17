@@ -237,6 +237,12 @@ namespace BO4E.ENUM
         ///     Unbestimmtes Merkmal
         /// </summary>
         [ProtoEnum(Name = nameof(Geraetemerkmal) + "_" + nameof(UNBESTIMMT))]
-        UNBESTIMMT
+        UNBESTIMMT,
+        
+        /// <summary>
+        ///  Wasserzähler Größe MWZW
+        /// </summary>
+        [ProtoEnum(Name = nameof(Geraetemerkmal) + "_" + nameof(WASSER_MWZW))]
+        WASSER_MWZW
     }
 }
