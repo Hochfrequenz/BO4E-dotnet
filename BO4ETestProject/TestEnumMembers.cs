@@ -23,11 +23,15 @@ namespace TestBO4E
                             !t.Namespace.StartsWith("BO4E.ENUM.EDI"));
             foreach (var enumType in enumTypes)
             {
-                var fieldsWithoutEnumMemberAttributes = enumType.GetFields()
+                var enumFields = enumType.GetFields()
+                    .Where(f => f.IsPublic)
+                    .Where(f => f.Name != "value__")
+                    .ToList();
+                var fieldsWithoutEnumMemberAttributes = enumFields
                     .Where(f => !f.GetCustomAttributes<EnumMemberAttribute>().Any())
                     .Select(f => new Tuple<Type, string>(enumType, f.Name));
                 fieldsWithoutEnumMemberAttributes.Should().BeEmpty();
-                var enumMemberAttributeDiffersFromEnumMemberName = enumType.GetFields()
+                var enumMemberAttributeDiffersFromEnumMemberName = enumFields
                     .Select(f => new Tuple<string, string>(f.GetCustomAttribute<EnumMemberAttribute>().Value, f.Name))
                     .Where(nameTuple => nameTuple.Item1 != nameTuple.Item2);
                 enumMemberAttributeDiffersFromEnumMemberName.Should().BeEmpty();
