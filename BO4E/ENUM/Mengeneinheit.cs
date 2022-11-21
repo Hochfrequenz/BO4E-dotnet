@@ -37,7 +37,7 @@ namespace BO4E.ENUM
         /// <summary>Anzahl</summary>
         ANZAHL = 7,
 
-        /// <summary>Kubikmeter (Gas)</summary>
+        /// <summary>Kubikmeter</summary>
         KUBIKMETER = 11,
 
         /// <summary>Stunde</summary>

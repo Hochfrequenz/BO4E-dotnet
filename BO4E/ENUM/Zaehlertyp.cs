@@ -1,7 +1,7 @@
 namespace BO4E.ENUM
 {
     /// <summary>
-    ///     Bei diesem Enum handelt es sich die Abbildung von Zählertypen der Sparten Strom und Gas.
+    ///     Bei diesem Enum handelt es sich die Abbildung von Zählertypen der Sparten Strom, Gas und Wasser.
     /// </summary>
     public enum Zaehlertyp
     {
@@ -43,5 +43,8 @@ namespace BO4E.ENUM
 
         /// <summary>Individuelle Abstimmung (Sonderausstattung)</summary>
         SONDERAUSSTATTUNG,
+
+        ///<summary>Wasserzähler</summary>
+        WASSERZAEHLER
     }
 }
