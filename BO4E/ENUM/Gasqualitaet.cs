@@ -1,4 +1,7 @@
 using System;
+using Newtonsoft.Json.Linq;
+using System.Runtime.Serialization;
+
 using ProtoBuf;
 
 namespace BO4E.ENUM
@@ -13,24 +16,29 @@ namespace BO4E.ENUM
         [Newtonsoft.Json.JsonIgnore]
         [System.Text.Json.Serialization.JsonIgnore]
 #pragma warning disable CS1591 // Missing XML comment for publicly visible type or member
+        [EnumMember(Value = "ZERO")]
         ZERO = 0,
 
 #pragma warning restore CS1591 // Missing XML comment for publicly visible type or member
 
         /// <summary>High Caloric Gas</summary>
+        [EnumMember(Value = "H_GAS")]
         H_GAS = 1,
 
         /// <summary>Low Caloric Gas</summary>
+        [EnumMember(Value = "L_GAS")]
         L_GAS = 2,
 
         /// <inheritdoc cref="H_GAS" />
         [Newtonsoft.Json.JsonIgnore]
         [System.Text.Json.Serialization.JsonIgnore]
+        [EnumMember(Value = "HGAS")]
         HGAS = 1, // do not remove, they're needed as workaround for bad sap values
 
         /// <inheritdoc cref="L_GAS" />
         [Newtonsoft.Json.JsonIgnore]
         [System.Text.Json.Serialization.JsonIgnore]
+        [EnumMember(Value = "LGAS")]
         LGAS = 2 // do not remove, they're needed as workaround for bad sap values
     }
 }
