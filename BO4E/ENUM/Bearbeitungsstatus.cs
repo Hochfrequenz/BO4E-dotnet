@@ -1,3 +1,6 @@
+using Newtonsoft.Json.Linq;
+using System.Runtime.Serialization;
+
 namespace BO4E.ENUM
 {
     /// <summary>
@@ -8,31 +11,37 @@ namespace BO4E.ENUM
         /// <summary>
         ///     offen oder neu
         /// </summary>
+        [EnumMember(Value = "OFFEN")]
         OFFEN,
 
         /// <summary>
         ///     in Bearbeitung
         /// </summary>
+        [EnumMember(Value = "IN_BEARBEITUNG")]
         IN_BEARBEITUNG,
 
         /// <summary>
         ///     abgeschlossen
         /// </summary>
+        [EnumMember(Value = "ABGESCHLOSSEN")]
         ABGESCHLOSSEN,
 
         /// <summary>
         ///     storniert
         /// </summary>
+        [EnumMember(Value = "STORNIERT")]
         STORNIERT,
 
         /// <summary>
         ///     quittiert
         /// </summary>
+        [EnumMember(Value = "QUITTIERT")]
         QUITTIERT,
 
         /// <summary>
         ///     Benachrichtigung ist auf Wunsch des Users standardmäßig ausgeblendet.
         /// </summary>
+        [EnumMember(Value = "IGNORIERT")]
         IGNORIERT
     }
 }

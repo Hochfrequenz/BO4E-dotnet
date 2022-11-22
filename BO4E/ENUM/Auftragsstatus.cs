@@ -1,5 +1,8 @@
 using BO4E.meta;
 
+using Newtonsoft.Json.Linq;
+using System.Runtime.Serialization;
+
 namespace BO4E.ENUM
 {
     /// <summary>
@@ -13,36 +16,42 @@ namespace BO4E.ENUM
         /// Der Auftrag ist gescheitert
         /// </summary>
         /// <remarks>EDIFACT DE4405: Z13</remarks>
+        [EnumMember(Value = "GESCHEITERT")]
         GESCHEITERT,
 
         /// <summary>
         /// Der Auftrag wurde erfolgreich bearbeitet
         /// </summary>
         /// <remarks>EDIFACT DE4405: Z14</remarks>
+        [EnumMember(Value = "ERFOLGREICH")]
         ERFOLGREICH,
 
         /// <summary>
         /// Der Auftrag ist geplant
         /// </summary>
         /// <remarks>EDIFACT DE4405: Z17</remarks>
+        [EnumMember(Value = "GEPLANT")]
         GEPLANT,
 
         /// <summary>
         /// Dem Auftrag wurde zugestimmmt (aber noch nicht durchgeführt)
         /// </summary>
         /// <remarks>EDIFACT DE4405: Z30</remarks>
+        [EnumMember(Value = "ZUGESTIMMT")]
         ZUGESTIMMT,
 
         /// <summary>
         /// Dem Auftrag wurde widersprochen
         /// </summary>
         /// <remarks>EDIFACT DE4405: Z31</remarks>
+        [EnumMember(Value = "WIDERSPROCHEN")]
         WIDERSPROCHEN,
 
         /// <summary>
         /// Der Auftrag wurde abgelehnt
         /// </summary>
         /// <remarks>EDIFACT DE4405: Z32</remarks>
+        [EnumMember(Value = "ABGELEHNT")]
         ABGELEHNT,
     }
 }

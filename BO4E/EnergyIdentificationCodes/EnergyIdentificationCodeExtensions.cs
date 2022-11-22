@@ -1,6 +1,9 @@
+using Newtonsoft.Json.Linq;
+
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.Serialization;
 using System.Text.RegularExpressions;
 
 namespace BO4E.EnergyIdentificationCodes
@@ -14,36 +17,44 @@ namespace BO4E.EnergyIdentificationCodes
         /// <summary>
         /// object type “Y”, Areas for inter System Operator data interchange 
         /// </summary>
+        [EnumMember(Value = "AREA")]
         AREA,
 
         /// <summary>
         /// object type “Z”, Energy Metering points
         /// </summary>
+
+        [EnumMember(Value = "AREA")] 
         MEASURING_POINT,
 
         /// <summary>
         /// object type "W", such as Production plants, consumption units, etc.
         /// </summary>
+        [EnumMember(Value = "RESOURCE_OBJECT")] 
         RESOURCE_OBJECT,
 
         /// <summary>
         /// object type "T", International tie lines between areas
         /// </summary>
+        [EnumMember(Value = "TIE_LINES")] 
         TIE_LINES,
 
         /// <summary>
         /// object type "V", Physical or logical place where a market participant or IT system is located
         /// </summary>
+        [EnumMember(Value = "LOCATION")] 
         LOCATION,
 
         /// <summary>
         /// object type "A"
         /// </summary>
+        [EnumMember(Value = "SUBSTATION")] 
         SUBSTATION,
 
         /// <summary>
         /// Parties - object type "X"
         /// </summary>
+        [EnumMember(Value = "MARKET_PARTICIPANT")] 
         MARKET_PARTICIPANT
     }
 

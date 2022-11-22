@@ -1,4 +1,7 @@
+using Newtonsoft.Json.Linq;
 using ProtoBuf;
+
+using System.Runtime.Serialization;
 
 namespace BO4E.ENUM
 {
@@ -9,10 +12,12 @@ namespace BO4E.ENUM
         /// Bericht war erfolgreich
         /// </summary>
         [ProtoEnum(Name = "BerichtStatus_ERFOLGREICH")]
+        [EnumMember(Value = "ERFOLGREICH")]
         ERFOLGREICH,
 
         /// <summary>Fehler im Bericht</summary>
         [ProtoEnum(Name = "BerichtStatus_FEHLER")]
+        [EnumMember(Value = "FEHLER")]
         FEHLER
     }
 }

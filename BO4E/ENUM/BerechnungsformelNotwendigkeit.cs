@@ -1,3 +1,6 @@
+using Newtonsoft.Json.Linq;
+using System.Runtime.Serialization;
+
 namespace BO4E.ENUM
 {
     /// <summary>
@@ -10,20 +13,24 @@ namespace BO4E.ENUM
         /// Berechnungsformel angefügt
         /// </summary>
         /// <remarks>Z33</remarks>
+        [EnumMember(Value = "BERECHNUNGSFORMEL_NOTWENDIG")]
         BERECHNUNGSFORMEL_NOTWENDIG,
         /// <summary>
         /// Berechnungsformel muss beim Absender angefragt werden
         /// </summary>
         /// <remarks>Z34</remarks>
+        [EnumMember(Value = "BERECHNUNGSFORMEL_MUSS_ANGEFRAGT_WERDEN")]
         BERECHNUNGSFORMEL_MUSS_ANGEFRAGT_WERDEN,
         /// <summary>
         /// Berechnungsformel besitzt keine Rechenoperation
         /// </summary>
         /// <remarks>Z40</remarks>
+        [EnumMember(Value = "BERECHNUNGSFORMEL_TRIVIAL")]
         BERECHNUNGSFORMEL_TRIVIAL,
         /// <summary>
         /// Berechnungsformel ist nicht erforderlich
         /// </summary>
+        [EnumMember(Value = "BERECHNUNGSFORMEL_NICHT_NOTWENDIG")]
         BERECHNUNGSFORMEL_NICHT_NOTWENDIG,
     }
 }

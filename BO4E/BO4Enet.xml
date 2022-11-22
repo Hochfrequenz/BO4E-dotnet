@@ -3182,7 +3182,7 @@
         </member>
         <member name="P:BO4E.COM.Netznutzungsabrechnungsdaten.PreisSingulaereBetriebsmittel">
             <summary>
-                Preis für singuläre Betriebsmittel
+                Preis für singulöre Betriebsmittel
             </summary>
         </member>
         <member name="T:BO4E.COM.Notiz">
@@ -6092,6 +6092,16 @@
                 Unbestimmtes Merkmal
             </summary>
         </member>
+        <member name="F:BO4E.ENUM.Geraetemerkmal.WASSER_MWZW">
+            <summary>
+             Wasserzähler Größe MWZW
+            </summary>
+        </member>
+        <member name="F:BO4E.ENUM.Geraetemerkmal.WASSER_WZ01">
+            <summary>
+             Wasserzähler Größe WZ01
+            </summary>
+        </member>
         <member name="T:BO4E.ENUM.Geraetetyp">
             <summary>Auflistung möglicher abzurechnender Gerätetypen.</summary>
         </member>
@@ -7642,7 +7652,7 @@
             <summary>Anzahl</summary>
         </member>
         <member name="F:BO4E.ENUM.Mengeneinheit.KUBIKMETER">
-            <summary>Kubikmeter (Gas)</summary>
+            <summary>Kubikmeter</summary>
         </member>
         <member name="F:BO4E.ENUM.Mengeneinheit.STUNDE">
             <summary>Stunde</summary>
@@ -10274,7 +10284,7 @@
         </member>
         <member name="T:BO4E.ENUM.Zaehlertyp">
             <summary>
-                Bei diesem Enum handelt es sich die Abbildung von Zählertypen der Sparten Strom und Gas.
+                Bei diesem Enum handelt es sich die Abbildung von Zählertypen der Sparten Strom, Gas und Wasser.
             </summary>
         </member>
         <member name="F:BO4E.ENUM.Zaehlertyp.DREHSTROMZAEHLER">
@@ -10315,6 +10325,9 @@
         </member>
         <member name="F:BO4E.ENUM.Zaehlertyp.SONDERAUSSTATTUNG">
             <summary>Individuelle Abstimmung (Sonderausstattung)</summary>
+        </member>
+        <member name="F:BO4E.ENUM.Zaehlertyp.WASSERZAEHLER">
+            <summary>Wasserzähler</summary>
         </member>
         <member name="T:BO4E.ENUM.ZaehlertypSpezifikation">
             <summary>
