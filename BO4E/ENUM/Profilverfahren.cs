@@ -9,11 +9,11 @@ namespace BO4E.ENUM
     public enum Profilverfahren
     {
         /// <summary>SLP</summary>
-        [EnumMember(Value = "SYNTHETISCH")] 
+        [EnumMember(Value = "SYNTHETISCH")]
         SYNTHETISCH,
 
         /// <summary>ALP</summary>
-        [EnumMember(Value = "ANALYTISCH")] 
+        [EnumMember(Value = "ANALYTISCH")]
         ANALYTISCH,
     }
 }

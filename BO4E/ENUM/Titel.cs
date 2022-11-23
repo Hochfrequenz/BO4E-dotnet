@@ -6,15 +6,15 @@ namespace BO4E.ENUM
     public enum Titel
     {
         /// <summary>Doktor</summary>
-        [EnumMember(Value = "DR")] 
+        [EnumMember(Value = "DR")]
         DR,
 
         /// <summary>Professor</summary>
-        [EnumMember(Value = "PROF")] 
+        [EnumMember(Value = "PROF")]
         PROF,
 
         /// <summary>Professor Dr.</summary>
-        [EnumMember(Value = "PROF_DR")] 
+        [EnumMember(Value = "PROF_DR")]
         PROF_DR,
     }
 }

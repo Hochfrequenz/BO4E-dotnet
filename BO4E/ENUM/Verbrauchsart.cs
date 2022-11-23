@@ -6,23 +6,23 @@ namespace BO4E.ENUM
     public enum Verbrauchsart
     {
         /// <summary>Kraft/Licht</summary>
-        [EnumMember(Value = "KL")] 
+        [EnumMember(Value = "KL")]
         KL,
 
         /// <summary>Kraft/Licht/Wärme</summary>
-        [EnumMember(Value = "KLW")] 
+        [EnumMember(Value = "KLW")]
         KLW,
 
         /// <summary>Kraft/Licht/Wärme/Speicherheizung</summary>
-        [EnumMember(Value = "KLWS")] 
+        [EnumMember(Value = "KLWS")]
         KLWS,
 
         /// <summary>Wärme</summary>
-        [EnumMember(Value = "W")] 
+        [EnumMember(Value = "W")]
         W,
 
         /// <summary>Wärme/Speicherheizung</summary>
-        [EnumMember(Value = "WS")] 
+        [EnumMember(Value = "WS")]
         WS,
     }
 }

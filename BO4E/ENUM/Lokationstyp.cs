@@ -6,11 +6,11 @@ namespace BO4E.ENUM
     public enum Lokationstyp
     {
         /// <summary>Marktlokation</summary>
-        [EnumMember(Value = "MALO")] 
+        [EnumMember(Value = "MALO")]
         MALO,
 
         /// <summary>Messlokation</summary>
-        [EnumMember(Value = "MELO")] 
+        [EnumMember(Value = "MELO")]
         MELO,
     }
 }

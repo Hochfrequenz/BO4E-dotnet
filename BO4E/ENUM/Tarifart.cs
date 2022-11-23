@@ -9,23 +9,23 @@ namespace BO4E.ENUM
     public enum Tarifart
     {
         /// <summary>Eintarif</summary>
-        [EnumMember(Value = "EINTARIF")] 
+        [EnumMember(Value = "EINTARIF")]
         EINTARIF,
 
         /// <summary>Zweitarif</summary>
-        [EnumMember(Value = "ZWEITARIF")] 
+        [EnumMember(Value = "ZWEITARIF")]
         ZWEITARIF,
 
         /// <summary>Mehrtarif</summary>
-        [EnumMember(Value = "MEHRTARIF")] 
+        [EnumMember(Value = "MEHRTARIF")]
         MEHRTARIF,
 
         /// <summary>Smart Meter Tarif</summary>
-        [EnumMember(Value = "SMART_METER")] 
+        [EnumMember(Value = "SMART_METER")]
         SMART_METER,
 
         /// <summary>Leistungsgemessener Tarif</summary>
-        [EnumMember(Value = "LEISTUNGSGEMESSEN")] 
+        [EnumMember(Value = "LEISTUNGSGEMESSEN")]
         LEISTUNGSGEMESSEN,
     }
 }

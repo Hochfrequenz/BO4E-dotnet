@@ -6,22 +6,22 @@ namespace BO4E.ENUM
     public enum Rechnungsstatus
     {
         /// <summary>Eine Rechnung vom Netzbetreiber an den Netznutzer. (i.d.R. der Lieferant) über die Netznutzung.</summary>
-        [EnumMember(Value = "GEPRUEFT_OK")] 
+        [EnumMember(Value = "GEPRUEFT_OK")]
         GEPRUEFT_OK,
 
         /// <summary>
         ///     Eine Rechnung vom Netzbetreiber an den Netznutzer (i.d.R. der Lieferant) zur Abrechnung von Mengen-Differenzen
         ///     zwischen Bilanzierung und Messung.
         /// </summary>
-        [EnumMember(Value = "GEPRUEFT_FEHLERHAFT")] 
+        [EnumMember(Value = "GEPRUEFT_FEHLERHAFT")]
         GEPRUEFT_FEHLERHAFT,
 
         /// <summary>Rechnung eines Messstellenbetreibers an den Messkunden.</summary>
-        [EnumMember(Value = "GEBUCHT")] 
+        [EnumMember(Value = "GEBUCHT")]
         GEBUCHT,
 
         /// <summary>Rechnungen zwischen einem Händler und Einkäufer von Energie.</summary>
-        [EnumMember(Value = "BEZAHLT")] 
+        [EnumMember(Value = "BEZAHLT")]
         BEZAHLT,
     }
 }

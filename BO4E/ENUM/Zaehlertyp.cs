@@ -8,59 +8,59 @@ namespace BO4E.ENUM
     public enum Zaehlertyp
     {
         /// <summary>Drehstromzaehler</summary>
-        [EnumMember(Value = "DREHSTROMZAEHLER")] 
+        [EnumMember(Value = "DREHSTROMZAEHLER")]
         DREHSTROMZAEHLER,
 
         /// <summary>Balgengaszähler</summary>
-        [EnumMember(Value = "BALGENGASZAEHLER")] 
+        [EnumMember(Value = "BALGENGASZAEHLER")]
         BALGENGASZAEHLER,
 
         /// <summary>Drehkolbengaszähler</summary>
-        [EnumMember(Value = "DREHKOLBENZAEHLER")] 
+        [EnumMember(Value = "DREHKOLBENZAEHLER")]
         DREHKOLBENZAEHLER,
 
         /// <summary>Smart Meter Zähler</summary>
-        [EnumMember(Value = "SMARTMETER")] 
+        [EnumMember(Value = "SMARTMETER")]
         SMARTMETER,
 
         /// <summary>leistungsmessender Zähler</summary>
-        [EnumMember(Value = "LEISTUNGSZAEHLER")] 
+        [EnumMember(Value = "LEISTUNGSZAEHLER")]
         LEISTUNGSZAEHLER,
 
         /// <summary>Maximumzähler</summary>
-        [EnumMember(Value = "MAXIMUMZAEHLER")] 
+        [EnumMember(Value = "MAXIMUMZAEHLER")]
         MAXIMUMZAEHLER,
 
         /// <summary>Turbinenradgaszähler</summary>
-        [EnumMember(Value = "TURBINENRADGASZAEHLER")] 
+        [EnumMember(Value = "TURBINENRADGASZAEHLER")]
         TURBINENRADGASZAEHLER,
 
         /// <summary>Ultraschallgaszähler</summary>
-        [EnumMember(Value = "ULTRASCHALLGASZAEHLER")] 
+        [EnumMember(Value = "ULTRASCHALLGASZAEHLER")]
         ULTRASCHALLGASZAEHLER,
 
         /// <summary>Wechselstromzähler</summary>
-        [EnumMember(Value = "WECHSELSTROMZAEHLER")] 
+        [EnumMember(Value = "WECHSELSTROMZAEHLER")]
         WECHSELSTROMZAEHLER,
 
         /// <summary>Wirbelgaszähler</summary>
-        [EnumMember(Value = "WIRBELGASZAEHLER")] 
+        [EnumMember(Value = "WIRBELGASZAEHLER")]
         WIRBELGASZAEHLER,
 
         /// <summary>Messdatenregistriergerät</summary>
-        [EnumMember(Value = "MESSDATENREGISTRIERGERAET")] 
+        [EnumMember(Value = "MESSDATENREGISTRIERGERAET")]
         MESSDATENREGISTRIERGERAET,
 
         /// <summary>elektronischer Haushaltszähler</summary>
-        [EnumMember(Value = "ELEKTRONISCHERHAUSHALTSZAEHLER")] 
+        [EnumMember(Value = "ELEKTRONISCHERHAUSHALTSZAEHLER")]
         ELEKTRONISCHERHAUSHALTSZAEHLER,
 
         /// <summary>Individuelle Abstimmung (Sonderausstattung)</summary>
-        [EnumMember(Value = "SONDERAUSSTATTUNG")] 
+        [EnumMember(Value = "SONDERAUSSTATTUNG")]
         SONDERAUSSTATTUNG,
 
         ///<summary>Wasserzähler</summary>
-        [EnumMember(Value = "WASSERZAEHLER")] 
+        [EnumMember(Value = "WASSERZAEHLER")]
         WASSERZAEHLER,
     }
 }

@@ -13,32 +13,32 @@ namespace BO4E.ENUM
     {
         /// <summary> PREIS_RECHENREGEL_FALSCH </summary>
         /// <remarks>5</remarks>
-        [EnumMember(Value = "PREIS_RECHENREGEL_FALSCH")] 
+        [EnumMember(Value = "PREIS_RECHENREGEL_FALSCH")]
         PREIS_RECHENREGEL_FALSCH,
 
         /// <summary> FALSCHER_ABRECHNUNGSZEITRAUM </summary>
         /// <remarks>9</remarks>
-        [EnumMember(Value = "FALSCHER_ABRECHNUNGSZEITRAUM")] 
+        [EnumMember(Value = "FALSCHER_ABRECHNUNGSZEITRAUM")]
         FALSCHER_ABRECHNUNGSZEITRAUM,
 
         /// <summary> UNBEKANNTE_MARKTLOKATION_MESSLOKATION </summary>
         /// <remarks>14</remarks>
-        [EnumMember(Value = "UNBEKANNTE_MARKTLOKATION_MESSLOKATION")] 
+        [EnumMember(Value = "UNBEKANNTE_MARKTLOKATION_MESSLOKATION")]
         UNBEKANNTE_MARKTLOKATION_MESSLOKATION,
 
         /// <summary> SONSTIGER_ABWEICHUNGSGRUND </summary>
         /// <remarks>28</remarks>
-        [EnumMember(Value = "SONSTIGER_ABWEICHUNGSGRUND")] 
+        [EnumMember(Value = "SONSTIGER_ABWEICHUNGSGRUND")]
         SONSTIGER_ABWEICHUNGSGRUND,
 
         /// <summary> DOPPELTE_RECHNUNG </summary>
         /// <remarks>53</remarks>
-        [EnumMember(Value = "DOPPELTE_RECHNUNG")] 
+        [EnumMember(Value = "DOPPELTE_RECHNUNG")]
         DOPPELTE_RECHNUNG,
 
         /// <summary> ABRECHNUNGSBEGINN_UNGLEICH_VERTRAGSBEGINN </summary>
         /// <remarks>Z01</remarks>
-        [EnumMember(Value = "ABRECHNUNGSBEGINN_UNGLEICH_VERTRAGSBEGINN")] 
+        [EnumMember(Value = "ABRECHNUNGSBEGINN_UNGLEICH_VERTRAGSBEGINN")]
         ABRECHNUNGSBEGINN_UNGLEICH_VERTRAGSBEGINN,
 
         /// <summary> ABRECHNUNGSENDE_UNGLEICH_VERTRAGSENDE </summary>

@@ -9,32 +9,32 @@ namespace BO4E.ENUM
     {
         /// <summary>Strom</summary>
         [ProtoEnum(Name = nameof(Sparte) + "_" + nameof(STROM))]
-        [EnumMember(Value = "STROM")] 
+        [EnumMember(Value = "STROM")]
         STROM,
 
         /// <summary>Gas</summary>
         [ProtoEnum(Name = nameof(Sparte) + "_" + nameof(GAS))]
-        [EnumMember(Value = "GAS")] 
+        [EnumMember(Value = "GAS")]
         GAS,
 
         /// <summary>Fernwärme</summary>
         [ProtoEnum(Name = nameof(Sparte) + "_" + nameof(FERNWAERME))]
-        [EnumMember(Value = "FERNWAERME")] 
+        [EnumMember(Value = "FERNWAERME")]
         FERNWAERME,
 
         /// <summary>Nahwärme</summary>
         [ProtoEnum(Name = nameof(Sparte) + "_" + nameof(NAHWAERME))]
-        [EnumMember(Value = "NAHWAERME")] 
+        [EnumMember(Value = "NAHWAERME")]
         NAHWAERME,
 
         /// <summary>Wasserversorgung</summary>
         [ProtoEnum(Name = nameof(Sparte) + "_" + nameof(WASSER))]
-        [EnumMember(Value = "WASSER")] 
+        [EnumMember(Value = "WASSER")]
         WASSER,
 
         /// <summary>Abwasserentsorgung</summary>
         [ProtoEnum(Name = nameof(Sparte) + "_" + nameof(ABWASSER))]
-        [EnumMember(Value = "ABWASSER")] 
+        [EnumMember(Value = "ABWASSER")]
         ABWASSER,
     }
 }

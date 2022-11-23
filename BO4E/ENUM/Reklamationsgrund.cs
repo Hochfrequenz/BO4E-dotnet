@@ -6,15 +6,15 @@ namespace BO4E.ENUM
     public enum Reklamationsgrund
     {
         /// <summary>Werte zu hoch im angegebenen Zeitintervall</summary>
-        [EnumMember(Value = "WERTE_ZU_HOCH")] 
+        [EnumMember(Value = "WERTE_ZU_HOCH")]
         WERTE_ZU_HOCH,
 
         /// <summary>Werte zu niedrig im angegebenen Zeitintervall</summary>
-        [EnumMember(Value = "WERTE_ZU_NIEDRIG")] 
+        [EnumMember(Value = "WERTE_ZU_NIEDRIG")]
         WERTE_ZU_NIEDRIG,
 
         /// <summary>Werte fehlen im angegebenen Zeitintervall</summary>
-        [EnumMember(Value = "WERTE_FEHLEN")] 
+        [EnumMember(Value = "WERTE_FEHLEN")]
         WERTE_FEHLEN,
     }
 }

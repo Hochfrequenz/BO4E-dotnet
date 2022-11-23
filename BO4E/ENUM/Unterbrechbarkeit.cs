@@ -6,11 +6,11 @@ namespace BO4E.ENUM
     public enum Unterbrechbarkeit
     {
         /// <summary>Z62: unterbrechbare Verbrauchseinrichtung</summary>
-        [EnumMember(Value = "UV")] 
+        [EnumMember(Value = "UV")]
         UV,
 
         /// <summary>Z63: nicht unterbrechbare Verbrauchseinrichtung</summary>
-        [EnumMember(Value = "NUV")] 
+        [EnumMember(Value = "NUV")]
         NUV,
     }
 }

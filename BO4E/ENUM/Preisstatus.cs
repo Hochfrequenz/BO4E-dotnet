@@ -8,13 +8,13 @@ namespace BO4E.ENUM
         /// <summary>
         ///     vorläufig
         /// </summary>
-        [EnumMember(Value = "VORLAEUFIG")] 
+        [EnumMember(Value = "VORLAEUFIG")]
         VORLAEUFIG,
 
         /// <summary>
         ///     endgültig
         /// </summary>
-        [EnumMember(Value = "ENDGUELTIG")] 
+        [EnumMember(Value = "ENDGUELTIG")]
         ENDGUELTIG,
     }
 }

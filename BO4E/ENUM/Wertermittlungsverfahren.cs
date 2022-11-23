@@ -10,13 +10,13 @@ namespace BO4E.ENUM
         /// <summary>
         ///     Prognose
         /// </summary>
-        [EnumMember(Value = "PROGNOSE")] 
+        [EnumMember(Value = "PROGNOSE")]
         PROGNOSE,
 
         /// <summary>
         ///     Messung
         /// </summary>
-        [EnumMember(Value = "MESSUNG")] 
+        [EnumMember(Value = "MESSUNG")]
         MESSUNG,
     }
 }

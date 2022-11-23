@@ -12,7 +12,7 @@ namespace BO4E.ENUM
         ///     ermittelte Preis
         /// </summary>
         [ProtoEnum(Name = nameof(Tarifkalkulationsmethode) + "_" + nameof(STAFFELN))]
-        [EnumMember(Value = "STAFFELN")] 
+        [EnumMember(Value = "STAFFELN")]
         STAFFELN,
 
         /// <summary>
@@ -20,17 +20,17 @@ namespace BO4E.ENUM
         ///     Preis der Zone.
         /// </summary>
         [ProtoEnum(Name = nameof(Tarifkalkulationsmethode) + "_" + nameof(ZONEN))]
-        [EnumMember(Value = "ZONEN")] 
+        [EnumMember(Value = "ZONEN")]
         ZONEN,
 
         /// <summary>Bestabrechnung innerhalb der Staffelung</summary>
         [ProtoEnum(Name = nameof(Tarifkalkulationsmethode) + "_" + nameof(BESTABRECHNUNG_STAFFEL))]
-        [EnumMember(Value = "BESTABRECHNUNG_STAFFEL")] 
+        [EnumMember(Value = "BESTABRECHNUNG_STAFFEL")]
         BESTABRECHNUNG_STAFFEL,
 
         /// <summary>Preis für ein Paket (eine Menge).</summary>
         [ProtoEnum(Name = nameof(Tarifkalkulationsmethode) + "_" + nameof(PAKETPREIS))]
-        [EnumMember(Value = "PAKETPREIS")] 
+        [EnumMember(Value = "PAKETPREIS")]
         PAKETPREIS,
     }
 }

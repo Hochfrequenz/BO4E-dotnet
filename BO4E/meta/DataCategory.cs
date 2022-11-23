@@ -12,49 +12,49 @@ namespace BO4E.meta
         /// <summary>
         ///     address data (city, street, house number, postbox)
         /// </summary>
-        [EnumMember(Value = "ADDRESS")] 
+        [EnumMember(Value = "ADDRESS")]
         ADDRESS,
 
         /// <summary>
         ///     device master data like device number or lokale Kennzeichnung
         /// </summary>
-        [EnumMember(Value = "DEVICE")] 
+        [EnumMember(Value = "DEVICE")]
         DEVICE,
 
         /// <summary>
         ///     financial information like bank account numbers
         /// </summary>
-        [EnumMember(Value = "FINANCE")] 
+        [EnumMember(Value = "FINANCE")]
         FINANCE,
 
         /// <summary>
         ///     legal and tax relevant information like handelsregisternummer
         /// </summary>
-        [EnumMember(Value = "LEGAL")] 
+        [EnumMember(Value = "LEGAL")]
         LEGAL,
 
         /// <summary>
         ///     names of persons
         /// </summary>
-        [EnumMember(Value = "NAME")] 
+        [EnumMember(Value = "NAME")]
         NAME,
 
         /// <summary>
         ///     metering values.
         /// </summary>
-        [EnumMember(Value = "METER_READING")] 
+        [EnumMember(Value = "METER_READING")]
         METER_READING,
 
         /// <summary>
         ///     points of delivery (market Location, measuring location, tranche)
         /// </summary>
-        [EnumMember(Value = "POD")] 
+        [EnumMember(Value = "POD")]
         POD,
 
         /// <summary>
         ///     the <see cref="BO.BusinessObject.UserProperties" /> might be handled separately with this DataCategory
         /// </summary>
-        [EnumMember(Value = "USER_PROPERTIES")] 
+        [EnumMember(Value = "USER_PROPERTIES")]
         USER_PROPERTIES,
     }
 }

@@ -9,19 +9,19 @@ namespace BO4E.ENUM
     public enum Tariftyp
     {
         /// <summary>Grund- und Ersatzversorgung</summary>
-        [EnumMember(Value = "GRUND_ERSATZVERSORGUNG")] 
+        [EnumMember(Value = "GRUND_ERSATZVERSORGUNG")]
         GRUND_ERSATZVERSORGUNG,
 
         /// <summary>Grundversorgung</summary>
-        [EnumMember(Value = "GRUNDVERSORGUNG")] 
+        [EnumMember(Value = "GRUNDVERSORGUNG")]
         GRUNDVERSORGUNG,
 
         /// <summary>Ersatzversorgung</summary>
-        [EnumMember(Value = "ERSATZVERSORGUNG")] 
+        [EnumMember(Value = "ERSATZVERSORGUNG")]
         ERSATZVERSORGUNG,
 
         /// <summary>Sondertarif</summary>
-        [EnumMember(Value = "SONDERTARIF")] 
+        [EnumMember(Value = "SONDERTARIF")]
         SONDERTARIF,
     }
 }

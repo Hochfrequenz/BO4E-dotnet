@@ -10,31 +10,31 @@ namespace BO4E.ENUM
         /// <summary>
         ///     Energieliefervertrag
         /// </summary>
-        [EnumMember(Value = "ENERGIELIEFERVERTRAG")] 
+        [EnumMember(Value = "ENERGIELIEFERVERTRAG")]
         ENERGIELIEFERVERTRAG,
 
         /// <summary>
         ///     Netznutzungsvertrag
         /// </summary>
-        [EnumMember(Value = "NETZNUTZUNGSVERTRAG")] 
+        [EnumMember(Value = "NETZNUTZUNGSVERTRAG")]
         NETZNUTZUNGSVERTRAG,
 
         /// <summary>
         ///     Bilanzierungsvertrag
         /// </summary>
-        [EnumMember(Value = "BILANZIERUNGSVERTRAG")] 
+        [EnumMember(Value = "BILANZIERUNGSVERTRAG")]
         BILANZIERUNGSVERTRAG,
 
         /// <summary>
         ///     Messstellenabetriebsvertrag
         /// </summary>
-        [EnumMember(Value = "MESSSTELLENBETRIEBSVERTRAG")] 
+        [EnumMember(Value = "MESSSTELLENBETRIEBSVERTRAG")]
         MESSSTELLENBETRIEBSVERTRAG,
 
         /// <summary>
         ///     Bündelvertrag
         /// </summary>
-        [EnumMember(Value = "BUENDELVERTRAG")] 
+        [EnumMember(Value = "BUENDELVERTRAG")]
         BUENDELVERTRAG,
     }
 }

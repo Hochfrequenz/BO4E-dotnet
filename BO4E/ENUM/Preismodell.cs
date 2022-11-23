@@ -6,7 +6,7 @@ namespace BO4E.ENUM
     public enum Preismodell
     {
         /// <summary>Tranche</summary>
-        [EnumMember(Value = "TRANCHE")] 
+        [EnumMember(Value = "TRANCHE")]
         TRANCHE,
     }
 }

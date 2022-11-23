@@ -6,11 +6,11 @@ namespace BO4E.ENUM
     public enum Zaehlerauspraegung
     {
         /// <summary>Einrichtungszaehler</summary>
-        [EnumMember(Value = "EINRICHTUNGSZAEHLER")] 
+        [EnumMember(Value = "EINRICHTUNGSZAEHLER")]
         EINRICHTUNGSZAEHLER,
 
         /// <summary>Zweirichtungszaehler</summary>
-        [EnumMember(Value = "ZWEIRICHTUNGSZAEHLER")] 
+        [EnumMember(Value = "ZWEIRICHTUNGSZAEHLER")]
         ZWEIRICHTUNGSZAEHLER,
     }
 }

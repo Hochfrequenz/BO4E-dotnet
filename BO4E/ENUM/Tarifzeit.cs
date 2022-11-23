@@ -6,15 +6,15 @@ namespace BO4E.ENUM
     public enum Tarifzeit
     {
         /// <summary>Tarifzeit Standard für Eintarif-Konfigurationen</summary>
-        [EnumMember(Value = "TZ_STANDARD")] 
+        [EnumMember(Value = "TZ_STANDARD")]
         TZ_STANDARD,
 
         /// <summary>Tarifzeit für Hochtarif bei Mehrtarif-Konfigurationen</summary>
-        [EnumMember(Value = "TZ_HT")] 
+        [EnumMember(Value = "TZ_HT")]
         TZ_HT,
 
         /// <summary>Tarifzeit für Niedritarif bei Mehrtarif-Konfigurationen</summary>
-        [EnumMember(Value = "TZ_NT")] 
+        [EnumMember(Value = "TZ_NT")]
         TZ_NT,
     }
 }

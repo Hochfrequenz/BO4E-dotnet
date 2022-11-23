@@ -8,16 +8,16 @@ namespace BO4E.ENUM
     public enum Vertragsform
     {
         /// <summary>Online</summary>
-        [EnumMember(Value = "ONLINE")] 
+        [EnumMember(Value = "ONLINE")]
         ONLINE,
 
         /// <summary>Direkt</summary>
-        [EnumMember(Value = "DIREKT")] 
+        [EnumMember(Value = "DIREKT")]
         DIREKT,
 
         /// <summary>Auftragsfax</summary>
         [ProtoEnum(Name = nameof(Vertragsform) + "_" + nameof(FAX))]
-        [EnumMember(Value = "FAX")] 
+        [EnumMember(Value = "FAX")]
         FAX,
     }
 }

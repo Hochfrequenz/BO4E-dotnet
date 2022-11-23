@@ -8,37 +8,37 @@ namespace BO4E.ENUM
         /// <summary>
         ///     Netzbetrieb Strom
         /// </summary>
-        [EnumMember(Value = "STROM_NB")] 
+        [EnumMember(Value = "STROM_NB")]
         STROM_NB,
 
         /// <summary>
         ///     Messstellenbetrieb Strom
         /// </summary>
-        [EnumMember(Value = "STROM_MSB")] 
+        [EnumMember(Value = "STROM_MSB")]
         STROM_MSB,
 
         /// <summary>
         ///     Lieferung Strom
         /// </summary>
-        [EnumMember(Value = "STROM_LIEF")] 
+        [EnumMember(Value = "STROM_LIEF")]
         STROM_LIEF,
 
         /// <summary>
         ///     Netzbetrieb Gas
         /// </summary>
-        [EnumMember(Value = "GAS_NB")] 
+        [EnumMember(Value = "GAS_NB")]
         GAS_NB,
 
         /// <summary>
         ///     Messstellenbetrieb Gas
         /// </summary>
-        [EnumMember(Value = "GAS_MSB")] 
+        [EnumMember(Value = "GAS_MSB")]
         GAS_MSB,
 
         /// <summary>
         ///     Lieferung Gas
         /// </summary>
-        [EnumMember(Value = "GAS_LIEF")] 
+        [EnumMember(Value = "GAS_LIEF")]
         GAS_LIEF,
     }
 }

@@ -15,21 +15,21 @@ namespace BO4E.ENUM
         [Newtonsoft.Json.JsonIgnore]
         [System.Text.Json.Serialization.JsonIgnore]
 #pragma warning disable CS1591 // Missing XML comment for publicly visible type or member
-        [EnumMember(Value = "ZERO")] 
+        [EnumMember(Value = "ZERO")]
         ZERO = 0,
 
 #pragma warning restore CS1591 // Missing XML comment for publicly visible type or member
 
         /// <summary>Bundesverband der Energie- u. Wasserwirtschaft</summary>
-        [EnumMember(Value = "BDEW")] 
+        [EnumMember(Value = "BDEW")]
         BDEW = 293,
 
         /// <summary>Deutscher Verein des Gas- und Wasserfaches</summary>
-        [EnumMember(Value = "DVGW")] 
+        [EnumMember(Value = "DVGW")]
         DVGW = 332,
 
         /// <summary>Global Location Number</summary>
-        [EnumMember(Value = "GLN")] 
+        [EnumMember(Value = "GLN")]
         GLN = 9
     }
 }

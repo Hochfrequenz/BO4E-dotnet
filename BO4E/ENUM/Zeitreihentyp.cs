@@ -10,41 +10,41 @@ namespace BO4E.ENUM
     public enum Zeitreihentyp
     {
         /// <summary>Einspeisegangsumme</summary>
-        [EnumMember(Value = "EGS")] 
+        [EnumMember(Value = "EGS")]
         EGS,
 
         /// <summary>Lastgangsumme</summary>
-        [EnumMember(Value = "LGS")] 
+        [EnumMember(Value = "LGS")]
         LGS,
 
         /// <summary>Netzzeitreihe</summary>
-        [EnumMember(Value = "NZR")] 
+        [EnumMember(Value = "NZR")]
         NZR,
 
         /// <summary>Standardeinspeiseprofilsumme</summary>
-        [EnumMember(Value = "SES")] 
+        [EnumMember(Value = "SES")]
         SES,
 
         /// <summary>Standardlastsumme</summary>
-        [EnumMember(Value = "SLS")] 
+        [EnumMember(Value = "SLS")]
         SLS,
 
         /// <summary>Tagesparameterabhängige Einspeiseprofilsumme</summary>
-        [EnumMember(Value = "TES")] 
+        [EnumMember(Value = "TES")]
         TES,
 
         /// <summary>Tagesparameterabhängige Lastprofilsumme</summary>
-        [EnumMember(Value = "TLS")] 
+        [EnumMember(Value = "TLS")]
         TLS,
         /// <summary>
         /// gemeinsame Messung aus SLS und TLS
         /// </summary>
-        [EnumMember(Value = "SLS_TLS")] 
+        [EnumMember(Value = "SLS_TLS")]
         SLS_TLS,
         /// <summary>
         /// Gemeinsame Messung aus SES und TES
         /// </summary>
-        [EnumMember(Value = "SES_TES")] 
+        [EnumMember(Value = "SES_TES")]
         SES_TES,
     }
 }

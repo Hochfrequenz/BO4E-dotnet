@@ -12,22 +12,22 @@ namespace BO4E.ENUM
     {
         /// <summary> HANDELSRECHNUNG </summary>
         /// <remarks>380</remarks>
-        [EnumMember(Value = "HANDELSRECHNUNG")] 
+        [EnumMember(Value = "HANDELSRECHNUNG")]
         HANDELSRECHNUNG,
 
         /// <summary> LIEFERSCHEIN_HANDELSUNSTIMMIGKEITSTYP </summary>
         /// <remarks>270</remarks>
-        [EnumMember(Value = "LIEFERSCHEIN_HANDELSUNSTIMMIGKEITSTYP")] 
+        [EnumMember(Value = "LIEFERSCHEIN_HANDELSUNSTIMMIGKEITSTYP")]
         LIEFERSCHEIN_HANDELSUNSTIMMIGKEITSTYP,
 
         /// <summary> LIEFERSCHEIN_GRUND_ARBEITSPREIS</summary>
         /// <remarks>Z41</remarks>
-        [EnumMember(Value = "LIEFERSCHEIN_GRUND_ARBEITSPREIS")] 
+        [EnumMember(Value = "LIEFERSCHEIN_GRUND_ARBEITSPREIS")]
         LIEFERSCHEIN_GRUND_ARBEITSPREIS,
 
         /// <summary> LIEFERSCHEIN_ARBEITS_LEISTUNGSPREIS </summary>
         /// <remarks>Z42</remarks>
-        [EnumMember(Value = "LIEFERSCHEIN_ARBEITS_LEISTUNGSPREIS")] 
+        [EnumMember(Value = "LIEFERSCHEIN_ARBEITS_LEISTUNGSPREIS")]
         LIEFERSCHEIN_ARBEITS_LEISTUNGSPREIS,
     }
 }

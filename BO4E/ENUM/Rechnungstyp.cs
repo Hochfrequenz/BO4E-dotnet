@@ -6,63 +6,63 @@ namespace BO4E.ENUM
     public enum Rechnungstyp
     {
         /// <summary>Abschlagsrechnung</summary>
-        [EnumMember(Value = "ABSCHLAGSRECHNUNG")] 
+        [EnumMember(Value = "ABSCHLAGSRECHNUNG")]
         ABSCHLAGSRECHNUNG,
 
         /// <summary>Turnusrechnung</summary>
-        [EnumMember(Value = "TURNUSRECHNUNG")] 
+        [EnumMember(Value = "TURNUSRECHNUNG")]
         TURNUSRECHNUNG,
 
         /// <summary>Monatsrechnung</summary>
-        [EnumMember(Value = "MONATSRECHNUNG")] 
+        [EnumMember(Value = "MONATSRECHNUNG")]
         MONATSRECHNUNG,
 
         /// <summary>Rechnung für WiM</summary>
-        [EnumMember(Value = "WIMRECHNUNG")] 
+        [EnumMember(Value = "WIMRECHNUNG")]
         WIMRECHNUNG,
 
         /// <summary>Zwischenrechnung</summary>
-        [EnumMember(Value = "ZWISCHENRECHNUNG")] 
+        [EnumMember(Value = "ZWISCHENRECHNUNG")]
         ZWISCHENRECHNUNG,
 
         /// <summary>Integrierte 13. Rechnung</summary>
-        [EnumMember(Value = "INTEGRIERTE_13TE_RECHNUNG")] 
+        [EnumMember(Value = "INTEGRIERTE_13TE_RECHNUNG")]
         INTEGRIERTE_13TE_RECHNUNG,
 
         /// <summary>Zusätzliche 13. Rechnung</summary>
-        [EnumMember(Value = "ZUSAETZLICHE_13TE_RECHNUNG")] 
+        [EnumMember(Value = "ZUSAETZLICHE_13TE_RECHNUNG")]
         ZUSAETZLICHE_13TE_RECHNUNG,
 
         /// <summary>Mehr/Mindermengenabrechnung</summary>
-        [EnumMember(Value = "MEHRMINDERMENGENRECHNUNG")] 
+        [EnumMember(Value = "MEHRMINDERMENGENRECHNUNG")]
         MEHRMINDERMENGENRECHNUNG,
 
         /// <summary>Abschlussrechnung</summary>
-        [EnumMember(Value = "ABSCHLUSSRECHNUNG")] 
+        [EnumMember(Value = "ABSCHLUSSRECHNUNG")]
         ABSCHLUSSRECHNUNG,
         /// <summary>Rechnung für Messstellenbetrieb</summary>
-        [EnumMember(Value = "MSBRECHNUNG")] 
+        [EnumMember(Value = "MSBRECHNUNG")]
         MSBRECHNUNG,
         /// <summary>Kapazitätsrechnung</summary>
-        [EnumMember(Value = "KAPAZITAETSRECHNUNG")] 
+        [EnumMember(Value = "KAPAZITAETSRECHNUNG")]
         KAPAZITAETSRECHNUNG,
         /// <summary>Rechnung für Sperren und Wiederinbetriebnahme</summary>
-        [EnumMember(Value = "SPERRUNG_INBETRIEBNAHME")] 
+        [EnumMember(Value = "SPERRUNG_INBETRIEBNAHME")]
         SPERRUNG_INBETRIEBNAHME,
         /// <summary>
         /// Verzugskostenrechnung
         /// </summary>
-        [EnumMember(Value = "VERZUGSKOSTEN")] 
+        [EnumMember(Value = "VERZUGSKOSTEN")]
         VERZUGSKOSTEN,
         /// <summary>
         /// Blindarbeitsrechnung
         /// </summary>
-        [EnumMember(Value = "BLINDARBEIT")] 
+        [EnumMember(Value = "BLINDARBEIT")]
         BLINDARBEIT,
         /// <summary>
         /// Sonderrechnung
         /// </summary>
-        [EnumMember(Value = "SONDERRECHNUNG")] 
+        [EnumMember(Value = "SONDERRECHNUNG")]
         SONDERRECHNUNG,
     }
 }

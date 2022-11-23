@@ -6,7 +6,7 @@ namespace BO4E.ENUM
     public enum NNRechnungsart
     {
         /// <summary>Selbst ausgestellte Rechnung, z.B. für Einspeiserechnungen.</summary>
-        [EnumMember(Value = "SELBSTAUSGESTELLT")] 
+        [EnumMember(Value = "SELBSTAUSGESTELLT")]
         SELBSTAUSGESTELLT,
     }
 }

@@ -10,25 +10,25 @@ namespace BO4E.meta
         /// <summary>
         ///     Englisch
         /// </summary>
-        [EnumMember(Value = "EN")] 
+        [EnumMember(Value = "EN")]
         EN,
 
         /// <summary>
         ///     Deutsch
         /// </summary>
-        [EnumMember(Value = "DE")] 
+        [EnumMember(Value = "DE")]
         DE,
 
         /// <summary>
         ///     Französisch
         /// </summary>
-        [EnumMember(Value = "FR")] 
+        [EnumMember(Value = "FR")]
         FR,
 
         /// <summary>
         ///     Spanisch
         /// </summary>
-        [EnumMember(Value = "SP")] 
+        [EnumMember(Value = "SP")]
         SP,
     }
 }

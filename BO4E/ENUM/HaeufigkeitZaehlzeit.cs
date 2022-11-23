@@ -6,11 +6,11 @@ namespace BO4E.ENUM
     public enum HaeufigkeitZaehlzeit
     {
         /// <summary>Einmalig</summary>
-        [EnumMember(Value = "EINMALIG")] 
+        [EnumMember(Value = "EINMALIG")]
         EINMALIG,
 
         /// <summary>Jährlich</summary>
-        [EnumMember(Value = "JAEHRLICH")] 
+        [EnumMember(Value = "JAEHRLICH")]
         JAEHRLICH
     }
 }

@@ -14,14 +14,14 @@ namespace BO4E.ENUM
         /// Ein Zähler soll gesperrt werden
         /// </summary>
         /// <remarks>EDIFACT Z51 in Nachricht 17115/17116</remarks>
-        [EnumMember(Value = "SPERREN")] 
+        [EnumMember(Value = "SPERREN")]
         SPERREN,
 
         /// <summary>
         /// Ein Zähler soll entsperrt werden
         /// </summary>
         /// <remarks>EDIFACT Z52 in Nachricht 17117</remarks>
-        [EnumMember(Value = "ENTSPERREN")] 
+        [EnumMember(Value = "ENTSPERREN")]
         ENTSPERREN,
     }
 }

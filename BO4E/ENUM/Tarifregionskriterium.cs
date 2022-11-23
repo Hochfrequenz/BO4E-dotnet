@@ -9,22 +9,22 @@ namespace BO4E.ENUM
     {
         /// <summary>Netznummer</summary>
         [ProtoEnum(Name = nameof(Tarifregionskriterium) + "_" + nameof(NETZ_NUMMER))]
-        [EnumMember(Value = "NETZ_NUMMER")] 
+        [EnumMember(Value = "NETZ_NUMMER")]
         NETZ_NUMMER,
 
         /// <summary>Postleitzahl</summary>
         [ProtoEnum(Name = nameof(Tarifregionskriterium) + "_" + nameof(POSTLEITZAHL))]
-        [EnumMember(Value = "POSTLEITZAHL")] 
+        [EnumMember(Value = "POSTLEITZAHL")]
         POSTLEITZAHL,
 
         /// <summary>Ort</summary>
         [ProtoEnum(Name = nameof(Tarifregionskriterium) + "_" + nameof(ORT))]
-        [EnumMember(Value = "ORT")] 
+        [EnumMember(Value = "ORT")]
         ORT,
 
         /// <summary>Nummer des Grundversorgers</summary>
         [ProtoEnum(Name = nameof(Tarifregionskriterium) + "_" + nameof(GRUNDVERSORGER_NUMMER))]
-        [EnumMember(Value = "GRUNDVERSORGER_NUMMER")] 
+        [EnumMember(Value = "GRUNDVERSORGER_NUMMER")]
         GRUNDVERSORGER_NUMMER,
     }
 }

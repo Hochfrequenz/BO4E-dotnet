@@ -6,15 +6,15 @@ namespace BO4E.ENUM
     public enum Verbrauchsmengetyp
     {
         /// <summary>Arbeitleistungtagesparameterabhmalo</summary>
-        [EnumMember(Value = "ARBEITLEISTUNGTAGESPARAMETERABHMALO")] 
+        [EnumMember(Value = "ARBEITLEISTUNGTAGESPARAMETERABHMALO")]
         ARBEITLEISTUNGTAGESPARAMETERABHMALO,
 
         /// <summary>Veranschlagtejahresmenge</summary>
-        [EnumMember(Value = "VERANSCHLAGTEJAHRESMENGE")] 
+        [EnumMember(Value = "VERANSCHLAGTEJAHRESMENGE")]
         VERANSCHLAGTEJAHRESMENGE,
 
         /// <summary>TUMKundenwert</summary>
-        [EnumMember(Value = "TUMKUNDENWERT")] 
+        [EnumMember(Value = "TUMKUNDENWERT")]
         TUMKUNDENWERT,
     }
 }

@@ -9,11 +9,11 @@ namespace BO4E.ENUM
     public enum Prognosegrundlage
     {
         /// <summary>Prognose auf der Basis von Werten</summary>
-        [EnumMember(Value = "WERTE")] 
+        [EnumMember(Value = "WERTE")]
         WERTE,
 
         /// <summary>Prognose auf der Basis von Profilen</summary>
-        [EnumMember(Value = "PROFILE")] 
+        [EnumMember(Value = "PROFILE")]
         PROFILE,
     }
 }

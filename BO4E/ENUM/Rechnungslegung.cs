@@ -6,23 +6,23 @@ namespace BO4E.ENUM
     public enum Rechnungslegung
     {
         /// <summary>monatsscharfe Rechnung</summary>
-        [EnumMember(Value = "MONATSRECHN")] 
+        [EnumMember(Value = "MONATSRECHN")]
         MONATSRECHN,
 
         /// <summary>Abschlag mit Monatsrechnung</summary>
-        [EnumMember(Value = "ABSCHL_MONATSRECHN")] 
+        [EnumMember(Value = "ABSCHL_MONATSRECHN")]
         ABSCHL_MONATSRECHN,
 
         /// <summary>Abschlag mit Jahresrechnung</summary>
-        [EnumMember(Value = "ABSCHL_JAHRESRECHN")] 
+        [EnumMember(Value = "ABSCHL_JAHRESRECHN")]
         ABSCHL_JAHRESRECHN,
 
         /// <summary>Monatsrechnung mit Jahresrechnung</summary>
-        [EnumMember(Value = "MONATSRECHN_JAHRESRECHN")] 
+        [EnumMember(Value = "MONATSRECHN_JAHRESRECHN")]
         MONATSRECHN_JAHRESRECHN,
 
         /// <summary>Vorkasse</summary>
-        [EnumMember(Value = "VORKASSE")] 
+        [EnumMember(Value = "VORKASSE")]
         VORKASSE,
     }
 }

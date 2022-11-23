@@ -16,14 +16,14 @@ namespace BO4E.ENUM
         /// Der Zähler ist nicht gesperrt
         /// </summary>
         [ProtoEnum(Name = nameof(Sperrstatus) + "_" + nameof(ENTSPERRT))]
-        [EnumMember(Value = "ENTSPERRT")] 
+        [EnumMember(Value = "ENTSPERRT")]
         ENTSPERRT,
 
         /// <summary>
         /// Der Zähler ist gesperrt
         /// </summary>
         [ProtoEnum(Name = nameof(Sperrstatus) + "_" + nameof(GESPERRT))]
-        [EnumMember(Value = "GESPERRT")] 
+        [EnumMember(Value = "GESPERRT")]
         GESPERRT,
     }
 }

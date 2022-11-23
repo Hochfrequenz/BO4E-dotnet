@@ -6,11 +6,11 @@ namespace BO4E.ENUM
     public enum Messwerterfassung
     {
         /// <summary>AMR: fernauslesbare Zähler</summary>
-        [EnumMember(Value = "FERNAUSLESBAR")] 
+        [EnumMember(Value = "FERNAUSLESBAR")]
         FERNAUSLESBAR,
 
         /// <summary>MMR: manuell ausgelesene Zähler</summary>
-        [EnumMember(Value = "MANUELL_AUSGELESENE")] 
+        [EnumMember(Value = "MANUELL_AUSGELESENE")]
         MANUELL_AUSGELESENE,
     }
 }

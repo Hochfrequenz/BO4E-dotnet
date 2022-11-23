@@ -13,26 +13,26 @@ namespace BO4E.meta.LenientConverters
         /// <summary>
         ///     strict parsing, no lenient behaviour
         /// </summary>
-        [EnumMember(Value = "STRICT")] 
+        [EnumMember(Value = "STRICT")]
         STRICT = 0,
 
         /// <summary>
         ///     allows automatic conversion of other date formats
         /// </summary>
-        [EnumMember(Value = "DATE_TIME")] 
+        [EnumMember(Value = "DATE_TIME")]
         DATE_TIME = 1,
 
         /// <summary>
         ///     allows list of objects with enum as value where a list of enums was expected
         ///     (e.g. when mapping from a SAP CDS view)
         /// </summary>
-        [EnumMember(Value = "ENUM_LIST")] 
+        [EnumMember(Value = "ENUM_LIST")]
         ENUM_LIST = 2,
 
         /// <summary>
         ///     allow partly malformed BO4E URIs
         /// </summary>
-        [EnumMember(Value = "BO4_E_URI")] 
+        [EnumMember(Value = "BO4_E_URI")]
         BO4_E_URI = 4,
 
         // /// <summary>
@@ -42,19 +42,19 @@ namespace BO4E.meta.LenientConverters
         /// <summary>
         ///     Set initial DateTimeOffset if date could not be parsed (only applies if <see cref="DATE_TIME" /> is set)
         /// </summary>
-        [EnumMember(Value = "SET_INITIAL_DATE_IF_NULL")] 
+        [EnumMember(Value = "SET_INITIAL_DATE_IF_NULL")]
         SET_INITIAL_DATE_IF_NULL = 8,
 
         /// <summary>
         ///     Try to parse Strings as Integer if type doesn't fit
         /// </summary>
-        [EnumMember(Value = "STRING_TO_INT")] 
+        [EnumMember(Value = "STRING_TO_INT")]
         STRING_TO_INT = 16,
 
         /// <summary>
         ///     most lenient (all others)
         /// </summary>
-        [EnumMember(Value = "MOST_LENIENT")] 
+        [EnumMember(Value = "MOST_LENIENT")]
         MOST_LENIENT = ~0
     }
 }

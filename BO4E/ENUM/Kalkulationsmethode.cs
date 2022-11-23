@@ -7,76 +7,76 @@ namespace BO4E.ENUM
     public enum Kalkulationsmethode
     {
         /// <summary>Es wird keine Berechnung durchgeführt, sondern lediglich die Menge mit dem Preis multipliziert.</summary>
-        [EnumMember(Value = "KEINE")] 
+        [EnumMember(Value = "KEINE")]
         KEINE,
 
         /// <summary>
         ///     Staffelmodell, d.h. die Gesamtmenge wird in eine Staffel eingeordnet und für die gesamte Menge gilt der so
         ///     ermittelte Preis
         /// </summary>
-        [EnumMember(Value = "STAFFELN")] 
+        [EnumMember(Value = "STAFFELN")]
         STAFFELN,
 
         /// <summary>
         ///     Zonenmodell, d.h. die Gesamtmenge wird auf die Zonen aufgeteilt und für die Teilmengen gilt der jeweilige
         ///     Preis der Zone.
         /// </summary>
-        [EnumMember(Value = "ZONEN")] 
+        [EnumMember(Value = "ZONEN")]
         ZONEN,
 
         /// <summary>Vorzonengrundpreis</summary>
-        [EnumMember(Value = "VORZONEN_GP")] 
+        [EnumMember(Value = "VORZONEN_GP")]
         VORZONEN_GP,
 
         /// <summary>Sigmoidfunktion</summary>
-        [EnumMember(Value = "SIGMOID")] 
+        [EnumMember(Value = "SIGMOID")]
         SIGMOID,
 
         /// <summary>Blindarbeit oberhalb 50% der Wirkarbeit</summary>
-        [EnumMember(Value = "BLINDARBEIT_GT_50_PROZENT")] 
+        [EnumMember(Value = "BLINDARBEIT_GT_50_PROZENT")]
         BLINDARBEIT_GT_50_PROZENT,
 
         /// <summary>Blindarbeit oberhalb 40% der Wirkarbeit</summary>
-        [EnumMember(Value = "BLINDARBEIT_GT_40_PROZENT")] 
+        [EnumMember(Value = "BLINDARBEIT_GT_40_PROZENT")]
         BLINDARBEIT_GT_40_PROZENT,
 
         /// <summary>Arbeits- und Grundpreis gezont</summary>
-        [EnumMember(Value = "AP_GP_ZONEN")] 
+        [EnumMember(Value = "AP_GP_ZONEN")]
         AP_GP_ZONEN,
 
         /// <summary>Leistungsentgelt auf Grundlage der installierten Leistung</summary>
-        [EnumMember(Value = "LP_INSTALL_LEISTUNG")] 
+        [EnumMember(Value = "LP_INSTALL_LEISTUNG")]
         LP_INSTALL_LEISTUNG,
 
         /// <summary>AP auf Grundlage Transport- oder Verteilnetz</summary>
-        [EnumMember(Value = "AP_TRANSPORT_ODER_VERTEILNETZ")] 
+        [EnumMember(Value = "AP_TRANSPORT_ODER_VERTEILNETZ")]
         AP_TRANSPORT_ODER_VERTEILNETZ,
 
         /// <summary>AP auf Grundlage Transport- oder Verteilnetz, Ortsverteilnetz über Sigmoid</summary>
-        [EnumMember(Value = "AP_TRANSPORT_ODER_VERTEILNETZ_ORTSVERTEILNETZ_SIGMOID")] 
+        [EnumMember(Value = "AP_TRANSPORT_ODER_VERTEILNETZ_ORTSVERTEILNETZ_SIGMOID")]
         AP_TRANSPORT_ODER_VERTEILNETZ_ORTSVERTEILNETZ_SIGMOID,
 
         /// <summary>Leistungsentgelt auf Grundlage des Jahresverbrauchs</summary>
-        [EnumMember(Value = "LP_JAHRESVERBRAUCH")] 
+        [EnumMember(Value = "LP_JAHRESVERBRAUCH")]
         LP_JAHRESVERBRAUCH,
 
         /// <summary>LP auf Grundlage Transport- oder Verteilnetz</summary>
-        [EnumMember(Value = "LP_TRANSPORT_ODER_VERTEILNETZ")] 
+        [EnumMember(Value = "LP_TRANSPORT_ODER_VERTEILNETZ")]
         LP_TRANSPORT_ODER_VERTEILNETZ,
 
         /// <summary>LP auf Grundlage Transport- oder Verteilnetz, Ortsverteilnetz über Sigmoid</summary>
-        [EnumMember(Value = "LP_TRANSPORT_ODER_VERTEILNETZ_ORTSVERTEILNETZ_SIGMOID")] 
+        [EnumMember(Value = "LP_TRANSPORT_ODER_VERTEILNETZ_ORTSVERTEILNETZ_SIGMOID")]
         LP_TRANSPORT_ODER_VERTEILNETZ_ORTSVERTEILNETZ_SIGMOID,
 
         /// <summary>Funktionsbezogene Leistungsermittlung bei Verbräuchen oberhalb der SLP Grenze. (ähnlich Sigmoid)</summary>
-        [EnumMember(Value = "FUNKTIONEN")] 
+        [EnumMember(Value = "FUNKTIONEN")]
         FUNKTIONEN,
 
         /// <summary>
         ///     Bei einem Verbrauch über der SLP-Grenze (letzte Staffelgrenze überschritten) erfolgt die Berechnung
         ///     funktionsbezogen (s.o.) als LGK.
         /// </summary>
-        [EnumMember(Value = "VERBRAUCH_UEBER_SLP_GRENZE_FUNKTIONSBEZOGEN_WEITERE_BERECHNUNG_ALS_LGK")] 
+        [EnumMember(Value = "VERBRAUCH_UEBER_SLP_GRENZE_FUNKTIONSBEZOGEN_WEITERE_BERECHNUNG_ALS_LGK")]
         VERBRAUCH_UEBER_SLP_GRENZE_FUNKTIONSBEZOGEN_WEITERE_BERECHNUNG_ALS_LGK,
     }
 }

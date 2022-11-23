@@ -10,19 +10,19 @@ namespace BO4E.ENUM
         /// <summary>
         ///     Alle Objekte mit einem Wert kleiner als der Bezugswert
         /// </summary>
-        [EnumMember(Value = "KLEINER_ALS")] 
+        [EnumMember(Value = "KLEINER_ALS")]
         KLEINER_ALS,
 
         /// <summary>
         ///     Alle Objekte mit einem Wert größer als der Bezugswert
         /// </summary>
-        [EnumMember(Value = "GROESSER_ALS")] 
+        [EnumMember(Value = "GROESSER_ALS")]
         GROESSER_ALS,
 
         /// <summary>
         ///     Alle Objekte mit gleichem Wert
         /// </summary>
-        [EnumMember(Value = "GLEICH")] 
+        [EnumMember(Value = "GLEICH")]
         GLEICH,
     }
 }

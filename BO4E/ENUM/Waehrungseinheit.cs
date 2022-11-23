@@ -12,11 +12,11 @@ namespace BO4E.ENUM
     {
         /// <summary>Euro</summary>
         [ProtoEnum(Name = nameof(Waehrungseinheit) + "_" + nameof(EUR))]
-        [EnumMember(Value = "EUR")] 
+        [EnumMember(Value = "EUR")]
         EUR,
 
         /// <summary>Eurocent</summary>
-        [EnumMember(Value = "CT")] 
+        [EnumMember(Value = "CT")]
         CT,
     }
 }

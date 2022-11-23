@@ -24,37 +24,37 @@ namespace BO4E.EnergyIdentificationCodes
         /// object type “Z”, Energy Metering points
         /// </summary>
 
-        [EnumMember(Value = "AREA")] 
+        [EnumMember(Value = "AREA")]
         MEASURING_POINT,
 
         /// <summary>
         /// object type "W", such as Production plants, consumption units, etc.
         /// </summary>
-        [EnumMember(Value = "RESOURCE_OBJECT")] 
+        [EnumMember(Value = "RESOURCE_OBJECT")]
         RESOURCE_OBJECT,
 
         /// <summary>
         /// object type "T", International tie lines between areas
         /// </summary>
-        [EnumMember(Value = "TIE_LINES")] 
+        [EnumMember(Value = "TIE_LINES")]
         TIE_LINES,
 
         /// <summary>
         /// object type "V", Physical or logical place where a market participant or IT system is located
         /// </summary>
-        [EnumMember(Value = "LOCATION")] 
+        [EnumMember(Value = "LOCATION")]
         LOCATION,
 
         /// <summary>
         /// object type "A"
         /// </summary>
-        [EnumMember(Value = "SUBSTATION")] 
+        [EnumMember(Value = "SUBSTATION")]
         SUBSTATION,
 
         /// <summary>
         /// Parties - object type "X"
         /// </summary>
-        [EnumMember(Value = "MARKET_PARTICIPANT")] 
+        [EnumMember(Value = "MARKET_PARTICIPANT")]
         MARKET_PARTICIPANT
     }
 
