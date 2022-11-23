@@ -1,5 +1,7 @@
 using BO4E.meta;
 
+using System.Runtime.Serialization;
+
 namespace BO4E.ENUM
 {
     /// <summary>
@@ -12,12 +14,14 @@ namespace BO4E.ENUM
         /// Ein Zähler soll gesperrt werden
         /// </summary>
         /// <remarks>EDIFACT Z51 in Nachricht 17115/17116</remarks>
+        [EnumMember(Value = "SPERREN")] 
         SPERREN,
 
         /// <summary>
         /// Ein Zähler soll entsperrt werden
         /// </summary>
         /// <remarks>EDIFACT Z52 in Nachricht 17117</remarks>
-        ENTSPERREN
+        [EnumMember(Value = "ENTSPERREN")] 
+        ENTSPERREN,
     }
 }

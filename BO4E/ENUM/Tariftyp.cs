@@ -1,3 +1,5 @@
+using System.Runtime.Serialization;
+
 namespace BO4E.ENUM
 {
     /// <summary>
@@ -7,15 +9,19 @@ namespace BO4E.ENUM
     public enum Tariftyp
     {
         /// <summary>Grund- und Ersatzversorgung</summary>
+        [EnumMember(Value = "GRUND_ERSATZVERSORGUNG")] 
         GRUND_ERSATZVERSORGUNG,
 
         /// <summary>Grundversorgung</summary>
+        [EnumMember(Value = "GRUNDVERSORGUNG")] 
         GRUNDVERSORGUNG,
 
         /// <summary>Ersatzversorgung</summary>
+        [EnumMember(Value = "ERSATZVERSORGUNG")] 
         ERSATZVERSORGUNG,
 
         /// <summary>Sondertarif</summary>
-        SONDERTARIF
+        [EnumMember(Value = "SONDERTARIF")] 
+        SONDERTARIF,
     }
 }

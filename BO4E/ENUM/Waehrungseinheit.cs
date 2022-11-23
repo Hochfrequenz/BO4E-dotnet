@@ -1,5 +1,7 @@
 using ProtoBuf;
 
+using System.Runtime.Serialization;
+
 namespace BO4E.ENUM
 {
     /// <summary>
@@ -10,9 +12,11 @@ namespace BO4E.ENUM
     {
         /// <summary>Euro</summary>
         [ProtoEnum(Name = nameof(Waehrungseinheit) + "_" + nameof(EUR))]
+        [EnumMember(Value = "EUR")] 
         EUR,
 
         /// <summary>Eurocent</summary>
-        CT
+        [EnumMember(Value = "CT")] 
+        CT,
     }
 }

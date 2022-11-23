@@ -1,3 +1,5 @@
+using System.Runtime.Serialization;
+
 namespace BO4E.ENUM
 {
     /// <summary>Statusinformation für Preise</summary>
@@ -6,11 +8,13 @@ namespace BO4E.ENUM
         /// <summary>
         ///     vorläufig
         /// </summary>
+        [EnumMember(Value = "VORLAEUFIG")] 
         VORLAEUFIG,
 
         /// <summary>
         ///     endgültig
         /// </summary>
-        ENDGUELTIG
+        [EnumMember(Value = "ENDGUELTIG")] 
+        ENDGUELTIG,
     }
 }

@@ -1,5 +1,7 @@
 using BO4E.meta;
 
+using System.Runtime.Serialization;
+
 namespace BO4E.ENUM
 {
     /// <summary>Profiltyp (temperaturabhängig / standardlastprofil)</summary>
@@ -7,9 +9,11 @@ namespace BO4E.ENUM
     public enum Profiltyp
     {
         /// <summary>SLP/SEP</summary>
+        [EnumMember(Value = "SLP_SEP")] 
         SLP_SEP,
 
         /// <summary>TLP/TEP</summary>
-        TLP_TEP
+        [EnumMember(Value = "TLP_TEP")] 
+        TLP_TEP,
     }
 }

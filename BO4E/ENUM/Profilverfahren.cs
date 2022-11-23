@@ -1,5 +1,7 @@
 using BO4E.meta;
 
+using System.Runtime.Serialization;
+
 namespace BO4E.ENUM
 {
     /// <summary>Profilverfahren (synthetisch/ analytisch)</summary>
@@ -7,9 +9,11 @@ namespace BO4E.ENUM
     public enum Profilverfahren
     {
         /// <summary>SLP</summary>
+        [EnumMember(Value = "SYNTHETISCH")] 
         SYNTHETISCH,
 
         /// <summary>ALP</summary>
-        ANALYTISCH
+        [EnumMember(Value = "ANALYTISCH")] 
+        ANALYTISCH,
     }
 }

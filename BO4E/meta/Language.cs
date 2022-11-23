@@ -1,3 +1,5 @@
+using System.Runtime.Serialization;
+
 namespace BO4E.meta
 {
     /// <summary>
@@ -8,21 +10,25 @@ namespace BO4E.meta
         /// <summary>
         ///     Englisch
         /// </summary>
+        [EnumMember(Value = "EN")] 
         EN,
 
         /// <summary>
         ///     Deutsch
         /// </summary>
+        [EnumMember(Value = "DE")] 
         DE,
 
         /// <summary>
         ///     Französisch
         /// </summary>
+        [EnumMember(Value = "FR")] 
         FR,
 
         /// <summary>
         ///     Spanisch
         /// </summary>
-        SP
+        [EnumMember(Value = "SP")] 
+        SP,
     }
 }

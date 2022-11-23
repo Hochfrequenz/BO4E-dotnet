@@ -7736,7 +7736,7 @@
             <summary>elektronischer_Aufsatz</summary>
         </member>
         <member name="F:BO4E.ENUM.Messpreistyp.SMART_METER_MESSPREIS_G2_5">
-            <summary>Smart_Meter_Messpreis_G2,5</summary>
+            <summary>Smart_Meter_Messpreis</summary>
         </member>
         <member name="F:BO4E.ENUM.Messpreistyp.SMART_METER_MESSPREIS_G4">
             <summary>Smart_Meter_Messpreis_G4</summary>

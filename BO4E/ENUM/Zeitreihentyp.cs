@@ -1,5 +1,7 @@
 using BO4E.meta;
 
+using System.Runtime.Serialization;
+
 namespace BO4E.ENUM
 {
     /// <summary>Codes der SummenzeitreihentypenDie nachfolgenden Codes sind in DE7111 zu nutzen:</summary>
@@ -8,32 +10,41 @@ namespace BO4E.ENUM
     public enum Zeitreihentyp
     {
         /// <summary>Einspeisegangsumme</summary>
+        [EnumMember(Value = "EGS")] 
         EGS,
 
         /// <summary>Lastgangsumme</summary>
+        [EnumMember(Value = "LGS")] 
         LGS,
 
         /// <summary>Netzzeitreihe</summary>
+        [EnumMember(Value = "NZR")] 
         NZR,
 
         /// <summary>Standardeinspeiseprofilsumme</summary>
+        [EnumMember(Value = "SES")] 
         SES,
 
         /// <summary>Standardlastsumme</summary>
+        [EnumMember(Value = "SLS")] 
         SLS,
 
         /// <summary>Tagesparameterabhängige Einspeiseprofilsumme</summary>
+        [EnumMember(Value = "TES")] 
         TES,
 
         /// <summary>Tagesparameterabhängige Lastprofilsumme</summary>
+        [EnumMember(Value = "TLS")] 
         TLS,
         /// <summary>
         /// gemeinsame Messung aus SLS und TLS
         /// </summary>
+        [EnumMember(Value = "SLS_TLS")] 
         SLS_TLS,
         /// <summary>
         /// Gemeinsame Messung aus SES und TES
         /// </summary>
+        [EnumMember(Value = "SES_TES")] 
         SES_TES,
     }
 }

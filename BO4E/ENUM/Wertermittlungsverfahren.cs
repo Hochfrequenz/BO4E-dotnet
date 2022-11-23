@@ -1,3 +1,5 @@
+using System.Runtime.Serialization;
+
 namespace BO4E.ENUM
 {
     /// <summary>
@@ -8,11 +10,13 @@ namespace BO4E.ENUM
         /// <summary>
         ///     Prognose
         /// </summary>
+        [EnumMember(Value = "PROGNOSE")] 
         PROGNOSE,
 
         /// <summary>
         ///     Messung
         /// </summary>
-        MESSUNG
+        [EnumMember(Value = "MESSUNG")] 
+        MESSUNG,
     }
 }
