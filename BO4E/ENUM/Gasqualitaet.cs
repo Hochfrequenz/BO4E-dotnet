@@ -1,5 +1,4 @@
 using System;
-using Newtonsoft.Json.Linq;
 using System.Runtime.Serialization;
 
 using ProtoBuf;

@@ -1,6 +1,4 @@
 using BO4E.meta;
-
-using Newtonsoft.Json.Linq;
 using System.Runtime.Serialization;
 
 namespace BO4E.ENUM

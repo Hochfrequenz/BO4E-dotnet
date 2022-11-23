@@ -1,7 +1,6 @@
 using ProtoBuf;
 
 using System.Runtime.Serialization;
-using System.Xml.Linq;
 
 namespace BO4E.ENUM
 {

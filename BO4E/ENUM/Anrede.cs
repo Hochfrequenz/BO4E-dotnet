@@ -2,9 +2,6 @@ using System;
 using System.Runtime.Serialization;
 
 using BO4E.meta;
-
-using Newtonsoft.Json.Linq;
-
 using ProtoBuf;
 
 namespace BO4E.ENUM

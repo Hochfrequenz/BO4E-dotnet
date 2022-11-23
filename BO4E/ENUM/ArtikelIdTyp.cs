@@ -1,6 +1,4 @@
 using BO4E.meta;
-
-using Newtonsoft.Json.Linq;
 using ProtoBuf;
 
 using System.Runtime.Serialization;
