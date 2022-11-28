@@ -78,7 +78,7 @@ namespace BO4E.COM
         public Menge? SingulaereBetriebsmittel { get; set; }
 
         /// <summary>
-        ///     Preis für singulöre Betriebsmittel
+        ///     Preis für singuläre Betriebsmittel
         /// </summary>
         [JsonProperty(PropertyName = "preisSingulaereBetriebsmittel", Order = 11, Required = Required.Default)]
         [JsonPropertyOrder(11)]

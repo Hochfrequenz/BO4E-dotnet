@@ -3182,7 +3182,7 @@
         </member>
         <member name="P:BO4E.COM.Netznutzungsabrechnungsdaten.PreisSingulaereBetriebsmittel">
             <summary>
-                Preis für singulöre Betriebsmittel
+                Preis für singuläre Betriebsmittel
             </summary>
         </member>
         <member name="T:BO4E.COM.Notiz">
