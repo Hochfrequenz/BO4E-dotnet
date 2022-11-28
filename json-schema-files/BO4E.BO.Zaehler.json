@@ -519,7 +519,9 @@
             "TEMPERATUR_MU",
             "KOMPAKT_MU",
             "SYSTEM_MU",
-            "UNBESTIMMT"
+            "UNBESTIMMT",
+            "WASSER_MWZW",
+            "WASSER_WZ01"
           ]
         },
         "Parameter": {
@@ -1124,7 +1126,8 @@
         "WIRBELGASZAEHLER",
         "MESSDATENREGISTRIERGERAET",
         "ELEKTRONISCHERHAUSHALTSZAEHLER",
-        "SONDERAUSSTATTUNG"
+        "SONDERAUSSTATTUNG",
+        "WASSERZAEHLER"
       ]
     },
     "tarifart": {
@@ -1275,7 +1278,9 @@
         "TEMPERATUR_MU",
         "KOMPAKT_MU",
         "SYSTEM_MU",
-        "UNBESTIMMT"
+        "UNBESTIMMT",
+        "WASSER_MWZW",
+        "WASSER_WZ01"
       ]
     },
     "geraete": {

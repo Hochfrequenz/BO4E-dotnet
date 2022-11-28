@@ -1,3 +1,5 @@
+using System.Runtime.Serialization;
+
 namespace BO4E.ENUM
 {
     /**
@@ -7,18 +9,23 @@ namespace BO4E.ENUM
     public enum Tarifart
     {
         /// <summary>Eintarif</summary>
+        [EnumMember(Value = "EINTARIF")]
         EINTARIF,
 
         /// <summary>Zweitarif</summary>
+        [EnumMember(Value = "ZWEITARIF")]
         ZWEITARIF,
 
         /// <summary>Mehrtarif</summary>
+        [EnumMember(Value = "MEHRTARIF")]
         MEHRTARIF,
 
         /// <summary>Smart Meter Tarif</summary>
+        [EnumMember(Value = "SMART_METER")]
         SMART_METER,
 
         /// <summary>Leistungsgemessener Tarif</summary>
-        LEISTUNGSGEMESSEN
+        [EnumMember(Value = "LEISTUNGSGEMESSEN")]
+        LEISTUNGSGEMESSEN,
     }
 }

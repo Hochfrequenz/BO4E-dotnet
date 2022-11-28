@@ -403,6 +403,8 @@ enum Geraetemerkmal {
    Geraetemerkmal_KOMPAKT_MU = 36;
    Geraetemerkmal_SYSTEM_MU = 37;
    Geraetemerkmal_UNBESTIMMT = 38;
+   Geraetemerkmal_WASSER_MWZW = 39;
+   Geraetemerkmal_WASSER_WZ01 = 40;
 }
 enum Geraetetyp {
    option (.protobuf_net.enumopt).namespace = "BO4E.ENUM";
@@ -1794,6 +1796,7 @@ enum Zaehlertyp {
    MESSDATENREGISTRIERGERAET = 10;
    ELEKTRONISCHERHAUSHALTSZAEHLER = 11;
    SONDERAUSSTATTUNG = 12;
+   WASSERZAEHLER = 13;
 }
 enum ZaehlertypSpezifikation {
    option (.protobuf_net.enumopt).namespace = "BO4E.ENUM";
