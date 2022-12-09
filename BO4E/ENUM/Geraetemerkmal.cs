@@ -393,7 +393,7 @@ namespace BO4E.ENUM
         WASSER_VWZ07,
 
         /// <summary>
-        ///  Wasserzähler Größe VWZ04 Verbundwasserzähler 600m³/h
+        ///  Wasserzähler Größe VWZ10 Verbundwasserzähler 600m³/h
         /// </summary>
         [ProtoEnum(Name = nameof(Geraetemerkmal) + "_" + nameof(WASSER_VWZ10))]
         [EnumMember(Value = "WASSER_VWZ10")]
