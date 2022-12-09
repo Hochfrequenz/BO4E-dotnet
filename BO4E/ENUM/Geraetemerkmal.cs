@@ -281,7 +281,7 @@ namespace BO4E.ENUM
         UNBESTIMMT,
 
         /// <summary>
-        ///  Wasserzähler Größe MWZW Meßkapsel Wohnungs-Wasserzähler
+        ///  Wasserzähler Größe MWZW Meßkapsel Wohnungswasserzähler
         /// </summary>
         [ProtoEnum(Name = nameof(Geraetemerkmal) + "_" + nameof(WASSER_MWZW))]
         [EnumMember(Value = "WASSER_MWZW")]
