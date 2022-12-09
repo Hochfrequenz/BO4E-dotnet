@@ -281,17 +281,123 @@ namespace BO4E.ENUM
         UNBESTIMMT,
 
         /// <summary>
-        ///  Wasserzähler Größe MWZW
+        ///  Wasserzähler Größe MWZW Meßkapsel Wohnungswasserzähler
         /// </summary>
         [ProtoEnum(Name = nameof(Geraetemerkmal) + "_" + nameof(WASSER_MWZW))]
         [EnumMember(Value = "WASSER_MWZW")]
         WASSER_MWZW,
 
         /// <summary>
-        ///  Wasserzähler Größe WZ01
+        ///  Wasserzähler Größe WZWW Wohnungswasserzähler
+        /// </summary>
+        [ProtoEnum(Name = nameof(Geraetemerkmal) + "_" + nameof(WASSER_WZWW))]
+        [EnumMember(Value = "WASSER_WZWW")]
+        WASSER_WZWW,
+
+        /// <summary>
+        ///  Wasserzähler Größe WZ01 Wasserzähler W01 5 m³/h
         /// </summary>
         [ProtoEnum(Name = nameof(Geraetemerkmal) + "_" + nameof(WASSER_WZ01))]
         [EnumMember(Value = "WASSER_WZ01")]
-        WASSER_WZ01
+        WASSER_WZ01,
+
+        /// <summary>
+        ///  Wasserzähler Größe WZ02 Wasserzähler W02 10 m³/h
+        /// </summary>
+        [ProtoEnum(Name = nameof(Geraetemerkmal) + "_" + nameof(WASSER_WZ02))]
+        [EnumMember(Value = "WASSER_WZ02")]
+        WASSER_WZ02,
+
+        /// <summary>
+        ///  Wasserzähler Größe WZ03 Wasserzähler W03 20 m³/h
+        /// </summary>
+        [ProtoEnum(Name = nameof(Geraetemerkmal) + "_" + nameof(WASSER_WZ03))]
+        [EnumMember(Value = "WASSER_WZ03")]
+        WASSER_WZ03,
+
+        /// <summary>
+        ///  Wasserzähler Größe WZ04 Wasserzähler W04 30 m³/h
+        /// </summary>
+        [ProtoEnum(Name = nameof(Geraetemerkmal) + "_" + nameof(WASSER_WZ04))]
+        [EnumMember(Value = "WASSER_WZ04")]
+        WASSER_WZ04,
+
+        /// <summary>
+        ///  Wasserzähler Größe WZ05 Wasserzähler W05 80 m³/h
+        /// </summary>
+        [ProtoEnum(Name = nameof(Geraetemerkmal) + "_" + nameof(WASSER_WZ05))]
+        [EnumMember(Value = "WASSER_WZ05")]
+        WASSER_WZ05,
+
+        /// <summary>
+        ///  Wasserzähler Größe WZ06 Wasserzähler W06 120 m³/h
+        /// </summary>
+        [ProtoEnum(Name = nameof(Geraetemerkmal) + "_" + nameof(WASSER_WZ06))]
+        [EnumMember(Value = "WASSER_WZ06")]
+        WASSER_WZ06,
+
+        /// <summary>
+        ///  Wasserzähler Größe WZ07 Wasserzähler W07 300 m³/h
+        /// </summary>
+        [ProtoEnum(Name = nameof(Geraetemerkmal) + "_" + nameof(WASSER_WZ07))]
+        [EnumMember(Value = "WASSER_WZ07")]
+        WASSER_WZ07,
+
+        /// <summary>
+        ///  Wasserzähler Größe WZ08 Wasserzähler W08 180 m³/h
+        /// </summary>
+        [ProtoEnum(Name = nameof(Geraetemerkmal) + "_" + nameof(WASSER_WZ08))]
+        [EnumMember(Value = "WASSER_WZ08")]
+        WASSER_WZ08,
+
+        /// <summary>
+        ///  Wasserzähler Größe WZ09 Wasserzähler W09 140 m³/h
+        /// </summary>
+        [ProtoEnum(Name = nameof(Geraetemerkmal) + "_" + nameof(WASSER_WZ09))]
+        [EnumMember(Value = "WASSER_WZ09")]
+        WASSER_WZ09,
+
+        /// <summary>
+        ///  Wasserzähler Größe WZ10 Wasserzähler W10 600 m³/h
+        /// </summary>
+        [ProtoEnum(Name = nameof(Geraetemerkmal) + "_" + nameof(WASSER_WZ10))]
+        [EnumMember(Value = "WASSER_WZ10")]
+        WASSER_WZ10,
+
+        /// <summary>
+        ///  Wasserzähler Größe VWZ04 Verbundwasserzähler 30m³/h
+        /// </summary>
+        [ProtoEnum(Name = nameof(Geraetemerkmal) + "_" + nameof(WASSER_VWZ04))]
+        [EnumMember(Value = "WASSER_VWZ04")]
+        WASSER_VWZ04,
+
+        /// <summary>
+        ///  Wasserzähler Größe VWZ05 Verbundwasserzähler 80m³/h
+        /// </summary>
+        [ProtoEnum(Name = nameof(Geraetemerkmal) + "_" + nameof(WASSER_VWZ05))]
+        [EnumMember(Value = "WASSER_VWZ05")]
+        WASSER_VWZ05,
+
+        /// <summary>
+        ///  Wasserzähler Größe VWZ06 Verbundwasserzähler 120m³/h
+        /// </summary>
+        [ProtoEnum(Name = nameof(Geraetemerkmal) + "_" + nameof(WASSER_VWZ06))]
+        [EnumMember(Value = "WASSER_VWZ06")]
+        WASSER_VWZ06,
+
+        /// <summary>
+        ///  Wasserzähler Größe VWZ07 Verbundwasserzähler 300m³/h
+        /// </summary>
+        [ProtoEnum(Name = nameof(Geraetemerkmal) + "_" + nameof(WASSER_VWZ07))]
+        [EnumMember(Value = "WASSER_VWZ07")]
+        WASSER_VWZ07,
+
+        /// <summary>
+        ///  Wasserzähler Größe VWZ10 Verbundwasserzähler 600m³/h
+        /// </summary>
+        [ProtoEnum(Name = nameof(Geraetemerkmal) + "_" + nameof(WASSER_VWZ10))]
+        [EnumMember(Value = "WASSER_VWZ10")]
+        WASSER_VWZ10,
+
     }
 }
