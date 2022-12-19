@@ -82,7 +82,7 @@
     <PackageReference Include="MiniProfiler.Shared" Version="4.2.22" />
     <PackageReference Include="Newtonsoft.Json" Version="13.0.2" />
     <PackageReference Include="Newtonsoft.Json.Schema" Version="3.0.14" />
-    <PackageReference Include="protobuf-net" Version="3.1.25" />
+    <PackageReference Include="protobuf-net" Version="3.1.26" />
     <PackageReference Include="SourceLink.Copy.PdbFiles" Version="2.8.3" PrivateAssets="All" />
     <PackageReference Include="System.ComponentModel.Annotations" Version="5.0.0" />
     <PackageReference Include="System.Text.Encodings.Web" Version="6.0.0" />
