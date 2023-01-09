@@ -76,15 +76,15 @@ namespace BO4E.COM
         [CompatibilityLevel(CompatibilityLevel.Level240)]
         private DateTime _LieferungVon
         {
-            get => LieferungVon.UtcDateTime;
+            get => LieferungVon?.UtcDateTime ?? DateTime.MinValue;
             set => LieferungVon = DateTime.SpecifyKind(value, DateTimeKind.Utc);
         }
         /// <inheritdoc cref="Rechnungsposition.LieferungVon" />
-        [JsonProperty(PropertyName = "lieferungVon", Required = Required.Always)]
+        [JsonProperty(PropertyName = "lieferungVon", Required = Required.Default)]
         [JsonPropertyName("lieferungVon")]
         [ProtoIgnore]
         [Newtonsoft.Json.JsonConverter(typeof(LenientDateTimeConverter))]
-        public DateTimeOffset LieferungVon { get; set; }
+        public DateTimeOffset? LieferungVon { get; set; }
 
         [System.Text.Json.Serialization.JsonIgnore]
         [Newtonsoft.Json.JsonIgnore]
@@ -92,15 +92,15 @@ namespace BO4E.COM
         [CompatibilityLevel(CompatibilityLevel.Level240)]
         private DateTime _LieferungBis
         {
-            get => LieferungBis.UtcDateTime;
+            get => LieferungBis?.UtcDateTime ?? DateTime.MinValue;
             set => LieferungBis = DateTime.SpecifyKind(value, DateTimeKind.Utc);
         }
         /// <inheritdoc cref="Rechnungsposition.LieferungBis" />
-        [JsonProperty(PropertyName = "lieferungBis", Required = Required.Always)]
+        [JsonProperty(PropertyName = "lieferungBis", Required = Required.Default)]
         [JsonPropertyName("lieferungBis")]
         [ProtoIgnore]
         [Newtonsoft.Json.JsonConverter(typeof(LenientDateTimeConverter))]
-        public DateTimeOffset LieferungBis { get; set; }
+        public DateTimeOffset? LieferungBis { get; set; }
 
         /// <summary>
         ///     Der Positionstext entspricht dem SAP CI Teilprozess bzw. der GCN Categoy

@@ -1,6 +1,7 @@
 using BO4E.meta;
-
 using ProtoBuf;
+
+using System.Runtime.Serialization;
 
 namespace BO4E.ENUM
 {
@@ -10,10 +11,12 @@ namespace BO4E.ENUM
     {
         /// <summary>Übertragungsnetzbetreiber</summary>
         [ProtoEnum(Name = nameof(ArtikelIdTyp) + "_" + nameof(ARTIKELID))]
+        [EnumMember(Value = "ARTIKELID")]
         ARTIKELID,
 
         /// <summary>Netzbetreiber</summary>
         [ProtoEnum(Name = nameof(ArtikelIdTyp) + "_" + nameof(GRUPPENARTIKELID))]
+        [EnumMember(Value = "GRUPPENARTIKELID")]
         GRUPPENARTIKELID
     }
 }

@@ -1,3 +1,5 @@
+using System.Runtime.Serialization;
+
 namespace BO4E.ENUM
 {
     /// <summary>
@@ -10,11 +12,13 @@ namespace BO4E.ENUM
         /// Berechnungsformel angefügt
         /// </summary>
         /// <remarks>Z02</remarks>
+        [EnumMember(Value = "ZAEHLZEITDEFINITIONEN_WERDEN_VERWENDET")]
         ZAEHLZEITDEFINITIONEN_WERDEN_VERWENDET,
         /// <summary>
         /// Berechnungsformel muss beim Absender angefragt werden
         /// </summary>
         /// <remarks>Z03</remarks>
+        [EnumMember(Value = "ZAEHLZEITDEFINITIONEN_WERDEN_NICHT_VERWENDET")]
         ZAEHLZEITDEFINITIONEN_WERDEN_NICHT_VERWENDET,
     }
 }

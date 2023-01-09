@@ -403,6 +403,8 @@ enum Geraetemerkmal {
    Geraetemerkmal_KOMPAKT_MU = 36;
    Geraetemerkmal_SYSTEM_MU = 37;
    Geraetemerkmal_UNBESTIMMT = 38;
+   Geraetemerkmal_WASSER_MWZW = 39;
+   Geraetemerkmal_WASSER_WZ01 = 40;
 }
 enum Geraetetyp {
    option (.protobuf_net.enumopt).namespace = "BO4E.ENUM";
@@ -1133,6 +1135,7 @@ message Rechnung {
    bool IstReverseCharge = 24;
    repeated Vorauszahlung Vorauszahlungen = 25;
    Sonderrechnungsart Sonderrechnungsart = 26;
+   .google.protobuf.Timestamp Buchungsdatum = 27;
 }
 message Rechnungsposition {
    option (.protobuf_net.msgopt).namespace = "BO4E.COM";
@@ -1152,6 +1155,7 @@ message Rechnungsposition {
    Steuerbetrag TeilsummeSteuer = 14;
    string VertragskontoId = 15;
    string ArtikelId = 28;
+   .google.protobuf.Timestamp Ausfuehrungsdatum = 29;
    string VertragsId = 1017;
    RechnungspositionsStatus Status = 1018;
 }
@@ -1792,6 +1796,7 @@ enum Zaehlertyp {
    MESSDATENREGISTRIERGERAET = 10;
    ELEKTRONISCHERHAUSHALTSZAEHLER = 11;
    SONDERAUSSTATTUNG = 12;
+   WASSERZAEHLER = 13;
 }
 enum ZaehlertypSpezifikation {
    option (.protobuf_net.enumopt).namespace = "BO4E.ENUM";

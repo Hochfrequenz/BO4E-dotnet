@@ -6,6 +6,7 @@ using BO4E;
 using BO4E.BO;
 using BO4E.ENUM;
 using BO4E.meta.LenientConverters;
+using FluentAssertions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Newtonsoft.Json;
 using JsonSerializer = System.Text.Json.JsonSerializer;
@@ -36,6 +37,23 @@ namespace TestBO4E
             Assert.IsNotNull(melo.UserProperties);
             Assert.AreEqual("some_value_not_covered_by_bo4e", melo.UserProperties["myCustomInfo"] as string);
             Assert.AreEqual(123.456M, (decimal)(double)melo.UserProperties["myCustomValue"]);
+        }
+
+        [TestMethod]
+        public void TestConvertingUserPropertyToBoolean()
+        {
+            var options = LenientParsing.MOST_LENIENT.GetJsonSerializerOptions();
+            var meloJson = @"{""messlokationsId"": ""DE0123456789012345678901234567890"", ""sparte"": ""STROM"", ""myCustomInfo"": ""some_value_not_covered_by_bo4e"", ""myCustomValue"": ""not a boolean""}";
+            var melo = JsonSerializer.Deserialize<Messlokation>(meloJson, options);
+            melo.Should().NotBeNull();
+            melo.IsValid().Should().BeTrue();
+            melo.UserProperties.Should().NotBeEmpty();
+            melo.UserProperties.Should().ContainKey("myCustomValue").WhoseValue.ToString().Should().Be("not a boolean");
+
+            var flagHasBeenSet = melo.SetFlag("myCustomValue", true);
+            flagHasBeenSet.Should().BeTrue(because: "the non-boolean existing value (which is overwritten) should not crash the code");
+            melo.TryGetUserProperty("myCustomValue", out bool booleanValue).Should().BeTrue();
+            booleanValue.Should().BeTrue();
         }
 
         [TestMethod]

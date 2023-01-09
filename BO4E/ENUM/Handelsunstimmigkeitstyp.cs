@@ -1,5 +1,7 @@
 using BO4E.meta;
 
+using System.Runtime.Serialization;
+
 namespace BO4E.ENUM
 {
     /// <summary>
@@ -10,18 +12,22 @@ namespace BO4E.ENUM
     {
         /// <summary> HANDELSRECHNUNG </summary>
         /// <remarks>380</remarks>
+        [EnumMember(Value = "HANDELSRECHNUNG")]
         HANDELSRECHNUNG,
 
         /// <summary> LIEFERSCHEIN_HANDELSUNSTIMMIGKEITSTYP </summary>
         /// <remarks>270</remarks>
+        [EnumMember(Value = "LIEFERSCHEIN_HANDELSUNSTIMMIGKEITSTYP")]
         LIEFERSCHEIN_HANDELSUNSTIMMIGKEITSTYP,
 
         /// <summary> LIEFERSCHEIN_GRUND_ARBEITSPREIS</summary>
         /// <remarks>Z41</remarks>
+        [EnumMember(Value = "LIEFERSCHEIN_GRUND_ARBEITSPREIS")]
         LIEFERSCHEIN_GRUND_ARBEITSPREIS,
 
         /// <summary> LIEFERSCHEIN_ARBEITS_LEISTUNGSPREIS </summary>
         /// <remarks>Z42</remarks>
+        [EnumMember(Value = "LIEFERSCHEIN_ARBEITS_LEISTUNGSPREIS")]
         LIEFERSCHEIN_ARBEITS_LEISTUNGSPREIS,
     }
 }

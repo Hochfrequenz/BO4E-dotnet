@@ -1,4 +1,6 @@
 using System;
+using System.Runtime.Serialization;
+
 using ProtoBuf;
 
 namespace BO4E.ENUM
@@ -16,6 +18,7 @@ namespace BO4E.ENUM
         [Newtonsoft.Json.JsonIgnore]
         [System.Text.Json.Serialization.JsonIgnore]
 #pragma warning disable CS1591 // Missing XML comment for publicly visible type or member
+        [EnumMember(Value = "ZERO")]
         ZERO,
 
 #pragma warning restore CS1591 // Missing XML comment for publicly visible type or member

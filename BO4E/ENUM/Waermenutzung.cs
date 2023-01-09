@@ -1,6 +1,6 @@
 using ProtoBuf;
 
-using System.Xml.Linq;
+using System.Runtime.Serialization;
 
 namespace BO4E.ENUM
 {
@@ -9,15 +9,18 @@ namespace BO4E.ENUM
     {
         /// <summary>Z56: Speicherheizung</summary>
         [ProtoEnum(Name = nameof(Waermenutzung) + "_" + nameof(SPEICHERHEIZUNG))]
+        [EnumMember(Value = "SPEICHERHEIZUNG")]
         SPEICHERHEIZUNG,
 
         /// <summary>Z57: Wärmepumpe</summary>
         [ProtoEnum(Name = nameof(Waermenutzung) + "_" + nameof(WAERMEPUMPE))]
+        [EnumMember(Value = "WAERMEPUMPE")]
         WAERMEPUMPE,
 
         ///Z61: Direktheizung <summary>        
         /// </summary>
         [ProtoEnum(Name = nameof(Waermenutzung) + "_" + nameof(DIREKTHEIZUNG))]
-        DIREKTHEIZUNG
+        [EnumMember(Value = "DIREKTHEIZUNG")]
+        DIREKTHEIZUNG,
     }
 }

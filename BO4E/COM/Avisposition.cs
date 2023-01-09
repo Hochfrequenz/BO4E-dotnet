@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Text.Json.Serialization;
 using BO4E.meta;
 using Newtonsoft.Json;
@@ -80,13 +81,31 @@ namespace BO4E.COM
         public Betrag ZuZahlen { get; set; }
 
         /// <summary>
-        /// Abweichung bei Ablehnung einer COMDIS
+        /// Referenzierung auf eine vorherige COMDIS-Nachricht
         /// </summary>
-        /// <see cref="Abweichung" />
-        [JsonProperty(PropertyName = "abweichung", Required = Required.Default, Order = 7)]
-        [JsonPropertyName("abweichung")]
+        [JsonProperty(PropertyName = "referenz", Required = Required.Default, Order = 7)]
+        [JsonPropertyName("referenz")]
+        [NonOfficial(NonOfficialCategory.MISSING)]
+        [ProtoMember(1)]
+        public string? Referenz { get; set; }
+
+        /// <summary>
+        /// Abweichungen bei Ablehnung einer COMDIS
+        /// </summary>
+        /// <see cref="Abweichungen" />
+        [JsonProperty(PropertyName = "abweichungen", Required = Required.Default, Order = 8)]
+        [JsonPropertyName("abweichungen")]
         [NonOfficial(NonOfficialCategory.MISSING)]
         [ProtoMember(7)]
-        public Abweichung? Abweichung { get; set; }
+        public List<Abweichung>? Abweichungen { get; set; }
+
+        /// <summary>
+        /// Rückmeldungspositionen
+        /// </summary>
+        [JsonProperty(PropertyName = "positionen", Required = Required.Default, Order = 9)]
+        [JsonPropertyName("positionen")]
+        [NonOfficial(NonOfficialCategory.MISSING)]
+        [ProtoMember(8)]
+        public List<Rueckmeldungsposition>? Positionen { get; set; }
     }
 }

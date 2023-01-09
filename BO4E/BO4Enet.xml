@@ -632,6 +632,11 @@
               Priorität des Bilanzkreises (für Gas)
             </summary>
         </member>
+        <member name="P:BO4E.BO.Bilanzierung.GrundWahlrechtPrognosegrundlage">
+            <summary>
+                Grund Wahlrecht der Prognosegrundlage (true = Wahlrecht beim Lieferanten vorhanden)
+            </summary>
+        </member>
         <member name="T:BO4E.BO.BusinessObject">
             <summary>
                 General abstract class for Business Objects for Energy (BO4E)
@@ -1748,6 +1753,11 @@
                 Sonderrechnungsart
             </summary>
         </member>
+        <member name="P:BO4E.BO.Rechnung.Buchungsdatum">
+            <summary>
+                Zu diesem Datum ist die Zahlung fällig.
+            </summary>
+        </member>
         <member name="T:BO4E.BO.Region">
             <summary>
                 Modellierung einer Region als Menge von Kriterien, die eine Region beschreiben.
@@ -2096,17 +2106,19 @@
             <summary>
             Der NB bzw. LF nutzt Zählzeitdefinitionen für die Tarifierung von Werten.
             <remarks>Zaehlzeitdefinitionen werden in der Marktkommunikation mit Prüfidentifikator 25001 (UTILTS) übermittelt</remarks>
+            Eine Zählzeitdefinition umfasst dabei eine Liste von möglichen Zählzeiten, 
+            den dazugehörigen Registern und der tatsächlich ausgerollten Zählzeit (wenn diese elektronisch übermittelt wird)
             </summary>
         </member>
         <member name="P:BO4E.BO.Zaehlzeitdefinition.Beginndatum">
             <summary>
-            Der inklusive Zeitpunkt ab dem die Zaehlzeitdefinitionen gültig ist
+            Der inklusive Zeitpunkt ab dem die Zaehlzeitdefinitionen ausgerollt sind
             </summary>
             <remarks>UTILTS SG5 DTM+Z34</remarks>
         </member>
         <member name="P:BO4E.BO.Zaehlzeitdefinition.Endedatum">
             <summary>
-            Der exklusive Zeitpunkt bis zu dem die Zaehlzeitdefinitionen gültig ist
+            Der exklusive Zeitpunkt bis zu dem die Zaehlzeitdefinitionen ausgerollt sind
             </summary>
             <remarks>UTILTS SG5 DTM+Z35</remarks>
         </member>
@@ -2141,11 +2153,6 @@
             Zur Angabe einer Abweichung bei Ablehnung einer COMDIS. (REMADV SG5 RFF und SG7 AJT/FTX)
             </summary>
         </member>
-        <member name="P:BO4E.COM.Abweichung.Referenz">
-            <summary>
-            Referenzierung auf eine vorherige COMDIS-Nachricht
-            </summary>
-        </member>
         <member name="P:BO4E.COM.Abweichung.Abweichungsgrund">
             <summary>
             Angabe des Abweichungsgrunds
@@ -2164,11 +2171,6 @@
         <member name="P:BO4E.COM.Abweichung.Abschlagsrechnungen">
             <summary>
             Abschlagsrechnungen
-            </summary>
-        </member>
-        <member name="P:BO4E.COM.Abweichung.Positionen">
-            <summary>
-            Rückmeldungspositionen
             </summary>
         </member>
         <member name="P:BO4E.COM.Abweichung.AbweichungsgrundCode">
@@ -2611,11 +2613,21 @@
             Geforderter Rechnungsbetrag
             </summary>
         </member>
-        <member name="P:BO4E.COM.Avisposition.Abweichung">
+        <member name="P:BO4E.COM.Avisposition.Referenz">
             <summary>
-            Abweichung bei Ablehnung einer COMDIS
+            Referenzierung auf eine vorherige COMDIS-Nachricht
             </summary>
-            <see cref="P:BO4E.COM.Avisposition.Abweichung" />
+        </member>
+        <member name="P:BO4E.COM.Avisposition.Abweichungen">
+            <summary>
+            Abweichungen bei Ablehnung einer COMDIS
+            </summary>
+            <see cref="P:BO4E.COM.Avisposition.Abweichungen" />
+        </member>
+        <member name="P:BO4E.COM.Avisposition.Positionen">
+            <summary>
+            Rückmeldungspositionen
+            </summary>
         </member>
         <member name="T:BO4E.COM.Betrag">
             <summary>
@@ -3366,7 +3378,7 @@
             Verarbeitungszeitraum. Details <see cref="T:BO4E.COM.Zeitraum" />
             </summary>
         </member>
-        <member name="P:BO4E.COM.Preisposition.ArtikelID">
+        <member name="P:BO4E.COM.Preisposition.ArtikelId">
             <summary>
              Die genauen Bedeutungen der einzelnen Artikel-IDs sind in der EDI@Energy Codeliste der Artikelnummern 
             und Artikel-IDs zu finden, die in der Spalte "PRICAT Codeverwendung" ein X haben
@@ -3520,6 +3532,16 @@
         <member name="P:BO4E.COM.Rechnungsposition.ArtikelId">
             <summary>
                 Artikel-ID (ab 1.10.2022)
+            </summary>
+        </member>
+        <member name="P:BO4E.COM.Rechnungsposition._Ausfuehrungsdatum">
+            <summary>
+                Um Qualifier 203 Ausführungsdatum/-zeit abzubilden
+            </summary>
+        </member>
+        <member name="P:BO4E.COM.Rechnungsposition.Ausfuehrungsdatum">
+            <summary>
+            Das Datum an dem die Leistung erbracht wurde.
             </summary>
         </member>
         <member name="T:BO4E.COM.RechnungspositionFlat">
@@ -4279,9 +4301,9 @@
                 Ermittlung Leistungsmaximum
             </summary>
         </member>
-        <member name="P:BO4E.COM.Zaehlzeit.Bestellbar">
+        <member name="P:BO4E.COM.Zaehlzeit.IstBestellbar">
             <summary>
-                Bestellbar
+                Ist die Zählzeit bestellbar?
             </summary>
         </member>
         <member name="P:BO4E.COM.Zaehlzeit.Typ">
@@ -4296,7 +4318,7 @@
         </member>
         <member name="T:BO4E.COM.Zaehlzeitregister">
             <summary>
-                Zaehlzeit
+                Ein Zählzeitregister beschreibt eine erweiterte Definition der Zählzeit in Bezug auf ein Register. Dabei werden alle Codes dazu vom Netzbetreiber vergeben.
             </summary>
         </member>
         <member name="P:BO4E.COM.Zaehlzeitregister.ZaehlzeitDefinition">
@@ -6070,6 +6092,16 @@
                 Unbestimmtes Merkmal
             </summary>
         </member>
+        <member name="F:BO4E.ENUM.Geraetemerkmal.WASSER_MWZW">
+            <summary>
+             Wasserzähler Größe MWZW
+            </summary>
+        </member>
+        <member name="F:BO4E.ENUM.Geraetemerkmal.WASSER_WZ01">
+            <summary>
+             Wasserzähler Größe WZ01
+            </summary>
+        </member>
         <member name="T:BO4E.ENUM.Geraetetyp">
             <summary>Auflistung möglicher abzurechnender Gerätetypen.</summary>
         </member>
@@ -6267,6 +6299,42 @@
         <member name="F:BO4E.ENUM.Handelsunstimmigkeitsgrund.SONSTIGES_SIEHE_BEGRUENDUNG">
             <summary> SONSTIGES_SIEHE_BEGRUENDUNG </summary>
             <remarks>28</remarks>
+        </member>
+        <member name="F:BO4E.ENUM.Handelsunstimmigkeitsgrund.GUELTIGES_PREISBLATT_VERSENDET">
+            <summary> GUELTIGES_PREISBLATT_VERSENDET </summary>
+            <remarks>A01</remarks>
+        </member>
+        <member name="F:BO4E.ENUM.Handelsunstimmigkeitsgrund.GUELTIGER_SPERRAUFTRAG_VORHANDEN">
+            <summary> GUELTIGER_SPERRAUFTRAG_VORHANDEN </summary>
+            <remarks>A02</remarks>
+        </member>
+        <member name="F:BO4E.ENUM.Handelsunstimmigkeitsgrund.KORREKTE_ARTIKEL_ID_IN_RECHNUNG">
+            <summary> KORREKTE_ARTIKEL_ID_IN_RECHNUNG </summary>
+            <remarks>A03</remarks>
+        </member>
+        <member name="F:BO4E.ENUM.Handelsunstimmigkeitsgrund.KORREKTER_PREIS_ZU_GUELTIGEM_PREISBLATT_IN_RECHNUNG">
+            <summary> KORREKTER_PREIS_ZU_GUELTIGEM_PREISBLATT_IN_RECHNUNG </summary>
+            <remarks>A04</remarks>
+        </member>
+        <member name="F:BO4E.ENUM.Handelsunstimmigkeitsgrund.GUELTIGES_PREISBLATT_FRISTGERECHT_VERSENDET">
+            <summary> GUELTIGES_PREISBLATT_FRISTGERECHT_VERSENDET </summary>
+            <remarks>A06</remarks>
+        </member>
+        <member name="F:BO4E.ENUM.Handelsunstimmigkeitsgrund.GUELTIGE_RECHNUNG_VORHANDEN">
+            <summary> GUELTIGE_RECHNUNG_VORHANDEN </summary>
+            <remarks>A07</remarks>
+        </member>
+        <member name="F:BO4E.ENUM.Handelsunstimmigkeitsgrund.KORREKTER_PREIS_IN_RECHNUNG_ABGERECHNET">
+            <summary> KORREKTER_PREIS_IN_RECHNUNG_ABGERECHNET </summary>
+            <remarks>A09</remarks>
+        </member>
+        <member name="F:BO4E.ENUM.Handelsunstimmigkeitsgrund.GUELTIGES_PREISBLATT_BLINDARBEIT_VERSENDET">
+            <summary> GUELTIGES_PREISBLATT_BLINDARBEIT_VERSENDET </summary>
+            <remarks>A12</remarks>
+        </member>
+        <member name="F:BO4E.ENUM.Handelsunstimmigkeitsgrund.KORREKTE_ARTIKEL_ID_FUER_ABRECHNUNG_STORNIERTER_SPERRAUFTRAG_ANGEGEBEN">
+            <summary> KORREKTE_ARTIKEL_ID_FUER_ABRECHNUNG_STORNIERTER_SPERRAUFTRAG_ANGEGEBEN </summary>
+            <remarks>A15</remarks>
         </member>
         <member name="T:BO4E.ENUM.Handelsunstimmigkeitstyp">
             <summary>
@@ -7584,7 +7652,7 @@
             <summary>Anzahl</summary>
         </member>
         <member name="F:BO4E.ENUM.Mengeneinheit.KUBIKMETER">
-            <summary>Kubikmeter (Gas)</summary>
+            <summary>Kubikmeter</summary>
         </member>
         <member name="F:BO4E.ENUM.Mengeneinheit.STUNDE">
             <summary>Stunde</summary>
@@ -7668,7 +7736,7 @@
             <summary>elektronischer_Aufsatz</summary>
         </member>
         <member name="F:BO4E.ENUM.Messpreistyp.SMART_METER_MESSPREIS_G2_5">
-            <summary>Smart_Meter_Messpreis_G2,5</summary>
+            <summary>Smart_Meter_Messpreis</summary>
         </member>
         <member name="F:BO4E.ENUM.Messpreistyp.SMART_METER_MESSPREIS_G4">
             <summary>Smart_Meter_Messpreis_G4</summary>
@@ -10160,6 +10228,12 @@
             </summary>
             <remarks> CAV+Z54 </remarks>
         </member>
+        <member name="F:BO4E.ENUM.WahlrechtPrognosegrundlage.DURCH_LF_NICHT_GEGEBEN">
+            <summary>
+            Wahlrecht durch LF gegeben
+            </summary>
+            <remarks> CAV+ZE2 </remarks>
+        </member>
         <member name="F:BO4E.ENUM.WahlrechtPrognosegrundlage.NICHT_WEGEN_GROSSEN_VERBRAUCHS">
             <summary>
             Wahlrecht nicht vorhanden wegen Verbrauch > 10.000 kWh/a
@@ -10210,7 +10284,7 @@
         </member>
         <member name="T:BO4E.ENUM.Zaehlertyp">
             <summary>
-                Bei diesem Enum handelt es sich die Abbildung von Zählertypen der Sparten Strom und Gas.
+                Bei diesem Enum handelt es sich die Abbildung von Zählertypen der Sparten Strom, Gas und Wasser.
             </summary>
         </member>
         <member name="F:BO4E.ENUM.Zaehlertyp.DREHSTROMZAEHLER">
@@ -10251,6 +10325,9 @@
         </member>
         <member name="F:BO4E.ENUM.Zaehlertyp.SONDERAUSSTATTUNG">
             <summary>Individuelle Abstimmung (Sonderausstattung)</summary>
+        </member>
+        <member name="F:BO4E.ENUM.Zaehlertyp.WASSERZAEHLER">
+            <summary>Wasserzähler</summary>
         </member>
         <member name="T:BO4E.ENUM.ZaehlertypSpezifikation">
             <summary>
@@ -10315,13 +10392,13 @@
         </member>
         <member name="F:BO4E.ENUM.ZaehlzeitdefinitionTyp.SONSTIGE">
             <summary>
-            Nachtspeicherheizung
+            sonstige Zaehlzeitdefinition
             </summary>
             <remarks>Z32</remarks>
         </member>
         <member name="F:BO4E.ENUM.ZaehlzeitdefinitionTyp.HOCHLASTZEITFENSTER">
             <summary>
-            Nachtspeicherheizung
+            Hochlastzeitfenster
             </summary>
             <remarks>Z35</remarks>
         </member>

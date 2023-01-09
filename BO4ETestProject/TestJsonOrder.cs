@@ -74,7 +74,6 @@ namespace TestBO4E
             typeof(Energiemix),
             typeof(ExterneReferenz),
             typeof(Fehler),
-            typeof(FehlerDetail),
             typeof(FehlerUrsache),
             typeof(GenericStringStringInfo),
             typeof(Geokoordinaten),

@@ -33,17 +33,17 @@ namespace BO4E.COM
         [CompatibilityLevel(CompatibilityLevel.Level240)]
         private DateTime _LieferungVon
         {
-            get => LieferungVon.UtcDateTime;
+            get => LieferungVon?.UtcDateTime ?? DateTime.MinValue;
             set => LieferungVon = DateTime.SpecifyKind(value, DateTimeKind.Utc);
         }
         /// <summary>Start der Lieferung für die abgerechnete Leistung.</summary>
-        [JsonProperty(PropertyName = "lieferungVon", Required = Required.Always, Order = 12)]
+        [JsonProperty(PropertyName = "lieferungVon", Required = Required.Default, Order = 12)]
         [JsonPropertyName("lieferungVon")]
         [JsonPropertyOrder(12)]
         [FieldName("deliveryStart", Language.EN)]
         [ProtoIgnore]
         [Newtonsoft.Json.JsonConverter(typeof(LenientDateTimeConverter))]
-        public DateTimeOffset LieferungVon { get; set; }
+        public DateTimeOffset? LieferungVon { get; set; }
 
 
         [System.Text.Json.Serialization.JsonIgnore]
@@ -52,17 +52,17 @@ namespace BO4E.COM
         [CompatibilityLevel(CompatibilityLevel.Level240)]
         private DateTime _LieferungBis
         {
-            get => LieferungBis.UtcDateTime;
+            get => LieferungBis?.UtcDateTime ?? DateTime.MinValue;
             set => LieferungBis = DateTime.SpecifyKind(value, DateTimeKind.Utc);
         }
         /// <summary>Ende der Lieferung für die abgerechnete Leistung.</summary>
-        [JsonProperty(PropertyName = "lieferungBis", Required = Required.Always, Order = 13)]
+        [JsonProperty(PropertyName = "lieferungBis", Required = Required.Default, Order = 13)]
         [JsonPropertyName("lieferungBis")]
         [JsonPropertyOrder(13)]
         [FieldName("deliveryEnd", Language.EN)]
         [ProtoIgnore]
         [Newtonsoft.Json.JsonConverter(typeof(LenientDateTimeConverter))]
-        public DateTimeOffset LieferungBis { get; set; }
+        public DateTimeOffset? LieferungBis { get; set; }
 
         /// <summary>Bezeichnung für die abgerechnete Position.</summary>
         [JsonProperty(PropertyName = "positionstext", Required = Required.Always, Order = 14)]
@@ -209,5 +209,28 @@ namespace BO4E.COM
         [NonOfficial(NonOfficialCategory.CUSTOMER_REQUIREMENTS)]
         [ProtoMember(28)]
         public string? ArtikelId { get; set; }
+
+        /// <summary>
+        ///     Um Qualifier 203 Ausführungsdatum/-zeit abzubilden
+        /// </summary>
+        [System.Text.Json.Serialization.JsonIgnore]
+        [Newtonsoft.Json.JsonIgnore]
+        [ProtoMember(29, Name = nameof(Ausfuehrungsdatum))]
+        [CompatibilityLevel(CompatibilityLevel.Level240)]
+        protected DateTime? _Ausfuehrungsdatum
+        {
+            get => Ausfuehrungsdatum?.UtcDateTime;
+            set => Ausfuehrungsdatum = value != null ? DateTime.SpecifyKind(value.Value, DateTimeKind.Utc) : null;
+        }
+
+        /// <summary>
+        /// Das Datum an dem die Leistung erbracht wurde.
+        /// </summary>
+        [JsonProperty("ausfuehrungsdatum", Order = 29, Required = Required.Default)]
+        [JsonPropertyName("ausfuehrungsdatum")]
+        [JsonPropertyOrder(29)]
+        [ProtoIgnore]
+        public DateTimeOffset? Ausfuehrungsdatum { get; set; }
+
     }
 }

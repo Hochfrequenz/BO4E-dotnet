@@ -3,8 +3,6 @@ using BO4E.meta;
 using Newtonsoft.Json;
 
 using ProtoBuf;
-
-using System.Collections.Generic;
 using System.Text.Json.Serialization;
 
 namespace BO4E.COM
@@ -36,7 +34,7 @@ namespace BO4E.COM
         public ENUM.ArtikelIdTyp? ArtikelIdTyp { get; set; }
 
         /// <summary>
-        ///     Anzahl der Positionen für diese ArtikelId
+        ///     Anzahl der Positionen fÃ¼r diese ArtikelId
         /// </summary>
         [JsonProperty(PropertyName = "anzahl", Order = 6, Required = Required.Default)]
         [JsonPropertyOrder(6)]
@@ -71,7 +69,7 @@ namespace BO4E.COM
         [ProtoMember(9)]
         public decimal? Abschlag { get; set; }
         /// <summary>
-        ///     Singuläre Betriebsmittel
+        ///     SingulÃ¤re Betriebsmittel
         /// </summary>
         [JsonProperty(PropertyName = "singulaereBetriebsmittel", Order = 10, Required = Required.Default)]
         [JsonPropertyOrder(10)]
@@ -80,7 +78,7 @@ namespace BO4E.COM
         public Menge? SingulaereBetriebsmittel { get; set; }
 
         /// <summary>
-        ///     Preis für singuläre Betriebsmittel
+        ///     Preis fÃ¼r singulÃ¤re Betriebsmittel
         /// </summary>
         [JsonProperty(PropertyName = "preisSingulaereBetriebsmittel", Order = 11, Required = Required.Default)]
         [JsonPropertyOrder(11)]

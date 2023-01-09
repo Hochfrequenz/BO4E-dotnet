@@ -18,15 +18,6 @@ namespace BO4E.COM
     public class Abweichung : COM
     {
         /// <summary>
-        /// Referenzierung auf eine vorherige COMDIS-Nachricht
-        /// </summary>
-        [JsonProperty(PropertyName = "referenz", Required = Required.Default, Order = 1)]
-        [JsonPropertyName("referenz")]
-        [NonOfficial(NonOfficialCategory.MISSING)]
-        [ProtoMember(1)]
-        public string? Referenz { get; set; }
-
-        /// <summary>
         /// Angabe des Abweichungsgrunds
         /// </summary>
         [JsonProperty(PropertyName = "abweichungsgrund", Required = Required.Default, Order = 3)]
@@ -61,15 +52,6 @@ namespace BO4E.COM
         [NonOfficial(NonOfficialCategory.MISSING)]
         [ProtoMember(6)]
         public List<string>? Abschlagsrechnungen { get; set; }
-
-        /// <summary>
-        /// Rückmeldungspositionen
-        /// </summary>
-        [JsonProperty(PropertyName = "positionen", Required = Required.Default, Order = 7)]
-        [JsonPropertyName("positionen")]
-        [NonOfficial(NonOfficialCategory.MISSING)]
-        [ProtoMember(7)]
-        public List<Rueckmeldungsposition>? Positionen { get; set; }
 
         /// <summary>
         /// Angabe des Abweichungsgrunds (Code)

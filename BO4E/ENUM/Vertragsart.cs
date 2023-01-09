@@ -1,3 +1,5 @@
+using System.Runtime.Serialization;
+
 namespace BO4E.ENUM
 {
     /// <summary>
@@ -8,26 +10,31 @@ namespace BO4E.ENUM
         /// <summary>
         ///     Energieliefervertrag
         /// </summary>
+        [EnumMember(Value = "ENERGIELIEFERVERTRAG")]
         ENERGIELIEFERVERTRAG,
 
         /// <summary>
         ///     Netznutzungsvertrag
         /// </summary>
+        [EnumMember(Value = "NETZNUTZUNGSVERTRAG")]
         NETZNUTZUNGSVERTRAG,
 
         /// <summary>
         ///     Bilanzierungsvertrag
         /// </summary>
+        [EnumMember(Value = "BILANZIERUNGSVERTRAG")]
         BILANZIERUNGSVERTRAG,
 
         /// <summary>
         ///     Messstellenabetriebsvertrag
         /// </summary>
+        [EnumMember(Value = "MESSSTELLENBETRIEBSVERTRAG")]
         MESSSTELLENBETRIEBSVERTRAG,
 
         /// <summary>
         ///     Bündelvertrag
         /// </summary>
-        BUENDELVERTRAG
+        [EnumMember(Value = "BUENDELVERTRAG")]
+        BUENDELVERTRAG,
     }
 }
