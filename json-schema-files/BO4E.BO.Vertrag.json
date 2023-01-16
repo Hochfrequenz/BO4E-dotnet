@@ -638,6 +638,19 @@
         "null"
       ],
       "properties": {
+        "timestamp": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "format": "date-time"
+        },
+        "guid": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
         "beschreibung": {
           "type": [
             "string",
@@ -740,19 +753,6 @@
         "beinhaltetSingulaerGenutzteBetriebsmittel": {
           "type": [
             "boolean",
-            "null"
-          ]
-        },
-        "timestamp": {
-          "type": [
-            "string",
-            "null"
-          ],
-          "format": "date-time"
-        },
-        "guid": {
-          "type": [
-            "string",
             "null"
           ]
         }

@@ -1,14 +1,19 @@
+using BO4E.BO;
+using BO4E.BO.LogObject;
+using BO4E.COM;
+
+using FluentAssertions;
+
+using Microsoft.VisualStudio.TestTools.UnitTesting;
+
+using Newtonsoft.Json;
+
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using System.Text.Json.Serialization;
-using BO4E.BO;
-using BO4E.BO.LogObject;
-using BO4E.COM;
-using FluentAssertions;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Newtonsoft.Json;
+
 using JsonIgnoreAttribute = System.Text.Json.Serialization.JsonIgnoreAttribute;
 
 namespace TestBO4E
@@ -47,7 +52,6 @@ namespace TestBO4E
             typeof(Energiemenge),
             typeof(Entsperrauftrag),
             typeof(Marktteilnehmer),
-            typeof(Handelsunstimmigkeit),
             typeof(Kosten),
             typeof(LogObject),
             typeof(PreisblattDienstleistung),
@@ -61,7 +65,6 @@ namespace TestBO4E
 
             // COMponents
             typeof(Abweichung),
-            typeof(Angebotsposition),
             typeof(AufAbschlag),
             typeof(Aufgabe),
             typeof(Ausschreibungsdetail),
@@ -114,7 +117,6 @@ namespace TestBO4E
             typeof(Tarifpreisposition),
             typeof(Unterschrift),
             typeof(Verbrauch),
-            typeof(Vertragskonditionen),
             typeof(Verwendungszweck),
             typeof(Vertragsteil),
 
