@@ -404,7 +404,22 @@ enum Geraetemerkmal {
    Geraetemerkmal_SYSTEM_MU = 37;
    Geraetemerkmal_UNBESTIMMT = 38;
    Geraetemerkmal_WASSER_MWZW = 39;
-   Geraetemerkmal_WASSER_WZ01 = 40;
+   Geraetemerkmal_WASSER_WZWW = 40;
+   Geraetemerkmal_WASSER_WZ01 = 41;
+   Geraetemerkmal_WASSER_WZ02 = 42;
+   Geraetemerkmal_WASSER_WZ03 = 43;
+   Geraetemerkmal_WASSER_WZ04 = 44;
+   Geraetemerkmal_WASSER_WZ05 = 45;
+   Geraetemerkmal_WASSER_WZ06 = 46;
+   Geraetemerkmal_WASSER_WZ07 = 47;
+   Geraetemerkmal_WASSER_WZ08 = 48;
+   Geraetemerkmal_WASSER_WZ09 = 49;
+   Geraetemerkmal_WASSER_WZ10 = 50;
+   Geraetemerkmal_WASSER_VWZ04 = 51;
+   Geraetemerkmal_WASSER_VWZ05 = 52;
+   Geraetemerkmal_WASSER_VWZ06 = 53;
+   Geraetemerkmal_WASSER_VWZ07 = 54;
+   Geraetemerkmal_WASSER_VWZ10 = 55;
 }
 enum Geraetetyp {
    option (.protobuf_net.enumopt).namespace = "BO4E.ENUM";
