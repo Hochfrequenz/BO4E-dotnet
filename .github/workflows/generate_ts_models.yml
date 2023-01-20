@@ -3,6 +3,8 @@ on:
   push:
     paths:
       - "json-schema-files/**.json"
+    branches:
+      - main  
 jobs:
   generate:
     name: Generate TypeScript Classes from JSONSchemas
