@@ -34,5 +34,5 @@ jobs:
           target-directory: "src"
           destination-github-username: "Hochfrequenz"
           destination-repository-name: "bo4e-dotnet-ts-models"
-          user-email: bo4e-dtoetn@hochfrequenz.de
+          user-email: bo4e-dotnet@hochfrequenz.de
           target-branch: main
