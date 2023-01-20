@@ -1,11 +1,10 @@
 name: Generate TypeScript Classes from JSONSchemas
 on:
   push:
-    {}
-    #paths:
-    #  - "json-schema-files/**.json"
-    #branches:
-    #  - main
+    paths:
+      - "json_schemas/**.json"
+    branches:
+      - main
 jobs:
   generate:
     name: Generate TypeScript Classes from JSONSchemas
