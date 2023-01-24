@@ -157,7 +157,8 @@ Find previous workflow runs [here](https://github.com/Hochfrequenz/BO4E-dotnet/a
 - [Golang](https://github.com/Hochfrequenz/go-bo4e/)
 - [Kotlin](https://github.com/openEnWi/ktBO4E-lib)
 - [Python](https://github.com/Hochfrequenz/BO4E-python/)
-- [TypeScript](https://github.com/openEnWi/tsBO4E-lib)
+- [TypeScript](https://github.com/Hochfrequenz/bo4e-dotnet-ts-models), inherently consistent with this .NET library
+- [TypeScript](https://github.com/openEnWi/tsBO4E-lib), independent of this library
 
 ## Contributing
 

@@ -1,0 +1,40 @@
+name: Generate TypeScript Classes from JSONSchemas
+on:
+  push:
+    paths:
+      - "json_schemas/**.json"
+    branches:
+      - main
+jobs:
+  generate:
+    name: Generate TypeScript Classes from JSONSchemas
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out Git repository
+        uses: actions/checkout@v3
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 14
+      - name: Install Code Generator
+        run: npm install json-schema-to-typescript -g
+      - name: Run Code Generator
+        run: json2ts -i 'json-schema-files/**.json' -o ts_models/
+      - name: Upload TypeScript Files
+        uses: actions/upload-artifact@master
+        with:
+          name: TypeScriptClasses
+          path: ts_models
+      - name: Push ts_models content to type script models repo
+        uses: cpina/github-action-push-to-another-repository@v1.5.1
+        env:
+          API_TOKEN_GITHUB: ${{ secrets.TS_MODELS_PUSH_TOKEN }} # this token expires on 2023-12-15
+          # token with repo scope
+          # https://github.com/Hochfrequenz/BO4E-dotnet/settings/secrets/actions/TS_MODELS_PUSH_TOKEN
+        with:
+          source-directory: "ts_models"
+          target-directory: "src"
+          destination-github-username: "Hochfrequenz"
+          destination-repository-name: "bo4e-dotnet-ts-models"
+          user-email: bo4e-dotnet@hochfrequenz.de
+          target-branch: main
