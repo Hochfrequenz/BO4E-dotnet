@@ -18,14 +18,14 @@ namespace BO4E.COM
         public decimal? Wert { get; set; }
 
         /// <summary>Währungseinheit für den Preis, z.B. Euro oder Ct. Details <see cref="Waehrungseinheit" /></summary>
-        [JsonProperty(PropertyName = "einheit", Required = Required.Always)]
+        [JsonProperty(PropertyName = "einheit", Required = Required.Default)]
         [JsonPropertyName("einheit")]
         [FieldName("currency", Language.EN)]
         [ProtoMember(4)]
         public Waehrungseinheit? Einheit { get; set; }
 
         /// <summary>Angabe, für welche Bezugsgröße der Preis gilt. Z.B. kWh. <seealso cref="Mengeneinheit" /></summary>
-        [JsonProperty(PropertyName = "bezugswert", Required = Required.Always)]
+        [JsonProperty(PropertyName = "bezugswert", Required = Required.Default)]
         [JsonPropertyName("bezugswert")]
         [FieldName("reference", Language.EN)]
         [ProtoMember(5)]
