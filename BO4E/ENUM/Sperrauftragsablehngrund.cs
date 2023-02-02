@@ -66,27 +66,27 @@ namespace BO4E.ENUM
         /// <remarks>EBD 0470 A99</remarks>
         [EnumMember(Value = "ANDERER_FEHLER")]
         ANDERER_FEHLER,
-        
+
         /// <summary>
         /// Sperrauftrag für Marktlokation liegt bereits vor.
         /// </summary>
         /// <remarks>FV2304 EBD 0470 A10</remarks>
         [EnumMember(Value = "LIEGT_BETREITS_VOR")]
         LIEGT_BETREITS_VOR,
-        
+
         /// <summary>
         /// Zukünftiger bestätigter Lieferbeginn liegt gegenüber anderem Lieferanten bereits vor. 
         /// </summary>
         /// <remarks>FV2304 EBD 0470 A11</remarks>
         [EnumMember(Value = "ANDERER_ZUKUENFITGER_LIEFERANT")]
         ANDERER_ZUKUENFITGER_LIEFERANT,
-        
+
         /// <summary>
         /// Im Ausführungszeitraum liegt bereits ein bestätigter Lieferbeginn gegenüber dem beauftragenden LF vor.
         /// </summary>
         /// <remarks>FV2304 EBD 0470 A12</remarks>
         [EnumMember(Value = "BESTAETIGTER_LIEFERBEGINN")]
         BESTAETIGTER_LIEFERBEGINN
-        
+
     }
 }
