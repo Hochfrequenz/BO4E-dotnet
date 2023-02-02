@@ -79,7 +79,7 @@ namespace BO4E.ENUM
         /// </summary>
         /// <remarks>FV2304 EBD 0470 A11</remarks>
         [EnumMember(Value = "ANDERER_ZUKUENFTIGER_LIEFERANT")]
-        ANDERER_ZUKUENFITGER_LIEFERANT,
+        ANDERER_ZUKUENFTIGER_LIEFERANT,
 
         /// <summary>
         /// Im Ausführungszeitraum liegt bereits ein bestätigter Lieferbeginn gegenüber dem beauftragenden LF vor.
