@@ -78,7 +78,7 @@ namespace BO4E.ENUM
         /// Zukünftiger bestätigter Lieferbeginn liegt gegenüber anderem Lieferanten bereits vor. 
         /// </summary>
         /// <remarks>FV2304 EBD 0470 A11</remarks>
-        [EnumMember(Value = "ANDERER_ZUKUENFITGER_LIEFERANT")]
+        [EnumMember(Value = "ANDERER_ZUKUENFTIGER_LIEFERANT")]
         ANDERER_ZUKUENFITGER_LIEFERANT,
 
         /// <summary>
