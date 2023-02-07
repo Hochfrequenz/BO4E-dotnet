@@ -71,8 +71,8 @@ namespace BO4E.ENUM
         /// Sperrauftrag für Marktlokation liegt bereits vor.
         /// </summary>
         /// <remarks>FV2304 EBD 0470 A10</remarks>
-        [EnumMember(Value = "LIEGT_BETREITS_VOR")]
-        LIEGT_BETREITS_VOR,
+        [EnumMember(Value = "LIEGT_BEREITS_VOR")]
+        LIEGT_BEREITS_VOR,
 
         /// <summary>
         /// Zukünftiger bestätigter Lieferbeginn liegt gegenüber anderem Lieferanten bereits vor. 
