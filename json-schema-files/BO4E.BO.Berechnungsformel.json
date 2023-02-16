@@ -1,0 +1,227 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "definitions": {
+    "ExterneReferenz": {
+      "type": [
+        "object",
+        "null"
+      ],
+      "properties": {
+        "exRefName": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "exRefWert": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "timestamp": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "format": "date-time"
+        },
+        "guid": {
+          "type": [
+            "string",
+            "null"
+          ]
+        }
+      }
+    },
+    "Rechenschritt": {
+      "type": [
+        "object",
+        "null"
+      ],
+      "properties": {
+        "rechenschrittBestandteilId": {
+          "type": "integer"
+        },
+        "referenzRechenschrittID": {
+          "type": "integer"
+        },
+        "timestamp": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "format": "date-time"
+        },
+        "guid": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "operation": {
+          "type": "string",
+          "enum": [
+            "ADDITION",
+            "SUBTRAKTION",
+            "MULTIPLIKATION",
+            "DIVISION",
+            "DIVIDEND",
+            "POSITIVWERT"
+          ]
+        },
+        "verlustfaktorTrafo": {
+          "type": [
+            "number",
+            "null"
+          ]
+        },
+        "verlustfaktorLeitung": {
+          "type": [
+            "number",
+            "null"
+          ]
+        },
+        "messlokationId": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "weitererRechenschritt": {
+          "$ref": "#/definitions/Rechenschritt"
+        }
+      },
+      "required": [
+        "rechenschrittBestandteilId",
+        "referenzRechenschrittID",
+        "operation"
+      ]
+    },
+    "Verwendungszweck": {
+      "type": "object",
+      "properties": {
+        "marktrolle": {
+          "type": "string",
+          "enum": [
+            "NB",
+            "LF",
+            "MSB",
+            "MDL",
+            "DL",
+            "BKV",
+            "BIKO",
+            "UENB",
+            "KUNDE_SELBST_NN",
+            "MGV",
+            "EIV",
+            "RB",
+            "KUNDE",
+            "INTERESSENT",
+            "GMSB"
+          ]
+        },
+        "zweck": {
+          "type": [
+            "array",
+            "null"
+          ],
+          "items": {
+            "type": "string",
+            "enum": [
+              "NETZNUTZUNGSABRECHNUNG",
+              "BILANZKREISABRECHNUNG",
+              "MEHRMINDERMBENGENABRECHNUNG",
+              "ENDKUNDENABRECHNUNG",
+              "UEBERMITTLUNG_AN_DAS_HKNR",
+              "ERMITTLUNG_AUSGEGLICHENHEIT_BILANZKREIS"
+            ]
+          }
+        },
+        "timestamp": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "format": "date-time"
+        },
+        "guid": {
+          "type": [
+            "string",
+            "null"
+          ]
+        }
+      },
+      "required": [
+        "marktrolle"
+      ]
+    }
+  },
+  "type": "object",
+  "properties": {
+    "boTyp": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "versionStruktur": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "timestamp": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "format": "date-time"
+    },
+    "externeReferenzen": {
+      "type": [
+        "array",
+        "null"
+      ],
+      "items": {
+        "$ref": "#/definitions/ExterneReferenz"
+      }
+    },
+    "beginndatum": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "guid": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "notwendigkeit": {
+      "type": "string",
+      "enum": [
+        "BERECHNUNGSFORMEL_NOTWENDIG",
+        "BERECHNUNGSFORMEL_MUSS_ANGEFRAGT_WERDEN",
+        "BERECHNUNGSFORMEL_TRIVIAL",
+        "BERECHNUNGSFORMEL_NICHT_NOTWENDIG"
+      ]
+    },
+    "rechenschrittId": {
+      "type": [
+        "integer",
+        "null"
+      ]
+    },
+    "verwendungszweck": {
+      "$ref": "#/definitions/Verwendungszweck"
+    },
+    "rechenschritt": {
+      "$ref": "#/definitions/Rechenschritt"
+    }
+  },
+  "required": [
+    "beginndatum",
+    "notwendigkeit",
+    "verwendungszweck"
+  ]
+}

@@ -1,11 +1,177 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema#",
   "definitions": {
-    "Verbrauch": {
-      "type": ["object", "null"],
+    "ExterneReferenz": {
+      "type": [
+        "object",
+        "null"
+      ],
       "properties": {
+        "exRefName": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "exRefWert": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "timestamp": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "format": "date-time"
+        },
+        "guid": {
+          "type": [
+            "string",
+            "null"
+          ]
+        }
+      }
+    },
+    "StatusZusatzInformation": {
+      "type": [
+        "object",
+        "null"
+      ],
+      "properties": {
+        "timestamp": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "format": "date-time"
+        },
+        "art": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "enum": [
+            null,
+            "VERTRAG",
+            "MESSWERTQUALITAET",
+            "MESSKLASSIFIZIERUNG",
+            "PLAUSIBILISIERUNGSHINWEIS",
+            "ERSATZWERTBILDUNGSVERFAHREN",
+            "GRUND_ERSATZWERTBILDUNGSVERFAHREN",
+            "KORREKTURGRUND",
+            "GASQUALITAET"
+          ]
+        },
+        "guid": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "status": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "enum": [
+            null,
+            "TARIF_1",
+            "TARIF_2",
+            "TARIF_3",
+            "TARIF_4",
+            "TARIF_5",
+            "TARIF_6",
+            "TARIF_7",
+            "TARIF_8",
+            "TARIF_9",
+            "ZAEHLERSTAND_ZUM_BEGINN_DER_ANGEGEBENEN_ENERGIEMENGE_VORHANDEN_UND_KOMMUNIZIERT",
+            "ZAEHLERSTAND_ZUM_ENDE_DER_ANGEGEBENEN_ENERGIEMENGE_VORHANDEN_UND_KOMMUNIZIERT",
+            "ZAEHLERSTAND_ZUM_BEGINN_DER_ANGEGEBENEN_ENERGIEMENGE_NICHT_VORHANDEN_DA_MENGENABGRENZUNG",
+            "ZAEHLERSTAND_ZUM_ENDE_DER_ANGEGEBENEN_ENERGIEMENGE_NICHT_VORHANDEN_DA_MENGENABGRENZUNG",
+            "KEIN_ZUGANG",
+            "KOMMUNIKATIONSSTOERUNG",
+            "NETZAUSFALL",
+            "SPANNUNGSAUSFALL",
+            "STATUS_GERAETEWECHSEL",
+            "KALIBRIERUNG",
+            "GERAET_ARBEITET_AUSSERHALB_DER_BETRIEBSBEDINGUNGEN",
+            "MESSEINRICHTUNG_GESTOERT_DEFEKT",
+            "UNSICHERHEIT_MESSUNG",
+            "KUNDENSELBSTABLESUNG",
+            "LEERSTAND",
+            "REALER_ZAEHLERUEBERLAUF_GEPRUEFT",
+            "PLAUSIBEL_WG_KONTROLLABLESUNG",
+            "PLAUSIBEL_WG_KUNDENHINWEIS",
+            "VERGLEICHSMESSUNG_GEEICHT",
+            "VERGLEICHSMESSUNG_NICHT_GEEICHT",
+            "MESSWERTNACHBILDUNG_AUS_GEEICHTEN_WERTEN",
+            "MESSWERTNACHBILDUNG_AUS_NICHT_GEEICHTEN_WERTEN",
+            "INTERPOLATION",
+            "HALTEWERT",
+            "BILANZIERUNG_NETZABSCHNITT",
+            "HISTORISCHE_MESSWERTE",
+            "BERUECKSICHTIGUNG_STOERMENGENZAEHLWERK",
+            "MENGENUMWERTUNG_VOLLSTAENDIG",
+            "UHRZEIT_GESTELLT_SYNCHRONISATION",
+            "MESSWERT_UNPLAUSIBEL",
+            "FALSCHER_WANDLERFAKTOR",
+            "FEHLERHAFTE_ABLESUNG",
+            "AENDERUNG_DER_BERECHNUNG",
+            "UMBAU_DER_MESSLOKATION",
+            "DATENBEARBEITUNGSFEHLER",
+            "BRENNWERTKORREKTUR",
+            "Z_ZAHL_KORREKTUR",
+            "STOERUNG_DEFEKT_MESSEINRICHTUNG",
+            "AENDERUNG_TARIFSCHALTZEITEN",
+            "TARIFSCHALTGERAET_DEFEKT",
+            "AUSTAUSCH_DES_ERSATZWERTES",
+            "IMPULSWERTIGKEIT_NICHT_AUSREICHEND",
+            "UMSTELLUNG_GASQUALITAET",
+            "STATISTISCHE_METHODE",
+            "ENERGIEMENGE_IN_UNGEMESSENEM_ZEITINTERVALL",
+            "ENERGIEMENGE_AUS_DEM_UNGEPAIRTEN_ZEITINTERVALL",
+            "AUFTEILUNG",
+            "VERWENDUNG_VON_WERTEN_DES_STOERMENGENZAEHLWERKS",
+            "UMGANGS_UND_KORREKTURMENGEN",
+            "WARTUNGSARBEITEN_AN_GEEICHTEM_MESSGERAET",
+            "GESTOERTE_WERTE",
+            "WARTUNGSARBEITEN_AN_EICHRECHTSKONFORMEN_MESSGERAETEN",
+            "KONSISTENZ_UND_SYNCHRONPRUEFUNG",
+            "RECHENWERT",
+            "ANGABEN_MESSLOKATION",
+            "BASIS_MME",
+            "GRUND_ANGABEN_MESSLOKATION"
+          ]
+        }
+      }
+    },
+    "Verbrauch": {
+      "type": [
+        "object",
+        "null"
+      ],
+      "properties": {
+        "startdatum": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "format": "date-time"
+        },
+        "enddatum": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "format": "date-time"
+        },
         "type": {
-          "type": ["string", "null"],
+          "type": [
+            "string",
+            "null"
+          ],
           "enum": [
             null,
             "ARBEITLEISTUNGTAGESPARAMETERABHMALO",
@@ -13,30 +179,86 @@
             "TUMKUNDENWERT"
           ]
         },
+        "tarifstufe": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "enum": [
+            null,
+            "TARIFSTUFE_0",
+            "TARIFSTUFE_1",
+            "TARIFSTUFE_2",
+            "TARIFSTUFE_3",
+            "TARIFSTUFE_4",
+            "TARIFSTUFE_5",
+            "TARIFSTUFE_6",
+            "TARIFSTUFE_7",
+            "TARIFSTUFE_8",
+            "TARIFSTUFE_9"
+          ]
+        },
+        "timestamp": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "format": "date-time"
+        },
         "guid": {
-          "type": ["string", "null"]
+          "type": [
+            "string",
+            "null"
+          ]
         },
         "wertermittlungsverfahren": {
-          "type": "string",
-          "enum": ["PROGNOSE", "MESSUNG"]
+          "type": [
+            "string",
+            "null"
+          ],
+          "enum": [
+            null,
+            "PROGNOSE",
+            "MESSUNG"
+          ]
+        },
+        "messwertstatus": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "enum": [
+            null,
+            "ABGELESEN",
+            "ERSATZWERT",
+            "VOLAEUFIGERWERT",
+            "ANGABE_FUER_LIEFERSCHEIN",
+            "VORSCHLAGSWERT",
+            "NICHT_VERWENDBAR",
+            "PROGNOSEWERT",
+            "ENERGIEMENGESUMMIERT",
+            "FEHLT"
+          ]
+        },
+        "statuszusatzinformationen": {
+          "type": [
+            "array",
+            "null"
+          ],
+          "items": {
+            "$ref": "#/definitions/StatusZusatzInformation"
+          }
         },
         "obiskennzahl": {
           "type": "string"
         },
-        "startdatum": {
-          "type": "string",
-          "format": "date-time"
-        },
         "wert": {
           "type": "number"
-        },
-        "enddatum": {
-          "type": "string",
-          "format": "date-time"
         },
         "einheit": {
           "type": "string",
           "enum": [
+            "ZERO",
             "WH",
             "KW",
             "ANZAHL",
@@ -46,6 +268,7 @@
             "MONAT",
             "VAR",
             "VARH",
+            "KWHK",
             "JAHR",
             "KWH",
             "MW",
@@ -53,10 +276,23 @@
             "KVARH",
             "MWH"
           ]
+        },
+        "nutzungszeitpunkt": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "format": "date-time"
+        },
+        "ausfuehrungszeitpunkt": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "format": "date-time"
         }
       },
       "required": [
-        "wertermittlungsverfahren",
         "obiskennzahl",
         "wert",
         "einheit"
@@ -65,30 +301,65 @@
   },
   "type": "object",
   "properties": {
-    "guid": {
-      "type": ["string", "null"]
-    },
     "boTyp": {
-      "type": ["string", "null"]
+      "type": [
+        "string",
+        "null"
+      ]
     },
     "versionStruktur": {
-      "type": "integer"
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "timestamp": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "format": "date-time"
+    },
+    "externeReferenzen": {
+      "type": [
+        "array",
+        "null"
+      ],
+      "items": {
+        "$ref": "#/definitions/ExterneReferenz"
+      }
+    },
+    "guid": {
+      "type": [
+        "string",
+        "null"
+      ]
     },
     "lokationsId": {
       "type": "string",
       "default": "|null|"
     },
-    "lokationstyp": {
+    "lokationsTyp": {
       "type": "string",
-      "enum": ["MaLo", "MeLo"]
+      "enum": [
+        "MALO",
+        "MELO"
+      ]
     },
     "energieverbrauch": {
-      "type": ["array", "null"],
+      "type": [
+        "array",
+        "null"
+      ],
       "items": {
         "$ref": "#/definitions/Verbrauch"
       },
       "minItems": 1
     }
   },
-  "required": ["lokationsId", "lokationstyp", "energieverbrauch"]
+  "required": [
+    "lokationsId",
+    "lokationsTyp",
+    "energieverbrauch"
+  ]
 }

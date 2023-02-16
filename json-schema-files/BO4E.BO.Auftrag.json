@@ -377,190 +377,62 @@
         }
       }
     },
-    "Geschaeftspartner": {
+    "Preis": {
       "type": [
         "object",
         "null"
       ],
       "properties": {
-        "boTyp": {
-          "type": [
-            "string",
-            "null"
-          ]
+        "wert": {
+          "type": "number"
         },
-        "versionStruktur": {
-          "type": [
-            "string",
-            "null"
-          ]
-        },
-        "timestamp": {
-          "type": [
-            "string",
-            "null"
-          ],
-          "format": "date-time"
-        },
-        "externeReferenzen": {
-          "type": [
-            "array",
-            "null"
-          ],
-          "items": {
-            "$ref": "#/definitions/ExterneReferenz"
-          }
-        },
-        "guid": {
-          "type": [
-            "string",
-            "null"
-          ]
-        },
-        "anrede": {
+        "einheit": {
           "type": [
             "string",
             "null"
           ],
           "enum": [
             null,
-            "HERR",
-            "FRAU",
-            "EHELEUTE",
-            "FIRMA",
-            "INDIVIDUELL",
-            "FAMILIE",
-            "ERBENGEMEINSCHAFT",
-            "WOHNGEMEINSCHAFT",
-            "GRUNDSTUECKGEMEINSCHAFT",
-            "DR"
+            "EUR",
+            "CT"
           ]
         },
-        "title": {
+        "bezugswert": {
           "type": [
             "string",
-            "null"
-          ]
-        },
-        "name1": {
-          "type": [
-            "string",
-            "null"
-          ]
-        },
-        "name2": {
-          "type": [
-            "string",
-            "null"
-          ]
-        },
-        "name3": {
-          "type": [
-            "string",
-            "null"
-          ]
-        },
-        "gewerbekennzeichnung": {
-          "type": "boolean"
-        },
-        "hrnummer": {
-          "type": [
-            "string",
-            "null"
-          ]
-        },
-        "amtsgericht": {
-          "type": [
-            "string",
-            "null"
-          ]
-        },
-        "kontaktweg": {
-          "type": [
-            "array",
             "null"
           ],
-          "items": {
-            "type": "string",
-            "enum": [
-              "ANSCHREIBEN",
-              "TELEFONAT",
-              "FAX",
-              "E_MAIL",
-              "SMS"
-            ]
-          }
-        },
-        "umsatzsteuerId": {
-          "type": [
-            "string",
-            "null"
-          ]
-        },
-        "glaeubigerId": {
-          "type": [
-            "string",
-            "null"
-          ]
-        },
-        "eMailAdresse": {
-          "type": [
-            "string",
-            "null"
-          ]
-        },
-        "website": {
-          "type": [
-            "string",
-            "null"
-          ]
-        },
-        "geschaeftspartnerrolle": {
-          "type": [
-            "array",
-            "null"
-          ],
-          "items": {
-            "type": "string",
-            "enum": [
-              "LIEFERANT",
-              "DIENSTLEISTER",
-              "KUNDE",
-              "INTERESSENT",
-              "MARKTPARTNER"
-            ]
-          }
-        },
-        "partneradresse": {
-          "$ref": "#/definitions/Adresse"
-        }
-      },
-      "required": [
-        "gewerbekennzeichnung"
-      ]
-    },
-    "Rufnummer": {
-      "type": [
-        "object",
-        "null"
-      ],
-      "properties": {
-        "nummerntyp": {
-          "type": "string",
           "enum": [
-            "RUF_ZENTRALE",
-            "FAX_ZENTRALE",
-            "SAMMELRUF",
-            "SAMMELFAX",
-            "ABTEILUNGRUF",
-            "ABTEILUNGFAX",
-            "RUF_DURCHWAHL",
-            "FAX_DURCHWAHL",
-            "MOBIL_NUMMER"
+            null,
+            "ZERO",
+            "WH",
+            "KW",
+            "ANZAHL",
+            "KUBIKMETER",
+            "STUNDE",
+            "TAG",
+            "MONAT",
+            "VAR",
+            "VARH",
+            "KWHK",
+            "JAHR",
+            "KWH",
+            "MW",
+            "KVAR",
+            "KVARH",
+            "MWH"
           ]
         },
-        "rufnummer": {
-          "type": "string"
+        "status": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "enum": [
+            null,
+            "VORLAEUFIG",
+            "ENDGUELTIG"
+          ]
         },
         "timestamp": {
           "type": [
@@ -577,62 +449,51 @@
         }
       },
       "required": [
-        "nummerntyp",
-        "rufnummer"
+        "wert"
       ]
-    },
-    "Zustaendigkeit": {
-      "type": [
-        "object",
-        "null"
-      ],
-      "properties": {
-        "jobtitel": {
-          "type": [
-            "string",
-            "null"
-          ]
-        },
-        "abteilung": {
-          "type": [
-            "string",
-            "null"
-          ]
-        },
-        "themengebiet": {
-          "type": [
-            "string",
-            "null"
-          ]
-        },
-        "timestamp": {
-          "type": [
-            "string",
-            "null"
-          ],
-          "format": "date-time"
-        },
-        "guid": {
-          "type": [
-            "string",
-            "null"
-          ]
-        }
-      }
     }
   },
   "type": "object",
   "properties": {
+    "ausfuehrungsdatum": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "format": "date-time"
+    },
     "boTyp": {
       "type": [
         "string",
         "null"
       ]
     },
+    "fertigstellungsdatum": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "format": "date-time"
+    },
     "versionStruktur": {
       "type": [
         "string",
         "null"
+      ]
+    },
+    "sparte": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "enum": [
+        null,
+        "STROM",
+        "GAS",
+        "FERNWAERME",
+        "NAHWAERME",
+        "WASSER",
+        "ABWASSER"
       ]
     },
     "timestamp": {
@@ -641,6 +502,9 @@
         "null"
       ],
       "format": "date-time"
+    },
+    "lieferanschrift": {
+      "$ref": "#/definitions/Adresse"
     },
     "externeReferenzen": {
       "type": [
@@ -651,96 +515,35 @@
         "$ref": "#/definitions/ExterneReferenz"
       }
     },
+    "marktlokationsId": {
+      "type": "string"
+    },
     "guid": {
       "type": [
         "string",
         "null"
       ]
     },
-    "anrede": {
-      "type": [
-        "string",
-        "null"
-      ],
-      "enum": [
-        null,
-        "HERR",
-        "FRAU",
-        "EHELEUTE",
-        "FIRMA",
-        "INDIVIDUELL",
-        "FAMILIE",
-        "ERBENGEMEINSCHAFT",
-        "WOHNGEMEINSCHAFT",
-        "GRUNDSTUECKGEMEINSCHAFT",
-        "DR"
-      ]
-    },
-    "inviduelleAnrede": {
-      "type": [
-        "string",
-        "null"
-      ]
-    },
-    "titel": {
-      "type": [
-        "string",
-        "null"
-      ],
-      "enum": [
-        null,
-        "DR",
-        "PROF",
-        "PROF_DR"
-      ]
-    },
-    "vorname": {
-      "type": [
-        "string",
-        "null"
-      ]
-    },
-    "nachname": {
-      "type": [
-        "string",
-        "null"
-      ]
-    },
-    "eMailAdresse": {
-      "type": [
-        "string",
-        "null"
-      ]
-    },
-    "kommentar": {
-      "type": [
-        "string",
-        "null"
-      ]
-    },
-    "geschaeftspartner": {
-      "$ref": "#/definitions/Geschaeftspartner"
-    },
-    "adresse": {
-      "$ref": "#/definitions/Adresse"
-    },
-    "rufnummern": {
+    "bemerkungen": {
       "type": [
         "array",
         "null"
       ],
       "items": {
-        "$ref": "#/definitions/Rufnummer"
+        "type": [
+          "string",
+          "null"
+        ]
       }
     },
-    "zustaendigkeit": {
-      "type": [
-        "array",
-        "null"
-      ],
-      "items": {
-        "$ref": "#/definitions/Zustaendigkeit"
-      }
+    "mindestpreis": {
+      "$ref": "#/definitions/Preis"
+    },
+    "hoechstpreis": {
+      "$ref": "#/definitions/Preis"
     }
-  }
+  },
+  "required": [
+    "marktlokationsId"
+  ]
 }
