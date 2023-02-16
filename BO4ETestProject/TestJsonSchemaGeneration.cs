@@ -31,13 +31,21 @@ namespace TestBO4E
                 "Illegal types must result in a ArgumentException.");
         }
 
+
+        
         [TestMethod]
-        public void TestJSchemaFileGenerationBo()
+        [DataRow(0)]
+        [DataRow(10)]
+        [DataRow(20)]
+        [DataRow(30)]
+        [DataRow(40)]
+        
+        public void TestJSchemaFileGenerationBo(int offset)
         {
-            try
+            //try
             {
                 foreach (var type in typeof(BusinessObject).Assembly.GetTypes()
-                    .Where(t => t.IsSubclassOf(typeof(BusinessObject))).Reverse())
+                    .Where(t => t.IsSubclassOf(typeof(BusinessObject))).Skip(offset))
                 {
                     var schema = BusinessObject.GetJsonSchema(type);
                     Assert.IsNotNull(schema);
@@ -51,10 +59,11 @@ namespace TestBO4E
                     File.WriteAllText(path, schema.ToString(SchemaVersion.Draft7), utf8WithoutByteOrderMark);
                 }
             }
-            catch (JSchemaException)
+            /*catch (JSchemaException jse)
             {
+                Console.Out.WriteLine(jse.Message);
                 // thats life. pay for it if you'd like to :P
-            }
+            }*/
         }
     }
 }
