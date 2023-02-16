@@ -2,8 +2,24 @@
   "$schema": "http://json-schema.org/draft-07/schema#",
   "definitions": {
     "Adresse": {
-      "type": ["object", "null"],
+      "type": [
+        "object",
+        "null"
+      ],
       "properties": {
+        "timestamp": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "format": "date-time"
+        },
+        "guid": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
         "postleitzahl": {
           "type": "string"
         },
@@ -11,22 +27,40 @@
           "type": "string"
         },
         "strasse": {
-          "type": ["string", "null"]
+          "type": [
+            "string",
+            "null"
+          ]
         },
         "hausnummer": {
-          "type": ["string", "null"]
+          "type": [
+            "string",
+            "null"
+          ]
         },
         "postfach": {
-          "type": ["string", "null"]
+          "type": [
+            "string",
+            "null"
+          ]
         },
         "adresszusatz": {
-          "type": ["string", "null"]
+          "type": [
+            "string",
+            "null"
+          ]
         },
         "coErgaenzung": {
-          "type": ["string", "null"]
+          "type": [
+            "string",
+            "null"
+          ]
         },
         "landescode": {
-          "type": ["string", "null"],
+          "type": [
+            "string",
+            "null"
+          ],
           "enum": [
             null,
             "AC",
@@ -298,70 +332,191 @@
             "ZW"
           ]
         },
-        "guid": {
-          "type": ["string", "null"]
+        "ortsteil": {
+          "type": [
+            "string",
+            "null"
+          ]
         }
       },
-      "required": ["postleitzahl", "ort"]
+      "required": [
+        "postleitzahl",
+        "ort"
+      ]
+    },
+    "ExterneReferenz": {
+      "type": [
+        "object",
+        "null"
+      ],
+      "properties": {
+        "exRefName": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "exRefWert": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "timestamp": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "format": "date-time"
+        },
+        "guid": {
+          "type": [
+            "string",
+            "null"
+          ]
+        }
+      }
     }
   },
   "type": "object",
   "properties": {
-    "guid": {
-      "type": ["string", "null"]
-    },
     "boTyp": {
-      "type": ["string", "null"]
+      "type": [
+        "string",
+        "null"
+      ]
     },
     "versionStruktur": {
-      "type": "integer"
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "timestamp": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "format": "date-time"
+    },
+    "externeReferenzen": {
+      "type": [
+        "array",
+        "null"
+      ],
+      "items": {
+        "$ref": "#/definitions/ExterneReferenz"
+      }
+    },
+    "guid": {
+      "type": [
+        "string",
+        "null"
+      ]
     },
     "anrede": {
-      "type": ["string", "null"],
-      "enum": [null, "HERR", "FRAU", "EHELEUTE", "FIRMA", "INDIVIDUELL", "DR"]
+      "type": [
+        "string",
+        "null"
+      ],
+      "enum": [
+        null,
+        "HERR",
+        "FRAU",
+        "EHELEUTE",
+        "FIRMA",
+        "INDIVIDUELL",
+        "FAMILIE",
+        "ERBENGEMEINSCHAFT",
+        "WOHNGEMEINSCHAFT",
+        "GRUNDSTUECKGEMEINSCHAFT",
+        "DR"
+      ]
     },
     "title": {
-      "type": ["string", "null"]
+      "type": [
+        "string",
+        "null"
+      ]
     },
     "name1": {
-      "type": ["string", "null"]
+      "type": [
+        "string",
+        "null"
+      ]
     },
     "name2": {
-      "type": ["string", "null"]
+      "type": [
+        "string",
+        "null"
+      ]
     },
     "name3": {
-      "type": ["string", "null"]
+      "type": [
+        "string",
+        "null"
+      ]
     },
     "gewerbekennzeichnung": {
       "type": "boolean"
     },
     "hrnummer": {
-      "type": ["string", "null"]
+      "type": [
+        "string",
+        "null"
+      ]
     },
     "amtsgericht": {
-      "type": ["string", "null"]
+      "type": [
+        "string",
+        "null"
+      ]
     },
     "kontaktweg": {
-      "type": ["array", "null"],
+      "type": [
+        "array",
+        "null"
+      ],
       "items": {
         "type": "string",
-        "enum": ["ANSCHREIBEN", "TELEFONAT", "FAX", "E_MAIL", "SMS"]
+        "enum": [
+          "ANSCHREIBEN",
+          "TELEFONAT",
+          "FAX",
+          "E_MAIL",
+          "SMS"
+        ]
       }
     },
     "umsatzsteuerId": {
-      "type": ["string", "null"]
+      "type": [
+        "string",
+        "null"
+      ]
     },
     "glaeubigerId": {
-      "type": ["string", "null"]
+      "type": [
+        "string",
+        "null"
+      ]
     },
     "eMailAdresse": {
-      "type": ["string", "null"]
+      "type": [
+        "string",
+        "null"
+      ]
     },
     "website": {
-      "type": ["string", "null"]
+      "type": [
+        "string",
+        "null"
+      ]
     },
     "geschaeftspartnerrolle": {
-      "type": ["array", "null"],
+      "type": [
+        "array",
+        "null"
+      ],
       "items": {
         "type": "string",
         "enum": [
@@ -377,5 +532,7 @@
       "$ref": "#/definitions/Adresse"
     }
   },
-  "required": ["gewerbekennzeichnung"]
+  "required": [
+    "gewerbekennzeichnung"
+  ]
 }
