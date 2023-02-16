@@ -477,48 +477,13 @@
         "ABGELEHNT"
       ]
     },
-    "sperrauftragsablehngrund": {
-      "type": [
-        "string",
-        "null"
-      ],
-      "enum": [
-        null,
-        "DUPLIKAT",
-        "FALSCHER_MSB",
-        "FALSCHE_SPANNUNGSEBENE",
-        "WEITERE_MALO_BETROFFEN",
-        "ANDERER_ABLEHNGRUND",
-        "FRISTVERLETZUNG_TERMINGEBUNDEN",
-        "FRISTVERLETZUNG_NICHT_TERMINGEBUNDEN",
-        "ANDERER_FEHLER",
-        "LIEGT_BEREITS_VOR",
-        "ANDERER_ZUKUENFTIGER_LIEFERANT",
-        "BESTAETIGTER_LIEFERBEGINN"
-      ]
-    },
-    "sperrauftragsverhinderungsgrund": {
-      "type": [
-        "string",
-        "null"
-      ],
-      "enum": [
-        null,
-        "RECHTLICHER_GRUND_FEHLT",
-        "AKTIVE_ZUTRITTSVERWEIGERUNG",
-        "PASSIVE_ZUTRITTSVERWEIGERUNG",
-        "ANDERER_VERHINDERUNGSGRUND",
-        "TATSAECHLICHER_VERHINDERUNGSGRUND",
-        "TECHNISCHER_VERHINDERUNGSGRUND"
-      ]
-    },
     "zaehlernummer": {
       "type": [
         "string",
         "null"
       ]
     },
-    "istVomGerichtsvollzieherAngeordnet": {
+    "istNurInnerhalbDerArbeitszeitZuEntsperren": {
       "type": "boolean"
     },
     "ausfuehrungsdatum": {
@@ -611,7 +576,7 @@
   },
   "required": [
     "sperrauftragsart",
-    "istVomGerichtsvollzieherAngeordnet",
+    "istNurInnerhalbDerArbeitszeitZuEntsperren",
     "marktlokationsId"
   ]
 }

@@ -455,72 +455,6 @@
   },
   "type": "object",
   "properties": {
-    "sperrauftragsart": {
-      "type": "string",
-      "enum": [
-        "SPERREN",
-        "ENTSPERREN"
-      ]
-    },
-    "sperrauftragsstatus": {
-      "type": [
-        "string",
-        "null"
-      ],
-      "enum": [
-        null,
-        "GESCHEITERT",
-        "ERFOLGREICH",
-        "GEPLANT",
-        "ZUGESTIMMT",
-        "WIDERSPROCHEN",
-        "ABGELEHNT"
-      ]
-    },
-    "sperrauftragsablehngrund": {
-      "type": [
-        "string",
-        "null"
-      ],
-      "enum": [
-        null,
-        "DUPLIKAT",
-        "FALSCHER_MSB",
-        "FALSCHE_SPANNUNGSEBENE",
-        "WEITERE_MALO_BETROFFEN",
-        "ANDERER_ABLEHNGRUND",
-        "FRISTVERLETZUNG_TERMINGEBUNDEN",
-        "FRISTVERLETZUNG_NICHT_TERMINGEBUNDEN",
-        "ANDERER_FEHLER",
-        "LIEGT_BEREITS_VOR",
-        "ANDERER_ZUKUENFTIGER_LIEFERANT",
-        "BESTAETIGTER_LIEFERBEGINN"
-      ]
-    },
-    "sperrauftragsverhinderungsgrund": {
-      "type": [
-        "string",
-        "null"
-      ],
-      "enum": [
-        null,
-        "RECHTLICHER_GRUND_FEHLT",
-        "AKTIVE_ZUTRITTSVERWEIGERUNG",
-        "PASSIVE_ZUTRITTSVERWEIGERUNG",
-        "ANDERER_VERHINDERUNGSGRUND",
-        "TATSAECHLICHER_VERHINDERUNGSGRUND",
-        "TECHNISCHER_VERHINDERUNGSGRUND"
-      ]
-    },
-    "zaehlernummer": {
-      "type": [
-        "string",
-        "null"
-      ]
-    },
-    "istVomGerichtsvollzieherAngeordnet": {
-      "type": "boolean"
-    },
     "ausfuehrungsdatum": {
       "type": [
         "string",
@@ -610,8 +544,6 @@
     }
   },
   "required": [
-    "sperrauftragsart",
-    "istVomGerichtsvollzieherAngeordnet",
     "marktlokationsId"
   ]
 }

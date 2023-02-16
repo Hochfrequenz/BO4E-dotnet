@@ -351,7 +351,7 @@
         "verarbeitungszeitraum": {
           "$ref": "#/definitions/Zeitraum-1"
         },
-        "artikelID": {
+        "artikelId": {
           "type": [
             "string",
             "null"

@@ -1021,15 +1021,23 @@
           "type": "number"
         },
         "einheit": {
-          "type": "string",
+          "type": [
+            "string",
+            "null"
+          ],
           "enum": [
+            null,
             "EUR",
             "CT"
           ]
         },
         "bezugswert": {
-          "type": "string",
+          "type": [
+            "string",
+            "null"
+          ],
           "enum": [
+            null,
             "ZERO",
             "WH",
             "KW",
@@ -1075,9 +1083,7 @@
         }
       },
       "required": [
-        "wert",
-        "einheit",
-        "bezugswert"
+        "wert"
       ]
     },
     "Rechnungsposition": {
@@ -1103,11 +1109,17 @@
           "type": "integer"
         },
         "lieferungVon": {
-          "type": "string",
+          "type": [
+            "string",
+            "null"
+          ],
           "format": "date-time"
         },
         "lieferungBis": {
-          "type": "string",
+          "type": [
+            "string",
+            "null"
+          ],
           "format": "date-time"
         },
         "positionstext": {
@@ -1261,12 +1273,17 @@
             "string",
             "null"
           ]
+        },
+        "ausfuehrungsdatum": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "format": "date-time"
         }
       },
       "required": [
         "positionsnummer",
-        "lieferungVon",
-        "lieferungBis",
         "positionstext",
         "einzelpreis"
       ]

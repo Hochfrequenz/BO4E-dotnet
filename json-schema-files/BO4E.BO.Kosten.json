@@ -2,7 +2,10 @@
   "$schema": "http://json-schema.org/draft-07/schema#",
   "definitions": {
     "Betrag": {
-      "type": ["object", "null"],
+      "type": [
+        "object",
+        "null"
+      ],
       "properties": {
         "wert": {
           "type": "number"
@@ -193,11 +196,24 @@
             "ZWL"
           ]
         },
+        "timestamp": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "format": "date-time"
+        },
         "guid": {
-          "type": ["string", "null"]
+          "type": [
+            "string",
+            "null"
+          ]
         }
       },
-      "required": ["wert", "waehrung"]
+      "required": [
+        "wert",
+        "waehrung"
+      ]
     },
     "Betrag-1": {
       "type": "object",
@@ -391,14 +407,63 @@
             "ZWL"
           ]
         },
+        "timestamp": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "format": "date-time"
+        },
         "guid": {
-          "type": ["string", "null"]
+          "type": [
+            "string",
+            "null"
+          ]
         }
       },
-      "required": ["wert", "waehrung"]
+      "required": [
+        "wert",
+        "waehrung"
+      ]
+    },
+    "ExterneReferenz": {
+      "type": [
+        "object",
+        "null"
+      ],
+      "properties": {
+        "exRefName": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "exRefWert": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "timestamp": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "format": "date-time"
+        },
+        "guid": {
+          "type": [
+            "string",
+            "null"
+          ]
+        }
+      }
     },
     "Kostenblock": {
-      "type": ["object", "null"],
+      "type": [
+        "object",
+        "null"
+      ],
       "properties": {
         "kostenblockbezeichnung": {
           "type": "string"
@@ -407,36 +472,63 @@
           "$ref": "#/definitions/Betrag"
         },
         "kostenpositionen": {
-          "type": ["array", "null"],
+          "type": [
+            "array",
+            "null"
+          ],
           "items": {
             "$ref": "#/definitions/Kostenposition"
           }
         },
+        "timestamp": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "format": "date-time"
+        },
         "guid": {
-          "type": ["string", "null"]
+          "type": [
+            "string",
+            "null"
+          ]
         }
       },
-      "required": ["kostenblockbezeichnung"]
+      "required": [
+        "kostenblockbezeichnung"
+      ]
     },
     "Kostenposition": {
-      "type": ["object", "null"],
+      "type": [
+        "object",
+        "null"
+      ],
       "properties": {
         "positionstitel": {
           "type": "string"
         },
         "von": {
-          "type": ["string", "null"],
+          "type": [
+            "string",
+            "null"
+          ],
           "format": "date-time"
         },
         "bis": {
-          "type": ["string", "null"],
+          "type": [
+            "string",
+            "null"
+          ],
           "format": "date-time"
         },
         "artikelbezeichnung": {
           "type": "string"
         },
         "artikeldetail": {
-          "type": ["string", "null"]
+          "type": [
+            "string",
+            "null"
+          ]
         },
         "menge": {
           "$ref": "#/definitions/Menge"
@@ -450,8 +542,18 @@
         "betragKostenposition": {
           "$ref": "#/definitions/Betrag-1"
         },
+        "timestamp": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "format": "date-time"
+        },
         "guid": {
-          "type": ["string", "null"]
+          "type": [
+            "string",
+            "null"
+          ]
         }
       },
       "required": [
@@ -462,14 +564,35 @@
       ]
     },
     "Menge": {
-      "type": ["object", "null"],
+      "type": [
+        "object",
+        "null"
+      ],
       "properties": {
+        "timestamp": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "format": "date-time"
+        },
+        "guid": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
         "wert": {
           "type": "number"
         },
         "einheit": {
-          "type": "string",
+          "type": [
+            "string",
+            "null"
+          ],
           "enum": [
+            null,
+            "ZERO",
             "WH",
             "KW",
             "ANZAHL",
@@ -479,6 +602,7 @@
             "MONAT",
             "VAR",
             "VARH",
+            "KWHK",
             "JAHR",
             "KWH",
             "MW",
@@ -486,12 +610,11 @@
             "KVARH",
             "MWH"
           ]
-        },
-        "guid": {
-          "type": ["string", "null"]
         }
       },
-      "required": ["wert", "einheit"]
+      "required": [
+        "wert"
+      ]
     },
     "Preis": {
       "type": "object",
@@ -500,12 +623,24 @@
           "type": "number"
         },
         "einheit": {
-          "type": "string",
-          "enum": ["EUR", "CT"]
+          "type": [
+            "string",
+            "null"
+          ],
+          "enum": [
+            null,
+            "EUR",
+            "CT"
+          ]
         },
         "bezugswert": {
-          "type": "string",
+          "type": [
+            "string",
+            "null"
+          ],
           "enum": [
+            null,
+            "ZERO",
             "WH",
             "KW",
             "ANZAHL",
@@ -515,6 +650,7 @@
             "MONAT",
             "VAR",
             "VARH",
+            "KWHK",
             "JAHR",
             "KWH",
             "MW",
@@ -524,20 +660,42 @@
           ]
         },
         "status": {
-          "type": ["string", "null"],
-          "enum": [null, "VORLAEUFIG", "ENDGUELTIG"]
+          "type": [
+            "string",
+            "null"
+          ],
+          "enum": [
+            null,
+            "VORLAEUFIG",
+            "ENDGUELTIG"
+          ]
+        },
+        "timestamp": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "format": "date-time"
         },
         "guid": {
-          "type": ["string", "null"]
+          "type": [
+            "string",
+            "null"
+          ]
         }
       },
-      "required": ["wert", "einheit", "bezugswert"]
+      "required": [
+        "wert"
+      ]
     },
     "Zeitraum": {
       "type": "object",
       "properties": {
         "einheit": {
-          "type": ["string", "null"],
+          "type": [
+            "string",
+            "null"
+          ],
           "enum": [
             null,
             "SEKUNDE",
@@ -553,41 +711,109 @@
           ]
         },
         "dauer": {
-          "type": ["number", "null"]
+          "type": [
+            "number",
+            "null"
+          ]
         },
         "startdatum": {
-          "type": ["string", "null"],
+          "type": [
+            "string",
+            "null"
+          ],
           "format": "date-time"
         },
         "enddatum": {
-          "type": ["string", "null"],
+          "type": [
+            "string",
+            "null"
+          ],
+          "format": "date-time"
+        },
+        "startzeitpunkt": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "format": "date-time"
+        },
+        "endzeitpunkt": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "format": "date-time"
+        },
+        "timestamp": {
+          "type": [
+            "string",
+            "null"
+          ],
           "format": "date-time"
         },
         "guid": {
-          "type": ["string", "null"]
+          "type": [
+            "string",
+            "null"
+          ]
         }
-      }
+      },
+      "required": [
+        "startzeitpunkt",
+        "endzeitpunkt"
+      ]
     }
   },
   "type": "object",
   "properties": {
-    "guid": {
-      "type": ["string", "null"]
-    },
     "boTyp": {
-      "type": ["string", "null"]
+      "type": [
+        "string",
+        "null"
+      ]
     },
     "versionStruktur": {
-      "type": "integer"
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "timestamp": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "format": "date-time"
     },
     "kostenklasse": {
-      "type": "string"
+      "type": "string",
+      "enum": [
+        "ZERO"
+      ]
+    },
+    "externeReferenzen": {
+      "type": [
+        "array",
+        "null"
+      ],
+      "items": {
+        "$ref": "#/definitions/ExterneReferenz"
+      }
     },
     "gueltigkeit": {
       "$ref": "#/definitions/Zeitraum"
     },
+    "guid": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
     "summeKosten": {
-      "type": ["array", "null"],
+      "type": [
+        "array",
+        "null"
+      ],
       "items": {
         "$ref": "#/definitions/Betrag"
       }
@@ -600,11 +826,18 @@
       "minItems": 1
     },
     "kostenpositionen": {
-      "type": ["array", "null"],
+      "type": [
+        "array",
+        "null"
+      ],
       "items": {
         "$ref": "#/definitions/Kostenposition"
       }
     }
   },
-  "required": ["kostenklasse", "gueltigkeit", "kostenbloecke"]
+  "required": [
+    "kostenklasse",
+    "gueltigkeit",
+    "kostenbloecke"
+  ]
 }

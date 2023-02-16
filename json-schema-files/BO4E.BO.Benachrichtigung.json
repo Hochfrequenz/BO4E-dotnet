@@ -2,54 +2,150 @@
   "$schema": "http://json-schema.org/draft-07/schema#",
   "definitions": {
     "Aufgabe": {
-      "type": ["object", "null"],
+      "type": [
+        "object",
+        "null"
+      ],
       "properties": {
         "aufgabenId": {
           "type": "string"
         },
         "beschreibung": {
-          "type": ["string", "null"]
+          "type": [
+            "string",
+            "null"
+          ]
         },
         "deadline": {
-          "type": ["string", "null"],
+          "type": [
+            "string",
+            "null"
+          ],
           "format": "date-time"
         },
         "ausgefuehrt": {
           "type": "boolean"
         },
         "ausfuehrungszeitpunkt": {
-          "type": ["string", "null"],
+          "type": [
+            "string",
+            "null"
+          ],
           "format": "date-time"
         },
         "ausfuehrender": {
-          "type": ["string", "null"]
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "timestamp": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "format": "date-time"
         },
         "guid": {
-          "type": ["string", "null"]
+          "type": [
+            "string",
+            "null"
+          ]
         }
       },
-      "required": ["aufgabenId", "ausgefuehrt"]
+      "required": [
+        "aufgabenId",
+        "ausgefuehrt"
+      ]
+    },
+    "ExterneReferenz": {
+      "type": [
+        "object",
+        "null"
+      ],
+      "properties": {
+        "exRefName": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "exRefWert": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "timestamp": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "format": "date-time"
+        },
+        "guid": {
+          "type": [
+            "string",
+            "null"
+          ]
+        }
+      }
     },
     "GenericStringStringInfo": {
-      "type": ["object", "null"],
+      "type": [
+        "object",
+        "null"
+      ],
       "properties": {
         "keyColumn": {
-          "type": ["string", "null"]
+          "type": [
+            "string",
+            "null"
+          ]
         },
         "value": {
-          "type": ["string", "null"]
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "timestamp": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "format": "date-time"
         },
         "guid": {
-          "type": ["string", "null"]
+          "type": [
+            "string",
+            "null"
+          ]
         }
       },
-      "required": ["keyColumn", "value"]
+      "required": [
+        "keyColumn",
+        "value"
+      ]
     },
     "Notiz": {
-      "type": ["object", "null"],
+      "type": [
+        "object",
+        "null"
+      ],
       "properties": {
+        "timestamp": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "format": "date-time"
+        },
         "guid": {
-          "type": ["string", "null"]
+          "type": [
+            "string",
+            "null"
+          ]
         },
         "inhalt": {
           "type": "string"
@@ -62,27 +158,62 @@
           "format": "date-time"
         }
       },
-      "required": ["inhalt", "autor", "zeitpunkt"]
+      "required": [
+        "inhalt",
+        "autor",
+        "zeitpunkt"
+      ]
     }
   },
   "type": "object",
   "properties": {
-    "guid": {
-      "type": ["string", "null"]
-    },
     "boTyp": {
-      "type": ["string", "null"]
+      "type": [
+        "string",
+        "null"
+      ]
     },
     "versionStruktur": {
-      "type": "integer"
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "timestamp": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "format": "date-time"
     },
     "benachrichtigungsId": {
       "type": "string"
     },
+    "externeReferenzen": {
+      "type": [
+        "array",
+        "null"
+      ],
+      "items": {
+        "$ref": "#/definitions/ExterneReferenz"
+      }
+    },
     "prioritaet": {
       "type": "string",
       "default": "NORMAL",
-      "enum": ["SEHR_NIEDRIG", "NIEDRIG", "NORMAL", "HOCH", "SEHR_HOCH"]
+      "enum": [
+        "SEHR_NIEDRIG",
+        "NIEDRIG",
+        "NORMAL",
+        "HOCH",
+        "SEHR_HOCH"
+      ]
+    },
+    "guid": {
+      "type": [
+        "string",
+        "null"
+      ]
     },
     "bearbeitungsstatus": {
       "type": "string",
@@ -104,29 +235,47 @@
       "format": "date-time"
     },
     "kategorie": {
-      "type": ["string", "null"]
+      "type": [
+        "string",
+        "null"
+      ]
     },
     "bearbeiter": {
-      "type": ["string", "null"]
+      "type": [
+        "string",
+        "null"
+      ]
     },
     "notizen": {
-      "type": ["array", "null"],
+      "type": [
+        "array",
+        "null"
+      ],
       "items": {
         "$ref": "#/definitions/Notiz"
       }
     },
     "deadline": {
-      "type": ["string", "null"],
+      "type": [
+        "string",
+        "null"
+      ],
       "format": "date-time"
     },
     "aufgaben": {
-      "type": ["array", "null"],
+      "type": [
+        "array",
+        "null"
+      ],
       "items": {
         "$ref": "#/definitions/Aufgabe"
       }
     },
     "infos": {
-      "type": ["array", "null"],
+      "type": [
+        "array",
+        "null"
+      ],
       "items": {
         "$ref": "#/definitions/GenericStringStringInfo"
       }

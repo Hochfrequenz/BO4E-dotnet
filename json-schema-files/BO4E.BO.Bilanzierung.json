@@ -1,0 +1,395 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "definitions": {
+    "ExterneReferenz": {
+      "type": [
+        "object",
+        "null"
+      ],
+      "properties": {
+        "exRefName": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "exRefWert": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "timestamp": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "format": "date-time"
+        },
+        "guid": {
+          "type": [
+            "string",
+            "null"
+          ]
+        }
+      }
+    },
+    "Lastprofil": {
+      "type": [
+        "object",
+        "null"
+      ],
+      "properties": {
+        "bezeichnung": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "profilschar": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "verfahren": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "enum": [
+            null,
+            "SYNTHETISCH",
+            "ANALYTISCH"
+          ]
+        },
+        "einspeisung": {
+          "type": [
+            "boolean",
+            "null"
+          ]
+        },
+        "tagesparameter": {
+          "$ref": "#/definitions/Tagesparameter"
+        },
+        "profilart": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "enum": [
+            null,
+            "ART_STANDARDLASTPROFIL",
+            "ART_TAGESPARAMETERABHAENGIGES_LASTPROFIL",
+            "ART_LASTPROFIL"
+          ]
+        },
+        "herausgeber": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "timestamp": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "format": "date-time"
+        },
+        "guid": {
+          "type": [
+            "string",
+            "null"
+          ]
+        }
+      }
+    },
+    "Menge": {
+      "type": [
+        "object",
+        "null"
+      ],
+      "properties": {
+        "timestamp": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "format": "date-time"
+        },
+        "guid": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "wert": {
+          "type": "number"
+        },
+        "einheit": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "enum": [
+            null,
+            "ZERO",
+            "WH",
+            "KW",
+            "ANZAHL",
+            "KUBIKMETER",
+            "STUNDE",
+            "TAG",
+            "MONAT",
+            "VAR",
+            "VARH",
+            "KWHK",
+            "JAHR",
+            "KWH",
+            "MW",
+            "KVAR",
+            "KVARH",
+            "MWH"
+          ]
+        }
+      },
+      "required": [
+        "wert"
+      ]
+    },
+    "Tagesparameter": {
+      "type": [
+        "object",
+        "null"
+      ],
+      "properties": {
+        "klimazone": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "temperaturmessstelle": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "dienstanbieter": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "herausgeber": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "timestamp": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "format": "date-time"
+        },
+        "guid": {
+          "type": [
+            "string",
+            "null"
+          ]
+        }
+      }
+    }
+  },
+  "type": "object",
+  "properties": {
+    "boTyp": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "versionStruktur": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "timestamp": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "format": "date-time"
+    },
+    "externeReferenzen": {
+      "type": [
+        "array",
+        "null"
+      ],
+      "items": {
+        "$ref": "#/definitions/ExterneReferenz"
+      }
+    },
+    "guid": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "marktlokationsId": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "lastprofile": {
+      "type": [
+        "array",
+        "null"
+      ],
+      "items": {
+        "$ref": "#/definitions/Lastprofil"
+      }
+    },
+    "bilanzierungsbeginn": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "format": "date-time"
+    },
+    "bilanzierungsende": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "format": "date-time"
+    },
+    "bilanzkreis": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "jahresverbrauchsprognose": {
+      "$ref": "#/definitions/Menge"
+    },
+    "temperaturarbeit": {
+      "$ref": "#/definitions/Menge"
+    },
+    "kundenwert": {
+      "$ref": "#/definitions/Menge"
+    },
+    "verbrauchsaufteilung": {
+      "type": [
+        "number",
+        "null"
+      ]
+    },
+    "zeitreihentyp": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "enum": [
+        null,
+        "EGS",
+        "LGS",
+        "NZR",
+        "SES",
+        "SLS",
+        "TES",
+        "TLS",
+        "SLS_TLS",
+        "SES_TES"
+      ]
+    },
+    "aggregationsverantwortung": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "enum": [
+        null,
+        "UENB",
+        "VNB"
+      ]
+    },
+    "prognosegrundlage": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "enum": [
+        null,
+        "WERTE",
+        "PROFILE"
+      ]
+    },
+    "detailsPrognosegrundlage": {
+      "type": [
+        "array",
+        "null"
+      ],
+      "items": {
+        "type": "string",
+        "enum": [
+          "SLP_SEP",
+          "TLP_TEP"
+        ]
+      }
+    },
+    "wahlrechtPrognosegrundlage": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "enum": [
+        null,
+        "DURCH_LF",
+        "DURCH_LF_NICHT_GEGEBEN",
+        "NICHT_WEGEN_GROSSEN_VERBRAUCHS",
+        "NICHT_WEGEN_EIGENVERBRAUCH",
+        "NICHT_WEGEN_TAGES_VERBRAUCH",
+        "NICHT_WEGEN_ENWG"
+      ]
+    },
+    "fallgruppenzuordnung": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "enum": [
+        null,
+        "GABI_RLMmT",
+        "GABI_RLMoT",
+        "GABI_RLMNEV"
+      ]
+    },
+    "prioritaet": {
+      "type": [
+        "integer",
+        "null"
+      ]
+    },
+    "grundWahlrechtPrognosegrundlage": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "enum": [
+        null,
+        "DURCH_LF",
+        "DURCH_LF_NICHT_GEGEBEN",
+        "NICHT_WEGEN_GROSSEN_VERBRAUCHS",
+        "NICHT_WEGEN_EIGENVERBRAUCH",
+        "NICHT_WEGEN_TAGES_VERBRAUCH",
+        "NICHT_WEGEN_ENWG"
+      ]
+    }
+  }
+}
