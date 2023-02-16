@@ -32,14 +32,14 @@ namespace TestBO4E
         }
 
 
-        
+
         [TestMethod]
         [DataRow(0)]
         [DataRow(10)]
         [DataRow(20)]
         [DataRow(30)]
         [DataRow(40)]
-        
+
         public void TestJSchemaFileGenerationBo(int offset)
         {
             try
