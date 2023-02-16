@@ -387,15 +387,23 @@
           "type": "number"
         },
         "einheit": {
-          "type": "string",
+          "type": [
+            "string",
+            "null"
+          ],
           "enum": [
+            null,
             "EUR",
             "CT"
           ]
         },
         "bezugswert": {
-          "type": "string",
+          "type": [
+            "string",
+            "null"
+          ],
           "enum": [
+            null,
             "ZERO",
             "WH",
             "KW",
@@ -441,9 +449,7 @@
         }
       },
       "required": [
-        "wert",
-        "einheit",
-        "bezugswert"
+        "wert"
       ]
     }
   },
@@ -485,7 +491,10 @@
         "ANDERER_ABLEHNGRUND",
         "FRISTVERLETZUNG_TERMINGEBUNDEN",
         "FRISTVERLETZUNG_NICHT_TERMINGEBUNDEN",
-        "ANDERER_FEHLER"
+        "ANDERER_FEHLER",
+        "LIEGT_BEREITS_VOR",
+        "ANDERER_ZUKUENFTIGER_LIEFERANT",
+        "BESTAETIGTER_LIEFERBEGINN"
       ]
     },
     "sperrauftragsverhinderungsgrund": {
