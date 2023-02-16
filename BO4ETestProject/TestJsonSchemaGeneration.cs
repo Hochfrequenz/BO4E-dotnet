@@ -42,7 +42,7 @@ namespace TestBO4E
         
         public void TestJSchemaFileGenerationBo(int offset)
         {
-            //try
+            try
             {
                 foreach (var type in typeof(BusinessObject).Assembly.GetTypes()
                     .Where(t => t.IsSubclassOf(typeof(BusinessObject))).Skip(offset))
@@ -59,11 +59,11 @@ namespace TestBO4E
                     File.WriteAllText(path, schema.ToString(SchemaVersion.Draft7), utf8WithoutByteOrderMark);
                 }
             }
-            /*catch (JSchemaException jse)
+            catch (JSchemaException jse)
             {
                 Console.Out.WriteLine(jse.Message);
                 // thats life. pay for it if you'd like to :P
-            }*/
+            }
         }
     }
 }
