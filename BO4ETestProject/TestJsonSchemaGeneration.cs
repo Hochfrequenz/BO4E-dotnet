@@ -38,14 +38,14 @@ namespace TestBO4E
         [DataRow(10)]
         [DataRow(20)]
         [DataRow(30)]
-        [DataRow(40)]
+        [DataRow(40)] // using these different data rows you to workaround the 10schema per hour limitation
 
         public void TestJSchemaFileGenerationBo(int offset)
         {
             try
             {
                 foreach (var type in typeof(BusinessObject).Assembly.GetTypes()
-                    .Where(t => t.IsSubclassOf(typeof(BusinessObject))).Skip(offset))
+                    .Where(t => t.IsSubclassOf(typeof(BusinessObject))).Skip(offset).Take(10))
                 {
                     var schema = BusinessObject.GetJsonSchema(type);
                     Assert.IsNotNull(schema);
