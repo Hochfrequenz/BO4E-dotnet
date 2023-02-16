@@ -2,124 +2,66 @@
   "$schema": "http://json-schema.org/draft-07/schema#",
   "definitions": {
     "AusgerollteZaehlzeit": {
-      "type": [
-        "object",
-        "null"
-      ],
+      "type": ["object", "null"],
       "properties": {
         "timestamp": {
-          "type": [
-            "string",
-            "null"
-          ],
+          "type": ["string", "null"],
           "format": "date-time"
         },
         "guid": {
-          "type": [
-            "string",
-            "null"
-          ]
+          "type": ["string", "null"]
         },
         "aenderungszeitpunkt": {
           "type": "string",
           "format": "date-time"
         },
         "register": {
-          "type": [
-            "string",
-            "null"
-          ]
+          "type": ["string", "null"]
         }
       },
-      "required": [
-        "aenderungszeitpunkt"
-      ]
+      "required": ["aenderungszeitpunkt"]
     },
     "ExterneReferenz": {
-      "type": [
-        "object",
-        "null"
-      ],
+      "type": ["object", "null"],
       "properties": {
         "exRefName": {
-          "type": [
-            "string",
-            "null"
-          ]
+          "type": ["string", "null"]
         },
         "exRefWert": {
-          "type": [
-            "string",
-            "null"
-          ]
+          "type": ["string", "null"]
         },
         "timestamp": {
-          "type": [
-            "string",
-            "null"
-          ],
+          "type": ["string", "null"],
           "format": "date-time"
         },
         "guid": {
-          "type": [
-            "string",
-            "null"
-          ]
+          "type": ["string", "null"]
         }
       }
     },
     "Zaehlzeit": {
-      "type": [
-        "object",
-        "null"
-      ],
+      "type": ["object", "null"],
       "properties": {
         "timestamp": {
-          "type": [
-            "string",
-            "null"
-          ],
+          "type": ["string", "null"],
           "format": "date-time"
         },
         "guid": {
-          "type": [
-            "string",
-            "null"
-          ]
+          "type": ["string", "null"]
         },
         "code": {
-          "type": [
-            "string",
-            "null"
-          ]
+          "type": ["string", "null"]
         },
         "haeufigkeit": {
-          "type": [
-            "string",
-            "null"
-          ],
-          "enum": [
-            null,
-            "EINMALIG",
-            "JAEHRLICH"
-          ]
+          "type": ["string", "null"],
+          "enum": [null, "EINMALIG", "JAEHRLICH"]
         },
         "uebermittelbarkeit": {
-          "type": [
-            "string",
-            "null"
-          ],
-          "enum": [
-            null,
-            "ELEKTRONISCH",
-            "NICHT_ELEKTRONISCH"
-          ]
+          "type": ["string", "null"],
+          "enum": [null, "ELEKTRONISCH", "NICHT_ELEKTRONISCH"]
         },
         "ermittlungLeistungsmaximum": {
-          "type": [
-            "string",
-            "null"
-          ],
+          "type": ["string", "null"],
           "enum": [
             null,
             "VERWENDUNG_HOCHLASTFENSTER",
@@ -127,16 +69,10 @@
           ]
         },
         "istBestellbar": {
-          "type": [
-            "boolean",
-            "null"
-          ]
+          "type": ["boolean", "null"]
         },
         "typ": {
-          "type": [
-            "string",
-            "null"
-          ],
+          "type": ["string", "null"],
           "enum": [
             null,
             "WAERMEPUMPE",
@@ -147,54 +83,29 @@
           ]
         },
         "beschreibungTyp": {
-          "type": [
-            "string",
-            "null"
-          ]
+          "type": ["string", "null"]
         }
       }
     },
     "Zaehlzeitregister": {
-      "type": [
-        "object",
-        "null"
-      ],
+      "type": ["object", "null"],
       "properties": {
         "timestamp": {
-          "type": [
-            "string",
-            "null"
-          ],
+          "type": ["string", "null"],
           "format": "date-time"
         },
         "guid": {
-          "type": [
-            "string",
-            "null"
-          ]
+          "type": ["string", "null"]
         },
         "zaehlzeitDefinition": {
-          "type": [
-            "string",
-            "null"
-          ]
+          "type": ["string", "null"]
         },
         "register": {
-          "type": [
-            "string",
-            "null"
-          ]
+          "type": ["string", "null"]
         },
         "schwachlastfaehig": {
-          "type": [
-            "string",
-            "null"
-          ],
-          "enum": [
-            null,
-            "NICHT_SCHWACHLASTFAEHIG",
-            "SCHWACHLASTFAEHIG"
-          ]
+          "type": ["string", "null"],
+          "enum": [null, "NICHT_SCHWACHLASTFAEHIG", "SCHWACHLASTFAEHIG"]
         }
       }
     }
@@ -202,51 +113,30 @@
   "type": "object",
   "properties": {
     "boTyp": {
-      "type": [
-        "string",
-        "null"
-      ]
+      "type": ["string", "null"]
     },
     "versionStruktur": {
-      "type": [
-        "string",
-        "null"
-      ]
+      "type": ["string", "null"]
     },
     "timestamp": {
-      "type": [
-        "string",
-        "null"
-      ],
+      "type": ["string", "null"],
       "format": "date-time"
     },
     "externeReferenzen": {
-      "type": [
-        "array",
-        "null"
-      ],
+      "type": ["array", "null"],
       "items": {
         "$ref": "#/definitions/ExterneReferenz"
       }
     },
     "guid": {
-      "type": [
-        "string",
-        "null"
-      ]
+      "type": ["string", "null"]
     },
     "beginndatum": {
-      "type": [
-        "string",
-        "null"
-      ],
+      "type": ["string", "null"],
       "format": "date-time"
     },
     "endedatum": {
-      "type": [
-        "string",
-        "null"
-      ],
+      "type": ["string", "null"],
       "format": "date-time"
     },
     "version": {
@@ -254,10 +144,7 @@
       "format": "date-time"
     },
     "notwendigkeit": {
-      "type": [
-        "string",
-        "null"
-      ],
+      "type": ["string", "null"],
       "enum": [
         null,
         "ZAEHLZEITDEFINITIONEN_WERDEN_VERWENDET",
@@ -265,10 +152,7 @@
       ]
     },
     "zaehlzeiten": {
-      "type": [
-        "array",
-        "null"
-      ],
+      "type": ["array", "null"],
       "items": {
         "$ref": "#/definitions/Zaehlzeit"
       }
@@ -286,9 +170,5 @@
       }
     }
   },
-  "required": [
-    "version",
-    "zaehlzeitregister",
-    "ausgerollteZaehlzeiten"
-  ]
+  "required": ["version", "zaehlzeitregister", "ausgerollteZaehlzeiten"]
 }
