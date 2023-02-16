@@ -13,9 +13,9 @@ namespace BO4E.ENUM
         [EnumMember(Value = "BILANZKREISABRECHNUNG")]
         BILANZKREISABRECHNUNG,
 
-        /// <summary>Z86: Mehrmindermbengenabrechnung</summary>
-        [EnumMember(Value = "MEHRMINDERMBENGENABRECHNUNG")]
-        MEHRMINDERMBENGENABRECHNUNG,
+        /// <summary>Z86: Mehrmindermengenabrechnung</summary>
+        [EnumMember(Value = "MEHRMINDERMENGENABRECHNUNG")]
+        MEHRMINDERMENGENABRECHNUNG,
 
         /// <summary>Z47: Endkundenabrechnung</summary>
         [EnumMember(Value = "ENDKUNDENABRECHNUNG")]
