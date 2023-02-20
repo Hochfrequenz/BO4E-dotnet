@@ -28,7 +28,7 @@ namespace BO4E.COM
         [JsonPropertyName("ustSonder")]
         [FieldName("customTax", Language.EN)]
         [ProtoMember(9)]
-        public decimal Sondersteuersatz { get; set; }
+        public decimal? Sondersteuersatz { get; set; }
 
         /// <summary>Nettobetrag für den die Steuer berechnet wurde. Z.B. 200</summary>
         [JsonProperty(PropertyName = "basiswert", Required = Required.Always)]
