@@ -41,7 +41,7 @@ namespace BO4E.COM
         [ProtoMember(6)]
         public Waehrungscode Waehrung { get; set; }
 
-        /// <summary>Nettobetrag (vorausgezahlt) für den die Steuer berechnet wurde. Z.B. 100</summary>
+        /// <summary>Bruttobetrag (vorausgezahlt) für den die Steuer berechnet wurde. Z.B. 100</summary>
         [JsonProperty(PropertyName = "basiswertVorausgezahlt", Required = Required.Default)]
         [JsonPropertyName("basiswertVorausgezahlt")]
         [FieldName("baseValuePrepaid", Language.EN)]
