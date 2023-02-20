@@ -24,7 +24,7 @@ namespace BO4E.COM
         /// Wert eines besonderen Steuersatzes, wenn <see cref="ENUM.Steuerkennzeichen" />
         /// den Wert <see cref="BO4E.ENUM.Steuerkennzeichen.UST_SONDER" /> hat
         /// </summary>
-        [JsonProperty(PropertyName = "sondersteuersatz", Required = Required.AllowNull)]
+        [JsonProperty(PropertyName = "sondersteuersatz", Required = Required.Default)]
         [JsonPropertyName("sondersteuersatz")]
         [FieldName("customTax", Language.EN)]
         [ProtoMember(9)]
