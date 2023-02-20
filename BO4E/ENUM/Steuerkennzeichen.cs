@@ -34,5 +34,9 @@ namespace BO4E.ENUM
         /// <summary>Reverse Charge Verfahren (Umkehrung der Steuerpflicht)</summary>
         [EnumMember(Value = "RCV")]
         RCV,
+
+        /// <summary>Umsatzsteuer mit abweichendem Satz</summary>
+        [EnumMember(Value = "UST_SONDER")]
+        UST_SONDER,
     }
 }

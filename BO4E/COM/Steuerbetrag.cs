@@ -20,6 +20,13 @@ namespace BO4E.COM
         [ProtoMember(3)]
         public Steuerkennzeichen Steuerkennzeichen { get; set; }
 
+        /// <summary>Wert eines besonderen Steuersatzes, wenn <see cref="ENUM.Steuerkennzeichen" /> den Wert <see cref="Steuerkennzeichen.UST_SONDER" /> hat</summary>
+        [JsonProperty(PropertyName = "ustSonder", Required = Required.AllowNull)]
+        [JsonPropertyName("ustSonder")]
+        [FieldName("customTax", Language.EN)]
+        [ProtoMember(9)]
+        public decimal Sondersteuersatz { get; set; }
+
         /// <summary>Nettobetrag für den die Steuer berechnet wurde. Z.B. 100</summary>
         [JsonProperty(PropertyName = "basiswert", Required = Required.Always)]
         [JsonPropertyName("basiswert")]
