@@ -1,4 +1,5 @@
 using System.Runtime.Serialization;
+using BO4E.COM;
 
 namespace BO4E.ENUM
 {
@@ -15,6 +16,13 @@ namespace BO4E.ENUM
         /// <summary>Umsatzsteuer 7%</summary>
         [EnumMember(Value = "UST_7")]
         UST_7,
+
+        /// <summary>
+        /// Fälle, die mit den übrigen Steuersätzen <see cref="UST_19"/>, <see cref="UST_16"/>, <see cref="UST_7"/> nicht abbildbar sind. 
+        /// </summary>
+        /// <remarks>Der abweichende Steuersatz kann in <see cref="Steuerbetrag.Steuerwert"/> angegeben werden.</remarks>
+        [EnumMember(Value = "UST_SONDER")]
+        UST_SONDER,
 
         /// <summary>Keine Vorsteuer, bzw. nicht steuerbar.</summary>
         [EnumMember(Value = "VST_0")]

@@ -27,7 +27,7 @@ namespace BO4E.COM
         [ProtoMember(4)]
         public decimal Basiswert { get; set; }
 
-        /// <summary>Aus dem Basiswert berechnete Steuer. Z.B. 19 (bei UST_19)</summary>
+        /// <summary>Aus dem Basiswert berechnete Steuer. Z.B. 19 (bei <see cref="BO4E.ENUM.Steuerkennzeichen.UST_19"/>) oder ein abweichender Steuersatz (bei <see cref="ENUM.Steuerkennzeichen.UST_SONDER"/></summary>
         [JsonProperty(PropertyName = "steuerwert", Required = Required.Always)]
         [JsonPropertyName("steuerwert")]
         [FieldName("taxValue", Language.EN)]
@@ -54,5 +54,6 @@ namespace BO4E.COM
         [FieldName("taxValuePrepaid", Language.EN)]
         [ProtoMember(8)]
         public decimal? SteuerwertVorausgezahlt { get; set; }
+
     }
 }
