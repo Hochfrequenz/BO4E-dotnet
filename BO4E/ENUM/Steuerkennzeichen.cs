@@ -5,6 +5,10 @@ namespace BO4E.ENUM
     /// <summary> </summary>
     public enum Steuerkennzeichen
     {
+        /// <summary>Umsatzsteuer mit abweichendem Satz</summary>
+        /// <remarks>Soll verwendet werden, wenn weder <see cref="UST_7"/> noch <see cref="UST_16"/> noch <see cref="UST_19"/> anwendbar sind.</remarks>
+        [EnumMember(Value = "UST_SONDER")]
+        UST_SONDER,
         /// <summary>Umsatzsteuer 19%</summary>
         [EnumMember(Value = "UST_19")]
         UST_19,
@@ -34,10 +38,5 @@ namespace BO4E.ENUM
         /// <summary>Reverse Charge Verfahren (Umkehrung der Steuerpflicht)</summary>
         [EnumMember(Value = "RCV")]
         RCV,
-
-        /// <summary>Umsatzsteuer mit abweichendem Satz</summary>
-        /// <remarks>Soll verwendet werden, wenn weder <see cref="UST_7"/> noch <see cref="UST_16"/> noch <see cref="UST_19"/> anwendbar sind.</remarks>
-        [EnumMember(Value = "UST_SONDER")]
-        UST_SONDER,
     }
 }
