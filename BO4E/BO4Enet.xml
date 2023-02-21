@@ -3865,20 +3865,26 @@
         <member name="P:BO4E.COM.Steuerbetrag.Steuerkennzeichen">
             <summary>Kennzeichnung des Steuersatzes, bzw. Verfahrens. Details <see cref="T:BO4E.ENUM.Steuerkennzeichen" /></summary>
         </member>
+        <member name="P:BO4E.COM.Steuerbetrag.Sondersteuersatz">
+            <summary>
+            Wert eines besonderen Steuersatzes, wenn <see cref="T:BO4E.ENUM.Steuerkennzeichen" />
+            den Wert <see cref="F:BO4E.ENUM.Steuerkennzeichen.UST_SONDER" /> hat
+            </summary>
+        </member>
         <member name="P:BO4E.COM.Steuerbetrag.Basiswert">
-            <summary>Nettobetrag für den die Steuer berechnet wurde. Z.B. 100</summary>
+            <summary>Nettobetrag für den die Steuer berechnet wurde. Z.B. 200</summary>
         </member>
         <member name="P:BO4E.COM.Steuerbetrag.Steuerwert">
-            <summary>Aus dem Basiswert berechnete Steuer. Z.B. 19 (bei UST_19)</summary>
+            <summary>Aus dem Basiswert berechnete Steuer. Z.B. 38 (bei UST_19), falls <see cref="P:BO4E.COM.Steuerbetrag.Basiswert"/> 200 ist.</summary>
         </member>
         <member name="P:BO4E.COM.Steuerbetrag.Waehrung">
             <summary>Währung. Z.B. Euro. <seealso cref="T:BO4E.ENUM.Waehrungscode" /></summary>
         </member>
         <member name="P:BO4E.COM.Steuerbetrag.BasiswertVorausgezahlt">
-            <summary>Nettobetrag (vorausgezahlt) für den die Steuer berechnet wurde. Z.B. 100</summary>
+            <summary>Nettobetrag (vorausgezahlt) für den die Steuer berechnet wurde. Z.B. 200</summary>
         </member>
         <member name="P:BO4E.COM.Steuerbetrag.SteuerwertVorausgezahlt">
-            <summary>Aus dem Basiswert (vorausgezahlt) berechnete Steuer. Z.B. 19 (bei UST_19)</summary>
+            <summary>Aus dem Basiswert (vorausgezahlt) berechnete Steuer. Z.B. 38 (bei UST_19), wenn <see cref="P:BO4E.COM.Steuerbetrag.BasiswertVorausgezahlt"/> 200 ist</summary>
         </member>
         <member name="T:BO4E.COM.Tagesparameter">
             <summary>
@@ -8675,6 +8681,24 @@
             </summary>
             <remarks>EBD 0470 A99</remarks>
         </member>
+        <member name="F:BO4E.ENUM.Sperrauftragsablehngrund.LIEGT_BEREITS_VOR">
+            <summary>
+            Sperrauftrag für Marktlokation liegt bereits vor.
+            </summary>
+            <remarks>FV2304 EBD 0470 A10</remarks>
+        </member>
+        <member name="F:BO4E.ENUM.Sperrauftragsablehngrund.ANDERER_ZUKUENFTIGER_LIEFERANT">
+            <summary>
+            Zukünftiger bestätigter Lieferbeginn liegt gegenüber anderem Lieferanten bereits vor. 
+            </summary>
+            <remarks>FV2304 EBD 0470 A11</remarks>
+        </member>
+        <member name="F:BO4E.ENUM.Sperrauftragsablehngrund.BESTAETIGTER_LIEFERBEGINN">
+            <summary>
+            Im Ausführungszeitraum liegt bereits ein bestätigter Lieferbeginn gegenüber dem beauftragenden LF vor.
+            </summary>
+            <remarks>FV2304 EBD 0470 A12</remarks>
+        </member>
         <member name="T:BO4E.ENUM.Sperrauftragsart">
             <summary>
             Die Sperrauftragsart beschreibt die Art eines <see cref="T:BO4E.BO.Sperrauftrag"/>s.
@@ -9062,6 +9086,10 @@
         </member>
         <member name="T:BO4E.ENUM.Steuerkennzeichen">
             <summary> </summary>
+        </member>
+        <member name="F:BO4E.ENUM.Steuerkennzeichen.UST_SONDER">
+            <summary>Umsatzsteuer mit abweichendem Satz</summary>
+            <remarks>Soll verwendet werden, wenn weder <see cref="F:BO4E.ENUM.Steuerkennzeichen.UST_7"/> noch <see cref="F:BO4E.ENUM.Steuerkennzeichen.UST_16"/> noch <see cref="F:BO4E.ENUM.Steuerkennzeichen.UST_19"/> anwendbar sind.</remarks>
         </member>
         <member name="F:BO4E.ENUM.Steuerkennzeichen.UST_19">
             <summary>Umsatzsteuer 19%</summary>
@@ -9582,8 +9610,8 @@
         <member name="F:BO4E.ENUM.Verwendungszweck.BILANZKREISABRECHNUNG">
             <summary>Z85: Bilanzkreisabrechnung</summary>
         </member>
-        <member name="F:BO4E.ENUM.Verwendungszweck.MEHRMINDERMBENGENABRECHNUNG">
-            <summary>Z86: Mehrmindermbengenabrechnung</summary>
+        <member name="F:BO4E.ENUM.Verwendungszweck.MEHRMINDERMENGENABRECHNUNG">
+            <summary>Z86: Mehrmindermengenabrechnung</summary>
         </member>
         <member name="F:BO4E.ENUM.Verwendungszweck.ENDKUNDENABRECHNUNG">
             <summary>Z47: Endkundenabrechnung</summary>
