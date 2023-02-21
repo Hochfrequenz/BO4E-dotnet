@@ -1,5 +1,4 @@
 using BO4E.BO;
-using BO4E.BO.LogObject;
 using BO4E.COM;
 
 using FluentAssertions;
@@ -53,7 +52,6 @@ namespace TestBO4E
             typeof(Entsperrauftrag),
             typeof(Marktteilnehmer),
             typeof(Kosten),
-            typeof(LogObject),
             typeof(PreisblattDienstleistung),
             typeof(PreisblattKonzessionsabgabe),
             typeof(PreisblattMessung),

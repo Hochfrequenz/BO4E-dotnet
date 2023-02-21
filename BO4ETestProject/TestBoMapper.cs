@@ -1,11 +1,9 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Linq;
 using BO4E;
 using BO4E.BO;
 using BO4E.COM;
-using BO4E.meta;
 using BO4E.meta.LenientConverters;
 using FluentAssertions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;

@@ -1,8 +1,0 @@
-@startuml
-class LogObject {
-    + Id : string <<get>> <<set>>
-    + LogMessage : string <<get>> <<set>>
-}
-BusinessObject <|-- LogObject
-LogObject --> "Datetime" DateTime
-@enduml

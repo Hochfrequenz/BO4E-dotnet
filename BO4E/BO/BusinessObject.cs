@@ -45,7 +45,6 @@ namespace BO4E.BO
     [ProtoInclude(12, typeof(Region))]
     [ProtoInclude(13, typeof(Vertrag))]
     [ProtoInclude(14, typeof(Zaehler))]
-    [ProtoInclude(15, typeof(LogObject.LogObject))]
     [ProtoInclude(16, typeof(Bilanzierung))]
     [ProtoInclude(17, typeof(Sperrauftrag))]
     [ProtoInclude(18, typeof(Entsperrauftrag))]
