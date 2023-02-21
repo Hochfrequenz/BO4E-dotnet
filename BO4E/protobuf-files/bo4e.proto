@@ -1396,17 +1396,19 @@ message Steuerbetrag {
    Waehrungscode Waehrung = 6;
    .bcl.Decimal BasiswertVorausgezahlt = 7;
    .bcl.Decimal SteuerwertVorausgezahlt = 8;
+   .bcl.Decimal Sondersteuersatz = 9;
 }
 enum Steuerkennzeichen {
    option (.protobuf_net.enumopt).namespace = "BO4E.ENUM";
-   UST_19 = 0;
-   UST_16 = 1;
-   UST_7 = 2;
-   VST_0 = 3;
-   VST_19 = 4;
-   VST_16 = 5;
-   VST_7 = 6;
-   RCV = 7;
+   UST_SONDER = 0;
+   UST_19 = 1;
+   UST_16 = 2;
+   UST_7 = 3;
+   VST_0 = 4;
+   VST_19 = 5;
+   VST_16 = 6;
+   VST_7 = 7;
+   RCV = 8;
 }
 enum Tarifart {
    option (.protobuf_net.enumopt).namespace = "BO4E.ENUM";
@@ -1560,7 +1562,7 @@ enum Verwendungszweck {
    option (.protobuf_net.enumopt).namespace = "BO4E.ENUM";
    NETZNUTZUNGSABRECHNUNG = 0;
    BILANZKREISABRECHNUNG = 1;
-   MEHRMINDERMBENGENABRECHNUNG = 2;
+   MEHRMINDERMENGENABRECHNUNG = 2;
    ENDKUNDENABRECHNUNG = 3;
    UEBERMITTLUNG_AN_DAS_HKNR = 4;
    ERMITTLUNG_AUSGEGLICHENHEIT_BILANZKREIS = 5;

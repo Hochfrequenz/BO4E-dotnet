@@ -20,14 +20,24 @@ namespace BO4E.COM
         [ProtoMember(3)]
         public Steuerkennzeichen Steuerkennzeichen { get; set; }
 
-        /// <summary>Nettobetrag für den die Steuer berechnet wurde. Z.B. 100</summary>
+        /// <summary>
+        /// Wert eines besonderen Steuersatzes, wenn <see cref="ENUM.Steuerkennzeichen" />
+        /// den Wert <see cref="BO4E.ENUM.Steuerkennzeichen.UST_SONDER" /> hat
+        /// </summary>
+        [JsonProperty(PropertyName = "sondersteuersatz", Required = Required.Default)]
+        [JsonPropertyName("sondersteuersatz")]
+        [FieldName("customTax", Language.EN)]
+        [ProtoMember(9)]
+        public decimal? Sondersteuersatz { get; set; }
+
+        /// <summary>Nettobetrag für den die Steuer berechnet wurde. Z.B. 200</summary>
         [JsonProperty(PropertyName = "basiswert", Required = Required.Always)]
         [JsonPropertyName("basiswert")]
         [FieldName("baseValue", Language.EN)]
         [ProtoMember(4)]
         public decimal Basiswert { get; set; }
 
-        /// <summary>Aus dem Basiswert berechnete Steuer. Z.B. 19 (bei UST_19)</summary>
+        /// <summary>Aus dem Basiswert berechnete Steuer. Z.B. 38 (bei UST_19), falls <see cref="Basiswert"/> 200 ist.</summary>
         [JsonProperty(PropertyName = "steuerwert", Required = Required.Always)]
         [JsonPropertyName("steuerwert")]
         [FieldName("taxValue", Language.EN)]
@@ -41,14 +51,14 @@ namespace BO4E.COM
         [ProtoMember(6)]
         public Waehrungscode Waehrung { get; set; }
 
-        /// <summary>Nettobetrag (vorausgezahlt) für den die Steuer berechnet wurde. Z.B. 100</summary>
+        /// <summary>Nettobetrag (vorausgezahlt) für den die Steuer berechnet wurde. Z.B. 200</summary>
         [JsonProperty(PropertyName = "basiswertVorausgezahlt", Required = Required.Default)]
         [JsonPropertyName("basiswertVorausgezahlt")]
         [FieldName("baseValuePrepaid", Language.EN)]
         [ProtoMember(7)]
         public decimal? BasiswertVorausgezahlt { get; set; }
 
-        /// <summary>Aus dem Basiswert (vorausgezahlt) berechnete Steuer. Z.B. 19 (bei UST_19)</summary>
+        /// <summary>Aus dem Basiswert (vorausgezahlt) berechnete Steuer. Z.B. 38 (bei UST_19), wenn <see cref="BasiswertVorausgezahlt"/> 200 ist</summary>
         [JsonProperty(PropertyName = "steuerwertVorausgezahlt", Required = Required.Default)]
         [JsonPropertyName("steuerwertVorausgezahlt")]
         [FieldName("taxValuePrepaid", Language.EN)]
