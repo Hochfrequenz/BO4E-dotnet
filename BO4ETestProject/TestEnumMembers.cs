@@ -3,8 +3,10 @@ using System.Linq;
 using System.Reflection;
 using System.Runtime.Serialization;
 using BO4E.ENUM;
+using BO4E.meta.LenientConverters;
 using FluentAssertions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Newtonsoft.Json.Converters;
 
 namespace TestBO4E
 {
@@ -36,6 +38,35 @@ namespace TestBO4E
                     .Where(nameTuple => nameTuple.Item1 != nameTuple.Item2);
                 enumMemberAttributeDiffersFromEnumMemberName.Should().BeEmpty();
             }
+        }
+
+        internal class MyClass
+        {
+            public Verwendungszweck Verwendungszweck { get; set; }
+        }
+        
+        [TestMethod]
+        public void Test_Mehrmindermengenabrechnung_System_Text()
+        {
+            var options = LenientParsing.MOST_LENIENT.GetJsonSerializerOptions();
+            var myLegacyInstance = new MyClass() { Verwendungszweck = Verwendungszweck.MEHRMINDERMBENGENABRECHNUNG };
+            var myLegacyJson = System.Text.Json.JsonSerializer.Serialize(myLegacyInstance, options);
+            myLegacyJson.Should().Contain("MEHRMINDERMBENGENABRECHNUNG").And.Contain("B"); // note the "B"
+            var myNewInstance = System.Text.Json.JsonSerializer.Deserialize<MyClass>(myLegacyJson, options);
+            myNewInstance.Verwendungszweck.Should().Be(Verwendungszweck.MEHRMINDERMENGENABRECHNUNG);
+        }
+        
+                
+        [TestMethod]
+        public void Test_Mehrmindermengenabrechnung_Newtonsoft()
+        {
+            var options = LenientParsing.MOST_LENIENT.GetJsonSerializerSettings();
+            options.Converters.Add(new StringEnumConverter());
+            var myLegacyInstance = new MyClass() { Verwendungszweck = Verwendungszweck.MEHRMINDERMBENGENABRECHNUNG };
+            var myLegacyJson = Newtonsoft.Json.JsonConvert.SerializeObject(myLegacyInstance, options);
+            myLegacyJson.Should().Contain("MEHRMINDERMBENGENABRECHNUNG").And.Contain("B"); // note the "B"
+            var myNewInstance = Newtonsoft.Json.JsonConvert.DeserializeObject<MyClass>(myLegacyJson, options);
+            myNewInstance.Verwendungszweck.Should().Be(Verwendungszweck.MEHRMINDERMENGENABRECHNUNG);
         }
     }
 }
