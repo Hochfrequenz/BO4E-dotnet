@@ -35,7 +35,7 @@ namespace BO4E.ENUM
         /// <remarks>ZB5</remarks>
         [EnumMember(Value = "ERMITTLUNG_AUSGEGLICHENHEIT_BILANZKREIS")]
         ERMITTLUNG_AUSGEGLICHENHEIT_BILANZKREIS,
-        
+
         /// <summary>
         /// <inheritdoc cref="MEHRMINDERMENGENABRECHNUNG"/>
         /// </summary>

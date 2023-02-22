@@ -44,7 +44,7 @@ namespace TestBO4E
         {
             public Verwendungszweck Verwendungszweck { get; set; }
         }
-        
+
         [TestMethod]
         public void Test_Mehrmindermengenabrechnung_System_Text()
         {
@@ -55,8 +55,8 @@ namespace TestBO4E
             var myNewInstance = System.Text.Json.JsonSerializer.Deserialize<MyClass>(myLegacyJson, options);
             myNewInstance.Verwendungszweck.Should().Be(Verwendungszweck.MEHRMINDERMENGENABRECHNUNG);
         }
-        
-                
+
+
         [TestMethod]
         public void Test_Mehrmindermengenabrechnung_Newtonsoft()
         {
