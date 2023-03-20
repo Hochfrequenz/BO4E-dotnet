@@ -1,6 +1,7 @@
+using BO4E.ENUM;
+
 using System;
 using System.Text.Json;
-using BO4E.ENUM;
 
 namespace BO4E.meta.LenientConverters
 {
@@ -22,6 +23,10 @@ namespace BO4E.meta.LenientConverters
             }
             catch (ArgumentException) when (rawString.StartsWith("G"))
             {
+                if (rawString == "G2Period5")
+                {
+                    return Geraetemerkmal.GAS_G2P5;
+                }
                 return Enum.Parse<Geraetemerkmal>("GAS_" + rawString);
             }
         }
@@ -57,6 +62,10 @@ namespace BO4E.meta.LenientConverters
             }
             catch (ArgumentException) when (rawString.StartsWith("G"))
             {
+                if (rawString == "G2Period5")
+                {
+                    return Geraetemerkmal.GAS_G2P5;
+                }
                 return Enum.Parse<Geraetemerkmal>("GAS_" + rawString);
             }
         }
