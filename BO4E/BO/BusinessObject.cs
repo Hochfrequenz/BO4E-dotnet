@@ -58,6 +58,7 @@ namespace BO4E.BO
     [ProtoInclude(24, typeof(Berechnungsformel))]
     [ProtoInclude(25, typeof(Anfrage))]
     [ProtoInclude(26, typeof(Zaehlzeitdefinition))]
+    [ProtoInclude(27, typeof(Wechsel))]
     public abstract class BusinessObject : IUserProperties, IOptionalGuid
     {
         /// <summary>

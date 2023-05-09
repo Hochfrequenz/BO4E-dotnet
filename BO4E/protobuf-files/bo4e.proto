@@ -1560,12 +1560,14 @@ message Verwendungszweck {
 }
 enum Verwendungszweck {
    option (.protobuf_net.enumopt).namespace = "BO4E.ENUM";
+   option allow_alias = true;
    NETZNUTZUNGSABRECHNUNG = 0;
    BILANZKREISABRECHNUNG = 1;
    MEHRMINDERMENGENABRECHNUNG = 2;
    ENDKUNDENABRECHNUNG = 3;
    UEBERMITTLUNG_AN_DAS_HKNR = 4;
    ERMITTLUNG_AUSGEGLICHENHEIT_BILANZKREIS = 5;
+   MEHRMINDERMBENGENABRECHNUNG = 2;
 }
 message Vorauszahlung {
    option (.protobuf_net.msgopt).namespace = "BO4E.COM";

@@ -2,25 +2,43 @@
   "$schema": "http://json-schema.org/draft-07/schema#",
   "definitions": {
     "ExterneReferenz": {
-      "type": ["object", "null"],
+      "type": [
+        "object",
+        "null"
+      ],
       "properties": {
         "exRefName": {
-          "type": ["string", "null"]
+          "type": [
+            "string",
+            "null"
+          ]
         },
         "exRefWert": {
-          "type": ["string", "null"]
+          "type": [
+            "string",
+            "null"
+          ]
         },
         "timestamp": {
-          "type": ["string", "null"],
+          "type": [
+            "string",
+            "null"
+          ],
           "format": "date-time"
         },
         "guid": {
-          "type": ["string", "null"]
+          "type": [
+            "string",
+            "null"
+          ]
         }
       }
     },
     "Rechenschritt": {
-      "type": ["object", "null"],
+      "type": [
+        "object",
+        "null"
+      ],
       "properties": {
         "rechenschrittBestandteilId": {
           "type": "integer"
@@ -29,11 +47,17 @@
           "type": "integer"
         },
         "timestamp": {
-          "type": ["string", "null"],
+          "type": [
+            "string",
+            "null"
+          ],
           "format": "date-time"
         },
         "guid": {
-          "type": ["string", "null"]
+          "type": [
+            "string",
+            "null"
+          ]
         },
         "operation": {
           "type": "string",
@@ -47,13 +71,22 @@
           ]
         },
         "verlustfaktorTrafo": {
-          "type": ["number", "null"]
+          "type": [
+            "number",
+            "null"
+          ]
         },
         "verlustfaktorLeitung": {
-          "type": ["number", "null"]
+          "type": [
+            "number",
+            "null"
+          ]
         },
         "messlokationId": {
-          "type": ["string", "null"]
+          "type": [
+            "string",
+            "null"
+          ]
         },
         "weitererRechenschritt": {
           "$ref": "#/definitions/Rechenschritt"
@@ -89,13 +122,17 @@
           ]
         },
         "zweck": {
-          "type": ["array", "null"],
+          "type": [
+            "array",
+            "null"
+          ],
           "items": {
             "type": "string",
             "enum": [
               "NETZNUTZUNGSABRECHNUNG",
               "BILANZKREISABRECHNUNG",
               "MEHRMINDERMENGENABRECHNUNG",
+              "MEHRMINDERMBENGENABRECHNUNG",
               "ENDKUNDENABRECHNUNG",
               "UEBERMITTLUNG_AN_DAS_HKNR",
               "ERMITTLUNG_AUSGEGLICHENHEIT_BILANZKREIS"
@@ -103,30 +140,50 @@
           }
         },
         "timestamp": {
-          "type": ["string", "null"],
+          "type": [
+            "string",
+            "null"
+          ],
           "format": "date-time"
         },
         "guid": {
-          "type": ["string", "null"]
+          "type": [
+            "string",
+            "null"
+          ]
         }
       },
-      "required": ["marktrolle"]
+      "required": [
+        "marktrolle"
+      ]
     }
   },
   "type": "object",
   "properties": {
     "boTyp": {
-      "type": ["string", "null"]
+      "type": [
+        "string",
+        "null"
+      ]
     },
     "versionStruktur": {
-      "type": ["string", "null"]
+      "type": [
+        "string",
+        "null"
+      ]
     },
     "timestamp": {
-      "type": ["string", "null"],
+      "type": [
+        "string",
+        "null"
+      ],
       "format": "date-time"
     },
     "externeReferenzen": {
-      "type": ["array", "null"],
+      "type": [
+        "array",
+        "null"
+      ],
       "items": {
         "$ref": "#/definitions/ExterneReferenz"
       }
@@ -136,7 +193,10 @@
       "format": "date-time"
     },
     "guid": {
-      "type": ["string", "null"]
+      "type": [
+        "string",
+        "null"
+      ]
     },
     "notwendigkeit": {
       "type": "string",
@@ -148,7 +208,10 @@
       ]
     },
     "rechenschrittId": {
-      "type": ["integer", "null"]
+      "type": [
+        "integer",
+        "null"
+      ]
     },
     "verwendungszweck": {
       "$ref": "#/definitions/Verwendungszweck"
@@ -157,5 +220,9 @@
       "$ref": "#/definitions/Rechenschritt"
     }
   },
-  "required": ["beginndatum", "notwendigkeit", "verwendungszweck"]
+  "required": [
+    "beginndatum",
+    "notwendigkeit",
+    "verwendungszweck"
+  ]
 }
