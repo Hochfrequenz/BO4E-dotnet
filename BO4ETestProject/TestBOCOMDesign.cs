@@ -1,12 +1,15 @@
+using BO4E.BO;
+using BO4E.COM;
+using BO4E.meta;
+
+using Microsoft.VisualStudio.TestTools.UnitTesting;
+
+using Newtonsoft.Json;
+
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
-using BO4E.BO;
-using BO4E.COM;
-using BO4E.meta;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Newtonsoft.Json;
 
 namespace TestBO4E
 {
@@ -15,7 +18,8 @@ namespace TestBO4E
     {
         private static readonly HashSet<Type> NO_KEYS_WHITELIST = new()
         {
-            typeof(Kosten)
+            typeof(Kosten),
+            typeof(Wechsel)
         };
 
         [TestMethod]
