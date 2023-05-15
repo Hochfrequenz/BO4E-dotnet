@@ -4,7 +4,7 @@ using System.Runtime.Serialization;
 
 namespace BO4E.ENUM
 {
-    /// <summary>Auflistung möglicher Geraetearten. This is more broadly defined as a <see cref="Geraetetyp"></see>, so a Zaehleinrichtung as Gerateart could be a elektronischer Haushaltszähler as a Gerätetyp./></summary>
+    /// <summary>Auflistung möglicher Geraetearten. This is more broadly defined as a <see cref="Geraetetyp"/>, so a Zaehleinrichtung as Gerateart could be a elektronischer Haushaltszähler as a Gerätetyp.</summary>
     public enum Geraeteart
     {
         /// <summary>Wandler</summary>
