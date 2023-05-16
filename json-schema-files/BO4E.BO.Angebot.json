@@ -2,23 +2,14 @@
   "$schema": "http://json-schema.org/draft-07/schema#",
   "definitions": {
     "Adresse": {
-      "type": [
-        "object",
-        "null"
-      ],
+      "type": ["object", "null"],
       "properties": {
         "timestamp": {
-          "type": [
-            "string",
-            "null"
-          ],
+          "type": ["string", "null"],
           "format": "date-time"
         },
         "guid": {
-          "type": [
-            "string",
-            "null"
-          ]
+          "type": ["string", "null"]
         },
         "postleitzahl": {
           "type": "string"
@@ -27,40 +18,22 @@
           "type": "string"
         },
         "strasse": {
-          "type": [
-            "string",
-            "null"
-          ]
+          "type": ["string", "null"]
         },
         "hausnummer": {
-          "type": [
-            "string",
-            "null"
-          ]
+          "type": ["string", "null"]
         },
         "postfach": {
-          "type": [
-            "string",
-            "null"
-          ]
+          "type": ["string", "null"]
         },
         "adresszusatz": {
-          "type": [
-            "string",
-            "null"
-          ]
+          "type": ["string", "null"]
         },
         "coErgaenzung": {
-          "type": [
-            "string",
-            "null"
-          ]
+          "type": ["string", "null"]
         },
         "landescode": {
-          "type": [
-            "string",
-            "null"
-          ],
+          "type": ["string", "null"],
           "enum": [
             null,
             "AC",
@@ -333,35 +306,20 @@
           ]
         },
         "ortsteil": {
-          "type": [
-            "string",
-            "null"
-          ]
+          "type": ["string", "null"]
         }
       },
-      "required": [
-        "postleitzahl",
-        "ort"
-      ]
+      "required": ["postleitzahl", "ort"]
     },
     "Angebotsposition": {
-      "type": [
-        "object",
-        "null"
-      ],
+      "type": ["object", "null"],
       "properties": {
         "timestamp": {
-          "type": [
-            "string",
-            "null"
-          ],
+          "type": ["string", "null"],
           "format": "date-time"
         },
         "guid": {
-          "type": [
-            "string",
-            "null"
-          ]
+          "type": ["string", "null"]
         },
         "positionsbezeichung": {
           "type": "string"
@@ -376,16 +334,10 @@
           "$ref": "#/definitions/Betrag"
         },
         "preisschluesselstamm": {
-          "type": [
-            "string",
-            "null"
-          ]
+          "type": ["string", "null"]
         },
         "bdewArtikelnummer": {
-          "type": [
-            "string",
-            "null"
-          ],
+          "type": ["string", "null"],
           "enum": [
             null,
             "LEISTUNG",
@@ -443,40 +395,23 @@
           ]
         }
       },
-      "required": [
-        "positionsbezeichung"
-      ]
+      "required": ["positionsbezeichung"]
     },
     "Angebotsteil": {
-      "type": [
-        "object",
-        "null"
-      ],
+      "type": ["object", "null"],
       "properties": {
         "timestamp": {
-          "type": [
-            "string",
-            "null"
-          ],
+          "type": ["string", "null"],
           "format": "date-time"
         },
         "guid": {
-          "type": [
-            "string",
-            "null"
-          ]
+          "type": ["string", "null"]
         },
         "anfrageSubreferenz": {
-          "type": [
-            "string",
-            "null"
-          ]
+          "type": ["string", "null"]
         },
         "lieferstellenangebotsteil": {
-          "type": [
-            "array",
-            "null"
-          ],
+          "type": ["array", "null"],
           "items": {
             "$ref": "#/definitions/Marktlokation"
           }
@@ -497,28 +432,17 @@
           "$ref": "#/definitions/Zeitraum"
         }
       },
-      "required": [
-        "positionen"
-      ]
+      "required": ["positionen"]
     },
     "Angebotsvariante": {
-      "type": [
-        "object",
-        "null"
-      ],
+      "type": ["object", "null"],
       "properties": {
         "timestamp": {
-          "type": [
-            "string",
-            "null"
-          ],
+          "type": ["string", "null"],
           "format": "date-time"
         },
         "guid": {
-          "type": [
-            "string",
-            "null"
-          ]
+          "type": ["string", "null"]
         },
         "angebotsstatus": {
           "type": "string",
@@ -535,23 +459,14 @@
           ]
         },
         "beschreibung": {
-          "type": [
-            "string",
-            "null"
-          ]
+          "type": ["string", "null"]
         },
         "erstelldatum": {
-          "type": [
-            "string",
-            "null"
-          ],
+          "type": ["string", "null"],
           "format": "date-time"
         },
         "bindefrist": {
-          "type": [
-            "string",
-            "null"
-          ],
+          "type": ["string", "null"],
           "format": "date-time"
         },
         "gesamtmenge": {
@@ -567,56 +482,32 @@
           }
         }
       },
-      "required": [
-        "angebotsstatus",
-        "teile"
-      ]
+      "required": ["angebotsstatus", "teile"]
     },
     "Ansprechpartner": {
-      "type": [
-        "object",
-        "null"
-      ],
+      "type": ["object", "null"],
       "properties": {
         "boTyp": {
-          "type": [
-            "string",
-            "null"
-          ]
+          "type": ["string", "null"]
         },
         "versionStruktur": {
-          "type": [
-            "string",
-            "null"
-          ]
+          "type": ["string", "null"]
         },
         "timestamp": {
-          "type": [
-            "string",
-            "null"
-          ],
+          "type": ["string", "null"],
           "format": "date-time"
         },
         "externeReferenzen": {
-          "type": [
-            "array",
-            "null"
-          ],
+          "type": ["array", "null"],
           "items": {
             "$ref": "#/definitions/ExterneReferenz"
           }
         },
         "guid": {
-          "type": [
-            "string",
-            "null"
-          ]
+          "type": ["string", "null"]
         },
         "anrede": {
-          "type": [
-            "string",
-            "null"
-          ],
+          "type": ["string", "null"],
           "enum": [
             null,
             "HERR",
@@ -632,46 +523,23 @@
           ]
         },
         "inviduelleAnrede": {
-          "type": [
-            "string",
-            "null"
-          ]
+          "type": ["string", "null"]
         },
         "titel": {
-          "type": [
-            "string",
-            "null"
-          ],
-          "enum": [
-            null,
-            "DR",
-            "PROF",
-            "PROF_DR"
-          ]
+          "type": ["string", "null"],
+          "enum": [null, "DR", "PROF", "PROF_DR"]
         },
         "vorname": {
-          "type": [
-            "string",
-            "null"
-          ]
+          "type": ["string", "null"]
         },
         "nachname": {
-          "type": [
-            "string",
-            "null"
-          ]
+          "type": ["string", "null"]
         },
         "eMailAdresse": {
-          "type": [
-            "string",
-            "null"
-          ]
+          "type": ["string", "null"]
         },
         "kommentar": {
-          "type": [
-            "string",
-            "null"
-          ]
+          "type": ["string", "null"]
         },
         "geschaeftspartner": {
           "$ref": "#/definitions/Geschaeftspartner-1"
@@ -680,19 +548,13 @@
           "$ref": "#/definitions/Adresse"
         },
         "rufnummern": {
-          "type": [
-            "array",
-            "null"
-          ],
+          "type": ["array", "null"],
           "items": {
             "$ref": "#/definitions/Rufnummer"
           }
         },
         "zustaendigkeit": {
-          "type": [
-            "array",
-            "null"
-          ],
+          "type": ["array", "null"],
           "items": {
             "$ref": "#/definitions/Zustaendigkeit"
           }
@@ -700,10 +562,7 @@
       }
     },
     "Betrag": {
-      "type": [
-        "object",
-        "null"
-      ],
+      "type": ["object", "null"],
       "properties": {
         "wert": {
           "type": "number"
@@ -895,29 +754,17 @@
           ]
         },
         "timestamp": {
-          "type": [
-            "string",
-            "null"
-          ],
+          "type": ["string", "null"],
           "format": "date-time"
         },
         "guid": {
-          "type": [
-            "string",
-            "null"
-          ]
+          "type": ["string", "null"]
         }
       },
-      "required": [
-        "wert",
-        "waehrung"
-      ]
+      "required": ["wert", "waehrung"]
     },
     "Dienstleistung": {
-      "type": [
-        "object",
-        "null"
-      ],
+      "type": ["object", "null"],
       "properties": {
         "dienstleistungstyp": {
           "type": "string",
@@ -967,62 +814,35 @@
           "type": "string"
         },
         "timestamp": {
-          "type": [
-            "string",
-            "null"
-          ],
+          "type": ["string", "null"],
           "format": "date-time"
         },
         "guid": {
-          "type": [
-            "string",
-            "null"
-          ]
+          "type": ["string", "null"]
         }
       },
-      "required": [
-        "dienstleistungstyp",
-        "bezeichnung"
-      ]
+      "required": ["dienstleistungstyp", "bezeichnung"]
     },
     "ExterneReferenz": {
-      "type": [
-        "object",
-        "null"
-      ],
+      "type": ["object", "null"],
       "properties": {
         "exRefName": {
-          "type": [
-            "string",
-            "null"
-          ]
+          "type": ["string", "null"]
         },
         "exRefWert": {
-          "type": [
-            "string",
-            "null"
-          ]
+          "type": ["string", "null"]
         },
         "timestamp": {
-          "type": [
-            "string",
-            "null"
-          ],
+          "type": ["string", "null"],
           "format": "date-time"
         },
         "guid": {
-          "type": [
-            "string",
-            "null"
-          ]
+          "type": ["string", "null"]
         }
       }
     },
     "Geokoordinaten": {
-      "type": [
-        "object",
-        "null"
-      ],
+      "type": ["object", "null"],
       "properties": {
         "breitengrad": {
           "type": "number"
@@ -1031,48 +851,27 @@
           "type": "number"
         },
         "timestamp": {
-          "type": [
-            "string",
-            "null"
-          ],
+          "type": ["string", "null"],
           "format": "date-time"
         },
         "guid": {
-          "type": [
-            "string",
-            "null"
-          ]
+          "type": ["string", "null"]
         }
       },
-      "required": [
-        "breitengrad",
-        "laengengrad"
-      ]
+      "required": ["breitengrad", "laengengrad"]
     },
     "Geraet": {
-      "type": [
-        "object",
-        "null"
-      ],
+      "type": ["object", "null"],
       "properties": {
         "timestamp": {
-          "type": [
-            "string",
-            "null"
-          ],
+          "type": ["string", "null"],
           "format": "date-time"
         },
         "guid": {
-          "type": [
-            "string",
-            "null"
-          ]
+          "type": ["string", "null"]
         },
         "geraetenummer": {
-          "type": [
-            "string",
-            "null"
-          ]
+          "type": ["string", "null"]
         },
         "geraeteeigenschaften": {
           "$ref": "#/definitions/Geraeteeigenschaften"
@@ -1080,23 +879,14 @@
       }
     },
     "Geraeteeigenschaften": {
-      "type": [
-        "object",
-        "null"
-      ],
+      "type": ["object", "null"],
       "properties": {
         "timestamp": {
-          "type": [
-            "string",
-            "null"
-          ],
+          "type": ["string", "null"],
           "format": "date-time"
         },
         "guid": {
-          "type": [
-            "string",
-            "null"
-          ]
+          "type": ["string", "null"]
         },
         "geraetetyp": {
           "type": "string",
@@ -1147,10 +937,7 @@
           ]
         },
         "geraetemerkmal": {
-          "type": [
-            "string",
-            "null"
-          ],
+          "type": ["string", "null"],
           "enum": [
             null,
             "EINTARIF",
@@ -1212,64 +999,38 @@
           ]
         },
         "Parameter": {
-          "type": [
-            "object",
-            "null"
-          ],
+          "type": ["object", "null"],
           "additionalProperties": {
-            "type": [
-              "string",
-              "null"
-            ]
+            "type": ["string", "null"]
           }
         }
       },
-      "required": [
-        "geraetetyp"
-      ]
+      "required": ["geraetetyp"]
     },
     "Geschaeftspartner": {
       "type": "object",
       "properties": {
         "boTyp": {
-          "type": [
-            "string",
-            "null"
-          ]
+          "type": ["string", "null"]
         },
         "versionStruktur": {
-          "type": [
-            "string",
-            "null"
-          ]
+          "type": ["string", "null"]
         },
         "timestamp": {
-          "type": [
-            "string",
-            "null"
-          ],
+          "type": ["string", "null"],
           "format": "date-time"
         },
         "externeReferenzen": {
-          "type": [
-            "array",
-            "null"
-          ],
+          "type": ["array", "null"],
           "items": {
             "$ref": "#/definitions/ExterneReferenz"
           }
         },
         "guid": {
-          "type": [
-            "string",
-            "null"
-          ]
+          "type": ["string", "null"]
         },
         "anrede": {
-          "type": [
-            "string",
-            "null"
-          ],
+          "type": ["string", "null"],
           "enum": [
             null,
             "HERR",
@@ -1285,89 +1046,47 @@
           ]
         },
         "title": {
-          "type": [
-            "string",
-            "null"
-          ]
+          "type": ["string", "null"]
         },
         "name1": {
-          "type": [
-            "string",
-            "null"
-          ]
+          "type": ["string", "null"]
         },
         "name2": {
-          "type": [
-            "string",
-            "null"
-          ]
+          "type": ["string", "null"]
         },
         "name3": {
-          "type": [
-            "string",
-            "null"
-          ]
+          "type": ["string", "null"]
         },
         "gewerbekennzeichnung": {
           "type": "boolean"
         },
         "hrnummer": {
-          "type": [
-            "string",
-            "null"
-          ]
+          "type": ["string", "null"]
         },
         "amtsgericht": {
-          "type": [
-            "string",
-            "null"
-          ]
+          "type": ["string", "null"]
         },
         "kontaktweg": {
-          "type": [
-            "array",
-            "null"
-          ],
+          "type": ["array", "null"],
           "items": {
             "type": "string",
-            "enum": [
-              "ANSCHREIBEN",
-              "TELEFONAT",
-              "FAX",
-              "E_MAIL",
-              "SMS"
-            ]
+            "enum": ["ANSCHREIBEN", "TELEFONAT", "FAX", "E_MAIL", "SMS"]
           }
         },
         "umsatzsteuerId": {
-          "type": [
-            "string",
-            "null"
-          ]
+          "type": ["string", "null"]
         },
         "glaeubigerId": {
-          "type": [
-            "string",
-            "null"
-          ]
+          "type": ["string", "null"]
         },
         "eMailAdresse": {
-          "type": [
-            "string",
-            "null"
-          ]
+          "type": ["string", "null"]
         },
         "website": {
-          "type": [
-            "string",
-            "null"
-          ]
+          "type": ["string", "null"]
         },
         "geschaeftspartnerrolle": {
-          "type": [
-            "array",
-            "null"
-          ],
+          "type": ["array", "null"],
           "items": {
             "type": "string",
             "enum": [
@@ -1383,55 +1102,32 @@
           "$ref": "#/definitions/Adresse"
         }
       },
-      "required": [
-        "gewerbekennzeichnung"
-      ]
+      "required": ["gewerbekennzeichnung"]
     },
     "Geschaeftspartner-1": {
-      "type": [
-        "object",
-        "null"
-      ],
+      "type": ["object", "null"],
       "properties": {
         "boTyp": {
-          "type": [
-            "string",
-            "null"
-          ]
+          "type": ["string", "null"]
         },
         "versionStruktur": {
-          "type": [
-            "string",
-            "null"
-          ]
+          "type": ["string", "null"]
         },
         "timestamp": {
-          "type": [
-            "string",
-            "null"
-          ],
+          "type": ["string", "null"],
           "format": "date-time"
         },
         "externeReferenzen": {
-          "type": [
-            "array",
-            "null"
-          ],
+          "type": ["array", "null"],
           "items": {
             "$ref": "#/definitions/ExterneReferenz"
           }
         },
         "guid": {
-          "type": [
-            "string",
-            "null"
-          ]
+          "type": ["string", "null"]
         },
         "anrede": {
-          "type": [
-            "string",
-            "null"
-          ],
+          "type": ["string", "null"],
           "enum": [
             null,
             "HERR",
@@ -1447,89 +1143,47 @@
           ]
         },
         "title": {
-          "type": [
-            "string",
-            "null"
-          ]
+          "type": ["string", "null"]
         },
         "name1": {
-          "type": [
-            "string",
-            "null"
-          ]
+          "type": ["string", "null"]
         },
         "name2": {
-          "type": [
-            "string",
-            "null"
-          ]
+          "type": ["string", "null"]
         },
         "name3": {
-          "type": [
-            "string",
-            "null"
-          ]
+          "type": ["string", "null"]
         },
         "gewerbekennzeichnung": {
           "type": "boolean"
         },
         "hrnummer": {
-          "type": [
-            "string",
-            "null"
-          ]
+          "type": ["string", "null"]
         },
         "amtsgericht": {
-          "type": [
-            "string",
-            "null"
-          ]
+          "type": ["string", "null"]
         },
         "kontaktweg": {
-          "type": [
-            "array",
-            "null"
-          ],
+          "type": ["array", "null"],
           "items": {
             "type": "string",
-            "enum": [
-              "ANSCHREIBEN",
-              "TELEFONAT",
-              "FAX",
-              "E_MAIL",
-              "SMS"
-            ]
+            "enum": ["ANSCHREIBEN", "TELEFONAT", "FAX", "E_MAIL", "SMS"]
           }
         },
         "umsatzsteuerId": {
-          "type": [
-            "string",
-            "null"
-          ]
+          "type": ["string", "null"]
         },
         "glaeubigerId": {
-          "type": [
-            "string",
-            "null"
-          ]
+          "type": ["string", "null"]
         },
         "eMailAdresse": {
-          "type": [
-            "string",
-            "null"
-          ]
+          "type": ["string", "null"]
         },
         "website": {
-          "type": [
-            "string",
-            "null"
-          ]
+          "type": ["string", "null"]
         },
         "geschaeftspartnerrolle": {
-          "type": [
-            "array",
-            "null"
-          ],
+          "type": ["array", "null"],
           "items": {
             "type": "string",
             "enum": [
@@ -1545,15 +1199,10 @@
           "$ref": "#/definitions/Adresse"
         }
       },
-      "required": [
-        "gewerbekennzeichnung"
-      ]
+      "required": ["gewerbekennzeichnung"]
     },
     "Hardware": {
-      "type": [
-        "object",
-        "null"
-      ],
+      "type": ["object", "null"],
       "properties": {
         "geraetetyp": {
           "type": "string",
@@ -1610,41 +1259,23 @@
           "$ref": "#/definitions/Geraeteeigenschaften"
         },
         "geraetenummer": {
-          "type": [
-            "string",
-            "null"
-          ]
+          "type": ["string", "null"]
         },
         "geraetereferenz": {
-          "type": [
-            "string",
-            "null"
-          ]
+          "type": ["string", "null"]
         },
         "timestamp": {
-          "type": [
-            "string",
-            "null"
-          ],
+          "type": ["string", "null"],
           "format": "date-time"
         },
         "guid": {
-          "type": [
-            "string",
-            "null"
-          ]
+          "type": ["string", "null"]
         }
       },
-      "required": [
-        "geraetetyp",
-        "bezeichnung"
-      ]
+      "required": ["geraetetyp", "bezeichnung"]
     },
     "Katasteradresse": {
-      "type": [
-        "object",
-        "null"
-      ],
+      "type": ["object", "null"],
       "properties": {
         "gemarkung_flur": {
           "type": "string"
@@ -1653,113 +1284,59 @@
           "type": "string"
         },
         "timestamp": {
-          "type": [
-            "string",
-            "null"
-          ],
+          "type": ["string", "null"],
           "format": "date-time"
         },
         "guid": {
-          "type": [
-            "string",
-            "null"
-          ]
+          "type": ["string", "null"]
         }
       },
-      "required": [
-        "gemarkung_flur",
-        "flurstueck"
-      ]
+      "required": ["gemarkung_flur", "flurstueck"]
     },
     "Konzessionsabgabe": {
-      "type": [
-        "object",
-        "null"
-      ],
+      "type": ["object", "null"],
       "properties": {
         "timestamp": {
-          "type": [
-            "string",
-            "null"
-          ],
+          "type": ["string", "null"],
           "format": "date-time"
         },
         "guid": {
-          "type": [
-            "string",
-            "null"
-          ]
+          "type": ["string", "null"]
         },
         "kosten": {
-          "type": [
-            "number",
-            "null"
-          ]
+          "type": ["number", "null"]
         },
         "kategorie": {
-          "type": [
-            "string",
-            "null"
-          ]
+          "type": ["string", "null"]
         },
         "satz": {
           "type": "string",
-          "enum": [
-            "KAS",
-            "SA",
-            "SAS",
-            "TA",
-            "TAS",
-            "TK",
-            "TKS",
-            "TS",
-            "TSS"
-          ]
+          "enum": ["KAS", "SA", "SAS", "TA", "TAS", "TK", "TKS", "TS", "TSS"]
         }
       },
-      "required": [
-        "satz"
-      ]
+      "required": ["satz"]
     },
     "Marktlokation": {
-      "type": [
-        "object",
-        "null"
-      ],
+      "type": ["object", "null"],
       "properties": {
         "boTyp": {
-          "type": [
-            "string",
-            "null"
-          ]
+          "type": ["string", "null"]
         },
         "versionStruktur": {
-          "type": [
-            "string",
-            "null"
-          ]
+          "type": ["string", "null"]
         },
         "timestamp": {
-          "type": [
-            "string",
-            "null"
-          ],
+          "type": ["string", "null"],
           "format": "date-time"
         },
         "externeReferenzen": {
-          "type": [
-            "array",
-            "null"
-          ],
+          "type": ["array", "null"],
           "items": {
             "$ref": "#/definitions/ExterneReferenz"
           }
         },
         "guid": {
-          "type": [
-            "string",
-            "null"
-          ]
+          "type": ["string", "null"]
         },
         "marktlokationsId": {
           "type": "string",
@@ -1777,21 +1354,11 @@
           ]
         },
         "energierichtung": {
-          "type": [
-            "string",
-            "null"
-          ],
-          "enum": [
-            null,
-            "AUSSP",
-            "EINSP"
-          ]
+          "type": ["string", "null"],
+          "enum": [null, "AUSSP", "EINSP"]
         },
         "bilanzierungsmethode": {
-          "type": [
-            "string",
-            "null"
-          ],
+          "type": ["string", "null"],
           "enum": [
             null,
             "RLM",
@@ -1803,30 +1370,14 @@
           ]
         },
         "verbrauchsart": {
-          "type": [
-            "string",
-            "null"
-          ],
-          "enum": [
-            null,
-            "KL",
-            "KLW",
-            "KLWS",
-            "W",
-            "WS"
-          ]
+          "type": ["string", "null"],
+          "enum": [null, "KL", "KLW", "KLWS", "W", "WS"]
         },
         "unterbrechbar": {
-          "type": [
-            "boolean",
-            "null"
-          ]
+          "type": ["boolean", "null"]
         },
         "netzebene": {
-          "type": [
-            "string",
-            "null"
-          ],
+          "type": ["string", "null"],
           "enum": [
             null,
             "NSP",
@@ -1842,16 +1393,10 @@
           ]
         },
         "netzbetreiberCodeNr": {
-          "type": [
-            "string",
-            "null"
-          ]
+          "type": ["string", "null"]
         },
         "gebietTyp": {
-          "type": [
-            "string",
-            "null"
-          ],
+          "type": ["string", "null"],
           "enum": [
             null,
             "REGELZONE",
@@ -1866,36 +1411,17 @@
           ]
         },
         "netzgebietNr": {
-          "type": [
-            "string",
-            "null"
-          ]
+          "type": ["string", "null"]
         },
         "bilanzierungsgebiet": {
-          "type": [
-            "string",
-            "null"
-          ]
+          "type": ["string", "null"]
         },
         "grundversorgerCodeNr": {
-          "type": [
-            "string",
-            "null"
-          ]
+          "type": ["string", "null"]
         },
         "gasqualitaet": {
-          "type": [
-            "string",
-            "null"
-          ],
-          "enum": [
-            null,
-            "ZERO",
-            "H_GAS",
-            "HGAS",
-            "L_GAS",
-            "LGAS"
-          ]
+          "type": ["string", "null"],
+          "enum": [null, "ZERO", "H_GAS", "HGAS", "L_GAS", "LGAS"]
         },
         "endkunde": {
           "$ref": "#/definitions/Geschaeftspartner-1"
@@ -1910,31 +1436,19 @@
           "$ref": "#/definitions/Katasteradresse"
         },
         "marktrollen": {
-          "type": [
-            "array",
-            "null"
-          ],
+          "type": ["array", "null"],
           "items": {
             "$ref": "#/definitions/MarktpartnerDetails"
           }
         },
         "regelzone": {
-          "type": [
-            "string",
-            "null"
-          ]
+          "type": ["string", "null"]
         },
         "marktgebiet": {
-          "type": [
-            "string",
-            "null"
-          ]
+          "type": ["string", "null"]
         },
         "zeitreihentyp": {
-          "type": [
-            "string",
-            "null"
-          ],
+          "type": ["string", "null"],
           "enum": [
             null,
             "EGS",
@@ -1949,111 +1463,63 @@
           ]
         },
         "zaehlwerke": {
-          "type": [
-            "array",
-            "null"
-          ],
+          "type": ["array", "null"],
           "items": {
             "$ref": "#/definitions/Zaehlwerk"
           }
         },
         "zaehlwerkeBeteiligteMarktrolle": {
-          "type": [
-            "array",
-            "null"
-          ],
+          "type": ["array", "null"],
           "items": {
             "$ref": "#/definitions/Zaehlwerk"
           }
         },
         "verbrauchsmenge": {
-          "type": [
-            "array",
-            "null"
-          ],
+          "type": ["array", "null"],
           "items": {
             "$ref": "#/definitions/Verbrauch"
           }
         },
         "messlokationen": {
-          "type": [
-            "array",
-            "null"
-          ],
+          "type": ["array", "null"],
           "items": {
             "$ref": "#/definitions/Messlokation"
           }
         },
         "zugehoerigeMesslokationen": {
-          "type": [
-            "array",
-            "null"
-          ],
+          "type": ["array", "null"],
           "items": {
             "$ref": "#/definitions/Messlokationszuordnung"
           }
         },
         "messtechnischeEinordnung": {
-          "type": [
-            "string",
-            "null"
-          ],
-          "enum": [
-            null,
-            "IMS",
-            "KME_MME",
-            "KEINE_MESSUNG"
-          ]
+          "type": ["string", "null"],
+          "enum": [null, "IMS", "KME_MME", "KEINE_MESSUNG"]
         },
         "netznutzungsabrechnungsdaten": {
-          "type": [
-            "array",
-            "null"
-          ],
+          "type": ["array", "null"],
           "items": {
             "$ref": "#/definitions/Netznutzungsabrechnungsdaten"
           }
         },
         "sperrstatus": {
-          "type": [
-            "string",
-            "null"
-          ],
-          "enum": [
-            null,
-            "ENTSPERRT",
-            "GESPERRT"
-          ]
+          "type": ["string", "null"],
+          "enum": [null, "ENTSPERRT", "GESPERRT"]
         }
       },
-      "required": [
-        "marktlokationsId",
-        "sparte"
-      ]
+      "required": ["marktlokationsId", "sparte"]
     },
     "MarktpartnerDetails": {
-      "type": [
-        "object",
-        "null"
-      ],
+      "type": ["object", "null"],
       "properties": {
         "rollencodenummer": {
-          "type": [
-            "string",
-            "null"
-          ]
+          "type": ["string", "null"]
         },
         "code": {
-          "type": [
-            "string",
-            "null"
-          ]
+          "type": ["string", "null"]
         },
         "marktrolle": {
-          "type": [
-            "string",
-            "null"
-          ],
+          "type": ["string", "null"],
           "enum": [
             null,
             "NB",
@@ -2074,53 +1540,32 @@
           ]
         },
         "timestamp": {
-          "type": [
-            "string",
-            "null"
-          ],
+          "type": ["string", "null"],
           "format": "date-time"
         },
         "guid": {
-          "type": [
-            "string",
-            "null"
-          ]
+          "type": ["string", "null"]
         },
         "weiterverpflichtet": {
-          "type": [
-            "boolean",
-            "null"
-          ]
+          "type": ["boolean", "null"]
         }
       }
     },
     "Menge": {
-      "type": [
-        "object",
-        "null"
-      ],
+      "type": ["object", "null"],
       "properties": {
         "timestamp": {
-          "type": [
-            "string",
-            "null"
-          ],
+          "type": ["string", "null"],
           "format": "date-time"
         },
         "guid": {
-          "type": [
-            "string",
-            "null"
-          ]
+          "type": ["string", "null"]
         },
         "wert": {
           "type": "number"
         },
         "einheit": {
-          "type": [
-            "string",
-            "null"
-          ],
+          "type": ["string", "null"],
           "enum": [
             null,
             "ZERO",
@@ -2143,49 +1588,29 @@
           ]
         }
       },
-      "required": [
-        "wert"
-      ]
+      "required": ["wert"]
     },
     "Messlokation": {
-      "type": [
-        "object",
-        "null"
-      ],
+      "type": ["object", "null"],
       "properties": {
         "boTyp": {
-          "type": [
-            "string",
-            "null"
-          ]
+          "type": ["string", "null"]
         },
         "versionStruktur": {
-          "type": [
-            "string",
-            "null"
-          ]
+          "type": ["string", "null"]
         },
         "timestamp": {
-          "type": [
-            "string",
-            "null"
-          ],
+          "type": ["string", "null"],
           "format": "date-time"
         },
         "externeReferenzen": {
-          "type": [
-            "array",
-            "null"
-          ],
+          "type": ["array", "null"],
           "items": {
             "$ref": "#/definitions/ExterneReferenz"
           }
         },
         "guid": {
-          "type": [
-            "string",
-            "null"
-          ]
+          "type": ["string", "null"]
         },
         "messlokationsId": {
           "type": "string",
@@ -2203,10 +1628,7 @@
           ]
         },
         "netzebeneMessung": {
-          "type": [
-            "string",
-            "null"
-          ],
+          "type": ["string", "null"],
           "enum": [
             null,
             "NSP",
@@ -2222,28 +1644,16 @@
           ]
         },
         "messgebietNr": {
-          "type": [
-            "string",
-            "null"
-          ]
+          "type": ["string", "null"]
         },
         "grundzustaendigerMSBCodeNr": {
-          "type": [
-            "string",
-            "null"
-          ]
+          "type": ["string", "null"]
         },
         "grundzustaendigerMSBIMCodeNr": {
-          "type": [
-            "string",
-            "null"
-          ]
+          "type": ["string", "null"]
         },
         "grundzustaendigerMDLCodeNr": {
-          "type": [
-            "string",
-            "null"
-          ]
+          "type": ["string", "null"]
         },
         "messadresse": {
           "$ref": "#/definitions/Adresse"
@@ -2255,37 +1665,25 @@
           "$ref": "#/definitions/Katasteradresse"
         },
         "geraete": {
-          "type": [
-            "array",
-            "null"
-          ],
+          "type": ["array", "null"],
           "items": {
             "$ref": "#/definitions/Hardware"
           }
         },
         "messdienstleistung": {
-          "type": [
-            "array",
-            "null"
-          ],
+          "type": ["array", "null"],
           "items": {
             "$ref": "#/definitions/Dienstleistung"
           }
         },
         "messlokationszaehler": {
-          "type": [
-            "array",
-            "null"
-          ],
+          "type": ["array", "null"],
           "items": {
             "$ref": "#/definitions/Zaehler"
           }
         },
         "bilanzierungsmethode": {
-          "type": [
-            "string",
-            "null"
-          ],
+          "type": ["string", "null"],
           "enum": [
             null,
             "RLM",
@@ -2297,54 +1695,29 @@
           ]
         },
         "abrechnungmessstellenbetriebnna": {
-          "type": [
-            "boolean",
-            "null"
-          ]
+          "type": ["boolean", "null"]
         },
         "marktrollen": {
-          "type": [
-            "array",
-            "null"
-          ],
+          "type": ["array", "null"],
           "items": {
             "$ref": "#/definitions/MarktpartnerDetails"
           }
         },
         "gasqualitaet": {
-          "type": [
-            "string",
-            "null"
-          ],
-          "enum": [
-            null,
-            "ZERO",
-            "H_GAS",
-            "HGAS",
-            "L_GAS",
-            "LGAS"
-          ]
+          "type": ["string", "null"],
+          "enum": [null, "ZERO", "H_GAS", "HGAS", "L_GAS", "LGAS"]
         },
         "verlustfaktor": {
-          "type": [
-            "number",
-            "null"
-          ]
+          "type": ["number", "null"]
         },
         "zaehlwerke": {
-          "type": [
-            "array",
-            "null"
-          ],
+          "type": ["array", "null"],
           "items": {
             "$ref": "#/definitions/Zaehlwerk"
           }
         },
         "betriebszustand": {
-          "type": [
-            "string",
-            "null"
-          ],
+          "type": ["string", "null"],
           "enum": [
             null,
             "GESPERRT_NICHT_ENTSPERREN",
@@ -2353,25 +1726,16 @@
           ]
         }
       },
-      "required": [
-        "messlokationsId",
-        "sparte"
-      ]
+      "required": ["messlokationsId", "sparte"]
     },
     "Messlokationszuordnung": {
-      "type": [
-        "object",
-        "null"
-      ],
+      "type": ["object", "null"],
       "properties": {
         "messlokationsId": {
           "type": "string"
         },
         "arithmetik": {
-          "type": [
-            "string",
-            "null"
-          ],
+          "type": ["string", "null"],
           "enum": [
             null,
             "ADDITION",
@@ -2383,96 +1747,51 @@
           ]
         },
         "gueltigSeit": {
-          "type": [
-            "string",
-            "null"
-          ],
+          "type": ["string", "null"],
           "format": "date-time"
         },
         "gueltigBis": {
-          "type": [
-            "string",
-            "null"
-          ],
+          "type": ["string", "null"],
           "format": "date-time"
         },
         "timestamp": {
-          "type": [
-            "string",
-            "null"
-          ],
+          "type": ["string", "null"],
           "format": "date-time"
         },
         "guid": {
-          "type": [
-            "string",
-            "null"
-          ]
+          "type": ["string", "null"]
         }
       },
-      "required": [
-        "messlokationsId"
-      ]
+      "required": ["messlokationsId"]
     },
     "Netznutzungsabrechnungsdaten": {
-      "type": [
-        "object",
-        "null"
-      ],
+      "type": ["object", "null"],
       "properties": {
         "timestamp": {
-          "type": [
-            "string",
-            "null"
-          ],
+          "type": ["string", "null"],
           "format": "date-time"
         },
         "guid": {
-          "type": [
-            "string",
-            "null"
-          ]
+          "type": ["string", "null"]
         },
         "artikelId": {
-          "type": [
-            "string",
-            "null"
-          ]
+          "type": ["string", "null"]
         },
         "artikelIdTyp": {
-          "type": [
-            "string",
-            "null"
-          ],
-          "enum": [
-            null,
-            "ARTIKELID",
-            "GRUPPENARTIKELID"
-          ]
+          "type": ["string", "null"],
+          "enum": [null, "ARTIKELID", "GRUPPENARTIKELID"]
         },
         "anzahl": {
-          "type": [
-            "integer",
-            "null"
-          ]
+          "type": ["integer", "null"]
         },
         "gemeinderabatt": {
-          "type": [
-            "number",
-            "null"
-          ]
+          "type": ["number", "null"]
         },
         "zuschlag": {
-          "type": [
-            "number",
-            "null"
-          ]
+          "type": ["number", "null"]
         },
         "abschlag": {
-          "type": [
-            "number",
-            "null"
-          ]
+          "type": ["number", "null"]
         },
         "singulaereBetriebsmittel": {
           "$ref": "#/definitions/Menge"
@@ -2483,30 +1802,17 @@
       }
     },
     "Preis": {
-      "type": [
-        "object",
-        "null"
-      ],
+      "type": ["object", "null"],
       "properties": {
         "wert": {
           "type": "number"
         },
         "einheit": {
-          "type": [
-            "string",
-            "null"
-          ],
-          "enum": [
-            null,
-            "EUR",
-            "CT"
-          ]
+          "type": ["string", "null"],
+          "enum": [null, "EUR", "CT"]
         },
         "bezugswert": {
-          "type": [
-            "string",
-            "null"
-          ],
+          "type": ["string", "null"],
           "enum": [
             null,
             "ZERO",
@@ -2529,39 +1835,21 @@
           ]
         },
         "status": {
-          "type": [
-            "string",
-            "null"
-          ],
-          "enum": [
-            null,
-            "VORLAEUFIG",
-            "ENDGUELTIG"
-          ]
+          "type": ["string", "null"],
+          "enum": [null, "VORLAEUFIG", "ENDGUELTIG"]
         },
         "timestamp": {
-          "type": [
-            "string",
-            "null"
-          ],
+          "type": ["string", "null"],
           "format": "date-time"
         },
         "guid": {
-          "type": [
-            "string",
-            "null"
-          ]
+          "type": ["string", "null"]
         }
       },
-      "required": [
-        "wert"
-      ]
+      "required": ["wert"]
     },
     "Rufnummer": {
-      "type": [
-        "object",
-        "null"
-      ],
+      "type": ["object", "null"],
       "properties": {
         "nummerntyp": {
           "type": "string",
@@ -2581,42 +1869,24 @@
           "type": "string"
         },
         "timestamp": {
-          "type": [
-            "string",
-            "null"
-          ],
+          "type": ["string", "null"],
           "format": "date-time"
         },
         "guid": {
-          "type": [
-            "string",
-            "null"
-          ]
+          "type": ["string", "null"]
         }
       },
-      "required": [
-        "nummerntyp",
-        "rufnummer"
-      ]
+      "required": ["nummerntyp", "rufnummer"]
     },
     "StatusZusatzInformation": {
-      "type": [
-        "object",
-        "null"
-      ],
+      "type": ["object", "null"],
       "properties": {
         "timestamp": {
-          "type": [
-            "string",
-            "null"
-          ],
+          "type": ["string", "null"],
           "format": "date-time"
         },
         "art": {
-          "type": [
-            "string",
-            "null"
-          ],
+          "type": ["string", "null"],
           "enum": [
             null,
             "VERTRAG",
@@ -2630,16 +1900,10 @@
           ]
         },
         "guid": {
-          "type": [
-            "string",
-            "null"
-          ]
+          "type": ["string", "null"]
         },
         "status": {
-          "type": [
-            "string",
-            "null"
-          ],
+          "type": ["string", "null"],
           "enum": [
             null,
             "TARIF_1",
@@ -2713,30 +1977,18 @@
       }
     },
     "Verbrauch": {
-      "type": [
-        "object",
-        "null"
-      ],
+      "type": ["object", "null"],
       "properties": {
         "startdatum": {
-          "type": [
-            "string",
-            "null"
-          ],
+          "type": ["string", "null"],
           "format": "date-time"
         },
         "enddatum": {
-          "type": [
-            "string",
-            "null"
-          ],
+          "type": ["string", "null"],
           "format": "date-time"
         },
         "type": {
-          "type": [
-            "string",
-            "null"
-          ],
+          "type": ["string", "null"],
           "enum": [
             null,
             "ARBEITLEISTUNGTAGESPARAMETERABHMALO",
@@ -2745,10 +1997,7 @@
           ]
         },
         "tarifstufe": {
-          "type": [
-            "string",
-            "null"
-          ],
+          "type": ["string", "null"],
           "enum": [
             null,
             "TARIFSTUFE_0",
@@ -2764,34 +2013,18 @@
           ]
         },
         "timestamp": {
-          "type": [
-            "string",
-            "null"
-          ],
+          "type": ["string", "null"],
           "format": "date-time"
         },
         "guid": {
-          "type": [
-            "string",
-            "null"
-          ]
+          "type": ["string", "null"]
         },
         "wertermittlungsverfahren": {
-          "type": [
-            "string",
-            "null"
-          ],
-          "enum": [
-            null,
-            "PROGNOSE",
-            "MESSUNG"
-          ]
+          "type": ["string", "null"],
+          "enum": [null, "PROGNOSE", "MESSUNG"]
         },
         "messwertstatus": {
-          "type": [
-            "string",
-            "null"
-          ],
+          "type": ["string", "null"],
           "enum": [
             null,
             "ABGELESEN",
@@ -2806,10 +2039,7 @@
           ]
         },
         "statuszusatzinformationen": {
-          "type": [
-            "array",
-            "null"
-          ],
+          "type": ["array", "null"],
           "items": {
             "$ref": "#/definitions/StatusZusatzInformation"
           }
@@ -2843,31 +2073,18 @@
           ]
         },
         "nutzungszeitpunkt": {
-          "type": [
-            "string",
-            "null"
-          ],
+          "type": ["string", "null"],
           "format": "date-time"
         },
         "ausfuehrungszeitpunkt": {
-          "type": [
-            "string",
-            "null"
-          ],
+          "type": ["string", "null"],
           "format": "date-time"
         }
       },
-      "required": [
-        "obiskennzahl",
-        "wert",
-        "einheit"
-      ]
+      "required": ["obiskennzahl", "wert", "einheit"]
     },
     "Verwendungszweck": {
-      "type": [
-        "object",
-        "null"
-      ],
+      "type": ["object", "null"],
       "properties": {
         "marktrolle": {
           "type": "string",
@@ -2890,10 +2107,7 @@
           ]
         },
         "zweck": {
-          "type": [
-            "array",
-            "null"
-          ],
+          "type": ["array", "null"],
           "items": {
             "type": "string",
             "enum": [
@@ -2908,62 +2122,36 @@
           }
         },
         "timestamp": {
-          "type": [
-            "string",
-            "null"
-          ],
+          "type": ["string", "null"],
           "format": "date-time"
         },
         "guid": {
-          "type": [
-            "string",
-            "null"
-          ]
+          "type": ["string", "null"]
         }
       },
-      "required": [
-        "marktrolle"
-      ]
+      "required": ["marktrolle"]
     },
     "Zaehler": {
-      "type": [
-        "object",
-        "null"
-      ],
+      "type": ["object", "null"],
       "properties": {
         "boTyp": {
-          "type": [
-            "string",
-            "null"
-          ]
+          "type": ["string", "null"]
         },
         "versionStruktur": {
-          "type": [
-            "string",
-            "null"
-          ]
+          "type": ["string", "null"]
         },
         "timestamp": {
-          "type": [
-            "string",
-            "null"
-          ],
+          "type": ["string", "null"],
           "format": "date-time"
         },
         "externeReferenzen": {
-          "type": [
-            "array",
-            "null"
-          ],
+          "type": ["array", "null"],
           "items": {
             "$ref": "#/definitions/ExterneReferenz"
           }
         },
         "guid": {
-          "type": [
-            "string",
-            "null"
-          ]
+          "type": ["string", "null"]
         },
         "zaehlernummer": {
           "type": "string"
@@ -2980,21 +2168,11 @@
           ]
         },
         "zaehlerauspraegung": {
-          "type": [
-            "string",
-            "null"
-          ],
-          "enum": [
-            null,
-            "EINRICHTUNGSZAEHLER",
-            "ZWEIRICHTUNGSZAEHLER"
-          ]
+          "type": ["string", "null"],
+          "enum": [null, "EINRICHTUNGSZAEHLER", "ZWEIRICHTUNGSZAEHLER"]
         },
         "zaehlertyp": {
-          "type": [
-            "string",
-            "null"
-          ],
+          "type": ["string", "null"],
           "enum": [
             null,
             "DREHSTROMZAEHLER",
@@ -3014,10 +2192,7 @@
           ]
         },
         "tarifart": {
-          "type": [
-            "string",
-            "null"
-          ],
+          "type": ["string", "null"],
           "enum": [
             null,
             "EINTARIF",
@@ -3028,30 +2203,18 @@
           ]
         },
         "zaehlerkonstante": {
-          "type": [
-            "number",
-            "null"
-          ]
+          "type": ["number", "null"]
         },
         "eichungBis": {
-          "type": [
-            "string",
-            "null"
-          ],
+          "type": ["string", "null"],
           "format": "date-time"
         },
         "letzteEichung": {
-          "type": [
-            "string",
-            "null"
-          ],
+          "type": ["string", "null"],
           "format": "date-time"
         },
         "zaehlwerke": {
-          "type": [
-            "array",
-            "null"
-          ],
+          "type": ["array", "null"],
           "items": {
             "$ref": "#/definitions/Zaehlwerk"
           },
@@ -3061,38 +2224,18 @@
           "$ref": "#/definitions/Geschaeftspartner-1"
         },
         "gateway": {
-          "type": [
-            "string",
-            "null"
-          ]
+          "type": ["string", "null"]
         },
         "fernschaltung": {
-          "type": [
-            "string",
-            "null"
-          ],
-          "enum": [
-            null,
-            "VORHANDEN",
-            "NICHT_VORHANDEN"
-          ]
+          "type": ["string", "null"],
+          "enum": [null, "VORHANDEN", "NICHT_VORHANDEN"]
         },
         "messwerterfassung": {
-          "type": [
-            "string",
-            "null"
-          ],
-          "enum": [
-            null,
-            "FERNAUSLESBAR",
-            "MANUELL_AUSGELESENE"
-          ]
+          "type": ["string", "null"],
+          "enum": [null, "FERNAUSLESBAR", "MANUELL_AUSGELESENE"]
         },
         "zaehlertypspezifikation": {
-          "type": [
-            "string",
-            "null"
-          ],
+          "type": ["string", "null"],
           "enum": [
             null,
             "EDL40",
@@ -3103,10 +2246,7 @@
           ]
         },
         "befestigungsart": {
-          "type": [
-            "string",
-            "null"
-          ],
+          "type": ["string", "null"],
           "enum": [
             null,
             "STECKTECHNIK",
@@ -3117,10 +2257,7 @@
           ]
         },
         "zaehlergroesse": {
-          "type": [
-            "string",
-            "null"
-          ],
+          "type": ["string", "null"],
           "enum": [
             null,
             "EINTARIF",
@@ -3182,79 +2319,42 @@
           ]
         },
         "geraete": {
-          "type": [
-            "array",
-            "null"
-          ],
+          "type": ["array", "null"],
           "items": {
             "$ref": "#/definitions/Geraet"
           }
         }
       },
-      "required": [
-        "zaehlernummer",
-        "sparte"
-      ]
+      "required": ["zaehlernummer", "sparte"]
     },
     "Zaehlwerk": {
-      "type": [
-        "object",
-        "null"
-      ],
+      "type": ["object", "null"],
       "properties": {
         "timestamp": {
-          "type": [
-            "string",
-            "null"
-          ],
+          "type": ["string", "null"],
           "format": "date-time"
         },
         "guid": {
-          "type": [
-            "string",
-            "null"
-          ]
+          "type": ["string", "null"]
         },
         "zaehlwerkId": {
-          "type": [
-            "string",
-            "null"
-          ]
+          "type": ["string", "null"]
         },
         "bezeichnung": {
-          "type": [
-            "string",
-            "null"
-          ]
+          "type": ["string", "null"]
         },
         "richtung": {
-          "type": [
-            "string",
-            "null"
-          ],
-          "enum": [
-            null,
-            "AUSSP",
-            "EINSP"
-          ]
+          "type": ["string", "null"],
+          "enum": [null, "AUSSP", "EINSP"]
         },
         "obisKennzahl": {
-          "type": [
-            "string",
-            "null"
-          ]
+          "type": ["string", "null"]
         },
         "wandlerfaktor": {
-          "type": [
-            "number",
-            "null"
-          ]
+          "type": ["number", "null"]
         },
         "einheit": {
-          "type": [
-            "string",
-            "null"
-          ],
+          "type": ["string", "null"],
           "enum": [
             null,
             "ZERO",
@@ -3277,167 +2377,83 @@
           ]
         },
         "kennzahl": {
-          "type": [
-            "string",
-            "null"
-          ]
+          "type": ["string", "null"]
         },
         "schwachlastfaehig": {
-          "type": [
-            "string",
-            "null"
-          ],
-          "enum": [
-            null,
-            "NICHT_SCHWACHLASTFAEHIG",
-            "SCHWACHLASTFAEHIG"
-          ]
+          "type": ["string", "null"],
+          "enum": [null, "NICHT_SCHWACHLASTFAEHIG", "SCHWACHLASTFAEHIG"]
         },
         "verwendungszwecke": {
-          "type": [
-            "array",
-            "null"
-          ],
+          "type": ["array", "null"],
           "items": {
             "$ref": "#/definitions/Verwendungszweck"
           }
         },
         "verbrauchsart": {
-          "type": [
-            "string",
-            "null"
-          ],
-          "enum": [
-            null,
-            "KL",
-            "KLW",
-            "KLWS",
-            "W",
-            "WS"
-          ]
+          "type": ["string", "null"],
+          "enum": [null, "KL", "KLW", "KLWS", "W", "WS"]
         },
         "unterbrechbarkeit": {
-          "type": [
-            "string",
-            "null"
-          ],
-          "enum": [
-            null,
-            "UV",
-            "NUV"
-          ]
+          "type": ["string", "null"],
+          "enum": [null, "UV", "NUV"]
         },
         "waermenutzung": {
-          "type": [
-            "string",
-            "null"
-          ],
-          "enum": [
-            null,
-            "SPEICHERHEIZUNG",
-            "WAERMEPUMPE",
-            "DIREKTHEIZUNG"
-          ]
+          "type": ["string", "null"],
+          "enum": [null, "SPEICHERHEIZUNG", "WAERMEPUMPE", "DIREKTHEIZUNG"]
         },
         "konzessionsabgabe": {
           "$ref": "#/definitions/Konzessionsabgabe"
         },
         "steuerbefreit": {
-          "type": [
-            "boolean",
-            "null"
-          ]
+          "type": ["boolean", "null"]
         },
         "vorkommastelle": {
-          "type": [
-            "integer",
-            "null"
-          ]
+          "type": ["integer", "null"]
         },
         "nachkommastelle": {
-          "type": [
-            "integer",
-            "null"
-          ]
+          "type": ["integer", "null"]
         },
         "abrechnungsrelevant": {
-          "type": [
-            "boolean",
-            "null"
-          ]
+          "type": ["boolean", "null"]
         },
         "anzahlAblesungen": {
-          "type": [
-            "integer",
-            "null"
-          ]
+          "type": ["integer", "null"]
         },
         "zaehlzeiten": {
           "$ref": "#/definitions/Zaehlzeitregister"
         },
         "konfiguration": {
-          "type": [
-            "string",
-            "null"
-          ]
+          "type": ["string", "null"]
         }
       }
     },
     "Zaehlzeitregister": {
-      "type": [
-        "object",
-        "null"
-      ],
+      "type": ["object", "null"],
       "properties": {
         "timestamp": {
-          "type": [
-            "string",
-            "null"
-          ],
+          "type": ["string", "null"],
           "format": "date-time"
         },
         "guid": {
-          "type": [
-            "string",
-            "null"
-          ]
+          "type": ["string", "null"]
         },
         "zaehlzeitDefinition": {
-          "type": [
-            "string",
-            "null"
-          ]
+          "type": ["string", "null"]
         },
         "register": {
-          "type": [
-            "string",
-            "null"
-          ]
+          "type": ["string", "null"]
         },
         "schwachlastfaehig": {
-          "type": [
-            "string",
-            "null"
-          ],
-          "enum": [
-            null,
-            "NICHT_SCHWACHLASTFAEHIG",
-            "SCHWACHLASTFAEHIG"
-          ]
+          "type": ["string", "null"],
+          "enum": [null, "NICHT_SCHWACHLASTFAEHIG", "SCHWACHLASTFAEHIG"]
         }
       }
     },
     "Zeitraum": {
-      "type": [
-        "object",
-        "null"
-      ],
+      "type": ["object", "null"],
       "properties": {
         "einheit": {
-          "type": [
-            "string",
-            "null"
-          ],
+          "type": ["string", "null"],
           "enum": [
             null,
             "SEKUNDE",
@@ -3453,94 +2469,52 @@
           ]
         },
         "dauer": {
-          "type": [
-            "number",
-            "null"
-          ]
+          "type": ["number", "null"]
         },
         "startdatum": {
-          "type": [
-            "string",
-            "null"
-          ],
+          "type": ["string", "null"],
           "format": "date-time"
         },
         "enddatum": {
-          "type": [
-            "string",
-            "null"
-          ],
+          "type": ["string", "null"],
           "format": "date-time"
         },
         "startzeitpunkt": {
-          "type": [
-            "string",
-            "null"
-          ],
+          "type": ["string", "null"],
           "format": "date-time"
         },
         "endzeitpunkt": {
-          "type": [
-            "string",
-            "null"
-          ],
+          "type": ["string", "null"],
           "format": "date-time"
         },
         "timestamp": {
-          "type": [
-            "string",
-            "null"
-          ],
+          "type": ["string", "null"],
           "format": "date-time"
         },
         "guid": {
-          "type": [
-            "string",
-            "null"
-          ]
+          "type": ["string", "null"]
         }
       },
-      "required": [
-        "startzeitpunkt",
-        "endzeitpunkt"
-      ]
+      "required": ["startzeitpunkt", "endzeitpunkt"]
     },
     "Zustaendigkeit": {
-      "type": [
-        "object",
-        "null"
-      ],
+      "type": ["object", "null"],
       "properties": {
         "jobtitel": {
-          "type": [
-            "string",
-            "null"
-          ]
+          "type": ["string", "null"]
         },
         "abteilung": {
-          "type": [
-            "string",
-            "null"
-          ]
+          "type": ["string", "null"]
         },
         "themengebiet": {
-          "type": [
-            "string",
-            "null"
-          ]
+          "type": ["string", "null"]
         },
         "timestamp": {
-          "type": [
-            "string",
-            "null"
-          ],
+          "type": ["string", "null"],
           "format": "date-time"
         },
         "guid": {
-          "type": [
-            "string",
-            "null"
-          ]
+          "type": ["string", "null"]
         }
       }
     }
@@ -3548,47 +2522,29 @@
   "type": "object",
   "properties": {
     "boTyp": {
-      "type": [
-        "string",
-        "null"
-      ]
+      "type": ["string", "null"]
     },
     "versionStruktur": {
-      "type": [
-        "string",
-        "null"
-      ]
+      "type": ["string", "null"]
     },
     "timestamp": {
-      "type": [
-        "string",
-        "null"
-      ],
+      "type": ["string", "null"],
       "format": "date-time"
     },
     "externeReferenzen": {
-      "type": [
-        "array",
-        "null"
-      ],
+      "type": ["array", "null"],
       "items": {
         "$ref": "#/definitions/ExterneReferenz"
       }
     },
     "guid": {
-      "type": [
-        "string",
-        "null"
-      ]
+      "type": ["string", "null"]
     },
     "angebotsnummer": {
       "type": "string"
     },
     "anfragereferenz": {
-      "type": [
-        "string",
-        "null"
-      ]
+      "type": ["string", "null"]
     },
     "angebotsdatum": {
       "type": "string",
@@ -3596,20 +2552,10 @@
     },
     "sparte": {
       "type": "string",
-      "enum": [
-        "STROM",
-        "GAS",
-        "FERNWAERME",
-        "NAHWAERME",
-        "WASSER",
-        "ABWASSER"
-      ]
+      "enum": ["STROM", "GAS", "FERNWAERME", "NAHWAERME", "WASSER", "ABWASSER"]
     },
     "bindefrist": {
-      "type": [
-        "string",
-        "null"
-      ],
+      "type": ["string", "null"],
       "format": "date-time"
     },
     "angebotgeber": {
@@ -3625,10 +2571,7 @@
       "$ref": "#/definitions/Ansprechpartner"
     },
     "varianten": {
-      "type": [
-        "array",
-        "null"
-      ],
+      "type": ["array", "null"],
       "items": {
         "$ref": "#/definitions/Angebotsvariante"
       },

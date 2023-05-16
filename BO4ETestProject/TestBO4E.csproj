@@ -16,7 +16,8 @@
 
     <ItemGroup>
         <PackageReference Include="coverlet.collector" Version="3.2.0">
-            <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+            <IncludeAssets
+      >runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
             <PrivateAssets>all</PrivateAssets>
         </PackageReference>
         <PackageReference Include="FluentAssertions" Version="6.11.0" />
@@ -44,7 +45,9 @@
         <None Update="bo4eURITests\marktteilnehmer.json">
             <CopyToOutputDirectory>Always</CopyToOutputDirectory>
         </None>
-        <None Update="BoMapperTests\geschaeftspartner_non_lenient_enumlist.json">
+        <None
+      Update="BoMapperTests\geschaeftspartner_non_lenient_enumlist.json"
+    >
             <CopyToOutputDirectory>Always</CopyToOutputDirectory>
         </None>
         <None Update="BoMapperTests\marktlokation_with_typenamehandling.json">

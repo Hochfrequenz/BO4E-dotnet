@@ -1078,6 +1078,7 @@
         "steuerkennzeichen": {
           "type": "string",
           "enum": [
+            "UST_SONDER",
             "UST_19",
             "UST_16",
             "UST_7",
@@ -1087,6 +1088,9 @@
             "VST_7",
             "RCV"
           ]
+        },
+        "sondersteuersatz": {
+          "type": ["number", "null"]
         },
         "basiswert": {
           "type": "number"
