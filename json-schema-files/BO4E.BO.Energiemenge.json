@@ -2,32 +2,56 @@
   "$schema": "http://json-schema.org/draft-07/schema#",
   "definitions": {
     "ExterneReferenz": {
-      "type": ["object", "null"],
+      "type": [
+        "object",
+        "null"
+      ],
       "properties": {
         "exRefName": {
-          "type": ["string", "null"]
+          "type": [
+            "string",
+            "null"
+          ]
         },
         "exRefWert": {
-          "type": ["string", "null"]
+          "type": [
+            "string",
+            "null"
+          ]
         },
         "timestamp": {
-          "type": ["string", "null"],
+          "type": [
+            "string",
+            "null"
+          ],
           "format": "date-time"
         },
         "guid": {
-          "type": ["string", "null"]
+          "type": [
+            "string",
+            "null"
+          ]
         }
       }
     },
     "StatusZusatzInformation": {
-      "type": ["object", "null"],
+      "type": [
+        "object",
+        "null"
+      ],
       "properties": {
         "timestamp": {
-          "type": ["string", "null"],
+          "type": [
+            "string",
+            "null"
+          ],
           "format": "date-time"
         },
         "art": {
-          "type": ["string", "null"],
+          "type": [
+            "string",
+            "null"
+          ],
           "enum": [
             null,
             "VERTRAG",
@@ -41,10 +65,16 @@
           ]
         },
         "guid": {
-          "type": ["string", "null"]
+          "type": [
+            "string",
+            "null"
+          ]
         },
         "status": {
-          "type": ["string", "null"],
+          "type": [
+            "string",
+            "null"
+          ],
           "enum": [
             null,
             "TARIF_1",
@@ -118,18 +148,30 @@
       }
     },
     "Verbrauch": {
-      "type": ["object", "null"],
+      "type": [
+        "object",
+        "null"
+      ],
       "properties": {
         "startdatum": {
-          "type": ["string", "null"],
+          "type": [
+            "string",
+            "null"
+          ],
           "format": "date-time"
         },
         "enddatum": {
-          "type": ["string", "null"],
+          "type": [
+            "string",
+            "null"
+          ],
           "format": "date-time"
         },
         "type": {
-          "type": ["string", "null"],
+          "type": [
+            "string",
+            "null"
+          ],
           "enum": [
             null,
             "ARBEITLEISTUNGTAGESPARAMETERABHMALO",
@@ -138,7 +180,10 @@
           ]
         },
         "tarifstufe": {
-          "type": ["string", "null"],
+          "type": [
+            "string",
+            "null"
+          ],
           "enum": [
             null,
             "TARIFSTUFE_0",
@@ -154,18 +199,34 @@
           ]
         },
         "timestamp": {
-          "type": ["string", "null"],
+          "type": [
+            "string",
+            "null"
+          ],
           "format": "date-time"
         },
         "guid": {
-          "type": ["string", "null"]
+          "type": [
+            "string",
+            "null"
+          ]
         },
         "wertermittlungsverfahren": {
-          "type": ["string", "null"],
-          "enum": [null, "PROGNOSE", "MESSUNG"]
+          "type": [
+            "string",
+            "null"
+          ],
+          "enum": [
+            null,
+            "PROGNOSE",
+            "MESSUNG"
+          ]
         },
         "messwertstatus": {
-          "type": ["string", "null"],
+          "type": [
+            "string",
+            "null"
+          ],
           "enum": [
             null,
             "ABGELESEN",
@@ -180,7 +241,10 @@
           ]
         },
         "statuszusatzinformationen": {
-          "type": ["array", "null"],
+          "type": [
+            "array",
+            "null"
+          ],
           "items": {
             "$ref": "#/definitions/StatusZusatzInformation"
           }
@@ -214,37 +278,62 @@
           ]
         },
         "nutzungszeitpunkt": {
-          "type": ["string", "null"],
+          "type": [
+            "string",
+            "null"
+          ],
           "format": "date-time"
         },
         "ausfuehrungszeitpunkt": {
-          "type": ["string", "null"],
+          "type": [
+            "string",
+            "null"
+          ],
           "format": "date-time"
         }
       },
-      "required": ["obiskennzahl", "wert", "einheit"]
+      "required": [
+        "obiskennzahl",
+        "wert",
+        "einheit"
+      ]
     }
   },
   "type": "object",
   "properties": {
     "boTyp": {
-      "type": ["string", "null"]
+      "type": [
+        "string",
+        "null"
+      ]
     },
     "versionStruktur": {
-      "type": ["string", "null"]
+      "type": [
+        "string",
+        "null"
+      ]
     },
     "timestamp": {
-      "type": ["string", "null"],
+      "type": [
+        "string",
+        "null"
+      ],
       "format": "date-time"
     },
     "externeReferenzen": {
-      "type": ["array", "null"],
+      "type": [
+        "array",
+        "null"
+      ],
       "items": {
         "$ref": "#/definitions/ExterneReferenz"
       }
     },
     "guid": {
-      "type": ["string", "null"]
+      "type": [
+        "string",
+        "null"
+      ]
     },
     "lokationsId": {
       "type": "string",
@@ -252,15 +341,25 @@
     },
     "lokationsTyp": {
       "type": "string",
-      "enum": ["MALO", "MELO"]
+      "enum": [
+        "MALO",
+        "MELO"
+      ]
     },
     "energieverbrauch": {
-      "type": ["array", "null"],
+      "type": [
+        "array",
+        "null"
+      ],
       "items": {
         "$ref": "#/definitions/Verbrauch"
       },
       "minItems": 1
     }
   },
-  "required": ["lokationsId", "lokationsTyp", "energieverbrauch"]
+  "required": [
+    "lokationsId",
+    "lokationsTyp",
+    "energieverbrauch"
+  ]
 }

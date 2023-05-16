@@ -2,32 +2,55 @@
   "$schema": "http://json-schema.org/draft-07/schema#",
   "definitions": {
     "ExterneReferenz": {
-      "type": ["object", "null"],
+      "type": [
+        "object",
+        "null"
+      ],
       "properties": {
         "exRefName": {
-          "type": ["string", "null"]
+          "type": [
+            "string",
+            "null"
+          ]
         },
         "exRefWert": {
-          "type": ["string", "null"]
+          "type": [
+            "string",
+            "null"
+          ]
         },
         "timestamp": {
-          "type": ["string", "null"],
+          "type": [
+            "string",
+            "null"
+          ],
           "format": "date-time"
         },
         "guid": {
-          "type": ["string", "null"]
+          "type": [
+            "string",
+            "null"
+          ]
         }
       }
     },
     "Regionskriterium": {
-      "type": ["object", "null"],
+      "type": [
+        "object",
+        "null"
+      ],
       "properties": {
         "gueltigkeitstyp": {
           "type": "string",
-          "enum": ["NICHT_IN"]
+          "enum": [
+            "NICHT_IN"
+          ]
         },
         "sparte": {
-          "type": ["string", "null"],
+          "type": [
+            "string",
+            "null"
+          ],
           "enum": [
             null,
             "STROM",
@@ -40,7 +63,11 @@
         },
         "mengenoperator": {
           "type": "string",
-          "enum": ["KLEINER_ALS", "GROESSER_ALS", "GLEICH"]
+          "enum": [
+            "KLEINER_ALS",
+            "GROESSER_ALS",
+            "GLEICH"
+          ]
         },
         "regionskriteriumtyp": {
           "type": "string",
@@ -76,11 +103,17 @@
           "type": "string"
         },
         "timestamp": {
-          "type": ["string", "null"],
+          "type": [
+            "string",
+            "null"
+          ],
           "format": "date-time"
         },
         "guid": {
-          "type": ["string", "null"]
+          "type": [
+            "string",
+            "null"
+          ]
         }
       },
       "required": [
@@ -94,20 +127,32 @@
   "type": "object",
   "properties": {
     "boTyp": {
-      "type": ["string", "null"]
+      "type": [
+        "string",
+        "null"
+      ]
     },
     "versionStruktur": {
-      "type": ["string", "null"]
+      "type": [
+        "string",
+        "null"
+      ]
     },
     "timestamp": {
-      "type": ["string", "null"],
+      "type": [
+        "string",
+        "null"
+      ],
       "format": "date-time"
     },
     "bezeichnung": {
       "type": "string"
     },
     "externeReferenzen": {
-      "type": ["array", "null"],
+      "type": [
+        "array",
+        "null"
+      ],
       "items": {
         "$ref": "#/definitions/ExterneReferenz"
       }
@@ -119,14 +164,23 @@
       }
     },
     "guid": {
-      "type": ["string", "null"]
+      "type": [
+        "string",
+        "null"
+      ]
     },
     "negativListe": {
-      "type": ["array", "null"],
+      "type": [
+        "array",
+        "null"
+      ],
       "items": {
         "$ref": "#/definitions/Regionskriterium"
       }
     }
   },
-  "required": ["bezeichnung", "positivListe"]
+  "required": [
+    "bezeichnung",
+    "positivListe"
+  ]
 }
