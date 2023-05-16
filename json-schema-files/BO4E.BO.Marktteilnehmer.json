@@ -2,23 +2,14 @@
   "$schema": "http://json-schema.org/draft-07/schema#",
   "definitions": {
     "Adresse": {
-      "type": [
-        "object",
-        "null"
-      ],
+      "type": ["object", "null"],
       "properties": {
         "timestamp": {
-          "type": [
-            "string",
-            "null"
-          ],
+          "type": ["string", "null"],
           "format": "date-time"
         },
         "guid": {
-          "type": [
-            "string",
-            "null"
-          ]
+          "type": ["string", "null"]
         },
         "postleitzahl": {
           "type": "string"
@@ -27,40 +18,22 @@
           "type": "string"
         },
         "strasse": {
-          "type": [
-            "string",
-            "null"
-          ]
+          "type": ["string", "null"]
         },
         "hausnummer": {
-          "type": [
-            "string",
-            "null"
-          ]
+          "type": ["string", "null"]
         },
         "postfach": {
-          "type": [
-            "string",
-            "null"
-          ]
+          "type": ["string", "null"]
         },
         "adresszusatz": {
-          "type": [
-            "string",
-            "null"
-          ]
+          "type": ["string", "null"]
         },
         "coErgaenzung": {
-          "type": [
-            "string",
-            "null"
-          ]
+          "type": ["string", "null"]
         },
         "landescode": {
-          "type": [
-            "string",
-            "null"
-          ],
+          "type": ["string", "null"],
           "enum": [
             null,
             "AC",
@@ -333,62 +306,35 @@
           ]
         },
         "ortsteil": {
-          "type": [
-            "string",
-            "null"
-          ]
+          "type": ["string", "null"]
         }
       },
-      "required": [
-        "postleitzahl",
-        "ort"
-      ]
+      "required": ["postleitzahl", "ort"]
     },
     "Ansprechpartner": {
-      "type": [
-        "object",
-        "null"
-      ],
+      "type": ["object", "null"],
       "properties": {
         "boTyp": {
-          "type": [
-            "string",
-            "null"
-          ]
+          "type": ["string", "null"]
         },
         "versionStruktur": {
-          "type": [
-            "string",
-            "null"
-          ]
+          "type": ["string", "null"]
         },
         "timestamp": {
-          "type": [
-            "string",
-            "null"
-          ],
+          "type": ["string", "null"],
           "format": "date-time"
         },
         "externeReferenzen": {
-          "type": [
-            "array",
-            "null"
-          ],
+          "type": ["array", "null"],
           "items": {
             "$ref": "#/definitions/ExterneReferenz"
           }
         },
         "guid": {
-          "type": [
-            "string",
-            "null"
-          ]
+          "type": ["string", "null"]
         },
         "anrede": {
-          "type": [
-            "string",
-            "null"
-          ],
+          "type": ["string", "null"],
           "enum": [
             null,
             "HERR",
@@ -404,46 +350,23 @@
           ]
         },
         "inviduelleAnrede": {
-          "type": [
-            "string",
-            "null"
-          ]
+          "type": ["string", "null"]
         },
         "titel": {
-          "type": [
-            "string",
-            "null"
-          ],
-          "enum": [
-            null,
-            "DR",
-            "PROF",
-            "PROF_DR"
-          ]
+          "type": ["string", "null"],
+          "enum": [null, "DR", "PROF", "PROF_DR"]
         },
         "vorname": {
-          "type": [
-            "string",
-            "null"
-          ]
+          "type": ["string", "null"]
         },
         "nachname": {
-          "type": [
-            "string",
-            "null"
-          ]
+          "type": ["string", "null"]
         },
         "eMailAdresse": {
-          "type": [
-            "string",
-            "null"
-          ]
+          "type": ["string", "null"]
         },
         "kommentar": {
-          "type": [
-            "string",
-            "null"
-          ]
+          "type": ["string", "null"]
         },
         "geschaeftspartner": {
           "$ref": "#/definitions/Geschaeftspartner"
@@ -452,19 +375,13 @@
           "$ref": "#/definitions/Adresse"
         },
         "rufnummern": {
-          "type": [
-            "array",
-            "null"
-          ],
+          "type": ["array", "null"],
           "items": {
             "$ref": "#/definitions/Rufnummer"
           }
         },
         "zustaendigkeit": {
-          "type": [
-            "array",
-            "null"
-          ],
+          "type": ["array", "null"],
           "items": {
             "$ref": "#/definitions/Zustaendigkeit"
           }
@@ -472,83 +389,47 @@
       }
     },
     "ExterneReferenz": {
-      "type": [
-        "object",
-        "null"
-      ],
+      "type": ["object", "null"],
       "properties": {
         "exRefName": {
-          "type": [
-            "string",
-            "null"
-          ]
+          "type": ["string", "null"]
         },
         "exRefWert": {
-          "type": [
-            "string",
-            "null"
-          ]
+          "type": ["string", "null"]
         },
         "timestamp": {
-          "type": [
-            "string",
-            "null"
-          ],
+          "type": ["string", "null"],
           "format": "date-time"
         },
         "guid": {
-          "type": [
-            "string",
-            "null"
-          ]
+          "type": ["string", "null"]
         }
       }
     },
     "Geschaeftspartner": {
-      "type": [
-        "object",
-        "null"
-      ],
+      "type": ["object", "null"],
       "properties": {
         "boTyp": {
-          "type": [
-            "string",
-            "null"
-          ]
+          "type": ["string", "null"]
         },
         "versionStruktur": {
-          "type": [
-            "string",
-            "null"
-          ]
+          "type": ["string", "null"]
         },
         "timestamp": {
-          "type": [
-            "string",
-            "null"
-          ],
+          "type": ["string", "null"],
           "format": "date-time"
         },
         "externeReferenzen": {
-          "type": [
-            "array",
-            "null"
-          ],
+          "type": ["array", "null"],
           "items": {
             "$ref": "#/definitions/ExterneReferenz"
           }
         },
         "guid": {
-          "type": [
-            "string",
-            "null"
-          ]
+          "type": ["string", "null"]
         },
         "anrede": {
-          "type": [
-            "string",
-            "null"
-          ],
+          "type": ["string", "null"],
           "enum": [
             null,
             "HERR",
@@ -564,89 +445,47 @@
           ]
         },
         "title": {
-          "type": [
-            "string",
-            "null"
-          ]
+          "type": ["string", "null"]
         },
         "name1": {
-          "type": [
-            "string",
-            "null"
-          ]
+          "type": ["string", "null"]
         },
         "name2": {
-          "type": [
-            "string",
-            "null"
-          ]
+          "type": ["string", "null"]
         },
         "name3": {
-          "type": [
-            "string",
-            "null"
-          ]
+          "type": ["string", "null"]
         },
         "gewerbekennzeichnung": {
           "type": "boolean"
         },
         "hrnummer": {
-          "type": [
-            "string",
-            "null"
-          ]
+          "type": ["string", "null"]
         },
         "amtsgericht": {
-          "type": [
-            "string",
-            "null"
-          ]
+          "type": ["string", "null"]
         },
         "kontaktweg": {
-          "type": [
-            "array",
-            "null"
-          ],
+          "type": ["array", "null"],
           "items": {
             "type": "string",
-            "enum": [
-              "ANSCHREIBEN",
-              "TELEFONAT",
-              "FAX",
-              "E_MAIL",
-              "SMS"
-            ]
+            "enum": ["ANSCHREIBEN", "TELEFONAT", "FAX", "E_MAIL", "SMS"]
           }
         },
         "umsatzsteuerId": {
-          "type": [
-            "string",
-            "null"
-          ]
+          "type": ["string", "null"]
         },
         "glaeubigerId": {
-          "type": [
-            "string",
-            "null"
-          ]
+          "type": ["string", "null"]
         },
         "eMailAdresse": {
-          "type": [
-            "string",
-            "null"
-          ]
+          "type": ["string", "null"]
         },
         "website": {
-          "type": [
-            "string",
-            "null"
-          ]
+          "type": ["string", "null"]
         },
         "geschaeftspartnerrolle": {
-          "type": [
-            "array",
-            "null"
-          ],
+          "type": ["array", "null"],
           "items": {
             "type": "string",
             "enum": [
@@ -662,15 +501,10 @@
           "$ref": "#/definitions/Adresse"
         }
       },
-      "required": [
-        "gewerbekennzeichnung"
-      ]
+      "required": ["gewerbekennzeichnung"]
     },
     "Rufnummer": {
-      "type": [
-        "object",
-        "null"
-      ],
+      "type": ["object", "null"],
       "properties": {
         "nummerntyp": {
           "type": "string",
@@ -690,60 +524,33 @@
           "type": "string"
         },
         "timestamp": {
-          "type": [
-            "string",
-            "null"
-          ],
+          "type": ["string", "null"],
           "format": "date-time"
         },
         "guid": {
-          "type": [
-            "string",
-            "null"
-          ]
+          "type": ["string", "null"]
         }
       },
-      "required": [
-        "nummerntyp",
-        "rufnummer"
-      ]
+      "required": ["nummerntyp", "rufnummer"]
     },
     "Zustaendigkeit": {
-      "type": [
-        "object",
-        "null"
-      ],
+      "type": ["object", "null"],
       "properties": {
         "jobtitel": {
-          "type": [
-            "string",
-            "null"
-          ]
+          "type": ["string", "null"]
         },
         "abteilung": {
-          "type": [
-            "string",
-            "null"
-          ]
+          "type": ["string", "null"]
         },
         "themengebiet": {
-          "type": [
-            "string",
-            "null"
-          ]
+          "type": ["string", "null"]
         },
         "timestamp": {
-          "type": [
-            "string",
-            "null"
-          ],
+          "type": ["string", "null"],
           "format": "date-time"
         },
         "guid": {
-          "type": [
-            "string",
-            "null"
-          ]
+          "type": ["string", "null"]
         }
       }
     }
@@ -751,44 +558,26 @@
   "type": "object",
   "properties": {
     "boTyp": {
-      "type": [
-        "string",
-        "null"
-      ]
+      "type": ["string", "null"]
     },
     "versionStruktur": {
-      "type": [
-        "string",
-        "null"
-      ]
+      "type": ["string", "null"]
     },
     "timestamp": {
-      "type": [
-        "string",
-        "null"
-      ],
+      "type": ["string", "null"],
       "format": "date-time"
     },
     "externeReferenzen": {
-      "type": [
-        "array",
-        "null"
-      ],
+      "type": ["array", "null"],
       "items": {
         "$ref": "#/definitions/ExterneReferenz"
       }
     },
     "guid": {
-      "type": [
-        "string",
-        "null"
-      ]
+      "type": ["string", "null"]
     },
     "anrede": {
-      "type": [
-        "string",
-        "null"
-      ],
+      "type": ["string", "null"],
       "enum": [
         null,
         "HERR",
@@ -804,89 +593,47 @@
       ]
     },
     "title": {
-      "type": [
-        "string",
-        "null"
-      ]
+      "type": ["string", "null"]
     },
     "name1": {
-      "type": [
-        "string",
-        "null"
-      ]
+      "type": ["string", "null"]
     },
     "name2": {
-      "type": [
-        "string",
-        "null"
-      ]
+      "type": ["string", "null"]
     },
     "name3": {
-      "type": [
-        "string",
-        "null"
-      ]
+      "type": ["string", "null"]
     },
     "gewerbekennzeichnung": {
       "type": "boolean"
     },
     "hrnummer": {
-      "type": [
-        "string",
-        "null"
-      ]
+      "type": ["string", "null"]
     },
     "amtsgericht": {
-      "type": [
-        "string",
-        "null"
-      ]
+      "type": ["string", "null"]
     },
     "kontaktweg": {
-      "type": [
-        "array",
-        "null"
-      ],
+      "type": ["array", "null"],
       "items": {
         "type": "string",
-        "enum": [
-          "ANSCHREIBEN",
-          "TELEFONAT",
-          "FAX",
-          "E_MAIL",
-          "SMS"
-        ]
+        "enum": ["ANSCHREIBEN", "TELEFONAT", "FAX", "E_MAIL", "SMS"]
       }
     },
     "umsatzsteuerId": {
-      "type": [
-        "string",
-        "null"
-      ]
+      "type": ["string", "null"]
     },
     "glaeubigerId": {
-      "type": [
-        "string",
-        "null"
-      ]
+      "type": ["string", "null"]
     },
     "eMailAdresse": {
-      "type": [
-        "string",
-        "null"
-      ]
+      "type": ["string", "null"]
     },
     "website": {
-      "type": [
-        "string",
-        "null"
-      ]
+      "type": ["string", "null"]
     },
     "geschaeftspartnerrolle": {
-      "type": [
-        "array",
-        "null"
-      ],
+      "type": ["array", "null"],
       "items": {
         "type": "string",
         "enum": [
@@ -902,10 +649,7 @@
       "$ref": "#/definitions/Adresse"
     },
     "marktrolle": {
-      "type": [
-        "string",
-        "null"
-      ],
+      "type": ["string", "null"],
       "enum": [
         null,
         "NB",
@@ -930,26 +674,14 @@
     },
     "rollencodetyp": {
       "type": "string",
-      "enum": [
-        "ZERO",
-        "GLN",
-        "BDEW",
-        "DVGW"
-      ]
+      "enum": ["ZERO", "GLN", "BDEW", "DVGW"]
     },
     "makoadresse": {
-      "type": [
-        "string",
-        "null"
-      ]
+      "type": ["string", "null"]
     },
     "ansprechpartner": {
       "$ref": "#/definitions/Ansprechpartner"
     }
   },
-  "required": [
-    "gewerbekennzeichnung",
-    "rollencodenummer",
-    "rollencodetyp"
-  ]
+  "required": ["gewerbekennzeichnung", "rollencodenummer", "rollencodetyp"]
 }
