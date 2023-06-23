@@ -34,6 +34,19 @@
         },
         "geraeteeigenschaften": {
           "$ref": "#/definitions/Geraeteeigenschaften"
+        },
+        "geraeteart": {
+          "type": ["string", "null"],
+          "enum": [
+            null,
+            "WANDLER",
+            "KOMMUNIKATIONSEINRICHTUNG",
+            "TECHNISCHE_STEUEREINRICHTUNG",
+            "MENGENUMWERTER",
+            "SMARTMETER_GATEWAY",
+            "STEUERBOX",
+            "ZAEHLEINRICHTUNG"
+          ]
         }
       }
     },
