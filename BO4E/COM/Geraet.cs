@@ -33,7 +33,7 @@ namespace BO4E.COM
         ///     Festlegung der Art des Gerätes. Z.B. ZAEHLEINRICHTUNG
         ///     <see cref="BO4E.ENUM.Geraeteart" />
         /// </summary>
-        [JsonProperty(PropertyName = "geraeteart", Required = Required.Default, Order = 11)]
+        [JsonProperty(PropertyName = "geraeteart", Required = Required.Default, Order = 12)]
         [JsonPropertyName("geraeteart")]
         [ProtoMember(5)]
         [JsonPropertyOrder(12)]
