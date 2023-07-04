@@ -355,6 +355,17 @@ message Geraet {
    option (.protobuf_net.msgopt).namespace = "BO4E.COM";
    string Geraetenummer = 3;
    Geraeteeigenschaften Geraeteeigenschaften = 4;
+   Geraeteart Geraeteart = 5;
+}
+enum Geraeteart {
+   option (.protobuf_net.enumopt).namespace = "BO4E.ENUM";
+   Geraeteart_WANDLER = 0;
+   Geraeteart_KOMMUNIKATIONSEINRICHTUNG = 1;
+   Geraeteart_TECHNISCHE_STEUEREINRICHTUNG = 2;
+   Geraeteart_MENGENUMWERTER = 3;
+   Geraeteart_SMARTMETER_GATEWAY = 4;
+   Geraeteart_STEUERBOX = 5;
+   Geraeteart_ZAEHLEINRICHTUNG = 6;
 }
 message Geraeteeigenschaften {
    option (.protobuf_net.msgopt).namespace = "BO4E.COM";
@@ -905,6 +916,7 @@ message Marktlokation {
    repeated Verbrauch Verbrauchsmenge = 1027;
    repeated Messlokation Messlokationen = 1028;
    MesstechnischeEinordnung MesstechnischeEinordnung = 1029;
+   repeated Messprodukt Messprodukte = 1039;
 }
 message MarktpartnerDetails {
    option (.protobuf_net.msgopt).namespace = "BO4E.COM";
@@ -984,6 +996,7 @@ message Messlokation {
    .bcl.Decimal Verlustfaktor = 1021;
    repeated Zaehlwerk Zaehlwerke = 1022;
    Betriebszustand Betriebszustand = 1023;
+   repeated Messprodukt Messprodukte = 1024;
 }
 message Messlokationszuordnung {
    option (.protobuf_net.msgopt).namespace = "BO4E.COM";
@@ -991,6 +1004,17 @@ message Messlokationszuordnung {
    ArithmetischeOperation Arithmetik = 4;
    .google.protobuf.Timestamp GueltigSeit = 5;
    .google.protobuf.Timestamp GueltigBis = 6;
+}
+message Messprodukt {
+   option (.protobuf_net.msgopt).namespace = "BO4E.COM";
+   string MessproduktId = 3;
+   repeated Verwendungszweck Verwendungszwecke = 1011;
+   Verbrauchsart Verbrauchsart = 1012;
+   Unterbrechbarkeit Unterbrechbarkeit = 1013;
+   Waermenutzung Waermenutzung = 1014;
+   Zaehlzeitregister Zaehlzeiten = 1021;
+   bool ZweiteMessung = 1022;
+   string WerteuebermittlungAnNB = 1023;
 }
 enum MesstechnischeEinordnung {
    option (.protobuf_net.enumopt).namespace = "BO4E.ENUM";
@@ -1553,11 +1577,6 @@ message Vertragsteil {
    Menge Kundenwert = 1010;
    string Verbrauchsaufteilung = 1011;
 }
-message Verwendungszweck {
-   option (.protobuf_net.msgopt).namespace = "BO4E.COM";
-   Marktrolle Marktrolle = 3;
-   repeated Verwendungszweck Zweck = 4 [packed = false];
-}
 enum Verwendungszweck {
    option (.protobuf_net.enumopt).namespace = "BO4E.ENUM";
    option allow_alias = true;
@@ -1568,6 +1587,11 @@ enum Verwendungszweck {
    UEBERMITTLUNG_AN_DAS_HKNR = 4;
    ERMITTLUNG_AUSGEGLICHENHEIT_BILANZKREIS = 5;
    MEHRMINDERMBENGENABRECHNUNG = 2;
+}
+message Verwendungszweck {
+   option (.protobuf_net.msgopt).namespace = "BO4E.COM";
+   Marktrolle Marktrolle = 3;
+   repeated Verwendungszweck Zweck = 4 [packed = false];
 }
 message Vorauszahlung {
    option (.protobuf_net.msgopt).namespace = "BO4E.COM";
