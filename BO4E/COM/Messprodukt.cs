@@ -79,7 +79,7 @@ namespace BO4E.COM
         public bool? ZweiteMessung { get; set; }
 
         /// <summary>
-        /// Konfiguration (iMSys) des Zählwerks
+        /// Werden die Werte an den Netzbetreiber übermittelt?
         /// </summary>
         [JsonProperty(PropertyName = "werteuebermittlungAnNB", Order = 1023, Required = Required.Default)]
         [JsonPropertyName("werteuebermittlungAnNB")]
