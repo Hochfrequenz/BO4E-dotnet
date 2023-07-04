@@ -86,7 +86,7 @@ namespace BO4E.COM
         [NonOfficial(NonOfficialCategory.CUSTOMER_REQUIREMENTS)]
         [ProtoMember(1023)]
         [JsonPropertyOrder(1023)]
-        public string? WerteuebermittlungAnNB { get; set; }
+        public bool? WerteuebermittlungAnNB { get; set; }
 
 
 
