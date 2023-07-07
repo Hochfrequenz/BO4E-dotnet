@@ -283,6 +283,7 @@ namespace BO4E.BO
         public List<Messlokation>? Messlokationen { get; set; }
 
 
+
         /// <summary>Aufzählung der Messlokationen, die zu dieser Marktlokation gehören.</summary>
         /// Es können 3 verschiedene Konstrukte auftreten:
         /// <ol>
@@ -344,6 +345,17 @@ namespace BO4E.BO
         [JsonPropertyOrder(38)]
         [ProtoMember(38)]
         public Sperrstatus? Sperrstatus { get; set; }
+
+
+        /// <summary>
+        ///   Zugeordnete Messprodukte
+        /// </summary>        
+        [JsonProperty(Required = Required.Default, Order = 39, PropertyName = "messprodukte")]
+        [JsonPropertyName("messprodukte")]
+        [ProtoMember(1039)]
+        [JsonPropertyOrder(39)]
+        [NonOfficial(NonOfficialCategory.CUSTOMER_REQUIREMENTS)]
+        public List<Messprodukt>? Messprodukte { get; set; }
         /// <summary>
         ///     Test if a <paramref name="id" /> is a valid Marktlokations ID.
         /// </summary>

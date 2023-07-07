@@ -1,13 +1,16 @@
+using BO4E.COM;
+using BO4E.ENUM;
+using BO4E.meta;
+
+using Newtonsoft.Json;
+
+using ProtoBuf;
+
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Text.Json.Serialization;
 using System.Text.RegularExpressions;
-using BO4E.COM;
-using BO4E.ENUM;
-using BO4E.meta;
-using Newtonsoft.Json;
-using ProtoBuf;
 
 namespace BO4E.BO
 {
@@ -243,6 +246,16 @@ namespace BO4E.BO
         [ProtoMember(1023)]
         [NonOfficial(NonOfficialCategory.CUSTOMER_REQUIREMENTS)]
         public Betriebszustand? Betriebszustand { get; set; }
+
+        /// <summary>
+        ///   Zugeordnete Messprodukte
+        /// </summary>        
+        [JsonProperty(Required = Required.Default, Order = 30, PropertyName = "messprodukte")]
+        [JsonPropertyName("messprodukte")]
+        [ProtoMember(1024)]
+        [JsonPropertyOrder(30)]
+        [NonOfficial(NonOfficialCategory.CUSTOMER_REQUIREMENTS)]
+        public List<Messprodukt>? Messprodukte { get; set; }
 
         /// <summary>
         ///     Test if a <paramref name="id" /> is a valid messlokations ID.
