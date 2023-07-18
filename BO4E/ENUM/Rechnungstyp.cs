@@ -64,5 +64,10 @@ namespace BO4E.ENUM
         /// </summary>
         [EnumMember(Value = "SONDERRECHNUNG")]
         SONDERRECHNUNG,
+        /// <summary>
+        /// Abrechnung von Konfigurationen (Universalbestellprozess)
+        /// </summary>
+        [EnumMember(Value = "ABRECHNUNG_VON_KONFIGURATIONEN_UNIVERSALBESTELLPROZESS")]
+        ABRECHNUNG_VON_KONFIGURATIONEN_UNIVERSALBESTELLPROZESS
     }
 }
