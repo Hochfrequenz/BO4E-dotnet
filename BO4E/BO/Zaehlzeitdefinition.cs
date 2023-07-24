@@ -92,7 +92,7 @@ namespace BO4E.BO
         [JsonPropertyName("notwendigkeit")]
         [ProtoMember(9)]
         [JsonPropertyOrder(9)]
-        public ZaehlzeitdefinitionNotwendigkeit? Notwendigkeit { get; set; }
+        public DefinitionenNotwendigkeit? Notwendigkeit { get; set; }
 
         /// <summary>
         /// Liste der Zählzeiten [1 - 99999]
