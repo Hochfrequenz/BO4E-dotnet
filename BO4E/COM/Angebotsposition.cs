@@ -66,5 +66,16 @@ namespace BO4E.COM
         [NonOfficial(NonOfficialCategory.MISSING)]
         [ProtoMember(8)]
         public BDEWArtikelnummer? BdewArtikelnummer { get; set; }
+
+        /// <summary>
+        ///  Die genauen Bedeutungen der einzelnen Artikel-IDs sind in der EDI@Energy Codeliste der Artikelnummern 
+        /// und Artikel-IDs zu finden, die in der Spalte des entsprechenden Prüfidentifikator ein X haben
+        /// </summary>
+        [JsonProperty(PropertyName = "artikelId", Order = 16, Required = Required.Default)]
+        [JsonPropertyName("artikelId")]
+        [NonOfficial(NonOfficialCategory.MISSING)]
+        [JsonPropertyOrder(16)]
+        [ProtoMember(9)]
+        public string? ArtikelId { get; set; }
     }
 }
