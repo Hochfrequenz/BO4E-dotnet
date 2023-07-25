@@ -56,5 +56,13 @@ namespace BO4E.ENUM
         /// <remarks>EBD 0472 A06</remarks>
         [EnumMember(Value = "TECHNISCHER_VERHINDERUNGSGRUND")]
         TECHNISCHER_VERHINDERUNGSGRUND,
+
+        /// <summary>
+        /// Der Anschlussnutzer wurde nicht angetroffen. Es gab keine Anzeichen dafür, dass dieser anwesend war.
+        /// Details werden im Freitext <see cref="Auftrag.Bemerkungen"/> vermerkt.
+        /// </summary>
+        /// <remarks>EBD 0472 A08</remarks>
+        [EnumMember(Value = "ANSCHLUSSNUTZER_WURDE_NICHT_ANGETROFFEN")]
+        ANSCHLUSSNUTZER_WURDE_NICHT_ANGETROFFEN,
     }
 }
