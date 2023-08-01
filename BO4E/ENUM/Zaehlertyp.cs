@@ -62,5 +62,13 @@ namespace BO4E.ENUM
         ///<summary>Wasserzähler</summary>
         [EnumMember(Value = "WASSERZAEHLER")]
         WASSERZAEHLER,
+
+        ///<summary>Moderne Messeinrichtung</summary>
+        [EnumMember(Value = "MODERNEMESSEINRICHTUNG")]
+        MODERNEMESSEINRICHTUNG,
+
+        ///<summary>Neue Messeinrichtung Gas</summary>
+        [EnumMember(Value = "NEUEMESSEINRICHTUNGGAS")]
+        NEUEMESSEINRICHTUNGGAS,
     }
 }

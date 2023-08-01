@@ -995,6 +995,12 @@
             "GESPERRT",
             "REGELBETRIEB"
           ]
+        },
+        "messprodukte": {
+          "type": ["array", "null"],
+          "items": {
+            "$ref": "#/definitions/Messprodukt"
+          }
         }
       },
       "required": ["messlokationsId", "sparte"]
@@ -1034,6 +1040,48 @@
         }
       },
       "required": ["messlokationsId"]
+    },
+    "Messprodukt": {
+      "type": ["object", "null"],
+      "properties": {
+        "timestamp": {
+          "type": ["string", "null"],
+          "format": "date-time"
+        },
+        "guid": {
+          "type": ["string", "null"]
+        },
+        "messproduktId": {
+          "type": ["string", "null"]
+        },
+        "verwendungszwecke": {
+          "type": ["array", "null"],
+          "items": {
+            "$ref": "#/definitions/Verwendungszweck"
+          }
+        },
+        "verbrauchsart": {
+          "type": ["string", "null"],
+          "enum": [null, "KL", "KLW", "KLWS", "W", "WS"]
+        },
+        "unterbrechbarkeit": {
+          "type": ["string", "null"],
+          "enum": [null, "UV", "NUV"]
+        },
+        "waermenutzung": {
+          "type": ["string", "null"],
+          "enum": [null, "SPEICHERHEIZUNG", "WAERMEPUMPE", "DIREKTHEIZUNG"]
+        },
+        "zaehlzeiten": {
+          "$ref": "#/definitions/Zaehlzeitregister"
+        },
+        "zweiteMessung": {
+          "type": ["boolean", "null"]
+        },
+        "werteuebermittlungAnNB": {
+          "type": ["boolean", "null"]
+        }
+      }
     },
     "Netznutzungsabrechnungsdaten": {
       "type": ["object", "null"],
@@ -1212,7 +1260,8 @@
             "RECHENWERT",
             "ANGABEN_MESSLOKATION",
             "BASIS_MME",
-            "GRUND_ANGABEN_MESSLOKATION"
+            "GRUND_ANGABEN_MESSLOKATION",
+            "ANFORDERUNG_IN_DIE_VERGANGENHEIT_ZUM_ANGEFORDERTEN_ZEITPUNKT_LIEGT_KEIN_WERT_VOR"
           ]
         }
       }
@@ -1429,7 +1478,9 @@
             "MESSDATENREGISTRIERGERAET",
             "ELEKTRONISCHERHAUSHALTSZAEHLER",
             "SONDERAUSSTATTUNG",
-            "WASSERZAEHLER"
+            "WASSERZAEHLER",
+            "MODERNEMESSEINRICHTUNG",
+            "NEUEMESSEINRICHTUNGGAS"
           ]
         },
         "tarifart": {
@@ -1872,6 +1923,12 @@
     "sperrstatus": {
       "type": ["string", "null"],
       "enum": [null, "ENTSPERRT", "GESPERRT"]
+    },
+    "messprodukte": {
+      "type": ["array", "null"],
+      "items": {
+        "$ref": "#/definitions/Messprodukt"
+      }
     }
   },
   "required": ["marktlokationsId", "sparte"]

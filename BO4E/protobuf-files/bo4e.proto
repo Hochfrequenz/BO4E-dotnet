@@ -1014,7 +1014,7 @@ message Messprodukt {
    Waermenutzung Waermenutzung = 1014;
    Zaehlzeitregister Zaehlzeiten = 1021;
    bool ZweiteMessung = 1022;
-   string WerteuebermittlungAnNB = 1023;
+   bool WerteuebermittlungAnNB = 1023;
 }
 enum MesstechnischeEinordnung {
    option (.protobuf_net.enumopt).namespace = "BO4E.ENUM";
@@ -1840,6 +1840,8 @@ enum Zaehlertyp {
    ELEKTRONISCHERHAUSHALTSZAEHLER = 11;
    SONDERAUSSTATTUNG = 12;
    WASSERZAEHLER = 13;
+   MODERNEMESSEINRICHTUNG = 14;
+   NEUEMESSEINRICHTUNGGAS = 15;
 }
 enum ZaehlertypSpezifikation {
    option (.protobuf_net.enumopt).namespace = "BO4E.ENUM";

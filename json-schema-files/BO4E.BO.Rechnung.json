@@ -1431,7 +1431,8 @@
         "SPERRUNG_INBETRIEBNAHME",
         "VERZUGSKOSTEN",
         "BLINDARBEIT",
-        "SONDERRECHNUNG"
+        "SONDERRECHNUNG",
+        "ABRECHNUNG_VON_KONFIGURATIONEN_UNIVERSALBESTELLPROZESS"
       ]
     },
     "originalRechnungsnummer": {
