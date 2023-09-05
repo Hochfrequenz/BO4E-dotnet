@@ -11,7 +11,7 @@ on:
 
 jobs:
   builddocs:
-    runs-on: ubuntu-18.04
+    runs-on: ubuntu-latest
     steps:
       - name: Trigger documentation build
         run: |
