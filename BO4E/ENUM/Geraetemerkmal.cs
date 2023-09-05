@@ -399,5 +399,46 @@ namespace BO4E.ENUM
         [EnumMember(Value = "WASSER_VWZ10")]
         WASSER_VWZ10,
 
+        /// <summary>
+        ///  Gaszähler Größe G350
+        /// </summary>
+        [ProtoEnum(Name = nameof(Geraetemerkmal) + "_" + nameof(GAS_G350))]
+        [EnumMember(Value = "GAS_G350")]
+        GAS_G350,
+
+        /// <summary>
+        ///  Gaszähler Größe G4000
+        /// </summary>
+        [ProtoEnum(Name = nameof(Geraetemerkmal) + "_" + nameof(GAS_G4000))]
+        [EnumMember(Value = "GAS_G4000")]
+        GAS_G4000,
+
+        /// <summary>
+        ///  Gaszähler Größe G6500
+        /// </summary>
+        [ProtoEnum(Name = nameof(Geraetemerkmal) + "_" + nameof(GAS_G6500))]
+        [EnumMember(Value = "GAS_G6500")]
+        GAS_G6500,
+
+        /// <summary>
+        ///  Gaszähler Größe G10000
+        /// </summary>
+        [ProtoEnum(Name = nameof(Geraetemerkmal) + "_" + nameof(GAS_G10000))]
+        [EnumMember(Value = "GAS_G10000")]
+        GAS_G10000,
+
+        /// <summary>
+        ///  Gaszähler Größe G12500
+        /// </summary>
+        [ProtoEnum(Name = nameof(Geraetemerkmal) + "_" + nameof(GAS_G12500))]
+        [EnumMember(Value = "GAS_G12500")]
+        GAS_G12500,
+
+        /// <summary>
+        ///  Gaszähler Größe G16000
+        /// </summary>
+        [ProtoEnum(Name = nameof(Geraetemerkmal) + "_" + nameof(GAS_G16000))]
+        [EnumMember(Value = "GAS_G16000")]
+        GAS_G16000,
     }
 }
