@@ -163,5 +163,16 @@ namespace BO4E.BO
         [JsonPropertyOrder(20)]
         [FieldName("partnerAddress", Language.EN)]
         public Adresse? Partneradresse { get; set; }
+
+        /// <summary>
+        /// Grundlage zur Verringerung der Umlagen nach EnFG
+        /// </summary>
+        [JsonProperty(PropertyName = "grundlageZurVerringerungDerUmlagenNachEnfg", Required = Required.Default, Order = 21)]
+        [JsonPropertyName("grundlageZurVerringerungDerUmlagenNachEnfg")]
+        [JsonPropertyOrder(21)]
+        [NonOfficial(NonOfficialCategory.CUSTOMER_REQUIREMENTS)]
+        [ProtoMember(19)]
+        public GrundlageZurVerringerungDerUmlagenNachEnfg? GrundlageZurVerringerungDerUmlagenNachEnfg { get; set; }
+
     }
 }
