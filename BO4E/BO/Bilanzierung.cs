@@ -222,5 +222,15 @@ namespace BO4E.BO
         [NonOfficial(NonOfficialCategory.MISSING)]
         [ProtoMember(1018)]
         public WahlrechtPrognosegrundlage? GrundWahlrechtPrognosegrundlage { get; set; }
+
+        /// <summary>
+        ///     Abwicklungsmodell
+        /// </summary>
+        [JsonProperty(PropertyName = "abwicklungsmodell", Required = Required.Default, Order = 27)]
+        [JsonPropertyName("abwicklungsmodell")]
+        [JsonPropertyOrder(27)]
+        [NonOfficial(NonOfficialCategory.MISSING)]
+        [ProtoMember(1019)]
+        public Abwicklungsmodell? Abwicklungsmodell { get; set; }
     }
 }
