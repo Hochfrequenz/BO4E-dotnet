@@ -15,7 +15,7 @@ jobs:
         id: current-time
         with:
           format: YYYYMMDDHHmmss
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
       - name: Setup .NET Core
         uses: actions/setup-dotnet@v3
         with:
