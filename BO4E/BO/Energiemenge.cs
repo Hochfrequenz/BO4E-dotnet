@@ -63,6 +63,16 @@ namespace BO4E.BO
         public Lokationstyp LokationsTyp { get; set; }
 
         /// <summary>
+        ///     Gibt die Konfigurations-ID eines intelligente Messsystems (iMS) an
+        /// </summary>
+        [JsonProperty(PropertyName = "konfigurationsId", Order = 13)]
+        [JsonPropertyName("konfigurationsId")]
+        [JsonPropertyOrder(13)]
+        [ProtoMember(13)]
+        [DataCategory(DataCategory.POD)]
+        public string? KonfigurationsId { get; set; }
+
+        /// <summary>
         ///     Gibt den <see cref="Verbrauch" /> in einer Zeiteinheit an.
         /// </summary>
         [JsonProperty(Order = 12, PropertyName = "energieverbrauch")]
