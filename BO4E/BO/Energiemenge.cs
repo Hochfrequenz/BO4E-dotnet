@@ -55,12 +55,12 @@ namespace BO4E.BO
         ///     Gibt an, ob es sich um eine Markt- oder Messlokation handelt.
         /// </summary>
         /// <see cref="Lokationstyp" />
-        [JsonProperty(PropertyName = "lokationsTyp", Required = Required.Always, Order = 11)]
+        [JsonProperty(PropertyName = "lokationsTyp", Order = 11)]
         [JsonPropertyName("lokationsTyp")]
         [JsonPropertyOrder(11)]
         [ProtoMember(11)]
         [DataCategory(DataCategory.POD)]
-        public Lokationstyp LokationsTyp { get; set; }
+        public Lokationstyp? LokationsTyp { get; set; }
 
         /// <summary>
         ///     Gibt den <see cref="Verbrauch" /> in einer Zeiteinheit an.
