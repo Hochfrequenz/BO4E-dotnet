@@ -49,6 +49,7 @@ message Angebotsposition {
    Betrag Positionsbetrag = 6;
    string Preisschluesselstamm = 7;
    BDEWArtikelnummer BdewArtikelnummer = 8;
+   string ArtikelId = 9;
 }
 enum Angebotsstatus {
    option (.protobuf_net.enumopt).namespace = "BO4E.ENUM";
@@ -431,6 +432,12 @@ enum Geraetemerkmal {
    Geraetemerkmal_WASSER_VWZ06 = 53;
    Geraetemerkmal_WASSER_VWZ07 = 54;
    Geraetemerkmal_WASSER_VWZ10 = 55;
+   Geraetemerkmal_GAS_G350 = 56;
+   Geraetemerkmal_GAS_G4000 = 57;
+   Geraetemerkmal_GAS_G6500 = 58;
+   Geraetemerkmal_GAS_G10000 = 59;
+   Geraetemerkmal_GAS_G12500 = 60;
+   Geraetemerkmal_GAS_G16000 = 61;
 }
 enum Geraetetyp {
    option (.protobuf_net.enumopt).namespace = "BO4E.ENUM";
@@ -494,6 +501,7 @@ message Geschaeftspartner {
    string Website = 16;
    repeated Geschaeftspartnerrolle Geschaeftspartnerrolle = 17 [packed = false];
    Adresse Partneradresse = 18;
+   GrundlageZurVerringerungDerUmlagenNachEnfg GrundlageZurVerringerungDerUmlagenNachEnfg = 19;
    string Title = 1001;
 }
 enum Geschaeftspartnerrolle {
@@ -503,6 +511,12 @@ enum Geschaeftspartnerrolle {
    Geschaeftspartnerrolle_KUNDE = 2;
    Geschaeftspartnerrolle_INTERESSENT = 3;
    Geschaeftspartnerrolle_MARKTPARTNER = 4;
+}
+enum GrundlageZurVerringerungDerUmlagenNachEnfg {
+   option (.protobuf_net.enumopt).namespace = "BO4E.ENUM";
+   KUNDE_ERFUELLT_VORAUSSETZUNG = 0;
+   KUNDE_ERFUELLT_VORAUSSETZUNG_NICHT = 1;
+   KEINE_ANGABE = 2;
 }
 enum Gueltigkeitstyp {
    option (.protobuf_net.enumopt).namespace = "BO4E.ENUM";
@@ -1230,6 +1244,7 @@ enum Rechnungstyp {
    VERZUGSKOSTEN = 12;
    BLINDARBEIT = 13;
    SONDERRECHNUNG = 14;
+   ABRECHNUNG_VON_KONFIGURATIONEN_UNIVERSALBESTELLPROZESS = 15;
 }
 message Region {
    option (.protobuf_net.msgopt).namespace = "BO4E.BO";
@@ -1395,6 +1410,7 @@ enum Status {
    ANGABEN_MESSLOKATION = 63;
    BASIS_MME = 64;
    GRUND_ANGABEN_MESSLOKATION = 65;
+   ANFORDERUNG_IN_DIE_VERGANGENHEIT_ZUM_ANGEFORDERTEN_ZEITPUNKT_LIEGT_KEIN_WERT_VOR = 66;
 }
 enum StatusArt {
    option (.protobuf_net.enumopt).namespace = "BO4E.ENUM";
@@ -1577,6 +1593,11 @@ message Vertragsteil {
    Menge Kundenwert = 1010;
    string Verbrauchsaufteilung = 1011;
 }
+message Verwendungszweck {
+   option (.protobuf_net.msgopt).namespace = "BO4E.COM";
+   Marktrolle Marktrolle = 3;
+   repeated Verwendungszweck Zweck = 4 [packed = false];
+}
 enum Verwendungszweck {
    option (.protobuf_net.enumopt).namespace = "BO4E.ENUM";
    option allow_alias = true;
@@ -1587,11 +1608,6 @@ enum Verwendungszweck {
    UEBERMITTLUNG_AN_DAS_HKNR = 4;
    ERMITTLUNG_AUSGEGLICHENHEIT_BILANZKREIS = 5;
    MEHRMINDERMBENGENABRECHNUNG = 2;
-}
-message Verwendungszweck {
-   option (.protobuf_net.msgopt).namespace = "BO4E.COM";
-   Marktrolle Marktrolle = 3;
-   repeated Verwendungszweck Zweck = 4 [packed = false];
 }
 message Vorauszahlung {
    option (.protobuf_net.msgopt).namespace = "BO4E.COM";
