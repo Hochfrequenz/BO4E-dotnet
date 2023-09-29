@@ -1483,6 +1483,13 @@ enum Titel {
    PROF = 1;
    PROF_DR = 2;
 }
+message Tranche {
+   option (.protobuf_net.msgopt).namespace = "BO4E.BO";
+   string TrancheId = 4; // default value could not be applied: |null|
+   Sparte Sparte = 5;
+   .bcl.Decimal Aufteilungsmenge = 6;
+   string ObisKennzahl = 7;
+}
 enum Unterbrechbarkeit {
    option (.protobuf_net.enumopt).namespace = "BO4E.ENUM";
    UV = 0;
