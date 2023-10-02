@@ -35,7 +35,7 @@ namespace BO4E.BO
         [ProtoMember(4)]
         public string TrancheId { get; set; }
 
-        /// <summary>Sparte der Messlokation, z.B. Gas oder Strom.</summary>
+        /// <summary>Sparte der Tranche, z.B. Gas oder Strom.</summary>
         [JsonProperty(Required = Required.Always, Order = 11, PropertyName = "sparte")]
         [JsonPropertyOrder(11)]
         [JsonPropertyName("sparte")]
