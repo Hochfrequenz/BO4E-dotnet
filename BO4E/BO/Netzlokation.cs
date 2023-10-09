@@ -1,6 +1,7 @@
 using System.ComponentModel;
 using System.Text.Json.Serialization;
 
+using BO4E.COM;
 using BO4E.ENUM;
 using BO4E.meta;
 
@@ -37,13 +38,13 @@ namespace BO4E.BO
         public Sparte Sparte { get; set; }
 
         /// <summary>
-        /// Netzanschlussleistung der Netzlokation in Kilowatt
+        /// Netzanschlussleistungsmenge der Netzlokation
         /// </summary>
         [JsonProperty(Required = Required.Default, Order = 12, PropertyName = "netzanschlussleistung")]
         [JsonPropertyOrder(12)]
         [JsonPropertyName("netzanschlussleistung")]
         [ProtoMember(6)]
-        public decimal? Netzanschlussleistung { get; set; }
+        public Menge? Netzanschlussleistung { get; set; }
 
         /// <summary>
         ///     Codenummer des grundzuständigen Messstellenbetreibers, der für diese
