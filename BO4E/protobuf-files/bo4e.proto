@@ -1494,7 +1494,7 @@ message Netzlokation {
    option (.protobuf_net.msgopt).namespace = "BO4E.BO";
    string NetzlokationsId = 4; // default value could not be applied: |null|
    Sparte Sparte = 5;
-   .bcl.Decimal Netzanschlussleistung = 6;
+   Menge Netzanschlussleistung = 6;
    string GrundzustaendigerMSBCodeNr = 7;
 }
 enum Unterbrechbarkeit {
