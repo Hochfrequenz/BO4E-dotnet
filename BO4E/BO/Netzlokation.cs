@@ -49,7 +49,7 @@ namespace BO4E.BO
         ///     Codenummer des grundzuständigen Messstellenbetreibers, der für diese
         ///     Netzlokation zuständig ist.
         /// </summary>
-        [JsonProperty(PropertyName = "grundzustaendigerMSBCodeNr", Required = Required.Default, Order = 13)]
+        [JsonProperty(Required = Required.Default, Order = 13, PropertyName = "grundzustaendigerMSBCodeNr")]
         [JsonPropertyOrder(13)]
         [JsonPropertyName("grundzustaendigerMSBCodeNr")]
         [ProtoMember(7)]
