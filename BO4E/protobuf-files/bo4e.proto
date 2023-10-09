@@ -1490,6 +1490,13 @@ message Tranche {
    .bcl.Decimal Aufteilungsmenge = 6;
    string ObisKennzahl = 7;
 }
+message Netzlokation {
+   option (.protobuf_net.msgopt).namespace = "BO4E.BO";
+   string NetzlokationsId = 4; // default value could not be applied: |null|
+   Sparte Sparte = 5;
+   Menge Netzanschlussleistung = 6;
+   string GrundzustaendigerMSBCodeNr = 7;
+}
 enum Unterbrechbarkeit {
    option (.protobuf_net.enumopt).namespace = "BO4E.ENUM";
    UV = 0;
