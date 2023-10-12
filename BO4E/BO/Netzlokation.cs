@@ -1,4 +1,5 @@
 using System.ComponentModel;
+using System.Runtime.ConstrainedExecution;
 using System.Text.Json.Serialization;
 
 using BO4E.COM;
@@ -47,13 +48,25 @@ namespace BO4E.BO
         public Menge? Netzanschlussleistung { get; set; }
 
         /// <summary>
-        ///     Codenummer des grundzuständigen Messstellenbetreibers, der für diese
-        ///     Netzlokation zuständig ist.
+        /// Codenummer des grundzuständigen Messstellenbetreibers, der für diese
+        /// Netzlokation zuständig ist.
         /// </summary>
         [JsonProperty(Required = Required.Default, Order = 13, PropertyName = "grundzustaendigerMSBCodeNr")]
         [JsonPropertyOrder(13)]
         [JsonPropertyName("grundzustaendigerMSBCodeNr")]
         [ProtoMember(7)]
         public string? GrundzustaendigerMSBCodeNr { get; set; }
+
+        /// <summary>
+        /// Ob ein Steuerkanal der Netzlokation zugeordnet ist und somit die Netzlokation gesteuert 
+        /// werden kann.
+        /// ZF2: Kein Steuerkanal vorhanden
+        /// ZF3: Steuerkanal vorhanden
+        /// </summary>
+        [JsonProperty(Required = Required.Default, Order = 14, PropertyName = "steuerkanal")]
+        [JsonPropertyOrder(14)]
+        [JsonPropertyName("steuerkanal")]
+        [ProtoMember(8)]
+        public bool? Steuerkanal { get; set; }
     }
 }
