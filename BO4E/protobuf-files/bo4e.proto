@@ -1496,6 +1496,7 @@ message Netzlokation {
    Sparte Sparte = 5;
    Menge Netzanschlussleistung = 6;
    string GrundzustaendigerMSBCodeNr = 7;
+   bool Steuerkanal = 8;
 }
 enum Unterbrechbarkeit {
    option (.protobuf_net.enumopt).namespace = "BO4E.ENUM";
