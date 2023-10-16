@@ -1497,6 +1497,8 @@ message Netzlokation {
    Menge Netzanschlussleistung = 6;
    string GrundzustaendigerMSBCodeNr = 7;
    bool Steuerkanal = 8;
+   string ObisKennzahl = 9;
+   Verwendungszweck Verwendungszweck = 10;
 }
 enum Unterbrechbarkeit {
    option (.protobuf_net.enumopt).namespace = "BO4E.ENUM";
@@ -1623,6 +1625,7 @@ enum Verwendungszweck {
    UEBERMITTLUNG_AN_DAS_HKNR = 4;
    ERMITTLUNG_AUSGEGLICHENHEIT_BILANZKREIS = 5;
    MEHRMINDERMBENGENABRECHNUNG = 2;
+   BLINDARBEITABRECHNUNG_BETRIEBSFÜHRUNG = 6;
 }
 message Vorauszahlung {
    option (.protobuf_net.msgopt).namespace = "BO4E.COM";

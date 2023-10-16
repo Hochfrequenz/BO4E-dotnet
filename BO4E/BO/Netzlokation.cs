@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.Runtime.ConstrainedExecution;
 using System.Text.Json.Serialization;
@@ -68,5 +69,21 @@ namespace BO4E.BO
         [JsonPropertyName("steuerkanal")]
         [ProtoMember(8)]
         public bool? Steuerkanal { get; set; }
+
+        /// <summary>
+        /// Die OBIS-Kennzahl für die Netzlokation
+        /// </summary>
+        [JsonProperty(Required = Required.Default, Order = 15, PropertyName = "obisKennzahl")]
+        [JsonPropertyOrder(15)]
+        [JsonPropertyName("obisKennzahl")]
+        [ProtoMember(9)]
+        public string? ObisKennzahl { get; set; }
+
+        /// <summary>Verwendungungszweck der Werte Netzlokation</summary>
+        [JsonProperty(Order = 16, Required = Required.Default, PropertyName = "verwendungszweck")]
+        [JsonPropertyOrder(16)]
+        [JsonPropertyName("verwendungszweck")]
+        [ProtoMember(10)]
+        public COM.Verwendungszweck? Verwendungszweck { get; set; }
     }
 }
