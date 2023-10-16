@@ -23,8 +23,8 @@ namespace BO4E.ENUM
         ENDKUNDENABRECHNUNG,
 
         /// <summary>ZD1: Blindarbeitabrechnung / Betriebsführung</summary>
-        [EnumMember(Value = "BLINDARBEITABRECHNUNG_BETRIEBSFÜHRUNG")]
-        BLINDARBEITABRECHNUNG_BETRIEBSFÜHRUNG,
+        [EnumMember(Value = "BLINDARBEITABRECHNUNG_BETRIEBSFUEHRUNG")]
+        BLINDARBEITABRECHNUNG_BETRIEBSFUEHRUNG,
 
         /// <summary>
         /// Übermittlung an das Herkunftsnachweisregister (HKNR)
