@@ -236,6 +236,10 @@
         "NICHT_WEGEN_TAGES_VERBRAUCH",
         "NICHT_WEGEN_ENWG"
       ]
+    },
+    "abwicklungsmodell": {
+      "type": ["string", "null"],
+      "enum": [null, "MODELL_1", "MODELL_2"]
     }
   }
 }

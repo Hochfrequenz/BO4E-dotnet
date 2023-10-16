@@ -252,8 +252,8 @@
       "default": "|null|"
     },
     "lokationsTyp": {
-      "type": "string",
-      "enum": ["MALO", "MELO"]
+      "type": ["string", "null"],
+      "enum": [null, "MALO", "MELO"]
     },
     "energieverbrauch": {
       "type": ["array", "null"],

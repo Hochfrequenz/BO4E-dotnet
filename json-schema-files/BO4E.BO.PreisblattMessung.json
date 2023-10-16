@@ -523,7 +523,13 @@
             "WASSER_VWZ05",
             "WASSER_VWZ06",
             "WASSER_VWZ07",
-            "WASSER_VWZ10"
+            "WASSER_VWZ10",
+            "GAS_G350",
+            "GAS_G4000",
+            "GAS_G6500",
+            "GAS_G10000",
+            "GAS_G12500",
+            "GAS_G16000"
           ]
         },
         "Parameter": {
@@ -652,7 +658,13 @@
             "WASSER_VWZ05",
             "WASSER_VWZ06",
             "WASSER_VWZ07",
-            "WASSER_VWZ10"
+            "WASSER_VWZ10",
+            "GAS_G350",
+            "GAS_G4000",
+            "GAS_G6500",
+            "GAS_G10000",
+            "GAS_G12500",
+            "GAS_G16000"
           ]
         },
         "Parameter": {
@@ -757,6 +769,15 @@
         },
         "partneradresse": {
           "$ref": "#/definitions/Adresse"
+        },
+        "grundlageZurVerringerungDerUmlagenNachEnfg": {
+          "type": ["string", "null"],
+          "enum": [
+            null,
+            "KUNDE_ERFUELLT_VORAUSSETZUNG",
+            "KUNDE_ERFUELLT_VORAUSSETZUNG_NICHT",
+            "KEINE_ANGABE"
+          ]
         }
       },
       "required": ["gewerbekennzeichnung"]
@@ -854,6 +875,15 @@
         },
         "partneradresse": {
           "$ref": "#/definitions/Adresse"
+        },
+        "grundlageZurVerringerungDerUmlagenNachEnfg": {
+          "type": ["string", "null"],
+          "enum": [
+            null,
+            "KUNDE_ERFUELLT_VORAUSSETZUNG",
+            "KUNDE_ERFUELLT_VORAUSSETZUNG_NICHT",
+            "KEINE_ANGABE"
+          ]
         },
         "marktrolle": {
           "type": ["string", "null"],

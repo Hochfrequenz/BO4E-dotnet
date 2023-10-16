@@ -19,15 +19,9 @@
         }
       }
     },
-    "Rechenschritt": {
+    "Menge": {
       "type": ["object", "null"],
       "properties": {
-        "rechenschrittBestandteilId": {
-          "type": "integer"
-        },
-        "referenzRechenschrittID": {
-          "type": "integer"
-        },
         "timestamp": {
           "type": ["string", "null"],
           "format": "date-time"
@@ -35,38 +29,37 @@
         "guid": {
           "type": ["string", "null"]
         },
-        "operation": {
-          "type": "string",
+        "wert": {
+          "type": "number"
+        },
+        "einheit": {
+          "type": ["string", "null"],
           "enum": [
-            "ADDITION",
-            "SUBTRAKTION",
-            "MULTIPLIKATION",
-            "DIVISION",
-            "DIVIDEND",
-            "POSITIVWERT"
+            null,
+            "ZERO",
+            "WH",
+            "KW",
+            "ANZAHL",
+            "KUBIKMETER",
+            "STUNDE",
+            "TAG",
+            "MONAT",
+            "VAR",
+            "VARH",
+            "KWHK",
+            "JAHR",
+            "KWH",
+            "MW",
+            "KVAR",
+            "KVARH",
+            "MWH"
           ]
-        },
-        "verlustfaktorTrafo": {
-          "type": ["number", "null"]
-        },
-        "verlustfaktorLeitung": {
-          "type": ["number", "null"]
-        },
-        "messlokationId": {
-          "type": ["string", "null"]
-        },
-        "weitererRechenschritt": {
-          "$ref": "#/definitions/Rechenschritt"
         }
       },
-      "required": [
-        "rechenschrittBestandteilId",
-        "referenzRechenschrittID",
-        "operation"
-      ]
+      "required": ["wert"]
     },
     "Verwendungszweck": {
-      "type": "object",
+      "type": ["object", "null"],
       "properties": {
         "marktrolle": {
           "type": "string",
@@ -133,31 +126,32 @@
         "$ref": "#/definitions/ExterneReferenz"
       }
     },
-    "beginndatum": {
-      "type": "string",
-      "format": "date-time"
-    },
     "guid": {
       "type": ["string", "null"]
     },
-    "notwendigkeit": {
+    "netzlokationsId": {
       "type": "string",
-      "enum": [
-        "BERECHNUNGSFORMEL_NOTWENDIG",
-        "BERECHNUNGSFORMEL_MUSS_ANGEFRAGT_WERDEN",
-        "BERECHNUNGSFORMEL_TRIVIAL",
-        "BERECHNUNGSFORMEL_NICHT_NOTWENDIG"
-      ]
+      "default": "|null|"
     },
-    "rechenschrittId": {
-      "type": ["integer", "null"]
+    "sparte": {
+      "type": "string",
+      "enum": ["STROM", "GAS", "FERNWAERME", "NAHWAERME", "WASSER", "ABWASSER"]
+    },
+    "netzanschlussleistung": {
+      "$ref": "#/definitions/Menge"
+    },
+    "grundzustaendigerMSBCodeNr": {
+      "type": ["string", "null"]
+    },
+    "steuerkanal": {
+      "type": ["boolean", "null"]
+    },
+    "obisKennzahl": {
+      "type": ["string", "null"]
     },
     "verwendungszweck": {
       "$ref": "#/definitions/Verwendungszweck"
-    },
-    "rechenschritt": {
-      "$ref": "#/definitions/Rechenschritt"
     }
   },
-  "required": ["beginndatum", "notwendigkeit", "verwendungszweck"]
+  "required": ["netzlokationsId", "sparte"]
 }
