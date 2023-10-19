@@ -16,6 +16,10 @@ namespace BO4E.meta.LenientConverters
         /// </summary>
         public override Geraetemerkmal Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
         {
+            if (reader.TokenType == JsonTokenType.Number)
+            {
+                return Geraetemerkmal.EINTARIF;
+            }
             var rawString = reader.GetString();
             try
             {
@@ -51,6 +55,10 @@ namespace BO4E.meta.LenientConverters
         /// </summary>
         public override Geraetemerkmal? Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
         {
+            if (reader.TokenType == JsonTokenType.Number)
+            {
+                return null;
+            }
             var rawString = reader.GetString();
             if (rawString is null)
             {
