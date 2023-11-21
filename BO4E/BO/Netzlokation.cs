@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Runtime.ConstrainedExecution;
@@ -80,10 +81,37 @@ namespace BO4E.BO
         public string? ObisKennzahl { get; set; }
 
         /// <summary>Verwendungungszweck der Werte Netzlokation</summary>
-        [JsonProperty(Order = 16, Required = Required.Default, PropertyName = "verwendungszweck")]
+        [JsonProperty(Required = Required.Default, Order = 16, PropertyName = "verwendungszweck")]
         [JsonPropertyOrder(16)]
         [JsonPropertyName("verwendungszweck")]
         [ProtoMember(10)]
         public COM.Verwendungszweck? Verwendungszweck { get; set; }
+
+        /// <summary>
+        /// Die Konfigurationsprodukt-Code für die Netzlokation
+        /// </summary>
+        [JsonProperty(Required = Required.Default, Order = 17, PropertyName = "konfigurationsproduktCode")]
+        [JsonPropertyOrder(17)]
+        [JsonPropertyName("konfigurationsproduktCode")]
+        [ProtoMember(11)]
+        public string? KonfigurationsproduktCode { get; set; }
+
+        /// <summary>
+        /// Code der Zugeordnete Leistungskurvendefinition für die Netzlokation
+        /// </summary>
+        [JsonProperty(Required = Required.Default, Order = 18, PropertyName = "leistungskurvendefinition")]
+        [JsonPropertyOrder(18)]
+        [JsonPropertyName("leistungskurvendefinition")]
+        [ProtoMember(12)]
+        public string? Leistungskurvendefinition { get; set; }
+
+        /// <summary>
+        /// Auftraggebender Marktpartner
+        /// </summary>
+        [JsonProperty(Required = Required.Default, Order = 19, PropertyName = "marktpartner")]
+        [JsonPropertyOrder(19)]
+        [JsonPropertyName("marktpartner")]
+        [ProtoMember(13)]
+        public Marktteilnehmer? Marktpartner { get; set; }
     }
 }

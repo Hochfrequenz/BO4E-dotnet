@@ -939,6 +939,12 @@ message MarktpartnerDetails {
    Marktrolle marktrolle = 5;
    bool Weiterverpflichtet = 10;
 }
+message Marktteilnehmer {
+   option (.protobuf_net.msgopt).namespace = "BO4E.COM";
+   string Rollencodenummer = 3;
+   string Code = 4;
+   Marktrolle marktrolle = 5;
+}
 enum Marktrolle {
    option (.protobuf_net.enumopt).namespace = "BO4E.ENUM";
    NB = 0;
@@ -1499,6 +1505,9 @@ message Netzlokation {
    bool Steuerkanal = 8;
    string ObisKennzahl = 9;
    Verwendungszweck Verwendungszweck = 10;
+   string KonfigurationsproduktCode = 11;
+   string Leistungskurvendefinition = 12;
+   Marktteilnehmer Marktpartner = 13;
 }
 enum Unterbrechbarkeit {
    option (.protobuf_net.enumopt).namespace = "BO4E.ENUM";
