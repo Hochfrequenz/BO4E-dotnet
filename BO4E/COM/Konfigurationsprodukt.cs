@@ -17,12 +17,12 @@ namespace BO4E.COM
         /// <summary>
         /// Die Konfigurationsprodukt-Code für das Objekt
         /// </summary>
-        [JsonProperty(Required = Required.Default, Order = 1, PropertyName = "konfigurationsproduktCode")]
+        [JsonProperty(Required = Required.Default, Order = 1, PropertyName = "produktcode")]
         [JsonPropertyOrder(1)]
-        [JsonPropertyName("konfigurationsproduktCode")]
+        [JsonPropertyName("produktcode")]
         [ProtoMember(1)]
         [NonOfficial(NonOfficialCategory.CUSTOMER_REQUIREMENTS)]
-        public string? KonfigurationsproduktCode { get; set; }
+        public string? Produktcode { get; set; }
 
         /// <summary>
         /// Code der Zugeordnete Leistungskurvendefinition für das Objekt
