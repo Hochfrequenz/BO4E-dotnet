@@ -346,7 +346,6 @@ namespace BO4E.BO
         [ProtoMember(38)]
         public Sperrstatus? Sperrstatus { get; set; }
 
-
         /// <summary>
         ///   Zugeordnete Messprodukte
         /// </summary>        
@@ -358,45 +357,14 @@ namespace BO4E.BO
         public List<Messprodukt>? Messprodukte { get; set; }
 
         /// <summary>
-        /// Die Konfigurationsprodukt-Code für die Marktlokation
-        /// </summary>
-        [JsonProperty(Required = Required.Default, Order = 40, PropertyName = "konfigurationsproduktCode")]
-        [JsonPropertyOrder(40)]
-        [JsonPropertyName("konfigurationsproduktCode")]
+        /// Produkt-Daten der Marktlokation
+        /// </summary>        
+        [JsonProperty(Required = Required.Default, Order = 40, PropertyName = "konfigurationsprodukt")]
+        [JsonPropertyName("konfigurationsprodukt")]
         [ProtoMember(40)]
+        [JsonPropertyOrder(40)]
         [NonOfficial(NonOfficialCategory.CUSTOMER_REQUIREMENTS)]
-        public string? KonfigurationsproduktCode { get; set; }
-
-        /// <summary>
-        /// Code der Zugeordnete Leistungskurvendefinition für die Marktlokation
-        /// </summary>
-        [JsonProperty(Required = Required.Default, Order = 41, PropertyName = "leistungskurvendefinition")]
-        [JsonPropertyOrder(41)]
-        [JsonPropertyName("leistungskurvendefinition")]
-        [ProtoMember(41)]
-        [NonOfficial(NonOfficialCategory.CUSTOMER_REQUIREMENTS)]
-        public string? Leistungskurvendefinition { get; set; }
-
-        /// <summary>
-        /// Code der Zugeordnete Schaltzeitdefinition für die Marktlokation
-        /// </summary>
-        [JsonProperty(Required = Required.Default, Order = 42, PropertyName = "schaltzeitdefinition")]
-        [JsonPropertyOrder(42)]
-        [JsonPropertyName("schaltzeitdefinition")]
-        [ProtoMember(42)]
-        [NonOfficial(NonOfficialCategory.CUSTOMER_REQUIREMENTS)]
-        public string? Schaltzeitdefinition { get; set; }
-
-        /// <summary>
-        /// Auftraggebender Marktpartner
-        /// MIG S1.1: Dieses Segment dient zur Identifizierung der Marktrolle an der Marktlokation, der die Information zum Produkt der im PIA genannten werden müssen.
-        /// </summary>
-        [JsonProperty(Required = Required.Default, Order = 43, PropertyName = "marktpartner")]
-        [JsonPropertyOrder(43)]
-        [JsonPropertyName("marktpartner")]
-        [ProtoMember(43)]
-        [NonOfficial(NonOfficialCategory.CUSTOMER_REQUIREMENTS)]
-        public Marktteilnehmer? Marktpartner { get; set; }
+        public List<Konfigurationsprodukt>? Konfigurationsprodukt { get; set; }
 
         /// <summary>
         ///     Test if a <paramref name="id" /> is a valid Marktlokations ID.
