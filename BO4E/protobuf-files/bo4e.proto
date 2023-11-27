@@ -931,6 +931,10 @@ message Marktlokation {
    repeated Messlokation Messlokationen = 1028;
    MesstechnischeEinordnung MesstechnischeEinordnung = 1029;
    repeated Messprodukt Messprodukte = 1039;
+   string KonfigurationsproduktCode = 40;
+   string Leistungskurvendefinition = 41;
+   string Schaltzeitdefinition = 42;
+   Marktteilnehmer Marktpartner = 43;
 }
 message MarktpartnerDetails {
    option (.protobuf_net.msgopt).namespace = "BO4E.COM";
