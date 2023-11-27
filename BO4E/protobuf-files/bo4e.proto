@@ -1513,9 +1513,7 @@ message Netzlokation {
    bool Steuerkanal = 8;
    string ObisKennzahl = 9;
    Verwendungszweck Verwendungszweck = 10;
-   string KonfigurationsproduktCode = 11;
-   string Leistungskurvendefinition = 12;
-   Marktteilnehmer Marktpartner = 13;
+   repeated Konfigurationsprodukt Konfigurationsprodukt = 11;
 }
 enum Unterbrechbarkeit {
    option (.protobuf_net.enumopt).namespace = "BO4E.ENUM";
