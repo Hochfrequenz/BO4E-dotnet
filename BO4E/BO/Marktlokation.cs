@@ -359,12 +359,12 @@ namespace BO4E.BO
         /// <summary>
         /// Produkt-Daten der Marktlokation
         /// </summary>        
-        [JsonProperty(Required = Required.Default, Order = 40, PropertyName = "konfigurationsprodukt")]
-        [JsonPropertyName("konfigurationsprodukt")]
+        [JsonProperty(Required = Required.Default, Order = 40, PropertyName = "konfigurationsprodukte")]
+        [JsonPropertyName("konfigurationsprodukte")]
         [ProtoMember(40)]
         [JsonPropertyOrder(40)]
         [NonOfficial(NonOfficialCategory.CUSTOMER_REQUIREMENTS)]
-        public List<Konfigurationsprodukt>? Konfigurationsprodukt { get; set; }
+        public List<Konfigurationsprodukt>? Konfigurationsprodukte { get; set; }
 
         /// <summary>
         ///     Test if a <paramref name="id" /> is a valid Marktlokations ID.

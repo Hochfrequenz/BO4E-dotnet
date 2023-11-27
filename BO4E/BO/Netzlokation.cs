@@ -90,11 +90,11 @@ namespace BO4E.BO
         /// <summary>
         /// Produkt-Daten der Netzlokation
         /// </summary>        
-        [JsonProperty(Required = Required.Default, Order = 17, PropertyName = "konfigurationsprodukt")]
-        [JsonPropertyName("konfigurationsprodukt")]
+        [JsonProperty(Required = Required.Default, Order = 17, PropertyName = "konfigurationsprodukte")]
+        [JsonPropertyName("konfigurationsprodukte")]
         [ProtoMember(11)]
         [JsonPropertyOrder(17)]
         [NonOfficial(NonOfficialCategory.CUSTOMER_REQUIREMENTS)]
-        public List<Konfigurationsprodukt>? Konfigurationsprodukt { get; set; }
+        public List<Konfigurationsprodukt>? Konfigurationsprodukte { get; set; }
     }
 }
