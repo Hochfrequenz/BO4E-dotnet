@@ -931,11 +931,11 @@ message Marktlokation {
    repeated Messlokation Messlokationen = 1028;
    MesstechnischeEinordnung MesstechnischeEinordnung = 1029;
    repeated Messprodukt Messprodukte = 1039;
-   repeated Konfigurationsprodukt Konfigurationsprodukt = 40;
+   repeated Konfigurationsprodukt Konfigurationsprodukte = 40;
 }
 message Konfigurationsprodukt {
    option (.protobuf_net.msgopt).namespace = "BO4E.COM";
-   string KonfigurationsproduktCode = 1;
+   string Produktcode = 1;
    string Leistungskurvendefinition = 2;
    string Schaltzeitdefinition = 3;
    Marktteilnehmer Marktpartner = 4;
@@ -1513,7 +1513,7 @@ message Netzlokation {
    bool Steuerkanal = 8;
    string ObisKennzahl = 9;
    Verwendungszweck Verwendungszweck = 10;
-   repeated Konfigurationsprodukt Konfigurationsprodukt = 11;
+   repeated Konfigurationsprodukt Konfigurationsprodukte = 11;
 }
 enum Unterbrechbarkeit {
    option (.protobuf_net.enumopt).namespace = "BO4E.ENUM";
