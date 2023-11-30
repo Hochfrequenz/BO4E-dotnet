@@ -1,8 +1,3 @@
-using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Threading.Tasks;
 using BO4E;
 using BO4E.BO;
 using BO4E.COM;
@@ -10,11 +5,21 @@ using BO4E.ENUM;
 using BO4E.Extensions.BusinessObjects.Energiemenge;
 using BO4E.meta;
 using BO4E.meta.LenientConverters;
+
 using Itenso.TimePeriod;
+
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
-using StackExchange.Profiling;
+
+
+using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Linq;
+using System.Threading.Tasks;
+
 using JsonSerializer = System.Text.Json.JsonSerializer;
 
 namespace TestBO4E.Extensions
@@ -106,21 +111,20 @@ namespace TestBO4E.Extensions
         public void TestDailyCompleteness()
         {
             foreach (var boFile in Directory.GetFiles("Energiemenge/completeness/", "50hz_prognose*.json"))
-                using (MiniProfiler.Current.Step($"Processing file {boFile}"))
+            {
+                JObject json;
+                using (var r = new StreamReader(boFile))
                 {
-                    JObject json;
-                    using (var r = new StreamReader(boFile))
-                    {
-                        var jsonString = r.ReadToEnd();
-                        json = JsonConvert.DeserializeObject<JObject>(jsonString);
-                    }
-#pragma warning disable 618
-                    var em = BoMapper.MapObject<Energiemenge>(json);
-#pragma warning restore 618
-                    var result = em.GetDailyCompletenessReports(CHRISTMAS_2018);
-                    Assert.AreEqual(8, result.Count);
-                    break; // one test is enough. the rest is covered by the individual completeness report tests.
+                    var jsonString = r.ReadToEnd();
+                    json = JsonConvert.DeserializeObject<JObject>(jsonString);
                 }
+#pragma warning disable 618
+                var em = BoMapper.MapObject<Energiemenge>(json);
+#pragma warning restore 618
+                var result = em.GetDailyCompletenessReports(CHRISTMAS_2018);
+                Assert.AreEqual(8, result.Count);
+                break; // one test is enough. the rest is covered by the individual completeness report tests.
+            }
         }
 
         [TestMethod]
@@ -134,22 +138,21 @@ namespace TestBO4E.Extensions
         internal void TestMonthlySlices(bool testFirstOnly = true, bool useParallelExecution = false)
         {
             foreach (var boFile in Directory.GetFiles("Energiemenge/completeness", "50hz_prognose*.json"))
-                using (MiniProfiler.Current.Step($"Processing file {boFile} with parallel={useParallelExecution}"))
+            {
+                JObject json;
+                using (var r = new StreamReader(boFile))
                 {
-                    JObject json;
-                    using (var r = new StreamReader(boFile))
-                    {
-                        var jsonString = r.ReadToEnd();
-                        json = JsonConvert.DeserializeObject<JObject>(jsonString);
-                    }
-
-                    var em = BoMapper.MapObject<Energiemenge>(json);
-                    var result = em.GetMonthlyCompletenessReports(GERMAN_YEAR_2018, useParallelExecution);
-                    Assert.AreEqual(12,
-                        result.Count); // don't care about values of coverage, just the start/end and count of reports generated.
-                    if (testFirstOnly)
-                        break; // one test is enough. the rest is covered by the individual completeness report tests
+                    var jsonString = r.ReadToEnd();
+                    json = JsonConvert.DeserializeObject<JObject>(jsonString);
                 }
+
+                var em = BoMapper.MapObject<Energiemenge>(json);
+                var result = em.GetMonthlyCompletenessReports(GERMAN_YEAR_2018, useParallelExecution);
+                Assert.AreEqual(12,
+                    result.Count); // don't care about values of coverage, just the start/end and count of reports generated.
+                if (testFirstOnly)
+                    break; // one test is enough. the rest is covered by the individual completeness report tests
+            }
         }
 
         [DoNotParallelize]
@@ -166,20 +169,14 @@ namespace TestBO4E.Extensions
                     em = JsonConvert.DeserializeObject<Energiemenge>(jsonString);
                 }
 
-                var mpLinear = MiniProfiler.StartNew("Non-Parallel");
+
                 em.GetMonthlyCompletenessReports(new TimeRange(new DateTime(2016, 1, 31, 23, 0, 0, DateTimeKind.Utc),
                     new DateTime(2016, 12, 31, 23, 0, 0, DateTimeKind.Utc)));
-                mpLinear.Stop();
-                Console.Out.Write(mpLinear.RenderPlainText());
-                Assert.IsTrue(mpLinear.DurationMilliseconds < 4000,
-                    $"Linear completeness report generation was too slow. Expected less than 4 seconds but was {mpLinear.DurationMilliseconds}ms: {mpLinear.RenderPlainText()}");
 
-                var mpParallel = MiniProfiler.StartNew("Parallel");
                 em.GetMonthlyCompletenessReports(
                     new TimeRange(new DateTime(2016, 1, 31, 23, 0, 0, DateTimeKind.Utc),
                         new DateTime(2016, 12, 31, 23, 0, 0, DateTimeKind.Utc)), true);
-                mpParallel.Stop();
-                Console.Out.Write(mpParallel.RenderPlainText());
+
                 //Assert.IsTrue(mpParallel.DurationMilliseconds < 3000, $"Parallel completeness report generation was too slow. Expected less than 3 seconds but was {mpParallel.DurationMilliseconds}ms: {mpParallel.RenderPlainText()}");
                 //Assert.IsTrue(mpParallel.DurationMilliseconds < (int)mpLinear.DurationMilliseconds * 1.25M, $"Parallel: {mpParallel.DurationMilliseconds}, Non-Parallel: {mpLinear.DurationMilliseconds}");
             }
@@ -198,20 +195,15 @@ namespace TestBO4E.Extensions
                 em = await JsonSerializer.DeserializeAsync<Energiemenge>(openStream,
                     LenientParsing.MOST_LENIENT.GetJsonSerializerOptions());
 
-                var mpLinear = MiniProfiler.StartNew("Non-Parallel");
+
                 em.GetMonthlyCompletenessReports(new TimeRange(new DateTime(2016, 1, 31, 23, 0, 0, DateTimeKind.Utc),
                     new DateTime(2016, 12, 31, 23, 0, 0, DateTimeKind.Utc)));
-                await mpLinear.StopAsync();
-                await Console.Out.WriteAsync(mpLinear.RenderPlainText());
-                Assert.IsTrue(mpLinear.DurationMilliseconds < 4000,
-                    $"Linear completeness report generation was too slow. Expected less than 4 seconds but was {mpLinear.DurationMilliseconds}ms: {mpLinear.RenderPlainText()}");
 
-                var mpParallel = MiniProfiler.StartNew("Parallel");
+
                 em.GetMonthlyCompletenessReports(
                     new TimeRange(new DateTime(2016, 1, 31, 23, 0, 0, DateTimeKind.Utc),
                         new DateTime(2016, 12, 31, 23, 0, 0, DateTimeKind.Utc)), true);
-                await mpParallel.StopAsync();
-                await Console.Out.WriteAsync(mpParallel.RenderPlainText());
+
                 //Assert.IsTrue(mpParallel.DurationMilliseconds < 3000, $"Parallel completeness report generation was too slow. Expected less than 3 seconds but was {mpParallel.DurationMilliseconds}ms: {mpParallel.RenderPlainText()}");
                 //Assert.IsTrue(mpParallel.DurationMilliseconds < (int)mpLinear.DurationMilliseconds * 1.25M, $"Parallel: {mpParallel.DurationMilliseconds}, Non-Parallel: {mpLinear.DurationMilliseconds}");
             }
@@ -243,19 +235,17 @@ namespace TestBO4E.Extensions
 
             em.Energieverbrauch = listvb;
 
-            var mpLinear = MiniProfiler.StartNew("Non-Parallel");
+
             em.GetMonthlyCompletenessReports(new TimeRange(new DateTime(2015, 1, 1, 23, 00, 0, DateTimeKind.Utc),
                 new DateTime(2019, 12, 31, 23, 0, 0, DateTimeKind.Utc)));
-            mpLinear.Stop();
-            Console.Out.Write(mpLinear.RenderPlainText());
+
             //Assert.IsTrue(mpLinear.DurationMilliseconds < 4000, $"Linear completeness report generation was too slow. Expected less than 4 seconds but was {mpLinear.DurationMilliseconds}ms: {mpLinear.RenderPlainText()}");
 
-            var mpParallel = MiniProfiler.StartNew("Parallel");
+
             em.GetDailyCompletenessReports(
                 new TimeRange(new DateTime(2015, 1, 01, 23, 0, 0, DateTimeKind.Utc),
                     new DateTime(2019, 12, 31, 23, 0, 0, DateTimeKind.Utc)), true);
-            mpParallel.Stop();
-            Console.Out.Write(mpParallel.RenderPlainText());
+
             //Assert.IsTrue(mpParallel.DurationMilliseconds < 3000, $"Parallel completeness report generation was too slow. Expected less than 3 seconds but was {mpParallel.DurationMilliseconds}ms: {mpParallel.RenderPlainText()}");
             //Assert.IsTrue(mpParallel.DurationMilliseconds < (int)mpLinear.DurationMilliseconds * 1.25M, $"Parallel: {mpParallel.DurationMilliseconds}, Non-Parallel: {mpLinear.DurationMilliseconds}");
         }
