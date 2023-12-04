@@ -17,10 +17,8 @@
     <EmbedUntrackedSources>true</EmbedUntrackedSources>
 
     <!-- Optional: Include PDB in the built .nupkg -->
-    <AllowedOutputExtensionsInPackageBuildOutputFolder
-    >$(AllowedOutputExtensionsInPackageBuildOutputFolder);.pdb</AllowedOutputExtensionsInPackageBuildOutputFolder>
-    <PackageProjectUrl
-    >https://github.com/Hochfrequenz/BO4E-dotnet/</PackageProjectUrl>
+    <AllowedOutputExtensionsInPackageBuildOutputFolder>$(AllowedOutputExtensionsInPackageBuildOutputFolder);.pdb</AllowedOutputExtensionsInPackageBuildOutputFolder>
+    <PackageProjectUrl>https://github.com/Hochfrequenz/BO4E-dotnet/</PackageProjectUrl>
     <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
     <PackageLicenseFile>LICENSE.txt</PackageLicenseFile>
 
@@ -79,26 +77,15 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.Extensions.Logging" Version="7.0.0" />
-    <PackageReference
-      Include="Microsoft.Extensions.Logging.Debug"
-      Version="6.0.0"
-    />
-    <PackageReference Include="MiniProfiler.Shared" Version="4.3.8" />
+    <PackageReference Include="Microsoft.Extensions.Logging" Version="8.0.0" />
+    <PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="8.0.0" />
     <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
     <PackageReference Include="Newtonsoft.Json.Schema" Version="3.0.15" />
-    <PackageReference Include="protobuf-net" Version="3.2.26" />
-    <PackageReference
-      Include="SourceLink.Copy.PdbFiles"
-      Version="2.8.3"
-      PrivateAssets="All"
-    />
-    <PackageReference
-      Include="System.ComponentModel.Annotations"
-      Version="5.0.0"
-    />
-    <PackageReference Include="System.Text.Encodings.Web" Version="6.0.0" />
-    <PackageReference Include="System.Text.Json" Version="6.0.8" />
+    <PackageReference Include="protobuf-net" Version="3.2.30" />
+    <PackageReference Include="SourceLink.Copy.PdbFiles" Version="2.8.3" PrivateAssets="All" />
+    <PackageReference Include="System.ComponentModel.Annotations" Version="5.0.0" />
+    <PackageReference Include="System.Text.Encodings.Web" Version="8.0.0" />
+    <PackageReference Include="System.Text.Json" Version="8.0.0" />
   </ItemGroup>
 
 </Project>

@@ -346,7 +346,6 @@ namespace BO4E.BO
         [ProtoMember(38)]
         public Sperrstatus? Sperrstatus { get; set; }
 
-
         /// <summary>
         ///   Zugeordnete Messprodukte
         /// </summary>        
@@ -356,6 +355,17 @@ namespace BO4E.BO
         [JsonPropertyOrder(39)]
         [NonOfficial(NonOfficialCategory.CUSTOMER_REQUIREMENTS)]
         public List<Messprodukt>? Messprodukte { get; set; }
+
+        /// <summary>
+        /// Produkt-Daten der Marktlokation
+        /// </summary>        
+        [JsonProperty(Required = Required.Default, Order = 40, PropertyName = "konfigurationsprodukte")]
+        [JsonPropertyName("konfigurationsprodukte")]
+        [ProtoMember(40)]
+        [JsonPropertyOrder(40)]
+        [NonOfficial(NonOfficialCategory.CUSTOMER_REQUIREMENTS)]
+        public List<Konfigurationsprodukt>? Konfigurationsprodukte { get; set; }
+
         /// <summary>
         ///     Test if a <paramref name="id" /> is a valid Marktlokations ID.
         /// </summary>

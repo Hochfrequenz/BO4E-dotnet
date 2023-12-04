@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Runtime.ConstrainedExecution;
@@ -80,10 +81,20 @@ namespace BO4E.BO
         public string? ObisKennzahl { get; set; }
 
         /// <summary>Verwendungungszweck der Werte Netzlokation</summary>
-        [JsonProperty(Order = 16, Required = Required.Default, PropertyName = "verwendungszweck")]
+        [JsonProperty(Required = Required.Default, Order = 16, PropertyName = "verwendungszweck")]
         [JsonPropertyOrder(16)]
         [JsonPropertyName("verwendungszweck")]
         [ProtoMember(10)]
         public COM.Verwendungszweck? Verwendungszweck { get; set; }
+
+        /// <summary>
+        /// Produkt-Daten der Netzlokation
+        /// </summary>        
+        [JsonProperty(Required = Required.Default, Order = 17, PropertyName = "konfigurationsprodukte")]
+        [JsonPropertyName("konfigurationsprodukte")]
+        [ProtoMember(11)]
+        [JsonPropertyOrder(17)]
+        [NonOfficial(NonOfficialCategory.CUSTOMER_REQUIREMENTS)]
+        public List<Konfigurationsprodukt>? Konfigurationsprodukte { get; set; }
     }
 }

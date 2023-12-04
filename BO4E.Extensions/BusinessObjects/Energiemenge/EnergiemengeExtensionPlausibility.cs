@@ -1,12 +1,15 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using BO4E.COM;
 using BO4E.ENUM;
 using BO4E.Reporting;
+
 using Itenso.TimePeriod;
+
 using Newtonsoft.Json;
-using StackExchange.Profiling;
+
+using System;
+using System.Collections.Generic;
+using System.Linq;
+
 using static BO4E.Extensions.ENUM.MengeneinheitExtenion;
 using static BO4E.Reporting.PlausibilityReport;
 
@@ -33,91 +36,86 @@ namespace BO4E.Extensions.BusinessObjects.Energiemenge
         public static PlausibilityReport GetPlausibilityReport(this BO.Energiemenge emReference,
             BO.Energiemenge emOther, ITimeRange timeframe = null, bool ignoreLocation = false)
         {
-            using (MiniProfiler.Current.Step(nameof(GetPlausibilityReport)))
+            var trReference = emReference.GetTimeRange();
+            var trOther = emOther.GetTimeRange();
+            if (timeframe == null)
             {
-                var trReference = emReference.GetTimeRange();
-                var trOther = emOther.GetTimeRange();
-                if (timeframe == null)
-                {
-                    var overlap = trReference.GetIntersection(trOther);
-                    if (!ignoreLocation)
-                        if (!(emReference.LokationsId == emOther.LokationsId &&
-                              emReference.LokationsTyp == emOther.LokationsTyp))
-                            throw new ArgumentException(
-                                $"locations do not match! '{emReference.LokationsId}' ({emReference.LokationsTyp}) != '{emOther.LokationsId}' ({emOther.LokationsTyp})");
-                    timeframe = overlap;
-                }
-
-                Tuple<decimal, Mengeneinheit> consumptionReference;
-                Tuple<decimal, Mengeneinheit> consumptionOtherRaw;
-                using (MiniProfiler.Current.Step("Get Consumptions for overlap:"))
-                {
-                    consumptionReference = emReference.GetConsumption(timeframe);
-                    consumptionOtherRaw = emOther.GetConsumption(timeframe);
-                }
-
-                Tuple<decimal, Mengeneinheit> consumptionOther;
-                if (consumptionReference.Item2 != consumptionOtherRaw.Item2)
-                {
-                    // unit mismatch
-                    if (consumptionReference.Item2.IsConvertibleTo(consumptionOtherRaw.Item2))
-                        consumptionOther = new Tuple<decimal, Mengeneinheit>(
-                            consumptionOtherRaw.Item1 *
-                            consumptionOtherRaw.Item2.GetConversionFactor(consumptionReference.Item2),
-                            consumptionReference.Item2);
-                    else
+                var overlap = trReference.GetIntersection(trOther);
+                if (!ignoreLocation)
+                    if (!(emReference.LokationsId == emOther.LokationsId &&
+                          emReference.LokationsTyp == emOther.LokationsTyp))
                         throw new ArgumentException(
-                            $"The unit {consumptionOtherRaw.Item2} is not comparable to {consumptionReference.Item2}!");
-                }
-                else
-                {
-                    consumptionOther = consumptionOtherRaw;
-                }
-
-                var absoluteDeviation = consumptionOther.Item1 - consumptionReference.Item1;
-                decimal? relativeDeviation;
-                try
-                {
-                    relativeDeviation = absoluteDeviation / consumptionReference.Item1;
-                }
-                catch (DivideByZeroException)
-                {
-                    relativeDeviation = null;
-                }
-
-                var vReference =
-                    emReference.Energieverbrauch.FirstOrDefault(); // copies obiskennzahl, wertermittlungsverfahren...
-                vReference.Wert = consumptionReference.Item1;
-                vReference.Einheit = consumptionReference.Item2;
-                vReference.Startdatum = timeframe.Start;
-                vReference.Enddatum = timeframe.End;
-
-                var vOther =
-                    emOther.Energieverbrauch.FirstOrDefault(); // copies obiskennzahl, wertermittlungsverfahren...
-                vOther.Wert = consumptionOther.Item1;
-                vOther.Einheit = consumptionOther.Item2;
-                vOther.Startdatum = timeframe.Start;
-                vOther.Enddatum = timeframe.End;
-
-                var pr = new PlausibilityReport
-                {
-                    LokationsId = emReference.LokationsId,
-                    ReferenceTimeFrame = new Zeitraum
-                    {
-                        Startdatum = new DateTimeOffset(timeframe.Start),
-                        Enddatum = new DateTimeOffset(timeframe.End)
-                    },
-                    VerbrauchReference = vReference,
-                    VerbrauchOther = vOther,
-                    AbsoluteDeviation = Math.Abs(absoluteDeviation),
-                    AbsoluteDeviationEinheit = consumptionReference.Item2
-                };
-                if (relativeDeviation.HasValue)
-                    pr.RelativeDeviation = Math.Round(relativeDeviation.Value, 4);
-                else
-                    pr.RelativeDeviation = null;
-                return pr;
+                            $"locations do not match! '{emReference.LokationsId}' ({emReference.LokationsTyp}) != '{emOther.LokationsId}' ({emOther.LokationsTyp})");
+                timeframe = overlap;
             }
+
+            Tuple<decimal, Mengeneinheit> consumptionReference;
+            Tuple<decimal, Mengeneinheit> consumptionOtherRaw;
+            consumptionReference = emReference.GetConsumption(timeframe);
+            consumptionOtherRaw = emOther.GetConsumption(timeframe);
+
+            Tuple<decimal, Mengeneinheit> consumptionOther;
+            if (consumptionReference.Item2 != consumptionOtherRaw.Item2)
+            {
+                // unit mismatch
+                if (consumptionReference.Item2.IsConvertibleTo(consumptionOtherRaw.Item2))
+                    consumptionOther = new Tuple<decimal, Mengeneinheit>(
+                        consumptionOtherRaw.Item1 *
+                        consumptionOtherRaw.Item2.GetConversionFactor(consumptionReference.Item2),
+                        consumptionReference.Item2);
+                else
+                    throw new ArgumentException(
+                        $"The unit {consumptionOtherRaw.Item2} is not comparable to {consumptionReference.Item2}!");
+            }
+            else
+            {
+                consumptionOther = consumptionOtherRaw;
+            }
+
+            var absoluteDeviation = consumptionOther.Item1 - consumptionReference.Item1;
+            decimal? relativeDeviation;
+            try
+            {
+                relativeDeviation = absoluteDeviation / consumptionReference.Item1;
+            }
+            catch (DivideByZeroException)
+            {
+                relativeDeviation = null;
+            }
+
+            var vReference =
+                emReference.Energieverbrauch.FirstOrDefault(); // copies obiskennzahl, wertermittlungsverfahren...
+            vReference.Wert = consumptionReference.Item1;
+            vReference.Einheit = consumptionReference.Item2;
+            vReference.Startdatum = timeframe.Start;
+            vReference.Enddatum = timeframe.End;
+
+            var vOther =
+                emOther.Energieverbrauch.FirstOrDefault(); // copies obiskennzahl, wertermittlungsverfahren...
+            vOther.Wert = consumptionOther.Item1;
+            vOther.Einheit = consumptionOther.Item2;
+            vOther.Startdatum = timeframe.Start;
+            vOther.Enddatum = timeframe.End;
+
+            var pr = new PlausibilityReport
+            {
+                LokationsId = emReference.LokationsId,
+                ReferenceTimeFrame = new Zeitraum
+                {
+                    Startdatum = new DateTimeOffset(timeframe.Start),
+                    Enddatum = new DateTimeOffset(timeframe.End)
+                },
+                VerbrauchReference = vReference,
+                VerbrauchOther = vOther,
+                AbsoluteDeviation = Math.Abs(absoluteDeviation),
+                AbsoluteDeviationEinheit = consumptionReference.Item2
+            };
+            if (relativeDeviation.HasValue)
+                pr.RelativeDeviation = Math.Round(relativeDeviation.Value, 4);
+            else
+                pr.RelativeDeviation = null;
+            return pr;
+
         }
 
         /// <summary>
