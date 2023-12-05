@@ -34,12 +34,12 @@ namespace BO4E.BO
         /// Leistungsbeschreibung des Steuerkanals
         /// </summary>
         /// <remarks>Edi-beispiel: CAV+ZF2:Z14'</remarks>
-        [JsonProperty(Required = Required.Default, Order = 11, PropertyName = "leistungsbeschreibungDesSteuerkanals")]
-        [JsonPropertyName("leistungsbeschreibungDesSteuerkanals")]
+        [JsonProperty(Required = Required.Default, Order = 11, PropertyName = "steuerkanalsLeistungsbeschreibung")]
+        [JsonPropertyName("steuerkanalsLeistungsbeschreibung")]
         [JsonPropertyOrder(11)]
         [NonOfficial(NonOfficialCategory.MISSING)]
         [ProtoMember(11)]
-        public LeistungsbeschreibungDesSteuerkanals? LeistungsbeschreibungDesSteuerkanals { get; set; }
+        public SteuerkanalsLeistungsbeschreibung? SteuerkanalsLeistungsbeschreibung { get; set; }
 
         /// <summary>
         /// Angabe des Messstellenbetreibers, der der Steuerbaren Ressource zugeordnet ist.

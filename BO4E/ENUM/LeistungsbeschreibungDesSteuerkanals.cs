@@ -7,7 +7,7 @@ namespace BO4E.ENUM
     /// Welche Funktionen der Steuerkanal einer <see cref="BO.SteuerbareRessource"/> bereitstsellt.
     /// </summary>
     [NonOfficial(NonOfficialCategory.MISSING)]
-    public enum LeistungsbeschreibungDesSteuerkanals
+    public enum SteuerkanalsLeistungsbeschreibung
     {
         /// <summary>
         /// AN/AUS
