@@ -61,7 +61,7 @@ namespace BO4E.BO
     [ProtoInclude(27, typeof(Wechsel))]
     [ProtoInclude(28, typeof(Tranche))]
     [ProtoInclude(29, typeof(Netzlokation))]
-    [ProtoInclude(29, typeof(SteuerbareRessource))]
+    [ProtoInclude(30, typeof(SteuerbareRessource))]
     public abstract class BusinessObject : IUserProperties, IOptionalGuid
     {
         /// <summary>
