@@ -22,7 +22,7 @@ namespace BO4E.BO
         /// </summary>
         /// <remarks>Edi-beispiel: LOC+Z19+C816417ST77'</remarks>
         [DefaultValue("|null|")]
-        [JsonProperty(Required = Required.Default, Order = 10, PropertyName = "steuerbareRessourceId")]
+        [JsonProperty(Required = Required.Always, Order = 10, PropertyName = "steuerbareRessourceId")]
         [JsonPropertyName("steuerbareRessourceId")]
         [JsonPropertyOrder(10)]
         [DataCategory(DataCategory.DEVICE)]
