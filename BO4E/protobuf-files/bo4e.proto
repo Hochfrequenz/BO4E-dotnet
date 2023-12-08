@@ -931,6 +931,14 @@ message Marktlokation {
    repeated Messlokation Messlokationen = 1028;
    MesstechnischeEinordnung MesstechnischeEinordnung = 1029;
    repeated Messprodukt Messprodukte = 1039;
+   repeated Konfigurationsprodukt Konfigurationsprodukte = 40;
+}
+message Konfigurationsprodukt {
+   option (.protobuf_net.msgopt).namespace = "BO4E.COM";
+   string Produktcode = 1;
+   string Leistungskurvendefinition = 2;
+   string Schaltzeitdefinition = 3;
+   Marktteilnehmer Marktpartner = 4;
 }
 message MarktpartnerDetails {
    option (.protobuf_net.msgopt).namespace = "BO4E.COM";
@@ -938,6 +946,12 @@ message MarktpartnerDetails {
    string Code = 4;
    Marktrolle marktrolle = 5;
    bool Weiterverpflichtet = 10;
+}
+message Marktteilnehmer {
+   option (.protobuf_net.msgopt).namespace = "BO4E.COM";
+   string Rollencodenummer = 3;
+   string Code = 4;
+   Marktrolle marktrolle = 5;
 }
 enum Marktrolle {
    option (.protobuf_net.enumopt).namespace = "BO4E.ENUM";
@@ -1483,6 +1497,35 @@ enum Titel {
    PROF = 1;
    PROF_DR = 2;
 }
+message Tranche {
+   option (.protobuf_net.msgopt).namespace = "BO4E.BO";
+   string TrancheId = 4; // default value could not be applied: |null|
+   Sparte Sparte = 5;
+   .bcl.Decimal Aufteilungsmenge = 6;
+   string ObisKennzahl = 7;
+}
+message Netzlokation {
+   option (.protobuf_net.msgopt).namespace = "BO4E.BO";
+   string NetzlokationsId = 4; // default value could not be applied: |null|
+   Sparte Sparte = 5;
+   Menge Netzanschlussleistung = 6;
+   string GrundzustaendigerMSBCodeNr = 7;
+   bool Steuerkanal = 8;
+   string ObisKennzahl = 9;
+   Verwendungszweck Verwendungszweck = 10;
+   repeated Konfigurationsprodukt Konfigurationsprodukte = 11;
+}
+message SteuerbareRessource {
+   option (.protobuf_net.msgopt).namespace = "BO4E.BO";
+   string SteuerbareRessourceId = 10; // default value could not be applied: |null|
+   SteuerkanalsLeistungsbeschreibung SteuerkanalsLeistungsbeschreibung = 11;
+   string ZugeordnetMSBCodeNr = 12;
+}
+enum SteuerkanalsLeistungsbeschreibung {
+	option (.protobuf_net.enumopt).namespace = "BO4E.ENUM";
+	AN_AUS = 0;
+	GESTUFT = 1;
+}
 enum Unterbrechbarkeit {
    option (.protobuf_net.enumopt).namespace = "BO4E.ENUM";
    UV = 0;
@@ -1605,7 +1648,7 @@ enum Verwendungszweck {
    BILANZKREISABRECHNUNG = 1;
    MEHRMINDERMENGENABRECHNUNG = 2;
    ENDKUNDENABRECHNUNG = 3;
-   BLINDARBEITABRECHNUNG_BETRIEBSFÜHRUNG = 4;
+   BLINDARBEITABRECHNUNG_BETRIEBSFUEHRUNG = 4;
    UEBERMITTLUNG_AN_DAS_HKNR = 5;
    ERMITTLUNG_AUSGEGLICHENHEIT_BILANZKREIS = 6;
    MEHRMINDERMBENGENABRECHNUNG = 2;

@@ -117,7 +117,7 @@ namespace TestBO4E
             typeof(Verbrauch),
             typeof(Verwendungszweck),
             typeof(Vertragsteil),
-
+            typeof(Konfigurationsprodukt),
             typeof(Zeitraum),
             typeof(Zustaendigkeit)
         };

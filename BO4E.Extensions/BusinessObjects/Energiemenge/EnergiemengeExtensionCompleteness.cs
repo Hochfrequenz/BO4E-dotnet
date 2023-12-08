@@ -1,13 +1,15 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using BO4E.COM;
 using BO4E.ENUM;
 using BO4E.Reporting;
+
 using Itenso.TimePeriod;
+
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
-using StackExchange.Profiling;
+
+using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace BO4E.Extensions.BusinessObjects.Energiemenge
 {
@@ -85,22 +87,21 @@ namespace BO4E.Extensions.BusinessObjects.Energiemenge
             Wertermittlungsverfahren? wev, string obiskennzahl, Mengeneinheit einheit)
         {
             CompletenessReport result;
-            using (MiniProfiler.Current.Step("create completeness report skeleton + find the coverage"))
+
+            result = new CompletenessReport
             {
-                result = new CompletenessReport
+                LokationsId = em.LokationsId,
+                Einheit = einheit,
+                Coverage = GetCoverage(em, reference, wev, obiskennzahl, einheit),
+                Wertermittlungsverfahren = wev,
+                Obiskennzahl = obiskennzahl,
+                ReferenceTimeFrame = new Zeitraum
                 {
-                    LokationsId = em.LokationsId,
-                    Einheit = einheit,
-                    Coverage = GetCoverage(em, reference, wev, obiskennzahl, einheit),
-                    Wertermittlungsverfahren = wev,
-                    Obiskennzahl = obiskennzahl,
-                    ReferenceTimeFrame = new Zeitraum
-                    {
-                        Startdatum = new DateTimeOffset(DateTime.SpecifyKind(reference.Start, DateTimeKind.Utc)),
-                        Enddatum = new DateTimeOffset(DateTime.SpecifyKind(reference.End, DateTimeKind.Utc))
-                    }
-                };
-            }
+                    Startdatum = new DateTimeOffset(DateTime.SpecifyKind(reference.Start, DateTimeKind.Utc)),
+                    Enddatum = new DateTimeOffset(DateTime.SpecifyKind(reference.End, DateTimeKind.Utc))
+                }
+            };
+
 
             if (em.Energieverbrauch != null && em.Energieverbrauch.Any())
             {
@@ -128,25 +129,24 @@ namespace BO4E.Extensions.BusinessObjects.Energiemenge
                     })
                     .ToList<CompletenessReport.BasicVerbrauch>());
                 }*/
-                using (MiniProfiler.Current.Step("Setting aggregated gaps"))
+
+                var nonNullValues =
+                    new TimePeriodCollection(
+                        em.Energieverbrauch.Select(v => new TimeRange((v.Startdatum ?? DateTimeOffset.MinValue).DateTime, (v.Enddatum ?? DateTimeOffset.MinValue).DateTime)));
+                ITimeRange limits;
+                if (result.ReferenceTimeFrame != null && result.ReferenceTimeFrame.Startdatum.HasValue)
+                    limits = new TimeRange(result.ReferenceTimeFrame.Startdatum.Value.UtcDateTime,
+                        result.ReferenceTimeFrame.Enddatum.Value.UtcDateTime);
+                else
+                    limits = null;
+                var gaps = new TimeGapCalculator<TimeRange>().GetGaps(nonNullValues, limits);
+                result.Gaps = gaps.Select(gap => new CompletenessReport.BasicVerbrauch
                 {
-                    var nonNullValues =
-                        new TimePeriodCollection(
-                            em.Energieverbrauch.Select(v => new TimeRange((v.Startdatum ?? DateTimeOffset.MinValue).DateTime, (v.Enddatum ?? DateTimeOffset.MinValue).DateTime)));
-                    ITimeRange limits;
-                    if (result.ReferenceTimeFrame != null && result.ReferenceTimeFrame.Startdatum.HasValue)
-                        limits = new TimeRange(result.ReferenceTimeFrame.Startdatum.Value.UtcDateTime,
-                            result.ReferenceTimeFrame.Enddatum.Value.UtcDateTime);
-                    else
-                        limits = null;
-                    var gaps = new TimeGapCalculator<TimeRange>().GetGaps(nonNullValues, limits);
-                    result.Gaps = gaps.Select(gap => new CompletenessReport.BasicVerbrauch
-                    {
-                        Startdatum = DateTime.SpecifyKind(gap.Start, DateTimeKind.Utc),
-                        Enddatum = DateTime.SpecifyKind(gap.End, DateTimeKind.Utc),
-                        Wert = null
-                    }).ToList();
-                }
+                    Startdatum = DateTime.SpecifyKind(gap.Start, DateTimeKind.Utc),
+                    Enddatum = DateTime.SpecifyKind(gap.End, DateTimeKind.Utc),
+                    Wert = null
+                }).ToList();
+
 
                 /*using (MiniProfiler.Current.Step("sorting result"))
                 {
