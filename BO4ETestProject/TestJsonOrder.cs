@@ -119,8 +119,7 @@ namespace TestBO4E
             typeof(Vertragsteil),
             typeof(Konfigurationsprodukt),
             typeof(Zeitraum),
-            typeof(Zustaendigkeit),
-            typeof(SteuerbareRessource)
+            typeof(Zustaendigkeit)
         };
 
         protected static void TestOrderFromAbstract(Type abstractBaseType)
