@@ -62,7 +62,7 @@ namespace BO4E.BO
         /// <remarks>UTILTS SG9 CAV 7111</remarks>
         [JsonProperty(Required = Required.Always, Order = 8, PropertyName = "verwendungszweck")]
         [JsonPropertyName("verwendungszweck")]
-        public Verwendungszweck Verwendungszweck { get; set; }
+        public List<Verwendungszweck>? Verwendungszweck { get; set; }
 
         /// <summary>
         /// Eine Berechnungsformel enthält, falls sie notwendig ist <see cref="BerechnungsformelNotwendigkeit.BERECHNUNGSFORMEL_NOTWENDIG"/>,
