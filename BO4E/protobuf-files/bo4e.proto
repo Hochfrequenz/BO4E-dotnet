@@ -1515,6 +1515,17 @@ message Netzlokation {
    Verwendungszweck Verwendungszweck = 10;
    repeated Konfigurationsprodukt Konfigurationsprodukte = 11;
 }
+message SteuerbareRessource {
+   option (.protobuf_net.msgopt).namespace = "BO4E.BO";
+   string SteuerbareRessourceId = 10; // default value could not be applied: |null|
+   SteuerkanalsLeistungsbeschreibung SteuerkanalsLeistungsbeschreibung = 11;
+   string ZugeordnetMSBCodeNr = 12;
+}
+enum SteuerkanalsLeistungsbeschreibung {
+	option (.protobuf_net.enumopt).namespace = "BO4E.ENUM";
+	AN_AUS = 0;
+	GESTUFT = 1;
+}
 enum Unterbrechbarkeit {
    option (.protobuf_net.enumopt).namespace = "BO4E.ENUM";
    UV = 0;
