@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Text.Json.Serialization;
 using BO4E.COM;
 using BO4E.ENUM;
@@ -57,12 +58,12 @@ namespace BO4E.BO
         public int? RechenschrittId { get; set; }
 
         /// <summary>
-        /// Verwendungszweck der Werte
+        /// Liste von Verwendungszweck der Werte
         /// </summary>
         /// <remarks>UTILTS SG9 CAV 7111</remarks>
-        [JsonProperty(Required = Required.Always, Order = 8, PropertyName = "verwendungszweck")]
-        [JsonPropertyName("verwendungszweck")]
-        public Verwendungszweck Verwendungszweck { get; set; }
+        [JsonProperty(Required = Required.Always, Order = 8, PropertyName = "verwendungszwecke")]
+        [JsonPropertyName("verwendungszwecke")]
+        public List<Verwendungszweck>? Verwendungszwecke { get; set; }
 
         /// <summary>
         /// Eine Berechnungsformel enthält, falls sie notwendig ist <see cref="BerechnungsformelNotwendigkeit.BERECHNUNGSFORMEL_NOTWENDIG"/>,
