@@ -2,7 +2,7 @@ using System.Runtime.Serialization;
 
 namespace BO4E.ENUM
 {
-    /// <summary>Im Falle der Speicher bei <see cref="TechnischeRessourceVerbrauchsart"/>, eine genauere Angabe über die Art der Speicher zu definieren.</summary>
+    /// <summary>Im Falle der Speicher bei <see cref="TechnischeRessourceNutzung"/>, eine genauere Angabe über die Art der Speicher zu definieren.</summary>
     public enum Speicherart
     {
         /// <summary>ZF7: Wasserstoffspeicher</summary>

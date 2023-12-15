@@ -105,6 +105,9 @@ namespace BO4E.BO
         /// <summary>
         /// Art und Nutzung der Technischen Ressource
         /// Beispiel: CCI+Z17'
+        ///     Z17: Stromverbrauchsart
+        ///     Z50: Stromerzeugungsart
+        ///     Z56: Speicher
         /// </summary>
         [JsonProperty(PropertyName = "technischeRessourceNutzung", Required = Required.Default, Order = 17)]
         [JsonPropertyName("technischeRessourceNutzung")]
@@ -116,6 +119,10 @@ namespace BO4E.BO
         /// <summary>
         /// Verbrauchsart der Technischen Ressource
         /// Beispiel: CAV+Z64'
+        ///     Z64: Kraft/Licht
+        ///     Z65: Wärme
+        ///     ZE5: E-Mobilität
+        ///     ZA8: Straßenbeleuchtung
         /// </summary>
         [JsonProperty(Required = Required.Default, Order = 14, PropertyName = "verbrauchsart")]
         [JsonPropertyOrder(14)]
@@ -126,6 +133,9 @@ namespace BO4E.BO
         /// <summary>
         /// Wärmenutzung
         /// Beispiel: CAV+Z56'
+        ///     Z56: Speicherheizung
+        ///     Z57: Wärmepumpe
+        ///     Z61: Direktheizung
         /// </summary>
         [JsonProperty(PropertyName = "waermenutzung", Order = 1014, Required = Required.Default)]
         [JsonPropertyName("waermenutzung")]
@@ -138,9 +148,9 @@ namespace BO4E.BO
         /// Art der E-Mobilität
         /// Das Segment dient dazu, im Falle der E-Mobilität eine genauere Angabe über die Art der E-Mobilität zu definieren.
         /// Beispiel: CAV+Z87'
-        /// ZE6: Wallbox: An der Marktlokation ist eine nicht öffentlliche Lademöglichkeit vorhanden
-        /// Z87: E-Mobilitätsladesäule: Es handelt sich um eine öffentliche Ladesäule mit ggf. mehreren Ladeanschlüssen an der Marktlokation.
-        /// ZE7: Ladepark: Es handelt sich um mehr als eine öffentliche Ladesäule an der Marktlokation
+        ///     ZE6: Wallbox: An der Marktlokation ist eine nicht öffentlliche Lademöglichkeit vorhanden
+        ///     Z87: E-Mobilitätsladesäule: Es handelt sich um eine öffentliche Ladesäule mit ggf. mehreren Ladeanschlüssen an der Marktlokation.
+        ///     ZE7: Ladepark: Es handelt sich um mehr als eine öffentliche Ladesäule an der Marktlokation
         /// </summary>
         [JsonProperty(PropertyName = "emobilitaetsart", Order = 1014, Required = Required.Default)]
         [JsonPropertyName("emobilitaetsart")]
@@ -151,16 +161,31 @@ namespace BO4E.BO
 
         /// <summary>
         /// Art der Erzeugung der Energie. Details <see cref="ENUM.Erzeugungsart" />
+        /// Beispiel: CAV+ZF5'
         /// Erzeugungsart:
-        /// ZF5 Solar
-        /// ZF6 Wind
-        /// ZG0 Gas
-        /// ZG1 Wasser
-        /// ZG5 Sonstige Erzeugungsart
+        ///     ZF5: Solar
+        ///     ZF6: Wind
+        ///     ZG0: Gas
+        ///     ZG1: Wasser
+        ///     ZG5: Sonstige Erzeugungsart
         /// </summary>
         [JsonProperty(PropertyName = "erzeugungsart", Required = Required.Always)]
         [JsonPropertyName("erzeugungsart")]
         [ProtoMember(3)]
         public Erzeugungsart? Erzeugungsart { get; set; }
+
+        /// <summary>
+        /// Art der speicher. Details <see cref="ENUM.Speicherart" />
+        /// Beispiel: CAV+ZF7'
+        /// Speicherart:
+        ///     ZF7: Wasserstoffspeicher
+        ///     ZF8: Pumpspeicher
+        ///     ZF9: Batteriespeicher
+        ///     ZG6: Sonstige Speicherart
+        /// </summary>
+        [JsonProperty(PropertyName = "speicherart", Required = Required.Always)]
+        [JsonPropertyName("speicherart")]
+        [ProtoMember(3)]
+        public Speicherart? Speicherart { get; set; }
     }
 }
