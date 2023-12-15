@@ -25,12 +25,12 @@ namespace BO4E.BO
         /// </summary>
         /// <remarks>Edi-beispiel: LOC+Z19+C816417ST77'</remarks>
         [DefaultValue("|null|")]
-        [JsonProperty(Required = Required.Always, Order = 10, PropertyName = "technischeRessourceId")]
+        [JsonProperty(PropertyName = "technischeRessourceId", Required = Required.Always, Order = 1)]
         [JsonPropertyName("technischeRessourceId")]
-        [JsonPropertyOrder(10)]
+        [JsonPropertyOrder(1)]
         [DataCategory(DataCategory.DEVICE)]
         [BoKey]
-        [ProtoMember(10)]
+        [ProtoMember(1)]
         public string? TechnischeRessourceId { get; set; }
 
         /// <summary>
@@ -38,11 +38,11 @@ namespace BO4E.BO
         /// Beispiel:
         /// RFF+Z34:DE00713739359S0000000000001222221'
         /// </summary>
-        [JsonProperty(PropertyName = "vorgelagerteMesslokationsId", Required = Required.Always, Order = 10)]
+        [JsonProperty(PropertyName = "vorgelagerteMesslokationsId", Required = Required.Always, Order = 2)]
         [JsonPropertyName("vorgelagerteMesslokationsId")]
-        [JsonPropertyOrder(10)]
+        [JsonPropertyOrder(2)]
         [DataCategory(DataCategory.POD)]
-        [ProtoMember(4)]
+        [ProtoMember(2)]
         public string? VorgelagerteMesslokationsId { get; set; }
 
         /// <summary>
@@ -50,11 +50,11 @@ namespace BO4E.BO
         /// Beispiel:
         /// RFF+Z16:20072281644'
         /// </summary>
-        [JsonProperty(PropertyName = "zugeordneteMarktlokationsId", Required = Required.Always, Order = 10)]
+        [JsonProperty(PropertyName = "zugeordneteMarktlokationsId", Required = Required.Always, Order = 3)]
         [JsonPropertyName("zugeordneteMarktlokationsId")]
-        [JsonPropertyOrder(10)]
+        [JsonPropertyOrder(3)]
         [DataCategory(DataCategory.POD)]
-        [ProtoMember(4)]
+        [ProtoMember(3)]
         public string? ZugeordneteMarktlokationsId { get; set; }
 
         /// <summary>
@@ -62,9 +62,9 @@ namespace BO4E.BO
         /// Beispiel:
         /// RFF+Z16:20072281644'
         /// </summary>
-        [JsonProperty(PropertyName = "zugeordneteSteuerbareRessourceId", Required = Required.Always, Order = 10)]
+        [JsonProperty(PropertyName = "zugeordneteSteuerbareRessourceId", Required = Required.Always, Order = 4)]
         [JsonPropertyName("zugeordneteSteuerbareRessourceId")]
-        [JsonPropertyOrder(10)]
+        [JsonPropertyOrder(4)]
         [DataCategory(DataCategory.POD)]
         [ProtoMember(4)]
         public string? ZugeordneteSteuerbareRessourceId { get; set; }
@@ -73,33 +73,33 @@ namespace BO4E.BO
         /// Nennleistung (Aufnahme)
         /// Beispiel: QTY+Z43:100:KWT'
         /// </summary>
-        [JsonProperty(PropertyName = "nennleistungAufnahme", Required = Required.Default, Order = 17)]
+        [JsonProperty(PropertyName = "nennleistungAufnahme", Required = Required.Default, Order = 5)]
         [JsonPropertyName("nennleistungAufnahme")]
-        [JsonPropertyOrder(17)]
+        [JsonPropertyOrder(5)]
         [NonOfficial(NonOfficialCategory.MISSING)]
-        [ProtoMember(1006)]
+        [ProtoMember(5)]
         public Menge? NennleistungAufnahme { get; set; }
 
         /// <summary>
         /// Nennleistung (Abgabe)
         /// Beispiel: QTY+Z44:100:KWT'
         /// </summary>
-        [JsonProperty(PropertyName = "nennleistungAbgabe", Required = Required.Default, Order = 17)]
+        [JsonProperty(PropertyName = "nennleistungAbgabe", Required = Required.Default, Order = 6)]
         [JsonPropertyName("nennleistungAbgabe")]
-        [JsonPropertyOrder(17)]
+        [JsonPropertyOrder(6)]
         [NonOfficial(NonOfficialCategory.MISSING)]
-        [ProtoMember(1006)]
+        [ProtoMember(6)]
         public Menge? NennleistungAbgabe { get; set; }
 
         /// <summary>
         /// Speicherkapazität
         /// Beispiel: QTY+Z42:100:KWH'
         /// </summary>
-        [JsonProperty(PropertyName = "speicherkapazitaet", Required = Required.Default, Order = 17)]
+        [JsonProperty(PropertyName = "speicherkapazitaet", Required = Required.Default, Order = 7)]
         [JsonPropertyName("speicherkapazitaet")]
-        [JsonPropertyOrder(17)]
+        [JsonPropertyOrder(7)]
         [NonOfficial(NonOfficialCategory.MISSING)]
-        [ProtoMember(1006)]
+        [ProtoMember(7)]
         public Menge? Speicherkapazitaet { get; set; }
 
         /// <summary>
@@ -109,11 +109,11 @@ namespace BO4E.BO
         ///     Z50: Stromerzeugungsart
         ///     Z56: Speicher
         /// </summary>
-        [JsonProperty(PropertyName = "technischeRessourceNutzung", Required = Required.Default, Order = 17)]
+        [JsonProperty(PropertyName = "technischeRessourceNutzung", Required = Required.Default, Order = 8)]
         [JsonPropertyName("technischeRessourceNutzung")]
-        [JsonPropertyOrder(17)]
+        [JsonPropertyOrder(8)]
         [NonOfficial(NonOfficialCategory.MISSING)]
-        [ProtoMember(1006)]
+        [ProtoMember(8)]
         public TechnischeRessourceNutzung? TechnischeRessourceNutzung { get; set; }
 
         /// <summary>
@@ -124,10 +124,11 @@ namespace BO4E.BO
         ///     ZE5: E-Mobilität
         ///     ZA8: Straßenbeleuchtung
         /// </summary>
-        [JsonProperty(Required = Required.Default, Order = 14, PropertyName = "verbrauchsart")]
-        [JsonPropertyOrder(14)]
+        [JsonProperty(PropertyName = "verbrauchsart", Required = Required.Default, Order = 9)]
+        [JsonPropertyOrder(9)]
         [JsonPropertyName("verbrauchsart")]
-        [ProtoMember(8)]
+        [NonOfficial(NonOfficialCategory.MISSING)]
+        [ProtoMember(9)]
         public TechnischeRessourceVerbrauchsart? Verbrauchsart { get; set; }
 
         /// <summary>
@@ -137,11 +138,11 @@ namespace BO4E.BO
         ///     Z57: Wärmepumpe
         ///     Z61: Direktheizung
         /// </summary>
-        [JsonProperty(PropertyName = "waermenutzung", Order = 1014, Required = Required.Default)]
+        [JsonProperty(PropertyName = "waermenutzung",  Required = Required.Default, Order = 10)]
+        [JsonPropertyOrder(10)]
         [JsonPropertyName("waermenutzung")]
-        [NonOfficial(NonOfficialCategory.CUSTOMER_REQUIREMENTS)]
-        [ProtoMember(1014)]
-        [JsonPropertyOrder(1014)]
+        [NonOfficial(NonOfficialCategory.MISSING)]
+        [ProtoMember(10)]
         public Waermenutzung? Waermenutzung { get; set; }
 
         /// <summary>
@@ -152,11 +153,11 @@ namespace BO4E.BO
         ///     Z87: E-Mobilitätsladesäule: Es handelt sich um eine öffentliche Ladesäule mit ggf. mehreren Ladeanschlüssen an der Marktlokation.
         ///     ZE7: Ladepark: Es handelt sich um mehr als eine öffentliche Ladesäule an der Marktlokation
         /// </summary>
-        [JsonProperty(PropertyName = "emobilitaetsart", Order = 1014, Required = Required.Default)]
+        [JsonProperty(PropertyName = "emobilitaetsart", Required = Required.Default, Order = 11)]
+        [JsonPropertyOrder(11)]
         [JsonPropertyName("emobilitaetsart")]
-        [NonOfficial(NonOfficialCategory.CUSTOMER_REQUIREMENTS)]
-        [ProtoMember(1014)]
-        [JsonPropertyOrder(1014)]
+        [NonOfficial(NonOfficialCategory.MISSING)]
+        [ProtoMember(11)]
         public EMobilitaetsart? EMobilitaetsart { get; set; }
 
         /// <summary>
@@ -169,9 +170,11 @@ namespace BO4E.BO
         ///     ZG1: Wasser
         ///     ZG5: Sonstige Erzeugungsart
         /// </summary>
-        [JsonProperty(PropertyName = "erzeugungsart", Required = Required.Always)]
+        [JsonProperty(PropertyName = "erzeugungsart", Required = Required.Always, Order = 12)]
+        [JsonPropertyOrder(12)]
         [JsonPropertyName("erzeugungsart")]
-        [ProtoMember(3)]
+        [NonOfficial(NonOfficialCategory.MISSING)]
+        [ProtoMember(12)]
         public Erzeugungsart? Erzeugungsart { get; set; }
 
         /// <summary>
@@ -183,9 +186,11 @@ namespace BO4E.BO
         ///     ZF9: Batteriespeicher
         ///     ZG6: Sonstige Speicherart
         /// </summary>
-        [JsonProperty(PropertyName = "speicherart", Required = Required.Always)]
+        [JsonProperty(PropertyName = "speicherart", Required = Required.Always, Order = 13)]
+        [JsonPropertyOrder(13)]
         [JsonPropertyName("speicherart")]
-        [ProtoMember(3)]
+        [NonOfficial(NonOfficialCategory.MISSING)]
+        [ProtoMember(13)]
         public Speicherart? Speicherart { get; set; }
     }
 }
