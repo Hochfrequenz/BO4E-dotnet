@@ -1,4 +1,6 @@
-using System.ComponentModel;
+﻿using System.ComponentModel;
+using System.Reflection.Metadata;
+using System.Runtime.ConstrainedExecution;
 using System.Text.Json.Serialization;
 
 using BO4E.COM;
@@ -90,7 +92,7 @@ namespace BO4E.BO
         public Menge? NennleistungAbgabe { get; set; }
 
         /// <summary>
-        /// Speicherkapazit�t
+        /// Speicherkapazität
         /// Beispiel: QTY+Z42:100:KWH'
         /// </summary>
         [JsonProperty(PropertyName = "speicherkapazitaet", Required = Required.Default, Order = 17)]
@@ -122,7 +124,7 @@ namespace BO4E.BO
         public TechnischeRessourceVerbrauchsart? Verbrauchsart { get; set; }
 
         /// <summary>
-        /// W�rmenutzung
+        /// Wärmenutzung
         /// Beispiel: CAV+Z56'
         /// </summary>
         [JsonProperty(PropertyName = "waermenutzung", Order = 1014, Required = Required.Default)]
@@ -131,5 +133,34 @@ namespace BO4E.BO
         [ProtoMember(1014)]
         [JsonPropertyOrder(1014)]
         public Waermenutzung? Waermenutzung { get; set; }
+
+        /// <summary>
+        /// Art der E-Mobilität
+        /// Das Segment dient dazu, im Falle der E-Mobilität eine genauere Angabe über die Art der E-Mobilität zu definieren.
+        /// Beispiel: CAV+Z87'
+        /// ZE6: Wallbox: An der Marktlokation ist eine nicht öffentlliche Lademöglichkeit vorhanden
+        /// Z87: E-Mobilitätsladesäule: Es handelt sich um eine öffentliche Ladesäule mit ggf. mehreren Ladeanschlüssen an der Marktlokation.
+        /// ZE7: Ladepark: Es handelt sich um mehr als eine öffentliche Ladesäule an der Marktlokation
+        /// </summary>
+        [JsonProperty(PropertyName = "emobilitaetsart", Order = 1014, Required = Required.Default)]
+        [JsonPropertyName("emobilitaetsart")]
+        [NonOfficial(NonOfficialCategory.CUSTOMER_REQUIREMENTS)]
+        [ProtoMember(1014)]
+        [JsonPropertyOrder(1014)]
+        public EMobilitaetsart? EMobilitaetsart { get; set; }
+
+        /// <summary>
+        /// Art der Erzeugung der Energie. Details <see cref="ENUM.Erzeugungsart" />
+        /// Erzeugungsart:
+        /// ZF5 Solar
+        /// ZF6 Wind
+        /// ZG0 Gas
+        /// ZG1 Wasser
+        /// ZG5 Sonstige Erzeugungsart
+        /// </summary>
+        [JsonProperty(PropertyName = "erzeugungsart", Required = Required.Always)]
+        [JsonPropertyName("erzeugungsart")]
+        [ProtoMember(3)]
+        public Erzeugungsart? Erzeugungsart { get; set; }
     }
 }
