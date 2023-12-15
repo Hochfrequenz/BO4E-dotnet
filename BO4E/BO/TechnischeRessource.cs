@@ -1,6 +1,4 @@
 ﻿using System.ComponentModel;
-using System.Reflection.Metadata;
-using System.Runtime.ConstrainedExecution;
 using System.Text.Json.Serialization;
 
 using BO4E.COM;
@@ -138,7 +136,7 @@ namespace BO4E.BO
         ///     Z57: Wärmepumpe
         ///     Z61: Direktheizung
         /// </summary>
-        [JsonProperty(PropertyName = "waermenutzung",  Required = Required.Default, Order = 10)]
+        [JsonProperty(PropertyName = "waermenutzung", Required = Required.Default, Order = 10)]
         [JsonPropertyOrder(10)]
         [JsonPropertyName("waermenutzung")]
         [NonOfficial(NonOfficialCategory.MISSING)]
