@@ -1531,6 +1531,62 @@ enum Unterbrechbarkeit {
    UV = 0;
    NUV = 1;
 }
+message TechnischeRessource {
+   option (.protobuf_net.msgopt).namespace = "BO4E.BO";
+   string TechnischeRessourceId = 1; // default value could not be applied: |null|
+   string VorgelagerteMesslokationsId = 2;
+   string ZugeordneteMarktlokationsId = 3;
+   string ZugeordneteSteuerbareRessourceId = 4;
+   Menge NennleistungAufnahme = 5;
+   Menge NennleistungAbgabe = 6;
+   Menge Speicherkapazitaet = 7;
+   TechnischeRessourceNutzung TechnischeRessourceNutzung = 8;
+   TechnischeRessourceVerbrauchsart Verbrauchsart = 9;
+   Waermenutzung Waermenutzung = 10;
+   EMobilitaetsart EMobilitaetsart = 11;
+   Erzeugungsart Erzeugungsart = 12;
+   Speicherart Speicherart = 13;
+}
+enum TechnischeRessourceNutzung {
+	option (.protobuf_net.enumopt).namespace = "BO4E.ENUM";
+	STROMVERBRAUCHSART = 0;
+	STROMERZEUGUNGSART = 1;
+	SPEICHER = 2;
+}
+enum TechnischeRessourceVerbrauchsart {
+	option (.protobuf_net.enumopt).namespace = "BO4E.ENUM";
+	KRAFT_LICHT = 0;
+	WAERME = 1;
+	E_MOBILITAET = 2;
+	STRASSENBELEUCHTUNG = 3;
+}
+enum EMobilitaetsart {
+	option (.protobuf_net.enumopt).namespace = "BO4E.ENUM";
+	WALLBOX = 0;
+	E_MOBILITAETSLADESAEULE = 1;
+	LADEPARK = 2;
+}
+enum Erzeugungsart {
+	option (.protobuf_net.enumopt).namespace = "BO4E.ENUM";
+	Erzeugungsart_KWK = 0;
+	Erzeugungsart_WIND = 1;
+	Erzeugungsart_SOLAR = 2;
+	Erzeugungsart_KERNKRAFT = 3;
+	Erzeugungsart_WASSER = 4;
+	Erzeugungsart_GEOTHERMIE = 5;
+	Erzeugungsart_BIOMASSE = 6;
+	Erzeugungsart_KOHLE = 7;
+	Erzeugungsart_GAS = 8;
+	Erzeugungsart_SONSTIGE = 9;
+	Erzeugungsart_SONSTIGE_EEG = 10;
+}
+enum Speicherart {
+	option (.protobuf_net.enumopt).namespace = "BO4E.ENUM";
+	WASSERSTOFFSPEICHER = 0;
+	PUMPSPEICHER = 1;
+	BATTERIESPEICHER = 2;
+	SONSTIGE_SPEICHERART = 3;
+}
 message Unterschrift {
    option (.protobuf_net.msgopt).namespace = "BO4E.COM";
    string Ort = 3;
