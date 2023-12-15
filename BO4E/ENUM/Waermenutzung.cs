@@ -17,7 +17,7 @@ namespace BO4E.ENUM
         [EnumMember(Value = "WAERMEPUMPE")]
         WAERMEPUMPE,
 
-        ///<summary>Z61: Direktheizung</summary>
+        /// <summary>Z61: Direktheizung</summary>
         [ProtoEnum(Name = nameof(Waermenutzung) + "_" + nameof(DIREKTHEIZUNG))]
         [EnumMember(Value = "DIREKTHEIZUNG")]
         DIREKTHEIZUNG,
