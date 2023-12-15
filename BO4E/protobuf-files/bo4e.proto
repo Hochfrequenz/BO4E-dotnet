@@ -1533,19 +1533,19 @@ enum Unterbrechbarkeit {
 }
 message TechnischeRessource {
    option (.protobuf_net.msgopt).namespace = "BO4E.BO";
-   string TechnischeRessourceId = 1; // default value could not be applied: |null|
-   string VorgelagerteMesslokationsId = 2;
-   string ZugeordneteMarktlokationsId = 3;
-   string ZugeordneteSteuerbareRessourceId = 4;
-   Menge NennleistungAufnahme = 5;
-   Menge NennleistungAbgabe = 6;
-   Menge Speicherkapazitaet = 7;
-   TechnischeRessourceNutzung TechnischeRessourceNutzung = 8;
-   TechnischeRessourceVerbrauchsart Verbrauchsart = 9;
-   Waermenutzung Waermenutzung = 10;
-   EMobilitaetsart EMobilitaetsart = 11;
-   Erzeugungsart Erzeugungsart = 12;
-   Speicherart Speicherart = 13;
+   string TechnischeRessourceId = 10; // default value could not be applied: |null|
+   string VorgelagerteMesslokationsId = 11;
+   string ZugeordneteMarktlokationsId = 12;
+   string ZugeordneteSteuerbareRessourceId = 13;
+   Menge NennleistungAufnahme = 14;
+   Menge NennleistungAbgabe = 15;
+   Menge Speicherkapazitaet = 16;
+   TechnischeRessourceNutzung TechnischeRessourceNutzung = 17;
+   TechnischeRessourceVerbrauchsart Verbrauchsart = 18;
+   Waermenutzung Waermenutzung = 19;
+   EMobilitaetsart EMobilitaetsart = 20;
+   Erzeugungsart Erzeugungsart = 21;
+   Speicherart Speicherart = 22;
 }
 enum TechnischeRessourceNutzung {
 	option (.protobuf_net.enumopt).namespace = "BO4E.ENUM";
