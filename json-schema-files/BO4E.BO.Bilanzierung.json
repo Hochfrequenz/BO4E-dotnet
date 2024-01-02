@@ -2,44 +2,81 @@
   "$schema": "http://json-schema.org/draft-07/schema#",
   "definitions": {
     "ExterneReferenz": {
-      "type": ["object", "null"],
+      "type": [
+        "object",
+        "null"
+      ],
       "properties": {
         "exRefName": {
-          "type": ["string", "null"]
+          "type": [
+            "string",
+            "null"
+          ]
         },
         "exRefWert": {
-          "type": ["string", "null"]
+          "type": [
+            "string",
+            "null"
+          ]
         },
         "timestamp": {
-          "type": ["string", "null"],
+          "type": [
+            "string",
+            "null"
+          ],
           "format": "date-time"
         },
         "guid": {
-          "type": ["string", "null"]
+          "type": [
+            "string",
+            "null"
+          ]
         }
       }
     },
     "Lastprofil": {
-      "type": ["object", "null"],
+      "type": [
+        "object",
+        "null"
+      ],
       "properties": {
         "bezeichnung": {
-          "type": ["string", "null"]
+          "type": [
+            "string",
+            "null"
+          ]
         },
         "profilschar": {
-          "type": ["string", "null"]
+          "type": [
+            "string",
+            "null"
+          ]
         },
         "verfahren": {
-          "type": ["string", "null"],
-          "enum": [null, "SYNTHETISCH", "ANALYTISCH"]
+          "type": [
+            "string",
+            "null"
+          ],
+          "enum": [
+            null,
+            "SYNTHETISCH",
+            "ANALYTISCH"
+          ]
         },
         "einspeisung": {
-          "type": ["boolean", "null"]
+          "type": [
+            "boolean",
+            "null"
+          ]
         },
         "tagesparameter": {
           "$ref": "#/definitions/Tagesparameter"
         },
         "profilart": {
-          "type": ["string", "null"],
+          "type": [
+            "string",
+            "null"
+          ],
           "enum": [
             null,
             "ART_STANDARDLASTPROFIL",
@@ -48,32 +85,53 @@
           ]
         },
         "herausgeber": {
-          "type": ["string", "null"]
+          "type": [
+            "string",
+            "null"
+          ]
         },
         "timestamp": {
-          "type": ["string", "null"],
+          "type": [
+            "string",
+            "null"
+          ],
           "format": "date-time"
         },
         "guid": {
-          "type": ["string", "null"]
+          "type": [
+            "string",
+            "null"
+          ]
         }
       }
     },
     "Menge": {
-      "type": ["object", "null"],
+      "type": [
+        "object",
+        "null"
+      ],
       "properties": {
         "timestamp": {
-          "type": ["string", "null"],
+          "type": [
+            "string",
+            "null"
+          ],
           "format": "date-time"
         },
         "guid": {
-          "type": ["string", "null"]
+          "type": [
+            "string",
+            "null"
+          ]
         },
         "wert": {
           "type": "number"
         },
         "einheit": {
-          "type": ["string", "null"],
+          "type": [
+            "string",
+            "null"
+          ],
           "enum": [
             null,
             "ZERO",
@@ -96,29 +154,52 @@
           ]
         }
       },
-      "required": ["wert"]
+      "required": [
+        "wert"
+      ]
     },
     "Tagesparameter": {
-      "type": ["object", "null"],
+      "type": [
+        "object",
+        "null"
+      ],
       "properties": {
         "klimazone": {
-          "type": ["string", "null"]
+          "type": [
+            "string",
+            "null"
+          ]
         },
         "temperaturmessstelle": {
-          "type": ["string", "null"]
+          "type": [
+            "string",
+            "null"
+          ]
         },
         "dienstanbieter": {
-          "type": ["string", "null"]
+          "type": [
+            "string",
+            "null"
+          ]
         },
         "herausgeber": {
-          "type": ["string", "null"]
+          "type": [
+            "string",
+            "null"
+          ]
         },
         "timestamp": {
-          "type": ["string", "null"],
+          "type": [
+            "string",
+            "null"
+          ],
           "format": "date-time"
         },
         "guid": {
-          "type": ["string", "null"]
+          "type": [
+            "string",
+            "null"
+          ]
         }
       }
     }
@@ -126,43 +207,73 @@
   "type": "object",
   "properties": {
     "boTyp": {
-      "type": ["string", "null"]
+      "type": [
+        "string",
+        "null"
+      ]
     },
     "versionStruktur": {
-      "type": ["string", "null"]
+      "type": [
+        "string",
+        "null"
+      ]
     },
     "timestamp": {
-      "type": ["string", "null"],
+      "type": [
+        "string",
+        "null"
+      ],
       "format": "date-time"
     },
     "externeReferenzen": {
-      "type": ["array", "null"],
+      "type": [
+        "array",
+        "null"
+      ],
       "items": {
         "$ref": "#/definitions/ExterneReferenz"
       }
     },
     "guid": {
-      "type": ["string", "null"]
+      "type": [
+        "string",
+        "null"
+      ]
     },
     "marktlokationsId": {
-      "type": ["string", "null"]
+      "type": [
+        "string",
+        "null"
+      ]
     },
     "lastprofile": {
-      "type": ["array", "null"],
+      "type": [
+        "array",
+        "null"
+      ],
       "items": {
         "$ref": "#/definitions/Lastprofil"
       }
     },
     "bilanzierungsbeginn": {
-      "type": ["string", "null"],
+      "type": [
+        "string",
+        "null"
+      ],
       "format": "date-time"
     },
     "bilanzierungsende": {
-      "type": ["string", "null"],
+      "type": [
+        "string",
+        "null"
+      ],
       "format": "date-time"
     },
     "bilanzkreis": {
-      "type": ["string", "null"]
+      "type": [
+        "string",
+        "null"
+      ]
     },
     "jahresverbrauchsprognose": {
       "$ref": "#/definitions/Menge"
@@ -174,10 +285,16 @@
       "$ref": "#/definitions/Menge"
     },
     "verbrauchsaufteilung": {
-      "type": ["number", "null"]
+      "type": [
+        "number",
+        "null"
+      ]
     },
     "zeitreihentyp": {
-      "type": ["string", "null"],
+      "type": [
+        "string",
+        "null"
+      ],
       "enum": [
         null,
         "EGS",
@@ -192,22 +309,45 @@
       ]
     },
     "aggregationsverantwortung": {
-      "type": ["string", "null"],
-      "enum": [null, "UENB", "VNB"]
+      "type": [
+        "string",
+        "null"
+      ],
+      "enum": [
+        null,
+        "UENB",
+        "VNB"
+      ]
     },
     "prognosegrundlage": {
-      "type": ["string", "null"],
-      "enum": [null, "WERTE", "PROFILE"]
+      "type": [
+        "string",
+        "null"
+      ],
+      "enum": [
+        null,
+        "WERTE",
+        "PROFILE"
+      ]
     },
     "detailsPrognosegrundlage": {
-      "type": ["array", "null"],
+      "type": [
+        "array",
+        "null"
+      ],
       "items": {
         "type": "string",
-        "enum": ["SLP_SEP", "TLP_TEP"]
+        "enum": [
+          "SLP_SEP",
+          "TLP_TEP"
+        ]
       }
     },
     "wahlrechtPrognosegrundlage": {
-      "type": ["string", "null"],
+      "type": [
+        "string",
+        "null"
+      ],
       "enum": [
         null,
         "DURCH_LF",
@@ -219,14 +359,28 @@
       ]
     },
     "fallgruppenzuordnung": {
-      "type": ["string", "null"],
-      "enum": [null, "GABI_RLMmT", "GABI_RLMoT", "GABI_RLMNEV"]
+      "type": [
+        "string",
+        "null"
+      ],
+      "enum": [
+        null,
+        "GABI_RLMmT",
+        "GABI_RLMoT",
+        "GABI_RLMNEV"
+      ]
     },
     "prioritaet": {
-      "type": ["integer", "null"]
+      "type": [
+        "integer",
+        "null"
+      ]
     },
     "grundWahlrechtPrognosegrundlage": {
-      "type": ["string", "null"],
+      "type": [
+        "string",
+        "null"
+      ],
       "enum": [
         null,
         "DURCH_LF",
@@ -235,6 +389,17 @@
         "NICHT_WEGEN_EIGENVERBRAUCH",
         "NICHT_WEGEN_TAGES_VERBRAUCH",
         "NICHT_WEGEN_ENWG"
+      ]
+    },
+    "abwicklungsmodell": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "enum": [
+        null,
+        "MODELL_1",
+        "MODELL_2"
       ]
     }
   }
