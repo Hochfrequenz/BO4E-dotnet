@@ -1,6 +1,10 @@
+using System.Runtime.ConstrainedExecution;
 using System.Text.Json.Serialization;
 using BO4E.ENUM;
 using BO4E.meta;
+
+using Microsoft.Win32;
+
 using Newtonsoft.Json;
 using ProtoBuf;
 
@@ -64,9 +68,21 @@ namespace BO4E.COM
         public string? MesslokationId { get; set; }
 
         /// <summary>
+        /// Angabe der benutzten Energieflussrichtung im Bestandteil des Rechenschritts. Die Energieflussrichtung
+        /// gibt an, ob die gemessene Energie an der Messlokation zum Netz fließt(Erzeugung) oder vom Netz wegfließt(Verbrauch).
+        /// Entsprechend dieser Aussage sind die zuvor durch die UTILMD ausgetauschten Register der Messlokation in der
+        /// Berechnungsformel zu verwenden
+        /// 
+        /// </summary>
+        [JsonProperty(Required = Required.Default, Order = 7, PropertyName = "energieflussrichtung")]
+        [JsonPropertyName("energieflussrichtung")]
+        [ProtoMember(7)]
+        public Energieflussrichtung? Energieflussrichtung { get; set; }
+
+        /// <summary>
         /// rekursive Verschachtelung weiterer rechenschritte
         /// </summary>
-        [JsonProperty(Required = Required.Default, Order = 6, PropertyName = "weitererRechenschritt")]
+        [JsonProperty(Required = Required.Default, Order = 8, PropertyName = "weitererRechenschritt")]
         [JsonPropertyName("weitererRechenschritt")]
         public Rechenschritt? WeitererRechenschritt { get; set; }
     }
