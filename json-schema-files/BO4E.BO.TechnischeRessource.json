@@ -2,65 +2,38 @@
   "$schema": "http://json-schema.org/draft-07/schema#",
   "definitions": {
     "ExterneReferenz": {
-      "type": [
-        "object",
-        "null"
-      ],
+      "type": ["object", "null"],
       "properties": {
         "exRefName": {
-          "type": [
-            "string",
-            "null"
-          ]
+          "type": ["string", "null"]
         },
         "exRefWert": {
-          "type": [
-            "string",
-            "null"
-          ]
+          "type": ["string", "null"]
         },
         "timestamp": {
-          "type": [
-            "string",
-            "null"
-          ],
+          "type": ["string", "null"],
           "format": "date-time"
         },
         "guid": {
-          "type": [
-            "string",
-            "null"
-          ]
+          "type": ["string", "null"]
         }
       }
     },
     "Menge": {
-      "type": [
-        "object",
-        "null"
-      ],
+      "type": ["object", "null"],
       "properties": {
         "timestamp": {
-          "type": [
-            "string",
-            "null"
-          ],
+          "type": ["string", "null"],
           "format": "date-time"
         },
         "guid": {
-          "type": [
-            "string",
-            "null"
-          ]
+          "type": ["string", "null"]
         },
         "wert": {
           "type": "number"
         },
         "einheit": {
-          "type": [
-            "string",
-            "null"
-          ],
+          "type": ["string", "null"],
           "enum": [
             null,
             "ZERO",
@@ -83,46 +56,29 @@
           ]
         }
       },
-      "required": [
-        "wert"
-      ]
+      "required": ["wert"]
     }
   },
   "type": "object",
   "properties": {
     "boTyp": {
-      "type": [
-        "string",
-        "null"
-      ]
+      "type": ["string", "null"]
     },
     "versionStruktur": {
-      "type": [
-        "string",
-        "null"
-      ]
+      "type": ["string", "null"]
     },
     "timestamp": {
-      "type": [
-        "string",
-        "null"
-      ],
+      "type": ["string", "null"],
       "format": "date-time"
     },
     "externeReferenzen": {
-      "type": [
-        "array",
-        "null"
-      ],
+      "type": ["array", "null"],
       "items": {
         "$ref": "#/definitions/ExterneReferenz"
       }
     },
     "guid": {
-      "type": [
-        "string",
-        "null"
-      ]
+      "type": ["string", "null"]
     },
     "technischeRessourceId": {
       "type": "string",
@@ -147,22 +103,11 @@
       "$ref": "#/definitions/Menge"
     },
     "technischeRessourceNutzung": {
-      "type": [
-        "string",
-        "null"
-      ],
-      "enum": [
-        null,
-        "STROMVERBRAUCHSART",
-        "STROMERZEUGUNGSART",
-        "SPEICHER"
-      ]
+      "type": ["string", "null"],
+      "enum": [null, "STROMVERBRAUCHSART", "STROMERZEUGUNGSART", "SPEICHER"]
     },
     "verbrauchsart": {
-      "type": [
-        "string",
-        "null"
-      ],
+      "type": ["string", "null"],
       "enum": [
         null,
         "KRAFT_LICHT",
@@ -172,28 +117,12 @@
       ]
     },
     "waermenutzung": {
-      "type": [
-        "string",
-        "null"
-      ],
-      "enum": [
-        null,
-        "SPEICHERHEIZUNG",
-        "WAERMEPUMPE",
-        "DIREKTHEIZUNG"
-      ]
+      "type": ["string", "null"],
+      "enum": [null, "SPEICHERHEIZUNG", "WAERMEPUMPE", "DIREKTHEIZUNG"]
     },
     "emobilitaetsart": {
-      "type": [
-        "string",
-        "null"
-      ],
-      "enum": [
-        null,
-        "WALLBOX",
-        "E_MOBILITAETSLADESAEULE",
-        "LADEPARK"
-      ]
+      "type": ["string", "null"],
+      "enum": [null, "WALLBOX", "E_MOBILITAETSLADESAEULE", "LADEPARK"]
     },
     "erzeugungsart": {
       "type": "string",
