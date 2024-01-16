@@ -71,28 +71,22 @@
         "null"
       ]
     },
-    "trancheId": {
+    "steuerbareRessourceId": {
       "type": "string",
       "default": "|null|"
     },
-    "sparte": {
-      "type": "string",
-      "enum": [
-        "STROM",
-        "GAS",
-        "FERNWAERME",
-        "NAHWAERME",
-        "WASSER",
-        "ABWASSER"
-      ]
-    },
-    "aufteilungsmenge": {
+    "steuerkanalsLeistungsbeschreibung": {
       "type": [
-        "number",
+        "string",
         "null"
+      ],
+      "enum": [
+        null,
+        "AN_AUS",
+        "GESTUFT"
       ]
     },
-    "obisKennzahl": {
+    "zugeordnetMSBCodeNr": {
       "type": [
         "string",
         "null"
@@ -100,7 +94,6 @@
     }
   },
   "required": [
-    "trancheId",
-    "sparte"
+    "steuerbareRessourceId"
   ]
 }

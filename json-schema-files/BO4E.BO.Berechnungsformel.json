@@ -88,6 +88,17 @@
             "null"
           ]
         },
+        "energieflussrichtung": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "enum": [
+            null,
+            "VERBRAUCH",
+            "ERZEUGUNG"
+          ]
+        },
         "weitererRechenschritt": {
           "$ref": "#/definitions/Rechenschritt"
         }
