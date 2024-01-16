@@ -28,9 +28,10 @@ jobs:
       - name: Push ts_models content to type script models repo
         uses: cpina/github-action-push-to-another-repository@v1.7.2
         env:
-          API_TOKEN_GITHUB: ${{ secrets.TS_MODELS_PUSH_TOKEN }} # this token expires on 2023-12-15
+          API_TOKEN_GITHUB: ${{ secrets.TS_MODELS_PUSH_TOKEN }} # this token expires on 2024-12-15
           # token with repo scope
-          # https://github.com/Hochfrequenz/BO4E-dotnet/settings/secrets/actions/TS_MODELS_PUSH_TOKEN
+          # Regenerate token: https://github.com/settings/tokens/1078258383/regenerate
+          # Update secret with regenerated token: https://github.com/Hochfrequenz/BO4E-dotnet/settings/secrets/actions/TS_MODELS_PUSH_TOKEN
         with:
           source-directory: "ts_models"
           target-directory: "src"
