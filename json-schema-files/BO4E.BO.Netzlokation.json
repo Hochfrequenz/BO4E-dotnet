@@ -311,6 +311,83 @@
       },
       "required": ["postleitzahl", "ort"]
     },
+    "Ansprechpartner": {
+      "type": ["object", "null"],
+      "properties": {
+        "boTyp": {
+          "type": ["string", "null"]
+        },
+        "versionStruktur": {
+          "type": ["string", "null"]
+        },
+        "timestamp": {
+          "type": ["string", "null"],
+          "format": "date-time"
+        },
+        "externeReferenzen": {
+          "type": ["array", "null"],
+          "items": {
+            "$ref": "#/definitions/ExterneReferenz"
+          }
+        },
+        "guid": {
+          "type": ["string", "null"]
+        },
+        "anrede": {
+          "type": ["string", "null"],
+          "enum": [
+            null,
+            "HERR",
+            "FRAU",
+            "EHELEUTE",
+            "FIRMA",
+            "INDIVIDUELL",
+            "FAMILIE",
+            "ERBENGEMEINSCHAFT",
+            "WOHNGEMEINSCHAFT",
+            "GRUNDSTUECKGEMEINSCHAFT",
+            "DR"
+          ]
+        },
+        "inviduelleAnrede": {
+          "type": ["string", "null"]
+        },
+        "titel": {
+          "type": ["string", "null"],
+          "enum": [null, "DR", "PROF", "PROF_DR"]
+        },
+        "vorname": {
+          "type": ["string", "null"]
+        },
+        "nachname": {
+          "type": ["string", "null"]
+        },
+        "eMailAdresse": {
+          "type": ["string", "null"]
+        },
+        "kommentar": {
+          "type": ["string", "null"]
+        },
+        "geschaeftspartner": {
+          "$ref": "#/definitions/Geschaeftspartner"
+        },
+        "adresse": {
+          "$ref": "#/definitions/Adresse"
+        },
+        "rufnummern": {
+          "type": ["array", "null"],
+          "items": {
+            "$ref": "#/definitions/Rufnummer"
+          }
+        },
+        "zustaendigkeit": {
+          "type": ["array", "null"],
+          "items": {
+            "$ref": "#/definitions/Zustaendigkeit"
+          }
+        }
+      }
+    },
     "ExterneReferenz": {
       "type": ["object", "null"],
       "properties": {
@@ -435,6 +512,209 @@
       },
       "required": ["gewerbekennzeichnung"]
     },
+    "Konfigurationsprodukt": {
+      "type": ["object", "null"],
+      "properties": {
+        "timestamp": {
+          "type": ["string", "null"],
+          "format": "date-time"
+        },
+        "produktcode": {
+          "type": ["string", "null"]
+        },
+        "guid": {
+          "type": ["string", "null"]
+        },
+        "leistungskurvendefinition": {
+          "type": ["string", "null"]
+        },
+        "schaltzeitdefinition": {
+          "type": ["string", "null"]
+        },
+        "marktpartner": {
+          "$ref": "#/definitions/Marktteilnehmer"
+        }
+      }
+    },
+    "Marktteilnehmer": {
+      "type": ["object", "null"],
+      "properties": {
+        "boTyp": {
+          "type": ["string", "null"]
+        },
+        "versionStruktur": {
+          "type": ["string", "null"]
+        },
+        "timestamp": {
+          "type": ["string", "null"],
+          "format": "date-time"
+        },
+        "externeReferenzen": {
+          "type": ["array", "null"],
+          "items": {
+            "$ref": "#/definitions/ExterneReferenz"
+          }
+        },
+        "guid": {
+          "type": ["string", "null"]
+        },
+        "anrede": {
+          "type": ["string", "null"],
+          "enum": [
+            null,
+            "HERR",
+            "FRAU",
+            "EHELEUTE",
+            "FIRMA",
+            "INDIVIDUELL",
+            "FAMILIE",
+            "ERBENGEMEINSCHAFT",
+            "WOHNGEMEINSCHAFT",
+            "GRUNDSTUECKGEMEINSCHAFT",
+            "DR"
+          ]
+        },
+        "title": {
+          "type": ["string", "null"]
+        },
+        "name1": {
+          "type": ["string", "null"]
+        },
+        "name2": {
+          "type": ["string", "null"]
+        },
+        "name3": {
+          "type": ["string", "null"]
+        },
+        "gewerbekennzeichnung": {
+          "type": "boolean"
+        },
+        "hrnummer": {
+          "type": ["string", "null"]
+        },
+        "amtsgericht": {
+          "type": ["string", "null"]
+        },
+        "kontaktweg": {
+          "type": ["array", "null"],
+          "items": {
+            "type": "string",
+            "enum": ["ANSCHREIBEN", "TELEFONAT", "FAX", "E_MAIL", "SMS"]
+          }
+        },
+        "umsatzsteuerId": {
+          "type": ["string", "null"]
+        },
+        "glaeubigerId": {
+          "type": ["string", "null"]
+        },
+        "eMailAdresse": {
+          "type": ["string", "null"]
+        },
+        "website": {
+          "type": ["string", "null"]
+        },
+        "geschaeftspartnerrolle": {
+          "type": ["array", "null"],
+          "items": {
+            "type": "string",
+            "enum": [
+              "LIEFERANT",
+              "DIENSTLEISTER",
+              "KUNDE",
+              "INTERESSENT",
+              "MARKTPARTNER"
+            ]
+          }
+        },
+        "partneradresse": {
+          "$ref": "#/definitions/Adresse"
+        },
+        "grundlageZurVerringerungDerUmlagenNachEnfg": {
+          "type": ["string", "null"],
+          "enum": [
+            null,
+            "KUNDE_ERFUELLT_VORAUSSETZUNG",
+            "KUNDE_ERFUELLT_VORAUSSETZUNG_NICHT",
+            "KEINE_ANGABE"
+          ]
+        },
+        "marktrolle": {
+          "type": ["string", "null"],
+          "enum": [
+            null,
+            "NB",
+            "LF",
+            "MSB",
+            "MDL",
+            "DL",
+            "BKV",
+            "BIKO",
+            "UENB",
+            "KUNDE_SELBST_NN",
+            "MGV",
+            "EIV",
+            "RB",
+            "KUNDE",
+            "INTERESSENT",
+            "GMSB"
+          ]
+        },
+        "rollencodenummer": {
+          "type": "string"
+        },
+        "rollencodetyp": {
+          "type": "string",
+          "enum": ["ZERO", "GLN", "BDEW", "DVGW"]
+        },
+        "makoadresse": {
+          "type": ["string", "null"]
+        },
+        "ansprechpartner": {
+          "$ref": "#/definitions/Ansprechpartner"
+        }
+      },
+      "required": ["gewerbekennzeichnung", "rollencodenummer", "rollencodetyp"]
+    },
+    "Menge": {
+      "type": ["object", "null"],
+      "properties": {
+        "timestamp": {
+          "type": ["string", "null"],
+          "format": "date-time"
+        },
+        "guid": {
+          "type": ["string", "null"]
+        },
+        "wert": {
+          "type": "number"
+        },
+        "einheit": {
+          "type": ["string", "null"],
+          "enum": [
+            null,
+            "ZERO",
+            "WH",
+            "KW",
+            "ANZAHL",
+            "KUBIKMETER",
+            "STUNDE",
+            "TAG",
+            "MONAT",
+            "VAR",
+            "VARH",
+            "KWHK",
+            "JAHR",
+            "KWH",
+            "MW",
+            "KVAR",
+            "KVARH",
+            "MWH"
+          ]
+        }
+      },
+      "required": ["wert"]
+    },
     "Rufnummer": {
       "type": ["object", "null"],
       "properties": {
@@ -464,6 +744,55 @@
         }
       },
       "required": ["nummerntyp", "rufnummer"]
+    },
+    "Verwendungszweck": {
+      "type": ["object", "null"],
+      "properties": {
+        "marktrolle": {
+          "type": "string",
+          "enum": [
+            "NB",
+            "LF",
+            "MSB",
+            "MDL",
+            "DL",
+            "BKV",
+            "BIKO",
+            "UENB",
+            "KUNDE_SELBST_NN",
+            "MGV",
+            "EIV",
+            "RB",
+            "KUNDE",
+            "INTERESSENT",
+            "GMSB"
+          ]
+        },
+        "zweck": {
+          "type": ["array", "null"],
+          "items": {
+            "type": "string",
+            "enum": [
+              "NETZNUTZUNGSABRECHNUNG",
+              "BILANZKREISABRECHNUNG",
+              "MEHRMINDERMENGENABRECHNUNG",
+              "MEHRMINDERMBENGENABRECHNUNG",
+              "ENDKUNDENABRECHNUNG",
+              "BLINDARBEITABRECHNUNG_BETRIEBSFUEHRUNG",
+              "UEBERMITTLUNG_AN_DAS_HKNR",
+              "ERMITTLUNG_AUSGEGLICHENHEIT_BILANZKREIS"
+            ]
+          }
+        },
+        "timestamp": {
+          "type": ["string", "null"],
+          "format": "date-time"
+        },
+        "guid": {
+          "type": ["string", "null"]
+        }
+      },
+      "required": ["marktrolle"]
     },
     "Zustaendigkeit": {
       "type": ["object", "null"],
@@ -508,58 +837,35 @@
     "guid": {
       "type": ["string", "null"]
     },
-    "anrede": {
-      "type": ["string", "null"],
-      "enum": [
-        null,
-        "HERR",
-        "FRAU",
-        "EHELEUTE",
-        "FIRMA",
-        "INDIVIDUELL",
-        "FAMILIE",
-        "ERBENGEMEINSCHAFT",
-        "WOHNGEMEINSCHAFT",
-        "GRUNDSTUECKGEMEINSCHAFT",
-        "DR"
-      ]
+    "netzlokationsId": {
+      "type": "string",
+      "default": "|null|"
     },
-    "inviduelleAnrede": {
+    "sparte": {
+      "type": "string",
+      "enum": ["STROM", "GAS", "FERNWAERME", "NAHWAERME", "WASSER", "ABWASSER"]
+    },
+    "netzanschlussleistung": {
+      "$ref": "#/definitions/Menge"
+    },
+    "grundzustaendigerMSBCodeNr": {
       "type": ["string", "null"]
     },
-    "titel": {
-      "type": ["string", "null"],
-      "enum": [null, "DR", "PROF", "PROF_DR"]
+    "steuerkanal": {
+      "type": ["boolean", "null"]
     },
-    "vorname": {
+    "obisKennzahl": {
       "type": ["string", "null"]
     },
-    "nachname": {
-      "type": ["string", "null"]
+    "verwendungszweck": {
+      "$ref": "#/definitions/Verwendungszweck"
     },
-    "eMailAdresse": {
-      "type": ["string", "null"]
-    },
-    "kommentar": {
-      "type": ["string", "null"]
-    },
-    "geschaeftspartner": {
-      "$ref": "#/definitions/Geschaeftspartner"
-    },
-    "adresse": {
-      "$ref": "#/definitions/Adresse"
-    },
-    "rufnummern": {
+    "konfigurationsprodukte": {
       "type": ["array", "null"],
       "items": {
-        "$ref": "#/definitions/Rufnummer"
-      }
-    },
-    "zustaendigkeit": {
-      "type": ["array", "null"],
-      "items": {
-        "$ref": "#/definitions/Zustaendigkeit"
+        "$ref": "#/definitions/Konfigurationsprodukt"
       }
     }
-  }
+  },
+  "required": ["netzlokationsId", "sparte"]
 }

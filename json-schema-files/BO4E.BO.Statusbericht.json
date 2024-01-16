@@ -78,7 +78,20 @@
             "KONFIGURATIONSID_UNBEKANNT",
             "SEGMENTWIEDERHOLUNG_UEBERSCHRITTEN",
             "ANZAHLCODES_UEBERSCHRITTEN",
-            "ZEITANGABE_UNPLAUSIBEL"
+            "ZEITANGABE_UNPLAUSIBEL",
+            "SYNTAXVERSION_NICHT_UNTERSTUETZT",
+            "FALSCHER_EMPFAENGER",
+            "WERT_UNGUELTIG",
+            "WERT_FEHLT",
+            "WERT_UEBERFLUESSIG",
+            "BEGRENZER_UNPLAUSIBEL",
+            "ZEICHEN_UNPLAUSIBEL",
+            "ABSENDER_UNBEKANNT",
+            "TESTKENNZEICHEN_UNPLAUSIBEL",
+            "DUPLIKAT",
+            "KONTROLLZAEHLER_UNPLAUSIBEL",
+            "WERT_ZU_LANG",
+            "WIEDERHOLUNG_UNPLAUSIBEL"
           ]
         },
         "beschreibung": {

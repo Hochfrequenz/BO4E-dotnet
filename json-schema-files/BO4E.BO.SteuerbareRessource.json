@@ -22,9 +22,6 @@
   },
   "type": "object",
   "properties": {
-    "auftragsId": {
-      "type": "string"
-    },
     "boTyp": {
       "type": ["string", "null"]
     },
@@ -43,7 +40,18 @@
     },
     "guid": {
       "type": ["string", "null"]
+    },
+    "steuerbareRessourceId": {
+      "type": "string",
+      "default": "|null|"
+    },
+    "steuerkanalsLeistungsbeschreibung": {
+      "type": ["string", "null"],
+      "enum": [null, "AN_AUS", "GESTUFT"]
+    },
+    "zugeordnetMSBCodeNr": {
+      "type": ["string", "null"]
     }
   },
-  "required": ["auftragsId"]
+  "required": ["steuerbareRessourceId"]
 }

@@ -826,6 +826,15 @@
         },
         "partneradresse": {
           "$ref": "#/definitions/Adresse"
+        },
+        "grundlageZurVerringerungDerUmlagenNachEnfg": {
+          "type": ["string", "null"],
+          "enum": [
+            null,
+            "KUNDE_ERFUELLT_VORAUSSETZUNG",
+            "KUNDE_ERFUELLT_VORAUSSETZUNG_NICHT",
+            "KEINE_ANGABE"
+          ]
         }
       },
       "required": ["gewerbekennzeichnung"]

@@ -22,9 +22,6 @@
   },
   "type": "object",
   "properties": {
-    "auftragsId": {
-      "type": "string"
-    },
     "boTyp": {
       "type": ["string", "null"]
     },
@@ -43,7 +40,21 @@
     },
     "guid": {
       "type": ["string", "null"]
+    },
+    "trancheId": {
+      "type": "string",
+      "default": "|null|"
+    },
+    "sparte": {
+      "type": "string",
+      "enum": ["STROM", "GAS", "FERNWAERME", "NAHWAERME", "WASSER", "ABWASSER"]
+    },
+    "aufteilungsmenge": {
+      "type": ["number", "null"]
+    },
+    "obisKennzahl": {
+      "type": ["string", "null"]
     }
   },
-  "required": ["auftragsId"]
+  "required": ["trancheId", "sparte"]
 }

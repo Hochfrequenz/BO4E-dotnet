@@ -1,3 +1,5 @@
+using ProtoBuf;
+
 using System.Runtime.Serialization;
 
 namespace BO4E.ENUM
@@ -124,6 +126,72 @@ namespace BO4E.ENUM
         /// Zeitangabe unplausibel
         /// </summary>
         [EnumMember(Value = "ZEITANGABE_UNPLAUSIBEL")]
-        ZEITANGABE_UNPLAUSIBEL
+        ZEITANGABE_UNPLAUSIBEL,
+        /// <summary>
+        /// Syntaxversion nicht unterstützt
+        /// </summary>
+        [EnumMember(Value = "SYNTAXVERSION_NICHT_UNTERSTUETZT")]
+        SYNTAXVERSION_NICHT_UNTERSTUETZT,
+        /// <summary>
+        /// Falscher Empfänger
+        /// </summary>
+        [EnumMember(Value = "FALSCHER_EMPFAENGER")]
+        FALSCHER_EMPFAENGER,
+        /// <summary>
+        /// Ungültiger Wert
+        /// </summary>
+        [EnumMember(Value = "WERT_UNGUELTIG")]
+        WERT_UNGUELTIG,
+        /// <summary>
+        /// Wert fehlt
+        /// </summary>
+        [EnumMember(Value = "WERT_FEHLT")]
+        WERT_FEHLT,
+        /// <summary>
+        /// Zu viele Werte
+        /// </summary>
+        [EnumMember(Value = "WERT_UEBERFLUESSIG")]
+        WERT_UEBERFLUESSIG,
+        /// <summary>
+        /// Falsches Service-Zeichen
+        /// </summary>
+        [EnumMember(Value = "BEGRENZER_UNPLAUSIBEL")]
+        BEGRENZER_UNPLAUSIBEL,
+        /// <summary>
+        /// Zeichen unplausibel
+        /// </summary>
+        [EnumMember(Value = "ZEICHEN_UNPLAUSIBEL")]
+        ZEICHEN_UNPLAUSIBEL,
+        /// <summary>
+        /// Absender unbekannt
+        /// </summary>
+        [EnumMember(Value = "ABSENDER_UNBEKANNT")]
+        ABSENDER_UNBEKANNT,
+        /// <summary>
+        /// Testkennzeichen nicht unterstützt
+        /// </summary>
+        [EnumMember(Value = "TESTKENNZEICHEN_UNPLAUSIBEL")]
+        TESTKENNZEICHEN_UNPLAUSIBEL,
+        /// <summary>
+        /// Duplikat
+        /// </summary>
+        [EnumMember(Value = "DUPLIKAT")]
+        [ProtoEnum(Name = "FehlerCode_" + nameof(DUPLIKAT))]
+        DUPLIKAT,
+        /// <summary>
+        /// Kontrollzähler unplausibel
+        /// </summary>
+        [EnumMember(Value = "KONTROLLZAEHLER_UNPLAUSIBEL")]
+        KONTROLLZAEHLER_UNPLAUSIBEL,
+        /// <summary>
+        /// Wert zu lang
+        /// </summary>
+        [EnumMember(Value = "WERT_ZU_LANG")]
+        WERT_ZU_LANG,
+        /// <summary>
+        /// Zu viele Wiederholungen
+        /// </summary>
+        [EnumMember(Value = "WIEDERHOLUNG_UNPLAUSIBEL")]
+        WIEDERHOLUNG_UNPLAUSIBEL,
     }
 }

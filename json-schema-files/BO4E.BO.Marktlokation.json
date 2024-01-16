@@ -311,6 +311,83 @@
       },
       "required": ["postleitzahl", "ort"]
     },
+    "Ansprechpartner": {
+      "type": ["object", "null"],
+      "properties": {
+        "boTyp": {
+          "type": ["string", "null"]
+        },
+        "versionStruktur": {
+          "type": ["string", "null"]
+        },
+        "timestamp": {
+          "type": ["string", "null"],
+          "format": "date-time"
+        },
+        "externeReferenzen": {
+          "type": ["array", "null"],
+          "items": {
+            "$ref": "#/definitions/ExterneReferenz"
+          }
+        },
+        "guid": {
+          "type": ["string", "null"]
+        },
+        "anrede": {
+          "type": ["string", "null"],
+          "enum": [
+            null,
+            "HERR",
+            "FRAU",
+            "EHELEUTE",
+            "FIRMA",
+            "INDIVIDUELL",
+            "FAMILIE",
+            "ERBENGEMEINSCHAFT",
+            "WOHNGEMEINSCHAFT",
+            "GRUNDSTUECKGEMEINSCHAFT",
+            "DR"
+          ]
+        },
+        "inviduelleAnrede": {
+          "type": ["string", "null"]
+        },
+        "titel": {
+          "type": ["string", "null"],
+          "enum": [null, "DR", "PROF", "PROF_DR"]
+        },
+        "vorname": {
+          "type": ["string", "null"]
+        },
+        "nachname": {
+          "type": ["string", "null"]
+        },
+        "eMailAdresse": {
+          "type": ["string", "null"]
+        },
+        "kommentar": {
+          "type": ["string", "null"]
+        },
+        "geschaeftspartner": {
+          "$ref": "#/definitions/Geschaeftspartner"
+        },
+        "adresse": {
+          "$ref": "#/definitions/Adresse"
+        },
+        "rufnummern": {
+          "type": ["array", "null"],
+          "items": {
+            "$ref": "#/definitions/Rufnummer"
+          }
+        },
+        "zustaendigkeit": {
+          "type": ["array", "null"],
+          "items": {
+            "$ref": "#/definitions/Zustaendigkeit"
+          }
+        }
+      }
+    },
     "Dienstleistung": {
       "type": ["object", "null"],
       "properties": {
@@ -556,7 +633,13 @@
             "WASSER_VWZ05",
             "WASSER_VWZ06",
             "WASSER_VWZ07",
-            "WASSER_VWZ10"
+            "WASSER_VWZ10",
+            "GAS_G350",
+            "GAS_G4000",
+            "GAS_G6500",
+            "GAS_G10000",
+            "GAS_G12500",
+            "GAS_G16000"
           ]
         },
         "Parameter": {
@@ -661,6 +744,15 @@
         },
         "partneradresse": {
           "$ref": "#/definitions/Adresse"
+        },
+        "grundlageZurVerringerungDerUmlagenNachEnfg": {
+          "type": ["string", "null"],
+          "enum": [
+            null,
+            "KUNDE_ERFUELLT_VORAUSSETZUNG",
+            "KUNDE_ERFUELLT_VORAUSSETZUNG_NICHT",
+            "KEINE_ANGABE"
+          ]
         }
       },
       "required": ["gewerbekennzeichnung"]
@@ -757,6 +849,30 @@
       },
       "required": ["gemarkung_flur", "flurstueck"]
     },
+    "Konfigurationsprodukt": {
+      "type": ["object", "null"],
+      "properties": {
+        "timestamp": {
+          "type": ["string", "null"],
+          "format": "date-time"
+        },
+        "produktcode": {
+          "type": ["string", "null"]
+        },
+        "guid": {
+          "type": ["string", "null"]
+        },
+        "leistungskurvendefinition": {
+          "type": ["string", "null"]
+        },
+        "schaltzeitdefinition": {
+          "type": ["string", "null"]
+        },
+        "marktpartner": {
+          "$ref": "#/definitions/Marktteilnehmer"
+        }
+      }
+    },
     "Konzessionsabgabe": {
       "type": ["object", "null"],
       "properties": {
@@ -821,6 +937,146 @@
           "type": ["boolean", "null"]
         }
       }
+    },
+    "Marktteilnehmer": {
+      "type": ["object", "null"],
+      "properties": {
+        "boTyp": {
+          "type": ["string", "null"]
+        },
+        "versionStruktur": {
+          "type": ["string", "null"]
+        },
+        "timestamp": {
+          "type": ["string", "null"],
+          "format": "date-time"
+        },
+        "externeReferenzen": {
+          "type": ["array", "null"],
+          "items": {
+            "$ref": "#/definitions/ExterneReferenz"
+          }
+        },
+        "guid": {
+          "type": ["string", "null"]
+        },
+        "anrede": {
+          "type": ["string", "null"],
+          "enum": [
+            null,
+            "HERR",
+            "FRAU",
+            "EHELEUTE",
+            "FIRMA",
+            "INDIVIDUELL",
+            "FAMILIE",
+            "ERBENGEMEINSCHAFT",
+            "WOHNGEMEINSCHAFT",
+            "GRUNDSTUECKGEMEINSCHAFT",
+            "DR"
+          ]
+        },
+        "title": {
+          "type": ["string", "null"]
+        },
+        "name1": {
+          "type": ["string", "null"]
+        },
+        "name2": {
+          "type": ["string", "null"]
+        },
+        "name3": {
+          "type": ["string", "null"]
+        },
+        "gewerbekennzeichnung": {
+          "type": "boolean"
+        },
+        "hrnummer": {
+          "type": ["string", "null"]
+        },
+        "amtsgericht": {
+          "type": ["string", "null"]
+        },
+        "kontaktweg": {
+          "type": ["array", "null"],
+          "items": {
+            "type": "string",
+            "enum": ["ANSCHREIBEN", "TELEFONAT", "FAX", "E_MAIL", "SMS"]
+          }
+        },
+        "umsatzsteuerId": {
+          "type": ["string", "null"]
+        },
+        "glaeubigerId": {
+          "type": ["string", "null"]
+        },
+        "eMailAdresse": {
+          "type": ["string", "null"]
+        },
+        "website": {
+          "type": ["string", "null"]
+        },
+        "geschaeftspartnerrolle": {
+          "type": ["array", "null"],
+          "items": {
+            "type": "string",
+            "enum": [
+              "LIEFERANT",
+              "DIENSTLEISTER",
+              "KUNDE",
+              "INTERESSENT",
+              "MARKTPARTNER"
+            ]
+          }
+        },
+        "partneradresse": {
+          "$ref": "#/definitions/Adresse"
+        },
+        "grundlageZurVerringerungDerUmlagenNachEnfg": {
+          "type": ["string", "null"],
+          "enum": [
+            null,
+            "KUNDE_ERFUELLT_VORAUSSETZUNG",
+            "KUNDE_ERFUELLT_VORAUSSETZUNG_NICHT",
+            "KEINE_ANGABE"
+          ]
+        },
+        "marktrolle": {
+          "type": ["string", "null"],
+          "enum": [
+            null,
+            "NB",
+            "LF",
+            "MSB",
+            "MDL",
+            "DL",
+            "BKV",
+            "BIKO",
+            "UENB",
+            "KUNDE_SELBST_NN",
+            "MGV",
+            "EIV",
+            "RB",
+            "KUNDE",
+            "INTERESSENT",
+            "GMSB"
+          ]
+        },
+        "rollencodenummer": {
+          "type": "string"
+        },
+        "rollencodetyp": {
+          "type": "string",
+          "enum": ["ZERO", "GLN", "BDEW", "DVGW"]
+        },
+        "makoadresse": {
+          "type": ["string", "null"]
+        },
+        "ansprechpartner": {
+          "$ref": "#/definitions/Ansprechpartner"
+        }
+      },
+      "required": ["gewerbekennzeichnung", "rollencodenummer", "rollencodetyp"]
     },
     "Menge": {
       "type": ["object", "null"],
@@ -1167,6 +1423,36 @@
       },
       "required": ["wert"]
     },
+    "Rufnummer": {
+      "type": ["object", "null"],
+      "properties": {
+        "nummerntyp": {
+          "type": "string",
+          "enum": [
+            "RUF_ZENTRALE",
+            "FAX_ZENTRALE",
+            "SAMMELRUF",
+            "SAMMELFAX",
+            "ABTEILUNGRUF",
+            "ABTEILUNGFAX",
+            "RUF_DURCHWAHL",
+            "FAX_DURCHWAHL",
+            "MOBIL_NUMMER"
+          ]
+        },
+        "rufnummer": {
+          "type": "string"
+        },
+        "timestamp": {
+          "type": ["string", "null"],
+          "format": "date-time"
+        },
+        "guid": {
+          "type": ["string", "null"]
+        }
+      },
+      "required": ["nummerntyp", "rufnummer"]
+    },
     "StatusZusatzInformation": {
       "type": ["object", "null"],
       "properties": {
@@ -1406,6 +1692,7 @@
               "MEHRMINDERMENGENABRECHNUNG",
               "MEHRMINDERMBENGENABRECHNUNG",
               "ENDKUNDENABRECHNUNG",
+              "BLINDARBEITABRECHNUNG_BETRIEBSFUEHRUNG",
               "UEBERMITTLUNG_AN_DAS_HKNR",
               "ERMITTLUNG_AUSGEGLICHENHEIT_BILANZKREIS"
             ]
@@ -1607,7 +1894,13 @@
             "WASSER_VWZ05",
             "WASSER_VWZ06",
             "WASSER_VWZ07",
-            "WASSER_VWZ10"
+            "WASSER_VWZ10",
+            "GAS_G350",
+            "GAS_G4000",
+            "GAS_G6500",
+            "GAS_G10000",
+            "GAS_G12500",
+            "GAS_G16000"
           ]
         },
         "geraete": {
@@ -1738,6 +2031,27 @@
         "schwachlastfaehig": {
           "type": ["string", "null"],
           "enum": [null, "NICHT_SCHWACHLASTFAEHIG", "SCHWACHLASTFAEHIG"]
+        }
+      }
+    },
+    "Zustaendigkeit": {
+      "type": ["object", "null"],
+      "properties": {
+        "jobtitel": {
+          "type": ["string", "null"]
+        },
+        "abteilung": {
+          "type": ["string", "null"]
+        },
+        "themengebiet": {
+          "type": ["string", "null"]
+        },
+        "timestamp": {
+          "type": ["string", "null"],
+          "format": "date-time"
+        },
+        "guid": {
+          "type": ["string", "null"]
         }
       }
     }
@@ -1928,6 +2242,12 @@
       "type": ["array", "null"],
       "items": {
         "$ref": "#/definitions/Messprodukt"
+      }
+    },
+    "konfigurationsprodukte": {
+      "type": ["array", "null"],
+      "items": {
+        "$ref": "#/definitions/Konfigurationsprodukt"
       }
     }
   },
