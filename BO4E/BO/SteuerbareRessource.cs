@@ -1,6 +1,8 @@
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.Text.Json.Serialization;
 
+using BO4E.COM;
 using BO4E.ENUM;
 using BO4E.meta;
 
@@ -50,5 +52,15 @@ namespace BO4E.BO
         [JsonPropertyName("zugeordnetMSBCodeNr")]
         [ProtoMember(12)]
         public string? ZugeordnetMSBCodeNr { get; set; }
+
+        /// <summary>
+        /// Produkt-Daten der Steuerbaren Ressource
+        /// </summary>        
+        [JsonProperty(Required = Required.Default, Order = 13, PropertyName = "konfigurationsprodukte")]
+        [JsonPropertyName("konfigurationsprodukte")]
+        [ProtoMember(13)]
+        [JsonPropertyOrder(13)]
+        [NonOfficial(NonOfficialCategory.CUSTOMER_REQUIREMENTS)]
+        public List<Konfigurationsprodukt>? Konfigurationsprodukte { get; set; }
     }
 }
