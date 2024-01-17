@@ -88,6 +88,9 @@
         <None Update="testjsons\zähler.json">
             <CopyToOutputDirectory>Always</CopyToOutputDirectory>
         </None>
+        <None Update="testjsons\marktlokation_with_verwendungszwecke.json">
+          <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        </None>
     </ItemGroup>
 
 </Project>

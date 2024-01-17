@@ -28,39 +28,39 @@ namespace BO4E.meta.LenientConverters
         {
             if (reader.TokenType == JsonTokenType.StartArray)
             {
-                var retList = new List<BO4E.ENUM.Verwendungszweck>();
+                var retList = new List<ENUM.Verwendungszweck>();
                 reader.Read();
                 while (reader.TokenType != JsonTokenType.EndArray)
                 {
-                    retList.Add(System.Text.Json.JsonSerializer.Deserialize<BO4E.ENUM.Verwendungszweck>(ref reader, defaultOptions));
+                    retList.Add(JsonSerializer.Deserialize<ENUM.Verwendungszweck>(ref reader, defaultOptions));
                     //read end object
                     reader.Read();
                 }
 
-                return new BO4E.COM.Verwendungszweck { Marktrolle = Marktrolle.LF, Zweck = retList };
+                return new Verwendungszweck { Marktrolle = Marktrolle.LF, Zweck = retList };
             }
 
             if (reader.TokenType == JsonTokenType.String)
             {
-                var retList = new List<BO4E.ENUM.Verwendungszweck>
+                var retList = new List<ENUM.Verwendungszweck>
                 {
-                    Enum.Parse<BO4E.ENUM.Verwendungszweck>(reader.GetString().ToUpper())
+                    Enum.Parse<ENUM.Verwendungszweck>(reader.GetString().ToUpper())
                 };
-                return new BO4E.COM.Verwendungszweck { Marktrolle = Marktrolle.LF, Zweck = retList };
+                return new Verwendungszweck { Marktrolle = Marktrolle.LF, Zweck = retList };
             }
 
             return reader.TokenType switch
             {
                 JsonTokenType.Null => null,
-                JsonTokenType.StartObject => System.Text.Json.JsonSerializer.Deserialize<BO4E.COM.Verwendungszweck>(ref reader, defaultOptions),
+                JsonTokenType.StartObject => JsonSerializer.Deserialize<Verwendungszweck>(ref reader, defaultOptions),
                 _ => null
             };
         }
 
         /// <inheritdoc />
-        public override void Write(Utf8JsonWriter writer, BO4E.COM.Verwendungszweck value, JsonSerializerOptions options)
+        public override void Write(Utf8JsonWriter writer, Verwendungszweck value, JsonSerializerOptions options)
         {
-            System.Text.Json.JsonSerializer.Serialize(writer, value, defaultOptions);
+            JsonSerializer.Serialize(writer, value, defaultOptions);
         }
     }
 }
