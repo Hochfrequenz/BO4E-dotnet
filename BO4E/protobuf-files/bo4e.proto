@@ -1520,6 +1520,7 @@ message SteuerbareRessource {
    string SteuerbareRessourceId = 10; // default value could not be applied: |null|
    SteuerkanalsLeistungsbeschreibung SteuerkanalsLeistungsbeschreibung = 11;
    string ZugeordnetMSBCodeNr = 12;
+   repeated Konfigurationsprodukt Konfigurationsprodukte = 13;
 }
 enum SteuerkanalsLeistungsbeschreibung {
 	option (.protobuf_net.enumopt).namespace = "BO4E.ENUM";
