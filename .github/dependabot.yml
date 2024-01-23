@@ -7,8 +7,6 @@ updates:
     reviewers:
       - "@Hochfrequenz/c-developers-review-team"
     ignore:
-      - dependency-name: "System.Text.*"
-        update-types: ["version-update:semver-major"]
       - dependency-name: "Microsoft.Extensions.Logging.*"
         update-types: ["version-update:semver-major"]
   # Maintain dependencies for GitHub Actions
