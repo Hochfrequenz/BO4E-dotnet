@@ -1,5 +1,6 @@
+﻿using System.Runtime.Serialization;
+
 using BO4E.meta;
-using System.Runtime.Serialization;
 
 namespace BO4E.ENUM
 {
@@ -148,5 +149,40 @@ namespace BO4E.ENUM
         /// <remarks>Z63</remarks>
         [EnumMember(Value = "COMDIS_WIRD_ABGELEHNT")]
         COMDIS_WIRD_ABGELEHNT,
+
+        /// <summary>Der Beginn des Abrechnungszeitraums ist kleiner als 01.01.2024 00:00 Uhr </summary>
+        /// <remarks>AE6</remarks>
+        [EnumMember(Value = "BEGINN_DES_ABRECHNUNGSZEITRAUMS_VOR_2024")]
+        BEGINN_DES_ABRECHNUNGSZEITRAUMS_VOR_2024,
+
+        /// <summary>Erwartete Position nicht vorhanden</summary>
+        /// <remarks>AE7</remarks>
+        [EnumMember(Value = "ERWARTETE_POSITION_NICHT_VORHANDEN")]
+        ERWARTETE_POSITION_NICHT_VORHANDEN,
+
+        /// <summary>Im gesamten Abrechnungszeitraum ist an keiner Messlokation der Marktlokation ein iMS eingebaut</summary>
+        /// <remarks>AE8</remarks>
+        [EnumMember(Value = "KEIN_IMS_IM_GESAMTEN_ABRECHNUNGSZEITRAUM")]
+        KEIN_IMS_IM_GESAMTEN_ABRECHNUNGSZEITRAUM,
+
+        /// <summary>Der MSB ist der Marktlokation nicht einen Tag des Abrechnungszeitraumes zugeordnet</summary>
+        /// <remarks>AE9</remarks>
+        [EnumMember(Value = "MSB_IM_ABRECHNUNGSZEITRAUM_NICHT_IMMER_ZUGEORDNET")]
+        MSB_IM_ABRECHNUNGSZEITRAUM_NICHT_IMMER_ZUGEORDNET,
+
+        /// <summary>Der MSB ist im gesamten Abrechnungszeitraum nicht der Marktlokation zugeordnet</summary>
+        /// <remarks>AF0</remarks>
+        [EnumMember(Value = "MSB_IM_GESAMTEN_ABRECHNUNGSZEITRAUM_NICHT_ZUGEORDNET")]
+        MSB_IM_GESAMTEN_ABRECHNUNGSZEITRAUM_NICHT_ZUGEORDNET,
+
+        /// <summary>Die in der angegebenen Position verwendete Artikel-ID hätte nicht für den gesamten Positionszeitraum aufgeführt werde</summary>
+        /// <remarks>AF1</remarks>
+        [EnumMember(Value = "ARTIKELID_DER_POSITION_NICHT_IM_GESAMTEN_POSITIONSZEITRAUM_GUELTIG")]
+        ARTIKELID_DER_POSITION_NICHT_IM_GESAMTEN_POSITIONSZEITRAUM_GUELTIG,
+
+        /// <summary>Diese Artikel-ID ist für diesen Rechnungstyp in dem besagten Positionszeitraum nicht zulässig</summary>
+        /// <remarks>AF2</remarks>
+        [EnumMember(Value = "ARTIKELID_FUER_RECHNUNGSTYP_IM_POSITIONSZEITRAUM_NICHT_ZULAESSIG")]
+        ARTIKELID_FUER_RECHNUNGSTYP_IM_POSITIONSZEITRAUM_NICHT_ZULAESSIG,
     }
 }
