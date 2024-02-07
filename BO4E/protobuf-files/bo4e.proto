@@ -1090,6 +1090,7 @@ message Netznutzungsabrechnungsdaten {
    .bcl.Decimal Abschlag = 9;
    Menge SingulaereBetriebsmittel = 10;
    Preis PreisSingulaereBetriebsmittel = 11;
+   Zaehlzeitregister Zaehlzeiten = 12;
 }
 enum Netznutzungsabrechnungsgrundlage {
    option (.protobuf_net.enumopt).namespace = "BO4E.ENUM";
