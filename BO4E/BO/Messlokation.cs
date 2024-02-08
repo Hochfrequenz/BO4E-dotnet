@@ -267,7 +267,7 @@ namespace BO4E.BO
         [JsonPropertyOrder(31)]
         [NonOfficial(NonOfficialCategory.CUSTOMER_REQUIREMENTS)]
         public Marktteilnehmer? Marktteilnehmer { get; set; }
-        
+
         /// <summary>
         ///     Test if a <paramref name="id" /> is a valid messlokations ID.
         /// </summary>

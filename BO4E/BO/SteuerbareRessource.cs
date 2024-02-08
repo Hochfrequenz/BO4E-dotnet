@@ -55,7 +55,7 @@ namespace BO4E.BO
         [ProtoMember(12)]
         [Obsolete("Should be placed in field Marktteilnehmer.")]
         public string? ZugeordnetMSBCodeNr { get; set; }
-        
+
         /// <summary>
         /// Produkt-Daten der Steuerbaren Ressource
         /// </summary>        
@@ -65,7 +65,7 @@ namespace BO4E.BO
         [JsonPropertyOrder(13)]
         [NonOfficial(NonOfficialCategory.CUSTOMER_REQUIREMENTS)]
         public List<Konfigurationsprodukt>? Konfigurationsprodukte { get; set; }
-        
+
         /// <summary>
         /// Angaben zum Marktteilnehmer
         /// Enthält den MSB Code und die MSB Rolle.

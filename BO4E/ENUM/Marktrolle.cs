@@ -88,13 +88,13 @@ namespace BO4E.ENUM
         /// </summary>
         [EnumMember(Value = "INTERESSENT")]
         INTERESSENT,
-        
+
         /// <summary>
         /// Grundzuständiger Messstellenbetreiber
         /// </summary>
         [EnumMember(Value = "GMSB")]
         GMSB,
-        
+
         /// <summary>
         /// Auffangmessstellenbetreiber
         /// </summary>

@@ -97,7 +97,7 @@ namespace BO4E.BO
         [JsonPropertyOrder(17)]
         [NonOfficial(NonOfficialCategory.CUSTOMER_REQUIREMENTS)]
         public List<Konfigurationsprodukt>? Konfigurationsprodukte { get; set; }
-        
+
         /// <summary>
         /// Angaben zum Marktteilnehmer
         /// Enthält den MSB Code und die MSB Rolle.
