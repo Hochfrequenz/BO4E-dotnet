@@ -5,65 +5,100 @@ namespace BO4E.ENUM
     /// <summary>Diese Rollen kann ein Marktteilnehmer einnehmen.</summary>
     public enum Marktrolle
     {
-        /// <summary>Netzbetreiber</summary>
+        /// <summary>
+        /// Netzbetreiber
+        /// </summary>
         [EnumMember(Value = "NB")]
         NB,
 
-        /// <summary>Lieferant</summary>
+        /// <summary>
+        /// Lieferant
+        /// </summary>
         [EnumMember(Value = "LF")]
         LF,
 
-        /// <summary>Messstellenbetreiber</summary>
+        /// <summary>
+        /// Messstellenbetreiber (Wettbewerblich)
+        /// </summary>
         [EnumMember(Value = "MSB")]
         MSB,
 
-        /// <summary>Messdienstleister</summary>
+        /// <summary>
+        /// Messdienstleister
+        /// </summary>
         [EnumMember(Value = "MDL")]
         MDL,
 
-        /// <summary>Dienstleister</summary>
+        /// <summary>
+        /// Dienstleister
+        /// </summary>
         [EnumMember(Value = "DL")]
         DL,
 
-        /// <summary>Bilanzkreisverantwortlicher</summary>
+        /// <summary>
+        /// Bilanzkreisverantwortlicher
+        /// </summary>
         [EnumMember(Value = "BKV")]
         BKV,
 
-        /// <summary>Bilanzkoordinator/Marktgebietsverantwortlicher</summary>
+        /// <summary>
+        /// Bilanzkoordinator/Marktgebietsverantwortlicher
+        /// </summary>
         [EnumMember(Value = "BIKO")]
         BIKO,
 
-        /// <summary>Übertragungsnetzbetreiber</summary>
+        /// <summary>
+        /// Übertragungsnetzbetreiber
+        /// </summary>
         [EnumMember(Value = "UENB")]
         UENB,
 
-        /// <summary>Kunden die NN-Entgelte selbst zahlen</summary>
+        /// <summary>
+        /// Kunden die NN-Entgelte selbst zahlen
+        /// </summary>
         [EnumMember(Value = "KUNDE_SELBST_NN")]
         KUNDE_SELBST_NN,
 
-        /// <summary>Marktgebietsverantwortlicher</summary>
+        /// <summary>
+        /// Marktgebietsverantwortlicher
+        /// </summary>
         [EnumMember(Value = "MGV")]
         MGV,
 
-        /// <summary>Einsatzverantwortlicher</summary>
+        /// <summary>
+        /// Einsatzverantwortlicher
+        /// </summary>
         [EnumMember(Value = "EIV")]
         EIV,
 
-        /// <summary>Registerbetreiber</summary>
+        /// <summary>
+        /// Registerbetreiber
+        /// </summary>
         [EnumMember(Value = "RB")]
         RB,
 
-        /// <summary>Kunde</summary>
+        /// <summary>
+        /// Kunde
+        /// </summary>
         [EnumMember(Value = "KUNDE")]
         KUNDE,
 
-        /// <summary>Interessent</summary>
+        /// <summary>
+        /// Interessent
+        /// </summary>
         [EnumMember(Value = "INTERESSENT")]
         INTERESSENT,
+        
         /// <summary>
-        /// grundzuständiger MSB
+        /// Grundzuständiger Messstellenbetreiber
         /// </summary>
         [EnumMember(Value = "GMSB")]
         GMSB,
+        
+        /// <summary>
+        /// Auffangmessstellenbetreiber
+        /// </summary>
+        [EnumMember(Value = "AMSB")]
+        AMSB,
     }
 }

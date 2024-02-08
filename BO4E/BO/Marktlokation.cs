@@ -367,6 +367,17 @@ namespace BO4E.BO
         public List<Konfigurationsprodukt>? Konfigurationsprodukte { get; set; }
 
         /// <summary>
+        /// Angaben zum Marktteilnehmer
+        /// Enthält den MSB Code und die MSB Rolle.
+        /// </summary>
+        [JsonProperty(Required = Required.Default, Order = 41, PropertyName = "marktteilnehmer")]
+        [JsonPropertyName("marktteilnehmer")]
+        [ProtoMember(41)]
+        [JsonPropertyOrder(41)]
+        [NonOfficial(NonOfficialCategory.CUSTOMER_REQUIREMENTS)]
+        public Marktteilnehmer? Marktteilnehmer { get; set; }
+        
+        /// <summary>
         ///     Test if a <paramref name="id" /> is a valid Marktlokations ID.
         /// </summary>
         /// <param name="id">id to test</param>

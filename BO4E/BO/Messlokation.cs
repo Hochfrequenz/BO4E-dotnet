@@ -237,7 +237,7 @@ namespace BO4E.BO
 
 
         /// <summary>
-        ///     gasqualitaet für EDIFACT mapping
+        /// Gasqualitaet für EDIFACT mapping
         /// </summary>
         [JsonProperty(PropertyName = "betriebszustand", Required = Required.Default, Order = 29,
             NullValueHandling = NullValueHandling.Ignore)]
@@ -248,7 +248,7 @@ namespace BO4E.BO
         public Betriebszustand? Betriebszustand { get; set; }
 
         /// <summary>
-        ///   Zugeordnete Messprodukte
+        /// Zugeordnete Messprodukte
         /// </summary>        
         [JsonProperty(Required = Required.Default, Order = 30, PropertyName = "messprodukte")]
         [JsonPropertyName("messprodukte")]
@@ -257,6 +257,17 @@ namespace BO4E.BO
         [NonOfficial(NonOfficialCategory.CUSTOMER_REQUIREMENTS)]
         public List<Messprodukt>? Messprodukte { get; set; }
 
+        /// <summary>
+        /// Angaben zum Marktteilnehmer
+        /// Enthält den MSB Code und die MSB Rolle.
+        /// </summary>
+        [JsonProperty(Required = Required.Default, Order = 31, PropertyName = "marktteilnehmer")]
+        [JsonPropertyName("marktteilnehmer")]
+        [ProtoMember(1025)]
+        [JsonPropertyOrder(31)]
+        [NonOfficial(NonOfficialCategory.CUSTOMER_REQUIREMENTS)]
+        public Marktteilnehmer? Marktteilnehmer { get; set; }
+        
         /// <summary>
         ///     Test if a <paramref name="id" /> is a valid messlokations ID.
         /// </summary>

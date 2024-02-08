@@ -57,6 +57,7 @@ namespace BO4E.BO
         [JsonPropertyOrder(13)]
         [JsonPropertyName("grundzustaendigerMSBCodeNr")]
         [ProtoMember(7)]
+        [Obsolete("Should be placed in field Marktteilnehmer.")]
         public string? GrundzustaendigerMSBCodeNr { get; set; }
 
         /// <summary>
@@ -96,5 +97,16 @@ namespace BO4E.BO
         [JsonPropertyOrder(17)]
         [NonOfficial(NonOfficialCategory.CUSTOMER_REQUIREMENTS)]
         public List<Konfigurationsprodukt>? Konfigurationsprodukte { get; set; }
+        
+        /// <summary>
+        /// Angaben zum Marktteilnehmer
+        /// Enthält den MSB Code und die MSB Rolle.
+        /// </summary>
+        [JsonProperty(Required = Required.Default, Order = 18, PropertyName = "marktteilnehmer")]
+        [JsonPropertyName("marktteilnehmer")]
+        [ProtoMember(12)]
+        [JsonPropertyOrder(18)]
+        [NonOfficial(NonOfficialCategory.CUSTOMER_REQUIREMENTS)]
+        public Marktteilnehmer? Marktteilnehmer { get; set; }
     }
 }

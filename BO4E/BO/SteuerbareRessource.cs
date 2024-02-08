@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Text.Json.Serialization;
@@ -50,9 +51,11 @@ namespace BO4E.BO
         [JsonProperty(Required = Required.Default, Order = 12, PropertyName = "zugeordnetMSBCodeNr")]
         [JsonPropertyOrder(12)]
         [JsonPropertyName("zugeordnetMSBCodeNr")]
+        [NonOfficial(NonOfficialCategory.CUSTOMER_REQUIREMENTS)]
         [ProtoMember(12)]
+        [Obsolete("Should be placed in field Marktteilnehmer.")]
         public string? ZugeordnetMSBCodeNr { get; set; }
-
+        
         /// <summary>
         /// Produkt-Daten der Steuerbaren Ressource
         /// </summary>        
@@ -62,5 +65,16 @@ namespace BO4E.BO
         [JsonPropertyOrder(13)]
         [NonOfficial(NonOfficialCategory.CUSTOMER_REQUIREMENTS)]
         public List<Konfigurationsprodukt>? Konfigurationsprodukte { get; set; }
+        
+        /// <summary>
+        /// Angaben zum Marktteilnehmer
+        /// Enthält den MSB Code und die MSB Rolle.
+        /// </summary>
+        [JsonProperty(Required = Required.Default, Order = 14, PropertyName = "marktteilnehmer")]
+        [JsonPropertyName("marktteilnehmer")]
+        [ProtoMember(14)]
+        [JsonPropertyOrder(14)]
+        [NonOfficial(NonOfficialCategory.CUSTOMER_REQUIREMENTS)]
+        public Marktteilnehmer? Marktteilnehmer { get; set; }
     }
 }
