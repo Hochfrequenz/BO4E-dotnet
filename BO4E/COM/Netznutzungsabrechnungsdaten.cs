@@ -87,13 +87,13 @@ namespace BO4E.COM
         public Preis? PreisSingulaereBetriebsmittel { get; set; }
 
         /// <summary>
-        /// Zählzeiten
+        /// Zählzeit
         /// </summary>
-        [JsonProperty(PropertyName = "zaehlzeiten", Order = 12, Required = Required.Default)]
-        [JsonPropertyName("zaehlzeiten")]
+        [JsonProperty(PropertyName = "zaehlzeit", Order = 12, Required = Required.Default)]
+        [JsonPropertyName("zaehlzeit")]
         [NonOfficial(NonOfficialCategory.CUSTOMER_REQUIREMENTS)]
         [ProtoMember(12)]
         [JsonPropertyOrder(12)]
-        public Zaehlzeitregister? Zaehlzeiten { get; set; }
+        public Zaehlzeitregister? Zaehlzeit { get; set; }
     }
 }
