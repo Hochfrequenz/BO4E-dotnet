@@ -2911,6 +2911,9 @@
         },
         "preisSingulaereBetriebsmittel": {
           "$ref": "#/definitions/Preis"
+        },
+        "zaehlzeit": {
+          "$ref": "#/definitions/Zaehlzeitregister"
         }
       }
     },
