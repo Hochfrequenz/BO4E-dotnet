@@ -1,0 +1,48 @@
+{
+  "boTyp": "MARKTLOKATION",
+  "versionStruktur": "1",
+  "marktlokationsId": "VerwendungszweckJsonConverter",
+  "sparte": "STROM",
+  "energierichtung": "AUSSP",
+  "netzebene": "NSP",
+  "bilanzierungsgebiet": "11YN10000762-01E",
+  "lokationsadresse": {
+    "postleitzahl": "12345",
+    "ort": "Teststadt",
+    "strasse": "Teststr.",
+    "hausnummer": "6B",
+    "landescode": "DE",
+    "ortsteil": "Blub"
+  },
+  "marktrollen": [
+    {
+      "code": "4033872000058",
+      "marktrolle": "UENB"
+    },
+    {
+      "code": "9906214000003",
+      "marktrolle": "MSB",
+      "weiterverpflichtet": false
+    }
+  ],
+  "regelzone": "10YDE-EON------1",
+  "zeitreihentyp": "SLS",
+  "zaehlwerke": [
+    {
+      "obisKennzahl": "1-1:1.9.0",
+      "verwendungszwecke": [
+        {
+          "marktrolle": "LF",
+          "zweck": [
+            "ENDKUNDENABRECHNUNG",
+            "NETZNUTZUNGSABRECHNUNG",
+            "MEHRMINDERMENGENABRECHNUNG"
+          ]
+        }
+      ],
+      "verbrauchsart": "KL",
+      "unterbrechbarkeit": "NUV",
+      "anzahlAblesungen": 1
+    }
+  ]
+}
