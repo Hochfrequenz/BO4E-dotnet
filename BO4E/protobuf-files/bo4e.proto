@@ -502,6 +502,7 @@ message Geschaeftspartner {
    repeated Geschaeftspartnerrolle Geschaeftspartnerrolle = 17 [packed = false];
    Adresse Partneradresse = 18;
    GrundlageZurVerringerungDerUmlagenNachEnfg GrundlageZurVerringerungDerUmlagenNachEnfg = 19;
+   GrundDerPrivilegierungNachEnFG GrundDerPrivilegierungNachEnFG = 20;
    string Title = 1001;
 }
 enum Geschaeftspartnerrolle {
@@ -517,6 +518,18 @@ enum GrundlageZurVerringerungDerUmlagenNachEnfg {
    KUNDE_ERFUELLT_VORAUSSETZUNG = 0;
    KUNDE_ERFUELLT_VORAUSSETZUNG_NICHT = 1;
    KEINE_ANGABE = 2;
+}
+enum GrundDerPrivilegierungNachEnFG {
+   option (.protobuf_net.enumopt).namespace = "BO4E.ENUM";
+   STROMSPEICHER_UND_VERLUSTENERGIE = 0;
+   ELEKTRISCH_ANGETRIEBENE_WAERMEPUMPEN = 1;
+   UMLAGEERHEBUNG_BEI_ANLAGEN_ZUR_VERSTROMUNG_VON_KUPPELGASEN = 2;
+   HERSTELLUNG_VON_GRUENEN_WASSERSTOFF = 3;
+   STROMKOSTENINTENSIVE_UNTERNEHMEN = 4;
+   HERSTELLUNG_VON_WASSERSTOFF_IN_STROMKOSTENINTENSIVEN_UNTERNEHMEN = 5;
+   SCHIENENBAHNEN = 6;
+   ELEKTRISCHE_BETRIEBENE_BUSSEN_IM_LINIENVERKEHR = 7;
+   LANDSTROMANLAGEN = 8;
 }
 enum Gueltigkeitstyp {
    option (.protobuf_net.enumopt).namespace = "BO4E.ENUM";
