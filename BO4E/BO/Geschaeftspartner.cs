@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Runtime.ConstrainedExecution;
 using System.Text.Json.Serialization;
 using BO4E.COM;
 using BO4E.ENUM;
@@ -174,5 +175,14 @@ namespace BO4E.BO
         [ProtoMember(19)]
         public GrundlageZurVerringerungDerUmlagenNachEnfg? GrundlageZurVerringerungDerUmlagenNachEnfg { get; set; }
 
+        /// <summary>
+        /// Grund der Privilegierung nach EnFG
+        /// </summary>
+        [JsonProperty(PropertyName = "grundDerPrivilegierungNachEnFG", Required = Required.Default, Order = 22)]
+        [JsonPropertyName("grundDerPrivilegierungNachEnFG")]
+        [JsonPropertyOrder(22)]
+        [NonOfficial(NonOfficialCategory.CUSTOMER_REQUIREMENTS)]
+        [ProtoMember(20)]
+        public GrundDerPrivilegierungNachEnFG? GrundDerPrivilegierungNachEnFG { get; set; }
     }
 }
