@@ -2182,7 +2182,8 @@
             "RB",
             "KUNDE",
             "INTERESSENT",
-            "GMSB"
+            "GMSB",
+            "AMSB"
           ]
         },
         "timestamp": {
@@ -2396,7 +2397,8 @@
             "RB",
             "KUNDE",
             "INTERESSENT",
-            "GMSB"
+            "GMSB",
+            "AMSB"
           ]
         },
         "rollencodenummer": {
@@ -3320,7 +3322,8 @@
             "RB",
             "KUNDE",
             "INTERESSENT",
-            "GMSB"
+            "GMSB",
+            "AMSB"
           ]
         },
         "zweck": {

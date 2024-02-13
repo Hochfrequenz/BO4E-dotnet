@@ -135,7 +135,8 @@
             "RB",
             "KUNDE",
             "INTERESSENT",
-            "GMSB"
+            "GMSB",
+            "AMSB"
           ]
         },
         "zweck": {

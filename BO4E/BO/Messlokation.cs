@@ -199,7 +199,6 @@ namespace BO4E.BO
         [JsonPropertyName("marktrollen")]
         [ProtoMember(1019)]
         [NonOfficial(NonOfficialCategory.CUSTOMER_REQUIREMENTS)]
-        [Obsolete("This isn't the right place for this information")] // ToDo: check
         public List<MarktpartnerDetails>? Marktrollen { get; set; }
 
         /// <summary>
