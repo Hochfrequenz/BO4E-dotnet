@@ -101,6 +101,7 @@ namespace BO4E.BO
         [JsonProperty(PropertyName = "zeitpunktFuerWertanfrage", Required = Required.Default, Order = 16)]
         [JsonPropertyName("zeitpunktFuerWertanfrage")]
         [JsonPropertyOrder(16)]
+        [ProtoIgnore]
         [Newtonsoft.Json.JsonConverter(typeof(LenientDateTimeConverter))]
         public DateTimeOffset? ZeitpunktFuerWertanfrage { get; set; }
     }
