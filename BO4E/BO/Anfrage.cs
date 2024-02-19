@@ -54,8 +54,8 @@ namespace BO4E.BO
         /// <summary>
         /// Sollablesetermin / Zeitangabe für Messwertanfrage. Details <see cref="Zeitraum" />
         /// </summary>
-        [JsonProperty(PropertyName = "zeitraumMesswertanfrage", Required = Required.Default, Order = 9)]
-        [JsonPropertyName("zeitraumMesswertanfrage")]
+        [JsonProperty(PropertyName = "ZeitraumMesswertanfrage", Required = Required.Default, Order = 9)]
+        [JsonPropertyName("ZeitraumMesswertanfrage")]
         [ProtoMember(1003)]
         [JsonPropertyOrder(9)]
         public Zeitraum? ZeitraumMesswertanfrage { get; set; }
