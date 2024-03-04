@@ -967,6 +967,24 @@
             "KUNDE_ERFUELLT_VORAUSSETZUNG_NICHT",
             "KEINE_ANGABE"
           ]
+        },
+        "grundDerPrivilegierungNachEnFG": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "enum": [
+            null,
+            "STROMSPEICHER_UND_VERLUSTENERGIE",
+            "ELEKTRISCH_ANGETRIEBENE_WAERMEPUMPEN",
+            "UMLAGEERHEBUNG_BEI_ANLAGEN_ZUR_VERSTROMUNG_VON_KUPPELGASEN",
+            "HERSTELLUNG_VON_GRUENEN_WASSERSTOFF",
+            "STROMKOSTENINTENSIVE_UNTERNEHMEN",
+            "HERSTELLUNG_VON_WASSERSTOFF_IN_STROMKOSTENINTENSIVEN_UNTERNEHMEN",
+            "SCHIENENBAHNEN",
+            "ELEKTRISCHE_BETRIEBENE_BUSSEN_IM_LINIENVERKEHR",
+            "LANDSTROMANLAGEN"
+          ]
         }
       },
       "required": [
