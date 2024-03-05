@@ -1077,6 +1077,7 @@ enum Messwertstatus {
    PROGNOSEWERT = 6;
    ENERGIEMENGESUMMIERT = 7;
    FEHLT = 8;
+   GRUNDLAGE_POG_ERMITTLUNG = 9;
 }
 enum Netzebene {
    option (.protobuf_net.enumopt).namespace = "BO4E.ENUM";
