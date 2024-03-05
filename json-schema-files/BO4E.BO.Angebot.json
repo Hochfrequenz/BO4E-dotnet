@@ -3292,7 +3292,8 @@
             "NICHT_VERWENDBAR",
             "PROGNOSEWERT",
             "ENERGIEMENGESUMMIERT",
-            "FEHLT"
+            "FEHLT",
+            "GRUNDLAGE_POG_ERMITTLUNG"
           ]
         },
         "statuszusatzinformationen": {
