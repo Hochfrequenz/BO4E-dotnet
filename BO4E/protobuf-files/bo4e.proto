@@ -1354,6 +1354,7 @@ enum Sonderrechnungsart {
    P19_STROM_NEV_UMLAGE = 5;
    P18_ABLAV = 6;
    KONZESSIONSABGABE_WECHSEL_RLM = 7;
+   PRIVILEGIERUNG_NACH_ENFG = 8;
 }
 enum Sparte {
    option (.protobuf_net.enumopt).namespace = "BO4E.ENUM";
