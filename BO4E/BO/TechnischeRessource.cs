@@ -23,7 +23,7 @@ namespace BO4E.BO
         /// </summary>
         /// <remarks>Edi-beispiel: LOC+Z19+C816417ST77'</remarks>
         [DefaultValue("|null|")]
-        [JsonProperty(PropertyName = "technischeRessourceId", Required = Required.Always, Order = 10)]
+        [JsonProperty(PropertyName = "technischeRessourceId", Required = Required.Default, Order = 10)]
         [JsonPropertyName("technischeRessourceId")]
         [JsonPropertyOrder(10)]
         [DataCategory(DataCategory.DEVICE)]
@@ -36,7 +36,7 @@ namespace BO4E.BO
         /// Beispiel:
         /// RFF+Z34:DE00713739359S0000000000001222221'
         /// </summary>
-        [JsonProperty(PropertyName = "vorgelagerteMesslokationsId", Required = Required.Always, Order = 11)]
+        [JsonProperty(PropertyName = "vorgelagerteMesslokationsId", Required = Required.Default, Order = 11)]
         [JsonPropertyName("vorgelagerteMesslokationsId")]
         [JsonPropertyOrder(11)]
         [DataCategory(DataCategory.POD)]
@@ -48,7 +48,7 @@ namespace BO4E.BO
         /// Beispiel:
         /// RFF+Z16:20072281644'
         /// </summary>
-        [JsonProperty(PropertyName = "zugeordneteMarktlokationsId", Required = Required.Always, Order = 12)]
+        [JsonProperty(PropertyName = "zugeordneteMarktlokationsId", Required = Required.Default, Order = 12)]
         [JsonPropertyName("zugeordneteMarktlokationsId")]
         [JsonPropertyOrder(12)]
         [DataCategory(DataCategory.POD)]
@@ -60,7 +60,7 @@ namespace BO4E.BO
         /// Beispiel:
         /// RFF+Z16:20072281644'
         /// </summary>
-        [JsonProperty(PropertyName = "zugeordneteSteuerbareRessourceId", Required = Required.Always, Order = 13)]
+        [JsonProperty(PropertyName = "zugeordneteSteuerbareRessourceId", Required = Required.Default, Order = 13)]
         [JsonPropertyName("zugeordneteSteuerbareRessourceId")]
         [JsonPropertyOrder(13)]
         [DataCategory(DataCategory.POD)]
