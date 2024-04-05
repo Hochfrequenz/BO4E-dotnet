@@ -45,13 +45,13 @@ namespace BO4E.BO
         ///     verbraucht, oder erzeugt wird
         /// </summary>
         [DefaultValue("|null|")]
-        [JsonProperty(Required = Required.Always, Order = 10, PropertyName = "marktlokationsId")]
+        [JsonProperty(Required = Required.Default, Order = 10, PropertyName = "marktlokationsId")]
         [JsonPropertyName("marktlokationsId")]
         [JsonPropertyOrder(10)]
         [DataCategory(DataCategory.POD)]
         [BoKey]
         [ProtoMember(4)]
-        public string MarktlokationsId { get; set; }
+        public string? MarktlokationsId { get; set; }
 
         /// <summary>Sparte der Messlokation, z.B. Gas oder Strom.</summary>
         [JsonProperty(Required = Required.Always, Order = 11, PropertyName = "sparte")]
