@@ -71,36 +71,12 @@
         "null"
       ]
     },
-    "trancheId": {
+    "Id": {
       "type": "string",
       "default": "|null|"
-    },
-    "sparte": {
-      "type": "string",
-      "enum": [
-        "STROM",
-        "GAS",
-        "FERNWAERME",
-        "NAHWAERME",
-        "WASSER",
-        "ABWASSER"
-      ]
-    },
-    "aufteilungsmenge": {
-      "type": [
-        "number",
-        "null"
-      ]
-    },
-    "obisKennzahl": {
-      "type": [
-        "string",
-        "null"
-      ]
     }
   },
   "required": [
-    "trancheId",
-    "sparte"
+    "Id"
   ]
 }

@@ -63,6 +63,8 @@ namespace BO4E.BO
     [ProtoInclude(29, typeof(Netzlokation))]
     [ProtoInclude(30, typeof(SteuerbareRessource))]
     [ProtoInclude(31, typeof(TechnischeRessource))]
+    [ProtoInclude(32, typeof(MabisZaehlpunkt))]
+    [ProtoInclude(33, typeof(Summenzeitreihe))]
     public abstract class BusinessObject : IUserProperties, IOptionalGuid
     {
         /// <summary>

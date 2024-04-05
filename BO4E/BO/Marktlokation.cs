@@ -199,8 +199,6 @@ namespace BO4E.BO
         [JsonPropertyOrder(27)]
         [ProtoMember(1021)]
         [NonOfficial(NonOfficialCategory.CUSTOMER_REQUIREMENTS)]
-        [Obsolete(
-            "I'm pretty sure the BO.Marktlokation is not the right place to store this information. Please evaluate!")]
         public List<MarktpartnerDetails>? Marktrollen { get; set; } // ToDo: evaluate this
 
         /// <summary>

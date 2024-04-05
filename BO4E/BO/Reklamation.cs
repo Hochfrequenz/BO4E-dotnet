@@ -1,10 +1,13 @@
 using BO4E.COM;
 using BO4E.ENUM;
 using BO4E.meta;
+using BO4E.meta.LenientConverters;
 
 using Newtonsoft.Json;
 
 using ProtoBuf;
+
+using System;
 using System.Text.Json.Serialization;
 
 namespace BO4E.BO
@@ -54,6 +57,7 @@ namespace BO4E.BO
         /// <summary>
         /// Sollablesetermin / Zeitangabe für Messwertanfrage. Details <see cref="Zeitraum" />
         /// </summary>
+        /// <remarks>DTM+163 and DTM+164</remarks>
         [JsonProperty(PropertyName = "ZeitraumMesswertanfrage", Required = Required.Default, Order = 13)]
         [JsonPropertyName("ZeitraumMesswertanfrage")]
         [ProtoMember(1003)]
@@ -80,5 +84,25 @@ namespace BO4E.BO
         [ProtoMember(1005)]
         [JsonPropertyOrder(15)]
         public string? ReklamationsgrundBemerkung { get; set; }
+
+        [System.Text.Json.Serialization.JsonIgnore]
+        [Newtonsoft.Json.JsonIgnore]
+        [ProtoMember(1006, Name = nameof(ZeitpunktFuerWertanfrage))]
+        [CompatibilityLevel(CompatibilityLevel.Level240)]
+        private DateTime _ZeitpunktFuerWertanfrage
+        {
+            get => ZeitpunktFuerWertanfrage?.UtcDateTime ?? default;
+            set => ZeitpunktFuerWertanfrage = value == default ? null : DateTime.SpecifyKind(value, DateTimeKind.Utc);
+        }
+        /// <summary>
+        /// Zeitpunkt für Wertanfrage
+        /// </summary>
+        /// <remarks>DTM+7</remarks>
+        [JsonProperty(PropertyName = "zeitpunktFuerWertanfrage", Required = Required.Default, Order = 16)]
+        [JsonPropertyName("zeitpunktFuerWertanfrage")]
+        [JsonPropertyOrder(16)]
+        [ProtoIgnore]
+        [Newtonsoft.Json.JsonConverter(typeof(LenientDateTimeConverter))]
+        public DateTimeOffset? ZeitpunktFuerWertanfrage { get; set; }
     }
 }

@@ -96,5 +96,15 @@ namespace BO4E.BO
         [JsonPropertyOrder(17)]
         [NonOfficial(NonOfficialCategory.CUSTOMER_REQUIREMENTS)]
         public List<Konfigurationsprodukt>? Konfigurationsprodukte { get; set; }
+
+        /// <summary>
+        /// Eigenschaft des Messstellenbetreiber an der Lokation
+        /// </summary>
+        [JsonProperty(Required = Required.Default, Order = 18, PropertyName = "eigenschaftMSBLokation")]
+        [JsonPropertyName("eigenschaftMSBLokation")]
+        [ProtoMember(12)]
+        [JsonPropertyOrder(18)]
+        [NonOfficial(NonOfficialCategory.CUSTOMER_REQUIREMENTS)]
+        public ENUM.Marktrolle? EigenschaftMSBLokation { get; set; }
     }
 }

@@ -55,12 +55,23 @@ namespace BO4E.BO
 
         /// <summary>
         /// Produkt-Daten der Steuerbaren Ressource
-        /// </summary>        
+        /// </summary> 
         [JsonProperty(Required = Required.Default, Order = 13, PropertyName = "konfigurationsprodukte")]
         [JsonPropertyName("konfigurationsprodukte")]
         [ProtoMember(13)]
         [JsonPropertyOrder(13)]
         [NonOfficial(NonOfficialCategory.CUSTOMER_REQUIREMENTS)]
         public List<Konfigurationsprodukt>? Konfigurationsprodukte { get; set; }
+
+
+        /// <summary>
+        /// Eigenschaft des Messstellenbetreiber an der Lokation
+        /// </summary>
+        [JsonProperty(Required = Required.Default, Order = 14, PropertyName = "eigenschaftMSBLokation")]
+        [JsonPropertyName("eigenschaftMSBLokation")]
+        [ProtoMember(14)]
+        [JsonPropertyOrder(14)]
+        [NonOfficial(NonOfficialCategory.CUSTOMER_REQUIREMENTS)]
+        public ENUM.Marktrolle? EigenschaftMSBLokation { get; set; }
     }
 }

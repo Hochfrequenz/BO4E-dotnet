@@ -299,6 +299,42 @@
         "wert",
         "einheit"
       ]
+    },
+    "Zeitreihenprodukt": {
+      "type": [
+        "object",
+        "null"
+      ],
+      "properties": {
+        "timestamp": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "format": "date-time"
+        },
+        "guid": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "identifikation": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "korrekturfaktor": {
+          "type": [
+            "number",
+            "null"
+          ]
+        },
+        "verbrauch": {
+          "$ref": "#/definitions/Verbrauch"
+        }
+      }
     }
   },
   "type": "object",
@@ -337,35 +373,154 @@
         "null"
       ]
     },
-    "lokationsId": {
-      "type": "string",
-      "default": "|null|"
+    "zaehlpunktId": {
+      "type": [
+        "string",
+        "null"
+      ]
     },
-    "lokationsTyp": {
+    "bilanzierungsbeginn": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "format": "date-time"
+    },
+    "bilanzierungsende": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "format": "date-time"
+    },
+    "bilanzkreis": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "bilanzierungsgebiet": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "regelzone": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "bezeichnung": {
       "type": [
         "string",
         "null"
       ],
       "enum": [
         null,
-        "MALO",
-        "MELO"
+        "BG_SZR_B",
+        "BG_SZR_C",
+        "BK_SZR_A",
+        "BK_SZR_B_RZ",
+        "BK_SZR_B_BG",
+        "BK_SZR_C",
+        "LF_SZR_A",
+        "LF_SZR_B_RZ",
+        "LF_SZR_B_BG",
+        "DZUE",
+        "NZR",
+        "ASZR"
       ]
     },
-    "energieverbrauch": {
+    "bezugszeitraum": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "enum": [
+        null,
+        "SEKUNDE",
+        "MINUTE",
+        "STUNDE",
+        "VIERTEL_STUNDE",
+        "TAG",
+        "WOCHE",
+        "MONAT",
+        "QUARTAL",
+        "HALBJAHR",
+        "JAHR"
+      ]
+    },
+    "zeitreihentyp": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "enum": [
+        null,
+        "EGS",
+        "LGS",
+        "NZR",
+        "SES",
+        "SLS",
+        "TES",
+        "TLS",
+        "SLS_TLS",
+        "SES_TES"
+      ]
+    },
+    "marktrolle": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "enum": [
+        null,
+        "NB",
+        "LF",
+        "MSB",
+        "MDL",
+        "DL",
+        "BKV",
+        "BIKO",
+        "UENB",
+        "KUNDE_SELBST_NN",
+        "MGV",
+        "EIV",
+        "RB",
+        "KUNDE",
+        "INTERESSENT",
+        "GMSB",
+        "AMSB"
+      ]
+    },
+    "spannungsebene": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "enum": [
+        null,
+        "NSP",
+        "MSP",
+        "HSP",
+        "HSS",
+        "MSP_NSP_UMSP",
+        "HSP_MSP_UMSP",
+        "HSS_HSP_UMSP",
+        "HD",
+        "MD",
+        "ND"
+      ]
+    },
+    "produkte": {
       "type": [
         "array",
         "null"
       ],
       "items": {
-        "$ref": "#/definitions/Verbrauch"
-      },
-      "minItems": 1
+        "$ref": "#/definitions/Zeitreihenprodukt"
+      }
     }
-  },
-  "required": [
-    "lokationsId",
-    "lokationsTyp",
-    "energieverbrauch"
-  ]
+  }
 }

@@ -33,14 +33,15 @@ namespace TestBO4E
         }
 
 
-        private const int LastDataRowOffset = 40;
+        private const int LastDataRowOffset = 50;
         private const int MaxSchemasPerHour = 10;
         [TestMethod]
         [DataRow(0)]
         [DataRow(10)]
         [DataRow(20)]
         [DataRow(30)]
-        [DataRow(LastDataRowOffset)] // using these different data rows you to workaround the 10schema per hour limitation (MaxSchemasPerHour)
+        [DataRow(40)]
+        [DataRow(LastDataRowOffset)] // using these different data rows allows you to workaround the 10schema per hour limitation (MaxSchemasPerHour)
 
         public void TestJSchemaFileGenerationBo(int offset)
         {
