@@ -168,7 +168,7 @@ namespace BO4E.BO
         ///     ZG1: Wasser
         ///     ZG5: Sonstige Erzeugungsart
         /// </summary>
-        [JsonProperty(PropertyName = "erzeugungsart", Required = Required.Always, Order = 21)]
+        [JsonProperty(PropertyName = "erzeugungsart", Required = Required.Default, Order = 21)]
         [JsonPropertyOrder(21)]
         [JsonPropertyName("erzeugungsart")]
         [NonOfficial(NonOfficialCategory.MISSING)]
@@ -184,7 +184,7 @@ namespace BO4E.BO
         ///     ZF9: Batteriespeicher
         ///     ZG6: Sonstige Speicherart
         /// </summary>
-        [JsonProperty(PropertyName = "speicherart", Required = Required.Always, Order = 22)]
+        [JsonProperty(PropertyName = "speicherart", Required = Required.Default, Order = 22)]
         [JsonPropertyOrder(22)]
         [JsonPropertyName("speicherart")]
         [NonOfficial(NonOfficialCategory.MISSING)]
