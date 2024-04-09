@@ -12,7 +12,7 @@ namespace BO4E.BO
     /// </summary>
     public class Lokationszuordnung : BusinessObject
     {
-        
+
         /// <summary>
         /// 
         /// </summary>
@@ -21,7 +21,7 @@ namespace BO4E.BO
         [JsonPropertyOrder(1)]
         [ProtoMember(1)]
         public string[] Marktlokationen { get; set; }
-        
+
         /// <summary>
         /// 
         /// </summary>
@@ -39,7 +39,7 @@ namespace BO4E.BO
         [JsonPropertyOrder(3)]
         [ProtoMember(3)]
         public string[] Netzlokationen { get; set; }
-        
+
         /// <summary>
         /// 
         /// </summary>
@@ -48,7 +48,7 @@ namespace BO4E.BO
         [JsonPropertyOrder(4)]
         [ProtoMember(4)]
         public string[] TechnischeRessourcen { get; set; }
-        
+
         /// <summary>
         /// 
         /// </summary>
@@ -67,7 +67,7 @@ namespace BO4E.BO
         [ProtoMember(6)]
         // Instead of COM.Zeitspanne (bo4e-python)
         public Zeitraum[] Gueltigkeit { get; set; }
-        
+
         /// <summary>
         /// 
         /// </summary>
@@ -76,7 +76,7 @@ namespace BO4E.BO
         [JsonPropertyOrder(7)]
         [ProtoMember(7)]
         public ArithmetischeOperation[] Arithmetik { get; set; }
-        
+
         /// <summary>
         /// 
         /// </summary>
@@ -85,6 +85,6 @@ namespace BO4E.BO
         [JsonPropertyOrder(8)]
         [ProtoMember(8)]
         public string Zuordnungstyp { get; set; }
-        
+
     }
 }
