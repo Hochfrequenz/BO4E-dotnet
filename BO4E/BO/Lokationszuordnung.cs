@@ -16,74 +16,74 @@ namespace BO4E.BO
         /// <summary>
         /// 
         /// </summary>
-        [JsonProperty(Required = Required.Default, Order = 1, PropertyName = "marktlokationen")]
+        [JsonProperty(Required = Required.Default, Order = 11, PropertyName = "marktlokationen")]
         [JsonPropertyName("marktlokationen")]
-        [JsonPropertyOrder(1)]
-        [ProtoMember(1)]
+        [JsonPropertyOrder(11)]
+        [ProtoMember(11)]
         public string[] Marktlokationen { get; set; }
 
         /// <summary>
         /// 
         /// </summary>
-        [JsonProperty(Required = Required.Default, Order = 2, PropertyName = "messlokationen")]
+        [JsonProperty(Required = Required.Default, Order = 12, PropertyName = "messlokationen")]
         [JsonPropertyName("messlokationen")]
-        [JsonPropertyOrder(2)]
-        [ProtoMember(2)]
+        [JsonPropertyOrder(12)]
+        [ProtoMember(12)]
         public string[] Messlokationen { get; set; }
 
         /// <summary>
         /// 
         /// </summary>
-        [JsonProperty(Required = Required.Default, Order = 3, PropertyName = "netzlokationen")]
+        [JsonProperty(Required = Required.Default, Order = 13, PropertyName = "netzlokationen")]
         [JsonPropertyName("netzlokationen")]
-        [JsonPropertyOrder(3)]
-        [ProtoMember(3)]
+        [JsonPropertyOrder(13)]
+        [ProtoMember(13)]
         public string[] Netzlokationen { get; set; }
 
         /// <summary>
         /// 
         /// </summary>
-        [JsonProperty(Required = Required.Default, Order = 4, PropertyName = "technischeRessourcen")]
+        [JsonProperty(Required = Required.Default, Order = 14, PropertyName = "technischeRessourcen")]
         [JsonPropertyName("technischeRessourcen")]
-        [JsonPropertyOrder(4)]
-        [ProtoMember(4)]
+        [JsonPropertyOrder(14)]
+        [ProtoMember(14)]
         public string[] TechnischeRessourcen { get; set; }
 
         /// <summary>
         /// 
         /// </summary>
-        [JsonProperty(Required = Required.Default, Order = 5, PropertyName = "steuerbareRessourcen")]
+        [JsonProperty(Required = Required.Default, Order = 15, PropertyName = "steuerbareRessourcen")]
         [JsonPropertyName("steuerbareRessourcen")]
-        [JsonPropertyOrder(5)]
-        [ProtoMember(5)]
+        [JsonPropertyOrder(15)]
+        [ProtoMember(15)]
         public string[] SteuerebareRessourcen { get; set; }
 
         /// <summary>
         /// 
         /// </summary>
-        [JsonProperty(Required = Required.Default, Order = 6, PropertyName = "gueltigkeit")]
+        [JsonProperty(Required = Required.Default, Order = 16, PropertyName = "gueltigkeit")]
         [JsonPropertyName("gueltigkeit")]
-        [JsonPropertyOrder(6)]
-        [ProtoMember(6)]
+        [JsonPropertyOrder(16)]
+        [ProtoMember(16)]
         // Instead of COM.Zeitspanne (bo4e-python)
         public Zeitraum[] Gueltigkeit { get; set; }
 
         /// <summary>
         /// 
         /// </summary>
-        [JsonProperty(Required = Required.Default, Order = 7, PropertyName = "arithmetik")]
+        [JsonProperty(Required = Required.Default, Order = 17, PropertyName = "arithmetik")]
         [JsonPropertyName("arithmetik")]
-        [JsonPropertyOrder(7)]
-        [ProtoMember(7)]
+        [JsonPropertyOrder(17)]
+        [ProtoMember(17)]
         public ArithmetischeOperation[] Arithmetik { get; set; }
 
         /// <summary>
         /// 
         /// </summary>
-        [JsonProperty(Required = Required.Default, Order = 8, PropertyName = "zuordnungstyp")]
+        [JsonProperty(Required = Required.Default, Order = 18, PropertyName = "zuordnungstyp")]
         [JsonPropertyName("zuordnungstyp")]
-        [JsonPropertyOrder(8)]
-        [ProtoMember(8)]
+        [JsonPropertyOrder(18)]
+        [ProtoMember(18)]
         public string Zuordnungstyp { get; set; }
 
     }
