@@ -84,6 +84,7 @@ namespace BO4E.BO
         [JsonPropertyName("zuordnungstyp")]
         [JsonPropertyOrder(18)]
         [ProtoMember(18)]
+        [BoKey]
         public string Zuordnungstyp { get; set; }
 
     }
