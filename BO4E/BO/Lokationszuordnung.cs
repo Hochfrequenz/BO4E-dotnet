@@ -10,6 +10,8 @@ namespace BO4E.BO
     /// <summary>
     /// 
     /// </summary>
+    [ProtoContract]
+
     public class Lokationszuordnung : BusinessObject
     {
 
@@ -20,7 +22,7 @@ namespace BO4E.BO
         [JsonPropertyName("marktlokationen")]
         [JsonPropertyOrder(11)]
         [ProtoMember(11)]
-        public string[] Marktlokationen { get; set; }
+        public string[]? Marktlokationen { get; set; }
 
         /// <summary>
         /// 
@@ -29,7 +31,7 @@ namespace BO4E.BO
         [JsonPropertyName("messlokationen")]
         [JsonPropertyOrder(12)]
         [ProtoMember(12)]
-        public string[] Messlokationen { get; set; }
+        public string[]? Messlokationen { get; set; }
 
         /// <summary>
         /// 
@@ -38,7 +40,7 @@ namespace BO4E.BO
         [JsonPropertyName("netzlokationen")]
         [JsonPropertyOrder(13)]
         [ProtoMember(13)]
-        public string[] Netzlokationen { get; set; }
+        public string[]? Netzlokationen { get; set; }
 
         /// <summary>
         /// 
@@ -47,7 +49,7 @@ namespace BO4E.BO
         [JsonPropertyName("technischeRessourcen")]
         [JsonPropertyOrder(14)]
         [ProtoMember(14)]
-        public string[] TechnischeRessourcen { get; set; }
+        public string[]? TechnischeRessourcen { get; set; }
 
         /// <summary>
         /// 
@@ -56,7 +58,7 @@ namespace BO4E.BO
         [JsonPropertyName("steuerbareRessourcen")]
         [JsonPropertyOrder(15)]
         [ProtoMember(15)]
-        public string[] SteuerebareRessourcen { get; set; }
+        public string[]? SteuerebareRessourcen { get; set; }
 
         /// <summary>
         /// 
@@ -66,7 +68,7 @@ namespace BO4E.BO
         [JsonPropertyOrder(16)]
         [ProtoMember(16)]
         // Instead of COM.Zeitspanne (bo4e-python)
-        public Zeitraum[] Gueltigkeit { get; set; }
+        public Zeitraum[]? Gueltigkeit { get; set; }
 
         /// <summary>
         /// 
@@ -75,7 +77,7 @@ namespace BO4E.BO
         [JsonPropertyName("arithmetik")]
         [JsonPropertyOrder(17)]
         [ProtoMember(17)]
-        public ArithmetischeOperation[] Arithmetik { get; set; }
+        public ArithmetischeOperation[]? Arithmetik { get; set; }
 
         /// <summary>
         /// 
@@ -85,7 +87,7 @@ namespace BO4E.BO
         [JsonPropertyOrder(18)]
         [ProtoMember(18)]
         [BoKey]
-        public string Zuordnungstyp { get; set; }
+        public string? Zuordnungstyp { get; set; }
 
     }
 }
