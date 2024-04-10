@@ -10,15 +10,15 @@ namespace BO4E.COM
     public class Energieherkunft : COM
     {
         /// <summary>Art der Erzeugung der Energie. Details <see cref="ENUM.Erzeugungsart" /></summary>
-        [JsonProperty(PropertyName = "erzeugungsart", Required = Required.Always)]
+        [JsonProperty(PropertyName = "erzeugungsart", Required = Required.Default)]
         [JsonPropertyName("erzeugungsart")]
         [ProtoMember(3)]
-        public Erzeugungsart Erzeugungsart { get; set; }
+        public Erzeugungsart? Erzeugungsart { get; set; }
 
         /// <summary>Prozentualer Anteil der jeweiligen Erzeugungsart.</summary>
-        [JsonProperty(PropertyName = "anteilProzent", Required = Required.Always)]
+        [JsonProperty(PropertyName = "anteilProzent", Required = Required.Default)]
         [JsonPropertyName("anteilProzent")]
         [ProtoMember(4)]
-        public decimal AnteilProzent { get; set; }
+        public decimal? AnteilProzent { get; set; }
     }
 }
