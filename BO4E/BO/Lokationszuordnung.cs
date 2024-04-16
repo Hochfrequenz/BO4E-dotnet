@@ -8,7 +8,8 @@ using ProtoBuf;
 namespace BO4E.BO
 {
     /// <summary>
-    /// 
+    /// Modell für die Abbildung der Referenz auf die Lokationsbündelstruktur. Diese gibt an welche Marktlokationen,
+    /// Messlokationen, Netzlokationen, technische/steuerbaren Ressourcen an einer Lokation vorhanden sind;
     /// </summary>
     [ProtoContract]
 
@@ -16,7 +17,7 @@ namespace BO4E.BO
     {
 
         /// <summary>
-        /// 
+        /// Liste mit IDs der referenzierten Marktlokationen
         /// </summary>
         [JsonProperty(Required = Required.Default, Order = 11, PropertyName = "marktlokationen")]
         [JsonPropertyName("marktlokationen")]
@@ -25,7 +26,7 @@ namespace BO4E.BO
         public string[]? Marktlokationen { get; set; }
 
         /// <summary>
-        /// 
+        /// Liste mit IDs der referenzierten Messlokationen
         /// </summary>
         [JsonProperty(Required = Required.Default, Order = 12, PropertyName = "messlokationen")]
         [JsonPropertyName("messlokationen")]
@@ -34,7 +35,7 @@ namespace BO4E.BO
         public string[]? Messlokationen { get; set; }
 
         /// <summary>
-        /// 
+        /// Liste mit IDs der referenzierten Netzlokationen
         /// </summary>
         [JsonProperty(Required = Required.Default, Order = 13, PropertyName = "netzlokationen")]
         [JsonPropertyName("netzlokationen")]
@@ -43,7 +44,7 @@ namespace BO4E.BO
         public string[]? Netzlokationen { get; set; }
 
         /// <summary>
-        /// 
+        /// Liste mit IDs der referenzierten technischen Ressourcen
         /// </summary>
         [JsonProperty(Required = Required.Default, Order = 14, PropertyName = "technischeRessourcen")]
         [JsonPropertyName("technischeRessourcen")]
@@ -52,7 +53,7 @@ namespace BO4E.BO
         public string[]? TechnischeRessourcen { get; set; }
 
         /// <summary>
-        /// 
+        /// Liste mit IDs der referenzierten steuerbaren Ressourcen
         /// </summary>
         [JsonProperty(Required = Required.Default, Order = 15, PropertyName = "steuerbareRessourcen")]
         [JsonPropertyName("steuerbareRessourcen")]
@@ -61,7 +62,7 @@ namespace BO4E.BO
         public string[]? SteuerebareRessourcen { get; set; }
 
         /// <summary>
-        /// 
+        /// Zeitspanne der Gültigkeit
         /// </summary>
         [JsonProperty(Required = Required.Default, Order = 16, PropertyName = "gueltigkeit")]
         [JsonPropertyName("gueltigkeit")]
@@ -71,7 +72,7 @@ namespace BO4E.BO
         public Zeitraum[]? Gueltigkeit { get; set; }
 
         /// <summary>
-        /// 
+        /// Angabe einer arithmetischen Operation
         /// </summary>
         [JsonProperty(Required = Required.Default, Order = 17, PropertyName = "arithmetik")]
         [JsonPropertyName("arithmetik")]
@@ -80,7 +81,7 @@ namespace BO4E.BO
         public ArithmetischeOperation[]? Arithmetik { get; set; }
 
         /// <summary>
-        /// 
+        /// Code, der angibt wie die Lokationsbündelstruktur zusammengesetzt ist
         /// </summary>
         [JsonProperty(Required = Required.Default, Order = 18, PropertyName = "zuordnungstyp")]
         [JsonPropertyName("zuordnungstyp")]
