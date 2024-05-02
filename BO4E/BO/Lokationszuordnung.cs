@@ -23,7 +23,7 @@ namespace BO4E.BO
         [JsonPropertyName("marktlokationen")]
         [JsonPropertyOrder(11)]
         [ProtoMember(11)]
-        public string[]? Marktlokationen { get; set; }
+        public Marktlokation[]? Marktlokationen { get; set; }
 
         /// <summary>
         /// Liste mit IDs der referenzierten Messlokationen
@@ -32,7 +32,7 @@ namespace BO4E.BO
         [JsonPropertyName("messlokationen")]
         [JsonPropertyOrder(12)]
         [ProtoMember(12)]
-        public string[]? Messlokationen { get; set; }
+        public Messlokation[]? Messlokationen { get; set; }
 
         /// <summary>
         /// Liste mit IDs der referenzierten Netzlokationen
@@ -41,7 +41,7 @@ namespace BO4E.BO
         [JsonPropertyName("netzlokationen")]
         [JsonPropertyOrder(13)]
         [ProtoMember(13)]
-        public string[]? Netzlokationen { get; set; }
+        public Netzlokation[]? Netzlokationen { get; set; }
 
         /// <summary>
         /// Liste mit IDs der referenzierten technischen Ressourcen
@@ -50,7 +50,7 @@ namespace BO4E.BO
         [JsonPropertyName("technischeRessourcen")]
         [JsonPropertyOrder(14)]
         [ProtoMember(14)]
-        public string[]? TechnischeRessourcen { get; set; }
+        public TechnischeRessource[]? TechnischeRessourcen { get; set; }
 
         /// <summary>
         /// Liste mit IDs der referenzierten steuerbaren Ressourcen
@@ -59,7 +59,7 @@ namespace BO4E.BO
         [JsonPropertyName("steuerbareRessourcen")]
         [JsonPropertyOrder(15)]
         [ProtoMember(15)]
-        public string[]? SteuerebareRessourcen { get; set; }
+        public SteuerbareRessource[]? SteuerebareRessourcen { get; set; }
 
         /// <summary>
         /// Zeitspanne der Gültigkeit
@@ -70,25 +70,26 @@ namespace BO4E.BO
         [ProtoMember(16)]
         // Instead of COM.Zeitspanne (bo4e-python)
         public Zeitraum[]? Gueltigkeit { get; set; }
+        
 
         /// <summary>
-        /// Angabe einer arithmetischen Operation
+        /// Verknüpfungsrichtung z.B. Malo-Melo
         /// </summary>
-        [JsonProperty(Required = Required.Default, Order = 17, PropertyName = "arithmetik")]
-        [JsonPropertyName("arithmetik")]
+        [JsonProperty(Required = Required.Default, Order = 17, PropertyName = "zuordnungstyp")]
+        [JsonPropertyName("zuordnungstyp")]
         [JsonPropertyOrder(17)]
         [ProtoMember(17)]
-        public ArithmetischeOperation[]? Arithmetik { get; set; }
-
+        public string? Zuordnungstyp { get; set; }
+        
         /// <summary>
-        /// Code, der angibt wie die Lokationsbündelstruktur zusammengesetzt ist
+        /// Code, der angibt wie die Lokationsbündelstruktur zusammengesetzt ist (zu finden unter "Codeliste der Lokationsbündelstrukturen" auf https://www.edi-energy.de/index.php?id=38)
         /// </summary>
-        [JsonProperty(Required = Required.Default, Order = 18, PropertyName = "zuordnungstyp")]
-        [JsonPropertyName("zuordnungstyp")]
+        [JsonProperty(Required = Required.Default, Order = 18, PropertyName = "lokationsbuendelcode")]
+        [JsonPropertyName("lokationsbuendelcode")]
         [JsonPropertyOrder(18)]
         [ProtoMember(18)]
         [BoKey]
-        public string? Zuordnungstyp { get; set; }
+        public string? LokationsbuendelCode { get; set; }
 
     }
 }
