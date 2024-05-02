@@ -70,7 +70,7 @@ namespace BO4E.BO
         [ProtoMember(16)]
         // Instead of COM.Zeitspanne (bo4e-python)
         public Zeitraum[]? Gueltigkeit { get; set; }
-        
+
 
         /// <summary>
         /// Verknüpfungsrichtung z.B. Malo-Melo
@@ -80,7 +80,7 @@ namespace BO4E.BO
         [JsonPropertyOrder(17)]
         [ProtoMember(17)]
         public string? Zuordnungstyp { get; set; }
-        
+
         /// <summary>
         /// Code, der angibt wie die Lokationsbündelstruktur zusammengesetzt ist (zu finden unter "Codeliste der Lokationsbündelstrukturen" auf https://www.edi-energy.de/index.php?id=38)
         /// </summary>
