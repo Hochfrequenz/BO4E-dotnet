@@ -4,6 +4,7 @@ using System.IO;
 using System.Text.Json;
 using BO4E;
 using BO4E.BO;
+using BO4E.COM;
 using BO4E.ENUM;
 using BO4E.meta.LenientConverters;
 using FluentAssertions;
@@ -202,6 +203,60 @@ namespace TestBO4E
         private class Bar
         {
             public string FooBar;
+        }
+
+        [TestMethod]
+        public void TestBusinessObjectHasAmbiguousUserProperties()
+        {
+            var zaehlerWithAmbiguousProperties = new Zaehler()
+            {
+                Zaehlergroesse = Geraetemerkmal.GAS_G6,
+                UserProperties = new Dictionary<string, object>
+                {
+                    {"zaehlergroesse", "Foo"},
+                    {"BoTyp", "Dei Mudder"}
+                }
+            };
+            zaehlerWithAmbiguousProperties.HasAmbiguousUserProperties().Should().BeTrue();
+            zaehlerWithAmbiguousProperties.GetAmbiguousUserPropertiesKeys().Should()
+                .Contain("zaehlergroesse")
+                .And.Contain("BoTyp")
+                .And.HaveCount(2);
+
+            var zaehlerWithoutAmbiguousProperties = new Zaehler()
+            {
+                Zaehlergroesse = Geraetemerkmal.GAS_G6,
+                UserProperties = new Dictionary<string, object> { { "foo", "bar" } }
+            };
+            zaehlerWithoutAmbiguousProperties.HasAmbiguousUserProperties().Should().BeFalse();
+            zaehlerWithoutAmbiguousProperties.GetAmbiguousUserPropertiesKeys().Should().BeEmpty();
+        }
+
+        [TestMethod]
+        public void TestComHasAmbiguousUserProperties()
+        {
+            var adresseWithAmbiguousProperties = new Adresse()
+            {
+                Hausnummer = "17",
+                UserProperties = new Dictionary<string, object>
+                {
+                    {"Hausnummer", 423},
+                    {"Postleitzahl", "foobar"},
+                }
+            };
+            adresseWithAmbiguousProperties.HasAmbiguousUserProperties().Should().BeTrue();
+            adresseWithAmbiguousProperties.GetAmbiguousUserPropertiesKeys().Should()
+                .Contain("Hausnummer")
+                .And.Contain("Postleitzahl")
+                .And.HaveCount(2);
+
+            var adresseWithoutAmbiguousProperties = new Adresse()
+            {
+                Hausnummer = "17",
+                UserProperties = new Dictionary<string, object> { { "foo", "bar" } }
+            };
+            adresseWithoutAmbiguousProperties.HasAmbiguousUserProperties().Should().BeFalse();
+            adresseWithAmbiguousProperties.GetAmbiguousUserPropertiesKeys().Should().BeEmpty();
         }
     }
 }
