@@ -219,6 +219,8 @@ namespace BO4E.BO
         /// This method allows APIs to reject requests which could lead to seemingly inconsistent data.
         /// The 'zaehlergroesse' user property is the opposite of strongly typed.
         /// Users can send anything as value but other components might misinterpret the value as the value of the regular property.
+        /// The method does not care about the casing of json properties or keys.
+        /// So "aBcDeF" is considered to be ambiguous (true) when there is a JsonProperty "abcdef".
         /// </remarks>
         public bool HasAmbiguousUserProperties() => GetAmbiguousUserPropertiesKeys().Any();
 
