@@ -8,6 +8,7 @@ using ProtoBuf;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Text.Json.Serialization;
 
 namespace BO4E.COM
@@ -142,6 +143,41 @@ namespace BO4E.COM
         [DataCategory(DataCategory.USER_PROPERTIES)]
         [JsonPropertyOrder(2)]
         public IDictionary<string, object>? UserProperties { get; set; }
+
+        /// <summary>
+        /// true iff any of the keys in <see cref="UserProperties"/> is the same as a property name of the class itself.
+        /// Example:
+        /// The COM Adresse has a _regular_ property 'hausnummer', typed as string.
+        /// If there is an entry in UserProperties that has the key 'hausnummer' or 'Hausnummer', this method will return true.
+        /// </summary>
+        /// <remarks>
+        /// This method allows APIs to reject requests which could lead to seemingly inconsistent data.
+        /// The 'hausnummer' user property is the opposite of strongly typed.
+        /// Users can send anything as value but other components might misinterpret the value as the value of the regular property.
+        /// </remarks>
+        public bool HasAmbiguousUserProperties() => GetAmbiguousUserPropertiesKeys().Any();
+
+        /// <summary>
+        /// returns those keys that match a property name of the class itself; See <see cref="HasAmbiguousUserProperties"/> for details.
+        /// </summary>
+        /// <returns></returns>
+        public List<string> GetAmbiguousUserPropertiesKeys()
+        {
+            if (UserProperties == null || !UserProperties.Any())
+            {
+                return new List<string>();
+            }
+            var regularPropertyNames = GetType().GetProperties()
+                .Where(p => p.GetCustomAttribute<JsonPropertyNameAttribute>() != null)
+                .Select(p => p.GetCustomAttribute<JsonPropertyNameAttribute>().Name)
+                .Select(x => x.ToLower())
+                .ToHashSet();
+            var result = UserProperties
+                .Keys
+                .Where(k => regularPropertyNames.Contains(k.ToLower()))
+                .ToList();
+            return result;
+        }
 
         /// <inheritdoc cref="BO4E.BO.BusinessObject.IsValid" />
         public virtual bool IsValid()
