@@ -256,7 +256,7 @@ namespace TestBO4E
                 UserProperties = new Dictionary<string, object> { { "foo", "bar" } }
             };
             adresseWithoutAmbiguousProperties.HasAmbiguousUserProperties().Should().BeFalse();
-            adresseWithAmbiguousProperties.GetAmbiguousUserPropertiesKeys().Should().BeEmpty();
+            adresseWithoutAmbiguousProperties.GetAmbiguousUserPropertiesKeys().Should().BeEmpty();
         }
     }
 }
