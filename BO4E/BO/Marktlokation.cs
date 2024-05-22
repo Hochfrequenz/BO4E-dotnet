@@ -409,7 +409,7 @@ namespace BO4E.BO
         /// </summary>
         [JsonProperty(
             Required = Required.Default,
-            Order = 39,
+            Order = 41,
             PropertyName = "lokationsbuendelObjektcode"
         )]
         [JsonPropertyName("lokationsbuendelObjektcode")]
