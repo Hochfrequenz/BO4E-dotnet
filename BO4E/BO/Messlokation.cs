@@ -1,16 +1,13 @@
-using BO4E.COM;
-using BO4E.ENUM;
-using BO4E.meta;
-
-using Newtonsoft.Json;
-
-using ProtoBuf;
-
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Text.Json.Serialization;
 using System.Text.RegularExpressions;
+using BO4E.COM;
+using BO4E.ENUM;
+using BO4E.meta;
+using Newtonsoft.Json;
+using ProtoBuf;
 
 namespace BO4E.BO
 {
@@ -53,8 +50,7 @@ namespace BO4E.BO
         public Sparte Sparte { get; set; }
 
         ///<summary> Spannungsebene der Messung. <seealso cref="Netzebene" /></summary>
-        [JsonProperty(PropertyName = "netzebeneMessung", Required = Required.Default,
-            Order = 12)] //explicitly set NOT required.
+        [JsonProperty(PropertyName = "netzebeneMessung", Required = Required.Default, Order = 12)] //explicitly set NOT required.
         [JsonPropertyName("netzebeneMessung")]
         [JsonPropertyOrder(12)]
         [ProtoMember(6)]
@@ -72,7 +68,11 @@ namespace BO4E.BO
         ///     Messlokation zuständig ist.( Dieser ist immer dann Messstellenbetreiber, wenn
         ///     kein anderer MSB die Einrichtungen an der Messlokation betreibt.)
         /// </summary>
-        [JsonProperty(PropertyName = "grundzustaendigerMSBCodeNr", Required = Required.Default, Order = 14)]
+        [JsonProperty(
+            PropertyName = "grundzustaendigerMSBCodeNr",
+            Required = Required.Default,
+            Order = 14
+        )]
         [JsonPropertyOrder(14)]
         [JsonPropertyName("grundzustaendigerMSBCodeNr")]
         [ProtoMember(8)]
@@ -84,23 +84,26 @@ namespace BO4E.BO
         ///     Messstellenbetreiber, wenn kein anderer MSB die Einrichtungen an der
         ///     Messlokation betreibt.)
         /// </summary>
-        [JsonProperty(PropertyName = "grundzustaendigerMSBIMCodeNr", Required = Required.Default, Order = 15)]
+        [JsonProperty(
+            PropertyName = "grundzustaendigerMSBIMCodeNr",
+            Required = Required.Default,
+            Order = 15
+        )]
         [JsonPropertyOrder(15)]
         [JsonPropertyName("grundzustaendigerMSBIMCodeNr")]
         [ProtoMember(9)]
-        public string?
-            GrundzustaendigerMSBIMCodeNr
-        {
-            get;
-            set;
-        } // grundzustaendigerMSB_IMCodenr;  https://github.com/Hochfrequenz/energy-service-hub/issues/11
+        public string? GrundzustaendigerMSBIMCodeNr { get; set; } // grundzustaendigerMSB_IMCodenr;  https://github.com/Hochfrequenz/energy-service-hub/issues/11
 
         /// <summary>
         ///     Codenummer des Messdienstleisters, der für diese Messlokation zuständig
         ///     ist.( Dieser ist immer dann Messdienstleister, wenn kein anderer MDL die
         ///     Messlokation abliest.)
         /// </summary>
-        [JsonProperty(PropertyName = "grundzustaendigerMDLCodeNr", Order = 16, Required = Required.Default)]
+        [JsonProperty(
+            PropertyName = "grundzustaendigerMDLCodeNr",
+            Order = 16,
+            Required = Required.Default
+        )]
         [JsonPropertyOrder(16)]
         [JsonPropertyName("grundzustaendigerMDLCodeNr")]
 #pragma warning disable CS0618 // Type or member is obsolete
@@ -143,7 +146,11 @@ namespace BO4E.BO
         ///     eine Adresse oder eine GeoKoordinate oder eine Katasteradresse.
         /// </summary>
         /// */
-        [JsonProperty(PropertyName = "katasterinformation", Required = Required.Default, Order = 19)]
+        [JsonProperty(
+            PropertyName = "katasterinformation",
+            Required = Required.Default,
+            Order = 19
+        )]
         [JsonPropertyOrder(19)]
         [JsonPropertyName("katasterinformation")]
         [ProtoMember(13)]
@@ -165,7 +172,11 @@ namespace BO4E.BO
         public List<Dienstleistung>? Messdienstleistung { get; set; }
 
         /// <summary> Zähler, die zu dieser Messlokation gehören. Details</summary>
-        [JsonProperty(PropertyName = "messlokationszaehler", Required = Required.Default, Order = 22)]
+        [JsonProperty(
+            PropertyName = "messlokationszaehler",
+            Required = Required.Default,
+            Order = 22
+        )]
         [JsonPropertyOrder(22)]
         [JsonPropertyName("messlokationszaehler")]
         [ProtoMember(16)]
@@ -174,7 +185,11 @@ namespace BO4E.BO
         /// <summary>
         ///     <see cref="Marktlokation.Bilanzierungsmethode" />
         /// </summary>
-        [JsonProperty(PropertyName = "bilanzierungsmethode", Required = Required.Default, Order = 23)]
+        [JsonProperty(
+            PropertyName = "bilanzierungsmethode",
+            Required = Required.Default,
+            Order = 23
+        )]
         [JsonPropertyOrder(23)]
         [JsonPropertyName("bilanzierungsmethode")]
         [ProtoMember(17)]
@@ -184,7 +199,11 @@ namespace BO4E.BO
         ///     Dieser Wert ist true, falls die Abrechnungs des Messstellenbetriebs die Netznutzungsabrechnung enthält. false
         ///     andernfalls
         /// </summary>
-        [JsonProperty(PropertyName = "abrechnungmessstellenbetriebnna", Required = Required.Default, Order = 24)]
+        [JsonProperty(
+            PropertyName = "abrechnungmessstellenbetriebnna",
+            Required = Required.Default,
+            Order = 24
+        )]
         [JsonPropertyOrder(24)]
         [JsonPropertyName("abrechnungmessstellenbetriebnna")]
         [ProtoMember(1018)]
@@ -204,8 +223,12 @@ namespace BO4E.BO
         /// <summary>
         ///     gasqualitaet für EDIFACT mapping
         /// </summary>
-        [JsonProperty(PropertyName = "gasqualitaet", Required = Required.Default, Order = 26,
-            NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty(
+            PropertyName = "gasqualitaet",
+            Required = Required.Default,
+            Order = 26,
+            NullValueHandling = NullValueHandling.Ignore
+        )]
         [JsonPropertyName("gasqualitaet")]
         [JsonPropertyOrder(26)]
         [ProtoMember(1020)]
@@ -234,12 +257,15 @@ namespace BO4E.BO
         [NonOfficial(NonOfficialCategory.CUSTOMER_REQUIREMENTS)]
         public List<Zaehlwerk>? Zaehlwerke { get; set; }
 
-
         /// <summary>
         ///     gasqualitaet für EDIFACT mapping
         /// </summary>
-        [JsonProperty(PropertyName = "betriebszustand", Required = Required.Default, Order = 29,
-            NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty(
+            PropertyName = "betriebszustand",
+            Required = Required.Default,
+            Order = 29,
+            NullValueHandling = NullValueHandling.Ignore
+        )]
         [JsonPropertyName("betriebszustand")]
         [JsonPropertyOrder(29)]
         [ProtoMember(1023)]
@@ -248,13 +274,27 @@ namespace BO4E.BO
 
         /// <summary>
         ///   Zugeordnete Messprodukte
-        /// </summary>        
+        /// </summary>
         [JsonProperty(Required = Required.Default, Order = 30, PropertyName = "messprodukte")]
         [JsonPropertyName("messprodukte")]
         [ProtoMember(1024)]
         [JsonPropertyOrder(30)]
         [NonOfficial(NonOfficialCategory.CUSTOMER_REQUIREMENTS)]
         public List<Messprodukt>? Messprodukte { get; set; }
+
+        /// <summary>
+        /// Lokationsbuendel Code, der die Funktion dieses BOs an der Lokationsbuendelstruktur beschreibt.
+        /// </summary>
+        [JsonProperty(
+            Required = Required.Default,
+            Order = 31,
+            PropertyName = "lokationsbuendelObjektcode"
+        )]
+        [JsonPropertyName("lokationsbuendelObjektcode")]
+        [ProtoMember(1025)]
+        [JsonPropertyOrder(31)]
+        [NonOfficial(NonOfficialCategory.CUSTOMER_REQUIREMENTS)]
+        public string? LokationsbuendelObjektcode { get; set; }
 
         /// <summary>
         ///     Test if a <paramref name="id" /> is a valid messlokations ID.

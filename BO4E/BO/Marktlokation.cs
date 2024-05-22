@@ -1,17 +1,14 @@
-using BO4E.COM;
-using BO4E.EnergyIdentificationCodes;
-using BO4E.ENUM;
-using BO4E.meta;
-
-using Newtonsoft.Json;
-
-using ProtoBuf;
-
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Text.Json.Serialization;
 using System.Text.RegularExpressions;
+using BO4E.COM;
+using BO4E.EnergyIdentificationCodes;
+using BO4E.ENUM;
+using BO4E.meta;
+using Newtonsoft.Json;
+using ProtoBuf;
 
 namespace BO4E.BO
 {
@@ -31,7 +28,8 @@ namespace BO4E.BO
         /// </summary>
         //[Newtonsoft.Json.JsonIgnore]
         [System.Text.Json.Serialization.JsonIgnore]
-        protected static readonly Regex RegexValidate = new(@"^[1-9][\d]{10}$", RegexOptions.Compiled);
+        protected static readonly Regex RegexValidate =
+            new(@"^[1-9][\d]{10}$", RegexOptions.Compiled);
 
         /// <summary>
         ///     Regular Expression to check if a string consists only of numbers (is numeric)
@@ -68,7 +66,11 @@ namespace BO4E.BO
         public Energierichtung? Energierichtung { get; set; }
 
         /// <summary>Kennzeichnung, ob Energie eingespeist oder entnommen (ausgespeist) wird.</summary>
-        [JsonProperty(Required = Required.Default, Order = 13, PropertyName = "bilanzierungsmethode")]
+        [JsonProperty(
+            Required = Required.Default,
+            Order = 13,
+            PropertyName = "bilanzierungsmethode"
+        )]
         [JsonPropertyName("bilanzierungsmethode")]
         [JsonPropertyOrder(13)]
         [ProtoMember(7)]
@@ -104,7 +106,11 @@ namespace BO4E.BO
         ///     Codenummer des Netzbetreibers, an dessen Netz diese Marktlokation
         ///     angeschlossen ist.
         /// </summary>
-        [JsonProperty(PropertyName = "netzbetreiberCodeNr", Required = Required.Default, Order = 17)]
+        [JsonProperty(
+            PropertyName = "netzbetreiberCodeNr",
+            Required = Required.Default,
+            Order = 17
+        )]
         [JsonPropertyOrder(17)]
         [JsonPropertyName("netzbetreiberCodeNr")]
         [ProtoMember(11)]
@@ -126,14 +132,22 @@ namespace BO4E.BO
         public string? NetzgebietNr { get; set; }
 
         /// <summary>Bilanzierungsgebiet, dem das Netzgebiet zugeordnet ist - im Falle eines Strom Netzes.</summary>
-        [JsonProperty(Required = Required.Default, Order = 20, PropertyName = "bilanzierungsgebiet")]
+        [JsonProperty(
+            Required = Required.Default,
+            Order = 20,
+            PropertyName = "bilanzierungsgebiet"
+        )]
         [JsonPropertyOrder(20)]
         [JsonPropertyName("bilanzierungsgebiet")]
         [ProtoMember(14)]
         public string? Bilanzierungsgebiet { get; set; }
 
         /// <summary>CodeNummer des Grundversorgers, der für diese Marktlokation zuständig ist.</summary>
-        [JsonProperty(PropertyName = "grundversorgerCodeNr", Order = 21, Required = Required.Default)]
+        [JsonProperty(
+            PropertyName = "grundversorgerCodeNr",
+            Order = 21,
+            Required = Required.Default
+        )]
         [JsonPropertyOrder(21)]
         [JsonPropertyName("grundversorgerCodeNr")]
         [ProtoMember(15)]
@@ -151,8 +165,12 @@ namespace BO4E.BO
         public Gasqualitaet? Gasqualitaet { get; set; }
 
         /// <summary>Link zum Geschäftspartner, dem diese Marktlokation gehört.</summary>
-        [JsonProperty(Required = Required.Default, Order = 23, NullValueHandling = NullValueHandling.Ignore,
-            PropertyName = "endkunde")]
+        [JsonProperty(
+            Required = Required.Default,
+            Order = 23,
+            NullValueHandling = NullValueHandling.Ignore,
+            PropertyName = "endkunde"
+        )]
         [JsonPropertyOrder(23)]
         [JsonPropertyName("endkunde")]
         [ProtoMember(17)]
@@ -184,7 +202,11 @@ namespace BO4E.BO
         ///     Flurstück erfolgen. <seealso cref="Katasteradresse" />
         /// </summary>
         [DataCategory(DataCategory.ADDRESS)]
-        [JsonProperty(Required = Required.Default, Order = 26, PropertyName = "katasterinformation")]
+        [JsonProperty(
+            Required = Required.Default,
+            Order = 26,
+            PropertyName = "katasterinformation"
+        )]
         [JsonPropertyOrder(26)]
         [JsonPropertyName("katasterinformation")]
         [ProtoMember(20)]
@@ -248,13 +270,16 @@ namespace BO4E.BO
         /// <summary>
         ///     Liste der Zählwerke der beteiligten Martrolle
         /// </summary>
-        [JsonProperty(Required = Required.Default, Order = 32, PropertyName = "zaehlwerkeBeteiligteMarktrolle")]
+        [JsonProperty(
+            Required = Required.Default,
+            Order = 32,
+            PropertyName = "zaehlwerkeBeteiligteMarktrolle"
+        )]
         [JsonPropertyName("zaehlwerkeBeteiligteMarktrolle")]
         [ProtoMember(1026)]
         [JsonPropertyOrder(32)]
         [NonOfficial(NonOfficialCategory.CUSTOMER_REQUIREMENTS)]
         public List<Zaehlwerk>? ZaehlwerkeBeteiligteMarktrolle { get; set; }
-
 
         /// <summary>
         ///     für EDIFACT mapping
@@ -266,7 +291,8 @@ namespace BO4E.BO
         [ProtoMember(1027)]
         [NonOfficial(NonOfficialCategory.CUSTOMER_REQUIREMENTS)]
         [Obsolete(
-            "Consider if this is really the right place to store the information. I think Energiemenge->energieverbrauch is better suited.")]
+            "Consider if this is really the right place to store the information. I think Energiemenge->energieverbrauch is better suited."
+        )]
         public List<Verbrauch>? Verbrauchsmenge { get; set; }
 
         /// <summary>
@@ -279,8 +305,6 @@ namespace BO4E.BO
         [ProtoMember(1028)]
         [NonOfficial(NonOfficialCategory.CUSTOMER_REQUIREMENTS)]
         public List<Messlokation>? Messlokationen { get; set; }
-
-
 
         /// <summary>Aufzählung der Messlokationen, die zu dieser Marktlokation gehören.</summary>
         /// Es können 3 verschiedene Konstrukte auftreten:
@@ -310,7 +334,11 @@ namespace BO4E.BO
         /// einer Messlokation zum Verbrauch einer Marktlokation beitrögt mit aufgeführt.
         /// Der Standard ist hier die Addition.
         [DataCategory(DataCategory.POD)]
-        [JsonProperty(Required = Required.Default, Order = 35, PropertyName = "zugehoerigeMesslokationen")]
+        [JsonProperty(
+            Required = Required.Default,
+            Order = 35,
+            PropertyName = "zugehoerigeMesslokationen"
+        )]
         [JsonPropertyName("zugehoerigeMesslokationen")]
         [JsonPropertyOrder(35)]
         [ProtoMember(28)]
@@ -319,7 +347,11 @@ namespace BO4E.BO
         /// <summary>
         ///     Messtechnische Einordnung aus der UTILMD (IMS, KME_MME, KEINE_MESSUNG)
         /// </summary>
-        [JsonProperty(Required = Required.Default, Order = 36, PropertyName = "messtechnischeEinordnung")]
+        [JsonProperty(
+            Required = Required.Default,
+            Order = 36,
+            PropertyName = "messtechnischeEinordnung"
+        )]
         [JsonPropertyName("messtechnischeEinordnung")]
         [JsonPropertyOrder(36)]
         [ProtoMember(1029)]
@@ -329,7 +361,11 @@ namespace BO4E.BO
         /// <summary>
         /// Daten für die Prüfung der Netznutzungsabrechnung
         /// </summary>
-        [JsonProperty(Required = Required.Default, Order = 37, PropertyName = "netznutzungsabrechnungsdaten")]
+        [JsonProperty(
+            Required = Required.Default,
+            Order = 37,
+            PropertyName = "netznutzungsabrechnungsdaten"
+        )]
         [JsonPropertyName("netznutzungsabrechnungsdaten")]
         [JsonPropertyOrder(37)]
         [ProtoMember(37)]
@@ -346,7 +382,7 @@ namespace BO4E.BO
 
         /// <summary>
         ///   Zugeordnete Messprodukte
-        /// </summary>        
+        /// </summary>
         [JsonProperty(Required = Required.Default, Order = 39, PropertyName = "messprodukte")]
         [JsonPropertyName("messprodukte")]
         [ProtoMember(1039)]
@@ -356,13 +392,31 @@ namespace BO4E.BO
 
         /// <summary>
         /// Produkt-Daten der Marktlokation
-        /// </summary>        
-        [JsonProperty(Required = Required.Default, Order = 40, PropertyName = "konfigurationsprodukte")]
+        /// </summary>
+        [JsonProperty(
+            Required = Required.Default,
+            Order = 40,
+            PropertyName = "konfigurationsprodukte"
+        )]
         [JsonPropertyName("konfigurationsprodukte")]
         [ProtoMember(40)]
         [JsonPropertyOrder(40)]
         [NonOfficial(NonOfficialCategory.CUSTOMER_REQUIREMENTS)]
         public List<Konfigurationsprodukt>? Konfigurationsprodukte { get; set; }
+
+        /// <summary>
+        /// Lokationsbuendel Code, der die Funktion dieses BOs an der Lokationsbuendelstruktur beschreibt.
+        /// </summary>
+        [JsonProperty(
+            Required = Required.Default,
+            Order = 39,
+            PropertyName = "lokationsbuendelObjektcode"
+        )]
+        [JsonPropertyName("lokationsbuendelObjektcode")]
+        [ProtoMember(41)]
+        [JsonPropertyOrder(41)]
+        [NonOfficial(NonOfficialCategory.CUSTOMER_REQUIREMENTS)]
+        public string? LokationsbuendelObjektcode { get; set; }
 
         /// <summary>
         ///     Test if a <paramref name="id" /> is a valid Marktlokations ID.
@@ -371,8 +425,10 @@ namespace BO4E.BO
         /// <returns></returns>
         public static bool ValidateId(string id)
         {
-            if (string.IsNullOrWhiteSpace(id)) return false;
-            if (!RegexValidate.IsMatch(id)) return false;
+            if (string.IsNullOrWhiteSpace(id))
+                return false;
+            if (!RegexValidate.IsMatch(id))
+                return false;
             var expectedChecksum = GetChecksum(id);
             var actualChecksum = id.Substring(10, 1);
             return actualChecksum == expectedChecksum;
@@ -391,12 +447,17 @@ namespace BO4E.BO
         public static string GetChecksum(string input)
         {
             if (string.IsNullOrWhiteSpace(input))
-                throw new ArgumentException($"Input '{nameof(input)}' must not be empty but was '{input}'");
+                throw new ArgumentException(
+                    $"Input '{nameof(input)}' must not be empty but was '{input}'"
+                );
             if (input.Length is < 10 or > 11)
                 throw new ArgumentException(
-                    $"Input '{nameof(input)}' must be a string with length 10 (to generate the checksum) or 11 (to validate the checksum).");
+                    $"Input '{nameof(input)}' must be a string with length 10 (to generate the checksum) or 11 (to validate the checksum)."
+                );
             if (!RegexNumericString.IsMatch(input))
-                throw new ArgumentException($"Input '{nameof(input)}' must be numeric was '{input}'");
+                throw new ArgumentException(
+                    $"Input '{nameof(input)}' must be numeric was '{input}'"
+                );
             var oddChecksum = 0;
             var evenChecksum = 0;
 
@@ -431,12 +492,25 @@ namespace BO4E.BO
         /// <param name="checkRegelZone">check if the <see cref="Regelzone"/> is a German Regelzone if set</param>
         /// <param name="checkBilanzierungsgebiet">check if the <see cref="Bilanzierungsgebiet"/> is a valid German Bilanzierungsgebiet if set</param>
         /// <returns>true if the marktlokation is valid</returns>
-        public bool IsValid(bool checkId = true, bool checkRegelZone = true, bool checkBilanzierungsgebiet = true)
+        public bool IsValid(
+            bool checkId = true,
+            bool checkRegelZone = true,
+            bool checkBilanzierungsgebiet = true
+        )
         {
             return base.IsValid()
-                   && (!checkId || HasValidId())
-                   && (!checkRegelZone || (string.IsNullOrWhiteSpace(Regelzone) || Regelzone.IsGermanControlArea()))
-                   && (!checkBilanzierungsgebiet || (string.IsNullOrWhiteSpace(Bilanzierungsgebiet) || Bilanzierungsgebiet.IsValidBilanzierungsGebietId()));
+                && (!checkId || HasValidId())
+                && (
+                    !checkRegelZone
+                    || (string.IsNullOrWhiteSpace(Regelzone) || Regelzone.IsGermanControlArea())
+                )
+                && (
+                    !checkBilanzierungsgebiet
+                    || (
+                        string.IsNullOrWhiteSpace(Bilanzierungsgebiet)
+                        || Bilanzierungsgebiet.IsValidBilanzierungsGebietId()
+                    )
+                );
         }
     }
 }
