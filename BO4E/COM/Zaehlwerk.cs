@@ -1,13 +1,10 @@
-using BO4E.ENUM;
-using BO4E.meta;
-
-using Newtonsoft.Json;
-
-using ProtoBuf;
-
 using System;
 using System.Collections.Generic;
 using System.Text.Json.Serialization;
+using BO4E.ENUM;
+using BO4E.meta;
+using Newtonsoft.Json;
+using ProtoBuf;
 
 namespace BO4E.COM
 {
@@ -77,7 +74,11 @@ namespace BO4E.COM
         public string? Kennzahl { get; set; }
 
         /// <summary>schwachlastfaehig</summary>
-        [JsonProperty(PropertyName = "schwachlastfaehig", Order = 1010, Required = Required.Default)]
+        [JsonProperty(
+            PropertyName = "schwachlastfaehig",
+            Order = 1010,
+            Required = Required.Default
+        )]
         [JsonPropertyName("schwachlastfaehig")]
         [NonOfficial(NonOfficialCategory.CUSTOMER_REQUIREMENTS)]
         [ProtoMember(1010)]
@@ -85,7 +86,11 @@ namespace BO4E.COM
         public Schwachlastfaehig? Schwachlastfaehig { get; set; }
 
         /// <summary>Verwendungungszweck der Werte Marktlokation</summary>
-        [JsonProperty(PropertyName = "verwendungszwecke", Order = 1011, Required = Required.Default)]
+        [JsonProperty(
+            PropertyName = "verwendungszwecke",
+            Order = 1011,
+            Required = Required.Default
+        )]
         [JsonPropertyName("verwendungszwecke")]
         [NonOfficial(NonOfficialCategory.CUSTOMER_REQUIREMENTS)]
         [ProtoMember(1011)]
@@ -101,7 +106,11 @@ namespace BO4E.COM
         public Verbrauchsart? Verbrauchsart { get; set; }
 
         /// <summary>Stromverbrauchsart/Unterbrechbarkeit Marktlokation</summary>
-        [JsonProperty(PropertyName = "unterbrechbarkeit", Order = 1013, Required = Required.Default)]
+        [JsonProperty(
+            PropertyName = "unterbrechbarkeit",
+            Order = 1013,
+            Required = Required.Default
+        )]
         [JsonPropertyName("unterbrechbarkeit")]
         [NonOfficial(NonOfficialCategory.CUSTOMER_REQUIREMENTS)]
         [ProtoMember(1013)]
@@ -116,7 +125,11 @@ namespace BO4E.COM
         [JsonPropertyOrder(1014)]
         public Waermenutzung? Waermenutzung { get; set; }
 
-        [JsonProperty(PropertyName = "konzessionsabgabe", Order = 1015, Required = Required.Default)]
+        [JsonProperty(
+            PropertyName = "konzessionsabgabe",
+            Order = 1015,
+            Required = Required.Default
+        )]
         [JsonPropertyName("konzessionsabgabe")]
         [NonOfficial(NonOfficialCategory.CUSTOMER_REQUIREMENTS)]
         [ProtoMember(1015)]
@@ -149,7 +162,11 @@ namespace BO4E.COM
         // Todo @hamid: add a docstring
         public int? Nachkommastelle { get; set; }
 
-        [JsonProperty(PropertyName = "abrechnungsrelevant", Order = 1019, Required = Required.Default)]
+        [JsonProperty(
+            PropertyName = "abrechnungsrelevant",
+            Order = 1019,
+            Required = Required.Default
+        )]
         [JsonPropertyName("abrechnungsrelevant")]
         [NonOfficial(NonOfficialCategory.CUSTOMER_REQUIREMENTS)]
         [ProtoMember(1019)]
@@ -181,6 +198,20 @@ namespace BO4E.COM
         [JsonPropertyOrder(1022)]
         public string? Konfiguration { get; set; }
 
+        /// <summary>
+        /// Art der E-Mobilität
+        /// Das Segment dient dazu, im Falle der E-Mobilität eine genauere Angabe über die Art der E-Mobilität zu definieren.
+        /// Beispiel: CAV+Z87'
+        ///     ZE6: Wallbox: An der Marktlokation ist eine nicht öffentlliche Lademöglichkeit vorhanden
+        ///     Z87: E-Mobilitätsladesäule: Es handelt sich um eine öffentliche Ladesäule mit ggf. mehreren Ladeanschlüssen an der Marktlokation.
+        ///     ZE7: Ladepark: Es handelt sich um mehr als eine öffentliche Ladesäule an der Marktlokation
+        /// </summary>
+        [JsonProperty(PropertyName = "emobilitaetsart", Required = Required.Default, Order = 1023)]
+        [JsonPropertyOrder(1023)]
+        [JsonPropertyName("emobilitaetsart")]
+        [NonOfficial(NonOfficialCategory.MISSING)]
+        [ProtoMember(1023)]
+        public EMobilitaetsart? EMobilitaetsart { get; set; }
 
 #pragma warning restore CS1591 // Missing XML comment for publicly visible type or member
     }

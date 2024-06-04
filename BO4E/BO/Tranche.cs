@@ -1,18 +1,15 @@
-using BO4E.COM;
-using BO4E.EnergyIdentificationCodes;
-using BO4E.ENUM;
-using BO4E.meta;
-
-using Newtonsoft.Json;
-
-using ProtoBuf;
-
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Runtime.ConstrainedExecution;
 using System.Text.Json.Serialization;
 using System.Text.RegularExpressions;
+using BO4E.COM;
+using BO4E.EnergyIdentificationCodes;
+using BO4E.ENUM;
+using BO4E.meta;
+using Newtonsoft.Json;
+using ProtoBuf;
 
 namespace BO4E.BO
 {
@@ -59,5 +56,14 @@ namespace BO4E.BO
         [JsonPropertyName("obisKennzahl")]
         [ProtoMember(7)]
         public string? ObisKennzahl { get; set; }
+
+        /// <summary>
+        ///     Zugeordnete Marktpartner
+        /// </summary>
+        [JsonProperty(Required = Required.Default, Order = 14, PropertyName = "marktrollen")]
+        [JsonPropertyName("marktrollen")]
+        [JsonPropertyOrder(14)]
+        [ProtoMember(8)]
+        public List<MarktpartnerDetails>? Marktrollen { get; set; }
     }
 }
