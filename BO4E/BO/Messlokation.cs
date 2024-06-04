@@ -283,7 +283,7 @@ namespace BO4E.BO
         public List<Messprodukt>? Messprodukte { get; set; }
 
         /// <summary>
-        /// Lokationszuordnung, um bspw. die zugehörigen Messlokationen anzugeben
+        /// Lokationszuordnung, um bspw. die zugehörigen Marktlokationen anzugeben
         /// </summary>
         [JsonProperty(
             Required = Required.Default,
