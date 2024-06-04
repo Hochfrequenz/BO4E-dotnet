@@ -287,7 +287,7 @@ namespace BO4E.BO
         /// </summary>
         [JsonProperty(
             Required = Required.Default,
-            Order = 41,
+            Order = 31,
             PropertyName = "lokationszuordnungen"
         )]
         [JsonPropertyName("lokationszuordnungen")]
@@ -300,7 +300,7 @@ namespace BO4E.BO
         /// </summary>
         [JsonProperty(
             Required = Required.Default,
-            Order = 31,
+            Order = 32,
             PropertyName = "lokationsbuendelObjektcode"
         )]
         [JsonPropertyName("lokationsbuendelObjektcode")]
