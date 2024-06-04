@@ -121,16 +121,29 @@ namespace BO4E.BO
         public ENUM.Marktrolle? EigenschaftMSBLokation { get; set; }
 
         /// <summary>
-        /// Lokationsbuendel Code, der die Funktion dieses BOs an der Lokationsbuendelstruktur beschreibt.
+        /// Lokationszuordnung, um bspw. die zugehörigen Messlokationen anzugeben
         /// </summary>
         [JsonProperty(
             Required = Required.Default,
             Order = 19,
+            PropertyName = "lokationszuordnungen"
+        )]
+        [JsonPropertyName("lokationszuordnungen")]
+        [ProtoMember(13)]
+        [JsonPropertyOrder(19)]
+        public Lokationszuordnung[]? Lokationszuordnungen { get; set; }
+
+        /// <summary>
+        /// Lokationsbuendel Code, der die Funktion dieses BOs an der Lokationsbuendelstruktur beschreibt.
+        /// </summary>
+        [JsonProperty(
+            Required = Required.Default,
+            Order = 20,
             PropertyName = "lokationsbuendelObjektcode"
         )]
         [JsonPropertyName("lokationsbuendelObjektcode")]
-        [ProtoMember(13)]
-        [JsonPropertyOrder(19)]
+        [ProtoMember(14)]
+        [JsonPropertyOrder(20)]
         [NonOfficial(NonOfficialCategory.CUSTOMER_REQUIREMENTS)]
         public string? LokationsbuendelObjektcode { get; set; }
     }

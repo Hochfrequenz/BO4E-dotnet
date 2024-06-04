@@ -213,16 +213,29 @@ namespace BO4E.BO
         public Speicherart? Speicherart { get; set; }
 
         /// <summary>
-        /// Lokationsbuendel Code, der die Funktion dieses BOs an der Lokationsbuendelstruktur beschreibt.
+        /// Lokationszuordnung, um bspw. die zugehörigen Messlokationen anzugeben
         /// </summary>
         [JsonProperty(
             Required = Required.Default,
             Order = 23,
+            PropertyName = "lokationszuordnungen"
+        )]
+        [JsonPropertyName("lokationszuordnungen")]
+        [ProtoMember(23)]
+        [JsonPropertyOrder(23)]
+        public Lokationszuordnung[]? Lokationszuordnungen { get; set; }
+
+        /// <summary>
+        /// Lokationsbuendel Code, der die Funktion dieses BOs an der Lokationsbuendelstruktur beschreibt.
+        /// </summary>
+        [JsonProperty(
+            Required = Required.Default,
+            Order = 24,
             PropertyName = "lokationsbuendelObjektcode"
         )]
         [JsonPropertyName("lokationsbuendelObjektcode")]
-        [ProtoMember(23)]
-        [JsonPropertyOrder(23)]
+        [ProtoMember(24)]
+        [JsonPropertyOrder(24)]
         [NonOfficial(NonOfficialCategory.CUSTOMER_REQUIREMENTS)]
         public string? LokationsbuendelObjektcode { get; set; }
     }

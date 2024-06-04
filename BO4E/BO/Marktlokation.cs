@@ -405,17 +405,29 @@ namespace BO4E.BO
         public List<Konfigurationsprodukt>? Konfigurationsprodukte { get; set; }
 
         /// <summary>
-        /// Lokationsbuendel Code, der die Funktion dieses BOs an der Lokationsbuendelstruktur beschreibt.
+        /// Lokationszuordnung, um bspw. die zugehörigen Messlokationen anzugeben
         /// </summary>
         [JsonProperty(
             Required = Required.Default,
             Order = 41,
+            PropertyName = "lokationszuordnungen"
+        )]
+        [JsonPropertyName("lokationszuordnungen")]
+        [ProtoMember(41)]
+        [JsonPropertyOrder(41)]
+        public Lokationszuordnung[]? Lokationszuordnungen { get; set; }
+
+        /// <summary>
+        /// Lokationsbuendel Code, der die Funktion dieses BOs an der Lokationsbuendelstruktur beschreibt.
+        /// </summary>
+        [JsonProperty(
+            Required = Required.Default,
+            Order = 42,
             PropertyName = "lokationsbuendelObjektcode"
         )]
         [JsonPropertyName("lokationsbuendelObjektcode")]
-        [ProtoMember(41)]
-        [JsonPropertyOrder(41)]
-        [NonOfficial(NonOfficialCategory.CUSTOMER_REQUIREMENTS)]
+        [ProtoMember(42)]
+        [JsonPropertyOrder(42)]
         public string? LokationsbuendelObjektcode { get; set; }
 
         /// <summary>
