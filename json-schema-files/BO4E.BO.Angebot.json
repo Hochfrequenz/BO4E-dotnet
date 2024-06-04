@@ -1851,6 +1851,114 @@
         "satz"
       ]
     },
+    "Lokationszuordnung": {
+      "type": [
+        "object",
+        "null"
+      ],
+      "properties": {
+        "boTyp": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "versionStruktur": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "timestamp": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "format": "date-time"
+        },
+        "externeReferenzen": {
+          "type": [
+            "array",
+            "null"
+          ],
+          "items": {
+            "$ref": "#/definitions/ExterneReferenz"
+          }
+        },
+        "guid": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "marktlokationen": {
+          "type": [
+            "array",
+            "null"
+          ],
+          "items": {
+            "$ref": "#/definitions/Marktlokation"
+          }
+        },
+        "messlokationen": {
+          "type": [
+            "array",
+            "null"
+          ],
+          "items": {
+            "$ref": "#/definitions/Messlokation"
+          }
+        },
+        "netzlokationen": {
+          "type": [
+            "array",
+            "null"
+          ],
+          "items": {
+            "$ref": "#/definitions/Netzlokation"
+          }
+        },
+        "technischeRessourcen": {
+          "type": [
+            "array",
+            "null"
+          ],
+          "items": {
+            "$ref": "#/definitions/TechnischeRessource"
+          }
+        },
+        "steuerbareRessourcen": {
+          "type": [
+            "array",
+            "null"
+          ],
+          "items": {
+            "$ref": "#/definitions/SteuerbareRessource"
+          }
+        },
+        "gueltigkeit": {
+          "type": [
+            "array",
+            "null"
+          ],
+          "items": {
+            "$ref": "#/definitions/Zeitraum"
+          }
+        },
+        "zuordnungstyp": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "lokationsbuendelcode": {
+          "type": [
+            "string",
+            "null"
+          ]
+        }
+      }
+    },
     "Marktlokation": {
       "type": [
         "object",
@@ -1892,7 +2000,10 @@
           ]
         },
         "marktlokationsId": {
-          "type": "string",
+          "type": [
+            "string",
+            "null"
+          ],
           "default": "|null|"
         },
         "sparte": {
@@ -2172,10 +2283,24 @@
           "items": {
             "$ref": "#/definitions/Konfigurationsprodukt"
           }
+        },
+        "lokationszuordnungen": {
+          "type": [
+            "array",
+            "null"
+          ],
+          "items": {
+            "$ref": "#/definitions/Lokationszuordnung"
+          }
+        },
+        "lokationsbuendelObjektcode": {
+          "type": [
+            "string",
+            "null"
+          ]
         }
       },
       "required": [
-        "marktlokationsId",
         "sparte"
       ]
     },
@@ -2749,6 +2874,21 @@
           "items": {
             "$ref": "#/definitions/Messprodukt"
           }
+        },
+        "lokationszuordnungen": {
+          "type": [
+            "array",
+            "null"
+          ],
+          "items": {
+            "$ref": "#/definitions/Lokationszuordnung"
+          }
+        },
+        "lokationsbuendelObjektcode": {
+          "type": [
+            "string",
+            "null"
+          ]
         }
       },
       "required": [
@@ -2899,6 +3039,140 @@
           ]
         }
       }
+    },
+    "Netzlokation": {
+      "type": [
+        "object",
+        "null"
+      ],
+      "properties": {
+        "boTyp": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "versionStruktur": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "timestamp": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "format": "date-time"
+        },
+        "externeReferenzen": {
+          "type": [
+            "array",
+            "null"
+          ],
+          "items": {
+            "$ref": "#/definitions/ExterneReferenz"
+          }
+        },
+        "guid": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "netzlokationsId": {
+          "type": "string",
+          "default": "|null|"
+        },
+        "sparte": {
+          "type": "string",
+          "enum": [
+            "STROM",
+            "GAS",
+            "FERNWAERME",
+            "NAHWAERME",
+            "WASSER",
+            "ABWASSER"
+          ]
+        },
+        "netzanschlussleistung": {
+          "$ref": "#/definitions/Menge"
+        },
+        "grundzustaendigerMSBCodeNr": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "steuerkanal": {
+          "type": [
+            "boolean",
+            "null"
+          ]
+        },
+        "obisKennzahl": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "verwendungszweck": {
+          "$ref": "#/definitions/Verwendungszweck"
+        },
+        "konfigurationsprodukte": {
+          "type": [
+            "array",
+            "null"
+          ],
+          "items": {
+            "$ref": "#/definitions/Konfigurationsprodukt"
+          }
+        },
+        "eigenschaftMSBLokation": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "enum": [
+            null,
+            "NB",
+            "LF",
+            "MSB",
+            "MDL",
+            "DL",
+            "BKV",
+            "BIKO",
+            "UENB",
+            "KUNDE_SELBST_NN",
+            "MGV",
+            "EIV",
+            "RB",
+            "KUNDE",
+            "INTERESSENT",
+            "GMSB",
+            "AMSB"
+          ]
+        },
+        "lokationszuordnungen": {
+          "type": [
+            "array",
+            "null"
+          ],
+          "items": {
+            "$ref": "#/definitions/Lokationszuordnung"
+          }
+        },
+        "lokationsbuendelObjektcode": {
+          "type": [
+            "string",
+            "null"
+          ]
+        }
+      },
+      "required": [
+        "netzlokationsId",
+        "sparte"
+      ]
     },
     "Netznutzungsabrechnungsdaten": {
       "type": [
@@ -3198,6 +3472,294 @@
             "BASIS_MME",
             "GRUND_ANGABEN_MESSLOKATION",
             "ANFORDERUNG_IN_DIE_VERGANGENHEIT_ZUM_ANGEFORDERTEN_ZEITPUNKT_LIEGT_KEIN_WERT_VOR"
+          ]
+        }
+      }
+    },
+    "SteuerbareRessource": {
+      "type": [
+        "object",
+        "null"
+      ],
+      "properties": {
+        "boTyp": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "versionStruktur": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "timestamp": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "format": "date-time"
+        },
+        "externeReferenzen": {
+          "type": [
+            "array",
+            "null"
+          ],
+          "items": {
+            "$ref": "#/definitions/ExterneReferenz"
+          }
+        },
+        "guid": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "steuerbareRessourceId": {
+          "type": "string",
+          "default": "|null|"
+        },
+        "steuerkanalsLeistungsbeschreibung": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "enum": [
+            null,
+            "AN_AUS",
+            "GESTUFT"
+          ]
+        },
+        "zugeordnetMSBCodeNr": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "konfigurationsprodukte": {
+          "type": [
+            "array",
+            "null"
+          ],
+          "items": {
+            "$ref": "#/definitions/Konfigurationsprodukt"
+          }
+        },
+        "eigenschaftMSBLokation": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "enum": [
+            null,
+            "NB",
+            "LF",
+            "MSB",
+            "MDL",
+            "DL",
+            "BKV",
+            "BIKO",
+            "UENB",
+            "KUNDE_SELBST_NN",
+            "MGV",
+            "EIV",
+            "RB",
+            "KUNDE",
+            "INTERESSENT",
+            "GMSB",
+            "AMSB"
+          ]
+        },
+        "lokationszuordnungen": {
+          "type": [
+            "array",
+            "null"
+          ],
+          "items": {
+            "$ref": "#/definitions/Lokationszuordnung"
+          }
+        },
+        "lokationsbuendelObjektcode": {
+          "type": [
+            "string",
+            "null"
+          ]
+        }
+      },
+      "required": [
+        "steuerbareRessourceId"
+      ]
+    },
+    "TechnischeRessource": {
+      "type": [
+        "object",
+        "null"
+      ],
+      "properties": {
+        "boTyp": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "versionStruktur": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "timestamp": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "format": "date-time"
+        },
+        "externeReferenzen": {
+          "type": [
+            "array",
+            "null"
+          ],
+          "items": {
+            "$ref": "#/definitions/ExterneReferenz"
+          }
+        },
+        "guid": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "technischeRessourceId": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "default": "|null|"
+        },
+        "vorgelagerteMesslokationsId": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "zugeordneteMarktlokationsId": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "zugeordneteSteuerbareRessourceId": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "nennleistungAufnahme": {
+          "$ref": "#/definitions/Menge"
+        },
+        "nennleistungAbgabe": {
+          "$ref": "#/definitions/Menge"
+        },
+        "speicherkapazitaet": {
+          "$ref": "#/definitions/Menge"
+        },
+        "technischeRessourceNutzung": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "enum": [
+            null,
+            "STROMVERBRAUCHSART",
+            "STROMERZEUGUNGSART",
+            "SPEICHER"
+          ]
+        },
+        "verbrauchsart": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "enum": [
+            null,
+            "KRAFT_LICHT",
+            "WAERME",
+            "E_MOBILITAET",
+            "STRASSENBELEUCHTUNG"
+          ]
+        },
+        "waermenutzung": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "enum": [
+            null,
+            "SPEICHERHEIZUNG",
+            "WAERMEPUMPE",
+            "DIREKTHEIZUNG"
+          ]
+        },
+        "emobilitaetsart": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "enum": [
+            null,
+            "WALLBOX",
+            "E_MOBILITAETSLADESAEULE",
+            "LADEPARK"
+          ]
+        },
+        "erzeugungsart": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "enum": [
+            null,
+            "KWK",
+            "WIND",
+            "SOLAR",
+            "KERNKRAFT",
+            "WASSER",
+            "GEOTHERMIE",
+            "BIOMASSE",
+            "KOHLE",
+            "GAS",
+            "SONSTIGE",
+            "SONSTIGE_EEG"
+          ]
+        },
+        "speicherart": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "enum": [
+            null,
+            "WASSERSTOFFSPEICHER",
+            "PUMPSPEICHER",
+            "BATTERIESPEICHER",
+            "SONSTIGE_SPEICHERART"
+          ]
+        },
+        "lokationszuordnungen": {
+          "type": [
+            "array",
+            "null"
+          ],
+          "items": {
+            "$ref": "#/definitions/Lokationszuordnung"
+          }
+        },
+        "lokationsbuendelObjektcode": {
+          "type": [
+            "string",
+            "null"
           ]
         }
       }

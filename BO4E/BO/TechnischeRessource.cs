@@ -1,12 +1,9 @@
 using System.ComponentModel;
 using System.Text.Json.Serialization;
-
 using BO4E.COM;
 using BO4E.ENUM;
 using BO4E.meta;
-
 using Newtonsoft.Json;
-
 using ProtoBuf;
 
 namespace BO4E.BO
@@ -23,7 +20,11 @@ namespace BO4E.BO
         /// </summary>
         /// <remarks>Edi-beispiel: LOC+Z19+C816417ST77'</remarks>
         [DefaultValue("|null|")]
-        [JsonProperty(PropertyName = "technischeRessourceId", Required = Required.Default, Order = 10)]
+        [JsonProperty(
+            PropertyName = "technischeRessourceId",
+            Required = Required.Default,
+            Order = 10
+        )]
         [JsonPropertyName("technischeRessourceId")]
         [JsonPropertyOrder(10)]
         [DataCategory(DataCategory.DEVICE)]
@@ -36,7 +37,11 @@ namespace BO4E.BO
         /// Beispiel:
         /// RFF+Z34:DE00713739359S0000000000001222221'
         /// </summary>
-        [JsonProperty(PropertyName = "vorgelagerteMesslokationsId", Required = Required.Default, Order = 11)]
+        [JsonProperty(
+            PropertyName = "vorgelagerteMesslokationsId",
+            Required = Required.Default,
+            Order = 11
+        )]
         [JsonPropertyName("vorgelagerteMesslokationsId")]
         [JsonPropertyOrder(11)]
         [DataCategory(DataCategory.POD)]
@@ -48,7 +53,11 @@ namespace BO4E.BO
         /// Beispiel:
         /// RFF+Z16:20072281644'
         /// </summary>
-        [JsonProperty(PropertyName = "zugeordneteMarktlokationsId", Required = Required.Default, Order = 12)]
+        [JsonProperty(
+            PropertyName = "zugeordneteMarktlokationsId",
+            Required = Required.Default,
+            Order = 12
+        )]
         [JsonPropertyName("zugeordneteMarktlokationsId")]
         [JsonPropertyOrder(12)]
         [DataCategory(DataCategory.POD)]
@@ -60,7 +69,11 @@ namespace BO4E.BO
         /// Beispiel:
         /// RFF+Z16:20072281644'
         /// </summary>
-        [JsonProperty(PropertyName = "zugeordneteSteuerbareRessourceId", Required = Required.Default, Order = 13)]
+        [JsonProperty(
+            PropertyName = "zugeordneteSteuerbareRessourceId",
+            Required = Required.Default,
+            Order = 13
+        )]
         [JsonPropertyName("zugeordneteSteuerbareRessourceId")]
         [JsonPropertyOrder(13)]
         [DataCategory(DataCategory.POD)]
@@ -71,7 +84,11 @@ namespace BO4E.BO
         /// Nennleistung (Aufnahme)
         /// Beispiel: QTY+Z43:100:KWT'
         /// </summary>
-        [JsonProperty(PropertyName = "nennleistungAufnahme", Required = Required.Default, Order = 14)]
+        [JsonProperty(
+            PropertyName = "nennleistungAufnahme",
+            Required = Required.Default,
+            Order = 14
+        )]
         [JsonPropertyName("nennleistungAufnahme")]
         [JsonPropertyOrder(14)]
         [NonOfficial(NonOfficialCategory.MISSING)]
@@ -107,7 +124,11 @@ namespace BO4E.BO
         ///     Z50: Stromerzeugungsart
         ///     Z56: Speicher
         /// </summary>
-        [JsonProperty(PropertyName = "technischeRessourceNutzung", Required = Required.Default, Order = 17)]
+        [JsonProperty(
+            PropertyName = "technischeRessourceNutzung",
+            Required = Required.Default,
+            Order = 17
+        )]
         [JsonPropertyName("technischeRessourceNutzung")]
         [JsonPropertyOrder(17)]
         [NonOfficial(NonOfficialCategory.MISSING)]
@@ -190,5 +211,32 @@ namespace BO4E.BO
         [NonOfficial(NonOfficialCategory.MISSING)]
         [ProtoMember(22)]
         public Speicherart? Speicherart { get; set; }
+
+        /// <summary>
+        /// Lokationszuordnung, um bspw. die zugehörigen Messlokationen anzugeben
+        /// </summary>
+        [JsonProperty(
+            Required = Required.Default,
+            Order = 23,
+            PropertyName = "lokationszuordnungen"
+        )]
+        [JsonPropertyName("lokationszuordnungen")]
+        [ProtoMember(23)]
+        [JsonPropertyOrder(23)]
+        public Lokationszuordnung[]? Lokationszuordnungen { get; set; }
+
+        /// <summary>
+        /// Lokationsbuendel Code, der die Funktion dieses BOs an der Lokationsbuendelstruktur beschreibt.
+        /// </summary>
+        [JsonProperty(
+            Required = Required.Default,
+            Order = 24,
+            PropertyName = "lokationsbuendelObjektcode"
+        )]
+        [JsonPropertyName("lokationsbuendelObjektcode")]
+        [ProtoMember(24)]
+        [JsonPropertyOrder(24)]
+        [NonOfficial(NonOfficialCategory.CUSTOMER_REQUIREMENTS)]
+        public string? LokationsbuendelObjektcode { get; set; }
     }
 }

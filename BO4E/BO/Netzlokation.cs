@@ -3,13 +3,10 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Runtime.ConstrainedExecution;
 using System.Text.Json.Serialization;
-
 using BO4E.COM;
 using BO4E.ENUM;
 using BO4E.meta;
-
 using Newtonsoft.Json;
-
 using ProtoBuf;
 
 namespace BO4E.BO
@@ -43,7 +40,11 @@ namespace BO4E.BO
         /// <summary>
         /// Netzanschlussleistungsmenge der Netzlokation
         /// </summary>
-        [JsonProperty(Required = Required.Default, Order = 12, PropertyName = "netzanschlussleistung")]
+        [JsonProperty(
+            Required = Required.Default,
+            Order = 12,
+            PropertyName = "netzanschlussleistung"
+        )]
         [JsonPropertyOrder(12)]
         [JsonPropertyName("netzanschlussleistung")]
         [ProtoMember(6)]
@@ -53,14 +54,18 @@ namespace BO4E.BO
         /// Codenummer des grundzuständigen Messstellenbetreibers, der für diese
         /// Netzlokation zuständig ist.
         /// </summary>
-        [JsonProperty(Required = Required.Default, Order = 13, PropertyName = "grundzustaendigerMSBCodeNr")]
+        [JsonProperty(
+            Required = Required.Default,
+            Order = 13,
+            PropertyName = "grundzustaendigerMSBCodeNr"
+        )]
         [JsonPropertyOrder(13)]
         [JsonPropertyName("grundzustaendigerMSBCodeNr")]
         [ProtoMember(7)]
         public string? GrundzustaendigerMSBCodeNr { get; set; }
 
         /// <summary>
-        /// Ob ein Steuerkanal der Netzlokation zugeordnet ist und somit die Netzlokation gesteuert 
+        /// Ob ein Steuerkanal der Netzlokation zugeordnet ist und somit die Netzlokation gesteuert
         /// werden kann.
         /// ZF2: Kein Steuerkanal vorhanden
         /// ZF3: Steuerkanal vorhanden
@@ -89,8 +94,12 @@ namespace BO4E.BO
 
         /// <summary>
         /// Produkt-Daten der Netzlokation
-        /// </summary>        
-        [JsonProperty(Required = Required.Default, Order = 17, PropertyName = "konfigurationsprodukte")]
+        /// </summary>
+        [JsonProperty(
+            Required = Required.Default,
+            Order = 17,
+            PropertyName = "konfigurationsprodukte"
+        )]
         [JsonPropertyName("konfigurationsprodukte")]
         [ProtoMember(11)]
         [JsonPropertyOrder(17)]
@@ -100,11 +109,42 @@ namespace BO4E.BO
         /// <summary>
         /// Eigenschaft des Messstellenbetreiber an der Lokation
         /// </summary>
-        [JsonProperty(Required = Required.Default, Order = 18, PropertyName = "eigenschaftMSBLokation")]
+        [JsonProperty(
+            Required = Required.Default,
+            Order = 18,
+            PropertyName = "eigenschaftMSBLokation"
+        )]
         [JsonPropertyName("eigenschaftMSBLokation")]
         [ProtoMember(12)]
         [JsonPropertyOrder(18)]
         [NonOfficial(NonOfficialCategory.CUSTOMER_REQUIREMENTS)]
         public ENUM.Marktrolle? EigenschaftMSBLokation { get; set; }
+
+        /// <summary>
+        /// Lokationszuordnung, um bspw. die zugehörigen Messlokationen anzugeben
+        /// </summary>
+        [JsonProperty(
+            Required = Required.Default,
+            Order = 19,
+            PropertyName = "lokationszuordnungen"
+        )]
+        [JsonPropertyName("lokationszuordnungen")]
+        [ProtoMember(13)]
+        [JsonPropertyOrder(19)]
+        public Lokationszuordnung[]? Lokationszuordnungen { get; set; }
+
+        /// <summary>
+        /// Lokationsbuendel Code, der die Funktion dieses BOs an der Lokationsbuendelstruktur beschreibt.
+        /// </summary>
+        [JsonProperty(
+            Required = Required.Default,
+            Order = 20,
+            PropertyName = "lokationsbuendelObjektcode"
+        )]
+        [JsonPropertyName("lokationsbuendelObjektcode")]
+        [ProtoMember(14)]
+        [JsonPropertyOrder(20)]
+        [NonOfficial(NonOfficialCategory.CUSTOMER_REQUIREMENTS)]
+        public string? LokationsbuendelObjektcode { get; set; }
     }
 }
