@@ -2,6 +2,7 @@ using BO4E.ENUM;
 
 using System;
 using System.Text.Json;
+using System.Text.RegularExpressions;
 
 namespace BO4E.meta.LenientConverters
 {
@@ -36,11 +37,24 @@ namespace BO4E.meta.LenientConverters
         }
 
         /// <summary>
+        /// https://regex101.com/r/dAUAHL/1
+        /// </summary>
+        private static readonly Regex GasPrefixRegex = new(@"^(?<praefix>(?:GAS_)?)(?<rest>.+)$", RegexOptions.Compiled);
+
+        /// <summary>
         /// <inheritdoc cref="System.Text.Json.Serialization.JsonConverter{T}.Write"/>
         /// </summary>
         public override void Write(Utf8JsonWriter writer, Geraetemerkmal value, JsonSerializerOptions options)
         {
-            throw new NotImplementedException();
+            var stringValue = value.ToString();
+            var match = GasPrefixRegex.Match(stringValue);
+            if (!match.Success)
+            {
+                writer.WriteStringValue(stringValue);
+                return;
+            }
+            var rest = match.Groups["rest"].Value;
+            writer.WriteStringValue(rest);
         }
     }
 
@@ -79,11 +93,32 @@ namespace BO4E.meta.LenientConverters
         }
 
         /// <summary>
+        /// https://regex101.com/r/dAUAHL/1
+        /// </summary>
+        private static readonly Regex GasPrefixRegex = new(@"^(?<praefix>(?:GAS_)?)(?<rest>.+)$", RegexOptions.Compiled);
+
+        /// <summary>
         /// <inheritdoc cref="System.Text.Json.Serialization.JsonConverter{T}.Write"/>
         /// </summary>
         public override void Write(Utf8JsonWriter writer, Geraetemerkmal? value, JsonSerializerOptions options)
         {
-            throw new NotImplementedException();
+            if (value.HasValue)
+            {
+                // Remove the "GAS_" prefix if it exists
+                var stringValue = value.Value.ToString();
+                var match = GasPrefixRegex.Match(stringValue);
+                if (!match.Success)
+                {
+                    writer.WriteStringValue(stringValue);
+                    return;
+                }
+                var rest = match.Groups["rest"].Value;
+                writer.WriteStringValue(rest);
+            }
+            else
+            {
+                writer.WriteNullValue();
+            }
         }
     }
 }
