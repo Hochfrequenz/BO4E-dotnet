@@ -1,16 +1,11 @@
+using System;
+using System.Runtime.ConstrainedExecution;
+using System.Text.Json.Serialization;
 using BO4E.COM;
 using BO4E.ENUM;
 using BO4E.meta;
-
 using Newtonsoft.Json;
-
 using ProtoBuf;
-
-using System;
-using System.Reflection.Metadata.Ecma335;
-using System.Runtime.ConstrainedExecution;
-using System.Text.Json.Serialization;
-
 using Verwendungszweck = BO4E.COM.Verwendungszweck;
 
 namespace BO4E.BO
@@ -18,7 +13,7 @@ namespace BO4E.BO
     /// <summary>
     /// Der NB bzw. LF nutzt Zählzeitdefinitionen für die Tarifierung von Werten.
     /// <remarks>Zaehlzeitdefinitionen werden in der Marktkommunikation mit Prüfidentifikator 25001 (UTILTS) übermittelt</remarks>
-    /// Eine Zählzeitdefinition umfasst dabei eine Liste von möglichen Zählzeiten, 
+    /// Eine Zählzeitdefinition umfasst dabei eine Liste von möglichen Zählzeiten,
     /// den dazugehörigen Registern und der tatsächlich ausgerollten Zählzeit (wenn diese elektronisch übermittelt wird)
     /// </summary>
     [ProtoContract]
@@ -36,6 +31,7 @@ namespace BO4E.BO
             get => Beginndatum?.UtcDateTime ?? DateTime.MinValue;
             set => Beginndatum = DateTime.SpecifyKind(value, DateTimeKind.Utc);
         }
+
         /// <summary>
         /// Der inklusive Zeitpunkt ab dem die Zaehlzeitdefinitionen ausgerollt sind
         /// </summary>
@@ -55,6 +51,7 @@ namespace BO4E.BO
             get => Endedatum?.UtcDateTime ?? DateTime.MinValue;
             set => Endedatum = DateTime.SpecifyKind(value, DateTimeKind.Utc);
         }
+
         /// <summary>
         /// Der exklusive Zeitpunkt bis zu dem die Zaehlzeitdefinitionen ausgerollt sind
         /// </summary>
@@ -74,6 +71,7 @@ namespace BO4E.BO
             get => Version.UtcDateTime;
             set => Version = DateTime.SpecifyKind(value, DateTimeKind.Utc);
         }
+
         /// <summary>
         /// Version der Zählzeitdefinition als Datum
         ///</summary>
@@ -115,12 +113,14 @@ namespace BO4E.BO
         /// <summary>
         /// Liste der ausgerollten Zählzeiten
         /// </summary>
-        [JsonProperty(Required = Required.Always, Order = 12, PropertyName = "ausgerollteZaehlzeiten")]
+        [JsonProperty(
+            Required = Required.Always,
+            Order = 12,
+            PropertyName = "ausgerollteZaehlzeiten"
+        )]
         [JsonPropertyName("ausgerollteZaehlzeiten")]
         [ProtoMember(12)]
         [JsonPropertyOrder(12)]
         public System.Collections.Generic.List<AusgerollteZaehlzeit> AusgerollteZaehlzeiten { get; set; }
-
-
     }
 }

@@ -1089,6 +1089,7 @@ message Messprodukt {
    Zaehlzeitregister Zaehlzeiten = 1021;
    bool ZweiteMessung = 1022;
    bool WerteuebermittlungAnNB = 1023;
+   EMobilitaetsart EMobilitaetsart = 1024;
 }
 enum MesstechnischeEinordnung {
    option (.protobuf_net.enumopt).namespace = "BO4E.ENUM";
@@ -2020,6 +2021,7 @@ message Zaehlwerk {
    int32 AnzahlAblesungen = 1020;
    Zaehlzeitregister Zaehlzeiten = 1021;
    string Konfiguration = 1022;
+   EMobilitaetsart EMobilitaetsart = 1023;
 }
 message Zaehlzeitregister {
    option (.protobuf_net.msgopt).namespace = "BO4E.COM";

@@ -31,11 +31,13 @@ namespace BO4E.meta
         [EnumMember(Value = "REGULATORY_REQUIREMENTS")]
         REGULATORY_REQUIREMENTS,
 
+#pragma warning disable CS0419 // Zweideutige Referenz im cref-Attribut
         /// <summary>
-        ///     an information or field is no longer necessary or outdated (please use <see cref="System.ObsoleteAttribute" />
+        ///     an information or field is no longer necessary or outdated (please use <see cref="ObsoleteAttribute" />
         ///     too). Hochfrequenz favors removal of this field from the official BO4E standard.
         /// </summary>
         [Obsolete("Hochfrequenz favours the removal of this field/property from BO4E.")]
+#pragma warning restore CS0419 // Zweideutige Referenz im cref-Attribut
         [EnumMember(Value = "PROPOSED_DELETION")]
         PROPOSED_DELETION,
 
