@@ -1,8 +1,7 @@
-using BO4E.ENUM;
-
-using Newtonsoft.Json;
-
 using System;
+using BO4E.ENUM;
+using EnumsNET;
+using Newtonsoft.Json;
 
 namespace BO4E.meta.LenientConverters
 {
@@ -18,12 +17,17 @@ namespace BO4E.meta.LenientConverters
         /// <inheritdoc cref="JsonConverter.CanConvert(Type)" />
         public override bool CanConvert(Type objectType)
         {
-            return objectType == typeof(BO4E.ENUM.Geraetemerkmal) || objectType == typeof(BO4E.ENUM.Geraetemerkmal?);
+            return objectType == typeof(BO4E.ENUM.Geraetemerkmal)
+                || objectType == typeof(BO4E.ENUM.Geraetemerkmal?);
         }
 
         /// <inheritdoc cref="JsonConverter.ReadJson(JsonReader, Type, object, JsonSerializer)" />
-        public override object ReadJson(JsonReader reader, Type objectType, object existingValue,
-            JsonSerializer serializer)
+        public override object ReadJson(
+            JsonReader reader,
+            Type objectType,
+            object existingValue,
+            JsonSerializer serializer
+        )
         {
             string rawValue;
             switch (reader.Value)
@@ -40,7 +44,7 @@ namespace BO4E.meta.LenientConverters
 
             try
             {
-                return Enum.Parse<Geraetemerkmal>(rawValue);
+                return Enums.Parse<Geraetemerkmal>(rawValue);
             }
             catch (ArgumentException) when (rawValue.StartsWith("G"))
             {
@@ -48,7 +52,7 @@ namespace BO4E.meta.LenientConverters
                 {
                     return Geraetemerkmal.GAS_G2P5;
                 }
-                return Enum.Parse<Geraetemerkmal>("GAS_" + rawValue);
+                return Enums.Parse<Geraetemerkmal>("GAS_" + rawValue);
             }
         }
 

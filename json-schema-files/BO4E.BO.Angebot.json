@@ -3037,6 +3037,18 @@
             "boolean",
             "null"
           ]
+        },
+        "emobilitaetsart": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "enum": [
+            null,
+            "WALLBOX",
+            "E_MOBILITAETSLADESAEULE",
+            "LADEPARK"
+          ]
         }
       }
     },
@@ -4442,6 +4454,18 @@
           "type": [
             "string",
             "null"
+          ]
+        },
+        "emobilitaetsart": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "enum": [
+            null,
+            "WALLBOX",
+            "E_MOBILITAETSLADESAEULE",
+            "LADEPARK"
           ]
         }
       }
