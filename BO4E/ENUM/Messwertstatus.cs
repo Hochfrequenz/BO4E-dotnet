@@ -45,5 +45,9 @@ namespace BO4E.ENUM
         /// <summary> Fehlender Wert: Z30 </summary>
         [EnumMember(Value = "FEHLT")]
         FEHLT,
+
+        /// <summary> Grundlage POG-Ermittlung: Z47 </summary>
+        [EnumMember(Value = "GRUNDLAGE_POG_ERMITTLUNG")]
+        GRUNDLAGE_POG_ERMITTLUNG,
     }
 }

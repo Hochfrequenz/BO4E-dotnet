@@ -1,10 +1,7 @@
 using System.Text.Json.Serialization;
-
 using BO4E.ENUM;
 using BO4E.meta;
-
 using Newtonsoft.Json;
-
 using ProtoBuf;
 
 namespace BO4E.COM
@@ -84,5 +81,14 @@ namespace BO4E.COM
         [JsonProperty(Required = Required.Default, Order = 8, PropertyName = "weitererRechenschritt")]
         [JsonPropertyName("weitererRechenschritt")]
         public Rechenschritt? WeitererRechenschritt { get; set; }
+
+        /// <summary>
+        /// Aufteilungsfaktor Energiemenge
+        /// </summary>
+        /// <remarks>UTILTS SG9 CCI ZG6</remarks>
+        [JsonProperty(Required = Required.Default, Order = 9, PropertyName = "aufteilungsfaktorEnergiemenge")]
+        [JsonPropertyName("aufteilungsfaktorEnergiemenge")]
+        [ProtoMember(9)]
+        public decimal? AufteilungsfaktorEnergiemenge { get; set; }
     }
 }

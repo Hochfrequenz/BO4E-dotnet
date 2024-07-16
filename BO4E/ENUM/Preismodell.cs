@@ -1,12 +1,11 @@
 using System.Runtime.Serialization;
 
-namespace BO4E.ENUM
+namespace BO4E.ENUM;
+
+/// <summary>Bezeichnung der Preismodelle in Ausschreibungen für die Energielieferung.</summary>
+public enum Preismodell
 {
-    /// <summary>Bezeichnung der Preismodelle in Ausschreibungen für die Energielieferung.</summary>
-    public enum Preismodell
-    {
-        /// <summary>Tranche</summary>
-        [EnumMember(Value = "TRANCHE")]
-        TRANCHE,
-    }
+    /// <summary>Tranche</summary>
+    [EnumMember(Value = "TRANCHE")]
+    TRANCHE,
 }

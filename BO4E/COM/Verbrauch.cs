@@ -1,4 +1,3 @@
-using BO4E.BO;
 using BO4E.ENUM;
 using BO4E.meta;
 using BO4E.meta.LenientConverters;
@@ -9,13 +8,8 @@ using ProtoBuf;
 
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Runtime.ConstrainedExecution;
-using System.Runtime.Serialization;
 using System.Text.Json;
 using System.Text.Json.Serialization;
-
-using JsonSerializer = System.Text.Json.JsonSerializer;
 
 namespace BO4E.COM
 {

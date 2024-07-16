@@ -3,22 +3,21 @@ using BO4E.ENUM;
 using Newtonsoft.Json;
 using ProtoBuf;
 
-namespace BO4E.COM
-{
-    /// <summary>Energieherkunft</summary>
-    [ProtoContract]
-    public class Energieherkunft : COM
-    {
-        /// <summary>Art der Erzeugung der Energie. Details <see cref="ENUM.Erzeugungsart" /></summary>
-        [JsonProperty(PropertyName = "erzeugungsart", Required = Required.Always)]
-        [JsonPropertyName("erzeugungsart")]
-        [ProtoMember(3)]
-        public Erzeugungsart Erzeugungsart { get; set; }
+namespace BO4E.COM;
 
-        /// <summary>Prozentualer Anteil der jeweiligen Erzeugungsart.</summary>
-        [JsonProperty(PropertyName = "anteilProzent", Required = Required.Always)]
-        [JsonPropertyName("anteilProzent")]
-        [ProtoMember(4)]
-        public decimal AnteilProzent { get; set; }
-    }
+/// <summary>Energieherkunft</summary>
+[ProtoContract]
+public class Energieherkunft : COM
+{
+    /// <summary>Art der Erzeugung der Energie. Details <see cref="ENUM.Erzeugungsart" /></summary>
+    [JsonProperty(PropertyName = "erzeugungsart", Required = Required.Default)]
+    [JsonPropertyName("erzeugungsart")]
+    [ProtoMember(3)]
+    public Erzeugungsart? Erzeugungsart { get; set; }
+
+    /// <summary>Prozentualer Anteil der jeweiligen Erzeugungsart.</summary>
+    [JsonProperty(PropertyName = "anteilProzent", Required = Required.Default)]
+    [JsonPropertyName("anteilProzent")]
+    [ProtoMember(4)]
+    public decimal? AnteilProzent { get; set; }
 }

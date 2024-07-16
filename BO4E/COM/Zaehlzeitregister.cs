@@ -4,21 +4,19 @@ using BO4E.meta;
 using Newtonsoft.Json;
 
 using ProtoBuf;
-
-using System.Collections.Generic;
 using System.Text.Json.Serialization;
 
 namespace BO4E.COM
 {
     /// <summary>
-    ///     Ein Z‰hlzeitregister beschreibt eine erweiterte Definition der Z‰hlzeit in Bezug auf ein Register. Dabei werden alle Codes dazu vom Netzbetreiber vergeben.
+    ///     Ein Z√§hlzeitregister beschreibt eine erweiterte Definition der Z√§hlzeit in Bezug auf ein Register. Dabei werden alle Codes dazu vom Netzbetreiber vergeben.
     /// </summary>
     [ProtoContract]
     [NonOfficial(NonOfficialCategory.REGULATORY_REQUIREMENTS)]
     public class Zaehlzeitregister : COM
     {
         /// <summary>
-        ///  Z‰hlzeitdefinition
+        ///  Z√§hlzeitdefinition
         /// </summary>
         [JsonProperty(PropertyName = "zaehlzeitDefinition", Order = 4, Required = Required.Default)]
         [JsonPropertyOrder(4)]
@@ -27,7 +25,7 @@ namespace BO4E.COM
         public string? ZaehlzeitDefinition { get; set; }
 
         /// <summary>
-        ///     Z‰hlzeitregister
+        ///     Z√§hlzeitregister
         /// </summary>
         [JsonProperty(PropertyName = "register", Order = 5, Required = Required.Default)]
         [JsonPropertyName("register")]
@@ -36,7 +34,7 @@ namespace BO4E.COM
         public string? Register { get; set; }
 
         /// <summary>
-        ///     Schwachlastf‰higkeit des Registers
+        ///     Schwachlastf√§higkeit des Registers
         /// </summary>
         [JsonProperty(PropertyName = "schwachlastfaehig", Order = 6, Required = Required.Default)]
         [JsonPropertyName("schwachlastfaehig")]

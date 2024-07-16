@@ -2,19 +2,12 @@ using BO4E.COM;
 using BO4E.ENUM;
 using BO4E.Extensions.COM;
 using BO4E.Extensions.ENUM;
-using BO4E.meta;
 using BO4E.Reporting;
 
 using Itenso.TimePeriod;
-
-using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
-
-
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text.Json;
 using System.Threading.Tasks;
 
 using static BO4E.Extensions.COM.VerbrauchExtension;

@@ -2,22 +2,21 @@ using ProtoBuf;
 
 using System.Runtime.Serialization;
 
-namespace BO4E.ENUM
+namespace BO4E.ENUM;
+
+/// <summary>Aufzählung der Möglichkeiten zu Vertragsformen in Ausschreibungen.</summary>
+public enum Vertragsform
 {
-    /// <summary>Aufzählung der Möglichkeiten zu Vertragsformen in Ausschreibungen.</summary>
-    public enum Vertragsform
-    {
-        /// <summary>Online</summary>
-        [EnumMember(Value = "ONLINE")]
-        ONLINE,
+    /// <summary>Online</summary>
+    [EnumMember(Value = "ONLINE")]
+    ONLINE,
 
-        /// <summary>Direkt</summary>
-        [EnumMember(Value = "DIREKT")]
-        DIREKT,
+    /// <summary>Direkt</summary>
+    [EnumMember(Value = "DIREKT")]
+    DIREKT,
 
-        /// <summary>Auftragsfax</summary>
-        [ProtoEnum(Name = nameof(Vertragsform) + "_" + nameof(FAX))]
-        [EnumMember(Value = "FAX")]
-        FAX,
-    }
+    /// <summary>Auftragsfax</summary>
+    [ProtoEnum(Name = nameof(Vertragsform) + "_" + nameof(FAX))]
+    [EnumMember(Value = "FAX")]
+    FAX,
 }

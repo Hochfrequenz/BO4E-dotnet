@@ -1,6 +1,4 @@
 using BO4E.BO;
-using BO4E.COM;
-
 using System;
 using System.Collections.Generic;
 using System.Text.Encodings.Web;
