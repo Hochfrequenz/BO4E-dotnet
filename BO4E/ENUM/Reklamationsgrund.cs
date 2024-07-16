@@ -1,20 +1,19 @@
 using System.Runtime.Serialization;
 
-namespace BO4E.ENUM
+namespace BO4E.ENUM;
+
+/// <summary>Reklamationsgrund</summary>
+public enum Reklamationsgrund
 {
-    /// <summary>Reklamationsgrund</summary>
-    public enum Reklamationsgrund
-    {
-        /// <summary>Werte zu hoch im angegebenen Zeitintervall</summary>
-        [EnumMember(Value = "WERTE_ZU_HOCH")]
-        WERTE_ZU_HOCH,
+    /// <summary>Werte zu hoch im angegebenen Zeitintervall</summary>
+    [EnumMember(Value = "WERTE_ZU_HOCH")]
+    WERTE_ZU_HOCH,
 
-        /// <summary>Werte zu niedrig im angegebenen Zeitintervall</summary>
-        [EnumMember(Value = "WERTE_ZU_NIEDRIG")]
-        WERTE_ZU_NIEDRIG,
+    /// <summary>Werte zu niedrig im angegebenen Zeitintervall</summary>
+    [EnumMember(Value = "WERTE_ZU_NIEDRIG")]
+    WERTE_ZU_NIEDRIG,
 
-        /// <summary>Werte fehlen im angegebenen Zeitintervall</summary>
-        [EnumMember(Value = "WERTE_FEHLEN")]
-        WERTE_FEHLEN,
-    }
+    /// <summary>Werte fehlen im angegebenen Zeitintervall</summary>
+    [EnumMember(Value = "WERTE_FEHLEN")]
+    WERTE_FEHLEN,
 }

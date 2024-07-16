@@ -7,32 +7,31 @@ using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 using JsonSerializer = System.Text.Json.JsonSerializer;
 
-namespace TestBO4E
+namespace TestBO4E;
+
+[TestClass]
+public class TestStringEnumConverter
 {
-    [TestClass]
-    public class TestStringEnumConverter
+    private readonly IList<Mengeneinheit> einheiten = new List<Mengeneinheit>
     {
-        private readonly IList<Mengeneinheit> einheiten = new List<Mengeneinheit>
+        Mengeneinheit.TAG
+    };
+
+    [TestMethod]
+    public void TestMengeneinheitNewtonsoft()
+    {
+        var jsonString = JsonConvert.SerializeObject(einheiten, new StringEnumConverter());
+        Assert.IsTrue(jsonString.Contains("TAG"));
+    }
+
+    [TestMethod]
+    public void TestMengeneinheit()
+    {
+        var options = new JsonSerializerOptions
         {
-            Mengeneinheit.TAG
+            Converters = { new StringNullableEnumConverter() }
         };
-
-        [TestMethod]
-        public void TestMengeneinheitNewtonsoft()
-        {
-            var jsonString = JsonConvert.SerializeObject(einheiten, new StringEnumConverter());
-            Assert.IsTrue(jsonString.Contains("TAG"));
-        }
-
-        [TestMethod]
-        public void TestMengeneinheit()
-        {
-            var options = new JsonSerializerOptions
-            {
-                Converters = { new StringNullableEnumConverter() }
-            };
-            var jsonString = JsonSerializer.Serialize(einheiten, options);
-            Assert.IsTrue(jsonString.Contains("TAG"));
-        }
+        var jsonString = JsonSerializer.Serialize(einheiten, options);
+        Assert.IsTrue(jsonString.Contains("TAG"));
     }
 }

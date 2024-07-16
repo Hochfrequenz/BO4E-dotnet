@@ -23,4 +23,3 @@ namespace BO4E.ENUM
         [EnumMember(Value = "GESTUFT")]
         GESTUFT,
     }
-}
