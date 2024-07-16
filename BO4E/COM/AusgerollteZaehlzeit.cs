@@ -43,5 +43,4 @@ public class AusgerollteZaehlzeit : COM
     [JsonPropertyOrder(5)]
     [ProtoMember(5)]
     public string? Register { get; set; }
-
 }
