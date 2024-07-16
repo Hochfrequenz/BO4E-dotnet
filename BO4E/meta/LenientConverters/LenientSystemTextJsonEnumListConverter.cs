@@ -82,12 +82,12 @@ public class LenientSystemTextJsonEnumListConverter<T, TE> : JsonConverter<T>
             switch (rawItem)
             {
                 case object _ when Enum.TryParse(rawItem.ToString(), true, out TE enumResult):
-                {
-                    // default. everything is as it should be :-)
+                    {
+                        // default. everything is as it should be :-)
 
-                    ((IList)result).Add(enumResult);
-                    break;
-                }
+                        ((IList)result).Add(enumResult);
+                        break;
+                    }
                 case JsonElement element:
                     try
                     {
