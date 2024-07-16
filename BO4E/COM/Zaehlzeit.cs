@@ -4,8 +4,6 @@ using BO4E.meta;
 using Newtonsoft.Json;
 
 using ProtoBuf;
-
-using System.Collections.Generic;
 using System.Text.Json.Serialization;
 
 namespace BO4E.COM
@@ -18,7 +16,7 @@ namespace BO4E.COM
     public class Zaehlzeit : COM
     {
         /// <summary>
-        ///  Zählzeitdefinition
+        ///  ZÃ¤hlzeitdefinition
         /// </summary>
         [JsonProperty(PropertyName = "code", Order = 4, Required = Required.Default)]
         [JsonPropertyOrder(4)]
@@ -27,7 +25,7 @@ namespace BO4E.COM
         public string? Code { get; set; }
 
         /// <summary>
-        ///     Häufigkeit der Übermittlung
+        ///     HÃ¤ufigkeit der Ãœbermittlung
         /// </summary>
         [JsonProperty(PropertyName = "haeufigkeit", Order = 5, Required = Required.Default)]
         [JsonPropertyName("haeufigkeit")]
@@ -36,7 +34,7 @@ namespace BO4E.COM
         public HaeufigkeitZaehlzeit? Haeufigkeit { get; set; }
 
         /// <summary>
-        ///     Art der Übermittlung
+        ///     Art der Ãœbermittlung
         /// </summary>
         [JsonProperty(PropertyName = "uebermittelbarkeit", Order = 6, Required = Required.Default)]
         [JsonPropertyName("uebermittelbarkeit")]
@@ -54,7 +52,7 @@ namespace BO4E.COM
         public ErmittlungLeistungsmaximum? ErmittlungLeistungsmaximum { get; set; }
 
         /// <summary>
-        ///     Ist die Zählzeit bestellbar?
+        ///     Ist die ZÃ¤hlzeit bestellbar?
         /// </summary>
         [JsonProperty(PropertyName = "istBestellbar", Order = 8, Required = Required.Default)]
         [JsonPropertyName("istBestellbar")]
@@ -63,7 +61,7 @@ namespace BO4E.COM
         public bool? IstBestellbar { get; set; }
 
         /// <summary>
-        ///     ZählzeitdefinitionTyp
+        ///     ZÃ¤hlzeitdefinitionTyp
         /// </summary>
         [JsonProperty(PropertyName = "typ", Order = 9, Required = Required.Default)]
         [JsonPropertyName("typ")]
@@ -72,7 +70,7 @@ namespace BO4E.COM
         public ZaehlzeitdefinitionTyp? Typ { get; set; }
 
         /// <summary>
-        ///     Beschreibung des ZählzeitdefinitionTyp
+        ///     Beschreibung des ZÃ¤hlzeitdefinitionTyp
         /// </summary>
         [JsonProperty(PropertyName = "beschreibungTyp", Order = 10, Required = Required.Default)]
         [JsonPropertyName("beschreibungTyp")]

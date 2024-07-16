@@ -102,6 +102,41 @@ namespace TestBO4E
             result.Merkmal.Should().Be(Geraetemerkmal.GAS_G2P5);
         }
 
-        // todo: someone should write the system.text equivalent once there's time.
+
+        [TestMethod]
+        public void TestSystemText_Write_NonNullable()
+        {
+            var settings = new System.Text.Json.JsonSerializerOptions()
+            {
+                Converters = { new LenientSystemTextGeraetemerkmalGasConverter() }
+            };
+            var instance = new SomethingWithAGeraetemerkmal { Merkmal = Geraetemerkmal.GAS_G4 };
+            var json = System.Text.Json.JsonSerializer.Serialize(instance, settings);
+            json.Should().Be("{\"merkmal\":\"G4\"}");
+        }
+
+        [TestMethod]
+        public void TestSystemText_Write_Nullable()
+        {
+            var settings = new System.Text.Json.JsonSerializerOptions()
+            {
+                Converters = { new LenientSystemTextNullableGeraetemerkmalGasConverter() }
+            };
+            var instance = new SomethingWithANullableGeraetemerkmal { Merkmal = Geraetemerkmal.GAS_G2P5 };
+            var json = System.Text.Json.JsonSerializer.Serialize(instance, settings);
+            json.Should().Be("{\"merkmal\":\"G2P5\"}");
+        }
+
+        [TestMethod]
+        public void TestSystemText_Write_Nullable_Null()
+        {
+            var settings = new System.Text.Json.JsonSerializerOptions()
+            {
+                Converters = { new LenientSystemTextNullableGeraetemerkmalGasConverter() }
+            };
+            var instance = new SomethingWithANullableGeraetemerkmal { Merkmal = null };
+            var json = System.Text.Json.JsonSerializer.Serialize(instance, settings);
+            json.Should().Be("{\"merkmal\":null}");
+        }
     }
 }
