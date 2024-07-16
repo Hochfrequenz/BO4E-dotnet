@@ -1,12 +1,10 @@
 using System;
-using System.Runtime.ConstrainedExecution;
 using System.Text.Json.Serialization;
 using BO4E.COM;
 using BO4E.ENUM;
 using BO4E.meta;
 using Newtonsoft.Json;
 using ProtoBuf;
-using Verwendungszweck = BO4E.COM.Verwendungszweck;
 
 namespace BO4E.BO
 {
