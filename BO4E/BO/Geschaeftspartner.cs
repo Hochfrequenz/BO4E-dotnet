@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-using System.Runtime.ConstrainedExecution;
 using System.Text.Json.Serialization;
 using BO4E.COM;
 using BO4E.ENUM;

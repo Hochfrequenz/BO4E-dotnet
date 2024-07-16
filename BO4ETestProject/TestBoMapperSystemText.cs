@@ -2,7 +2,6 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
-using System.Linq;
 using System.Text.Json;
 using System.Threading.Tasks;
 
@@ -10,7 +9,6 @@ using BO4E;
 using BO4E.BO;
 using BO4E.COM;
 using BO4E.ENUM;
-using BO4E.meta;
 using BO4E.meta.LenientConverters;
 
 using Microsoft.VisualStudio.TestTools.UnitTesting; //using BO4E.Extensions;

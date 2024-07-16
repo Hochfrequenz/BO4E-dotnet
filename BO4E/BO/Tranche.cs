@@ -1,11 +1,7 @@
-using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Runtime.ConstrainedExecution;
 using System.Text.Json.Serialization;
-using System.Text.RegularExpressions;
 using BO4E.COM;
-using BO4E.EnergyIdentificationCodes;
 using BO4E.ENUM;
 using BO4E.meta;
 using Newtonsoft.Json;

@@ -1,20 +1,9 @@
 using System;
-using System.Globalization;
-using System.IO;
-using System.Linq;
-using System.Text;
-using BO4E;
 using BO4E.BO;
-using BO4E.COM;
-using BO4E.ENUM;
-using BO4E.Extensions.BusinessObjects;
 using BO4E.Extensions.BusinessObjects.Energiemenge;
-using BO4E.meta.LenientConverters;
-using FluentAssertions;
 using Itenso.TimePeriod;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
 
 namespace TestBO4E.Extensions
 {

@@ -3,15 +3,12 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
-using System.Runtime.Serialization;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
 using BO4E.COM;
 using BO4E.ENUM;
 using BO4E.meta;
-using BO4E.meta.LenientConverters;
-
 using Newtonsoft.Json;
 
 using ProtoBuf;
