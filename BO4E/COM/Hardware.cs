@@ -11,10 +11,10 @@ namespace BO4E.COM
     public class Hardware : COM
     {
         /// <summary>Eindeutiger Typ der Hardware. Details <see cref="ENUM.Geraetetyp" /></summary>
-        [JsonProperty(PropertyName = "geraetetyp", Required = Required.Always)]
+        [JsonProperty(PropertyName = "geraetetyp", Required = Required.Default)]
         [JsonPropertyName("geraetetyp")]
         [ProtoMember(3)]
-        public Geraetetyp Geraetetyp { get; set; }
+        public Geraetetyp? Geraetetyp { get; set; }
 
         /// <summary>Bezeichnung der Hardware.</summary>
         [JsonProperty(PropertyName = "bezeichnung", Required = Required.Always)]
