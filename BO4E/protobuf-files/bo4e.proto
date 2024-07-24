@@ -2070,17 +2070,17 @@ message Zustaendigkeit {
 
 enum EEGVermarktungsform {
    option (.protobuf_net.enumopt).namespace = "BO4E.ENUM";
-   Z90_AUSFALLVERGUETUNG = 0;
-   Z91_MARKTPRAEMIE = 1;
-   Z92_SONSTIGE = 2;
-   Z94_KWKG_VERGUETUNG = 3;
+   AUSFALLVERGUETUNG = 0;
+   MARKTPRAEMIE = 1;
+   SONSTIGE = 2;
+   KWKG_VERGUETUNG = 3;
 }
 
 enum FernsteuerbarkeitStatus {
    option (.protobuf_net.enumopt).namespace = "BO4E.ENUM";
-   Z96_NICHT_FERNSTEUERBAR = 0;
-   Z97_TECHNISCH_FERNSTEUERBAR = 1;
-   Z98_LIEFERANT_FERNSTEUERBAR = 2;
+   NICHT_FERNSTEUERBAR = 0;
+   TECHNISCH_FERNSTEUERBAR = 1;
+   LIEFERANT_FERNSTEUERBAR = 2;
 }
 
 message Einspeisung {
