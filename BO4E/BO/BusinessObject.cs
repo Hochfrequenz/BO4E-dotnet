@@ -66,6 +66,7 @@ namespace BO4E.BO;
 [ProtoInclude(32, typeof(MabisZaehlpunkt))]
 [ProtoInclude(33, typeof(Summenzeitreihe))]
 [ProtoInclude(34, typeof(Lokationszuordnung))]
+[ProtoInclude(34, typeof(Einspeise))]
 public abstract class BusinessObject : IUserProperties, IOptionalGuid
 {
     /// <summary>
