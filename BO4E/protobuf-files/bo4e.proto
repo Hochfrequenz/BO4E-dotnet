@@ -2067,3 +2067,27 @@ message Zustaendigkeit {
    string Abteilung = 4;
    string Themengebiet = 5;
 }
+
+enum EEGVermarktungsform {
+   option (.protobuf_net.enumopt).namespace = "BO4E.ENUM";
+   Z90_AUSFALLVERGUETUNG = 0;
+   Z91_MARKTPRAEMIE = 1;
+   Z92_SONSTIGE = 2;
+   Z94_KWKG_VERGUETUNG = 3;
+}
+
+enum FernsteuerbarkeitStatus {
+   option (.protobuf_net.enumopt).namespace = "BO4E.ENUM";
+   Z96_NICHT_FERNSTEUERBAR = 0;
+   Z97_TECHNISCH_FERNSTEUERBAR = 1;
+   Z98_LIEFERANT_FERNSTEUERBAR = 2;
+}
+
+message Einspeise {
+   option (.protobuf_net.msgopt).namespace = "BO4E.BO";
+   string MarktlokationsId = 10;
+   Geschaeftspartnerrolle Verguetungsempfaenger = 11;
+   EEGVermarktungsform EEGVermarktungsform = 12;
+   Landescode Landescode = 13;
+   FernsteuerbarkeitStatus FernsteuerbarkeitStatus = 14;
+}
