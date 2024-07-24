@@ -22,4 +22,14 @@ public enum Profilart
     /// <remarks>Z12</remarks>
     [EnumMember(Value = "ART_LASTPROFIL")]
     ART_LASTPROFIL,
+
+    /// <summary>Z04 Standardeinspeiseprofil</summary>
+    /// <remarks>Z04</remarks>
+    [EnumMember(Value = "ART_STANDARDEINSPEISEPROFIL")]
+    ART_STANDARDEINSPEISEPROFIL,
+
+    /// <summary>Z05 tagesparameterabhängiges Einspeiseprofil</summary>
+    /// <remarks>Z05</remarks>
+    [EnumMember(Value = "ART_TAGESPARAMETERABHAENGIGES_EINSPEISEPROFIL")]
+    ART_TAGESPARAMETERABHAENGIGES_EINSPEISEPROFIL
 }
