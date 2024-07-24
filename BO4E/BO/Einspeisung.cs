@@ -10,11 +10,11 @@ using ProtoBuf;
 namespace BO4E.BO;
 
 /// <summary>
-/// Einspeise BO
+/// Einspeisung BO
 /// </summary>
 [ProtoContract]
 [NonOfficial(NonOfficialCategory.MISSING)]
-public class Einspeise : BusinessObject
+public class Einspeisung : BusinessObject
 {
     /// <summary>
     /// Für welche Marktlokation gelten diese Einspeisedaten
@@ -39,8 +39,8 @@ public class Einspeise : BusinessObject
     /// <summary>
     /// Vermarktungsformen gemäß dem Erneuerbare-Energien-Gesetz (EEG).
     /// </summary>
-    [JsonProperty(PropertyName = "eEGVermarktungsform", Required = Required.Default, Order = 12)]
-    [JsonPropertyName("eEGVermarktungsform")]
+    [JsonProperty(PropertyName = "eegVermarktungsform", Required = Required.Default, Order = 12)]
+    [JsonPropertyName("eegVermarktungsform")]
     [JsonPropertyOrder(12)]
     [NonOfficial(NonOfficialCategory.MISSING)]
     [ProtoMember(12)]

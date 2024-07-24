@@ -2083,7 +2083,7 @@ enum FernsteuerbarkeitStatus {
    Z98_LIEFERANT_FERNSTEUERBAR = 2;
 }
 
-message Einspeise {
+message Einspeisung {
    option (.protobuf_net.msgopt).namespace = "BO4E.BO";
    string MarktlokationsId = 10;
    Geschaeftspartnerrolle Verguetungsempfaenger = 11;
