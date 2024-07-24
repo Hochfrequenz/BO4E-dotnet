@@ -30,6 +30,6 @@ public enum Profilart
 
     /// <summary>Z05 tagesparameterabhängiges Einspeiseprofil</summary>
     /// <remarks>Z05</remarks>
-    [EnumMember(Value = "ART_STANDARDEINSPEISEPROFIL")]
-    ART_TAGESPARAMETERABHÄNGIGES_EINSPEISEPROFIL
+    [EnumMember(Value = "ART_TAGESPARAMETERABHAENGIGES_EINSPEISEPROFIL")]
+    ART_TAGESPARAMETERABHAENGIGES_EINSPEISEPROFIL
 }
