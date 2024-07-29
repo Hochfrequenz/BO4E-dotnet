@@ -13,10 +13,10 @@ namespace BO4E.meta.LenientConverters
     /// </summary>
     public class LenientDateTimeConverter : IsoDateTimeConverter
     {
-        private readonly List<(string, bool)> _allowedDatetimeFormats = new()
-        {
-            ("yyyy-MM-ddTHH:mm:sszzzz", true),
-        };
+        private readonly List<(string, bool)> _allowedDatetimeFormats =
+        [
+            ("yyyy-MM-ddTHH:mm:sszzzz", true)
+        ];
         // basic structure copied from https://stackoverflow.com/a/33172735/10009545
 
         private readonly DateTimeOffset? _defaultDateTime;
