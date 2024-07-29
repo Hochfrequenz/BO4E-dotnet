@@ -2086,6 +2086,7 @@ enum FernsteuerbarkeitStatus {
 message Einspeisung {
    option (.protobuf_net.msgopt).namespace = "BO4E.BO";
    string MarktlokationsId = 10;
+   string TrancheId = 101;
    Geschaeftspartnerrolle Verguetungsempfaenger = 11;
    EEGVermarktungsform EEGVermarktungsform = 12;
    Landescode Landescode = 13;
