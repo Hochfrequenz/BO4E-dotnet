@@ -26,6 +26,18 @@ public class Einspeisung : BusinessObject
     [ProtoMember(10)]
     [BoKey]
     public string? MarktlokationsId { get; set; }
+
+    /// <summary>
+    /// Für welche Marktlokation gelten diese Einspeisedaten
+    /// </summary>
+    [JsonProperty(PropertyName = "trancheId", Required = Required.Default, Order = 101)]
+    [JsonPropertyName("trancheId")]
+    [JsonPropertyOrder(101)]
+    [NonOfficial(NonOfficialCategory.MISSING)]
+    [ProtoMember(101)]
+    [BoKey]
+    public string? TrancheId { get; set; }
+
     /// <summary>
     /// Empfänger der Vergütung zur Einspeisung 
     /// </summary>
