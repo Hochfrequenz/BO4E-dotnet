@@ -13,10 +13,10 @@ namespace BO4E.meta.LenientConverters
     /// </summary>
     public class LenientDateTimeConverter : IsoDateTimeConverter
     {
-        private readonly List<(string, bool)> _allowedDatetimeFormats = new()
-        {
-            ("yyyy-MM-ddTHH:mm:sszzzz", true),
-        };
+        private readonly List<(string, bool)> _allowedDatetimeFormats =
+        [
+            ("yyyy-MM-ddTHH:mm:sszzzz", true)
+        ];
         // basic structure copied from https://stackoverflow.com/a/33172735/10009545
 
         private readonly DateTimeOffset? _defaultDateTime;
@@ -73,23 +73,42 @@ namespace BO4E.meta.LenientConverters
             // First try to parse the date string as is (in case it is correctly formatted)
             if (objectType == typeof(DateTimeOffset) || objectType == typeof(DateTimeOffset?))
             {
-                if (DateTimeOffset.TryParse(rawDate, CultureInfo.CurrentCulture, DateTimeStyles.AssumeUniversal, out var dateTimeOffset)) return dateTimeOffset;
+                if (DateTimeOffset.TryParse(rawDate, CultureInfo.CurrentCulture, DateTimeStyles.AssumeUniversal, out var dateTimeOffset))
+                {
+                    return dateTimeOffset;
+                }
+
                 foreach (var (dtf, asUniversal) in _allowedDatetimeFormats)
                     if (DateTimeOffset.TryParseExact(rawDate, dtf, CultureInfo.InvariantCulture,
-                        asUniversal ? DateTimeStyles.AssumeUniversal : DateTimeStyles.None, out dateTimeOffset))
+                            asUniversal ? DateTimeStyles.AssumeUniversal : DateTimeStyles.None, out dateTimeOffset))
+                    {
                         return dateTimeOffset;
+                    }
             }
             else if (objectType == typeof(DateTime) || objectType == typeof(DateTime?))
             {
-                if (DateTime.TryParse(rawDate, out var dateTime)) return dateTime;
+                if (DateTime.TryParse(rawDate, out var dateTime))
+                {
+                    return dateTime;
+                }
 
                 if (_allowedDatetimeFormats.Any(dtf => DateTime.TryParseExact(rawDate, dtf.Item1,
-                    CultureInfo.InvariantCulture, DateTimeStyles.None, out dateTime))) return dateTime;
+                        CultureInfo.InvariantCulture, DateTimeStyles.None, out dateTime)))
+                {
+                    return dateTime;
+                }
             }
 
             // It's not a date after all, so just return the default value
-            if (objectType == typeof(DateTimeOffset?) || objectType == typeof(DateTime?)) return null;
-            if (_defaultDateTime.HasValue) return _defaultDateTime;
+            if (objectType == typeof(DateTimeOffset?) || objectType == typeof(DateTime?))
+            {
+                return null;
+            }
+
+            if (_defaultDateTime.HasValue)
+            {
+                return _defaultDateTime;
+            }
 
             try
             {
@@ -98,17 +117,31 @@ namespace BO4E.meta.LenientConverters
             catch (FormatException fe) when (fe.Message ==
                                              "The UTC representation of the date '0001-01-01T00:00:00' falls outside the year range 1-9999.")
             {
-                if (objectType == typeof(DateTime)) return DateTime.MinValue;
+                if (objectType == typeof(DateTime))
+                {
+                    return DateTime.MinValue;
+                }
 
-                if (objectType == typeof(DateTime?) || objectType == typeof(DateTimeOffset?)) return null;
+                if (objectType == typeof(DateTime?) || objectType == typeof(DateTimeOffset?))
+                {
+                    return null;
+                }
+
                 return DateTimeOffset.MinValue;
             }
             catch (ArgumentOutOfRangeException ae) when (ae.Message ==
                                                          "The UTC time represented when the offset is applied must be between year 0 and 10,000. (Parameter 'offset')")
             {
-                if (objectType == typeof(DateTime)) return DateTime.MinValue;
+                if (objectType == typeof(DateTime))
+                {
+                    return DateTime.MinValue;
+                }
 
-                if (objectType == typeof(DateTime?) || objectType == typeof(DateTimeOffset?)) return null;
+                if (objectType == typeof(DateTime?) || objectType == typeof(DateTimeOffset?))
+                {
+                    return null;
+                }
+
                 return DateTimeOffset.MinValue;
             }
             //throw new JsonReaderException($"Couldn't convert {rawDate} to any of the allowed date time formats: {String.Join(";", ALLOWED_DATETIME_FORMATS)})");

@@ -13,14 +13,14 @@ namespace BO4E.meta.LenientConverters
     /// </summary>
     public class LenientSystemTextJsonDateTimeConverter : JsonConverter<DateTime>
     {
-        private readonly List<(string, bool)> _allowedDatetimeFormats = new List<(string, bool)>
-        {
+        private readonly List<(string, bool)> _allowedDatetimeFormats =
+        [
             ("yyyy-MM-ddTHH:mm:ss", false),
             ("yyyy-MM-ddTHH:mm:sszzzz", true),
             ("yyyyMMddHHmm", false),
             ("yyyyMMddHHmmss", false),
-            (@"yyyyMMddHHmmss'--T::zzzz'", false) // ToDo: remove again. this is just a buggy, nasty workaround
-        };
+            ("yyyyMMddHHmmss'--T::zzzz'", false)
+        ];
 
         private readonly DateTimeOffset? _defaultDateTime;
 
@@ -48,29 +48,45 @@ namespace BO4E.meta.LenientConverters
         /// <returns></returns>
         public override DateTime Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
         {
-            if (reader.TryGetDateTime(out var dt)) return DateTime.SpecifyKind(dt, DateTimeKind.Utc);
+            if (reader.TryGetDateTime(out var dt))
+            {
+                return DateTime.SpecifyKind(dt, DateTimeKind.Utc);
+            }
 
             var rawDate = reader.GetString();
             // First try to parse the date string as is (in case it is correctly formatted)
             if (typeToConvert == typeof(DateTimeOffset) || typeToConvert == typeof(DateTimeOffset?))
             {
-                if (DateTimeOffset.TryParse(rawDate, out var dateTimeOffset)) return dateTimeOffset.DateTime;
+                if (DateTimeOffset.TryParse(rawDate, out var dateTimeOffset))
+                {
+                    return dateTimeOffset.DateTime;
+                }
+
                 foreach (var (dtf, asUniversal) in _allowedDatetimeFormats)
                     if (DateTimeOffset.TryParseExact(rawDate, dtf, CultureInfo.InvariantCulture,
-                        asUniversal ? DateTimeStyles.AssumeUniversal : DateTimeStyles.None, out dateTimeOffset))
+                            asUniversal ? DateTimeStyles.AssumeUniversal : DateTimeStyles.None, out dateTimeOffset))
+                    {
                         return dateTimeOffset.DateTime;
+                    }
             }
             else if (typeToConvert == typeof(DateTime) || typeToConvert == typeof(DateTime?))
             {
                 if (DateTime.TryParse(rawDate, out var dateTime))
+                {
                     return DateTime.SpecifyKind(dateTime, DateTimeKind.Utc);
+                }
 
                 if (_allowedDatetimeFormats.Any(dtf => DateTime.TryParseExact(rawDate, dtf.Item1,
-                    CultureInfo.InvariantCulture, DateTimeStyles.None, out dateTime)))
+                        CultureInfo.InvariantCulture, DateTimeStyles.None, out dateTime)))
+                {
                     return DateTime.SpecifyKind(dateTime, DateTimeKind.Utc);
+                }
             }
 
-            if (_defaultDateTime.HasValue) return _defaultDateTime.Value.DateTime;
+            if (_defaultDateTime.HasValue)
+            {
+                return _defaultDateTime.Value.DateTime;
+            }
 
             try
             {
@@ -79,13 +95,21 @@ namespace BO4E.meta.LenientConverters
             catch (FormatException fe) when (fe.Message ==
                                              "The UTC representation of the date '0001-01-01T00:00:00' falls outside the year range 1-9999.")
             {
-                if (typeToConvert == typeof(DateTime)) return DateTime.MinValue;
+                if (typeToConvert == typeof(DateTime))
+                {
+                    return DateTime.MinValue;
+                }
+
                 return DateTime.MinValue;
             }
             catch (ArgumentOutOfRangeException ae) when (ae.Message ==
                                                          "The UTC time represented when the offset is applied must be between year 0 and 10,000. (Parameter 'offset')")
             {
-                if (typeToConvert == typeof(DateTime)) return DateTime.MinValue;
+                if (typeToConvert == typeof(DateTime))
+                {
+                    return DateTime.MinValue;
+                }
+
                 return DateTime.MinValue;
             }
         }
@@ -142,30 +166,50 @@ namespace BO4E.meta.LenientConverters
         /// <returns></returns>
         public override DateTime? Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
         {
-            if (reader.TryGetDateTimeOffset(out var dto)) return DateTime.SpecifyKind(dto.DateTime, DateTimeKind.Utc);
-            if (reader.TryGetDateTime(out var dt)) return DateTime.SpecifyKind(dt, DateTimeKind.Utc);
+            if (reader.TryGetDateTimeOffset(out var dto))
+            {
+                return DateTime.SpecifyKind(dto.DateTime, DateTimeKind.Utc);
+            }
+
+            if (reader.TryGetDateTime(out var dt))
+            {
+                return DateTime.SpecifyKind(dt, DateTimeKind.Utc);
+            }
 
             var rawDate = reader.GetString();
             // First try to parse the date string as is (in case it is correctly formatted)
             if (typeToConvert == typeof(DateTimeOffset) || typeToConvert == typeof(DateTimeOffset?))
             {
-                if (DateTimeOffset.TryParse(rawDate, out var dateTimeOffset)) return dateTimeOffset.DateTime;
+                if (DateTimeOffset.TryParse(rawDate, out var dateTimeOffset))
+                {
+                    return dateTimeOffset.DateTime;
+                }
+
                 foreach (var (dtf, asUniversal) in _allowedDatetimeFormats)
                     if (DateTimeOffset.TryParseExact(rawDate, dtf, CultureInfo.InvariantCulture,
-                        asUniversal ? DateTimeStyles.AssumeUniversal : DateTimeStyles.None, out dateTimeOffset))
+                            asUniversal ? DateTimeStyles.AssumeUniversal : DateTimeStyles.None, out dateTimeOffset))
+                    {
                         return dateTimeOffset.DateTime;
+                    }
             }
             else if (typeToConvert == typeof(DateTime) || typeToConvert == typeof(DateTime?))
             {
                 if (DateTime.TryParse(rawDate, out var dateTime))
+                {
                     return DateTime.SpecifyKind(dateTime, DateTimeKind.Utc);
+                }
 
                 if (_allowedDatetimeFormats.Any(dtf => DateTime.TryParseExact(rawDate, dtf.Item1,
-                    CultureInfo.InvariantCulture, DateTimeStyles.None, out dateTime)))
+                        CultureInfo.InvariantCulture, DateTimeStyles.None, out dateTime)))
+                {
                     return DateTime.SpecifyKind(dateTime, DateTimeKind.Utc);
+                }
             }
 
-            if (_defaultDateTime.HasValue) return _defaultDateTime.Value.DateTime;
+            if (_defaultDateTime.HasValue)
+            {
+                return _defaultDateTime.Value.DateTime;
+            }
 
             try
             {
@@ -174,14 +218,20 @@ namespace BO4E.meta.LenientConverters
             catch (FormatException fe) when (fe.Message ==
                                              "The UTC representation of the date '0001-01-01T00:00:00' falls outside the year range 1-9999.")
             {
-                if (typeToConvert == typeof(DateTime)) return DateTime.MinValue;
+                if (typeToConvert == typeof(DateTime))
+                {
+                    return DateTime.MinValue;
+                }
 
                 return null;
             }
             catch (ArgumentOutOfRangeException ae) when (ae.Message ==
                                                          "The UTC time represented when the offset is applied must be between year 0 and 10,000. (Parameter 'offset')")
             {
-                if (typeToConvert == typeof(DateTime)) return DateTime.MinValue;
+                if (typeToConvert == typeof(DateTime))
+                {
+                    return DateTime.MinValue;
+                }
 
 
                 return null;
@@ -242,30 +292,50 @@ namespace BO4E.meta.LenientConverters
         public override DateTimeOffset Read(ref Utf8JsonReader reader, Type typeToConvert,
             JsonSerializerOptions options)
         {
-            if (reader.TryGetDateTimeOffset(out var dto)) return dto;
+            if (reader.TryGetDateTimeOffset(out var dto))
+            {
+                return dto;
+            }
 
             if (reader.TokenType == JsonTokenType.Null)
+            {
                 return DateTimeOffset.MinValue;
+            }
 
             var rawDate = reader.GetString();
             // First try to parse the date string as is (in case it is correctly formatted)
             if (typeToConvert == typeof(DateTimeOffset) || typeToConvert == typeof(DateTimeOffset?))
             {
-                if (DateTimeOffset.TryParse(rawDate, out var dateTimeOffset)) return dateTimeOffset;
+                if (DateTimeOffset.TryParse(rawDate, out var dateTimeOffset))
+                {
+                    return dateTimeOffset;
+                }
+
                 foreach (var (dtf, asUniversal) in _allowedDatetimeFormats)
                     if (DateTimeOffset.TryParseExact(rawDate, dtf, CultureInfo.InvariantCulture,
-                        asUniversal ? DateTimeStyles.AssumeUniversal : DateTimeStyles.None, out dateTimeOffset))
+                            asUniversal ? DateTimeStyles.AssumeUniversal : DateTimeStyles.None, out dateTimeOffset))
+                    {
                         return dateTimeOffset;
+                    }
             }
             else if (typeToConvert == typeof(DateTime) || typeToConvert == typeof(DateTime?))
             {
-                if (DateTime.TryParse(rawDate, out var dateTime)) return dateTime;
+                if (DateTime.TryParse(rawDate, out var dateTime))
+                {
+                    return dateTime;
+                }
 
                 if (_allowedDatetimeFormats.Any(dtf => DateTime.TryParseExact(rawDate, dtf.Item1,
-                    CultureInfo.InvariantCulture, DateTimeStyles.None, out dateTime))) return dateTime;
+                        CultureInfo.InvariantCulture, DateTimeStyles.None, out dateTime)))
+                {
+                    return dateTime;
+                }
             }
 
-            if (_defaultDateTime.HasValue) return _defaultDateTime.Value;
+            if (_defaultDateTime.HasValue)
+            {
+                return _defaultDateTime.Value;
+            }
 
             try
             {
@@ -278,13 +348,20 @@ namespace BO4E.meta.LenientConverters
             catch (FormatException fe) when (fe.Message ==
                                              "The UTC representation of the date '0001-01-01T00:00:00' falls outside the year range 1-9999.")
             {
-                if (typeToConvert == typeof(DateTime)) return DateTime.MinValue;
+                if (typeToConvert == typeof(DateTime))
+                {
+                    return DateTime.MinValue;
+                }
+
                 return DateTimeOffset.MinValue;
             }
             catch (ArgumentOutOfRangeException ae) when (ae.Message ==
                                                          "The UTC time represented when the offset is applied must be between year 0 and 10,000. (Parameter 'offset')")
             {
-                if (typeToConvert == typeof(DateTime)) return DateTime.MinValue;
+                if (typeToConvert == typeof(DateTime))
+                {
+                    return DateTime.MinValue;
+                }
 
 
                 return DateTimeOffset.MinValue;
@@ -345,28 +422,46 @@ namespace BO4E.meta.LenientConverters
         public override DateTimeOffset? Read(ref Utf8JsonReader reader, Type typeToConvert,
             JsonSerializerOptions options)
         {
-            if (reader.TryGetDateTimeOffset(out var dto)) return dto;
+            if (reader.TryGetDateTimeOffset(out var dto))
+            {
+                return dto;
+            }
 
 
             var rawDate = reader.GetString();
             // First try to parse the date string as is (in case it is correctly formatted)
             if (typeToConvert == typeof(DateTimeOffset) || typeToConvert == typeof(DateTimeOffset?))
             {
-                if (DateTimeOffset.TryParse(rawDate, out var dateTimeOffset)) return dateTimeOffset;
+                if (DateTimeOffset.TryParse(rawDate, out var dateTimeOffset))
+                {
+                    return dateTimeOffset;
+                }
+
                 foreach (var (dtf, asUniversal) in _allowedDatetimeFormats)
                     if (DateTimeOffset.TryParseExact(rawDate, dtf, CultureInfo.InvariantCulture,
-                        asUniversal ? DateTimeStyles.AssumeUniversal : DateTimeStyles.None, out dateTimeOffset))
+                            asUniversal ? DateTimeStyles.AssumeUniversal : DateTimeStyles.None, out dateTimeOffset))
+                    {
                         return dateTimeOffset;
+                    }
             }
             else if (typeToConvert == typeof(DateTime) || typeToConvert == typeof(DateTime?))
             {
-                if (DateTime.TryParse(rawDate, out var dateTime)) return dateTime;
+                if (DateTime.TryParse(rawDate, out var dateTime))
+                {
+                    return dateTime;
+                }
 
                 if (_allowedDatetimeFormats.Any(dtf => DateTime.TryParseExact(rawDate, dtf.Item1,
-                    CultureInfo.InvariantCulture, DateTimeStyles.None, out dateTime))) return dateTime;
+                        CultureInfo.InvariantCulture, DateTimeStyles.None, out dateTime)))
+                {
+                    return dateTime;
+                }
             }
 
-            if (_defaultDateTime.HasValue) return _defaultDateTime.Value;
+            if (_defaultDateTime.HasValue)
+            {
+                return _defaultDateTime.Value;
+            }
 
             try
             {
@@ -379,13 +474,20 @@ namespace BO4E.meta.LenientConverters
             catch (FormatException fe) when (fe.Message ==
                                              "The UTC representation of the date '0001-01-01T00:00:00' falls outside the year range 1-9999.")
             {
-                if (typeToConvert == typeof(DateTime)) return DateTime.MinValue;
+                if (typeToConvert == typeof(DateTime))
+                {
+                    return DateTime.MinValue;
+                }
+
                 return DateTimeOffset.MinValue;
             }
             catch (ArgumentOutOfRangeException ae) when (ae.Message ==
                                                          "The UTC time represented when the offset is applied must be between year 0 and 10,000. (Parameter 'offset')")
             {
-                if (typeToConvert == typeof(DateTime)) return DateTime.MinValue;
+                if (typeToConvert == typeof(DateTime))
+                {
+                    return DateTime.MinValue;
+                }
 
 
                 return DateTimeOffset.MinValue;
