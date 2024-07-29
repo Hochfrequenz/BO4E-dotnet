@@ -28,7 +28,7 @@ public class Einspeisung : BusinessObject
     public string? MarktlokationsId { get; set; }
 
     /// <summary>
-    /// Für welche Marktlokation gelten diese Einspeisedaten
+    /// Für welche Tranche gelten diese Einspeisedaten
     /// </summary>
     [JsonProperty(PropertyName = "trancheId", Required = Required.Default, Order = 101)]
     [JsonPropertyName("trancheId")]
