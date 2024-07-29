@@ -51,23 +51,19 @@ namespace BO4E.meta.LenientConverters
                     switch (lp)
                     {
                         case LenientParsing.DATE_TIME:
-                            if (!lenient.HasFlag(LenientParsing.SET_INITIAL_DATE_IF_NULL))
+                            if (lenient.HasFlag(LenientParsing.SET_INITIAL_DATE_IF_NULL))
+                            {
+                                settings.Converters.Add(new LenientSystemTextJsonDateTimeConverter(new DateTimeOffset()));
+                                settings.Converters.Add(new LenientSystemTextJsonNullableDateTimeConverter(new DateTimeOffset()));
+                                settings.Converters.Add(new LenientSystemTextJsonDateTimeOffsetConverter(new DateTimeOffset()));
+                                settings.Converters.Add(new LenientSystemTextJsonNullableDateTimeOffsetConverter(new DateTimeOffset()));
+                            }
+                            else
                             {
                                 settings.Converters.Add(new LenientSystemTextJsonDateTimeConverter());
                                 settings.Converters.Add(new LenientSystemTextJsonDateTimeOffsetConverter());
                                 settings.Converters.Add(new LenientSystemTextJsonNullableDateTimeConverter());
                                 settings.Converters.Add(new LenientSystemTextJsonNullableDateTimeOffsetConverter());
-                            }
-                            else
-                            {
-                                settings.Converters.Add(
-                                    new LenientSystemTextJsonDateTimeConverter(new DateTimeOffset()));
-                                settings.Converters.Add(
-                                    new LenientSystemTextJsonNullableDateTimeConverter(new DateTimeOffset()));
-                                settings.Converters.Add(
-                                    new LenientSystemTextJsonDateTimeOffsetConverter(new DateTimeOffset()));
-                                settings.Converters.Add(
-                                    new LenientSystemTextJsonNullableDateTimeOffsetConverter(new DateTimeOffset()));
                             }
 
                             break;
