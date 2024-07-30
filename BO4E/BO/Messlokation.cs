@@ -293,7 +293,7 @@ namespace BO4E.BO
         [JsonPropertyName("lokationszuordnungen")]
         [ProtoMember(1025)]
         [JsonPropertyOrder(31)]
-        public Lokationszuordnung[]? Lokationszuordnungen { get; set; }
+        public List<Lokationszuordnung>? Lokationszuordnungen { get; set; }
 
         /// <summary>
         /// Lokationsbuendel Code, der die Funktion dieses BOs an der Lokationsbuendelstruktur beschreibt.

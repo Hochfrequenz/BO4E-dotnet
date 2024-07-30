@@ -129,7 +129,7 @@ public class Netzlokation : BusinessObject
     [JsonPropertyName("lokationszuordnungen")]
     [ProtoMember(13)]
     [JsonPropertyOrder(19)]
-    public Lokationszuordnung[]? Lokationszuordnungen { get; set; }
+    public List<Lokationszuordnung>? Lokationszuordnungen { get; set; }
 
     /// <summary>
     /// Lokationsbuendel Code, der die Funktion dieses BOs an der Lokationsbuendelstruktur beschreibt.

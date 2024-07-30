@@ -101,7 +101,7 @@ public class SteuerbareRessource : BusinessObject
     [JsonPropertyName("lokationszuordnungen")]
     [ProtoMember(15)]
     [JsonPropertyOrder(15)]
-    public Lokationszuordnung[]? Lokationszuordnungen { get; set; }
+    public List<Lokationszuordnung>? Lokationszuordnungen { get; set; }
 
     /// <summary>
     /// Lokationsbuendel Code, der die Funktion dieses BOs an der Lokationsbuendelstruktur beschreibt.

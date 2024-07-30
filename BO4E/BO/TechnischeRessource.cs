@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.Text.Json.Serialization;
 using BO4E.COM;
@@ -223,7 +224,7 @@ public class TechnischeRessource : BusinessObject
     [JsonPropertyName("lokationszuordnungen")]
     [ProtoMember(23)]
     [JsonPropertyOrder(23)]
-    public Lokationszuordnung[]? Lokationszuordnungen { get; set; }
+    public List<Lokationszuordnung>? Lokationszuordnungen { get; set; }
 
     /// <summary>
     /// Lokationsbuendel Code, der die Funktion dieses BOs an der Lokationsbuendelstruktur beschreibt.

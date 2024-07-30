@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using System.Text.Json.Serialization;
 using BO4E.COM;
 using BO4E.ENUM;
@@ -23,7 +24,7 @@ namespace BO4E.BO
         [JsonPropertyName("marktlokationen")]
         [JsonPropertyOrder(11)]
         [ProtoMember(11)]
-        public Marktlokation[]? Marktlokationen { get; set; }
+        public List<Marktlokation>? Marktlokationen { get; set; }
 
         /// <summary>
         /// Liste mit IDs der referenzierten Messlokationen
@@ -32,7 +33,7 @@ namespace BO4E.BO
         [JsonPropertyName("messlokationen")]
         [JsonPropertyOrder(12)]
         [ProtoMember(12)]
-        public Messlokation[]? Messlokationen { get; set; }
+        public List<Messlokation>? Messlokationen { get; set; }
 
         /// <summary>
         /// Liste mit IDs der referenzierten Netzlokationen
@@ -41,7 +42,7 @@ namespace BO4E.BO
         [JsonPropertyName("netzlokationen")]
         [JsonPropertyOrder(13)]
         [ProtoMember(13)]
-        public Netzlokation[]? Netzlokationen { get; set; }
+        public List<Netzlokation>? Netzlokationen { get; set; }
 
         /// <summary>
         /// Liste mit IDs der referenzierten technischen Ressourcen
@@ -50,7 +51,7 @@ namespace BO4E.BO
         [JsonPropertyName("technischeRessourcen")]
         [JsonPropertyOrder(14)]
         [ProtoMember(14)]
-        public TechnischeRessource[]? TechnischeRessourcen { get; set; }
+        public List<TechnischeRessource>? TechnischeRessourcen { get; set; }
 
         /// <summary>
         /// Liste mit IDs der referenzierten steuerbaren Ressourcen
@@ -59,7 +60,7 @@ namespace BO4E.BO
         [JsonPropertyName("steuerbareRessourcen")]
         [JsonPropertyOrder(15)]
         [ProtoMember(15)]
-        public SteuerbareRessource[]? SteuerebareRessourcen { get; set; }
+        public List<SteuerbareRessource>? SteuerebareRessourcen { get; set; }
 
         /// <summary>
         /// Zeitspanne der Gültigkeit
@@ -69,7 +70,7 @@ namespace BO4E.BO
         [JsonPropertyOrder(16)]
         [ProtoMember(16)]
         // Instead of COM.Zeitspanne (bo4e-python)
-        public Zeitraum[]? Gueltigkeit { get; set; }
+        public List<Zeitraum>? Gueltigkeit { get; set; }
 
 
         /// <summary>
