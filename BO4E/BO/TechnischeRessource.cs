@@ -213,18 +213,18 @@ public class TechnischeRessource : BusinessObject
     [ProtoMember(22)]
     public Speicherart? Speicherart { get; set; }
 
-    /// <summary>
-    /// Lokationszuordnung, um bspw. die zugehörigen Messlokationen anzugeben
-    /// </summary>
-    [JsonProperty(
-        Required = Required.Default,
-        Order = 23,
-        PropertyName = "lokationszuordnungen"
-    )]
-    [JsonPropertyName("lokationszuordnungen")]
-    [ProtoMember(23)]
-    [JsonPropertyOrder(23)]
-    public List<Lokationszuordnung>? Lokationszuordnungen { get; set; }
+    // /// <summary>
+    // /// Lokationszuordnung, um bspw. die zugehörigen Messlokationen anzugeben
+    // /// </summary>
+    // [JsonProperty(
+    //     Required = Required.Default,
+    //     Order = 23,
+    //     PropertyName = "lokationszuordnungen"
+    // )]
+    // [JsonPropertyName("lokationszuordnungen")]
+    // [ProtoMember(23)]
+    // [JsonPropertyOrder(23)]
+    // public List<Lokationszuordnung>? Lokationszuordnungen { get; set; }
 
     /// <summary>
     /// Lokationsbuendel Code, der die Funktion dieses BOs an der Lokationsbuendelstruktur beschreibt.

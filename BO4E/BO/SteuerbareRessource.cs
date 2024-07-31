@@ -90,18 +90,18 @@ public class SteuerbareRessource : BusinessObject
     [NonOfficial(NonOfficialCategory.CUSTOMER_REQUIREMENTS)]
     public ENUM.Marktrolle? EigenschaftMSBLokation { get; set; }
 
-    /// <summary>
-    /// Lokationszuordnung, um bspw. die zugehörigen Messlokationen anzugeben
-    /// </summary>
-    [JsonProperty(
-        Required = Required.Default,
-        Order = 15,
-        PropertyName = "lokationszuordnungen"
-    )]
-    [JsonPropertyName("lokationszuordnungen")]
-    [ProtoMember(15)]
-    [JsonPropertyOrder(15)]
-    public List<Lokationszuordnung>? Lokationszuordnungen { get; set; }
+    // /// <summary>
+    // /// Lokationszuordnung, um bspw. die zugehörigen Messlokationen anzugeben
+    // /// </summary>
+    // [JsonProperty(
+    //     Required = Required.Default,
+    //     Order = 15,
+    //     PropertyName = "lokationszuordnungen"
+    // )]
+    // [JsonPropertyName("lokationszuordnungen")]
+    // [ProtoMember(15)]
+    // [JsonPropertyOrder(15)]
+    // public List<Lokationszuordnung>? Lokationszuordnungen { get; set; }
 
     /// <summary>
     /// Lokationsbuendel Code, der die Funktion dieses BOs an der Lokationsbuendelstruktur beschreibt.
