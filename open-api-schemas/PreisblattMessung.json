@@ -1,0 +1,1763 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "title": "PreisblattMessung",
+  "definitions": {
+    "Bilanzierungsmethode": {
+      "type": "integer",
+      "description": "Mit dieser Aufzählung kann zwischen den Bilanzierungsmethoden bzw. -Grundlagen unterschieden werden.",
+      "x-enumNames": [
+        "RLM",
+        "SLP",
+        "TLP_GEMEINSAM",
+        "TLP_GETRENNT",
+        "PAUSCHAL",
+        "IMS"
+      ],
+      "enum": [0, 1, 2, 3, 4, 5]
+    },
+    "Netzebene": {
+      "type": "integer",
+      "description": "Auflistung möglicher Netzebenen innerhalb der Energiearten Strom und Gas.",
+      "x-enumNames": [
+        "NSP",
+        "MSP",
+        "HSP",
+        "HSS",
+        "MSP_NSP_UMSP",
+        "HSP_MSP_UMSP",
+        "HSS_HSP_UMSP",
+        "HD",
+        "MD",
+        "ND"
+      ],
+      "enum": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+    },
+    "Dienstleistungstyp": {
+      "type": "integer",
+      "description": "Auflistung möglicher abzurechnender Dienstleistungen.",
+      "x-enumNames": [
+        "DATENBEREITSTELLUNG_TAEGLICH",
+        "DATENBEREITSTELLUNG_WOECHENTLICH",
+        "DATENBEREITSTELLUNG_MONATLICH",
+        "DATENBEREITSTELLUNG_JAEHRLICH",
+        "DATENBEREITSTELLUNG_HISTORISCHE_LG",
+        "DATENBEREITSTELLUNG_STUENDLICH",
+        "DATENBEREITSTELLUNG_VIERTELJAEHRLICH",
+        "DATENBEREITSTELLUNG_HALBJAEHRLICH",
+        "DATENBEREITSTELLUNG_MONATLICH_ZUSAETZLICH",
+        "DATENBEREITSTELLUNG_EINMALIG",
+        "AUSLESUNG_2X_TAEGLICH_FERNAUSLESUNG",
+        "AUSLESUNG_TAEGLICH_FERNAUSLESUNG",
+        "AUSLESUNG_LGK_MANUELL_MSB",
+        "AUSLESUNG_MONATLICH_SLP_FERNAUSLESUNG",
+        "AUSLESUNG_JAEHRLICH_SLP_FERNAUSLESUNG",
+        "AUSLESUNG_MDE_SLP",
+        "ABLESUNG_MONATLICH_SLP",
+        "ABLESUNG_VIERTELJAEHRLICH_SLP",
+        "ABLESUNG_HALBJAEHRLICH_SLP",
+        "ABLESUNG_JAEHRLICH_SLP",
+        "AUSLESUNG_SLP_FERNAUSLESUNG",
+        "ABLESUNG_SLP_ZUSAETZLICH_MSB",
+        "ABLESUNG_SLP_ZUSAETZLICH_KUNDE",
+        "AUSLESUNG_LGK_FERNAUSLESUNG_ZUSAETZLICH_MSB",
+        "AUSLESUNG_MOATLICH_FERNAUSLESUNG",
+        "AUSLESUNG_STUENDLICH_FERNAUSLESUNG",
+        "ABLESUNG_MONATLICH_LGK",
+        "AUSLESUNG_TEMERATURMENGENUMWERTER",
+        "AUSLESUNG_ZUSTANDSMENGENUMWERTER",
+        "AUSLESUNG_SYSTEMMENGENUMWERTER",
+        "AUSLESUNG_VORGANG_SLP",
+        "AUSLESUUNG_KOMPAKTMENGENUMWERTER",
+        "AUSLESUNG_MDE_LGK",
+        "SPERRUNG_SLP",
+        "ENTSPERRUNG_SLP",
+        "SPERRUNG_RLM",
+        "ENTSPERRUNG_RLM",
+        "MAHNKOSTEN",
+        "INKASSOKOSTEN"
+      ],
+      "enum": [
+        0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19,
+        20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37,
+        38
+      ]
+    },
+    "Geraeteeigenschaften": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/COM"
+        },
+        {
+          "type": "object",
+          "description": "Mit dieser Komponente werden die Eigenschaften eines Gerätes in Bezug auf den Typ und weitere Merkmale\nmodelliert.\n            ",
+          "additionalProperties": {},
+          "properties": {
+            "geraetetyp": {
+              "description": "Der Typ eines Gerätes, beispielsweise Drehstromzähler. Details Geraetetyp",
+              "oneOf": [
+                {
+                  "$ref": "#/definitions/Geraetetyp"
+                }
+              ]
+            },
+            "geraetemerkmal": {
+              "description": "Weitere Merkmale des Geräts, zum Beispiel Mehrtarif, Eintarif etc.. Details Geraetemerkmal\n            ",
+              "x-nullable": true,
+              "oneOf": [
+                {
+                  "$ref": "#/definitions/Geraetemerkmal"
+                }
+              ]
+            }
+          }
+        }
+      ]
+    },
+    "Geraetetyp": {
+      "type": "integer",
+      "description": "Auflistung möglicher abzurechnender Gerätetypen.",
+      "x-enumNames": [
+        "WECHSELSTROMZAEHLER",
+        "DREHSTROMZAEHLER",
+        "ZWEIRICHTUNGSZAEHLER",
+        "RLM_ZAEHLER",
+        "IMS_ZAEHLER",
+        "BALGENGASZAEHLER",
+        "MAXIMUMZAEHLER",
+        "MULTIPLEXANLAGE",
+        "PAUSCHALANLAGE",
+        "VERSTAERKERANLAGE",
+        "SUMMATIONSGERAET",
+        "IMPULSGEBER",
+        "EDL_21_ZAEHLERAUFSATZ",
+        "VIER_QUADRANTEN_LASTGANGZAEHLER",
+        "MENGENUMWERTER",
+        "STROMWANDLER",
+        "SPANNUNGSWANDLER",
+        "DATENLOGGER",
+        "KOMMUNIKATIONSANSCHLUSS",
+        "MODEM",
+        "TELEKOMMUNIKATIONSEINRICHTUNG",
+        "DREHKOLBENGASZAEHLER",
+        "TURBINENRADGASZAEHLER",
+        "ULTRASCHALLZAEHLER",
+        "WIRBELGASZAEHLER",
+        "MODERNE_MESSEINRICHTUNG",
+        "ELEKTRONISCHER_HAUSHALTSZAEHLER",
+        "STEUEREINRICHTUNG",
+        "TECHNISCHESTEUEREINRICHTUNG",
+        "TARIFSCHALTGERAET",
+        "RUNDSTEUEREMPFAENGER",
+        "OPTIONALE_ZUS_ZAEHLEINRICHTUNG",
+        "MESSWANDLERSATZ_IMS_MME",
+        "KOMBIMESSWANDLER_IMS_MME",
+        "TARIFSCHALTGERAET_IMS_MME",
+        "RUNDSTEUEREMPFAENGER_IMS_MME",
+        "TEMPERATUR_KOMPENSATION",
+        "HOECHSTBELASTUNGS_ANZEIGER",
+        "SONSTIGES_GERAET",
+        "SMARTMETERGATEWAY",
+        "STEUERBOX",
+        "BLOCKSTROMWANDLER",
+        "KOMBIMESSWANDLER"
+      ],
+      "enum": [
+        0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19,
+        20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37,
+        38, 39, 40, 41, 42
+      ]
+    },
+    "Geraetemerkmal": {
+      "type": "integer",
+      "description": "Auflistung möglicher abzurechnender Gerätetypen.",
+      "x-enumNames": [
+        "EINTARIF",
+        "ZWEITARIF",
+        "MEHRTARIF",
+        "GAS_G2P5",
+        "GAS_G4",
+        "GAS_G6",
+        "GAS_G10",
+        "GAS_G16",
+        "GAS_G25",
+        "GAS_G40",
+        "GAS_G65",
+        "GAS_G100",
+        "GAS_G160",
+        "GAS_G250",
+        "GAS_G400",
+        "GAS_G650",
+        "GAS_G1000",
+        "GAS_G1600",
+        "GAS_G2500",
+        "IMPULSGEBER_G4_G100",
+        "IMPULSGEBER_G100",
+        "MODEM_GSM",
+        "MODEM_GPRS",
+        "MODEM_FUNK",
+        "MODEM_GSM_O_LG",
+        "MODEM_GSM_M_LG",
+        "MODEM_FESTNETZ",
+        "MODEM_GPRS_M_LG",
+        "PLC_COM",
+        "ETHERNET_KOM",
+        "DSL_KOM",
+        "LTE_KOM",
+        "RUNDSTEUEREMPFAENGER",
+        "TARIFSCHALTGERAET",
+        "ZUSTANDS_MU",
+        "TEMPERATUR_MU",
+        "KOMPAKT_MU",
+        "SYSTEM_MU",
+        "UNBESTIMMT",
+        "WASSER_MWZW",
+        "WASSER_WZWW",
+        "WASSER_WZ01",
+        "WASSER_WZ02",
+        "WASSER_WZ03",
+        "WASSER_WZ04",
+        "WASSER_WZ05",
+        "WASSER_WZ06",
+        "WASSER_WZ07",
+        "WASSER_WZ08",
+        "WASSER_WZ09",
+        "WASSER_WZ10",
+        "WASSER_VWZ04",
+        "WASSER_VWZ05",
+        "WASSER_VWZ06",
+        "WASSER_VWZ07",
+        "WASSER_VWZ10",
+        "GAS_G350",
+        "GAS_G4000",
+        "GAS_G6500",
+        "GAS_G10000",
+        "GAS_G12500",
+        "GAS_G16000"
+      ],
+      "enum": [
+        0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19,
+        20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37,
+        38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55,
+        56, 57, 58, 59, 60, 61
+      ]
+    },
+    "COM": {
+      "type": "object",
+      "description": "The COM class is the abstract class from which all BO4E.COM classes are derived.\n            ",
+      "x-abstract": true,
+      "additionalProperties": {},
+      "properties": {
+        "guidSerialized": {
+          "type": "string"
+        },
+        "timestamp": {
+          "type": "string",
+          "description": "Store the latest timestamp (update from the database)\n            ",
+          "format": "date-time",
+          "x-nullable": true
+        },
+        "guid": {
+          "type": "string",
+          "description": "allows adding a GUID to COM objects for tracking across systems\n            ",
+          "format": "guid",
+          "x-nullable": true
+        }
+      }
+    },
+    "Marktteilnehmer": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/Geschaeftspartner"
+        },
+        {
+          "type": "object",
+          "description": "Objekt zur Kommunikation von Marktteilnehmern jeglicher Art.\n            ",
+          "additionalProperties": {},
+          "properties": {
+            "marktrolle": {
+              "description": "Gibt im Klartext die Bezeichnung der Marktrolle an.",
+              "x-nullable": true,
+              "x-example": "LF",
+              "oneOf": [
+                {
+                  "$ref": "#/definitions/Marktrolle"
+                }
+              ]
+            },
+            "rollencodenummer": {
+              "type": "string",
+              "description": "Gibt die Codenummer der Marktrolle an.",
+              "x-example": "9903100000006"
+            },
+            "rollencodetyp": {
+              "description": "Gibt den Typ des Codes an.",
+              "x-example": "BDEW (instead of 293, 500 etc.)",
+              "oneOf": [
+                {
+                  "$ref": "#/definitions/Rollencodetyp"
+                }
+              ]
+            },
+            "makoadresse": {
+              "type": "string",
+              "description": "Die 1:1-Kommunikationsadresse des Marktteilnehmers. Diese wird in der\nMarktkommunikation verwendet.\n            ",
+              "x-nullable": true
+            },
+            "ansprechpartner": {
+              "description": "Ansprechpartner as in EDIFACT NAD+MS, that includes e.g. the email address of a natural person.\n            ",
+              "x-nullable": true,
+              "oneOf": [
+                {
+                  "$ref": "#/definitions/Ansprechpartner"
+                }
+              ]
+            }
+          }
+        }
+      ]
+    },
+    "Marktrolle": {
+      "type": "integer",
+      "description": "Diese Rollen kann ein Marktteilnehmer einnehmen.",
+      "x-enumNames": [
+        "NB",
+        "LF",
+        "MSB",
+        "MDL",
+        "DL",
+        "BKV",
+        "BIKO",
+        "UENB",
+        "KUNDE_SELBST_NN",
+        "MGV",
+        "EIV",
+        "RB",
+        "KUNDE",
+        "INTERESSENT",
+        "GMSB",
+        "AMSB"
+      ],
+      "enum": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15]
+    },
+    "Rollencodetyp": {
+      "type": "integer",
+      "description": "Gibt den Codetyp einer Rolle, beispielsweise einer Marktrolle, an.",
+      "x-enumNames": ["ZERO", "GLN", "BDEW", "DVGW"],
+      "enum": [0, 9, 293, 332]
+    },
+    "Ansprechpartner": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/BusinessObject"
+        },
+        {
+          "type": "object",
+          "description": "Modellierung eines Ansprechpartners für einen bestimmten Geschäftspartner.\n            ",
+          "additionalProperties": {},
+          "properties": {
+            "anrede": {
+              "description": "Mögliche Anrede des Ansprechpartners\n            ",
+              "x-nullable": true,
+              "oneOf": [
+                {
+                  "$ref": "#/definitions/Anrede"
+                }
+              ]
+            },
+            "inviduelleAnrede": {
+              "type": "string",
+              "description": "Im Falle einer nicht standardisierten Anrede kann hier eine frei definierbare\nAnrede vorgegeben werden. Beispiel: \"Sehr geehrte Frau Müller, sehr geehrter\nHerr Dr. Müller\"\n            ",
+              "x-nullable": true
+            },
+            "titel": {
+              "description": "Möglicher Titel des Ansprechpartners",
+              "x-nullable": true,
+              "oneOf": [
+                {
+                  "$ref": "#/definitions/Titel"
+                }
+              ]
+            },
+            "vorname": {
+              "type": "string",
+              "description": "Vorname des Ansprechpartners",
+              "x-nullable": true
+            },
+            "nachname": {
+              "type": "string",
+              "description": "Nachname (Familienname) des Ansprechpartners",
+              "x-nullable": true
+            },
+            "eMailAdresse": {
+              "type": "string",
+              "description": "E-Mail Adresse",
+              "x-nullable": true
+            },
+            "kommentar": {
+              "type": "string",
+              "description": "Weitere Informationen zum Ansprechpartner",
+              "x-nullable": true
+            },
+            "geschaeftspartner": {
+              "description": "Der Geschäftspartner, für den dieser Ansprechpartner modelliert wird.",
+              "x-nullable": true,
+              "oneOf": [
+                {
+                  "$ref": "#/definitions/Geschaeftspartner"
+                }
+              ]
+            },
+            "adresse": {
+              "description": "Adresse des Ansprechpartners, falls diese von der Adresse des Geschäftspartners abweicht.",
+              "x-nullable": true,
+              "oneOf": [
+                {
+                  "$ref": "#/definitions/Adresse"
+                }
+              ]
+            },
+            "rufnummern": {
+              "type": "array",
+              "description": "Liste der Telefonnummern, unter denen der Ansprechpartner erreichbar ist.",
+              "x-nullable": true,
+              "items": {
+                "$ref": "#/definitions/Rufnummer"
+              }
+            },
+            "zustaendigkeit": {
+              "type": "array",
+              "description": "Liste der Abteilungen und Zuständigkeiten des Ansprechpartners.",
+              "x-nullable": true,
+              "items": {
+                "$ref": "#/definitions/Zustaendigkeit"
+              }
+            }
+          }
+        }
+      ]
+    },
+    "Anrede": {
+      "type": "integer",
+      "description": "Übersicht möglicher Anreden, z.B. eines Geschäftspartners.",
+      "x-enumNames": [
+        "HERR",
+        "FRAU",
+        "EHELEUTE",
+        "FIRMA",
+        "INDIVIDUELL",
+        "FAMILIE",
+        "ERBENGEMEINSCHAFT",
+        "WOHNGEMEINSCHAFT",
+        "GRUNDSTUECKGEMEINSCHAFT",
+        "DR"
+      ],
+      "enum": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+    },
+    "Titel": {
+      "type": "integer",
+      "description": "Übersicht möglicher Titel, z.B. eines Geschäftspartners.",
+      "x-enumNames": ["DR", "PROF", "PROF_DR"],
+      "enum": [0, 1, 2]
+    },
+    "Geschaeftspartner": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/BusinessObject"
+        },
+        {
+          "type": "object",
+          "description": "Mit diesem Objekt können Geschäftspartner übertragen werden. Sowohl\nUnternehmen, als auch Privatpersonen können Geschäftspartner sein.\n            ",
+          "additionalProperties": {},
+          "properties": {
+            "anrede": {
+              "description": "Die Anrede für den GePa, Z.B. Herr. ",
+              "x-nullable": true,
+              "oneOf": [
+                {
+                  "$ref": "#/definitions/Anrede"
+                }
+              ]
+            },
+            "title": {
+              "type": "string",
+              "description": "title of name\n            ",
+              "x-deprecated": true,
+              "x-deprecatedMessage": "Please use anrede instead or Ansprechpartner.individuelleAnrede",
+              "x-nullable": true,
+              "x-example": "Dr."
+            },
+            "name1": {
+              "type": "string",
+              "description": "Erster Teil des Namens. Hier kann der Firmenname oder bei Privatpersonen\nbeispielsweise der Nachname dargestellt werden. Beispiele: Yellow Strom GmbH\noder Hagen\n            ",
+              "x-nullable": true
+            },
+            "name2": {
+              "type": "string",
+              "description": "Zweiter Teil des Namens. Hier kann der eine Erweiterung zum Firmennamen oder\nbei Privatpersonen beispielsweise der Vorname dargestellt werden. Beispiele:\nBereich Süd oder Nina\n            ",
+              "x-nullable": true
+            },
+            "name3": {
+              "type": "string",
+              "description": "Dritter Teil des Namens. Hier können weitere Ergänzungen zum Firmennamen oder\nbei Privatpersonen Zusätze zum Namen dargestellt werden. Beispiele: und Afrika\noder Sängerin\n            ",
+              "x-nullable": true
+            },
+            "gewerbekennzeichnung": {
+              "type": "boolean",
+              "description": "Kennzeichnung ob es sich um einen Gewerbe/Unternehmen (gewerbeKennzeichnung = true)\noder eine Privatperson handelt. (gewerbeKennzeichnung = false)\n            "
+            },
+            "hrnummer": {
+              "type": "string",
+              "description": "Handelsregisternummer des Geschäftspartners",
+              "x-nullable": true
+            },
+            "amtsgericht": {
+              "type": "string",
+              "description": "Amtsgericht bzw Handelsregistergericht, das die Handelsregisternummer herausgegeben hat",
+              "x-nullable": true
+            },
+            "kontaktweg": {
+              "type": "array",
+              "description": "Bevorzugter Kontaktweg des Geschäftspartners.",
+              "x-nullable": true,
+              "items": {
+                "$ref": "#/definitions/Kontaktart"
+              }
+            },
+            "umsatzsteuerId": {
+              "type": "string",
+              "description": "Die Steuer-ID des Geschäftspartners. Beispiel: DE 813281825",
+              "x-nullable": true
+            },
+            "glaeubigerId": {
+              "type": "string",
+              "description": "* Die Gläubiger-ID welche im Zahlungsverkehr verwendet wird- Z.B. DE 47116789",
+              "x-nullable": true
+            },
+            "eMailAdresse": {
+              "type": "string",
+              "description": "E-Mail-Adresse des Ansprechpartners. Z.B. info@mp-energie.de",
+              "x-nullable": true
+            },
+            "website": {
+              "type": "string",
+              "description": "Internetseite des Marktpartners. Beispiel: www.mp-energie.de",
+              "x-nullable": true
+            },
+            "geschaeftspartnerrolle": {
+              "type": "array",
+              "description": "Rolle, die der Geschäftspartner hat (z.B. Interessent, Kunde).",
+              "x-nullable": true,
+              "items": {
+                "$ref": "#/definitions/Geschaeftspartnerrolle"
+              }
+            },
+            "partneradresse": {
+              "description": "Adresse des Geschäftspartners, an der sich der Hauptsitz befindet. Details \n            ",
+              "x-nullable": true,
+              "oneOf": [
+                {
+                  "$ref": "#/definitions/Adresse"
+                }
+              ]
+            },
+            "grundlageZurVerringerungDerUmlagenNachEnfg": {
+              "description": "Grundlage zur Verringerung der Umlagen nach EnFG",
+              "x-nullable": true,
+              "oneOf": [
+                {
+                  "$ref": "#/definitions/GrundlageZurVerringerungDerUmlagenNachEnfg"
+                }
+              ]
+            },
+            "grundDerPrivilegierungNachEnFG": {
+              "description": "Grund der Privilegierung nach EnFG",
+              "x-nullable": true,
+              "oneOf": [
+                {
+                  "$ref": "#/definitions/GrundDerPrivilegierungNachEnFG"
+                }
+              ]
+            }
+          }
+        }
+      ]
+    },
+    "Kontaktart": {
+      "type": "integer",
+      "description": "Art des Kontaktes zwischen Geschäftspartnern.",
+      "x-enumNames": ["ANSCHREIBEN", "TELEFONAT", "FAX", "E_MAIL", "SMS"],
+      "enum": [0, 1, 2, 3, 4]
+    },
+    "Geschaeftspartnerrolle": {
+      "type": "integer",
+      "description": "Diese Rollen kann ein Geschäftspartner einnehmen.",
+      "x-enumNames": [
+        "LIEFERANT",
+        "DIENSTLEISTER",
+        "KUNDE",
+        "INTERESSENT",
+        "MARKTPARTNER"
+      ],
+      "enum": [0, 1, 2, 3, 4]
+    },
+    "Adresse": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/COM"
+        },
+        {
+          "type": "object",
+          "description": "Enthält eine Adresse, die für die meisten Zwecke verwendbar ist.",
+          "additionalProperties": {},
+          "properties": {
+            "postleitzahl": {
+              "type": "string",
+              "description": "Die Postleitzahl. Beispiel: 41836"
+            },
+            "ort": {
+              "type": "string",
+              "description": "Bezeichnung der Stadt. Beispiel Hückelhoven"
+            },
+            "strasse": {
+              "type": "string",
+              "description": "Bezeichnung der Straße. Beispiel: Weserstraße",
+              "x-nullable": true
+            },
+            "hausnummer": {
+              "type": "string",
+              "description": "Hausnummer inkl. Zusatz. Beispiel. 3, 4a etc.",
+              "x-nullable": true
+            },
+            "postfach": {
+              "type": "string",
+              "description": "Im Falle einer Postfachadresse das Postfach. Damit werden Straße und\nHausnummer nicht berücksichtigt.Beispiel: Postfach 4711\n            ",
+              "x-nullable": true
+            },
+            "adresszusatz": {
+              "type": "string",
+              "description": "Zusatzhinweis zum Auffinden der Adresse, z.B. \"3. Stock linke Wohnung\"",
+              "x-nullable": true
+            },
+            "coErgaenzung": {
+              "type": "string",
+              "description": "Im Falle einer c/o-Adresse steht in diesem Attribut die Anrede. Z.B. c/o\nVeronica Hauptmieterin.In diesem Fall enthält die folgende Adresse die Daten\nder in c/o adressierten Person oder Firma.\n            ",
+              "x-nullable": true
+            },
+            "landescode": {
+              "description": "Offizieller ISO-Landescode. Z.B. NL, Details Landescode",
+              "x-nullable": true,
+              "oneOf": [
+                {
+                  "$ref": "#/definitions/Landescode"
+                }
+              ]
+            },
+            "ortsteil": {
+              "type": "string",
+              "description": "Ortsteil für EDIFACT mapping\n            ",
+              "x-nullable": true
+            }
+          }
+        }
+      ]
+    },
+    "Landescode": {
+      "type": "integer",
+      "description": "Der ISO-Landescode.",
+      "x-enumNames": [
+        "AC",
+        "AD",
+        "AE",
+        "AF",
+        "AG",
+        "AI",
+        "AL",
+        "AM",
+        "AN",
+        "AO",
+        "AQ",
+        "AR",
+        "AS",
+        "AT",
+        "AU",
+        "AW",
+        "AX",
+        "AZ",
+        "BA",
+        "BB",
+        "BD",
+        "BE",
+        "BF",
+        "BG",
+        "BH",
+        "BI",
+        "BJ",
+        "BL",
+        "BM",
+        "BN",
+        "BO",
+        "BQ",
+        "BR",
+        "BS",
+        "BT",
+        "BU",
+        "BV",
+        "BW",
+        "BY",
+        "BZ",
+        "CA",
+        "CC",
+        "CD",
+        "CF",
+        "CG",
+        "CH",
+        "CI",
+        "CK",
+        "CL",
+        "CM",
+        "CN",
+        "CO",
+        "CP",
+        "CR",
+        "CS",
+        "CU",
+        "CV",
+        "CW",
+        "CX",
+        "CY",
+        "CZ",
+        "DE",
+        "DG",
+        "DJ",
+        "DK",
+        "DM",
+        "DO",
+        "DZ",
+        "EA",
+        "EC",
+        "EE",
+        "EG",
+        "EH",
+        "ER",
+        "ES",
+        "ET",
+        "EU",
+        "FI",
+        "FJ",
+        "FK",
+        "FM",
+        "FO",
+        "FR",
+        "FX",
+        "GA",
+        "GB",
+        "GD",
+        "GE",
+        "GF",
+        "GG",
+        "GH",
+        "GI",
+        "GL",
+        "GM",
+        "GN",
+        "GP",
+        "GQ",
+        "GR",
+        "GS",
+        "GT",
+        "GU",
+        "GW",
+        "GY",
+        "HK",
+        "HM",
+        "HN",
+        "HR",
+        "HT",
+        "HU",
+        "IC",
+        "ID",
+        "IE",
+        "IL",
+        "IM",
+        "IN",
+        "IO",
+        "IQ",
+        "IR",
+        "IS",
+        "IT",
+        "JE",
+        "JM",
+        "JO",
+        "JP",
+        "KE",
+        "KG",
+        "KH",
+        "KI",
+        "KM",
+        "KN",
+        "KP",
+        "KR",
+        "KW",
+        "KY",
+        "KZ",
+        "LA",
+        "LB",
+        "LC",
+        "LI",
+        "LK",
+        "LR",
+        "LS",
+        "LT",
+        "LU",
+        "LV",
+        "LY",
+        "MA",
+        "MC",
+        "MD",
+        "ME",
+        "MF",
+        "MG",
+        "MH",
+        "MK",
+        "ML",
+        "MM",
+        "MN",
+        "MO",
+        "MP",
+        "MQ",
+        "MR",
+        "MS",
+        "MT",
+        "MU",
+        "MV",
+        "MW",
+        "MX",
+        "MY",
+        "MZ",
+        "NA",
+        "NC",
+        "NE",
+        "NF",
+        "NG",
+        "NI",
+        "NL",
+        "NO",
+        "NP",
+        "NR",
+        "NT",
+        "NU",
+        "NZ",
+        "OM",
+        "PA",
+        "PE",
+        "PF",
+        "PG",
+        "PH",
+        "PK",
+        "PL",
+        "PM",
+        "PN",
+        "PR",
+        "PS",
+        "PT",
+        "PW",
+        "PY",
+        "QA",
+        "RE",
+        "RO",
+        "RS",
+        "RU",
+        "RW",
+        "SA",
+        "SB",
+        "SC",
+        "SD",
+        "SE",
+        "SF",
+        "SG",
+        "SH",
+        "SI",
+        "SJ",
+        "SK",
+        "SL",
+        "SM",
+        "SN",
+        "SO",
+        "SR",
+        "SS",
+        "ST",
+        "SU",
+        "SV",
+        "SX",
+        "SY",
+        "SZ",
+        "TA",
+        "TC",
+        "TD",
+        "TF",
+        "TG",
+        "TJ",
+        "TK",
+        "TL",
+        "TM",
+        "TN",
+        "TO",
+        "TP",
+        "TR",
+        "TT",
+        "TV",
+        "TW",
+        "TZ",
+        "UA",
+        "UG",
+        "UK",
+        "UM",
+        "US",
+        "UY",
+        "UZ",
+        "VA",
+        "VC",
+        "VE",
+        "VG",
+        "VI",
+        "VN",
+        "VU",
+        "WF",
+        "WS",
+        "XK",
+        "YE",
+        "YT",
+        "YU",
+        "ZA",
+        "ZM",
+        "ZR",
+        "ZW"
+      ],
+      "enum": [
+        0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19,
+        20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37,
+        38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55,
+        56, 57, 58, 59, 60, 61, 62, 63, 64, 65, 66, 67, 68, 69, 70, 71, 72, 73,
+        74, 75, 76, 77, 78, 79, 80, 81, 82, 83, 84, 85, 86, 87, 88, 89, 90, 91,
+        92, 93, 94, 95, 96, 97, 98, 99, 100, 101, 102, 103, 104, 105, 106, 107,
+        108, 109, 110, 111, 112, 113, 114, 115, 116, 117, 118, 119, 120, 121,
+        122, 123, 124, 125, 126, 127, 128, 129, 130, 131, 132, 133, 134, 135,
+        136, 137, 138, 139, 140, 141, 142, 143, 144, 145, 146, 147, 148, 149,
+        150, 151, 152, 153, 154, 155, 156, 157, 158, 159, 160, 161, 162, 163,
+        164, 165, 166, 167, 168, 169, 170, 171, 172, 173, 174, 175, 176, 177,
+        178, 179, 180, 181, 182, 183, 184, 185, 186, 187, 188, 189, 190, 191,
+        192, 193, 194, 195, 196, 197, 198, 199, 200, 201, 202, 203, 204, 205,
+        206, 207, 208, 209, 210, 211, 212, 213, 214, 215, 216, 217, 218, 219,
+        220, 221, 222, 223, 224, 225, 226, 227, 228, 229, 230, 231, 232, 233,
+        234, 235, 236, 237, 238, 239, 240, 241, 242, 243, 244, 245, 246, 247,
+        248, 249, 250, 251, 252, 253, 254, 255, 256, 257, 258, 259, 260, 261,
+        262, 263, 264, 265, 266
+      ]
+    },
+    "GrundlageZurVerringerungDerUmlagenNachEnfg": {
+      "type": "integer",
+      "description": "Grundlage zur Verringerung der Umlagen nach EnFG (UTILMD Strom)",
+      "x-enumNames": [
+        "KUNDE_ERFUELLT_VORAUSSETZUNG",
+        "KUNDE_ERFUELLT_VORAUSSETZUNG_NICHT",
+        "KEINE_ANGABE"
+      ],
+      "enum": [0, 1, 2]
+    },
+    "GrundDerPrivilegierungNachEnFG": {
+      "type": "integer",
+      "description": "Grund der Privilegierung nach EnFG (UTILMD Strom)",
+      "x-enumNames": [
+        "STROMSPEICHER_UND_VERLUSTENERGIE",
+        "ELEKTRISCH_ANGETRIEBENE_WAERMEPUMPEN",
+        "UMLAGEERHEBUNG_BEI_ANLAGEN_ZUR_VERSTROMUNG_VON_KUPPELGASEN",
+        "HERSTELLUNG_VON_GRUENEN_WASSERSTOFF",
+        "STROMKOSTENINTENSIVE_UNTERNEHMEN",
+        "HERSTELLUNG_VON_WASSERSTOFF_IN_STROMKOSTENINTENSIVEN_UNTERNEHMEN",
+        "SCHIENENBAHNEN",
+        "ELEKTRISCHE_BETRIEBENE_BUSSEN_IM_LINIENVERKEHR",
+        "LANDSTROMANLAGEN"
+      ],
+      "enum": [0, 1, 2, 3, 4, 5, 6, 7, 8]
+    },
+    "BusinessObject": {
+      "type": "object",
+      "description": "General abstract class for Business Objects for Energy (BO4E)\n            ",
+      "x-abstract": true,
+      "additionalProperties": {},
+      "properties": {
+        "boTyp": {
+          "type": "string",
+          "description": "obligatory type of the business object in UPPER CASE\n            ",
+          "x-nullable": true,
+          "x-example": "'MESSLOKATION',\n'MARKTLOKATION'\n            "
+        },
+        "versionStruktur": {
+          "type": "string",
+          "description": "obligatory version of the BO4E definition. Currently hard coded to 1\n            ",
+          "x-nullable": true,
+          "x-example": 1
+        },
+        "guidSerialized": {
+          "type": "string",
+          "description": "protobuf serilization requires the Guid as string.\n            "
+        },
+        "timestamp": {
+          "type": "string",
+          "description": "Store the latest database update, is Datetime, because postgres doesn't handle datetimeoffset in a generated column\ngracefully\n            ",
+          "format": "date-time",
+          "x-nullable": true
+        },
+        "externeReferenzen": {
+          "type": "array",
+          "description": "Hier können IDs anderer Systeme hinterlegt werden (z.B. eine SAP-GP-Nummer) (Details siehe\nExterneReferenz)\n            ",
+          "x-nullable": true,
+          "items": {
+            "$ref": "#/definitions/ExterneReferenz"
+          }
+        },
+        "guid": {
+          "type": "string",
+          "description": "allows adding a GUID to Business Objects for tracking across systems\n            ",
+          "format": "guid",
+          "x-nullable": true
+        }
+      }
+    },
+    "ExterneReferenz": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/COM"
+        },
+        {
+          "type": "object",
+          "description": "Viele Datenobjekte weisen in unterschiedlichen Systemen eine eindeutige ID (Kundennummer, GP-Nummer etc.) auf.\nBeim Austausch von Datenobjekten zwischen verschiedenen Systemen ist es daher hilfreich, sich die eindeutigen IDs\nder anzubindenden Systeme zu merken.\nDiese Komponente ermöglicht es, sich die SAP GP-Nummer zu merken, um diese bei SAP-Aufrufen als Parameter mitgeben\nzu können.\n            ",
+          "additionalProperties": {},
+          "properties": {
+            "exRefName": {
+              "type": "string",
+              "description": "Bezeichnung der externen Referenz (z.B. \"hochfrequenz integration services\")\n            ",
+              "x-nullable": true
+            },
+            "exRefWert": {
+              "type": "string",
+              "description": "Wert der externen Referenz (z.B. \"123456\"; \"4711\")\n            ",
+              "x-nullable": true
+            }
+          }
+        }
+      ]
+    },
+    "Rufnummer": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/COM"
+        },
+        {
+          "type": "object",
+          "description": "Abbildung von Rufnummern.",
+          "additionalProperties": {},
+          "properties": {
+            "nummerntyp": {
+              "description": "Ausprägung der Nummer, z.B. Zentrale, Faxnummer, Mobilnummer etc. Details Rufnummernart\n            ",
+              "oneOf": [
+                {
+                  "$ref": "#/definitions/Rufnummernart"
+                }
+              ]
+            },
+            "rufnummer": {
+              "type": "string",
+              "description": "Die konkrete Nummer, z.B. 02433 5 26 01 900"
+            }
+          }
+        }
+      ]
+    },
+    "Rufnummernart": {
+      "type": "integer",
+      "description": "Abbildung verschiedener Rufnummerntypen.",
+      "x-enumNames": [
+        "RUF_ZENTRALE",
+        "FAX_ZENTRALE",
+        "SAMMELRUF",
+        "SAMMELFAX",
+        "ABTEILUNGRUF",
+        "ABTEILUNGFAX",
+        "RUF_DURCHWAHL",
+        "FAX_DURCHWAHL",
+        "MOBIL_NUMMER"
+      ],
+      "enum": [0, 1, 2, 3, 4, 5, 6, 7, 8]
+    },
+    "Zustaendigkeit": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/COM"
+        },
+        {
+          "type": "object",
+          "description": "Enthält die zeitliche Zuordnung eines Ansprechpartners zu Abteilungen und Zuständigkeiten.",
+          "additionalProperties": {},
+          "properties": {
+            "jobtitel": {
+              "type": "string",
+              "description": "Berufliche Rolle des Ansprechpartners",
+              "x-nullable": true
+            },
+            "abteilung": {
+              "type": "string",
+              "description": "Abteilung, in der der Ansprechpartner tätig ist",
+              "x-nullable": true
+            },
+            "themengebiet": {
+              "type": "string",
+              "description": "Hier kann eine thematische Zuordnung des APs angegeben werden. Details Themengebiet\n            ",
+              "x-nullable": true
+            }
+          }
+        }
+      ]
+    },
+    "Preisblatt": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/BusinessObject"
+        },
+        {
+          "type": "object",
+          "description": "Das allgemeine Modell zur Abbildung von Preisen. Davon abgeleitet können, über die Zuordnung identifizierender\nMerkmale, spezielle Preisblatt-Varianten modelliert werden.\nDie jeweiligen Sätze von Merkmalen sind in der Grafik ergänzt worden und stellen jeweils eine Ausprägung für die\nverschiedenen Anwendungsfälle der Preisblätter dar.\n            ",
+          "additionalProperties": {},
+          "properties": {
+            "bezeichnung": {
+              "type": "string",
+              "description": "Eine Bezeichnung für das Preisblatt.\n            "
+            },
+            "gueltigkeit": {
+              "description": "Der Zeitraum für den der Preis festgelegt ist. Details siehe Zeitraum\n            ",
+              "oneOf": [
+                {
+                  "$ref": "#/definitions/Zeitraum"
+                }
+              ]
+            },
+            "preispositionen": {
+              "type": "array",
+              "description": "Die einzelnen Positionen, die mit dem Preisblatt abgerechnet werden können. Z.B. Arbeitspreis, Grundpreis etc.\nDetails siehe Preisposition\n            ",
+              "items": {
+                "$ref": "#/definitions/Preisposition"
+              }
+            },
+            "preisstatus": {
+              "description": "Gibt den Status des veröffentlichten Preises an\n            ",
+              "x-nullable": true,
+              "oneOf": [
+                {
+                  "$ref": "#/definitions/Preisstatus"
+                }
+              ]
+            },
+            "sparte": {
+              "description": "Strom oder Gas. ",
+              "x-nullable": true,
+              "oneOf": [
+                {
+                  "$ref": "#/definitions/Sparte"
+                }
+              ]
+            }
+          }
+        }
+      ]
+    },
+    "Zeitraum": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/COM"
+        },
+        {
+          "type": "object",
+          "description": "Diese Komponente wird zur Abbildung von Zeiträumen in Form von Dauern oder der Angabe von Start und Ende\nverwendet.\n            ",
+          "additionalProperties": {},
+          "properties": {
+            "einheit": {
+              "description": "Die Einheit in der die Dauer angeben ist. Z.B. Monate. ",
+              "x-nullable": true,
+              "oneOf": [
+                {
+                  "$ref": "#/definitions/Zeiteinheit"
+                }
+              ]
+            },
+            "dauer": {
+              "type": "number",
+              "description": "Gibt die Anzahl der Zeiteinheiten an, z.B. 3 (Monate).",
+              "format": "decimal",
+              "x-nullable": true
+            },
+            "startdatum": {
+              "type": "string",
+              "description": "Gibt Tag und Uhrzeit (falls vorhanden) an, wann der Zeitraum startet.",
+              "format": "date-time",
+              "x-nullable": true
+            },
+            "enddatum": {
+              "type": "string",
+              "description": "Gibt Tag und Uhrzeit (falls vorhanden) an, wann der Zeitraum endet.",
+              "format": "date-time",
+              "x-nullable": true
+            },
+            "startzeitpunkt": {
+              "type": "string",
+              "description": "The same value as Startdatum",
+              "format": "date-time",
+              "x-nullable": true
+            },
+            "endzeitpunkt": {
+              "type": "string",
+              "description": "The same value as Enddatum",
+              "format": "date-time",
+              "x-nullable": true
+            }
+          }
+        }
+      ]
+    },
+    "Zeiteinheit": {
+      "type": "integer",
+      "description": "Auflistung möglicher Einheiten zur Verwendung in zeitbezogenen Angaben.",
+      "x-enumNames": [
+        "SEKUNDE",
+        "MINUTE",
+        "STUNDE",
+        "VIERTEL_STUNDE",
+        "TAG",
+        "WOCHE",
+        "MONAT",
+        "QUARTAL",
+        "HALBJAHR",
+        "JAHR"
+      ],
+      "enum": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+    },
+    "Preisposition": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/COM"
+        },
+        {
+          "type": "object",
+          "description": "Preisposition",
+          "additionalProperties": {},
+          "properties": {
+            "berechnungsmethode": {
+              "description": "Das Modell, das der Preisbildung zugrunde liegt. Details Kalkulationsmethode",
+              "oneOf": [
+                {
+                  "$ref": "#/definitions/Kalkulationsmethode"
+                }
+              ]
+            },
+            "leistungstyp": {
+              "description": "Standardisierte Bezeichnung für die abgerechnete Leistungserbringung. Details Leistungstyp\n            ",
+              "oneOf": [
+                {
+                  "$ref": "#/definitions/Leistungstyp"
+                }
+              ]
+            },
+            "leistungsbezeichnung": {
+              "type": "string",
+              "description": "Bezeichnung für die in der Position abgebildete Leistungserbringung"
+            },
+            "preiseinheit": {
+              "description": "Festlegung, mit welcher Preiseinheit abgerechnet wird, z.B. Ct. oder €. Details\nWaehrungseinheit\n            ",
+              "oneOf": [
+                {
+                  "$ref": "#/definitions/Waehrungseinheit"
+                }
+              ]
+            },
+            "bezugsgroesse": {
+              "description": "Hier wird festgelegt, auf welche Bezugsgröße sich der Preis bezieht, z.B. kWh oder Stück. Details\nMengeneinheit\n            ",
+              "x-nullable": true,
+              "oneOf": [
+                {
+                  "$ref": "#/definitions/Mengeneinheit"
+                }
+              ]
+            },
+            "zeitbasis": {
+              "description": "Die Zeit(dauer) auf die sich der Preis bezieht. Z.B. ein Jahr für einen Leistungspreis der in €/kW/Jahr\nausgegeben wird.\n            ",
+              "x-nullable": true,
+              "oneOf": [
+                {
+                  "$ref": "#/definitions/Zeiteinheit"
+                }
+              ]
+            },
+            "tarifzeit": {
+              "description": "Festlegung, für welche Tarifzeit der Preis hier festgelegt ist. ",
+              "x-nullable": true,
+              "oneOf": [
+                {
+                  "$ref": "#/definitions/Tarifzeit"
+                }
+              ]
+            },
+            "bdewArtikelnummer": {
+              "description": "Eine vom BDEW standardisierte Bezeichnung für die abgerechnete Leistungserbringung. Diese Artikelnummer wird\nauch im Rechnungsteil der INVOIC verwendet. \n            ",
+              "x-nullable": true,
+              "oneOf": [
+                {
+                  "$ref": "#/definitions/BDEWArtikelnummer"
+                }
+              ]
+            },
+            "zonungsgroesse": {
+              "description": "Mit der Menge der hier angegebenen Größe wird die Staffelung/Zonung durchgeführt. Z.B. Vollbenutzungsstunden.\n\n            ",
+              "x-nullable": true,
+              "oneOf": [
+                {
+                  "$ref": "#/definitions/Bemessungsgroesse"
+                }
+              ]
+            },
+            "zu_abschlaege": {
+              "description": "Zuschläge oder Abschläge auf die Position. ",
+              "x-nullable": true,
+              "oneOf": [
+                {
+                  "$ref": "#/definitions/PositionsAufAbschlag"
+                }
+              ]
+            },
+            "preisstaffeln": {
+              "type": "array",
+              "description": "Preisstaffeln, die zu dieser Preisposition gehören. Details Preisstaffel",
+              "items": {
+                "$ref": "#/definitions/Preisstaffel"
+              }
+            },
+            "preisschluesselstamm": {
+              "type": "string",
+              "description": "Preisschlüsselstamm>",
+              "x-nullable": true
+            },
+            "positionsnummer": {
+              "type": "integer",
+              "description": "Fortlaufende Nummer für die Preisposition",
+              "format": "int32",
+              "x-nullable": true
+            },
+            "messebene": {
+              "description": "Vgl. PRICAT IMD 7009",
+              "x-nullable": true,
+              "oneOf": [
+                {
+                  "$ref": "#/definitions/Netzebene"
+                }
+              ]
+            },
+            "beschreibung": {
+              "type": "string",
+              "description": "Produkt-/Leistungsbeschreibung, wenn IMD+X vorhanden Vgl. PRICAT IMD 7008\n            ",
+              "x-nullable": true
+            },
+            "verarbeitungszeitraum": {
+              "description": "Verarbeitungszeitraum. Details Zeitraum",
+              "x-nullable": true,
+              "oneOf": [
+                {
+                  "$ref": "#/definitions/Zeitraum"
+                }
+              ]
+            },
+            "artikelId": {
+              "type": "string",
+              "description": "Die genauen Bedeutungen der einzelnen Artikel-IDs sind in der EDI@Energy Codeliste der Artikelnummern \n            und Artikel-IDs zu finden, die in der Spalte \"PRICAT Codeverwendung\" ein X haben\n            ",
+              "x-nullable": true
+            }
+          }
+        }
+      ]
+    },
+    "Kalkulationsmethode": {
+      "type": "integer",
+      "description": "Aulistung der verschiedenen Berechnungsmethoden für ein Preisblatt.",
+      "x-enumNames": [
+        "KEINE",
+        "STAFFELN",
+        "ZONEN",
+        "VORZONEN_GP",
+        "SIGMOID",
+        "BLINDARBEIT_GT_50_PROZENT",
+        "BLINDARBEIT_GT_40_PROZENT",
+        "AP_GP_ZONEN",
+        "LP_INSTALL_LEISTUNG",
+        "AP_TRANSPORT_ODER_VERTEILNETZ",
+        "AP_TRANSPORT_ODER_VERTEILNETZ_ORTSVERTEILNETZ_SIGMOID",
+        "LP_JAHRESVERBRAUCH",
+        "LP_TRANSPORT_ODER_VERTEILNETZ",
+        "LP_TRANSPORT_ODER_VERTEILNETZ_ORTSVERTEILNETZ_SIGMOID",
+        "FUNKTIONEN",
+        "VERBRAUCH_UEBER_SLP_GRENZE_FUNKTIONSBEZOGEN_WEITERE_BERECHNUNG_ALS_LGK"
+      ],
+      "enum": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15]
+    },
+    "Leistungstyp": {
+      "type": "integer",
+      "description": "",
+      "x-enumNames": [
+        "ARBEITSPREIS_WIRKARBEIT",
+        "LEISTUNGSPREIS_WIRKLEISTUNG",
+        "ARBEITSPREIS_BLINDARBEIT_IND",
+        "ARBEITSPREIS_BLINDARBEIT_KAP",
+        "GRUNDPREIS",
+        "MEHRMINDERMENGE",
+        "MESSSTELLENBETRIEB",
+        "MESSDIENSTLEISTUNG",
+        "MESSDIENSTLEISTUNG_INKL_MESSUNG",
+        "ABRECHNUNG",
+        "KONZESSIONS_ABGABE",
+        "KWK_UMLAGE",
+        "OFFSHORE_UMLAGE",
+        "ABLAV_UMLAGE",
+        "REGELENERGIE_UMLAGE",
+        "BILANZIERUNG_UMLAGE",
+        "AUSLESUNG_ZUSAETZLICH",
+        "ABLESUNG_ZUSAETZLICH",
+        "ABRECHNUNG_ZUSAETZLICH",
+        "SPERRUNG",
+        "ENTSPERRUNG",
+        "MAHNKOSTEN",
+        "INKASSOKOSTEN"
+      ],
+      "enum": [
+        0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19,
+        20, 21, 22
+      ]
+    },
+    "Waehrungseinheit": {
+      "type": "integer",
+      "description": "In diesem Enum werden die Währungen und ihre Untereinheiten definiert, beispielsweise für die Verwendung in\nPreisen.\n            ",
+      "x-enumNames": ["EUR", "CT"],
+      "enum": [0, 1]
+    },
+    "Mengeneinheit": {
+      "type": "integer",
+      "description": "Einheit: Messgrößen, die per Messung oder Vorgabe ermittelt werden können.\n            ",
+      "x-enumNames": [
+        "ZERO",
+        "WH",
+        "KW",
+        "ANZAHL",
+        "KUBIKMETER",
+        "STUNDE",
+        "TAG",
+        "MONAT",
+        "VAR",
+        "VARH",
+        "KWHK",
+        "JAHR",
+        "KWH",
+        "MW",
+        "KVAR",
+        "KVARH",
+        "MWH"
+      ],
+      "enum": [
+        0, 2, 3, 7, 11, 13, 17, 19, 23, 29, 40, 228, 2000, 3000, 23000, 29000,
+        2000000
+      ]
+    },
+    "Tarifzeit": {
+      "type": "integer",
+      "description": "Zur Kennzeichnung verschiedener Tarifzeiten, beispielsweise zur Bepreisung oder zur Verbrauchsermittlung.",
+      "x-enumNames": ["TZ_STANDARD", "TZ_HT", "TZ_NT"],
+      "enum": [0, 1, 2]
+    },
+    "BDEWArtikelnummer": {
+      "type": "integer",
+      "description": "BDEWArtikelnummer",
+      "x-enumNames": [
+        "LEISTUNG",
+        "LEISTUNG_PAUSCHAL",
+        "GRUNDPREIS",
+        "REGELENERGIE_ARBEIT",
+        "REGELENERGIE_LEISTUNG",
+        "NOTSTROMLIEFERUNG_ARBEIT",
+        "NOTSTROMLIEFERUNG_LEISTUNG",
+        "RESERVENETZKAPAZITAET",
+        "RESERVELEISTUNG",
+        "ZUSAETZLICHE_ABLESUNG",
+        "PRUEFGEBUEHREN_AUSSERPLANMAESSIG",
+        "WIRKARBEIT",
+        "SINGULAER_GENUTZTE_BETRIEBSMITTEL",
+        "ABGABE_KWKG",
+        "ABSCHLAG",
+        "KONZESSIONSABGABE",
+        "ENTGELT_FERNAUSLESUNG",
+        "UNTERMESSUNG",
+        "BLINDMEHRARBEIT",
+        "ENTGELT_ABRECHNUNG",
+        "SPERRKOSTEN",
+        "ENTSPERRKOSTEN",
+        "MAHNKOSTEN",
+        "MEHR_MINDERMENGEN",
+        "INKASSOKOSTEN",
+        "BLINDMEHRLEISTUNG",
+        "ENTGELT_MESSUNG_ABLESUNG",
+        "ENTGELT_EINBAU_BETRIEB_WARTUNG_MESSTECHNIK",
+        "AUSGLEICHSENERGIE",
+        "AUSGLEICHSENERGIE_UNTERDECKUNG",
+        "ZAEHLEINRICHTUNG",
+        "WANDLER_MENGENUMWERTER",
+        "KOMMUNIKATIONSEINRICHTUNG",
+        "TECHNISCHE_STEUEREINRICHTUNG",
+        "PARAGRAF_19_STROM_NEV_UMLAGE",
+        "BEFESTIGUNGSEINRICHTUNG",
+        "OFFSHORE_HAFTUNGSUMLAGE",
+        "FIXE_ARBEITSENTGELTKOMPONENTE",
+        "FIXE_LEISTUNGSENTGELTKOMPONENTE",
+        "UMLAGE_ABSCHALTBARE_LASTEN",
+        "MEHRMENGE",
+        "MINDERMENGE",
+        "ENERGIESTEUER",
+        "SMARTMETER_GATEWAY",
+        "STEUERBOX",
+        "MSB_INKL_MESSUNG",
+        "ZUSATZDIENSTLEISTUNG_PARAGRAPH_35_2_1_MSBG",
+        "ZUSATZDIENSTLEISTUNG_PARAGRAPH_35_2_2_MSBG",
+        "ZUSATZDIENSTLEISTUNG_PARAGRAPH_35_2_3_MSBG",
+        "ZUSATZDIENSTLEISTUNG_PARAGRAPH_35_2_4_MSBG",
+        "ZUSATZDIENSTLEISTUNG_PARAGRAPH_35_2_5_MSBG",
+        "ZUSATZDIENSTLEISTUNG_PARAGRAPH_35_3_MSBG"
+      ],
+      "enum": [
+        0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19,
+        20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37,
+        38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51
+      ]
+    },
+    "Bemessungsgroesse": {
+      "type": "integer",
+      "description": "Zur Abbildung von Messgrössen und zur Verwendung in energiewirtschaftlichen Berechnungen.",
+      "x-enumNames": [
+        "WIRKARBEIT_EL",
+        "LEISTUNG_EL",
+        "BLINDARBEIT_KAP",
+        "BLINDARBEIT_IND",
+        "BLINDLEISTUNG_KAP",
+        "BLINDLEISTUNG_IND",
+        "WIRKARBEIT_TH",
+        "LEISTUNG_TH",
+        "VOLUMEN",
+        "VOLUMENSTROM",
+        "BENUTZUNGSDAUER",
+        "ANZAHL"
+      ],
+      "enum": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11]
+    },
+    "PositionsAufAbschlag": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/COM"
+        },
+        {
+          "type": "object",
+          "description": "Differenzierung der zu betrachtenden Produkte anhand der preiserhöhenden (Aufschlag) bzw. preisvermindernden\n(Abschlag) Zusatzvereinbarungen, die individuell zu einem neuen oder bestehenden Liefervertrag abgeschlossen werden\nkönnen. Es können mehrere Auf-/Abschläge gleichzeitig ausgewählt werden.\n            ",
+          "additionalProperties": {},
+          "properties": {
+            "bezeichnung": {
+              "type": "string",
+              "description": "Bezeichnung des Auf-/Abschlags"
+            },
+            "beschreibung": {
+              "type": "string",
+              "description": "Beschreibung zum Auf-/Abschlag"
+            },
+            "aufAbschlagstyp": {
+              "description": "Typ des AufAbschlages. Details AufAbschlagstyp",
+              "oneOf": [
+                {
+                  "$ref": "#/definitions/AufAbschlagstyp"
+                }
+              ]
+            },
+            "aufAbschlagswert": {
+              "type": "number",
+              "description": "Höhe des Auf-/Abschlages",
+              "format": "decimal"
+            },
+            "aufAbschlagswaehrung": {
+              "description": "Einheit, in der der Auf-/Abschlag angegeben ist (z.B. ct/kWh). Details Waehrungseinheit\n            ",
+              "oneOf": [
+                {
+                  "$ref": "#/definitions/Waehrungseinheit"
+                }
+              ]
+            }
+          }
+        }
+      ]
+    },
+    "AufAbschlagstyp": {
+      "type": "integer",
+      "description": "Festlegung, ob der Auf- oder Abschlag mit relativen oder absoluten Werten erfolgt.",
+      "x-enumNames": ["RELATIV", "ABSOLUT"],
+      "enum": [0, 1]
+    },
+    "Preisstaffel": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/COM"
+        },
+        {
+          "type": "object",
+          "description": "Gibt die Staffelgrenzen der jeweiligen Preise an.",
+          "additionalProperties": {},
+          "properties": {
+            "einheitspreis": {
+              "type": "number",
+              "description": "Preis pro abgerechneter Mengeneinheit",
+              "format": "decimal"
+            },
+            "staffelgrenzeVon": {
+              "type": "number",
+              "description": "Unterer Wert, ab dem die Staffel gilt.",
+              "format": "decimal"
+            },
+            "staffelgrenzeBis": {
+              "type": "number",
+              "description": "Oberer Wert, bis zu dem die Staffel gilt.",
+              "format": "decimal"
+            },
+            "sigmoidparameter": {
+              "description": "Parameter zur Berechnung des Preises anhand der Jahresmenge und weiterer netzbezogener Parameter.\n\n            ",
+              "x-nullable": true,
+              "oneOf": [
+                {
+                  "$ref": "#/definitions/Sigmoidparameter"
+                }
+              ]
+            }
+          }
+        }
+      ]
+    },
+    "Sigmoidparameter": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/COM"
+        },
+        {
+          "type": "object",
+          "description": "Sigmoidparameter",
+          "additionalProperties": {},
+          "properties": {
+            "A": {
+              "type": "number",
+              "description": "Briefmarke Ortsverteilnetz",
+              "format": "decimal"
+            },
+            "B": {
+              "type": "number",
+              "description": "Wendepunkt für die bepreiste Menge",
+              "format": "decimal"
+            },
+            "C": {
+              "type": "number",
+              "description": "Exponent",
+              "format": "decimal"
+            },
+            "D": {
+              "type": "number",
+              "description": "Briefmarke Transportnetz",
+              "format": "decimal"
+            }
+          }
+        }
+      ]
+    },
+    "Preisstatus": {
+      "type": "integer",
+      "description": "Statusinformation für Preise",
+      "x-enumNames": ["VORLAEUFIG", "ENDGUELTIG"],
+      "enum": [0, 1]
+    },
+    "Sparte": {
+      "type": "integer",
+      "description": "Unterscheidungsmöglichkeiten für die Sparte.",
+      "x-enumNames": [
+        "STROM",
+        "GAS",
+        "FERNWAERME",
+        "NAHWAERME",
+        "WASSER",
+        "ABWASSER"
+      ],
+      "enum": [0, 1, 2, 3, 4, 5]
+    }
+  },
+  "allOf": [
+    {
+      "$ref": "#/definitions/Preisblatt"
+    },
+    {
+      "type": "object",
+      "description": "Die Variante des Preisblattmodells zur Abbildung der Preise für den Messstellenbetrieb und damit verbundene\nLeistungen.\n            ",
+      "additionalProperties": {},
+      "properties": {
+        "bilanzierungsmethode": {
+          "description": "Die Preise gelten für Marktlokationen der angegebenen Bilanzierungsmethode.\n            ",
+          "oneOf": [
+            {
+              "$ref": "#/definitions/Bilanzierungsmethode"
+            }
+          ]
+        },
+        "messebene": {
+          "description": "Die Preise gelten für Messlokationen in der angegebenen Netzebene.\n            ",
+          "oneOf": [
+            {
+              "$ref": "#/definitions/Netzebene"
+            }
+          ]
+        },
+        "inklusiveDienstleistung": {
+          "type": "array",
+          "description": "Im Preis sind die hier angegebenen Dienstleistungen enthalten. Z.B. Jährliche Ablesung.\n            ",
+          "x-nullable": true,
+          "items": {
+            "$ref": "#/definitions/Dienstleistungstyp"
+          }
+        },
+        "basisgeraet": {
+          "description": "Der Preis betrifft das hier angegebene Geräte, z.B. einen Drehstromzähler.\n            ",
+          "oneOf": [
+            {
+              "$ref": "#/definitions/Geraeteeigenschaften"
+            }
+          ]
+        },
+        "inklusiveGeraete": {
+          "type": "array",
+          "description": "Im Preis sind die hier angegebenen Geräte mit enthalten, z.B. ein Wandler.\n            ",
+          "x-nullable": true,
+          "items": {
+            "$ref": "#/definitions/Geraeteeigenschaften"
+          }
+        },
+        "herausgeber": {
+          "description": "Der Netzbetreiber oder Messstellenbetreiber, der die Preise veröffentlicht hat.\n            ",
+          "oneOf": [
+            {
+              "$ref": "#/definitions/Marktteilnehmer"
+            }
+          ]
+        }
+      }
+    }
+  ]
+}

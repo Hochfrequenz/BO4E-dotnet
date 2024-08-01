@@ -1,0 +1,239 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "title": "Region",
+  "definitions": {
+    "Regionskriterium": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/COM"
+        },
+        {
+          "type": "object",
+          "description": "Komponente zur Abbildung eines Regionskriteriums.\n            ",
+          "additionalProperties": {},
+          "properties": {
+            "gueltigkeitstyp": {
+              "description": "Hier wird festgelegt, ob es sich um ein einschließendes oder ausschließendes Kriterium handelt.Details siehe\nGueltigkeitstyp\n            ",
+              "oneOf": [
+                {
+                  "$ref": "#/definitions/Gueltigkeitstyp"
+                }
+              ]
+            },
+            "sparte": {
+              "description": "Das Kriterium gilt in der angegebenen Sparte.Details siehe Sparte\n            ",
+              "x-nullable": true,
+              "oneOf": [
+                {
+                  "$ref": "#/definitions/Sparte"
+                }
+              ]
+            },
+            "mengenoperator": {
+              "description": "Unterscheidung, wie der Wert angewendet werden soll, z.B.kleiner, größer, gleich.Details siehe\nMengenoperator\n            ",
+              "oneOf": [
+                {
+                  "$ref": "#/definitions/Mengenoperator"
+                }
+              ]
+            },
+            "regionskriteriumtyp": {
+              "description": "Hier wird das Kriterium selbst angegeben, z.B.Bundesland. Details siehe Regionskriteriumtyp\n            ",
+              "oneOf": [
+                {
+                  "$ref": "#/definitions/Regionskriteriumtyp"
+                }
+              ]
+            },
+            "wert": {
+              "type": "string",
+              "description": "Der Wert, den das Kriterium annehmen kann, z.B.NRW.Im Falle des Regionskriteriumstyp BUNDESWEIT spielt dieser Wert\nkeine Rolle.\n            "
+            }
+          }
+        }
+      ]
+    },
+    "Gueltigkeitstyp": {
+      "type": "integer",
+      "description": "Übersicht der verschiedenen Gültigkeiten zur Umsetzung von Positiv- bzw. Negativlisten.",
+      "x-enumNames": ["NICHT_IN"],
+      "enum": [0]
+    },
+    "Sparte": {
+      "type": "integer",
+      "description": "Unterscheidungsmöglichkeiten für die Sparte.",
+      "x-enumNames": [
+        "STROM",
+        "GAS",
+        "FERNWAERME",
+        "NAHWAERME",
+        "WASSER",
+        "ABWASSER"
+      ],
+      "enum": [0, 1, 2, 3, 4, 5]
+    },
+    "Mengenoperator": {
+      "type": "integer",
+      "description": "Angabe, wie eine Menge in Bezug auf einen Wert zu bilden ist.\n            ",
+      "x-enumNames": ["KLEINER_ALS", "GROESSER_ALS", "GLEICH"],
+      "enum": [0, 1, 2]
+    },
+    "Regionskriteriumtyp": {
+      "type": "integer",
+      "description": "Klassifizierung der Kriterien für eine regionale Eingrenzung.\n            ",
+      "x-enumNames": [
+        "BUNDESLANDKENNZIFFER",
+        "BUNDESLAND_NAME",
+        "MARKTGEBIET_NUMMER",
+        "MARKTGEBIET_NAME",
+        "REGELGEBIET_NUMMER",
+        "REGELGEBIET_NAME",
+        "NETZBETREIBER_NUMMER",
+        "NETZBETREIBER_NAME",
+        "BILANZIERUNGS_GEBIET_NUMMER",
+        "MSB_NUMMER",
+        "MSB_NAME",
+        "VERSORGER_NUMMER",
+        "VERSORGER_NAME",
+        "GRUNDVERSORGER_NUMMER",
+        "GRUNDVERSORGER_NAME",
+        "KREIS_NAME",
+        "KREISKENNZIFFER",
+        "GEMEINDE_NAME",
+        "GEMEINDEKENNZIFFER",
+        "POSTLEITZAHL",
+        "ORT",
+        "EINWOHNERZAHL_GEMEINDE",
+        "EINWOHNERZAHL_ORT",
+        "KM_UMKREIS",
+        "BUNDESWEIT"
+      ],
+      "enum": [
+        0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19,
+        20, 21, 22, 23, 24
+      ]
+    },
+    "COM": {
+      "type": "object",
+      "description": "The COM class is the abstract class from which all BO4E.COM classes are derived.\n            ",
+      "x-abstract": true,
+      "additionalProperties": {},
+      "properties": {
+        "guidSerialized": {
+          "type": "string"
+        },
+        "timestamp": {
+          "type": "string",
+          "description": "Store the latest timestamp (update from the database)\n            ",
+          "format": "date-time",
+          "x-nullable": true
+        },
+        "guid": {
+          "type": "string",
+          "description": "allows adding a GUID to COM objects for tracking across systems\n            ",
+          "format": "guid",
+          "x-nullable": true
+        }
+      }
+    },
+    "BusinessObject": {
+      "type": "object",
+      "description": "General abstract class for Business Objects for Energy (BO4E)\n            ",
+      "x-abstract": true,
+      "additionalProperties": {},
+      "properties": {
+        "boTyp": {
+          "type": "string",
+          "description": "obligatory type of the business object in UPPER CASE\n            ",
+          "x-nullable": true,
+          "x-example": "'MESSLOKATION',\n'MARKTLOKATION'\n            "
+        },
+        "versionStruktur": {
+          "type": "string",
+          "description": "obligatory version of the BO4E definition. Currently hard coded to 1\n            ",
+          "x-nullable": true,
+          "x-example": 1
+        },
+        "guidSerialized": {
+          "type": "string",
+          "description": "protobuf serilization requires the Guid as string.\n            "
+        },
+        "timestamp": {
+          "type": "string",
+          "description": "Store the latest database update, is Datetime, because postgres doesn't handle datetimeoffset in a generated column\ngracefully\n            ",
+          "format": "date-time",
+          "x-nullable": true
+        },
+        "externeReferenzen": {
+          "type": "array",
+          "description": "Hier können IDs anderer Systeme hinterlegt werden (z.B. eine SAP-GP-Nummer) (Details siehe\nExterneReferenz)\n            ",
+          "x-nullable": true,
+          "items": {
+            "$ref": "#/definitions/ExterneReferenz"
+          }
+        },
+        "guid": {
+          "type": "string",
+          "description": "allows adding a GUID to Business Objects for tracking across systems\n            ",
+          "format": "guid",
+          "x-nullable": true
+        }
+      }
+    },
+    "ExterneReferenz": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/COM"
+        },
+        {
+          "type": "object",
+          "description": "Viele Datenobjekte weisen in unterschiedlichen Systemen eine eindeutige ID (Kundennummer, GP-Nummer etc.) auf.\nBeim Austausch von Datenobjekten zwischen verschiedenen Systemen ist es daher hilfreich, sich die eindeutigen IDs\nder anzubindenden Systeme zu merken.\nDiese Komponente ermöglicht es, sich die SAP GP-Nummer zu merken, um diese bei SAP-Aufrufen als Parameter mitgeben\nzu können.\n            ",
+          "additionalProperties": {},
+          "properties": {
+            "exRefName": {
+              "type": "string",
+              "description": "Bezeichnung der externen Referenz (z.B. \"hochfrequenz integration services\")\n            ",
+              "x-nullable": true
+            },
+            "exRefWert": {
+              "type": "string",
+              "description": "Wert der externen Referenz (z.B. \"123456\"; \"4711\")\n            ",
+              "x-nullable": true
+            }
+          }
+        }
+      ]
+    }
+  },
+  "allOf": [
+    {
+      "$ref": "#/definitions/BusinessObject"
+    },
+    {
+      "type": "object",
+      "description": "Modellierung einer Region als Menge von Kriterien, die eine Region beschreiben.\n            ",
+      "additionalProperties": {},
+      "properties": {
+        "bezeichnung": {
+          "type": "string",
+          "description": "Bezeichnung der Region.\n            "
+        },
+        "positivListe": {
+          "type": "array",
+          "description": "Positivliste der Kriterien zur Definition der Region.\n            ",
+          "items": {
+            "$ref": "#/definitions/Regionskriterium"
+          }
+        },
+        "negativListe": {
+          "type": "array",
+          "description": "Negativliste der Kriterien zur Definition der Region.\n            ",
+          "x-nullable": true,
+          "items": {
+            "$ref": "#/definitions/Regionskriterium"
+          }
+        }
+      }
+    }
+  ]
+}

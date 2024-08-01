@@ -2,35 +2,20 @@
   "$schema": "http://json-schema.org/draft-07/schema#",
   "definitions": {
     "ExterneReferenz": {
-      "type": [
-        "object",
-        "null"
-      ],
+      "type": ["object", "null"],
       "properties": {
         "exRefName": {
-          "type": [
-            "string",
-            "null"
-          ]
+          "type": ["string", "null"]
         },
         "exRefWert": {
-          "type": [
-            "string",
-            "null"
-          ]
+          "type": ["string", "null"]
         },
         "timestamp": {
-          "type": [
-            "string",
-            "null"
-          ],
+          "type": ["string", "null"],
           "format": "date-time"
         },
         "guid": {
-          "type": [
-            "string",
-            "null"
-          ]
+          "type": ["string", "null"]
         }
       }
     }
@@ -38,50 +23,29 @@
   "type": "object",
   "properties": {
     "boTyp": {
-      "type": [
-        "string",
-        "null"
-      ]
+      "type": ["string", "null"]
     },
     "versionStruktur": {
-      "type": [
-        "string",
-        "null"
-      ]
+      "type": ["string", "null"]
     },
     "timestamp": {
-      "type": [
-        "string",
-        "null"
-      ],
+      "type": ["string", "null"],
       "format": "date-time"
     },
     "externeReferenzen": {
-      "type": [
-        "array",
-        "null"
-      ],
+      "type": ["array", "null"],
       "items": {
         "$ref": "#/definitions/ExterneReferenz"
       }
     },
     "guid": {
-      "type": [
-        "string",
-        "null"
-      ]
+      "type": ["string", "null"]
     },
     "marktlokationsId": {
-      "type": [
-        "string",
-        "null"
-      ]
+      "type": ["string", "null"]
     },
     "verguetungsempfaenger": {
-      "type": [
-        "string",
-        "null"
-      ],
+      "type": ["string", "null"],
       "enum": [
         null,
         "LIEFERANT",
@@ -92,10 +56,7 @@
       ]
     },
     "eegVermarktungsform": {
-      "type": [
-        "string",
-        "null"
-      ],
+      "type": ["string", "null"],
       "enum": [
         null,
         "AUSFALLVERGUETUNG",
@@ -105,10 +66,7 @@
       ]
     },
     "landescode": {
-      "type": [
-        "string",
-        "null"
-      ],
+      "type": ["string", "null"],
       "enum": [
         null,
         "AC",
@@ -381,10 +339,7 @@
       ]
     },
     "fernsteuerbarkeitStatus": {
-      "type": [
-        "string",
-        "null"
-      ],
+      "type": ["string", "null"],
       "enum": [
         null,
         "NICHT_FERNSTEUERBAR",
@@ -393,10 +348,7 @@
       ]
     },
     "trancheId": {
-      "type": [
-        "string",
-        "null"
-      ]
+      "type": ["string", "null"]
     }
   }
 }

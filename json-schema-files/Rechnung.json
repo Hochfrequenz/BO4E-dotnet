@@ -2,23 +2,14 @@
   "$schema": "http://json-schema.org/draft-07/schema#",
   "definitions": {
     "Adresse": {
-      "type": [
-        "object",
-        "null"
-      ],
+      "type": ["object", "null"],
       "properties": {
         "timestamp": {
-          "type": [
-            "string",
-            "null"
-          ],
+          "type": ["string", "null"],
           "format": "date-time"
         },
         "guid": {
-          "type": [
-            "string",
-            "null"
-          ]
+          "type": ["string", "null"]
         },
         "postleitzahl": {
           "type": "string"
@@ -27,40 +18,22 @@
           "type": "string"
         },
         "strasse": {
-          "type": [
-            "string",
-            "null"
-          ]
+          "type": ["string", "null"]
         },
         "hausnummer": {
-          "type": [
-            "string",
-            "null"
-          ]
+          "type": ["string", "null"]
         },
         "postfach": {
-          "type": [
-            "string",
-            "null"
-          ]
+          "type": ["string", "null"]
         },
         "adresszusatz": {
-          "type": [
-            "string",
-            "null"
-          ]
+          "type": ["string", "null"]
         },
         "coErgaenzung": {
-          "type": [
-            "string",
-            "null"
-          ]
+          "type": ["string", "null"]
         },
         "landescode": {
-          "type": [
-            "string",
-            "null"
-          ],
+          "type": ["string", "null"],
           "enum": [
             null,
             "AC",
@@ -333,16 +306,10 @@
           ]
         },
         "ortsteil": {
-          "type": [
-            "string",
-            "null"
-          ]
+          "type": ["string", "null"]
         }
       },
-      "required": [
-        "postleitzahl",
-        "ort"
-      ]
+      "required": ["postleitzahl", "ort"]
     },
     "Betrag": {
       "type": "object",
@@ -537,29 +504,17 @@
           ]
         },
         "timestamp": {
-          "type": [
-            "string",
-            "null"
-          ],
+          "type": ["string", "null"],
           "format": "date-time"
         },
         "guid": {
-          "type": [
-            "string",
-            "null"
-          ]
+          "type": ["string", "null"]
         }
       },
-      "required": [
-        "wert",
-        "waehrung"
-      ]
+      "required": ["wert", "waehrung"]
     },
     "Betrag-1": {
-      "type": [
-        "object",
-        "null"
-      ],
+      "type": ["object", "null"],
       "properties": {
         "wert": {
           "type": "number"
@@ -751,54 +706,30 @@
           ]
         },
         "timestamp": {
-          "type": [
-            "string",
-            "null"
-          ],
+          "type": ["string", "null"],
           "format": "date-time"
         },
         "guid": {
-          "type": [
-            "string",
-            "null"
-          ]
+          "type": ["string", "null"]
         }
       },
-      "required": [
-        "wert",
-        "waehrung"
-      ]
+      "required": ["wert", "waehrung"]
     },
     "ExterneReferenz": {
-      "type": [
-        "object",
-        "null"
-      ],
+      "type": ["object", "null"],
       "properties": {
         "exRefName": {
-          "type": [
-            "string",
-            "null"
-          ]
+          "type": ["string", "null"]
         },
         "exRefWert": {
-          "type": [
-            "string",
-            "null"
-          ]
+          "type": ["string", "null"]
         },
         "timestamp": {
-          "type": [
-            "string",
-            "null"
-          ],
+          "type": ["string", "null"],
           "format": "date-time"
         },
         "guid": {
-          "type": [
-            "string",
-            "null"
-          ]
+          "type": ["string", "null"]
         }
       }
     },
@@ -806,44 +737,26 @@
       "type": "object",
       "properties": {
         "boTyp": {
-          "type": [
-            "string",
-            "null"
-          ]
+          "type": ["string", "null"]
         },
         "versionStruktur": {
-          "type": [
-            "string",
-            "null"
-          ]
+          "type": ["string", "null"]
         },
         "timestamp": {
-          "type": [
-            "string",
-            "null"
-          ],
+          "type": ["string", "null"],
           "format": "date-time"
         },
         "externeReferenzen": {
-          "type": [
-            "array",
-            "null"
-          ],
+          "type": ["array", "null"],
           "items": {
             "$ref": "#/definitions/ExterneReferenz"
           }
         },
         "guid": {
-          "type": [
-            "string",
-            "null"
-          ]
+          "type": ["string", "null"]
         },
         "anrede": {
-          "type": [
-            "string",
-            "null"
-          ],
+          "type": ["string", "null"],
           "enum": [
             null,
             "HERR",
@@ -859,89 +772,47 @@
           ]
         },
         "title": {
-          "type": [
-            "string",
-            "null"
-          ]
+          "type": ["string", "null"]
         },
         "name1": {
-          "type": [
-            "string",
-            "null"
-          ]
+          "type": ["string", "null"]
         },
         "name2": {
-          "type": [
-            "string",
-            "null"
-          ]
+          "type": ["string", "null"]
         },
         "name3": {
-          "type": [
-            "string",
-            "null"
-          ]
+          "type": ["string", "null"]
         },
         "gewerbekennzeichnung": {
           "type": "boolean"
         },
         "hrnummer": {
-          "type": [
-            "string",
-            "null"
-          ]
+          "type": ["string", "null"]
         },
         "amtsgericht": {
-          "type": [
-            "string",
-            "null"
-          ]
+          "type": ["string", "null"]
         },
         "kontaktweg": {
-          "type": [
-            "array",
-            "null"
-          ],
+          "type": ["array", "null"],
           "items": {
             "type": "string",
-            "enum": [
-              "ANSCHREIBEN",
-              "TELEFONAT",
-              "FAX",
-              "E_MAIL",
-              "SMS"
-            ]
+            "enum": ["ANSCHREIBEN", "TELEFONAT", "FAX", "E_MAIL", "SMS"]
           }
         },
         "umsatzsteuerId": {
-          "type": [
-            "string",
-            "null"
-          ]
+          "type": ["string", "null"]
         },
         "glaeubigerId": {
-          "type": [
-            "string",
-            "null"
-          ]
+          "type": ["string", "null"]
         },
         "eMailAdresse": {
-          "type": [
-            "string",
-            "null"
-          ]
+          "type": ["string", "null"]
         },
         "website": {
-          "type": [
-            "string",
-            "null"
-          ]
+          "type": ["string", "null"]
         },
         "geschaeftspartnerrolle": {
-          "type": [
-            "array",
-            "null"
-          ],
+          "type": ["array", "null"],
           "items": {
             "type": "string",
             "enum": [
@@ -957,10 +828,7 @@
           "$ref": "#/definitions/Adresse"
         },
         "grundlageZurVerringerungDerUmlagenNachEnfg": {
-          "type": [
-            "string",
-            "null"
-          ],
+          "type": ["string", "null"],
           "enum": [
             null,
             "KUNDE_ERFUELLT_VORAUSSETZUNG",
@@ -969,10 +837,7 @@
           ]
         },
         "grundDerPrivilegierungNachEnFG": {
-          "type": [
-            "string",
-            "null"
-          ],
+          "type": ["string", "null"],
           "enum": [
             null,
             "STROMSPEICHER_UND_VERLUSTENERGIE",
@@ -987,37 +852,23 @@
           ]
         }
       },
-      "required": [
-        "gewerbekennzeichnung"
-      ]
+      "required": ["gewerbekennzeichnung"]
     },
     "Menge": {
-      "type": [
-        "object",
-        "null"
-      ],
+      "type": ["object", "null"],
       "properties": {
         "timestamp": {
-          "type": [
-            "string",
-            "null"
-          ],
+          "type": ["string", "null"],
           "format": "date-time"
         },
         "guid": {
-          "type": [
-            "string",
-            "null"
-          ]
+          "type": ["string", "null"]
         },
         "wert": {
           "type": "number"
         },
         "einheit": {
-          "type": [
-            "string",
-            "null"
-          ],
+          "type": ["string", "null"],
           "enum": [
             null,
             "ZERO",
@@ -1040,9 +891,7 @@
           ]
         }
       },
-      "required": [
-        "wert"
-      ]
+      "required": ["wert"]
     },
     "Preis": {
       "type": "object",
@@ -1051,21 +900,11 @@
           "type": "number"
         },
         "einheit": {
-          "type": [
-            "string",
-            "null"
-          ],
-          "enum": [
-            null,
-            "EUR",
-            "CT"
-          ]
+          "type": ["string", "null"],
+          "enum": [null, "EUR", "CT"]
         },
         "bezugswert": {
-          "type": [
-            "string",
-            "null"
-          ],
+          "type": ["string", "null"],
           "enum": [
             null,
             "ZERO",
@@ -1088,78 +927,45 @@
           ]
         },
         "status": {
-          "type": [
-            "string",
-            "null"
-          ],
-          "enum": [
-            null,
-            "VORLAEUFIG",
-            "ENDGUELTIG"
-          ]
+          "type": ["string", "null"],
+          "enum": [null, "VORLAEUFIG", "ENDGUELTIG"]
         },
         "timestamp": {
-          "type": [
-            "string",
-            "null"
-          ],
+          "type": ["string", "null"],
           "format": "date-time"
         },
         "guid": {
-          "type": [
-            "string",
-            "null"
-          ]
+          "type": ["string", "null"]
         }
       },
-      "required": [
-        "wert"
-      ]
+      "required": ["wert"]
     },
     "Rechnungsposition": {
-      "type": [
-        "object",
-        "null"
-      ],
+      "type": ["object", "null"],
       "properties": {
         "timestamp": {
-          "type": [
-            "string",
-            "null"
-          ],
+          "type": ["string", "null"],
           "format": "date-time"
         },
         "guid": {
-          "type": [
-            "string",
-            "null"
-          ]
+          "type": ["string", "null"]
         },
         "positionsnummer": {
           "type": "integer"
         },
         "lieferungVon": {
-          "type": [
-            "string",
-            "null"
-          ],
+          "type": ["string", "null"],
           "format": "date-time"
         },
         "lieferungBis": {
-          "type": [
-            "string",
-            "null"
-          ],
+          "type": ["string", "null"],
           "format": "date-time"
         },
         "positionstext": {
           "type": "string"
         },
         "zeiteinheit": {
-          "type": [
-            "string",
-            "null"
-          ],
+          "type": ["string", "null"],
           "enum": [
             null,
             "ZERO",
@@ -1182,10 +988,7 @@
           ]
         },
         "artikelnummer": {
-          "type": [
-            "string",
-            "null"
-          ],
+          "type": ["string", "null"],
           "enum": [
             null,
             "LEISTUNG",
@@ -1243,10 +1046,7 @@
           ]
         },
         "lokationsId": {
-          "type": [
-            "string",
-            "null"
-          ]
+          "type": ["string", "null"]
         },
         "positionsMenge": {
           "$ref": "#/definitions/Menge"
@@ -1255,10 +1055,7 @@
           "$ref": "#/definitions/Menge"
         },
         "korrekturfaktor": {
-          "type": [
-            "number",
-            "null"
-          ]
+          "type": ["number", "null"]
         },
         "einzelpreis": {
           "$ref": "#/definitions/Preis"
@@ -1273,22 +1070,13 @@
           "$ref": "#/definitions/Steuerbetrag"
         },
         "vertragskontoId": {
-          "type": [
-            "string",
-            "null"
-          ]
+          "type": ["string", "null"]
         },
         "vertragsId": {
-          "type": [
-            "string",
-            "null"
-          ]
+          "type": ["string", "null"]
         },
         "status": {
-          "type": [
-            "string",
-            "null"
-          ],
+          "type": ["string", "null"],
           "enum": [
             null,
             "ROH",
@@ -1299,30 +1087,17 @@
           ]
         },
         "artikelId": {
-          "type": [
-            "string",
-            "null"
-          ]
+          "type": ["string", "null"]
         },
         "ausfuehrungsdatum": {
-          "type": [
-            "string",
-            "null"
-          ],
+          "type": ["string", "null"],
           "format": "date-time"
         }
       },
-      "required": [
-        "positionsnummer",
-        "positionstext",
-        "einzelpreis"
-      ]
+      "required": ["positionsnummer", "positionstext", "einzelpreis"]
     },
     "Steuerbetrag": {
-      "type": [
-        "object",
-        "null"
-      ],
+      "type": ["object", "null"],
       "properties": {
         "steuerkennzeichen": {
           "type": "string",
@@ -1339,10 +1114,7 @@
           ]
         },
         "sondersteuersatz": {
-          "type": [
-            "number",
-            "null"
-          ]
+          "type": ["number", "null"]
         },
         "basiswert": {
           "type": "number"
@@ -1537,86 +1309,49 @@
           ]
         },
         "basiswertVorausgezahlt": {
-          "type": [
-            "number",
-            "null"
-          ]
+          "type": ["number", "null"]
         },
         "steuerwertVorausgezahlt": {
-          "type": [
-            "number",
-            "null"
-          ]
+          "type": ["number", "null"]
         },
         "timestamp": {
-          "type": [
-            "string",
-            "null"
-          ],
+          "type": ["string", "null"],
           "format": "date-time"
         },
         "guid": {
-          "type": [
-            "string",
-            "null"
-          ]
+          "type": ["string", "null"]
         }
       },
-      "required": [
-        "steuerkennzeichen",
-        "basiswert",
-        "steuerwert",
-        "waehrung"
-      ]
+      "required": ["steuerkennzeichen", "basiswert", "steuerwert", "waehrung"]
     },
     "Vorauszahlung": {
-      "type": [
-        "object",
-        "null"
-      ],
+      "type": ["object", "null"],
       "properties": {
         "timestamp": {
-          "type": [
-            "string",
-            "null"
-          ],
+          "type": ["string", "null"],
           "format": "date-time"
         },
         "guid": {
-          "type": [
-            "string",
-            "null"
-          ]
+          "type": ["string", "null"]
         },
         "betrag": {
           "$ref": "#/definitions/Betrag"
         },
         "referenz": {
-          "type": [
-            "string",
-            "null"
-          ]
+          "type": ["string", "null"]
         },
         "referenzDatum": {
-          "type": [
-            "string",
-            "null"
-          ],
+          "type": ["string", "null"],
           "format": "date-time"
         }
       },
-      "required": [
-        "betrag"
-      ]
+      "required": ["betrag"]
     },
     "Zeitraum": {
       "type": "object",
       "properties": {
         "einheit": {
-          "type": [
-            "string",
-            "null"
-          ],
+          "type": ["string", "null"],
           "enum": [
             null,
             "SEKUNDE",
@@ -1632,113 +1367,62 @@
           ]
         },
         "dauer": {
-          "type": [
-            "number",
-            "null"
-          ]
+          "type": ["number", "null"]
         },
         "startdatum": {
-          "type": [
-            "string",
-            "null"
-          ],
+          "type": ["string", "null"],
           "format": "date-time"
         },
         "enddatum": {
-          "type": [
-            "string",
-            "null"
-          ],
+          "type": ["string", "null"],
           "format": "date-time"
         },
         "startzeitpunkt": {
-          "type": [
-            "string",
-            "null"
-          ],
+          "type": ["string", "null"],
           "format": "date-time"
         },
         "endzeitpunkt": {
-          "type": [
-            "string",
-            "null"
-          ],
+          "type": ["string", "null"],
           "format": "date-time"
         },
         "timestamp": {
-          "type": [
-            "string",
-            "null"
-          ],
+          "type": ["string", "null"],
           "format": "date-time"
         },
         "guid": {
-          "type": [
-            "string",
-            "null"
-          ]
+          "type": ["string", "null"]
         }
       },
-      "required": [
-        "startzeitpunkt",
-        "endzeitpunkt"
-      ]
+      "required": ["startzeitpunkt", "endzeitpunkt"]
     }
   },
   "type": "object",
   "properties": {
     "boTyp": {
-      "type": [
-        "string",
-        "null"
-      ]
+      "type": ["string", "null"]
     },
     "versionStruktur": {
-      "type": [
-        "string",
-        "null"
-      ]
+      "type": ["string", "null"]
     },
     "timestamp": {
-      "type": [
-        "string",
-        "null"
-      ],
+      "type": ["string", "null"],
       "format": "date-time"
     },
     "externeReferenzen": {
-      "type": [
-        "array",
-        "null"
-      ],
+      "type": ["array", "null"],
       "items": {
         "$ref": "#/definitions/ExterneReferenz"
       }
     },
     "guid": {
-      "type": [
-        "string",
-        "null"
-      ]
+      "type": ["string", "null"]
     },
     "rechnungstitel": {
-      "type": [
-        "string",
-        "null"
-      ]
+      "type": ["string", "null"]
     },
     "rechnungsstatus": {
-      "type": [
-        "string",
-        "null"
-      ],
-      "enum": [
-        null,
-        "GEPRUEFT_OK",
-        "GEPRUEFT_FEHLERHAFT",
-        "GEBUCHT",
-        "BEZAHLT"
-      ]
+      "type": ["string", "null"],
+      "enum": [null, "GEPRUEFT_OK", "GEPRUEFT_FEHLERHAFT", "GEBUCHT", "BEZAHLT"]
     },
     "storno": {
       "type": "boolean"
@@ -1776,10 +1460,7 @@
       ]
     },
     "originalRechnungsnummer": {
-      "type": [
-        "string",
-        "null"
-      ]
+      "type": ["string", "null"]
     },
     "rechnungsperiode": {
       "$ref": "#/definitions/Zeitraum"
@@ -1809,10 +1490,7 @@
       "$ref": "#/definitions/Betrag"
     },
     "steuerbetraege": {
-      "type": [
-        "array",
-        "null"
-      ],
+      "type": ["array", "null"],
       "items": {
         "$ref": "#/definitions/Steuerbetrag"
       }
@@ -1824,31 +1502,19 @@
       }
     },
     "istSelbstausgestellt": {
-      "type": [
-        "boolean",
-        "null"
-      ]
+      "type": ["boolean", "null"]
     },
     "istReverseCharge": {
-      "type": [
-        "boolean",
-        "null"
-      ]
+      "type": ["boolean", "null"]
     },
     "vorauszahlungen": {
-      "type": [
-        "array",
-        "null"
-      ],
+      "type": ["array", "null"],
       "items": {
         "$ref": "#/definitions/Vorauszahlung"
       }
     },
     "sonderrechnungsart": {
-      "type": [
-        "string",
-        "null"
-      ],
+      "type": ["string", "null"],
       "enum": [
         null,
         "KONZESSIONSABGABE_TESTAT",
@@ -1863,10 +1529,7 @@
       ]
     },
     "buchungsdatum": {
-      "type": [
-        "string",
-        "null"
-      ],
+      "type": ["string", "null"],
       "format": "date-time"
     }
   },

@@ -1,0 +1,429 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "title": "Handelsunstimmigkeit",
+  "definitions": {
+    "Handelsunstimmigkeitstyp": {
+      "type": "integer",
+      "description": "Gibt den Typ der Handelsunstimmigkeit an (COMDIS DOC 1001)",
+      "x-enumNames": [
+        "HANDELSRECHNUNG",
+        "LIEFERSCHEIN_HANDELSUNSTIMMIGKEITSTYP",
+        "LIEFERSCHEIN_GRUND_ARBEITSPREIS",
+        "LIEFERSCHEIN_ARBEITS_LEISTUNGSPREIS"
+      ],
+      "enum": [0, 1, 2, 3]
+    },
+    "Handelsunstimmigkeitsbegruendung": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/COM"
+        },
+        {
+          "type": "object",
+          "description": "Begründung der Korrektheit der Rechnung oder des Lieferscheins (COMDIS SG3 AJT)",
+          "additionalProperties": {},
+          "properties": {
+            "referenzen": {
+              "type": "array",
+              "description": "Referenzen auf vorherige Nachrichten",
+              "x-nullable": true,
+              "items": {
+                "type": "string"
+              }
+            },
+            "grund": {
+              "description": "Angabe des Handelsunstimmigkeitsgrunds",
+              "oneOf": [
+                {
+                  "$ref": "#/definitions/Handelsunstimmigkeitsgrund"
+                }
+              ]
+            }
+          }
+        }
+      ]
+    },
+    "Handelsunstimmigkeitsgrund": {
+      "type": "integer",
+      "description": "Begründung der Korrektheit der Rechnung oder des Lieferscheins (COMDIS SG3 AJT 4465)",
+      "x-enumNames": [
+        "ANMELDUNG_BESTAETIGT",
+        "ABRECHNUNGSBEGINN_GLEICH_BESTAETIGTEM_VERTRAGSBEGINN",
+        "ABRECHNUNGSENDE_GLEICH_BESTAETIGTEM_VERTRAGSENDE",
+        "NN_MSCONS_UEBERSENDET",
+        "RICHTIGE_MESSWERTE_ENERGIEMENGEN_UEBERSENDET",
+        "SONSTIGES_SIEHE_BEGRUENDUNG",
+        "GUELTIGES_PREISBLATT_VERSENDET",
+        "GUELTIGER_SPERRAUFTRAG_VORHANDEN",
+        "KORREKTE_ARTIKEL_ID_IN_RECHNUNG",
+        "KORREKTER_PREIS_ZU_GUELTIGEM_PREISBLATT_IN_RECHNUNG",
+        "GUELTIGES_PREISBLATT_FRISTGERECHT_VERSENDET",
+        "GUELTIGE_RECHNUNG_VORHANDEN",
+        "KORREKTER_PREIS_IN_RECHNUNG_ABGERECHNET",
+        "GUELTIGES_PREISBLATT_BLINDARBEIT_VERSENDET",
+        "KORREKTE_ARTIKEL_ID_FUER_ABRECHNUNG_STORNIERTER_SPERRAUFTRAG_ANGEGEBEN"
+      ],
+      "enum": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14]
+    },
+    "COM": {
+      "type": "object",
+      "description": "The COM class is the abstract class from which all BO4E.COM classes are derived.\n            ",
+      "x-abstract": true,
+      "additionalProperties": {},
+      "properties": {
+        "guidSerialized": {
+          "type": "string"
+        },
+        "timestamp": {
+          "type": "string",
+          "description": "Store the latest timestamp (update from the database)\n            ",
+          "format": "date-time",
+          "x-nullable": true
+        },
+        "guid": {
+          "type": "string",
+          "description": "allows adding a GUID to COM objects for tracking across systems\n            ",
+          "format": "guid",
+          "x-nullable": true
+        }
+      }
+    },
+    "Betrag": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/COM"
+        },
+        {
+          "type": "object",
+          "description": "Die Komponente wird dazu verwendet Summebeträge - beispielsweise in Angeboten und Rechnungen - als Geldbeträge\nabzubilden. Die Einheit ist dabei immer die Hauptwährung also Euro, Dollar etc..\n            ",
+          "additionalProperties": {},
+          "properties": {
+            "wert": {
+              "type": "number",
+              "description": "Gibt den Betrag des Preises an.",
+              "format": "decimal"
+            },
+            "waehrung": {
+              "description": "            ",
+              "oneOf": [
+                {
+                  "$ref": "#/definitions/Waehrungscode"
+                }
+              ]
+            }
+          }
+        }
+      ]
+    },
+    "Waehrungscode": {
+      "type": "integer",
+      "description": "Aufzählung der Währungscodes.",
+      "x-enumNames": [
+        "AFN",
+        "ALL",
+        "AMD",
+        "ANG",
+        "AOA",
+        "ARS",
+        "AUD",
+        "AWG",
+        "AZN",
+        "BAM",
+        "BBD",
+        "BDT",
+        "BGN",
+        "BHD",
+        "BIF",
+        "BMD",
+        "BND",
+        "BOB",
+        "BOV",
+        "BRL",
+        "BSD",
+        "BTN",
+        "BWP",
+        "BYN",
+        "BYR",
+        "BZD",
+        "CAD",
+        "CDF",
+        "CHE",
+        "CHF",
+        "CHW",
+        "CLF",
+        "CLP",
+        "CNY",
+        "COP",
+        "COU",
+        "CRC",
+        "CUC",
+        "CUP",
+        "CVE",
+        "CZK",
+        "DJF",
+        "DKK",
+        "DOP",
+        "DZD",
+        "EGP",
+        "ERN",
+        "ETB",
+        "EUR",
+        "FJD",
+        "FKP",
+        "GBP",
+        "GEL",
+        "GHS",
+        "GIP",
+        "GMD",
+        "GNF",
+        "GTQ",
+        "GYD",
+        "HKD",
+        "HNL",
+        "HRK",
+        "HTG",
+        "HUF",
+        "IDR",
+        "ILS",
+        "INR",
+        "IQD",
+        "IRR",
+        "ISK",
+        "JMD",
+        "JOD",
+        "JPY",
+        "KES",
+        "KGS",
+        "KHR",
+        "KMF",
+        "KPW",
+        "KRW",
+        "KWD",
+        "KYD",
+        "KZT",
+        "LAK",
+        "LBP",
+        "LKR",
+        "LRD",
+        "LSL",
+        "LTL",
+        "LYD",
+        "MAD",
+        "MDL",
+        "MGA",
+        "MKD",
+        "MMK",
+        "MNT",
+        "MOP",
+        "MRO",
+        "MUR",
+        "MVR",
+        "MWK",
+        "MXN",
+        "MXV",
+        "MYR",
+        "MZN",
+        "NAD",
+        "NGN",
+        "NIO",
+        "NOK",
+        "NPR",
+        "NZD",
+        "OMR",
+        "PAB",
+        "PEN",
+        "PGK",
+        "PHP",
+        "PKR",
+        "PLN",
+        "PYG",
+        "QAR",
+        "RON",
+        "RSD",
+        "RUB",
+        "RUR",
+        "RWF",
+        "SAR",
+        "SBD",
+        "SCR",
+        "SDG",
+        "SEK",
+        "SGD",
+        "SHP",
+        "SLL",
+        "SOS",
+        "SRD",
+        "SSP",
+        "STD",
+        "SVC",
+        "SYP",
+        "SZL",
+        "THB",
+        "TJS",
+        "TMT",
+        "TND",
+        "TOP",
+        "TRY",
+        "TTD",
+        "TWD",
+        "TZS",
+        "UAH",
+        "UGX",
+        "USD",
+        "USN",
+        "USS",
+        "UYI",
+        "UYU",
+        "UZS",
+        "VEF",
+        "VND",
+        "VUV",
+        "WST",
+        "XAF",
+        "XAG",
+        "XAU",
+        "XBA",
+        "XBB",
+        "XBC",
+        "XBD",
+        "XCD",
+        "XDR",
+        "XOF",
+        "XPD",
+        "XPF",
+        "XPT",
+        "XSU",
+        "XTS",
+        "XUA",
+        "XXX",
+        "YER",
+        "ZAR",
+        "ZMW",
+        "ZWL"
+      ],
+      "enum": [
+        0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19,
+        20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37,
+        38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55,
+        56, 57, 58, 59, 60, 61, 62, 63, 64, 65, 66, 67, 68, 69, 70, 71, 72, 73,
+        74, 75, 76, 77, 78, 79, 80, 81, 82, 83, 84, 85, 86, 87, 88, 89, 90, 91,
+        92, 93, 94, 95, 96, 97, 98, 99, 100, 101, 102, 103, 104, 105, 106, 107,
+        108, 109, 110, 111, 112, 113, 114, 115, 116, 117, 118, 119, 120, 121,
+        122, 123, 124, 125, 126, 127, 128, 129, 130, 131, 132, 133, 134, 135,
+        136, 137, 138, 139, 140, 141, 142, 143, 144, 145, 146, 147, 148, 149,
+        150, 151, 152, 153, 154, 155, 156, 157, 158, 159, 160, 161, 162, 163,
+        164, 165, 166, 167, 168, 169, 170, 171, 172, 173, 174, 175, 176, 177,
+        178, 179, 180
+      ]
+    },
+    "BusinessObject": {
+      "type": "object",
+      "description": "General abstract class for Business Objects for Energy (BO4E)\n            ",
+      "x-abstract": true,
+      "additionalProperties": {},
+      "properties": {
+        "boTyp": {
+          "type": "string",
+          "description": "obligatory type of the business object in UPPER CASE\n            ",
+          "x-nullable": true,
+          "x-example": "'MESSLOKATION',\n'MARKTLOKATION'\n            "
+        },
+        "versionStruktur": {
+          "type": "string",
+          "description": "obligatory version of the BO4E definition. Currently hard coded to 1\n            ",
+          "x-nullable": true,
+          "x-example": 1
+        },
+        "guidSerialized": {
+          "type": "string",
+          "description": "protobuf serilization requires the Guid as string.\n            "
+        },
+        "timestamp": {
+          "type": "string",
+          "description": "Store the latest database update, is Datetime, because postgres doesn't handle datetimeoffset in a generated column\ngracefully\n            ",
+          "format": "date-time",
+          "x-nullable": true
+        },
+        "externeReferenzen": {
+          "type": "array",
+          "description": "Hier können IDs anderer Systeme hinterlegt werden (z.B. eine SAP-GP-Nummer) (Details siehe\nExterneReferenz)\n            ",
+          "x-nullable": true,
+          "items": {
+            "$ref": "#/definitions/ExterneReferenz"
+          }
+        },
+        "guid": {
+          "type": "string",
+          "description": "allows adding a GUID to Business Objects for tracking across systems\n            ",
+          "format": "guid",
+          "x-nullable": true
+        }
+      }
+    },
+    "ExterneReferenz": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/COM"
+        },
+        {
+          "type": "object",
+          "description": "Viele Datenobjekte weisen in unterschiedlichen Systemen eine eindeutige ID (Kundennummer, GP-Nummer etc.) auf.\nBeim Austausch von Datenobjekten zwischen verschiedenen Systemen ist es daher hilfreich, sich die eindeutigen IDs\nder anzubindenden Systeme zu merken.\nDiese Komponente ermöglicht es, sich die SAP GP-Nummer zu merken, um diese bei SAP-Aufrufen als Parameter mitgeben\nzu können.\n            ",
+          "additionalProperties": {},
+          "properties": {
+            "exRefName": {
+              "type": "string",
+              "description": "Bezeichnung der externen Referenz (z.B. \"hochfrequenz integration services\")\n            ",
+              "x-nullable": true
+            },
+            "exRefWert": {
+              "type": "string",
+              "description": "Wert der externen Referenz (z.B. \"123456\"; \"4711\")\n            ",
+              "x-nullable": true
+            }
+          }
+        }
+      ]
+    }
+  },
+  "allOf": [
+    {
+      "$ref": "#/definitions/BusinessObject"
+    },
+    {
+      "type": "object",
+      "description": "Handelsunstimmigkeit BO",
+      "additionalProperties": {},
+      "properties": {
+        "nummer": {
+          "type": "string",
+          "description": "Handelsunstimmigkeitsnummer"
+        },
+        "typ": {
+          "description": "Gibt den Typ der Handelsunstimmigkeit an.",
+          "oneOf": [
+            {
+              "$ref": "#/definitions/Handelsunstimmigkeitstyp"
+            }
+          ]
+        },
+        "begruendung": {
+          "description": "Handelsunstimmigskeitsbegründung",
+          "oneOf": [
+            {
+              "$ref": "#/definitions/Handelsunstimmigkeitsbegruendung"
+            }
+          ]
+        },
+        "zuZahlen": {
+          "description": "angeforderter Betrag",
+          "x-nullable": true,
+          "oneOf": [
+            {
+              "$ref": "#/definitions/Betrag"
+            }
+          ]
+        }
+      }
+    }
+  ]
+}

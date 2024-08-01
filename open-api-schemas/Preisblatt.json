@@ -1,0 +1,692 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "title": "Preisblatt",
+  "definitions": {
+    "Zeitraum": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/COM"
+        },
+        {
+          "type": "object",
+          "description": "Diese Komponente wird zur Abbildung von Zeiträumen in Form von Dauern oder der Angabe von Start und Ende\nverwendet.\n            ",
+          "additionalProperties": {},
+          "properties": {
+            "einheit": {
+              "description": "Die Einheit in der die Dauer angeben ist. Z.B. Monate. ",
+              "x-nullable": true,
+              "oneOf": [
+                {
+                  "$ref": "#/definitions/Zeiteinheit"
+                }
+              ]
+            },
+            "dauer": {
+              "type": "number",
+              "description": "Gibt die Anzahl der Zeiteinheiten an, z.B. 3 (Monate).",
+              "format": "decimal",
+              "x-nullable": true
+            },
+            "startdatum": {
+              "type": "string",
+              "description": "Gibt Tag und Uhrzeit (falls vorhanden) an, wann der Zeitraum startet.",
+              "format": "date-time",
+              "x-nullable": true
+            },
+            "enddatum": {
+              "type": "string",
+              "description": "Gibt Tag und Uhrzeit (falls vorhanden) an, wann der Zeitraum endet.",
+              "format": "date-time",
+              "x-nullable": true
+            },
+            "startzeitpunkt": {
+              "type": "string",
+              "description": "The same value as Startdatum",
+              "format": "date-time",
+              "x-nullable": true
+            },
+            "endzeitpunkt": {
+              "type": "string",
+              "description": "The same value as Enddatum",
+              "format": "date-time",
+              "x-nullable": true
+            }
+          }
+        }
+      ]
+    },
+    "Zeiteinheit": {
+      "type": "integer",
+      "description": "Auflistung möglicher Einheiten zur Verwendung in zeitbezogenen Angaben.",
+      "x-enumNames": [
+        "SEKUNDE",
+        "MINUTE",
+        "STUNDE",
+        "VIERTEL_STUNDE",
+        "TAG",
+        "WOCHE",
+        "MONAT",
+        "QUARTAL",
+        "HALBJAHR",
+        "JAHR"
+      ],
+      "enum": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+    },
+    "COM": {
+      "type": "object",
+      "description": "The COM class is the abstract class from which all BO4E.COM classes are derived.\n            ",
+      "x-abstract": true,
+      "additionalProperties": {},
+      "properties": {
+        "guidSerialized": {
+          "type": "string"
+        },
+        "timestamp": {
+          "type": "string",
+          "description": "Store the latest timestamp (update from the database)\n            ",
+          "format": "date-time",
+          "x-nullable": true
+        },
+        "guid": {
+          "type": "string",
+          "description": "allows adding a GUID to COM objects for tracking across systems\n            ",
+          "format": "guid",
+          "x-nullable": true
+        }
+      }
+    },
+    "Preisposition": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/COM"
+        },
+        {
+          "type": "object",
+          "description": "Preisposition",
+          "additionalProperties": {},
+          "properties": {
+            "berechnungsmethode": {
+              "description": "Das Modell, das der Preisbildung zugrunde liegt. Details Kalkulationsmethode",
+              "oneOf": [
+                {
+                  "$ref": "#/definitions/Kalkulationsmethode"
+                }
+              ]
+            },
+            "leistungstyp": {
+              "description": "Standardisierte Bezeichnung für die abgerechnete Leistungserbringung. Details Leistungstyp\n            ",
+              "oneOf": [
+                {
+                  "$ref": "#/definitions/Leistungstyp"
+                }
+              ]
+            },
+            "leistungsbezeichnung": {
+              "type": "string",
+              "description": "Bezeichnung für die in der Position abgebildete Leistungserbringung"
+            },
+            "preiseinheit": {
+              "description": "Festlegung, mit welcher Preiseinheit abgerechnet wird, z.B. Ct. oder €. Details\nWaehrungseinheit\n            ",
+              "oneOf": [
+                {
+                  "$ref": "#/definitions/Waehrungseinheit"
+                }
+              ]
+            },
+            "bezugsgroesse": {
+              "description": "Hier wird festgelegt, auf welche Bezugsgröße sich der Preis bezieht, z.B. kWh oder Stück. Details\nMengeneinheit\n            ",
+              "x-nullable": true,
+              "oneOf": [
+                {
+                  "$ref": "#/definitions/Mengeneinheit"
+                }
+              ]
+            },
+            "zeitbasis": {
+              "description": "Die Zeit(dauer) auf die sich der Preis bezieht. Z.B. ein Jahr für einen Leistungspreis der in €/kW/Jahr\nausgegeben wird.\n            ",
+              "x-nullable": true,
+              "oneOf": [
+                {
+                  "$ref": "#/definitions/Zeiteinheit"
+                }
+              ]
+            },
+            "tarifzeit": {
+              "description": "Festlegung, für welche Tarifzeit der Preis hier festgelegt ist. ",
+              "x-nullable": true,
+              "oneOf": [
+                {
+                  "$ref": "#/definitions/Tarifzeit"
+                }
+              ]
+            },
+            "bdewArtikelnummer": {
+              "description": "Eine vom BDEW standardisierte Bezeichnung für die abgerechnete Leistungserbringung. Diese Artikelnummer wird\nauch im Rechnungsteil der INVOIC verwendet. \n            ",
+              "x-nullable": true,
+              "oneOf": [
+                {
+                  "$ref": "#/definitions/BDEWArtikelnummer"
+                }
+              ]
+            },
+            "zonungsgroesse": {
+              "description": "Mit der Menge der hier angegebenen Größe wird die Staffelung/Zonung durchgeführt. Z.B. Vollbenutzungsstunden.\n\n            ",
+              "x-nullable": true,
+              "oneOf": [
+                {
+                  "$ref": "#/definitions/Bemessungsgroesse"
+                }
+              ]
+            },
+            "zu_abschlaege": {
+              "description": "Zuschläge oder Abschläge auf die Position. ",
+              "x-nullable": true,
+              "oneOf": [
+                {
+                  "$ref": "#/definitions/PositionsAufAbschlag"
+                }
+              ]
+            },
+            "preisstaffeln": {
+              "type": "array",
+              "description": "Preisstaffeln, die zu dieser Preisposition gehören. Details Preisstaffel",
+              "items": {
+                "$ref": "#/definitions/Preisstaffel"
+              }
+            },
+            "preisschluesselstamm": {
+              "type": "string",
+              "description": "Preisschlüsselstamm>",
+              "x-nullable": true
+            },
+            "positionsnummer": {
+              "type": "integer",
+              "description": "Fortlaufende Nummer für die Preisposition",
+              "format": "int32",
+              "x-nullable": true
+            },
+            "messebene": {
+              "description": "Vgl. PRICAT IMD 7009",
+              "x-nullable": true,
+              "oneOf": [
+                {
+                  "$ref": "#/definitions/Netzebene"
+                }
+              ]
+            },
+            "beschreibung": {
+              "type": "string",
+              "description": "Produkt-/Leistungsbeschreibung, wenn IMD+X vorhanden Vgl. PRICAT IMD 7008\n            ",
+              "x-nullable": true
+            },
+            "verarbeitungszeitraum": {
+              "description": "Verarbeitungszeitraum. Details Zeitraum",
+              "x-nullable": true,
+              "oneOf": [
+                {
+                  "$ref": "#/definitions/Zeitraum"
+                }
+              ]
+            },
+            "artikelId": {
+              "type": "string",
+              "description": "Die genauen Bedeutungen der einzelnen Artikel-IDs sind in der EDI@Energy Codeliste der Artikelnummern \n            und Artikel-IDs zu finden, die in der Spalte \"PRICAT Codeverwendung\" ein X haben\n            ",
+              "x-nullable": true
+            }
+          }
+        }
+      ]
+    },
+    "Kalkulationsmethode": {
+      "type": "integer",
+      "description": "Aulistung der verschiedenen Berechnungsmethoden für ein Preisblatt.",
+      "x-enumNames": [
+        "KEINE",
+        "STAFFELN",
+        "ZONEN",
+        "VORZONEN_GP",
+        "SIGMOID",
+        "BLINDARBEIT_GT_50_PROZENT",
+        "BLINDARBEIT_GT_40_PROZENT",
+        "AP_GP_ZONEN",
+        "LP_INSTALL_LEISTUNG",
+        "AP_TRANSPORT_ODER_VERTEILNETZ",
+        "AP_TRANSPORT_ODER_VERTEILNETZ_ORTSVERTEILNETZ_SIGMOID",
+        "LP_JAHRESVERBRAUCH",
+        "LP_TRANSPORT_ODER_VERTEILNETZ",
+        "LP_TRANSPORT_ODER_VERTEILNETZ_ORTSVERTEILNETZ_SIGMOID",
+        "FUNKTIONEN",
+        "VERBRAUCH_UEBER_SLP_GRENZE_FUNKTIONSBEZOGEN_WEITERE_BERECHNUNG_ALS_LGK"
+      ],
+      "enum": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15]
+    },
+    "Leistungstyp": {
+      "type": "integer",
+      "description": "",
+      "x-enumNames": [
+        "ARBEITSPREIS_WIRKARBEIT",
+        "LEISTUNGSPREIS_WIRKLEISTUNG",
+        "ARBEITSPREIS_BLINDARBEIT_IND",
+        "ARBEITSPREIS_BLINDARBEIT_KAP",
+        "GRUNDPREIS",
+        "MEHRMINDERMENGE",
+        "MESSSTELLENBETRIEB",
+        "MESSDIENSTLEISTUNG",
+        "MESSDIENSTLEISTUNG_INKL_MESSUNG",
+        "ABRECHNUNG",
+        "KONZESSIONS_ABGABE",
+        "KWK_UMLAGE",
+        "OFFSHORE_UMLAGE",
+        "ABLAV_UMLAGE",
+        "REGELENERGIE_UMLAGE",
+        "BILANZIERUNG_UMLAGE",
+        "AUSLESUNG_ZUSAETZLICH",
+        "ABLESUNG_ZUSAETZLICH",
+        "ABRECHNUNG_ZUSAETZLICH",
+        "SPERRUNG",
+        "ENTSPERRUNG",
+        "MAHNKOSTEN",
+        "INKASSOKOSTEN"
+      ],
+      "enum": [
+        0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19,
+        20, 21, 22
+      ]
+    },
+    "Waehrungseinheit": {
+      "type": "integer",
+      "description": "In diesem Enum werden die Währungen und ihre Untereinheiten definiert, beispielsweise für die Verwendung in\nPreisen.\n            ",
+      "x-enumNames": ["EUR", "CT"],
+      "enum": [0, 1]
+    },
+    "Mengeneinheit": {
+      "type": "integer",
+      "description": "Einheit: Messgrößen, die per Messung oder Vorgabe ermittelt werden können.\n            ",
+      "x-enumNames": [
+        "ZERO",
+        "WH",
+        "KW",
+        "ANZAHL",
+        "KUBIKMETER",
+        "STUNDE",
+        "TAG",
+        "MONAT",
+        "VAR",
+        "VARH",
+        "KWHK",
+        "JAHR",
+        "KWH",
+        "MW",
+        "KVAR",
+        "KVARH",
+        "MWH"
+      ],
+      "enum": [
+        0, 2, 3, 7, 11, 13, 17, 19, 23, 29, 40, 228, 2000, 3000, 23000, 29000,
+        2000000
+      ]
+    },
+    "Tarifzeit": {
+      "type": "integer",
+      "description": "Zur Kennzeichnung verschiedener Tarifzeiten, beispielsweise zur Bepreisung oder zur Verbrauchsermittlung.",
+      "x-enumNames": ["TZ_STANDARD", "TZ_HT", "TZ_NT"],
+      "enum": [0, 1, 2]
+    },
+    "BDEWArtikelnummer": {
+      "type": "integer",
+      "description": "BDEWArtikelnummer",
+      "x-enumNames": [
+        "LEISTUNG",
+        "LEISTUNG_PAUSCHAL",
+        "GRUNDPREIS",
+        "REGELENERGIE_ARBEIT",
+        "REGELENERGIE_LEISTUNG",
+        "NOTSTROMLIEFERUNG_ARBEIT",
+        "NOTSTROMLIEFERUNG_LEISTUNG",
+        "RESERVENETZKAPAZITAET",
+        "RESERVELEISTUNG",
+        "ZUSAETZLICHE_ABLESUNG",
+        "PRUEFGEBUEHREN_AUSSERPLANMAESSIG",
+        "WIRKARBEIT",
+        "SINGULAER_GENUTZTE_BETRIEBSMITTEL",
+        "ABGABE_KWKG",
+        "ABSCHLAG",
+        "KONZESSIONSABGABE",
+        "ENTGELT_FERNAUSLESUNG",
+        "UNTERMESSUNG",
+        "BLINDMEHRARBEIT",
+        "ENTGELT_ABRECHNUNG",
+        "SPERRKOSTEN",
+        "ENTSPERRKOSTEN",
+        "MAHNKOSTEN",
+        "MEHR_MINDERMENGEN",
+        "INKASSOKOSTEN",
+        "BLINDMEHRLEISTUNG",
+        "ENTGELT_MESSUNG_ABLESUNG",
+        "ENTGELT_EINBAU_BETRIEB_WARTUNG_MESSTECHNIK",
+        "AUSGLEICHSENERGIE",
+        "AUSGLEICHSENERGIE_UNTERDECKUNG",
+        "ZAEHLEINRICHTUNG",
+        "WANDLER_MENGENUMWERTER",
+        "KOMMUNIKATIONSEINRICHTUNG",
+        "TECHNISCHE_STEUEREINRICHTUNG",
+        "PARAGRAF_19_STROM_NEV_UMLAGE",
+        "BEFESTIGUNGSEINRICHTUNG",
+        "OFFSHORE_HAFTUNGSUMLAGE",
+        "FIXE_ARBEITSENTGELTKOMPONENTE",
+        "FIXE_LEISTUNGSENTGELTKOMPONENTE",
+        "UMLAGE_ABSCHALTBARE_LASTEN",
+        "MEHRMENGE",
+        "MINDERMENGE",
+        "ENERGIESTEUER",
+        "SMARTMETER_GATEWAY",
+        "STEUERBOX",
+        "MSB_INKL_MESSUNG",
+        "ZUSATZDIENSTLEISTUNG_PARAGRAPH_35_2_1_MSBG",
+        "ZUSATZDIENSTLEISTUNG_PARAGRAPH_35_2_2_MSBG",
+        "ZUSATZDIENSTLEISTUNG_PARAGRAPH_35_2_3_MSBG",
+        "ZUSATZDIENSTLEISTUNG_PARAGRAPH_35_2_4_MSBG",
+        "ZUSATZDIENSTLEISTUNG_PARAGRAPH_35_2_5_MSBG",
+        "ZUSATZDIENSTLEISTUNG_PARAGRAPH_35_3_MSBG"
+      ],
+      "enum": [
+        0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19,
+        20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37,
+        38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51
+      ]
+    },
+    "Bemessungsgroesse": {
+      "type": "integer",
+      "description": "Zur Abbildung von Messgrössen und zur Verwendung in energiewirtschaftlichen Berechnungen.",
+      "x-enumNames": [
+        "WIRKARBEIT_EL",
+        "LEISTUNG_EL",
+        "BLINDARBEIT_KAP",
+        "BLINDARBEIT_IND",
+        "BLINDLEISTUNG_KAP",
+        "BLINDLEISTUNG_IND",
+        "WIRKARBEIT_TH",
+        "LEISTUNG_TH",
+        "VOLUMEN",
+        "VOLUMENSTROM",
+        "BENUTZUNGSDAUER",
+        "ANZAHL"
+      ],
+      "enum": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11]
+    },
+    "PositionsAufAbschlag": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/COM"
+        },
+        {
+          "type": "object",
+          "description": "Differenzierung der zu betrachtenden Produkte anhand der preiserhöhenden (Aufschlag) bzw. preisvermindernden\n(Abschlag) Zusatzvereinbarungen, die individuell zu einem neuen oder bestehenden Liefervertrag abgeschlossen werden\nkönnen. Es können mehrere Auf-/Abschläge gleichzeitig ausgewählt werden.\n            ",
+          "additionalProperties": {},
+          "properties": {
+            "bezeichnung": {
+              "type": "string",
+              "description": "Bezeichnung des Auf-/Abschlags"
+            },
+            "beschreibung": {
+              "type": "string",
+              "description": "Beschreibung zum Auf-/Abschlag"
+            },
+            "aufAbschlagstyp": {
+              "description": "Typ des AufAbschlages. Details AufAbschlagstyp",
+              "oneOf": [
+                {
+                  "$ref": "#/definitions/AufAbschlagstyp"
+                }
+              ]
+            },
+            "aufAbschlagswert": {
+              "type": "number",
+              "description": "Höhe des Auf-/Abschlages",
+              "format": "decimal"
+            },
+            "aufAbschlagswaehrung": {
+              "description": "Einheit, in der der Auf-/Abschlag angegeben ist (z.B. ct/kWh). Details Waehrungseinheit\n            ",
+              "oneOf": [
+                {
+                  "$ref": "#/definitions/Waehrungseinheit"
+                }
+              ]
+            }
+          }
+        }
+      ]
+    },
+    "AufAbschlagstyp": {
+      "type": "integer",
+      "description": "Festlegung, ob der Auf- oder Abschlag mit relativen oder absoluten Werten erfolgt.",
+      "x-enumNames": ["RELATIV", "ABSOLUT"],
+      "enum": [0, 1]
+    },
+    "Preisstaffel": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/COM"
+        },
+        {
+          "type": "object",
+          "description": "Gibt die Staffelgrenzen der jeweiligen Preise an.",
+          "additionalProperties": {},
+          "properties": {
+            "einheitspreis": {
+              "type": "number",
+              "description": "Preis pro abgerechneter Mengeneinheit",
+              "format": "decimal"
+            },
+            "staffelgrenzeVon": {
+              "type": "number",
+              "description": "Unterer Wert, ab dem die Staffel gilt.",
+              "format": "decimal"
+            },
+            "staffelgrenzeBis": {
+              "type": "number",
+              "description": "Oberer Wert, bis zu dem die Staffel gilt.",
+              "format": "decimal"
+            },
+            "sigmoidparameter": {
+              "description": "Parameter zur Berechnung des Preises anhand der Jahresmenge und weiterer netzbezogener Parameter.\n\n            ",
+              "x-nullable": true,
+              "oneOf": [
+                {
+                  "$ref": "#/definitions/Sigmoidparameter"
+                }
+              ]
+            }
+          }
+        }
+      ]
+    },
+    "Sigmoidparameter": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/COM"
+        },
+        {
+          "type": "object",
+          "description": "Sigmoidparameter",
+          "additionalProperties": {},
+          "properties": {
+            "A": {
+              "type": "number",
+              "description": "Briefmarke Ortsverteilnetz",
+              "format": "decimal"
+            },
+            "B": {
+              "type": "number",
+              "description": "Wendepunkt für die bepreiste Menge",
+              "format": "decimal"
+            },
+            "C": {
+              "type": "number",
+              "description": "Exponent",
+              "format": "decimal"
+            },
+            "D": {
+              "type": "number",
+              "description": "Briefmarke Transportnetz",
+              "format": "decimal"
+            }
+          }
+        }
+      ]
+    },
+    "Netzebene": {
+      "type": "integer",
+      "description": "Auflistung möglicher Netzebenen innerhalb der Energiearten Strom und Gas.",
+      "x-enumNames": [
+        "NSP",
+        "MSP",
+        "HSP",
+        "HSS",
+        "MSP_NSP_UMSP",
+        "HSP_MSP_UMSP",
+        "HSS_HSP_UMSP",
+        "HD",
+        "MD",
+        "ND"
+      ],
+      "enum": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+    },
+    "Preisstatus": {
+      "type": "integer",
+      "description": "Statusinformation für Preise",
+      "x-enumNames": ["VORLAEUFIG", "ENDGUELTIG"],
+      "enum": [0, 1]
+    },
+    "Sparte": {
+      "type": "integer",
+      "description": "Unterscheidungsmöglichkeiten für die Sparte.",
+      "x-enumNames": [
+        "STROM",
+        "GAS",
+        "FERNWAERME",
+        "NAHWAERME",
+        "WASSER",
+        "ABWASSER"
+      ],
+      "enum": [0, 1, 2, 3, 4, 5]
+    },
+    "BusinessObject": {
+      "type": "object",
+      "description": "General abstract class for Business Objects for Energy (BO4E)\n            ",
+      "x-abstract": true,
+      "additionalProperties": {},
+      "properties": {
+        "boTyp": {
+          "type": "string",
+          "description": "obligatory type of the business object in UPPER CASE\n            ",
+          "x-nullable": true,
+          "x-example": "'MESSLOKATION',\n'MARKTLOKATION'\n            "
+        },
+        "versionStruktur": {
+          "type": "string",
+          "description": "obligatory version of the BO4E definition. Currently hard coded to 1\n            ",
+          "x-nullable": true,
+          "x-example": 1
+        },
+        "guidSerialized": {
+          "type": "string",
+          "description": "protobuf serilization requires the Guid as string.\n            "
+        },
+        "timestamp": {
+          "type": "string",
+          "description": "Store the latest database update, is Datetime, because postgres doesn't handle datetimeoffset in a generated column\ngracefully\n            ",
+          "format": "date-time",
+          "x-nullable": true
+        },
+        "externeReferenzen": {
+          "type": "array",
+          "description": "Hier können IDs anderer Systeme hinterlegt werden (z.B. eine SAP-GP-Nummer) (Details siehe\nExterneReferenz)\n            ",
+          "x-nullable": true,
+          "items": {
+            "$ref": "#/definitions/ExterneReferenz"
+          }
+        },
+        "guid": {
+          "type": "string",
+          "description": "allows adding a GUID to Business Objects for tracking across systems\n            ",
+          "format": "guid",
+          "x-nullable": true
+        }
+      }
+    },
+    "ExterneReferenz": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/COM"
+        },
+        {
+          "type": "object",
+          "description": "Viele Datenobjekte weisen in unterschiedlichen Systemen eine eindeutige ID (Kundennummer, GP-Nummer etc.) auf.\nBeim Austausch von Datenobjekten zwischen verschiedenen Systemen ist es daher hilfreich, sich die eindeutigen IDs\nder anzubindenden Systeme zu merken.\nDiese Komponente ermöglicht es, sich die SAP GP-Nummer zu merken, um diese bei SAP-Aufrufen als Parameter mitgeben\nzu können.\n            ",
+          "additionalProperties": {},
+          "properties": {
+            "exRefName": {
+              "type": "string",
+              "description": "Bezeichnung der externen Referenz (z.B. \"hochfrequenz integration services\")\n            ",
+              "x-nullable": true
+            },
+            "exRefWert": {
+              "type": "string",
+              "description": "Wert der externen Referenz (z.B. \"123456\"; \"4711\")\n            ",
+              "x-nullable": true
+            }
+          }
+        }
+      ]
+    }
+  },
+  "allOf": [
+    {
+      "$ref": "#/definitions/BusinessObject"
+    },
+    {
+      "type": "object",
+      "description": "Das allgemeine Modell zur Abbildung von Preisen. Davon abgeleitet können, über die Zuordnung identifizierender\nMerkmale, spezielle Preisblatt-Varianten modelliert werden.\nDie jeweiligen Sätze von Merkmalen sind in der Grafik ergänzt worden und stellen jeweils eine Ausprägung für die\nverschiedenen Anwendungsfälle der Preisblätter dar.\n            ",
+      "additionalProperties": {},
+      "properties": {
+        "bezeichnung": {
+          "type": "string",
+          "description": "Eine Bezeichnung für das Preisblatt.\n            "
+        },
+        "gueltigkeit": {
+          "description": "Der Zeitraum für den der Preis festgelegt ist. Details siehe Zeitraum\n            ",
+          "oneOf": [
+            {
+              "$ref": "#/definitions/Zeitraum"
+            }
+          ]
+        },
+        "preispositionen": {
+          "type": "array",
+          "description": "Die einzelnen Positionen, die mit dem Preisblatt abgerechnet werden können. Z.B. Arbeitspreis, Grundpreis etc.\nDetails siehe Preisposition\n            ",
+          "items": {
+            "$ref": "#/definitions/Preisposition"
+          }
+        },
+        "preisstatus": {
+          "description": "Gibt den Status des veröffentlichten Preises an\n            ",
+          "x-nullable": true,
+          "oneOf": [
+            {
+              "$ref": "#/definitions/Preisstatus"
+            }
+          ]
+        },
+        "sparte": {
+          "description": "Strom oder Gas. ",
+          "x-nullable": true,
+          "oneOf": [
+            {
+              "$ref": "#/definitions/Sparte"
+            }
+          ]
+        }
+      }
+    }
+  ]
+}

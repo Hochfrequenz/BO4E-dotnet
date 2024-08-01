@@ -1,0 +1,215 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "title": "Tranche",
+  "definitions": {
+    "Sparte": {
+      "type": "integer",
+      "description": "Unterscheidungsmöglichkeiten für die Sparte.",
+      "x-enumNames": [
+        "STROM",
+        "GAS",
+        "FERNWAERME",
+        "NAHWAERME",
+        "WASSER",
+        "ABWASSER"
+      ],
+      "enum": [0, 1, 2, 3, 4, 5]
+    },
+    "MarktpartnerDetails": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/COM"
+        },
+        {
+          "type": "object",
+          "description": "Used in Marktlokation and Messlokation to represent data about MSB",
+          "additionalProperties": {},
+          "properties": {
+            "rollencodenummer": {
+              "type": "string",
+              "description": "Rollencodenummer von Marktrolle",
+              "x-nullable": true
+            },
+            "code": {
+              "type": "string",
+              "description": "Code von Marktrolle",
+              "x-nullable": true
+            },
+            "marktrolle": {
+              "description": "Marktrolle. Details siehe Marktrolle",
+              "x-nullable": true,
+              "oneOf": [
+                {
+                  "$ref": "#/definitions/Marktrolle"
+                }
+              ]
+            },
+            "weiterverpflichtet": {
+              "type": "boolean",
+              "description": "Weiterverpflichtung des MSB />",
+              "x-nullable": true
+            }
+          }
+        }
+      ]
+    },
+    "Marktrolle": {
+      "type": "integer",
+      "description": "Diese Rollen kann ein Marktteilnehmer einnehmen.",
+      "x-enumNames": [
+        "NB",
+        "LF",
+        "MSB",
+        "MDL",
+        "DL",
+        "BKV",
+        "BIKO",
+        "UENB",
+        "KUNDE_SELBST_NN",
+        "MGV",
+        "EIV",
+        "RB",
+        "KUNDE",
+        "INTERESSENT",
+        "GMSB",
+        "AMSB"
+      ],
+      "enum": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15]
+    },
+    "COM": {
+      "type": "object",
+      "description": "The COM class is the abstract class from which all BO4E.COM classes are derived.\n            ",
+      "x-abstract": true,
+      "additionalProperties": {},
+      "properties": {
+        "guidSerialized": {
+          "type": "string"
+        },
+        "timestamp": {
+          "type": "string",
+          "description": "Store the latest timestamp (update from the database)\n            ",
+          "format": "date-time",
+          "x-nullable": true
+        },
+        "guid": {
+          "type": "string",
+          "description": "allows adding a GUID to COM objects for tracking across systems\n            ",
+          "format": "guid",
+          "x-nullable": true
+        }
+      }
+    },
+    "BusinessObject": {
+      "type": "object",
+      "description": "General abstract class for Business Objects for Energy (BO4E)\n            ",
+      "x-abstract": true,
+      "additionalProperties": {},
+      "properties": {
+        "boTyp": {
+          "type": "string",
+          "description": "obligatory type of the business object in UPPER CASE\n            ",
+          "x-nullable": true,
+          "x-example": "'MESSLOKATION',\n'MARKTLOKATION'\n            "
+        },
+        "versionStruktur": {
+          "type": "string",
+          "description": "obligatory version of the BO4E definition. Currently hard coded to 1\n            ",
+          "x-nullable": true,
+          "x-example": 1
+        },
+        "guidSerialized": {
+          "type": "string",
+          "description": "protobuf serilization requires the Guid as string.\n            "
+        },
+        "timestamp": {
+          "type": "string",
+          "description": "Store the latest database update, is Datetime, because postgres doesn't handle datetimeoffset in a generated column\ngracefully\n            ",
+          "format": "date-time",
+          "x-nullable": true
+        },
+        "externeReferenzen": {
+          "type": "array",
+          "description": "Hier können IDs anderer Systeme hinterlegt werden (z.B. eine SAP-GP-Nummer) (Details siehe\nExterneReferenz)\n            ",
+          "x-nullable": true,
+          "items": {
+            "$ref": "#/definitions/ExterneReferenz"
+          }
+        },
+        "guid": {
+          "type": "string",
+          "description": "allows adding a GUID to Business Objects for tracking across systems\n            ",
+          "format": "guid",
+          "x-nullable": true
+        }
+      }
+    },
+    "ExterneReferenz": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/COM"
+        },
+        {
+          "type": "object",
+          "description": "Viele Datenobjekte weisen in unterschiedlichen Systemen eine eindeutige ID (Kundennummer, GP-Nummer etc.) auf.\nBeim Austausch von Datenobjekten zwischen verschiedenen Systemen ist es daher hilfreich, sich die eindeutigen IDs\nder anzubindenden Systeme zu merken.\nDiese Komponente ermöglicht es, sich die SAP GP-Nummer zu merken, um diese bei SAP-Aufrufen als Parameter mitgeben\nzu können.\n            ",
+          "additionalProperties": {},
+          "properties": {
+            "exRefName": {
+              "type": "string",
+              "description": "Bezeichnung der externen Referenz (z.B. \"hochfrequenz integration services\")\n            ",
+              "x-nullable": true
+            },
+            "exRefWert": {
+              "type": "string",
+              "description": "Wert der externen Referenz (z.B. \"123456\"; \"4711\")\n            ",
+              "x-nullable": true
+            }
+          }
+        }
+      ]
+    }
+  },
+  "allOf": [
+    {
+      "$ref": "#/definitions/BusinessObject"
+    },
+    {
+      "type": "object",
+      "description": "Objekt zur Aufnahme der Informationen zu einer Tranche\n            ",
+      "additionalProperties": {},
+      "properties": {
+        "trancheId": {
+          "type": "string",
+          "description": "Identifikationsnummer einer Tranche, an der Energie entweder\nverbraucht, oder erzeugt wird (Like MarktlokationsId Marktlokation)\n            ",
+          "default": "|null|"
+        },
+        "sparte": {
+          "description": "Sparte der Tranche, z.B. Gas oder Strom.",
+          "oneOf": [
+            {
+              "$ref": "#/definitions/Sparte"
+            }
+          ]
+        },
+        "aufteilungsmenge": {
+          "type": "number",
+          "description": "Prozentualer Anteil der Tranche an der erzeugenden Marktlokation in Prozent mit 2 Nachkommastellen",
+          "format": "decimal",
+          "x-nullable": true
+        },
+        "obisKennzahl": {
+          "type": "string",
+          "description": "Die OBIS-Kennzahl für die Tranche, die festlegt, welche auf die gemessene Größe mit dem Stand gemeldet wird.\n            ",
+          "x-nullable": true
+        },
+        "marktrollen": {
+          "type": "array",
+          "description": "Zugeordnete Marktpartner\n            ",
+          "x-nullable": true,
+          "items": {
+            "$ref": "#/definitions/MarktpartnerDetails"
+          }
+        }
+      }
+    }
+  ]
+}

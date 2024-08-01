@@ -1,0 +1,1607 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "title": "Rechnung",
+  "definitions": {
+    "Rechnungsstatus": {
+      "type": "integer",
+      "description": "Abbildung verschiedener Zustände, die im Rahmen der Rechnungsbearbeitung durchlaufen werden.",
+      "x-enumNames": [
+        "GEPRUEFT_OK",
+        "GEPRUEFT_FEHLERHAFT",
+        "GEBUCHT",
+        "BEZAHLT"
+      ],
+      "enum": [0, 1, 2, 3]
+    },
+    "Rechnungstyp": {
+      "type": "integer",
+      "description": "",
+      "x-enumNames": [
+        "ABSCHLAGSRECHNUNG",
+        "TURNUSRECHNUNG",
+        "MONATSRECHNUNG",
+        "WIMRECHNUNG",
+        "ZWISCHENRECHNUNG",
+        "INTEGRIERTE_13TE_RECHNUNG",
+        "ZUSAETZLICHE_13TE_RECHNUNG",
+        "MEHRMINDERMENGENRECHNUNG",
+        "ABSCHLUSSRECHNUNG",
+        "MSBRECHNUNG",
+        "KAPAZITAETSRECHNUNG",
+        "SPERRUNG_INBETRIEBNAHME",
+        "VERZUGSKOSTEN",
+        "BLINDARBEIT",
+        "SONDERRECHNUNG",
+        "ABRECHNUNG_VON_KONFIGURATIONEN_UNIVERSALBESTELLPROZESS"
+      ],
+      "enum": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15]
+    },
+    "Zeitraum": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/COM"
+        },
+        {
+          "type": "object",
+          "description": "Diese Komponente wird zur Abbildung von Zeiträumen in Form von Dauern oder der Angabe von Start und Ende\nverwendet.\n            ",
+          "additionalProperties": {},
+          "properties": {
+            "einheit": {
+              "description": "Die Einheit in der die Dauer angeben ist. Z.B. Monate. ",
+              "x-nullable": true,
+              "oneOf": [
+                {
+                  "$ref": "#/definitions/Zeiteinheit"
+                }
+              ]
+            },
+            "dauer": {
+              "type": "number",
+              "description": "Gibt die Anzahl der Zeiteinheiten an, z.B. 3 (Monate).",
+              "format": "decimal",
+              "x-nullable": true
+            },
+            "startdatum": {
+              "type": "string",
+              "description": "Gibt Tag und Uhrzeit (falls vorhanden) an, wann der Zeitraum startet.",
+              "format": "date-time",
+              "x-nullable": true
+            },
+            "enddatum": {
+              "type": "string",
+              "description": "Gibt Tag und Uhrzeit (falls vorhanden) an, wann der Zeitraum endet.",
+              "format": "date-time",
+              "x-nullable": true
+            },
+            "startzeitpunkt": {
+              "type": "string",
+              "description": "The same value as Startdatum",
+              "format": "date-time",
+              "x-nullable": true
+            },
+            "endzeitpunkt": {
+              "type": "string",
+              "description": "The same value as Enddatum",
+              "format": "date-time",
+              "x-nullable": true
+            }
+          }
+        }
+      ]
+    },
+    "Zeiteinheit": {
+      "type": "integer",
+      "description": "Auflistung möglicher Einheiten zur Verwendung in zeitbezogenen Angaben.",
+      "x-enumNames": [
+        "SEKUNDE",
+        "MINUTE",
+        "STUNDE",
+        "VIERTEL_STUNDE",
+        "TAG",
+        "WOCHE",
+        "MONAT",
+        "QUARTAL",
+        "HALBJAHR",
+        "JAHR"
+      ],
+      "enum": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+    },
+    "COM": {
+      "type": "object",
+      "description": "The COM class is the abstract class from which all BO4E.COM classes are derived.\n            ",
+      "x-abstract": true,
+      "additionalProperties": {},
+      "properties": {
+        "guidSerialized": {
+          "type": "string"
+        },
+        "timestamp": {
+          "type": "string",
+          "description": "Store the latest timestamp (update from the database)\n            ",
+          "format": "date-time",
+          "x-nullable": true
+        },
+        "guid": {
+          "type": "string",
+          "description": "allows adding a GUID to COM objects for tracking across systems\n            ",
+          "format": "guid",
+          "x-nullable": true
+        }
+      }
+    },
+    "Geschaeftspartner": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/BusinessObject"
+        },
+        {
+          "type": "object",
+          "description": "Mit diesem Objekt können Geschäftspartner übertragen werden. Sowohl\nUnternehmen, als auch Privatpersonen können Geschäftspartner sein.\n            ",
+          "additionalProperties": {},
+          "properties": {
+            "anrede": {
+              "description": "Die Anrede für den GePa, Z.B. Herr. ",
+              "x-nullable": true,
+              "oneOf": [
+                {
+                  "$ref": "#/definitions/Anrede"
+                }
+              ]
+            },
+            "title": {
+              "type": "string",
+              "description": "title of name\n            ",
+              "x-deprecated": true,
+              "x-deprecatedMessage": "Please use anrede instead or Ansprechpartner.individuelleAnrede",
+              "x-nullable": true,
+              "x-example": "Dr."
+            },
+            "name1": {
+              "type": "string",
+              "description": "Erster Teil des Namens. Hier kann der Firmenname oder bei Privatpersonen\nbeispielsweise der Nachname dargestellt werden. Beispiele: Yellow Strom GmbH\noder Hagen\n            ",
+              "x-nullable": true
+            },
+            "name2": {
+              "type": "string",
+              "description": "Zweiter Teil des Namens. Hier kann der eine Erweiterung zum Firmennamen oder\nbei Privatpersonen beispielsweise der Vorname dargestellt werden. Beispiele:\nBereich Süd oder Nina\n            ",
+              "x-nullable": true
+            },
+            "name3": {
+              "type": "string",
+              "description": "Dritter Teil des Namens. Hier können weitere Ergänzungen zum Firmennamen oder\nbei Privatpersonen Zusätze zum Namen dargestellt werden. Beispiele: und Afrika\noder Sängerin\n            ",
+              "x-nullable": true
+            },
+            "gewerbekennzeichnung": {
+              "type": "boolean",
+              "description": "Kennzeichnung ob es sich um einen Gewerbe/Unternehmen (gewerbeKennzeichnung = true)\noder eine Privatperson handelt. (gewerbeKennzeichnung = false)\n            "
+            },
+            "hrnummer": {
+              "type": "string",
+              "description": "Handelsregisternummer des Geschäftspartners",
+              "x-nullable": true
+            },
+            "amtsgericht": {
+              "type": "string",
+              "description": "Amtsgericht bzw Handelsregistergericht, das die Handelsregisternummer herausgegeben hat",
+              "x-nullable": true
+            },
+            "kontaktweg": {
+              "type": "array",
+              "description": "Bevorzugter Kontaktweg des Geschäftspartners.",
+              "x-nullable": true,
+              "items": {
+                "$ref": "#/definitions/Kontaktart"
+              }
+            },
+            "umsatzsteuerId": {
+              "type": "string",
+              "description": "Die Steuer-ID des Geschäftspartners. Beispiel: DE 813281825",
+              "x-nullable": true
+            },
+            "glaeubigerId": {
+              "type": "string",
+              "description": "* Die Gläubiger-ID welche im Zahlungsverkehr verwendet wird- Z.B. DE 47116789",
+              "x-nullable": true
+            },
+            "eMailAdresse": {
+              "type": "string",
+              "description": "E-Mail-Adresse des Ansprechpartners. Z.B. info@mp-energie.de",
+              "x-nullable": true
+            },
+            "website": {
+              "type": "string",
+              "description": "Internetseite des Marktpartners. Beispiel: www.mp-energie.de",
+              "x-nullable": true
+            },
+            "geschaeftspartnerrolle": {
+              "type": "array",
+              "description": "Rolle, die der Geschäftspartner hat (z.B. Interessent, Kunde).",
+              "x-nullable": true,
+              "items": {
+                "$ref": "#/definitions/Geschaeftspartnerrolle"
+              }
+            },
+            "partneradresse": {
+              "description": "Adresse des Geschäftspartners, an der sich der Hauptsitz befindet. Details \n            ",
+              "x-nullable": true,
+              "oneOf": [
+                {
+                  "$ref": "#/definitions/Adresse"
+                }
+              ]
+            },
+            "grundlageZurVerringerungDerUmlagenNachEnfg": {
+              "description": "Grundlage zur Verringerung der Umlagen nach EnFG",
+              "x-nullable": true,
+              "oneOf": [
+                {
+                  "$ref": "#/definitions/GrundlageZurVerringerungDerUmlagenNachEnfg"
+                }
+              ]
+            },
+            "grundDerPrivilegierungNachEnFG": {
+              "description": "Grund der Privilegierung nach EnFG",
+              "x-nullable": true,
+              "oneOf": [
+                {
+                  "$ref": "#/definitions/GrundDerPrivilegierungNachEnFG"
+                }
+              ]
+            }
+          }
+        }
+      ]
+    },
+    "Anrede": {
+      "type": "integer",
+      "description": "Übersicht möglicher Anreden, z.B. eines Geschäftspartners.",
+      "x-enumNames": [
+        "HERR",
+        "FRAU",
+        "EHELEUTE",
+        "FIRMA",
+        "INDIVIDUELL",
+        "FAMILIE",
+        "ERBENGEMEINSCHAFT",
+        "WOHNGEMEINSCHAFT",
+        "GRUNDSTUECKGEMEINSCHAFT",
+        "DR"
+      ],
+      "enum": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+    },
+    "Kontaktart": {
+      "type": "integer",
+      "description": "Art des Kontaktes zwischen Geschäftspartnern.",
+      "x-enumNames": ["ANSCHREIBEN", "TELEFONAT", "FAX", "E_MAIL", "SMS"],
+      "enum": [0, 1, 2, 3, 4]
+    },
+    "Geschaeftspartnerrolle": {
+      "type": "integer",
+      "description": "Diese Rollen kann ein Geschäftspartner einnehmen.",
+      "x-enumNames": [
+        "LIEFERANT",
+        "DIENSTLEISTER",
+        "KUNDE",
+        "INTERESSENT",
+        "MARKTPARTNER"
+      ],
+      "enum": [0, 1, 2, 3, 4]
+    },
+    "Adresse": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/COM"
+        },
+        {
+          "type": "object",
+          "description": "Enthält eine Adresse, die für die meisten Zwecke verwendbar ist.",
+          "additionalProperties": {},
+          "properties": {
+            "postleitzahl": {
+              "type": "string",
+              "description": "Die Postleitzahl. Beispiel: 41836"
+            },
+            "ort": {
+              "type": "string",
+              "description": "Bezeichnung der Stadt. Beispiel Hückelhoven"
+            },
+            "strasse": {
+              "type": "string",
+              "description": "Bezeichnung der Straße. Beispiel: Weserstraße",
+              "x-nullable": true
+            },
+            "hausnummer": {
+              "type": "string",
+              "description": "Hausnummer inkl. Zusatz. Beispiel. 3, 4a etc.",
+              "x-nullable": true
+            },
+            "postfach": {
+              "type": "string",
+              "description": "Im Falle einer Postfachadresse das Postfach. Damit werden Straße und\nHausnummer nicht berücksichtigt.Beispiel: Postfach 4711\n            ",
+              "x-nullable": true
+            },
+            "adresszusatz": {
+              "type": "string",
+              "description": "Zusatzhinweis zum Auffinden der Adresse, z.B. \"3. Stock linke Wohnung\"",
+              "x-nullable": true
+            },
+            "coErgaenzung": {
+              "type": "string",
+              "description": "Im Falle einer c/o-Adresse steht in diesem Attribut die Anrede. Z.B. c/o\nVeronica Hauptmieterin.In diesem Fall enthält die folgende Adresse die Daten\nder in c/o adressierten Person oder Firma.\n            ",
+              "x-nullable": true
+            },
+            "landescode": {
+              "description": "Offizieller ISO-Landescode. Z.B. NL, Details Landescode",
+              "x-nullable": true,
+              "oneOf": [
+                {
+                  "$ref": "#/definitions/Landescode"
+                }
+              ]
+            },
+            "ortsteil": {
+              "type": "string",
+              "description": "Ortsteil für EDIFACT mapping\n            ",
+              "x-nullable": true
+            }
+          }
+        }
+      ]
+    },
+    "Landescode": {
+      "type": "integer",
+      "description": "Der ISO-Landescode.",
+      "x-enumNames": [
+        "AC",
+        "AD",
+        "AE",
+        "AF",
+        "AG",
+        "AI",
+        "AL",
+        "AM",
+        "AN",
+        "AO",
+        "AQ",
+        "AR",
+        "AS",
+        "AT",
+        "AU",
+        "AW",
+        "AX",
+        "AZ",
+        "BA",
+        "BB",
+        "BD",
+        "BE",
+        "BF",
+        "BG",
+        "BH",
+        "BI",
+        "BJ",
+        "BL",
+        "BM",
+        "BN",
+        "BO",
+        "BQ",
+        "BR",
+        "BS",
+        "BT",
+        "BU",
+        "BV",
+        "BW",
+        "BY",
+        "BZ",
+        "CA",
+        "CC",
+        "CD",
+        "CF",
+        "CG",
+        "CH",
+        "CI",
+        "CK",
+        "CL",
+        "CM",
+        "CN",
+        "CO",
+        "CP",
+        "CR",
+        "CS",
+        "CU",
+        "CV",
+        "CW",
+        "CX",
+        "CY",
+        "CZ",
+        "DE",
+        "DG",
+        "DJ",
+        "DK",
+        "DM",
+        "DO",
+        "DZ",
+        "EA",
+        "EC",
+        "EE",
+        "EG",
+        "EH",
+        "ER",
+        "ES",
+        "ET",
+        "EU",
+        "FI",
+        "FJ",
+        "FK",
+        "FM",
+        "FO",
+        "FR",
+        "FX",
+        "GA",
+        "GB",
+        "GD",
+        "GE",
+        "GF",
+        "GG",
+        "GH",
+        "GI",
+        "GL",
+        "GM",
+        "GN",
+        "GP",
+        "GQ",
+        "GR",
+        "GS",
+        "GT",
+        "GU",
+        "GW",
+        "GY",
+        "HK",
+        "HM",
+        "HN",
+        "HR",
+        "HT",
+        "HU",
+        "IC",
+        "ID",
+        "IE",
+        "IL",
+        "IM",
+        "IN",
+        "IO",
+        "IQ",
+        "IR",
+        "IS",
+        "IT",
+        "JE",
+        "JM",
+        "JO",
+        "JP",
+        "KE",
+        "KG",
+        "KH",
+        "KI",
+        "KM",
+        "KN",
+        "KP",
+        "KR",
+        "KW",
+        "KY",
+        "KZ",
+        "LA",
+        "LB",
+        "LC",
+        "LI",
+        "LK",
+        "LR",
+        "LS",
+        "LT",
+        "LU",
+        "LV",
+        "LY",
+        "MA",
+        "MC",
+        "MD",
+        "ME",
+        "MF",
+        "MG",
+        "MH",
+        "MK",
+        "ML",
+        "MM",
+        "MN",
+        "MO",
+        "MP",
+        "MQ",
+        "MR",
+        "MS",
+        "MT",
+        "MU",
+        "MV",
+        "MW",
+        "MX",
+        "MY",
+        "MZ",
+        "NA",
+        "NC",
+        "NE",
+        "NF",
+        "NG",
+        "NI",
+        "NL",
+        "NO",
+        "NP",
+        "NR",
+        "NT",
+        "NU",
+        "NZ",
+        "OM",
+        "PA",
+        "PE",
+        "PF",
+        "PG",
+        "PH",
+        "PK",
+        "PL",
+        "PM",
+        "PN",
+        "PR",
+        "PS",
+        "PT",
+        "PW",
+        "PY",
+        "QA",
+        "RE",
+        "RO",
+        "RS",
+        "RU",
+        "RW",
+        "SA",
+        "SB",
+        "SC",
+        "SD",
+        "SE",
+        "SF",
+        "SG",
+        "SH",
+        "SI",
+        "SJ",
+        "SK",
+        "SL",
+        "SM",
+        "SN",
+        "SO",
+        "SR",
+        "SS",
+        "ST",
+        "SU",
+        "SV",
+        "SX",
+        "SY",
+        "SZ",
+        "TA",
+        "TC",
+        "TD",
+        "TF",
+        "TG",
+        "TJ",
+        "TK",
+        "TL",
+        "TM",
+        "TN",
+        "TO",
+        "TP",
+        "TR",
+        "TT",
+        "TV",
+        "TW",
+        "TZ",
+        "UA",
+        "UG",
+        "UK",
+        "UM",
+        "US",
+        "UY",
+        "UZ",
+        "VA",
+        "VC",
+        "VE",
+        "VG",
+        "VI",
+        "VN",
+        "VU",
+        "WF",
+        "WS",
+        "XK",
+        "YE",
+        "YT",
+        "YU",
+        "ZA",
+        "ZM",
+        "ZR",
+        "ZW"
+      ],
+      "enum": [
+        0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19,
+        20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37,
+        38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55,
+        56, 57, 58, 59, 60, 61, 62, 63, 64, 65, 66, 67, 68, 69, 70, 71, 72, 73,
+        74, 75, 76, 77, 78, 79, 80, 81, 82, 83, 84, 85, 86, 87, 88, 89, 90, 91,
+        92, 93, 94, 95, 96, 97, 98, 99, 100, 101, 102, 103, 104, 105, 106, 107,
+        108, 109, 110, 111, 112, 113, 114, 115, 116, 117, 118, 119, 120, 121,
+        122, 123, 124, 125, 126, 127, 128, 129, 130, 131, 132, 133, 134, 135,
+        136, 137, 138, 139, 140, 141, 142, 143, 144, 145, 146, 147, 148, 149,
+        150, 151, 152, 153, 154, 155, 156, 157, 158, 159, 160, 161, 162, 163,
+        164, 165, 166, 167, 168, 169, 170, 171, 172, 173, 174, 175, 176, 177,
+        178, 179, 180, 181, 182, 183, 184, 185, 186, 187, 188, 189, 190, 191,
+        192, 193, 194, 195, 196, 197, 198, 199, 200, 201, 202, 203, 204, 205,
+        206, 207, 208, 209, 210, 211, 212, 213, 214, 215, 216, 217, 218, 219,
+        220, 221, 222, 223, 224, 225, 226, 227, 228, 229, 230, 231, 232, 233,
+        234, 235, 236, 237, 238, 239, 240, 241, 242, 243, 244, 245, 246, 247,
+        248, 249, 250, 251, 252, 253, 254, 255, 256, 257, 258, 259, 260, 261,
+        262, 263, 264, 265, 266
+      ]
+    },
+    "GrundlageZurVerringerungDerUmlagenNachEnfg": {
+      "type": "integer",
+      "description": "Grundlage zur Verringerung der Umlagen nach EnFG (UTILMD Strom)",
+      "x-enumNames": [
+        "KUNDE_ERFUELLT_VORAUSSETZUNG",
+        "KUNDE_ERFUELLT_VORAUSSETZUNG_NICHT",
+        "KEINE_ANGABE"
+      ],
+      "enum": [0, 1, 2]
+    },
+    "GrundDerPrivilegierungNachEnFG": {
+      "type": "integer",
+      "description": "Grund der Privilegierung nach EnFG (UTILMD Strom)",
+      "x-enumNames": [
+        "STROMSPEICHER_UND_VERLUSTENERGIE",
+        "ELEKTRISCH_ANGETRIEBENE_WAERMEPUMPEN",
+        "UMLAGEERHEBUNG_BEI_ANLAGEN_ZUR_VERSTROMUNG_VON_KUPPELGASEN",
+        "HERSTELLUNG_VON_GRUENEN_WASSERSTOFF",
+        "STROMKOSTENINTENSIVE_UNTERNEHMEN",
+        "HERSTELLUNG_VON_WASSERSTOFF_IN_STROMKOSTENINTENSIVEN_UNTERNEHMEN",
+        "SCHIENENBAHNEN",
+        "ELEKTRISCHE_BETRIEBENE_BUSSEN_IM_LINIENVERKEHR",
+        "LANDSTROMANLAGEN"
+      ],
+      "enum": [0, 1, 2, 3, 4, 5, 6, 7, 8]
+    },
+    "BusinessObject": {
+      "type": "object",
+      "description": "General abstract class for Business Objects for Energy (BO4E)\n            ",
+      "x-abstract": true,
+      "additionalProperties": {},
+      "properties": {
+        "boTyp": {
+          "type": "string",
+          "description": "obligatory type of the business object in UPPER CASE\n            ",
+          "x-nullable": true,
+          "x-example": "'MESSLOKATION',\n'MARKTLOKATION'\n            "
+        },
+        "versionStruktur": {
+          "type": "string",
+          "description": "obligatory version of the BO4E definition. Currently hard coded to 1\n            ",
+          "x-nullable": true,
+          "x-example": 1
+        },
+        "guidSerialized": {
+          "type": "string",
+          "description": "protobuf serilization requires the Guid as string.\n            "
+        },
+        "timestamp": {
+          "type": "string",
+          "description": "Store the latest database update, is Datetime, because postgres doesn't handle datetimeoffset in a generated column\ngracefully\n            ",
+          "format": "date-time",
+          "x-nullable": true
+        },
+        "externeReferenzen": {
+          "type": "array",
+          "description": "Hier können IDs anderer Systeme hinterlegt werden (z.B. eine SAP-GP-Nummer) (Details siehe\nExterneReferenz)\n            ",
+          "x-nullable": true,
+          "items": {
+            "$ref": "#/definitions/ExterneReferenz"
+          }
+        },
+        "guid": {
+          "type": "string",
+          "description": "allows adding a GUID to Business Objects for tracking across systems\n            ",
+          "format": "guid",
+          "x-nullable": true
+        }
+      }
+    },
+    "ExterneReferenz": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/COM"
+        },
+        {
+          "type": "object",
+          "description": "Viele Datenobjekte weisen in unterschiedlichen Systemen eine eindeutige ID (Kundennummer, GP-Nummer etc.) auf.\nBeim Austausch von Datenobjekten zwischen verschiedenen Systemen ist es daher hilfreich, sich die eindeutigen IDs\nder anzubindenden Systeme zu merken.\nDiese Komponente ermöglicht es, sich die SAP GP-Nummer zu merken, um diese bei SAP-Aufrufen als Parameter mitgeben\nzu können.\n            ",
+          "additionalProperties": {},
+          "properties": {
+            "exRefName": {
+              "type": "string",
+              "description": "Bezeichnung der externen Referenz (z.B. \"hochfrequenz integration services\")\n            ",
+              "x-nullable": true
+            },
+            "exRefWert": {
+              "type": "string",
+              "description": "Wert der externen Referenz (z.B. \"123456\"; \"4711\")\n            ",
+              "x-nullable": true
+            }
+          }
+        }
+      ]
+    },
+    "Betrag": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/COM"
+        },
+        {
+          "type": "object",
+          "description": "Die Komponente wird dazu verwendet Summebeträge - beispielsweise in Angeboten und Rechnungen - als Geldbeträge\nabzubilden. Die Einheit ist dabei immer die Hauptwährung also Euro, Dollar etc..\n            ",
+          "additionalProperties": {},
+          "properties": {
+            "wert": {
+              "type": "number",
+              "description": "Gibt den Betrag des Preises an.",
+              "format": "decimal"
+            },
+            "waehrung": {
+              "description": "            ",
+              "oneOf": [
+                {
+                  "$ref": "#/definitions/Waehrungscode"
+                }
+              ]
+            }
+          }
+        }
+      ]
+    },
+    "Waehrungscode": {
+      "type": "integer",
+      "description": "Aufzählung der Währungscodes.",
+      "x-enumNames": [
+        "AFN",
+        "ALL",
+        "AMD",
+        "ANG",
+        "AOA",
+        "ARS",
+        "AUD",
+        "AWG",
+        "AZN",
+        "BAM",
+        "BBD",
+        "BDT",
+        "BGN",
+        "BHD",
+        "BIF",
+        "BMD",
+        "BND",
+        "BOB",
+        "BOV",
+        "BRL",
+        "BSD",
+        "BTN",
+        "BWP",
+        "BYN",
+        "BYR",
+        "BZD",
+        "CAD",
+        "CDF",
+        "CHE",
+        "CHF",
+        "CHW",
+        "CLF",
+        "CLP",
+        "CNY",
+        "COP",
+        "COU",
+        "CRC",
+        "CUC",
+        "CUP",
+        "CVE",
+        "CZK",
+        "DJF",
+        "DKK",
+        "DOP",
+        "DZD",
+        "EGP",
+        "ERN",
+        "ETB",
+        "EUR",
+        "FJD",
+        "FKP",
+        "GBP",
+        "GEL",
+        "GHS",
+        "GIP",
+        "GMD",
+        "GNF",
+        "GTQ",
+        "GYD",
+        "HKD",
+        "HNL",
+        "HRK",
+        "HTG",
+        "HUF",
+        "IDR",
+        "ILS",
+        "INR",
+        "IQD",
+        "IRR",
+        "ISK",
+        "JMD",
+        "JOD",
+        "JPY",
+        "KES",
+        "KGS",
+        "KHR",
+        "KMF",
+        "KPW",
+        "KRW",
+        "KWD",
+        "KYD",
+        "KZT",
+        "LAK",
+        "LBP",
+        "LKR",
+        "LRD",
+        "LSL",
+        "LTL",
+        "LYD",
+        "MAD",
+        "MDL",
+        "MGA",
+        "MKD",
+        "MMK",
+        "MNT",
+        "MOP",
+        "MRO",
+        "MUR",
+        "MVR",
+        "MWK",
+        "MXN",
+        "MXV",
+        "MYR",
+        "MZN",
+        "NAD",
+        "NGN",
+        "NIO",
+        "NOK",
+        "NPR",
+        "NZD",
+        "OMR",
+        "PAB",
+        "PEN",
+        "PGK",
+        "PHP",
+        "PKR",
+        "PLN",
+        "PYG",
+        "QAR",
+        "RON",
+        "RSD",
+        "RUB",
+        "RUR",
+        "RWF",
+        "SAR",
+        "SBD",
+        "SCR",
+        "SDG",
+        "SEK",
+        "SGD",
+        "SHP",
+        "SLL",
+        "SOS",
+        "SRD",
+        "SSP",
+        "STD",
+        "SVC",
+        "SYP",
+        "SZL",
+        "THB",
+        "TJS",
+        "TMT",
+        "TND",
+        "TOP",
+        "TRY",
+        "TTD",
+        "TWD",
+        "TZS",
+        "UAH",
+        "UGX",
+        "USD",
+        "USN",
+        "USS",
+        "UYI",
+        "UYU",
+        "UZS",
+        "VEF",
+        "VND",
+        "VUV",
+        "WST",
+        "XAF",
+        "XAG",
+        "XAU",
+        "XBA",
+        "XBB",
+        "XBC",
+        "XBD",
+        "XCD",
+        "XDR",
+        "XOF",
+        "XPD",
+        "XPF",
+        "XPT",
+        "XSU",
+        "XTS",
+        "XUA",
+        "XXX",
+        "YER",
+        "ZAR",
+        "ZMW",
+        "ZWL"
+      ],
+      "enum": [
+        0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19,
+        20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37,
+        38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55,
+        56, 57, 58, 59, 60, 61, 62, 63, 64, 65, 66, 67, 68, 69, 70, 71, 72, 73,
+        74, 75, 76, 77, 78, 79, 80, 81, 82, 83, 84, 85, 86, 87, 88, 89, 90, 91,
+        92, 93, 94, 95, 96, 97, 98, 99, 100, 101, 102, 103, 104, 105, 106, 107,
+        108, 109, 110, 111, 112, 113, 114, 115, 116, 117, 118, 119, 120, 121,
+        122, 123, 124, 125, 126, 127, 128, 129, 130, 131, 132, 133, 134, 135,
+        136, 137, 138, 139, 140, 141, 142, 143, 144, 145, 146, 147, 148, 149,
+        150, 151, 152, 153, 154, 155, 156, 157, 158, 159, 160, 161, 162, 163,
+        164, 165, 166, 167, 168, 169, 170, 171, 172, 173, 174, 175, 176, 177,
+        178, 179, 180
+      ]
+    },
+    "Steuerbetrag": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/COM"
+        },
+        {
+          "type": "object",
+          "description": "Abbildung eines Steuerbetrages.",
+          "additionalProperties": {},
+          "properties": {
+            "steuerkennzeichen": {
+              "description": "Kennzeichnung des Steuersatzes, bzw. Verfahrens. Details Steuerkennzeichen",
+              "oneOf": [
+                {
+                  "$ref": "#/definitions/Steuerkennzeichen"
+                }
+              ]
+            },
+            "sondersteuersatz": {
+              "type": "number",
+              "description": "Wert eines besonderen Steuersatzes, wenn Steuerkennzeichen\nden Wert UST_SONDER hat",
+              "format": "decimal",
+              "x-nullable": true
+            },
+            "basiswert": {
+              "type": "number",
+              "description": "Nettobetrag für den die Steuer berechnet wurde. Z.B. 200",
+              "format": "decimal"
+            },
+            "steuerwert": {
+              "type": "number",
+              "description": "Aus dem Basiswert berechnete Steuer. Z.B. 38 (bei UST_19), falls Basiswert 200 ist.",
+              "format": "decimal"
+            },
+            "waehrung": {
+              "description": "Währung. Z.B. Euro. ",
+              "oneOf": [
+                {
+                  "$ref": "#/definitions/Waehrungscode"
+                }
+              ]
+            },
+            "basiswertVorausgezahlt": {
+              "type": "number",
+              "description": "Nettobetrag (vorausgezahlt) für den die Steuer berechnet wurde. Z.B. 200",
+              "format": "decimal",
+              "x-nullable": true
+            },
+            "steuerwertVorausgezahlt": {
+              "type": "number",
+              "description": "Aus dem Basiswert (vorausgezahlt) berechnete Steuer. Z.B. 38 (bei UST_19), wenn BasiswertVorausgezahlt 200 ist",
+              "format": "decimal",
+              "x-nullable": true
+            }
+          }
+        }
+      ]
+    },
+    "Steuerkennzeichen": {
+      "type": "integer",
+      "description": "",
+      "x-enumNames": [
+        "UST_SONDER",
+        "UST_19",
+        "UST_16",
+        "UST_7",
+        "VST_0",
+        "VST_19",
+        "VST_16",
+        "VST_7",
+        "RCV"
+      ],
+      "enum": [0, 1, 2, 3, 4, 5, 6, 7, 8]
+    },
+    "Rechnungsposition": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/COM"
+        },
+        {
+          "type": "object",
+          "description": "Abbildung einer Rechnungsposition. Über Rechnungspositionen werden Rechnungen strukturiert. In einem\nRechnungsteil wird jeweils eine in sich geschlossene Leistung abgerechnet.\n            ",
+          "additionalProperties": {},
+          "properties": {
+            "positionsnummer": {
+              "type": "integer",
+              "description": "Fortlaufende Nummer für die Rechnungsposition.",
+              "format": "int32"
+            },
+            "lieferungVon": {
+              "type": "string",
+              "description": "Start der Lieferung für die abgerechnete Leistung.",
+              "format": "date-time",
+              "x-nullable": true
+            },
+            "lieferungBis": {
+              "type": "string",
+              "description": "Ende der Lieferung für die abgerechnete Leistung.",
+              "format": "date-time",
+              "x-nullable": true
+            },
+            "positionstext": {
+              "type": "string",
+              "description": "Bezeichnung für die abgerechnete Position."
+            },
+            "zeiteinheit": {
+              "description": "Falls sich der Preis auf eine Zeit bezieht, steht hier die Einheit, z.B. JAHR. Details\nMengeneinheit\n            ",
+              "x-nullable": true,
+              "oneOf": [
+                {
+                  "$ref": "#/definitions/Mengeneinheit"
+                }
+              ]
+            },
+            "artikelnummer": {
+              "description": "Kennzeichnung der Rechnungsposition mit der Standard-Artikelnummer des BDEW. Details\nBDEWArtikelnummer\n            ",
+              "x-nullable": true,
+              "oneOf": [
+                {
+                  "$ref": "#/definitions/BDEWArtikelnummer"
+                }
+              ]
+            },
+            "lokationsId": {
+              "type": "string",
+              "description": "Marktlokation, die zu dieser Position gehört.",
+              "x-nullable": true
+            },
+            "positionsMenge": {
+              "description": "Die abgerechnete Menge mit Einheit. Z.B. 4372 kWh. Details Menge",
+              "x-nullable": true,
+              "oneOf": [
+                {
+                  "$ref": "#/definitions/Menge"
+                }
+              ]
+            },
+            "zeitbezogeneMenge": {
+              "description": "Eine auf die Zeiteinheit bezogene Untermenge. Z.B. bei einem Jahrespreis, 3 Monate oder 146 Tage. Basierend\ndarauf wird der Preis aufgeteilt. Details Menge\n            ",
+              "x-nullable": true,
+              "oneOf": [
+                {
+                  "$ref": "#/definitions/Menge"
+                }
+              ]
+            },
+            "korrekturfaktor": {
+              "type": "number",
+              "description": "Gibt ggf. einen Korrekturfaktor für die Menge an.",
+              "format": "decimal",
+              "x-nullable": true
+            },
+            "einzelpreis": {
+              "description": "Der Preis für eine Einheit der energetischen Menge. Details Preis",
+              "oneOf": [
+                {
+                  "$ref": "#/definitions/Preis"
+                }
+              ]
+            },
+            "teilsummeNetto": {
+              "description": "Das Ergebnis der Multiplikation aus einzelpreis * positionsMenge * (Faktor aus zeitbezogeneMenge). Z.B. 12,60€\n* 120 kW * 3/12 (für 3 Monate). Details Betrag\n            ",
+              "x-nullable": true,
+              "oneOf": [
+                {
+                  "$ref": "#/definitions/Betrag"
+                }
+              ]
+            },
+            "teilrabattNetto": {
+              "description": "Nettobetrag für den Rabatt dieser Position. Details Betrag",
+              "x-nullable": true,
+              "oneOf": [
+                {
+                  "$ref": "#/definitions/Betrag"
+                }
+              ]
+            },
+            "teilsummeSteuer": {
+              "description": "Auf die Position entfallende Steuer, bestehend aus Steuersatz und Betrag. Details Steuerbetrag\n            ",
+              "x-nullable": true,
+              "oneOf": [
+                {
+                  "$ref": "#/definitions/Steuerbetrag"
+                }
+              ]
+            },
+            "vertragskontoId": {
+              "type": "string",
+              "description": "Möglichkeit die Rechnungsposition einem Vertragskonto zuzuordnen, um die Rechnungsposition mittels SAP Convergent\nInvoicing zu verarbeiten.\n(Ergänzung von Hochfrequenz Unternehmensberatung GmbH)\n            ",
+              "x-deprecated": true,
+              "x-deprecatedMessage": "Please use vertragsId instead of vertragskontoId",
+              "x-nullable": true
+            },
+            "vertragsId": {
+              "type": "string",
+              "description": "Möglichkeit die Rechnungsposition einem Vertragskonto zuzuordnen, um die Rechnungsposition mittels SAP Convergent\nInvoicing zu verarbeiten.\n(Ergänzung von Hochfrequenz Unternehmensberatung GmbH)\n            ",
+              "x-nullable": true
+            },
+            "status": {
+              "description": "status einer Rechnungsposition in SAP Convergent Invoicing\n(Ergänzung von Hochfrequenz Unternehmensberatung GmbH)\n            ",
+              "x-nullable": true,
+              "oneOf": [
+                {
+                  "$ref": "#/definitions/RechnungspositionsStatus"
+                }
+              ]
+            },
+            "artikelId": {
+              "type": "string",
+              "description": "Artikel-ID (ab 1.10.2022)\n            ",
+              "x-nullable": true
+            },
+            "ausfuehrungsdatum": {
+              "type": "string",
+              "description": "Das Datum an dem die Leistung erbracht wurde.",
+              "format": "date-time",
+              "x-nullable": true
+            }
+          }
+        }
+      ]
+    },
+    "Mengeneinheit": {
+      "type": "integer",
+      "description": "Einheit: Messgrößen, die per Messung oder Vorgabe ermittelt werden können.\n            ",
+      "x-enumNames": [
+        "ZERO",
+        "WH",
+        "KW",
+        "ANZAHL",
+        "KUBIKMETER",
+        "STUNDE",
+        "TAG",
+        "MONAT",
+        "VAR",
+        "VARH",
+        "KWHK",
+        "JAHR",
+        "KWH",
+        "MW",
+        "KVAR",
+        "KVARH",
+        "MWH"
+      ],
+      "enum": [
+        0, 2, 3, 7, 11, 13, 17, 19, 23, 29, 40, 228, 2000, 3000, 23000, 29000,
+        2000000
+      ]
+    },
+    "BDEWArtikelnummer": {
+      "type": "integer",
+      "description": "BDEWArtikelnummer",
+      "x-enumNames": [
+        "LEISTUNG",
+        "LEISTUNG_PAUSCHAL",
+        "GRUNDPREIS",
+        "REGELENERGIE_ARBEIT",
+        "REGELENERGIE_LEISTUNG",
+        "NOTSTROMLIEFERUNG_ARBEIT",
+        "NOTSTROMLIEFERUNG_LEISTUNG",
+        "RESERVENETZKAPAZITAET",
+        "RESERVELEISTUNG",
+        "ZUSAETZLICHE_ABLESUNG",
+        "PRUEFGEBUEHREN_AUSSERPLANMAESSIG",
+        "WIRKARBEIT",
+        "SINGULAER_GENUTZTE_BETRIEBSMITTEL",
+        "ABGABE_KWKG",
+        "ABSCHLAG",
+        "KONZESSIONSABGABE",
+        "ENTGELT_FERNAUSLESUNG",
+        "UNTERMESSUNG",
+        "BLINDMEHRARBEIT",
+        "ENTGELT_ABRECHNUNG",
+        "SPERRKOSTEN",
+        "ENTSPERRKOSTEN",
+        "MAHNKOSTEN",
+        "MEHR_MINDERMENGEN",
+        "INKASSOKOSTEN",
+        "BLINDMEHRLEISTUNG",
+        "ENTGELT_MESSUNG_ABLESUNG",
+        "ENTGELT_EINBAU_BETRIEB_WARTUNG_MESSTECHNIK",
+        "AUSGLEICHSENERGIE",
+        "AUSGLEICHSENERGIE_UNTERDECKUNG",
+        "ZAEHLEINRICHTUNG",
+        "WANDLER_MENGENUMWERTER",
+        "KOMMUNIKATIONSEINRICHTUNG",
+        "TECHNISCHE_STEUEREINRICHTUNG",
+        "PARAGRAF_19_STROM_NEV_UMLAGE",
+        "BEFESTIGUNGSEINRICHTUNG",
+        "OFFSHORE_HAFTUNGSUMLAGE",
+        "FIXE_ARBEITSENTGELTKOMPONENTE",
+        "FIXE_LEISTUNGSENTGELTKOMPONENTE",
+        "UMLAGE_ABSCHALTBARE_LASTEN",
+        "MEHRMENGE",
+        "MINDERMENGE",
+        "ENERGIESTEUER",
+        "SMARTMETER_GATEWAY",
+        "STEUERBOX",
+        "MSB_INKL_MESSUNG",
+        "ZUSATZDIENSTLEISTUNG_PARAGRAPH_35_2_1_MSBG",
+        "ZUSATZDIENSTLEISTUNG_PARAGRAPH_35_2_2_MSBG",
+        "ZUSATZDIENSTLEISTUNG_PARAGRAPH_35_2_3_MSBG",
+        "ZUSATZDIENSTLEISTUNG_PARAGRAPH_35_2_4_MSBG",
+        "ZUSATZDIENSTLEISTUNG_PARAGRAPH_35_2_5_MSBG",
+        "ZUSATZDIENSTLEISTUNG_PARAGRAPH_35_3_MSBG"
+      ],
+      "enum": [
+        0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19,
+        20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37,
+        38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51
+      ]
+    },
+    "Menge": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/COM"
+        },
+        {
+          "type": "object",
+          "description": "Abbildung einer Menge mit Wert und Einheit.",
+          "additionalProperties": {},
+          "properties": {
+            "wert": {
+              "type": "number",
+              "description": "Gibt den absoluten Wert der Menge an.",
+              "format": "decimal"
+            },
+            "einheit": {
+              "description": "Gibt die Einheit zum jeweiligen Wert an. Details Mengeneinheit",
+              "x-nullable": true,
+              "oneOf": [
+                {
+                  "$ref": "#/definitions/Mengeneinheit"
+                }
+              ]
+            }
+          }
+        }
+      ]
+    },
+    "Preis": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/COM"
+        },
+        {
+          "type": "object",
+          "description": "Preis",
+          "additionalProperties": {},
+          "properties": {
+            "wert": {
+              "type": "number",
+              "description": "Gibt die nomiale Höhe des Preises an.",
+              "format": "decimal",
+              "x-nullable": true
+            },
+            "einheit": {
+              "description": "Währungseinheit für den Preis, z.B. Euro oder Ct. Details Waehrungseinheit",
+              "x-nullable": true,
+              "oneOf": [
+                {
+                  "$ref": "#/definitions/Waehrungseinheit"
+                }
+              ]
+            },
+            "bezugswert": {
+              "description": "Angabe, für welche Bezugsgröße der Preis gilt. Z.B. kWh. ",
+              "x-nullable": true,
+              "oneOf": [
+                {
+                  "$ref": "#/definitions/Mengeneinheit"
+                }
+              ]
+            },
+            "status": {
+              "description": "Gibt den Status des veröffentlichten Preises an\n            ",
+              "x-nullable": true,
+              "oneOf": [
+                {
+                  "$ref": "#/definitions/Preisstatus"
+                }
+              ]
+            }
+          }
+        }
+      ]
+    },
+    "Waehrungseinheit": {
+      "type": "integer",
+      "description": "In diesem Enum werden die Währungen und ihre Untereinheiten definiert, beispielsweise für die Verwendung in\nPreisen.\n            ",
+      "x-enumNames": ["EUR", "CT"],
+      "enum": [0, 1]
+    },
+    "Preisstatus": {
+      "type": "integer",
+      "description": "Statusinformation für Preise",
+      "x-enumNames": ["VORLAEUFIG", "ENDGUELTIG"],
+      "enum": [0, 1]
+    },
+    "RechnungspositionsStatus": {
+      "type": "integer",
+      "description": "Status einer Rechnungsposition (konkret SAP Convergent Invoicing).",
+      "x-enumNames": [
+        "ROH",
+        "ROH_AUSGENOMMEN",
+        "ABRECHENBAR",
+        "ABRECHENBAR_AUSGENOMMEN",
+        "ABGERECHNET"
+      ],
+      "enum": [0, 1, 2, 3, 4]
+    },
+    "Vorauszahlung": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/COM"
+        },
+        {
+          "type": "object",
+          "description": "Die Komponente wird dazu verwendet Vorauszahlungen einer Rechnung abzubilden (inkl. Referenz auf die bezahlte Rechnung)\n            ",
+          "additionalProperties": {},
+          "properties": {
+            "betrag": {
+              "description": "Gibt den Betrag des Preises an.",
+              "oneOf": [
+                {
+                  "$ref": "#/definitions/Betrag"
+                }
+              ]
+            },
+            "referenz": {
+              "type": "string",
+              "description": "Referenz auf die Rechnungsnummer, die durch diesen Betrag bezahlt wurde\n            ",
+              "x-nullable": true
+            },
+            "referenzDatum": {
+              "type": "string",
+              "description": "Referenz auf das Datum der Rechnung, die durch diesen Betrag bezahlt wurde\n            ",
+              "format": "date-time",
+              "x-nullable": true
+            }
+          }
+        }
+      ]
+    },
+    "Sonderrechnungsart": {
+      "type": "integer",
+      "description": "",
+      "x-enumNames": [
+        "KONZESSIONSABGABE_TESTAT",
+        "INDIVIDUELL_ATYPISCH",
+        "INDIVIDUELL_SINGULAER",
+        "KWKG_UMLAGE",
+        "OFFSHORE_UMLAGE",
+        "P19_STROM_NEV_UMLAGE",
+        "P18_ABLAV",
+        "KONZESSIONSABGABE_WECHSEL_RLM",
+        "PRIVILEGIERUNG_NACH_ENFG"
+      ],
+      "enum": [0, 1, 2, 3, 4, 5, 6, 7, 8]
+    }
+  },
+  "allOf": [
+    {
+      "$ref": "#/definitions/BusinessObject"
+    },
+    {
+      "type": "object",
+      "description": "Modell für die Abbildung von Rechnungen im Kontext der Energiewirtschaft. Ausgehend von diesem Basismodell werden\nweitere spezifische Formen abgeleitet.\nhttps://www.bo4e.de/dokumentation/geschaeftsobjekte/bo-rechnung\n            ",
+      "additionalProperties": {},
+      "properties": {
+        "rechnungstitel": {
+          "type": "string",
+          "description": "Bezeichnung für die vorliegende Rechnung.\n            ",
+          "x-nullable": true
+        },
+        "rechnungsstatus": {
+          "description": "Status der Rechnung zur Kennzeichnung des Bearbeitungsstandes. Details siehe ENUM Rechnungsstatus\n            ",
+          "x-nullable": true,
+          "oneOf": [
+            {
+              "$ref": "#/definitions/Rechnungsstatus"
+            }
+          ]
+        },
+        "storno": {
+          "type": "boolean",
+          "description": "Kennzeichnung, ob es sich um eine Stornorechnung handelt. Im Falle \"true\" findet sich im Attribut\n\"originalrechnungsnummer\" die Nummer der Originalrechnung.\n            "
+        },
+        "rechnungsnummer": {
+          "type": "string",
+          "description": "Eine im Verwendungskontext eindeutige Nummer für die Rechnung.\n            "
+        },
+        "rechnungsdatum": {
+          "type": "string",
+          "description": "Ausstellungsdatum der Rechnung.\n            ",
+          "format": "date-time"
+        },
+        "faelligkeitsdatum": {
+          "type": "string",
+          "description": "Zu diesem Datum ist die Zahlung fällig.\n            ",
+          "format": "date-time"
+        },
+        "rechnungstyp": {
+          "description": "Ein kontextbezogender Rechnungstyp, z.B. Netznutzungsrechnung. Details siehe ENUM Rechnungstyp\n            ",
+          "oneOf": [
+            {
+              "$ref": "#/definitions/Rechnungstyp"
+            }
+          ]
+        },
+        "originalRechnungsnummer": {
+          "type": "string",
+          "description": "Im Falle einer Stornorechnung (storno = true) steht hier die Rechnungsnummer der stornierten Rechnung.\n            ",
+          "x-nullable": true
+        },
+        "rechnungsperiode": {
+          "description": "Der Zeitraum der zugrunde liegenden Lieferung zur Rechnung. In der COM Zeitraum können diese angegeben werden.\n            ",
+          "oneOf": [
+            {
+              "$ref": "#/definitions/Zeitraum"
+            }
+          ]
+        },
+        "rechnungsersteller": {
+          "description": "Der Aussteller der Rechnung. Details Geschaeftspartner\n            ",
+          "oneOf": [
+            {
+              "$ref": "#/definitions/Geschaeftspartner"
+            }
+          ]
+        },
+        "rechnungsempfaenger": {
+          "description": "Der Empfänger der Rechnung. Details Geschaeftspartner\n            ",
+          "oneOf": [
+            {
+              "$ref": "#/definitions/Geschaeftspartner"
+            }
+          ]
+        },
+        "gesamtnetto": {
+          "description": "Die Summe der Nettobeträge der Rechnungsteile. Details Betrag\n            ",
+          "oneOf": [
+            {
+              "$ref": "#/definitions/Betrag"
+            }
+          ]
+        },
+        "gesamtsteuer": {
+          "description": "Die Summe der Steuerbeträge der Rechnungsteile. Details Betrag\n            ",
+          "oneOf": [
+            {
+              "$ref": "#/definitions/Betrag"
+            }
+          ]
+        },
+        "gesamtbrutto": {
+          "description": "Die Summe aus Netto- und Steuerbetrag. Details Betrag\n            ",
+          "oneOf": [
+            {
+              "$ref": "#/definitions/Betrag"
+            }
+          ]
+        },
+        "vorausgezahlt": {
+          "description": "Die Summe evtl. vorausgezahlter Beträge, z.B. Abschläge. Angabe als Bruttowert. Details Betrag\n            ",
+          "x-nullable": true,
+          "oneOf": [
+            {
+              "$ref": "#/definitions/Betrag"
+            }
+          ]
+        },
+        "rabattBrutto": {
+          "description": "Gesamtrabatt auf den Bruttobetrag. Details Betrag\n            ",
+          "x-nullable": true,
+          "oneOf": [
+            {
+              "$ref": "#/definitions/Betrag"
+            }
+          ]
+        },
+        "zuzahlen": {
+          "description": "Der zu zahlende Betrag, der sich aus (Gesamtbrutto - Vorausgezahlt -\nRabattBrutto) ergibt. Details Betrag\n///\n            ",
+          "oneOf": [
+            {
+              "$ref": "#/definitions/Betrag"
+            }
+          ]
+        },
+        "steuerbetraege": {
+          "type": "array",
+          "description": "Eine Liste mit Steuerbeträgen pro Steuerkennzeichen/Steuersatz. Die Summe dieser Beträge ergibt den Wert für\ngesamtsteuer. Details Steuerbetrag\n            ",
+          "x-nullable": true,
+          "items": {
+            "$ref": "#/definitions/Steuerbetrag"
+          }
+        },
+        "rechnungspositionen": {
+          "type": "array",
+          "description": "Die Rechnungspositionen. Details siehe Rechnungsposition\n            ",
+          "items": {
+            "$ref": "#/definitions/Rechnungsposition"
+          }
+        },
+        "istSelbstausgestellt": {
+          "type": "boolean",
+          "description": "Kennzeichen, ob es sich um eine selbstausgestellte Rechnung handelt\n            ",
+          "x-nullable": true
+        },
+        "istReverseCharge": {
+          "type": "boolean",
+          "description": "Kennzeichen, ob bei der Rechnung das Reverse Charge verfahren angewendet wird\n            ",
+          "x-nullable": true
+        },
+        "vorauszahlungen": {
+          "type": "array",
+          "description": "evtl. vorausgezahlte Beträge, z.B. Abschläge. Angabe als Bruttowert. Details Betrag\n            ",
+          "x-nullable": true,
+          "items": {
+            "$ref": "#/definitions/Vorauszahlung"
+          }
+        },
+        "sonderrechnungsart": {
+          "description": "Sonderrechnungsart\n            ",
+          "x-nullable": true,
+          "oneOf": [
+            {
+              "$ref": "#/definitions/Sonderrechnungsart"
+            }
+          ]
+        },
+        "buchungsdatum": {
+          "type": "string",
+          "description": "Zu diesem Datum ist die Zahlung fällig.\n            ",
+          "format": "date-time",
+          "x-nullable": true
+        }
+      }
+    }
+  ]
+}

@@ -1,0 +1,442 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "title": "Energiemenge",
+  "definitions": {
+    "Lokationstyp": {
+      "type": "integer",
+      "description": "Gibt an, ob es sich um eine Markt- oder Messlokation handelt.",
+      "x-enumNames": ["MALO", "MELO"],
+      "enum": [0, 1]
+    },
+    "Verbrauch": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/COM"
+        },
+        {
+          "type": "object",
+          "description": "Abbildung eines zeitlich abgegrenzten Verbrauchs.\n            ",
+          "additionalProperties": {},
+          "properties": {
+            "startdatum": {
+              "type": "string",
+              "description": "Gibt Tag und Uhrzeit (falls vorhanden) an, wann der Zeitraum startet.",
+              "format": "date-time",
+              "x-nullable": true
+            },
+            "enddatum": {
+              "type": "string",
+              "description": "Gibt Tag und Uhrzeit (falls vorhanden) an, wann der Zeitraum endet.",
+              "format": "date-time",
+              "x-nullable": true
+            },
+            "wertermittlungsverfahren": {
+              "description": "Gibt an, ob es sich um eine PROGNOSE oder eine MESSUNG handelt.\n            ",
+              "x-nullable": true,
+              "oneOf": [
+                {
+                  "$ref": "#/definitions/Wertermittlungsverfahren"
+                }
+              ]
+            },
+            "messwertstatus": {
+              "description": "Enthält die Gültigkeit des angegebenen Wertes\n            ",
+              "x-nullable": true,
+              "oneOf": [
+                {
+                  "$ref": "#/definitions/Messwertstatus"
+                }
+              ]
+            },
+            "statuszusatzinformationen": {
+              "type": "array",
+              "description": "Enthält die Auflistung der STS Segmente Plausibilisierungshinweis, Ersatzwertbildungsverfahren,\nKorrekturgrund, Gasqualität, Tarif, Grundlage der Energiemenge",
+              "x-nullable": true,
+              "items": {
+                "$ref": "#/definitions/StatusZusatzInformation"
+              }
+            },
+            "obiskennzahl": {
+              "type": "string",
+              "description": "Die OBIS-Kennzahl für den Wert, die festlegt, welche Größe mit dem Stand gemeldet wird.\n            ",
+              "x-example": "1-0:1.8.1\n            "
+            },
+            "wert": {
+              "type": "number",
+              "description": "Gibt den absoluten Wert der Menge an.\n            ",
+              "format": "decimal"
+            },
+            "einheit": {
+              "description": "Gibt die Einheit zum jeweiligen Wert an.\n            ",
+              "oneOf": [
+                {
+                  "$ref": "#/definitions/Mengeneinheit"
+                }
+              ]
+            },
+            "type": {
+              "description": "type",
+              "x-nullable": true,
+              "x-example": "arbeitleistungtagesparameterabhmalo | veranschlagtejahresmenge | TUMKundenwert",
+              "oneOf": [
+                {
+                  "$ref": "#/definitions/Verbrauchsmengetyp"
+                }
+              ]
+            },
+            "tarifstufe": {
+              "description": "Tarifstufe",
+              "x-nullable": true,
+              "oneOf": [
+                {
+                  "$ref": "#/definitions/Tarifstufe"
+                }
+              ]
+            },
+            "nutzungszeitpunkt": {
+              "type": "string",
+              "description": "Wird verwendet, um einen Zählerstand eindeutig einem Prozesszeitpunkt zuzuordnen. Dieser Prozesszeitpunkt kann entweder ein Zeitpunkt einer Stammdatenänderung sein(z. B.bei einem Gerätewechsel, in der die Änderung vor dem Versand des Zählerstandes übermittelt wurde) oder die Bestellung eines Wertes aufgrund eines eingetretenen Ereignisses(z.B. Lieferantenwechsel). Der  Nutzungszeitpunkt ist für den Zählerstand der Zeitpunkt der für die weitere Verarbeitung relevant ist(z.B.Zuordnung bei Empfänger anhand der Zuordnungstupel).",
+              "format": "date-time",
+              "x-nullable": true
+            },
+            "ausfuehrungszeitpunkt": {
+              "type": "string",
+              "description": "Wird verwendet, um einen Zählerstand eindeutig einer tatsächlichen Änderung zuzuordnen, z.B.bei einem Gerätewechsel oder Geräteparameteränderung der tatsächliche Zeitpunkt an dem die Änderung an der Messlokation durchgeführt wurde.Der Nutzungszeitpunkt ist für den Zählerstand der Zeitpunkt der für die weitere Verarbeitung relevant ist(z.B. Zuordnung bei Empfänger anhand der Zuordnungstupel).",
+              "format": "date-time",
+              "x-nullable": true
+            }
+          }
+        }
+      ]
+    },
+    "Wertermittlungsverfahren": {
+      "type": "integer",
+      "description": "Gibt an, ob es sich um eine Prognose oder eine Messung handelt, beispielsweise bei der Abbildung eines Verbrauchs.\n            ",
+      "x-enumNames": ["PROGNOSE", "MESSUNG"],
+      "enum": [0, 1]
+    },
+    "Messwertstatus": {
+      "type": "integer",
+      "description": "Gibt auskunft über die Gültigkeit des angegebenen Verbrauchswertes. Bildet MSCONS SG10 QTY 6063 ab. ",
+      "x-enumNames": [
+        "ABGELESEN",
+        "ERSATZWERT",
+        "VOLAEUFIGERWERT",
+        "ANGABE_FUER_LIEFERSCHEIN",
+        "VORSCHLAGSWERT",
+        "NICHT_VERWENDBAR",
+        "PROGNOSEWERT",
+        "ENERGIEMENGESUMMIERT",
+        "FEHLT",
+        "GRUNDLAGE_POG_ERMITTLUNG"
+      ],
+      "enum": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+    },
+    "StatusZusatzInformation": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/COM"
+        },
+        {
+          "type": "object",
+          "description": "Enthält die Auflistung der STS Segmente Plausibilisierungshinweis, Ersatzwertbildungsverfahren,\nKorrekturgrund, Gasqualität, Tarif, Grundlage der Energiemenge.",
+          "additionalProperties": {},
+          "properties": {
+            "art": {
+              "description": "Enthält die Zusatzinformation Art des angegebenen Wertes\n            ",
+              "x-nullable": true,
+              "oneOf": [
+                {
+                  "$ref": "#/definitions/StatusArt"
+                }
+              ]
+            },
+            "status": {
+              "description": "Enthält die Zusatzinformation Status des angegebenen Wertes\n            ",
+              "x-nullable": true,
+              "oneOf": [
+                {
+                  "$ref": "#/definitions/Status"
+                }
+              ]
+            }
+          }
+        }
+      ]
+    },
+    "StatusArt": {
+      "type": "integer",
+      "description": "Represents the Type of Wert (MSCONS SG10 STS 9015)",
+      "x-enumNames": [
+        "VERTRAG",
+        "MESSWERTQUALITAET",
+        "MESSKLASSIFIZIERUNG",
+        "PLAUSIBILISIERUNGSHINWEIS",
+        "ERSATZWERTBILDUNGSVERFAHREN",
+        "GRUND_ERSATZWERTBILDUNGSVERFAHREN",
+        "KORREKTURGRUND",
+        "GASQUALITAET"
+      ],
+      "enum": [0, 1, 2, 3, 4, 5, 6, 7]
+    },
+    "Status": {
+      "type": "integer",
+      "description": "Represents the Status Code (MSCONS SG10 STS 4405) ",
+      "x-enumNames": [
+        "TARIF_1",
+        "TARIF_2",
+        "TARIF_3",
+        "TARIF_4",
+        "TARIF_5",
+        "TARIF_6",
+        "TARIF_7",
+        "TARIF_8",
+        "TARIF_9",
+        "ZAEHLERSTAND_ZUM_BEGINN_DER_ANGEGEBENEN_ENERGIEMENGE_VORHANDEN_UND_KOMMUNIZIERT",
+        "ZAEHLERSTAND_ZUM_ENDE_DER_ANGEGEBENEN_ENERGIEMENGE_VORHANDEN_UND_KOMMUNIZIERT",
+        "ZAEHLERSTAND_ZUM_BEGINN_DER_ANGEGEBENEN_ENERGIEMENGE_NICHT_VORHANDEN_DA_MENGENABGRENZUNG",
+        "ZAEHLERSTAND_ZUM_ENDE_DER_ANGEGEBENEN_ENERGIEMENGE_NICHT_VORHANDEN_DA_MENGENABGRENZUNG",
+        "KEIN_ZUGANG",
+        "KOMMUNIKATIONSSTOERUNG",
+        "NETZAUSFALL",
+        "SPANNUNGSAUSFALL",
+        "STATUS_GERAETEWECHSEL",
+        "KALIBRIERUNG",
+        "GERAET_ARBEITET_AUSSERHALB_DER_BETRIEBSBEDINGUNGEN",
+        "MESSEINRICHTUNG_GESTOERT_DEFEKT",
+        "UNSICHERHEIT_MESSUNG",
+        "KUNDENSELBSTABLESUNG",
+        "LEERSTAND",
+        "REALER_ZAEHLERUEBERLAUF_GEPRUEFT",
+        "PLAUSIBEL_WG_KONTROLLABLESUNG",
+        "PLAUSIBEL_WG_KUNDENHINWEIS",
+        "VERGLEICHSMESSUNG_GEEICHT",
+        "VERGLEICHSMESSUNG_NICHT_GEEICHT",
+        "MESSWERTNACHBILDUNG_AUS_GEEICHTEN_WERTEN",
+        "MESSWERTNACHBILDUNG_AUS_NICHT_GEEICHTEN_WERTEN",
+        "INTERPOLATION",
+        "HALTEWERT",
+        "BILANZIERUNG_NETZABSCHNITT",
+        "HISTORISCHE_MESSWERTE",
+        "BERUECKSICHTIGUNG_STOERMENGENZAEHLWERK",
+        "MENGENUMWERTUNG_VOLLSTAENDIG",
+        "UHRZEIT_GESTELLT_SYNCHRONISATION",
+        "MESSWERT_UNPLAUSIBEL",
+        "FALSCHER_WANDLERFAKTOR",
+        "FEHLERHAFTE_ABLESUNG",
+        "AENDERUNG_DER_BERECHNUNG",
+        "UMBAU_DER_MESSLOKATION",
+        "DATENBEARBEITUNGSFEHLER",
+        "BRENNWERTKORREKTUR",
+        "Z_ZAHL_KORREKTUR",
+        "STOERUNG_DEFEKT_MESSEINRICHTUNG",
+        "AENDERUNG_TARIFSCHALTZEITEN",
+        "TARIFSCHALTGERAET_DEFEKT",
+        "AUSTAUSCH_DES_ERSATZWERTES",
+        "IMPULSWERTIGKEIT_NICHT_AUSREICHEND",
+        "UMSTELLUNG_GASQUALITAET",
+        "STATISTISCHE_METHODE",
+        "ENERGIEMENGE_IN_UNGEMESSENEM_ZEITINTERVALL",
+        "ENERGIEMENGE_AUS_DEM_UNGEPAIRTEN_ZEITINTERVALL",
+        "AUFTEILUNG",
+        "VERWENDUNG_VON_WERTEN_DES_STOERMENGENZAEHLWERKS",
+        "UMGANGS_UND_KORREKTURMENGEN",
+        "WARTUNGSARBEITEN_AN_GEEICHTEM_MESSGERAET",
+        "GESTOERTE_WERTE",
+        "WARTUNGSARBEITEN_AN_EICHRECHTSKONFORMEN_MESSGERAETEN",
+        "KONSISTENZ_UND_SYNCHRONPRUEFUNG",
+        "RECHENWERT",
+        "ANGABEN_MESSLOKATION",
+        "BASIS_MME",
+        "GRUND_ANGABEN_MESSLOKATION",
+        "ANFORDERUNG_IN_DIE_VERGANGENHEIT_ZUM_ANGEFORDERTEN_ZEITPUNKT_LIEGT_KEIN_WERT_VOR"
+      ],
+      "enum": [
+        0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19,
+        20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37,
+        38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55,
+        56, 57, 58, 59, 60, 61, 62, 63, 64, 65, 66
+      ]
+    },
+    "COM": {
+      "type": "object",
+      "description": "The COM class is the abstract class from which all BO4E.COM classes are derived.\n            ",
+      "x-abstract": true,
+      "additionalProperties": {},
+      "properties": {
+        "guidSerialized": {
+          "type": "string"
+        },
+        "timestamp": {
+          "type": "string",
+          "description": "Store the latest timestamp (update from the database)\n            ",
+          "format": "date-time",
+          "x-nullable": true
+        },
+        "guid": {
+          "type": "string",
+          "description": "allows adding a GUID to COM objects for tracking across systems\n            ",
+          "format": "guid",
+          "x-nullable": true
+        }
+      }
+    },
+    "Mengeneinheit": {
+      "type": "integer",
+      "description": "Einheit: Messgrößen, die per Messung oder Vorgabe ermittelt werden können.\n            ",
+      "x-enumNames": [
+        "ZERO",
+        "WH",
+        "KW",
+        "ANZAHL",
+        "KUBIKMETER",
+        "STUNDE",
+        "TAG",
+        "MONAT",
+        "VAR",
+        "VARH",
+        "KWHK",
+        "JAHR",
+        "KWH",
+        "MW",
+        "KVAR",
+        "KVARH",
+        "MWH"
+      ],
+      "enum": [
+        0, 2, 3, 7, 11, 13, 17, 19, 23, 29, 40, 228, 2000, 3000, 23000, 29000,
+        2000000
+      ]
+    },
+    "Verbrauchsmengetyp": {
+      "type": "integer",
+      "description": "type von Verbrauchsmenge",
+      "x-enumNames": [
+        "ARBEITLEISTUNGTAGESPARAMETERABHMALO",
+        "VERANSCHLAGTEJAHRESMENGE",
+        "TUMKUNDENWERT"
+      ],
+      "enum": [0, 1, 2]
+    },
+    "Tarifstufe": {
+      "type": "integer",
+      "description": "In IFTSTA 21035 \"Rückmeldung auf Lieferschein\" (IFTSTA SG16 QTY 6063) ",
+      "x-enumNames": [
+        "TARIFSTUFE_0",
+        "TARIFSTUFE_1",
+        "TARIFSTUFE_2",
+        "TARIFSTUFE_3",
+        "TARIFSTUFE_4",
+        "TARIFSTUFE_5",
+        "TARIFSTUFE_6",
+        "TARIFSTUFE_7",
+        "TARIFSTUFE_8",
+        "TARIFSTUFE_9"
+      ],
+      "enum": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+    },
+    "BusinessObject": {
+      "type": "object",
+      "description": "General abstract class for Business Objects for Energy (BO4E)\n            ",
+      "x-abstract": true,
+      "additionalProperties": {},
+      "properties": {
+        "boTyp": {
+          "type": "string",
+          "description": "obligatory type of the business object in UPPER CASE\n            ",
+          "x-nullable": true,
+          "x-example": "'MESSLOKATION',\n'MARKTLOKATION'\n            "
+        },
+        "versionStruktur": {
+          "type": "string",
+          "description": "obligatory version of the BO4E definition. Currently hard coded to 1\n            ",
+          "x-nullable": true,
+          "x-example": 1
+        },
+        "guidSerialized": {
+          "type": "string",
+          "description": "protobuf serilization requires the Guid as string.\n            "
+        },
+        "timestamp": {
+          "type": "string",
+          "description": "Store the latest database update, is Datetime, because postgres doesn't handle datetimeoffset in a generated column\ngracefully\n            ",
+          "format": "date-time",
+          "x-nullable": true
+        },
+        "externeReferenzen": {
+          "type": "array",
+          "description": "Hier können IDs anderer Systeme hinterlegt werden (z.B. eine SAP-GP-Nummer) (Details siehe\nExterneReferenz)\n            ",
+          "x-nullable": true,
+          "items": {
+            "$ref": "#/definitions/ExterneReferenz"
+          }
+        },
+        "guid": {
+          "type": "string",
+          "description": "allows adding a GUID to Business Objects for tracking across systems\n            ",
+          "format": "guid",
+          "x-nullable": true
+        }
+      }
+    },
+    "ExterneReferenz": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/COM"
+        },
+        {
+          "type": "object",
+          "description": "Viele Datenobjekte weisen in unterschiedlichen Systemen eine eindeutige ID (Kundennummer, GP-Nummer etc.) auf.\nBeim Austausch von Datenobjekten zwischen verschiedenen Systemen ist es daher hilfreich, sich die eindeutigen IDs\nder anzubindenden Systeme zu merken.\nDiese Komponente ermöglicht es, sich die SAP GP-Nummer zu merken, um diese bei SAP-Aufrufen als Parameter mitgeben\nzu können.\n            ",
+          "additionalProperties": {},
+          "properties": {
+            "exRefName": {
+              "type": "string",
+              "description": "Bezeichnung der externen Referenz (z.B. \"hochfrequenz integration services\")\n            ",
+              "x-nullable": true
+            },
+            "exRefWert": {
+              "type": "string",
+              "description": "Wert der externen Referenz (z.B. \"123456\"; \"4711\")\n            ",
+              "x-nullable": true
+            }
+          }
+        }
+      ]
+    }
+  },
+  "allOf": [
+    {
+      "$ref": "#/definitions/BusinessObject"
+    },
+    {
+      "type": "object",
+      "description": "Abbildung von Mengen, die Lokationen zugeordnet sind.\n            ",
+      "additionalProperties": {},
+      "properties": {
+        "lokationsId": {
+          "type": "string",
+          "description": "Eindeutige Nummer der Marktlokation bzw. der Messlokation, zu der die Energiemenge gehört\n            ",
+          "default": "|null|"
+        },
+        "lokationsTyp": {
+          "description": "Gibt an, ob es sich um eine Markt- oder Messlokation handelt.\n            ",
+          "x-nullable": true,
+          "oneOf": [
+            {
+              "$ref": "#/definitions/Lokationstyp"
+            }
+          ]
+        },
+        "energieverbrauch": {
+          "type": "array",
+          "description": "Gibt den Verbrauch in einer Zeiteinheit an.\n            ",
+          "minItems": 1,
+          "x-nullable": true,
+          "items": {
+            "$ref": "#/definitions/Verbrauch"
+          }
+        }
+      }
+    }
+  ]
+}

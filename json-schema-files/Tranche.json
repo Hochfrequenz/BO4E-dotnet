@@ -2,61 +2,34 @@
   "$schema": "http://json-schema.org/draft-07/schema#",
   "definitions": {
     "ExterneReferenz": {
-      "type": [
-        "object",
-        "null"
-      ],
+      "type": ["object", "null"],
       "properties": {
         "exRefName": {
-          "type": [
-            "string",
-            "null"
-          ]
+          "type": ["string", "null"]
         },
         "exRefWert": {
-          "type": [
-            "string",
-            "null"
-          ]
+          "type": ["string", "null"]
         },
         "timestamp": {
-          "type": [
-            "string",
-            "null"
-          ],
+          "type": ["string", "null"],
           "format": "date-time"
         },
         "guid": {
-          "type": [
-            "string",
-            "null"
-          ]
+          "type": ["string", "null"]
         }
       }
     },
     "MarktpartnerDetails": {
-      "type": [
-        "object",
-        "null"
-      ],
+      "type": ["object", "null"],
       "properties": {
         "rollencodenummer": {
-          "type": [
-            "string",
-            "null"
-          ]
+          "type": ["string", "null"]
         },
         "code": {
-          "type": [
-            "string",
-            "null"
-          ]
+          "type": ["string", "null"]
         },
         "marktrolle": {
-          "type": [
-            "string",
-            "null"
-          ],
+          "type": ["string", "null"],
           "enum": [
             null,
             "NB",
@@ -78,23 +51,14 @@
           ]
         },
         "timestamp": {
-          "type": [
-            "string",
-            "null"
-          ],
+          "type": ["string", "null"],
           "format": "date-time"
         },
         "guid": {
-          "type": [
-            "string",
-            "null"
-          ]
+          "type": ["string", "null"]
         },
         "weiterverpflichtet": {
-          "type": [
-            "boolean",
-            "null"
-          ]
+          "type": ["boolean", "null"]
         }
       }
     }
@@ -102,38 +66,23 @@
   "type": "object",
   "properties": {
     "boTyp": {
-      "type": [
-        "string",
-        "null"
-      ]
+      "type": ["string", "null"]
     },
     "versionStruktur": {
-      "type": [
-        "string",
-        "null"
-      ]
+      "type": ["string", "null"]
     },
     "timestamp": {
-      "type": [
-        "string",
-        "null"
-      ],
+      "type": ["string", "null"],
       "format": "date-time"
     },
     "externeReferenzen": {
-      "type": [
-        "array",
-        "null"
-      ],
+      "type": ["array", "null"],
       "items": {
         "$ref": "#/definitions/ExterneReferenz"
       }
     },
     "guid": {
-      "type": [
-        "string",
-        "null"
-      ]
+      "type": ["string", "null"]
     },
     "trancheId": {
       "type": "string",
@@ -141,39 +90,20 @@
     },
     "sparte": {
       "type": "string",
-      "enum": [
-        "STROM",
-        "GAS",
-        "FERNWAERME",
-        "NAHWAERME",
-        "WASSER",
-        "ABWASSER"
-      ]
+      "enum": ["STROM", "GAS", "FERNWAERME", "NAHWAERME", "WASSER", "ABWASSER"]
     },
     "aufteilungsmenge": {
-      "type": [
-        "number",
-        "null"
-      ]
+      "type": ["number", "null"]
     },
     "obisKennzahl": {
-      "type": [
-        "string",
-        "null"
-      ]
+      "type": ["string", "null"]
     },
     "marktrollen": {
-      "type": [
-        "array",
-        "null"
-      ],
+      "type": ["array", "null"],
       "items": {
         "$ref": "#/definitions/MarktpartnerDetails"
       }
     }
   },
-  "required": [
-    "trancheId",
-    "sparte"
-  ]
+  "required": ["trancheId", "sparte"]
 }
