@@ -18,6 +18,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestBO4E.Reporting", "TestB
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestBO4E.Extensions", "TestBO4E.Extensions\TestBO4E.Extensions.csproj", "{BDA5224F-3C83-44F7-B96F-B873247E3245}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SchemaGenerator", "SchemaGenerator\SchemaGenerator.csproj", "{A178CA52-4DF3-4A12-8B84-FFF1EB3152F7}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -48,6 +50,10 @@ Global
 		{BDA5224F-3C83-44F7-B96F-B873247E3245}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BDA5224F-3C83-44F7-B96F-B873247E3245}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{BDA5224F-3C83-44F7-B96F-B873247E3245}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A178CA52-4DF3-4A12-8B84-FFF1EB3152F7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A178CA52-4DF3-4A12-8B84-FFF1EB3152F7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A178CA52-4DF3-4A12-8B84-FFF1EB3152F7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A178CA52-4DF3-4A12-8B84-FFF1EB3152F7}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

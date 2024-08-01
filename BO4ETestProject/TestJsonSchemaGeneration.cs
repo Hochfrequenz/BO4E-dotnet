@@ -1,7 +1,5 @@
 using System;
-using System.IO;
 using System.Linq;
-using System.Text;
 using BO4E.BO;
 using FluentAssertions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -48,20 +46,13 @@ namespace TestBO4E
             var relevantBusinessObjectTypes = typeof(BusinessObject).Assembly.GetTypes()
                 .Where(t => t.IsSubclassOf(typeof(BusinessObject)));
             relevantBusinessObjectTypes.Count().Should().BeLessThan(LastDataRowOffset + MaxSchemasPerHour); // if this fails, add another data row to this test method
-            try
+            try // generate plain json schemas
             {
                 foreach (var type in relevantBusinessObjectTypes.Skip(offset).Take(MaxSchemasPerHour))
                 {
                     var schema = BusinessObject.GetJsonSchema(type);
                     Assert.IsNotNull(schema);
-                    var path = $"../../../../json-schema-files/{type}.json"; // not elegant but ok ;)
-                    if (!File.Exists(path))
-                    {
-                        var stream = File.Create(path);
-                        stream.Close();
-                    }
-                    var utf8WithoutByteOrderMark = new UTF8Encoding(false);
-                    File.WriteAllText(path, schema.ToString(SchemaVersion.Draft7), utf8WithoutByteOrderMark);
+                    // writing the schemas has moved to the SchemaGenerator project/generate-json-schemas.sh
                 }
             }
             catch (JSchemaException jse)

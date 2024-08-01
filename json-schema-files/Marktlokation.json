@@ -344,240 +344,6 @@
         "ort"
       ]
     },
-    "Angebotsposition": {
-      "type": [
-        "object",
-        "null"
-      ],
-      "properties": {
-        "timestamp": {
-          "type": [
-            "string",
-            "null"
-          ],
-          "format": "date-time"
-        },
-        "guid": {
-          "type": [
-            "string",
-            "null"
-          ]
-        },
-        "positionsbezeichung": {
-          "type": "string"
-        },
-        "positionsmenge": {
-          "$ref": "#/definitions/Menge"
-        },
-        "positionspreis": {
-          "$ref": "#/definitions/Preis"
-        },
-        "positionsbetrag": {
-          "$ref": "#/definitions/Betrag"
-        },
-        "preisschluesselstamm": {
-          "type": [
-            "string",
-            "null"
-          ]
-        },
-        "bdewArtikelnummer": {
-          "type": [
-            "string",
-            "null"
-          ],
-          "enum": [
-            null,
-            "LEISTUNG",
-            "LEISTUNG_PAUSCHAL",
-            "GRUNDPREIS",
-            "REGELENERGIE_ARBEIT",
-            "REGELENERGIE_LEISTUNG",
-            "NOTSTROMLIEFERUNG_ARBEIT",
-            "NOTSTROMLIEFERUNG_LEISTUNG",
-            "RESERVENETZKAPAZITAET",
-            "RESERVELEISTUNG",
-            "ZUSAETZLICHE_ABLESUNG",
-            "PRUEFGEBUEHREN_AUSSERPLANMAESSIG",
-            "WIRKARBEIT",
-            "SINGULAER_GENUTZTE_BETRIEBSMITTEL",
-            "ABGABE_KWKG",
-            "ABSCHLAG",
-            "KONZESSIONSABGABE",
-            "ENTGELT_FERNAUSLESUNG",
-            "UNTERMESSUNG",
-            "BLINDMEHRARBEIT",
-            "ENTGELT_ABRECHNUNG",
-            "SPERRKOSTEN",
-            "ENTSPERRKOSTEN",
-            "MAHNKOSTEN",
-            "MEHR_MINDERMENGEN",
-            "INKASSOKOSTEN",
-            "BLINDMEHRLEISTUNG",
-            "ENTGELT_MESSUNG_ABLESUNG",
-            "ENTGELT_EINBAU_BETRIEB_WARTUNG_MESSTECHNIK",
-            "AUSGLEICHSENERGIE",
-            "AUSGLEICHSENERGIE_UNTERDECKUNG",
-            "ZAEHLEINRICHTUNG",
-            "WANDLER_MENGENUMWERTER",
-            "KOMMUNIKATIONSEINRICHTUNG",
-            "TECHNISCHE_STEUEREINRICHTUNG",
-            "PARAGRAF_19_STROM_NEV_UMLAGE",
-            "BEFESTIGUNGSEINRICHTUNG",
-            "OFFSHORE_HAFTUNGSUMLAGE",
-            "FIXE_ARBEITSENTGELTKOMPONENTE",
-            "FIXE_LEISTUNGSENTGELTKOMPONENTE",
-            "UMLAGE_ABSCHALTBARE_LASTEN",
-            "MEHRMENGE",
-            "MINDERMENGE",
-            "ENERGIESTEUER",
-            "SMARTMETER_GATEWAY",
-            "STEUERBOX",
-            "MSB_INKL_MESSUNG",
-            "ZUSATZDIENSTLEISTUNG_PARAGRAPH_35_2_1_MSBG",
-            "ZUSATZDIENSTLEISTUNG_PARAGRAPH_35_2_2_MSBG",
-            "ZUSATZDIENSTLEISTUNG_PARAGRAPH_35_2_3_MSBG",
-            "ZUSATZDIENSTLEISTUNG_PARAGRAPH_35_2_4_MSBG",
-            "ZUSATZDIENSTLEISTUNG_PARAGRAPH_35_2_5_MSBG",
-            "ZUSATZDIENSTLEISTUNG_PARAGRAPH_35_3_MSBG"
-          ]
-        },
-        "artikelId": {
-          "type": [
-            "string",
-            "null"
-          ]
-        }
-      },
-      "required": [
-        "positionsbezeichung"
-      ]
-    },
-    "Angebotsteil": {
-      "type": [
-        "object",
-        "null"
-      ],
-      "properties": {
-        "timestamp": {
-          "type": [
-            "string",
-            "null"
-          ],
-          "format": "date-time"
-        },
-        "guid": {
-          "type": [
-            "string",
-            "null"
-          ]
-        },
-        "anfrageSubreferenz": {
-          "type": [
-            "string",
-            "null"
-          ]
-        },
-        "lieferstellenangebotsteil": {
-          "type": [
-            "array",
-            "null"
-          ],
-          "items": {
-            "$ref": "#/definitions/Marktlokation"
-          }
-        },
-        "gesamtmengeangebotsteil": {
-          "$ref": "#/definitions/Menge"
-        },
-        "gesamtkostenangebotsteil": {
-          "$ref": "#/definitions/Betrag"
-        },
-        "positionen": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/Angebotsposition"
-          }
-        },
-        "lieferzeitraum": {
-          "$ref": "#/definitions/Zeitraum"
-        }
-      },
-      "required": [
-        "positionen"
-      ]
-    },
-    "Angebotsvariante": {
-      "type": [
-        "object",
-        "null"
-      ],
-      "properties": {
-        "timestamp": {
-          "type": [
-            "string",
-            "null"
-          ],
-          "format": "date-time"
-        },
-        "guid": {
-          "type": [
-            "string",
-            "null"
-          ]
-        },
-        "angebotsstatus": {
-          "type": "string",
-          "enum": [
-            "KONZEPTION",
-            "UNVERBINDLICH",
-            "VERBINDLICH",
-            "BEAUFTRAGT",
-            "UNGUELTIG",
-            "ABGELEHNT",
-            "NACHGEFASST",
-            "AUSSTEHEND",
-            "ERLEDIGT"
-          ]
-        },
-        "beschreibung": {
-          "type": [
-            "string",
-            "null"
-          ]
-        },
-        "erstelldatum": {
-          "type": [
-            "string",
-            "null"
-          ],
-          "format": "date-time"
-        },
-        "bindefrist": {
-          "type": [
-            "string",
-            "null"
-          ],
-          "format": "date-time"
-        },
-        "gesamtmenge": {
-          "$ref": "#/definitions/Menge"
-        },
-        "gesamtkosten": {
-          "$ref": "#/definitions/Betrag"
-        },
-        "teile": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/Angebotsteil"
-          }
-        }
-      },
-      "required": [
-        "angebotsstatus",
-        "teile"
-      ]
-    },
     "Ansprechpartner": {
       "type": [
         "object",
@@ -680,7 +446,7 @@
           ]
         },
         "geschaeftspartner": {
-          "$ref": "#/definitions/Geschaeftspartner-1"
+          "$ref": "#/definitions/Geschaeftspartner"
         },
         "adresse": {
           "$ref": "#/definitions/Adresse"
@@ -704,220 +470,6 @@
           }
         }
       }
-    },
-    "Betrag": {
-      "type": [
-        "object",
-        "null"
-      ],
-      "properties": {
-        "wert": {
-          "type": "number"
-        },
-        "waehrung": {
-          "type": "string",
-          "enum": [
-            "AFN",
-            "ALL",
-            "AMD",
-            "ANG",
-            "AOA",
-            "ARS",
-            "AUD",
-            "AWG",
-            "AZN",
-            "BAM",
-            "BBD",
-            "BDT",
-            "BGN",
-            "BHD",
-            "BIF",
-            "BMD",
-            "BND",
-            "BOB",
-            "BOV",
-            "BRL",
-            "BSD",
-            "BTN",
-            "BWP",
-            "BYN",
-            "BYR",
-            "BZD",
-            "CAD",
-            "CDF",
-            "CHE",
-            "CHF",
-            "CHW",
-            "CLF",
-            "CLP",
-            "CNY",
-            "COP",
-            "COU",
-            "CRC",
-            "CUC",
-            "CUP",
-            "CVE",
-            "CZK",
-            "DJF",
-            "DKK",
-            "DOP",
-            "DZD",
-            "EGP",
-            "ERN",
-            "ETB",
-            "EUR",
-            "FJD",
-            "FKP",
-            "GBP",
-            "GEL",
-            "GHS",
-            "GIP",
-            "GMD",
-            "GNF",
-            "GTQ",
-            "GYD",
-            "HKD",
-            "HNL",
-            "HRK",
-            "HTG",
-            "HUF",
-            "IDR",
-            "ILS",
-            "INR",
-            "IQD",
-            "IRR",
-            "ISK",
-            "JMD",
-            "JOD",
-            "JPY",
-            "KES",
-            "KGS",
-            "KHR",
-            "KMF",
-            "KPW",
-            "KRW",
-            "KWD",
-            "KYD",
-            "KZT",
-            "LAK",
-            "LBP",
-            "LKR",
-            "LRD",
-            "LSL",
-            "LTL",
-            "LYD",
-            "MAD",
-            "MDL",
-            "MGA",
-            "MKD",
-            "MMK",
-            "MNT",
-            "MOP",
-            "MRO",
-            "MUR",
-            "MVR",
-            "MWK",
-            "MXN",
-            "MXV",
-            "MYR",
-            "MZN",
-            "NAD",
-            "NGN",
-            "NIO",
-            "NOK",
-            "NPR",
-            "NZD",
-            "OMR",
-            "PAB",
-            "PEN",
-            "PGK",
-            "PHP",
-            "PKR",
-            "PLN",
-            "PYG",
-            "QAR",
-            "RON",
-            "RSD",
-            "RUB",
-            "RUR",
-            "RWF",
-            "SAR",
-            "SBD",
-            "SCR",
-            "SDG",
-            "SEK",
-            "SGD",
-            "SHP",
-            "SLL",
-            "SOS",
-            "SRD",
-            "SSP",
-            "STD",
-            "SVC",
-            "SYP",
-            "SZL",
-            "THB",
-            "TJS",
-            "TMT",
-            "TND",
-            "TOP",
-            "TRY",
-            "TTD",
-            "TWD",
-            "TZS",
-            "UAH",
-            "UGX",
-            "USD",
-            "USN",
-            "USS",
-            "UYI",
-            "UYU",
-            "UZS",
-            "VEF",
-            "VND",
-            "VUV",
-            "WST",
-            "XAF",
-            "XAG",
-            "XAU",
-            "XBA",
-            "XBB",
-            "XBC",
-            "XBD",
-            "XCD",
-            "XDR",
-            "XOF",
-            "XPD",
-            "XPF",
-            "XPT",
-            "XSU",
-            "XTS",
-            "XUA",
-            "XXX",
-            "YER",
-            "ZAR",
-            "ZMW",
-            "ZWL"
-          ]
-        },
-        "timestamp": {
-          "type": [
-            "string",
-            "null"
-          ],
-          "format": "date-time"
-        },
-        "guid": {
-          "type": [
-            "string",
-            "null"
-          ]
-        }
-      },
-      "required": [
-        "wert",
-        "waehrung"
-      ]
     },
     "Dienstleistung": {
       "type": [
@@ -1257,195 +809,6 @@
       ]
     },
     "Geschaeftspartner": {
-      "type": "object",
-      "properties": {
-        "boTyp": {
-          "type": [
-            "string",
-            "null"
-          ]
-        },
-        "versionStruktur": {
-          "type": [
-            "string",
-            "null"
-          ]
-        },
-        "timestamp": {
-          "type": [
-            "string",
-            "null"
-          ],
-          "format": "date-time"
-        },
-        "externeReferenzen": {
-          "type": [
-            "array",
-            "null"
-          ],
-          "items": {
-            "$ref": "#/definitions/ExterneReferenz"
-          }
-        },
-        "guid": {
-          "type": [
-            "string",
-            "null"
-          ]
-        },
-        "anrede": {
-          "type": [
-            "string",
-            "null"
-          ],
-          "enum": [
-            null,
-            "HERR",
-            "FRAU",
-            "EHELEUTE",
-            "FIRMA",
-            "INDIVIDUELL",
-            "FAMILIE",
-            "ERBENGEMEINSCHAFT",
-            "WOHNGEMEINSCHAFT",
-            "GRUNDSTUECKGEMEINSCHAFT",
-            "DR"
-          ]
-        },
-        "title": {
-          "type": [
-            "string",
-            "null"
-          ]
-        },
-        "name1": {
-          "type": [
-            "string",
-            "null"
-          ]
-        },
-        "name2": {
-          "type": [
-            "string",
-            "null"
-          ]
-        },
-        "name3": {
-          "type": [
-            "string",
-            "null"
-          ]
-        },
-        "gewerbekennzeichnung": {
-          "type": "boolean"
-        },
-        "hrnummer": {
-          "type": [
-            "string",
-            "null"
-          ]
-        },
-        "amtsgericht": {
-          "type": [
-            "string",
-            "null"
-          ]
-        },
-        "kontaktweg": {
-          "type": [
-            "array",
-            "null"
-          ],
-          "items": {
-            "type": "string",
-            "enum": [
-              "ANSCHREIBEN",
-              "TELEFONAT",
-              "FAX",
-              "E_MAIL",
-              "SMS"
-            ]
-          }
-        },
-        "umsatzsteuerId": {
-          "type": [
-            "string",
-            "null"
-          ]
-        },
-        "glaeubigerId": {
-          "type": [
-            "string",
-            "null"
-          ]
-        },
-        "eMailAdresse": {
-          "type": [
-            "string",
-            "null"
-          ]
-        },
-        "website": {
-          "type": [
-            "string",
-            "null"
-          ]
-        },
-        "geschaeftspartnerrolle": {
-          "type": [
-            "array",
-            "null"
-          ],
-          "items": {
-            "type": "string",
-            "enum": [
-              "LIEFERANT",
-              "DIENSTLEISTER",
-              "KUNDE",
-              "INTERESSENT",
-              "MARKTPARTNER"
-            ]
-          }
-        },
-        "partneradresse": {
-          "$ref": "#/definitions/Adresse"
-        },
-        "grundlageZurVerringerungDerUmlagenNachEnfg": {
-          "type": [
-            "string",
-            "null"
-          ],
-          "enum": [
-            null,
-            "KUNDE_ERFUELLT_VORAUSSETZUNG",
-            "KUNDE_ERFUELLT_VORAUSSETZUNG_NICHT",
-            "KEINE_ANGABE"
-          ]
-        },
-        "grundDerPrivilegierungNachEnFG": {
-          "type": [
-            "string",
-            "null"
-          ],
-          "enum": [
-            null,
-            "STROMSPEICHER_UND_VERLUSTENERGIE",
-            "ELEKTRISCH_ANGETRIEBENE_WAERMEPUMPEN",
-            "UMLAGEERHEBUNG_BEI_ANLAGEN_ZUR_VERSTROMUNG_VON_KUPPELGASEN",
-            "HERSTELLUNG_VON_GRUENEN_WASSERSTOFF",
-            "STROMKOSTENINTENSIVE_UNTERNEHMEN",
-            "HERSTELLUNG_VON_WASSERSTOFF_IN_STROMKOSTENINTENSIVEN_UNTERNEHMEN",
-            "SCHIENENBAHNEN",
-            "ELEKTRISCHE_BETRIEBENE_BUSSEN_IM_LINIENVERKEHR",
-            "LANDSTROMANLAGEN"
-          ]
-        }
-      },
-      "required": [
-        "gewerbekennzeichnung"
-      ]
-    },
-    "Geschaeftspartner-1": {
       "type": [
         "object",
         "null"
@@ -1852,342 +1215,6 @@
       },
       "required": [
         "satz"
-      ]
-    },
-    "Marktlokation": {
-      "type": [
-        "object",
-        "null"
-      ],
-      "properties": {
-        "boTyp": {
-          "type": [
-            "string",
-            "null"
-          ]
-        },
-        "versionStruktur": {
-          "type": [
-            "string",
-            "null"
-          ]
-        },
-        "timestamp": {
-          "type": [
-            "string",
-            "null"
-          ],
-          "format": "date-time"
-        },
-        "externeReferenzen": {
-          "type": [
-            "array",
-            "null"
-          ],
-          "items": {
-            "$ref": "#/definitions/ExterneReferenz"
-          }
-        },
-        "guid": {
-          "type": [
-            "string",
-            "null"
-          ]
-        },
-        "marktlokationsId": {
-          "type": [
-            "string",
-            "null"
-          ],
-          "default": "|null|"
-        },
-        "sparte": {
-          "type": "string",
-          "enum": [
-            "STROM",
-            "GAS",
-            "FERNWAERME",
-            "NAHWAERME",
-            "WASSER",
-            "ABWASSER"
-          ]
-        },
-        "energierichtung": {
-          "type": [
-            "string",
-            "null"
-          ],
-          "enum": [
-            null,
-            "AUSSP",
-            "EINSP"
-          ]
-        },
-        "bilanzierungsmethode": {
-          "type": [
-            "string",
-            "null"
-          ],
-          "enum": [
-            null,
-            "RLM",
-            "SLP",
-            "TLP_GEMEINSAM",
-            "TLP_GETRENNT",
-            "PAUSCHAL",
-            "IMS"
-          ]
-        },
-        "verbrauchsart": {
-          "type": [
-            "string",
-            "null"
-          ],
-          "enum": [
-            null,
-            "KL",
-            "KLW",
-            "KLWS",
-            "W",
-            "WS"
-          ]
-        },
-        "unterbrechbar": {
-          "type": [
-            "boolean",
-            "null"
-          ]
-        },
-        "netzebene": {
-          "type": [
-            "string",
-            "null"
-          ],
-          "enum": [
-            null,
-            "NSP",
-            "MSP",
-            "HSP",
-            "HSS",
-            "MSP_NSP_UMSP",
-            "HSP_MSP_UMSP",
-            "HSS_HSP_UMSP",
-            "HD",
-            "MD",
-            "ND"
-          ]
-        },
-        "netzbetreiberCodeNr": {
-          "type": [
-            "string",
-            "null"
-          ]
-        },
-        "gebietTyp": {
-          "type": [
-            "string",
-            "null"
-          ],
-          "enum": [
-            null,
-            "REGELZONE",
-            "MARKTGEBIET",
-            "BILANZIERUNGSGEBIET",
-            "VERTEILNETZ",
-            "TRANSPORTNETZ",
-            "REGIONALNETZ",
-            "AREALNETZ",
-            "GRUNDVERSORGUNGSGEBIET",
-            "VERSORGUNGSGEBIET"
-          ]
-        },
-        "netzgebietNr": {
-          "type": [
-            "string",
-            "null"
-          ]
-        },
-        "bilanzierungsgebiet": {
-          "type": [
-            "string",
-            "null"
-          ]
-        },
-        "grundversorgerCodeNr": {
-          "type": [
-            "string",
-            "null"
-          ]
-        },
-        "gasqualitaet": {
-          "type": [
-            "string",
-            "null"
-          ],
-          "enum": [
-            null,
-            "ZERO",
-            "H_GAS",
-            "HGAS",
-            "L_GAS",
-            "LGAS"
-          ]
-        },
-        "endkunde": {
-          "$ref": "#/definitions/Geschaeftspartner-1"
-        },
-        "lokationsadresse": {
-          "$ref": "#/definitions/Adresse"
-        },
-        "geoadresse": {
-          "$ref": "#/definitions/Geokoordinaten"
-        },
-        "katasterinformation": {
-          "$ref": "#/definitions/Katasteradresse"
-        },
-        "marktrollen": {
-          "type": [
-            "array",
-            "null"
-          ],
-          "items": {
-            "$ref": "#/definitions/MarktpartnerDetails"
-          }
-        },
-        "regelzone": {
-          "type": [
-            "string",
-            "null"
-          ]
-        },
-        "marktgebiet": {
-          "type": [
-            "string",
-            "null"
-          ]
-        },
-        "zeitreihentyp": {
-          "type": [
-            "string",
-            "null"
-          ],
-          "enum": [
-            null,
-            "EGS",
-            "LGS",
-            "NZR",
-            "SES",
-            "SLS",
-            "TES",
-            "TLS",
-            "SLS_TLS",
-            "SES_TES"
-          ]
-        },
-        "zaehlwerke": {
-          "type": [
-            "array",
-            "null"
-          ],
-          "items": {
-            "$ref": "#/definitions/Zaehlwerk"
-          }
-        },
-        "zaehlwerkeBeteiligteMarktrolle": {
-          "type": [
-            "array",
-            "null"
-          ],
-          "items": {
-            "$ref": "#/definitions/Zaehlwerk"
-          }
-        },
-        "verbrauchsmenge": {
-          "type": [
-            "array",
-            "null"
-          ],
-          "items": {
-            "$ref": "#/definitions/Verbrauch"
-          }
-        },
-        "messlokationen": {
-          "type": [
-            "array",
-            "null"
-          ],
-          "items": {
-            "$ref": "#/definitions/Messlokation"
-          }
-        },
-        "zugehoerigeMesslokationen": {
-          "type": [
-            "array",
-            "null"
-          ],
-          "items": {
-            "$ref": "#/definitions/Messlokationszuordnung"
-          }
-        },
-        "messtechnischeEinordnung": {
-          "type": [
-            "string",
-            "null"
-          ],
-          "enum": [
-            null,
-            "IMS",
-            "KME_MME",
-            "KEINE_MESSUNG"
-          ]
-        },
-        "netznutzungsabrechnungsdaten": {
-          "type": [
-            "array",
-            "null"
-          ],
-          "items": {
-            "$ref": "#/definitions/Netznutzungsabrechnungsdaten"
-          }
-        },
-        "sperrstatus": {
-          "type": [
-            "string",
-            "null"
-          ],
-          "enum": [
-            null,
-            "ENTSPERRT",
-            "GESPERRT"
-          ]
-        },
-        "messprodukte": {
-          "type": [
-            "array",
-            "null"
-          ],
-          "items": {
-            "$ref": "#/definitions/Messprodukt"
-          }
-        },
-        "konfigurationsprodukte": {
-          "type": [
-            "array",
-            "null"
-          ],
-          "items": {
-            "$ref": "#/definitions/Konfigurationsprodukt"
-          }
-        },
-        "lokationsbuendelObjektcode": {
-          "type": [
-            "string",
-            "null"
-          ]
-        }
-      },
-      "required": [
-        "sparte"
       ]
     },
     "MarktpartnerDetails": {
@@ -3582,7 +2609,7 @@
           "minItems": 1
         },
         "zaehlerhersteller": {
-          "$ref": "#/definitions/Geschaeftspartner-1"
+          "$ref": "#/definitions/Geschaeftspartner"
         },
         "gateway": {
           "type": [
@@ -3969,84 +2996,6 @@
         }
       }
     },
-    "Zeitraum": {
-      "type": [
-        "object",
-        "null"
-      ],
-      "properties": {
-        "einheit": {
-          "type": [
-            "string",
-            "null"
-          ],
-          "enum": [
-            null,
-            "SEKUNDE",
-            "MINUTE",
-            "STUNDE",
-            "VIERTEL_STUNDE",
-            "TAG",
-            "WOCHE",
-            "MONAT",
-            "QUARTAL",
-            "HALBJAHR",
-            "JAHR"
-          ]
-        },
-        "dauer": {
-          "type": [
-            "number",
-            "null"
-          ]
-        },
-        "startdatum": {
-          "type": [
-            "string",
-            "null"
-          ],
-          "format": "date-time"
-        },
-        "enddatum": {
-          "type": [
-            "string",
-            "null"
-          ],
-          "format": "date-time"
-        },
-        "startzeitpunkt": {
-          "type": [
-            "string",
-            "null"
-          ],
-          "format": "date-time"
-        },
-        "endzeitpunkt": {
-          "type": [
-            "string",
-            "null"
-          ],
-          "format": "date-time"
-        },
-        "timestamp": {
-          "type": [
-            "string",
-            "null"
-          ],
-          "format": "date-time"
-        },
-        "guid": {
-          "type": [
-            "string",
-            "null"
-          ]
-        }
-      },
-      "required": [
-        "startzeitpunkt",
-        "endzeitpunkt"
-      ]
-    },
     "Zustaendigkeit": {
       "type": [
         "object",
@@ -4123,18 +3072,12 @@
         "null"
       ]
     },
-    "angebotsnummer": {
-      "type": "string"
-    },
-    "anfragereferenz": {
+    "marktlokationsId": {
       "type": [
         "string",
         "null"
-      ]
-    },
-    "angebotsdatum": {
-      "type": "string",
-      "format": "date-time"
+      ],
+      "default": "|null|"
     },
     "sparte": {
       "type": "string",
@@ -4147,41 +3090,281 @@
         "ABWASSER"
       ]
     },
-    "bindefrist": {
+    "energierichtung": {
       "type": [
         "string",
         "null"
       ],
-      "format": "date-time"
+      "enum": [
+        null,
+        "AUSSP",
+        "EINSP"
+      ]
     },
-    "angebotgeber": {
+    "bilanzierungsmethode": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "enum": [
+        null,
+        "RLM",
+        "SLP",
+        "TLP_GEMEINSAM",
+        "TLP_GETRENNT",
+        "PAUSCHAL",
+        "IMS"
+      ]
+    },
+    "verbrauchsart": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "enum": [
+        null,
+        "KL",
+        "KLW",
+        "KLWS",
+        "W",
+        "WS"
+      ]
+    },
+    "unterbrechbar": {
+      "type": [
+        "boolean",
+        "null"
+      ]
+    },
+    "netzebene": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "enum": [
+        null,
+        "NSP",
+        "MSP",
+        "HSP",
+        "HSS",
+        "MSP_NSP_UMSP",
+        "HSP_MSP_UMSP",
+        "HSS_HSP_UMSP",
+        "HD",
+        "MD",
+        "ND"
+      ]
+    },
+    "netzbetreiberCodeNr": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "gebietTyp": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "enum": [
+        null,
+        "REGELZONE",
+        "MARKTGEBIET",
+        "BILANZIERUNGSGEBIET",
+        "VERTEILNETZ",
+        "TRANSPORTNETZ",
+        "REGIONALNETZ",
+        "AREALNETZ",
+        "GRUNDVERSORGUNGSGEBIET",
+        "VERSORGUNGSGEBIET"
+      ]
+    },
+    "netzgebietNr": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "bilanzierungsgebiet": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "grundversorgerCodeNr": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "gasqualitaet": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "enum": [
+        null,
+        "ZERO",
+        "H_GAS",
+        "HGAS",
+        "L_GAS",
+        "LGAS"
+      ]
+    },
+    "endkunde": {
       "$ref": "#/definitions/Geschaeftspartner"
     },
-    "angebotnehmer": {
-      "$ref": "#/definitions/Geschaeftspartner"
+    "lokationsadresse": {
+      "$ref": "#/definitions/Adresse"
     },
-    "unterzeichnerAngebotsnehmer": {
-      "$ref": "#/definitions/Ansprechpartner"
+    "geoadresse": {
+      "$ref": "#/definitions/Geokoordinaten"
     },
-    "unterzeichnerAngebotsgeber": {
-      "$ref": "#/definitions/Ansprechpartner"
+    "katasterinformation": {
+      "$ref": "#/definitions/Katasteradresse"
     },
-    "varianten": {
+    "marktrollen": {
       "type": [
         "array",
         "null"
       ],
       "items": {
-        "$ref": "#/definitions/Angebotsvariante"
-      },
-      "minItems": 1
+        "$ref": "#/definitions/MarktpartnerDetails"
+      }
+    },
+    "regelzone": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "marktgebiet": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "zeitreihentyp": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "enum": [
+        null,
+        "EGS",
+        "LGS",
+        "NZR",
+        "SES",
+        "SLS",
+        "TES",
+        "TLS",
+        "SLS_TLS",
+        "SES_TES"
+      ]
+    },
+    "zaehlwerke": {
+      "type": [
+        "array",
+        "null"
+      ],
+      "items": {
+        "$ref": "#/definitions/Zaehlwerk"
+      }
+    },
+    "zaehlwerkeBeteiligteMarktrolle": {
+      "type": [
+        "array",
+        "null"
+      ],
+      "items": {
+        "$ref": "#/definitions/Zaehlwerk"
+      }
+    },
+    "verbrauchsmenge": {
+      "type": [
+        "array",
+        "null"
+      ],
+      "items": {
+        "$ref": "#/definitions/Verbrauch"
+      }
+    },
+    "messlokationen": {
+      "type": [
+        "array",
+        "null"
+      ],
+      "items": {
+        "$ref": "#/definitions/Messlokation"
+      }
+    },
+    "zugehoerigeMesslokationen": {
+      "type": [
+        "array",
+        "null"
+      ],
+      "items": {
+        "$ref": "#/definitions/Messlokationszuordnung"
+      }
+    },
+    "messtechnischeEinordnung": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "enum": [
+        null,
+        "IMS",
+        "KME_MME",
+        "KEINE_MESSUNG"
+      ]
+    },
+    "netznutzungsabrechnungsdaten": {
+      "type": [
+        "array",
+        "null"
+      ],
+      "items": {
+        "$ref": "#/definitions/Netznutzungsabrechnungsdaten"
+      }
+    },
+    "sperrstatus": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "enum": [
+        null,
+        "ENTSPERRT",
+        "GESPERRT"
+      ]
+    },
+    "messprodukte": {
+      "type": [
+        "array",
+        "null"
+      ],
+      "items": {
+        "$ref": "#/definitions/Messprodukt"
+      }
+    },
+    "konfigurationsprodukte": {
+      "type": [
+        "array",
+        "null"
+      ],
+      "items": {
+        "$ref": "#/definitions/Konfigurationsprodukt"
+      }
+    },
+    "lokationsbuendelObjektcode": {
+      "type": [
+        "string",
+        "null"
+      ]
     }
   },
   "required": [
-    "angebotsnummer",
-    "angebotsdatum",
-    "sparte",
-    "angebotgeber",
-    "angebotnehmer"
+    "sparte"
   ]
 }
