@@ -1,0 +1,271 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "definitions": {
+    "ExterneReferenz": {
+      "type": [
+        "object",
+        "null"
+      ],
+      "properties": {
+        "exRefName": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "exRefWert": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "timestamp": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "format": "date-time"
+        },
+        "guid": {
+          "type": [
+            "string",
+            "null"
+          ]
+        }
+      }
+    },
+    "Fehler": {
+      "type": [
+        "object",
+        "null"
+      ],
+      "properties": {
+        "typ": {
+          "type": "string",
+          "enum": [
+            "SYNTAX",
+            "VERARBEITUNG"
+          ]
+        },
+        "fehlerDetails": {
+          "type": [
+            "array",
+            "null"
+          ],
+          "items": {
+            "$ref": "#/definitions/FehlerDetail"
+          }
+        },
+        "timestamp": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "format": "date-time"
+        },
+        "guid": {
+          "type": [
+            "string",
+            "null"
+          ]
+        }
+      },
+      "required": [
+        "typ"
+      ]
+    },
+    "FehlerDetail": {
+      "type": [
+        "object",
+        "null"
+      ],
+      "properties": {
+        "timestamp": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "format": "date-time"
+        },
+        "guid": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "code": {
+          "type": "string",
+          "enum": [
+            "ID_UNBEKANNT",
+            "ABSENDER_NICHT_ZUGEORDNET",
+            "EMPFAENGER_NICHT_ZUGEORDNET",
+            "GERAET_UNBEKANNT",
+            "OBIS_UNBEKANNT",
+            "REFERENZIERUNG_FEHLERHAFT",
+            "TUPEL_UNBEKANNT",
+            "ABSENDER_TUPEL_NICHT_ZUGEORDNET",
+            "EMPFAENGER_TUPEL_NICHT_ZUGEORDNET",
+            "VORKOMMA_ZU_VIELE_STELLEN",
+            "ZEITREIHE_UNVOLLSTAENDIG",
+            "REFERENZIERTES_TUPEL_UNBEKANNT",
+            "MARKTLOKATION_UNBEKANNT",
+            "MESSLOKATION_UNBEKANNT",
+            "MELDEPUNKT_NICHT_MEHR_IM_NETZ",
+            "ERFORDERLICHE_ANGABE_FEHLT",
+            "GESCHAEFTSVORFALL_ZURUECKGEWIESEN",
+            "ZEITINTERVALL_NEGATIV",
+            "FORMAT_NICHT_EINGEHALTEN",
+            "GESCHAEFTSVORFALL_ABSENDER",
+            "KONFIGURATIONSID_UNBEKANNT",
+            "SEGMENTWIEDERHOLUNG_UEBERSCHRITTEN",
+            "ANZAHLCODES_UEBERSCHRITTEN",
+            "ZEITANGABE_UNPLAUSIBEL",
+            "SYNTAXVERSION_NICHT_UNTERSTUETZT",
+            "FALSCHER_EMPFAENGER",
+            "WERT_UNGUELTIG",
+            "WERT_FEHLT",
+            "WERT_UEBERFLUESSIG",
+            "BEGRENZER_UNPLAUSIBEL",
+            "ZEICHEN_UNPLAUSIBEL",
+            "ABSENDER_UNBEKANNT",
+            "TESTKENNZEICHEN_UNPLAUSIBEL",
+            "DUPLIKAT",
+            "KONTROLLZAEHLER_UNPLAUSIBEL",
+            "WERT_ZU_LANG",
+            "WIEDERHOLUNG_UNPLAUSIBEL"
+          ]
+        },
+        "beschreibung": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "ursache": {
+          "$ref": "#/definitions/FehlerUrsache"
+        }
+      },
+      "required": [
+        "code"
+      ]
+    },
+    "FehlerUrsache": {
+      "type": [
+        "object",
+        "null"
+      ],
+      "properties": {
+        "dokument": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "nachricht": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "transaktion": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "gruppe": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "segment": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "beschreibung": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "timestamp": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "format": "date-time"
+        },
+        "guid": {
+          "type": [
+            "string",
+            "null"
+          ]
+        }
+      }
+    }
+  },
+  "type": "object",
+  "properties": {
+    "boTyp": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "versionStruktur": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "timestamp": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "format": "date-time"
+    },
+    "externeReferenzen": {
+      "type": [
+        "array",
+        "null"
+      ],
+      "items": {
+        "$ref": "#/definitions/ExterneReferenz"
+      }
+    },
+    "guid": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "ERFOLGREICH",
+        "FEHLER"
+      ]
+    },
+    "pruefgegenstand": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "datumPruefung": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "fehler": {
+      "$ref": "#/definitions/Fehler"
+    }
+  },
+  "required": [
+    "status",
+    "datumPruefung"
+  ]
+}

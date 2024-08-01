@@ -1,0 +1,1084 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "definitions": {
+    "Adresse": {
+      "type": [
+        "object",
+        "null"
+      ],
+      "properties": {
+        "timestamp": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "format": "date-time"
+        },
+        "guid": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "postleitzahl": {
+          "type": "string"
+        },
+        "ort": {
+          "type": "string"
+        },
+        "strasse": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "hausnummer": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "postfach": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "adresszusatz": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "coErgaenzung": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "landescode": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "enum": [
+            null,
+            "AC",
+            "AD",
+            "AE",
+            "AF",
+            "AG",
+            "AI",
+            "AL",
+            "AM",
+            "AN",
+            "AO",
+            "AQ",
+            "AR",
+            "AS",
+            "AT",
+            "AU",
+            "AW",
+            "AX",
+            "AZ",
+            "BA",
+            "BB",
+            "BD",
+            "BE",
+            "BF",
+            "BG",
+            "BH",
+            "BI",
+            "BJ",
+            "BL",
+            "BM",
+            "BN",
+            "BO",
+            "BQ",
+            "BR",
+            "BS",
+            "BT",
+            "BU",
+            "BV",
+            "BW",
+            "BY",
+            "BZ",
+            "CA",
+            "CC",
+            "CD",
+            "CF",
+            "CG",
+            "CH",
+            "CI",
+            "CK",
+            "CL",
+            "CM",
+            "CN",
+            "CO",
+            "CP",
+            "CR",
+            "CS",
+            "CU",
+            "CV",
+            "CW",
+            "CX",
+            "CY",
+            "CZ",
+            "DE",
+            "DG",
+            "DJ",
+            "DK",
+            "DM",
+            "DO",
+            "DZ",
+            "EA",
+            "EC",
+            "EE",
+            "EG",
+            "EH",
+            "ER",
+            "ES",
+            "ET",
+            "EU",
+            "FI",
+            "FJ",
+            "FK",
+            "FM",
+            "FO",
+            "FR",
+            "FX",
+            "GA",
+            "GB",
+            "GD",
+            "GE",
+            "GF",
+            "GG",
+            "GH",
+            "GI",
+            "GL",
+            "GM",
+            "GN",
+            "GP",
+            "GQ",
+            "GR",
+            "GS",
+            "GT",
+            "GU",
+            "GW",
+            "GY",
+            "HK",
+            "HM",
+            "HN",
+            "HR",
+            "HT",
+            "HU",
+            "IC",
+            "ID",
+            "IE",
+            "IL",
+            "IM",
+            "IN",
+            "IO",
+            "IQ",
+            "IR",
+            "IS",
+            "IT",
+            "JE",
+            "JM",
+            "JO",
+            "JP",
+            "KE",
+            "KG",
+            "KH",
+            "KI",
+            "KM",
+            "KN",
+            "KP",
+            "KR",
+            "KW",
+            "KY",
+            "KZ",
+            "LA",
+            "LB",
+            "LC",
+            "LI",
+            "LK",
+            "LR",
+            "LS",
+            "LT",
+            "LU",
+            "LV",
+            "LY",
+            "MA",
+            "MC",
+            "MD",
+            "ME",
+            "MF",
+            "MG",
+            "MH",
+            "MK",
+            "ML",
+            "MM",
+            "MN",
+            "MO",
+            "MP",
+            "MQ",
+            "MR",
+            "MS",
+            "MT",
+            "MU",
+            "MV",
+            "MW",
+            "MX",
+            "MY",
+            "MZ",
+            "NA",
+            "NC",
+            "NE",
+            "NF",
+            "NG",
+            "NI",
+            "NL",
+            "NO",
+            "NP",
+            "NR",
+            "NT",
+            "NU",
+            "NZ",
+            "OM",
+            "PA",
+            "PE",
+            "PF",
+            "PG",
+            "PH",
+            "PK",
+            "PL",
+            "PM",
+            "PN",
+            "PR",
+            "PS",
+            "PT",
+            "PW",
+            "PY",
+            "QA",
+            "RE",
+            "RO",
+            "RS",
+            "RU",
+            "RW",
+            "SA",
+            "SB",
+            "SC",
+            "SD",
+            "SE",
+            "SF",
+            "SG",
+            "SH",
+            "SI",
+            "SJ",
+            "SK",
+            "SL",
+            "SM",
+            "SN",
+            "SO",
+            "SR",
+            "SS",
+            "ST",
+            "SU",
+            "SV",
+            "SX",
+            "SY",
+            "SZ",
+            "TA",
+            "TC",
+            "TD",
+            "TF",
+            "TG",
+            "TJ",
+            "TK",
+            "TL",
+            "TM",
+            "TN",
+            "TO",
+            "TP",
+            "TR",
+            "TT",
+            "TV",
+            "TW",
+            "TZ",
+            "UA",
+            "UG",
+            "UK",
+            "UM",
+            "US",
+            "UY",
+            "UZ",
+            "VA",
+            "VC",
+            "VE",
+            "VG",
+            "VI",
+            "VN",
+            "VU",
+            "WF",
+            "WS",
+            "XK",
+            "YE",
+            "YT",
+            "YU",
+            "ZA",
+            "ZM",
+            "ZR",
+            "ZW"
+          ]
+        },
+        "ortsteil": {
+          "type": [
+            "string",
+            "null"
+          ]
+        }
+      },
+      "required": [
+        "postleitzahl",
+        "ort"
+      ]
+    },
+    "ExterneReferenz": {
+      "type": [
+        "object",
+        "null"
+      ],
+      "properties": {
+        "exRefName": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "exRefWert": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "timestamp": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "format": "date-time"
+        },
+        "guid": {
+          "type": [
+            "string",
+            "null"
+          ]
+        }
+      }
+    },
+    "Geschaeftspartner": {
+      "type": [
+        "object",
+        "null"
+      ],
+      "properties": {
+        "boTyp": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "versionStruktur": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "timestamp": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "format": "date-time"
+        },
+        "externeReferenzen": {
+          "type": [
+            "array",
+            "null"
+          ],
+          "items": {
+            "$ref": "#/definitions/ExterneReferenz"
+          }
+        },
+        "guid": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "anrede": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "enum": [
+            null,
+            "HERR",
+            "FRAU",
+            "EHELEUTE",
+            "FIRMA",
+            "INDIVIDUELL",
+            "FAMILIE",
+            "ERBENGEMEINSCHAFT",
+            "WOHNGEMEINSCHAFT",
+            "GRUNDSTUECKGEMEINSCHAFT",
+            "DR"
+          ]
+        },
+        "title": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "name1": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "name2": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "name3": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "gewerbekennzeichnung": {
+          "type": "boolean"
+        },
+        "hrnummer": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "amtsgericht": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "kontaktweg": {
+          "type": [
+            "array",
+            "null"
+          ],
+          "items": {
+            "type": "string",
+            "enum": [
+              "ANSCHREIBEN",
+              "TELEFONAT",
+              "FAX",
+              "E_MAIL",
+              "SMS"
+            ]
+          }
+        },
+        "umsatzsteuerId": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "glaeubigerId": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "eMailAdresse": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "website": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "geschaeftspartnerrolle": {
+          "type": [
+            "array",
+            "null"
+          ],
+          "items": {
+            "type": "string",
+            "enum": [
+              "LIEFERANT",
+              "DIENSTLEISTER",
+              "KUNDE",
+              "INTERESSENT",
+              "MARKTPARTNER"
+            ]
+          }
+        },
+        "partneradresse": {
+          "$ref": "#/definitions/Adresse"
+        },
+        "grundlageZurVerringerungDerUmlagenNachEnfg": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "enum": [
+            null,
+            "KUNDE_ERFUELLT_VORAUSSETZUNG",
+            "KUNDE_ERFUELLT_VORAUSSETZUNG_NICHT",
+            "KEINE_ANGABE"
+          ]
+        },
+        "grundDerPrivilegierungNachEnFG": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "enum": [
+            null,
+            "STROMSPEICHER_UND_VERLUSTENERGIE",
+            "ELEKTRISCH_ANGETRIEBENE_WAERMEPUMPEN",
+            "UMLAGEERHEBUNG_BEI_ANLAGEN_ZUR_VERSTROMUNG_VON_KUPPELGASEN",
+            "HERSTELLUNG_VON_GRUENEN_WASSERSTOFF",
+            "STROMKOSTENINTENSIVE_UNTERNEHMEN",
+            "HERSTELLUNG_VON_WASSERSTOFF_IN_STROMKOSTENINTENSIVEN_UNTERNEHMEN",
+            "SCHIENENBAHNEN",
+            "ELEKTRISCHE_BETRIEBENE_BUSSEN_IM_LINIENVERKEHR",
+            "LANDSTROMANLAGEN"
+          ]
+        }
+      },
+      "required": [
+        "gewerbekennzeichnung"
+      ]
+    },
+    "Menge": {
+      "type": [
+        "object",
+        "null"
+      ],
+      "properties": {
+        "timestamp": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "format": "date-time"
+        },
+        "guid": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "wert": {
+          "type": "number"
+        },
+        "einheit": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "enum": [
+            null,
+            "ZERO",
+            "WH",
+            "KW",
+            "ANZAHL",
+            "KUBIKMETER",
+            "STUNDE",
+            "TAG",
+            "MONAT",
+            "VAR",
+            "VARH",
+            "KWHK",
+            "JAHR",
+            "KWH",
+            "MW",
+            "KVAR",
+            "KVARH",
+            "MWH"
+          ]
+        }
+      },
+      "required": [
+        "wert"
+      ]
+    },
+    "Unterschrift": {
+      "type": [
+        "object",
+        "null"
+      ],
+      "properties": {
+        "ort": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "datum": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "format": "date-time"
+        },
+        "name": {
+          "type": "string"
+        },
+        "timestamp": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "format": "date-time"
+        },
+        "guid": {
+          "type": [
+            "string",
+            "null"
+          ]
+        }
+      },
+      "required": [
+        "name"
+      ]
+    },
+    "Vertragskonditionen": {
+      "type": [
+        "object",
+        "null"
+      ],
+      "properties": {
+        "timestamp": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "format": "date-time"
+        },
+        "guid": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "beschreibung": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "anzahlAbschlaege": {
+          "type": [
+            "integer",
+            "null"
+          ]
+        },
+        "vertragslaufzeit": {
+          "$ref": "#/definitions/Zeitraum"
+        },
+        "kuendigungsfrist": {
+          "$ref": "#/definitions/Zeitraum"
+        },
+        "vertragsverlaengerung": {
+          "$ref": "#/definitions/Zeitraum"
+        },
+        "abschlagszyklus": {
+          "$ref": "#/definitions/Zeitraum"
+        },
+        "startAbrechnungsjahr": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "format": "date-time"
+        },
+        "geplanteTurnusablesung": {
+          "$ref": "#/definitions/Zeitraum"
+        },
+        "turnusablesungIntervall": {
+          "type": [
+            "integer",
+            "null"
+          ]
+        },
+        "netznutzungsabrechnung": {
+          "$ref": "#/definitions/Zeitraum"
+        },
+        "netznutzungsabrechnungIntervall": {
+          "type": [
+            "integer",
+            "null"
+          ]
+        },
+        "haushaltskunde": {
+          "type": [
+            "boolean",
+            "null"
+          ]
+        },
+        "netznutzungsvertrag": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "enum": [
+            null,
+            "KUNDEN_NB",
+            "LIEFERANTEN_NB"
+          ]
+        },
+        "netznutzungszahler": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "enum": [
+            null,
+            "KUNDE",
+            "LIEFERANT"
+          ]
+        },
+        "netznutzungsabrechnungsvariante": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "enum": [
+            null,
+            "ARBEITSPREIS_GRUNDPREIS",
+            "ARBEITSPREIS_LEISTUNGSPREIS"
+          ]
+        },
+        "netznutzungsabrechnungsgrundlage": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "enum": [
+            null,
+            "LIEFERSCHEIN",
+            "ABWEICHENDE_GRUNDLAGE"
+          ]
+        },
+        "beinhaltetSingulaerGenutzteBetriebsmittel": {
+          "type": [
+            "boolean",
+            "null"
+          ]
+        }
+      }
+    },
+    "Vertragsteil": {
+      "type": [
+        "object",
+        "null"
+      ],
+      "properties": {
+        "vertragsteilbeginn": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "format": "date-time"
+        },
+        "vertragsteilende": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "format": "date-time"
+        },
+        "lokation": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "vertraglichFixierteMenge": {
+          "$ref": "#/definitions/Menge"
+        },
+        "minimaleAbnahmemenge": {
+          "$ref": "#/definitions/Menge"
+        },
+        "maximaleAbnahmemenge": {
+          "$ref": "#/definitions/Menge"
+        },
+        "jahresverbrauchsprognose": {
+          "$ref": "#/definitions/Menge"
+        },
+        "kundenwert": {
+          "$ref": "#/definitions/Menge"
+        },
+        "verbrauchsaufteilung": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "timestamp": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "format": "date-time"
+        },
+        "guid": {
+          "type": [
+            "string",
+            "null"
+          ]
+        }
+      }
+    },
+    "Zeitraum": {
+      "type": [
+        "object",
+        "null"
+      ],
+      "properties": {
+        "einheit": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "enum": [
+            null,
+            "SEKUNDE",
+            "MINUTE",
+            "STUNDE",
+            "VIERTEL_STUNDE",
+            "TAG",
+            "WOCHE",
+            "MONAT",
+            "QUARTAL",
+            "HALBJAHR",
+            "JAHR"
+          ]
+        },
+        "dauer": {
+          "type": [
+            "number",
+            "null"
+          ]
+        },
+        "startdatum": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "format": "date-time"
+        },
+        "enddatum": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "format": "date-time"
+        },
+        "startzeitpunkt": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "format": "date-time"
+        },
+        "endzeitpunkt": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "format": "date-time"
+        },
+        "timestamp": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "format": "date-time"
+        },
+        "guid": {
+          "type": [
+            "string",
+            "null"
+          ]
+        }
+      },
+      "required": [
+        "startzeitpunkt",
+        "endzeitpunkt"
+      ]
+    }
+  },
+  "type": "object",
+  "properties": {
+    "boTyp": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "versionStruktur": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "timestamp": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "format": "date-time"
+    },
+    "externeReferenzen": {
+      "type": [
+        "array",
+        "null"
+      ],
+      "items": {
+        "$ref": "#/definitions/ExterneReferenz"
+      }
+    },
+    "guid": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "vertragsnummer": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "beschreibung": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "vertragsart": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "enum": [
+        null,
+        "ENERGIELIEFERVERTRAG",
+        "NETZNUTZUNGSVERTRAG",
+        "BILANZIERUNGSVERTRAG",
+        "MESSSTELLENBETRIEBSVERTRAG",
+        "BUENDELVERTRAG"
+      ]
+    },
+    "vertragstatus": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "enum": [
+        null,
+        "IN_ARBEIT",
+        "UEBERMITTELT",
+        "ANGENOMMEN",
+        "AKTIV",
+        "ABGELEHNT",
+        "WIDERRUFEN",
+        "STORNIERT",
+        "GEKUENDIGT",
+        "BEENDET"
+      ]
+    },
+    "sparte": {
+      "type": "string",
+      "enum": [
+        "STROM",
+        "GAS",
+        "FERNWAERME",
+        "NAHWAERME",
+        "WASSER",
+        "ABWASSER"
+      ]
+    },
+    "vertragsbeginn": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "vertragsende": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "format": "date-time"
+    },
+    "vertragspartner1": {
+      "$ref": "#/definitions/Geschaeftspartner"
+    },
+    "vertragspartner2": {
+      "$ref": "#/definitions/Geschaeftspartner"
+    },
+    "unterzeichnervp1": {
+      "type": [
+        "array",
+        "null"
+      ],
+      "items": {
+        "$ref": "#/definitions/Unterschrift"
+      }
+    },
+    "unterzeichnervp2": {
+      "type": [
+        "array",
+        "null"
+      ],
+      "items": {
+        "$ref": "#/definitions/Unterschrift"
+      }
+    },
+    "vertragskonditionen": {
+      "$ref": "#/definitions/Vertragskonditionen"
+    },
+    "vertragsteile": {
+      "type": [
+        "array",
+        "null"
+      ],
+      "items": {
+        "$ref": "#/definitions/Vertragsteil"
+      }
+    },
+    "gemeinderabatt": {
+      "type": [
+        "number",
+        "null"
+      ]
+    },
+    "korrespondenzpartner": {
+      "$ref": "#/definitions/Geschaeftspartner"
+    }
+  },
+  "required": [
+    "sparte",
+    "vertragsbeginn"
+  ]
+}

@@ -1,0 +1,526 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "definitions": {
+    "ExterneReferenz": {
+      "type": [
+        "object",
+        "null"
+      ],
+      "properties": {
+        "exRefName": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "exRefWert": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "timestamp": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "format": "date-time"
+        },
+        "guid": {
+          "type": [
+            "string",
+            "null"
+          ]
+        }
+      }
+    },
+    "StatusZusatzInformation": {
+      "type": [
+        "object",
+        "null"
+      ],
+      "properties": {
+        "timestamp": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "format": "date-time"
+        },
+        "art": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "enum": [
+            null,
+            "VERTRAG",
+            "MESSWERTQUALITAET",
+            "MESSKLASSIFIZIERUNG",
+            "PLAUSIBILISIERUNGSHINWEIS",
+            "ERSATZWERTBILDUNGSVERFAHREN",
+            "GRUND_ERSATZWERTBILDUNGSVERFAHREN",
+            "KORREKTURGRUND",
+            "GASQUALITAET"
+          ]
+        },
+        "guid": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "status": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "enum": [
+            null,
+            "TARIF_1",
+            "TARIF_2",
+            "TARIF_3",
+            "TARIF_4",
+            "TARIF_5",
+            "TARIF_6",
+            "TARIF_7",
+            "TARIF_8",
+            "TARIF_9",
+            "ZAEHLERSTAND_ZUM_BEGINN_DER_ANGEGEBENEN_ENERGIEMENGE_VORHANDEN_UND_KOMMUNIZIERT",
+            "ZAEHLERSTAND_ZUM_ENDE_DER_ANGEGEBENEN_ENERGIEMENGE_VORHANDEN_UND_KOMMUNIZIERT",
+            "ZAEHLERSTAND_ZUM_BEGINN_DER_ANGEGEBENEN_ENERGIEMENGE_NICHT_VORHANDEN_DA_MENGENABGRENZUNG",
+            "ZAEHLERSTAND_ZUM_ENDE_DER_ANGEGEBENEN_ENERGIEMENGE_NICHT_VORHANDEN_DA_MENGENABGRENZUNG",
+            "KEIN_ZUGANG",
+            "KOMMUNIKATIONSSTOERUNG",
+            "NETZAUSFALL",
+            "SPANNUNGSAUSFALL",
+            "STATUS_GERAETEWECHSEL",
+            "KALIBRIERUNG",
+            "GERAET_ARBEITET_AUSSERHALB_DER_BETRIEBSBEDINGUNGEN",
+            "MESSEINRICHTUNG_GESTOERT_DEFEKT",
+            "UNSICHERHEIT_MESSUNG",
+            "KUNDENSELBSTABLESUNG",
+            "LEERSTAND",
+            "REALER_ZAEHLERUEBERLAUF_GEPRUEFT",
+            "PLAUSIBEL_WG_KONTROLLABLESUNG",
+            "PLAUSIBEL_WG_KUNDENHINWEIS",
+            "VERGLEICHSMESSUNG_GEEICHT",
+            "VERGLEICHSMESSUNG_NICHT_GEEICHT",
+            "MESSWERTNACHBILDUNG_AUS_GEEICHTEN_WERTEN",
+            "MESSWERTNACHBILDUNG_AUS_NICHT_GEEICHTEN_WERTEN",
+            "INTERPOLATION",
+            "HALTEWERT",
+            "BILANZIERUNG_NETZABSCHNITT",
+            "HISTORISCHE_MESSWERTE",
+            "BERUECKSICHTIGUNG_STOERMENGENZAEHLWERK",
+            "MENGENUMWERTUNG_VOLLSTAENDIG",
+            "UHRZEIT_GESTELLT_SYNCHRONISATION",
+            "MESSWERT_UNPLAUSIBEL",
+            "FALSCHER_WANDLERFAKTOR",
+            "FEHLERHAFTE_ABLESUNG",
+            "AENDERUNG_DER_BERECHNUNG",
+            "UMBAU_DER_MESSLOKATION",
+            "DATENBEARBEITUNGSFEHLER",
+            "BRENNWERTKORREKTUR",
+            "Z_ZAHL_KORREKTUR",
+            "STOERUNG_DEFEKT_MESSEINRICHTUNG",
+            "AENDERUNG_TARIFSCHALTZEITEN",
+            "TARIFSCHALTGERAET_DEFEKT",
+            "AUSTAUSCH_DES_ERSATZWERTES",
+            "IMPULSWERTIGKEIT_NICHT_AUSREICHEND",
+            "UMSTELLUNG_GASQUALITAET",
+            "STATISTISCHE_METHODE",
+            "ENERGIEMENGE_IN_UNGEMESSENEM_ZEITINTERVALL",
+            "ENERGIEMENGE_AUS_DEM_UNGEPAIRTEN_ZEITINTERVALL",
+            "AUFTEILUNG",
+            "VERWENDUNG_VON_WERTEN_DES_STOERMENGENZAEHLWERKS",
+            "UMGANGS_UND_KORREKTURMENGEN",
+            "WARTUNGSARBEITEN_AN_GEEICHTEM_MESSGERAET",
+            "GESTOERTE_WERTE",
+            "WARTUNGSARBEITEN_AN_EICHRECHTSKONFORMEN_MESSGERAETEN",
+            "KONSISTENZ_UND_SYNCHRONPRUEFUNG",
+            "RECHENWERT",
+            "ANGABEN_MESSLOKATION",
+            "BASIS_MME",
+            "GRUND_ANGABEN_MESSLOKATION",
+            "ANFORDERUNG_IN_DIE_VERGANGENHEIT_ZUM_ANGEFORDERTEN_ZEITPUNKT_LIEGT_KEIN_WERT_VOR"
+          ]
+        }
+      }
+    },
+    "Verbrauch": {
+      "type": [
+        "object",
+        "null"
+      ],
+      "properties": {
+        "startdatum": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "format": "date-time"
+        },
+        "enddatum": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "format": "date-time"
+        },
+        "type": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "enum": [
+            null,
+            "ARBEITLEISTUNGTAGESPARAMETERABHMALO",
+            "VERANSCHLAGTEJAHRESMENGE",
+            "TUMKUNDENWERT"
+          ]
+        },
+        "tarifstufe": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "enum": [
+            null,
+            "TARIFSTUFE_0",
+            "TARIFSTUFE_1",
+            "TARIFSTUFE_2",
+            "TARIFSTUFE_3",
+            "TARIFSTUFE_4",
+            "TARIFSTUFE_5",
+            "TARIFSTUFE_6",
+            "TARIFSTUFE_7",
+            "TARIFSTUFE_8",
+            "TARIFSTUFE_9"
+          ]
+        },
+        "timestamp": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "format": "date-time"
+        },
+        "guid": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "wertermittlungsverfahren": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "enum": [
+            null,
+            "PROGNOSE",
+            "MESSUNG"
+          ]
+        },
+        "messwertstatus": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "enum": [
+            null,
+            "ABGELESEN",
+            "ERSATZWERT",
+            "VOLAEUFIGERWERT",
+            "ANGABE_FUER_LIEFERSCHEIN",
+            "VORSCHLAGSWERT",
+            "NICHT_VERWENDBAR",
+            "PROGNOSEWERT",
+            "ENERGIEMENGESUMMIERT",
+            "FEHLT",
+            "GRUNDLAGE_POG_ERMITTLUNG"
+          ]
+        },
+        "statuszusatzinformationen": {
+          "type": [
+            "array",
+            "null"
+          ],
+          "items": {
+            "$ref": "#/definitions/StatusZusatzInformation"
+          }
+        },
+        "obiskennzahl": {
+          "type": "string"
+        },
+        "wert": {
+          "type": "number"
+        },
+        "einheit": {
+          "type": "string",
+          "enum": [
+            "ZERO",
+            "WH",
+            "KW",
+            "ANZAHL",
+            "KUBIKMETER",
+            "STUNDE",
+            "TAG",
+            "MONAT",
+            "VAR",
+            "VARH",
+            "KWHK",
+            "JAHR",
+            "KWH",
+            "MW",
+            "KVAR",
+            "KVARH",
+            "MWH"
+          ]
+        },
+        "nutzungszeitpunkt": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "format": "date-time"
+        },
+        "ausfuehrungszeitpunkt": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "format": "date-time"
+        }
+      },
+      "required": [
+        "obiskennzahl",
+        "wert",
+        "einheit"
+      ]
+    },
+    "Zeitreihenprodukt": {
+      "type": [
+        "object",
+        "null"
+      ],
+      "properties": {
+        "timestamp": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "format": "date-time"
+        },
+        "guid": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "identifikation": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "korrekturfaktor": {
+          "type": [
+            "number",
+            "null"
+          ]
+        },
+        "verbrauch": {
+          "$ref": "#/definitions/Verbrauch"
+        }
+      }
+    }
+  },
+  "type": "object",
+  "properties": {
+    "boTyp": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "versionStruktur": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "timestamp": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "format": "date-time"
+    },
+    "externeReferenzen": {
+      "type": [
+        "array",
+        "null"
+      ],
+      "items": {
+        "$ref": "#/definitions/ExterneReferenz"
+      }
+    },
+    "guid": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "zaehlpunktId": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "bilanzierungsbeginn": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "format": "date-time"
+    },
+    "bilanzierungsende": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "format": "date-time"
+    },
+    "bilanzkreis": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "bilanzierungsgebiet": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "regelzone": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "bezeichnung": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "enum": [
+        null,
+        "BG_SZR_B",
+        "BG_SZR_C",
+        "BK_SZR_A",
+        "BK_SZR_B_RZ",
+        "BK_SZR_B_BG",
+        "BK_SZR_C",
+        "LF_SZR_A",
+        "LF_SZR_B_RZ",
+        "LF_SZR_B_BG",
+        "DZUE",
+        "NZR",
+        "ASZR"
+      ]
+    },
+    "bezugszeitraum": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "enum": [
+        null,
+        "SEKUNDE",
+        "MINUTE",
+        "STUNDE",
+        "VIERTEL_STUNDE",
+        "TAG",
+        "WOCHE",
+        "MONAT",
+        "QUARTAL",
+        "HALBJAHR",
+        "JAHR"
+      ]
+    },
+    "zeitreihentyp": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "enum": [
+        null,
+        "EGS",
+        "LGS",
+        "NZR",
+        "SES",
+        "SLS",
+        "TES",
+        "TLS",
+        "SLS_TLS",
+        "SES_TES"
+      ]
+    },
+    "marktrolle": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "enum": [
+        null,
+        "NB",
+        "LF",
+        "MSB",
+        "MDL",
+        "DL",
+        "BKV",
+        "BIKO",
+        "UENB",
+        "KUNDE_SELBST_NN",
+        "MGV",
+        "EIV",
+        "RB",
+        "KUNDE",
+        "INTERESSENT",
+        "GMSB",
+        "AMSB"
+      ]
+    },
+    "spannungsebene": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "enum": [
+        null,
+        "NSP",
+        "MSP",
+        "HSP",
+        "HSS",
+        "MSP_NSP_UMSP",
+        "HSP_MSP_UMSP",
+        "HSS_HSP_UMSP",
+        "HD",
+        "MD",
+        "ND"
+      ]
+    },
+    "produkte": {
+      "type": [
+        "array",
+        "null"
+      ],
+      "items": {
+        "$ref": "#/definitions/Zeitreihenprodukt"
+      }
+    }
+  }
+}
