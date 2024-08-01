@@ -1,0 +1,359 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "title": "Wechsel",
+  "definitions": {
+    "Sparte": {
+      "type": "integer",
+      "description": "Unterscheidungsmöglichkeiten für die Sparte.",
+      "x-enumNames": [
+        "STROM",
+        "GAS",
+        "FERNWAERME",
+        "NAHWAERME",
+        "WASSER",
+        "ABWASSER"
+      ],
+      "enum": [0, 1, 2, 3, 4, 5]
+    },
+    "Geraet": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/COM"
+        },
+        {
+          "type": "object",
+          "description": "Mit dieser Komponente werden alle Geräte modelliert, die keine Zähler sind.",
+          "additionalProperties": {},
+          "properties": {
+            "geraetenummer": {
+              "type": "string",
+              "description": "Die auf dem Geräte aufgedruckte Nummer, die vom MSB vergeben wird.",
+              "x-nullable": true
+            },
+            "geraeteeigenschaften": {
+              "description": "Festlegung der Eigenschaften des Gerätes. Z.B. Wandler MS/NS. Details\nGeraeteeigenschaften\n            ",
+              "x-nullable": true,
+              "oneOf": [
+                {
+                  "$ref": "#/definitions/Geraeteeigenschaften"
+                }
+              ]
+            },
+            "geraeteart": {
+              "description": "Festlegung der Art des Gerätes. Z.B. ZAEHLEINRICHTUNG\nGeraeteart\n            ",
+              "x-nullable": true,
+              "oneOf": [
+                {
+                  "$ref": "#/definitions/Geraeteart"
+                }
+              ]
+            }
+          }
+        }
+      ]
+    },
+    "Geraeteeigenschaften": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/COM"
+        },
+        {
+          "type": "object",
+          "description": "Mit dieser Komponente werden die Eigenschaften eines Gerätes in Bezug auf den Typ und weitere Merkmale\nmodelliert.\n            ",
+          "additionalProperties": {},
+          "properties": {
+            "geraetetyp": {
+              "description": "Der Typ eines Gerätes, beispielsweise Drehstromzähler. Details Geraetetyp",
+              "oneOf": [
+                {
+                  "$ref": "#/definitions/Geraetetyp"
+                }
+              ]
+            },
+            "geraetemerkmal": {
+              "description": "Weitere Merkmale des Geräts, zum Beispiel Mehrtarif, Eintarif etc.. Details Geraetemerkmal\n            ",
+              "x-nullable": true,
+              "oneOf": [
+                {
+                  "$ref": "#/definitions/Geraetemerkmal"
+                }
+              ]
+            }
+          }
+        }
+      ]
+    },
+    "Geraetetyp": {
+      "type": "integer",
+      "description": "Auflistung möglicher abzurechnender Gerätetypen.",
+      "x-enumNames": [
+        "WECHSELSTROMZAEHLER",
+        "DREHSTROMZAEHLER",
+        "ZWEIRICHTUNGSZAEHLER",
+        "RLM_ZAEHLER",
+        "IMS_ZAEHLER",
+        "BALGENGASZAEHLER",
+        "MAXIMUMZAEHLER",
+        "MULTIPLEXANLAGE",
+        "PAUSCHALANLAGE",
+        "VERSTAERKERANLAGE",
+        "SUMMATIONSGERAET",
+        "IMPULSGEBER",
+        "EDL_21_ZAEHLERAUFSATZ",
+        "VIER_QUADRANTEN_LASTGANGZAEHLER",
+        "MENGENUMWERTER",
+        "STROMWANDLER",
+        "SPANNUNGSWANDLER",
+        "DATENLOGGER",
+        "KOMMUNIKATIONSANSCHLUSS",
+        "MODEM",
+        "TELEKOMMUNIKATIONSEINRICHTUNG",
+        "DREHKOLBENGASZAEHLER",
+        "TURBINENRADGASZAEHLER",
+        "ULTRASCHALLZAEHLER",
+        "WIRBELGASZAEHLER",
+        "MODERNE_MESSEINRICHTUNG",
+        "ELEKTRONISCHER_HAUSHALTSZAEHLER",
+        "STEUEREINRICHTUNG",
+        "TECHNISCHESTEUEREINRICHTUNG",
+        "TARIFSCHALTGERAET",
+        "RUNDSTEUEREMPFAENGER",
+        "OPTIONALE_ZUS_ZAEHLEINRICHTUNG",
+        "MESSWANDLERSATZ_IMS_MME",
+        "KOMBIMESSWANDLER_IMS_MME",
+        "TARIFSCHALTGERAET_IMS_MME",
+        "RUNDSTEUEREMPFAENGER_IMS_MME",
+        "TEMPERATUR_KOMPENSATION",
+        "HOECHSTBELASTUNGS_ANZEIGER",
+        "SONSTIGES_GERAET",
+        "SMARTMETERGATEWAY",
+        "STEUERBOX",
+        "BLOCKSTROMWANDLER",
+        "KOMBIMESSWANDLER"
+      ],
+      "enum": [
+        0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19,
+        20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37,
+        38, 39, 40, 41, 42
+      ]
+    },
+    "Geraetemerkmal": {
+      "type": "integer",
+      "description": "Auflistung möglicher abzurechnender Gerätetypen.",
+      "x-enumNames": [
+        "EINTARIF",
+        "ZWEITARIF",
+        "MEHRTARIF",
+        "GAS_G2P5",
+        "GAS_G4",
+        "GAS_G6",
+        "GAS_G10",
+        "GAS_G16",
+        "GAS_G25",
+        "GAS_G40",
+        "GAS_G65",
+        "GAS_G100",
+        "GAS_G160",
+        "GAS_G250",
+        "GAS_G400",
+        "GAS_G650",
+        "GAS_G1000",
+        "GAS_G1600",
+        "GAS_G2500",
+        "IMPULSGEBER_G4_G100",
+        "IMPULSGEBER_G100",
+        "MODEM_GSM",
+        "MODEM_GPRS",
+        "MODEM_FUNK",
+        "MODEM_GSM_O_LG",
+        "MODEM_GSM_M_LG",
+        "MODEM_FESTNETZ",
+        "MODEM_GPRS_M_LG",
+        "PLC_COM",
+        "ETHERNET_KOM",
+        "DSL_KOM",
+        "LTE_KOM",
+        "RUNDSTEUEREMPFAENGER",
+        "TARIFSCHALTGERAET",
+        "ZUSTANDS_MU",
+        "TEMPERATUR_MU",
+        "KOMPAKT_MU",
+        "SYSTEM_MU",
+        "UNBESTIMMT",
+        "WASSER_MWZW",
+        "WASSER_WZWW",
+        "WASSER_WZ01",
+        "WASSER_WZ02",
+        "WASSER_WZ03",
+        "WASSER_WZ04",
+        "WASSER_WZ05",
+        "WASSER_WZ06",
+        "WASSER_WZ07",
+        "WASSER_WZ08",
+        "WASSER_WZ09",
+        "WASSER_WZ10",
+        "WASSER_VWZ04",
+        "WASSER_VWZ05",
+        "WASSER_VWZ06",
+        "WASSER_VWZ07",
+        "WASSER_VWZ10",
+        "GAS_G350",
+        "GAS_G4000",
+        "GAS_G6500",
+        "GAS_G10000",
+        "GAS_G12500",
+        "GAS_G16000"
+      ],
+      "enum": [
+        0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19,
+        20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37,
+        38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55,
+        56, 57, 58, 59, 60, 61
+      ]
+    },
+    "COM": {
+      "type": "object",
+      "description": "The COM class is the abstract class from which all BO4E.COM classes are derived.\n            ",
+      "x-abstract": true,
+      "additionalProperties": {},
+      "properties": {
+        "guidSerialized": {
+          "type": "string"
+        },
+        "timestamp": {
+          "type": "string",
+          "description": "Store the latest timestamp (update from the database)\n            ",
+          "format": "date-time",
+          "x-nullable": true
+        },
+        "guid": {
+          "type": "string",
+          "description": "allows adding a GUID to COM objects for tracking across systems\n            ",
+          "format": "guid",
+          "x-nullable": true
+        }
+      }
+    },
+    "Geraeteart": {
+      "type": "integer",
+      "description": "Auflistung möglicher Geraetearten. This is more broadly defined as a Geraetetyp, so a Zaehleinrichtung as Gerateart could be a elektronischer Haushaltszähler as a Gerätetyp.",
+      "x-enumNames": [
+        "WANDLER",
+        "KOMMUNIKATIONSEINRICHTUNG",
+        "TECHNISCHE_STEUEREINRICHTUNG",
+        "MENGENUMWERTER",
+        "SMARTMETER_GATEWAY",
+        "STEUERBOX",
+        "ZAEHLEINRICHTUNG"
+      ],
+      "enum": [0, 1, 2, 3, 4, 5, 6]
+    },
+    "BusinessObject": {
+      "type": "object",
+      "description": "General abstract class for Business Objects for Energy (BO4E)\n            ",
+      "x-abstract": true,
+      "additionalProperties": {},
+      "properties": {
+        "boTyp": {
+          "type": "string",
+          "description": "obligatory type of the business object in UPPER CASE\n            ",
+          "x-nullable": true,
+          "x-example": "'MESSLOKATION',\n'MARKTLOKATION'\n            "
+        },
+        "versionStruktur": {
+          "type": "string",
+          "description": "obligatory version of the BO4E definition. Currently hard coded to 1\n            ",
+          "x-nullable": true,
+          "x-example": 1
+        },
+        "guidSerialized": {
+          "type": "string",
+          "description": "protobuf serilization requires the Guid as string.\n            "
+        },
+        "timestamp": {
+          "type": "string",
+          "description": "Store the latest database update, is Datetime, because postgres doesn't handle datetimeoffset in a generated column\ngracefully\n            ",
+          "format": "date-time",
+          "x-nullable": true
+        },
+        "externeReferenzen": {
+          "type": "array",
+          "description": "Hier können IDs anderer Systeme hinterlegt werden (z.B. eine SAP-GP-Nummer) (Details siehe\nExterneReferenz)\n            ",
+          "x-nullable": true,
+          "items": {
+            "$ref": "#/definitions/ExterneReferenz"
+          }
+        },
+        "guid": {
+          "type": "string",
+          "description": "allows adding a GUID to Business Objects for tracking across systems\n            ",
+          "format": "guid",
+          "x-nullable": true
+        }
+      }
+    },
+    "ExterneReferenz": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/COM"
+        },
+        {
+          "type": "object",
+          "description": "Viele Datenobjekte weisen in unterschiedlichen Systemen eine eindeutige ID (Kundennummer, GP-Nummer etc.) auf.\nBeim Austausch von Datenobjekten zwischen verschiedenen Systemen ist es daher hilfreich, sich die eindeutigen IDs\nder anzubindenden Systeme zu merken.\nDiese Komponente ermöglicht es, sich die SAP GP-Nummer zu merken, um diese bei SAP-Aufrufen als Parameter mitgeben\nzu können.\n            ",
+          "additionalProperties": {},
+          "properties": {
+            "exRefName": {
+              "type": "string",
+              "description": "Bezeichnung der externen Referenz (z.B. \"hochfrequenz integration services\")\n            ",
+              "x-nullable": true
+            },
+            "exRefWert": {
+              "type": "string",
+              "description": "Wert der externen Referenz (z.B. \"123456\"; \"4711\")\n            ",
+              "x-nullable": true
+            }
+          }
+        }
+      ]
+    }
+  },
+  "allOf": [
+    {
+      "$ref": "#/definitions/BusinessObject"
+    },
+    {
+      "type": "object",
+      "description": "Mit diesem Geschäftsobjekt wird der Wechsel eines Gerätes oder Zählers modelliert.\n            ",
+      "additionalProperties": {},
+      "properties": {
+        "sparte": {
+          "description": "Strom oder Gas. ",
+          "oneOf": [
+            {
+              "$ref": "#/definitions/Sparte"
+            }
+          ]
+        },
+        "geraete": {
+          "type": "array",
+          "description": "Liste an Geräten.",
+          "x-nullable": true,
+          "items": {
+            "$ref": "#/definitions/Geraet"
+          }
+        },
+        "wechseldatum": {
+          "type": "string",
+          "description": "Gibt an, wann der Wechsel (voraussichtlich) stattfinden wird.\n            ",
+          "format": "date-time",
+          "x-nullable": true
+        },
+        "vollstaendig": {
+          "type": "boolean",
+          "description": "Vollständiger Wechsel (ja/nein), defaults to ja",
+          "x-nullable": true
+        }
+      }
+    }
+  ]
+}

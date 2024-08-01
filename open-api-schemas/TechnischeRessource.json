@@ -1,0 +1,329 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "title": "TechnischeRessource",
+  "definitions": {
+    "Menge": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/COM"
+        },
+        {
+          "type": "object",
+          "description": "Abbildung einer Menge mit Wert und Einheit.",
+          "additionalProperties": {},
+          "properties": {
+            "wert": {
+              "type": "number",
+              "description": "Gibt den absoluten Wert der Menge an.",
+              "format": "decimal"
+            },
+            "einheit": {
+              "description": "Gibt die Einheit zum jeweiligen Wert an. Details Mengeneinheit",
+              "x-nullable": true,
+              "oneOf": [
+                {
+                  "$ref": "#/definitions/Mengeneinheit"
+                }
+              ]
+            }
+          }
+        }
+      ]
+    },
+    "Mengeneinheit": {
+      "type": "integer",
+      "description": "Einheit: Messgrößen, die per Messung oder Vorgabe ermittelt werden können.\n            ",
+      "x-enumNames": [
+        "ZERO",
+        "WH",
+        "KW",
+        "ANZAHL",
+        "KUBIKMETER",
+        "STUNDE",
+        "TAG",
+        "MONAT",
+        "VAR",
+        "VARH",
+        "KWHK",
+        "JAHR",
+        "KWH",
+        "MW",
+        "KVAR",
+        "KVARH",
+        "MWH"
+      ],
+      "enum": [
+        0, 2, 3, 7, 11, 13, 17, 19, 23, 29, 40, 228, 2000, 3000, 23000, 29000,
+        2000000
+      ]
+    },
+    "COM": {
+      "type": "object",
+      "description": "The COM class is the abstract class from which all BO4E.COM classes are derived.\n            ",
+      "x-abstract": true,
+      "additionalProperties": {},
+      "properties": {
+        "guidSerialized": {
+          "type": "string"
+        },
+        "timestamp": {
+          "type": "string",
+          "description": "Store the latest timestamp (update from the database)\n            ",
+          "format": "date-time",
+          "x-nullable": true
+        },
+        "guid": {
+          "type": "string",
+          "description": "allows adding a GUID to COM objects for tracking across systems\n            ",
+          "format": "guid",
+          "x-nullable": true
+        }
+      }
+    },
+    "TechnischeRessourceNutzung": {
+      "type": "integer",
+      "description": "Art und Nutzung der Technischen Ressource",
+      "x-enumNames": ["STROMVERBRAUCHSART", "STROMERZEUGUNGSART", "SPEICHER"],
+      "enum": [0, 1, 2]
+    },
+    "TechnischeRessourceVerbrauchsart": {
+      "type": "integer",
+      "description": "Verbrauchsart der Technischen Ressource.",
+      "x-enumNames": [
+        "KRAFT_LICHT",
+        "WAERME",
+        "E_MOBILITAET",
+        "STRASSENBELEUCHTUNG"
+      ],
+      "enum": [0, 1, 2, 3]
+    },
+    "Waermenutzung": {
+      "type": "integer",
+      "description": "Stromverbrauchsart/Wärmenutzung Marktlokation",
+      "x-enumNames": ["SPEICHERHEIZUNG", "WAERMEPUMPE", "DIREKTHEIZUNG"],
+      "enum": [0, 1, 2]
+    },
+    "EMobilitaetsart": {
+      "type": "integer",
+      "description": "Im Falle der E-Mobilität bei TechnischeRessourceNutzung, eine genauere Angabe über die Art der E-Mobilität zu definieren.",
+      "x-enumNames": ["WALLBOX", "E_MOBILITAETSLADESAEULE", "LADEPARK"],
+      "enum": [0, 1, 2]
+    },
+    "Erzeugungsart": {
+      "type": "integer",
+      "description": "Auflistung der Erzeugungsarten von Energie.",
+      "x-enumNames": [
+        "KWK",
+        "WIND",
+        "SOLAR",
+        "KERNKRAFT",
+        "WASSER",
+        "GEOTHERMIE",
+        "BIOMASSE",
+        "KOHLE",
+        "GAS",
+        "SONSTIGE",
+        "SONSTIGE_EEG"
+      ],
+      "enum": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+    },
+    "Speicherart": {
+      "type": "integer",
+      "description": "Im Falle der Speicher bei TechnischeRessourceNutzung, eine genauere Angabe über die Art der Speicher zu definieren.",
+      "x-enumNames": [
+        "WASSERSTOFFSPEICHER",
+        "PUMPSPEICHER",
+        "BATTERIESPEICHER",
+        "SONSTIGE_SPEICHERART"
+      ],
+      "enum": [0, 1, 2, 3]
+    },
+    "BusinessObject": {
+      "type": "object",
+      "description": "General abstract class for Business Objects for Energy (BO4E)\n            ",
+      "x-abstract": true,
+      "additionalProperties": {},
+      "properties": {
+        "boTyp": {
+          "type": "string",
+          "description": "obligatory type of the business object in UPPER CASE\n            ",
+          "x-nullable": true,
+          "x-example": "'MESSLOKATION',\n'MARKTLOKATION'\n            "
+        },
+        "versionStruktur": {
+          "type": "string",
+          "description": "obligatory version of the BO4E definition. Currently hard coded to 1\n            ",
+          "x-nullable": true,
+          "x-example": 1
+        },
+        "guidSerialized": {
+          "type": "string",
+          "description": "protobuf serilization requires the Guid as string.\n            "
+        },
+        "timestamp": {
+          "type": "string",
+          "description": "Store the latest database update, is Datetime, because postgres doesn't handle datetimeoffset in a generated column\ngracefully\n            ",
+          "format": "date-time",
+          "x-nullable": true
+        },
+        "externeReferenzen": {
+          "type": "array",
+          "description": "Hier können IDs anderer Systeme hinterlegt werden (z.B. eine SAP-GP-Nummer) (Details siehe\nExterneReferenz)\n            ",
+          "x-nullable": true,
+          "items": {
+            "$ref": "#/definitions/ExterneReferenz"
+          }
+        },
+        "guid": {
+          "type": "string",
+          "description": "allows adding a GUID to Business Objects for tracking across systems\n            ",
+          "format": "guid",
+          "x-nullable": true
+        }
+      }
+    },
+    "ExterneReferenz": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/COM"
+        },
+        {
+          "type": "object",
+          "description": "Viele Datenobjekte weisen in unterschiedlichen Systemen eine eindeutige ID (Kundennummer, GP-Nummer etc.) auf.\nBeim Austausch von Datenobjekten zwischen verschiedenen Systemen ist es daher hilfreich, sich die eindeutigen IDs\nder anzubindenden Systeme zu merken.\nDiese Komponente ermöglicht es, sich die SAP GP-Nummer zu merken, um diese bei SAP-Aufrufen als Parameter mitgeben\nzu können.\n            ",
+          "additionalProperties": {},
+          "properties": {
+            "exRefName": {
+              "type": "string",
+              "description": "Bezeichnung der externen Referenz (z.B. \"hochfrequenz integration services\")\n            ",
+              "x-nullable": true
+            },
+            "exRefWert": {
+              "type": "string",
+              "description": "Wert der externen Referenz (z.B. \"123456\"; \"4711\")\n            ",
+              "x-nullable": true
+            }
+          }
+        }
+      ]
+    }
+  },
+  "allOf": [
+    {
+      "$ref": "#/definitions/BusinessObject"
+    },
+    {
+      "type": "object",
+      "description": "Technische Ressource BO",
+      "additionalProperties": {},
+      "properties": {
+        "technischeRessourceId": {
+          "type": "string",
+          "description": "Identifikationsnummer einer TechnischeRessource",
+          "default": "|null|",
+          "x-nullable": true
+        },
+        "vorgelagerteMesslokationsId": {
+          "type": "string",
+          "description": "Vorgelagerte Messlokation ID\nBeispiel:\nRFF+Z34:DE00713739359S0000000000001222221'",
+          "x-nullable": true
+        },
+        "zugeordneteMarktlokationsId": {
+          "type": "string",
+          "description": "Referenz auf die der Technischen Ressource Zugeordneten Marktlokation\nBeispiel:\nRFF+Z16:20072281644'",
+          "x-nullable": true
+        },
+        "zugeordneteSteuerbareRessourceId": {
+          "type": "string",
+          "description": "Referenz auf die der Technischen Ressource zugeordneten Steuerbaren Ressource\nBeispiel:\nRFF+Z16:20072281644'",
+          "x-nullable": true
+        },
+        "nennleistungAufnahme": {
+          "description": "Nennleistung (Aufnahme)\nBeispiel: QTY+Z43:100:KWT'",
+          "x-nullable": true,
+          "oneOf": [
+            {
+              "$ref": "#/definitions/Menge"
+            }
+          ]
+        },
+        "nennleistungAbgabe": {
+          "description": "Nennleistung (Abgabe)\nBeispiel: QTY+Z44:100:KWT'",
+          "x-nullable": true,
+          "oneOf": [
+            {
+              "$ref": "#/definitions/Menge"
+            }
+          ]
+        },
+        "speicherkapazitaet": {
+          "description": "Speicherkapazität\nBeispiel: QTY+Z42:100:KWH'",
+          "x-nullable": true,
+          "oneOf": [
+            {
+              "$ref": "#/definitions/Menge"
+            }
+          ]
+        },
+        "technischeRessourceNutzung": {
+          "description": "Art und Nutzung der Technischen Ressource\nBeispiel: CCI+Z17'\n    Z17: Stromverbrauchsart\n    Z50: Stromerzeugungsart\n    Z56: Speicher",
+          "x-nullable": true,
+          "oneOf": [
+            {
+              "$ref": "#/definitions/TechnischeRessourceNutzung"
+            }
+          ]
+        },
+        "verbrauchsart": {
+          "description": "Verbrauchsart der Technischen Ressource\nBeispiel: CAV+Z64'\n    Z64: Kraft/Licht\n    Z65: Wärme\n    ZE5: E-Mobilität\n    ZA8: Straßenbeleuchtung",
+          "x-nullable": true,
+          "oneOf": [
+            {
+              "$ref": "#/definitions/TechnischeRessourceVerbrauchsart"
+            }
+          ]
+        },
+        "waermenutzung": {
+          "description": "Wärmenutzung\nBeispiel: CAV+Z56'\n    Z56: Speicherheizung\n    Z57: Wärmepumpe\n    Z61: Direktheizung",
+          "x-nullable": true,
+          "oneOf": [
+            {
+              "$ref": "#/definitions/Waermenutzung"
+            }
+          ]
+        },
+        "emobilitaetsart": {
+          "description": "Art der E-Mobilität\nDas Segment dient dazu, im Falle der E-Mobilität eine genauere Angabe über die Art der E-Mobilität zu definieren.\nBeispiel: CAV+Z87'\n    ZE6: Wallbox: An der Marktlokation ist eine nicht öffentlliche Lademöglichkeit vorhanden\n    Z87: E-Mobilitätsladesäule: Es handelt sich um eine öffentliche Ladesäule mit ggf. mehreren Ladeanschlüssen an der Marktlokation.\n    ZE7: Ladepark: Es handelt sich um mehr als eine öffentliche Ladesäule an der Marktlokation",
+          "x-nullable": true,
+          "oneOf": [
+            {
+              "$ref": "#/definitions/EMobilitaetsart"
+            }
+          ]
+        },
+        "erzeugungsart": {
+          "description": "Art der Erzeugung der Energie. Details Erzeugungsart\nBeispiel: CAV+ZF5'\nErzeugungsart:\n    ZF5: Solar\n    ZF6: Wind\n    ZG0: Gas\n    ZG1: Wasser\n    ZG5: Sonstige Erzeugungsart",
+          "x-nullable": true,
+          "oneOf": [
+            {
+              "$ref": "#/definitions/Erzeugungsart"
+            }
+          ]
+        },
+        "speicherart": {
+          "description": "Art der speicher. Details Speicherart\nBeispiel: CAV+ZF7'\nSpeicherart:\n    ZF7: Wasserstoffspeicher\n    ZF8: Pumpspeicher\n    ZF9: Batteriespeicher\n    ZG6: Sonstige Speicherart",
+          "x-nullable": true,
+          "oneOf": [
+            {
+              "$ref": "#/definitions/Speicherart"
+            }
+          ]
+        },
+        "lokationsbuendelObjektcode": {
+          "type": "string",
+          "description": "Lokationsbuendel Code, der die Funktion dieses BOs an der Lokationsbuendelstruktur beschreibt.",
+          "x-nullable": true
+        }
+      }
+    }
+  ]
+}

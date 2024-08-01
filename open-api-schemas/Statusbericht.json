@@ -1,0 +1,306 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "title": "Statusbericht",
+  "definitions": {
+    "BerichtStatus": {
+      "type": "integer",
+      "description": "Status des Statusbericht",
+      "x-enumNames": ["ERFOLGREICH", "FEHLER"],
+      "enum": [0, 1]
+    },
+    "Fehler": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/COM"
+        },
+        {
+          "type": "object",
+          "description": "Die Komponente wird dazu verwendet Fehler innerhalb eines Statusberichts abzubilden\n            ",
+          "additionalProperties": {},
+          "properties": {
+            "typ": {
+              "description": "Gibt den Typ des Fehlers an.",
+              "oneOf": [
+                {
+                  "$ref": "#/definitions/FehlerTyp"
+                }
+              ]
+            },
+            "fehlerDetails": {
+              "type": "array",
+              "description": "Fehlerdetails\n            ",
+              "x-nullable": true,
+              "items": {
+                "$ref": "#/definitions/FehlerDetail"
+              }
+            }
+          }
+        }
+      ]
+    },
+    "FehlerTyp": {
+      "type": "integer",
+      "description": "Typen von Fehlern",
+      "x-enumNames": ["SYNTAX", "VERARBEITUNG"],
+      "enum": [0, 1]
+    },
+    "FehlerDetail": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/COM"
+        },
+        {
+          "type": "object",
+          "description": "Die Komponente wird dazu verwendet Fehler innerhalb eines Statusberichtes mit mehr Details zu versorgen\n            ",
+          "additionalProperties": {},
+          "properties": {
+            "code": {
+              "description": "Gibt den Code des Fehlers an.",
+              "oneOf": [
+                {
+                  "$ref": "#/definitions/FehlerCode"
+                }
+              ]
+            },
+            "beschreibung": {
+              "type": "string",
+              "description": "Eine Beschreibung des Fehlers.",
+              "x-nullable": true
+            },
+            "ursache": {
+              "description": "Herkunft / Ursache des Fehlers\n            ",
+              "x-nullable": true,
+              "oneOf": [
+                {
+                  "$ref": "#/definitions/FehlerUrsache"
+                }
+              ]
+            }
+          }
+        }
+      ]
+    },
+    "FehlerCode": {
+      "type": "integer",
+      "description": "verschiedene Fehler-Codes, vor allem für Statusberichte",
+      "x-enumNames": [
+        "ID_UNBEKANNT",
+        "ABSENDER_NICHT_ZUGEORDNET",
+        "EMPFAENGER_NICHT_ZUGEORDNET",
+        "GERAET_UNBEKANNT",
+        "OBIS_UNBEKANNT",
+        "REFERENZIERUNG_FEHLERHAFT",
+        "TUPEL_UNBEKANNT",
+        "ABSENDER_TUPEL_NICHT_ZUGEORDNET",
+        "EMPFAENGER_TUPEL_NICHT_ZUGEORDNET",
+        "VORKOMMA_ZU_VIELE_STELLEN",
+        "ZEITREIHE_UNVOLLSTAENDIG",
+        "REFERENZIERTES_TUPEL_UNBEKANNT",
+        "MARKTLOKATION_UNBEKANNT",
+        "MESSLOKATION_UNBEKANNT",
+        "MELDEPUNKT_NICHT_MEHR_IM_NETZ",
+        "ERFORDERLICHE_ANGABE_FEHLT",
+        "GESCHAEFTSVORFALL_ZURUECKGEWIESEN",
+        "ZEITINTERVALL_NEGATIV",
+        "FORMAT_NICHT_EINGEHALTEN",
+        "GESCHAEFTSVORFALL_ABSENDER",
+        "KONFIGURATIONSID_UNBEKANNT",
+        "SEGMENTWIEDERHOLUNG_UEBERSCHRITTEN",
+        "ANZAHLCODES_UEBERSCHRITTEN",
+        "ZEITANGABE_UNPLAUSIBEL",
+        "SYNTAXVERSION_NICHT_UNTERSTUETZT",
+        "FALSCHER_EMPFAENGER",
+        "WERT_UNGUELTIG",
+        "WERT_FEHLT",
+        "WERT_UEBERFLUESSIG",
+        "BEGRENZER_UNPLAUSIBEL",
+        "ZEICHEN_UNPLAUSIBEL",
+        "ABSENDER_UNBEKANNT",
+        "TESTKENNZEICHEN_UNPLAUSIBEL",
+        "DUPLIKAT",
+        "KONTROLLZAEHLER_UNPLAUSIBEL",
+        "WERT_ZU_LANG",
+        "WIEDERHOLUNG_UNPLAUSIBEL"
+      ],
+      "enum": [
+        0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19,
+        20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36
+      ]
+    },
+    "FehlerUrsache": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/COM"
+        },
+        {
+          "type": "object",
+          "description": "Die Komponente wird dazu verwendet die Ursache bzw. Herkunft von Fehlern genauer zu spezifizieren\n            ",
+          "additionalProperties": {},
+          "properties": {
+            "dokument": {
+              "type": "string",
+              "description": "Das Dokument (im EDIFACT das UNB-Segment).",
+              "x-nullable": true
+            },
+            "nachricht": {
+              "type": "string",
+              "description": "Die Nachricht (im EDIFACT das UNH-Segment).",
+              "x-nullable": true
+            },
+            "transaktion": {
+              "type": "string",
+              "description": "Die Transaktion (im EDIFACT das BGM/IDE-Segment).",
+              "x-nullable": true
+            },
+            "gruppe": {
+              "type": "string",
+              "description": "Die Gruppe (im EDIFACT Segment-Gruppe).",
+              "x-nullable": true
+            },
+            "segment": {
+              "type": "string",
+              "description": "Das Segment (im EDIFACT Segment).",
+              "x-nullable": true
+            },
+            "beschreibung": {
+              "type": "string",
+              "description": "Zusätzliche Fehlerbeschreibung.",
+              "x-nullable": true
+            }
+          }
+        }
+      ]
+    },
+    "COM": {
+      "type": "object",
+      "description": "The COM class is the abstract class from which all BO4E.COM classes are derived.\n            ",
+      "x-abstract": true,
+      "additionalProperties": {},
+      "properties": {
+        "guidSerialized": {
+          "type": "string"
+        },
+        "timestamp": {
+          "type": "string",
+          "description": "Store the latest timestamp (update from the database)\n            ",
+          "format": "date-time",
+          "x-nullable": true
+        },
+        "guid": {
+          "type": "string",
+          "description": "allows adding a GUID to COM objects for tracking across systems\n            ",
+          "format": "guid",
+          "x-nullable": true
+        }
+      }
+    },
+    "BusinessObject": {
+      "type": "object",
+      "description": "General abstract class for Business Objects for Energy (BO4E)\n            ",
+      "x-abstract": true,
+      "additionalProperties": {},
+      "properties": {
+        "boTyp": {
+          "type": "string",
+          "description": "obligatory type of the business object in UPPER CASE\n            ",
+          "x-nullable": true,
+          "x-example": "'MESSLOKATION',\n'MARKTLOKATION'\n            "
+        },
+        "versionStruktur": {
+          "type": "string",
+          "description": "obligatory version of the BO4E definition. Currently hard coded to 1\n            ",
+          "x-nullable": true,
+          "x-example": 1
+        },
+        "guidSerialized": {
+          "type": "string",
+          "description": "protobuf serilization requires the Guid as string.\n            "
+        },
+        "timestamp": {
+          "type": "string",
+          "description": "Store the latest database update, is Datetime, because postgres doesn't handle datetimeoffset in a generated column\ngracefully\n            ",
+          "format": "date-time",
+          "x-nullable": true
+        },
+        "externeReferenzen": {
+          "type": "array",
+          "description": "Hier können IDs anderer Systeme hinterlegt werden (z.B. eine SAP-GP-Nummer) (Details siehe\nExterneReferenz)\n            ",
+          "x-nullable": true,
+          "items": {
+            "$ref": "#/definitions/ExterneReferenz"
+          }
+        },
+        "guid": {
+          "type": "string",
+          "description": "allows adding a GUID to Business Objects for tracking across systems\n            ",
+          "format": "guid",
+          "x-nullable": true
+        }
+      }
+    },
+    "ExterneReferenz": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/COM"
+        },
+        {
+          "type": "object",
+          "description": "Viele Datenobjekte weisen in unterschiedlichen Systemen eine eindeutige ID (Kundennummer, GP-Nummer etc.) auf.\nBeim Austausch von Datenobjekten zwischen verschiedenen Systemen ist es daher hilfreich, sich die eindeutigen IDs\nder anzubindenden Systeme zu merken.\nDiese Komponente ermöglicht es, sich die SAP GP-Nummer zu merken, um diese bei SAP-Aufrufen als Parameter mitgeben\nzu können.\n            ",
+          "additionalProperties": {},
+          "properties": {
+            "exRefName": {
+              "type": "string",
+              "description": "Bezeichnung der externen Referenz (z.B. \"hochfrequenz integration services\")\n            ",
+              "x-nullable": true
+            },
+            "exRefWert": {
+              "type": "string",
+              "description": "Wert der externen Referenz (z.B. \"123456\"; \"4711\")\n            ",
+              "x-nullable": true
+            }
+          }
+        }
+      ]
+    }
+  },
+  "allOf": [
+    {
+      "$ref": "#/definitions/BusinessObject"
+    },
+    {
+      "type": "object",
+      "description": "Mit diesem BO können Statusberichte (vor allem CONTRL/APERAK-Nachrichten) ausgetauscht werden\n            ",
+      "additionalProperties": {},
+      "properties": {
+        "status": {
+          "description": "Status des Berichtes (Fehlerhaft, Erfolgreich)\n            ",
+          "oneOf": [
+            {
+              "$ref": "#/definitions/BerichtStatus"
+            }
+          ]
+        },
+        "pruefgegenstand": {
+          "type": "string",
+          "description": "Das geprüfte Dokument, z.B. die Referenz auf die EDIFACT-Nachricht die geprüft / beanstandet wurde\n            ",
+          "x-nullable": true
+        },
+        "datumPruefung": {
+          "type": "string",
+          "description": "Pruefdatum (wann wurde der Pruefgegenstand geprüft)\n            ",
+          "format": "date-time",
+          "x-example": "2017-12-24\n            "
+        },
+        "fehler": {
+          "description": "Liste der Fehler\n            ",
+          "x-nullable": true,
+          "oneOf": [
+            {
+              "$ref": "#/definitions/Fehler"
+            }
+          ]
+        }
+      }
+    }
+  ]
+}

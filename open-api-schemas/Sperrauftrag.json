@@ -1,0 +1,732 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "title": "Sperrauftrag",
+  "definitions": {
+    "Sperrauftragsart": {
+      "type": "integer",
+      "description": "Die Sperrauftragsart beschreibt die Art eines Sperrauftrags.",
+      "x-enumNames": ["SPERREN", "ENTSPERREN"],
+      "enum": [0, 1]
+    },
+    "Auftragsstatus": {
+      "type": "integer",
+      "description": "Auftragststatus (Planungsstatus in IFTSTA STS 4405 (21029) and Sperrauftragsstatus in IFTSTA STS 4405 (21039/21040))\nDer Sperrauftragsstatus beschreibt den Status eines Sperrauftrags",
+      "x-enumNames": [
+        "GESCHEITERT",
+        "ERFOLGREICH",
+        "GEPLANT",
+        "ZUGESTIMMT",
+        "WIDERSPROCHEN",
+        "ABGELEHNT"
+      ],
+      "enum": [0, 1, 2, 3, 4, 5]
+    },
+    "Sperrauftragsablehngrund": {
+      "type": "integer",
+      "description": "Gründe aus denen ein Sperrauftrag abgelehnt werden kann.",
+      "x-enumNames": [
+        "DUPLIKAT",
+        "FALSCHER_MSB",
+        "FALSCHE_SPANNUNGSEBENE",
+        "WEITERE_MALO_BETROFFEN",
+        "ANDERER_ABLEHNGRUND",
+        "FRISTVERLETZUNG_TERMINGEBUNDEN",
+        "FRISTVERLETZUNG_NICHT_TERMINGEBUNDEN",
+        "ANDERER_FEHLER",
+        "LIEGT_BEREITS_VOR",
+        "ANDERER_ZUKUENFTIGER_LIEFERANT",
+        "BESTAETIGTER_LIEFERBEGINN"
+      ],
+      "enum": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+    },
+    "Sperrauftragsverhinderungsgrund": {
+      "type": "integer",
+      "description": "Gründe aus denen ein Sperrauftrag nicht durchgeführt wird/wurde.",
+      "x-enumNames": [
+        "RECHTLICHER_GRUND_FEHLT",
+        "AKTIVE_ZUTRITTSVERWEIGERUNG",
+        "PASSIVE_ZUTRITTSVERWEIGERUNG",
+        "ANDERER_VERHINDERUNGSGRUND",
+        "TATSAECHLICHER_VERHINDERUNGSGRUND",
+        "TECHNISCHER_VERHINDERUNGSGRUND",
+        "ANSCHLUSSNUTZER_WURDE_NICHT_ANGETROFFEN"
+      ],
+      "enum": [0, 1, 2, 3, 4, 5, 6]
+    },
+    "Auftrag": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/BusinessObject"
+        },
+        {
+          "type": "object",
+          "description": "Ein Auftrag beschreibt einen Vorgang, der von einem anderen Marktpartner auszuführen ist. ",
+          "x-abstract": true,
+          "additionalProperties": {},
+          "properties": {
+            "ausfuehrungsdatum": {
+              "type": "string",
+              "description": "Das Ausführungsdatum beschreibt zu welchem Zeitpunkt ein Auftrag ausgeführt werden soll.",
+              "format": "date-time",
+              "x-nullable": true
+            },
+            "fertigstellungsdatum": {
+              "type": "string",
+              "description": "Das Fertigstellungsdatum beschreibt zu welchem Zeitpunkt ein Auftrag ausgeführt wurde/wird.",
+              "format": "date-time",
+              "x-nullable": true
+            },
+            "sparte": {
+              "description": "Die Sparte in der der Auftrag relevant ist",
+              "x-nullable": true,
+              "oneOf": [
+                {
+                  "$ref": "#/definitions/Sparte"
+                }
+              ]
+            },
+            "lieferanschrift": {
+              "description": "Die Adresse, die sich in Belieferung befindet.",
+              "x-nullable": true,
+              "oneOf": [
+                {
+                  "$ref": "#/definitions/Adresse"
+                }
+              ]
+            },
+            "marktlokationsId": {
+              "type": "string",
+              "description": "Die ID der Marktlokation der der zu sperrende Zähler zugeordnet ist."
+            },
+            "bemerkungen": {
+              "type": "array",
+              "description": "Ein zusätzlicher Freitext",
+              "x-nullable": true,
+              "items": {
+                "type": "string"
+              }
+            },
+            "mindestpreis": {
+              "description": "Der Mindestpreis eines Auftrags (z.B. für eine Sperrung)",
+              "x-nullable": true,
+              "oneOf": [
+                {
+                  "$ref": "#/definitions/Preis"
+                }
+              ]
+            },
+            "hoechstpreis": {
+              "description": "Der Höchstpreis eines Auftrags (z.B. für eine Sperrung)",
+              "x-nullable": true,
+              "oneOf": [
+                {
+                  "$ref": "#/definitions/Preis"
+                }
+              ]
+            }
+          }
+        }
+      ]
+    },
+    "Sparte": {
+      "type": "integer",
+      "description": "Unterscheidungsmöglichkeiten für die Sparte.",
+      "x-enumNames": [
+        "STROM",
+        "GAS",
+        "FERNWAERME",
+        "NAHWAERME",
+        "WASSER",
+        "ABWASSER"
+      ],
+      "enum": [0, 1, 2, 3, 4, 5]
+    },
+    "Adresse": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/COM"
+        },
+        {
+          "type": "object",
+          "description": "Enthält eine Adresse, die für die meisten Zwecke verwendbar ist.",
+          "additionalProperties": {},
+          "properties": {
+            "postleitzahl": {
+              "type": "string",
+              "description": "Die Postleitzahl. Beispiel: 41836"
+            },
+            "ort": {
+              "type": "string",
+              "description": "Bezeichnung der Stadt. Beispiel Hückelhoven"
+            },
+            "strasse": {
+              "type": "string",
+              "description": "Bezeichnung der Straße. Beispiel: Weserstraße",
+              "x-nullable": true
+            },
+            "hausnummer": {
+              "type": "string",
+              "description": "Hausnummer inkl. Zusatz. Beispiel. 3, 4a etc.",
+              "x-nullable": true
+            },
+            "postfach": {
+              "type": "string",
+              "description": "Im Falle einer Postfachadresse das Postfach. Damit werden Straße und\nHausnummer nicht berücksichtigt.Beispiel: Postfach 4711\n            ",
+              "x-nullable": true
+            },
+            "adresszusatz": {
+              "type": "string",
+              "description": "Zusatzhinweis zum Auffinden der Adresse, z.B. \"3. Stock linke Wohnung\"",
+              "x-nullable": true
+            },
+            "coErgaenzung": {
+              "type": "string",
+              "description": "Im Falle einer c/o-Adresse steht in diesem Attribut die Anrede. Z.B. c/o\nVeronica Hauptmieterin.In diesem Fall enthält die folgende Adresse die Daten\nder in c/o adressierten Person oder Firma.\n            ",
+              "x-nullable": true
+            },
+            "landescode": {
+              "description": "Offizieller ISO-Landescode. Z.B. NL, Details Landescode",
+              "x-nullable": true,
+              "oneOf": [
+                {
+                  "$ref": "#/definitions/Landescode"
+                }
+              ]
+            },
+            "ortsteil": {
+              "type": "string",
+              "description": "Ortsteil für EDIFACT mapping\n            ",
+              "x-nullable": true
+            }
+          }
+        }
+      ]
+    },
+    "Landescode": {
+      "type": "integer",
+      "description": "Der ISO-Landescode.",
+      "x-enumNames": [
+        "AC",
+        "AD",
+        "AE",
+        "AF",
+        "AG",
+        "AI",
+        "AL",
+        "AM",
+        "AN",
+        "AO",
+        "AQ",
+        "AR",
+        "AS",
+        "AT",
+        "AU",
+        "AW",
+        "AX",
+        "AZ",
+        "BA",
+        "BB",
+        "BD",
+        "BE",
+        "BF",
+        "BG",
+        "BH",
+        "BI",
+        "BJ",
+        "BL",
+        "BM",
+        "BN",
+        "BO",
+        "BQ",
+        "BR",
+        "BS",
+        "BT",
+        "BU",
+        "BV",
+        "BW",
+        "BY",
+        "BZ",
+        "CA",
+        "CC",
+        "CD",
+        "CF",
+        "CG",
+        "CH",
+        "CI",
+        "CK",
+        "CL",
+        "CM",
+        "CN",
+        "CO",
+        "CP",
+        "CR",
+        "CS",
+        "CU",
+        "CV",
+        "CW",
+        "CX",
+        "CY",
+        "CZ",
+        "DE",
+        "DG",
+        "DJ",
+        "DK",
+        "DM",
+        "DO",
+        "DZ",
+        "EA",
+        "EC",
+        "EE",
+        "EG",
+        "EH",
+        "ER",
+        "ES",
+        "ET",
+        "EU",
+        "FI",
+        "FJ",
+        "FK",
+        "FM",
+        "FO",
+        "FR",
+        "FX",
+        "GA",
+        "GB",
+        "GD",
+        "GE",
+        "GF",
+        "GG",
+        "GH",
+        "GI",
+        "GL",
+        "GM",
+        "GN",
+        "GP",
+        "GQ",
+        "GR",
+        "GS",
+        "GT",
+        "GU",
+        "GW",
+        "GY",
+        "HK",
+        "HM",
+        "HN",
+        "HR",
+        "HT",
+        "HU",
+        "IC",
+        "ID",
+        "IE",
+        "IL",
+        "IM",
+        "IN",
+        "IO",
+        "IQ",
+        "IR",
+        "IS",
+        "IT",
+        "JE",
+        "JM",
+        "JO",
+        "JP",
+        "KE",
+        "KG",
+        "KH",
+        "KI",
+        "KM",
+        "KN",
+        "KP",
+        "KR",
+        "KW",
+        "KY",
+        "KZ",
+        "LA",
+        "LB",
+        "LC",
+        "LI",
+        "LK",
+        "LR",
+        "LS",
+        "LT",
+        "LU",
+        "LV",
+        "LY",
+        "MA",
+        "MC",
+        "MD",
+        "ME",
+        "MF",
+        "MG",
+        "MH",
+        "MK",
+        "ML",
+        "MM",
+        "MN",
+        "MO",
+        "MP",
+        "MQ",
+        "MR",
+        "MS",
+        "MT",
+        "MU",
+        "MV",
+        "MW",
+        "MX",
+        "MY",
+        "MZ",
+        "NA",
+        "NC",
+        "NE",
+        "NF",
+        "NG",
+        "NI",
+        "NL",
+        "NO",
+        "NP",
+        "NR",
+        "NT",
+        "NU",
+        "NZ",
+        "OM",
+        "PA",
+        "PE",
+        "PF",
+        "PG",
+        "PH",
+        "PK",
+        "PL",
+        "PM",
+        "PN",
+        "PR",
+        "PS",
+        "PT",
+        "PW",
+        "PY",
+        "QA",
+        "RE",
+        "RO",
+        "RS",
+        "RU",
+        "RW",
+        "SA",
+        "SB",
+        "SC",
+        "SD",
+        "SE",
+        "SF",
+        "SG",
+        "SH",
+        "SI",
+        "SJ",
+        "SK",
+        "SL",
+        "SM",
+        "SN",
+        "SO",
+        "SR",
+        "SS",
+        "ST",
+        "SU",
+        "SV",
+        "SX",
+        "SY",
+        "SZ",
+        "TA",
+        "TC",
+        "TD",
+        "TF",
+        "TG",
+        "TJ",
+        "TK",
+        "TL",
+        "TM",
+        "TN",
+        "TO",
+        "TP",
+        "TR",
+        "TT",
+        "TV",
+        "TW",
+        "TZ",
+        "UA",
+        "UG",
+        "UK",
+        "UM",
+        "US",
+        "UY",
+        "UZ",
+        "VA",
+        "VC",
+        "VE",
+        "VG",
+        "VI",
+        "VN",
+        "VU",
+        "WF",
+        "WS",
+        "XK",
+        "YE",
+        "YT",
+        "YU",
+        "ZA",
+        "ZM",
+        "ZR",
+        "ZW"
+      ],
+      "enum": [
+        0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19,
+        20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37,
+        38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55,
+        56, 57, 58, 59, 60, 61, 62, 63, 64, 65, 66, 67, 68, 69, 70, 71, 72, 73,
+        74, 75, 76, 77, 78, 79, 80, 81, 82, 83, 84, 85, 86, 87, 88, 89, 90, 91,
+        92, 93, 94, 95, 96, 97, 98, 99, 100, 101, 102, 103, 104, 105, 106, 107,
+        108, 109, 110, 111, 112, 113, 114, 115, 116, 117, 118, 119, 120, 121,
+        122, 123, 124, 125, 126, 127, 128, 129, 130, 131, 132, 133, 134, 135,
+        136, 137, 138, 139, 140, 141, 142, 143, 144, 145, 146, 147, 148, 149,
+        150, 151, 152, 153, 154, 155, 156, 157, 158, 159, 160, 161, 162, 163,
+        164, 165, 166, 167, 168, 169, 170, 171, 172, 173, 174, 175, 176, 177,
+        178, 179, 180, 181, 182, 183, 184, 185, 186, 187, 188, 189, 190, 191,
+        192, 193, 194, 195, 196, 197, 198, 199, 200, 201, 202, 203, 204, 205,
+        206, 207, 208, 209, 210, 211, 212, 213, 214, 215, 216, 217, 218, 219,
+        220, 221, 222, 223, 224, 225, 226, 227, 228, 229, 230, 231, 232, 233,
+        234, 235, 236, 237, 238, 239, 240, 241, 242, 243, 244, 245, 246, 247,
+        248, 249, 250, 251, 252, 253, 254, 255, 256, 257, 258, 259, 260, 261,
+        262, 263, 264, 265, 266
+      ]
+    },
+    "COM": {
+      "type": "object",
+      "description": "The COM class is the abstract class from which all BO4E.COM classes are derived.\n            ",
+      "x-abstract": true,
+      "additionalProperties": {},
+      "properties": {
+        "guidSerialized": {
+          "type": "string"
+        },
+        "timestamp": {
+          "type": "string",
+          "description": "Store the latest timestamp (update from the database)\n            ",
+          "format": "date-time",
+          "x-nullable": true
+        },
+        "guid": {
+          "type": "string",
+          "description": "allows adding a GUID to COM objects for tracking across systems\n            ",
+          "format": "guid",
+          "x-nullable": true
+        }
+      }
+    },
+    "Preis": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/COM"
+        },
+        {
+          "type": "object",
+          "description": "Preis",
+          "additionalProperties": {},
+          "properties": {
+            "wert": {
+              "type": "number",
+              "description": "Gibt die nomiale Höhe des Preises an.",
+              "format": "decimal",
+              "x-nullable": true
+            },
+            "einheit": {
+              "description": "Währungseinheit für den Preis, z.B. Euro oder Ct. Details Waehrungseinheit",
+              "x-nullable": true,
+              "oneOf": [
+                {
+                  "$ref": "#/definitions/Waehrungseinheit"
+                }
+              ]
+            },
+            "bezugswert": {
+              "description": "Angabe, für welche Bezugsgröße der Preis gilt. Z.B. kWh. ",
+              "x-nullable": true,
+              "oneOf": [
+                {
+                  "$ref": "#/definitions/Mengeneinheit"
+                }
+              ]
+            },
+            "status": {
+              "description": "Gibt den Status des veröffentlichten Preises an\n            ",
+              "x-nullable": true,
+              "oneOf": [
+                {
+                  "$ref": "#/definitions/Preisstatus"
+                }
+              ]
+            }
+          }
+        }
+      ]
+    },
+    "Waehrungseinheit": {
+      "type": "integer",
+      "description": "In diesem Enum werden die Währungen und ihre Untereinheiten definiert, beispielsweise für die Verwendung in\nPreisen.\n            ",
+      "x-enumNames": ["EUR", "CT"],
+      "enum": [0, 1]
+    },
+    "Mengeneinheit": {
+      "type": "integer",
+      "description": "Einheit: Messgrößen, die per Messung oder Vorgabe ermittelt werden können.\n            ",
+      "x-enumNames": [
+        "ZERO",
+        "WH",
+        "KW",
+        "ANZAHL",
+        "KUBIKMETER",
+        "STUNDE",
+        "TAG",
+        "MONAT",
+        "VAR",
+        "VARH",
+        "KWHK",
+        "JAHR",
+        "KWH",
+        "MW",
+        "KVAR",
+        "KVARH",
+        "MWH"
+      ],
+      "enum": [
+        0, 2, 3, 7, 11, 13, 17, 19, 23, 29, 40, 228, 2000, 3000, 23000, 29000,
+        2000000
+      ]
+    },
+    "Preisstatus": {
+      "type": "integer",
+      "description": "Statusinformation für Preise",
+      "x-enumNames": ["VORLAEUFIG", "ENDGUELTIG"],
+      "enum": [0, 1]
+    },
+    "BusinessObject": {
+      "type": "object",
+      "description": "General abstract class for Business Objects for Energy (BO4E)\n            ",
+      "x-abstract": true,
+      "additionalProperties": {},
+      "properties": {
+        "boTyp": {
+          "type": "string",
+          "description": "obligatory type of the business object in UPPER CASE\n            ",
+          "x-nullable": true,
+          "x-example": "'MESSLOKATION',\n'MARKTLOKATION'\n            "
+        },
+        "versionStruktur": {
+          "type": "string",
+          "description": "obligatory version of the BO4E definition. Currently hard coded to 1\n            ",
+          "x-nullable": true,
+          "x-example": 1
+        },
+        "guidSerialized": {
+          "type": "string",
+          "description": "protobuf serilization requires the Guid as string.\n            "
+        },
+        "timestamp": {
+          "type": "string",
+          "description": "Store the latest database update, is Datetime, because postgres doesn't handle datetimeoffset in a generated column\ngracefully\n            ",
+          "format": "date-time",
+          "x-nullable": true
+        },
+        "externeReferenzen": {
+          "type": "array",
+          "description": "Hier können IDs anderer Systeme hinterlegt werden (z.B. eine SAP-GP-Nummer) (Details siehe\nExterneReferenz)\n            ",
+          "x-nullable": true,
+          "items": {
+            "$ref": "#/definitions/ExterneReferenz"
+          }
+        },
+        "guid": {
+          "type": "string",
+          "description": "allows adding a GUID to Business Objects for tracking across systems\n            ",
+          "format": "guid",
+          "x-nullable": true
+        }
+      }
+    },
+    "ExterneReferenz": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/COM"
+        },
+        {
+          "type": "object",
+          "description": "Viele Datenobjekte weisen in unterschiedlichen Systemen eine eindeutige ID (Kundennummer, GP-Nummer etc.) auf.\nBeim Austausch von Datenobjekten zwischen verschiedenen Systemen ist es daher hilfreich, sich die eindeutigen IDs\nder anzubindenden Systeme zu merken.\nDiese Komponente ermöglicht es, sich die SAP GP-Nummer zu merken, um diese bei SAP-Aufrufen als Parameter mitgeben\nzu können.\n            ",
+          "additionalProperties": {},
+          "properties": {
+            "exRefName": {
+              "type": "string",
+              "description": "Bezeichnung der externen Referenz (z.B. \"hochfrequenz integration services\")\n            ",
+              "x-nullable": true
+            },
+            "exRefWert": {
+              "type": "string",
+              "description": "Wert der externen Referenz (z.B. \"123456\"; \"4711\")\n            ",
+              "x-nullable": true
+            }
+          }
+        }
+      ]
+    }
+  },
+  "allOf": [
+    {
+      "$ref": "#/definitions/Auftrag"
+    },
+    {
+      "type": "object",
+      "description": "Ein Sperrauftrag ist das BO, das die Aufforderung des Lieferanten an den Netzbetreiber bzw. Netzstellenbetreiber beschreibt einen Zähler zu sperren.",
+      "additionalProperties": {},
+      "properties": {
+        "sperrauftragsart": {
+          "description": "Handelt es sich um einen Auftrag zum SPERREN oder ENTSPERREN?",
+          "oneOf": [
+            {
+              "$ref": "#/definitions/Sperrauftragsart"
+            }
+          ]
+        },
+        "sperrauftragsstatus": {
+          "description": "Auftragsstatus",
+          "x-nullable": true,
+          "oneOf": [
+            {
+              "$ref": "#/definitions/Auftragsstatus"
+            }
+          ]
+        },
+        "sperrauftragsablehngrund": {
+          "description": "Falls Sperrauftragsstatus = ABGELEHNT",
+          "x-nullable": true,
+          "oneOf": [
+            {
+              "$ref": "#/definitions/Sperrauftragsablehngrund"
+            }
+          ]
+        },
+        "sperrauftragsverhinderungsgrund": {
+          "description": "Falls Sperrauftragsstatus = GESCHEITERT",
+          "x-nullable": true,
+          "oneOf": [
+            {
+              "$ref": "#/definitions/Sperrauftragsverhinderungsgrund"
+            }
+          ]
+        },
+        "zaehlernummer": {
+          "type": "string",
+          "description": "Die Nummer des zu sperrenden Zählers",
+          "x-nullable": true
+        },
+        "istVomGerichtsvollzieherAngeordnet": {
+          "type": "boolean",
+          "description": "True, falls die Sperrung vom Gerichtsvollzieher angeordnet ist."
+        }
+      }
+    }
+  ]
+}

@@ -1,0 +1,329 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "title": "Zaehlzeitdefinition",
+  "definitions": {
+    "DefinitionenNotwendigkeit": {
+      "type": "integer",
+      "description": "Beschreibt, ob Definitionen notwendig sind",
+      "x-enumNames": [
+        "ZAEHLZEITDEFINITIONEN_WERDEN_VERWENDET",
+        "ZAEHLZEITDEFINITIONEN_WERDEN_NICHT_VERWENDET",
+        "DEFINITIONEN_WERDEN_VERWENDET",
+        "DEFINITIONEN_WERDEN_NICHT_VERWENDET"
+      ],
+      "enum": [0, 1, 2, 3]
+    },
+    "Zaehlzeit": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/COM"
+        },
+        {
+          "type": "object",
+          "description": "Zaehlzeit\n            ",
+          "additionalProperties": {},
+          "properties": {
+            "code": {
+              "type": "string",
+              "description": "Zählzeitdefinition\n            ",
+              "x-nullable": true
+            },
+            "haeufigkeit": {
+              "description": "Häufigkeit der Übermittlung\n            ",
+              "x-nullable": true,
+              "oneOf": [
+                {
+                  "$ref": "#/definitions/HaeufigkeitZaehlzeit"
+                }
+              ]
+            },
+            "uebermittelbarkeit": {
+              "description": "Art der Übermittlung\n            ",
+              "x-nullable": true,
+              "oneOf": [
+                {
+                  "$ref": "#/definitions/UebermittelbarkeitZaehlzeit"
+                }
+              ]
+            },
+            "ermittlungLeistungsmaximum": {
+              "description": "Ermittlung Leistungsmaximum\n            ",
+              "x-nullable": true,
+              "oneOf": [
+                {
+                  "$ref": "#/definitions/ErmittlungLeistungsmaximum"
+                }
+              ]
+            },
+            "istBestellbar": {
+              "type": "boolean",
+              "description": "Ist die Zählzeit bestellbar?\n            ",
+              "x-nullable": true
+            },
+            "typ": {
+              "description": "ZählzeitdefinitionTyp\n            ",
+              "x-nullable": true,
+              "oneOf": [
+                {
+                  "$ref": "#/definitions/ZaehlzeitdefinitionTyp"
+                }
+              ]
+            },
+            "beschreibungTyp": {
+              "type": "string",
+              "description": "Beschreibung des ZählzeitdefinitionTyp\n            ",
+              "x-nullable": true
+            }
+          }
+        }
+      ]
+    },
+    "HaeufigkeitZaehlzeit": {
+      "type": "integer",
+      "description": "Häufigkeit der Übermittlung der Zählzeit",
+      "x-enumNames": ["EINMALIG", "JAEHRLICH"],
+      "enum": [0, 1]
+    },
+    "UebermittelbarkeitZaehlzeit": {
+      "type": "integer",
+      "description": "Übermittelbarkeit der ausgerollten Zählzeit",
+      "x-enumNames": ["ELEKTRONISCH", "NICHT_ELEKTRONISCH"],
+      "enum": [0, 1]
+    },
+    "ErmittlungLeistungsmaximum": {
+      "type": "integer",
+      "description": "Ermittlung des Leistungsmaximums bei atypischer Netznutzung",
+      "x-enumNames": [
+        "VERWENDUNG_HOCHLASTFENSTER",
+        "KEINE_VERWENDUNG_HOCHLASTFENSTER"
+      ],
+      "enum": [0, 1]
+    },
+    "ZaehlzeitdefinitionTyp": {
+      "type": "integer",
+      "description": "Zählzeitdefinitionstyp",
+      "x-enumNames": [
+        "WAERMEPUMPE",
+        "NACHTSPEICHERHEIZUNG",
+        "SCHWACHLASTZEITFENSTER",
+        "SONSTIGE",
+        "HOCHLASTZEITFENSTER"
+      ],
+      "enum": [0, 1, 2, 3, 4]
+    },
+    "COM": {
+      "type": "object",
+      "description": "The COM class is the abstract class from which all BO4E.COM classes are derived.\n            ",
+      "x-abstract": true,
+      "additionalProperties": {},
+      "properties": {
+        "guidSerialized": {
+          "type": "string"
+        },
+        "timestamp": {
+          "type": "string",
+          "description": "Store the latest timestamp (update from the database)\n            ",
+          "format": "date-time",
+          "x-nullable": true
+        },
+        "guid": {
+          "type": "string",
+          "description": "allows adding a GUID to COM objects for tracking across systems\n            ",
+          "format": "guid",
+          "x-nullable": true
+        }
+      }
+    },
+    "Zaehlzeitregister": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/COM"
+        },
+        {
+          "type": "object",
+          "description": "Ein Zählzeitregister beschreibt eine erweiterte Definition der Zählzeit in Bezug auf ein Register. Dabei werden alle Codes dazu vom Netzbetreiber vergeben.\n            ",
+          "additionalProperties": {},
+          "properties": {
+            "zaehlzeitDefinition": {
+              "type": "string",
+              "description": "Zählzeitdefinition\n            ",
+              "x-nullable": true
+            },
+            "register": {
+              "type": "string",
+              "description": "Zählzeitregister\n            ",
+              "x-nullable": true
+            },
+            "schwachlastfaehig": {
+              "description": "Schwachlastfähigkeit des Registers\n            ",
+              "x-nullable": true,
+              "oneOf": [
+                {
+                  "$ref": "#/definitions/Schwachlastfaehig"
+                }
+              ]
+            }
+          }
+        }
+      ]
+    },
+    "Schwachlastfaehig": {
+      "type": "integer",
+      "description": "Schwachlastfähigkeit Marktlokation",
+      "x-enumNames": ["NICHT_SCHWACHLASTFAEHIG", "SCHWACHLASTFAEHIG"],
+      "enum": [0, 1]
+    },
+    "AusgerollteZaehlzeit": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/COM"
+        },
+        {
+          "type": "object",
+          "description": "Ausgerollte Zaehlzeit\n            ",
+          "additionalProperties": {},
+          "properties": {
+            "aenderungszeitpunkt": {
+              "type": "string",
+              "description": "Angabe eines Zeitpunktes, zu dem der Wechsel auf ein neues aktives Zählzeitregister erfolgt.",
+              "format": "date-time"
+            },
+            "register": {
+              "type": "string",
+              "description": "Zählzeitregister\n            ",
+              "x-nullable": true
+            }
+          }
+        }
+      ]
+    },
+    "BusinessObject": {
+      "type": "object",
+      "description": "General abstract class for Business Objects for Energy (BO4E)\n            ",
+      "x-abstract": true,
+      "additionalProperties": {},
+      "properties": {
+        "boTyp": {
+          "type": "string",
+          "description": "obligatory type of the business object in UPPER CASE\n            ",
+          "x-nullable": true,
+          "x-example": "'MESSLOKATION',\n'MARKTLOKATION'\n            "
+        },
+        "versionStruktur": {
+          "type": "string",
+          "description": "obligatory version of the BO4E definition. Currently hard coded to 1\n            ",
+          "x-nullable": true,
+          "x-example": 1
+        },
+        "guidSerialized": {
+          "type": "string",
+          "description": "protobuf serilization requires the Guid as string.\n            "
+        },
+        "timestamp": {
+          "type": "string",
+          "description": "Store the latest database update, is Datetime, because postgres doesn't handle datetimeoffset in a generated column\ngracefully\n            ",
+          "format": "date-time",
+          "x-nullable": true
+        },
+        "externeReferenzen": {
+          "type": "array",
+          "description": "Hier können IDs anderer Systeme hinterlegt werden (z.B. eine SAP-GP-Nummer) (Details siehe\nExterneReferenz)\n            ",
+          "x-nullable": true,
+          "items": {
+            "$ref": "#/definitions/ExterneReferenz"
+          }
+        },
+        "guid": {
+          "type": "string",
+          "description": "allows adding a GUID to Business Objects for tracking across systems\n            ",
+          "format": "guid",
+          "x-nullable": true
+        }
+      }
+    },
+    "ExterneReferenz": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/COM"
+        },
+        {
+          "type": "object",
+          "description": "Viele Datenobjekte weisen in unterschiedlichen Systemen eine eindeutige ID (Kundennummer, GP-Nummer etc.) auf.\nBeim Austausch von Datenobjekten zwischen verschiedenen Systemen ist es daher hilfreich, sich die eindeutigen IDs\nder anzubindenden Systeme zu merken.\nDiese Komponente ermöglicht es, sich die SAP GP-Nummer zu merken, um diese bei SAP-Aufrufen als Parameter mitgeben\nzu können.\n            ",
+          "additionalProperties": {},
+          "properties": {
+            "exRefName": {
+              "type": "string",
+              "description": "Bezeichnung der externen Referenz (z.B. \"hochfrequenz integration services\")\n            ",
+              "x-nullable": true
+            },
+            "exRefWert": {
+              "type": "string",
+              "description": "Wert der externen Referenz (z.B. \"123456\"; \"4711\")\n            ",
+              "x-nullable": true
+            }
+          }
+        }
+      ]
+    }
+  },
+  "allOf": [
+    {
+      "$ref": "#/definitions/BusinessObject"
+    },
+    {
+      "type": "object",
+      "description": "Der NB bzw. LF nutzt Zählzeitdefinitionen für die Tarifierung von Werten.\nZaehlzeitdefinitionen werden in der Marktkommunikation mit Prüfidentifikator 25001 (UTILTS) übermittelt\nEine Zählzeitdefinition umfasst dabei eine Liste von möglichen Zählzeiten,\nden dazugehörigen Registern und der tatsächlich ausgerollten Zählzeit (wenn diese elektronisch übermittelt wird)",
+      "additionalProperties": {},
+      "properties": {
+        "beginndatum": {
+          "type": "string",
+          "description": "Der inklusive Zeitpunkt ab dem die Zaehlzeitdefinitionen ausgerollt sind",
+          "format": "date-time",
+          "x-nullable": true
+        },
+        "endedatum": {
+          "type": "string",
+          "description": "Der exklusive Zeitpunkt bis zu dem die Zaehlzeitdefinitionen ausgerollt sind",
+          "format": "date-time",
+          "x-nullable": true
+        },
+        "version": {
+          "type": "string",
+          "description": "Version der Zählzeitdefinition als Datum\n            ",
+          "format": "date-time"
+        },
+        "notwendigkeit": {
+          "description": "Beschreibt ob eine Zaehlzeitdefinitionen notwendig ist",
+          "x-nullable": true,
+          "oneOf": [
+            {
+              "$ref": "#/definitions/DefinitionenNotwendigkeit"
+            }
+          ]
+        },
+        "zaehlzeiten": {
+          "type": "array",
+          "description": "Liste der Zählzeiten [1 - 99999]",
+          "x-nullable": true,
+          "items": {
+            "$ref": "#/definitions/Zaehlzeit"
+          }
+        },
+        "zaehlzeitregister": {
+          "type": "array",
+          "description": "Liste der Zählzeitregister",
+          "items": {
+            "$ref": "#/definitions/Zaehlzeitregister"
+          }
+        },
+        "ausgerollteZaehlzeiten": {
+          "type": "array",
+          "description": "Liste der ausgerollten Zählzeiten",
+          "items": {
+            "$ref": "#/definitions/AusgerollteZaehlzeit"
+          }
+        }
+      }
+    }
+  ]
+}
