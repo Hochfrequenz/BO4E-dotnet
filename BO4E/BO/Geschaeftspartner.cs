@@ -188,7 +188,7 @@ public class Geschaeftspartner : BusinessObject
     [JsonProperty(Required = Required.Default, Order = 23, PropertyName = "bankverbindung")]
     [JsonPropertyName("bankverbindung")]
     [JsonPropertyOrder(23)]
-    [ProtoMember(23)]
+    [ProtoMember(21)]
     [DataCategory(DataCategory.FINANCE)]
     [NonOfficial(NonOfficialCategory.CUSTOMER_REQUIREMENTS)]
     public Bankverbindung? Bankverbindung { get; set; }
@@ -197,7 +197,7 @@ public class Geschaeftspartner : BusinessObject
     [JsonProperty(Required = Required.Default, Order = 24, PropertyName = "steuernummer")]
     [JsonPropertyOrder(24)]
     [JsonPropertyName("steuernummer")]
-    [ProtoMember(24)]
+    [ProtoMember(22)]
     [DataCategory(DataCategory.LEGAL)]
     public string? Steuernummer { get; set; }
 
@@ -205,7 +205,7 @@ public class Geschaeftspartner : BusinessObject
     [JsonProperty(Required = Required.Default, Order = 25, PropertyName = "erreichbarkeit")]
     [JsonPropertyOrder(25)]
     [JsonPropertyName("erreichbarkeit")]
-    [ProtoMember(25)]
+    [ProtoMember(23)]
     [DataCategory(DataCategory.LEGAL)]
     public Erreichbarkeit? Erreichbarkeit { get; set; }
 }

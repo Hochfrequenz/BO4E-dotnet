@@ -524,6 +524,10 @@ message Geschaeftspartner {
    GrundlageZurVerringerungDerUmlagenNachEnfg GrundlageZurVerringerungDerUmlagenNachEnfg = 19;
    GrundDerPrivilegierungNachEnFG GrundDerPrivilegierungNachEnFG = 20;
    string Title = 1001;
+   Bankverbindung Bankverbindung = 21;
+   string Steuernummer = 22;
+   Erreichbarkeit Erreichbarkeit = 23;
+
 }
 enum Geschaeftspartnerrolle {
    option (.protobuf_net.enumopt).namespace = "BO4E.ENUM";
@@ -554,6 +558,22 @@ enum GrundlageZurVerringerungDerUmlagenNachEnfg {
 enum Gueltigkeitstyp {
    option (.protobuf_net.enumopt).namespace = "BO4E.ENUM";
    NICHT_IN = 0;
+}
+message Bankverbindung {
+    string Kontonummer = 1;
+    string Kontoinhaber = 2;
+    string Bankkennung = 3;
+    string Bankcode = 4;
+    string Bankname = 5;
+    Landescode land = 6;
+}
+message Erreichbarkeit {
+    string MontagErreichbarkeit = 1;
+    string DienstagErreichbarkeit = 2;
+    string MittwochErreichbarkeit = 3;
+    string DonnerstagErreichbarkeit = 4;
+    string FreitagErreichbarkeit = 5;
+    string Mittagspause = 6;
 }
 message Hardware {
    option (.protobuf_net.msgopt).namespace = "BO4E.COM";
