@@ -41,13 +41,13 @@ namespace BO4E.COM
         /// <summary>Erreichbarkeit am Freitag (Format: HHMMHHMM).</summary>
         [JsonProperty(PropertyName = "freitagErreichbarkeit", Required = Required.Default, Order = 5)]
         [JsonPropertyName("freitagErreichbarkeit")]
-        [ProtoMember(5)]
+        [ProtoMember(7)]
         public string? FreitagErreichbarkeit { get; set; }
 
         /// <summary>Mittagspause (Ausschluss der Erreichbarkeit, Format: HHMMHHMM).</summary>
         [JsonProperty(PropertyName = "mittagspause", Required = Required.Default, Order = 6)]
         [JsonPropertyName("mittagspause")]
-        [ProtoMember(7)]
+        [ProtoMember(8)]
         public string? Mittagspause { get; set; }
     }
 }
