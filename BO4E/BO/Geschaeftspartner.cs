@@ -194,10 +194,18 @@ public class Geschaeftspartner : BusinessObject
     public Bankverbindung? Bankverbindung { get; set; }
 
     /// <summary>Die Steuernummer-ID des Geschäftspartners. Beispiel: DE 813281825</summary>
-    [JsonProperty(Required = Required.Default, Order = 15, PropertyName = "steuernummer")]
-    [JsonPropertyOrder(15)]
+    [JsonProperty(Required = Required.Default, Order = 24, PropertyName = "steuernummer")]
+    [JsonPropertyOrder(24)]
     [JsonPropertyName("steuernummer")]
-    [ProtoMember(13)]
+    [ProtoMember(24)]
     [DataCategory(DataCategory.LEGAL)]
     public string? Steuernummer { get; set; }
+
+    /// <summary>Die Erreichbarkeit eines Unternehmens an Werktagen.</summary>
+    [JsonProperty(Required = Required.Default, Order = 25, PropertyName = "erreichbarkeit")]
+    [JsonPropertyOrder(25)]
+    [JsonPropertyName("erreichbarkeit")]
+    [ProtoMember(25)]
+    [DataCategory(DataCategory.LEGAL)]
+    public Erreichbarkeit? Erreichbarkeit { get; set; }
 }

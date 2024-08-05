@@ -1,0 +1,53 @@
+﻿using System.Text.Json.Serialization;
+
+using BO4E.meta;
+
+using Newtonsoft.Json;
+
+using ProtoBuf;
+
+namespace BO4E.COM
+{
+    /// <summary>
+    /// Die Erreichbarkeit eines Unternehmens an Werktagen.
+    /// </summary>
+    [ProtoContract]
+    public class Erreichbarkeit : COM
+    {
+        /// <summary>Erreichbarkeit am Montag (Format: HHMMHHMM).</summary>
+        [JsonProperty(PropertyName = "montagErreichbarkeit", Required = Required.Default, Order = 1)]
+        [JsonPropertyName("montagErreichbarkeit")]
+        [ProtoMember(1)]
+        public string? MontagErreichbarkeit { get; set; }
+
+        /// <summary>Erreichbarkeit am Dienstag (Format: HHMMHHMM).</summary>
+        [JsonProperty(PropertyName = "dienstagErreichbarkeit", Required = Required.Default, Order = 2)]
+        [JsonPropertyName("dienstagErreichbarkeit")]
+        [ProtoMember(2)]
+        public string? DienstagErreichbarkeit { get; set; }
+
+        /// <summary>Erreichbarkeit am Mittwoch (Format: HHMMHHMM).</summary>
+        [JsonProperty(PropertyName = "mittwochErreichbarkeit", Required = Required.Default, Order = 3)]
+        [JsonPropertyName("mittwochErreichbarkeit")]
+        [ProtoMember(3)]
+        public string? MittwochErreichbarkeit { get; set; }
+
+        /// <summary>Erreichbarkeit am Donnerstag (Format: HHMMHHMM).</summary>
+        [JsonProperty(PropertyName = "donnerstagErreichbarkeit", Required = Required.Default, Order = 4)]
+        [JsonPropertyName("donnerstagErreichbarkeit")]
+        [ProtoMember(4)]
+        public string? DonnerstagErreichbarkeit { get; set; }
+
+        /// <summary>Erreichbarkeit am Freitag (Format: HHMMHHMM).</summary>
+        [JsonProperty(PropertyName = "freitagErreichbarkeit", Required = Required.Default, Order = 5)]
+        [JsonPropertyName("freitagErreichbarkeit")]
+        [ProtoMember(5)]
+        public string? FreitagErreichbarkeit { get; set; }
+
+        /// <summary>Mittagspause (Ausschluss der Erreichbarkeit, Format: HHMMHHMM).</summary>
+        [JsonProperty(PropertyName = "mittagspause", Required = Required.Default, Order = 6)]
+        [JsonPropertyName("mittagspause")]
+        [ProtoMember(6)]
+        public string? Mittagspause { get; set; }
+    }
+}
