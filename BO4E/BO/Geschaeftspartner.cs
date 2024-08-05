@@ -113,7 +113,7 @@ public class Geschaeftspartner : BusinessObject
     [ProtoMember(12)]
     public List<Kontaktart>? Kontaktweg { get; set; }
 
-    /// <summary>Die Steuer-ID des Geschäftspartners. Beispiel: DE 813281825</summary>
+    /// <summary>Die Umsatzsteuer-ID des Geschäftspartners. Beispiel: DE 813281825</summary>
     [JsonProperty(Required = Required.Default, Order = 15, PropertyName = "umsatzsteuerId")]
     [JsonPropertyOrder(15)]
     [JsonPropertyName("umsatzsteuerId")]
@@ -183,4 +183,21 @@ public class Geschaeftspartner : BusinessObject
     [NonOfficial(NonOfficialCategory.CUSTOMER_REQUIREMENTS)]
     [ProtoMember(20)]
     public GrundDerPrivilegierungNachEnFG? GrundDerPrivilegierungNachEnFG { get; set; }
+
+    /// <summary>Bankverbindung</summary>
+    [JsonProperty(Required = Required.Default, Order = 23, PropertyName = "bankverbindung")]
+    [JsonPropertyName("bankverbindung")]
+    [JsonPropertyOrder(23)]
+    [ProtoMember(23)]
+    [DataCategory(DataCategory.FINANCE)]
+    [NonOfficial(NonOfficialCategory.CUSTOMER_REQUIREMENTS)]
+    public Bankverbindung? Bankverbindung { get; set; }
+
+    /// <summary>Die Steuernummer-ID des Geschäftspartners. Beispiel: DE 813281825</summary>
+    [JsonProperty(Required = Required.Default, Order = 15, PropertyName = "steuernummer")]
+    [JsonPropertyOrder(15)]
+    [JsonPropertyName("steuernummer")]
+    [ProtoMember(13)]
+    [DataCategory(DataCategory.LEGAL)]
+    public string? Steuernummer { get; set; }
 }
