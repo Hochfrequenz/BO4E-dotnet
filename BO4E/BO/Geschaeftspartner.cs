@@ -114,6 +114,7 @@ public class Geschaeftspartner : BusinessObject
     public List<Kontaktart>? Kontaktweg { get; set; }
 
     /// <summary>Die Umsatzsteuer-ID des Geschäftspartners. Beispiel: DE 813281825</summary>
+    /// <remarks>VA Umsatzsteuernummer</remarks>
     [JsonProperty(Required = Required.Default, Order = 15, PropertyName = "umsatzsteuerId")]
     [JsonPropertyOrder(15)]
     [JsonPropertyName("umsatzsteuerId")]
@@ -193,7 +194,8 @@ public class Geschaeftspartner : BusinessObject
     [NonOfficial(NonOfficialCategory.CUSTOMER_REQUIREMENTS)]
     public Bankverbindung? Bankverbindung { get; set; }
 
-    /// <summary>Die Steuernummer-ID des Geschäftspartners. Beispiel: DE 813281825</summary>
+    /// <summary>Die Steuernummer-ID des Geschäftspartners. Beispiel: 30120345678</summary>
+    /// <remarks>FC Steuernummer</remarks>
     [JsonProperty(Required = Required.Default, Order = 24, PropertyName = "steuernummer")]
     [JsonPropertyOrder(24)]
     [JsonPropertyName("steuernummer")]
