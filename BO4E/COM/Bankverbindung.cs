@@ -10,7 +10,7 @@ namespace BO4E.COM;
 [ProtoContract]
 public class Bankverbindung : COM
 {
-    /// <summary>Der kontonummer. IBAN</summary>
+    /// <summary>Die kontonummer. IBAN</summary>
     [DataCategory(DataCategory.FINANCE)]
     [JsonProperty(PropertyName = "kontonummer", Required = Required.Default, Order = 3)]
     [JsonPropertyName("kontonummer")]
