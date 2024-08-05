@@ -565,7 +565,7 @@ message Bankverbindung {
     string Bankkennung = 3;
     string Bankcode = 4;
     string Bankname = 5;
-    Landescode land = 6;
+    Landescode Land = 6;
 }
 message Erreichbarkeit {
     string MontagErreichbarkeit = 1;
