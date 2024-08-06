@@ -13,7 +13,7 @@ namespace BO4E.COM
     [ProtoContract]
     public class Zeitfenster : COM
     {
-        /// <summary>Startzeit</summary>
+        /// <summary>inklusive Startzeit; z.B. 8Uhr</summary>
         [JsonProperty(Required = Required.Default, Order = 3, PropertyName = "startzeit")]
         [JsonPropertyName("startzeit")]
         [JsonPropertyOrder(3)]
