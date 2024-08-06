@@ -3,6 +3,7 @@ package bo4e;
 import "google/protobuf/timestamp.proto";
 import "protobuf-net/bcl.proto"; // schema for protobuf-net's handling of core .NET types
 import "protobuf-net/protogen.proto"; // custom protobuf-net options
+import "google/type/timeofday.proto";
 
 enum AbgabeArt {
    option (.protobuf_net.enumopt).namespace = "BO4E.ENUM";
@@ -527,7 +528,6 @@ message Geschaeftspartner {
    Bankverbindung Bankverbindung = 21;
    string Steuernummer = 22;
    Erreichbarkeit Erreichbarkeit = 23;
-
 }
 enum Geschaeftspartnerrolle {
    option (.protobuf_net.enumopt).namespace = "BO4E.ENUM";
@@ -570,12 +570,18 @@ message Bankverbindung {
 }
 message Erreichbarkeit {
     option (.protobuf_net.msgopt).namespace = "BO4E.COM";
-    string MontagErreichbarkeit = 3;
-    string DienstagErreichbarkeit = 4;
-    string MittwochErreichbarkeit = 5;
-    string DonnerstagErreichbarkeit = 6;
-    string FreitagErreichbarkeit = 7;
-    string Mittagspause = 8;
+    Zeitfenster MontagErreichbarkeit = 3;
+    Zeitfenster DienstagErreichbarkeit = 4;
+    Zeitfenster MittwochErreichbarkeit = 5;
+    Zeitfenster DonnerstagErreichbarkeit = 6;
+    Zeitfenster FreitagErreichbarkeit = 7;
+    Zeitfenster Mittagspause = 8;
+}
+// https://github.com/googleapis/googleapis/blob/master/google/type/timeofday.proto
+message Zeitfenster {
+    option (.protobuf_net.msgopt).namespace = "BO4E.COM";
+    google.type.TimeOfDay Startzeit = 3;
+    google.type.TimeOfDay Endzeit = 4;
 }
 message Hardware {
    option (.protobuf_net.msgopt).namespace = "BO4E.COM";
