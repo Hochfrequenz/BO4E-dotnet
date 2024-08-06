@@ -388,6 +388,30 @@
         }
       }
     },
+    "Bankverbindung": {
+      "type": ["object", "null"],
+      "properties": {
+        "timestamp": {
+          "type": ["string", "null"],
+          "format": "date-time"
+        },
+        "guid": {
+          "type": ["string", "null"]
+        },
+        "iban": {
+          "type": ["string", "null"]
+        },
+        "kontoinhaber": {
+          "type": ["string", "null"]
+        },
+        "bankkennung": {
+          "type": ["string", "null"]
+        },
+        "bankname": {
+          "type": ["string", "null"]
+        }
+      }
+    },
     "Dienstleistung": {
       "type": ["object", "null"],
       "properties": {
@@ -447,6 +471,36 @@
         }
       },
       "required": ["dienstleistungstyp", "bezeichnung"]
+    },
+    "Erreichbarkeit": {
+      "type": ["object", "null"],
+      "properties": {
+        "timestamp": {
+          "type": ["string", "null"],
+          "format": "date-time"
+        },
+        "guid": {
+          "type": ["string", "null"]
+        },
+        "montagErreichbarkeit": {
+          "$ref": "#/definitions/Zeitfenster"
+        },
+        "dienstagErreichbarkeit": {
+          "$ref": "#/definitions/Zeitfenster"
+        },
+        "mittwochErreichbarkeit": {
+          "$ref": "#/definitions/Zeitfenster"
+        },
+        "donnerstagErreichbarkeit": {
+          "$ref": "#/definitions/Zeitfenster"
+        },
+        "freitagErreichbarkeit": {
+          "$ref": "#/definitions/Zeitfenster"
+        },
+        "mittagspause": {
+          "$ref": "#/definitions/Zeitfenster"
+        }
+      }
     },
     "ExterneReferenz": {
       "type": ["object", "null"],
@@ -768,6 +822,15 @@
             "ELEKTRISCHE_BETRIEBENE_BUSSEN_IM_LINIENVERKEHR",
             "LANDSTROMANLAGEN"
           ]
+        },
+        "bankverbindung": {
+          "$ref": "#/definitions/Bankverbindung"
+        },
+        "steuernummer": {
+          "type": ["string", "null"]
+        },
+        "erreichbarkeit": {
+          "$ref": "#/definitions/Erreichbarkeit"
         }
       },
       "required": ["gewerbekennzeichnung"]
@@ -1072,6 +1135,15 @@
             "ELEKTRISCHE_BETRIEBENE_BUSSEN_IM_LINIENVERKEHR",
             "LANDSTROMANLAGEN"
           ]
+        },
+        "bankverbindung": {
+          "$ref": "#/definitions/Bankverbindung"
+        },
+        "steuernummer": {
+          "type": ["string", "null"]
+        },
+        "erreichbarkeit": {
+          "$ref": "#/definitions/Erreichbarkeit"
         },
         "marktrolle": {
           "type": ["string", "null"],
@@ -2080,6 +2152,24 @@
         "schwachlastfaehig": {
           "type": ["string", "null"],
           "enum": [null, "NICHT_SCHWACHLASTFAEHIG", "SCHWACHLASTFAEHIG"]
+        }
+      }
+    },
+    "Zeitfenster": {
+      "type": ["object", "null"],
+      "properties": {
+        "timestamp": {
+          "type": ["string", "null"],
+          "format": "date-time"
+        },
+        "guid": {
+          "type": ["string", "null"]
+        },
+        "startzeit": {
+          "type": ["string", "null"]
+        },
+        "endzeit": {
+          "type": ["string", "null"]
         }
       }
     },
