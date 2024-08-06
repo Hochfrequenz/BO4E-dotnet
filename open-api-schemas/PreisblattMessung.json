@@ -525,7 +525,7 @@
             },
             "umsatzsteuerId": {
               "type": "string",
-              "description": "Die Steuer-ID des Geschäftspartners. Beispiel: DE 813281825",
+              "description": "Die Umsatzsteuer-ID des Geschäftspartners. Beispiel: DE 813281825",
               "x-nullable": true
             },
             "glaeubigerId": {
@@ -575,6 +575,29 @@
               "oneOf": [
                 {
                   "$ref": "#/definitions/GrundDerPrivilegierungNachEnFG"
+                }
+              ]
+            },
+            "bankverbindung": {
+              "description": "Bankverbindung",
+              "x-nullable": true,
+              "oneOf": [
+                {
+                  "$ref": "#/definitions/Bankverbindung"
+                }
+              ]
+            },
+            "steuernummer": {
+              "type": "string",
+              "description": "Die Steuernummer-ID des Geschäftspartners. Beispiel: 30120345678",
+              "x-nullable": true
+            },
+            "erreichbarkeit": {
+              "description": "Die Erreichbarkeit eines Unternehmens an Werktagen.",
+              "x-nullable": true,
+              "oneOf": [
+                {
+                  "$ref": "#/definitions/Erreichbarkeit"
                 }
               ]
             }
@@ -979,6 +1002,134 @@
         "LANDSTROMANLAGEN"
       ],
       "enum": [0, 1, 2, 3, 4, 5, 6, 7, 8]
+    },
+    "Bankverbindung": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/COM"
+        },
+        {
+          "type": "object",
+          "description": "Enthält eine Bankverbindung",
+          "additionalProperties": {},
+          "properties": {
+            "iban": {
+              "type": "string",
+              "description": "IBAN",
+              "x-nullable": true
+            },
+            "kontoinhaber": {
+              "type": "string",
+              "description": "Der kontoinhaber",
+              "x-nullable": true
+            },
+            "bankkennung": {
+              "type": "string",
+              "description": "Die Bankkennung, BIC",
+              "x-nullable": true
+            },
+            "bankname": {
+              "type": "string",
+              "description": "Der Bankname",
+              "x-nullable": true
+            }
+          }
+        }
+      ]
+    },
+    "Erreichbarkeit": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/COM"
+        },
+        {
+          "type": "object",
+          "description": "Die Erreichbarkeit eines Unternehmens an Werktagen.",
+          "additionalProperties": {},
+          "properties": {
+            "montagErreichbarkeit": {
+              "description": "Erreichbarkeit am Montag",
+              "x-nullable": true,
+              "oneOf": [
+                {
+                  "$ref": "#/definitions/Zeitfenster"
+                }
+              ]
+            },
+            "dienstagErreichbarkeit": {
+              "description": "Erreichbarkeit am Dienstag",
+              "x-nullable": true,
+              "oneOf": [
+                {
+                  "$ref": "#/definitions/Zeitfenster"
+                }
+              ]
+            },
+            "mittwochErreichbarkeit": {
+              "description": "Erreichbarkeit am Mittwoch",
+              "x-nullable": true,
+              "oneOf": [
+                {
+                  "$ref": "#/definitions/Zeitfenster"
+                }
+              ]
+            },
+            "donnerstagErreichbarkeit": {
+              "description": "Erreichbarkeit am Donnerstag",
+              "x-nullable": true,
+              "oneOf": [
+                {
+                  "$ref": "#/definitions/Zeitfenster"
+                }
+              ]
+            },
+            "freitagErreichbarkeit": {
+              "description": "Erreichbarkeit am Freitag",
+              "x-nullable": true,
+              "oneOf": [
+                {
+                  "$ref": "#/definitions/Zeitfenster"
+                }
+              ]
+            },
+            "mittagspause": {
+              "description": "Mittagspause (Ausschluss der Erreichbarkeit)",
+              "x-nullable": true,
+              "oneOf": [
+                {
+                  "$ref": "#/definitions/Zeitfenster"
+                }
+              ]
+            }
+          }
+        }
+      ]
+    },
+    "Zeitfenster": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/COM"
+        },
+        {
+          "type": "object",
+          "description": "Ein Zeitfenster mit Start- und Endzeiten mit TimeOnly als Typ.",
+          "additionalProperties": {},
+          "properties": {
+            "startzeit": {
+              "type": "string",
+              "description": "inklusive Startzeit; z.B. 8 Uhr",
+              "format": "time",
+              "x-nullable": true
+            },
+            "endzeit": {
+              "type": "string",
+              "description": "exklusive Endzeit (z.B. 17:00 Uhr)",
+              "format": "time",
+              "x-nullable": true
+            }
+          }
+        }
+      ]
     },
     "BusinessObject": {
       "type": "object",

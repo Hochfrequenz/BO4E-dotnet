@@ -311,6 +311,30 @@
       },
       "required": ["postleitzahl", "ort"]
     },
+    "Bankverbindung": {
+      "type": ["object", "null"],
+      "properties": {
+        "timestamp": {
+          "type": ["string", "null"],
+          "format": "date-time"
+        },
+        "guid": {
+          "type": ["string", "null"]
+        },
+        "iban": {
+          "type": ["string", "null"]
+        },
+        "kontoinhaber": {
+          "type": ["string", "null"]
+        },
+        "bankkennung": {
+          "type": ["string", "null"]
+        },
+        "bankname": {
+          "type": ["string", "null"]
+        }
+      }
+    },
     "Betrag": {
       "type": "object",
       "properties": {
@@ -715,6 +739,36 @@
       },
       "required": ["wert", "waehrung"]
     },
+    "Erreichbarkeit": {
+      "type": ["object", "null"],
+      "properties": {
+        "timestamp": {
+          "type": ["string", "null"],
+          "format": "date-time"
+        },
+        "guid": {
+          "type": ["string", "null"]
+        },
+        "montagErreichbarkeit": {
+          "$ref": "#/definitions/Zeitfenster"
+        },
+        "dienstagErreichbarkeit": {
+          "$ref": "#/definitions/Zeitfenster"
+        },
+        "mittwochErreichbarkeit": {
+          "$ref": "#/definitions/Zeitfenster"
+        },
+        "donnerstagErreichbarkeit": {
+          "$ref": "#/definitions/Zeitfenster"
+        },
+        "freitagErreichbarkeit": {
+          "$ref": "#/definitions/Zeitfenster"
+        },
+        "mittagspause": {
+          "$ref": "#/definitions/Zeitfenster"
+        }
+      }
+    },
     "ExterneReferenz": {
       "type": ["object", "null"],
       "properties": {
@@ -850,6 +904,15 @@
             "ELEKTRISCHE_BETRIEBENE_BUSSEN_IM_LINIENVERKEHR",
             "LANDSTROMANLAGEN"
           ]
+        },
+        "bankverbindung": {
+          "$ref": "#/definitions/Bankverbindung"
+        },
+        "steuernummer": {
+          "type": ["string", "null"]
+        },
+        "erreichbarkeit": {
+          "$ref": "#/definitions/Erreichbarkeit"
         }
       },
       "required": ["gewerbekennzeichnung"]
@@ -1346,6 +1409,24 @@
         }
       },
       "required": ["betrag"]
+    },
+    "Zeitfenster": {
+      "type": ["object", "null"],
+      "properties": {
+        "timestamp": {
+          "type": ["string", "null"],
+          "format": "date-time"
+        },
+        "guid": {
+          "type": ["string", "null"]
+        },
+        "startzeit": {
+          "type": ["string", "null"]
+        },
+        "endzeit": {
+          "type": ["string", "null"]
+        }
+      }
     },
     "Zeitraum": {
       "type": "object",
