@@ -564,9 +564,7 @@ message Bankverbindung {
     string Kontonummer = 3;
     string Kontoinhaber = 4;
     string Bankkennung = 5;
-    string Bankcode = 6;
-    string Bankname = 7;
-    Landescode Land = 8;
+    string Bankname = 6;
 }
 message Erreichbarkeit {
     option (.protobuf_net.msgopt).namespace = "BO4E.COM";

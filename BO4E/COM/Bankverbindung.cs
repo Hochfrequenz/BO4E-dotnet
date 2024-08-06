@@ -10,13 +10,13 @@ namespace BO4E.COM;
 [ProtoContract]
 public class Bankverbindung : COM
 {
-    /// <summary>Die kontonummer. IBAN</summary>
+    /// <summary>IBAN</summary>
     [DataCategory(DataCategory.FINANCE)]
-    [JsonProperty(PropertyName = "kontonummer", Required = Required.Default, Order = 3)]
-    [JsonPropertyName("kontonummer")]
+    [JsonProperty(PropertyName = "iban", Required = Required.Default, Order = 3)]
+    [JsonPropertyName("iban")]
     [ProtoMember(3)]
     [JsonPropertyOrder(3)]
-    public string? Kontonummer { get; set; }
+    public string? IBAN { get; set; }
 
     /// <summary>Der kontoinhaber</summary>
     [DataCategory(DataCategory.FINANCE)]
@@ -34,27 +34,11 @@ public class Bankverbindung : COM
     [JsonPropertyOrder(5)]
     public string? Bankkennung { get; set; }
 
-    /// <summary>Das bankcode</summary>
-    [DataCategory(DataCategory.FINANCE)]
-    [JsonProperty(PropertyName = "bankcode", Required = Required.Default, Order = 6)]
-    [JsonPropertyName("bankcode")]
-    [ProtoMember(6)]
-    [JsonPropertyOrder(6)]
-    public string? Bankcode { get; set; }
-
     /// <summary>Der Bankname</summary>
     [DataCategory(DataCategory.FINANCE)]
-    [JsonProperty(PropertyName = "bankname", Required = Required.Default, Order = 7)]
+    [JsonProperty(PropertyName = "bankname", Required = Required.Default, Order = 6)]
     [JsonPropertyName("bankname")]
-    [ProtoMember(7)]
-    [JsonPropertyOrder(7)]
+    [ProtoMember(6)]
+    [JsonPropertyOrder(6)]
     public string? Bankname { get; set; }
-
-    /// <summary>Das Land</summary>
-    [DataCategory(DataCategory.FINANCE)]
-    [JsonProperty(PropertyName = "land", Required = Required.Default, Order = 8)]
-    [JsonPropertyName("land")]
-    [ProtoMember(8)]
-    [JsonPropertyOrder(8)]
-    public Landescode? Land { get; set; }
 }
