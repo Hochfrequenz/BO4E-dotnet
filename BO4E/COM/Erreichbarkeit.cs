@@ -12,45 +12,45 @@ namespace BO4E.COM;
 [ProtoContract]
 public class Erreichbarkeit : COM
 {
-    /// <summary>Erreichbarkeit am Montag (Format: HHMMHHMM).</summary>
+    /// <summary>Erreichbarkeit am Montag</summary>
     [JsonProperty(PropertyName = "montagErreichbarkeit", Required = Required.Default, Order = 3)]
     [JsonPropertyName("montagErreichbarkeit")]
     [ProtoMember(3)]
     [JsonPropertyOrder(3)]
-    public string? MontagErreichbarkeit { get; set; }
+    public Zeitfenster? MontagErreichbarkeit { get; set; }
 
-    /// <summary>Erreichbarkeit am Dienstag (Format: HHMMHHMM).</summary>
+    /// <summary>Erreichbarkeit am Dienstag</summary>
     [JsonProperty(PropertyName = "dienstagErreichbarkeit", Required = Required.Default, Order = 4)]
     [JsonPropertyName("dienstagErreichbarkeit")]
     [ProtoMember(4)]
     [JsonPropertyOrder(4)]
-    public string? DienstagErreichbarkeit { get; set; }
+    public Zeitfenster? DienstagErreichbarkeit { get; set; }
 
-    /// <summary>Erreichbarkeit am Mittwoch (Format: HHMMHHMM).</summary>
+    /// <summary>Erreichbarkeit am Mittwoch</summary>
     [JsonProperty(PropertyName = "mittwochErreichbarkeit", Required = Required.Default, Order = 5)]
     [JsonPropertyName("mittwochErreichbarkeit")]
     [ProtoMember(5)]
     [JsonPropertyOrder(5)]
-    public string? MittwochErreichbarkeit { get; set; }
+    public Zeitfenster? MittwochErreichbarkeit { get; set; }
 
-    /// <summary>Erreichbarkeit am Donnerstag (Format: HHMMHHMM).</summary>
+    /// <summary>Erreichbarkeit am Donnerstag</summary>
     [JsonProperty(PropertyName = "donnerstagErreichbarkeit", Required = Required.Default, Order = 6)]
     [JsonPropertyName("donnerstagErreichbarkeit")]
     [ProtoMember(6)]
     [JsonPropertyOrder(6)]
-    public string? DonnerstagErreichbarkeit { get; set; }
+    public Zeitfenster? DonnerstagErreichbarkeit { get; set; }
 
-    /// <summary>Erreichbarkeit am Freitag (Format: HHMMHHMM).</summary>
+    /// <summary>Erreichbarkeit am Freitag</summary>
     [JsonProperty(PropertyName = "freitagErreichbarkeit", Required = Required.Default, Order = 7)]
     [JsonPropertyName("freitagErreichbarkeit")]
     [ProtoMember(7)]
     [JsonPropertyOrder(7)]
-    public string? FreitagErreichbarkeit { get; set; }
+    public Zeitfenster? FreitagErreichbarkeit { get; set; }
 
-    /// <summary>Mittagspause (Ausschluss der Erreichbarkeit, Format: HHMMHHMM).</summary>
+    /// <summary>Mittagspause (Ausschluss der Erreichbarkeit)</summary>
     [JsonProperty(PropertyName = "mittagspause", Required = Required.Default, Order = 8)]
     [JsonPropertyName("mittagspause")]
     [ProtoMember(8)]
     [JsonPropertyOrder(8)]
-    public string? Mittagspause { get; set; }
+    public Zeitfenster? Mittagspause { get; set; }
 }
