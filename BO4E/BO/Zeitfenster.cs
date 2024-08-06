@@ -20,7 +20,7 @@ namespace BO4E.COM
         [ProtoMember(3)]
         public TimeOnly? Startzeit { get; set; }
 
-        /// <summary>Endzeit</summary>
+        /// <summary>exklusive Endzeit (z.B. 17:00 Uhr)</summary>
         [JsonProperty(Required = Required.Default, Order = 4, PropertyName = "endzeit")]
         [JsonPropertyName("endzeit")]
         [JsonPropertyOrder(4)]
