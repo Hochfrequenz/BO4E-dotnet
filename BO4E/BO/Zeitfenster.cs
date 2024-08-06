@@ -1,4 +1,7 @@
-﻿using System;
+using System;
+using System.Text.Json.Serialization;
+
+using Newtonsoft.Json;
 
 using ProtoBuf;
 
@@ -10,13 +13,19 @@ namespace BO4E.COM
     [ProtoContract]
     public class Zeitfenster : COM
     {
-        /// <summary>Startzeit (Format: HHMM)</summary>
-        [ProtoMember(1)]
-        public TimeOnly Startzeit { get; set; }
+        /// <summary>Startzeit</summary>
+        [JsonProperty(Required = Required.Default, Order = 3, PropertyName = "startzeit")]
+        [JsonPropertyName("startzeit")]
+        [JsonPropertyOrder(3)]
+        [ProtoMember(3)]
+        public TimeOnly? Startzeit { get; set; }
 
-        /// <summary>Endzeit (Format: HHMM)</summary>
-        [ProtoMember(2)]
-        public TimeOnly Endzeit { get; set; }
+        /// <summary>Endzeit</summary>
+        [JsonProperty(Required = Required.Default, Order = 4, PropertyName = "endzeit")]
+        [JsonPropertyName("endzeit")]
+        [JsonPropertyOrder(4)]
+        [ProtoMember(4)]
+        public TimeOnly? Endzeit { get; set; }
 
         /// <summary>
         /// Erstellt eine neue Instanz von Zeitfenster mit spezifischen Start- und Endzeiten.
