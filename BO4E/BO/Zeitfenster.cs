@@ -30,8 +30,8 @@ namespace BO4E.COM
         /// <summary>
         /// Erstellt eine neue Instanz von Zeitfenster mit spezifischen Start- und Endzeiten.
         /// </summary>
-        /// <param name="startzeit">Startzeit (Format: HHMM)</param>
-        /// <param name="endzeit">Endzeit (Format: HHMM)</param>
+        /// <param name="startzeit">inklusive Startzeit</param>
+        /// <param name="endzeit">exklusive Endzeit</param>
         public Zeitfenster(TimeOnly startzeit, TimeOnly endzeit)
         {
             Startzeit = startzeit;
