@@ -13,7 +13,7 @@ namespace BO4E.COM
     [ProtoContract]
     public class Zeitfenster : COM
     {
-        /// <summary>inklusive Startzeit; z.B. 8Uhr</summary>
+        /// <summary>inklusive Startzeit; z.B. 8 Uhr</summary>
         [JsonProperty(Required = Required.Default, Order = 3, PropertyName = "startzeit")]
         [JsonPropertyName("startzeit")]
         [JsonPropertyOrder(3)]
@@ -56,17 +56,12 @@ namespace BO4E.COM
 
             try
             {
-                int startStunden = int.Parse(zeitfensterString.Substring(0, 2));
-                int startMinuten = int.Parse(zeitfensterString.Substring(2, 2));
-                int endStunden = int.Parse(zeitfensterString.Substring(4, 2));
-                int endMinuten = int.Parse(zeitfensterString.Substring(6, 2));
-
-                Startzeit = new TimeOnly(startStunden, startMinuten);
-                Endzeit = new TimeOnly(endStunden, endMinuten);
+                Startzeit = TimeOnly.ParseExact(zeitfensterString.Substring(0, 4), "HHmm");
+                Endzeit = TimeOnly.ParseExact(zeitfensterString.Substring(4, 4), "HHmm");
             }
             catch (FormatException)
             {
-                throw new ArgumentException("Der Zeitfenster-String muss im Format HHMMHHMM vorliegen und nur Zahlen enthalten.");
+                throw new ArgumentException("Der Zeitfenster-String muss im Format HHMMHHMM vorliegen und gültige Zeitwerte enthalten.");
             }
         }
     }
