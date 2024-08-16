@@ -62,8 +62,8 @@ public abstract class BoMapper
         return clazz != null
             ? clazz
             : (from boName in GetValidBoNames()
-                where string.Equals(boName, businessObjectName, StringComparison.CurrentCultureIgnoreCase)
-                select Assembly.GetExecutingAssembly().GetType(PackagePrefix + "." + boName)).FirstOrDefault();
+               where string.Equals(boName, businessObjectName, StringComparison.CurrentCultureIgnoreCase)
+               select Assembly.GetExecutingAssembly().GetType(PackagePrefix + "." + boName)).FirstOrDefault();
 
         //throw new ArgumentException($"No implemented BusinessObject type matches the name '{businessObjectName}'.");
     }
