@@ -112,15 +112,12 @@ namespace TestBO4E.Extensions
         {
             foreach (var boFile in Directory.GetFiles("Energiemenge/completeness/", "50hz_prognose*.json"))
             {
-                JObject json;
+                string jsonString;
                 using (var r = new StreamReader(boFile))
                 {
-                    var jsonString = r.ReadToEnd();
-                    json = JsonConvert.DeserializeObject<JObject>(jsonString);
+                    jsonString = r.ReadToEnd();
                 }
-#pragma warning disable 618
-                var em = BoMapper.MapObject<Energiemenge>(json);
-#pragma warning restore 618
+                var em = JsonConvert.DeserializeObject<Energiemenge>(jsonString);
                 var result = em.GetDailyCompletenessReports(CHRISTMAS_2018);
                 Assert.AreEqual(8, result.Count);
                 break; // one test is enough. the rest is covered by the individual completeness report tests.
@@ -139,14 +136,12 @@ namespace TestBO4E.Extensions
         {
             foreach (var boFile in Directory.GetFiles("Energiemenge/completeness", "50hz_prognose*.json"))
             {
-                JObject json;
+                string jsonString;
                 using (var r = new StreamReader(boFile))
                 {
-                    var jsonString = r.ReadToEnd();
-                    json = JsonConvert.DeserializeObject<JObject>(jsonString);
+                    jsonString = r.ReadToEnd();
                 }
-
-                var em = BoMapper.MapObject<Energiemenge>(json);
+                var em = JsonConvert.DeserializeObject<Energiemenge>(jsonString);
                 var result = em.GetMonthlyCompletenessReports(GERMAN_YEAR_2018, useParallelExecution);
                 Assert.AreEqual(12,
                     result.Count); // don't care about values of coverage, just the start/end and count of reports generated.
