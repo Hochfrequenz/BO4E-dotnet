@@ -97,7 +97,7 @@ namespace BO4E.EnergyIdentificationCodes
         /// </summary>
         /// <param name="eicCandidate"></param>
         /// <returns>true iff it obeys the "Allgemeine Bildungsvorschrift"</returns>
-        public static bool IsValidEIC(this string eicCandidate)
+        public static bool IsValidEIC(this string? eicCandidate)
         {
             if (string.IsNullOrWhiteSpace(eicCandidate))
             {
@@ -110,7 +110,7 @@ namespace BO4E.EnergyIdentificationCodes
             }
 
             var actualCheckCharacter = eicCandidate.Last();
-            var expectedCheckCharacter = GetEICCheckCharacter(eicCandidate[..15]);
+            var expectedCheckCharacter = GetEICCheckCharacter(eicCandidate![..15]);
             return actualCheckCharacter == expectedCheckCharacter;
         }
 
@@ -119,7 +119,7 @@ namespace BO4E.EnergyIdentificationCodes
         /// </summary>
         /// <param name="eicCandidate"></param>
         /// <returns>true iff BDEW is the "Vergeber"</returns>
-        public static bool IsValidEICBDEW(this string eicCandidate)
+        public static bool IsValidEICBDEW(this string? eicCandidate)
         {
             if (!IsValidEIC(eicCandidate))
             {
@@ -137,7 +137,7 @@ namespace BO4E.EnergyIdentificationCodes
         /// <param name="bilanzierungsGebietEic"></param>
         /// <returns></returns>
         /// <remarks>See https://bdew-codes.de/Content/Files/EIC/Awh_20171218_EIC-Vergabe_V1-0.pdf section 2.2.2</remarks>
-        public static bool IsValidBilanzierungsGebietId(this string bilanzierungsGebietEic)
+        public static bool IsValidBilanzierungsGebietId(this string? bilanzierungsGebietEic)
         {
             if (!IsValidEICBDEW(bilanzierungsGebietEic))
             {
@@ -145,7 +145,7 @@ namespace BO4E.EnergyIdentificationCodes
             }
 
             var eicType = GetEICType(EicRegex.Match(bilanzierungsGebietEic).Groups["typ"].Value);
-            return eicType == EicType.AREA && GermanControlAreas.ContainsKey(bilanzierungsGebietEic.Substring(3, 1));
+            return eicType == EicType.AREA && GermanControlAreas.ContainsKey(bilanzierungsGebietEic!.Substring(3, 1));
         }
 
         /// <summary>
@@ -153,7 +153,7 @@ namespace BO4E.EnergyIdentificationCodes
         /// </summary>
         /// <param name="eicCode"></param>
         /// <returns></returns>
-        public static bool IsGermanControlArea(this string eicCode) => GermanControlAreas.Values.Contains(eicCode);
+        public static bool IsGermanControlArea(this string? eicCode) => GermanControlAreas.Values.Contains(eicCode);
 
         private static readonly Dictionary<string, string> GermanControlAreas = new()
         {
