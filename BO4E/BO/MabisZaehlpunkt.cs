@@ -22,13 +22,13 @@ public class MabisZaehlpunkt : BusinessObject
     ///     z.B. DE 47108151234567
     /// </summary>
     [DefaultValue("|null|")]
-    [JsonProperty(PropertyName = "Id", Required = Required.Always, Order = 10)]
+    [JsonProperty(PropertyName = "Id", Required = Required.Default, Order = 10)]
     [JsonPropertyName("Id")]
     [JsonPropertyOrder(10)]
     [DataCategory(DataCategory.POD)]
     [BoKey]
     [ProtoMember(4)]
-    public string Id { get; set; }
+    public string? Id { get; set; }
 
 
     /// <summary>
@@ -36,7 +36,7 @@ public class MabisZaehlpunkt : BusinessObject
     /// </summary>
     /// <param name="id">id to test</param>
     /// <returns></returns>
-    public static bool ValidateId(string id)
+    public static bool ValidateId(string? id)
     {
         return !string.IsNullOrWhiteSpace(id) && RegexValidate.IsMatch(id);
     }
