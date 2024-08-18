@@ -13,10 +13,10 @@ namespace BO4E.COM
         ///     Ein Titel für die Zeile. Hier kann z.B. der Netzbetreiber eingetragen werden, wenn es sich um Netzkosten
         ///     handelt.
         /// </summary>
-        [JsonProperty(PropertyName = "positionstitel", Required = Required.Always)]
+        [JsonProperty(PropertyName = "positionstitel", Required = Required.Default)]
         [JsonPropertyName("positionstitel")]
         [ProtoMember(3)]
-        public string Positionstitel { get; set; }
+        public string? Positionstitel { get; set; }
 
         [System.Text.Json.Serialization.JsonIgnore]
         [Newtonsoft.Json.JsonIgnore]
@@ -50,10 +50,10 @@ namespace BO4E.COM
         public DateTimeOffset? Bis { get; set; }
 
         /// <summary>Bezeichnung für den Artikel für den die Kosten ermittelt wurden. Beispiel: Arbeitspreis HT</summary>
-        [JsonProperty(PropertyName = "artikelbezeichnung", Required = Required.Always)]
+        [JsonProperty(PropertyName = "artikelbezeichnung", Required = Required.Default)]
         [JsonPropertyName("artikelbezeichnung")]
         [ProtoMember(6)]
-        public string Artikelbezeichnung { get; set; }
+        public string? Artikelbezeichnung { get; set; }
 
         /// <summary>Detaillierung des Artikels (optional). Beispiel: Drehstromzähler</summary>
         [JsonProperty(PropertyName = "artikeldetail", Required = Required.Default)]
@@ -80,18 +80,18 @@ namespace BO4E.COM
         public Menge? Zeitmenge { get; set; }
 
         /// <summary>Der Preis für eine Einheit. Beispiele: 5,8200 ct/kWh oder 55 €/Jahr. Details <see cref="Preis" /></summary>
-        [JsonProperty(PropertyName = "einzelpreis", Required = Required.Always)]
+        [JsonProperty(PropertyName = "einzelpreis", Required = Required.Default)]
         [JsonPropertyName("einzelpreis")]
         [ProtoMember(10)]
-        public Preis Einzelpreis { get; set; }
+        public Preis? Einzelpreis { get; set; }
 
         /// <summary>
         ///     Der errechnete Gesamtbetrag der Position als Ergebnis der Berechnung &lt;Menge&gt; x &lt;Einzelpreis&gt; oder
         ///     &lt;Einzelpreis&gt; / (Anzahl Tage Jahr) * &lt;zeitmenge&gt;. Details <see cref="Betrag" />
         /// </summary>
-        [JsonProperty(PropertyName = "betragKostenposition", Required = Required.Always)]
+        [JsonProperty(PropertyName = "betragKostenposition", Required = Required.Default)]
         [JsonPropertyName("betragKostenposition")]
         [ProtoMember(11)]
-        public Betrag BetragKostenposition { get; set; }
+        public Betrag? BetragKostenposition { get; set; }
     }
 }
