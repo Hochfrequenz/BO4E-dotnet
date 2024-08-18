@@ -21,13 +21,13 @@ public class Handelsunstimmigkeit : BusinessObject
     /// <summary>
     /// Handelsunstimmigkeitsnummer
     /// </summary>
-    [JsonProperty(PropertyName = "nummer", Required = Required.Always, Order = 10)]
+    [JsonProperty(PropertyName = "nummer", Required = Required.Default, Order = 10)]
     [JsonPropertyName("nummer")]
     [NonOfficial(NonOfficialCategory.MISSING)]
     [ProtoMember(1000)]
     [JsonPropertyOrder(10)]
     [BoKey]
-    public string Nummer { get; set; }
+    public string? Nummer { get; set; }
 
     /// <summary>
     /// Gibt den Typ der Handelsunstimmigkeit an.
@@ -43,12 +43,12 @@ public class Handelsunstimmigkeit : BusinessObject
     /// Handelsunstimmigskeitsbegründung
     /// </summary>
     /// <see cref="Handelsunstimmigkeitsbegruendung" />
-    [JsonProperty(PropertyName = "begruendung", Required = Required.Always, Order = 12)]
+    [JsonProperty(PropertyName = "begruendung", Required = Required.Default, Order = 12)]
     [JsonPropertyName("begruendung")]
     [NonOfficial(NonOfficialCategory.MISSING)]
     [JsonPropertyOrder(12)]
     [ProtoMember(1002)]
-    public Handelsunstimmigkeitsbegruendung Begruendung { get; set; }
+    public Handelsunstimmigkeitsbegruendung? Begruendung { get; set; }
 
     /// <summary>
     /// angeforderter Betrag
