@@ -21,18 +21,18 @@ public class Zaehler : BusinessObject
 {
     /// <summary>Nummerierung des Zählers, vergeben durch den Messstellenbetreiber</summary>
     [BoKey]
-    [JsonProperty(Required = Required.Always, Order = 10, PropertyName = "zaehlernummer")]
+    [JsonProperty(Required = Required.Default, Order = 10, PropertyName = "zaehlernummer")]
     [JsonPropertyName("zaehlernummer")]
     [ProtoMember(4)]
     [JsonPropertyOrder(10)]
-    public string Zaehlernummer { get; set; }
+    public string? Zaehlernummer { get; set; }
 
     /// <summary>Strom oder Gas. <seealso cref="ENUM.Sparte" /></summary>
-    [JsonProperty(Required = Required.Always, Order = 11, PropertyName = "sparte")]
+    [JsonProperty(Required = Required.Default, Order = 11, PropertyName = "sparte")]
     [JsonPropertyName("sparte")]
     [ProtoMember(5)]
     [JsonPropertyOrder(11)]
-    public Sparte Sparte { get; set; }
+    public Sparte? Sparte { get; set; }
 
     /// <summary>
     ///     Spezifikation die Richtung des Zählers betreffend.
@@ -90,9 +90,7 @@ public class Zaehler : BusinessObject
     [JsonPropertyOrder(16)]
     [ProtoIgnore]
     public DateTimeOffset? EichungBis { get; set; } // ToDO implement date
-
-
-
+    
     [System.Text.Json.Serialization.JsonIgnore]
     [Newtonsoft.Json.JsonIgnore]
     [ProtoMember(11, Name = nameof(LetzteEichung))]
