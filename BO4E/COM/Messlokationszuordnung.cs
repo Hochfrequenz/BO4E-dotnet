@@ -17,10 +17,10 @@ namespace BO4E.COM
     {
         /// <summary>Die Messlokations-ID, früher die Zählpunktbezeichnung.</summary>
         [DataCategory(DataCategory.POD)]
-        [JsonProperty(PropertyName = "messlokationsId", Required = Required.Always)]
+        [JsonProperty(PropertyName = "messlokationsId", Required = Required.Default)]
         [JsonPropertyName("messlokationsId")]
         [ProtoMember(3)]
-        public string MesslokationsId { get; set; }
+        public string? MesslokationsId { get; set; }
 
         /// <summary>
         ///     Die Operation, mit der eine Messung an dieser Lokation für den Gesamtverbrauch der Marktlokation verrechnet
