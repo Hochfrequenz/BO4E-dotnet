@@ -20,20 +20,20 @@ public class Netzlokation : BusinessObject
     ///     verbraucht, oder erzeugt wird (Like MarktlokationsId <see cref="Marktlokation"/>)
     /// </summary>
     [DefaultValue("|null|")]
-    [JsonProperty(Required = Required.Always, Order = 10, PropertyName = "netzlokationsId")]
+    [JsonProperty(Required = Required.Default, Order = 10, PropertyName = "netzlokationsId")]
     [JsonPropertyName("netzlokationsId")]
     [JsonPropertyOrder(10)]
     [DataCategory(DataCategory.POD)]
     [BoKey]
     [ProtoMember(4)]
-    public string NetzlokationsId { get; set; }
+    public string? NetzlokationsId { get; set; }
 
     /// <summary>Sparte der Netzlokation, z.B. Gas oder Strom.</summary>
-    [JsonProperty(Required = Required.Always, Order = 11, PropertyName = "sparte")]
+    [JsonProperty(Required = Required.Default, Order = 11, PropertyName = "sparte")]
     [JsonPropertyOrder(11)]
     [JsonPropertyName("sparte")]
     [ProtoMember(5)]
-    public Sparte Sparte { get; set; }
+    public Sparte? Sparte { get; set; }
 
     /// <summary>
     /// Netzanschlussleistungsmenge der Netzlokation
