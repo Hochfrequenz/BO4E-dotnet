@@ -119,27 +119,27 @@ namespace BO4E.COM
         /// <example>
         ///     1-0:1.8.1
         /// </example>
-        [JsonProperty(PropertyName = "obiskennzahl", Required = Required.Always, Order = 6)]
+        [JsonProperty(PropertyName = "obiskennzahl", Required = Required.Default, Order = 6)]
         [JsonPropertyName("obiskennzahl")]
         [ProtoMember(6)]
-        public string Obiskennzahl { get; set; }
+        public string? Obiskennzahl { get; set; }
 
         /// <summary>
         ///     Gibt den absoluten Wert der Menge an.
         /// </summary>
-        [JsonProperty(PropertyName = "wert", Required = Required.Always, Order = 7)]
+        [JsonProperty(PropertyName = "wert", Required = Required.Default, Order = 7)]
         [JsonPropertyName("wert")]
         [ProtoMember(7)]
-        public decimal Wert { get; set; }
+        public decimal? Wert { get; set; }
 
         /// <summary>
         ///     Gibt die Einheit zum jeweiligen Wert an.
         /// </summary>
         /// <seealso cref="Mengeneinheit" />
-        [JsonProperty(PropertyName = "einheit", Required = Required.Always, Order = 8)]
+        [JsonProperty(PropertyName = "einheit", Required = Required.Default, Order = 8)]
         [JsonPropertyName("einheit")]
         [ProtoMember(8)]
-        public Mengeneinheit Einheit { get; set; }
+        public Mengeneinheit? Einheit { get; set; }
 
         /// <summary>type</summary>
         /// <example>arbeitleistungtagesparameterabhmalo | veranschlagtejahresmenge | TUMKundenwert</example>
