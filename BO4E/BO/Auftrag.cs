@@ -82,11 +82,11 @@ public abstract class Auftrag : BusinessObject
     /// <summary>
     /// Die ID der Marktlokation der der zu sperrende Zähler zugeordnet ist.
     /// </summary>
-    [JsonProperty("marktlokationsId", Order = 5, Required = Required.Always)]
+    [JsonProperty("marktlokationsId", Order = 5, Required = Required.Default)]
     [JsonPropertyName("marktlokationsId")]
     [JsonPropertyOrder(5)]
     [ProtoMember(7)]
-    public string MarktlokationsId { get; set; }
+    public string? MarktlokationsId { get; set; }
 
     /// <summary>
     /// Ein zusätzlicher Freitext
