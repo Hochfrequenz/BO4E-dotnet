@@ -19,9 +19,15 @@ public class LenientSystemTextJsonEnumListConverter : JsonConverterFactory
     /// <returns></returns>
     public override bool CanConvert(Type typeToConvert)
     {
-        if (!typeToConvert.IsGenericType) return false;
+        if (!typeToConvert.IsGenericType)
+        {
+            return false;
+        }
 
-        if (typeToConvert.GetGenericTypeDefinition() != typeof(List<>)) return false;
+        if (typeToConvert.GetGenericTypeDefinition() != typeof(List<>))
+        {
+            return false;
+        }
 
         var expectedListElementType = typeToConvert.GetGenericArguments()[0];
         return expectedListElementType.ToString().StartsWith("BO4E.ENUM");
@@ -55,9 +61,15 @@ public class LenientSystemTextJsonEnumListConverter<T, TE> : JsonConverter<T>
     /// <inheritdoc cref=" JsonConverter.CanConvert(Type)" />
     public override bool CanConvert(Type objectType)
     {
-        if (!objectType.IsGenericType) return false;
+        if (!objectType.IsGenericType)
+        {
+            return false;
+        }
 
-        if (objectType.GetGenericTypeDefinition() != typeof(List<>)) return false;
+        if (objectType.GetGenericTypeDefinition() != typeof(List<>))
+        {
+            return false;
+        }
 
         var expectedListElementType = objectType.GetGenericArguments()[0];
         return expectedListElementType.ToString().StartsWith("BO4E.ENUM");
@@ -75,7 +87,10 @@ public class LenientSystemTextJsonEnumListConverter<T, TE> : JsonConverter<T>
         var expectedListElementType = typeToConvert.GetGenericArguments()[0];
         var expectedListType = typeof(List<>).MakeGenericType(expectedListElementType);
         var result = Activator.CreateInstance(expectedListType);
-        if (rawList == null || rawList.Count == 0) return result as T;
+        if (rawList == null || rawList.Count == 0)
+        {
+            return result as T;
+        }
 
         // First try to parse the List normally, in case it's formatted as expected
         foreach (var rawItem in rawList)

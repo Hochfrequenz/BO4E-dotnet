@@ -24,11 +24,21 @@ namespace BO4E.meta.LenientConverters
         public override object ReadJson(JsonReader reader, Type objectType, object existingValue,
             JsonSerializer serializer)
         {
-            if (reader.Value == null) return null;
-            var numeric = new string(reader.Value.ToString().Where(char.IsDigit).ToArray());
-            if (int.TryParse(numeric, out var intValue)) return intValue;
+            if (reader.Value == null)
+            {
+                return null;
+            }
 
-            if (objectType == typeof(int?)) return null;
+            var numeric = new string(reader.Value.ToString().Where(char.IsDigit).ToArray());
+            if (int.TryParse(numeric, out var intValue))
+            {
+                return intValue;
+            }
+
+            if (objectType == typeof(int?))
+            {
+                return null;
+            }
 
             return 0;
         }

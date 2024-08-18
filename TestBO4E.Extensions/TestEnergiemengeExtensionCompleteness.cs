@@ -146,7 +146,9 @@ namespace TestBO4E.Extensions
                 Assert.AreEqual(12,
                     result.Count); // don't care about values of coverage, just the start/end and count of reports generated.
                 if (testFirstOnly)
+                {
                     break; // one test is enough. the rest is covered by the individual completeness report tests
+                }
             }
         }
 

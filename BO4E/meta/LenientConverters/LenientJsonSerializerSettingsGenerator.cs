@@ -35,6 +35,7 @@ namespace BO4E.meta.LenientConverters
             foreach (LenientParsing lp in Enum.GetValues(typeof(LenientParsing)))
                 if (lenient.HasFlag(lp))
                     // ReSharper disable once SwitchStatementMissingSomeEnumCasesNoDefault
+                {
                     switch (lp)
                     {
                         case LenientParsing.DATE_TIME:
@@ -54,12 +55,13 @@ namespace BO4E.meta.LenientConverters
                         case LenientParsing.STRING_TO_INT:
                             converters.Add(new LenientStringToIntConverter());
                             break;
-                            // case LenientParsing.EmptyLists:
-                            // converters.Add(new LenientRequiredListConverter());
-                            // break;
+                        // case LenientParsing.EmptyLists:
+                        // converters.Add(new LenientRequiredListConverter());
+                        // break;
 
-                            // no default case because NONE and MOST_LENIENT do not come up with more converters
+                        // no default case because NONE and MOST_LENIENT do not come up with more converters
                     }
+                }
 
             IContractResolver contractResolver = userPropertiesWhiteList.Count > 0
                 ? new UserPropertiesDataContractResolver(userPropertiesWhiteList)

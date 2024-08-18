@@ -13,8 +13,15 @@ public static class JsonHelper
                     foreach (var prop in token.Children<JProperty>())
                     {
                         var child = prop.Value;
-                        if (child.HasValues) child = RemoveEmptyChildren(child);
-                        if (!IsEmpty(child)) copy.Add(prop.Name, child);
+                        if (child.HasValues)
+                        {
+                            child = RemoveEmptyChildren(child);
+                        }
+
+                        if (!IsEmpty(child))
+                        {
+                            copy.Add(prop.Name, child);
+                        }
                     }
 
                     return copy;
@@ -25,8 +32,15 @@ public static class JsonHelper
                     foreach (var item in token.Children())
                     {
                         var child = item;
-                        if (child.HasValues) child = RemoveEmptyChildren(child);
-                        if (!IsEmpty(child)) copy.Add(child);
+                        if (child.HasValues)
+                        {
+                            child = RemoveEmptyChildren(child);
+                        }
+
+                        if (!IsEmpty(child))
+                        {
+                            copy.Add(child);
+                        }
                     }
 
                     return copy;

@@ -438,9 +438,15 @@ public class Marktlokation : BusinessObject
     public static bool ValidateId(string id)
     {
         if (string.IsNullOrWhiteSpace(id))
+        {
             return false;
+        }
+
         if (!RegexValidate.IsMatch(id))
+        {
             return false;
+        }
+
         var expectedChecksum = GetChecksum(id);
         var actualChecksum = id.Substring(10, 1);
         return actualChecksum == expectedChecksum;
@@ -459,17 +465,26 @@ public class Marktlokation : BusinessObject
     public static string GetChecksum(string input)
     {
         if (string.IsNullOrWhiteSpace(input))
+        {
             throw new ArgumentException(
                 $"Input '{nameof(input)}' must not be empty but was '{input}'"
             );
+        }
+
         if (input.Length is < 10 or > 11)
+        {
             throw new ArgumentException(
                 $"Input '{nameof(input)}' must be a string with length 10 (to generate the checksum) or 11 (to validate the checksum)."
             );
+        }
+
         if (!RegexNumericString.IsMatch(input))
+        {
             throw new ArgumentException(
                 $"Input '{nameof(input)}' must be numeric was '{input}'"
             );
+        }
+
         var oddChecksum = 0;
         var evenChecksum = 0;
 
@@ -478,9 +493,13 @@ public class Marktlokation : BusinessObject
         {
             var s = input.Substring(i - 1, 1);
             if (i % 2 == 0)
+            {
                 evenChecksum += 2 * int.Parse(s);
+            }
             else
+            {
                 oddChecksum += int.Parse(s);
+            }
         }
 
         var result = (10 - (evenChecksum + oddChecksum) % 10) % 10;

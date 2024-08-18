@@ -43,8 +43,10 @@ public class Rechnung : BusinessObject
         var infoToken = sapPrintDocument.SelectToken("erdk") ?? sapPrintDocument.SelectToken("ERDK");
         var tErdzToken = sapPrintDocument.SelectToken("tErdz") ?? sapPrintDocument.SelectToken("T_ERDZ");
         if (tErdzToken == null)
+        {
             throw new ArgumentException(
                 "The SAP print document did not contain a 'tErdz' token. Did you serialize using the right naming convention?");
+        }
 
         Rechnungsnummer = (infoToken["opbel"] ?? infoToken["OPBEL"]).Value<string>();
         Rechnungsdatum = new DateTimeOffset(TimeZoneInfo.ConvertTime(
@@ -79,7 +81,10 @@ public class Rechnung : BusinessObject
         foreach (var jrp in tErdzToken)
         {
             var belzart = (jrp["belzart"] ?? jrp["BELZART"]).ToString();
-            if (belzart == "IQUANT" || belzart == "ROUND" || belzart == "ROUNDO") continue;
+            if (belzart == "IQUANT" || belzart == "ROUND" || belzart == "ROUNDO")
+            {
+                continue;
+            }
 
             var rp = new Rechnungsposition();
             decimal zeitbezogeneMengeWert = 0;
@@ -139,30 +144,40 @@ public class Rechnung : BusinessObject
             if (rp.Einzelpreis == null)
             {
                 if ((jrp["preisbtr"] ?? jrp["PREISBTR"]) != null)
+                {
                     rp.Einzelpreis = new Preis
                     {
                         Wert = decimal.Parse((jrp["preisbtr"] ?? jrp["PREISBTR"]).ToString()),
                         Einheit = waehrungseinheit,
                         Bezugswert = mengeneinheit
                     };
+                }
                 else
+                {
                     rp.Einzelpreis = new Preis
                     {
                         Wert = 0,
                         Einheit = waehrungseinheit,
                         Bezugswert = mengeneinheit
                     };
+                }
             }
 
             rp.Positionsnummer = (jrp["belzeile"] ?? jrp["BELZEILE"]).Value<int>();
             if ((jrp["bis"] ?? jrp["BIS"]) != null && (jrp["bis"] ?? jrp["BIS"]).Value<string>() != "0000-00-00")
+            {
                 rp.LieferungBis = new DateTimeOffset(TimeZoneInfo.ConvertTime(
                     (jrp["bis"] ?? jrp["BIS"]).Value<DateTime>(),
                     CentralEuropeStandardTime.CentralEuropeStandardTimezoneInfo, TimeZoneInfo.Utc));
+            }
+
             if ((jrp["ab"] ?? jrp["AB"]) != null && (jrp["ab"] ?? jrp["AB"]).Value<string>() != "0000-00-00")
+            {
                 rp.LieferungVon = new DateTimeOffset(TimeZoneInfo.ConvertTime(
                     (jrp["ab"] ?? jrp["AB"]).Value<DateTime>(),
                     CentralEuropeStandardTime.CentralEuropeStandardTimezoneInfo, TimeZoneInfo.Utc));
+            }
+
             if ((jrp["vertrag"] ?? jrp["VERTRAG"]) != null)
             {
 #pragma warning disable CS0618 // Type or member is obsolete
@@ -171,11 +186,13 @@ public class Rechnung : BusinessObject
             }
 
             if ((jrp["iAbrmenge"] ?? jrp["I_ABRMENGE"]) != null)
+            {
                 rp.PositionsMenge = new Menge
                 {
                     Wert = (jrp["iAbrmenge"] ?? jrp["I_ABRMENGE"]).Value<decimal>(),
                     Einheit = mengeneinheit
                 };
+            }
 
             if ((jrp["nettobtr"] ?? jrp["NETTOBTR"]) != null)
             {
@@ -204,11 +221,15 @@ public class Rechnung : BusinessObject
                     decimal steuerProzent;
                     if ((jrp["stprz"] ?? jrp["STPRZ"]) != null &&
                         !string.IsNullOrWhiteSpace((jrp["stprz"] ?? jrp["STPRZ"]).Value<string>()))
+                    {
                         steuerProzent =
                             decimal.Parse((jrp["stprz"] ?? jrp["STPRZ"]).Value<string>().Replace(",", ".").Trim(),
                                 CultureInfo.InvariantCulture);
+                    }
                     else
+                    {
                         steuerProzent = steuerbetrag.Steuerwert / steuerbetrag.Basiswert * 100.0M;
+                    }
 
                     steuerbetrag.Steuerkennzeichen = (int)steuerProzent switch
                     {
@@ -221,8 +242,10 @@ public class Rechnung : BusinessObject
                 }
 
                 if ((jrp["nettobtr"] ?? jrp["NETTOBTR"]).Value<decimal>() <= 0)
+                {
                     Vorausgezahlt = new Betrag
-                    { Waehrung = waehrungscode, Wert = (jrp["nettobtr"] ?? jrp["NETTOBTR"]).Value<decimal>() };
+                        { Waehrung = waehrungscode, Wert = (jrp["nettobtr"] ?? jrp["NETTOBTR"]).Value<decimal>() };
+                }
             }
 
             rp.Zeiteinheit = mengeneinheit;
@@ -247,11 +270,15 @@ public class Rechnung : BusinessObject
                     decimal steuerProzent;
                     if ((jrp["stprz"] ?? jrp["STPRZ"]) != null &&
                         !string.IsNullOrWhiteSpace((jrp["stprz"] ?? jrp["STPRZ"]).Value<string>()))
+                    {
                         steuerProzent =
                             decimal.Parse((jrp["stprz"] ?? jrp["STPRZ"]).Value<string>().Replace(",", ".").Trim(),
                                 CultureInfo.InvariantCulture);
+                    }
                     else
+                    {
                         steuerProzent = Math.Round(steuerbetrag.Steuerwert / steuerbetrag.Basiswert * 100.0M);
+                    }
 
                     steuerbetrag.Steuerkennzeichen = steuerProzent switch
                     {

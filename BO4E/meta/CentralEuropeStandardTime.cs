@@ -23,7 +23,10 @@ namespace BO4E.meta
             using var stream = assembly.GetManifestResourceStream(resourceFileName);
             if (stream == null)
                 // this should never ever happen
+            {
                 throw new FileNotFoundException($"The file resource {resourceFileName} was not found.");
+            }
+
             using (var jsonReader = new StreamReader(stream))
             {
                 var jsonString = jsonReader.ReadToEnd();

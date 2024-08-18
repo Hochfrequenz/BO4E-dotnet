@@ -135,10 +135,15 @@ namespace BO4E.Extensions.BusinessObjects.Energiemenge
                         em.Energieverbrauch.Select(v => new TimeRange((v.Startdatum ?? DateTimeOffset.MinValue).DateTime, (v.Enddatum ?? DateTimeOffset.MinValue).DateTime)));
                 ITimeRange limits;
                 if (result.ReferenceTimeFrame != null && result.ReferenceTimeFrame.Startdatum.HasValue)
+                {
                     limits = new TimeRange(result.ReferenceTimeFrame.Startdatum.Value.UtcDateTime,
                         result.ReferenceTimeFrame.Enddatum.Value.UtcDateTime);
+                }
                 else
+                {
                     limits = null;
+                }
+
                 var gaps = new TimeGapCalculator<TimeRange>().GetGaps(nonNullValues, limits);
                 result.Gaps = gaps.Select(gap => new CompletenessReport.BasicVerbrauch
                 {
@@ -153,20 +158,28 @@ namespace BO4E.Extensions.BusinessObjects.Energiemenge
                     result.values.Sort(new BasicVerbrauchDateTimeComparer());
                 }*/
                 if (em.IsPure(true))
+                {
                     try
                     {
                         foreach (var kvp in em.Energieverbrauch.Where(v => v.UserProperties != null)
-                            .SelectMany(v => v.UserProperties))
+                                     .SelectMany(v => v.UserProperties))
                         {
-                            if (result.UserProperties == null) result.UserProperties = new Dictionary<string, object>();
+                            if (result.UserProperties == null)
+                            {
+                                result.UserProperties = new Dictionary<string, object>();
+                            }
+
                             if (!result.UserProperties.ContainsKey(kvp.Key))
+                            {
                                 result.UserProperties.Add(kvp.Key, kvp.Value);
+                            }
                         }
                     }
                     catch (InvalidOperationException)
                     {
                         // ok, there's no Verbrauch with user properties.
                     }
+                }
             }
 
             /*else
@@ -190,8 +203,11 @@ namespace BO4E.Extensions.BusinessObjects.Energiemenge
         public static CompletenessReport GetCompletenessReport(this BO.Energiemenge em)
         {
             if (!em.IsPure())
+            {
                 throw new ArgumentException(
                     "The provided Energiemenge is not pure. Please use overloaded method GetCompletenessReport(... , wertermittlungsverfahren, obiskennzahl, mengeneinheit).");
+            }
+
             Verbrauch v;
             try
             {
@@ -220,11 +236,17 @@ namespace BO4E.Extensions.BusinessObjects.Energiemenge
         public static IDictionary<ITimeRange, CompletenessReport> GetSlicedCompletenessReports(this BO.Energiemenge em,
             IEnumerable<ITimeRange> ranges, bool useParallelExecution = false)
         {
-            if (ranges == null) throw new ArgumentNullException(nameof(ranges), "list of time ranges must not be null");
+            if (ranges == null)
+            {
+                throw new ArgumentNullException(nameof(ranges), "list of time ranges must not be null");
+            }
+
             if (ranges.Any())
             {
                 if (useParallelExecution)
+                {
                     return ranges.AsParallel().ToDictionary(r => r, r => GetCompletenessReport(em, r));
+                }
 
                 return ranges.ToDictionary(r => r, r => GetCompletenessReport(em, r));
             }
