@@ -12,21 +12,21 @@ public class Adresse : COM
 {
     /// <summary>Die Postleitzahl. Beispiel: 41836</summary>
     [DataCategory(DataCategory.ADDRESS)]
-    [JsonProperty(PropertyName = "postleitzahl", Required = Required.Always, Order = 11)]
+    [JsonProperty(PropertyName = "postleitzahl", Required = Required.Default, Order = 11)]
     [JsonPropertyName("postleitzahl")]
     [FieldName("zipCode", Language.EN)]
     [ProtoMember(3)]
     [JsonPropertyOrder(11)]
-    public string Postleitzahl { get; set; }
+    public string? Postleitzahl { get; set; }
 
     /// <summary>Bezeichnung der Stadt. Beispiel Hückelhoven</summary>
     [DataCategory(DataCategory.ADDRESS)]
-    [JsonProperty(PropertyName = "ort", Required = Required.Always, Order = 12)]
+    [JsonProperty(PropertyName = "ort", Required = Required.Default, Order = 12)]
     [JsonPropertyName("ort")]
     [FieldName("city", Language.EN)]
     [ProtoMember(4)]
     [JsonPropertyOrder(12)]
-    public string Ort { get; set; }
+    public string? Ort { get; set; }
 
     /// <summary>Bezeichnung der Straße. Beispiel: Weserstraße</summary>
     [DataCategory(DataCategory.ADDRESS)]
