@@ -90,7 +90,7 @@ public class Zaehler : BusinessObject
     [JsonPropertyOrder(16)]
     [ProtoIgnore]
     public DateTimeOffset? EichungBis { get; set; } // ToDO implement date
-    
+
     [System.Text.Json.Serialization.JsonIgnore]
     [Newtonsoft.Json.JsonIgnore]
     [ProtoMember(11, Name = nameof(LetzteEichung))]
