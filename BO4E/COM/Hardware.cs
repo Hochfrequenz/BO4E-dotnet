@@ -20,7 +20,7 @@ public class Hardware : COM
     [JsonProperty(PropertyName = "bezeichnung", Required = Required.Always)]
     [JsonPropertyName("bezeichnung")]
     [ProtoMember(4)]
-    public string Bezeichnung { get; set; }
+    public string? Bezeichnung { get; set; }
 
     /// <summary>Bezeichnung der Hardware.</summary>
     [JsonProperty(PropertyName = "geraeteeigenschaften", Required = Required.Default)]
