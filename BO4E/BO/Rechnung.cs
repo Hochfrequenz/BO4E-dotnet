@@ -244,7 +244,7 @@ public class Rechnung : BusinessObject
                 if ((jrp["nettobtr"] ?? jrp["NETTOBTR"]).Value<decimal>() <= 0)
                 {
                     Vorausgezahlt = new Betrag
-                        { Waehrung = waehrungscode, Wert = (jrp["nettobtr"] ?? jrp["NETTOBTR"]).Value<decimal>() };
+                    { Waehrung = waehrungscode, Wert = (jrp["nettobtr"] ?? jrp["NETTOBTR"]).Value<decimal>() };
                 }
             }
 

@@ -127,7 +127,7 @@ namespace BO4E.Extensions.BusinessObjects.Energiemenge
 
             ISet<Mengeneinheit> einheiten = new HashSet<Mengeneinheit>(em.Energieverbrauch.Select(x => x.Einheit));
             if (einheiten.Count > 1)
-                // z.B. kWh und Wh oder Monat und Jahr... Die liefern IsPure==true.
+            // z.B. kWh und Wh oder Monat und Jahr... Die liefern IsPure==true.
             {
                 throw new NotImplementedException("Converting different units of same type is not supported yet.");
             }
@@ -439,7 +439,7 @@ namespace BO4E.Extensions.BusinessObjects.Energiemenge
                 var minDiff = startEndDatumPeriods.Min().TotalSeconds;
                 foreach (var ts in startEndDatumPeriods)
                     if (Math.Abs(ts.TotalSeconds % minDiff) != 0)
-                        // use profiler as logger:
+                    // use profiler as logger:
 
                     {
                         return false;
