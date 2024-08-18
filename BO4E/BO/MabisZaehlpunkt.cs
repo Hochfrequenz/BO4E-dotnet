@@ -1,3 +1,4 @@
+#nullable enable
 using BO4E.meta;
 
 using Newtonsoft.Json;
