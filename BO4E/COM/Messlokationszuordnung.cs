@@ -1,3 +1,4 @@
+#nullable enable
 using System;
 using System.Text.Json.Serialization;
 using BO4E.ENUM;
