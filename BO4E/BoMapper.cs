@@ -73,21 +73,4 @@ public abstract class BoMapper
 
         //throw new ArgumentException($"No implemented BusinessObject type matches the name '{businessObjectName}'.");
     }
-
-    /// <summary>
-    ///     Get JSON Scheme for given Business Object type
-    /// </summary>
-    /// <param name="businessObjectType">Business Object type (e.g. typeof(BO4E.BO.Messlokation)</param>
-    /// <returns>A JSON scheme to be used for validation purposes.</returns>
-    /// <exception cref="ArgumentException">if given type is not derived from BusinessObject</exception>
-    public static JSchema GetJsonSchemeFor(Type businessObjectType)
-    {
-        if (!businessObjectType.IsSubclassOf(typeof(BusinessObject)))
-        {
-            throw new ArgumentException($"The given type {businessObjectType} is not derived from BusinessObject.");
-        }
-
-        var bo = Activator.CreateInstance(businessObjectType) as BusinessObject;
-        return bo.GetJsonScheme();
-    }
 }

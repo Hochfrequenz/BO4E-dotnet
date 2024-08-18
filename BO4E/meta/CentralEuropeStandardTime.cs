@@ -10,10 +10,15 @@ namespace BO4E.meta
     /// </summary>
     public abstract class CentralEuropeStandardTime
     {
+        private static readonly TimeZoneInfo? _CentralEuropeStandardTimezoneInfo;
+
         /// <summary>
         ///     Central Europe Standard Time as hard coded default time. Public to be used elsewhere ;)
         /// </summary>
-        public static readonly TimeZoneInfo CentralEuropeStandardTimezoneInfo;
+        public static TimeZoneInfo CentralEuropeStandardTimezoneInfo
+        {
+            get => _CentralEuropeStandardTimezoneInfo!;
+        }
 
         static CentralEuropeStandardTime()
         {
@@ -26,13 +31,10 @@ namespace BO4E.meta
             {
                 throw new FileNotFoundException($"The file resource {resourceFileName} was not found.");
             }
-
-            using (var jsonReader = new StreamReader(stream))
-            {
-                var jsonString = jsonReader.ReadToEnd();
-                //Console.WriteLine(jsonString);
-                CentralEuropeStandardTimezoneInfo = JsonConvert.DeserializeObject<TimeZoneInfo>(jsonString);
-            }
+            using var jsonReader = new StreamReader(stream);
+            var jsonString = jsonReader.ReadToEnd();
+            //Console.WriteLine(jsonString);
+            _CentralEuropeStandardTimezoneInfo = JsonConvert.DeserializeObject<TimeZoneInfo>(jsonString);
         }
 
         /// <summary>
