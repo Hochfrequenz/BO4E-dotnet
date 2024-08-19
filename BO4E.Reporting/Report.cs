@@ -110,8 +110,11 @@ namespace BO4E.Reporting
                     }
 
                     if (i == 0 && headerLine)
+                    {
                         resultBuilder = new StringBuilder(string.Join(separator.ToString(), sortedHeaderNamesList) +
                                                           lineTerminator);
+                    }
+
                     resultBuilder.Append(string.Join(separator.ToString(), sortedResults) + lineTerminator);
                 }
             }
@@ -156,8 +159,11 @@ namespace BO4E.Reporting
                 }
 
                 if (headerLine)
+                {
                     resultBuilder =
                         new StringBuilder(string.Join(separator.ToString(), sortedHeaderNamesList) + lineTerminator);
+                }
+
                 resultBuilder.Append(string.Join(separator.ToString(), sortedResults));
             }
 
@@ -226,17 +232,25 @@ namespace BO4E.Reporting
                     if (nestedValue != null)
                     {
                         var muterType = "";
-                        if (field.DeclaringType.BaseType == typeof(COM.COM)) muterType = field.DeclaringType.Name + ".";
+                        if (field.DeclaringType.BaseType == typeof(COM.COM))
+                        {
+                            muterType = field.DeclaringType.Name + ".";
+                        }
+
                         var val = nestedValue.ToString();
                         if (field.PropertyType == typeof(DateTime?))
                         {
                             if (((DateTime?)nestedValue).HasValue)
+                            {
                                 val = ((DateTime?)nestedValue).Value.ToString("yyyy-MM-ddTHH:mm:ssZ");
+                            }
                         }
                         else if (field.PropertyType == typeof(DateTimeOffset?))
                         {
                             if (((DateTimeOffset?)nestedValue).HasValue)
+                            {
                                 val = ((DateTimeOffset?)nestedValue).Value.ToString("yyyy-MM-ddTHH:mm:ssZ");
+                            }
                         }
                         else if (field.PropertyType == typeof(DateTime))
                         {
@@ -263,7 +277,10 @@ namespace BO4E.Reporting
             var h = returnData.Keys.First();
             foreach (var field in fields)
             {
-                if (field.FieldType.IsSubclassOf(typeof(COM.COM))) continue;
+                if (field.FieldType.IsSubclassOf(typeof(COM.COM)))
+                {
+                    continue;
+                }
 
                 if (field.FieldType.IsGenericType && field.FieldType.GetGenericTypeDefinition() == typeof(List<>))
                 {
@@ -280,7 +297,11 @@ namespace BO4E.Reporting
                     var nestedValue = field.GetValue(value);
                     if (nestedValue != null)
                     {
-                        if (field.DeclaringType.BaseType == typeof(COM.COM)) continue;
+                        if (field.DeclaringType.BaseType == typeof(COM.COM))
+                        {
+                            continue;
+                        }
+
                         if (field.DeclaringType == typeof(BasicVerbrauch))
                         {
                             var muterType = "gap.";
@@ -288,7 +309,10 @@ namespace BO4E.Reporting
                             if (field.FieldType == typeof(DateTime?))
                             {
                                 if (((DateTime?)nestedValue).HasValue)
+                                {
                                     val = ((DateTime?)nestedValue).Value.ToString("yyyy-MM-ddTHH:mm:ssZ");
+                                }
+
                                 h.Add(muterType + field.Name);
                                 d.Add(val.Contains(separator) ? "\"" + val + "\"" : val);
                             }

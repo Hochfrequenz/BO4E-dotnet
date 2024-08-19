@@ -34,7 +34,10 @@ public abstract class BoMapper
         foreach (var t in types)
         {
             var m = BoRegex.Match(t.ToString());
-            if (m.Success) result.Add(m.Groups["boName"].Value);
+            if (m.Success)
+            {
+                result.Add(m.Groups["boName"].Value);
+            }
         }
 
         return result;
@@ -55,7 +58,10 @@ public abstract class BoMapper
     /// </example>
     public static Type GetTypeForBoName(string businessObjectName)
     {
-        if (businessObjectName == null) throw new ArgumentNullException(nameof(businessObjectName));
+        if (businessObjectName == null)
+        {
+            throw new ArgumentNullException(nameof(businessObjectName));
+        }
 
         //Type[] types = Assembly.GetExecutingAssembly().GetTypes();
         var clazz = Assembly.GetExecutingAssembly().GetType(PackagePrefix + "." + businessObjectName);

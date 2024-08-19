@@ -36,7 +36,10 @@ namespace BO4E.Extensions.ENUM
         public static bool AreConvertible(Mengeneinheit me1, Mengeneinheit me2)
         {
 #pragma warning disable 618
-            if (me1 == Mengeneinheit.ZERO || me2 == Mengeneinheit.ZERO) return false;
+            if (me1 == Mengeneinheit.ZERO || me2 == Mengeneinheit.ZERO)
+            {
+                return false;
+            }
 #pragma warning restore 618
             return DimensionSets.Any(einheitengroup => einheitengroup.Contains(me1) && einheitengroup.Contains(me2));
         }
@@ -109,13 +112,25 @@ namespace BO4E.Extensions.ENUM
 #pragma warning disable 618
             if (me1 == Mengeneinheit.ZERO || me2 == Mengeneinheit.ZERO)
 #pragma warning restore 618
+            {
                 throw new InvalidOperationException("You must not use the artificial 'ZERO' value.");
+            }
 
-            if (me1 == me2) return 1.0M;
+            if (me1 == me2)
+            {
+                return 1.0M;
+            }
+
             if (!me1.IsConvertibleTo(me2))
+            {
                 throw new InvalidOperationException(
                     $"{me1} and {me2} are not convertible into each other because they don't share the same dimension.");
-            if ((int)me1 % (int)me2 == 0 || (int)me2 % (int)me2 == 0) return (decimal)me1 / (decimal)me2;
+            }
+
+            if ((int)me1 % (int)me2 == 0 || (int)me2 % (int)me2 == 0)
+            {
+                return (decimal)me1 / (decimal)me2;
+            }
 
             throw new InvalidOperationException($"{me1} and {me2} are not (trivially) convertible into each other.");
         }

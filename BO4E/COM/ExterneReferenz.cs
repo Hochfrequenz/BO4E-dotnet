@@ -61,7 +61,11 @@ internal static class ExterneReferenzExtensions
     public static bool TryGetExterneReferenz(this ICollection<ExterneReferenz> extReferences, string extRefName,
         out string extRefWert)
     {
-        if (extRefName == null) throw new ArgumentNullException(nameof(extRefName));
+        if (extRefName == null)
+        {
+            throw new ArgumentNullException(nameof(extRefName));
+        }
+
         if (extReferences == null)
         {
             extRefWert = null;
@@ -92,12 +96,22 @@ internal static class ExterneReferenzExtensions
     public static List<ExterneReferenz> SetExterneReferenz(this List<ExterneReferenz> extReferences,
         ExterneReferenz extRef, bool overwriteExisting = false)
     {
-        if (extRef == null) throw new ArgumentNullException(nameof(extRef));
+        if (extRef == null)
+        {
+            throw new ArgumentNullException(nameof(extRef));
+        }
+
         if (!extRef.IsValid())
+        {
             throw new ArgumentException(
                 $"The external reference with {nameof(extRef.ExRefName)}='{extRef.ExRefName}' and {nameof(extRef.ExRefWert)}='{extRef.ExRefWert}' you tried to add is invalid.",
                 nameof(extRef));
-        if (extReferences == null) return new List<ExterneReferenz> { extRef };
+        }
+
+        if (extReferences == null)
+        {
+            return new List<ExterneReferenz> { extRef };
+        }
 
         if (extReferences.Any() && extReferences.TryGetExterneReferenz(extRef.ExRefName, out var existingRefWert))
         {
@@ -108,8 +122,10 @@ internal static class ExterneReferenzExtensions
             else
             {
                 if (existingRefWert != extRef.ExRefWert)
+                {
                     throw new InvalidOperationException(
                         $"There is already an with {nameof(extRef.ExRefName)}='{extRef.ExRefName}' having {nameof(extRef.ExRefWert)}='{existingRefWert}'!='{extRef.ExRefWert}'. Use {nameof(overwriteExisting)}=true to overwrite it.");
+                }
 
                 return extReferences;
             }

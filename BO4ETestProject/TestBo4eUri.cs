@@ -85,7 +85,9 @@ namespace TestBO4E
                         .Replace("\n", "")
                         .Replace("\r", "")
                         .Replace(" ", "") == "{\"vorname\":[null,null]}")
+                    {
                         continue;
+                    }
 
                     Assert.IsNull(patch, patch.ToString());
                 }

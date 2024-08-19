@@ -54,9 +54,12 @@ namespace TestBO4E
         protected void TestUniqueProtobufMemberIdAbstract(Type abstractType)
         {
             if (!abstractType.IsAbstract)
+            {
                 throw new ArgumentException($"The type {abstractType} is not abstract", nameof(abstractType));
+            }
+
             foreach (var type in
-                typeof(BusinessObject).Assembly.GetTypes().Where(t => abstractType.IsAssignableFrom(t)))
+                     typeof(BusinessObject).Assembly.GetTypes().Where(t => abstractType.IsAssignableFrom(t)))
                 TestProtobufType(type, type.BaseType == abstractType || type == abstractType);
         }
 
@@ -99,9 +102,11 @@ namespace TestBO4E
             try
             {
                 if (isDirectBase)
+                {
                     Assert.AreEqual(allFields.Length, fieldsWithProtoMemberAttribute.Count(),
                         $"Missing protobuf attributes for {type} for: " +
                         string.Join(", ", allFields.Except(fieldsWithProtoMemberAttribute)));
+                }
             }
             catch (ArgumentOutOfRangeException aoore) when (aoore.ParamName == "tag")
             {
@@ -130,7 +135,10 @@ namespace TestBO4E
         protected void TestProtobufDateTimeWorkaround(Type abstractBaseType)
         {
             if (!abstractBaseType.IsAbstract)
+            {
                 throw new ArgumentException($"The type {abstractBaseType} is not abstract", nameof(abstractBaseType));
+            }
+
             var relevantTypes = typeof(BusinessObject).Assembly.GetTypes()
                 .Where(t => abstractBaseType.IsAssignableFrom(t));
             foreach (var relevantType in relevantTypes)
@@ -171,7 +179,10 @@ namespace TestBO4E
         protected void TestUniqueProtoIncludeTagAbstract(Type abstractBaseType) // ToDo: test this with preisblatt
         {
             if (!abstractBaseType.IsAbstract)
+            {
                 throw new ArgumentException($"The type {abstractBaseType} is not abstract", nameof(abstractBaseType));
+            }
+
             var duplicateIncludeTags = typeof(BusinessObject).Assembly.GetTypes()
                 .Where(t => abstractBaseType.IsAssignableFrom(t))
                 .SelectMany(t => t.GetCustomAttributes(typeof(ProtoIncludeAttribute), false))
@@ -236,13 +247,18 @@ namespace TestBO4E
                 // Assert.IsTrue(typePair.baseType.GetCustomAttributes(typeof(ProtoContractAttribute), false).Any(), $"The (base) type {typePair.baseType} has not [ProtoContract] attribute."); // ToDo: re-add this line because fields on BO / COM level are not properly proto-serialized as of now!
                 if (typePair.inheritingType.BaseType ==
                     typeof(BusinessObject)) //because protobuf-net doesn't support mutliple levels of inheritance
+                {
                     Assert.IsTrue(
                         typePair.inheritingType.GetCustomAttributes(typeof(ProtoContractAttribute), false).Any(),
                         $"The (inheriting) type {typePair.inheritingType} has not [ProtoContract] attribute.");
+                }
                 else
+                {
                     Assert.IsFalse(
                         typePair.inheritingType.GetCustomAttributes(typeof(ProtoContractAttribute), false).Any(),
                         $"The (INDIRECTLY inheriting) type {typePair.inheritingType} has the [ProtoContract] attribute."); // bug in protobuf-net
+                }
+
                 if (typePair.inheritingType.BaseType == typePair.baseType &&
                     typePair.baseType != typeof(BusinessObject))
                 {
