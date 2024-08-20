@@ -429,6 +429,20 @@ public class Marktlokation : BusinessObject
     [ProtoMember(42)]
     [JsonPropertyOrder(42)]
     public string? LokationsbuendelObjektcode { get; set; }
+    
+    /// <summary>
+    /// Enthält die ID der vorgelagerten Lokation. Kann Ids unterschiedlicher Lokationen enthalten, also zum Beispiel
+    /// einer Messlokation oder Marktlokation.
+    /// </summary>
+    [JsonProperty(
+        Required = Required.Default,
+        Order = 43,
+        PropertyName = "vorgelagerteLokationsId"
+    )]
+    [JsonPropertyName("vorgelagerteLokationsId")]
+    [ProtoMember(43)]
+    [JsonPropertyOrder(43)]
+    public string? VorgelagerteLokationsId { get; set; }
 
     /// <summary>
     ///     Test if a <paramref name="id" /> is a valid Marktlokations ID.
