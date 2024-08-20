@@ -238,7 +238,7 @@ public class TechnischeRessource : BusinessObject
     [JsonPropertyOrder(24)]
     [NonOfficial(NonOfficialCategory.CUSTOMER_REQUIREMENTS)]
     public string? LokationsbuendelObjektcode { get; set; }
-    
+
     /// <summary>
     /// Enthält die ID der vorgelagerten Lokation. Kann Ids unterschiedlicher Lokationen enthalten, also zum Beispiel
     /// einer Messlokation oder Marktlokation.
