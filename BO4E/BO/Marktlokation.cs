@@ -432,7 +432,7 @@ public class Marktlokation : BusinessObject
 
     /// <summary>
     /// Enthält die ID der vorgelagerten Lokation. Kann Ids unterschiedlicher Lokationen enthalten, also zum Beispiel
-    /// einer Messlokation oder Marktlokation.
+    /// einer Messlokation oder Netzlokation.
     /// </summary>
     [JsonProperty(
         Required = Required.Default,
