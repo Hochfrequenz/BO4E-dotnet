@@ -1,3 +1,4 @@
+#nullable enable
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -449,7 +450,7 @@ public class Marktlokation : BusinessObject
     /// </summary>
     /// <param name="id">id to test</param>
     /// <returns></returns>
-    public static bool ValidateId(string id)
+    public static bool ValidateId(string? id)
     {
         if (string.IsNullOrWhiteSpace(id))
         {
@@ -460,9 +461,8 @@ public class Marktlokation : BusinessObject
         {
             return false;
         }
-
-        var expectedChecksum = GetChecksum(id);
-        var actualChecksum = id.Substring(10, 1);
+        var expectedChecksum = GetChecksum(id!);
+        var actualChecksum = id!.Substring(10, 1);
         return actualChecksum == expectedChecksum;
     }
 
