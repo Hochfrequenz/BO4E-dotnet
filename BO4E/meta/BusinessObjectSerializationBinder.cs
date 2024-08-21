@@ -27,13 +27,13 @@ public class BusinessObjectSerializationBinder : ISerializationBinder
     public static IList<Type> BusinessObjectAndCOMTypes { get; }
 
     /// <inheritdoc cref="ISerializationBinder.BindToType(string, string)" />
-    public Type BindToType(string assemblyName, string typeName)
+    public Type BindToType(string? assemblyName, string typeName)
     {
         return BusinessObjectAndCOMTypes.SingleOrDefault(t => t.Name == typeName);
     }
 
     /// <inheritdoc cref="ISerializationBinder.BindToName(Type, out string, out string)" />
-    public void BindToName(Type serializedType, out string assemblyName, out string typeName)
+    public void BindToName(Type serializedType, out string? assemblyName, out string typeName)
     {
         assemblyName = null;
         typeName = serializedType.Name;

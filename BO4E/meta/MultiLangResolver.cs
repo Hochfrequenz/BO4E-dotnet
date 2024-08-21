@@ -39,12 +39,16 @@ namespace BO4E.meta
 
             // See if there is a [FieldName] attribute applied to the property 
             // for the requested language
-            var att = prop.AttributeProvider.GetAttributes(true)
+            var att = prop.AttributeProvider?.GetAttributes(true)
                 .OfType<FieldName>()
                 .FirstOrDefault(a => a.Language == _language);
 
             // if so, change the property name to the one from the attribute
-            if (att != null) prop.PropertyName = att.Text;
+            if (att != null)
+            {
+                prop.PropertyName = att.Text;
+            }
+
             return prop;
         }
     }

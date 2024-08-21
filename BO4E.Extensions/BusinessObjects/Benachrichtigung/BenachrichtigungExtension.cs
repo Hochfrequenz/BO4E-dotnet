@@ -34,7 +34,11 @@ namespace BO4E.Extensions.BusinessObjects.Benachrichtigung
         /// <returns></returns>
         public static bool Has(this BO.Benachrichtigung b, GenericStringStringInfo gssi)
         {
-            if (b.Infos == null || b.Infos.Count == 0) return false;
+            if (b.Infos == null || b.Infos.Count == 0)
+            {
+                return false;
+            }
+
             // ToDo für Hamid: Bitte prüfen, warum Contains false zurückliefert.
             return b.Infos.Any(m => m.KeyColumn == gssi.KeyColumn && m.Value == gssi.Value);
         }
@@ -47,7 +51,11 @@ namespace BO4E.Extensions.BusinessObjects.Benachrichtigung
         /// <returns>true if key is in <see cref="BO4E.BO.Benachrichtigung.Infos" /></returns>
         public static bool Has(this BO.Benachrichtigung b, string key)
         {
-            if (b.Infos == null || b.Infos.Count == 0) return false;
+            if (b.Infos == null || b.Infos.Count == 0)
+            {
+                return false;
+            }
+
             return b.Infos.Any(gssi => gssi.KeyColumn == key);
         }
 
@@ -68,11 +76,18 @@ namespace BO4E.Extensions.BusinessObjects.Benachrichtigung
         public static bool Has<T>(this BO.Benachrichtigung b, string keyName, Predicate<T> predicate,
             bool passByDefault = true, TypeConverter typeConverter = null) where T : IComparable
         {
-            if (!b.Has(keyName)) return passByDefault;
+            if (!b.Has(keyName))
+            {
+                return passByDefault;
+            }
+
             foreach (var info in b.Infos.Where(gssi => gssi.KeyColumn == keyName))
                 try
                 {
-                    if (typeConverter == null) typeConverter = TypeDescriptor.GetConverter(typeof(T));
+                    if (typeConverter == null)
+                    {
+                        typeConverter = TypeDescriptor.GetConverter(typeof(T));
+                    }
 
                     {
                         var value = (T)typeConverter.ConvertFromString(info.Value);
@@ -97,11 +112,18 @@ namespace BO4E.Extensions.BusinessObjects.Benachrichtigung
         {
             if (b.Infos != null && b.Infos.Count > 0)
             {
-                if (b.UserProperties == null) b.UserProperties = new Dictionary<string, object>();
+                if (b.UserProperties == null)
+                {
+                    b.UserProperties = new Dictionary<string, object>();
+                }
+
                 foreach (var info in b.Infos)
                 {
                     if (b.UserProperties.ContainsKey(info.KeyColumn) && overwriteExistingKeys)
+                    {
                         b.UserProperties.Remove(info.KeyColumn);
+                    }
+
                     b.UserProperties.Add(info.KeyColumn,
                         info.Value); // might throw exception if key exists and !overwriteExistingKeys. That's ok.
                 }

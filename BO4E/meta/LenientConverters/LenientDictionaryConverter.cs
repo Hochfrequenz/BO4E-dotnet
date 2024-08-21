@@ -32,19 +32,29 @@ namespace BO4E.meta.LenientConverters
             JsonSerializerOptions options)
         {
             if (reader.TokenType != JsonTokenType.StartObject)
+            {
                 throw new JsonException($"JsonTokenType was of type {reader.TokenType}, only objects are supported");
+            }
 
             var dictionary = new Dictionary<string, object>();
             while (reader.Read())
             {
-                if (reader.TokenType == JsonTokenType.EndObject) return dictionary;
+                if (reader.TokenType == JsonTokenType.EndObject)
+                {
+                    return dictionary;
+                }
 
                 if (reader.TokenType != JsonTokenType.PropertyName)
+                {
                     throw new JsonException("JsonTokenType was not PropertyName");
+                }
 
                 var propertyName = reader.GetString();
 
-                if (string.IsNullOrWhiteSpace(propertyName)) throw new JsonException("Failed to get property name");
+                if (string.IsNullOrWhiteSpace(propertyName))
+                {
+                    throw new JsonException("Failed to get property name");
+                }
 
                 reader.Read();
 
@@ -72,7 +82,10 @@ namespace BO4E.meta.LenientConverters
 
         private static void HandleValue(Utf8JsonWriter writer, string key, object objectValue)
         {
-            if (key != null) writer.WritePropertyName(key);
+            if (key != null)
+            {
+                writer.WritePropertyName(key);
+            }
 
             switch (objectValue)
             {
@@ -126,7 +139,11 @@ namespace BO4E.meta.LenientConverters
             switch (reader.TokenType)
             {
                 case JsonTokenType.String:
-                    if (reader.TryGetDateTime(out var date)) return date;
+                    if (reader.TryGetDateTime(out var date))
+                    {
+                        return date;
+                    }
+
                     return reader.GetString();
                 case JsonTokenType.False:
                     return false;
@@ -135,7 +152,11 @@ namespace BO4E.meta.LenientConverters
                 case JsonTokenType.Null:
                     return null;
                 case JsonTokenType.Number:
-                    if (reader.TryGetInt64(out var result)) return result;
+                    if (reader.TryGetInt64(out var result))
+                    {
+                        return result;
+                    }
+
                     return reader.GetDecimal();
                 case JsonTokenType.StartObject:
                     return Read(ref reader, null, options);

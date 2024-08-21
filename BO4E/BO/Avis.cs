@@ -1,3 +1,4 @@
+#nullable enable
 using BO4E.COM;
 using BO4E.ENUM;
 using BO4E.meta;
@@ -20,37 +21,37 @@ public class Avis : BusinessObject
     /// <summary>
     /// Eine im Verwendungskontext eindeutige Nummer für das Avis.
     /// </summary>
-    [JsonProperty(PropertyName = "avisNummer", Required = Required.Always)]
+    [JsonProperty(PropertyName = "avisNummer", Required = Required.Default)]
     [JsonPropertyName("avisNummer")]
     [NonOfficial(NonOfficialCategory.MISSING)]
     [ProtoMember(1000)]
-    public string AvisNummer { get; set; }
+    public string? AvisNummer { get; set; }
 
     /// <summary>
     /// Gibt den Typ des Avis an.
     /// </summary>
     /// <see cref="AvisTyp" />
-    [JsonProperty(PropertyName = "avisTyp", Required = Required.Always)]
+    [JsonProperty(PropertyName = "avisTyp", Required = Required.Default)]
     [JsonPropertyName("avisTyp")]
     [ProtoMember(1001)]
-    public AvisTyp AvisTyp { get; set; }
+    public AvisTyp? AvisTyp { get; set; }
 
     /// <summary>
     /// Avispositionen
     /// </summary>
-    [JsonProperty(PropertyName = "positionen", Required = Required.Always)]
+    [JsonProperty(PropertyName = "positionen", Required = Required.Default)]
     [JsonPropertyName("positionen")]
     [NonOfficial(NonOfficialCategory.MISSING)]
     [ProtoMember(1002)]
     [BoKey]
-    public List<Avisposition> Positionen { get; set; }
+    public List<Avisposition>? Positionen { get; set; }
 
     /// <summary>
     /// Summenbetrag
     /// </summary>
-    [JsonProperty(PropertyName = "zuZahlen", Required = Required.Always)]
+    [JsonProperty(PropertyName = "zuZahlen", Required = Required.Default)]
     [JsonPropertyName("zuZahlen")]
     [NonOfficial(NonOfficialCategory.MISSING)]
     [ProtoMember(1003)]
-    public Betrag ZuZahlen { get; set; }
+    public Betrag? ZuZahlen { get; set; }
 }

@@ -34,7 +34,10 @@ public abstract class BoMapper
         foreach (var t in types)
         {
             var m = BoRegex.Match(t.ToString());
-            if (m.Success) result.Add(m.Groups["boName"].Value);
+            if (m.Success)
+            {
+                result.Add(m.Groups["boName"].Value);
+            }
         }
 
         return result;
@@ -55,7 +58,10 @@ public abstract class BoMapper
     /// </example>
     public static Type GetTypeForBoName(string businessObjectName)
     {
-        if (businessObjectName == null) throw new ArgumentNullException(nameof(businessObjectName));
+        if (businessObjectName == null)
+        {
+            throw new ArgumentNullException(nameof(businessObjectName));
+        }
 
         //Type[] types = Assembly.GetExecutingAssembly().GetTypes();
         var clazz = Assembly.GetExecutingAssembly().GetType(PackagePrefix + "." + businessObjectName);
@@ -66,19 +72,5 @@ public abstract class BoMapper
                select Assembly.GetExecutingAssembly().GetType(PackagePrefix + "." + boName)).FirstOrDefault();
 
         //throw new ArgumentException($"No implemented BusinessObject type matches the name '{businessObjectName}'.");
-    }
-
-    /// <summary>
-    ///     Get JSON Scheme for given Business Object type
-    /// </summary>
-    /// <param name="businessObjectType">Business Object type (e.g. typeof(BO4E.BO.Messlokation)</param>
-    /// <returns>A JSON scheme to be used for validation purposes.</returns>
-    /// <exception cref="ArgumentException">if given type is not derived from BusinessObject</exception>
-    public static JSchema GetJsonSchemeFor(Type businessObjectType)
-    {
-        if (!businessObjectType.IsSubclassOf(typeof(BusinessObject)))
-            throw new ArgumentException($"The given type {businessObjectType} is not derived from BusinessObject.");
-        var bo = Activator.CreateInstance(businessObjectType) as BusinessObject;
-        return bo.GetJsonScheme();
     }
 }

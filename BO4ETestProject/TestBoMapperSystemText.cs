@@ -37,16 +37,26 @@ public class TestBoMapperSystemText
                 $"You have to specify the object name in test file {file}");
             var lenients = LenientParsing.STRICT; // default
             if (json.RootElement.TryGetProperty("lenientDateTime", out var boolElement) && boolElement.GetBoolean())
+            {
                 lenients |= LenientParsing.DATE_TIME;
+            }
 
             if (json.RootElement.TryGetProperty("lenientEnumList", out var listElement) && listElement.GetBoolean())
+            {
                 lenients |= LenientParsing.ENUM_LIST;
+            }
 
             if (json.RootElement.TryGetProperty("lenientBo4eUri", out var urlElement) && urlElement.GetBoolean())
+            {
                 lenients |= LenientParsing.BO4_E_URI;
+            }
 
             if (json.RootElement.TryGetProperty("lenientStringToInt", out var intElement) &&
-                intElement.GetBoolean()) lenients |= LenientParsing.STRING_TO_INT;
+                intElement.GetBoolean())
+            {
+                lenients |= LenientParsing.STRING_TO_INT;
+            }
+
             BusinessObject bo = null;
             try
             {
@@ -61,7 +71,11 @@ public class TestBoMapperSystemText
             }
 
             var regularOutputString = JsonSerializer.Serialize(bo, bo.GetType());
-            if (bo.GetType() == typeof(Rechnung)) continue; // todo: fix this!
+            if (bo.GetType() == typeof(Rechnung))
+            {
+                continue; // todo: fix this!
+            }
+
             /*if (json["input"]["boTyp"] != null)
             {
                 //BusinessObject bo2 = BoMapper.MapObject((JObject)json["input"], lenients);
@@ -83,10 +97,16 @@ public class TestBoMapperSystemText
             }*/
             HashSet<string> whitelist;
             if (json.RootElement.TryGetProperty("userPropWhiteList", out var whiteList))
+            {
                 whitelist = new HashSet<string>(JsonSerializer.Deserialize<List<string>>(whiteList.GetRawText()));
+            }
             else
+            {
                 whitelist = new HashSet<string>();
+            }
+
             if (lenients == LenientParsing.STRICT)
+            {
                 foreach (LenientParsing lenient in Enum.GetValues(typeof(LenientParsing)))
                 {
                     // strict mappings must also work with lenient mapping
@@ -112,6 +132,7 @@ public class TestBoMapperSystemText
                     //    Assert.AreEqual(regularOutputString, dateLenietOutputString);
                     //}
                 }
+            }
         }
     }
 
@@ -260,9 +281,13 @@ public class TestBoMapperSystemText
             set
             {
                 if (value == DateTime.MinValue)
+                {
                     eventOccured = new DateTime(1, 1, 1, 0, 0, 0, DateTimeKind.Utc);
+                }
                 else
+                {
                     eventOccured = value;
+                }
             }
         }
     }

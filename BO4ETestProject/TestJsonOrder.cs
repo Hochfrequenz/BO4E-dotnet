@@ -125,7 +125,10 @@ namespace TestBO4E
         protected static void TestOrderFromAbstract(Type abstractBaseType)
         {
             if (!abstractBaseType.IsAbstract)
+            {
                 throw new ArgumentException($"The type {abstractBaseType} is not abstract", nameof(abstractBaseType));
+            }
+
             var relevantTypes = typeof(BusinessObject).Assembly.GetTypes().Where(abstractBaseType.IsAssignableFrom);
             foreach (var relevantType in relevantTypes.Where(t => !IgnoreOrderTypes.Contains(t) && !t.Name.Contains("Marktrolle")))
             {

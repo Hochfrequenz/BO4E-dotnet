@@ -217,6 +217,7 @@ public class Vertrag : BusinessObject
     {
         if ((Vertragsteile == null || Vertragsteile.Count == 0) && UserProperties != null &&
             UserProperties.ContainsKey("lokationsId"))
+        {
             Vertragsteile = new List<Vertragsteil>
             {
                 new Vertragsteil
@@ -226,6 +227,7 @@ public class Vertrag : BusinessObject
                     Lokation = UserProperties["lokationsId"] as string
                 }
             };
+        }
     }
 }
 
@@ -259,6 +261,7 @@ public class VertragsConverter : System.Text.Json.Serialization.JsonConverter<Ve
         }
         if ((v.Vertragsteile == null || v.Vertragsteile.Count == 0) && v.UserProperties != null &&
             v.UserProperties.TryGetValue("lokationsId", out var property))
+        {
             v.Vertragsteile = new List<Vertragsteil>
             {
                 new()
@@ -268,6 +271,8 @@ public class VertragsConverter : System.Text.Json.Serialization.JsonConverter<Ve
                     Lokation = ((JsonElement) property).GetString()
                 }
             };
+        }
+
         return v;
     }
 

@@ -115,12 +115,23 @@ namespace BO4E.Extensions.BusinessObjects.Energiemenge
         /// <returns>Tuple of consumption value and automatically determined unit of measurement</returns>
         public static Tuple<decimal, Mengeneinheit> GetConsumption(this BO.Energiemenge em, ITimeRange reference)
         {
-            if (!IsPure(em)) throw new ArgumentException("The Energiemenge is not pure.");
-            if (em.Energieverbrauch.Count == 0) return Tuple.Create(0.0M, Mengeneinheit.ANZAHL);
+            if (!IsPure(em))
+            {
+                throw new ArgumentException("The Energiemenge is not pure.");
+            }
+
+            if (em.Energieverbrauch.Count == 0)
+            {
+                return Tuple.Create(0.0M, Mengeneinheit.ANZAHL);
+            }
+
             ISet<Mengeneinheit> einheiten = new HashSet<Mengeneinheit>(em.Energieverbrauch.Select(x => x.Einheit));
             if (einheiten.Count > 1)
-                // z.B. kWh und Wh oder Monat und Jahr... Die liefern IsPure==true.
+            // z.B. kWh und Wh oder Monat und Jahr... Die liefern IsPure==true.
+            {
                 throw new NotImplementedException("Converting different units of same type is not supported yet.");
+            }
+
             var v = em.Energieverbrauch.First();
             var consumption = em.GetConsumption(reference, v.Wertermittlungsverfahren, v.Obiskennzahl, v.Einheit);
             return Tuple.Create(consumption, v.Einheit);
@@ -143,8 +154,11 @@ namespace BO4E.Extensions.BusinessObjects.Energiemenge
             Wertermittlungsverfahren? wev, string obiskennzahl, Mengeneinheit me)
         {
             if (!me.IsExtensive())
+            {
                 throw new ArgumentException(
                     $"The Mengeneinheit {me} isn't extensive. Calculating a consumption doesn't make sense.");
+            }
+
             return em.Energieverbrauch
                 .Where(v => v.Wertermittlungsverfahren == wev && v.Obiskennzahl == obiskennzahl && v.Einheit == me)
                 .Sum(v => GetOverlapFactor(new TimeRange((v.Startdatum ?? DateTimeOffset.MinValue).DateTime, (v.Enddatum ?? DateTimeOffset.MinValue).DateTime), reference, false) * v.Wert);
@@ -166,9 +180,13 @@ namespace BO4E.Extensions.BusinessObjects.Energiemenge
             totalConsumption = em.GetTotalConsumption();
             result = em.DeepClone();
             if (totalConsumption.Item1 != 0.0M)
+            {
                 scalingFactor = target / totalConsumption.Item1;
+            }
             else
+            {
                 scalingFactor = 0.0M;
+            }
 
             Parallel.ForEach(result.Energieverbrauch.Where(v => v.Einheit == totalConsumption.Item2),
                 v => { v.Wert = scalingFactor * v.Wert; });
@@ -188,14 +206,22 @@ namespace BO4E.Extensions.BusinessObjects.Energiemenge
         public static decimal? GetLoad(this BO.Energiemenge em, Mengeneinheit me, DateTime dt)
         {
             if (!me.IsIntensive())
+            {
                 throw new ArgumentException(
                     $"The Mengeneinheit {me} isn't intensive. Calculating the value for a specific point in time doesn't make sense.");
+            }
+
             decimal? result = null;
             foreach (var v in em.Energieverbrauch.Where(v => v.Startdatum <= dt && dt < v.Enddatum))
                 if (result.HasValue)
+                {
                     result += v.Wert;
+                }
                 else
+                {
                     result = v.Wert;
+                }
+
             return result;
         }
 
@@ -209,9 +235,16 @@ namespace BO4E.Extensions.BusinessObjects.Energiemenge
         /// <returns>Tuple of average value and unit of measurement</returns>
         public static Tuple<decimal?, Mengeneinheit> GetAverage(this BO.Energiemenge em)
         {
-            if (!IsPure(em)) throw new ArgumentException("Energiemenge is not pure.");
+            if (!IsPure(em))
+            {
+                throw new ArgumentException("Energiemenge is not pure.");
+            }
 
-            if (em.Energieverbrauch.Count == 0) return Tuple.Create<decimal?, Mengeneinheit>(null, Mengeneinheit.KW);
+            if (em.Energieverbrauch.Count == 0)
+            {
+                return Tuple.Create<decimal?, Mengeneinheit>(null, Mengeneinheit.KW);
+            }
+
             var v = em.Energieverbrauch.First();
             return Tuple.Create(em.GetAverage(v.Wertermittlungsverfahren, v.Obiskennzahl, v.Einheit), v.Einheit);
         }
@@ -251,13 +284,21 @@ namespace BO4E.Extensions.BusinessObjects.Energiemenge
             {
                 var overlapFactor = GetOverlapFactor(new TimeRange((v.Startdatum ?? DateTimeOffset.MinValue).DateTime, (v.Enddatum ?? DateTimeOffset.MinValue).DateTime), reference, true);
                 if (result.HasValue)
+                {
                     result += overlapFactor * v.Wert;
+                }
                 else
+                {
                     result = v.Wert;
+                }
+
                 overallDenominator += overlapFactor;
             }
 
-            if (result.HasValue) return result / overallDenominator;
+            if (result.HasValue)
+            {
+                return result / overallDenominator;
+            }
 
             return null;
         }
@@ -293,16 +334,25 @@ namespace BO4E.Extensions.BusinessObjects.Energiemenge
 
 
             if (filteredVerbrauch.Count < 2)
+            {
                 throw new ArgumentException("Not enough entries in energieverbrauch to determine periodicity.");
+            }
+
             if (!IsEvenlySpaced(em, reference, wev, obis, me, true))
+            {
                 throw new ArgumentException(
                     "The provided Energiemenge is not evenly spaced although gaps are allowed.");
+            }
+
             var periodicity = GetTimeSpans(em, wev, obis, me).Min();
             if (
                 Math.Abs((reference.Start - em.GetMinDate()).TotalMilliseconds % periodicity.TotalMilliseconds) !=
                 0)
+            {
                 throw new ArgumentException(
                     $"The absolute difference between reference.start ({reference.Start}) and the minimal date time in the Energiemenge ({em.GetMinDate()}) has to be an integer multiple of the periodicity {periodicity.TotalMilliseconds} but was {(reference.Start - em.GetMinDate()).TotalMilliseconds}.");
+            }
+
             // since it's assured, that the energieverbrauch entries are evenly spaced it doesn't matter which entry we use to determine the duration.
             var duration = filteredVerbrauch.Values.Min(v => v.Enddatum) -
                            filteredVerbrauch.Values.Min(v => v.Startdatum);
@@ -327,7 +377,9 @@ namespace BO4E.Extensions.BusinessObjects.Energiemenge
                 if (!filteredVerbrauch.ContainsKey(
                     new Tuple<DateTimeOffset?, DateTimeOffset?>(dt,
                         dt + duration))) //   Where<Verbrauch>(v => v.startdatum == dt && v.enddatum == dt + duration).Any())
+                {
                     result.Add(new TimeRange(dt, (dt + duration).Value));
+                }
                 //}
             }
 
@@ -345,8 +397,11 @@ namespace BO4E.Extensions.BusinessObjects.Energiemenge
         public static List<TimeRange> GetMissingTimeRanges(this BO.Energiemenge em, TimeRange reference)
         {
             if (!em.IsPure())
+            {
                 throw new ArgumentException(
                     "The Energiemenge you provided is not pure. Consider using the overloaded method.");
+            }
+
             var v = em.Energieverbrauch.FirstOrDefault();
             return GetMissingTimeRanges(em, reference, v.Wertermittlungsverfahren, v.Obiskennzahl, v.Einheit);
         }
@@ -372,7 +427,11 @@ namespace BO4E.Extensions.BusinessObjects.Energiemenge
             startEndDatumPeriods = GetTimeSpans(em, wev, obis, me);
 
 
-            if (startEndDatumPeriods.Count < 2) return true;
+            if (startEndDatumPeriods.Count < 2)
+            {
+                return true;
+            }
+
             if (allowGaps)
             {
                 // each time difference must be a multiple of the smallest difference.
@@ -380,9 +439,11 @@ namespace BO4E.Extensions.BusinessObjects.Energiemenge
                 var minDiff = startEndDatumPeriods.Min().TotalSeconds;
                 foreach (var ts in startEndDatumPeriods)
                     if (Math.Abs(ts.TotalSeconds % minDiff) != 0)
-                        // use profiler as logger:
+                    // use profiler as logger:
 
+                    {
                         return false;
+                    }
 
 
                 return true;
@@ -408,7 +469,9 @@ namespace BO4E.Extensions.BusinessObjects.Energiemenge
                 var combinations = GetWevObisMeCombinations(em);
                 foreach (var combo in combinations)
                     if (!em.IsEvenlySpaced(em.GetTimeRange(), combo.Item1, combo.Item2, combo.Item3, allowGaps))
+                    {
                         return false;
+                    }
 
 
                 return true;
@@ -490,8 +553,15 @@ namespace BO4E.Extensions.BusinessObjects.Energiemenge
         {
 
             if (!IsPure(em))
+            {
                 throw new ArgumentException("The Energiemenge is not pure. Cannot determine parameters.");
-            if (em.Energieverbrauch.Count == 0) return 0.0M;
+            }
+
+            if (em.Energieverbrauch.Count == 0)
+            {
+                return 0.0M;
+            }
+
             var v = em.Energieverbrauch.First();
             return em.GetCoverage(reference, v.Wertermittlungsverfahren, v.Obiskennzahl, v.Einheit);
 
@@ -571,8 +641,10 @@ namespace BO4E.Extensions.BusinessObjects.Energiemenge
             try
             {
                 if (toReference)
+                {
                     return (decimal)intersectedPeriods.TotalDuration.TotalSeconds /
                            (decimal)reference.Duration.TotalSeconds;
+                }
 
                 return (decimal)intersectedPeriods.TotalDuration.TotalSeconds / (decimal)period.Duration.TotalSeconds;
             }
@@ -653,8 +725,14 @@ namespace BO4E.Extensions.BusinessObjects.Energiemenge
                         if (values.TryGetValue(key, out var onlyValue))
                         {
                             if (rawValue == null && onlyValue != null)
+                            {
                                 return false;
-                            if (rawValue != null && !rawValue.Equals(onlyValue)) return false;
+                            }
+
+                            if (rawValue != null && !rawValue.Equals(onlyValue))
+                            {
+                                return false;
+                            }
                         }
                         else
                         {
@@ -674,7 +752,10 @@ namespace BO4E.Extensions.BusinessObjects.Energiemenge
         public static bool IsPureMengeneinheit(this BO.Energiemenge em)
         {
 
-            if (em.Energieverbrauch.Select(v => v.Einheit).Distinct().Count() <= 1) return true;
+            if (em.Energieverbrauch.Select(v => v.Einheit).Distinct().Count() <= 1)
+            {
+                return true;
+            }
 
             var me1 = em.Energieverbrauch.Select(v => v.Einheit).First();
             return em.Energieverbrauch.Select(v => v.Einheit).All(me2 => me1.IsConvertibleTo(me2));
@@ -712,7 +793,10 @@ namespace BO4E.Extensions.BusinessObjects.Energiemenge
         /// <returns>a list of pure energiemengen (<see cref="IsPure"/>)</returns>
         public static List<BO.Energiemenge> SplitInPureGroups(this BO.Energiemenge em)
         {
-            if (em.Energieverbrauch == null) return new List<BO.Energiemenge> { em };
+            if (em.Energieverbrauch == null)
+            {
+                return new List<BO.Energiemenge> { em };
+            }
 
             var result = new List<BO.Energiemenge>();
             foreach (var group in em.Energieverbrauch.GroupBy(PurityGrouper))
@@ -732,7 +816,10 @@ namespace BO4E.Extensions.BusinessObjects.Energiemenge
         /// <param name="em"></param>
         public static void Detangle(this BO.Energiemenge em)
         {
-            if (em.Energieverbrauch != null) em.Energieverbrauch = VerbrauchExtension.Detangle(em.Energieverbrauch);
+            if (em.Energieverbrauch != null)
+            {
+                em.Energieverbrauch = VerbrauchExtension.Detangle(em.Energieverbrauch);
+            }
         }
 
         private class BasicVerbrauchDateTimeComparer : IComparer<CompletenessReport.BasicVerbrauch>
