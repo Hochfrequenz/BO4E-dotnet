@@ -1,3 +1,4 @@
+#nullable enable
 using BO4E.COM;
 using BO4E.ENUM;
 using BO4E.meta;
@@ -9,6 +10,7 @@ using ProtoBuf;
 
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Runtime.Serialization;
 using System.Text.Json;
@@ -253,8 +255,12 @@ public class VertragsConverter : System.Text.Json.Serialization.JsonConverter<Ve
         }
 
         var v = JsonSerializer.Deserialize<Vertrag>(ref reader, Vertrag.VertragsSerializerOptions);
+        if (v is null)
+        {
+            throw new InvalidDataException("Could not deserialize Vertrag");
+        }
         if ((v.Vertragsteile == null || v.Vertragsteile.Count == 0) && v.UserProperties != null &&
-            v.UserProperties.ContainsKey("lokationsId"))
+            v.UserProperties.TryGetValue("lokationsId", out var property))
         {
             v.Vertragsteile = new List<Vertragsteil>
             {
@@ -262,7 +268,7 @@ public class VertragsConverter : System.Text.Json.Serialization.JsonConverter<Ve
                 {
                     Vertragsteilbeginn = v.Vertragsbeginn,
                     Vertragsteilende = v.Vertragsende,
-                    Lokation = ((JsonElement) v.UserProperties["lokationsId"]).GetString()
+                    Lokation = ((JsonElement) property).GetString()
                 }
             };
         }
