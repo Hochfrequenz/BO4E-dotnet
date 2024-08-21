@@ -88,9 +88,13 @@ namespace BO4E.Extensions.COM
                                 vmerge.Enddatum = v1.Enddatum;
                                 if (exclusiveV1Wert == 0.0M && exclusiveV2Wert == 0.0M &&
                                     overlapV1Wert == overlapV2Wert)
+                                {
                                     vmerge.Wert = overlapV1Wert;
+                                }
                                 else
+                                {
                                     vmerge.Wert = v1.Wert - overlapV2Wert; // overlapV1Wert;
+                                }
                             }
                             else
                             {
@@ -130,8 +134,11 @@ namespace BO4E.Extensions.COM
                         if (redundant)
                         {
                             if (v1.Wert != v2.Wert)
+                            {
                                 throw new ArgumentException(
                                     $"Data cannot be redundant if values ({v1.Wert}{v1.Einheit} vs. {v2.Wert}{v2.Einheit}) don't match for interval [{vmerge2.Startdatum}, {vmerge2.Enddatum}).");
+                            }
+
                             vmerge2.Wert = v1.Wert;
                         }
                         else
@@ -269,8 +276,11 @@ namespace BO4E.Extensions.COM
                 foreach (var frv in fullyRedundantVerbrauchs)
                 {
                     if (frv.av.x.Wert + frv.av.y.Wert != frv.z.Wert)
+                    {
                         throw new ArgumentException(
                             $"Inconsistent data detected: {JsonConvert.SerializeObject(frv.av.x)} + {JsonConvert.SerializeObject(frv.av.y)} ≠ {JsonConvert.SerializeObject(frv.z)}");
+                    }
+
                     subResult.Remove(frv.z);
                 }
 
@@ -406,9 +416,16 @@ namespace BO4E.Extensions.COM
         {
             int IComparer<Verbrauch>.Compare(Verbrauch x, Verbrauch y)
             {
-                if (x.Startdatum != y.Startdatum) return DateTimeOffset.Compare(x.Startdatum ?? DateTimeOffset.MinValue, y.Startdatum ?? DateTimeOffset.MinValue);
+                if (x.Startdatum != y.Startdatum)
+                {
+                    return DateTimeOffset.Compare(x.Startdatum ?? DateTimeOffset.MinValue, y.Startdatum ?? DateTimeOffset.MinValue);
+                }
 
-                if (x.Enddatum != y.Enddatum) return DateTimeOffset.Compare(x.Enddatum ?? DateTimeOffset.MinValue, y.Enddatum ?? DateTimeOffset.MinValue);
+                if (x.Enddatum != y.Enddatum)
+                {
+                    return DateTimeOffset.Compare(x.Enddatum ?? DateTimeOffset.MinValue, y.Enddatum ?? DateTimeOffset.MinValue);
+                }
+
                 return 0;
             }
         }

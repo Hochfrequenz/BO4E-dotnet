@@ -1,4 +1,3 @@
-using BO4E;
 using BO4E.BO;
 using BO4E.COM;
 using BO4E.ENUM;
@@ -11,9 +10,6 @@ using Itenso.TimePeriod;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
-
-
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -146,7 +142,9 @@ namespace TestBO4E.Extensions
                 Assert.AreEqual(12,
                     result.Count); // don't care about values of coverage, just the start/end and count of reports generated.
                 if (testFirstOnly)
+                {
                     break; // one test is enough. the rest is covered by the individual completeness report tests
+                }
             }
         }
 

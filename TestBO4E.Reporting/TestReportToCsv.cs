@@ -53,7 +53,10 @@ namespace TestBO4E.Reporting
             var commaResult = cr.ToCsv(',', lineTerminator: Environment.NewLine, reihenfolge: reihenfolge);
             var separator = "";
             if (decimalSeparator == ",")
+            {
                 separator = "\"";
+            }
+
             Assert.AreEqual(
                 $"DE12345,{separator}0" + decimalSeparator +
                 $"87{separator},2019-01-01T00:00:00Z,2019-03-01T00:00:00Z,", commaResult.Split(Environment.NewLine)[1]);

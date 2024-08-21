@@ -18,8 +18,16 @@ namespace BO4E.meta.LenientConverters
         /// <inheritdoc cref="JsonConverter.CanConvert(Type)" />
         public override bool CanConvert(Type objectType)
         {
-            if (!objectType.IsGenericType) return false;
-            if (objectType.GetGenericTypeDefinition() != typeof(List<>)) return false;
+            if (!objectType.IsGenericType)
+            {
+                return false;
+            }
+
+            if (objectType.GetGenericTypeDefinition() != typeof(List<>))
+            {
+                return false;
+            }
+
             var expectedListElementType = objectType.GetGenericArguments()[0];
             return expectedListElementType.ToString().StartsWith("BO4E.ENUM");
         }
@@ -33,7 +41,11 @@ namespace BO4E.meta.LenientConverters
             var expectedListElementType = objectType.GetGenericArguments()[0];
             var expectedListType = typeof(List<>).MakeGenericType(expectedListElementType);
             var result = Activator.CreateInstance(expectedListType);
-            if (rawList == null || rawList.Count == 0) return result;
+            if (rawList == null || rawList.Count == 0)
+            {
+                return result;
+            }
+
             // First try to parse the List normally, in case it's formatted as expected
             foreach (var rawItem in rawList)
                 if (rawItem is string && Enum.IsDefined(expectedListElementType, rawItem.ToString()))

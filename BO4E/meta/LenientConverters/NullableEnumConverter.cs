@@ -17,7 +17,10 @@ namespace BO4E.meta.LenientConverters
         public override bool CanConvert(Type typeToConvert)
         {
             if (Nullable.GetUnderlyingType(typeToConvert) == null)
+            {
                 return typeToConvert.ToString().StartsWith("BO4E.ENUM");
+            }
+
             return Nullable.GetUnderlyingType(typeToConvert).ToString().StartsWith("BO4E.ENUM");
         }
 
@@ -62,12 +65,17 @@ namespace BO4E.meta.LenientConverters
         public StringNullableEnumConverter(JsonSerializerOptions options)
         {
             // for performance, use the existing converter if available
-            if (options != null) _converter = (JsonConverter<T>)options.GetConverter(typeof(T));
+            if (options != null)
+            {
+                _converter = (JsonConverter<T>)options.GetConverter(typeof(T));
+            }
 
             // cache the underlying type
             _underlyingType = Nullable.GetUnderlyingType(typeof(T));
             if (_underlyingType == null)
+            {
                 _underlyingType = typeof(T);
+            }
         }
 
         /// <summary>
@@ -96,13 +104,24 @@ namespace BO4E.meta.LenientConverters
         public override T Read(ref Utf8JsonReader reader,
             Type typeToConvert, JsonSerializerOptions options)
         {
-            if (_converter != null) return _converter.Read(ref reader, _underlyingType, options);
+            if (_converter != null)
+            {
+                return _converter.Read(ref reader, _underlyingType, options);
+            }
+
             if (reader.TokenType == JsonTokenType.Null)
+            {
                 return default;
+            }
+
             if (reader.TokenType == JsonTokenType.String)
             {
                 var value = reader.GetString();
-                if (string.IsNullOrEmpty(value)) return default;
+                if (string.IsNullOrEmpty(value))
+                {
+                    return default;
+                }
+
                 // for performance, parse with ignoreCase:false first.
                 try
                 {

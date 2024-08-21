@@ -30,7 +30,11 @@ public class DataCategoryAttribute : Attribute
     /// <param name="enums"></param>
     public DataCategoryAttribute(params object[] enums)
     {
-        if (enums.Any(r => r.GetType().BaseType != typeof(Enum))) throw new ArgumentException("enums");
+        if (enums.Any(r => r.GetType().BaseType != typeof(Enum)))
+        {
+            throw new ArgumentException("enums");
+        }
+
         Mapping = new HashSet<Enum>();
         foreach (Enum e in enums) Mapping.Add(e);
     }

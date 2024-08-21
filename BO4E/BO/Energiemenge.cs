@@ -82,8 +82,11 @@ public class Energiemenge : BusinessObject
     {
         if (em1.LokationsId != em2.LokationsId || em1.LokationsTyp != em2.LokationsTyp ||
             em1.VersionStruktur != em2.VersionStruktur)
+        {
             throw new InvalidOperationException(
                 $"You must not add the Energiemengen with different locations {em1.LokationsId} ({em1.LokationsTyp}) (v{em1.VersionStruktur}) vs. {em2.LokationsId} ({em2.LokationsTyp}) (v{em2.VersionStruktur})");
+        }
+
         var result = new Energiemenge
         {
             LokationsId = em1.LokationsId,
@@ -105,7 +108,9 @@ public class Energiemenge : BusinessObject
             foreach (var kvp1 in em1.UserProperties) result.UserProperties.Add(kvp1.Key, kvp1.Value);
             foreach (var kvp2 in em2.UserProperties)
                 if (!result.UserProperties.ContainsKey(kvp2.Key))
+                {
                     result.UserProperties.Add(kvp2.Key, kvp2.Value);
+                }
         }
 
         if (em1.Energieverbrauch == null || em1.Energieverbrauch.Count == 0)
