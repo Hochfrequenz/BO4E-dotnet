@@ -92,15 +92,33 @@ namespace BO4E.Reporting
         /// <returns></returns>
         public int CompareTo(CompletenessReport other)
         {
-            if (ReferenceTimeFrame == null && other.ReferenceTimeFrame == null) return 0;
-            if (ReferenceTimeFrame != null && other.ReferenceTimeFrame == null) return 1;
-            if (ReferenceTimeFrame == null && other.ReferenceTimeFrame != null) return -1;
+            if (ReferenceTimeFrame == null && other.ReferenceTimeFrame == null)
+            {
+                return 0;
+            }
+
+            if (ReferenceTimeFrame != null && other.ReferenceTimeFrame == null)
+            {
+                return 1;
+            }
+
+            if (ReferenceTimeFrame == null && other.ReferenceTimeFrame != null)
+            {
+                return -1;
+            }
+
             if (ReferenceTimeFrame != null && other.ReferenceTimeFrame != null)
             {
                 if (ReferenceTimeFrame.Startdatum.HasValue && other.ReferenceTimeFrame.Startdatum.HasValue)
+                {
                     return Comparer<DateTimeOffset>.Default.Compare(ReferenceTimeFrame.Startdatum.Value,
                         other.ReferenceTimeFrame.Startdatum.Value);
-                if (ReferenceTimeFrame.Startdatum.HasValue) return 1;
+                }
+
+                if (ReferenceTimeFrame.Startdatum.HasValue)
+                {
+                    return 1;
+                }
 
                 return -1;
             }
@@ -166,14 +184,23 @@ namespace BO4E.Reporting
             columns.Add("MSB"); // MSB
 
             if (UserProperties.TryGetValue("profil", out var profil))
+            {
                 columns.Add(profil.ToString());
+            }
             else
+            {
                 columns.Add(string.Empty);
+            }
 
             if (UserProperties.TryGetValue("profilRolle", out var profilRolle))
+            {
                 columns.Add(profilRolle.ToString());
+            }
             else
+            {
                 columns.Add(string.Empty);
+            }
+
             if (Gaps != null && Gaps.Any())
             {
                 var minGap = Gaps.Min(x => x.Startdatum); // OrderBy(x => x.Startdatum).First().Startdatum;
@@ -191,9 +218,14 @@ namespace BO4E.Reporting
             }
 
             if (Coverage.HasValue)
+            {
                 columns.Add((Coverage.Value * 100).ToString("0.####") + " %");
+            }
             else
+            {
                 columns.Add(string.Empty);
+            }
+
             columns.Add("Status");
             builder.Append(string.Join(separator, columns) + lineTerminator);
 

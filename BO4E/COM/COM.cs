@@ -119,7 +119,11 @@ public abstract class COM : IUserProperties, IOptionalGuid
     /// <returns><code>true</code> iff all elements of this COM and COM b are equal; <code>false</code> otherwise</returns>
     public bool Equals(COM b)
     {
-        if (b == null || b.GetType() != GetType()) return false;
+        if (b == null || b.GetType() != GetType())
+        {
+            return false;
+        }
+
         return JsonConvert.SerializeObject(this) == JsonConvert.SerializeObject(b);
     }
 

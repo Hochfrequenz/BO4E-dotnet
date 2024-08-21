@@ -12,14 +12,26 @@ namespace BO4E.Extensions.BusinessObjects.Energiemenge
         internal static IList<ITimeRange> GetLocalDailySlices(ITimeRange overallTimeRange, TimeZoneInfo tz = null)
         {
             if (overallTimeRange == null)
+            {
                 throw new ArgumentNullException(nameof(overallTimeRange), "overall time range must not be null");
-            if (tz == null) tz = CentralEuropeStandardTime.CentralEuropeStandardTimezoneInfo;
+            }
+
+            if (tz == null)
+            {
+                tz = CentralEuropeStandardTime.CentralEuropeStandardTimezoneInfo;
+            }
+
             if (overallTimeRange.Start.Kind == DateTimeKind.Unspecified)
+            {
                 throw new ArgumentException("TimeRange start must not have DateTimeKind.Unspecified",
                     nameof(overallTimeRange));
+            }
+
             if (overallTimeRange.End.Kind == DateTimeKind.Unspecified)
+            {
                 throw new ArgumentException("TimeRange end must not have DateTimeKind.Unspecified",
                     nameof(overallTimeRange));
+            }
 
             IList<ITimeRange> result = new List<ITimeRange>();
             if (!overallTimeRange.IsMoment)
@@ -43,7 +55,10 @@ namespace BO4E.Extensions.BusinessObjects.Energiemenge
         internal static IList<ITimeRange> GetLocalMonthlySlices(ITimeRange overallTimeRange, TimeZoneInfo tz = null)
         {
             if (overallTimeRange == null)
+            {
                 throw new ArgumentNullException(nameof(overallTimeRange), "overall time range must not be null");
+            }
+
             DateTime localStart;
             DateTime localEnd;
             if (tz == null)
@@ -51,13 +66,19 @@ namespace BO4E.Extensions.BusinessObjects.Energiemenge
                 tz = CentralEuropeStandardTime.CentralEuropeStandardTimezoneInfo;
 
                 if (overallTimeRange.Start.Kind != DateTimeKind.Utc)
+                {
                     throw new ArgumentException(
                         $"TimeRange start must have DateTimeKind.Utc if no timezone is given in parameter {nameof(tz)}",
                         nameof(overallTimeRange));
+                }
+
                 if (overallTimeRange.End.Kind != DateTimeKind.Utc)
+                {
                     throw new ArgumentException(
                         $"TimeRange end must have DateTimeKind.Utc if no timezone is given in parameter {nameof(tz)}",
                         nameof(overallTimeRange));
+                }
+
                 localStart = TimeZoneInfo.ConvertTimeFromUtc(overallTimeRange.Start, tz);
                 localEnd = TimeZoneInfo.ConvertTimeFromUtc(overallTimeRange.End, tz);
             }
@@ -142,7 +163,11 @@ namespace BO4E.Extensions.BusinessObjects.Energiemenge
         /// <returns></returns>
         public static DateTime AddDaysDST(this DateTime dt, double value, TimeZoneInfo tz = null)
         {
-            if (tz == null) tz = CentralEuropeStandardTime.CentralEuropeStandardTimezoneInfo;
+            if (tz == null)
+            {
+                tz = CentralEuropeStandardTime.CentralEuropeStandardTimezoneInfo;
+            }
+
             switch (dt.Kind)
             {
                 case DateTimeKind.Local:

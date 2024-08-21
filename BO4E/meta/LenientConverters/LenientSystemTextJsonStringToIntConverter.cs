@@ -31,7 +31,10 @@ public class LenientSystemTextJsonStringToIntConverter : JsonConverter<int?>
             case JsonTokenType.String:
                 {
                     var numeric = new string(reader.GetString().Where(char.IsDigit).ToArray());
-                    if (int.TryParse(numeric, out var intValue)) return intValue;
+                    if (int.TryParse(numeric, out var intValue))
+                    {
+                        return intValue;
+                    }
 
                     break;
                 }

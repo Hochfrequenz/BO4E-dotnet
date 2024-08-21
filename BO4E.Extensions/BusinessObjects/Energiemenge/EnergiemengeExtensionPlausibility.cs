@@ -42,10 +42,15 @@ namespace BO4E.Extensions.BusinessObjects.Energiemenge
             {
                 var overlap = trReference.GetIntersection(trOther);
                 if (!ignoreLocation)
+                {
                     if (!(emReference.LokationsId == emOther.LokationsId &&
                           emReference.LokationsTyp == emOther.LokationsTyp))
+                    {
                         throw new ArgumentException(
                             $"locations do not match! '{emReference.LokationsId}' ({emReference.LokationsTyp}) != '{emOther.LokationsId}' ({emOther.LokationsTyp})");
+                    }
+                }
+
                 timeframe = overlap;
             }
 
@@ -59,13 +64,17 @@ namespace BO4E.Extensions.BusinessObjects.Energiemenge
             {
                 // unit mismatch
                 if (consumptionReference.Item2.IsConvertibleTo(consumptionOtherRaw.Item2))
+                {
                     consumptionOther = new Tuple<decimal, Mengeneinheit>(
                         consumptionOtherRaw.Item1 *
                         consumptionOtherRaw.Item2.GetConversionFactor(consumptionReference.Item2),
                         consumptionReference.Item2);
+                }
                 else
+                {
                     throw new ArgumentException(
                         $"The unit {consumptionOtherRaw.Item2} is not comparable to {consumptionReference.Item2}!");
+                }
             }
             else
             {
@@ -111,9 +120,14 @@ namespace BO4E.Extensions.BusinessObjects.Energiemenge
                 AbsoluteDeviationEinheit = consumptionReference.Item2
             };
             if (relativeDeviation.HasValue)
+            {
                 pr.RelativeDeviation = Math.Round(relativeDeviation.Value, 4);
+            }
             else
+            {
                 pr.RelativeDeviation = null;
+            }
+
             return pr;
 
         }
@@ -144,7 +158,11 @@ namespace BO4E.Extensions.BusinessObjects.Energiemenge
         public static IDictionary<ITimeRange, PlausibilityReport> GetSlicedPlausibilityReports(this BO.Energiemenge em,
             PlausibilityReportConfiguration config, IEnumerable<ITimeRange> ranges)
         {
-            if (ranges == null) throw new ArgumentNullException(nameof(ranges), "list of time ranges must not be null");
+            if (ranges == null)
+            {
+                throw new ArgumentNullException(nameof(ranges), "list of time ranges must not be null");
+            }
+
             var result = new Dictionary<ITimeRange, PlausibilityReport>();
             foreach (var range in ranges)
             {
@@ -175,8 +193,16 @@ namespace BO4E.Extensions.BusinessObjects.Energiemenge
         public static IDictionary<ITimeRange, PlausibilityReport> GetDailyPlausibilityReports(this BO.Energiemenge em,
             PlausibilityReportConfiguration config)
         {
-            if (config == null) throw new ArgumentNullException(nameof(config));
-            if (config.Timeframe == null) throw new ArgumentNullException(nameof(config.Timeframe));
+            if (config == null)
+            {
+                throw new ArgumentNullException(nameof(config));
+            }
+
+            if (config.Timeframe == null)
+            {
+                throw new ArgumentNullException(nameof(config.Timeframe));
+            }
+
             var slices = GetLocalDailySlices(new TimeRange
             {
                 Start = config.Timeframe.Startdatum.Value.UtcDateTime,
@@ -197,8 +223,16 @@ namespace BO4E.Extensions.BusinessObjects.Energiemenge
         public static IDictionary<ITimeRange, PlausibilityReport> GetMonthlyPlausibilityReports(this BO.Energiemenge em,
             PlausibilityReportConfiguration config)
         {
-            if (config == null) throw new ArgumentNullException(nameof(config));
-            if (config.Timeframe == null) throw new ArgumentNullException(nameof(config.Timeframe));
+            if (config == null)
+            {
+                throw new ArgumentNullException(nameof(config));
+            }
+
+            if (config.Timeframe == null)
+            {
+                throw new ArgumentNullException(nameof(config.Timeframe));
+            }
+
             var slices = GetLocalMonthlySlices(new TimeRange
             {
                 Start = config.Timeframe.Startdatum.Value.UtcDateTime,
