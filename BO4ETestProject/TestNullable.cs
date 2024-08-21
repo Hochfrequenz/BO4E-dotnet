@@ -34,7 +34,10 @@ namespace TestBO4E
         protected void TestNullableAttributesFromAbstract(Type abstractBaseType)
         {
             if (!abstractBaseType.IsAbstract)
+            {
                 throw new ArgumentException($"The type {abstractBaseType} is not abstract", nameof(abstractBaseType));
+            }
+
             var relevantTypes = typeof(BusinessObject).Assembly.GetTypes()
                 .Where(t => abstractBaseType.IsAssignableFrom(t));
             foreach (var relevantType in relevantTypes)

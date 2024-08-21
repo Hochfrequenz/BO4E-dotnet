@@ -282,6 +282,7 @@ namespace BO4E.BO
         [NonOfficial(NonOfficialCategory.CUSTOMER_REQUIREMENTS)]
         public List<Messprodukt>? Messprodukte { get; set; }
 
+
         // /// <summary>
         // /// Lokationszuordnung, um bspw. die zugehörigen Marktlokationen anzugeben
         // /// </summary>
@@ -307,6 +308,20 @@ namespace BO4E.BO
         [ProtoMember(1026)]
         [JsonPropertyOrder(32)]
         public string? LokationsbuendelObjektcode { get; set; }
+
+        /// <summary>
+        /// Enthält die ID der vorgelagerten Lokation. Kann Ids unterschiedlicher Lokationen enthalten, also zum Beispiel
+        /// einer Messlokation oder Marktlokation.
+        /// </summary>
+        [JsonProperty(
+            Required = Required.Default,
+            Order = 33,
+            PropertyName = "vorgelagerteLokationsId"
+        )]
+        [JsonPropertyName("vorgelagerteLokationsId")]
+        [ProtoMember(1027)]
+        [JsonPropertyOrder(33)]
+        public string? VorgelagerteLokationsId { get; set; }
 
         /// <summary>
         ///     Test if a <paramref name="id" /> is a valid messlokations ID.

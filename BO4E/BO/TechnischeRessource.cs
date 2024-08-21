@@ -1,4 +1,3 @@
-using System.Collections.Generic;
 using System.ComponentModel;
 using System.Text.Json.Serialization;
 using BO4E.COM;
@@ -239,4 +238,18 @@ public class TechnischeRessource : BusinessObject
     [JsonPropertyOrder(24)]
     [NonOfficial(NonOfficialCategory.CUSTOMER_REQUIREMENTS)]
     public string? LokationsbuendelObjektcode { get; set; }
+
+    /// <summary>
+    /// Enthält die ID der vorgelagerten Lokation. Kann Ids unterschiedlicher Lokationen enthalten, also zum Beispiel
+    /// einer Messlokation oder Marktlokation.
+    /// </summary>
+    [JsonProperty(
+        Required = Required.Default,
+        Order = 25,
+        PropertyName = "vorgelagerteLokationsId"
+    )]
+    [JsonPropertyName("vorgelagerteLokationsId")]
+    [ProtoMember(25)]
+    [JsonPropertyOrder(25)]
+    public string? VorgelagerteLokationsId { get; set; }
 }
