@@ -39,5 +39,5 @@ public class Geraeteeigenschaften : COM
     [ProtoMember(1005)]
     [JsonPropertyOrder(12)]
     [Obsolete("Use the COM.UserProperties instead", true)]
-    private Dictionary<string, string> Parameter { get; set; } // ToDo: add docstring
+    private Dictionary<string, string>? Parameter { get; set; } // ToDo: add docstring
 }
