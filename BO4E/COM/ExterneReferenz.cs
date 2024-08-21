@@ -1,3 +1,4 @@
+#nullable enable
 using BO4E.BO;
 
 using Newtonsoft.Json;
@@ -58,8 +59,8 @@ internal static class ExterneReferenzExtensions
     /// <param name="extRefWert">non-null if the externe referenz was found</param>
     /// <param name="extReferences">list of external references</param>
     /// <returns>true if externe referenz with name <paramref name="extRefName" /> was found</returns>
-    public static bool TryGetExterneReferenz(this ICollection<ExterneReferenz> extReferences, string extRefName,
-        out string extRefWert)
+    public static bool TryGetExterneReferenz(this ICollection<ExterneReferenz>? extReferences, string? extRefName,
+        out string? extRefWert)
     {
         if (extRefName == null)
         {
@@ -93,7 +94,7 @@ internal static class ExterneReferenzExtensions
     ///     if there is a conflicting value and <paramref name="overwriteExisting" />
     ///     is false
     /// </exception>
-    public static List<ExterneReferenz> SetExterneReferenz(this List<ExterneReferenz> extReferences,
+    public static List<ExterneReferenz> SetExterneReferenz(this List<ExterneReferenz>? extReferences,
         ExterneReferenz extRef, bool overwriteExisting = false)
     {
         if (extRef == null)
@@ -107,12 +108,10 @@ internal static class ExterneReferenzExtensions
                 $"The external reference with {nameof(extRef.ExRefName)}='{extRef.ExRefName}' and {nameof(extRef.ExRefWert)}='{extRef.ExRefWert}' you tried to add is invalid.",
                 nameof(extRef));
         }
-
         if (extReferences == null)
         {
             return new List<ExterneReferenz> { extRef };
         }
-
         if (extReferences.Any() && extReferences.TryGetExterneReferenz(extRef.ExRefName, out var existingRefWert))
         {
             if (overwriteExisting)
