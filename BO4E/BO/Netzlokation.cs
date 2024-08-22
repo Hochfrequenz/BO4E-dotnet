@@ -146,8 +146,8 @@ public class Netzlokation : BusinessObject
     public string? LokationsbuendelObjektcode { get; set; }
 
     /// <summary>
-    /// Enthält die ID der vorgelagerten Lokation. Kann Ids unterschiedlicher Lokationen enthalten, also zum Beispiel
-    /// einer Messlokation oder Marktlokation.
+    /// Enthält die ID der vorgelagerten Lokation. Kann IDs unterschiedlicher Lokationen enthalten, also zum Beispiel
+    /// einer Messlokation oder Netzlokation
     /// </summary>
     [JsonProperty(
         Required = Required.Default,
