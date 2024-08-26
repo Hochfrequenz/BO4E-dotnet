@@ -13,6 +13,7 @@ namespace TestBO4E
     {
         private const string JsonString = "{\"merkmal\":\"G4\"}";
         private const string JsonStringWithPeriod = "{\"merkmal\":\"G2Period5\"}";
+        private const string JsonStringWasser = "{\"merkmal\":\"WASSER_MWZW\"}";
         internal class SomethingWithAGeraetemerkmal
         {
             [JsonProperty(PropertyName = "merkmal")] // system.text
@@ -63,10 +64,17 @@ namespace TestBO4E
         }
 
         [TestMethod]
+        public void TestNewtonsoft_Success_Nullable_WASSER_MWZW()
+        {
+            var result = Newtonsoft.Json.JsonConvert.DeserializeObject<SomethingWithANullableGeraetemerkmal>(JsonString, new LenientGeraetemerkmalGasConverter());
+            result.Merkmal.Should().Be(Geraetemerkmal.GAS_G4);
+        }
+
+        [TestMethod]
         public void TestNewtonsoft_Success_Nullable_GPointSomething()
         {
-            var result = Newtonsoft.Json.JsonConvert.DeserializeObject<SomethingWithANullableGeraetemerkmal>(JsonStringWithPeriod, new LenientGeraetemerkmalGasConverter());
-            result.Merkmal.Should().Be(Geraetemerkmal.GAS_G2P5);
+            var result = Newtonsoft.Json.JsonConvert.DeserializeObject<SomethingWithANullableGeraetemerkmal>(JsonStringWasser, new LenientGeraetemerkmalGasConverter());
+            result.Merkmal.Should().Be(Geraetemerkmal.WASSER_MWZW);
         }
 
         [TestMethod]
@@ -78,6 +86,17 @@ namespace TestBO4E
             };
             var result = System.Text.Json.JsonSerializer.Deserialize<SomethingWithAGeraetemerkmal>(JsonString, settings);
             result.Merkmal.Should().Be(Geraetemerkmal.GAS_G4);
+        }
+
+        [TestMethod]
+        public void TestSystemText_Success_NonNullable_WASSER_MWZW()
+        {
+            var settings = new System.Text.Json.JsonSerializerOptions()
+            {
+                Converters = { new LenientSystemTextGeraetemerkmalGasConverter() }
+            };
+            var result = System.Text.Json.JsonSerializer.Deserialize<SomethingWithAGeraetemerkmal>(JsonStringWasser, settings);
+            result.Merkmal.Should().Be(Geraetemerkmal.WASSER_MWZW);
         }
 
         [TestMethod]
