@@ -1,7 +1,11 @@
 using System.Collections.Generic;
+using System.Linq;
+using System.Runtime.Serialization;
 using System.Text.Json;
+using System.Text.Json.Serialization;
 using BO4E.ENUM;
 using BO4E.meta.LenientConverters;
+using FluentAssertions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
@@ -9,6 +13,30 @@ using JsonSerializer = System.Text.Json.JsonSerializer;
 
 namespace TestBO4E
 {
+    /// <summary>
+    /// gasqualitaet enum before https://github.com/Hochfrequenz/BO4E-dotnet/pull/508
+    /// </summary>
+    /// <remarks>I opened a bug at System.Text for this: https://github.com/dotnet/runtime/issues/107296</remarks>
+    public enum LegacyGasQualitaet
+    {
+        /// <summary>High Caloric Gas</summary>
+        [EnumMember(Value = "H_GAS")] H_GAS = 1,
+
+        /// <summary>Low Caloric Gas</summary>
+        [EnumMember(Value = "L_GAS")] L_GAS = 2,
+
+        /// <summary>High Caloric Gas</summary>
+        [EnumMember(Value = "HGAS")] HGAS = 1,
+
+        /// <summary>Low Caloric Gas</summary>
+        [EnumMember(Value = "LGAS")] LGAS = 2,
+    }
+
+    public class SomethingWithGasqualitaet
+    {
+        public LegacyGasQualitaet Gasqualitaet { get; set; }
+    }
+
     [TestClass]
     public class TestStringEnumConverter
     {
@@ -33,6 +61,39 @@ namespace TestBO4E
             };
             var jsonString = JsonSerializer.Serialize(einheiten, options);
             Assert.IsTrue(jsonString.Contains("TAG"));
+        }
+
+        [TestMethod]
+        [DataRow(LegacyGasQualitaet.LGAS)]
+        [DataRow(LegacyGasQualitaet.L_GAS)]
+        [DataRow(LegacyGasQualitaet.HGAS)]
+        [DataRow(LegacyGasQualitaet.H_GAS)]
+        public void Test_Newtonsoft_With_Degenerate_Enum(LegacyGasQualitaet qualiaet)
+        {
+            var jsonString = JsonConvert.SerializeObject(new SomethingWithGasqualitaet
+            {
+                Gasqualitaet = qualiaet
+            }, new StringEnumConverter());
+            jsonString.Should().ContainAny("H_GAS", "L_GAS").And.NotContainAny("HGAS", "LGAS");
+        }
+
+        [TestMethod]
+        [DataRow(LegacyGasQualitaet.LGAS)]
+        [DataRow(LegacyGasQualitaet.L_GAS)]
+        [DataRow(LegacyGasQualitaet.HGAS)] // as of 2024-09-03 both H-GAS test cases fail but both L-GAS test cases pass 🤯
+        [DataRow(LegacyGasQualitaet.H_GAS)]
+        [Ignore("this test fails but at least I understand it now: See https://github.com/dotnet/runtime/issues/107296")]
+        public void Test_System_Text_With_Degenerate_Enum(LegacyGasQualitaet qualiaet)
+        {
+            var options = new JsonSerializerOptions
+            {
+                Converters = { new JsonStringEnumConverter() }
+            };
+            var jsonString = JsonSerializer.Serialize(new SomethingWithGasqualitaet
+            {
+                Gasqualitaet = qualiaet
+            }, options);
+            jsonString.Should().ContainAny("H_GAS", "L_GAS").And.NotContainAny("HGAS", "LGAS");
         }
     }
 }
