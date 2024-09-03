@@ -27,17 +27,5 @@ namespace BO4E.ENUM
         /// <summary>Low Caloric Gas</summary>
         [EnumMember(Value = "L_GAS")]
         L_GAS = 2,
-
-        /// <inheritdoc cref="H_GAS" />
-        [Newtonsoft.Json.JsonIgnore]
-        [System.Text.Json.Serialization.JsonIgnore]
-        [EnumMember(Value = "HGAS")]
-        HGAS = 1, // do not remove, they're needed as workaround for bad sap values
-
-        /// <inheritdoc cref="L_GAS" />
-        [Newtonsoft.Json.JsonIgnore]
-        [System.Text.Json.Serialization.JsonIgnore]
-        [EnumMember(Value = "LGAS")]
-        LGAS = 2 // do not remove, they're needed as workaround for bad sap values
     }
 }
