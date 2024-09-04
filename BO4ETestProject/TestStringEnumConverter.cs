@@ -1,3 +1,4 @@
+#nullable enable
 using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.Serialization;
@@ -36,6 +37,8 @@ namespace TestBO4E
     {
         public LegacyGasQualitaet Gasqualitaet { get; set; }
     }
+
+
 
     [TestClass]
     public class TestStringEnumConverter
@@ -94,6 +97,127 @@ namespace TestBO4E
                 Gasqualitaet = qualiaet
             }, options);
             jsonString.Should().ContainAny("H_GAS", "L_GAS").And.NotContainAny("HGAS", "LGAS");
+        }
+
+        public class ClassWithNullableGasqualitaet
+        {
+            public Gasqualitaet? Foo { get; set; }
+        }
+
+        public class ClassWithNonNullableGasqualitaet
+        {
+            public Gasqualitaet? Foo { get; set; }
+        }
+
+        [TestMethod]
+        [DataRow("HGAS", Gasqualitaet.H_GAS)]
+        [DataRow("H_GAS", Gasqualitaet.H_GAS)]
+        [DataRow("LGAS", Gasqualitaet.L_GAS)]
+        [DataRow("L_GAS", Gasqualitaet.L_GAS)]
+        [DataRow(null, null)]
+        public void Test_System_Text_Gasqualitaet_Legacy_Converter_With_Nullable_Gasqualitaet(string? jsonValue, Gasqualitaet? expectedGasqualitaet)
+        {
+            string jsonString;
+            if (jsonValue != null)
+            {
+                jsonString = "{\"Foo\": \"" + jsonValue + "\"}";
+            }
+            else
+            {
+                jsonString = "{\"Foo\": null}";
+            }
+
+            var settings = new JsonSerializerOptions { Converters = { new SystemTextGasqualitaetStringEnumConverter() } };
+            var actual = System.Text.Json.JsonSerializer.Deserialize<ClassWithNullableGasqualitaet>(jsonString, settings);
+            actual.Should().NotBeNull();
+            actual.Foo.Should().Be(expectedGasqualitaet);
+
+            var reSerializedJsonString = System.Text.Json.JsonSerializer.Serialize(actual, settings);
+            reSerializedJsonString.Should().Contain(expectedGasqualitaet?.ToString() ?? "null");
+        }
+
+        [TestMethod]
+        [DataRow("HGAS", Gasqualitaet.H_GAS)]
+        [DataRow("H_GAS", Gasqualitaet.H_GAS)]
+        [DataRow("LGAS", Gasqualitaet.L_GAS)]
+        [DataRow("L_GAS", Gasqualitaet.L_GAS)]
+        public void Test_System_Text_Gasqualitaet_Legacy_Converter_With_Non_Nullable_Gasqualitaet(string? jsonValue, Gasqualitaet expectedGasqualitaet)
+        {
+            string jsonString;
+            if (jsonValue != null)
+            {
+                jsonString = "{\"Foo\": \"" + jsonValue + "\"}";
+            }
+            else
+            {
+                jsonString = "{\"Foo\": null}";
+            }
+            var settings = new JsonSerializerOptions { Converters = { new SystemTextGasqualitaetStringEnumConverter() } };
+            var actual = System.Text.Json.JsonSerializer.Deserialize<ClassWithNonNullableGasqualitaet>(jsonString, settings);
+            actual.Should().NotBeNull();
+            actual.Foo.Should().Be(expectedGasqualitaet);
+
+            var reSerializedJsonString = System.Text.Json.JsonSerializer.Serialize(actual, settings);
+            reSerializedJsonString.Should().Contain(expectedGasqualitaet.ToString());
+        }
+
+        [TestMethod]
+        [DataRow("HGAS", Gasqualitaet.H_GAS)]
+        [DataRow("H_GAS", Gasqualitaet.H_GAS)]
+        [DataRow("LGAS", Gasqualitaet.L_GAS)]
+        [DataRow("L_GAS", Gasqualitaet.L_GAS)]
+        [DataRow(null, null)]
+        public void Test_Newtonsoft_Gasqualitaet_Legacy_Converter_With_Nullable_Gasqualitaet(string? jsonValue, Gasqualitaet? expectedGasqualitaet)
+        {
+            string jsonString;
+            if (jsonValue != null)
+            {
+                jsonString = "{\"Foo\": \"" + jsonValue + "\"}";
+            }
+            else
+            {
+                jsonString = "{\"Foo\": null}";
+            }
+
+            var settings = new Newtonsoft.Json.JsonSerializerSettings()
+            {
+                Converters = { new NewtonsoftGasqualitaetStringEnumConverter(), new StringEnumConverter() }
+            };
+            var actual = Newtonsoft.Json.JsonConvert.DeserializeObject<ClassWithNullableGasqualitaet>(jsonString, settings);
+            actual.Should().NotBeNull();
+            actual.Foo.Should().Be(expectedGasqualitaet);
+
+            var reSerializedJsonString = Newtonsoft.Json.JsonConvert.SerializeObject(actual, settings);
+            reSerializedJsonString.Should().Contain(expectedGasqualitaet?.ToString() ?? "null");
+        }
+
+        [TestMethod]
+        [DataRow("HGAS", Gasqualitaet.H_GAS)]
+        [DataRow("H_GAS", Gasqualitaet.H_GAS)]
+        [DataRow("LGAS", Gasqualitaet.L_GAS)]
+        [DataRow("L_GAS", Gasqualitaet.L_GAS)]
+        public void Test_Newtonsoft_Gasqualitaet_Legacy_Converter_With_Non_Nullable_Gasqualitaet(string? jsonValue, Gasqualitaet expectedGasqualitaet)
+        {
+            string jsonString;
+            if (jsonValue != null)
+            {
+                jsonString = "{\"Foo\": \"" + jsonValue + "\"}";
+            }
+            else
+            {
+                jsonString = "{\"Foo\": null}";
+            }
+
+            var settings = new Newtonsoft.Json.JsonSerializerSettings()
+            {
+                Converters = { new NewtonsoftGasqualitaetStringEnumConverter(), new StringEnumConverter() }
+            };
+            var actual = Newtonsoft.Json.JsonConvert.DeserializeObject<ClassWithNonNullableGasqualitaet>(jsonString, settings);
+            actual.Should().NotBeNull();
+            actual.Foo.Should().Be(expectedGasqualitaet);
+
+            var reSerializedJsonString = Newtonsoft.Json.JsonConvert.SerializeObject(actual, settings);
+            reSerializedJsonString.Should().Contain(expectedGasqualitaet.ToString());
         }
     }
 }
