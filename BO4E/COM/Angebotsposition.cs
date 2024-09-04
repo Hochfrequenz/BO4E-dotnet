@@ -1,3 +1,4 @@
+#nullable enable
 using BO4E.ENUM;
 using BO4E.meta;
 
@@ -17,11 +18,11 @@ namespace BO4E.COM;
 public class Angebotsposition : COM
 {
     /// <summary>Bezeichnung der jeweiligen Position des Angebotsteils.</summary>
-    [JsonProperty(PropertyName = "positionsbezeichung", Required = Required.Always, Order = 10)]
+    [JsonProperty(PropertyName = "positionsbezeichung", Required = Required.Default, Order = 10)]
     [JsonPropertyName("positionsbezeichung")]
     [JsonPropertyOrder(10)]
     [ProtoMember(3)]
-    public string Positionsbezeichung { get; set; }
+    public string? Positionsbezeichung { get; set; }
 
     /// <summary>
     ///     Summe der Verbräuche (z.B. in kWh), die zu dieser Angebotsposition gehören. Details <see cref="Menge" />
