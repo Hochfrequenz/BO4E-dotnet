@@ -41,6 +41,7 @@ namespace BO4E.meta.LenientConverters
             settings.Converters.Add(new AutoNumberToStringConverter());
             settings.Converters.Add(new VertragsConverter());
             settings.Converters.Add(new EnergiemengeConverter());
+            settings.Converters.Add(new SystemTextGasqualitaetStringEnumConverter());
             settings.Converters.Add(new LenientSystemTextJsonStringToBoolConverter());
             settings.Converters.Add(new StringNullableEnumConverter());
             settings.Converters.Add(new JsonStringEnumConverter());
