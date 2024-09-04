@@ -67,7 +67,7 @@ namespace BO4E.meta.LenientConverters
                 : new DefaultContractResolver();
             if (lenient.HasFlag(LenientParsing.MOST_LENIENT))
             {
-                converters.Insert(index:0, item: new NewtonsoftGasqualitaetStringEnumConverter());
+                converters.Insert(index: 0, item: new NewtonsoftGasqualitaetStringEnumConverter());
                 // needs to be placed BEFORE the regular StringEnumConverter, see its documentation
             }
             var settings = new JsonSerializerSettings
