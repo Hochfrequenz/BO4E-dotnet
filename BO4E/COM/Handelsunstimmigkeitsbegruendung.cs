@@ -28,10 +28,10 @@ public class Handelsunstimmigkeitsbegruendung : COM
     /// <summary>
     /// Angabe des Handelsunstimmigkeitsgrunds
     /// </summary>
-    [JsonProperty(PropertyName = "grund", Required = Required.Always, Order = 2)]
+    [JsonProperty(PropertyName = "grund", Required = Required.Default, Order = 2)]
     [JsonPropertyName("grund")]
     [NonOfficial(NonOfficialCategory.MISSING)]
     [ProtoMember(2)]
-    public Handelsunstimmigkeitsgrund Grund { get; set; }
+    public Handelsunstimmigkeitsgrund? Grund { get; set; }
 
 }
