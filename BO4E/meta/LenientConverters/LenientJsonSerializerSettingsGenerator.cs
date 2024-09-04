@@ -62,10 +62,14 @@ namespace BO4E.meta.LenientConverters
                             // no default case because NONE and MOST_LENIENT do not come up with more converters
                     }
                 }
-
             IContractResolver contractResolver = userPropertiesWhiteList.Count > 0
                 ? new UserPropertiesDataContractResolver(userPropertiesWhiteList)
                 : new DefaultContractResolver();
+            if (lenient.HasFlag(LenientParsing.MOST_LENIENT))
+            {
+                converters.Insert(index: 0, item: new NewtonsoftGasqualitaetStringEnumConverter());
+                // needs to be placed BEFORE the regular StringEnumConverter, see its documentation
+            }
             var settings = new JsonSerializerSettings
             {
                 Converters = converters,
