@@ -1,12 +1,12 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>net6.0</TargetFramework> 
+    <TargetFramework>net8.0</TargetFramework> 
     <RootNamespace>TestBO4E_dotnet_Reporting</RootNamespace>
 
     <IsPackable>false</IsPackable>
 
-    <LangVersion>13</LangVersion>
+    <LangVersion>12</LangVersion>
   </PropertyGroup>
 
   <ItemGroup>
