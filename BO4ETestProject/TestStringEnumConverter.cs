@@ -219,5 +219,39 @@ namespace TestBO4E
             var reSerializedJsonString = Newtonsoft.Json.JsonConvert.SerializeObject(actual, settings);
             reSerializedJsonString.Should().Contain(expectedGasqualitaet.ToString());
         }
+
+
+        [TestMethod]
+        [DataRow(1, Gasqualitaet.H_GAS)]
+        [DataRow(2, Gasqualitaet.L_GAS)]
+        public void Test_SystemText_Gasqualitaet_Legacy_Converter_With_Non_Nullable_Gasqualitaet_Integer(int jsonValue, Gasqualitaet expectedGasqualitaet)
+        {
+            string jsonString = "{\"Foo\": " + jsonValue + "}";
+            var settings = new JsonSerializerOptions { Converters = { new SystemTextGasqualitaetStringEnumConverter() } };
+            var actual = System.Text.Json.JsonSerializer.Deserialize<ClassWithNonNullableGasqualitaet>(jsonString, settings);
+            actual.Should().NotBeNull();
+            actual.Foo.Should().Be(expectedGasqualitaet);
+
+            var reSerializedJsonString = System.Text.Json.JsonSerializer.Serialize(actual, settings);
+            reSerializedJsonString.Should().Contain(expectedGasqualitaet.ToString());
+        }
+
+        [TestMethod]
+        [DataRow(1, Gasqualitaet.H_GAS)]
+        [DataRow(2, Gasqualitaet.L_GAS)]
+        public void Test_Newtonsoft_Gasqualitaet_Legacy_Converter_With_Non_Nullable_Gasqualitaet_Integer(int jsonValue, Gasqualitaet expectedGasqualitaet)
+        {
+            string jsonString = "{\"Foo\": " + jsonValue + "}";
+            var settings = new Newtonsoft.Json.JsonSerializerSettings()
+            {
+                Converters = { new NewtonsoftGasqualitaetStringEnumConverter(), new StringEnumConverter() }
+            };
+            var actual = Newtonsoft.Json.JsonConvert.DeserializeObject<ClassWithNonNullableGasqualitaet>(jsonString, settings);
+            actual.Should().NotBeNull();
+            actual.Foo.Should().Be(expectedGasqualitaet);
+
+            var reSerializedJsonString = Newtonsoft.Json.JsonConvert.SerializeObject(actual, settings);
+            reSerializedJsonString.Should().Contain(expectedGasqualitaet.ToString());
+        }
     }
 }
