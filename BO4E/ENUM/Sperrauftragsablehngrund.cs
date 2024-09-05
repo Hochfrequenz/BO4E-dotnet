@@ -1,6 +1,5 @@
-using BO4E.meta;
-
 using System.Runtime.Serialization;
+using BO4E.meta;
 
 namespace BO4E.ENUM;
 
@@ -19,7 +18,7 @@ public enum Sperrauftragsablehngrund
     DUPLIKAT,
 
     /// <summary>
-    /// An mindestens einer Messlokation ist ein anderer MSB zugeordnet als an der Marktlokation. 
+    /// An mindestens einer Messlokation ist ein anderer MSB zugeordnet als an der Marktlokation.
     /// </summary>
     /// <remarks>EBD 0470 A02</remarks>
     [EnumMember(Value = "FALSCHER_MSB")]
@@ -33,7 +32,7 @@ public enum Sperrauftragsablehngrund
     FALSCHE_SPANNUNGSEBENE,
 
     /// <summary>
-    /// Mindestens eine weitere Marktlokation ist von der Sperrung betroffen. 
+    /// Mindestens eine weitere Marktlokation ist von der Sperrung betroffen.
     /// </summary>
     /// <remarks>EBD 0470 A04</remarks>
     [EnumMember(Value = "WEITERE_MALO_BETROFFEN")]
@@ -75,7 +74,7 @@ public enum Sperrauftragsablehngrund
     LIEGT_BEREITS_VOR,
 
     /// <summary>
-    /// Zukünftiger bestätigter Lieferbeginn liegt gegenüber anderem Lieferanten bereits vor. 
+    /// Zukünftiger bestätigter Lieferbeginn liegt gegenüber anderem Lieferanten bereits vor.
     /// </summary>
     /// <remarks>FV2304 EBD 0470 A11</remarks>
     [EnumMember(Value = "ANDERER_ZUKUENFTIGER_LIEFERANT")]
@@ -86,6 +85,5 @@ public enum Sperrauftragsablehngrund
     /// </summary>
     /// <remarks>FV2304 EBD 0470 A12</remarks>
     [EnumMember(Value = "BESTAETIGTER_LIEFERBEGINN")]
-    BESTAETIGTER_LIEFERBEGINN
-
+    BESTAETIGTER_LIEFERBEGINN,
 }

@@ -28,8 +28,10 @@ public static class LenientParsingExtensionsNewtonsoft
     /// <param name="lenient"></param>
     /// <param name="userPropertiesWhiteList"></param>
     /// <returns></returns>
-    public static JsonSerializerSettings GetJsonSerializerSettings(this LenientParsing lenient,
-        HashSet<string> userPropertiesWhiteList)
+    public static JsonSerializerSettings GetJsonSerializerSettings(
+        this LenientParsing lenient,
+        HashSet<string> userPropertiesWhiteList
+    )
     {
         var converters = new List<JsonConverter>();
         foreach (LenientParsing lp in Enum.GetValues(typeof(LenientParsing)))
@@ -39,9 +41,11 @@ public static class LenientParsingExtensionsNewtonsoft
                 switch (lp)
                 {
                     case LenientParsing.DATE_TIME:
-                        converters.Add(!lenient.HasFlag(LenientParsing.SET_INITIAL_DATE_IF_NULL)
-                            ? new LenientDateTimeConverter()
-                            : new LenientDateTimeConverter(new DateTimeOffset()));
+                        converters.Add(
+                            !lenient.HasFlag(LenientParsing.SET_INITIAL_DATE_IF_NULL)
+                                ? new LenientDateTimeConverter()
+                                : new LenientDateTimeConverter(new DateTimeOffset())
+                        );
                         break;
 
                     case LenientParsing.ENUM_LIST:
@@ -55,16 +59,17 @@ public static class LenientParsingExtensionsNewtonsoft
                     case LenientParsing.STRING_TO_INT:
                         converters.Add(new LenientStringToIntConverter());
                         break;
-                        // case LenientParsing.EmptyLists:
-                        // converters.Add(new LenientRequiredListConverter());
-                        // break;
+                    // case LenientParsing.EmptyLists:
+                    // converters.Add(new LenientRequiredListConverter());
+                    // break;
 
-                        // no default case because NONE and MOST_LENIENT do not come up with more converters
+                    // no default case because NONE and MOST_LENIENT do not come up with more converters
                 }
             }
-        IContractResolver contractResolver = userPropertiesWhiteList.Count > 0
-            ? new UserPropertiesDataContractResolver(userPropertiesWhiteList)
-            : new DefaultContractResolver();
+        IContractResolver contractResolver =
+            userPropertiesWhiteList.Count > 0
+                ? new UserPropertiesDataContractResolver(userPropertiesWhiteList)
+                : new DefaultContractResolver();
         if (lenient.HasFlag(LenientParsing.MOST_LENIENT))
         {
             converters.Insert(index: 0, item: new NewtonsoftGasqualitaetStringEnumConverter());
@@ -75,7 +80,7 @@ public static class LenientParsingExtensionsNewtonsoft
         {
             Converters = converters,
             DateParseHandling = DateParseHandling.None,
-            ContractResolver = contractResolver
+            ContractResolver = contractResolver,
         };
         return settings;
     }

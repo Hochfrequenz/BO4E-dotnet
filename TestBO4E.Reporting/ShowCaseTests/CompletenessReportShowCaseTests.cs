@@ -28,25 +28,36 @@ public class CompletenessReportShowCaseTests
                     Startdatum = new DateTimeOffset(2020, 3, 1, 0, 0, 0, TimeSpan.Zero).UtcDateTime,
                     Enddatum = new DateTimeOffset(2020, 3, 8, 0, 0, 0, TimeSpan.Zero).UtcDateTime,
                     Wert = 456.0M,
-                    Wertermittlungsverfahren = Wertermittlungsverfahren.MESSUNG
+                    Wertermittlungsverfahren = Wertermittlungsverfahren.MESSUNG,
                 },
                 new Verbrauch
                 {
                     Einheit = Mengeneinheit.KWH,
-                    Startdatum = new DateTimeOffset(2020, 3, 25, 0, 0, 0, TimeSpan.Zero).UtcDateTime,
+                    Startdatum = new DateTimeOffset(
+                        2020,
+                        3,
+                        25,
+                        0,
+                        0,
+                        0,
+                        TimeSpan.Zero
+                    ).UtcDateTime,
                     Enddatum = new DateTimeOffset(2020, 4, 1, 0, 0, 0, TimeSpan.Zero).UtcDateTime,
                     Wert = 123.0M,
-                    Wertermittlungsverfahren = Wertermittlungsverfahren.MESSUNG
-                }
-            }
+                    Wertermittlungsverfahren = Wertermittlungsverfahren.MESSUNG,
+                },
+            },
         };
 
         var cr = em.GetCompletenessReport();
-        Debug.WriteLine($"{nameof(em)} has a coverage of {decimal.Round(cr.Coverage.Value * 100.0M)}%.");
+        Debug.WriteLine(
+            $"{nameof(em)} has a coverage of {decimal.Round(cr.Coverage.Value * 100.0M)}%."
+        );
         // em has a coverage of 45%.
 
         Debug.WriteLine(
-            $"{nameof(em)} has no values for the following intervals: {string.Join(", ", cr.Gaps.Select(g => g.Startdatum.ToString("yyyy-MM-dd") + " to " + g.Enddatum.ToString("yyyy-MM-dd")))}");
+            $"{nameof(em)} has no values for the following intervals: {string.Join(", ", cr.Gaps.Select(g => g.Startdatum.ToString("yyyy-MM-dd") + " to " + g.Enddatum.ToString("yyyy-MM-dd")))}"
+        );
         // em has no values for the following intervals: 2020-03-08 to 2020-03-25
     }
 }

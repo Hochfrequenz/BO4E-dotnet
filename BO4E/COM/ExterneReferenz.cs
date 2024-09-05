@@ -1,14 +1,11 @@
 #nullable enable
-using BO4E.BO;
-
-using Newtonsoft.Json;
-
-using ProtoBuf;
-
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text.Json.Serialization;
+using BO4E.BO;
+using Newtonsoft.Json;
+using ProtoBuf;
 
 namespace BO4E.COM;
 
@@ -37,6 +34,7 @@ public class ExterneReferenz : COM
     [JsonPropertyName("exRefWert")]
     [ProtoMember(2)]
     public string? ExRefWert { get; set; }
+
     /// <summary>
     /// Ist das Objekt valide
     /// </summary>
@@ -59,8 +57,11 @@ internal static class ExterneReferenzExtensions
     /// <param name="extRefWert">non-null if the externe referenz was found</param>
     /// <param name="extReferences">list of external references</param>
     /// <returns>true if externe referenz with name <paramref name="extRefName" /> was found</returns>
-    public static bool TryGetExterneReferenz(this ICollection<ExterneReferenz>? extReferences, string? extRefName,
-        out string? extRefWert)
+    public static bool TryGetExterneReferenz(
+        this ICollection<ExterneReferenz>? extReferences,
+        string? extRefName,
+        out string? extRefWert
+    )
     {
         if (extRefName == null)
         {
@@ -94,8 +95,11 @@ internal static class ExterneReferenzExtensions
     ///     if there is a conflicting value and <paramref name="overwriteExisting" />
     ///     is false
     /// </exception>
-    public static List<ExterneReferenz> SetExterneReferenz(this List<ExterneReferenz>? extReferences,
-        ExterneReferenz extRef, bool overwriteExisting = false)
+    public static List<ExterneReferenz> SetExterneReferenz(
+        this List<ExterneReferenz>? extReferences,
+        ExterneReferenz extRef,
+        bool overwriteExisting = false
+    )
     {
         if (extRef == null)
         {
@@ -106,13 +110,17 @@ internal static class ExterneReferenzExtensions
         {
             throw new ArgumentException(
                 $"The external reference with {nameof(extRef.ExRefName)}='{extRef.ExRefName}' and {nameof(extRef.ExRefWert)}='{extRef.ExRefWert}' you tried to add is invalid.",
-                nameof(extRef));
+                nameof(extRef)
+            );
         }
         if (extReferences == null)
         {
             return new List<ExterneReferenz> { extRef };
         }
-        if (extReferences.Any() && extReferences.TryGetExterneReferenz(extRef.ExRefName, out var existingRefWert))
+        if (
+            extReferences.Any()
+            && extReferences.TryGetExterneReferenz(extRef.ExRefName, out var existingRefWert)
+        )
         {
             if (overwriteExisting)
             {
@@ -123,7 +131,8 @@ internal static class ExterneReferenzExtensions
                 if (existingRefWert != extRef.ExRefWert)
                 {
                     throw new InvalidOperationException(
-                        $"There is already an with {nameof(extRef.ExRefName)}='{extRef.ExRefName}' having {nameof(extRef.ExRefWert)}='{existingRefWert}'!='{extRef.ExRefWert}'. Use {nameof(overwriteExisting)}=true to overwrite it.");
+                        $"There is already an with {nameof(extRef.ExRefName)}='{extRef.ExRefName}' having {nameof(extRef.ExRefWert)}='{existingRefWert}'!='{extRef.ExRefWert}'. Use {nameof(overwriteExisting)}=true to overwrite it."
+                    );
                 }
 
                 return extReferences;

@@ -13,24 +13,28 @@ public enum ZaehlzeitdefinitionTyp
     /// <remarks>Z29</remarks>
     [EnumMember(Value = "WAERMEPUMPE")]
     WAERMEPUMPE,
+
     /// <summary>
     /// Nachtspeicherheizung
     /// </summary>
     /// <remarks>Z30</remarks>
     [EnumMember(Value = "NACHTSPEICHERHEIZUNG")]
     NACHTSPEICHERHEIZUNG,
+
     /// <summary>
     /// Schwachlastzeifenster
     /// </summary>
     /// <remarks>Z31</remarks>
     [EnumMember(Value = "SCHWACHLASTZEITFENSTER")]
     SCHWACHLASTZEITFENSTER,
+
     /// <summary>
     /// sonstige Zaehlzeitdefinition
     /// </summary>
     /// <remarks>Z32</remarks>
     [EnumMember(Value = "SONSTIGE")]
     SONSTIGE,
+
     /// <summary>
     /// Hochlastzeitfenster
     /// </summary>

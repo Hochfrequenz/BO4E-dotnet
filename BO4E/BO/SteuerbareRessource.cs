@@ -21,11 +21,7 @@ public class SteuerbareRessource : BusinessObject
     /// </summary>
     /// <remarks>Edi-beispiel: LOC+Z19+C816417ST77'</remarks>
     [DefaultValue("|null|")]
-    [JsonProperty(
-        Required = Required.Always,
-        Order = 10,
-        PropertyName = "steuerbareRessourceId"
-    )]
+    [JsonProperty(Required = Required.Always, Order = 10, PropertyName = "steuerbareRessourceId")]
     [JsonPropertyName("steuerbareRessourceId")]
     [JsonPropertyOrder(10)]
     [DataCategory(DataCategory.DEVICE)]
@@ -52,11 +48,7 @@ public class SteuerbareRessource : BusinessObject
     /// Angabe des Messstellenbetreibers, der der Steuerbaren Ressource zugeordnet ist.
     /// </summary>
     /// <remarks>Edi-beispiel: CAV+Z91:9900000000002'</remarks>
-    [JsonProperty(
-        Required = Required.Default,
-        Order = 12,
-        PropertyName = "zugeordnetMSBCodeNr"
-    )]
+    [JsonProperty(Required = Required.Default, Order = 12, PropertyName = "zugeordnetMSBCodeNr")]
     [JsonPropertyOrder(12)]
     [JsonPropertyName("zugeordnetMSBCodeNr")]
     [ProtoMember(12)]
@@ -65,11 +57,7 @@ public class SteuerbareRessource : BusinessObject
     /// <summary>
     /// Produkt-Daten der Steuerbaren Ressource
     /// </summary>
-    [JsonProperty(
-        Required = Required.Default,
-        Order = 13,
-        PropertyName = "konfigurationsprodukte"
-    )]
+    [JsonProperty(Required = Required.Default, Order = 13, PropertyName = "konfigurationsprodukte")]
     [JsonPropertyName("konfigurationsprodukte")]
     [ProtoMember(13)]
     [JsonPropertyOrder(13)]
@@ -79,11 +67,7 @@ public class SteuerbareRessource : BusinessObject
     /// <summary>
     /// Eigenschaft des Messstellenbetreiber an der Lokation
     /// </summary>
-    [JsonProperty(
-        Required = Required.Default,
-        Order = 14,
-        PropertyName = "eigenschaftMSBLokation"
-    )]
+    [JsonProperty(Required = Required.Default, Order = 14, PropertyName = "eigenschaftMSBLokation")]
     [JsonPropertyName("eigenschaftMSBLokation")]
     [ProtoMember(14)]
     [JsonPropertyOrder(14)]

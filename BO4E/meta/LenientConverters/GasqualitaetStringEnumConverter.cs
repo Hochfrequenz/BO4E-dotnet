@@ -6,10 +6,15 @@ namespace BO4E.meta.LenientConverters;
 /// <summary>
 /// converts 'HGAS' to Enum Member Gasqualitaet.H_GAS (and 'LGAS' to Gasqualitaet.L_GAS)
 /// </summary>
-public class SystemTextGasqualitaetStringEnumConverter : System.Text.Json.Serialization.JsonConverter<Gasqualitaet?>
+public class SystemTextGasqualitaetStringEnumConverter
+    : System.Text.Json.Serialization.JsonConverter<Gasqualitaet?>
 {
     /// <inheritdoc />
-    public override Gasqualitaet? Read(ref System.Text.Json.Utf8JsonReader reader, Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+    public override Gasqualitaet? Read(
+        ref System.Text.Json.Utf8JsonReader reader,
+        Type typeToConvert,
+        System.Text.Json.JsonSerializerOptions options
+    )
     {
         if (reader.TokenType == System.Text.Json.JsonTokenType.Null)
         {
@@ -26,12 +31,20 @@ public class SystemTextGasqualitaetStringEnumConverter : System.Text.Json.Serial
         {
             "HGAS" => Gasqualitaet.H_GAS,
             "LGAS" => Gasqualitaet.L_GAS,
-            _ => Enum.TryParse(enumString, out Gasqualitaet result) ? result : throw new System.Text.Json.JsonException($"Invalid value for {typeToConvert}: {enumString}")
+            _ => Enum.TryParse(enumString, out Gasqualitaet result)
+                ? result
+                : throw new System.Text.Json.JsonException(
+                    $"Invalid value for {typeToConvert}: {enumString}"
+                ),
         };
     }
 
     /// <inheritdoc />
-    public override void Write(System.Text.Json.Utf8JsonWriter writer, Gasqualitaet? value, System.Text.Json.JsonSerializerOptions options)
+    public override void Write(
+        System.Text.Json.Utf8JsonWriter writer,
+        Gasqualitaet? value,
+        System.Text.Json.JsonSerializerOptions options
+    )
     {
         if (value is null)
         {
@@ -58,10 +71,17 @@ public class SystemTextGasqualitaetStringEnumConverter : System.Text.Json.Serial
 /// </code>
 /// </remarks>
 /// <remarks><seealso cref="SystemTextGasqualitaetStringEnumConverter"/></remarks>
-public class NewtonsoftGasqualitaetStringEnumConverter : Newtonsoft.Json.JsonConverter<Gasqualitaet?>
+public class NewtonsoftGasqualitaetStringEnumConverter
+    : Newtonsoft.Json.JsonConverter<Gasqualitaet?>
 {
     /// <inheritdoc />>
-    public override Gasqualitaet? ReadJson(Newtonsoft.Json.JsonReader reader, Type objectType, Gasqualitaet? existingValue, bool hasExistingValue, Newtonsoft.Json.JsonSerializer serializer)
+    public override Gasqualitaet? ReadJson(
+        Newtonsoft.Json.JsonReader reader,
+        Type objectType,
+        Gasqualitaet? existingValue,
+        bool hasExistingValue,
+        Newtonsoft.Json.JsonSerializer serializer
+    )
     {
         if (reader.TokenType == Newtonsoft.Json.JsonToken.Null)
         {
@@ -80,14 +100,23 @@ public class NewtonsoftGasqualitaetStringEnumConverter : Newtonsoft.Json.JsonCon
             {
                 "HGAS" => Gasqualitaet.H_GAS,
                 "LGAS" => Gasqualitaet.L_GAS,
-                _ => Enum.TryParse(enumString, out Gasqualitaet result) ? result : throw new Newtonsoft.Json.JsonSerializationException($"Invalid value for {objectType}: {enumString}")
+                _ => Enum.TryParse(enumString, out Gasqualitaet result)
+                    ? result
+                    : throw new Newtonsoft.Json.JsonSerializationException(
+                        $"Invalid value for {objectType}: {enumString}"
+                    ),
             };
         }
 
         throw new Newtonsoft.Json.JsonSerializationException("Expected string value.");
     }
+
     /// <inheritdoc />
-    public override void WriteJson(Newtonsoft.Json.JsonWriter writer, Gasqualitaet? value, Newtonsoft.Json.JsonSerializer serializer)
+    public override void WriteJson(
+        Newtonsoft.Json.JsonWriter writer,
+        Gasqualitaet? value,
+        Newtonsoft.Json.JsonSerializer serializer
+    )
     {
         if (value is null)
         {

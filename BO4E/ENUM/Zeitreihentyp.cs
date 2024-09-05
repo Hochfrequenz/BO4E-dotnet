@@ -1,6 +1,5 @@
-using BO4E.meta;
-
 using System.Runtime.Serialization;
+using BO4E.meta;
 
 namespace BO4E.ENUM;
 
@@ -36,11 +35,13 @@ public enum Zeitreihentyp
     /// <summary>Tagesparameterabhängige Lastprofilsumme</summary>
     [EnumMember(Value = "TLS")]
     TLS,
+
     /// <summary>
     /// gemeinsame Messung aus SLS und TLS
     /// </summary>
     [EnumMember(Value = "SLS_TLS")]
     SLS_TLS,
+
     /// <summary>
     /// Gemeinsame Messung aus SES und TES
     /// </summary>

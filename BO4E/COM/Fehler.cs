@@ -22,5 +22,6 @@ public class Fehler : COM
     [JsonProperty(PropertyName = "fehlerDetails", Required = Required.Default)]
     [JsonPropertyName("fehlerDetails")]
     [ProtoMember(2)]
-    public System.Collections.Generic.List<FehlerDetail>? FehlerDetails { get; set; } = new System.Collections.Generic.List<FehlerDetail>();
+    public System.Collections.Generic.List<FehlerDetail>? FehlerDetails { get; set; } =
+        new System.Collections.Generic.List<FehlerDetail>();
 }

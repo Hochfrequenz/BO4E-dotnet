@@ -97,7 +97,6 @@ public class Geschaeftspartner : BusinessObject
     [DataCategory(DataCategory.LEGAL)]
     public string? Hrnummer { get; set; }
 
-
     /// <summary> Amtsgericht bzw Handelsregistergericht, das die Handelsregisternummer herausgegeben hat</summary>
     [JsonProperty(Required = Required.Default, Order = 13, PropertyName = "amtsgericht")]
     [JsonPropertyOrder(13)]
@@ -147,8 +146,7 @@ public class Geschaeftspartner : BusinessObject
     public string? Website { get; set; }
 
     /// <summary>Rolle, die der Geschäftspartner hat (z.B. Interessent, Kunde).</summary>
-    [JsonProperty(Required = Required.Default, Order = 19,
-        PropertyName = "geschaeftspartnerrolle")] // ToDo: it's actually required but I need it to work quickly
+    [JsonProperty(Required = Required.Default, Order = 19, PropertyName = "geschaeftspartnerrolle")] // ToDo: it's actually required but I need it to work quickly
     [JsonPropertyName("geschaeftspartnerrolle")]
     [JsonPropertyOrder(19)]
     [FieldName("role", Language.EN)]
@@ -168,7 +166,11 @@ public class Geschaeftspartner : BusinessObject
     /// <summary>
     /// Grundlage zur Verringerung der Umlagen nach EnFG
     /// </summary>
-    [JsonProperty(PropertyName = "grundlageZurVerringerungDerUmlagenNachEnfg", Required = Required.Default, Order = 21)]
+    [JsonProperty(
+        PropertyName = "grundlageZurVerringerungDerUmlagenNachEnfg",
+        Required = Required.Default,
+        Order = 21
+    )]
     [JsonPropertyName("grundlageZurVerringerungDerUmlagenNachEnfg")]
     [JsonPropertyOrder(21)]
     [NonOfficial(NonOfficialCategory.CUSTOMER_REQUIREMENTS)]
@@ -178,7 +180,11 @@ public class Geschaeftspartner : BusinessObject
     /// <summary>
     /// Grund der Privilegierung nach EnFG
     /// </summary>
-    [JsonProperty(PropertyName = "grundDerPrivilegierungNachEnFG", Required = Required.Default, Order = 22)]
+    [JsonProperty(
+        PropertyName = "grundDerPrivilegierungNachEnFG",
+        Required = Required.Default,
+        Order = 22
+    )]
     [JsonPropertyName("grundDerPrivilegierungNachEnFG")]
     [JsonPropertyOrder(22)]
     [NonOfficial(NonOfficialCategory.CUSTOMER_REQUIREMENTS)]

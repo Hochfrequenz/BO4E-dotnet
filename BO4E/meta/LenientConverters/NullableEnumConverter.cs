@@ -31,12 +31,14 @@ public class StringNullableEnumConverter : JsonConverterFactory
     /// <returns></returns>
     public override JsonConverter CreateConverter(Type typeToConvert, JsonSerializerOptions options)
     {
-        var converter = (JsonConverter)Activator.CreateInstance(
-            typeof(StringNullableEnumConverter<>).MakeGenericType(typeToConvert),
-            BindingFlags.Instance | BindingFlags.Public,
-            null,
-            null,
-            null);
+        var converter = (JsonConverter)
+            Activator.CreateInstance(
+                typeof(StringNullableEnumConverter<>).MakeGenericType(typeToConvert),
+                BindingFlags.Instance | BindingFlags.Public,
+                null,
+                null,
+                null
+            );
 
         return converter;
     }
@@ -54,9 +56,8 @@ public class StringNullableEnumConverter<T> : JsonConverter<T>
     /// <summary>
     ///     constructor
     /// </summary>
-    public StringNullableEnumConverter() : this(null)
-    {
-    }
+    public StringNullableEnumConverter()
+        : this(null) { }
 
     /// <summary>
     ///     Construct a converter (reuse if possible)
@@ -101,8 +102,11 @@ public class StringNullableEnumConverter<T> : JsonConverter<T>
     /// <param name="typeToConvert"></param>
     /// <param name="options"></param>
     /// <returns></returns>
-    public override T Read(ref Utf8JsonReader reader,
-        Type typeToConvert, JsonSerializerOptions options)
+    public override T Read(
+        ref Utf8JsonReader reader,
+        Type typeToConvert,
+        JsonSerializerOptions options
+    )
     {
         if (_converter != null)
         {
@@ -149,8 +153,7 @@ public class StringNullableEnumConverter<T> : JsonConverter<T>
     /// <param name="writer"></param>
     /// <param name="value"></param>
     /// <param name="options"></param>
-    public override void Write(Utf8JsonWriter writer,
-        T value, JsonSerializerOptions options)
+    public override void Write(Utf8JsonWriter writer, T value, JsonSerializerOptions options)
     {
         writer.WriteStringValue(value?.ToString());
     }

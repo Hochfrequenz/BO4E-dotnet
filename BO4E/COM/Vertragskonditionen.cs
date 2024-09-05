@@ -1,13 +1,10 @@
+using System;
+using System.Text.Json.Serialization;
 using BO4E.ENUM;
 using BO4E.meta;
 using BO4E.meta.LenientConverters;
-
 using Newtonsoft.Json;
-
 using ProtoBuf;
-
-using System;
-using System.Text.Json.Serialization;
 
 namespace BO4E.COM;
 
@@ -70,8 +67,11 @@ public class Vertragskonditionen : COM
     private DateTime _StartAbrechnungsjahr
     {
         get => StartAbrechnungsjahr?.UtcDateTime ?? default;
-        set => StartAbrechnungsjahr = value == default ? null : DateTime.SpecifyKind(value, DateTimeKind.Utc);
+        set =>
+            StartAbrechnungsjahr =
+                value == default ? null : DateTime.SpecifyKind(value, DateTimeKind.Utc);
     }
+
     // ToDo: Docstring!
     [JsonProperty(PropertyName = "startAbrechnungsjahr", Required = Required.Default, Order = 16)]
     [JsonPropertyName("startAbrechnungsjahr")]
@@ -94,7 +94,11 @@ public class Vertragskonditionen : COM
 
     // ToDo: Docstring! what is the unit? days? why don't you use zeitraum?
     // todo @hamid: add a docstring
-    [JsonProperty(PropertyName = "turnusablesungIntervall", Required = Required.Default, Order = 18)]
+    [JsonProperty(
+        PropertyName = "turnusablesungIntervall",
+        Required = Required.Default,
+        Order = 18
+    )]
     [JsonPropertyName("turnusablesungIntervall")]
     [JsonPropertyOrder(18)]
     [NonOfficial(NonOfficialCategory.CUSTOMER_REQUIREMENTS)]
@@ -112,7 +116,11 @@ public class Vertragskonditionen : COM
 
     // ToDo: Docstring! what is the unit? days? why dont you use zeitraum?
     // todo @hamid: add a docstring
-    [JsonProperty(PropertyName = "netznutzungsabrechnungIntervall", Required = Required.Default, Order = 20)]
+    [JsonProperty(
+        PropertyName = "netznutzungsabrechnungIntervall",
+        Required = Required.Default,
+        Order = 20
+    )]
     [JsonPropertyName("netznutzungsabrechnungIntervall")]
     [JsonPropertyOrder(20)]
     [NonOfficial(NonOfficialCategory.CUSTOMER_REQUIREMENTS)]
@@ -137,7 +145,6 @@ public class Vertragskonditionen : COM
     [ProtoMember(1015)]
     public Netznutzungsvertragsart? Netznutzungsvertragsart { get; set; }
 
-
     // ToDo: Docstring!
     // todo @hamid: add a docstring
     [JsonProperty(PropertyName = "netznutzungszahler", Required = Required.Default, Order = 23)]
@@ -149,7 +156,11 @@ public class Vertragskonditionen : COM
 
     // ToDo: Docstring!
     // todo @hamid: add a docstring
-    [JsonProperty(PropertyName = "netznutzungsabrechnungsvariante", Required = Required.Default, Order = 24)]
+    [JsonProperty(
+        PropertyName = "netznutzungsabrechnungsvariante",
+        Required = Required.Default,
+        Order = 24
+    )]
     [JsonPropertyName("netznutzungsabrechnungsvariante")]
     [JsonPropertyOrder(24)]
     [NonOfficial(NonOfficialCategory.CUSTOMER_REQUIREMENTS)]
@@ -158,7 +169,11 @@ public class Vertragskonditionen : COM
 
     // ToDo: Docstring!
     // todo @hamid: add a docstring
-    [JsonProperty(PropertyName = "netznutzungsabrechnungsgrundlage", Required = Required.Default, Order = 25)]
+    [JsonProperty(
+        PropertyName = "netznutzungsabrechnungsgrundlage",
+        Required = Required.Default,
+        Order = 25
+    )]
     [JsonPropertyName("netznutzungsabrechnungsgrundlage")]
     [JsonPropertyOrder(25)]
     [NonOfficial(NonOfficialCategory.CUSTOMER_REQUIREMENTS)]
@@ -167,11 +182,15 @@ public class Vertragskonditionen : COM
 
     /// <summary>
     ///     Singulär genutzte Betriebsmittel in der Netznutzungsabrechnung
-    ///     Hier wird angegeben, ob in der Netznutzungsabrechnung der verbrauchenden Marktlokation singulär 
+    ///     Hier wird angegeben, ob in der Netznutzungsabrechnung der verbrauchenden Marktlokation singulär
     ///     genutzte Betriebsmittel abgerechnet werden.
     /// </summary>
     /// <remarks>für EDIFACT mapping</remarks>
-    [JsonProperty(PropertyName = "beinhaltetSingulaerGenutzteBetriebsmittel", Required = Required.Default, Order = 26)]
+    [JsonProperty(
+        PropertyName = "beinhaltetSingulaerGenutzteBetriebsmittel",
+        Required = Required.Default,
+        Order = 26
+    )]
     [JsonPropertyName("beinhaltetSingulaerGenutzteBetriebsmittel")]
     [JsonPropertyOrder(26)]
     [NonOfficial(NonOfficialCategory.CUSTOMER_REQUIREMENTS)]

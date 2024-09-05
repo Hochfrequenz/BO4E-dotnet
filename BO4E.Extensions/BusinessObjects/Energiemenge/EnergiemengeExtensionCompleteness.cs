@@ -1,15 +1,12 @@
-using BO4E.COM;
-using BO4E.ENUM;
-using BO4E.Reporting;
-
-using Itenso.TimePeriod;
-
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
-
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using BO4E.COM;
+using BO4E.ENUM;
+using BO4E.Reporting;
+using Itenso.TimePeriod;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Converters;
 
 namespace BO4E.Extensions.BusinessObjects.Energiemenge;
 
@@ -23,13 +20,20 @@ public static partial class EnergiemengeExtension
     /// <param name="em">Energiemenge</param>
     /// <param name="config">configuration container</param>
     /// <returns></returns>
-    public static CompletenessReport GetCompletenessReport(this BO.Energiemenge em,
-        CompletenessReport.CompletenessReportConfiguration config)
+    public static CompletenessReport GetCompletenessReport(
+        this BO.Energiemenge em,
+        CompletenessReport.CompletenessReportConfiguration config
+    )
     {
         return em.GetCompletenessReport(
-            new TimeRange(config.ReferenceTimeFrame.Startdatum.Value.UtcDateTime,
-                config.ReferenceTimeFrame.Enddatum.Value.UtcDateTime), config.Wertermittlungsverfahren, config.Obis,
-            config.Einheit);
+            new TimeRange(
+                config.ReferenceTimeFrame.Startdatum.Value.UtcDateTime,
+                config.ReferenceTimeFrame.Enddatum.Value.UtcDateTime
+            ),
+            config.Wertermittlungsverfahren,
+            config.Obis,
+            config.Einheit
+        );
     }
 
     /// <summary>
@@ -38,7 +42,10 @@ public static partial class EnergiemengeExtension
     /// <param name="em">Energiemenge</param>
     /// <param name="reference">reference time frame</param>
     /// <returns></returns>
-    public static CompletenessReport GetCompletenessReport(this BO.Energiemenge em, ITimeRange reference)
+    public static CompletenessReport GetCompletenessReport(
+        this BO.Energiemenge em,
+        ITimeRange reference
+    )
     {
         var combis = em.GetWevObisMeCombinations();
         if (combis.Count != 1)
@@ -63,10 +70,10 @@ public static partial class EnergiemengeExtension
                 ReferenceTimeFrame = new Zeitraum
                 {
                     Startdatum = new DateTimeOffset(reference.Start, TimeSpan.Zero),
-                    Enddatum = new DateTimeOffset(reference.End, TimeSpan.Zero)
+                    Enddatum = new DateTimeOffset(reference.End, TimeSpan.Zero),
                 },
                 Coverage = coverage,
-                ErrorMessage = errorMessage
+                ErrorMessage = errorMessage,
             };
         }
 
@@ -83,8 +90,13 @@ public static partial class EnergiemengeExtension
     /// <param name="obiskennzahl">OBIS Kennzahl</param>
     /// <param name="einheit">Mengeneinheit</param>
     /// <returns>the completeness report</returns>
-    public static CompletenessReport GetCompletenessReport(this BO.Energiemenge em, ITimeRange reference,
-        Wertermittlungsverfahren? wev, string obiskennzahl, Mengeneinheit einheit)
+    public static CompletenessReport GetCompletenessReport(
+        this BO.Energiemenge em,
+        ITimeRange reference,
+        Wertermittlungsverfahren? wev,
+        string obiskennzahl,
+        Mengeneinheit einheit
+    )
     {
         CompletenessReport result;
 
@@ -97,11 +109,14 @@ public static partial class EnergiemengeExtension
             Obiskennzahl = obiskennzahl,
             ReferenceTimeFrame = new Zeitraum
             {
-                Startdatum = new DateTimeOffset(DateTime.SpecifyKind(reference.Start, DateTimeKind.Utc)),
-                Enddatum = new DateTimeOffset(DateTime.SpecifyKind(reference.End, DateTimeKind.Utc))
-            }
+                Startdatum = new DateTimeOffset(
+                    DateTime.SpecifyKind(reference.Start, DateTimeKind.Utc)
+                ),
+                Enddatum = new DateTimeOffset(
+                    DateTime.SpecifyKind(reference.End, DateTimeKind.Utc)
+                ),
+            },
         };
-
 
         if (em.Energieverbrauch != null && em.Energieverbrauch.Any())
         {
@@ -130,14 +145,19 @@ public static partial class EnergiemengeExtension
                 .ToList<CompletenessReport.BasicVerbrauch>());
             }*/
 
-            var nonNullValues =
-                new TimePeriodCollection(
-                    em.Energieverbrauch.Select(v => new TimeRange((v.Startdatum ?? DateTimeOffset.MinValue).DateTime, (v.Enddatum ?? DateTimeOffset.MinValue).DateTime)));
+            var nonNullValues = new TimePeriodCollection(
+                em.Energieverbrauch.Select(v => new TimeRange(
+                    (v.Startdatum ?? DateTimeOffset.MinValue).DateTime,
+                    (v.Enddatum ?? DateTimeOffset.MinValue).DateTime
+                ))
+            );
             ITimeRange limits;
             if (result.ReferenceTimeFrame != null && result.ReferenceTimeFrame.Startdatum.HasValue)
             {
-                limits = new TimeRange(result.ReferenceTimeFrame.Startdatum.Value.UtcDateTime,
-                    result.ReferenceTimeFrame.Enddatum.Value.UtcDateTime);
+                limits = new TimeRange(
+                    result.ReferenceTimeFrame.Startdatum.Value.UtcDateTime,
+                    result.ReferenceTimeFrame.Enddatum.Value.UtcDateTime
+                );
             }
             else
             {
@@ -146,12 +166,12 @@ public static partial class EnergiemengeExtension
 
             var gaps = new TimeGapCalculator<TimeRange>().GetGaps(nonNullValues, limits);
             result.Gaps = gaps.Select(gap => new CompletenessReport.BasicVerbrauch
-            {
-                Startdatum = DateTime.SpecifyKind(gap.Start, DateTimeKind.Utc),
-                Enddatum = DateTime.SpecifyKind(gap.End, DateTimeKind.Utc),
-                Wert = null
-            }).ToList();
-
+                {
+                    Startdatum = DateTime.SpecifyKind(gap.Start, DateTimeKind.Utc),
+                    Enddatum = DateTime.SpecifyKind(gap.End, DateTimeKind.Utc),
+                    Wert = null,
+                })
+                .ToList();
 
             /*using (MiniProfiler.Current.Step("sorting result"))
             {
@@ -161,8 +181,11 @@ public static partial class EnergiemengeExtension
             {
                 try
                 {
-                    foreach (var kvp in em.Energieverbrauch.Where(v => v.UserProperties != null)
-                                 .SelectMany(v => v.UserProperties))
+                    foreach (
+                        var kvp in em
+                            .Energieverbrauch.Where(v => v.UserProperties != null)
+                            .SelectMany(v => v.UserProperties)
+                    )
                     {
                         if (result.UserProperties == null)
                         {
@@ -205,7 +228,8 @@ public static partial class EnergiemengeExtension
         if (!em.IsPure())
         {
             throw new ArgumentException(
-                "The provided Energiemenge is not pure. Please use overloaded method GetCompletenessReport(... , wertermittlungsverfahren, obiskennzahl, mengeneinheit).");
+                "The provided Energiemenge is not pure. Please use overloaded method GetCompletenessReport(... , wertermittlungsverfahren, obiskennzahl, mengeneinheit)."
+            );
         }
 
         Verbrauch v;
@@ -219,11 +243,16 @@ public static partial class EnergiemengeExtension
             {
                 Coverage = null,
                 LokationsId = em.LokationsId,
-                ErrorMessage = "energieverbrauch is empty"
+                ErrorMessage = "energieverbrauch is empty",
             };
         }
 
-        return em.GetCompletenessReport(em.GetTimeRange(), v.Wertermittlungsverfahren, v.Obiskennzahl, v.Einheit);
+        return em.GetCompletenessReport(
+            em.GetTimeRange(),
+            v.Wertermittlungsverfahren,
+            v.Obiskennzahl,
+            v.Einheit
+        );
     }
 
     /// <summary>
@@ -233,8 +262,11 @@ public static partial class EnergiemengeExtension
     /// <param name="ranges">list of ranges for which the completeness reports are generated</param>
     /// <param name="useParallelExecution">set true to internally use parallel linq</param>
     /// <returns></returns>
-    public static IDictionary<ITimeRange, CompletenessReport> GetSlicedCompletenessReports(this BO.Energiemenge em,
-        IEnumerable<ITimeRange> ranges, bool useParallelExecution = false)
+    public static IDictionary<ITimeRange, CompletenessReport> GetSlicedCompletenessReports(
+        this BO.Energiemenge em,
+        IEnumerable<ITimeRange> ranges,
+        bool useParallelExecution = false
+    )
     {
         if (ranges == null)
         {
@@ -262,8 +294,11 @@ public static partial class EnergiemengeExtension
     /// <param name="overallTimeRange">overall time frame. Beginning and end must have same hour/minute/second</param>
     /// <param name="useParallelExecution">set true to internally use parallel linq</param>
     /// <returns></returns>
-    public static IDictionary<ITimeRange, CompletenessReport> GetDailyCompletenessReports(this BO.Energiemenge em,
-        ITimeRange overallTimeRange, bool useParallelExecution = false)
+    public static IDictionary<ITimeRange, CompletenessReport> GetDailyCompletenessReports(
+        this BO.Energiemenge em,
+        ITimeRange overallTimeRange,
+        bool useParallelExecution = false
+    )
     {
         var slices = GetLocalDailySlices(overallTimeRange);
         return em.GetSlicedCompletenessReports(slices, useParallelExecution);
@@ -276,8 +311,11 @@ public static partial class EnergiemengeExtension
     /// <param name="overallTimeRange"></param>
     /// <param name="useParallelExecution">set true to internally use parallel linq</param>
     /// <returns></returns>
-    public static IDictionary<ITimeRange, CompletenessReport> GetMonthlyCompletenessReports(this BO.Energiemenge em,
-        ITimeRange overallTimeRange, bool useParallelExecution = false)
+    public static IDictionary<ITimeRange, CompletenessReport> GetMonthlyCompletenessReports(
+        this BO.Energiemenge em,
+        ITimeRange overallTimeRange,
+        bool useParallelExecution = false
+    )
     {
         var slices = GetLocalMonthlySlices(overallTimeRange);
         return em.GetSlicedCompletenessReports(slices, useParallelExecution);

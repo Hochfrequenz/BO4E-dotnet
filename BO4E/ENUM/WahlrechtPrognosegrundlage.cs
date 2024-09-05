@@ -14,6 +14,7 @@ public enum WahlrechtPrognosegrundlage
     /// <remarks> CAV+Z54 </remarks>
     [EnumMember(Value = "DURCH_LF")]
     DURCH_LF,
+
     /// <summary>
     /// Wahlrecht durch LF gegeben
     /// </summary>

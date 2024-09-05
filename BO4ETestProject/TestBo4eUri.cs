@@ -14,36 +14,50 @@ namespace TestBO4E;
 [TestClass]
 public class TestBo4eURI
 {
-    private static readonly Dictionary<string, string> boNameResults = new Dictionary<string, string>
+    private static readonly Dictionary<string, string> boNameResults = new Dictionary<
+        string,
+        string
+    >
     {
-        {"bo4e://Marktlokation/987654321098", "Marktlokation"},
-        {"bo4e://hurzelasdanoafi/123456", null},
-        {"bo4e://Energiemenge/123456", "Energiemenge"},
-        {"bo4e://Ansprechpartner/123467/adsadad/aafe4rq3rqr/", "Ansprechpartner"},
-        {"bo4e://ansprechpartner/mitlowercase/", "Ansprechpartner"},
-        {"bo4e://MaRkTLoKaTiOn/mitlowercase/", "Marktlokation"},
-        {"bo4e://Marktlokation/?backendId=10000001308", "Marktlokation"}
+        { "bo4e://Marktlokation/987654321098", "Marktlokation" },
+        { "bo4e://hurzelasdanoafi/123456", null },
+        { "bo4e://Energiemenge/123456", "Energiemenge" },
+        { "bo4e://Ansprechpartner/123467/adsadad/aafe4rq3rqr/", "Ansprechpartner" },
+        { "bo4e://ansprechpartner/mitlowercase/", "Ansprechpartner" },
+        { "bo4e://MaRkTLoKaTiOn/mitlowercase/", "Marktlokation" },
+        { "bo4e://Marktlokation/?backendId=10000001308", "Marktlokation" },
     };
 
-    private static readonly Dictionary<Type, List<string>> boKeyNamesResults = new Dictionary<Type, List<string>>
+    private static readonly Dictionary<Type, List<string>> boKeyNamesResults = new Dictionary<
+        Type,
+        List<string>
+    >
     {
-        {typeof(Marktlokation), new List<string> {"marktlokationsId"}},
         {
-            typeof(Messlokation), new List<string> {"messlokationsId"}
-        } //<-- should be the json property name if annotated 
+            typeof(Marktlokation),
+            new List<string> { "marktlokationsId" }
+        },
+        {
+            typeof(Messlokation),
+            new List<string> { "messlokationsId" }
+        } //<-- should be the json property name if annotated
+        ,
     };
 
-    private static readonly Dictionary<string, bool> validationResults = new Dictionary<string, bool>
+    private static readonly Dictionary<string, bool> validationResults = new Dictionary<
+        string,
+        bool
+    >
     {
-        {"bo4e://Marktlokation/987654321098", true},
+        { "bo4e://Marktlokation/987654321098", true },
         // {"   bo4e://Leerzeichen/987654321098", false },
-        {"keinProtokoll/123456", false},
-        {"falschesProtokoll://asdadadl/123456", false},
-        {"bo4e://Marktlokation/123467/adsadad/aafe4rq3rqr/", true},
-        {"bo4e://kf56@Marktlokation:100/adadsadad", true},
-        {"bo4e://kf56:pw@Marktlokation:100/adadsadad?dasd=asd", true},
-        {"bo4e://Marktlokation/123467/adsadad/aafe4rq3rqr?asdasda=3r343&adasdas=2334#341", true},
-        {"bo4e://Marktteilnehmer/?backendId=1234", true}
+        { "keinProtokoll/123456", false },
+        { "falschesProtokoll://asdadadl/123456", false },
+        { "bo4e://Marktlokation/123467/adsadad/aafe4rq3rqr/", true },
+        { "bo4e://kf56@Marktlokation:100/adadsadad", true },
+        { "bo4e://kf56:pw@Marktlokation:100/adadsadad?dasd=asd", true },
+        { "bo4e://Marktlokation/123467/adsadad/aafe4rq3rqr?asdasda=3r343&adasdas=2334#341", true },
+        { "bo4e://Marktteilnehmer/?backendId=1234", true },
     };
 
     [TestMethod]
@@ -60,9 +74,14 @@ public class TestBo4eURI
             }
 
             Assert.IsNotNull(json, $"The content of file {file} seems to be no valid JSON.");
-            Assert.IsNotNull(json["input"], $"The file {file} does not contain the mandatory 'input' key.");
-            Assert.IsNotNull(json["expectedUri"],
-                $"The file {file} does not contain the mandatory 'expectedUri' key.");
+            Assert.IsNotNull(
+                json["input"],
+                $"The file {file} does not contain the mandatory 'input' key."
+            );
+            Assert.IsNotNull(
+                json["expectedUri"],
+                $"The file {file} does not contain the mandatory 'expectedUri' key."
+            );
             //string boType = (string)json["input"]["boTyp"];
             //Assert.IsNotNull(boType, $"The JSON content of file {file} is missing the obligatory 'boTyp' attribute.");
             var bo = JsonConvert.DeserializeObject<BusinessObject>(json["input"].ToString());
@@ -70,10 +89,16 @@ public class TestBo4eURI
 
             var uri = Bo4eUri.GetUri(bo);
             var uriString = uri.AbsoluteUri;
-            Assert.AreEqual(json["expectedUri"], uriString, "The URI doesn't match the expectations.");
+            Assert.AreEqual(
+                json["expectedUri"],
+                uriString,
+                "The URI doesn't match the expectations."
+            );
 
-            Assert.IsNotNull(json["expectedQueryObject"],
-                $"Please specify the query object result in file {file}, key 'expectedQueryObject'.");
+            Assert.IsNotNull(
+                json["expectedQueryObject"],
+                $"Please specify the query object result in file {file}, key 'expectedQueryObject'."
+            );
             var queryObject = uri.GetQueryObject();
             var jdp = new JsonDiffPatch();
             var left = json["expectedQueryObject"];
@@ -81,10 +106,10 @@ public class TestBo4eURI
             var patch = jdp.Diff(left, right);
             if (patch != null)
             {
-                if (patch.ToString()
-                        .Replace("\n", "")
-                        .Replace("\r", "")
-                        .Replace(" ", "") == "{\"vorname\":[null,null]}")
+                if (
+                    patch.ToString().Replace("\n", "").Replace("\r", "").Replace(" ", "")
+                    == "{\"vorname\":[null,null]}"
+                )
                 {
                     continue;
                 }
@@ -122,7 +147,8 @@ public class TestBo4eURI
     public void TestWellformedKannmichmal()
     {
         var uri = new Bo4eUri(
-            "bo4e://messlokation/?filter=bilanzierungsmethode eq 'RLM'or bilanzierungsmethode eq 'IMS'");
+            "bo4e://messlokation/?filter=bilanzierungsmethode eq 'RLM'or bilanzierungsmethode eq 'IMS'"
+        );
         Assert.IsNotNull(uri);
     }
 
@@ -133,8 +159,11 @@ public class TestBo4eURI
             try
             {
                 var uri = new Bo4eUri(testString);
-                Assert.AreEqual(boNameResults[testString], uri.GetBoName(),
-                    $"boName validation failed for {testString}.");
+                Assert.AreEqual(
+                    boNameResults[testString],
+                    uri.GetBoName(),
+                    $"boName validation failed for {testString}."
+                );
                 Assert.IsTrue(uri.GetBoType().ToString().EndsWith(boNameResults[testString]));
             }
             catch (ArgumentException)
@@ -150,8 +179,10 @@ public class TestBo4eURI
         {
             var expectedList = boKeyNamesResults[boType];
             var actualList = BusinessObject.GetBoKeyNames(boType);
-            Assert.IsTrue(expectedList.SequenceEqual(actualList),
-                $"{boType}: expected: [{string.Join(",", expectedList)}] actual: [{string.Join(",", actualList)}] ");
+            Assert.IsTrue(
+                expectedList.SequenceEqual(actualList),
+                $"{boType}: expected: [{string.Join(",", expectedList)}] actual: [{string.Join(",", actualList)}] "
+            );
         }
     }
 
@@ -159,8 +190,11 @@ public class TestBo4eURI
     public void TestValidity()
     {
         foreach (var testString in validationResults.Keys)
-            Assert.AreEqual(validationResults[testString], Bo4eUri.IsValid(testString),
-                $"URI validation failed for {testString} .");
+            Assert.AreEqual(
+                validationResults[testString],
+                Bo4eUri.IsValid(testString),
+                $"URI validation failed for {testString} ."
+            );
     }
 
     [TestMethod]
@@ -180,13 +214,16 @@ public class TestBo4eURI
     public void TestRoundTripUriFilterQueryObject()
     {
         var qo = JObject.Parse(
-            "{'marktlokationsId':'543212345', 'messlokationsId':'DE123', 'bilanzierungsmethode':'SLP'}");
+            "{'marktlokationsId':'543212345', 'messlokationsId':'DE123', 'bilanzierungsmethode':'SLP'}"
+        );
         var uri = new Bo4eUri("bo4e://marktlokation?search=something").AddFilter(
-            JsonConvert.DeserializeObject<IDictionary<string, object>>(qo.ToString()));
+            JsonConvert.DeserializeObject<IDictionary<string, object>>(qo.ToString())
+        );
         Assert.IsNotNull(uri);
         Assert.AreEqual(
             "bo4e://marktlokation/?search=something&filter=marktlokationsId+eq+%27543212345%27+and+bilanzierungsmethode+eq+%27SLP%27",
-            uri.ToString());
+            uri.ToString()
+        );
         var qo2 = uri.GetQueryObject();
         Assert.IsTrue(qo2.ContainsKey("marktlokationsId"));
         Assert.IsTrue(qo2.ContainsKey("bilanzierungsmethode"));

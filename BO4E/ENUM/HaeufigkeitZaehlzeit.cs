@@ -11,5 +11,5 @@ public enum HaeufigkeitZaehlzeit
 
     /// <summary>Jährlich</summary>
     [EnumMember(Value = "JAEHRLICH")]
-    JAEHRLICH
+    JAEHRLICH,
 }

@@ -1,11 +1,8 @@
+using System.Text.Json.Serialization;
 using BO4E.BO;
 using BO4E.meta;
-
 using Newtonsoft.Json;
-
 using ProtoBuf;
-
-using System.Text.Json.Serialization;
 
 namespace BO4E.COM;
 
@@ -26,7 +23,11 @@ public class Konfigurationsprodukt : COM
     /// <summary>
     /// Code der Zugeordnete Leistungskurvendefinition für das Objekt
     /// </summary>
-    [JsonProperty(Required = Required.Default, Order = 2, PropertyName = "leistungskurvendefinition")]
+    [JsonProperty(
+        Required = Required.Default,
+        Order = 2,
+        PropertyName = "leistungskurvendefinition"
+    )]
     [JsonPropertyOrder(2)]
     [JsonPropertyName("leistungskurvendefinition")]
     [ProtoMember(2)]

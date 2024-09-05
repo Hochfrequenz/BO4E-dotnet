@@ -9,11 +9,17 @@ namespace BO4E.Extensions.BusinessObjects.Energiemenge;
 /// <summary>Do calculations on top of an Energiemenge BO4E.</summary>
 public static partial class EnergiemengeExtension
 {
-    internal static IList<ITimeRange> GetLocalDailySlices(ITimeRange overallTimeRange, TimeZoneInfo tz = null)
+    internal static IList<ITimeRange> GetLocalDailySlices(
+        ITimeRange overallTimeRange,
+        TimeZoneInfo tz = null
+    )
     {
         if (overallTimeRange == null)
         {
-            throw new ArgumentNullException(nameof(overallTimeRange), "overall time range must not be null");
+            throw new ArgumentNullException(
+                nameof(overallTimeRange),
+                "overall time range must not be null"
+            );
         }
 
         if (tz == null)
@@ -23,40 +29,54 @@ public static partial class EnergiemengeExtension
 
         if (overallTimeRange.Start.Kind == DateTimeKind.Unspecified)
         {
-            throw new ArgumentException("TimeRange start must not have DateTimeKind.Unspecified",
-                nameof(overallTimeRange));
+            throw new ArgumentException(
+                "TimeRange start must not have DateTimeKind.Unspecified",
+                nameof(overallTimeRange)
+            );
         }
 
         if (overallTimeRange.End.Kind == DateTimeKind.Unspecified)
         {
-            throw new ArgumentException("TimeRange end must not have DateTimeKind.Unspecified",
-                nameof(overallTimeRange));
+            throw new ArgumentException(
+                "TimeRange end must not have DateTimeKind.Unspecified",
+                nameof(overallTimeRange)
+            );
         }
 
         IList<ITimeRange> result = new List<ITimeRange>();
         if (!overallTimeRange.IsMoment)
         {
-            result.Add(new TimeRange
-            {
-                Start = overallTimeRange.Start,
-                End = overallTimeRange.Start.AddDaysDST(1)
-            });
-            while (result.Last().End < overallTimeRange.End)
-                result.Add(new TimeRange
+            result.Add(
+                new TimeRange
                 {
-                    Start = result.Last().Start.AddDaysDST(1),
-                    End = result.Last().End.AddDaysDST(1)
-                });
+                    Start = overallTimeRange.Start,
+                    End = overallTimeRange.Start.AddDaysDST(1),
+                }
+            );
+            while (result.Last().End < overallTimeRange.End)
+                result.Add(
+                    new TimeRange
+                    {
+                        Start = result.Last().Start.AddDaysDST(1),
+                        End = result.Last().End.AddDaysDST(1),
+                    }
+                );
         }
 
         return result;
     }
 
-    internal static IList<ITimeRange> GetLocalMonthlySlices(ITimeRange overallTimeRange, TimeZoneInfo tz = null)
+    internal static IList<ITimeRange> GetLocalMonthlySlices(
+        ITimeRange overallTimeRange,
+        TimeZoneInfo tz = null
+    )
     {
         if (overallTimeRange == null)
         {
-            throw new ArgumentNullException(nameof(overallTimeRange), "overall time range must not be null");
+            throw new ArgumentNullException(
+                nameof(overallTimeRange),
+                "overall time range must not be null"
+            );
         }
 
         DateTime localStart;
@@ -69,14 +89,16 @@ public static partial class EnergiemengeExtension
             {
                 throw new ArgumentException(
                     $"TimeRange start must have DateTimeKind.Utc if no timezone is given in parameter {nameof(tz)}",
-                    nameof(overallTimeRange));
+                    nameof(overallTimeRange)
+                );
             }
 
             if (overallTimeRange.End.Kind != DateTimeKind.Utc)
             {
                 throw new ArgumentException(
                     $"TimeRange end must have DateTimeKind.Utc if no timezone is given in parameter {nameof(tz)}",
-                    nameof(overallTimeRange));
+                    nameof(overallTimeRange)
+                );
             }
 
             localStart = TimeZoneInfo.ConvertTimeFromUtc(overallTimeRange.Start, tz);
@@ -87,8 +109,10 @@ public static partial class EnergiemengeExtension
             switch (overallTimeRange.Start.Kind)
             {
                 case DateTimeKind.Local:
-                    throw new ArgumentException($"{nameof(DateTimeKind.Local)} not allowed for Start",
-                        nameof(overallTimeRange));
+                    throw new ArgumentException(
+                        $"{nameof(DateTimeKind.Local)} not allowed for Start",
+                        nameof(overallTimeRange)
+                    );
                 case DateTimeKind.Unspecified:
                     localStart = overallTimeRange.Start;
                     break;
@@ -102,8 +126,10 @@ public static partial class EnergiemengeExtension
             switch (overallTimeRange.End.Kind)
             {
                 case DateTimeKind.Local:
-                    throw new ArgumentException($"{nameof(DateTimeKind.Local)} not allowed for End",
-                        nameof(overallTimeRange));
+                    throw new ArgumentException(
+                        $"{nameof(DateTimeKind.Local)} not allowed for End",
+                        nameof(overallTimeRange)
+                    );
                 case DateTimeKind.Unspecified:
                     localEnd = overallTimeRange.End;
                     break;
@@ -121,31 +147,33 @@ public static partial class EnergiemengeExtension
         IList<ITimeRange> result = new List<ITimeRange>();
         if (!overallTimeRange.IsMoment)
         {
-            var initialStart =
-                new DateTime(localStart.Year, localStart.Month, 1, 0, 0, 0, DateTimeKind.Unspecified);
+            var initialStart = new DateTime(
+                localStart.Year,
+                localStart.Month,
+                1,
+                0,
+                0,
+                0,
+                DateTimeKind.Unspecified
+            );
             var initialEnd = initialStart.AddMonths(1);
-            result.Add(new TimeRange
-            {
-                Start = initialStart,
-                End = initialEnd
-            });
+            result.Add(new TimeRange { Start = initialStart, End = initialEnd });
             while (result.Last().End < overallTimeRange.End)
             {
                 var sliceStart = result.Last().Start.AddMonths(1);
-                result.Add(new TimeRange
-                {
-                    Start = sliceStart,
-                    End = sliceStart.AddMonths(1)
-                });
+                result.Add(new TimeRange { Start = sliceStart, End = sliceStart.AddMonths(1) });
             }
         }
 
         return result
-            .Select(tr => (ITimeRange)new TimeRange
-            {
-                Start = TimeZoneInfo.ConvertTimeToUtc(tr.Start, tz),
-                End = TimeZoneInfo.ConvertTimeToUtc(tr.End, tz)
-            })
+            .Select(tr =>
+                (ITimeRange)
+                    new TimeRange
+                    {
+                        Start = TimeZoneInfo.ConvertTimeToUtc(tr.Start, tz),
+                        End = TimeZoneInfo.ConvertTimeToUtc(tr.End, tz),
+                    }
+            )
             .Where(tr => tr.Start >= overallTimeRange.Start && tr.End <= overallTimeRange.End)
             .ToList();
     }
@@ -173,17 +201,21 @@ public static partial class EnergiemengeExtension
             case DateTimeKind.Local:
                 throw new ArgumentException("DateTime Kind must not be local", nameof(dt));
             case DateTimeKind.Unspecified:
-                return
-                    dt.AddDays(value); // doesn't take dst into account. that's just what we want! A day can have 23,24 or 25 hours
+                return dt.AddDays(value); // doesn't take dst into account. that's just what we want! A day can have 23,24 or 25 hours
             case DateTimeKind.Utc:
-                {
-                    // an utc day does always have 24 hours. not what humans expect!
-                    var dtLocal = DateTime.SpecifyKind(TimeZoneInfo.ConvertTimeFromUtc(dt, tz),
-                        DateTimeKind.Unspecified);
-                    var preResult = DateTime.SpecifyKind(dtLocal.AddDays(value), DateTimeKind.Unspecified);
-                    var result = TimeZoneInfo.ConvertTimeToUtc(preResult, tz);
-                    return result;
-                }
+            {
+                // an utc day does always have 24 hours. not what humans expect!
+                var dtLocal = DateTime.SpecifyKind(
+                    TimeZoneInfo.ConvertTimeFromUtc(dt, tz),
+                    DateTimeKind.Unspecified
+                );
+                var preResult = DateTime.SpecifyKind(
+                    dtLocal.AddDays(value),
+                    DateTimeKind.Unspecified
+                );
+                var result = TimeZoneInfo.ConvertTimeToUtc(preResult, tz);
+                return result;
+            }
             default:
                 throw new NotImplementedException($"DateTimeKind {dt.Kind} is not implemented.");
         }

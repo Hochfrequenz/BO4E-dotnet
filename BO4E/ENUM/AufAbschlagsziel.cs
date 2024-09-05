@@ -1,6 +1,5 @@
-using ProtoBuf;
-
 using System.Runtime.Serialization;
+using ProtoBuf;
 
 namespace BO4E.ENUM;
 
@@ -30,5 +29,5 @@ public enum AufAbschlagsziel
     /// <summary>Auf/Abschlag auf den Gesamtpreis</summary>
     [ProtoEnum(Name = nameof(AufAbschlagsziel) + "_" + nameof(GESAMTPREIS))]
     [EnumMember(Value = "GESAMTPREIS")]
-    GESAMTPREIS
+    GESAMTPREIS,
 }

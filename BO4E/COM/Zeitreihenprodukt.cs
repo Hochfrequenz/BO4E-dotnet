@@ -1,7 +1,6 @@
-using Newtonsoft.Json;
-
-using ProtoBuf;
 using System.Text.Json.Serialization;
+using Newtonsoft.Json;
+using ProtoBuf;
 
 namespace BO4E.COM;
 
@@ -9,9 +8,8 @@ namespace BO4E.COM;
 [ProtoContract]
 public class Zeitreihenprodukt : COM
 {
-
     /// <summary>
-    ///     Die OBIS-Kennzahl für das Produkt, die festlegt, welche auf die gemessene Größe mit dem Stand gemeldet wird.        
+    ///     Die OBIS-Kennzahl für das Produkt, die festlegt, welche auf die gemessene Größe mit dem Stand gemeldet wird.
     /// </summary>
     [JsonProperty(PropertyName = "identifikation", Order = 6, Required = Required.Default)]
     [JsonPropertyName("identifikation")]
@@ -34,8 +32,6 @@ public class Zeitreihenprodukt : COM
     [ProtoMember(8)]
     [JsonPropertyOrder(8)]
     public Verbrauch? Verbrauch { get; set; }
-
-
 
 #pragma warning restore CS1591 // Missing XML comment for publicly visible type or member
 }

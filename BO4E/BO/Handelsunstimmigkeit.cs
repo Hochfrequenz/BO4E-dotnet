@@ -1,12 +1,9 @@
+using System.Text.Json.Serialization;
 using BO4E.COM;
 using BO4E.ENUM;
 using BO4E.meta;
-
 using Newtonsoft.Json;
-
 using ProtoBuf;
-
-using System.Text.Json.Serialization;
 
 namespace BO4E.BO;
 
@@ -17,7 +14,6 @@ namespace BO4E.BO;
 [NonOfficial(NonOfficialCategory.MISSING)]
 public class Handelsunstimmigkeit : BusinessObject
 {
-
     /// <summary>
     /// Handelsunstimmigkeitsnummer
     /// </summary>
@@ -59,5 +55,4 @@ public class Handelsunstimmigkeit : BusinessObject
     [NonOfficial(NonOfficialCategory.MISSING)]
     [ProtoMember(1003)]
     public Betrag? ZuZahlen { get; set; }
-
 }

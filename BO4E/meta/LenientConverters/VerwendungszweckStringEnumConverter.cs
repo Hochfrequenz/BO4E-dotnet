@@ -6,11 +6,15 @@ namespace BO4E.meta.LenientConverters;
 /// <summary>
 /// Converts 'MEHRMINDERMBENGENABRECHNUNG' (with typo!) to Enum Member <see cref="Verwendungszweck.MEHRMINDERMENGENABRECHNUNG"/>.
 /// </summary>
-public class SystemTextVerwendungszweckStringEnumConverter : System.Text.Json.Serialization.JsonConverter<Verwendungszweck?>
+public class SystemTextVerwendungszweckStringEnumConverter
+    : System.Text.Json.Serialization.JsonConverter<Verwendungszweck?>
 {
     /// <inheritdoc />
-    public override Verwendungszweck? Read(ref System.Text.Json.Utf8JsonReader reader, Type typeToConvert,
-        System.Text.Json.JsonSerializerOptions options)
+    public override Verwendungszweck? Read(
+        ref System.Text.Json.Utf8JsonReader reader,
+        Type typeToConvert,
+        System.Text.Json.JsonSerializerOptions options
+    )
     {
         if (reader.TokenType == System.Text.Json.JsonTokenType.Null)
         {
@@ -32,16 +36,23 @@ public class SystemTextVerwendungszweckStringEnumConverter : System.Text.Json.Se
                 "MEHRMINDERMBENGENABRECHNUNG" => Verwendungszweck.MEHRMINDERMENGENABRECHNUNG,
                 _ => Enum.TryParse<Verwendungszweck>(enumString, true, out var result)
                     ? result
-                    : throw new System.Text.Json.JsonException($"Invalid value for {typeToConvert.Name}: {enumString}")
+                    : throw new System.Text.Json.JsonException(
+                        $"Invalid value for {typeToConvert.Name}: {enumString}"
+                    ),
             };
         }
 
-        throw new System.Text.Json.JsonException($"Unexpected token parsing {typeToConvert.Name}. Expected String or Number, got {reader.TokenType}.");
+        throw new System.Text.Json.JsonException(
+            $"Unexpected token parsing {typeToConvert.Name}. Expected String or Number, got {reader.TokenType}."
+        );
     }
 
     /// <inheritdoc />
-    public override void Write(System.Text.Json.Utf8JsonWriter writer, Verwendungszweck? value,
-        System.Text.Json.JsonSerializerOptions options)
+    public override void Write(
+        System.Text.Json.Utf8JsonWriter writer,
+        Verwendungszweck? value,
+        System.Text.Json.JsonSerializerOptions options
+    )
     {
         if (value is null)
         {
@@ -68,11 +79,17 @@ public class SystemTextVerwendungszweckStringEnumConverter : System.Text.Json.Se
 /// </code>
 /// </remarks>
 /// <remarks><seealso cref="SystemTextVerwendungszweckStringEnumConverter"/></remarks>
-public class NewtonsoftVerwendungszweckStringEnumConverter : Newtonsoft.Json.JsonConverter<Verwendungszweck?>
+public class NewtonsoftVerwendungszweckStringEnumConverter
+    : Newtonsoft.Json.JsonConverter<Verwendungszweck?>
 {
     /// <inheritdoc />>
-    public override Verwendungszweck? ReadJson(Newtonsoft.Json.JsonReader reader, Type objectType,
-        Verwendungszweck? existingValue, bool hasExistingValue, Newtonsoft.Json.JsonSerializer serializer)
+    public override Verwendungszweck? ReadJson(
+        Newtonsoft.Json.JsonReader reader,
+        Type objectType,
+        Verwendungszweck? existingValue,
+        bool hasExistingValue,
+        Newtonsoft.Json.JsonSerializer serializer
+    )
     {
         if (reader.TokenType == Newtonsoft.Json.JsonToken.Null)
         {
@@ -95,7 +112,8 @@ public class NewtonsoftVerwendungszweckStringEnumConverter : Newtonsoft.Json.Jso
                 _ => Enum.TryParse(enumString, out Verwendungszweck result)
                     ? result
                     : throw new Newtonsoft.Json.JsonSerializationException(
-                        $"Invalid value for {objectType}: {enumString}")
+                        $"Invalid value for {objectType}: {enumString}"
+                    ),
             };
         }
 
@@ -103,8 +121,11 @@ public class NewtonsoftVerwendungszweckStringEnumConverter : Newtonsoft.Json.Jso
     }
 
     /// <inheritdoc />
-    public override void WriteJson(Newtonsoft.Json.JsonWriter writer, Verwendungszweck? value,
-        Newtonsoft.Json.JsonSerializer serializer)
+    public override void WriteJson(
+        Newtonsoft.Json.JsonWriter writer,
+        Verwendungszweck? value,
+        Newtonsoft.Json.JsonSerializer serializer
+    )
     {
         if (value is null)
         {

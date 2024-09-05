@@ -1,8 +1,6 @@
 using System;
 using System.Text.Json.Serialization;
-
 using Newtonsoft.Json;
-
 using ProtoBuf;
 
 namespace BO4E.COM;
@@ -61,7 +59,9 @@ public class Zeitfenster : COM
         }
         catch (FormatException)
         {
-            throw new ArgumentException("Der Zeitfenster-String muss im Format HHMMHHMM vorliegen und gültige Zeitwerte enthalten.");
+            throw new ArgumentException(
+                "Der Zeitfenster-String muss im Format HHMMHHMM vorliegen und gültige Zeitwerte enthalten."
+            );
         }
     }
 }

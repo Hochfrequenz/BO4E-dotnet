@@ -34,5 +34,5 @@ public enum ArithmetischeOperation
     /// <summary>Positivwert</summary>
     /// <remarks>UTILTS SG9 CAV Z83</remarks>
     [EnumMember(Value = "POSITIVWERT")]
-    POSITIVWERT
+    POSITIVWERT,
 }

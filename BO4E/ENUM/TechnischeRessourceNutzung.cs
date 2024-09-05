@@ -15,5 +15,5 @@ public enum TechnischeRessourceNutzung
 
     /// <summary>Z56: Speicher</summary>
     [EnumMember(Value = "SPEICHER")]
-    SPEICHER
+    SPEICHER,
 }

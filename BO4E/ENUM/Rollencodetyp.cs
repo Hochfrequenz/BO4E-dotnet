@@ -1,6 +1,5 @@
 using System;
 using System.Runtime.Serialization;
-
 using ProtoBuf;
 
 namespace BO4E.ENUM;
@@ -8,7 +7,9 @@ namespace BO4E.ENUM;
 /// <summary>Gibt den Codetyp einer Rolle, beispielsweise einer Marktrolle, an.</summary>
 public enum Rollencodetyp
 {
-    [Obsolete("This value is only a workaround for the proto3 syntax generation. You shouldn't actually use it")]
+    [Obsolete(
+        "This value is only a workaround for the proto3 syntax generation. You shouldn't actually use it"
+    )]
 #pragma warning disable CS0618 // Type or member is obsolete
     [ProtoEnum(Name = nameof(Rollencodetyp) + "_" + nameof(ZERO))]
 #pragma warning restore CS0618 // Type or member is obsolete
@@ -30,5 +31,5 @@ public enum Rollencodetyp
 
     /// <summary>Global Location Number</summary>
     [EnumMember(Value = "GLN")]
-    GLN = 9
+    GLN = 9,
 }

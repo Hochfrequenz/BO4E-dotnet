@@ -146,11 +146,7 @@ public class Messlokation : BusinessObject
     ///     eine Adresse oder eine GeoKoordinate oder eine Katasteradresse.
     /// </summary>
     /// */
-    [JsonProperty(
-        PropertyName = "katasterinformation",
-        Required = Required.Default,
-        Order = 19
-    )]
+    [JsonProperty(PropertyName = "katasterinformation", Required = Required.Default, Order = 19)]
     [JsonPropertyOrder(19)]
     [JsonPropertyName("katasterinformation")]
     [ProtoMember(13)]
@@ -172,11 +168,7 @@ public class Messlokation : BusinessObject
     public List<Dienstleistung>? Messdienstleistung { get; set; }
 
     /// <summary> Zähler, die zu dieser Messlokation gehören. Details</summary>
-    [JsonProperty(
-        PropertyName = "messlokationszaehler",
-        Required = Required.Default,
-        Order = 22
-    )]
+    [JsonProperty(PropertyName = "messlokationszaehler", Required = Required.Default, Order = 22)]
     [JsonPropertyOrder(22)]
     [JsonPropertyName("messlokationszaehler")]
     [ProtoMember(16)]
@@ -185,11 +177,7 @@ public class Messlokation : BusinessObject
     /// <summary>
     ///     <see cref="Marktlokation.Bilanzierungsmethode" />
     /// </summary>
-    [JsonProperty(
-        PropertyName = "bilanzierungsmethode",
-        Required = Required.Default,
-        Order = 23
-    )]
+    [JsonProperty(PropertyName = "bilanzierungsmethode", Required = Required.Default, Order = 23)]
     [JsonPropertyOrder(23)]
     [JsonPropertyName("bilanzierungsmethode")]
     [ProtoMember(17)]
@@ -281,7 +269,6 @@ public class Messlokation : BusinessObject
     [JsonPropertyOrder(30)]
     [NonOfficial(NonOfficialCategory.CUSTOMER_REQUIREMENTS)]
     public List<Messprodukt>? Messprodukte { get; set; }
-
 
     // /// <summary>
     // /// Lokationszuordnung, um bspw. die zugehörigen Marktlokationen anzugeben

@@ -41,5 +41,5 @@ public enum BerechnungsformelAblehngrund
     /// <summary>Der Marktlokation ist nicht genau eine Messlokation zugeordnet</summary>
     /// <remarks>E_0218: A10</remarks>
     [EnumMember(Value = "MARKTLOKATION_IST_NICHT_GENAU_DER_MESSLOKATION_ZUGEORDNET")]
-    MARKTLOKATION_IST_NICHT_GENAU_DER_MESSLOKATION_ZUGEORDNET
+    MARKTLOKATION_IST_NICHT_GENAU_DER_MESSLOKATION_ZUGEORDNET,
 }

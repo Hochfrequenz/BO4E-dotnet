@@ -1,11 +1,8 @@
+using System.Text.Json.Serialization;
 using BO4E.ENUM;
 using BO4E.meta;
-
 using Newtonsoft.Json;
-
 using ProtoBuf;
-
-using System.Text.Json.Serialization;
 
 namespace BO4E.COM;
 
@@ -68,7 +65,7 @@ public class Angebotsposition : COM
     public BDEWArtikelnummer? BdewArtikelnummer { get; set; }
 
     /// <summary>
-    ///  Die genauen Bedeutungen der einzelnen Artikel-IDs sind in der EDI@Energy Codeliste der Artikelnummern 
+    ///  Die genauen Bedeutungen der einzelnen Artikel-IDs sind in der EDI@Energy Codeliste der Artikelnummern
     /// und Artikel-IDs zu finden, die in der Spalte des entsprechenden Prüfidentifikator ein X haben
     /// </summary>
     [JsonProperty(PropertyName = "artikelId", Order = 16, Required = Required.Default)]

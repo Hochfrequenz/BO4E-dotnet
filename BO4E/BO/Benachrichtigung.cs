@@ -67,6 +67,7 @@ public class Benachrichtigung : BusinessObject
         get => ErstellungsZeitpunkt.UtcDateTime;
         set => ErstellungsZeitpunkt = DateTime.SpecifyKind(value, DateTimeKind.Utc);
     }
+
     /// <summary>
     ///     Zeitpunkt zu dem die Benachrichtigung erstellt wurde (UTC).
     /// </summary>
@@ -76,6 +77,7 @@ public class Benachrichtigung : BusinessObject
     [ProtoIgnore]
     [Newtonsoft.Json.JsonConverter(typeof(LenientDateTimeConverter))]
     public DateTimeOffset ErstellungsZeitpunkt { get; set; }
+
     /*{
         get { return _erstellungsZeitpunkt; }
         set
@@ -136,6 +138,7 @@ public class Benachrichtigung : BusinessObject
         get => Deadline?.UtcDateTime ?? default;
         set => Deadline = value == default ? null : DateTime.SpecifyKind(value, DateTimeKind.Utc);
     }
+
     /// <summary>
     ///     Zeitpunkt bis zu dem die Benachrichtigung bearbeitet worden sein muss.
     /// </summary>

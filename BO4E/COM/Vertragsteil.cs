@@ -1,12 +1,9 @@
-using BO4E.meta;
-using BO4E.meta.LenientConverters;
-
-using Newtonsoft.Json;
-
-using ProtoBuf;
-
 using System;
 using System.Text.Json.Serialization;
+using BO4E.meta;
+using BO4E.meta.LenientConverters;
+using Newtonsoft.Json;
+using ProtoBuf;
 
 namespace BO4E.COM;
 
@@ -27,6 +24,7 @@ public class Vertragsteil : COM
         get => Vertragsteilbeginn?.UtcDateTime ?? DateTime.MinValue;
         set => Vertragsteilbeginn = DateTime.SpecifyKind(value, DateTimeKind.Utc);
     }
+
     /// <summary>
     ///     Start der Gültigkeit des Vertragsteils.
     /// </summary>
@@ -35,7 +33,6 @@ public class Vertragsteil : COM
     [ProtoIgnore]
     [Newtonsoft.Json.JsonConverter(typeof(LenientDateTimeConverter))]
     public DateTimeOffset? Vertragsteilbeginn { get; set; }
-
 
     [System.Text.Json.Serialization.JsonIgnore]
     [Newtonsoft.Json.JsonIgnore]
@@ -46,6 +43,7 @@ public class Vertragsteil : COM
         get => Vertragsteilende?.UtcDateTime ?? DateTime.MinValue;
         set => Vertragsteilende = DateTime.SpecifyKind(value, DateTimeKind.Utc);
     }
+
     /// <summary>
     ///     Ende der Gültigkeit des Vertragsteils.
     /// </summary>

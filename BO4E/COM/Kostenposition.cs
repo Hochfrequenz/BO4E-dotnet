@@ -27,12 +27,12 @@ public class Kostenposition : COM
         get => Von?.UtcDateTime ?? default;
         set => Von = value == default ? null : DateTime.SpecifyKind(value, DateTimeKind.Utc);
     }
+
     /// <summary>von-Datum der Kostenzeitscheibe. Z.B. 2017-01-01</summary>
     [JsonProperty(PropertyName = "von", Required = Required.Default)]
     [JsonPropertyName("von")]
     [ProtoIgnore]
     public DateTimeOffset? Von { get; set; }
-
 
     [System.Text.Json.Serialization.JsonIgnore]
     [Newtonsoft.Json.JsonIgnore]
@@ -43,6 +43,7 @@ public class Kostenposition : COM
         get => Bis?.UtcDateTime ?? default;
         set => Bis = value == default ? null : DateTime.SpecifyKind(value, DateTimeKind.Utc);
     }
+
     /// <summary>bis-Datum der Kostenzeitscheibe. Z.B. 2017-12-31</summary>
     [JsonProperty(PropertyName = "bis", Required = Required.Default)]
     [JsonPropertyName("bis")]

@@ -22,8 +22,12 @@ public abstract class Report : BusinessObject
     /// <summary>
     /// </summary>
     /// <returns>return report as CSV string</returns>
-    public string ToCsv(char separator = ';', bool headerLine = true, string lineTerminator = "\\n",
-        List<Dictionary<string, string>> reihenfolge = null)
+    public string ToCsv(
+        char separator = ';',
+        bool headerLine = true,
+        string lineTerminator = "\\n",
+        List<Dictionary<string, string>> reihenfolge = null
+    )
     {
         var type = GetType();
         var resultBuilder = new StringBuilder();
@@ -38,7 +42,8 @@ public abstract class Report : BusinessObject
 
         var sortedResults = new List<string>();
         var sortedHeaderNamesList = new List<string>();
-        var parallelItems = headerNames.GroupBy(x => x)
+        var parallelItems = headerNames
+            .GroupBy(x => x)
             .Where(g => g.Count() > 1)
             .Select(y => new { Element = y.Key, Counter = y.Count() })
             .ToList();
@@ -52,8 +57,10 @@ public abstract class Report : BusinessObject
                 {
                     reihenfolge = reihenfolge.Where(x => x != null).ToList();
                     foreach (var reihenItem in reihenfolge)
-                        if (!string.IsNullOrEmpty(reihenItem.Values.First()) &&
-                            !string.IsNullOrEmpty(reihenItem.Keys.First()))
+                        if (
+                            !string.IsNullOrEmpty(reihenItem.Values.First())
+                            && !string.IsNullOrEmpty(reihenItem.Keys.First())
+                        )
                         {
                             var index = headerNames.IndexOf(reihenItem.Keys.First());
                             if (index != -1)
@@ -111,11 +118,14 @@ public abstract class Report : BusinessObject
 
                 if (i == 0 && headerLine)
                 {
-                    resultBuilder = new StringBuilder(string.Join(separator.ToString(), sortedHeaderNamesList) +
-                                                      lineTerminator);
+                    resultBuilder = new StringBuilder(
+                        string.Join(separator.ToString(), sortedHeaderNamesList) + lineTerminator
+                    );
                 }
 
-                resultBuilder.Append(string.Join(separator.ToString(), sortedResults) + lineTerminator);
+                resultBuilder.Append(
+                    string.Join(separator.ToString(), sortedResults) + lineTerminator
+                );
             }
         }
         else
@@ -124,8 +134,10 @@ public abstract class Report : BusinessObject
             {
                 reihenfolge = reihenfolge.Where(x => x != null).ToList();
                 foreach (var reihenItem in reihenfolge)
-                    if (!string.IsNullOrEmpty(reihenItem.Values.First()) &&
-                        !string.IsNullOrEmpty(reihenItem.Keys.First()))
+                    if (
+                        !string.IsNullOrEmpty(reihenItem.Values.First())
+                        && !string.IsNullOrEmpty(reihenItem.Keys.First())
+                    )
                     {
                         var index = headerNames.IndexOf(reihenItem.Keys.First());
                         if (index != -1)
@@ -137,7 +149,8 @@ public abstract class Report : BusinessObject
                         {
                             throw new ArgumentException(
                                 $"'{reihenItem.Keys.First()}' was not part of {nameof(headerNames)}=[{string.Join(", ", headerNames)}]",
-                                nameof(reihenfolge));
+                                nameof(reihenfolge)
+                            );
                         }
                     }
                     else
@@ -160,13 +173,13 @@ public abstract class Report : BusinessObject
 
             if (headerLine)
             {
-                resultBuilder =
-                    new StringBuilder(string.Join(separator.ToString(), sortedHeaderNamesList) + lineTerminator);
+                resultBuilder = new StringBuilder(
+                    string.Join(separator.ToString(), sortedHeaderNamesList) + lineTerminator
+                );
             }
 
             resultBuilder.Append(string.Join(separator.ToString(), sortedResults));
         }
-
 
         var gapdata = new List<string>();
         var gapHeaderNames = new List<string>();
@@ -174,7 +187,8 @@ public abstract class Report : BusinessObject
         _ = DetectGaps(type, separator, this, gapReterned);
 
         var gapSortedResults = new List<string>();
-        var gapParallelItems = gapHeaderNames.GroupBy(x => x)
+        var gapParallelItems = gapHeaderNames
+            .GroupBy(x => x)
             .Where(g => g.Count() > 1)
             .Select(y => new { Element = y.Key, Counter = y.Count() })
             .ToList();
@@ -203,8 +217,12 @@ public abstract class Report : BusinessObject
         return resultBuilder.ToString();
     }
 
-    private Dictionary<List<string>, List<string>> Detect(Type type, char separator, object value,
-        Dictionary<List<string>, List<string>> returnData)
+    private Dictionary<List<string>, List<string>> Detect(
+        Type type,
+        char separator,
+        object value,
+        Dictionary<List<string>, List<string>> returnData
+    )
     {
         var props = type.GetProperties();
         var nonHiddenProps = props.Where(s => !s.Name.StartsWith("_")).ToList();
@@ -213,17 +231,25 @@ public abstract class Report : BusinessObject
         foreach (var field in nonHiddenProps)
             if (field.PropertyType.IsSubclassOf(typeof(COM.COM)))
             {
-                returnData = Detect(field.PropertyType, separator, field.GetValue(value), returnData);
+                returnData = Detect(
+                    field.PropertyType,
+                    separator,
+                    field.GetValue(value),
+                    returnData
+                );
             }
-            else if (field.PropertyType.IsGenericType &&
-                     field.PropertyType.GetGenericTypeDefinition() == typeof(List<>))
+            else if (
+                field.PropertyType.IsGenericType
+                && field.PropertyType.GetGenericTypeDefinition() == typeof(List<>)
+            )
             {
                 if (field.GetValue(value) != null && field.Name != "gaps")
                 {
                     //var ItemType = field.GetValue(value).GetType().GetGenericArguments()[0];
                     var list = field.GetValue(value);
                     var a = (IList)list;
-                    foreach (var s in a) returnData = Detect(s.GetType(), separator, s, returnData);
+                    foreach (var s in a)
+                        returnData = Detect(s.GetType(), separator, s, returnData);
                 }
             }
             else
@@ -249,7 +275,9 @@ public abstract class Report : BusinessObject
                     {
                         if (((DateTimeOffset?)nestedValue).HasValue)
                         {
-                            val = ((DateTimeOffset?)nestedValue).Value.ToString("yyyy-MM-ddTHH:mm:ssZ");
+                            val = ((DateTimeOffset?)nestedValue).Value.ToString(
+                                "yyyy-MM-ddTHH:mm:ssZ"
+                            );
                         }
                     }
                     else if (field.PropertyType == typeof(DateTime))
@@ -269,8 +297,12 @@ public abstract class Report : BusinessObject
         return returnData;
     }
 
-    private Dictionary<List<string>, List<string>> DetectGaps(Type type, char separator, object value,
-        Dictionary<List<string>, List<string>> returnData)
+    private Dictionary<List<string>, List<string>> DetectGaps(
+        Type type,
+        char separator,
+        object value,
+        Dictionary<List<string>, List<string>> returnData
+    )
     {
         var fields = type.GetFields();
         var d = returnData.Values.First();
@@ -282,14 +314,18 @@ public abstract class Report : BusinessObject
                 continue;
             }
 
-            if (field.FieldType.IsGenericType && field.FieldType.GetGenericTypeDefinition() == typeof(List<>))
+            if (
+                field.FieldType.IsGenericType
+                && field.FieldType.GetGenericTypeDefinition() == typeof(List<>)
+            )
             {
                 if (field.GetValue(value) != null && field.Name == "gaps")
                 {
                     var itemType = field.GetValue(value).GetType().GetGenericArguments()[0];
                     var list = field.GetValue(value);
                     var a = (IList)list;
-                    foreach (var s in a) returnData = DetectGaps(s.GetType(), separator, s, returnData);
+                    foreach (var s in a)
+                        returnData = DetectGaps(s.GetType(), separator, s, returnData);
                 }
             }
             else
@@ -310,7 +346,9 @@ public abstract class Report : BusinessObject
                         {
                             if (((DateTime?)nestedValue).HasValue)
                             {
-                                val = ((DateTime?)nestedValue).Value.ToString("yyyy-MM-ddTHH:mm:ssZ");
+                                val = ((DateTime?)nestedValue).Value.ToString(
+                                    "yyyy-MM-ddTHH:mm:ssZ"
+                                );
                             }
 
                             h.Add(muterType + field.Name);

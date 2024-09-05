@@ -5,14 +5,11 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text.Json;
 using System.Text.Json.Serialization;
-
 using BO4E.COM;
 using BO4E.ENUM;
 using BO4E.meta;
 using Newtonsoft.Json;
-
 using ProtoBuf;
-
 using JsonSerializer = System.Text.Json.JsonSerializer;
 
 namespace BO4E.BO;
@@ -27,14 +24,13 @@ public class Energiemenge : BusinessObject
     ///     static serializer options for Energiemengenconverter
     /// </summary>
     public static JsonSerializerOptions? EnergiemengeSerializerOptions;
+
     /// <summary>
     /// Semaphore to protect access to the serializer
     /// </summary>
     public static readonly System.Threading.SemaphoreSlim SerializerSemaphore = new(1);
-    static Energiemenge()
-    {
 
-    }
+    static Energiemenge() { }
 
     /// <summary>
     ///     Eindeutige Nummer der Marktlokation bzw. der Messlokation, zu der die Energiemenge gehört
@@ -80,18 +76,22 @@ public class Energiemenge : BusinessObject
     /// <returns>new Energiemenge object</returns>
     public static Energiemenge operator +(Energiemenge em1, Energiemenge em2)
     {
-        if (em1.LokationsId != em2.LokationsId || em1.LokationsTyp != em2.LokationsTyp ||
-            em1.VersionStruktur != em2.VersionStruktur)
+        if (
+            em1.LokationsId != em2.LokationsId
+            || em1.LokationsTyp != em2.LokationsTyp
+            || em1.VersionStruktur != em2.VersionStruktur
+        )
         {
             throw new InvalidOperationException(
-                $"You must not add the Energiemengen with different locations {em1.LokationsId} ({em1.LokationsTyp}) (v{em1.VersionStruktur}) vs. {em2.LokationsId} ({em2.LokationsTyp}) (v{em2.VersionStruktur})");
+                $"You must not add the Energiemengen with different locations {em1.LokationsId} ({em1.LokationsTyp}) (v{em1.VersionStruktur}) vs. {em2.LokationsId} ({em2.LokationsTyp}) (v{em2.VersionStruktur})"
+            );
         }
 
         var result = new Energiemenge
         {
             LokationsId = em1.LokationsId,
             LokationsTyp = em1.LokationsTyp,
-            VersionStruktur = em1.VersionStruktur
+            VersionStruktur = em1.VersionStruktur,
         };
         if (em1.UserProperties == null)
         {
@@ -105,7 +105,8 @@ public class Energiemenge : BusinessObject
         {
             // there's no consistency check on user properties!
             result.UserProperties = new Dictionary<string, object>();
-            foreach (var kvp1 in em1.UserProperties) result.UserProperties.Add(kvp1.Key, kvp1.Value);
+            foreach (var kvp1 in em1.UserProperties)
+                result.UserProperties.Add(kvp1.Key, kvp1.Value);
             foreach (var kvp2 in em2.UserProperties)
                 if (!result.UserProperties.ContainsKey(kvp2.Key))
                 {
@@ -143,20 +144,34 @@ public class EnergiemengeConverter : System.Text.Json.Serialization.JsonConverte
     /// <param name="typeToConvert"></param>
     /// <param name="options"></param>
     /// <returns></returns>
-    public override Energiemenge Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+    public override Energiemenge Read(
+        ref Utf8JsonReader reader,
+        Type typeToConvert,
+        JsonSerializerOptions options
+    )
     {
         Energiemenge.SerializerSemaphore.Wait();
         if (Energiemenge.EnergiemengeSerializerOptions == null)
         {
             Energiemenge.EnergiemengeSerializerOptions = new JsonSerializerOptions(options);
-            while (Energiemenge.EnergiemengeSerializerOptions.Converters.Any(s => s.GetType() == typeof(EnergiemengeConverter)))
+            while (
+                Energiemenge.EnergiemengeSerializerOptions.Converters.Any(s =>
+                    s.GetType() == typeof(EnergiemengeConverter)
+                )
+            )
             {
                 Energiemenge.EnergiemengeSerializerOptions.Converters.Remove(
-                    Energiemenge.EnergiemengeSerializerOptions.Converters.First(s => s.GetType() == typeof(EnergiemengeConverter)));
+                    Energiemenge.EnergiemengeSerializerOptions.Converters.First(s =>
+                        s.GetType() == typeof(EnergiemengeConverter)
+                    )
+                );
             }
         }
         Energiemenge.SerializerSemaphore.Release();
-        var e = JsonSerializer.Deserialize<Energiemenge>(ref reader, Energiemenge.EnergiemengeSerializerOptions);
+        var e = JsonSerializer.Deserialize<Energiemenge>(
+            ref reader,
+            Energiemenge.EnergiemengeSerializerOptions
+        );
         if (e.Energieverbrauch == null)
         {
             e.Energieverbrauch = new List<Verbrauch>();
@@ -170,16 +185,27 @@ public class EnergiemengeConverter : System.Text.Json.Serialization.JsonConverte
     /// <param name="writer"></param>
     /// <param name="value"></param>
     /// <param name="options"></param>
-    public override void Write(Utf8JsonWriter writer, Energiemenge value, JsonSerializerOptions options)
+    public override void Write(
+        Utf8JsonWriter writer,
+        Energiemenge value,
+        JsonSerializerOptions options
+    )
     {
         Energiemenge.SerializerSemaphore.Wait();
         if (Energiemenge.EnergiemengeSerializerOptions == null)
         {
             Energiemenge.EnergiemengeSerializerOptions = new JsonSerializerOptions(options);
-            while (Energiemenge.EnergiemengeSerializerOptions.Converters.Any(s => s.GetType() == typeof(EnergiemengeConverter)))
+            while (
+                Energiemenge.EnergiemengeSerializerOptions.Converters.Any(s =>
+                    s.GetType() == typeof(EnergiemengeConverter)
+                )
+            )
             {
                 Energiemenge.EnergiemengeSerializerOptions.Converters.Remove(
-                    Energiemenge.EnergiemengeSerializerOptions.Converters.First(s => s.GetType() == typeof(EnergiemengeConverter)));
+                    Energiemenge.EnergiemengeSerializerOptions.Converters.First(s =>
+                        s.GetType() == typeof(EnergiemengeConverter)
+                    )
+                );
             }
         }
         Energiemenge.SerializerSemaphore.Release();

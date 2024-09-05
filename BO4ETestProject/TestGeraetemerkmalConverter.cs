@@ -14,6 +14,7 @@ public class TestGeraeteerkmalDeserialization
     private const string JsonString = "{\"merkmal\":\"G4\"}";
     private const string JsonStringWithPeriod = "{\"merkmal\":\"G2Period5\"}";
     private const string JsonStringWasser = "{\"merkmal\":\"WASSER_MWZW\"}";
+
     internal class SomethingWithAGeraetemerkmal
     {
         [JsonProperty(PropertyName = "merkmal")] // system.text
@@ -31,49 +32,77 @@ public class TestGeraeteerkmalDeserialization
     [TestMethod]
     public void TestNewtonsoft_Error()
     {
-        var errorAction = () => Newtonsoft.Json.JsonConvert.DeserializeObject<SomethingWithAGeraetemerkmal>(JsonString);
-        errorAction.Should().Throw<JsonSerializationException>().Which.Message.StartsWith("Error converting value \"G4\" to type");
+        var errorAction = () =>
+            Newtonsoft.Json.JsonConvert.DeserializeObject<SomethingWithAGeraetemerkmal>(JsonString);
+        errorAction
+            .Should()
+            .Throw<JsonSerializationException>()
+            .Which.Message.StartsWith("Error converting value \"G4\" to type");
     }
 
     [TestMethod]
     public void TestSystemText_Error()
     {
-        var errorAction = () => System.Text.Json.JsonSerializer.Deserialize<SomethingWithAGeraetemerkmal>(JsonString);
-        errorAction.Should().Throw<JsonException>().Which.Message.StartsWith("The JSON value could not be converted to BO4E.ENUM.Geraetemerkmal");
+        var errorAction = () =>
+            System.Text.Json.JsonSerializer.Deserialize<SomethingWithAGeraetemerkmal>(JsonString);
+        errorAction
+            .Should()
+            .Throw<JsonException>()
+            .Which.Message.StartsWith(
+                "The JSON value could not be converted to BO4E.ENUM.Geraetemerkmal"
+            );
     }
 
     [TestMethod]
     public void TestNewtonsoft_Success_NonNullable()
     {
-        var result = Newtonsoft.Json.JsonConvert.DeserializeObject<SomethingWithAGeraetemerkmal>(JsonString, new LenientGeraetemerkmalGasConverter());
+        var result = Newtonsoft.Json.JsonConvert.DeserializeObject<SomethingWithAGeraetemerkmal>(
+            JsonString,
+            new LenientGeraetemerkmalGasConverter()
+        );
         result.Merkmal.Should().Be(Geraetemerkmal.GAS_G4);
     }
 
     [TestMethod]
     public void TestNewtonsoft_Success_NonNullable_GPointSomething()
     {
-        var result = Newtonsoft.Json.JsonConvert.DeserializeObject<SomethingWithAGeraetemerkmal>(JsonStringWithPeriod, new LenientGeraetemerkmalGasConverter());
+        var result = Newtonsoft.Json.JsonConvert.DeserializeObject<SomethingWithAGeraetemerkmal>(
+            JsonStringWithPeriod,
+            new LenientGeraetemerkmalGasConverter()
+        );
         result.Merkmal.Should().Be(Geraetemerkmal.GAS_G2P5);
     }
 
     [TestMethod]
     public void TestNewtonsoft_Success_Nullable()
     {
-        var result = Newtonsoft.Json.JsonConvert.DeserializeObject<SomethingWithANullableGeraetemerkmal>(JsonString, new LenientGeraetemerkmalGasConverter());
+        var result =
+            Newtonsoft.Json.JsonConvert.DeserializeObject<SomethingWithANullableGeraetemerkmal>(
+                JsonString,
+                new LenientGeraetemerkmalGasConverter()
+            );
         result.Merkmal.Should().Be(Geraetemerkmal.GAS_G4);
     }
 
     [TestMethod]
     public void TestNewtonsoft_Success_Nullable_WASSER_MWZW()
     {
-        var result = Newtonsoft.Json.JsonConvert.DeserializeObject<SomethingWithANullableGeraetemerkmal>(JsonString, new LenientGeraetemerkmalGasConverter());
+        var result =
+            Newtonsoft.Json.JsonConvert.DeserializeObject<SomethingWithANullableGeraetemerkmal>(
+                JsonString,
+                new LenientGeraetemerkmalGasConverter()
+            );
         result.Merkmal.Should().Be(Geraetemerkmal.GAS_G4);
     }
 
     [TestMethod]
     public void TestNewtonsoft_Success_Nullable_GPointSomething()
     {
-        var result = Newtonsoft.Json.JsonConvert.DeserializeObject<SomethingWithANullableGeraetemerkmal>(JsonStringWasser, new LenientGeraetemerkmalGasConverter());
+        var result =
+            Newtonsoft.Json.JsonConvert.DeserializeObject<SomethingWithANullableGeraetemerkmal>(
+                JsonStringWasser,
+                new LenientGeraetemerkmalGasConverter()
+            );
         result.Merkmal.Should().Be(Geraetemerkmal.WASSER_MWZW);
     }
 
@@ -82,9 +111,12 @@ public class TestGeraeteerkmalDeserialization
     {
         var settings = new System.Text.Json.JsonSerializerOptions()
         {
-            Converters = { new LenientSystemTextGeraetemerkmalGasConverter() }
+            Converters = { new LenientSystemTextGeraetemerkmalGasConverter() },
         };
-        var result = System.Text.Json.JsonSerializer.Deserialize<SomethingWithAGeraetemerkmal>(JsonString, settings);
+        var result = System.Text.Json.JsonSerializer.Deserialize<SomethingWithAGeraetemerkmal>(
+            JsonString,
+            settings
+        );
         result.Merkmal.Should().Be(Geraetemerkmal.GAS_G4);
     }
 
@@ -93,9 +125,12 @@ public class TestGeraeteerkmalDeserialization
     {
         var settings = new System.Text.Json.JsonSerializerOptions()
         {
-            Converters = { new LenientSystemTextGeraetemerkmalGasConverter() }
+            Converters = { new LenientSystemTextGeraetemerkmalGasConverter() },
         };
-        var result = System.Text.Json.JsonSerializer.Deserialize<SomethingWithAGeraetemerkmal>(JsonStringWasser, settings);
+        var result = System.Text.Json.JsonSerializer.Deserialize<SomethingWithAGeraetemerkmal>(
+            JsonStringWasser,
+            settings
+        );
         result.Merkmal.Should().Be(Geraetemerkmal.WASSER_MWZW);
     }
 
@@ -104,9 +139,12 @@ public class TestGeraeteerkmalDeserialization
     {
         var settings = new System.Text.Json.JsonSerializerOptions()
         {
-            Converters = { new LenientSystemTextGeraetemerkmalGasConverter() }
+            Converters = { new LenientSystemTextGeraetemerkmalGasConverter() },
         };
-        var result = System.Text.Json.JsonSerializer.Deserialize<SomethingWithAGeraetemerkmal>(JsonStringWithPeriod, settings);
+        var result = System.Text.Json.JsonSerializer.Deserialize<SomethingWithAGeraetemerkmal>(
+            JsonStringWithPeriod,
+            settings
+        );
         result.Merkmal.Should().Be(Geraetemerkmal.GAS_G2P5);
     }
 
@@ -115,19 +153,22 @@ public class TestGeraeteerkmalDeserialization
     {
         var settings = new System.Text.Json.JsonSerializerOptions()
         {
-            Converters = { new LenientSystemTextNullableGeraetemerkmalGasConverter() }
+            Converters = { new LenientSystemTextNullableGeraetemerkmalGasConverter() },
         };
-        var result = System.Text.Json.JsonSerializer.Deserialize<SomethingWithANullableGeraetemerkmal>(JsonStringWithPeriod, settings);
+        var result =
+            System.Text.Json.JsonSerializer.Deserialize<SomethingWithANullableGeraetemerkmal>(
+                JsonStringWithPeriod,
+                settings
+            );
         result.Merkmal.Should().Be(Geraetemerkmal.GAS_G2P5);
     }
-
 
     [TestMethod]
     public void TestSystemText_Write_NonNullable()
     {
         var settings = new System.Text.Json.JsonSerializerOptions()
         {
-            Converters = { new LenientSystemTextGeraetemerkmalGasConverter() }
+            Converters = { new LenientSystemTextGeraetemerkmalGasConverter() },
         };
         var instance = new SomethingWithAGeraetemerkmal { Merkmal = Geraetemerkmal.GAS_G4 };
         var json = System.Text.Json.JsonSerializer.Serialize(instance, settings);
@@ -139,9 +180,12 @@ public class TestGeraeteerkmalDeserialization
     {
         var settings = new System.Text.Json.JsonSerializerOptions()
         {
-            Converters = { new LenientSystemTextNullableGeraetemerkmalGasConverter() }
+            Converters = { new LenientSystemTextNullableGeraetemerkmalGasConverter() },
         };
-        var instance = new SomethingWithANullableGeraetemerkmal { Merkmal = Geraetemerkmal.GAS_G2P5 };
+        var instance = new SomethingWithANullableGeraetemerkmal
+        {
+            Merkmal = Geraetemerkmal.GAS_G2P5,
+        };
         var json = System.Text.Json.JsonSerializer.Serialize(instance, settings);
         json.Should().Be("{\"merkmal\":\"G2P5\"}");
     }
@@ -151,7 +195,7 @@ public class TestGeraeteerkmalDeserialization
     {
         var settings = new System.Text.Json.JsonSerializerOptions()
         {
-            Converters = { new LenientSystemTextNullableGeraetemerkmalGasConverter() }
+            Converters = { new LenientSystemTextNullableGeraetemerkmalGasConverter() },
         };
         var instance = new SomethingWithANullableGeraetemerkmal { Merkmal = null };
         var json = System.Text.Json.JsonSerializer.Serialize(instance, settings);

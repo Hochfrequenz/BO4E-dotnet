@@ -1,6 +1,5 @@
-using ProtoBuf;
-
 using System.Runtime.Serialization;
+using ProtoBuf;
 
 namespace BO4E.ENUM;
 
@@ -20,5 +19,5 @@ public enum Betriebszustand
     /// <summary>ZC3</summary>
     [ProtoEnum(Name = nameof(Betriebszustand) + "_" + nameof(REGELBETRIEB))]
     [EnumMember(Value = "REGELBETRIEB")]
-    REGELBETRIEB
+    REGELBETRIEB,
 }

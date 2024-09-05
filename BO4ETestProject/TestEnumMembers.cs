@@ -20,12 +20,17 @@ public class TestEnumMembers
     [TestMethod]
     public void TestEnumMemberConsistency()
     {
-        var enumTypes = typeof(AbgabeArt).Assembly.GetTypes()
-            .Where(t => t.IsEnum && t.Namespace.StartsWith("BO4E.ENUM") &&
-                        !t.Namespace.StartsWith("BO4E.ENUM.EDI"));
+        var enumTypes = typeof(AbgabeArt)
+            .Assembly.GetTypes()
+            .Where(t =>
+                t.IsEnum
+                && t.Namespace.StartsWith("BO4E.ENUM")
+                && !t.Namespace.StartsWith("BO4E.ENUM.EDI")
+            );
         foreach (var enumType in enumTypes)
         {
-            var enumFields = enumType.GetFields()
+            var enumFields = enumType
+                .GetFields()
                 .Where(f => f.IsPublic)
                 .Where(f => f.Name != "value__")
                 .ToList();
@@ -34,7 +39,10 @@ public class TestEnumMembers
                 .Select(f => new Tuple<Type, string>(enumType, f.Name));
             fieldsWithoutEnumMemberAttributes.Should().BeEmpty();
             var enumMemberAttributeDiffersFromEnumMemberName = enumFields
-                .Select(f => new Tuple<string, string>(f.GetCustomAttribute<EnumMemberAttribute>().Value, f.Name))
+                .Select(f => new Tuple<string, string>(
+                    f.GetCustomAttribute<EnumMemberAttribute>().Value,
+                    f.Name
+                ))
                 .Where(nameTuple => nameTuple.Item1 != nameTuple.Item2);
             enumMemberAttributeDiffersFromEnumMemberName.Should().BeEmpty();
         }
@@ -49,23 +57,34 @@ public class TestEnumMembers
     public void Test_Mehrmindermengenabrechnung_System_Text()
     {
         var options = LenientParsing.MOST_LENIENT.GetJsonSerializerOptions();
-        var myLegacyInstance = new MyClass() { Verwendungszweck = Verwendungszweck.MEHRMINDERMENGENABRECHNUNG };
+        var myLegacyInstance = new MyClass()
+        {
+            Verwendungszweck = Verwendungszweck.MEHRMINDERMENGENABRECHNUNG,
+        };
         var myLegacyJson = System.Text.Json.JsonSerializer.Serialize(myLegacyInstance, options);
         myLegacyJson.Should().Contain("MEHRMINDERMENGENABRECHNUNG");
-        var myNewInstance = System.Text.Json.JsonSerializer.Deserialize<MyClass>(myLegacyJson, options);
+        var myNewInstance = System.Text.Json.JsonSerializer.Deserialize<MyClass>(
+            myLegacyJson,
+            options
+        );
         myNewInstance.Verwendungszweck.Should().Be(Verwendungszweck.MEHRMINDERMENGENABRECHNUNG);
     }
-
 
     [TestMethod]
     public void Test_Mehrmindermengenabrechnung_Newtonsoft()
     {
         var options = LenientParsing.MOST_LENIENT.GetJsonSerializerSettings();
         options.Converters.Add(new StringEnumConverter());
-        var myLegacyInstance = new MyClass() { Verwendungszweck = Verwendungszweck.MEHRMINDERMENGENABRECHNUNG };
+        var myLegacyInstance = new MyClass()
+        {
+            Verwendungszweck = Verwendungszweck.MEHRMINDERMENGENABRECHNUNG,
+        };
         var myLegacyJson = Newtonsoft.Json.JsonConvert.SerializeObject(myLegacyInstance, options);
         myLegacyJson.Should().Contain("MEHRMINDERMENGENABRECHNUNG");
-        var myNewInstance = Newtonsoft.Json.JsonConvert.DeserializeObject<MyClass>(myLegacyJson, options);
+        var myNewInstance = Newtonsoft.Json.JsonConvert.DeserializeObject<MyClass>(
+            myLegacyJson,
+            options
+        );
         myNewInstance.Verwendungszweck.Should().Be(Verwendungszweck.MEHRMINDERMENGENABRECHNUNG);
     }
 }

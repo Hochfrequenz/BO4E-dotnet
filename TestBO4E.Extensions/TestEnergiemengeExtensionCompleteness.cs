@@ -1,21 +1,17 @@
+using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Linq;
+using System.Threading.Tasks;
 using BO4E.BO;
 using BO4E.COM;
 using BO4E.ENUM;
 using BO4E.Extensions.BusinessObjects.Energiemenge;
 using BO4E.meta;
 using BO4E.meta.LenientConverters;
-
 using Itenso.TimePeriod;
-
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-
 using Newtonsoft.Json;
-using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Threading.Tasks;
-
 using JsonSerializer = System.Text.Json.JsonSerializer;
 
 namespace TestBO4E.Extensions;
@@ -25,12 +21,13 @@ public class TestEnergiemengeExtensionCompleteness
 {
     internal static readonly TimeRange CHRISTMAS_2018 = new TimeRange(
         new DateTimeOffset(2018, 12, 23, 22, 0, 0, TimeSpan.Zero).UtcDateTime,
-        new DateTimeOffset(2018, 12, 31, 22, 0, 0, TimeSpan.Zero).UtcDateTime);
+        new DateTimeOffset(2018, 12, 31, 22, 0, 0, TimeSpan.Zero).UtcDateTime
+    );
 
     internal static readonly TimeRange GERMAN_YEAR_2018 = new TimeRange(
         new DateTimeOffset(2017, 12, 31, 23, 0, 0, TimeSpan.Zero).UtcDateTime,
-        new DateTimeOffset(2018, 12, 31, 23, 0, 0, TimeSpan.Zero).UtcDateTime);
-
+        new DateTimeOffset(2018, 12, 31, 23, 0, 0, TimeSpan.Zero).UtcDateTime
+    );
 
     [TestMethod]
     public void TestFirstLastGap()
@@ -47,7 +44,7 @@ public class TestEnergiemengeExtensionCompleteness
                     Wert = 123.456M,
                     Wertermittlungsverfahren = Wertermittlungsverfahren.MESSUNG,
                     Startdatum = new DateTimeOffset(2019, 1, 1, 0, 0, 0, TimeSpan.Zero).UtcDateTime,
-                    Enddatum = new DateTimeOffset(2019, 1, 4, 0, 0, 0, TimeSpan.Zero).UtcDateTime
+                    Enddatum = new DateTimeOffset(2019, 1, 4, 0, 0, 0, TimeSpan.Zero).UtcDateTime,
                 },
                 new Verbrauch
                 {
@@ -55,18 +52,34 @@ public class TestEnergiemengeExtensionCompleteness
                     Wert = 123.456M,
                     Wertermittlungsverfahren = Wertermittlungsverfahren.MESSUNG,
                     Startdatum = new DateTimeOffset(2019, 1, 4, 0, 0, 0, TimeSpan.Zero).UtcDateTime,
-                    Enddatum = new DateTimeOffset(2019, 1, 7, 0, 0, 0, TimeSpan.Zero).UtcDateTime
-                }
-            }
+                    Enddatum = new DateTimeOffset(2019, 1, 7, 0, 0, 0, TimeSpan.Zero).UtcDateTime,
+                },
+            },
         };
 
-        var cr = em.GetCompletenessReport(new TimeRange(new DateTime(2018, 12, 29, 0, 0, 0, DateTimeKind.Utc),
-            new DateTime(2019, 1, 10, 0, 0, 0, DateTimeKind.Utc)));
+        var cr = em.GetCompletenessReport(
+            new TimeRange(
+                new DateTime(2018, 12, 29, 0, 0, 0, DateTimeKind.Utc),
+                new DateTime(2019, 1, 10, 0, 0, 0, DateTimeKind.Utc)
+            )
+        );
         Assert.AreEqual(2, cr.Gaps.Count);
-        Assert.AreEqual(new DateTimeOffset(2018, 12, 29, 0, 0, 0, TimeSpan.Zero), cr.Gaps.First().Startdatum);
-        Assert.AreEqual(new DateTimeOffset(2019, 1, 1, 0, 0, 0, TimeSpan.Zero), cr.Gaps.First().Enddatum);
-        Assert.AreEqual(new DateTimeOffset(2019, 1, 7, 0, 0, 0, TimeSpan.Zero), cr.Gaps.Last().Startdatum);
-        Assert.AreEqual(new DateTimeOffset(2019, 1, 10, 0, 0, 0, TimeSpan.Zero), cr.Gaps.Last().Enddatum);
+        Assert.AreEqual(
+            new DateTimeOffset(2018, 12, 29, 0, 0, 0, TimeSpan.Zero),
+            cr.Gaps.First().Startdatum
+        );
+        Assert.AreEqual(
+            new DateTimeOffset(2019, 1, 1, 0, 0, 0, TimeSpan.Zero),
+            cr.Gaps.First().Enddatum
+        );
+        Assert.AreEqual(
+            new DateTimeOffset(2019, 1, 7, 0, 0, 0, TimeSpan.Zero),
+            cr.Gaps.Last().Startdatum
+        );
+        Assert.AreEqual(
+            new DateTimeOffset(2019, 1, 10, 0, 0, 0, TimeSpan.Zero),
+            cr.Gaps.Last().Enddatum
+        );
     }
 
     [TestMethod]
@@ -76,7 +89,9 @@ public class TestEnergiemengeExtensionCompleteness
         {
             LokationsId = "DE123456789DieseEmhatkeineVerbräuche",
             LokationsTyp = Lokationstyp.MELO,
-            Energieverbrauch = new List<Verbrauch>() //empty list
+            Energieverbrauch =
+                new List<Verbrauch>() //empty list
+            ,
         };
         var cr1 = em1.GetCompletenessReport();
         Assert.IsNotNull(cr1);
@@ -87,10 +102,16 @@ public class TestEnergiemengeExtensionCompleteness
         {
             LokationsId = "54321012345DieseEmhatkeineVerbräuche",
             LokationsTyp = Lokationstyp.MELO,
-            Energieverbrauch = new List<Verbrauch>() //empty list
+            Energieverbrauch =
+                new List<Verbrauch>() //empty list
+            ,
         };
-        var cr2 = em2.GetCompletenessReport(CHRISTMAS_2018, Wertermittlungsverfahren.MESSUNG, "1-2-3-4",
-            Mengeneinheit.KUBIKMETER);
+        var cr2 = em2.GetCompletenessReport(
+            CHRISTMAS_2018,
+            Wertermittlungsverfahren.MESSUNG,
+            "1-2-3-4",
+            Mengeneinheit.KUBIKMETER
+        );
         Assert.IsNotNull(cr2);
         Assert.IsNotNull(cr2.Coverage); // not null because no values but configuration given
         Assert.AreEqual(0.0M, cr2.Coverage);
@@ -106,7 +127,9 @@ public class TestEnergiemengeExtensionCompleteness
     [TestMethod]
     public void TestDailyCompleteness()
     {
-        foreach (var boFile in Directory.GetFiles("Energiemenge/completeness/", "50hz_prognose*.json"))
+        foreach (
+            var boFile in Directory.GetFiles("Energiemenge/completeness/", "50hz_prognose*.json")
+        )
         {
             string jsonString;
             using (var r = new StreamReader(boFile))
@@ -130,7 +153,9 @@ public class TestEnergiemengeExtensionCompleteness
     [Obsolete]
     internal void TestMonthlySlices(bool testFirstOnly = true, bool useParallelExecution = false)
     {
-        foreach (var boFile in Directory.GetFiles("Energiemenge/completeness", "50hz_prognose*.json"))
+        foreach (
+            var boFile in Directory.GetFiles("Energiemenge/completeness", "50hz_prognose*.json")
+        )
         {
             string jsonString;
             using (var r = new StreamReader(boFile))
@@ -139,8 +164,7 @@ public class TestEnergiemengeExtensionCompleteness
             }
             var em = JsonConvert.DeserializeObject<Energiemenge>(jsonString);
             var result = em.GetMonthlyCompletenessReports(GERMAN_YEAR_2018, useParallelExecution);
-            Assert.AreEqual(12,
-                result.Count); // don't care about values of coverage, just the start/end and count of reports generated.
+            Assert.AreEqual(12, result.Count); // don't care about values of coverage, just the start/end and count of reports generated.
             if (testFirstOnly)
             {
                 break; // one test is enough. the rest is covered by the individual completeness report tests
@@ -155,20 +179,30 @@ public class TestEnergiemengeExtensionCompleteness
         for (var i = 0; i < 10; i++)
         {
             Energiemenge em;
-            using (var r =
-                   new StreamReader(Directory.GetFiles("Energiemenge/completeness", "threeyears.json").First()))
+            using (
+                var r = new StreamReader(
+                    Directory.GetFiles("Energiemenge/completeness", "threeyears.json").First()
+                )
+            )
             {
                 var jsonString = r.ReadToEnd();
                 em = JsonConvert.DeserializeObject<Energiemenge>(jsonString);
             }
 
-
-            em.GetMonthlyCompletenessReports(new TimeRange(new DateTime(2016, 1, 31, 23, 0, 0, DateTimeKind.Utc),
-                new DateTime(2016, 12, 31, 23, 0, 0, DateTimeKind.Utc)));
+            em.GetMonthlyCompletenessReports(
+                new TimeRange(
+                    new DateTime(2016, 1, 31, 23, 0, 0, DateTimeKind.Utc),
+                    new DateTime(2016, 12, 31, 23, 0, 0, DateTimeKind.Utc)
+                )
+            );
 
             em.GetMonthlyCompletenessReports(
-                new TimeRange(new DateTime(2016, 1, 31, 23, 0, 0, DateTimeKind.Utc),
-                    new DateTime(2016, 12, 31, 23, 0, 0, DateTimeKind.Utc)), true);
+                new TimeRange(
+                    new DateTime(2016, 1, 31, 23, 0, 0, DateTimeKind.Utc),
+                    new DateTime(2016, 12, 31, 23, 0, 0, DateTimeKind.Utc)
+                ),
+                true
+            );
 
             //Assert.IsTrue(mpParallel.DurationMilliseconds < 3000, $"Parallel completeness report generation was too slow. Expected less than 3 seconds but was {mpParallel.DurationMilliseconds}ms: {mpParallel.RenderPlainText()}");
             //Assert.IsTrue(mpParallel.DurationMilliseconds < (int)mpLinear.DurationMilliseconds * 1.25M, $"Parallel: {mpParallel.DurationMilliseconds}, Non-Parallel: {mpLinear.DurationMilliseconds}");
@@ -185,22 +219,31 @@ public class TestEnergiemengeExtensionCompleteness
             Energiemenge em;
             var r = Directory.GetFiles("Energiemenge/completeness", "threeyears.json").First();
             await using var openStream = File.OpenRead(r);
-            em = await JsonSerializer.DeserializeAsync<Energiemenge>(openStream,
-                LenientParsing.MOST_LENIENT.GetJsonSerializerOptions());
-
-
-            em.GetMonthlyCompletenessReports(new TimeRange(new DateTime(2016, 1, 31, 23, 0, 0, DateTimeKind.Utc),
-                new DateTime(2016, 12, 31, 23, 0, 0, DateTimeKind.Utc)));
-
+            em = await JsonSerializer.DeserializeAsync<Energiemenge>(
+                openStream,
+                LenientParsing.MOST_LENIENT.GetJsonSerializerOptions()
+            );
 
             em.GetMonthlyCompletenessReports(
-                new TimeRange(new DateTime(2016, 1, 31, 23, 0, 0, DateTimeKind.Utc),
-                    new DateTime(2016, 12, 31, 23, 0, 0, DateTimeKind.Utc)), true);
+                new TimeRange(
+                    new DateTime(2016, 1, 31, 23, 0, 0, DateTimeKind.Utc),
+                    new DateTime(2016, 12, 31, 23, 0, 0, DateTimeKind.Utc)
+                )
+            );
+
+            em.GetMonthlyCompletenessReports(
+                new TimeRange(
+                    new DateTime(2016, 1, 31, 23, 0, 0, DateTimeKind.Utc),
+                    new DateTime(2016, 12, 31, 23, 0, 0, DateTimeKind.Utc)
+                ),
+                true
+            );
 
             //Assert.IsTrue(mpParallel.DurationMilliseconds < 3000, $"Parallel completeness report generation was too slow. Expected less than 3 seconds but was {mpParallel.DurationMilliseconds}ms: {mpParallel.RenderPlainText()}");
             //Assert.IsTrue(mpParallel.DurationMilliseconds < (int)mpLinear.DurationMilliseconds * 1.25M, $"Parallel: {mpParallel.DurationMilliseconds}, Non-Parallel: {mpLinear.DurationMilliseconds}");
         }
     }
+
     //int a = 0;
 
 
@@ -221,47 +264,71 @@ public class TestEnergiemengeExtensionCompleteness
             dateTime = dateTime.AddMinutes(15);
             var endDateTime = dateTime.AddMinutes(15);
 
-            listvb.Add(new Verbrauch
-            { Startdatum = dateTime, Enddatum = endDateTime, Einheit = Mengeneinheit.JAHR, Wert = 12 });
+            listvb.Add(
+                new Verbrauch
+                {
+                    Startdatum = dateTime,
+                    Enddatum = endDateTime,
+                    Einheit = Mengeneinheit.JAHR,
+                    Wert = 12,
+                }
+            );
             dateTime = endDateTime;
         }
 
         em.Energieverbrauch = listvb;
 
-
-        em.GetMonthlyCompletenessReports(new TimeRange(new DateTime(2015, 1, 1, 23, 00, 0, DateTimeKind.Utc),
-            new DateTime(2019, 12, 31, 23, 0, 0, DateTimeKind.Utc)));
+        em.GetMonthlyCompletenessReports(
+            new TimeRange(
+                new DateTime(2015, 1, 1, 23, 00, 0, DateTimeKind.Utc),
+                new DateTime(2019, 12, 31, 23, 0, 0, DateTimeKind.Utc)
+            )
+        );
 
         //Assert.IsTrue(mpLinear.DurationMilliseconds < 4000, $"Linear completeness report generation was too slow. Expected less than 4 seconds but was {mpLinear.DurationMilliseconds}ms: {mpLinear.RenderPlainText()}");
 
 
         em.GetDailyCompletenessReports(
-            new TimeRange(new DateTime(2015, 1, 01, 23, 0, 0, DateTimeKind.Utc),
-                new DateTime(2019, 12, 31, 23, 0, 0, DateTimeKind.Utc)), true);
+            new TimeRange(
+                new DateTime(2015, 1, 01, 23, 0, 0, DateTimeKind.Utc),
+                new DateTime(2019, 12, 31, 23, 0, 0, DateTimeKind.Utc)
+            ),
+            true
+        );
 
         //Assert.IsTrue(mpParallel.DurationMilliseconds < 3000, $"Parallel completeness report generation was too slow. Expected less than 3 seconds but was {mpParallel.DurationMilliseconds}ms: {mpParallel.RenderPlainText()}");
         //Assert.IsTrue(mpParallel.DurationMilliseconds < (int)mpLinear.DurationMilliseconds * 1.25M, $"Parallel: {mpParallel.DurationMilliseconds}, Non-Parallel: {mpLinear.DurationMilliseconds}");
     }
-
 
     [TestMethod]
     public void TestDailyCompletenessDST()
     {
         var localStart = TimeZoneInfo.ConvertTimeFromUtc(
             new DateTimeOffset(2018, 3, 24, 23, 0, 0, TimeSpan.Zero).UtcDateTime,
-            CentralEuropeStandardTime.CentralEuropeStandardTimezoneInfo); //, DateTimeKind.Unspecified);
+            CentralEuropeStandardTime.CentralEuropeStandardTimezoneInfo
+        ); //, DateTimeKind.Unspecified);
         var localEnd = TimeZoneInfo.ConvertTimeFromUtc(
             new DateTimeOffset(2018, 3, 26, 22, 0, 0, TimeSpan.Zero).UtcDateTime,
-            CentralEuropeStandardTime.CentralEuropeStandardTimezoneInfo); //, DateTimeKind.Unspecified);
+            CentralEuropeStandardTime.CentralEuropeStandardTimezoneInfo
+        ); //, DateTimeKind.Unspecified);
         if (TimeZoneInfo.Local != CentralEuropeStandardTime.CentralEuropeStandardTimezoneInfo)
         {
-            localStart =
-                DateTime.SpecifyKind(
-                    TimeZoneInfo.ConvertTime(localStart, TimeZoneInfo.Local,
-                        CentralEuropeStandardTime.CentralEuropeStandardTimezoneInfo), DateTimeKind.Unspecified);
+            localStart = DateTime.SpecifyKind(
+                TimeZoneInfo.ConvertTime(
+                    localStart,
+                    TimeZoneInfo.Local,
+                    CentralEuropeStandardTime.CentralEuropeStandardTimezoneInfo
+                ),
+                DateTimeKind.Unspecified
+            );
             localEnd = DateTime.SpecifyKind(
-                TimeZoneInfo.ConvertTime(localEnd, TimeZoneInfo.Local,
-                    CentralEuropeStandardTime.CentralEuropeStandardTimezoneInfo), DateTimeKind.Unspecified);
+                TimeZoneInfo.ConvertTime(
+                    localEnd,
+                    TimeZoneInfo.Local,
+                    CentralEuropeStandardTime.CentralEuropeStandardTimezoneInfo
+                ),
+                DateTimeKind.Unspecified
+            );
         }
         else
         {
@@ -271,65 +338,86 @@ public class TestEnergiemengeExtensionCompleteness
 
         var utcStart = new DateTimeOffset(2018, 3, 24, 23, 0, 0, TimeSpan.Zero);
         var utcEnd = new DateTimeOffset(2018, 3, 26, 22, 0, 0, TimeSpan.Zero);
-        if (TimeZoneInfo.Local.SupportsDaylightSavingTime &&
-            CentralEuropeStandardTime.CentralEuropeStandardTimezoneInfo.Equals(TimeZoneInfo.Local))
+        if (
+            TimeZoneInfo.Local.SupportsDaylightSavingTime
+            && CentralEuropeStandardTime.CentralEuropeStandardTimezoneInfo.Equals(
+                TimeZoneInfo.Local
+            )
+        )
         {
             Assert.IsFalse(
-                CentralEuropeStandardTime.CentralEuropeStandardTimezoneInfo.IsDaylightSavingTime(localStart));
+                CentralEuropeStandardTime.CentralEuropeStandardTimezoneInfo.IsDaylightSavingTime(
+                    localStart
+                )
+            );
             Assert.IsTrue(
-                CentralEuropeStandardTime.CentralEuropeStandardTimezoneInfo.IsDaylightSavingTime(localEnd));
+                CentralEuropeStandardTime.CentralEuropeStandardTimezoneInfo.IsDaylightSavingTime(
+                    localEnd
+                )
+            );
         }
 
         var verbrauchSlices = new List<TimeRange>
         {
-            new TimeRange
-            {
-                Start = utcStart.UtcDateTime,
-                End = utcStart.AddHours(1).UtcDateTime
-            }
+            new TimeRange { Start = utcStart.UtcDateTime, End = utcStart.AddHours(1).UtcDateTime },
         };
         while (verbrauchSlices.Last().End < utcEnd)
-            verbrauchSlices.Add(new TimeRange
-            {
-                Start = verbrauchSlices.Last().Start.AddHours(1),
-                End = verbrauchSlices.Last().End.AddHours(1)
-            });
+            verbrauchSlices.Add(
+                new TimeRange
+                {
+                    Start = verbrauchSlices.Last().Start.AddHours(1),
+                    End = verbrauchSlices.Last().End.AddHours(1),
+                }
+            );
         Assert.AreEqual(2 * 24 - 1, verbrauchSlices.Count);
         var em = new Energiemenge
         {
             LokationsId = "MeinUnitTest123",
             LokationsTyp = Lokationstyp.MELO,
-            Energieverbrauch = verbrauchSlices.Select(vs => new Verbrauch
-            {
-                Startdatum = vs.Start,
-                Enddatum = vs.End,
-                Einheit = Mengeneinheit.KWH,
-                Wert = (decimal)123.456,
-                Wertermittlungsverfahren = Wertermittlungsverfahren.MESSUNG
-            }
-            ).ToList()
+            Energieverbrauch = verbrauchSlices
+                .Select(vs => new Verbrauch
+                {
+                    Startdatum = vs.Start,
+                    Enddatum = vs.End,
+                    Einheit = Mengeneinheit.KWH,
+                    Wert = (decimal)123.456,
+                    Wertermittlungsverfahren = Wertermittlungsverfahren.MESSUNG,
+                })
+                .ToList(),
         };
-        var result = em.GetDailyCompletenessReports(new TimeRange(utcStart.UtcDateTime, utcEnd.UtcDateTime));
+        var result = em.GetDailyCompletenessReports(
+            new TimeRange(utcStart.UtcDateTime, utcEnd.UtcDateTime)
+        );
         Assert.AreEqual(2, result.Count);
-        Assert.AreEqual(new DateTimeOffset(2018, 3, 24, 23, 0, 0, TimeSpan.Zero),
-            result.First().Value.ReferenceTimeFrame.Startdatum);
-        Assert.AreEqual(new DateTimeOffset(2018, 3, 25, 22, 0, 0, TimeSpan.Zero),
-            result.First().Value.ReferenceTimeFrame.Enddatum);
-        Assert.AreEqual(new DateTimeOffset(2018, 3, 25, 22, 0, 0, TimeSpan.Zero),
-            result.Last().Value.ReferenceTimeFrame.Startdatum);
-        Assert.AreEqual(new DateTimeOffset(2018, 3, 26, 22, 0, 0, TimeSpan.Zero),
-            result.Last().Value.ReferenceTimeFrame.Enddatum);
+        Assert.AreEqual(
+            new DateTimeOffset(2018, 3, 24, 23, 0, 0, TimeSpan.Zero),
+            result.First().Value.ReferenceTimeFrame.Startdatum
+        );
+        Assert.AreEqual(
+            new DateTimeOffset(2018, 3, 25, 22, 0, 0, TimeSpan.Zero),
+            result.First().Value.ReferenceTimeFrame.Enddatum
+        );
+        Assert.AreEqual(
+            new DateTimeOffset(2018, 3, 25, 22, 0, 0, TimeSpan.Zero),
+            result.Last().Value.ReferenceTimeFrame.Startdatum
+        );
+        Assert.AreEqual(
+            new DateTimeOffset(2018, 3, 26, 22, 0, 0, TimeSpan.Zero),
+            result.Last().Value.ReferenceTimeFrame.Enddatum
+        );
     }
 
     [TestMethod]
     public void TestAddDaysDSTSpring()
     {
         var utcDt = new DateTimeOffset(2018, 3, 24, 23, 0, 0, TimeSpan.Zero).UtcDateTime;
-        var localDt =
-            DateTime.SpecifyKind(
-                TimeZoneInfo.ConvertTimeFromUtc(
-                    new DateTimeOffset(2018, 3, 24, 23, 0, 0, TimeSpan.Zero).UtcDateTime,
-                    CentralEuropeStandardTime.CentralEuropeStandardTimezoneInfo), DateTimeKind.Unspecified);
+        var localDt = DateTime.SpecifyKind(
+            TimeZoneInfo.ConvertTimeFromUtc(
+                new DateTimeOffset(2018, 3, 24, 23, 0, 0, TimeSpan.Zero).UtcDateTime,
+                CentralEuropeStandardTime.CentralEuropeStandardTimezoneInfo
+            ),
+            DateTimeKind.Unspecified
+        );
 
         var resultUtc = utcDt.AddDaysDST(1);
         var resultLocal = localDt.AddDaysDST(1);
@@ -338,24 +426,35 @@ public class TestEnergiemengeExtensionCompleteness
         Assert.AreEqual(DateTimeKind.Unspecified, resultLocal.Kind);
 
         Assert.AreEqual(23, new TimeRange(utcDt, resultUtc).Duration.TotalHours);
-        Assert.AreEqual(23, new TimeRange
-        {
-            Start = TimeZoneInfo.ConvertTimeToUtc(DateTime.SpecifyKind(localDt, DateTimeKind.Unspecified),
-                CentralEuropeStandardTime.CentralEuropeStandardTimezoneInfo),
-            End = TimeZoneInfo.ConvertTimeToUtc(DateTime.SpecifyKind(resultLocal, DateTimeKind.Unspecified),
-                CentralEuropeStandardTime.CentralEuropeStandardTimezoneInfo)
-        }.Duration.TotalHours);
+        Assert.AreEqual(
+            23,
+            new TimeRange
+            {
+                Start = TimeZoneInfo.ConvertTimeToUtc(
+                    DateTime.SpecifyKind(localDt, DateTimeKind.Unspecified),
+                    CentralEuropeStandardTime.CentralEuropeStandardTimezoneInfo
+                ),
+                End = TimeZoneInfo.ConvertTimeToUtc(
+                    DateTime.SpecifyKind(resultLocal, DateTimeKind.Unspecified),
+                    CentralEuropeStandardTime.CentralEuropeStandardTimezoneInfo
+                ),
+            }
+                .Duration
+                .TotalHours
+        );
     }
 
     [TestMethod]
     public void TestAddDaysDSTAutumn()
     {
         var utcDt = new DateTimeOffset(2018, 10, 27, 22, 0, 0, TimeSpan.Zero).UtcDateTime;
-        var localDt =
-            DateTime.SpecifyKind(
-                TimeZoneInfo.ConvertTimeFromUtc(
-                    new DateTimeOffset(2018, 10, 27, 22, 0, 0, TimeSpan.Zero).UtcDateTime,
-                    CentralEuropeStandardTime.CentralEuropeStandardTimezoneInfo), DateTimeKind.Unspecified);
+        var localDt = DateTime.SpecifyKind(
+            TimeZoneInfo.ConvertTimeFromUtc(
+                new DateTimeOffset(2018, 10, 27, 22, 0, 0, TimeSpan.Zero).UtcDateTime,
+                CentralEuropeStandardTime.CentralEuropeStandardTimezoneInfo
+            ),
+            DateTimeKind.Unspecified
+        );
 
         var resultUtc = utcDt.AddDaysDST(1);
         var resultLocal = localDt.AddDaysDST(1);
@@ -364,24 +463,35 @@ public class TestEnergiemengeExtensionCompleteness
         Assert.AreEqual(DateTimeKind.Unspecified, resultLocal.Kind);
 
         Assert.AreEqual(25, new TimeRange(utcDt, resultUtc).Duration.TotalHours);
-        Assert.AreEqual(25, new TimeRange
-        {
-            Start = TimeZoneInfo.ConvertTimeToUtc(DateTime.SpecifyKind(localDt, DateTimeKind.Unspecified),
-                CentralEuropeStandardTime.CentralEuropeStandardTimezoneInfo),
-            End = TimeZoneInfo.ConvertTimeToUtc(DateTime.SpecifyKind(resultLocal, DateTimeKind.Unspecified),
-                CentralEuropeStandardTime.CentralEuropeStandardTimezoneInfo)
-        }.Duration.TotalHours);
+        Assert.AreEqual(
+            25,
+            new TimeRange
+            {
+                Start = TimeZoneInfo.ConvertTimeToUtc(
+                    DateTime.SpecifyKind(localDt, DateTimeKind.Unspecified),
+                    CentralEuropeStandardTime.CentralEuropeStandardTimezoneInfo
+                ),
+                End = TimeZoneInfo.ConvertTimeToUtc(
+                    DateTime.SpecifyKind(resultLocal, DateTimeKind.Unspecified),
+                    CentralEuropeStandardTime.CentralEuropeStandardTimezoneInfo
+                ),
+            }
+                .Duration
+                .TotalHours
+        );
     }
 
     [TestMethod]
     public void TestAddDaysDSTSummer() // could be winter as well ;)
     {
         var utcDt = new DateTimeOffset(2018, 7, 27, 22, 0, 0, TimeSpan.Zero).UtcDateTime;
-        var localDt =
-            DateTime.SpecifyKind(
-                TimeZoneInfo.ConvertTimeFromUtc(
-                    new DateTimeOffset(2018, 7, 27, 22, 0, 0, TimeSpan.Zero).UtcDateTime,
-                    CentralEuropeStandardTime.CentralEuropeStandardTimezoneInfo), DateTimeKind.Unspecified);
+        var localDt = DateTime.SpecifyKind(
+            TimeZoneInfo.ConvertTimeFromUtc(
+                new DateTimeOffset(2018, 7, 27, 22, 0, 0, TimeSpan.Zero).UtcDateTime,
+                CentralEuropeStandardTime.CentralEuropeStandardTimezoneInfo
+            ),
+            DateTimeKind.Unspecified
+        );
 
         var resultUtc = utcDt.AddDaysDST(1);
         var resultLocal = localDt.AddDaysDST(1);
@@ -390,12 +500,21 @@ public class TestEnergiemengeExtensionCompleteness
         Assert.AreEqual(DateTimeKind.Unspecified, resultLocal.Kind);
 
         Assert.AreEqual(24, new TimeRange(utcDt, resultUtc).Duration.TotalHours);
-        Assert.AreEqual(24, new TimeRange
-        {
-            Start = TimeZoneInfo.ConvertTimeToUtc(DateTime.SpecifyKind(localDt, DateTimeKind.Unspecified),
-                CentralEuropeStandardTime.CentralEuropeStandardTimezoneInfo),
-            End = TimeZoneInfo.ConvertTimeToUtc(DateTime.SpecifyKind(resultLocal, DateTimeKind.Unspecified),
-                CentralEuropeStandardTime.CentralEuropeStandardTimezoneInfo)
-        }.Duration.TotalHours);
+        Assert.AreEqual(
+            24,
+            new TimeRange
+            {
+                Start = TimeZoneInfo.ConvertTimeToUtc(
+                    DateTime.SpecifyKind(localDt, DateTimeKind.Unspecified),
+                    CentralEuropeStandardTime.CentralEuropeStandardTimezoneInfo
+                ),
+                End = TimeZoneInfo.ConvertTimeToUtc(
+                    DateTime.SpecifyKind(resultLocal, DateTimeKind.Unspecified),
+                    CentralEuropeStandardTime.CentralEuropeStandardTimezoneInfo
+                ),
+            }
+                .Duration
+                .TotalHours
+        );
     }
 }

@@ -11,5 +11,5 @@ public enum AufAbschlagstyp
 
     /// <summary>Absoluter AufAbschlag</summary>
     [EnumMember(Value = "ABSOLUT")]
-    ABSOLUT
+    ABSOLUT,
 }

@@ -28,12 +28,17 @@ public class LenientDictionaryConverter : JsonConverter<Dictionary<string, objec
     /// <param name="typeToConvert">The type we want to construct</param>
     /// <param name="options">any json serializer options</param>
     /// <returns></returns>
-    public override Dictionary<string, object> Read(ref Utf8JsonReader reader, Type typeToConvert,
-        JsonSerializerOptions options)
+    public override Dictionary<string, object> Read(
+        ref Utf8JsonReader reader,
+        Type typeToConvert,
+        JsonSerializerOptions options
+    )
     {
         if (reader.TokenType != JsonTokenType.StartObject)
         {
-            throw new JsonException($"JsonTokenType was of type {reader.TokenType}, only objects are supported");
+            throw new JsonException(
+                $"JsonTokenType was of type {reader.TokenType}, only objects are supported"
+            );
         }
 
         var dictionary = new Dictionary<string, object>();
@@ -70,12 +75,16 @@ public class LenientDictionaryConverter : JsonConverter<Dictionary<string, objec
     /// <param name="writer">a json writer to write to</param>
     /// <param name="value">the value of the dictionary we want to write to</param>
     /// <param name="options">a jsonserializeroptions object to give custom options</param>
-    public override void Write(Utf8JsonWriter writer, Dictionary<string, object> value,
-        JsonSerializerOptions options)
+    public override void Write(
+        Utf8JsonWriter writer,
+        Dictionary<string, object> value,
+        JsonSerializerOptions options
+    )
     {
         writer.WriteStartObject();
 
-        foreach (var key in value.Keys) HandleValue(writer, key, value[key]);
+        foreach (var key in value.Keys)
+            HandleValue(writer, key, value[key]);
 
         writer.WriteEndObject();
     }
@@ -115,12 +124,14 @@ public class LenientDictionaryConverter : JsonConverter<Dictionary<string, objec
                 break;
             case Dictionary<string, object> dict:
                 writer.WriteStartObject();
-                foreach (var item in dict) HandleValue(writer, item.Key, item.Value);
+                foreach (var item in dict)
+                    HandleValue(writer, item.Key, item.Value);
                 writer.WriteEndObject();
                 break;
             case object[] array:
                 writer.WriteStartArray();
-                foreach (var item in array) HandleValue(writer, item);
+                foreach (var item in array)
+                    HandleValue(writer, item);
                 writer.WriteEndArray();
                 break;
             default:

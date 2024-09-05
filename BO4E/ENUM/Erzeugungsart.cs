@@ -1,6 +1,5 @@
-using ProtoBuf;
-
 using System.Runtime.Serialization;
+using ProtoBuf;
 
 namespace BO4E.ENUM;
 
@@ -60,5 +59,5 @@ public enum Erzeugungsart
     /// <summary>Sonstige nach EEG</summary>
     [ProtoEnum(Name = nameof(Erzeugungsart) + "_" + nameof(SONSTIGE_EEG))]
     [EnumMember(Value = "SONSTIGE_EEG")]
-    SONSTIGE_EEG
+    SONSTIGE_EEG,
 }

@@ -1,12 +1,9 @@
-using BO4E.ENUM;
-using BO4E.meta;
-
-using Newtonsoft.Json;
-
-using ProtoBuf;
-
 using System.Collections.Generic;
 using System.Text.Json.Serialization;
+using BO4E.ENUM;
+using BO4E.meta;
+using Newtonsoft.Json;
+using ProtoBuf;
 
 namespace BO4E.COM;
 
@@ -29,7 +26,11 @@ public class Abweichung : COM
     /// <summary>
     /// Nähere Erläuterung zum Abweichungsgrund
     /// </summary>
-    [JsonProperty(PropertyName = "abweichungsgrundBemerkung", Required = Required.Default, Order = 4)]
+    [JsonProperty(
+        PropertyName = "abweichungsgrundBemerkung",
+        Required = Required.Default,
+        Order = 4
+    )]
     [JsonPropertyName("abweichungsgrundBemerkung")]
     [NonOfficial(NonOfficialCategory.MISSING)]
     [ProtoMember(4)]
@@ -61,10 +62,15 @@ public class Abweichung : COM
     [NonOfficial(NonOfficialCategory.MISSING)]
     [ProtoMember(8)]
     public string? AbweichungsgrundCode { get; set; }
+
     /// <summary>
     /// Angabe des Abweichungsgrunds (Code)
     /// </summary>
-    [JsonProperty(PropertyName = "abweichungsgrundCodeliste", Required = Required.Always, Order = 9)]
+    [JsonProperty(
+        PropertyName = "abweichungsgrundCodeliste",
+        Required = Required.Always,
+        Order = 9
+    )]
     [JsonPropertyName("abweichungsgrundCodeliste")]
     [NonOfficial(NonOfficialCategory.MISSING)]
     [ProtoMember(9)]

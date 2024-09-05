@@ -1,6 +1,5 @@
-using ProtoBuf;
-
 using System.Runtime.Serialization;
+using ProtoBuf;
 
 namespace BO4E.ENUM;
 
@@ -37,5 +36,5 @@ public enum Bilanzierungsmethode
     /// </summary>
     [ProtoEnum(Name = nameof(Bilanzierungsmethode) + "_" + nameof(IMS))]
     [EnumMember(Value = "IMS")]
-    IMS
+    IMS,
 }

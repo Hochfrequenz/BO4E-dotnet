@@ -14,17 +14,24 @@ public static class MengeneinheitExtenion
     ///     This set contains sets of Mengeneinheiten that share the same dimension (e.g. time, power, work, volume)
     ///     Einheiten in the same subset are considered convertible amongst each other.
     /// </summary>
-    public static readonly ISet<ISet<Mengeneinheit>> DimensionSets = new HashSet<ISet<Mengeneinheit>>
+    public static readonly ISet<ISet<Mengeneinheit>> DimensionSets = new HashSet<
+        ISet<Mengeneinheit>
+    >
     {
-        new HashSet<Mengeneinheit> {Mengeneinheit.WH, Mengeneinheit.KWH, Mengeneinheit.MWH},
-        new HashSet<Mengeneinheit> {Mengeneinheit.KW, Mengeneinheit.MW},
+        new HashSet<Mengeneinheit> { Mengeneinheit.WH, Mengeneinheit.KWH, Mengeneinheit.MWH },
+        new HashSet<Mengeneinheit> { Mengeneinheit.KW, Mengeneinheit.MW },
         new HashSet<Mengeneinheit>
-            {Mengeneinheit.JAHR, Mengeneinheit.MONAT, Mengeneinheit.TAG, Mengeneinheit.STUNDE},
-        new HashSet<Mengeneinheit> {Mengeneinheit.ANZAHL},
-        new HashSet<Mengeneinheit> {Mengeneinheit.KUBIKMETER},
-        new HashSet<Mengeneinheit> {Mengeneinheit.VAR, Mengeneinheit.KVAR},
-        new HashSet<Mengeneinheit> {Mengeneinheit.VARH, Mengeneinheit.KVARH},
-        new HashSet<Mengeneinheit> {Mengeneinheit.KWHK}
+        {
+            Mengeneinheit.JAHR,
+            Mengeneinheit.MONAT,
+            Mengeneinheit.TAG,
+            Mengeneinheit.STUNDE,
+        },
+        new HashSet<Mengeneinheit> { Mengeneinheit.ANZAHL },
+        new HashSet<Mengeneinheit> { Mengeneinheit.KUBIKMETER },
+        new HashSet<Mengeneinheit> { Mengeneinheit.VAR, Mengeneinheit.KVAR },
+        new HashSet<Mengeneinheit> { Mengeneinheit.VARH, Mengeneinheit.KVARH },
+        new HashSet<Mengeneinheit> { Mengeneinheit.KWHK },
     };
 
     /// <summary>
@@ -41,7 +48,9 @@ public static class MengeneinheitExtenion
             return false;
         }
 #pragma warning restore 618
-        return DimensionSets.Any(einheitengroup => einheitengroup.Contains(me1) && einheitengroup.Contains(me2));
+        return DimensionSets.Any(einheitengroup =>
+            einheitengroup.Contains(me1) && einheitengroup.Contains(me2)
+        );
     }
 
     /// <summary>
@@ -124,7 +133,8 @@ public static class MengeneinheitExtenion
         if (!me1.IsConvertibleTo(me2))
         {
             throw new InvalidOperationException(
-                $"{me1} and {me2} are not convertible into each other because they don't share the same dimension.");
+                $"{me1} and {me2} are not convertible into each other because they don't share the same dimension."
+            );
         }
 
         if ((int)me1 % (int)me2 == 0 || (int)me2 % (int)me2 == 0)
@@ -132,6 +142,8 @@ public static class MengeneinheitExtenion
             return (decimal)me1 / (decimal)me2;
         }
 
-        throw new InvalidOperationException($"{me1} and {me2} are not (trivially) convertible into each other.");
+        throw new InvalidOperationException(
+            $"{me1} and {me2} are not (trivially) convertible into each other."
+        );
     }
 }

@@ -1,14 +1,11 @@
+using System;
+using System.Text.Json.Serialization;
 using BO4E.COM;
 using BO4E.ENUM;
 using BO4E.meta;
 using BO4E.meta.LenientConverters;
-
 using Newtonsoft.Json;
-
 using ProtoBuf;
-
-using System;
-using System.Text.Json.Serialization;
 
 namespace BO4E.BO;
 
@@ -39,7 +36,6 @@ public class Reklamation : BusinessObject
     [JsonPropertyOrder(11)]
     public Lokationstyp LokationsTyp { get; set; }
 
-
     /// <summary>
     /// OBIS-Kennzahl
     /// </summary>
@@ -58,7 +54,11 @@ public class Reklamation : BusinessObject
     /// Sollablesetermin / Zeitangabe für Messwertanfrage. Details <see cref="Zeitraum" />
     /// </summary>
     /// <remarks>DTM+163 and DTM+164</remarks>
-    [JsonProperty(PropertyName = "ZeitraumMesswertanfrage", Required = Required.Default, Order = 13)]
+    [JsonProperty(
+        PropertyName = "ZeitraumMesswertanfrage",
+        Required = Required.Default,
+        Order = 13
+    )]
     [JsonPropertyName("ZeitraumMesswertanfrage")]
     [ProtoMember(1003)]
     [JsonPropertyOrder(13)]
@@ -78,7 +78,11 @@ public class Reklamation : BusinessObject
     /// <summary>
     /// Freitext für eine weitere Beschreibung des Reklamationsgrunds
     /// </summary>
-    [JsonProperty(PropertyName = "reklamationsgrundBemerkung", Required = Required.Default, Order = 15)]
+    [JsonProperty(
+        PropertyName = "reklamationsgrundBemerkung",
+        Required = Required.Default,
+        Order = 15
+    )]
     [JsonPropertyName("reklamationsgrundBemerkung")]
     [NonOfficial(NonOfficialCategory.MISSING)]
     [ProtoMember(1005)]
@@ -92,13 +96,20 @@ public class Reklamation : BusinessObject
     private DateTime _ZeitpunktFuerWertanfrage
     {
         get => ZeitpunktFuerWertanfrage?.UtcDateTime ?? default;
-        set => ZeitpunktFuerWertanfrage = value == default ? null : DateTime.SpecifyKind(value, DateTimeKind.Utc);
+        set =>
+            ZeitpunktFuerWertanfrage =
+                value == default ? null : DateTime.SpecifyKind(value, DateTimeKind.Utc);
     }
+
     /// <summary>
     /// Zeitpunkt für Wertanfrage
     /// </summary>
     /// <remarks>DTM+7</remarks>
-    [JsonProperty(PropertyName = "zeitpunktFuerWertanfrage", Required = Required.Default, Order = 16)]
+    [JsonProperty(
+        PropertyName = "zeitpunktFuerWertanfrage",
+        Required = Required.Default,
+        Order = 16
+    )]
     [JsonPropertyName("zeitpunktFuerWertanfrage")]
     [JsonPropertyOrder(16)]
     [ProtoIgnore]

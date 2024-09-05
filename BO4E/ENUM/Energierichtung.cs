@@ -13,5 +13,5 @@ public enum Energierichtung
     /// <summary>Einspeisung</summary>
     /// <remarks>UTILTS DE7037 Z06: Erzeugung</remarks>
     [EnumMember(Value = "EINSP")]
-    EINSP
+    EINSP,
 }

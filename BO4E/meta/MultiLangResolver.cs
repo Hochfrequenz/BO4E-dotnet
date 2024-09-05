@@ -33,13 +33,17 @@ public class MultiLangResolver : DefaultContractResolver
     /// <param name="member"></param>
     /// <param name="memberSerialization"></param>
     /// <returns></returns>
-    protected override JsonProperty CreateProperty(MemberInfo member, MemberSerialization memberSerialization)
+    protected override JsonProperty CreateProperty(
+        MemberInfo member,
+        MemberSerialization memberSerialization
+    )
     {
         var prop = base.CreateProperty(member, memberSerialization);
 
-        // See if there is a [FieldName] attribute applied to the property 
+        // See if there is a [FieldName] attribute applied to the property
         // for the requested language
-        var att = prop.AttributeProvider?.GetAttributes(true)
+        var att = prop
+            .AttributeProvider?.GetAttributes(true)
             .OfType<FieldName>()
             .FirstOrDefault(a => a.Language == _language);
 

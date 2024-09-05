@@ -89,8 +89,12 @@ public class Adresse : COM
     /// <summary>
     ///     Ortsteil für EDIFACT mapping
     /// </summary>
-    [JsonProperty(PropertyName = "ortsteil", Required = Required.Default,
-        NullValueHandling = NullValueHandling.Ignore, Order = 19)]
+    [JsonProperty(
+        PropertyName = "ortsteil",
+        Required = Required.Default,
+        NullValueHandling = NullValueHandling.Ignore,
+        Order = 19
+    )]
     [JsonPropertyName("ortsteil")]
     [ProtoMember(1011)]
     [NonOfficial(NonOfficialCategory.MISSING)]

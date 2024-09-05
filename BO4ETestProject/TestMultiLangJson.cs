@@ -16,12 +16,12 @@ public class TestMultiLangJson
         var mlb = new MultiLangBo
         {
             DatumDeutsch = new DateTimeOffset(2018, 1, 1, 0, 0, 0, TimeSpan.Zero),
-            WertDeutsch = "Hallo Welt"
+            WertDeutsch = "Hallo Welt",
         };
         var settings = new JsonSerializerSettings
         {
             ContractResolver = new MultiLangResolver(Language.EN),
-            Formatting = Formatting.Indented
+            Formatting = Formatting.Indented,
         };
         var json = JsonConvert.SerializeObject(mlb, settings);
 
@@ -48,19 +48,34 @@ public class TestMultiLangJson
             {
                 BoolDeutsch = true,
                 InternDeutsch = "Hallo",
-                IntDeutsch = 33
+                IntDeutsch = 33,
             },
             InternList = new List<NestedObject>
             {
-                new NestedObject {BoolDeutsch = false, IntDeutsch = 10, InternDeutsch = "internalList1"},
-                new NestedObject {BoolDeutsch = false, IntDeutsch = 35, InternDeutsch = "internalList2"},
-                new NestedObject {BoolDeutsch = true, IntDeutsch = 1200, InternDeutsch = "internalList3"}
-            }
+                new NestedObject
+                {
+                    BoolDeutsch = false,
+                    IntDeutsch = 10,
+                    InternDeutsch = "internalList1",
+                },
+                new NestedObject
+                {
+                    BoolDeutsch = false,
+                    IntDeutsch = 35,
+                    InternDeutsch = "internalList2",
+                },
+                new NestedObject
+                {
+                    BoolDeutsch = true,
+                    IntDeutsch = 1200,
+                    InternDeutsch = "internalList3",
+                },
+            },
         };
         var settings = new JsonSerializerSettings
         {
             ContractResolver = new MultiLangResolver(Language.EN),
-            Formatting = Formatting.Indented
+            Formatting = Formatting.Indented,
         };
         var json = JsonConvert.SerializeObject(mlb, settings);
 

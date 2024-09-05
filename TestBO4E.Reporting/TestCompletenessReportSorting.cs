@@ -17,22 +17,22 @@ public class TestCompletenessReportSorting
         {
             ReferenceTimeFrame = new Zeitraum
             {
-                Startdatum = new DateTime(2001, 1, 1, 0, 0, 0, DateTimeKind.Utc)
-            }
+                Startdatum = new DateTime(2001, 1, 1, 0, 0, 0, DateTimeKind.Utc),
+            },
         };
         var cr2 = new CompletenessReport
         {
             ReferenceTimeFrame = new Zeitraum
             {
-                Startdatum = new DateTime(2002, 1, 1, 0, 0, 0, DateTimeKind.Utc)
-            }
+                Startdatum = new DateTime(2002, 1, 1, 0, 0, 0, DateTimeKind.Utc),
+            },
         };
         var cr3 = new CompletenessReport
         {
             ReferenceTimeFrame = new Zeitraum
             {
-                Startdatum = new DateTime(2003, 1, 1, 0, 0, 0, DateTimeKind.Utc)
-            }
+                Startdatum = new DateTime(2003, 1, 1, 0, 0, 0, DateTimeKind.Utc),
+            },
         };
         var crList = new List<CompletenessReport> { cr2, cr3, cr1 };
         // before sorting
@@ -52,8 +52,8 @@ public class TestCompletenessReportSorting
         {
             ReferenceTimeFrame = new Zeitraum
             {
-                Startdatum = new DateTime(1999, 1, 1, 0, 0, 0, DateTimeKind.Utc)
-            }
+                Startdatum = new DateTime(1999, 1, 1, 0, 0, 0, DateTimeKind.Utc),
+            },
         };
         crList.Add(cr0);
         crList.Sort();

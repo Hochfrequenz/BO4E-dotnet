@@ -11,18 +11,26 @@ public class TestBoExpansion
     [TestMethod]
     public void TestBoExpansionMaLo()
     {
-        var result = new HashSet<string>(BusinessObject.GetExpandablePropertyNames(typeof(Marktlokation)).Keys);
+        var result = new HashSet<string>(
+            BusinessObject.GetExpandablePropertyNames(typeof(Marktlokation)).Keys
+        );
         Assert.IsTrue(result.Contains("zugehoerigeMesslokationen"));
 
-        var result2 = new HashSet<string>(BusinessObject.GetExpandableFieldNames("Marktlokation").Keys);
+        var result2 = new HashSet<string>(
+            BusinessObject.GetExpandableFieldNames("Marktlokation").Keys
+        );
         Assert.IsTrue(result.SetEquals(result2));
-        Assert.ThrowsException<ArgumentException>(() => BusinessObject.GetExpandableFieldNames("kein gültiges bo"));
+        Assert.ThrowsException<ArgumentException>(
+            () => BusinessObject.GetExpandableFieldNames("kein gültiges bo")
+        );
     }
 
     [TestMethod]
     public void TestBoExpansionMeLo()
     {
-        var result = new HashSet<string>(BusinessObject.GetExpandablePropertyNames(typeof(Messlokation)).Keys);
+        var result = new HashSet<string>(
+            BusinessObject.GetExpandablePropertyNames(typeof(Messlokation)).Keys
+        );
         Assert.IsTrue(result.Contains("messadresse"));
         Assert.IsTrue(result.Contains("messlokationszaehler"));
         Assert.IsTrue(result.Contains("messlokationszaehler.zaehlwerke"));

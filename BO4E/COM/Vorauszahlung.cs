@@ -1,11 +1,8 @@
-using BO4E.meta;
-
-using Newtonsoft.Json;
-
-using ProtoBuf;
-
 using System;
 using System.Text.Json.Serialization;
+using BO4E.meta;
+using Newtonsoft.Json;
+using ProtoBuf;
 
 namespace BO4E.COM;
 
@@ -22,7 +19,6 @@ public class Vorauszahlung : COM
     [ProtoMember(3)]
     [JsonPropertyOrder(3)]
     public Betrag Betrag { get; set; }
-
 
     /// <summary>
     ///     Referenz auf die Rechnungsnummer, die durch diesen Betrag bezahlt wurde

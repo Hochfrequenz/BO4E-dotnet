@@ -14,6 +14,6 @@ public static class Defaults
     public static JsonSerializerOptions JsonSerializerDefaultOptions =>
         new JsonSerializerOptions(JsonSerializerDefaults.Web)
         {
-            NumberHandling = JsonNumberHandling.AllowReadingFromString
+            NumberHandling = JsonNumberHandling.AllowReadingFromString,
         };
 }

@@ -1,8 +1,8 @@
+using System.Text.Json.Serialization;
 using BO4E.ENUM;
 using BO4E.meta;
 using Newtonsoft.Json;
 using ProtoBuf;
-using System.Text.Json.Serialization;
 
 namespace BO4E.COM;
 
@@ -28,6 +28,7 @@ public class Lastprofil : COM
     [NonOfficial(NonOfficialCategory.CUSTOMER_REQUIREMENTS)]
     [ProtoMember(1005)]
     public string? Profilschar { get; set; }
+
     /// <summary>
     /// Verfahren des Profils (analytisch oder synthetisch)
     /// </summary>
@@ -38,14 +39,13 @@ public class Lastprofil : COM
     public Profilverfahren? Verfahren { get; set; }
 
     /// <summary>
-    /// true, falls es sich um ein Einspeiseprofil handelt 
+    /// true, falls es sich um ein Einspeiseprofil handelt
     /// </summary>
     [JsonProperty(PropertyName = "einspeisung", Required = Required.Default)]
     [JsonPropertyName("einspeisung")]
     [NonOfficial(NonOfficialCategory.CUSTOMER_REQUIREMENTS)]
     [ProtoMember(1003)]
     public bool? Einspeisung { get; set; }
-
 
     /// <summary>
     /// Klimazone / Temperaturmessstelle
@@ -73,5 +73,4 @@ public class Lastprofil : COM
     [JsonPropertyName("herausgeber")]
     [ProtoMember(1006)]
     public string? Herausgeber { get; set; }
-
 }

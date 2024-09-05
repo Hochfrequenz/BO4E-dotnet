@@ -26,14 +26,16 @@ public class TestProtoFileGeneration
         typeof(Rechnung),
         typeof(Region),
         typeof(Vertrag),
-        typeof(Zaehler)
+        typeof(Zaehler),
     };
 
     [TestMethod]
     public void TestProtoGenerationBo()
     {
-        var method = typeof(Serializer).GetMethod(nameof(Serializer.GetProto),
-            new[] { typeof(ProtoBuf.Meta.SchemaGenerationOptions) });
+        var method = typeof(Serializer).GetMethod(
+            nameof(Serializer.GetProto),
+            new[] { typeof(ProtoBuf.Meta.SchemaGenerationOptions) }
+        );
 
         Assert.IsNotNull(method);
         var options = new ProtoBuf.Meta.SchemaGenerationOptions

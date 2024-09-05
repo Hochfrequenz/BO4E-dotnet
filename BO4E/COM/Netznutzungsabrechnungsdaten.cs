@@ -1,9 +1,7 @@
-using BO4E.meta;
-
-using Newtonsoft.Json;
-
-using ProtoBuf;
 using System.Text.Json.Serialization;
+using BO4E.meta;
+using Newtonsoft.Json;
+using ProtoBuf;
 
 namespace BO4E.COM;
 
@@ -22,7 +20,6 @@ public class Netznutzungsabrechnungsdaten : COM
     [JsonPropertyName("artikelId")]
     [ProtoMember(4)]
     public string? ArtikelId { get; set; }
-
 
     /// <summary>
     ///     Typ der ArtikelId (Einzel oder Gruppe)
@@ -68,10 +65,15 @@ public class Netznutzungsabrechnungsdaten : COM
     [JsonPropertyOrder(9)]
     [ProtoMember(9)]
     public decimal? Abschlag { get; set; }
+
     /// <summary>
     ///     Singuläre Betriebsmittel
     /// </summary>
-    [JsonProperty(PropertyName = "singulaereBetriebsmittel", Order = 10, Required = Required.Default)]
+    [JsonProperty(
+        PropertyName = "singulaereBetriebsmittel",
+        Order = 10,
+        Required = Required.Default
+    )]
     [JsonPropertyOrder(10)]
     [JsonPropertyName("singulaereBetriebsmittel")]
     [ProtoMember(10)]
@@ -80,7 +82,11 @@ public class Netznutzungsabrechnungsdaten : COM
     /// <summary>
     ///     Preis für singuläre Betriebsmittel
     /// </summary>
-    [JsonProperty(PropertyName = "preisSingulaereBetriebsmittel", Order = 11, Required = Required.Default)]
+    [JsonProperty(
+        PropertyName = "preisSingulaereBetriebsmittel",
+        Order = 11,
+        Required = Required.Default
+    )]
     [JsonPropertyOrder(11)]
     [JsonPropertyName("preisSingulaereBetriebsmittel")]
     [ProtoMember(11)]

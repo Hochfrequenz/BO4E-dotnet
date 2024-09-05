@@ -13,7 +13,7 @@ namespace BO4E.EnergyIdentificationCodes;
 public enum EicType
 {
     /// <summary>
-    /// object type “Y”, Areas for inter System Operator data interchange 
+    /// object type “Y”, Areas for inter System Operator data interchange
     /// </summary>
     [EnumMember(Value = "AREA")]
     AREA,
@@ -53,7 +53,7 @@ public enum EicType
     /// Parties - object type "X"
     /// </summary>
     [EnumMember(Value = "MARKET_PARTICIPANT")]
-    MARKET_PARTICIPANT
+    MARKET_PARTICIPANT,
 }
 
 /// <summary>
@@ -65,7 +65,10 @@ public static class EnergyIdentificationCodeExtensions
     /// Energy Identification Code Regular Expression
     /// </summary>
     /// <remarks>https://regex101.com/r/LpyuKX/1</remarks>
-    internal static readonly Regex EicRegex = new Regex("(?<vergabestelle>\\d{2})(?<typ>A|T|V|W|X|Y|Z)([-A-Z\\d]{12})(?<pruefziffer>[A-Z0-9])", RegexOptions.Compiled);
+    internal static readonly Regex EicRegex = new Regex(
+        "(?<vergabestelle>\\d{2})(?<typ>A|T|V|W|X|Y|Z)([-A-Z\\d]{12})(?<pruefziffer>[A-Z0-9])",
+        RegexOptions.Compiled
+    );
 
     /// <summary>
     /// Converts a object type string <paramref name="type"/> to a <see cref="EicType"/>
@@ -88,7 +91,9 @@ public static class EnergyIdentificationCodeExtensions
             "X" => EicType.MARKET_PARTICIPANT,
             "Y" => EicType.AREA,
             "Z" => EicType.MEASURING_POINT,
-            _ => throw new ArgumentException($"The type '{type}' is not a valid EIC type character.")
+            _ => throw new ArgumentException(
+                $"The type '{type}' is not a valid EIC type character."
+            ),
         };
     }
 
@@ -145,7 +150,8 @@ public static class EnergyIdentificationCodeExtensions
         }
 
         var eicType = GetEICType(EicRegex.Match(bilanzierungsGebietEic).Groups["typ"].Value);
-        return eicType == EicType.AREA && GermanControlAreas.ContainsKey(bilanzierungsGebietEic!.Substring(3, 1));
+        return eicType == EicType.AREA
+            && GermanControlAreas.ContainsKey(bilanzierungsGebietEic!.Substring(3, 1));
     }
 
     /// <summary>
@@ -153,16 +159,22 @@ public static class EnergyIdentificationCodeExtensions
     /// </summary>
     /// <param name="eicCode"></param>
     /// <returns></returns>
-    public static bool IsGermanControlArea(this string? eicCode) => GermanControlAreas.Values.Contains(eicCode);
+    public static bool IsGermanControlArea(this string? eicCode) =>
+        GermanControlAreas.Values.Contains(eicCode);
 
-    private static readonly Dictionary<string, string> GermanControlAreas = new()
-    {
-        // they won't change in foreseeable time
-        { "N", "10YDE-EON------1" }, // tennet
-        { "R", "10YDE-RWENET---I" }, // amprion
-        { "V", "10YDE-VE-------2" }, // 50Hz
-        { "W", "10YDE-ENBW-----N" } // transnet BW
-    };
+    private static readonly Dictionary<string, string> GermanControlAreas =
+        new()
+        {
+            // they won't change in foreseeable time
+            { "N", "10YDE-EON------1" }, // tennet
+            { "R", "10YDE-RWENET---I" }, // amprion
+            { "V", "10YDE-VE-------2" }, // 50Hz
+            {
+                "W",
+                "10YDE-ENBW-----N"
+            } // transnet BW
+            ,
+        };
 
     /// <summary>
     /// calculates the check character according to the EIC rules (ENTSO-E)
@@ -179,7 +191,10 @@ public static class EnergyIdentificationCodeExtensions
 
         if (eicWithoutChecksum.Length != 15)
         {
-            throw new ArgumentException($"The {nameof(eicWithoutChecksum)} has to be exactly 15 characters long.", nameof(eicWithoutChecksum));
+            throw new ArgumentException(
+                $"The {nameof(eicWithoutChecksum)} has to be exactly 15 characters long.",
+                nameof(eicWithoutChecksum)
+            );
         }
 
         List<int> numericValues;
@@ -212,7 +227,8 @@ public static class EnergyIdentificationCodeExtensions
                 if (checkCharacter == '-')
                 {
                     throw new ArgumentException(
-                        $"The check character must not be {checkCharacter}. Please choose other 15 characters to start with than '{eicWithoutChecksum}'");
+                        $"The check character must not be {checkCharacter}. Please choose other 15 characters to start with than '{eicWithoutChecksum}'"
+                    );
                     // https://eepublicdownloads.entsoe.eu/clean-documents/EDI/Library/cim_based/02%20EIC%20Code%20implementation%20guide_final.pdf line 509
                 }
             }
@@ -245,7 +261,9 @@ public static class EnergyIdentificationCodeExtensions
             '7' => 7,
             '8' => 8,
             '9' => 9,
-            _ => character - 55 // in ASCII 65=A but in ENTSO 10=A
+            _ => character
+                - 55 // in ASCII 65=A but in ENTSO 10=A
+            ,
         };
     }
 
@@ -259,9 +277,12 @@ public static class EnergyIdentificationCodeExtensions
     {
         return number switch
         {
-            < 10 or > 36 => throw new ArgumentOutOfRangeException(nameof(number), "Only the range [10,36] is supported."),
+            < 10 or > 36 => throw new ArgumentOutOfRangeException(
+                nameof(number),
+                "Only the range [10,36] is supported."
+            ),
             36 => '-',
-            _ => (char)(number + 55)
+            _ => (char)(number + 55),
         };
     }
 }

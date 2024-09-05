@@ -74,11 +74,7 @@ public class Zaehlwerk : COM
     public string? Kennzahl { get; set; }
 
     /// <summary>schwachlastfaehig</summary>
-    [JsonProperty(
-        PropertyName = "schwachlastfaehig",
-        Order = 1010,
-        Required = Required.Default
-    )]
+    [JsonProperty(PropertyName = "schwachlastfaehig", Order = 1010, Required = Required.Default)]
     [JsonPropertyName("schwachlastfaehig")]
     [NonOfficial(NonOfficialCategory.CUSTOMER_REQUIREMENTS)]
     [ProtoMember(1010)]
@@ -86,11 +82,7 @@ public class Zaehlwerk : COM
     public Schwachlastfaehig? Schwachlastfaehig { get; set; }
 
     /// <summary>Verwendungungszweck der Werte Marktlokation</summary>
-    [JsonProperty(
-        PropertyName = "verwendungszwecke",
-        Order = 1011,
-        Required = Required.Default
-    )]
+    [JsonProperty(PropertyName = "verwendungszwecke", Order = 1011, Required = Required.Default)]
     [JsonPropertyName("verwendungszwecke")]
     [NonOfficial(NonOfficialCategory.CUSTOMER_REQUIREMENTS)]
     [ProtoMember(1011)]
@@ -106,11 +98,7 @@ public class Zaehlwerk : COM
     public Verbrauchsart? Verbrauchsart { get; set; }
 
     /// <summary>Stromverbrauchsart/Unterbrechbarkeit Marktlokation</summary>
-    [JsonProperty(
-        PropertyName = "unterbrechbarkeit",
-        Order = 1013,
-        Required = Required.Default
-    )]
+    [JsonProperty(PropertyName = "unterbrechbarkeit", Order = 1013, Required = Required.Default)]
     [JsonPropertyName("unterbrechbarkeit")]
     [NonOfficial(NonOfficialCategory.CUSTOMER_REQUIREMENTS)]
     [ProtoMember(1013)]
@@ -125,11 +113,7 @@ public class Zaehlwerk : COM
     [JsonPropertyOrder(1014)]
     public Waermenutzung? Waermenutzung { get; set; }
 
-    [JsonProperty(
-        PropertyName = "konzessionsabgabe",
-        Order = 1015,
-        Required = Required.Default
-    )]
+    [JsonProperty(PropertyName = "konzessionsabgabe", Order = 1015, Required = Required.Default)]
     [JsonPropertyName("konzessionsabgabe")]
     [NonOfficial(NonOfficialCategory.CUSTOMER_REQUIREMENTS)]
     [ProtoMember(1015)]
@@ -162,11 +146,7 @@ public class Zaehlwerk : COM
     // Todo @hamid: add a docstring
     public int? Nachkommastelle { get; set; }
 
-    [JsonProperty(
-        PropertyName = "abrechnungsrelevant",
-        Order = 1019,
-        Required = Required.Default
-    )]
+    [JsonProperty(PropertyName = "abrechnungsrelevant", Order = 1019, Required = Required.Default)]
     [JsonPropertyName("abrechnungsrelevant")]
     [NonOfficial(NonOfficialCategory.CUSTOMER_REQUIREMENTS)]
     [ProtoMember(1019)]

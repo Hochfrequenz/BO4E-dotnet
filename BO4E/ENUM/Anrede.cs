@@ -1,6 +1,5 @@
 using System;
 using System.Runtime.Serialization;
-
 using BO4E.meta;
 using ProtoBuf;
 
@@ -64,5 +63,5 @@ public enum Anrede
     [Obsolete("Use BO4E.ENUM.Titel instead", true)]
     [ProtoEnum(Name = nameof(Anrede) + "_" + "DR")]
     [EnumMember(Value = "DR")]
-    DR
+    DR,
 }

@@ -1,15 +1,11 @@
-using BO4E.COM;
-using BO4E.ENUM;
-using BO4E.Reporting;
-
-using Itenso.TimePeriod;
-
-using Newtonsoft.Json;
-
 using System;
 using System.Collections.Generic;
 using System.Linq;
-
+using BO4E.COM;
+using BO4E.ENUM;
+using BO4E.Reporting;
+using Itenso.TimePeriod;
+using Newtonsoft.Json;
 using static BO4E.Extensions.ENUM.MengeneinheitExtenion;
 using static BO4E.Reporting.PlausibilityReport;
 
@@ -33,8 +29,12 @@ public static partial class EnergiemengeExtension
     ///     <see cref="BO4E.BO.Energiemenge.LokationsId" /> do not match. Setting this flag suppresses the error.
     /// </param>
     /// <returns>a <see cref="PlausibilityReport" /></returns>
-    public static PlausibilityReport GetPlausibilityReport(this BO.Energiemenge emReference,
-        BO.Energiemenge emOther, ITimeRange timeframe = null, bool ignoreLocation = false)
+    public static PlausibilityReport GetPlausibilityReport(
+        this BO.Energiemenge emReference,
+        BO.Energiemenge emOther,
+        ITimeRange timeframe = null,
+        bool ignoreLocation = false
+    )
     {
         var trReference = emReference.GetTimeRange();
         var trOther = emOther.GetTimeRange();
@@ -43,11 +43,16 @@ public static partial class EnergiemengeExtension
             var overlap = trReference.GetIntersection(trOther);
             if (!ignoreLocation)
             {
-                if (!(emReference.LokationsId == emOther.LokationsId &&
-                      emReference.LokationsTyp == emOther.LokationsTyp))
+                if (
+                    !(
+                        emReference.LokationsId == emOther.LokationsId
+                        && emReference.LokationsTyp == emOther.LokationsTyp
+                    )
+                )
                 {
                     throw new ArgumentException(
-                        $"locations do not match! '{emReference.LokationsId}' ({emReference.LokationsTyp}) != '{emOther.LokationsId}' ({emOther.LokationsTyp})");
+                        $"locations do not match! '{emReference.LokationsId}' ({emReference.LokationsTyp}) != '{emOther.LokationsId}' ({emOther.LokationsTyp})"
+                    );
                 }
             }
 
@@ -66,14 +71,16 @@ public static partial class EnergiemengeExtension
             if (consumptionReference.Item2.IsConvertibleTo(consumptionOtherRaw.Item2))
             {
                 consumptionOther = new Tuple<decimal, Mengeneinheit>(
-                    consumptionOtherRaw.Item1 *
-                    consumptionOtherRaw.Item2.GetConversionFactor(consumptionReference.Item2),
-                    consumptionReference.Item2);
+                    consumptionOtherRaw.Item1
+                        * consumptionOtherRaw.Item2.GetConversionFactor(consumptionReference.Item2),
+                    consumptionReference.Item2
+                );
             }
             else
             {
                 throw new ArgumentException(
-                    $"The unit {consumptionOtherRaw.Item2} is not comparable to {consumptionReference.Item2}!");
+                    $"The unit {consumptionOtherRaw.Item2} is not comparable to {consumptionReference.Item2}!"
+                );
             }
         }
         else
@@ -92,15 +99,13 @@ public static partial class EnergiemengeExtension
             relativeDeviation = null;
         }
 
-        var vReference =
-            emReference.Energieverbrauch.FirstOrDefault(); // copies obiskennzahl, wertermittlungsverfahren...
+        var vReference = emReference.Energieverbrauch.FirstOrDefault(); // copies obiskennzahl, wertermittlungsverfahren...
         vReference.Wert = consumptionReference.Item1;
         vReference.Einheit = consumptionReference.Item2;
         vReference.Startdatum = timeframe.Start;
         vReference.Enddatum = timeframe.End;
 
-        var vOther =
-            emOther.Energieverbrauch.FirstOrDefault(); // copies obiskennzahl, wertermittlungsverfahren...
+        var vOther = emOther.Energieverbrauch.FirstOrDefault(); // copies obiskennzahl, wertermittlungsverfahren...
         vOther.Wert = consumptionOther.Item1;
         vOther.Einheit = consumptionOther.Item2;
         vOther.Startdatum = timeframe.Start;
@@ -112,12 +117,12 @@ public static partial class EnergiemengeExtension
             ReferenceTimeFrame = new Zeitraum
             {
                 Startdatum = new DateTimeOffset(timeframe.Start),
-                Enddatum = new DateTimeOffset(timeframe.End)
+                Enddatum = new DateTimeOffset(timeframe.End),
             },
             VerbrauchReference = vReference,
             VerbrauchOther = vOther,
             AbsoluteDeviation = Math.Abs(absoluteDeviation),
-            AbsoluteDeviationEinheit = consumptionReference.Item2
+            AbsoluteDeviationEinheit = consumptionReference.Item2,
         };
         if (relativeDeviation.HasValue)
         {
@@ -129,7 +134,6 @@ public static partial class EnergiemengeExtension
         }
 
         return pr;
-
     }
 
     /// <summary>
@@ -140,12 +144,19 @@ public static partial class EnergiemengeExtension
     /// <param name="config">container containing the relevant data</param>
     /// <param name="energiemenge"></param>
     /// <returns></returns>
-    public static PlausibilityReport GetPlausibilityReport(this BO.Energiemenge energiemenge,
-        PlausibilityReportConfiguration config)
+    public static PlausibilityReport GetPlausibilityReport(
+        this BO.Energiemenge energiemenge,
+        PlausibilityReportConfiguration config
+    )
     {
-        return energiemenge.GetPlausibilityReport(config.Other,
-            new TimeRange(config.Timeframe.Startdatum.Value.UtcDateTime,
-                config.Timeframe.Enddatum.Value.UtcDateTime), config.IgnoreLocation);
+        return energiemenge.GetPlausibilityReport(
+            config.Other,
+            new TimeRange(
+                config.Timeframe.Startdatum.Value.UtcDateTime,
+                config.Timeframe.Enddatum.Value.UtcDateTime
+            ),
+            config.IgnoreLocation
+        );
     }
 
     /// <summary>
@@ -155,8 +166,11 @@ public static partial class EnergiemengeExtension
     /// <param name="config">container containing the relevant data</param>
     /// <param name="ranges">list of ranges for which the completeness reports are generated</param>
     /// <returns></returns>
-    public static IDictionary<ITimeRange, PlausibilityReport> GetSlicedPlausibilityReports(this BO.Energiemenge em,
-        PlausibilityReportConfiguration config, IEnumerable<ITimeRange> ranges)
+    public static IDictionary<ITimeRange, PlausibilityReport> GetSlicedPlausibilityReports(
+        this BO.Energiemenge em,
+        PlausibilityReportConfiguration config,
+        IEnumerable<ITimeRange> ranges
+    )
     {
         if (ranges == null)
         {
@@ -166,13 +180,10 @@ public static partial class EnergiemengeExtension
         var result = new Dictionary<ITimeRange, PlausibilityReport>();
         foreach (var range in ranges)
         {
-            var localConfig =
-                JsonConvert.DeserializeObject<PlausibilityReportConfiguration>(JsonConvert.SerializeObject(config));
-            localConfig.Timeframe = new Zeitraum
-            {
-                Startdatum = range.Start,
-                Enddatum = range.End
-            };
+            var localConfig = JsonConvert.DeserializeObject<PlausibilityReportConfiguration>(
+                JsonConvert.SerializeObject(config)
+            );
+            localConfig.Timeframe = new Zeitraum { Startdatum = range.Start, Enddatum = range.End };
             var subResult = GetPlausibilityReport(em, localConfig);
             result.Add(range, subResult);
         }
@@ -190,8 +201,10 @@ public static partial class EnergiemengeExtension
     ///     <see cref="PlausibilityReport.PlausibilityReportConfiguration.Timeframe" />
     /// </param>
     /// <returns></returns>
-    public static IDictionary<ITimeRange, PlausibilityReport> GetDailyPlausibilityReports(this BO.Energiemenge em,
-        PlausibilityReportConfiguration config)
+    public static IDictionary<ITimeRange, PlausibilityReport> GetDailyPlausibilityReports(
+        this BO.Energiemenge em,
+        PlausibilityReportConfiguration config
+    )
     {
         if (config == null)
         {
@@ -203,11 +216,13 @@ public static partial class EnergiemengeExtension
             throw new ArgumentNullException(nameof(config.Timeframe));
         }
 
-        var slices = GetLocalDailySlices(new TimeRange
-        {
-            Start = config.Timeframe.Startdatum.Value.UtcDateTime,
-            End = config.Timeframe.Enddatum.Value.UtcDateTime
-        });
+        var slices = GetLocalDailySlices(
+            new TimeRange
+            {
+                Start = config.Timeframe.Startdatum.Value.UtcDateTime,
+                End = config.Timeframe.Enddatum.Value.UtcDateTime,
+            }
+        );
         return em.GetSlicedPlausibilityReports(config, slices);
     }
 
@@ -220,8 +235,10 @@ public static partial class EnergiemengeExtension
     ///     <see cref="PlausibilityReport.PlausibilityReportConfiguration.Timeframe" />
     /// </param>
     /// <returns></returns>
-    public static IDictionary<ITimeRange, PlausibilityReport> GetMonthlyPlausibilityReports(this BO.Energiemenge em,
-        PlausibilityReportConfiguration config)
+    public static IDictionary<ITimeRange, PlausibilityReport> GetMonthlyPlausibilityReports(
+        this BO.Energiemenge em,
+        PlausibilityReportConfiguration config
+    )
     {
         if (config == null)
         {
@@ -233,11 +250,13 @@ public static partial class EnergiemengeExtension
             throw new ArgumentNullException(nameof(config.Timeframe));
         }
 
-        var slices = GetLocalMonthlySlices(new TimeRange
-        {
-            Start = config.Timeframe.Startdatum.Value.UtcDateTime,
-            End = config.Timeframe.Enddatum.Value.UtcDateTime
-        });
+        var slices = GetLocalMonthlySlices(
+            new TimeRange
+            {
+                Start = config.Timeframe.Startdatum.Value.UtcDateTime,
+                End = config.Timeframe.Enddatum.Value.UtcDateTime,
+            }
+        );
         return em.GetSlicedPlausibilityReports(config, slices);
     }
 }

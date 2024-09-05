@@ -35,6 +35,7 @@ public class Avisposition : COM
         get => RechnungsDatum.UtcDateTime;
         set => RechnungsDatum = DateTime.SpecifyKind(value, DateTimeKind.Utc);
     }
+
     /// <summary>
     /// Das Rechnungsdatum der Rechnung, auf die sich das Avis bezieht.
     /// </summary>

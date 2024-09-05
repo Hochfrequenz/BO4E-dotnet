@@ -1,6 +1,5 @@
-using ProtoBuf;
-
 using System.Runtime.Serialization;
+using ProtoBuf;
 
 namespace BO4E.ENUM;
 
@@ -28,7 +27,9 @@ public enum Dienstleistungstyp
     DATENBEREITSTELLUNG_JAEHRLICH,
 
     /// <summary>Datenbereitstellung historischer Lastgänge</summary>
-    [ProtoEnum(Name = nameof(Dienstleistungstyp) + "_" + nameof(DATENBEREITSTELLUNG_HISTORISCHE_LG))]
+    [ProtoEnum(
+        Name = nameof(Dienstleistungstyp) + "_" + nameof(DATENBEREITSTELLUNG_HISTORISCHE_LG)
+    )]
     [EnumMember(Value = "DATENBEREITSTELLUNG_HISTORISCHE_LG")]
     DATENBEREITSTELLUNG_HISTORISCHE_LG,
 
@@ -38,7 +39,9 @@ public enum Dienstleistungstyp
     DATENBEREITSTELLUNG_STUENDLICH,
 
     /// <summary>Datenbereitstellung vierteljährlich</summary>
-    [ProtoEnum(Name = nameof(Dienstleistungstyp) + "_" + nameof(DATENBEREITSTELLUNG_VIERTELJAEHRLICH))]
+    [ProtoEnum(
+        Name = nameof(Dienstleistungstyp) + "_" + nameof(DATENBEREITSTELLUNG_VIERTELJAEHRLICH)
+    )]
     [EnumMember(Value = "DATENBEREITSTELLUNG_VIERTELJAEHRLICH")]
     DATENBEREITSTELLUNG_VIERTELJAEHRLICH,
 
@@ -48,7 +51,9 @@ public enum Dienstleistungstyp
     DATENBEREITSTELLUNG_HALBJAEHRLICH,
 
     /// <summary>Datenbereitstellung monatlich zusätzlich</summary>
-    [ProtoEnum(Name = nameof(Dienstleistungstyp) + "_" + nameof(DATENBEREITSTELLUNG_MONATLICH_ZUSAETZLICH))]
+    [ProtoEnum(
+        Name = nameof(Dienstleistungstyp) + "_" + nameof(DATENBEREITSTELLUNG_MONATLICH_ZUSAETZLICH)
+    )]
     [EnumMember(Value = "DATENBEREITSTELLUNG_MONATLICH_ZUSAETZLICH")]
     DATENBEREITSTELLUNG_MONATLICH_ZUSAETZLICH,
 
@@ -58,7 +63,9 @@ public enum Dienstleistungstyp
     DATENBEREITSTELLUNG_EINMALIG,
 
     /// <summary>Auslesung 2x täglich mittels Fernauslesung</summary>
-    [ProtoEnum(Name = nameof(Dienstleistungstyp) + "_" + nameof(AUSLESUNG_2X_TAEGLICH_FERNAUSLESUNG))]
+    [ProtoEnum(
+        Name = nameof(Dienstleistungstyp) + "_" + nameof(AUSLESUNG_2X_TAEGLICH_FERNAUSLESUNG)
+    )]
     [EnumMember(Value = "AUSLESUNG_2X_TAEGLICH_FERNAUSLESUNG")]
     AUSLESUNG_2X_TAEGLICH_FERNAUSLESUNG,
 
@@ -73,12 +80,16 @@ public enum Dienstleistungstyp
     AUSLESUNG_LGK_MANUELL_MSB,
 
     /// <summary>Auslesung monatlich bei SLP mittels Fernauslesung</summary>
-    [ProtoEnum(Name = nameof(Dienstleistungstyp) + "_" + nameof(AUSLESUNG_MONATLICH_SLP_FERNAUSLESUNG))]
+    [ProtoEnum(
+        Name = nameof(Dienstleistungstyp) + "_" + nameof(AUSLESUNG_MONATLICH_SLP_FERNAUSLESUNG)
+    )]
     [EnumMember(Value = "AUSLESUNG_MONATLICH_SLP_FERNAUSLESUNG")]
     AUSLESUNG_MONATLICH_SLP_FERNAUSLESUNG,
 
     /// <summary>Auslesung jährlich bei SLP mittels Fernauslesung</summary>
-    [ProtoEnum(Name = nameof(Dienstleistungstyp) + "_" + nameof(AUSLESUNG_JAEHRLICH_SLP_FERNAUSLESUNG))]
+    [ProtoEnum(
+        Name = nameof(Dienstleistungstyp) + "_" + nameof(AUSLESUNG_JAEHRLICH_SLP_FERNAUSLESUNG)
+    )]
     [EnumMember(Value = "AUSLESUNG_JAEHRLICH_SLP_FERNAUSLESUNG")]
     AUSLESUNG_JAEHRLICH_SLP_FERNAUSLESUNG,
 
@@ -123,7 +134,11 @@ public enum Dienstleistungstyp
     ABLESUNG_SLP_ZUSAETZLICH_KUNDE,
 
     /// <summary>Auslesung mittels Fernauslesung, zusätzlich vom Messstellenbetreiber vorgenommen</summary>
-    [ProtoEnum(Name = nameof(Dienstleistungstyp) + "_" + nameof(AUSLESUNG_LGK_FERNAUSLESUNG_ZUSAETZLICH_MSB))]
+    [ProtoEnum(
+        Name = nameof(Dienstleistungstyp)
+            + "_"
+            + nameof(AUSLESUNG_LGK_FERNAUSLESUNG_ZUSAETZLICH_MSB)
+    )]
     [EnumMember(Value = "AUSLESUNG_LGK_FERNAUSLESUNG_ZUSAETZLICH_MSB")]
     AUSLESUNG_LGK_FERNAUSLESUNG_ZUSAETZLICH_MSB,
 
@@ -133,7 +148,9 @@ public enum Dienstleistungstyp
     AUSLESUNG_MOATLICH_FERNAUSLESUNG,
 
     /// <summary>Auslesung stündlich mittels Fernauslesung</summary>
-    [ProtoEnum(Name = nameof(Dienstleistungstyp) + "_" + nameof(AUSLESUNG_STUENDLICH_FERNAUSLESUNG))]
+    [ProtoEnum(
+        Name = nameof(Dienstleistungstyp) + "_" + nameof(AUSLESUNG_STUENDLICH_FERNAUSLESUNG)
+    )]
     [EnumMember(Value = "AUSLESUNG_STUENDLICH_FERNAUSLESUNG")]
     AUSLESUNG_STUENDLICH_FERNAUSLESUNG,
 
@@ -200,5 +217,5 @@ public enum Dienstleistungstyp
     /// <summary>Inkassokosten</summary>
     [ProtoEnum(Name = nameof(Dienstleistungstyp) + "_" + nameof(INKASSOKOSTEN))]
     [EnumMember(Value = "INKASSOKOSTEN")]
-    INKASSOKOSTEN
+    INKASSOKOSTEN,
 }

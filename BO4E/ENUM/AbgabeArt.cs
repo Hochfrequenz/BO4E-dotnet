@@ -42,5 +42,5 @@ public enum AbgabeArt
 
     /// <summary>TSS: Kennzeichnung, dass ein abweichender Preis für Schwachlast angewendet wird</summary>
     [EnumMember(Value = "TSS")]
-    TSS
+    TSS,
 }

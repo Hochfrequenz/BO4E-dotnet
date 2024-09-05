@@ -1,16 +1,13 @@
-using BO4E.COM;
-using BO4E.ENUM;
-using BO4E.meta;
-
-using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
-
-using ProtoBuf;
-
 using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Text.Json.Serialization;
+using BO4E.COM;
+using BO4E.ENUM;
+using BO4E.meta;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
+using ProtoBuf;
 
 namespace BO4E.BO;
 
@@ -25,55 +22,84 @@ public class Rechnung : BusinessObject
     /// <summary>
     ///     empty constructor for deserilization
     /// </summary>
-    public Rechnung()
-    {
-    }
+    public Rechnung() { }
 
     /// <summary>
     ///     this constructor creates a BO4E.Rechnung from a JSON serialized SAP print document ("Druckbeleg")
     /// </summary>
     /// <param name="sapPrintDocument">a JSON serialized SAP print document using lowerCamelCase naming convention</param>
-    public Rechnung(JObject sapPrintDocument) : this()
+    public Rechnung(JObject sapPrintDocument)
+        : this()
     {
         // why is this method so bloated and always tries to access two different keys of the JSON document using the ?? operator?
         // Initially I exported the SAP print document "Druckbeleg") using the SAP library /ui2/cl_json which allows for pretty printing
         // the ALL_UPPER_CASE SAP internal keys to lowerCamelCase. Later on technical constraints in SAP forced me to use a different
         // serialization which is closer to SAPs internal structure and has no lower case keys at all. Furthermore in SAP there is
         // no difference between string.Empty and null; the latter doesn't even exist as a concept.
-        var infoToken = sapPrintDocument.SelectToken("erdk") ?? sapPrintDocument.SelectToken("ERDK");
-        var tErdzToken = sapPrintDocument.SelectToken("tErdz") ?? sapPrintDocument.SelectToken("T_ERDZ");
+        var infoToken =
+            sapPrintDocument.SelectToken("erdk") ?? sapPrintDocument.SelectToken("ERDK");
+        var tErdzToken =
+            sapPrintDocument.SelectToken("tErdz") ?? sapPrintDocument.SelectToken("T_ERDZ");
         if (tErdzToken == null)
         {
             throw new ArgumentException(
-                "The SAP print document did not contain a 'tErdz' token. Did you serialize using the right naming convention?");
+                "The SAP print document did not contain a 'tErdz' token. Did you serialize using the right naming convention?"
+            );
         }
 
         Rechnungsnummer = (infoToken["opbel"] ?? infoToken["OPBEL"]).Value<string>();
-        Rechnungsdatum = new DateTimeOffset(TimeZoneInfo.ConvertTime(
-            (infoToken["bldat"] ?? infoToken["BLDAT"]).Value<DateTime>(),
-            CentralEuropeStandardTime.CentralEuropeStandardTimezoneInfo, TimeZoneInfo.Utc));
+        Rechnungsdatum = new DateTimeOffset(
+            TimeZoneInfo.ConvertTime(
+                (infoToken["bldat"] ?? infoToken["BLDAT"]).Value<DateTime>(),
+                CentralEuropeStandardTime.CentralEuropeStandardTimezoneInfo,
+                TimeZoneInfo.Utc
+            )
+        );
         Rechnungsperiode = new Zeitraum
         {
-            Startdatum = new DateTimeOffset(TimeZoneInfo.ConvertTime(
-                (tErdzToken[0]["ab"] ?? tErdzToken[0]["AB"]).Value<DateTime>(),
-                CentralEuropeStandardTime.CentralEuropeStandardTimezoneInfo, TimeZoneInfo.Utc)),
-            Enddatum = new DateTimeOffset(TimeZoneInfo.ConvertTime(
-                (tErdzToken[0]["bis"] ?? tErdzToken[0]["BIS"]).Value<DateTime>(),
-                CentralEuropeStandardTime.CentralEuropeStandardTimezoneInfo, TimeZoneInfo.Utc))
+            Startdatum = new DateTimeOffset(
+                TimeZoneInfo.ConvertTime(
+                    (tErdzToken[0]["ab"] ?? tErdzToken[0]["AB"]).Value<DateTime>(),
+                    CentralEuropeStandardTime.CentralEuropeStandardTimezoneInfo,
+                    TimeZoneInfo.Utc
+                )
+            ),
+            Enddatum = new DateTimeOffset(
+                TimeZoneInfo.ConvertTime(
+                    (tErdzToken[0]["bis"] ?? tErdzToken[0]["BIS"]).Value<DateTime>(),
+                    CentralEuropeStandardTime.CentralEuropeStandardTimezoneInfo,
+                    TimeZoneInfo.Utc
+                )
+            ),
         };
-        Faelligkeitsdatum = new DateTimeOffset(TimeZoneInfo.ConvertTime(
-            (infoToken["faedn"] ?? infoToken["FAEDN"]).Value<DateTime>(),
-            CentralEuropeStandardTime.CentralEuropeStandardTimezoneInfo, TimeZoneInfo.Utc));
+        Faelligkeitsdatum = new DateTimeOffset(
+            TimeZoneInfo.ConvertTime(
+                (infoToken["faedn"] ?? infoToken["FAEDN"]).Value<DateTime>(),
+                CentralEuropeStandardTime.CentralEuropeStandardTimezoneInfo,
+                TimeZoneInfo.Utc
+            )
+        );
         Storno = false;
 
-        decimal gSteure, vGezahlt, rBrutto;
+        decimal gSteure,
+            vGezahlt,
+            rBrutto;
         var gNetto = gSteure = _ = vGezahlt = rBrutto = 0.00M;
-        var waehrungscode = (Waehrungscode)Enum.Parse(typeof(Waehrungscode),
-            (infoToken["totalWaer"] ?? infoToken["TOTAL_WAER"]).Value<string>());
-        var waehrungseinheit = (Waehrungseinheit)Enum.Parse(typeof(Waehrungseinheit),
-            (infoToken["totalWaer"] ?? infoToken["TOTAL_WAER"]).Value<string>());
-        var mengeneinheit = (Mengeneinheit)Enum.Parse(typeof(Mengeneinheit),
-            (tErdzToken[0]["massbill"] ?? tErdzToken[0]["MASSBILL"]).Value<string>());
+        var waehrungscode = (Waehrungscode)
+            Enum.Parse(
+                typeof(Waehrungscode),
+                (infoToken["totalWaer"] ?? infoToken["TOTAL_WAER"]).Value<string>()
+            );
+        var waehrungseinheit = (Waehrungseinheit)
+            Enum.Parse(
+                typeof(Waehrungseinheit),
+                (infoToken["totalWaer"] ?? infoToken["TOTAL_WAER"]).Value<string>()
+            );
+        var mengeneinheit = (Mengeneinheit)
+            Enum.Parse(
+                typeof(Mengeneinheit),
+                (tErdzToken[0]["massbill"] ?? tErdzToken[0]["MASSBILL"]).Value<string>()
+            );
 
         var rpList = new List<Rechnungsposition>();
         var stList = new List<Steuerbetrag>();
@@ -97,13 +123,17 @@ public class Rechnung : BusinessObject
                     rp.Positionstext = "PAUSCHALE";
                     mengeneinheit = Mengeneinheit.JAHR;
                     zeitbezogeneMengeWert = (jrp["preisbtr"] ?? jrp["PREISBTR"]).Value<decimal>();
-                    rp.ZeitbezogeneMenge = new Menge { Einheit = Mengeneinheit.TAG, Wert = zeitbezogeneMengeWert };
+                    rp.ZeitbezogeneMenge = new Menge
+                    {
+                        Einheit = Mengeneinheit.TAG,
+                        Wert = zeitbezogeneMengeWert,
+                    };
 
                     rp.Einzelpreis = new Preis
                     {
                         Wert = decimal.Parse((jrp["zeitant"] ?? jrp["ZEITANT"]).ToString()),
                         Einheit = waehrungseinheit,
-                        Bezugswert = mengeneinheit
+                        Bezugswert = mengeneinheit,
                     };
                     break;
                 case "000004":
@@ -121,19 +151,30 @@ public class Rechnung : BusinessObject
                     break;
             }
 
-            if ((jrp["massbill"] ?? jrp["MASSBILL"]) != null &&
-                !string.IsNullOrWhiteSpace((jrp["massbill"] ?? jrp["MASSBILL"]).Value<string>()))
+            if (
+                (jrp["massbill"] ?? jrp["MASSBILL"]) != null
+                && !string.IsNullOrWhiteSpace((jrp["massbill"] ?? jrp["MASSBILL"]).Value<string>())
+            )
             {
-                mengeneinheit = (Mengeneinheit)Enum.Parse(typeof(Mengeneinheit),
-                    (jrp["massbill"] ?? jrp["MASSBILL"]).Value<string>());
+                mengeneinheit = (Mengeneinheit)
+                    Enum.Parse(
+                        typeof(Mengeneinheit),
+                        (jrp["massbill"] ?? jrp["MASSBILL"]).Value<string>()
+                    );
             }
-            else if ((jrp["timbasis"] ?? jrp["TIMBASIS"]) != null &&
-                     !string.IsNullOrWhiteSpace((jrp["timbasis"] ?? jrp["TIMBASIS"]).Value<string>()))
+            else if (
+                (jrp["timbasis"] ?? jrp["TIMBASIS"]) != null
+                && !string.IsNullOrWhiteSpace((jrp["timbasis"] ?? jrp["TIMBASIS"]).Value<string>())
+            )
             {
                 if ((jrp["timbasis"] ?? jrp["TIMBASIS"]).Value<string>() == "365")
                 {
                     mengeneinheit = Mengeneinheit.JAHR;
-                    rp.ZeitbezogeneMenge = new Menge { Einheit = Mengeneinheit.TAG, Wert = zeitbezogeneMengeWert };
+                    rp.ZeitbezogeneMenge = new Menge
+                    {
+                        Einheit = Mengeneinheit.TAG,
+                        Wert = zeitbezogeneMengeWert,
+                    };
                 }
             }
             else
@@ -149,7 +190,7 @@ public class Rechnung : BusinessObject
                     {
                         Wert = decimal.Parse((jrp["preisbtr"] ?? jrp["PREISBTR"]).ToString()),
                         Einheit = waehrungseinheit,
-                        Bezugswert = mengeneinheit
+                        Bezugswert = mengeneinheit,
                     };
                 }
                 else
@@ -158,24 +199,38 @@ public class Rechnung : BusinessObject
                     {
                         Wert = 0,
                         Einheit = waehrungseinheit,
-                        Bezugswert = mengeneinheit
+                        Bezugswert = mengeneinheit,
                     };
                 }
             }
 
             rp.Positionsnummer = (jrp["belzeile"] ?? jrp["BELZEILE"]).Value<int>();
-            if ((jrp["bis"] ?? jrp["BIS"]) != null && (jrp["bis"] ?? jrp["BIS"]).Value<string>() != "0000-00-00")
+            if (
+                (jrp["bis"] ?? jrp["BIS"]) != null
+                && (jrp["bis"] ?? jrp["BIS"]).Value<string>() != "0000-00-00"
+            )
             {
-                rp.LieferungBis = new DateTimeOffset(TimeZoneInfo.ConvertTime(
-                    (jrp["bis"] ?? jrp["BIS"]).Value<DateTime>(),
-                    CentralEuropeStandardTime.CentralEuropeStandardTimezoneInfo, TimeZoneInfo.Utc));
+                rp.LieferungBis = new DateTimeOffset(
+                    TimeZoneInfo.ConvertTime(
+                        (jrp["bis"] ?? jrp["BIS"]).Value<DateTime>(),
+                        CentralEuropeStandardTime.CentralEuropeStandardTimezoneInfo,
+                        TimeZoneInfo.Utc
+                    )
+                );
             }
 
-            if ((jrp["ab"] ?? jrp["AB"]) != null && (jrp["ab"] ?? jrp["AB"]).Value<string>() != "0000-00-00")
+            if (
+                (jrp["ab"] ?? jrp["AB"]) != null
+                && (jrp["ab"] ?? jrp["AB"]).Value<string>() != "0000-00-00"
+            )
             {
-                rp.LieferungVon = new DateTimeOffset(TimeZoneInfo.ConvertTime(
-                    (jrp["ab"] ?? jrp["AB"]).Value<DateTime>(),
-                    CentralEuropeStandardTime.CentralEuropeStandardTimezoneInfo, TimeZoneInfo.Utc));
+                rp.LieferungVon = new DateTimeOffset(
+                    TimeZoneInfo.ConvertTime(
+                        (jrp["ab"] ?? jrp["AB"]).Value<DateTime>(),
+                        CentralEuropeStandardTime.CentralEuropeStandardTimezoneInfo,
+                        TimeZoneInfo.Utc
+                    )
+                );
             }
 
             if ((jrp["vertrag"] ?? jrp["VERTRAG"]) != null)
@@ -190,7 +245,7 @@ public class Rechnung : BusinessObject
                 rp.PositionsMenge = new Menge
                 {
                     Wert = (jrp["iAbrmenge"] ?? jrp["I_ABRMENGE"]).Value<decimal>(),
-                    Einheit = mengeneinheit
+                    Einheit = mengeneinheit,
                 };
             }
 
@@ -201,7 +256,7 @@ public class Rechnung : BusinessObject
                     rp.TeilsummeNetto = new Betrag
                     {
                         Wert = (jrp["nettobtr"] ?? jrp["NETTOBTR"]).Value<decimal>(),
-                        Waehrung = waehrungscode
+                        Waehrung = waehrungscode,
                     };
                 }
                 else
@@ -209,22 +264,30 @@ public class Rechnung : BusinessObject
                     rp.TeilsummeNetto = new Betrag
                     {
                         Wert = (jrp["sbasw"] ?? jrp["SBASW"]).Value<decimal>(),
-                        Waehrung = waehrungscode
+                        Waehrung = waehrungscode,
                     };
                     var steuerbetrag = new Steuerbetrag
                     {
                         Basiswert = (jrp["sbasw"] ?? jrp["SBASW"]).Value<decimal>(),
                         Steuerwert = (jrp["sbetw"] ?? jrp["SBETW"]).Value<decimal>(),
-                        Waehrung = (Waehrungscode)Enum.Parse(typeof(Waehrungscode),
-                            (jrp["twaers"] ?? jrp["TWAERS"]).Value<string>())
+                        Waehrung = (Waehrungscode)
+                            Enum.Parse(
+                                typeof(Waehrungscode),
+                                (jrp["twaers"] ?? jrp["TWAERS"]).Value<string>()
+                            ),
                     };
                     decimal steuerProzent;
-                    if ((jrp["stprz"] ?? jrp["STPRZ"]) != null &&
-                        !string.IsNullOrWhiteSpace((jrp["stprz"] ?? jrp["STPRZ"]).Value<string>()))
+                    if (
+                        (jrp["stprz"] ?? jrp["STPRZ"]) != null
+                        && !string.IsNullOrWhiteSpace(
+                            (jrp["stprz"] ?? jrp["STPRZ"]).Value<string>()
+                        )
+                    )
                     {
-                        steuerProzent =
-                            decimal.Parse((jrp["stprz"] ?? jrp["STPRZ"]).Value<string>().Replace(",", ".").Trim(),
-                                CultureInfo.InvariantCulture);
+                        steuerProzent = decimal.Parse(
+                            (jrp["stprz"] ?? jrp["STPRZ"]).Value<string>().Replace(",", ".").Trim(),
+                            CultureInfo.InvariantCulture
+                        );
                     }
                     else
                     {
@@ -236,7 +299,8 @@ public class Rechnung : BusinessObject
                         19 => Steuerkennzeichen.UST_19,
                         7 => Steuerkennzeichen.UST_7,
                         _ => throw new NotImplementedException(
-                            $"Taxrate Internal '{jrp["taxrateInternal"]}' is not mapped.")
+                            $"Taxrate Internal '{jrp["taxrateInternal"]}' is not mapped."
+                        ),
                     };
                     rp.TeilsummeSteuer = steuerbetrag;
                 }
@@ -244,7 +308,10 @@ public class Rechnung : BusinessObject
                 if ((jrp["nettobtr"] ?? jrp["NETTOBTR"]).Value<decimal>() <= 0)
                 {
                     Vorausgezahlt = new Betrag
-                    { Waehrung = waehrungscode, Wert = (jrp["nettobtr"] ?? jrp["NETTOBTR"]).Value<decimal>() };
+                    {
+                        Waehrung = waehrungscode,
+                        Wert = (jrp["nettobtr"] ?? jrp["NETTOBTR"]).Value<decimal>(),
+                    };
                 }
             }
 
@@ -264,20 +331,30 @@ public class Rechnung : BusinessObject
                     {
                         Basiswert = (jrp["sbasw"] ?? jrp["SBASW"]).Value<decimal>(),
                         Steuerwert = (jrp["sbetw"] ?? jrp["SBETW"]).Value<decimal>(),
-                        Waehrung = (Waehrungscode)Enum.Parse(typeof(Waehrungscode),
-                            (jrp["twaers"] ?? jrp["TWAERS"]).Value<string>())
+                        Waehrung = (Waehrungscode)
+                            Enum.Parse(
+                                typeof(Waehrungscode),
+                                (jrp["twaers"] ?? jrp["TWAERS"]).Value<string>()
+                            ),
                     };
                     decimal steuerProzent;
-                    if ((jrp["stprz"] ?? jrp["STPRZ"]) != null &&
-                        !string.IsNullOrWhiteSpace((jrp["stprz"] ?? jrp["STPRZ"]).Value<string>()))
+                    if (
+                        (jrp["stprz"] ?? jrp["STPRZ"]) != null
+                        && !string.IsNullOrWhiteSpace(
+                            (jrp["stprz"] ?? jrp["STPRZ"]).Value<string>()
+                        )
+                    )
                     {
-                        steuerProzent =
-                            decimal.Parse((jrp["stprz"] ?? jrp["STPRZ"]).Value<string>().Replace(",", ".").Trim(),
-                                CultureInfo.InvariantCulture);
+                        steuerProzent = decimal.Parse(
+                            (jrp["stprz"] ?? jrp["STPRZ"]).Value<string>().Replace(",", ".").Trim(),
+                            CultureInfo.InvariantCulture
+                        );
                     }
                     else
                     {
-                        steuerProzent = Math.Round(steuerbetrag.Steuerwert / steuerbetrag.Basiswert * 100.0M);
+                        steuerProzent = Math.Round(
+                            steuerbetrag.Steuerwert / steuerbetrag.Basiswert * 100.0M
+                        );
                     }
 
                     steuerbetrag.Steuerkennzeichen = steuerProzent switch
@@ -285,7 +362,8 @@ public class Rechnung : BusinessObject
                         19.0M => Steuerkennzeichen.UST_19,
                         7.0M => Steuerkennzeichen.UST_7,
                         _ => throw new NotImplementedException(
-                            $"Taxrate Internal '{jrp["taxrateInternal"] ?? jrp["TAXRATE_INTERNAL"]}' is not mapped.")
+                            $"Taxrate Internal '{jrp["taxrateInternal"] ?? jrp["TAXRATE_INTERNAL"]}' is not mapped."
+                        ),
                     };
                     stList.Add(steuerbetrag);
                     gSteure += be.Value<decimal>();
@@ -304,7 +382,10 @@ public class Rechnung : BusinessObject
 
         Rechnungsersteller = new Geschaeftspartner
         {
-            Geschaeftspartnerrolle = new List<Geschaeftspartnerrolle> { Geschaeftspartnerrolle.LIEFERANT },
+            Geschaeftspartnerrolle = new List<Geschaeftspartnerrolle>
+            {
+                Geschaeftspartnerrolle.LIEFERANT,
+            },
             Gewerbekennzeichnung = true,
             Anrede = Anrede.HERR,
             Name1 = "Mein super Lieferant",
@@ -314,12 +395,15 @@ public class Rechnung : BusinessObject
                 Hausnummer = "8",
                 Postleitzahl = "90190",
                 Landescode = Landescode.DE,
-                Ort = "Walldorf"
-            }
+                Ort = "Walldorf",
+            },
         };
         Rechnungsempfaenger = new Geschaeftspartner
         {
-            Geschaeftspartnerrolle = new List<Geschaeftspartnerrolle> { Geschaeftspartnerrolle.KUNDE },
+            Geschaeftspartnerrolle = new List<Geschaeftspartnerrolle>
+            {
+                Geschaeftspartnerrolle.KUNDE,
+            },
             Gewerbekennzeichnung = false,
             Anrede = Anrede.HERR,
             Name1 = "Lustig",
@@ -330,8 +414,8 @@ public class Rechnung : BusinessObject
                 Hausnummer = "20",
                 Postleitzahl = "50672",
                 Landescode = Landescode.DE,
-                Ort = "Köln"
-            }
+                Ort = "Köln",
+            },
         };
     }
 
@@ -377,7 +461,6 @@ public class Rechnung : BusinessObject
     [FieldName("billNumber", Language.EN)]
     public string Rechnungsnummer { get; set; }
 
-
     [System.Text.Json.Serialization.JsonIgnore]
     [Newtonsoft.Json.JsonIgnore]
     [ProtoMember(8, Name = nameof(Rechnungsdatum))]
@@ -387,6 +470,7 @@ public class Rechnung : BusinessObject
         get => Rechnungsdatum.UtcDateTime;
         set => Rechnungsdatum = DateTime.SpecifyKind(value, DateTimeKind.Utc);
     }
+
     /// <summary>
     ///     Ausstellungsdatum der Rechnung.
     /// </summary>
@@ -397,7 +481,6 @@ public class Rechnung : BusinessObject
     [FieldName("billDate", Language.EN)]
     public DateTimeOffset Rechnungsdatum { get; set; }
 
-
     [System.Text.Json.Serialization.JsonIgnore]
     [Newtonsoft.Json.JsonIgnore]
     [ProtoMember(9, Name = nameof(Faelligkeitsdatum))]
@@ -407,6 +490,7 @@ public class Rechnung : BusinessObject
         get => Faelligkeitsdatum.UtcDateTime;
         set => Faelligkeitsdatum = DateTime.SpecifyKind(value, DateTimeKind.Utc);
     }
+
     /// <summary>
     ///     Zu diesem Datum ist die Zahlung fällig.
     /// </summary>
@@ -430,7 +514,11 @@ public class Rechnung : BusinessObject
     /// <summary>
     ///     Im Falle einer Stornorechnung (storno = true) steht hier die Rechnungsnummer der stornierten Rechnung.
     /// </summary>
-    [JsonProperty(Required = Required.Default, Order = 13, PropertyName = "originalRechnungsnummer")]
+    [JsonProperty(
+        Required = Required.Default,
+        Order = 13,
+        PropertyName = "originalRechnungsnummer"
+    )]
     [JsonPropertyName("originalRechnungsnummer")]
     [ProtoMember(11)]
     [JsonPropertyOrder(13)]
@@ -595,6 +683,7 @@ public class Rechnung : BusinessObject
         get => Buchungsdatum?.UtcDateTime ?? DateTime.MinValue;
         set => Buchungsdatum = DateTime.SpecifyKind(value, DateTimeKind.Utc);
     }
+
     /// <summary>
     ///     Zu diesem Datum ist die Zahlung fällig.
     /// </summary>

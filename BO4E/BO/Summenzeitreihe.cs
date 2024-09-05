@@ -1,15 +1,12 @@
+using System;
+using System.Collections.Generic;
+using System.Text.Json.Serialization;
 using BO4E.COM;
 using BO4E.EnergyIdentificationCodes;
 using BO4E.ENUM;
 using BO4E.meta;
-
 using Newtonsoft.Json;
-
 using ProtoBuf;
-
-using System;
-using System.Collections.Generic;
-using System.Text.Json.Serialization;
 
 namespace BO4E.BO;
 
@@ -43,6 +40,7 @@ public class Summenzeitreihe : BusinessObject
         get => Bilanzierungsbeginn?.UtcDateTime ?? DateTime.MinValue;
         set => Bilanzierungsbeginn = DateTime.SpecifyKind(value, DateTimeKind.Utc);
     }
+
     /// <summary>
     /// Inklusiver Start der Bilanzierung
     /// </summary>
@@ -52,7 +50,6 @@ public class Summenzeitreihe : BusinessObject
     [NonOfficial(NonOfficialCategory.MISSING)]
     [ProtoIgnore]
     public DateTimeOffset? Bilanzierungsbeginn { get; set; }
-
 
     /// <summary>
     /// Exklusives Ende der Bilanzierung
@@ -66,6 +63,7 @@ public class Summenzeitreihe : BusinessObject
         get => Bilanzierungsende?.UtcDateTime ?? DateTime.MinValue;
         set => Bilanzierungsende = DateTime.SpecifyKind(value, DateTimeKind.Utc);
     }
+
     /// <summary>
     /// Exklusives Ende der Bilanzierung
     /// </summary>
@@ -154,7 +152,6 @@ public class Summenzeitreihe : BusinessObject
     [ProtoMember(1021)]
     public Netzebene? Spannungsebene { get; set; }
 
-
     /// <summary>
     ///     Produkte der Summenzeitreihe
     /// </summary>
@@ -163,5 +160,4 @@ public class Summenzeitreihe : BusinessObject
     [ProtoMember(1022)]
     [JsonPropertyOrder(22)]
     public List<Zeitreihenprodukt>? Produkte { get; set; }
-
 }

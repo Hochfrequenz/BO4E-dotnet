@@ -13,10 +13,13 @@ public enum RechnungspositionsStatus
 
     [EnumMember(Value = "ROH_AUSGENOMMEN")]
     ROH_AUSGENOMMEN = 1,
+
     [EnumMember(Value = "ABRECHENBAR")]
     ABRECHENBAR = 2,
+
     [EnumMember(Value = "ABRECHENBAR_AUSGENOMMEN")]
     ABRECHENBAR_AUSGENOMMEN = 3,
+
     [EnumMember(Value = "ABGERECHNET")]
     ABGERECHNET = 4
 #pragma warning restore CS1591 // Missing XML comment for publicly visible type or member

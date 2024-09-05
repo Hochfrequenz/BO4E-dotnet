@@ -1,14 +1,12 @@
-using BO4E.meta;
-
 using System.Runtime.Serialization;
+using BO4E.meta;
 
 namespace BO4E.ENUM;
 
 /// <summary>
-/// In IFTSTA 21035 "Rückmeldung auf Lieferschein" (IFTSTA SG16 QTY 6063) 
+/// In IFTSTA 21035 "Rückmeldung auf Lieferschein" (IFTSTA SG16 QTY 6063)
 /// </summary>
 [NonOfficial(NonOfficialCategory.UNSPECIFIED)]
-
 public enum Tarifstufe
 {
     /// <summary> TARIFSTUFE_0 </summary>
@@ -30,10 +28,12 @@ public enum Tarifstufe
     /// <remarks>Z23</remarks>
     [EnumMember(Value = "TARIFSTUFE_3")]
     TARIFSTUFE_3,
+
     /// <summary> TARIFSTUFE_4 </summary>
     /// <remarks>Z24</remarks>
     [EnumMember(Value = "TARIFSTUFE_4")]
     TARIFSTUFE_4,
+
     /// <summary> TARIFSTUFE_5 </summary>
     /// <remarks>Z25</remarks>
     [EnumMember(Value = "TARIFSTUFE_5")]

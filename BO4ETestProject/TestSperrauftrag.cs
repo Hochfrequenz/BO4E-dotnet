@@ -16,11 +16,8 @@ namespace TestBO4E;
 [TestClass]
 public class TestSperrauftrag
 {
-    private readonly JsonSerializerOptions _options = new()
-    {
-        Converters = { new JsonStringEnumConverter() },
-        IgnoreNullValues = true
-    };
+    private readonly JsonSerializerOptions _options =
+        new() { Converters = { new JsonStringEnumConverter() }, IgnoreNullValues = true };
 
     [TestMethod]
     public void TestSperrauftragSerializationMaximal()
@@ -28,7 +25,10 @@ public class TestSperrauftrag
         var sperrauftrag = new Sperrauftrag
         {
             Ausfuehrungsdatum = new DateTimeOffset(2022, 1, 5, 1, 1, 1, TimeSpan.Zero),
-            Bemerkungen = new List<string> { "Der Typ erwartet uns mit Baseballschläger am Zähler" },
+            Bemerkungen = new List<string>
+            {
+                "Der Typ erwartet uns mit Baseballschläger am Zähler",
+            },
             Sparte = Sparte.STROM,
             Zaehlernummer = "1YSE29183123",
             Lieferanschrift = new Adresse
@@ -37,7 +37,7 @@ public class TestSperrauftrag
                 Hausnummer = "8",
                 Landescode = Landescode.DE,
                 Postleitzahl = "04109",
-                Ort = "Leipzig"
+                Ort = "Leipzig",
             },
             MarktlokationsId = "54321012345",
             IstVomGerichtsvollzieherAngeordnet = true,
@@ -45,9 +45,10 @@ public class TestSperrauftrag
             {
                 new()
                 {
-                    ExRefName = "Blocking service internal ID, you can choose any key here that you recognize",
+                    ExRefName =
+                        "Blocking service internal ID, you can choose any key here that you recognize",
                     ExRefWert = Guid.NewGuid().ToString(),
-                }
+                },
             },
             Sperrauftragsstatus = Auftragsstatus.ZUGESTIMMT,
             Mindestpreis = new Preis
@@ -55,14 +56,14 @@ public class TestSperrauftrag
                 Bezugswert = Mengeneinheit.ANZAHL,
                 Einheit = Waehrungseinheit.EUR,
                 Status = Preisstatus.VORLAEUFIG,
-                Wert = 10.00M
+                Wert = 10.00M,
             },
             Hoechstpreis = new Preis
             {
                 Bezugswert = Mengeneinheit.ANZAHL,
                 Einheit = Waehrungseinheit.EUR,
                 Status = Preisstatus.VORLAEUFIG,
-                Wert = 20.00M
+                Wert = 20.00M,
             },
         };
         sperrauftrag.IsValid().Should().BeTrue();
@@ -82,7 +83,7 @@ public class TestSperrauftrag
                 Hausnummer = "8",
                 Landescode = Landescode.DE,
                 Postleitzahl = "04109",
-                Ort = "Leipzig"
+                Ort = "Leipzig",
             },
             MarktlokationsId = "54321012345",
             IstVomGerichtsvollzieherAngeordnet = true,
@@ -105,7 +106,7 @@ public class TestSperrauftrag
                 Hausnummer = "8",
                 Landescode = Landescode.DE,
                 Postleitzahl = "04109",
-                Ort = "Leipzig"
+                Ort = "Leipzig",
             },
             MarktlokationsId = "54321012345",
             Zaehlernummer = "1Yasdasdasd",
@@ -116,8 +117,8 @@ public class TestSperrauftrag
                 {
                     ExRefName = "Blocking service internal ID",
                     ExRefWert = Guid.NewGuid().ToString(),
-                }
-            }
+                },
+            },
         };
         entsperrauftrag.IsValid().Should().BeTrue();
         var entsperrauftragJson = JsonSerializer.Serialize(entsperrauftrag, _options);
