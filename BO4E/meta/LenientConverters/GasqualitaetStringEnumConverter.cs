@@ -15,7 +15,11 @@ public class SystemTextGasqualitaetStringEnumConverter : System.Text.Json.Serial
         {
             return null;
         }
-
+        if (reader.TokenType == System.Text.Json.JsonTokenType.Number)
+        {
+            var integerValue = reader.GetInt64();
+            return (Gasqualitaet)Enum.ToObject(typeof(Gasqualitaet), integerValue);
+        }
         string enumString = reader.GetString();
 
         return enumString switch
@@ -63,7 +67,11 @@ public class NewtonsoftGasqualitaetStringEnumConverter : Newtonsoft.Json.JsonCon
         {
             return null;
         }
-
+        if (reader.TokenType == Newtonsoft.Json.JsonToken.Integer)
+        {
+            var integerValue = Convert.ToInt64(reader.Value);
+            return (Gasqualitaet)Enum.ToObject(typeof(Gasqualitaet), integerValue);
+        }
         if (reader.TokenType == Newtonsoft.Json.JsonToken.String)
         {
             string enumString = reader.Value.ToString();
