@@ -71,6 +71,7 @@ namespace TestBO4E
         [DataRow(LegacyGasQualitaet.L_GAS)]
         [DataRow(LegacyGasQualitaet.HGAS)]
         [DataRow(LegacyGasQualitaet.H_GAS)]
+        [Ignore("This test/the newtonsoft.json code path just worked accidentally, as a commenter in https://github.com/dotnet/runtime/issues/107296 pointed out")]
         public void Test_Newtonsoft_With_Degenerate_Enum(LegacyGasQualitaet qualiaet)
         {
             var jsonString = JsonConvert.SerializeObject(new SomethingWithGasqualitaet
