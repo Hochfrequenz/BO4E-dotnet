@@ -5,27 +5,26 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.IO;
 using JsonSerializer = System.Text.Json.JsonSerializer;
 
-namespace TestBO4E
+namespace TestBO4E;
+
+[TestClass]
+public class TestAutoNumberConverter
 {
-    [TestClass]
-    public class TestAutoNumberConverter
+
+    [TestMethod]
+    public void TestConverter()
     {
-
-        [TestMethod]
-        public void TestConverter()
+        string jsonString;
+        using (var r = new StreamReader("testjsons/vertrag_numeric_versionstruktur.json"))
         {
-            string jsonString;
-            using (var r = new StreamReader("testjsons/vertrag_numeric_versionstruktur.json"))
-            {
-                jsonString = r.ReadToEnd();
+            jsonString = r.ReadToEnd();
 
-            }
-
-            var options = LenientParsing.MOST_LENIENT.GetJsonSerializerOptions();
-
-
-            var vertrag = JsonSerializer.Deserialize<Vertrag>(jsonString, options);
-            Assert.IsNotNull(vertrag);
         }
+
+        var options = LenientParsing.MOST_LENIENT.GetJsonSerializerOptions();
+
+
+        var vertrag = JsonSerializer.Deserialize<Vertrag>(jsonString, options);
+        Assert.IsNotNull(vertrag);
     }
 }
