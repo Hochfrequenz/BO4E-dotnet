@@ -17,7 +17,7 @@ public class SystemTextGasqualitaetStringEnumConverter : System.Text.Json.Serial
         }
         if (reader.TokenType == System.Text.Json.JsonTokenType.Number)
         {
-            var integerValue = Convert.ToInt64(reader.GetInt64());
+            var integerValue = reader.GetInt64();
             return (Gasqualitaet)Enum.ToObject(typeof(Gasqualitaet), integerValue);
         }
         string enumString = reader.GetString();
