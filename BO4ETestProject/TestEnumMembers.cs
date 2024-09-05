@@ -49,9 +49,9 @@ namespace TestBO4E
         public void Test_Mehrmindermengenabrechnung_System_Text()
         {
             var options = LenientParsing.MOST_LENIENT.GetJsonSerializerOptions();
-            var myLegacyInstance = new MyClass() { Verwendungszweck = Verwendungszweck.MEHRMINDERMBENGENABRECHNUNG };
+            var myLegacyInstance = new MyClass() { Verwendungszweck = Verwendungszweck.MEHRMINDERMENGENABRECHNUNG };
             var myLegacyJson = System.Text.Json.JsonSerializer.Serialize(myLegacyInstance, options);
-            myLegacyJson.Should().Contain("MEHRMINDERMBENGENABRECHNUNG").And.Contain("B"); // note the "B"
+            myLegacyJson.Should().Contain("MEHRMINDERMENGENABRECHNUNG");
             var myNewInstance = System.Text.Json.JsonSerializer.Deserialize<MyClass>(myLegacyJson, options);
             myNewInstance.Verwendungszweck.Should().Be(Verwendungszweck.MEHRMINDERMENGENABRECHNUNG);
         }
@@ -62,9 +62,9 @@ namespace TestBO4E
         {
             var options = LenientParsing.MOST_LENIENT.GetJsonSerializerSettings();
             options.Converters.Add(new StringEnumConverter());
-            var myLegacyInstance = new MyClass() { Verwendungszweck = Verwendungszweck.MEHRMINDERMBENGENABRECHNUNG };
+            var myLegacyInstance = new MyClass() { Verwendungszweck = Verwendungszweck.MEHRMINDERMENGENABRECHNUNG };
             var myLegacyJson = Newtonsoft.Json.JsonConvert.SerializeObject(myLegacyInstance, options);
-            myLegacyJson.Should().Contain("MEHRMINDERMBENGENABRECHNUNG").And.Contain("B"); // note the "B"
+            myLegacyJson.Should().Contain("MEHRMINDERMENGENABRECHNUNG");
             var myNewInstance = Newtonsoft.Json.JsonConvert.DeserializeObject<MyClass>(myLegacyJson, options);
             myNewInstance.Verwendungszweck.Should().Be(Verwendungszweck.MEHRMINDERMENGENABRECHNUNG);
         }
