@@ -253,5 +253,142 @@ namespace TestBO4E
             var reSerializedJsonString = Newtonsoft.Json.JsonConvert.SerializeObject(actual, settings);
             reSerializedJsonString.Should().Contain(expectedGasqualitaet.ToString());
         }
+
+        public class ClassWithNullableVerwendungszweck
+        {
+            public Verwendungszweck? Foo { get; set; }
+        }
+
+        public class ClassWithNonNullableVerwendungszweck
+        {
+            public Verwendungszweck Foo { get; set; }
+        }
+
+        [TestMethod]
+        [DataRow("MEHRMINDERMENGENABRECHNUNG", Verwendungszweck.MEHRMINDERMENGENABRECHNUNG)]
+        [DataRow("MEHRMINDERMBENGENABRECHNUNG", Verwendungszweck.MEHRMINDERMENGENABRECHNUNG)]
+        [DataRow(null, null)]
+        public void Test_System_Text_Verwendungszweck_Legacy_Converter_With_Nullable_Verwendungszweck(string? jsonValue, Verwendungszweck? expectedVerwendungszweck)
+        {
+            string jsonString;
+            if (jsonValue != null)
+            {
+                jsonString = "{\"Foo\": \"" + jsonValue + "\"}";
+            }
+            else
+            {
+                jsonString = "{\"Foo\": null}";
+            }
+
+            var settings = new JsonSerializerOptions { Converters = { new SystemTextVerwendungszweckStringEnumConverter() } };
+            var actual = System.Text.Json.JsonSerializer.Deserialize<ClassWithNullableVerwendungszweck>(jsonString, settings);
+            actual.Should().NotBeNull();
+            actual.Foo.Should().Be(expectedVerwendungszweck);
+
+            var reSerializedJsonString = System.Text.Json.JsonSerializer.Serialize(actual, settings);
+            reSerializedJsonString.Should().Contain(expectedVerwendungszweck?.ToString() ?? "null");
+        }
+
+        [TestMethod]
+        [DataRow("MEHRMINDERMENGENABRECHNUNG", Verwendungszweck.MEHRMINDERMENGENABRECHNUNG)]
+        [DataRow("MEHRMINDERMBENGENABRECHNUNG", Verwendungszweck.MEHRMINDERMENGENABRECHNUNG)]
+        public void Test_System_Text_Gasqualitaet_Legacy_Converter_With_Non_Nullable_Gasqualitaet(string? jsonValue, Verwendungszweck expectedVerwendungszweck)
+        {
+            string jsonString;
+            if (jsonValue != null)
+            {
+                jsonString = "{\"Foo\": \"" + jsonValue + "\"}";
+            }
+            else
+            {
+                jsonString = "{\"Foo\": null}";
+            }
+            var settings = new JsonSerializerOptions { Converters = { new SystemTextVerwendungszweckStringEnumConverter() } };
+            var actual = System.Text.Json.JsonSerializer.Deserialize<ClassWithNonNullableVerwendungszweck>(jsonString, settings);
+            actual.Should().NotBeNull();
+            actual.Foo.Should().Be(expectedVerwendungszweck);
+
+            var reSerializedJsonString = System.Text.Json.JsonSerializer.Serialize(actual, settings);
+            reSerializedJsonString.Should().Contain(expectedVerwendungszweck.ToString());
+        }
+
+
+        [TestMethod]
+        [DataRow("MEHRMINDERMENGENABRECHNUNG", Verwendungszweck.MEHRMINDERMENGENABRECHNUNG)]
+        [DataRow("MEHRMINDERMBENGENABRECHNUNG", Verwendungszweck.MEHRMINDERMENGENABRECHNUNG)]
+        [DataRow(null, null)]
+        public void Test_Newtonsoft_Verwendungszweck_Legacy_Converter_With_Nullable_Verwendungszweck(string? jsonValue, Verwendungszweck? expectedVerwendungszweck)
+        {
+            string jsonString;
+            if (jsonValue != null)
+            {
+                jsonString = "{\"Foo\": \"" + jsonValue + "\"}";
+            }
+            else
+            {
+                jsonString = "{\"Foo\": null}";
+            }
+
+            var settings = new Newtonsoft.Json.JsonSerializerSettings()
+            {
+                Converters = { new NewtonsoftVerwendungszweckStringEnumConverter(), new StringEnumConverter() }
+            };
+            var actual = Newtonsoft.Json.JsonConvert.DeserializeObject<ClassWithNullableVerwendungszweck>(jsonString, settings);
+            actual.Should().NotBeNull();
+            actual.Foo.Should().Be(expectedVerwendungszweck);
+
+            var reSerializedJsonString = Newtonsoft.Json.JsonConvert.SerializeObject(actual, settings);
+            reSerializedJsonString.Should().Contain(expectedVerwendungszweck?.ToString() ?? "null");
+        }
+
+        [TestMethod]
+        [DataRow("MEHRMINDERMENGENABRECHNUNG", Verwendungszweck.MEHRMINDERMENGENABRECHNUNG)]
+        [DataRow("MEHRMINDERMBENGENABRECHNUNG", Verwendungszweck.MEHRMINDERMENGENABRECHNUNG)]
+        public void Test_Newtonsoft_Verwendungszweck_Legacy_Converter_With_Non_Nullable_Verwendungszweck(string? jsonValue, Verwendungszweck expectedVerwendungszweck)
+        {
+            string jsonString = "{\"Foo\": \"" + jsonValue + "\"}";
+            var settings = new Newtonsoft.Json.JsonSerializerSettings()
+            {
+                Converters = { new NewtonsoftVerwendungszweckStringEnumConverter(), new StringEnumConverter() }
+            };
+            var actual = Newtonsoft.Json.JsonConvert.DeserializeObject<ClassWithNonNullableVerwendungszweck>(jsonString, settings);
+            actual.Should().NotBeNull();
+            actual.Foo.Should().Be(expectedVerwendungszweck);
+
+            var reSerializedJsonString = Newtonsoft.Json.JsonConvert.SerializeObject(actual, settings);
+            reSerializedJsonString.Should().Contain(expectedVerwendungszweck.ToString());
+        }
+
+        [TestMethod]
+        [DataRow((int)Verwendungszweck.MEHRMINDERMENGENABRECHNUNG, Verwendungszweck.MEHRMINDERMENGENABRECHNUNG)]
+        public void Test_SystemText_Verwendungszweck_Legacy_Converter_With_Non_Nullable_Verwendungszweck_Integer(int jsonValue, Verwendungszweck expectedVerwendungszweck)
+        {
+            string jsonString = "{\"Foo\": " + jsonValue + "}";
+            var settings = new JsonSerializerOptions { Converters = { new SystemTextVerwendungszweckStringEnumConverter(), new JsonStringEnumConverter() } };
+            var actual = System.Text.Json.JsonSerializer.Deserialize<ClassWithNonNullableVerwendungszweck>(jsonString, settings);
+            actual.Should().NotBeNull();
+            actual.Foo.Should().Be(expectedVerwendungszweck);
+
+            var reSerializedJsonString = System.Text.Json.JsonSerializer.Serialize(actual, settings);
+            reSerializedJsonString.Should().Contain(expectedVerwendungszweck.ToString());
+        }
+
+        [TestMethod]
+        [DataRow((int)Verwendungszweck.MEHRMINDERMENGENABRECHNUNG, Verwendungszweck.MEHRMINDERMENGENABRECHNUNG)]
+        public void Test_Newtonsoft_Verwendungszweck_Legacy_Converter_With_Non_Nullable_Verwendungszweck_Integer(int jsonValue, Verwendungszweck expectedVerwendungszweck)
+        {
+            string jsonString = "{\"Foo\": " + jsonValue + "}";
+            var settings = new Newtonsoft.Json.JsonSerializerSettings()
+            {
+                Converters = { new NewtonsoftVerwendungszweckStringEnumConverter(), new StringEnumConverter() }
+            };
+            var actual = Newtonsoft.Json.JsonConvert.DeserializeObject<ClassWithNonNullableVerwendungszweck>(jsonString, settings);
+            actual.Should().NotBeNull();
+            actual.Foo.Should().Be(expectedVerwendungszweck);
+
+            var reSerializedJsonString = Newtonsoft.Json.JsonConvert.SerializeObject(actual, settings);
+            reSerializedJsonString.Should().Contain(expectedVerwendungszweck.ToString());
+        }
+
     }
 }
