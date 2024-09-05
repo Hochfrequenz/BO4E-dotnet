@@ -23,6 +23,7 @@ public class TestEnums
                 return valueGroups.Any();
             })
             .ToList();
-        enumTypesWithDuplicateValues.Should().BeEmpty();
+        enumTypesWithDuplicateValues.Should().BeEmpty("this may cause undefined behaviour");
+        // https://github.com/dotnet/runtime/issues/107296#issuecomment-2327881647
     }
 }
