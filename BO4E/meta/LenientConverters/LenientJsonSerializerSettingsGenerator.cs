@@ -68,7 +68,8 @@ public static class LenientParsingExtensionsNewtonsoft
         if (lenient.HasFlag(LenientParsing.MOST_LENIENT))
         {
             converters.Insert(index: 0, item: new NewtonsoftGasqualitaetStringEnumConverter());
-            // needs to be placed BEFORE the regular StringEnumConverter, see its documentation
+            converters.Insert(index: 0, item: new NewtonsoftVerwendungszweckStringEnumConverter());
+            // need to be placed BEFORE the regular StringEnumConverter, see their documentation
         }
         var settings = new JsonSerializerSettings
         {
