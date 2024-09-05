@@ -1,6 +1,5 @@
-using ProtoBuf;
-
 using System.Runtime.Serialization;
+using ProtoBuf;
 
 namespace BO4E.ENUM;
 
@@ -60,5 +59,5 @@ public enum Angebotsstatus
     ///     erledigt
     /// </summary>
     [EnumMember(Value = "ERLEDIGT")]
-    ERLEDIGT
+    ERLEDIGT,
 }

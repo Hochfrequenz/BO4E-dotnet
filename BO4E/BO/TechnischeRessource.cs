@@ -20,11 +20,7 @@ public class TechnischeRessource : BusinessObject
     /// </summary>
     /// <remarks>Edi-beispiel: LOC+Z19+C816417ST77'</remarks>
     [DefaultValue("|null|")]
-    [JsonProperty(
-        PropertyName = "technischeRessourceId",
-        Required = Required.Default,
-        Order = 10
-    )]
+    [JsonProperty(PropertyName = "technischeRessourceId", Required = Required.Default, Order = 10)]
     [JsonPropertyName("technischeRessourceId")]
     [JsonPropertyOrder(10)]
     [DataCategory(DataCategory.DEVICE)]
@@ -84,11 +80,7 @@ public class TechnischeRessource : BusinessObject
     /// Nennleistung (Aufnahme)
     /// Beispiel: QTY+Z43:100:KWT'
     /// </summary>
-    [JsonProperty(
-        PropertyName = "nennleistungAufnahme",
-        Required = Required.Default,
-        Order = 14
-    )]
+    [JsonProperty(PropertyName = "nennleistungAufnahme", Required = Required.Default, Order = 14)]
     [JsonPropertyName("nennleistungAufnahme")]
     [JsonPropertyOrder(14)]
     [NonOfficial(NonOfficialCategory.MISSING)]

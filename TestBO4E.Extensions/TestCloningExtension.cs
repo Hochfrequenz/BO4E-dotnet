@@ -14,10 +14,7 @@ public class TestCloningExtension
     [TestMethod]
     public void TestCloning()
     {
-        var bo = new Messlokation
-        {
-            MesslokationsId = "DE345"
-        };
+        var bo = new Messlokation { MesslokationsId = "DE345" };
         var cloneBo = bo.DeepClone();
         Assert.AreNotSame(bo, cloneBo);
         // Assert.AreEqual<Messlokation>((Messlokation)bo, cloneBo); <--- keine ahnung warum das failed. vllt. auch mit json patch/diff arbeiten wie im hubnet projekt
@@ -39,7 +36,7 @@ public class TestCloningExtension
                     Obiskennzahl = "dei vadder",
                     Wertermittlungsverfahren = Wertermittlungsverfahren.MESSUNG,
                     Startdatum = new DateTime(2018, 12, 31, 23, 0, 0, 0, DateTimeKind.Utc),
-                    Enddatum = new DateTime(2019, 12, 31, 23, 0, 0, 0, DateTimeKind.Utc)
+                    Enddatum = new DateTime(2019, 12, 31, 23, 0, 0, 0, DateTimeKind.Utc),
                 },
                 new Verbrauch
                 {
@@ -48,9 +45,9 @@ public class TestCloningExtension
                     Obiskennzahl = "dei mudder",
                     Wertermittlungsverfahren = Wertermittlungsverfahren.MESSUNG,
                     Startdatum = new DateTime(2019, 12, 31, 23, 0, 0, 0, DateTimeKind.Utc),
-                    Enddatum = new DateTime(2020, 12, 31, 23, 0, 0, 0, DateTimeKind.Utc)
-                }
-            }
+                    Enddatum = new DateTime(2020, 12, 31, 23, 0, 0, 0, DateTimeKind.Utc),
+                },
+            },
         };
         var cloned = em.DeepClone();
         Assert.AreEqual(em.Energieverbrauch.Count, cloned.Energieverbrauch.Count);
@@ -60,6 +57,9 @@ public class TestCloningExtension
 
         var cloned3 = ((BusinessObject)em).DeepClone();
         Assert.IsTrue(cloned3 is Energiemenge);
-        Assert.AreEqual(em.Energieverbrauch.Count, (cloned3 as Energiemenge).Energieverbrauch.Count);
+        Assert.AreEqual(
+            em.Energieverbrauch.Count,
+            (cloned3 as Energiemenge).Energieverbrauch.Count
+        );
     }
 }

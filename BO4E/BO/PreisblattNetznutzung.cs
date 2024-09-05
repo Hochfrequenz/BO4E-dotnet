@@ -10,7 +10,6 @@ namespace BO4E.BO;
 //[ProtoContract]
 public class PreisblattNetznutzung : Preisblatt
 {
-
     /// <summary>
     ///     Die Preise gelten für Marktlokationen der angegebenen Bilanzierungsmethode.
     /// </summary>

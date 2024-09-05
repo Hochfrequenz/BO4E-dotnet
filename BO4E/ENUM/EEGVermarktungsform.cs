@@ -1,5 +1,4 @@
 using System.Runtime.Serialization;
-
 using ProtoBuf;
 
 namespace BO4E.ENUM;
@@ -32,5 +31,5 @@ public enum EEGVermarktungsform
     /// <remarks>Z94</remarks>
     [ProtoEnum(Name = nameof(EEGVermarktungsform) + "_" + nameof(KWKG_VERGUETUNG))]
     [EnumMember(Value = "KWKG_VERGUETUNG")]
-    KWKG_VERGUETUNG
+    KWKG_VERGUETUNG,
 }

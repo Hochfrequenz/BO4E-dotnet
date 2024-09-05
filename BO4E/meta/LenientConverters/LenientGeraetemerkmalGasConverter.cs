@@ -18,7 +18,7 @@ public class LenientGeraetemerkmalGasConverter : JsonConverter
     public override bool CanConvert(Type objectType)
     {
         return objectType == typeof(BO4E.ENUM.Geraetemerkmal)
-               || objectType == typeof(BO4E.ENUM.Geraetemerkmal?);
+            || objectType == typeof(BO4E.ENUM.Geraetemerkmal?);
     }
 
     /// <inheritdoc cref="JsonConverter.ReadJson(JsonReader, Type, object, JsonSerializer)" />

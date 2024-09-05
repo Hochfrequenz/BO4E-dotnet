@@ -20,20 +20,22 @@ public class TestBOCOMGuids
             LokationsId = "DE123456",
             LokationsTyp = Lokationstyp.MALO,
             Energieverbrauch = new List<Verbrauch>(),
-            Guid = Guid.NewGuid()
+            Guid = Guid.NewGuid(),
         };
 
         var emJson = JsonConvert.SerializeObject(em);
-        Assert.AreEqual(em.Guid.Value, JsonConvert.DeserializeObject<Energiemenge>(emJson).Guid.Value);
+        Assert.AreEqual(
+            em.Guid.Value,
+            JsonConvert.DeserializeObject<Energiemenge>(emJson).Guid.Value
+        );
 
-        var gp = new Geschaeftspartner
-        {
-            Gewerbekennzeichnung = true,
-            Guid = Guid.NewGuid()
-        };
+        var gp = new Geschaeftspartner { Gewerbekennzeichnung = true, Guid = Guid.NewGuid() };
 
         var gpJson = JsonConvert.SerializeObject(gp);
-        Assert.AreEqual(gp.Guid.Value, JsonConvert.DeserializeObject<Geschaeftspartner>(gpJson).Guid.Value);
+        Assert.AreEqual(
+            gp.Guid.Value,
+            JsonConvert.DeserializeObject<Geschaeftspartner>(gpJson).Guid.Value
+        );
     }
 
     [TestMethod]
@@ -44,18 +46,17 @@ public class TestBOCOMGuids
             LokationsId = "DE123456",
             LokationsTyp = Lokationstyp.MALO,
             Energieverbrauch = new List<Verbrauch>(),
-            Guid = Guid.NewGuid()
+            Guid = Guid.NewGuid(),
         };
 
         var emJson = JsonSerializer.Serialize(em);
         Assert.AreEqual(em.Guid.Value, JsonSerializer.Deserialize<Energiemenge>(emJson).Guid.Value);
-        var gp = new Geschaeftspartner
-        {
-            Gewerbekennzeichnung = true,
-            Guid = Guid.NewGuid()
-        };
+        var gp = new Geschaeftspartner { Gewerbekennzeichnung = true, Guid = Guid.NewGuid() };
 
         var gpJson = JsonSerializer.Serialize(gp);
-        Assert.AreEqual(gp.Guid.Value, JsonSerializer.Deserialize<Geschaeftspartner>(gpJson).Guid.Value);
+        Assert.AreEqual(
+            gp.Guid.Value,
+            JsonSerializer.Deserialize<Geschaeftspartner>(gpJson).Guid.Value
+        );
     }
 }

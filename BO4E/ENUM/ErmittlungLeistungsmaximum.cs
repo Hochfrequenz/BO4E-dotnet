@@ -11,5 +11,5 @@ public enum ErmittlungLeistungsmaximum
 
     /// <summary>keine Verwendung des Hochlastzeitfensters</summary>
     [EnumMember(Value = "KEINE_VERWENDUNG_HOCHLASTFENSTER")]
-    KEINE_VERWENDUNG_HOCHLASTFENSTER
+    KEINE_VERWENDUNG_HOCHLASTFENSTER,
 }

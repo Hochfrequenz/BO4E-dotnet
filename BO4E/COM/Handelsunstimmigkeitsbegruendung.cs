@@ -1,5 +1,5 @@
-using System.Text.Json.Serialization;
 using System.Collections.Generic;
+using System.Text.Json.Serialization;
 using BO4E.ENUM;
 using BO4E.meta;
 using Newtonsoft.Json;
@@ -21,9 +21,7 @@ public class Handelsunstimmigkeitsbegruendung : COM
     [JsonPropertyName("referenzen")]
     [NonOfficial(NonOfficialCategory.MISSING)]
     [ProtoMember(1)]
-
     public List<string>? Referenzen { get; set; }
-
 
     /// <summary>
     /// Angabe des Handelsunstimmigkeitsgrunds
@@ -33,5 +31,4 @@ public class Handelsunstimmigkeitsbegruendung : COM
     [NonOfficial(NonOfficialCategory.MISSING)]
     [ProtoMember(2)]
     public Handelsunstimmigkeitsgrund Grund { get; set; }
-
 }

@@ -9,11 +9,12 @@ namespace BO4E.ENUM;
 public enum DefinitionenNotwendigkeit
 {
     /// <summary>
-    /// Zählzeitdefinitionen werden verwendet 
+    /// Zählzeitdefinitionen werden verwendet
     /// </summary>
     /// <remarks>Z02</remarks>
     [EnumMember(Value = "ZAEHLZEITDEFINITIONEN_WERDEN_VERWENDET")]
     ZAEHLZEITDEFINITIONEN_WERDEN_VERWENDET,
+
     /// <summary>
     /// Zählzeitdefinitionen werden nicht verwendet
     /// </summary>
@@ -22,11 +23,12 @@ public enum DefinitionenNotwendigkeit
     ZAEHLZEITDEFINITIONEN_WERDEN_NICHT_VERWENDET,
 
     /// <summary>
-    /// Definitionen werden verwendet 
+    /// Definitionen werden verwendet
     /// </summary>
     /// <remarks>Z45</remarks>
     [EnumMember(Value = "DEFINITIONEN_WERDEN_VERWENDET")]
     DEFINITIONEN_WERDEN_VERWENDET,
+
     /// <summary>
     /// Definitionen werden nicht verwendet
     /// </summary>

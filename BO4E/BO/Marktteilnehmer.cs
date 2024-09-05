@@ -49,8 +49,7 @@ public class Marktteilnehmer : Geschaeftspartner
     ///     Die 1:1-Kommunikationsadresse des Marktteilnehmers. Diese wird in der
     ///     Marktkommunikation verwendet.
     /// </summary>
-    [JsonProperty(Required = Required.Default, Order = 34,
-        PropertyName = "makoadresse")] // relaxed from always to default to make COM.Marktrolle obsolete.
+    [JsonProperty(Required = Required.Default, Order = 34, PropertyName = "makoadresse")] // relaxed from always to default to make COM.Marktrolle obsolete.
     [JsonPropertyName("makoadresse")]
     [JsonPropertyOrder(34)]
     //[ProtoMember(22)]

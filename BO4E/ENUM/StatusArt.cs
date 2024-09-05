@@ -1,7 +1,6 @@
+using System.Runtime.Serialization;
 using BO4E.COM;
 using BO4E.meta;
-
-using System.Runtime.Serialization;
 
 namespace BO4E.ENUM;
 

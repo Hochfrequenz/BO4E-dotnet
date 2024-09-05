@@ -150,7 +150,7 @@ public class Preisposition : COM
     public Zeitraum? Verarbeitungszeitraum { get; set; }
 
     /// <summary>
-    ///  Die genauen Bedeutungen der einzelnen Artikel-IDs sind in der EDI@Energy Codeliste der Artikelnummern 
+    ///  Die genauen Bedeutungen der einzelnen Artikel-IDs sind in der EDI@Energy Codeliste der Artikelnummern
     /// und Artikel-IDs zu finden, die in der Spalte "PRICAT Codeverwendung" ein X haben
     /// </summary>
     [JsonProperty(PropertyName = "artikelId", Order = 26, Required = Required.Default)]

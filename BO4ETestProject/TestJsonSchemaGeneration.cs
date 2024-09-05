@@ -26,13 +26,15 @@ public class TestJsonSchemaGeneration
     [TestMethod]
     public void NegativeTest()
     {
-        Assert.ThrowsException<ArgumentException>(() => BusinessObject.GetJsonSchema(typeof(string)),
-            "Illegal types must result in a ArgumentException.");
+        Assert.ThrowsException<ArgumentException>(
+            () => BusinessObject.GetJsonSchema(typeof(string)),
+            "Illegal types must result in a ArgumentException."
+        );
     }
-
 
     private const int LastDataRowOffset = 50;
     private const int MaxSchemasPerHour = 10;
+
     [TestMethod]
     [DataRow(0)]
     [DataRow(10)]
@@ -40,12 +42,15 @@ public class TestJsonSchemaGeneration
     [DataRow(30)]
     [DataRow(40)]
     [DataRow(LastDataRowOffset)] // using these different data rows allows you to workaround the 10schema per hour limitation (MaxSchemasPerHour)
-
     public void TestJSchemaFileGenerationBo(int offset)
     {
-        var relevantBusinessObjectTypes = typeof(BusinessObject).Assembly.GetTypes()
+        var relevantBusinessObjectTypes = typeof(BusinessObject)
+            .Assembly.GetTypes()
             .Where(t => t.IsSubclassOf(typeof(BusinessObject)));
-        relevantBusinessObjectTypes.Count().Should().BeLessThan(LastDataRowOffset + MaxSchemasPerHour); // if this fails, add another data row to this test method
+        relevantBusinessObjectTypes
+            .Count()
+            .Should()
+            .BeLessThan(LastDataRowOffset + MaxSchemasPerHour); // if this fails, add another data row to this test method
         try // generate plain json schemas
         {
             foreach (var type in relevantBusinessObjectTypes.Skip(offset).Take(MaxSchemasPerHour))

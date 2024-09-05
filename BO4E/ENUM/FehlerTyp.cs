@@ -13,5 +13,5 @@ public enum FehlerTyp
 
     /// <summary>Fehler in der Verarbeitung</summary>
     [EnumMember(Value = "VERARBEITUNG")]
-    VERARBEITUNG
+    VERARBEITUNG,
 }

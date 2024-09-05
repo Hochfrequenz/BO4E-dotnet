@@ -11,5 +11,5 @@ public enum Ausschreibungstyp
 
     /// <summary>Europaweit</summary>
     [EnumMember(Value = "EUROPAWEIT")]
-    EUROPAWEIT
+    EUROPAWEIT,
 }

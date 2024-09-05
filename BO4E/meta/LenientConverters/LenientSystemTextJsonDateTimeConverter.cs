@@ -19,7 +19,7 @@ public class LenientSystemTextJsonDateTimeConverter : JsonConverter<DateTime>
         ("yyyy-MM-ddTHH:mm:sszzzz", true),
         ("yyyyMMddHHmm", false),
         ("yyyyMMddHHmmss", false),
-        ("yyyyMMddHHmmss'--T::zzzz'", false)
+        ("yyyyMMddHHmmss'--T::zzzz'", false),
     ];
 
     private readonly DateTimeOffset? _defaultDateTime;
@@ -36,9 +36,8 @@ public class LenientSystemTextJsonDateTimeConverter : JsonConverter<DateTime>
     /// <summary>
     ///     initialize using no default datetime
     /// </summary>
-    public LenientSystemTextJsonDateTimeConverter() : this(null)
-    {
-    }
+    public LenientSystemTextJsonDateTimeConverter()
+        : this(null) { }
 
     /// <summary>
     /// </summary>
@@ -46,7 +45,11 @@ public class LenientSystemTextJsonDateTimeConverter : JsonConverter<DateTime>
     /// <param name="typeToConvert"></param>
     /// <param name="options"></param>
     /// <returns></returns>
-    public override DateTime Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+    public override DateTime Read(
+        ref Utf8JsonReader reader,
+        Type typeToConvert,
+        JsonSerializerOptions options
+    )
     {
         if (reader.TryGetDateTime(out var dt))
         {
@@ -63,8 +66,15 @@ public class LenientSystemTextJsonDateTimeConverter : JsonConverter<DateTime>
             }
 
             foreach (var (dtf, asUniversal) in _allowedDatetimeFormats)
-                if (DateTimeOffset.TryParseExact(rawDate, dtf, CultureInfo.InvariantCulture,
-                        asUniversal ? DateTimeStyles.AssumeUniversal : DateTimeStyles.None, out dateTimeOffset))
+                if (
+                    DateTimeOffset.TryParseExact(
+                        rawDate,
+                        dtf,
+                        CultureInfo.InvariantCulture,
+                        asUniversal ? DateTimeStyles.AssumeUniversal : DateTimeStyles.None,
+                        out dateTimeOffset
+                    )
+                )
                 {
                     return dateTimeOffset.DateTime;
                 }
@@ -76,8 +86,17 @@ public class LenientSystemTextJsonDateTimeConverter : JsonConverter<DateTime>
                 return DateTime.SpecifyKind(dateTime, DateTimeKind.Utc);
             }
 
-            if (_allowedDatetimeFormats.Any(dtf => DateTime.TryParseExact(rawDate, dtf.Item1,
-                    CultureInfo.InvariantCulture, DateTimeStyles.None, out dateTime)))
+            if (
+                _allowedDatetimeFormats.Any(dtf =>
+                    DateTime.TryParseExact(
+                        rawDate,
+                        dtf.Item1,
+                        CultureInfo.InvariantCulture,
+                        DateTimeStyles.None,
+                        out dateTime
+                    )
+                )
+            )
             {
                 return DateTime.SpecifyKind(dateTime, DateTimeKind.Utc);
             }
@@ -92,8 +111,10 @@ public class LenientSystemTextJsonDateTimeConverter : JsonConverter<DateTime>
         {
             return JsonSerializer.Deserialize<DateTime>(ref reader);
         }
-        catch (FormatException fe) when (fe.Message ==
-                                         "The UTC representation of the date '0001-01-01T00:00:00' falls outside the year range 1-9999.")
+        catch (FormatException fe)
+            when (fe.Message
+                == "The UTC representation of the date '0001-01-01T00:00:00' falls outside the year range 1-9999."
+            )
         {
             if (typeToConvert == typeof(DateTime))
             {
@@ -102,8 +123,10 @@ public class LenientSystemTextJsonDateTimeConverter : JsonConverter<DateTime>
 
             return DateTime.MinValue;
         }
-        catch (ArgumentOutOfRangeException ae) when (ae.Message ==
-                                                     "The UTC time represented when the offset is applied must be between year 0 and 10,000. (Parameter 'offset')")
+        catch (ArgumentOutOfRangeException ae)
+            when (ae.Message
+                == "The UTC time represented when the offset is applied must be between year 0 and 10,000. (Parameter 'offset')"
+            )
         {
             if (typeToConvert == typeof(DateTime))
             {
@@ -137,7 +160,11 @@ public class LenientSystemTextJsonNullableDateTimeConverter : JsonConverter<Date
         ("yyyy-MM-ddTHH:mm:sszzzz", true),
         ("yyyyMMddHHmm", false),
         ("yyyyMMddHHmmss", false),
-        (@"yyyyMMddHHmmss'--T::zzzz'", false) // ToDo: remove again. this is just a buggy, nasty workaround
+        (
+            @"yyyyMMddHHmmss'--T::zzzz'",
+            false
+        ) // ToDo: remove again. this is just a buggy, nasty workaround
+        ,
     };
 
     private readonly DateTimeOffset? _defaultDateTime;
@@ -154,9 +181,8 @@ public class LenientSystemTextJsonNullableDateTimeConverter : JsonConverter<Date
     /// <summary>
     ///     initialize using no default datetime
     /// </summary>
-    public LenientSystemTextJsonNullableDateTimeConverter() : this(null)
-    {
-    }
+    public LenientSystemTextJsonNullableDateTimeConverter()
+        : this(null) { }
 
     /// <summary>
     /// </summary>
@@ -164,7 +190,11 @@ public class LenientSystemTextJsonNullableDateTimeConverter : JsonConverter<Date
     /// <param name="typeToConvert"></param>
     /// <param name="options"></param>
     /// <returns></returns>
-    public override DateTime? Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+    public override DateTime? Read(
+        ref Utf8JsonReader reader,
+        Type typeToConvert,
+        JsonSerializerOptions options
+    )
     {
         if (reader.TryGetDateTimeOffset(out var dto))
         {
@@ -186,8 +216,15 @@ public class LenientSystemTextJsonNullableDateTimeConverter : JsonConverter<Date
             }
 
             foreach (var (dtf, asUniversal) in _allowedDatetimeFormats)
-                if (DateTimeOffset.TryParseExact(rawDate, dtf, CultureInfo.InvariantCulture,
-                        asUniversal ? DateTimeStyles.AssumeUniversal : DateTimeStyles.None, out dateTimeOffset))
+                if (
+                    DateTimeOffset.TryParseExact(
+                        rawDate,
+                        dtf,
+                        CultureInfo.InvariantCulture,
+                        asUniversal ? DateTimeStyles.AssumeUniversal : DateTimeStyles.None,
+                        out dateTimeOffset
+                    )
+                )
                 {
                     return dateTimeOffset.DateTime;
                 }
@@ -199,8 +236,17 @@ public class LenientSystemTextJsonNullableDateTimeConverter : JsonConverter<Date
                 return DateTime.SpecifyKind(dateTime, DateTimeKind.Utc);
             }
 
-            if (_allowedDatetimeFormats.Any(dtf => DateTime.TryParseExact(rawDate, dtf.Item1,
-                    CultureInfo.InvariantCulture, DateTimeStyles.None, out dateTime)))
+            if (
+                _allowedDatetimeFormats.Any(dtf =>
+                    DateTime.TryParseExact(
+                        rawDate,
+                        dtf.Item1,
+                        CultureInfo.InvariantCulture,
+                        DateTimeStyles.None,
+                        out dateTime
+                    )
+                )
+            )
             {
                 return DateTime.SpecifyKind(dateTime, DateTimeKind.Utc);
             }
@@ -215,8 +261,10 @@ public class LenientSystemTextJsonNullableDateTimeConverter : JsonConverter<Date
         {
             return JsonSerializer.Deserialize<DateTime>(ref reader);
         }
-        catch (FormatException fe) when (fe.Message ==
-                                         "The UTC representation of the date '0001-01-01T00:00:00' falls outside the year range 1-9999.")
+        catch (FormatException fe)
+            when (fe.Message
+                == "The UTC representation of the date '0001-01-01T00:00:00' falls outside the year range 1-9999."
+            )
         {
             if (typeToConvert == typeof(DateTime))
             {
@@ -225,14 +273,15 @@ public class LenientSystemTextJsonNullableDateTimeConverter : JsonConverter<Date
 
             return null;
         }
-        catch (ArgumentOutOfRangeException ae) when (ae.Message ==
-                                                     "The UTC time represented when the offset is applied must be between year 0 and 10,000. (Parameter 'offset')")
+        catch (ArgumentOutOfRangeException ae)
+            when (ae.Message
+                == "The UTC time represented when the offset is applied must be between year 0 and 10,000. (Parameter 'offset')"
+            )
         {
             if (typeToConvert == typeof(DateTime))
             {
                 return DateTime.MinValue;
             }
-
 
             return null;
         }
@@ -243,7 +292,11 @@ public class LenientSystemTextJsonNullableDateTimeConverter : JsonConverter<Date
     /// <param name="writer"></param>
     /// <param name="value"></param>
     /// <param name="options"></param>
-    public override void Write(Utf8JsonWriter writer, DateTime? value, JsonSerializerOptions options)
+    public override void Write(
+        Utf8JsonWriter writer,
+        DateTime? value,
+        JsonSerializerOptions options
+    )
     {
         JsonSerializer.Serialize(writer, value);
     }
@@ -261,7 +314,11 @@ public class LenientSystemTextJsonDateTimeOffsetConverter : JsonConverter<DateTi
         ("yyyy-MM-ddTHH:mm:sszzzz", true),
         ("yyyyMMddHHmm", false),
         ("yyyyMMddHHmmss", false),
-        (@"yyyyMMddHHmmss'--T::zzzz'", false) // ToDo: remove again. this is just a buggy, nasty workaround
+        (
+            @"yyyyMMddHHmmss'--T::zzzz'",
+            false
+        ) // ToDo: remove again. this is just a buggy, nasty workaround
+        ,
     };
 
     private readonly DateTimeOffset? _defaultDateTime;
@@ -278,10 +335,8 @@ public class LenientSystemTextJsonDateTimeOffsetConverter : JsonConverter<DateTi
     /// <summary>
     ///     initialize using no default datetime
     /// </summary>
-    public LenientSystemTextJsonDateTimeOffsetConverter() : this(null)
-    {
-    }
-
+    public LenientSystemTextJsonDateTimeOffsetConverter()
+        : this(null) { }
 
     /// <summary>
     /// </summary>
@@ -289,8 +344,11 @@ public class LenientSystemTextJsonDateTimeOffsetConverter : JsonConverter<DateTi
     /// <param name="typeToConvert"></param>
     /// <param name="options"></param>
     /// <returns></returns>
-    public override DateTimeOffset Read(ref Utf8JsonReader reader, Type typeToConvert,
-        JsonSerializerOptions options)
+    public override DateTimeOffset Read(
+        ref Utf8JsonReader reader,
+        Type typeToConvert,
+        JsonSerializerOptions options
+    )
     {
         if (reader.TryGetDateTimeOffset(out var dto))
         {
@@ -312,8 +370,15 @@ public class LenientSystemTextJsonDateTimeOffsetConverter : JsonConverter<DateTi
             }
 
             foreach (var (dtf, asUniversal) in _allowedDatetimeFormats)
-                if (DateTimeOffset.TryParseExact(rawDate, dtf, CultureInfo.InvariantCulture,
-                        asUniversal ? DateTimeStyles.AssumeUniversal : DateTimeStyles.None, out dateTimeOffset))
+                if (
+                    DateTimeOffset.TryParseExact(
+                        rawDate,
+                        dtf,
+                        CultureInfo.InvariantCulture,
+                        asUniversal ? DateTimeStyles.AssumeUniversal : DateTimeStyles.None,
+                        out dateTimeOffset
+                    )
+                )
                 {
                     return dateTimeOffset;
                 }
@@ -325,8 +390,17 @@ public class LenientSystemTextJsonDateTimeOffsetConverter : JsonConverter<DateTi
                 return dateTime;
             }
 
-            if (_allowedDatetimeFormats.Any(dtf => DateTime.TryParseExact(rawDate, dtf.Item1,
-                    CultureInfo.InvariantCulture, DateTimeStyles.None, out dateTime)))
+            if (
+                _allowedDatetimeFormats.Any(dtf =>
+                    DateTime.TryParseExact(
+                        rawDate,
+                        dtf.Item1,
+                        CultureInfo.InvariantCulture,
+                        DateTimeStyles.None,
+                        out dateTime
+                    )
+                )
+            )
             {
                 return dateTime;
             }
@@ -345,8 +419,10 @@ public class LenientSystemTextJsonDateTimeOffsetConverter : JsonConverter<DateTi
         {
             return DateTimeOffset.MinValue;
         }
-        catch (FormatException fe) when (fe.Message ==
-                                         "The UTC representation of the date '0001-01-01T00:00:00' falls outside the year range 1-9999.")
+        catch (FormatException fe)
+            when (fe.Message
+                == "The UTC representation of the date '0001-01-01T00:00:00' falls outside the year range 1-9999."
+            )
         {
             if (typeToConvert == typeof(DateTime))
             {
@@ -355,14 +431,15 @@ public class LenientSystemTextJsonDateTimeOffsetConverter : JsonConverter<DateTi
 
             return DateTimeOffset.MinValue;
         }
-        catch (ArgumentOutOfRangeException ae) when (ae.Message ==
-                                                     "The UTC time represented when the offset is applied must be between year 0 and 10,000. (Parameter 'offset')")
+        catch (ArgumentOutOfRangeException ae)
+            when (ae.Message
+                == "The UTC time represented when the offset is applied must be between year 0 and 10,000. (Parameter 'offset')"
+            )
         {
             if (typeToConvert == typeof(DateTime))
             {
                 return DateTime.MinValue;
             }
-
 
             return DateTimeOffset.MinValue;
         }
@@ -373,7 +450,11 @@ public class LenientSystemTextJsonDateTimeOffsetConverter : JsonConverter<DateTi
     /// <param name="writer"></param>
     /// <param name="value"></param>
     /// <param name="options"></param>
-    public override void Write(Utf8JsonWriter writer, DateTimeOffset value, JsonSerializerOptions options)
+    public override void Write(
+        Utf8JsonWriter writer,
+        DateTimeOffset value,
+        JsonSerializerOptions options
+    )
     {
         JsonSerializer.Serialize(writer, value);
     }
@@ -391,7 +472,11 @@ public class LenientSystemTextJsonNullableDateTimeOffsetConverter : JsonConverte
         ("yyyy-MM-ddTHH:mm:sszzzz", true),
         ("yyyyMMddHHmm", false),
         ("yyyyMMddHHmmss", false),
-        (@"yyyyMMddHHmmss'--T::zzzz'", false) // ToDo: remove again. this is just a buggy, nasty workaround
+        (
+            @"yyyyMMddHHmmss'--T::zzzz'",
+            false
+        ) // ToDo: remove again. this is just a buggy, nasty workaround
+        ,
     };
 
     private readonly DateTimeOffset? _defaultDateTime;
@@ -400,7 +485,9 @@ public class LenientSystemTextJsonNullableDateTimeOffsetConverter : JsonConverte
     ///     initialize using a default date time
     /// </summary>
     /// <param name="defaultDateTime"></param>
-    public LenientSystemTextJsonNullableDateTimeOffsetConverter(DateTimeOffset? defaultDateTime = null)
+    public LenientSystemTextJsonNullableDateTimeOffsetConverter(
+        DateTimeOffset? defaultDateTime = null
+    )
     {
         _defaultDateTime = defaultDateTime;
     }
@@ -408,10 +495,8 @@ public class LenientSystemTextJsonNullableDateTimeOffsetConverter : JsonConverte
     /// <summary>
     ///     initialize using no default datetime
     /// </summary>
-    public LenientSystemTextJsonNullableDateTimeOffsetConverter() : this(null)
-    {
-    }
-
+    public LenientSystemTextJsonNullableDateTimeOffsetConverter()
+        : this(null) { }
 
     /// <summary>
     /// </summary>
@@ -419,14 +504,16 @@ public class LenientSystemTextJsonNullableDateTimeOffsetConverter : JsonConverte
     /// <param name="typeToConvert"></param>
     /// <param name="options"></param>
     /// <returns></returns>
-    public override DateTimeOffset? Read(ref Utf8JsonReader reader, Type typeToConvert,
-        JsonSerializerOptions options)
+    public override DateTimeOffset? Read(
+        ref Utf8JsonReader reader,
+        Type typeToConvert,
+        JsonSerializerOptions options
+    )
     {
         if (reader.TryGetDateTimeOffset(out var dto))
         {
             return dto;
         }
-
 
         var rawDate = reader.GetString();
         // First try to parse the date string as is (in case it is correctly formatted)
@@ -438,8 +525,15 @@ public class LenientSystemTextJsonNullableDateTimeOffsetConverter : JsonConverte
             }
 
             foreach (var (dtf, asUniversal) in _allowedDatetimeFormats)
-                if (DateTimeOffset.TryParseExact(rawDate, dtf, CultureInfo.InvariantCulture,
-                        asUniversal ? DateTimeStyles.AssumeUniversal : DateTimeStyles.None, out dateTimeOffset))
+                if (
+                    DateTimeOffset.TryParseExact(
+                        rawDate,
+                        dtf,
+                        CultureInfo.InvariantCulture,
+                        asUniversal ? DateTimeStyles.AssumeUniversal : DateTimeStyles.None,
+                        out dateTimeOffset
+                    )
+                )
                 {
                     return dateTimeOffset;
                 }
@@ -451,8 +545,17 @@ public class LenientSystemTextJsonNullableDateTimeOffsetConverter : JsonConverte
                 return dateTime;
             }
 
-            if (_allowedDatetimeFormats.Any(dtf => DateTime.TryParseExact(rawDate, dtf.Item1,
-                    CultureInfo.InvariantCulture, DateTimeStyles.None, out dateTime)))
+            if (
+                _allowedDatetimeFormats.Any(dtf =>
+                    DateTime.TryParseExact(
+                        rawDate,
+                        dtf.Item1,
+                        CultureInfo.InvariantCulture,
+                        DateTimeStyles.None,
+                        out dateTime
+                    )
+                )
+            )
             {
                 return dateTime;
             }
@@ -471,8 +574,10 @@ public class LenientSystemTextJsonNullableDateTimeOffsetConverter : JsonConverte
         {
             return null;
         }
-        catch (FormatException fe) when (fe.Message ==
-                                         "The UTC representation of the date '0001-01-01T00:00:00' falls outside the year range 1-9999.")
+        catch (FormatException fe)
+            when (fe.Message
+                == "The UTC representation of the date '0001-01-01T00:00:00' falls outside the year range 1-9999."
+            )
         {
             if (typeToConvert == typeof(DateTime))
             {
@@ -481,14 +586,15 @@ public class LenientSystemTextJsonNullableDateTimeOffsetConverter : JsonConverte
 
             return DateTimeOffset.MinValue;
         }
-        catch (ArgumentOutOfRangeException ae) when (ae.Message ==
-                                                     "The UTC time represented when the offset is applied must be between year 0 and 10,000. (Parameter 'offset')")
+        catch (ArgumentOutOfRangeException ae)
+            when (ae.Message
+                == "The UTC time represented when the offset is applied must be between year 0 and 10,000. (Parameter 'offset')"
+            )
         {
             if (typeToConvert == typeof(DateTime))
             {
                 return DateTime.MinValue;
             }
-
 
             return DateTimeOffset.MinValue;
         }
@@ -499,7 +605,11 @@ public class LenientSystemTextJsonNullableDateTimeOffsetConverter : JsonConverte
     /// <param name="writer"></param>
     /// <param name="value"></param>
     /// <param name="options"></param>
-    public override void Write(Utf8JsonWriter writer, DateTimeOffset? value, JsonSerializerOptions options)
+    public override void Write(
+        Utf8JsonWriter writer,
+        DateTimeOffset? value,
+        JsonSerializerOptions options
+    )
     {
         JsonSerializer.Serialize(writer, value);
     }

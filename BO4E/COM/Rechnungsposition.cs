@@ -1,13 +1,10 @@
+using System;
+using System.Text.Json.Serialization;
 using BO4E.ENUM;
 using BO4E.meta;
 using BO4E.meta.LenientConverters;
-
 using Newtonsoft.Json;
-
 using ProtoBuf;
-
-using System;
-using System.Text.Json.Serialization;
 
 namespace BO4E.COM;
 
@@ -26,7 +23,6 @@ public class Rechnungsposition : COM
     [ProtoMember(1)]
     public int Positionsnummer { get; set; }
 
-
     [System.Text.Json.Serialization.JsonIgnore]
     [Newtonsoft.Json.JsonIgnore]
     [ProtoMember(2, Name = nameof(LieferungVon))]
@@ -36,6 +32,7 @@ public class Rechnungsposition : COM
         get => LieferungVon?.UtcDateTime ?? DateTime.MinValue;
         set => LieferungVon = DateTime.SpecifyKind(value, DateTimeKind.Utc);
     }
+
     /// <summary>Start der Lieferung für die abgerechnete Leistung.</summary>
     [JsonProperty(PropertyName = "lieferungVon", Required = Required.Default, Order = 12)]
     [JsonPropertyName("lieferungVon")]
@@ -44,7 +41,6 @@ public class Rechnungsposition : COM
     [ProtoIgnore]
     [Newtonsoft.Json.JsonConverter(typeof(LenientDateTimeConverter))]
     public DateTimeOffset? LieferungVon { get; set; }
-
 
     [System.Text.Json.Serialization.JsonIgnore]
     [Newtonsoft.Json.JsonIgnore]
@@ -55,6 +51,7 @@ public class Rechnungsposition : COM
         get => LieferungBis?.UtcDateTime ?? DateTime.MinValue;
         set => LieferungBis = DateTime.SpecifyKind(value, DateTimeKind.Utc);
     }
+
     /// <summary>Ende der Lieferung für die abgerechnete Leistung.</summary>
     [JsonProperty(PropertyName = "lieferungBis", Required = Required.Default, Order = 13)]
     [JsonPropertyName("lieferungBis")]
@@ -220,7 +217,9 @@ public class Rechnungsposition : COM
     protected DateTime? _Ausfuehrungsdatum
     {
         get => Ausfuehrungsdatum?.UtcDateTime;
-        set => Ausfuehrungsdatum = value != null ? DateTime.SpecifyKind(value.Value, DateTimeKind.Utc) : null;
+        set =>
+            Ausfuehrungsdatum =
+                value != null ? DateTime.SpecifyKind(value.Value, DateTimeKind.Utc) : null;
     }
 
     /// <summary>
@@ -231,5 +230,4 @@ public class Rechnungsposition : COM
     [JsonPropertyOrder(29)]
     [ProtoIgnore]
     public DateTimeOffset? Ausfuehrungsdatum { get; set; }
-
 }

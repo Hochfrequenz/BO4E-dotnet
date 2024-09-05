@@ -25,7 +25,6 @@ public class Angebotsvariante : COM
     [ProtoMember(5)]
     public string? Beschreibung { get; set; }
 
-
     [System.Text.Json.Serialization.JsonIgnore]
     [Newtonsoft.Json.JsonIgnore]
     [ProtoMember(6, Name = nameof(Erstelldatum))]
@@ -33,8 +32,10 @@ public class Angebotsvariante : COM
     private DateTime _Erstelldatum
     {
         get => Erstelldatum?.UtcDateTime ?? default;
-        set => Erstelldatum = value == default ? null : DateTime.SpecifyKind(value, DateTimeKind.Utc);
+        set =>
+            Erstelldatum = value == default ? null : DateTime.SpecifyKind(value, DateTimeKind.Utc);
     }
+
     /// <summary>Datum der Erstellung der Angebotsvariante</summary>
     [JsonProperty(PropertyName = "erstelldatum", Order = 12, Required = Required.Default)]
     [JsonPropertyName("erstelldatum")]
@@ -51,6 +52,7 @@ public class Angebotsvariante : COM
         get => Bindefrist?.UtcDateTime ?? default;
         set => Bindefrist = value == default ? null : DateTime.SpecifyKind(value, DateTimeKind.Utc);
     }
+
     /// <summary>Bis zu diesem Zeitpunkt (Tag/Uhrzeit) inklusive gilt die Angebotsvariante, z.B. 31.12.2017, 17:00 Uhr.</summary>
     [JsonProperty(PropertyName = "bindefrist", Order = 13, Required = Required.Default)]
     [JsonPropertyName("bindefrist")]

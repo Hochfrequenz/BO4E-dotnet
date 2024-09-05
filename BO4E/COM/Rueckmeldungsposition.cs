@@ -1,11 +1,8 @@
-using BO4E.meta;
-
-using Newtonsoft.Json;
-
-using ProtoBuf;
-
 using System.Collections.Generic;
 using System.Text.Json.Serialization;
+using BO4E.meta;
+using Newtonsoft.Json;
+using ProtoBuf;
 
 namespace BO4E.COM;
 
@@ -16,7 +13,6 @@ namespace BO4E.COM;
 [NonOfficial(NonOfficialCategory.MISSING)]
 public class Rueckmeldungsposition : COM
 {
-
     /// <summary>
     /// Positionsnummer der Referenzierung
     /// </summary>
@@ -36,6 +32,4 @@ public class Rueckmeldungsposition : COM
     [ProtoMember(4)]
     [JsonPropertyOrder(4)]
     public List<Abweichungsposition>? Abweichungspositionen { get; set; }
-
-
 }

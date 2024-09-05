@@ -24,7 +24,11 @@ public class Angebotsteil : COM
     ///     Marktlokationen, für die dieses Angebotsteil gilt, falls vorhanden. Durch die Marktlokation ist auch die
     ///     Lieferadresse festgelegt. Details <see cref="Marktlokation" />
     /// </summary>
-    [JsonProperty(PropertyName = "lieferstellenangebotsteil", Order = 11, Required = Required.Default)]
+    [JsonProperty(
+        PropertyName = "lieferstellenangebotsteil",
+        Order = 11,
+        Required = Required.Default
+    )]
     [JsonPropertyName("lieferstellenangebotsteil")]
     [JsonPropertyOrder(11)]
     [ProtoMember(4)]
@@ -33,7 +37,11 @@ public class Angebotsteil : COM
     /// <summary>
     ///     Summe der Verbräuche aller in diesem Angebotsteil eingeschlossenen Lieferstellen. Details <see cref="Menge" />
     /// </summary>
-    [JsonProperty(PropertyName = "gesamtmengeangebotsteil", Order = 12, Required = Required.Default)]
+    [JsonProperty(
+        PropertyName = "gesamtmengeangebotsteil",
+        Order = 12,
+        Required = Required.Default
+    )]
     [JsonPropertyName("gesamtmengeangebotsteil")]
     [JsonPropertyOrder(12)]
     [ProtoMember(5)]
@@ -43,7 +51,11 @@ public class Angebotsteil : COM
     ///     Summe der Jahresenergiekosten aller in diesem Angebotsteil enthaltenen Lieferstellen. Details
     ///     <see cref="Betrag" />
     /// </summary>
-    [JsonProperty(PropertyName = "gesamtkostenangebotsteil", Order = 13, Required = Required.Default)]
+    [JsonProperty(
+        PropertyName = "gesamtkostenangebotsteil",
+        Order = 13,
+        Required = Required.Default
+    )]
     [JsonPropertyName("gesamtkostenangebotsteil")]
     [JsonPropertyOrder(13)]
     [ProtoMember(6)]

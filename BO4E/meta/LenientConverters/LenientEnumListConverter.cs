@@ -33,8 +33,12 @@ public class LenientEnumListConverter : JsonConverter
     }
 
     /// <inheritdoc cref="JsonConverter.ReadJson(JsonReader, Type, object, JsonSerializer)" />
-    public override object ReadJson(JsonReader reader, Type objectType, object existingValue,
-        JsonSerializer serializer)
+    public override object ReadJson(
+        JsonReader reader,
+        Type objectType,
+        object existingValue,
+        JsonSerializer serializer
+    )
     {
         var token = JToken.Load(reader); // https://stackoverflow.com/a/47864946/10009545
         var rawList = token.ToObject<List<object>>();

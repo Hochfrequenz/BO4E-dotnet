@@ -13,7 +13,10 @@ namespace TestBO4E;
 [TestClass]
 public class TestZeitraumDeserialization
 {
-    private void _TestZeitraumDeserialization(Func<Zeitraum, string> serializer, Func<string, Zeitraum> deserializer)
+    private void _TestZeitraumDeserialization(
+        Func<Zeitraum, string> serializer,
+        Func<string, Zeitraum> deserializer
+    )
     {
         var zeitraum = new Zeitraum
         {
@@ -21,7 +24,9 @@ public class TestZeitraumDeserialization
             Enddatum = new DateTimeOffset(2022, 1, 2, 0, 0, 0, TimeSpan.Zero),
         };
         var jsonString = serializer(zeitraum);
-        var jsonDict = System.Text.Json.JsonSerializer.Deserialize<Dictionary<string, string>>(jsonString); // we deserialize into an anonymous dict just to be decoupled from the json hacks, it is not important that we use system.text for that
+        var jsonDict = System.Text.Json.JsonSerializer.Deserialize<Dictionary<string, string>>(
+            jsonString
+        ); // we deserialize into an anonymous dict just to be decoupled from the json hacks, it is not important that we use system.text for that
         jsonDict["startdatum"].Should().NotBeNull();
         jsonDict["enddatum"].Should().NotBeNull();
         jsonDict["startzeitpunkt"].Should().BeEquivalentTo(jsonDict["startdatum"]);
@@ -33,14 +38,22 @@ public class TestZeitraumDeserialization
 
         jsonString = System.Text.Json.JsonSerializer.Serialize(jsonDict);
         var deserializedZeitraum = deserializer(jsonString);
-        deserializedZeitraum.Should().BeEquivalentTo(zeitraum, opts => opts.Excluding(zr => zr.Dauer).Excluding(zr => zr.Einheit));
+        deserializedZeitraum
+            .Should()
+            .BeEquivalentTo(
+                zeitraum,
+                opts => opts.Excluding(zr => zr.Dauer).Excluding(zr => zr.Einheit)
+            );
         // excluding the two props because they are part of a not so glorious hack `FillNullValues` in the Zeitraum class which I don't want to touch here.
     }
 
     [TestMethod]
     public void TestZeitraumDeserializationNewtonsoft()
     {
-        _TestZeitraumDeserialization(zr => JsonConvert.SerializeObject(zr, new StringEnumConverter()), str => JsonConvert.DeserializeObject<Zeitraum>(str));
+        _TestZeitraumDeserialization(
+            zr => JsonConvert.SerializeObject(zr, new StringEnumConverter()),
+            str => JsonConvert.DeserializeObject<Zeitraum>(str)
+        );
     }
 
     [TestMethod]
@@ -48,8 +61,11 @@ public class TestZeitraumDeserialization
     {
         var jsonOptions = new JsonSerializerOptions()
         {
-            Converters = { new JsonStringEnumConverter() }
+            Converters = { new JsonStringEnumConverter() },
         };
-        _TestZeitraumDeserialization(zr => System.Text.Json.JsonSerializer.Serialize(zr, jsonOptions), str => System.Text.Json.JsonSerializer.Deserialize<Zeitraum>(str, jsonOptions));
+        _TestZeitraumDeserialization(
+            zr => System.Text.Json.JsonSerializer.Serialize(zr, jsonOptions),
+            str => System.Text.Json.JsonSerializer.Deserialize<Zeitraum>(str, jsonOptions)
+        );
     }
 }

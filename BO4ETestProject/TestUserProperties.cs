@@ -36,7 +36,10 @@ public class TestUserProperties
         var melo = JsonConvert.DeserializeObject<Messlokation>(meloJson);
         Assert.IsTrue(melo.IsValid());
         Assert.IsNotNull(melo.UserProperties);
-        Assert.AreEqual("some_value_not_covered_by_bo4e", melo.UserProperties["myCustomInfo"] as string);
+        Assert.AreEqual(
+            "some_value_not_covered_by_bo4e",
+            melo.UserProperties["myCustomInfo"] as string
+        );
         Assert.AreEqual(123.456M, (decimal)(double)melo.UserProperties["myCustomValue"]);
     }
 
@@ -44,15 +47,24 @@ public class TestUserProperties
     public void TestConvertingUserPropertyToBoolean()
     {
         var options = LenientParsing.MOST_LENIENT.GetJsonSerializerOptions();
-        var meloJson = @"{""messlokationsId"": ""DE0123456789012345678901234567890"", ""sparte"": ""STROM"", ""myCustomInfo"": ""some_value_not_covered_by_bo4e"", ""myCustomValue"": ""not a boolean""}";
+        var meloJson =
+            @"{""messlokationsId"": ""DE0123456789012345678901234567890"", ""sparte"": ""STROM"", ""myCustomInfo"": ""some_value_not_covered_by_bo4e"", ""myCustomValue"": ""not a boolean""}";
         var melo = JsonSerializer.Deserialize<Messlokation>(meloJson, options);
         melo.Should().NotBeNull();
         melo.IsValid().Should().BeTrue();
         melo.UserProperties.Should().NotBeEmpty();
-        melo.UserProperties.Should().ContainKey("myCustomValue").WhoseValue.ToString().Should().Be("not a boolean");
+        melo.UserProperties.Should()
+            .ContainKey("myCustomValue")
+            .WhoseValue.ToString()
+            .Should()
+            .Be("not a boolean");
 
         var flagHasBeenSet = melo.SetFlag("myCustomValue", true);
-        flagHasBeenSet.Should().BeTrue(because: "the non-boolean existing value (which is overwritten) should not crash the code");
+        flagHasBeenSet
+            .Should()
+            .BeTrue(
+                because: "the non-boolean existing value (which is overwritten) should not crash the code"
+            );
         melo.TryGetUserProperty("myCustomValue", out bool booleanValue).Should().BeTrue();
         booleanValue.Should().BeTrue();
     }
@@ -66,7 +78,10 @@ public class TestUserProperties
         var melo = JsonSerializer.Deserialize<Messlokation>(meloJson, options);
         Assert.IsTrue(melo.IsValid());
         Assert.IsNotNull(melo.UserProperties);
-        Assert.AreEqual("some_value_not_covered_by_bo4e", melo.UserProperties["myCustomInfo"].ToString());
+        Assert.AreEqual(
+            "some_value_not_covered_by_bo4e",
+            melo.UserProperties["myCustomInfo"].ToString()
+        );
         Assert.AreEqual(123.456M, ((JsonElement)melo.UserProperties["myCustomValue"]).GetDecimal());
     }
 
@@ -83,13 +98,22 @@ public class TestUserProperties
         Assert.IsFalse(melo.UserPropertyEquals("myCustomValue", "asd")); // the cast exception is catched inside.
         Assert.IsFalse(melo.UserPropertyEquals("some_key_that_was_not_found", "asd"));
         Assert.IsTrue(
-            melo.EvaluateUserProperty<string, bool, Messlokation>("myCustomInfo", up => !string.IsNullOrEmpty(up)));
+            melo.EvaluateUserProperty<string, bool, Messlokation>(
+                "myCustomInfo",
+                up => !string.IsNullOrEmpty(up)
+            )
+        );
 
         melo.UserProperties = null;
         Assert.IsFalse(melo.UserPropertyEquals("there are no user properties", "asd"));
         Assert.IsFalse(melo.TryGetUserProperty("there are no user properties", out string _));
-        Assert.ThrowsException<ArgumentNullException>(() =>
-            melo.EvaluateUserProperty<string, bool, Messlokation>("there are no user properties", _ => default));
+        Assert.ThrowsException<ArgumentNullException>(
+            () =>
+                melo.EvaluateUserProperty<string, bool, Messlokation>(
+                    "there are no user properties",
+                    _ => default
+                )
+        );
         Assert.IsFalse(melo.UserPropertyEquals("myNullProp", true));
     }
 
@@ -114,7 +138,7 @@ public class TestUserProperties
         var melo = new Messlokation
         {
             MesslokationsId = "DE0123456789012345678901234567890",
-            Sparte = Sparte.STROM
+            Sparte = Sparte.STROM,
         };
         Assert.IsNull(melo.UserProperties);
         Assert.IsFalse(melo.HasFlagSet("foo"));
@@ -144,7 +168,7 @@ public class TestUserProperties
         var melo = new Messlokation
         {
             MesslokationsId = "DE0123456789012345678901234567890",
-            Sparte = Sparte.STROM
+            Sparte = Sparte.STROM,
         };
         Assert.IsNull(melo.UserProperties);
 
@@ -171,7 +195,7 @@ public class TestUserProperties
         var melo = new Messlokation
         {
             MesslokationsId = "DE0123456789012345678901234567890",
-            Sparte = Sparte.STROM
+            Sparte = Sparte.STROM,
         };
         Assert.IsNull(melo.UserProperties);
 
@@ -213,12 +237,14 @@ public class TestUserProperties
             Zaehlergroesse = Geraetemerkmal.GAS_G6,
             UserProperties = new Dictionary<string, object>
             {
-                {"zaehlergroesse", "Foo"},
-                {"BoTyp", "Dei Mudder"}
-            }
+                { "zaehlergroesse", "Foo" },
+                { "BoTyp", "Dei Mudder" },
+            },
         };
         zaehlerWithAmbiguousProperties.HasAmbiguousUserProperties().Should().BeTrue();
-        zaehlerWithAmbiguousProperties.GetAmbiguousUserPropertiesKeys().Should()
+        zaehlerWithAmbiguousProperties
+            .GetAmbiguousUserPropertiesKeys()
+            .Should()
             .Contain("zaehlergroesse")
             .And.Contain("BoTyp")
             .And.HaveCount(2);
@@ -226,7 +252,7 @@ public class TestUserProperties
         var zaehlerWithoutAmbiguousProperties = new Zaehler()
         {
             Zaehlergroesse = Geraetemerkmal.GAS_G6,
-            UserProperties = new Dictionary<string, object> { { "foo", "bar" } }
+            UserProperties = new Dictionary<string, object> { { "foo", "bar" } },
         };
         zaehlerWithoutAmbiguousProperties.HasAmbiguousUserProperties().Should().BeFalse();
         zaehlerWithoutAmbiguousProperties.GetAmbiguousUserPropertiesKeys().Should().BeEmpty();
@@ -240,12 +266,14 @@ public class TestUserProperties
             Hausnummer = "17",
             UserProperties = new Dictionary<string, object>
             {
-                {"Hausnummer", 423},
-                {"Postleitzahl", "foobar"},
-            }
+                { "Hausnummer", 423 },
+                { "Postleitzahl", "foobar" },
+            },
         };
         adresseWithAmbiguousProperties.HasAmbiguousUserProperties().Should().BeTrue();
-        adresseWithAmbiguousProperties.GetAmbiguousUserPropertiesKeys().Should()
+        adresseWithAmbiguousProperties
+            .GetAmbiguousUserPropertiesKeys()
+            .Should()
             .Contain("Hausnummer")
             .And.Contain("Postleitzahl")
             .And.HaveCount(2);
@@ -253,7 +281,7 @@ public class TestUserProperties
         var adresseWithoutAmbiguousProperties = new Adresse()
         {
             Hausnummer = "17",
-            UserProperties = new Dictionary<string, object> { { "foo", "bar" } }
+            UserProperties = new Dictionary<string, object> { { "foo", "bar" } },
         };
         adresseWithoutAmbiguousProperties.HasAmbiguousUserProperties().Should().BeFalse();
         adresseWithoutAmbiguousProperties.GetAmbiguousUserPropertiesKeys().Should().BeEmpty();

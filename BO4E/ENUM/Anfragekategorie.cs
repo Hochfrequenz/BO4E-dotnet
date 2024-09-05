@@ -1,7 +1,6 @@
+using System.Runtime.Serialization;
 using BO4E.meta;
 using ProtoBuf;
-
-using System.Runtime.Serialization;
 
 namespace BO4E.ENUM;
 
@@ -16,7 +15,6 @@ public enum Anfragekategorie
     [EnumMember(Value = "PROZESSDATENBERICHT")]
     PROZESSDATENBERICHT,
 
-
     /// <summary>GERAETEUEBERNAHME</summary>
     /// <remarks>Z10</remarks>
     [EnumMember(Value = "GERAETEUEBERNAHME")]
@@ -26,7 +24,6 @@ public enum Anfragekategorie
     /// <remarks>Z11</remarks>
     [EnumMember(Value = "WEITERVERPFLICHTUNG_BETRIEB_MELO")]
     WEITERVERPFLICHTUNG_BETRIEB_MELO,
-
 
     /// <summary>AENDERUNG_MELO</summary>
     /// <remarks>Z12</remarks>
@@ -88,6 +85,5 @@ public enum Anfragekategorie
     /// <remarks>Z52</remarks>
     [ProtoEnum(Name = "Anfragekategorie_ENTSPERRUNG")]
     [EnumMember(Value = "ENTSPERRUNG")]
-    ENTSPERRUNG
-
+    ENTSPERRUNG,
 }

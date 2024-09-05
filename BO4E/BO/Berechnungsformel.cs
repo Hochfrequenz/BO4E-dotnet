@@ -28,6 +28,7 @@ public class Berechnungsformel : BusinessObject
         get => Beginndatum.UtcDateTime;
         set => Beginndatum = DateTime.SpecifyKind(value, DateTimeKind.Utc);
     }
+
     /// <summary>
     /// Der inklusive Zeitpunkt ab dem die Berechnungsformel gültig ist
     /// </summary>

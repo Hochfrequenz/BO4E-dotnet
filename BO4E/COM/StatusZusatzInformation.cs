@@ -26,7 +26,6 @@ public class StatusZusatzInformation : COM
     [ProtoMember(1)]
     public StatusArt? Art { get; set; }
 
-
     /// <summary>
     ///     Enthält die Zusatzinformation Status des angegebenen Wertes
     /// </summary>

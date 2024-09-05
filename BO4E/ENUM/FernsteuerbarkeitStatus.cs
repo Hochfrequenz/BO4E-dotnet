@@ -1,5 +1,4 @@
 using System.Runtime.Serialization;
-
 using ProtoBuf;
 
 namespace BO4E.ENUM;
@@ -35,5 +34,5 @@ public enum FernsteuerbarkeitStatus
     /// <remarks>Z98</remarks>
     [ProtoEnum(Name = nameof(FernsteuerbarkeitStatus) + "_" + nameof(LIEFERANT_FERNSTEUERBAR))]
     [EnumMember(Value = "LIEFERANT_FERNSTEUERBAR")]
-    LIEFERANT_FERNSTEUERBAR
+    LIEFERANT_FERNSTEUERBAR,
 }

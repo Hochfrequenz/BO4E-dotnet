@@ -22,11 +22,7 @@ public class Messprodukt : COM
     public string? MessproduktId { get; set; }
 
     /// <summary>Verwendungungszweck der Werte Marktlokation</summary>
-    [JsonProperty(
-        PropertyName = "verwendungszwecke",
-        Order = 1011,
-        Required = Required.Default
-    )]
+    [JsonProperty(PropertyName = "verwendungszwecke", Order = 1011, Required = Required.Default)]
     [JsonPropertyName("verwendungszwecke")]
     [NonOfficial(NonOfficialCategory.CUSTOMER_REQUIREMENTS)]
     [ProtoMember(1011)]
@@ -42,11 +38,7 @@ public class Messprodukt : COM
     public Verbrauchsart? Verbrauchsart { get; set; }
 
     /// <summary>Stromverbrauchsart/Unterbrechbarkeit Marktlokation</summary>
-    [JsonProperty(
-        PropertyName = "unterbrechbarkeit",
-        Order = 1013,
-        Required = Required.Default
-    )]
+    [JsonProperty(PropertyName = "unterbrechbarkeit", Order = 1013, Required = Required.Default)]
     [JsonPropertyName("unterbrechbarkeit")]
     [NonOfficial(NonOfficialCategory.CUSTOMER_REQUIREMENTS)]
     [ProtoMember(1013)]

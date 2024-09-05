@@ -1,7 +1,6 @@
+using System.Runtime.Serialization;
 using BO4E.BO;
 using BO4E.meta;
-
-using System.Runtime.Serialization;
 
 namespace BO4E.ENUM;
 
@@ -43,7 +42,7 @@ public enum Sperrauftragsverhinderungsgrund
 
     /// <summary>
     /// Ein tatsächlicher Verhinderungsgrund liegt vor, wenn z.B. die MaLo nicht identifizierbar, der Zugang nicht möglich war oder ein Kundenwechsel festgestellt wurde
-    /// Details werden im Freitext <see cref="Auftrag.Bemerkungen"/> vermerkt.        
+    /// Details werden im Freitext <see cref="Auftrag.Bemerkungen"/> vermerkt.
     /// </summary>
     /// <remarks>EBD 0472 A05</remarks>
     [EnumMember(Value = "TATSAECHLICHER_VERHINDERUNGSGRUND")]

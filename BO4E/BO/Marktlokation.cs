@@ -29,8 +29,7 @@ public class Marktlokation : BusinessObject
     /// </summary>
     //[Newtonsoft.Json.JsonIgnore]
     [System.Text.Json.Serialization.JsonIgnore]
-    protected static readonly Regex RegexValidate =
-        new(@"^[1-9][\d]{10}$", RegexOptions.Compiled);
+    protected static readonly Regex RegexValidate = new(@"^[1-9][\d]{10}$", RegexOptions.Compiled);
 
     /// <summary>
     ///     Regular Expression to check if a string consists only of numbers (is numeric)
@@ -67,11 +66,7 @@ public class Marktlokation : BusinessObject
     public Energierichtung? Energierichtung { get; set; }
 
     /// <summary>Kennzeichnung, ob Energie eingespeist oder entnommen (ausgespeist) wird.</summary>
-    [JsonProperty(
-        Required = Required.Default,
-        Order = 13,
-        PropertyName = "bilanzierungsmethode"
-    )]
+    [JsonProperty(Required = Required.Default, Order = 13, PropertyName = "bilanzierungsmethode")]
     [JsonPropertyName("bilanzierungsmethode")]
     [JsonPropertyOrder(13)]
     [ProtoMember(7)]
@@ -107,11 +102,7 @@ public class Marktlokation : BusinessObject
     ///     Codenummer des Netzbetreibers, an dessen Netz diese Marktlokation
     ///     angeschlossen ist.
     /// </summary>
-    [JsonProperty(
-        PropertyName = "netzbetreiberCodeNr",
-        Required = Required.Default,
-        Order = 17
-    )]
+    [JsonProperty(PropertyName = "netzbetreiberCodeNr", Required = Required.Default, Order = 17)]
     [JsonPropertyOrder(17)]
     [JsonPropertyName("netzbetreiberCodeNr")]
     [ProtoMember(11)]
@@ -133,22 +124,14 @@ public class Marktlokation : BusinessObject
     public string? NetzgebietNr { get; set; }
 
     /// <summary>Bilanzierungsgebiet, dem das Netzgebiet zugeordnet ist - im Falle eines Strom Netzes.</summary>
-    [JsonProperty(
-        Required = Required.Default,
-        Order = 20,
-        PropertyName = "bilanzierungsgebiet"
-    )]
+    [JsonProperty(Required = Required.Default, Order = 20, PropertyName = "bilanzierungsgebiet")]
     [JsonPropertyOrder(20)]
     [JsonPropertyName("bilanzierungsgebiet")]
     [ProtoMember(14)]
     public string? Bilanzierungsgebiet { get; set; }
 
     /// <summary>CodeNummer des Grundversorgers, der für diese Marktlokation zuständig ist.</summary>
-    [JsonProperty(
-        PropertyName = "grundversorgerCodeNr",
-        Order = 21,
-        Required = Required.Default
-    )]
+    [JsonProperty(PropertyName = "grundversorgerCodeNr", Order = 21, Required = Required.Default)]
     [JsonPropertyOrder(21)]
     [JsonPropertyName("grundversorgerCodeNr")]
     [ProtoMember(15)]
@@ -203,11 +186,7 @@ public class Marktlokation : BusinessObject
     ///     Flurstück erfolgen. <seealso cref="Katasteradresse" />
     /// </summary>
     [DataCategory(DataCategory.ADDRESS)]
-    [JsonProperty(
-        Required = Required.Default,
-        Order = 26,
-        PropertyName = "katasterinformation"
-    )]
+    [JsonProperty(Required = Required.Default, Order = 26, PropertyName = "katasterinformation")]
     [JsonPropertyOrder(26)]
     [JsonPropertyName("katasterinformation")]
     [ProtoMember(20)]
@@ -394,11 +373,7 @@ public class Marktlokation : BusinessObject
     /// <summary>
     /// Produkt-Daten der Marktlokation
     /// </summary>
-    [JsonProperty(
-        Required = Required.Default,
-        Order = 40,
-        PropertyName = "konfigurationsprodukte"
-    )]
+    [JsonProperty(Required = Required.Default, Order = 40, PropertyName = "konfigurationsprodukte")]
     [JsonPropertyName("konfigurationsprodukte")]
     [ProtoMember(40)]
     [JsonPropertyOrder(40)]
@@ -494,9 +469,7 @@ public class Marktlokation : BusinessObject
 
         if (!RegexNumericString.IsMatch(input))
         {
-            throw new ArgumentException(
-                $"Input '{nameof(input)}' must be numeric was '{input}'"
-            );
+            throw new ArgumentException($"Input '{nameof(input)}' must be numeric was '{input}'");
         }
 
         var oddChecksum = 0;
@@ -544,17 +517,17 @@ public class Marktlokation : BusinessObject
     )
     {
         return base.IsValid()
-               && (!checkId || HasValidId())
-               && (
-                   !checkRegelZone
-                   || (string.IsNullOrWhiteSpace(Regelzone) || Regelzone.IsGermanControlArea())
-               )
-               && (
-                   !checkBilanzierungsgebiet
-                   || (
-                       string.IsNullOrWhiteSpace(Bilanzierungsgebiet)
-                       || Bilanzierungsgebiet.IsValidBilanzierungsGebietId()
-                   )
-               );
+            && (!checkId || HasValidId())
+            && (
+                !checkRegelZone
+                || (string.IsNullOrWhiteSpace(Regelzone) || Regelzone.IsGermanControlArea())
+            )
+            && (
+                !checkBilanzierungsgebiet
+                || (
+                    string.IsNullOrWhiteSpace(Bilanzierungsgebiet)
+                    || Bilanzierungsgebiet.IsValidBilanzierungsGebietId()
+                )
+            );
     }
 }

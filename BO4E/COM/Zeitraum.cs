@@ -30,7 +30,6 @@ public class Zeitraum : COM
     [ProtoMember(4)]
     public decimal? Dauer { get; set; }
 
-
     [System.Text.Json.Serialization.JsonIgnore]
     [Newtonsoft.Json.JsonIgnore]
     [ProtoMember(5, Name = nameof(Startdatum))]
@@ -40,6 +39,7 @@ public class Zeitraum : COM
         get => Startdatum?.UtcDateTime ?? default;
         set => Startdatum = value == default ? null : DateTime.SpecifyKind(value, DateTimeKind.Utc);
     }
+
     /// <summary>Gibt Tag und Uhrzeit (falls vorhanden) an, wann der Zeitraum startet.</summary>
     [JsonProperty(PropertyName = "startdatum", Required = Required.Default)]
     [JsonPropertyName("startdatum")]
@@ -47,7 +47,6 @@ public class Zeitraum : COM
     [ProtoIgnore]
     [Newtonsoft.Json.JsonConverter(typeof(LenientDateTimeConverter))]
     public DateTimeOffset? Startdatum { get; set; }
-
 
     [System.Text.Json.Serialization.JsonIgnore]
     [Newtonsoft.Json.JsonIgnore]
@@ -58,6 +57,7 @@ public class Zeitraum : COM
         get => Enddatum?.UtcDateTime ?? default;
         set => Enddatum = value == default ? null : DateTime.SpecifyKind(value, DateTimeKind.Utc);
     }
+
     /// <summary>Gibt Tag und Uhrzeit (falls vorhanden) an, wann der Zeitraum endet.</summary>
     [JsonProperty(PropertyName = "enddatum", Required = Required.Default)]
     [JsonPropertyName("enddatum")]
@@ -65,7 +65,6 @@ public class Zeitraum : COM
     [ProtoIgnore]
     [Newtonsoft.Json.JsonConverter(typeof(LenientDateTimeConverter))]
     public DateTimeOffset? Enddatum { get; set; }
-
 
     // we disagree with the official bo4e standard that there should be 2xtwo separate properties where one property does contain a date and the other one contains a datetime.
     // we only want datetimes and we already have them present in start- and enddatum above. They are, to be honest, also not ideal because their name ends with "datum".

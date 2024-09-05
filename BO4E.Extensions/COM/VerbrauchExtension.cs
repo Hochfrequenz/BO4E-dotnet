@@ -26,7 +26,7 @@ public static class VerbrauchExtension
 
     /// <summary>
     /// Apply <see cref="Merge(BO4E.COM.Verbrauch,BO4E.COM.Verbrauch)"/> to the provided Verbräuche.
-    /// But remove identical entries that occur in both <paramref name="v1"/> and <paramref name="v2"/> 
+    /// But remove identical entries that occur in both <paramref name="v1"/> and <paramref name="v2"/>
     /// </summary>
     /// <param name="v1"></param>
     /// <param name="v2"></param>
@@ -47,19 +47,33 @@ public static class VerbrauchExtension
     /// <param name="biased"></param>
     /// <returns></returns>
     /// <exception cref="ArgumentException"></exception>
-    public static HashSet<Verbrauch> Merge(this Verbrauch v1, Verbrauch v2, bool redundant, bool biased)
+    public static HashSet<Verbrauch> Merge(
+        this Verbrauch v1,
+        Verbrauch v2,
+        bool redundant,
+        bool biased
+    )
     {
         var result = new HashSet<Verbrauch>();
-        if (v1.Obiskennzahl == v2.Obiskennzahl && v1.Wertermittlungsverfahren == v2.Wertermittlungsverfahren &&
-            v1.Einheit == v2.Einheit)
+        if (
+            v1.Obiskennzahl == v2.Obiskennzahl
+            && v1.Wertermittlungsverfahren == v2.Wertermittlungsverfahren
+            && v1.Einheit == v2.Einheit
+        )
         {
             if (v1.OverlapsWith(v2))
             {
                 // don't wanna deal with time running backwards.
                 //Debug.Assert(v1.enddatum >= v1.startdatum);
                 //Debug.Assert(v2.enddatum >= v2.startdatum);
-                var tr1 = new TimeRange((v1.Startdatum ?? DateTimeOffset.MinValue).UtcDateTime, (v1.Enddatum ?? DateTimeOffset.MinValue).UtcDateTime);
-                var tr2 = new TimeRange((v2.Startdatum ?? DateTimeOffset.MinValue).UtcDateTime, (v2.Enddatum ?? DateTimeOffset.MinValue).UtcDateTime);
+                var tr1 = new TimeRange(
+                    (v1.Startdatum ?? DateTimeOffset.MinValue).UtcDateTime,
+                    (v1.Enddatum ?? DateTimeOffset.MinValue).UtcDateTime
+                );
+                var tr2 = new TimeRange(
+                    (v2.Startdatum ?? DateTimeOffset.MinValue).UtcDateTime,
+                    (v2.Enddatum ?? DateTimeOffset.MinValue).UtcDateTime
+                );
                 var overlap = v1.GetIntersection(v2);
                 if (v1.Einheit.IsExtensive())
                 {
@@ -67,27 +81,36 @@ public static class VerbrauchExtension
                     {
                         Obiskennzahl = v1.Obiskennzahl,
                         Einheit = v1.Einheit,
-                        Wertermittlungsverfahren = v1.Wertermittlungsverfahren
+                        Wertermittlungsverfahren = v1.Wertermittlungsverfahren,
                     };
                     if (redundant)
                     {
                         var exclusiveV1Wert =
-                            (decimal)(tr1.Duration.TotalSeconds - overlap.Duration.TotalSeconds) * v1.Wert /
-                            (decimal)tr1.Duration.TotalSeconds;
+                            (decimal)(tr1.Duration.TotalSeconds - overlap.Duration.TotalSeconds)
+                            * v1.Wert
+                            / (decimal)tr1.Duration.TotalSeconds;
                         var exclusiveV2Wert =
-                            (decimal)(tr2.Duration.TotalSeconds - overlap.Duration.TotalSeconds) * v2.Wert /
-                            (decimal)tr2.Duration.TotalSeconds;
-                        var overlapV1Wert = (decimal)overlap.Duration.TotalSeconds * v1.Wert /
-                                            (decimal)tr1.Duration.TotalSeconds;
-                        var overlapV2Wert = (decimal)overlap.Duration.TotalSeconds * v2.Wert /
-                                            (decimal)tr2.Duration.TotalSeconds;
+                            (decimal)(tr2.Duration.TotalSeconds - overlap.Duration.TotalSeconds)
+                            * v2.Wert
+                            / (decimal)tr2.Duration.TotalSeconds;
+                        var overlapV1Wert =
+                            (decimal)overlap.Duration.TotalSeconds
+                            * v1.Wert
+                            / (decimal)tr1.Duration.TotalSeconds;
+                        var overlapV2Wert =
+                            (decimal)overlap.Duration.TotalSeconds
+                            * v2.Wert
+                            / (decimal)tr2.Duration.TotalSeconds;
                         if (biased)
                         {
                             // biased ==> assume that v2 is contained in v1
                             vmerge.Startdatum = v1.Startdatum;
                             vmerge.Enddatum = v1.Enddatum;
-                            if (exclusiveV1Wert == 0.0M && exclusiveV2Wert == 0.0M &&
-                                overlapV1Wert == overlapV2Wert)
+                            if (
+                                exclusiveV1Wert == 0.0M
+                                && exclusiveV2Wert == 0.0M
+                                && overlapV1Wert == overlapV2Wert
+                            )
                             {
                                 vmerge.Wert = overlapV1Wert;
                             }
@@ -105,7 +128,8 @@ public static class VerbrauchExtension
                     }
                     else
                     {
-                        vmerge.Startdatum = v1.Startdatum < v2.Startdatum ? v1.Startdatum : v2.Startdatum;
+                        vmerge.Startdatum =
+                            v1.Startdatum < v2.Startdatum ? v1.Startdatum : v2.Startdatum;
                         vmerge.Enddatum = v1.Enddatum > v2.Enddatum ? v1.Enddatum : v2.Enddatum;
                         vmerge.Wert = v1.Wert + v2.Wert;
                     }
@@ -121,7 +145,7 @@ public static class VerbrauchExtension
                         Wertermittlungsverfahren = v1.Wertermittlungsverfahren,
                         Startdatum = v1.Startdatum < v2.Startdatum ? v1.Startdatum : v2.Startdatum,
                         Enddatum = new DateTimeOffset(overlap.Start, TimeSpan.Zero),
-                        Wert = v1.Startdatum < v2.Startdatum ? v1.Wert : v2.Wert
+                        Wert = v1.Startdatum < v2.Startdatum ? v1.Wert : v2.Wert,
                     };
                     var vmerge2 = new Verbrauch
                     {
@@ -136,7 +160,8 @@ public static class VerbrauchExtension
                         if (v1.Wert != v2.Wert)
                         {
                             throw new ArgumentException(
-                                $"Data cannot be redundant if values ({v1.Wert}{v1.Einheit} vs. {v2.Wert}{v2.Einheit}) don't match for interval [{vmerge2.Startdatum}, {vmerge2.Enddatum}).");
+                                $"Data cannot be redundant if values ({v1.Wert}{v1.Einheit} vs. {v2.Wert}{v2.Einheit}) don't match for interval [{vmerge2.Startdatum}, {vmerge2.Enddatum})."
+                            );
                         }
 
                         vmerge2.Wert = v1.Wert;
@@ -153,7 +178,7 @@ public static class VerbrauchExtension
                         Wertermittlungsverfahren = v1.Wertermittlungsverfahren,
                         Startdatum = overlap.End,
                         Enddatum = v1.Enddatum > v2.Enddatum ? v1.Enddatum : v2.Enddatum,
-                        Wert = v1.Enddatum > v2.Enddatum ? v1.Wert : v2.Wert
+                        Wert = v1.Enddatum > v2.Enddatum ? v1.Wert : v2.Wert,
                     };
                     result.Add(vmerge1);
                     result.Add(vmerge2);
@@ -170,7 +195,7 @@ public static class VerbrauchExtension
                     Einheit = v1.Einheit,
                     Wertermittlungsverfahren = v1.Wertermittlungsverfahren,
                     Startdatum = start,
-                    Enddatum = stop
+                    Enddatum = stop,
                 };
                 if (v1.Einheit.IsExtensive())
                 {
@@ -204,7 +229,14 @@ public static class VerbrauchExtension
         }
 
         result.RemoveWhere(v =>
-            v.Einheit.IsIntensive() && new TimeRange((v.Startdatum ?? DateTimeOffset.MinValue).DateTime, (v.Enddatum ?? DateTimeOffset.MinValue).DateTime).Duration.TotalMilliseconds == 0);
+            v.Einheit.IsIntensive()
+            && new TimeRange(
+                (v.Startdatum ?? DateTimeOffset.MinValue).DateTime,
+                (v.Enddatum ?? DateTimeOffset.MinValue).DateTime
+            )
+                .Duration
+                .TotalMilliseconds == 0
+        );
         return result;
     }
 
@@ -215,7 +247,10 @@ public static class VerbrauchExtension
     /// <returns></returns>
     public static TimeRange GetTimeRange(this Verbrauch v)
     {
-        return new TimeRange((v.Startdatum ?? DateTimeOffset.MinValue).DateTime, (v.Enddatum ?? DateTimeOffset.MinValue).DateTime);
+        return new TimeRange(
+            (v.Startdatum ?? DateTimeOffset.MinValue).DateTime,
+            (v.Enddatum ?? DateTimeOffset.MinValue).DateTime
+        );
     }
 
     /// <summary>
@@ -224,7 +259,6 @@ public static class VerbrauchExtension
     /// <param name="v"></param>
     /// <returns></returns>
     public static TimeSpan GetDuration(this Verbrauch v) => v.GetTimeRange().Duration;
-
 
     /// <summary>
     ///     De-tangles a list of overlapping Verbrauch entries where entries can be subsets of other entries.
@@ -244,9 +278,9 @@ public static class VerbrauchExtension
     {
         //var filteredInput = KeepShortestSlices(input);
         var resultSet = new HashSet<Verbrauch>();
-        var groups = input.OrderBy(v => (v.Startdatum, v.Wertermittlungsverfahren, v.Obiskennzahl, v.Einheit))
-            .GroupBy(v => new Tuple<Wertermittlungsverfahren?, string, Mengeneinheit>
-            (
+        var groups = input
+            .OrderBy(v => (v.Startdatum, v.Wertermittlungsverfahren, v.Obiskennzahl, v.Einheit))
+            .GroupBy(v => new Tuple<Wertermittlungsverfahren?, string, Mengeneinheit>(
                 v.Wertermittlungsverfahren,
                 v.Obiskennzahl,
                 v.Einheit
@@ -259,7 +293,9 @@ public static class VerbrauchExtension
             // |----x----|--------y--------|
             //var adjacentVerbrauchs = from x in vGroup join y in vGroup on x.enddatum equals y.startdatum select new { x, y };
             var adjacentVerbrauchs =
-                from x in vGroup join y in vGroup on x.Enddatum equals y.Startdatum select new { x, y };
+                from x in vGroup
+                join y in vGroup on x.Enddatum equals y.Startdatum
+                select new { x, y };
             foreach (var av in adjacentVerbrauchs)
             {
                 subResult.Add(av.x);
@@ -270,15 +306,22 @@ public static class VerbrauchExtension
             // |-------------z-------------|
             // ==> delete z from result where z.start == x.start and z.end == y.end
             //var fullyRedundantVerbrauchs = from av in adjacentVerbrauchs join z in vGroup on new { av.x.startdatum, av.y.enddatum } equals new { z.startdatum, z.enddatum } select new { av, z };
-            var fullyRedundantVerbrauchs = from av in adjacentVerbrauchs
-                                           join z in vGroup on new { av.x.Startdatum, av.y.Enddatum } equals new { z.Startdatum, z.Enddatum }
-                                           select new { av, z };
+            var fullyRedundantVerbrauchs =
+                from av in adjacentVerbrauchs
+                join z in vGroup
+                    on new { av.x.Startdatum, av.y.Enddatum } equals new
+                    {
+                        z.Startdatum,
+                        z.Enddatum,
+                    }
+                select new { av, z };
             foreach (var frv in fullyRedundantVerbrauchs)
             {
                 if (frv.av.x.Wert + frv.av.y.Wert != frv.z.Wert)
                 {
                     throw new ArgumentException(
-                        $"Inconsistent data detected: {JsonConvert.SerializeObject(frv.av.x)} + {JsonConvert.SerializeObject(frv.av.y)} ≠ {JsonConvert.SerializeObject(frv.z)}");
+                        $"Inconsistent data detected: {JsonConvert.SerializeObject(frv.av.x)} + {JsonConvert.SerializeObject(frv.av.y)} ≠ {JsonConvert.SerializeObject(frv.z)}"
+                    );
                 }
 
                 subResult.Remove(frv.z);
@@ -314,7 +357,7 @@ public static class VerbrauchExtension
                             Wertermittlungsverfahren = z.Wertermittlungsverfahren,
                             Obiskennzahl = z.Obiskennzahl,
                             Startdatum = new DateTimeOffset(tr.Start, TimeSpan.Zero),
-                            Enddatum = new DateTimeOffset(tr.End, TimeSpan.Zero)
+                            Enddatum = new DateTimeOffset(tr.End, TimeSpan.Zero),
                         };
                         xs.Add(v);
                     }
@@ -322,7 +365,10 @@ public static class VerbrauchExtension
                     var totalXWert = z.Wert - ys.Select(y => y.Wert).Sum();
                     var totalXDuration = xs.Select(x => x.GetDuration().TotalSeconds).Sum();
                     foreach (var x in xs)
-                        x.Wert = totalXWert * (decimal)x.GetDuration().TotalSeconds / (decimal)totalXDuration;
+                        x.Wert =
+                            totalXWert
+                            * (decimal)x.GetDuration().TotalSeconds
+                            / (decimal)totalXDuration;
                     subResult.Remove(z);
                     subResult.UnionWith(xs);
                 }
@@ -361,7 +407,13 @@ public static class VerbrauchExtension
     /// </returns>
     public static bool OverlapsWith(this Verbrauch v1, Verbrauch v2)
     {
-        return v1.OverlapsWith(new TimeRange((v2.Startdatum ?? DateTimeOffset.MinValue).DateTime, (v2.Enddatum ?? DateTimeOffset.MinValue).DateTime, true));
+        return v1.OverlapsWith(
+            new TimeRange(
+                (v2.Startdatum ?? DateTimeOffset.MinValue).DateTime,
+                (v2.Enddatum ?? DateTimeOffset.MinValue).DateTime,
+                true
+            )
+        );
     }
 
     /// <summary>
@@ -372,7 +424,10 @@ public static class VerbrauchExtension
     /// <returns></returns>
     public static bool OverlapsWith(this Verbrauch v1, ITimeRange tr2)
     {
-        return new TimeRange((v1.Startdatum ?? DateTimeOffset.MinValue).DateTime, (v1.Enddatum ?? DateTimeOffset.MinValue).DateTime).OverlapsWith(tr2);
+        return new TimeRange(
+            (v1.Startdatum ?? DateTimeOffset.MinValue).DateTime,
+            (v1.Enddatum ?? DateTimeOffset.MinValue).DateTime
+        ).OverlapsWith(tr2);
     }
 
     /// <summary>
@@ -383,7 +438,10 @@ public static class VerbrauchExtension
     /// <returns></returns>
     public static ITimeRange GetIntersection(this Verbrauch v1, ITimeRange tr2)
     {
-        return new TimeRange((v1.Startdatum ?? DateTimeOffset.MinValue).DateTime, (v1.Enddatum ?? DateTimeOffset.MinValue).DateTime).GetIntersection(tr2);
+        return new TimeRange(
+            (v1.Startdatum ?? DateTimeOffset.MinValue).DateTime,
+            (v1.Enddatum ?? DateTimeOffset.MinValue).DateTime
+        ).GetIntersection(tr2);
     }
 
     /// <summary>
@@ -394,7 +452,12 @@ public static class VerbrauchExtension
     /// <returns></returns>
     public static ITimeRange GetIntersection(this Verbrauch v1, Verbrauch v2)
     {
-        return v1.GetIntersection(new TimeRange((v2.Startdatum ?? DateTimeOffset.MinValue).DateTime, (v2.Enddatum ?? DateTimeOffset.MinValue).DateTime));
+        return v1.GetIntersection(
+            new TimeRange(
+                (v2.Startdatum ?? DateTimeOffset.MinValue).DateTime,
+                (v2.Enddatum ?? DateTimeOffset.MinValue).DateTime
+            )
+        );
     }
 
     /// <summary>
@@ -418,12 +481,18 @@ public static class VerbrauchExtension
         {
             if (x.Startdatum != y.Startdatum)
             {
-                return DateTimeOffset.Compare(x.Startdatum ?? DateTimeOffset.MinValue, y.Startdatum ?? DateTimeOffset.MinValue);
+                return DateTimeOffset.Compare(
+                    x.Startdatum ?? DateTimeOffset.MinValue,
+                    y.Startdatum ?? DateTimeOffset.MinValue
+                );
             }
 
             if (x.Enddatum != y.Enddatum)
             {
-                return DateTimeOffset.Compare(x.Enddatum ?? DateTimeOffset.MinValue, y.Enddatum ?? DateTimeOffset.MinValue);
+                return DateTimeOffset.Compare(
+                    x.Enddatum ?? DateTimeOffset.MinValue,
+                    y.Enddatum ?? DateTimeOffset.MinValue
+                );
             }
 
             return 0;

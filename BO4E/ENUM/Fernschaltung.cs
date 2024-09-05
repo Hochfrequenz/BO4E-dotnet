@@ -11,5 +11,5 @@ public enum Fernschaltung
 
     /// <summary>Z07: nicht vorhanden</summary>
     [EnumMember(Value = "NICHT_VORHANDEN")]
-    NICHT_VORHANDEN
+    NICHT_VORHANDEN,
 }

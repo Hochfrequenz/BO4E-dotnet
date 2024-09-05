@@ -16,7 +16,10 @@ public static class PhysikalischerWertExtension
     /// <param name="pw">physikalischer Wert</param>
     /// <param name="newEinheit">new unit of measurement</param>
     /// <returns>a new instance of PhysikalischerWert having the unit <paramref name="newEinheit" /></returns>
-    public static PhysikalischerWert ConvertToUnit(this PhysikalischerWert pw, Mengeneinheit newEinheit)
+    public static PhysikalischerWert ConvertToUnit(
+        this PhysikalischerWert pw,
+        Mengeneinheit newEinheit
+    )
     {
         var factor = pw.Einheit.GetConversionFactor(newEinheit); // throws all the exceptions.
         return new PhysikalischerWert(factor * pw.Wert, newEinheit);

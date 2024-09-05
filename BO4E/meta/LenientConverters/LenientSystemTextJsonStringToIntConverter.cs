@@ -22,22 +22,26 @@ public class LenientSystemTextJsonStringToIntConverter : JsonConverter<int?>
     /// <param name="typeToConvert"></param>
     /// <param name="options"></param>
     /// <returns></returns>
-    public override int? Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+    public override int? Read(
+        ref Utf8JsonReader reader,
+        Type typeToConvert,
+        JsonSerializerOptions options
+    )
     {
         switch (reader.TokenType)
         {
             case JsonTokenType.Null:
                 return null;
             case JsonTokenType.String:
+            {
+                var numeric = new string(reader.GetString().Where(char.IsDigit).ToArray());
+                if (int.TryParse(numeric, out var intValue))
                 {
-                    var numeric = new string(reader.GetString().Where(char.IsDigit).ToArray());
-                    if (int.TryParse(numeric, out var intValue))
-                    {
-                        return intValue;
-                    }
-
-                    break;
+                    return intValue;
                 }
+
+                break;
+            }
             case JsonTokenType.Number when reader.TryGetInt32(out var int32Value):
                 return int32Value;
             case JsonTokenType.Number when reader.TryGetInt64(out var int64Value):

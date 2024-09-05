@@ -19,7 +19,8 @@ public class PhysikalischerWert : COM
     /// </summary>
     /// <param name="wert">numerischer Wert</param>
     /// <param name="einheit">zugehörige Mengeneinheit</param>
-    public PhysikalischerWert(decimal wert, Mengeneinheit einheit) : this()
+    public PhysikalischerWert(decimal wert, Mengeneinheit einheit)
+        : this()
     {
         Wert = wert;
         Einheit = einheit;
@@ -28,16 +29,15 @@ public class PhysikalischerWert : COM
     /// <summary>
     ///     empty constructor for deserilization
     /// </summary>
-    public PhysikalischerWert()
-    {
-    }
+    public PhysikalischerWert() { }
 
     /// <summary>
     ///     initialise with wert and string for einheit
     /// </summary>
     /// <param name="wert">numerischer wert</param>
     /// <param name="einheitString">zugehörige Einheit als string (case insensitive)</param>
-    public PhysikalischerWert(decimal wert, string einheitString) : this()
+    public PhysikalischerWert(decimal wert, string einheitString)
+        : this()
     {
         Wert = wert;
 

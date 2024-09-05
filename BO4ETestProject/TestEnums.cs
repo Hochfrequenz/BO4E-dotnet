@@ -5,6 +5,7 @@ using FluentAssertions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace TestBO4E;
+
 [TestClass]
 public class TestEnums
 {
@@ -14,7 +15,8 @@ public class TestEnums
         var arbitraryEnumType = typeof(BO4E.ENUM.Abweichungsgrund);
         var enumAssembly = Assembly.GetAssembly(arbitraryEnumType);
         enumAssembly.Should().NotBeNull();
-        var enumTypesWithDuplicateValues = enumAssembly!.GetTypes()
+        var enumTypesWithDuplicateValues = enumAssembly!
+            .GetTypes()
             .Where(t => t.IsEnum)
             .Where(t =>
             {

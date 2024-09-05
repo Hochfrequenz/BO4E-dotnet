@@ -21,16 +21,20 @@ namespace TestBO4E;
 public enum LegacyGasQualitaet
 {
     /// <summary>High Caloric Gas</summary>
-    [EnumMember(Value = "H_GAS")] H_GAS = 1,
+    [EnumMember(Value = "H_GAS")]
+    H_GAS = 1,
 
     /// <summary>Low Caloric Gas</summary>
-    [EnumMember(Value = "L_GAS")] L_GAS = 2,
+    [EnumMember(Value = "L_GAS")]
+    L_GAS = 2,
 
     /// <summary>High Caloric Gas</summary>
-    [EnumMember(Value = "HGAS")] HGAS = 1,
+    [EnumMember(Value = "HGAS")]
+    HGAS = 1,
 
     /// <summary>Low Caloric Gas</summary>
-    [EnumMember(Value = "LGAS")] LGAS = 2,
+    [EnumMember(Value = "LGAS")]
+    LGAS = 2,
 }
 
 public class SomethingWithGasqualitaet
@@ -38,15 +42,10 @@ public class SomethingWithGasqualitaet
     public LegacyGasQualitaet Gasqualitaet { get; set; }
 }
 
-
-
 [TestClass]
 public class TestStringEnumConverter
 {
-    private readonly IList<Mengeneinheit> einheiten = new List<Mengeneinheit>
-    {
-        Mengeneinheit.TAG
-    };
+    private readonly IList<Mengeneinheit> einheiten = new List<Mengeneinheit> { Mengeneinheit.TAG };
 
     [TestMethod]
     public void TestMengeneinheitNewtonsoft()
@@ -60,7 +59,7 @@ public class TestStringEnumConverter
     {
         var options = new JsonSerializerOptions
         {
-            Converters = { new StringNullableEnumConverter() }
+            Converters = { new StringNullableEnumConverter() },
         };
         var jsonString = JsonSerializer.Serialize(einheiten, options);
         Assert.IsTrue(jsonString.Contains("TAG"));
@@ -71,13 +70,15 @@ public class TestStringEnumConverter
     [DataRow(LegacyGasQualitaet.L_GAS)]
     [DataRow(LegacyGasQualitaet.HGAS)]
     [DataRow(LegacyGasQualitaet.H_GAS)]
-    [Ignore("This test/the newtonsoft.json code path just worked accidentally, as a commenter in https://github.com/dotnet/runtime/issues/107296 pointed out")]
+    [Ignore(
+        "This test/the newtonsoft.json code path just worked accidentally, as a commenter in https://github.com/dotnet/runtime/issues/107296 pointed out"
+    )]
     public void Test_Newtonsoft_With_Degenerate_Enum(LegacyGasQualitaet qualiaet)
     {
-        var jsonString = JsonConvert.SerializeObject(new SomethingWithGasqualitaet
-        {
-            Gasqualitaet = qualiaet
-        }, new StringEnumConverter());
+        var jsonString = JsonConvert.SerializeObject(
+            new SomethingWithGasqualitaet { Gasqualitaet = qualiaet },
+            new StringEnumConverter()
+        );
         jsonString.Should().ContainAny("H_GAS", "L_GAS").And.NotContainAny("HGAS", "LGAS");
     }
 
@@ -86,17 +87,16 @@ public class TestStringEnumConverter
     [DataRow(LegacyGasQualitaet.L_GAS)]
     [DataRow(LegacyGasQualitaet.HGAS)] // as of 2024-09-03 both H-GAS test cases fail but both L-GAS test cases pass 🤯
     [DataRow(LegacyGasQualitaet.H_GAS)]
-    [Ignore("this test fails but at least I understand it now: See https://github.com/dotnet/runtime/issues/107296")]
+    [Ignore(
+        "this test fails but at least I understand it now: See https://github.com/dotnet/runtime/issues/107296"
+    )]
     public void Test_System_Text_With_Degenerate_Enum(LegacyGasQualitaet qualiaet)
     {
-        var options = new JsonSerializerOptions
-        {
-            Converters = { new JsonStringEnumConverter() }
-        };
-        var jsonString = JsonSerializer.Serialize(new SomethingWithGasqualitaet
-        {
-            Gasqualitaet = qualiaet
-        }, options);
+        var options = new JsonSerializerOptions { Converters = { new JsonStringEnumConverter() } };
+        var jsonString = JsonSerializer.Serialize(
+            new SomethingWithGasqualitaet { Gasqualitaet = qualiaet },
+            options
+        );
         jsonString.Should().ContainAny("H_GAS", "L_GAS").And.NotContainAny("HGAS", "LGAS");
     }
 
@@ -116,7 +116,10 @@ public class TestStringEnumConverter
     [DataRow("LGAS", Gasqualitaet.L_GAS)]
     [DataRow("L_GAS", Gasqualitaet.L_GAS)]
     [DataRow(null, null)]
-    public void Test_System_Text_Gasqualitaet_Legacy_Converter_With_Nullable_Gasqualitaet(string? jsonValue, Gasqualitaet? expectedGasqualitaet)
+    public void Test_System_Text_Gasqualitaet_Legacy_Converter_With_Nullable_Gasqualitaet(
+        string? jsonValue,
+        Gasqualitaet? expectedGasqualitaet
+    )
     {
         string jsonString;
         if (jsonValue != null)
@@ -128,8 +131,14 @@ public class TestStringEnumConverter
             jsonString = "{\"Foo\": null}";
         }
 
-        var settings = new JsonSerializerOptions { Converters = { new SystemTextGasqualitaetStringEnumConverter() } };
-        var actual = System.Text.Json.JsonSerializer.Deserialize<ClassWithNullableGasqualitaet>(jsonString, settings);
+        var settings = new JsonSerializerOptions
+        {
+            Converters = { new SystemTextGasqualitaetStringEnumConverter() },
+        };
+        var actual = System.Text.Json.JsonSerializer.Deserialize<ClassWithNullableGasqualitaet>(
+            jsonString,
+            settings
+        );
         actual.Should().NotBeNull();
         actual.Foo.Should().Be(expectedGasqualitaet);
 
@@ -142,7 +151,10 @@ public class TestStringEnumConverter
     [DataRow("H_GAS", Gasqualitaet.H_GAS)]
     [DataRow("LGAS", Gasqualitaet.L_GAS)]
     [DataRow("L_GAS", Gasqualitaet.L_GAS)]
-    public void Test_System_Text_Gasqualitaet_Legacy_Converter_With_Non_Nullable_Gasqualitaet(string? jsonValue, Gasqualitaet expectedGasqualitaet)
+    public void Test_System_Text_Gasqualitaet_Legacy_Converter_With_Non_Nullable_Gasqualitaet(
+        string? jsonValue,
+        Gasqualitaet expectedGasqualitaet
+    )
     {
         string jsonString;
         if (jsonValue != null)
@@ -153,8 +165,14 @@ public class TestStringEnumConverter
         {
             jsonString = "{\"Foo\": null}";
         }
-        var settings = new JsonSerializerOptions { Converters = { new SystemTextGasqualitaetStringEnumConverter() } };
-        var actual = System.Text.Json.JsonSerializer.Deserialize<ClassWithNonNullableGasqualitaet>(jsonString, settings);
+        var settings = new JsonSerializerOptions
+        {
+            Converters = { new SystemTextGasqualitaetStringEnumConverter() },
+        };
+        var actual = System.Text.Json.JsonSerializer.Deserialize<ClassWithNonNullableGasqualitaet>(
+            jsonString,
+            settings
+        );
         actual.Should().NotBeNull();
         actual.Foo.Should().Be(expectedGasqualitaet);
 
@@ -168,7 +186,10 @@ public class TestStringEnumConverter
     [DataRow("LGAS", Gasqualitaet.L_GAS)]
     [DataRow("L_GAS", Gasqualitaet.L_GAS)]
     [DataRow(null, null)]
-    public void Test_Newtonsoft_Gasqualitaet_Legacy_Converter_With_Nullable_Gasqualitaet(string? jsonValue, Gasqualitaet? expectedGasqualitaet)
+    public void Test_Newtonsoft_Gasqualitaet_Legacy_Converter_With_Nullable_Gasqualitaet(
+        string? jsonValue,
+        Gasqualitaet? expectedGasqualitaet
+    )
     {
         string jsonString;
         if (jsonValue != null)
@@ -182,9 +203,16 @@ public class TestStringEnumConverter
 
         var settings = new Newtonsoft.Json.JsonSerializerSettings()
         {
-            Converters = { new NewtonsoftGasqualitaetStringEnumConverter(), new StringEnumConverter() }
+            Converters =
+            {
+                new NewtonsoftGasqualitaetStringEnumConverter(),
+                new StringEnumConverter(),
+            },
         };
-        var actual = Newtonsoft.Json.JsonConvert.DeserializeObject<ClassWithNullableGasqualitaet>(jsonString, settings);
+        var actual = Newtonsoft.Json.JsonConvert.DeserializeObject<ClassWithNullableGasqualitaet>(
+            jsonString,
+            settings
+        );
         actual.Should().NotBeNull();
         actual.Foo.Should().Be(expectedGasqualitaet);
 
@@ -197,7 +225,10 @@ public class TestStringEnumConverter
     [DataRow("H_GAS", Gasqualitaet.H_GAS)]
     [DataRow("LGAS", Gasqualitaet.L_GAS)]
     [DataRow("L_GAS", Gasqualitaet.L_GAS)]
-    public void Test_Newtonsoft_Gasqualitaet_Legacy_Converter_With_Non_Nullable_Gasqualitaet(string? jsonValue, Gasqualitaet expectedGasqualitaet)
+    public void Test_Newtonsoft_Gasqualitaet_Legacy_Converter_With_Non_Nullable_Gasqualitaet(
+        string? jsonValue,
+        Gasqualitaet expectedGasqualitaet
+    )
     {
         string jsonString;
         if (jsonValue != null)
@@ -211,9 +242,17 @@ public class TestStringEnumConverter
 
         var settings = new Newtonsoft.Json.JsonSerializerSettings()
         {
-            Converters = { new NewtonsoftGasqualitaetStringEnumConverter(), new StringEnumConverter() }
+            Converters =
+            {
+                new NewtonsoftGasqualitaetStringEnumConverter(),
+                new StringEnumConverter(),
+            },
         };
-        var actual = Newtonsoft.Json.JsonConvert.DeserializeObject<ClassWithNonNullableGasqualitaet>(jsonString, settings);
+        var actual =
+            Newtonsoft.Json.JsonConvert.DeserializeObject<ClassWithNonNullableGasqualitaet>(
+                jsonString,
+                settings
+            );
         actual.Should().NotBeNull();
         actual.Foo.Should().Be(expectedGasqualitaet);
 
@@ -221,15 +260,23 @@ public class TestStringEnumConverter
         reSerializedJsonString.Should().Contain(expectedGasqualitaet.ToString());
     }
 
-
     [TestMethod]
     [DataRow(1, Gasqualitaet.H_GAS)]
     [DataRow(2, Gasqualitaet.L_GAS)]
-    public void Test_SystemText_Gasqualitaet_Legacy_Converter_With_Non_Nullable_Gasqualitaet_Integer(int jsonValue, Gasqualitaet expectedGasqualitaet)
+    public void Test_SystemText_Gasqualitaet_Legacy_Converter_With_Non_Nullable_Gasqualitaet_Integer(
+        int jsonValue,
+        Gasqualitaet expectedGasqualitaet
+    )
     {
         string jsonString = "{\"Foo\": " + jsonValue + "}";
-        var settings = new JsonSerializerOptions { Converters = { new SystemTextGasqualitaetStringEnumConverter() } };
-        var actual = System.Text.Json.JsonSerializer.Deserialize<ClassWithNonNullableGasqualitaet>(jsonString, settings);
+        var settings = new JsonSerializerOptions
+        {
+            Converters = { new SystemTextGasqualitaetStringEnumConverter() },
+        };
+        var actual = System.Text.Json.JsonSerializer.Deserialize<ClassWithNonNullableGasqualitaet>(
+            jsonString,
+            settings
+        );
         actual.Should().NotBeNull();
         actual.Foo.Should().Be(expectedGasqualitaet);
 
@@ -240,14 +287,25 @@ public class TestStringEnumConverter
     [TestMethod]
     [DataRow(1, Gasqualitaet.H_GAS)]
     [DataRow(2, Gasqualitaet.L_GAS)]
-    public void Test_Newtonsoft_Gasqualitaet_Legacy_Converter_With_Non_Nullable_Gasqualitaet_Integer(int jsonValue, Gasqualitaet expectedGasqualitaet)
+    public void Test_Newtonsoft_Gasqualitaet_Legacy_Converter_With_Non_Nullable_Gasqualitaet_Integer(
+        int jsonValue,
+        Gasqualitaet expectedGasqualitaet
+    )
     {
         string jsonString = "{\"Foo\": " + jsonValue + "}";
         var settings = new Newtonsoft.Json.JsonSerializerSettings()
         {
-            Converters = { new NewtonsoftGasqualitaetStringEnumConverter(), new StringEnumConverter() }
+            Converters =
+            {
+                new NewtonsoftGasqualitaetStringEnumConverter(),
+                new StringEnumConverter(),
+            },
         };
-        var actual = Newtonsoft.Json.JsonConvert.DeserializeObject<ClassWithNonNullableGasqualitaet>(jsonString, settings);
+        var actual =
+            Newtonsoft.Json.JsonConvert.DeserializeObject<ClassWithNonNullableGasqualitaet>(
+                jsonString,
+                settings
+            );
         actual.Should().NotBeNull();
         actual.Foo.Should().Be(expectedGasqualitaet);
 
@@ -269,7 +327,10 @@ public class TestStringEnumConverter
     [DataRow("MEHRMINDERMENGENABRECHNUNG", Verwendungszweck.MEHRMINDERMENGENABRECHNUNG)]
     [DataRow("MEHRMINDERMBENGENABRECHNUNG", Verwendungszweck.MEHRMINDERMENGENABRECHNUNG)]
     [DataRow(null, null)]
-    public void Test_System_Text_Verwendungszweck_Legacy_Converter_With_Nullable_Verwendungszweck(string? jsonValue, Verwendungszweck? expectedVerwendungszweck)
+    public void Test_System_Text_Verwendungszweck_Legacy_Converter_With_Nullable_Verwendungszweck(
+        string? jsonValue,
+        Verwendungszweck? expectedVerwendungszweck
+    )
     {
         string jsonString;
         if (jsonValue != null)
@@ -281,8 +342,14 @@ public class TestStringEnumConverter
             jsonString = "{\"Foo\": null}";
         }
 
-        var settings = new JsonSerializerOptions { Converters = { new SystemTextVerwendungszweckStringEnumConverter() } };
-        var actual = System.Text.Json.JsonSerializer.Deserialize<ClassWithNullableVerwendungszweck>(jsonString, settings);
+        var settings = new JsonSerializerOptions
+        {
+            Converters = { new SystemTextVerwendungszweckStringEnumConverter() },
+        };
+        var actual = System.Text.Json.JsonSerializer.Deserialize<ClassWithNullableVerwendungszweck>(
+            jsonString,
+            settings
+        );
         actual.Should().NotBeNull();
         actual.Foo.Should().Be(expectedVerwendungszweck);
 
@@ -293,7 +360,10 @@ public class TestStringEnumConverter
     [TestMethod]
     [DataRow("MEHRMINDERMENGENABRECHNUNG", Verwendungszweck.MEHRMINDERMENGENABRECHNUNG)]
     [DataRow("MEHRMINDERMBENGENABRECHNUNG", Verwendungszweck.MEHRMINDERMENGENABRECHNUNG)]
-    public void Test_System_Text_Gasqualitaet_Legacy_Converter_With_Non_Nullable_Gasqualitaet(string? jsonValue, Verwendungszweck expectedVerwendungszweck)
+    public void Test_System_Text_Gasqualitaet_Legacy_Converter_With_Non_Nullable_Gasqualitaet(
+        string? jsonValue,
+        Verwendungszweck expectedVerwendungszweck
+    )
     {
         string jsonString;
         if (jsonValue != null)
@@ -304,21 +374,30 @@ public class TestStringEnumConverter
         {
             jsonString = "{\"Foo\": null}";
         }
-        var settings = new JsonSerializerOptions { Converters = { new SystemTextVerwendungszweckStringEnumConverter() } };
-        var actual = System.Text.Json.JsonSerializer.Deserialize<ClassWithNonNullableVerwendungszweck>(jsonString, settings);
+        var settings = new JsonSerializerOptions
+        {
+            Converters = { new SystemTextVerwendungszweckStringEnumConverter() },
+        };
+        var actual =
+            System.Text.Json.JsonSerializer.Deserialize<ClassWithNonNullableVerwendungszweck>(
+                jsonString,
+                settings
+            );
         actual.Should().NotBeNull();
         actual.Foo.Should().Be(expectedVerwendungszweck);
 
         var reSerializedJsonString = System.Text.Json.JsonSerializer.Serialize(actual, settings);
         reSerializedJsonString.Should().Contain(expectedVerwendungszweck.ToString());
     }
-
 
     [TestMethod]
     [DataRow("MEHRMINDERMENGENABRECHNUNG", Verwendungszweck.MEHRMINDERMENGENABRECHNUNG)]
     [DataRow("MEHRMINDERMBENGENABRECHNUNG", Verwendungszweck.MEHRMINDERMENGENABRECHNUNG)]
     [DataRow(null, null)]
-    public void Test_Newtonsoft_Verwendungszweck_Legacy_Converter_With_Nullable_Verwendungszweck(string? jsonValue, Verwendungszweck? expectedVerwendungszweck)
+    public void Test_Newtonsoft_Verwendungszweck_Legacy_Converter_With_Nullable_Verwendungszweck(
+        string? jsonValue,
+        Verwendungszweck? expectedVerwendungszweck
+    )
     {
         string jsonString;
         if (jsonValue != null)
@@ -332,9 +411,17 @@ public class TestStringEnumConverter
 
         var settings = new Newtonsoft.Json.JsonSerializerSettings()
         {
-            Converters = { new NewtonsoftVerwendungszweckStringEnumConverter(), new StringEnumConverter() }
+            Converters =
+            {
+                new NewtonsoftVerwendungszweckStringEnumConverter(),
+                new StringEnumConverter(),
+            },
         };
-        var actual = Newtonsoft.Json.JsonConvert.DeserializeObject<ClassWithNullableVerwendungszweck>(jsonString, settings);
+        var actual =
+            Newtonsoft.Json.JsonConvert.DeserializeObject<ClassWithNullableVerwendungszweck>(
+                jsonString,
+                settings
+            );
         actual.Should().NotBeNull();
         actual.Foo.Should().Be(expectedVerwendungszweck);
 
@@ -345,14 +432,25 @@ public class TestStringEnumConverter
     [TestMethod]
     [DataRow("MEHRMINDERMENGENABRECHNUNG", Verwendungszweck.MEHRMINDERMENGENABRECHNUNG)]
     [DataRow("MEHRMINDERMBENGENABRECHNUNG", Verwendungszweck.MEHRMINDERMENGENABRECHNUNG)]
-    public void Test_Newtonsoft_Verwendungszweck_Legacy_Converter_With_Non_Nullable_Verwendungszweck(string? jsonValue, Verwendungszweck expectedVerwendungszweck)
+    public void Test_Newtonsoft_Verwendungszweck_Legacy_Converter_With_Non_Nullable_Verwendungszweck(
+        string? jsonValue,
+        Verwendungszweck expectedVerwendungszweck
+    )
     {
         string jsonString = "{\"Foo\": \"" + jsonValue + "\"}";
         var settings = new Newtonsoft.Json.JsonSerializerSettings()
         {
-            Converters = { new NewtonsoftVerwendungszweckStringEnumConverter(), new StringEnumConverter() }
+            Converters =
+            {
+                new NewtonsoftVerwendungszweckStringEnumConverter(),
+                new StringEnumConverter(),
+            },
         };
-        var actual = Newtonsoft.Json.JsonConvert.DeserializeObject<ClassWithNonNullableVerwendungszweck>(jsonString, settings);
+        var actual =
+            Newtonsoft.Json.JsonConvert.DeserializeObject<ClassWithNonNullableVerwendungszweck>(
+                jsonString,
+                settings
+            );
         actual.Should().NotBeNull();
         actual.Foo.Should().Be(expectedVerwendungszweck);
 
@@ -361,12 +459,29 @@ public class TestStringEnumConverter
     }
 
     [TestMethod]
-    [DataRow((int)Verwendungszweck.MEHRMINDERMENGENABRECHNUNG, Verwendungszweck.MEHRMINDERMENGENABRECHNUNG)]
-    public void Test_SystemText_Verwendungszweck_Legacy_Converter_With_Non_Nullable_Verwendungszweck_Integer(int jsonValue, Verwendungszweck expectedVerwendungszweck)
+    [DataRow(
+        (int)Verwendungszweck.MEHRMINDERMENGENABRECHNUNG,
+        Verwendungszweck.MEHRMINDERMENGENABRECHNUNG
+    )]
+    public void Test_SystemText_Verwendungszweck_Legacy_Converter_With_Non_Nullable_Verwendungszweck_Integer(
+        int jsonValue,
+        Verwendungszweck expectedVerwendungszweck
+    )
     {
         string jsonString = "{\"Foo\": " + jsonValue + "}";
-        var settings = new JsonSerializerOptions { Converters = { new SystemTextVerwendungszweckStringEnumConverter(), new JsonStringEnumConverter() } };
-        var actual = System.Text.Json.JsonSerializer.Deserialize<ClassWithNonNullableVerwendungszweck>(jsonString, settings);
+        var settings = new JsonSerializerOptions
+        {
+            Converters =
+            {
+                new SystemTextVerwendungszweckStringEnumConverter(),
+                new JsonStringEnumConverter(),
+            },
+        };
+        var actual =
+            System.Text.Json.JsonSerializer.Deserialize<ClassWithNonNullableVerwendungszweck>(
+                jsonString,
+                settings
+            );
         actual.Should().NotBeNull();
         actual.Foo.Should().Be(expectedVerwendungszweck);
 
@@ -375,20 +490,33 @@ public class TestStringEnumConverter
     }
 
     [TestMethod]
-    [DataRow((int)Verwendungszweck.MEHRMINDERMENGENABRECHNUNG, Verwendungszweck.MEHRMINDERMENGENABRECHNUNG)]
-    public void Test_Newtonsoft_Verwendungszweck_Legacy_Converter_With_Non_Nullable_Verwendungszweck_Integer(int jsonValue, Verwendungszweck expectedVerwendungszweck)
+    [DataRow(
+        (int)Verwendungszweck.MEHRMINDERMENGENABRECHNUNG,
+        Verwendungszweck.MEHRMINDERMENGENABRECHNUNG
+    )]
+    public void Test_Newtonsoft_Verwendungszweck_Legacy_Converter_With_Non_Nullable_Verwendungszweck_Integer(
+        int jsonValue,
+        Verwendungszweck expectedVerwendungszweck
+    )
     {
         string jsonString = "{\"Foo\": " + jsonValue + "}";
         var settings = new Newtonsoft.Json.JsonSerializerSettings()
         {
-            Converters = { new NewtonsoftVerwendungszweckStringEnumConverter(), new StringEnumConverter() }
+            Converters =
+            {
+                new NewtonsoftVerwendungszweckStringEnumConverter(),
+                new StringEnumConverter(),
+            },
         };
-        var actual = Newtonsoft.Json.JsonConvert.DeserializeObject<ClassWithNonNullableVerwendungszweck>(jsonString, settings);
+        var actual =
+            Newtonsoft.Json.JsonConvert.DeserializeObject<ClassWithNonNullableVerwendungszweck>(
+                jsonString,
+                settings
+            );
         actual.Should().NotBeNull();
         actual.Foo.Should().Be(expectedVerwendungszweck);
 
         var reSerializedJsonString = Newtonsoft.Json.JsonConvert.SerializeObject(actual, settings);
         reSerializedJsonString.Should().Contain(expectedVerwendungszweck.ToString());
     }
-
 }

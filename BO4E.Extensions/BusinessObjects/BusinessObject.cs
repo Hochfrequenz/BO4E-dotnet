@@ -14,7 +14,8 @@ public static class BusinessObjectExtensions
     /// <typeparam name="T">Type of the BusinessObject</typeparam>
     /// <param name="source">the BO that is copied</param>
     /// <returns>the deep copy</returns>
-    public static T DeepClone<T>(this T source) where T : BusinessObject
+    public static T DeepClone<T>(this T source)
+        where T : BusinessObject
     {
         return JsonConvert.DeserializeObject<T>(JsonConvert.SerializeObject(source));
     }

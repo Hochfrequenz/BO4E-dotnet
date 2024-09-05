@@ -30,14 +30,21 @@ public class NonOfficialAttribute : Attribute
     /// <param name="enums"></param>
     public NonOfficialAttribute(params object[] enums)
     {
-        if (enums.Any(r => r.GetType().BaseType != typeof(Enum) || r.GetType() != typeof(NonOfficialCategory)))
+        if (
+            enums.Any(r =>
+                r.GetType().BaseType != typeof(Enum) || r.GetType() != typeof(NonOfficialCategory)
+            )
+        )
         {
-            throw new ArgumentException($"You must only pass enums of type {nameof(NonOfficialCategory)}",
-                nameof(enums));
+            throw new ArgumentException(
+                $"You must only pass enums of type {nameof(NonOfficialCategory)}",
+                nameof(enums)
+            );
         }
 
         Mapping = new HashSet<Enum>();
-        foreach (Enum e in enums) Mapping.Add(e);
+        foreach (Enum e in enums)
+            Mapping.Add(e);
     }
 
     /// <summary>

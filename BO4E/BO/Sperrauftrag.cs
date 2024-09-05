@@ -43,7 +43,6 @@ public class Sperrauftrag : Auftrag
     [JsonPropertyName("sperrauftragsverhinderungsgrund")]
     public Sperrauftragsverhinderungsgrund? Sperrauftragsverhinderungsgrund { get; set; }
 
-
     /*
     /// <summary>
     /// True, falls der Netzbetreiber die Ansicht des MSB teilt, dass sich gesperrt werden darf.

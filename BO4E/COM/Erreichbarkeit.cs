@@ -1,7 +1,5 @@
 using System.Text.Json.Serialization;
-
 using Newtonsoft.Json;
-
 using ProtoBuf;
 
 namespace BO4E.COM;
@@ -34,7 +32,11 @@ public class Erreichbarkeit : COM
     public Zeitfenster? MittwochErreichbarkeit { get; set; }
 
     /// <summary>Erreichbarkeit am Donnerstag</summary>
-    [JsonProperty(PropertyName = "donnerstagErreichbarkeit", Required = Required.Default, Order = 6)]
+    [JsonProperty(
+        PropertyName = "donnerstagErreichbarkeit",
+        Required = Required.Default,
+        Order = 6
+    )]
     [JsonPropertyName("donnerstagErreichbarkeit")]
     [ProtoMember(6)]
     [JsonPropertyOrder(6)]

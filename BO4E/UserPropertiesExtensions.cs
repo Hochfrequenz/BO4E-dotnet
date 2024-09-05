@@ -1,10 +1,8 @@
-using BO4E.meta;
-
-using Newtonsoft.Json.Linq;
-
 using System;
 using System.Collections.Generic;
 using System.Text.Json;
+using BO4E.meta;
+using Newtonsoft.Json.Linq;
 
 namespace BO4E;
 
@@ -30,8 +28,12 @@ public static class UserPropertiesExtensions
     /// <param name="value">default if false is returned, the stored value otherwise</param>
     /// <returns>true if found</returns>
     /// <exception cref="ArgumentNullException">iff <paramref name="userPropertyKey" /> is null or whitespace</exception>
-    public static bool TryGetUserProperty<TUserProperty, TParent>(this TParent parent, string userPropertyKey,
-        out TUserProperty value) where TParent : IUserProperties
+    public static bool TryGetUserProperty<TUserProperty, TParent>(
+        this TParent parent,
+        string userPropertyKey,
+        out TUserProperty value
+    )
+        where TParent : IUserProperties
     {
         var up = parent.UserProperties;
         if (string.IsNullOrWhiteSpace(userPropertyKey))
@@ -70,13 +72,16 @@ public static class UserPropertiesExtensions
                 default:
                     try
                     {
-                        value = JsonSerializer.Deserialize<TUserProperty>(((JsonElement)upToken).GetRawText(),
-                            Defaults.JsonSerializerDefaultOptions);
+                        value = JsonSerializer.Deserialize<TUserProperty>(
+                            ((JsonElement)upToken).GetRawText(),
+                            Defaults.JsonSerializerDefaultOptions
+                        );
                     }
                     catch (JsonException)
                     {
                         throw new FormatException(
-                            $"Could not convert {((JsonElement)upToken).GetRawText()} to {typeof(TUserProperty).Name}");
+                            $"Could not convert {((JsonElement)upToken).GetRawText()} to {typeof(TUserProperty).Name}"
+                        );
                     }
 
                     break;
@@ -106,10 +111,17 @@ public static class UserPropertiesExtensions
     /// </param>
     /// <returns>the value stored in the userproperty or the default <paramref name="defaultValue" /></returns>
     /// <exception cref="ArgumentNullException">iff <paramref name="userPropertyKey" /> is null or whitespace</exception>
-    public static TUserProperty GetUserProperty<TUserProperty, TParent>(this TParent parent, string userPropertyKey,
-        TUserProperty defaultValue) where TParent : IUserProperties
+    public static TUserProperty GetUserProperty<TUserProperty, TParent>(
+        this TParent parent,
+        string userPropertyKey,
+        TUserProperty defaultValue
+    )
+        where TParent : IUserProperties
     {
-        if (parent != null && parent.TryGetUserProperty(userPropertyKey, out TUserProperty actualValue))
+        if (
+            parent != null
+            && parent.TryGetUserProperty(userPropertyKey, out TUserProperty actualValue)
+        )
         {
             return actualValue;
         }
@@ -130,8 +142,12 @@ public static class UserPropertiesExtensions
     /// <param name="parent">object implementing <see cref="IUserProperties" /></param>
     /// <param name="value">Value of the property</param>
     /// <returns></returns>
-    public static void SetUserProperty<TUserProperty, TParent>(this TParent parent, string userPropertyKey,
-        TUserProperty value) where TParent : IUserProperties
+    public static void SetUserProperty<TUserProperty, TParent>(
+        this TParent parent,
+        string userPropertyKey,
+        TUserProperty value
+    )
+        where TParent : IUserProperties
     {
         // if user properties don't exist already, create them
         if (parent.UserProperties == null)
@@ -193,8 +209,13 @@ public static class UserPropertiesExtensions
     ///     <paramref name="userPropertyKey" /> == <paramref name="other" />
     /// </returns>
     /// <exception cref="ArgumentNullException">iff <paramref name="userPropertyKey" /> is null or whitespace</exception>
-    public static bool UserPropertyEquals<TUserProperty, TParent>(this TParent parent, string userPropertyKey,
-        TUserProperty other, bool ignoreWrongType = true) where TParent : IUserProperties
+    public static bool UserPropertyEquals<TUserProperty, TParent>(
+        this TParent parent,
+        string userPropertyKey,
+        TUserProperty other,
+        bool ignoreWrongType = true
+    )
+        where TParent : IUserProperties
     {
         if (parent.UserProperties == null)
         {
@@ -203,7 +224,9 @@ public static class UserPropertiesExtensions
 
         try
         {
-            return parent.EvaluateUserProperty<TUserProperty, bool, TParent>(userPropertyKey, value =>
+            return parent.EvaluateUserProperty<TUserProperty, bool, TParent>(
+                userPropertyKey,
+                value =>
                 {
                     if (value == null && other != null)
                     {
@@ -232,7 +255,10 @@ public static class UserPropertiesExtensions
     /// <returns>result of <paramref name="evaluation" /> if the key exists, default otherwise</returns>
     /// <exception cref="ArgumentNullException">iff <paramref name="userPropertyKey" /> is null or whitespace</exception>
     public static TEvaluationResult EvaluateUserProperty<TUserProperty, TEvaluationResult, TParent>(
-        this TParent parent, string userPropertyKey, Func<TUserProperty, TEvaluationResult> evaluation)
+        this TParent parent,
+        string userPropertyKey,
+        Func<TUserProperty, TEvaluationResult> evaluation
+    )
         where TParent : IUserProperties
     {
         var up = parent.UserProperties;
@@ -295,7 +321,10 @@ public static class UserPropertiesExtensions
 
         try
         {
-            if (parent.TryGetUserProperty<bool?, TParent>(flagKey, out var existingValue) && existingValue == flagValue.Value)
+            if (
+                parent.TryGetUserProperty<bool?, TParent>(flagKey, out var existingValue)
+                && existingValue == flagValue.Value
+            )
             {
                 return false;
             }

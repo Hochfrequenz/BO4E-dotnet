@@ -1,7 +1,5 @@
 using System;
-
 using BO4E.COM;
-
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace TestBO4E;

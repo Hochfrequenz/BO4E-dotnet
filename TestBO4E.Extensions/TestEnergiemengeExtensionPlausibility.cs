@@ -16,7 +16,9 @@ public class TestEnergiemengeExtensionPlausibility
     [TestMethod]
     public void TestPlausibilityReportGenerationSomeCustomer()
     {
-        foreach (var boFile in Directory.GetFiles("Energiemenge/plausibility", "somecustomer*.json"))
+        foreach (
+            var boFile in Directory.GetFiles("Energiemenge/plausibility", "somecustomer*.json")
+        )
         {
             JObject json;
             using (var r = new StreamReader(boFile))
@@ -31,11 +33,15 @@ public class TestEnergiemengeExtensionPlausibility
                     throw new ArgumentException($"Test file {boFile} has no key '{key}'.");
                 }
 
-            var emReference = JsonConvert.DeserializeObject<Energiemenge>(json["reference"].ToString());
+            var emReference = JsonConvert.DeserializeObject<Energiemenge>(
+                json["reference"].ToString()
+            );
             var emOther = JsonConvert.DeserializeObject<Energiemenge>(json["other"].ToString());
 
             var prActual = emReference.GetPlausibilityReport(emOther);
-            var prExpected = JsonConvert.DeserializeObject<PlausibilityReport>(json["expectedResult"].ToString());
+            var prExpected = JsonConvert.DeserializeObject<PlausibilityReport>(
+                json["expectedResult"].ToString()
+            );
             //Assert.AreEqual(prExpected, prActual);
         }
     }

@@ -23,8 +23,10 @@ public class CompletenessReport : Report, IComparable<CompletenessReport>
     /// <summary>
     ///     matches a OBIS-Kennzahl that stands for an intelligentes messsystem for power.
     /// </summary>
-    private static readonly Regex imsysRegex = new Regex(@"(1)-(65):((?:[1-8]|99))\.((?:6|8|9|29))\.([0-9]{1,2})",
-        RegexOptions.Compiled);
+    private static readonly Regex imsysRegex = new Regex(
+        @"(1)-(65):((?:[1-8]|99))\.((?:6|8|9|29))\.([0-9]{1,2})",
+        RegexOptions.Compiled
+    );
 
     /// <summary>
     ///     all information like e.g. <see cref="Coverage" /> is normalised to this reference time frame.
@@ -55,7 +57,11 @@ public class CompletenessReport : Report, IComparable<CompletenessReport>
     /// <summary>
     ///     <see cref="Verbrauch.Wertermittlungsverfahren" />
     /// </summary>
-    [JsonProperty(PropertyName = "wertermittlungsverfahren", Required = Required.Default, Order = 7)]
+    [JsonProperty(
+        PropertyName = "wertermittlungsverfahren",
+        Required = Required.Default,
+        Order = 7
+    )]
     public Wertermittlungsverfahren? Wertermittlungsverfahren { get; set; }
 
     /// <summary>
@@ -109,10 +115,15 @@ public class CompletenessReport : Report, IComparable<CompletenessReport>
 
         if (ReferenceTimeFrame != null && other.ReferenceTimeFrame != null)
         {
-            if (ReferenceTimeFrame.Startdatum.HasValue && other.ReferenceTimeFrame.Startdatum.HasValue)
+            if (
+                ReferenceTimeFrame.Startdatum.HasValue
+                && other.ReferenceTimeFrame.Startdatum.HasValue
+            )
             {
-                return Comparer<DateTimeOffset>.Default.Compare(ReferenceTimeFrame.Startdatum.Value,
-                    other.ReferenceTimeFrame.Startdatum.Value);
+                return Comparer<DateTimeOffset>.Default.Compare(
+                    ReferenceTimeFrame.Startdatum.Value,
+                    other.ReferenceTimeFrame.Startdatum.Value
+                );
             }
 
             if (ReferenceTimeFrame.Startdatum.HasValue)
@@ -133,7 +144,11 @@ public class CompletenessReport : Report, IComparable<CompletenessReport>
     /// <param name="headerLine">Shows header of columns in return string?</param>
     /// <param name="lineTerminator">This value goes to end of every line. By default is "\\n"</param>
     /// <returns></returns>
-    public string ToCSV(string separator = ";", bool headerLine = true, string lineTerminator = "\\n")
+    public string ToCSV(
+        string separator = ";",
+        bool headerLine = true,
+        string lineTerminator = "\\n"
+    )
     {
         var builder = new StringBuilder();
         if (headerLine)
@@ -152,7 +167,7 @@ public class CompletenessReport : Report, IComparable<CompletenessReport>
                 "Zeitbereich in dem kein wahrer Wert vorhanden ist bis",
                 "Anzahl fehlende Werte",
                 "Prozentuale Vollständigkeit",
-                "Status"
+                "Status",
             };
             builder.Append(string.Join(separator, headerColumns) + lineTerminator);
         }
@@ -160,7 +175,7 @@ public class CompletenessReport : Report, IComparable<CompletenessReport>
         var columns = new List<string>
         {
             ReferenceTimeFrame.Startdatum.Value.ToString("yyyy-MM-ddTHH:mm:ssZ"),
-            ReferenceTimeFrame.Enddatum.Value.ToString("yyyy-MM-ddTHH:mm:ssZ")
+            ReferenceTimeFrame.Enddatum.Value.ToString("yyyy-MM-ddTHH:mm:ssZ"),
         };
 
         if (Messlokation.ValidateId(LokationsId))
@@ -287,7 +302,11 @@ public class CompletenessReport : Report, IComparable<CompletenessReport>
         /// <summary>
         ///     Wertermittlungsverfahren (<see cref="Verbrauch.Wertermittlungsverfahren" />) to be taken into account.
         /// </summary>
-        [JsonProperty(PropertyName = "wertermittlungsverfahren", Required = Required.Default, Order = 8)]
+        [JsonProperty(
+            PropertyName = "wertermittlungsverfahren",
+            Required = Required.Default,
+            Order = 8
+        )]
         public Wertermittlungsverfahren? Wertermittlungsverfahren { get; set; }
 
         /// <summary>

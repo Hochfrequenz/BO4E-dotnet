@@ -87,5 +87,5 @@ public enum BoTyp
 
     /// <summary>1</summary>
     [EnumMember(Value = "ANFRAGE")]
-    ANFRAGE
+    ANFRAGE,
 }

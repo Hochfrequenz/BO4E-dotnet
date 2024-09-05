@@ -69,10 +69,7 @@ public class TestAbstractDeserialization
             json = JObject.Parse(jsonString);
         }
 
-        var settings = new JsonSerializerSettings
-        {
-            TypeNameHandling = TypeNameHandling.Objects
-        };
+        var settings = new JsonSerializerSettings { TypeNameHandling = TypeNameHandling.Objects };
         var maloString = json["input"].ToString();
         var malo = JsonConvert.DeserializeObject<Marktlokation>(maloString, settings);
         Assert.IsNotNull(malo);
@@ -103,5 +100,5 @@ public class TestAbstractDeserialization
         Assert.IsInstanceOfType(bo, typeof(Marktlokation));
     }
 
-    // no typename handling test in .NET as this is a JsonConvert feature 
+    // no typename handling test in .NET as this is a JsonConvert feature
 }

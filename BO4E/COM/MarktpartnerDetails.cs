@@ -1,21 +1,19 @@
-using BO4E.meta;
-
-using Newtonsoft.Json;
-
-using ProtoBuf;
-
 using System;
 using System.Text.Json.Serialization;
+using BO4E.meta;
+using Newtonsoft.Json;
+using ProtoBuf;
 
 namespace BO4E.COM;
 
 [Obsolete(
-    "This class has been renamed to COM." + nameof(MarktpartnerDetails) + " to avoid further naming confusion.",
-    true)]
+    "This class has been renamed to COM."
+        + nameof(MarktpartnerDetails)
+        + " to avoid further naming confusion.",
+    true
+)]
 #pragma warning disable CS1591 // Missing XML comment for publicly visible type or member
-public class Marktrolle : MarktpartnerDetails
-{
-}
+public class Marktrolle : MarktpartnerDetails { }
 
 #pragma warning restore CS1591 // Missing XML comment for publicly visible type or member
 

@@ -34,7 +34,9 @@ public abstract class CentralEuropeStandardTime
         using var jsonReader = new StreamReader(stream);
         var jsonString = jsonReader.ReadToEnd();
         //Console.WriteLine(jsonString);
-        _CentralEuropeStandardTimezoneInfo = JsonConvert.DeserializeObject<TimeZoneInfo>(jsonString);
+        _CentralEuropeStandardTimezoneInfo = JsonConvert.DeserializeObject<TimeZoneInfo>(
+            jsonString
+        );
     }
 
     /// <summary>

@@ -9,9 +9,11 @@ public enum Steuerkennzeichen
     /// <remarks>Soll verwendet werden, wenn weder <see cref="UST_7"/> noch <see cref="UST_16"/> noch <see cref="UST_19"/> anwendbar sind.</remarks>
     [EnumMember(Value = "UST_SONDER")]
     UST_SONDER,
+
     /// <summary>Umsatzsteuer 19%</summary>
     [EnumMember(Value = "UST_19")]
     UST_19,
+
     /// <summary>Umsatzsteuer 16%</summary>
     [EnumMember(Value = "UST_16")]
     UST_16,
@@ -27,6 +29,7 @@ public enum Steuerkennzeichen
     /// <summary>Vorsteuer 19%</summary>
     [EnumMember(Value = "VST_19")]
     VST_19,
+
     /// <summary>Vorsteuer 16%</summary>
     [EnumMember(Value = "VST_16")]
     VST_16,

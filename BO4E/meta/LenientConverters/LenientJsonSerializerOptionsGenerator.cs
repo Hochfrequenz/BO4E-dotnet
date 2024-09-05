@@ -1,9 +1,9 @@
-using BO4E.BO;
 using System;
 using System.Collections.Generic;
 using System.Text.Encodings.Web;
 using System.Text.Json;
 using System.Text.Json.Serialization;
+using BO4E.BO;
 
 namespace BO4E.meta.LenientConverters;
 
@@ -29,14 +29,16 @@ public static class LenientSystemTextJsonParsingExtensions
     /// <param name="lenient"></param>
     /// <param name="userPropertiesWhiteList"></param>
     /// <returns></returns>
-    public static JsonSerializerOptions GetJsonSerializerOptions(this LenientParsing lenient,
-        HashSet<string> userPropertiesWhiteList)
+    public static JsonSerializerOptions GetJsonSerializerOptions(
+        this LenientParsing lenient,
+        HashSet<string> userPropertiesWhiteList
+    )
     {
         var settings = new JsonSerializerOptions
         {
             PropertyNameCaseInsensitive = true,
             NumberHandling = JsonNumberHandling.AllowReadingFromString,
-            Encoder = JavaScriptEncoder.UnsafeRelaxedJsonEscaping
+            Encoder = JavaScriptEncoder.UnsafeRelaxedJsonEscaping,
         };
         settings.Converters.Add(new AutoNumberToStringConverter());
         settings.Converters.Add(new VertragsConverter());
@@ -56,17 +58,37 @@ public static class LenientSystemTextJsonParsingExtensions
                     case LenientParsing.DATE_TIME:
                         if (lenient.HasFlag(LenientParsing.SET_INITIAL_DATE_IF_NULL))
                         {
-                            settings.Converters.Add(new LenientSystemTextJsonDateTimeConverter(new DateTimeOffset()));
-                            settings.Converters.Add(new LenientSystemTextJsonNullableDateTimeConverter(new DateTimeOffset()));
-                            settings.Converters.Add(new LenientSystemTextJsonDateTimeOffsetConverter(new DateTimeOffset()));
-                            settings.Converters.Add(new LenientSystemTextJsonNullableDateTimeOffsetConverter(new DateTimeOffset()));
+                            settings.Converters.Add(
+                                new LenientSystemTextJsonDateTimeConverter(new DateTimeOffset())
+                            );
+                            settings.Converters.Add(
+                                new LenientSystemTextJsonNullableDateTimeConverter(
+                                    new DateTimeOffset()
+                                )
+                            );
+                            settings.Converters.Add(
+                                new LenientSystemTextJsonDateTimeOffsetConverter(
+                                    new DateTimeOffset()
+                                )
+                            );
+                            settings.Converters.Add(
+                                new LenientSystemTextJsonNullableDateTimeOffsetConverter(
+                                    new DateTimeOffset()
+                                )
+                            );
                         }
                         else
                         {
                             settings.Converters.Add(new LenientSystemTextJsonDateTimeConverter());
-                            settings.Converters.Add(new LenientSystemTextJsonDateTimeOffsetConverter());
-                            settings.Converters.Add(new LenientSystemTextJsonNullableDateTimeConverter());
-                            settings.Converters.Add(new LenientSystemTextJsonNullableDateTimeOffsetConverter());
+                            settings.Converters.Add(
+                                new LenientSystemTextJsonDateTimeOffsetConverter()
+                            );
+                            settings.Converters.Add(
+                                new LenientSystemTextJsonNullableDateTimeConverter()
+                            );
+                            settings.Converters.Add(
+                                new LenientSystemTextJsonNullableDateTimeOffsetConverter()
+                            );
                         }
 
                         break;
@@ -82,11 +104,11 @@ public static class LenientSystemTextJsonParsingExtensions
                     case LenientParsing.STRING_TO_INT:
                         settings.Converters.Add(new LenientSystemTextJsonStringToIntConverter());
                         break;
-                        // case LenientParsing.EmptyLists:
-                        // converters.Add(new LenientRequiredListConverter());
-                        // break;
+                    // case LenientParsing.EmptyLists:
+                    // converters.Add(new LenientRequiredListConverter());
+                    // break;
 
-                        // no default case because NONE and MOST_LENIENT do not come up with more converters
+                    // no default case because NONE and MOST_LENIENT do not come up with more converters
                 }
             }
         //IContractResolver contractResolver;

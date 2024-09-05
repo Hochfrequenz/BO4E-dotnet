@@ -55,5 +55,5 @@ public enum LenientParsing
     ///     most lenient (all others)
     /// </summary>
     [EnumMember(Value = "MOST_LENIENT")]
-    MOST_LENIENT = ~0
+    MOST_LENIENT = ~0,
 }

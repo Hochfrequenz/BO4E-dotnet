@@ -68,7 +68,7 @@ public class Rechenschritt : COM
     /// gibt an, ob die gemessene Energie an der Messlokation zum Netz fließt(Erzeugung) oder vom Netz wegfließt(Verbrauch).
     /// Entsprechend dieser Aussage sind die zuvor durch die UTILMD ausgetauschten Register der Messlokation in der
     /// Berechnungsformel zu verwenden
-    /// 
+    ///
     /// </summary>
     [JsonProperty(Required = Required.Default, Order = 7, PropertyName = "energieflussrichtung")]
     [JsonPropertyName("energieflussrichtung")]
@@ -86,7 +86,11 @@ public class Rechenschritt : COM
     /// Aufteilungsfaktor Energiemenge
     /// </summary>
     /// <remarks>UTILTS SG9 CCI ZG6</remarks>
-    [JsonProperty(Required = Required.Default, Order = 9, PropertyName = "aufteilungsfaktorEnergiemenge")]
+    [JsonProperty(
+        Required = Required.Default,
+        Order = 9,
+        PropertyName = "aufteilungsfaktorEnergiemenge"
+    )]
     [JsonPropertyName("aufteilungsfaktorEnergiemenge")]
     [ProtoMember(9)]
     public decimal? AufteilungsfaktorEnergiemenge { get; set; }

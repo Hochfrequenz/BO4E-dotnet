@@ -19,5 +19,5 @@ public enum Ausschreibungsstatus
 
     /// <summary>Phase4: Zuschlagserteilung</summary>
     [EnumMember(Value = "PHASE4")]
-    PHASE4
+    PHASE4,
 }

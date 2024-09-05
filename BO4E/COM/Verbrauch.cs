@@ -1,15 +1,12 @@
-using BO4E.ENUM;
-using BO4E.meta;
-using BO4E.meta.LenientConverters;
-
-using Newtonsoft.Json;
-
-using ProtoBuf;
-
 using System;
 using System.Collections.Generic;
 using System.Text.Json;
 using System.Text.Json.Serialization;
+using BO4E.ENUM;
+using BO4E.meta;
+using BO4E.meta.LenientConverters;
+using Newtonsoft.Json;
+using ProtoBuf;
 
 namespace BO4E.COM;
 
@@ -19,7 +16,8 @@ namespace BO4E.COM;
 [ProtoContract]
 public class Verbrauch : COM
 {
-    [ProtoIgnore] internal const string SapProfdecimalsKey = "sap_profdecimals";
+    [ProtoIgnore]
+    internal const string SapProfdecimalsKey = "sap_profdecimals";
 
     /// <summary>
     ///     static serializer options for Verbracuhconverter
@@ -36,11 +34,16 @@ public class Verbrauch : COM
     /// </summary>
     [ProtoIgnore]
     [Obsolete(
-        "This property moved. Use the property BO4E.meta." + nameof(CentralEuropeStandardTime) + "." +
-        nameof(CentralEuropeStandardTime.CentralEuropeStandardTimezoneInfo) + " instead.", true)]
+        "This property moved. Use the property BO4E.meta."
+            + nameof(CentralEuropeStandardTime)
+            + "."
+            + nameof(CentralEuropeStandardTime.CentralEuropeStandardTimezoneInfo)
+            + " instead.",
+        true
+    )]
     // ReSharper disable once InconsistentNaming
-    public static TimeZoneInfo CENTRAL_EUROPE_STANDARD_TIME
-        => CentralEuropeStandardTime.CentralEuropeStandardTimezoneInfo;
+    public static TimeZoneInfo CENTRAL_EUROPE_STANDARD_TIME =>
+        CentralEuropeStandardTime.CentralEuropeStandardTimezoneInfo;
 
     /// <summary>
     ///     Beginn des Zeitraumes, für den der Verbrauch angegeben wird.
@@ -57,6 +60,7 @@ public class Verbrauch : COM
         get => Startdatum?.UtcDateTime ?? default;
         set => Startdatum = value == default ? null : DateTime.SpecifyKind(value, DateTimeKind.Utc);
     }
+
     /// <summary>Gibt Tag und Uhrzeit (falls vorhanden) an, wann der Zeitraum startet.</summary>
     [JsonProperty(PropertyName = "startdatum", Required = Required.Default)]
     [JsonPropertyName("startdatum")]
@@ -64,7 +68,6 @@ public class Verbrauch : COM
     [ProtoIgnore]
     [Newtonsoft.Json.JsonConverter(typeof(LenientDateTimeConverter))]
     public DateTimeOffset? Startdatum { get; set; }
-
 
     [System.Text.Json.Serialization.JsonIgnore]
     [Newtonsoft.Json.JsonIgnore]
@@ -75,6 +78,7 @@ public class Verbrauch : COM
         get => Enddatum?.UtcDateTime ?? default;
         set => Enddatum = value == default ? null : DateTime.SpecifyKind(value, DateTimeKind.Utc);
     }
+
     /// <summary>Gibt Tag und Uhrzeit (falls vorhanden) an, wann der Zeitraum endet.</summary>
     [JsonProperty(PropertyName = "enddatum", Required = Required.Default)]
     [JsonPropertyName("enddatum")]
@@ -87,7 +91,11 @@ public class Verbrauch : COM
     ///     Gibt an, ob es sich um eine PROGNOSE oder eine MESSUNG handelt.
     /// </summary>
     /// <seealso cref="ENUM.Wertermittlungsverfahren" />
-    [JsonProperty(PropertyName = "wertermittlungsverfahren", Required = Required.Default, Order = 5)]
+    [JsonProperty(
+        PropertyName = "wertermittlungsverfahren",
+        Required = Required.Default,
+        Order = 5
+    )]
     [JsonPropertyName("wertermittlungsverfahren")]
     [ProtoMember(5)]
     public Wertermittlungsverfahren? Wertermittlungsverfahren { get; set; }
@@ -102,12 +110,15 @@ public class Verbrauch : COM
     [ProtoMember(10)]
     public Messwertstatus? Messwertstatus { get; set; }
 
-
     /// <summary>
     /// Enthält die Auflistung der STS Segmente Plausibilisierungshinweis, Ersatzwertbildungsverfahren,
     /// Korrekturgrund, Gasqualität, Tarif, Grundlage der Energiemenge
     /// </summary>
-    [JsonProperty(PropertyName = "statuszusatzinformationen", Required = Required.Default, Order = 5)]
+    [JsonProperty(
+        PropertyName = "statuszusatzinformationen",
+        Required = Required.Default,
+        Order = 5
+    )]
     [JsonPropertyName("statuszusatzinformationen")]
     [NonOfficial(NonOfficialCategory.UNSPECIFIED)]
     [ProtoMember(11)]
@@ -164,8 +175,11 @@ public class Verbrauch : COM
     private DateTime _Nutzungszeitpunkt
     {
         get => Nutzungszeitpunkt?.UtcDateTime ?? default;
-        set => Nutzungszeitpunkt = value == default ? null : DateTime.SpecifyKind(value, DateTimeKind.Utc);
+        set =>
+            Nutzungszeitpunkt =
+                value == default ? null : DateTime.SpecifyKind(value, DateTimeKind.Utc);
     }
+
     /// <summary>Wird verwendet, um einen Zählerstand eindeutig einem Prozesszeitpunkt zuzuordnen. Dieser Prozesszeitpunkt kann entweder ein Zeitpunkt einer Stammdatenänderung sein(z. B.bei einem Gerätewechsel, in der die Änderung vor dem Versand des Zählerstandes übermittelt wurde) oder die Bestellung eines Wertes aufgrund eines eingetretenen Ereignisses(z.B. Lieferantenwechsel). Der  Nutzungszeitpunkt ist für den Zählerstand der Zeitpunkt der für die weitere Verarbeitung relevant ist(z.B.Zuordnung bei Empfänger anhand der Zuordnungstupel).</summary>
     [JsonProperty(PropertyName = "nutzungszeitpunkt", Required = Required.Default, Order = 13)]
     [JsonPropertyName("nutzungszeitpunkt")]
@@ -181,8 +195,11 @@ public class Verbrauch : COM
     private DateTime _Ausfuehrungszeitpunkt
     {
         get => Ausfuehrungszeitpunkt?.UtcDateTime ?? default;
-        set => Ausfuehrungszeitpunkt = value == default ? null : DateTime.SpecifyKind(value, DateTimeKind.Utc);
+        set =>
+            Ausfuehrungszeitpunkt =
+                value == default ? null : DateTime.SpecifyKind(value, DateTimeKind.Utc);
     }
+
     /// <summary>Wird verwendet, um einen Zählerstand eindeutig einer tatsächlichen Änderung zuzuordnen, z.B.bei einem Gerätewechsel oder Geräteparameteränderung der tatsächliche Zeitpunkt an dem die Änderung an der Messlokation durchgeführt wurde.Der Nutzungszeitpunkt ist für den Zählerstand der Zeitpunkt der für die weitere Verarbeitung relevant ist(z.B. Zuordnung bei Empfänger anhand der Zuordnungstupel).</summary>
     [JsonProperty(PropertyName = "ausfuehrungszeitpunkt", Required = Required.Default, Order = 14)]
     [JsonPropertyName("ausfuehrungszeitpunkt")]
@@ -190,6 +207,4 @@ public class Verbrauch : COM
     [JsonPropertyOrder(14)]
     [Newtonsoft.Json.JsonConverter(typeof(LenientDateTimeConverter))]
     public DateTimeOffset? Ausfuehrungszeitpunkt { get; set; }
-
-
 }

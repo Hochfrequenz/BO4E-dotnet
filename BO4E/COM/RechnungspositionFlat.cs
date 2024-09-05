@@ -60,9 +60,7 @@ public class RechnungspositionFlat : COM
     /// <summary>
     ///     empty constructor for serialization
     /// </summary>
-    public RechnungspositionFlat()
-    {
-    }
+    public RechnungspositionFlat() { }
 
     /// <inheritdoc cref="Rechnungsposition.Positionsnummer" />
     [JsonProperty(PropertyName = "positionsnummer", Required = Required.Always)]
@@ -79,6 +77,7 @@ public class RechnungspositionFlat : COM
         get => LieferungVon?.UtcDateTime ?? DateTime.MinValue;
         set => LieferungVon = DateTime.SpecifyKind(value, DateTimeKind.Utc);
     }
+
     /// <inheritdoc cref="Rechnungsposition.LieferungVon" />
     [JsonProperty(PropertyName = "lieferungVon", Required = Required.Default)]
     [JsonPropertyName("lieferungVon")]
@@ -95,6 +94,7 @@ public class RechnungspositionFlat : COM
         get => LieferungBis?.UtcDateTime ?? DateTime.MinValue;
         set => LieferungBis = DateTime.SpecifyKind(value, DateTimeKind.Utc);
     }
+
     /// <inheritdoc cref="Rechnungsposition.LieferungBis" />
     [JsonProperty(PropertyName = "lieferungBis", Required = Required.Default)]
     [JsonPropertyName("lieferungBis")]
@@ -214,15 +214,21 @@ public class RechnungspositionFlat : COM
                 Wert = PreisWert,
                 Einheit = PreisEinheit,
                 Bezugswert = PreisBezugswert,
-                Status = PreisStatus ?? Preisstatus.VORLAEUFIG // poor default choice
+                Status =
+                    PreisStatus
+                    ?? Preisstatus.VORLAEUFIG // poor default choice
+                ,
             },
             PositionsMenge = new Menge
             {
                 Einheit = PositionsMengeEinheit ?? Mengeneinheit.KWH, // poor default choice
-                Wert = PositionsMengeWert ?? 0.0M // poor default choice
+                Wert =
+                    PositionsMengeWert
+                    ?? 0.0M // poor default choice
+                ,
             },
             Guid = Guid,
-            Status = Status
+            Status = Status,
         };
         return result;
     }

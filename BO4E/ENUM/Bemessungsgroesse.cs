@@ -1,6 +1,5 @@
-using ProtoBuf;
-
 using System.Runtime.Serialization;
+using ProtoBuf;
 
 namespace BO4E.ENUM;
 
@@ -65,5 +64,5 @@ public enum Bemessungsgroesse
     /// <summary>Darstellung einer Stückzahl</summary>
     [ProtoEnum(Name = nameof(Bemessungsgroesse) + "_" + nameof(ANZAHL))]
     [EnumMember(Value = "ANZAHL")]
-    ANZAHL
+    ANZAHL,
 }

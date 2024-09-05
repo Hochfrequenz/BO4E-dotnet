@@ -18,10 +18,8 @@ public class TestEnergyIdentificationCodeExtensions
     [DataRow("", false)]
     [DataRow(null, false)]
     [DataRow("soooasdasdmk", false)]
-    [DataRow("11XRWENET12345-2",
-        true)] // example from section 7 https://eepublicdownloads.entsoe.eu/clean-documents/EDI/Library/cim_based/02%20EIC%20Code%20implementation%20guide_final.pdf
-    [DataRow("11XRWENET12345-3",
-        false)] // example from section 7 https://eepublicdownloads.entsoe.eu/clean-documents/EDI/Library/cim_based/02%20EIC%20Code%20implementation%20guide_final.pdf
+    [DataRow("11XRWENET12345-2", true)] // example from section 7 https://eepublicdownloads.entsoe.eu/clean-documents/EDI/Library/cim_based/02%20EIC%20Code%20implementation%20guide_final.pdf
+    [DataRow("11XRWENET12345-3", false)] // example from section 7 https://eepublicdownloads.entsoe.eu/clean-documents/EDI/Library/cim_based/02%20EIC%20Code%20implementation%20guide_final.pdf
     // other examples taken from https://www.entsoe.eu/data/energy-identification-codes-eic/eic-approved-codes/
     [DataRow("10X1001A1001A361", true)] // TENNET_TSO
     [DataRow("10X1001A1001A360", false)] // TENNET_TSO with wrong check sum

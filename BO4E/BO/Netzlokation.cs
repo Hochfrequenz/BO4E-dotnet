@@ -38,11 +38,7 @@ public class Netzlokation : BusinessObject
     /// <summary>
     /// Netzanschlussleistungsmenge der Netzlokation
     /// </summary>
-    [JsonProperty(
-        Required = Required.Default,
-        Order = 12,
-        PropertyName = "netzanschlussleistung"
-    )]
+    [JsonProperty(Required = Required.Default, Order = 12, PropertyName = "netzanschlussleistung")]
     [JsonPropertyOrder(12)]
     [JsonPropertyName("netzanschlussleistung")]
     [ProtoMember(6)]
@@ -93,11 +89,7 @@ public class Netzlokation : BusinessObject
     /// <summary>
     /// Produkt-Daten der Netzlokation
     /// </summary>
-    [JsonProperty(
-        Required = Required.Default,
-        Order = 17,
-        PropertyName = "konfigurationsprodukte"
-    )]
+    [JsonProperty(Required = Required.Default, Order = 17, PropertyName = "konfigurationsprodukte")]
     [JsonPropertyName("konfigurationsprodukte")]
     [ProtoMember(11)]
     [JsonPropertyOrder(17)]
@@ -107,11 +99,7 @@ public class Netzlokation : BusinessObject
     /// <summary>
     /// Eigenschaft des Messstellenbetreiber an der Lokation
     /// </summary>
-    [JsonProperty(
-        Required = Required.Default,
-        Order = 18,
-        PropertyName = "eigenschaftMSBLokation"
-    )]
+    [JsonProperty(Required = Required.Default, Order = 18, PropertyName = "eigenschaftMSBLokation")]
     [JsonPropertyName("eigenschaftMSBLokation")]
     [ProtoMember(12)]
     [JsonPropertyOrder(18)]

@@ -1,10 +1,7 @@
-using BO4E.meta;
-
-using Newtonsoft.Json;
-
-using ProtoBuf;
-
 using System.Text.Json.Serialization;
+using BO4E.meta;
+using Newtonsoft.Json;
+using ProtoBuf;
 
 namespace BO4E.COM;
 
@@ -50,5 +47,4 @@ public class Tagesparameter : COM
     [JsonPropertyName("herausgeber")]
     [ProtoMember(6)]
     public string? Herausgeber { get; set; }
-
 }

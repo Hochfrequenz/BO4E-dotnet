@@ -42,7 +42,7 @@ public class TestMaLoMeLoId
             MarktlokationsId = "1235678901",
             Sparte = Sparte.STROM,
             Energierichtung = Energierichtung.AUSSP,
-            Regelzone = null
+            Regelzone = null,
         };
         Assert.IsFalse(malo.IsValid()); // because the obligatory bilanzierungsmethode is not set
         malo.Bilanzierungsmethode = Bilanzierungsmethode.SLP;

@@ -7,5 +7,5 @@ public enum Gueltigkeitstyp
 {
     /// <summary>Ein so eingeschränktes Merkmal gilt nicht mit den angegebenen Werten</summary>
     [EnumMember(Value = "NICHT_IN")]
-    NICHT_IN
+    NICHT_IN,
 }

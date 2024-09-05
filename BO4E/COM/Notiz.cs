@@ -20,8 +20,8 @@ public class Notiz : COM
     /// </summary>
     [Newtonsoft.Json.JsonIgnore]
     [System.Text.Json.Serialization.JsonIgnore]
-    private static readonly Regex TrailingMinusRegex = new(@"\r?(?:\\n|\n)?-*$", RegexOptions.Compiled);
-
+    private static readonly Regex TrailingMinusRegex =
+        new(@"\r?(?:\\n|\n)?-*$", RegexOptions.Compiled);
 
     private string _inhalt;
 
@@ -33,7 +33,6 @@ public class Notiz : COM
     [ProtoMember(3)]
     public string Autor { get; set; }
 
-
     [System.Text.Json.Serialization.JsonIgnore]
     [Newtonsoft.Json.JsonIgnore]
     [ProtoMember(4, Name = nameof(Zeitpunkt))]
@@ -43,6 +42,7 @@ public class Notiz : COM
         get => Zeitpunkt.UtcDateTime;
         set => Zeitpunkt = DateTime.SpecifyKind(value, DateTimeKind.Utc);
     }
+
     /// <summary>
     ///     Zeitpunkt zu dem die Notiz angelegt wurde
     /// </summary>

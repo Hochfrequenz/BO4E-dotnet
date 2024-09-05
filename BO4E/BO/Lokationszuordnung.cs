@@ -12,10 +12,8 @@ namespace BO4E.BO;
 /// Messlokationen, Netzlokationen, technische/steuerbaren Ressourcen an einer Lokation vorhanden sind;
 /// </summary>
 [ProtoContract]
-
 public class Lokationszuordnung : BusinessObject
 {
-
     /// <summary>
     /// Liste mit IDs der referenzierten Marktlokationen
     /// </summary>
@@ -71,7 +69,6 @@ public class Lokationszuordnung : BusinessObject
     // Instead of COM.Zeitspanne (bo4e-python)
     public List<Zeitraum>? Gueltigkeit { get; set; }
 
-
     /// <summary>
     /// Verknüpfungsrichtung z.B. Malo-Melo
     /// </summary>
@@ -90,5 +87,4 @@ public class Lokationszuordnung : BusinessObject
     [ProtoMember(18)]
     [BoKey]
     public string? LokationsbuendelCode { get; set; }
-
 }

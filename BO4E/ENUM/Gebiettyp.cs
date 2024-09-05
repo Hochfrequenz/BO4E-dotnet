@@ -39,5 +39,5 @@ public enum Gebiettyp
 
     /// <summary>Versorgungsgebiet</summary>
     [EnumMember(Value = "VERSORGUNGSGEBIET")]
-    VERSORGUNGSGEBIET
+    VERSORGUNGSGEBIET,
 }

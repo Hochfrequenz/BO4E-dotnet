@@ -18,11 +18,7 @@ public static class BenachrichtigungExtension
     /// <returns></returns>
     public static bool Has(this BO.Benachrichtigung b, string key, string value)
     {
-        return Has(b, new GenericStringStringInfo
-        {
-            KeyColumn = key,
-            Value = value
-        });
+        return Has(b, new GenericStringStringInfo { KeyColumn = key, Value = value });
     }
 
     /// <summary>
@@ -73,8 +69,14 @@ public static class BenachrichtigungExtension
     ///     true if there's an info object with given key <paramref name="keyName" /> of type <typeparamref name="T" />
     ///     fulfilling <paramref name="predicate" /> or there's no such property but <paramref name="passByDefault" /> is true
     /// </returns>
-    public static bool Has<T>(this BO.Benachrichtigung b, string keyName, Predicate<T> predicate,
-        bool passByDefault = true, TypeConverter typeConverter = null) where T : IComparable
+    public static bool Has<T>(
+        this BO.Benachrichtigung b,
+        string keyName,
+        Predicate<T> predicate,
+        bool passByDefault = true,
+        TypeConverter typeConverter = null
+    )
+        where T : IComparable
     {
         if (!b.Has(keyName))
         {
@@ -94,9 +96,7 @@ public static class BenachrichtigungExtension
                     return predicate(value);
                 }
             }
-            catch (NotSupportedException)
-            {
-            }
+            catch (NotSupportedException) { }
 
         return false;
     }
@@ -108,7 +108,10 @@ public static class BenachrichtigungExtension
     /// <param name="b">Benachrichtigung</param>
     /// <param name="overwriteExistingKeys">set true to overwrite userProperties with same key</param>
     // ToDo: make method generic MoveInfosTouserProperties<boT>(...)
-    public static void MoveInfosToUserProperties(this BO.Benachrichtigung b, bool overwriteExistingKeys = false)
+    public static void MoveInfosToUserProperties(
+        this BO.Benachrichtigung b,
+        bool overwriteExistingKeys = false
+    )
     {
         if (b.Infos != null && b.Infos.Count > 0)
         {
@@ -124,8 +127,7 @@ public static class BenachrichtigungExtension
                     b.UserProperties.Remove(info.KeyColumn);
                 }
 
-                b.UserProperties.Add(info.KeyColumn,
-                    info.Value); // might throw exception if key exists and !overwriteExistingKeys. That's ok.
+                b.UserProperties.Add(info.KeyColumn, info.Value); // might throw exception if key exists and !overwriteExistingKeys. That's ok.
             }
 
             b.Infos = null; // set to null after all elements have been moved

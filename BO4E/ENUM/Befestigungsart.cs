@@ -23,5 +23,5 @@ public enum Befestigungsart
 
     /// <summary>Z32</summary>
     [EnumMember(Value = "ZWEISTUTZEN")]
-    ZWEISTUTZEN
+    ZWEISTUTZEN,
 }

@@ -43,5 +43,5 @@ public enum Ausschreibungsportal
 
     /// <summary>dtad.de</summary>
     [EnumMember(Value = "DTAD")]
-    DTAD
+    DTAD,
 }

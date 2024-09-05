@@ -1,8 +1,8 @@
 using System;
 using System.Text.Json;
+using System.Text.RegularExpressions;
 using BO4E.ENUM;
 using EnumsNET;
-using System.Text.RegularExpressions;
 
 namespace BO4E.meta.LenientConverters;
 
@@ -44,7 +44,8 @@ public class LenientSystemTextGeraetemerkmalGasConverter
     /// <summary>
     /// https://regex101.com/r/dAUAHL/1
     /// </summary>
-    private static readonly Regex GasPrefixRegex = new(@"^(?<praefix>(?:GAS_)?)(?<rest>.+)$", RegexOptions.Compiled);
+    private static readonly Regex GasPrefixRegex =
+        new(@"^(?<praefix>(?:GAS_)?)(?<rest>.+)$", RegexOptions.Compiled);
 
     /// <summary>
     /// <inheritdoc cref="System.Text.Json.Serialization.JsonConverter{T}.Write"/>
@@ -109,7 +110,8 @@ public class LenientSystemTextNullableGeraetemerkmalGasConverter
     /// <summary>
     /// https://regex101.com/r/dAUAHL/1
     /// </summary>
-    private static readonly Regex GasPrefixRegex = new(@"^(?<praefix>(?:GAS_)?)(?<rest>.+)$", RegexOptions.Compiled);
+    private static readonly Regex GasPrefixRegex =
+        new(@"^(?<praefix>(?:GAS_)?)(?<rest>.+)$", RegexOptions.Compiled);
 
     /// <summary>
     /// <inheritdoc cref="System.Text.Json.Serialization.JsonConverter{T}.Write"/>

@@ -15,8 +15,9 @@ public class LenientDateTimeConverter : IsoDateTimeConverter
 {
     private readonly List<(string, bool)> _allowedDatetimeFormats =
     [
-        ("yyyy-MM-ddTHH:mm:sszzzz", true)
+        ("yyyy-MM-ddTHH:mm:sszzzz", true),
     ];
+
     // basic structure copied from https://stackoverflow.com/a/33172735/10009545
 
     private readonly DateTimeOffset? _defaultDateTime;
@@ -33,9 +34,8 @@ public class LenientDateTimeConverter : IsoDateTimeConverter
     /// <summary>
     ///     initialize using no default datetime
     /// </summary>
-    public LenientDateTimeConverter() : this(null)
-    {
-    }
+    public LenientDateTimeConverter()
+        : this(null) { }
 
     /// <inheritdoc cref="JsonConverter.CanWrite" />
     public override bool CanWrite => false;
@@ -44,14 +44,18 @@ public class LenientDateTimeConverter : IsoDateTimeConverter
     public override bool CanConvert(Type objectType)
     {
         return objectType == typeof(DateTimeOffset)
-               || objectType == typeof(DateTimeOffset?)
-               || objectType == typeof(DateTime)
-               || objectType == typeof(DateTime?);
+            || objectType == typeof(DateTimeOffset?)
+            || objectType == typeof(DateTime)
+            || objectType == typeof(DateTime?);
     }
 
     /// <inheritdoc cref="JsonConverter.ReadJson(JsonReader, Type, object, JsonSerializer)" />
-    public override object ReadJson(JsonReader reader, Type objectType, object existingValue,
-        JsonSerializer serializer)
+    public override object ReadJson(
+        JsonReader reader,
+        Type objectType,
+        object existingValue,
+        JsonSerializer serializer
+    )
     {
         string rawDate;
         switch (reader.Value)
@@ -73,14 +77,28 @@ public class LenientDateTimeConverter : IsoDateTimeConverter
         // First try to parse the date string as is (in case it is correctly formatted)
         if (objectType == typeof(DateTimeOffset) || objectType == typeof(DateTimeOffset?))
         {
-            if (DateTimeOffset.TryParse(rawDate, CultureInfo.CurrentCulture, DateTimeStyles.AssumeUniversal, out var dateTimeOffset))
+            if (
+                DateTimeOffset.TryParse(
+                    rawDate,
+                    CultureInfo.CurrentCulture,
+                    DateTimeStyles.AssumeUniversal,
+                    out var dateTimeOffset
+                )
+            )
             {
                 return dateTimeOffset;
             }
 
             foreach (var (dtf, asUniversal) in _allowedDatetimeFormats)
-                if (DateTimeOffset.TryParseExact(rawDate, dtf, CultureInfo.InvariantCulture,
-                        asUniversal ? DateTimeStyles.AssumeUniversal : DateTimeStyles.None, out dateTimeOffset))
+                if (
+                    DateTimeOffset.TryParseExact(
+                        rawDate,
+                        dtf,
+                        CultureInfo.InvariantCulture,
+                        asUniversal ? DateTimeStyles.AssumeUniversal : DateTimeStyles.None,
+                        out dateTimeOffset
+                    )
+                )
                 {
                     return dateTimeOffset;
                 }
@@ -92,8 +110,17 @@ public class LenientDateTimeConverter : IsoDateTimeConverter
                 return dateTime;
             }
 
-            if (_allowedDatetimeFormats.Any(dtf => DateTime.TryParseExact(rawDate, dtf.Item1,
-                    CultureInfo.InvariantCulture, DateTimeStyles.None, out dateTime)))
+            if (
+                _allowedDatetimeFormats.Any(dtf =>
+                    DateTime.TryParseExact(
+                        rawDate,
+                        dtf.Item1,
+                        CultureInfo.InvariantCulture,
+                        DateTimeStyles.None,
+                        out dateTime
+                    )
+                )
+            )
             {
                 return dateTime;
             }
@@ -114,8 +141,10 @@ public class LenientDateTimeConverter : IsoDateTimeConverter
         {
             return base.ReadJson(reader, objectType, existingValue, serializer);
         }
-        catch (FormatException fe) when (fe.Message ==
-                                         "The UTC representation of the date '0001-01-01T00:00:00' falls outside the year range 1-9999.")
+        catch (FormatException fe)
+            when (fe.Message
+                == "The UTC representation of the date '0001-01-01T00:00:00' falls outside the year range 1-9999."
+            )
         {
             if (objectType == typeof(DateTime))
             {
@@ -129,8 +158,10 @@ public class LenientDateTimeConverter : IsoDateTimeConverter
 
             return DateTimeOffset.MinValue;
         }
-        catch (ArgumentOutOfRangeException ae) when (ae.Message ==
-                                                     "The UTC time represented when the offset is applied must be between year 0 and 10,000. (Parameter 'offset')")
+        catch (ArgumentOutOfRangeException ae)
+            when (ae.Message
+                == "The UTC time represented when the offset is applied must be between year 0 and 10,000. (Parameter 'offset')"
+            )
         {
             if (objectType == typeof(DateTime))
             {

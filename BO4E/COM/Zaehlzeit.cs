@@ -1,10 +1,8 @@
+using System.Text.Json.Serialization;
 using BO4E.ENUM;
 using BO4E.meta;
-
 using Newtonsoft.Json;
-
 using ProtoBuf;
-using System.Text.Json.Serialization;
 
 namespace BO4E.COM;
 
@@ -45,7 +43,11 @@ public class Zaehlzeit : COM
     /// <summary>
     ///     Ermittlung Leistungsmaximum
     /// </summary>
-    [JsonProperty(PropertyName = "ermittlungLeistungsmaximum", Order = 7, Required = Required.Default)]
+    [JsonProperty(
+        PropertyName = "ermittlungLeistungsmaximum",
+        Order = 7,
+        Required = Required.Default
+    )]
     [JsonPropertyName("ermittlungLeistungsmaximum")]
     [JsonPropertyOrder(7)]
     [ProtoMember(7)]

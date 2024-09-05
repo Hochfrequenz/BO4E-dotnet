@@ -41,5 +41,5 @@ public enum Bearbeitungsstatus
     ///     Benachrichtigung ist auf Wunsch des Users standardmäßig ausgeblendet.
     /// </summary>
     [EnumMember(Value = "IGNORIERT")]
-    IGNORIERT
+    IGNORIERT,
 }

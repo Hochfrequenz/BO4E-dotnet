@@ -1,6 +1,5 @@
-using ProtoBuf;
-
 using System.Runtime.Serialization;
+using ProtoBuf;
 
 namespace BO4E.ENUM;
 
@@ -17,5 +16,5 @@ public enum BerichtStatus
     /// <summary>Fehler im Bericht</summary>
     [ProtoEnum(Name = "BerichtStatus_FEHLER")]
     [EnumMember(Value = "FEHLER")]
-    FEHLER
+    FEHLER,
 }
