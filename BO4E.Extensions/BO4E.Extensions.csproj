@@ -11,7 +11,7 @@
     <PackageId>Hochfrequenz.BO4E.Extensions</PackageId>
     <Authors>Hochfrequenz Unternehmensberatung GmbH</Authors>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-    <LangVersion>9</LangVersion>
+    <LangVersion>13</LangVersion>
     <TargetFramework>net6.0</TargetFramework>
   </PropertyGroup>
 

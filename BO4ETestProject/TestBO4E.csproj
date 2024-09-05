@@ -12,6 +12,8 @@
         <StartupObject />
 
         <RootNamespace>TestBO4E-dotnet</RootNamespace>
+
+        <LangVersion>13</LangVersion>
     </PropertyGroup>
 
     <ItemGroup>

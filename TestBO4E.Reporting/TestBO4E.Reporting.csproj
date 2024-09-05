@@ -5,6 +5,8 @@
     <RootNamespace>TestBO4E_dotnet_Reporting</RootNamespace>
 
     <IsPackable>false</IsPackable>
+
+    <LangVersion>13</LangVersion>
   </PropertyGroup>
 
   <ItemGroup>

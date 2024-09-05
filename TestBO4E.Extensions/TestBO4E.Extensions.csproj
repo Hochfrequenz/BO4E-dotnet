@@ -5,6 +5,8 @@
     <RootNamespace>TestBO4E_dotnet_Extensions</RootNamespace>
 
     <IsPackable>false</IsPackable>
+
+    <LangVersion>13</LangVersion>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
