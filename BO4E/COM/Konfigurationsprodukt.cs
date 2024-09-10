@@ -14,7 +14,7 @@ namespace BO4E.COM;
 public class Konfigurationsprodukt : COM
 {
     /// <summary>
-    /// Die Konfigurationsprodukt-Code für das Objekt
+    /// Der Konfigurationsprodukt-Code für das Objekt
     /// </summary>
     [JsonProperty(Required = Required.Default, Order = 1, PropertyName = "produktcode")]
     [JsonPropertyOrder(1)]
@@ -51,5 +51,15 @@ public class Konfigurationsprodukt : COM
     [JsonPropertyName("marktpartner")]
     [ProtoMember(4)]
     [NonOfficial(NonOfficialCategory.CUSTOMER_REQUIREMENTS)]
-    public Marktteilnehmer? Marktpartner { get; set; }
+    public Marktteilnehmer? AuftraggebenderMarktpartner { get; set; }
+    
+    /// <summary>
+    /// Marktpartner für die die Produkt-Daten relevant sind.
+    /// </summary>
+    [JsonProperty(Required = Required.Default, Order = 5, PropertyName = "empfangendeMarktrolle")]
+    [JsonPropertyOrder(5)]
+    [JsonPropertyName("empfangendeMarktrolle")]
+    [ProtoMember(5)]
+    [NonOfficial(NonOfficialCategory.CUSTOMER_REQUIREMENTS)]
+    public ENUM.Marktrolle? EmpfangendeMarktrolle { get; set; }
 }
