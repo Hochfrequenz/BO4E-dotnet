@@ -11,7 +11,7 @@ namespace BO4E.COM;
 public class Konfigurationsprodukt : COM
 {
     /// <summary>
-    /// Die Konfigurationsprodukt-Code für das Objekt
+    /// Der Konfigurationsprodukt-Code für das Objekt
     /// </summary>
     [JsonProperty(Required = Required.Default, Order = 1, PropertyName = "produktcode")]
     [JsonPropertyOrder(1)]
@@ -47,10 +47,22 @@ public class Konfigurationsprodukt : COM
     /// <summary>
     /// Auftraggebender Marktpartner
     /// </summary>
-    [JsonProperty(Required = Required.Default, Order = 4, PropertyName = "marktpartner")]
+    [JsonProperty(Required = Required.Default, Order = 4, PropertyName = "auftraggebenderMarktpartner")]
     [JsonPropertyOrder(4)]
-    [JsonPropertyName("marktpartner")]
+    [JsonPropertyName("auftraggebenderMarktpartner")]
     [ProtoMember(4)]
     [NonOfficial(NonOfficialCategory.CUSTOMER_REQUIREMENTS)]
-    public Marktteilnehmer? Marktpartner { get; set; }
+    public Marktteilnehmer? AuftraggebenderMarktpartner { get; set; }
+    
+    /// <summary>
+    /// Marktrolle des Marktpartners für den die Produkt-Daten relevant sind.
+    /// Dient zur Identifizierung der Marktrolle an der Marktlokation, an die die Daten des
+    /// Konfigurationsprodukts vom MSB der Marktlokation zu übermitteln sind.
+    /// </summary>
+    [JsonProperty(Required = Required.Default, Order = 5, PropertyName = "empfangendeMarktrolle")]
+    [JsonPropertyOrder(5)]
+    [JsonPropertyName("empfangendeMarktrolle")]
+    [ProtoMember(5)]
+    [NonOfficial(NonOfficialCategory.CUSTOMER_REQUIREMENTS)]
+    public ENUM.Marktrolle? EmpfangendeMarktrolle { get; set; }
 }
