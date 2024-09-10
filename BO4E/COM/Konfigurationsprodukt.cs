@@ -55,7 +55,7 @@ public class Konfigurationsprodukt : COM
     public Marktteilnehmer? AuftraggebenderMarktpartner { get; set; }
     
     /// <summary>
-    /// Marktpartner für die die Produkt-Daten relevant sind.
+    /// Marktrolle des Marktpartners für den die Produkt-Daten relevant sind.
     /// </summary>
     [JsonProperty(Required = Required.Default, Order = 5, PropertyName = "empfangendeMarktrolle")]
     [JsonPropertyOrder(5)]
