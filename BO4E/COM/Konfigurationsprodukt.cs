@@ -56,6 +56,8 @@ public class Konfigurationsprodukt : COM
     
     /// <summary>
     /// Marktrolle des Marktpartners für den die Produkt-Daten relevant sind.
+    /// Dient zur Identifizierung der Marktrolle an der Marktlokation, an die die Daten des im PIA genannten
+    /// Konfigurationsprodukts vom MSB der Marktlokation zu übermitteln sind.
     /// </summary>
     [JsonProperty(Required = Required.Default, Order = 5, PropertyName = "empfangendeMarktrolle")]
     [JsonPropertyOrder(5)]
