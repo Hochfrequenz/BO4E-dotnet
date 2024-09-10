@@ -1,6 +1,5 @@
-using BO4E.meta;
-
 using System.Runtime.Serialization;
+using BO4E.meta;
 
 namespace BO4E.ENUM;
 
@@ -31,5 +30,5 @@ public enum Profilart
     /// <summary>Z05 tagesparameterabhängiges Einspeiseprofil</summary>
     /// <remarks>Z05</remarks>
     [EnumMember(Value = "ART_TAGESPARAMETERABHAENGIGES_EINSPEISEPROFIL")]
-    ART_TAGESPARAMETERABHAENGIGES_EINSPEISEPROFIL
+    ART_TAGESPARAMETERABHAENGIGES_EINSPEISEPROFIL,
 }

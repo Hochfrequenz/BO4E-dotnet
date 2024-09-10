@@ -39,11 +39,4 @@ public enum Verwendungszweck
     /// <remarks>ZB5</remarks>
     [EnumMember(Value = "ERMITTLUNG_AUSGEGLICHENHEIT_BILANZKREIS")]
     ERMITTLUNG_AUSGEGLICHENHEIT_BILANZKREIS,
-
-    /// <summary>
-    /// <inheritdoc cref="MEHRMINDERMENGENABRECHNUNG"/>
-    /// </summary>
-    [Obsolete("This is only to keep the library backwards compatible")]
-    [EnumMember(Value = "MEHRMINDERMBENGENABRECHNUNG")]
-    MEHRMINDERMBENGENABRECHNUNG = MEHRMINDERMENGENABRECHNUNG,
 }

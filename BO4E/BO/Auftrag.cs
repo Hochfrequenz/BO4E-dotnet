@@ -1,18 +1,15 @@
 using System;
 using System.Collections.Generic;
 using System.Text.Json.Serialization;
-
 using BO4E.COM;
 using BO4E.meta;
-
 using Newtonsoft.Json;
-
 using ProtoBuf;
 
 namespace BO4E.BO;
 
 /// <summary>
-/// Ein Auftrag beschreibt einen Vorgang, der von einem anderen Marktpartner auszuführen ist. 
+/// Ein Auftrag beschreibt einen Vorgang, der von einem anderen Marktpartner auszuführen ist.
 /// </summary>
 [NonOfficial(NonOfficialCategory.REGULATORY_REQUIREMENTS)]
 [ProtoContract]
@@ -28,7 +25,9 @@ public abstract class Auftrag : BusinessObject
     protected DateTime? _Ausfuehrungsdatum
     {
         get => Ausfuehrungsdatum?.UtcDateTime;
-        set => Ausfuehrungsdatum = value != null ? DateTime.SpecifyKind(value.Value, DateTimeKind.Utc) : null;
+        set =>
+            Ausfuehrungsdatum =
+                value != null ? DateTime.SpecifyKind(value.Value, DateTimeKind.Utc) : null;
     }
 
     /// <summary>
@@ -50,7 +49,9 @@ public abstract class Auftrag : BusinessObject
     protected DateTime _Fertigstellungsdatum
     {
         get => Fertigstellungsdatum?.UtcDateTime ?? DateTime.MinValue;
-        set => Fertigstellungsdatum = value == default ? null : DateTime.SpecifyKind(value, DateTimeKind.Utc);
+        set =>
+            Fertigstellungsdatum =
+                value == default ? null : DateTime.SpecifyKind(value, DateTimeKind.Utc);
     }
 
     /// <summary>

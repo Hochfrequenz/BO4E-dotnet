@@ -1,15 +1,12 @@
-using BO4E.COM;
-using BO4E.ENUM;
-using BO4E.meta;
-
-using Newtonsoft.Json;
-
-using ProtoBuf;
-
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Text.Json.Serialization;
+using BO4E.COM;
+using BO4E.ENUM;
+using BO4E.meta;
+using Newtonsoft.Json;
+using ProtoBuf;
 
 namespace BO4E.BO;
 
@@ -50,12 +47,13 @@ public class Zaehler : BusinessObject
     /// </summary>
     [JsonProperty(
         Required = Required.Default, //Required = Required.Always,
-        Order = 13, PropertyName = "zaehlertyp")]
+        Order = 13,
+        PropertyName = "zaehlertyp"
+    )]
     [ProtoMember(7)]
     [JsonPropertyOrder(13)]
     [JsonPropertyName("zaehlertyp")]
-    [NonOfficial(NonOfficialCategory
-        .REGULATORY_REQUIREMENTS)] // this is ALWAYS required in BO4E standard; Maybe nullable if you as a LIEFERANT don't care about the type of Zähler, othern than in the grid
+    [NonOfficial(NonOfficialCategory.REGULATORY_REQUIREMENTS)] // this is ALWAYS required in BO4E standard; Maybe nullable if you as a LIEFERANT don't care about the type of Zähler, othern than in the grid
     public Zaehlertyp? Zaehlertyp { get; set; }
 
     /// <summary>
@@ -84,14 +82,13 @@ public class Zaehler : BusinessObject
         get => EichungBis?.UtcDateTime ?? default;
         set => EichungBis = value == default ? null : DateTime.SpecifyKind(value, DateTimeKind.Utc);
     }
+
     /// <summary>Bis zu diesem Datum ist der Zähler geeicht.</summary>
     [JsonProperty(Required = Required.Default, Order = 16, PropertyName = "eichungBis")]
     [JsonPropertyName("eichungBis")]
     [JsonPropertyOrder(16)]
     [ProtoIgnore]
     public DateTimeOffset? EichungBis { get; set; } // ToDO implement date
-
-
 
     [System.Text.Json.Serialization.JsonIgnore]
     [Newtonsoft.Json.JsonIgnore]
@@ -100,8 +97,10 @@ public class Zaehler : BusinessObject
     private DateTime _LetzteEichung
     {
         get => LetzteEichung?.UtcDateTime ?? default;
-        set => LetzteEichung = value == default ? null : DateTime.SpecifyKind(value, DateTimeKind.Utc);
+        set =>
+            LetzteEichung = value == default ? null : DateTime.SpecifyKind(value, DateTimeKind.Utc);
     }
+
     /// <summary>Zu diesem Datum fand die letzte Eichprüfung des Zählers statt.</summary>
     [JsonProperty(Required = Required.Default, Order = 17, PropertyName = "letzteEichung")]
     [JsonPropertyName("letzteEichung")]
@@ -121,8 +120,12 @@ public class Zaehler : BusinessObject
     public List<Zaehlwerk>? Zaehlwerke { get; set; }
 
     /// <summary>Der Hersteller des Zählers. Details <see cref="Geschaeftspartner" /></summary>
-    [JsonProperty(Required = Required.Default, Order = 19, NullValueHandling = NullValueHandling.Ignore,
-        PropertyName = "zaehlerhersteller")]
+    [JsonProperty(
+        Required = Required.Default,
+        Order = 19,
+        NullValueHandling = NullValueHandling.Ignore,
+        PropertyName = "zaehlerhersteller"
+    )]
     [JsonPropertyName("zaehlerhersteller")]
     [ProtoMember(13)]
     [JsonPropertyOrder(19)]
@@ -164,13 +167,14 @@ public class Zaehler : BusinessObject
     /// </summary>
     [JsonProperty(
         Required = Required.Default,
-        PropertyName = "zaehlertypspezifikation", Order = 23)]
+        PropertyName = "zaehlertypspezifikation",
+        Order = 23
+    )]
     [ProtoMember(1017)]
     [JsonPropertyOrder(23)]
     [JsonPropertyName("zaehlertypspezifikation")]
     [NonOfficial(NonOfficialCategory.REGULATORY_REQUIREMENTS)]
     public ZaehlertypSpezifikation? Zaehlertypspezifikation { get; set; }
-
 
     /// <summary>
     ///     Befestigungsart
@@ -191,6 +195,7 @@ public class Zaehler : BusinessObject
     [JsonPropertyOrder(25)]
     [NonOfficial(NonOfficialCategory.REGULATORY_REQUIREMENTS)]
     public Geraetemerkmal? Zaehlergroesse { get; set; }
+
     /// <summary>Liste der Geräte, die zu diesem Zähler gehören.</summary>
     [JsonProperty(PropertyName = "geraete", Required = Required.Default, Order = 26)]
     [JsonPropertyOrder(26)]

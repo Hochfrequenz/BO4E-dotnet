@@ -1,6 +1,5 @@
-using ProtoBuf;
-
 using System.Runtime.Serialization;
+using ProtoBuf;
 
 namespace BO4E.ENUM;
 
@@ -143,7 +142,9 @@ public enum BDEWArtikelnummer
     ENTGELT_MESSUNG_ABLESUNG,
 
     /// <summary>9990001000623</summary>
-    [ProtoEnum(Name = nameof(BDEWArtikelnummer) + "_" + nameof(ENTGELT_EINBAU_BETRIEB_WARTUNG_MESSTECHNIK))]
+    [ProtoEnum(
+        Name = nameof(BDEWArtikelnummer) + "_" + nameof(ENTGELT_EINBAU_BETRIEB_WARTUNG_MESSTECHNIK)
+    )]
     [EnumMember(Value = "ENTGELT_EINBAU_BETRIEB_WARTUNG_MESSTECHNIK")]
     ENTGELT_EINBAU_BETRIEB_WARTUNG_MESSTECHNIK,
 
@@ -242,37 +243,49 @@ public enum BDEWArtikelnummer
 
     /// <summary>9990001000813</summary>
     /// <remarks>Zusatzdienstleistung nach § 35 Abs. 2 Nr. 1 MsbG</remarks>
-    [ProtoEnum(Name = nameof(BDEWArtikelnummer) + "_" + nameof(ZUSATZDIENSTLEISTUNG_PARAGRAPH_35_2_1_MSBG))]
+    [ProtoEnum(
+        Name = nameof(BDEWArtikelnummer) + "_" + nameof(ZUSATZDIENSTLEISTUNG_PARAGRAPH_35_2_1_MSBG)
+    )]
     [EnumMember(Value = "ZUSATZDIENSTLEISTUNG_PARAGRAPH_35_2_1_MSBG")]
     ZUSATZDIENSTLEISTUNG_PARAGRAPH_35_2_1_MSBG,
 
     /// <summary>9990001000821</summary>
     /// <remarks>Zusatzdienstleistung nach § 35 Abs. 2 Nr. 2 MsbG</remarks>
-    [ProtoEnum(Name = nameof(BDEWArtikelnummer) + "_" + nameof(ZUSATZDIENSTLEISTUNG_PARAGRAPH_35_2_2_MSBG))]
+    [ProtoEnum(
+        Name = nameof(BDEWArtikelnummer) + "_" + nameof(ZUSATZDIENSTLEISTUNG_PARAGRAPH_35_2_2_MSBG)
+    )]
     [EnumMember(Value = "ZUSATZDIENSTLEISTUNG_PARAGRAPH_35_2_2_MSBG")]
     ZUSATZDIENSTLEISTUNG_PARAGRAPH_35_2_2_MSBG,
 
     /// <summary>9990001000839</summary>
     /// <remarks>Zusatzdienstleistung nach § 35 Abs. 2 Nr. 3 MsbG</remarks>
-    [ProtoEnum(Name = nameof(BDEWArtikelnummer) + "_" + nameof(ZUSATZDIENSTLEISTUNG_PARAGRAPH_35_2_3_MSBG))]
+    [ProtoEnum(
+        Name = nameof(BDEWArtikelnummer) + "_" + nameof(ZUSATZDIENSTLEISTUNG_PARAGRAPH_35_2_3_MSBG)
+    )]
     [EnumMember(Value = "ZUSATZDIENSTLEISTUNG_PARAGRAPH_35_2_3_MSBG")]
     ZUSATZDIENSTLEISTUNG_PARAGRAPH_35_2_3_MSBG,
 
     /// <summary>9990001000847</summary>
     /// <remarks>Zusatzdienstleistung nach § 35 Abs. 2 Nr. 4 MsbG</remarks>
-    [ProtoEnum(Name = nameof(BDEWArtikelnummer) + "_" + nameof(ZUSATZDIENSTLEISTUNG_PARAGRAPH_35_2_4_MSBG))]
+    [ProtoEnum(
+        Name = nameof(BDEWArtikelnummer) + "_" + nameof(ZUSATZDIENSTLEISTUNG_PARAGRAPH_35_2_4_MSBG)
+    )]
     [EnumMember(Value = "ZUSATZDIENSTLEISTUNG_PARAGRAPH_35_2_4_MSBG")]
     ZUSATZDIENSTLEISTUNG_PARAGRAPH_35_2_4_MSBG,
 
     /// <summary>9990001000855</summary>
     /// <remarks>Zusatzdienstleistung nach § 35 Abs. 2 Nr. 5 MsbG</remarks>
-    [ProtoEnum(Name = nameof(BDEWArtikelnummer) + "_" + nameof(ZUSATZDIENSTLEISTUNG_PARAGRAPH_35_2_5_MSBG))]
+    [ProtoEnum(
+        Name = nameof(BDEWArtikelnummer) + "_" + nameof(ZUSATZDIENSTLEISTUNG_PARAGRAPH_35_2_5_MSBG)
+    )]
     [EnumMember(Value = "ZUSATZDIENSTLEISTUNG_PARAGRAPH_35_2_5_MSBG")]
     ZUSATZDIENSTLEISTUNG_PARAGRAPH_35_2_5_MSBG,
 
     /// <summary>9990001000863</summary>
     /// <remarks>Zusatzdienstleistung nach § 35 Abs. 3 MsbG</remarks>
-    [ProtoEnum(Name = nameof(BDEWArtikelnummer) + "_" + nameof(ZUSATZDIENSTLEISTUNG_PARAGRAPH_35_3_MSBG))]
+    [ProtoEnum(
+        Name = nameof(BDEWArtikelnummer) + "_" + nameof(ZUSATZDIENSTLEISTUNG_PARAGRAPH_35_3_MSBG)
+    )]
     [EnumMember(Value = "ZUSATZDIENSTLEISTUNG_PARAGRAPH_35_3_MSBG")]
     ZUSATZDIENSTLEISTUNG_PARAGRAPH_35_3_MSBG,
 }

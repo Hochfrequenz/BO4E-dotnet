@@ -111,11 +111,7 @@ public class Zaehlzeitdefinition : BusinessObject
     /// <summary>
     /// Liste der ausgerollten Zählzeiten
     /// </summary>
-    [JsonProperty(
-        Required = Required.Always,
-        Order = 12,
-        PropertyName = "ausgerollteZaehlzeiten"
-    )]
+    [JsonProperty(Required = Required.Always, Order = 12, PropertyName = "ausgerollteZaehlzeiten")]
     [JsonPropertyName("ausgerollteZaehlzeiten")]
     [ProtoMember(12)]
     [JsonPropertyOrder(12)]

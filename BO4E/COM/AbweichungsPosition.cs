@@ -1,9 +1,7 @@
-using BO4E.meta;
-
-using Newtonsoft.Json;
-
-using ProtoBuf;
 using System.Text.Json.Serialization;
+using BO4E.meta;
+using Newtonsoft.Json;
+using ProtoBuf;
 
 namespace BO4E.COM;
 
@@ -14,7 +12,6 @@ namespace BO4E.COM;
 [NonOfficial(NonOfficialCategory.MISSING)]
 public class Abweichungsposition : COM
 {
-
     /// <summary>
     /// Angabe des Abweichungsgrunds (Code)
     /// </summary>
@@ -24,10 +21,15 @@ public class Abweichungsposition : COM
     [ProtoMember(7)]
     [JsonPropertyOrder(7)]
     public string? AbweichungsgrundCode { get; set; }
+
     /// <summary>
     /// Angabe des Abweichungsgrunds (Codeliste)
     /// </summary>
-    [JsonProperty(PropertyName = "abweichungsgrundCodeliste", Required = Required.Default, Order = 3)]
+    [JsonProperty(
+        PropertyName = "abweichungsgrundCodeliste",
+        Required = Required.Default,
+        Order = 3
+    )]
     [JsonPropertyName("abweichungsgrundCodeliste")]
     [NonOfficial(NonOfficialCategory.MISSING)]
     [ProtoMember(3)]
@@ -37,7 +39,11 @@ public class Abweichungsposition : COM
     /// <summary>
     /// Nähere Erläuterung zum Abweichungsgrund
     /// </summary>
-    [JsonProperty(PropertyName = "abweichungsgrundBemerkung", Required = Required.Default, Order = 4)]
+    [JsonProperty(
+        PropertyName = "abweichungsgrundBemerkung",
+        Required = Required.Default,
+        Order = 4
+    )]
     [JsonPropertyName("abweichungsgrundBemerkung")]
     [NonOfficial(NonOfficialCategory.MISSING)]
     [ProtoMember(4)]
@@ -63,5 +69,4 @@ public class Abweichungsposition : COM
     [ProtoMember(6)]
     [JsonPropertyOrder(6)]
     public string? ZugehoerigeBestellung { get; set; }
-
 }

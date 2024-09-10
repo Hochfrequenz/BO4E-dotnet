@@ -1,10 +1,7 @@
 using System.Text.Json.Serialization;
-
 using BO4E.ENUM;
 using BO4E.meta;
-
 using Newtonsoft.Json;
-
 using ProtoBuf;
 
 namespace BO4E.BO;
@@ -39,7 +36,7 @@ public class Einspeisung : BusinessObject
     public string? TrancheId { get; set; }
 
     /// <summary>
-    /// Empfänger der Vergütung zur Einspeisung 
+    /// Empfänger der Vergütung zur Einspeisung
     /// </summary>
     [JsonProperty(PropertyName = "verguetungsempfaenger", Required = Required.Default, Order = 11)]
     [JsonPropertyName("verguetungsempfaenger")]
@@ -69,7 +66,11 @@ public class Einspeisung : BusinessObject
     /// <summary>
     /// Status der Fernsteuerbarkeit einer Marktlokation
     /// </summary>
-    [JsonProperty(PropertyName = "fernsteuerbarkeitStatus", Required = Required.Default, Order = 14)]
+    [JsonProperty(
+        PropertyName = "fernsteuerbarkeitStatus",
+        Required = Required.Default,
+        Order = 14
+    )]
     [JsonPropertyName("fernsteuerbarkeitStatus")]
     [JsonPropertyOrder(14)]
     [NonOfficial(NonOfficialCategory.MISSING)]

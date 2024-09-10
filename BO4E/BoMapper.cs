@@ -12,7 +12,8 @@ namespace BO4E;
 ///     This class maps generic JObjects to BO4E business objects.
 /// </summary>
 [Obsolete(
-    "The BoMapper is obsolete and should be replace with JsonConvert.DeserializeObject<T>(...) in the long run. It's not a good coding style but still thoroughly tested.")]
+    "The BoMapper is obsolete and should be replace with JsonConvert.DeserializeObject<T>(...) in the long run. It's not a good coding style but still thoroughly tested."
+)]
 public abstract class BoMapper
 {
     /// <summary>
@@ -20,8 +21,10 @@ public abstract class BoMapper
     /// </summary>
     public const string PackagePrefix = "BO4E.BO";
 
-    private static readonly Regex BoRegex = new Regex(@"BO4E\.(?:Extensions\.)?BO\.\b(?<boName>\w+)\b",
-        RegexOptions.Compiled);
+    private static readonly Regex BoRegex = new Regex(
+        @"BO4E\.(?:Extensions\.)?BO\.\b(?<boName>\w+)\b",
+        RegexOptions.Compiled
+    );
 
     /// <summary>
     ///     Get a list of those strings that are known BO4E types (e.g. "Messlokation", "Energiemenge"...)
@@ -64,12 +67,21 @@ public abstract class BoMapper
         }
 
         //Type[] types = Assembly.GetExecutingAssembly().GetTypes();
-        var clazz = Assembly.GetExecutingAssembly().GetType(PackagePrefix + "." + businessObjectName);
+        var clazz = Assembly
+            .GetExecutingAssembly()
+            .GetType(PackagePrefix + "." + businessObjectName);
         return clazz != null
             ? clazz
-            : (from boName in GetValidBoNames()
-               where string.Equals(boName, businessObjectName, StringComparison.CurrentCultureIgnoreCase)
-               select Assembly.GetExecutingAssembly().GetType(PackagePrefix + "." + boName)).FirstOrDefault();
+            : (
+                from boName in GetValidBoNames()
+                where
+                    string.Equals(
+                        boName,
+                        businessObjectName,
+                        StringComparison.CurrentCultureIgnoreCase
+                    )
+                select Assembly.GetExecutingAssembly().GetType(PackagePrefix + "." + boName)
+            ).FirstOrDefault();
 
         //throw new ArgumentException($"No implemented BusinessObject type matches the name '{businessObjectName}'.");
     }

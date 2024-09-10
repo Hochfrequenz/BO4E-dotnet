@@ -42,6 +42,7 @@ public class Statusbericht : BusinessObject
         get => DatumPruefung.UtcDateTime;
         set => DatumPruefung = DateTime.SpecifyKind(value, DateTimeKind.Utc);
     }
+
     /// <summary>
     ///     Pruefdatum (wann wurde der <see cref="Pruefgegenstand" /> geprüft)
     /// </summary>

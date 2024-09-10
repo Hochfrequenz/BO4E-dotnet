@@ -36,7 +36,8 @@ public class DataCategoryAttribute : Attribute
         }
 
         Mapping = new HashSet<Enum>();
-        foreach (Enum e in enums) Mapping.Add(e);
+        foreach (Enum e in enums)
+            Mapping.Add(e);
     }
 
     /// <summary>

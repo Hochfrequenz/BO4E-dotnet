@@ -40,33 +40,40 @@ public enum Rechnungstyp
     /// <summary>Abschlussrechnung</summary>
     [EnumMember(Value = "ABSCHLUSSRECHNUNG")]
     ABSCHLUSSRECHNUNG,
+
     /// <summary>Rechnung für Messstellenbetrieb</summary>
     [EnumMember(Value = "MSBRECHNUNG")]
     MSBRECHNUNG,
+
     /// <summary>Kapazitätsrechnung</summary>
     [EnumMember(Value = "KAPAZITAETSRECHNUNG")]
     KAPAZITAETSRECHNUNG,
+
     /// <summary>Rechnung für Sperren und Wiederinbetriebnahme</summary>
     [EnumMember(Value = "SPERRUNG_INBETRIEBNAHME")]
     SPERRUNG_INBETRIEBNAHME,
+
     /// <summary>
     /// Verzugskostenrechnung
     /// </summary>
     [EnumMember(Value = "VERZUGSKOSTEN")]
     VERZUGSKOSTEN,
+
     /// <summary>
     /// Blindarbeitsrechnung
     /// </summary>
     [EnumMember(Value = "BLINDARBEIT")]
     BLINDARBEIT,
+
     /// <summary>
     /// Sonderrechnung
     /// </summary>
     [EnumMember(Value = "SONDERRECHNUNG")]
     SONDERRECHNUNG,
+
     /// <summary>
     /// Abrechnung von Konfigurationen (Universalbestellprozess)
     /// </summary>
     [EnumMember(Value = "ABRECHNUNG_VON_KONFIGURATIONEN_UNIVERSALBESTELLPROZESS")]
-    ABRECHNUNG_VON_KONFIGURATIONEN_UNIVERSALBESTELLPROZESS
+    ABRECHNUNG_VON_KONFIGURATIONEN_UNIVERSALBESTELLPROZESS,
 }

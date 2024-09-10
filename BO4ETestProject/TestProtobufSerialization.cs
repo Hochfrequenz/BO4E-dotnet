@@ -20,7 +20,7 @@ public class TestProtobufSerialization
         {
             Datum = new DateTimeOffset(2021, 1, 1, 0, 0, 0, TimeSpan.Zero),
             Name = "Hans Wurst",
-            Ort = "Musterstadt"
+            Ort = "Musterstadt",
         };
         Assert.IsTrue(unterschrift.IsValid(), "Must not serialize invalid COM");
         var unterschriftRoundTrip = SerializeAsBase64RoundTrip(unterschrift);
@@ -43,9 +43,9 @@ public class TestProtobufSerialization
                 {
                     Einheit = Mengeneinheit.KWH,
                     Wert = 10.0M,
-                    Startdatum = new DateTimeOffset(2019, 1, 1, 0, 0, 0 ,TimeSpan.Zero),
+                    Startdatum = new DateTimeOffset(2019, 1, 1, 0, 0, 0, TimeSpan.Zero),
                     Enddatum = new DateTimeOffset(2019, 1, 2, 0, 0, 0, TimeSpan.Zero),
-                    Obiskennzahl = "1-0:1.8.1"
+                    Obiskennzahl = "1-0:1.8.1",
                     //Guid = v1Guid
                 },
                 new Verbrauch
@@ -54,10 +54,10 @@ public class TestProtobufSerialization
                     Wert = 23.0M,
                     Startdatum = new DateTimeOffset(2019, 1, 2, 0, 0, 0, TimeSpan.Zero),
                     Enddatum = new DateTimeOffset(2019, 1, 3, 0, 0, 0, TimeSpan.Zero),
-                    Obiskennzahl = "1-0:1.8.1"
+                    Obiskennzahl = "1-0:1.8.1",
                     //Guid = null
-                }
-            }
+                },
+            },
         };
         Assert.IsTrue(em.IsValid(), "Must not serialize invalid Business Objects.");
         var emRoundTrip = SerializeAsBase64RoundTrip(em);

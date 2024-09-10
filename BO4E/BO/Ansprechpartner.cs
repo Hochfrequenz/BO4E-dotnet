@@ -82,8 +82,7 @@ public class Ansprechpartner : BusinessObject
     [JsonProperty(Required = Required.Default, Order = 17, PropertyName = "geschaeftspartner")]
     [JsonPropertyName("geschaeftspartner")]
     [JsonPropertyOrder(17)]
-    [NonOfficial(NonOfficialCategory
-        .UNSPECIFIED)] // it's always required in BO4E, changed it to default 2020-08-31 KK
+    [NonOfficial(NonOfficialCategory.UNSPECIFIED)] // it's always required in BO4E, changed it to default 2020-08-31 KK
     [ProtoMember(11)]
     [BoKey]
     public Geschaeftspartner? Geschaeftspartner { get; set; }
@@ -97,8 +96,7 @@ public class Ansprechpartner : BusinessObject
     public Adresse? Adresse { get; set; }
 
     /// <summary>Liste der Telefonnummern, unter denen der Ansprechpartner erreichbar ist.</summary>
-    [NonOfficial(NonOfficialCategory
-        .UNSPECIFIED)] //  We suggest to name it "rufnummern" instead of "rufnummer" because it's a list")]
+    [NonOfficial(NonOfficialCategory.UNSPECIFIED)] //  We suggest to name it "rufnummern" instead of "rufnummer" because it's a list")]
     [JsonProperty(Required = Required.Default, Order = 19, PropertyName = "rufnummern")]
     [JsonPropertyName("rufnummern")]
     [JsonPropertyOrder(19)]

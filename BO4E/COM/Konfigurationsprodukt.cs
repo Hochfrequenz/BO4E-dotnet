@@ -1,11 +1,8 @@
+using System.Text.Json.Serialization;
 using BO4E.BO;
 using BO4E.meta;
-
 using Newtonsoft.Json;
-
 using ProtoBuf;
-
-using System.Text.Json.Serialization;
 
 namespace BO4E.COM;
 
@@ -26,7 +23,11 @@ public class Konfigurationsprodukt : COM
     /// <summary>
     /// Code der Zugeordnete Leistungskurvendefinition für das Objekt
     /// </summary>
-    [JsonProperty(Required = Required.Default, Order = 2, PropertyName = "leistungskurvendefinition")]
+    [JsonProperty(
+        Required = Required.Default,
+        Order = 2,
+        PropertyName = "leistungskurvendefinition"
+    )]
     [JsonPropertyOrder(2)]
     [JsonPropertyName("leistungskurvendefinition")]
     [ProtoMember(2)]
@@ -46,9 +47,9 @@ public class Konfigurationsprodukt : COM
     /// <summary>
     /// Auftraggebender Marktpartner
     /// </summary>
-    [JsonProperty(Required = Required.Default, Order = 4, PropertyName = "marktpartner")]
+    [JsonProperty(Required = Required.Default, Order = 4, PropertyName = "auftraggebenderMarktpartner")]
     [JsonPropertyOrder(4)]
-    [JsonPropertyName("marktpartner")]
+    [JsonPropertyName("auftraggebenderMarktpartner")]
     [ProtoMember(4)]
     [NonOfficial(NonOfficialCategory.CUSTOMER_REQUIREMENTS)]
     public Marktteilnehmer? AuftraggebenderMarktpartner { get; set; }

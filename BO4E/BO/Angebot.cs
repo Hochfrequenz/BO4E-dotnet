@@ -50,6 +50,7 @@ public class Angebot : BusinessObject
         get => Angebotsdatum.UtcDateTime;
         set => Angebotsdatum = DateTime.SpecifyKind(value, DateTimeKind.Utc);
     }
+
     /// <summary>
     ///     Erstellungsdatum des Angebots,
     /// </summary>
@@ -82,6 +83,7 @@ public class Angebot : BusinessObject
         get => Bindefrist?.UtcDateTime ?? default;
         set => Bindefrist = value == default ? null : DateTime.SpecifyKind(value, DateTimeKind.Utc);
     }
+
     /// <summary>
     ///     Bis zu diesem Zeitpunkt(Tag/Uhrzeit) inklusive gilt das Angebot
     /// </summary>
@@ -121,7 +123,11 @@ public class Angebot : BusinessObject
     ///     Link auf die Person, die als Angebotsnehmer das Angebot angenommen hat.
     /// </summary>
     /// <see cref="Ansprechpartner" />
-    [JsonProperty(Required = Required.Default, Order = 18, PropertyName = "unterzeichnerAngebotsnehmer")]
+    [JsonProperty(
+        Required = Required.Default,
+        Order = 18,
+        PropertyName = "unterzeichnerAngebotsnehmer"
+    )]
     [JsonPropertyName("unterzeichnerAngebotsnehmer")]
     [ProtoMember(11)]
     [JsonPropertyOrder(18)]
@@ -132,7 +138,11 @@ public class Angebot : BusinessObject
     ///     Link auf die Person, die als Angebotsgeber das Angebots ausgestellt hat.
     /// </summary>
     /// <see cref="Ansprechpartner" />
-    [JsonProperty(Required = Required.Default, Order = 19, PropertyName = "unterzeichnerAngebotsgeber")]
+    [JsonProperty(
+        Required = Required.Default,
+        Order = 19,
+        PropertyName = "unterzeichnerAngebotsgeber"
+    )]
     [JsonPropertyName("unterzeichnerAngebotsgeber")]
     [ProtoMember(12)]
     [JsonPropertyOrder(19)]

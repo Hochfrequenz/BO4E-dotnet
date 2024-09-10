@@ -19,7 +19,7 @@ public class TestComValidity
             Enddatum = new DateTimeOffset(),
             Einheit = Mengeneinheit.ANZAHL,
             Wert = (decimal)123.456,
-            Obiskennzahl = "asd"
+            Obiskennzahl = "asd",
         };
         Assert.IsTrue(v2.IsValid());
     }

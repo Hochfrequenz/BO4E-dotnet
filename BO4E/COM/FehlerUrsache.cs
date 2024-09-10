@@ -45,6 +45,4 @@ public class FehlerUrsache : COM
     [JsonPropertyName("beschreibung")]
     [ProtoMember(5)]
     public string? Beschreibung { get; set; }
-
-
 }
