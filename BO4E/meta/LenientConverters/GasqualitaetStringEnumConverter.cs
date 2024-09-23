@@ -100,7 +100,7 @@ public class NewtonsoftGasqualitaetStringEnumConverter
             {
                 "HGAS" => Gasqualitaet.H_GAS,
                 "LGAS" => Gasqualitaet.L_GAS,
-                _ => Enum.TryParse(enumString, out Gasqualitaet result)
+                _ => Enum.TryParse(enumString?.ToUpper(), out Gasqualitaet result)
                     ? result
                     : throw new Newtonsoft.Json.JsonSerializationException(
                         $"Invalid value for {objectType}: {enumString}"
