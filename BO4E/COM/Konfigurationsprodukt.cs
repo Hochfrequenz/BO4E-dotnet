@@ -47,13 +47,17 @@ public class Konfigurationsprodukt : COM
     /// <summary>
     /// Auftraggebender Marktpartner
     /// </summary>
-    [JsonProperty(Required = Required.Default, Order = 4, PropertyName = "auftraggebenderMarktpartner")]
+    [JsonProperty(
+        Required = Required.Default,
+        Order = 4,
+        PropertyName = "auftraggebenderMarktpartner"
+    )]
     [JsonPropertyOrder(4)]
     [JsonPropertyName("auftraggebenderMarktpartner")]
     [ProtoMember(4)]
     [NonOfficial(NonOfficialCategory.CUSTOMER_REQUIREMENTS)]
     public Marktteilnehmer? AuftraggebenderMarktpartner { get; set; }
-    
+
     /// <summary>
     /// Marktrolle des Marktpartners für den die Produkt-Daten relevant sind.
     /// Dient zur Identifizierung der Marktrolle an der Marktlokation, an die die Daten des
