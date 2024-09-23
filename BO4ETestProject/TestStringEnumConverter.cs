@@ -112,6 +112,7 @@ public class TestStringEnumConverter
 
     [TestMethod]
     [DataRow("HGAS", Gasqualitaet.H_GAS)]
+    [DataRow("h_GAS", Gasqualitaet.H_GAS)]
     [DataRow("H_GAS", Gasqualitaet.H_GAS)]
     [DataRow("LGAS", Gasqualitaet.L_GAS)]
     [DataRow("L_GAS", Gasqualitaet.L_GAS)]
@@ -148,6 +149,7 @@ public class TestStringEnumConverter
 
     [TestMethod]
     [DataRow("HGAS", Gasqualitaet.H_GAS)]
+    [DataRow("h_GAS", Gasqualitaet.H_GAS)]
     [DataRow("H_GAS", Gasqualitaet.H_GAS)]
     [DataRow("LGAS", Gasqualitaet.L_GAS)]
     [DataRow("L_GAS", Gasqualitaet.L_GAS)]
@@ -183,6 +185,7 @@ public class TestStringEnumConverter
     [TestMethod]
     [DataRow("HGAS", Gasqualitaet.H_GAS)]
     [DataRow("H_GAS", Gasqualitaet.H_GAS)]
+    [DataRow("h_GAS", Gasqualitaet.H_GAS)]
     [DataRow("LGAS", Gasqualitaet.L_GAS)]
     [DataRow("L_GAS", Gasqualitaet.L_GAS)]
     [DataRow(null, null)]
@@ -223,6 +226,7 @@ public class TestStringEnumConverter
     [TestMethod]
     [DataRow("HGAS", Gasqualitaet.H_GAS)]
     [DataRow("H_GAS", Gasqualitaet.H_GAS)]
+    [DataRow("h_GAS", Gasqualitaet.H_GAS)]
     [DataRow("LGAS", Gasqualitaet.L_GAS)]
     [DataRow("L_GAS", Gasqualitaet.L_GAS)]
     public void Test_Newtonsoft_Gasqualitaet_Legacy_Converter_With_Non_Nullable_Gasqualitaet(

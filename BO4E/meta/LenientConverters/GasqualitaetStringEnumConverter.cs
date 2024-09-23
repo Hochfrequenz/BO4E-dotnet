@@ -27,11 +27,11 @@ public class SystemTextGasqualitaetStringEnumConverter
         }
         string enumString = reader.GetString();
 
-        return enumString switch
+        return enumString?.ToUpper() switch
         {
             "HGAS" => Gasqualitaet.H_GAS,
             "LGAS" => Gasqualitaet.L_GAS,
-            _ => Enum.TryParse(enumString, out Gasqualitaet result)
+            _ => Enum.TryParse(enumString?.ToUpper(), out Gasqualitaet result)
                 ? result
                 : throw new System.Text.Json.JsonException(
                     $"Invalid value for {typeToConvert}: {enumString}"
@@ -96,11 +96,11 @@ public class NewtonsoftGasqualitaetStringEnumConverter
         {
             string enumString = reader.Value.ToString();
 
-            return enumString switch
+            return enumString?.ToUpper() switch
             {
                 "HGAS" => Gasqualitaet.H_GAS,
                 "LGAS" => Gasqualitaet.L_GAS,
-                _ => Enum.TryParse(enumString, out Gasqualitaet result)
+                _ => Enum.TryParse(enumString?.ToUpper(), out Gasqualitaet result)
                     ? result
                     : throw new Newtonsoft.Json.JsonSerializationException(
                         $"Invalid value for {objectType}: {enumString}"
