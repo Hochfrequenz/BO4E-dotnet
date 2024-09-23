@@ -100,6 +100,14 @@ public abstract class BusinessObject : IUserProperties, IOptionalGuid
     public const string USER_PROPERTIES_NAME = "userProperties";
 
     /// <summary>
+    /// define common property name for gueltigkeit
+    /// </summary>
+    [Newtonsoft.Json.JsonIgnore]
+    [System.Text.Json.Serialization.JsonIgnore]
+    [ProtoIgnore]
+    public const string GUELTIGKEIT_PROPERTIES_NAME = "gueltigkeitszeitraum";
+
+    /// <summary>
     ///     generates the BO4E boTyp attribute value (class name as upper case)
     /// </summary>
     [System.Text.Json.Serialization.JsonConstructor]
@@ -217,6 +225,37 @@ public abstract class BusinessObject : IUserProperties, IOptionalGuid
     [DataCategory(DataCategory.USER_PROPERTIES)]
     [System.Text.Json.Serialization.JsonExtensionData]
     public IDictionary<string, object>? UserProperties { get; set; }
+
+    /// <summary>
+    ///     Defines the validity of a business object in terms of time (maybe multiple versions exist).
+    ///     Background: German market communication requires for master data changes starting 03.04.2025 that business objects are ordered and aggregated by validity (in terms of time).
+    ///     To easily group data based on this data a new zeitraum is introduced as an optional field in all business objects.
+    /// </summary>
+    [JsonProperty(
+        PropertyName = GUELTIGKEIT_PROPERTIES_NAME,
+        Required = Required.Default,
+        DefaultValueHandling = DefaultValueHandling.Ignore,
+        Order = 201
+    )]
+    [ProtoMember(201)]
+    [JsonPropertyName(GUELTIGKEIT_PROPERTIES_NAME)]
+    [JsonPropertyOrder(201)]
+    public COM.Zeitraum? Gueltigkeitszeitraum { get; set; }
+
+    /// <summary>
+    ///     Defines a level of data quality that is attached to the business object, this can have multiple origins, you could specify a version as draft or uncomplete if this is in the state of creation.
+    ///     Another requirement is coming from german market communictation where business objects of different quality levels need to be grouped.
+    /// </summary>
+    [JsonProperty(
+        PropertyName = "qualitaet",
+        Required = Required.Default,
+        DefaultValueHandling = DefaultValueHandling.Ignore,
+        Order = 202
+    )]
+    [JsonPropertyName("qualitaet")]
+    [ProtoMember(202)]
+    [JsonPropertyOrder(202)]
+    public ENUM.Qualitaet? Qualitaet { get; set; }
 
     /// <summary>
     /// true iff any of the keys in <see cref="UserProperties"/> is the same as a property name of the class itself.
