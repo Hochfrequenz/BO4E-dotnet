@@ -254,6 +254,11 @@ public abstract class Report : BusinessObject
             }
             else
             {
+                if (field is null || value is null)
+                {
+                    continue;
+                }
+
                 var nestedValue = field.GetValue(value);
                 if (nestedValue != null)
                 {
