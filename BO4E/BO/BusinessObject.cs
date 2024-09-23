@@ -105,7 +105,7 @@ public abstract class BusinessObject : IUserProperties, IOptionalGuid
     [Newtonsoft.Json.JsonIgnore]
     [System.Text.Json.Serialization.JsonIgnore]
     [ProtoIgnore]
-    public const string GUELTIGKEIT_PROPERTIES_NAME = "gueltig";
+    public const string GUELTIGKEIT_PROPERTIES_NAME = "gueltigkeitszeitraum";
 
     /// <summary>
     ///     generates the BO4E boTyp attribute value (class name as upper case)
@@ -227,7 +227,9 @@ public abstract class BusinessObject : IUserProperties, IOptionalGuid
     public IDictionary<string, object>? UserProperties { get; set; }
 
     /// <summary>
-    ///     Defines the validity of a business object in terms of time (maybe multiple versions exist)
+    ///     Defines the validity of a business object in terms of time (maybe multiple versions exist).
+    ///     Background: German market communication requires for master data changes starting 03.04.2025 that business objects are ordered and aggregated by validity (in terms of time).
+    ///     To easily group data based on this data a new zeitraum is introduced as an optional field in all business objects.
     /// </summary>
     [JsonProperty(
         PropertyName = GUELTIGKEIT_PROPERTIES_NAME,
@@ -236,11 +238,13 @@ public abstract class BusinessObject : IUserProperties, IOptionalGuid
         Order = 201
     )]
     [ProtoMember(201)]
+    [JsonPropertyName(GUELTIGKEIT_PROPERTIES_NAME)]
     [JsonPropertyOrder(201)]
-    public COM.Zeitraum? Gueltig { get; set; }
+    public COM.Zeitraum? Gueltigkeitszeitraum { get; set; }
 
     /// <summary>
-    ///     Defines the validity of a business object in terms of time (maybe multiple versions exist)
+    ///     Defines a level of data quality that is attached to the business object, this can have multiple origins, you could specify a version as draft or uncomplete if this is in the state of creation.
+    ///     Another requirement is coming from german market communictation where business objects of different quality levels need to be grouped.
     /// </summary>
     [JsonProperty(
         PropertyName = "qualitaet",
@@ -248,6 +252,7 @@ public abstract class BusinessObject : IUserProperties, IOptionalGuid
         DefaultValueHandling = DefaultValueHandling.Ignore,
         Order = 202
     )]
+    [JsonPropertyName("qualitaet")]
     [ProtoMember(202)]
     [JsonPropertyOrder(202)]
     public ENUM.Qualitaet? Qualitaet { get; set; }
