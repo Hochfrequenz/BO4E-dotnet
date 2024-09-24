@@ -244,4 +244,40 @@ public class TechnischeRessource : BusinessObject
     [ProtoMember(25)]
     [JsonPropertyOrder(25)]
     public string? VorgelagerteLokationsId { get; set; }
+
+    /// <summary>
+    ///Kategorie der verbrauchenden Technischen Ressource
+    /// </summary>
+    [JsonProperty(Required = Required.Default, Order = 26, PropertyName = "kategorie")]
+    [JsonPropertyName("kategorie")]
+    [ProtoMember(26)]
+    [JsonPropertyOrder(26)]
+    public KategorieTechnischeRessource? Kategorie { get; set; }
+
+    /// <summary>
+    ///Inbetriebsetzungsdatum der verbrauchenden Technischen Ressource nach § 14a EnWG
+    /// </summary>
+    [JsonProperty(Required = Required.Default, Order = 27, PropertyName = "inbetriebsetzung")]
+    [JsonPropertyName("inbetriebsetzung")]
+    [ProtoMember(27)]
+    [JsonPropertyOrder(27)]
+    public InbetriebsetzungTechnischeRessource? Inbetriebsetzung { get; set; }
+
+    /// <summary>
+    ///Einordnung der verbrauchenden Technischen Ressource nach § 14a EnWG mit Inbetriebsetzung vor 2024
+    /// </summary>
+    [JsonProperty(Required = Required.Default, Order = 28, PropertyName = "einordnung")]
+    [JsonPropertyName("einordnung")]
+    [ProtoMember(28)]
+    [JsonPropertyOrder(28)]
+    public EinordnungTechnischeRessource? Einordnung { get; set; }
+
+    /// <summary>
+    ///Information zu weiteren technischen Einrichtungen
+    /// </summary>
+    [JsonProperty(Required = Required.Default, Order = 29, PropertyName = "weitereEinrichtung")]
+    [JsonPropertyName("weitereEinrichtung")]
+    [ProtoMember(29)]
+    [JsonPropertyOrder(29)]
+    public InformationWeitereTechnischeRessource? WeitereEinrichtung { get; set; }
 }
