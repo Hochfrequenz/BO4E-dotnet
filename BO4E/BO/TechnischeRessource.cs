@@ -146,8 +146,11 @@ public class TechnischeRessource : BusinessObject
     /// Wärmenutzung
     /// Beispiel: CAV+Z56'
     ///     Z56: Speicherheizung
-    ///     Z57: Wärmepumpe
+    ///     Z57: Wärmepumpe (unspezifiziert)
     ///     Z61: Direktheizung
+    ///     ZV5: Wärmepumpe (Wärme und Kälte)
+    ///     ZV6: Wärmepumpe (Kälte)
+    ///     ZV7: Wärmepumpe (Wärme)
     /// </summary>
     [JsonProperty(PropertyName = "waermenutzung", Required = Required.Default, Order = 19)]
     [JsonPropertyOrder(19)]

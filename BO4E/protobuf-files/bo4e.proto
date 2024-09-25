@@ -1864,6 +1864,9 @@ enum Waermenutzung {
    Waermenutzung_SPEICHERHEIZUNG = 0;
    Waermenutzung_WAERMEPUMPE = 1;
    Waermenutzung_DIREKTHEIZUNG = 2;
+   Waermenutzung_WAERMEPUMPE_WAERME_KAELTE = 3;
+   Waermenutzung_WAERMEPUMPE_KAELTE = 4;
+   Waermenutzung_WAERMEPUMPE_WAERME = 5;
 }
 enum Wertermittlungsverfahren {
    option (.protobuf_net.enumopt).namespace = "BO4E.ENUM";
