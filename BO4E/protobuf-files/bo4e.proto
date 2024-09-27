@@ -1131,7 +1131,8 @@ message Netznutzungsabrechnungsdaten {
    Menge SingulaereBetriebsmittel = 10;
    Preis PreisSingulaereBetriebsmittel = 11;
    Zaehlzeitregister Zaehlzeit = 12;
-   bool Differenz = 13;
+   bool IstDifferenz = 13;
+   repeated MarktpartnerDetails Marktrollen = 14;
 }
 enum Netznutzungsabrechnungsgrundlage {
    option (.protobuf_net.enumopt).namespace = "BO4E.ENUM";
