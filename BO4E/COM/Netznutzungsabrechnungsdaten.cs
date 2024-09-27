@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using System.Text.Json.Serialization;
 using BO4E.meta;
 using Newtonsoft.Json;
@@ -111,4 +112,14 @@ public class Netznutzungsabrechnungsdaten : COM
     [ProtoMember(13)]
     [JsonPropertyOrder(13)]
     public bool? IstDifferenz { get; set; }
+
+    /// <summary>
+    /// Zu den Netznutzungsabrechnungsdaten gehörende Marktrollen (z.B. Netzbetreiber)
+    /// </summary>
+    [JsonProperty(Required = Required.Default, Order = 14, PropertyName = "marktrollen")]
+    [JsonPropertyName("marktrollen")]
+    [JsonPropertyOrder(14)]
+    [ProtoMember(14)]
+    [NonOfficial(NonOfficialCategory.CUSTOMER_REQUIREMENTS)]
+    public List<MarktpartnerDetails>? Marktrollen { get; set; }
 }
