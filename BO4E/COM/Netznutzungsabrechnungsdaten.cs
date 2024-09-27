@@ -101,4 +101,14 @@ public class Netznutzungsabrechnungsdaten : COM
     [ProtoMember(12)]
     [JsonPropertyOrder(12)]
     public Zaehlzeitregister? Zaehlzeit { get; set; }
+
+    /// <summary>
+    /// Sind es Original oder Differenz-Netznutzungsabrechnungsdaten
+    /// </summary>
+    [JsonProperty(PropertyName = "istDifferenz", Order = 13, Required = Required.Default)]
+    [JsonPropertyName("istDifferenz")]
+    [NonOfficial(NonOfficialCategory.CUSTOMER_REQUIREMENTS)]
+    [ProtoMember(13)]
+    [JsonPropertyOrder(13)]
+    public bool? IstDifferenz { get; set; }
 }
