@@ -105,10 +105,10 @@ public class Netznutzungsabrechnungsdaten : COM
     /// <summary>
     /// Sind es Original oder Differenz-Netznutzungsabrechnungsdaten
     /// </summary>
-    [JsonProperty(PropertyName = "differenz", Order = 13, Required = Required.Default)]
-    [JsonPropertyName("differenz")]
+    [JsonProperty(PropertyName = "istDifferenz", Order = 13, Required = Required.Default)]
+    [JsonPropertyName("istDifferenz")]
     [NonOfficial(NonOfficialCategory.CUSTOMER_REQUIREMENTS)]
     [ProtoMember(13)]
     [JsonPropertyOrder(13)]
-    public bool? Differenz { get; set; }
+    public bool? IstDifferenz { get; set; }
 }
