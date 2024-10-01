@@ -14,4 +14,8 @@ public enum Energierichtung
     /// <remarks>UTILTS DE7037 Z06: Erzeugung</remarks>
     [EnumMember(Value = "EINSP")]
     EINSP,
+
+    /// <summary>Ruhende Lokation (in einer Kundenanlage)</summary>
+    [EnumMember(Value = "RUHEND")]
+    RUHEND,
 }
