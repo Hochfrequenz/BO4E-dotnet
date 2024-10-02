@@ -24,7 +24,8 @@ public class Produktkonfiguration : COM
     [JsonPropertyOrder(4)]
     public Produktcode? Eigenschaft { get; set; }
 
-    /// <summary>Zusätzlicher Eigenschaftswert</summary>
+    /// <summary>Zusätzlicher Eigenschaftswert, z.B. Angabe der Jahresverbrauchsprognose (4000).
+    /// Im Allgemeinen zur Angabe von Werten, die nicht als Produktcode definiert sind</summary>
     [JsonProperty(PropertyName = "zusatzeigenschaft", Order = 5, Required = Required.Default)]
     [JsonPropertyName("zusatzeigenschaft")]
     [ProtoMember(5)]

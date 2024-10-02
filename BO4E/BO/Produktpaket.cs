@@ -21,7 +21,7 @@ public class Produktpaket : BusinessObject
     [ProtoMember(8)]
     [JsonPropertyOrder(8)]
     [BoKey]
-    public int paketId { get; set; }
+    public int PaketId { get; set; }
 
     /// <summary>
     ///     Liste an Produktkonfigurationen
@@ -33,7 +33,7 @@ public class Produktpaket : BusinessObject
     public List<Produktkonfiguration>? Konfigurationen { get; set; }
 
     /// <summary>
-    ///     Prioritaet des Pakets
+    ///     Prioritaet des Pakets (1-5, 1 ist die hoechste Prioritaet)
     /// </summary>
     [JsonProperty(Required = Required.Default, Order = 10, PropertyName = "prioritaet")]
     [JsonPropertyName("prioritaet")]

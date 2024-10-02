@@ -172,9 +172,9 @@ public enum Produktcode
     PROZENTUALE_REDUZIERUNG_AP_MODUL_2,
 
     /// <summary>9991 00000 215 7</summary>
-    [ProtoEnum(Name = nameof(Produktcode) + "_" + nameof(ANZREIZMODUL_3))]
-    [EnumMember(Value = "ANZREIZMODUL_3")]
-    ANZREIZMODUL_3,
+    [ProtoEnum(Name = nameof(Produktcode) + "_" + nameof(ANREIZMODUL_3))]
+    [EnumMember(Value = "ANREIZMODUL_3")]
+    ANREIZMODUL_3,
 
     /// <summary>9991 00000 202 4</summary>
     [ProtoEnum(Name = nameof(Produktcode) + "_" + nameof(NETZENTGELTE_PREISSYSTEM))]
