@@ -328,6 +328,7 @@ enum Energierichtung {
    option (.protobuf_net.enumopt).namespace = "BO4E.ENUM";
    AUSSP = 0;
    EINSP = 1;
+   RUHEND = 2;
 }
 message Erreichbarkeit {
    option (.protobuf_net.msgopt).namespace = "BO4E.COM";
