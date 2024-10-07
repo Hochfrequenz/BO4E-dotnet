@@ -364,7 +364,7 @@ public class TestStringEnumConverter
     [TestMethod]
     [DataRow("MEHRMINDERMENGENABRECHNUNG", Verwendungszweck.MEHRMINDERMENGENABRECHNUNG)]
     [DataRow("MEHRMINDERMBENGENABRECHNUNG", Verwendungszweck.MEHRMINDERMENGENABRECHNUNG)]
-    public void Test_System_Text_Gasqualitaet_Legacy_Converter_With_Non_Nullable_Gasqualitaet(
+    public void Test_System_Text_Verwendungszweck_Legacy_Converter_With_Non_Nullable_Verwendungszweck(
         string? jsonValue,
         Verwendungszweck expectedVerwendungszweck
     )
