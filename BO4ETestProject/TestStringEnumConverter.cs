@@ -111,15 +111,22 @@ public class TestStringEnumConverter
     }
 
     [TestMethod]
-    [DataRow("HGAS", Gasqualitaet.H_GAS)]
-    [DataRow("h_GAS", Gasqualitaet.H_GAS)]
-    [DataRow("H_GAS", Gasqualitaet.H_GAS)]
-    [DataRow("LGAS", Gasqualitaet.L_GAS)]
-    [DataRow("L_GAS", Gasqualitaet.L_GAS)]
-    [DataRow(null, null)]
+    [DataRow("HGAS", Gasqualitaet.H_GAS, false)]
+    [DataRow("h_GAS", Gasqualitaet.H_GAS, false)]
+    [DataRow("H_GAS", Gasqualitaet.H_GAS, false)]
+    [DataRow("LGAS", Gasqualitaet.L_GAS, false)]
+    [DataRow("L_GAS", Gasqualitaet.L_GAS, false)]
+    [DataRow(null, null, false)]
+    [DataRow("HGAS", Gasqualitaet.H_GAS, true)]
+    [DataRow("h_GAS", Gasqualitaet.H_GAS, true)]
+    [DataRow("H_GAS", Gasqualitaet.H_GAS, true)]
+    [DataRow("LGAS", Gasqualitaet.L_GAS, true)]
+    [DataRow("L_GAS", Gasqualitaet.L_GAS, true)]
+    [DataRow(null, null, true)]
     public void Test_System_Text_Gasqualitaet_Legacy_Converter_With_Nullable_Gasqualitaet(
         string? jsonValue,
-        Gasqualitaet? expectedGasqualitaet
+        Gasqualitaet? expectedGasqualitaet,
+        bool useMostLenient
     )
     {
         string jsonString;
@@ -132,10 +139,19 @@ public class TestStringEnumConverter
             jsonString = "{\"Foo\": null}";
         }
 
-        var settings = new JsonSerializerOptions
+        JsonSerializerOptions settings;
+        if (useMostLenient)
         {
-            Converters = { new SystemTextNullableGasqualitaetStringEnumConverter() },
-        };
+            settings = LenientParsing.MOST_LENIENT.GetJsonSerializerOptions();
+        }
+        else
+        {
+            settings = new JsonSerializerOptions
+            {
+                Converters = { new SystemTextNullableGasqualitaetStringEnumConverter() },
+            };
+        }
+
         var actual = System.Text.Json.JsonSerializer.Deserialize<ClassWithNullableGasqualitaet>(
             jsonString,
             settings
@@ -148,14 +164,20 @@ public class TestStringEnumConverter
     }
 
     [TestMethod]
-    [DataRow("HGAS", Gasqualitaet.H_GAS)]
-    [DataRow("h_GAS", Gasqualitaet.H_GAS)]
-    [DataRow("H_GAS", Gasqualitaet.H_GAS)]
-    [DataRow("LGAS", Gasqualitaet.L_GAS)]
-    [DataRow("L_GAS", Gasqualitaet.L_GAS)]
+    [DataRow("HGAS", Gasqualitaet.H_GAS, false)]
+    [DataRow("h_GAS", Gasqualitaet.H_GAS, false)]
+    [DataRow("H_GAS", Gasqualitaet.H_GAS, false)]
+    [DataRow("LGAS", Gasqualitaet.L_GAS, false)]
+    [DataRow("L_GAS", Gasqualitaet.L_GAS, false)]
+    [DataRow("HGAS", Gasqualitaet.H_GAS, true)]
+    [DataRow("h_GAS", Gasqualitaet.H_GAS, true)]
+    [DataRow("H_GAS", Gasqualitaet.H_GAS, true)]
+    [DataRow("LGAS", Gasqualitaet.L_GAS, true)]
+    [DataRow("L_GAS", Gasqualitaet.L_GAS, true)]
     public void Test_System_Text_Gasqualitaet_Legacy_Converter_With_Non_Nullable_Gasqualitaet(
         string? jsonValue,
-        Gasqualitaet expectedGasqualitaet
+        Gasqualitaet expectedGasqualitaet,
+        bool useMostLenient
     )
     {
         string jsonString;
@@ -167,10 +189,19 @@ public class TestStringEnumConverter
         {
             jsonString = "{\"Foo\": null}";
         }
-        var settings = new JsonSerializerOptions
+
+        JsonSerializerOptions settings;
+        if (useMostLenient)
         {
-            Converters = { new SystemTextGasqualitaetStringEnumConverter() },
-        };
+            settings = LenientParsing.MOST_LENIENT.GetJsonSerializerOptions();
+        }
+        else
+        {
+            settings = new JsonSerializerOptions
+            {
+                Converters = { new SystemTextGasqualitaetStringEnumConverter() },
+            };
+        }
         var actual = System.Text.Json.JsonSerializer.Deserialize<ClassWithNonNullableGasqualitaet>(
             jsonString,
             settings
@@ -183,15 +214,22 @@ public class TestStringEnumConverter
     }
 
     [TestMethod]
-    [DataRow("HGAS", Gasqualitaet.H_GAS)]
-    [DataRow("H_GAS", Gasqualitaet.H_GAS)]
-    [DataRow("h_GAS", Gasqualitaet.H_GAS)]
-    [DataRow("LGAS", Gasqualitaet.L_GAS)]
-    [DataRow("L_GAS", Gasqualitaet.L_GAS)]
-    [DataRow(null, null)]
+    [DataRow("HGAS", Gasqualitaet.H_GAS, false)]
+    [DataRow("H_GAS", Gasqualitaet.H_GAS, false)]
+    [DataRow("h_GAS", Gasqualitaet.H_GAS, false)]
+    [DataRow("LGAS", Gasqualitaet.L_GAS, false)]
+    [DataRow("L_GAS", Gasqualitaet.L_GAS, false)]
+    [DataRow(null, null, false)]
+    [DataRow("HGAS", Gasqualitaet.H_GAS, true)]
+    [DataRow("H_GAS", Gasqualitaet.H_GAS, true)]
+    [DataRow("h_GAS", Gasqualitaet.H_GAS, true)]
+    [DataRow("LGAS", Gasqualitaet.L_GAS, true)]
+    [DataRow("L_GAS", Gasqualitaet.L_GAS, true)]
+    [DataRow(null, null, true)]
     public void Test_Newtonsoft_Gasqualitaet_Legacy_Converter_With_Nullable_Gasqualitaet(
         string? jsonValue,
-        Gasqualitaet? expectedGasqualitaet
+        Gasqualitaet? expectedGasqualitaet,
+        bool useMostLenient
     )
     {
         string jsonString;
@@ -204,14 +242,22 @@ public class TestStringEnumConverter
             jsonString = "{\"Foo\": null}";
         }
 
-        var settings = new Newtonsoft.Json.JsonSerializerSettings()
+        JsonSerializerSettings settings;
+        if (useMostLenient)
         {
-            Converters =
+            settings = LenientParsing.MOST_LENIENT.GetJsonSerializerSettings();
+        }
+        else
+        {
+            settings = new Newtonsoft.Json.JsonSerializerSettings()
             {
-                new NewtonsoftGasqualitaetStringEnumConverter(),
-                new StringEnumConverter(),
-            },
-        };
+                Converters =
+                {
+                    new NewtonsoftGasqualitaetStringEnumConverter(),
+                    new StringEnumConverter(),
+                },
+            };
+        }
         var actual = Newtonsoft.Json.JsonConvert.DeserializeObject<ClassWithNullableGasqualitaet>(
             jsonString,
             settings
@@ -224,14 +270,20 @@ public class TestStringEnumConverter
     }
 
     [TestMethod]
-    [DataRow("HGAS", Gasqualitaet.H_GAS)]
-    [DataRow("H_GAS", Gasqualitaet.H_GAS)]
-    [DataRow("h_GAS", Gasqualitaet.H_GAS)]
-    [DataRow("LGAS", Gasqualitaet.L_GAS)]
-    [DataRow("L_GAS", Gasqualitaet.L_GAS)]
+    [DataRow("HGAS", Gasqualitaet.H_GAS, true)]
+    [DataRow("H_GAS", Gasqualitaet.H_GAS, true)]
+    [DataRow("h_GAS", Gasqualitaet.H_GAS, true)]
+    [DataRow("LGAS", Gasqualitaet.L_GAS, true)]
+    [DataRow("L_GAS", Gasqualitaet.L_GAS, true)]
+    [DataRow("HGAS", Gasqualitaet.H_GAS, false)]
+    [DataRow("H_GAS", Gasqualitaet.H_GAS, false)]
+    [DataRow("h_GAS", Gasqualitaet.H_GAS, false)]
+    [DataRow("LGAS", Gasqualitaet.L_GAS, false)]
+    [DataRow("L_GAS", Gasqualitaet.L_GAS, false)]
     public void Test_Newtonsoft_Gasqualitaet_Legacy_Converter_With_Non_Nullable_Gasqualitaet(
         string? jsonValue,
-        Gasqualitaet expectedGasqualitaet
+        Gasqualitaet expectedGasqualitaet,
+        bool useMostLenient
     )
     {
         string jsonString;
@@ -243,15 +295,23 @@ public class TestStringEnumConverter
         {
             jsonString = "{\"Foo\": null}";
         }
-
-        var settings = new Newtonsoft.Json.JsonSerializerSettings()
+        JsonSerializerSettings settings;
+        if (useMostLenient)
         {
-            Converters =
+            settings = LenientParsing.MOST_LENIENT.GetJsonSerializerSettings();
+        }
+        else
+        {
+            settings = new Newtonsoft.Json.JsonSerializerSettings()
             {
-                new NewtonsoftGasqualitaetStringEnumConverter(),
-                new StringEnumConverter(),
-            },
-        };
+                Converters =
+                {
+                    new NewtonsoftGasqualitaetStringEnumConverter(),
+                    new StringEnumConverter(),
+                },
+            };
+        }
+
         var actual =
             Newtonsoft.Json.JsonConvert.DeserializeObject<ClassWithNonNullableGasqualitaet>(
                 jsonString,
