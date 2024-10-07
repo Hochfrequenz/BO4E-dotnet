@@ -43,7 +43,9 @@ public static class LenientSystemTextJsonParsingExtensions
         settings.Converters.Add(new AutoNumberToStringConverter());
         settings.Converters.Add(new VertragsConverter());
         settings.Converters.Add(new EnergiemengeConverter());
+        settings.Converters.Add(new SystemTextNullableVerwendungszweckStringEnumConverter());
         settings.Converters.Add(new SystemTextVerwendungszweckStringEnumConverter());
+        settings.Converters.Add(new SystemTextNullableGasqualitaetStringEnumConverter());
         settings.Converters.Add(new SystemTextGasqualitaetStringEnumConverter());
         settings.Converters.Add(new LenientSystemTextJsonStringToBoolConverter());
         settings.Converters.Add(new StringNullableEnumConverter());
