@@ -107,7 +107,7 @@ public class TestStringEnumConverter
 
     public class ClassWithNonNullableGasqualitaet
     {
-        public Gasqualitaet? Foo { get; set; }
+        public Gasqualitaet Foo { get; set; }
     }
 
     [TestMethod]
@@ -134,7 +134,7 @@ public class TestStringEnumConverter
 
         var settings = new JsonSerializerOptions
         {
-            Converters = { new SystemTextGasqualitaetStringEnumConverter() },
+            Converters = { new SystemTextNullableGasqualitaetStringEnumConverter() },
         };
         var actual = System.Text.Json.JsonSerializer.Deserialize<ClassWithNullableGasqualitaet>(
             jsonString,
@@ -348,7 +348,7 @@ public class TestStringEnumConverter
 
         var settings = new JsonSerializerOptions
         {
-            Converters = { new SystemTextVerwendungszweckStringEnumConverter() },
+            Converters = { new SystemTextNullableVerwendungszweckStringEnumConverter() },
         };
         var actual = System.Text.Json.JsonSerializer.Deserialize<ClassWithNullableVerwendungszweck>(
             jsonString,
@@ -477,7 +477,7 @@ public class TestStringEnumConverter
         {
             Converters =
             {
-                new SystemTextVerwendungszweckStringEnumConverter(),
+                new SystemTextNullableVerwendungszweckStringEnumConverter(),
                 new JsonStringEnumConverter(),
             },
         };
