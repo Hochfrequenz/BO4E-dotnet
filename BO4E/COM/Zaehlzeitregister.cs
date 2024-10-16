@@ -7,14 +7,14 @@ using ProtoBuf;
 namespace BO4E.COM;
 
 /// <summary>
-///     Ein Zählzeitregister beschreibt eine erweiterte Definition der Zählzeit in Bezug auf ein Register. Dabei werden alle Codes dazu vom Netzbetreiber vergeben.
+/// Ein Zählzeitregister beschreibt eine erweiterte Definition der Zählzeit in Bezug auf ein Register. Dabei werden alle Codes dazu vom Netzbetreiber vergeben.
 /// </summary>
 [ProtoContract]
 [NonOfficial(NonOfficialCategory.REGULATORY_REQUIREMENTS)]
 public class Zaehlzeitregister : COM
 {
     /// <summary>
-    ///  Zählzeitdefinition
+    /// Zählzeitdefinition
     /// </summary>
     [JsonProperty(PropertyName = "zaehlzeitDefinition", Order = 4, Required = Required.Default)]
     [JsonPropertyOrder(4)]
@@ -23,7 +23,7 @@ public class Zaehlzeitregister : COM
     public string? ZaehlzeitDefinition { get; set; }
 
     /// <summary>
-    ///     Zählzeitregister
+    /// Zählzeitregister
     /// </summary>
     [JsonProperty(PropertyName = "register", Order = 5, Required = Required.Default)]
     [JsonPropertyName("register")]
@@ -32,7 +32,7 @@ public class Zaehlzeitregister : COM
     public string? Register { get; set; }
 
     /// <summary>
-    ///     Schwachlastfähigkeit des Registers
+    /// Schwachlastfähigkeit des Registers
     /// </summary>
     [JsonProperty(PropertyName = "schwachlastfaehig", Order = 6, Required = Required.Default)]
     [JsonPropertyName("schwachlastfaehig")]
