@@ -15,7 +15,7 @@ public class Abweichungsposition : COM
     /// <summary>
     /// Angabe des Abweichungsgrunds (Code)
     /// </summary>
-    [JsonProperty(PropertyName = "abweichungsgrundCode", Required = Required.Default, Order = 7)]
+    [JsonProperty(PropertyName = "abweichungsgrundCode", Order = 7)]
     [JsonPropertyName("abweichungsgrundCode")]
     [NonOfficial(NonOfficialCategory.MISSING)]
     [ProtoMember(7)]
@@ -25,11 +25,7 @@ public class Abweichungsposition : COM
     /// <summary>
     /// Angabe des Abweichungsgrunds (Codeliste)
     /// </summary>
-    [JsonProperty(
-        PropertyName = "abweichungsgrundCodeliste",
-        Required = Required.Default,
-        Order = 3
-    )]
+    [JsonProperty(PropertyName = "abweichungsgrundCodeliste", Order = 3)]
     [JsonPropertyName("abweichungsgrundCodeliste")]
     [NonOfficial(NonOfficialCategory.MISSING)]
     [ProtoMember(3)]
@@ -39,11 +35,7 @@ public class Abweichungsposition : COM
     /// <summary>
     /// Nähere Erläuterung zum Abweichungsgrund
     /// </summary>
-    [JsonProperty(
-        PropertyName = "abweichungsgrundBemerkung",
-        Required = Required.Default,
-        Order = 4
-    )]
+    [JsonProperty(PropertyName = "abweichungsgrundBemerkung", Order = 4)]
     [JsonPropertyName("abweichungsgrundBemerkung")]
     [NonOfficial(NonOfficialCategory.MISSING)]
     [ProtoMember(4)]
@@ -53,7 +45,7 @@ public class Abweichungsposition : COM
     /// <summary>
     /// Zugehörige Rechnung
     /// </summary>
-    [JsonProperty(PropertyName = "zugehoerigeRechnung", Required = Required.Default, Order = 5)]
+    [JsonProperty(PropertyName = "zugehoerigeRechnung", Order = 5)]
     [JsonPropertyName("zugehoerigeRechnung")]
     [NonOfficial(NonOfficialCategory.MISSING)]
     [ProtoMember(5)]
@@ -63,7 +55,7 @@ public class Abweichungsposition : COM
     /// <summary>
     /// Zugehörige Bestellung
     /// </summary>
-    [JsonProperty(PropertyName = "zugehoerigeBestellung", Required = Required.Default, Order = 6)]
+    [JsonProperty(PropertyName = "zugehoerigeBestellung", Order = 6)]
     [JsonPropertyName("zugehoerigeBestellung")]
     [NonOfficial(NonOfficialCategory.MISSING)]
     [ProtoMember(6)]

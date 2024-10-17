@@ -27,7 +27,7 @@ public class MarktpartnerDetails : COM
     /// <summary>
     /// Rollencodenummer von Marktrolle
     /// </summary>
-    [JsonProperty(PropertyName = "rollencodenummer", Required = Required.Default)]
+    [JsonProperty(PropertyName = "rollencodenummer")]
     [JsonPropertyName("rollencodenummer")]
     [ProtoMember(3)]
     public string? Rollencodenummer { get; set; }
@@ -35,7 +35,7 @@ public class MarktpartnerDetails : COM
     /// <summary>
     /// Code von Marktrolle
     /// </summary>
-    [JsonProperty(PropertyName = "code", Required = Required.Default)]
+    [JsonProperty(PropertyName = "code")]
     [JsonPropertyName("code")]
     [NonOfficial(NonOfficialCategory.UNSPECIFIED)]
     [ProtoMember(4)]
@@ -44,7 +44,6 @@ public class MarktpartnerDetails : COM
     /// <summary>
     /// Marktrolle. Details siehe <see cref="ENUM.Marktrolle" />
     /// </summary>
-    [JsonProperty(Required = Required.Default)]
     [ProtoMember(5)]
 #pragma warning disable IDE1006 // Naming Styles because Marktrolle is already the name of the enum
     // ReSharper disable once InconsistentNaming
@@ -53,7 +52,7 @@ public class MarktpartnerDetails : COM
     /// <summary>
     /// Weiterverpflichtung des MSB />
     /// </summary>
-    [JsonProperty(PropertyName = "weiterverpflichtet", Required = Required.Default, Order = 10)]
+    [JsonProperty(PropertyName = "weiterverpflichtet", Order = 10)]
     [JsonPropertyName("weiterverpflichtet")]
     [ProtoMember(10)]
     [JsonPropertyOrder(10)]

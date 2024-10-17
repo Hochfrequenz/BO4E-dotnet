@@ -23,7 +23,7 @@ public class Benachrichtigung : BusinessObject
     ///     Eine eindeutige ID der Benachrichtigung.
     ///     Entspricht z.B. der Klärfallnummer in einem SAP-System oder der Task-ID im Salesforce
     /// </summary>
-    [JsonProperty(Required = Required.Always, Order = 4, PropertyName = "benachrichtigungsId")]
+    [JsonProperty(Order = 4, PropertyName = "benachrichtigungsId")]
     [JsonPropertyName("benachrichtigungsId")]
     [ProtoMember(4)]
     [BoKey]
@@ -33,7 +33,7 @@ public class Benachrichtigung : BusinessObject
     ///     Priorität der Benachrichtigung
     /// </summary>
     [DefaultValue(Prioritaet.NORMAL)]
-    [JsonProperty(Required = Required.Always, Order = 5, PropertyName = "prioritaet")]
+    [JsonProperty(Order = 5, PropertyName = "prioritaet")]
     [JsonPropertyName("prioritaet")]
     [ProtoMember(5)]
     public Prioritaet Prioritaet { get; set; }
@@ -42,7 +42,7 @@ public class Benachrichtigung : BusinessObject
     ///     Status der Benachrichtigung
     /// </summary>
     [DefaultValue(Bearbeitungsstatus.OFFEN)]
-    [JsonProperty(Required = Required.Always, Order = 6, PropertyName = "bearbeitungsstatus")]
+    [JsonProperty(Order = 6, PropertyName = "bearbeitungsstatus")]
     [JsonPropertyName("bearbeitungsstatus")]
     [ProtoMember(6)]
     public Bearbeitungsstatus Bearbeitungsstatus { get; set; }
@@ -50,7 +50,7 @@ public class Benachrichtigung : BusinessObject
     /// <summary>
     ///     Kurzbeschreibung des Fehlers (Klärfall-Überschrift im SAP, Subject im SFDC)
     /// </summary>
-    [JsonProperty(Required = Required.Always, Order = 7, PropertyName = "kurztext")]
+    [JsonProperty(Order = 7, PropertyName = "kurztext")]
     [JsonPropertyName("kurztext")]
     [ProtoMember(7)]
     public string Kurztext { get; set; }
@@ -72,7 +72,7 @@ public class Benachrichtigung : BusinessObject
     ///     Zeitpunkt zu dem die Benachrichtigung erstellt wurde (UTC).
     /// </summary>
     // [DefaultValue(DateTimeOffset.UtcNow)] <-- doesn't work.
-    [JsonProperty(Required = Required.Always, Order = 8, PropertyName = "erstellungsZeitpunkt")]
+    [JsonProperty(Order = 8, PropertyName = "erstellungsZeitpunkt")]
     [JsonPropertyName("erstellungsZeitpunkt")]
     [ProtoIgnore]
     [Newtonsoft.Json.JsonConverter(typeof(LenientDateTimeConverter))]
@@ -97,7 +97,7 @@ public class Benachrichtigung : BusinessObject
     ///     Optionale Kategorisierung der Benachrichtigung.
     ///     (Entspricht z.B. der Klärfallkategorie in SAP)
     /// </summary>
-    [JsonProperty(Required = Required.Default, Order = 9, PropertyName = "kategorie")]
+    [JsonProperty(Order = 9, PropertyName = "kategorie")]
     [JsonPropertyName("kategorie")]
     [ProtoMember(9)]
     public string? Kategorie { get; set; }
@@ -107,7 +107,7 @@ public class Benachrichtigung : BusinessObject
     ///     muss; analog dem Klärfallbearbeiter im SAP oder dem Owner im Salesforce.
     ///     Kann auch <c>null</c> sein, wenn es keinen festen Bearbeiter gibt.
     /// </summary>
-    [JsonProperty(Required = Required.Default, Order = 10, PropertyName = "bearbeiter")]
+    [JsonProperty(Order = 10, PropertyName = "bearbeiter")]
     [JsonPropertyName("bearbeiter")]
     [ProtoMember(10)]
     public string? Bearbeiter { get; set; }
@@ -115,7 +115,7 @@ public class Benachrichtigung : BusinessObject
     /// <summary>
     ///     Detaillierte Beschreibung (Klärfall-Notizen im SAP, Description im SFDC)
     /// </summary>
-    [JsonProperty(Required = Required.Default, Order = 11, PropertyName = "notizen")]
+    [JsonProperty(Order = 11, PropertyName = "notizen")]
     [JsonPropertyName("notizen")]
     [ProtoMember(11)]
     public List<Notiz>? Notizen { get; set; }
@@ -124,7 +124,7 @@ public class Benachrichtigung : BusinessObject
     /// <summary>
     /// Referenz auf ein Business Object, das die Benachrichtigung ausgelöst hat.
     /// </summary>
-    [JsonProperty(Required = Required.Default, Order = 8)]
+    [JsonProperty( Order = 8)]
     [ProtoMember(8)]
     public Bo4eUri betroffenesObjekt { get;set; }
     */
@@ -142,7 +142,7 @@ public class Benachrichtigung : BusinessObject
     /// <summary>
     ///     Zeitpunkt bis zu dem die Benachrichtigung bearbeitet worden sein muss.
     /// </summary>
-    [JsonProperty(Required = Required.Default, Order = 12, PropertyName = "deadline")]
+    [JsonProperty(Order = 12, PropertyName = "deadline")]
     [JsonPropertyName("deadline")]
     [ProtoIgnore]
     [Newtonsoft.Json.JsonConverter(typeof(LenientDateTimeConverter))]
@@ -151,7 +151,7 @@ public class Benachrichtigung : BusinessObject
     /// <summary>
     ///     Liste von Aktivitäten, die der Bearbeiter ausführen kann.
     /// </summary>
-    [JsonProperty(Required = Required.Default, Order = 13, PropertyName = "aufgaben")]
+    [JsonProperty(Order = 13, PropertyName = "aufgaben")]
     [JsonPropertyName("aufgaben")]
     [ProtoMember(13)]
     public List<Aufgabe>? Aufgaben { get; set; }
@@ -159,7 +159,7 @@ public class Benachrichtigung : BusinessObject
     /// <summary>
     ///     list of additional information built in a customer dependet implementation
     /// </summary>
-    [JsonProperty(Required = Required.Default, Order = 14, PropertyName = "infos")]
+    [JsonProperty(Order = 14, PropertyName = "infos")]
     [JsonPropertyName("infos")]
     [ProtoMember(14)]
     public List<GenericStringStringInfo>? Infos { get; set; }

@@ -422,7 +422,7 @@ public class Rechnung : BusinessObject
     /// <summary>
     ///     Bezeichnung für die vorliegende Rechnung.
     /// </summary>
-    [JsonProperty(Required = Required.Default, Order = 6, PropertyName = "rechnungstitel")]
+    [JsonProperty(Order = 6, PropertyName = "rechnungstitel")]
     [JsonPropertyName("rechnungstitel")]
     [FieldName("billTitle", Language.EN)]
     [ProtoMember(4)]
@@ -432,7 +432,7 @@ public class Rechnung : BusinessObject
     /// <summary>
     ///     Status der Rechnung zur Kennzeichnung des Bearbeitungsstandes. Details siehe ENUM Rechnungsstatus
     /// </summary>
-    [JsonProperty(Required = Required.Default, Order = 7, PropertyName = "rechnungsstatus")]
+    [JsonProperty(Order = 7, PropertyName = "rechnungsstatus")]
     [JsonPropertyName("rechnungsstatus")]
     [FieldName("billStatus", Language.EN)]
     [ProtoMember(5)]
@@ -443,7 +443,7 @@ public class Rechnung : BusinessObject
     ///     Kennzeichnung, ob es sich um eine Stornorechnung handelt. Im Falle "true" findet sich im Attribut
     ///     "originalrechnungsnummer" die Nummer der Originalrechnung.
     /// </summary>
-    [JsonProperty(Required = Required.Always, Order = 8, PropertyName = "storno")]
+    [JsonProperty(Order = 8, PropertyName = "storno")]
     [JsonPropertyName("storno")]
     [FieldName("isCancellation", Language.EN)]
     [ProtoMember(6)]
@@ -453,7 +453,7 @@ public class Rechnung : BusinessObject
     /// <summary>
     ///     Eine im Verwendungskontext eindeutige Nummer für die Rechnung.
     /// </summary>
-    [JsonProperty(Required = Required.Always, Order = 9, PropertyName = "rechnungsnummer")]
+    [JsonProperty(Order = 9, PropertyName = "rechnungsnummer")]
     [JsonPropertyName("rechnungsnummer")]
     [ProtoMember(7)]
     [JsonPropertyOrder(9)]
@@ -474,7 +474,7 @@ public class Rechnung : BusinessObject
     /// <summary>
     ///     Ausstellungsdatum der Rechnung.
     /// </summary>
-    [JsonProperty(Required = Required.Always, Order = 10, PropertyName = "rechnungsdatum")]
+    [JsonProperty(Order = 10, PropertyName = "rechnungsdatum")]
     [JsonPropertyName("rechnungsdatum")]
     [ProtoIgnore]
     [JsonPropertyOrder(10)]
@@ -494,7 +494,7 @@ public class Rechnung : BusinessObject
     /// <summary>
     ///     Zu diesem Datum ist die Zahlung fällig.
     /// </summary>
-    [JsonProperty(Required = Required.Always, Order = 11, PropertyName = "faelligkeitsdatum")]
+    [JsonProperty(Order = 11, PropertyName = "faelligkeitsdatum")]
     [JsonPropertyName("faelligkeitsdatum")]
     [ProtoIgnore]
     [JsonPropertyOrder(11)]
@@ -504,7 +504,7 @@ public class Rechnung : BusinessObject
     /// <summary>
     ///     Ein kontextbezogender Rechnungstyp, z.B. Netznutzungsrechnung. Details siehe ENUM Rechnungstyp
     /// </summary>
-    [JsonProperty(Required = Required.Always, Order = 12, PropertyName = "rechnungstyp")]
+    [JsonProperty(Order = 12, PropertyName = "rechnungstyp")]
     [JsonPropertyName("rechnungstyp")]
     [ProtoMember(10)]
     [JsonPropertyOrder(12)]
@@ -514,11 +514,7 @@ public class Rechnung : BusinessObject
     /// <summary>
     ///     Im Falle einer Stornorechnung (storno = true) steht hier die Rechnungsnummer der stornierten Rechnung.
     /// </summary>
-    [JsonProperty(
-        Required = Required.Default,
-        Order = 13,
-        PropertyName = "originalRechnungsnummer"
-    )]
+    [JsonProperty(Order = 13, PropertyName = "originalRechnungsnummer")]
     [JsonPropertyName("originalRechnungsnummer")]
     [ProtoMember(11)]
     [JsonPropertyOrder(13)]
@@ -527,7 +523,7 @@ public class Rechnung : BusinessObject
     /// <summary>
     ///     Der Zeitraum der zugrunde liegenden Lieferung zur Rechnung. In der COM Zeitraum können diese angegeben werden.
     /// </summary>
-    [JsonProperty(Required = Required.Always, Order = 14, PropertyName = "rechnungsperiode")]
+    [JsonProperty(Order = 14, PropertyName = "rechnungsperiode")]
     [JsonPropertyName("rechnungsperiode")]
     [ProtoMember(12)]
     [JsonPropertyOrder(14)]
@@ -537,7 +533,7 @@ public class Rechnung : BusinessObject
     /// <summary>
     ///     Der Aussteller der Rechnung. Details <see cref="Geschaeftspartner" />
     /// </summary>
-    [JsonProperty(Required = Required.Always, Order = 15, PropertyName = "rechnungsersteller")]
+    [JsonProperty(Order = 15, PropertyName = "rechnungsersteller")]
     [JsonPropertyName("rechnungsersteller")]
     [ProtoMember(13)]
     [JsonPropertyOrder(15)]
@@ -547,7 +543,7 @@ public class Rechnung : BusinessObject
     /// <summary>
     ///     Der Empfänger der Rechnung. Details <see cref="Geschaeftspartner" />
     /// </summary>
-    [JsonProperty(Required = Required.Always, Order = 16, PropertyName = "rechnungsempfaenger")]
+    [JsonProperty(Order = 16, PropertyName = "rechnungsempfaenger")]
     [JsonPropertyName("rechnungsempfaenger")]
     [ProtoMember(14)]
     [JsonPropertyOrder(16)]
@@ -557,7 +553,7 @@ public class Rechnung : BusinessObject
     /// <summary>
     ///     Die Summe der Nettobeträge der Rechnungsteile. Details <see cref="Betrag" />
     /// </summary>
-    [JsonProperty(Required = Required.Always, Order = 17, PropertyName = "gesamtnetto")]
+    [JsonProperty(Order = 17, PropertyName = "gesamtnetto")]
     [JsonPropertyName("gesamtnetto")]
     [ProtoMember(15)]
     [JsonPropertyOrder(17)]
@@ -567,7 +563,7 @@ public class Rechnung : BusinessObject
     /// <summary>
     ///     Die Summe der Steuerbeträge der Rechnungsteile. Details <see cref="Betrag" />
     /// </summary>
-    [JsonProperty(Required = Required.Always, Order = 18, PropertyName = "gesamtsteuer")]
+    [JsonProperty(Order = 18, PropertyName = "gesamtsteuer")]
     [JsonPropertyName("gesamtsteuer")]
     [ProtoMember(16)]
     [JsonPropertyOrder(18)]
@@ -577,7 +573,7 @@ public class Rechnung : BusinessObject
     /// <summary>
     ///     Die Summe aus Netto- und Steuerbetrag. Details <see cref="Betrag" />
     /// </summary>
-    [JsonProperty(Required = Required.Always, Order = 19, PropertyName = "gesamtbrutto")]
+    [JsonProperty(Order = 19, PropertyName = "gesamtbrutto")]
     [JsonPropertyName("gesamtbrutto")]
     [ProtoMember(17)]
     [JsonPropertyOrder(19)]
@@ -587,7 +583,7 @@ public class Rechnung : BusinessObject
     /// <summary>
     ///     Die Summe evtl. vorausgezahlter Beträge, z.B. Abschläge. Angabe als Bruttowert. Details <see cref="Betrag" />
     /// </summary>
-    [JsonProperty(Required = Required.Default, Order = 20, PropertyName = "vorausgezahlt")]
+    [JsonProperty(Order = 20, PropertyName = "vorausgezahlt")]
     [JsonPropertyName("vorausgezahlt")]
     [ProtoMember(18)]
     [JsonPropertyOrder(20)]
@@ -597,7 +593,7 @@ public class Rechnung : BusinessObject
     /// <summary>
     ///     Gesamtrabatt auf den Bruttobetrag. Details <see cref="Betrag" />
     /// </summary>
-    [JsonProperty(Required = Required.Default, Order = 21, PropertyName = "rabattBrutto")]
+    [JsonProperty(Order = 21, PropertyName = "rabattBrutto")]
     [JsonPropertyName("rabattBrutto")]
     [ProtoMember(19)]
     [JsonPropertyOrder(21)]
@@ -609,7 +605,7 @@ public class Rechnung : BusinessObject
     ///     <see cref="RabattBrutto" />) ergibt. Details <see cref="Betrag" />
     ///     ///
     /// </summary>
-    [JsonProperty(Required = Required.Always, Order = 22, PropertyName = "zuzahlen")]
+    [JsonProperty(Order = 22, PropertyName = "zuzahlen")]
     [JsonPropertyName("zuzahlen")]
     [ProtoMember(20)]
     [JsonPropertyOrder(22)]
@@ -620,7 +616,7 @@ public class Rechnung : BusinessObject
     ///     Eine Liste mit Steuerbeträgen pro Steuerkennzeichen/Steuersatz. Die Summe dieser Beträge ergibt den Wert für
     ///     gesamtsteuer. Details <see cref="Steuerbetrag" />
     /// </summary>
-    [JsonProperty(Required = Required.Default, Order = 23, PropertyName = "steuerbetraege")]
+    [JsonProperty(Order = 23, PropertyName = "steuerbetraege")]
     [JsonPropertyName("steuerbetraege")]
     [ProtoMember(21)]
     [JsonPropertyOrder(23)]
@@ -631,7 +627,7 @@ public class Rechnung : BusinessObject
     ///     Die Rechnungspositionen. Details siehe <see cref="Rechnungsposition" />
     /// </summary>
     [ProtoMember(22)]
-    [JsonProperty(Required = Required.Always, Order = 24, PropertyName = "rechnungspositionen")]
+    [JsonProperty(Order = 24, PropertyName = "rechnungspositionen")]
     [JsonPropertyName("rechnungspositionen")]
     [FieldName("invoiceItemList", Language.EN)]
     [JsonPropertyOrder(24)]
@@ -641,7 +637,7 @@ public class Rechnung : BusinessObject
     ///     Kennzeichen, ob es sich um eine selbstausgestellte Rechnung handelt
     /// </summary>
     [ProtoMember(23)]
-    [JsonProperty(Required = Required.Default, Order = 25, PropertyName = "istSelbstausgestellt")]
+    [JsonProperty(Order = 25, PropertyName = "istSelbstausgestellt")]
     [JsonPropertyName("istSelbstausgestellt")]
     [JsonPropertyOrder(25)]
     public bool? IstSelbstausgestellt { get; set; }
@@ -650,7 +646,7 @@ public class Rechnung : BusinessObject
     ///     Kennzeichen, ob bei der Rechnung das Reverse Charge verfahren angewendet wird
     /// </summary>
     [ProtoMember(24)]
-    [JsonProperty(Required = Required.Default, Order = 26, PropertyName = "istReverseCharge")]
+    [JsonProperty(Order = 26, PropertyName = "istReverseCharge")]
     [JsonPropertyName("istReverseCharge")]
     [JsonPropertyOrder(26)]
     public bool? IstReverseCharge { get; set; }
@@ -658,7 +654,7 @@ public class Rechnung : BusinessObject
     /// <summary>
     ///     evtl. vorausgezahlte Beträge, z.B. Abschläge. Angabe als Bruttowert. Details <see cref="Betrag" />
     /// </summary>
-    [JsonProperty(Required = Required.Default, Order = 27, PropertyName = "vorauszahlungen")]
+    [JsonProperty(Order = 27, PropertyName = "vorauszahlungen")]
     [JsonPropertyName("vorauszahlungen")]
     [ProtoMember(25)]
     [FieldName("prepaids", Language.EN)]
@@ -668,7 +664,7 @@ public class Rechnung : BusinessObject
     /// <summary>
     ///     Sonderrechnungsart
     /// </summary>
-    [JsonProperty(Required = Required.Default, Order = 28, PropertyName = "sonderrechnungsart")]
+    [JsonProperty(Order = 28, PropertyName = "sonderrechnungsart")]
     [JsonPropertyName("sonderrechnungsart")]
     [ProtoMember(26)]
     [JsonPropertyOrder(28)]
@@ -687,7 +683,7 @@ public class Rechnung : BusinessObject
     /// <summary>
     ///     Zu diesem Datum ist die Zahlung fällig.
     /// </summary>
-    [JsonProperty(Required = Required.Default, Order = 29, PropertyName = "buchungsdatum")]
+    [JsonProperty(Order = 29, PropertyName = "buchungsdatum")]
     [JsonPropertyName("buchungsdatum")]
     [ProtoIgnore]
     [FieldName("bookingDate", Language.EN)]

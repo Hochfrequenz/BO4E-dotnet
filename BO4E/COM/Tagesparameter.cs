@@ -16,7 +16,7 @@ public class Tagesparameter : COM
     ///     Qualifier der Klimazone
     /// </summary>
     /// <example>7624q</example>
-    [JsonProperty(PropertyName = "klimazone", Required = Required.Default)]
+    [JsonProperty(PropertyName = "klimazone")]
     [JsonPropertyName("klimazone")]
     [ProtoMember(3)]
     public string? Klimazone { get; set; }
@@ -25,7 +25,7 @@ public class Tagesparameter : COM
     ///     Qualifier der Temperaturmessstelle
     /// </summary>
     /// <example>1234x</example>
-    [JsonProperty(PropertyName = "temperaturmessstelle", Required = Required.Default)]
+    [JsonProperty(PropertyName = "temperaturmessstelle")]
     [JsonPropertyName("temperaturmessstelle")]
     [ProtoMember(4)]
     public string? Temperaturmessstelle { get; set; }
@@ -34,7 +34,7 @@ public class Tagesparameter : COM
     ///    Dienstanbieter (bei Temperaturmessstellen)
     /// </summary>
     /// <example>ZT1</example>
-    [JsonProperty(PropertyName = "dienstanbieter", Required = Required.Default)]
+    [JsonProperty(PropertyName = "dienstanbieter")]
     [JsonPropertyName("dienstanbieter")]
     [ProtoMember(5)]
     public string? Dienstanbieter { get; set; }
@@ -43,7 +43,7 @@ public class Tagesparameter : COM
     ///    Herausgeber des Lastprofil-Codes
     /// </summary>
     /// <example>BDEW</example>
-    [JsonProperty(PropertyName = "herausgeber", Required = Required.Default)]
+    [JsonProperty(PropertyName = "herausgeber")]
     [JsonPropertyName("herausgeber")]
     [ProtoMember(6)]
     public string? Herausgeber { get; set; }

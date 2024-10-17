@@ -17,7 +17,7 @@ public class Handelsunstimmigkeitsbegruendung : COM
     /// <summary>
     /// Referenzen auf vorherige Nachrichten
     /// </summary>
-    [JsonProperty(PropertyName = "referenzen", Required = Required.Default, Order = 1)]
+    [JsonProperty(PropertyName = "referenzen", Order = 1)]
     [JsonPropertyName("referenzen")]
     [NonOfficial(NonOfficialCategory.MISSING)]
     [ProtoMember(1)]
@@ -26,7 +26,7 @@ public class Handelsunstimmigkeitsbegruendung : COM
     /// <summary>
     /// Angabe des Handelsunstimmigkeitsgrunds
     /// </summary>
-    [JsonProperty(PropertyName = "grund", Required = Required.Always, Order = 2)]
+    [JsonProperty(PropertyName = "grund", Order = 2)]
     [JsonPropertyName("grund")]
     [NonOfficial(NonOfficialCategory.MISSING)]
     [ProtoMember(2)]

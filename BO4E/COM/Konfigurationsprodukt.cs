@@ -13,7 +13,7 @@ public class Konfigurationsprodukt : COM
     /// <summary>
     /// Der Konfigurationsprodukt-Code für das Objekt
     /// </summary>
-    [JsonProperty(Required = Required.Default, Order = 1, PropertyName = "produktcode")]
+    [JsonProperty(Order = 1, PropertyName = "produktcode")]
     [JsonPropertyOrder(1)]
     [JsonPropertyName("produktcode")]
     [ProtoMember(1)]
@@ -23,11 +23,7 @@ public class Konfigurationsprodukt : COM
     /// <summary>
     /// Code der Zugeordnete Leistungskurvendefinition für das Objekt
     /// </summary>
-    [JsonProperty(
-        Required = Required.Default,
-        Order = 2,
-        PropertyName = "leistungskurvendefinition"
-    )]
+    [JsonProperty(Order = 2, PropertyName = "leistungskurvendefinition")]
     [JsonPropertyOrder(2)]
     [JsonPropertyName("leistungskurvendefinition")]
     [ProtoMember(2)]
@@ -37,7 +33,7 @@ public class Konfigurationsprodukt : COM
     /// <summary>
     /// Code der Zugeordnete Schaltzeitdefinition für das Objekt
     /// </summary>
-    [JsonProperty(Required = Required.Default, Order = 3, PropertyName = "schaltzeitdefinition")]
+    [JsonProperty(Order = 3, PropertyName = "schaltzeitdefinition")]
     [JsonPropertyOrder(3)]
     [JsonPropertyName("schaltzeitdefinition")]
     [ProtoMember(3)]
@@ -47,11 +43,7 @@ public class Konfigurationsprodukt : COM
     /// <summary>
     /// Auftraggebender Marktpartner
     /// </summary>
-    [JsonProperty(
-        Required = Required.Default,
-        Order = 4,
-        PropertyName = "auftraggebenderMarktpartner"
-    )]
+    [JsonProperty(Order = 4, PropertyName = "auftraggebenderMarktpartner")]
     [JsonPropertyOrder(4)]
     [JsonPropertyName("auftraggebenderMarktpartner")]
     [ProtoMember(4)]
@@ -63,7 +55,7 @@ public class Konfigurationsprodukt : COM
     /// Dient zur Identifizierung der Marktrolle an der Marktlokation, an die die Daten des
     /// Konfigurationsprodukts vom MSB der Marktlokation zu übermitteln sind.
     /// </summary>
-    [JsonProperty(Required = Required.Default, Order = 5, PropertyName = "empfangendeMarktrolle")]
+    [JsonProperty(Order = 5, PropertyName = "empfangendeMarktrolle")]
     [JsonPropertyOrder(5)]
     [JsonPropertyName("empfangendeMarktrolle")]
     [ProtoMember(5)]

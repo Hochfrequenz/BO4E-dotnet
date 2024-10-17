@@ -14,7 +14,7 @@ namespace BO4E.COM;
 public class Angebotsteil : COM
 {
     /// <summary>Identifizierung eines Subkapitels einer Anfrage, beispielsweise das Los einer Ausschreibung.</summary>
-    [JsonProperty(PropertyName = "anfrageSubreferenz", Order = 10, Required = Required.Default)]
+    [JsonProperty(PropertyName = "anfrageSubreferenz", Order = 10)]
     [JsonPropertyName("anfrageSubreferenz")]
     [JsonPropertyOrder(10)]
     [ProtoMember(3)]
@@ -62,14 +62,14 @@ public class Angebotsteil : COM
     public Betrag? Gesamtkostenangebotsteil { get; set; }
 
     /// <summary>Einzelne Positionen, die zu diesem Angebotsteil gehören. Details <see cref="Angebotsposition" /></summary>
-    [JsonProperty(PropertyName = "positionen", Order = 14, Required = Required.Always)]
+    [JsonProperty(PropertyName = "positionen", Order = 14)]
     [JsonPropertyName("positionen")]
     [JsonPropertyOrder(14)]
     [ProtoMember(7)]
     public List<Angebotsposition> Positionen { get; set; }
 
     /// <summary>Hier kann der Belieferungszeitraum angegeben werden, für den dieser Angebotsteil gilt. Details <see cref="Zeitraum" /></summary>
-    [JsonProperty(PropertyName = "lieferzeitraum", Order = 15, Required = Required.Default)]
+    [JsonProperty(PropertyName = "lieferzeitraum", Order = 15)]
     [JsonPropertyName("lieferzeitraum")]
     [JsonPropertyOrder(15)]
     [ProtoMember(8)]

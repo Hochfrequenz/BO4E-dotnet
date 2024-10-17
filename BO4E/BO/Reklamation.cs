@@ -19,7 +19,7 @@ public class Reklamation : BusinessObject
     /// <summary>
     /// Für welche Markt- oder Messlokation gilt diese Reklamation.
     /// </summary>
-    [JsonProperty(PropertyName = "lokationsId", Required = Required.Always, Order = 10)]
+    [JsonProperty(PropertyName = "lokationsId", Order = 10)]
     [JsonPropertyName("lokationsId")]
     [NonOfficial(NonOfficialCategory.MISSING)]
     [ProtoMember(1000)]
@@ -30,7 +30,7 @@ public class Reklamation : BusinessObject
     /// Gibt an, ob es sich um eine Markt- oder Messlokation handelt.
     /// </summary>
     /// <see cref="Lokationstyp" />
-    [JsonProperty(PropertyName = "lokationsTyp", Required = Required.Always, Order = 11)]
+    [JsonProperty(PropertyName = "lokationsTyp", Order = 11)]
     [JsonPropertyName("lokationsTyp")]
     [ProtoMember(1001)]
     [JsonPropertyOrder(11)]
@@ -42,7 +42,7 @@ public class Reklamation : BusinessObject
     /// <example>
     ///     1-0:1.8.1
     /// </example>
-    [JsonProperty(PropertyName = "obiskennzahl", Required = Required.Always, Order = 12)]
+    [JsonProperty(PropertyName = "obiskennzahl", Order = 12)]
     [JsonPropertyName("obiskennzahl")]
     [NonOfficial(NonOfficialCategory.MISSING)]
     [ProtoMember(1002)]
@@ -54,11 +54,7 @@ public class Reklamation : BusinessObject
     /// Sollablesetermin / Zeitangabe für Messwertanfrage. Details <see cref="Zeitraum" />
     /// </summary>
     /// <remarks>DTM+163 and DTM+164</remarks>
-    [JsonProperty(
-        PropertyName = "ZeitraumMesswertanfrage",
-        Required = Required.Default,
-        Order = 13
-    )]
+    [JsonProperty(PropertyName = "ZeitraumMesswertanfrage", Order = 13)]
     [JsonPropertyName("ZeitraumMesswertanfrage")]
     [ProtoMember(1003)]
     [JsonPropertyOrder(13)]
@@ -67,7 +63,7 @@ public class Reklamation : BusinessObject
     /// <summary>
     /// Hier wird für die Reklamation von Werten der Reklamationsgrund angegeben.
     /// </summary>
-    [JsonProperty(PropertyName = "reklamationsgrund", Required = Required.Always, Order = 14)]
+    [JsonProperty(PropertyName = "reklamationsgrund", Order = 14)]
     [JsonPropertyName("reklamationsgrund")]
     [NonOfficial(NonOfficialCategory.MISSING)]
     [ProtoMember(1004)]
@@ -78,11 +74,7 @@ public class Reklamation : BusinessObject
     /// <summary>
     /// Freitext für eine weitere Beschreibung des Reklamationsgrunds
     /// </summary>
-    [JsonProperty(
-        PropertyName = "reklamationsgrundBemerkung",
-        Required = Required.Default,
-        Order = 15
-    )]
+    [JsonProperty(PropertyName = "reklamationsgrundBemerkung", Order = 15)]
     [JsonPropertyName("reklamationsgrundBemerkung")]
     [NonOfficial(NonOfficialCategory.MISSING)]
     [ProtoMember(1005)]
@@ -105,11 +97,7 @@ public class Reklamation : BusinessObject
     /// Zeitpunkt für Wertanfrage
     /// </summary>
     /// <remarks>DTM+7</remarks>
-    [JsonProperty(
-        PropertyName = "zeitpunktFuerWertanfrage",
-        Required = Required.Default,
-        Order = 16
-    )]
+    [JsonProperty(PropertyName = "zeitpunktFuerWertanfrage", Order = 16)]
     [JsonPropertyName("zeitpunktFuerWertanfrage")]
     [JsonPropertyOrder(16)]
     [ProtoIgnore]

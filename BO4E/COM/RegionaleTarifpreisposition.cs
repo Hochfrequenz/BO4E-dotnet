@@ -14,13 +14,13 @@ namespace BO4E.COM;
 public class RegionaleTarifpreisposition : COM
 {
     /// <summary>Angabe des Preistyps (z.B. Grundpreis) Details <see cref="ENUM.Preistyp" /></summary>
-    [JsonProperty(PropertyName = "preistyp", Required = Required.Always)]
+    [JsonProperty(PropertyName = "preistyp")]
     [JsonPropertyName("preistyp")]
     [ProtoMember(3)]
     public Preistyp Preistyp { get; set; }
 
     /// <summary>Einheit des Preises (z.B. EURO) Details <see cref="Waehrungseinheit" /></summary>
-    [JsonProperty(PropertyName = "einheit", Required = Required.Always)]
+    [JsonProperty(PropertyName = "einheit")]
     [JsonPropertyName("einheit")]
     [ProtoMember(4)]
     public string Einheit { get; set; }
@@ -28,7 +28,7 @@ public class RegionaleTarifpreisposition : COM
     /// <summary>
     ///     Größe, auf die sich die Einheit bezieht, beispielsweise kWh, Jahr. Details <see cref="Mengeneinheit" />
     /// </summary>
-    [JsonProperty(PropertyName = "bezugseinheit", Required = Required.Always)]
+    [JsonProperty(PropertyName = "bezugseinheit")]
     [JsonPropertyName("bezugseinheit")]
     [ProtoMember(5)]
     public Mengeneinheit Bezugseinheit { get; set; }
@@ -37,7 +37,7 @@ public class RegionaleTarifpreisposition : COM
     ///     Gibt an, nach welcher Menge die vorgenannte Einschränkung erfolgt (z.B. Jahresstromverbrauch in kWh).Details
     ///     <see cref="Mengeneinheit" />
     /// </summary>
-    [JsonProperty(PropertyName = "mengeneinheitstaffel", Required = Required.Default)]
+    [JsonProperty(PropertyName = "mengeneinheitstaffel")]
     [JsonPropertyName("mengeneinheitstaffel")]
     [ProtoMember(6)]
     public Mengeneinheit? Mengeneinheitstaffel { get; set; }
@@ -46,7 +46,7 @@ public class RegionaleTarifpreisposition : COM
     ///     Hier sind die Staffeln mit ihren Preisangaben und regionalen Gültigkeiten definiert. Struktur
     ///     <seealso cref="RegionalePreisstaffel" />
     /// </summary>
-    [JsonProperty(PropertyName = "preisstaffeln", Required = Required.Default)]
+    [JsonProperty(PropertyName = "preisstaffeln")]
     [JsonPropertyName("preisstaffeln")]
     [ProtoMember(7)]
     public List<RegionalePreisstaffel>? Preisstaffeln { get; set; }

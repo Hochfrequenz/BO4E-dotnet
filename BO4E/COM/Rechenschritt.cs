@@ -16,7 +16,7 @@ public class Rechenschritt : COM
     /// Die BestandteilID des Rechenschritt (1-99999)
     /// </summary>
     /// <remarks>UTILTS SG8 RFF 1154 / SG</remarks>
-    [JsonProperty(Required = Required.Always, PropertyName = "rechenschrittBestandteilId")]
+    [JsonProperty(PropertyName = "rechenschrittBestandteilId")]
     [JsonPropertyName("rechenschrittBestandteilId")]
     public int RechenschrittBestandteilId { get; set; }
 
@@ -24,14 +24,14 @@ public class Rechenschritt : COM
     /// Die ReferenzID des Rechenschritt (1-99999)
     /// </summary>
     /// <remarks>UTILTS SG8 RFF 1154 / SG</remarks>
-    [JsonProperty(Required = Required.Always, PropertyName = "referenzRechenschrittID")]
+    [JsonProperty(PropertyName = "referenzRechenschrittID")]
     [JsonPropertyName("referenzRechenschrittID")]
     public int ReferenzRechenschrittId { get; set; }
 
     /// <summary>
     /// Die Rechenoperation dieses Schrittes
     /// </summary>
-    [JsonProperty(Required = Required.Always, Order = 3, PropertyName = "operation")]
+    [JsonProperty(Order = 3, PropertyName = "operation")]
     [JsonPropertyName("operation")]
     [BoKey]
     [ProtoMember(3)]
@@ -41,7 +41,7 @@ public class Rechenschritt : COM
     /// Ein möglicher Trafoverlust
     /// </summary>
     /// <remarks>UTILTS SG9 CCI Z16</remarks>
-    [JsonProperty(Required = Required.Default, Order = 4, PropertyName = "verlustfaktorTrafo")]
+    [JsonProperty(Order = 4, PropertyName = "verlustfaktorTrafo")]
     [JsonPropertyName("verlustfaktorTrafo")]
     [ProtoMember(4)]
     public decimal? VerlustfaktorTrafo { get; set; }
@@ -50,7 +50,7 @@ public class Rechenschritt : COM
     /// Ein möglicher Leitungsverlust
     /// </summary>
     /// <remarks>UTILTS SG9 CCI ZB2</remarks>
-    [JsonProperty(Required = Required.Default, Order = 5, PropertyName = "verlustfaktorLeitung")]
+    [JsonProperty(Order = 5, PropertyName = "verlustfaktorLeitung")]
     [JsonPropertyName("verlustfaktorLeitung")]
     [ProtoMember(5)]
     public decimal? VerlustfaktorLeitung { get; set; }
@@ -58,7 +58,7 @@ public class Rechenschritt : COM
     /// <summary>
     /// Verweis auf MesslokationsId
     /// </summary>
-    [JsonProperty(Required = Required.Default, Order = 6, PropertyName = "messlokationId")]
+    [JsonProperty(Order = 6, PropertyName = "messlokationId")]
     [JsonPropertyName("messlokationId")]
     [ProtoMember(6)]
     public string? MesslokationId { get; set; }
@@ -70,7 +70,7 @@ public class Rechenschritt : COM
     /// Berechnungsformel zu verwenden
     ///
     /// </summary>
-    [JsonProperty(Required = Required.Default, Order = 7, PropertyName = "energieflussrichtung")]
+    [JsonProperty(Order = 7, PropertyName = "energieflussrichtung")]
     [JsonPropertyName("energieflussrichtung")]
     [ProtoMember(7)]
     public Energieflussrichtung? Energieflussrichtung { get; set; }
@@ -78,7 +78,7 @@ public class Rechenschritt : COM
     /// <summary>
     /// rekursive Verschachtelung weiterer rechenschritte
     /// </summary>
-    [JsonProperty(Required = Required.Default, Order = 8, PropertyName = "weitererRechenschritt")]
+    [JsonProperty(Order = 8, PropertyName = "weitererRechenschritt")]
     [JsonPropertyName("weitererRechenschritt")]
     public Rechenschritt? WeitererRechenschritt { get; set; }
 
@@ -86,11 +86,7 @@ public class Rechenschritt : COM
     /// Aufteilungsfaktor Energiemenge
     /// </summary>
     /// <remarks>UTILTS SG9 CCI ZG6</remarks>
-    [JsonProperty(
-        Required = Required.Default,
-        Order = 9,
-        PropertyName = "aufteilungsfaktorEnergiemenge"
-    )]
+    [JsonProperty(Order = 9, PropertyName = "aufteilungsfaktorEnergiemenge")]
     [JsonPropertyName("aufteilungsfaktorEnergiemenge")]
     [ProtoMember(9)]
     public decimal? AufteilungsfaktorEnergiemenge { get; set; }

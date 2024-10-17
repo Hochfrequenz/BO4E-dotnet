@@ -16,7 +16,7 @@ public class Zaehlzeitregister : COM
     /// <summary>
     ///  Zählzeitdefinition
     /// </summary>
-    [JsonProperty(PropertyName = "zaehlzeitDefinition", Order = 4, Required = Required.Default)]
+    [JsonProperty(PropertyName = "zaehlzeitDefinition", Order = 4)]
     [JsonPropertyOrder(4)]
     [JsonPropertyName("zaehlzeitDefinition")]
     [ProtoMember(4)]
@@ -25,7 +25,7 @@ public class Zaehlzeitregister : COM
     /// <summary>
     ///     Zählzeitregister
     /// </summary>
-    [JsonProperty(PropertyName = "register", Order = 5, Required = Required.Default)]
+    [JsonProperty(PropertyName = "register", Order = 5)]
     [JsonPropertyName("register")]
     [JsonPropertyOrder(5)]
     [ProtoMember(5)]
@@ -34,7 +34,7 @@ public class Zaehlzeitregister : COM
     /// <summary>
     ///     Schwachlastfähigkeit des Registers
     /// </summary>
-    [JsonProperty(PropertyName = "schwachlastfaehig", Order = 6, Required = Required.Default)]
+    [JsonProperty(PropertyName = "schwachlastfaehig", Order = 6)]
     [JsonPropertyName("schwachlastfaehig")]
     [JsonPropertyOrder(6)]
     [ProtoMember(6)]

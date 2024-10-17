@@ -15,7 +15,7 @@ public class Unterschrift : COM
     /// <summary>
     ///     Ort, an dem die Unterschrift geleistet wird
     /// </summary>
-    [JsonProperty(PropertyName = "ort", Required = Required.Default)]
+    [JsonProperty(PropertyName = "ort")]
     [JsonPropertyName("ort")]
     [ProtoMember(3)]
     public string? Ort { get; set; }
@@ -33,7 +33,7 @@ public class Unterschrift : COM
     /// <summary>
     ///     Datum der Unterschrift
     /// </summary>
-    [JsonProperty(PropertyName = "datum", Required = Required.Default)]
+    [JsonProperty(PropertyName = "datum")]
     [JsonPropertyName("datum")]
     [ProtoIgnore]
     public DateTimeOffset? Datum { get; set; }
@@ -41,7 +41,7 @@ public class Unterschrift : COM
     /// <summary>
     ///     Name des Unterschreibers
     /// </summary>
-    [JsonProperty(PropertyName = "name", Required = Required.Always)]
+    [JsonProperty(PropertyName = "name")]
     [JsonPropertyName("name")]
     [ProtoMember(5)]
     public string? Name { get; set; }

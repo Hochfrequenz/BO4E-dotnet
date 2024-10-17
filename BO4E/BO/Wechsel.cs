@@ -16,14 +16,14 @@ namespace BO4E.BO;
 public class Wechsel : BusinessObject
 {
     /// <summary>Strom oder Gas. <seealso cref="ENUM.Sparte" /></summary>
-    [JsonProperty(Required = Required.Always, Order = 11, PropertyName = "sparte")]
+    [JsonProperty(Order = 11, PropertyName = "sparte")]
     [JsonPropertyName("sparte")]
     [ProtoMember(11)]
     [JsonPropertyOrder(11)]
     public Sparte Sparte { get; set; }
 
     /// <summary>Liste an Geräten.</summary>
-    [JsonProperty(PropertyName = "geraete", Required = Required.Always, Order = 12)]
+    [JsonProperty(PropertyName = "geraete", Order = 12)]
     [JsonPropertyName("geraete")]
     [ProtoMember(12)]
     [JsonPropertyOrder(12)]
@@ -42,7 +42,7 @@ public class Wechsel : BusinessObject
     /// <summary>
     ///     Gibt an, wann der Wechsel (voraussichtlich) stattfinden wird.
     /// </summary>
-    [JsonProperty(Required = Required.Default, Order = 13, PropertyName = "wechseldatum")]
+    [JsonProperty(Order = 13, PropertyName = "wechseldatum")]
     [JsonPropertyName("wechseldatum")]
     [JsonPropertyOrder(13)]
     [ProtoIgnore]
@@ -50,7 +50,7 @@ public class Wechsel : BusinessObject
     public DateTimeOffset? Wechseldatum { get; set; }
 
     /// <summary>Vollständiger Wechsel (ja/nein), defaults to ja</summary>
-    [JsonProperty(Required = Required.Default, Order = 14, PropertyName = "vollstaendig")]
+    [JsonProperty(Order = 14, PropertyName = "vollstaendig")]
     [JsonPropertyName("vollstaendig")]
     [ProtoMember(14)]
     [JsonPropertyOrder(14)]

@@ -18,28 +18,28 @@ public class Sperrauftrag : Auftrag
     /// <summary>
     /// Handelt es sich um einen Auftrag zum <see cref="ENUM.Sperrauftragsart.SPERREN"/> oder <see cref="ENUM.Sperrauftragsart.ENTSPERREN"/>?
     /// </summary>
-    [JsonProperty("sperrauftragsart", Required = Required.Always)]
+    [JsonProperty("sperrauftragsart")]
     [JsonPropertyName("sperrauftragsart")]
     public Sperrauftragsart Sperrauftragsart => Sperrauftragsart.SPERREN;
 
     /// <summary>
     /// <see cref="ENUM.Auftragsstatus"/>
     /// </summary>
-    [JsonProperty("sperrauftragsstatus", Required = Required.Default)]
+    [JsonProperty("sperrauftragsstatus")]
     [JsonPropertyName("sperrauftragsstatus")]
     public Auftragsstatus? Sperrauftragsstatus { get; set; }
 
     /// <summary>
     /// Falls <see cref="Sperrauftragsstatus"/> = <see cref="ENUM.Auftragsstatus.ABGELEHNT"/>
     /// </summary>
-    [JsonProperty("sperrauftragsablehngrund", Required = Required.Default)]
+    [JsonProperty("sperrauftragsablehngrund")]
     [JsonPropertyName("sperrauftragsablehngrund")]
     public Sperrauftragsablehngrund? Sperrauftragsablehnungsgrund { get; set; }
 
     /// <summary>
     /// Falls <see cref="Sperrauftragsstatus"/> = <see cref="ENUM.Auftragsstatus.GESCHEITERT"/>
     /// </summary>
-    [JsonProperty("sperrauftragsverhinderungsgrund", Required = Required.Default)]
+    [JsonProperty("sperrauftragsverhinderungsgrund")]
     [JsonPropertyName("sperrauftragsverhinderungsgrund")]
     public Sperrauftragsverhinderungsgrund? Sperrauftragsverhinderungsgrund { get; set; }
 
@@ -53,7 +53,7 @@ public class Sperrauftrag : Auftrag
     /// <summary>
     /// Die Nummer des zu sperrenden Zählers
     /// </summary>
-    [JsonProperty("zaehlernummer", Required = Required.Default)]
+    [JsonProperty("zaehlernummer")]
     [JsonPropertyName("zaehlernummer")]
     public string? Zaehlernummer { get; set; }
 
@@ -64,7 +64,7 @@ public class Sperrauftrag : Auftrag
     /// Wenn true, dann ist das <see cref="Auftrag.Ausfuehrungsdatum"/> in DTM+469 zu übermitteln.
     /// Wenn false, dann ist das <see cref="Auftrag.Ausfuehrungsdatum"/> in DTM+203 zu übermitteln.
     /// </remarks>
-    [JsonProperty("istVomGerichtsvollzieherAngeordnet", Required = Required.Always)]
+    [JsonProperty("istVomGerichtsvollzieherAngeordnet")]
     [JsonPropertyName("istVomGerichtsvollzieherAngeordnet")]
     public bool IstVomGerichtsvollzieherAngeordnet { get; set; }
 }

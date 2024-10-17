@@ -33,7 +33,7 @@ public abstract class Auftrag : BusinessObject
     /// <summary>
     /// Das Ausführungsdatum beschreibt zu welchem Zeitpunkt ein Auftrag ausgeführt werden soll.
     /// </summary>
-    [JsonProperty("ausfuehrungsdatum", Order = 1, Required = Required.Default)]
+    [JsonProperty("ausfuehrungsdatum", Order = 1)]
     [JsonPropertyName("ausfuehrungsdatum")]
     [JsonPropertyOrder(1)]
     [ProtoIgnore]
@@ -57,7 +57,7 @@ public abstract class Auftrag : BusinessObject
     /// <summary>
     /// Das Fertigstellungsdatum beschreibt zu welchem Zeitpunkt ein Auftrag ausgeführt wurde/wird.
     /// </summary>
-    [JsonProperty("fertigstellungsdatum", Order = 2, Required = Required.Default)]
+    [JsonProperty("fertigstellungsdatum", Order = 2)]
     [JsonPropertyName("fertigstellungsdatum")]
     [JsonPropertyOrder(2)]
     [ProtoIgnore]
@@ -66,7 +66,7 @@ public abstract class Auftrag : BusinessObject
     /// <summary>
     /// Die Sparte in der der Auftrag relevant ist
     /// </summary>
-    [JsonProperty("sparte", Order = 3, Required = Required.Default)]
+    [JsonProperty("sparte", Order = 3)]
     [JsonPropertyName("sparte")]
     [JsonPropertyOrder(3)]
     public ENUM.Sparte? Sparte { get; set; }
@@ -74,7 +74,7 @@ public abstract class Auftrag : BusinessObject
     /// <summary>
     /// Die Adresse, die sich in Belieferung befindet.
     /// </summary>
-    [JsonProperty("lieferanschrift", Order = 4, Required = Required.Default)]
+    [JsonProperty("lieferanschrift", Order = 4)]
     [JsonPropertyName("lieferanschrift")]
     [JsonPropertyOrder(4)]
     [ProtoMember(6)]
@@ -83,7 +83,7 @@ public abstract class Auftrag : BusinessObject
     /// <summary>
     /// Die ID der Marktlokation der der zu sperrende Zähler zugeordnet ist.
     /// </summary>
-    [JsonProperty("marktlokationsId", Order = 5, Required = Required.Always)]
+    [JsonProperty("marktlokationsId", Order = 5)]
     [JsonPropertyName("marktlokationsId")]
     [JsonPropertyOrder(5)]
     [ProtoMember(7)]
@@ -92,7 +92,7 @@ public abstract class Auftrag : BusinessObject
     /// <summary>
     /// Ein zusätzlicher Freitext
     /// </summary>
-    [JsonProperty("bemerkungen", Order = 6, Required = Required.Default)]
+    [JsonProperty("bemerkungen", Order = 6)]
     [JsonPropertyName("bemerkungen")]
     [JsonPropertyOrder(6)]
     [ProtoMember(11)]
@@ -101,7 +101,7 @@ public abstract class Auftrag : BusinessObject
     /// <summary>
     /// Der Mindestpreis eines Auftrags (z.B. für eine Sperrung)
     /// </summary>
-    [JsonProperty("mindestpreis", Order = 7, Required = Required.Default)]
+    [JsonProperty("mindestpreis", Order = 7)]
     [JsonPropertyName("mindestpreis")]
     [JsonPropertyOrder(7)]
     [ProtoMember(9)]
@@ -110,7 +110,7 @@ public abstract class Auftrag : BusinessObject
     /// <summary>
     /// Der Höchstpreis eines Auftrags (z.B. für eine Sperrung)
     /// </summary>
-    [JsonProperty("hoechstpreis", Order = 8, Required = Required.Default)]
+    [JsonProperty("hoechstpreis", Order = 8)]
     [JsonPropertyName("hoechstpreis")]
     [JsonPropertyOrder(8)]
     [ProtoMember(10)]

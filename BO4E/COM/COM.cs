@@ -104,7 +104,6 @@ public abstract class COM : IUserProperties, IOptionalGuid
     [JsonProperty(
         PropertyName = "timestamp",
         NullValueHandling = NullValueHandling.Ignore,
-        Required = Required.Default,
         Order = 0
     )]
     [JsonPropertyName("timestamp")]
@@ -130,12 +129,7 @@ public abstract class COM : IUserProperties, IOptionalGuid
     /// <summary>
     ///     allows adding a GUID to COM objects for tracking across systems
     /// </summary>
-    [JsonProperty(
-        PropertyName = "guid",
-        NullValueHandling = NullValueHandling.Ignore,
-        Required = Required.Default,
-        Order = 1
-    )]
+    [JsonProperty(PropertyName = "guid", NullValueHandling = NullValueHandling.Ignore, Order = 1)]
     [JsonPropertyName("guid")]
     [JsonPropertyOrder(1)]
     public Guid? Guid { get; set; }
@@ -145,7 +139,6 @@ public abstract class COM : IUserProperties, IOptionalGuid
     /// </summary>
     [JsonProperty(
         PropertyName = BusinessObject.USER_PROPERTIES_NAME,
-        Required = Required.Default,
         Order = 2,
         DefaultValueHandling = DefaultValueHandling.Ignore
     )]

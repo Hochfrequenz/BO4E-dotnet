@@ -12,14 +12,14 @@ namespace BO4E.COM;
 public class Angebotsvariante : COM
 {
     /// <summary>Gibt den Status eines Angebotes an. <seealso cref="ENUM.Angebotsstatus" /></summary>
-    [JsonProperty(PropertyName = "angebotsstatus", Order = 10, Required = Required.Always)]
+    [JsonProperty(PropertyName = "angebotsstatus", Order = 10)]
     [JsonPropertyName("angebotsstatus")]
     [JsonPropertyOrder(10)]
     [ProtoMember(4)]
     public Angebotsstatus Angebotsstatus { get; set; }
 
     /// <summary>Umschreibung des Inhalts der Angebotsvariante.</summary>
-    [JsonProperty(PropertyName = "beschreibung", Order = 11, Required = Required.Default)]
+    [JsonProperty(PropertyName = "beschreibung", Order = 11)]
     [JsonPropertyName("beschreibung")]
     [JsonPropertyOrder(11)]
     [ProtoMember(5)]
@@ -37,7 +37,7 @@ public class Angebotsvariante : COM
     }
 
     /// <summary>Datum der Erstellung der Angebotsvariante</summary>
-    [JsonProperty(PropertyName = "erstelldatum", Order = 12, Required = Required.Default)]
+    [JsonProperty(PropertyName = "erstelldatum", Order = 12)]
     [JsonPropertyName("erstelldatum")]
     [JsonPropertyOrder(12)]
     [ProtoIgnore]
@@ -54,21 +54,21 @@ public class Angebotsvariante : COM
     }
 
     /// <summary>Bis zu diesem Zeitpunkt (Tag/Uhrzeit) inklusive gilt die Angebotsvariante, z.B. 31.12.2017, 17:00 Uhr.</summary>
-    [JsonProperty(PropertyName = "bindefrist", Order = 13, Required = Required.Default)]
+    [JsonProperty(PropertyName = "bindefrist", Order = 13)]
     [JsonPropertyName("bindefrist")]
     [JsonPropertyOrder(13)]
     [ProtoIgnore]
     public DateTimeOffset? Bindefrist { get; set; }
 
     /// <summary>Aufsummierte Wirkarbeitsmenge aller Angebotsteile. <seealso cref="Menge" /></summary>
-    [JsonProperty(PropertyName = "gesamtmenge", Order = 14, Required = Required.Default)]
+    [JsonProperty(PropertyName = "gesamtmenge", Order = 14)]
     [JsonPropertyName("gesamtmenge")]
     [JsonPropertyOrder(14)]
     [ProtoMember(8)]
     public Menge? Gesamtmenge { get; set; }
 
     /// <summary>Aufsummierte Kosten aller Angebotsteile. <seealso cref="Betrag" /></summary>
-    [JsonProperty(PropertyName = "gesamtkosten", Order = 15, Required = Required.Default)]
+    [JsonProperty(PropertyName = "gesamtkosten", Order = 15)]
     [JsonPropertyName("gesamtkosten")]
     [JsonPropertyOrder(15)]
     [ProtoMember(9)]
@@ -79,7 +79,7 @@ public class Angebotsvariante : COM
     ///     die Mengen und Gesamtkosten aller Angebotspositionen zusammengefasst. Eine Variante besteht mindestens aus einem
     ///     Angebotsteil. Details <see cref="Angebotsteil" />
     /// </summary>
-    [JsonProperty(PropertyName = "teile", Order = 16, Required = Required.Always)]
+    [JsonProperty(PropertyName = "teile", Order = 16)]
     [JsonPropertyName("teile")]
     [JsonPropertyOrder(16)]
     [ProtoMember(10)]

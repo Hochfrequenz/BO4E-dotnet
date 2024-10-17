@@ -28,7 +28,7 @@ public class Notiz : COM
     /// <summary>
     ///     Person oder System, das die Notiz angelegt hat.
     /// </summary>
-    [JsonProperty(PropertyName = "autor", Required = Required.Always, Order = 7)]
+    [JsonProperty(PropertyName = "autor", Order = 7)]
     [JsonPropertyName("autor")]
     [ProtoMember(3)]
     public string Autor { get; set; }
@@ -46,7 +46,7 @@ public class Notiz : COM
     /// <summary>
     ///     Zeitpunkt zu dem die Notiz angelegt wurde
     /// </summary>
-    [JsonProperty(PropertyName = "zeitpunkt", Required = Required.Always, Order = 8)]
+    [JsonProperty(PropertyName = "zeitpunkt", Order = 8)]
     [JsonPropertyName("zeitpunkt")]
     [ProtoIgnore]
     public DateTimeOffset Zeitpunkt { get; set; }
@@ -54,7 +54,7 @@ public class Notiz : COM
     /// <summary>
     ///     Inhalt der Notiz (Freitext)
     /// </summary>
-    [JsonProperty(PropertyName = "inhalt", Required = Required.Always, Order = 5)]
+    [JsonProperty(PropertyName = "inhalt", Order = 5)]
     [JsonPropertyName("inhalt")]
     [ProtoMember(5)]
     public string Inhalt

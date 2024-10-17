@@ -13,7 +13,7 @@ public class Kostenposition : COM
     ///     Ein Titel für die Zeile. Hier kann z.B. der Netzbetreiber eingetragen werden, wenn es sich um Netzkosten
     ///     handelt.
     /// </summary>
-    [JsonProperty(PropertyName = "positionstitel", Required = Required.Always)]
+    [JsonProperty(PropertyName = "positionstitel")]
     [JsonPropertyName("positionstitel")]
     [ProtoMember(3)]
     public string Positionstitel { get; set; }
@@ -29,7 +29,7 @@ public class Kostenposition : COM
     }
 
     /// <summary>von-Datum der Kostenzeitscheibe. Z.B. 2017-01-01</summary>
-    [JsonProperty(PropertyName = "von", Required = Required.Default)]
+    [JsonProperty(PropertyName = "von")]
     [JsonPropertyName("von")]
     [ProtoIgnore]
     public DateTimeOffset? Von { get; set; }
@@ -45,19 +45,19 @@ public class Kostenposition : COM
     }
 
     /// <summary>bis-Datum der Kostenzeitscheibe. Z.B. 2017-12-31</summary>
-    [JsonProperty(PropertyName = "bis", Required = Required.Default)]
+    [JsonProperty(PropertyName = "bis")]
     [JsonPropertyName("bis")]
     [ProtoIgnore]
     public DateTimeOffset? Bis { get; set; }
 
     /// <summary>Bezeichnung für den Artikel für den die Kosten ermittelt wurden. Beispiel: Arbeitspreis HT</summary>
-    [JsonProperty(PropertyName = "artikelbezeichnung", Required = Required.Always)]
+    [JsonProperty(PropertyName = "artikelbezeichnung")]
     [JsonPropertyName("artikelbezeichnung")]
     [ProtoMember(6)]
     public string Artikelbezeichnung { get; set; }
 
     /// <summary>Detaillierung des Artikels (optional). Beispiel: Drehstromzähler</summary>
-    [JsonProperty(PropertyName = "artikeldetail", Required = Required.Default)]
+    [JsonProperty(PropertyName = "artikeldetail")]
     [JsonPropertyName("artikeldetail")]
     [ProtoMember(7)]
     public string? Artikeldetail { get; set; }
@@ -66,7 +66,7 @@ public class Kostenposition : COM
     ///     Die Menge, die in die Kostenberechnung eingeflossen ist. Beispiel: 3.660 kWh. Details
     ///     <see cref="BO4E.COM.Menge" />
     /// </summary>
-    [JsonProperty(PropertyName = "menge", Required = Required.Default)]
+    [JsonProperty(PropertyName = "menge")]
     [JsonPropertyName("menge")]
     [ProtoMember(8)]
     public Menge? Menge { get; set; }
@@ -75,13 +75,13 @@ public class Kostenposition : COM
     ///     Wenn es einen zeitbasierten Preis gibt (z.B. €/Jahr), dann ist hier die Menge angegeben mit der die Kosten
     ///     berechnet wurden. Z.B.  138 Tage. Details <see cref="BO4E.COM.Menge" />
     /// </summary>
-    [JsonProperty(PropertyName = "zeitmenge", Required = Required.Default)]
+    [JsonProperty(PropertyName = "zeitmenge")]
     [JsonPropertyName("zeitmenge")]
     [ProtoMember(9)]
     public Menge? Zeitmenge { get; set; }
 
     /// <summary>Der Preis für eine Einheit. Beispiele: 5,8200 ct/kWh oder 55 €/Jahr. Details <see cref="Preis" /></summary>
-    [JsonProperty(PropertyName = "einzelpreis", Required = Required.Always)]
+    [JsonProperty(PropertyName = "einzelpreis")]
     [JsonPropertyName("einzelpreis")]
     [ProtoMember(10)]
     public Preis Einzelpreis { get; set; }
@@ -90,7 +90,7 @@ public class Kostenposition : COM
     ///     Der errechnete Gesamtbetrag der Position als Ergebnis der Berechnung &lt;Menge&gt; x &lt;Einzelpreis&gt; oder
     ///     &lt;Einzelpreis&gt; / (Anzahl Tage Jahr) * &lt;zeitmenge&gt;. Details <see cref="Betrag" />
     /// </summary>
-    [JsonProperty(PropertyName = "betragKostenposition", Required = Required.Always)]
+    [JsonProperty(PropertyName = "betragKostenposition")]
     [JsonPropertyName("betragKostenposition")]
     [ProtoMember(11)]
     public Betrag BetragKostenposition { get; set; }

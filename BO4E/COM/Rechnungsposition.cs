@@ -16,7 +16,7 @@ namespace BO4E.COM;
 public class Rechnungsposition : COM
 {
     /// <summary>Fortlaufende Nummer für die Rechnungsposition.</summary>
-    [JsonProperty(PropertyName = "positionsnummer", Required = Required.Always, Order = 11)]
+    [JsonProperty(PropertyName = "positionsnummer", Order = 11)]
     [JsonPropertyName("positionsnummer")]
     [JsonPropertyOrder(11)]
     [FieldName("invoiceItemNumber", Language.EN)]
@@ -34,7 +34,7 @@ public class Rechnungsposition : COM
     }
 
     /// <summary>Start der Lieferung für die abgerechnete Leistung.</summary>
-    [JsonProperty(PropertyName = "lieferungVon", Required = Required.Default, Order = 12)]
+    [JsonProperty(PropertyName = "lieferungVon", Order = 12)]
     [JsonPropertyName("lieferungVon")]
     [JsonPropertyOrder(12)]
     [FieldName("deliveryStart", Language.EN)]
@@ -53,7 +53,7 @@ public class Rechnungsposition : COM
     }
 
     /// <summary>Ende der Lieferung für die abgerechnete Leistung.</summary>
-    [JsonProperty(PropertyName = "lieferungBis", Required = Required.Default, Order = 13)]
+    [JsonProperty(PropertyName = "lieferungBis", Order = 13)]
     [JsonPropertyName("lieferungBis")]
     [JsonPropertyOrder(13)]
     [FieldName("deliveryEnd", Language.EN)]
@@ -62,7 +62,7 @@ public class Rechnungsposition : COM
     public DateTimeOffset? LieferungBis { get; set; }
 
     /// <summary>Bezeichnung für die abgerechnete Position.</summary>
-    [JsonProperty(PropertyName = "positionstext", Required = Required.Always, Order = 14)]
+    [JsonProperty(PropertyName = "positionstext", Order = 14)]
     [JsonPropertyName("positionstext")]
     [JsonPropertyOrder(14)]
     [FieldName("invoiceItemText", Language.EN)]
@@ -73,7 +73,7 @@ public class Rechnungsposition : COM
     ///     Falls sich der Preis auf eine Zeit bezieht, steht hier die Einheit, z.B. JAHR. Details
     ///     <see cref="Mengeneinheit" />
     /// </summary>
-    [JsonProperty(PropertyName = "zeiteinheit", Required = Required.Default, Order = 15)]
+    [JsonProperty(PropertyName = "zeiteinheit", Order = 15)]
     [JsonPropertyName("zeiteinheit")]
     [JsonPropertyOrder(15)]
     [FieldName("unit", Language.EN)]
@@ -84,21 +84,21 @@ public class Rechnungsposition : COM
     ///     Kennzeichnung der Rechnungsposition mit der Standard-Artikelnummer des BDEW. Details
     ///     <see cref="BDEWArtikelnummer" />
     /// </summary>
-    [JsonProperty(PropertyName = "artikelnummer", Required = Required.Default, Order = 16)]
+    [JsonProperty(PropertyName = "artikelnummer", Order = 16)]
     [JsonPropertyName("artikelnummer")]
     [JsonPropertyOrder(16)]
     [ProtoMember(6)]
     public BDEWArtikelnummer? Artikelnummer { get; set; }
 
     /// <summary>Marktlokation, die zu dieser Position gehört.</summary>
-    [JsonProperty(PropertyName = "lokationsId", Required = Required.Default, Order = 17)]
+    [JsonProperty(PropertyName = "lokationsId", Order = 17)]
     [JsonPropertyName("lokationsId")]
     [JsonPropertyOrder(17)]
     [ProtoMember(7)]
     public string? LokationsId { get; set; }
 
     /// <summary>Die abgerechnete Menge mit Einheit. Z.B. 4372 kWh. Details <see cref="Menge" /></summary>
-    [JsonProperty(PropertyName = "positionsMenge", Required = Required.Default, Order = 18)]
+    [JsonProperty(PropertyName = "positionsMenge", Order = 18)]
     [JsonPropertyName("positionsMenge")]
     [JsonPropertyOrder(18)]
     [FieldName("amount", Language.EN)]
@@ -109,7 +109,7 @@ public class Rechnungsposition : COM
     ///     Eine auf die Zeiteinheit bezogene Untermenge. Z.B. bei einem Jahrespreis, 3 Monate oder 146 Tage. Basierend
     ///     darauf wird der Preis aufgeteilt. Details <see cref="Menge" />
     /// </summary>
-    [JsonProperty(PropertyName = "zeitbezogeneMenge", Required = Required.Default, Order = 19)]
+    [JsonProperty(PropertyName = "zeitbezogeneMenge", Order = 19)]
     [JsonPropertyName("zeitbezogeneMenge")]
     [JsonPropertyOrder(19)]
     [FieldName("timeBasedAmount", Language.EN)]
@@ -117,7 +117,7 @@ public class Rechnungsposition : COM
     public Menge? ZeitbezogeneMenge { get; set; }
 
     /// <summary>Gibt ggf. einen Korrekturfaktor für die Menge an.</summary>
-    [JsonProperty(PropertyName = "korrekturfaktor", Required = Required.Default, Order = 20)]
+    [JsonProperty(PropertyName = "korrekturfaktor", Order = 20)]
     [JsonPropertyName("korrekturfaktor")]
     [JsonPropertyOrder(20)]
     [ProtoMember(10)]
@@ -125,7 +125,7 @@ public class Rechnungsposition : COM
     public decimal? Korrekturfaktor { get; set; }
 
     /// <summary>Der Preis für eine Einheit der energetischen Menge. Details <see cref="Preis" /></summary>
-    [JsonProperty(PropertyName = "einzelpreis", Required = Required.Always, Order = 21)]
+    [JsonProperty(PropertyName = "einzelpreis", Order = 21)]
     [JsonPropertyName("einzelpreis")]
     [JsonPropertyOrder(21)]
     [FieldName("unitCost", Language.EN)]
@@ -136,7 +136,7 @@ public class Rechnungsposition : COM
     ///     Das Ergebnis der Multiplikation aus einzelpreis * positionsMenge * (Faktor aus zeitbezogeneMenge). Z.B. 12,60€
     ///     * 120 kW * 3/12 (für 3 Monate). Details <see cref="Betrag" />
     /// </summary>
-    [JsonProperty(PropertyName = "teilsummeNetto", Required = Required.Default, Order = 22)]
+    [JsonProperty(PropertyName = "teilsummeNetto", Order = 22)]
     [JsonPropertyName("teilsummeNetto")]
     [JsonPropertyOrder(22)]
     [FieldName("subtotalNet", Language.EN)]
@@ -144,7 +144,7 @@ public class Rechnungsposition : COM
     public Betrag? TeilsummeNetto { get; set; }
 
     /// <summary>Nettobetrag für den Rabatt dieser Position. Details <see cref="Betrag" /></summary>
-    [JsonProperty(PropertyName = "teilrabattNetto", Required = Required.Default, Order = 23)]
+    [JsonProperty(PropertyName = "teilrabattNetto", Order = 23)]
     [JsonPropertyName("teilrabattNetto")]
     [JsonPropertyOrder(23)]
     [FieldName("someDiscountNet", Language.EN)]
@@ -154,7 +154,7 @@ public class Rechnungsposition : COM
     /// <summary>
     ///     Auf die Position entfallende Steuer, bestehend aus Steuersatz und Betrag. Details <see cref="Steuerbetrag" />
     /// </summary>
-    [JsonProperty(PropertyName = "teilsummeSteuer", Required = Required.Default, Order = 24)]
+    [JsonProperty(PropertyName = "teilsummeSteuer", Order = 24)]
     [JsonPropertyName("teilsummeSteuer")]
     [JsonPropertyOrder(24)]
     [FieldName("subtotalTax", Language.EN)]
@@ -166,7 +166,7 @@ public class Rechnungsposition : COM
     ///     Invoicing zu verarbeiten.
     ///     (Ergänzung von Hochfrequenz Unternehmensberatung GmbH)
     /// </summary>
-    [JsonProperty(PropertyName = "vertragskontoId", Required = Required.Default, Order = 25)]
+    [JsonProperty(PropertyName = "vertragskontoId", Order = 25)]
     [JsonPropertyName("vertragskontoId")]
     [JsonPropertyOrder(25)]
     [Obsolete("Please use vertragsId instead of vertragskontoId", false)]
@@ -179,7 +179,7 @@ public class Rechnungsposition : COM
     ///     Invoicing zu verarbeiten.
     ///     (Ergänzung von Hochfrequenz Unternehmensberatung GmbH)
     /// </summary>
-    [JsonProperty(PropertyName = "vertragsId", Required = Required.Default, Order = 26)]
+    [JsonProperty(PropertyName = "vertragsId", Order = 26)]
     [JsonPropertyName("vertragsId")]
     [JsonPropertyOrder(26)]
     [ProtoMember(1017)]
@@ -190,7 +190,7 @@ public class Rechnungsposition : COM
     ///     status einer Rechnungsposition in SAP Convergent Invoicing
     ///     (Ergänzung von Hochfrequenz Unternehmensberatung GmbH)
     /// </summary>
-    [JsonProperty(PropertyName = "status", Required = Required.Default, Order = 27)]
+    [JsonProperty(PropertyName = "status", Order = 27)]
     [JsonPropertyName("status")]
     [JsonPropertyOrder(27)]
     [NonOfficial(NonOfficialCategory.CUSTOMER_REQUIREMENTS)]
@@ -200,7 +200,7 @@ public class Rechnungsposition : COM
     /// <summary>
     ///     Artikel-ID (ab 1.10.2022)
     /// </summary>
-    [JsonProperty(PropertyName = "artikelId", Required = Required.Default, Order = 28)]
+    [JsonProperty(PropertyName = "artikelId", Order = 28)]
     [JsonPropertyName("artikelId")]
     [JsonPropertyOrder(28)]
     [NonOfficial(NonOfficialCategory.CUSTOMER_REQUIREMENTS)]
@@ -225,7 +225,7 @@ public class Rechnungsposition : COM
     /// <summary>
     /// Das Datum an dem die Leistung erbracht wurde.
     /// </summary>
-    [JsonProperty("ausfuehrungsdatum", Order = 29, Required = Required.Default)]
+    [JsonProperty("ausfuehrungsdatum", Order = 29)]
     [JsonPropertyName("ausfuehrungsdatum")]
     [JsonPropertyOrder(29)]
     [ProtoIgnore]

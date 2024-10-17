@@ -15,14 +15,14 @@ public class Messprodukt : COM
     ///     Identifikation des Messproduktes
     ///     Z.B. 9991000000151
     /// </summary>
-    [JsonProperty(PropertyName = "messproduktId", Order = 3, Required = Required.Default)]
+    [JsonProperty(PropertyName = "messproduktId", Order = 3)]
     [JsonPropertyName("messproduktId")]
     [ProtoMember(3)]
     [JsonPropertyOrder(3)]
     public string? MessproduktId { get; set; }
 
     /// <summary>Verwendungungszweck der Werte Marktlokation</summary>
-    [JsonProperty(PropertyName = "verwendungszwecke", Order = 1011, Required = Required.Default)]
+    [JsonProperty(PropertyName = "verwendungszwecke", Order = 1011)]
     [JsonPropertyName("verwendungszwecke")]
     [NonOfficial(NonOfficialCategory.CUSTOMER_REQUIREMENTS)]
     [ProtoMember(1011)]
@@ -30,7 +30,7 @@ public class Messprodukt : COM
     public List<Verwendungszweck>? Verwendungszwecke { get; set; }
 
     /// <summary>Stromverbrauchsart/Verbrauchsart Marktlokation</summary>
-    [JsonProperty(PropertyName = "verbrauchsart", Order = 1012, Required = Required.Default)]
+    [JsonProperty(PropertyName = "verbrauchsart", Order = 1012)]
     [JsonPropertyName("verbrauchsart")]
     [NonOfficial(NonOfficialCategory.CUSTOMER_REQUIREMENTS)]
     [ProtoMember(1012)]
@@ -38,7 +38,7 @@ public class Messprodukt : COM
     public Verbrauchsart? Verbrauchsart { get; set; }
 
     /// <summary>Stromverbrauchsart/Unterbrechbarkeit Marktlokation</summary>
-    [JsonProperty(PropertyName = "unterbrechbarkeit", Order = 1013, Required = Required.Default)]
+    [JsonProperty(PropertyName = "unterbrechbarkeit", Order = 1013)]
     [JsonPropertyName("unterbrechbarkeit")]
     [NonOfficial(NonOfficialCategory.CUSTOMER_REQUIREMENTS)]
     [ProtoMember(1013)]
@@ -46,7 +46,7 @@ public class Messprodukt : COM
     public Unterbrechbarkeit? Unterbrechbarkeit { get; set; }
 
     /// <summary>Stromverbrauchsart/Wärmenutzung Marktlokation</summary>
-    [JsonProperty(PropertyName = "waermenutzung", Order = 1014, Required = Required.Default)]
+    [JsonProperty(PropertyName = "waermenutzung", Order = 1014)]
     [JsonPropertyName("waermenutzung")]
     [NonOfficial(NonOfficialCategory.CUSTOMER_REQUIREMENTS)]
     [ProtoMember(1014)]
@@ -56,7 +56,7 @@ public class Messprodukt : COM
     /// <summary>
     /// Zählzeiten des Messproduktes
     /// </summary>
-    [JsonProperty(PropertyName = "zaehlzeiten", Order = 1021, Required = Required.Default)]
+    [JsonProperty(PropertyName = "zaehlzeiten", Order = 1021)]
     [JsonPropertyName("zaehlzeiten")]
     [NonOfficial(NonOfficialCategory.CUSTOMER_REQUIREMENTS)]
     [ProtoMember(1021)]
@@ -66,7 +66,7 @@ public class Messprodukt : COM
     /// <summary>
     /// zweite Messung erforderlich
     /// </summary>
-    [JsonProperty(PropertyName = "zweiteMessung", Order = 1022, Required = Required.Default)]
+    [JsonProperty(PropertyName = "zweiteMessung", Order = 1022)]
     [JsonPropertyName("zweiteMessung")]
     [NonOfficial(NonOfficialCategory.CUSTOMER_REQUIREMENTS)]
     [ProtoMember(1022)]
@@ -95,7 +95,7 @@ public class Messprodukt : COM
     ///     Z87: E-Mobilitätsladesäule: Es handelt sich um eine öffentliche Ladesäule mit ggf. mehreren Ladeanschlüssen an der Marktlokation.
     ///     ZE7: Ladepark: Es handelt sich um mehr als eine öffentliche Ladesäule an der Marktlokation
     /// </summary>
-    [JsonProperty(PropertyName = "emobilitaetsart", Required = Required.Default, Order = 1024)]
+    [JsonProperty(PropertyName = "emobilitaetsart", Order = 1024)]
     [JsonPropertyOrder(1024)]
     [JsonPropertyName("emobilitaetsart")]
     [NonOfficial(NonOfficialCategory.MISSING)]

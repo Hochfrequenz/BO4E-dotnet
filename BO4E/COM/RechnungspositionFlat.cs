@@ -63,7 +63,7 @@ public class RechnungspositionFlat : COM
     public RechnungspositionFlat() { }
 
     /// <inheritdoc cref="Rechnungsposition.Positionsnummer" />
-    [JsonProperty(PropertyName = "positionsnummer", Required = Required.Always)]
+    [JsonProperty(PropertyName = "positionsnummer")]
     [JsonPropertyName("positionsnummer")]
     [ProtoMember(3)]
     public int Positionsnummer { get; set; }
@@ -79,7 +79,7 @@ public class RechnungspositionFlat : COM
     }
 
     /// <inheritdoc cref="Rechnungsposition.LieferungVon" />
-    [JsonProperty(PropertyName = "lieferungVon", Required = Required.Default)]
+    [JsonProperty(PropertyName = "lieferungVon")]
     [JsonPropertyName("lieferungVon")]
     [ProtoIgnore]
     [Newtonsoft.Json.JsonConverter(typeof(LenientDateTimeConverter))]
@@ -96,7 +96,7 @@ public class RechnungspositionFlat : COM
     }
 
     /// <inheritdoc cref="Rechnungsposition.LieferungBis" />
-    [JsonProperty(PropertyName = "lieferungBis", Required = Required.Default)]
+    [JsonProperty(PropertyName = "lieferungBis")]
     [JsonPropertyName("lieferungBis")]
     [ProtoIgnore]
     [Newtonsoft.Json.JsonConverter(typeof(LenientDateTimeConverter))]
@@ -106,21 +106,21 @@ public class RechnungspositionFlat : COM
     ///     Der Positionstext entspricht dem SAP CI Teilprozess bzw. der GCN Categoy
     ///     <seealso cref="Rechnungsposition.Positionstext" />
     /// </summary>
-    [JsonProperty(PropertyName = "positionstext", Required = Required.Always)]
+    [JsonProperty(PropertyName = "positionstext")]
     [JsonPropertyName("positionstext")]
     [ProtoMember(6)]
     public string Positionstext { get; set; }
 
     /// <inheritdoc cref="Rechnungsposition.LokationsId" />
     /// >
-    [JsonProperty(PropertyName = "lokationsId", Required = Required.Always)]
+    [JsonProperty(PropertyName = "lokationsId")]
     [JsonPropertyName("lokationsId")]
     [ProtoMember(7)]
     public string LokationsId { get; set; }
 
     /// <inheritdoc cref="Rechnungsposition.VertragskontoId" />
     /// >
-    [JsonProperty(PropertyName = "vertragskontoId", Required = Required.Always)]
+    [JsonProperty(PropertyName = "vertragskontoId")]
     [JsonPropertyName("vertragskontoId")]
     [ProtoMember(8)]
     public string VertragskontoId { get; set; }
@@ -128,7 +128,7 @@ public class RechnungspositionFlat : COM
     /// <summary>
     ///     <see cref="Rechnungsposition.Einzelpreis" /> and <see cref="Preis.Wert" />
     /// </summary>
-    [JsonProperty(PropertyName = "preisWert", Required = Required.Always)]
+    [JsonProperty(PropertyName = "preisWert")]
     [JsonPropertyName("preisWert")]
     [ProtoMember(9)]
     public decimal? PreisWert { get; set; }
@@ -136,7 +136,7 @@ public class RechnungspositionFlat : COM
     /// <summary>
     ///     <see cref="Rechnungsposition.Einzelpreis" /> and <see cref="Preis.Einheit" />
     /// </summary>
-    [JsonProperty(PropertyName = "preisEinheit", Required = Required.Always)]
+    [JsonProperty(PropertyName = "preisEinheit")]
     [JsonPropertyName("preisEinheit")]
     [ProtoMember(10)]
     public Waehrungseinheit? PreisEinheit { get; set; }
@@ -144,7 +144,7 @@ public class RechnungspositionFlat : COM
     /// <summary>
     ///     <see cref="Rechnungsposition.Einzelpreis" /> and <see cref="Preis.Bezugswert" />
     /// </summary>
-    [JsonProperty(PropertyName = "preisBezugswert", Required = Required.Always)]
+    [JsonProperty(PropertyName = "preisBezugswert")]
     [JsonPropertyName("preisBezugswert")]
     [ProtoMember(11)]
     public Mengeneinheit? PreisBezugswert { get; set; }
@@ -152,7 +152,7 @@ public class RechnungspositionFlat : COM
     /// <summary>
     ///     <see cref="Rechnungsposition.Einzelpreis" /> and <see cref="Preis.Status" />
     /// </summary>
-    [JsonProperty(PropertyName = "preisStatus", Required = Required.Default)]
+    [JsonProperty(PropertyName = "preisStatus")]
     [JsonPropertyName("preisStatus")]
     [ProtoMember(12)]
     public Preisstatus? PreisStatus { get; set; }
@@ -161,7 +161,7 @@ public class RechnungspositionFlat : COM
     ///     GCN mediated value value
     ///     <see cref="Rechnungsposition.PositionsMenge" /> and <see cref="Menge.Wert" />
     /// </summary>
-    [JsonProperty(PropertyName = "positionsMengeWert", Required = Required.Always)]
+    [JsonProperty(PropertyName = "positionsMengeWert")]
     [JsonPropertyName("positionsMengeWert")]
     [ProtoMember(13)]
     public decimal? PositionsMengeWert { get; set; }
@@ -170,13 +170,13 @@ public class RechnungspositionFlat : COM
     ///     GCN mediated value unit
     ///     <see cref="Rechnungsposition.PositionsMenge" /> and <see cref="Menge.Einheit" />
     /// </summary>
-    [JsonProperty(PropertyName = "positionsMengeEinheit", Required = Required.Always)]
+    [JsonProperty(PropertyName = "positionsMengeEinheit")]
     [JsonPropertyName("positionsMengeEinheit")]
     [ProtoMember(14)]
     public Mengeneinheit? PositionsMengeEinheit { get; set; }
 
     /// <inheritdoc cref="Rechnungsposition.VertragsId" />
-    [JsonProperty(PropertyName = "vertragsId", Required = Required.Default)]
+    [JsonProperty(PropertyName = "vertragsId")]
     [JsonPropertyName("vertragsId")]
     [ProtoMember(15)]
     public string? VertragsId { get; set; }
@@ -185,7 +185,7 @@ public class RechnungspositionFlat : COM
     ///     status einer Rechnungsposition in SAP Convergent Invoicing
     ///     (Ergänzung von Hochfrequenz Unternehmensberatung GmbH)
     /// </summary>
-    [JsonProperty(PropertyName = "status", Required = Required.Default)]
+    [JsonProperty(PropertyName = "status")]
     [JsonPropertyName("status")]
     [ProtoMember(16)]
     public RechnungspositionsStatus? Status { get; set; }

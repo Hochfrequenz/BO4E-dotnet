@@ -17,7 +17,7 @@ public class Lokationszuordnung : BusinessObject
     /// <summary>
     /// Liste mit IDs der referenzierten Marktlokationen
     /// </summary>
-    [JsonProperty(Required = Required.Default, Order = 11, PropertyName = "marktlokationen")]
+    [JsonProperty(Order = 11, PropertyName = "marktlokationen")]
     [JsonPropertyName("marktlokationen")]
     [JsonPropertyOrder(11)]
     [ProtoMember(11)]
@@ -26,7 +26,7 @@ public class Lokationszuordnung : BusinessObject
     /// <summary>
     /// Liste mit IDs der referenzierten Messlokationen
     /// </summary>
-    [JsonProperty(Required = Required.Default, Order = 12, PropertyName = "messlokationen")]
+    [JsonProperty(Order = 12, PropertyName = "messlokationen")]
     [JsonPropertyName("messlokationen")]
     [JsonPropertyOrder(12)]
     [ProtoMember(12)]
@@ -35,7 +35,7 @@ public class Lokationszuordnung : BusinessObject
     /// <summary>
     /// Liste mit IDs der referenzierten Netzlokationen
     /// </summary>
-    [JsonProperty(Required = Required.Default, Order = 13, PropertyName = "netzlokationen")]
+    [JsonProperty(Order = 13, PropertyName = "netzlokationen")]
     [JsonPropertyName("netzlokationen")]
     [JsonPropertyOrder(13)]
     [ProtoMember(13)]
@@ -44,7 +44,7 @@ public class Lokationszuordnung : BusinessObject
     /// <summary>
     /// Liste mit IDs der referenzierten technischen Ressourcen
     /// </summary>
-    [JsonProperty(Required = Required.Default, Order = 14, PropertyName = "technischeRessourcen")]
+    [JsonProperty(Order = 14, PropertyName = "technischeRessourcen")]
     [JsonPropertyName("technischeRessourcen")]
     [JsonPropertyOrder(14)]
     [ProtoMember(14)]
@@ -53,7 +53,7 @@ public class Lokationszuordnung : BusinessObject
     /// <summary>
     /// Liste mit IDs der referenzierten steuerbaren Ressourcen
     /// </summary>
-    [JsonProperty(Required = Required.Default, Order = 15, PropertyName = "steuerbareRessourcen")]
+    [JsonProperty(Order = 15, PropertyName = "steuerbareRessourcen")]
     [JsonPropertyName("steuerbareRessourcen")]
     [JsonPropertyOrder(15)]
     [ProtoMember(15)]
@@ -62,7 +62,7 @@ public class Lokationszuordnung : BusinessObject
     /// <summary>
     /// Zeitspanne der Gültigkeit
     /// </summary>
-    [JsonProperty(Required = Required.Default, Order = 16, PropertyName = "gueltigkeit")]
+    [JsonProperty(Order = 16, PropertyName = "gueltigkeit")]
     [JsonPropertyName("gueltigkeit")]
     [JsonPropertyOrder(16)]
     [ProtoMember(16)]
@@ -72,7 +72,7 @@ public class Lokationszuordnung : BusinessObject
     /// <summary>
     /// Verknüpfungsrichtung z.B. Malo-Melo
     /// </summary>
-    [JsonProperty(Required = Required.Default, Order = 17, PropertyName = "zuordnungstyp")]
+    [JsonProperty(Order = 17, PropertyName = "zuordnungstyp")]
     [JsonPropertyName("zuordnungstyp")]
     [JsonPropertyOrder(17)]
     [ProtoMember(17)]
@@ -81,7 +81,7 @@ public class Lokationszuordnung : BusinessObject
     /// <summary>
     /// Code, der angibt wie die Lokationsbündelstruktur zusammengesetzt ist (zu finden unter "Codeliste der Lokationsbündelstrukturen" auf https://www.edi-energy.de/index.php?id=38)
     /// </summary>
-    [JsonProperty(Required = Required.Default, Order = 18, PropertyName = "lokationsbuendelcode")]
+    [JsonProperty(Order = 18, PropertyName = "lokationsbuendelcode")]
     [JsonPropertyName("lokationsbuendelcode")]
     [JsonPropertyOrder(18)]
     [ProtoMember(18)]

@@ -10,7 +10,7 @@ namespace BO4E.COM;
 public class Geraet : COM
 {
     /// <summary>Die auf dem Geräte aufgedruckte Nummer, die vom MSB vergeben wird.</summary>
-    [JsonProperty(PropertyName = "geraetenummer", Required = Required.Default, Order = 10)]
+    [JsonProperty(PropertyName = "geraetenummer", Order = 10)]
     [JsonPropertyName("geraetenummer")]
     [ProtoMember(3)]
     [JsonPropertyOrder(10)]
@@ -20,7 +20,7 @@ public class Geraet : COM
     ///     Festlegung der Eigenschaften des Gerätes. Z.B. Wandler MS/NS. Details
     ///     <see cref="BO4E.COM.Geraeteeigenschaften" />
     /// </summary>
-    [JsonProperty(PropertyName = "geraeteeigenschaften", Required = Required.Default, Order = 11)]
+    [JsonProperty(PropertyName = "geraeteeigenschaften", Order = 11)]
     [JsonPropertyName("geraeteeigenschaften")]
     [ProtoMember(4)]
     [JsonPropertyOrder(11)]
@@ -30,7 +30,7 @@ public class Geraet : COM
     ///     Festlegung der Art des Gerätes. Z.B. ZAEHLEINRICHTUNG
     ///     <see cref="BO4E.ENUM.Geraeteart" />
     /// </summary>
-    [JsonProperty(PropertyName = "geraeteart", Required = Required.Default, Order = 12)]
+    [JsonProperty(PropertyName = "geraeteart", Order = 12)]
     [JsonPropertyName("geraeteart")]
     [ProtoMember(5)]
     [JsonPropertyOrder(12)]

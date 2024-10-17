@@ -9,13 +9,13 @@ namespace BO4E.COM;
 public class Geokoordinaten : COM
 {
     /// <summary>Gibt den Breitengrad eines entsprechenden Ortes an.</summary>
-    [JsonProperty(PropertyName = "breitengrad", Required = Required.Always)]
+    [JsonProperty(PropertyName = "breitengrad")]
     [JsonPropertyName("breitengrad")]
     [ProtoMember(3)]
     public decimal Breitengrad { get; set; }
 
     /// <summary>Gibt den Längengrad eines entsprechenden Ortes an.</summary>
-    [JsonProperty(PropertyName = "laengengrad", Required = Required.Always)]
+    [JsonProperty(PropertyName = "laengengrad")]
     [JsonPropertyName("laengengrad")]
     [ProtoMember(4)]
     public decimal Laengengrad { get; set; }

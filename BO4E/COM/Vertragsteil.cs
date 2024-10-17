@@ -28,7 +28,7 @@ public class Vertragsteil : COM
     /// <summary>
     ///     Start der Gültigkeit des Vertragsteils.
     /// </summary>
-    [JsonProperty(PropertyName = "vertragsteilbeginn", Required = Required.Default)]
+    [JsonProperty(PropertyName = "vertragsteilbeginn")]
     [JsonPropertyName("vertragsteilbeginn")]
     [ProtoIgnore]
     [Newtonsoft.Json.JsonConverter(typeof(LenientDateTimeConverter))]
@@ -47,7 +47,7 @@ public class Vertragsteil : COM
     /// <summary>
     ///     Ende der Gültigkeit des Vertragsteils.
     /// </summary>
-    [JsonProperty(PropertyName = "vertragsteilende", Required = Required.Default)]
+    [JsonProperty(PropertyName = "vertragsteilende")]
     [JsonPropertyName("vertragsteilende")]
     [ProtoIgnore]
     [Newtonsoft.Json.JsonConverter(typeof(LenientDateTimeConverter))]
@@ -58,14 +58,14 @@ public class Vertragsteil : COM
     ///     Verträge für mehrere Lokationen werden mit mehreren Vertragsteilen abgebildet.
     /// </summary>
     [ProtoMember(5)]
-    [JsonProperty(PropertyName = "lokation", Required = Required.Default)]
+    [JsonProperty(PropertyName = "lokation")]
     [JsonPropertyName("lokation")]
     public string? Lokation { get; set; }
 
     /// <summary>
     ///     Für die Lokation festgeschriebene Abnahmemenge. Siehe COM Menge
     /// </summary>
-    [JsonProperty(PropertyName = "vertraglichFixierteMenge", Required = Required.Default)]
+    [JsonProperty(PropertyName = "vertraglichFixierteMenge")]
     [JsonPropertyName("vertraglichFixierteMenge")]
     [ProtoMember(6)]
     public Menge? VertraglichFixierteMenge { get; set; }
@@ -73,7 +73,7 @@ public class Vertragsteil : COM
     /// <summary>
     ///     Für die Lokation festgelegte Mindestabnahmemenge. Siehe COM Menge
     /// </summary>
-    [JsonProperty(PropertyName = "minimaleAbnahmemenge", Required = Required.Default)]
+    [JsonProperty(PropertyName = "minimaleAbnahmemenge")]
     [JsonPropertyName("minimaleAbnahmemenge")]
     [ProtoMember(7)]
     public Menge? MinimaleAbnahmemenge { get; set; }
@@ -81,7 +81,7 @@ public class Vertragsteil : COM
     /// <summary>
     ///     Für die Lokation festgelegte maximale Abnahmemenge. Siehe COM Menge
     /// </summary>
-    [JsonProperty(PropertyName = "maximaleAbnahmemenge", Required = Required.Default)]
+    [JsonProperty(PropertyName = "maximaleAbnahmemenge")]
     [JsonPropertyName("maximaleAbnahmemenge")]
     [ProtoMember(8)]
     public Menge? MaximaleAbnahmemenge { get; set; }
@@ -89,7 +89,7 @@ public class Vertragsteil : COM
     /// <summary>
     ///     jahresverbrauchsprognose für EDIFACT mapping
     /// </summary>
-    [JsonProperty(PropertyName = "jahresverbrauchsprognose", Required = Required.Default)]
+    [JsonProperty(PropertyName = "jahresverbrauchsprognose")]
     [JsonPropertyName("jahresverbrauchsprognose")]
     [NonOfficial(NonOfficialCategory.CUSTOMER_REQUIREMENTS)]
     [ProtoMember(1009)]
@@ -98,7 +98,7 @@ public class Vertragsteil : COM
     /// <summary>
     ///     kundenwert für EDIFACT mapping
     /// </summary>
-    [JsonProperty(PropertyName = "kundenwert", Required = Required.Default)]
+    [JsonProperty(PropertyName = "kundenwert")]
     [JsonPropertyName("kundenwert")]
     [NonOfficial(NonOfficialCategory.CUSTOMER_REQUIREMENTS)]
     [ProtoMember(1010)]
@@ -107,7 +107,7 @@ public class Vertragsteil : COM
     /// <summary>
     ///     verbrauchsaufteilung für EDIFACT mapping
     /// </summary>
-    [JsonProperty(PropertyName = "verbrauchsaufteilung", Required = Required.Default)]
+    [JsonProperty(PropertyName = "verbrauchsaufteilung")]
     [JsonPropertyName("verbrauchsaufteilung")]
     [ProtoMember(1011)]
     public string? Verbrauchsaufteilung { get; set; } // ToDo: evaluate if this actually should be an enum

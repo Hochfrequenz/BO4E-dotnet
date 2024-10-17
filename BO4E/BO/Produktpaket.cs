@@ -16,7 +16,7 @@ public class Produktpaket : BusinessObject
     /// <summary>
     ///     Paket-Identifikation (Durchnummerierung).
     /// </summary>
-    [JsonProperty(Required = Required.Always, Order = 8, PropertyName = "paketId")]
+    [JsonProperty(Order = 8, PropertyName = "paketId")]
     [JsonPropertyName("paketId")]
     [ProtoMember(8)]
     [JsonPropertyOrder(8)]
@@ -26,7 +26,7 @@ public class Produktpaket : BusinessObject
     /// <summary>
     ///     Liste an Produktkonfigurationen
     /// </summary>
-    [JsonProperty(Required = Required.Default, Order = 9, PropertyName = "konfigurationen")]
+    [JsonProperty(Order = 9, PropertyName = "konfigurationen")]
     [JsonPropertyName("konfigurationen")]
     [ProtoMember(9)]
     [JsonPropertyOrder(9)]
@@ -35,7 +35,7 @@ public class Produktpaket : BusinessObject
     /// <summary>
     ///     Prioritaet des Pakets (1-5, 1 ist die hoechste Prioritaet)
     /// </summary>
-    [JsonProperty(Required = Required.Default, Order = 10, PropertyName = "prioritaet")]
+    [JsonProperty(Order = 10, PropertyName = "prioritaet")]
     [JsonPropertyName("prioritaet")]
     [ProtoMember(10)]
     [JsonPropertyOrder(10)]
@@ -44,7 +44,7 @@ public class Produktpaket : BusinessObject
     /// <summary>
     ///     Muss das Paket vollstaendig umgesetzt werden?
     /// </summary>
-    [JsonProperty(Required = Required.Default, Order = 11, PropertyName = "mussVollstaendigSein")]
+    [JsonProperty(Order = 11, PropertyName = "mussVollstaendigSein")]
     [JsonPropertyName("mussVollstaendigSein")]
     [ProtoMember(11)]
     [JsonPropertyOrder(11)]
