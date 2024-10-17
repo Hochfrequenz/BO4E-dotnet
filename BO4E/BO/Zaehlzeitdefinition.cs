@@ -73,7 +73,7 @@ public class Zaehlzeitdefinition : BusinessObject
     /// <summary>
     /// Version der Zählzeitdefinition als Datum
     ///</summary>
-    [JsonProperty( Order = 8, PropertyName = "version")]
+    [JsonProperty(Order = 8, PropertyName = "version")]
     [JsonPropertyName("version")]
     [ProtoIgnore]
     [BoKey]
@@ -102,7 +102,7 @@ public class Zaehlzeitdefinition : BusinessObject
     /// <summary>
     /// Liste der Zählzeitregister
     /// </summary>
-    [JsonProperty( Order = 11, PropertyName = "zaehlzeitregister")]
+    [JsonProperty(Order = 11, PropertyName = "zaehlzeitregister")]
     [JsonPropertyName("zaehlzeitregister")]
     [ProtoMember(11)]
     [JsonPropertyOrder(11)]
@@ -111,7 +111,7 @@ public class Zaehlzeitdefinition : BusinessObject
     /// <summary>
     /// Liste der ausgerollten Zählzeiten
     /// </summary>
-    [JsonProperty( Order = 12, PropertyName = "ausgerollteZaehlzeiten")]
+    [JsonProperty(Order = 12, PropertyName = "ausgerollteZaehlzeiten")]
     [JsonPropertyName("ausgerollteZaehlzeiten")]
     [ProtoMember(12)]
     [JsonPropertyOrder(12)]

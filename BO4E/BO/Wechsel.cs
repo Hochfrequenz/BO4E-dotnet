@@ -16,7 +16,7 @@ namespace BO4E.BO;
 public class Wechsel : BusinessObject
 {
     /// <summary>Strom oder Gas. <seealso cref="ENUM.Sparte" /></summary>
-    [JsonProperty( Order = 11, PropertyName = "sparte")]
+    [JsonProperty(Order = 11, PropertyName = "sparte")]
     [JsonPropertyName("sparte")]
     [ProtoMember(11)]
     [JsonPropertyOrder(11)]

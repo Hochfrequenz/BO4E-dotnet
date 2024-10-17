@@ -21,7 +21,7 @@ public class SteuerbareRessource : BusinessObject
     /// </summary>
     /// <remarks>Edi-beispiel: LOC+Z19+C816417ST77'</remarks>
     [DefaultValue("|null|")]
-    [JsonProperty( Order = 10, PropertyName = "steuerbareRessourceId")]
+    [JsonProperty(Order = 10, PropertyName = "steuerbareRessourceId")]
     [JsonPropertyName("steuerbareRessourceId")]
     [JsonPropertyOrder(10)]
     [DataCategory(DataCategory.DEVICE)]

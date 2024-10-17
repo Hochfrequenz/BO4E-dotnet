@@ -66,11 +66,7 @@ public class Abweichung : COM
     /// <summary>
     /// Angabe des Abweichungsgrunds (Code)
     /// </summary>
-    [JsonProperty(
-        PropertyName = "abweichungsgrundCodeliste",
-        
-        Order = 9
-    )]
+    [JsonProperty(PropertyName = "abweichungsgrundCodeliste", Order = 9)]
     [JsonPropertyName("abweichungsgrundCodeliste")]
     [NonOfficial(NonOfficialCategory.MISSING)]
     [ProtoMember(9)]

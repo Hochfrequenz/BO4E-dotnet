@@ -31,7 +31,7 @@ public class Marktteilnehmer : Geschaeftspartner
     /// <summary>Gibt die Codenummer der Marktrolle an.</summary>
     /// <example>"9903100000006"</example>
     [BoKey(true)]
-    [JsonProperty( Order = 32, PropertyName = "rollencodenummer")]
+    [JsonProperty(Order = 32, PropertyName = "rollencodenummer")]
     [JsonPropertyName("rollencodenummer")]
     [JsonPropertyOrder(32)]
     //[ProtoMember(20)]
@@ -39,7 +39,7 @@ public class Marktteilnehmer : Geschaeftspartner
 
     /// <summary>Gibt den Typ des Codes an.</summary>
     /// <example>BDEW (instead of 293, 500 etc.)</example>
-    [JsonProperty( Order = 33, PropertyName = "rollencodetyp")]
+    [JsonProperty(Order = 33, PropertyName = "rollencodetyp")]
     [JsonPropertyOrder(33)]
     [JsonPropertyName("rollencodetyp")]
     //[ProtoMember(21)]

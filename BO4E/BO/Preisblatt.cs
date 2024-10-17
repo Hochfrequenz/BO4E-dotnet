@@ -25,7 +25,7 @@ public class Preisblatt : BusinessObject
     /// <summary>
     ///     Eine Bezeichnung für das Preisblatt.
     /// </summary>
-    [JsonProperty( Order = 10, PropertyName = "bezeichnung")]
+    [JsonProperty(Order = 10, PropertyName = "bezeichnung")]
     [JsonPropertyName("bezeichnung")]
     [ProtoMember(4)]
     [JsonPropertyOrder(10)]
@@ -36,7 +36,7 @@ public class Preisblatt : BusinessObject
     /// <summary>
     ///     Der Zeitraum für den der Preis festgelegt ist. Details siehe <see cref="Zeitraum" />
     /// </summary>
-    [JsonProperty( Order = 11, PropertyName = "gueltigkeit")]
+    [JsonProperty(Order = 11, PropertyName = "gueltigkeit")]
     [JsonPropertyName("gueltigkeit")]
     [JsonPropertyOrder(11)]
     [ProtoMember(5)]
@@ -47,7 +47,7 @@ public class Preisblatt : BusinessObject
     ///     Die einzelnen Positionen, die mit dem Preisblatt abgerechnet werden können. Z.B. Arbeitspreis, Grundpreis etc.
     ///     Details siehe <see cref="Preisposition" />
     /// </summary>
-    [JsonProperty( Order = 13, PropertyName = "preispositionen")] // at least one entry
+    [JsonProperty(Order = 13, PropertyName = "preispositionen")] // at least one entry
     [JsonPropertyName("preispositionen")]
     [DataCategory(DataCategory.FINANCE)]
     [JsonPropertyOrder(13)]

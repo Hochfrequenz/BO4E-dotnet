@@ -443,7 +443,7 @@ public class Rechnung : BusinessObject
     ///     Kennzeichnung, ob es sich um eine Stornorechnung handelt. Im Falle "true" findet sich im Attribut
     ///     "originalrechnungsnummer" die Nummer der Originalrechnung.
     /// </summary>
-    [JsonProperty( Order = 8, PropertyName = "storno")]
+    [JsonProperty(Order = 8, PropertyName = "storno")]
     [JsonPropertyName("storno")]
     [FieldName("isCancellation", Language.EN)]
     [ProtoMember(6)]
@@ -453,7 +453,7 @@ public class Rechnung : BusinessObject
     /// <summary>
     ///     Eine im Verwendungskontext eindeutige Nummer für die Rechnung.
     /// </summary>
-    [JsonProperty( Order = 9, PropertyName = "rechnungsnummer")]
+    [JsonProperty(Order = 9, PropertyName = "rechnungsnummer")]
     [JsonPropertyName("rechnungsnummer")]
     [ProtoMember(7)]
     [JsonPropertyOrder(9)]
@@ -474,7 +474,7 @@ public class Rechnung : BusinessObject
     /// <summary>
     ///     Ausstellungsdatum der Rechnung.
     /// </summary>
-    [JsonProperty( Order = 10, PropertyName = "rechnungsdatum")]
+    [JsonProperty(Order = 10, PropertyName = "rechnungsdatum")]
     [JsonPropertyName("rechnungsdatum")]
     [ProtoIgnore]
     [JsonPropertyOrder(10)]
@@ -494,7 +494,7 @@ public class Rechnung : BusinessObject
     /// <summary>
     ///     Zu diesem Datum ist die Zahlung fällig.
     /// </summary>
-    [JsonProperty( Order = 11, PropertyName = "faelligkeitsdatum")]
+    [JsonProperty(Order = 11, PropertyName = "faelligkeitsdatum")]
     [JsonPropertyName("faelligkeitsdatum")]
     [ProtoIgnore]
     [JsonPropertyOrder(11)]
@@ -504,7 +504,7 @@ public class Rechnung : BusinessObject
     /// <summary>
     ///     Ein kontextbezogender Rechnungstyp, z.B. Netznutzungsrechnung. Details siehe ENUM Rechnungstyp
     /// </summary>
-    [JsonProperty( Order = 12, PropertyName = "rechnungstyp")]
+    [JsonProperty(Order = 12, PropertyName = "rechnungstyp")]
     [JsonPropertyName("rechnungstyp")]
     [ProtoMember(10)]
     [JsonPropertyOrder(12)]
@@ -527,7 +527,7 @@ public class Rechnung : BusinessObject
     /// <summary>
     ///     Der Zeitraum der zugrunde liegenden Lieferung zur Rechnung. In der COM Zeitraum können diese angegeben werden.
     /// </summary>
-    [JsonProperty( Order = 14, PropertyName = "rechnungsperiode")]
+    [JsonProperty(Order = 14, PropertyName = "rechnungsperiode")]
     [JsonPropertyName("rechnungsperiode")]
     [ProtoMember(12)]
     [JsonPropertyOrder(14)]
@@ -537,7 +537,7 @@ public class Rechnung : BusinessObject
     /// <summary>
     ///     Der Aussteller der Rechnung. Details <see cref="Geschaeftspartner" />
     /// </summary>
-    [JsonProperty( Order = 15, PropertyName = "rechnungsersteller")]
+    [JsonProperty(Order = 15, PropertyName = "rechnungsersteller")]
     [JsonPropertyName("rechnungsersteller")]
     [ProtoMember(13)]
     [JsonPropertyOrder(15)]
@@ -547,7 +547,7 @@ public class Rechnung : BusinessObject
     /// <summary>
     ///     Der Empfänger der Rechnung. Details <see cref="Geschaeftspartner" />
     /// </summary>
-    [JsonProperty( Order = 16, PropertyName = "rechnungsempfaenger")]
+    [JsonProperty(Order = 16, PropertyName = "rechnungsempfaenger")]
     [JsonPropertyName("rechnungsempfaenger")]
     [ProtoMember(14)]
     [JsonPropertyOrder(16)]
@@ -557,7 +557,7 @@ public class Rechnung : BusinessObject
     /// <summary>
     ///     Die Summe der Nettobeträge der Rechnungsteile. Details <see cref="Betrag" />
     /// </summary>
-    [JsonProperty( Order = 17, PropertyName = "gesamtnetto")]
+    [JsonProperty(Order = 17, PropertyName = "gesamtnetto")]
     [JsonPropertyName("gesamtnetto")]
     [ProtoMember(15)]
     [JsonPropertyOrder(17)]
@@ -567,7 +567,7 @@ public class Rechnung : BusinessObject
     /// <summary>
     ///     Die Summe der Steuerbeträge der Rechnungsteile. Details <see cref="Betrag" />
     /// </summary>
-    [JsonProperty( Order = 18, PropertyName = "gesamtsteuer")]
+    [JsonProperty(Order = 18, PropertyName = "gesamtsteuer")]
     [JsonPropertyName("gesamtsteuer")]
     [ProtoMember(16)]
     [JsonPropertyOrder(18)]
@@ -577,7 +577,7 @@ public class Rechnung : BusinessObject
     /// <summary>
     ///     Die Summe aus Netto- und Steuerbetrag. Details <see cref="Betrag" />
     /// </summary>
-    [JsonProperty( Order = 19, PropertyName = "gesamtbrutto")]
+    [JsonProperty(Order = 19, PropertyName = "gesamtbrutto")]
     [JsonPropertyName("gesamtbrutto")]
     [ProtoMember(17)]
     [JsonPropertyOrder(19)]
@@ -609,7 +609,7 @@ public class Rechnung : BusinessObject
     ///     <see cref="RabattBrutto" />) ergibt. Details <see cref="Betrag" />
     ///     ///
     /// </summary>
-    [JsonProperty( Order = 22, PropertyName = "zuzahlen")]
+    [JsonProperty(Order = 22, PropertyName = "zuzahlen")]
     [JsonPropertyName("zuzahlen")]
     [ProtoMember(20)]
     [JsonPropertyOrder(22)]
@@ -631,7 +631,7 @@ public class Rechnung : BusinessObject
     ///     Die Rechnungspositionen. Details siehe <see cref="Rechnungsposition" />
     /// </summary>
     [ProtoMember(22)]
-    [JsonProperty( Order = 24, PropertyName = "rechnungspositionen")]
+    [JsonProperty(Order = 24, PropertyName = "rechnungspositionen")]
     [JsonPropertyName("rechnungspositionen")]
     [FieldName("invoiceItemList", Language.EN)]
     [JsonPropertyOrder(24)]

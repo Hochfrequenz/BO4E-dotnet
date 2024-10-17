@@ -22,7 +22,7 @@ public class Angebot : BusinessObject
     /// <summary>
     ///     Eindeutige Nummer des Angebotes.
     /// </summary>
-    [JsonProperty( Order = 10, PropertyName = "angebotsnummer")]
+    [JsonProperty(Order = 10, PropertyName = "angebotsnummer")]
     [JsonPropertyName("angebotsnummer")]
     [ProtoMember(4)]
     [JsonPropertyOrder(10)]
@@ -57,7 +57,7 @@ public class Angebot : BusinessObject
     /// <example>
     ///     2017-12-24
     /// </example>
-    [JsonProperty( Order = 13, PropertyName = "angebotsdatum")]
+    [JsonProperty(Order = 13, PropertyName = "angebotsdatum")]
     [JsonPropertyName("angebotsdatum")]
     [JsonPropertyOrder(13)]
     [ProtoIgnore]
@@ -68,7 +68,7 @@ public class Angebot : BusinessObject
     ///     Sparte, für die das Angebot abgegeben wird (Strom/Gas).
     /// </summary>
     /// <see cref="Sparte" />
-    [JsonProperty( Order = 14, PropertyName = "sparte")]
+    [JsonProperty(Order = 14, PropertyName = "sparte")]
     [JsonPropertyName("sparte")]
     [JsonPropertyOrder(14)]
     [ProtoMember(7)]
@@ -101,7 +101,7 @@ public class Angebot : BusinessObject
     ///     Link auf den Ersteller des Angebots.
     /// </summary>
     /// <see cref="Geschaeftspartner" />
-    [JsonProperty( Order = 16, PropertyName = "angebotgeber")]
+    [JsonProperty(Order = 16, PropertyName = "angebotgeber")]
     [JsonPropertyName("angebotgeber")]
     [JsonPropertyOrder(16)]
     [ProtoMember(9)]
@@ -112,7 +112,7 @@ public class Angebot : BusinessObject
     ///     Link auf den Empfänger des Angebots.
     /// </summary>
     /// <see cref="Geschaeftspartner" />
-    [JsonProperty( Order = 17, PropertyName = "angebotnehmer")]
+    [JsonProperty(Order = 17, PropertyName = "angebotnehmer")]
     [JsonPropertyName("angebotnehmer")]
     [JsonPropertyOrder(17)]
     [ProtoMember(10)]

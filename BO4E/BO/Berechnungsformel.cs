@@ -33,7 +33,7 @@ public class Berechnungsformel : BusinessObject
     /// Der inklusive Zeitpunkt ab dem die Berechnungsformel gültig ist
     /// </summary>
     /// <remarks>UTILTS SG5 DTM+157</remarks>
-    [JsonProperty( Order = 5, PropertyName = "beginndatum")]
+    [JsonProperty(Order = 5, PropertyName = "beginndatum")]
     [JsonPropertyName("beginndatum")]
     [ProtoIgnore]
     public DateTimeOffset Beginndatum { get; set; }
@@ -42,7 +42,7 @@ public class Berechnungsformel : BusinessObject
     /// Beschreibt ob eine Berechnungsformel notwendig ist
     /// </summary>
     /// <remarks>UTILTS SG5 STS 4405</remarks>
-    [JsonProperty( Order = 6, PropertyName = "notwendigkeit")]
+    [JsonProperty(Order = 6, PropertyName = "notwendigkeit")]
     [JsonPropertyName("notwendigkeit")]
     [ProtoMember(6)]
     public BerechnungsformelNotwendigkeit Notwendigkeit { get; set; }
@@ -61,7 +61,7 @@ public class Berechnungsformel : BusinessObject
     /// Verwendungszweck der Werte
     /// </summary>
     /// <remarks>UTILTS SG9 CAV 7111</remarks>
-    [JsonProperty( Order = 8, PropertyName = "verwendungszweck")]
+    [JsonProperty(Order = 8, PropertyName = "verwendungszweck")]
     [JsonPropertyName("verwendungszweck")]
     public Verwendungszweck Verwendungszweck { get; set; }
 

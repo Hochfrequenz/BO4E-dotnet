@@ -18,14 +18,14 @@ public class Zaehler : BusinessObject
 {
     /// <summary>Nummerierung des Zählers, vergeben durch den Messstellenbetreiber</summary>
     [BoKey]
-    [JsonProperty( Order = 10, PropertyName = "zaehlernummer")]
+    [JsonProperty(Order = 10, PropertyName = "zaehlernummer")]
     [JsonPropertyName("zaehlernummer")]
     [ProtoMember(4)]
     [JsonPropertyOrder(10)]
     public string Zaehlernummer { get; set; }
 
     /// <summary>Strom oder Gas. <seealso cref="ENUM.Sparte" /></summary>
-    [JsonProperty( Order = 11, PropertyName = "sparte")]
+    [JsonProperty(Order = 11, PropertyName = "sparte")]
     [JsonPropertyName("sparte")]
     [ProtoMember(5)]
     [JsonPropertyOrder(11)]

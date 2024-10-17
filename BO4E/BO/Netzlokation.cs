@@ -20,7 +20,7 @@ public class Netzlokation : BusinessObject
     ///     verbraucht, oder erzeugt wird (Like MarktlokationsId <see cref="Marktlokation"/>)
     /// </summary>
     [DefaultValue("|null|")]
-    [JsonProperty( Order = 10, PropertyName = "netzlokationsId")]
+    [JsonProperty(Order = 10, PropertyName = "netzlokationsId")]
     [JsonPropertyName("netzlokationsId")]
     [JsonPropertyOrder(10)]
     [DataCategory(DataCategory.POD)]
@@ -29,7 +29,7 @@ public class Netzlokation : BusinessObject
     public string NetzlokationsId { get; set; }
 
     /// <summary>Sparte der Netzlokation, z.B. Gas oder Strom.</summary>
-    [JsonProperty( Order = 11, PropertyName = "sparte")]
+    [JsonProperty(Order = 11, PropertyName = "sparte")]
     [JsonPropertyOrder(11)]
     [JsonPropertyName("sparte")]
     [ProtoMember(5)]
