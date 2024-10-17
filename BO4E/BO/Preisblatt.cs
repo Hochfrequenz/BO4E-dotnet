@@ -65,13 +65,13 @@ public class Preisblatt : BusinessObject
     /// <summary>
     ///     Gibt den Status des veröffentlichten Preises an
     /// </summary>
-    [JsonProperty(PropertyName = "preisstatus", Order = 14, Required = Required.Default)]
+    [JsonProperty(PropertyName = "preisstatus", Order = 14)]
     [JsonPropertyName("preisstatus")]
     [JsonPropertyOrder(14)]
     public Preisstatus? preisstatus { get; set; }
 
     /// <summary>Strom oder Gas. <seealso cref="ENUM.Sparte" /></summary>
-    [JsonProperty(Required = Required.Default, Order = 15, PropertyName = "sparte")]
+    [JsonProperty(Order = 15, PropertyName = "sparte")]
     [JsonPropertyName("sparte")]
     [JsonPropertyOrder(15)]
     public Sparte? Sparte { get; set; }

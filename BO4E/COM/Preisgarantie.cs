@@ -13,7 +13,7 @@ namespace BO4E.COM;
 public class Preisgarantie : COM
 {
     /// <summary>Freitext zur Beschreibung der Preisgarantie</summary>
-    [JsonProperty(PropertyName = "beschreibung", Required = Required.Default)]
+    [JsonProperty(PropertyName = "beschreibung")]
     [JsonPropertyName("beschreibung")]
     [ProtoMember(3)]
     public string? Beschreibung { get; set; }

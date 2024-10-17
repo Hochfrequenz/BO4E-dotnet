@@ -49,7 +49,7 @@ public class Handelsunstimmigkeit : BusinessObject
     /// <summary>
     /// angeforderter Betrag
     /// </summary>
-    [JsonProperty(PropertyName = "zuZahlen", Required = Required.Default, Order = 13)]
+    [JsonProperty(PropertyName = "zuZahlen", Order = 13)]
     [JsonPropertyName("zuZahlen")]
     [JsonPropertyOrder(13)]
     [NonOfficial(NonOfficialCategory.MISSING)]

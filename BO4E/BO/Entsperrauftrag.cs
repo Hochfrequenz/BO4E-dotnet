@@ -20,14 +20,14 @@ public class Entsperrauftrag : Auftrag
     /// <summary>
     /// <see cref="ENUM.Auftragsstatus"/>
     /// </summary>
-    [JsonProperty("sperrauftragsstatus", Required = Required.Default)]
+    [JsonProperty("sperrauftragsstatus")]
     [JsonPropertyName("sperrauftragsstatus")]
     public Auftragsstatus? Sperrauftragsstatus { get; set; }
 
     /// <summary>
     /// Die Nummer des zu sperrenden Zählers
     /// </summary>
-    [JsonProperty("zaehlernummer", Required = Required.Default)]
+    [JsonProperty("zaehlernummer")]
     [JsonPropertyName("zaehlernummer")]
     public string? Zaehlernummer { get; set; }
 

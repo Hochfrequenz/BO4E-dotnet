@@ -33,7 +33,7 @@ public class Region : BusinessObject
     /// <summary>
     ///     Negativliste der Kriterien zur Definition der Region.
     /// </summary>
-    [JsonProperty(Required = Required.Default, Order = 6, PropertyName = "negativListe")]
+    [JsonProperty(Order = 6, PropertyName = "negativListe")]
     [JsonPropertyName("negativListe")]
     [ProtoMember(6)]
     public List<Regionskriterium>? NegativListe { get; set; }

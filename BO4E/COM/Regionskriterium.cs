@@ -23,7 +23,7 @@ public class Regionskriterium : COM
     /// <summary>
     ///     Das Kriterium gilt in der angegebenen Sparte.Details siehe <see cref="ENUM.Sparte" />
     /// </summary>
-    [JsonProperty(PropertyName = "sparte", Required = Required.Default)]
+    [JsonProperty(PropertyName = "sparte")]
     [JsonPropertyName("sparte")]
     [ProtoMember(4)]
     public Sparte? Sparte { get; set; }

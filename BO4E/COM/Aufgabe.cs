@@ -26,7 +26,7 @@ public class Aufgabe : COM
     /// <summary>
     ///     Optionale Beschreibung der Aufgabe
     /// </summary>
-    [JsonProperty(PropertyName = "beschreibung", Required = Required.Default)]
+    [JsonProperty(PropertyName = "beschreibung")]
     [JsonPropertyName("beschreibung")]
     [ProtoMember(4)]
     public string? Beschreibung { get; set; }
@@ -45,7 +45,7 @@ public class Aufgabe : COM
     ///     Optionale Deadline bis zu der die Aufgabe ausführt werden kann oder ihre Ausführung
     ///     sinnvoll ist.
     /// </summary>
-    [JsonProperty(PropertyName = "deadline", Required = Required.Default)]
+    [JsonProperty(PropertyName = "deadline")]
     [JsonPropertyName("deadline")]
     [ProtoIgnore]
     public DateTimeOffset? Deadline { get; set; }
@@ -77,7 +77,7 @@ public class Aufgabe : COM
     [System.Text.Json.Serialization.JsonConverter(
         typeof(LenientSystemTextJsonNullableDateTimeOffsetConverter)
     )]
-    [JsonProperty(PropertyName = "ausfuehrungszeitpunkt", Required = Required.Default)]
+    [JsonProperty(PropertyName = "ausfuehrungszeitpunkt")]
     [JsonPropertyName("ausfuehrungszeitpunkt")]
     [ProtoIgnore]
     public DateTimeOffset? Ausfuehrungszeitpunkt { get; set; }
@@ -86,7 +86,7 @@ public class Aufgabe : COM
     ///     Eindeutige Kennung des Benutzers, der diese Aufgabe ausführt hat.
     ///     (Nur sinnvoll, wenn <c>ausgefuehrt==true</c>)
     /// </summary>
-    [JsonProperty(PropertyName = "ausfuehrender", Required = Required.Default)]
+    [JsonProperty(PropertyName = "ausfuehrender")]
     [JsonPropertyName("ausfuehrender")]
     [ProtoMember(8)]
     public string? Ausfuehrender { get; set; }

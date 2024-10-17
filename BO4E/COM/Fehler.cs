@@ -19,7 +19,7 @@ public class Fehler : COM
     /// <summary>
     ///     Fehlerdetails
     /// </summary>
-    [JsonProperty(PropertyName = "fehlerDetails", Required = Required.Default)]
+    [JsonProperty(PropertyName = "fehlerDetails")]
     [JsonPropertyName("fehlerDetails")]
     [ProtoMember(2)]
     public System.Collections.Generic.List<FehlerDetail>? FehlerDetails { get; set; } =

@@ -14,7 +14,7 @@ public class Lastprofil : COM
     /// <summary>
     /// Bezeichnung des Profils, durch DVGW bzw. den Netzbetreiber vergeben (z.B. H0)
     /// </summary>
-    [JsonProperty(PropertyName = "bezeichnung", Required = Required.Default)]
+    [JsonProperty(PropertyName = "bezeichnung")]
     [JsonPropertyName("bezeichnung")]
     [NonOfficial(NonOfficialCategory.CUSTOMER_REQUIREMENTS)]
     [ProtoMember(1001)]
@@ -23,7 +23,7 @@ public class Lastprofil : COM
     /// <summary>
     /// Optionale Bezeichnung der Profilschar, durch DVGW bzw. den Netzbetreiber vergeben (z.B. H0)
     /// </summary>
-    [JsonProperty(PropertyName = "profilschar", Required = Required.Default)]
+    [JsonProperty(PropertyName = "profilschar")]
     [JsonPropertyName("profilschar")]
     [NonOfficial(NonOfficialCategory.CUSTOMER_REQUIREMENTS)]
     [ProtoMember(1005)]
@@ -32,7 +32,7 @@ public class Lastprofil : COM
     /// <summary>
     /// Verfahren des Profils (analytisch oder synthetisch)
     /// </summary>
-    [JsonProperty(PropertyName = "verfahren", Required = Required.Default)]
+    [JsonProperty(PropertyName = "verfahren")]
     [JsonPropertyName("verfahren")]
     [NonOfficial(NonOfficialCategory.CUSTOMER_REQUIREMENTS)]
     [ProtoMember(1002)]
@@ -41,7 +41,7 @@ public class Lastprofil : COM
     /// <summary>
     /// true, falls es sich um ein Einspeiseprofil handelt
     /// </summary>
-    [JsonProperty(PropertyName = "einspeisung", Required = Required.Default)]
+    [JsonProperty(PropertyName = "einspeisung")]
     [JsonPropertyName("einspeisung")]
     [NonOfficial(NonOfficialCategory.CUSTOMER_REQUIREMENTS)]
     [ProtoMember(1003)]
@@ -50,7 +50,7 @@ public class Lastprofil : COM
     /// <summary>
     /// Klimazone / Temperaturmessstelle
     /// </summary>
-    [JsonProperty(PropertyName = "tagesparameter", Required = Required.Default)]
+    [JsonProperty(PropertyName = "tagesparameter")]
     [JsonPropertyName("tagesparameter")]
     [NonOfficial(NonOfficialCategory.CUSTOMER_REQUIREMENTS)]
     [ProtoMember(1004)]
@@ -60,7 +60,7 @@ public class Lastprofil : COM
     ///    Profilart des Lastprofils
     /// </summary>
     /// <example>ART_STANDARDLASTPROFIL</example>
-    [JsonProperty(PropertyName = "profilart", Required = Required.Default)]
+    [JsonProperty(PropertyName = "profilart")]
     [JsonPropertyName("profilart")]
     [ProtoMember(1005)]
     public Profilart? Profilart { get; set; }
@@ -69,7 +69,7 @@ public class Lastprofil : COM
     ///    Herausgeber des Lastprofil-Codes
     /// </summary>
     /// <example>BDEW</example>
-    [JsonProperty(PropertyName = "herausgeber", Required = Required.Default)]
+    [JsonProperty(PropertyName = "herausgeber")]
     [JsonPropertyName("herausgeber")]
     [ProtoMember(1006)]
     public string? Herausgeber { get; set; }

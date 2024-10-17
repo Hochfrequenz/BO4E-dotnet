@@ -16,7 +16,7 @@ public class Einspeisung : BusinessObject
     /// <summary>
     /// Für welche Marktlokation gelten diese Einspeisedaten
     /// </summary>
-    [JsonProperty(PropertyName = "marktlokationsId", Required = Required.Default, Order = 10)]
+    [JsonProperty(PropertyName = "marktlokationsId", Order = 10)]
     [JsonPropertyName("marktlokationsId")]
     [JsonPropertyOrder(10)]
     [NonOfficial(NonOfficialCategory.MISSING)]
@@ -27,7 +27,7 @@ public class Einspeisung : BusinessObject
     /// <summary>
     /// Für welche Tranche gelten diese Einspeisedaten
     /// </summary>
-    [JsonProperty(PropertyName = "trancheId", Required = Required.Default, Order = 101)]
+    [JsonProperty(PropertyName = "trancheId", Order = 101)]
     [JsonPropertyName("trancheId")]
     [JsonPropertyOrder(101)]
     [NonOfficial(NonOfficialCategory.MISSING)]
@@ -38,7 +38,7 @@ public class Einspeisung : BusinessObject
     /// <summary>
     /// Empfänger der Vergütung zur Einspeisung
     /// </summary>
-    [JsonProperty(PropertyName = "verguetungsempfaenger", Required = Required.Default, Order = 11)]
+    [JsonProperty(PropertyName = "verguetungsempfaenger", Order = 11)]
     [JsonPropertyName("verguetungsempfaenger")]
     [JsonPropertyOrder(11)]
     [NonOfficial(NonOfficialCategory.MISSING)]
@@ -48,7 +48,7 @@ public class Einspeisung : BusinessObject
     /// <summary>
     /// Vermarktungsformen gemäß dem Erneuerbare-Energien-Gesetz (EEG).
     /// </summary>
-    [JsonProperty(PropertyName = "eegVermarktungsform", Required = Required.Default, Order = 12)]
+    [JsonProperty(PropertyName = "eegVermarktungsform", Order = 12)]
     [JsonPropertyName("eegVermarktungsform")]
     [JsonPropertyOrder(12)]
     [NonOfficial(NonOfficialCategory.MISSING)]
@@ -56,7 +56,7 @@ public class Einspeisung : BusinessObject
     public EEGVermarktungsform? EEGVermarktungsform { get; set; }
 
     /// <summary>Land der Förderung, Details <see cref="ENUM.Landescode" /></summary>
-    [JsonProperty(PropertyName = "landescode", Required = Required.Default, Order = 13)]
+    [JsonProperty(PropertyName = "landescode", Order = 13)]
     [JsonPropertyName("landescode")]
     [ProtoMember(13)]
     [JsonPropertyOrder(13)]
@@ -66,11 +66,7 @@ public class Einspeisung : BusinessObject
     /// <summary>
     /// Status der Fernsteuerbarkeit einer Marktlokation
     /// </summary>
-    [JsonProperty(
-        PropertyName = "fernsteuerbarkeitStatus",
-        Required = Required.Default,
-        Order = 14
-    )]
+    [JsonProperty(PropertyName = "fernsteuerbarkeitStatus", Order = 14)]
     [JsonPropertyName("fernsteuerbarkeitStatus")]
     [JsonPropertyOrder(14)]
     [NonOfficial(NonOfficialCategory.MISSING)]

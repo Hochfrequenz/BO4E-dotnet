@@ -24,7 +24,7 @@ public class Vorauszahlung : COM
     ///     Referenz auf die Rechnungsnummer, die durch diesen Betrag bezahlt wurde
     /// </summary>
     [ProtoMember(4)]
-    [JsonProperty(Required = Required.Default, Order = 4, PropertyName = "referenz")]
+    [JsonProperty(Order = 4, PropertyName = "referenz")]
     [JsonPropertyName("referenz")]
     [JsonPropertyOrder(4)]
     public string? Referenz { get; set; }
@@ -33,7 +33,7 @@ public class Vorauszahlung : COM
     ///     Referenz auf das Datum der Rechnung, die durch diesen Betrag bezahlt wurde
     /// </summary>
     [ProtoIgnore]
-    [JsonProperty(Required = Required.Default, Order = 5, PropertyName = "referenzDatum")]
+    [JsonProperty(Order = 5, PropertyName = "referenzDatum")]
     [JsonPropertyName("referenzDatum")]
     [JsonPropertyOrder(5)]
     public DateTimeOffset? ReferenzDatum { get; set; }

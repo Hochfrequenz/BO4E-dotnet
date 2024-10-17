@@ -32,11 +32,7 @@ public class PreisblattMessung : Preisblatt
     /// <summary>
     ///     Im Preis sind die hier angegebenen Dienstleistungen enthalten. Z.B. Jährliche Ablesung.
     /// </summary>
-    [JsonProperty(
-        Required = Required.Default,
-        Order = 10,
-        PropertyName = "inklusiveDienstleistung"
-    )]
+    [JsonProperty(Order = 10, PropertyName = "inklusiveDienstleistung")]
     [JsonPropertyName("inklusiveDienstleistung")]
     //[ProtoMember(10)]
     public List<Dienstleistungstyp>? InklusiveDienstleistung { get; set; }
@@ -52,7 +48,7 @@ public class PreisblattMessung : Preisblatt
     /// <summary>
     ///     Im Preis sind die hier angegebenen Geräte mit enthalten, z.B. ein Wandler.
     /// </summary>
-    [JsonProperty(Required = Required.Default, Order = 12, PropertyName = "inklusiveGeraete")]
+    [JsonProperty(Order = 12, PropertyName = "inklusiveGeraete")]
     [JsonPropertyName("inklusiveGeraete")]
     //[ProtoMember(12)]
     public List<Geraeteeigenschaften>? InklusiveGeraete { get; set; }

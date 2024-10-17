@@ -79,7 +79,7 @@ public class RechnungspositionFlat : COM
     }
 
     /// <inheritdoc cref="Rechnungsposition.LieferungVon" />
-    [JsonProperty(PropertyName = "lieferungVon", Required = Required.Default)]
+    [JsonProperty(PropertyName = "lieferungVon")]
     [JsonPropertyName("lieferungVon")]
     [ProtoIgnore]
     [Newtonsoft.Json.JsonConverter(typeof(LenientDateTimeConverter))]
@@ -96,7 +96,7 @@ public class RechnungspositionFlat : COM
     }
 
     /// <inheritdoc cref="Rechnungsposition.LieferungBis" />
-    [JsonProperty(PropertyName = "lieferungBis", Required = Required.Default)]
+    [JsonProperty(PropertyName = "lieferungBis")]
     [JsonPropertyName("lieferungBis")]
     [ProtoIgnore]
     [Newtonsoft.Json.JsonConverter(typeof(LenientDateTimeConverter))]
@@ -152,7 +152,7 @@ public class RechnungspositionFlat : COM
     /// <summary>
     ///     <see cref="Rechnungsposition.Einzelpreis" /> and <see cref="Preis.Status" />
     /// </summary>
-    [JsonProperty(PropertyName = "preisStatus", Required = Required.Default)]
+    [JsonProperty(PropertyName = "preisStatus")]
     [JsonPropertyName("preisStatus")]
     [ProtoMember(12)]
     public Preisstatus? PreisStatus { get; set; }
@@ -176,7 +176,7 @@ public class RechnungspositionFlat : COM
     public Mengeneinheit? PositionsMengeEinheit { get; set; }
 
     /// <inheritdoc cref="Rechnungsposition.VertragsId" />
-    [JsonProperty(PropertyName = "vertragsId", Required = Required.Default)]
+    [JsonProperty(PropertyName = "vertragsId")]
     [JsonPropertyName("vertragsId")]
     [ProtoMember(15)]
     public string? VertragsId { get; set; }
@@ -185,7 +185,7 @@ public class RechnungspositionFlat : COM
     ///     status einer Rechnungsposition in SAP Convergent Invoicing
     ///     (Ergänzung von Hochfrequenz Unternehmensberatung GmbH)
     /// </summary>
-    [JsonProperty(PropertyName = "status", Required = Required.Default)]
+    [JsonProperty(PropertyName = "status")]
     [JsonPropertyName("status")]
     [ProtoMember(16)]
     public RechnungspositionsStatus? Status { get; set; }

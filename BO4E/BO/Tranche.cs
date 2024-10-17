@@ -38,7 +38,7 @@ public class Tranche : BusinessObject
     /// <summary>
     /// Prozentualer Anteil der Tranche an der erzeugenden Marktlokation in Prozent mit 2 Nachkommastellen
     /// </summary>
-    [JsonProperty(Required = Required.Default, Order = 12, PropertyName = "aufteilungsmenge")]
+    [JsonProperty(Order = 12, PropertyName = "aufteilungsmenge")]
     [JsonPropertyOrder(12)]
     [JsonPropertyName("aufteilungsmenge")]
     [ProtoMember(6)]
@@ -47,7 +47,7 @@ public class Tranche : BusinessObject
     /// <summary>
     ///     Die OBIS-Kennzahl für die Tranche, die festlegt, welche auf die gemessene Größe mit dem Stand gemeldet wird.
     /// </summary>
-    [JsonProperty(Required = Required.Default, Order = 13, PropertyName = "obisKennzahl")]
+    [JsonProperty(Order = 13, PropertyName = "obisKennzahl")]
     [JsonPropertyOrder(13)]
     [JsonPropertyName("obisKennzahl")]
     [ProtoMember(7)]
@@ -56,7 +56,7 @@ public class Tranche : BusinessObject
     /// <summary>
     ///     Zugeordnete Marktpartner
     /// </summary>
-    [JsonProperty(Required = Required.Default, Order = 14, PropertyName = "marktrollen")]
+    [JsonProperty(Order = 14, PropertyName = "marktrollen")]
     [JsonPropertyName("marktrollen")]
     [JsonPropertyOrder(14)]
     [ProtoMember(8)]

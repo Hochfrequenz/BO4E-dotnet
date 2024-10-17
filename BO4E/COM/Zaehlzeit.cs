@@ -16,7 +16,7 @@ public class Zaehlzeit : COM
     /// <summary>
     ///  Zählzeitdefinition
     /// </summary>
-    [JsonProperty(PropertyName = "code", Order = 4, Required = Required.Default)]
+    [JsonProperty(PropertyName = "code", Order = 4)]
     [JsonPropertyOrder(4)]
     [JsonPropertyName("code")]
     [ProtoMember(4)]
@@ -25,7 +25,7 @@ public class Zaehlzeit : COM
     /// <summary>
     ///     Häufigkeit der Übermittlung
     /// </summary>
-    [JsonProperty(PropertyName = "haeufigkeit", Order = 5, Required = Required.Default)]
+    [JsonProperty(PropertyName = "haeufigkeit", Order = 5)]
     [JsonPropertyName("haeufigkeit")]
     [JsonPropertyOrder(5)]
     [ProtoMember(5)]
@@ -34,7 +34,7 @@ public class Zaehlzeit : COM
     /// <summary>
     ///     Art der Übermittlung
     /// </summary>
-    [JsonProperty(PropertyName = "uebermittelbarkeit", Order = 6, Required = Required.Default)]
+    [JsonProperty(PropertyName = "uebermittelbarkeit", Order = 6)]
     [JsonPropertyName("uebermittelbarkeit")]
     [JsonPropertyOrder(6)]
     [ProtoMember(6)]
@@ -56,7 +56,7 @@ public class Zaehlzeit : COM
     /// <summary>
     ///     Ist die Zählzeit bestellbar?
     /// </summary>
-    [JsonProperty(PropertyName = "istBestellbar", Order = 8, Required = Required.Default)]
+    [JsonProperty(PropertyName = "istBestellbar", Order = 8)]
     [JsonPropertyName("istBestellbar")]
     [JsonPropertyOrder(8)]
     [ProtoMember(8)]
@@ -65,7 +65,7 @@ public class Zaehlzeit : COM
     /// <summary>
     ///     ZählzeitdefinitionTyp
     /// </summary>
-    [JsonProperty(PropertyName = "typ", Order = 9, Required = Required.Default)]
+    [JsonProperty(PropertyName = "typ", Order = 9)]
     [JsonPropertyName("typ")]
     [JsonPropertyOrder(9)]
     [ProtoMember(9)]
@@ -74,7 +74,7 @@ public class Zaehlzeit : COM
     /// <summary>
     ///     Beschreibung des ZählzeitdefinitionTyp
     /// </summary>
-    [JsonProperty(PropertyName = "beschreibungTyp", Order = 10, Required = Required.Default)]
+    [JsonProperty(PropertyName = "beschreibungTyp", Order = 10)]
     [JsonPropertyName("beschreibungTyp")]
     [JsonPropertyOrder(10)]
     [ProtoMember(10)]

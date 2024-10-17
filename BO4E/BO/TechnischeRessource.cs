@@ -20,7 +20,7 @@ public class TechnischeRessource : BusinessObject
     /// </summary>
     /// <remarks>Edi-beispiel: LOC+Z19+C816417ST77'</remarks>
     [DefaultValue("|null|")]
-    [JsonProperty(PropertyName = "technischeRessourceId", Required = Required.Default, Order = 10)]
+    [JsonProperty(PropertyName = "technischeRessourceId", Order = 10)]
     [JsonPropertyName("technischeRessourceId")]
     [JsonPropertyOrder(10)]
     [DataCategory(DataCategory.DEVICE)]
@@ -33,11 +33,7 @@ public class TechnischeRessource : BusinessObject
     /// Beispiel:
     /// RFF+Z34:DE00713739359S0000000000001222221'
     /// </summary>
-    [JsonProperty(
-        PropertyName = "vorgelagerteMesslokationsId",
-        Required = Required.Default,
-        Order = 11
-    )]
+    [JsonProperty(PropertyName = "vorgelagerteMesslokationsId", Order = 11)]
     [JsonPropertyName("vorgelagerteMesslokationsId")]
     [JsonPropertyOrder(11)]
     [DataCategory(DataCategory.POD)]
@@ -49,11 +45,7 @@ public class TechnischeRessource : BusinessObject
     /// Beispiel:
     /// RFF+Z16:20072281644'
     /// </summary>
-    [JsonProperty(
-        PropertyName = "zugeordneteMarktlokationsId",
-        Required = Required.Default,
-        Order = 12
-    )]
+    [JsonProperty(PropertyName = "zugeordneteMarktlokationsId", Order = 12)]
     [JsonPropertyName("zugeordneteMarktlokationsId")]
     [JsonPropertyOrder(12)]
     [DataCategory(DataCategory.POD)]
@@ -65,11 +57,7 @@ public class TechnischeRessource : BusinessObject
     /// Beispiel:
     /// RFF+Z16:20072281644'
     /// </summary>
-    [JsonProperty(
-        PropertyName = "zugeordneteSteuerbareRessourceId",
-        Required = Required.Default,
-        Order = 13
-    )]
+    [JsonProperty(PropertyName = "zugeordneteSteuerbareRessourceId", Order = 13)]
     [JsonPropertyName("zugeordneteSteuerbareRessourceId")]
     [JsonPropertyOrder(13)]
     [DataCategory(DataCategory.POD)]
@@ -80,7 +68,7 @@ public class TechnischeRessource : BusinessObject
     /// Nennleistung (Aufnahme)
     /// Beispiel: QTY+Z43:100:KWT'
     /// </summary>
-    [JsonProperty(PropertyName = "nennleistungAufnahme", Required = Required.Default, Order = 14)]
+    [JsonProperty(PropertyName = "nennleistungAufnahme", Order = 14)]
     [JsonPropertyName("nennleistungAufnahme")]
     [JsonPropertyOrder(14)]
     [NonOfficial(NonOfficialCategory.MISSING)]
@@ -91,7 +79,7 @@ public class TechnischeRessource : BusinessObject
     /// Nennleistung (Abgabe)
     /// Beispiel: QTY+Z44:100:KWT'
     /// </summary>
-    [JsonProperty(PropertyName = "nennleistungAbgabe", Required = Required.Default, Order = 15)]
+    [JsonProperty(PropertyName = "nennleistungAbgabe", Order = 15)]
     [JsonPropertyName("nennleistungAbgabe")]
     [JsonPropertyOrder(15)]
     [NonOfficial(NonOfficialCategory.MISSING)]
@@ -102,7 +90,7 @@ public class TechnischeRessource : BusinessObject
     /// Speicherkapazität
     /// Beispiel: QTY+Z42:100:KWH'
     /// </summary>
-    [JsonProperty(PropertyName = "speicherkapazitaet", Required = Required.Default, Order = 16)]
+    [JsonProperty(PropertyName = "speicherkapazitaet", Order = 16)]
     [JsonPropertyName("speicherkapazitaet")]
     [JsonPropertyOrder(16)]
     [NonOfficial(NonOfficialCategory.MISSING)]
@@ -116,11 +104,7 @@ public class TechnischeRessource : BusinessObject
     ///     Z50: Stromerzeugungsart
     ///     Z56: Speicher
     /// </summary>
-    [JsonProperty(
-        PropertyName = "technischeRessourceNutzung",
-        Required = Required.Default,
-        Order = 17
-    )]
+    [JsonProperty(PropertyName = "technischeRessourceNutzung", Order = 17)]
     [JsonPropertyName("technischeRessourceNutzung")]
     [JsonPropertyOrder(17)]
     [NonOfficial(NonOfficialCategory.MISSING)]
@@ -135,7 +119,7 @@ public class TechnischeRessource : BusinessObject
     ///     ZE5: E-Mobilität
     ///     ZA8: Straßenbeleuchtung
     /// </summary>
-    [JsonProperty(PropertyName = "verbrauchsart", Required = Required.Default, Order = 18)]
+    [JsonProperty(PropertyName = "verbrauchsart", Order = 18)]
     [JsonPropertyOrder(18)]
     [JsonPropertyName("verbrauchsart")]
     [NonOfficial(NonOfficialCategory.MISSING)]
@@ -152,7 +136,7 @@ public class TechnischeRessource : BusinessObject
     ///     ZV6: Wärmepumpe (Kälte)
     ///     ZV7: Wärmepumpe (Wärme)
     /// </summary>
-    [JsonProperty(PropertyName = "waermenutzung", Required = Required.Default, Order = 19)]
+    [JsonProperty(PropertyName = "waermenutzung", Order = 19)]
     [JsonPropertyOrder(19)]
     [JsonPropertyName("waermenutzung")]
     [NonOfficial(NonOfficialCategory.MISSING)]
@@ -167,7 +151,7 @@ public class TechnischeRessource : BusinessObject
     ///     Z87: E-Mobilitätsladesäule: Es handelt sich um eine öffentliche Ladesäule mit ggf. mehreren Ladeanschlüssen an der Marktlokation.
     ///     ZE7: Ladepark: Es handelt sich um mehr als eine öffentliche Ladesäule an der Marktlokation
     /// </summary>
-    [JsonProperty(PropertyName = "emobilitaetsart", Required = Required.Default, Order = 20)]
+    [JsonProperty(PropertyName = "emobilitaetsart", Order = 20)]
     [JsonPropertyOrder(20)]
     [JsonPropertyName("emobilitaetsart")]
     [NonOfficial(NonOfficialCategory.MISSING)]
@@ -184,7 +168,7 @@ public class TechnischeRessource : BusinessObject
     ///     ZG1: Wasser
     ///     ZG5: Sonstige Erzeugungsart
     /// </summary>
-    [JsonProperty(PropertyName = "erzeugungsart", Required = Required.Default, Order = 21)]
+    [JsonProperty(PropertyName = "erzeugungsart", Order = 21)]
     [JsonPropertyOrder(21)]
     [JsonPropertyName("erzeugungsart")]
     [NonOfficial(NonOfficialCategory.MISSING)]
@@ -200,7 +184,7 @@ public class TechnischeRessource : BusinessObject
     ///     ZF9: Batteriespeicher
     ///     ZG6: Sonstige Speicherart
     /// </summary>
-    [JsonProperty(PropertyName = "speicherart", Required = Required.Default, Order = 22)]
+    [JsonProperty(PropertyName = "speicherart", Order = 22)]
     [JsonPropertyOrder(22)]
     [JsonPropertyName("speicherart")]
     [NonOfficial(NonOfficialCategory.MISSING)]
@@ -211,7 +195,7 @@ public class TechnischeRessource : BusinessObject
     // /// Lokationszuordnung, um bspw. die zugehörigen Messlokationen anzugeben
     // /// </summary>
     // [JsonProperty(
-    //     Required = Required.Default,
+    //
     //     Order = 23,
     //     PropertyName = "lokationszuordnungen"
     // )]
@@ -223,11 +207,7 @@ public class TechnischeRessource : BusinessObject
     /// <summary>
     /// Lokationsbuendel Code, der die Funktion dieses BOs an der Lokationsbuendelstruktur beschreibt.
     /// </summary>
-    [JsonProperty(
-        Required = Required.Default,
-        Order = 24,
-        PropertyName = "lokationsbuendelObjektcode"
-    )]
+    [JsonProperty(Order = 24, PropertyName = "lokationsbuendelObjektcode")]
     [JsonPropertyName("lokationsbuendelObjektcode")]
     [ProtoMember(24)]
     [JsonPropertyOrder(24)]
@@ -238,11 +218,7 @@ public class TechnischeRessource : BusinessObject
     /// Enthält die ID der vorgelagerten Lokation. Kann IDs unterschiedlicher Lokationen enthalten, also zum Beispiel
     /// einer Messlokation oder Netzlokation
     /// </summary>
-    [JsonProperty(
-        Required = Required.Default,
-        Order = 25,
-        PropertyName = "vorgelagerteLokationsId"
-    )]
+    [JsonProperty(Order = 25, PropertyName = "vorgelagerteLokationsId")]
     [JsonPropertyName("vorgelagerteLokationsId")]
     [ProtoMember(25)]
     [JsonPropertyOrder(25)]
@@ -251,7 +227,7 @@ public class TechnischeRessource : BusinessObject
     /// <summary>
     ///Kategorie der verbrauchenden Technischen Ressource
     /// </summary>
-    [JsonProperty(Required = Required.Default, Order = 26, PropertyName = "kategorie")]
+    [JsonProperty(Order = 26, PropertyName = "kategorie")]
     [JsonPropertyName("kategorie")]
     [ProtoMember(26)]
     [JsonPropertyOrder(26)]
@@ -260,7 +236,7 @@ public class TechnischeRessource : BusinessObject
     /// <summary>
     ///Inbetriebsetzungsdatum der verbrauchenden Technischen Ressource nach § 14a EnWG
     /// </summary>
-    [JsonProperty(Required = Required.Default, Order = 27, PropertyName = "inbetriebsetzung")]
+    [JsonProperty(Order = 27, PropertyName = "inbetriebsetzung")]
     [JsonPropertyName("inbetriebsetzung")]
     [ProtoMember(27)]
     [JsonPropertyOrder(27)]
@@ -269,7 +245,7 @@ public class TechnischeRessource : BusinessObject
     /// <summary>
     ///Einordnung der verbrauchenden Technischen Ressource nach § 14a EnWG mit Inbetriebsetzung vor 2024
     /// </summary>
-    [JsonProperty(Required = Required.Default, Order = 28, PropertyName = "einordnung")]
+    [JsonProperty(Order = 28, PropertyName = "einordnung")]
     [JsonPropertyName("einordnung")]
     [ProtoMember(28)]
     [JsonPropertyOrder(28)]
@@ -278,7 +254,7 @@ public class TechnischeRessource : BusinessObject
     /// <summary>
     ///Information zu weiteren technischen Einrichtungen
     /// </summary>
-    [JsonProperty(Required = Required.Default, Order = 29, PropertyName = "weitereEinrichtung")]
+    [JsonProperty(Order = 29, PropertyName = "weitereEinrichtung")]
     [JsonPropertyName("weitereEinrichtung")]
     [ProtoMember(29)]
     [JsonPropertyOrder(29)]

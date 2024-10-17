@@ -40,7 +40,7 @@ public class Anfrage : BusinessObject
     /// <example>
     ///     1-0:1.8.1
     /// </example>
-    [JsonProperty(PropertyName = "obiskennzahl", Required = Required.Default, Order = 8)]
+    [JsonProperty(PropertyName = "obiskennzahl", Order = 8)]
     [JsonPropertyName("obiskennzahl")]
     [NonOfficial(NonOfficialCategory.MISSING)]
     [ProtoMember(1002)]
@@ -51,7 +51,7 @@ public class Anfrage : BusinessObject
     /// <summary>
     /// Sollablesetermin / Zeitangabe für Messwertanfrage. Details <see cref="Zeitraum" />
     /// </summary>
-    [JsonProperty(PropertyName = "ZeitraumMesswertanfrage", Required = Required.Default, Order = 9)]
+    [JsonProperty(PropertyName = "ZeitraumMesswertanfrage", Order = 9)]
     [JsonPropertyName("ZeitraumMesswertanfrage")]
     [ProtoMember(1003)]
     [JsonPropertyOrder(9)]
@@ -71,7 +71,7 @@ public class Anfrage : BusinessObject
     /// <summary>
     /// Typ/Art der Anfrage (ORDERS ORDRSP IMD 7081)
     /// </summary>
-    [JsonProperty(PropertyName = "anfragetyp", Required = Required.Default, Order = 11)]
+    [JsonProperty(PropertyName = "anfragetyp", Order = 11)]
     [JsonPropertyName("anfragetyp")]
     [NonOfficial(NonOfficialCategory.MISSING)]
     [ProtoMember(1005)]

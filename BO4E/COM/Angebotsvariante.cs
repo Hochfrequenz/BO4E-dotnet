@@ -19,7 +19,7 @@ public class Angebotsvariante : COM
     public Angebotsstatus Angebotsstatus { get; set; }
 
     /// <summary>Umschreibung des Inhalts der Angebotsvariante.</summary>
-    [JsonProperty(PropertyName = "beschreibung", Order = 11, Required = Required.Default)]
+    [JsonProperty(PropertyName = "beschreibung", Order = 11)]
     [JsonPropertyName("beschreibung")]
     [JsonPropertyOrder(11)]
     [ProtoMember(5)]
@@ -37,7 +37,7 @@ public class Angebotsvariante : COM
     }
 
     /// <summary>Datum der Erstellung der Angebotsvariante</summary>
-    [JsonProperty(PropertyName = "erstelldatum", Order = 12, Required = Required.Default)]
+    [JsonProperty(PropertyName = "erstelldatum", Order = 12)]
     [JsonPropertyName("erstelldatum")]
     [JsonPropertyOrder(12)]
     [ProtoIgnore]
@@ -54,21 +54,21 @@ public class Angebotsvariante : COM
     }
 
     /// <summary>Bis zu diesem Zeitpunkt (Tag/Uhrzeit) inklusive gilt die Angebotsvariante, z.B. 31.12.2017, 17:00 Uhr.</summary>
-    [JsonProperty(PropertyName = "bindefrist", Order = 13, Required = Required.Default)]
+    [JsonProperty(PropertyName = "bindefrist", Order = 13)]
     [JsonPropertyName("bindefrist")]
     [JsonPropertyOrder(13)]
     [ProtoIgnore]
     public DateTimeOffset? Bindefrist { get; set; }
 
     /// <summary>Aufsummierte Wirkarbeitsmenge aller Angebotsteile. <seealso cref="Menge" /></summary>
-    [JsonProperty(PropertyName = "gesamtmenge", Order = 14, Required = Required.Default)]
+    [JsonProperty(PropertyName = "gesamtmenge", Order = 14)]
     [JsonPropertyName("gesamtmenge")]
     [JsonPropertyOrder(14)]
     [ProtoMember(8)]
     public Menge? Gesamtmenge { get; set; }
 
     /// <summary>Aufsummierte Kosten aller Angebotsteile. <seealso cref="Betrag" /></summary>
-    [JsonProperty(PropertyName = "gesamtkosten", Order = 15, Required = Required.Default)]
+    [JsonProperty(PropertyName = "gesamtkosten", Order = 15)]
     [JsonPropertyName("gesamtkosten")]
     [JsonPropertyOrder(15)]
     [ProtoMember(9)]

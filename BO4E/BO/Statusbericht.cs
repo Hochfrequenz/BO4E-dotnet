@@ -26,7 +26,7 @@ public class Statusbericht : BusinessObject
     /// <summary>
     ///    Das geprüfte Dokument, z.B. die Referenz auf die EDIFACT-Nachricht die geprüft / beanstandet wurde
     /// </summary>
-    [JsonProperty(Required = Required.Default, Order = 11, PropertyName = "pruefgegenstand")]
+    [JsonProperty(Order = 11, PropertyName = "pruefgegenstand")]
     [JsonPropertyName("pruefgegenstand")]
     [ProtoMember(2)]
     [JsonPropertyOrder(11)]
@@ -58,7 +58,7 @@ public class Statusbericht : BusinessObject
     /// <summary>
     ///    Liste der Fehler
     /// </summary>
-    [JsonProperty(Required = Required.Default, Order = 13, PropertyName = "fehler")]
+    [JsonProperty(Order = 13, PropertyName = "fehler")]
     [JsonPropertyName("fehler")]
     [JsonPropertyOrder(13)]
     public Fehler? Fehler { get; set; }

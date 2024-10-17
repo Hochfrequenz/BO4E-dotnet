@@ -16,7 +16,7 @@ public class Rueckmeldungsposition : COM
     /// <summary>
     /// Positionsnummer der Referenzierung
     /// </summary>
-    [JsonProperty(PropertyName = "positionsnummer", Required = Required.Default, Order = 3)]
+    [JsonProperty(PropertyName = "positionsnummer", Order = 3)]
     [JsonPropertyName("positionsnummer")]
     [NonOfficial(NonOfficialCategory.MISSING)]
     [ProtoMember(3)]
@@ -26,7 +26,7 @@ public class Rueckmeldungsposition : COM
     /// <summary>
     /// Abweichungspositionen
     /// </summary>
-    [JsonProperty(PropertyName = "abweichungspositionen", Required = Required.Default, Order = 4)]
+    [JsonProperty(PropertyName = "abweichungspositionen", Order = 4)]
     [JsonPropertyName("abweichungspositionen")]
     [NonOfficial(NonOfficialCategory.MISSING)]
     [ProtoMember(4)]

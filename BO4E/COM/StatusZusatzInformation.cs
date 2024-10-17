@@ -20,7 +20,7 @@ public class StatusZusatzInformation : COM
     ///     Enthält die Zusatzinformation Art des angegebenen Wertes
     /// </summary>
     /// <seealso cref="StatusArt" />
-    [JsonProperty(PropertyName = "art", Required = Required.Default, Order = 1)]
+    [JsonProperty(PropertyName = "art", Order = 1)]
     [JsonPropertyName("art")]
     [NonOfficial(NonOfficialCategory.UNSPECIFIED)]
     [ProtoMember(1)]
@@ -30,7 +30,7 @@ public class StatusZusatzInformation : COM
     ///     Enthält die Zusatzinformation Status des angegebenen Wertes
     /// </summary>
     /// <seealso cref="Status" />
-    [JsonProperty(PropertyName = "status", Required = Required.Default, Order = 2)]
+    [JsonProperty(PropertyName = "status", Order = 2)]
     [JsonPropertyName("status")]
     [NonOfficial(NonOfficialCategory.UNSPECIFIED)]
     [ProtoMember(2)]

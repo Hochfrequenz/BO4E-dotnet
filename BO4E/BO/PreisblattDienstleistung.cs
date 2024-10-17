@@ -21,7 +21,7 @@ public class PreisblattDienstleistung : Preisblatt
     /// <summary>
     ///     Hier kann der Preis auf bestimmte Geräte eingegrenzt werden. Z.B. auf die Zählergröße.
     /// </summary>
-    [JsonProperty(Required = Required.Default, Order = 8, PropertyName = "geraetedetails")]
+    [JsonProperty(Order = 8, PropertyName = "geraetedetails")]
     [JsonPropertyName("geraetedetails")]
     //[ProtoMember(8)]
     public Bilanzierungsmethode? Geraetedetails { get; set; }

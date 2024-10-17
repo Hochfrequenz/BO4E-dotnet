@@ -9,13 +9,13 @@ namespace BO4E.COM;
 public class Zustaendigkeit : COM
 {
     /// <summary>Berufliche Rolle des Ansprechpartners</summary>
-    [JsonProperty(PropertyName = "jobtitel", Required = Required.Default)]
+    [JsonProperty(PropertyName = "jobtitel")]
     [JsonPropertyName("jobtitel")]
     [ProtoMember(3)]
     public string? Jobtitel { get; set; }
 
     /// <summary>Abteilung, in der der Ansprechpartner tätig ist</summary>
-    [JsonProperty(PropertyName = "abteilung", Required = Required.Default)]
+    [JsonProperty(PropertyName = "abteilung")]
     [JsonPropertyName("abteilung")]
     [ProtoMember(4)]
     public string? Abteilung { get; set; }
@@ -23,7 +23,7 @@ public class Zustaendigkeit : COM
     /// <summary>
     ///     Hier kann eine thematische Zuordnung des APs angegeben werden. Details <see cref="ENUM.Themengebiet" />
     /// </summary>
-    [JsonProperty(PropertyName = "themengebiet", Required = Required.Default)]
+    [JsonProperty(PropertyName = "themengebiet")]
     [JsonPropertyName("themengebiet")]
     [ProtoMember(5)]
     public string? Themengebiet { get; set; }

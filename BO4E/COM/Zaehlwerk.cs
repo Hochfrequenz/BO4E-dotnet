@@ -16,21 +16,21 @@ public class Zaehlwerk : COM
     ///     Identifikation des Zählwerks (Registers) innerhalb des Zählers. Oftmals eine laufende Nummer hinter der
     ///     Zählernummer. Z.B. 47110815_1
     /// </summary>
-    [JsonProperty(PropertyName = "zaehlwerkId", Order = 3, Required = Required.Default)]
+    [JsonProperty(PropertyName = "zaehlwerkId", Order = 3)]
     [JsonPropertyName("zaehlwerkId")]
     [ProtoMember(3)]
     [JsonPropertyOrder(3)]
     public string? ZaehlwerkId { get; set; }
 
     /// <summary>Zusätzliche Bezeichnung, z.B. Zählwerk_Wirkarbeit.</summary>
-    [JsonProperty(PropertyName = "bezeichnung", Order = 4, Required = Required.Default)]
+    [JsonProperty(PropertyName = "bezeichnung", Order = 4)]
     [JsonPropertyName("bezeichnung")]
     [ProtoMember(4)]
     [JsonPropertyOrder(4)]
     public string? Bezeichnung { get; set; }
 
     /// <summary>Die Energierichtung, Einspeisung oder Ausspeisung. Details <see cref="Energierichtung" /></summary>
-    [JsonProperty(PropertyName = "richtung", Order = 5, Required = Required.Default)]
+    [JsonProperty(PropertyName = "richtung", Order = 5)]
     [JsonPropertyName("richtung")]
     [ProtoMember(5)]
     [JsonPropertyOrder(5)]
@@ -41,7 +41,7 @@ public class Zaehlwerk : COM
     ///     Nur Zählwerkstände mit dieser OBIS-Kennzahl werden an diesem Zählwerk registriert. Beispiel:1-0:1.8.1 für
     ///     elektrische Wirkarbeit.
     /// </summary>
-    [JsonProperty(PropertyName = "obisKennzahl", Order = 6, Required = Required.Default)]
+    [JsonProperty(PropertyName = "obisKennzahl", Order = 6)]
     [JsonPropertyName("obisKennzahl")]
     [ProtoMember(6)]
     [JsonPropertyOrder(6)]
@@ -51,21 +51,21 @@ public class Zaehlwerk : COM
     ///     Mit diesem Faktor wird eine Zählerstandsdifferenz multipliziert, um zum eigentlichen Verbrauch im Zeitraum zu
     ///     kommen.
     /// </summary>
-    [JsonProperty(PropertyName = "wandlerfaktor", Order = 7, Required = Required.Default)]
+    [JsonProperty(PropertyName = "wandlerfaktor", Order = 7)]
     [JsonPropertyName("wandlerfaktor")]
     [ProtoMember(7)]
     [JsonPropertyOrder(7)]
     public decimal? Wandlerfaktor { get; set; }
 
     /// <summary>Die Einheit der gemessenen Größe, z.B. kWh. Details <see cref="Mengeneinheit" /></summary>
-    [JsonProperty(PropertyName = "einheit", Order = 8, Required = Required.Default)]
+    [JsonProperty(PropertyName = "einheit", Order = 8)]
     [JsonPropertyName("einheit")]
     [ProtoMember(8)]
     [JsonPropertyOrder(8)]
     public Mengeneinheit? Einheit { get; set; }
 
     /// <summary>Obis kennzahl</summary>
-    [JsonProperty(PropertyName = "kennzahl", Order = 1009, Required = Required.Default)]
+    [JsonProperty(PropertyName = "kennzahl", Order = 1009)]
     [JsonPropertyName("kennzahl")]
     [NonOfficial(NonOfficialCategory.CUSTOMER_REQUIREMENTS)]
     [Obsolete("Use existing obisKennzahl instead.", true)]
@@ -74,7 +74,7 @@ public class Zaehlwerk : COM
     public string? Kennzahl { get; set; }
 
     /// <summary>schwachlastfaehig</summary>
-    [JsonProperty(PropertyName = "schwachlastfaehig", Order = 1010, Required = Required.Default)]
+    [JsonProperty(PropertyName = "schwachlastfaehig", Order = 1010)]
     [JsonPropertyName("schwachlastfaehig")]
     [NonOfficial(NonOfficialCategory.CUSTOMER_REQUIREMENTS)]
     [ProtoMember(1010)]
@@ -82,7 +82,7 @@ public class Zaehlwerk : COM
     public Schwachlastfaehig? Schwachlastfaehig { get; set; }
 
     /// <summary>Verwendungungszweck der Werte Marktlokation</summary>
-    [JsonProperty(PropertyName = "verwendungszwecke", Order = 1011, Required = Required.Default)]
+    [JsonProperty(PropertyName = "verwendungszwecke", Order = 1011)]
     [JsonPropertyName("verwendungszwecke")]
     [NonOfficial(NonOfficialCategory.CUSTOMER_REQUIREMENTS)]
     [ProtoMember(1011)]
@@ -90,7 +90,7 @@ public class Zaehlwerk : COM
     public List<Verwendungszweck>? Verwendungszwecke { get; set; }
 
     /// <summary>Stromverbrauchsart/Verbrauchsart Marktlokation</summary>
-    [JsonProperty(PropertyName = "verbrauchsart", Order = 1012, Required = Required.Default)]
+    [JsonProperty(PropertyName = "verbrauchsart", Order = 1012)]
     [JsonPropertyName("verbrauchsart")]
     [NonOfficial(NonOfficialCategory.CUSTOMER_REQUIREMENTS)]
     [ProtoMember(1012)]
@@ -98,7 +98,7 @@ public class Zaehlwerk : COM
     public Verbrauchsart? Verbrauchsart { get; set; }
 
     /// <summary>Stromverbrauchsart/Unterbrechbarkeit Marktlokation</summary>
-    [JsonProperty(PropertyName = "unterbrechbarkeit", Order = 1013, Required = Required.Default)]
+    [JsonProperty(PropertyName = "unterbrechbarkeit", Order = 1013)]
     [JsonPropertyName("unterbrechbarkeit")]
     [NonOfficial(NonOfficialCategory.CUSTOMER_REQUIREMENTS)]
     [ProtoMember(1013)]
@@ -106,14 +106,14 @@ public class Zaehlwerk : COM
     public Unterbrechbarkeit? Unterbrechbarkeit { get; set; }
 
     /// <summary>Stromverbrauchsart/Wärmenutzung Marktlokation</summary>
-    [JsonProperty(PropertyName = "waermenutzung", Order = 1014, Required = Required.Default)]
+    [JsonProperty(PropertyName = "waermenutzung", Order = 1014)]
     [JsonPropertyName("waermenutzung")]
     [NonOfficial(NonOfficialCategory.CUSTOMER_REQUIREMENTS)]
     [ProtoMember(1014)]
     [JsonPropertyOrder(1014)]
     public Waermenutzung? Waermenutzung { get; set; }
 
-    [JsonProperty(PropertyName = "konzessionsabgabe", Order = 1015, Required = Required.Default)]
+    [JsonProperty(PropertyName = "konzessionsabgabe", Order = 1015)]
     [JsonPropertyName("konzessionsabgabe")]
     [NonOfficial(NonOfficialCategory.CUSTOMER_REQUIREMENTS)]
     [ProtoMember(1015)]
@@ -122,7 +122,7 @@ public class Zaehlwerk : COM
     // Todo @hamid: add a docstring
     public Konzessionsabgabe? Konzessionsabgabe { get; set; }
 
-    [JsonProperty(PropertyName = "steuerbefreit", Order = 1016, Required = Required.Default)]
+    [JsonProperty(PropertyName = "steuerbefreit", Order = 1016)]
     [JsonPropertyName("steuerbefreit")]
     [NonOfficial(NonOfficialCategory.CUSTOMER_REQUIREMENTS)]
     [ProtoMember(1016)]
@@ -130,7 +130,7 @@ public class Zaehlwerk : COM
     // Todo @hamid: add a docstring
     public bool? Steuerbefreit { get; set; }
 
-    [JsonProperty(PropertyName = "vorkommastelle", Order = 1017, Required = Required.Default)]
+    [JsonProperty(PropertyName = "vorkommastelle", Order = 1017)]
     [JsonPropertyName("vorkommastelle")]
     [NonOfficial(NonOfficialCategory.CUSTOMER_REQUIREMENTS)]
     [ProtoMember(1017)]
@@ -138,7 +138,7 @@ public class Zaehlwerk : COM
     // Todo @hamid: add a docstring
     public int? Vorkommastelle { get; set; }
 
-    [JsonProperty(PropertyName = "nachkommastelle", Order = 1018, Required = Required.Default)]
+    [JsonProperty(PropertyName = "nachkommastelle", Order = 1018)]
     [JsonPropertyName("nachkommastelle")]
     [NonOfficial(NonOfficialCategory.CUSTOMER_REQUIREMENTS)]
     [ProtoMember(1018)]
@@ -146,7 +146,7 @@ public class Zaehlwerk : COM
     // Todo @hamid: add a docstring
     public int? Nachkommastelle { get; set; }
 
-    [JsonProperty(PropertyName = "abrechnungsrelevant", Order = 1019, Required = Required.Default)]
+    [JsonProperty(PropertyName = "abrechnungsrelevant", Order = 1019)]
     [JsonPropertyName("abrechnungsrelevant")]
     [NonOfficial(NonOfficialCategory.CUSTOMER_REQUIREMENTS)]
     [ProtoMember(1019)]
@@ -154,14 +154,14 @@ public class Zaehlwerk : COM
     // Todo @hamid: add a docstring
     public bool? Abrechnungsrelevant { get; set; }
 
-    [JsonProperty(PropertyName = "anzahlAblesungen", Order = 1020, Required = Required.Default)]
+    [JsonProperty(PropertyName = "anzahlAblesungen", Order = 1020)]
     [JsonPropertyName("anzahlAblesungen")]
     [NonOfficial(NonOfficialCategory.CUSTOMER_REQUIREMENTS)]
     [ProtoMember(1020)]
     [JsonPropertyOrder(1020)]
     public int? AnzahlAblesungen { get; set; }
 
-    [JsonProperty(PropertyName = "zaehlzeiten", Order = 1021, Required = Required.Default)]
+    [JsonProperty(PropertyName = "zaehlzeiten", Order = 1021)]
     [JsonPropertyName("zaehlzeiten")]
     [NonOfficial(NonOfficialCategory.CUSTOMER_REQUIREMENTS)]
     [ProtoMember(1021)]
@@ -171,7 +171,7 @@ public class Zaehlwerk : COM
     /// <summary>
     /// Konfiguration (iMSys) des Zählwerks
     /// </summary>
-    [JsonProperty(PropertyName = "konfiguration", Order = 1022, Required = Required.Default)]
+    [JsonProperty(PropertyName = "konfiguration", Order = 1022)]
     [JsonPropertyName("konfiguration")]
     [NonOfficial(NonOfficialCategory.CUSTOMER_REQUIREMENTS)]
     [ProtoMember(1022)]
@@ -186,7 +186,7 @@ public class Zaehlwerk : COM
     ///     Z87: E-Mobilitätsladesäule: Es handelt sich um eine öffentliche Ladesäule mit ggf. mehreren Ladeanschlüssen an der Marktlokation.
     ///     ZE7: Ladepark: Es handelt sich um mehr als eine öffentliche Ladesäule an der Marktlokation
     /// </summary>
-    [JsonProperty(PropertyName = "emobilitaetsart", Required = Required.Default, Order = 1023)]
+    [JsonProperty(PropertyName = "emobilitaetsart", Order = 1023)]
     [JsonPropertyOrder(1023)]
     [JsonPropertyName("emobilitaetsart")]
     [NonOfficial(NonOfficialCategory.MISSING)]

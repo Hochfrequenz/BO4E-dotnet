@@ -37,7 +37,7 @@ public class RegionaleTarifpreisposition : COM
     ///     Gibt an, nach welcher Menge die vorgenannte Einschränkung erfolgt (z.B. Jahresstromverbrauch in kWh).Details
     ///     <see cref="Mengeneinheit" />
     /// </summary>
-    [JsonProperty(PropertyName = "mengeneinheitstaffel", Required = Required.Default)]
+    [JsonProperty(PropertyName = "mengeneinheitstaffel")]
     [JsonPropertyName("mengeneinheitstaffel")]
     [ProtoMember(6)]
     public Mengeneinheit? Mengeneinheitstaffel { get; set; }
@@ -46,7 +46,7 @@ public class RegionaleTarifpreisposition : COM
     ///     Hier sind die Staffeln mit ihren Preisangaben und regionalen Gültigkeiten definiert. Struktur
     ///     <seealso cref="RegionalePreisstaffel" />
     /// </summary>
-    [JsonProperty(PropertyName = "preisstaffeln", Required = Required.Default)]
+    [JsonProperty(PropertyName = "preisstaffeln")]
     [JsonPropertyName("preisstaffeln")]
     [ProtoMember(7)]
     public List<RegionalePreisstaffel>? Preisstaffeln { get; set; }

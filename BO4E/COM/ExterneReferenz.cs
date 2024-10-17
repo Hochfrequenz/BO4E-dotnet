@@ -22,7 +22,7 @@ public class ExterneReferenz : COM
     /// <summary>
     ///     Bezeichnung der externen Referenz (z.B. "hochfrequenz integration services")
     /// </summary>
-    [JsonProperty(PropertyName = "exRefName", Required = Required.Default)]
+    [JsonProperty(PropertyName = "exRefName")]
     [JsonPropertyName("exRefName")]
     [ProtoMember(1)]
     public string? ExRefName { get; set; }
@@ -30,7 +30,7 @@ public class ExterneReferenz : COM
     /// <summary>
     ///     Wert der externen Referenz (z.B. "123456"; "4711")
     /// </summary>
-    [JsonProperty(PropertyName = "exRefWert", Required = Required.Default)]
+    [JsonProperty(PropertyName = "exRefWert")]
     [JsonPropertyName("exRefWert")]
     [ProtoMember(2)]
     public string? ExRefWert { get; set; }
