@@ -238,6 +238,83 @@ public class TestBOCOMDesign
     [TestMethod]
     public void NullableDefaultEnums()
     {
+        // In the past, we thought that it's ok to have non-nullable enums (= enums, that default to a value other than null even if they're not explicitly set)
+        // as long as they are only marked with a Newtonsoft JsonProperty Required.Always attribute.
+        // This design was wrong but it is there now, at least for a handful of existing BOs and COMs.
+        // In the future we don't want any more non-nullable enums.
+        // But those who are there already are grandfathered in.
+        var enumPropertiesThatAreHistoricallyNotNullable = new HashSet<string>
+        {
+            "BO4E.COM.Angebotsvariante->Angebotsstatus",
+            "BO4E.COM.Aufgabe->Ausgefuehrt",
+            "BO4E.COM.Ausschreibungsdetail->NetzebeneLieferung",
+            "BO4E.COM.Ausschreibungsdetail->NetzebeneMessung",
+            "BO4E.COM.Ausschreibungslos->Preismodell",
+            "BO4E.COM.Ausschreibungslos->Energieart",
+            "BO4E.COM.Ausschreibungslos->WunschRechnungslegung",
+            "BO4E.COM.Ausschreibungslos->WunschVertragsform",
+            "BO4E.COM.Ausschreibungslos->AnzahlLieferstellen",
+            "BO4E.COM.Avisposition->IstStorno",
+            "BO4E.COM.Betrag->Waehrung",
+            "BO4E.COM.Dienstleistung->Dienstleistungstyp",
+            "BO4E.COM.Energiemix->Energiemixnummer",
+            "BO4E.COM.Energiemix->Energieart",
+            "BO4E.COM.Energiemix->Gueltigkeitsjahr",
+            "BO4E.COM.Fehler->Typ",
+            "BO4E.COM.FehlerDetail->Code",
+            "BO4E.COM.Geraeteeigenschaften->Geraetetyp",
+            "BO4E.COM.Handelsunstimmigkeitsbegruendung->Grund",
+            "BO4E.COM.Konzessionsabgabe->Satz",
+            "BO4E.COM.KriteriumsWert->Kriterium",
+            "BO4E.COM.PhysikalischerWert->Einheit",
+            "BO4E.COM.PositionsAufAbschlag->AufAbschlagstyp",
+            "BO4E.COM.PositionsAufAbschlag->AufAbschlagswaehrung",
+            "BO4E.COM.Preisgarantie->Preisgarantietyp",
+            "BO4E.COM.Preisposition->Berechnungsmethode",
+            "BO4E.COM.Preisposition->Leistungstyp",
+            "BO4E.COM.Preisposition->Preiseinheit",
+            "BO4E.COM.Rechenschritt->RechenschrittBestandteilId",
+            "BO4E.COM.Rechenschritt->ReferenzRechenschrittId",
+            "BO4E.COM.Rechenschritt->Operation",
+            "BO4E.COM.Rechnungsposition->Positionsnummer",
+            "BO4E.COM.RechnungspositionFlat->Positionsnummer",
+            "BO4E.COM.RegionaleGueltigkeit->Gueltigkeitstyp",
+            "BO4E.COM.RegionaleTarifpreisposition->Preistyp",
+            "BO4E.COM.RegionaleTarifpreisposition->Bezugseinheit",
+            "BO4E.COM.Regionskriterium->Gueltigkeitstyp",
+            "BO4E.COM.Regionskriterium->Mengenoperator",
+            "BO4E.COM.Regionskriterium->Regionskriteriumtyp",
+            "BO4E.COM.Rufnummer->Nummerntyp",
+            "BO4E.COM.Steuerbetrag->Steuerkennzeichen",
+            "BO4E.COM.Steuerbetrag->Waehrung",
+            "BO4E.COM.Tarifpreisposition->Preistyp",
+            "BO4E.COM.Tarifpreisposition->Einheit",
+            "BO4E.COM.Tarifpreisposition->Bezugseinheit",
+            "BO4E.COM.Verbrauch->Einheit",
+            "BO4E.COM.Verwendungszweck->Marktrolle",
+            "BO4E.BO.Anfrage->LokationsTyp",
+            "BO4E.BO.Anfrage->Anfragekategorie",
+            "BO4E.BO.Angebot->Sparte",
+            "BO4E.BO.Benachrichtigung->Prioritaet",
+            "BO4E.BO.Benachrichtigung->Bearbeitungsstatus",
+            "BO4E.BO.Berechnungsformel->Notwendigkeit",
+            "BO4E.BO.Geschaeftspartner->Gewerbekennzeichnung",
+            "BO4E.BO.Handelsunstimmigkeit->Typ",
+            "BO4E.BO.Kosten->Kostenklasse",
+            "BO4E.BO.Marktlokation->Sparte",
+            "BO4E.BO.Messlokation->Sparte",
+            "BO4E.BO.Netzlokation->Sparte",
+            "BO4E.BO.Produktpaket->PaketId",
+            "BO4E.BO.Rechnung->Storno",
+            "BO4E.BO.Rechnung->Rechnungsstyp",
+            "BO4E.BO.Reklamation->LokationsTyp",
+            "BO4E.BO.Reklamation->Reklamationsgrund",
+            "BO4E.BO.Statusbericht->Status",
+            "BO4E.BO.Tranche->Sparte",
+            "BO4E.BO.Vertrag->Sparte",
+            "BO4E.BO.Wechsel->Sparte",
+            "BO4E.BO.Zaehler->Sparte",
+        };
         foreach (
             var boType in typeof(BusinessObject)
                 .Assembly.GetTypes()
@@ -248,16 +325,9 @@ public class TestBOCOMDesign
         )
         {
             foreach (
-                var obligDefaultField in boType
-                    .GetProperties(
-                        BindingFlags.DeclaredOnly | BindingFlags.Public | BindingFlags.Instance
-                    )
-                    .Where(field =>
-                        field
-                            .GetCustomAttributes(typeof(JsonPropertyAttribute), true)
-                            .Cast<JsonPropertyAttribute>()
-                            .Any(jpa => jpa.Required == Required.Default)
-                    )
+                var obligDefaultField in boType.GetProperties(
+                    BindingFlags.DeclaredOnly | BindingFlags.Public | BindingFlags.Instance
+                )
             )
             {
                 if (
@@ -275,11 +345,18 @@ public class TestBOCOMDesign
                 {
                     continue;
                 }
+
+                var isLegacyNonNullableEnum = enumPropertiesThatAreHistoricallyNotNullable.Contains(
+                    $"{boType.FullName}->{obligDefaultField.Name}"
+                );
+                if (isLegacyNonNullableEnum)
+                {
+                    continue;
+                }
                 Assert.IsTrue(
                     false,
-                    $"The type {obligDefaultField.PropertyType} of {boType.FullName}.{obligDefaultField.Name} is not nullable but not marked as obligatory."
+                    $"The type {obligDefaultField.PropertyType} of {boType.FullName}.{obligDefaultField.Name} is not nullable but should be"
                 );
-                // this is a problem because e.g. for integers you can't distinguish between no value (null) or initial value (0). Same is true for Enum values
             }
         }
     }
