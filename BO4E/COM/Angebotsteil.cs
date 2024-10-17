@@ -62,7 +62,7 @@ public class Angebotsteil : COM
     public Betrag? Gesamtkostenangebotsteil { get; set; }
 
     /// <summary>Einzelne Positionen, die zu diesem Angebotsteil gehören. Details <see cref="Angebotsposition" /></summary>
-    [JsonProperty(PropertyName = "positionen", Order = 14, Required = Required.Always)]
+    [JsonProperty(PropertyName = "positionen", Order = 14)]
     [JsonPropertyName("positionen")]
     [JsonPropertyOrder(14)]
     [ProtoMember(7)]

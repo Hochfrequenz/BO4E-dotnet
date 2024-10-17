@@ -19,7 +19,7 @@ public class Reklamation : BusinessObject
     /// <summary>
     /// Für welche Markt- oder Messlokation gilt diese Reklamation.
     /// </summary>
-    [JsonProperty(PropertyName = "lokationsId", Required = Required.Always, Order = 10)]
+    [JsonProperty(PropertyName = "lokationsId", Order = 10)]
     [JsonPropertyName("lokationsId")]
     [NonOfficial(NonOfficialCategory.MISSING)]
     [ProtoMember(1000)]
@@ -30,7 +30,7 @@ public class Reklamation : BusinessObject
     /// Gibt an, ob es sich um eine Markt- oder Messlokation handelt.
     /// </summary>
     /// <see cref="Lokationstyp" />
-    [JsonProperty(PropertyName = "lokationsTyp", Required = Required.Always, Order = 11)]
+    [JsonProperty(PropertyName = "lokationsTyp", Order = 11)]
     [JsonPropertyName("lokationsTyp")]
     [ProtoMember(1001)]
     [JsonPropertyOrder(11)]
@@ -42,7 +42,7 @@ public class Reklamation : BusinessObject
     /// <example>
     ///     1-0:1.8.1
     /// </example>
-    [JsonProperty(PropertyName = "obiskennzahl", Required = Required.Always, Order = 12)]
+    [JsonProperty(PropertyName = "obiskennzahl", Order = 12)]
     [JsonPropertyName("obiskennzahl")]
     [NonOfficial(NonOfficialCategory.MISSING)]
     [ProtoMember(1002)]
@@ -67,7 +67,7 @@ public class Reklamation : BusinessObject
     /// <summary>
     /// Hier wird für die Reklamation von Werten der Reklamationsgrund angegeben.
     /// </summary>
-    [JsonProperty(PropertyName = "reklamationsgrund", Required = Required.Always, Order = 14)]
+    [JsonProperty(PropertyName = "reklamationsgrund", Order = 14)]
     [JsonPropertyName("reklamationsgrund")]
     [NonOfficial(NonOfficialCategory.MISSING)]
     [ProtoMember(1004)]

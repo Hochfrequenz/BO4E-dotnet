@@ -13,7 +13,7 @@ namespace BO4E.COM;
 public class Ausschreibungsdetail : COM
 {
     /// <summary>Identifikation einer ausgeschriebenen Marktlokation</summary>
-    [JsonProperty(PropertyName = "lokationsId", Required = Required.Always)]
+    [JsonProperty(PropertyName = "lokationsId")]
     [JsonPropertyName("lokationsId")]
     [ProtoMember(3)]
     public string LokationsId { get; set; }
@@ -28,7 +28,7 @@ public class Ausschreibungsdetail : COM
     ///     In der angegebenen Netzebene wird die Marktlokation versorgt, z.B. MSP für Mittelspanung. Details
     ///     <see cref="Netzebene" />
     /// </summary>
-    [JsonProperty(PropertyName = "netzebeneLieferung", Required = Required.Always)]
+    [JsonProperty(PropertyName = "netzebeneLieferung")]
     [JsonPropertyName("netzebeneLieferung")]
     [ProtoMember(5)]
     public Netzebene NetzebeneLieferung { get; set; }
@@ -37,7 +37,7 @@ public class Ausschreibungsdetail : COM
     ///     In der angegebenen Netzebene wird die Lokation gemessen, z.B. NSP für Niederspanung. Details
     ///     <see cref="Netzebene" />
     /// </summary>
-    [JsonProperty(PropertyName = "netzebeneMessung", Required = Required.Always)]
+    [JsonProperty(PropertyName = "netzebeneMessung")]
     [JsonPropertyName("netzebeneMessung")]
     [ProtoMember(6)]
     public Netzebene NetzebeneMessung { get; set; }
@@ -79,7 +79,7 @@ public class Ausschreibungsdetail : COM
     public bool? LastgangVorhanden { get; set; }
 
     /// <summary>Die Adresse an der die Marktlokation sich befindet. Struktur <seealso cref="Adresse" /></summary>
-    [JsonProperty(PropertyName = "lokationsadresse", Required = Required.Always)]
+    [JsonProperty(PropertyName = "lokationsadresse")]
     [JsonPropertyName("lokationsadresse")]
     [ProtoMember(12)]
     public Adresse Lokationsadresse { get; set; }

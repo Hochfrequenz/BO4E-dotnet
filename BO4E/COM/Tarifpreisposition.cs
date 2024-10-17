@@ -10,13 +10,13 @@ namespace BO4E.COM;
 public class Tarifpreisposition : COM
 {
     /// <summary>Angabe des Preistypes (z.B. Grundpreis) Details <see cref="ENUM.Preistyp" /></summary>
-    [JsonProperty(PropertyName = "preistyp", Required = Required.Always)]
+    [JsonProperty(PropertyName = "preistyp")]
     [JsonPropertyName("preistyp")]
     [ProtoMember(3)]
     public Preistyp Preistyp { get; set; }
 
     /// <summary>Einheit des Preises (z.B. EURO) Details <see cref="Waehrungseinheit" /></summary>
-    [JsonProperty(PropertyName = "einheit", Required = Required.Always)]
+    [JsonProperty(PropertyName = "einheit")]
     [JsonPropertyName("einheit")]
     [ProtoMember(4)]
     public Waehrungseinheit Einheit { get; set; }
@@ -24,7 +24,7 @@ public class Tarifpreisposition : COM
     /// <summary>
     ///     Größe, auf die sich die Einheit bezieht, beispielsweise kWh, Jahr. Details <see cref="Mengeneinheit" />
     /// </summary>
-    [JsonProperty(PropertyName = "bezugseinheit", Required = Required.Always)]
+    [JsonProperty(PropertyName = "bezugseinheit")]
     [JsonPropertyName("bezugseinheit")]
     [ProtoMember(5)]
     public Mengeneinheit Bezugseinheit { get; set; }
@@ -39,7 +39,7 @@ public class Tarifpreisposition : COM
     public Mengeneinheit? Mengeneinheitstaffel { get; set; }
 
     /// <summary>Hier sind die Staffeln mit ihren Preisenangaben definiert. Struktur <seealso cref="Preisstaffel" /></summary>
-    [JsonProperty(PropertyName = "preisstaffeln", Required = Required.Always)]
+    [JsonProperty(PropertyName = "preisstaffeln")]
     [JsonPropertyName("preisstaffeln")]
     [ProtoMember(7)]
     public Preisstaffel Preisstaffeln { get; set; }

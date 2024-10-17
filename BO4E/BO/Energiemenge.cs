@@ -36,7 +36,7 @@ public class Energiemenge : BusinessObject
     ///     Eindeutige Nummer der Marktlokation bzw. der Messlokation, zu der die Energiemenge gehört
     /// </summary>
     [DefaultValue("|null|")]
-    [JsonProperty(PropertyName = "lokationsId", Required = Required.Always, Order = 10)]
+    [JsonProperty(PropertyName = "lokationsId", Order = 10)]
     [JsonPropertyName("lokationsId")]
     [JsonPropertyOrder(10)]
     [ProtoMember(10)]

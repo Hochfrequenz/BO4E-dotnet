@@ -31,7 +31,7 @@ public class Messlokation : BusinessObject
     ///     z.B. DE 47108151234567
     /// </summary>
     [DefaultValue("|null|")]
-    [JsonProperty(PropertyName = "messlokationsId", Required = Required.Always, Order = 10)]
+    [JsonProperty(PropertyName = "messlokationsId", Order = 10)]
     [JsonPropertyName("messlokationsId")]
     [JsonPropertyOrder(10)]
     [DataCategory(DataCategory.POD)]
@@ -43,7 +43,7 @@ public class Messlokation : BusinessObject
     ///     * Sparte der Messlokation, z.B. Gas oder Strom.
     ///     <seealso cref="ENUM.Sparte" />
     /// </summary>
-    [JsonProperty(PropertyName = "sparte", Required = Required.Always, Order = 11)]
+    [JsonProperty(PropertyName = "sparte", Order = 11)]
     [JsonPropertyName("sparte")]
     [JsonPropertyOrder(11)]
     [ProtoMember(5)]

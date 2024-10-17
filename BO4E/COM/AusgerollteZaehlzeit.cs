@@ -27,7 +27,7 @@ public class AusgerollteZaehlzeit : COM
     /// Angabe eines Zeitpunktes, zu dem der Wechsel auf ein neues aktives Zählzeitregister erfolgt.
     /// </summary>
     /// <remarks>UTILTS SG5 DTM+Z34</remarks>
-    [JsonProperty(Required = Required.Always, Order = 4, PropertyName = "aenderungszeitpunkt")]
+    [JsonProperty( Order = 4, PropertyName = "aenderungszeitpunkt")]
     [JsonPropertyName("aenderungszeitpunkt")]
     [JsonPropertyOrder(4)]
     [ProtoIgnore]

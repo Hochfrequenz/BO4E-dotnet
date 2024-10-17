@@ -16,7 +16,7 @@ public class Rechenschritt : COM
     /// Die BestandteilID des Rechenschritt (1-99999)
     /// </summary>
     /// <remarks>UTILTS SG8 RFF 1154 / SG</remarks>
-    [JsonProperty(Required = Required.Always, PropertyName = "rechenschrittBestandteilId")]
+    [JsonProperty( PropertyName = "rechenschrittBestandteilId")]
     [JsonPropertyName("rechenschrittBestandteilId")]
     public int RechenschrittBestandteilId { get; set; }
 
@@ -24,14 +24,14 @@ public class Rechenschritt : COM
     /// Die ReferenzID des Rechenschritt (1-99999)
     /// </summary>
     /// <remarks>UTILTS SG8 RFF 1154 / SG</remarks>
-    [JsonProperty(Required = Required.Always, PropertyName = "referenzRechenschrittID")]
+    [JsonProperty( PropertyName = "referenzRechenschrittID")]
     [JsonPropertyName("referenzRechenschrittID")]
     public int ReferenzRechenschrittId { get; set; }
 
     /// <summary>
     /// Die Rechenoperation dieses Schrittes
     /// </summary>
-    [JsonProperty(Required = Required.Always, Order = 3, PropertyName = "operation")]
+    [JsonProperty( Order = 3, PropertyName = "operation")]
     [JsonPropertyName("operation")]
     [BoKey]
     [ProtoMember(3)]

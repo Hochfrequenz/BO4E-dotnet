@@ -22,7 +22,7 @@ public class Preisgarantie : COM
     ///     Festlegung, auf welche Preisbestandteile die Garantie gewährt wird. Details
     ///     <see cref="ENUM.Preisgarantietyp" />
     /// </summary>
-    [JsonProperty(PropertyName = "preisgarantietyp", Required = Required.Always)]
+    [JsonProperty(PropertyName = "preisgarantietyp")]
     [JsonPropertyName("preisgarantietyp")]
     [ProtoMember(4)]
     public Preisgarantietyp Preisgarantietyp { get; set; }
@@ -31,7 +31,7 @@ public class Preisgarantie : COM
     ///     Zeitraum, bis zu dem die Preisgarantie gilt, z.B. bis zu einem absolutem / fixem Datum oder als Laufzeit in
     ///     Monaten. Details <see cref="Zeitraum" />
     /// </summary>
-    [JsonProperty(PropertyName = "zeitlicheGueltigkeit", Required = Required.Always)]
+    [JsonProperty(PropertyName = "zeitlicheGueltigkeit")]
     [JsonPropertyName("zeitlicheGueltigkeit")]
     [ProtoMember(5)]
     public Zeitraum ZeitlicheGueltigkeit { get; set; }

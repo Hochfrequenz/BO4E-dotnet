@@ -18,7 +18,7 @@ public class SperrauftragsStorno : AuftragsStorno
     /// <summary>
     /// Handelt es sich beim zu stornierenden Auftrag um einen Auftrag zum <see cref="ENUM.Sperrauftragsart.SPERREN"/> oder <see cref="ENUM.Sperrauftragsart.ENTSPERREN"/>?
     /// </summary>
-    [JsonProperty("originalSperrauftragsart", Required = Required.Always)]
+    [JsonProperty("originalSperrauftragsart")]
     [JsonPropertyName("originalSperrauftragsart")]
     public Sperrauftragsart OriginalSperrauftragsart => Sperrauftragsart.SPERREN;
 }

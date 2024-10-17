@@ -12,7 +12,7 @@ namespace BO4E.COM;
 public class Angebotsvariante : COM
 {
     /// <summary>Gibt den Status eines Angebotes an. <seealso cref="ENUM.Angebotsstatus" /></summary>
-    [JsonProperty(PropertyName = "angebotsstatus", Order = 10, Required = Required.Always)]
+    [JsonProperty(PropertyName = "angebotsstatus", Order = 10)]
     [JsonPropertyName("angebotsstatus")]
     [JsonPropertyOrder(10)]
     [ProtoMember(4)]
@@ -79,7 +79,7 @@ public class Angebotsvariante : COM
     ///     die Mengen und Gesamtkosten aller Angebotspositionen zusammengefasst. Eine Variante besteht mindestens aus einem
     ///     Angebotsteil. Details <see cref="Angebotsteil" />
     /// </summary>
-    [JsonProperty(PropertyName = "teile", Order = 16, Required = Required.Always)]
+    [JsonProperty(PropertyName = "teile", Order = 16)]
     [JsonPropertyName("teile")]
     [JsonPropertyOrder(16)]
     [ProtoMember(10)]

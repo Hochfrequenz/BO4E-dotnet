@@ -82,7 +82,7 @@ public class Geschaeftspartner : BusinessObject
     ///     Kennzeichnung ob es sich um einen Gewerbe/Unternehmen (gewerbeKennzeichnung = true)
     ///     oder eine Privatperson handelt. (gewerbeKennzeichnung = false)
     /// </summary>
-    [JsonProperty(Required = Required.Always, Order = 11, PropertyName = "gewerbekennzeichnung")]
+    [JsonProperty( Order = 11, PropertyName = "gewerbekennzeichnung")]
     [JsonPropertyName("gewerbekennzeichnung")]
     [JsonPropertyOrder(11)]
     [ProtoMember(9)]

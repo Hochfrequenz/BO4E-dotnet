@@ -11,7 +11,7 @@ namespace BO4E.COM;
 public class FehlerDetail : COM
 {
     /// <summary>Gibt den Code des Fehlers an.</summary>
-    [JsonProperty(PropertyName = "code", Required = Required.Always, Order = 10)]
+    [JsonProperty(PropertyName = "code", Order = 10)]
     [JsonPropertyName("code")]
     [JsonPropertyOrder(10)]
     [ProtoMember(1)]

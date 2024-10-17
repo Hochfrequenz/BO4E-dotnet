@@ -14,7 +14,7 @@ namespace BO4E.COM;
 public class RegionalerAufAbschlag : COM
 {
     /// <summary>Bezeichnung des Auf-/Abschlags</summary>
-    [JsonProperty(PropertyName = "bezeichnung", Required = Required.Always)]
+    [JsonProperty(PropertyName = "bezeichnung")]
     [JsonPropertyName("bezeichnung")]
     [ProtoMember(3)]
     public string Bezeichnung { get; set; }
@@ -119,7 +119,7 @@ public class RegionalerAufAbschlag : COM
     ///     Werte für die gestaffelten Auf/Abschläge mit regionaler Eingrenzung. Details
     ///     <see cref="RegionalePreisstaffel" />
     /// </summary>
-    [JsonProperty(PropertyName = "staffeln", Required = Required.Always)]
+    [JsonProperty(PropertyName = "staffeln")]
     [JsonPropertyName("staffeln")]
     [ProtoMember(17)]
     public List<RegionalePreisstaffel> Staffeln { get; set; }

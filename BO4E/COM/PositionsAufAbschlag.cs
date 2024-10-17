@@ -14,25 +14,25 @@ namespace BO4E.COM;
 public class PositionsAufAbschlag : COM
 {
     /// <summary>Bezeichnung des Auf-/Abschlags</summary>
-    [JsonProperty(PropertyName = "bezeichnung", Required = Required.Always)]
+    [JsonProperty(PropertyName = "bezeichnung")]
     [JsonPropertyName("bezeichnung")]
     [ProtoMember(3)]
     public string Bezeichnung { get; set; }
 
     /// <summary>Beschreibung zum Auf-/Abschlag</summary>
-    [JsonProperty(PropertyName = "beschreibung", Required = Required.Always)]
+    [JsonProperty(PropertyName = "beschreibung")]
     [JsonPropertyName("beschreibung")]
     [ProtoMember(4)]
     public string Beschreibung { get; set; }
 
     /// <summary>Typ des AufAbschlages. Details <see cref="ENUM.AufAbschlagstyp" /></summary>
-    [JsonProperty(PropertyName = "aufAbschlagstyp", Required = Required.Always)]
+    [JsonProperty(PropertyName = "aufAbschlagstyp")]
     [JsonPropertyName("aufAbschlagstyp")]
     [ProtoMember(5)]
     public AufAbschlagstyp AufAbschlagstyp { get; set; }
 
     /// <summary>Höhe des Auf-/Abschlages</summary>
-    [JsonProperty(PropertyName = "aufAbschlagswert", Required = Required.Always)]
+    [JsonProperty(PropertyName = "aufAbschlagswert")]
     [JsonPropertyName("aufAbschlagswert")]
     [ProtoMember(6)]
     public decimal AufAbschlagswert { get; set; }
@@ -40,7 +40,7 @@ public class PositionsAufAbschlag : COM
     /// <summary>
     ///     Einheit, in der der Auf-/Abschlag angegeben ist (z.B. ct/kWh). Details <see cref="Waehrungseinheit" />
     /// </summary>
-    [JsonProperty(PropertyName = "aufAbschlagswaehrung", Required = Required.Always)]
+    [JsonProperty(PropertyName = "aufAbschlagswaehrung")]
     [JsonPropertyName("aufAbschlagswaehrung")]
     [ProtoMember(7)]
     public Waehrungseinheit AufAbschlagswaehrung { get; set; }

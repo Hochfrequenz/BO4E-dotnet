@@ -23,7 +23,7 @@ public class Benachrichtigung : BusinessObject
     ///     Eine eindeutige ID der Benachrichtigung.
     ///     Entspricht z.B. der Klärfallnummer in einem SAP-System oder der Task-ID im Salesforce
     /// </summary>
-    [JsonProperty(Required = Required.Always, Order = 4, PropertyName = "benachrichtigungsId")]
+    [JsonProperty( Order = 4, PropertyName = "benachrichtigungsId")]
     [JsonPropertyName("benachrichtigungsId")]
     [ProtoMember(4)]
     [BoKey]
@@ -33,7 +33,7 @@ public class Benachrichtigung : BusinessObject
     ///     Priorität der Benachrichtigung
     /// </summary>
     [DefaultValue(Prioritaet.NORMAL)]
-    [JsonProperty(Required = Required.Always, Order = 5, PropertyName = "prioritaet")]
+    [JsonProperty( Order = 5, PropertyName = "prioritaet")]
     [JsonPropertyName("prioritaet")]
     [ProtoMember(5)]
     public Prioritaet Prioritaet { get; set; }
@@ -42,7 +42,7 @@ public class Benachrichtigung : BusinessObject
     ///     Status der Benachrichtigung
     /// </summary>
     [DefaultValue(Bearbeitungsstatus.OFFEN)]
-    [JsonProperty(Required = Required.Always, Order = 6, PropertyName = "bearbeitungsstatus")]
+    [JsonProperty( Order = 6, PropertyName = "bearbeitungsstatus")]
     [JsonPropertyName("bearbeitungsstatus")]
     [ProtoMember(6)]
     public Bearbeitungsstatus Bearbeitungsstatus { get; set; }
@@ -50,7 +50,7 @@ public class Benachrichtigung : BusinessObject
     /// <summary>
     ///     Kurzbeschreibung des Fehlers (Klärfall-Überschrift im SAP, Subject im SFDC)
     /// </summary>
-    [JsonProperty(Required = Required.Always, Order = 7, PropertyName = "kurztext")]
+    [JsonProperty( Order = 7, PropertyName = "kurztext")]
     [JsonPropertyName("kurztext")]
     [ProtoMember(7)]
     public string Kurztext { get; set; }
@@ -72,7 +72,7 @@ public class Benachrichtigung : BusinessObject
     ///     Zeitpunkt zu dem die Benachrichtigung erstellt wurde (UTC).
     /// </summary>
     // [DefaultValue(DateTimeOffset.UtcNow)] <-- doesn't work.
-    [JsonProperty(Required = Required.Always, Order = 8, PropertyName = "erstellungsZeitpunkt")]
+    [JsonProperty( Order = 8, PropertyName = "erstellungsZeitpunkt")]
     [JsonPropertyName("erstellungsZeitpunkt")]
     [ProtoIgnore]
     [Newtonsoft.Json.JsonConverter(typeof(LenientDateTimeConverter))]

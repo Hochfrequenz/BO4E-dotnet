@@ -17,7 +17,7 @@ public class Hardware : COM
     public Geraetetyp? Geraetetyp { get; set; }
 
     /// <summary>Bezeichnung der Hardware.</summary>
-    [JsonProperty(PropertyName = "bezeichnung", Required = Required.Always)]
+    [JsonProperty(PropertyName = "bezeichnung")]
     [JsonPropertyName("bezeichnung")]
     [ProtoMember(4)]
     public string Bezeichnung { get; set; }

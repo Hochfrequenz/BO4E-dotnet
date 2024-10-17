@@ -13,7 +13,7 @@ public class PreisblattDienstleistung : Preisblatt
     /// <summary>
     ///     Hier kann der Preis noch auf bestimmte Dienstleistungsbereiche eingegrenzt werden. Z.B. Sperrung/Entsperrung.
     /// </summary>
-    [JsonProperty(Required = Required.Always, Order = 7, PropertyName = "dienstleistungsdetails")]
+    [JsonProperty( Order = 7, PropertyName = "dienstleistungsdetails")]
     [JsonPropertyName("dienstleistungsdetails")]
     //[ProtoMember(7)]
     public Dienstleistungstyp Dienstleistungsdetails { get; set; }
@@ -29,7 +29,7 @@ public class PreisblattDienstleistung : Preisblatt
     /// <summary>
     ///     Der Netzbetreiber oder Messstellenbetreiber, der die Preise veröffentlicht hat.
     /// </summary>
-    [JsonProperty(Required = Required.Always, Order = 9, PropertyName = "herausgeber")]
+    [JsonProperty( Order = 9, PropertyName = "herausgeber")]
     [JsonPropertyName("herausgeber")]
     //[ProtoMember(9)]
     public Marktteilnehmer Herausgeber { get; set; }

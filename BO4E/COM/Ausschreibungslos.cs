@@ -11,13 +11,13 @@ namespace BO4E.COM;
 public class Ausschreibungslos : COM
 {
     /// <summary>Laufende Nummer des Loses</summary>
-    [JsonProperty(PropertyName = "losnummer", Required = Required.Always)]
+    [JsonProperty(PropertyName = "losnummer")]
     [JsonPropertyName("losnummer")]
     [ProtoMember(3)]
     public string Losnummer { get; set; }
 
     /// <summary>Bezeichnung der Ausschreibung</summary>
-    [JsonProperty(PropertyName = "bezeichung", Required = Required.Always)]
+    [JsonProperty(PropertyName = "bezeichung")]
     [JsonPropertyName("bezeichung")]
     [ProtoMember(4)]
     public string Bezeichung { get; set; }
@@ -32,13 +32,13 @@ public class Ausschreibungslos : COM
     ///     Bezeichnung der Preismodelle in Ausschreibungen für die Energielieferung. Details
     ///     <see cref="ENUM.Preismodell" />
     /// </summary>
-    [JsonProperty(PropertyName = "preismodell", Required = Required.Always)]
+    [JsonProperty(PropertyName = "preismodell")]
     [JsonPropertyName("preismodell")]
     [ProtoMember(6)]
     public Preismodell Preismodell { get; set; }
 
     /// <summary>Unterscheidungsmöglichkeiten für die Sparte. Details <see cref="Sparte" /></summary>
-    [JsonProperty(PropertyName = "energieart", Required = Required.Always)]
+    [JsonProperty(PropertyName = "energieart")]
     [JsonPropertyName("energieart")]
     [ProtoMember(7)]
     public Sparte Energieart { get; set; }
@@ -46,7 +46,7 @@ public class Ausschreibungslos : COM
     /// <summary>
     ///     Aufzählung der Möglichkeiten zur Rechnungslegung in Ausschreibungen. Details <see cref="Rechnungslegung" />
     /// </summary>
-    [JsonProperty(PropertyName = "wunschRechnungslegung", Required = Required.Always)]
+    [JsonProperty(PropertyName = "wunschRechnungslegung")]
     [JsonPropertyName("wunschRechnungslegung")]
     [ProtoMember(8)]
     public Rechnungslegung WunschRechnungslegung { get; set; }
@@ -54,25 +54,25 @@ public class Ausschreibungslos : COM
     /// <summary>
     ///     Aufzählung der Möglichkeiten zu Vertragsformen in Ausschreibungen. Details <see cref="Vertragsform" />
     /// </summary>
-    [JsonProperty(PropertyName = "wunschVertragsform", Required = Required.Always)]
+    [JsonProperty(PropertyName = "wunschVertragsform")]
     [JsonPropertyName("wunschVertragsform")]
     [ProtoMember(9)]
     public Vertragsform WunschVertragsform { get; set; }
 
     /// <summary>Name des Lizenzpartners</summary>
-    [JsonProperty(PropertyName = "betreutDurch", Required = Required.Always)]
+    [JsonProperty(PropertyName = "betreutDurch")]
     [JsonPropertyName("betreutDurch")]
     [ProtoMember(10)]
     public string BetreutDurch { get; set; }
 
     /// <summary>Anzahl der Lieferstellen in dieser Ausschreibung</summary>
-    [JsonProperty(PropertyName = "anzahlLieferstellen", Required = Required.Always)]
+    [JsonProperty(PropertyName = "anzahlLieferstellen")]
     [JsonPropertyName("anzahlLieferstellen")]
     [ProtoMember(11)]
     public int AnzahlLieferstellen { get; set; } // does this make sense? lieferstellen.Size()?
 
     /// <summary>Die ausgeschriebenen Lieferstellen. Details <see cref="Ausschreibungsdetail" /></summary>
-    [JsonProperty(PropertyName = "lieferstellen", Required = Required.Always)]
+    [JsonProperty(PropertyName = "lieferstellen")]
     [JsonPropertyName("lieferstellen")]
     [ProtoMember(12)]
     public List<Ausschreibungsdetail> Lieferstellen { get; set; }

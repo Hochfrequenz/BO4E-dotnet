@@ -10,7 +10,7 @@ namespace BO4E.COM;
 public class Kostenblock : COM
 {
     /// <summary>Bezeichnung für einen Kostenblock. Z.B. Netzkosten, Messkosten, Umlagen, etc.</summary>
-    [JsonProperty(PropertyName = "kostenblockbezeichnung", Required = Required.Always)]
+    [JsonProperty(PropertyName = "kostenblockbezeichnung")]
     [JsonPropertyName("kostenblockbezeichnung")]
     [ProtoMember(3)]
     public string Kostenblockbezeichnung { get; set; }

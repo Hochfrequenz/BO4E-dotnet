@@ -17,7 +17,7 @@ public class Statusbericht : BusinessObject
     /// <summary>
     ///     Status des Berichtes (Fehlerhaft, Erfolgreich)
     /// </summary>
-    [JsonProperty(Required = Required.Always, Order = 10, PropertyName = "status")]
+    [JsonProperty( Order = 10, PropertyName = "status")]
     [JsonPropertyName("status")]
     [JsonPropertyOrder(10)]
     [ProtoMember(1)]
@@ -49,7 +49,7 @@ public class Statusbericht : BusinessObject
     /// <example>
     ///     2017-12-24
     /// </example>
-    [JsonProperty(Required = Required.Always, Order = 12, PropertyName = "datumPruefung")]
+    [JsonProperty( Order = 12, PropertyName = "datumPruefung")]
     [JsonPropertyName("datumPruefung")]
     [JsonPropertyOrder(12)]
     [ProtoIgnore]

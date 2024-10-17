@@ -19,7 +19,7 @@ public abstract class AuftragsStorno : BusinessObject
     /// <summary>
     /// Eindeutige Kennung des zu stornierenden <see cref="Auftrag"/>s
     /// </summary>
-    [JsonProperty("auftragsId", Required = Required.Always)]
+    [JsonProperty("auftragsId")]
     [JsonPropertyName("auftragsId")]
     public string AuftragsId { get; set; }
 }

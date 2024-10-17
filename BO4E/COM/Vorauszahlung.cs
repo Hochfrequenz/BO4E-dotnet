@@ -13,7 +13,7 @@ namespace BO4E.COM;
 public class Vorauszahlung : COM
 {
     /// <summary>Gibt den Betrag des Preises an.</summary>
-    [JsonProperty(PropertyName = "betrag", Required = Required.Always, Order = 3)]
+    [JsonProperty(PropertyName = "betrag", Order = 3)]
     [JsonPropertyName("betrag")]
     [FieldName("value", Language.EN)]
     [ProtoMember(3)]

@@ -16,7 +16,7 @@ public class Region : BusinessObject
     /// <summary>
     ///     Bezeichnung der Region.
     /// </summary>
-    [JsonProperty(Required = Required.Always, Order = 4, PropertyName = "bezeichnung")]
+    [JsonProperty( Order = 4, PropertyName = "bezeichnung")]
     [JsonPropertyName("bezeichnung")]
     [ProtoMember(4)]
     [BoKey]
@@ -25,7 +25,7 @@ public class Region : BusinessObject
     /// <summary>
     ///     Positivliste der Kriterien zur Definition der Region.
     /// </summary>
-    [JsonProperty(Required = Required.Always, Order = 5, PropertyName = "positivListe")]
+    [JsonProperty( Order = 5, PropertyName = "positivListe")]
     [JsonPropertyName("positivListe")]
     [ProtoMember(5)]
     public List<Regionskriterium> PositivListe { get; set; }

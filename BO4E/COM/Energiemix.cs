@@ -11,19 +11,19 @@ namespace BO4E.COM;
 public class Energiemix : COM
 {
     /// <summary>Eindeutige Nummer zur Identifizierung des Energiemixes.</summary>
-    [JsonProperty(PropertyName = "energiemixnummer", Required = Required.Always)]
+    [JsonProperty(PropertyName = "energiemixnummer")]
     [JsonPropertyName("energiemixnummer")]
     [ProtoMember(3)]
     public int Energiemixnummer { get; set; }
 
     /// <summary>Strom oder Gas etc.. Details <see cref="Sparte" /></summary>
-    [JsonProperty(PropertyName = "energieart", Required = Required.Always)]
+    [JsonProperty(PropertyName = "energieart")]
     [JsonPropertyName("energieart")]
     [ProtoMember(4)]
     public Sparte Energieart { get; set; }
 
     /// <summary>Bezeichnung des Energiemix.</summary>
-    [JsonProperty(PropertyName = "bezeichnung", Required = Required.Always)]
+    [JsonProperty(PropertyName = "bezeichnung")]
     [JsonPropertyName("bezeichnung")]
     [ProtoMember(5)]
     public string Bezeichnung { get; set; }
@@ -35,7 +35,7 @@ public class Energiemix : COM
     public string? Bemerkung { get; set; }
 
     /// <summary>Jahr, für das der Energiemix gilt.</summary>
-    [JsonProperty(PropertyName = "gueltigkeitsjahr", Required = Required.Always)]
+    [JsonProperty(PropertyName = "gueltigkeitsjahr")]
     [JsonPropertyName("gueltigkeitsjahr")]
     [ProtoMember(7)]
     public int Gueltigkeitsjahr { get; set; }
@@ -77,7 +77,7 @@ public class Energiemix : COM
     public string? Website { get; set; }
 
     /// <summary>Anteile der jeweiligen Erzeugungsart. Details <see cref="Energieherkunft" /></summary>
-    [JsonProperty(PropertyName = "anteil", Required = Required.Always)]
+    [JsonProperty(PropertyName = "anteil")]
     [JsonPropertyName("anteil")]
     [ProtoMember(14)]
     public List<Energieherkunft> Anteil { get; set; }

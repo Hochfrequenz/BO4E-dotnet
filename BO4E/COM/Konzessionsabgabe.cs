@@ -15,7 +15,7 @@ public class Konzessionsabgabe : COM
     /// <summary>
     ///     Art der Abgabe
     /// </summary>
-    [JsonProperty(PropertyName = "satz", Required = Required.Always, Order = 8)]
+    [JsonProperty(PropertyName = "satz", Order = 8)]
     [JsonPropertyName("satz")]
     [ProtoMember(3)]
     public AbgabeArt Satz { get; set; }

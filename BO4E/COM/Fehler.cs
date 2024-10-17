@@ -11,7 +11,7 @@ namespace BO4E.COM;
 public class Fehler : COM
 {
     /// <summary>Gibt den Typ des Fehlers an.</summary>
-    [JsonProperty(PropertyName = "typ", Required = Required.Always)]
+    [JsonProperty(PropertyName = "typ")]
     [JsonPropertyName("typ")]
     [ProtoMember(1)]
     public BO4E.ENUM.FehlerTyp Typ { get; set; }

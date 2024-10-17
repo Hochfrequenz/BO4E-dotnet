@@ -39,7 +39,7 @@ public class CompletenessReport : Report, IComparable<CompletenessReport>
     ///     <see cref="BO4E.BO.Energiemenge.LokationsId" />
     /// </summary>
     [DataCategory(DataCategory.POD)]
-    [JsonProperty(PropertyName = "lokationsId", Required = Required.Always, Order = 8)]
+    [JsonProperty(PropertyName = "lokationsId", Order = 8)]
     public string LokationsId { get; set; }
 
     /// <summary>
@@ -256,13 +256,13 @@ public class CompletenessReport : Report, IComparable<CompletenessReport>
         /// <summary>
         ///     <see cref="Verbrauch.Startdatum" />
         /// </summary>
-        [JsonProperty(PropertyName = "startdatum", Required = Required.Always)]
+        [JsonProperty(PropertyName = "startdatum")]
         public DateTime Startdatum { get; set; }
 
         /// <summary>
         ///     <see cref="Verbrauch.Enddatum" />
         /// </summary>
-        [JsonProperty(PropertyName = "enddatum", Required = Required.Always)]
+        [JsonProperty(PropertyName = "enddatum")]
         public DateTime Enddatum { get; set; }
 
         /// <summary>
@@ -296,7 +296,7 @@ public class CompletenessReport : Report, IComparable<CompletenessReport>
         /// <summary>
         ///     reference time frame to be analysed
         /// </summary>
-        [JsonProperty(PropertyName = "referenceTimeFrame", Required = Required.Always, Order = 7)]
+        [JsonProperty(PropertyName = "referenceTimeFrame", Order = 7)]
         public Zeitraum ReferenceTimeFrame { get; set; }
 
         /// <summary>

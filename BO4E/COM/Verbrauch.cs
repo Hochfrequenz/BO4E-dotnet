@@ -130,7 +130,7 @@ public class Verbrauch : COM
     /// <example>
     ///     1-0:1.8.1
     /// </example>
-    [JsonProperty(PropertyName = "obiskennzahl", Required = Required.Always, Order = 6)]
+    [JsonProperty(PropertyName = "obiskennzahl", Order = 6)]
     [JsonPropertyName("obiskennzahl")]
     [ProtoMember(6)]
     public string Obiskennzahl { get; set; }
@@ -138,7 +138,7 @@ public class Verbrauch : COM
     /// <summary>
     ///     Gibt den absoluten Wert der Menge an.
     /// </summary>
-    [JsonProperty(PropertyName = "wert", Required = Required.Always, Order = 7)]
+    [JsonProperty(PropertyName = "wert", Order = 7)]
     [JsonPropertyName("wert")]
     [ProtoMember(7)]
     public decimal Wert { get; set; }
@@ -147,7 +147,7 @@ public class Verbrauch : COM
     ///     Gibt die Einheit zum jeweiligen Wert an.
     /// </summary>
     /// <seealso cref="Mengeneinheit" />
-    [JsonProperty(PropertyName = "einheit", Required = Required.Always, Order = 8)]
+    [JsonProperty(PropertyName = "einheit", Order = 8)]
     [JsonPropertyName("einheit")]
     [ProtoMember(8)]
     public Mengeneinheit Einheit { get; set; }

@@ -13,7 +13,7 @@ public class Entsperrauftrag : Auftrag
     /// <summary>
     /// <inheritdoc cref="Sperrauftrag.Sperrauftragsart"/>
     /// </summary>
-    [JsonProperty("sperrauftragsart", Required = Required.Always)]
+    [JsonProperty("sperrauftragsart")]
     [JsonPropertyName("sperrauftragsart")]
     public Sperrauftragsart Sperrauftragsart => Sperrauftragsart.ENTSPERREN;
 
@@ -35,7 +35,7 @@ public class Entsperrauftrag : Auftrag
     /// Ist true, falls die Entsperrung innerhalb der Arbeitszeit zu erfolgen hat.
     /// </summary>
     /// <remarks>Falls true ist in EDIFACT Z53 zu verwenden, falls false dann Z54</remarks>
-    [JsonProperty("istNurInnerhalbDerArbeitszeitZuEntsperren", Required = Required.Always)]
+    [JsonProperty("istNurInnerhalbDerArbeitszeitZuEntsperren")]
     [JsonPropertyName("istNurInnerhalbDerArbeitszeitZuEntsperren")]
     public bool IstNurInnerhalbDerArbeitszeitZuEntsperren { get; set; }
 }

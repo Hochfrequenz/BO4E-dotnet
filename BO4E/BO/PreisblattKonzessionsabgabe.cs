@@ -13,7 +13,7 @@ public class PreisblattKonzessionsabgabe : Preisblatt
     /// <summary>
     ///     Kundegruppe anhand derer die Höhe der Konzessionsabgabe festgelegt ist.
     /// </summary>
-    [JsonProperty(Required = Required.Always, Order = 8, PropertyName = "kundengruppeKA")]
+    [JsonProperty( Order = 8, PropertyName = "kundengruppeKA")]
     [JsonPropertyName("kundengruppeKA")]
     //[ProtoMember(8)]
     public KundengruppeKA KundengruppeKA { get; set; }

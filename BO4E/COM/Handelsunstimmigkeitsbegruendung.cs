@@ -26,7 +26,7 @@ public class Handelsunstimmigkeitsbegruendung : COM
     /// <summary>
     /// Angabe des Handelsunstimmigkeitsgrunds
     /// </summary>
-    [JsonProperty(PropertyName = "grund", Required = Required.Always, Order = 2)]
+    [JsonProperty(PropertyName = "grund", Order = 2)]
     [JsonPropertyName("grund")]
     [NonOfficial(NonOfficialCategory.MISSING)]
     [ProtoMember(2)]

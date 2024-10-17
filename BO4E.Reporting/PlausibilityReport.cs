@@ -18,14 +18,14 @@ public class PlausibilityReport : Report
     /// <summary>
     ///     all information is normalised to this reference time frame
     /// </summary>
-    [JsonProperty(PropertyName = "referenceTimeFrame", Required = Required.Always, Order = 7)]
+    [JsonProperty(PropertyName = "referenceTimeFrame", Order = 7)]
     public Zeitraum ReferenceTimeFrame { get; set; }
 
     /// <summary>
     ///     refers to a <see cref="Energiemenge.LokationsId" />
     /// </summary>
     [DataCategory(DataCategory.POD)]
-    [JsonProperty(PropertyName = "lokationsId", Required = Required.Always, Order = 8)]
+    [JsonProperty(PropertyName = "lokationsId", Order = 8)]
     public string LokationsId { get; set; }
 
     /// <summary>
@@ -44,27 +44,27 @@ public class PlausibilityReport : Report
     ///     Verbrauch of the reference Energiemenge
     /// </summary>
     [DataCategory(DataCategory.METER_READING)]
-    [JsonProperty(PropertyName = "verbrauchReference", Required = Required.Always, Order = 6)]
+    [JsonProperty(PropertyName = "verbrauchReference", Order = 6)]
     public Verbrauch VerbrauchReference { get; set; }
 
     /// <summary>
     ///     Verbrauch of another Energiemenge
     /// </summary>
     [DataCategory(DataCategory.METER_READING)]
-    [JsonProperty(PropertyName = "verbrauchOther", Required = Required.Always, Order = 7)]
+    [JsonProperty(PropertyName = "verbrauchOther", Order = 7)]
     public Verbrauch VerbrauchOther { get; set; }
 
     /// <summary>
     ///     absolute value of the difference between <see cref="Verbrauch.Wert" /> of <see cref="VerbrauchReference" /> and
     ///     <see cref="VerbrauchOther" />
     /// </summary>
-    [JsonProperty(PropertyName = "absoluteDeviation", Required = Required.Always, Order = 8)]
+    [JsonProperty(PropertyName = "absoluteDeviation", Order = 8)]
     public decimal AbsoluteDeviation { get; set; }
 
     /// <summary>
     ///     unit of <see cref="AbsoluteDeviation" />
     /// </summary>
-    [JsonProperty(PropertyName = "absoluteDeviationEinheit", Required = Required.Always, Order = 5)]
+    [JsonProperty(PropertyName = "absoluteDeviationEinheit", Order = 5)]
     public Mengeneinheit AbsoluteDeviationEinheit { get; set; }
 
     /// <summary>
@@ -82,14 +82,14 @@ public class PlausibilityReport : Report
         /// <summary>
         ///     Energiemenge to be compared with the reference Energiemenge
         /// </summary>
-        [JsonProperty(PropertyName = "other", Required = Required.Always)]
+        [JsonProperty(PropertyName = "other")]
         public Energiemenge Other { get; set; }
 
         /// <summary>
         ///     set true to ignore if Energiemenge do have different <see cref="Energiemenge.LokationsId" /> or
         ///     <see cref="Energiemenge.LokationsTyp" />
         /// </summary>
-        [JsonProperty(PropertyName = "ignoreLocation", Required = Required.Always)]
+        [JsonProperty(PropertyName = "ignoreLocation")]
         public bool IgnoreLocation { get; set; }
     }
 }

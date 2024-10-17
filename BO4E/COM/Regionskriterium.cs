@@ -15,7 +15,7 @@ public class Regionskriterium : COM
     ///     Hier wird festgelegt, ob es sich um ein einschließendes oder ausschließendes Kriterium handelt.Details siehe
     ///     <see cref="ENUM.Gueltigkeitstyp" />
     /// </summary>
-    [JsonProperty(PropertyName = "gueltigkeitstyp", Required = Required.Always)]
+    [JsonProperty(PropertyName = "gueltigkeitstyp")]
     [JsonPropertyName("gueltigkeitstyp")]
     [ProtoMember(3)]
     public Gueltigkeitstyp Gueltigkeitstyp { get; set; }
@@ -32,7 +32,7 @@ public class Regionskriterium : COM
     ///     Unterscheidung, wie der Wert angewendet werden soll, z.B.kleiner, größer, gleich.Details siehe
     ///     <see cref="ENUM.Mengenoperator" />
     /// </summary>
-    [JsonProperty(PropertyName = "mengenoperator", Required = Required.Always)]
+    [JsonProperty(PropertyName = "mengenoperator")]
     [JsonPropertyName("mengenoperator")]
     [ProtoMember(5)]
     public Mengenoperator Mengenoperator { get; set; }
@@ -40,7 +40,7 @@ public class Regionskriterium : COM
     /// <summary>
     ///     Hier wird das Kriterium selbst angegeben, z.B.Bundesland. Details siehe <see cref="ENUM.Regionskriteriumtyp" />
     /// </summary>
-    [JsonProperty(PropertyName = "regionskriteriumtyp", Required = Required.Always)]
+    [JsonProperty(PropertyName = "regionskriteriumtyp")]
     [JsonPropertyName("regionskriteriumtyp")]
     [ProtoMember(6)]
     public Regionskriteriumtyp Regionskriteriumtyp { get; set; }
@@ -49,7 +49,7 @@ public class Regionskriterium : COM
     ///     Der Wert, den das Kriterium annehmen kann, z.B.NRW.Im Falle des Regionskriteriumstyp BUNDESWEIT spielt dieser Wert
     ///     keine Rolle.
     /// </summary>
-    [JsonProperty(PropertyName = "wert", Required = Required.Always)]
+    [JsonProperty(PropertyName = "wert")]
     [JsonPropertyName("wert")]
     [ProtoMember(7)]
     public string Wert { get; set; }

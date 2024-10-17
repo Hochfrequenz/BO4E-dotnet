@@ -17,7 +17,7 @@ public class Anfrage : BusinessObject
     /// <summary>
     /// Für welche Markt- oder Messlokation gilt diese Anfrage.
     /// </summary>
-    [JsonProperty(PropertyName = "lokationsId", Required = Required.Always, Order = 6)]
+    [JsonProperty(PropertyName = "lokationsId", Order = 6)]
     [JsonPropertyName("lokationsId")]
     [JsonPropertyOrder(6)]
     [NonOfficial(NonOfficialCategory.MISSING)]
@@ -28,7 +28,7 @@ public class Anfrage : BusinessObject
     /// Gibt an, ob es sich um eine Markt- oder Messlokation handelt
     /// </summary>
     /// <see cref="Lokationstyp" />
-    [JsonProperty(PropertyName = "lokationsTyp", Required = Required.Always, Order = 7)]
+    [JsonProperty(PropertyName = "lokationsTyp", Order = 7)]
     [JsonPropertyName("lokationsTyp")]
     [ProtoMember(1001)]
     [JsonPropertyOrder(7)]
@@ -60,7 +60,7 @@ public class Anfrage : BusinessObject
     /// <summary>
     /// Kategorie der Anfrage (ORDERS ORDRSP BGM 1001)
     /// </summary>
-    [JsonProperty(PropertyName = "anfragekategorie", Required = Required.Always, Order = 10)]
+    [JsonProperty(PropertyName = "anfragekategorie", Order = 10)]
     [JsonPropertyName("anfragekategorie")]
     [NonOfficial(NonOfficialCategory.MISSING)]
     [ProtoMember(1004)]

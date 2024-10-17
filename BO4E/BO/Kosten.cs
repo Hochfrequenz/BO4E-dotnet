@@ -19,7 +19,7 @@ public class Kosten : BusinessObject
     /// <summary>
     ///     Klasse der Kosten, beispielsweise Fremdkosten. Details siehe <see cref="ENUM.Kostenklasse" />
     /// </summary>
-    [JsonProperty(Required = Required.Always, Order = 4, PropertyName = "kostenklasse")]
+    [JsonProperty( Order = 4, PropertyName = "kostenklasse")]
     [JsonPropertyName("kostenklasse")]
     [ProtoMember(4)]
     [DataCategory(DataCategory.FINANCE)]
@@ -28,7 +28,7 @@ public class Kosten : BusinessObject
     /// <summary>
     ///     Für diesen Zeitraum wurden die Kosten ermittelt. Details siehe <see cref="Zeitraum" />
     /// </summary>
-    [JsonProperty(Required = Required.Always, Order = 5, PropertyName = "gueltigkeit")]
+    [JsonProperty( Order = 5, PropertyName = "gueltigkeit")]
     [JsonPropertyName("gueltigkeit")]
     [ProtoMember(5)]
     [DataCategory(DataCategory.FINANCE)]
@@ -47,7 +47,7 @@ public class Kosten : BusinessObject
     ///     Eine Liste mit Kostenblöcken. In Kostenblöcken werden Kostenpositionen zusammengefasst. Beispiele: Netzkosten,
     ///     Umlagen, Steuern etc. Details siehe <see cref="Kostenblock" />
     /// </summary>
-    [JsonProperty(Required = Required.Always, Order = 7, PropertyName = "kostenbloecke")] // at least 1 entry
+    [JsonProperty( Order = 7, PropertyName = "kostenbloecke")] // at least 1 entry
     [JsonPropertyName("kostenbloecke")]
     [ProtoMember(7)]
     [MinLength(1)]

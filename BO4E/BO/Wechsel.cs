@@ -16,14 +16,14 @@ namespace BO4E.BO;
 public class Wechsel : BusinessObject
 {
     /// <summary>Strom oder Gas. <seealso cref="ENUM.Sparte" /></summary>
-    [JsonProperty(Required = Required.Always, Order = 11, PropertyName = "sparte")]
+    [JsonProperty( Order = 11, PropertyName = "sparte")]
     [JsonPropertyName("sparte")]
     [ProtoMember(11)]
     [JsonPropertyOrder(11)]
     public Sparte Sparte { get; set; }
 
     /// <summary>Liste an Geräten.</summary>
-    [JsonProperty(PropertyName = "geraete", Required = Required.Always, Order = 12)]
+    [JsonProperty(PropertyName = "geraete", Order = 12)]
     [JsonPropertyName("geraete")]
     [ProtoMember(12)]
     [JsonPropertyOrder(12)]

@@ -16,7 +16,7 @@ namespace BO4E.COM;
 public class Rechnungsposition : COM
 {
     /// <summary>Fortlaufende Nummer für die Rechnungsposition.</summary>
-    [JsonProperty(PropertyName = "positionsnummer", Required = Required.Always, Order = 11)]
+    [JsonProperty(PropertyName = "positionsnummer", Order = 11)]
     [JsonPropertyName("positionsnummer")]
     [JsonPropertyOrder(11)]
     [FieldName("invoiceItemNumber", Language.EN)]
@@ -62,7 +62,7 @@ public class Rechnungsposition : COM
     public DateTimeOffset? LieferungBis { get; set; }
 
     /// <summary>Bezeichnung für die abgerechnete Position.</summary>
-    [JsonProperty(PropertyName = "positionstext", Required = Required.Always, Order = 14)]
+    [JsonProperty(PropertyName = "positionstext", Order = 14)]
     [JsonPropertyName("positionstext")]
     [JsonPropertyOrder(14)]
     [FieldName("invoiceItemText", Language.EN)]
@@ -125,7 +125,7 @@ public class Rechnungsposition : COM
     public decimal? Korrekturfaktor { get; set; }
 
     /// <summary>Der Preis für eine Einheit der energetischen Menge. Details <see cref="Preis" /></summary>
-    [JsonProperty(PropertyName = "einzelpreis", Required = Required.Always, Order = 21)]
+    [JsonProperty(PropertyName = "einzelpreis", Order = 21)]
     [JsonPropertyName("einzelpreis")]
     [JsonPropertyOrder(21)]
     [FieldName("unitCost", Language.EN)]

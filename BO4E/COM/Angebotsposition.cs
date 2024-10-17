@@ -14,7 +14,7 @@ namespace BO4E.COM;
 public class Angebotsposition : COM
 {
     /// <summary>Bezeichnung der jeweiligen Position des Angebotsteils.</summary>
-    [JsonProperty(PropertyName = "positionsbezeichung", Required = Required.Always, Order = 10)]
+    [JsonProperty(PropertyName = "positionsbezeichung", Order = 10)]
     [JsonPropertyName("positionsbezeichung")]
     [JsonPropertyOrder(10)]
     [ProtoMember(3)]

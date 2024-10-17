@@ -12,7 +12,7 @@ public class Adresse : COM
 {
     /// <summary>Die Postleitzahl. Beispiel: 41836</summary>
     [DataCategory(DataCategory.ADDRESS)]
-    [JsonProperty(PropertyName = "postleitzahl", Required = Required.Always, Order = 11)]
+    [JsonProperty(PropertyName = "postleitzahl", Order = 11)]
     [JsonPropertyName("postleitzahl")]
     [FieldName("zipCode", Language.EN)]
     [ProtoMember(3)]
@@ -21,7 +21,7 @@ public class Adresse : COM
 
     /// <summary>Bezeichnung der Stadt. Beispiel Hückelhoven</summary>
     [DataCategory(DataCategory.ADDRESS)]
-    [JsonProperty(PropertyName = "ort", Required = Required.Always, Order = 12)]
+    [JsonProperty(PropertyName = "ort", Order = 12)]
     [JsonPropertyName("ort")]
     [FieldName("city", Language.EN)]
     [ProtoMember(4)]

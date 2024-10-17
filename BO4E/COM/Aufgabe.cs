@@ -18,7 +18,7 @@ public class Aufgabe : COM
     /// <summary>
     ///     Eindeutige Kennzeichnung der Aufgabe
     /// </summary>
-    [JsonProperty(PropertyName = "aufgabenId", Required = Required.Always)]
+    [JsonProperty(PropertyName = "aufgabenId")]
     [JsonPropertyName("aufgabenId")]
     [ProtoMember(3)]
     public string AufgabenId { get; set; }
@@ -53,7 +53,7 @@ public class Aufgabe : COM
     /// <summary>
     ///     Wurde diese Aufgabe schon ausgeführt (true)? Steht sie noch zur Bearbeitung an (false)?
     /// </summary>
-    [JsonProperty(PropertyName = "ausgefuehrt", Required = Required.Always)]
+    [JsonProperty(PropertyName = "ausgefuehrt")]
     [JsonPropertyName("ausgefuehrt")]
     [ProtoMember(6)]
     public bool Ausgefuehrt { get; set; }

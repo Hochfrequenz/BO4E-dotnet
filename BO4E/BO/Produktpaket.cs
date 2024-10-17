@@ -16,7 +16,7 @@ public class Produktpaket : BusinessObject
     /// <summary>
     ///     Paket-Identifikation (Durchnummerierung).
     /// </summary>
-    [JsonProperty(Required = Required.Always, Order = 8, PropertyName = "paketId")]
+    [JsonProperty( Order = 8, PropertyName = "paketId")]
     [JsonPropertyName("paketId")]
     [ProtoMember(8)]
     [JsonPropertyOrder(8)]

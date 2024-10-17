@@ -41,7 +41,7 @@ public class Unterschrift : COM
     /// <summary>
     ///     Name des Unterschreibers
     /// </summary>
-    [JsonProperty(PropertyName = "name", Required = Required.Always)]
+    [JsonProperty(PropertyName = "name")]
     [JsonPropertyName("name")]
     [ProtoMember(5)]
     public string? Name { get; set; }

@@ -14,7 +14,7 @@ namespace BO4E.COM;
 public class AufAbschlag : COM
 {
     /// <summary>Bezeichnung des Auf-/Abschlags</summary>
-    [JsonProperty(PropertyName = "bezeichnung", Required = Required.Always)]
+    [JsonProperty(PropertyName = "bezeichnung")]
     [JsonPropertyName("bezeichnung")]
     [ProtoMember(3)]
     public string Bezeichnung { get; set; }
@@ -62,7 +62,7 @@ public class AufAbschlag : COM
     public Zeitraum? Gueltigkeitszeitraum { get; set; }
 
     /// <summary>Werte für die gestaffelten Auf/Abschläge. Details <see cref="Preisstaffel" /></summary>
-    [JsonProperty(PropertyName = "staffeln", Required = Required.Always)]
+    [JsonProperty(PropertyName = "staffeln")]
     [JsonPropertyName("staffeln")]
     [ProtoMember(10)]
     public List<Preisstaffel> Staffeln { get; set; }

@@ -53,7 +53,7 @@ public class PhysikalischerWert : COM
     ///     numerischer Wert
     /// </summary>
     [ProtoMember(3)]
-    [JsonProperty(Required = Required.Always, PropertyName = "wert")]
+    [JsonProperty( PropertyName = "wert")]
     [JsonPropertyName("wert")]
     public decimal Wert { get; set; }
 
@@ -61,7 +61,7 @@ public class PhysikalischerWert : COM
     ///     Einheit von <see cref="Wert" />
     /// </summary>
     [ProtoMember(4)]
-    [JsonProperty(Required = Required.Always, PropertyName = "einheit")]
+    [JsonProperty( PropertyName = "einheit")]
     [JsonPropertyName("einheit")]
     public Mengeneinheit Einheit { get; set; }
 }

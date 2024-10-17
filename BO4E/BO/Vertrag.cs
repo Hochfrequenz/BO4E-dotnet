@@ -77,7 +77,7 @@ public class Vertrag : BusinessObject
     /// <summary>
     ///     Unterscheidungsmöglichkeiten für die Sparte. Siehe ENUM Sparte
     /// </summary>
-    [JsonProperty(Required = Required.Always, Order = 14, PropertyName = "sparte")]
+    [JsonProperty( Order = 14, PropertyName = "sparte")]
     [JsonPropertyName("sparte")]
     [JsonPropertyOrder(14)]
     [ProtoMember(8)]
@@ -96,7 +96,7 @@ public class Vertrag : BusinessObject
     /// <summary>
     ///     Gibt an, wann der Vertrag beginnt.
     /// </summary>
-    [JsonProperty(Required = Required.Always, Order = 15, PropertyName = "vertragsbeginn")]
+    [JsonProperty( Order = 15, PropertyName = "vertragsbeginn")]
     [JsonPropertyName("vertragsbeginn")]
     [ProtoIgnore]
     [JsonPropertyOrder(15)]

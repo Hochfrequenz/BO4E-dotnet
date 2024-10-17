@@ -13,7 +13,7 @@ public class Kostenposition : COM
     ///     Ein Titel für die Zeile. Hier kann z.B. der Netzbetreiber eingetragen werden, wenn es sich um Netzkosten
     ///     handelt.
     /// </summary>
-    [JsonProperty(PropertyName = "positionstitel", Required = Required.Always)]
+    [JsonProperty(PropertyName = "positionstitel")]
     [JsonPropertyName("positionstitel")]
     [ProtoMember(3)]
     public string Positionstitel { get; set; }
@@ -51,7 +51,7 @@ public class Kostenposition : COM
     public DateTimeOffset? Bis { get; set; }
 
     /// <summary>Bezeichnung für den Artikel für den die Kosten ermittelt wurden. Beispiel: Arbeitspreis HT</summary>
-    [JsonProperty(PropertyName = "artikelbezeichnung", Required = Required.Always)]
+    [JsonProperty(PropertyName = "artikelbezeichnung")]
     [JsonPropertyName("artikelbezeichnung")]
     [ProtoMember(6)]
     public string Artikelbezeichnung { get; set; }
@@ -81,7 +81,7 @@ public class Kostenposition : COM
     public Menge? Zeitmenge { get; set; }
 
     /// <summary>Der Preis für eine Einheit. Beispiele: 5,8200 ct/kWh oder 55 €/Jahr. Details <see cref="Preis" /></summary>
-    [JsonProperty(PropertyName = "einzelpreis", Required = Required.Always)]
+    [JsonProperty(PropertyName = "einzelpreis")]
     [JsonPropertyName("einzelpreis")]
     [ProtoMember(10)]
     public Preis Einzelpreis { get; set; }
@@ -90,7 +90,7 @@ public class Kostenposition : COM
     ///     Der errechnete Gesamtbetrag der Position als Ergebnis der Berechnung &lt;Menge&gt; x &lt;Einzelpreis&gt; oder
     ///     &lt;Einzelpreis&gt; / (Anzahl Tage Jahr) * &lt;zeitmenge&gt;. Details <see cref="Betrag" />
     /// </summary>
-    [JsonProperty(PropertyName = "betragKostenposition", Required = Required.Always)]
+    [JsonProperty(PropertyName = "betragKostenposition")]
     [JsonPropertyName("betragKostenposition")]
     [ProtoMember(11)]
     public Betrag BetragKostenposition { get; set; }

@@ -20,7 +20,7 @@ public class Tranche : BusinessObject
     ///     verbraucht, oder erzeugt wird (Like MarktlokationsId <see cref="Marktlokation"/>)
     /// </summary>
     [DefaultValue("|null|")]
-    [JsonProperty(Required = Required.Always, Order = 10, PropertyName = "trancheId")]
+    [JsonProperty( Order = 10, PropertyName = "trancheId")]
     [JsonPropertyName("trancheId")]
     [JsonPropertyOrder(10)]
     [DataCategory(DataCategory.POD)]
@@ -29,7 +29,7 @@ public class Tranche : BusinessObject
     public string TrancheId { get; set; }
 
     /// <summary>Sparte der Tranche, z.B. Gas oder Strom.</summary>
-    [JsonProperty(Required = Required.Always, Order = 11, PropertyName = "sparte")]
+    [JsonProperty( Order = 11, PropertyName = "sparte")]
     [JsonPropertyOrder(11)]
     [JsonPropertyName("sparte")]
     [ProtoMember(5)]

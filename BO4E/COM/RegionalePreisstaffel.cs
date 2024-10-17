@@ -8,7 +8,7 @@ namespace BO4E.COM;
 public class RegionalePreisstaffel : Preisstaffel
 {
     /// <summary>Regionale Eingrenzung der Preisstaffel. Details <see cref="BO4E.COM.RegionaleGueltigkeit" /></summary>
-    [JsonProperty(PropertyName = "regionaleGueltigkeit", Required = Required.Always)]
+    [JsonProperty(PropertyName = "regionaleGueltigkeit")]
     [JsonPropertyName("regionaleGueltigkeit")]
     //[ProtoMember(8)]
     public RegionaleGueltigkeit RegionaleGueltigkeit { get; set; }

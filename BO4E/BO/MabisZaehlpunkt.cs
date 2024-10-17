@@ -20,7 +20,7 @@ public class MabisZaehlpunkt : BusinessObject
     ///     z.B. DE 47108151234567
     /// </summary>
     [DefaultValue("|null|")]
-    [JsonProperty(PropertyName = "Id", Required = Required.Always, Order = 10)]
+    [JsonProperty(PropertyName = "Id", Order = 10)]
     [JsonPropertyName("Id")]
     [JsonPropertyOrder(10)]
     [DataCategory(DataCategory.POD)]

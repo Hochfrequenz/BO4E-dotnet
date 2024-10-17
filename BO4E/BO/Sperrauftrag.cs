@@ -18,7 +18,7 @@ public class Sperrauftrag : Auftrag
     /// <summary>
     /// Handelt es sich um einen Auftrag zum <see cref="ENUM.Sperrauftragsart.SPERREN"/> oder <see cref="ENUM.Sperrauftragsart.ENTSPERREN"/>?
     /// </summary>
-    [JsonProperty("sperrauftragsart", Required = Required.Always)]
+    [JsonProperty("sperrauftragsart")]
     [JsonPropertyName("sperrauftragsart")]
     public Sperrauftragsart Sperrauftragsart => Sperrauftragsart.SPERREN;
 
@@ -64,7 +64,7 @@ public class Sperrauftrag : Auftrag
     /// Wenn true, dann ist das <see cref="Auftrag.Ausfuehrungsdatum"/> in DTM+469 zu übermitteln.
     /// Wenn false, dann ist das <see cref="Auftrag.Ausfuehrungsdatum"/> in DTM+203 zu übermitteln.
     /// </remarks>
-    [JsonProperty("istVomGerichtsvollzieherAngeordnet", Required = Required.Always)]
+    [JsonProperty("istVomGerichtsvollzieherAngeordnet")]
     [JsonPropertyName("istVomGerichtsvollzieherAngeordnet")]
     public bool IstVomGerichtsvollzieherAngeordnet { get; set; }
 }

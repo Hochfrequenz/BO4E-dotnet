@@ -12,7 +12,7 @@ namespace BO4E.COM;
 public class Preisposition : COM
 {
     /// <summary>Das Modell, das der Preisbildung zugrunde liegt. Details <see cref="Kalkulationsmethode" /></summary>
-    [JsonProperty(PropertyName = "berechnungsmethode", Order = 10, Required = Required.Always)]
+    [JsonProperty(PropertyName = "berechnungsmethode", Order = 10)]
     [JsonPropertyName("berechnungsmethode")]
     [ProtoMember(3)]
     [JsonPropertyOrder(10)]
@@ -21,14 +21,14 @@ public class Preisposition : COM
     /// <summary>
     ///     Standardisierte Bezeichnung für die abgerechnete Leistungserbringung. Details <see cref="ENUM.Leistungstyp" />
     /// </summary>
-    [JsonProperty(PropertyName = "leistungstyp", Order = 11, Required = Required.Always)]
+    [JsonProperty(PropertyName = "leistungstyp", Order = 11)]
     [JsonPropertyName("leistungstyp")]
     [ProtoMember(4)]
     [JsonPropertyOrder(11)]
     public Leistungstyp Leistungstyp { get; set; }
 
     /// <summary>Bezeichnung für die in der Position abgebildete Leistungserbringung</summary>
-    [JsonProperty(PropertyName = "leistungsbezeichnung", Order = 12, Required = Required.Always)]
+    [JsonProperty(PropertyName = "leistungsbezeichnung", Order = 12)]
     [JsonPropertyName("leistungsbezeichnung")]
     [ProtoMember(5)]
     [JsonPropertyOrder(12)]
@@ -38,7 +38,7 @@ public class Preisposition : COM
     ///     Festlegung, mit welcher Preiseinheit abgerechnet wird, z.B. Ct. oder €. Details
     ///     <see cref="Waehrungseinheit" />
     /// </summary>
-    [JsonProperty(PropertyName = "preiseinheit", Order = 13, Required = Required.Always)]
+    [JsonProperty(PropertyName = "preiseinheit", Order = 13)]
     [JsonPropertyName("preiseinheit")]
     [ProtoMember(6)]
     [JsonPropertyOrder(13)]
@@ -99,7 +99,7 @@ public class Preisposition : COM
     public PositionsAufAbschlag? ZuAbschlaege { get; set; }
 
     /// <summary>Preisstaffeln, die zu dieser Preisposition gehören. Details <see cref="Preisstaffel" /></summary>
-    [JsonProperty(PropertyName = "preisstaffeln", Order = 20, Required = Required.Always)]
+    [JsonProperty(PropertyName = "preisstaffeln", Order = 20)]
     [JsonPropertyName("preisstaffeln")]
     [ProtoMember(13)]
     [JsonPropertyOrder(20)]

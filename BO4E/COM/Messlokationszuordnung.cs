@@ -17,7 +17,7 @@ public class Messlokationszuordnung : COM
 {
     /// <summary>Die Messlokations-ID, früher die Zählpunktbezeichnung.</summary>
     [DataCategory(DataCategory.POD)]
-    [JsonProperty(PropertyName = "messlokationsId", Required = Required.Always)]
+    [JsonProperty(PropertyName = "messlokationsId")]
     [JsonPropertyName("messlokationsId")]
     [ProtoMember(3)]
     public string MesslokationsId { get; set; }
