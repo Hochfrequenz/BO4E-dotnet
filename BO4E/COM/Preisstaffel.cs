@@ -31,7 +31,7 @@ public class Preisstaffel : COM
     ///     Parameter zur Berechnung des Preises anhand der Jahresmenge und weiterer netzbezogener Parameter.
     ///     <seealso cref="BO4E.COM.Sigmoidparameter" />
     /// </summary>
-    [JsonProperty(PropertyName = "sigmoidparameter", Required = Required.Default)]
+    [JsonProperty(PropertyName = "sigmoidparameter")]
     [JsonPropertyName("sigmoidparameter")]
     [ProtoMember(6)]
     public Sigmoidparameter? Sigmoidparameter { get; set; }

@@ -42,7 +42,7 @@ public class Wechsel : BusinessObject
     /// <summary>
     ///     Gibt an, wann der Wechsel (voraussichtlich) stattfinden wird.
     /// </summary>
-    [JsonProperty(Required = Required.Default, Order = 13, PropertyName = "wechseldatum")]
+    [JsonProperty(Order = 13, PropertyName = "wechseldatum")]
     [JsonPropertyName("wechseldatum")]
     [JsonPropertyOrder(13)]
     [ProtoIgnore]
@@ -50,7 +50,7 @@ public class Wechsel : BusinessObject
     public DateTimeOffset? Wechseldatum { get; set; }
 
     /// <summary>Vollständiger Wechsel (ja/nein), defaults to ja</summary>
-    [JsonProperty(Required = Required.Default, Order = 14, PropertyName = "vollstaendig")]
+    [JsonProperty(Order = 14, PropertyName = "vollstaendig")]
     [JsonPropertyName("vollstaendig")]
     [ProtoMember(14)]
     [JsonPropertyOrder(14)]

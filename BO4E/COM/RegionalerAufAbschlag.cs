@@ -20,13 +20,13 @@ public class RegionalerAufAbschlag : COM
     public string Bezeichnung { get; set; }
 
     /// <summary>Beschreibung zum Auf-/Abschlag</summary>
-    [JsonProperty(PropertyName = "beschreibung", Required = Required.Default)]
+    [JsonProperty(PropertyName = "beschreibung")]
     [JsonPropertyName("beschreibung")]
     [ProtoMember(4)]
     public string? Beschreibung { get; set; }
 
     /// <summary>Typ des Aufabschlages (z.B. absolut oder prozentual). Details <see cref="ENUM.AufAbschlagstyp" /></summary>
-    [JsonProperty(PropertyName = "aufAbschlagstyp", Required = Required.Default)]
+    [JsonProperty(PropertyName = "aufAbschlagstyp")]
     [JsonPropertyName("aufAbschlagstyp")]
     [ProtoMember(5)]
     public AufAbschlagstyp? AufAbschlagstyp { get; set; }
@@ -35,7 +35,7 @@ public class RegionalerAufAbschlag : COM
     ///     Diesem Preis oder den Kosten ist der Auf/Abschlag zugeordnet. Z.B. Arbeitspreis, Gesamtpreis etc.. Details
     ///     <see cref="ENUM.AufAbschlagsziel" />
     /// </summary>
-    [JsonProperty(PropertyName = "aufAbschlagsziel", Required = Required.Default)]
+    [JsonProperty(PropertyName = "aufAbschlagsziel")]
     [JsonPropertyName("aufAbschlagsziel")]
     [ProtoMember(6)]
     public AufAbschlagsziel? AufAbschlagsziel { get; set; }
@@ -44,37 +44,37 @@ public class RegionalerAufAbschlag : COM
     ///     Gibt an in welcher Währungseinheit der Auf/Abschlag berechnet wird. Euro oder Ct.. (Nur im Falle absoluter
     ///     Aufschlagstypen). Details <see cref="Waehrungseinheit" />
     /// </summary>
-    [JsonProperty(PropertyName = "einheit", Required = Required.Default)]
+    [JsonProperty(PropertyName = "einheit")]
     [JsonPropertyName("einheit")]
     [ProtoMember(7)]
     public Waehrungseinheit? Einheit { get; set; }
 
     /// <summary>Internetseite, auf der die Informationen zum Auf-/Abschlag veröffentlicht sind.</summary>
-    [JsonProperty(PropertyName = "website", Required = Required.Default)]
+    [JsonProperty(PropertyName = "website")]
     [JsonPropertyName("website")]
     [ProtoMember(8)]
     public string? Website { get; set; }
 
     /// <summary>Zusatzprodukte, die nur in Kombination mit diesem AufAbschlag erhältlich sind.</summary>
-    [JsonProperty(PropertyName = "zusatzprodukte", Required = Required.Default)]
+    [JsonProperty(PropertyName = "zusatzprodukte")]
     [JsonPropertyName("zusatzprodukte")]
     [ProtoMember(9)]
     public List<string>? Zusatzprodukte { get; set; }
 
     /// <summary>Voraussetzungen, die erfüllt sein müssen, damit dieser AufAbschlag zur Anwendung kommen kann</summary>
-    [JsonProperty(PropertyName = "voraussetzungen", Required = Required.Default)]
+    [JsonProperty(PropertyName = "voraussetzungen")]
     [JsonPropertyName("voraussetzungen")]
     [ProtoMember(10)]
     public List<string>? Voraussetzungen { get; set; }
 
     /// <summary>Zeitraum, in dem der Abschlag zur Anwendung kommen kann. Details <see cref="Zeitraum" /></summary>
-    [JsonProperty(PropertyName = "gueltigkeitszeitraum", Required = Required.Default)]
+    [JsonProperty(PropertyName = "gueltigkeitszeitraum")]
     [JsonPropertyName("gueltigkeitszeitraum")]
     [ProtoMember(11)]
     public Zeitraum? Gueltigkeitszeitraum { get; set; }
 
     /// <summary>Durch die Anwendung des Auf/Abschlags kann eine Änderung des Tarifnamens auftreten.</summary>
-    [JsonProperty(PropertyName = "tarifnamensaenderungen", Required = Required.Default)]
+    [JsonProperty(PropertyName = "tarifnamensaenderungen")]
     [JsonPropertyName("tarifnamensaenderungen")]
     [ProtoMember(12)]
     public string? Tarifnamensaenderungen { get; set; }
@@ -83,7 +83,7 @@ public class RegionalerAufAbschlag : COM
     ///     Der Energiemix kann sich durch einen AufAbschlag ändern (z.B. zwei Cent Aufschlag für Ökostrom: Sollte dies
     ///     der Fall sein,wird hier die neue Zusammensetzung des Energiemix angegeben. Details <see cref="Energiemix" />
     /// </summary>
-    [JsonProperty(PropertyName = "energiemixaenderung", Required = Required.Default)]
+    [JsonProperty(PropertyName = "energiemixaenderung")]
     [JsonPropertyName("energiemixaenderung")]
     [ProtoMember(13)]
     public Energiemix? Energiemixaenderung { get; set; }
@@ -92,7 +92,7 @@ public class RegionalerAufAbschlag : COM
     ///     Änderungen in den Vertragskonditionen. Falls in dieser Komponenten angegeben, werden die Tarifparameter
     ///     hiermit überschrieben. Details <see cref="Vertragskonditionen" />
     /// </summary>
-    [JsonProperty(PropertyName = "vertagskonditionsaenderung", Required = Required.Default)]
+    [JsonProperty(PropertyName = "vertagskonditionsaenderung")]
     [JsonPropertyName("vertagskonditionsaenderung")]
     [ProtoMember(14)]
     public Vertragskonditionen? Vertagskonditionsaenderung { get; set; }
@@ -101,7 +101,7 @@ public class RegionalerAufAbschlag : COM
     ///     Änderungen in den Garantievereinbarungen. Falls in dieser Komponenten angegeben, werden die Tarifparameter
     ///     hiermit überschrieben. Details <see cref="Preisgarantie" />
     /// </summary>
-    [JsonProperty(PropertyName = "garantieaenderung", Required = Required.Default)]
+    [JsonProperty(PropertyName = "garantieaenderung")]
     [JsonPropertyName("garantieaenderung")]
     [ProtoMember(15)]
     public Preisgarantie? Garantieaenderung { get; set; }
@@ -110,7 +110,7 @@ public class RegionalerAufAbschlag : COM
     ///     Änderungen in den Einschränkungen zum Tarif. Falls in dieser Komponenten angegeben, werden die Tarifparameter
     ///     hiermit überschrieben. Details <see cref="Tarifeinschraenkung" />
     /// </summary>
-    [JsonProperty(PropertyName = "einschraenkungsaenderung", Required = Required.Default)]
+    [JsonProperty(PropertyName = "einschraenkungsaenderung")]
     [JsonPropertyName("einschraenkungsaenderung")]
     [ProtoMember(16)]
     public Tarifeinschraenkung? Einschraenkungsaenderung { get; set; }

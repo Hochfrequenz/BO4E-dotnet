@@ -35,7 +35,7 @@ public class Zaehler : BusinessObject
     ///     Spezifikation die Richtung des Zählers betreffend.
     ///     <seealso cref="ENUM.Zaehlerauspraegung" />
     /// </summary>
-    [JsonProperty(Required = Required.Default, Order = 12, PropertyName = "zaehlerauspraegung")]
+    [JsonProperty(Order = 12, PropertyName = "zaehlerauspraegung")]
     [JsonPropertyName("zaehlerauspraegung")]
     [ProtoMember(6)]
     [JsonPropertyOrder(12)]
@@ -46,7 +46,7 @@ public class Zaehler : BusinessObject
     ///     <seealso cref="ENUM.Zaehlertyp" />
     /// </summary>
     [JsonProperty(
-        Required = Required.Default, //
+        //
         Order = 13,
         PropertyName = "zaehlertyp"
     )]
@@ -60,14 +60,14 @@ public class Zaehler : BusinessObject
     ///     Spezifikation bezüglich unterstützter Tarifarten.
     ///     <seealso cref="ENUM.Tarifart" />
     /// </summary>
-    [JsonProperty(Required = Required.Default, Order = 14, PropertyName = "tarifart")]
+    [JsonProperty(Order = 14, PropertyName = "tarifart")]
     [JsonPropertyName("tarifart")]
     [ProtoMember(8)]
     [JsonPropertyOrder(14)]
     public Tarifart? Tarifart { get; set; }
 
     /// <summary>Zählerkonstante auf dem Zähler.</summary>
-    [JsonProperty(Required = Required.Default, Order = 15, PropertyName = "zaehlerkonstante")]
+    [JsonProperty(Order = 15, PropertyName = "zaehlerkonstante")]
     [JsonPropertyName("zaehlerkonstante")]
     [ProtoMember(9)]
     [JsonPropertyOrder(15)]
@@ -84,7 +84,7 @@ public class Zaehler : BusinessObject
     }
 
     /// <summary>Bis zu diesem Datum ist der Zähler geeicht.</summary>
-    [JsonProperty(Required = Required.Default, Order = 16, PropertyName = "eichungBis")]
+    [JsonProperty(Order = 16, PropertyName = "eichungBis")]
     [JsonPropertyName("eichungBis")]
     [JsonPropertyOrder(16)]
     [ProtoIgnore]
@@ -102,7 +102,7 @@ public class Zaehler : BusinessObject
     }
 
     /// <summary>Zu diesem Datum fand die letzte Eichprüfung des Zählers statt.</summary>
-    [JsonProperty(Required = Required.Default, Order = 17, PropertyName = "letzteEichung")]
+    [JsonProperty(Order = 17, PropertyName = "letzteEichung")]
     [JsonPropertyName("letzteEichung")]
     [ProtoIgnore]
     [JsonPropertyOrder(17)]
@@ -112,7 +112,7 @@ public class Zaehler : BusinessObject
     ///     Die Zählwerke des Zählers.
     ///     <seealso cref="Zaehlwerk" />
     /// </summary>
-    [JsonProperty(Required = Required.Default, Order = 18, PropertyName = "zaehlwerke")]
+    [JsonProperty(Order = 18, PropertyName = "zaehlwerke")]
     [JsonPropertyName("zaehlwerke")]
     [MinLength(1)]
     [ProtoMember(12)]
@@ -121,7 +121,6 @@ public class Zaehler : BusinessObject
 
     /// <summary>Der Hersteller des Zählers. Details <see cref="Geschaeftspartner" /></summary>
     [JsonProperty(
-        Required = Required.Default,
         Order = 19,
         NullValueHandling = NullValueHandling.Ignore,
         PropertyName = "zaehlerhersteller"
@@ -134,7 +133,7 @@ public class Zaehler : BusinessObject
     /// <summary>
     ///     Referenz auf das Smartmeter-Gateway
     /// </summary>
-    [JsonProperty(Required = Required.Default, Order = 20, PropertyName = "gateway")]
+    [JsonProperty(Order = 20, PropertyName = "gateway")]
     [JsonPropertyName("gateway")]
     [NonOfficial(NonOfficialCategory.CUSTOMER_REQUIREMENTS)]
     [ProtoMember(1014)]
@@ -144,7 +143,7 @@ public class Zaehler : BusinessObject
     /// <summary>
     ///     Fernschaltung
     /// </summary>
-    [JsonProperty(Required = Required.Default, Order = 21, PropertyName = "fernschaltung")]
+    [JsonProperty(Order = 21, PropertyName = "fernschaltung")]
     [JsonPropertyName("fernschaltung")]
     [ProtoMember(1015)]
     [JsonPropertyOrder(21)]
@@ -154,7 +153,7 @@ public class Zaehler : BusinessObject
     /// <summary>
     ///     Messwerterfassung am Zählpunkt
     /// </summary>
-    [JsonProperty(Required = Required.Default, Order = 22, PropertyName = "messwerterfassung")]
+    [JsonProperty(Order = 22, PropertyName = "messwerterfassung")]
     [JsonPropertyName("messwerterfassung")]
     [ProtoMember(1016)]
     [JsonPropertyOrder(22)]
@@ -165,11 +164,7 @@ public class Zaehler : BusinessObject
     ///     Typisierung des Zählers (spezifikation für EHZ und MME)
     ///     <seealso cref="ENUM.ZaehlertypSpezifikation" />
     /// </summary>
-    [JsonProperty(
-        Required = Required.Default,
-        PropertyName = "zaehlertypspezifikation",
-        Order = 23
-    )]
+    [JsonProperty(PropertyName = "zaehlertypspezifikation", Order = 23)]
     [ProtoMember(1017)]
     [JsonPropertyOrder(23)]
     [JsonPropertyName("zaehlertypspezifikation")]
@@ -179,7 +174,7 @@ public class Zaehler : BusinessObject
     /// <summary>
     ///     Befestigungsart
     /// </summary>
-    [JsonProperty(Required = Required.Default, Order = 24, PropertyName = "befestigungsart")]
+    [JsonProperty(Order = 24, PropertyName = "befestigungsart")]
     [JsonPropertyName("befestigungsart")]
     [ProtoMember(1018)]
     [JsonPropertyOrder(24)]
@@ -189,7 +184,7 @@ public class Zaehler : BusinessObject
     /// <summary>
     ///     Zaehlergroesse
     /// </summary>
-    [JsonProperty(Required = Required.Default, Order = 25, PropertyName = "zaehlergroesse")]
+    [JsonProperty(Order = 25, PropertyName = "zaehlergroesse")]
     [JsonPropertyName("zaehlergroesse")]
     [ProtoMember(1019)]
     [JsonPropertyOrder(25)]
@@ -197,7 +192,7 @@ public class Zaehler : BusinessObject
     public Geraetemerkmal? Zaehlergroesse { get; set; }
 
     /// <summary>Liste der Geräte, die zu diesem Zähler gehören.</summary>
-    [JsonProperty(PropertyName = "geraete", Required = Required.Default, Order = 26)]
+    [JsonProperty(PropertyName = "geraete", Order = 26)]
     [JsonPropertyOrder(26)]
     [JsonPropertyName("geraete")]
     [ProtoMember(1020)]

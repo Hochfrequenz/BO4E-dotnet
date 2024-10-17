@@ -62,7 +62,7 @@ public class Verbrauch : COM
     }
 
     /// <summary>Gibt Tag und Uhrzeit (falls vorhanden) an, wann der Zeitraum startet.</summary>
-    [JsonProperty(PropertyName = "startdatum", Required = Required.Default)]
+    [JsonProperty(PropertyName = "startdatum")]
     [JsonPropertyName("startdatum")]
     [FieldName("startDate", Language.EN)]
     [ProtoIgnore]
@@ -80,7 +80,7 @@ public class Verbrauch : COM
     }
 
     /// <summary>Gibt Tag und Uhrzeit (falls vorhanden) an, wann der Zeitraum endet.</summary>
-    [JsonProperty(PropertyName = "enddatum", Required = Required.Default)]
+    [JsonProperty(PropertyName = "enddatum")]
     [JsonPropertyName("enddatum")]
     [FieldName("endDate", Language.EN)]
     [ProtoIgnore]
@@ -91,11 +91,7 @@ public class Verbrauch : COM
     ///     Gibt an, ob es sich um eine PROGNOSE oder eine MESSUNG handelt.
     /// </summary>
     /// <seealso cref="ENUM.Wertermittlungsverfahren" />
-    [JsonProperty(
-        PropertyName = "wertermittlungsverfahren",
-        Required = Required.Default,
-        Order = 5
-    )]
+    [JsonProperty(PropertyName = "wertermittlungsverfahren", Order = 5)]
     [JsonPropertyName("wertermittlungsverfahren")]
     [ProtoMember(5)]
     public Wertermittlungsverfahren? Wertermittlungsverfahren { get; set; }
@@ -104,7 +100,7 @@ public class Verbrauch : COM
     ///     Enthält die Gültigkeit des angegebenen Wertes
     /// </summary>
     /// <seealso cref="ENUM.Messwertstatus" />
-    [JsonProperty(PropertyName = "messwertstatus", Required = Required.Default, Order = 5)]
+    [JsonProperty(PropertyName = "messwertstatus", Order = 5)]
     [JsonPropertyName("messwertstatus")]
     [NonOfficial(NonOfficialCategory.UNSPECIFIED)]
     [ProtoMember(10)]
@@ -114,11 +110,7 @@ public class Verbrauch : COM
     /// Enthält die Auflistung der STS Segmente Plausibilisierungshinweis, Ersatzwertbildungsverfahren,
     /// Korrekturgrund, Gasqualität, Tarif, Grundlage der Energiemenge
     /// </summary>
-    [JsonProperty(
-        PropertyName = "statuszusatzinformationen",
-        Required = Required.Default,
-        Order = 5
-    )]
+    [JsonProperty(PropertyName = "statuszusatzinformationen", Order = 5)]
     [JsonPropertyName("statuszusatzinformationen")]
     [NonOfficial(NonOfficialCategory.UNSPECIFIED)]
     [ProtoMember(11)]
@@ -155,7 +147,7 @@ public class Verbrauch : COM
     /// <summary>type</summary>
     /// <example>arbeitleistungtagesparameterabhmalo | veranschlagtejahresmenge | TUMKundenwert</example>
     [NonOfficial(NonOfficialCategory.UNSPECIFIED)]
-    [JsonProperty(PropertyName = "type", Required = Required.Default)]
+    [JsonProperty(PropertyName = "type")]
     [JsonPropertyName("type")]
     [ProtoMember(9)]
     public Verbrauchsmengetyp? Type { get; set; }
@@ -163,7 +155,7 @@ public class Verbrauch : COM
     /// <summary>Tarifstufe</summary>
     /// <seealso cref="ENUM.Tarifstufe" />
     [NonOfficial(NonOfficialCategory.UNSPECIFIED)]
-    [JsonProperty(PropertyName = "tarifstufe", Required = Required.Default)]
+    [JsonProperty(PropertyName = "tarifstufe")]
     [JsonPropertyName("tarifstufe")]
     [ProtoMember(12)]
     public Tarifstufe? Tarifstufe { get; set; }
@@ -181,7 +173,7 @@ public class Verbrauch : COM
     }
 
     /// <summary>Wird verwendet, um einen Zählerstand eindeutig einem Prozesszeitpunkt zuzuordnen. Dieser Prozesszeitpunkt kann entweder ein Zeitpunkt einer Stammdatenänderung sein(z. B.bei einem Gerätewechsel, in der die Änderung vor dem Versand des Zählerstandes übermittelt wurde) oder die Bestellung eines Wertes aufgrund eines eingetretenen Ereignisses(z.B. Lieferantenwechsel). Der  Nutzungszeitpunkt ist für den Zählerstand der Zeitpunkt der für die weitere Verarbeitung relevant ist(z.B.Zuordnung bei Empfänger anhand der Zuordnungstupel).</summary>
-    [JsonProperty(PropertyName = "nutzungszeitpunkt", Required = Required.Default, Order = 13)]
+    [JsonProperty(PropertyName = "nutzungszeitpunkt", Order = 13)]
     [JsonPropertyName("nutzungszeitpunkt")]
     [ProtoIgnore]
     [JsonPropertyOrder(13)]
@@ -201,7 +193,7 @@ public class Verbrauch : COM
     }
 
     /// <summary>Wird verwendet, um einen Zählerstand eindeutig einer tatsächlichen Änderung zuzuordnen, z.B.bei einem Gerätewechsel oder Geräteparameteränderung der tatsächliche Zeitpunkt an dem die Änderung an der Messlokation durchgeführt wurde.Der Nutzungszeitpunkt ist für den Zählerstand der Zeitpunkt der für die weitere Verarbeitung relevant ist(z.B. Zuordnung bei Empfänger anhand der Zuordnungstupel).</summary>
-    [JsonProperty(PropertyName = "ausfuehrungszeitpunkt", Required = Required.Default, Order = 14)]
+    [JsonProperty(PropertyName = "ausfuehrungszeitpunkt", Order = 14)]
     [JsonPropertyName("ausfuehrungszeitpunkt")]
     [ProtoIgnore]
     [JsonPropertyOrder(14)]

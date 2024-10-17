@@ -125,7 +125,7 @@ public abstract class BusinessObject : IUserProperties, IOptionalGuid
     ///     'MESSLOKATION',
     ///     'MARKTLOKATION'
     /// </example>
-    [JsonProperty(Required = Required.Default, Order = 1, PropertyName = "boTyp")]
+    [JsonProperty(Order = 1, PropertyName = "boTyp")]
     [JsonPropertyName("boTyp")]
     [JsonPropertyOrder(1)]
     [ProtoMember(1)]
@@ -141,7 +141,7 @@ public abstract class BusinessObject : IUserProperties, IOptionalGuid
     /// <example>
     ///     1
     /// </example>
-    [JsonProperty(PropertyName = "versionStruktur", Required = Required.Default, Order = 2)]
+    [JsonProperty(PropertyName = "versionStruktur", Order = 2)]
     [JsonPropertyName("versionStruktur")]
     [JsonPropertyOrder(2)]
     [ProtoMember(2)]
@@ -180,7 +180,6 @@ public abstract class BusinessObject : IUserProperties, IOptionalGuid
     [JsonProperty(
         PropertyName = "timestamp",
         NullValueHandling = NullValueHandling.Ignore,
-        Required = Required.Default,
         Order = 3
     )]
     [JsonPropertyName("timestamp")]
@@ -192,7 +191,7 @@ public abstract class BusinessObject : IUserProperties, IOptionalGuid
     ///     Hier können IDs anderer Systeme hinterlegt werden (z.B. eine SAP-GP-Nummer) (Details siehe
     ///     <see cref="ExterneReferenz" />)
     /// </summary>
-    [JsonProperty(PropertyName = "externeReferenzen", Required = Required.Default, Order = 4)]
+    [JsonProperty(PropertyName = "externeReferenzen", Order = 4)]
     [JsonPropertyName("externeReferenzen")]
     [JsonPropertyOrder(4)]
     [ProtoMember(4)]
@@ -201,12 +200,7 @@ public abstract class BusinessObject : IUserProperties, IOptionalGuid
     /// <summary>
     ///     allows adding a GUID to Business Objects for tracking across systems
     /// </summary>
-    [JsonProperty(
-        PropertyName = "guid",
-        NullValueHandling = NullValueHandling.Ignore,
-        Required = Required.Default,
-        Order = 5
-    )]
+    [JsonProperty(PropertyName = "guid", NullValueHandling = NullValueHandling.Ignore, Order = 5)]
     [JsonPropertyName("guid")]
     [JsonPropertyOrder(5)]
     public virtual Guid? Guid { get; set; }
@@ -216,7 +210,6 @@ public abstract class BusinessObject : IUserProperties, IOptionalGuid
     /// </summary>
     [JsonProperty(
         PropertyName = USER_PROPERTIES_NAME,
-        Required = Required.Default,
         DefaultValueHandling = DefaultValueHandling.Ignore,
         Order = 200
     )]
@@ -234,7 +227,6 @@ public abstract class BusinessObject : IUserProperties, IOptionalGuid
     /// </summary>
     [JsonProperty(
         PropertyName = GUELTIGKEIT_PROPERTIES_NAME,
-        Required = Required.Default,
         DefaultValueHandling = DefaultValueHandling.Ignore,
         Order = 201
     )]
@@ -249,7 +241,6 @@ public abstract class BusinessObject : IUserProperties, IOptionalGuid
     /// </summary>
     [JsonProperty(
         PropertyName = "qualitaet",
-        Required = Required.Default,
         DefaultValueHandling = DefaultValueHandling.Ignore,
         Order = 202
     )]

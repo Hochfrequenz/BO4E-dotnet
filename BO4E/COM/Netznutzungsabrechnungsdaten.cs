@@ -16,7 +16,7 @@ public class Netznutzungsabrechnungsdaten : COM
     /// <summary>
     ///     Artikel oder Gruppen-ArtikelId
     /// </summary>
-    [JsonProperty(PropertyName = "artikelId", Order = 4, Required = Required.Default)]
+    [JsonProperty(PropertyName = "artikelId", Order = 4)]
     [JsonPropertyOrder(4)]
     [JsonPropertyName("artikelId")]
     [ProtoMember(4)]
@@ -25,7 +25,7 @@ public class Netznutzungsabrechnungsdaten : COM
     /// <summary>
     ///     Typ der ArtikelId (Einzel oder Gruppe)
     /// </summary>
-    [JsonProperty(PropertyName = "artikelIdTyp", Order = 5, Required = Required.Default)]
+    [JsonProperty(PropertyName = "artikelIdTyp", Order = 5)]
     [JsonPropertyName("artikelIdTyp")]
     [JsonPropertyOrder(5)]
     [ProtoMember(5)]
@@ -34,7 +34,7 @@ public class Netznutzungsabrechnungsdaten : COM
     /// <summary>
     ///     Anzahl der Positionen für diese ArtikelId
     /// </summary>
-    [JsonProperty(PropertyName = "anzahl", Order = 6, Required = Required.Default)]
+    [JsonProperty(PropertyName = "anzahl", Order = 6)]
     [JsonPropertyOrder(6)]
     [JsonPropertyName("anzahl")]
     [ProtoMember(6)]
@@ -43,7 +43,7 @@ public class Netznutzungsabrechnungsdaten : COM
     /// <summary>
     ///     Gemeinderabatt
     /// </summary>
-    [JsonProperty(Required = Required.Default, Order = 7, PropertyName = "gemeinderabatt")]
+    [JsonProperty(Order = 7, PropertyName = "gemeinderabatt")]
     [JsonPropertyName("gemeinderabatt")]
     [JsonPropertyOrder(7)]
     [ProtoMember(7)]
@@ -52,7 +52,7 @@ public class Netznutzungsabrechnungsdaten : COM
     /// <summary>
     ///     Zuschlag
     /// </summary>
-    [JsonProperty(Required = Required.Default, Order = 8, PropertyName = "zuschlag")]
+    [JsonProperty(Order = 8, PropertyName = "zuschlag")]
     [JsonPropertyName("zuschlag")]
     [JsonPropertyOrder(8)]
     [ProtoMember(8)]
@@ -61,7 +61,7 @@ public class Netznutzungsabrechnungsdaten : COM
     /// <summary>
     ///     Abschlag
     /// </summary>
-    [JsonProperty(Required = Required.Default, Order = 9, PropertyName = "abschlag")]
+    [JsonProperty(Order = 9, PropertyName = "abschlag")]
     [JsonPropertyName("abschlag")]
     [JsonPropertyOrder(9)]
     [ProtoMember(9)]
@@ -96,7 +96,7 @@ public class Netznutzungsabrechnungsdaten : COM
     /// <summary>
     /// Zählzeit
     /// </summary>
-    [JsonProperty(PropertyName = "zaehlzeit", Order = 12, Required = Required.Default)]
+    [JsonProperty(PropertyName = "zaehlzeit", Order = 12)]
     [JsonPropertyName("zaehlzeit")]
     [NonOfficial(NonOfficialCategory.CUSTOMER_REQUIREMENTS)]
     [ProtoMember(12)]
@@ -106,7 +106,7 @@ public class Netznutzungsabrechnungsdaten : COM
     /// <summary>
     /// Sind es Original oder Differenz-Netznutzungsabrechnungsdaten
     /// </summary>
-    [JsonProperty(PropertyName = "istDifferenz", Order = 13, Required = Required.Default)]
+    [JsonProperty(PropertyName = "istDifferenz", Order = 13)]
     [JsonPropertyName("istDifferenz")]
     [NonOfficial(NonOfficialCategory.CUSTOMER_REQUIREMENTS)]
     [ProtoMember(13)]
@@ -116,7 +116,7 @@ public class Netznutzungsabrechnungsdaten : COM
     /// <summary>
     /// Zu den Netznutzungsabrechnungsdaten gehörende Marktrollen (z.B. Netzbetreiber)
     /// </summary>
-    [JsonProperty(Required = Required.Default, Order = 14, PropertyName = "marktrollen")]
+    [JsonProperty(Order = 14, PropertyName = "marktrollen")]
     [JsonPropertyName("marktrollen")]
     [JsonPropertyOrder(14)]
     [ProtoMember(14)]

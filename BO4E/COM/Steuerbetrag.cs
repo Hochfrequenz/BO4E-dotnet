@@ -21,7 +21,7 @@ public class Steuerbetrag : COM
     /// Wert eines besonderen Steuersatzes, wenn <see cref="ENUM.Steuerkennzeichen" />
     /// den Wert <see cref="BO4E.ENUM.Steuerkennzeichen.UST_SONDER" /> hat
     /// </summary>
-    [JsonProperty(PropertyName = "sondersteuersatz", Required = Required.Default)]
+    [JsonProperty(PropertyName = "sondersteuersatz")]
     [JsonPropertyName("sondersteuersatz")]
     [FieldName("customTax", Language.EN)]
     [ProtoMember(9)]
@@ -49,14 +49,14 @@ public class Steuerbetrag : COM
     public Waehrungscode Waehrung { get; set; }
 
     /// <summary>Nettobetrag (vorausgezahlt) für den die Steuer berechnet wurde. Z.B. 200</summary>
-    [JsonProperty(PropertyName = "basiswertVorausgezahlt", Required = Required.Default)]
+    [JsonProperty(PropertyName = "basiswertVorausgezahlt")]
     [JsonPropertyName("basiswertVorausgezahlt")]
     [FieldName("baseValuePrepaid", Language.EN)]
     [ProtoMember(7)]
     public decimal? BasiswertVorausgezahlt { get; set; }
 
     /// <summary>Aus dem Basiswert (vorausgezahlt) berechnete Steuer. Z.B. 38 (bei UST_19), wenn <see cref="BasiswertVorausgezahlt"/> 200 ist</summary>
-    [JsonProperty(PropertyName = "steuerwertVorausgezahlt", Required = Required.Default)]
+    [JsonProperty(PropertyName = "steuerwertVorausgezahlt")]
     [JsonPropertyName("steuerwertVorausgezahlt")]
     [FieldName("taxValuePrepaid", Language.EN)]
     [ProtoMember(8)]

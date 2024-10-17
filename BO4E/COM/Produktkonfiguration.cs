@@ -11,14 +11,14 @@ namespace BO4E.COM;
 public class Produktkonfiguration : COM
 {
     /// <summary>Eindeutiger Code der Konfiguration</summary>
-    [JsonProperty(PropertyName = "code", Order = 3, Required = Required.Default)]
+    [JsonProperty(PropertyName = "code", Order = 3)]
     [JsonPropertyName("code")]
     [ProtoMember(3)]
     [JsonPropertyOrder(3)]
     public Produktcode? Code { get; set; }
 
     /// <summary>Eigenschaftswert zur Konfiguration (als Code)</summary>
-    [JsonProperty(PropertyName = "eigenschaft", Order = 4, Required = Required.Default)]
+    [JsonProperty(PropertyName = "eigenschaft", Order = 4)]
     [JsonPropertyName("eigenschaft")]
     [ProtoMember(4)]
     [JsonPropertyOrder(4)]
@@ -26,7 +26,7 @@ public class Produktkonfiguration : COM
 
     /// <summary>Zusätzlicher Eigenschaftswert, z.B. Angabe der Jahresverbrauchsprognose (4000).
     /// Im Allgemeinen zur Angabe von Werten, die nicht als Produktcode definiert sind</summary>
-    [JsonProperty(PropertyName = "zusatzeigenschaft", Order = 5, Required = Required.Default)]
+    [JsonProperty(PropertyName = "zusatzeigenschaft", Order = 5)]
     [JsonPropertyName("zusatzeigenschaft")]
     [ProtoMember(5)]
     [JsonPropertyOrder(5)]

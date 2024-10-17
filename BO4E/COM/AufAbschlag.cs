@@ -20,13 +20,13 @@ public class AufAbschlag : COM
     public string Bezeichnung { get; set; }
 
     /// <summary>Beschreibung zum Auf-/Abschlag</summary>
-    [JsonProperty(PropertyName = "beschreibung", Required = Required.Default)]
+    [JsonProperty(PropertyName = "beschreibung")]
     [JsonPropertyName("beschreibung")]
     [ProtoMember(4)]
     public string? Beschreibung { get; set; }
 
     /// <summary>Typ des Aufabschlages (z.B. absolut oder prozentual). Details <see cref="ENUM.AufAbschlagstyp" /></summary>
-    [JsonProperty(PropertyName = "aufAbschlagstyp", Required = Required.Default)]
+    [JsonProperty(PropertyName = "aufAbschlagstyp")]
     [JsonPropertyName("aufAbschlagstyp")]
     [ProtoMember(5)]
     public AufAbschlagstyp? AufAbschlagstyp { get; set; }
@@ -35,7 +35,7 @@ public class AufAbschlag : COM
     ///     Diesem Preis oder den Kosten ist der Auf/Abschlag zugeordnet. Z.B. Arbeitspreis, Gesamtpreis etc.. Details
     ///     <see cref="ENUM.AufAbschlagsziel" />
     /// </summary>
-    [JsonProperty(PropertyName = "aufAbschlagsziel", Required = Required.Default)]
+    [JsonProperty(PropertyName = "aufAbschlagsziel")]
     [JsonPropertyName("aufAbschlagsziel")]
     [ProtoMember(6)]
     public AufAbschlagsziel? AufAbschlagsziel { get; set; }
@@ -44,19 +44,19 @@ public class AufAbschlag : COM
     ///     Gibt an in welcher Währungseinheit der Auf/Abschlag berechnet wird. Euro oder Ct.. (Nur im Falle absoluter
     ///     Aufschlagstypen). Details <see cref="Waehrungseinheit" />
     /// </summary>
-    [JsonProperty(PropertyName = "einheit", Required = Required.Default)]
+    [JsonProperty(PropertyName = "einheit")]
     [JsonPropertyName("einheit")]
     [ProtoMember(7)]
     public Waehrungseinheit? Einheit { get; set; }
 
     /// <summary>Internetseite, auf der die Informationen zum Auf-/Abschlag veröffentlicht sind.</summary>
-    [JsonProperty(PropertyName = "website", Required = Required.Default)]
+    [JsonProperty(PropertyName = "website")]
     [JsonPropertyName("website")]
     [ProtoMember(8)]
     public string? Website { get; set; }
 
     /// <summary>Zeitraum, in dem der Abschlag zur Anwendung kommen kann. Details <see cref="Zeitraum" /></summary>
-    [JsonProperty(PropertyName = "gueltigkeitszeitraum", Required = Required.Default)]
+    [JsonProperty(PropertyName = "gueltigkeitszeitraum")]
     [JsonPropertyName("gueltigkeitszeitraum")]
     [ProtoMember(9)]
     public Zeitraum? Gueltigkeitszeitraum { get; set; }

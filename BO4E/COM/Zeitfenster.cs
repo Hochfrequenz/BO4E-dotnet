@@ -12,14 +12,14 @@ namespace BO4E.COM;
 public class Zeitfenster : COM
 {
     /// <summary>inklusive Startzeit; z.B. 8 Uhr</summary>
-    [JsonProperty(Required = Required.Default, Order = 3, PropertyName = "startzeit")]
+    [JsonProperty(Order = 3, PropertyName = "startzeit")]
     [JsonPropertyName("startzeit")]
     [JsonPropertyOrder(3)]
     [ProtoMember(3)]
     public TimeOnly? Startzeit { get; set; }
 
     /// <summary>exklusive Endzeit (z.B. 17:00 Uhr)</summary>
-    [JsonProperty(Required = Required.Default, Order = 4, PropertyName = "endzeit")]
+    [JsonProperty(Order = 4, PropertyName = "endzeit")]
     [JsonPropertyName("endzeit")]
     [JsonPropertyOrder(4)]
     [ProtoMember(4)]

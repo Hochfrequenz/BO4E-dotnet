@@ -29,7 +29,7 @@ public class Kostenposition : COM
     }
 
     /// <summary>von-Datum der Kostenzeitscheibe. Z.B. 2017-01-01</summary>
-    [JsonProperty(PropertyName = "von", Required = Required.Default)]
+    [JsonProperty(PropertyName = "von")]
     [JsonPropertyName("von")]
     [ProtoIgnore]
     public DateTimeOffset? Von { get; set; }
@@ -45,7 +45,7 @@ public class Kostenposition : COM
     }
 
     /// <summary>bis-Datum der Kostenzeitscheibe. Z.B. 2017-12-31</summary>
-    [JsonProperty(PropertyName = "bis", Required = Required.Default)]
+    [JsonProperty(PropertyName = "bis")]
     [JsonPropertyName("bis")]
     [ProtoIgnore]
     public DateTimeOffset? Bis { get; set; }
@@ -57,7 +57,7 @@ public class Kostenposition : COM
     public string Artikelbezeichnung { get; set; }
 
     /// <summary>Detaillierung des Artikels (optional). Beispiel: Drehstromzähler</summary>
-    [JsonProperty(PropertyName = "artikeldetail", Required = Required.Default)]
+    [JsonProperty(PropertyName = "artikeldetail")]
     [JsonPropertyName("artikeldetail")]
     [ProtoMember(7)]
     public string? Artikeldetail { get; set; }
@@ -66,7 +66,7 @@ public class Kostenposition : COM
     ///     Die Menge, die in die Kostenberechnung eingeflossen ist. Beispiel: 3.660 kWh. Details
     ///     <see cref="BO4E.COM.Menge" />
     /// </summary>
-    [JsonProperty(PropertyName = "menge", Required = Required.Default)]
+    [JsonProperty(PropertyName = "menge")]
     [JsonPropertyName("menge")]
     [ProtoMember(8)]
     public Menge? Menge { get; set; }
@@ -75,7 +75,7 @@ public class Kostenposition : COM
     ///     Wenn es einen zeitbasierten Preis gibt (z.B. €/Jahr), dann ist hier die Menge angegeben mit der die Kosten
     ///     berechnet wurden. Z.B.  138 Tage. Details <see cref="BO4E.COM.Menge" />
     /// </summary>
-    [JsonProperty(PropertyName = "zeitmenge", Required = Required.Default)]
+    [JsonProperty(PropertyName = "zeitmenge")]
     [JsonPropertyName("zeitmenge")]
     [ProtoMember(9)]
     public Menge? Zeitmenge { get; set; }

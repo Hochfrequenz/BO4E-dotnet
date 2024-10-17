@@ -33,7 +33,7 @@ public class Tarifpreisposition : COM
     ///     Gibt an, nach welcher Menge die vorgenannte Einschränkung erfolgt (z.B. Jahresstromverbrauch in kWh).Details
     ///     <see cref="Mengeneinheit" />
     /// </summary>
-    [JsonProperty(PropertyName = "mengeneinheitstaffel", Required = Required.Default)]
+    [JsonProperty(PropertyName = "mengeneinheitstaffel")]
     [JsonPropertyName("mengeneinheitstaffel")]
     [ProtoMember(6)]
     public Mengeneinheit? Mengeneinheitstaffel { get; set; }

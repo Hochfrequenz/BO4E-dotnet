@@ -51,7 +51,7 @@ public class Berechnungsformel : BusinessObject
     /// ID des Rechenschritts [1 - 99999]
     /// </summary>
     /// <remarks>UTILTS SG8 SEQ Z37</remarks>
-    [JsonProperty(Required = Required.Default, Order = 7, PropertyName = "rechenschrittId")]
+    [JsonProperty(Order = 7, PropertyName = "rechenschrittId")]
     [JsonPropertyName("rechenschrittId")]
     [ProtoMember(7)]
     [BoKey]
@@ -69,7 +69,7 @@ public class Berechnungsformel : BusinessObject
     /// Eine Berechnungsformel enthält, falls sie notwendig ist <see cref="BerechnungsformelNotwendigkeit.BERECHNUNGSFORMEL_NOTWENDIG"/>,
     /// einen oder mehrere Berechnungschritte, die hier rekursiv abgebildet werden.
     /// </summary>
-    [JsonProperty(Required = Required.Default, Order = 9, PropertyName = "rechenschritt")]
+    [JsonProperty(Order = 9, PropertyName = "rechenschritt")]
     [JsonPropertyName("rechenschritt")]
     public Rechenschritt? Rechenschritt { get; set; }
 }

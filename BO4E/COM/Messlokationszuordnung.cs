@@ -27,7 +27,7 @@ public class Messlokationszuordnung : COM
     ///     wird. Beispielsweise bei einer Untermessung, wird der Verbauch der Untermessung subtrahiert. Details
     ///     <see cref="ArithmetischeOperation" />
     /// </summary>
-    [JsonProperty(PropertyName = "arithmetik", Required = Required.Default)] // Default weil Hochfrequenz/energy-service-hub#35
+    [JsonProperty(PropertyName = "arithmetik")] // Default weil Hochfrequenz/energy-service-hub#35
     [JsonPropertyName("arithmetik")]
     [ProtoMember(4)]
     public ArithmetischeOperation? Arithmetik { get; set; }
@@ -44,7 +44,7 @@ public class Messlokationszuordnung : COM
     }
 
     /// <summary>Zeitpunkt, ab dem die Messlokation zur Marktlokation gehört</summary>
-    [JsonProperty(PropertyName = "gueltigSeit", Required = Required.Default)]
+    [JsonProperty(PropertyName = "gueltigSeit")]
     [JsonPropertyName("gueltigSeit")]
     [ProtoIgnore]
     public DateTimeOffset? GueltigSeit { get; set; }
@@ -60,7 +60,7 @@ public class Messlokationszuordnung : COM
     }
 
     /// <summary>Zeitpunkt, bis zu dem die Messlokation zur Marktlokation gehört</summary>
-    [JsonProperty(PropertyName = "gueltigBis", Required = Required.Default)]
+    [JsonProperty(PropertyName = "gueltigBis")]
     [JsonPropertyName("gueltigBis")]
     [ProtoIgnore]
     public DateTimeOffset? GueltigBis { get; set; }

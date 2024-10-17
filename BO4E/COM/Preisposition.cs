@@ -48,7 +48,7 @@ public class Preisposition : COM
     ///     Hier wird festgelegt, auf welche Bezugsgröße sich der Preis bezieht, z.B. kWh oder Stück. Details
     ///     <see cref="Mengeneinheit" />
     /// </summary>
-    [JsonProperty(PropertyName = "bezugsgroesse", Order = 14, Required = Required.Default)]
+    [JsonProperty(PropertyName = "bezugsgroesse", Order = 14)]
     [JsonPropertyName("bezugsgroesse")]
     [ProtoMember(7)]
     [JsonPropertyOrder(14)]
@@ -58,14 +58,14 @@ public class Preisposition : COM
     ///     Die Zeit(dauer) auf die sich der Preis bezieht. Z.B. ein Jahr für einen Leistungspreis der in €/kW/Jahr
     ///     ausgegeben wird.
     /// </summary>
-    [JsonProperty(PropertyName = "zeitbasis", Order = 15, Required = Required.Default)]
+    [JsonProperty(PropertyName = "zeitbasis", Order = 15)]
     [JsonPropertyName("zeitbasis")]
     [ProtoMember(8)]
     [JsonPropertyOrder(15)]
     public Zeiteinheit? Zeitbasis { get; set; }
 
     /// <summary>Festlegung, für welche Tarifzeit der Preis hier festgelegt ist. <seealso cref="ENUM.Tarifzeit" /></summary>
-    [JsonProperty(PropertyName = "tarifzeit", Order = 16, Required = Required.Default)]
+    [JsonProperty(PropertyName = "tarifzeit", Order = 16)]
     [JsonPropertyName("tarifzeit")]
     [ProtoMember(9)]
     [JsonPropertyOrder(16)]
@@ -75,7 +75,7 @@ public class Preisposition : COM
     ///     Eine vom BDEW standardisierte Bezeichnung für die abgerechnete Leistungserbringung. Diese Artikelnummer wird
     ///     auch im Rechnungsteil der INVOIC verwendet. <seealso cref="BDEWArtikelnummer" />
     /// </summary>
-    [JsonProperty(PropertyName = "bdewArtikelnummer", Order = 17, Required = Required.Default)]
+    [JsonProperty(PropertyName = "bdewArtikelnummer", Order = 17)]
     [JsonPropertyName("bdewArtikelnummer")]
     [ProtoMember(10)]
     [JsonPropertyOrder(17)]
@@ -85,14 +85,14 @@ public class Preisposition : COM
     ///     Mit der Menge der hier angegebenen Größe wird die Staffelung/Zonung durchgeführt. Z.B. Vollbenutzungsstunden.
     ///     <seealso cref="Bemessungsgroesse" />
     /// </summary>
-    [JsonProperty(PropertyName = "zonungsgroesse", Order = 18, Required = Required.Default)]
+    [JsonProperty(PropertyName = "zonungsgroesse", Order = 18)]
     [JsonPropertyName("zonungsgroesse")]
     [ProtoMember(11)]
     [JsonPropertyOrder(18)]
     public Bemessungsgroesse? Zonungsgroesse { get; set; }
 
     /// <summary>Zuschläge oder Abschläge auf die Position. <seealso cref="PositionsAufAbschlag" /></summary>
-    [JsonProperty(PropertyName = "zu_abschlaege", Order = 19, Required = Required.Default)]
+    [JsonProperty(PropertyName = "zu_abschlaege", Order = 19)]
     [JsonPropertyName("zu_abschlaege")]
     [ProtoMember(12)]
     [JsonPropertyOrder(19)]
@@ -106,7 +106,7 @@ public class Preisposition : COM
     public List<Preisstaffel> Preisstaffeln { get; set; }
 
     /// <summary>Preisschlüsselstamm></summary>
-    [JsonProperty(PropertyName = "preisschluesselstamm", Order = 21, Required = Required.Default)]
+    [JsonProperty(PropertyName = "preisschluesselstamm", Order = 21)]
     [JsonPropertyName("preisschluesselstamm")]
     [NonOfficial(NonOfficialCategory.MISSING)]
     [ProtoMember(14)]
@@ -114,7 +114,7 @@ public class Preisposition : COM
     public string? Preisschluesselstamm { get; set; }
 
     /// <summary>Fortlaufende Nummer für die Preisposition</summary>
-    [JsonProperty(PropertyName = "positionsnummer", Required = Required.Default, Order = 22)]
+    [JsonProperty(PropertyName = "positionsnummer", Order = 22)]
     [JsonPropertyName("positionsnummer")]
     [JsonPropertyOrder(22)]
     [NonOfficial(NonOfficialCategory.MISSING)]
@@ -122,7 +122,7 @@ public class Preisposition : COM
     public int? Positionsnummer { get; set; }
 
     /// <summary>Vgl. PRICAT IMD 7009</summary>
-    [JsonProperty(Required = Required.Default, Order = 23, PropertyName = "messebene")]
+    [JsonProperty(Order = 23, PropertyName = "messebene")]
     [JsonPropertyName("messebene")]
     [NonOfficial(NonOfficialCategory.MISSING)]
     [ProtoMember(16)]
@@ -132,7 +132,7 @@ public class Preisposition : COM
     /// <summary>
     ///     Produkt-/Leistungsbeschreibung, wenn IMD+X vorhanden Vgl. PRICAT IMD 7008
     /// </summary>
-    [JsonProperty(PropertyName = "beschreibung", Required = Required.Default, Order = 24)]
+    [JsonProperty(PropertyName = "beschreibung", Order = 24)]
     [JsonPropertyName("beschreibung")]
     [NonOfficial(NonOfficialCategory.MISSING)]
     [ProtoMember(17)]
@@ -142,7 +142,7 @@ public class Preisposition : COM
     /// <summary>
     /// Verarbeitungszeitraum. Details <see cref="Zeitraum" />
     /// </summary>
-    [JsonProperty(PropertyName = "verarbeitungszeitraum", Required = Required.Default, Order = 25)]
+    [JsonProperty(PropertyName = "verarbeitungszeitraum", Order = 25)]
     [JsonPropertyName("verarbeitungszeitraum")]
     [NonOfficial(NonOfficialCategory.MISSING)]
     [ProtoMember(18)]
@@ -153,7 +153,7 @@ public class Preisposition : COM
     ///  Die genauen Bedeutungen der einzelnen Artikel-IDs sind in der EDI@Energy Codeliste der Artikelnummern
     /// und Artikel-IDs zu finden, die in der Spalte "PRICAT Codeverwendung" ein X haben
     /// </summary>
-    [JsonProperty(PropertyName = "artikelId", Order = 26, Required = Required.Default)]
+    [JsonProperty(PropertyName = "artikelId", Order = 26)]
     [JsonPropertyName("artikelId")]
     [NonOfficial(NonOfficialCategory.MISSING)]
     [JsonPropertyOrder(26)]

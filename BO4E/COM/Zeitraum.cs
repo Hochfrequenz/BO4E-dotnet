@@ -17,14 +17,14 @@ namespace BO4E.COM;
 public class Zeitraum : COM
 {
     /// <summary>Die Einheit in der die Dauer angeben ist. Z.B. Monate. <seealso cref="Zeiteinheit" /></summary>
-    [JsonProperty(PropertyName = "einheit", Required = Required.Default)]
+    [JsonProperty(PropertyName = "einheit")]
     [JsonPropertyName("einheit")]
     [FieldName("unit", Language.EN)]
     [ProtoMember(3)]
     public Zeiteinheit? Einheit { get; set; }
 
     /// <summary>Gibt die Anzahl der Zeiteinheiten an, z.B. 3 (Monate).</summary>
-    [JsonProperty(PropertyName = "dauer", Required = Required.Default)]
+    [JsonProperty(PropertyName = "dauer")]
     [JsonPropertyName("dauer")]
     [FieldName("duration", Language.EN)]
     [ProtoMember(4)]
@@ -41,7 +41,7 @@ public class Zeitraum : COM
     }
 
     /// <summary>Gibt Tag und Uhrzeit (falls vorhanden) an, wann der Zeitraum startet.</summary>
-    [JsonProperty(PropertyName = "startdatum", Required = Required.Default)]
+    [JsonProperty(PropertyName = "startdatum")]
     [JsonPropertyName("startdatum")]
     [FieldName("startDate", Language.EN)]
     [ProtoIgnore]
@@ -59,7 +59,7 @@ public class Zeitraum : COM
     }
 
     /// <summary>Gibt Tag und Uhrzeit (falls vorhanden) an, wann der Zeitraum endet.</summary>
-    [JsonProperty(PropertyName = "enddatum", Required = Required.Default)]
+    [JsonProperty(PropertyName = "enddatum")]
     [JsonPropertyName("enddatum")]
     [FieldName("endDate", Language.EN)]
     [ProtoIgnore]

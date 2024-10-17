@@ -19,7 +19,7 @@ public class Avis : BusinessObject
     /// <summary>
     /// Eine im Verwendungskontext eindeutige Nummer für das Avis.
     /// </summary>
-    [JsonProperty(PropertyName = "avisNummer", Required = Required.Default)]
+    [JsonProperty(PropertyName = "avisNummer")]
     [JsonPropertyName("avisNummer")]
     [NonOfficial(NonOfficialCategory.MISSING)]
     [ProtoMember(1000)]
@@ -29,7 +29,7 @@ public class Avis : BusinessObject
     /// Gibt den Typ des Avis an.
     /// </summary>
     /// <see cref="AvisTyp" />
-    [JsonProperty(PropertyName = "avisTyp", Required = Required.Default)]
+    [JsonProperty(PropertyName = "avisTyp")]
     [JsonPropertyName("avisTyp")]
     [ProtoMember(1001)]
     public AvisTyp? AvisTyp { get; set; }
@@ -37,7 +37,7 @@ public class Avis : BusinessObject
     /// <summary>
     /// Avispositionen
     /// </summary>
-    [JsonProperty(PropertyName = "positionen", Required = Required.Default)]
+    [JsonProperty(PropertyName = "positionen")]
     [JsonPropertyName("positionen")]
     [NonOfficial(NonOfficialCategory.MISSING)]
     [ProtoMember(1002)]
@@ -47,7 +47,7 @@ public class Avis : BusinessObject
     /// <summary>
     /// Summenbetrag
     /// </summary>
-    [JsonProperty(PropertyName = "zuZahlen", Required = Required.Default)]
+    [JsonProperty(PropertyName = "zuZahlen")]
     [JsonPropertyName("zuZahlen")]
     [NonOfficial(NonOfficialCategory.MISSING)]
     [ProtoMember(1003)]

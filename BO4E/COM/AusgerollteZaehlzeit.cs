@@ -36,7 +36,7 @@ public class AusgerollteZaehlzeit : COM
     /// <summary>
     ///     Zählzeitregister
     /// </summary>
-    [JsonProperty(PropertyName = "register", Order = 5, Required = Required.Default)]
+    [JsonProperty(PropertyName = "register", Order = 5)]
     [JsonPropertyName("register")]
     [JsonPropertyOrder(5)]
     [ProtoMember(5)]

@@ -37,7 +37,7 @@ public class Kosten : BusinessObject
     /// <summary>
     ///     Die Gesamtsumme über alle Kostenblöcke und -positionen. Details siehe <see cref="Betrag" />
     /// </summary>
-    [JsonProperty(Required = Required.Default, Order = 6, PropertyName = "summeKosten")]
+    [JsonProperty(Order = 6, PropertyName = "summeKosten")]
     [JsonPropertyName("summeKosten")]
     [ProtoMember(6)]
     [DataCategory(DataCategory.FINANCE)]
@@ -58,7 +58,7 @@ public class Kosten : BusinessObject
     ///     Alliander Netz Heinsberg GmbH, 01.02.2018, 31.12.2018, Arbeitspreis HT, 3.660 kWh, 5,8200 ct/kWh, 213,01 €. Details
     ///     siehe COM Kostenposition
     /// </summary>
-    [JsonProperty(Required = Required.Default, Order = 8, PropertyName = "kostenpositionen")]
+    [JsonProperty(Order = 8, PropertyName = "kostenpositionen")]
     [JsonPropertyName("kostenpositionen")]
     [ProtoMember(8)]
     [DataCategory(DataCategory.FINANCE)]

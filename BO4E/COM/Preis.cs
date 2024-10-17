@@ -18,14 +18,14 @@ public class Preis : COM
     public decimal? Wert { get; set; }
 
     /// <summary>Währungseinheit für den Preis, z.B. Euro oder Ct. Details <see cref="Waehrungseinheit" /></summary>
-    [JsonProperty(PropertyName = "einheit", Required = Required.Default)]
+    [JsonProperty(PropertyName = "einheit")]
     [JsonPropertyName("einheit")]
     [FieldName("currency", Language.EN)]
     [ProtoMember(4)]
     public Waehrungseinheit? Einheit { get; set; }
 
     /// <summary>Angabe, für welche Bezugsgröße der Preis gilt. Z.B. kWh. <seealso cref="Mengeneinheit" /></summary>
-    [JsonProperty(PropertyName = "bezugswert", Required = Required.Default)]
+    [JsonProperty(PropertyName = "bezugswert")]
     [JsonPropertyName("bezugswert")]
     [FieldName("reference", Language.EN)]
     [ProtoMember(5)]
@@ -34,7 +34,7 @@ public class Preis : COM
     /// <summary>
     ///     Gibt den Status des veröffentlichten Preises an
     /// </summary>
-    [JsonProperty(PropertyName = "status", Required = Required.Default)]
+    [JsonProperty(PropertyName = "status")]
     [JsonPropertyName("status")]
     [ProtoMember(6)]
     public Preisstatus? Status { get; set; }

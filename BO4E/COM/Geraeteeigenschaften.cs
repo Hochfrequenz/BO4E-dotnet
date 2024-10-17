@@ -25,7 +25,7 @@ public class Geraeteeigenschaften : COM
     /// <summary>
     ///     Weitere Merkmale des Geräts, zum Beispiel Mehrtarif, Eintarif etc.. Details <see cref="ENUM.Geraetemerkmal" />
     /// </summary>
-    [JsonProperty(PropertyName = "geraetemerkmal", Required = Required.Default, Order = 11)]
+    [JsonProperty(PropertyName = "geraetemerkmal", Order = 11)]
     [JsonPropertyName("geraetemerkmal")]
     [ProtoMember(4)]
     [JsonPropertyOrder(11)]
@@ -34,7 +34,7 @@ public class Geraeteeigenschaften : COM
     /// <summary>
     ///     Für nicht feste Fields, bsw: 'faktor'
     /// </summary>
-    [JsonProperty(Required = Required.Default, Order = 12)]
+    [JsonProperty(Order = 12)]
     [NonOfficial(NonOfficialCategory.CUSTOMER_REQUIREMENTS)]
     [ProtoMember(1005)]
     [JsonPropertyOrder(12)]

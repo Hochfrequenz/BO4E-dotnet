@@ -50,14 +50,14 @@ public class Messlokation : BusinessObject
     public Sparte Sparte { get; set; }
 
     ///<summary> Spannungsebene der Messung. <seealso cref="Netzebene" /></summary>
-    [JsonProperty(PropertyName = "netzebeneMessung", Required = Required.Default, Order = 12)] //explicitly set NOT required.
+    [JsonProperty(PropertyName = "netzebeneMessung", Order = 12)] //explicitly set NOT required.
     [JsonPropertyName("netzebeneMessung")]
     [JsonPropertyOrder(12)]
     [ProtoMember(6)]
     public Netzebene? NetzebeneMessung { get; set; }
 
     /// <summary>Die Nummer des Messgebietes in der ene't-Datenbank.</summary>
-    [JsonProperty(PropertyName = "messgebietNr", Required = Required.Default, Order = 13)]
+    [JsonProperty(PropertyName = "messgebietNr", Order = 13)]
     [JsonPropertyOrder(13)]
     [JsonPropertyName("messgebietNr")]
     [ProtoMember(7)]
@@ -68,11 +68,7 @@ public class Messlokation : BusinessObject
     ///     Messlokation zuständig ist.( Dieser ist immer dann Messstellenbetreiber, wenn
     ///     kein anderer MSB die Einrichtungen an der Messlokation betreibt.)
     /// </summary>
-    [JsonProperty(
-        PropertyName = "grundzustaendigerMSBCodeNr",
-        Required = Required.Default,
-        Order = 14
-    )]
+    [JsonProperty(PropertyName = "grundzustaendigerMSBCodeNr", Order = 14)]
     [JsonPropertyOrder(14)]
     [JsonPropertyName("grundzustaendigerMSBCodeNr")]
     [ProtoMember(8)]
@@ -84,11 +80,7 @@ public class Messlokation : BusinessObject
     ///     Messstellenbetreiber, wenn kein anderer MSB die Einrichtungen an der
     ///     Messlokation betreibt.)
     /// </summary>
-    [JsonProperty(
-        PropertyName = "grundzustaendigerMSBIMCodeNr",
-        Required = Required.Default,
-        Order = 15
-    )]
+    [JsonProperty(PropertyName = "grundzustaendigerMSBIMCodeNr", Order = 15)]
     [JsonPropertyOrder(15)]
     [JsonPropertyName("grundzustaendigerMSBIMCodeNr")]
     [ProtoMember(9)]
@@ -119,7 +111,7 @@ public class Messlokation : BusinessObject
     ///     Achtung: Es darf immer nur eine Art der Ortsangabe vorhanden sein (entweder
     ///     eine Adresse oder eine GeoKoordinate oder eine Katasteradresse.
     /// </summary>
-    [JsonProperty(PropertyName = "messadresse", Required = Required.Default, Order = 17)]
+    [JsonProperty(PropertyName = "messadresse", Order = 17)]
     [JsonPropertyOrder(17)]
     [JsonPropertyName("messadresse")]
     [DataCategory(DataCategory.ADDRESS)]
@@ -132,7 +124,7 @@ public class Messlokation : BusinessObject
     ///     Achtung: Es darf immer nur eine Art der Ortsangabe vorhanden sein (entweder
     ///     eine Adresse oder eine GeoKoordinate oder eine Katasteradresse.
     /// </summary>
-    [JsonProperty(PropertyName = "geoadresse", Required = Required.Default, Order = 18)]
+    [JsonProperty(PropertyName = "geoadresse", Order = 18)]
     [JsonPropertyOrder(18)]
     [JsonPropertyName("geoadresse")]
     [DataCategory(DataCategory.ADDRESS)]
@@ -146,7 +138,7 @@ public class Messlokation : BusinessObject
     ///     eine Adresse oder eine GeoKoordinate oder eine Katasteradresse.
     /// </summary>
     /// */
-    [JsonProperty(PropertyName = "katasterinformation", Required = Required.Default, Order = 19)]
+    [JsonProperty(PropertyName = "katasterinformation", Order = 19)]
     [JsonPropertyOrder(19)]
     [JsonPropertyName("katasterinformation")]
     [ProtoMember(13)]
@@ -154,21 +146,21 @@ public class Messlokation : BusinessObject
     public Katasteradresse? Katasterinformation { get; set; }
 
     /// <summary>Liste der Hardware, die zu dieser Messstelle gehört.</summary>
-    [JsonProperty(PropertyName = "geraete", Required = Required.Default, Order = 20)]
+    [JsonProperty(PropertyName = "geraete", Order = 20)]
     [JsonPropertyOrder(20)]
     [JsonPropertyName("geraete")]
     [ProtoMember(14)]
     public List<Hardware>? Geraete { get; set; }
 
     /// <summary>Liste der Messdienstleistungen, die zu dieser Messstelle gehört.</summary>
-    [JsonProperty(PropertyName = "messdienstleistung", Required = Required.Default, Order = 21)]
+    [JsonProperty(PropertyName = "messdienstleistung", Order = 21)]
     [JsonPropertyOrder(21)]
     [JsonPropertyName("messdienstleistung")]
     [ProtoMember(15)]
     public List<Dienstleistung>? Messdienstleistung { get; set; }
 
     /// <summary> Zähler, die zu dieser Messlokation gehören. Details</summary>
-    [JsonProperty(PropertyName = "messlokationszaehler", Required = Required.Default, Order = 22)]
+    [JsonProperty(PropertyName = "messlokationszaehler", Order = 22)]
     [JsonPropertyOrder(22)]
     [JsonPropertyName("messlokationszaehler")]
     [ProtoMember(16)]
@@ -177,7 +169,7 @@ public class Messlokation : BusinessObject
     /// <summary>
     ///     <see cref="Marktlokation.Bilanzierungsmethode" />
     /// </summary>
-    [JsonProperty(PropertyName = "bilanzierungsmethode", Required = Required.Default, Order = 23)]
+    [JsonProperty(PropertyName = "bilanzierungsmethode", Order = 23)]
     [JsonPropertyOrder(23)]
     [JsonPropertyName("bilanzierungsmethode")]
     [ProtoMember(17)]
@@ -187,11 +179,7 @@ public class Messlokation : BusinessObject
     ///     Dieser Wert ist true, falls die Abrechnungs des Messstellenbetriebs die Netznutzungsabrechnung enthält. false
     ///     andernfalls
     /// </summary>
-    [JsonProperty(
-        PropertyName = "abrechnungmessstellenbetriebnna",
-        Required = Required.Default,
-        Order = 24
-    )]
+    [JsonProperty(PropertyName = "abrechnungmessstellenbetriebnna", Order = 24)]
     [JsonPropertyOrder(24)]
     [JsonPropertyName("abrechnungmessstellenbetriebnna")]
     [ProtoMember(1018)]
@@ -201,7 +189,7 @@ public class Messlokation : BusinessObject
     /// <summary>
     ///     marktrollen für EDIFACT mapping
     /// </summary>
-    [JsonProperty(Required = Required.Default, Order = 25, PropertyName = "marktrollen")]
+    [JsonProperty(Order = 25, PropertyName = "marktrollen")]
     [JsonPropertyOrder(25)]
     [JsonPropertyName("marktrollen")]
     [ProtoMember(1019)]
@@ -213,7 +201,6 @@ public class Messlokation : BusinessObject
     /// </summary>
     [JsonProperty(
         PropertyName = "gasqualitaet",
-        Required = Required.Default,
         Order = 26,
         NullValueHandling = NullValueHandling.Ignore
     )]
@@ -227,7 +214,7 @@ public class Messlokation : BusinessObject
     ///     verlustfaktor für EDIFACT mapping
     /// </summary>
     // ToDo: so does this mean that a factor of 0.0M has no losses?
-    [JsonProperty(PropertyName = "verlustfaktor", Required = Required.Default, Order = 27)]
+    [JsonProperty(PropertyName = "verlustfaktor", Order = 27)]
     [JsonPropertyOrder(27)]
     [JsonPropertyName("verlustfaktor")]
     [NonOfficial(NonOfficialCategory.CUSTOMER_REQUIREMENTS)]
@@ -238,7 +225,7 @@ public class Messlokation : BusinessObject
     ///     OBIS-Daten der Messlokation
     /// </summary>
     // ToDo: specify docstring.
-    [JsonProperty(Required = Required.Default, Order = 28, PropertyName = "zaehlwerke")]
+    [JsonProperty(Order = 28, PropertyName = "zaehlwerke")]
     [JsonPropertyName("zaehlwerke")]
     [JsonPropertyOrder(28)]
     [ProtoMember(1022)]
@@ -250,7 +237,6 @@ public class Messlokation : BusinessObject
     /// </summary>
     [JsonProperty(
         PropertyName = "betriebszustand",
-        Required = Required.Default,
         Order = 29,
         NullValueHandling = NullValueHandling.Ignore
     )]
@@ -263,7 +249,7 @@ public class Messlokation : BusinessObject
     /// <summary>
     ///   Zugeordnete Messprodukte
     /// </summary>
-    [JsonProperty(Required = Required.Default, Order = 30, PropertyName = "messprodukte")]
+    [JsonProperty(Order = 30, PropertyName = "messprodukte")]
     [JsonPropertyName("messprodukte")]
     [ProtoMember(1024)]
     [JsonPropertyOrder(30)]
@@ -274,7 +260,7 @@ public class Messlokation : BusinessObject
     // /// Lokationszuordnung, um bspw. die zugehörigen Marktlokationen anzugeben
     // /// </summary>
     // [JsonProperty(
-    //     Required = Required.Default,
+    //
     //     Order = 31,
     //     PropertyName = "lokationszuordnungen"
     // )]
@@ -286,11 +272,7 @@ public class Messlokation : BusinessObject
     /// <summary>
     /// Lokationsbuendel Code, der die Funktion dieses BOs an der Lokationsbuendelstruktur beschreibt.
     /// </summary>
-    [JsonProperty(
-        Required = Required.Default,
-        Order = 32,
-        PropertyName = "lokationsbuendelObjektcode"
-    )]
+    [JsonProperty(Order = 32, PropertyName = "lokationsbuendelObjektcode")]
     [JsonPropertyName("lokationsbuendelObjektcode")]
     [ProtoMember(1026)]
     [JsonPropertyOrder(32)]
@@ -300,11 +282,7 @@ public class Messlokation : BusinessObject
     /// Enthält die ID der vorgelagerten Lokation. Kann IDs unterschiedlicher Lokationen enthalten, also zum Beispiel
     /// einer Messlokation oder Netzlokation
     /// </summary>
-    [JsonProperty(
-        Required = Required.Default,
-        Order = 33,
-        PropertyName = "vorgelagerteLokationsId"
-    )]
+    [JsonProperty(Order = 33, PropertyName = "vorgelagerteLokationsId")]
     [JsonPropertyName("vorgelagerteLokationsId")]
     [ProtoMember(1027)]
     [JsonPropertyOrder(33)]

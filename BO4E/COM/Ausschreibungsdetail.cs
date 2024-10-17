@@ -19,7 +19,7 @@ public class Ausschreibungsdetail : COM
     public string LokationsId { get; set; }
 
     /// <summary>Bezeichnung für die Lokation, z.B. Zentraler Einkauf, Hamburg</summary>
-    [JsonProperty(PropertyName = "lokationsbezeichung", Required = Required.Default)]
+    [JsonProperty(PropertyName = "lokationsbezeichung")]
     [JsonPropertyName("lokationsbezeichung")]
     [ProtoMember(4)]
     public string? Lokationsbezeichung { get; set; }
@@ -43,19 +43,19 @@ public class Ausschreibungsdetail : COM
     public Netzebene NetzebeneMessung { get; set; }
 
     /// <summary>Bezeichnung des zuständigen Netzbetreibers, z.B. Stromnetz Hamburg GmbH.</summary>
-    [JsonProperty(PropertyName = "netzbetreiber", Required = Required.Default)]
+    [JsonProperty(PropertyName = "netzbetreiber")]
     [JsonPropertyName("netzbetreiber")]
     [ProtoMember(7)]
     public string? Netzbetreiber { get; set; }
 
     /// <summary>Bezeichnung des Kunden, der die Marktlokation nutzt.</summary>
-    [JsonProperty(PropertyName = "kunde", Required = Required.Default)]
+    [JsonProperty(PropertyName = "kunde")]
     [JsonPropertyName("kunde")]
     [ProtoMember(8)]
     public string? Kunde { get; set; }
 
     /// <summary>Die Bezeichnung des Zählers an der Marktlokation</summary>
-    [JsonProperty(PropertyName = "zaehlernummer", Required = Required.Default)]
+    [JsonProperty(PropertyName = "zaehlernummer")]
     [JsonPropertyName("zaehlernummer")]
     [ProtoMember(9)]
     public string? Zaehlernummer { get; set; }
@@ -64,7 +64,7 @@ public class Ausschreibungsdetail : COM
     ///     Spezifikation, um welche Zählertechnik es sich im vorliegenden Fall handelt, z.B. Leistungsmessung. Details
     ///     <see cref="Zaehlertyp" />
     /// </summary>
-    [JsonProperty(PropertyName = "zaehlertechnik", Required = Required.Default)]
+    [JsonProperty(PropertyName = "zaehlertechnik")]
     [JsonPropertyName("zaehlertechnik")]
     [ProtoMember(10)]
     public Zaehlertyp? Zaehlertechnik { get; set; }
@@ -73,7 +73,7 @@ public class Ausschreibungsdetail : COM
     ///     Zeigt an, ob es zu der Marktlokation einen Lastgang gibt. Falls ja, kann dieser abgerufen werden und daraus
     ///     die Verbrauchswerte ermittelt werden.
     /// </summary>
-    [JsonProperty(PropertyName = "lastgangVorhanden", Required = Required.Default)]
+    [JsonProperty(PropertyName = "lastgangVorhanden")]
     [JsonPropertyName("lastgangVorhanden")]
     [ProtoMember(11)]
     public bool? LastgangVorhanden { get; set; }
@@ -85,13 +85,13 @@ public class Ausschreibungsdetail : COM
     public Adresse Lokationsadresse { get; set; }
 
     /// <summary>Die (evtl. abweichende) Rechnungsadresse. Struktur <seealso cref="Adresse" /></summary>
-    [JsonProperty(PropertyName = "rechnungsadresse", Required = Required.Default)]
+    [JsonProperty(PropertyName = "rechnungsadresse")]
     [JsonPropertyName("rechnungsadresse")]
     [ProtoMember(13)]
     public Adresse? Rechnungsadresse { get; set; }
 
     /// <summary>Prognosewert für die Jahresarbeit der ausgeschriebenen Lokation. Struktur <seealso cref="Menge" /></summary>
-    [JsonProperty(PropertyName = "prognoseJahresarbeit", Required = Required.Default)]
+    [JsonProperty(PropertyName = "prognoseJahresarbeit")]
     [JsonPropertyName("prognoseJahresarbeit")]
     [ProtoMember(14)]
     public Menge? PrognoseJahresarbeit { get; set; }
@@ -100,7 +100,7 @@ public class Ausschreibungsdetail : COM
     ///     Ein Prognosewert für die Arbeit innerhalb des angefragten Lieferzeitraums der ausgeschriebenen Lokation.
     ///     Struktur <seealso cref="Menge" />
     /// </summary>
-    [JsonProperty(PropertyName = "prognoseArbeitLieferzeitraum", Required = Required.Default)]
+    [JsonProperty(PropertyName = "prognoseArbeitLieferzeitraum")]
     [JsonPropertyName("prognoseArbeitLieferzeitraum")]
     [ProtoMember(15)]
     public Menge? PrognoseArbeitLieferzeitraum { get; set; }
@@ -109,13 +109,13 @@ public class Ausschreibungsdetail : COM
     ///     Prognosewert für die abgenommene maximale Leistung der ausgeschriebenen Lokation. Struktur
     ///     <seealso cref="Menge" />
     /// </summary>
-    [JsonProperty(PropertyName = "prognoseLeistung", Required = Required.Default)]
+    [JsonProperty(PropertyName = "prognoseLeistung")]
     [JsonPropertyName("prognoseLeistung")]
     [ProtoMember(16)]
     public Menge? PrognoseLeistung { get; set; }
 
     /// <summary>Angefragter Zeitraum für die ausgeschriebene Belieferung. <seealso cref="Zeitraum" /></summary>
-    [JsonProperty(PropertyName = "lieferzeitraum", Required = Required.Default)]
+    [JsonProperty(PropertyName = "lieferzeitraum")]
     [JsonPropertyName("lieferzeitraum")]
     [ProtoMember(17)]
     public Zeitraum? Lieferzeitraum { get; set; }

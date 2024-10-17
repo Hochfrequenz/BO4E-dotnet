@@ -19,7 +19,7 @@ public class Menge : COM
     public decimal Wert { get; set; }
 
     /// <summary>Gibt die Einheit zum jeweiligen Wert an. Details <see cref="Mengeneinheit" /></summary>
-    [JsonProperty(PropertyName = "einheit", Required = Required.Default, Order = 11)]
+    [JsonProperty(PropertyName = "einheit", Order = 11)]
     [JsonPropertyName("einheit")]
     [FieldName("unit", Language.EN)]
     [JsonPropertyOrder(11)]

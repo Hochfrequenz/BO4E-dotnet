@@ -16,7 +16,7 @@ public class Kostenblock : COM
     public string Kostenblockbezeichnung { get; set; }
 
     /// <summary>Die Summe aller Kostenpositionen dieses Blocks</summary>
-    [JsonProperty(PropertyName = "summeKostenblock", Required = Required.Default)]
+    [JsonProperty(PropertyName = "summeKostenblock")]
     [JsonPropertyName("summeKostenblock")]
     [ProtoMember(4)]
     public Betrag? SummeKostenblock { get; set; }
@@ -25,7 +25,7 @@ public class Kostenblock : COM
     ///     Hier sind die Details zu einer Kostenposition aufgeführt. Z.B.:Alliander Netz Heinsberg GmbH, 01.02.2018,
     ///     31.12.2018, Arbeitspreis HT, 3.660 kWh, 5,8200 ct/kWh, 213,01 €. Details <see cref="Kostenposition" />
     /// </summary>
-    [JsonProperty(PropertyName = "kostenpositionen", Required = Required.Default)]
+    [JsonProperty(PropertyName = "kostenpositionen")]
     [JsonPropertyName("kostenpositionen")]
     [ProtoMember(5)]
     public List<Kostenposition>? Kostenpositionen { get; set; }

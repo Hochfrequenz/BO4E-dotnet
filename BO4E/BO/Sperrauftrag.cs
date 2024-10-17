@@ -25,21 +25,21 @@ public class Sperrauftrag : Auftrag
     /// <summary>
     /// <see cref="ENUM.Auftragsstatus"/>
     /// </summary>
-    [JsonProperty("sperrauftragsstatus", Required = Required.Default)]
+    [JsonProperty("sperrauftragsstatus")]
     [JsonPropertyName("sperrauftragsstatus")]
     public Auftragsstatus? Sperrauftragsstatus { get; set; }
 
     /// <summary>
     /// Falls <see cref="Sperrauftragsstatus"/> = <see cref="ENUM.Auftragsstatus.ABGELEHNT"/>
     /// </summary>
-    [JsonProperty("sperrauftragsablehngrund", Required = Required.Default)]
+    [JsonProperty("sperrauftragsablehngrund")]
     [JsonPropertyName("sperrauftragsablehngrund")]
     public Sperrauftragsablehngrund? Sperrauftragsablehnungsgrund { get; set; }
 
     /// <summary>
     /// Falls <see cref="Sperrauftragsstatus"/> = <see cref="ENUM.Auftragsstatus.GESCHEITERT"/>
     /// </summary>
-    [JsonProperty("sperrauftragsverhinderungsgrund", Required = Required.Default)]
+    [JsonProperty("sperrauftragsverhinderungsgrund")]
     [JsonPropertyName("sperrauftragsverhinderungsgrund")]
     public Sperrauftragsverhinderungsgrund? Sperrauftragsverhinderungsgrund { get; set; }
 
@@ -53,7 +53,7 @@ public class Sperrauftrag : Auftrag
     /// <summary>
     /// Die Nummer des zu sperrenden Zählers
     /// </summary>
-    [JsonProperty("zaehlernummer", Required = Required.Default)]
+    [JsonProperty("zaehlernummer")]
     [JsonPropertyName("zaehlernummer")]
     public string? Zaehlernummer { get; set; }
 

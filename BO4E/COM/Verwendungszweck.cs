@@ -24,7 +24,7 @@ public class Verwendungszweck : COM
     /// <summary>
     ///     code von Marktrolle
     /// </summary>
-    [JsonProperty(PropertyName = "zweck", Required = Required.Default)]
+    [JsonProperty(PropertyName = "zweck")]
     [JsonPropertyName("zweck")]
     [ProtoMember(4)]
     public List<ENUM.Verwendungszweck>? Zweck { get; set; }

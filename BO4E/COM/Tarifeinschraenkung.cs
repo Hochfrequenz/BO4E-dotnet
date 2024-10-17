@@ -11,7 +11,7 @@ namespace BO4E.COM;
 public class Tarifeinschraenkung : COM
 {
     /// <summary>Weitere Produkte, die gemeinsam mit diesem Tarif bestellt werden können.</summary>
-    [JsonProperty(PropertyName = "zusatzprodukte", Required = Required.Default)]
+    [JsonProperty(PropertyName = "zusatzprodukte")]
     [JsonPropertyName("zusatzprodukte")]
     [ProtoMember(3)]
     public List<string>? Zusatzprodukte { get; set; }
@@ -20,7 +20,7 @@ public class Tarifeinschraenkung : COM
     ///     Voraussetzungen, die erfüllt sein müssen, damit dieser Tarif zur Anwendung kommen kann. Details
     ///     <see cref="ENUM.Voraussetzungen" />
     /// </summary>
-    [JsonProperty(PropertyName = "voraussetzungen", Required = Required.Default)]
+    [JsonProperty(PropertyName = "voraussetzungen")]
     [JsonPropertyName("voraussetzungen")]
     [ProtoMember(4)]
     public List<Voraussetzungen>? Voraussetzungen { get; set; }
@@ -30,7 +30,7 @@ public class Tarifeinschraenkung : COM
     ///     Zähler angegeben sind, ist der Tarif nicht an das Vorhandensein bestimmter Zähler gebunden.)Details
     ///     <see cref="Geraet" />
     /// </summary>
-    [JsonProperty(PropertyName = "einschraenkungzaehler", Required = Required.Default)]
+    [JsonProperty(PropertyName = "einschraenkungzaehler")]
     [JsonPropertyName("einschraenkungzaehler")]
     [ProtoMember(5)]
     public Geraet? Einschraenkungzaehler { get; set; }
@@ -39,7 +39,7 @@ public class Tarifeinschraenkung : COM
     ///     Die vereinbarte Leistung, die (näherungsweise) abgenommen wird. Insbesondere Gastarife können daran gebunden
     ///     sein, dass die Leistung einer vereinbarten Höhe entspricht.Details <see cref="Menge" />
     /// </summary>
-    [JsonProperty(PropertyName = "einschraenkungleistung", Required = Required.Default)]
+    [JsonProperty(PropertyName = "einschraenkungleistung")]
     [JsonPropertyName("einschraenkungleistung")]
     [ProtoMember(6)]
     public Menge? Einschraenkungleistung { get; set; }
