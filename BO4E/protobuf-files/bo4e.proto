@@ -522,7 +522,7 @@ message Geschaeftspartner {
    repeated Geschaeftspartnerrolle Geschaeftspartnerrolle = 17 [packed = false];
    Adresse Partneradresse = 18;
    GrundlageZurVerringerungDerUmlagenNachEnfg GrundlageZurVerringerungDerUmlagenNachEnfg = 19;
-   GrundDerPrivilegierungNachEnFG GrundDerPrivilegierungNachEnFG = 20;
+   repeated GrundDerPrivilegierungNachEnFG GruendeDerPrivilegierungNachEnFG = 20 [packed = false];
    Bankverbindung Bankverbindung = 21;
    string Steuernummer = 22;
    Erreichbarkeit Erreichbarkeit = 23;
