@@ -174,14 +174,14 @@ public class Geschaeftspartner : BusinessObject
     public GrundlageZurVerringerungDerUmlagenNachEnfg? GrundlageZurVerringerungDerUmlagenNachEnfg { get; set; }
 
     /// <summary>
-    /// Grund der Privilegierung nach EnFG
+    /// Gründe der Privilegierung nach EnFG
     /// </summary>
-    [JsonProperty(PropertyName = "grundDerPrivilegierungNachEnFG", Order = 22)]
-    [JsonPropertyName("grundDerPrivilegierungNachEnFG")]
+    [JsonProperty(PropertyName = "gruendeDerPrivilegierungNachEnFG", Order = 22)]
+    [JsonPropertyName("gruendeDerPrivilegierungNachEnFG")]
     [JsonPropertyOrder(22)]
     [NonOfficial(NonOfficialCategory.CUSTOMER_REQUIREMENTS)]
     [ProtoMember(20)]
-    public GrundDerPrivilegierungNachEnFG? GrundDerPrivilegierungNachEnFG { get; set; }
+    public List<GrundDerPrivilegierungNachEnFG>? GruendeDerPrivilegierungNachEnFG { get; set; }
 
     /// <summary>Bankverbindung</summary>
     [JsonProperty(Order = 23, PropertyName = "bankverbindung")]
