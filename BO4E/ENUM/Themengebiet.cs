@@ -25,6 +25,10 @@ public enum Themengebiet
     [EnumMember(Value = "ANSPRECHPARTNER_IT_TECHNIK")]
     ANSPRECHPARTNER_IT_TECHNIK,
 
+    /// <summary>Bewegungsdaten</summary>
+    [EnumMember(Value = "BEWEGUNG")]
+    BEWEGUNG,
+    
     /// <summary>Bilanzierung</summary>
     [EnumMember(Value = "BILANZIERUNG")]
     BILANZIERUNG,
@@ -56,6 +60,10 @@ public enum Themengebiet
     /// <summary>EDIFACT</summary>
     [EnumMember(Value = "EDIFACT")]
     EDIFACT,
+    
+    /// <summary>EINSPEISE</summary>
+    [EnumMember(Value = "EINSPEISE")]
+    EINSPEISE,
 
     /// <summary>Energiedatenmanagement</summary>
     [EnumMember(Value = "ENERGIEDATENMANAGEMENT")]
@@ -132,6 +140,10 @@ public enum Themengebiet
     /// <summary>Klärfälle</summary>
     [EnumMember(Value = "KLAERFAELLE")]
     KLAERFAELLE,
+    
+    /// <summary>Kündigung</summary>
+    [EnumMember(Value = "KUENDIGUNG")]
+    KUENDIGUNG,
 
     /// <summary>Lastgänge RLM</summary>
     [EnumMember(Value = "LASTGAENGE_RLM")]
@@ -208,6 +220,10 @@ public enum Themengebiet
     /// <summary>Technische Fragen</summary>
     [EnumMember(Value = "TECHNISCHE_FRAGEN")]
     TECHNISCHE_FRAGEN,
+    
+    /// <summary>technischer Netzanschluss</summary>
+    [EnumMember(Value = "TECHNISCHERNETZANSCHLUSS")]
+    TECHNISCHERNETZANSCHLUSS,
 
     /// <summary>Umstellung INVOIC</summary>
     [EnumMember(Value = "UMSTELLUNG_INVOIC")]
