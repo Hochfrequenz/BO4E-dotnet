@@ -7,16 +7,16 @@ using EnumsNET;
 namespace BO4E.meta.LenientConverters;
 
 /// <summary>
-/// The lenient ZaehlergroesseGasConverter allows for transforming strings that do not contain the prefix "GAS_" into valid <see cref="BO4E.ENUM.Geraetemerkmal"/>
+/// The lenient ZaehlergroesseGasConverter allows for transforming strings that do not contain the prefix "GAS_" into valid nullable <see cref="BO4E.ENUM.Geraetemerkmal"/>
 /// </summary>
 /// <remarks>The main symptom for its usage is "Error converting value "G4" to type Geraetemerkmal"</remarks>
-public class LenientSystemTextGeraetemerkmalGasConverter
-    : System.Text.Json.Serialization.JsonConverter<Geraetemerkmal>
+public class LenientSystemTextNullableGeraetemerkmalGasConverter
+    : System.Text.Json.Serialization.JsonConverter<Geraetemerkmal?>
 {
     /// <summary>
     /// <inheritdoc cref="System.Text.Json.Serialization.JsonConverter{T}.Read"/>
     /// </summary>
-    public override Geraetemerkmal Read(
+    public override Geraetemerkmal? Read(
         ref Utf8JsonReader reader,
         Type typeToConvert,
         JsonSerializerOptions options
@@ -24,9 +24,13 @@ public class LenientSystemTextGeraetemerkmalGasConverter
     {
         if (reader.TokenType == JsonTokenType.Number)
         {
-            return Geraetemerkmal.EINTARIF;
+            return null;
         }
         var rawString = reader.GetString();
+        if (rawString is null)
+        {
+            return null;
+        }
         try
         {
             return Enums.Parse<Geraetemerkmal>(rawString);
@@ -52,18 +56,26 @@ public class LenientSystemTextGeraetemerkmalGasConverter
     /// </summary>
     public override void Write(
         Utf8JsonWriter writer,
-        Geraetemerkmal value,
+        Geraetemerkmal? value,
         JsonSerializerOptions options
     )
     {
-        var stringValue = value.ToString();
-        var match = GasPrefixRegex.Match(stringValue);
-        if (!match.Success)
+        if (value.HasValue)
         {
-            writer.WriteStringValue(stringValue);
-            return;
+            // Remove the "GAS_" prefix if it exists
+            var stringValue = value.Value.ToString();
+            var match = GasPrefixRegex.Match(stringValue);
+            if (!match.Success)
+            {
+                writer.WriteStringValue(stringValue);
+                return;
+            }
+            var rest = match.Groups["rest"].Value;
+            writer.WriteStringValue(rest);
         }
-        var rest = match.Groups["rest"].Value;
-        writer.WriteStringValue(rest);
+        else
+        {
+            writer.WriteNullValue();
+        }
     }
 }

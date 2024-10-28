@@ -11,16 +11,20 @@ namespace BO4E.meta.LenientConverters;
 ///     The lenient DateTimeConverter allows for transforming strings into (nullable) DateTimeOffset(?) objects,
 ///     even if their formatting is somehow weird.
 /// </summary>
-public class LenientSystemTextJsonDateTimeConverter : JsonConverter<DateTime>
+public class LenientSystemTextJsonNullableDateTimeConverter : JsonConverter<DateTime?>
 {
-    private readonly List<(string, bool)> _allowedDatetimeFormats =
-    [
+    private readonly List<(string, bool)> _allowedDatetimeFormats = new List<(string, bool)>
+    {
         ("yyyy-MM-ddTHH:mm:ss", false),
         ("yyyy-MM-ddTHH:mm:sszzzz", true),
         ("yyyyMMddHHmm", false),
         ("yyyyMMddHHmmss", false),
-        ("yyyyMMddHHmmss'--T::zzzz'", false),
-    ];
+        (
+            @"yyyyMMddHHmmss'--T::zzzz'",
+            false
+        ) // ToDo: remove again. this is just a buggy, nasty workaround
+        ,
+    };
 
     private readonly DateTimeOffset? _defaultDateTime;
 
@@ -28,7 +32,7 @@ public class LenientSystemTextJsonDateTimeConverter : JsonConverter<DateTime>
     ///     initialize using a default date time
     /// </summary>
     /// <param name="defaultDateTime"></param>
-    public LenientSystemTextJsonDateTimeConverter(DateTimeOffset? defaultDateTime = null)
+    public LenientSystemTextJsonNullableDateTimeConverter(DateTimeOffset? defaultDateTime = null)
     {
         _defaultDateTime = defaultDateTime;
     }
@@ -36,7 +40,7 @@ public class LenientSystemTextJsonDateTimeConverter : JsonConverter<DateTime>
     /// <summary>
     ///     initialize using no default datetime
     /// </summary>
-    public LenientSystemTextJsonDateTimeConverter()
+    public LenientSystemTextJsonNullableDateTimeConverter()
         : this(null) { }
 
     /// <summary>
@@ -45,12 +49,17 @@ public class LenientSystemTextJsonDateTimeConverter : JsonConverter<DateTime>
     /// <param name="typeToConvert"></param>
     /// <param name="options"></param>
     /// <returns></returns>
-    public override DateTime Read(
+    public override DateTime? Read(
         ref Utf8JsonReader reader,
         Type typeToConvert,
         JsonSerializerOptions options
     )
     {
+        if (reader.TryGetDateTimeOffset(out var dto))
+        {
+            return DateTime.SpecifyKind(dto.DateTime, DateTimeKind.Utc);
+        }
+
         if (reader.TryGetDateTime(out var dt))
         {
             return DateTime.SpecifyKind(dt, DateTimeKind.Utc);
@@ -90,7 +99,7 @@ public class LenientSystemTextJsonDateTimeConverter : JsonConverter<DateTime>
                 _allowedDatetimeFormats.Any(dtf =>
                     DateTime.TryParseExact(
                         rawDate,
-                        dtf.Item1,
+                        (string)dtf.Item1,
                         CultureInfo.InvariantCulture,
                         DateTimeStyles.None,
                         out dateTime
@@ -121,7 +130,7 @@ public class LenientSystemTextJsonDateTimeConverter : JsonConverter<DateTime>
                 return DateTime.MinValue;
             }
 
-            return DateTime.MinValue;
+            return null;
         }
         catch (ArgumentOutOfRangeException ae)
             when (ae.Message
@@ -133,7 +142,7 @@ public class LenientSystemTextJsonDateTimeConverter : JsonConverter<DateTime>
                 return DateTime.MinValue;
             }
 
-            return DateTime.MinValue;
+            return null;
         }
     }
 
@@ -142,7 +151,11 @@ public class LenientSystemTextJsonDateTimeConverter : JsonConverter<DateTime>
     /// <param name="writer"></param>
     /// <param name="value"></param>
     /// <param name="options"></param>
-    public override void Write(Utf8JsonWriter writer, DateTime value, JsonSerializerOptions options)
+    public override void Write(
+        Utf8JsonWriter writer,
+        DateTime? value,
+        JsonSerializerOptions options
+    )
     {
         JsonSerializer.Serialize(writer, value);
     }
