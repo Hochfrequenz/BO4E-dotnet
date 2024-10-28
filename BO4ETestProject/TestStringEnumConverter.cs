@@ -586,6 +586,8 @@ public class TestStringEnumConverter
 
     public class ClassWithAnnotatedListOfVerwendungszweck
     {
+        [Newtonsoft.Json.JsonConverter(typeof(NewtonsoftVerwendungszweckListConverter))]
+        [System.Text.Json.Serialization.JsonConverter(typeof(VerwendungszweckListConverter))]
         public List<Verwendungszweck>? Foo { get; set; }
     }
 
@@ -606,6 +608,17 @@ public class TestStringEnumConverter
     }
 
     [TestMethod]
+    public void Test_Newtonsoft_List_of_Verwendungszweck_Conversion_With_Null()
+    {
+        var jsonString = "{\"Foo\": null}";
+        var result = JsonConvert.DeserializeObject<ClassWithAnnotatedListOfVerwendungszweck>(
+            jsonString
+        );
+        result.Should().NotBeNull();
+        result.Foo.Should().BeNull();
+    }
+
+    [TestMethod]
     [DataRow("MEHRMINDERMENGENABRECHNUNG", Verwendungszweck.MEHRMINDERMENGENABRECHNUNG)]
     [DataRow("MEHRMINDERMBENGENABRECHNUNG", Verwendungszweck.MEHRMINDERMENGENABRECHNUNG)]
     public void Test_SystemText_List_of_Verwendungszweck_Conversion(
@@ -619,5 +632,16 @@ public class TestStringEnumConverter
         );
         result.Should().NotBeNull();
         result.Foo.Should().NotBeNullOrEmpty().And.ContainInOrder(expectedVerwendungszweck);
+    }
+
+    [TestMethod]
+    public void Test_SystemText_List_of_Verwendungszweck_Conversion_With_Null()
+    {
+        var jsonString = "{\"Foo\": null}";
+        var result = JsonSerializer.Deserialize<ClassWithAnnotatedListOfVerwendungszweck>(
+            jsonString
+        );
+        result.Should().NotBeNull();
+        result.Foo.Should().BeNull();
     }
 }
