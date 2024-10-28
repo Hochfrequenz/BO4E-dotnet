@@ -6,6 +6,7 @@ using System.Text.RegularExpressions;
 using BO4E.COM;
 using BO4E.ENUM;
 using BO4E.meta;
+using BO4E.meta.LenientConverters;
 using Newtonsoft.Json;
 using ProtoBuf;
 
@@ -208,6 +209,10 @@ public class Messlokation : BusinessObject
     [JsonPropertyOrder(26)]
     [ProtoMember(1020)]
     [NonOfficial(NonOfficialCategory.CUSTOMER_REQUIREMENTS)]
+    [System.Text.Json.Serialization.JsonConverter(
+        typeof(SystemTextNullableGasqualitaetStringEnumConverter)
+    )]
+    [Newtonsoft.Json.JsonConverter(typeof(NewtonsoftGasqualitaetStringEnumConverter))]
     public Gasqualitaet? Gasqualitaet { get; set; }
 
     /// <summary>

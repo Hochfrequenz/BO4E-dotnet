@@ -8,6 +8,7 @@ using BO4E.COM;
 using BO4E.EnergyIdentificationCodes;
 using BO4E.ENUM;
 using BO4E.meta;
+using BO4E.meta.LenientConverters;
 using Newtonsoft.Json;
 using ProtoBuf;
 
@@ -146,6 +147,10 @@ public class Marktlokation : BusinessObject
     [JsonPropertyOrder(22)]
     [JsonPropertyName("gasqualitaet")]
     [ProtoMember(16)]
+    [System.Text.Json.Serialization.JsonConverter(
+        typeof(SystemTextNullableGasqualitaetStringEnumConverter)
+    )]
+    [Newtonsoft.Json.JsonConverter(typeof(NewtonsoftGasqualitaetStringEnumConverter))]
     public Gasqualitaet? Gasqualitaet { get; set; }
 
     /// <summary>Link zum Geschäftspartner, dem diese Marktlokation gehört.</summary>
