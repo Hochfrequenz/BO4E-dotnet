@@ -15,7 +15,7 @@ public class FehlerDetail : COM
     [JsonPropertyName("code")]
     [JsonPropertyOrder(10)]
     [ProtoMember(1)]
-    public BO4E.ENUM.FehlerCode Code { get; set; }
+    public BO4E.ENUM.FehlerCode? Code { get; set; }
 
     /// <summary>Eine Beschreibung des Fehlers.</summary>
     [JsonProperty(PropertyName = "beschreibung", Order = 11)]

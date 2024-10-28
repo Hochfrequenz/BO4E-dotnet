@@ -14,7 +14,7 @@ public class Fehler : COM
     [JsonProperty(PropertyName = "typ")]
     [JsonPropertyName("typ")]
     [ProtoMember(1)]
-    public BO4E.ENUM.FehlerTyp Typ { get; set; }
+    public BO4E.ENUM.FehlerTyp? Typ { get; set; }
 
     /// <summary>
     ///     Fehlerdetails
