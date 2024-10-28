@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Text.Json.Serialization;
 using BO4E.ENUM;
 using BO4E.meta;
+using BO4E.meta.LenientConverters;
 using Newtonsoft.Json;
 using ProtoBuf;
 
@@ -29,6 +30,10 @@ public class Geraeteeigenschaften : COM
     [JsonPropertyName("geraetemerkmal")]
     [ProtoMember(4)]
     [JsonPropertyOrder(11)]
+    [Newtonsoft.Json.JsonConverter(typeof(LenientGeraetemerkmalGasConverter))]
+    [System.Text.Json.Serialization.JsonConverter(
+        typeof(LenientSystemTextNullableGeraetemerkmalGasConverter)
+    )]
     public Geraetemerkmal? Geraetemerkmal { get; set; }
 
     /// <summary>

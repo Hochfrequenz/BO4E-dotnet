@@ -5,6 +5,7 @@ using System.Text.Json.Serialization;
 using BO4E.COM;
 using BO4E.ENUM;
 using BO4E.meta;
+using BO4E.meta.LenientConverters;
 using Newtonsoft.Json;
 using ProtoBuf;
 
@@ -189,6 +190,10 @@ public class Zaehler : BusinessObject
     [ProtoMember(1019)]
     [JsonPropertyOrder(25)]
     [NonOfficial(NonOfficialCategory.REGULATORY_REQUIREMENTS)]
+    [Newtonsoft.Json.JsonConverter(typeof(LenientGeraetemerkmalGasConverter))]
+    [System.Text.Json.Serialization.JsonConverter(
+        typeof(LenientSystemTextNullableGeraetemerkmalGasConverter)
+    )]
     public Geraetemerkmal? Zaehlergroesse { get; set; }
 
     /// <summary>Liste der Geräte, die zu diesem Zähler gehören.</summary>
