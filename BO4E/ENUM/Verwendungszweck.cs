@@ -1,9 +1,11 @@
-using System;
 using System.Runtime.Serialization;
+using BO4E.meta.LenientConverters;
 
 namespace BO4E.ENUM;
 
 /// <summary>Verwendungungszweck der Werte Marktlokation</summary>
+[System.Text.Json.Serialization.JsonConverter(typeof(SystemTextVerwendungszweckStringEnumConverter))]
+[Newtonsoft.Json.JsonConverter(typeof(NewtonsoftVerwendungszweckStringEnumConverter))]
 public enum Verwendungszweck
 {
     /// <summary>Z84: Netznutzungsabrechnung</summary>

@@ -584,10 +584,8 @@ public class TestStringEnumConverter
         reSerializedJsonString.Should().Contain(expectedVerwendungszweck.ToString());
     }
 
-    public class ClassWithAnnotatedListOfVerwendungszweck
+    public class ClassWithListOfVerwendungszweck
     {
-        [Newtonsoft.Json.JsonConverter(typeof(NewtonsoftVerwendungszweckListConverter))]
-        [System.Text.Json.Serialization.JsonConverter(typeof(VerwendungszweckListConverter))]
         public List<Verwendungszweck>? Foo { get; set; }
     }
 
@@ -600,7 +598,7 @@ public class TestStringEnumConverter
     )
     {
         var jsonString = "{\"Foo\": [\"" + jsonValue + "\"]}";
-        var result = JsonConvert.DeserializeObject<ClassWithAnnotatedListOfVerwendungszweck>(
+        var result = JsonConvert.DeserializeObject<ClassWithListOfVerwendungszweck>(
             jsonString
         );
         result.Should().NotBeNull();
@@ -611,7 +609,7 @@ public class TestStringEnumConverter
     public void Test_Newtonsoft_List_of_Verwendungszweck_Conversion_With_Null()
     {
         var jsonString = "{\"Foo\": null}";
-        var result = JsonConvert.DeserializeObject<ClassWithAnnotatedListOfVerwendungszweck>(
+        var result = JsonConvert.DeserializeObject<ClassWithListOfVerwendungszweck>(
             jsonString
         );
         result.Should().NotBeNull();
@@ -627,7 +625,7 @@ public class TestStringEnumConverter
     )
     {
         var jsonString = "{\"Foo\": [\"" + jsonValue + "\"]}";
-        var result = JsonSerializer.Deserialize<ClassWithAnnotatedListOfVerwendungszweck>(
+        var result = JsonSerializer.Deserialize<ClassWithListOfVerwendungszweck>(
             jsonString
         );
         result.Should().NotBeNull();
@@ -638,7 +636,7 @@ public class TestStringEnumConverter
     public void Test_SystemText_List_of_Verwendungszweck_Conversion_With_Null()
     {
         var jsonString = "{\"Foo\": null}";
-        var result = JsonSerializer.Deserialize<ClassWithAnnotatedListOfVerwendungszweck>(
+        var result = JsonSerializer.Deserialize<ClassWithListOfVerwendungszweck>(
             jsonString
         );
         result.Should().NotBeNull();
