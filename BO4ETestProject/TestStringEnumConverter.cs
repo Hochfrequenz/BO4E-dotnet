@@ -598,9 +598,7 @@ public class TestStringEnumConverter
     )
     {
         var jsonString = "{\"Foo\": [\"" + jsonValue + "\"]}";
-        var result = JsonConvert.DeserializeObject<ClassWithListOfVerwendungszweck>(
-            jsonString
-        );
+        var result = JsonConvert.DeserializeObject<ClassWithListOfVerwendungszweck>(jsonString);
         result.Should().NotBeNull();
         result.Foo.Should().NotBeNullOrEmpty().And.ContainInOrder(expectedVerwendungszweck);
     }
@@ -609,9 +607,7 @@ public class TestStringEnumConverter
     public void Test_Newtonsoft_List_of_Verwendungszweck_Conversion_With_Null()
     {
         var jsonString = "{\"Foo\": null}";
-        var result = JsonConvert.DeserializeObject<ClassWithListOfVerwendungszweck>(
-            jsonString
-        );
+        var result = JsonConvert.DeserializeObject<ClassWithListOfVerwendungszweck>(jsonString);
         result.Should().NotBeNull();
         result.Foo.Should().BeNull();
     }
@@ -625,9 +621,7 @@ public class TestStringEnumConverter
     )
     {
         var jsonString = "{\"Foo\": [\"" + jsonValue + "\"]}";
-        var result = JsonSerializer.Deserialize<ClassWithListOfVerwendungszweck>(
-            jsonString
-        );
+        var result = JsonSerializer.Deserialize<ClassWithListOfVerwendungszweck>(jsonString);
         result.Should().NotBeNull();
         result.Foo.Should().NotBeNullOrEmpty().And.ContainInOrder(expectedVerwendungszweck);
     }
@@ -636,9 +630,7 @@ public class TestStringEnumConverter
     public void Test_SystemText_List_of_Verwendungszweck_Conversion_With_Null()
     {
         var jsonString = "{\"Foo\": null}";
-        var result = JsonSerializer.Deserialize<ClassWithListOfVerwendungszweck>(
-            jsonString
-        );
+        var result = JsonSerializer.Deserialize<ClassWithListOfVerwendungszweck>(jsonString);
         result.Should().NotBeNull();
         result.Foo.Should().BeNull();
     }

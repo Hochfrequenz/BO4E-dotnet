@@ -4,7 +4,9 @@ using BO4E.meta.LenientConverters;
 namespace BO4E.ENUM;
 
 /// <summary>Verwendungungszweck der Werte Marktlokation</summary>
-[System.Text.Json.Serialization.JsonConverter(typeof(SystemTextVerwendungszweckStringEnumConverter))]
+[System.Text.Json.Serialization.JsonConverter(
+    typeof(SystemTextVerwendungszweckStringEnumConverter)
+)]
 [Newtonsoft.Json.JsonConverter(typeof(NewtonsoftVerwendungszweckStringEnumConverter))]
 public enum Verwendungszweck
 {
