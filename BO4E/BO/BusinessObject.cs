@@ -65,6 +65,8 @@ namespace BO4E.BO;
 [ProtoInclude(34, typeof(Lokationszuordnung))]
 [ProtoInclude(35, typeof(Einspeisung))]
 [ProtoInclude(36, typeof(Produktpaket))]
+[ProtoInclude(37, typeof(Leistungskurvendefinition))]
+[ProtoInclude(38, typeof(Schaltzeitdefinition))]
 public abstract class BusinessObject : IUserProperties, IOptionalGuid
 {
     /// <summary>

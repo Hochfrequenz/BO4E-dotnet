@@ -134,4 +134,13 @@ public class Netzlokation : BusinessObject
     [ProtoMember(15)]
     [JsonPropertyOrder(21)]
     public string? VorgelagerteLokationsId { get; set; }
+
+    /// <summary>
+    /// Abrechnungsdaten der Netzlokation
+    /// </summary>
+    [JsonProperty(Order = 22, PropertyName = "abrechnungsdaten")]
+    [JsonPropertyName("abrechnungsdaten")]
+    [ProtoMember(16)]
+    [JsonPropertyOrder(22)]
+    public List<Netzlokationsabrechnungsdaten>? Abrechnungsdaten { get; set; }
 }
