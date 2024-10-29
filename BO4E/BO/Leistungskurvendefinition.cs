@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Text.Json.Serialization;
 using BO4E.COM;
 using BO4E.ENUM;
+using BO4E.meta;
 using Newtonsoft.Json;
 using ProtoBuf;
 
@@ -17,16 +18,16 @@ public class Leistungskurvendefinition : BusinessObject
     /// <summary>
     /// Ausgerollt oder nicht ausgerollt
     /// </summary>
-    [JsonProperty(Required = Required.Default, Order = 1, PropertyName = "ausgerollt")]
+    [JsonProperty(Required = Required.Default, Order = 10, PropertyName = "ausgerollt")]
     [JsonPropertyName("ausgerollt")]
-    [ProtoMember(1)]
-    [JsonPropertyOrder(1)]
+    [ProtoMember(10)]
+    [JsonPropertyOrder(10)]
     public bool? Ausgerollt { get; set; }
     
     
     [Newtonsoft.Json.JsonIgnore]
     [System.Text.Json.Serialization.JsonIgnore]
-    [ProtoMember(2, Name = nameof(Aenderungszeitpunkt))]
+    [ProtoMember(11, Name = nameof(Aenderungszeitpunkt))]
     [CompatibilityLevel(CompatibilityLevel.Level240)]
     private DateTime _Aenderungszeitpunkt
     {
@@ -37,46 +38,47 @@ public class Leistungskurvendefinition : BusinessObject
     /// <summary>
     /// Leistungskurvenänderungszeitpunkt
     /// </summary>
-    [JsonProperty(Required = Required.Default, Order = 2, PropertyName = "aenderungszeitpunkt")]
+    [JsonProperty(Required = Required.Default, Order = 12, PropertyName = "aenderungszeitpunkt")]
     [JsonPropertyName("aenderungszeitpunkt")]
-    [ProtoMember(3)]
-    [JsonPropertyOrder(2)]
+    [ProtoMember(12)]
+    [JsonPropertyOrder(12)]
     [ProtoIgnore]
     public DateTimeOffset Aenderungszeitpunkt { get; set; }
     
     /// <summary>
     /// Code der Leistungskurvendefinition
     /// </summary>
-    [JsonProperty(Required = Required.Default, Order = 3, PropertyName = "code")]
+    [BoKey]
+    [JsonProperty(Required = Required.Default, Order = 13, PropertyName = "code")]
     [JsonPropertyName("code")]
-    [ProtoMember(4)]
-    [JsonPropertyOrder(3)]
+    [ProtoMember(13)]
+    [JsonPropertyOrder(13)]
     public string? Code { get; set; }
     
     /// <summary>
     /// Häufigkeit der Übermittlung
     /// </summary>
-    [JsonProperty(Required = Required.Default, Order = 4, PropertyName = "haeufigkeit")]
+    [JsonProperty(Required = Required.Default, Order = 14, PropertyName = "haeufigkeit")]
     [JsonPropertyName("haeufigkeit")]
-    [ProtoMember(5)]
-    [JsonPropertyOrder(4)]
+    [ProtoMember(14)]
+    [JsonPropertyOrder(14)]
     public HaeufigkeitZaehlzeit? Haeufigkeit { get; set; }
     
     /// <summary>
     /// Übermittelbarkeit der ausgerollten Leistungskurvendefinition
     /// </summary>
-    [JsonProperty(PropertyName = "uebermittelbarkeit", Order = 5, Required = Required.Default)]
+    [JsonProperty(PropertyName = "uebermittelbarkeit", Order = 15, Required = Required.Default)]
     [JsonPropertyName("uebermittelbarkeit")]
-    [JsonPropertyOrder(6)]
-    [ProtoMember(5)]
+    [ProtoMember(15)]
+    [JsonPropertyOrder(15)]
     public UebermittelbarkeitZaehlzeit? Uebermittelbarkeit { get; set; }
     
     /// <summary>
     /// oberer Schwellwert
     /// </summary>
-    [JsonProperty(Required = Required.Default, Order = 6, PropertyName = "obererSchwellwert")]
+    [JsonProperty(Required = Required.Default, Order = 16, PropertyName = "obererSchwellwert")]
     [JsonPropertyName("obererSchwellwert")]
-    [ProtoMember(7)]
-    [JsonPropertyOrder(6)]
+    [ProtoMember(16)]
+    [JsonPropertyOrder(16)]
     public string? ObererSchwellwert { get; set; }
 }
