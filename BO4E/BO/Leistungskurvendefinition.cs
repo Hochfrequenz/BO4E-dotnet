@@ -9,11 +9,13 @@ using ProtoBuf;
 namespace BO4E.BO;
 
 /// <summary>
+/// Eigenschaften der Leistungskurvendefinition und einer ausgerollten Leistungskurvendefinition
 /// </summary>
 [ProtoContract]
 public class Leistungskurvendefinition : BusinessObject
 {
     /// <summary>
+    /// Ausgerollt oder nicht ausgerollt
     /// </summary>
     [JsonProperty(Required = Required.Default, Order = 1, PropertyName = "ausgerollt")]
     [JsonPropertyName("ausgerollt")]
@@ -33,6 +35,7 @@ public class Leistungskurvendefinition : BusinessObject
     }
     
     /// <summary>
+    /// Leistungskurvenänderungszeitpunkt
     /// </summary>
     [JsonProperty(Required = Required.Default, Order = 2, PropertyName = "aenderungszeitpunkt")]
     [JsonPropertyName("aenderungszeitpunkt")]
@@ -42,6 +45,7 @@ public class Leistungskurvendefinition : BusinessObject
     public DateTimeOffset Aenderungszeitpunkt { get; set; }
     
     /// <summary>
+    /// Code der Leistungskurvendefinition
     /// </summary>
     [JsonProperty(Required = Required.Default, Order = 3, PropertyName = "code")]
     [JsonPropertyName("code")]
@@ -50,6 +54,7 @@ public class Leistungskurvendefinition : BusinessObject
     public string? Code { get; set; }
     
     /// <summary>
+    /// Häufigkeit der Übermittlung
     /// </summary>
     [JsonProperty(Required = Required.Default, Order = 4, PropertyName = "haeufigkeit")]
     [JsonPropertyName("haeufigkeit")]
@@ -58,6 +63,7 @@ public class Leistungskurvendefinition : BusinessObject
     public HaeufigkeitZaehlzeit? Haeufigkeit { get; set; }
     
     /// <summary>
+    /// Übermittelbarkeit der ausgerollten Leistungskurvendefinition
     /// </summary>
     [JsonProperty(PropertyName = "uebermittelbarkeit", Order = 5, Required = Required.Default)]
     [JsonPropertyName("uebermittelbarkeit")]
@@ -66,6 +72,7 @@ public class Leistungskurvendefinition : BusinessObject
     public UebermittelbarkeitZaehlzeit? Uebermittelbarkeit { get; set; }
     
     /// <summary>
+    /// oberer Schwellwert
     /// </summary>
     [JsonProperty(Required = Required.Default, Order = 6, PropertyName = "obererSchwellwert")]
     [JsonPropertyName("obererSchwellwert")]

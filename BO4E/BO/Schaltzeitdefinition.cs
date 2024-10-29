@@ -9,11 +9,13 @@ using ProtoBuf;
 namespace BO4E.BO;
 
 /// <summary>
+/// Eigenschaften der Schaltdefinition und einer ausgerollten Schaltzeitdefinitionen
 /// </summary>
 [ProtoContract]
 public class Schaltzeitdefinition : BusinessObject
 {
     /// <summary>
+    /// Ausgerollt oder nicht ausgerollt
     /// </summary>
     [JsonProperty(Required = Required.Default, Order = 1, PropertyName = "ausgerollt")]
     [JsonPropertyName("ausgerollt")]
@@ -33,6 +35,7 @@ public class Schaltzeitdefinition : BusinessObject
     }
     
     /// <summary>
+    /// Schaltzeitänderungszeitpunkt
     /// </summary>
     [JsonProperty(Required = Required.Default, Order = 2, PropertyName = "aenderungszeitpunkt")]
     [JsonPropertyName("aenderungszeitpunkt")]
@@ -42,6 +45,7 @@ public class Schaltzeitdefinition : BusinessObject
     public DateTimeOffset Aenderungszeitpunkt { get; set; }
     
     /// <summary>
+    /// Code der Schaltzeitdefinition
     /// </summary>
     [JsonProperty(Required = Required.Default, Order = 3, PropertyName = "code")]
     [JsonPropertyName("code")]
@@ -50,6 +54,7 @@ public class Schaltzeitdefinition : BusinessObject
     public string? Code { get; set; }
     
     /// <summary>
+    /// Häufigkeit der Übermittlung
     /// </summary>
     [JsonProperty(Required = Required.Default, Order = 4, PropertyName = "haeufigkeit")]
     [JsonPropertyName("haeufigkeit")]
@@ -58,6 +63,7 @@ public class Schaltzeitdefinition : BusinessObject
     public HaeufigkeitZaehlzeit? Haeufigkeit { get; set; }
     
     /// <summary>
+    /// Übermittelbarkeit der ausgerollten Schaltzeitdefinition
     /// </summary>
     [JsonProperty(PropertyName = "uebermittelbarkeit", Order = 5, Required = Required.Default)]
     [JsonPropertyName("uebermittelbarkeit")]
@@ -66,6 +72,7 @@ public class Schaltzeitdefinition : BusinessObject
     public UebermittelbarkeitZaehlzeit? Uebermittelbarkeit { get; set; }
     
     /// <summary>
+    /// Schalthandlung an der Lokation
     /// </summary>
     [JsonProperty(PropertyName = "schalthandlung", Order = 6, Required = Required.Default)]
     [JsonPropertyName("schalthandlung")]
