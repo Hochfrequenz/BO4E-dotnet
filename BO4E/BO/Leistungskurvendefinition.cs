@@ -10,7 +10,7 @@ using ProtoBuf;
 namespace BO4E.BO;
 
 /// <summary>
-/// Eigenschaften der Leistungskurvendefinition und einer ausgerollten Leistungskurvendefinition
+/// Eigenschaften einer (nicht) ausgerollten Leistungskurvendefinition
 /// </summary>
 [ProtoContract]
 public class Leistungskurvendefinition : BusinessObject
@@ -53,7 +53,7 @@ public class Leistungskurvendefinition : BusinessObject
     [JsonPropertyName("code")]
     [ProtoMember(13)]
     [JsonPropertyOrder(13)]
-    public string? Code { get; set; }
+    public string? LeistungskurvendefinitionsCode { get; set; }
     
     /// <summary>
     /// Häufigkeit der Übermittlung

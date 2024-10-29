@@ -10,7 +10,7 @@ using ProtoBuf;
 namespace BO4E.BO;
 
 /// <summary>
-/// Eigenschaften der Schaltdefinition und einer ausgerollten Schaltzeitdefinitionen
+/// Eigenschaften einer (nicht) ausgerollten Schaltzeitdefinition
 /// </summary>
 [ProtoContract]
 public class Schaltzeitdefinition : BusinessObject
@@ -53,7 +53,7 @@ public class Schaltzeitdefinition : BusinessObject
     [JsonPropertyName("code")]
     [ProtoMember(13)]
     [JsonPropertyOrder(13)]
-    public string? Code { get; set; }
+    public string? SchaltzeitdefinitionsCode { get; set; }
     
     /// <summary>
     /// Häufigkeit der Übermittlung
