@@ -49,8 +49,8 @@ public class Schaltzeitdefinition : BusinessObject
     /// Code der Schaltzeitdefinition
     /// </summary>
     [BoKey]
-    [JsonProperty(Required = Required.Default, Order = 13, PropertyName = "code")]
-    [JsonPropertyName("code")]
+    [JsonProperty(Required = Required.Default, Order = 13, PropertyName = "schaltzeitdefinitionscode")]
+    [JsonPropertyName("schaltzeitdefinitionscode")]
     [ProtoMember(13)]
     [JsonPropertyOrder(13)]
     public string? SchaltzeitdefinitionsCode { get; set; }

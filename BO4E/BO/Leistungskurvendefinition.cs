@@ -49,8 +49,8 @@ public class Leistungskurvendefinition : BusinessObject
     /// Code der Leistungskurvendefinition
     /// </summary>
     [BoKey]
-    [JsonProperty(Required = Required.Default, Order = 13, PropertyName = "code")]
-    [JsonPropertyName("code")]
+    [JsonProperty(Required = Required.Default, Order = 13, PropertyName = "leistungskurvendefinitionscode")]
+    [JsonPropertyName("leistungskurvendefinitionscode")]
     [ProtoMember(13)]
     [JsonPropertyOrder(13)]
     public string? LeistungskurvendefinitionsCode { get; set; }
