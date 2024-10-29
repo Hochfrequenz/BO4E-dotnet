@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Text.Json.Serialization;
 using BO4E.COM;
 using BO4E.ENUM;
@@ -97,7 +98,7 @@ public class Zaehlzeitdefinition : BusinessObject
     [JsonPropertyName("zaehlzeiten")]
     [ProtoMember(10)]
     [JsonPropertyOrder(10)]
-    public System.Collections.Generic.List<Zaehlzeit>? Zaehlzeiten { get; set; }
+    public List<Zaehlzeit>? Zaehlzeiten { get; set; }
 
     /// <summary>
     /// Liste der Zählzeitregister
@@ -106,7 +107,7 @@ public class Zaehlzeitdefinition : BusinessObject
     [JsonPropertyName("zaehlzeitregister")]
     [ProtoMember(11)]
     [JsonPropertyOrder(11)]
-    public System.Collections.Generic.List<Zaehlzeitregister> Zaehlzeitregister { get; set; }
+    public List<Zaehlzeitregister> Zaehlzeitregister { get; set; }
 
     /// <summary>
     /// Liste der ausgerollten Zählzeiten
@@ -115,5 +116,5 @@ public class Zaehlzeitdefinition : BusinessObject
     [JsonPropertyName("ausgerollteZaehlzeiten")]
     [ProtoMember(12)]
     [JsonPropertyOrder(12)]
-    public System.Collections.Generic.List<AusgerollteZaehlzeit> AusgerollteZaehlzeiten { get; set; }
+    public List<AusgerollteZaehlzeit> AusgerollteZaehlzeiten { get; set; }
 }
