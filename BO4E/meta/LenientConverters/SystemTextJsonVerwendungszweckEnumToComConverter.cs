@@ -26,15 +26,13 @@ public class SystemTextVerwendungszweckEnumToComConverter
         {
             return null;
         }
-
-        var result = new Verwendungszweck
-        {
-            Marktrolle = ENUM.Marktrolle.LF,
-            Zweck = new List<ENUM.Verwendungszweck>(),
-        };
-
         if (reader.TokenType == JsonTokenType.String)
         {
+            var result = new Verwendungszweck
+            {
+                Marktrolle = ENUM.Marktrolle.LF,
+                Zweck = new List<ENUM.Verwendungszweck>(),
+            };
             string stringValue = reader.GetString()!;
 
             // Adjust the string as per the Newtonsoft version
