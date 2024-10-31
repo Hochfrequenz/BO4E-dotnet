@@ -675,6 +675,7 @@ public class TestStringEnumConverter
             .NotBeNull()
             .And.ContainEquivalentOf(BO4E.ENUM.Verwendungszweck.MEHRMINDERMENGENABRECHNUNG);
 
+        settings.Converters.Add(new StringEnumConverter());
         var reSerializedJsonString = JsonConvert.SerializeObject(result, settings);
         reSerializedJsonString.Should().Contain("MEHRMINDERMENGENABRECHNUNG");
     }
@@ -698,7 +699,13 @@ public class TestStringEnumConverter
             .Foo?.Zweck.Should()
             .NotBeNull()
             .And.ContainEquivalentOf(BO4E.ENUM.Verwendungszweck.MEHRMINDERMENGENABRECHNUNG);
-        var reSerializedJsonString = JsonConvert.SerializeObject(result);
+        var reSerializedJsonString = JsonConvert.SerializeObject(
+            result,
+            new JsonSerializerSettings
+            {
+                Converters = new List<Newtonsoft.Json.JsonConverter> { new StringEnumConverter() },
+            }
+        );
         reSerializedJsonString.Should().Contain("MEHRMINDERMENGENABRECHNUNG");
     }
 
@@ -711,7 +718,11 @@ public class TestStringEnumConverter
     {
         var settings = new System.Text.Json.JsonSerializerOptions()
         {
-            Converters = { new SystemTextVerwendungszweckEnumToComConverter() },
+            Converters =
+            {
+                new SystemTextVerwendungszweckStringEnumConverter(),
+                new SystemTextVerwendungszweckEnumToComConverter(),
+            },
         };
         var result = System.Text.Json.JsonSerializer.Deserialize<ClassWithComVerwendungszweck>(
             jsonString,

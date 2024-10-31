@@ -61,6 +61,39 @@ public class NewtonsoftVerwendungszweckEnumToComConverter
             );
             return result;
         }
-        return JToken.ReadFrom(reader).ToObject<BO4E.COM.Verwendungszweck>();
+
+        int? stringEnumConverterIndex = null;
+        foreach (var converter in serializer.Converters)
+        {
+            if (converter is NewtonsoftVerwendungszweckStringEnumConverter)
+            {
+                stringEnumConverterIndex = serializer.Converters.IndexOf(converter);
+                break;
+            }
+        }
+        int? thisConverterIndex =
+            serializer.Converters.IndexOf(this) == -1 ? null : serializer.Converters.IndexOf(this);
+
+        if (stringEnumConverterIndex == null)
+        {
+            serializer.Converters.Add(new NewtonsoftVerwendungszweckStringEnumConverter());
+            ;
+        }
+        if (thisConverterIndex != null)
+        {
+            serializer.Converters.RemoveAt(thisConverterIndex.Value);
+        }
+        // Delegate to the default behavior for complex objects or other token types
+        var objectResult = JToken.ReadFrom(reader).ToObject<BO4E.COM.Verwendungszweck>(serializer);
+        if (thisConverterIndex != null)
+        {
+            serializer.Converters.Insert(thisConverterIndex.Value, this);
+        }
+        if (stringEnumConverterIndex == null)
+        {
+            serializer.Converters.RemoveAt(serializer.Converters.Count - 1);
+        }
+
+        return objectResult;
     }
 }

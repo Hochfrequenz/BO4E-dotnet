@@ -90,7 +90,7 @@ public class SystemTextVerwendungszweckEnumToComConverter
             }
             clonedOptions.Converters.Add(converter);
         }
-
+        clonedOptions.Converters.Add(new SystemTextVerwendungszweckStringEnumConverter());
         return clonedOptions;
     }
 
