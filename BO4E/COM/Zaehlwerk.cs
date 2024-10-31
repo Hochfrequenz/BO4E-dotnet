@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Text.Json.Serialization;
 using BO4E.ENUM;
 using BO4E.meta;
-using BO4E.meta.LenientConverters;
 using Newtonsoft.Json;
 using ProtoBuf;
 
@@ -88,8 +87,6 @@ public class Zaehlwerk : COM
     [NonOfficial(NonOfficialCategory.CUSTOMER_REQUIREMENTS)]
     [ProtoMember(1011)]
     [JsonPropertyOrder(1011)]
-    [System.Text.Json.Serialization.JsonConverter(typeof(SystemTextVerwendungszweckEnumToComConverter))]
-    [Newtonsoft.Json.JsonConverter(typeof(NewtonsoftVerwendungszweckEnumToComConverter))]
     public List<Verwendungszweck>? Verwendungszwecke { get; set; }
 
     /// <summary>Stromverbrauchsart/Verbrauchsart Marktlokation</summary>
