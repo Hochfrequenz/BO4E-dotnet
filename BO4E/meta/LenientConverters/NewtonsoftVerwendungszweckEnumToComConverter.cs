@@ -42,13 +42,13 @@ public class NewtonsoftVerwendungszweckEnumToComConverter
             return null;
         }
 
-        var result = new BO4E.COM.Verwendungszweck
-        {
-            Marktrolle = ENUM.Marktrolle.LF,
-            Zweck = new List<ENUM.Verwendungszweck>(),
-        };
         if (reader.TokenType == JsonToken.String)
         {
+            var result = new BO4E.COM.Verwendungszweck
+            {
+                Marktrolle = ENUM.Marktrolle.LF,
+                Zweck = new List<ENUM.Verwendungszweck>(),
+            };
             var stringValue = (string)reader.Value!;
             // we don't want to interfere or re-add the famous and beloved NewtonsoftVerwendungszweckStringEnumConverter
             stringValue = stringValue.Replace(
