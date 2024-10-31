@@ -12,6 +12,8 @@ namespace BO4E.COM;
 /// </summary>
 [ProtoContract]
 [NonOfficial(NonOfficialCategory.REGULATORY_REQUIREMENTS)]
+[System.Text.Json.Serialization.JsonConverter(typeof(SystemTextVerwendungszweckEnumToComConverter))]
+[Newtonsoft.Json.JsonConverter(typeof(NewtonsoftVerwendungszweckEnumToComConverter))]
 public class Verwendungszweck : COM
 {
     /// <summary>
@@ -28,7 +30,5 @@ public class Verwendungszweck : COM
     [JsonProperty(PropertyName = "zweck")]
     [JsonPropertyName("zweck")]
     [ProtoMember(4)]
-    [System.Text.Json.Serialization.JsonConverter(typeof(SystemTextVerwendungszweckEnumToComConverter))]
-    [Newtonsoft.Json.JsonConverter(typeof(NewtonsoftVerwendungszweckEnumToComConverter))]
     public List<ENUM.Verwendungszweck>? Zweck { get; set; }
 }
