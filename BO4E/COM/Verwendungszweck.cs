@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using System.Text.Json.Serialization;
 using BO4E.meta;
+using BO4E.meta.LenientConverters;
 using Newtonsoft.Json;
 using ProtoBuf;
 
@@ -27,5 +28,7 @@ public class Verwendungszweck : COM
     [JsonProperty(PropertyName = "zweck")]
     [JsonPropertyName("zweck")]
     [ProtoMember(4)]
+    [System.Text.Json.Serialization.JsonConverter(typeof(SystemTextVerwendungszweckEnumToComConverter))]
+    [Newtonsoft.Json.JsonConverter(typeof(NewtonsoftVerwendungszweckEnumToComConverter))]
     public List<ENUM.Verwendungszweck>? Zweck { get; set; }
 }
