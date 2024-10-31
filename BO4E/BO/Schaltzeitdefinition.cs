@@ -23,8 +23,7 @@ public class Schaltzeitdefinition : BusinessObject
     [ProtoMember(10)]
     [JsonPropertyOrder(10)]
     public bool? Ausgerollt { get; set; }
-    
-    
+
     [Newtonsoft.Json.JsonIgnore]
     [System.Text.Json.Serialization.JsonIgnore]
     [ProtoMember(11, Name = nameof(Aenderungszeitpunkt))]
@@ -34,7 +33,7 @@ public class Schaltzeitdefinition : BusinessObject
         get => Aenderungszeitpunkt.UtcDateTime;
         set => Aenderungszeitpunkt = DateTime.SpecifyKind(value, DateTimeKind.Utc);
     }
-    
+
     /// <summary>
     /// Schaltzeitänderungszeitpunkt
     /// </summary>
@@ -44,17 +43,21 @@ public class Schaltzeitdefinition : BusinessObject
     [JsonPropertyOrder(12)]
     [ProtoIgnore]
     public DateTimeOffset Aenderungszeitpunkt { get; set; }
-    
+
     /// <summary>
     /// Code der Schaltzeitdefinition
     /// </summary>
     [BoKey]
-    [JsonProperty(Required = Required.Default, Order = 13, PropertyName = "schaltzeitdefinitionscode")]
+    [JsonProperty(
+        Required = Required.Default,
+        Order = 13,
+        PropertyName = "schaltzeitdefinitionscode"
+    )]
     [JsonPropertyName("schaltzeitdefinitionscode")]
     [ProtoMember(13)]
     [JsonPropertyOrder(13)]
     public string? SchaltzeitdefinitionsCode { get; set; }
-    
+
     /// <summary>
     /// Häufigkeit der Übermittlung
     /// </summary>
@@ -63,7 +66,7 @@ public class Schaltzeitdefinition : BusinessObject
     [ProtoMember(14)]
     [JsonPropertyOrder(14)]
     public HaeufigkeitZaehlzeit? Haeufigkeit { get; set; }
-    
+
     /// <summary>
     /// Übermittelbarkeit der ausgerollten Schaltzeitdefinition
     /// </summary>
@@ -72,7 +75,7 @@ public class Schaltzeitdefinition : BusinessObject
     [ProtoMember(15)]
     [JsonPropertyOrder(15)]
     public UebermittelbarkeitZaehlzeit? Uebermittelbarkeit { get; set; }
-    
+
     /// <summary>
     /// Schalthandlung an der Lokation
     /// </summary>
