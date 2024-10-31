@@ -21,7 +21,7 @@ public class Statusbericht : BusinessObject
     [JsonPropertyName("status")]
     [JsonPropertyOrder(10)]
     [ProtoMember(1)]
-    public BO4E.ENUM.BerichtStatus Status { get; set; }
+    public BO4E.ENUM.BerichtStatus? Status { get; set; }
 
     /// <summary>
     ///    Das geprüfte Dokument, z.B. die Referenz auf die EDIFACT-Nachricht die geprüft / beanstandet wurde
