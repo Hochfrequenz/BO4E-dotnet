@@ -635,6 +635,57 @@ public class TestStringEnumConverter
         result.Foo.Should().BeNull();
     }
 
+    public class ClassWithListOfVerwendungszweck
+    {
+        public List<Verwendungszweck>? Foo { get; set; }
+    }
+
+    [TestMethod]
+    [DataRow("MEHRMINDERMENGENABRECHNUNG", Verwendungszweck.MEHRMINDERMENGENABRECHNUNG)]
+    [DataRow("MEHRMINDERMBENGENABRECHNUNG", Verwendungszweck.MEHRMINDERMENGENABRECHNUNG)]
+    public void Test_Newtonsoft_List_of_Verwendungszweck_Conversion(
+        string? jsonValue,
+        Verwendungszweck expectedVerwendungszweck
+    )
+    {
+        var jsonString = "{\"Foo\": [\"" + jsonValue + "\"]}";
+        var result = JsonConvert.DeserializeObject<ClassWithListOfVerwendungszweck>(jsonString);
+        result.Should().NotBeNull();
+        result.Foo.Should().NotBeNullOrEmpty().And.ContainInOrder(expectedVerwendungszweck);
+    }
+
+    [TestMethod]
+    public void Test_Newtonsoft_List_of_Verwendungszweck_Conversion_With_Null()
+    {
+        var jsonString = "{\"Foo\": null}";
+        var result = JsonConvert.DeserializeObject<ClassWithListOfVerwendungszweck>(jsonString);
+        result.Should().NotBeNull();
+        result.Foo.Should().BeNull();
+    }
+
+    [TestMethod]
+    [DataRow("MEHRMINDERMENGENABRECHNUNG", Verwendungszweck.MEHRMINDERMENGENABRECHNUNG)]
+    [DataRow("MEHRMINDERMBENGENABRECHNUNG", Verwendungszweck.MEHRMINDERMENGENABRECHNUNG)]
+    public void Test_SystemText_List_of_Verwendungszweck_Conversion(
+        string? jsonValue,
+        Verwendungszweck expectedVerwendungszweck
+    )
+    {
+        var jsonString = "{\"Foo\": [\"" + jsonValue + "\"]}";
+        var result = JsonSerializer.Deserialize<ClassWithListOfVerwendungszweck>(jsonString);
+        result.Should().NotBeNull();
+        result.Foo.Should().NotBeNullOrEmpty().And.ContainInOrder(expectedVerwendungszweck);
+    }
+
+    [TestMethod]
+    public void Test_SystemText_List_of_Verwendungszweck_Conversion_With_Null()
+    {
+        var jsonString = "{\"Foo\": null}";
+        var result = JsonSerializer.Deserialize<ClassWithListOfVerwendungszweck>(jsonString);
+        result.Should().NotBeNull();
+        result.Foo.Should().BeNull();
+    }
+
     public class ClassWithComVerwendungszweck
     {
         public BO4E.COM.Verwendungszweck? Foo { get; set; }
