@@ -634,4 +634,133 @@ public class TestStringEnumConverter
         result.Should().NotBeNull();
         result.Foo.Should().BeNull();
     }
+
+    public class ClassWithComVerwendungszweck
+    {
+        public BO4E.COM.Verwendungszweck? Foo { get; set; }
+    }
+
+    public class ClassWithAnnotatedComVerwendungszweck
+    {
+        [System.Text.Json.Serialization.JsonConverter(
+            typeof(SystemTextVerwendungszweckEnumToComConverter)
+        )]
+        [Newtonsoft.Json.JsonConverter(typeof(NewtonsoftVerwendungszweckEnumToComConverter))]
+        public BO4E.COM.Verwendungszweck? Foo { get; set; }
+    }
+
+    [TestMethod]
+    [DataRow("{\"Foo\": \"MEHRMINDERMENGENABRECHNUNG\"}")]
+    [DataRow("{\"Foo\": \"MEHRMINDERMBENGENABRECHNUNG\"}")]
+    [DataRow("{\"Foo\": {\"zweck\":[\"MEHRMINDERMENGENABRECHNUNG\"]}}")]
+    [DataRow("{\"Foo\": {\"zweck\":[\"MEHRMINDERMBENGENABRECHNUNG\"]}}")]
+    public void Test_Newtonsoft_VerwendungszweckEnum_To_COM_Converter(string jsonString)
+    {
+        var settings = new Newtonsoft.Json.JsonSerializerSettings
+        {
+            Converters = new List<Newtonsoft.Json.JsonConverter>
+            {
+                new NewtonsoftVerwendungszweckEnumToComConverter(),
+            },
+        };
+        var result = JsonConvert.DeserializeObject<ClassWithComVerwendungszweck>(
+            jsonString,
+            settings
+        );
+        result
+            .Should()
+            .NotBeNull()
+            .And.Subject.As<ClassWithComVerwendungszweck>()
+            .Foo?.Zweck.Should()
+            .NotBeNull()
+            .And.ContainEquivalentOf(BO4E.ENUM.Verwendungszweck.MEHRMINDERMENGENABRECHNUNG);
+
+        settings.Converters.Add(new StringEnumConverter());
+        var reSerializedJsonString = JsonConvert.SerializeObject(result, settings);
+        reSerializedJsonString.Should().Contain("MEHRMINDERMENGENABRECHNUNG");
+    }
+
+    [TestMethod]
+    [DataRow("{\"Foo\": \"MEHRMINDERMENGENABRECHNUNG\"}")]
+    [DataRow("{\"Foo\": \"MEHRMINDERMBENGENABRECHNUNG\"}")]
+    [DataRow("{\"Foo\": {\"zweck\":[\"MEHRMINDERMENGENABRECHNUNG\"]}}")]
+    [DataRow("{\"Foo\": {\"zweck\":[\"MEHRMINDERMBENGENABRECHNUNG\"]}}")]
+    public void Test_Newtonsoft_VerwendungszweckEnum_To_COM_Converter_With_Annotated_Property(
+        string jsonString
+    )
+    {
+        var result = JsonConvert.DeserializeObject<ClassWithAnnotatedComVerwendungszweck>(
+            jsonString
+        );
+        result
+            .Should()
+            .NotBeNull()
+            .And.Subject.As<ClassWithAnnotatedComVerwendungszweck>()
+            .Foo?.Zweck.Should()
+            .NotBeNull()
+            .And.ContainEquivalentOf(BO4E.ENUM.Verwendungszweck.MEHRMINDERMENGENABRECHNUNG);
+        var reSerializedJsonString = JsonConvert.SerializeObject(
+            result,
+            new JsonSerializerSettings
+            {
+                Converters = new List<Newtonsoft.Json.JsonConverter> { new StringEnumConverter() },
+            }
+        );
+        reSerializedJsonString.Should().Contain("MEHRMINDERMENGENABRECHNUNG");
+    }
+
+    [TestMethod]
+    [DataRow("{\"Foo\": \"MEHRMINDERMENGENABRECHNUNG\"}")]
+    [DataRow("{\"Foo\": \"MEHRMINDERMBENGENABRECHNUNG\"}")]
+    [DataRow("{\"Foo\": {\"zweck\":[\"MEHRMINDERMENGENABRECHNUNG\"]}}")]
+    [DataRow("{\"Foo\": {\"zweck\":[\"MEHRMINDERMBENGENABRECHNUNG\"]}}")]
+    public void Test_STJ_VerwendungszweckEnum_To_COM_Converter(string jsonString)
+    {
+        var settings = new System.Text.Json.JsonSerializerOptions()
+        {
+            Converters =
+            {
+                new SystemTextVerwendungszweckStringEnumConverter(),
+                new SystemTextVerwendungszweckEnumToComConverter(),
+            },
+        };
+        var result = System.Text.Json.JsonSerializer.Deserialize<ClassWithComVerwendungszweck>(
+            jsonString,
+            settings
+        );
+        result
+            .Should()
+            .NotBeNull()
+            .And.Subject.As<ClassWithComVerwendungszweck>()
+            .Foo?.Zweck.Should()
+            .NotBeNull()
+            .And.ContainEquivalentOf(BO4E.ENUM.Verwendungszweck.MEHRMINDERMENGENABRECHNUNG);
+
+        var reSerializedJsonString = System.Text.Json.JsonSerializer.Serialize(result, settings);
+        reSerializedJsonString.Should().Contain("MEHRMINDERMENGENABRECHNUNG");
+    }
+
+    [TestMethod]
+    [DataRow("{\"Foo\": \"MEHRMINDERMENGENABRECHNUNG\"}")]
+    [DataRow("{\"Foo\": \"MEHRMINDERMBENGENABRECHNUNG\"}")]
+    [DataRow("{\"Foo\": {\"zweck\":[\"MEHRMINDERMENGENABRECHNUNG\"]}}")]
+    [DataRow("{\"Foo\": {\"zweck\":[\"MEHRMINDERMBENGENABRECHNUNG\"]}}")]
+    public void Test_STJ_VerwendungszweckEnum_To_COM_Converter_With_Annotated_Property(
+        string jsonString
+    )
+    {
+        var result =
+            System.Text.Json.JsonSerializer.Deserialize<ClassWithAnnotatedComVerwendungszweck>(
+                jsonString
+            );
+        result
+            .Should()
+            .NotBeNull()
+            .And.Subject.As<ClassWithAnnotatedComVerwendungszweck>()
+            .Foo?.Zweck.Should()
+            .NotBeNull()
+            .And.ContainEquivalentOf(BO4E.ENUM.Verwendungszweck.MEHRMINDERMENGENABRECHNUNG);
+        var reSerializedJsonString = System.Text.Json.JsonSerializer.Serialize(result);
+        reSerializedJsonString.Should().Contain("MEHRMINDERMENGENABRECHNUNG");
+    }
 }
