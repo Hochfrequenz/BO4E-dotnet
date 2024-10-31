@@ -763,4 +763,40 @@ public class TestStringEnumConverter
         var reSerializedJsonString = System.Text.Json.JsonSerializer.Serialize(result);
         reSerializedJsonString.Should().Contain("MEHRMINDERMENGENABRECHNUNG");
     }
+
+    [TestMethod]
+    [DataRow("{\"verwendungszwecke\": [{\"zwecke\":\"MEHRMINDERMENGENABRECHNUNG\"}]")]
+    public void Test_STJ_VerwendungszweckEnum_To_COM_Converter_With_Annotated_Property_At_Zaehlwerk(
+        string jsonString
+    )
+    {
+        var result = System.Text.Json.JsonSerializer.Deserialize<BO4E.COM.Zaehlwerk>(jsonString);
+        result
+            .Should()
+            .NotBeNull()
+            .And.Subject.As<BO4E.COM.Zaehlwerk>()
+            .Verwendungszwecke?.Should()
+            .NotBeNull()
+            .And.ContainEquivalentOf(BO4E.ENUM.Verwendungszweck.MEHRMINDERMENGENABRECHNUNG);
+        var reSerializedJsonString = System.Text.Json.JsonSerializer.Serialize(result);
+        reSerializedJsonString.Should().Contain("MEHRMINDERMENGENABRECHNUNG");
+    }
+
+    [TestMethod]
+    [DataRow("{\"verwendungszwecke\": [{\"zwecke\":\"MEHRMINDERMENGENABRECHNUNG\"}]")]
+    public void Test_Newtonsoft_VerwendungszweckEnum_To_COM_Converter_With_Annotated_Property_At_Zaehlwerk(
+        string jsonString
+    )
+    {
+        var result = Newtonsoft.Json.JsonConvert.DeserializeObject<BO4E.COM.Zaehlwerk>(jsonString);
+        result
+            .Should()
+            .NotBeNull()
+            .And.Subject.As<BO4E.COM.Zaehlwerk>()
+            .Verwendungszwecke?.Should()
+            .NotBeNull()
+            .And.ContainEquivalentOf(BO4E.ENUM.Verwendungszweck.MEHRMINDERMENGENABRECHNUNG);
+        var reSerializedJsonString = Newtonsoft.Json.JsonConvert.SerializeObject(result);
+        reSerializedJsonString.Should().Contain("MEHRMINDERMENGENABRECHNUNG");
+    }
 }
