@@ -223,11 +223,20 @@ public class Rechnungsposition : COM
     }
 
     /// <summary>
-    /// Das Datum an dem die Leistung erbracht wurde.
+    /// Das Datum, an dem die Leistung erbracht wurde.
     /// </summary>
     [JsonProperty("ausfuehrungsdatum", Order = 29)]
     [JsonPropertyName("ausfuehrungsdatum")]
     [JsonPropertyOrder(29)]
     [ProtoIgnore]
     public DateTimeOffset? Ausfuehrungsdatum { get; set; }
+
+    /// <summary>
+    /// Gesamtzu- oder abschlagsbetrag
+    /// </summary>
+    [JsonProperty("gesamtzuabschlagsbetrag", Order = 30)]
+    [JsonPropertyName("gesamtzuabschlagsbetrag")]
+    [ProtoMember(30)]
+    [JsonPropertyOrder(30)]
+    public decimal? GesamtZuAbschlagsbetrag { get; set; }
 }
