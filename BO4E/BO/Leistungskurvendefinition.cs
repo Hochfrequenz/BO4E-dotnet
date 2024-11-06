@@ -23,8 +23,7 @@ public class Leistungskurvendefinition : BusinessObject
     [ProtoMember(10)]
     [JsonPropertyOrder(10)]
     public bool? Ausgerollt { get; set; }
-    
-    
+
     [Newtonsoft.Json.JsonIgnore]
     [System.Text.Json.Serialization.JsonIgnore]
     [ProtoMember(11, Name = nameof(Aenderungszeitpunkt))]
@@ -34,7 +33,7 @@ public class Leistungskurvendefinition : BusinessObject
         get => Aenderungszeitpunkt.UtcDateTime;
         set => Aenderungszeitpunkt = DateTime.SpecifyKind(value, DateTimeKind.Utc);
     }
-    
+
     /// <summary>
     /// Leistungskurvenänderungszeitpunkt
     /// </summary>
@@ -44,17 +43,21 @@ public class Leistungskurvendefinition : BusinessObject
     [JsonPropertyOrder(12)]
     [ProtoIgnore]
     public DateTimeOffset Aenderungszeitpunkt { get; set; }
-    
+
     /// <summary>
     /// Code der Leistungskurvendefinition
     /// </summary>
     [BoKey]
-    [JsonProperty(Required = Required.Default, Order = 13, PropertyName = "leistungskurvendefinitionscode")]
+    [JsonProperty(
+        Required = Required.Default,
+        Order = 13,
+        PropertyName = "leistungskurvendefinitionscode"
+    )]
     [JsonPropertyName("leistungskurvendefinitionscode")]
     [ProtoMember(13)]
     [JsonPropertyOrder(13)]
     public string? LeistungskurvendefinitionsCode { get; set; }
-    
+
     /// <summary>
     /// Häufigkeit der Übermittlung
     /// </summary>
@@ -63,7 +66,7 @@ public class Leistungskurvendefinition : BusinessObject
     [ProtoMember(14)]
     [JsonPropertyOrder(14)]
     public HaeufigkeitZaehlzeit? Haeufigkeit { get; set; }
-    
+
     /// <summary>
     /// Übermittelbarkeit der ausgerollten Leistungskurvendefinition
     /// </summary>
@@ -72,7 +75,7 @@ public class Leistungskurvendefinition : BusinessObject
     [ProtoMember(15)]
     [JsonPropertyOrder(15)]
     public UebermittelbarkeitZaehlzeit? Uebermittelbarkeit { get; set; }
-    
+
     /// <summary>
     /// oberer Schwellwert
     /// </summary>
