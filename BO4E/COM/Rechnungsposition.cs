@@ -239,4 +239,24 @@ public class Rechnungsposition : COM
     [ProtoMember(30)]
     [JsonPropertyOrder(30)]
     public decimal? GesamtZuAbschlagsbetrag { get; set; }
+
+    /// <summary>
+    /// Zuschlag
+    /// </summary>
+    [JsonProperty("zuschlag", Order = 31)]
+    [JsonPropertyName("zuschlag")]
+    [ProtoMember(31)]
+    [JsonPropertyOrder(31)]
+    public decimal? Zuschlag { get; set; }
+
+    /// <summary>
+    /// Abschlag
+    /// </summary>
+    [JsonProperty("abschlag", Order = 32)]
+    [JsonPropertyName("abschlag")]
+    [ProtoMember(32)]
+    [JsonPropertyOrder(32)]
+    public decimal? Abschlag { get; set; }
+
+
 }
