@@ -257,6 +257,4 @@ public class Rechnungsposition : COM
     [ProtoMember(32)]
     [JsonPropertyOrder(32)]
     public decimal? Abschlag { get; set; }
-
-
 }
