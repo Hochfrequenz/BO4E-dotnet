@@ -1,6 +1,7 @@
 using System.IO;
 using BO4E.BO;
 using BO4E.meta.LenientConverters;
+using FluentAssertions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using JsonSerializer = System.Text.Json.JsonSerializer;
 
@@ -22,5 +23,14 @@ public class TestAutoNumberConverter
 
         var vertrag = JsonSerializer.Deserialize<Vertrag>(jsonString, options);
         Assert.IsNotNull(vertrag);
+    }
+
+    [TestMethod]
+    [DataRow("{\"versionStruktur\": \"12\"}")]
+    [DataRow("{\"versionStruktur\": 12}")]
+    public void Test_Annotation_STJ(string jsonString)
+    {
+        var malo = System.Text.Json.JsonSerializer.Deserialize<Marktlokation>(jsonString);
+        malo.Should().NotBeNull().And.Subject.As<Marktlokation>().VersionStruktur.Should().Be("12");
     }
 }
