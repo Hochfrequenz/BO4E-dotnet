@@ -6,6 +6,7 @@ using System.Text.Json;
 using System.Text.Json.Serialization;
 using BO4E.COM;
 using BO4E.meta;
+using BO4E.meta.LenientConverters;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using Newtonsoft.Json.Schema;
@@ -147,6 +148,7 @@ public abstract class BusinessObject : IUserProperties, IOptionalGuid
     [JsonPropertyName("versionStruktur")]
     [JsonPropertyOrder(2)]
     [ProtoMember(2)]
+    [System.Text.Json.Serialization.JsonConverter(typeof(AutoNumberToStringConverter))]
     public string? VersionStruktur { get; set; }
 
     /// <summary>
