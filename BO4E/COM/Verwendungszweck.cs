@@ -16,10 +16,10 @@ public class Verwendungszweck : COM
     /// <summary>
     ///     rollencodenummer von Marktrolle
     /// </summary>
-    [JsonProperty(PropertyName = "marktrolle", Required = Required.Always)]
+    [JsonProperty(PropertyName = "marktrolle")]
     [JsonPropertyName("marktrolle")]
     [ProtoMember(3)]
-    public ENUM.Marktrolle Marktrolle { get; set; }
+    public ENUM.Marktrolle? Marktrolle { get; set; }
 
     /// <summary>
     ///     code von Marktrolle
