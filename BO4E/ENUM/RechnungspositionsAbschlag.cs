@@ -8,13 +8,13 @@ namespace BO4E.ENUM;
 public enum RechnungspositionsAbschlag
 {
     /// <summary>
-    /// Gemeinderabatt nach Konzessionsabgabenverordnung
+    /// Gemeinderabatt nach Konzessionsabgabenverordnung [Z01]
     /// </summary>
     [EnumMember(Value = "GEMEINDERABATT")]
     GEMEINDERABATT,
 
     /// <summary>
-    /// Anpassung nach § 19, Absatz 2 Stromnetzentgeltverordnung
+    /// Anpassung nach § 19, Absatz 2 Stromnetzentgeltverordnung [Z04]
     /// </summary>
     [EnumMember(Value = "ANPASSUNG")]
     ANPASSUNG,
