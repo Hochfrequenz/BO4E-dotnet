@@ -22,8 +22,8 @@ public enum RechnungspositionsZuschlag
     /// <summary>
     /// Anpassung nach § 19, Absatz 2 Stromnetzentgeltverordnung [Z04]
     /// </summary>
-    [EnumMember(Value = "ANPASSUNG")]
-    ANPASSUNG,
+    [EnumMember(Value = "ZUSCHLAG_ANPASSUNG")]
+    ZUSCHLAG_ANPASSUNG,
 
     /// <summary>
     /// Anpassung Pauschale Netzentgeltreduzierung nach § 14a EnWG auf Höhe der NNE [Z05]

@@ -16,6 +16,6 @@ public enum RechnungspositionsAbschlag
     /// <summary>
     /// Anpassung nach § 19, Absatz 2 Stromnetzentgeltverordnung [Z04]
     /// </summary>
-    [EnumMember(Value = "ANPASSUNG")]
-    ANPASSUNG,
+    [EnumMember(Value = "ABSCHLAG_ANPASSUNG")]
+    ABSCHLAG_ANPASSUNG,
 }
