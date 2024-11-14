@@ -14,6 +14,7 @@ public enum SteuerkanalsLeistungsbeschreibung
     /// </summary>
     /// <remarks>EDIFACT : CAV+ZF2:Z14</remarks>
     [EnumMember(Value = "AN_AUS")]
+    [System.Text.Json.Serialization.JsonStringEnumMemberName("AN_AUS")]
     AN_AUS,
 
     /// <summary>
@@ -21,5 +22,6 @@ public enum SteuerkanalsLeistungsbeschreibung
     /// </summary>
     /// <remarks>EDIFACT : CAV+ZF2:Z15</remarks>
     [EnumMember(Value = "GESTUFT")]
+    [System.Text.Json.Serialization.JsonStringEnumMemberName("GESTUFT")]
     GESTUFT,
 }

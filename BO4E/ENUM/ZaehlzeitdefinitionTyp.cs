@@ -12,6 +12,7 @@ public enum ZaehlzeitdefinitionTyp
     /// </summary>
     /// <remarks>Z29</remarks>
     [EnumMember(Value = "WAERMEPUMPE")]
+    [System.Text.Json.Serialization.JsonStringEnumMemberName("WAERMEPUMPE")]
     WAERMEPUMPE,
 
     /// <summary>
@@ -19,6 +20,7 @@ public enum ZaehlzeitdefinitionTyp
     /// </summary>
     /// <remarks>Z30</remarks>
     [EnumMember(Value = "NACHTSPEICHERHEIZUNG")]
+    [System.Text.Json.Serialization.JsonStringEnumMemberName("NACHTSPEICHERHEIZUNG")]
     NACHTSPEICHERHEIZUNG,
 
     /// <summary>
@@ -26,6 +28,7 @@ public enum ZaehlzeitdefinitionTyp
     /// </summary>
     /// <remarks>Z31</remarks>
     [EnumMember(Value = "SCHWACHLASTZEITFENSTER")]
+    [System.Text.Json.Serialization.JsonStringEnumMemberName("SCHWACHLASTZEITFENSTER")]
     SCHWACHLASTZEITFENSTER,
 
     /// <summary>
@@ -33,6 +36,7 @@ public enum ZaehlzeitdefinitionTyp
     /// </summary>
     /// <remarks>Z32</remarks>
     [EnumMember(Value = "SONSTIGE")]
+    [System.Text.Json.Serialization.JsonStringEnumMemberName("SONSTIGE")]
     SONSTIGE,
 
     /// <summary>
@@ -40,5 +44,6 @@ public enum ZaehlzeitdefinitionTyp
     /// </summary>
     /// <remarks>Z35</remarks>
     [EnumMember(Value = "HOCHLASTZEITFENSTER")]
+    [System.Text.Json.Serialization.JsonStringEnumMemberName("HOCHLASTZEITFENSTER")]
     HOCHLASTZEITFENSTER,
 }

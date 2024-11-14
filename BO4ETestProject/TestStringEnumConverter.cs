@@ -22,18 +22,22 @@ public enum LegacyGasQualitaet
 {
     /// <summary>High Caloric Gas</summary>
     [EnumMember(Value = "H_GAS")]
+    [System.Text.Json.Serialization.JsonStringEnumMemberName("H_GAS")]
     H_GAS = 1,
 
     /// <summary>Low Caloric Gas</summary>
     [EnumMember(Value = "L_GAS")]
+    [System.Text.Json.Serialization.JsonStringEnumMemberName("L_GAS")]
     L_GAS = 2,
 
     /// <summary>High Caloric Gas</summary>
     [EnumMember(Value = "HGAS")]
+    [System.Text.Json.Serialization.JsonStringEnumMemberName("HGAS")]
     HGAS = 1,
 
     /// <summary>Low Caloric Gas</summary>
     [EnumMember(Value = "LGAS")]
+    [System.Text.Json.Serialization.JsonStringEnumMemberName("LGAS")]
     LGAS = 2,
 }
 

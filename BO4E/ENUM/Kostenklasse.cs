@@ -20,6 +20,7 @@ public enum Kostenklasse
     [System.Text.Json.Serialization.JsonIgnore]
 #pragma warning disable CS1591 // Missing XML comment for publicly visible type or member
     [EnumMember(Value = "ZERO")]
+    [System.Text.Json.Serialization.JsonStringEnumMemberName("ZERO")]
     ZERO,
 
 #pragma warning restore CS1591 // Missing XML comment for publicly visible type or member

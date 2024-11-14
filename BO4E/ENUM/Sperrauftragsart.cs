@@ -14,6 +14,7 @@ public enum Sperrauftragsart
     /// </summary>
     /// <remarks>EDIFACT Z51 in Nachricht 17115/17116</remarks>
     [EnumMember(Value = "SPERREN")]
+    [System.Text.Json.Serialization.JsonStringEnumMemberName("SPERREN")]
     SPERREN,
 
     /// <summary>
@@ -21,5 +22,6 @@ public enum Sperrauftragsart
     /// </summary>
     /// <remarks>EDIFACT Z52 in Nachricht 17117</remarks>
     [EnumMember(Value = "ENTSPERREN")]
+    [System.Text.Json.Serialization.JsonStringEnumMemberName("ENTSPERREN")]
     ENTSPERREN,
 }

@@ -13,6 +13,7 @@ public enum Vertragstatus
     /// </summary>
     [ProtoEnum(Name = nameof(Vertragstatus) + "_" + nameof(IN_ARBEIT))]
     [EnumMember(Value = "IN_ARBEIT")]
+    [System.Text.Json.Serialization.JsonStringEnumMemberName("IN_ARBEIT")]
     IN_ARBEIT,
 
     /// <summary>
@@ -20,6 +21,7 @@ public enum Vertragstatus
     /// </summary>
     [ProtoEnum(Name = nameof(Vertragstatus) + "_" + nameof(UEBERMITTELT))]
     [EnumMember(Value = "UEBERMITTELT")]
+    [System.Text.Json.Serialization.JsonStringEnumMemberName("UEBERMITTELT")]
     UEBERMITTELT,
 
     /// <summary>
@@ -27,6 +29,7 @@ public enum Vertragstatus
     /// </summary>
     [ProtoEnum(Name = nameof(Vertragstatus) + "_" + nameof(ANGENOMMEN))]
     [EnumMember(Value = "ANGENOMMEN")]
+    [System.Text.Json.Serialization.JsonStringEnumMemberName("ANGENOMMEN")]
     ANGENOMMEN,
 
     /// <summary>
@@ -34,6 +37,7 @@ public enum Vertragstatus
     /// </summary>
     [ProtoEnum(Name = nameof(Vertragstatus) + "_" + nameof(AKTIV))]
     [EnumMember(Value = "AKTIV")]
+    [System.Text.Json.Serialization.JsonStringEnumMemberName("AKTIV")]
     AKTIV,
 
     /// <summary>
@@ -41,6 +45,7 @@ public enum Vertragstatus
     /// </summary>
     [ProtoEnum(Name = nameof(Vertragstatus) + "_" + nameof(ABGELEHNT))]
     [EnumMember(Value = "ABGELEHNT")]
+    [System.Text.Json.Serialization.JsonStringEnumMemberName("ABGELEHNT")]
     ABGELEHNT,
 
     /// <summary>
@@ -48,6 +53,7 @@ public enum Vertragstatus
     /// </summary>
     [ProtoEnum(Name = nameof(Vertragstatus) + "_" + nameof(WIDERRUFEN))]
     [EnumMember(Value = "WIDERRUFEN")]
+    [System.Text.Json.Serialization.JsonStringEnumMemberName("WIDERRUFEN")]
     WIDERRUFEN,
 
     /// <summary>
@@ -55,6 +61,7 @@ public enum Vertragstatus
     /// </summary>
     [ProtoEnum(Name = nameof(Vertragstatus) + "_" + nameof(STORNIERT))]
     [EnumMember(Value = "STORNIERT")]
+    [System.Text.Json.Serialization.JsonStringEnumMemberName("STORNIERT")]
     STORNIERT,
 
     /// <summary>
@@ -62,6 +69,7 @@ public enum Vertragstatus
     /// </summary>
     [ProtoEnum(Name = nameof(Vertragstatus) + "_" + nameof(GEKUENDIGT))]
     [EnumMember(Value = "GEKUENDIGT")]
+    [System.Text.Json.Serialization.JsonStringEnumMemberName("GEKUENDIGT")]
     GEKUENDIGT,
 
     /// <summary>
@@ -69,5 +77,6 @@ public enum Vertragstatus
     /// </summary>
     [ProtoEnum(Name = nameof(Vertragstatus) + "_" + nameof(BEENDET))]
     [EnumMember(Value = "BEENDET")]
+    [System.Text.Json.Serialization.JsonStringEnumMemberName("BEENDET")]
     BEENDET,
 }
