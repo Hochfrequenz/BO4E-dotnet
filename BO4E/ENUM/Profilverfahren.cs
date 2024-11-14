@@ -9,9 +9,11 @@ public enum Profilverfahren
 {
     /// <summary>SLP</summary>
     [EnumMember(Value = "SYNTHETISCH")]
+    [System.Text.Json.Serialization.JsonStringEnumMemberName("SYNTHETISCH")]
     SYNTHETISCH,
 
     /// <summary>ALP</summary>
     [EnumMember(Value = "ANALYTISCH")]
+    [System.Text.Json.Serialization.JsonStringEnumMemberName("ANALYTISCH")]
     ANALYTISCH,
 }

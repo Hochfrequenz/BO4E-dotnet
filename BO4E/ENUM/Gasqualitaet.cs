@@ -17,15 +17,18 @@ public enum Gasqualitaet
     [System.Text.Json.Serialization.JsonIgnore]
 #pragma warning disable CS1591 // Missing XML comment for publicly visible type or member
     [EnumMember(Value = "ZERO")]
+    [System.Text.Json.Serialization.JsonStringEnumMemberName("ZERO")]
     ZERO = 0,
 
 #pragma warning restore CS1591 // Missing XML comment for publicly visible type or member
 
     /// <summary>High Caloric Gas</summary>
     [EnumMember(Value = "H_GAS")]
+    [System.Text.Json.Serialization.JsonStringEnumMemberName("H_GAS")]
     H_GAS = 1,
 
     /// <summary>Low Caloric Gas</summary>
     [EnumMember(Value = "L_GAS")]
+    [System.Text.Json.Serialization.JsonStringEnumMemberName("L_GAS")]
     L_GAS = 2,
 }

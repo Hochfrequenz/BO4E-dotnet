@@ -13,6 +13,7 @@ public enum WahlrechtPrognosegrundlage
     /// </summary>
     /// <remarks> CAV+Z54 </remarks>
     [EnumMember(Value = "DURCH_LF")]
+    [System.Text.Json.Serialization.JsonStringEnumMemberName("DURCH_LF")]
     DURCH_LF,
 
     /// <summary>
@@ -20,6 +21,7 @@ public enum WahlrechtPrognosegrundlage
     /// </summary>
     /// <remarks> CAV+ZE2 </remarks>
     [EnumMember(Value = "DURCH_LF_NICHT_GEGEBEN")]
+    [System.Text.Json.Serialization.JsonStringEnumMemberName("DURCH_LF_NICHT_GEGEBEN")]
     DURCH_LF_NICHT_GEGEBEN,
 
     /// <summary>
@@ -27,6 +29,7 @@ public enum WahlrechtPrognosegrundlage
     /// </summary>
     /// <remarks> CAV+Z55 </remarks>
     [EnumMember(Value = "NICHT_WEGEN_GROSSEN_VERBRAUCHS")]
+    [System.Text.Json.Serialization.JsonStringEnumMemberName("NICHT_WEGEN_GROSSEN_VERBRAUCHS")]
     NICHT_WEGEN_GROSSEN_VERBRAUCHS,
 
     /// <summary>
@@ -34,6 +37,7 @@ public enum WahlrechtPrognosegrundlage
     /// </summary>
     /// <remarks> CAV+ZC1 </remarks>
     [EnumMember(Value = "NICHT_WEGEN_EIGENVERBRAUCH")]
+    [System.Text.Json.Serialization.JsonStringEnumMemberName("NICHT_WEGEN_EIGENVERBRAUCH")]
     NICHT_WEGEN_EIGENVERBRAUCH,
 
     /// <summary>
@@ -41,6 +45,7 @@ public enum WahlrechtPrognosegrundlage
     /// </summary>
     /// <remarks> CAV+ZD2 </remarks>
     [EnumMember(Value = "NICHT_WEGEN_TAGES_VERBRAUCH")]
+    [System.Text.Json.Serialization.JsonStringEnumMemberName("NICHT_WEGEN_TAGES_VERBRAUCH")]
     NICHT_WEGEN_TAGES_VERBRAUCH,
 
     /// <summary>
@@ -48,5 +53,6 @@ public enum WahlrechtPrognosegrundlage
     /// </summary>
     /// <remarks> CAV+ZE3 </remarks>
     [EnumMember(Value = "NICHT_WEGEN_ENWG")]
+    [System.Text.Json.Serialization.JsonStringEnumMemberName("NICHT_WEGEN_ENWG")]
     NICHT_WEGEN_ENWG,
 }

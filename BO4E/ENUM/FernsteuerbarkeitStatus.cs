@@ -16,6 +16,7 @@ public enum FernsteuerbarkeitStatus
     /// <remarks>Z96</remarks>
     [ProtoEnum(Name = nameof(FernsteuerbarkeitStatus) + "_" + nameof(NICHT_FERNSTEUERBAR))]
     [EnumMember(Value = "NICHT_FERNSTEUERBAR")]
+    [System.Text.Json.Serialization.JsonStringEnumMemberName("NICHT_FERNSTEUERBAR")]
     NICHT_FERNSTEUERBAR,
 
     /// <summary>
@@ -25,6 +26,7 @@ public enum FernsteuerbarkeitStatus
     /// <remarks>Z97</remarks>
     [ProtoEnum(Name = nameof(FernsteuerbarkeitStatus) + "_" + nameof(TECHNISCH_FERNSTEUERBAR))]
     [EnumMember(Value = "TECHNISCH_FERNSTEUERBAR")]
+    [System.Text.Json.Serialization.JsonStringEnumMemberName("TECHNISCH_FERNSTEUERBAR")]
     TECHNISCH_FERNSTEUERBAR,
 
     /// <summary>
@@ -34,5 +36,6 @@ public enum FernsteuerbarkeitStatus
     /// <remarks>Z98</remarks>
     [ProtoEnum(Name = nameof(FernsteuerbarkeitStatus) + "_" + nameof(LIEFERANT_FERNSTEUERBAR))]
     [EnumMember(Value = "LIEFERANT_FERNSTEUERBAR")]
+    [System.Text.Json.Serialization.JsonStringEnumMemberName("LIEFERANT_FERNSTEUERBAR")]
     LIEFERANT_FERNSTEUERBAR,
 }

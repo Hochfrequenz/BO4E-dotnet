@@ -13,6 +13,7 @@ public enum BerechnungsformelNotwendigkeit
     /// </summary>
     /// <remarks>Z33</remarks>
     [EnumMember(Value = "BERECHNUNGSFORMEL_NOTWENDIG")]
+    [System.Text.Json.Serialization.JsonStringEnumMemberName("BERECHNUNGSFORMEL_NOTWENDIG")]
     BERECHNUNGSFORMEL_NOTWENDIG,
 
     /// <summary>
@@ -20,6 +21,9 @@ public enum BerechnungsformelNotwendigkeit
     /// </summary>
     /// <remarks>Z34</remarks>
     [EnumMember(Value = "BERECHNUNGSFORMEL_MUSS_ANGEFRAGT_WERDEN")]
+    [System.Text.Json.Serialization.JsonStringEnumMemberName(
+        "BERECHNUNGSFORMEL_MUSS_ANGEFRAGT_WERDEN"
+    )]
     BERECHNUNGSFORMEL_MUSS_ANGEFRAGT_WERDEN,
 
     /// <summary>
@@ -27,11 +31,13 @@ public enum BerechnungsformelNotwendigkeit
     /// </summary>
     /// <remarks>Z40</remarks>
     [EnumMember(Value = "BERECHNUNGSFORMEL_TRIVIAL")]
+    [System.Text.Json.Serialization.JsonStringEnumMemberName("BERECHNUNGSFORMEL_TRIVIAL")]
     BERECHNUNGSFORMEL_TRIVIAL,
 
     /// <summary>
     /// Berechnungsformel ist nicht erforderlich
     /// </summary>
     [EnumMember(Value = "BERECHNUNGSFORMEL_NICHT_NOTWENDIG")]
+    [System.Text.Json.Serialization.JsonStringEnumMemberName("BERECHNUNGSFORMEL_NICHT_NOTWENDIG")]
     BERECHNUNGSFORMEL_NICHT_NOTWENDIG,
 }

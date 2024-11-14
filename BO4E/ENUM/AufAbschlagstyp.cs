@@ -7,9 +7,11 @@ public enum AufAbschlagstyp
 {
     /// <summary>prozentualer AufAbschlag</summary>
     [EnumMember(Value = "RELATIV")]
+    [System.Text.Json.Serialization.JsonStringEnumMemberName("RELATIV")]
     RELATIV,
 
     /// <summary>Absoluter AufAbschlag</summary>
     [EnumMember(Value = "ABSOLUT")]
+    [System.Text.Json.Serialization.JsonStringEnumMemberName("ABSOLUT")]
     ABSOLUT,
 }

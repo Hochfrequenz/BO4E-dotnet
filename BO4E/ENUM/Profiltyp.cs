@@ -9,9 +9,11 @@ public enum Profiltyp
 {
     /// <summary>SLP/SEP</summary>
     [EnumMember(Value = "SLP_SEP")]
+    [System.Text.Json.Serialization.JsonStringEnumMemberName("SLP_SEP")]
     SLP_SEP,
 
     /// <summary>TLP/TEP</summary>
     [EnumMember(Value = "TLP_TEP")]
+    [System.Text.Json.Serialization.JsonStringEnumMemberName("TLP_TEP")]
     TLP_TEP,
 }

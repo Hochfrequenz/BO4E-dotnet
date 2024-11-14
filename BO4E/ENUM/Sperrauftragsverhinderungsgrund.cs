@@ -16,6 +16,7 @@ public enum Sperrauftragsverhinderungsgrund
     /// </summary>
     /// <remarks>EBD 0472 A01</remarks>
     [EnumMember(Value = "RECHTLICHER_GRUND_FEHLT")]
+    [System.Text.Json.Serialization.JsonStringEnumMemberName("RECHTLICHER_GRUND_FEHLT")]
     RECHTLICHER_GRUND_FEHLT,
 
     /// <summary>
@@ -23,6 +24,7 @@ public enum Sperrauftragsverhinderungsgrund
     /// </summary>
     /// <remarks>EBD 0472 A02</remarks>
     [EnumMember(Value = "AKTIVE_ZUTRITTSVERWEIGERUNG")]
+    [System.Text.Json.Serialization.JsonStringEnumMemberName("AKTIVE_ZUTRITTSVERWEIGERUNG")]
     AKTIVE_ZUTRITTSVERWEIGERUNG,
 
     /// <summary>
@@ -30,6 +32,7 @@ public enum Sperrauftragsverhinderungsgrund
     /// </summary>
     /// <remarks>EBD 0472 A03</remarks>
     [EnumMember(Value = "PASSIVE_ZUTRITTSVERWEIGERUNG")]
+    [System.Text.Json.Serialization.JsonStringEnumMemberName("PASSIVE_ZUTRITTSVERWEIGERUNG")]
     PASSIVE_ZUTRITTSVERWEIGERUNG,
 
     /// <summary>
@@ -38,6 +41,7 @@ public enum Sperrauftragsverhinderungsgrund
     /// </summary>
     /// <remarks>EBD 0472 A04</remarks>
     [EnumMember(Value = "ANDERER_VERHINDERUNGSGRUND")]
+    [System.Text.Json.Serialization.JsonStringEnumMemberName("ANDERER_VERHINDERUNGSGRUND")]
     ANDERER_VERHINDERUNGSGRUND,
 
     /// <summary>
@@ -46,6 +50,7 @@ public enum Sperrauftragsverhinderungsgrund
     /// </summary>
     /// <remarks>EBD 0472 A05</remarks>
     [EnumMember(Value = "TATSAECHLICHER_VERHINDERUNGSGRUND")]
+    [System.Text.Json.Serialization.JsonStringEnumMemberName("TATSAECHLICHER_VERHINDERUNGSGRUND")]
     TATSAECHLICHER_VERHINDERUNGSGRUND,
 
     /// <summary>
@@ -54,6 +59,7 @@ public enum Sperrauftragsverhinderungsgrund
     /// </summary>
     /// <remarks>EBD 0472 A06</remarks>
     [EnumMember(Value = "TECHNISCHER_VERHINDERUNGSGRUND")]
+    [System.Text.Json.Serialization.JsonStringEnumMemberName("TECHNISCHER_VERHINDERUNGSGRUND")]
     TECHNISCHER_VERHINDERUNGSGRUND,
 
     /// <summary>
@@ -62,5 +68,8 @@ public enum Sperrauftragsverhinderungsgrund
     /// </summary>
     /// <remarks>EBD 0472 A08</remarks>
     [EnumMember(Value = "ANSCHLUSSNUTZER_WURDE_NICHT_ANGETROFFEN")]
+    [System.Text.Json.Serialization.JsonStringEnumMemberName(
+        "ANSCHLUSSNUTZER_WURDE_NICHT_ANGETROFFEN"
+    )]
     ANSCHLUSSNUTZER_WURDE_NICHT_ANGETROFFEN,
 }

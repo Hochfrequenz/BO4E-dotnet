@@ -11,11 +11,13 @@ public enum Wertermittlungsverfahren
     ///     Prognose
     /// </summary>
     [EnumMember(Value = "PROGNOSE")]
+    [System.Text.Json.Serialization.JsonStringEnumMemberName("PROGNOSE")]
     PROGNOSE,
 
     /// <summary>
     ///     Messung
     /// </summary>
     [EnumMember(Value = "MESSUNG")]
+    [System.Text.Json.Serialization.JsonStringEnumMemberName("MESSUNG")]
     MESSUNG,
 }
