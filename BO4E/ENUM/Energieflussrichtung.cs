@@ -11,11 +11,13 @@ public enum Energieflussrichtung
     /// Z71: Verbrauch
     /// </summary>
     [EnumMember(Value = "VERBRAUCH")]
+    [System.Text.Json.Serialization.JsonStringEnumMemberName("VERBRAUCH")]
     VERBRAUCH,
 
     /// <summary>
     /// Z72: Erzeugung
     /// </summary>
     [EnumMember(Value = "ERZEUGUNG")]
+    [System.Text.Json.Serialization.JsonStringEnumMemberName("ERZEUGUNG")]
     ERZEUGUNG,
 }

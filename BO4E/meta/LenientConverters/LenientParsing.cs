@@ -14,12 +14,14 @@ public enum LenientParsing
     ///     strict parsing, no lenient behaviour
     /// </summary>
     [EnumMember(Value = "STRICT")]
+    [System.Text.Json.Serialization.JsonStringEnumMemberName("STRICT")]
     STRICT = 0,
 
     /// <summary>
     ///     allows automatic conversion of other date formats
     /// </summary>
     [EnumMember(Value = "DATE_TIME")]
+    [System.Text.Json.Serialization.JsonStringEnumMemberName("DATE_TIME")]
     DATE_TIME = 1,
 
     /// <summary>
@@ -27,12 +29,14 @@ public enum LenientParsing
     ///     (e.g. when mapping from a SAP CDS view)
     /// </summary>
     [EnumMember(Value = "ENUM_LIST")]
+    [System.Text.Json.Serialization.JsonStringEnumMemberName("ENUM_LIST")]
     ENUM_LIST = 2,
 
     /// <summary>
     ///     allow partly malformed BO4E URIs
     /// </summary>
     [EnumMember(Value = "BO4_E_URI")]
+    [System.Text.Json.Serialization.JsonStringEnumMemberName("BO4_E_URI")]
     BO4_E_URI = 4,
 
     // /// <summary>
@@ -43,17 +47,20 @@ public enum LenientParsing
     ///     Set initial DateTimeOffset if date could not be parsed (only applies if <see cref="DATE_TIME" /> is set)
     /// </summary>
     [EnumMember(Value = "SET_INITIAL_DATE_IF_NULL")]
+    [System.Text.Json.Serialization.JsonStringEnumMemberName("SET_INITIAL_DATE_IF_NULL")]
     SET_INITIAL_DATE_IF_NULL = 8,
 
     /// <summary>
     ///     Try to parse Strings as Integer if type doesn't fit
     /// </summary>
     [EnumMember(Value = "STRING_TO_INT")]
+    [System.Text.Json.Serialization.JsonStringEnumMemberName("STRING_TO_INT")]
     STRING_TO_INT = 16,
 
     /// <summary>
     ///     most lenient (all others)
     /// </summary>
     [EnumMember(Value = "MOST_LENIENT")]
+    [System.Text.Json.Serialization.JsonStringEnumMemberName("MOST_LENIENT")]
     MOST_LENIENT = ~0,
 }

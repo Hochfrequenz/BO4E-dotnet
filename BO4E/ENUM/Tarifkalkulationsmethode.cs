@@ -12,6 +12,7 @@ public enum Tarifkalkulationsmethode
     /// </summary>
     [ProtoEnum(Name = nameof(Tarifkalkulationsmethode) + "_" + nameof(STAFFELN))]
     [EnumMember(Value = "STAFFELN")]
+    [System.Text.Json.Serialization.JsonStringEnumMemberName("STAFFELN")]
     STAFFELN,
 
     /// <summary>
@@ -20,15 +21,18 @@ public enum Tarifkalkulationsmethode
     /// </summary>
     [ProtoEnum(Name = nameof(Tarifkalkulationsmethode) + "_" + nameof(ZONEN))]
     [EnumMember(Value = "ZONEN")]
+    [System.Text.Json.Serialization.JsonStringEnumMemberName("ZONEN")]
     ZONEN,
 
     /// <summary>Bestabrechnung innerhalb der Staffelung</summary>
     [ProtoEnum(Name = nameof(Tarifkalkulationsmethode) + "_" + nameof(BESTABRECHNUNG_STAFFEL))]
     [EnumMember(Value = "BESTABRECHNUNG_STAFFEL")]
+    [System.Text.Json.Serialization.JsonStringEnumMemberName("BESTABRECHNUNG_STAFFEL")]
     BESTABRECHNUNG_STAFFEL,
 
     /// <summary>Preis für ein Paket (eine Menge).</summary>
     [ProtoEnum(Name = nameof(Tarifkalkulationsmethode) + "_" + nameof(PAKETPREIS))]
     [EnumMember(Value = "PAKETPREIS")]
+    [System.Text.Json.Serialization.JsonStringEnumMemberName("PAKETPREIS")]
     PAKETPREIS,
 }

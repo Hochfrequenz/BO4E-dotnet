@@ -11,6 +11,7 @@ public enum Geraetemerkmal
     /// </summary>
     [ProtoEnum(Name = nameof(Geraetemerkmal) + "_" + nameof(EINTARIF))]
     [EnumMember(Value = "EINTARIF")]
+    [System.Text.Json.Serialization.JsonStringEnumMemberName("EINTARIF")]
     EINTARIF,
 
     /// <summary>
@@ -18,6 +19,7 @@ public enum Geraetemerkmal
     /// </summary>
     [ProtoEnum(Name = nameof(Geraetemerkmal) + "_" + nameof(ZWEITARIF))]
     [EnumMember(Value = "ZWEITARIF")]
+    [System.Text.Json.Serialization.JsonStringEnumMemberName("ZWEITARIF")]
     ZWEITARIF,
 
     /// <summary>
@@ -25,6 +27,7 @@ public enum Geraetemerkmal
     /// </summary>
     [ProtoEnum(Name = nameof(Geraetemerkmal) + "_" + nameof(MEHRTARIF))]
     [EnumMember(Value = "MEHRTARIF")]
+    [System.Text.Json.Serialization.JsonStringEnumMemberName("MEHRTARIF")]
     MEHRTARIF,
 
     /// <summary>
@@ -32,6 +35,7 @@ public enum Geraetemerkmal
     /// </summary>
     [ProtoEnum(Name = nameof(Geraetemerkmal) + "_" + nameof(GAS_G2P5))]
     [EnumMember(Value = "GAS_G2P5")]
+    [System.Text.Json.Serialization.JsonStringEnumMemberName("GAS_G2P5")]
     GAS_G2P5, // changed to "GAS_G2P5" as "GAS_G2_5" and "GAS_G25" are equivalent in protobuf.
 
     /// <summary>
@@ -39,6 +43,7 @@ public enum Geraetemerkmal
     /// </summary>
     [ProtoEnum(Name = nameof(Geraetemerkmal) + "_" + nameof(GAS_G4))]
     [EnumMember(Value = "GAS_G4")]
+    [System.Text.Json.Serialization.JsonStringEnumMemberName("GAS_G4")]
     GAS_G4,
 
     /// <summary>
@@ -46,6 +51,7 @@ public enum Geraetemerkmal
     /// </summary>
     [ProtoEnum(Name = nameof(Geraetemerkmal) + "_" + nameof(GAS_G6))]
     [EnumMember(Value = "GAS_G6")]
+    [System.Text.Json.Serialization.JsonStringEnumMemberName("GAS_G6")]
     GAS_G6,
 
     /// <summary>
@@ -53,6 +59,7 @@ public enum Geraetemerkmal
     /// </summary>
     [ProtoEnum(Name = nameof(Geraetemerkmal) + "_" + nameof(GAS_G10))]
     [EnumMember(Value = "GAS_G10")]
+    [System.Text.Json.Serialization.JsonStringEnumMemberName("GAS_G10")]
     GAS_G10,
 
     /// <summary>
@@ -60,6 +67,7 @@ public enum Geraetemerkmal
     /// </summary>
     [ProtoEnum(Name = nameof(Geraetemerkmal) + "_" + nameof(GAS_G16))]
     [EnumMember(Value = "GAS_G16")]
+    [System.Text.Json.Serialization.JsonStringEnumMemberName("GAS_G16")]
     GAS_G16,
 
     /// <summary>
@@ -67,6 +75,7 @@ public enum Geraetemerkmal
     /// </summary>
     [ProtoEnum(Name = nameof(Geraetemerkmal) + "_" + nameof(GAS_G25))]
     [EnumMember(Value = "GAS_G25")]
+    [System.Text.Json.Serialization.JsonStringEnumMemberName("GAS_G25")]
     GAS_G25,
 
     /// <summary>
@@ -74,6 +83,7 @@ public enum Geraetemerkmal
     /// </summary>
     [ProtoEnum(Name = nameof(Geraetemerkmal) + "_" + nameof(GAS_G40))]
     [EnumMember(Value = "GAS_G40")]
+    [System.Text.Json.Serialization.JsonStringEnumMemberName("GAS_G40")]
     GAS_G40,
 
     /// <summary>
@@ -81,6 +91,7 @@ public enum Geraetemerkmal
     /// </summary>
     [ProtoEnum(Name = nameof(Geraetemerkmal) + "_" + nameof(GAS_G65))]
     [EnumMember(Value = "GAS_G65")]
+    [System.Text.Json.Serialization.JsonStringEnumMemberName("GAS_G65")]
     GAS_G65,
 
     /// <summary>
@@ -88,6 +99,7 @@ public enum Geraetemerkmal
     /// </summary>
     [ProtoEnum(Name = nameof(Geraetemerkmal) + "_" + nameof(GAS_G100))]
     [EnumMember(Value = "GAS_G100")]
+    [System.Text.Json.Serialization.JsonStringEnumMemberName("GAS_G100")]
     GAS_G100,
 
     /// <summary>
@@ -95,6 +107,7 @@ public enum Geraetemerkmal
     /// </summary>
     [ProtoEnum(Name = nameof(Geraetemerkmal) + "_" + nameof(GAS_G160))]
     [EnumMember(Value = "GAS_G160")]
+    [System.Text.Json.Serialization.JsonStringEnumMemberName("GAS_G160")]
     GAS_G160,
 
     /// <summary>
@@ -102,6 +115,7 @@ public enum Geraetemerkmal
     /// </summary>
     [ProtoEnum(Name = nameof(Geraetemerkmal) + "_" + nameof(GAS_G250))]
     [EnumMember(Value = "GAS_G250")]
+    [System.Text.Json.Serialization.JsonStringEnumMemberName("GAS_G250")]
     GAS_G250,
 
     /// <summary>
@@ -109,6 +123,7 @@ public enum Geraetemerkmal
     /// </summary>
     [ProtoEnum(Name = nameof(Geraetemerkmal) + "_" + nameof(GAS_G400))]
     [EnumMember(Value = "GAS_G400")]
+    [System.Text.Json.Serialization.JsonStringEnumMemberName("GAS_G400")]
     GAS_G400,
 
     /// <summary>
@@ -116,6 +131,7 @@ public enum Geraetemerkmal
     /// </summary>
     [ProtoEnum(Name = nameof(Geraetemerkmal) + "_" + nameof(GAS_G650))]
     [EnumMember(Value = "GAS_G650")]
+    [System.Text.Json.Serialization.JsonStringEnumMemberName("GAS_G650")]
     GAS_G650,
 
     /// <summary>
@@ -123,6 +139,7 @@ public enum Geraetemerkmal
     /// </summary>
     [ProtoEnum(Name = nameof(Geraetemerkmal) + "_" + nameof(GAS_G1000))]
     [EnumMember(Value = "GAS_G1000")]
+    [System.Text.Json.Serialization.JsonStringEnumMemberName("GAS_G1000")]
     GAS_G1000,
 
     /// <summary>
@@ -130,6 +147,7 @@ public enum Geraetemerkmal
     /// </summary>
     [ProtoEnum(Name = nameof(Geraetemerkmal) + "_" + nameof(GAS_G1600))]
     [EnumMember(Value = "GAS_G1600")]
+    [System.Text.Json.Serialization.JsonStringEnumMemberName("GAS_G1600")]
     GAS_G1600,
 
     /// <summary>
@@ -137,6 +155,7 @@ public enum Geraetemerkmal
     /// </summary>
     [ProtoEnum(Name = nameof(Geraetemerkmal) + "_" + nameof(GAS_G2500))]
     [EnumMember(Value = "GAS_G2500")]
+    [System.Text.Json.Serialization.JsonStringEnumMemberName("GAS_G2500")]
     GAS_G2500,
 
     /// <summary>
@@ -144,6 +163,7 @@ public enum Geraetemerkmal
     /// </summary>
     [ProtoEnum(Name = nameof(Geraetemerkmal) + "_" + nameof(IMPULSGEBER_G4_G100))]
     [EnumMember(Value = "IMPULSGEBER_G4_G100")]
+    [System.Text.Json.Serialization.JsonStringEnumMemberName("IMPULSGEBER_G4_G100")]
     IMPULSGEBER_G4_G100,
 
     /// <summary>
@@ -151,6 +171,7 @@ public enum Geraetemerkmal
     /// </summary>
     [ProtoEnum(Name = nameof(Geraetemerkmal) + "_" + nameof(IMPULSGEBER_G100))]
     [EnumMember(Value = "IMPULSGEBER_G100")]
+    [System.Text.Json.Serialization.JsonStringEnumMemberName("IMPULSGEBER_G100")]
     IMPULSGEBER_G100,
 
     /// <summary>
@@ -158,6 +179,7 @@ public enum Geraetemerkmal
     /// </summary>
     [ProtoEnum(Name = nameof(Geraetemerkmal) + "_" + nameof(MODEM_GSM))]
     [EnumMember(Value = "MODEM_GSM")]
+    [System.Text.Json.Serialization.JsonStringEnumMemberName("MODEM_GSM")]
     MODEM_GSM,
 
     /// <summary>
@@ -165,6 +187,7 @@ public enum Geraetemerkmal
     /// </summary>
     [ProtoEnum(Name = nameof(Geraetemerkmal) + "_" + nameof(MODEM_GPRS))]
     [EnumMember(Value = "MODEM_GPRS")]
+    [System.Text.Json.Serialization.JsonStringEnumMemberName("MODEM_GPRS")]
     MODEM_GPRS,
 
     /// <summary>
@@ -172,6 +195,7 @@ public enum Geraetemerkmal
     /// </summary>
     [ProtoEnum(Name = nameof(Geraetemerkmal) + "_" + nameof(MODEM_FUNK))]
     [EnumMember(Value = "MODEM_FUNK")]
+    [System.Text.Json.Serialization.JsonStringEnumMemberName("MODEM_FUNK")]
     MODEM_FUNK,
 
     /// <summary>
@@ -179,6 +203,7 @@ public enum Geraetemerkmal
     /// </summary>
     [ProtoEnum(Name = nameof(Geraetemerkmal) + "_" + nameof(MODEM_GSM_O_LG))]
     [EnumMember(Value = "MODEM_GSM_O_LG")]
+    [System.Text.Json.Serialization.JsonStringEnumMemberName("MODEM_GSM_O_LG")]
     MODEM_GSM_O_LG,
 
     /// <summary>
@@ -186,6 +211,7 @@ public enum Geraetemerkmal
     /// </summary>
     [ProtoEnum(Name = nameof(Geraetemerkmal) + "_" + nameof(MODEM_GSM_M_LG))]
     [EnumMember(Value = "MODEM_GSM_M_LG")]
+    [System.Text.Json.Serialization.JsonStringEnumMemberName("MODEM_GSM_M_LG")]
     MODEM_GSM_M_LG,
 
     /// <summary>
@@ -193,6 +219,7 @@ public enum Geraetemerkmal
     /// </summary>
     [ProtoEnum(Name = nameof(Geraetemerkmal) + "_" + nameof(MODEM_FESTNETZ))]
     [EnumMember(Value = "MODEM_FESTNETZ")]
+    [System.Text.Json.Serialization.JsonStringEnumMemberName("MODEM_FESTNETZ")]
     MODEM_FESTNETZ,
 
     /// <summary>
@@ -200,6 +227,7 @@ public enum Geraetemerkmal
     /// </summary>
     [ProtoEnum(Name = nameof(Geraetemerkmal) + "_" + nameof(MODEM_GPRS_M_LG))]
     [EnumMember(Value = "MODEM_GPRS_M_LG")]
+    [System.Text.Json.Serialization.JsonStringEnumMemberName("MODEM_GPRS_M_LG")]
     MODEM_GPRS_M_LG,
 
     /// <summary>
@@ -207,6 +235,7 @@ public enum Geraetemerkmal
     /// </summary>
     [ProtoEnum(Name = nameof(Geraetemerkmal) + "_" + nameof(PLC_COM))]
     [EnumMember(Value = "PLC_COM")]
+    [System.Text.Json.Serialization.JsonStringEnumMemberName("PLC_COM")]
     PLC_COM,
 
     /// <summary>
@@ -214,6 +243,7 @@ public enum Geraetemerkmal
     /// </summary>
     [ProtoEnum(Name = nameof(Geraetemerkmal) + "_" + nameof(ETHERNET_KOM))]
     [EnumMember(Value = "ETHERNET_KOM")]
+    [System.Text.Json.Serialization.JsonStringEnumMemberName("ETHERNET_KOM")]
     ETHERNET_KOM,
 
     /// <summary>
@@ -221,6 +251,7 @@ public enum Geraetemerkmal
     /// </summary>
     [ProtoEnum(Name = nameof(Geraetemerkmal) + "_" + nameof(DSL_KOM))]
     [EnumMember(Value = "DSL_KOM")]
+    [System.Text.Json.Serialization.JsonStringEnumMemberName("DSL_KOM")]
     DSL_KOM,
 
     /// <summary>
@@ -228,6 +259,7 @@ public enum Geraetemerkmal
     /// </summary>
     [ProtoEnum(Name = nameof(Geraetemerkmal) + "_" + nameof(LTE_KOM))]
     [EnumMember(Value = "LTE_KOM")]
+    [System.Text.Json.Serialization.JsonStringEnumMemberName("LTE_KOM")]
     LTE_KOM,
 
     /// <summary>
@@ -235,6 +267,7 @@ public enum Geraetemerkmal
     /// </summary>
     [ProtoEnum(Name = nameof(Geraetemerkmal) + "_" + nameof(RUNDSTEUEREMPFAENGER))]
     [EnumMember(Value = "RUNDSTEUEREMPFAENGER")]
+    [System.Text.Json.Serialization.JsonStringEnumMemberName("RUNDSTEUEREMPFAENGER")]
     RUNDSTEUEREMPFAENGER,
 
     /// <summary>
@@ -242,6 +275,7 @@ public enum Geraetemerkmal
     /// </summary>
     [ProtoEnum(Name = nameof(Geraetemerkmal) + "_" + nameof(TARIFSCHALTGERAET))]
     [EnumMember(Value = "TARIFSCHALTGERAET")]
+    [System.Text.Json.Serialization.JsonStringEnumMemberName("TARIFSCHALTGERAET")]
     TARIFSCHALTGERAET,
 
     /// <summary>
@@ -249,6 +283,7 @@ public enum Geraetemerkmal
     /// </summary>
     [ProtoEnum(Name = nameof(Geraetemerkmal) + "_" + nameof(ZUSTANDS_MU))]
     [EnumMember(Value = "ZUSTANDS_MU")]
+    [System.Text.Json.Serialization.JsonStringEnumMemberName("ZUSTANDS_MU")]
     ZUSTANDS_MU,
 
     /// <summary>
@@ -256,6 +291,7 @@ public enum Geraetemerkmal
     /// </summary>
     [ProtoEnum(Name = nameof(Geraetemerkmal) + "_" + nameof(TEMPERATUR_MU))]
     [EnumMember(Value = "TEMPERATUR_MU")]
+    [System.Text.Json.Serialization.JsonStringEnumMemberName("TEMPERATUR_MU")]
     TEMPERATUR_MU,
 
     /// <summary>
@@ -263,6 +299,7 @@ public enum Geraetemerkmal
     /// </summary>
     [ProtoEnum(Name = nameof(Geraetemerkmal) + "_" + nameof(KOMPAKT_MU))]
     [EnumMember(Value = "KOMPAKT_MU")]
+    [System.Text.Json.Serialization.JsonStringEnumMemberName("KOMPAKT_MU")]
     KOMPAKT_MU,
 
     /// <summary>
@@ -270,6 +307,7 @@ public enum Geraetemerkmal
     /// </summary>
     [ProtoEnum(Name = nameof(Geraetemerkmal) + "_" + nameof(SYSTEM_MU))]
     [EnumMember(Value = "SYSTEM_MU")]
+    [System.Text.Json.Serialization.JsonStringEnumMemberName("SYSTEM_MU")]
     SYSTEM_MU,
 
     /// <summary>
@@ -277,6 +315,7 @@ public enum Geraetemerkmal
     /// </summary>
     [ProtoEnum(Name = nameof(Geraetemerkmal) + "_" + nameof(UNBESTIMMT))]
     [EnumMember(Value = "UNBESTIMMT")]
+    [System.Text.Json.Serialization.JsonStringEnumMemberName("UNBESTIMMT")]
     UNBESTIMMT,
 
     /// <summary>
@@ -284,6 +323,7 @@ public enum Geraetemerkmal
     /// </summary>
     [ProtoEnum(Name = nameof(Geraetemerkmal) + "_" + nameof(WASSER_MWZW))]
     [EnumMember(Value = "WASSER_MWZW")]
+    [System.Text.Json.Serialization.JsonStringEnumMemberName("WASSER_MWZW")]
     WASSER_MWZW,
 
     /// <summary>
@@ -291,6 +331,7 @@ public enum Geraetemerkmal
     /// </summary>
     [ProtoEnum(Name = nameof(Geraetemerkmal) + "_" + nameof(WASSER_WZWW))]
     [EnumMember(Value = "WASSER_WZWW")]
+    [System.Text.Json.Serialization.JsonStringEnumMemberName("WASSER_WZWW")]
     WASSER_WZWW,
 
     /// <summary>
@@ -298,6 +339,7 @@ public enum Geraetemerkmal
     /// </summary>
     [ProtoEnum(Name = nameof(Geraetemerkmal) + "_" + nameof(WASSER_WZ01))]
     [EnumMember(Value = "WASSER_WZ01")]
+    [System.Text.Json.Serialization.JsonStringEnumMemberName("WASSER_WZ01")]
     WASSER_WZ01,
 
     /// <summary>
@@ -305,6 +347,7 @@ public enum Geraetemerkmal
     /// </summary>
     [ProtoEnum(Name = nameof(Geraetemerkmal) + "_" + nameof(WASSER_WZ02))]
     [EnumMember(Value = "WASSER_WZ02")]
+    [System.Text.Json.Serialization.JsonStringEnumMemberName("WASSER_WZ02")]
     WASSER_WZ02,
 
     /// <summary>
@@ -312,6 +355,7 @@ public enum Geraetemerkmal
     /// </summary>
     [ProtoEnum(Name = nameof(Geraetemerkmal) + "_" + nameof(WASSER_WZ03))]
     [EnumMember(Value = "WASSER_WZ03")]
+    [System.Text.Json.Serialization.JsonStringEnumMemberName("WASSER_WZ03")]
     WASSER_WZ03,
 
     /// <summary>
@@ -319,6 +363,7 @@ public enum Geraetemerkmal
     /// </summary>
     [ProtoEnum(Name = nameof(Geraetemerkmal) + "_" + nameof(WASSER_WZ04))]
     [EnumMember(Value = "WASSER_WZ04")]
+    [System.Text.Json.Serialization.JsonStringEnumMemberName("WASSER_WZ04")]
     WASSER_WZ04,
 
     /// <summary>
@@ -326,6 +371,7 @@ public enum Geraetemerkmal
     /// </summary>
     [ProtoEnum(Name = nameof(Geraetemerkmal) + "_" + nameof(WASSER_WZ05))]
     [EnumMember(Value = "WASSER_WZ05")]
+    [System.Text.Json.Serialization.JsonStringEnumMemberName("WASSER_WZ05")]
     WASSER_WZ05,
 
     /// <summary>
@@ -333,6 +379,7 @@ public enum Geraetemerkmal
     /// </summary>
     [ProtoEnum(Name = nameof(Geraetemerkmal) + "_" + nameof(WASSER_WZ06))]
     [EnumMember(Value = "WASSER_WZ06")]
+    [System.Text.Json.Serialization.JsonStringEnumMemberName("WASSER_WZ06")]
     WASSER_WZ06,
 
     /// <summary>
@@ -340,6 +387,7 @@ public enum Geraetemerkmal
     /// </summary>
     [ProtoEnum(Name = nameof(Geraetemerkmal) + "_" + nameof(WASSER_WZ07))]
     [EnumMember(Value = "WASSER_WZ07")]
+    [System.Text.Json.Serialization.JsonStringEnumMemberName("WASSER_WZ07")]
     WASSER_WZ07,
 
     /// <summary>
@@ -347,6 +395,7 @@ public enum Geraetemerkmal
     /// </summary>
     [ProtoEnum(Name = nameof(Geraetemerkmal) + "_" + nameof(WASSER_WZ08))]
     [EnumMember(Value = "WASSER_WZ08")]
+    [System.Text.Json.Serialization.JsonStringEnumMemberName("WASSER_WZ08")]
     WASSER_WZ08,
 
     /// <summary>
@@ -354,6 +403,7 @@ public enum Geraetemerkmal
     /// </summary>
     [ProtoEnum(Name = nameof(Geraetemerkmal) + "_" + nameof(WASSER_WZ09))]
     [EnumMember(Value = "WASSER_WZ09")]
+    [System.Text.Json.Serialization.JsonStringEnumMemberName("WASSER_WZ09")]
     WASSER_WZ09,
 
     /// <summary>
@@ -361,6 +411,7 @@ public enum Geraetemerkmal
     /// </summary>
     [ProtoEnum(Name = nameof(Geraetemerkmal) + "_" + nameof(WASSER_WZ10))]
     [EnumMember(Value = "WASSER_WZ10")]
+    [System.Text.Json.Serialization.JsonStringEnumMemberName("WASSER_WZ10")]
     WASSER_WZ10,
 
     /// <summary>
@@ -368,6 +419,7 @@ public enum Geraetemerkmal
     /// </summary>
     [ProtoEnum(Name = nameof(Geraetemerkmal) + "_" + nameof(WASSER_VWZ04))]
     [EnumMember(Value = "WASSER_VWZ04")]
+    [System.Text.Json.Serialization.JsonStringEnumMemberName("WASSER_VWZ04")]
     WASSER_VWZ04,
 
     /// <summary>
@@ -375,6 +427,7 @@ public enum Geraetemerkmal
     /// </summary>
     [ProtoEnum(Name = nameof(Geraetemerkmal) + "_" + nameof(WASSER_VWZ05))]
     [EnumMember(Value = "WASSER_VWZ05")]
+    [System.Text.Json.Serialization.JsonStringEnumMemberName("WASSER_VWZ05")]
     WASSER_VWZ05,
 
     /// <summary>
@@ -382,6 +435,7 @@ public enum Geraetemerkmal
     /// </summary>
     [ProtoEnum(Name = nameof(Geraetemerkmal) + "_" + nameof(WASSER_VWZ06))]
     [EnumMember(Value = "WASSER_VWZ06")]
+    [System.Text.Json.Serialization.JsonStringEnumMemberName("WASSER_VWZ06")]
     WASSER_VWZ06,
 
     /// <summary>
@@ -389,6 +443,7 @@ public enum Geraetemerkmal
     /// </summary>
     [ProtoEnum(Name = nameof(Geraetemerkmal) + "_" + nameof(WASSER_VWZ07))]
     [EnumMember(Value = "WASSER_VWZ07")]
+    [System.Text.Json.Serialization.JsonStringEnumMemberName("WASSER_VWZ07")]
     WASSER_VWZ07,
 
     /// <summary>
@@ -396,6 +451,7 @@ public enum Geraetemerkmal
     /// </summary>
     [ProtoEnum(Name = nameof(Geraetemerkmal) + "_" + nameof(WASSER_VWZ10))]
     [EnumMember(Value = "WASSER_VWZ10")]
+    [System.Text.Json.Serialization.JsonStringEnumMemberName("WASSER_VWZ10")]
     WASSER_VWZ10,
 
     /// <summary>
@@ -403,6 +459,7 @@ public enum Geraetemerkmal
     /// </summary>
     [ProtoEnum(Name = nameof(Geraetemerkmal) + "_" + nameof(GAS_G350))]
     [EnumMember(Value = "GAS_G350")]
+    [System.Text.Json.Serialization.JsonStringEnumMemberName("GAS_G350")]
     GAS_G350,
 
     /// <summary>
@@ -410,6 +467,7 @@ public enum Geraetemerkmal
     /// </summary>
     [ProtoEnum(Name = nameof(Geraetemerkmal) + "_" + nameof(GAS_G4000))]
     [EnumMember(Value = "GAS_G4000")]
+    [System.Text.Json.Serialization.JsonStringEnumMemberName("GAS_G4000")]
     GAS_G4000,
 
     /// <summary>
@@ -417,6 +475,7 @@ public enum Geraetemerkmal
     /// </summary>
     [ProtoEnum(Name = nameof(Geraetemerkmal) + "_" + nameof(GAS_G6500))]
     [EnumMember(Value = "GAS_G6500")]
+    [System.Text.Json.Serialization.JsonStringEnumMemberName("GAS_G6500")]
     GAS_G6500,
 
     /// <summary>
@@ -424,6 +483,7 @@ public enum Geraetemerkmal
     /// </summary>
     [ProtoEnum(Name = nameof(Geraetemerkmal) + "_" + nameof(GAS_G10000))]
     [EnumMember(Value = "GAS_G10000")]
+    [System.Text.Json.Serialization.JsonStringEnumMemberName("GAS_G10000")]
     GAS_G10000,
 
     /// <summary>
@@ -431,6 +491,7 @@ public enum Geraetemerkmal
     /// </summary>
     [ProtoEnum(Name = nameof(Geraetemerkmal) + "_" + nameof(GAS_G12500))]
     [EnumMember(Value = "GAS_G12500")]
+    [System.Text.Json.Serialization.JsonStringEnumMemberName("GAS_G12500")]
     GAS_G12500,
 
     /// <summary>
@@ -438,5 +499,6 @@ public enum Geraetemerkmal
     /// </summary>
     [ProtoEnum(Name = nameof(Geraetemerkmal) + "_" + nameof(GAS_G16000))]
     [EnumMember(Value = "GAS_G16000")]
+    [System.Text.Json.Serialization.JsonStringEnumMemberName("GAS_G16000")]
     GAS_G16000,
 }

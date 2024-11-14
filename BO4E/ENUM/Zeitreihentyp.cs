@@ -10,41 +10,50 @@ public enum Zeitreihentyp
 {
     /// <summary>Einspeisegangsumme</summary>
     [EnumMember(Value = "EGS")]
+    [System.Text.Json.Serialization.JsonStringEnumMemberName("EGS")]
     EGS,
 
     /// <summary>Lastgangsumme</summary>
     [EnumMember(Value = "LGS")]
+    [System.Text.Json.Serialization.JsonStringEnumMemberName("LGS")]
     LGS,
 
     /// <summary>Netzzeitreihe</summary>
     [EnumMember(Value = "NZR")]
+    [System.Text.Json.Serialization.JsonStringEnumMemberName("NZR")]
     NZR,
 
     /// <summary>Standardeinspeiseprofilsumme</summary>
     [EnumMember(Value = "SES")]
+    [System.Text.Json.Serialization.JsonStringEnumMemberName("SES")]
     SES,
 
     /// <summary>Standardlastsumme</summary>
     [EnumMember(Value = "SLS")]
+    [System.Text.Json.Serialization.JsonStringEnumMemberName("SLS")]
     SLS,
 
     /// <summary>Tagesparameterabhängige Einspeiseprofilsumme</summary>
     [EnumMember(Value = "TES")]
+    [System.Text.Json.Serialization.JsonStringEnumMemberName("TES")]
     TES,
 
     /// <summary>Tagesparameterabhängige Lastprofilsumme</summary>
     [EnumMember(Value = "TLS")]
+    [System.Text.Json.Serialization.JsonStringEnumMemberName("TLS")]
     TLS,
 
     /// <summary>
     /// gemeinsame Messung aus SLS und TLS
     /// </summary>
     [EnumMember(Value = "SLS_TLS")]
+    [System.Text.Json.Serialization.JsonStringEnumMemberName("SLS_TLS")]
     SLS_TLS,
 
     /// <summary>
     /// Gemeinsame Messung aus SES und TES
     /// </summary>
     [EnumMember(Value = "SES_TES")]
+    [System.Text.Json.Serialization.JsonStringEnumMemberName("SES_TES")]
     SES_TES,
 }

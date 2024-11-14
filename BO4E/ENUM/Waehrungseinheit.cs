@@ -12,9 +12,11 @@ public enum Waehrungseinheit
     /// <summary>Euro</summary>
     [ProtoEnum(Name = nameof(Waehrungseinheit) + "_" + nameof(EUR))]
     [EnumMember(Value = "EUR")]
+    [System.Text.Json.Serialization.JsonStringEnumMemberName("EUR")]
     EUR,
 
     /// <summary>Eurocent</summary>
     [EnumMember(Value = "CT")]
+    [System.Text.Json.Serialization.JsonStringEnumMemberName("CT")]
     CT,
 }

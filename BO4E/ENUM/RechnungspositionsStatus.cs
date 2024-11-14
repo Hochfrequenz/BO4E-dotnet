@@ -9,18 +9,23 @@ public enum RechnungspositionsStatus
     // https://imgflip.com/i/4e3u6m
 #pragma warning disable CS1591 // Missing XML comment for publicly visible type or member
     [EnumMember(Value = "ROH")]
+    [System.Text.Json.Serialization.JsonStringEnumMemberName("ROH")]
     ROH = 0,
 
     [EnumMember(Value = "ROH_AUSGENOMMEN")]
+    [System.Text.Json.Serialization.JsonStringEnumMemberName("ROH_AUSGENOMMEN")]
     ROH_AUSGENOMMEN = 1,
 
     [EnumMember(Value = "ABRECHENBAR")]
+    [System.Text.Json.Serialization.JsonStringEnumMemberName("ABRECHENBAR")]
     ABRECHENBAR = 2,
 
     [EnumMember(Value = "ABRECHENBAR_AUSGENOMMEN")]
+    [System.Text.Json.Serialization.JsonStringEnumMemberName("ABRECHENBAR_AUSGENOMMEN")]
     ABRECHENBAR_AUSGENOMMEN = 3,
 
     [EnumMember(Value = "ABGERECHNET")]
+    [System.Text.Json.Serialization.JsonStringEnumMemberName("ABGERECHNET")]
     ABGERECHNET = 4
 #pragma warning restore CS1591 // Missing XML comment for publicly visible type or member
 }
