@@ -48,11 +48,14 @@ public class LenientGeraetemerkmalGasConverter : JsonConverter
         }
         catch (ArgumentException) when (rawValue.StartsWith("G"))
         {
-            if (rawValue == "G2Period5")
+            switch (rawValue)
             {
-                return Geraetemerkmal.GAS_G2P5;
+                case "G2Period5":
+                case "G2.5":
+                    return Geraetemerkmal.GAS_G2P5;
+                default:
+                    return Enums.Parse<Geraetemerkmal>("GAS_" + rawValue);
             }
-            return Enums.Parse<Geraetemerkmal>("GAS_" + rawValue);
         }
     }
 

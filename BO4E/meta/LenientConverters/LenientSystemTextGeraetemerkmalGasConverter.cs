@@ -33,11 +33,14 @@ public class LenientSystemTextGeraetemerkmalGasConverter
         }
         catch (ArgumentException) when (rawString.StartsWith("G"))
         {
-            if (rawString == "G2Period5")
+            switch (rawString)
             {
-                return Geraetemerkmal.GAS_G2P5;
+                case "G2Period5":
+                case "G2.5":
+                    return Geraetemerkmal.GAS_G2P5;
+                default:
+                    return Enums.Parse<Geraetemerkmal>("GAS_" + rawString);
             }
-            return Enums.Parse<Geraetemerkmal>("GAS_" + rawString);
         }
     }
 

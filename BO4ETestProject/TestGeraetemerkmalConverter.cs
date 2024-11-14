@@ -13,6 +13,7 @@ public class TestGeraeteerkmalDeserialization
 {
     private const string JsonString = "{\"merkmal\":\"G4\"}";
     private const string JsonStringWithPeriod = "{\"merkmal\":\"G2Period5\"}";
+    private const string JsonStringWithLiteralFullstop = "{\"merkmal\":\"G2.5\"}";
     private const string JsonStringWasser = "{\"merkmal\":\"WASSER_MWZW\"}";
 
     internal class SomethingWithAGeraetemerkmal
@@ -158,6 +159,46 @@ public class TestGeraeteerkmalDeserialization
         var result =
             System.Text.Json.JsonSerializer.Deserialize<SomethingWithANullableGeraetemerkmal>(
                 JsonStringWithPeriod,
+                settings
+            );
+        result.Merkmal.Should().Be(Geraetemerkmal.GAS_G2P5);
+    }
+
+    [TestMethod]
+    public void TestNewtonsoft_Success_Nullable_With_Literal_Fullstop()
+    {
+        var result =
+            Newtonsoft.Json.JsonConvert.DeserializeObject<SomethingWithANullableGeraetemerkmal>(
+                JsonStringWithLiteralFullstop,
+                new LenientGeraetemerkmalGasConverter()
+            );
+        result.Merkmal.Should().Be(Geraetemerkmal.GAS_G2P5);
+    }
+
+    [TestMethod]
+    public void TestSystemText_Success_With_Literal_Fullstop()
+    {
+        var settings = new System.Text.Json.JsonSerializerOptions()
+        {
+            Converters = { new LenientSystemTextGeraetemerkmalGasConverter() },
+        };
+        var result = System.Text.Json.JsonSerializer.Deserialize<SomethingWithAGeraetemerkmal>(
+            JsonStringWithLiteralFullstop,
+            settings
+        );
+        result.Merkmal.Should().Be(Geraetemerkmal.GAS_G2P5);
+    }
+
+    [TestMethod]
+    public void TestSystemText_Success_With_Nullable_Literal_Fullstop()
+    {
+        var settings = new System.Text.Json.JsonSerializerOptions()
+        {
+            Converters = { new LenientSystemTextGeraetemerkmalGasConverter() },
+        };
+        var result =
+            System.Text.Json.JsonSerializer.Deserialize<SomethingWithANullableGeraetemerkmal>(
+                JsonStringWithLiteralFullstop,
                 settings
             );
         result.Merkmal.Should().Be(Geraetemerkmal.GAS_G2P5);
