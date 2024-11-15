@@ -17,7 +17,7 @@ public enum RechnungspositionsAbschlag
     /// <summary>
     /// Anpassung nach § 19, Absatz 2 Stromnetzentgeltverordnung [Z04]
     /// </summary>
-    [EnumMember(Value = "ABSCHLAG_ANPASSUNG")]
-    [System.Text.Json.Serialization.JsonStringEnumMemberName("ABSCHLAG_ANPASSUNG")]
+    [EnumMember(Value = "ANPASSUNG_STROM_NEV_19_2")]
+    [System.Text.Json.Serialization.JsonStringEnumMemberName("ANPASSUNG_STROM_NEV_19_2")]
     ABSCHLAG_ANPASSUNG,
 }
