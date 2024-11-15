@@ -19,5 +19,5 @@ public enum RechnungspositionsAbschlag
     /// </summary>
     [EnumMember(Value = "ANPASSUNG_STROM_NEV_19_2")]
     [System.Text.Json.Serialization.JsonStringEnumMemberName("ANPASSUNG_STROM_NEV_19_2")]
-    ABSCHLAG_ANPASSUNG,
+    ANPASSUNG_STROM_NEV_19_2,
 }
