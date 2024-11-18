@@ -43,17 +43,4 @@ public class BOneyComb
     [JsonPropertyOrder(3)]
     [Newtonsoft.Json.JsonProperty(PropertyName = "links", Order = 3)]
     public Dictionary<string, List<string>>? Links { get; set; }
-
-    /// <summary>
-    /// Similar to <see cref="Links"/> but with time dependencies.
-    /// </summary>
-    /// <remarks>
-    /// We didn't want to encode/serialize any information into the values of <see cref="Links"/> or loosen its typing by changing the value type to object.
-    /// That's why this is a separate property.
-    /// With this being a separate property, systems that care only about links, can simply ignore the zeitabhängige Links and those that care have a strong type to work with.
-    /// </remarks>
-    [JsonPropertyName("zeitabhaengigeLinks")]
-    [JsonPropertyOrder(4)]
-    [Newtonsoft.Json.JsonProperty(PropertyName = "zeitabhaengigeLinks", Order = 4)]
-    public List<ZeitabhaengigeBeziehung>? ZeitabhaengigeLinks { get; set; }
 }
