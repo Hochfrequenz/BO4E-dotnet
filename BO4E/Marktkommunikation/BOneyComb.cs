@@ -54,6 +54,6 @@ public class BOneyComb
     /// </remarks>
     [JsonPropertyName("zeitabhängigeLinks")]
     [JsonPropertyOrder(4)]
-    [Newtonsoft.Json.JsonProperty(PropertyName = "zeitabhängigeLinks", Order = 3)]
+    [Newtonsoft.Json.JsonProperty(PropertyName = "zeitabhängigeLinks", Order = 4)]
     public List<ZeitabhaengigeBeziehung>? ZeitabhaengigeLinks { get; set; }
 }
