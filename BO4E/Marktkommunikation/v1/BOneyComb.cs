@@ -4,7 +4,7 @@ using System.Text.Json.Serialization;
 using BO4E.BO;
 using BO4E.meta;
 
-namespace BO4E.Marktkommunikation;
+namespace BO4E.Marktkommunikation.v1;
 
 /// <summary>
 /// BOneyComb is a structure that is used when dealing with business objects that are embedded into market communication messages.
