@@ -1288,10 +1288,10 @@ enum RechnungspositionsStatus {
 }
 enum RechnungspositionsZuschlag {
    option (.protobuf_net.enumopt).namespace = "BO4E.ENUM";
-   UMSPANNUNGSZUSCHLAG = 0;
-   ALLEIN_GENUTZTE_BETRIEBSMITTEL_STROM_NEV = 1;
+   RechnungspositionsZuschlag_UMSPANNUNGSZUSCHLAG = 0;
+   RechnungspositionsZuschlag_ALLEIN_GENUTZTE_BETRIEBSMITTEL_STROM_NEV = 1;
    ANPASSUNG_STROM_NEV_19_2 = 2;
-   PAUSCHALE_NETZENTGELTREDUZIERUNG_ENWG_14A = 3;
+   RechnungspositionsZuschlag_PAUSCHALE_NETZENTGELTREDUZIERUNG_ENWG_14A = 3;
 }
 enum Rechnungsstatus {
    option (.protobuf_net.enumopt).namespace = "BO4E.ENUM";
