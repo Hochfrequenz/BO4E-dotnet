@@ -1,4 +1,5 @@
 using System.Runtime.Serialization;
+using ProtoBuf;
 
 namespace BO4E.ENUM;
 
@@ -11,6 +12,7 @@ public enum RechnungspositionsZuschlag
     /// Umspannungszuschlag [Z02]
     /// </summary>
     [EnumMember(Value = "UMSPANNUNGSZUSCHLAG")]
+    [ProtoEnum(Name = nameof(RechnungspositionsZuschlag) + "_" + nameof(UMSPANNUNGSZUSCHLAG))]
     [System.Text.Json.Serialization.JsonStringEnumMemberName("UMSPANNUNGSZUSCHLAG")]
     UMSPANNUNGSZUSCHLAG,
 
@@ -20,6 +22,11 @@ public enum RechnungspositionsZuschlag
     [EnumMember(Value = "ALLEIN_GENUTZTE_BETRIEBSMITTEL_STROM_NEV")]
     [System.Text.Json.Serialization.JsonStringEnumMemberName(
         "ALLEIN_GENUTZTE_BETRIEBSMITTEL_STROM_NEV"
+    )]
+    [ProtoEnum(
+        Name = nameof(RechnungspositionsZuschlag)
+            + "_"
+            + nameof(ALLEIN_GENUTZTE_BETRIEBSMITTEL_STROM_NEV)
     )]
     ALLEIN_GENUTZTE_BETRIEBSMITTEL_STROM_NEV,
 
@@ -36,6 +43,11 @@ public enum RechnungspositionsZuschlag
     [EnumMember(Value = "PAUSCHALE_NETZENTGELTREDUZIERUNG_ENWG_14A")]
     [System.Text.Json.Serialization.JsonStringEnumMemberName(
         "PAUSCHALE_NETZENTGELTREDUZIERUNG_ENWG_14A"
+    )]
+    [ProtoEnum(
+        Name = nameof(RechnungspositionsZuschlag)
+            + "_"
+            + nameof(PAUSCHALE_NETZENTGELTREDUZIERUNG_ENWG_14A)
     )]
     PAUSCHALE_NETZENTGELTREDUZIERUNG_ENWG_14A,
 }
