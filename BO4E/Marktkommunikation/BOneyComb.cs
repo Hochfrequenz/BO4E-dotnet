@@ -52,8 +52,8 @@ public class BOneyComb
     /// That's why this is a separate property.
     /// With this being a separate property, systems that care only about links, can simply ignore the zeitabhängige Links and those that care have a strong type to work with.
     /// </remarks>
-    [JsonPropertyName("zeitabhängigeLinks")]
+    [JsonPropertyName("zeitabhaengigeLinks")]
     [JsonPropertyOrder(4)]
-    [Newtonsoft.Json.JsonProperty(PropertyName = "zeitabhängigeLinks", Order = 4)]
+    [Newtonsoft.Json.JsonProperty(PropertyName = "zeitabhaengigeLinks", Order = 4)]
     public List<ZeitabhaengigeBeziehung>? ZeitabhaengigeLinks { get; set; }
 }
