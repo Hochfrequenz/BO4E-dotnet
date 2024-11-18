@@ -18,7 +18,9 @@ public enum RechnungspositionsZuschlag
     /// allein genutzte Betriebsmittel nach § 19, Absatz 3 Stromnetzentgeltverordnung [Z03]
     /// </summary>
     [EnumMember(Value = "ALLEIN_GENUTZTE_BETRIEBSMITTEL_STROM_NEV")]
-    [System.Text.Json.Serialization.JsonStringEnumMemberName("ALLEIN_GENUTZTE_BETRIEBSMITTEL_STROM_NEV")]
+    [System.Text.Json.Serialization.JsonStringEnumMemberName(
+        "ALLEIN_GENUTZTE_BETRIEBSMITTEL_STROM_NEV"
+    )]
     ALLEIN_GENUTZTE_BETRIEBSMITTEL_STROM_NEV,
 
     /// <summary>
