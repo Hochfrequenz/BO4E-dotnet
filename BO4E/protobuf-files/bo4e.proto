@@ -1267,8 +1267,16 @@ message Rechnungsposition {
    string VertragskontoId = 15;
    string ArtikelId = 28;
    .google.protobuf.Timestamp Ausfuehrungsdatum = 29;
+   .bcl.Decimal GesamtZuAbschlagsbetrag = 30;
+   RechnungspositionsZuschlag Zuschlag = 31;
+   RechnungspositionsAbschlag Abschlag = 32;
    string VertragsId = 1017;
    RechnungspositionsStatus Status = 1018;
+}
+enum RechnungspositionsAbschlag {
+   option (.protobuf_net.enumopt).namespace = "BO4E.ENUM";
+   GEMEINDERABATT = 0;
+   ANPASSUNG_STROM_NEV_19_2 = 1;
 }
 enum RechnungspositionsStatus {
    option (.protobuf_net.enumopt).namespace = "BO4E.ENUM";
@@ -1277,6 +1285,13 @@ enum RechnungspositionsStatus {
    ABRECHENBAR = 2;
    ABRECHENBAR_AUSGENOMMEN = 3;
    ABGERECHNET = 4;
+}
+enum RechnungspositionsZuschlag {
+   option (.protobuf_net.enumopt).namespace = "BO4E.ENUM";
+   RechnungspositionsZuschlag_UMSPANNUNGSZUSCHLAG = 0;
+   RechnungspositionsZuschlag_ALLEIN_GENUTZTE_BETRIEBSMITTEL_STROM_NEV = 1;
+   ANPASSUNG_STROM_NEV_19_2 = 2;
+   RechnungspositionsZuschlag_PAUSCHALE_NETZENTGELTREDUZIERUNG_ENWG_14A = 3;
 }
 enum Rechnungsstatus {
    option (.protobuf_net.enumopt).namespace = "BO4E.ENUM";
