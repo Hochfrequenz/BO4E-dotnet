@@ -1,3 +1,4 @@
+#nullable enable
 using System.Collections.Generic;
 using System.Text.Json.Serialization;
 using BO4E.BO;
@@ -22,7 +23,7 @@ public class BOneyComb
     [JsonPropertyName("stammdaten")]
     [JsonPropertyOrder(1)]
     [Newtonsoft.Json.JsonProperty(PropertyName = "stammdaten", Order = 1)]
-    public List<BusinessObject> Stammdaten { get; set; }
+    public List<BusinessObject>? Stammdaten { get; set; }
 
     /// <summary>
     /// Transaktionsdaten are data relevant only in the context of this market communication message.
@@ -31,7 +32,7 @@ public class BOneyComb
     [JsonPropertyName("transaktionsdaten")]
     [JsonPropertyOrder(2)]
     [Newtonsoft.Json.JsonProperty(PropertyName = "transaktionsdaten", Order = 2)]
-    public Dictionary<string, string> Transaktionsdaten { get; set; }
+    public Dictionary<string, string>? Transaktionsdaten { get; set; }
 
     /// <summary>
     /// Links describes relations between different BusinessObjects in Stammdaten.
@@ -41,5 +42,5 @@ public class BOneyComb
     [JsonPropertyName("links")]
     [JsonPropertyOrder(3)]
     [Newtonsoft.Json.JsonProperty(PropertyName = "links", Order = 3)]
-    public Dictionary<string, List<string>> Links { get; set; }
+    public Dictionary<string, List<string>>? Links { get; set; }
 }
