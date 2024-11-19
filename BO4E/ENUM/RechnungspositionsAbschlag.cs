@@ -1,4 +1,5 @@
 using System.Runtime.Serialization;
+using ProtoBuf;
 
 namespace BO4E.ENUM;
 
@@ -12,12 +13,14 @@ public enum RechnungspositionsAbschlag
     /// </summary>
     [EnumMember(Value = "GEMEINDERABATT")]
     [System.Text.Json.Serialization.JsonStringEnumMemberName("GEMEINDERABATT")]
+    [ProtoEnum(Name = nameof(RechnungspositionsAbschlag) + "_" + nameof(GEMEINDERABATT))]
     GEMEINDERABATT,
 
     /// <summary>
     /// Anpassung nach § 19, Absatz 2 Stromnetzentgeltverordnung [Z04]
     /// </summary>
-    [EnumMember(Value = "ABSCHLAG_ANPASSUNG")]
-    [System.Text.Json.Serialization.JsonStringEnumMemberName("ABSCHLAG_ANPASSUNG")]
-    ABSCHLAG_ANPASSUNG,
+    [EnumMember(Value = "ANPASSUNG_STROM_NEV_19_2")]
+    [System.Text.Json.Serialization.JsonStringEnumMemberName("ANPASSUNG_STROM_NEV_19_2")]
+    [ProtoEnum(Name = nameof(RechnungspositionsAbschlag) + "_" + nameof(ANPASSUNG_STROM_NEV_19_2))]
+    ANPASSUNG_STROM_NEV_19_2,
 }
