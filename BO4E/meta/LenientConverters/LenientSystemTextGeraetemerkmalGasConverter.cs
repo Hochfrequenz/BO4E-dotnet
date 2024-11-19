@@ -47,8 +47,10 @@ public class LenientSystemTextGeraetemerkmalGasConverter
     /// <summary>
     /// https://regex101.com/r/dAUAHL/1
     /// </summary>
-    private static readonly Regex GasPrefixRegex =
-        new(@"^(?<praefix>(?:GAS_)?)(?<rest>.+)$", RegexOptions.Compiled);
+    private static readonly Regex GasPrefixRegex = new(
+        @"^(?<praefix>(?:GAS_)?)(?<rest>.+)$",
+        RegexOptions.Compiled
+    );
 
     /// <summary>
     /// <inheritdoc cref="System.Text.Json.Serialization.JsonConverter{T}.Write"/>

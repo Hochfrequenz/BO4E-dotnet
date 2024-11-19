@@ -20,8 +20,10 @@ public class Notiz : COM
     /// </summary>
     [Newtonsoft.Json.JsonIgnore]
     [System.Text.Json.Serialization.JsonIgnore]
-    private static readonly Regex TrailingMinusRegex =
-        new(@"\r?(?:\\n|\n)?-*$", RegexOptions.Compiled);
+    private static readonly Regex TrailingMinusRegex = new(
+        @"\r?(?:\\n|\n)?-*$",
+        RegexOptions.Compiled
+    );
 
     private string _inhalt;
 

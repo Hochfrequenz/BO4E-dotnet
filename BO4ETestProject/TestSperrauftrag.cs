@@ -16,8 +16,11 @@ namespace TestBO4E;
 [TestClass]
 public class TestSperrauftrag
 {
-    private readonly JsonSerializerOptions _options =
-        new() { Converters = { new JsonStringEnumConverter() }, IgnoreNullValues = true };
+    private readonly JsonSerializerOptions _options = new()
+    {
+        Converters = { new JsonStringEnumConverter() },
+        IgnoreNullValues = true,
+    };
 
     [TestMethod]
     public void TestSperrauftragSerializationMaximal()

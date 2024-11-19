@@ -13,8 +13,11 @@ namespace TestBO4E;
 [TestClass]
 public class TestBOCOMDesign
 {
-    private static readonly HashSet<Type> NO_KEYS_WHITELIST =
-        new() { typeof(Kosten), typeof(Wechsel) };
+    private static readonly HashSet<Type> NO_KEYS_WHITELIST = new()
+    {
+        typeof(Kosten),
+        typeof(Wechsel),
+    };
 
     [TestMethod]
     public void TestNoBOFields()
