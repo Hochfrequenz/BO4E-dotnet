@@ -8,7 +8,7 @@ namespace BO4E.COM;
 /// Diese Komponente liefert die Geokoordinaten für einen Ort.
 /// Hierbei kann es sich um Breiten- und Längengrad oder um UTM-Koordinaten handeln. Diese lassen sich zwar ineinander
 /// umrechnen, jedoch sind die UTM-Koordinaten genauer, benötigen aber auch mehr Werte.
-/// Ein Mapping ist nicht vorgesehen, da die UTM-Koordinaten in der Regel nur von Fachleuten verwendet werden.
+/// Ein Mapping ist nicht vorgesehen in UTM-Koordinaten ist aktuell nicht vorgesehen.
 /// </summary>
 [ProtoContract]
 public class Geokoordinaten : COM
