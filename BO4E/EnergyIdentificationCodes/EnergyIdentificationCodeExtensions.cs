@@ -169,19 +169,18 @@ public static class EnergyIdentificationCodeExtensions
     public static bool IsGermanControlArea(this string? eicCode) =>
         GermanControlAreas.Values.Contains(eicCode);
 
-    private static readonly Dictionary<string, string> GermanControlAreas =
-        new()
+    private static readonly Dictionary<string, string> GermanControlAreas = new()
+    {
+        // they won't change in foreseeable time
+        { "N", "10YDE-EON------1" }, // tennet
+        { "R", "10YDE-RWENET---I" }, // amprion
+        { "V", "10YDE-VE-------2" }, // 50Hz
         {
-            // they won't change in foreseeable time
-            { "N", "10YDE-EON------1" }, // tennet
-            { "R", "10YDE-RWENET---I" }, // amprion
-            { "V", "10YDE-VE-------2" }, // 50Hz
-            {
-                "W",
-                "10YDE-ENBW-----N"
-            } // transnet BW
-            ,
-        };
+            "W",
+            "10YDE-ENBW-----N"
+        } // transnet BW
+        ,
+    };
 
     /// <summary>
     /// calculates the check character according to the EIC rules (ENTSO-E)
