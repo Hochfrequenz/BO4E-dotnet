@@ -7,7 +7,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        dotnet-version: ["8.0.401"]
+        dotnet-version: ["8.0.401", "9"]
     steps:
       - uses: actions/checkout@v4
       - name: Setup .NET Core
