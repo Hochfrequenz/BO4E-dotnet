@@ -12,7 +12,7 @@ namespace TestBO4E;
 public class TestLinkExtensions
 {
     [TestMethod]
-    public void Test_Link_To_Zeitabhaengig()
+    public void Test_Links_To_Zeitabhaengig()
     {
         var bc = new BOneyComb
         {
@@ -28,7 +28,7 @@ public class TestLinkExtensions
                 },
             },
         };
-        var actual = bc.Links.SelectMany(x => x.ToTimeDependentLink()).ToList();
+        var actual = bc.Links.ToTimeDependentLinks();
         actual
             .Should()
             .BeEquivalentTo(
@@ -81,5 +81,47 @@ public class TestLinkExtensions
             .BeEquivalentTo(
                 new KeyValuePair<string, List<string>>("foo", new List<string> { "bar" })
             );
+    }
+
+    [TestMethod]
+    public void Test_Zeitabhaengig_To_Links()
+    {
+        var bc = new BOneyComb
+        {
+            ZeitabhaengigeLinks = new()
+            {
+                new ZeitabhaengigeBeziehung
+                {
+                    ParentId = "foo",
+                    ChildId = "bar",
+                    GueltigVon = DateTimeOffset.MinValue,
+                    GueltigBis = DateTimeOffset.MaxValue,
+                },
+                new ZeitabhaengigeBeziehung
+                {
+                    ParentId = "foo",
+                    ChildId = "baz",
+                    GueltigVon = DateTimeOffset.MinValue,
+                    GueltigBis = DateTimeOffset.MaxValue,
+                },
+                new ZeitabhaengigeBeziehung
+                {
+                    ParentId = "x",
+                    ChildId = "y",
+                    GueltigVon = DateTimeOffset.MinValue,
+                    GueltigBis = DateTimeOffset.MaxValue,
+                },
+                new ZeitabhaengigeBeziehung
+                {
+                    ParentId = "x",
+                    ChildId = "z",
+                    GueltigVon = DateTimeOffset.MinValue,
+                    GueltigBis = DateTimeOffset.MaxValue,
+                },
+            },
+        };
+        var actual = bc.ZeitabhaengigeLinks.ToTimeIndependentLinks();
+        actual.Should().ContainKey("x").WhoseValue.Should().HaveCount(2);
+        actual.Should().ContainKey("foo").WhoseValue.Should().HaveCount(2);
     }
 }

@@ -45,4 +45,35 @@ public static class LinkExtensions
             .ToList();
         return result;
     }
+
+    /// <summary>
+    /// converts a dictionary of links to<see cref="ZeitabhaengigeBeziehung"/> based on <see cref="ToTimeDependentLink"/>
+    /// </summary>
+    /// <param name="timeIndependentLinks"></param>
+    /// <returns></returns>
+    public static List<ZeitabhaengigeBeziehung> ToTimeDependentLinks(
+        this IDictionary<string, List<string>> timeIndependentLinks
+    )
+    {
+        var result = timeIndependentLinks.SelectMany(x => x.ToTimeDependentLink()).ToList();
+        return result;
+    }
+
+    /// <summary>
+    /// converts a list of <see cref="ZeitabhaengigeBeziehung"/> to a dictionary of links
+    /// </summary>
+    /// <param name="timeDependentLinks"></param>
+    /// <returns></returns>
+    public static Dictionary<string, List<string>> ToTimeIndependentLinks(
+        this IList<ZeitabhaengigeBeziehung> timeDependentLinks
+    )
+    {
+        var result = timeDependentLinks
+            .GroupBy(x => x.ParentId)
+            .ToDictionary(
+                grouper => grouper.Key,
+                grouper => grouper.Select(x => x.ChildId).ToList()
+            );
+        return result;
+    }
 }
