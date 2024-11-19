@@ -20,17 +20,17 @@ public class Geokoordinaten : COM
     [ProtoMember(4)]
     public decimal? Laengengrad { get; set; }
 
-    /// <summary> Gibt die Östliche Koordinate eines entsprechenden Ortes an.</summary>
-    [JsonProperty(PropertyName = "oestlichelaenge")]
-    [JsonPropertyName("oestlichelaenge")]
+    /// <summary> Gibt die Östliche Länge im UTM-Koordinaten eines entsprechenden Ortes an.</summary>
+    [JsonProperty(PropertyName = "oestlicheLaenge")]
+    [JsonPropertyName("oestlicheLaenge")]
     [ProtoMember(5)]
     public decimal? OestlicheLaenge { get; set; }
 
-    /// <summary> Gibt die Nördliche Koordinate eines entsprechenden Ortes an.</summary>
-    [JsonProperty(PropertyName = "noerdlichebreite")]
-    [JsonPropertyName("noerdlichebreite")]
+    /// <summary> Gibt die Nördliche Breite in UTM-Koordinate eines entsprechenden Ortes an.</summary>
+    [JsonProperty(PropertyName = "noerdlicheBreite")]
+    [JsonPropertyName("noerdlicheBreite")]
     [ProtoMember(6)]
-    public decimal? noerdlichebreite { get; set; }
+    public decimal? NoerdlicheBreite { get; set; }
 
     /// <summary> Gibt die UTM Zone des Ortes an.</summary>
     [JsonProperty(PropertyName = "zone")]
@@ -38,15 +38,15 @@ public class Geokoordinaten : COM
     [ProtoMember(7)]
     public string? Zone { get; set; }
 
-    /// <summary> Gibt den Nordwert Ortes an.</summary>
-    [JsonProperty(PropertyName = "nordwert")]
+    /// <summary> Gibt den Nordwert Ortes in UTM-Koordinaten an.</summary>
+    [JsonProperty(PropertyName = "nordWert")]
     [JsonPropertyName("nordwert")]
     [ProtoMember(8)]
-    public string? nordwert { get; set; }
+    public string? NordWert { get; set; }
 
-    /// <summary> Gibt Ostwert des Ortes an.</summary>
-    [JsonProperty(PropertyName = "ostwert")]
+    /// <summary> Gibt Ostwert des Ortes in UTM-Koordinaten an.</summary>
+    [JsonProperty(PropertyName = "ostWert")]
     [JsonPropertyName("ostwert")]
     [ProtoMember(9)]
-    public string? oestwert { get; set; }
+    public string? OstWert { get; set; }
 }
