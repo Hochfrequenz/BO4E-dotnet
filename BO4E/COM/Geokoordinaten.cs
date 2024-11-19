@@ -45,13 +45,13 @@ public class Geokoordinaten : COM
 
     /// <summary> Gibt den Nordwert Ortes in UTM-Koordinaten an.</summary>
     [JsonProperty(PropertyName = "nordWert")]
-    [JsonPropertyName("nordwert")]
+    [JsonPropertyName("nordWert")]
     [ProtoMember(8)]
     public string? NordWert { get; set; }
 
     /// <summary> Gibt Ostwert des Ortes in UTM-Koordinaten an.</summary>
     [JsonProperty(PropertyName = "ostWert")]
-    [JsonPropertyName("ostwert")]
+    [JsonPropertyName("ostWert")]
     [ProtoMember(9)]
     public string? OstWert { get; set; }
 }
