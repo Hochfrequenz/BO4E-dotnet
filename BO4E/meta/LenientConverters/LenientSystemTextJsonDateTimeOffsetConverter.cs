@@ -55,6 +55,11 @@ public class LenientSystemTextJsonDateTimeOffsetConverter : JsonConverter<DateTi
         JsonSerializerOptions options
     )
     {
+        bool targetTypeIsNullable = Nullable.GetUnderlyingType(typeToConvert) != null;
+        if (reader.TokenType == JsonTokenType.Null && !targetTypeIsNullable)
+        {
+            return DateTimeOffset.MinValue;
+        }
         if (reader.TryGetDateTimeOffset(out var dto))
         {
             return dto;
