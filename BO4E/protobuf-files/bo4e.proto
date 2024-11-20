@@ -371,6 +371,11 @@ message Geokoordinaten {
    option (.protobuf_net.msgopt).namespace = "BO4E.COM";
    .bcl.Decimal Breitengrad = 3;
    .bcl.Decimal Laengengrad = 4;
+   .bcl.Decimal OestlicheLaenge = 5;
+   .bcl.Decimal NoerdlicheBreite = 6;
+   string Zone = 7;
+   string NordWert = 8;
+   string OstWert = 9;
 }
 message Geraet {
    option (.protobuf_net.msgopt).namespace = "BO4E.COM";
@@ -1275,8 +1280,8 @@ message Rechnungsposition {
 }
 enum RechnungspositionsAbschlag {
    option (.protobuf_net.enumopt).namespace = "BO4E.ENUM";
-   GEMEINDERABATT = 0;
-   ANPASSUNG_STROM_NEV_19_2 = 1;
+   RechnungspositionsAbschlag_GEMEINDERABATT = 0;
+   RechnungspositionsAbschlag_ANPASSUNG_STROM_NEV_19_2 = 1;
 }
 enum RechnungspositionsStatus {
    option (.protobuf_net.enumopt).namespace = "BO4E.ENUM";
