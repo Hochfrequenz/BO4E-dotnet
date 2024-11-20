@@ -51,6 +51,11 @@ public class LenientSystemTextJsonDateTimeConverter : JsonConverter<DateTime>
         JsonSerializerOptions options
     )
     {
+        bool targetTypeIsNullable = Nullable.GetUnderlyingType(typeToConvert) != null;
+        if (reader.TokenType == JsonTokenType.Null && !targetTypeIsNullable)
+        {
+            return DateTime.SpecifyKind(DateTime.MinValue, DateTimeKind.Utc);
+        }
         if (reader.TryGetDateTime(out var dt))
         {
             return DateTime.SpecifyKind(dt, DateTimeKind.Utc);
