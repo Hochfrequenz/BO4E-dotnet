@@ -1,15 +1,12 @@
+using System;
+using System.Collections.Generic;
+using System.Text.Json.Serialization;
 using BO4E.COM;
 using BO4E.EnergyIdentificationCodes;
 using BO4E.ENUM;
 using BO4E.meta;
-
 using Newtonsoft.Json;
-
 using ProtoBuf;
-
-using System;
-using System.Collections.Generic;
-using System.Text.Json.Serialization;
 
 namespace BO4E.BO;
 
@@ -23,17 +20,18 @@ public class Bilanzierung : BusinessObject
     /// <summary>
     /// Für welche Marktlokation gelten diese Bilanzierungsdaten
     /// </summary>
-    [JsonProperty(PropertyName = "marktlokationsId", Required = Required.Default, Order = 10)]
+    [JsonProperty(PropertyName = "marktlokationsId", Order = 10)]
     [JsonPropertyName("marktlokationsId")]
     [JsonPropertyOrder(10)]
     [NonOfficial(NonOfficialCategory.MISSING)]
     [ProtoMember(1000)]
     [BoKey]
     public string? MarktlokationsId { get; set; }
+
     /// <summary>
     /// Eine Liste der verwendeten Lastprofile (SLP, SLP/TLP, ALP etc.)
     /// </summary>
-    [JsonProperty(PropertyName = "lastprofile", Required = Required.Default, Order = 11)]
+    [JsonProperty(PropertyName = "lastprofile", Order = 11)]
     [JsonPropertyName("lastprofile")]
     [JsonPropertyOrder(11)]
     [NonOfficial(NonOfficialCategory.MISSING)]
@@ -52,16 +50,16 @@ public class Bilanzierung : BusinessObject
         get => Bilanzierungsbeginn?.UtcDateTime ?? DateTime.MinValue;
         set => Bilanzierungsbeginn = DateTime.SpecifyKind(value, DateTimeKind.Utc);
     }
+
     /// <summary>
     /// Inklusiver Start der Bilanzierung
     /// </summary>
-    [JsonProperty(PropertyName = "bilanzierungsbeginn", Required = Required.Default, Order = 12)]
+    [JsonProperty(PropertyName = "bilanzierungsbeginn", Order = 12)]
     [JsonPropertyName("bilanzierungsbeginn")]
     [JsonPropertyOrder(12)]
     [NonOfficial(NonOfficialCategory.MISSING)]
     [ProtoIgnore]
     public DateTimeOffset? Bilanzierungsbeginn { get; set; }
-
 
     /// <summary>
     /// Exklusives Ende der Bilanzierung
@@ -75,10 +73,11 @@ public class Bilanzierung : BusinessObject
         get => Bilanzierungsende?.UtcDateTime ?? DateTime.MinValue;
         set => Bilanzierungsende = DateTime.SpecifyKind(value, DateTimeKind.Utc);
     }
+
     /// <summary>
     /// Exklusives Ende der Bilanzierung
     /// </summary>
-    [JsonProperty(PropertyName = "bilanzierungsende", Required = Required.Default, Order = 13)]
+    [JsonProperty(PropertyName = "bilanzierungsende", Order = 13)]
     [JsonPropertyName("bilanzierungsende")]
     [JsonPropertyOrder(13)]
     [NonOfficial(NonOfficialCategory.MISSING)]
@@ -88,7 +87,7 @@ public class Bilanzierung : BusinessObject
     /// <summary>
     /// Bilanzkreis, should obey <see cref="EnergyIdentificationCodeExtensions.IsValidEIC"/>
     /// </summary>
-    [JsonProperty(PropertyName = "bilanzkreis", Required = Required.Default, Order = 14)]
+    [JsonProperty(PropertyName = "bilanzkreis", Order = 14)]
     [JsonPropertyName("bilanzkreis")]
     [JsonPropertyOrder(14)]
     [NonOfficial(NonOfficialCategory.MISSING)]
@@ -99,7 +98,7 @@ public class Bilanzierung : BusinessObject
     /// <summary>
     /// Jahresverbrauchsprognose
     /// </summary>
-    [JsonProperty(PropertyName = "jahresverbrauchsprognose", Required = Required.Default, Order = 15)]
+    [JsonProperty(PropertyName = "jahresverbrauchsprognose", Order = 15)]
     [JsonPropertyName("jahresverbrauchsprognose")]
     [JsonPropertyOrder(15)]
     [NonOfficial(NonOfficialCategory.MISSING)]
@@ -109,7 +108,7 @@ public class Bilanzierung : BusinessObject
     /// <summary>
     /// Kundenwert
     /// </summary>
-    [JsonProperty(PropertyName = "temperaturarbeit", Required = Required.Default, Order = 16)]
+    [JsonProperty(PropertyName = "temperaturarbeit", Order = 16)]
     [JsonPropertyName("temperaturarbeit")]
     [JsonPropertyOrder(16)]
     [NonOfficial(NonOfficialCategory.MISSING)]
@@ -119,7 +118,7 @@ public class Bilanzierung : BusinessObject
     /// <summary>
     /// Kundenwert
     /// </summary>
-    [JsonProperty(PropertyName = "kundenwert", Required = Required.Default, Order = 17)]
+    [JsonProperty(PropertyName = "kundenwert", Order = 17)]
     [JsonPropertyName("kundenwert")]
     [JsonPropertyOrder(17)]
     [NonOfficial(NonOfficialCategory.MISSING)]
@@ -134,7 +133,7 @@ public class Bilanzierung : BusinessObject
     ///  3. [Gemessene Energiemenge der OBIS "nicht Schwachlast"] + [zu verlagernde Energiemenge] = [Ermittelte Energiemenge für nicht
     ///     Schwachlast]
     /// </summary>
-    [JsonProperty(PropertyName = "verbrauchsaufteilung", Required = Required.Default, Order = 18)]
+    [JsonProperty(PropertyName = "verbrauchsaufteilung", Order = 18)]
     [JsonPropertyName("verbrauchsaufteilung")]
     [JsonPropertyOrder(18)]
     [NonOfficial(NonOfficialCategory.MISSING)]
@@ -144,7 +143,7 @@ public class Bilanzierung : BusinessObject
     /// <summary>
     ///     Zeitreihentyp (SLS, TLS, etc.)
     /// </summary>
-    [JsonProperty(PropertyName = "zeitreihentyp", Required = Required.Default, Order = 19)]
+    [JsonProperty(PropertyName = "zeitreihentyp", Order = 19)]
     [JsonPropertyName("zeitreihentyp")]
     [JsonPropertyOrder(19)]
     [NonOfficial(NonOfficialCategory.MISSING)]
@@ -154,7 +153,7 @@ public class Bilanzierung : BusinessObject
     /// <summary>
     ///     Aggregationsverantwortung
     /// </summary>
-    [JsonProperty(PropertyName = "aggregationsverantwortung", Required = Required.Default, Order = 20)]
+    [JsonProperty(PropertyName = "aggregationsverantwortung", Order = 20)]
     [JsonPropertyName("aggregationsverantwortung")]
     [JsonPropertyOrder(20)]
     [NonOfficial(NonOfficialCategory.MISSING)]
@@ -164,7 +163,7 @@ public class Bilanzierung : BusinessObject
     /// <summary>
     ///     Prognosegrundlage
     /// </summary>
-    [JsonProperty(PropertyName = "prognosegrundlage", Required = Required.Default, Order = 21)]
+    [JsonProperty(PropertyName = "prognosegrundlage", Order = 21)]
     [JsonPropertyName("prognosegrundlage")]
     [JsonPropertyOrder(21)]
     [NonOfficial(NonOfficialCategory.MISSING)]
@@ -176,7 +175,7 @@ public class Bilanzierung : BusinessObject
     ///     Besteht der Bedarf ein tagesparameteräbhängiges Lastprofil mit gemeinsamer Messung anzugeben, so ist dies über die 2 -malige
     ///     Wiederholung des CAV Segments mit der Angabe der Codes E02 und E14 möglich.
     /// </summary>
-    [JsonProperty(PropertyName = "detailsPrognosegrundlage", Required = Required.Default, Order = 22)]
+    [JsonProperty(PropertyName = "detailsPrognosegrundlage", Order = 22)]
     [JsonPropertyName("detailsPrognosegrundlage")]
     [JsonPropertyOrder(22)]
     [NonOfficial(NonOfficialCategory.MISSING)]
@@ -186,7 +185,7 @@ public class Bilanzierung : BusinessObject
     /// <summary>
     ///     Wahlrecht der Prognosegrundlage (true = Wahlrecht beim Lieferanten vorhanden)
     /// </summary>
-    [JsonProperty(PropertyName = "wahlrechtPrognosegrundlage", Required = Required.Default, Order = 23)]
+    [JsonProperty(PropertyName = "wahlrechtPrognosegrundlage", Order = 23)]
     [JsonPropertyName("wahlrechtPrognosegrundlage")]
     [JsonPropertyOrder(23)]
     [NonOfficial(NonOfficialCategory.MISSING)]
@@ -196,7 +195,7 @@ public class Bilanzierung : BusinessObject
     /// <summary>
     ///     Fallgruppenzuordnung (für gas RLM)
     /// </summary>
-    [JsonProperty(PropertyName = "fallgruppenzuordnung", Required = Required.Default, Order = 24)]
+    [JsonProperty(PropertyName = "fallgruppenzuordnung", Order = 24)]
     [JsonPropertyName("fallgruppenzuordnung")]
     [JsonPropertyOrder(24)]
     [NonOfficial(NonOfficialCategory.MISSING)]
@@ -206,7 +205,7 @@ public class Bilanzierung : BusinessObject
     /// <summary>
     ///   Priorität des Bilanzkreises (für Gas)
     /// </summary>
-    [JsonProperty(PropertyName = "prioritaet", Required = Required.Default, Order = 25)]
+    [JsonProperty(PropertyName = "prioritaet", Order = 25)]
     [JsonPropertyName("prioritaet")]
     [JsonPropertyOrder(25)]
     [NonOfficial(NonOfficialCategory.MISSING)]
@@ -216,7 +215,7 @@ public class Bilanzierung : BusinessObject
     /// <summary>
     ///     Grund Wahlrecht der Prognosegrundlage (true = Wahlrecht beim Lieferanten vorhanden)
     /// </summary>
-    [JsonProperty(PropertyName = "grundWahlrechtPrognosegrundlage", Required = Required.Default, Order = 26)]
+    [JsonProperty(PropertyName = "grundWahlrechtPrognosegrundlage", Order = 26)]
     [JsonPropertyName("grundWahlrechtPrognosegrundlage")]
     [JsonPropertyOrder(26)]
     [NonOfficial(NonOfficialCategory.MISSING)]
@@ -226,7 +225,7 @@ public class Bilanzierung : BusinessObject
     /// <summary>
     ///     Abwicklungsmodell
     /// </summary>
-    [JsonProperty(PropertyName = "abwicklungsmodell", Required = Required.Default, Order = 27)]
+    [JsonProperty(PropertyName = "abwicklungsmodell", Order = 27)]
     [JsonPropertyName("abwicklungsmodell")]
     [JsonPropertyOrder(27)]
     [NonOfficial(NonOfficialCategory.MISSING)]

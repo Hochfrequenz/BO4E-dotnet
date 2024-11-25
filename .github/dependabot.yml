@@ -4,8 +4,6 @@ updates:
     directory: "/"
     schedule:
       interval: "weekly"
-    reviewers:
-      - "@Hochfrequenz/c-developers-review-team"
     ignore:
       - dependency-name: "System.Text.*"
         update-types: ["version-update:semver-major"]

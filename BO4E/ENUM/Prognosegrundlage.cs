@@ -1,19 +1,19 @@
+using System.Runtime.Serialization;
 using BO4E.meta;
 
-using System.Runtime.Serialization;
+namespace BO4E.ENUM;
 
-namespace BO4E.ENUM
+/// <summary>Prognosegrundlage (WERTE, PROFILE)</summary>
+[NonOfficial(NonOfficialCategory.REGULATORY_REQUIREMENTS)]
+public enum Prognosegrundlage
 {
-    /// <summary>Prognosegrundlage (WERTE, PROFILE)</summary>
-    [NonOfficial(NonOfficialCategory.REGULATORY_REQUIREMENTS)]
-    public enum Prognosegrundlage
-    {
-        /// <summary>Prognose auf der Basis von Werten</summary>
-        [EnumMember(Value = "WERTE")]
-        WERTE,
+    /// <summary>Prognose auf der Basis von Werten</summary>
+    [EnumMember(Value = "WERTE")]
+    [System.Text.Json.Serialization.JsonStringEnumMemberName("WERTE")]
+    WERTE,
 
-        /// <summary>Prognose auf der Basis von Profilen</summary>
-        [EnumMember(Value = "PROFILE")]
-        PROFILE,
-    }
+    /// <summary>Prognose auf der Basis von Profilen</summary>
+    [EnumMember(Value = "PROFILE")]
+    [System.Text.Json.Serialization.JsonStringEnumMemberName("PROFILE")]
+    PROFILE,
 }

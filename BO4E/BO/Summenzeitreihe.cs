@@ -1,15 +1,12 @@
+using System;
+using System.Collections.Generic;
+using System.Text.Json.Serialization;
 using BO4E.COM;
 using BO4E.EnergyIdentificationCodes;
 using BO4E.ENUM;
 using BO4E.meta;
-
 using Newtonsoft.Json;
-
 using ProtoBuf;
-
-using System;
-using System.Collections.Generic;
-using System.Text.Json.Serialization;
 
 namespace BO4E.BO;
 
@@ -23,7 +20,7 @@ public class Summenzeitreihe : BusinessObject
     /// <summary>
     /// Für welchen MABIS-Zaehlpuunkt gelten diese Summenzeitreihendaten
     /// </summary>
-    [JsonProperty(PropertyName = "zaehlpunktId", Required = Required.Default, Order = 10)]
+    [JsonProperty(PropertyName = "zaehlpunktId", Order = 10)]
     [JsonPropertyName("zaehlpunktId")]
     [JsonPropertyOrder(10)]
     [NonOfficial(NonOfficialCategory.MISSING)]
@@ -43,16 +40,16 @@ public class Summenzeitreihe : BusinessObject
         get => Bilanzierungsbeginn?.UtcDateTime ?? DateTime.MinValue;
         set => Bilanzierungsbeginn = DateTime.SpecifyKind(value, DateTimeKind.Utc);
     }
+
     /// <summary>
     /// Inklusiver Start der Bilanzierung
     /// </summary>
-    [JsonProperty(PropertyName = "bilanzierungsbeginn", Required = Required.Default, Order = 12)]
+    [JsonProperty(PropertyName = "bilanzierungsbeginn", Order = 12)]
     [JsonPropertyName("bilanzierungsbeginn")]
     [JsonPropertyOrder(12)]
     [NonOfficial(NonOfficialCategory.MISSING)]
     [ProtoIgnore]
     public DateTimeOffset? Bilanzierungsbeginn { get; set; }
-
 
     /// <summary>
     /// Exklusives Ende der Bilanzierung
@@ -66,10 +63,11 @@ public class Summenzeitreihe : BusinessObject
         get => Bilanzierungsende?.UtcDateTime ?? DateTime.MinValue;
         set => Bilanzierungsende = DateTime.SpecifyKind(value, DateTimeKind.Utc);
     }
+
     /// <summary>
     /// Exklusives Ende der Bilanzierung
     /// </summary>
-    [JsonProperty(PropertyName = "bilanzierungsende", Required = Required.Default, Order = 13)]
+    [JsonProperty(PropertyName = "bilanzierungsende", Order = 13)]
     [JsonPropertyName("bilanzierungsende")]
     [JsonPropertyOrder(13)]
     [NonOfficial(NonOfficialCategory.MISSING)]
@@ -79,7 +77,7 @@ public class Summenzeitreihe : BusinessObject
     /// <summary>
     /// Bilanzkreis, should obey <see cref="EnergyIdentificationCodeExtensions.IsValidEIC"/>
     /// </summary>
-    [JsonProperty(PropertyName = "bilanzkreis", Required = Required.Default, Order = 14)]
+    [JsonProperty(PropertyName = "bilanzkreis", Order = 14)]
     [JsonPropertyName("bilanzkreis")]
     [JsonPropertyOrder(14)]
     [NonOfficial(NonOfficialCategory.MISSING)]
@@ -88,7 +86,7 @@ public class Summenzeitreihe : BusinessObject
     public string? Bilanzkreis { get; set; }
 
     /// <summary>Bilanzierungsgebiet, dem das Netzgebiet zugeordnet ist - im Falle eines Strom Netzes.</summary>
-    [JsonProperty(Required = Required.Default, Order = 15, PropertyName = "bilanzierungsgebiet")]
+    [JsonProperty(Order = 15, PropertyName = "bilanzierungsgebiet")]
     [JsonPropertyOrder(15)]
     [JsonPropertyName("bilanzierungsgebiet")]
     [ProtoMember(1005)]
@@ -97,7 +95,7 @@ public class Summenzeitreihe : BusinessObject
     /// <summary>
     /// Regelzone
     /// </summary>
-    [JsonProperty(Required = Required.Default, Order = 16, PropertyName = "regelzone")]
+    [JsonProperty(Order = 16, PropertyName = "regelzone")]
     [JsonPropertyName("regelzone")]
     [JsonPropertyOrder(16)]
     [ProtoMember(1006)]
@@ -107,7 +105,7 @@ public class Summenzeitreihe : BusinessObject
     /// <summary>
     /// Bezeichnung
     /// </summary>
-    [JsonProperty(Required = Required.Default, Order = 17, PropertyName = "bezeichnung")]
+    [JsonProperty(Order = 17, PropertyName = "bezeichnung")]
     [JsonPropertyName("bezeichnung")]
     [JsonPropertyOrder(17)]
     [ProtoMember(1007)]
@@ -117,7 +115,7 @@ public class Summenzeitreihe : BusinessObject
     /// <summary>
     /// Bezugszeitraum (TAG,MONAT)
     /// </summary>
-    [JsonProperty(Required = Required.Default, Order = 18, PropertyName = "bezugszeitraum")]
+    [JsonProperty(Order = 18, PropertyName = "bezugszeitraum")]
     [JsonPropertyName("bezugszeitraum")]
     [JsonPropertyOrder(18)]
     [ProtoMember(1008)]
@@ -127,7 +125,7 @@ public class Summenzeitreihe : BusinessObject
     /// <summary>
     /// Zeitreihentyp (SLS, TLS, etc.)
     /// </summary>
-    [JsonProperty(PropertyName = "zeitreihentyp", Required = Required.Default, Order = 19)]
+    [JsonProperty(PropertyName = "zeitreihentyp", Order = 19)]
     [JsonPropertyName("zeitreihentyp")]
     [JsonPropertyOrder(19)]
     [NonOfficial(NonOfficialCategory.MISSING)]
@@ -137,7 +135,7 @@ public class Summenzeitreihe : BusinessObject
     /// <summary>
     ///  Verantwortliche Marktrolle
     /// </summary>
-    [JsonProperty(PropertyName = "marktrolle", Required = Required.Default, Order = 20)]
+    [JsonProperty(PropertyName = "marktrolle", Order = 20)]
     [JsonPropertyName("marktrolle")]
     [JsonPropertyOrder(20)]
     [NonOfficial(NonOfficialCategory.MISSING)]
@@ -147,21 +145,19 @@ public class Summenzeitreihe : BusinessObject
     /// <summary>
     ///  Spannungsebene
     /// </summary>
-    [JsonProperty(PropertyName = "spannungsebene", Required = Required.Default, Order = 21)]
+    [JsonProperty(PropertyName = "spannungsebene", Order = 21)]
     [JsonPropertyName("spannungsebene")]
     [JsonPropertyOrder(21)]
     [NonOfficial(NonOfficialCategory.MISSING)]
     [ProtoMember(1021)]
     public Netzebene? Spannungsebene { get; set; }
 
-
     /// <summary>
     ///     Produkte der Summenzeitreihe
     /// </summary>
-    [JsonProperty(PropertyName = "produkte", Order = 22, Required = Required.Default)]
+    [JsonProperty(PropertyName = "produkte", Order = 22)]
     [JsonPropertyName("produkte")]
     [ProtoMember(1022)]
     [JsonPropertyOrder(22)]
     public List<Zeitreihenprodukt>? Produkte { get; set; }
-
 }

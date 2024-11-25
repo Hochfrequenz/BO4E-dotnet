@@ -11,19 +11,19 @@ namespace BO4E.COM;
 public class Ausschreibungslos : COM
 {
     /// <summary>Laufende Nummer des Loses</summary>
-    [JsonProperty(PropertyName = "losnummer", Required = Required.Always)]
+    [JsonProperty(PropertyName = "losnummer")]
     [JsonPropertyName("losnummer")]
     [ProtoMember(3)]
     public string Losnummer { get; set; }
 
     /// <summary>Bezeichnung der Ausschreibung</summary>
-    [JsonProperty(PropertyName = "bezeichung", Required = Required.Always)]
+    [JsonProperty(PropertyName = "bezeichung")]
     [JsonPropertyName("bezeichung")]
     [ProtoMember(4)]
     public string Bezeichung { get; set; }
 
     /// <summary>Bemerkung des Kunden zur Ausschreibung</summary>
-    [JsonProperty(PropertyName = "bemerkung", Required = Required.Default)]
+    [JsonProperty(PropertyName = "bemerkung")]
     [JsonPropertyName("bemerkung")]
     [ProtoMember(5)]
     public string? Bemerkung { get; set; }
@@ -32,13 +32,13 @@ public class Ausschreibungslos : COM
     ///     Bezeichnung der Preismodelle in Ausschreibungen für die Energielieferung. Details
     ///     <see cref="ENUM.Preismodell" />
     /// </summary>
-    [JsonProperty(PropertyName = "preismodell", Required = Required.Always)]
+    [JsonProperty(PropertyName = "preismodell")]
     [JsonPropertyName("preismodell")]
     [ProtoMember(6)]
     public Preismodell Preismodell { get; set; }
 
     /// <summary>Unterscheidungsmöglichkeiten für die Sparte. Details <see cref="Sparte" /></summary>
-    [JsonProperty(PropertyName = "energieart", Required = Required.Always)]
+    [JsonProperty(PropertyName = "energieart")]
     [JsonPropertyName("energieart")]
     [ProtoMember(7)]
     public Sparte Energieart { get; set; }
@@ -46,7 +46,7 @@ public class Ausschreibungslos : COM
     /// <summary>
     ///     Aufzählung der Möglichkeiten zur Rechnungslegung in Ausschreibungen. Details <see cref="Rechnungslegung" />
     /// </summary>
-    [JsonProperty(PropertyName = "wunschRechnungslegung", Required = Required.Always)]
+    [JsonProperty(PropertyName = "wunschRechnungslegung")]
     [JsonPropertyName("wunschRechnungslegung")]
     [ProtoMember(8)]
     public Rechnungslegung WunschRechnungslegung { get; set; }
@@ -54,46 +54,46 @@ public class Ausschreibungslos : COM
     /// <summary>
     ///     Aufzählung der Möglichkeiten zu Vertragsformen in Ausschreibungen. Details <see cref="Vertragsform" />
     /// </summary>
-    [JsonProperty(PropertyName = "wunschVertragsform", Required = Required.Always)]
+    [JsonProperty(PropertyName = "wunschVertragsform")]
     [JsonPropertyName("wunschVertragsform")]
     [ProtoMember(9)]
     public Vertragsform WunschVertragsform { get; set; }
 
     /// <summary>Name des Lizenzpartners</summary>
-    [JsonProperty(PropertyName = "betreutDurch", Required = Required.Always)]
+    [JsonProperty(PropertyName = "betreutDurch")]
     [JsonPropertyName("betreutDurch")]
     [ProtoMember(10)]
     public string BetreutDurch { get; set; }
 
     /// <summary>Anzahl der Lieferstellen in dieser Ausschreibung</summary>
-    [JsonProperty(PropertyName = "anzahlLieferstellen", Required = Required.Always)]
+    [JsonProperty(PropertyName = "anzahlLieferstellen")]
     [JsonPropertyName("anzahlLieferstellen")]
     [ProtoMember(11)]
     public int AnzahlLieferstellen { get; set; } // does this make sense? lieferstellen.Size()?
 
     /// <summary>Die ausgeschriebenen Lieferstellen. Details <see cref="Ausschreibungsdetail" /></summary>
-    [JsonProperty(PropertyName = "lieferstellen", Required = Required.Always)]
+    [JsonProperty(PropertyName = "lieferstellen")]
     [JsonPropertyName("lieferstellen")]
     [ProtoMember(12)]
     public List<Ausschreibungsdetail> Lieferstellen { get; set; }
 
     /// <summary>Gibt den Gesamtjahresverbrauch (z.B. in kWh) aller in diesem Los enthaltenen Lieferstellen an.</summary>
     /// <see cref="Menge" />
-    [JsonProperty(PropertyName = "gesamtmenge", Required = Required.Default)]
+    [JsonProperty(PropertyName = "gesamtmenge")]
     [JsonPropertyName("gesamtmenge")]
     [ProtoMember(13)]
     public Menge? Gesamtmenge { get; set; }
 
     /// <summary>Mindestmenge Toleranzband (kWh, %)</summary>
     /// <see cref="Menge" />
-    [JsonProperty(PropertyName = "wunschMindestmenge", Required = Required.Default)]
+    [JsonProperty(PropertyName = "wunschMindestmenge")]
     [JsonPropertyName("wunschMindestmenge")]
     [ProtoMember(14)]
     public Menge? WunschMindestmenge { get; set; }
 
     /// <summary>Maximalmenge Toleranzband (kWh, %)</summary>
     /// <see cref="Menge" />
-    [JsonProperty(PropertyName = "wunschMaximalmenge", Required = Required.Default)]
+    [JsonProperty(PropertyName = "wunschMaximalmenge")]
     [JsonPropertyName("wunschMaximalmenge")]
     [ProtoMember(15)]
     public Menge? WunschMaximalmenge { get; set; }
@@ -103,28 +103,28 @@ public class Ausschreibungslos : COM
     ///     bei öffentlich-rechtlichen Ausschreibungen, ansonsten NULL
     /// </summary>
     /// <see cref="Zeitraum" />
-    [JsonProperty(PropertyName = "wiederholungsintervall", Required = Required.Default)]
+    [JsonProperty(PropertyName = "wiederholungsintervall")]
     [JsonPropertyName("wiederholungsintervall")]
     [ProtoMember(16)]
     public Zeitraum? Wiederholungsintervall { get; set; }
 
     /// <summary>Zeitraum, für den die in diesem Los enthaltenen Lieferstellen beliefert werden sollen</summary>
     /// <see cref="Zeitraum" />
-    [JsonProperty(PropertyName = "lieferzeitraum", Required = Required.Default)]
+    [JsonProperty(PropertyName = "lieferzeitraum")]
     [JsonPropertyName("lieferzeitraum")]
     [ProtoMember(17)]
     public Zeitraum? Lieferzeitraum { get; set; }
 
     /// <summary>Kundenwunsch zur Kündigungsfrist in der Ausschreibung.</summary>
     /// <see cref="Zeitraum" />
-    [JsonProperty(PropertyName = "wunschKuendingungsfrist", Required = Required.Default)]
+    [JsonProperty(PropertyName = "wunschKuendingungsfrist")]
     [JsonPropertyName("wunschKuendingungsfrist")]
     [ProtoMember(18)]
     public Zeitraum? WunschKuendingungsfrist { get; set; }
 
     /// <summary>Kundenwunsch zum Zahlungsziel in der Ausschreibung.</summary>
     /// <see cref="Zeitraum" />
-    [JsonProperty(PropertyName = "wunschZahlungsziel", Required = Required.Default)]
+    [JsonProperty(PropertyName = "wunschZahlungsziel")]
     [JsonPropertyName("wunschZahlungsziel")]
     [ProtoMember(19)]
     public Zeitraum? WunschZahlungsziel { get; set; }

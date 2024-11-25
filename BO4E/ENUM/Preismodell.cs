@@ -7,5 +7,6 @@ public enum Preismodell
 {
     /// <summary>Tranche</summary>
     [EnumMember(Value = "TRANCHE")]
+    [System.Text.Json.Serialization.JsonStringEnumMemberName("TRANCHE")]
     TRANCHE,
 }
