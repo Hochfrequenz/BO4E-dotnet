@@ -47,7 +47,8 @@ public class ZeitabhaengigeBeziehung
     public string? ChildId { get; set; }
 
     /// <summary>
-    /// An extra filed to store or add additional information for further processing.
+    /// An extra field to store or add additional information for further processing.
+    /// This can be used to distinguish different kinds of relations between the same parent and child type.
     /// </summary>
     [JsonPropertyName("additionalInformation")]
     [JsonPropertyOrder(5)]
