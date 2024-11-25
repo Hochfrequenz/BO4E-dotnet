@@ -29,10 +29,10 @@ public class ZeitabhaengigeBeziehung
     [Newtonsoft.Json.JsonProperty(PropertyName = "gueltigBis", Order = 2)]
     public DateTimeOffset? GueltigBis
     {
-        get => _infiniteTime;
-        set => _infiniteTime = (value == DateTimeOffset.MaxValue) ? null : value;
+        get => _gueltigBis;
+        set => _gueltigBis = (value == DateTimeOffset.MaxValue) ? null : value;
     }
-    private DateTimeOffset? _infiniteTime;
+    private DateTimeOffset? _gueltigBis;
 
     /// <summary>
     /// e.g.
