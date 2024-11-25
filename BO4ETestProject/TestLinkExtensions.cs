@@ -118,10 +118,17 @@ public class TestLinkExtensions
                     GueltigVon = DateTimeOffset.MinValue,
                     GueltigBis = DateTimeOffset.MaxValue,
                 },
+                new ZeitabhaengigeBeziehung
+                {
+                    ParentId = "x",
+                    ChildId = "g",
+                    GueltigVon = DateTimeOffset.MinValue,
+                    GueltigBis = null,
+                },
             },
         };
         var actual = bc.ZeitabhaengigeLinks.ToTimeIndependentLinks();
-        actual.Should().ContainKey("x").WhoseValue.Should().HaveCount(2);
+        actual.Should().ContainKey("x").WhoseValue.Should().HaveCount(3);
         actual.Should().ContainKey("foo").WhoseValue.Should().HaveCount(2);
     }
 }
