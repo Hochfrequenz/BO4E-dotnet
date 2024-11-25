@@ -14,7 +14,7 @@ namespace BO4E.COM;
 public class Betrag : COM
 {
     /// <summary>Gibt den Betrag des Preises an.</summary>
-    [JsonProperty(PropertyName = "wert", Required = Required.Always)]
+    [JsonProperty(PropertyName = "wert")]
     [JsonPropertyName("wert")]
     [FieldName("value", Language.EN)]
     [ProtoMember(3)]
@@ -23,7 +23,7 @@ public class Betrag : COM
     /// <summary>
     ///     <seealso cref="Waehrungscode" />
     /// </summary>
-    [JsonProperty(PropertyName = "waehrung", Required = Required.Always)]
+    [JsonProperty(PropertyName = "waehrung")]
     [JsonPropertyName("waehrung")]
     [FieldName("currency", Language.EN)]
     [ProtoMember(4)]

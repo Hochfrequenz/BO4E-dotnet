@@ -21,8 +21,8 @@
     <AllowedOutputExtensionsInPackageBuildOutputFolder
     >$(AllowedOutputExtensionsInPackageBuildOutputFolder);.pdb</AllowedOutputExtensionsInPackageBuildOutputFolder>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-    <LangVersion>9</LangVersion>
-    <TargetFramework>net6.0</TargetFramework>
+    <LangVersion>12</LangVersion>
+    <TargetFrameworks>netstandard2.1;netstandard2.0</TargetFrameworks>
   </PropertyGroup>
 
   <PropertyGroup>

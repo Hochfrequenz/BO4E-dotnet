@@ -13,7 +13,7 @@ public class Adresse : COM
 {
     /// <summary>Die Postleitzahl. Beispiel: 41836</summary>
     [DataCategory(DataCategory.ADDRESS)]
-    [JsonProperty(PropertyName = "postleitzahl", Required = Required.Default, Order = 11)]
+    [JsonProperty(PropertyName = "postleitzahl", Order = 11)]
     [JsonPropertyName("postleitzahl")]
     [FieldName("zipCode", Language.EN)]
     [ProtoMember(3)]
@@ -22,7 +22,7 @@ public class Adresse : COM
 
     /// <summary>Bezeichnung der Stadt. Beispiel Hückelhoven</summary>
     [DataCategory(DataCategory.ADDRESS)]
-    [JsonProperty(PropertyName = "ort", Required = Required.Default, Order = 12)]
+    [JsonProperty(PropertyName = "ort", Order = 12)]
     [JsonPropertyName("ort")]
     [FieldName("city", Language.EN)]
     [ProtoMember(4)]
@@ -31,7 +31,7 @@ public class Adresse : COM
 
     /// <summary>Bezeichnung der Straße. Beispiel: Weserstraße</summary>
     [DataCategory(DataCategory.ADDRESS)]
-    [JsonProperty(PropertyName = "strasse", Required = Required.Default, Order = 13)]
+    [JsonProperty(PropertyName = "strasse", Order = 13)]
     [JsonPropertyName("strasse")]
     [FieldName("street", Language.EN)]
     [ProtoMember(5)]
@@ -40,7 +40,7 @@ public class Adresse : COM
 
     /// <summary>Hausnummer inkl. Zusatz. Beispiel. 3, 4a etc.</summary>
     [DataCategory(DataCategory.ADDRESS)]
-    [JsonProperty(PropertyName = "hausnummer", Required = Required.Default, Order = 14)]
+    [JsonProperty(PropertyName = "hausnummer", Order = 14)]
     [JsonPropertyName("hausnummer")]
     [FieldName("houseNumber", Language.EN)]
     [ProtoMember(6)]
@@ -52,7 +52,7 @@ public class Adresse : COM
     ///     Hausnummer nicht berücksichtigt.Beispiel: Postfach 4711
     /// </summary>
     [DataCategory(DataCategory.ADDRESS)]
-    [JsonProperty(PropertyName = "postfach", Required = Required.Default, Order = 15)]
+    [JsonProperty(PropertyName = "postfach", Order = 15)]
     [JsonPropertyName("postfach")]
     [ProtoMember(7)]
     [JsonPropertyOrder(15)]
@@ -60,7 +60,7 @@ public class Adresse : COM
 
     /// <summary>Zusatzhinweis zum Auffinden der Adresse, z.B. "3. Stock linke Wohnung"</summary>
     [DataCategory(DataCategory.ADDRESS)]
-    [JsonProperty(PropertyName = "adresszusatz", Required = Required.Default, Order = 16)]
+    [JsonProperty(PropertyName = "adresszusatz", Order = 16)]
     [JsonPropertyName("adresszusatz")]
     [ProtoMember(8)]
     [JsonPropertyOrder(16)]
@@ -72,7 +72,7 @@ public class Adresse : COM
     ///     der in c/o adressierten Person oder Firma.
     /// </summary>
     [DataCategory(DataCategory.ADDRESS)]
-    [JsonProperty(PropertyName = "coErgaenzung", Required = Required.Default, Order = 17)]
+    [JsonProperty(PropertyName = "coErgaenzung", Order = 17)]
     [JsonPropertyName("coErgaenzung")]
     [ProtoMember(9)]
     [JsonPropertyOrder(17)]
@@ -80,7 +80,7 @@ public class Adresse : COM
 
     /// <summary>Offizieller ISO-Landescode. Z.B. NL, Details <see cref="ENUM.Landescode" /></summary>
     [DataCategory(DataCategory.ADDRESS)]
-    [JsonProperty(PropertyName = "landescode", Required = Required.Default, Order = 18)]
+    [JsonProperty(PropertyName = "landescode", Order = 18)]
     [JsonPropertyName("landescode")]
     [FieldName("countryCode", Language.EN)]
     [ProtoMember(10)]
@@ -90,8 +90,11 @@ public class Adresse : COM
     /// <summary>
     ///     Ortsteil für EDIFACT mapping
     /// </summary>
-    [JsonProperty(PropertyName = "ortsteil", Required = Required.Default,
-        NullValueHandling = NullValueHandling.Ignore, Order = 19)]
+    [JsonProperty(
+        PropertyName = "ortsteil",
+        NullValueHandling = NullValueHandling.Ignore,
+        Order = 19
+    )]
     [JsonPropertyName("ortsteil")]
     [ProtoMember(1011)]
     [NonOfficial(NonOfficialCategory.MISSING)]

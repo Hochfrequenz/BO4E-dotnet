@@ -22,7 +22,7 @@ public class Angebot : BusinessObject
     /// <summary>
     ///     Eindeutige Nummer des Angebotes.
     /// </summary>
-    [JsonProperty(Required = Required.Always, Order = 10, PropertyName = "angebotsnummer")]
+    [JsonProperty(Order = 10, PropertyName = "angebotsnummer")]
     [JsonPropertyName("angebotsnummer")]
     [ProtoMember(4)]
     [JsonPropertyOrder(10)]
@@ -34,7 +34,7 @@ public class Angebot : BusinessObject
     ///     Referenz auf eine Anfrage oder Ausschreibung.Kann dem Empfänger des Angebotes bei Zuordnung des Angebotes zur
     ///     Anfrage bzw.Ausschreibung helfen.
     /// </summary>
-    [JsonProperty(Required = Required.Default, Order = 11, PropertyName = "anfragereferenz")]
+    [JsonProperty(Order = 11, PropertyName = "anfragereferenz")]
     [JsonPropertyName("anfragereferenz")]
     [ProtoMember(5)]
     [JsonPropertyOrder(11)]
@@ -50,13 +50,14 @@ public class Angebot : BusinessObject
         get => Angebotsdatum.UtcDateTime;
         set => Angebotsdatum = DateTime.SpecifyKind(value, DateTimeKind.Utc);
     }
+
     /// <summary>
     ///     Erstellungsdatum des Angebots,
     /// </summary>
     /// <example>
     ///     2017-12-24
     /// </example>
-    [JsonProperty(Required = Required.Always, Order = 13, PropertyName = "angebotsdatum")]
+    [JsonProperty(Order = 13, PropertyName = "angebotsdatum")]
     [JsonPropertyName("angebotsdatum")]
     [JsonPropertyOrder(13)]
     [ProtoIgnore]
@@ -67,7 +68,7 @@ public class Angebot : BusinessObject
     ///     Sparte, für die das Angebot abgegeben wird (Strom/Gas).
     /// </summary>
     /// <see cref="Sparte" />
-    [JsonProperty(Required = Required.Always, Order = 14, PropertyName = "sparte")]
+    [JsonProperty(Order = 14, PropertyName = "sparte")]
     [JsonPropertyName("sparte")]
     [JsonPropertyOrder(14)]
     [ProtoMember(7)]
@@ -82,13 +83,14 @@ public class Angebot : BusinessObject
         get => Bindefrist?.UtcDateTime ?? default;
         set => Bindefrist = value == default ? null : DateTime.SpecifyKind(value, DateTimeKind.Utc);
     }
+
     /// <summary>
     ///     Bis zu diesem Zeitpunkt(Tag/Uhrzeit) inklusive gilt das Angebot
     /// </summary>
     /// <example>
     ///     2017-12-31 17:00:00
     /// </example>
-    [JsonProperty(Required = Required.Default, Order = 15, PropertyName = "bindefrist")]
+    [JsonProperty(Order = 15, PropertyName = "bindefrist")]
     [JsonPropertyName("bindefrist")]
     [JsonPropertyOrder(15)]
     [ProtoIgnore]
@@ -99,7 +101,7 @@ public class Angebot : BusinessObject
     ///     Link auf den Ersteller des Angebots.
     /// </summary>
     /// <see cref="Geschaeftspartner" />
-    [JsonProperty(Required = Required.Always, Order = 16, PropertyName = "angebotgeber")]
+    [JsonProperty(Order = 16, PropertyName = "angebotgeber")]
     [JsonPropertyName("angebotgeber")]
     [JsonPropertyOrder(16)]
     [ProtoMember(9)]
@@ -110,7 +112,7 @@ public class Angebot : BusinessObject
     ///     Link auf den Empfänger des Angebots.
     /// </summary>
     /// <see cref="Geschaeftspartner" />
-    [JsonProperty(Required = Required.Always, Order = 17, PropertyName = "angebotnehmer")]
+    [JsonProperty(Order = 17, PropertyName = "angebotnehmer")]
     [JsonPropertyName("angebotnehmer")]
     [JsonPropertyOrder(17)]
     [ProtoMember(10)]
@@ -121,7 +123,7 @@ public class Angebot : BusinessObject
     ///     Link auf die Person, die als Angebotsnehmer das Angebot angenommen hat.
     /// </summary>
     /// <see cref="Ansprechpartner" />
-    [JsonProperty(Required = Required.Default, Order = 18, PropertyName = "unterzeichnerAngebotsnehmer")]
+    [JsonProperty(Order = 18, PropertyName = "unterzeichnerAngebotsnehmer")]
     [JsonPropertyName("unterzeichnerAngebotsnehmer")]
     [ProtoMember(11)]
     [JsonPropertyOrder(18)]
@@ -132,7 +134,7 @@ public class Angebot : BusinessObject
     ///     Link auf die Person, die als Angebotsgeber das Angebots ausgestellt hat.
     /// </summary>
     /// <see cref="Ansprechpartner" />
-    [JsonProperty(Required = Required.Default, Order = 19, PropertyName = "unterzeichnerAngebotsgeber")]
+    [JsonProperty(Order = 19, PropertyName = "unterzeichnerAngebotsgeber")]
     [JsonPropertyName("unterzeichnerAngebotsgeber")]
     [ProtoMember(12)]
     [JsonPropertyOrder(19)]
@@ -143,7 +145,7 @@ public class Angebot : BusinessObject
     ///     Eine oder mehrere Varianten des Angebots mit den Angebotsteilen. Ein Angebot besteht mindestens aus einer Variante.
     /// </summary>
     /// <see cref="Angebotsvariante" />
-    [JsonProperty(Required = Required.Default, Order = 20, PropertyName = "varianten")]
+    [JsonProperty(Order = 20, PropertyName = "varianten")]
     [JsonPropertyName("varianten")]
     [JsonPropertyOrder(20)]
     [ProtoMember(13)]
