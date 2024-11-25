@@ -137,28 +137,24 @@ public class TestLinkExtensions
                     ParentId = "foo",
                     ChildId = "bar",
                     GueltigVon = DateTimeOffset.MinValue,
-                    GueltigBis = null,
                 },
                 new ZeitabhaengigeBeziehung
                 {
                     ParentId = "foo",
                     ChildId = "baz",
                     GueltigVon = DateTimeOffset.MinValue,
-                    GueltigBis = null,
                 },
                 new ZeitabhaengigeBeziehung
                 {
                     ParentId = "x",
                     ChildId = "y",
                     GueltigVon = DateTimeOffset.MinValue,
-                    GueltigBis = null,
                 },
                 new ZeitabhaengigeBeziehung
                 {
                     ParentId = "x",
                     ChildId = "z",
                     GueltigVon = DateTimeOffset.MinValue,
-                    GueltigBis = null,
                 },
             },
         };

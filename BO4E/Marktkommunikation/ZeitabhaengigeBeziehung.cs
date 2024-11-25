@@ -21,12 +21,12 @@ public class ZeitabhaengigeBeziehung
     public DateTimeOffset GueltigVon { get; set; }
 
     /// <summary>
-    /// exklusives Ende
+    /// exklusives Ende, hier darf nur das Mavimale Enddatum eingetragen werden, sofern bekannt. Anderen Falls ist das Feld null.
     /// </summary>
     [JsonPropertyName("gueltigBis")]
     [JsonPropertyOrder(2)]
     [Newtonsoft.Json.JsonProperty(PropertyName = "gueltigBis", Order = 2)]
-    public DateTimeOffset? GueltigBis { get; set; }
+    public DateTimeOffset? GueltigBis { get; set; } = null;
 
     /// <summary>
     /// e.g.
