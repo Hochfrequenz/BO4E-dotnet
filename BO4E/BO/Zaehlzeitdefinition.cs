@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Text.Json.Serialization;
 using BO4E.COM;
 using BO4E.ENUM;
@@ -34,7 +35,7 @@ public class Zaehlzeitdefinition : BusinessObject
     /// Der inklusive Zeitpunkt ab dem die Zaehlzeitdefinitionen ausgerollt sind
     /// </summary>
     /// <remarks>UTILTS SG5 DTM+Z34</remarks>
-    [JsonProperty(Required = Required.Default, Order = 6, PropertyName = "beginndatum")]
+    [JsonProperty(Order = 6, PropertyName = "beginndatum")]
     [JsonPropertyName("beginndatum")]
     [JsonPropertyOrder(6)]
     [ProtoIgnore]
@@ -54,7 +55,7 @@ public class Zaehlzeitdefinition : BusinessObject
     /// Der exklusive Zeitpunkt bis zu dem die Zaehlzeitdefinitionen ausgerollt sind
     /// </summary>
     /// <remarks>UTILTS SG5 DTM+Z35</remarks>
-    [JsonProperty(Required = Required.Default, Order = 7, PropertyName = "endedatum")]
+    [JsonProperty(Order = 7, PropertyName = "endedatum")]
     [JsonPropertyName("endedatum")]
     [ProtoIgnore]
     [JsonPropertyOrder(7)]
@@ -73,7 +74,7 @@ public class Zaehlzeitdefinition : BusinessObject
     /// <summary>
     /// Version der Zählzeitdefinition als Datum
     ///</summary>
-    [JsonProperty(Required = Required.Always, Order = 8, PropertyName = "version")]
+    [JsonProperty(Order = 8, PropertyName = "version")]
     [JsonPropertyName("version")]
     [ProtoIgnore]
     [BoKey]
@@ -84,7 +85,7 @@ public class Zaehlzeitdefinition : BusinessObject
     /// Beschreibt ob eine Zaehlzeitdefinitionen notwendig ist
     /// </summary>
     /// <remarks>UTILTS SG5 STS 4405</remarks>
-    [JsonProperty(Required = Required.Default, Order = 9, PropertyName = "notwendigkeit")]
+    [JsonProperty(Order = 9, PropertyName = "notwendigkeit")]
     [JsonPropertyName("notwendigkeit")]
     [ProtoMember(9)]
     [JsonPropertyOrder(9)]
@@ -93,31 +94,27 @@ public class Zaehlzeitdefinition : BusinessObject
     /// <summary>
     /// Liste der Zählzeiten [1 - 99999]
     /// </summary>
-    [JsonProperty(Required = Required.Default, Order = 10, PropertyName = "zaehlzeiten")]
+    [JsonProperty(Order = 10, PropertyName = "zaehlzeiten")]
     [JsonPropertyName("zaehlzeiten")]
     [ProtoMember(10)]
     [JsonPropertyOrder(10)]
-    public System.Collections.Generic.List<Zaehlzeit>? Zaehlzeiten { get; set; }
+    public List<Zaehlzeit>? Zaehlzeiten { get; set; }
 
     /// <summary>
     /// Liste der Zählzeitregister
     /// </summary>
-    [JsonProperty(Required = Required.Always, Order = 11, PropertyName = "zaehlzeitregister")]
+    [JsonProperty(Order = 11, PropertyName = "zaehlzeitregister")]
     [JsonPropertyName("zaehlzeitregister")]
     [ProtoMember(11)]
     [JsonPropertyOrder(11)]
-    public System.Collections.Generic.List<Zaehlzeitregister> Zaehlzeitregister { get; set; }
+    public List<Zaehlzeitregister> Zaehlzeitregister { get; set; }
 
     /// <summary>
     /// Liste der ausgerollten Zählzeiten
     /// </summary>
-    [JsonProperty(
-        Required = Required.Always,
-        Order = 12,
-        PropertyName = "ausgerollteZaehlzeiten"
-    )]
+    [JsonProperty(Order = 12, PropertyName = "ausgerollteZaehlzeiten")]
     [JsonPropertyName("ausgerollteZaehlzeiten")]
     [ProtoMember(12)]
     [JsonPropertyOrder(12)]
-    public System.Collections.Generic.List<AusgerollteZaehlzeit> AusgerollteZaehlzeiten { get; set; }
+    public List<AusgerollteZaehlzeit> AusgerollteZaehlzeiten { get; set; }
 }

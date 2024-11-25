@@ -17,16 +17,16 @@ public class Statusbericht : BusinessObject
     /// <summary>
     ///     Status des Berichtes (Fehlerhaft, Erfolgreich)
     /// </summary>
-    [JsonProperty(Required = Required.Always, Order = 10, PropertyName = "status")]
+    [JsonProperty(Order = 10, PropertyName = "status")]
     [JsonPropertyName("status")]
     [JsonPropertyOrder(10)]
     [ProtoMember(1)]
-    public BO4E.ENUM.BerichtStatus Status { get; set; }
+    public BO4E.ENUM.BerichtStatus? Status { get; set; }
 
     /// <summary>
     ///    Das geprüfte Dokument, z.B. die Referenz auf die EDIFACT-Nachricht die geprüft / beanstandet wurde
     /// </summary>
-    [JsonProperty(Required = Required.Default, Order = 11, PropertyName = "pruefgegenstand")]
+    [JsonProperty(Order = 11, PropertyName = "pruefgegenstand")]
     [JsonPropertyName("pruefgegenstand")]
     [ProtoMember(2)]
     [JsonPropertyOrder(11)]
@@ -42,13 +42,14 @@ public class Statusbericht : BusinessObject
         get => DatumPruefung.UtcDateTime;
         set => DatumPruefung = DateTime.SpecifyKind(value, DateTimeKind.Utc);
     }
+
     /// <summary>
     ///     Pruefdatum (wann wurde der <see cref="Pruefgegenstand" /> geprüft)
     /// </summary>
     /// <example>
     ///     2017-12-24
     /// </example>
-    [JsonProperty(Required = Required.Always, Order = 12, PropertyName = "datumPruefung")]
+    [JsonProperty(Order = 12, PropertyName = "datumPruefung")]
     [JsonPropertyName("datumPruefung")]
     [JsonPropertyOrder(12)]
     [ProtoIgnore]
@@ -57,7 +58,7 @@ public class Statusbericht : BusinessObject
     /// <summary>
     ///    Liste der Fehler
     /// </summary>
-    [JsonProperty(Required = Required.Default, Order = 13, PropertyName = "fehler")]
+    [JsonProperty(Order = 13, PropertyName = "fehler")]
     [JsonPropertyName("fehler")]
     [JsonPropertyOrder(13)]
     public Fehler? Fehler { get; set; }

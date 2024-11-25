@@ -20,7 +20,7 @@ public class Netzlokation : BusinessObject
     ///     verbraucht, oder erzeugt wird (Like MarktlokationsId <see cref="Marktlokation"/>)
     /// </summary>
     [DefaultValue("|null|")]
-    [JsonProperty(Required = Required.Always, Order = 10, PropertyName = "netzlokationsId")]
+    [JsonProperty(Order = 10, PropertyName = "netzlokationsId")]
     [JsonPropertyName("netzlokationsId")]
     [JsonPropertyOrder(10)]
     [DataCategory(DataCategory.POD)]
@@ -29,7 +29,7 @@ public class Netzlokation : BusinessObject
     public string NetzlokationsId { get; set; }
 
     /// <summary>Sparte der Netzlokation, z.B. Gas oder Strom.</summary>
-    [JsonProperty(Required = Required.Always, Order = 11, PropertyName = "sparte")]
+    [JsonProperty(Order = 11, PropertyName = "sparte")]
     [JsonPropertyOrder(11)]
     [JsonPropertyName("sparte")]
     [ProtoMember(5)]
@@ -38,11 +38,7 @@ public class Netzlokation : BusinessObject
     /// <summary>
     /// Netzanschlussleistungsmenge der Netzlokation
     /// </summary>
-    [JsonProperty(
-        Required = Required.Default,
-        Order = 12,
-        PropertyName = "netzanschlussleistung"
-    )]
+    [JsonProperty(Order = 12, PropertyName = "netzanschlussleistung")]
     [JsonPropertyOrder(12)]
     [JsonPropertyName("netzanschlussleistung")]
     [ProtoMember(6)]
@@ -52,11 +48,7 @@ public class Netzlokation : BusinessObject
     /// Codenummer des grundzuständigen Messstellenbetreibers, der für diese
     /// Netzlokation zuständig ist.
     /// </summary>
-    [JsonProperty(
-        Required = Required.Default,
-        Order = 13,
-        PropertyName = "grundzustaendigerMSBCodeNr"
-    )]
+    [JsonProperty(Order = 13, PropertyName = "grundzustaendigerMSBCodeNr")]
     [JsonPropertyOrder(13)]
     [JsonPropertyName("grundzustaendigerMSBCodeNr")]
     [ProtoMember(7)]
@@ -68,7 +60,7 @@ public class Netzlokation : BusinessObject
     /// ZF2: Kein Steuerkanal vorhanden
     /// ZF3: Steuerkanal vorhanden
     /// </summary>
-    [JsonProperty(Required = Required.Default, Order = 14, PropertyName = "steuerkanal")]
+    [JsonProperty(Order = 14, PropertyName = "steuerkanal")]
     [JsonPropertyOrder(14)]
     [JsonPropertyName("steuerkanal")]
     [ProtoMember(8)]
@@ -77,14 +69,14 @@ public class Netzlokation : BusinessObject
     /// <summary>
     /// Die OBIS-Kennzahl für die Netzlokation
     /// </summary>
-    [JsonProperty(Required = Required.Default, Order = 15, PropertyName = "obisKennzahl")]
+    [JsonProperty(Order = 15, PropertyName = "obisKennzahl")]
     [JsonPropertyOrder(15)]
     [JsonPropertyName("obisKennzahl")]
     [ProtoMember(9)]
     public string? ObisKennzahl { get; set; }
 
     /// <summary>Verwendungungszweck der Werte Netzlokation</summary>
-    [JsonProperty(Required = Required.Default, Order = 16, PropertyName = "verwendungszweck")]
+    [JsonProperty(Order = 16, PropertyName = "verwendungszweck")]
     [JsonPropertyOrder(16)]
     [JsonPropertyName("verwendungszweck")]
     [ProtoMember(10)]
@@ -93,11 +85,7 @@ public class Netzlokation : BusinessObject
     /// <summary>
     /// Produkt-Daten der Netzlokation
     /// </summary>
-    [JsonProperty(
-        Required = Required.Default,
-        Order = 17,
-        PropertyName = "konfigurationsprodukte"
-    )]
+    [JsonProperty(Order = 17, PropertyName = "konfigurationsprodukte")]
     [JsonPropertyName("konfigurationsprodukte")]
     [ProtoMember(11)]
     [JsonPropertyOrder(17)]
@@ -107,11 +95,7 @@ public class Netzlokation : BusinessObject
     /// <summary>
     /// Eigenschaft des Messstellenbetreiber an der Lokation
     /// </summary>
-    [JsonProperty(
-        Required = Required.Default,
-        Order = 18,
-        PropertyName = "eigenschaftMSBLokation"
-    )]
+    [JsonProperty(Order = 18, PropertyName = "eigenschaftMSBLokation")]
     [JsonPropertyName("eigenschaftMSBLokation")]
     [ProtoMember(12)]
     [JsonPropertyOrder(18)]
@@ -122,7 +106,7 @@ public class Netzlokation : BusinessObject
     // /// Lokationszuordnung, um bspw. die zugehörigen Messlokationen anzugeben
     // /// </summary>
     // [JsonProperty(
-    //     Required = Required.Default,
+    //
     //     Order = 19,
     //     PropertyName = "lokationszuordnungen"
     // )]
@@ -134,14 +118,29 @@ public class Netzlokation : BusinessObject
     /// <summary>
     /// Lokationsbuendel Code, der die Funktion dieses BOs an der Lokationsbuendelstruktur beschreibt.
     /// </summary>
-    [JsonProperty(
-        Required = Required.Default,
-        Order = 20,
-        PropertyName = "lokationsbuendelObjektcode"
-    )]
+    [JsonProperty(Order = 20, PropertyName = "lokationsbuendelObjektcode")]
     [JsonPropertyName("lokationsbuendelObjektcode")]
     [ProtoMember(14)]
     [JsonPropertyOrder(20)]
     [NonOfficial(NonOfficialCategory.CUSTOMER_REQUIREMENTS)]
     public string? LokationsbuendelObjektcode { get; set; }
+
+    /// <summary>
+    /// Enthält die ID der vorgelagerten Lokation. Kann IDs unterschiedlicher Lokationen enthalten, also zum Beispiel
+    /// einer Messlokation oder Netzlokation
+    /// </summary>
+    [JsonProperty(Order = 21, PropertyName = "vorgelagerteLokationsId")]
+    [JsonPropertyName("vorgelagerteLokationsId")]
+    [ProtoMember(15)]
+    [JsonPropertyOrder(21)]
+    public string? VorgelagerteLokationsId { get; set; }
+
+    /// <summary>
+    /// Abrechnungsdaten der Netzlokation
+    /// </summary>
+    [JsonProperty(Order = 22, PropertyName = "abrechnungsdaten")]
+    [JsonPropertyName("abrechnungsdaten")]
+    [ProtoMember(16)]
+    [JsonPropertyOrder(22)]
+    public List<Netzlokationsabrechnungsdaten>? Abrechnungsdaten { get; set; }
 }
