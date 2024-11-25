@@ -1,12 +1,9 @@
+using System.Text.Json.Serialization;
 using BO4E.COM;
 using BO4E.ENUM;
 using BO4E.meta;
-
 using Newtonsoft.Json;
-
 using ProtoBuf;
-
-using System.Text.Json.Serialization;
 
 namespace BO4E.BO;
 
@@ -20,7 +17,7 @@ public class Anfrage : BusinessObject
     /// <summary>
     /// Für welche Markt- oder Messlokation gilt diese Anfrage.
     /// </summary>
-    [JsonProperty(PropertyName = "lokationsId", Required = Required.Always, Order = 6)]
+    [JsonProperty(PropertyName = "lokationsId", Order = 6)]
     [JsonPropertyName("lokationsId")]
     [JsonPropertyOrder(6)]
     [NonOfficial(NonOfficialCategory.MISSING)]
@@ -31,7 +28,7 @@ public class Anfrage : BusinessObject
     /// Gibt an, ob es sich um eine Markt- oder Messlokation handelt
     /// </summary>
     /// <see cref="Lokationstyp" />
-    [JsonProperty(PropertyName = "lokationsTyp", Required = Required.Always, Order = 7)]
+    [JsonProperty(PropertyName = "lokationsTyp", Order = 7)]
     [JsonPropertyName("lokationsTyp")]
     [ProtoMember(1001)]
     [JsonPropertyOrder(7)]
@@ -43,7 +40,7 @@ public class Anfrage : BusinessObject
     /// <example>
     ///     1-0:1.8.1
     /// </example>
-    [JsonProperty(PropertyName = "obiskennzahl", Required = Required.Default, Order = 8)]
+    [JsonProperty(PropertyName = "obiskennzahl", Order = 8)]
     [JsonPropertyName("obiskennzahl")]
     [NonOfficial(NonOfficialCategory.MISSING)]
     [ProtoMember(1002)]
@@ -54,7 +51,7 @@ public class Anfrage : BusinessObject
     /// <summary>
     /// Sollablesetermin / Zeitangabe für Messwertanfrage. Details <see cref="Zeitraum" />
     /// </summary>
-    [JsonProperty(PropertyName = "ZeitraumMesswertanfrage", Required = Required.Default, Order = 9)]
+    [JsonProperty(PropertyName = "ZeitraumMesswertanfrage", Order = 9)]
     [JsonPropertyName("ZeitraumMesswertanfrage")]
     [ProtoMember(1003)]
     [JsonPropertyOrder(9)]
@@ -63,7 +60,7 @@ public class Anfrage : BusinessObject
     /// <summary>
     /// Kategorie der Anfrage (ORDERS ORDRSP BGM 1001)
     /// </summary>
-    [JsonProperty(PropertyName = "anfragekategorie", Required = Required.Always, Order = 10)]
+    [JsonProperty(PropertyName = "anfragekategorie", Order = 10)]
     [JsonPropertyName("anfragekategorie")]
     [NonOfficial(NonOfficialCategory.MISSING)]
     [ProtoMember(1004)]
@@ -74,7 +71,7 @@ public class Anfrage : BusinessObject
     /// <summary>
     /// Typ/Art der Anfrage (ORDERS ORDRSP IMD 7081)
     /// </summary>
-    [JsonProperty(PropertyName = "anfragetyp", Required = Required.Default, Order = 11)]
+    [JsonProperty(PropertyName = "anfragetyp", Order = 11)]
     [JsonPropertyName("anfragetyp")]
     [NonOfficial(NonOfficialCategory.MISSING)]
     [ProtoMember(1005)]

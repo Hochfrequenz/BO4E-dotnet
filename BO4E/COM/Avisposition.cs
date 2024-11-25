@@ -17,7 +17,7 @@ public class Avisposition : COM
     /// <summary>
     /// Die Rechnungsnummer der Rechnung, auf die sich das Avis bezieht.
     /// </summary>
-    [JsonProperty(PropertyName = "rechnungsNummer", Required = Required.Always, Order = 1)]
+    [JsonProperty(PropertyName = "rechnungsNummer", Order = 1)]
     [JsonPropertyName("rechnungsNummer")]
     [NonOfficial(NonOfficialCategory.MISSING)]
     [ProtoMember(1)]
@@ -35,10 +35,11 @@ public class Avisposition : COM
         get => RechnungsDatum.UtcDateTime;
         set => RechnungsDatum = DateTime.SpecifyKind(value, DateTimeKind.Utc);
     }
+
     /// <summary>
     /// Das Rechnungsdatum der Rechnung, auf die sich das Avis bezieht.
     /// </summary>
-    [JsonProperty(PropertyName = "rechnungsDatum", Required = Required.Always, Order = 2)]
+    [JsonProperty(PropertyName = "rechnungsDatum", Order = 2)]
     [JsonPropertyName("rechnungsDatum")]
     [NonOfficial(NonOfficialCategory.MISSING)]
     [ProtoIgnore]
@@ -47,7 +48,7 @@ public class Avisposition : COM
     /// <summary>
     /// Kennzeichnung, ob es sich bei der Rechnung auf die sich das Avis bezieht, um eine Stornorechnung handelt.
     /// </summary>
-    [JsonProperty(PropertyName = "istStorno", Required = Required.Always, Order = 3)]
+    [JsonProperty(PropertyName = "istStorno", Order = 3)]
     [JsonPropertyName("istStorno")]
     [NonOfficial(NonOfficialCategory.MISSING)]
     [ProtoMember(3)]
@@ -56,7 +57,7 @@ public class Avisposition : COM
     /// <summary>
     /// Kennzeichnung, ob es sich bei der Rechnung auf die sich das Avis bezieht, um eine Stornorechnung handelt.
     /// </summary>
-    [JsonProperty(PropertyName = "istSelbstausgestellt", Required = Required.Default, Order = 4)]
+    [JsonProperty(PropertyName = "istSelbstausgestellt", Order = 4)]
     [JsonPropertyName("istSelbstausgestellt")]
     [NonOfficial(NonOfficialCategory.MISSING)]
     [ProtoMember(4)]
@@ -65,7 +66,7 @@ public class Avisposition : COM
     /// <summary>
     /// Überweisungsbetrag
     /// </summary>
-    [JsonProperty(PropertyName = "gesamtBrutto", Required = Required.Always, Order = 5)]
+    [JsonProperty(PropertyName = "gesamtBrutto", Order = 5)]
     [JsonPropertyName("gesamtBrutto")]
     [NonOfficial(NonOfficialCategory.MISSING)]
     [ProtoMember(5)]
@@ -74,7 +75,7 @@ public class Avisposition : COM
     /// <summary>
     /// Geforderter Rechnungsbetrag
     /// </summary>
-    [JsonProperty(PropertyName = "zuZahlen", Required = Required.Always, Order = 6)]
+    [JsonProperty(PropertyName = "zuZahlen", Order = 6)]
     [JsonPropertyName("zuZahlen")]
     [NonOfficial(NonOfficialCategory.MISSING)]
     [ProtoMember(6)]
@@ -83,7 +84,7 @@ public class Avisposition : COM
     /// <summary>
     /// Referenzierung auf eine vorherige COMDIS-Nachricht
     /// </summary>
-    [JsonProperty(PropertyName = "referenz", Required = Required.Default, Order = 7)]
+    [JsonProperty(PropertyName = "referenz", Order = 7)]
     [JsonPropertyName("referenz")]
     [NonOfficial(NonOfficialCategory.MISSING)]
     [ProtoMember(1)]
@@ -93,7 +94,7 @@ public class Avisposition : COM
     /// Abweichungen bei Ablehnung einer COMDIS
     /// </summary>
     /// <see cref="Abweichungen" />
-    [JsonProperty(PropertyName = "abweichungen", Required = Required.Default, Order = 8)]
+    [JsonProperty(PropertyName = "abweichungen", Order = 8)]
     [JsonPropertyName("abweichungen")]
     [NonOfficial(NonOfficialCategory.MISSING)]
     [ProtoMember(7)]
@@ -102,7 +103,7 @@ public class Avisposition : COM
     /// <summary>
     /// Rückmeldungspositionen
     /// </summary>
-    [JsonProperty(PropertyName = "positionen", Required = Required.Default, Order = 9)]
+    [JsonProperty(PropertyName = "positionen", Order = 9)]
     [JsonPropertyName("positionen")]
     [NonOfficial(NonOfficialCategory.MISSING)]
     [ProtoMember(8)]

@@ -5,8 +5,14 @@ namespace BO4E.meta;
 /// <summary>
 ///     A Custom attribute for make fields and properties multilingual
 /// </summary>
-[AttributeUsage(AttributeTargets.Class | AttributeTargets.Constructor | AttributeTargets.Field |
-                AttributeTargets.Method | AttributeTargets.Property, AllowMultiple = true)]
+[AttributeUsage(
+    AttributeTargets.Class
+        | AttributeTargets.Constructor
+        | AttributeTargets.Field
+        | AttributeTargets.Method
+        | AttributeTargets.Property,
+    AllowMultiple = true
+)]
 public class FieldName : Attribute
 {
     /// <summary>

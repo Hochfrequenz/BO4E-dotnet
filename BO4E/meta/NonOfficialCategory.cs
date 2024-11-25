@@ -15,6 +15,7 @@ public enum NonOfficialCategory
     ///     none of the other reasons apply
     /// </summary>
     [EnumMember(Value = "UNSPECIFIED")]
+    [System.Text.Json.Serialization.JsonStringEnumMemberName("UNSPECIFIED")]
     UNSPECIFIED,
 
     /// <summary>
@@ -22,6 +23,7 @@ public enum NonOfficialCategory
     ///     implementation
     /// </summary>
     [EnumMember(Value = "MISSING")]
+    [System.Text.Json.Serialization.JsonStringEnumMemberName("MISSING")]
     MISSING,
 
     /// <summary>
@@ -29,6 +31,7 @@ public enum NonOfficialCategory
     ///     official BO4E standard
     /// </summary>
     [EnumMember(Value = "REGULATORY_REQUIREMENTS")]
+    [System.Text.Json.Serialization.JsonStringEnumMemberName("REGULATORY_REQUIREMENTS")]
     REGULATORY_REQUIREMENTS,
 
 #pragma warning disable CS0419 // Zweideutige Referenz im cref-Attribut
@@ -39,6 +42,7 @@ public enum NonOfficialCategory
     [Obsolete("Hochfrequenz favours the removal of this field/property from BO4E.")]
 #pragma warning restore CS0419 // Zweideutige Referenz im cref-Attribut
     [EnumMember(Value = "PROPOSED_DELETION")]
+    [System.Text.Json.Serialization.JsonStringEnumMemberName("PROPOSED_DELETION")]
     PROPOSED_DELETION,
 
     /// <summary>
@@ -46,5 +50,6 @@ public enum NonOfficialCategory
     ///     BO4E standard
     /// </summary>
     [EnumMember(Value = "CUSTOMER_REQUIREMENTS")]
+    [System.Text.Json.Serialization.JsonStringEnumMemberName("CUSTOMER_REQUIREMENTS")]
     CUSTOMER_REQUIREMENTS,
 }

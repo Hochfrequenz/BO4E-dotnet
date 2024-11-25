@@ -1,6 +1,6 @@
 using System.Text;
-using Newtonsoft.Json.Schema;
 using BO4E.BO;
+using Newtonsoft.Json.Schema;
 using NJsonSchema;
 using NJsonSchema.Generation;
 using JsonSchema = NJsonSchema.JsonSchema;
@@ -14,14 +14,20 @@ string openApiOutputDirectory;
 // Validate arguments
 if (args.Length < 3)
 {
-    Console.Error.WriteLine("Error: You must provide an offset, a JSON output directory, and an OpenAPI output directory.");
-    Console.Error.WriteLine("Usage: dotnet run -- <offset> <jsonOutputDirectory> <openApiOutputDirectory>");
+    Console.Error.WriteLine(
+        "Error: You must provide an offset, a JSON output directory, and an OpenAPI output directory."
+    );
+    Console.Error.WriteLine(
+        "Usage: dotnet run -- <offset> <jsonOutputDirectory> <openApiOutputDirectory>"
+    );
     Environment.Exit(1); // Exit with a specific error code for missing arguments
 }
 
 if (!int.TryParse(args[0], out offset))
 {
-    Console.Error.WriteLine($"Error: Invalid argument '{args[0]}'. Please provide a valid integer offset.");
+    Console.Error.WriteLine(
+        $"Error: Invalid argument '{args[0]}'. Please provide a valid integer offset."
+    );
     Environment.Exit(2); // Exit with a specific error code for invalid offset
 }
 
@@ -58,13 +64,15 @@ public class JsonSchemaGenerator
 
     public static void GenerateSchemas(int offset, string jsonOutputDirectory)
     {
-        var relevantBusinessObjectTypes = typeof(BusinessObject).Assembly
-            .GetTypes()
+        var relevantBusinessObjectTypes = typeof(BusinessObject)
+            .Assembly.GetTypes()
             .Where(t => t.IsSubclassOf(typeof(BusinessObject)));
 
         if (relevantBusinessObjectTypes.Count() > LastDataRowOffset + MaxSchemasPerHour)
         {
-            throw new InvalidOperationException("Too many BusinessObject types. Increase the LastDataRowOffset or adjust the MaxSchemasPerHour.");
+            throw new InvalidOperationException(
+                "Too many BusinessObject types. Increase the LastDataRowOffset or adjust the MaxSchemasPerHour."
+            );
         }
 
         try
@@ -84,13 +92,15 @@ public class JsonSchemaGenerator
 
                 if (!File.Exists(path))
                 {
-                    using (File.Create(path))
-                    {
-                    }
+                    using (File.Create(path)) { }
                 }
 
                 var utf8WithoutByteOrderMark = new UTF8Encoding(false);
-                File.WriteAllText(path, schema.ToString(SchemaVersion.Draft7), utf8WithoutByteOrderMark);
+                File.WriteAllText(
+                    path,
+                    schema.ToString(SchemaVersion.Draft7),
+                    utf8WithoutByteOrderMark
+                );
             }
         }
         catch (JSchemaException jse)
@@ -102,8 +112,8 @@ public class JsonSchemaGenerator
 
     public static void GenerateOpenApiSchemas(int offset, string openApiOutputDirectory)
     {
-        var relevantBusinessObjectTypes = typeof(BusinessObject).Assembly
-            .GetTypes()
+        var relevantBusinessObjectTypes = typeof(BusinessObject)
+            .Assembly.GetTypes()
             .Where(t => t.IsSubclassOf(typeof(BusinessObject)));
 
         try
@@ -116,19 +126,17 @@ public class JsonSchemaGenerator
 
             foreach (var type in relevantBusinessObjectTypes.Skip(offset))
             {
-                var schema = JsonSchema.FromType(type, new SystemTextJsonSchemaGeneratorSettings()
-                {
-                    SchemaType = SchemaType.OpenApi3
-                });
+                var schema = JsonSchema.FromType(
+                    type,
+                    new SystemTextJsonSchemaGeneratorSettings() { SchemaType = SchemaType.OpenApi3 }
+                );
                 var path = Path.Combine(openApiOutputDirectory, $"{type.Name}.json");
 
                 Console.WriteLine($"Generating OpenAPI schema for {type.Name} at {path}.");
 
                 if (!File.Exists(path))
                 {
-                    using (File.Create(path))
-                    {
-                    }
+                    using (File.Create(path)) { }
                 }
 
                 var utf8WithoutByteOrderMark = new UTF8Encoding(false);
