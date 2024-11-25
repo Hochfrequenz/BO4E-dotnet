@@ -118,17 +118,52 @@ public class TestLinkExtensions
                     GueltigVon = DateTimeOffset.MinValue,
                     GueltigBis = DateTimeOffset.MaxValue,
                 },
+            },
+        };
+        var actual = bc.ZeitabhaengigeLinks.ToTimeIndependentLinks();
+        actual.Should().ContainKey("x").WhoseValue.Should().HaveCount(2);
+        actual.Should().ContainKey("foo").WhoseValue.Should().HaveCount(2);
+    }
+
+    [TestMethod]
+    public void Test_Zeitabhaengig_To_Links_with_Null_Until()
+    {
+        var bc = new BOneyComb
+        {
+            ZeitabhaengigeLinks = new()
+            {
+                new ZeitabhaengigeBeziehung
+                {
+                    ParentId = "foo",
+                    ChildId = "bar",
+                    GueltigVon = DateTimeOffset.MinValue,
+                    GueltigBis = null,
+                },
+                new ZeitabhaengigeBeziehung
+                {
+                    ParentId = "foo",
+                    ChildId = "baz",
+                    GueltigVon = DateTimeOffset.MinValue,
+                    GueltigBis = null,
+                },
                 new ZeitabhaengigeBeziehung
                 {
                     ParentId = "x",
-                    ChildId = "g",
+                    ChildId = "y",
+                    GueltigVon = DateTimeOffset.MinValue,
+                    GueltigBis = null,
+                },
+                new ZeitabhaengigeBeziehung
+                {
+                    ParentId = "x",
+                    ChildId = "z",
                     GueltigVon = DateTimeOffset.MinValue,
                     GueltigBis = null,
                 },
             },
         };
         var actual = bc.ZeitabhaengigeLinks.ToTimeIndependentLinks();
-        actual.Should().ContainKey("x").WhoseValue.Should().HaveCount(3);
+        actual.Should().ContainKey("x").WhoseValue.Should().HaveCount(2);
         actual.Should().ContainKey("foo").WhoseValue.Should().HaveCount(2);
     }
 }
