@@ -162,4 +162,24 @@ public class TestLinkExtensions
         actual.Should().ContainKey("x").WhoseValue.Should().HaveCount(2);
         actual.Should().ContainKey("foo").WhoseValue.Should().HaveCount(2);
     }
+
+    [TestMethod]
+    public void Test_inifinteTime_is_null()
+    {
+        ZeitabhaengigeBeziehung timeMax = new ZeitabhaengigeBeziehung()
+        {
+            ParentId = "x",
+            ChildId = "y",
+            GueltigVon = DateTimeOffset.MinValue,
+            GueltigBis = DateTimeOffset.MaxValue,
+        };
+        ZeitabhaengigeBeziehung nullTime = new ZeitabhaengigeBeziehung()
+        {
+            ParentId = "x",
+            ChildId = "y",
+            GueltigVon = DateTimeOffset.MinValue,
+            GueltigBis = null,
+        };
+        timeMax.Should().BeEquivalentTo(nullTime);
+    }
 }

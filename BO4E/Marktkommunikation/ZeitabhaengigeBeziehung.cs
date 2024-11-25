@@ -22,11 +22,17 @@ public class ZeitabhaengigeBeziehung
 
     /// <summary>
     /// exklusives Ende, hier darf nur das Mavimale Enddatum eingetragen werden, sofern bekannt. Anderen Falls ist das Feld null.
+    /// The maximum end date is NULL, this means DateTimeOffset.MaxValue is converted to null. 
     /// </summary>
     [JsonPropertyName("gueltigBis")]
     [JsonPropertyOrder(2)]
     [Newtonsoft.Json.JsonProperty(PropertyName = "gueltigBis", Order = 2)]
-    public DateTimeOffset? GueltigBis { get; set; } = null;
+    public DateTimeOffset? GueltigBis
+    {
+        get => _infiniteTime;
+        set => _infiniteTime = (value == DateTimeOffset.MaxValue) ? null : value;
+    }
+    private DateTimeOffset? _infiniteTime;
 
     /// <summary>
     /// e.g.
