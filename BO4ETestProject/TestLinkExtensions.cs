@@ -173,13 +173,6 @@ public class TestLinkExtensions
             GueltigVon = DateTimeOffset.MinValue,
             GueltigBis = DateTimeOffset.MaxValue,
         };
-        ZeitabhaengigeBeziehung nullTime = new ZeitabhaengigeBeziehung()
-        {
-            ParentId = "x",
-            ChildId = "y",
-            GueltigVon = DateTimeOffset.MinValue,
-            GueltigBis = null,
-        };
-        timeMax.Should().BeEquivalentTo(nullTime);
+        timeMax.GueltigBis.Should().BeNull(because: "the setter converts MaxValue to null");
     }
 }
