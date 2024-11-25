@@ -26,7 +26,7 @@ public class ZeitabhaengigeBeziehung
     [JsonPropertyName("gueltigBis")]
     [JsonPropertyOrder(2)]
     [Newtonsoft.Json.JsonProperty(PropertyName = "gueltigBis", Order = 2)]
-    public DateTimeOffset? GueltigBis { get; set; }
+    public DateTimeOffset GueltigBis { get; set; }
 
     /// <summary>
     /// e.g.
