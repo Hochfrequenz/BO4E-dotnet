@@ -1,10 +1,8 @@
-using BO4E.meta;
-
-using Newtonsoft.Json.Linq;
-
 using System;
 using System.Collections.Generic;
 using System.Text.Json;
+using BO4E.meta;
+using Newtonsoft.Json.Linq;
 
 namespace BO4E;
 
@@ -30,11 +28,19 @@ public static class UserPropertiesExtensions
     /// <param name="value">default if false is returned, the stored value otherwise</param>
     /// <returns>true if found</returns>
     /// <exception cref="ArgumentNullException">iff <paramref name="userPropertyKey" /> is null or whitespace</exception>
-    public static bool TryGetUserProperty<TUserProperty, TParent>(this TParent parent, string userPropertyKey,
-        out TUserProperty value) where TParent : IUserProperties
+    public static bool TryGetUserProperty<TUserProperty, TParent>(
+        this TParent parent,
+        string userPropertyKey,
+        out TUserProperty value
+    )
+        where TParent : IUserProperties
     {
         var up = parent.UserProperties;
-        if (string.IsNullOrWhiteSpace(userPropertyKey)) throw new ArgumentNullException(nameof(userPropertyKey));
+        if (string.IsNullOrWhiteSpace(userPropertyKey))
+        {
+            throw new ArgumentNullException(nameof(userPropertyKey));
+        }
+
         if (up != null && up.TryGetValue(userPropertyKey, out var upToken))
         {
             switch (upToken)
@@ -66,13 +72,16 @@ public static class UserPropertiesExtensions
                 default:
                     try
                     {
-                        value = JsonSerializer.Deserialize<TUserProperty>(((JsonElement)upToken).GetRawText(),
-                            Defaults.JsonSerializerDefaultOptions);
+                        value = JsonSerializer.Deserialize<TUserProperty>(
+                            ((JsonElement)upToken).GetRawText(),
+                            Defaults.JsonSerializerDefaultOptions
+                        );
                     }
                     catch (JsonException)
                     {
                         throw new FormatException(
-                            $"Could not convert {((JsonElement)upToken).GetRawText()} to {typeof(TUserProperty).Name}");
+                            $"Could not convert {((JsonElement)upToken).GetRawText()} to {typeof(TUserProperty).Name}"
+                        );
                     }
 
                     break;
@@ -102,11 +111,20 @@ public static class UserPropertiesExtensions
     /// </param>
     /// <returns>the value stored in the userproperty or the default <paramref name="defaultValue" /></returns>
     /// <exception cref="ArgumentNullException">iff <paramref name="userPropertyKey" /> is null or whitespace</exception>
-    public static TUserProperty GetUserProperty<TUserProperty, TParent>(this TParent parent, string userPropertyKey,
-        TUserProperty defaultValue) where TParent : IUserProperties
+    public static TUserProperty GetUserProperty<TUserProperty, TParent>(
+        this TParent parent,
+        string userPropertyKey,
+        TUserProperty defaultValue
+    )
+        where TParent : IUserProperties
     {
-        if (parent != null && parent.TryGetUserProperty(userPropertyKey, out TUserProperty actualValue))
+        if (
+            parent != null
+            && parent.TryGetUserProperty(userPropertyKey, out TUserProperty actualValue)
+        )
+        {
             return actualValue;
+        }
 
         return defaultValue;
     }
@@ -124,13 +142,24 @@ public static class UserPropertiesExtensions
     /// <param name="parent">object implementing <see cref="IUserProperties" /></param>
     /// <param name="value">Value of the property</param>
     /// <returns></returns>
-    public static void SetUserProperty<TUserProperty, TParent>(this TParent parent, string userPropertyKey,
-        TUserProperty value) where TParent : IUserProperties
+    public static void SetUserProperty<TUserProperty, TParent>(
+        this TParent parent,
+        string userPropertyKey,
+        TUserProperty value
+    )
+        where TParent : IUserProperties
     {
         // if user properties don't exist already, create them
-        if (parent.UserProperties == null) parent.UserProperties = new Dictionary<string, object>();
+        if (parent.UserProperties == null)
+        {
+            parent.UserProperties = new Dictionary<string, object>();
+        }
+
         // if there is already an value for the property, delete ist first
-        if (parent.UserProperties.ContainsKey(userPropertyKey)) parent.UserProperties.Remove(userPropertyKey);
+        if (parent.UserProperties.ContainsKey(userPropertyKey))
+        {
+            parent.UserProperties.Remove(userPropertyKey);
+        }
 
         // set the value
         parent.UserProperties.Add(userPropertyKey, value);
@@ -147,9 +176,16 @@ public static class UserPropertiesExtensions
         where TParent : IUserProperties
     {
         // if user properties don't exist we cannot remove anything
-        if (parent.UserProperties == null) return;
+        if (parent.UserProperties == null)
+        {
+            return;
+        }
+
         // if there is already an value for the property, delete it
-        if (parent.UserProperties.ContainsKey(userPropertyKey)) parent.UserProperties.Remove(userPropertyKey);
+        if (parent.UserProperties.ContainsKey(userPropertyKey))
+        {
+            parent.UserProperties.Remove(userPropertyKey);
+        }
     }
 
     /// <summary>
@@ -173,16 +209,29 @@ public static class UserPropertiesExtensions
     ///     <paramref name="userPropertyKey" /> == <paramref name="other" />
     /// </returns>
     /// <exception cref="ArgumentNullException">iff <paramref name="userPropertyKey" /> is null or whitespace</exception>
-    public static bool UserPropertyEquals<TUserProperty, TParent>(this TParent parent, string userPropertyKey,
-        TUserProperty other, bool ignoreWrongType = true) where TParent : IUserProperties
+    public static bool UserPropertyEquals<TUserProperty, TParent>(
+        this TParent parent,
+        string userPropertyKey,
+        TUserProperty other,
+        bool ignoreWrongType = true
+    )
+        where TParent : IUserProperties
     {
-        if (parent.UserProperties == null) return false;
+        if (parent.UserProperties == null)
+        {
+            return false;
+        }
 
         try
         {
-            return parent.EvaluateUserProperty<TUserProperty, bool, TParent>(userPropertyKey, value =>
+            return parent.EvaluateUserProperty<TUserProperty, bool, TParent>(
+                userPropertyKey,
+                value =>
                 {
-                    if (value == null && other != null) return false;
+                    if (value == null && other != null)
+                    {
+                        return false;
+                    }
 
                     return value == null || value.Equals(other);
                 }
@@ -206,11 +255,18 @@ public static class UserPropertiesExtensions
     /// <returns>result of <paramref name="evaluation" /> if the key exists, default otherwise</returns>
     /// <exception cref="ArgumentNullException">iff <paramref name="userPropertyKey" /> is null or whitespace</exception>
     public static TEvaluationResult EvaluateUserProperty<TUserProperty, TEvaluationResult, TParent>(
-        this TParent parent, string userPropertyKey, Func<TUserProperty, TEvaluationResult> evaluation)
+        this TParent parent,
+        string userPropertyKey,
+        Func<TUserProperty, TEvaluationResult> evaluation
+    )
         where TParent : IUserProperties
     {
         var up = parent.UserProperties;
-        if (up == null) throw new ArgumentNullException(nameof(up));
+        if (up == null)
+        {
+            throw new ArgumentNullException(nameof(up));
+        }
+
         return parent.TryGetUserProperty<TUserProperty, TParent>(userPropertyKey, out var value)
             ? evaluation(value)
             : default;
@@ -234,12 +290,18 @@ public static class UserPropertiesExtensions
     public static bool SetFlag<TParent>(this TParent parent, string flagKey, bool? flagValue = true)
         where TParent : class, IUserProperties
     {
-        if (string.IsNullOrWhiteSpace(flagKey)) throw new ArgumentNullException(nameof(flagKey));
+        if (string.IsNullOrWhiteSpace(flagKey))
+        {
+            throw new ArgumentNullException(nameof(flagKey));
+        }
 
         if (parent.UserProperties == null)
         {
             parent.UserProperties = new Dictionary<string, object>();
-            if (!flagValue.HasValue) return false;
+            if (!flagValue.HasValue)
+            {
+                return false;
+            }
         }
         else if (flagValue.HasValue && flagValue.Value == parent.HasFlagSet(flagKey))
         {
@@ -248,7 +310,10 @@ public static class UserPropertiesExtensions
 
         if (!flagValue.HasValue)
         {
-            if (!parent.UserProperties.ContainsKey(flagKey)) return false;
+            if (!parent.UserProperties.ContainsKey(flagKey))
+            {
+                return false;
+            }
 
             parent.UserProperties.Remove(flagKey);
             return true;
@@ -256,7 +321,10 @@ public static class UserPropertiesExtensions
 
         try
         {
-            if (parent.TryGetUserProperty<bool?, TParent>(flagKey, out var existingValue) && existingValue == flagValue.Value)
+            if (
+                parent.TryGetUserProperty<bool?, TParent>(flagKey, out var existingValue)
+                && existingValue == flagValue.Value
+            )
             {
                 return false;
             }
@@ -285,7 +353,10 @@ public static class UserPropertiesExtensions
     public static bool HasFlagSet<TParent>(this TParent parent, string flagKey)
         where TParent : class, IUserProperties
     {
-        if (string.IsNullOrWhiteSpace(flagKey)) throw new ArgumentNullException(nameof(flagKey));
+        if (string.IsNullOrWhiteSpace(flagKey))
+        {
+            throw new ArgumentNullException(nameof(flagKey));
+        }
 
         try
         {

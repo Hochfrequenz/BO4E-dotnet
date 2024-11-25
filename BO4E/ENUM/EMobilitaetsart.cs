@@ -7,13 +7,16 @@ public enum EMobilitaetsart
 {
     /// <summary>ZE6: Wallbox</summary>
     [EnumMember(Value = "WALLBOX")]
+    [System.Text.Json.Serialization.JsonStringEnumMemberName("WALLBOX")]
     WALLBOX,
 
     /// <summary>Z87: E-Mobilitätsladesäule</summary>
     [EnumMember(Value = "E_MOBILITAETSLADESAEULE")]
+    [System.Text.Json.Serialization.JsonStringEnumMemberName("E_MOBILITAETSLADESAEULE")]
     E_MOBILITAETSLADESAEULE,
 
     /// <summary>ZE7: Ladepark</summary>
     [EnumMember(Value = "LADEPARK")]
+    [System.Text.Json.Serialization.JsonStringEnumMemberName("LADEPARK")]
     LADEPARK,
 }

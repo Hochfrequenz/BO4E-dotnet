@@ -7,17 +7,19 @@ using ProtoBuf;
 namespace BO4E.BO;
 
 /// <summary>
-/// DEPRECATED Ein AuftragsStorno beschreibt die Stornierung eines <see cref="Auftrag"/>s. 
+/// DEPRECATED Ein AuftragsStorno beschreibt die Stornierung eines <see cref="Auftrag"/>s.
 /// </summary>
 [NonOfficial(NonOfficialCategory.REGULATORY_REQUIREMENTS)]
 [ProtoContract]
-[Obsolete("This is not used in the implementation of the blocking process - we use the enum Auftragsstornogrund instead")]
+[Obsolete(
+    "This is not used in the implementation of the blocking process - we use the enum Auftragsstornogrund instead"
+)]
 public abstract class AuftragsStorno : BusinessObject
 {
     /// <summary>
     /// Eindeutige Kennung des zu stornierenden <see cref="Auftrag"/>s
     /// </summary>
-    [JsonProperty("auftragsId", Required = Required.Always)]
+    [JsonProperty("auftragsId")]
     [JsonPropertyName("auftragsId")]
     public string AuftragsId { get; set; }
 }

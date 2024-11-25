@@ -17,7 +17,7 @@ public class Ansprechpartner : BusinessObject
     /// <summary>
     ///     Mögliche Anrede des Ansprechpartners
     /// </summary>
-    [JsonProperty(Required = Required.Default, Order = 10, PropertyName = "anrede")]
+    [JsonProperty(Order = 10, PropertyName = "anrede")]
     [JsonPropertyName("anrede")]
     [JsonPropertyOrder(10)]
     [ProtoMember(4)]
@@ -29,7 +29,7 @@ public class Ansprechpartner : BusinessObject
     ///     Anrede vorgegeben werden. Beispiel: "Sehr geehrte Frau Müller, sehr geehrter
     ///     Herr Dr. Müller"
     /// </summary>
-    [JsonProperty(Required = Required.Default, Order = 11, PropertyName = "inviduelleAnrede")]
+    [JsonProperty(Order = 11, PropertyName = "inviduelleAnrede")]
     [JsonPropertyName("inviduelleAnrede")]
     [JsonPropertyOrder(11)]
     [ProtoMember(5)]
@@ -37,7 +37,7 @@ public class Ansprechpartner : BusinessObject
     public string? IndividuelleAnrede { get; set; }
 
     /// <summary>Möglicher Titel des Ansprechpartners</summary>
-    [JsonProperty(Required = Required.Default, Order = 12, PropertyName = "titel")]
+    [JsonProperty(Order = 12, PropertyName = "titel")]
     [JsonPropertyName("titel")]
     [JsonPropertyOrder(12)]
     [ProtoMember(6)]
@@ -45,7 +45,7 @@ public class Ansprechpartner : BusinessObject
     public Titel? Titel { get; set; }
 
     /// <summary>Vorname des Ansprechpartners</summary>
-    [JsonProperty(Required = Required.Default, Order = 13, PropertyName = "vorname")]
+    [JsonProperty(Order = 13, PropertyName = "vorname")]
     [JsonPropertyName("vorname")]
     [JsonPropertyOrder(13)]
     [ProtoMember(7)]
@@ -54,7 +54,7 @@ public class Ansprechpartner : BusinessObject
     public string? Vorname { get; set; }
 
     /// <summary>Nachname (Familienname) des Ansprechpartners</summary>
-    [JsonProperty(Required = Required.Default, Order = 14, PropertyName = "nachname")]
+    [JsonProperty(Order = 14, PropertyName = "nachname")]
     [JsonPropertyName("nachname")]
     [JsonPropertyOrder(14)]
     [ProtoMember(8)]
@@ -63,7 +63,7 @@ public class Ansprechpartner : BusinessObject
     public string? Nachname { get; set; }
 
     /// <summary>E-Mail Adresse</summary>
-    [JsonProperty(Required = Required.Default, Order = 15, PropertyName = "eMailAdresse")]
+    [JsonProperty(Order = 15, PropertyName = "eMailAdresse")]
     [JsonPropertyName("eMailAdresse")]
     [JsonPropertyOrder(15)]
     [ProtoMember(9)]
@@ -71,7 +71,7 @@ public class Ansprechpartner : BusinessObject
     public string? EMailAdresse { get; set; }
 
     /// <summary>Weitere Informationen zum Ansprechpartner</summary>
-    [JsonProperty(Required = Required.Default, Order = 16, PropertyName = "kommentar")]
+    [JsonProperty(Order = 16, PropertyName = "kommentar")]
     [JsonPropertyName("kommentar")]
     [JsonPropertyOrder(16)]
     [ProtoMember(10)]
@@ -79,17 +79,16 @@ public class Ansprechpartner : BusinessObject
     public string? Kommentar { get; set; }
 
     /// <summary>Der Geschäftspartner, für den dieser Ansprechpartner modelliert wird.</summary>
-    [JsonProperty(Required = Required.Default, Order = 17, PropertyName = "geschaeftspartner")]
+    [JsonProperty(Order = 17, PropertyName = "geschaeftspartner")]
     [JsonPropertyName("geschaeftspartner")]
     [JsonPropertyOrder(17)]
-    [NonOfficial(NonOfficialCategory
-        .UNSPECIFIED)] // it's always required in BO4E, changed it to default 2020-08-31 KK
+    [NonOfficial(NonOfficialCategory.UNSPECIFIED)] // it's always required in BO4E, changed it to default 2020-08-31 KK
     [ProtoMember(11)]
     [BoKey]
     public Geschaeftspartner? Geschaeftspartner { get; set; }
 
     /// <summary> Adresse des Ansprechpartners, falls diese von der Adresse des Geschäftspartners abweicht.</summary>
-    [JsonProperty(Required = Required.Default, Order = 18, PropertyName = "adresse")]
+    [JsonProperty(Order = 18, PropertyName = "adresse")]
     [JsonPropertyName("adresse")]
     [JsonPropertyOrder(18)]
     [ProtoMember(12)]
@@ -97,9 +96,8 @@ public class Ansprechpartner : BusinessObject
     public Adresse? Adresse { get; set; }
 
     /// <summary>Liste der Telefonnummern, unter denen der Ansprechpartner erreichbar ist.</summary>
-    [NonOfficial(NonOfficialCategory
-        .UNSPECIFIED)] //  We suggest to name it "rufnummern" instead of "rufnummer" because it's a list")]
-    [JsonProperty(Required = Required.Default, Order = 19, PropertyName = "rufnummern")]
+    [NonOfficial(NonOfficialCategory.UNSPECIFIED)] //  We suggest to name it "rufnummern" instead of "rufnummer" because it's a list")]
+    [JsonProperty(Order = 19, PropertyName = "rufnummern")]
     [JsonPropertyName("rufnummern")]
     [JsonPropertyOrder(19)]
     [ProtoMember(13)]
@@ -107,7 +105,7 @@ public class Ansprechpartner : BusinessObject
     public List<Rufnummer>? Rufnummern { get; set; }
 
     /// <summary>Liste der Abteilungen und Zuständigkeiten des Ansprechpartners.</summary>
-    [JsonProperty(Required = Required.Default, Order = 20, PropertyName = "zustaendigkeit")]
+    [JsonProperty(Order = 20, PropertyName = "zustaendigkeit")]
     [JsonPropertyName("zustaendigkeit")]
     [JsonPropertyOrder(20)]
     [ProtoMember(14)]
