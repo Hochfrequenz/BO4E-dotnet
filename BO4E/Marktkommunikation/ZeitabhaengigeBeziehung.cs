@@ -21,8 +21,8 @@ public class ZeitabhaengigeBeziehung
     public DateTimeOffset GueltigVon { get; set; }
 
     /// <summary>
-    /// exklusives Ende, hier darf nur das Mavimale Enddatum eingetragen werden, sofern bekannt. Anderen Falls ist das Feld null.
-    /// The maximum end date is NULL, this means DateTimeOffset.MaxValue is converted to null.
+    /// Offene Zeitscheiben werden mit <code>GueltigBis = null</code> modelliert, _nicht_ mit <code>DateTimeOffset.MaxValue</code>.
+    /// The maximum end date is NULL, this means DateTimeOffset.MaxValue is converted to null by the setter.
     /// </summary>
     [JsonPropertyName("gueltigBis")]
     [JsonPropertyOrder(2)]
