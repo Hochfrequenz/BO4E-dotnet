@@ -45,4 +45,13 @@ public class ZeitabhaengigeBeziehung
     [JsonPropertyOrder(4)]
     [Newtonsoft.Json.JsonProperty(PropertyName = "childId", Order = 4)]
     public string? ChildId { get; set; }
+
+    /// <summary>
+    /// An extra field to store or add additional information for further processing.
+    /// This can be used to distinguish different kinds of relations between the same parent and child type.
+    /// </summary>
+    [JsonPropertyName("additionalInformation")]
+    [JsonPropertyOrder(5)]
+    [Newtonsoft.Json.JsonProperty(PropertyName = "additionalInformation", Order = 5)]
+    public string? AdditionalInformation { get; set; }
 }
