@@ -65,9 +65,9 @@ public class Tranche : BusinessObject
     /// <summary>
     /// Liefert zusätzliche Spezifizierungen zu dem prozentualen Anteil der Tranche an der erzeugenden Marktlokation
     /// </summary>
-    [JsonProperty(Order = 15, PropertyName = "aufteilungsmenge")]
+    [JsonProperty(Order = 15, PropertyName = "spezifizierungAufteilungsmenge")]
     [JsonPropertyOrder(15)]
-    [JsonPropertyName("aufteilungsmenge")]
+    [JsonPropertyName("spezifizierungAufteilungsmenge")]
     [ProtoMember(9)]
     public string? SpezifizierungAufteilungsmenge { get; set; }
 }
