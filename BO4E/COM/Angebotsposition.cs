@@ -1,3 +1,4 @@
+#nullable enable
 using System.Text.Json.Serialization;
 using BO4E.ENUM;
 using BO4E.meta;
@@ -18,7 +19,7 @@ public class Angebotsposition : COM
     [JsonPropertyName("positionsbezeichung")]
     [JsonPropertyOrder(10)]
     [ProtoMember(3)]
-    public string Positionsbezeichung { get; set; }
+    public string? Positionsbezeichung { get; set; }
 
     /// <summary>
     ///     Summe der Verbräuche (z.B. in kWh), die zu dieser Angebotsposition gehören. Details <see cref="Menge" />
