@@ -92,7 +92,7 @@ public class SteuerbareRessource : BusinessObject
     [JsonPropertyOrder(16)]
     [NonOfficial(NonOfficialCategory.CUSTOMER_REQUIREMENTS)]
     public string? LokationsbuendelObjektcode { get; set; }
-    
+
     /// <summary>
     /// Ergänzt die Marktrollen zu der Steuerbaren Ressource
     /// </summary>
