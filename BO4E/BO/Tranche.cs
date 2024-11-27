@@ -63,8 +63,7 @@ public class Tranche : BusinessObject
     public List<MarktpartnerDetails>? Marktrollen { get; set; }
 
     /// <summary>
-    /// Liefert zusätzliceh Spezifizierungen zu der Prozentualer Anteil der Tranche an der erzeugenden Marktlokation
-    /// in Prozent mit 2 Nachkommastellen
+    /// Liefert zusätzliche Spezifizierungen zu dem prozentualen Anteil der Tranche an der erzeugenden Marktlokation
     /// </summary>
     [JsonProperty(Order = 15, PropertyName = "aufteilungsmenge")]
     [JsonPropertyOrder(15)]
