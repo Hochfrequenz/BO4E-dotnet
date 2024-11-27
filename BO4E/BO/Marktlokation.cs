@@ -194,7 +194,7 @@ public class Marktlokation : BusinessObject
     [JsonPropertyOrder(26)]
     [JsonPropertyName("katasterinformation")]
     [ProtoMember(20)]
-    public Katasteradresse? Katasterinformation { get; set; }
+    public List<Katasteradresse>? Katasterinformation { get; set; }
 
     /// <summary>
     ///     für EDIFACT mapping
