@@ -61,4 +61,14 @@ public class Tranche : BusinessObject
     [JsonPropertyOrder(14)]
     [ProtoMember(8)]
     public List<MarktpartnerDetails>? Marktrollen { get; set; }
+
+    /// <summary>
+    /// Liefert zusätzliceh Spezifizierungen zu der Prozentualer Anteil der Tranche an der erzeugenden Marktlokation
+    /// in Prozent mit 2 Nachkommastellen
+    /// </summary>
+    [JsonProperty(Order = 15, PropertyName = "aufteilungsmenge")]
+    [JsonPropertyOrder(15)]
+    [JsonPropertyName("aufteilungsmenge")]
+    [ProtoMember(9)]
+    public string? SpezifizierungAufteilungsmenge { get; set; }
 }
