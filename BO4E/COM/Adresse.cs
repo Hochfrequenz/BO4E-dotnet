@@ -1,3 +1,4 @@
+#nullable enable
 using System.Text.Json.Serialization;
 using BO4E.ENUM;
 using BO4E.meta;
@@ -17,7 +18,7 @@ public class Adresse : COM
     [FieldName("zipCode", Language.EN)]
     [ProtoMember(3)]
     [JsonPropertyOrder(11)]
-    public string Postleitzahl { get; set; }
+    public string? Postleitzahl { get; set; }
 
     /// <summary>Bezeichnung der Stadt. Beispiel Hückelhoven</summary>
     [DataCategory(DataCategory.ADDRESS)]
@@ -26,7 +27,7 @@ public class Adresse : COM
     [FieldName("city", Language.EN)]
     [ProtoMember(4)]
     [JsonPropertyOrder(12)]
-    public string Ort { get; set; }
+    public string? Ort { get; set; }
 
     /// <summary>Bezeichnung der Straße. Beispiel: Weserstraße</summary>
     [DataCategory(DataCategory.ADDRESS)]
