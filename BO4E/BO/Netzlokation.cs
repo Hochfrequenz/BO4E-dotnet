@@ -26,14 +26,14 @@ public class Netzlokation : BusinessObject
     [DataCategory(DataCategory.POD)]
     [BoKey]
     [ProtoMember(4)]
-    public string NetzlokationsId { get; set; }
+    public string? NetzlokationsId { get; set; }
 
     /// <summary>Sparte der Netzlokation, z.B. Gas oder Strom.</summary>
     [JsonProperty(Order = 11, PropertyName = "sparte")]
     [JsonPropertyOrder(11)]
     [JsonPropertyName("sparte")]
     [ProtoMember(5)]
-    public Sparte Sparte { get; set; }
+    public Sparte? Sparte { get; set; }
 
     /// <summary>
     /// Netzanschlussleistungsmenge der Netzlokation
