@@ -44,7 +44,7 @@ public class ZeitabhaengigeBeziehung
     public string? ParentId { get; set; }
 
     /// <summary>
-    /// Wer oder was ist dem mit <see cref="ChildId"/> beschriebenen Objekt zugeordnet?
+    /// Wer oder was ist dem mit <see cref="ParentId"/> beschriebenen Objekt zugeordnet?
     /// </summary>
     /// <example>"bo4e://marktteilnehmer/9991234567890"</example>
     [JsonPropertyName("childId")]
