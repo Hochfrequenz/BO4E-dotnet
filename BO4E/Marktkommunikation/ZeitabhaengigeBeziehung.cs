@@ -56,8 +56,8 @@ public class ZeitabhaengigeBeziehung
     /// Mit dem Feld <see cref="AdditionalSpecification"/> können zusätzliche Spezifikationen angegeben werden.
     /// </summary>
     /// <example>"bo4e://marktteilnehmer/9991234567890"</example>
-    [JsonPropertyName("additionialSpecification")]
+    [JsonPropertyName("additionalSpecification")]
     [JsonPropertyOrder(4)]
-    [Newtonsoft.Json.JsonProperty(PropertyName = "additionialSpecification", Order = 4)]
+    [Newtonsoft.Json.JsonProperty(PropertyName = "additionalSpecification", Order = 4)]
     public string? AdditionalSpecification { get; set; }
 }
