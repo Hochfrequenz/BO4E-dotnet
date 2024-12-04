@@ -49,7 +49,7 @@ public class ZeitabhaengigeBeziehung
     /// <example>"bo4e://marktteilnehmer/9991234567890"</example>
     [JsonPropertyName("childId")]
     [JsonPropertyOrder(4)]
-    [Newtonsoft.Json.JsonProperty(PropertyName = "childId", Order = 4)]
+    [Newtonsoft.Json.JsonProperty(PropertyName = "ParentId", Order = 4)]
     public string? ChildId { get; set; }
 
     /// <summary>
