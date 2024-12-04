@@ -53,11 +53,11 @@ public class ZeitabhaengigeBeziehung
     public string? ChildId { get; set; }
 
     /// <summary>
-    /// Mit dem Feld <see cref="AdditionialRolleSpecification"/> können zusätzliche Rollen Spezifikationen angegeben werden.
+    /// Mit dem Feld <see cref="AdditionialSpecification"/> können zusätzliche Spezifikationen angegeben werden.
     /// </summary>
     /// <example>"bo4e://marktteilnehmer/9991234567890"</example>
-    [JsonPropertyName("additionialRolleSpecification")]
+    [JsonPropertyName("additionialSpecification")]
     [JsonPropertyOrder(4)]
-    [Newtonsoft.Json.JsonProperty(PropertyName = "additionialRolleSpecification", Order = 4)]
-    public string? AdditionialRolleSpecification { get; set; }
+    [Newtonsoft.Json.JsonProperty(PropertyName = "additionialSpecification", Order = 4)]
+    public string? AdditionialSpecification { get; set; }
 }
