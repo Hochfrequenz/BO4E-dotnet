@@ -57,13 +57,6 @@ public class LenientSystemTextGeraetemerkmalGasConverter
     )
     {
         var stringValue = value.ToString();
-        var match = GasPrefixRegex.Match(stringValue);
-        if (!match.Success)
-        {
-            writer.WriteStringValue(stringValue);
-            return;
-        }
-        var rest = match.Groups["rest"].Value;
-        writer.WriteStringValue(rest);
+        writer.WriteStringValue(stringValue);
     }
 }
