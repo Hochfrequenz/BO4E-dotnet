@@ -51,4 +51,13 @@ public class ZeitabhaengigeBeziehung
     [JsonPropertyOrder(4)]
     [Newtonsoft.Json.JsonProperty(PropertyName = "childId", Order = 4)]
     public string? ChildId { get; set; }
+
+    /// <summary>
+    /// Mit dem Feld <see cref="AdditionalSpecification"/> können zusätzliche Spezifikationen angegeben werden.
+    /// </summary>
+    /// <example>"bo4e://marktteilnehmer/9991234567890"</example>
+    [JsonPropertyName("additionalSpecification")]
+    [JsonPropertyOrder(5)]
+    [Newtonsoft.Json.JsonProperty(PropertyName = "additionalSpecification", Order = 5)]
+    public string? AdditionalSpecification { get; set; }
 }
