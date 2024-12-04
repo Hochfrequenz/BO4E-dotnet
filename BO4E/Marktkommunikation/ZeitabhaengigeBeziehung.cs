@@ -57,7 +57,7 @@ public class ZeitabhaengigeBeziehung
     /// </summary>
     /// <example>"bo4e://marktteilnehmer/9991234567890"</example>
     [JsonPropertyName("additionalSpecification")]
-    [JsonPropertyOrder(4)]
-    [Newtonsoft.Json.JsonProperty(PropertyName = "additionalSpecification", Order = 4)]
+    [JsonPropertyOrder(5)]
+    [Newtonsoft.Json.JsonProperty(PropertyName = "additionalSpecification", Order = 5)]
     public string? AdditionalSpecification { get; set; }
 }
