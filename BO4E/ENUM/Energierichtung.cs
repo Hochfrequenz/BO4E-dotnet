@@ -21,4 +21,9 @@ public enum Energierichtung
     [EnumMember(Value = "RUHEND")]
     [System.Text.Json.Serialization.JsonStringEnumMemberName("RUHEND")]
     RUHEND,
+    
+    /// <summary>Die Marktlokation is eine Kundenanlage nach EnWG</summary>
+    [EnumMember(Value = "KUNDENANLAGE")]
+    [System.Text.Json.Serialization.JsonStringEnumMemberName("KUNDENANLAGE")]
+    KUNDENANLAGE
 }
