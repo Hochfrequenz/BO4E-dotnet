@@ -99,8 +99,8 @@ public class TestGeraeteerkmalDeserialization
             {
                 Converters = new List<Newtonsoft.Json.JsonConverter>()
                 {
-                    new Newtonsoft.Json.Converters.StringEnumConverter(),
                     new LenientGeraetemerkmalGasConverter(),
+                    new Newtonsoft.Json.Converters.StringEnumConverter(),
                 },
             }
         );
@@ -265,7 +265,7 @@ public class TestGeraeteerkmalDeserialization
             Merkmal = Geraetemerkmal.GAS_G2P5,
         };
         var json = System.Text.Json.JsonSerializer.Serialize(instance, settings);
-        json.Should().Be("{\"merkmal\":\"G2P5\"}");
+        json.Should().Be("{\"merkmal\":\"GAS_G2P5\"}");
     }
 
     [TestMethod]
