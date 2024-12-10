@@ -62,16 +62,8 @@ public class LenientSystemTextNullableGeraetemerkmalGasConverter
     {
         if (value.HasValue)
         {
-            // Remove the "GAS_" prefix if it exists
-            var stringValue = value.Value.ToString();
-            var match = GasPrefixRegex.Match(stringValue);
-            if (!match.Success)
-            {
-                writer.WriteStringValue(stringValue);
-                return;
-            }
-            var rest = match.Groups["rest"].Value;
-            writer.WriteStringValue(rest);
+            var stringValue = value.ToString();
+            writer.WriteStringValue(stringValue);
         }
         else
         {
