@@ -41,7 +41,10 @@ public class LenientGeraetemerkmalGasConverter : JsonConverter
                 rawValue = reader.Value?.ToString();
                 break;
         }
-
+        if (string.IsNullOrEmpty(rawValue))
+        {
+            return null;
+        }
         try
         {
             return Enums.Parse<Geraetemerkmal>(rawValue);
