@@ -99,8 +99,8 @@ public class TestGeraeteerkmalDeserialization
             {
                 Converters = new List<Newtonsoft.Json.JsonConverter>()
                 {
-                    new Newtonsoft.Json.Converters.StringEnumConverter(),
                     new LenientGeraetemerkmalGasConverter(),
+                    new Newtonsoft.Json.Converters.StringEnumConverter(),
                 },
             }
         );

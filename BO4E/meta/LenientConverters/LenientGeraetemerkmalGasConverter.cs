@@ -12,7 +12,7 @@ namespace BO4E.meta.LenientConverters;
 public class LenientGeraetemerkmalGasConverter : JsonConverter
 {
     /// <inheritdoc cref="JsonConverter.CanWrite" />
-    public override bool CanWrite => false;
+    public override bool CanWrite => true;
 
     /// <inheritdoc cref="JsonConverter.CanConvert(Type)" />
     public override bool CanConvert(Type objectType)
@@ -65,6 +65,6 @@ public class LenientGeraetemerkmalGasConverter : JsonConverter
     /// <inheritdoc cref="JsonConverter.WriteJson(JsonWriter, object, JsonSerializer)" />
     public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
     {
-        throw new NotImplementedException();
+        writer.WriteRawValue("\"" + value.ToString() + "\"");
     }
 }
