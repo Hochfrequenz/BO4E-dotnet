@@ -131,16 +131,11 @@ public class LenientSystemTextJsonEnumListConverter<T, TE> : JsonConverter<T>
                         if (
                             (
                                 (Type)expectedListElementType
-                            ).GetCustomAttribute<System.Text.Json.Serialization.JsonConverterAttribute>()
-                                is { } jca
-                            && jca.ConverterType != null
+                            ).GetCustomAttribute<System.Text.Json.Serialization.JsonConverterAttribute>() is
+                            { ConverterType: not null } jca
                         )
                         {
-                            if (
-                                options.Converters.Any(x =>
-                                    x.GetType() == jca.ConverterType
-                                )
-                            )
+                            if (options.Converters.Any(x => x.GetType() == jca.ConverterType))
                             {
                                 var optionsWithoutThisConverter = new JsonSerializerOptions(
                                     options
