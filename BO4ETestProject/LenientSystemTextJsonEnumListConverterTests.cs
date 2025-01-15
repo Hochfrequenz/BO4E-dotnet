@@ -24,6 +24,9 @@ public class LenientSystemTextJsonEnumListConverterTests
         result
             .Should()
             .NotBeNull()
-            .And.Contain(BO4E.ENUM.Verwendungszweck.MEHRMINDERMENGENABRECHNUNG);
+            .And.ContainInOrder(
+                BO4E.ENUM.Verwendungszweck.MEHRMINDERMENGENABRECHNUNG,
+                BO4E.ENUM.Verwendungszweck.MEHRMINDERMENGENABRECHNUNG
+            );
     }
 }
