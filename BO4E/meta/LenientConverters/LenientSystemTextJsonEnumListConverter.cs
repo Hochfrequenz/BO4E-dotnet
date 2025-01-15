@@ -128,20 +128,37 @@ public class LenientSystemTextJsonEnumListConverter<T, TE> : JsonConverter<T>
                     }
                     catch (Exception)
                     {
-                        if (((Type)expectedListElementType).GetCustomAttribute<System.Text.Json.Serialization.JsonConverterAttribute>() is {}jca && jca.ConverterType!=null)
+                        if (
+                            (
+                                (Type)expectedListElementType
+                            ).GetCustomAttribute<System.Text.Json.Serialization.JsonConverterAttribute>()
+                                is { } jca
+                            && jca.ConverterType != null
+                        )
                         {
-                            // public override Verwendungszweck? Read(
-                            // ref System.Text.Json.Utf8JsonReader reader,
-                            //    Type typeToConvert,
-                            //    System.Text.Json.JsonSerializerOptions options
-                            if (options.Converters.FirstOrDefault(x => x.GetType() == jca.ConverterType) is
-                                { } converter)
+                            if (
+                                options.Converters.Any(x =>
+                                    x.GetType() == jca.ConverterType
+                                )
+                            )
                             {
-                                jca.ConverterType!.GetMethod("Read").Invoke(converter, new object[] {reader, expectedListElementType, options});
+                                var optionsWithoutThisConverter = new JsonSerializerOptions(
+                                    options
+                                );
+                                if (optionsWithoutThisConverter.Converters.Contains(this))
+                                {
+                                    // avoid stack overflow/infinity recursion
+                                    optionsWithoutThisConverter.Converters.Remove(this);
+                                }
+                                var helperJsonList = "[" + element.GetRawText() + "]";
+                                var subResultList = System.Text.Json.JsonSerializer.Deserialize(
+                                    helperJsonList,
+                                    expectedListType,
+                                    optionsWithoutThisConverter
+                                );
+                                // check the unittest Test_Mehrmindermengenabrechnungslist() to debug this code block
+                                ((IList)result).Add((subResultList as IList)[0]);
                             }
-                            ((JsonConverter)options.Converters.FirstOrDefault(x=>x.GetType()==jca.ConverterType)).Read(ref reader, expectedListElementType, options);
-                            jca.ConverterType.GetMethod("Read")
-                                .Invoke(new object[] { ref reader, expectedListElementType, options });   
                         }
                         else
                         {
@@ -150,7 +167,7 @@ public class LenientSystemTextJsonEnumListConverter<T, TE> : JsonConverter<T>
                                 element.GetString(),
                                 true
                             );
-                            ((IList)result).Add(enumValue);                            
+                            ((IList)result).Add(enumValue);
                         }
                     }
 
