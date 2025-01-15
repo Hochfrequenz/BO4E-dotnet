@@ -145,6 +145,19 @@ public class LenientSystemTextJsonEnumListConverter<T, TE> : JsonConverter<T>
                                     // avoid stack overflow/infinity recursion
                                     optionsWithoutThisConverter.Converters.Remove(this);
                                 }
+
+                                if (
+                                    optionsWithoutThisConverter.Converters.FirstOrDefault(c =>
+                                        c.GetType()
+                                        == typeof(LenientSystemTextJsonEnumListConverter)
+                                    ) is
+                                    { } sameTypeConverter
+                                )
+                                {
+                                    optionsWithoutThisConverter.Converters.Remove(
+                                        sameTypeConverter
+                                    );
+                                }
                                 var helperJsonList = "[" + element.GetRawText() + "]";
                                 var subResultList = System.Text.Json.JsonSerializer.Deserialize(
                                     helperJsonList,
