@@ -128,12 +128,42 @@ public class LenientSystemTextJsonEnumListConverter<T, TE> : JsonConverter<T>
                     }
                     catch (Exception)
                     {
-                        var enumValue = Enum.Parse(
-                            expectedListElementType,
-                            element.GetString(),
-                            true
-                        );
-                        ((IList)result).Add(enumValue);
+                        if (
+                            (
+                                (Type)expectedListElementType
+                            ).GetCustomAttribute<System.Text.Json.Serialization.JsonConverterAttribute>() is
+                            { ConverterType: not null } jca
+                        )
+                        {
+                            if (options.Converters.Any(x => x.GetType() == jca.ConverterType))
+                            {
+                                var optionsWithoutThisConverter = new JsonSerializerOptions(
+                                    options
+                                );
+                                if (optionsWithoutThisConverter.Converters.Contains(this))
+                                {
+                                    // avoid stack overflow/infinity recursion
+                                    optionsWithoutThisConverter.Converters.Remove(this);
+                                }
+                                var helperJsonList = "[" + element.GetRawText() + "]";
+                                var subResultList = System.Text.Json.JsonSerializer.Deserialize(
+                                    helperJsonList,
+                                    expectedListType,
+                                    optionsWithoutThisConverter
+                                );
+                                // check the unittest Test_Mehrmindermengenabrechnungslist() to debug this code block
+                                ((IList)result).Add((subResultList as IList)[0]);
+                            }
+                        }
+                        else
+                        {
+                            var enumValue = Enum.Parse(
+                                expectedListElementType,
+                                element.GetString(),
+                                true
+                            );
+                            ((IList)result).Add(enumValue);
+                        }
                     }
 
                     break;
