@@ -187,8 +187,13 @@ public class Marktlokation : BusinessObject
 
     /// <summary>
     ///     Alternativ zu einer postalischen Adresse und Geokoordinaten kann hier eine  Ortsangabe mittels Gemarkung und
-    ///     Flurstück erfolgen. <seealso cref="Katasteradresse" />
+    ///     Flurstück erfolgen.
     /// </summary>
+    /// <remarks>
+    /// Es handelt sich seit v0.20.0 um eine Liste, weil nur so die (listenartigen) Informationen aus der positiven Antwort auf
+    /// eine MaLo-Ident Anfrage abgebildet werden können.
+    /// https://github.com/Hochfrequenz/malo-ident-net-models/blob/d17bc7fd9732ec4d0d335425c33d5cf34c987bf7/MaLoIdentModels/MaLoIdentModels/v1/DataMarketLocation.cs#L48-L49
+    /// </remarks>
     [DataCategory(DataCategory.ADDRESS)]
     [JsonProperty(Order = 26, PropertyName = "katasterinformation")]
     [JsonPropertyOrder(26)]
