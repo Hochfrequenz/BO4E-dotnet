@@ -88,7 +88,7 @@
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
     <PackageReference Include="Portable.System.DateTimeOnly" Version="9.0.0" />
-    <PackageReference Include="protobuf-net" Version="3.2.45" />
+    <PackageReference Include="protobuf-net" Version="3.2.46" />
     <PackageReference Include="SourceLink.Copy.PdbFiles" Version="2.8.3" PrivateAssets="All" />
     <PackageReference Include="System.ComponentModel.Annotations" Version="5.0.0" />
     <PackageReference Include="System.Text.Encodings.Web" Version="9.0.1" />
