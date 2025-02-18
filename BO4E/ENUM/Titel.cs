@@ -19,7 +19,7 @@ public enum Titel
     [EnumMember(Value = "PROF_DR")]
     [System.Text.Json.Serialization.JsonStringEnumMemberName("PROF_DR")]
     PROF_DR,
-    
+
     /// <summary>Diplom Informatiker</summary>
     [EnumMember(Value = "DIPLOM_INF")]
     [System.Text.Json.Serialization.JsonStringEnumMemberName("DIPLOM_INF")]
