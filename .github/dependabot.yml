@@ -9,6 +9,11 @@ updates:
         update-types: ["version-update:semver-major"]
       - dependency-name: "Microsoft.Extensions.Logging.*"
         update-types: ["version-update:semver-major"]
+     groups:
+       mstest:
+        applies-to: version-updates
+        patterns:
+          - "MSTest.*"
   # Maintain dependencies for GitHub Actions
   - package-ecosystem: "github-actions"
     directory: "/"
