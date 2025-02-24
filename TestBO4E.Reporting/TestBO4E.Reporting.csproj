@@ -10,14 +10,14 @@
   </PropertyGroup>
 
   <ItemGroup>
-	  <PackageReference Include="AwesomeAssertions" Version="8.0.0" />
+	  <PackageReference Include="AwesomeAssertions" Version="8.0.1" />
 	  <PackageReference Include="coverlet.collector" Version="6.0.4">
 		  <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
 		  <PrivateAssets>all</PrivateAssets>
 	  </PackageReference>
 	  <PackageReference Include="JsonDiffPatch.Net" Version="2.3.0" />
 	  <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.13.0" />
-	  <PackageReference Include="MSTest.TestAdapter" Version="3.7.3" />
+	  <PackageReference Include="MSTest.TestAdapter" Version="3.8.2" />
 	  <PackageReference Include="MSTest.TestFramework" Version="3.8.2" />
 	  <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
   </ItemGroup>
