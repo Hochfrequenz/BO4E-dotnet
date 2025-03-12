@@ -260,15 +260,31 @@ public enum Geraetetyp
     [System.Text.Json.Serialization.JsonStringEnumMemberName("STEUERBOX")]
     STEUERBOX,
 
-    /// <summary>BLOCKSTROMWANDLER</summary>
+    /// <summary>Blockstromwandler</summary>
     [ProtoEnum(Name = nameof(Geraetetyp) + "_" + nameof(BLOCKSTROMWANDLER))]
     [EnumMember(Value = "BLOCKSTROMWANDLER")]
     [System.Text.Json.Serialization.JsonStringEnumMemberName("BLOCKSTROMWANDLER")]
     BLOCKSTROMWANDLER,
 
-    ///<summary>KOMBIMESSWANDLER</summary>
+    ///<summary>Kombimesswandler</summary>
     [ProtoEnum(Name = nameof(Geraetetyp) + "_" + nameof(KOMBIMESSWANDLER))]
     [EnumMember(Value = "KOMBIMESSWANDLER")]
     [System.Text.Json.Serialization.JsonStringEnumMemberName("KOMBIMESSWANDLER")]
     KOMBIMESSWANDLER,
+    
+    ///<summary>Dichtemengenumwerter</summary>
+    [ProtoEnum(Name = nameof(Geraetetyp) + "_" + nameof(DICHTEMENGENUMWERTER))]
+    [EnumMember(Value = "DICHTEMENGENUMWERTER")]
+    [System.Text.Json.Serialization.JsonStringEnumMemberName("DICHTEMENGENUMWERTER")]
+    DICHTEMENGENUMWERTER,
+    ///<summary>Temperaturmengenumwerter</summary>
+    [ProtoEnum(Name = nameof(Geraetetyp) + "_" + nameof(TEMPERATURMENGENUMWERTER))]
+    [EnumMember(Value = "TEMPERATURMENGENUMWERTER")]
+    [System.Text.Json.Serialization.JsonStringEnumMemberName("TEMPERATURMENGENUMWERTER")]
+    TEMPERATURMENGENUMWERTER,
+    ///<summary>Zustandsmengenumwerter</summary>
+    [ProtoEnum(Name = nameof(Geraetetyp) + "_" + nameof(ZUSTANDSMENGENUMWERTER))]
+    [EnumMember(Value = "ZUSTANDSMENGENUMWERTER")]
+    [System.Text.Json.Serialization.JsonStringEnumMemberName("ZUSTANDSMENGENUMWERTER")]
+    ZUSTANDSMENGENUMWERTER,
 }
