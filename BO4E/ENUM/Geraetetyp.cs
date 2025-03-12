@@ -271,17 +271,19 @@ public enum Geraetetyp
     [EnumMember(Value = "KOMBIMESSWANDLER")]
     [System.Text.Json.Serialization.JsonStringEnumMemberName("KOMBIMESSWANDLER")]
     KOMBIMESSWANDLER,
-    
+
     ///<summary>Dichtemengenumwerter</summary>
     [ProtoEnum(Name = nameof(Geraetetyp) + "_" + nameof(DICHTEMENGENUMWERTER))]
     [EnumMember(Value = "DICHTEMENGENUMWERTER")]
     [System.Text.Json.Serialization.JsonStringEnumMemberName("DICHTEMENGENUMWERTER")]
     DICHTEMENGENUMWERTER,
+
     ///<summary>Temperaturmengenumwerter</summary>
     [ProtoEnum(Name = nameof(Geraetetyp) + "_" + nameof(TEMPERATURMENGENUMWERTER))]
     [EnumMember(Value = "TEMPERATURMENGENUMWERTER")]
     [System.Text.Json.Serialization.JsonStringEnumMemberName("TEMPERATURMENGENUMWERTER")]
     TEMPERATURMENGENUMWERTER,
+
     ///<summary>Zustandsmengenumwerter</summary>
     [ProtoEnum(Name = nameof(Geraetetyp) + "_" + nameof(ZUSTANDSMENGENUMWERTER))]
     [EnumMember(Value = "ZUSTANDSMENGENUMWERTER")]

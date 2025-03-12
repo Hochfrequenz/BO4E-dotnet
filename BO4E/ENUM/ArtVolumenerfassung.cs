@@ -18,5 +18,4 @@ public enum ArtVolumenerfassung
     [EnumMember(Value = "SCHLEICHMENGENUNTERDRÜCKUNG")]
     [System.Text.Json.Serialization.JsonStringEnumMemberName("SCHLEICHMENGENUNTERDRÜCKUNG")]
     SCHLEICHMENGENUNTERDRÜCKUNG,
-
 }
