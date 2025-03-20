@@ -17,7 +17,8 @@
         "guid": {
           "type": ["string", "null"]
         }
-      }
+      },
+      "required": ["exRefName", "exRefWert"]
     },
     "Geraet": {
       "type": ["object", "null"],
@@ -48,7 +49,8 @@
             "ZAEHLEINRICHTUNG"
           ]
         }
-      }
+      },
+      "required": ["geraetenummer", "geraeteeigenschaften", "geraeteart"]
     },
     "Geraeteeigenschaften": {
       "type": ["object", "null"],
@@ -105,7 +107,10 @@
             "SMARTMETERGATEWAY",
             "STEUERBOX",
             "BLOCKSTROMWANDLER",
-            "KOMBIMESSWANDLER"
+            "KOMBIMESSWANDLER",
+            "DICHTEMENGENUMWERTER",
+            "TEMPERATURMENGENUMWERTER",
+            "ZUSTANDSMENGENUMWERTER"
           ]
         },
         "geraetemerkmal": {
@@ -183,7 +188,62 @@
           }
         }
       },
-      "required": ["geraetetyp"]
+      "required": ["geraetetyp", "geraetemerkmal", "Parameter"]
+    },
+    "Zeitraum": {
+      "type": ["object", "null"],
+      "properties": {
+        "einheit": {
+          "type": ["string", "null"],
+          "enum": [
+            null,
+            "SEKUNDE",
+            "MINUTE",
+            "STUNDE",
+            "VIERTEL_STUNDE",
+            "TAG",
+            "WOCHE",
+            "MONAT",
+            "QUARTAL",
+            "HALBJAHR",
+            "JAHR"
+          ]
+        },
+        "dauer": {
+          "type": ["number", "null"]
+        },
+        "startdatum": {
+          "type": ["string", "null"],
+          "format": "date-time"
+        },
+        "enddatum": {
+          "type": ["string", "null"],
+          "format": "date-time"
+        },
+        "startzeitpunkt": {
+          "type": ["string", "null"],
+          "format": "date-time"
+        },
+        "endzeitpunkt": {
+          "type": ["string", "null"],
+          "format": "date-time"
+        },
+        "timestamp": {
+          "type": ["string", "null"],
+          "format": "date-time"
+        },
+        "guid": {
+          "type": ["string", "null"]
+        }
+      },
+      "required": [
+        "einheit",
+        "dauer",
+        "startdatum",
+        "enddatum",
+        "startzeitpunkt",
+        "endzeitpunkt"
+      ]
     }
   },
   "type": "object",
@@ -212,7 +272,7 @@
       "enum": ["STROM", "GAS", "FERNWAERME", "NAHWAERME", "WASSER", "ABWASSER"]
     },
     "geraete": {
-      "type": "array",
+      "type": ["array", "null"],
       "items": {
         "$ref": "#/definitions/Geraet"
       }
@@ -223,7 +283,30 @@
     },
     "vollstaendig": {
       "type": ["boolean", "null"]
+    },
+    "gueltigkeitszeitraum": {
+      "$ref": "#/definitions/Zeitraum"
+    },
+    "qualitaet": {
+      "type": ["string", "null"],
+      "enum": [
+        null,
+        "VOLLSTAENDIG",
+        "INFORMATIV",
+        "IM_SYSTEM_VORHANDEN",
+        "ERWARTET",
+        "VORLAEUFIG",
+        "UNVOLLSTAENDIG"
+      ]
     }
   },
-  "required": ["sparte", "geraete"]
+  "required": [
+    "boTyp",
+    "versionStruktur",
+    "externeReferenzen",
+    "sparte",
+    "geraete",
+    "wechseldatum",
+    "vollstaendig"
+  ]
 }
