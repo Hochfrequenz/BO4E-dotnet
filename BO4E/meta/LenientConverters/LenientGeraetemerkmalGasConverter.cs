@@ -47,7 +47,7 @@ public class LenientGeraetemerkmalGasConverter : JsonConverter
         }
         try
         {
-            return Enums.Parse<Geraetemerkmal>(rawValue);
+            return Enum.Parse(typeof(BO4E.ENUM.Geraetemerkmal), rawValue, ignoreCase: true);
         }
         catch (ArgumentException) when (rawValue.StartsWith("G"))
         {
@@ -57,7 +57,11 @@ public class LenientGeraetemerkmalGasConverter : JsonConverter
                 case "G2.5":
                     return Geraetemerkmal.GAS_G2P5;
                 default:
-                    return Enums.Parse<Geraetemerkmal>("GAS_" + rawValue);
+                    return Enum.Parse(
+                        typeof(BO4E.ENUM.Geraetemerkmal),
+                        "GAS_" + rawValue,
+                        ignoreCase: true
+                    );
             }
         }
     }

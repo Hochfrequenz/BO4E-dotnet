@@ -29,7 +29,8 @@ public class LenientSystemTextGeraetemerkmalGasConverter
         var rawString = reader.GetString();
         try
         {
-            return Enums.Parse<Geraetemerkmal>(rawString);
+            return (BO4E.ENUM.Geraetemerkmal)
+                Enum.Parse(typeof(BO4E.ENUM.Geraetemerkmal), rawString, ignoreCase: true);
         }
         catch (ArgumentException) when (rawString.StartsWith("G"))
         {
@@ -39,7 +40,12 @@ public class LenientSystemTextGeraetemerkmalGasConverter
                 case "G2.5":
                     return Geraetemerkmal.GAS_G2P5;
                 default:
-                    return Enums.Parse<Geraetemerkmal>("GAS_" + rawString);
+                    return (BO4E.ENUM.Geraetemerkmal)
+                        Enum.Parse(
+                            typeof(BO4E.ENUM.Geraetemerkmal),
+                            "GAS_" + rawString,
+                            ignoreCase: true
+                        );
             }
         }
     }
