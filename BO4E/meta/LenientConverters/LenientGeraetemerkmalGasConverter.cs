@@ -1,6 +1,5 @@
 using System;
 using BO4E.ENUM;
-using EnumsNET;
 using Newtonsoft.Json;
 
 namespace BO4E.meta.LenientConverters;
