@@ -2,7 +2,6 @@ using System;
 using System.Text.Json;
 using System.Text.RegularExpressions;
 using BO4E.ENUM;
-using EnumsNET;
 
 namespace BO4E.meta.LenientConverters;
 
