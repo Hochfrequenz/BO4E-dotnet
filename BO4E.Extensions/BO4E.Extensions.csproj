@@ -29,7 +29,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="TimePeriodLibrary.NET" Version="2.1.5" />
+    <PackageReference Include="TimePeriodLibrary.NET" Version="2.1.6" />
 	  <PackageReference Include="System.Net.Http" Version="4.3.*" />
 	  <PackageReference Include="System.Text.RegularExpressions" Version="4.3.*" />
 	  <None Include="..\LICENSE.txt">
