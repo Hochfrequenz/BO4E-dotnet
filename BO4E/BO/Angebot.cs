@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
 using System.Text.Json.Serialization;
 using BO4E.COM;
 using BO4E.ENUM;
@@ -150,6 +149,5 @@ public class Angebot : BusinessObject
     [JsonPropertyOrder(20)]
     [ProtoMember(13)]
     [DataCategory(DataCategory.FINANCE)]
-    [MinLength(1)]
     public List<Angebotsvariante>? Varianten { get; set; }
 }
