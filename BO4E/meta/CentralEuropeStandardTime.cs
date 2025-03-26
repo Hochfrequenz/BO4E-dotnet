@@ -1,6 +1,4 @@
 using System;
-using System.IO;
-using Newtonsoft.Json;
 
 namespace BO4E.meta;
 
@@ -10,34 +8,21 @@ namespace BO4E.meta;
 /// </summary>
 public abstract class CentralEuropeStandardTime
 {
-    private static readonly TimeZoneInfo? _CentralEuropeStandardTimezoneInfo;
+    /// <summary>
+    /// serialized with <see cref="TimeZoneInfo.ToSerializedString"/> on a system where the timezone is present.
+    /// </summary>
+    /// <remarks>
+    /// Especially in systems like alpine linux or azure functions "Europe/Berlin" might not be available as timezone (or under a different name)
+    /// So to avoid any issues, we just ship it with the package.
+    /// </remarks>
+    private const string SerializedTimezone =
+        "Central Europe Standard Time;60;(UTC+01:00) Belgrad, Bratislava (Pressburg), Budapest, Ljubljana, Prag (Praha);Mitteleuropäische Zeit ;Mitteleuropäische Sommerzeit ;[01:01:0001;12:31:9999;60;[0;02:00:00;3;5;0;];[0;03:00:00;10;5;0;];];";
 
     /// <summary>
     ///     Central Europe Standard Time as hard coded default time. Public to be used elsewhere ;)
     /// </summary>
-    public static TimeZoneInfo CentralEuropeStandardTimezoneInfo
-    {
-        get => _CentralEuropeStandardTimezoneInfo!;
-    }
-
-    static CentralEuropeStandardTime()
-    {
-        var assembly = typeof(CentralEuropeStandardTime).Assembly;
-        // load serialized time zone from json resource file:
-        const string resourceFileName = "BO4E.meta.CentralEuropeStandardTime.json";
-        using var stream = assembly.GetManifestResourceStream(resourceFileName);
-        if (stream == null)
-        // this should never ever happen
-        {
-            throw new FileNotFoundException($"The file resource {resourceFileName} was not found.");
-        }
-        using var jsonReader = new StreamReader(stream);
-        var jsonString = jsonReader.ReadToEnd();
-        //Console.WriteLine(jsonString);
-        _CentralEuropeStandardTimezoneInfo = JsonConvert.DeserializeObject<TimeZoneInfo>(
-            jsonString
-        );
-    }
+    public static TimeZoneInfo CentralEuropeStandardTimezoneInfo =>
+        TimeZoneInfo.FromSerializedString(SerializedTimezone);
 
     /// <summary>
     ///     legacy time zone info object.
