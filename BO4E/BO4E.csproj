@@ -71,12 +71,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <EmbeddedResource Include="meta\CentralEuropeStandardTime.json">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </EmbeddedResource>
-  </ItemGroup>
-
-  <ItemGroup>
     <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
     <PackageReference Include="Newtonsoft.Json.Schema" Version="4.0.1" />
     <PackageReference Include="Polyfill" Version="7.12.0">
