@@ -22,7 +22,7 @@ public abstract class CentralEuropeStandardTime
     ///     Central Europe Standard Time as hard coded default time. Public to be used elsewhere ;)
     /// </summary>
     public static TimeZoneInfo CentralEuropeStandardTimezoneInfo =>
-        TimeZoneInfo.FromSerializedString(SerializedTimezone);
+        TimeZoneInfo.FromSerializedString(SerializedTimezone); // the string we read from is not malformed, hence we need no error handling. there are tests for this.
 
     /// <summary>
     ///     legacy time zone info object.
