@@ -144,4 +144,14 @@ public class Netzlokation : BusinessObject
     [ProtoMember(16)]
     [JsonPropertyOrder(22)]
     public List<Netzlokationsabrechnungsdaten>? Abrechnungsdaten { get; set; }
+
+    /// <summary>
+    /// Ergänzt die Marktrollen zu der Netzlokation
+    /// </summary>
+    [JsonProperty(Order = 23, PropertyName = "marktrollen")]
+    [JsonPropertyName("marktrollen")]
+    [ProtoMember(17)]
+    [JsonPropertyOrder(23)]
+    [NonOfficial(NonOfficialCategory.CUSTOMER_REQUIREMENTS)]
+    public List<MarktpartnerDetails>? Marktrollen { get; set; } // ToDo: evaluate this
 }

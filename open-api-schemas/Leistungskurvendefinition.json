@@ -1,119 +1,18 @@
 {
   "$schema": "http://json-schema.org/draft-04/schema#",
-  "title": "Region",
+  "title": "Leistungskurvendefinition",
   "definitions": {
-    "Regionskriterium": {
-      "allOf": [
-        {
-          "$ref": "#/definitions/COM"
-        },
-        {
-          "type": "object",
-          "additionalProperties": {},
-          "properties": {
-            "gueltigkeitstyp": {
-              "$ref": "#/definitions/Gueltigkeitstyp"
-            },
-            "sparte": {
-              "x-nullable": true,
-              "oneOf": [
-                {
-                  "$ref": "#/definitions/Sparte"
-                }
-              ]
-            },
-            "mengenoperator": {
-              "$ref": "#/definitions/Mengenoperator"
-            },
-            "regionskriteriumtyp": {
-              "$ref": "#/definitions/Regionskriteriumtyp"
-            },
-            "wert": {
-              "type": "string"
-            }
-          }
-        }
-      ]
-    },
-    "Gueltigkeitstyp": {
+    "HaeufigkeitZaehlzeit": {
       "type": "integer",
       "description": "",
-      "x-enumNames": ["NICHT_IN"],
-      "enum": [0]
+      "x-enumNames": ["EINMALIG", "JAEHRLICH"],
+      "enum": [0, 1]
     },
-    "Sparte": {
+    "UebermittelbarkeitZaehlzeit": {
       "type": "integer",
       "description": "",
-      "x-enumNames": [
-        "STROM",
-        "GAS",
-        "FERNWAERME",
-        "NAHWAERME",
-        "WASSER",
-        "ABWASSER"
-      ],
-      "enum": [0, 1, 2, 3, 4, 5]
-    },
-    "Mengenoperator": {
-      "type": "integer",
-      "description": "",
-      "x-enumNames": ["KLEINER_ALS", "GROESSER_ALS", "GLEICH"],
-      "enum": [0, 1, 2]
-    },
-    "Regionskriteriumtyp": {
-      "type": "integer",
-      "description": "",
-      "x-enumNames": [
-        "BUNDESLANDKENNZIFFER",
-        "BUNDESLAND_NAME",
-        "MARKTGEBIET_NUMMER",
-        "MARKTGEBIET_NAME",
-        "REGELGEBIET_NUMMER",
-        "REGELGEBIET_NAME",
-        "NETZBETREIBER_NUMMER",
-        "NETZBETREIBER_NAME",
-        "BILANZIERUNGS_GEBIET_NUMMER",
-        "MSB_NUMMER",
-        "MSB_NAME",
-        "VERSORGER_NUMMER",
-        "VERSORGER_NAME",
-        "GRUNDVERSORGER_NUMMER",
-        "GRUNDVERSORGER_NAME",
-        "KREIS_NAME",
-        "KREISKENNZIFFER",
-        "GEMEINDE_NAME",
-        "GEMEINDEKENNZIFFER",
-        "POSTLEITZAHL",
-        "ORT",
-        "EINWOHNERZAHL_GEMEINDE",
-        "EINWOHNERZAHL_ORT",
-        "KM_UMKREIS",
-        "BUNDESWEIT"
-      ],
-      "enum": [
-        0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19,
-        20, 21, 22, 23, 24
-      ]
-    },
-    "COM": {
-      "type": "object",
-      "x-abstract": true,
-      "additionalProperties": {},
-      "properties": {
-        "guidSerialized": {
-          "type": "string"
-        },
-        "timestamp": {
-          "type": "string",
-          "format": "date-time",
-          "x-nullable": true
-        },
-        "guid": {
-          "type": "string",
-          "format": "guid",
-          "x-nullable": true
-        }
-      }
+      "x-enumNames": ["ELEKTRONISCH", "NICHT_ELEKTRONISCH"],
+      "enum": [0, 1]
     },
     "BusinessObject": {
       "type": "object",
@@ -186,6 +85,26 @@
           }
         }
       ]
+    },
+    "COM": {
+      "type": "object",
+      "x-abstract": true,
+      "additionalProperties": {},
+      "properties": {
+        "guidSerialized": {
+          "type": "string"
+        },
+        "timestamp": {
+          "type": "string",
+          "format": "date-time",
+          "x-nullable": true
+        },
+        "guid": {
+          "type": "string",
+          "format": "guid",
+          "x-nullable": true
+        }
+      }
     },
     "Zeitraum": {
       "allOf": [
@@ -272,21 +191,37 @@
       "type": "object",
       "additionalProperties": {},
       "properties": {
-        "bezeichnung": {
-          "type": "string"
+        "ausgerollt": {
+          "type": "boolean",
+          "x-nullable": true
         },
-        "positivListe": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/Regionskriterium"
-          }
+        "aenderungszeitpunkt": {
+          "type": "string",
+          "format": "date-time"
         },
-        "negativListe": {
-          "type": "array",
+        "leistungskurvendefinitionscode": {
+          "type": "string",
+          "x-nullable": true
+        },
+        "haeufigkeit": {
           "x-nullable": true,
-          "items": {
-            "$ref": "#/definitions/Regionskriterium"
-          }
+          "oneOf": [
+            {
+              "$ref": "#/definitions/HaeufigkeitZaehlzeit"
+            }
+          ]
+        },
+        "uebermittelbarkeit": {
+          "x-nullable": true,
+          "oneOf": [
+            {
+              "$ref": "#/definitions/UebermittelbarkeitZaehlzeit"
+            }
+          ]
+        },
+        "obererSchwellwert": {
+          "type": "string",
+          "x-nullable": true
         }
       }
     }
