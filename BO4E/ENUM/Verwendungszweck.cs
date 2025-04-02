@@ -37,6 +37,11 @@ public enum Verwendungszweck
     )]
     BLINDARBEITABRECHNUNG_BETRIEBSFUEHRUNG,
 
+    /// <summary>ZE1: Es liegt kein Verwendungszweck vor</summary>
+    [EnumMember(Value = "KEIN_VERWENDUNGSZWECK")]
+    [System.Text.Json.Serialization.JsonStringEnumMemberName("KEIN_VERWENDUNGSZWECK")]
+    KEIN_VERWENDUNGSZWECK,
+
     /// <summary>
     /// Übermittlung an das Herkunftsnachweisregister (HKNR)
     /// </summary>
