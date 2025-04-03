@@ -62,7 +62,7 @@ public class Angebot : BusinessObject
     [JsonPropertyOrder(13)]
     [ProtoIgnore]
     [DataCategory(DataCategory.FINANCE)]
-    public DateTimeOffset? Angebotsdatum { get; set; }
+    public DateTimeOffset Angebotsdatum { get; set; }
 
     /// <summary>
     ///     Sparte, für die das Angebot abgegeben wird (Strom/Gas).
