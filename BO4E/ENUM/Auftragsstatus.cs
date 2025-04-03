@@ -1,5 +1,5 @@
-using BO4E.meta;
 using System.Runtime.Serialization;
+using BO4E.meta;
 
 namespace BO4E.ENUM;
 
@@ -15,6 +15,7 @@ public enum Auftragsstatus
     /// </summary>
     /// <remarks>EDIFACT DE4405: Z13</remarks>
     [EnumMember(Value = "GESCHEITERT")]
+    [System.Text.Json.Serialization.JsonStringEnumMemberName("GESCHEITERT")]
     GESCHEITERT,
 
     /// <summary>
@@ -22,6 +23,7 @@ public enum Auftragsstatus
     /// </summary>
     /// <remarks>EDIFACT DE4405: Z14</remarks>
     [EnumMember(Value = "ERFOLGREICH")]
+    [System.Text.Json.Serialization.JsonStringEnumMemberName("ERFOLGREICH")]
     ERFOLGREICH,
 
     /// <summary>
@@ -29,6 +31,7 @@ public enum Auftragsstatus
     /// </summary>
     /// <remarks>EDIFACT DE4405: Z17</remarks>
     [EnumMember(Value = "GEPLANT")]
+    [System.Text.Json.Serialization.JsonStringEnumMemberName("GEPLANT")]
     GEPLANT,
 
     /// <summary>
@@ -36,6 +39,7 @@ public enum Auftragsstatus
     /// </summary>
     /// <remarks>EDIFACT DE4405: Z30</remarks>
     [EnumMember(Value = "ZUGESTIMMT")]
+    [System.Text.Json.Serialization.JsonStringEnumMemberName("ZUGESTIMMT")]
     ZUGESTIMMT,
 
     /// <summary>
@@ -43,6 +47,7 @@ public enum Auftragsstatus
     /// </summary>
     /// <remarks>EDIFACT DE4405: Z31</remarks>
     [EnumMember(Value = "WIDERSPROCHEN")]
+    [System.Text.Json.Serialization.JsonStringEnumMemberName("WIDERSPROCHEN")]
     WIDERSPROCHEN,
 
     /// <summary>
@@ -50,5 +55,6 @@ public enum Auftragsstatus
     /// </summary>
     /// <remarks>EDIFACT DE4405: Z32</remarks>
     [EnumMember(Value = "ABGELEHNT")]
+    [System.Text.Json.Serialization.JsonStringEnumMemberName("ABGELEHNT")]
     ABGELEHNT,
 }

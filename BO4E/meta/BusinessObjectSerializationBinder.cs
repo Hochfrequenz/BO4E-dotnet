@@ -13,9 +13,17 @@ public class BusinessObjectSerializationBinder : ISerializationBinder
 {
     static BusinessObjectSerializationBinder()
     {
-        BusinessObjectAndCOMTypes = typeof(BusinessObject).Assembly.GetTypes().Where(t =>
-            t.IsClass && !t.IsAbstract &&
-            (typeof(BusinessObject).IsAssignableFrom(t) || typeof(COM.COM).IsAssignableFrom(t))).ToList();
+        BusinessObjectAndCOMTypes = typeof(BusinessObject)
+            .Assembly.GetTypes()
+            .Where(t =>
+                t.IsClass
+                && !t.IsAbstract
+                && (
+                    typeof(BusinessObject).IsAssignableFrom(t)
+                    || typeof(COM.COM).IsAssignableFrom(t)
+                )
+            )
+            .ToList();
     }
 
     // implementation is similar to the JSON.net example implementation in the docs: https://www.newtonsoft.com/json/help/html/SerializeSerializationBinder.htm

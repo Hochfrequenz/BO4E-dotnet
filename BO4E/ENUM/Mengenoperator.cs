@@ -11,17 +11,20 @@ public enum Mengenoperator
     ///     Alle Objekte mit einem Wert kleiner als der Bezugswert
     /// </summary>
     [EnumMember(Value = "KLEINER_ALS")]
+    [System.Text.Json.Serialization.JsonStringEnumMemberName("KLEINER_ALS")]
     KLEINER_ALS,
 
     /// <summary>
     ///     Alle Objekte mit einem Wert größer als der Bezugswert
     /// </summary>
     [EnumMember(Value = "GROESSER_ALS")]
+    [System.Text.Json.Serialization.JsonStringEnumMemberName("GROESSER_ALS")]
     GROESSER_ALS,
 
     /// <summary>
     ///     Alle Objekte mit gleichem Wert
     /// </summary>
     [EnumMember(Value = "GLEICH")]
+    [System.Text.Json.Serialization.JsonStringEnumMemberName("GLEICH")]
     GLEICH,
 }
