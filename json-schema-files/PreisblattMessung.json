@@ -12,10 +12,10 @@
           "type": ["string", "null"]
         },
         "postleitzahl": {
-          "type": "string"
+          "type": ["string", "null"]
         },
         "ort": {
-          "type": "string"
+          "type": ["string", "null"]
         },
         "strasse": {
           "type": ["string", "null"]
@@ -309,7 +309,16 @@
           "type": ["string", "null"]
         }
       },
-      "required": ["postleitzahl", "ort"]
+      "required": [
+        "postleitzahl",
+        "ort",
+        "strasse",
+        "hausnummer",
+        "postfach",
+        "adresszusatz",
+        "coErgaenzung",
+        "landescode"
+      ]
     },
     "Ansprechpartner": {
       "type": ["object", "null"],
@@ -354,7 +363,7 @@
         },
         "titel": {
           "type": ["string", "null"],
-          "enum": [null, "DR", "PROF", "PROF_DR"]
+          "enum": [null, "DR", "PROF", "PROF_DR", "DIPLOM_INF"]
         },
         "vorname": {
           "type": ["string", "null"]
@@ -385,8 +394,39 @@
           "items": {
             "$ref": "#/definitions/Zustaendigkeit"
           }
+        },
+        "gueltigkeitszeitraum": {
+          "$ref": "#/definitions/Zeitraum"
+        },
+        "qualitaet": {
+          "type": ["string", "null"],
+          "enum": [
+            null,
+            "VOLLSTAENDIG",
+            "INFORMATIV",
+            "IM_SYSTEM_VORHANDEN",
+            "ERWARTET",
+            "VORLAEUFIG",
+            "UNVOLLSTAENDIG"
+          ]
         }
-      }
+      },
+      "required": [
+        "boTyp",
+        "versionStruktur",
+        "externeReferenzen",
+        "anrede",
+        "inviduelleAnrede",
+        "titel",
+        "vorname",
+        "nachname",
+        "eMailAdresse",
+        "kommentar",
+        "geschaeftspartner",
+        "adresse",
+        "rufnummern",
+        "zustaendigkeit"
+      ]
     },
     "Bankverbindung": {
       "type": ["object", "null"],
@@ -410,7 +450,8 @@
         "bankname": {
           "type": ["string", "null"]
         }
-      }
+      },
+      "required": ["iban", "kontoinhaber", "bankkennung", "bankname"]
     },
     "Erreichbarkeit": {
       "type": ["object", "null"],
@@ -440,7 +481,15 @@
         "mittagspause": {
           "$ref": "#/definitions/Zeitfenster"
         }
-      }
+      },
+      "required": [
+        "montagErreichbarkeit",
+        "dienstagErreichbarkeit",
+        "mittwochErreichbarkeit",
+        "donnerstagErreichbarkeit",
+        "freitagErreichbarkeit",
+        "mittagspause"
+      ]
     },
     "ExterneReferenz": {
       "type": ["object", "null"],
@@ -458,144 +507,10 @@
         "guid": {
           "type": ["string", "null"]
         }
-      }
+      },
+      "required": ["exRefName", "exRefWert"]
     },
     "Geraeteeigenschaften": {
-      "type": "object",
-      "properties": {
-        "timestamp": {
-          "type": ["string", "null"],
-          "format": "date-time"
-        },
-        "guid": {
-          "type": ["string", "null"]
-        },
-        "geraetetyp": {
-          "type": "string",
-          "enum": [
-            "WECHSELSTROMZAEHLER",
-            "DREHSTROMZAEHLER",
-            "ZWEIRICHTUNGSZAEHLER",
-            "RLM_ZAEHLER",
-            "IMS_ZAEHLER",
-            "BALGENGASZAEHLER",
-            "MAXIMUMZAEHLER",
-            "MULTIPLEXANLAGE",
-            "PAUSCHALANLAGE",
-            "VERSTAERKERANLAGE",
-            "SUMMATIONSGERAET",
-            "IMPULSGEBER",
-            "EDL_21_ZAEHLERAUFSATZ",
-            "VIER_QUADRANTEN_LASTGANGZAEHLER",
-            "MENGENUMWERTER",
-            "STROMWANDLER",
-            "SPANNUNGSWANDLER",
-            "DATENLOGGER",
-            "KOMMUNIKATIONSANSCHLUSS",
-            "MODEM",
-            "TELEKOMMUNIKATIONSEINRICHTUNG",
-            "DREHKOLBENGASZAEHLER",
-            "TURBINENRADGASZAEHLER",
-            "ULTRASCHALLZAEHLER",
-            "WIRBELGASZAEHLER",
-            "MODERNE_MESSEINRICHTUNG",
-            "ELEKTRONISCHER_HAUSHALTSZAEHLER",
-            "STEUEREINRICHTUNG",
-            "TECHNISCHESTEUEREINRICHTUNG",
-            "TARIFSCHALTGERAET",
-            "RUNDSTEUEREMPFAENGER",
-            "OPTIONALE_ZUS_ZAEHLEINRICHTUNG",
-            "MESSWANDLERSATZ_IMS_MME",
-            "KOMBIMESSWANDLER_IMS_MME",
-            "TARIFSCHALTGERAET_IMS_MME",
-            "RUNDSTEUEREMPFAENGER_IMS_MME",
-            "TEMPERATUR_KOMPENSATION",
-            "HOECHSTBELASTUNGS_ANZEIGER",
-            "SONSTIGES_GERAET",
-            "SMARTMETERGATEWAY",
-            "STEUERBOX",
-            "BLOCKSTROMWANDLER",
-            "KOMBIMESSWANDLER"
-          ]
-        },
-        "geraetemerkmal": {
-          "type": ["string", "null"],
-          "enum": [
-            null,
-            "EINTARIF",
-            "ZWEITARIF",
-            "MEHRTARIF",
-            "GAS_G2P5",
-            "GAS_G4",
-            "GAS_G6",
-            "GAS_G10",
-            "GAS_G16",
-            "GAS_G25",
-            "GAS_G40",
-            "GAS_G65",
-            "GAS_G100",
-            "GAS_G160",
-            "GAS_G250",
-            "GAS_G400",
-            "GAS_G650",
-            "GAS_G1000",
-            "GAS_G1600",
-            "GAS_G2500",
-            "IMPULSGEBER_G4_G100",
-            "IMPULSGEBER_G100",
-            "MODEM_GSM",
-            "MODEM_GPRS",
-            "MODEM_FUNK",
-            "MODEM_GSM_O_LG",
-            "MODEM_GSM_M_LG",
-            "MODEM_FESTNETZ",
-            "MODEM_GPRS_M_LG",
-            "PLC_COM",
-            "ETHERNET_KOM",
-            "DSL_KOM",
-            "LTE_KOM",
-            "RUNDSTEUEREMPFAENGER",
-            "TARIFSCHALTGERAET",
-            "ZUSTANDS_MU",
-            "TEMPERATUR_MU",
-            "KOMPAKT_MU",
-            "SYSTEM_MU",
-            "UNBESTIMMT",
-            "WASSER_MWZW",
-            "WASSER_WZWW",
-            "WASSER_WZ01",
-            "WASSER_WZ02",
-            "WASSER_WZ03",
-            "WASSER_WZ04",
-            "WASSER_WZ05",
-            "WASSER_WZ06",
-            "WASSER_WZ07",
-            "WASSER_WZ08",
-            "WASSER_WZ09",
-            "WASSER_WZ10",
-            "WASSER_VWZ04",
-            "WASSER_VWZ05",
-            "WASSER_VWZ06",
-            "WASSER_VWZ07",
-            "WASSER_VWZ10",
-            "GAS_G350",
-            "GAS_G4000",
-            "GAS_G6500",
-            "GAS_G10000",
-            "GAS_G12500",
-            "GAS_G16000"
-          ]
-        },
-        "Parameter": {
-          "type": ["object", "null"],
-          "additionalProperties": {
-            "type": ["string", "null"]
-          }
-        }
-      },
-      "required": ["geraetetyp"]
-    },
-    "Geraeteeigenschaften-1": {
       "type": ["object", "null"],
       "properties": {
         "timestamp": {
@@ -650,7 +565,10 @@
             "SMARTMETERGATEWAY",
             "STEUERBOX",
             "BLOCKSTROMWANDLER",
-            "KOMBIMESSWANDLER"
+            "KOMBIMESSWANDLER",
+            "DICHTEMENGENUMWERTER",
+            "TEMPERATURMENGENUMWERTER",
+            "ZUSTANDSMENGENUMWERTER"
           ]
         },
         "geraetemerkmal": {
@@ -728,7 +646,7 @@
           }
         }
       },
-      "required": ["geraetetyp"]
+      "required": ["geraetetyp", "geraetemerkmal", "Parameter"]
     },
     "Geschaeftspartner": {
       "type": ["object", "null"],
@@ -833,20 +751,22 @@
             "KEINE_ANGABE"
           ]
         },
-        "grundDerPrivilegierungNachEnFG": {
-          "type": ["string", "null"],
-          "enum": [
-            null,
-            "STROMSPEICHER_UND_VERLUSTENERGIE",
-            "ELEKTRISCH_ANGETRIEBENE_WAERMEPUMPEN",
-            "UMLAGEERHEBUNG_BEI_ANLAGEN_ZUR_VERSTROMUNG_VON_KUPPELGASEN",
-            "HERSTELLUNG_VON_GRUENEN_WASSERSTOFF",
-            "STROMKOSTENINTENSIVE_UNTERNEHMEN",
-            "HERSTELLUNG_VON_WASSERSTOFF_IN_STROMKOSTENINTENSIVEN_UNTERNEHMEN",
-            "SCHIENENBAHNEN",
-            "ELEKTRISCHE_BETRIEBENE_BUSSEN_IM_LINIENVERKEHR",
-            "LANDSTROMANLAGEN"
-          ]
+        "gruendeDerPrivilegierungNachEnFG": {
+          "type": ["array", "null"],
+          "items": {
+            "type": "string",
+            "enum": [
+              "STROMSPEICHER_UND_VERLUSTENERGIE",
+              "ELEKTRISCH_ANGETRIEBENE_WAERMEPUMPEN",
+              "UMLAGEERHEBUNG_BEI_ANLAGEN_ZUR_VERSTROMUNG_VON_KUPPELGASEN",
+              "HERSTELLUNG_VON_GRUENEN_WASSERSTOFF",
+              "STROMKOSTENINTENSIVE_UNTERNEHMEN",
+              "HERSTELLUNG_VON_WASSERSTOFF_IN_STROMKOSTENINTENSIVEN_UNTERNEHMEN",
+              "SCHIENENBAHNEN",
+              "ELEKTRISCHE_BETRIEBENE_BUSSEN_IM_LINIENVERKEHR",
+              "LANDSTROMANLAGEN"
+            ]
+          }
         },
         "bankverbindung": {
           "$ref": "#/definitions/Bankverbindung"
@@ -856,12 +776,51 @@
         },
         "erreichbarkeit": {
           "$ref": "#/definitions/Erreichbarkeit"
+        },
+        "gueltigkeitszeitraum": {
+          "$ref": "#/definitions/Zeitraum"
+        },
+        "qualitaet": {
+          "type": ["string", "null"],
+          "enum": [
+            null,
+            "VOLLSTAENDIG",
+            "INFORMATIV",
+            "IM_SYSTEM_VORHANDEN",
+            "ERWARTET",
+            "VORLAEUFIG",
+            "UNVOLLSTAENDIG"
+          ]
         }
       },
-      "required": ["gewerbekennzeichnung"]
+      "required": [
+        "boTyp",
+        "versionStruktur",
+        "externeReferenzen",
+        "anrede",
+        "title",
+        "name1",
+        "name2",
+        "name3",
+        "gewerbekennzeichnung",
+        "hrnummer",
+        "amtsgericht",
+        "kontaktweg",
+        "umsatzsteuerId",
+        "glaeubigerId",
+        "eMailAdresse",
+        "website",
+        "geschaeftspartnerrolle",
+        "partneradresse",
+        "grundlageZurVerringerungDerUmlagenNachEnfg",
+        "gruendeDerPrivilegierungNachEnFG",
+        "bankverbindung",
+        "steuernummer",
+        "erreichbarkeit"
+      ]
     },
     "Marktteilnehmer": {
-      "type": "object",
+      "type": ["object", "null"],
       "properties": {
         "boTyp": {
           "type": ["string", "null"]
@@ -963,20 +922,22 @@
             "KEINE_ANGABE"
           ]
         },
-        "grundDerPrivilegierungNachEnFG": {
-          "type": ["string", "null"],
-          "enum": [
-            null,
-            "STROMSPEICHER_UND_VERLUSTENERGIE",
-            "ELEKTRISCH_ANGETRIEBENE_WAERMEPUMPEN",
-            "UMLAGEERHEBUNG_BEI_ANLAGEN_ZUR_VERSTROMUNG_VON_KUPPELGASEN",
-            "HERSTELLUNG_VON_GRUENEN_WASSERSTOFF",
-            "STROMKOSTENINTENSIVE_UNTERNEHMEN",
-            "HERSTELLUNG_VON_WASSERSTOFF_IN_STROMKOSTENINTENSIVEN_UNTERNEHMEN",
-            "SCHIENENBAHNEN",
-            "ELEKTRISCHE_BETRIEBENE_BUSSEN_IM_LINIENVERKEHR",
-            "LANDSTROMANLAGEN"
-          ]
+        "gruendeDerPrivilegierungNachEnFG": {
+          "type": ["array", "null"],
+          "items": {
+            "type": "string",
+            "enum": [
+              "STROMSPEICHER_UND_VERLUSTENERGIE",
+              "ELEKTRISCH_ANGETRIEBENE_WAERMEPUMPEN",
+              "UMLAGEERHEBUNG_BEI_ANLAGEN_ZUR_VERSTROMUNG_VON_KUPPELGASEN",
+              "HERSTELLUNG_VON_GRUENEN_WASSERSTOFF",
+              "STROMKOSTENINTENSIVE_UNTERNEHMEN",
+              "HERSTELLUNG_VON_WASSERSTOFF_IN_STROMKOSTENINTENSIVEN_UNTERNEHMEN",
+              "SCHIENENBAHNEN",
+              "ELEKTRISCHE_BETRIEBENE_BUSSEN_IM_LINIENVERKEHR",
+              "LANDSTROMANLAGEN"
+            ]
+          }
         },
         "bankverbindung": {
           "$ref": "#/definitions/Bankverbindung"
@@ -1010,7 +971,7 @@
           ]
         },
         "rollencodenummer": {
-          "type": "string"
+          "type": ["string", "null"]
         },
         "rollencodetyp": {
           "type": "string",
@@ -1021,18 +982,62 @@
         },
         "ansprechpartner": {
           "$ref": "#/definitions/Ansprechpartner"
+        },
+        "gueltigkeitszeitraum": {
+          "$ref": "#/definitions/Zeitraum"
+        },
+        "qualitaet": {
+          "type": ["string", "null"],
+          "enum": [
+            null,
+            "VOLLSTAENDIG",
+            "INFORMATIV",
+            "IM_SYSTEM_VORHANDEN",
+            "ERWARTET",
+            "VORLAEUFIG",
+            "UNVOLLSTAENDIG"
+          ]
         }
       },
-      "required": ["gewerbekennzeichnung", "rollencodenummer", "rollencodetyp"]
+      "required": [
+        "boTyp",
+        "versionStruktur",
+        "externeReferenzen",
+        "anrede",
+        "title",
+        "name1",
+        "name2",
+        "name3",
+        "gewerbekennzeichnung",
+        "hrnummer",
+        "amtsgericht",
+        "kontaktweg",
+        "umsatzsteuerId",
+        "glaeubigerId",
+        "eMailAdresse",
+        "website",
+        "geschaeftspartnerrolle",
+        "partneradresse",
+        "grundlageZurVerringerungDerUmlagenNachEnfg",
+        "gruendeDerPrivilegierungNachEnFG",
+        "bankverbindung",
+        "steuernummer",
+        "erreichbarkeit",
+        "marktrolle",
+        "rollencodenummer",
+        "rollencodetyp",
+        "makoadresse",
+        "ansprechpartner"
+      ]
     },
     "PositionsAufAbschlag": {
       "type": ["object", "null"],
       "properties": {
         "bezeichnung": {
-          "type": "string"
+          "type": ["string", "null"]
         },
         "beschreibung": {
-          "type": "string"
+          "type": ["string", "null"]
         },
         "aufAbschlagstyp": {
           "type": "string",
@@ -1121,7 +1126,7 @@
           ]
         },
         "leistungsbezeichnung": {
-          "type": "string"
+          "type": ["string", "null"]
         },
         "preiseinheit": {
           "type": "string",
@@ -1250,7 +1255,7 @@
           "$ref": "#/definitions/PositionsAufAbschlag"
         },
         "preisstaffeln": {
-          "type": "array",
+          "type": ["array", "null"],
           "items": {
             "$ref": "#/definitions/Preisstaffel"
           }
@@ -1281,7 +1286,7 @@
           "type": ["string", "null"]
         },
         "verarbeitungszeitraum": {
-          "$ref": "#/definitions/Zeitraum-1"
+          "$ref": "#/definitions/Zeitraum"
         },
         "artikelId": {
           "type": ["string", "null"]
@@ -1292,7 +1297,19 @@
         "leistungstyp",
         "leistungsbezeichnung",
         "preiseinheit",
-        "preisstaffeln"
+        "bezugsgroesse",
+        "zeitbasis",
+        "tarifzeit",
+        "bdewArtikelnummer",
+        "zonungsgroesse",
+        "zu_abschlaege",
+        "preisstaffeln",
+        "preisschluesselstamm",
+        "positionsnummer",
+        "messebene",
+        "beschreibung",
+        "verarbeitungszeitraum",
+        "artikelId"
       ]
     },
     "Preisstaffel": {
@@ -1318,7 +1335,12 @@
           "type": ["string", "null"]
         }
       },
-      "required": ["einheitspreis", "staffelgrenzeVon", "staffelgrenzeBis"]
+      "required": [
+        "einheitspreis",
+        "staffelgrenzeVon",
+        "staffelgrenzeBis",
+        "sigmoidparameter"
+      ]
     },
     "Rufnummer": {
       "type": ["object", "null"],
@@ -1338,7 +1360,7 @@
           ]
         },
         "rufnummer": {
-          "type": "string"
+          "type": ["string", "null"]
         },
         "timestamp": {
           "type": ["string", "null"],
@@ -1391,57 +1413,10 @@
         "endzeit": {
           "type": ["string", "null"]
         }
-      }
+      },
+      "required": ["startzeit", "endzeit"]
     },
     "Zeitraum": {
-      "type": "object",
-      "properties": {
-        "einheit": {
-          "type": ["string", "null"],
-          "enum": [
-            null,
-            "SEKUNDE",
-            "MINUTE",
-            "STUNDE",
-            "VIERTEL_STUNDE",
-            "TAG",
-            "WOCHE",
-            "MONAT",
-            "QUARTAL",
-            "HALBJAHR",
-            "JAHR"
-          ]
-        },
-        "dauer": {
-          "type": ["number", "null"]
-        },
-        "startdatum": {
-          "type": ["string", "null"],
-          "format": "date-time"
-        },
-        "enddatum": {
-          "type": ["string", "null"],
-          "format": "date-time"
-        },
-        "startzeitpunkt": {
-          "type": ["string", "null"],
-          "format": "date-time"
-        },
-        "endzeitpunkt": {
-          "type": ["string", "null"],
-          "format": "date-time"
-        },
-        "timestamp": {
-          "type": ["string", "null"],
-          "format": "date-time"
-        },
-        "guid": {
-          "type": ["string", "null"]
-        }
-      },
-      "required": ["startzeitpunkt", "endzeitpunkt"]
-    },
-    "Zeitraum-1": {
       "type": ["object", "null"],
       "properties": {
         "einheit": {
@@ -1487,7 +1462,14 @@
           "type": ["string", "null"]
         }
       },
-      "required": ["startzeitpunkt", "endzeitpunkt"]
+      "required": [
+        "einheit",
+        "dauer",
+        "startdatum",
+        "enddatum",
+        "startzeitpunkt",
+        "endzeitpunkt"
+      ]
     },
     "Zustaendigkeit": {
       "type": ["object", "null"],
@@ -1508,7 +1490,8 @@
         "guid": {
           "type": ["string", "null"]
         }
-      }
+      },
+      "required": ["jobtitel", "abteilung", "themengebiet"]
     }
   },
   "type": "object",
@@ -1599,7 +1582,7 @@
       }
     },
     "bezeichnung": {
-      "type": "string"
+      "type": ["string", "null"]
     },
     "basisgeraet": {
       "$ref": "#/definitions/Geraeteeigenschaften"
@@ -1610,14 +1593,14 @@
     "inklusiveGeraete": {
       "type": ["array", "null"],
       "items": {
-        "$ref": "#/definitions/Geraeteeigenschaften-1"
+        "$ref": "#/definitions/Geraeteeigenschaften"
       }
     },
     "herausgeber": {
       "$ref": "#/definitions/Marktteilnehmer"
     },
     "preispositionen": {
-      "type": "array",
+      "type": ["array", "null"],
       "items": {
         "$ref": "#/definitions/Preisposition"
       }
@@ -1637,15 +1620,37 @@
         "WASSER",
         "ABWASSER"
       ]
+    },
+    "gueltigkeitszeitraum": {
+      "$ref": "#/definitions/Zeitraum"
+    },
+    "qualitaet": {
+      "type": ["string", "null"],
+      "enum": [
+        null,
+        "VOLLSTAENDIG",
+        "INFORMATIV",
+        "IM_SYSTEM_VORHANDEN",
+        "ERWARTET",
+        "VORLAEUFIG",
+        "UNVOLLSTAENDIG"
+      ]
     }
   },
   "required": [
+    "boTyp",
+    "versionStruktur",
+    "externeReferenzen",
     "bilanzierungsmethode",
     "messebene",
+    "inklusiveDienstleistung",
     "bezeichnung",
     "basisgeraet",
     "gueltigkeit",
+    "inklusiveGeraete",
     "herausgeber",
-    "preispositionen"
+    "preispositionen",
+    "preisstatus",
+    "sparte"
   ]
 }

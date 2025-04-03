@@ -329,6 +329,7 @@ enum Energierichtung {
    AUSSP = 0;
    EINSP = 1;
    RUHEND = 2;
+   KUNDENANLAGE = 3;
 }
 message Erreichbarkeit {
    option (.protobuf_net.msgopt).namespace = "BO4E.COM";
@@ -966,7 +967,7 @@ message Marktlokation {
    Geschaeftspartner Endkunde = 17;
    Adresse Lokationsadresse = 18;
    Geokoordinaten Geoadresse = 19;
-   Katasteradresse Katasterinformation = 20;
+   repeated Katasteradresse Katasterinformation = 20;
    repeated Messlokationszuordnung ZugehoerigeMesslokationen = 28;
    repeated Netznutzungsabrechnungsdaten Netznutzungsabrechnungsdaten = 37;
    Sperrstatus Sperrstatus = 38;

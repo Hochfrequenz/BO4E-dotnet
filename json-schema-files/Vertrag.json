@@ -12,10 +12,10 @@
           "type": ["string", "null"]
         },
         "postleitzahl": {
-          "type": "string"
+          "type": ["string", "null"]
         },
         "ort": {
-          "type": "string"
+          "type": ["string", "null"]
         },
         "strasse": {
           "type": ["string", "null"]
@@ -309,7 +309,16 @@
           "type": ["string", "null"]
         }
       },
-      "required": ["postleitzahl", "ort"]
+      "required": [
+        "postleitzahl",
+        "ort",
+        "strasse",
+        "hausnummer",
+        "postfach",
+        "adresszusatz",
+        "coErgaenzung",
+        "landescode"
+      ]
     },
     "Bankverbindung": {
       "type": ["object", "null"],
@@ -333,7 +342,8 @@
         "bankname": {
           "type": ["string", "null"]
         }
-      }
+      },
+      "required": ["iban", "kontoinhaber", "bankkennung", "bankname"]
     },
     "Erreichbarkeit": {
       "type": ["object", "null"],
@@ -363,7 +373,15 @@
         "mittagspause": {
           "$ref": "#/definitions/Zeitfenster"
         }
-      }
+      },
+      "required": [
+        "montagErreichbarkeit",
+        "dienstagErreichbarkeit",
+        "mittwochErreichbarkeit",
+        "donnerstagErreichbarkeit",
+        "freitagErreichbarkeit",
+        "mittagspause"
+      ]
     },
     "ExterneReferenz": {
       "type": ["object", "null"],
@@ -381,7 +399,8 @@
         "guid": {
           "type": ["string", "null"]
         }
-      }
+      },
+      "required": ["exRefName", "exRefWert"]
     },
     "Geschaeftspartner": {
       "type": ["object", "null"],
@@ -486,20 +505,22 @@
             "KEINE_ANGABE"
           ]
         },
-        "grundDerPrivilegierungNachEnFG": {
-          "type": ["string", "null"],
-          "enum": [
-            null,
-            "STROMSPEICHER_UND_VERLUSTENERGIE",
-            "ELEKTRISCH_ANGETRIEBENE_WAERMEPUMPEN",
-            "UMLAGEERHEBUNG_BEI_ANLAGEN_ZUR_VERSTROMUNG_VON_KUPPELGASEN",
-            "HERSTELLUNG_VON_GRUENEN_WASSERSTOFF",
-            "STROMKOSTENINTENSIVE_UNTERNEHMEN",
-            "HERSTELLUNG_VON_WASSERSTOFF_IN_STROMKOSTENINTENSIVEN_UNTERNEHMEN",
-            "SCHIENENBAHNEN",
-            "ELEKTRISCHE_BETRIEBENE_BUSSEN_IM_LINIENVERKEHR",
-            "LANDSTROMANLAGEN"
-          ]
+        "gruendeDerPrivilegierungNachEnFG": {
+          "type": ["array", "null"],
+          "items": {
+            "type": "string",
+            "enum": [
+              "STROMSPEICHER_UND_VERLUSTENERGIE",
+              "ELEKTRISCH_ANGETRIEBENE_WAERMEPUMPEN",
+              "UMLAGEERHEBUNG_BEI_ANLAGEN_ZUR_VERSTROMUNG_VON_KUPPELGASEN",
+              "HERSTELLUNG_VON_GRUENEN_WASSERSTOFF",
+              "STROMKOSTENINTENSIVE_UNTERNEHMEN",
+              "HERSTELLUNG_VON_WASSERSTOFF_IN_STROMKOSTENINTENSIVEN_UNTERNEHMEN",
+              "SCHIENENBAHNEN",
+              "ELEKTRISCHE_BETRIEBENE_BUSSEN_IM_LINIENVERKEHR",
+              "LANDSTROMANLAGEN"
+            ]
+          }
         },
         "bankverbindung": {
           "$ref": "#/definitions/Bankverbindung"
@@ -509,9 +530,48 @@
         },
         "erreichbarkeit": {
           "$ref": "#/definitions/Erreichbarkeit"
+        },
+        "gueltigkeitszeitraum": {
+          "$ref": "#/definitions/Zeitraum"
+        },
+        "qualitaet": {
+          "type": ["string", "null"],
+          "enum": [
+            null,
+            "VOLLSTAENDIG",
+            "INFORMATIV",
+            "IM_SYSTEM_VORHANDEN",
+            "ERWARTET",
+            "VORLAEUFIG",
+            "UNVOLLSTAENDIG"
+          ]
         }
       },
-      "required": ["gewerbekennzeichnung"]
+      "required": [
+        "boTyp",
+        "versionStruktur",
+        "externeReferenzen",
+        "anrede",
+        "title",
+        "name1",
+        "name2",
+        "name3",
+        "gewerbekennzeichnung",
+        "hrnummer",
+        "amtsgericht",
+        "kontaktweg",
+        "umsatzsteuerId",
+        "glaeubigerId",
+        "eMailAdresse",
+        "website",
+        "geschaeftspartnerrolle",
+        "partneradresse",
+        "grundlageZurVerringerungDerUmlagenNachEnfg",
+        "gruendeDerPrivilegierungNachEnFG",
+        "bankverbindung",
+        "steuernummer",
+        "erreichbarkeit"
+      ]
     },
     "Menge": {
       "type": ["object", "null"],
@@ -550,7 +610,7 @@
           ]
         }
       },
-      "required": ["wert"]
+      "required": ["wert", "einheit"]
     },
     "Unterschrift": {
       "type": ["object", "null"],
@@ -563,7 +623,7 @@
           "format": "date-time"
         },
         "name": {
-          "type": "string"
+          "type": ["string", "null"]
         },
         "timestamp": {
           "type": ["string", "null"],
@@ -573,7 +633,7 @@
           "type": ["string", "null"]
         }
       },
-      "required": ["name"]
+      "required": ["ort", "datum", "name"]
     },
     "Vertragskonditionen": {
       "type": ["object", "null"],
@@ -645,7 +705,26 @@
         "beinhaltetSingulaerGenutzteBetriebsmittel": {
           "type": ["boolean", "null"]
         }
-      }
+      },
+      "required": [
+        "beschreibung",
+        "anzahlAbschlaege",
+        "vertragslaufzeit",
+        "kuendigungsfrist",
+        "vertragsverlaengerung",
+        "abschlagszyklus",
+        "startAbrechnungsjahr",
+        "geplanteTurnusablesung",
+        "turnusablesungIntervall",
+        "netznutzungsabrechnung",
+        "netznutzungsabrechnungIntervall",
+        "haushaltskunde",
+        "netznutzungsvertrag",
+        "netznutzungszahler",
+        "netznutzungsabrechnungsvariante",
+        "netznutzungsabrechnungsgrundlage",
+        "beinhaltetSingulaerGenutzteBetriebsmittel"
+      ]
     },
     "Vertragsteil": {
       "type": ["object", "null"],
@@ -686,7 +765,18 @@
         "guid": {
           "type": ["string", "null"]
         }
-      }
+      },
+      "required": [
+        "vertragsteilbeginn",
+        "vertragsteilende",
+        "lokation",
+        "vertraglichFixierteMenge",
+        "minimaleAbnahmemenge",
+        "maximaleAbnahmemenge",
+        "jahresverbrauchsprognose",
+        "kundenwert",
+        "verbrauchsaufteilung"
+      ]
     },
     "Zeitfenster": {
       "type": ["object", "null"],
@@ -704,7 +794,8 @@
         "endzeit": {
           "type": ["string", "null"]
         }
-      }
+      },
+      "required": ["startzeit", "endzeit"]
     },
     "Zeitraum": {
       "type": ["object", "null"],
@@ -752,7 +843,14 @@
           "type": ["string", "null"]
         }
       },
-      "required": ["startzeitpunkt", "endzeitpunkt"]
+      "required": [
+        "einheit",
+        "dauer",
+        "startdatum",
+        "enddatum",
+        "startzeitpunkt",
+        "endzeitpunkt"
+      ]
     }
   },
   "type": "object",
@@ -852,7 +950,41 @@
     },
     "korrespondenzpartner": {
       "$ref": "#/definitions/Geschaeftspartner"
+    },
+    "gueltigkeitszeitraum": {
+      "$ref": "#/definitions/Zeitraum"
+    },
+    "qualitaet": {
+      "type": ["string", "null"],
+      "enum": [
+        null,
+        "VOLLSTAENDIG",
+        "INFORMATIV",
+        "IM_SYSTEM_VORHANDEN",
+        "ERWARTET",
+        "VORLAEUFIG",
+        "UNVOLLSTAENDIG"
+      ]
     }
   },
-  "required": ["sparte", "vertragsbeginn"]
+  "required": [
+    "boTyp",
+    "versionStruktur",
+    "externeReferenzen",
+    "vertragsnummer",
+    "beschreibung",
+    "vertragsart",
+    "vertragstatus",
+    "sparte",
+    "vertragsbeginn",
+    "vertragsende",
+    "vertragspartner1",
+    "vertragspartner2",
+    "unterzeichnervp1",
+    "unterzeichnervp2",
+    "vertragskonditionen",
+    "vertragsteile",
+    "gemeinderabatt",
+    "korrespondenzpartner"
+  ]
 }

@@ -12,10 +12,10 @@
           "type": ["string", "null"]
         },
         "postleitzahl": {
-          "type": "string"
+          "type": ["string", "null"]
         },
         "ort": {
-          "type": "string"
+          "type": ["string", "null"]
         },
         "strasse": {
           "type": ["string", "null"]
@@ -309,7 +309,16 @@
           "type": ["string", "null"]
         }
       },
-      "required": ["postleitzahl", "ort"]
+      "required": [
+        "postleitzahl",
+        "ort",
+        "strasse",
+        "hausnummer",
+        "postfach",
+        "adresszusatz",
+        "coErgaenzung",
+        "landescode"
+      ]
     },
     "Ansprechpartner": {
       "type": ["object", "null"],
@@ -354,7 +363,7 @@
         },
         "titel": {
           "type": ["string", "null"],
-          "enum": [null, "DR", "PROF", "PROF_DR"]
+          "enum": [null, "DR", "PROF", "PROF_DR", "DIPLOM_INF"]
         },
         "vorname": {
           "type": ["string", "null"]
@@ -385,8 +394,39 @@
           "items": {
             "$ref": "#/definitions/Zustaendigkeit"
           }
+        },
+        "gueltigkeitszeitraum": {
+          "$ref": "#/definitions/Zeitraum"
+        },
+        "qualitaet": {
+          "type": ["string", "null"],
+          "enum": [
+            null,
+            "VOLLSTAENDIG",
+            "INFORMATIV",
+            "IM_SYSTEM_VORHANDEN",
+            "ERWARTET",
+            "VORLAEUFIG",
+            "UNVOLLSTAENDIG"
+          ]
         }
-      }
+      },
+      "required": [
+        "boTyp",
+        "versionStruktur",
+        "externeReferenzen",
+        "anrede",
+        "inviduelleAnrede",
+        "titel",
+        "vorname",
+        "nachname",
+        "eMailAdresse",
+        "kommentar",
+        "geschaeftspartner",
+        "adresse",
+        "rufnummern",
+        "zustaendigkeit"
+      ]
     },
     "Bankverbindung": {
       "type": ["object", "null"],
@@ -410,7 +450,8 @@
         "bankname": {
           "type": ["string", "null"]
         }
-      }
+      },
+      "required": ["iban", "kontoinhaber", "bankkennung", "bankname"]
     },
     "Erreichbarkeit": {
       "type": ["object", "null"],
@@ -440,7 +481,15 @@
         "mittagspause": {
           "$ref": "#/definitions/Zeitfenster"
         }
-      }
+      },
+      "required": [
+        "montagErreichbarkeit",
+        "dienstagErreichbarkeit",
+        "mittwochErreichbarkeit",
+        "donnerstagErreichbarkeit",
+        "freitagErreichbarkeit",
+        "mittagspause"
+      ]
     },
     "ExterneReferenz": {
       "type": ["object", "null"],
@@ -458,7 +507,8 @@
         "guid": {
           "type": ["string", "null"]
         }
-      }
+      },
+      "required": ["exRefName", "exRefWert"]
     },
     "Geschaeftspartner": {
       "type": ["object", "null"],
@@ -563,20 +613,22 @@
             "KEINE_ANGABE"
           ]
         },
-        "grundDerPrivilegierungNachEnFG": {
-          "type": ["string", "null"],
-          "enum": [
-            null,
-            "STROMSPEICHER_UND_VERLUSTENERGIE",
-            "ELEKTRISCH_ANGETRIEBENE_WAERMEPUMPEN",
-            "UMLAGEERHEBUNG_BEI_ANLAGEN_ZUR_VERSTROMUNG_VON_KUPPELGASEN",
-            "HERSTELLUNG_VON_GRUENEN_WASSERSTOFF",
-            "STROMKOSTENINTENSIVE_UNTERNEHMEN",
-            "HERSTELLUNG_VON_WASSERSTOFF_IN_STROMKOSTENINTENSIVEN_UNTERNEHMEN",
-            "SCHIENENBAHNEN",
-            "ELEKTRISCHE_BETRIEBENE_BUSSEN_IM_LINIENVERKEHR",
-            "LANDSTROMANLAGEN"
-          ]
+        "gruendeDerPrivilegierungNachEnFG": {
+          "type": ["array", "null"],
+          "items": {
+            "type": "string",
+            "enum": [
+              "STROMSPEICHER_UND_VERLUSTENERGIE",
+              "ELEKTRISCH_ANGETRIEBENE_WAERMEPUMPEN",
+              "UMLAGEERHEBUNG_BEI_ANLAGEN_ZUR_VERSTROMUNG_VON_KUPPELGASEN",
+              "HERSTELLUNG_VON_GRUENEN_WASSERSTOFF",
+              "STROMKOSTENINTENSIVE_UNTERNEHMEN",
+              "HERSTELLUNG_VON_WASSERSTOFF_IN_STROMKOSTENINTENSIVEN_UNTERNEHMEN",
+              "SCHIENENBAHNEN",
+              "ELEKTRISCHE_BETRIEBENE_BUSSEN_IM_LINIENVERKEHR",
+              "LANDSTROMANLAGEN"
+            ]
+          }
         },
         "bankverbindung": {
           "$ref": "#/definitions/Bankverbindung"
@@ -586,9 +638,48 @@
         },
         "erreichbarkeit": {
           "$ref": "#/definitions/Erreichbarkeit"
+        },
+        "gueltigkeitszeitraum": {
+          "$ref": "#/definitions/Zeitraum"
+        },
+        "qualitaet": {
+          "type": ["string", "null"],
+          "enum": [
+            null,
+            "VOLLSTAENDIG",
+            "INFORMATIV",
+            "IM_SYSTEM_VORHANDEN",
+            "ERWARTET",
+            "VORLAEUFIG",
+            "UNVOLLSTAENDIG"
+          ]
         }
       },
-      "required": ["gewerbekennzeichnung"]
+      "required": [
+        "boTyp",
+        "versionStruktur",
+        "externeReferenzen",
+        "anrede",
+        "title",
+        "name1",
+        "name2",
+        "name3",
+        "gewerbekennzeichnung",
+        "hrnummer",
+        "amtsgericht",
+        "kontaktweg",
+        "umsatzsteuerId",
+        "glaeubigerId",
+        "eMailAdresse",
+        "website",
+        "geschaeftspartnerrolle",
+        "partneradresse",
+        "grundlageZurVerringerungDerUmlagenNachEnfg",
+        "gruendeDerPrivilegierungNachEnFG",
+        "bankverbindung",
+        "steuernummer",
+        "erreichbarkeit"
+      ]
     },
     "Konfigurationsprodukt": {
       "type": ["object", "null"],
@@ -609,10 +700,88 @@
         "schaltzeitdefinition": {
           "type": ["string", "null"]
         },
-        "marktpartner": {
+        "auftraggebenderMarktpartner": {
           "$ref": "#/definitions/Marktteilnehmer"
+        },
+        "empfangendeMarktrolle": {
+          "type": ["string", "null"],
+          "enum": [
+            null,
+            "NB",
+            "LF",
+            "MSB",
+            "MDL",
+            "DL",
+            "BKV",
+            "BIKO",
+            "UENB",
+            "KUNDE_SELBST_NN",
+            "MGV",
+            "EIV",
+            "RB",
+            "KUNDE",
+            "INTERESSENT",
+            "GMSB",
+            "AMSB"
+          ]
         }
-      }
+      },
+      "required": [
+        "produktcode",
+        "leistungskurvendefinition",
+        "schaltzeitdefinition",
+        "auftraggebenderMarktpartner",
+        "empfangendeMarktrolle"
+      ]
+    },
+    "MarktpartnerDetails": {
+      "type": ["object", "null"],
+      "properties": {
+        "rollencodenummer": {
+          "type": ["string", "null"]
+        },
+        "code": {
+          "type": ["string", "null"]
+        },
+        "marktrolle": {
+          "type": ["string", "null"],
+          "enum": [
+            null,
+            "NB",
+            "LF",
+            "MSB",
+            "MDL",
+            "DL",
+            "BKV",
+            "BIKO",
+            "UENB",
+            "KUNDE_SELBST_NN",
+            "MGV",
+            "EIV",
+            "RB",
+            "KUNDE",
+            "INTERESSENT",
+            "GMSB",
+            "AMSB"
+          ]
+        },
+        "timestamp": {
+          "type": ["string", "null"],
+          "format": "date-time"
+        },
+        "guid": {
+          "type": ["string", "null"]
+        },
+        "weiterverpflichtet": {
+          "type": ["boolean", "null"]
+        }
+      },
+      "required": [
+        "rollencodenummer",
+        "code",
+        "marktrolle",
+        "weiterverpflichtet"
+      ]
     },
     "Marktteilnehmer": {
       "type": ["object", "null"],
@@ -717,20 +886,22 @@
             "KEINE_ANGABE"
           ]
         },
-        "grundDerPrivilegierungNachEnFG": {
-          "type": ["string", "null"],
-          "enum": [
-            null,
-            "STROMSPEICHER_UND_VERLUSTENERGIE",
-            "ELEKTRISCH_ANGETRIEBENE_WAERMEPUMPEN",
-            "UMLAGEERHEBUNG_BEI_ANLAGEN_ZUR_VERSTROMUNG_VON_KUPPELGASEN",
-            "HERSTELLUNG_VON_GRUENEN_WASSERSTOFF",
-            "STROMKOSTENINTENSIVE_UNTERNEHMEN",
-            "HERSTELLUNG_VON_WASSERSTOFF_IN_STROMKOSTENINTENSIVEN_UNTERNEHMEN",
-            "SCHIENENBAHNEN",
-            "ELEKTRISCHE_BETRIEBENE_BUSSEN_IM_LINIENVERKEHR",
-            "LANDSTROMANLAGEN"
-          ]
+        "gruendeDerPrivilegierungNachEnFG": {
+          "type": ["array", "null"],
+          "items": {
+            "type": "string",
+            "enum": [
+              "STROMSPEICHER_UND_VERLUSTENERGIE",
+              "ELEKTRISCH_ANGETRIEBENE_WAERMEPUMPEN",
+              "UMLAGEERHEBUNG_BEI_ANLAGEN_ZUR_VERSTROMUNG_VON_KUPPELGASEN",
+              "HERSTELLUNG_VON_GRUENEN_WASSERSTOFF",
+              "STROMKOSTENINTENSIVE_UNTERNEHMEN",
+              "HERSTELLUNG_VON_WASSERSTOFF_IN_STROMKOSTENINTENSIVEN_UNTERNEHMEN",
+              "SCHIENENBAHNEN",
+              "ELEKTRISCHE_BETRIEBENE_BUSSEN_IM_LINIENVERKEHR",
+              "LANDSTROMANLAGEN"
+            ]
+          }
         },
         "bankverbindung": {
           "$ref": "#/definitions/Bankverbindung"
@@ -764,7 +935,7 @@
           ]
         },
         "rollencodenummer": {
-          "type": "string"
+          "type": ["string", "null"]
         },
         "rollencodetyp": {
           "type": "string",
@@ -775,9 +946,53 @@
         },
         "ansprechpartner": {
           "$ref": "#/definitions/Ansprechpartner"
+        },
+        "gueltigkeitszeitraum": {
+          "$ref": "#/definitions/Zeitraum"
+        },
+        "qualitaet": {
+          "type": ["string", "null"],
+          "enum": [
+            null,
+            "VOLLSTAENDIG",
+            "INFORMATIV",
+            "IM_SYSTEM_VORHANDEN",
+            "ERWARTET",
+            "VORLAEUFIG",
+            "UNVOLLSTAENDIG"
+          ]
         }
       },
-      "required": ["gewerbekennzeichnung", "rollencodenummer", "rollencodetyp"]
+      "required": [
+        "boTyp",
+        "versionStruktur",
+        "externeReferenzen",
+        "anrede",
+        "title",
+        "name1",
+        "name2",
+        "name3",
+        "gewerbekennzeichnung",
+        "hrnummer",
+        "amtsgericht",
+        "kontaktweg",
+        "umsatzsteuerId",
+        "glaeubigerId",
+        "eMailAdresse",
+        "website",
+        "geschaeftspartnerrolle",
+        "partneradresse",
+        "grundlageZurVerringerungDerUmlagenNachEnfg",
+        "gruendeDerPrivilegierungNachEnFG",
+        "bankverbindung",
+        "steuernummer",
+        "erreichbarkeit",
+        "marktrolle",
+        "rollencodenummer",
+        "rollencodetyp",
+        "makoadresse",
+        "ansprechpartner"
+      ]
     },
     "Rufnummer": {
       "type": ["object", "null"],
@@ -797,7 +1012,7 @@
           ]
         },
         "rufnummer": {
-          "type": "string"
+          "type": ["string", "null"]
         },
         "timestamp": {
           "type": ["string", "null"],
@@ -825,7 +1040,63 @@
         "endzeit": {
           "type": ["string", "null"]
         }
-      }
+      },
+      "required": ["startzeit", "endzeit"]
+    },
+    "Zeitraum": {
+      "type": ["object", "null"],
+      "properties": {
+        "einheit": {
+          "type": ["string", "null"],
+          "enum": [
+            null,
+            "SEKUNDE",
+            "MINUTE",
+            "STUNDE",
+            "VIERTEL_STUNDE",
+            "TAG",
+            "WOCHE",
+            "MONAT",
+            "QUARTAL",
+            "HALBJAHR",
+            "JAHR"
+          ]
+        },
+        "dauer": {
+          "type": ["number", "null"]
+        },
+        "startdatum": {
+          "type": ["string", "null"],
+          "format": "date-time"
+        },
+        "enddatum": {
+          "type": ["string", "null"],
+          "format": "date-time"
+        },
+        "startzeitpunkt": {
+          "type": ["string", "null"],
+          "format": "date-time"
+        },
+        "endzeitpunkt": {
+          "type": ["string", "null"],
+          "format": "date-time"
+        },
+        "timestamp": {
+          "type": ["string", "null"],
+          "format": "date-time"
+        },
+        "guid": {
+          "type": ["string", "null"]
+        }
+      },
+      "required": [
+        "einheit",
+        "dauer",
+        "startdatum",
+        "enddatum",
+        "startzeitpunkt",
+        "endzeitpunkt"
+      ]
     },
     "Zustaendigkeit": {
       "type": ["object", "null"],
@@ -846,7 +1117,8 @@
         "guid": {
           "type": ["string", "null"]
         }
-      }
+      },
+      "required": ["jobtitel", "abteilung", "themengebiet"]
     }
   },
   "type": "object",
@@ -871,7 +1143,7 @@
       "type": ["string", "null"]
     },
     "steuerbareRessourceId": {
-      "type": "string",
+      "type": ["string", "null"],
       "default": "|null|"
     },
     "steuerkanalsLeistungsbeschreibung": {
@@ -911,7 +1183,39 @@
     },
     "lokationsbuendelObjektcode": {
       "type": ["string", "null"]
+    },
+    "marktrollen": {
+      "type": ["array", "null"],
+      "items": {
+        "$ref": "#/definitions/MarktpartnerDetails"
+      }
+    },
+    "gueltigkeitszeitraum": {
+      "$ref": "#/definitions/Zeitraum"
+    },
+    "qualitaet": {
+      "type": ["string", "null"],
+      "enum": [
+        null,
+        "VOLLSTAENDIG",
+        "INFORMATIV",
+        "IM_SYSTEM_VORHANDEN",
+        "ERWARTET",
+        "VORLAEUFIG",
+        "UNVOLLSTAENDIG"
+      ]
     }
   },
-  "required": ["steuerbareRessourceId"]
+  "required": [
+    "boTyp",
+    "versionStruktur",
+    "externeReferenzen",
+    "steuerbareRessourceId",
+    "steuerkanalsLeistungsbeschreibung",
+    "zugeordnetMSBCodeNr",
+    "konfigurationsprodukte",
+    "eigenschaftMSBLokation",
+    "lokationsbuendelObjektcode",
+    "marktrollen"
+  ]
 }

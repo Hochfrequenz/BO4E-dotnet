@@ -20,55 +20,6 @@
       },
       "required": ["exRefName", "exRefWert"]
     },
-    "MarktpartnerDetails": {
-      "type": ["object", "null"],
-      "properties": {
-        "rollencodenummer": {
-          "type": ["string", "null"]
-        },
-        "code": {
-          "type": ["string", "null"]
-        },
-        "marktrolle": {
-          "type": ["string", "null"],
-          "enum": [
-            null,
-            "NB",
-            "LF",
-            "MSB",
-            "MDL",
-            "DL",
-            "BKV",
-            "BIKO",
-            "UENB",
-            "KUNDE_SELBST_NN",
-            "MGV",
-            "EIV",
-            "RB",
-            "KUNDE",
-            "INTERESSENT",
-            "GMSB",
-            "AMSB"
-          ]
-        },
-        "timestamp": {
-          "type": ["string", "null"],
-          "format": "date-time"
-        },
-        "guid": {
-          "type": ["string", "null"]
-        },
-        "weiterverpflichtet": {
-          "type": ["boolean", "null"]
-        }
-      },
-      "required": [
-        "rollencodenummer",
-        "code",
-        "marktrolle",
-        "weiterverpflichtet"
-      ]
-    },
     "Zeitraum": {
       "type": ["object", "null"],
       "properties": {
@@ -146,27 +97,25 @@
     "guid": {
       "type": ["string", "null"]
     },
-    "trancheId": {
-      "type": ["string", "null"],
-      "default": "|null|"
+    "ausgerollt": {
+      "type": ["boolean", "null"]
     },
-    "sparte": {
+    "aenderungszeitpunkt": {
       "type": "string",
-      "enum": ["STROM", "GAS", "FERNWAERME", "NAHWAERME", "WASSER", "ABWASSER"]
+      "format": "date-time"
     },
-    "aufteilungsmenge": {
-      "type": ["number", "null"]
-    },
-    "obisKennzahl": {
+    "leistungskurvendefinitionscode": {
       "type": ["string", "null"]
     },
-    "marktrollen": {
-      "type": ["array", "null"],
-      "items": {
-        "$ref": "#/definitions/MarktpartnerDetails"
-      }
+    "haeufigkeit": {
+      "type": ["string", "null"],
+      "enum": [null, "EINMALIG", "JAEHRLICH"]
     },
-    "spezifizierungAufteilungsmenge": {
+    "uebermittelbarkeit": {
+      "type": ["string", "null"],
+      "enum": [null, "ELEKTRONISCH", "NICHT_ELEKTRONISCH"]
+    },
+    "obererSchwellwert": {
       "type": ["string", "null"]
     },
     "gueltigkeitszeitraum": {
@@ -185,15 +134,5 @@
       ]
     }
   },
-  "required": [
-    "boTyp",
-    "versionStruktur",
-    "externeReferenzen",
-    "trancheId",
-    "sparte",
-    "aufteilungsmenge",
-    "obisKennzahl",
-    "marktrollen",
-    "spezifizierungAufteilungsmenge"
-  ]
+  "required": ["boTyp", "versionStruktur", "externeReferenzen"]
 }

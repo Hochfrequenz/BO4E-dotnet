@@ -1,6 +1,5 @@
 using System;
 using BO4E.ENUM;
-using EnumsNET;
 using Newtonsoft.Json;
 
 namespace BO4E.meta.LenientConverters;
@@ -12,7 +11,7 @@ namespace BO4E.meta.LenientConverters;
 public class LenientGeraetemerkmalGasConverter : JsonConverter
 {
     /// <inheritdoc cref="JsonConverter.CanWrite" />
-    public override bool CanWrite => false;
+    public override bool CanWrite => true;
 
     /// <inheritdoc cref="JsonConverter.CanConvert(Type)" />
     public override bool CanConvert(Type objectType)
@@ -41,10 +40,13 @@ public class LenientGeraetemerkmalGasConverter : JsonConverter
                 rawValue = reader.Value?.ToString();
                 break;
         }
-
+        if (string.IsNullOrEmpty(rawValue))
+        {
+            return null;
+        }
         try
         {
-            return Enums.Parse<Geraetemerkmal>(rawValue);
+            return Enum.Parse(typeof(BO4E.ENUM.Geraetemerkmal), rawValue, ignoreCase: true);
         }
         catch (ArgumentException) when (rawValue.StartsWith("G"))
         {
@@ -54,7 +56,11 @@ public class LenientGeraetemerkmalGasConverter : JsonConverter
                 case "G2.5":
                     return Geraetemerkmal.GAS_G2P5;
                 default:
-                    return Enums.Parse<Geraetemerkmal>("GAS_" + rawValue);
+                    return Enum.Parse(
+                        typeof(BO4E.ENUM.Geraetemerkmal),
+                        "GAS_" + rawValue,
+                        ignoreCase: true
+                    );
             }
         }
     }
@@ -62,6 +68,6 @@ public class LenientGeraetemerkmalGasConverter : JsonConverter
     /// <inheritdoc cref="JsonConverter.WriteJson(JsonWriter, object, JsonSerializer)" />
     public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
     {
-        throw new NotImplementedException();
+        writer.WriteRawValue("\"" + value.ToString() + "\"");
     }
 }

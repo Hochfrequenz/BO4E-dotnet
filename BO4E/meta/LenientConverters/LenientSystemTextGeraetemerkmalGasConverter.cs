@@ -2,7 +2,6 @@ using System;
 using System.Text.Json;
 using System.Text.RegularExpressions;
 using BO4E.ENUM;
-using EnumsNET;
 
 namespace BO4E.meta.LenientConverters;
 
@@ -29,7 +28,8 @@ public class LenientSystemTextGeraetemerkmalGasConverter
         var rawString = reader.GetString();
         try
         {
-            return Enums.Parse<Geraetemerkmal>(rawString);
+            return (BO4E.ENUM.Geraetemerkmal)
+                Enum.Parse(typeof(BO4E.ENUM.Geraetemerkmal), rawString, ignoreCase: true);
         }
         catch (ArgumentException) when (rawString.StartsWith("G"))
         {
@@ -39,7 +39,12 @@ public class LenientSystemTextGeraetemerkmalGasConverter
                 case "G2.5":
                     return Geraetemerkmal.GAS_G2P5;
                 default:
-                    return Enums.Parse<Geraetemerkmal>("GAS_" + rawString);
+                    return (BO4E.ENUM.Geraetemerkmal)
+                        Enum.Parse(
+                            typeof(BO4E.ENUM.Geraetemerkmal),
+                            "GAS_" + rawString,
+                            ignoreCase: true
+                        );
             }
         }
     }
@@ -62,13 +67,6 @@ public class LenientSystemTextGeraetemerkmalGasConverter
     )
     {
         var stringValue = value.ToString();
-        var match = GasPrefixRegex.Match(stringValue);
-        if (!match.Success)
-        {
-            writer.WriteStringValue(stringValue);
-            return;
-        }
-        var rest = match.Groups["rest"].Value;
-        writer.WriteStringValue(rest);
+        writer.WriteStringValue(stringValue);
     }
 }

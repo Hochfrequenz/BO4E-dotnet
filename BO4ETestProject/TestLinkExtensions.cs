@@ -124,4 +124,55 @@ public class TestLinkExtensions
         actual.Should().ContainKey("x").WhoseValue.Should().HaveCount(2);
         actual.Should().ContainKey("foo").WhoseValue.Should().HaveCount(2);
     }
+
+    [TestMethod]
+    public void Test_Zeitabhaengig_To_Links_with_Null_Until()
+    {
+        var bc = new BOneyComb
+        {
+            ZeitabhaengigeLinks = new()
+            {
+                new ZeitabhaengigeBeziehung
+                {
+                    ParentId = "foo",
+                    ChildId = "bar",
+                    GueltigVon = DateTimeOffset.MinValue,
+                },
+                new ZeitabhaengigeBeziehung
+                {
+                    ParentId = "foo",
+                    ChildId = "baz",
+                    GueltigVon = DateTimeOffset.MinValue,
+                },
+                new ZeitabhaengigeBeziehung
+                {
+                    ParentId = "x",
+                    ChildId = "y",
+                    GueltigVon = DateTimeOffset.MinValue,
+                },
+                new ZeitabhaengigeBeziehung
+                {
+                    ParentId = "x",
+                    ChildId = "z",
+                    GueltigVon = DateTimeOffset.MinValue,
+                },
+            },
+        };
+        var actual = bc.ZeitabhaengigeLinks.ToTimeIndependentLinks();
+        actual.Should().ContainKey("x").WhoseValue.Should().HaveCount(2);
+        actual.Should().ContainKey("foo").WhoseValue.Should().HaveCount(2);
+    }
+
+    [TestMethod]
+    public void Test_inifinteTime_is_null()
+    {
+        ZeitabhaengigeBeziehung timeMax = new ZeitabhaengigeBeziehung()
+        {
+            ParentId = "x",
+            ChildId = "y",
+            GueltigVon = DateTimeOffset.MinValue,
+            GueltigBis = DateTimeOffset.MaxValue,
+        };
+        timeMax.GueltigBis.Should().BeNull(because: "the setter converts MaxValue to null");
+    }
 }

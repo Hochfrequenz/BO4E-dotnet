@@ -17,7 +17,8 @@
         "guid": {
           "type": ["string", "null"]
         }
-      }
+      },
+      "required": ["exRefName", "exRefWert"]
     },
     "Zeitraum": {
       "type": ["object", "null"],
@@ -65,7 +66,14 @@
           "type": ["string", "null"]
         }
       },
-      "required": ["startzeitpunkt", "endzeitpunkt"]
+      "required": [
+        "einheit",
+        "dauer",
+        "startdatum",
+        "enddatum",
+        "startzeitpunkt",
+        "endzeitpunkt"
+      ]
     }
   },
   "type": "object",
@@ -90,14 +98,14 @@
       "type": ["string", "null"]
     },
     "lokationsId": {
-      "type": "string"
+      "type": ["string", "null"]
     },
     "lokationsTyp": {
       "type": "string",
       "enum": ["MALO", "MELO"]
     },
     "obiskennzahl": {
-      "type": "string"
+      "type": ["string", "null"]
     },
     "ZeitraumMesswertanfrage": {
       "$ref": "#/definitions/Zeitraum"
@@ -112,12 +120,33 @@
     "zeitpunktFuerWertanfrage": {
       "type": ["string", "null"],
       "format": "date-time"
+    },
+    "gueltigkeitszeitraum": {
+      "$ref": "#/definitions/Zeitraum"
+    },
+    "qualitaet": {
+      "type": ["string", "null"],
+      "enum": [
+        null,
+        "VOLLSTAENDIG",
+        "INFORMATIV",
+        "IM_SYSTEM_VORHANDEN",
+        "ERWARTET",
+        "VORLAEUFIG",
+        "UNVOLLSTAENDIG"
+      ]
     }
   },
   "required": [
+    "boTyp",
+    "versionStruktur",
+    "externeReferenzen",
     "lokationsId",
     "lokationsTyp",
     "obiskennzahl",
-    "reklamationsgrund"
+    "ZeitraumMesswertanfrage",
+    "reklamationsgrund",
+    "reklamationsgrundBemerkung",
+    "zeitpunktFuerWertanfrage"
   ]
 }
