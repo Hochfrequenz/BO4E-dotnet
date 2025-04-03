@@ -7,9 +7,11 @@ public enum Zaehlerauspraegung
 {
     /// <summary>Einrichtungszaehler</summary>
     [EnumMember(Value = "EINRICHTUNGSZAEHLER")]
+    [System.Text.Json.Serialization.JsonStringEnumMemberName("EINRICHTUNGSZAEHLER")]
     EINRICHTUNGSZAEHLER,
 
     /// <summary>Zweirichtungszaehler</summary>
     [EnumMember(Value = "ZWEIRICHTUNGSZAEHLER")]
+    [System.Text.Json.Serialization.JsonStringEnumMemberName("ZWEIRICHTUNGSZAEHLER")]
     ZWEIRICHTUNGSZAEHLER,
 }

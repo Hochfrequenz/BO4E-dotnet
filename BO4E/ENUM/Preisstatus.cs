@@ -9,11 +9,13 @@ public enum Preisstatus
     ///     vorläufig
     /// </summary>
     [EnumMember(Value = "VORLAEUFIG")]
+    [System.Text.Json.Serialization.JsonStringEnumMemberName("VORLAEUFIG")]
     VORLAEUFIG,
 
     /// <summary>
     ///     endgültig
     /// </summary>
     [EnumMember(Value = "ENDGUELTIG")]
+    [System.Text.Json.Serialization.JsonStringEnumMemberName("ENDGUELTIG")]
     ENDGUELTIG,
 }

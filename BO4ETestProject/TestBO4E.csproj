@@ -1,7 +1,7 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
     <PropertyGroup>
-        <TargetFramework>net6.0</TargetFramework> 
+        <TargetFramework>net8.0</TargetFramework> 
 
         <IsPackable>false</IsPackable>
 
@@ -12,18 +12,21 @@
         <StartupObject />
 
         <RootNamespace>TestBO4E-dotnet</RootNamespace>
+
+        <LangVersion>12</LangVersion>
     </PropertyGroup>
 
     <ItemGroup>
-        <PackageReference Include="coverlet.collector" Version="6.0.2">
+        <PackageReference Include="AwesomeAssertions" Version="8.0.2" />
+        <PackageReference Include="coverlet.collector" Version="6.0.4">
             <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
             <PrivateAssets>all</PrivateAssets>
         </PackageReference>
-        <PackageReference Include="FluentAssertions" Version="6.12.0" />
         <PackageReference Include="JsonDiffPatch.Net" Version="2.3.0" />
-        <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.10.0" />
-        <PackageReference Include="MSTest.TestAdapter" Version="3.5.1" />
-        <PackageReference Include="MSTest.TestFramework" Version="3.5.1" />
+        <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.13.0" />
+        <PackageReference Include="MSTest.TestAdapter" Version="3.8.3" />
+        <PackageReference Include="MSTest.TestFramework" Version="3.8.3" />
+        <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
     </ItemGroup>
 
     <ItemGroup>

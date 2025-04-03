@@ -1,5 +1,6 @@
-using System.Text.Json.Serialization;
+#nullable enable
 using System.Collections.Generic;
+using System.Text.Json.Serialization;
 using BO4E.ENUM;
 using BO4E.meta;
 using Newtonsoft.Json;
@@ -17,21 +18,18 @@ public class Handelsunstimmigkeitsbegruendung : COM
     /// <summary>
     /// Referenzen auf vorherige Nachrichten
     /// </summary>
-    [JsonProperty(PropertyName = "referenzen", Required = Required.Default, Order = 1)]
+    [JsonProperty(PropertyName = "referenzen", Order = 1)]
     [JsonPropertyName("referenzen")]
     [NonOfficial(NonOfficialCategory.MISSING)]
     [ProtoMember(1)]
-
     public List<string>? Referenzen { get; set; }
-
 
     /// <summary>
     /// Angabe des Handelsunstimmigkeitsgrunds
     /// </summary>
-    [JsonProperty(PropertyName = "grund", Required = Required.Default, Order = 2)]
+    [JsonProperty(PropertyName = "grund", Order = 2)]
     [JsonPropertyName("grund")]
     [NonOfficial(NonOfficialCategory.MISSING)]
     [ProtoMember(2)]
     public Handelsunstimmigkeitsgrund? Grund { get; set; }
-
 }

@@ -19,12 +19,24 @@ public class LenientBo4eUriConverter : JsonConverter
     }
 
     /// <inheritdoc cref="JsonConverter.ReadJson(JsonReader, Type, object, JsonSerializer)" />
-    public override object ReadJson(JsonReader reader, Type objectType, object existingValue,
-        JsonSerializer serializer)
+    public override object ReadJson(
+        JsonReader reader,
+        Type objectType,
+        object existingValue,
+        JsonSerializer serializer
+    )
     {
-        if (reader.Value == null) return null;
+        if (reader.Value == null)
+        {
+            return null;
+        }
+
         var rawString = (string)reader.Value;
-        if (rawString.Trim() == string.Empty) return null;
+        if (rawString.Trim() == string.Empty)
+        {
+            return null;
+        }
+
         return new Bo4eUri(rawString);
     }
 
