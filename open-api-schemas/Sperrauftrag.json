@@ -4,13 +4,13 @@
   "definitions": {
     "Sperrauftragsart": {
       "type": "integer",
-      "description": "Die Sperrauftragsart beschreibt die Art eines Sperrauftrags.",
+      "description": "",
       "x-enumNames": ["SPERREN", "ENTSPERREN"],
       "enum": [0, 1]
     },
     "Auftragsstatus": {
       "type": "integer",
-      "description": "Auftragststatus (Planungsstatus in IFTSTA STS 4405 (21029) and Sperrauftragsstatus in IFTSTA STS 4405 (21039/21040))\nDer Sperrauftragsstatus beschreibt den Status eines Sperrauftrags",
+      "description": "",
       "x-enumNames": [
         "GESCHEITERT",
         "ERFOLGREICH",
@@ -23,7 +23,7 @@
     },
     "Sperrauftragsablehngrund": {
       "type": "integer",
-      "description": "Gründe aus denen ein Sperrauftrag abgelehnt werden kann.",
+      "description": "",
       "x-enumNames": [
         "DUPLIKAT",
         "FALSCHER_MSB",
@@ -41,7 +41,7 @@
     },
     "Sperrauftragsverhinderungsgrund": {
       "type": "integer",
-      "description": "Gründe aus denen ein Sperrauftrag nicht durchgeführt wird/wurde.",
+      "description": "",
       "x-enumNames": [
         "RECHTLICHER_GRUND_FEHLT",
         "AKTIVE_ZUTRITTSVERWEIGERUNG",
@@ -60,24 +60,20 @@
         },
         {
           "type": "object",
-          "description": "Ein Auftrag beschreibt einen Vorgang, der von einem anderen Marktpartner auszuführen ist. ",
           "x-abstract": true,
           "additionalProperties": {},
           "properties": {
             "ausfuehrungsdatum": {
               "type": "string",
-              "description": "Das Ausführungsdatum beschreibt zu welchem Zeitpunkt ein Auftrag ausgeführt werden soll.",
               "format": "date-time",
               "x-nullable": true
             },
             "fertigstellungsdatum": {
               "type": "string",
-              "description": "Das Fertigstellungsdatum beschreibt zu welchem Zeitpunkt ein Auftrag ausgeführt wurde/wird.",
               "format": "date-time",
               "x-nullable": true
             },
             "sparte": {
-              "description": "Die Sparte in der der Auftrag relevant ist",
               "x-nullable": true,
               "oneOf": [
                 {
@@ -86,7 +82,6 @@
               ]
             },
             "lieferanschrift": {
-              "description": "Die Adresse, die sich in Belieferung befindet.",
               "x-nullable": true,
               "oneOf": [
                 {
@@ -95,19 +90,16 @@
               ]
             },
             "marktlokationsId": {
-              "type": "string",
-              "description": "Die ID der Marktlokation der der zu sperrende Zähler zugeordnet ist."
+              "type": "string"
             },
             "bemerkungen": {
               "type": "array",
-              "description": "Ein zusätzlicher Freitext",
               "x-nullable": true,
               "items": {
                 "type": "string"
               }
             },
             "mindestpreis": {
-              "description": "Der Mindestpreis eines Auftrags (z.B. für eine Sperrung)",
               "x-nullable": true,
               "oneOf": [
                 {
@@ -116,7 +108,6 @@
               ]
             },
             "hoechstpreis": {
-              "description": "Der Höchstpreis eines Auftrags (z.B. für eine Sperrung)",
               "x-nullable": true,
               "oneOf": [
                 {
@@ -130,7 +121,7 @@
     },
     "Sparte": {
       "type": "integer",
-      "description": "Unterscheidungsmöglichkeiten für die Sparte.",
+      "description": "",
       "x-enumNames": [
         "STROM",
         "GAS",
@@ -148,44 +139,35 @@
         },
         {
           "type": "object",
-          "description": "Enthält eine Adresse, die für die meisten Zwecke verwendbar ist.",
           "additionalProperties": {},
           "properties": {
             "postleitzahl": {
-              "type": "string",
-              "description": "Die Postleitzahl. Beispiel: 41836"
+              "type": "string"
             },
             "ort": {
-              "type": "string",
-              "description": "Bezeichnung der Stadt. Beispiel Hückelhoven"
+              "type": "string"
             },
             "strasse": {
               "type": "string",
-              "description": "Bezeichnung der Straße. Beispiel: Weserstraße",
               "x-nullable": true
             },
             "hausnummer": {
               "type": "string",
-              "description": "Hausnummer inkl. Zusatz. Beispiel. 3, 4a etc.",
               "x-nullable": true
             },
             "postfach": {
               "type": "string",
-              "description": "Im Falle einer Postfachadresse das Postfach. Damit werden Straße und\nHausnummer nicht berücksichtigt.Beispiel: Postfach 4711\n            ",
               "x-nullable": true
             },
             "adresszusatz": {
               "type": "string",
-              "description": "Zusatzhinweis zum Auffinden der Adresse, z.B. \"3. Stock linke Wohnung\"",
               "x-nullable": true
             },
             "coErgaenzung": {
               "type": "string",
-              "description": "Im Falle einer c/o-Adresse steht in diesem Attribut die Anrede. Z.B. c/o\nVeronica Hauptmieterin.In diesem Fall enthält die folgende Adresse die Daten\nder in c/o adressierten Person oder Firma.\n            ",
               "x-nullable": true
             },
             "landescode": {
-              "description": "Offizieller ISO-Landescode. Z.B. NL, Details Landescode",
               "x-nullable": true,
               "oneOf": [
                 {
@@ -195,7 +177,6 @@
             },
             "ortsteil": {
               "type": "string",
-              "description": "Ortsteil für EDIFACT mapping\n            ",
               "x-nullable": true
             }
           }
@@ -204,7 +185,7 @@
     },
     "Landescode": {
       "type": "integer",
-      "description": "Der ISO-Landescode.",
+      "description": "",
       "x-enumNames": [
         "AC",
         "AD",
@@ -497,7 +478,6 @@
     },
     "COM": {
       "type": "object",
-      "description": "The COM class is the abstract class from which all BO4E.COM classes are derived.\n            ",
       "x-abstract": true,
       "additionalProperties": {},
       "properties": {
@@ -506,13 +486,11 @@
         },
         "timestamp": {
           "type": "string",
-          "description": "Store the latest timestamp (update from the database)\n            ",
           "format": "date-time",
           "x-nullable": true
         },
         "guid": {
           "type": "string",
-          "description": "allows adding a GUID to COM objects for tracking across systems\n            ",
           "format": "guid",
           "x-nullable": true
         }
@@ -525,17 +503,14 @@
         },
         {
           "type": "object",
-          "description": "Preis",
           "additionalProperties": {},
           "properties": {
             "wert": {
               "type": "number",
-              "description": "Gibt die nomiale Höhe des Preises an.",
               "format": "decimal",
               "x-nullable": true
             },
             "einheit": {
-              "description": "Währungseinheit für den Preis, z.B. Euro oder Ct. Details Waehrungseinheit",
               "x-nullable": true,
               "oneOf": [
                 {
@@ -544,7 +519,6 @@
               ]
             },
             "bezugswert": {
-              "description": "Angabe, für welche Bezugsgröße der Preis gilt. Z.B. kWh. ",
               "x-nullable": true,
               "oneOf": [
                 {
@@ -553,7 +527,6 @@
               ]
             },
             "status": {
-              "description": "Gibt den Status des veröffentlichten Preises an\n            ",
               "x-nullable": true,
               "oneOf": [
                 {
@@ -567,13 +540,13 @@
     },
     "Waehrungseinheit": {
       "type": "integer",
-      "description": "In diesem Enum werden die Währungen und ihre Untereinheiten definiert, beispielsweise für die Verwendung in\nPreisen.\n            ",
+      "description": "",
       "x-enumNames": ["EUR", "CT"],
       "enum": [0, 1]
     },
     "Mengeneinheit": {
       "type": "integer",
-      "description": "Einheit: Messgrößen, die per Messung oder Vorgabe ermittelt werden können.\n            ",
+      "description": "",
       "x-enumNames": [
         "ZERO",
         "WH",
@@ -600,41 +573,33 @@
     },
     "Preisstatus": {
       "type": "integer",
-      "description": "Statusinformation für Preise",
+      "description": "",
       "x-enumNames": ["VORLAEUFIG", "ENDGUELTIG"],
       "enum": [0, 1]
     },
     "BusinessObject": {
       "type": "object",
-      "description": "General abstract class for Business Objects for Energy (BO4E)\n            ",
       "x-abstract": true,
       "additionalProperties": {},
       "properties": {
         "boTyp": {
           "type": "string",
-          "description": "obligatory type of the business object in UPPER CASE\n            ",
-          "x-nullable": true,
-          "x-example": "'MESSLOKATION',\n'MARKTLOKATION'\n            "
+          "x-nullable": true
         },
         "versionStruktur": {
           "type": "string",
-          "description": "obligatory version of the BO4E definition. Currently hard coded to 1\n            ",
-          "x-nullable": true,
-          "x-example": 1
+          "x-nullable": true
         },
         "guidSerialized": {
-          "type": "string",
-          "description": "protobuf serilization requires the Guid as string.\n            "
+          "type": "string"
         },
         "timestamp": {
           "type": "string",
-          "description": "Store the latest database update, is Datetime, because postgres doesn't handle datetimeoffset in a generated column\ngracefully\n            ",
           "format": "date-time",
           "x-nullable": true
         },
         "externeReferenzen": {
           "type": "array",
-          "description": "Hier können IDs anderer Systeme hinterlegt werden (z.B. eine SAP-GP-Nummer) (Details siehe\nExterneReferenz)\n            ",
           "x-nullable": true,
           "items": {
             "$ref": "#/definitions/ExterneReferenz"
@@ -642,9 +607,24 @@
         },
         "guid": {
           "type": "string",
-          "description": "allows adding a GUID to Business Objects for tracking across systems\n            ",
           "format": "guid",
           "x-nullable": true
+        },
+        "gueltigkeitszeitraum": {
+          "x-nullable": true,
+          "oneOf": [
+            {
+              "$ref": "#/definitions/Zeitraum"
+            }
+          ]
+        },
+        "qualitaet": {
+          "x-nullable": true,
+          "oneOf": [
+            {
+              "$ref": "#/definitions/Qualitaet"
+            }
+          ]
         }
       }
     },
@@ -655,22 +635,95 @@
         },
         {
           "type": "object",
-          "description": "Viele Datenobjekte weisen in unterschiedlichen Systemen eine eindeutige ID (Kundennummer, GP-Nummer etc.) auf.\nBeim Austausch von Datenobjekten zwischen verschiedenen Systemen ist es daher hilfreich, sich die eindeutigen IDs\nder anzubindenden Systeme zu merken.\nDiese Komponente ermöglicht es, sich die SAP GP-Nummer zu merken, um diese bei SAP-Aufrufen als Parameter mitgeben\nzu können.\n            ",
           "additionalProperties": {},
           "properties": {
             "exRefName": {
               "type": "string",
-              "description": "Bezeichnung der externen Referenz (z.B. \"hochfrequenz integration services\")\n            ",
               "x-nullable": true
             },
             "exRefWert": {
               "type": "string",
-              "description": "Wert der externen Referenz (z.B. \"123456\"; \"4711\")\n            ",
               "x-nullable": true
             }
           }
         }
       ]
+    },
+    "Zeitraum": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/COM"
+        },
+        {
+          "type": "object",
+          "additionalProperties": {},
+          "properties": {
+            "einheit": {
+              "x-nullable": true,
+              "oneOf": [
+                {
+                  "$ref": "#/definitions/Zeiteinheit"
+                }
+              ]
+            },
+            "dauer": {
+              "type": "number",
+              "format": "decimal",
+              "x-nullable": true
+            },
+            "startdatum": {
+              "type": "string",
+              "format": "date-time",
+              "x-nullable": true
+            },
+            "enddatum": {
+              "type": "string",
+              "format": "date-time",
+              "x-nullable": true
+            },
+            "startzeitpunkt": {
+              "type": "string",
+              "format": "date-time",
+              "x-nullable": true
+            },
+            "endzeitpunkt": {
+              "type": "string",
+              "format": "date-time",
+              "x-nullable": true
+            }
+          }
+        }
+      ]
+    },
+    "Zeiteinheit": {
+      "type": "integer",
+      "description": "",
+      "x-enumNames": [
+        "SEKUNDE",
+        "MINUTE",
+        "STUNDE",
+        "VIERTEL_STUNDE",
+        "TAG",
+        "WOCHE",
+        "MONAT",
+        "QUARTAL",
+        "HALBJAHR",
+        "JAHR"
+      ],
+      "enum": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+    },
+    "Qualitaet": {
+      "type": "integer",
+      "description": "",
+      "x-enumNames": [
+        "VOLLSTAENDIG",
+        "INFORMATIV",
+        "IM_SYSTEM_VORHANDEN",
+        "ERWARTET",
+        "VORLAEUFIG",
+        "UNVOLLSTAENDIG"
+      ],
+      "enum": [0, 1, 2, 3, 4, 5]
     }
   },
   "allOf": [
@@ -679,19 +732,12 @@
     },
     {
       "type": "object",
-      "description": "Ein Sperrauftrag ist das BO, das die Aufforderung des Lieferanten an den Netzbetreiber bzw. Netzstellenbetreiber beschreibt einen Zähler zu sperren.",
       "additionalProperties": {},
       "properties": {
         "sperrauftragsart": {
-          "description": "Handelt es sich um einen Auftrag zum SPERREN oder ENTSPERREN?",
-          "oneOf": [
-            {
-              "$ref": "#/definitions/Sperrauftragsart"
-            }
-          ]
+          "$ref": "#/definitions/Sperrauftragsart"
         },
         "sperrauftragsstatus": {
-          "description": "Auftragsstatus",
           "x-nullable": true,
           "oneOf": [
             {
@@ -700,7 +746,6 @@
           ]
         },
         "sperrauftragsablehngrund": {
-          "description": "Falls Sperrauftragsstatus = ABGELEHNT",
           "x-nullable": true,
           "oneOf": [
             {
@@ -709,7 +754,6 @@
           ]
         },
         "sperrauftragsverhinderungsgrund": {
-          "description": "Falls Sperrauftragsstatus = GESCHEITERT",
           "x-nullable": true,
           "oneOf": [
             {
@@ -719,12 +763,10 @@
         },
         "zaehlernummer": {
           "type": "string",
-          "description": "Die Nummer des zu sperrenden Zählers",
           "x-nullable": true
         },
         "istVomGerichtsvollzieherAngeordnet": {
-          "type": "boolean",
-          "description": "True, falls die Sperrung vom Gerichtsvollzieher angeordnet ist."
+          "type": "boolean"
         }
       }
     }

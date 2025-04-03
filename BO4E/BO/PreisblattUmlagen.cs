@@ -4,7 +4,4 @@ namespace BO4E.BO;
 ///     Die Variante des Preisblattmodells zur Abbildung von allgemeinen Abgaben.
 /// </summary>
 //[ProtoContract]
-public class PreisblattUmlagen : Preisblatt
-{
-
-}
+public class PreisblattUmlagen : Preisblatt { }

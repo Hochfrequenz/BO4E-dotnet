@@ -19,9 +19,15 @@ public class LenientSystemTextJsonEnumListConverter : JsonConverterFactory
     /// <returns></returns>
     public override bool CanConvert(Type typeToConvert)
     {
-        if (!typeToConvert.IsGenericType) return false;
+        if (!typeToConvert.IsGenericType)
+        {
+            return false;
+        }
 
-        if (typeToConvert.GetGenericTypeDefinition() != typeof(List<>)) return false;
+        if (typeToConvert.GetGenericTypeDefinition() != typeof(List<>))
+        {
+            return false;
+        }
 
         var expectedListElementType = typeToConvert.GetGenericArguments()[0];
         return expectedListElementType.ToString().StartsWith("BO4E.ENUM");
@@ -34,13 +40,17 @@ public class LenientSystemTextJsonEnumListConverter : JsonConverterFactory
     /// <returns></returns>
     public override JsonConverter CreateConverter(Type typeToConvert, JsonSerializerOptions options)
     {
-        var converter = (JsonConverter)Activator.CreateInstance(
-            typeof(LenientSystemTextJsonEnumListConverter<,>).MakeGenericType(typeToConvert,
-                typeToConvert.GetGenericArguments().First()),
-            BindingFlags.Instance | BindingFlags.Public,
-            null,
-            null,
-            null);
+        var converter = (JsonConverter)
+            Activator.CreateInstance(
+                typeof(LenientSystemTextJsonEnumListConverter<,>).MakeGenericType(
+                    typeToConvert,
+                    typeToConvert.GetGenericArguments().First()
+                ),
+                BindingFlags.Instance | BindingFlags.Public,
+                null,
+                null,
+                null
+            );
 
         return converter;
     }
@@ -50,14 +60,21 @@ public class LenientSystemTextJsonEnumListConverter : JsonConverterFactory
 ///     allows to deserialize a list of enums (see tests)
 /// </summary>
 public class LenientSystemTextJsonEnumListConverter<T, TE> : JsonConverter<T>
-    where T : List<TE> where TE : struct, Enum
+    where T : List<TE>
+    where TE : struct, Enum
 {
     /// <inheritdoc cref=" JsonConverter.CanConvert(Type)" />
     public override bool CanConvert(Type objectType)
     {
-        if (!objectType.IsGenericType) return false;
+        if (!objectType.IsGenericType)
+        {
+            return false;
+        }
 
-        if (objectType.GetGenericTypeDefinition() != typeof(List<>)) return false;
+        if (objectType.GetGenericTypeDefinition() != typeof(List<>))
+        {
+            return false;
+        }
 
         var expectedListElementType = objectType.GetGenericArguments()[0];
         return expectedListElementType.ToString().StartsWith("BO4E.ENUM");
@@ -69,37 +86,97 @@ public class LenientSystemTextJsonEnumListConverter<T, TE> : JsonConverter<T>
     /// <param name="typeToConvert"></param>
     /// <param name="options"></param>
     /// <returns></returns>
-    public override T Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+    public override T Read(
+        ref Utf8JsonReader reader,
+        Type typeToConvert,
+        JsonSerializerOptions options
+    )
     {
         var rawList = JsonSerializer.Deserialize<List<object>>(ref reader);
         var expectedListElementType = typeToConvert.GetGenericArguments()[0];
         var expectedListType = typeof(List<>).MakeGenericType(expectedListElementType);
         var result = Activator.CreateInstance(expectedListType);
-        if (rawList == null || rawList.Count == 0) return result as T;
+        if (rawList == null || rawList.Count == 0)
+        {
+            return result as T;
+        }
 
         // First try to parse the List normally, in case it's formatted as expected
         foreach (var rawItem in rawList)
             switch (rawItem)
             {
                 case object _ when Enum.TryParse(rawItem.ToString(), true, out TE enumResult):
-                    {
-                        // default. everything is as it should be :-)
+                {
+                    // default. everything is as it should be :-)
 
-                        ((IList)result).Add(enumResult);
-                        break;
-                    }
+                    ((IList)result).Add(enumResult);
+                    break;
+                }
                 case JsonElement element:
                     try
                     {
-                        var rawDict = JsonSerializer.Deserialize<Dictionary<string, object>>(element.GetRawText());
+                        var rawDict = JsonSerializer.Deserialize<Dictionary<string, object>>(
+                            element.GetRawText()
+                        );
                         var rawObject = rawDict.Values.FirstOrDefault();
-                        var enumValue = Enum.Parse(expectedListElementType, rawObject.ToString(), true);
+                        var enumValue = Enum.Parse(
+                            expectedListElementType,
+                            rawObject.ToString(),
+                            true
+                        );
                         ((IList)result).Add(enumValue);
                     }
                     catch (Exception)
                     {
-                        var enumValue = Enum.Parse(expectedListElementType, element.GetString(), true);
-                        ((IList)result).Add(enumValue);
+                        if (
+                            (
+                                (Type)expectedListElementType
+                            ).GetCustomAttribute<System.Text.Json.Serialization.JsonConverterAttribute>() is
+                            { ConverterType: not null } jca
+                        )
+                        {
+                            if (options.Converters.Any(x => x.GetType() == jca.ConverterType))
+                            {
+                                var optionsWithoutThisConverter = new JsonSerializerOptions(
+                                    options
+                                );
+                                if (optionsWithoutThisConverter.Converters.Contains(this))
+                                {
+                                    // avoid stack overflow/infinity recursion
+                                    optionsWithoutThisConverter.Converters.Remove(this);
+                                }
+
+                                if (
+                                    optionsWithoutThisConverter.Converters.FirstOrDefault(c =>
+                                        c.GetType()
+                                        == typeof(LenientSystemTextJsonEnumListConverter)
+                                    ) is
+                                    { } sameTypeConverter
+                                )
+                                {
+                                    optionsWithoutThisConverter.Converters.Remove(
+                                        sameTypeConverter
+                                    );
+                                }
+                                var helperJsonList = "[" + element.GetRawText() + "]";
+                                var subResultList = System.Text.Json.JsonSerializer.Deserialize(
+                                    helperJsonList,
+                                    expectedListType,
+                                    optionsWithoutThisConverter
+                                );
+                                // check the unittest Test_Mehrmindermengenabrechnungslist() to debug this code block
+                                ((IList)result).Add((subResultList as IList)[0]);
+                            }
+                        }
+                        else
+                        {
+                            var enumValue = Enum.Parse(
+                                expectedListElementType,
+                                element.GetString(),
+                                true
+                            );
+                            ((IList)result).Add(enumValue);
+                        }
                     }
 
                     break;
@@ -121,7 +198,8 @@ public class LenientSystemTextJsonEnumListConverter<T, TE> : JsonConverter<T>
         if (value.Any())
         {
             writer.WriteStartArray();
-            foreach (var val in value) JsonSerializer.Serialize(writer, val, typeof(TE), options);
+            foreach (var val in value)
+                JsonSerializer.Serialize(writer, val, typeof(TE), options);
 
             writer.WriteEndArray();
         }

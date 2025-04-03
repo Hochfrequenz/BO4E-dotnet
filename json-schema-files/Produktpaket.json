@@ -1,0 +1,298 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "definitions": {
+    "ExterneReferenz": {
+      "type": ["object", "null"],
+      "properties": {
+        "exRefName": {
+          "type": ["string", "null"]
+        },
+        "exRefWert": {
+          "type": ["string", "null"]
+        },
+        "timestamp": {
+          "type": ["string", "null"],
+          "format": "date-time"
+        },
+        "guid": {
+          "type": ["string", "null"]
+        }
+      },
+      "required": ["exRefName", "exRefWert"]
+    },
+    "Produktkonfiguration": {
+      "type": ["object", "null"],
+      "properties": {
+        "timestamp": {
+          "type": ["string", "null"],
+          "format": "date-time"
+        },
+        "guid": {
+          "type": ["string", "null"]
+        },
+        "code": {
+          "type": ["string", "null"],
+          "enum": [
+            null,
+            "BILANZKREIS",
+            "TRANCHENGROESSE",
+            "PROZENTUALE_AUFTEILUNG",
+            "AUFTEILUNGSFAKTOR",
+            "MESSTECHNISCHE_EINORDNUNG",
+            "INTELLIGENTES_MESSSYSTEM",
+            "KME_MME",
+            "KEINE_MESSUNG",
+            "VERBRAUCHSART",
+            "KRAFT_LICHT",
+            "WAERME_KAELTE",
+            "EMOBILITAET",
+            "STRASSENBELEUCHTUNG",
+            "STEUERUNG_WAERMEABGABE",
+            "WAERMENUTZUNG",
+            "SPEICHERHEIZUNG",
+            "WAERMEPUMPE",
+            "DIREKTHEIZUNG",
+            "WAERMEPUMPE_WAERME_KAELTE",
+            "WAERMEPUMPE_KAELTE",
+            "WAERMEPUMPE_WAERME",
+            "ART_EMOBILITAET",
+            "WALLBOX",
+            "LADESAEULE",
+            "LADEPARK",
+            "STEUERBARE_RESSOURCE",
+            "STEUERBARE_RESSOURCE_VORHANDEN",
+            "EIGENSCHAFT_MARKTLOKATION",
+            "KUNDENANLAGE",
+            "KEINE_KUNDENANLAGE",
+            "NETZENTGELTE_NETZORIENTIERTE_STEUERUNG",
+            "PAUSCHALE_REDUZIERUNG_MODUL_1",
+            "PROZENTUALE_REDUZIERUNG_AP_MODUL_2",
+            "ANREIZMODUL_3",
+            "NETZENTGELTE_PREISSYSTEM",
+            "JAHRESLEISTUNG",
+            "MONATSLEISTUNG",
+            "GRUNDPREIS_ARBEITSPREIS",
+            "TAGESLEISTUNG",
+            "KONZESSIONSABGABE",
+            "TARIFKUNDE",
+            "SONDERVERTRAGSKUNDE",
+            "SCHWACHLAST_KA",
+            "BEFREIUNG",
+            "NETZNUTZUNGSVERTRAG",
+            "DIREKTER_VERTRAG",
+            "VERTRAG_MIT_LIEFERANT",
+            "ZAHLER_NETZNUTZUNG",
+            "ZAHLER_KUNDE",
+            "ZAHLER_LIEFERANT",
+            "EMPFAENGER_VERGUETUNG",
+            "EMPFAENGER_KUNDE",
+            "EMPFAENGER_LIEFERANT",
+            "PROGNOSEGRUNDLAGE",
+            "PROFILE",
+            "WERTE",
+            "JAHRESVERBRAUCHSPROGNOSE",
+            "VERAEUSSERUNGSFORM",
+            "AUSFALLVERGUETUNG",
+            "MARKTPRAEMIE",
+            "KWKG",
+            "SONSTIGE_DIREKTVERMARKTUNG",
+            "RUHENDE_MARKTLOKATION",
+            "BILDUNG",
+            "INTEGRATION"
+          ]
+        },
+        "eigenschaft": {
+          "type": ["string", "null"],
+          "enum": [
+            null,
+            "BILANZKREIS",
+            "TRANCHENGROESSE",
+            "PROZENTUALE_AUFTEILUNG",
+            "AUFTEILUNGSFAKTOR",
+            "MESSTECHNISCHE_EINORDNUNG",
+            "INTELLIGENTES_MESSSYSTEM",
+            "KME_MME",
+            "KEINE_MESSUNG",
+            "VERBRAUCHSART",
+            "KRAFT_LICHT",
+            "WAERME_KAELTE",
+            "EMOBILITAET",
+            "STRASSENBELEUCHTUNG",
+            "STEUERUNG_WAERMEABGABE",
+            "WAERMENUTZUNG",
+            "SPEICHERHEIZUNG",
+            "WAERMEPUMPE",
+            "DIREKTHEIZUNG",
+            "WAERMEPUMPE_WAERME_KAELTE",
+            "WAERMEPUMPE_KAELTE",
+            "WAERMEPUMPE_WAERME",
+            "ART_EMOBILITAET",
+            "WALLBOX",
+            "LADESAEULE",
+            "LADEPARK",
+            "STEUERBARE_RESSOURCE",
+            "STEUERBARE_RESSOURCE_VORHANDEN",
+            "EIGENSCHAFT_MARKTLOKATION",
+            "KUNDENANLAGE",
+            "KEINE_KUNDENANLAGE",
+            "NETZENTGELTE_NETZORIENTIERTE_STEUERUNG",
+            "PAUSCHALE_REDUZIERUNG_MODUL_1",
+            "PROZENTUALE_REDUZIERUNG_AP_MODUL_2",
+            "ANREIZMODUL_3",
+            "NETZENTGELTE_PREISSYSTEM",
+            "JAHRESLEISTUNG",
+            "MONATSLEISTUNG",
+            "GRUNDPREIS_ARBEITSPREIS",
+            "TAGESLEISTUNG",
+            "KONZESSIONSABGABE",
+            "TARIFKUNDE",
+            "SONDERVERTRAGSKUNDE",
+            "SCHWACHLAST_KA",
+            "BEFREIUNG",
+            "NETZNUTZUNGSVERTRAG",
+            "DIREKTER_VERTRAG",
+            "VERTRAG_MIT_LIEFERANT",
+            "ZAHLER_NETZNUTZUNG",
+            "ZAHLER_KUNDE",
+            "ZAHLER_LIEFERANT",
+            "EMPFAENGER_VERGUETUNG",
+            "EMPFAENGER_KUNDE",
+            "EMPFAENGER_LIEFERANT",
+            "PROGNOSEGRUNDLAGE",
+            "PROFILE",
+            "WERTE",
+            "JAHRESVERBRAUCHSPROGNOSE",
+            "VERAEUSSERUNGSFORM",
+            "AUSFALLVERGUETUNG",
+            "MARKTPRAEMIE",
+            "KWKG",
+            "SONSTIGE_DIREKTVERMARKTUNG",
+            "RUHENDE_MARKTLOKATION",
+            "BILDUNG",
+            "INTEGRATION"
+          ]
+        },
+        "zusatzeigenschaft": {
+          "type": ["string", "null"]
+        }
+      },
+      "required": ["code", "eigenschaft", "zusatzeigenschaft"]
+    },
+    "Zeitraum": {
+      "type": ["object", "null"],
+      "properties": {
+        "einheit": {
+          "type": ["string", "null"],
+          "enum": [
+            null,
+            "SEKUNDE",
+            "MINUTE",
+            "STUNDE",
+            "VIERTEL_STUNDE",
+            "TAG",
+            "WOCHE",
+            "MONAT",
+            "QUARTAL",
+            "HALBJAHR",
+            "JAHR"
+          ]
+        },
+        "dauer": {
+          "type": ["number", "null"]
+        },
+        "startdatum": {
+          "type": ["string", "null"],
+          "format": "date-time"
+        },
+        "enddatum": {
+          "type": ["string", "null"],
+          "format": "date-time"
+        },
+        "startzeitpunkt": {
+          "type": ["string", "null"],
+          "format": "date-time"
+        },
+        "endzeitpunkt": {
+          "type": ["string", "null"],
+          "format": "date-time"
+        },
+        "timestamp": {
+          "type": ["string", "null"],
+          "format": "date-time"
+        },
+        "guid": {
+          "type": ["string", "null"]
+        }
+      },
+      "required": [
+        "einheit",
+        "dauer",
+        "startdatum",
+        "enddatum",
+        "startzeitpunkt",
+        "endzeitpunkt"
+      ]
+    }
+  },
+  "type": "object",
+  "properties": {
+    "boTyp": {
+      "type": ["string", "null"]
+    },
+    "versionStruktur": {
+      "type": ["string", "null"]
+    },
+    "timestamp": {
+      "type": ["string", "null"],
+      "format": "date-time"
+    },
+    "externeReferenzen": {
+      "type": ["array", "null"],
+      "items": {
+        "$ref": "#/definitions/ExterneReferenz"
+      }
+    },
+    "guid": {
+      "type": ["string", "null"]
+    },
+    "paketId": {
+      "type": "integer"
+    },
+    "konfigurationen": {
+      "type": ["array", "null"],
+      "items": {
+        "$ref": "#/definitions/Produktkonfiguration"
+      }
+    },
+    "prioritaet": {
+      "type": ["integer", "null"]
+    },
+    "mussVollstaendigSein": {
+      "type": ["boolean", "null"]
+    },
+    "gueltigkeitszeitraum": {
+      "$ref": "#/definitions/Zeitraum"
+    },
+    "qualitaet": {
+      "type": ["string", "null"],
+      "enum": [
+        null,
+        "VOLLSTAENDIG",
+        "INFORMATIV",
+        "IM_SYSTEM_VORHANDEN",
+        "ERWARTET",
+        "VORLAEUFIG",
+        "UNVOLLSTAENDIG"
+      ]
+    }
+  },
+  "required": [
+    "boTyp",
+    "versionStruktur",
+    "externeReferenzen",
+    "paketId",
+    "konfigurationen",
+    "prioritaet",
+    "mussVollstaendigSein"
+  ]
+}

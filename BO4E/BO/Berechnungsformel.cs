@@ -29,11 +29,12 @@ public class Berechnungsformel : BusinessObject
         get => Beginndatum.UtcDateTime;
         set => Beginndatum = DateTime.SpecifyKind(value, DateTimeKind.Utc);
     }
+
     /// <summary>
     /// Der inklusive Zeitpunkt ab dem die Berechnungsformel gültig ist
     /// </summary>
     /// <remarks>UTILTS SG5 DTM+157</remarks>
-    [JsonProperty(Required = Required.Always, Order = 5, PropertyName = "beginndatum")]
+    [JsonProperty(Order = 5, PropertyName = "beginndatum")]
     [JsonPropertyName("beginndatum")]
     [ProtoIgnore]
     public DateTimeOffset Beginndatum { get; set; }
@@ -42,7 +43,7 @@ public class Berechnungsformel : BusinessObject
     /// Beschreibt ob eine Berechnungsformel notwendig ist
     /// </summary>
     /// <remarks>UTILTS SG5 STS 4405</remarks>
-    [JsonProperty(Required = Required.Always, Order = 6, PropertyName = "notwendigkeit")]
+    [JsonProperty(Order = 6, PropertyName = "notwendigkeit")]
     [JsonPropertyName("notwendigkeit")]
     [ProtoMember(6)]
     public BerechnungsformelNotwendigkeit Notwendigkeit { get; set; }
@@ -51,7 +52,7 @@ public class Berechnungsformel : BusinessObject
     /// ID des Rechenschritts [1 - 99999]
     /// </summary>
     /// <remarks>UTILTS SG8 SEQ Z37</remarks>
-    [JsonProperty(Required = Required.Default, Order = 7, PropertyName = "rechenschrittId")]
+    [JsonProperty(Order = 7, PropertyName = "rechenschrittId")]
     [JsonPropertyName("rechenschrittId")]
     [ProtoMember(7)]
     [BoKey]
@@ -61,7 +62,7 @@ public class Berechnungsformel : BusinessObject
     /// Verwendungszweck der Werte
     /// </summary>
     /// <remarks>UTILTS SG9 CAV 7111</remarks>
-    [JsonProperty(Required = Required.Default, Order = 8, PropertyName = "verwendungszweck")]
+    [JsonProperty(Order = 8, PropertyName = "verwendungszweck")]
     [JsonPropertyName("verwendungszweck")]
     public Verwendungszweck? Verwendungszweck { get; set; }
 
@@ -69,7 +70,7 @@ public class Berechnungsformel : BusinessObject
     /// Eine Berechnungsformel enthält, falls sie notwendig ist <see cref="BerechnungsformelNotwendigkeit.BERECHNUNGSFORMEL_NOTWENDIG"/>,
     /// einen oder mehrere Berechnungschritte, die hier rekursiv abgebildet werden.
     /// </summary>
-    [JsonProperty(Required = Required.Default, Order = 9, PropertyName = "rechenschritt")]
+    [JsonProperty(Order = 9, PropertyName = "rechenschritt")]
     [JsonPropertyName("rechenschritt")]
     public Rechenschritt? Rechenschritt { get; set; }
 }

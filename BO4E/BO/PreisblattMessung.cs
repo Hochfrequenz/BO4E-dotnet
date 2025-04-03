@@ -16,7 +16,7 @@ public class PreisblattMessung : Preisblatt
     /// <summary>
     ///     Die Preise gelten für Marktlokationen der angegebenen Bilanzierungsmethode.
     /// </summary>
-    [JsonProperty(Required = Required.Always, Order = 8, PropertyName = "bilanzierungsmethode")]
+    [JsonProperty(Order = 8, PropertyName = "bilanzierungsmethode")]
     [JsonPropertyName("bilanzierungsmethode")]
     //[ProtoMember(8)]
     public Bilanzierungsmethode Bilanzierungsmethode { get; set; }
@@ -24,7 +24,7 @@ public class PreisblattMessung : Preisblatt
     /// <summary>
     ///     Die Preise gelten für Messlokationen in der angegebenen Netzebene.
     /// </summary>
-    [JsonProperty(Required = Required.Always, Order = 9, PropertyName = "messebene")]
+    [JsonProperty(Order = 9, PropertyName = "messebene")]
     [JsonPropertyName("messebene")]
     //[ProtoMember(9)]
     public Netzebene Messebene { get; set; }
@@ -32,7 +32,7 @@ public class PreisblattMessung : Preisblatt
     /// <summary>
     ///     Im Preis sind die hier angegebenen Dienstleistungen enthalten. Z.B. Jährliche Ablesung.
     /// </summary>
-    [JsonProperty(Required = Required.Default, Order = 10, PropertyName = "inklusiveDienstleistung")]
+    [JsonProperty(Order = 10, PropertyName = "inklusiveDienstleistung")]
     [JsonPropertyName("inklusiveDienstleistung")]
     //[ProtoMember(10)]
     public List<Dienstleistungstyp>? InklusiveDienstleistung { get; set; }
@@ -40,7 +40,7 @@ public class PreisblattMessung : Preisblatt
     /// <summary>
     ///     Der Preis betrifft das hier angegebene Geräte, z.B. einen Drehstromzähler.
     /// </summary>
-    [JsonProperty(Required = Required.Always, Order = 11, PropertyName = "basisgeraet")]
+    [JsonProperty(Order = 11, PropertyName = "basisgeraet")]
     [JsonPropertyName("basisgeraet")]
     //[ProtoMember(11)]
     public Geraeteeigenschaften Basisgeraet { get; set; }
@@ -48,7 +48,7 @@ public class PreisblattMessung : Preisblatt
     /// <summary>
     ///     Im Preis sind die hier angegebenen Geräte mit enthalten, z.B. ein Wandler.
     /// </summary>
-    [JsonProperty(Required = Required.Default, Order = 12, PropertyName = "inklusiveGeraete")]
+    [JsonProperty(Order = 12, PropertyName = "inklusiveGeraete")]
     [JsonPropertyName("inklusiveGeraete")]
     //[ProtoMember(12)]
     public List<Geraeteeigenschaften>? InklusiveGeraete { get; set; }
@@ -56,7 +56,7 @@ public class PreisblattMessung : Preisblatt
     /// <summary>
     ///     Der Netzbetreiber oder Messstellenbetreiber, der die Preise veröffentlicht hat.
     /// </summary>
-    [JsonProperty(Required = Required.Always, Order = 13, PropertyName = "herausgeber")]
+    [JsonProperty(Order = 13, PropertyName = "herausgeber")]
     [JsonPropertyName("herausgeber")]
     //[ProtoMember(13)]
     public Marktteilnehmer Herausgeber { get; set; }
