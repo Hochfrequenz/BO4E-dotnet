@@ -22,7 +22,7 @@ namespace BO4E.BO;
 public class Geschaeftspartner : BusinessObject
 {
     /// <summary>Die Anrede für den GePa, Z.B. Herr. <seealso cref="Anrede" /></summary>
-    [JsonProperty(Required = Required.Default, Order = 6, PropertyName = "anrede")]
+    [JsonProperty(Order = 6, PropertyName = "anrede")]
     [JsonPropertyName("anrede")]
     [JsonPropertyOrder(6)]
     [ProtoMember(4)]
@@ -33,7 +33,7 @@ public class Geschaeftspartner : BusinessObject
     ///     title of name
     /// </summary>
     /// <example>Dr.</example>
-    [JsonProperty(Required = Required.Default, Order = 7, PropertyName = "title")]
+    [JsonProperty(Order = 7, PropertyName = "title")]
     [JsonPropertyName("title")]
     [JsonPropertyOrder(7)]
     [ProtoMember(1001)]
@@ -46,7 +46,7 @@ public class Geschaeftspartner : BusinessObject
     ///     beispielsweise der Nachname dargestellt werden. Beispiele: Yellow Strom GmbH
     ///     oder Hagen
     /// </summary>
-    [JsonProperty(Required = Required.Default, Order = 8, PropertyName = "name1")]
+    [JsonProperty(Order = 8, PropertyName = "name1")]
     [JsonPropertyName("name1")]
     [JsonPropertyOrder(8)]
     [ProtoMember(6)]
@@ -59,7 +59,7 @@ public class Geschaeftspartner : BusinessObject
     ///     bei Privatpersonen beispielsweise der Vorname dargestellt werden. Beispiele:
     ///     Bereich Süd oder Nina
     /// </summary>
-    [JsonProperty(Required = Required.Default, Order = 9, PropertyName = "name2")]
+    [JsonProperty(Order = 9, PropertyName = "name2")]
     [JsonPropertyName("name2")]
     [JsonPropertyOrder(9)]
     [ProtoMember(7)]
@@ -71,7 +71,7 @@ public class Geschaeftspartner : BusinessObject
     ///     bei Privatpersonen Zusätze zum Namen dargestellt werden. Beispiele: und Afrika
     ///     oder Sängerin
     /// </summary>
-    [JsonProperty(Required = Required.Default, Order = 10, PropertyName = "name3")]
+    [JsonProperty(Order = 10, PropertyName = "name3")]
     [JsonPropertyName("name3")]
     [JsonPropertyOrder(10)]
     [ProtoMember(8)]
@@ -82,7 +82,7 @@ public class Geschaeftspartner : BusinessObject
     ///     Kennzeichnung ob es sich um einen Gewerbe/Unternehmen (gewerbeKennzeichnung = true)
     ///     oder eine Privatperson handelt. (gewerbeKennzeichnung = false)
     /// </summary>
-    [JsonProperty(Required = Required.Always, Order = 11, PropertyName = "gewerbekennzeichnung")]
+    [JsonProperty(Order = 11, PropertyName = "gewerbekennzeichnung")]
     [JsonPropertyName("gewerbekennzeichnung")]
     [JsonPropertyOrder(11)]
     [ProtoMember(9)]
@@ -90,16 +90,15 @@ public class Geschaeftspartner : BusinessObject
     public bool Gewerbekennzeichnung { get; set; }
 
     /// <summary>Handelsregisternummer des Geschäftspartners</summary>
-    [JsonProperty(Required = Required.Default, Order = 12, PropertyName = "hrnummer")]
+    [JsonProperty(Order = 12, PropertyName = "hrnummer")]
     [JsonPropertyOrder(12)]
     [JsonPropertyName("hrnummer")]
     [ProtoMember(10)]
     [DataCategory(DataCategory.LEGAL)]
     public string? Hrnummer { get; set; }
 
-
     /// <summary> Amtsgericht bzw Handelsregistergericht, das die Handelsregisternummer herausgegeben hat</summary>
-    [JsonProperty(Required = Required.Default, Order = 13, PropertyName = "amtsgericht")]
+    [JsonProperty(Order = 13, PropertyName = "amtsgericht")]
     [JsonPropertyOrder(13)]
     [JsonPropertyName("amtsgericht")]
     [ProtoMember(11)]
@@ -107,7 +106,7 @@ public class Geschaeftspartner : BusinessObject
     public string? Amtsgericht { get; set; }
 
     /// <summary>Bevorzugter Kontaktweg des Geschäftspartners.</summary>
-    [JsonProperty(Required = Required.Default, Order = 14, PropertyName = "kontaktweg")]
+    [JsonProperty(Order = 14, PropertyName = "kontaktweg")]
     [JsonPropertyOrder(14)]
     [JsonPropertyName("kontaktweg")]
     [ProtoMember(12)]
@@ -115,7 +114,7 @@ public class Geschaeftspartner : BusinessObject
 
     /// <summary>Die Umsatzsteuer-ID des Geschäftspartners. Beispiel: DE 813281825</summary>
     /// <remarks>VA Umsatzsteuernummer</remarks>
-    [JsonProperty(Required = Required.Default, Order = 15, PropertyName = "umsatzsteuerId")]
+    [JsonProperty(Order = 15, PropertyName = "umsatzsteuerId")]
     [JsonPropertyOrder(15)]
     [JsonPropertyName("umsatzsteuerId")]
     [ProtoMember(13)]
@@ -123,7 +122,7 @@ public class Geschaeftspartner : BusinessObject
     public string? UmsatzsteuerId { get; set; }
 
     /// <summary>* Die Gläubiger-ID welche im Zahlungsverkehr verwendet wird- Z.B. DE 47116789</summary>
-    [JsonProperty(Required = Required.Default, Order = 16, PropertyName = "glaeubigerId")]
+    [JsonProperty(Order = 16, PropertyName = "glaeubigerId")]
     [JsonPropertyOrder(16)]
     [JsonPropertyName("glaeubigerId")]
     [ProtoMember(14)]
@@ -131,7 +130,7 @@ public class Geschaeftspartner : BusinessObject
     public string? GlaeubigerId { get; set; }
 
     /// <summary>E-Mail-Adresse des Ansprechpartners. Z.B. info@mp-energie.de</summary>
-    [JsonProperty(Required = Required.Default, Order = 17, PropertyName = "eMailAdresse")]
+    [JsonProperty(Order = 17, PropertyName = "eMailAdresse")]
     [JsonPropertyOrder(17)]
     [JsonPropertyName("eMailAdresse")]
     [ProtoMember(15)]
@@ -139,7 +138,7 @@ public class Geschaeftspartner : BusinessObject
     public string? EMailAdresse { get; set; }
 
     /// <summary>Internetseite des Marktpartners. Beispiel: www.mp-energie.de</summary>
-    [JsonProperty(Required = Required.Default, Order = 18, PropertyName = "website")]
+    [JsonProperty(Order = 18, PropertyName = "website")]
     [JsonPropertyName("website")]
     [JsonPropertyOrder(18)]
     [ProtoMember(16)]
@@ -147,8 +146,7 @@ public class Geschaeftspartner : BusinessObject
     public string? Website { get; set; }
 
     /// <summary>Rolle, die der Geschäftspartner hat (z.B. Interessent, Kunde).</summary>
-    [JsonProperty(Required = Required.Default, Order = 19,
-        PropertyName = "geschaeftspartnerrolle")] // ToDo: it's actually required but I need it to work quickly
+    [JsonProperty(Order = 19, PropertyName = "geschaeftspartnerrolle")] // ToDo: it's actually required but I need it to work quickly
     [JsonPropertyName("geschaeftspartnerrolle")]
     [JsonPropertyOrder(19)]
     [FieldName("role", Language.EN)]
@@ -158,7 +156,7 @@ public class Geschaeftspartner : BusinessObject
     /// <summary>
     ///     Adresse des Geschäftspartners, an der sich der Hauptsitz befindet. Details <seealso cref="Adresse" />
     /// </summary>
-    [JsonProperty(Required = Required.Default, Order = 20, PropertyName = "partneradresse")]
+    [JsonProperty(Order = 20, PropertyName = "partneradresse")]
     [JsonPropertyName("partneradresse")]
     [ProtoMember(18)]
     [JsonPropertyOrder(20)]
@@ -168,7 +166,7 @@ public class Geschaeftspartner : BusinessObject
     /// <summary>
     /// Grundlage zur Verringerung der Umlagen nach EnFG
     /// </summary>
-    [JsonProperty(PropertyName = "grundlageZurVerringerungDerUmlagenNachEnfg", Required = Required.Default, Order = 21)]
+    [JsonProperty(PropertyName = "grundlageZurVerringerungDerUmlagenNachEnfg", Order = 21)]
     [JsonPropertyName("grundlageZurVerringerungDerUmlagenNachEnfg")]
     [JsonPropertyOrder(21)]
     [NonOfficial(NonOfficialCategory.CUSTOMER_REQUIREMENTS)]
@@ -176,17 +174,17 @@ public class Geschaeftspartner : BusinessObject
     public GrundlageZurVerringerungDerUmlagenNachEnfg? GrundlageZurVerringerungDerUmlagenNachEnfg { get; set; }
 
     /// <summary>
-    /// Grund der Privilegierung nach EnFG
+    /// Gründe der Privilegierung nach EnFG
     /// </summary>
-    [JsonProperty(PropertyName = "grundDerPrivilegierungNachEnFG", Required = Required.Default, Order = 22)]
-    [JsonPropertyName("grundDerPrivilegierungNachEnFG")]
+    [JsonProperty(PropertyName = "gruendeDerPrivilegierungNachEnFG", Order = 22)]
+    [JsonPropertyName("gruendeDerPrivilegierungNachEnFG")]
     [JsonPropertyOrder(22)]
     [NonOfficial(NonOfficialCategory.CUSTOMER_REQUIREMENTS)]
     [ProtoMember(20)]
-    public GrundDerPrivilegierungNachEnFG? GrundDerPrivilegierungNachEnFG { get; set; }
+    public List<GrundDerPrivilegierungNachEnFG>? GruendeDerPrivilegierungNachEnFG { get; set; }
 
     /// <summary>Bankverbindung</summary>
-    [JsonProperty(Required = Required.Default, Order = 23, PropertyName = "bankverbindung")]
+    [JsonProperty(Order = 23, PropertyName = "bankverbindung")]
     [JsonPropertyName("bankverbindung")]
     [JsonPropertyOrder(23)]
     [ProtoMember(21)]
@@ -196,7 +194,7 @@ public class Geschaeftspartner : BusinessObject
 
     /// <summary>Die Steuernummer-ID des Geschäftspartners. Beispiel: 30120345678</summary>
     /// <remarks>FC Steuernummer</remarks>
-    [JsonProperty(Required = Required.Default, Order = 24, PropertyName = "steuernummer")]
+    [JsonProperty(Order = 24, PropertyName = "steuernummer")]
     [JsonPropertyOrder(24)]
     [JsonPropertyName("steuernummer")]
     [ProtoMember(22)]
@@ -204,7 +202,7 @@ public class Geschaeftspartner : BusinessObject
     public string? Steuernummer { get; set; }
 
     /// <summary>Die Erreichbarkeit eines Unternehmens an Werktagen.</summary>
-    [JsonProperty(Required = Required.Default, Order = 25, PropertyName = "erreichbarkeit")]
+    [JsonProperty(Order = 25, PropertyName = "erreichbarkeit")]
     [JsonPropertyOrder(25)]
     [JsonPropertyName("erreichbarkeit")]
     [ProtoMember(23)]

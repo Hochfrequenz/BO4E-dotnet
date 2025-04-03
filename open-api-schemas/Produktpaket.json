@@ -1,0 +1,315 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "title": "Produktpaket",
+  "definitions": {
+    "Produktkonfiguration": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/COM"
+        },
+        {
+          "type": "object",
+          "additionalProperties": {},
+          "properties": {
+            "code": {
+              "x-nullable": true,
+              "oneOf": [
+                {
+                  "$ref": "#/definitions/Produktcode"
+                }
+              ]
+            },
+            "eigenschaft": {
+              "x-nullable": true,
+              "oneOf": [
+                {
+                  "$ref": "#/definitions/Produktcode"
+                }
+              ]
+            },
+            "zusatzeigenschaft": {
+              "type": "string",
+              "x-nullable": true
+            }
+          }
+        }
+      ]
+    },
+    "Produktcode": {
+      "type": "integer",
+      "description": "",
+      "x-enumNames": [
+        "BILANZKREIS",
+        "TRANCHENGROESSE",
+        "PROZENTUALE_AUFTEILUNG",
+        "AUFTEILUNGSFAKTOR",
+        "MESSTECHNISCHE_EINORDNUNG",
+        "INTELLIGENTES_MESSSYSTEM",
+        "KME_MME",
+        "KEINE_MESSUNG",
+        "VERBRAUCHSART",
+        "KRAFT_LICHT",
+        "WAERME_KAELTE",
+        "EMOBILITAET",
+        "STRASSENBELEUCHTUNG",
+        "STEUERUNG_WAERMEABGABE",
+        "WAERMENUTZUNG",
+        "SPEICHERHEIZUNG",
+        "WAERMEPUMPE",
+        "DIREKTHEIZUNG",
+        "WAERMEPUMPE_WAERME_KAELTE",
+        "WAERMEPUMPE_KAELTE",
+        "WAERMEPUMPE_WAERME",
+        "ART_EMOBILITAET",
+        "WALLBOX",
+        "LADESAEULE",
+        "LADEPARK",
+        "STEUERBARE_RESSOURCE",
+        "STEUERBARE_RESSOURCE_VORHANDEN",
+        "EIGENSCHAFT_MARKTLOKATION",
+        "KUNDENANLAGE",
+        "KEINE_KUNDENANLAGE",
+        "NETZENTGELTE_NETZORIENTIERTE_STEUERUNG",
+        "PAUSCHALE_REDUZIERUNG_MODUL_1",
+        "PROZENTUALE_REDUZIERUNG_AP_MODUL_2",
+        "ANREIZMODUL_3",
+        "NETZENTGELTE_PREISSYSTEM",
+        "JAHRESLEISTUNG",
+        "MONATSLEISTUNG",
+        "GRUNDPREIS_ARBEITSPREIS",
+        "TAGESLEISTUNG",
+        "KONZESSIONSABGABE",
+        "TARIFKUNDE",
+        "SONDERVERTRAGSKUNDE",
+        "SCHWACHLAST_KA",
+        "BEFREIUNG",
+        "NETZNUTZUNGSVERTRAG",
+        "DIREKTER_VERTRAG",
+        "VERTRAG_MIT_LIEFERANT",
+        "ZAHLER_NETZNUTZUNG",
+        "ZAHLER_KUNDE",
+        "ZAHLER_LIEFERANT",
+        "EMPFAENGER_VERGUETUNG",
+        "EMPFAENGER_KUNDE",
+        "EMPFAENGER_LIEFERANT",
+        "PROGNOSEGRUNDLAGE",
+        "PROFILE",
+        "WERTE",
+        "JAHRESVERBRAUCHSPROGNOSE",
+        "VERAEUSSERUNGSFORM",
+        "AUSFALLVERGUETUNG",
+        "MARKTPRAEMIE",
+        "KWKG",
+        "SONSTIGE_DIREKTVERMARKTUNG",
+        "RUHENDE_MARKTLOKATION",
+        "BILDUNG",
+        "INTEGRATION"
+      ],
+      "enum": [
+        0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19,
+        20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37,
+        38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55,
+        56, 57, 58, 59, 60, 61, 62, 63, 64
+      ]
+    },
+    "COM": {
+      "type": "object",
+      "x-abstract": true,
+      "additionalProperties": {},
+      "properties": {
+        "guidSerialized": {
+          "type": "string"
+        },
+        "timestamp": {
+          "type": "string",
+          "format": "date-time",
+          "x-nullable": true
+        },
+        "guid": {
+          "type": "string",
+          "format": "guid",
+          "x-nullable": true
+        }
+      }
+    },
+    "BusinessObject": {
+      "type": "object",
+      "x-abstract": true,
+      "additionalProperties": {},
+      "properties": {
+        "boTyp": {
+          "type": "string",
+          "x-nullable": true
+        },
+        "versionStruktur": {
+          "type": "string",
+          "x-nullable": true
+        },
+        "guidSerialized": {
+          "type": "string"
+        },
+        "timestamp": {
+          "type": "string",
+          "format": "date-time",
+          "x-nullable": true
+        },
+        "externeReferenzen": {
+          "type": "array",
+          "x-nullable": true,
+          "items": {
+            "$ref": "#/definitions/ExterneReferenz"
+          }
+        },
+        "guid": {
+          "type": "string",
+          "format": "guid",
+          "x-nullable": true
+        },
+        "gueltigkeitszeitraum": {
+          "x-nullable": true,
+          "oneOf": [
+            {
+              "$ref": "#/definitions/Zeitraum"
+            }
+          ]
+        },
+        "qualitaet": {
+          "x-nullable": true,
+          "oneOf": [
+            {
+              "$ref": "#/definitions/Qualitaet"
+            }
+          ]
+        }
+      }
+    },
+    "ExterneReferenz": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/COM"
+        },
+        {
+          "type": "object",
+          "additionalProperties": {},
+          "properties": {
+            "exRefName": {
+              "type": "string",
+              "x-nullable": true
+            },
+            "exRefWert": {
+              "type": "string",
+              "x-nullable": true
+            }
+          }
+        }
+      ]
+    },
+    "Zeitraum": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/COM"
+        },
+        {
+          "type": "object",
+          "additionalProperties": {},
+          "properties": {
+            "einheit": {
+              "x-nullable": true,
+              "oneOf": [
+                {
+                  "$ref": "#/definitions/Zeiteinheit"
+                }
+              ]
+            },
+            "dauer": {
+              "type": "number",
+              "format": "decimal",
+              "x-nullable": true
+            },
+            "startdatum": {
+              "type": "string",
+              "format": "date-time",
+              "x-nullable": true
+            },
+            "enddatum": {
+              "type": "string",
+              "format": "date-time",
+              "x-nullable": true
+            },
+            "startzeitpunkt": {
+              "type": "string",
+              "format": "date-time",
+              "x-nullable": true
+            },
+            "endzeitpunkt": {
+              "type": "string",
+              "format": "date-time",
+              "x-nullable": true
+            }
+          }
+        }
+      ]
+    },
+    "Zeiteinheit": {
+      "type": "integer",
+      "description": "",
+      "x-enumNames": [
+        "SEKUNDE",
+        "MINUTE",
+        "STUNDE",
+        "VIERTEL_STUNDE",
+        "TAG",
+        "WOCHE",
+        "MONAT",
+        "QUARTAL",
+        "HALBJAHR",
+        "JAHR"
+      ],
+      "enum": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+    },
+    "Qualitaet": {
+      "type": "integer",
+      "description": "",
+      "x-enumNames": [
+        "VOLLSTAENDIG",
+        "INFORMATIV",
+        "IM_SYSTEM_VORHANDEN",
+        "ERWARTET",
+        "VORLAEUFIG",
+        "UNVOLLSTAENDIG"
+      ],
+      "enum": [0, 1, 2, 3, 4, 5]
+    }
+  },
+  "allOf": [
+    {
+      "$ref": "#/definitions/BusinessObject"
+    },
+    {
+      "type": "object",
+      "additionalProperties": {},
+      "properties": {
+        "paketId": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "konfigurationen": {
+          "type": "array",
+          "x-nullable": true,
+          "items": {
+            "$ref": "#/definitions/Produktkonfiguration"
+          }
+        },
+        "prioritaet": {
+          "type": "integer",
+          "format": "int32",
+          "x-nullable": true
+        },
+        "mussVollstaendigSein": {
+          "type": "boolean",
+          "x-nullable": true
+        }
+      }
+    }
+  ]
+}

@@ -4,7 +4,7 @@
   "definitions": {
     "BerichtStatus": {
       "type": "integer",
-      "description": "Status des Statusbericht",
+      "description": "",
       "x-enumNames": ["ERFOLGREICH", "FEHLER"],
       "enum": [0, 1]
     },
@@ -15,11 +15,10 @@
         },
         {
           "type": "object",
-          "description": "Die Komponente wird dazu verwendet Fehler innerhalb eines Statusberichts abzubilden\n            ",
           "additionalProperties": {},
           "properties": {
             "typ": {
-              "description": "Gibt den Typ des Fehlers an.",
+              "x-nullable": true,
               "oneOf": [
                 {
                   "$ref": "#/definitions/FehlerTyp"
@@ -28,7 +27,6 @@
             },
             "fehlerDetails": {
               "type": "array",
-              "description": "Fehlerdetails\n            ",
               "x-nullable": true,
               "items": {
                 "$ref": "#/definitions/FehlerDetail"
@@ -40,7 +38,7 @@
     },
     "FehlerTyp": {
       "type": "integer",
-      "description": "Typen von Fehlern",
+      "description": "",
       "x-enumNames": ["SYNTAX", "VERARBEITUNG"],
       "enum": [0, 1]
     },
@@ -51,11 +49,10 @@
         },
         {
           "type": "object",
-          "description": "Die Komponente wird dazu verwendet Fehler innerhalb eines Statusberichtes mit mehr Details zu versorgen\n            ",
           "additionalProperties": {},
           "properties": {
             "code": {
-              "description": "Gibt den Code des Fehlers an.",
+              "x-nullable": true,
               "oneOf": [
                 {
                   "$ref": "#/definitions/FehlerCode"
@@ -64,11 +61,9 @@
             },
             "beschreibung": {
               "type": "string",
-              "description": "Eine Beschreibung des Fehlers.",
               "x-nullable": true
             },
             "ursache": {
-              "description": "Herkunft / Ursache des Fehlers\n            ",
               "x-nullable": true,
               "oneOf": [
                 {
@@ -82,7 +77,7 @@
     },
     "FehlerCode": {
       "type": "integer",
-      "description": "verschiedene Fehler-Codes, vor allem für Statusberichte",
+      "description": "",
       "x-enumNames": [
         "ID_UNBEKANNT",
         "ABSENDER_NICHT_ZUGEORDNET",
@@ -134,37 +129,30 @@
         },
         {
           "type": "object",
-          "description": "Die Komponente wird dazu verwendet die Ursache bzw. Herkunft von Fehlern genauer zu spezifizieren\n            ",
           "additionalProperties": {},
           "properties": {
             "dokument": {
               "type": "string",
-              "description": "Das Dokument (im EDIFACT das UNB-Segment).",
               "x-nullable": true
             },
             "nachricht": {
               "type": "string",
-              "description": "Die Nachricht (im EDIFACT das UNH-Segment).",
               "x-nullable": true
             },
             "transaktion": {
               "type": "string",
-              "description": "Die Transaktion (im EDIFACT das BGM/IDE-Segment).",
               "x-nullable": true
             },
             "gruppe": {
               "type": "string",
-              "description": "Die Gruppe (im EDIFACT Segment-Gruppe).",
               "x-nullable": true
             },
             "segment": {
               "type": "string",
-              "description": "Das Segment (im EDIFACT Segment).",
               "x-nullable": true
             },
             "beschreibung": {
               "type": "string",
-              "description": "Zusätzliche Fehlerbeschreibung.",
               "x-nullable": true
             }
           }
@@ -173,7 +161,6 @@
     },
     "COM": {
       "type": "object",
-      "description": "The COM class is the abstract class from which all BO4E.COM classes are derived.\n            ",
       "x-abstract": true,
       "additionalProperties": {},
       "properties": {
@@ -182,13 +169,11 @@
         },
         "timestamp": {
           "type": "string",
-          "description": "Store the latest timestamp (update from the database)\n            ",
           "format": "date-time",
           "x-nullable": true
         },
         "guid": {
           "type": "string",
-          "description": "allows adding a GUID to COM objects for tracking across systems\n            ",
           "format": "guid",
           "x-nullable": true
         }
@@ -196,35 +181,27 @@
     },
     "BusinessObject": {
       "type": "object",
-      "description": "General abstract class for Business Objects for Energy (BO4E)\n            ",
       "x-abstract": true,
       "additionalProperties": {},
       "properties": {
         "boTyp": {
           "type": "string",
-          "description": "obligatory type of the business object in UPPER CASE\n            ",
-          "x-nullable": true,
-          "x-example": "'MESSLOKATION',\n'MARKTLOKATION'\n            "
+          "x-nullable": true
         },
         "versionStruktur": {
           "type": "string",
-          "description": "obligatory version of the BO4E definition. Currently hard coded to 1\n            ",
-          "x-nullable": true,
-          "x-example": 1
+          "x-nullable": true
         },
         "guidSerialized": {
-          "type": "string",
-          "description": "protobuf serilization requires the Guid as string.\n            "
+          "type": "string"
         },
         "timestamp": {
           "type": "string",
-          "description": "Store the latest database update, is Datetime, because postgres doesn't handle datetimeoffset in a generated column\ngracefully\n            ",
           "format": "date-time",
           "x-nullable": true
         },
         "externeReferenzen": {
           "type": "array",
-          "description": "Hier können IDs anderer Systeme hinterlegt werden (z.B. eine SAP-GP-Nummer) (Details siehe\nExterneReferenz)\n            ",
           "x-nullable": true,
           "items": {
             "$ref": "#/definitions/ExterneReferenz"
@@ -232,9 +209,24 @@
         },
         "guid": {
           "type": "string",
-          "description": "allows adding a GUID to Business Objects for tracking across systems\n            ",
           "format": "guid",
           "x-nullable": true
+        },
+        "gueltigkeitszeitraum": {
+          "x-nullable": true,
+          "oneOf": [
+            {
+              "$ref": "#/definitions/Zeitraum"
+            }
+          ]
+        },
+        "qualitaet": {
+          "x-nullable": true,
+          "oneOf": [
+            {
+              "$ref": "#/definitions/Qualitaet"
+            }
+          ]
         }
       }
     },
@@ -245,22 +237,95 @@
         },
         {
           "type": "object",
-          "description": "Viele Datenobjekte weisen in unterschiedlichen Systemen eine eindeutige ID (Kundennummer, GP-Nummer etc.) auf.\nBeim Austausch von Datenobjekten zwischen verschiedenen Systemen ist es daher hilfreich, sich die eindeutigen IDs\nder anzubindenden Systeme zu merken.\nDiese Komponente ermöglicht es, sich die SAP GP-Nummer zu merken, um diese bei SAP-Aufrufen als Parameter mitgeben\nzu können.\n            ",
           "additionalProperties": {},
           "properties": {
             "exRefName": {
               "type": "string",
-              "description": "Bezeichnung der externen Referenz (z.B. \"hochfrequenz integration services\")\n            ",
               "x-nullable": true
             },
             "exRefWert": {
               "type": "string",
-              "description": "Wert der externen Referenz (z.B. \"123456\"; \"4711\")\n            ",
               "x-nullable": true
             }
           }
         }
       ]
+    },
+    "Zeitraum": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/COM"
+        },
+        {
+          "type": "object",
+          "additionalProperties": {},
+          "properties": {
+            "einheit": {
+              "x-nullable": true,
+              "oneOf": [
+                {
+                  "$ref": "#/definitions/Zeiteinheit"
+                }
+              ]
+            },
+            "dauer": {
+              "type": "number",
+              "format": "decimal",
+              "x-nullable": true
+            },
+            "startdatum": {
+              "type": "string",
+              "format": "date-time",
+              "x-nullable": true
+            },
+            "enddatum": {
+              "type": "string",
+              "format": "date-time",
+              "x-nullable": true
+            },
+            "startzeitpunkt": {
+              "type": "string",
+              "format": "date-time",
+              "x-nullable": true
+            },
+            "endzeitpunkt": {
+              "type": "string",
+              "format": "date-time",
+              "x-nullable": true
+            }
+          }
+        }
+      ]
+    },
+    "Zeiteinheit": {
+      "type": "integer",
+      "description": "",
+      "x-enumNames": [
+        "SEKUNDE",
+        "MINUTE",
+        "STUNDE",
+        "VIERTEL_STUNDE",
+        "TAG",
+        "WOCHE",
+        "MONAT",
+        "QUARTAL",
+        "HALBJAHR",
+        "JAHR"
+      ],
+      "enum": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+    },
+    "Qualitaet": {
+      "type": "integer",
+      "description": "",
+      "x-enumNames": [
+        "VOLLSTAENDIG",
+        "INFORMATIV",
+        "IM_SYSTEM_VORHANDEN",
+        "ERWARTET",
+        "VORLAEUFIG",
+        "UNVOLLSTAENDIG"
+      ],
+      "enum": [0, 1, 2, 3, 4, 5]
     }
   },
   "allOf": [
@@ -269,11 +334,10 @@
     },
     {
       "type": "object",
-      "description": "Mit diesem BO können Statusberichte (vor allem CONTRL/APERAK-Nachrichten) ausgetauscht werden\n            ",
       "additionalProperties": {},
       "properties": {
         "status": {
-          "description": "Status des Berichtes (Fehlerhaft, Erfolgreich)\n            ",
+          "x-nullable": true,
           "oneOf": [
             {
               "$ref": "#/definitions/BerichtStatus"
@@ -282,17 +346,13 @@
         },
         "pruefgegenstand": {
           "type": "string",
-          "description": "Das geprüfte Dokument, z.B. die Referenz auf die EDIFACT-Nachricht die geprüft / beanstandet wurde\n            ",
           "x-nullable": true
         },
         "datumPruefung": {
           "type": "string",
-          "description": "Pruefdatum (wann wurde der Pruefgegenstand geprüft)\n            ",
-          "format": "date-time",
-          "x-example": "2017-12-24\n            "
+          "format": "date-time"
         },
         "fehler": {
-          "description": "Liste der Fehler\n            ",
           "x-nullable": true,
           "oneOf": [
             {
