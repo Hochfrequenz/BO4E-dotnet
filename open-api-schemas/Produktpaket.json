@@ -1,8 +1,8 @@
 {
   "$schema": "http://json-schema.org/draft-04/schema#",
-  "title": "Region",
+  "title": "Produktpaket",
   "definitions": {
-    "Regionskriterium": {
+    "Produktkonfiguration": {
       "allOf": [
         {
           "$ref": "#/definitions/COM"
@@ -11,88 +11,105 @@
           "type": "object",
           "additionalProperties": {},
           "properties": {
-            "gueltigkeitstyp": {
-              "$ref": "#/definitions/Gueltigkeitstyp"
-            },
-            "sparte": {
+            "code": {
               "x-nullable": true,
               "oneOf": [
                 {
-                  "$ref": "#/definitions/Sparte"
+                  "$ref": "#/definitions/Produktcode"
                 }
               ]
             },
-            "mengenoperator": {
-              "$ref": "#/definitions/Mengenoperator"
+            "eigenschaft": {
+              "x-nullable": true,
+              "oneOf": [
+                {
+                  "$ref": "#/definitions/Produktcode"
+                }
+              ]
             },
-            "regionskriteriumtyp": {
-              "$ref": "#/definitions/Regionskriteriumtyp"
-            },
-            "wert": {
-              "type": "string"
+            "zusatzeigenschaft": {
+              "type": "string",
+              "x-nullable": true
             }
           }
         }
       ]
     },
-    "Gueltigkeitstyp": {
-      "type": "integer",
-      "description": "",
-      "x-enumNames": ["NICHT_IN"],
-      "enum": [0]
-    },
-    "Sparte": {
+    "Produktcode": {
       "type": "integer",
       "description": "",
       "x-enumNames": [
-        "STROM",
-        "GAS",
-        "FERNWAERME",
-        "NAHWAERME",
-        "WASSER",
-        "ABWASSER"
-      ],
-      "enum": [0, 1, 2, 3, 4, 5]
-    },
-    "Mengenoperator": {
-      "type": "integer",
-      "description": "",
-      "x-enumNames": ["KLEINER_ALS", "GROESSER_ALS", "GLEICH"],
-      "enum": [0, 1, 2]
-    },
-    "Regionskriteriumtyp": {
-      "type": "integer",
-      "description": "",
-      "x-enumNames": [
-        "BUNDESLANDKENNZIFFER",
-        "BUNDESLAND_NAME",
-        "MARKTGEBIET_NUMMER",
-        "MARKTGEBIET_NAME",
-        "REGELGEBIET_NUMMER",
-        "REGELGEBIET_NAME",
-        "NETZBETREIBER_NUMMER",
-        "NETZBETREIBER_NAME",
-        "BILANZIERUNGS_GEBIET_NUMMER",
-        "MSB_NUMMER",
-        "MSB_NAME",
-        "VERSORGER_NUMMER",
-        "VERSORGER_NAME",
-        "GRUNDVERSORGER_NUMMER",
-        "GRUNDVERSORGER_NAME",
-        "KREIS_NAME",
-        "KREISKENNZIFFER",
-        "GEMEINDE_NAME",
-        "GEMEINDEKENNZIFFER",
-        "POSTLEITZAHL",
-        "ORT",
-        "EINWOHNERZAHL_GEMEINDE",
-        "EINWOHNERZAHL_ORT",
-        "KM_UMKREIS",
-        "BUNDESWEIT"
+        "BILANZKREIS",
+        "TRANCHENGROESSE",
+        "PROZENTUALE_AUFTEILUNG",
+        "AUFTEILUNGSFAKTOR",
+        "MESSTECHNISCHE_EINORDNUNG",
+        "INTELLIGENTES_MESSSYSTEM",
+        "KME_MME",
+        "KEINE_MESSUNG",
+        "VERBRAUCHSART",
+        "KRAFT_LICHT",
+        "WAERME_KAELTE",
+        "EMOBILITAET",
+        "STRASSENBELEUCHTUNG",
+        "STEUERUNG_WAERMEABGABE",
+        "WAERMENUTZUNG",
+        "SPEICHERHEIZUNG",
+        "WAERMEPUMPE",
+        "DIREKTHEIZUNG",
+        "WAERMEPUMPE_WAERME_KAELTE",
+        "WAERMEPUMPE_KAELTE",
+        "WAERMEPUMPE_WAERME",
+        "ART_EMOBILITAET",
+        "WALLBOX",
+        "LADESAEULE",
+        "LADEPARK",
+        "STEUERBARE_RESSOURCE",
+        "STEUERBARE_RESSOURCE_VORHANDEN",
+        "EIGENSCHAFT_MARKTLOKATION",
+        "KUNDENANLAGE",
+        "KEINE_KUNDENANLAGE",
+        "NETZENTGELTE_NETZORIENTIERTE_STEUERUNG",
+        "PAUSCHALE_REDUZIERUNG_MODUL_1",
+        "PROZENTUALE_REDUZIERUNG_AP_MODUL_2",
+        "ANREIZMODUL_3",
+        "NETZENTGELTE_PREISSYSTEM",
+        "JAHRESLEISTUNG",
+        "MONATSLEISTUNG",
+        "GRUNDPREIS_ARBEITSPREIS",
+        "TAGESLEISTUNG",
+        "KONZESSIONSABGABE",
+        "TARIFKUNDE",
+        "SONDERVERTRAGSKUNDE",
+        "SCHWACHLAST_KA",
+        "BEFREIUNG",
+        "NETZNUTZUNGSVERTRAG",
+        "DIREKTER_VERTRAG",
+        "VERTRAG_MIT_LIEFERANT",
+        "ZAHLER_NETZNUTZUNG",
+        "ZAHLER_KUNDE",
+        "ZAHLER_LIEFERANT",
+        "EMPFAENGER_VERGUETUNG",
+        "EMPFAENGER_KUNDE",
+        "EMPFAENGER_LIEFERANT",
+        "PROGNOSEGRUNDLAGE",
+        "PROFILE",
+        "WERTE",
+        "JAHRESVERBRAUCHSPROGNOSE",
+        "VERAEUSSERUNGSFORM",
+        "AUSFALLVERGUETUNG",
+        "MARKTPRAEMIE",
+        "KWKG",
+        "SONSTIGE_DIREKTVERMARKTUNG",
+        "RUHENDE_MARKTLOKATION",
+        "BILDUNG",
+        "INTEGRATION"
       ],
       "enum": [
         0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19,
-        20, 21, 22, 23, 24
+        20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37,
+        38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55,
+        56, 57, 58, 59, 60, 61, 62, 63, 64
       ]
     },
     "COM": {
@@ -272,21 +289,25 @@
       "type": "object",
       "additionalProperties": {},
       "properties": {
-        "bezeichnung": {
-          "type": "string"
+        "paketId": {
+          "type": "integer",
+          "format": "int32"
         },
-        "positivListe": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/Regionskriterium"
-          }
-        },
-        "negativListe": {
+        "konfigurationen": {
           "type": "array",
           "x-nullable": true,
           "items": {
-            "$ref": "#/definitions/Regionskriterium"
+            "$ref": "#/definitions/Produktkonfiguration"
           }
+        },
+        "prioritaet": {
+          "type": "integer",
+          "format": "int32",
+          "x-nullable": true
+        },
+        "mussVollstaendigSein": {
+          "type": "boolean",
+          "x-nullable": true
         }
       }
     }

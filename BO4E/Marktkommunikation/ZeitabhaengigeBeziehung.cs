@@ -21,12 +21,18 @@ public class ZeitabhaengigeBeziehung
     public DateTimeOffset GueltigVon { get; set; }
 
     /// <summary>
-    /// exklusives Ende
+    /// Offene Zeitscheiben werden mit <code>GueltigBis = null</code> modelliert, _nicht_ mit <code>DateTimeOffset.MaxValue</code>.
+    /// The maximum end date is NULL, this means DateTimeOffset.MaxValue is converted to null by the setter.
     /// </summary>
     [JsonPropertyName("gueltigBis")]
     [JsonPropertyOrder(2)]
     [Newtonsoft.Json.JsonProperty(PropertyName = "gueltigBis", Order = 2)]
-    public DateTimeOffset GueltigBis { get; set; }
+    public DateTimeOffset? GueltigBis
+    {
+        get => _gueltigBis;
+        set => _gueltigBis = (value == DateTimeOffset.MaxValue) ? null : value;
+    }
+    private DateTimeOffset? _gueltigBis;
 
     /// <summary>
     /// e.g.
@@ -45,4 +51,13 @@ public class ZeitabhaengigeBeziehung
     [JsonPropertyOrder(4)]
     [Newtonsoft.Json.JsonProperty(PropertyName = "childId", Order = 4)]
     public string? ChildId { get; set; }
+
+    /// <summary>
+    /// Mit dem Feld <see cref="AdditionalSpecification"/> können zusätzliche Spezifikationen angegeben werden.
+    /// </summary>
+    /// <example>"bo4e://marktteilnehmer/9991234567890"</example>
+    [JsonPropertyName("additionalSpecification")]
+    [JsonPropertyOrder(5)]
+    [Newtonsoft.Json.JsonProperty(PropertyName = "additionalSpecification", Order = 5)]
+    public string? AdditionalSpecification { get; set; }
 }

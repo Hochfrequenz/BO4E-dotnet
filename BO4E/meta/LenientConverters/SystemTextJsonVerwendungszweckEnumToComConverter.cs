@@ -54,6 +54,18 @@ public class SystemTextVerwendungszweckEnumToComConverter
             return result;
         }
 
+        if (reader.TokenType == JsonTokenType.Number)
+        {
+            // DEV-84242
+            var intValue = reader.GetInt32();
+            var enumValue = (ENUM.Verwendungszweck)intValue;
+            var result = new Verwendungszweck
+            {
+                Marktrolle = ENUM.Marktrolle.LF,
+                Zweck = new List<ENUM.Verwendungszweck>() { enumValue },
+            };
+            return result;
+        }
         // Delegate to the default deserialization behavior for Verwendungszweck
         return JsonSerializer.Deserialize<Verwendungszweck>(
             ref reader,

@@ -1,7 +1,6 @@
 #nullable enable
 using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
 using System.Text.Json.Serialization;
 using BO4E.COM;
 using BO4E.ENUM;
@@ -116,7 +115,6 @@ public class Zaehler : BusinessObject
     /// </summary>
     [JsonProperty(Order = 18, PropertyName = "zaehlwerke")]
     [JsonPropertyName("zaehlwerke")]
-    [MinLength(1)]
     [ProtoMember(12)]
     [JsonPropertyOrder(18)]
     public List<Zaehlwerk>? Zaehlwerke { get; set; }
