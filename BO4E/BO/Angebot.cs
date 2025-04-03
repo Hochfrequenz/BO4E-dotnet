@@ -72,7 +72,7 @@ public class Angebot : BusinessObject
     [JsonPropertyName("sparte")]
     [JsonPropertyOrder(14)]
     [ProtoMember(7)]
-    public Sparte? Sparte { get; set; }
+    public Sparte Sparte { get; set; }
 
     [System.Text.Json.Serialization.JsonIgnore]
     [Newtonsoft.Json.JsonIgnore]
