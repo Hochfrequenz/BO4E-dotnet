@@ -14,7 +14,7 @@ public class KriteriumsWert : COM
     /// <summary>
     ///     Hier steht, für welches Kriterium der Wert gilt. Z.B. Postleitzahlen.
     /// </summary>
-    [JsonProperty(PropertyName = "kriterium", Required = Required.Always)]
+    [JsonProperty(PropertyName = "kriterium")]
     [JsonPropertyName("kriterium")]
     [ProtoMember(3)]
     public Tarifregionskriterium Kriterium { get; set; }
@@ -22,7 +22,7 @@ public class KriteriumsWert : COM
     /// <summary>
     ///     Ein Wert, passend zum Kriterium. Z.B. eine Postleitzahl.
     /// </summary>
-    [JsonProperty(PropertyName = "wert", Required = Required.Always)]
+    [JsonProperty(PropertyName = "wert")]
     [JsonPropertyName("wert")]
     [ProtoMember(4)]
     public string Wert { get; set; }

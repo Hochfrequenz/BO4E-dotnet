@@ -17,10 +17,15 @@ public class AutoNumberToStringConverter : JsonConverter<string>
     {
         return typeof(string) == typeToConvert;
     }
+
     /// <summary>
     /// <inheritdoc cref="JsonConverter{T}.Read(ref Utf8JsonReader, Type, JsonSerializerOptions)"/>
     /// </summary>
-    public override string Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+    public override string Read(
+        ref Utf8JsonReader reader,
+        Type typeToConvert,
+        JsonSerializerOptions options
+    )
     {
         if (reader.TokenType == JsonTokenType.Number)
         {
@@ -43,6 +48,7 @@ public class AutoNumberToStringConverter : JsonConverter<string>
         using var document = JsonDocument.ParseValue(ref reader);
         return document.RootElement.Clone().ToString();
     }
+
     /// <summary>
     /// <inheritdoc cref="JsonConverter{T}.Write(Utf8JsonWriter, T, JsonSerializerOptions)"/>
     /// </summary>

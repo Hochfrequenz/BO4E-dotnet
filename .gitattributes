@@ -3,3 +3,4 @@
 *.yml eol=lf
 *.json eol=lf
 *.cs eol=crlf
+*.csproj eol=crlf

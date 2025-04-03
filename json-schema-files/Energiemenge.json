@@ -17,7 +17,8 @@
         "guid": {
           "type": ["string", "null"]
         }
-      }
+      },
+      "required": ["exRefName", "exRefWert"]
     },
     "StatusZusatzInformation": {
       "type": ["object", "null"],
@@ -116,7 +117,8 @@
             "ANFORDERUNG_IN_DIE_VERGANGENHEIT_ZUM_ANGEFORDERTEN_ZEITPUNKT_LIEGT_KEIN_WERT_VOR"
           ]
         }
-      }
+      },
+      "required": ["art", "status"]
     },
     "Verbrauch": {
       "type": ["object", "null"],
@@ -188,7 +190,7 @@
           }
         },
         "obiskennzahl": {
-          "type": "string"
+          "type": ["string", "null"]
         },
         "wert": {
           "type": "number"
@@ -224,7 +226,75 @@
           "format": "date-time"
         }
       },
-      "required": ["obiskennzahl", "wert", "einheit"]
+      "required": [
+        "startdatum",
+        "enddatum",
+        "type",
+        "tarifstufe",
+        "wertermittlungsverfahren",
+        "messwertstatus",
+        "statuszusatzinformationen",
+        "obiskennzahl",
+        "wert",
+        "einheit",
+        "nutzungszeitpunkt",
+        "ausfuehrungszeitpunkt"
+      ]
+    },
+    "Zeitraum": {
+      "type": ["object", "null"],
+      "properties": {
+        "einheit": {
+          "type": ["string", "null"],
+          "enum": [
+            null,
+            "SEKUNDE",
+            "MINUTE",
+            "STUNDE",
+            "VIERTEL_STUNDE",
+            "TAG",
+            "WOCHE",
+            "MONAT",
+            "QUARTAL",
+            "HALBJAHR",
+            "JAHR"
+          ]
+        },
+        "dauer": {
+          "type": ["number", "null"]
+        },
+        "startdatum": {
+          "type": ["string", "null"],
+          "format": "date-time"
+        },
+        "enddatum": {
+          "type": ["string", "null"],
+          "format": "date-time"
+        },
+        "startzeitpunkt": {
+          "type": ["string", "null"],
+          "format": "date-time"
+        },
+        "endzeitpunkt": {
+          "type": ["string", "null"],
+          "format": "date-time"
+        },
+        "timestamp": {
+          "type": ["string", "null"],
+          "format": "date-time"
+        },
+        "guid": {
+          "type": ["string", "null"]
+        }
+      },
+      "required": [
+        "einheit",
+        "dauer",
+        "startdatum",
+        "enddatum",
+        "startzeitpunkt",
+        "endzeitpunkt"
+      ]
     }
   },
   "type": "object",
@@ -249,7 +319,7 @@
       "type": ["string", "null"]
     },
     "lokationsId": {
-      "type": "string",
+      "type": ["string", "null"],
       "default": "|null|"
     },
     "lokationsTyp": {
@@ -262,7 +332,29 @@
         "$ref": "#/definitions/Verbrauch"
       },
       "minItems": 1
+    },
+    "gueltigkeitszeitraum": {
+      "$ref": "#/definitions/Zeitraum"
+    },
+    "qualitaet": {
+      "type": ["string", "null"],
+      "enum": [
+        null,
+        "VOLLSTAENDIG",
+        "INFORMATIV",
+        "IM_SYSTEM_VORHANDEN",
+        "ERWARTET",
+        "VORLAEUFIG",
+        "UNVOLLSTAENDIG"
+      ]
     }
   },
-  "required": ["lokationsId", "lokationsTyp", "energieverbrauch"]
+  "required": [
+    "boTyp",
+    "versionStruktur",
+    "externeReferenzen",
+    "lokationsId",
+    "lokationsTyp",
+    "energieverbrauch"
+  ]
 }
