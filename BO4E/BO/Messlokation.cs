@@ -308,9 +308,9 @@ public class Messlokation : BusinessObject
     ///     Test if the <see cref="MesslokationsId" /> is valid.
     /// </summary>
     /// <returns>if messlokationsId matches the expected format</returns>
-    public bool HasValidId()
+    public bool? HasValidId()
     {
-        return ValidateId(MesslokationsId);
+        return MesslokationsId is null ? null : ValidateId(MesslokationsId);
     }
 
     /// <summary>
@@ -321,6 +321,6 @@ public class Messlokation : BusinessObject
     /// <returns>true if the marktlokation is valid</returns>
     public bool IsValid(bool checkId = true)
     {
-        return base.IsValid() && (!checkId || HasValidId());
+        return base.IsValid() && (!checkId || HasValidId()==true || HasValidId()==null);
     }
 }
