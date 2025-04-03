@@ -203,208 +203,6 @@
       },
       "required": ["wert", "waehrung"]
     },
-    "Betrag-1": {
-      "type": "object",
-      "properties": {
-        "wert": {
-          "type": "number"
-        },
-        "waehrung": {
-          "type": "string",
-          "enum": [
-            "AFN",
-            "ALL",
-            "AMD",
-            "ANG",
-            "AOA",
-            "ARS",
-            "AUD",
-            "AWG",
-            "AZN",
-            "BAM",
-            "BBD",
-            "BDT",
-            "BGN",
-            "BHD",
-            "BIF",
-            "BMD",
-            "BND",
-            "BOB",
-            "BOV",
-            "BRL",
-            "BSD",
-            "BTN",
-            "BWP",
-            "BYN",
-            "BYR",
-            "BZD",
-            "CAD",
-            "CDF",
-            "CHE",
-            "CHF",
-            "CHW",
-            "CLF",
-            "CLP",
-            "CNY",
-            "COP",
-            "COU",
-            "CRC",
-            "CUC",
-            "CUP",
-            "CVE",
-            "CZK",
-            "DJF",
-            "DKK",
-            "DOP",
-            "DZD",
-            "EGP",
-            "ERN",
-            "ETB",
-            "EUR",
-            "FJD",
-            "FKP",
-            "GBP",
-            "GEL",
-            "GHS",
-            "GIP",
-            "GMD",
-            "GNF",
-            "GTQ",
-            "GYD",
-            "HKD",
-            "HNL",
-            "HRK",
-            "HTG",
-            "HUF",
-            "IDR",
-            "ILS",
-            "INR",
-            "IQD",
-            "IRR",
-            "ISK",
-            "JMD",
-            "JOD",
-            "JPY",
-            "KES",
-            "KGS",
-            "KHR",
-            "KMF",
-            "KPW",
-            "KRW",
-            "KWD",
-            "KYD",
-            "KZT",
-            "LAK",
-            "LBP",
-            "LKR",
-            "LRD",
-            "LSL",
-            "LTL",
-            "LYD",
-            "MAD",
-            "MDL",
-            "MGA",
-            "MKD",
-            "MMK",
-            "MNT",
-            "MOP",
-            "MRO",
-            "MUR",
-            "MVR",
-            "MWK",
-            "MXN",
-            "MXV",
-            "MYR",
-            "MZN",
-            "NAD",
-            "NGN",
-            "NIO",
-            "NOK",
-            "NPR",
-            "NZD",
-            "OMR",
-            "PAB",
-            "PEN",
-            "PGK",
-            "PHP",
-            "PKR",
-            "PLN",
-            "PYG",
-            "QAR",
-            "RON",
-            "RSD",
-            "RUB",
-            "RUR",
-            "RWF",
-            "SAR",
-            "SBD",
-            "SCR",
-            "SDG",
-            "SEK",
-            "SGD",
-            "SHP",
-            "SLL",
-            "SOS",
-            "SRD",
-            "SSP",
-            "STD",
-            "SVC",
-            "SYP",
-            "SZL",
-            "THB",
-            "TJS",
-            "TMT",
-            "TND",
-            "TOP",
-            "TRY",
-            "TTD",
-            "TWD",
-            "TZS",
-            "UAH",
-            "UGX",
-            "USD",
-            "USN",
-            "USS",
-            "UYI",
-            "UYU",
-            "UZS",
-            "VEF",
-            "VND",
-            "VUV",
-            "WST",
-            "XAF",
-            "XAG",
-            "XAU",
-            "XBA",
-            "XBB",
-            "XBC",
-            "XBD",
-            "XCD",
-            "XDR",
-            "XOF",
-            "XPD",
-            "XPF",
-            "XPT",
-            "XSU",
-            "XTS",
-            "XUA",
-            "XXX",
-            "YER",
-            "ZAR",
-            "ZMW",
-            "ZWL"
-          ]
-        },
-        "timestamp": {
-          "type": ["string", "null"],
-          "format": "date-time"
-        },
-        "guid": {
-          "type": ["string", "null"]
-        }
-      },
-      "required": ["wert", "waehrung"]
-    },
     "ExterneReferenz": {
       "type": ["object", "null"],
       "properties": {
@@ -421,13 +219,14 @@
         "guid": {
           "type": ["string", "null"]
         }
-      }
+      },
+      "required": ["exRefName", "exRefWert"]
     },
     "Kostenblock": {
       "type": ["object", "null"],
       "properties": {
         "kostenblockbezeichnung": {
-          "type": "string"
+          "type": ["string", "null"]
         },
         "summeKostenblock": {
           "$ref": "#/definitions/Betrag"
@@ -446,13 +245,17 @@
           "type": ["string", "null"]
         }
       },
-      "required": ["kostenblockbezeichnung"]
+      "required": [
+        "kostenblockbezeichnung",
+        "summeKostenblock",
+        "kostenpositionen"
+      ]
     },
     "Kostenposition": {
       "type": ["object", "null"],
       "properties": {
         "positionstitel": {
-          "type": "string"
+          "type": ["string", "null"]
         },
         "von": {
           "type": ["string", "null"],
@@ -463,7 +266,7 @@
           "format": "date-time"
         },
         "artikelbezeichnung": {
-          "type": "string"
+          "type": ["string", "null"]
         },
         "artikeldetail": {
           "type": ["string", "null"]
@@ -478,7 +281,7 @@
           "$ref": "#/definitions/Preis"
         },
         "betragKostenposition": {
-          "$ref": "#/definitions/Betrag-1"
+          "$ref": "#/definitions/Betrag"
         },
         "timestamp": {
           "type": ["string", "null"],
@@ -490,7 +293,12 @@
       },
       "required": [
         "positionstitel",
+        "von",
+        "bis",
         "artikelbezeichnung",
+        "artikeldetail",
+        "menge",
+        "zeitmenge",
         "einzelpreis",
         "betragKostenposition"
       ]
@@ -532,13 +340,13 @@
           ]
         }
       },
-      "required": ["wert"]
+      "required": ["wert", "einheit"]
     },
     "Preis": {
-      "type": "object",
+      "type": ["object", "null"],
       "properties": {
         "wert": {
-          "type": "number"
+          "type": ["number", "null"]
         },
         "einheit": {
           "type": ["string", "null"],
@@ -579,10 +387,10 @@
           "type": ["string", "null"]
         }
       },
-      "required": ["wert"]
+      "required": ["wert", "einheit", "bezugswert", "status"]
     },
     "Zeitraum": {
-      "type": "object",
+      "type": ["object", "null"],
       "properties": {
         "einheit": {
           "type": ["string", "null"],
@@ -627,7 +435,14 @@
           "type": ["string", "null"]
         }
       },
-      "required": ["startzeitpunkt", "endzeitpunkt"]
+      "required": [
+        "einheit",
+        "dauer",
+        "startdatum",
+        "enddatum",
+        "startzeitpunkt",
+        "endzeitpunkt"
+      ]
     }
   },
   "type": "object",
@@ -665,7 +480,7 @@
       }
     },
     "kostenbloecke": {
-      "type": "array",
+      "type": ["array", "null"],
       "items": {
         "$ref": "#/definitions/Kostenblock"
       },
@@ -676,7 +491,31 @@
       "items": {
         "$ref": "#/definitions/Kostenposition"
       }
+    },
+    "gueltigkeitszeitraum": {
+      "$ref": "#/definitions/Zeitraum"
+    },
+    "qualitaet": {
+      "type": ["string", "null"],
+      "enum": [
+        null,
+        "VOLLSTAENDIG",
+        "INFORMATIV",
+        "IM_SYSTEM_VORHANDEN",
+        "ERWARTET",
+        "VORLAEUFIG",
+        "UNVOLLSTAENDIG"
+      ]
     }
   },
-  "required": ["kostenklasse", "gueltigkeit", "kostenbloecke"]
+  "required": [
+    "boTyp",
+    "versionStruktur",
+    "kostenklasse",
+    "externeReferenzen",
+    "gueltigkeit",
+    "summeKosten",
+    "kostenbloecke",
+    "kostenpositionen"
+  ]
 }

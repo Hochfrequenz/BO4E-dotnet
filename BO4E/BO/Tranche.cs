@@ -20,7 +20,7 @@ public class Tranche : BusinessObject
     ///     verbraucht, oder erzeugt wird (Like MarktlokationsId <see cref="Marktlokation"/>)
     /// </summary>
     [DefaultValue("|null|")]
-    [JsonProperty(Required = Required.Always, Order = 10, PropertyName = "trancheId")]
+    [JsonProperty(Order = 10, PropertyName = "trancheId")]
     [JsonPropertyName("trancheId")]
     [JsonPropertyOrder(10)]
     [DataCategory(DataCategory.POD)]
@@ -29,7 +29,7 @@ public class Tranche : BusinessObject
     public string TrancheId { get; set; }
 
     /// <summary>Sparte der Tranche, z.B. Gas oder Strom.</summary>
-    [JsonProperty(Required = Required.Always, Order = 11, PropertyName = "sparte")]
+    [JsonProperty(Order = 11, PropertyName = "sparte")]
     [JsonPropertyOrder(11)]
     [JsonPropertyName("sparte")]
     [ProtoMember(5)]
@@ -38,7 +38,7 @@ public class Tranche : BusinessObject
     /// <summary>
     /// Prozentualer Anteil der Tranche an der erzeugenden Marktlokation in Prozent mit 2 Nachkommastellen
     /// </summary>
-    [JsonProperty(Required = Required.Default, Order = 12, PropertyName = "aufteilungsmenge")]
+    [JsonProperty(Order = 12, PropertyName = "aufteilungsmenge")]
     [JsonPropertyOrder(12)]
     [JsonPropertyName("aufteilungsmenge")]
     [ProtoMember(6)]
@@ -47,7 +47,7 @@ public class Tranche : BusinessObject
     /// <summary>
     ///     Die OBIS-Kennzahl für die Tranche, die festlegt, welche auf die gemessene Größe mit dem Stand gemeldet wird.
     /// </summary>
-    [JsonProperty(Required = Required.Default, Order = 13, PropertyName = "obisKennzahl")]
+    [JsonProperty(Order = 13, PropertyName = "obisKennzahl")]
     [JsonPropertyOrder(13)]
     [JsonPropertyName("obisKennzahl")]
     [ProtoMember(7)]
@@ -56,9 +56,18 @@ public class Tranche : BusinessObject
     /// <summary>
     ///     Zugeordnete Marktpartner
     /// </summary>
-    [JsonProperty(Required = Required.Default, Order = 14, PropertyName = "marktrollen")]
+    [JsonProperty(Order = 14, PropertyName = "marktrollen")]
     [JsonPropertyName("marktrollen")]
     [JsonPropertyOrder(14)]
     [ProtoMember(8)]
     public List<MarktpartnerDetails>? Marktrollen { get; set; }
+
+    /// <summary>
+    /// Liefert zusätzliche Spezifizierungen zu dem prozentualen Anteil der Tranche an der erzeugenden Marktlokation
+    /// </summary>
+    [JsonProperty(Order = 15, PropertyName = "spezifizierungAufteilungsmenge")]
+    [JsonPropertyOrder(15)]
+    [JsonPropertyName("spezifizierungAufteilungsmenge")]
+    [ProtoMember(9)]
+    public string? SpezifizierungAufteilungsmenge { get; set; }
 }

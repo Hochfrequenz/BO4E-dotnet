@@ -1,0 +1,138 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "definitions": {
+    "ExterneReferenz": {
+      "type": ["object", "null"],
+      "properties": {
+        "exRefName": {
+          "type": ["string", "null"]
+        },
+        "exRefWert": {
+          "type": ["string", "null"]
+        },
+        "timestamp": {
+          "type": ["string", "null"],
+          "format": "date-time"
+        },
+        "guid": {
+          "type": ["string", "null"]
+        }
+      },
+      "required": ["exRefName", "exRefWert"]
+    },
+    "Zeitraum": {
+      "type": ["object", "null"],
+      "properties": {
+        "einheit": {
+          "type": ["string", "null"],
+          "enum": [
+            null,
+            "SEKUNDE",
+            "MINUTE",
+            "STUNDE",
+            "VIERTEL_STUNDE",
+            "TAG",
+            "WOCHE",
+            "MONAT",
+            "QUARTAL",
+            "HALBJAHR",
+            "JAHR"
+          ]
+        },
+        "dauer": {
+          "type": ["number", "null"]
+        },
+        "startdatum": {
+          "type": ["string", "null"],
+          "format": "date-time"
+        },
+        "enddatum": {
+          "type": ["string", "null"],
+          "format": "date-time"
+        },
+        "startzeitpunkt": {
+          "type": ["string", "null"],
+          "format": "date-time"
+        },
+        "endzeitpunkt": {
+          "type": ["string", "null"],
+          "format": "date-time"
+        },
+        "timestamp": {
+          "type": ["string", "null"],
+          "format": "date-time"
+        },
+        "guid": {
+          "type": ["string", "null"]
+        }
+      },
+      "required": [
+        "einheit",
+        "dauer",
+        "startdatum",
+        "enddatum",
+        "startzeitpunkt",
+        "endzeitpunkt"
+      ]
+    }
+  },
+  "type": "object",
+  "properties": {
+    "boTyp": {
+      "type": ["string", "null"]
+    },
+    "versionStruktur": {
+      "type": ["string", "null"]
+    },
+    "timestamp": {
+      "type": ["string", "null"],
+      "format": "date-time"
+    },
+    "externeReferenzen": {
+      "type": ["array", "null"],
+      "items": {
+        "$ref": "#/definitions/ExterneReferenz"
+      }
+    },
+    "guid": {
+      "type": ["string", "null"]
+    },
+    "ausgerollt": {
+      "type": ["boolean", "null"]
+    },
+    "aenderungszeitpunkt": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "leistungskurvendefinitionscode": {
+      "type": ["string", "null"]
+    },
+    "haeufigkeit": {
+      "type": ["string", "null"],
+      "enum": [null, "EINMALIG", "JAEHRLICH"]
+    },
+    "uebermittelbarkeit": {
+      "type": ["string", "null"],
+      "enum": [null, "ELEKTRONISCH", "NICHT_ELEKTRONISCH"]
+    },
+    "obererSchwellwert": {
+      "type": ["string", "null"]
+    },
+    "gueltigkeitszeitraum": {
+      "$ref": "#/definitions/Zeitraum"
+    },
+    "qualitaet": {
+      "type": ["string", "null"],
+      "enum": [
+        null,
+        "VOLLSTAENDIG",
+        "INFORMATIV",
+        "IM_SYSTEM_VORHANDEN",
+        "ERWARTET",
+        "VORLAEUFIG",
+        "UNVOLLSTAENDIG"
+      ]
+    }
+  },
+  "required": ["boTyp", "versionStruktur", "externeReferenzen"]
+}
