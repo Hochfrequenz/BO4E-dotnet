@@ -1,16 +1,14 @@
 #nullable enable
-using BO4E.meta;
-
-using Newtonsoft.Json;
-
-using ProtoBuf;
 using System.ComponentModel;
 using System.Text.Json.Serialization;
 using System.Text.RegularExpressions;
+using BO4E.meta;
+using Newtonsoft.Json;
+using ProtoBuf;
 
 namespace BO4E.BO;
 
-///     Objekt zur Aufnahme der Informationen zu einem MabisZaehlpunkt.    
+///     Objekt zur Aufnahme der Informationen zu einem MabisZaehlpunkt.
 [ProtoContract]
 public class MabisZaehlpunkt : BusinessObject
 {
@@ -23,14 +21,13 @@ public class MabisZaehlpunkt : BusinessObject
     ///     z.B. DE 47108151234567
     /// </summary>
     [DefaultValue("|null|")]
-    [JsonProperty(PropertyName = "Id", Required = Required.Default, Order = 10)]
+    [JsonProperty(PropertyName = "Id", Order = 10)]
     [JsonPropertyName("Id")]
     [JsonPropertyOrder(10)]
     [DataCategory(DataCategory.POD)]
     [BoKey]
     [ProtoMember(4)]
     public string? Id { get; set; }
-
 
     /// <summary>
     ///     Test if a <paramref name="id" /> is a valid messlokations ID.

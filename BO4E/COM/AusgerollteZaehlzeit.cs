@@ -1,11 +1,8 @@
-using BO4E.meta;
-
-using Newtonsoft.Json;
-
-using ProtoBuf;
-
 using System;
 using System.Text.Json.Serialization;
+using BO4E.meta;
+using Newtonsoft.Json;
+using ProtoBuf;
 
 namespace BO4E.COM;
 
@@ -25,11 +22,12 @@ public class AusgerollteZaehlzeit : COM
         get => Aenderungszeitpunkt.UtcDateTime;
         set => Aenderungszeitpunkt = DateTime.SpecifyKind(value, DateTimeKind.Utc);
     }
+
     /// <summary>
     /// Angabe eines Zeitpunktes, zu dem der Wechsel auf ein neues aktives Zählzeitregister erfolgt.
     /// </summary>
     /// <remarks>UTILTS SG5 DTM+Z34</remarks>
-    [JsonProperty(Required = Required.Always, Order = 4, PropertyName = "aenderungszeitpunkt")]
+    [JsonProperty(Order = 4, PropertyName = "aenderungszeitpunkt")]
     [JsonPropertyName("aenderungszeitpunkt")]
     [JsonPropertyOrder(4)]
     [ProtoIgnore]
@@ -38,7 +36,7 @@ public class AusgerollteZaehlzeit : COM
     /// <summary>
     ///     Zählzeitregister
     /// </summary>
-    [JsonProperty(PropertyName = "register", Order = 5, Required = Required.Default)]
+    [JsonProperty(PropertyName = "register", Order = 5)]
     [JsonPropertyName("register")]
     [JsonPropertyOrder(5)]
     [ProtoMember(5)]

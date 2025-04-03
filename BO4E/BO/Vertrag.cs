@@ -1,19 +1,17 @@
-using BO4E.COM;
-using BO4E.ENUM;
-using BO4E.meta;
-using BO4E.meta.LenientConverters;
-
-using Newtonsoft.Json;
-
-using ProtoBuf;
-
+#nullable enable
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Runtime.Serialization;
 using System.Text.Json;
 using System.Text.Json.Serialization;
-
+using BO4E.COM;
+using BO4E.ENUM;
+using BO4E.meta;
+using BO4E.meta.LenientConverters;
+using Newtonsoft.Json;
+using ProtoBuf;
 using JsonSerializer = System.Text.Json.JsonSerializer;
 
 namespace BO4E.BO;
@@ -30,19 +28,19 @@ public class Vertrag : BusinessObject
     ///     static serializer options for Vertragsconverter
     /// </summary>
     public static JsonSerializerOptions? VertragsSerializerOptions;
+
     /// <summary>
     /// Semaphore to protect access to the serializer
     /// </summary>
     public static readonly System.Threading.SemaphoreSlim SerializerSemaphore = new(1);
-    static Vertrag()
-    {
-    }
+
+    static Vertrag() { }
 
     /// <summary>
     ///     Eine im Verwendungskontext eindeutige Nummer für den Vertrag
     /// </summary>
     [BoKey]
-    [JsonProperty(Required = Required.Default, Order = 10, PropertyName = "vertragsnummer")]
+    [JsonProperty(Order = 10, PropertyName = "vertragsnummer")]
     [JsonPropertyName("vertragsnummer")]
     [ProtoMember(4)]
     [JsonPropertyOrder(10)]
@@ -51,7 +49,7 @@ public class Vertrag : BusinessObject
     /// <summary>
     ///     Beschreibung zum Vertrag
     /// </summary>
-    [JsonProperty(Required = Required.Default, Order = 11, PropertyName = "beschreibung")]
+    [JsonProperty(Order = 11, PropertyName = "beschreibung")]
     [JsonPropertyName("beschreibung")]
     [ProtoMember(5)]
     [JsonPropertyOrder(11)]
@@ -61,7 +59,7 @@ public class Vertrag : BusinessObject
     ///     Hier ist festgelegt, um welche Art von Vertrag es sich handelt. Z.B. Netznutzungvertrag. Details siehe ENUM
     ///     Vertragsart
     /// </summary>
-    [JsonProperty(Required = Required.Default, Order = 12, PropertyName = "vertragsart")]
+    [JsonProperty(Order = 12, PropertyName = "vertragsart")]
     [JsonPropertyName("vertragsart")]
     [ProtoMember(6)]
     [JsonPropertyOrder(12)]
@@ -70,7 +68,7 @@ public class Vertrag : BusinessObject
     /// <summary>
     ///     Gibt den Status des Vertrags an. Siehe ENUM Vertragsstatus
     /// </summary>
-    [JsonProperty(Required = Required.Default, Order = 13, PropertyName = "vertragstatus")]
+    [JsonProperty(Order = 13, PropertyName = "vertragstatus")]
     [JsonPropertyName("vertragstatus")]
     [JsonPropertyOrder(13)]
     [ProtoMember(7)]
@@ -79,7 +77,7 @@ public class Vertrag : BusinessObject
     /// <summary>
     ///     Unterscheidungsmöglichkeiten für die Sparte. Siehe ENUM Sparte
     /// </summary>
-    [JsonProperty(Required = Required.Always, Order = 14, PropertyName = "sparte")]
+    [JsonProperty(Order = 14, PropertyName = "sparte")]
     [JsonPropertyName("sparte")]
     [JsonPropertyOrder(14)]
     [ProtoMember(8)]
@@ -94,16 +92,16 @@ public class Vertrag : BusinessObject
         get => Vertragsbeginn.UtcDateTime;
         set => Vertragsbeginn = DateTime.SpecifyKind(value, DateTimeKind.Utc);
     }
+
     /// <summary>
     ///     Gibt an, wann der Vertrag beginnt.
     /// </summary>
-    [JsonProperty(Required = Required.Always, Order = 15, PropertyName = "vertragsbeginn")]
+    [JsonProperty(Order = 15, PropertyName = "vertragsbeginn")]
     [JsonPropertyName("vertragsbeginn")]
     [ProtoIgnore]
     [JsonPropertyOrder(15)]
     [Newtonsoft.Json.JsonConverter(typeof(LenientDateTimeConverter))]
     public DateTimeOffset Vertragsbeginn { get; set; }
-
 
     [System.Text.Json.Serialization.JsonIgnore]
     [Newtonsoft.Json.JsonIgnore]
@@ -114,10 +112,11 @@ public class Vertrag : BusinessObject
         get => Vertragsende?.UtcDateTime ?? DateTime.MinValue;
         set => Vertragsende = DateTime.SpecifyKind(value, DateTimeKind.Utc);
     }
+
     /// <summary>
     ///     Gibt an, wann der Vertrag (voraussichtlich) endet oder beendet wurde.
     /// </summary>
-    [JsonProperty(Required = Required.Default, Order = 16, PropertyName = "vertragsende")]
+    [JsonProperty(Order = 16, PropertyName = "vertragsende")]
     [JsonPropertyName("vertragsende")]
     [JsonPropertyOrder(16)]
     [ProtoIgnore]
@@ -128,8 +127,7 @@ public class Vertrag : BusinessObject
     ///     Der "erstgenannte" Vertragspartner. In der Regel der Aussteller des Vertrags. Beispiel: "Vertrag zwischen
     ///     Vertagspartner 1 ..." Siehe BO Geschaeftspartner
     /// </summary>
-    [JsonProperty(Required = Required.Default, Order = 17,
-        PropertyName = "vertragspartner1")] // TODO: should be required but our CDS is missing the association
+    [JsonProperty(Order = 17, PropertyName = "vertragspartner1")] // TODO: should be required but our CDS is missing the association
     [JsonPropertyName("vertragspartner1")]
     [JsonPropertyOrder(17)]
     [ProtoMember(11)]
@@ -139,8 +137,7 @@ public class Vertrag : BusinessObject
     ///     Der "zweitgenannte" Vertragspartner. In der Regel der Empfänger des Vertrags. Beispiel "Vertrag zwischen
     ///     Vertagspartner 1 und Vertragspartner 2". Siehe BO Geschaeftspartner
     /// </summary>
-    [JsonProperty(Required = Required.Default, Order = 18,
-        PropertyName = "vertragspartner2")] // TODO: should be required but our CDS is missing the association
+    [JsonProperty(Order = 18, PropertyName = "vertragspartner2")] // TODO: should be required but our CDS is missing the association
     [JsonPropertyName("vertragspartner2")]
     [JsonPropertyOrder(18)]
     [ProtoMember(12)]
@@ -149,7 +146,7 @@ public class Vertrag : BusinessObject
     /// <summary>
     ///     Unterzeichner des Vertragspartners1. Siehe COM Unterschrift
     /// </summary>
-    [JsonProperty(Required = Required.Default, Order = 19, PropertyName = "unterzeichnervp1")]
+    [JsonProperty(Order = 19, PropertyName = "unterzeichnervp1")]
     [JsonPropertyName("unterzeichnervp1")]
     [ProtoMember(13)]
     [JsonPropertyOrder(19)]
@@ -158,7 +155,7 @@ public class Vertrag : BusinessObject
     /// <summary>
     ///     Unterzeichner des Vertragspartners2. Siehe COM Unterschrift
     /// </summary>
-    [JsonProperty(Required = Required.Default, Order = 20, PropertyName = "unterzeichnervp2")]
+    [JsonProperty(Order = 20, PropertyName = "unterzeichnervp2")]
     [JsonPropertyName("unterzeichnervp2")]
     [ProtoMember(14)]
     [JsonPropertyOrder(20)]
@@ -167,7 +164,7 @@ public class Vertrag : BusinessObject
     /// <summary>
     ///     Festlegungen zu Laufzeiten und Kündigungsfristen. Details siehe COM Vertragskonditionen
     /// </summary>
-    [JsonProperty(Required = Required.Default, Order = 21, PropertyName = "vertragskonditionen")]
+    [JsonProperty(Order = 21, PropertyName = "vertragskonditionen")]
     [JsonPropertyName("vertragskonditionen")]
     [ProtoMember(15)]
     [JsonPropertyOrder(21)]
@@ -177,8 +174,7 @@ public class Vertrag : BusinessObject
     ///     Der Vertragsteil wird dazu verwendet, eine vertragliche Leistung in Bezug zu einer Lokation (Markt- oder
     ///     Messlokation) festzulegen. Details siehe COM Vertragsteil
     /// </summary>
-    [JsonProperty(Required = Required.Default, Order = 22,
-        PropertyName = "vertragsteile")] // TODO: should be required always but our CDS is missing the association
+    [JsonProperty(Order = 22, PropertyName = "vertragsteile")] // TODO: should be required always but our CDS is missing the association
     [JsonPropertyName("vertragsteile")]
     [ProtoMember(16)]
     [JsonPropertyOrder(22)]
@@ -188,7 +184,7 @@ public class Vertrag : BusinessObject
     ///     gemeinderabatt für EDIFACT mapping.
     /// </summary>
     // ToDo: What is the unit? is 1.0 = 100% discount?
-    [JsonProperty(Required = Required.Default, Order = 23, PropertyName = "gemeinderabatt")]
+    [JsonProperty(Order = 23, PropertyName = "gemeinderabatt")]
     [JsonPropertyName("gemeinderabatt")]
     [JsonPropertyOrder(23)]
     [NonOfficial(NonOfficialCategory.CUSTOMER_REQUIREMENTS)]
@@ -198,7 +194,7 @@ public class Vertrag : BusinessObject
     /// <summary>
     ///     korrespondenzpartner für EDIFACT mapping
     /// </summary>
-    [JsonProperty(Required = Required.Default, Order = 24, PropertyName = "korrespondenzpartner")]
+    [JsonProperty(Order = 24, PropertyName = "korrespondenzpartner")]
     [JsonPropertyName("korrespondenzpartner")]
     [NonOfficial(NonOfficialCategory.CUSTOMER_REQUIREMENTS)]
     [ProtoMember(1018)]
@@ -213,17 +209,22 @@ public class Vertrag : BusinessObject
     [OnDeserialized]
     protected void OnDeserialized(StreamingContext context)
     {
-        if ((Vertragsteile == null || Vertragsteile.Count == 0) && UserProperties != null &&
-            UserProperties.ContainsKey("lokationsId"))
+        if (
+            (Vertragsteile == null || Vertragsteile.Count == 0)
+            && UserProperties != null
+            && UserProperties.ContainsKey("lokationsId")
+        )
+        {
             Vertragsteile = new List<Vertragsteil>
             {
                 new Vertragsteil
                 {
                     Vertragsteilbeginn = Vertragsbeginn,
                     Vertragsteilende = Vertragsende,
-                    Lokation = UserProperties["lokationsId"] as string
-                }
+                    Lokation = UserProperties["lokationsId"] as string,
+                },
             };
+        }
     }
 }
 
@@ -238,7 +239,11 @@ public class VertragsConverter : System.Text.Json.Serialization.JsonConverter<Ve
     /// <param name="typeToConvert"></param>
     /// <param name="options"></param>
     /// <returns></returns>
-    public override Vertrag Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+    public override Vertrag Read(
+        ref Utf8JsonReader reader,
+        Type typeToConvert,
+        JsonSerializerOptions options
+    )
     {
         Vertrag.SerializerSemaphore.Wait();
         try
@@ -251,17 +256,27 @@ public class VertragsConverter : System.Text.Json.Serialization.JsonConverter<Ve
         }
 
         var v = JsonSerializer.Deserialize<Vertrag>(ref reader, Vertrag.VertragsSerializerOptions);
-        if ((v.Vertragsteile == null || v.Vertragsteile.Count == 0) && v.UserProperties != null &&
-            v.UserProperties.ContainsKey("lokationsId"))
+        if (v is null)
+        {
+            throw new InvalidDataException("Could not deserialize Vertrag");
+        }
+        if (
+            (v.Vertragsteile == null || v.Vertragsteile.Count == 0)
+            && v.UserProperties != null
+            && v.UserProperties.TryGetValue("lokationsId", out var property)
+        )
+        {
             v.Vertragsteile = new List<Vertragsteil>
             {
                 new()
                 {
                     Vertragsteilbeginn = v.Vertragsbeginn,
                     Vertragsteilende = v.Vertragsende,
-                    Lokation = ((JsonElement) v.UserProperties["lokationsId"]).GetString()
-                }
+                    Lokation = ((JsonElement)property).GetString(),
+                },
             };
+        }
+
         return v;
     }
 
@@ -270,10 +285,17 @@ public class VertragsConverter : System.Text.Json.Serialization.JsonConverter<Ve
         if (Vertrag.VertragsSerializerOptions == null)
         {
             Vertrag.VertragsSerializerOptions = new JsonSerializerOptions(options);
-            while (Vertrag.VertragsSerializerOptions.Converters.Any(s => s.GetType() == typeof(VertragsConverter)))
+            while (
+                Vertrag.VertragsSerializerOptions.Converters.Any(s =>
+                    s.GetType() == typeof(VertragsConverter)
+                )
+            )
             {
                 Vertrag.VertragsSerializerOptions.Converters.Remove(
-                    Vertrag.VertragsSerializerOptions.Converters.First(s => s.GetType() == typeof(VertragsConverter)));
+                    Vertrag.VertragsSerializerOptions.Converters.First(s =>
+                        s.GetType() == typeof(VertragsConverter)
+                    )
+                );
             }
         }
     }

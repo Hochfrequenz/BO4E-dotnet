@@ -4,7 +4,7 @@
   "definitions": {
     "Vertragsart": {
       "type": "integer",
-      "description": "Aufzählung der Vertragsarten\n            ",
+      "description": "",
       "x-enumNames": [
         "ENERGIELIEFERVERTRAG",
         "NETZNUTZUNGSVERTRAG",
@@ -16,7 +16,7 @@
     },
     "Vertragstatus": {
       "type": "integer",
-      "description": "Abbildung einer Statusinformation für Verträge.\n            ",
+      "description": "",
       "x-enumNames": [
         "IN_ARBEIT",
         "UEBERMITTELT",
@@ -32,7 +32,7 @@
     },
     "Sparte": {
       "type": "integer",
-      "description": "Unterscheidungsmöglichkeiten für die Sparte.",
+      "description": "",
       "x-enumNames": [
         "STROM",
         "GAS",
@@ -50,11 +50,9 @@
         },
         {
           "type": "object",
-          "description": "Mit diesem Objekt können Geschäftspartner übertragen werden. Sowohl\nUnternehmen, als auch Privatpersonen können Geschäftspartner sein.\n            ",
           "additionalProperties": {},
           "properties": {
             "anrede": {
-              "description": "Die Anrede für den GePa, Z.B. Herr. ",
               "x-nullable": true,
               "oneOf": [
                 {
@@ -64,44 +62,35 @@
             },
             "title": {
               "type": "string",
-              "description": "title of name\n            ",
               "x-deprecated": true,
               "x-deprecatedMessage": "Please use anrede instead or Ansprechpartner.individuelleAnrede",
-              "x-nullable": true,
-              "x-example": "Dr."
+              "x-nullable": true
             },
             "name1": {
               "type": "string",
-              "description": "Erster Teil des Namens. Hier kann der Firmenname oder bei Privatpersonen\nbeispielsweise der Nachname dargestellt werden. Beispiele: Yellow Strom GmbH\noder Hagen\n            ",
               "x-nullable": true
             },
             "name2": {
               "type": "string",
-              "description": "Zweiter Teil des Namens. Hier kann der eine Erweiterung zum Firmennamen oder\nbei Privatpersonen beispielsweise der Vorname dargestellt werden. Beispiele:\nBereich Süd oder Nina\n            ",
               "x-nullable": true
             },
             "name3": {
               "type": "string",
-              "description": "Dritter Teil des Namens. Hier können weitere Ergänzungen zum Firmennamen oder\nbei Privatpersonen Zusätze zum Namen dargestellt werden. Beispiele: und Afrika\noder Sängerin\n            ",
               "x-nullable": true
             },
             "gewerbekennzeichnung": {
-              "type": "boolean",
-              "description": "Kennzeichnung ob es sich um einen Gewerbe/Unternehmen (gewerbeKennzeichnung = true)\noder eine Privatperson handelt. (gewerbeKennzeichnung = false)\n            "
+              "type": "boolean"
             },
             "hrnummer": {
               "type": "string",
-              "description": "Handelsregisternummer des Geschäftspartners",
               "x-nullable": true
             },
             "amtsgericht": {
               "type": "string",
-              "description": "Amtsgericht bzw Handelsregistergericht, das die Handelsregisternummer herausgegeben hat",
               "x-nullable": true
             },
             "kontaktweg": {
               "type": "array",
-              "description": "Bevorzugter Kontaktweg des Geschäftspartners.",
               "x-nullable": true,
               "items": {
                 "$ref": "#/definitions/Kontaktart"
@@ -109,34 +98,28 @@
             },
             "umsatzsteuerId": {
               "type": "string",
-              "description": "Die Umsatzsteuer-ID des Geschäftspartners. Beispiel: DE 813281825",
               "x-nullable": true
             },
             "glaeubigerId": {
               "type": "string",
-              "description": "* Die Gläubiger-ID welche im Zahlungsverkehr verwendet wird- Z.B. DE 47116789",
               "x-nullable": true
             },
             "eMailAdresse": {
               "type": "string",
-              "description": "E-Mail-Adresse des Ansprechpartners. Z.B. info@mp-energie.de",
               "x-nullable": true
             },
             "website": {
               "type": "string",
-              "description": "Internetseite des Marktpartners. Beispiel: www.mp-energie.de",
               "x-nullable": true
             },
             "geschaeftspartnerrolle": {
               "type": "array",
-              "description": "Rolle, die der Geschäftspartner hat (z.B. Interessent, Kunde).",
               "x-nullable": true,
               "items": {
                 "$ref": "#/definitions/Geschaeftspartnerrolle"
               }
             },
             "partneradresse": {
-              "description": "Adresse des Geschäftspartners, an der sich der Hauptsitz befindet. Details \n            ",
               "x-nullable": true,
               "oneOf": [
                 {
@@ -145,7 +128,6 @@
               ]
             },
             "grundlageZurVerringerungDerUmlagenNachEnfg": {
-              "description": "Grundlage zur Verringerung der Umlagen nach EnFG",
               "x-nullable": true,
               "oneOf": [
                 {
@@ -153,17 +135,14 @@
                 }
               ]
             },
-            "grundDerPrivilegierungNachEnFG": {
-              "description": "Grund der Privilegierung nach EnFG",
+            "gruendeDerPrivilegierungNachEnFG": {
+              "type": "array",
               "x-nullable": true,
-              "oneOf": [
-                {
-                  "$ref": "#/definitions/GrundDerPrivilegierungNachEnFG"
-                }
-              ]
+              "items": {
+                "$ref": "#/definitions/GrundDerPrivilegierungNachEnFG"
+              }
             },
             "bankverbindung": {
-              "description": "Bankverbindung",
               "x-nullable": true,
               "oneOf": [
                 {
@@ -173,11 +152,9 @@
             },
             "steuernummer": {
               "type": "string",
-              "description": "Die Steuernummer-ID des Geschäftspartners. Beispiel: 30120345678",
               "x-nullable": true
             },
             "erreichbarkeit": {
-              "description": "Die Erreichbarkeit eines Unternehmens an Werktagen.",
               "x-nullable": true,
               "oneOf": [
                 {
@@ -191,7 +168,7 @@
     },
     "Anrede": {
       "type": "integer",
-      "description": "Übersicht möglicher Anreden, z.B. eines Geschäftspartners.",
+      "description": "",
       "x-enumNames": [
         "HERR",
         "FRAU",
@@ -208,13 +185,13 @@
     },
     "Kontaktart": {
       "type": "integer",
-      "description": "Art des Kontaktes zwischen Geschäftspartnern.",
+      "description": "",
       "x-enumNames": ["ANSCHREIBEN", "TELEFONAT", "FAX", "E_MAIL", "SMS"],
       "enum": [0, 1, 2, 3, 4]
     },
     "Geschaeftspartnerrolle": {
       "type": "integer",
-      "description": "Diese Rollen kann ein Geschäftspartner einnehmen.",
+      "description": "",
       "x-enumNames": [
         "LIEFERANT",
         "DIENSTLEISTER",
@@ -231,44 +208,35 @@
         },
         {
           "type": "object",
-          "description": "Enthält eine Adresse, die für die meisten Zwecke verwendbar ist.",
           "additionalProperties": {},
           "properties": {
             "postleitzahl": {
-              "type": "string",
-              "description": "Die Postleitzahl. Beispiel: 41836"
+              "type": "string"
             },
             "ort": {
-              "type": "string",
-              "description": "Bezeichnung der Stadt. Beispiel Hückelhoven"
+              "type": "string"
             },
             "strasse": {
               "type": "string",
-              "description": "Bezeichnung der Straße. Beispiel: Weserstraße",
               "x-nullable": true
             },
             "hausnummer": {
               "type": "string",
-              "description": "Hausnummer inkl. Zusatz. Beispiel. 3, 4a etc.",
               "x-nullable": true
             },
             "postfach": {
               "type": "string",
-              "description": "Im Falle einer Postfachadresse das Postfach. Damit werden Straße und\nHausnummer nicht berücksichtigt.Beispiel: Postfach 4711\n            ",
               "x-nullable": true
             },
             "adresszusatz": {
               "type": "string",
-              "description": "Zusatzhinweis zum Auffinden der Adresse, z.B. \"3. Stock linke Wohnung\"",
               "x-nullable": true
             },
             "coErgaenzung": {
               "type": "string",
-              "description": "Im Falle einer c/o-Adresse steht in diesem Attribut die Anrede. Z.B. c/o\nVeronica Hauptmieterin.In diesem Fall enthält die folgende Adresse die Daten\nder in c/o adressierten Person oder Firma.\n            ",
               "x-nullable": true
             },
             "landescode": {
-              "description": "Offizieller ISO-Landescode. Z.B. NL, Details Landescode",
               "x-nullable": true,
               "oneOf": [
                 {
@@ -278,7 +246,6 @@
             },
             "ortsteil": {
               "type": "string",
-              "description": "Ortsteil für EDIFACT mapping\n            ",
               "x-nullable": true
             }
           }
@@ -287,7 +254,7 @@
     },
     "Landescode": {
       "type": "integer",
-      "description": "Der ISO-Landescode.",
+      "description": "",
       "x-enumNames": [
         "AC",
         "AD",
@@ -580,7 +547,6 @@
     },
     "COM": {
       "type": "object",
-      "description": "The COM class is the abstract class from which all BO4E.COM classes are derived.\n            ",
       "x-abstract": true,
       "additionalProperties": {},
       "properties": {
@@ -589,13 +555,11 @@
         },
         "timestamp": {
           "type": "string",
-          "description": "Store the latest timestamp (update from the database)\n            ",
           "format": "date-time",
           "x-nullable": true
         },
         "guid": {
           "type": "string",
-          "description": "allows adding a GUID to COM objects for tracking across systems\n            ",
           "format": "guid",
           "x-nullable": true
         }
@@ -603,7 +567,7 @@
     },
     "GrundlageZurVerringerungDerUmlagenNachEnfg": {
       "type": "integer",
-      "description": "Grundlage zur Verringerung der Umlagen nach EnFG (UTILMD Strom)",
+      "description": "",
       "x-enumNames": [
         "KUNDE_ERFUELLT_VORAUSSETZUNG",
         "KUNDE_ERFUELLT_VORAUSSETZUNG_NICHT",
@@ -613,7 +577,7 @@
     },
     "GrundDerPrivilegierungNachEnFG": {
       "type": "integer",
-      "description": "Grund der Privilegierung nach EnFG (UTILMD Strom)",
+      "description": "",
       "x-enumNames": [
         "STROMSPEICHER_UND_VERLUSTENERGIE",
         "ELEKTRISCH_ANGETRIEBENE_WAERMEPUMPEN",
@@ -634,27 +598,22 @@
         },
         {
           "type": "object",
-          "description": "Enthält eine Bankverbindung",
           "additionalProperties": {},
           "properties": {
             "iban": {
               "type": "string",
-              "description": "IBAN",
               "x-nullable": true
             },
             "kontoinhaber": {
               "type": "string",
-              "description": "Der kontoinhaber",
               "x-nullable": true
             },
             "bankkennung": {
               "type": "string",
-              "description": "Die Bankkennung, BIC",
               "x-nullable": true
             },
             "bankname": {
               "type": "string",
-              "description": "Der Bankname",
               "x-nullable": true
             }
           }
@@ -668,11 +627,9 @@
         },
         {
           "type": "object",
-          "description": "Die Erreichbarkeit eines Unternehmens an Werktagen.",
           "additionalProperties": {},
           "properties": {
             "montagErreichbarkeit": {
-              "description": "Erreichbarkeit am Montag",
               "x-nullable": true,
               "oneOf": [
                 {
@@ -681,7 +638,6 @@
               ]
             },
             "dienstagErreichbarkeit": {
-              "description": "Erreichbarkeit am Dienstag",
               "x-nullable": true,
               "oneOf": [
                 {
@@ -690,7 +646,6 @@
               ]
             },
             "mittwochErreichbarkeit": {
-              "description": "Erreichbarkeit am Mittwoch",
               "x-nullable": true,
               "oneOf": [
                 {
@@ -699,7 +654,6 @@
               ]
             },
             "donnerstagErreichbarkeit": {
-              "description": "Erreichbarkeit am Donnerstag",
               "x-nullable": true,
               "oneOf": [
                 {
@@ -708,7 +662,6 @@
               ]
             },
             "freitagErreichbarkeit": {
-              "description": "Erreichbarkeit am Freitag",
               "x-nullable": true,
               "oneOf": [
                 {
@@ -717,7 +670,6 @@
               ]
             },
             "mittagspause": {
-              "description": "Mittagspause (Ausschluss der Erreichbarkeit)",
               "x-nullable": true,
               "oneOf": [
                 {
@@ -736,18 +688,15 @@
         },
         {
           "type": "object",
-          "description": "Ein Zeitfenster mit Start- und Endzeiten mit TimeOnly als Typ.",
           "additionalProperties": {},
           "properties": {
             "startzeit": {
               "type": "string",
-              "description": "inklusive Startzeit; z.B. 8 Uhr",
               "format": "time",
               "x-nullable": true
             },
             "endzeit": {
               "type": "string",
-              "description": "exklusive Endzeit (z.B. 17:00 Uhr)",
               "format": "time",
               "x-nullable": true
             }
@@ -757,35 +706,27 @@
     },
     "BusinessObject": {
       "type": "object",
-      "description": "General abstract class for Business Objects for Energy (BO4E)\n            ",
       "x-abstract": true,
       "additionalProperties": {},
       "properties": {
         "boTyp": {
           "type": "string",
-          "description": "obligatory type of the business object in UPPER CASE\n            ",
-          "x-nullable": true,
-          "x-example": "'MESSLOKATION',\n'MARKTLOKATION'\n            "
+          "x-nullable": true
         },
         "versionStruktur": {
           "type": "string",
-          "description": "obligatory version of the BO4E definition. Currently hard coded to 1\n            ",
-          "x-nullable": true,
-          "x-example": 1
+          "x-nullable": true
         },
         "guidSerialized": {
-          "type": "string",
-          "description": "protobuf serilization requires the Guid as string.\n            "
+          "type": "string"
         },
         "timestamp": {
           "type": "string",
-          "description": "Store the latest database update, is Datetime, because postgres doesn't handle datetimeoffset in a generated column\ngracefully\n            ",
           "format": "date-time",
           "x-nullable": true
         },
         "externeReferenzen": {
           "type": "array",
-          "description": "Hier können IDs anderer Systeme hinterlegt werden (z.B. eine SAP-GP-Nummer) (Details siehe\nExterneReferenz)\n            ",
           "x-nullable": true,
           "items": {
             "$ref": "#/definitions/ExterneReferenz"
@@ -793,9 +734,24 @@
         },
         "guid": {
           "type": "string",
-          "description": "allows adding a GUID to Business Objects for tracking across systems\n            ",
           "format": "guid",
           "x-nullable": true
+        },
+        "gueltigkeitszeitraum": {
+          "x-nullable": true,
+          "oneOf": [
+            {
+              "$ref": "#/definitions/Zeitraum"
+            }
+          ]
+        },
+        "qualitaet": {
+          "x-nullable": true,
+          "oneOf": [
+            {
+              "$ref": "#/definitions/Qualitaet"
+            }
+          ]
         }
       }
     },
@@ -806,22 +762,95 @@
         },
         {
           "type": "object",
-          "description": "Viele Datenobjekte weisen in unterschiedlichen Systemen eine eindeutige ID (Kundennummer, GP-Nummer etc.) auf.\nBeim Austausch von Datenobjekten zwischen verschiedenen Systemen ist es daher hilfreich, sich die eindeutigen IDs\nder anzubindenden Systeme zu merken.\nDiese Komponente ermöglicht es, sich die SAP GP-Nummer zu merken, um diese bei SAP-Aufrufen als Parameter mitgeben\nzu können.\n            ",
           "additionalProperties": {},
           "properties": {
             "exRefName": {
               "type": "string",
-              "description": "Bezeichnung der externen Referenz (z.B. \"hochfrequenz integration services\")\n            ",
               "x-nullable": true
             },
             "exRefWert": {
               "type": "string",
-              "description": "Wert der externen Referenz (z.B. \"123456\"; \"4711\")\n            ",
               "x-nullable": true
             }
           }
         }
       ]
+    },
+    "Zeitraum": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/COM"
+        },
+        {
+          "type": "object",
+          "additionalProperties": {},
+          "properties": {
+            "einheit": {
+              "x-nullable": true,
+              "oneOf": [
+                {
+                  "$ref": "#/definitions/Zeiteinheit"
+                }
+              ]
+            },
+            "dauer": {
+              "type": "number",
+              "format": "decimal",
+              "x-nullable": true
+            },
+            "startdatum": {
+              "type": "string",
+              "format": "date-time",
+              "x-nullable": true
+            },
+            "enddatum": {
+              "type": "string",
+              "format": "date-time",
+              "x-nullable": true
+            },
+            "startzeitpunkt": {
+              "type": "string",
+              "format": "date-time",
+              "x-nullable": true
+            },
+            "endzeitpunkt": {
+              "type": "string",
+              "format": "date-time",
+              "x-nullable": true
+            }
+          }
+        }
+      ]
+    },
+    "Zeiteinheit": {
+      "type": "integer",
+      "description": "",
+      "x-enumNames": [
+        "SEKUNDE",
+        "MINUTE",
+        "STUNDE",
+        "VIERTEL_STUNDE",
+        "TAG",
+        "WOCHE",
+        "MONAT",
+        "QUARTAL",
+        "HALBJAHR",
+        "JAHR"
+      ],
+      "enum": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+    },
+    "Qualitaet": {
+      "type": "integer",
+      "description": "",
+      "x-enumNames": [
+        "VOLLSTAENDIG",
+        "INFORMATIV",
+        "IM_SYSTEM_VORHANDEN",
+        "ERWARTET",
+        "VORLAEUFIG",
+        "UNVOLLSTAENDIG"
+      ],
+      "enum": [0, 1, 2, 3, 4, 5]
     },
     "Unterschrift": {
       "allOf": [
@@ -830,23 +859,19 @@
         },
         {
           "type": "object",
-          "description": "Modellierung einer Unterschrift, z.B. für Verträge, Angebote etc.\nhttps://www.bo4e.de/dokumentation/komponenten/com-unterschrift\n            ",
           "additionalProperties": {},
           "properties": {
             "ort": {
               "type": "string",
-              "description": "Ort, an dem die Unterschrift geleistet wird\n            ",
               "x-nullable": true
             },
             "datum": {
               "type": "string",
-              "description": "Datum der Unterschrift\n            ",
               "format": "date-time",
               "x-nullable": true
             },
             "name": {
               "type": "string",
-              "description": "Name des Unterschreibers\n            ",
               "x-nullable": true
             }
           }
@@ -860,22 +885,18 @@
         },
         {
           "type": "object",
-          "description": "Abbildung für Vertragskonditionen. Die Komponente wird sowohl im Vertrag als auch im Tarif verwendet.",
           "additionalProperties": {},
           "properties": {
             "beschreibung": {
               "type": "string",
-              "description": "Freitext zur Beschreibung der Konditionen, z.B. \"Standardkonditionen Gas\"",
               "x-nullable": true
             },
             "anzahlAbschlaege": {
               "type": "integer",
-              "description": "Anzahl der vereinbarten Abschläge pro Jahr, z.B. 12",
               "format": "int32",
               "x-nullable": true
             },
             "vertragslaufzeit": {
-              "description": "Über diesen Zeitraum läuft der Vertrag. Details Zeitraum",
               "x-nullable": true,
               "oneOf": [
                 {
@@ -884,7 +905,6 @@
               ]
             },
             "kuendigungsfrist": {
-              "description": "Innerhalb dieser Frist kann der Vertrag gekündigt werden. Details Zeitraum",
               "x-nullable": true,
               "oneOf": [
                 {
@@ -893,7 +913,6 @@
               ]
             },
             "vertragsverlaengerung": {
-              "description": "Falls der Vertrag nicht gekündigt wird, verlängert er sich automatisch um die hier angegebene Zeit. Details\nZeitraum\n            ",
               "x-nullable": true,
               "oneOf": [
                 {
@@ -902,7 +921,6 @@
               ]
             },
             "abschlagszyklus": {
-              "description": "In diesen Zyklen werden Abschläge gestellt. Details Zeitraum. Alternativ kann auch die Anzahl\nin den Konditionen angeben werden.\"\n            ",
               "x-nullable": true,
               "oneOf": [
                 {
@@ -979,104 +997,33 @@
             },
             "beinhaltetSingulaerGenutzteBetriebsmittel": {
               "type": "boolean",
-              "description": "Singulär genutzte Betriebsmittel in der Netznutzungsabrechnung\nHier wird angegeben, ob in der Netznutzungsabrechnung der verbrauchenden Marktlokation singulär \ngenutzte Betriebsmittel abgerechnet werden.\n            ",
               "x-nullable": true
             }
           }
         }
       ]
-    },
-    "Zeitraum": {
-      "allOf": [
-        {
-          "$ref": "#/definitions/COM"
-        },
-        {
-          "type": "object",
-          "description": "Diese Komponente wird zur Abbildung von Zeiträumen in Form von Dauern oder der Angabe von Start und Ende\nverwendet.\n            ",
-          "additionalProperties": {},
-          "properties": {
-            "einheit": {
-              "description": "Die Einheit in der die Dauer angeben ist. Z.B. Monate. ",
-              "x-nullable": true,
-              "oneOf": [
-                {
-                  "$ref": "#/definitions/Zeiteinheit"
-                }
-              ]
-            },
-            "dauer": {
-              "type": "number",
-              "description": "Gibt die Anzahl der Zeiteinheiten an, z.B. 3 (Monate).",
-              "format": "decimal",
-              "x-nullable": true
-            },
-            "startdatum": {
-              "type": "string",
-              "description": "Gibt Tag und Uhrzeit (falls vorhanden) an, wann der Zeitraum startet.",
-              "format": "date-time",
-              "x-nullable": true
-            },
-            "enddatum": {
-              "type": "string",
-              "description": "Gibt Tag und Uhrzeit (falls vorhanden) an, wann der Zeitraum endet.",
-              "format": "date-time",
-              "x-nullable": true
-            },
-            "startzeitpunkt": {
-              "type": "string",
-              "description": "The same value as Startdatum",
-              "format": "date-time",
-              "x-nullable": true
-            },
-            "endzeitpunkt": {
-              "type": "string",
-              "description": "The same value as Enddatum",
-              "format": "date-time",
-              "x-nullable": true
-            }
-          }
-        }
-      ]
-    },
-    "Zeiteinheit": {
-      "type": "integer",
-      "description": "Auflistung möglicher Einheiten zur Verwendung in zeitbezogenen Angaben.",
-      "x-enumNames": [
-        "SEKUNDE",
-        "MINUTE",
-        "STUNDE",
-        "VIERTEL_STUNDE",
-        "TAG",
-        "WOCHE",
-        "MONAT",
-        "QUARTAL",
-        "HALBJAHR",
-        "JAHR"
-      ],
-      "enum": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
     },
     "Netznutzungsvertragsart": {
       "type": "integer",
-      "description": "Art des Netznutzungsvertrags",
+      "description": "",
       "x-enumNames": ["KUNDEN_NB", "LIEFERANTEN_NB"],
       "enum": [0, 1]
     },
     "Netznutzungszahler": {
       "type": "integer",
-      "description": "Zahlung der Netznutzung",
+      "description": "",
       "x-enumNames": ["KUNDE", "LIEFERANT"],
       "enum": [0, 1]
     },
     "Netznutzungsabrechnungsvariante": {
       "type": "integer",
-      "description": "Netznutzungsabrechnungsvariante",
+      "description": "",
       "x-enumNames": ["ARBEITSPREIS_GRUNDPREIS", "ARBEITSPREIS_LEISTUNGSPREIS"],
       "enum": [0, 1]
     },
     "Netznutzungsabrechnungsgrundlage": {
       "type": "integer",
-      "description": "Netznutzungsabrechnungsgrundlage",
+      "description": "",
       "x-enumNames": ["LIEFERSCHEIN", "ABWEICHENDE_GRUNDLAGE"],
       "enum": [0, 1]
     },
@@ -1087,28 +1034,23 @@
         },
         {
           "type": "object",
-          "description": "Abbildung für einen Vertragsteil. Der Vertragsteil wird dazu verwendet, eine vertragliche Leistung in Bezug zu\neiner Lokation (Markt- oder Messlokation) festzulegen.\nhttps://www.bo4e.de/dokumentation/komponenten/com-vertragsteil\n            ",
           "additionalProperties": {},
           "properties": {
             "vertragsteilbeginn": {
               "type": "string",
-              "description": "Start der Gültigkeit des Vertragsteils.\n            ",
               "format": "date-time",
               "x-nullable": true
             },
             "vertragsteilende": {
               "type": "string",
-              "description": "Ende der Gültigkeit des Vertragsteils.\n            ",
               "format": "date-time",
               "x-nullable": true
             },
             "lokation": {
               "type": "string",
-              "description": "Der Identifier für diejenigen Markt- oder Messlokation, die zu diesem Vertragsteil gehören.\nVerträge für mehrere Lokationen werden mit mehreren Vertragsteilen abgebildet.\n            ",
               "x-nullable": true
             },
             "vertraglichFixierteMenge": {
-              "description": "Für die Lokation festgeschriebene Abnahmemenge. Siehe COM Menge\n            ",
               "x-nullable": true,
               "oneOf": [
                 {
@@ -1117,7 +1059,6 @@
               ]
             },
             "minimaleAbnahmemenge": {
-              "description": "Für die Lokation festgelegte Mindestabnahmemenge. Siehe COM Menge\n            ",
               "x-nullable": true,
               "oneOf": [
                 {
@@ -1126,7 +1067,6 @@
               ]
             },
             "maximaleAbnahmemenge": {
-              "description": "Für die Lokation festgelegte maximale Abnahmemenge. Siehe COM Menge\n            ",
               "x-nullable": true,
               "oneOf": [
                 {
@@ -1135,7 +1075,6 @@
               ]
             },
             "jahresverbrauchsprognose": {
-              "description": "jahresverbrauchsprognose für EDIFACT mapping\n            ",
               "x-nullable": true,
               "oneOf": [
                 {
@@ -1144,7 +1083,6 @@
               ]
             },
             "kundenwert": {
-              "description": "kundenwert für EDIFACT mapping\n            ",
               "x-nullable": true,
               "oneOf": [
                 {
@@ -1154,7 +1092,6 @@
             },
             "verbrauchsaufteilung": {
               "type": "string",
-              "description": "verbrauchsaufteilung für EDIFACT mapping\n            ",
               "x-nullable": true
             }
           }
@@ -1168,16 +1105,13 @@
         },
         {
           "type": "object",
-          "description": "Abbildung einer Menge mit Wert und Einheit.",
           "additionalProperties": {},
           "properties": {
             "wert": {
               "type": "number",
-              "description": "Gibt den absoluten Wert der Menge an.",
               "format": "decimal"
             },
             "einheit": {
-              "description": "Gibt die Einheit zum jeweiligen Wert an. Details Mengeneinheit",
               "x-nullable": true,
               "oneOf": [
                 {
@@ -1191,7 +1125,7 @@
     },
     "Mengeneinheit": {
       "type": "integer",
-      "description": "Einheit: Messgrößen, die per Messung oder Vorgabe ermittelt werden können.\n            ",
+      "description": "",
       "x-enumNames": [
         "ZERO",
         "WH",
@@ -1223,21 +1157,17 @@
     },
     {
       "type": "object",
-      "description": "Modell für die Abbildung von Vertragsbeziehungen. Das Objekt dient dazu, alle Arten von Verträgen, die in der\nEnergiewirtschaft Verwendung finden, abzubilden.\nhttps://www.bo4e.de/dokumentation/geschaeftsobjekte/bo-vertrag\n            ",
       "additionalProperties": {},
       "properties": {
         "vertragsnummer": {
           "type": "string",
-          "description": "Eine im Verwendungskontext eindeutige Nummer für den Vertrag\n            ",
           "x-nullable": true
         },
         "beschreibung": {
           "type": "string",
-          "description": "Beschreibung zum Vertrag\n            ",
           "x-nullable": true
         },
         "vertragsart": {
-          "description": "Hier ist festgelegt, um welche Art von Vertrag es sich handelt. Z.B. Netznutzungvertrag. Details siehe ENUM\nVertragsart\n            ",
           "x-nullable": true,
           "oneOf": [
             {
@@ -1246,7 +1176,6 @@
           ]
         },
         "vertragstatus": {
-          "description": "Gibt den Status des Vertrags an. Siehe ENUM Vertragsstatus\n            ",
           "x-nullable": true,
           "oneOf": [
             {
@@ -1255,26 +1184,18 @@
           ]
         },
         "sparte": {
-          "description": "Unterscheidungsmöglichkeiten für die Sparte. Siehe ENUM Sparte\n            ",
-          "oneOf": [
-            {
-              "$ref": "#/definitions/Sparte"
-            }
-          ]
+          "$ref": "#/definitions/Sparte"
         },
         "vertragsbeginn": {
           "type": "string",
-          "description": "Gibt an, wann der Vertrag beginnt.\n            ",
           "format": "date-time"
         },
         "vertragsende": {
           "type": "string",
-          "description": "Gibt an, wann der Vertrag (voraussichtlich) endet oder beendet wurde.\n            ",
           "format": "date-time",
           "x-nullable": true
         },
         "vertragspartner1": {
-          "description": "Der \"erstgenannte\" Vertragspartner. In der Regel der Aussteller des Vertrags. Beispiel: \"Vertrag zwischen\nVertagspartner 1 ...\" Siehe BO Geschaeftspartner\n            ",
           "x-nullable": true,
           "oneOf": [
             {
@@ -1283,7 +1204,6 @@
           ]
         },
         "vertragspartner2": {
-          "description": "Der \"zweitgenannte\" Vertragspartner. In der Regel der Empfänger des Vertrags. Beispiel \"Vertrag zwischen\nVertagspartner 1 und Vertragspartner 2\". Siehe BO Geschaeftspartner\n            ",
           "x-nullable": true,
           "oneOf": [
             {
@@ -1293,7 +1213,6 @@
         },
         "unterzeichnervp1": {
           "type": "array",
-          "description": "Unterzeichner des Vertragspartners1. Siehe COM Unterschrift\n            ",
           "x-nullable": true,
           "items": {
             "$ref": "#/definitions/Unterschrift"
@@ -1301,14 +1220,12 @@
         },
         "unterzeichnervp2": {
           "type": "array",
-          "description": "Unterzeichner des Vertragspartners2. Siehe COM Unterschrift\n            ",
           "x-nullable": true,
           "items": {
             "$ref": "#/definitions/Unterschrift"
           }
         },
         "vertragskonditionen": {
-          "description": "Festlegungen zu Laufzeiten und Kündigungsfristen. Details siehe COM Vertragskonditionen\n            ",
           "x-nullable": true,
           "oneOf": [
             {
@@ -1318,7 +1235,6 @@
         },
         "vertragsteile": {
           "type": "array",
-          "description": "Der Vertragsteil wird dazu verwendet, eine vertragliche Leistung in Bezug zu einer Lokation (Markt- oder\nMesslokation) festzulegen. Details siehe COM Vertragsteil\n            ",
           "x-nullable": true,
           "items": {
             "$ref": "#/definitions/Vertragsteil"
@@ -1326,12 +1242,10 @@
         },
         "gemeinderabatt": {
           "type": "number",
-          "description": "gemeinderabatt für EDIFACT mapping.\n            ",
           "format": "decimal",
           "x-nullable": true
         },
         "korrespondenzpartner": {
-          "description": "korrespondenzpartner für EDIFACT mapping\n            ",
           "x-nullable": true,
           "oneOf": [
             {
