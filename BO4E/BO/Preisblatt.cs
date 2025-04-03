@@ -25,7 +25,7 @@ public class Preisblatt : BusinessObject
     /// <summary>
     ///     Eine Bezeichnung für das Preisblatt.
     /// </summary>
-    [JsonProperty(Required = Required.Always, Order = 10, PropertyName = "bezeichnung")]
+    [JsonProperty(Order = 10, PropertyName = "bezeichnung")]
     [JsonPropertyName("bezeichnung")]
     [ProtoMember(4)]
     [JsonPropertyOrder(10)]
@@ -36,7 +36,7 @@ public class Preisblatt : BusinessObject
     /// <summary>
     ///     Der Zeitraum für den der Preis festgelegt ist. Details siehe <see cref="Zeitraum" />
     /// </summary>
-    [JsonProperty(Required = Required.Always, Order = 11, PropertyName = "gueltigkeit")]
+    [JsonProperty(Order = 11, PropertyName = "gueltigkeit")]
     [JsonPropertyName("gueltigkeit")]
     [JsonPropertyOrder(11)]
     [ProtoMember(5)]
@@ -47,7 +47,7 @@ public class Preisblatt : BusinessObject
     ///     Die einzelnen Positionen, die mit dem Preisblatt abgerechnet werden können. Z.B. Arbeitspreis, Grundpreis etc.
     ///     Details siehe <see cref="Preisposition" />
     /// </summary>
-    [JsonProperty(Required = Required.Always, Order = 13, PropertyName = "preispositionen")] // at least one entry
+    [JsonProperty(Order = 13, PropertyName = "preispositionen")] // at least one entry
     [JsonPropertyName("preispositionen")]
     [DataCategory(DataCategory.FINANCE)]
     [JsonPropertyOrder(13)]
@@ -57,7 +57,7 @@ public class Preisblatt : BusinessObject
     /*/// <summary>
     /// Staffelgrenzen der jeweiligen Preise. Details siehe <see cref="Preisstaffel"/>
     /// </summary>
-    [JsonProperty(Required = Required.Always, Order = 6)] // at least 1 entry
+    [JsonProperty( Order = 6)] // at least 1 entry
     [DataCategory(DataCategory.FINANCE)]
     public List<Preisstaffel> preisstaffeln { get;set; }*/
     // https://github.com/Hochfrequenz/energy-service-hub/issues/11
@@ -65,13 +65,13 @@ public class Preisblatt : BusinessObject
     /// <summary>
     ///     Gibt den Status des veröffentlichten Preises an
     /// </summary>
-    [JsonProperty(PropertyName = "preisstatus", Order = 14, Required = Required.Default)]
+    [JsonProperty(PropertyName = "preisstatus", Order = 14)]
     [JsonPropertyName("preisstatus")]
     [JsonPropertyOrder(14)]
     public Preisstatus? preisstatus { get; set; }
 
     /// <summary>Strom oder Gas. <seealso cref="ENUM.Sparte" /></summary>
-    [JsonProperty(Required = Required.Default, Order = 15, PropertyName = "sparte")]
+    [JsonProperty(Order = 15, PropertyName = "sparte")]
     [JsonPropertyName("sparte")]
     [JsonPropertyOrder(15)]
     public Sparte? Sparte { get; set; }

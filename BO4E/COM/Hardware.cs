@@ -12,19 +12,19 @@ namespace BO4E.COM;
 public class Hardware : COM
 {
     /// <summary>Eindeutiger Typ der Hardware. Details <see cref="ENUM.Geraetetyp" /></summary>
-    [JsonProperty(PropertyName = "geraetetyp", Required = Required.Default)]
+    [JsonProperty(PropertyName = "geraetetyp")]
     [JsonPropertyName("geraetetyp")]
     [ProtoMember(3)]
     public Geraetetyp? Geraetetyp { get; set; }
 
     /// <summary>Bezeichnung der Hardware.</summary>
-    [JsonProperty(PropertyName = "bezeichnung", Required = Required.Always)]
+    [JsonProperty(PropertyName = "bezeichnung")]
     [JsonPropertyName("bezeichnung")]
     [ProtoMember(4)]
     public string? Bezeichnung { get; set; }
 
     /// <summary>Bezeichnung der Hardware.</summary>
-    [JsonProperty(PropertyName = "geraeteeigenschaften", Required = Required.Default)]
+    [JsonProperty(PropertyName = "geraeteeigenschaften")]
     [JsonPropertyName("geraeteeigenschaften")]
     [NonOfficial(NonOfficialCategory.CUSTOMER_REQUIREMENTS)]
     [ProtoMember(1005)]
@@ -33,7 +33,7 @@ public class Hardware : COM
     /// <summary>
     ///     Gerätenummer des Wandlers
     /// </summary>
-    [JsonProperty(PropertyName = "geraetenummer", Required = Required.Default)]
+    [JsonProperty(PropertyName = "geraetenummer")]
     [JsonPropertyName("geraetenummer")]
     [NonOfficial(NonOfficialCategory.CUSTOMER_REQUIREMENTS)]
     [ProtoMember(1006)]
@@ -42,7 +42,7 @@ public class Hardware : COM
     /// <summary>
     ///     Referenz auf die Gerätenummer des Zählers
     /// </summary>
-    [JsonProperty(PropertyName = "geraetereferenz", Required = Required.Default)]
+    [JsonProperty(PropertyName = "geraetereferenz")]
     [JsonPropertyName("geraetereferenz")]
     [NonOfficial(NonOfficialCategory.CUSTOMER_REQUIREMENTS)]
     [ProtoMember(1007)]
