@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using System.Text.Json.Serialization;
 using BO4E.ENUM;
 using BO4E.meta.LenientConverters;
@@ -86,6 +87,27 @@ public class TestGeraeteerkmalDeserialization
     }
 
     [TestMethod]
+    public void TestNewtonsoft_Success_Nullable_Serialization()
+    {
+        var myInstance = new SomethingWithANullableGeraetemerkmal()
+        {
+            Merkmal = Geraetemerkmal.GAS_G4,
+        };
+        var result = JsonConvert.SerializeObject(
+            myInstance,
+            new JsonSerializerSettings()
+            {
+                Converters = new List<Newtonsoft.Json.JsonConverter>()
+                {
+                    new LenientGeraetemerkmalGasConverter(),
+                    new Newtonsoft.Json.Converters.StringEnumConverter(),
+                },
+            }
+        );
+        result.Should().NotBeNullOrWhiteSpace().And.Contain("\"GAS_G4\"").And.NotContain("\"G4\"");
+    }
+
+    [TestMethod]
     public void TestNewtonsoft_Success_Nullable_WASSER_MWZW()
     {
         var result =
@@ -119,6 +141,21 @@ public class TestGeraeteerkmalDeserialization
             settings
         );
         result.Merkmal.Should().Be(Geraetemerkmal.GAS_G4);
+    }
+
+    [TestMethod]
+    public void TestSystemText_Success_NonNullable_Serialization()
+    {
+        var myInstance = new SomethingWithANullableGeraetemerkmal()
+        {
+            Merkmal = Geraetemerkmal.GAS_G4,
+        };
+        var settings = new System.Text.Json.JsonSerializerOptions()
+        {
+            Converters = { new LenientSystemTextGeraetemerkmalGasConverter() },
+        };
+        var result = System.Text.Json.JsonSerializer.Serialize(myInstance, settings);
+        result.Should().NotBeNullOrWhiteSpace().And.Contain("\"GAS_G4\"").And.NotContain("\"G4\"");
     }
 
     [TestMethod]
@@ -213,7 +250,7 @@ public class TestGeraeteerkmalDeserialization
         };
         var instance = new SomethingWithAGeraetemerkmal { Merkmal = Geraetemerkmal.GAS_G4 };
         var json = System.Text.Json.JsonSerializer.Serialize(instance, settings);
-        json.Should().Be("{\"merkmal\":\"G4\"}");
+        json.Should().Be($"{{\"merkmal\":\"{Geraetemerkmal.GAS_G4.ToString()}\"}}");
     }
 
     [TestMethod]
@@ -228,7 +265,7 @@ public class TestGeraeteerkmalDeserialization
             Merkmal = Geraetemerkmal.GAS_G2P5,
         };
         var json = System.Text.Json.JsonSerializer.Serialize(instance, settings);
-        json.Should().Be("{\"merkmal\":\"G2P5\"}");
+        json.Should().Be("{\"merkmal\":\"GAS_G2P5\"}");
     }
 
     [TestMethod]

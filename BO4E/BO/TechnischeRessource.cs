@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.Text.Json.Serialization;
 using BO4E.COM;
@@ -259,4 +260,14 @@ public class TechnischeRessource : BusinessObject
     [ProtoMember(29)]
     [JsonPropertyOrder(29)]
     public InformationWeitereTechnischeRessource? WeitereEinrichtung { get; set; }
+
+    /// <summary>
+    /// Ergänzt die Marktrollen zu der Technischen Ressource
+    /// </summary>
+    [JsonProperty(Order = 30, PropertyName = "marktrollen")]
+    [JsonPropertyName("marktrollen")]
+    [ProtoMember(30)]
+    [JsonPropertyOrder(30)]
+    [NonOfficial(NonOfficialCategory.CUSTOMER_REQUIREMENTS)]
+    public List<MarktpartnerDetails>? Marktrollen { get; set; } // ToDo: evaluate this
 }

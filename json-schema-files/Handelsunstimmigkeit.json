@@ -219,10 +219,11 @@
         "guid": {
           "type": ["string", "null"]
         }
-      }
+      },
+      "required": ["exRefName", "exRefWert"]
     },
     "Handelsunstimmigkeitsbegruendung": {
-      "type": "object",
+      "type": ["object", "null"],
       "properties": {
         "timestamp": {
           "type": ["string", "null"],
@@ -258,7 +259,62 @@
           ]
         }
       },
-      "required": ["grund"]
+      "required": ["referenzen", "grund"]
+    },
+    "Zeitraum": {
+      "type": ["object", "null"],
+      "properties": {
+        "einheit": {
+          "type": ["string", "null"],
+          "enum": [
+            null,
+            "SEKUNDE",
+            "MINUTE",
+            "STUNDE",
+            "VIERTEL_STUNDE",
+            "TAG",
+            "WOCHE",
+            "MONAT",
+            "QUARTAL",
+            "HALBJAHR",
+            "JAHR"
+          ]
+        },
+        "dauer": {
+          "type": ["number", "null"]
+        },
+        "startdatum": {
+          "type": ["string", "null"],
+          "format": "date-time"
+        },
+        "enddatum": {
+          "type": ["string", "null"],
+          "format": "date-time"
+        },
+        "startzeitpunkt": {
+          "type": ["string", "null"],
+          "format": "date-time"
+        },
+        "endzeitpunkt": {
+          "type": ["string", "null"],
+          "format": "date-time"
+        },
+        "timestamp": {
+          "type": ["string", "null"],
+          "format": "date-time"
+        },
+        "guid": {
+          "type": ["string", "null"]
+        }
+      },
+      "required": [
+        "einheit",
+        "dauer",
+        "startdatum",
+        "enddatum",
+        "startzeitpunkt",
+        "endzeitpunkt"
+      ]
     }
   },
   "type": "object",
@@ -283,7 +339,7 @@
       "type": ["string", "null"]
     },
     "nummer": {
-      "type": "string"
+      "type": ["string", "null"]
     },
     "typ": {
       "type": "string",
@@ -299,7 +355,30 @@
     },
     "zuZahlen": {
       "$ref": "#/definitions/Betrag"
+    },
+    "gueltigkeitszeitraum": {
+      "$ref": "#/definitions/Zeitraum"
+    },
+    "qualitaet": {
+      "type": ["string", "null"],
+      "enum": [
+        null,
+        "VOLLSTAENDIG",
+        "INFORMATIV",
+        "IM_SYSTEM_VORHANDEN",
+        "ERWARTET",
+        "VORLAEUFIG",
+        "UNVOLLSTAENDIG"
+      ]
     }
   },
-  "required": ["nummer", "typ", "begruendung"]
+  "required": [
+    "boTyp",
+    "versionStruktur",
+    "externeReferenzen",
+    "nummer",
+    "typ",
+    "begruendung",
+    "zuZahlen"
+  ]
 }

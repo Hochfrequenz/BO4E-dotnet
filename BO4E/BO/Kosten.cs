@@ -1,5 +1,4 @@
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
 using System.Text.Json.Serialization;
 using BO4E.COM;
 using BO4E.ENUM;
@@ -50,7 +49,6 @@ public class Kosten : BusinessObject
     [JsonProperty(Order = 7, PropertyName = "kostenbloecke")] // at least 1 entry
     [JsonPropertyName("kostenbloecke")]
     [ProtoMember(7)]
-    [MinLength(1)]
     public List<Kostenblock> Kostenbloecke { get; set; }
 
     /// <summary>

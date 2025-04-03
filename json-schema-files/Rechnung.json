@@ -12,10 +12,10 @@
           "type": ["string", "null"]
         },
         "postleitzahl": {
-          "type": "string"
+          "type": ["string", "null"]
         },
         "ort": {
-          "type": "string"
+          "type": ["string", "null"]
         },
         "strasse": {
           "type": ["string", "null"]
@@ -309,7 +309,16 @@
           "type": ["string", "null"]
         }
       },
-      "required": ["postleitzahl", "ort"]
+      "required": [
+        "postleitzahl",
+        "ort",
+        "strasse",
+        "hausnummer",
+        "postfach",
+        "adresszusatz",
+        "coErgaenzung",
+        "landescode"
+      ]
     },
     "Bankverbindung": {
       "type": ["object", "null"],
@@ -333,211 +342,10 @@
         "bankname": {
           "type": ["string", "null"]
         }
-      }
+      },
+      "required": ["iban", "kontoinhaber", "bankkennung", "bankname"]
     },
     "Betrag": {
-      "type": "object",
-      "properties": {
-        "wert": {
-          "type": "number"
-        },
-        "waehrung": {
-          "type": "string",
-          "enum": [
-            "AFN",
-            "ALL",
-            "AMD",
-            "ANG",
-            "AOA",
-            "ARS",
-            "AUD",
-            "AWG",
-            "AZN",
-            "BAM",
-            "BBD",
-            "BDT",
-            "BGN",
-            "BHD",
-            "BIF",
-            "BMD",
-            "BND",
-            "BOB",
-            "BOV",
-            "BRL",
-            "BSD",
-            "BTN",
-            "BWP",
-            "BYN",
-            "BYR",
-            "BZD",
-            "CAD",
-            "CDF",
-            "CHE",
-            "CHF",
-            "CHW",
-            "CLF",
-            "CLP",
-            "CNY",
-            "COP",
-            "COU",
-            "CRC",
-            "CUC",
-            "CUP",
-            "CVE",
-            "CZK",
-            "DJF",
-            "DKK",
-            "DOP",
-            "DZD",
-            "EGP",
-            "ERN",
-            "ETB",
-            "EUR",
-            "FJD",
-            "FKP",
-            "GBP",
-            "GEL",
-            "GHS",
-            "GIP",
-            "GMD",
-            "GNF",
-            "GTQ",
-            "GYD",
-            "HKD",
-            "HNL",
-            "HRK",
-            "HTG",
-            "HUF",
-            "IDR",
-            "ILS",
-            "INR",
-            "IQD",
-            "IRR",
-            "ISK",
-            "JMD",
-            "JOD",
-            "JPY",
-            "KES",
-            "KGS",
-            "KHR",
-            "KMF",
-            "KPW",
-            "KRW",
-            "KWD",
-            "KYD",
-            "KZT",
-            "LAK",
-            "LBP",
-            "LKR",
-            "LRD",
-            "LSL",
-            "LTL",
-            "LYD",
-            "MAD",
-            "MDL",
-            "MGA",
-            "MKD",
-            "MMK",
-            "MNT",
-            "MOP",
-            "MRO",
-            "MUR",
-            "MVR",
-            "MWK",
-            "MXN",
-            "MXV",
-            "MYR",
-            "MZN",
-            "NAD",
-            "NGN",
-            "NIO",
-            "NOK",
-            "NPR",
-            "NZD",
-            "OMR",
-            "PAB",
-            "PEN",
-            "PGK",
-            "PHP",
-            "PKR",
-            "PLN",
-            "PYG",
-            "QAR",
-            "RON",
-            "RSD",
-            "RUB",
-            "RUR",
-            "RWF",
-            "SAR",
-            "SBD",
-            "SCR",
-            "SDG",
-            "SEK",
-            "SGD",
-            "SHP",
-            "SLL",
-            "SOS",
-            "SRD",
-            "SSP",
-            "STD",
-            "SVC",
-            "SYP",
-            "SZL",
-            "THB",
-            "TJS",
-            "TMT",
-            "TND",
-            "TOP",
-            "TRY",
-            "TTD",
-            "TWD",
-            "TZS",
-            "UAH",
-            "UGX",
-            "USD",
-            "USN",
-            "USS",
-            "UYI",
-            "UYU",
-            "UZS",
-            "VEF",
-            "VND",
-            "VUV",
-            "WST",
-            "XAF",
-            "XAG",
-            "XAU",
-            "XBA",
-            "XBB",
-            "XBC",
-            "XBD",
-            "XCD",
-            "XDR",
-            "XOF",
-            "XPD",
-            "XPF",
-            "XPT",
-            "XSU",
-            "XTS",
-            "XUA",
-            "XXX",
-            "YER",
-            "ZAR",
-            "ZMW",
-            "ZWL"
-          ]
-        },
-        "timestamp": {
-          "type": ["string", "null"],
-          "format": "date-time"
-        },
-        "guid": {
-          "type": ["string", "null"]
-        }
-      },
-      "required": ["wert", "waehrung"]
-    },
-    "Betrag-1": {
       "type": ["object", "null"],
       "properties": {
         "wert": {
@@ -767,7 +575,15 @@
         "mittagspause": {
           "$ref": "#/definitions/Zeitfenster"
         }
-      }
+      },
+      "required": [
+        "montagErreichbarkeit",
+        "dienstagErreichbarkeit",
+        "mittwochErreichbarkeit",
+        "donnerstagErreichbarkeit",
+        "freitagErreichbarkeit",
+        "mittagspause"
+      ]
     },
     "ExterneReferenz": {
       "type": ["object", "null"],
@@ -785,10 +601,11 @@
         "guid": {
           "type": ["string", "null"]
         }
-      }
+      },
+      "required": ["exRefName", "exRefWert"]
     },
     "Geschaeftspartner": {
-      "type": "object",
+      "type": ["object", "null"],
       "properties": {
         "boTyp": {
           "type": ["string", "null"]
@@ -890,20 +707,22 @@
             "KEINE_ANGABE"
           ]
         },
-        "grundDerPrivilegierungNachEnFG": {
-          "type": ["string", "null"],
-          "enum": [
-            null,
-            "STROMSPEICHER_UND_VERLUSTENERGIE",
-            "ELEKTRISCH_ANGETRIEBENE_WAERMEPUMPEN",
-            "UMLAGEERHEBUNG_BEI_ANLAGEN_ZUR_VERSTROMUNG_VON_KUPPELGASEN",
-            "HERSTELLUNG_VON_GRUENEN_WASSERSTOFF",
-            "STROMKOSTENINTENSIVE_UNTERNEHMEN",
-            "HERSTELLUNG_VON_WASSERSTOFF_IN_STROMKOSTENINTENSIVEN_UNTERNEHMEN",
-            "SCHIENENBAHNEN",
-            "ELEKTRISCHE_BETRIEBENE_BUSSEN_IM_LINIENVERKEHR",
-            "LANDSTROMANLAGEN"
-          ]
+        "gruendeDerPrivilegierungNachEnFG": {
+          "type": ["array", "null"],
+          "items": {
+            "type": "string",
+            "enum": [
+              "STROMSPEICHER_UND_VERLUSTENERGIE",
+              "ELEKTRISCH_ANGETRIEBENE_WAERMEPUMPEN",
+              "UMLAGEERHEBUNG_BEI_ANLAGEN_ZUR_VERSTROMUNG_VON_KUPPELGASEN",
+              "HERSTELLUNG_VON_GRUENEN_WASSERSTOFF",
+              "STROMKOSTENINTENSIVE_UNTERNEHMEN",
+              "HERSTELLUNG_VON_WASSERSTOFF_IN_STROMKOSTENINTENSIVEN_UNTERNEHMEN",
+              "SCHIENENBAHNEN",
+              "ELEKTRISCHE_BETRIEBENE_BUSSEN_IM_LINIENVERKEHR",
+              "LANDSTROMANLAGEN"
+            ]
+          }
         },
         "bankverbindung": {
           "$ref": "#/definitions/Bankverbindung"
@@ -913,9 +732,48 @@
         },
         "erreichbarkeit": {
           "$ref": "#/definitions/Erreichbarkeit"
+        },
+        "gueltigkeitszeitraum": {
+          "$ref": "#/definitions/Zeitraum"
+        },
+        "qualitaet": {
+          "type": ["string", "null"],
+          "enum": [
+            null,
+            "VOLLSTAENDIG",
+            "INFORMATIV",
+            "IM_SYSTEM_VORHANDEN",
+            "ERWARTET",
+            "VORLAEUFIG",
+            "UNVOLLSTAENDIG"
+          ]
         }
       },
-      "required": ["gewerbekennzeichnung"]
+      "required": [
+        "boTyp",
+        "versionStruktur",
+        "externeReferenzen",
+        "anrede",
+        "title",
+        "name1",
+        "name2",
+        "name3",
+        "gewerbekennzeichnung",
+        "hrnummer",
+        "amtsgericht",
+        "kontaktweg",
+        "umsatzsteuerId",
+        "glaeubigerId",
+        "eMailAdresse",
+        "website",
+        "geschaeftspartnerrolle",
+        "partneradresse",
+        "grundlageZurVerringerungDerUmlagenNachEnfg",
+        "gruendeDerPrivilegierungNachEnFG",
+        "bankverbindung",
+        "steuernummer",
+        "erreichbarkeit"
+      ]
     },
     "Menge": {
       "type": ["object", "null"],
@@ -954,13 +812,13 @@
           ]
         }
       },
-      "required": ["wert"]
+      "required": ["wert", "einheit"]
     },
     "Preis": {
-      "type": "object",
+      "type": ["object", "null"],
       "properties": {
         "wert": {
-          "type": "number"
+          "type": ["number", "null"]
         },
         "einheit": {
           "type": ["string", "null"],
@@ -1001,7 +859,7 @@
           "type": ["string", "null"]
         }
       },
-      "required": ["wert"]
+      "required": ["wert", "einheit", "bezugswert", "status"]
     },
     "Rechnungsposition": {
       "type": ["object", "null"],
@@ -1025,7 +883,7 @@
           "format": "date-time"
         },
         "positionstext": {
-          "type": "string"
+          "type": ["string", "null"]
         },
         "zeiteinheit": {
           "type": ["string", "null"],
@@ -1124,10 +982,10 @@
           "$ref": "#/definitions/Preis"
         },
         "teilsummeNetto": {
-          "$ref": "#/definitions/Betrag-1"
+          "$ref": "#/definitions/Betrag"
         },
         "teilrabattNetto": {
-          "$ref": "#/definitions/Betrag-1"
+          "$ref": "#/definitions/Betrag"
         },
         "teilsummeSteuer": {
           "$ref": "#/definitions/Steuerbetrag"
@@ -1155,9 +1013,49 @@
         "ausfuehrungsdatum": {
           "type": ["string", "null"],
           "format": "date-time"
+        },
+        "gesamtzuabschlagsbetrag": {
+          "type": ["number", "null"]
+        },
+        "zuschlag": {
+          "type": ["string", "null"],
+          "enum": [
+            null,
+            "UMSPANNUNGSZUSCHLAG",
+            "ALLEIN_GENUTZTE_BETRIEBSMITTEL_STROM_NEV",
+            "ANPASSUNG_STROM_NEV_19_2",
+            "PAUSCHALE_NETZENTGELTREDUZIERUNG_ENWG_14A"
+          ]
+        },
+        "abschlag": {
+          "type": ["string", "null"],
+          "enum": [null, "GEMEINDERABATT", "ANPASSUNG_STROM_NEV_19_2"]
         }
       },
-      "required": ["positionsnummer", "positionstext", "einzelpreis"]
+      "required": [
+        "positionsnummer",
+        "lieferungVon",
+        "lieferungBis",
+        "positionstext",
+        "zeiteinheit",
+        "artikelnummer",
+        "lokationsId",
+        "positionsMenge",
+        "zeitbezogeneMenge",
+        "korrekturfaktor",
+        "einzelpreis",
+        "teilsummeNetto",
+        "teilrabattNetto",
+        "teilsummeSteuer",
+        "vertragskontoId",
+        "vertragsId",
+        "status",
+        "artikelId",
+        "ausfuehrungsdatum",
+        "gesamtzuabschlagsbetrag",
+        "zuschlag",
+        "abschlag"
+      ]
     },
     "Steuerbetrag": {
       "type": ["object", "null"],
@@ -1385,7 +1283,15 @@
           "type": ["string", "null"]
         }
       },
-      "required": ["steuerkennzeichen", "basiswert", "steuerwert", "waehrung"]
+      "required": [
+        "steuerkennzeichen",
+        "sondersteuersatz",
+        "basiswert",
+        "steuerwert",
+        "waehrung",
+        "basiswertVorausgezahlt",
+        "steuerwertVorausgezahlt"
+      ]
     },
     "Vorauszahlung": {
       "type": ["object", "null"],
@@ -1408,7 +1314,7 @@
           "format": "date-time"
         }
       },
-      "required": ["betrag"]
+      "required": ["betrag", "referenz", "referenzDatum"]
     },
     "Zeitfenster": {
       "type": ["object", "null"],
@@ -1426,10 +1332,11 @@
         "endzeit": {
           "type": ["string", "null"]
         }
-      }
+      },
+      "required": ["startzeit", "endzeit"]
     },
     "Zeitraum": {
-      "type": "object",
+      "type": ["object", "null"],
       "properties": {
         "einheit": {
           "type": ["string", "null"],
@@ -1474,7 +1381,14 @@
           "type": ["string", "null"]
         }
       },
-      "required": ["startzeitpunkt", "endzeitpunkt"]
+      "required": [
+        "einheit",
+        "dauer",
+        "startdatum",
+        "enddatum",
+        "startzeitpunkt",
+        "endzeitpunkt"
+      ]
     }
   },
   "type": "object",
@@ -1509,7 +1423,7 @@
       "type": "boolean"
     },
     "rechnungsnummer": {
-      "type": "string"
+      "type": ["string", "null"]
     },
     "rechnungsdatum": {
       "type": "string",
@@ -1562,10 +1476,10 @@
       "$ref": "#/definitions/Betrag"
     },
     "vorausgezahlt": {
-      "$ref": "#/definitions/Betrag-1"
+      "$ref": "#/definitions/Betrag"
     },
     "rabattBrutto": {
-      "$ref": "#/definitions/Betrag-1"
+      "$ref": "#/definitions/Betrag"
     },
     "zuzahlen": {
       "$ref": "#/definitions/Betrag"
@@ -1577,7 +1491,7 @@
       }
     },
     "rechnungspositionen": {
-      "type": "array",
+      "type": ["array", "null"],
       "items": {
         "$ref": "#/definitions/Rechnungsposition"
       }
@@ -1612,21 +1526,50 @@
     "buchungsdatum": {
       "type": ["string", "null"],
       "format": "date-time"
+    },
+    "gueltigkeitszeitraum": {
+      "$ref": "#/definitions/Zeitraum"
+    },
+    "qualitaet": {
+      "type": ["string", "null"],
+      "enum": [
+        null,
+        "VOLLSTAENDIG",
+        "INFORMATIV",
+        "IM_SYSTEM_VORHANDEN",
+        "ERWARTET",
+        "VORLAEUFIG",
+        "UNVOLLSTAENDIG"
+      ]
     }
   },
   "required": [
+    "boTyp",
+    "versionStruktur",
+    "externeReferenzen",
+    "rechnungstitel",
+    "rechnungsstatus",
     "storno",
     "rechnungsnummer",
     "rechnungsdatum",
     "faelligkeitsdatum",
     "rechnungstyp",
+    "originalRechnungsnummer",
     "rechnungsperiode",
     "rechnungsersteller",
     "rechnungsempfaenger",
     "gesamtnetto",
     "gesamtsteuer",
     "gesamtbrutto",
+    "vorausgezahlt",
+    "rabattBrutto",
     "zuzahlen",
-    "rechnungspositionen"
+    "steuerbetraege",
+    "rechnungspositionen",
+    "istSelbstausgestellt",
+    "istReverseCharge",
+    "vorauszahlungen",
+    "sonderrechnungsart",
+    "buchungsdatum"
   ]
 }
