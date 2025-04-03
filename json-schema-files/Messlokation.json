@@ -12,10 +12,10 @@
           "type": ["string", "null"]
         },
         "postleitzahl": {
-          "type": "string"
+          "type": ["string", "null"]
         },
         "ort": {
-          "type": "string"
+          "type": ["string", "null"]
         },
         "strasse": {
           "type": ["string", "null"]
@@ -309,7 +309,16 @@
           "type": ["string", "null"]
         }
       },
-      "required": ["postleitzahl", "ort"]
+      "required": [
+        "postleitzahl",
+        "ort",
+        "strasse",
+        "hausnummer",
+        "postfach",
+        "adresszusatz",
+        "coErgaenzung",
+        "landescode"
+      ]
     },
     "Bankverbindung": {
       "type": ["object", "null"],
@@ -333,7 +342,8 @@
         "bankname": {
           "type": ["string", "null"]
         }
-      }
+      },
+      "required": ["iban", "kontoinhaber", "bankkennung", "bankname"]
     },
     "Dienstleistung": {
       "type": ["object", "null"],
@@ -383,7 +393,7 @@
           ]
         },
         "bezeichnung": {
-          "type": "string"
+          "type": ["string", "null"]
         },
         "timestamp": {
           "type": ["string", "null"],
@@ -423,7 +433,15 @@
         "mittagspause": {
           "$ref": "#/definitions/Zeitfenster"
         }
-      }
+      },
+      "required": [
+        "montagErreichbarkeit",
+        "dienstagErreichbarkeit",
+        "mittwochErreichbarkeit",
+        "donnerstagErreichbarkeit",
+        "freitagErreichbarkeit",
+        "mittagspause"
+      ]
     },
     "ExterneReferenz": {
       "type": ["object", "null"],
@@ -441,16 +459,32 @@
         "guid": {
           "type": ["string", "null"]
         }
-      }
+      },
+      "required": ["exRefName", "exRefWert"]
     },
     "Geokoordinaten": {
       "type": ["object", "null"],
       "properties": {
         "breitengrad": {
-          "type": "number"
+          "type": ["number", "null"]
         },
         "laengengrad": {
-          "type": "number"
+          "type": ["number", "null"]
+        },
+        "oestlicheLaenge": {
+          "type": ["number", "null"]
+        },
+        "noerdlicheBreite": {
+          "type": ["number", "null"]
+        },
+        "zone": {
+          "type": ["string", "null"]
+        },
+        "nordWert": {
+          "type": ["string", "null"]
+        },
+        "ostWert": {
+          "type": ["string", "null"]
         },
         "timestamp": {
           "type": ["string", "null"],
@@ -460,7 +494,15 @@
           "type": ["string", "null"]
         }
       },
-      "required": ["breitengrad", "laengengrad"]
+      "required": [
+        "breitengrad",
+        "laengengrad",
+        "oestlicheLaenge",
+        "noerdlicheBreite",
+        "zone",
+        "nordWert",
+        "ostWert"
+      ]
     },
     "Geraet": {
       "type": ["object", "null"],
@@ -491,7 +533,8 @@
             "ZAEHLEINRICHTUNG"
           ]
         }
-      }
+      },
+      "required": ["geraetenummer", "geraeteeigenschaften", "geraeteart"]
     },
     "Geraeteeigenschaften": {
       "type": ["object", "null"],
@@ -548,7 +591,10 @@
             "SMARTMETERGATEWAY",
             "STEUERBOX",
             "BLOCKSTROMWANDLER",
-            "KOMBIMESSWANDLER"
+            "KOMBIMESSWANDLER",
+            "DICHTEMENGENUMWERTER",
+            "TEMPERATURMENGENUMWERTER",
+            "ZUSTANDSMENGENUMWERTER"
           ]
         },
         "geraetemerkmal": {
@@ -626,7 +672,7 @@
           }
         }
       },
-      "required": ["geraetetyp"]
+      "required": ["geraetetyp", "geraetemerkmal", "Parameter"]
     },
     "Geschaeftspartner": {
       "type": ["object", "null"],
@@ -731,20 +777,22 @@
             "KEINE_ANGABE"
           ]
         },
-        "grundDerPrivilegierungNachEnFG": {
-          "type": ["string", "null"],
-          "enum": [
-            null,
-            "STROMSPEICHER_UND_VERLUSTENERGIE",
-            "ELEKTRISCH_ANGETRIEBENE_WAERMEPUMPEN",
-            "UMLAGEERHEBUNG_BEI_ANLAGEN_ZUR_VERSTROMUNG_VON_KUPPELGASEN",
-            "HERSTELLUNG_VON_GRUENEN_WASSERSTOFF",
-            "STROMKOSTENINTENSIVE_UNTERNEHMEN",
-            "HERSTELLUNG_VON_WASSERSTOFF_IN_STROMKOSTENINTENSIVEN_UNTERNEHMEN",
-            "SCHIENENBAHNEN",
-            "ELEKTRISCHE_BETRIEBENE_BUSSEN_IM_LINIENVERKEHR",
-            "LANDSTROMANLAGEN"
-          ]
+        "gruendeDerPrivilegierungNachEnFG": {
+          "type": ["array", "null"],
+          "items": {
+            "type": "string",
+            "enum": [
+              "STROMSPEICHER_UND_VERLUSTENERGIE",
+              "ELEKTRISCH_ANGETRIEBENE_WAERMEPUMPEN",
+              "UMLAGEERHEBUNG_BEI_ANLAGEN_ZUR_VERSTROMUNG_VON_KUPPELGASEN",
+              "HERSTELLUNG_VON_GRUENEN_WASSERSTOFF",
+              "STROMKOSTENINTENSIVE_UNTERNEHMEN",
+              "HERSTELLUNG_VON_WASSERSTOFF_IN_STROMKOSTENINTENSIVEN_UNTERNEHMEN",
+              "SCHIENENBAHNEN",
+              "ELEKTRISCHE_BETRIEBENE_BUSSEN_IM_LINIENVERKEHR",
+              "LANDSTROMANLAGEN"
+            ]
+          }
         },
         "bankverbindung": {
           "$ref": "#/definitions/Bankverbindung"
@@ -754,9 +802,48 @@
         },
         "erreichbarkeit": {
           "$ref": "#/definitions/Erreichbarkeit"
+        },
+        "gueltigkeitszeitraum": {
+          "$ref": "#/definitions/Zeitraum"
+        },
+        "qualitaet": {
+          "type": ["string", "null"],
+          "enum": [
+            null,
+            "VOLLSTAENDIG",
+            "INFORMATIV",
+            "IM_SYSTEM_VORHANDEN",
+            "ERWARTET",
+            "VORLAEUFIG",
+            "UNVOLLSTAENDIG"
+          ]
         }
       },
-      "required": ["gewerbekennzeichnung"]
+      "required": [
+        "boTyp",
+        "versionStruktur",
+        "externeReferenzen",
+        "anrede",
+        "title",
+        "name1",
+        "name2",
+        "name3",
+        "gewerbekennzeichnung",
+        "hrnummer",
+        "amtsgericht",
+        "kontaktweg",
+        "umsatzsteuerId",
+        "glaeubigerId",
+        "eMailAdresse",
+        "website",
+        "geschaeftspartnerrolle",
+        "partneradresse",
+        "grundlageZurVerringerungDerUmlagenNachEnfg",
+        "gruendeDerPrivilegierungNachEnFG",
+        "bankverbindung",
+        "steuernummer",
+        "erreichbarkeit"
+      ]
     },
     "Hardware": {
       "type": ["object", "null"],
@@ -807,11 +894,14 @@
             "SMARTMETERGATEWAY",
             "STEUERBOX",
             "BLOCKSTROMWANDLER",
-            "KOMBIMESSWANDLER"
+            "KOMBIMESSWANDLER",
+            "DICHTEMENGENUMWERTER",
+            "TEMPERATURMENGENUMWERTER",
+            "ZUSTANDSMENGENUMWERTER"
           ]
         },
         "bezeichnung": {
-          "type": "string"
+          "type": ["string", "null"]
         },
         "geraeteeigenschaften": {
           "$ref": "#/definitions/Geraeteeigenschaften"
@@ -830,16 +920,22 @@
           "type": ["string", "null"]
         }
       },
-      "required": ["bezeichnung"]
+      "required": [
+        "geraetetyp",
+        "bezeichnung",
+        "geraeteeigenschaften",
+        "geraetenummer",
+        "geraetereferenz"
+      ]
     },
     "Katasteradresse": {
       "type": ["object", "null"],
       "properties": {
         "gemarkung_flur": {
-          "type": "string"
+          "type": ["string", "null"]
         },
         "flurstueck": {
-          "type": "string"
+          "type": ["string", "null"]
         },
         "timestamp": {
           "type": ["string", "null"],
@@ -872,7 +968,7 @@
           "enum": ["KAS", "SA", "SAS", "TA", "TAS", "TK", "TKS", "TS", "TSS"]
         }
       },
-      "required": ["satz"]
+      "required": ["kosten", "kategorie", "satz"]
     },
     "MarktpartnerDetails": {
       "type": ["object", "null"],
@@ -915,7 +1011,13 @@
         "weiterverpflichtet": {
           "type": ["boolean", "null"]
         }
-      }
+      },
+      "required": [
+        "rollencodenummer",
+        "code",
+        "marktrolle",
+        "weiterverpflichtet"
+      ]
     },
     "Messprodukt": {
       "type": ["object", "null"],
@@ -946,7 +1048,15 @@
         },
         "waermenutzung": {
           "type": ["string", "null"],
-          "enum": [null, "SPEICHERHEIZUNG", "WAERMEPUMPE", "DIREKTHEIZUNG"]
+          "enum": [
+            null,
+            "SPEICHERHEIZUNG",
+            "WAERMEPUMPE",
+            "DIREKTHEIZUNG",
+            "WAERMEPUMPE_WAERME_KAELTE",
+            "WAERMEPUMPE_KAELTE",
+            "WAERMEPUMPE_WAERME"
+          ]
         },
         "zaehlzeiten": {
           "$ref": "#/definitions/Zaehlzeitregister"
@@ -961,7 +1071,17 @@
           "type": ["string", "null"],
           "enum": [null, "WALLBOX", "E_MOBILITAETSLADESAEULE", "LADEPARK"]
         }
-      }
+      },
+      "required": [
+        "messproduktId",
+        "verwendungszwecke",
+        "verbrauchsart",
+        "unterbrechbarkeit",
+        "waermenutzung",
+        "zaehlzeiten",
+        "zweiteMessung",
+        "emobilitaetsart"
+      ]
     },
     "Verwendungszweck": {
       "type": ["object", "null"],
@@ -995,7 +1115,6 @@
               "NETZNUTZUNGSABRECHNUNG",
               "BILANZKREISABRECHNUNG",
               "MEHRMINDERMENGENABRECHNUNG",
-              "MEHRMINDERMBENGENABRECHNUNG",
               "ENDKUNDENABRECHNUNG",
               "BLINDARBEITABRECHNUNG_BETRIEBSFUEHRUNG",
               "UEBERMITTLUNG_AN_DAS_HKNR",
@@ -1011,7 +1130,7 @@
           "type": ["string", "null"]
         }
       },
-      "required": ["marktrolle"]
+      "required": ["marktrolle", "zweck"]
     },
     "Zaehler": {
       "type": ["object", "null"],
@@ -1036,7 +1155,7 @@
           "type": ["string", "null"]
         },
         "zaehlernummer": {
-          "type": "string"
+          "type": ["string", "null"]
         },
         "sparte": {
           "type": "string",
@@ -1072,7 +1191,8 @@
             "SONDERAUSSTATTUNG",
             "WASSERZAEHLER",
             "MODERNEMESSEINRICHTUNG",
-            "NEUEMESSEINRICHTUNGGAS"
+            "NEUEMESSEINRICHTUNGGAS",
+            "MENGENUMWERTER"
           ]
         },
         "tarifart": {
@@ -1213,9 +1333,44 @@
           "items": {
             "$ref": "#/definitions/Geraet"
           }
+        },
+        "gueltigkeitszeitraum": {
+          "$ref": "#/definitions/Zeitraum"
+        },
+        "qualitaet": {
+          "type": ["string", "null"],
+          "enum": [
+            null,
+            "VOLLSTAENDIG",
+            "INFORMATIV",
+            "IM_SYSTEM_VORHANDEN",
+            "ERWARTET",
+            "VORLAEUFIG",
+            "UNVOLLSTAENDIG"
+          ]
         }
       },
-      "required": ["zaehlernummer", "sparte"]
+      "required": [
+        "boTyp",
+        "versionStruktur",
+        "externeReferenzen",
+        "zaehlernummer",
+        "sparte",
+        "zaehlerauspraegung",
+        "zaehlertyp",
+        "tarifart",
+        "zaehlerkonstante",
+        "eichungBis",
+        "letzteEichung",
+        "zaehlwerke",
+        "gateway",
+        "fernschaltung",
+        "messwerterfassung",
+        "zaehlertypspezifikation",
+        "befestigungsart",
+        "zaehlergroesse",
+        "geraete"
+      ]
     },
     "Zaehlwerk": {
       "type": ["object", "null"],
@@ -1235,7 +1390,7 @@
         },
         "richtung": {
           "type": ["string", "null"],
-          "enum": [null, "AUSSP", "EINSP"]
+          "enum": [null, "AUSSP", "EINSP", "RUHEND", "KUNDENANLAGE"]
         },
         "obisKennzahl": {
           "type": ["string", "null"]
@@ -1289,7 +1444,15 @@
         },
         "waermenutzung": {
           "type": ["string", "null"],
-          "enum": [null, "SPEICHERHEIZUNG", "WAERMEPUMPE", "DIREKTHEIZUNG"]
+          "enum": [
+            null,
+            "SPEICHERHEIZUNG",
+            "WAERMEPUMPE",
+            "DIREKTHEIZUNG",
+            "WAERMEPUMPE_WAERME_KAELTE",
+            "WAERMEPUMPE_KAELTE",
+            "WAERMEPUMPE_WAERME"
+          ]
         },
         "konzessionsabgabe": {
           "$ref": "#/definitions/Konzessionsabgabe"
@@ -1319,7 +1482,30 @@
           "type": ["string", "null"],
           "enum": [null, "WALLBOX", "E_MOBILITAETSLADESAEULE", "LADEPARK"]
         }
-      }
+      },
+      "required": [
+        "zaehlwerkId",
+        "bezeichnung",
+        "richtung",
+        "obisKennzahl",
+        "wandlerfaktor",
+        "einheit",
+        "kennzahl",
+        "schwachlastfaehig",
+        "verwendungszwecke",
+        "verbrauchsart",
+        "unterbrechbarkeit",
+        "waermenutzung",
+        "konzessionsabgabe",
+        "steuerbefreit",
+        "vorkommastelle",
+        "nachkommastelle",
+        "abrechnungsrelevant",
+        "anzahlAblesungen",
+        "zaehlzeiten",
+        "konfiguration",
+        "emobilitaetsart"
+      ]
     },
     "Zaehlzeitregister": {
       "type": ["object", "null"],
@@ -1341,7 +1527,8 @@
           "type": ["string", "null"],
           "enum": [null, "NICHT_SCHWACHLASTFAEHIG", "SCHWACHLASTFAEHIG"]
         }
-      }
+      },
+      "required": ["zaehlzeitDefinition", "register", "schwachlastfaehig"]
     },
     "Zeitfenster": {
       "type": ["object", "null"],
@@ -1359,7 +1546,63 @@
         "endzeit": {
           "type": ["string", "null"]
         }
-      }
+      },
+      "required": ["startzeit", "endzeit"]
+    },
+    "Zeitraum": {
+      "type": ["object", "null"],
+      "properties": {
+        "einheit": {
+          "type": ["string", "null"],
+          "enum": [
+            null,
+            "SEKUNDE",
+            "MINUTE",
+            "STUNDE",
+            "VIERTEL_STUNDE",
+            "TAG",
+            "WOCHE",
+            "MONAT",
+            "QUARTAL",
+            "HALBJAHR",
+            "JAHR"
+          ]
+        },
+        "dauer": {
+          "type": ["number", "null"]
+        },
+        "startdatum": {
+          "type": ["string", "null"],
+          "format": "date-time"
+        },
+        "enddatum": {
+          "type": ["string", "null"],
+          "format": "date-time"
+        },
+        "startzeitpunkt": {
+          "type": ["string", "null"],
+          "format": "date-time"
+        },
+        "endzeitpunkt": {
+          "type": ["string", "null"],
+          "format": "date-time"
+        },
+        "timestamp": {
+          "type": ["string", "null"],
+          "format": "date-time"
+        },
+        "guid": {
+          "type": ["string", "null"]
+        }
+      },
+      "required": [
+        "einheit",
+        "dauer",
+        "startdatum",
+        "enddatum",
+        "startzeitpunkt",
+        "endzeitpunkt"
+      ]
     }
   },
   "type": "object",
@@ -1384,7 +1627,7 @@
       "type": ["string", "null"]
     },
     "messlokationsId": {
-      "type": "string",
+      "type": ["string", "null"],
       "default": "|null|"
     },
     "sparte": {
@@ -1469,7 +1712,7 @@
     },
     "gasqualitaet": {
       "type": ["string", "null"],
-      "enum": [null, "ZERO", "H_GAS", "HGAS", "L_GAS", "LGAS"]
+      "enum": [null, "ZERO", "H_GAS", "L_GAS"]
     },
     "verlustfaktor": {
       "type": ["number", "null"]
@@ -1492,7 +1735,49 @@
     },
     "lokationsbuendelObjektcode": {
       "type": ["string", "null"]
+    },
+    "vorgelagerteLokationsId": {
+      "type": ["string", "null"]
+    },
+    "gueltigkeitszeitraum": {
+      "$ref": "#/definitions/Zeitraum"
+    },
+    "qualitaet": {
+      "type": ["string", "null"],
+      "enum": [
+        null,
+        "VOLLSTAENDIG",
+        "INFORMATIV",
+        "IM_SYSTEM_VORHANDEN",
+        "ERWARTET",
+        "VORLAEUFIG",
+        "UNVOLLSTAENDIG"
+      ]
     }
   },
-  "required": ["messlokationsId", "sparte"]
+  "required": [
+    "boTyp",
+    "versionStruktur",
+    "externeReferenzen",
+    "messlokationsId",
+    "sparte",
+    "netzebeneMessung",
+    "messgebietNr",
+    "grundzustaendigerMSBCodeNr",
+    "grundzustaendigerMSBIMCodeNr",
+    "messadresse",
+    "geoadresse",
+    "katasterinformation",
+    "geraete",
+    "messdienstleistung",
+    "messlokationszaehler",
+    "bilanzierungsmethode",
+    "abrechnungmessstellenbetriebnna",
+    "marktrollen",
+    "verlustfaktor",
+    "zaehlwerke",
+    "messprodukte",
+    "lokationsbuendelObjektcode",
+    "vorgelagerteLokationsId"
+  ]
 }

@@ -21,11 +21,7 @@ public class SteuerbareRessource : BusinessObject
     /// </summary>
     /// <remarks>Edi-beispiel: LOC+Z19+C816417ST77'</remarks>
     [DefaultValue("|null|")]
-    [JsonProperty(
-        Required = Required.Always,
-        Order = 10,
-        PropertyName = "steuerbareRessourceId"
-    )]
+    [JsonProperty(Order = 10, PropertyName = "steuerbareRessourceId")]
     [JsonPropertyName("steuerbareRessourceId")]
     [JsonPropertyOrder(10)]
     [DataCategory(DataCategory.DEVICE)]
@@ -37,11 +33,7 @@ public class SteuerbareRessource : BusinessObject
     /// Leistungsbeschreibung des Steuerkanals
     /// </summary>
     /// <remarks>Edi-beispiel: CAV+ZF2:Z14'</remarks>
-    [JsonProperty(
-        Required = Required.Default,
-        Order = 11,
-        PropertyName = "steuerkanalsLeistungsbeschreibung"
-    )]
+    [JsonProperty(Order = 11, PropertyName = "steuerkanalsLeistungsbeschreibung")]
     [JsonPropertyName("steuerkanalsLeistungsbeschreibung")]
     [JsonPropertyOrder(11)]
     [NonOfficial(NonOfficialCategory.MISSING)]
@@ -52,11 +44,7 @@ public class SteuerbareRessource : BusinessObject
     /// Angabe des Messstellenbetreibers, der der Steuerbaren Ressource zugeordnet ist.
     /// </summary>
     /// <remarks>Edi-beispiel: CAV+Z91:9900000000002'</remarks>
-    [JsonProperty(
-        Required = Required.Default,
-        Order = 12,
-        PropertyName = "zugeordnetMSBCodeNr"
-    )]
+    [JsonProperty(Order = 12, PropertyName = "zugeordnetMSBCodeNr")]
     [JsonPropertyOrder(12)]
     [JsonPropertyName("zugeordnetMSBCodeNr")]
     [ProtoMember(12)]
@@ -65,11 +53,7 @@ public class SteuerbareRessource : BusinessObject
     /// <summary>
     /// Produkt-Daten der Steuerbaren Ressource
     /// </summary>
-    [JsonProperty(
-        Required = Required.Default,
-        Order = 13,
-        PropertyName = "konfigurationsprodukte"
-    )]
+    [JsonProperty(Order = 13, PropertyName = "konfigurationsprodukte")]
     [JsonPropertyName("konfigurationsprodukte")]
     [ProtoMember(13)]
     [JsonPropertyOrder(13)]
@@ -79,11 +63,7 @@ public class SteuerbareRessource : BusinessObject
     /// <summary>
     /// Eigenschaft des Messstellenbetreiber an der Lokation
     /// </summary>
-    [JsonProperty(
-        Required = Required.Default,
-        Order = 14,
-        PropertyName = "eigenschaftMSBLokation"
-    )]
+    [JsonProperty(Order = 14, PropertyName = "eigenschaftMSBLokation")]
     [JsonPropertyName("eigenschaftMSBLokation")]
     [ProtoMember(14)]
     [JsonPropertyOrder(14)]
@@ -94,7 +74,7 @@ public class SteuerbareRessource : BusinessObject
     // /// Lokationszuordnung, um bspw. die zugehörigen Messlokationen anzugeben
     // /// </summary>
     // [JsonProperty(
-    //     Required = Required.Default,
+    //
     //     Order = 15,
     //     PropertyName = "lokationszuordnungen"
     // )]
@@ -106,14 +86,20 @@ public class SteuerbareRessource : BusinessObject
     /// <summary>
     /// Lokationsbuendel Code, der die Funktion dieses BOs an der Lokationsbuendelstruktur beschreibt.
     /// </summary>
-    [JsonProperty(
-        Required = Required.Default,
-        Order = 16,
-        PropertyName = "lokationsbuendelObjektcode"
-    )]
+    [JsonProperty(Order = 16, PropertyName = "lokationsbuendelObjektcode")]
     [JsonPropertyName("lokationsbuendelObjektcode")]
     [ProtoMember(16)]
     [JsonPropertyOrder(16)]
     [NonOfficial(NonOfficialCategory.CUSTOMER_REQUIREMENTS)]
     public string? LokationsbuendelObjektcode { get; set; }
+
+    /// <summary>
+    /// Ergänzt die Marktrollen zu der Steuerbaren Ressource
+    /// </summary>
+    [JsonProperty(Order = 17, PropertyName = "marktrollen")]
+    [JsonPropertyName("marktrollen")]
+    [ProtoMember(17)]
+    [JsonPropertyOrder(17)]
+    [NonOfficial(NonOfficialCategory.CUSTOMER_REQUIREMENTS)]
+    public List<MarktpartnerDetails>? Marktrollen { get; set; } // ToDo: evaluate this
 }

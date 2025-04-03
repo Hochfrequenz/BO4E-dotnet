@@ -1,15 +1,12 @@
-using BO4E.BO;
-using BO4E.meta;
-
-using Newtonsoft.Json;
-
-using ProtoBuf;
-
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using System.Text.Json.Serialization;
+using BO4E.BO;
+using BO4E.meta;
+using Newtonsoft.Json;
+using ProtoBuf;
 
 namespace BO4E.COM;
 
@@ -79,7 +76,6 @@ public abstract class COM : IUserProperties, IOptionalGuid
 
     // note that this inheritance protobuf thing doesn't work as expected. please see the comments in TestBO4E project->TestProfobufSerialization
     [ProtoMember(1)]
-
 #pragma warning disable IDE1006 // Naming Styles
     // ReSharper disable once InconsistentNaming
     protected string guidSerialized
@@ -105,8 +101,11 @@ public abstract class COM : IUserProperties, IOptionalGuid
     /// <summary>
     ///     Store the latest timestamp (update from the database)
     /// </summary>
-    [JsonProperty(PropertyName = "timestamp", NullValueHandling = NullValueHandling.Ignore,
-        Required = Required.Default, Order = 0)]
+    [JsonProperty(
+        PropertyName = "timestamp",
+        NullValueHandling = NullValueHandling.Ignore,
+        Order = 0
+    )]
     [JsonPropertyName("timestamp")]
     [ProtoIgnore]
     [JsonPropertyOrder(0)]
@@ -119,15 +118,18 @@ public abstract class COM : IUserProperties, IOptionalGuid
     /// <returns><code>true</code> iff all elements of this COM and COM b are equal; <code>false</code> otherwise</returns>
     public bool Equals(COM b)
     {
-        if (b == null || b.GetType() != GetType()) return false;
+        if (b == null || b.GetType() != GetType())
+        {
+            return false;
+        }
+
         return JsonConvert.SerializeObject(this) == JsonConvert.SerializeObject(b);
     }
 
     /// <summary>
     ///     allows adding a GUID to COM objects for tracking across systems
     /// </summary>
-    [JsonProperty(PropertyName = "guid", NullValueHandling = NullValueHandling.Ignore, Required = Required.Default,
-        Order = 1)]
+    [JsonProperty(PropertyName = "guid", NullValueHandling = NullValueHandling.Ignore, Order = 1)]
     [JsonPropertyName("guid")]
     [JsonPropertyOrder(1)]
     public Guid? Guid { get; set; }
@@ -135,8 +137,11 @@ public abstract class COM : IUserProperties, IOptionalGuid
     /// <summary>
     ///     User properties (non bo4e standard)
     /// </summary>
-    [JsonProperty(PropertyName = BusinessObject.USER_PROPERTIES_NAME, Required = Required.Default, Order = 2,
-        DefaultValueHandling = DefaultValueHandling.Ignore)]
+    [JsonProperty(
+        PropertyName = BusinessObject.USER_PROPERTIES_NAME,
+        Order = 2,
+        DefaultValueHandling = DefaultValueHandling.Ignore
+    )]
     [ProtoMember(2)]
     [Newtonsoft.Json.JsonExtensionData]
     [System.Text.Json.Serialization.JsonExtensionData]
@@ -167,14 +172,14 @@ public abstract class COM : IUserProperties, IOptionalGuid
         {
             return new List<string>();
         }
-        var regularPropertyNames = GetType().GetProperties()
+        var regularPropertyNames = GetType()
+            .GetProperties()
             .Where(p => p.GetCustomAttribute<JsonPropertyNameAttribute>() != null)
             .Select(p => p.GetCustomAttribute<JsonPropertyNameAttribute>().Name)
             .Select(x => x.ToLower())
             .ToHashSet();
         var result = UserProperties
-            .Keys
-            .Where(k => regularPropertyNames.Contains(k.ToLower()))
+            .Keys.Where(k => regularPropertyNames.Contains(k.ToLower()))
             .ToList();
         return result;
     }
