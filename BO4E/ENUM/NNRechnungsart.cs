@@ -7,5 +7,6 @@ public enum NNRechnungsart
 {
     /// <summary>Selbst ausgestellte Rechnung, z.B. für Einspeiserechnungen.</summary>
     [EnumMember(Value = "SELBSTAUSGESTELLT")]
+    [System.Text.Json.Serialization.JsonStringEnumMemberName("SELBSTAUSGESTELLT")]
     SELBSTAUSGESTELLT,
 }
