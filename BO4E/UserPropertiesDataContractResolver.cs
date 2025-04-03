@@ -32,12 +32,23 @@ public class UserPropertiesDataContractResolver : DefaultContractResolver
     public override JsonContract ResolveContract(Type type)
     {
         var contract = base.ResolveContract(type);
-        if (!(contract is JsonObjectContract objContract)) return contract;
-        if (objContract.ExtensionDataSetter == null) return contract;
+        if (!(contract is JsonObjectContract objContract))
+        {
+            return contract;
+        }
+
+        if (objContract.ExtensionDataSetter == null)
+        {
+            return contract;
+        }
+
         var oldSetter = objContract.ExtensionDataSetter;
         objContract.ExtensionDataSetter = (o, key, value) =>
         {
-            if (_allowList.Contains(key)) oldSetter(o, key, value);
+            if (_allowList.Contains(key))
+            {
+                oldSetter(o, key, value);
+            }
         };
         return contract;
     }

@@ -1,0 +1,239 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "title": "Schaltzeitdefinition",
+  "definitions": {
+    "HaeufigkeitZaehlzeit": {
+      "type": "integer",
+      "description": "",
+      "x-enumNames": ["EINMALIG", "JAEHRLICH"],
+      "enum": [0, 1]
+    },
+    "UebermittelbarkeitZaehlzeit": {
+      "type": "integer",
+      "description": "",
+      "x-enumNames": ["ELEKTRONISCH", "NICHT_ELEKTRONISCH"],
+      "enum": [0, 1]
+    },
+    "Schalthandlung": {
+      "type": "integer",
+      "description": "",
+      "x-enumNames": ["LEISTUNG_LOKATION_AN", "LEISTUNG_LOKATION_AUS"],
+      "enum": [0, 1]
+    },
+    "BusinessObject": {
+      "type": "object",
+      "x-abstract": true,
+      "additionalProperties": {},
+      "properties": {
+        "boTyp": {
+          "type": "string",
+          "x-nullable": true
+        },
+        "versionStruktur": {
+          "type": "string",
+          "x-nullable": true
+        },
+        "guidSerialized": {
+          "type": "string"
+        },
+        "timestamp": {
+          "type": "string",
+          "format": "date-time",
+          "x-nullable": true
+        },
+        "externeReferenzen": {
+          "type": "array",
+          "x-nullable": true,
+          "items": {
+            "$ref": "#/definitions/ExterneReferenz"
+          }
+        },
+        "guid": {
+          "type": "string",
+          "format": "guid",
+          "x-nullable": true
+        },
+        "gueltigkeitszeitraum": {
+          "x-nullable": true,
+          "oneOf": [
+            {
+              "$ref": "#/definitions/Zeitraum"
+            }
+          ]
+        },
+        "qualitaet": {
+          "x-nullable": true,
+          "oneOf": [
+            {
+              "$ref": "#/definitions/Qualitaet"
+            }
+          ]
+        }
+      }
+    },
+    "ExterneReferenz": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/COM"
+        },
+        {
+          "type": "object",
+          "additionalProperties": {},
+          "properties": {
+            "exRefName": {
+              "type": "string",
+              "x-nullable": true
+            },
+            "exRefWert": {
+              "type": "string",
+              "x-nullable": true
+            }
+          }
+        }
+      ]
+    },
+    "COM": {
+      "type": "object",
+      "x-abstract": true,
+      "additionalProperties": {},
+      "properties": {
+        "guidSerialized": {
+          "type": "string"
+        },
+        "timestamp": {
+          "type": "string",
+          "format": "date-time",
+          "x-nullable": true
+        },
+        "guid": {
+          "type": "string",
+          "format": "guid",
+          "x-nullable": true
+        }
+      }
+    },
+    "Zeitraum": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/COM"
+        },
+        {
+          "type": "object",
+          "additionalProperties": {},
+          "properties": {
+            "einheit": {
+              "x-nullable": true,
+              "oneOf": [
+                {
+                  "$ref": "#/definitions/Zeiteinheit"
+                }
+              ]
+            },
+            "dauer": {
+              "type": "number",
+              "format": "decimal",
+              "x-nullable": true
+            },
+            "startdatum": {
+              "type": "string",
+              "format": "date-time",
+              "x-nullable": true
+            },
+            "enddatum": {
+              "type": "string",
+              "format": "date-time",
+              "x-nullable": true
+            },
+            "startzeitpunkt": {
+              "type": "string",
+              "format": "date-time",
+              "x-nullable": true
+            },
+            "endzeitpunkt": {
+              "type": "string",
+              "format": "date-time",
+              "x-nullable": true
+            }
+          }
+        }
+      ]
+    },
+    "Zeiteinheit": {
+      "type": "integer",
+      "description": "",
+      "x-enumNames": [
+        "SEKUNDE",
+        "MINUTE",
+        "STUNDE",
+        "VIERTEL_STUNDE",
+        "TAG",
+        "WOCHE",
+        "MONAT",
+        "QUARTAL",
+        "HALBJAHR",
+        "JAHR"
+      ],
+      "enum": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+    },
+    "Qualitaet": {
+      "type": "integer",
+      "description": "",
+      "x-enumNames": [
+        "VOLLSTAENDIG",
+        "INFORMATIV",
+        "IM_SYSTEM_VORHANDEN",
+        "ERWARTET",
+        "VORLAEUFIG",
+        "UNVOLLSTAENDIG"
+      ],
+      "enum": [0, 1, 2, 3, 4, 5]
+    }
+  },
+  "allOf": [
+    {
+      "$ref": "#/definitions/BusinessObject"
+    },
+    {
+      "type": "object",
+      "additionalProperties": {},
+      "properties": {
+        "ausgerollt": {
+          "type": "boolean",
+          "x-nullable": true
+        },
+        "aenderungszeitpunkt": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "schaltzeitdefinitionscode": {
+          "type": "string",
+          "x-nullable": true
+        },
+        "haeufigkeit": {
+          "x-nullable": true,
+          "oneOf": [
+            {
+              "$ref": "#/definitions/HaeufigkeitZaehlzeit"
+            }
+          ]
+        },
+        "uebermittelbarkeit": {
+          "x-nullable": true,
+          "oneOf": [
+            {
+              "$ref": "#/definitions/UebermittelbarkeitZaehlzeit"
+            }
+          ]
+        },
+        "schalthandlung": {
+          "x-nullable": true,
+          "oneOf": [
+            {
+              "$ref": "#/definitions/Schalthandlung"
+            }
+          ]
+        }
+      }
+    }
+  ]
+}
