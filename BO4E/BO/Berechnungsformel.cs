@@ -1,3 +1,4 @@
+#nullable enable
 using System;
 using System.Text.Json.Serialization;
 using BO4E.COM;
@@ -63,7 +64,7 @@ public class Berechnungsformel : BusinessObject
     /// <remarks>UTILTS SG9 CAV 7111</remarks>
     [JsonProperty(Order = 8, PropertyName = "verwendungszweck")]
     [JsonPropertyName("verwendungszweck")]
-    public Verwendungszweck Verwendungszweck { get; set; }
+    public Verwendungszweck? Verwendungszweck { get; set; }
 
     /// <summary>
     /// Eine Berechnungsformel enthält, falls sie notwendig ist <see cref="BerechnungsformelNotwendigkeit.BERECHNUNGSFORMEL_NOTWENDIG"/>,
