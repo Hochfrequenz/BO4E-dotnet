@@ -1,3 +1,4 @@
+#nullable enable
 using System;
 using System.Collections.Generic;
 using System.Text.Json.Serialization;
@@ -27,7 +28,7 @@ public class Angebot : BusinessObject
     [JsonPropertyOrder(10)]
     [DataCategory(DataCategory.FINANCE)]
     [BoKey]
-    public string Angebotsnummer { get; set; }
+    public string? Angebotsnummer { get; set; }
 
     /// <summary>
     ///     Referenz auf eine Anfrage oder Ausschreibung.Kann dem Empfänger des Angebotes bei Zuordnung des Angebotes zur
@@ -105,7 +106,7 @@ public class Angebot : BusinessObject
     [JsonPropertyOrder(16)]
     [ProtoMember(9)]
     [DataCategory(DataCategory.FINANCE)]
-    public Geschaeftspartner Angebotgeber { get; set; }
+    public Geschaeftspartner? Angebotgeber { get; set; }
 
     /// <summary>
     ///     Link auf den Empfänger des Angebots.
@@ -116,7 +117,7 @@ public class Angebot : BusinessObject
     [JsonPropertyOrder(17)]
     [ProtoMember(10)]
     [DataCategory(DataCategory.FINANCE)]
-    public Geschaeftspartner Angebotnehmer { get; set; }
+    public Geschaeftspartner? Angebotnehmer { get; set; }
 
     /// <summary>
     ///     Link auf die Person, die als Angebotsnehmer das Angebot angenommen hat.
