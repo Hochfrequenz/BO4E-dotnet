@@ -1,3 +1,4 @@
+#nullable enable
 using System.Collections.Generic;
 using System.Text.Json.Serialization;
 using BO4E.ENUM;
@@ -30,5 +31,5 @@ public class Handelsunstimmigkeitsbegruendung : COM
     [JsonPropertyName("grund")]
     [NonOfficial(NonOfficialCategory.MISSING)]
     [ProtoMember(2)]
-    public Handelsunstimmigkeitsgrund Grund { get; set; }
+    public Handelsunstimmigkeitsgrund? Grund { get; set; }
 }
