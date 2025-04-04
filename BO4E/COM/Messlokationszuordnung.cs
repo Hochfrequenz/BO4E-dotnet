@@ -1,3 +1,4 @@
+#nullable enable
 using System;
 using System.Text.Json.Serialization;
 using BO4E.ENUM;
@@ -20,7 +21,7 @@ public class Messlokationszuordnung : COM
     [JsonProperty(PropertyName = "messlokationsId")]
     [JsonPropertyName("messlokationsId")]
     [ProtoMember(3)]
-    public string MesslokationsId { get; set; }
+    public string? MesslokationsId { get; set; }
 
     /// <summary>
     ///     Die Operation, mit der eine Messung an dieser Lokation für den Gesamtverbrauch der Marktlokation verrechnet

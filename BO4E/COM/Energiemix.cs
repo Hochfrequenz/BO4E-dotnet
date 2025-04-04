@@ -1,3 +1,4 @@
+#nullable enable
 using System.Collections.Generic;
 using System.Text.Json.Serialization;
 using BO4E.ENUM;
@@ -14,19 +15,19 @@ public class Energiemix : COM
     [JsonProperty(PropertyName = "energiemixnummer")]
     [JsonPropertyName("energiemixnummer")]
     [ProtoMember(3)]
-    public int Energiemixnummer { get; set; }
+    public int? Energiemixnummer { get; set; } // todo: probably should be a string
 
     /// <summary>Strom oder Gas etc.. Details <see cref="Sparte" /></summary>
     [JsonProperty(PropertyName = "energieart")]
     [JsonPropertyName("energieart")]
     [ProtoMember(4)]
-    public Sparte Energieart { get; set; }
+    public Sparte? Energieart { get; set; }
 
     /// <summary>Bezeichnung des Energiemix.</summary>
     [JsonProperty(PropertyName = "bezeichnung")]
     [JsonPropertyName("bezeichnung")]
     [ProtoMember(5)]
-    public string Bezeichnung { get; set; }
+    public string? Bezeichnung { get; set; }
 
     /// <summary>Bemerkung zum Energiemix.</summary>
     [JsonProperty(PropertyName = "bemerkung")]
@@ -38,7 +39,7 @@ public class Energiemix : COM
     [JsonProperty(PropertyName = "gueltigkeitsjahr")]
     [JsonPropertyName("gueltigkeitsjahr")]
     [ProtoMember(7)]
-    public int Gueltigkeitsjahr { get; set; }
+    public int? Gueltigkeitsjahr { get; set; }
 
     /// <summary>Höhe des erzeugten CO2-Ausstosses in g/kWh.</summary>
     [JsonProperty(PropertyName = "cO2Emission")]
@@ -80,5 +81,5 @@ public class Energiemix : COM
     [JsonProperty(PropertyName = "anteil")]
     [JsonPropertyName("anteil")]
     [ProtoMember(14)]
-    public List<Energieherkunft> Anteil { get; set; }
+    public List<Energieherkunft>? Anteil { get; set; }
 }
