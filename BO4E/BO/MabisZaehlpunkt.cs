@@ -1,3 +1,4 @@
+#nullable enable
 using System.ComponentModel;
 using System.Text.Json.Serialization;
 using System.Text.RegularExpressions;
@@ -26,14 +27,14 @@ public class MabisZaehlpunkt : BusinessObject
     [DataCategory(DataCategory.POD)]
     [BoKey]
     [ProtoMember(4)]
-    public string Id { get; set; }
+    public string? Id { get; set; }
 
     /// <summary>
     ///     Test if a <paramref name="id" /> is a valid messlokations ID.
     /// </summary>
     /// <param name="id">id to test</param>
     /// <returns></returns>
-    public static bool ValidateId(string id)
+    public static bool ValidateId(string? id)
     {
         return !string.IsNullOrWhiteSpace(id) && RegexValidate.IsMatch(id);
     }
