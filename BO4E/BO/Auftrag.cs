@@ -1,3 +1,4 @@
+#nullable enable
 using System;
 using System.Collections.Generic;
 using System.Text.Json.Serialization;
@@ -87,7 +88,7 @@ public abstract class Auftrag : BusinessObject
     [JsonPropertyName("marktlokationsId")]
     [JsonPropertyOrder(5)]
     [ProtoMember(7)]
-    public string MarktlokationsId { get; set; }
+    public string? MarktlokationsId { get; set; }
 
     /// <summary>
     /// Ein zusätzlicher Freitext
