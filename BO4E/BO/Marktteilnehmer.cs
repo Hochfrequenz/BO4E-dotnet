@@ -1,3 +1,4 @@
+#nullable enable
 using System.Text.Json.Serialization;
 using BO4E.ENUM;
 using BO4E.meta;
@@ -35,7 +36,7 @@ public class Marktteilnehmer : Geschaeftspartner
     [JsonPropertyName("rollencodenummer")]
     [JsonPropertyOrder(32)]
     //[ProtoMember(20)]
-    public string Rollencodenummer { get; set; }
+    public string? Rollencodenummer { get; set; }
 
     /// <summary>Gibt den Typ des Codes an.</summary>
     /// <example>BDEW (instead of 293, 500 etc.)</example>
@@ -43,7 +44,7 @@ public class Marktteilnehmer : Geschaeftspartner
     [JsonPropertyOrder(33)]
     [JsonPropertyName("rollencodetyp")]
     //[ProtoMember(21)]
-    public Rollencodetyp Rollencodetyp { get; set; }
+    public Rollencodetyp? Rollencodetyp { get; set; }
 
     /// <summary>
     ///     Die 1:1-Kommunikationsadresse des Marktteilnehmers. Diese wird in der
