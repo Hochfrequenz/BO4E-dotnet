@@ -38,6 +38,13 @@ public class TestEnumMembers
                 .Where(f => !f.GetCustomAttributes<EnumMemberAttribute>().Any())
                 .Select(f => new Tuple<Type, string>(enumType, f.Name));
             fieldsWithoutEnumMemberAttributes.Should().BeEmpty();
+            var fieldsWithoutSTJEnumMemberAttributes = enumFields
+                .Where(f =>
+                    !f.GetCustomAttributes<System.Text.Json.Serialization.JsonStringEnumMemberNameAttribute>()
+                        .Any()
+                )
+                .Select(f => new Tuple<Type, string>(enumType, f.Name));
+            fieldsWithoutSTJEnumMemberAttributes.Should().BeEmpty();
             var enumMemberAttributeDiffersFromEnumMemberName = enumFields
                 .Select(f => new Tuple<string, string>(
                     f.GetCustomAttribute<EnumMemberAttribute>().Value,
@@ -45,6 +52,13 @@ public class TestEnumMembers
                 ))
                 .Where(nameTuple => nameTuple.Item1 != nameTuple.Item2);
             enumMemberAttributeDiffersFromEnumMemberName.Should().BeEmpty();
+            var enumMemberSTJAttributeDiffersFromEnumMemberName = enumFields
+                .Select(f => new Tuple<string, string>(
+                    f.GetCustomAttribute<System.Text.Json.Serialization.JsonStringEnumMemberNameAttribute>().Name,
+                    f.Name
+                ))
+                .Where(nameTuple => nameTuple.Item1 != nameTuple.Item2);
+            enumMemberSTJAttributeDiffersFromEnumMemberName.Should().BeEmpty();
         }
     }
 

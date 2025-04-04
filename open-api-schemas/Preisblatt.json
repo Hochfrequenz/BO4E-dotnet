@@ -9,11 +9,9 @@
         },
         {
           "type": "object",
-          "description": "Diese Komponente wird zur Abbildung von Zeiträumen in Form von Dauern oder der Angabe von Start und Ende\nverwendet.\n            ",
           "additionalProperties": {},
           "properties": {
             "einheit": {
-              "description": "Die Einheit in der die Dauer angeben ist. Z.B. Monate. ",
               "x-nullable": true,
               "oneOf": [
                 {
@@ -23,31 +21,26 @@
             },
             "dauer": {
               "type": "number",
-              "description": "Gibt die Anzahl der Zeiteinheiten an, z.B. 3 (Monate).",
               "format": "decimal",
               "x-nullable": true
             },
             "startdatum": {
               "type": "string",
-              "description": "Gibt Tag und Uhrzeit (falls vorhanden) an, wann der Zeitraum startet.",
               "format": "date-time",
               "x-nullable": true
             },
             "enddatum": {
               "type": "string",
-              "description": "Gibt Tag und Uhrzeit (falls vorhanden) an, wann der Zeitraum endet.",
               "format": "date-time",
               "x-nullable": true
             },
             "startzeitpunkt": {
               "type": "string",
-              "description": "The same value as Startdatum",
               "format": "date-time",
               "x-nullable": true
             },
             "endzeitpunkt": {
               "type": "string",
-              "description": "The same value as Enddatum",
               "format": "date-time",
               "x-nullable": true
             }
@@ -57,7 +50,7 @@
     },
     "Zeiteinheit": {
       "type": "integer",
-      "description": "Auflistung möglicher Einheiten zur Verwendung in zeitbezogenen Angaben.",
+      "description": "",
       "x-enumNames": [
         "SEKUNDE",
         "MINUTE",
@@ -74,7 +67,6 @@
     },
     "COM": {
       "type": "object",
-      "description": "The COM class is the abstract class from which all BO4E.COM classes are derived.\n            ",
       "x-abstract": true,
       "additionalProperties": {},
       "properties": {
@@ -83,13 +75,11 @@
         },
         "timestamp": {
           "type": "string",
-          "description": "Store the latest timestamp (update from the database)\n            ",
           "format": "date-time",
           "x-nullable": true
         },
         "guid": {
           "type": "string",
-          "description": "allows adding a GUID to COM objects for tracking across systems\n            ",
           "format": "guid",
           "x-nullable": true
         }
@@ -102,39 +92,21 @@
         },
         {
           "type": "object",
-          "description": "Preisposition",
           "additionalProperties": {},
           "properties": {
             "berechnungsmethode": {
-              "description": "Das Modell, das der Preisbildung zugrunde liegt. Details Kalkulationsmethode",
-              "oneOf": [
-                {
-                  "$ref": "#/definitions/Kalkulationsmethode"
-                }
-              ]
+              "$ref": "#/definitions/Kalkulationsmethode"
             },
             "leistungstyp": {
-              "description": "Standardisierte Bezeichnung für die abgerechnete Leistungserbringung. Details Leistungstyp\n            ",
-              "oneOf": [
-                {
-                  "$ref": "#/definitions/Leistungstyp"
-                }
-              ]
+              "$ref": "#/definitions/Leistungstyp"
             },
             "leistungsbezeichnung": {
-              "type": "string",
-              "description": "Bezeichnung für die in der Position abgebildete Leistungserbringung"
+              "type": "string"
             },
             "preiseinheit": {
-              "description": "Festlegung, mit welcher Preiseinheit abgerechnet wird, z.B. Ct. oder €. Details\nWaehrungseinheit\n            ",
-              "oneOf": [
-                {
-                  "$ref": "#/definitions/Waehrungseinheit"
-                }
-              ]
+              "$ref": "#/definitions/Waehrungseinheit"
             },
             "bezugsgroesse": {
-              "description": "Hier wird festgelegt, auf welche Bezugsgröße sich der Preis bezieht, z.B. kWh oder Stück. Details\nMengeneinheit\n            ",
               "x-nullable": true,
               "oneOf": [
                 {
@@ -143,7 +115,6 @@
               ]
             },
             "zeitbasis": {
-              "description": "Die Zeit(dauer) auf die sich der Preis bezieht. Z.B. ein Jahr für einen Leistungspreis der in €/kW/Jahr\nausgegeben wird.\n            ",
               "x-nullable": true,
               "oneOf": [
                 {
@@ -152,7 +123,6 @@
               ]
             },
             "tarifzeit": {
-              "description": "Festlegung, für welche Tarifzeit der Preis hier festgelegt ist. ",
               "x-nullable": true,
               "oneOf": [
                 {
@@ -161,7 +131,6 @@
               ]
             },
             "bdewArtikelnummer": {
-              "description": "Eine vom BDEW standardisierte Bezeichnung für die abgerechnete Leistungserbringung. Diese Artikelnummer wird\nauch im Rechnungsteil der INVOIC verwendet. \n            ",
               "x-nullable": true,
               "oneOf": [
                 {
@@ -170,7 +139,6 @@
               ]
             },
             "zonungsgroesse": {
-              "description": "Mit der Menge der hier angegebenen Größe wird die Staffelung/Zonung durchgeführt. Z.B. Vollbenutzungsstunden.\n\n            ",
               "x-nullable": true,
               "oneOf": [
                 {
@@ -179,7 +147,6 @@
               ]
             },
             "zu_abschlaege": {
-              "description": "Zuschläge oder Abschläge auf die Position. ",
               "x-nullable": true,
               "oneOf": [
                 {
@@ -189,24 +156,20 @@
             },
             "preisstaffeln": {
               "type": "array",
-              "description": "Preisstaffeln, die zu dieser Preisposition gehören. Details Preisstaffel",
               "items": {
                 "$ref": "#/definitions/Preisstaffel"
               }
             },
             "preisschluesselstamm": {
               "type": "string",
-              "description": "Preisschlüsselstamm>",
               "x-nullable": true
             },
             "positionsnummer": {
               "type": "integer",
-              "description": "Fortlaufende Nummer für die Preisposition",
               "format": "int32",
               "x-nullable": true
             },
             "messebene": {
-              "description": "Vgl. PRICAT IMD 7009",
               "x-nullable": true,
               "oneOf": [
                 {
@@ -216,11 +179,9 @@
             },
             "beschreibung": {
               "type": "string",
-              "description": "Produkt-/Leistungsbeschreibung, wenn IMD+X vorhanden Vgl. PRICAT IMD 7008\n            ",
               "x-nullable": true
             },
             "verarbeitungszeitraum": {
-              "description": "Verarbeitungszeitraum. Details Zeitraum",
               "x-nullable": true,
               "oneOf": [
                 {
@@ -230,7 +191,6 @@
             },
             "artikelId": {
               "type": "string",
-              "description": "Die genauen Bedeutungen der einzelnen Artikel-IDs sind in der EDI@Energy Codeliste der Artikelnummern \n            und Artikel-IDs zu finden, die in der Spalte \"PRICAT Codeverwendung\" ein X haben\n            ",
               "x-nullable": true
             }
           }
@@ -239,7 +199,7 @@
     },
     "Kalkulationsmethode": {
       "type": "integer",
-      "description": "Aulistung der verschiedenen Berechnungsmethoden für ein Preisblatt.",
+      "description": "",
       "x-enumNames": [
         "KEINE",
         "STAFFELN",
@@ -295,13 +255,13 @@
     },
     "Waehrungseinheit": {
       "type": "integer",
-      "description": "In diesem Enum werden die Währungen und ihre Untereinheiten definiert, beispielsweise für die Verwendung in\nPreisen.\n            ",
+      "description": "",
       "x-enumNames": ["EUR", "CT"],
       "enum": [0, 1]
     },
     "Mengeneinheit": {
       "type": "integer",
-      "description": "Einheit: Messgrößen, die per Messung oder Vorgabe ermittelt werden können.\n            ",
+      "description": "",
       "x-enumNames": [
         "ZERO",
         "WH",
@@ -328,13 +288,13 @@
     },
     "Tarifzeit": {
       "type": "integer",
-      "description": "Zur Kennzeichnung verschiedener Tarifzeiten, beispielsweise zur Bepreisung oder zur Verbrauchsermittlung.",
+      "description": "",
       "x-enumNames": ["TZ_STANDARD", "TZ_HT", "TZ_NT"],
       "enum": [0, 1, 2]
     },
     "BDEWArtikelnummer": {
       "type": "integer",
-      "description": "BDEWArtikelnummer",
+      "description": "",
       "x-enumNames": [
         "LEISTUNG",
         "LEISTUNG_PAUSCHAL",
@@ -397,7 +357,7 @@
     },
     "Bemessungsgroesse": {
       "type": "integer",
-      "description": "Zur Abbildung von Messgrössen und zur Verwendung in energiewirtschaftlichen Berechnungen.",
+      "description": "",
       "x-enumNames": [
         "WIRKARBEIT_EL",
         "LEISTUNG_EL",
@@ -421,37 +381,23 @@
         },
         {
           "type": "object",
-          "description": "Differenzierung der zu betrachtenden Produkte anhand der preiserhöhenden (Aufschlag) bzw. preisvermindernden\n(Abschlag) Zusatzvereinbarungen, die individuell zu einem neuen oder bestehenden Liefervertrag abgeschlossen werden\nkönnen. Es können mehrere Auf-/Abschläge gleichzeitig ausgewählt werden.\n            ",
           "additionalProperties": {},
           "properties": {
             "bezeichnung": {
-              "type": "string",
-              "description": "Bezeichnung des Auf-/Abschlags"
+              "type": "string"
             },
             "beschreibung": {
-              "type": "string",
-              "description": "Beschreibung zum Auf-/Abschlag"
+              "type": "string"
             },
             "aufAbschlagstyp": {
-              "description": "Typ des AufAbschlages. Details AufAbschlagstyp",
-              "oneOf": [
-                {
-                  "$ref": "#/definitions/AufAbschlagstyp"
-                }
-              ]
+              "$ref": "#/definitions/AufAbschlagstyp"
             },
             "aufAbschlagswert": {
               "type": "number",
-              "description": "Höhe des Auf-/Abschlages",
               "format": "decimal"
             },
             "aufAbschlagswaehrung": {
-              "description": "Einheit, in der der Auf-/Abschlag angegeben ist (z.B. ct/kWh). Details Waehrungseinheit\n            ",
-              "oneOf": [
-                {
-                  "$ref": "#/definitions/Waehrungseinheit"
-                }
-              ]
+              "$ref": "#/definitions/Waehrungseinheit"
             }
           }
         }
@@ -459,7 +405,7 @@
     },
     "AufAbschlagstyp": {
       "type": "integer",
-      "description": "Festlegung, ob der Auf- oder Abschlag mit relativen oder absoluten Werten erfolgt.",
+      "description": "",
       "x-enumNames": ["RELATIV", "ABSOLUT"],
       "enum": [0, 1]
     },
@@ -470,26 +416,21 @@
         },
         {
           "type": "object",
-          "description": "Gibt die Staffelgrenzen der jeweiligen Preise an.",
           "additionalProperties": {},
           "properties": {
             "einheitspreis": {
               "type": "number",
-              "description": "Preis pro abgerechneter Mengeneinheit",
               "format": "decimal"
             },
             "staffelgrenzeVon": {
               "type": "number",
-              "description": "Unterer Wert, ab dem die Staffel gilt.",
               "format": "decimal"
             },
             "staffelgrenzeBis": {
               "type": "number",
-              "description": "Oberer Wert, bis zu dem die Staffel gilt.",
               "format": "decimal"
             },
             "sigmoidparameter": {
-              "description": "Parameter zur Berechnung des Preises anhand der Jahresmenge und weiterer netzbezogener Parameter.\n\n            ",
               "x-nullable": true,
               "oneOf": [
                 {
@@ -508,27 +449,22 @@
         },
         {
           "type": "object",
-          "description": "Sigmoidparameter",
           "additionalProperties": {},
           "properties": {
             "A": {
               "type": "number",
-              "description": "Briefmarke Ortsverteilnetz",
               "format": "decimal"
             },
             "B": {
               "type": "number",
-              "description": "Wendepunkt für die bepreiste Menge",
               "format": "decimal"
             },
             "C": {
               "type": "number",
-              "description": "Exponent",
               "format": "decimal"
             },
             "D": {
               "type": "number",
-              "description": "Briefmarke Transportnetz",
               "format": "decimal"
             }
           }
@@ -537,7 +473,7 @@
     },
     "Netzebene": {
       "type": "integer",
-      "description": "Auflistung möglicher Netzebenen innerhalb der Energiearten Strom und Gas.",
+      "description": "",
       "x-enumNames": [
         "NSP",
         "MSP",
@@ -554,13 +490,13 @@
     },
     "Preisstatus": {
       "type": "integer",
-      "description": "Statusinformation für Preise",
+      "description": "",
       "x-enumNames": ["VORLAEUFIG", "ENDGUELTIG"],
       "enum": [0, 1]
     },
     "Sparte": {
       "type": "integer",
-      "description": "Unterscheidungsmöglichkeiten für die Sparte.",
+      "description": "",
       "x-enumNames": [
         "STROM",
         "GAS",
@@ -573,35 +509,27 @@
     },
     "BusinessObject": {
       "type": "object",
-      "description": "General abstract class for Business Objects for Energy (BO4E)\n            ",
       "x-abstract": true,
       "additionalProperties": {},
       "properties": {
         "boTyp": {
           "type": "string",
-          "description": "obligatory type of the business object in UPPER CASE\n            ",
-          "x-nullable": true,
-          "x-example": "'MESSLOKATION',\n'MARKTLOKATION'\n            "
+          "x-nullable": true
         },
         "versionStruktur": {
           "type": "string",
-          "description": "obligatory version of the BO4E definition. Currently hard coded to 1\n            ",
-          "x-nullable": true,
-          "x-example": 1
+          "x-nullable": true
         },
         "guidSerialized": {
-          "type": "string",
-          "description": "protobuf serilization requires the Guid as string.\n            "
+          "type": "string"
         },
         "timestamp": {
           "type": "string",
-          "description": "Store the latest database update, is Datetime, because postgres doesn't handle datetimeoffset in a generated column\ngracefully\n            ",
           "format": "date-time",
           "x-nullable": true
         },
         "externeReferenzen": {
           "type": "array",
-          "description": "Hier können IDs anderer Systeme hinterlegt werden (z.B. eine SAP-GP-Nummer) (Details siehe\nExterneReferenz)\n            ",
           "x-nullable": true,
           "items": {
             "$ref": "#/definitions/ExterneReferenz"
@@ -609,9 +537,24 @@
         },
         "guid": {
           "type": "string",
-          "description": "allows adding a GUID to Business Objects for tracking across systems\n            ",
           "format": "guid",
           "x-nullable": true
+        },
+        "gueltigkeitszeitraum": {
+          "x-nullable": true,
+          "oneOf": [
+            {
+              "$ref": "#/definitions/Zeitraum"
+            }
+          ]
+        },
+        "qualitaet": {
+          "x-nullable": true,
+          "oneOf": [
+            {
+              "$ref": "#/definitions/Qualitaet"
+            }
+          ]
         }
       }
     },
@@ -622,22 +565,32 @@
         },
         {
           "type": "object",
-          "description": "Viele Datenobjekte weisen in unterschiedlichen Systemen eine eindeutige ID (Kundennummer, GP-Nummer etc.) auf.\nBeim Austausch von Datenobjekten zwischen verschiedenen Systemen ist es daher hilfreich, sich die eindeutigen IDs\nder anzubindenden Systeme zu merken.\nDiese Komponente ermöglicht es, sich die SAP GP-Nummer zu merken, um diese bei SAP-Aufrufen als Parameter mitgeben\nzu können.\n            ",
           "additionalProperties": {},
           "properties": {
             "exRefName": {
               "type": "string",
-              "description": "Bezeichnung der externen Referenz (z.B. \"hochfrequenz integration services\")\n            ",
               "x-nullable": true
             },
             "exRefWert": {
               "type": "string",
-              "description": "Wert der externen Referenz (z.B. \"123456\"; \"4711\")\n            ",
               "x-nullable": true
             }
           }
         }
       ]
+    },
+    "Qualitaet": {
+      "type": "integer",
+      "description": "",
+      "x-enumNames": [
+        "VOLLSTAENDIG",
+        "INFORMATIV",
+        "IM_SYSTEM_VORHANDEN",
+        "ERWARTET",
+        "VORLAEUFIG",
+        "UNVOLLSTAENDIG"
+      ],
+      "enum": [0, 1, 2, 3, 4, 5]
     }
   },
   "allOf": [
@@ -646,30 +599,21 @@
     },
     {
       "type": "object",
-      "description": "Das allgemeine Modell zur Abbildung von Preisen. Davon abgeleitet können, über die Zuordnung identifizierender\nMerkmale, spezielle Preisblatt-Varianten modelliert werden.\nDie jeweiligen Sätze von Merkmalen sind in der Grafik ergänzt worden und stellen jeweils eine Ausprägung für die\nverschiedenen Anwendungsfälle der Preisblätter dar.\n            ",
       "additionalProperties": {},
       "properties": {
         "bezeichnung": {
-          "type": "string",
-          "description": "Eine Bezeichnung für das Preisblatt.\n            "
+          "type": "string"
         },
         "gueltigkeit": {
-          "description": "Der Zeitraum für den der Preis festgelegt ist. Details siehe Zeitraum\n            ",
-          "oneOf": [
-            {
-              "$ref": "#/definitions/Zeitraum"
-            }
-          ]
+          "$ref": "#/definitions/Zeitraum"
         },
         "preispositionen": {
           "type": "array",
-          "description": "Die einzelnen Positionen, die mit dem Preisblatt abgerechnet werden können. Z.B. Arbeitspreis, Grundpreis etc.\nDetails siehe Preisposition\n            ",
           "items": {
             "$ref": "#/definitions/Preisposition"
           }
         },
         "preisstatus": {
-          "description": "Gibt den Status des veröffentlichten Preises an\n            ",
           "x-nullable": true,
           "oneOf": [
             {
@@ -678,7 +622,6 @@
           ]
         },
         "sparte": {
-          "description": "Strom oder Gas. ",
           "x-nullable": true,
           "oneOf": [
             {

@@ -15,6 +15,7 @@ public enum Sperrauftragsablehngrund
     /// </summary>
     /// <remarks>EBD 0470 A01</remarks>
     [EnumMember(Value = "DUPLIKAT")]
+    [System.Text.Json.Serialization.JsonStringEnumMemberName("DUPLIKAT")]
     DUPLIKAT,
 
     /// <summary>
@@ -22,6 +23,7 @@ public enum Sperrauftragsablehngrund
     /// </summary>
     /// <remarks>EBD 0470 A02</remarks>
     [EnumMember(Value = "FALSCHER_MSB")]
+    [System.Text.Json.Serialization.JsonStringEnumMemberName("FALSCHER_MSB")]
     FALSCHER_MSB,
 
     /// <summary>
@@ -29,6 +31,7 @@ public enum Sperrauftragsablehngrund
     /// </summary>
     /// <remarks>EBD 0470 A03</remarks>
     [EnumMember(Value = "FALSCHE_SPANNUNGSEBENE")]
+    [System.Text.Json.Serialization.JsonStringEnumMemberName("FALSCHE_SPANNUNGSEBENE")]
     FALSCHE_SPANNUNGSEBENE,
 
     /// <summary>
@@ -36,6 +39,7 @@ public enum Sperrauftragsablehngrund
     /// </summary>
     /// <remarks>EBD 0470 A04</remarks>
     [EnumMember(Value = "WEITERE_MALO_BETROFFEN")]
+    [System.Text.Json.Serialization.JsonStringEnumMemberName("WEITERE_MALO_BETROFFEN")]
     WEITERE_MALO_BETROFFEN,
 
     /// <summary>
@@ -43,6 +47,7 @@ public enum Sperrauftragsablehngrund
     /// </summary>
     /// <remarks>EBD 0470 A05</remarks>
     [EnumMember(Value = "ANDERER_ABLEHNGRUND")]
+    [System.Text.Json.Serialization.JsonStringEnumMemberName("ANDERER_ABLEHNGRUND")]
     ANDERER_ABLEHNGRUND,
 
     /// <summary>
@@ -50,6 +55,7 @@ public enum Sperrauftragsablehngrund
     /// </summary>
     /// <remarks>EBD 0470 A06</remarks>
     [EnumMember(Value = "FRISTVERLETZUNG_TERMINGEBUNDEN")]
+    [System.Text.Json.Serialization.JsonStringEnumMemberName("FRISTVERLETZUNG_TERMINGEBUNDEN")]
     FRISTVERLETZUNG_TERMINGEBUNDEN,
 
     /// <summary>
@@ -57,6 +63,9 @@ public enum Sperrauftragsablehngrund
     /// </summary>
     /// <remarks>EBD 0470 A07</remarks>
     [EnumMember(Value = "FRISTVERLETZUNG_NICHT_TERMINGEBUNDEN")]
+    [System.Text.Json.Serialization.JsonStringEnumMemberName(
+        "FRISTVERLETZUNG_NICHT_TERMINGEBUNDEN"
+    )]
     FRISTVERLETZUNG_NICHT_TERMINGEBUNDEN,
 
     /// <summary>
@@ -64,6 +73,7 @@ public enum Sperrauftragsablehngrund
     /// </summary>
     /// <remarks>EBD 0470 A99</remarks>
     [EnumMember(Value = "ANDERER_FEHLER")]
+    [System.Text.Json.Serialization.JsonStringEnumMemberName("ANDERER_FEHLER")]
     ANDERER_FEHLER,
 
     /// <summary>
@@ -71,6 +81,7 @@ public enum Sperrauftragsablehngrund
     /// </summary>
     /// <remarks>FV2304 EBD 0470 A10</remarks>
     [EnumMember(Value = "LIEGT_BEREITS_VOR")]
+    [System.Text.Json.Serialization.JsonStringEnumMemberName("LIEGT_BEREITS_VOR")]
     LIEGT_BEREITS_VOR,
 
     /// <summary>
@@ -78,6 +89,7 @@ public enum Sperrauftragsablehngrund
     /// </summary>
     /// <remarks>FV2304 EBD 0470 A11</remarks>
     [EnumMember(Value = "ANDERER_ZUKUENFTIGER_LIEFERANT")]
+    [System.Text.Json.Serialization.JsonStringEnumMemberName("ANDERER_ZUKUENFTIGER_LIEFERANT")]
     ANDERER_ZUKUENFTIGER_LIEFERANT,
 
     /// <summary>
@@ -85,5 +97,6 @@ public enum Sperrauftragsablehngrund
     /// </summary>
     /// <remarks>FV2304 EBD 0470 A12</remarks>
     [EnumMember(Value = "BESTAETIGTER_LIEFERBEGINN")]
+    [System.Text.Json.Serialization.JsonStringEnumMemberName("BESTAETIGTER_LIEFERBEGINN")]
     BESTAETIGTER_LIEFERBEGINN,
 }

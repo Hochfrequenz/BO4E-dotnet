@@ -247,7 +247,7 @@ public class Rechnungsposition : COM
     [JsonPropertyName("zuschlag")]
     [ProtoMember(31)]
     [JsonPropertyOrder(31)]
-    public string? Zuschlag { get; set; }
+    public RechnungspositionsZuschlag? Zuschlag { get; set; }
 
     /// <summary>
     /// Abschlag
@@ -256,5 +256,5 @@ public class Rechnungsposition : COM
     [JsonPropertyName("abschlag")]
     [ProtoMember(32)]
     [JsonPropertyOrder(32)]
-    public string? Abschlag { get; set; }
+    public RechnungspositionsAbschlag? Abschlag { get; set; }
 }

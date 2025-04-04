@@ -7,6 +7,7 @@ public enum Rechnungsstatus
 {
     /// <summary>Eine Rechnung vom Netzbetreiber an den Netznutzer. (i.d.R. der Lieferant) über die Netznutzung.</summary>
     [EnumMember(Value = "GEPRUEFT_OK")]
+    [System.Text.Json.Serialization.JsonStringEnumMemberName("GEPRUEFT_OK")]
     GEPRUEFT_OK,
 
     /// <summary>
@@ -14,13 +15,16 @@ public enum Rechnungsstatus
     ///     zwischen Bilanzierung und Messung.
     /// </summary>
     [EnumMember(Value = "GEPRUEFT_FEHLERHAFT")]
+    [System.Text.Json.Serialization.JsonStringEnumMemberName("GEPRUEFT_FEHLERHAFT")]
     GEPRUEFT_FEHLERHAFT,
 
     /// <summary>Rechnung eines Messstellenbetreibers an den Messkunden.</summary>
     [EnumMember(Value = "GEBUCHT")]
+    [System.Text.Json.Serialization.JsonStringEnumMemberName("GEBUCHT")]
     GEBUCHT,
 
     /// <summary>Rechnungen zwischen einem Händler und Einkäufer von Energie.</summary>
     [EnumMember(Value = "BEZAHLT")]
+    [System.Text.Json.Serialization.JsonStringEnumMemberName("BEZAHLT")]
     BEZAHLT,
 }

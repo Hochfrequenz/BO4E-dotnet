@@ -16,6 +16,7 @@ public enum EicType
     /// object type “Y”, Areas for inter System Operator data interchange
     /// </summary>
     [EnumMember(Value = "AREA")]
+    [System.Text.Json.Serialization.JsonStringEnumMemberName("AREA")]
     AREA,
 
     /// <summary>
@@ -23,36 +24,42 @@ public enum EicType
     /// </summary>
 
     [EnumMember(Value = "AREA")]
+    [System.Text.Json.Serialization.JsonStringEnumMemberName("AREA")]
     MEASURING_POINT,
 
     /// <summary>
     /// object type "W", such as Production plants, consumption units, etc.
     /// </summary>
     [EnumMember(Value = "RESOURCE_OBJECT")]
+    [System.Text.Json.Serialization.JsonStringEnumMemberName("RESOURCE_OBJECT")]
     RESOURCE_OBJECT,
 
     /// <summary>
     /// object type "T", International tie lines between areas
     /// </summary>
     [EnumMember(Value = "TIE_LINES")]
+    [System.Text.Json.Serialization.JsonStringEnumMemberName("TIE_LINES")]
     TIE_LINES,
 
     /// <summary>
     /// object type "V", Physical or logical place where a market participant or IT system is located
     /// </summary>
     [EnumMember(Value = "LOCATION")]
+    [System.Text.Json.Serialization.JsonStringEnumMemberName("LOCATION")]
     LOCATION,
 
     /// <summary>
     /// object type "A"
     /// </summary>
     [EnumMember(Value = "SUBSTATION")]
+    [System.Text.Json.Serialization.JsonStringEnumMemberName("SUBSTATION")]
     SUBSTATION,
 
     /// <summary>
     /// Parties - object type "X"
     /// </summary>
     [EnumMember(Value = "MARKET_PARTICIPANT")]
+    [System.Text.Json.Serialization.JsonStringEnumMemberName("MARKET_PARTICIPANT")]
     MARKET_PARTICIPANT,
 }
 
@@ -162,19 +169,18 @@ public static class EnergyIdentificationCodeExtensions
     public static bool IsGermanControlArea(this string? eicCode) =>
         GermanControlAreas.Values.Contains(eicCode);
 
-    private static readonly Dictionary<string, string> GermanControlAreas =
-        new()
+    private static readonly Dictionary<string, string> GermanControlAreas = new()
+    {
+        // they won't change in foreseeable time
+        { "N", "10YDE-EON------1" }, // tennet
+        { "R", "10YDE-RWENET---I" }, // amprion
+        { "V", "10YDE-VE-------2" }, // 50Hz
         {
-            // they won't change in foreseeable time
-            { "N", "10YDE-EON------1" }, // tennet
-            { "R", "10YDE-RWENET---I" }, // amprion
-            { "V", "10YDE-VE-------2" }, // 50Hz
-            {
-                "W",
-                "10YDE-ENBW-----N"
-            } // transnet BW
-            ,
-        };
+            "W",
+            "10YDE-ENBW-----N"
+        } // transnet BW
+        ,
+    };
 
     /// <summary>
     /// calculates the check character according to the EIC rules (ENTSO-E)

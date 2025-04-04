@@ -2,7 +2,6 @@ using System;
 using System.Text.Json;
 using System.Text.RegularExpressions;
 using BO4E.ENUM;
-using EnumsNET;
 
 namespace BO4E.meta.LenientConverters;
 
@@ -29,23 +28,34 @@ public class LenientSystemTextGeraetemerkmalGasConverter
         var rawString = reader.GetString();
         try
         {
-            return Enums.Parse<Geraetemerkmal>(rawString);
+            return (BO4E.ENUM.Geraetemerkmal)
+                Enum.Parse(typeof(BO4E.ENUM.Geraetemerkmal), rawString, ignoreCase: true);
         }
         catch (ArgumentException) when (rawString.StartsWith("G"))
         {
-            if (rawString == "G2Period5")
+            switch (rawString)
             {
-                return Geraetemerkmal.GAS_G2P5;
+                case "G2Period5":
+                case "G2.5":
+                    return Geraetemerkmal.GAS_G2P5;
+                default:
+                    return (BO4E.ENUM.Geraetemerkmal)
+                        Enum.Parse(
+                            typeof(BO4E.ENUM.Geraetemerkmal),
+                            "GAS_" + rawString,
+                            ignoreCase: true
+                        );
             }
-            return Enums.Parse<Geraetemerkmal>("GAS_" + rawString);
         }
     }
 
     /// <summary>
     /// https://regex101.com/r/dAUAHL/1
     /// </summary>
-    private static readonly Regex GasPrefixRegex =
-        new(@"^(?<praefix>(?:GAS_)?)(?<rest>.+)$", RegexOptions.Compiled);
+    private static readonly Regex GasPrefixRegex = new(
+        @"^(?<praefix>(?:GAS_)?)(?<rest>.+)$",
+        RegexOptions.Compiled
+    );
 
     /// <summary>
     /// <inheritdoc cref="System.Text.Json.Serialization.JsonConverter{T}.Write"/>
@@ -57,13 +67,6 @@ public class LenientSystemTextGeraetemerkmalGasConverter
     )
     {
         var stringValue = value.ToString();
-        var match = GasPrefixRegex.Match(stringValue);
-        if (!match.Success)
-        {
-            writer.WriteStringValue(stringValue);
-            return;
-        }
-        var rest = match.Groups["rest"].Value;
-        writer.WriteStringValue(rest);
+        writer.WriteStringValue(stringValue);
     }
 }

@@ -15,6 +15,7 @@ public enum Sperrstatus
     /// </summary>
     [ProtoEnum(Name = nameof(Sperrstatus) + "_" + nameof(ENTSPERRT))]
     [EnumMember(Value = "ENTSPERRT")]
+    [System.Text.Json.Serialization.JsonStringEnumMemberName("ENTSPERRT")]
     ENTSPERRT,
 
     /// <summary>
@@ -22,5 +23,6 @@ public enum Sperrstatus
     /// </summary>
     [ProtoEnum(Name = nameof(Sperrstatus) + "_" + nameof(GESPERRT))]
     [EnumMember(Value = "GESPERRT")]
+    [System.Text.Json.Serialization.JsonStringEnumMemberName("GESPERRT")]
     GESPERRT,
 }

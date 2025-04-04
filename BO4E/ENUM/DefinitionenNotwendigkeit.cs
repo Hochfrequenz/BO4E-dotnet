@@ -13,6 +13,9 @@ public enum DefinitionenNotwendigkeit
     /// </summary>
     /// <remarks>Z02</remarks>
     [EnumMember(Value = "ZAEHLZEITDEFINITIONEN_WERDEN_VERWENDET")]
+    [System.Text.Json.Serialization.JsonStringEnumMemberName(
+        "ZAEHLZEITDEFINITIONEN_WERDEN_VERWENDET"
+    )]
     ZAEHLZEITDEFINITIONEN_WERDEN_VERWENDET,
 
     /// <summary>
@@ -20,6 +23,9 @@ public enum DefinitionenNotwendigkeit
     /// </summary>
     /// <remarks>Z03</remarks>
     [EnumMember(Value = "ZAEHLZEITDEFINITIONEN_WERDEN_NICHT_VERWENDET")]
+    [System.Text.Json.Serialization.JsonStringEnumMemberName(
+        "ZAEHLZEITDEFINITIONEN_WERDEN_NICHT_VERWENDET"
+    )]
     ZAEHLZEITDEFINITIONEN_WERDEN_NICHT_VERWENDET,
 
     /// <summary>
@@ -27,6 +33,7 @@ public enum DefinitionenNotwendigkeit
     /// </summary>
     /// <remarks>Z45</remarks>
     [EnumMember(Value = "DEFINITIONEN_WERDEN_VERWENDET")]
+    [System.Text.Json.Serialization.JsonStringEnumMemberName("DEFINITIONEN_WERDEN_VERWENDET")]
     DEFINITIONEN_WERDEN_VERWENDET,
 
     /// <summary>
@@ -34,5 +41,6 @@ public enum DefinitionenNotwendigkeit
     /// </summary>
     /// <remarks>Z46</remarks>
     [EnumMember(Value = "DEFINITIONEN_WERDEN_NICHT_VERWENDET")]
+    [System.Text.Json.Serialization.JsonStringEnumMemberName("DEFINITIONEN_WERDEN_NICHT_VERWENDET")]
     DEFINITIONEN_WERDEN_NICHT_VERWENDET,
 }

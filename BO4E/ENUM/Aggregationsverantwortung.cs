@@ -11,10 +11,12 @@ public enum Aggregationsverantwortung
     /// <summary>Übertragungsnetzbetreiber</summary>
     [ProtoEnum(Name = nameof(Aggregationsverantwortung) + "_" + nameof(UENB))]
     [EnumMember(Value = "UENB")]
+    [System.Text.Json.Serialization.JsonStringEnumMemberName("UENB")]
     UENB,
 
     /// <summary>Netzbetreiber</summary>
     [ProtoEnum(Name = nameof(Aggregationsverantwortung) + "_" + nameof(VNB))]
     [EnumMember(Value = "VNB")]
+    [System.Text.Json.Serialization.JsonStringEnumMemberName("VNB")]
     VNB,
 }
