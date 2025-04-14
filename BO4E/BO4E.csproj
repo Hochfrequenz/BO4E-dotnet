@@ -80,8 +80,8 @@
     <PackageReference Include="Portable.System.DateTimeOnly" Version="9.0.0" />
     <PackageReference Include="protobuf-net" Version="3.2.46" />
     <PackageReference Include="SourceLink.Copy.PdbFiles" Version="2.8.3" PrivateAssets="All" />
-    <PackageReference Include="System.Text.Encodings.Web" Version="9.0.3" />
-    <PackageReference Include="System.Text.Json" Version="9.0.3" />
+    <PackageReference Include="System.Text.Encodings.Web" Version="9.0.4" />
+    <PackageReference Include="System.Text.Json" Version="9.0.4" />
   </ItemGroup>
 
 </Project>
