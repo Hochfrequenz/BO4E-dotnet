@@ -73,7 +73,6 @@ namespace BO4E.COM;
 public abstract class COM : IUserProperties, IOptionalGuid
 {
     /// <inheritdoc cref="BO.BusinessObject.guidSerialized" />
-
     // note that this inheritance protobuf thing doesn't work as expected. please see the comments in TestBO4E project->TestProfobufSerialization
     [ProtoMember(1)]
 #pragma warning disable IDE1006 // Naming Styles
