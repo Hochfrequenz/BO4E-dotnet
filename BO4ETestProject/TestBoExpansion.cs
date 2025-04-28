@@ -20,8 +20,8 @@ public class TestBoExpansion
             BusinessObject.GetExpandableFieldNames("Marktlokation").Keys
         );
         Assert.IsTrue(result.SetEquals(result2));
-        Assert.ThrowsException<ArgumentException>(
-            () => BusinessObject.GetExpandableFieldNames("kein gültiges bo")
+        Assert.ThrowsException<ArgumentException>(() =>
+            BusinessObject.GetExpandableFieldNames("kein gültiges bo")
         );
     }
 

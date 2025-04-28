@@ -6,31 +6,26 @@
     <Authors>Hochfrequenz Untenehmensberatung GmbH</Authors>
     <Product>BO4E .net core bindings</Product>
     <RepositoryUrl>https://github.com/Hochfrequenz/BO4E-dotnet/</RepositoryUrl>
- 
     <VersionPrefix>0.2.50</VersionPrefix>
     <AssemblyName>BO4Enet</AssemblyName>
     <GeneratePackageOnBuild>false</GeneratePackageOnBuild>
     <PublishRepositoryUrl>true</PublishRepositoryUrl>
-
     <!-- Optional: Embed source files that are not tracked by the source control manager to the PDB -->
     <EmbedUntrackedSources>true</EmbedUntrackedSources>
-
     <!-- Optional: Include PDB in the built .nupkg -->
     <AllowedOutputExtensionsInPackageBuildOutputFolder>$(AllowedOutputExtensionsInPackageBuildOutputFolder);.pdb</AllowedOutputExtensionsInPackageBuildOutputFolder>
     <PackageProjectUrl>https://github.com/Hochfrequenz/BO4E-dotnet/</PackageProjectUrl>
     <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
     <PackageLicenseFile>LICENSE.txt</PackageLicenseFile>
-
     <RepositoryType>git</RepositoryType>
     <IncludeSymbols>true</IncludeSymbols>
     <DebugType>Embedded</DebugType>
     <EmbedAllSources>True</EmbedAllSources>
     <LangVersion>12</LangVersion>
     <DocumentationFile>BO4Enet.xml</DocumentationFile>
-	 <Nullable>annotations</Nullable>
-	 <TargetFrameworks>netstandard2.0;netstandard2.1</TargetFrameworks>
+    <Nullable>annotations</Nullable>
+    <TargetFrameworks>netstandard2.0;netstandard2.1</TargetFrameworks>
   </PropertyGroup>
-
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
     <Optimize>false</Optimize>
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
@@ -39,7 +34,6 @@
     <DefineConstants>DEBUG</DefineConstants>
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
   </PropertyGroup>
-
   <ItemGroup>
     <Compile Remove="BO\NewFolder\**" />
     <Compile Remove="json-schema-files\**" />
@@ -52,7 +46,6 @@
       <PackagePath />
     </None>
   </ItemGroup>
-
   <ItemGroup>
     <None Remove="CentralEuropeStandardTime.json" />
     <None Remove="protobuf-files\BO4E.BO.Angebot.proto" />
@@ -69,7 +62,6 @@
     <None Remove="protobuf-files\BO4E.BO.Vertrag.proto" />
     <None Remove="protobuf-files\BO4E.BO.Zaehler.proto" />
   </ItemGroup>
-
   <ItemGroup>
     <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
     <PackageReference Include="Newtonsoft.Json.Schema" Version="4.0.1" />
@@ -83,5 +75,4 @@
     <PackageReference Include="System.Text.Encodings.Web" Version="9.0.4" />
     <PackageReference Include="System.Text.Json" Version="9.0.4" />
   </ItemGroup>
-
 </Project>

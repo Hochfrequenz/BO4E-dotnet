@@ -22,7 +22,6 @@ public enum EicType
     /// <summary>
     /// object type “Z”, Energy Metering points
     /// </summary>
-
     [EnumMember(Value = "AREA")]
     [System.Text.Json.Serialization.JsonStringEnumMemberName("AREA")]
     MEASURING_POINT,

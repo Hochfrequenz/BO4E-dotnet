@@ -481,8 +481,7 @@ public class TestVerbrauchExtension
         Assert.AreEqual(Mengeneinheit.KW, v1.Einheit);
         Assert.AreEqual(17000.0M, v1.Wert);
 
-        Assert.ThrowsException<InvalidOperationException>(
-            () => v1.ConvertToUnit(Mengeneinheit.KWH)
+        Assert.ThrowsException<InvalidOperationException>(() => v1.ConvertToUnit(Mengeneinheit.KWH)
         );
     }
 }
