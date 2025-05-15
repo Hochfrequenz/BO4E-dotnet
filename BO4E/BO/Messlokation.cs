@@ -294,6 +294,18 @@ public class Messlokation : BusinessObject
     public string? VorgelagerteLokationsId { get; set; }
 
     /// <summary>
+    /// Behelfs-Flag das anzeigt, ob eine Messlokation für die Lieferanmeldung relevant ist (true).
+    /// </summary>
+    /// <remarks>
+    /// Das kann in Systemen hilfreich sein, die nicht die volle Komplexität von Lokationsbündeln abbildeln.
+    /// </remarks>
+    [JsonProperty(Order = 34, PropertyName = "istFuerLieferanmeldungRelevant")]
+    [JsonPropertyName("istFuerLieferanmeldungRelevant")]
+    [ProtoMember(1028)]
+    [JsonPropertyOrder(34)]
+    public bool? IstFuerLieferanmeldungRelevant { get; set; } = null;
+
+    /// <summary>
     ///     Test if a <paramref name="id" /> is a valid messlokations ID.
     /// </summary>
     /// <param name="id">id to test</param>
