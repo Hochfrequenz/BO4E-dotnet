@@ -86,4 +86,9 @@ public enum Zaehlertyp
     [EnumMember(Value = "NEUEMESSEINRICHTUNGGAS")]
     [System.Text.Json.Serialization.JsonStringEnumMemberName("NEUEMESSEINRICHTUNGGAS")]
     NEUEMESSEINRICHTUNGGAS,
+
+    ///<summary>Mengenumwerter</summary>
+    [EnumMember(Value = "MENGENUMWERTER")]
+    [System.Text.Json.Serialization.JsonStringEnumMemberName("MENGENUMWERTER")]
+    MENGENUMWERTER,
 }

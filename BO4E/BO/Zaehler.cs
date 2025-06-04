@@ -1,6 +1,6 @@
+#nullable enable
 using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
 using System.Text.Json.Serialization;
 using BO4E.COM;
 using BO4E.ENUM;
@@ -23,14 +23,14 @@ public class Zaehler : BusinessObject
     [JsonPropertyName("zaehlernummer")]
     [ProtoMember(4)]
     [JsonPropertyOrder(10)]
-    public string Zaehlernummer { get; set; }
+    public string? Zaehlernummer { get; set; }
 
     /// <summary>Strom oder Gas. <seealso cref="ENUM.Sparte" /></summary>
     [JsonProperty(Order = 11, PropertyName = "sparte")]
     [JsonPropertyName("sparte")]
     [ProtoMember(5)]
     [JsonPropertyOrder(11)]
-    public Sparte Sparte { get; set; }
+    public Sparte? Sparte { get; set; }
 
     /// <summary>
     ///     Spezifikation die Richtung des Zählers betreffend.
@@ -115,7 +115,6 @@ public class Zaehler : BusinessObject
     /// </summary>
     [JsonProperty(Order = 18, PropertyName = "zaehlwerke")]
     [JsonPropertyName("zaehlwerke")]
-    [MinLength(1)]
     [ProtoMember(12)]
     [JsonPropertyOrder(18)]
     public List<Zaehlwerk>? Zaehlwerke { get; set; }

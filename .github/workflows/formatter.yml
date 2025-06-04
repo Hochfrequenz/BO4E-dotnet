@@ -14,4 +14,4 @@ jobs:
       - name: Restore .NET tools
         run: dotnet tool restore
       - name: Run CSharpier
-        run: dotnet csharpier . --check
+        run: dotnet csharpier check .

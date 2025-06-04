@@ -335,8 +335,8 @@ public class TestReportToCsv
             null,
         };
         var newResult = string.Empty;
-        Assert.ThrowsException<ArgumentNullException>(
-            () => cr.ToCsv(';', true, Environment.NewLine, reihenfolge)
+        Assert.ThrowsException<ArgumentNullException>(() =>
+            cr.ToCsv(';', true, Environment.NewLine, reihenfolge)
         );
         Assert.AreEqual(newResult, "");
 
@@ -352,8 +352,8 @@ public class TestReportToCsv
             new Dictionary<string, string> { ["enddatum"] = "V.enddatum" },
             new Dictionary<string, string> { ["asdasd"] = "000" },
         };
-        Assert.ThrowsException<ArgumentException>(
-            () => cr.ToCsv(';', true, Environment.NewLine, reihenfolge2)
+        Assert.ThrowsException<ArgumentException>(() =>
+            cr.ToCsv(';', true, Environment.NewLine, reihenfolge2)
         );
         Assert.AreEqual(newResult, "");
     }

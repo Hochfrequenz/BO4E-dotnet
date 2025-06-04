@@ -1,3 +1,4 @@
+#nullable enable
 using System.Text.Json.Serialization;
 using BO4E.ENUM;
 using BO4E.meta;
@@ -20,7 +21,7 @@ public class Hardware : COM
     [JsonProperty(PropertyName = "bezeichnung")]
     [JsonPropertyName("bezeichnung")]
     [ProtoMember(4)]
-    public string Bezeichnung { get; set; }
+    public string? Bezeichnung { get; set; }
 
     /// <summary>Bezeichnung der Hardware.</summary>
     [JsonProperty(PropertyName = "geraeteeigenschaften")]

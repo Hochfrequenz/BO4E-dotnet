@@ -1,3 +1,4 @@
+#nullable enable
 using System;
 using System.Text.Json.Serialization;
 using Newtonsoft.Json;
@@ -16,7 +17,7 @@ public class Kostenposition : COM
     [JsonProperty(PropertyName = "positionstitel")]
     [JsonPropertyName("positionstitel")]
     [ProtoMember(3)]
-    public string Positionstitel { get; set; }
+    public string? Positionstitel { get; set; }
 
     [System.Text.Json.Serialization.JsonIgnore]
     [Newtonsoft.Json.JsonIgnore]
@@ -54,7 +55,7 @@ public class Kostenposition : COM
     [JsonProperty(PropertyName = "artikelbezeichnung")]
     [JsonPropertyName("artikelbezeichnung")]
     [ProtoMember(6)]
-    public string Artikelbezeichnung { get; set; }
+    public string? Artikelbezeichnung { get; set; }
 
     /// <summary>Detaillierung des Artikels (optional). Beispiel: Drehstromzähler</summary>
     [JsonProperty(PropertyName = "artikeldetail")]
@@ -84,7 +85,7 @@ public class Kostenposition : COM
     [JsonProperty(PropertyName = "einzelpreis")]
     [JsonPropertyName("einzelpreis")]
     [ProtoMember(10)]
-    public Preis Einzelpreis { get; set; }
+    public Preis? Einzelpreis { get; set; }
 
     /// <summary>
     ///     Der errechnete Gesamtbetrag der Position als Ergebnis der Berechnung &lt;Menge&gt; x &lt;Einzelpreis&gt; oder
@@ -93,5 +94,5 @@ public class Kostenposition : COM
     [JsonProperty(PropertyName = "betragKostenposition")]
     [JsonPropertyName("betragKostenposition")]
     [ProtoMember(11)]
-    public Betrag BetragKostenposition { get; set; }
+    public Betrag? BetragKostenposition { get; set; }
 }

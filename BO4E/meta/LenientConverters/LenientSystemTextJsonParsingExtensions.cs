@@ -123,7 +123,6 @@ public static class LenientSystemTextJsonParsingExtensions
         //    contractResolver = new DefaultContractResolver();
         //}
 
-
         return settings;
     }
 }
