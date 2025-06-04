@@ -125,7 +125,7 @@ public class TechnischeRessource : BusinessObject
     [JsonPropertyName("verbrauchsart")]
     [NonOfficial(NonOfficialCategory.MISSING)]
     [ProtoMember(18)]
-    public TechnischeRessourceVerbrauchsart? Verbrauchsart { get; set; }
+    public List<TechnischeRessourceVerbrauchsart>? Verbrauchsart { get; set; }
 
     /// <summary>
     /// Wärmenutzung
