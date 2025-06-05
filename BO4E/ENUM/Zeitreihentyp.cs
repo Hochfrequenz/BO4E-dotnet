@@ -3,8 +3,8 @@ using BO4E.meta;
 
 namespace BO4E.ENUM;
 
-/// <summary>Codes der SummenzeitreihentypenDie nachfolgenden Codes sind in DE7111 zu nutzen:</summary>
-// https://www.edi-energy.de/index.php?id=38&tx_bdew_bdew%5Buid%5D=695&tx_bdew_bdew%5Baction%5D=download&tx_bdew_bdew%5Bcontroller%5D=Dokument&cHash=67782e05d8b0f75fbe3a0e1801d07ed0
+/// <summary>Codes der Summenzeitreihentypen. Die nachfolgenden Codes sind in DE7111 zu nutzen:</summary>
+// https://www.bdew-mako.de/pdf/Codeliste_der_Zeitreihentypen_1_1d_Lesefassung_20210716.pdf
 [NonOfficial(NonOfficialCategory.REGULATORY_REQUIREMENTS)]
 public enum Zeitreihentyp
 {
@@ -56,4 +56,54 @@ public enum Zeitreihentyp
     [EnumMember(Value = "SES_TES")]
     [System.Text.Json.Serialization.JsonStringEnumMemberName("SES_TES")]
     SES_TES,
+
+    /// <summary>Ausfallarbeitssumme</summary>
+    [EnumMember(Value = "AUS")]
+    [System.Text.Json.Serialization.JsonStringEnumMemberName("AUS")]
+    AUS,
+
+    /// <summary>Bilanzkreisabweichungssaldo</summary>
+    [EnumMember(Value = "BAS")]
+    [System.Text.Json.Serialization.JsonStringEnumMemberName("BAS")]
+    BAS,
+
+    /// <summary>Differenzzeitreihe</summary>
+    [EnumMember(Value = "DBA")]
+    [System.Text.Json.Serialization.JsonStringEnumMemberName("DBA")]
+    DBA,
+
+    /// <summary>Deltazeitreihe</summary>
+    [EnumMember(Value = "DZR")]
+    [System.Text.Json.Serialization.JsonStringEnumMemberName("DZR")]
+    DZR,
+
+    /// <summary>Deltazeitreihenübertrag</summary>
+    [EnumMember(Value = "DZÜ")]
+    [System.Text.Json.Serialization.JsonStringEnumMemberName("DZÜ")]
+    DZÜ,
+
+    /// <summary>Fahrplanentnahmesumme</summary>
+    [EnumMember(Value = "FPE")]
+    [System.Text.Json.Serialization.JsonStringEnumMemberName("FPE")]
+    FPE,
+
+    /// <summary>Fahrplaneinspeisesumme</summary>
+    [EnumMember(Value = "FPI")]
+    [System.Text.Json.Serialization.JsonStringEnumMemberName("FPI")]
+    FPI,
+
+    /// <summary>Überführungszeitreihe Sekundärregelleistung (Export)</summary>
+    [EnumMember(Value = "SRE")]
+    [System.Text.Json.Serialization.JsonStringEnumMemberName("SRE")]
+    SRE,
+
+    /// <summary>Überführungszeitreihe Sekundärregelleistung (Import)</summary>
+    [EnumMember(Value = "SRI")]
+    [System.Text.Json.Serialization.JsonStringEnumMemberName("SRI")]
+    SRI,
+
+    /// <summary>Verlustzeitreihe</summary>
+    [EnumMember(Value = "VZR")]
+    [System.Text.Json.Serialization.JsonStringEnumMemberName("VZR")]
+    VZR,
 }
