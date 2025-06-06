@@ -120,12 +120,28 @@ public class TechnischeRessource : BusinessObject
     ///     ZE5: E-Mobilität
     ///     ZA8: Straßenbeleuchtung
     /// </summary>
+    [Obsolete("Abgelöst durch 'Verbrauchsarten'. (Technische Ressource unterstützt mehrere Verbrauchsarten)")]
     [JsonProperty(PropertyName = "verbrauchsart", Order = 18)]
     [JsonPropertyOrder(18)]
     [JsonPropertyName("verbrauchsart")]
     [NonOfficial(NonOfficialCategory.MISSING)]
     [ProtoMember(18)]
     public TechnischeRessourceVerbrauchsart? Verbrauchsart { get; set; }
+
+    /// <summary>
+    /// Verbrauchsarten der Technischen Ressource
+    /// Beispiel: CAV+Z64'
+    ///     Z64: Kraft/Licht
+    ///     Z65: Wärme
+    ///     ZE5: E-Mobilität
+    ///     ZA8: Straßenbeleuchtung
+    /// </summary>
+    [JsonProperty(PropertyName = "verbrauchsarten", Order = 33)]
+    [JsonPropertyOrder(33)]
+    [JsonPropertyName("verbrauchsarten")]
+    [NonOfficial(NonOfficialCategory.MISSING)]
+    [ProtoMember(33)]
+    public List<TechnischeRessourceVerbrauchsart>? Verbrauchsarten { get; set; }
 
     /// <summary>
     /// Wärmenutzung
