@@ -1,4 +1,5 @@
 #nullable enable
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Text.Json.Serialization;
@@ -130,6 +131,7 @@ public class Netzlokation : BusinessObject
     /// Enthält die ID der vorgelagerten Lokation. Kann IDs unterschiedlicher Lokationen enthalten, also zum Beispiel
     /// einer Messlokation oder Netzlokation
     /// </summary>
+    [Obsolete("Abgelöst durch 'VorgelagerteLokationsIds'.")]
     [JsonProperty(Order = 21, PropertyName = "vorgelagerteLokationsId")]
     [JsonPropertyName("vorgelagerteLokationsId")]
     [ProtoMember(15)]
@@ -154,4 +156,14 @@ public class Netzlokation : BusinessObject
     [JsonPropertyOrder(23)]
     [NonOfficial(NonOfficialCategory.CUSTOMER_REQUIREMENTS)]
     public List<MarktpartnerDetails>? Marktrollen { get; set; } // ToDo: evaluate this
+
+    /// <summary>
+    /// Enthält die ID's der vorgelagerten Lokationen. Kann IDs unterschiedlicher Lokationen enthalten, also zum Beispiel
+    /// einer Messlokation oder Netzlokation
+    /// </summary>
+    [JsonProperty(Order = 24, PropertyName = "vorgelagerteLokationsIds")]
+    [JsonPropertyName("vorgelagerteLokationsIds")]
+    [ProtoMember(18)]
+    [JsonPropertyOrder(24)]
+    public List<LokationsTypZuordnung>? VorgelagerteLokationsIds { get; set; }
 }
