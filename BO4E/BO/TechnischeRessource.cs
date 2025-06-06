@@ -136,7 +136,9 @@ public class TechnischeRessource : BusinessObject
     ///     ZE5: E-Mobilität
     ///     ZA8: Straßenbeleuchtung
     /// </summary>
-    [Obsolete("Abgelöst durch 'Verbrauchsarten'. (Technische Ressource unterstützt mehrere Verbrauchsarten)")]
+    [Obsolete(
+        "Abgelöst durch 'Verbrauchsarten'. (Technische Ressource unterstützt mehrere Verbrauchsarten)"
+    )]
     [JsonProperty(PropertyName = "verbrauchsart", Order = 18)]
     [JsonPropertyOrder(18)]
     [JsonPropertyName("verbrauchsart")]
@@ -257,7 +259,7 @@ public class TechnischeRessource : BusinessObject
     [ProtoMember(25)]
     [JsonPropertyOrder(25)]
     public string? VorgelagerteLokationsId { get; set; }
-    
+
     /// <summary>
     /// Enthält die ID's der vorgelagerten Lokationen. Kann IDs unterschiedlicher Lokationen enthalten, also zum Beispiel
     /// einer Messlokation oder Netzlokation

@@ -315,6 +315,7 @@ public class Messlokation : BusinessObject
     [ProtoMember(1029)]
     [JsonPropertyOrder(35)]
     public List<LokationsTypZuordnung>? VorgelagerteLokationsIds { get; set; }
+
     /// <summary>
     ///     Test if a <paramref name="id" /> is a valid messlokations ID.
     /// </summary>

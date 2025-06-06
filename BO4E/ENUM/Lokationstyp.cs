@@ -19,11 +19,12 @@ public enum Lokationstyp
     [EnumMember(Value = "NELO")]
     [System.Text.Json.Serialization.JsonStringEnumMemberName("NELO")]
     NELO,
+
     /// <summary>Steuerbare Ressource</summary>
     [EnumMember(Value = "SR")]
     [System.Text.Json.Serialization.JsonStringEnumMemberName("SR")]
     SR,
-    
+
     /// <summary>Technische Ressource</summary>
     [EnumMember(Value = "TR")]
     [System.Text.Json.Serialization.JsonStringEnumMemberName("TR")]

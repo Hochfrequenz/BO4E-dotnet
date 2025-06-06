@@ -7,7 +7,7 @@ using ProtoBuf;
 namespace BO4E.COM;
 
 /// <summary>
-/// ordnet beliebigen einer Lokations-ID einen Lokationstyp zu 
+/// ordnet beliebigen einer Lokations-ID einen Lokationstyp zu
 /// </summary>
 [ProtoContract]
 public class LokationsTypZuordnung : COM
@@ -20,7 +20,6 @@ public class LokationsTypZuordnung : COM
     [JsonPropertyOrder(1)]
     [ProtoMember(1)]
     public Lokationstyp? Lokationstyp { get; set; }
-
 
     /// <summary>
     /// Wert, der einem Lokationstyp zugeordnet werden soll #TODO: generischer? (für andere zur Verfügung stellen)
