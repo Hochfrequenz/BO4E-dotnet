@@ -400,20 +400,20 @@ public class Marktlokation : BusinessObject
     /// einer Messlokation oder Netzlokation
     /// </summary>
     [Obsolete("Abgelöst durch 'VorgelagerteLokationsIds'.")]
-    [JsonProperty(Order = 25, PropertyName = "vorgelagerteLokationsId")]
+    [JsonProperty(Order = 43, PropertyName = "vorgelagerteLokationsId")]
     [JsonPropertyName("vorgelagerteLokationsId")]
-    [ProtoMember(25)]
-    [JsonPropertyOrder(25)]
+    [ProtoMember(43)]
+    [JsonPropertyOrder(43)]
     public string? VorgelagerteLokationsId { get; set; }
 
     /// <summary>
     /// Enthält die ID's der vorgelagerten Lokationen. Kann IDs unterschiedlicher Lokationen enthalten, also zum Beispiel
     /// einer Messlokation oder Netzlokation
     /// </summary>
-    [JsonProperty(Order = 43, PropertyName = "vorgelagerteLokationsIds")]
+    [JsonProperty(Order = 44, PropertyName = "vorgelagerteLokationsIds")]
     [JsonPropertyName("vorgelagerteLokationsIds")]
-    [ProtoMember(43)]
-    [JsonPropertyOrder(43)]
+    [ProtoMember(44)]
+    [JsonPropertyOrder(44)]
     public List<LokationsTypZuordnung>? VorgelagerteLokationsIds { get; set; }
 
     /// <summary>
