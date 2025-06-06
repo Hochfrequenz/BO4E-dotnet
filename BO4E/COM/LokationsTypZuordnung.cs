@@ -15,18 +15,18 @@ public class LokationsTypZuordnung : COM
     /// <summary>
     /// Lokationstyp
     /// </summary>
-    [JsonProperty(Order = 1, PropertyName = "lokationstyp")]
+    [JsonProperty(Order = 3, PropertyName = "lokationstyp")]
     [JsonPropertyName("lokationstyp")]
-    [JsonPropertyOrder(1)]
-    [ProtoMember(1)]
+    [JsonPropertyOrder(3)]
+    [ProtoMember(3)]
     public Lokationstyp? Lokationstyp { get; set; }
 
     /// <summary>
     /// Wert, der einem Lokationstyp zugeordnet werden soll #TODO: generischer? (für andere zur Verfügung stellen)
     /// </summary>
-    [JsonProperty(Order = 2, PropertyName = "lokationsId")]
+    [JsonProperty(Order = 4, PropertyName = "lokationsId")]
     [JsonPropertyName("lokationsId")]
-    [JsonPropertyOrder(2)]
-    [ProtoMember(2)]
+    [JsonPropertyOrder(4)]
+    [ProtoMember(4)]
     public string? LokationsId { get; set; }
 }
