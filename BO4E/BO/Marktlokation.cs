@@ -399,11 +399,22 @@ public class Marktlokation : BusinessObject
     /// Enthält die ID der vorgelagerten Lokation. Kann IDs unterschiedlicher Lokationen enthalten, also zum Beispiel
     /// einer Messlokation oder Netzlokation
     /// </summary>
+    [Obsolete("Abgelöst durch 'VorgelagerteLokationsIds'.")]
+    [JsonProperty(Order = 25, PropertyName = "vorgelagerteLokationsId")]
+    [JsonPropertyName("vorgelagerteLokationsId")]
+    [ProtoMember(25)]
+    [JsonPropertyOrder(25)]
+    public string? VorgelagerteLokationsId { get; set; }
+
+    /// <summary>
+    /// Enthält die ID's der vorgelagerten Lokationen. Kann IDs unterschiedlicher Lokationen enthalten, also zum Beispiel
+    /// einer Messlokation oder Netzlokation
+    /// </summary>
     [JsonProperty(Order = 43, PropertyName = "vorgelagerteLokationsId")]
     [JsonPropertyName("vorgelagerteLokationsId")]
     [ProtoMember(43)]
     [JsonPropertyOrder(43)]
-    public string? VorgelagerteLokationsId { get; set; }
+    public List<LokationsTypZuordnung>? VorgelagerteLokationsIds { get; set; }
 
     /// <summary>
     ///     Test if a <paramref name="id" /> is a valid Marktlokations ID.
