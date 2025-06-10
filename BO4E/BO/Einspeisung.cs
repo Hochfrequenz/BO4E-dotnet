@@ -74,12 +74,22 @@ public class Einspeisung : BusinessObject
     public FernsteuerbarkeitStatus? FernsteuerbarkeitStatus { get; set; }
 
     /// <summary>
-    /// Art der erzeugenden Marktlokation (EEG oder KWKG, Mit oder ohne DV-Pflicht)
+    /// Erzeugungsart
     /// </summary>
-    [JsonProperty(PropertyName = "artDerErzeugendenMarktlokation", Order = 15)]
-    [JsonPropertyName("artDerErzeugendenMarktlokation")]
+    [JsonProperty(PropertyName = "erzeugungsart", Order = 15)]
+    [JsonPropertyName("erzeugungsart")]
     [JsonPropertyOrder(15)]
     [NonOfficial(NonOfficialCategory.MISSING)]
     [ProtoMember(15)]
-    public ArtDerErzeugendenMarktlokation? ArtDerErzeugendenMarktlokation { get; set; }
+    public Erzeugungsart? Erzeugungsart { get; set; }
+
+    /// <summary>
+    /// Direktvermarktungspflichtig
+    /// </summary>
+    [JsonProperty(PropertyName = "istDvPflichtig", Order = 16)]
+    [JsonPropertyName("istDvPflichtig")]
+    [JsonPropertyOrder(16)]
+    [NonOfficial(NonOfficialCategory.MISSING)]
+    [ProtoMember(16)]
+    public bool? IstDvPflichtig { get; set; }
 }
