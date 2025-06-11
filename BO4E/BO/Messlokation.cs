@@ -287,6 +287,7 @@ public class Messlokation : BusinessObject
     /// Enthält die ID der vorgelagerten Lokation. Kann IDs unterschiedlicher Lokationen enthalten, also zum Beispiel
     /// einer Messlokation oder Netzlokation
     /// </summary>
+    [Obsolete("Abgelöst durch 'VorgelagerteLokationsIds'.")]
     [JsonProperty(Order = 33, PropertyName = "vorgelagerteLokationsId")]
     [JsonPropertyName("vorgelagerteLokationsId")]
     [ProtoMember(1027)]
@@ -304,6 +305,16 @@ public class Messlokation : BusinessObject
     [ProtoMember(1028)]
     [JsonPropertyOrder(34)]
     public bool? IstFuerLieferanmeldungRelevant { get; set; } = null;
+
+    /// <summary>
+    /// Enthält die ID's der vorgelagerten Lokationen. Kann IDs unterschiedlicher Lokationen enthalten, also zum Beispiel
+    /// einer Messlokation oder Netzlokation
+    /// </summary>
+    [JsonProperty(Order = 35, PropertyName = "vorgelagerteLokationsIds")]
+    [JsonPropertyName("vorgelagerteLokationsIds")]
+    [ProtoMember(1029)]
+    [JsonPropertyOrder(35)]
+    public List<LokationsTypZuordnung>? VorgelagerteLokationsIds { get; set; }
 
     /// <summary>
     ///     Test if a <paramref name="id" /> is a valid messlokations ID.
