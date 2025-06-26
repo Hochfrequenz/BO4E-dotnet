@@ -198,7 +198,7 @@ public class Zaehlwerk : COM
     [JsonPropertyName("Verbrauchsarten")]
     [NonOfficial(NonOfficialCategory.CUSTOMER_REQUIREMENTS)]
     [ProtoMember(1024)]
-    [JsonPropertyOrder(1012)]
+    [JsonPropertyOrder(1024)]
     public List<Verbrauchsart>? Verbrauchsarten { get; set; }
 
 #pragma warning restore CS1591 // Missing XML comment for publicly visible type or member
