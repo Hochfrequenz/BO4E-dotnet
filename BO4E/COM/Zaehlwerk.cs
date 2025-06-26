@@ -90,6 +90,7 @@ public class Zaehlwerk : COM
     public List<Verwendungszweck>? Verwendungszwecke { get; set; }
 
     /// <summary>Stromverbrauchsart/Verbrauchsart Marktlokation</summary>
+    [Obsolete("Abgelöst durch 'Verbrauchsarten'. (Mehrere Verbrauchsarten möglich)")]
     [JsonProperty(PropertyName = "verbrauchsart", Order = 1012)]
     [JsonPropertyName("verbrauchsart")]
     [NonOfficial(NonOfficialCategory.CUSTOMER_REQUIREMENTS)]
@@ -193,7 +194,7 @@ public class Zaehlwerk : COM
     [ProtoMember(1023)]
     public EMobilitaetsart? EMobilitaetsart { get; set; }
 
-    /// <summary>Verbrauchsart Marktlokation</summary>
+    /// <summary>Verbrauchsarten Marktlokation</summary>
     [JsonProperty(PropertyName = "Verbrauchsarten", Order = 1024)]
     [JsonPropertyName("Verbrauchsarten")]
     [NonOfficial(NonOfficialCategory.CUSTOMER_REQUIREMENTS)]
