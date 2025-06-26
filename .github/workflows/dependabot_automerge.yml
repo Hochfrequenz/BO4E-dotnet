@@ -17,7 +17,7 @@ jobs:
         run: |
           curl -s https://github.com/web-flow.gpg | gpg --import
           echo "Imported GitHub keys."
-          
+
           echo "Verifying signature of commit: $GITHUB_SHA"
           if ! git verify-commit "$GITHUB_SHA"; then
             echo "Commit signature verification failed."

@@ -193,7 +193,6 @@ public class Zaehlwerk : COM
     [ProtoMember(1023)]
     public EMobilitaetsart? EMobilitaetsart { get; set; }
 
-
     /// <summary>Verbrauchsart Marktlokation</summary>
     [JsonProperty(PropertyName = "Verbrauchsarten", Order = 1024)]
     [JsonPropertyName("Verbrauchsarten")]
