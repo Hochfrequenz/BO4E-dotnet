@@ -45,7 +45,7 @@ public enum Verbrauchsart
     [System.Text.Json.Serialization.JsonStringEnumMemberName("STRB")]
     STRB,
 
-    /// <summary>ZA8: Steuerung Wärmeabgabe</summary>
+    /// <summary>ZB3: Steuerung Wärmeabgabe</summary>
     [EnumMember(Value = "STW")]
     [System.Text.Json.Serialization.JsonStringEnumMemberName("STW")]
     STW,
