@@ -510,6 +510,9 @@ enum Geraetetyp {
    Geraetetyp_STEUERBOX = 40;
    Geraetetyp_BLOCKSTROMWANDLER = 41;
    Geraetetyp_KOMBIMESSWANDLER = 42;
+   Geraetetyp_DICHTEMENGENUMWERTER = 43;
+   Geraetetyp_TEMPERATURMENGENUMWERTER = 44;
+   Geraetetyp_ZUSTANDSMENGENUMWERTER = 45;
 }
 message Geschaeftspartner {
    option (.protobuf_net.msgopt).namespace = "BO4E.BO";
@@ -944,10 +947,18 @@ enum Leistungstyp {
    MAHNKOSTEN = 21;
    INKASSOKOSTEN = 22;
 }
+message LokationsTypZuordnung {
+   option (.protobuf_net.msgopt).namespace = "BO4E.COM";
+   Lokationstyp Lokationstyp = 3;
+   string LokationsId = 4;
+}
 enum Lokationstyp {
    option (.protobuf_net.enumopt).namespace = "BO4E.ENUM";
    MALO = 0;
    MELO = 1;
+   NELO = 2;
+   SR = 3;
+   TR = 4;
 }
 message Marktlokation {
    option (.protobuf_net.msgopt).namespace = "BO4E.BO";
@@ -974,6 +985,7 @@ message Marktlokation {
    repeated Konfigurationsprodukt Konfigurationsprodukte = 40;
    string LokationsbuendelObjektcode = 42;
    string VorgelagerteLokationsId = 43;
+   repeated LokationsTypZuordnung VorgelagerteLokationsIds = 44;
    repeated MarktpartnerDetails Marktrollen = 1021;
    string Regelzone = 1022;
    string Marktgebiet = 1023;
@@ -1070,6 +1082,8 @@ message Messlokation {
    repeated Messprodukt Messprodukte = 1024;
    string LokationsbuendelObjektcode = 1026;
    string VorgelagerteLokationsId = 1027;
+   bool IstFuerLieferanmeldungRelevant = 1028;
+   repeated LokationsTypZuordnung VorgelagerteLokationsIds = 1029;
 }
 message Messlokationszuordnung {
    option (.protobuf_net.msgopt).namespace = "BO4E.COM";
@@ -1562,6 +1576,7 @@ enum Titel {
    DR = 0;
    PROF = 1;
    PROF_DR = 2;
+   DIPLOM_INF = 3;
 }
 enum Unterbrechbarkeit {
    option (.protobuf_net.enumopt).namespace = "BO4E.ENUM";
@@ -1596,6 +1611,10 @@ enum Verbrauchsart {
    KLWS = 2;
    W = 3;
    WS = 4;
+   WK = 5;
+   EM = 6;
+   STRB = 7;
+   STW = 8;
 }
 enum Verbrauchsmengetyp {
    option (.protobuf_net.enumopt).namespace = "BO4E.ENUM";
@@ -1940,6 +1959,7 @@ enum Zaehlertyp {
    WASSERZAEHLER = 13;
    MODERNEMESSEINRICHTUNG = 14;
    NEUEMESSEINRICHTUNGGAS = 15;
+   MENGENUMWERTER = 16;
 }
 enum ZaehlertypSpezifikation {
    option (.protobuf_net.enumopt).namespace = "BO4E.ENUM";
@@ -1972,6 +1992,7 @@ message Zaehlwerk {
    Zaehlzeitregister Zaehlzeiten = 1021;
    string Konfiguration = 1022;
    EMobilitaetsart EMobilitaetsart = 1023;
+   repeated Verbrauchsart Verbrauchsarten = 1024 [packed = false];
 }
 message Zaehlzeitregister {
    option (.protobuf_net.msgopt).namespace = "BO4E.COM";
@@ -2015,6 +2036,16 @@ enum Zeitreihentyp {
    TLS = 6;
    SLS_TLS = 7;
    SES_TES = 8;
+   AUS = 9;
+   BAS = 10;
+   DBA = 11;
+   DZR = 12;
+   DZÜ = 13;
+   FPE = 14;
+   FPI = 15;
+   SRE = 16;
+   SRI = 17;
+   VZR = 18;
 }
 message Zustaendigkeit {
    option (.protobuf_net.msgopt).namespace = "BO4E.COM";
