@@ -73,4 +73,22 @@ public class Lastprofil : COM
     [JsonPropertyName("herausgeber")]
     [ProtoMember(1006)]
     public string? Herausgeber { get; set; }
+
+    /// <summary>
+    ///   Profiltyp
+    /// </summary>
+    /// <example>HAUSHALT</example>
+    [JsonProperty(PropertyName = "profiltyp")]
+    [JsonPropertyName("profiltyp")]
+    [ProtoMember(1007)]
+    public Profilklasse? Profiltyp { get; set; }
+
+    /// <summary>
+    ///   Normierungsfaktor
+    /// </summary>
+    /// <example>300_KWH_K</example>
+    [JsonProperty(PropertyName = "normierungsfaktor")]
+    [JsonPropertyName("normierungsfaktor")]
+    [ProtoMember(1008)]
+    public Normierungsfaktor? Normierungsfaktor { get; set; }
 }
