@@ -65,6 +65,16 @@ public class Energiemenge : BusinessObject
     public List<Verbrauch>? Energieverbrauch { get; set; }
 
     /// <summary>
+    ///     Gibt das <see cref="Lastprofil" /> an, zu der die Energiemenge gehört.
+    /// </summary>
+    [JsonProperty(Order = 13, PropertyName = "lastprofil")]
+    [JsonPropertyName("lastprofil")]
+    [JsonPropertyOrder(13)]
+    [ProtoMember(13)]
+    [DataCategory(DataCategory.POD)]
+    public Lastprofil? Lastprofil { get; set; }
+
+    /// <summary>
     ///     Adding two Energiemenge objects is allowed for Energiemenge with the same location Id and location type.
     ///     The operation basically merges both energieverbrauch lists. Non-standard attributes (userProperties) are
     ///     not contained in the result.
