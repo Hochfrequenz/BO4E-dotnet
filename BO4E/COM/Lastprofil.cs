@@ -27,7 +27,7 @@ public class Lastprofil : COM
     [JsonProperty(PropertyName = "profilschar")]
     [JsonPropertyName("profilschar")]
     [NonOfficial(NonOfficialCategory.CUSTOMER_REQUIREMENTS)]
-    [ProtoMember(1005)]
+    [ProtoMember(1002)]
     public string? Profilschar { get; set; }
 
     /// <summary>
@@ -36,7 +36,7 @@ public class Lastprofil : COM
     [JsonProperty(PropertyName = "verfahren")]
     [JsonPropertyName("verfahren")]
     [NonOfficial(NonOfficialCategory.CUSTOMER_REQUIREMENTS)]
-    [ProtoMember(1002)]
+    [ProtoMember(1003)]
     public Profilverfahren? Verfahren { get; set; }
 
     /// <summary>
@@ -45,7 +45,7 @@ public class Lastprofil : COM
     [JsonProperty(PropertyName = "einspeisung")]
     [JsonPropertyName("einspeisung")]
     [NonOfficial(NonOfficialCategory.CUSTOMER_REQUIREMENTS)]
-    [ProtoMember(1003)]
+    [ProtoMember(1004)]
     public bool? Einspeisung { get; set; }
 
     /// <summary>
@@ -54,7 +54,7 @@ public class Lastprofil : COM
     [JsonProperty(PropertyName = "tagesparameter")]
     [JsonPropertyName("tagesparameter")]
     [NonOfficial(NonOfficialCategory.CUSTOMER_REQUIREMENTS)]
-    [ProtoMember(1004)]
+    [ProtoMember(1005)]
     public Tagesparameter? Tagesparameter { get; set; }
 
     /// <summary>
@@ -63,7 +63,7 @@ public class Lastprofil : COM
     /// <example>ART_STANDARDLASTPROFIL</example>
     [JsonProperty(PropertyName = "profilart")]
     [JsonPropertyName("profilart")]
-    [ProtoMember(1005)]
+    [ProtoMember(1006)]
     public Profilart? Profilart { get; set; }
 
     /// <summary>
@@ -72,7 +72,7 @@ public class Lastprofil : COM
     /// <example>BDEW</example>
     [JsonProperty(PropertyName = "herausgeber")]
     [JsonPropertyName("herausgeber")]
-    [ProtoMember(1006)]
+    [ProtoMember(1007)]
     public string? Herausgeber { get; set; }
 
     /// <summary>
@@ -81,7 +81,7 @@ public class Lastprofil : COM
     /// <example>HAUSHALT</example>
     [JsonProperty(PropertyName = "profiltyp")]
     [JsonPropertyName("profiltyp")]
-    [ProtoMember(1007)]
+    [ProtoMember(1008)]
     public Profilklasse? Profiltyp { get; set; }
 
     /// <summary>
@@ -90,6 +90,6 @@ public class Lastprofil : COM
     /// <example>300_KWH_K</example>
     [JsonProperty(PropertyName = "normierungsfaktor")]
     [JsonPropertyName("normierungsfaktor")]
-    [ProtoMember(1008)]
+    [ProtoMember(1009)]
     public Normierungsfaktor? Normierungsfaktor { get; set; }
 }

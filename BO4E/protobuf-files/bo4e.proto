@@ -924,6 +924,15 @@ enum Landescode {
 }
 message Lastprofil {
    option (.protobuf_net.msgopt).namespace = "BO4E.COM";
+   string Bezeichnung = 1001;
+   string Profilschar = 1002;
+   Profilverfahren Verfahren = 1003;
+   bool Einspeisung = 1004;
+   Tagesparameter Tagesparameter = 1005;
+   Profilart Profilart = 1006;
+   string Herausgeber = 1007;
+   Profilklasse Profiltyp = 1008;
+   Normierungsfaktor Normierungsfaktor = 1009;
 }
 enum Leistungstyp {
    option (.protobuf_net.enumopt).namespace = "BO4E.ENUM";
@@ -1179,6 +1188,12 @@ enum Netznutzungszahler {
    Netznutzungszahler_KUNDE = 0;
    Netznutzungszahler_LIEFERANT = 1;
 }
+enum Normierungsfaktor {
+   option (.protobuf_net.enumopt).namespace = "BO4E.ENUM";
+   NORMIERUNGSFAKTOR_1_000_000_KWH_A = 0;
+   NORMIERUNGSFAKTOR_300_KWH_K = 1;
+   NORMIERUNGSFAKTOR_1_000_000_KW = 2;
+}
 message Notiz {
    option (.protobuf_net.msgopt).namespace = "BO4E.COM";
    string Autor = 3;
@@ -1244,6 +1259,44 @@ enum Prioritaet {
    NORMAL = 2;
    HOCH = 3;
    SEHR_HOCH = 4;
+}
+enum Profilart {
+   option (.protobuf_net.enumopt).namespace = "BO4E.ENUM";
+   ART_STANDARDLASTPROFIL = 0;
+   ART_TAGESPARAMETERABHAENGIGES_LASTPROFIL = 1;
+   ART_LASTPROFIL = 2;
+   ART_STANDARDEINSPEISEPROFIL = 3;
+   ART_TAGESPARAMETERABHAENGIGES_EINSPEISEPROFIL = 4;
+}
+enum Profilklasse {
+   option (.protobuf_net.enumopt).namespace = "BO4E.ENUM";
+   Profilklasse_GEWERBE = 0;
+   GEWERBE_WERKTAG_9_BIS_18 = 1;
+   GEWERBE_ABEND = 2;
+   GEWERBE_DURCHLAUFEND = 3;
+   GEWERBE_LADEN_FRISEUR = 4;
+   GEWERBE_BAECKEREI = 5;
+   GEWERBE_WOCHENENDE = 6;
+   LANDWIRTSCHAFT = 7;
+   LANDWIRTSCHAFT_MIT_MILCH = 8;
+   LANDWIRTSCHAFT_OHNE_MILCH = 9;
+   HAUSHALT = 10;
+   BANDLAST = 11;
+   UNTERBRECHBARE_VERBRAUCHSEINRICHTUNG = 12;
+   HEIZWAERMESPEICHER = 13;
+   Profilklasse_STRASSENBELEUCHTUNG = 14;
+   PHOTOVOLTAIK = 15;
+   BLOCKHEIZKRAFTWERK = 16;
+   SONSTIGE_VERBRAUCHENDE_MARKTLOKATION = 17;
+   SONSTIGE_ERZEUGENDE_MARKTLOKATION = 18;
+   EMOB_OEFFENTLICH = 19;
+   EMOB_HAUSHALT = 20;
+   EMOB_GEWERBE = 21;
+}
+enum Profilverfahren {
+   option (.protobuf_net.enumopt).namespace = "BO4E.ENUM";
+   SYNTHETISCH = 0;
+   ANALYTISCH = 1;
 }
 message Rechnung {
    option (.protobuf_net.msgopt).namespace = "BO4E.BO";
@@ -1547,6 +1600,13 @@ enum Steuerkennzeichen {
    VST_16 = 6;
    VST_7 = 7;
    RCV = 8;
+}
+message Tagesparameter {
+   option (.protobuf_net.msgopt).namespace = "BO4E.COM";
+   string Klimazone = 3;
+   string Temperaturmessstelle = 4;
+   string Dienstanbieter = 5;
+   string Herausgeber = 6;
 }
 enum Tarifart {
    option (.protobuf_net.enumopt).namespace = "BO4E.ENUM";
