@@ -9,6 +9,7 @@ namespace BO4E.COM;
 /// <summary>
 /// Lastprofil
 /// </summary>
+[ProtoContract]
 public class Lastprofil : COM
 {
     /// <summary>

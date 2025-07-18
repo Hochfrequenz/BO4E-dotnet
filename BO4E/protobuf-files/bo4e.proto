@@ -323,6 +323,7 @@ message Energiemenge {
    string LokationsId = 10; // default value could not be applied: |null|
    Lokationstyp LokationsTyp = 11;
    repeated Verbrauch Energieverbrauch = 12;
+   Lastprofil Lastprofil = 13;
 }
 enum Energierichtung {
    option (.protobuf_net.enumopt).namespace = "BO4E.ENUM";
@@ -920,6 +921,9 @@ enum Landescode {
    Landescode_ZM = 264;
    Landescode_ZR = 265;
    Landescode_ZW = 266;
+}
+message Lastprofil {
+   option (.protobuf_net.msgopt).namespace = "BO4E.COM";
 }
 enum Leistungstyp {
    option (.protobuf_net.enumopt).namespace = "BO4E.ENUM";
@@ -1692,11 +1696,6 @@ message Vertragsteil {
    Menge Kundenwert = 1010;
    string Verbrauchsaufteilung = 1011;
 }
-message Verwendungszweck {
-   option (.protobuf_net.msgopt).namespace = "BO4E.COM";
-   Marktrolle Marktrolle = 3;
-   repeated Verwendungszweck Zweck = 4 [packed = false];
-}
 enum Verwendungszweck {
    option (.protobuf_net.enumopt).namespace = "BO4E.ENUM";
    NETZNUTZUNGSABRECHNUNG = 0;
@@ -1706,6 +1705,11 @@ enum Verwendungszweck {
    BLINDARBEITABRECHNUNG_BETRIEBSFUEHRUNG = 4;
    UEBERMITTLUNG_AN_DAS_HKNR = 5;
    ERMITTLUNG_AUSGEGLICHENHEIT_BILANZKREIS = 6;
+}
+message Verwendungszweck {
+   option (.protobuf_net.msgopt).namespace = "BO4E.COM";
+   Marktrolle Marktrolle = 3;
+   repeated Verwendungszweck Zweck = 4 [packed = false];
 }
 message Vorauszahlung {
    option (.protobuf_net.msgopt).namespace = "BO4E.COM";
