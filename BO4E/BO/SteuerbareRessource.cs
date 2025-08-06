@@ -106,10 +106,10 @@ public class SteuerbareRessource : BusinessObject
     /// <summary>
     ///   Zugeordnete Messprodukte
     /// </summary>
-    [JsonProperty(Order = 17, PropertyName = "messprodukte")]
+    [JsonProperty(Order = 18, PropertyName = "messprodukte")]
     [JsonPropertyName("messprodukte")]
-    [ProtoMember(17)]
-    [JsonPropertyOrder(17)]
+    [ProtoMember(18)]
+    [JsonPropertyOrder(18)]
     [NonOfficial(NonOfficialCategory.CUSTOMER_REQUIREMENTS)]
     public List<Messprodukt>? Messprodukte { get; set; }
 }
