@@ -102,4 +102,14 @@ public class SteuerbareRessource : BusinessObject
     [JsonPropertyOrder(17)]
     [NonOfficial(NonOfficialCategory.CUSTOMER_REQUIREMENTS)]
     public List<MarktpartnerDetails>? Marktrollen { get; set; } // ToDo: evaluate this
+
+    /// <summary>
+    ///   Zugeordnete Messprodukte
+    /// </summary>
+    [JsonProperty(Order = 18, PropertyName = "messprodukte")]
+    [JsonPropertyName("messprodukte")]
+    [ProtoMember(18)]
+    [JsonPropertyOrder(18)]
+    [NonOfficial(NonOfficialCategory.CUSTOMER_REQUIREMENTS)]
+    public List<Messprodukt>? Messprodukte { get; set; }
 }

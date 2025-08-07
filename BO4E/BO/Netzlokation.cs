@@ -166,4 +166,14 @@ public class Netzlokation : BusinessObject
     [ProtoMember(18)]
     [JsonPropertyOrder(24)]
     public List<LokationsTypZuordnung>? VorgelagerteLokationsIds { get; set; }
+
+    /// <summary>
+    ///   Zugeordnete Messprodukte
+    /// </summary>
+    [JsonProperty(Order = 25, PropertyName = "messprodukte")]
+    [JsonPropertyName("messprodukte")]
+    [ProtoMember(19)]
+    [JsonPropertyOrder(25)]
+    [NonOfficial(NonOfficialCategory.CUSTOMER_REQUIREMENTS)]
+    public List<Messprodukt>? Messprodukte { get; set; }
 }
