@@ -101,5 +101,4 @@ public enum Rechnungstyp
     [EnumMember(Value = "ABRECHNUNG_TECHNIK")]
     [System.Text.Json.Serialization.JsonStringEnumMemberName("ABRECHNUNG_TECHNIK")]
     ABRECHNUNG_TECHNIK,
-
 }
