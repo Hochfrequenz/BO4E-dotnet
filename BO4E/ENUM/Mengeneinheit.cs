@@ -113,4 +113,18 @@ public enum Mengeneinheit
     [EnumMember(Value = "KWHK")]
     [System.Text.Json.Serialization.JsonStringEnumMemberName("KWHK")]
     KWHK = 40,
+
+    /// <summary>
+    ///     W/m**2 (Watt pro Quadratmeter)
+    /// </summary>
+    [EnumMember(Value = "W_M2")]
+    [System.Text.Json.Serialization.JsonStringEnumMemberName("W_M2")]
+    W_M2 = 50,
+
+    /// <summary>
+    ///     m/s (Meter pro Sekunde)
+    /// </summary>
+    [EnumMember(Value = "M_S")]
+    [System.Text.Json.Serialization.JsonStringEnumMemberName("M_S")]
+    M_S = 60,
 }
