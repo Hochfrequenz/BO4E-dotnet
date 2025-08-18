@@ -119,12 +119,12 @@ public enum Mengeneinheit
     /// </summary>
     [EnumMember(Value = "W_M2")]
     [System.Text.Json.Serialization.JsonStringEnumMemberName("W_M2")]
-    W_M2 = 43,
+    W_M2,
 
     /// <summary>
     ///     m/s (Meter pro Sekunde)
     /// </summary>
     [EnumMember(Value = "M_S")]
     [System.Text.Json.Serialization.JsonStringEnumMemberName("M_S")]
-    M_S = 47,
+    M_S,
 }
