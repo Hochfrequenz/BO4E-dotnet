@@ -32,6 +32,8 @@ public static class MengeneinheitExtenion
         new HashSet<Mengeneinheit> { Mengeneinheit.VAR, Mengeneinheit.KVAR },
         new HashSet<Mengeneinheit> { Mengeneinheit.VARH, Mengeneinheit.KVARH },
         new HashSet<Mengeneinheit> { Mengeneinheit.KWHK },
+        new HashSet<Mengeneinheit> { Mengeneinheit.M_S },
+        new HashSet<Mengeneinheit> { Mengeneinheit.W_M2 },
     };
 
     /// <summary>
