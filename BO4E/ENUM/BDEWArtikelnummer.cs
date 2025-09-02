@@ -354,4 +354,61 @@ public enum BDEWArtikelnummer
         "ZUSATZDIENSTLEISTUNG_PARAGRAPH_35_3_MSBG"
     )]
     ZUSATZDIENSTLEISTUNG_PARAGRAPH_35_3_MSBG,
+
+    /// <summary>9991000002305</summary>
+    /// <remarks>Einbau iMS, Produkt-Code (Änderung an einer Lokation in der Sparte Strom)</remarks>
+    [ProtoEnum(Name = nameof(BDEWArtikelnummer) + "_" + nameof(EINBAU_IMS))]
+    [EnumMember(Value = "EINBAU_IMS")]
+    [System.Text.Json.Serialization.JsonStringEnumMemberName("EINBAU_IMS")]
+    EINBAU_IMS,
+
+    /// <summary>9991000002313</summary>
+    /// <remarks>Einbau kME / rLM, Produkt-Code (Änderung an einer Lokation in der Sparte Strom)</remarks>
+    [ProtoEnum(Name = nameof(BDEWArtikelnummer) + "_" + nameof(EINBAU_KME_RLM))]
+    [EnumMember(Value = "EINBAU_KME_RLM")]
+    [System.Text.Json.Serialization.JsonStringEnumMemberName("EINBAU_KME_RLM")]
+    EINBAU_KME_RLM,
+
+    /// <summary>9991000002321</summary>
+    /// <remarks>Einbau Wandler, Produkt-Code (Änderung an einer Lokation in der Sparte Strom)</remarks>
+    [ProtoEnum(Name = nameof(BDEWArtikelnummer) + "_" + nameof(EINBAU_WANDLER))]
+    [EnumMember(Value = "EINBAU_WANDLER")]
+    [System.Text.Json.Serialization.JsonStringEnumMemberName("EINBAU_WANDLER")]
+    EINBAU_WANDLER,
+
+    /// <summary>9991000002339</summary>
+    /// <remarks>weitere Energieflussrichtung, Produkt-Code (Änderung an einer Lokation in der Sparte Strom)</remarks>
+    [ProtoEnum(Name = nameof(BDEWArtikelnummer) + "_" + nameof(WEITERE_ENERGIEFLUSSRICHTUNG))]
+    [EnumMember(Value = "WEITERE_ENERGIEFLUSSRICHTUNG")]
+    [System.Text.Json.Serialization.JsonStringEnumMemberName("WEITERE_ENERGIEFLUSSRICHTUNG")]
+    WEITERE_ENERGIEFLUSSRICHTUNG,
+
+    /// <summary>9991000002347</summary>
+    /// <remarks>Vergleichsmessung, Produkt-Code (Änderung an einer Lokation in der Sparte Strom)</remarks>
+    [ProtoEnum(Name = nameof(BDEWArtikelnummer) + "_" + nameof(VERGLEICHSMESSUNG))]
+    [EnumMember(Value = "VERGLEICHSMESSUNG")]
+    [System.Text.Json.Serialization.JsonStringEnumMemberName("VERGLEICHSMESSUNG")]
+    VERGLEICHSMESSUNG,
+
+    /// <summary>9991000002355</summary>
+    /// <remarks>Änderung Messebene, Produkt-Code (Änderung an einer Lokation in der Sparte Strom)</remarks>
+    [ProtoEnum(Name = nameof(BDEWArtikelnummer) + "_" + nameof(ÄNDERUNG_MESSEBENE))]
+    [EnumMember(Value = "ÄNDERUNG_MESSEBENE")]
+    [System.Text.Json.Serialization.JsonStringEnumMemberName("ÄNDERUNG_MESSEBENE")]
+    ÄNDERUNG_MESSEBENE,
+
+    /// <summary>9991000002363 (an SR),
+    /// 9991000002389 (an NeLo)</summary>
+    /// <remarks>Einbau einer Steuerbox, Produkt-Code (Änderung an einer Lokation in der Sparte Strom)</remarks>
+    [ProtoEnum(Name = nameof(BDEWArtikelnummer) + "_" + nameof(EINBAU_STEUERBOX))]
+    [EnumMember(Value = "EINBAU_STEUERBOX")]
+    [System.Text.Json.Serialization.JsonStringEnumMemberName("EINBAU_STEUERBOX")]
+    EINBAU_STEUERBOX,
+
+    /// <summary>9991000002371</summary>
+    /// <remarks>Anschluss weiterer Technischer Ressource an die Steuerbare Ressource der Steuerbox, Produkt-Code (Änderung an einer Lokation in der Sparte Strom)</remarks>
+    [ProtoEnum(Name = nameof(BDEWArtikelnummer) + "_" + nameof(ANSCHLUSS_TR_STEUERBOX_SR))]
+    [EnumMember(Value = "ANSCHLUSS_TR_STEUERBOX_SR")]
+    [System.Text.Json.Serialization.JsonStringEnumMemberName("ANSCHLUSS_TR_STEUERBOX_SR")]
+    ANSCHLUSS_TR_STEUERBOX_SR,
 }
