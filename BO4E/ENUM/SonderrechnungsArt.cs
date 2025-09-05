@@ -69,4 +69,11 @@ public enum Sonderrechnungsart
     [EnumMember(Value = "PRIVILEGIERUNG_NACH_ENFG")]
     [System.Text.Json.Serialization.JsonStringEnumMemberName("PRIVILEGIERUNG_NACH_ENFG")]
     PRIVILEGIERUNG_NACH_ENFG,
+
+    /// <summary>
+    /// Z10: Konzessionsabgabe (weitergeleitete Mengen)
+    /// </summary>
+    [EnumMember(Value = "KONZESSIONSABGABE_WEIGEL_MENGEN")]
+    [System.Text.Json.Serialization.JsonStringEnumMemberName("KONZESSIONSABGABE_WEIGEL_MENGEN")]
+    KONZESSIONSABGABE_WEIGEL_MENGEN,
 }
