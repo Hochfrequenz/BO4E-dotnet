@@ -27,7 +27,7 @@ public class Angebotsposition : COM
     [JsonPropertyOrder(17)]
     [ProtoMember(10)]
     public Menge? PositionsmengeMinimum { get; set; }
-    
+
     /// <summary>
     ///     Summe der Verbräuche (z. B. in kWh), die zu dieser Angebotsposition gehören. Details <see cref="Menge" />
     /// </summary>
@@ -43,7 +43,7 @@ public class Angebotsposition : COM
     [JsonPropertyOrder(18)]
     [ProtoMember(11)]
     public Menge? PositionsmengeMaximum { get; set; }
-    
+
     /// <summary>
     /// Preis pro Einheit/Stückpreis der jeweiligen Angebotsposition. Details <see cref="Preis" />
     /// </summary>
