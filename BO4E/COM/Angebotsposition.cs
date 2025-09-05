@@ -21,8 +21,15 @@ public class Angebotsposition : COM
     [ProtoMember(3)]
     public string? Positionsbezeichung { get; set; }
 
+    /// <summary>Mindestmenge der jeweiligen Position des Angebotsteils.</summary>
+    [JsonProperty(PropertyName = "positionsmengeMinimum", Order = 17)]
+    [JsonPropertyName("positionsmengeMinimum")]
+    [JsonPropertyOrder(17)]
+    [ProtoMember(10)]
+    public Menge? PositionsmengeMinimum { get; set; }
+
     /// <summary>
-    ///     Summe der Verbräuche (z.B. in kWh), die zu dieser Angebotsposition gehören. Details <see cref="Menge" />
+    ///     Summe der Verbräuche (z. B. in kWh), die zu dieser Angebotsposition gehören. Details <see cref="Menge" />
     /// </summary>
     [JsonProperty(PropertyName = "positionsmenge", Order = 11)]
     [JsonPropertyName("positionsmenge")]
@@ -30,7 +37,16 @@ public class Angebotsposition : COM
     [ProtoMember(4)]
     public Menge? Positionsmenge { get; set; }
 
-    /// <summary>Preis pro Einheit/Stückpreis der jeweiligen Angebotsposition. Details <see cref="Preis" /></summary>
+    /// <summary>Maximale Menge für die jeweilige Position des Angebotsteils.</summary>
+    [JsonProperty(PropertyName = "positionsmengeMaximum", Order = 18)]
+    [JsonPropertyName("positionsmengeMaximum")]
+    [JsonPropertyOrder(18)]
+    [ProtoMember(11)]
+    public Menge? PositionsmengeMaximum { get; set; }
+
+    /// <summary>
+    /// Preis pro Einheit/Stückpreis der jeweiligen Angebotsposition. Details <see cref="Preis" />
+    /// </summary>
     [JsonProperty(PropertyName = "positionspreis", Order = 12)]
     [JsonPropertyName("positionspreis")]
     [JsonPropertyOrder(12)]
