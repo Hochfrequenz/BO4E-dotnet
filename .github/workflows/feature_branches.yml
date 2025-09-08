@@ -20,7 +20,7 @@ jobs:
           format: YYYYMMDDHHmmss
       - uses: actions/checkout@v5
       - name: Setup .NET Core
-        uses: actions/setup-dotnet@v4
+        uses: actions/setup-dotnet@v5
         with:
           dotnet-version: 8
       - name: Build/Check for compile errors (dotnet build)
