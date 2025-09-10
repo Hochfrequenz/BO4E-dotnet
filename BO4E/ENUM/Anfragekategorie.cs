@@ -107,4 +107,11 @@ public enum Anfragekategorie
     [EnumMember(Value = "ENTSPERRUNG")]
     [System.Text.Json.Serialization.JsonStringEnumMemberName("ENTSPERRUNG")]
     ENTSPERRUNG,
+
+    /// <summary>BESTELLUNG_AENDERUNG_MELO</summary>
+    /// <remarks>Z93</remarks>
+    [ProtoEnum(Name = "Anfragekategorie_BESTELLUNG_AENDERUNG_MELO")]
+    [EnumMember(Value = "BESTELLUNG_AENDERUNG_MELO")]
+    [System.Text.Json.Serialization.JsonStringEnumMemberName("BESTELLUNG_AENDERUNG_MELO")]
+    BESTELLUNG_AENDERUNG_MELO,
 }
