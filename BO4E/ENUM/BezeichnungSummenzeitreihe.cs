@@ -79,4 +79,11 @@ public enum BezeichnungSummenzeitreihe
     [EnumMember(Value = "ASZR")]
     [System.Text.Json.Serialization.JsonStringEnumMemberName("ASZR")]
     ASZR,
+
+    /// <summary>Netzgangzeitreihe (NF1)</summary>
+    [ProtoEnum(Name = nameof(BezeichnungSummenzeitreihe) + "_" + nameof(NGZ))]
+    [EnumMember(Value = "NGZ")]
+    [System.Text.Json.Serialization.JsonStringEnumMemberName("NGZ")]
+    NGZ,
+    
 }
