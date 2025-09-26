@@ -84,6 +84,5 @@ public enum BezeichnungSummenzeitreihe
     [ProtoEnum(Name = nameof(BezeichnungSummenzeitreihe) + "_" + nameof(NGZ))]
     [EnumMember(Value = "NGZ")]
     [System.Text.Json.Serialization.JsonStringEnumMemberName("NGZ")]
-    NGZ,
-    
+    NGZ
 }
