@@ -26,7 +26,7 @@ jobs:
           name: TypeScriptClasses
           path: ts_models
       - name: Push ts_models content to type script models repo
-        uses: cpina/github-action-push-to-another-repository@v1.7.2
+        uses: cpina/github-action-push-to-another-repository@v1.7.3
         env:
           API_TOKEN_GITHUB: ${{ secrets.TS_MODELS_PUSH_TOKEN }} # this token expires on 2024-12-15
           # token with repo scope
