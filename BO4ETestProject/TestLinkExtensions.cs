@@ -1,9 +1,9 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using AwesomeAssertions;
 using BO4E.Marktkommunikation;
 using BO4E.Marktkommunikation.v2;
-using FluentAssertions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace TestBO4E;

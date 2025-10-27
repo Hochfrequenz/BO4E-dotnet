@@ -1,7 +1,7 @@
 using System;
 using System.Linq;
+using AwesomeAssertions;
 using BO4E.BO;
-using FluentAssertions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Newtonsoft.Json.Schema;
 
