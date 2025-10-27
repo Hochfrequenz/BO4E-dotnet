@@ -1,7 +1,7 @@
 using System;
 using System.Linq;
 using System.Reflection;
-using FluentAssertions;
+using AwesomeAssertions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace TestBO4E;

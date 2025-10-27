@@ -1,6 +1,6 @@
 using System;
+using AwesomeAssertions;
 using BO4E.meta.LenientConverters;
-using FluentAssertions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace TestBO4E;
