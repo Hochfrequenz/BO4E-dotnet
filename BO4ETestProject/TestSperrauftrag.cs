@@ -2,10 +2,10 @@ using System;
 using System.Collections.Generic;
 using System.Text.Json;
 using System.Text.Json.Serialization;
+using AwesomeAssertions;
 using BO4E.BO;
 using BO4E.COM;
 using BO4E.ENUM;
-using FluentAssertions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace TestBO4E;

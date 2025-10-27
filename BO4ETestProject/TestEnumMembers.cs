@@ -2,9 +2,9 @@ using System;
 using System.Linq;
 using System.Reflection;
 using System.Runtime.Serialization;
+using AwesomeAssertions;
 using BO4E.ENUM;
 using BO4E.meta.LenientConverters;
-using FluentAssertions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Newtonsoft.Json.Converters;
 
