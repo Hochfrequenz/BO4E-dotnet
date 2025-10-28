@@ -1,4 +1,5 @@
 using System;
+using AwesomeAssertions;
 using BO4E.ENUM;
 using BO4E.Extensions.ENUM;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -41,10 +42,12 @@ public class TestMengeneinheitExtension
         foreach (Mengeneinheit me2 in Enum.GetValues(typeof(Mengeneinheit)))
             if (!me1.IsConvertibleTo(me2))
             {
-                Assert.ThrowsException<InvalidOperationException>(
-                    () => me1.GetConversionFactor(me2),
-                    $"Conversion {me1}-->{me2} should throw an exception!"
-                );
+                var gettingConversionFactor = () => me1.GetConversionFactor(me2);
+                gettingConversionFactor
+                    .Should()
+                    .Throw<InvalidOperationException>(
+                        $"Conversion {me1}-->{me2} should throw an exception!"
+                    );
             }
     }
 }

@@ -4,6 +4,7 @@ using System.Diagnostics;
 using System.IO;
 using System.Text.Json;
 using System.Threading.Tasks;
+using AwesomeAssertions;
 using BO4E;
 using BO4E.BO;
 using BO4E.COM;
@@ -249,11 +250,12 @@ public class TestBoMapperSystemText
     {
         Assert.AreEqual(typeof(Benachrichtigung), BoMapper.GetTypeForBoName("Benachrichtigung"));
         Assert.AreEqual(typeof(Benachrichtigung), BoMapper.GetTypeForBoName("bEnAcHriCHTIGuNg"));
-
-        Assert.ThrowsException<ArgumentNullException>(
-            () => BoMapper.GetTypeForBoName(null),
-            "null as argument must result in a ArgumentNullException"
-        );
+        var gettingTypeForNullName = () => BoMapper.GetTypeForBoName(null);
+        gettingTypeForNullName
+            .Should()
+            .Throw<ArgumentNullException>(
+                "null as argument must result in a ArgumentNullException"
+            );
         /*
         bool argumentExceptionThrown = false;
         try
