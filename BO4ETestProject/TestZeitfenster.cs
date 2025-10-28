@@ -1,4 +1,5 @@
 using System;
+using AwesomeAssertions;
 using BO4E.COM;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
@@ -22,30 +23,30 @@ public class TestZeitfenster
     /// Invalid string length
     /// </summary>
     [TestMethod]
-    [ExpectedException(typeof(ArgumentException))]
     public void TestZeitfensterCreationFromInvalidString_Length()
     {
-        var zeitfenster = new Zeitfenster("090017");
+        var instantiating = () => new Zeitfenster("090017");
+        instantiating.Should().Throw<ArgumentException>();
     }
 
     /// <summary>
     /// Invalid format (non-numeric)
     /// </summary>
     [TestMethod]
-    [ExpectedException(typeof(ArgumentException))]
     public void TestZeitfensterCreationFromInvalidString_Format()
     {
-        var zeitfenster = new Zeitfenster("09XX1700");
+        var instantiating = () => new Zeitfenster("09XX1700");
+        instantiating.Should().Throw<ArgumentException>();
     }
 
     /// <summary>
     /// Invalid time (hours >= 24 or minutes >= 60)
     /// </summary>
     [TestMethod]
-    [ExpectedException(typeof(ArgumentException))]
     public void TestZeitfensterCreationFromInvalidString_InvalidTime()
     {
-        var zeitfenster = new Zeitfenster("24611700");
+        var instantiating = () => new Zeitfenster("24611700");
+        instantiating.Should().Throw<ArgumentException>();
     }
 
     /// <summary>

@@ -107,12 +107,12 @@ public class TestUserProperties
         melo.UserProperties = null;
         Assert.IsFalse(melo.UserPropertyEquals("there are no user properties", "asd"));
         Assert.IsFalse(melo.TryGetUserProperty("there are no user properties", out string _));
-        Assert.ThrowsException<ArgumentNullException>(() =>
+        var invalidAttempt = () =>
             melo.EvaluateUserProperty<string, bool, Messlokation>(
                 "there are no user properties",
                 _ => default
-            )
-        );
+            );
+        invalidAttempt.Should().Throw<ArgumentNullException>();
         Assert.IsFalse(melo.UserPropertyEquals("myNullProp", true));
     }
 

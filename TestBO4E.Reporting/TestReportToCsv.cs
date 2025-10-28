@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
+using AwesomeAssertions;
 using BO4E.BO;
 using BO4E.COM;
 using BO4E.ENUM;
@@ -335,9 +336,8 @@ public class TestReportToCsv
             null,
         };
         var newResult = string.Empty;
-        Assert.ThrowsException<ArgumentNullException>(() =>
-            cr.ToCsv(';', true, Environment.NewLine, reihenfolge)
-        );
+        var invalidToCsv1 = () => cr.ToCsv(';', true, Environment.NewLine, reihenfolge);
+        invalidToCsv1.Should().Throw<ArgumentNullException>();
         Assert.AreEqual(newResult, "");
 
         // reihenfolge
@@ -352,9 +352,8 @@ public class TestReportToCsv
             new Dictionary<string, string> { ["enddatum"] = "V.enddatum" },
             new Dictionary<string, string> { ["asdasd"] = "000" },
         };
-        Assert.ThrowsException<ArgumentException>(() =>
-            cr.ToCsv(';', true, Environment.NewLine, reihenfolge2)
-        );
+        var invalidToCsv = () => cr.ToCsv(';', true, Environment.NewLine, reihenfolge2);
+        invalidToCsv.Should().Throw<ArgumentException>();
         Assert.AreEqual(newResult, "");
     }
 

@@ -5,6 +5,8 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace TestBO4E;
 
+using AwesomeAssertions;
+
 [TestClass]
 public class TestBoExpansion
 {
@@ -20,9 +22,8 @@ public class TestBoExpansion
             BusinessObject.GetExpandableFieldNames("Marktlokation").Keys
         );
         Assert.IsTrue(result.SetEquals(result2));
-        Assert.ThrowsException<ArgumentException>(() =>
-            BusinessObject.GetExpandableFieldNames("kein gültiges bo")
-        );
+        var instantiating = () => BusinessObject.GetExpandableFieldNames("kein gültiges bo");
+        instantiating.Should().Throw<ArgumentException>();
     }
 
     [TestMethod]
