@@ -63,7 +63,7 @@
     <None Remove="protobuf-files\BO4E.BO.Zaehler.proto" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.4" />
     <PackageReference Include="Newtonsoft.Json.Schema" Version="4.0.1" />
     <PackageReference Include="Polyfill" Version="7.12.0">
       <PrivateAssets>all</PrivateAssets>
