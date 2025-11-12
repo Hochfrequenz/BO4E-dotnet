@@ -1,3 +1,4 @@
+#nullable enable
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -38,7 +39,7 @@ public class Messlokation : BusinessObject
     [DataCategory(DataCategory.POD)]
     [BoKey]
     [ProtoMember(4)]
-    public string MesslokationsId { get; set; }
+    public string? MesslokationsId { get; set; }
 
     /// <summary>
     ///     * Sparte der Messlokation, z.B. Gas oder Strom.
@@ -330,9 +331,9 @@ public class Messlokation : BusinessObject
     ///     Test if the <see cref="MesslokationsId" /> is valid.
     /// </summary>
     /// <returns>if messlokationsId matches the expected format</returns>
-    public bool HasValidId()
+    public bool? HasValidId()
     {
-        return ValidateId(MesslokationsId);
+        return MesslokationsId is null ? null : ValidateId(MesslokationsId);
     }
 
     /// <summary>
@@ -343,6 +344,6 @@ public class Messlokation : BusinessObject
     /// <returns>true if the marktlokation is valid</returns>
     public bool IsValid(bool checkId = true)
     {
-        return base.IsValid() && (!checkId || HasValidId());
+        return base.IsValid() && (!checkId || HasValidId()==true || HasValidId()==null);
     }
 }
