@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Text.Json.Serialization;
 using BO4E.BO;
@@ -24,6 +25,7 @@ public class Angebotsteil : COM
     ///     Marktlokationen, für die dieses Angebotsteil gilt, falls vorhanden. Durch die Marktlokation ist auch die
     ///     Lieferadresse festgelegt. Details <see cref="Marktlokation" />
     /// </summary>
+    [Obsolete("Abgelöst durch 'Lieferstellen', da nicht nur MaLos als Lieferstelle möglich.")]
     [JsonProperty(
         PropertyName = "lieferstellenangebotsteil",
         Order = 11,
@@ -74,4 +76,14 @@ public class Angebotsteil : COM
     [JsonPropertyOrder(15)]
     [ProtoMember(8)]
     public Zeitraum? Lieferzeitraum { get; set; }
+
+    /// <summary>
+    ///     Lieferstellen, für die dieses Angebotsteil gilt, falls vorhanden.
+    ///     Mögliche Lieferstellen sind: Marktlokation, Netzlokation, Messlokation, TechnischeRessource, Steuerbare Ressource
+    /// </summary>
+    [JsonProperty(PropertyName = "Lieferstellen", Order = 16, Required = Required.Default)]
+    [JsonPropertyName("lieferstellen")]
+    [JsonPropertyOrder(16)]
+    [ProtoMember(9)]
+    public List<BusinessObject>? Lieferstellen { get; set; }
 }
