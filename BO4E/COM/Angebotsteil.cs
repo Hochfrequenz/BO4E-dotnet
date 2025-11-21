@@ -25,7 +25,7 @@ public class Angebotsteil : COM
     ///     Marktlokationen, für die dieses Angebotsteil gilt, falls vorhanden. Durch die Marktlokation ist auch die
     ///     Lieferadresse festgelegt. Details <see cref="Marktlokation" />
     /// </summary>
-    [Obsolete("Abgelöst durch 'Lieferort', da nicht nur MaLos als Lieferstelle möglich.")]
+    [Obsolete("Abgelöst durch 'Lieferstellen', da nicht nur MaLos als Lieferstelle möglich.")]
     [JsonProperty(
         PropertyName = "lieferstellenangebotsteil",
         Order = 11,
