@@ -81,7 +81,7 @@ public class Angebotsteil : COM
     ///     Lieferstellen, für die dieses Angebotsteil gilt, falls vorhanden.
     ///     Mögliche Lieferstellen sind: Marktlokation, Netzlokation, Messlokation, TechnischeRessource, Steuerbare Ressource
     /// </summary>
-    [JsonProperty(PropertyName = "Lieferstellen", Order = 16, Required = Required.Default)]
+    [JsonProperty(PropertyName = "lieferstellen", Order = 16, Required = Required.Default)]
     [JsonPropertyName("lieferstellen")]
     [JsonPropertyOrder(16)]
     [ProtoMember(9)]
