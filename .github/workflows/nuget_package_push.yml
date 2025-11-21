@@ -6,7 +6,8 @@ on:
       - created
     tags:
       - "\\d+\\.\\d+\\.\\d+"
-    workflow_dispatch:
+  workflow_dispatch:
+
 jobs:
   pushrelease:
     runs-on: windows-latest
