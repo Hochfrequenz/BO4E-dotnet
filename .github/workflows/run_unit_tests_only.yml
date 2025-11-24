@@ -9,7 +9,7 @@ jobs:
       matrix:
         dotnet-version: ["8.0.401", "9"]
     steps:
-      - uses: actions/checkout@v5
+      - uses: actions/checkout@v6
       - name: Setup .NET Core
         uses: actions/setup-dotnet@v5
         with:
