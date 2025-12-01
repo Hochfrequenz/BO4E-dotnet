@@ -10,15 +10,21 @@ on:
 
 jobs:
   pushrelease:
-    runs-on: windows-latest
+    runs-on: ubuntu-latest
     env:
       ACTIONS_ALLOW_UNSECURE_COMMANDS: "true"
+    # This job is based on the Trusted Publishing Setup.
+    # See https://learn.microsoft.com/en-us/nuget/nuget-org/trusted-publishing for details.
+    permissions:
+      id-token: write # enable GitHub OIDC token issuance for this job
+    environment: "release" # has to match the policy name in the nuget.org Trusted Publishing setup.
+    # if the environment name is not set here, you'll run into an error message like "Error: Token exchange failed (401): Environment mismatch for policy 'release': expected 'release', actual ''"
     steps:
       - uses: actions/checkout@v6
       - name: Setup .NET Core
         uses: actions/setup-dotnet@v5
         with:
-          dotnet-version: 8.0.100
+          dotnet-version: 10
       - name: Build/Check for compile errors (dotnet build)
         run: dotnet build --configuration Release
       - name: Run Unit Tests (dotnet test)
@@ -28,9 +34,12 @@ jobs:
           dotnet pack ./BO4E.Extensions/BO4E.Extensions.csproj --configuration Release --output packages -property:VersionPrefix=${{github.event.release.tag_name}}
           dotnet pack ./BO4E.Reporting/BO4E.Reporting.csproj --configuration Release --output packages -property:VersionPrefix=${{github.event.release.tag_name}}
           dotnet pack ./BO4E/BO4E.csproj --configuration Release --output packages -property:VersionPrefix=${{github.event.release.tag_name}}
-      - name: Setup Nuget.exe
-        uses: warrenbuckley/Setup-Nuget@v1
+      - name: NuGet login (OIDC → temp API key)
+        uses: NuGet/login@v1
+        id: login
+        with:
+          user: Hochfrequenz
+        # because the package is owned by Hochfrequenz: https://www.nuget.org/packages/Hochfrequenz.BO4Enet
       - name: Nuget push
         run: |
-          nuget setApiKey ${{ secrets.BO4E_NUGET_ORG_PUSH_TOKEN }}
-          nuget push .\packages\*.nupkg -Source https://api.nuget.org/v3/index.json -SkipDuplicate -NoSymbols
+          dotnet nuget push ./packages/*.nupkg --source https://api.nuget.org/v3/index.json  --api-key ${{steps.login.outputs.NUGET_API_KEY}} --skip-duplicate

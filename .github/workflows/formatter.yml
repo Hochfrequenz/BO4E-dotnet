@@ -7,10 +7,10 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v6
-      - name: Setup .NET 8
+      - name: Setup .NET
         uses: actions/setup-dotnet@v5
         with:
-          dotnet-version: 8.0.100
+          dotnet-version: 10
       - name: Restore .NET tools
         run: dotnet tool restore
       - name: Run CSharpier
