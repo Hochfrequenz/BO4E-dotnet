@@ -74,7 +74,9 @@ internal static class ExterneReferenzExtensions
             return false;
         }
 
-        var externeReferenz = extReferences.SingleOrDefault(er => er.ExRefName == extRefName);
+        var externeReferenz = extReferences.SingleOrDefault(er =>
+            er.ExRefName == extRefName && er.IsValid()
+        );
         if (externeReferenz == null)
         {
             extRefWert = null;
