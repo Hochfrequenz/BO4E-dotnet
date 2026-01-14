@@ -67,9 +67,11 @@ public class TestExterneReferenzen
         };
         Assert.IsFalse(geschaeftspartner.TryGetExterneReferenz("foo", out actualBar));
         Assert.IsNull(actualBar);
-        
+
         // add a valid item and try again
-        geschaeftspartner.SetExterneReferenz(new ExterneReferenz{ ExRefName = "foo", ExRefWert = "bar"});
+        geschaeftspartner.SetExterneReferenz(
+            new ExterneReferenz { ExRefName = "foo", ExRefWert = "bar" }
+        );
         Assert.IsTrue(geschaeftspartner.TryGetExterneReferenz("foo", out actualBar));
         Assert.AreEqual("bar", actualBar);
     }
