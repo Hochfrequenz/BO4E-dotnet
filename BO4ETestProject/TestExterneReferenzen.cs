@@ -57,5 +57,20 @@ public class TestExterneReferenzen
         ); // setting a non-conflicting value twice doesn't hurt
         Assert.IsTrue(marktlokation.TryGetExterneReferenz("foo", out actualBar));
         Assert.AreEqual("bar", actualBar);
+
+        var geschaeftspartner = new Geschaeftspartner { };
+        geschaeftspartner.ExterneReferenzen = new List<ExterneReferenz>
+        {
+            // add only invalid items
+            new() { ExRefName = "foo", ExRefWert = null },
+            new() { ExRefName = "foo", ExRefWert = "" },
+        };
+        Assert.IsFalse(geschaeftspartner.TryGetExterneReferenz("foo", out actualBar));
+        Assert.IsNull(actualBar);
+        
+        // add a valid item and try again
+        geschaeftspartner.SetExterneReferenz(new ExterneReferenz{ ExRefName = "foo", ExRefWert = "bar"});
+        Assert.IsTrue(geschaeftspartner.TryGetExterneReferenz("foo", out actualBar));
+        Assert.AreEqual("bar", actualBar);
     }
 }
