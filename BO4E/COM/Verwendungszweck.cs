@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using System.Text.Json.Serialization;
 using BO4E.meta;
+using BO4E.meta.LenientConverters;
 using Newtonsoft.Json;
 using ProtoBuf;
 
@@ -11,6 +12,8 @@ namespace BO4E.COM;
 /// </summary>
 [ProtoContract]
 [NonOfficial(NonOfficialCategory.REGULATORY_REQUIREMENTS)]
+[System.Text.Json.Serialization.JsonConverter(typeof(SystemTextVerwendungszweckEnumToComConverter))]
+[Newtonsoft.Json.JsonConverter(typeof(NewtonsoftVerwendungszweckEnumToComConverter))]
 public class Verwendungszweck : COM
 {
     /// <summary>
