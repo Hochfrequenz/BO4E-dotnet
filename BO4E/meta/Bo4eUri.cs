@@ -72,11 +72,10 @@ public class Bo4eUri : Uri
     /// <returns>business object name or null iff there is no such object</returns>
     public string GetBoName()
     {
-#pragma warning disable CS0618 // Type or member is obsolete
-        return BoMapper
-            .GetValidBoNames()
+        return BusinessObjectSerializationBinder
+            .BusinessObjectAndCOMTypes.Where(t => typeof(BusinessObject).IsAssignableFrom(t))
+            .Select(t => t.Name)
             .FirstOrDefault(boName => boName.ToUpper().Equals(Host.ToUpper()));
-#pragma warning restore CS0618 // Type or member is obsolete
     }
 
     /// <summary>

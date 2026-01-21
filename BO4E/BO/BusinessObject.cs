@@ -409,109 +409,6 @@ public abstract class BusinessObject : IUserProperties, IOptionalGuid
     }
 
     /// <summary>
-    ///     This method returns information about the object structure, especially if there are
-    ///     nested field, that could be used, e.g. to expand OData queries.
-    /// </summary>
-    /// <param name="boType">
-    ///     valid business object type
-    ///     <example>
-    ///         <code>typeof(Marktlokation)</code>
-    ///     </example>
-    /// </param>
-    /// <returns>
-    ///     A dictionary with field names as keys (or the different JSON property name if set)
-    ///     and the type of the property as value. Nesting and different layers are denoted by
-    ///     using "."
-    /// </returns>
-    public static Dictionary<string, Type> GetExpandablePropertyNames(Type boType)
-    {
-        return GetExpandablePropertyNames(boType, true);
-    }
-
-    /// <summary>
-    ///     <see cref="GetExpandablePropertyNames(Type)" />
-    /// </summary>
-    /// <param name="boTypeName">name of the business object as string</param>
-    /// <returns>
-    ///     <see cref="GetExpandablePropertyNames(Type)" />
-    /// </returns>
-    public static Dictionary<string, Type> GetExpandableFieldNames(string boTypeName)
-    {
-#pragma warning disable CS0618 // Type or member is obsolete
-        var clazz = Assembly
-            .GetExecutingAssembly()
-            .GetType(BoMapper.PackagePrefix + "." + boTypeName);
-#pragma warning restore CS0618 // Type or member is obsolete
-        if (clazz == null)
-        {
-#pragma warning disable CS0618 // Type or member is obsolete
-            throw new ArgumentException(
-                $"{boTypeName} is not a valid Business Object name. Use one of the following: {string.Join("\n -", BoMapper.GetValidBoNames())}"
-            );
-#pragma warning restore CS0618 // Type or member is obsolete
-        }
-
-        return GetExpandablePropertyNames(clazz);
-    }
-
-    /// <summary>
-    ///     recursive function to return all expandable fields for a given type <paramref name="type" />.
-    ///     Set <paramref name="rootLevel" /> when calling from outside the function itself.
-    /// </summary>
-    /// <param name="type">Type inherited from Business Object</param>
-    /// <param name="rootLevel">true iff calling from outside the function itself / default</param>
-    /// <returns>HashSet of strings</returns>
-    protected static Dictionary<string, Type> GetExpandablePropertyNames(
-        Type type,
-        bool rootLevel = true
-    )
-    {
-        if (rootLevel && !type.IsSubclassOf(typeof(BusinessObject)))
-        {
-            throw new ArgumentException("Only allowed for BusinessObjects");
-        }
-
-        var result = new Dictionary<string, Type>();
-        foreach (var prop in type.GetProperties())
-        {
-            string fieldName;
-            var jpa = prop.GetCustomAttribute<JsonPropertyAttribute>();
-            if (jpa?.PropertyName != null)
-            {
-                fieldName = jpa.PropertyName;
-            }
-            else
-            {
-                fieldName = prop.Name;
-            }
-
-            if (prop.PropertyType.IsSubclassOf(typeof(BusinessObject)))
-            {
-                foreach (var subResult in GetExpandablePropertyNames(prop.PropertyType, false))
-                    result.Add(string.Join(".", fieldName, subResult.Key), subResult.Value);
-                result.Add(fieldName, prop.PropertyType);
-            }
-            else if (prop.PropertyType.IsSubclassOf(typeof(COM.COM)))
-            {
-                result.Add(fieldName, prop.PropertyType);
-                // coms do not contain any exandable subfield since they're flat
-            }
-            else if (
-                prop.PropertyType.IsGenericType
-                && prop.PropertyType.GetGenericTypeDefinition() == typeof(List<>)
-            )
-            {
-                var listElementType = prop.PropertyType.GetGenericArguments()[0];
-                foreach (var subResult in GetExpandablePropertyNames(listElementType, false))
-                    result.Add(string.Join(".", fieldName, subResult.Key), subResult.Value);
-                result.Add(fieldName, prop.PropertyType);
-            }
-        }
-
-        return result;
-    }
-
-    /// <summary>
     ///     Get a dictionary containing the key values of this Business Object.
     ///     The dictionary has the JsonPropertyAttribute.PropertyName or FieldName
     ///     of the key as key and the actual key value as value.
@@ -573,6 +470,25 @@ public abstract class BusinessObject : IUserProperties, IOptionalGuid
         return true;
     }
 
+    /// <summary>
+    ///     Returns a Type for given Business Object name. This method is useful to avoid stringified code.
+    /// </summary>
+    /// <param name="businessObjectName">name of a business object; is lenient regarding upper/lower case</param>
+    /// <returns>a BusinessObject Type or null if no matching type was found</returns>
+    /// <exception cref="ArgumentNullException">if argument is null</exception>
+    private static Type GetTypeForBoName(string businessObjectName)
+    {
+        if (businessObjectName == null)
+        {
+            throw new ArgumentNullException(nameof(businessObjectName));
+        }
+
+        return BusinessObjectSerializationBinder.BusinessObjectAndCOMTypes.FirstOrDefault(t =>
+            typeof(BusinessObject).IsAssignableFrom(t)
+            && string.Equals(t.Name, businessObjectName, StringComparison.OrdinalIgnoreCase)
+        );
+    }
+
     internal class BaseSpecifiedConcreteClassConverter : DefaultContractResolver
     {
         protected override JsonConverter ResolveContractConverter(Type objectType)
@@ -632,9 +548,7 @@ public abstract class BusinessObject : IUserProperties, IOptionalGuid
                 }
                 else
                 {
-#pragma warning disable CS0618 // Type or member is obsolete
-                    boType = BoMapper.GetTypeForBoName(jo["boTyp"].Value<string>()); // ToDo: catch exception if boTyp is not set and throw exception with descriptive error message
-#pragma warning restore CS0618 // Type or member is obsolete
+                    boType = GetTypeForBoName(jo["boTyp"].Value<string>());
                 }
 
                 if (boType == null)
@@ -742,9 +656,7 @@ public abstract class BusinessObject : IUserProperties, IOptionalGuid
                 }
 
                 var boTypeString = boTypeProp.GetString();
-#pragma warning disable CS0618 // Type or member is obsolete
-                var boType = BoMapper.GetTypeForBoName(boTypeString);
-#pragma warning restore CS0618 // Type or member is obsolete
+                var boType = GetTypeForBoName(boTypeString);
                 if (boType == null)
                 {
                     foreach (var assembley in AppDomain.CurrentDomain.GetAssemblies())
@@ -797,9 +709,7 @@ public abstract class BusinessObject : IUserProperties, IOptionalGuid
         )
         {
             var boTypeString = value.GetBoTyp();
-#pragma warning disable CS0618 // Type or member is obsolete
-            var boType = BoMapper.GetTypeForBoName(boTypeString);
-#pragma warning restore CS0618 // Type or member is obsolete
+            var boType = GetTypeForBoName(boTypeString);
             System.Text.Json.JsonSerializer.Serialize(writer, value, boType, options);
         }
     }

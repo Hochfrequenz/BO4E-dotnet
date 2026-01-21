@@ -1,169 +1,19 @@
 using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.IO;
 using System.Text.Json;
 using System.Threading.Tasks;
-using AwesomeAssertions;
-using BO4E;
 using BO4E.BO;
 using BO4E.COM;
 using BO4E.ENUM;
 using BO4E.meta.LenientConverters;
-using Microsoft.VisualStudio.TestTools.UnitTesting; //using BO4E.Extensions;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace TestBO4E;
 
 [TestClass]
 public class TestBoMapperSystemText
 {
-    [TestMethod]
-    [Obsolete]
-    public void TestBoMapping()
-    {
-        var files = Directory.GetFiles("BoMapperTests/", "*.json");
-        foreach (var file in files)
-        {
-            Trace.WriteLine($"testing file {file}");
-            JsonDocument json;
-            using (var r = new StreamReader(file))
-            {
-                var jsonString = r.ReadToEnd();
-                json = JsonSerializer.Deserialize<JsonDocument>(jsonString);
-            }
-
-            Assert.IsNotNull(
-                json.RootElement.GetProperty("objectName"),
-                $"You have to specify the object name in test file {file}"
-            );
-            var lenients = LenientParsing.STRICT; // default
-            if (
-                json.RootElement.TryGetProperty("lenientDateTime", out var boolElement)
-                && boolElement.GetBoolean()
-            )
-            {
-                lenients |= LenientParsing.DATE_TIME;
-            }
-
-            if (
-                json.RootElement.TryGetProperty("lenientEnumList", out var listElement)
-                && listElement.GetBoolean()
-            )
-            {
-                lenients |= LenientParsing.ENUM_LIST;
-            }
-
-            if (
-                json.RootElement.TryGetProperty("lenientBo4eUri", out var urlElement)
-                && urlElement.GetBoolean()
-            )
-            {
-                lenients |= LenientParsing.BO4_E_URI;
-            }
-
-            if (
-                json.RootElement.TryGetProperty("lenientStringToInt", out var intElement)
-                && intElement.GetBoolean()
-            )
-            {
-                lenients |= LenientParsing.STRING_TO_INT;
-            }
-
-            BusinessObject bo = null;
-            try
-            {
-                bo = JsonSerializer.Deserialize<BusinessObject>(
-                    json.RootElement.GetProperty("input").GetRawText(),
-                    lenients.GetJsonSerializerOptions()
-                );
-            }
-            catch (Exception)
-            {
-                bo =
-                    JsonSerializer.Deserialize(
-                        json.RootElement.GetProperty("input").GetRawText(),
-                        BoMapper.GetTypeForBoName(
-                            json.RootElement.GetProperty("objectName").GetString()
-                        ),
-                        LenientParsing.MOST_LENIENT.GetJsonSerializerOptions()
-                    ) as BusinessObject;
-            }
-
-            var regularOutputString = JsonSerializer.Serialize(bo, bo.GetType());
-            if (bo.GetType() == typeof(Rechnung))
-            {
-                continue; // todo: fix this!
-            }
-
-            /*if (json["input"]["boTyp"] != null)
-            {
-                //BusinessObject bo2 = BoMapper.MapObject((JObject)json["input"], lenients);
-                BusinessObject bo2 = JsonConvert.DeserializeObject<BusinessObject>(json["input"].ToString(), BoMapper.GetJsonSerializerSettings(lenients));
-                //string regularOutputString2 = JsonConvert.SerializeObject(bo2, new StringEnumConverter());
-                Assert.AreEqual(bo, bo2);
-                switch (json["input"]["boTyp"].ToString().ToLower())
-                {
-                    case "energiemenge":
-                        //Assert.AreEqual((Energiemenge)bo, BoMapper.MapObject<Energiemenge>((JObject)json["input"], lenients));
-                        Assert.AreEqual((Energiemenge)bo, JsonConvert.DeserializeObject<Energiemenge>(json["input"].ToString(), BoMapper.GetJsonSerializerSettings(lenients)));
-                        break;
-                    case "messlokation":
-                        //Assert.AreEqual((Messlokation)bo, BoMapper.MapObject<Messlokation>((JObject)json["input"], lenients));
-                        Assert.AreEqual((Messlokation)bo, JsonConvert.DeserializeObject<Messlokation>(json["input"].ToString(), BoMapper.GetJsonSerializerSettings(lenients)));
-                        break;
-                        // add more if you feel like
-                }
-            }*/
-            HashSet<string> whitelist;
-            if (json.RootElement.TryGetProperty("userPropWhiteList", out var whiteList))
-            {
-                whitelist = new HashSet<string>(
-                    JsonSerializer.Deserialize<List<string>>(whiteList.GetRawText())
-                );
-            }
-            else
-            {
-                whitelist = new HashSet<string>();
-            }
-
-            if (lenients == LenientParsing.STRICT)
-            {
-                foreach (LenientParsing lenient in Enum.GetValues(typeof(LenientParsing)))
-                {
-                    // strict mappings must also work with lenient mapping
-                    BusinessObject boLenient;
-                    try
-                    {
-                        boLenient = JsonSerializer.Deserialize<BusinessObject>(
-                            json.RootElement.GetProperty("input").GetRawText(),
-                            lenient.GetJsonSerializerOptions()
-                        );
-                    }
-                    catch (Exception)
-                    {
-                        _ =
-                            JsonSerializer.Deserialize(
-                                json.RootElement.GetProperty("input").GetRawText(),
-                                BoMapper.GetTypeForBoName(
-                                    json.RootElement.GetProperty("objectName").GetString()
-                                ),
-                                lenients.GetJsonSerializerOptions()
-                            ) as BusinessObject;
-                    }
-
-                    //string dateLenietOutputString = JsonConvert.SerializeObject(boLenient, new StringEnumConverter());
-                    //if (whitelist.Count ==0) {
-                    //Assert.AreEqual(regularOutputString, dateLenietOutputString);
-                    //}
-                    //else
-                    // {
-                    //    Assert.AreEqual(regularOutputString, dateLenietOutputString);
-                    //}
-                }
-            }
-        }
-    }
-
     [TestMethod]
     public void TestMesslokation()
     {
@@ -242,36 +92,6 @@ public class TestBoMapperSystemText
             );
         }
         await Task.WhenAll(taskList);
-    }
-
-    [TestMethod]
-    [Obsolete]
-    public void TestBoNameTyping()
-    {
-        Assert.AreEqual(typeof(Benachrichtigung), BoMapper.GetTypeForBoName("Benachrichtigung"));
-        Assert.AreEqual(typeof(Benachrichtigung), BoMapper.GetTypeForBoName("bEnAcHriCHTIGuNg"));
-        var gettingTypeForNullName = () => BoMapper.GetTypeForBoName(null);
-        gettingTypeForNullName
-            .Should()
-            .Throw<ArgumentNullException>(
-                "null as argument must result in a ArgumentNullException"
-            );
-        /*
-        bool argumentExceptionThrown = false;
-        try
-        {
-            BoMapper.GetTypeForBoName("dei mudder ihr business object");
-        }
-        catch (ArgumentException)
-        {
-            argumentExceptionThrown = true;
-        }
-        Assert.IsTrue(argumentExceptionThrown, "invalid argument must result in a ArgumentException");
-        */
-        Assert.IsNull(
-            BoMapper.GetTypeForBoName("dei mudder ihr business object"),
-            "invalid business object names must result in null"
-        );
     }
 
     [TestMethod]
