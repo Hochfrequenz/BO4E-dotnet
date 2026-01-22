@@ -1,3 +1,4 @@
+#nullable enable
 using System.Collections.Generic;
 using System.Text.Json.Serialization;
 using BO4E.ENUM;
@@ -28,5 +29,5 @@ public class RegionaleGueltigkeit : COM
     [JsonProperty(PropertyName = "kriteriumsWerte")]
     [JsonPropertyName("kriteriumsWerte")]
     [ProtoMember(4)]
-    public List<KriteriumsWert> KriteriumsWerte { get; set; }
+    public List<KriteriumsWert>? KriteriumsWerte { get; set; }
 }
