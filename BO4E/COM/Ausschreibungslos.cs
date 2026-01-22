@@ -1,3 +1,4 @@
+#nullable enable
 using System.Collections.Generic;
 using System.Text.Json.Serialization;
 using BO4E.ENUM;
@@ -14,13 +15,13 @@ public class Ausschreibungslos : COM
     [JsonProperty(PropertyName = "losnummer")]
     [JsonPropertyName("losnummer")]
     [ProtoMember(3)]
-    public string Losnummer { get; set; }
+    public string? Losnummer { get; set; }
 
     /// <summary>Bezeichnung der Ausschreibung</summary>
     [JsonProperty(PropertyName = "bezeichung")]
     [JsonPropertyName("bezeichung")]
     [ProtoMember(4)]
-    public string Bezeichung { get; set; }
+    public string? Bezeichung { get; set; }
 
     /// <summary>Bemerkung des Kunden zur Ausschreibung</summary>
     [JsonProperty(PropertyName = "bemerkung")]
@@ -63,7 +64,7 @@ public class Ausschreibungslos : COM
     [JsonProperty(PropertyName = "betreutDurch")]
     [JsonPropertyName("betreutDurch")]
     [ProtoMember(10)]
-    public string BetreutDurch { get; set; }
+    public string? BetreutDurch { get; set; }
 
     /// <summary>Anzahl der Lieferstellen in dieser Ausschreibung</summary>
     [JsonProperty(PropertyName = "anzahlLieferstellen")]
@@ -75,7 +76,7 @@ public class Ausschreibungslos : COM
     [JsonProperty(PropertyName = "lieferstellen")]
     [JsonPropertyName("lieferstellen")]
     [ProtoMember(12)]
-    public List<Ausschreibungsdetail> Lieferstellen { get; set; }
+    public List<Ausschreibungsdetail>? Lieferstellen { get; set; }
 
     /// <summary>Gibt den Gesamtjahresverbrauch (z.B. in kWh) aller in diesem Los enthaltenen Lieferstellen an.</summary>
     /// <see cref="Menge" />
