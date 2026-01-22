@@ -3,6 +3,8 @@ using System.Text.Json.Serialization;
 using Newtonsoft.Json;
 using ProtoBuf;
 
+#nullable enable
+
 namespace BO4E.COM;
 
 /// <summary>
@@ -31,8 +33,8 @@ public class GenericStringStringInfo : COM
     ///     convert object to a key value pair
     /// </summary>
     /// <returns></returns>
-    public KeyValuePair<string, string> ToKeyValuePair()
+    public KeyValuePair<string?, string?> ToKeyValuePair()
     {
-        return new KeyValuePair<string, string>(KeyColumn, Value);
+        return new KeyValuePair<string?, string?>(KeyColumn, Value);
     }
 }
