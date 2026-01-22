@@ -1,3 +1,4 @@
+#nullable enable
 using System.Text.Json.Serialization;
 using BO4E.ENUM;
 using Newtonsoft.Json;
@@ -25,5 +26,5 @@ public class KriteriumsWert : COM
     [JsonProperty(PropertyName = "wert")]
     [JsonPropertyName("wert")]
     [ProtoMember(4)]
-    public string Wert { get; set; }
+    public string? Wert { get; set; }
 }
