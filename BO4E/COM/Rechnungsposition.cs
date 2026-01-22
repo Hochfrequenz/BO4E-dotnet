@@ -1,3 +1,4 @@
+#nullable enable
 using System;
 using System.Text.Json.Serialization;
 using BO4E.ENUM;
@@ -67,7 +68,7 @@ public class Rechnungsposition : COM
     [JsonPropertyOrder(14)]
     [FieldName("invoiceItemText", Language.EN)]
     [ProtoMember(4)]
-    public string Positionstext { get; set; }
+    public string? Positionstext { get; set; }
 
     /// <summary>
     ///     Falls sich der Preis auf eine Zeit bezieht, steht hier die Einheit, z.B. JAHR. Details
@@ -130,7 +131,7 @@ public class Rechnungsposition : COM
     [JsonPropertyOrder(21)]
     [FieldName("unitCost", Language.EN)]
     [ProtoMember(11)]
-    public Preis Einzelpreis { get; set; }
+    public Preis? Einzelpreis { get; set; }
 
     /// <summary>
     ///     Das Ergebnis der Multiplikation aus einzelpreis * positionsMenge * (Faktor aus zeitbezogeneMenge). Z.B. 12,60€
