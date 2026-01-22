@@ -1,3 +1,4 @@
+#nullable enable
 using System.Collections.Generic;
 using System.Text.Json.Serialization;
 using BO4E.COM;
@@ -31,7 +32,7 @@ public class Preisblatt : BusinessObject
     [JsonPropertyOrder(10)]
     [DataCategory(DataCategory.FINANCE)]
     [BoKey]
-    public string Bezeichnung { get; set; }
+    public string? Bezeichnung { get; set; }
 
     /// <summary>
     ///     Der Zeitraum für den der Preis festgelegt ist. Details siehe <see cref="Zeitraum" />
@@ -41,7 +42,7 @@ public class Preisblatt : BusinessObject
     [JsonPropertyOrder(11)]
     [ProtoMember(5)]
     [DataCategory(DataCategory.FINANCE)]
-    public Zeitraum Gueltigkeit { get; set; }
+    public Zeitraum? Gueltigkeit { get; set; }
 
     /// <summary>
     ///     Die einzelnen Positionen, die mit dem Preisblatt abgerechnet werden können. Z.B. Arbeitspreis, Grundpreis etc.
@@ -52,7 +53,7 @@ public class Preisblatt : BusinessObject
     [DataCategory(DataCategory.FINANCE)]
     [JsonPropertyOrder(13)]
     [ProtoMember(6)]
-    public List<Preisposition> Preispositionen { get; set; }
+    public List<Preisposition>? Preispositionen { get; set; }
 
     /*/// <summary>
     /// Staffelgrenzen der jeweiligen Preise. Details siehe <see cref="Preisstaffel"/>
