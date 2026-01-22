@@ -1,3 +1,4 @@
+#nullable enable
 using System;
 using System.Text.Json.Serialization;
 using BO4E.ENUM;
@@ -109,21 +110,21 @@ public class RechnungspositionFlat : COM
     [JsonProperty(PropertyName = "positionstext")]
     [JsonPropertyName("positionstext")]
     [ProtoMember(6)]
-    public string Positionstext { get; set; }
+    public string? Positionstext { get; set; }
 
     /// <inheritdoc cref="Rechnungsposition.LokationsId" />
     /// >
     [JsonProperty(PropertyName = "lokationsId")]
     [JsonPropertyName("lokationsId")]
     [ProtoMember(7)]
-    public string LokationsId { get; set; }
+    public string? LokationsId { get; set; }
 
     /// <inheritdoc cref="Rechnungsposition.VertragskontoId" />
     /// >
     [JsonProperty(PropertyName = "vertragskontoId")]
     [JsonPropertyName("vertragskontoId")]
     [ProtoMember(8)]
-    public string VertragskontoId { get; set; }
+    public string? VertragskontoId { get; set; }
 
     /// <summary>
     ///     <see cref="Rechnungsposition.Einzelpreis" /> and <see cref="Preis.Wert" />
@@ -203,7 +204,7 @@ public class RechnungspositionFlat : COM
             Positionsnummer = Positionsnummer,
             LieferungVon = LieferungVon,
             LieferungBis = LieferungBis,
-            Positionstext = Positionstext,
+            Positionstext = Positionstext!,
             LokationsId = LokationsId,
             VertragsId = VertragsId,
 #pragma warning disable CS0618 // Type or member is obsolete
