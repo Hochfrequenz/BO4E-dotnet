@@ -1,3 +1,4 @@
+#nullable enable
 using System.Text.Json.Serialization;
 using BO4E.ENUM;
 using Newtonsoft.Json;
@@ -32,5 +33,5 @@ public class PreisblattDienstleistung : Preisblatt
     [JsonProperty(Order = 9, PropertyName = "herausgeber")]
     [JsonPropertyName("herausgeber")]
     //[ProtoMember(9)]
-    public Marktteilnehmer Herausgeber { get; set; }
+    public Marktteilnehmer? Herausgeber { get; set; }
 }
