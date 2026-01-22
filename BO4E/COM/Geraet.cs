@@ -3,6 +3,8 @@ using BO4E.ENUM;
 using Newtonsoft.Json;
 using ProtoBuf;
 
+#nullable enable
+
 namespace BO4E.COM;
 
 /// <summary>Mit dieser Komponente werden alle Geräte modelliert, die keine Zähler sind.</summary>
