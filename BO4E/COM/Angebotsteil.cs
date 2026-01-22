@@ -1,3 +1,4 @@
+#nullable enable
 using System;
 using System.Collections.Generic;
 using System.Text.Json.Serialization;
@@ -68,7 +69,7 @@ public class Angebotsteil : COM
     [JsonPropertyName("positionen")]
     [JsonPropertyOrder(14)]
     [ProtoMember(7)]
-    public List<Angebotsposition> Positionen { get; set; }
+    public List<Angebotsposition>? Positionen { get; set; }
 
     /// <summary>Hier kann der Belieferungszeitraum angegeben werden, für den dieser Angebotsteil gilt. Details <see cref="Zeitraum" /></summary>
     [JsonProperty(PropertyName = "lieferzeitraum", Order = 15)]
