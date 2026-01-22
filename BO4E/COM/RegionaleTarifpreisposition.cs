@@ -1,3 +1,4 @@
+#nullable enable
 using System.Collections.Generic;
 using System.Text.Json.Serialization;
 using BO4E.ENUM;
@@ -23,7 +24,7 @@ public class RegionaleTarifpreisposition : COM
     [JsonProperty(PropertyName = "einheit")]
     [JsonPropertyName("einheit")]
     [ProtoMember(4)]
-    public string Einheit { get; set; }
+    public string? Einheit { get; set; }
 
     /// <summary>
     ///     Größe, auf die sich die Einheit bezieht, beispielsweise kWh, Jahr. Details <see cref="Mengeneinheit" />
