@@ -1,3 +1,4 @@
+#nullable enable
 using System.Text.Json.Serialization;
 using BO4E.ENUM;
 using Newtonsoft.Json;
@@ -34,5 +35,5 @@ public class Preisgarantie : COM
     [JsonProperty(PropertyName = "zeitlicheGueltigkeit")]
     [JsonPropertyName("zeitlicheGueltigkeit")]
     [ProtoMember(5)]
-    public Zeitraum ZeitlicheGueltigkeit { get; set; }
+    public Zeitraum? ZeitlicheGueltigkeit { get; set; }
 }
