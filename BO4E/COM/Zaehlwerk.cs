@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Text.Json.Serialization;
 using BO4E.ENUM;
 using BO4E.meta;
+using BO4E.meta.LenientConverters;
 using Newtonsoft.Json;
 using ProtoBuf;
 
@@ -201,6 +202,10 @@ public class Zaehlwerk : COM
     [NonOfficial(NonOfficialCategory.CUSTOMER_REQUIREMENTS)]
     [ProtoMember(1024)]
     [JsonPropertyOrder(1024)]
+    [System.Text.Json.Serialization.JsonConverter(
+        typeof(LenientSystemTextVerbrauchsartListConverter)
+    )]
+    [Newtonsoft.Json.JsonConverter(typeof(LenientNewtonsoftVerbrauchsartListConverter))]
     public List<Verbrauchsart>? Verbrauchsarten { get; set; }
 
 #pragma warning restore CS1591 // Missing XML comment for publicly visible type or member
