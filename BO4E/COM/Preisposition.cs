@@ -1,3 +1,4 @@
+#nullable enable
 using System.Collections.Generic;
 using System.Text.Json.Serialization;
 using BO4E.ENUM;
@@ -32,7 +33,7 @@ public class Preisposition : COM
     [JsonPropertyName("leistungsbezeichnung")]
     [ProtoMember(5)]
     [JsonPropertyOrder(12)]
-    public string Leistungsbezeichnung { get; set; }
+    public string? Leistungsbezeichnung { get; set; }
 
     /// <summary>
     ///     Festlegung, mit welcher Preiseinheit abgerechnet wird, z.B. Ct. oder €. Details
@@ -103,7 +104,7 @@ public class Preisposition : COM
     [JsonPropertyName("preisstaffeln")]
     [ProtoMember(13)]
     [JsonPropertyOrder(20)]
-    public List<Preisstaffel> Preisstaffeln { get; set; }
+    public List<Preisstaffel>? Preisstaffeln { get; set; }
 
     /// <summary>Preisschlüsselstamm></summary>
     [JsonProperty(PropertyName = "preisschluesselstamm", Order = 21)]
