@@ -1,3 +1,4 @@
+#nullable enable
 using System.Collections.Generic;
 using System.Text.Json.Serialization;
 using Newtonsoft.Json;
@@ -13,7 +14,7 @@ public class Kostenblock : COM
     [JsonProperty(PropertyName = "kostenblockbezeichnung")]
     [JsonPropertyName("kostenblockbezeichnung")]
     [ProtoMember(3)]
-    public string Kostenblockbezeichnung { get; set; }
+    public string? Kostenblockbezeichnung { get; set; }
 
     /// <summary>Die Summe aller Kostenpositionen dieses Blocks</summary>
     [JsonProperty(PropertyName = "summeKostenblock")]
