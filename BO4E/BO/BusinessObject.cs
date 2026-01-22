@@ -1,3 +1,4 @@
+#nullable enable
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -160,7 +161,7 @@ public abstract class BusinessObject : IUserProperties, IOptionalGuid
     protected virtual string guidSerialized
 #pragma warning restore IDE1006 // Naming Styles
     {
-        get => Guid.HasValue ? Guid.ToString() : string.Empty;
+        get => Guid.HasValue ? Guid.ToString()! : string.Empty;
         set { Guid = string.IsNullOrWhiteSpace(value) ? (Guid?)null : System.Guid.Parse(value); }
     }
 
@@ -281,7 +282,7 @@ public abstract class BusinessObject : IUserProperties, IOptionalGuid
         var regularPropertyNames = GetType()
             .GetProperties()
             .Where(p => p.GetCustomAttribute<JsonPropertyNameAttribute>() != null)
-            .Select(p => p.GetCustomAttribute<JsonPropertyNameAttribute>().Name)
+            .Select(p => p.GetCustomAttribute<JsonPropertyNameAttribute>()!.Name!)
             .Select(x => x.ToLower())
             .ToHashSet();
         var result = UserProperties
@@ -296,7 +297,7 @@ public abstract class BusinessObject : IUserProperties, IOptionalGuid
     /// <returns></returns>
     public string GetBoTyp()
     {
-        return BoTyp;
+        return BoTyp!;
     }
 
     /// <summary>
@@ -312,7 +313,7 @@ public abstract class BusinessObject : IUserProperties, IOptionalGuid
     ///     <inheritdoc
     ///         cref="ExterneReferenzExtensions.TryGetExterneReferenz(ICollection{ExterneReferenz}, string, out string)" />
     /// </summary>
-    public bool TryGetExterneReferenz(string extRefName, out string extRefWert)
+    public bool TryGetExterneReferenz(string extRefName, out string? extRefWert)
     {
         return ExterneReferenzen.TryGetExterneReferenz(extRefName, out extRefWert);
     }
@@ -518,9 +519,9 @@ public abstract class BusinessObject : IUserProperties, IOptionalGuid
     /// </summary>
     /// <seealso cref="GetBoKeyProps(Type)" />
     /// <returns>A dictionary with key value pairs.</returns>
-    public Dictionary<string, object> GetBoKeys()
+    public Dictionary<string, object?> GetBoKeys()
     {
-        var result = new Dictionary<string, object>();
+        var result = new Dictionary<string, object?>();
         foreach (var pi in GetBoKeyProps(GetType()))
         {
             var jpa = pi.GetCustomAttribute<JsonPropertyAttribute>();
@@ -575,7 +576,7 @@ public abstract class BusinessObject : IUserProperties, IOptionalGuid
 
     internal class BaseSpecifiedConcreteClassConverter : DefaultContractResolver
     {
-        protected override JsonConverter ResolveContractConverter(Type objectType)
+        protected override JsonConverter? ResolveContractConverter(Type objectType)
         {
             if (typeof(BusinessObject).IsAssignableFrom(objectType) && !objectType.IsAbstract)
             {
@@ -597,10 +598,10 @@ public abstract class BusinessObject : IUserProperties, IOptionalGuid
             return objectType == typeof(BusinessObject);
         }
 
-        public override object ReadJson(
+        public override object? ReadJson(
             JsonReader reader,
             Type objectType,
-            object existingValue,
+            object? existingValue,
             JsonSerializer serializer
         )
         {
@@ -612,7 +613,7 @@ public abstract class BusinessObject : IUserProperties, IOptionalGuid
             if (objectType.IsAbstract)
             {
                 var jo = JObject.Load(reader);
-                Type boType;
+                Type? boType;
                 if (
                     serializer.TypeNameHandling.HasFlag(TypeNameHandling.Objects)
                     && jo.TryGetValue("$type", out var typeToken)
@@ -621,7 +622,10 @@ public abstract class BusinessObject : IUserProperties, IOptionalGuid
                     boType =
                         BusinessObjectSerializationBinder.BusinessObjectAndCOMTypes.SingleOrDefault(
                             t =>
-                                typeToken.Value<string>().ToUpper().StartsWith(t.FullName.ToUpper())
+                                typeToken
+                                    .Value<string>()!
+                                    .ToUpper()
+                                    .StartsWith(t.FullName!.ToUpper())
                         );
                 }
                 else if (!jo.ContainsKey("boTyp"))
@@ -633,7 +637,7 @@ public abstract class BusinessObject : IUserProperties, IOptionalGuid
                 else
                 {
 #pragma warning disable CS0618 // Type or member is obsolete
-                    boType = BoMapper.GetTypeForBoName(jo["boTyp"].Value<string>()); // ToDo: catch exception if boTyp is not set and throw exception with descriptive error message
+                    boType = BoMapper.GetTypeForBoName(jo["boTyp"]!.Value<string>()!); // ToDo: catch exception if boTyp is not set and throw exception with descriptive error message
 #pragma warning restore CS0618 // Type or member is obsolete
                 }
 
@@ -648,7 +652,7 @@ public abstract class BusinessObject : IUserProperties, IOptionalGuid
                                 .FirstOrDefault(x =>
                                     string.Equals(
                                         x.Name,
-                                        jo["boTyp"].Value<string>(),
+                                        jo["boTyp"]!.Value<string>(),
                                         StringComparison.CurrentCultureIgnoreCase
                                     )
                                 );
@@ -667,7 +671,7 @@ public abstract class BusinessObject : IUserProperties, IOptionalGuid
                     if (boType == null)
                     {
                         throw new NotImplementedException(
-                            $"The type '{jo["boTyp"].Value<string>()}' does not exist in the BO4E standard."
+                            $"The type '{jo["boTyp"]!.Value<string>()}' does not exist in the BO4E standard."
                         );
                     }
                 }
@@ -700,11 +704,11 @@ public abstract class BusinessObject : IUserProperties, IOptionalGuid
                 }
             }
 
-            serializer.ContractResolver.ResolveContract(objectType).Converter = null;
+            serializer.ContractResolver!.ResolveContract(objectType).Converter = null;
             return serializer.Deserialize(JObject.Load(reader).CreateReader(), objectType);
         }
 
-        public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
+        public override void WriteJson(JsonWriter writer, object? value, JsonSerializer serializer)
         {
             throw new NotImplementedException(
                 "Serializing an abstract BusinessObject is not supported."
@@ -722,7 +726,7 @@ public abstract class BusinessObject : IUserProperties, IOptionalGuid
             return objectType == typeof(BusinessObject);
         }
 
-        public override BusinessObject Read(
+        public override BusinessObject? Read(
             ref Utf8JsonReader reader,
             Type typeToConvert,
             JsonSerializerOptions options
@@ -743,7 +747,7 @@ public abstract class BusinessObject : IUserProperties, IOptionalGuid
 
                 var boTypeString = boTypeProp.GetString();
 #pragma warning disable CS0618 // Type or member is obsolete
-                var boType = BoMapper.GetTypeForBoName(boTypeString);
+                var boType = BoMapper.GetTypeForBoName(boTypeString!);
 #pragma warning restore CS0618 // Type or member is obsolete
                 if (boType == null)
                 {
@@ -800,7 +804,7 @@ public abstract class BusinessObject : IUserProperties, IOptionalGuid
 #pragma warning disable CS0618 // Type or member is obsolete
             var boType = BoMapper.GetTypeForBoName(boTypeString);
 #pragma warning restore CS0618 // Type or member is obsolete
-            System.Text.Json.JsonSerializer.Serialize(writer, value, boType, options);
+            System.Text.Json.JsonSerializer.Serialize(writer, value, boType!, options);
         }
     }
 }
