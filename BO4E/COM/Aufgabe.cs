@@ -1,3 +1,4 @@
+#nullable enable
 using System;
 using System.Text.Json.Serialization;
 using BO4E.meta;
@@ -21,7 +22,7 @@ public class Aufgabe : COM
     [JsonProperty(PropertyName = "aufgabenId")]
     [JsonPropertyName("aufgabenId")]
     [ProtoMember(3)]
-    public string AufgabenId { get; set; }
+    public string? AufgabenId { get; set; }
 
     /// <summary>
     ///     Optionale Beschreibung der Aufgabe
