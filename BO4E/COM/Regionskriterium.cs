@@ -1,3 +1,4 @@
+#nullable enable
 using System.Text.Json.Serialization;
 using BO4E.ENUM;
 using Newtonsoft.Json;
@@ -52,5 +53,5 @@ public class Regionskriterium : COM
     [JsonProperty(PropertyName = "wert")]
     [JsonPropertyName("wert")]
     [ProtoMember(7)]
-    public string Wert { get; set; }
+    public string? Wert { get; set; }
 }
