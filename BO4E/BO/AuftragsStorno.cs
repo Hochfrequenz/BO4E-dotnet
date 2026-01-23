@@ -1,3 +1,4 @@
+#nullable enable
 using System;
 using System.Text.Json.Serialization;
 using BO4E.meta;
@@ -21,5 +22,5 @@ public abstract class AuftragsStorno : BusinessObject
     /// </summary>
     [JsonProperty("auftragsId")]
     [JsonPropertyName("auftragsId")]
-    public string AuftragsId { get; set; }
+    public string? AuftragsId { get; set; }
 }
