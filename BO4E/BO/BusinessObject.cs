@@ -363,7 +363,7 @@ public abstract class BusinessObject : IUserProperties, IOptionalGuid
     /// <returns>a BO4E compliant URI object</returns>
     public Bo4eUri GetURI(bool includeUserProperties = false)
     {
-        return Bo4eUri.GetUri(this, includeUserProperties);
+        return Bo4eUri.GetUri(this, includeUserProperties)!;
     }
 
     /// <summary>
