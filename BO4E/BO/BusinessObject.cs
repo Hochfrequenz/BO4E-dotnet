@@ -1,3 +1,4 @@
+#nullable enable
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -296,7 +297,7 @@ public abstract class BusinessObject : IUserProperties, IOptionalGuid
     /// <returns></returns>
     public string GetBoTyp()
     {
-        return BoTyp;
+        return BoTyp!;
     }
 
     /// <summary>
@@ -310,9 +311,9 @@ public abstract class BusinessObject : IUserProperties, IOptionalGuid
 
     /// <summary>
     ///     <inheritdoc
-    ///         cref="ExterneReferenzExtensions.TryGetExterneReferenz(ICollection{ExterneReferenz}, string, out string)" />
+    ///         cref="ExterneReferenzExtensions.TryGetExterneReferenz(ICollection{ExterneReferenz}, string, out string?)" />
     /// </summary>
-    public bool TryGetExterneReferenz(string extRefName, out string extRefWert)
+    public bool TryGetExterneReferenz(string extRefName, out string? extRefWert)
     {
         return ExterneReferenzen.TryGetExterneReferenz(extRefName, out extRefWert);
     }
@@ -573,6 +574,7 @@ public abstract class BusinessObject : IUserProperties, IOptionalGuid
         return true;
     }
 
+#nullable disable warnings
     internal class BaseSpecifiedConcreteClassConverter : DefaultContractResolver
     {
         protected override JsonConverter ResolveContractConverter(Type objectType)
@@ -803,4 +805,5 @@ public abstract class BusinessObject : IUserProperties, IOptionalGuid
             System.Text.Json.JsonSerializer.Serialize(writer, value, boType, options);
         }
     }
+#nullable restore warnings
 }

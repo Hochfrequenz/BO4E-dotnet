@@ -1,3 +1,4 @@
+#nullable enable
 using System.Runtime.Serialization;
 using BO4E.BO;
 using BO4E.meta;
