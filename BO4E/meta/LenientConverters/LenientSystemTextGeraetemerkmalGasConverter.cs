@@ -1,3 +1,4 @@
+#nullable enable
 using System;
 using System.Text.Json;
 using System.Text.RegularExpressions;
@@ -25,7 +26,7 @@ public class LenientSystemTextGeraetemerkmalGasConverter
         {
             return Geraetemerkmal.EINTARIF;
         }
-        var rawString = reader.GetString();
+        var rawString = reader.GetString()!;
         try
         {
             return (BO4E.ENUM.Geraetemerkmal)

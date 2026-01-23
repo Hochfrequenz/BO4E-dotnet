@@ -1,3 +1,4 @@
+#nullable enable
 using System;
 using BO4E.ENUM;
 
@@ -26,7 +27,7 @@ public class SystemTextNullableGasqualitaetStringEnumConverter
             var integerValue = reader.GetInt64();
             return (Gasqualitaet)Enum.ToObject(typeof(Gasqualitaet), integerValue);
         }
-        string enumString = reader.GetString();
+        string? enumString = reader.GetString();
 
         return enumString?.ToUpper() switch
         {

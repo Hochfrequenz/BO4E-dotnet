@@ -1,9 +1,11 @@
+#nullable enable
 using System;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
 namespace BO4E.meta.LenientConverters;
 
+#nullable disable warnings
 /// <summary>
 ///     A converter to also allow parsing of nullable enums (not included in system.text.json yet)
 /// </summary>
@@ -23,7 +25,7 @@ public class StringNullableEnumConverter<T> : JsonConverter<T>
     ///     Construct a converter (reuse if possible)
     /// </summary>
     /// <param name="options"></param>
-    public StringNullableEnumConverter(JsonSerializerOptions options)
+    public StringNullableEnumConverter(JsonSerializerOptions? options)
     {
         // for performance, use the existing converter if available
         if (options != null)

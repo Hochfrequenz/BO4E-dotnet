@@ -1,3 +1,4 @@
+#nullable enable
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -70,7 +71,7 @@ public class Bo4eUri : Uri
     ///     Get name of business object with correct upper/lower case (the host value)
     /// </summary>
     /// <returns>business object name or null iff there is no such object</returns>
-    public string GetBoName()
+    public string? GetBoName()
     {
 #pragma warning disable CS0618 // Type or member is obsolete
         return BoMapper
@@ -83,7 +84,7 @@ public class Bo4eUri : Uri
     ///     Get type of business object (e.g. to be used with Activator.CreateInstance)
     /// </summary>
     /// <returns>business object type of null iff there is no such object</returns>
-    public Type GetBoType()
+    public Type? GetBoType()
     {
         var boName = GetBoName();
         return boName == null
@@ -138,7 +139,8 @@ public class Bo4eUri : Uri
     /// or
     /// <see cref="System.Uri.ToString" />
     /// on the returned object.
-    public static Bo4eUri GetUri(BusinessObject bo, bool includeUserProperties = false)
+#nullable disable warnings
+    public static Bo4eUri? GetUri(BusinessObject bo, bool includeUserProperties = false)
     {
         if (bo == null)
         {
@@ -214,6 +216,8 @@ public class Bo4eUri : Uri
             : null;
     }
 
+#nullable restore warnings
+
     private static IList<PropertyInfo> GetKeyFields(BusinessObject bo)
     {
         if (bo == null)
@@ -271,6 +275,7 @@ public class Bo4eUri : Uri
     /// This is why the return type of this method is just a general JObject but not a valid
     /// Business Object.
     /// <returns>A dictionary with boKey:boKeyValue pairs.</returns>
+#nullable disable warnings
     public JObject GetQueryObject(Type boType = null, int i = 0)
     {
         var result = new JObject();
@@ -363,10 +368,13 @@ public class Bo4eUri : Uri
         return result;
     }
 
+#nullable restore warnings
+
     /// <summary>
     ///     returns a new Bo4eUri instance with an additional filter in the query
     /// </summary>
     /// <param name="filterObject"></param>
+#nullable disable warnings
     public Bo4eUri AddFilter(IDictionary<string, object> filterObject)
     {
         var query = HttpUtility.ParseQueryString(Query);
@@ -390,12 +398,14 @@ public class Bo4eUri : Uri
         var ub = new UriBuilder(this) { Query = query.ToString() };
         return new Bo4eUri(ub.Uri.ToString());
     }
+#nullable restore warnings
 }
 
 // https://stackoverflow.com/a/39386674/10009545
 /// <summary>
 ///     tries to implicitly convert a string to a BO4E URI if a URI is expected.
 /// </summary>
+#nullable disable warnings
 public class StringUriConverter : TypeConverter
 {
     /// <inheritdoc />
@@ -419,3 +429,4 @@ public class StringUriConverter : TypeConverter
         return base.ConvertFrom(context, culture, value);
     }
 }
+#nullable restore warnings

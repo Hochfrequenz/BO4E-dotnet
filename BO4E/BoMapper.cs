@@ -1,3 +1,4 @@
+#nullable enable
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -59,7 +60,7 @@ public abstract class BoMapper
     /// BoMapper.GetTypeForBoName("non existent BO"); // returns null
     /// </code>
     /// </example>
-    public static Type GetTypeForBoName(string businessObjectName)
+    public static Type? GetTypeForBoName(string businessObjectName)
     {
         if (businessObjectName == null)
         {
