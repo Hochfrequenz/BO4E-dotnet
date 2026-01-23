@@ -1,3 +1,4 @@
+#nullable enable
 using System;
 using System.Collections.Generic;
 using System.Text.Json;
@@ -6,6 +7,7 @@ using Newtonsoft.Json.Linq;
 
 namespace BO4E;
 
+#nullable disable warnings
 /// <summary>
 ///     extensions for both <see cref="BO.BusinessObject.UserProperties" /> and <see cref="COM.COM.UserProperties" />
 /// </summary>

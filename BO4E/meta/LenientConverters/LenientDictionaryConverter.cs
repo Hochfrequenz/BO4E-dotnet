@@ -1,3 +1,4 @@
+#nullable enable
 using System;
 using System.Collections.Generic;
 using System.Text.Json;
@@ -5,6 +6,7 @@ using System.Text.Json.Serialization;
 
 namespace BO4E.meta.LenientConverters;
 
+#nullable disable warnings
 /// <summary>
 ///     A custom converter following the code on joseftw/JOS.SystemTextJsonDictionaryStringObjectJsonConverter
 /// </summary>
@@ -28,7 +30,7 @@ public class LenientDictionaryConverter : JsonConverter<Dictionary<string, objec
     /// <param name="typeToConvert">The type we want to construct</param>
     /// <param name="options">any json serializer options</param>
     /// <returns></returns>
-    public override Dictionary<string, object> Read(
+    public override Dictionary<string, object>? Read(
         ref Utf8JsonReader reader,
         Type typeToConvert,
         JsonSerializerOptions options
@@ -89,7 +91,7 @@ public class LenientDictionaryConverter : JsonConverter<Dictionary<string, objec
         writer.WriteEndObject();
     }
 
-    private static void HandleValue(Utf8JsonWriter writer, string key, object objectValue)
+    private static void HandleValue(Utf8JsonWriter writer, string? key, object? objectValue)
     {
         if (key != null)
         {
@@ -145,7 +147,7 @@ public class LenientDictionaryConverter : JsonConverter<Dictionary<string, objec
         HandleValue(writer, null, value);
     }
 
-    private object ExtractValue(ref Utf8JsonReader reader, JsonSerializerOptions options)
+    private object? ExtractValue(ref Utf8JsonReader reader, JsonSerializerOptions options)
     {
         switch (reader.TokenType)
         {

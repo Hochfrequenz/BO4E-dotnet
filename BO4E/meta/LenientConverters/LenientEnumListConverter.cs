@@ -1,3 +1,4 @@
+#nullable enable
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -7,6 +8,7 @@ using Newtonsoft.Json.Linq;
 
 namespace BO4E.meta.LenientConverters;
 
+#nullable disable warnings
 /// <summary>
 ///     allows to deserialize a list of enums (see tests)
 /// </summary>
@@ -33,10 +35,10 @@ public class LenientEnumListConverter : JsonConverter
     }
 
     /// <inheritdoc cref="JsonConverter.ReadJson(JsonReader, Type, object, JsonSerializer)" />
-    public override object ReadJson(
+    public override object? ReadJson(
         JsonReader reader,
         Type objectType,
-        object existingValue,
+        object? existingValue,
         JsonSerializer serializer
     )
     {
@@ -74,7 +76,7 @@ public class LenientEnumListConverter : JsonConverter
     }
 
     /// <inheritdoc cref="JsonConverter.WriteJson(JsonWriter, object, JsonSerializer)" />
-    public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
+    public override void WriteJson(JsonWriter writer, object? value, JsonSerializer serializer)
     {
         throw new NotImplementedException();
     }
