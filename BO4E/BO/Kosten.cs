@@ -1,3 +1,4 @@
+#nullable enable
 using System.Collections.Generic;
 using System.Text.Json.Serialization;
 using BO4E.COM;
@@ -31,7 +32,7 @@ public class Kosten : BusinessObject
     [JsonPropertyName("gueltigkeit")]
     [ProtoMember(5)]
     [DataCategory(DataCategory.FINANCE)]
-    public Zeitraum Gueltigkeit { get; set; }
+    public Zeitraum? Gueltigkeit { get; set; }
 
     /// <summary>
     ///     Die Gesamtsumme über alle Kostenblöcke und -positionen. Details siehe <see cref="Betrag" />
@@ -49,7 +50,7 @@ public class Kosten : BusinessObject
     [JsonProperty(Order = 7, PropertyName = "kostenbloecke")] // at least 1 entry
     [JsonPropertyName("kostenbloecke")]
     [ProtoMember(7)]
-    public List<Kostenblock> Kostenbloecke { get; set; }
+    public List<Kostenblock>? Kostenbloecke { get; set; }
 
     /// <summary>
     ///     Hier sind die Details zu einer Kostenposition aufgeführt. Z.B.:
