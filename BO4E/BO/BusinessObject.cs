@@ -311,7 +311,7 @@ public abstract class BusinessObject : IUserProperties, IOptionalGuid
 
     /// <summary>
     ///     <inheritdoc
-    ///         cref="ExterneReferenzExtensions.TryGetExterneReferenz(ICollection{ExterneReferenz}, string, out string)" />
+    ///         cref="ExterneReferenzExtensions.TryGetExterneReferenz(ICollection{ExterneReferenz}, string, out string?)" />
     /// </summary>
     public bool TryGetExterneReferenz(string extRefName, out string? extRefWert)
     {
