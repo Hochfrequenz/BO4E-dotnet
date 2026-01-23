@@ -1,3 +1,4 @@
+#nullable enable
 using System.Text.Json.Serialization;
 using BO4E.ENUM;
 using Newtonsoft.Json;
@@ -42,5 +43,5 @@ public class Tarifpreisposition : COM
     [JsonProperty(PropertyName = "preisstaffeln")]
     [JsonPropertyName("preisstaffeln")]
     [ProtoMember(7)]
-    public Preisstaffel Preisstaffeln { get; set; }
+    public Preisstaffel? Preisstaffeln { get; set; }
 }

@@ -1,3 +1,4 @@
+#nullable enable
 using System;
 using System.Collections.Generic;
 using System.Text.Json;
@@ -125,7 +126,7 @@ public class Verbrauch : COM
     [JsonProperty(PropertyName = "obiskennzahl", Order = 6)]
     [JsonPropertyName("obiskennzahl")]
     [ProtoMember(6)]
-    public string Obiskennzahl { get; set; }
+    public string? Obiskennzahl { get; set; }
 
     /// <summary>
     ///     Gibt den absoluten Wert der Menge an.
