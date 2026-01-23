@@ -5,7 +5,7 @@ using System.Runtime.Serialization;
 namespace BO4E.meta.LenientConverters;
 
 /// <summary>
-///     Passing LenientParsing flags to <see cref="BoMapper" /> allows you to map such JSONs that
+///     Passing LenientParsing flags to JSON deserialization allows you to map such JSONs that
 ///     are "slightly invalid". Slightly means, e.g. the date string format is wrong.
 /// </summary>
 [Flags]

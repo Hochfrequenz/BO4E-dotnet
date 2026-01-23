@@ -10,8 +10,6 @@ abstract class BusinessObject {
     + GetURI(includeUserProperties:bool) : Bo4eUri
     + GetBoKeyNames() : List<string>
     + {static} GetBoKeyNames(boType:Type) : List<string>
-    + {static} GetExpandablePropertyNames(boType:Type) : Dictionary<string, Type>
-    + {static} GetExpandableFieldNames(boTypeName:string) : Dictionary<string, Type>
     + GetBoKeys() : Dictionary<string, object>
     + {static} GetBoKeyProps(boType:Type) : List<PropertyInfo>
     + <<override>> Equals(b:object) : bool
