@@ -1,3 +1,4 @@
+#nullable enable
 using System.Collections.Generic;
 using System.Text.Json.Serialization;
 using BO4E.COM;
@@ -43,7 +44,7 @@ public class PreisblattMessung : Preisblatt
     [JsonProperty(Order = 11, PropertyName = "basisgeraet")]
     [JsonPropertyName("basisgeraet")]
     //[ProtoMember(11)]
-    public Geraeteeigenschaften Basisgeraet { get; set; }
+    public Geraeteeigenschaften? Basisgeraet { get; set; }
 
     /// <summary>
     ///     Im Preis sind die hier angegebenen Geräte mit enthalten, z.B. ein Wandler.
@@ -59,5 +60,5 @@ public class PreisblattMessung : Preisblatt
     [JsonProperty(Order = 13, PropertyName = "herausgeber")]
     [JsonPropertyName("herausgeber")]
     //[ProtoMember(13)]
-    public Marktteilnehmer Herausgeber { get; set; }
+    public Marktteilnehmer? Herausgeber { get; set; }
 }

@@ -1,3 +1,4 @@
+#nullable enable
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -296,7 +297,7 @@ public abstract class BusinessObject : IUserProperties, IOptionalGuid
     /// <returns></returns>
     public string GetBoTyp()
     {
-        return BoTyp;
+        return BoTyp!;
     }
 
     /// <summary>
@@ -310,9 +311,9 @@ public abstract class BusinessObject : IUserProperties, IOptionalGuid
 
     /// <summary>
     ///     <inheritdoc
-    ///         cref="ExterneReferenzExtensions.TryGetExterneReferenz(ICollection{ExterneReferenz}, string, out string)" />
+    ///         cref="ExterneReferenzExtensions.TryGetExterneReferenz(ICollection{ExterneReferenz}, string, out string?)" />
     /// </summary>
-    public bool TryGetExterneReferenz(string extRefName, out string extRefWert)
+    public bool TryGetExterneReferenz(string extRefName, out string? extRefWert)
     {
         return ExterneReferenzen.TryGetExterneReferenz(extRefName, out extRefWert);
     }
@@ -476,7 +477,7 @@ public abstract class BusinessObject : IUserProperties, IOptionalGuid
     /// <param name="businessObjectName">name of a business object; is lenient regarding upper/lower case</param>
     /// <returns>a BusinessObject Type or null if no matching type was found</returns>
     /// <exception cref="ArgumentNullException">if argument is null</exception>
-    private static Type GetTypeForBoName(string businessObjectName)
+    private static Type? GetTypeForBoName(string businessObjectName)
     {
         if (businessObjectName == null)
         {
@@ -489,6 +490,7 @@ public abstract class BusinessObject : IUserProperties, IOptionalGuid
         );
     }
 
+#nullable disable warnings
     internal class BaseSpecifiedConcreteClassConverter : DefaultContractResolver
     {
         protected override JsonConverter ResolveContractConverter(Type objectType)
@@ -713,4 +715,5 @@ public abstract class BusinessObject : IUserProperties, IOptionalGuid
             System.Text.Json.JsonSerializer.Serialize(writer, value, boType, options);
         }
     }
+#nullable restore warnings
 }

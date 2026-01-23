@@ -1,3 +1,4 @@
+#nullable enable
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -38,7 +39,7 @@ public class Messlokation : BusinessObject
     [DataCategory(DataCategory.POD)]
     [BoKey]
     [ProtoMember(4)]
-    public string MesslokationsId { get; set; }
+    public string? MesslokationsId { get; set; }
 
     /// <summary>
     ///     * Sparte der Messlokation, z.B. Gas oder Strom.
@@ -321,7 +322,7 @@ public class Messlokation : BusinessObject
     /// </summary>
     /// <param name="id">id to test</param>
     /// <returns></returns>
-    public static bool ValidateId(string id)
+    public static bool ValidateId(string? id)
     {
         return !string.IsNullOrWhiteSpace(id) && RegexValidate.IsMatch(id);
     }

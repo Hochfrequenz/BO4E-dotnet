@@ -1,3 +1,4 @@
+#nullable enable
 using System;
 using System.Text.Json.Serialization;
 using BO4E.COM;
@@ -24,7 +25,7 @@ public class Reklamation : BusinessObject
     [NonOfficial(NonOfficialCategory.MISSING)]
     [ProtoMember(1000)]
     [JsonPropertyOrder(10)]
-    public string LokationsId { get; set; }
+    public string? LokationsId { get; set; }
 
     /// <summary>
     /// Gibt an, ob es sich um eine Markt- oder Messlokation handelt.
@@ -48,7 +49,7 @@ public class Reklamation : BusinessObject
     [ProtoMember(1002)]
     [BoKey]
     [JsonPropertyOrder(12)]
-    public string Obiskennzahl { get; set; }
+    public string? Obiskennzahl { get; set; }
 
     /// <summary>
     /// Sollablesetermin / Zeitangabe für Messwertanfrage. Details <see cref="Zeitraum" />

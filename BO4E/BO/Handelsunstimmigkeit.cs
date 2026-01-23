@@ -1,3 +1,4 @@
+#nullable enable
 using System.Text.Json.Serialization;
 using BO4E.COM;
 using BO4E.ENUM;
@@ -23,7 +24,7 @@ public class Handelsunstimmigkeit : BusinessObject
     [ProtoMember(1000)]
     [JsonPropertyOrder(10)]
     [BoKey]
-    public string Nummer { get; set; }
+    public string? Nummer { get; set; }
 
     /// <summary>
     /// Gibt den Typ der Handelsunstimmigkeit an.
@@ -44,7 +45,7 @@ public class Handelsunstimmigkeit : BusinessObject
     [NonOfficial(NonOfficialCategory.MISSING)]
     [JsonPropertyOrder(12)]
     [ProtoMember(1002)]
-    public Handelsunstimmigkeitsbegruendung Begruendung { get; set; }
+    public Handelsunstimmigkeitsbegruendung? Begruendung { get; set; }
 
     /// <summary>
     /// angeforderter Betrag

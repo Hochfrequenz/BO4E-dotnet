@@ -1,3 +1,4 @@
+#nullable enable
 using System;
 using System.Collections.Generic;
 using System.Globalization;
@@ -24,6 +25,7 @@ public class Rechnung : BusinessObject
     /// </summary>
     public Rechnung() { }
 
+#nullable disable warnings
     /// <summary>
     ///     this constructor creates a BO4E.Rechnung from a JSON serialized SAP print document ("Druckbeleg")
     /// </summary>
@@ -419,6 +421,8 @@ public class Rechnung : BusinessObject
         };
     }
 
+#nullable restore warnings
+
     /// <summary>
     ///     Bezeichnung für die vorliegende Rechnung.
     /// </summary>
@@ -459,7 +463,7 @@ public class Rechnung : BusinessObject
     [JsonPropertyOrder(9)]
     [BoKey]
     [FieldName("billNumber", Language.EN)]
-    public string Rechnungsnummer { get; set; }
+    public string? Rechnungsnummer { get; set; }
 
     [System.Text.Json.Serialization.JsonIgnore]
     [Newtonsoft.Json.JsonIgnore]
@@ -528,7 +532,7 @@ public class Rechnung : BusinessObject
     [ProtoMember(12)]
     [JsonPropertyOrder(14)]
     [FieldName("billPeriod", Language.EN)]
-    public Zeitraum Rechnungsperiode { get; set; }
+    public Zeitraum? Rechnungsperiode { get; set; }
 
     /// <summary>
     ///     Der Aussteller der Rechnung. Details <see cref="Geschaeftspartner" />
@@ -538,7 +542,7 @@ public class Rechnung : BusinessObject
     [ProtoMember(13)]
     [JsonPropertyOrder(15)]
     [FieldName("issuer", Language.EN)]
-    public Geschaeftspartner Rechnungsersteller { get; set; }
+    public Geschaeftspartner? Rechnungsersteller { get; set; }
 
     /// <summary>
     ///     Der Empfänger der Rechnung. Details <see cref="Geschaeftspartner" />
@@ -548,7 +552,7 @@ public class Rechnung : BusinessObject
     [ProtoMember(14)]
     [JsonPropertyOrder(16)]
     [FieldName("recipient", Language.EN)]
-    public Geschaeftspartner Rechnungsempfaenger { get; set; }
+    public Geschaeftspartner? Rechnungsempfaenger { get; set; }
 
     /// <summary>
     ///     Die Summe der Nettobeträge der Rechnungsteile. Details <see cref="Betrag" />
@@ -558,7 +562,7 @@ public class Rechnung : BusinessObject
     [ProtoMember(15)]
     [JsonPropertyOrder(17)]
     [FieldName("totalNet", Language.EN)]
-    public Betrag Gesamtnetto { get; set; }
+    public Betrag? Gesamtnetto { get; set; }
 
     /// <summary>
     ///     Die Summe der Steuerbeträge der Rechnungsteile. Details <see cref="Betrag" />
@@ -568,7 +572,7 @@ public class Rechnung : BusinessObject
     [ProtoMember(16)]
     [JsonPropertyOrder(18)]
     [FieldName("totalTax", Language.EN)]
-    public Betrag Gesamtsteuer { get; set; }
+    public Betrag? Gesamtsteuer { get; set; }
 
     /// <summary>
     ///     Die Summe aus Netto- und Steuerbetrag. Details <see cref="Betrag" />
@@ -578,7 +582,7 @@ public class Rechnung : BusinessObject
     [ProtoMember(17)]
     [JsonPropertyOrder(19)]
     [FieldName("totalGross", Language.EN)]
-    public Betrag Gesamtbrutto { get; set; }
+    public Betrag? Gesamtbrutto { get; set; }
 
     /// <summary>
     ///     Die Summe evtl. vorausgezahlter Beträge, z.B. Abschläge. Angabe als Bruttowert. Details <see cref="Betrag" />
@@ -610,7 +614,7 @@ public class Rechnung : BusinessObject
     [ProtoMember(20)]
     [JsonPropertyOrder(22)]
     [FieldName("toPay", Language.EN)]
-    public Betrag Zuzahlen { get; set; }
+    public Betrag? Zuzahlen { get; set; }
 
     /// <summary>
     ///     Eine Liste mit Steuerbeträgen pro Steuerkennzeichen/Steuersatz. Die Summe dieser Beträge ergibt den Wert für
@@ -631,7 +635,7 @@ public class Rechnung : BusinessObject
     [JsonPropertyName("rechnungspositionen")]
     [FieldName("invoiceItemList", Language.EN)]
     [JsonPropertyOrder(24)]
-    public List<Rechnungsposition> Rechnungspositionen { get; set; }
+    public List<Rechnungsposition>? Rechnungspositionen { get; set; }
 
     /// <summary>
     ///     Kennzeichen, ob es sich um eine selbstausgestellte Rechnung handelt
