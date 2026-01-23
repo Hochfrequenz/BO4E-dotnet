@@ -1,3 +1,4 @@
+#nullable enable
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Text.Json.Serialization;
@@ -27,7 +28,7 @@ public class SteuerbareRessource : BusinessObject
     [DataCategory(DataCategory.DEVICE)]
     [BoKey]
     [ProtoMember(10)]
-    public string SteuerbareRessourceId { get; set; }
+    public string? SteuerbareRessourceId { get; set; }
 
     /// <summary>
     /// Leistungsbeschreibung des Steuerkanals
