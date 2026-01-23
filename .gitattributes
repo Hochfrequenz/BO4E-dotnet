@@ -1,6 +1,2 @@
-* text eol=crlf
-*.md eol=lf
-*.yml eol=lf
-*.json eol=lf
-*.cs eol=crlf
-*.csproj eol=crlf
+# Auto detect text files and normalize line endings
+* text=auto

@@ -1,3 +1,4 @@
+#nullable enable
 using System.Text.Json.Serialization;
 using BO4E.COM;
 using BO4E.ENUM;
@@ -22,7 +23,7 @@ public class Anfrage : BusinessObject
     [JsonPropertyOrder(6)]
     [NonOfficial(NonOfficialCategory.MISSING)]
     [ProtoMember(1000)]
-    public string LokationsId { get; set; }
+    public string? LokationsId { get; set; }
 
     /// <summary>
     /// Gibt an, ob es sich um eine Markt- oder Messlokation handelt

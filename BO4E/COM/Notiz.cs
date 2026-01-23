@@ -1,3 +1,4 @@
+#nullable enable
 using System;
 using System.Text.Json.Serialization;
 using System.Text.RegularExpressions;
@@ -25,7 +26,7 @@ public class Notiz : COM
         RegexOptions.Compiled
     );
 
-    private string _inhalt;
+    private string? _inhalt;
 
     /// <summary>
     ///     Person oder System, das die Notiz angelegt hat.
@@ -33,7 +34,7 @@ public class Notiz : COM
     [JsonProperty(PropertyName = "autor", Order = 7)]
     [JsonPropertyName("autor")]
     [ProtoMember(3)]
-    public string Autor { get; set; }
+    public string? Autor { get; set; }
 
     [System.Text.Json.Serialization.JsonIgnore]
     [Newtonsoft.Json.JsonIgnore]
@@ -59,9 +60,9 @@ public class Notiz : COM
     [JsonProperty(PropertyName = "inhalt", Order = 5)]
     [JsonPropertyName("inhalt")]
     [ProtoMember(5)]
-    public string Inhalt
+    public string? Inhalt
     {
         get => _inhalt;
-        set => _inhalt = TrailingMinusRegex.Replace(value, string.Empty);
+        set => _inhalt = value is null ? null : TrailingMinusRegex.Replace(value, string.Empty);
     }
 }
