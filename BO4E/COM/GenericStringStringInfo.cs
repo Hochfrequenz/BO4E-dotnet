@@ -3,8 +3,6 @@ using System.Text.Json.Serialization;
 using Newtonsoft.Json;
 using ProtoBuf;
 
-#nullable enable
-
 namespace BO4E.COM;
 
 /// <summary>

@@ -1,4 +1,3 @@
-#nullable enable
 using System.Linq;
 using System.Reflection;
 using Newtonsoft.Json;
