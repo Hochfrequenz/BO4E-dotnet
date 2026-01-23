@@ -1,3 +1,4 @@
+#nullable enable
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -77,7 +78,7 @@ public abstract class COM : IUserProperties, IOptionalGuid
     [ProtoMember(1)]
 #pragma warning disable IDE1006 // Naming Styles
     // ReSharper disable once InconsistentNaming
-    protected string guidSerialized
+    protected string? guidSerialized
 #pragma warning restore IDE1006 // Naming Styles
     {
         get => Guid.HasValue ? Guid.ToString() : string.Empty;
