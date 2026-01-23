@@ -1,4 +1,3 @@
-#nullable enable
 using System;
 using BO4E.ENUM;
 

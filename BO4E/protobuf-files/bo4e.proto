@@ -50,6 +50,8 @@ message Angebotsposition {
    string Preisschluesselstamm = 7;
    BDEWArtikelnummer BdewArtikelnummer = 8;
    string ArtikelId = 9;
+   Menge PositionsmengeMinimum = 10;
+   Menge PositionsmengeMaximum = 11;
 }
 enum Angebotsstatus {
    option (.protobuf_net.enumopt).namespace = "BO4E.ENUM";
@@ -71,6 +73,7 @@ message Angebotsteil {
    Betrag Gesamtkostenangebotsteil = 6;
    repeated Angebotsposition Positionen = 7;
    Zeitraum Lieferzeitraum = 8;
+   repeated BusinessObject Lieferstellen = 9;
 }
 message Angebotsvariante {
    option (.protobuf_net.msgopt).namespace = "BO4E.COM";
@@ -191,6 +194,14 @@ enum BDEWArtikelnummer {
    BDEWArtikelnummer_ZUSATZDIENSTLEISTUNG_PARAGRAPH_35_2_4_MSBG = 49;
    BDEWArtikelnummer_ZUSATZDIENSTLEISTUNG_PARAGRAPH_35_2_5_MSBG = 50;
    BDEWArtikelnummer_ZUSATZDIENSTLEISTUNG_PARAGRAPH_35_3_MSBG = 51;
+   BDEWArtikelnummer_EINBAU_IMS = 52;
+   BDEWArtikelnummer_EINBAU_KME_RLM = 53;
+   BDEWArtikelnummer_EINBAU_WANDLER = 54;
+   BDEWArtikelnummer_WEITERE_ENERGIEFLUSSRICHTUNG = 55;
+   BDEWArtikelnummer_VERGLEICHSMESSUNG = 56;
+   BDEWArtikelnummer_ÄNDERUNG_MESSEBENE = 57;
+   BDEWArtikelnummer_EINBAU_STEUERBOX = 58;
+   BDEWArtikelnummer_ANSCHLUSS_TR_STEUERBOX_SR = 59;
 }
 message Bankverbindung {
    option (.protobuf_net.msgopt).namespace = "BO4E.COM";
@@ -264,6 +275,9 @@ enum Bilanzierungsmethode {
    Bilanzierungsmethode_TLP_GETRENNT = 3;
    Bilanzierungsmethode_PAUSCHAL = 4;
    Bilanzierungsmethode_IMS = 5;
+}
+message BusinessObject {
+   option (.protobuf_net.msgopt).namespace = "BO4E.BO";
 }
 message Dienstleistung {
    option (.protobuf_net.msgopt).namespace = "BO4E.COM";
@@ -1057,6 +1071,8 @@ enum Mengeneinheit {
    VAR = 23;
    VARH = 29;
    KWHK = 40;
+   W_M2 = 41;
+   M_S = 42;
    JAHR = 228;
    KWH = 2000;
    MW = 3000;
@@ -1395,6 +1411,7 @@ enum Rechnungstyp {
    BLINDARBEIT = 13;
    SONDERRECHNUNG = 14;
    ABRECHNUNG_VON_KONFIGURATIONEN_UNIVERSALBESTELLPROZESS = 15;
+   ABRECHNUNG_TECHNIK = 16;
 }
 message Region {
    option (.protobuf_net.msgopt).namespace = "BO4E.BO";
@@ -1478,6 +1495,7 @@ enum Sonderrechnungsart {
    P18_ABLAV = 6;
    KONZESSIONSABGABE_WECHSEL_RLM = 7;
    PRIVILEGIERUNG_NACH_ENFG = 8;
+   KONZESSIONSABGABE_WEIGEL_MENGEN = 9;
 }
 enum Sparte {
    option (.protobuf_net.enumopt).namespace = "BO4E.ENUM";
@@ -1667,6 +1685,8 @@ message Verbrauch {
    Tarifstufe Tarifstufe = 12;
    .google.protobuf.Timestamp Nutzungszeitpunkt = 13;
    .google.protobuf.Timestamp Ausfuehrungszeitpunkt = 14;
+   string Temperaturmasszahl = 15;
+   Zeitfenster Zeitfenster = 16;
 }
 enum Verbrauchsart {
    option (.protobuf_net.enumopt).namespace = "BO4E.ENUM";

@@ -23,7 +23,7 @@
     <EmbedAllSources>True</EmbedAllSources>
     <LangVersion>12</LangVersion>
     <DocumentationFile>BO4Enet.xml</DocumentationFile>
-    <Nullable>annotations</Nullable>
+    <Nullable>enable</Nullable>
     <TargetFrameworks>netstandard2.0;netstandard2.1</TargetFrameworks>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">

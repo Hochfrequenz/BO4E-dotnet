@@ -1,4 +1,3 @@
-#nullable enable
 namespace BO4E.BO;
 
 /// <summary>
