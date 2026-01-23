@@ -1,3 +1,4 @@
+#nullable enable
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -41,7 +42,7 @@ public class Energiemenge : BusinessObject
     [ProtoMember(10)]
     [DataCategory(DataCategory.POD)]
     [BoKey]
-    public string LokationsId { get; set; }
+    public string? LokationsId { get; set; }
 
     /// <summary>
     ///     Gibt an, ob es sich um eine Markt- oder Messlokation handelt.
@@ -180,11 +181,11 @@ public class EnergiemengeConverter : System.Text.Json.Serialization.JsonConverte
             ref reader,
             Energiemenge.EnergiemengeSerializerOptions
         );
-        if (e.Energieverbrauch == null)
+        if (e != null && e.Energieverbrauch == null)
         {
             e.Energieverbrauch = new List<Verbrauch>();
         }
-        return e;
+        return e!;
     }
 
     /// <summary>
