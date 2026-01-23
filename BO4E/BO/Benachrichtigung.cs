@@ -1,3 +1,4 @@
+#nullable enable
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -27,7 +28,7 @@ public class Benachrichtigung : BusinessObject
     [JsonPropertyName("benachrichtigungsId")]
     [ProtoMember(4)]
     [BoKey]
-    public string BenachrichtigungsId { get; set; }
+    public string? BenachrichtigungsId { get; set; }
 
     /// <summary>
     ///     Priorität der Benachrichtigung
@@ -53,7 +54,7 @@ public class Benachrichtigung : BusinessObject
     [JsonProperty(Order = 7, PropertyName = "kurztext")]
     [JsonPropertyName("kurztext")]
     [ProtoMember(7)]
-    public string Kurztext { get; set; }
+    public string? Kurztext { get; set; }
 
     //[JsonIgnore]
     //private DateTimeOffset _erstellungsZeitpunkt;
