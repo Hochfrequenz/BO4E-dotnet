@@ -1,3 +1,4 @@
+#nullable enable
 using System;
 using System.Linq;
 using System.Text.Json;
@@ -34,7 +35,7 @@ public class LenientSystemTextJsonStringToIntConverter : JsonConverter<int?>
                 return null;
             case JsonTokenType.String:
             {
-                var numeric = new string(reader.GetString().Where(char.IsDigit).ToArray());
+                var numeric = new string(reader.GetString()!.Where(char.IsDigit).ToArray());
                 if (int.TryParse(numeric, out var intValue))
                 {
                     return intValue;

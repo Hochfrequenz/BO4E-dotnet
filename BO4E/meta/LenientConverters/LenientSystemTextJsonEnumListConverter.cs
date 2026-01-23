@@ -1,3 +1,4 @@
+#nullable enable
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -8,6 +9,7 @@ using System.Text.Json.Serialization;
 
 namespace BO4E.meta.LenientConverters;
 
+#nullable disable warnings
 /// <summary>
 ///     A custom enum converter that uses an array for containing bit flags.
 /// </summary>
@@ -38,7 +40,10 @@ public class LenientSystemTextJsonEnumListConverter : JsonConverterFactory
     /// <param name="typeToConvert"></param>
     /// <param name="options"></param>
     /// <returns></returns>
-    public override JsonConverter CreateConverter(Type typeToConvert, JsonSerializerOptions options)
+    public override JsonConverter? CreateConverter(
+        Type typeToConvert,
+        JsonSerializerOptions options
+    )
     {
         var converter = (JsonConverter)
             Activator.CreateInstance(
@@ -86,7 +91,7 @@ public class LenientSystemTextJsonEnumListConverter<T, TE> : JsonConverter<T>
     /// <param name="typeToConvert"></param>
     /// <param name="options"></param>
     /// <returns></returns>
-    public override T Read(
+    public override T? Read(
         ref Utf8JsonReader reader,
         Type typeToConvert,
         JsonSerializerOptions options

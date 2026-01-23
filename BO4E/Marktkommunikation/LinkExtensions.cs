@@ -1,3 +1,4 @@
+#nullable enable
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -5,6 +6,7 @@ using BO4E.Marktkommunikation.v1;
 
 namespace BO4E.Marktkommunikation;
 
+#nullable disable warnings
 /// <summary>
 /// extension methods for <see cref="BOneyComb.Links"/> and <see cref="v2.BOneyComb.ZeitabhaengigeLinks"/>
 /// </summary>
