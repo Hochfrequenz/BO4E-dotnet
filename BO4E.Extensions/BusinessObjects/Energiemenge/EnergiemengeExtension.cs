@@ -882,26 +882,30 @@ public static partial class EnergiemengeExtension
         var values = new Dictionary<string, object>();
         // ToDo: make it nice.
         foreach (var v in em.Energieverbrauch!.Where(v => v.UserProperties != null))
-        foreach (var key in upKeys)
-            if (v.UserProperties!.TryGetValue(key, out var rawValue))
+        {
+            foreach (var key in upKeys)
             {
-                if (values.TryGetValue(key, out var onlyValue))
+                if (v.UserProperties!.TryGetValue(key, out var rawValue))
                 {
-                    if (rawValue == null && onlyValue != null)
+                    if (values.TryGetValue(key, out var onlyValue))
                     {
-                        return false;
-                    }
+                        if (rawValue == null && onlyValue != null)
+                        {
+                            return false;
+                        }
 
-                    if (rawValue != null && !rawValue.Equals(onlyValue))
-                    {
-                        return false;
+                        if (rawValue != null && !rawValue.Equals(onlyValue))
+                        {
+                            return false;
+                        }
                     }
-                }
-                else
-                {
-                    values.Add(key, rawValue);
+                    else
+                    {
+                        values.Add(key, rawValue);
+                    }
                 }
             }
+        }
 
         return true;
     }
