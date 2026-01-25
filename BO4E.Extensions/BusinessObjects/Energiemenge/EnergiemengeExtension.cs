@@ -427,7 +427,11 @@ public static partial class EnergiemengeExtension
             );
         }
 
-        // since it's assured, that the energieverbrauch entries are evenly spaced it doesn't matter which entry we use to determine the duration.
+        // Since it's assured that the energieverbrauch entries are evenly spaced it doesn't matter
+        // which entry we use to determine the duration. Note: duration is TimeSpan? because
+        // Startdatum/Enddatum are nullable. The null-forgiving operator at line (dt + duration)!.Value
+        // maintains original behavior - if dates are null, this throws (same as pre-nullable code).
+        // TODO: Consider validating that filtered entries have non-null dates before computing duration.
         var duration =
             filteredVerbrauch.Values.Min(v => v.Enddatum)
             - filteredVerbrauch.Values.Min(v => v.Startdatum);
