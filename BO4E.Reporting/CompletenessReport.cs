@@ -204,10 +204,11 @@ public class CompletenessReport : Report, IComparable<CompletenessReport>
         columns.Add(imsysRegex.Match(Obiskennzahl!).Success ? "IMS" : "RLM"); // messung
         columns.Add("MSB"); // MSB
 
-        // Note: The null-forgiving operators (!) on profil and profilRolle maintain the original
-        // runtime behavior. If the dictionary contains a null value for these keys, ToString()
-        // will throw NullReferenceException - same as the pre-nullable code. This is intentional
-        // to preserve backward compatibility. Callers should ensure UserProperties values are non-null.
+        // Note: UserProperties must be non-null for ToCSV - TryGetValue on null throws
+        // NullReferenceException (same as pre-nullable code). The null-forgiving operators (!)
+        // on profil and profilRolle also maintain original behavior - if the dictionary contains
+        // a null value for these keys, ToString() will throw. Callers should ensure UserProperties
+        // is set and its values are non-null.
         if (UserProperties!.TryGetValue("profil", out var profil))
         {
             columns.Add(profil!.ToString());
