@@ -714,4 +714,83 @@ public class TestUserPropertiesEmptiness
     }
 
     #endregion
+
+    #region Circular Reference Protection Tests
+
+    /// <summary>
+    ///     Test model with a self-reference to verify circular reference protection.
+    /// </summary>
+    private class SelfReferencingModel : BO4E.COM.COM
+    {
+        public SelfReferencingModel? Self { get; set; }
+        public SelfReferencingModel? Other { get; set; }
+    }
+
+    [TestMethod]
+    public void TestRecursive_CircularReference_SelfReference_DoesNotStackOverflow()
+    {
+        var model = new SelfReferencingModel();
+        model.Self = model; // circular self-reference
+
+        var act = () => model.HasAllEmptyUserPropertiesRecursive(out _);
+        act.Should().NotThrow();
+
+        var result = model.HasAllEmptyUserPropertiesRecursive(out var paths);
+        result.Should().BeTrue();
+        paths.Should().BeEmpty();
+    }
+
+    [TestMethod]
+    public void TestRecursive_CircularReference_WithNonEmptyUserProperties_ReportsCorrectly()
+    {
+        var model = new SelfReferencingModel
+        {
+            UserProperties = new Dictionary<string, object> { { "key", "value" } },
+        };
+        model.Self = model; // circular self-reference
+
+        var result = model.HasAllEmptyUserPropertiesRecursive(out var paths);
+        result.Should().BeFalse();
+        paths.Should().HaveCount(1);
+        paths.Should().Contain("(root)");
+        // Should NOT contain "Self" because the visited set prevents re-checking the same object
+    }
+
+    [TestMethod]
+    public void TestRecursive_CircularReference_ParentChildBackReference_DoesNotStackOverflow()
+    {
+        var parent = new SelfReferencingModel();
+        var child = new SelfReferencingModel();
+        parent.Self = child;
+        child.Other = parent; // back-reference to parent creates a cycle
+
+        var act = () => parent.HasAllEmptyUserPropertiesRecursive(out _);
+        act.Should().NotThrow();
+
+        var result = parent.HasAllEmptyUserPropertiesRecursive(out var paths);
+        result.Should().BeTrue();
+        paths.Should().BeEmpty();
+    }
+
+    [TestMethod]
+    public void TestRecursive_CircularReference_ChainWithNonEmptyInMiddle_ReportsAllNonEmpty()
+    {
+        var a = new SelfReferencingModel();
+        var b = new SelfReferencingModel
+        {
+            UserProperties = new Dictionary<string, object> { { "middle", "data" } },
+        };
+        var c = new SelfReferencingModel();
+
+        a.Self = b;
+        b.Self = c;
+        c.Other = a; // cycle back to start
+
+        var result = a.HasAllEmptyUserPropertiesRecursive(out var paths);
+        result.Should().BeFalse();
+        paths.Should().HaveCount(1);
+        paths.Should().Contain("Self"); // b is at path "Self" from a
+    }
+
+    #endregion
 }
