@@ -9,6 +9,7 @@
     <Authors>Hochfrequenz Unternehmensberatung GmbH</Authors>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <LangVersion>12</LangVersion>
+    <Nullable>enable</Nullable>
     <TargetFrameworks>netstandard2.1;netstandard2.0</TargetFrameworks>
   </PropertyGroup>
   <PropertyGroup>
