@@ -625,9 +625,53 @@ public class TestUserPropertiesEmptiness
         var result = rechnung.HasAllEmptyUserPropertiesRecursive(out var paths);
         result.Should().BeFalse();
 
-        paths.Should().Contain("(root)");
-        paths.Should().Contain("Rechnungspositionen[0]");
-        paths.Should().Contain("Rechnungspositionen[0].TeilsummeNetto");
+        // Paths should be sorted: (root) first, then by depth, then lexicographically
+        paths.Should().HaveCount(3);
+        paths[0].Should().Be("(root)");
+        paths[1].Should().Be("Rechnungspositionen[0]");
+        paths[2].Should().Be("Rechnungspositionen[0].TeilsummeNetto");
+    }
+
+    [TestMethod]
+    public void TestRecursive_Paths_AreSortedByDepthThenLexicographically()
+    {
+        // Create a structure with multiple paths at different depths to verify sorting
+        var energiemenge = new Energiemenge
+        {
+            LokationsId = "DE0123456789012345678901234567890",
+            LokationsTyp = Lokationstyp.MELO,
+            UserProperties = new Dictionary<string, object> { { "root", "data" } },
+            Energieverbrauch = new List<Verbrauch>
+            {
+                new Verbrauch
+                {
+                    Einheit = Mengeneinheit.KWH,
+                    Wert = 100,
+                    UserProperties = new Dictionary<string, object> { { "v0", "data" } },
+                },
+                new Verbrauch
+                {
+                    Einheit = Mengeneinheit.KWH,
+                    Wert = 200,
+                    // no UserProperties - should not appear in paths
+                },
+                new Verbrauch
+                {
+                    Einheit = Mengeneinheit.KWH,
+                    Wert = 300,
+                    UserProperties = new Dictionary<string, object> { { "v2", "data" } },
+                },
+            },
+        };
+
+        var result = energiemenge.HasAllEmptyUserPropertiesRecursive(out var paths);
+        result.Should().BeFalse();
+
+        // Verify exact order: (root) first, then depth 1 paths in lexicographic order
+        paths.Should().HaveCount(3);
+        paths[0].Should().Be("(root)");
+        paths[1].Should().Be("Energieverbrauch[0]");
+        paths[2].Should().Be("Energieverbrauch[2]");
     }
 
     [TestMethod]
