@@ -17,6 +17,6 @@ public static class BusinessObjectExtensions
     public static T DeepClone<T>(this T source)
         where T : BusinessObject
     {
-        return JsonConvert.DeserializeObject<T>(JsonConvert.SerializeObject(source));
+        return JsonConvert.DeserializeObject<T>(JsonConvert.SerializeObject(source))!;
     }
 }

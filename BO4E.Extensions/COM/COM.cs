@@ -16,6 +16,6 @@ public static class COMExtensions
     public static T DeepClone<T>(this T source)
         where T : BO4E.COM.COM
     {
-        return JsonConvert.DeserializeObject<T>(JsonConvert.SerializeObject(source));
+        return JsonConvert.DeserializeObject<T>(JsonConvert.SerializeObject(source))!;
     }
 }

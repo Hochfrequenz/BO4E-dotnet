@@ -32,7 +32,7 @@ public static partial class EnergiemengeExtension
     public static PlausibilityReport GetPlausibilityReport(
         this BO.Energiemenge emReference,
         BO.Energiemenge emOther,
-        ITimeRange timeframe = null,
+        ITimeRange? timeframe = null,
         bool ignoreLocation = false
     )
     {
@@ -150,10 +150,10 @@ public static partial class EnergiemengeExtension
     )
     {
         return energiemenge.GetPlausibilityReport(
-            config.Other,
+            config.Other!,
             new TimeRange(
-                config.Timeframe.Startdatum.Value.UtcDateTime,
-                config.Timeframe.Enddatum.Value.UtcDateTime
+                config.Timeframe!.Startdatum!.Value.UtcDateTime,
+                config.Timeframe!.Enddatum!.Value.UtcDateTime
             ),
             config.IgnoreLocation
         );
@@ -182,7 +182,7 @@ public static partial class EnergiemengeExtension
         {
             var localConfig = JsonConvert.DeserializeObject<PlausibilityReportConfiguration>(
                 JsonConvert.SerializeObject(config)
-            );
+            )!;
             localConfig.Timeframe = new Zeitraum { Startdatum = range.Start, Enddatum = range.End };
             var subResult = GetPlausibilityReport(em, localConfig);
             result.Add(range, subResult);
@@ -219,8 +219,8 @@ public static partial class EnergiemengeExtension
         var slices = GetLocalDailySlices(
             new TimeRange
             {
-                Start = config.Timeframe.Startdatum.Value.UtcDateTime,
-                End = config.Timeframe.Enddatum.Value.UtcDateTime,
+                Start = config.Timeframe!.Startdatum!.Value.UtcDateTime,
+                End = config.Timeframe!.Enddatum!.Value.UtcDateTime,
             }
         );
         return em.GetSlicedPlausibilityReports(config, slices);
@@ -253,8 +253,8 @@ public static partial class EnergiemengeExtension
         var slices = GetLocalMonthlySlices(
             new TimeRange
             {
-                Start = config.Timeframe.Startdatum.Value.UtcDateTime,
-                End = config.Timeframe.Enddatum.Value.UtcDateTime,
+                Start = config.Timeframe!.Startdatum!.Value.UtcDateTime,
+                End = config.Timeframe!.Enddatum!.Value.UtcDateTime,
             }
         );
         return em.GetSlicedPlausibilityReports(config, slices);

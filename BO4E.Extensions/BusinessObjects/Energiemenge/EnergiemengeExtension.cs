@@ -21,8 +21,8 @@ public static partial class EnergiemengeExtension
 
     private static readonly Func<
         Verbrauch,
-        Tuple<Wertermittlungsverfahren?, Mengeneinheit, string>
-    > PurityGrouper = v => new Tuple<Wertermittlungsverfahren?, Mengeneinheit, string>(
+        Tuple<Wertermittlungsverfahren?, Mengeneinheit, string?>
+    > PurityGrouper = v => new Tuple<Wertermittlungsverfahren?, Mengeneinheit, string?>(
         v.Wertermittlungsverfahren,
         v.Einheit,
         v.Obiskennzahl
@@ -130,13 +130,13 @@ public static partial class EnergiemengeExtension
             throw new ArgumentException("The Energiemenge is not pure.");
         }
 
-        if (em.Energieverbrauch.Count == 0)
+        if (em.Energieverbrauch!.Count == 0)
         {
             return Tuple.Create(0.0M, Mengeneinheit.ANZAHL);
         }
 
         ISet<Mengeneinheit> einheiten = new HashSet<Mengeneinheit>(
-            em.Energieverbrauch.Select(x => x.Einheit)
+            em.Energieverbrauch!.Select(x => x.Einheit)
         );
         if (einheiten.Count > 1)
         // z.B. kWh und Wh oder Monat und Jahr... Die liefern IsPure==true.
@@ -172,7 +172,7 @@ public static partial class EnergiemengeExtension
         this BO.Energiemenge em,
         ITimeRange reference,
         Wertermittlungsverfahren? wev,
-        string obiskennzahl,
+        string? obiskennzahl,
         Mengeneinheit me
     )
     {
@@ -280,12 +280,12 @@ public static partial class EnergiemengeExtension
             throw new ArgumentException("Energiemenge is not pure.");
         }
 
-        if (em.Energieverbrauch.Count == 0)
+        if (em.Energieverbrauch!.Count == 0)
         {
             return Tuple.Create<decimal?, Mengeneinheit>(null, Mengeneinheit.KW);
         }
 
-        var v = em.Energieverbrauch.First();
+        var v = em.Energieverbrauch!.First();
         return Tuple.Create(
             em.GetAverage(v.Wertermittlungsverfahren, v.Obiskennzahl, v.Einheit),
             v.Einheit
@@ -306,7 +306,7 @@ public static partial class EnergiemengeExtension
     public static decimal? GetAverage(
         this BO.Energiemenge em,
         Wertermittlungsverfahren? wev,
-        string obiskennzahl,
+        string? obiskennzahl,
         Mengeneinheit me
     )
     {
@@ -326,13 +326,13 @@ public static partial class EnergiemengeExtension
         this BO.Energiemenge em,
         TimeRange reference,
         Wertermittlungsverfahren? wev,
-        string obiskennzahl,
+        string? obiskennzahl,
         Mengeneinheit me
     )
     {
         decimal? result = null;
         var overallDenominator = 0.0M;
-        foreach (var v in em.Energieverbrauch.Where(v => v.Einheit == me))
+        foreach (var v in em.Energieverbrauch!.Where(v => v.Einheit == me))
         {
             var overlapFactor = GetOverlapFactor(
                 new TimeRange(
@@ -385,7 +385,7 @@ public static partial class EnergiemengeExtension
         this BO.Energiemenge em,
         ITimeRange reference,
         Wertermittlungsverfahren? wev,
-        string obis,
+        string? obis,
         Mengeneinheit me
     )
     {
@@ -455,7 +455,7 @@ public static partial class EnergiemengeExtension
                 )
             ) //   Where<Verbrauch>(v => v.startdatum == dt && v.enddatum == dt + duration).Any())
             {
-                result.Add(new TimeRange(dt, (dt + duration).Value));
+                result.Add(new TimeRange(dt, (dt + duration)!.Value));
             }
             //}
         }
@@ -505,7 +505,7 @@ public static partial class EnergiemengeExtension
         this BO.Energiemenge em,
         ITimeRange reference,
         Wertermittlungsverfahren? wev,
-        string obis,
+        string? obis,
         Mengeneinheit me,
         bool allowGaps = false
     )
@@ -603,12 +603,12 @@ public static partial class EnergiemengeExtension
     private static HashSet<TimeSpan> GetTimeSpans(
         this BO.Energiemenge em,
         Wertermittlungsverfahren? wev,
-        string obis,
+        string? obis,
         Mengeneinheit me
     )
     {
         var result = new HashSet<TimeSpan>();
-        var vlist = new List<Verbrauch>(em.Energieverbrauch);
+        var vlist = new List<Verbrauch>(em.Energieverbrauch!);
         vlist.Sort(new VerbrauchDateTimeComparer());
         vlist = vlist
             .Where(v =>
@@ -636,11 +636,11 @@ public static partial class EnergiemengeExtension
     /// <param name="em">em</param>
     /// <returns>A Set of tuples of all (Wertermittlungsverfahren, OBIS, Mengeneinheit) combinations</returns>
     public static ISet<
-        Tuple<Wertermittlungsverfahren?, string, Mengeneinheit>
+        Tuple<Wertermittlungsverfahren?, string?, Mengeneinheit>
     > GetWevObisMeCombinations(this BO.Energiemenge em)
     {
-        return new HashSet<Tuple<Wertermittlungsverfahren?, string, Mengeneinheit>>(
-            em.Energieverbrauch.Select(v =>
+        return new HashSet<Tuple<Wertermittlungsverfahren?, string?, Mengeneinheit>>(
+            em.Energieverbrauch!.Select(v =>
                 Tuple.Create(v.Wertermittlungsverfahren, v.Obiskennzahl, v.Einheit)
             )
         );
@@ -656,8 +656,7 @@ public static partial class EnergiemengeExtension
     public static decimal GetJointCoverage(this BO.Energiemenge em, TimeRange reference)
     {
         var combinations = GetWevObisMeCombinations(em);
-        var jointCoverage = em
-            .Energieverbrauch.Where(v =>
+        var jointCoverage = em.Energieverbrauch!.Where(v =>
                 combinations.Contains(
                     Tuple.Create(v.Wertermittlungsverfahren, v.Obiskennzahl, v.Einheit)
                 )
@@ -690,12 +689,12 @@ public static partial class EnergiemengeExtension
             );
         }
 
-        if (em.Energieverbrauch.Count == 0)
+        if (em.Energieverbrauch!.Count == 0)
         {
             return 0.0M;
         }
 
-        var v = em.Energieverbrauch.First();
+        var v = em.Energieverbrauch!.First();
         return em.GetCoverage(reference, v.Wertermittlungsverfahren, v.Obiskennzahl, v.Einheit);
     }
 
@@ -724,15 +723,14 @@ public static partial class EnergiemengeExtension
         this BO.Energiemenge em,
         ITimeRange reference,
         Wertermittlungsverfahren? wev,
-        string obisKz,
+        string? obisKz,
         Mengeneinheit mengeneinheit,
         int decimalRounding = 10
     )
     {
         decimal exactResult;
 
-        exactResult = em
-            .Energieverbrauch.Where(v =>
+        exactResult = em.Energieverbrauch!.Where(v =>
                 v.Einheit == mengeneinheit
                 && v.Obiskennzahl == obisKz
                 && v.Wertermittlungsverfahren == wev
@@ -874,14 +872,14 @@ public static partial class EnergiemengeExtension
     public static bool IsPureUserProperties(this BO.Energiemenge em)
     {
         ISet<string> upKeys = new HashSet<string>(
-            em.Energieverbrauch.Where(v => v.UserProperties != null)
-                .SelectMany(v => v.UserProperties.Keys)
+            em.Energieverbrauch!.Where(v => v.UserProperties != null)
+                .SelectMany(v => v.UserProperties!.Keys)
         );
         var values = new Dictionary<string, object>();
         // ToDo: make it nice.
-        foreach (var v in em.Energieverbrauch.Where(v => v.UserProperties != null))
+        foreach (var v in em.Energieverbrauch!.Where(v => v.UserProperties != null))
         foreach (var key in upKeys)
-            if (v.UserProperties.TryGetValue(key, out var rawValue))
+            if (v.UserProperties!.TryGetValue(key, out var rawValue))
             {
                 if (values.TryGetValue(key, out var onlyValue))
                 {

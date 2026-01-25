@@ -74,7 +74,7 @@ public static class BenachrichtigungExtension
         string keyName,
         Predicate<T> predicate,
         bool passByDefault = true,
-        TypeConverter typeConverter = null
+        TypeConverter? typeConverter = null
     )
         where T : IComparable
     {
@@ -122,12 +122,12 @@ public static class BenachrichtigungExtension
 
             foreach (var info in b.Infos)
             {
-                if (b.UserProperties.ContainsKey(info.KeyColumn) && overwriteExistingKeys)
+                if (b.UserProperties.ContainsKey(info.KeyColumn!) && overwriteExistingKeys)
                 {
-                    b.UserProperties.Remove(info.KeyColumn);
+                    b.UserProperties.Remove(info.KeyColumn!);
                 }
 
-                b.UserProperties.Add(info.KeyColumn, info.Value); // might throw exception if key exists and !overwriteExistingKeys. That's ok.
+                b.UserProperties.Add(info.KeyColumn!, info.Value!); // might throw exception if key exists and !overwriteExistingKeys. That's ok.
             }
 
             b.Infos = null; // set to null after all elements have been moved
