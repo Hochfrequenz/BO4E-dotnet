@@ -19,14 +19,14 @@ public class PlausibilityReport : Report
     ///     all information is normalised to this reference time frame
     /// </summary>
     [JsonProperty(PropertyName = "referenceTimeFrame", Order = 7)]
-    public Zeitraum ReferenceTimeFrame { get; set; }
+    public Zeitraum? ReferenceTimeFrame { get; set; }
 
     /// <summary>
     ///     refers to a <see cref="Energiemenge.LokationsId" />
     /// </summary>
     [DataCategory(DataCategory.POD)]
     [JsonProperty(PropertyName = "lokationsId", Order = 8)]
-    public string LokationsId { get; set; }
+    public string? LokationsId { get; set; }
 
     /// <summary>
     ///     relative deviation of both Energiemengen within <see cref="ReferenceTimeFrame" />.
@@ -45,14 +45,14 @@ public class PlausibilityReport : Report
     /// </summary>
     [DataCategory(DataCategory.METER_READING)]
     [JsonProperty(PropertyName = "verbrauchReference", Order = 6)]
-    public Verbrauch VerbrauchReference { get; set; }
+    public Verbrauch? VerbrauchReference { get; set; }
 
     /// <summary>
     ///     Verbrauch of another Energiemenge
     /// </summary>
     [DataCategory(DataCategory.METER_READING)]
     [JsonProperty(PropertyName = "verbrauchOther", Order = 7)]
-    public Verbrauch VerbrauchOther { get; set; }
+    public Verbrauch? VerbrauchOther { get; set; }
 
     /// <summary>
     ///     absolute value of the difference between <see cref="Verbrauch.Wert" /> of <see cref="VerbrauchReference" /> and
@@ -77,13 +77,13 @@ public class PlausibilityReport : Report
         ///     reference time frame
         /// </summary>
         [JsonProperty(PropertyName = "timeframe", Required = Required.AllowNull)]
-        public Zeitraum Timeframe { get; set; }
+        public Zeitraum? Timeframe { get; set; }
 
         /// <summary>
         ///     Energiemenge to be compared with the reference Energiemenge
         /// </summary>
         [JsonProperty(PropertyName = "other")]
-        public Energiemenge Other { get; set; }
+        public Energiemenge? Other { get; set; }
 
         /// <summary>
         ///     set true to ignore if Energiemenge do have different <see cref="Energiemenge.LokationsId" /> or

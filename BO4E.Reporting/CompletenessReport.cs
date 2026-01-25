@@ -33,20 +33,20 @@ public class CompletenessReport : Report, IComparable<CompletenessReport>
     ///     Must only be null if an error occurred and <see cref="ErrorMessage" /> is not null.
     /// </summary>
     [JsonProperty(PropertyName = "referenceTimeFrame", Required = Required.AllowNull, Order = 7)]
-    public Zeitraum ReferenceTimeFrame { get; set; }
+    public Zeitraum? ReferenceTimeFrame { get; set; }
 
     /// <summary>
     ///     <see cref="BO4E.BO.Energiemenge.LokationsId" />
     /// </summary>
     [DataCategory(DataCategory.POD)]
     [JsonProperty(PropertyName = "lokationsId", Order = 8)]
-    public string LokationsId { get; set; }
+    public string? LokationsId { get; set; }
 
     /// <summary>
     ///     <see cref="Verbrauch.Obiskennzahl" />
     /// </summary>
     [JsonProperty(PropertyName = "obiskennzahl", Order = 5)]
-    public string Obiskennzahl { get; set; }
+    public string? Obiskennzahl { get; set; }
 
     /// <summary>
     ///     <see cref="Verbrauch.Einheit" />
@@ -72,19 +72,19 @@ public class CompletenessReport : Report, IComparable<CompletenessReport>
     /// </summary>
     [JsonProperty(PropertyName = "values", Order = 5)]
     [DataCategory(DataCategory.METER_READING)]
-    public List<BasicVerbrauch> Values { get; set; }
+    public List<BasicVerbrauch>? Values { get; set; }
 
     /// <summary>
     ///     gaps are continous values (<see cref="Values" />) with value null.
     /// </summary>
     [JsonProperty(PropertyName = "gaps", Order = 6)]
-    public List<BasicVerbrauch> Gaps { get; set; }
+    public List<BasicVerbrauch>? Gaps { get; set; }
 
     /// <summary>
     ///     optional field for storing error messages
     /// </summary>
     [JsonProperty(PropertyName = "_errorMessage")]
-    public string ErrorMessage { get; set; }
+    public string? ErrorMessage { get; set; }
 
     // ToDo: make it nice.
     /// <summary>
@@ -168,44 +168,59 @@ public class CompletenessReport : Report, IComparable<CompletenessReport>
             builder.Append(string.Join(separator, headerColumns) + lineTerminator);
         }
 
+        // Note: ToCSV requires ReferenceTimeFrame and its date properties to be non-null.
+        // The null-forgiving operators (!) maintain original behavior - callers must ensure
+        // ReferenceTimeFrame is populated before calling ToCSV. This is consistent with the
+        // pre-nullable code which would also throw NullReferenceException if these were null.
         var columns = new List<string>
         {
-            ReferenceTimeFrame.Startdatum.Value.ToString("yyyy-MM-ddTHH:mm:ssZ"),
-            ReferenceTimeFrame.Enddatum.Value.ToString("yyyy-MM-ddTHH:mm:ssZ"),
+            ReferenceTimeFrame!.Startdatum!.Value.ToString("yyyy-MM-ddTHH:mm:ssZ"),
+            ReferenceTimeFrame!.Enddatum!.Value.ToString("yyyy-MM-ddTHH:mm:ssZ"),
         };
 
+        // Note: LokationsId is expected to be non-null for ToCSV. ValidateId returns false for null,
+        // so null LokationsId falls through to the else branch. The null-forgiving operators maintain
+        // original behavior - pre-nullable code would add null to the list (valid for List<string>).
+        // Callers should ensure LokationsId is set before calling ToCSV.
         if (Messlokation.ValidateId(LokationsId))
         {
-            columns.Add(LokationsId); // melo
+            columns.Add(LokationsId!); // melo
             columns.Add(string.Empty); // malo
         }
         else if (Marktlokation.ValidateId(LokationsId))
         {
             columns.Add(string.Empty); //melo
-            columns.Add(LokationsId); //malo
+            columns.Add(LokationsId!); //malo
         }
         else
         {
-            // fallback only
-            columns.Add(LokationsId);
-            columns.Add(LokationsId);
+            // fallback only - may add null if LokationsId is null (same as pre-nullable behavior)
+            columns.Add(LokationsId!);
+            columns.Add(LokationsId!);
         }
 
-        columns.Add(imsysRegex.Match(Obiskennzahl).Success ? "IMS" : "RLM"); // messung
+        // Note: Obiskennzahl must be non-null for ToCSV. Regex.Match throws ArgumentNullException
+        // if null - same behavior as pre-nullable code. Callers must ensure Obiskennzahl is set.
+        columns.Add(imsysRegex.Match(Obiskennzahl!).Success ? "IMS" : "RLM"); // messung
         columns.Add("MSB"); // MSB
 
-        if (UserProperties.TryGetValue("profil", out var profil))
+        // Note: UserProperties must be non-null for ToCSV - TryGetValue on null throws
+        // NullReferenceException (same as pre-nullable code). The null-forgiving operators (!)
+        // on profil and profilRolle also maintain original behavior - if the dictionary contains
+        // a null value for these keys, ToString() will throw. Callers should ensure UserProperties
+        // is set and its values are non-null.
+        if (UserProperties!.TryGetValue("profil", out var profil))
         {
-            columns.Add(profil.ToString());
+            columns.Add(profil!.ToString());
         }
         else
         {
             columns.Add(string.Empty);
         }
 
-        if (UserProperties.TryGetValue("profilRolle", out var profilRolle))
+        if (UserProperties!.TryGetValue("profilRolle", out var profilRolle))
         {
-            columns.Add(profilRolle.ToString());
+            columns.Add(profilRolle!.ToString());
         }
         else
         {
@@ -293,7 +308,7 @@ public class CompletenessReport : Report, IComparable<CompletenessReport>
         ///     reference time frame to be analysed
         /// </summary>
         [JsonProperty(PropertyName = "referenceTimeFrame", Order = 7)]
-        public Zeitraum ReferenceTimeFrame { get; set; }
+        public Zeitraum? ReferenceTimeFrame { get; set; }
 
         /// <summary>
         ///     Wertermittlungsverfahren (<see cref="Verbrauch.Wertermittlungsverfahren" />) to be taken into account.
@@ -305,7 +320,7 @@ public class CompletenessReport : Report, IComparable<CompletenessReport>
         ///     OBIS ID (<see cref="Verbrauch.Obiskennzahl" />) to be taken into account.
         /// </summary>
         [JsonProperty(PropertyName = "obis", Order = 5)]
-        public string Obis { get; set; }
+        public string? Obis { get; set; }
 
         /// <summary>
         ///     Unit (<see cref="Verbrauch.Einheit" />) to be taken into account.
