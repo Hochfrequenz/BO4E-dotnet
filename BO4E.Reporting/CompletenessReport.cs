@@ -178,6 +178,10 @@ public class CompletenessReport : Report, IComparable<CompletenessReport>
             ReferenceTimeFrame!.Enddatum!.Value.ToString("yyyy-MM-ddTHH:mm:ssZ"),
         };
 
+        // Note: LokationsId is expected to be non-null for ToCSV. ValidateId returns false for null,
+        // so null LokationsId falls through to the else branch. The null-forgiving operators maintain
+        // original behavior - pre-nullable code would add null to the list (valid for List<string>).
+        // Callers should ensure LokationsId is set before calling ToCSV.
         if (Messlokation.ValidateId(LokationsId))
         {
             columns.Add(LokationsId!); // melo
@@ -190,7 +194,7 @@ public class CompletenessReport : Report, IComparable<CompletenessReport>
         }
         else
         {
-            // fallback only
+            // fallback only - may add null if LokationsId is null (same as pre-nullable behavior)
             columns.Add(LokationsId!);
             columns.Add(LokationsId!);
         }
