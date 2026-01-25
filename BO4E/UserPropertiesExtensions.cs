@@ -552,10 +552,7 @@ public static class UserPropertiesExtensions
 
         // Check if type itself is IEnumerable<T> (e.g., property declared as IEnumerable<SomeType>)
         // GetInterfaces() doesn't include the type itself when the type IS the interface
-        if (
-            type.IsGenericType
-            && type.GetGenericTypeDefinition() == typeof(IEnumerable<>)
-        )
+        if (type.IsGenericType && type.GetGenericTypeDefinition() == typeof(IEnumerable<>))
         {
             var elementType = type.GetGenericArguments()[0];
             if (typeof(IUserProperties).IsAssignableFrom(elementType))
@@ -567,7 +564,9 @@ public static class UserPropertiesExtensions
         // Check for generic IEnumerable<T> in implemented interfaces where T : IUserProperties
         foreach (
             var interfaceType in type.GetInterfaces()
-                .Where(i => i.IsGenericType && i.GetGenericTypeDefinition() == typeof(IEnumerable<>))
+                .Where(i =>
+                    i.IsGenericType && i.GetGenericTypeDefinition() == typeof(IEnumerable<>)
+                )
         )
         {
             var elementType = interfaceType.GetGenericArguments()[0];
