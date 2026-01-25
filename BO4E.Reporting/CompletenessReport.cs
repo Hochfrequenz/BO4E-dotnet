@@ -195,6 +195,8 @@ public class CompletenessReport : Report, IComparable<CompletenessReport>
             columns.Add(LokationsId!);
         }
 
+        // Note: Obiskennzahl must be non-null for ToCSV. Regex.Match throws ArgumentNullException
+        // if null - same behavior as pre-nullable code. Callers must ensure Obiskennzahl is set.
         columns.Add(imsysRegex.Match(Obiskennzahl!).Success ? "IMS" : "RLM"); // messung
         columns.Add("MSB"); // MSB
 
