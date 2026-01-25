@@ -168,6 +168,10 @@ public class CompletenessReport : Report, IComparable<CompletenessReport>
             builder.Append(string.Join(separator, headerColumns) + lineTerminator);
         }
 
+        // Note: ToCSV requires ReferenceTimeFrame and its date properties to be non-null.
+        // The null-forgiving operators (!) maintain original behavior - callers must ensure
+        // ReferenceTimeFrame is populated before calling ToCSV. This is consistent with the
+        // pre-nullable code which would also throw NullReferenceException if these were null.
         var columns = new List<string>
         {
             ReferenceTimeFrame!.Startdatum!.Value.ToString("yyyy-MM-ddTHH:mm:ssZ"),
