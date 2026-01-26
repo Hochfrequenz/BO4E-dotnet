@@ -16,12 +16,13 @@ public class StringNullableEnumConverter : JsonConverterFactory
     /// <returns></returns>
     public override bool CanConvert(Type typeToConvert)
     {
-        if (Nullable.GetUnderlyingType(typeToConvert) == null)
+        var underlyingType = Nullable.GetUnderlyingType(typeToConvert);
+        if (underlyingType == null)
         {
             return typeToConvert.ToString().StartsWith("BO4E.ENUM");
         }
 
-        return Nullable.GetUnderlyingType(typeToConvert).ToString().StartsWith("BO4E.ENUM");
+        return underlyingType.ToString().StartsWith("BO4E.ENUM");
     }
 
     /// <summary>
@@ -34,7 +35,7 @@ public class StringNullableEnumConverter : JsonConverterFactory
         JsonSerializerOptions options
     )
     {
-        var converter = (JsonConverter)
+        var converter = (JsonConverter?)
             Activator.CreateInstance(
                 typeof(StringNullableEnumConverter<>).MakeGenericType(typeToConvert),
                 BindingFlags.Instance | BindingFlags.Public,

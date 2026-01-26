@@ -37,7 +37,8 @@ public class BusinessObjectSerializationBinder : ISerializationBinder
     /// <inheritdoc cref="ISerializationBinder.BindToType(string, string)" />
     public Type BindToType(string? assemblyName, string typeName)
     {
-        return BusinessObjectAndCOMTypes.SingleOrDefault(t => t.Name == typeName);
+        return BusinessObjectAndCOMTypes.SingleOrDefault(t => t.Name == typeName)
+            ?? throw new InvalidOperationException($"Type '{typeName}' not found in BO4E types.");
     }
 
     /// <inheritdoc cref="ISerializationBinder.BindToName(Type, out string, out string)" />

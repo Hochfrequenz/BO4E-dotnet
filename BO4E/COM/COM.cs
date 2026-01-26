@@ -173,9 +173,9 @@ public abstract class COM : IUserProperties, IOptionalGuid
         }
         var regularPropertyNames = GetType()
             .GetProperties()
-            .Where(p => p.GetCustomAttribute<JsonPropertyNameAttribute>() != null)
-            .Select(p => p.GetCustomAttribute<JsonPropertyNameAttribute>().Name)
-            .Select(x => x.ToLower())
+            .Select(p => p.GetCustomAttribute<JsonPropertyNameAttribute>()?.Name)
+            .Where(name => name != null)
+            .Select(x => x!.ToLower())
             .ToHashSet();
         var result = UserProperties
             .Keys.Where(k => regularPropertyNames.Contains(k.ToLower()))

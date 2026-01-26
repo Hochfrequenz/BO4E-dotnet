@@ -70,7 +70,7 @@ public class LenientDateTimeConverter : IsoDateTimeConverter
             case DateTime time when objectType == typeof(DateTime):
                 return time;
             default:
-                rawDate = reader.Value.ToString();
+                rawDate = reader.Value!.ToString()!;
                 break;
         }
 

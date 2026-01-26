@@ -1,9 +1,9 @@
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <TargetFramework>net8.0</TargetFramework>
+    <TargetFramework>net9.0</TargetFramework>
     <RootNamespace>TestBO4E_dotnet_Reporting</RootNamespace>
     <IsPackable>false</IsPackable>
-    <LangVersion>12</LangVersion>
+    <LangVersion>13</LangVersion>
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="AwesomeAssertions" Version="9.3.0" />

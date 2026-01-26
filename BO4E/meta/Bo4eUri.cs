@@ -245,7 +245,7 @@ public class Bo4eUri : Uri
         foreach (var keyProp in allKeyProperties)
             if (
                 keyProp.DeclaringType == boType
-                && keyProp.GetCustomAttribute<BoKey>().IgnoreInheritedKeys
+                && keyProp.GetCustomAttribute<BoKey>()?.IgnoreInheritedKeys == true
             )
             {
                 ignoreInheritedFields = true;
