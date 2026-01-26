@@ -1,5 +1,6 @@
 using System;
 using System.Text.Json;
+using AwesomeAssertions;
 using BO4E.BO;
 using BO4E.meta.LenientConverters;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -349,64 +350,40 @@ public class TestPolymorphicDeserialization
         // When boTyp is missing, the STJ converter throws ArgumentException
         // with a descriptive message.
         var json = """{ "messlokationsId": "DE0001234567890123456789012345678" }""";
-        try
-        {
-            JsonSerializer.Deserialize<BusinessObject>(json, StjOptions);
-            Assert.Fail("Expected exception was not thrown");
-        }
-        catch (ArgumentException ex)
-        {
-            // Expected - the converter should throw a descriptive ArgumentException
-            Assert.IsTrue(
-                ex.Message.Contains("boTyp"),
-                $"Exception message should mention 'boTyp': {ex.Message}"
-            );
-        }
+
+        Action action = () => JsonSerializer.Deserialize<BusinessObject>(json, StjOptions);
+
+        action.Should().Throw<ArgumentException>().WithMessage("*boTyp*");
     }
 
     [TestMethod]
     public void TestMissingBoTyp_Newtonsoft_Throws()
     {
         var json = """{ "messlokationsId": "DE0001234567890123456789012345678" }""";
-        try
-        {
-            JsonConvert.DeserializeObject<BusinessObject>(json);
-            Assert.Fail("Expected ArgumentException was not thrown");
-        }
-        catch (ArgumentException)
-        {
-            // Expected
-        }
+
+        Action action = () => JsonConvert.DeserializeObject<BusinessObject>(json);
+
+        action.Should().Throw<ArgumentException>().WithMessage("*boTyp*");
     }
 
     [TestMethod]
     public void TestUnknownBoTyp_SystemTextJson_Throws()
     {
         var json = """{ "boTyp": "UNKNOWN_TYPE" }""";
-        try
-        {
-            JsonSerializer.Deserialize<BusinessObject>(json, StjOptions);
-            Assert.Fail("Expected NotImplementedException was not thrown");
-        }
-        catch (NotImplementedException)
-        {
-            // Expected
-        }
+
+        Action action = () => JsonSerializer.Deserialize<BusinessObject>(json, StjOptions);
+
+        action.Should().Throw<NotImplementedException>().WithMessage("*UNKNOWN_TYPE*");
     }
 
     [TestMethod]
     public void TestUnknownBoTyp_Newtonsoft_Throws()
     {
         var json = """{ "boTyp": "UNKNOWN_TYPE" }""";
-        try
-        {
-            JsonConvert.DeserializeObject<BusinessObject>(json);
-            Assert.Fail("Expected NotImplementedException was not thrown");
-        }
-        catch (NotImplementedException)
-        {
-            // Expected
-        }
+
+        Action action = () => JsonConvert.DeserializeObject<BusinessObject>(json);
+
+        action.Should().Throw<NotImplementedException>().WithMessage("*UNKNOWN_TYPE*");
     }
 
     [TestMethod]
@@ -433,90 +410,60 @@ public class TestPolymorphicDeserialization
     public void TestNullBoTypValue_SystemTextJson_Throws()
     {
         var json = """{ "boTyp": null }""";
-        try
-        {
-            JsonSerializer.Deserialize<BusinessObject>(json, StjOptions);
-            Assert.Fail("Expected exception was not thrown");
-        }
-        catch (ArgumentException)
-        {
-            // Expected - null boTyp should throw
-        }
+
+        Action action = () => JsonSerializer.Deserialize<BusinessObject>(json, StjOptions);
+
+        action.Should().Throw<ArgumentException>();
     }
 
     [TestMethod]
     public void TestNullBoTypValue_Newtonsoft_Throws()
     {
         var json = """{ "boTyp": null }""";
-        try
-        {
-            JsonConvert.DeserializeObject<BusinessObject>(json);
-            Assert.Fail("Expected exception was not thrown");
-        }
-        catch (ArgumentException)
-        {
-            // Expected - null boTyp should throw
-        }
+
+        Action action = () => JsonConvert.DeserializeObject<BusinessObject>(json);
+
+        action.Should().Throw<ArgumentException>();
     }
 
     [TestMethod]
     public void TestEmptyBoTypValue_SystemTextJson_Throws()
     {
         var json = """{ "boTyp": "" }""";
-        try
-        {
-            JsonSerializer.Deserialize<BusinessObject>(json, StjOptions);
-            Assert.Fail("Expected exception was not thrown");
-        }
-        catch (ArgumentException)
-        {
-            // Expected - empty boTyp should throw
-        }
+
+        Action action = () => JsonSerializer.Deserialize<BusinessObject>(json, StjOptions);
+
+        action.Should().Throw<ArgumentException>();
     }
 
     [TestMethod]
     public void TestEmptyBoTypValue_Newtonsoft_Throws()
     {
         var json = """{ "boTyp": "" }""";
-        try
-        {
-            JsonConvert.DeserializeObject<BusinessObject>(json);
-            Assert.Fail("Expected exception was not thrown");
-        }
-        catch (ArgumentException)
-        {
-            // Expected - empty boTyp should throw
-        }
+
+        Action action = () => JsonConvert.DeserializeObject<BusinessObject>(json);
+
+        action.Should().Throw<ArgumentException>();
     }
 
     [TestMethod]
     public void TestWhitespaceBoTypValue_SystemTextJson_Throws()
     {
         var json = """{ "boTyp": "   " }""";
-        try
-        {
-            JsonSerializer.Deserialize<BusinessObject>(json, StjOptions);
-            Assert.Fail("Expected exception was not thrown");
-        }
-        catch (ArgumentException)
-        {
-            // Expected - whitespace-only boTyp should throw
-        }
+
+        Action action = () => JsonSerializer.Deserialize<BusinessObject>(json, StjOptions);
+
+        action.Should().Throw<ArgumentException>();
     }
 
     [TestMethod]
     public void TestWhitespaceBoTypValue_Newtonsoft_Throws()
     {
         var json = """{ "boTyp": "   " }""";
-        try
-        {
-            JsonConvert.DeserializeObject<BusinessObject>(json);
-            Assert.Fail("Expected exception was not thrown");
-        }
-        catch (ArgumentException)
-        {
-            // Expected - whitespace-only boTyp should throw
-        }
+
+        Action action = () => JsonConvert.DeserializeObject<BusinessObject>(json);
+
+        action.Should().Throw<ArgumentException>();
     }
 
     #endregion
