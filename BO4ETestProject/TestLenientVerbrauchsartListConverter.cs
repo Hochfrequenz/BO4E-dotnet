@@ -768,6 +768,38 @@ public class TestLenientVerbrauchsartListConverter
             .And.BeEmpty();
     }
 
+    /// <summary>
+    /// Test that when Verbrauchsarten is an object (not an array), Newtonsoft deserialization still works.
+    /// This is the Newtonsoft equivalent of Test_SystemTextJson_ObjectInsteadOfArray_IsHandled.
+    /// </summary>
+    [TestMethod]
+    public void Test_Newtonsoft_ObjectInsteadOfArray_IsHandled()
+    {
+        // Arrange: Verbrauchsarten is an object instead of an array
+        // This is malformed data that the lenient converter should handle
+        var json =
+            @"{""boTyp"":""MARKTLOKATION"",""marktlokationsId"":""12345678901"",""sparte"":""STROM"",""zaehlwerkeBeteiligteMarktrolle"":[{""zaehlwerkId"":""ZW001"",""Verbrauchsarten"":{""invalid"":""object""},""bezeichnung"":""Test""}]}";
+
+        var settings = new JsonSerializerSettings
+        {
+            Converters = { new Newtonsoft.Json.Converters.StringEnumConverter() },
+        };
+
+        // Act & Assert: Should not throw deserialization error
+        var action = () => JsonConvert.DeserializeObject<Marktlokation>(json, settings);
+
+        action.Should().NotThrow();
+        var result = action();
+        result!.ZaehlwerkeBeteiligteMarktrolle![0].ZaehlwerkId.Should().Be("ZW001");
+        result!.ZaehlwerkeBeteiligteMarktrolle![0].Bezeichnung.Should().Be("Test");
+        // Verbrauchsarten should be empty since the object couldn't be parsed as enum values
+        result!
+            .ZaehlwerkeBeteiligteMarktrolle![0]
+            .Verbrauchsarten.Should()
+            .NotBeNull()
+            .And.BeEmpty();
+    }
+
     [TestMethod]
     public void Test_SystemTextJson_ObjectsInArray_AreSkipped()
     {
