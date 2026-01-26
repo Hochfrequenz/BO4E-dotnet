@@ -415,6 +415,9 @@ public static class UserPropertiesExtensions
     /// </summary>
     private static readonly Comparison<string> PathComparer = (a, b) =>
     {
+        // Handle equality first to satisfy comparer contract
+        if (a == "(root)" && b == "(root)")
+            return 0;
         if (a == "(root)")
             return -1;
         if (b == "(root)")
@@ -598,7 +601,7 @@ public static class UserPropertiesExtensions
     ///     Gets the element type if the given type is a collection of IUserProperties.
     ///     Returns null if not a collection or elements don't implement IUserProperties.
     /// </summary>
-    private static Type GetUserPropertiesElementType(Type type)
+    private static Type? GetUserPropertiesElementType(Type type)
     {
         // Skip string (implements IEnumerable<char>)
         if (type == typeof(string))
