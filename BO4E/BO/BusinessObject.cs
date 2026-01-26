@@ -643,18 +643,9 @@ public abstract class BusinessObject : IUserProperties, IOptionalGuid
     /// <remarks>
     /// <para>
     /// This custom converter is required instead of [JsonPolymorphic] / [JsonDerivedType] attributes
-    /// for backward compatibility. The built-in STJ polymorphic handling has several limitations:
+    /// for full backward compatibility. The built-in STJ polymorphic handling has several limitations:
     /// </para>
     /// <list type="number">
-    ///   <item>
-    ///     <description>
-    ///       <b>Discriminator position:</b> STJ requires the discriminator to be the FIRST property
-    ///       in the JSON object. Our JSON may have "boTyp" anywhere. While .NET 9+ adds
-    ///       <c>AllowOutOfOrderMetadataProperties</c>, it comes with memory warnings for large payloads
-    ///       and this library targets netstandard2.0/2.1.
-    ///       See: https://github.com/dotnet/runtime/issues/72604
-    ///     </description>
-    ///   </item>
     ///   <item>
     ///     <description>
     ///       <b>Discriminator value case-sensitivity:</b> STJ's polymorphic handling is CASE-SENSITIVE
@@ -666,17 +657,16 @@ public abstract class BusinessObject : IUserProperties, IOptionalGuid
     ///     <description>
     ///       <b>Discriminator property name case-sensitivity:</b> Even with <c>PropertyNameCaseInsensitive = true</c>,
     ///       STJ does not apply case-insensitivity to the discriminator property name. This is a known bug.
-    ///       We support both "boTyp" and "BoTyp" as the discriminator property name.
+    ///       We support case-insensitive lookup for the "boTyp" property name.
     ///       See: https://github.com/dotnet/runtime/issues/118786
     ///     </description>
     ///   </item>
-    ///   <item>
-    ///     <description>
-    ///       <b>Target framework:</b> [JsonPolymorphic] and [JsonDerivedType] attributes require .NET 7+,
-    ///       but this library targets netstandard2.0/2.1 for broad compatibility.
-    ///     </description>
-    ///   </item>
     /// </list>
+    /// <para>
+    /// Note: While .NET 9+ adds <c>AllowOutOfOrderMetadataProperties</c> to allow the discriminator at any position,
+    /// the case-sensitivity issues above still require a custom converter for full compatibility.
+    /// See: https://github.com/dotnet/runtime/issues/72604
+    /// </para>
     /// </remarks>
     internal class BusinessObjectSystemTextJsonBaseConverter
         : System.Text.Json.Serialization.JsonConverter<BusinessObject>
@@ -708,10 +698,11 @@ public abstract class BusinessObject : IUserProperties, IOptionalGuid
             // Using 'using' ensures proper disposal and prevents memory leaks.
             using var jdoc = JsonDocument.ParseValue(ref reader);
 
-            // Try both "BoTyp" (PascalCase) and "boTyp" (camelCase) property names.
+            // Try common casings first for performance, then fall back to case-insensitive search.
             if (
-                !jdoc.RootElement.TryGetProperty("BoTyp", out var boTypeProp)
-                && !jdoc.RootElement.TryGetProperty("boTyp", out boTypeProp)
+                !jdoc.RootElement.TryGetProperty("boTyp", out var boTypeProp)
+                && !jdoc.RootElement.TryGetProperty("BoTyp", out boTypeProp)
+                && !TryGetPropertyCaseInsensitive(jdoc.RootElement, "boTyp", out boTypeProp)
             )
             {
                 throw new ArgumentException(
@@ -763,14 +754,8 @@ public abstract class BusinessObject : IUserProperties, IOptionalGuid
                 }
             }
 
-            // Deserialize using the concrete type.
-            // Note: We use GetRawText() because JsonElement.Deserialize(Type, options)
-            // is not available in netstandard2.0 even with the System.Text.Json package.
-            return System.Text.Json.JsonSerializer.Deserialize(
-                    jdoc.RootElement.GetRawText(),
-                    boType,
-                    options
-                ) as BusinessObject;
+            // Deserialize using the concrete type directly from the JsonElement.
+            return jdoc.RootElement.Deserialize(boType, options) as BusinessObject;
         }
 
         public override void Write(
@@ -793,6 +778,29 @@ public abstract class BusinessObject : IUserProperties, IOptionalGuid
                 boType ?? value.GetType(),
                 options
             );
+        }
+
+        /// <summary>
+        /// Tries to get a property from a JsonElement using case-insensitive comparison.
+        /// This is a fallback for when the common casings ("boTyp", "BoTyp") don't match.
+        /// </summary>
+        private static bool TryGetPropertyCaseInsensitive(
+            JsonElement element,
+            string propertyName,
+            out JsonElement value
+        )
+        {
+            foreach (var property in element.EnumerateObject())
+            {
+                if (string.Equals(property.Name, propertyName, StringComparison.OrdinalIgnoreCase))
+                {
+                    value = property.Value;
+                    return true;
+                }
+            }
+
+            value = default;
+            return false;
         }
     }
 #nullable restore warnings

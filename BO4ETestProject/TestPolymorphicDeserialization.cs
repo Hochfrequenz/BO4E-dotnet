@@ -201,6 +201,24 @@ public class TestPolymorphicDeserialization
     }
 
     [TestMethod]
+    [DataRow("BOTYP", DisplayName = "All uppercase property name")]
+    [DataRow("botyp", DisplayName = "All lowercase property name")]
+    [DataRow("bOtYp", DisplayName = "Mixed case property name")]
+    public void TestBoTypPropertyCaseInsensitive_SystemTextJson(string propertyName)
+    {
+        // STJ converter falls back to case-insensitive property lookup
+        var json = $$"""
+            {
+                "{{propertyName}}": "ENERGIEMENGE"
+            }
+            """;
+
+        var result = JsonSerializer.Deserialize<BusinessObject>(json, StjOptions);
+
+        result.Should().NotBeNull().And.BeOfType<Energiemenge>();
+    }
+
+    [TestMethod]
     public void TestBoTypPropertyCamelCase_Newtonsoft()
     {
         // Newtonsoft converter uses case-insensitive property lookup
