@@ -1,4 +1,6 @@
 using System;
+using System.Collections.Concurrent;
+using System.Collections.Frozen;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
@@ -471,6 +473,23 @@ public abstract class BusinessObject : IUserProperties, IOptionalGuid
     }
 
     /// <summary>
+    /// Cached dictionary for O(1) BusinessObject type lookups by name (case-insensitive).
+    /// Uses FrozenDictionary for optimal read performance on this immutable collection.
+    /// </summary>
+    private static readonly FrozenDictionary<string, Type> BoTypesByName =
+        BusinessObjectSerializationBinder
+            .BusinessObjectAndCOMTypes.Where(t => typeof(BusinessObject).IsAssignableFrom(t))
+            .ToFrozenDictionary(t => t.Name, t => t, StringComparer.OrdinalIgnoreCase);
+
+    /// <summary>
+    /// Cache for external type lookups (types not in BO4E assembly).
+    /// Thread-safe for concurrent access during deserialization.
+    /// </summary>
+    private static readonly ConcurrentDictionary<string, Type?> ExternalTypeCache = new(
+        StringComparer.OrdinalIgnoreCase
+    );
+
+    /// <summary>
     ///     Returns a Type for given Business Object name. This method is useful to avoid stringified code.
     /// </summary>
     /// <param name="businessObjectName">name of a business object; is lenient regarding upper/lower case</param>
@@ -478,14 +497,42 @@ public abstract class BusinessObject : IUserProperties, IOptionalGuid
     /// <exception cref="ArgumentNullException">if argument is null</exception>
     private static Type? GetTypeForBoName(string businessObjectName)
     {
-        if (businessObjectName == null)
-        {
-            throw new ArgumentNullException(nameof(businessObjectName));
-        }
+        ArgumentNullException.ThrowIfNull(businessObjectName);
+        return BoTypesByName.GetValueOrDefault(businessObjectName);
+    }
 
-        return BusinessObjectSerializationBinder.BusinessObjectAndCOMTypes.FirstOrDefault(t =>
-            typeof(BusinessObject).IsAssignableFrom(t)
-            && string.Equals(t.Name, businessObjectName, StringComparison.OrdinalIgnoreCase)
+    /// <summary>
+    /// Scans all loaded assemblies for a type with the given name.
+    /// Results are cached to avoid repeated assembly scanning.
+    /// </summary>
+    private static Type? ScanAssembliesForType(string typeName)
+    {
+        return ExternalTypeCache.GetOrAdd(
+            typeName,
+            static name =>
+            {
+                foreach (var assembly in AppDomain.CurrentDomain.GetAssemblies())
+                {
+                    try
+                    {
+                        var type = assembly
+                            .GetTypes()
+                            .FirstOrDefault(x =>
+                                string.Equals(x.Name, name, StringComparison.OrdinalIgnoreCase)
+                            );
+                        if (type != null)
+                        {
+                            return type;
+                        }
+                    }
+                    catch (ReflectionTypeLoadException)
+                    {
+                        continue;
+                    }
+                }
+
+                return null;
+            }
         );
     }
 
@@ -525,6 +572,15 @@ public abstract class BusinessObject : IUserProperties, IOptionalGuid
             return objectType == typeof(BusinessObject);
         }
 
+        /// <summary>
+        /// Thread-safe serializer settings for deserializing concrete types.
+        /// Uses BaseSpecifiedConcreteClassConverter to avoid infinite recursion.
+        /// </summary>
+        private static readonly JsonSerializerSettings ConcreteTypeSettings = new()
+        {
+            ContractResolver = new BaseSpecifiedConcreteClassConverter(),
+        };
+
         public override object? ReadJson(
             JsonReader reader,
             Type objectType,
@@ -537,15 +593,18 @@ public abstract class BusinessObject : IUserProperties, IOptionalGuid
                 return null;
             }
 
+            var jo = JObject.Load(reader);
+
             if (!objectType.IsAbstract)
             {
                 // This converter only handles the abstract BusinessObject base class.
-                // Concrete types should be handled by the default serializer.
-                serializer.ContractResolver.ResolveContract(objectType).Converter = null;
-                return serializer.Deserialize(JObject.Load(reader).CreateReader(), objectType);
+                // Use thread-safe settings to avoid mutating shared contract resolver.
+                return jo.ToObject(
+                    objectType,
+                    Newtonsoft.Json.JsonSerializer.Create(ConcreteTypeSettings)
+                );
             }
 
-            var jo = JObject.Load(reader);
             Type? boType;
 
             // Check for TypeNameHandling with $type property first
@@ -569,7 +628,9 @@ public abstract class BusinessObject : IUserProperties, IOptionalGuid
                 var boTypeString = boTypToken.Value<string>();
                 if (string.IsNullOrWhiteSpace(boTypeString))
                 {
-                    throw new ArgumentException("The \"boTyp\" property cannot be null or empty.");
+                    throw new Newtonsoft.Json.JsonSerializationException(
+                        "The \"boTyp\" property cannot be null or empty."
+                    );
                 }
 
                 boType = GetTypeForBoName(boTypeString);
@@ -577,35 +638,12 @@ public abstract class BusinessObject : IUserProperties, IOptionalGuid
                 if (boType == null)
                 {
                     // Fallback: search all loaded assemblies for a type with matching name.
-                    // This supports custom BusinessObject types defined in other assemblies.
-                    foreach (var assembly in AppDomain.CurrentDomain.GetAssemblies())
-                    {
-                        try
-                        {
-                            boType = assembly
-                                .GetTypes()
-                                .FirstOrDefault(x =>
-                                    string.Equals(
-                                        x.Name,
-                                        boTypeString,
-                                        StringComparison.OrdinalIgnoreCase
-                                    )
-                                );
-                        }
-                        catch (ReflectionTypeLoadException)
-                        {
-                            continue;
-                        }
-
-                        if (boType != null)
-                        {
-                            break;
-                        }
-                    }
+                    // Results are cached to avoid repeated assembly scanning.
+                    boType = ScanAssembliesForType(boTypeString);
 
                     if (boType == null)
                     {
-                        throw new NotImplementedException(
+                        throw new Newtonsoft.Json.JsonSerializationException(
                             $"The type '{boTypeString}' does not exist in the BO4E standard."
                         );
                     }
@@ -613,14 +651,14 @@ public abstract class BusinessObject : IUserProperties, IOptionalGuid
             }
             else
             {
-                throw new ArgumentException(
+                throw new Newtonsoft.Json.JsonSerializationException(
                     "When deserializing into an abstract BusinessObject, the JSON must contain a \"boTyp\" property to identify the concrete type."
                 );
             }
 
             if (boType == null)
             {
-                throw new NotImplementedException(
+                throw new Newtonsoft.Json.JsonSerializationException(
                     "Could not determine the concrete BusinessObject type from the JSON."
                 );
             }
@@ -698,6 +736,14 @@ public abstract class BusinessObject : IUserProperties, IOptionalGuid
             // Using 'using' ensures proper disposal and prevents memory leaks.
             using var jdoc = JsonDocument.ParseValue(ref reader);
 
+            // Validate that root element is a JSON object
+            if (jdoc.RootElement.ValueKind != JsonValueKind.Object)
+            {
+                throw new System.Text.Json.JsonException(
+                    $"Expected JSON object but found {jdoc.RootElement.ValueKind}"
+                );
+            }
+
             // Try common casings first for performance, then fall back to case-insensitive search.
             if (
                 !jdoc.RootElement.TryGetProperty("boTyp", out var boTypeProp)
@@ -705,7 +751,7 @@ public abstract class BusinessObject : IUserProperties, IOptionalGuid
                 && !TryGetPropertyCaseInsensitive(jdoc.RootElement, "boTyp", out boTypeProp)
             )
             {
-                throw new ArgumentException(
+                throw new System.Text.Json.JsonException(
                     "When deserializing into an abstract BusinessObject, the JSON must contain a \"boTyp\" property to identify the concrete type."
                 );
             }
@@ -713,42 +759,21 @@ public abstract class BusinessObject : IUserProperties, IOptionalGuid
             var boTypeString = boTypeProp.GetString();
             if (string.IsNullOrWhiteSpace(boTypeString))
             {
-                throw new ArgumentException("The \"boTyp\" property cannot be null or empty.");
+                throw new System.Text.Json.JsonException(
+                    "The \"boTyp\" property cannot be null or empty."
+                );
             }
 
             var boType = GetTypeForBoName(boTypeString);
             if (boType == null)
             {
                 // Fallback: search all loaded assemblies for a type with matching name.
-                // This supports custom BusinessObject types defined in other assemblies.
-                foreach (var assembly in AppDomain.CurrentDomain.GetAssemblies())
-                {
-                    try
-                    {
-                        boType = assembly
-                            .GetTypes()
-                            .FirstOrDefault(x =>
-                                string.Equals(
-                                    x.Name,
-                                    boTypeString,
-                                    StringComparison.OrdinalIgnoreCase
-                                )
-                            );
-                    }
-                    catch (ReflectionTypeLoadException)
-                    {
-                        continue;
-                    }
-
-                    if (boType != null)
-                    {
-                        break;
-                    }
-                }
+                // Results are cached to avoid repeated assembly scanning.
+                boType = ScanAssembliesForType(boTypeString);
 
                 if (boType == null)
                 {
-                    throw new NotImplementedException(
+                    throw new System.Text.Json.JsonException(
                         $"The type '{boTypeString}' does not exist in the BO4E standard."
                     );
                 }

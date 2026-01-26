@@ -351,13 +351,13 @@ public class TestPolymorphicDeserialization
     [TestMethod]
     public void TestMissingBoTyp_SystemTextJson_Throws()
     {
-        // When boTyp is missing, the STJ converter throws ArgumentException
+        // When boTyp is missing, the STJ converter throws JsonException
         // with a descriptive message.
         var json = """{ "messlokationsId": "DE0001234567890123456789012345678" }""";
 
         Action action = () => JsonSerializer.Deserialize<BusinessObject>(json, StjOptions);
 
-        action.Should().Throw<ArgumentException>().WithMessage("*boTyp*");
+        action.Should().Throw<System.Text.Json.JsonException>().WithMessage("*boTyp*");
     }
 
     [TestMethod]
@@ -367,7 +367,7 @@ public class TestPolymorphicDeserialization
 
         Action action = () => JsonConvert.DeserializeObject<BusinessObject>(json);
 
-        action.Should().Throw<ArgumentException>().WithMessage("*boTyp*");
+        action.Should().Throw<Newtonsoft.Json.JsonSerializationException>().WithMessage("*boTyp*");
     }
 
     [TestMethod]
@@ -377,7 +377,7 @@ public class TestPolymorphicDeserialization
 
         Action action = () => JsonSerializer.Deserialize<BusinessObject>(json, StjOptions);
 
-        action.Should().Throw<NotImplementedException>().WithMessage("*UNKNOWN_TYPE*");
+        action.Should().Throw<System.Text.Json.JsonException>().WithMessage("*UNKNOWN_TYPE*");
     }
 
     [TestMethod]
@@ -387,7 +387,10 @@ public class TestPolymorphicDeserialization
 
         Action action = () => JsonConvert.DeserializeObject<BusinessObject>(json);
 
-        action.Should().Throw<NotImplementedException>().WithMessage("*UNKNOWN_TYPE*");
+        action
+            .Should()
+            .Throw<Newtonsoft.Json.JsonSerializationException>()
+            .WithMessage("*UNKNOWN_TYPE*");
     }
 
     [TestMethod]
@@ -417,7 +420,7 @@ public class TestPolymorphicDeserialization
 
         Action action = () => JsonSerializer.Deserialize<BusinessObject>(json, StjOptions);
 
-        action.Should().Throw<ArgumentException>();
+        action.Should().Throw<System.Text.Json.JsonException>();
     }
 
     [TestMethod]
@@ -427,7 +430,7 @@ public class TestPolymorphicDeserialization
 
         Action action = () => JsonConvert.DeserializeObject<BusinessObject>(json);
 
-        action.Should().Throw<ArgumentException>();
+        action.Should().Throw<Newtonsoft.Json.JsonSerializationException>();
     }
 
     [TestMethod]
@@ -437,7 +440,7 @@ public class TestPolymorphicDeserialization
 
         Action action = () => JsonSerializer.Deserialize<BusinessObject>(json, StjOptions);
 
-        action.Should().Throw<ArgumentException>();
+        action.Should().Throw<System.Text.Json.JsonException>();
     }
 
     [TestMethod]
@@ -447,7 +450,7 @@ public class TestPolymorphicDeserialization
 
         Action action = () => JsonConvert.DeserializeObject<BusinessObject>(json);
 
-        action.Should().Throw<ArgumentException>();
+        action.Should().Throw<Newtonsoft.Json.JsonSerializationException>();
     }
 
     [TestMethod]
@@ -457,7 +460,7 @@ public class TestPolymorphicDeserialization
 
         Action action = () => JsonSerializer.Deserialize<BusinessObject>(json, StjOptions);
 
-        action.Should().Throw<ArgumentException>();
+        action.Should().Throw<System.Text.Json.JsonException>();
     }
 
     [TestMethod]
@@ -467,7 +470,7 @@ public class TestPolymorphicDeserialization
 
         Action action = () => JsonConvert.DeserializeObject<BusinessObject>(json);
 
-        action.Should().Throw<ArgumentException>();
+        action.Should().Throw<Newtonsoft.Json.JsonSerializationException>();
     }
 
     #endregion
