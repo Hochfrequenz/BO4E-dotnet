@@ -8,7 +8,7 @@ namespace BO4E.meta.LenientConverters;
 
 /// <summary>
 /// A lenient JSON converter for <see cref="List{T}"/> of <see cref="Verbrauchsart"/> that handles
-/// malformed historic data where values may be nested in arrays.
+/// malformed historic data where values may be nested in arrays or have unexpected types.
 /// </summary>
 /// <remarks>
 /// This converter was created to handle historic data stored in databases when the Verbrauchsarten
@@ -18,8 +18,11 @@ namespace BO4E.meta.LenientConverters;
 /// <item><description>{"Verbrauchsarten": [[0]]} - nested list with integer value</description></item>
 /// <item><description>{"Verbrauchsarten": [[], 0]} - mixed nested list and value</description></item>
 /// <item><description>{"Verbrauchsarten": [["KL"]]} - nested list with string value</description></item>
+/// <item><description>{"Verbrauchsarten": {"invalid": "object"}} - object instead of array</description></item>
 /// </list>
 /// The converter extracts valid Verbrauchsart values from any nesting level and ignores invalid entries.
+/// When the input is an unexpected type (e.g., an object), the converter returns an empty list
+/// and properly consumes the value to avoid "read too much or not enough" errors.
 /// Note: Enum.TryParse is used which matches by member name (e.g., "KL"), which happens to match
 /// the [EnumMember] attribute values in this case.
 /// </remarks>
@@ -50,6 +53,16 @@ public class LenientSystemTextVerbrauchsartListConverter : JsonConverter<List<Ve
             {
                 return new List<Verbrauchsart> { singleValue.Value };
             }
+
+            // For objects or other unexpected types, we must skip the entire value
+            // to leave the reader in the correct position (at the last token of the value).
+            // Simple values (string, number, bool, null) are already at the correct position,
+            // but objects and arrays need to be fully consumed.
+            if (reader.TokenType == JsonTokenType.StartObject)
+            {
+                SkipObject(ref reader);
+            }
+
             return new List<Verbrauchsart>();
         }
 

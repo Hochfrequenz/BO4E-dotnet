@@ -8,7 +8,7 @@ namespace BO4E.meta.LenientConverters;
 
 /// <summary>
 /// A lenient JSON converter for <see cref="List{T}"/> of <see cref="Verbrauchsart"/> that handles
-/// malformed historic data where values may be nested in arrays.
+/// malformed historic data where values may be nested in arrays or have unexpected types.
 /// </summary>
 /// <remarks>
 /// This converter was created to handle historic data stored in databases when the Verbrauchsarten
@@ -18,8 +18,11 @@ namespace BO4E.meta.LenientConverters;
 /// <item><description>{"Verbrauchsarten": [[0]]} - nested list with integer value</description></item>
 /// <item><description>{"Verbrauchsarten": [[], 0]} - mixed nested list and value</description></item>
 /// <item><description>{"Verbrauchsarten": [["KL"]]} - nested list with string value</description></item>
+/// <item><description>{"Verbrauchsarten": {"invalid": "object"}} - object instead of array</description></item>
 /// </list>
 /// The converter extracts valid Verbrauchsart values from any nesting level and ignores invalid entries.
+/// When the input is an unexpected type (e.g., an object), the converter returns an empty list
+/// and properly consumes the value to avoid deserialization errors.
 /// Note: Enum.TryParse is used which matches by member name (e.g., "KL"), which happens to match
 /// the [EnumMember] attribute values in this case.
 /// </remarks>
@@ -65,6 +68,12 @@ public class LenientNewtonsoftVerbrauchsartListConverter : JsonConverter<List<Ve
             if (singleValue.HasValue)
             {
                 result.Add(singleValue.Value);
+            }
+            else if (reader.TokenType == JsonToken.StartObject)
+            {
+                // For objects or other unexpected types, we must skip the entire value
+                // to leave the reader in the correct position (past the value).
+                reader.Skip();
             }
         }
 
