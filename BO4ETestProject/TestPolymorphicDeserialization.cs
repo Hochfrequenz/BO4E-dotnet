@@ -44,9 +44,8 @@ public class TestPolymorphicDeserialization
 
         var result = JsonSerializer.Deserialize<BusinessObject>(json, StjOptions);
 
-        Assert.IsNotNull(result);
-        Assert.IsInstanceOfType(result, typeof(Marktlokation));
-        Assert.AreEqual("12345678901", ((Marktlokation)result).MarktlokationsId);
+        result.Should().NotBeNull().And.BeOfType<Marktlokation>();
+        ((Marktlokation)result!).MarktlokationsId.Should().Be("12345678901");
     }
 
     [TestMethod]
@@ -65,9 +64,8 @@ public class TestPolymorphicDeserialization
 
         var result = JsonConvert.DeserializeObject<BusinessObject>(json);
 
-        Assert.IsNotNull(result);
-        Assert.IsInstanceOfType(result, typeof(Marktlokation));
-        Assert.AreEqual("12345678901", ((Marktlokation)result).MarktlokationsId);
+        result.Should().NotBeNull().And.BeOfType<Marktlokation>();
+        ((Marktlokation)result!).MarktlokationsId.Should().Be("12345678901");
     }
 
     #endregion
@@ -86,8 +84,7 @@ public class TestPolymorphicDeserialization
 
         var result = JsonSerializer.Deserialize<BusinessObject>(json, StjOptions);
 
-        Assert.IsNotNull(result);
-        Assert.IsInstanceOfType(result, typeof(Messlokation));
+        result.Should().NotBeNull().And.BeOfType<Messlokation>();
     }
 
     [TestMethod]
@@ -103,8 +100,7 @@ public class TestPolymorphicDeserialization
 
         var result = JsonSerializer.Deserialize<BusinessObject>(json, StjOptions);
 
-        Assert.IsNotNull(result);
-        Assert.IsInstanceOfType(result, typeof(Messlokation));
+        result.Should().NotBeNull().And.BeOfType<Messlokation>();
     }
 
     [TestMethod]
@@ -120,8 +116,7 @@ public class TestPolymorphicDeserialization
 
         var result = JsonSerializer.Deserialize<BusinessObject>(json, StjOptions);
 
-        Assert.IsNotNull(result);
-        Assert.IsInstanceOfType(result, typeof(Messlokation));
+        result.Should().NotBeNull().And.BeOfType<Messlokation>();
     }
 
     [TestMethod]
@@ -136,8 +131,7 @@ public class TestPolymorphicDeserialization
 
         var result = JsonConvert.DeserializeObject<BusinessObject>(json);
 
-        Assert.IsNotNull(result);
-        Assert.IsInstanceOfType(result, typeof(Messlokation));
+        result.Should().NotBeNull().And.BeOfType<Messlokation>();
     }
 
     [TestMethod]
@@ -153,8 +147,7 @@ public class TestPolymorphicDeserialization
 
         var result = JsonConvert.DeserializeObject<BusinessObject>(json);
 
-        Assert.IsNotNull(result);
-        Assert.IsInstanceOfType(result, typeof(Messlokation));
+        result.Should().NotBeNull().And.BeOfType<Messlokation>();
     }
 
     [TestMethod]
@@ -170,8 +163,7 @@ public class TestPolymorphicDeserialization
 
         var result = JsonConvert.DeserializeObject<BusinessObject>(json);
 
-        Assert.IsNotNull(result);
-        Assert.IsInstanceOfType(result, typeof(Messlokation));
+        result.Should().NotBeNull().And.BeOfType<Messlokation>();
     }
 
     #endregion
@@ -190,8 +182,7 @@ public class TestPolymorphicDeserialization
 
         var result = JsonSerializer.Deserialize<BusinessObject>(json, StjOptions);
 
-        Assert.IsNotNull(result);
-        Assert.IsInstanceOfType(result, typeof(Energiemenge));
+        result.Should().NotBeNull().And.BeOfType<Energiemenge>();
     }
 
     [TestMethod]
@@ -206,8 +197,7 @@ public class TestPolymorphicDeserialization
 
         var result = JsonSerializer.Deserialize<BusinessObject>(json, StjOptions);
 
-        Assert.IsNotNull(result);
-        Assert.IsInstanceOfType(result, typeof(Energiemenge));
+        result.Should().NotBeNull().And.BeOfType<Energiemenge>();
     }
 
     [TestMethod]
@@ -222,8 +212,7 @@ public class TestPolymorphicDeserialization
 
         var result = JsonConvert.DeserializeObject<BusinessObject>(json);
 
-        Assert.IsNotNull(result);
-        Assert.IsInstanceOfType(result, typeof(Energiemenge));
+        result.Should().NotBeNull().And.BeOfType<Energiemenge>();
     }
 
     [TestMethod]
@@ -238,8 +227,7 @@ public class TestPolymorphicDeserialization
 
         var result = JsonConvert.DeserializeObject<BusinessObject>(json);
 
-        Assert.IsNotNull(result);
-        Assert.IsInstanceOfType(result, typeof(Energiemenge));
+        result.Should().NotBeNull().And.BeOfType<Energiemenge>();
     }
 
     #endregion
@@ -288,9 +276,8 @@ public class TestPolymorphicDeserialization
 
         var result = JsonSerializer.Deserialize<BusinessObject>(json, StjOptions);
 
-        Assert.IsNotNull(result);
-        Assert.IsInstanceOfType(result, expectedType);
-        Assert.AreEqual(boTyp, result.BoTyp);
+        result.Should().NotBeNull().And.BeOfType(expectedType);
+        result!.BoTyp.Should().Be(boTyp);
     }
 
     [TestMethod]
@@ -335,9 +322,8 @@ public class TestPolymorphicDeserialization
 
         var result = JsonConvert.DeserializeObject<BusinessObject>(json);
 
-        Assert.IsNotNull(result);
-        Assert.IsInstanceOfType(result, expectedType);
-        Assert.AreEqual(boTyp, result.BoTyp);
+        result.Should().NotBeNull().And.BeOfType(expectedType);
+        result!.BoTyp.Should().Be(boTyp);
     }
 
     #endregion
@@ -393,7 +379,7 @@ public class TestPolymorphicDeserialization
 
         var result = JsonSerializer.Deserialize<BusinessObject>(json, StjOptions);
 
-        Assert.IsNull(result);
+        result.Should().BeNull();
     }
 
     [TestMethod]
@@ -403,7 +389,7 @@ public class TestPolymorphicDeserialization
 
         var result = JsonConvert.DeserializeObject<BusinessObject>(json);
 
-        Assert.IsNull(result);
+        result.Should().BeNull();
     }
 
     [TestMethod]
@@ -477,8 +463,8 @@ public class TestPolymorphicDeserialization
 
         var json = JsonSerializer.Serialize<BusinessObject>(malo, StjOptions);
 
-        Assert.IsTrue(json.Contains("\"boTyp\":\"MARKTLOKATION\""));
-        Assert.IsTrue(json.Contains("\"marktlokationsId\":\"12345678901\""));
+        json.Should().Contain("\"boTyp\":\"MARKTLOKATION\"");
+        json.Should().Contain("\"marktlokationsId\":\"12345678901\"");
     }
 
     [TestMethod]
@@ -488,8 +474,8 @@ public class TestPolymorphicDeserialization
 
         var json = JsonConvert.SerializeObject(malo);
 
-        Assert.IsTrue(json.Contains("\"boTyp\":\"MARKTLOKATION\""));
-        Assert.IsTrue(json.Contains("\"marktlokationsId\":\"12345678901\""));
+        json.Should().Contain("\"boTyp\":\"MARKTLOKATION\"");
+        json.Should().Contain("\"marktlokationsId\":\"12345678901\"");
     }
 
     [TestMethod]
@@ -504,11 +490,10 @@ public class TestPolymorphicDeserialization
         var json = JsonSerializer.Serialize<BusinessObject>(original, StjOptions);
         var deserialized = JsonSerializer.Deserialize<BusinessObject>(json, StjOptions);
 
-        Assert.IsNotNull(deserialized);
-        Assert.IsInstanceOfType(deserialized, typeof(Messlokation));
-        var result = (Messlokation)deserialized;
-        Assert.AreEqual(original.MesslokationsId, result.MesslokationsId);
-        Assert.AreEqual(original.Sparte, result.Sparte);
+        deserialized.Should().NotBeNull().And.BeOfType<Messlokation>();
+        var result = (Messlokation)deserialized!;
+        result.MesslokationsId.Should().Be(original.MesslokationsId);
+        result.Sparte.Should().Be(original.Sparte);
     }
 
     [TestMethod]
@@ -523,11 +508,10 @@ public class TestPolymorphicDeserialization
         var json = JsonConvert.SerializeObject(original);
         var deserialized = JsonConvert.DeserializeObject<BusinessObject>(json);
 
-        Assert.IsNotNull(deserialized);
-        Assert.IsInstanceOfType(deserialized, typeof(Messlokation));
-        var result = (Messlokation)deserialized;
-        Assert.AreEqual(original.MesslokationsId, result.MesslokationsId);
-        Assert.AreEqual(original.Sparte, result.Sparte);
+        deserialized.Should().NotBeNull().And.BeOfType<Messlokation>();
+        var result = (Messlokation)deserialized!;
+        result.MesslokationsId.Should().Be(original.MesslokationsId);
+        result.Sparte.Should().Be(original.Sparte);
     }
 
     #endregion
@@ -547,11 +531,10 @@ public class TestPolymorphicDeserialization
 
         var result = JsonSerializer.Deserialize<BusinessObject[]>(json, StjOptions);
 
-        Assert.IsNotNull(result);
-        Assert.AreEqual(3, result.Length);
-        Assert.IsInstanceOfType(result[0], typeof(Marktlokation));
-        Assert.IsInstanceOfType(result[1], typeof(Messlokation));
-        Assert.IsInstanceOfType(result[2], typeof(Energiemenge));
+        result.Should().NotBeNull().And.HaveCount(3);
+        result![0].Should().BeOfType<Marktlokation>();
+        result[1].Should().BeOfType<Messlokation>();
+        result[2].Should().BeOfType<Energiemenge>();
     }
 
     [TestMethod]
@@ -567,11 +550,10 @@ public class TestPolymorphicDeserialization
 
         var result = JsonConvert.DeserializeObject<BusinessObject[]>(json);
 
-        Assert.IsNotNull(result);
-        Assert.AreEqual(3, result.Length);
-        Assert.IsInstanceOfType(result[0], typeof(Marktlokation));
-        Assert.IsInstanceOfType(result[1], typeof(Messlokation));
-        Assert.IsInstanceOfType(result[2], typeof(Energiemenge));
+        result.Should().NotBeNull().And.HaveCount(3);
+        result![0].Should().BeOfType<Marktlokation>();
+        result[1].Should().BeOfType<Messlokation>();
+        result[2].Should().BeOfType<Energiemenge>();
     }
 
     [TestMethod]
@@ -587,11 +569,10 @@ public class TestPolymorphicDeserialization
 
         var result = JsonSerializer.Deserialize<BusinessObject[]>(json, StjOptions);
 
-        Assert.IsNotNull(result);
-        Assert.AreEqual(3, result.Length);
-        Assert.IsInstanceOfType(result[0], typeof(Marktlokation));
-        Assert.IsInstanceOfType(result[1], typeof(Messlokation));
-        Assert.IsInstanceOfType(result[2], typeof(Energiemenge));
+        result.Should().NotBeNull().And.HaveCount(3);
+        result![0].Should().BeOfType<Marktlokation>();
+        result[1].Should().BeOfType<Messlokation>();
+        result[2].Should().BeOfType<Energiemenge>();
     }
 
     #endregion
