@@ -512,16 +512,10 @@ public static class UserPropertiesExtensions
             return;
         }
 
-        // Check if this object implements IUserProperties
-        if (obj is IUserProperties userPropertiesObj)
+        // Check if this object implements IUserProperties with non-empty UserProperties
+        if (obj is IUserProperties { UserProperties: { Count: > 0 } })
         {
-            if (
-                userPropertiesObj.UserProperties != null
-                && userPropertiesObj.UserProperties.Count > 0
-            )
-            {
-                nonEmptyPaths.Add(string.IsNullOrEmpty(currentPath) ? "(root)" : currentPath);
-            }
+            nonEmptyPaths.Add(string.IsNullOrEmpty(currentPath) ? "(root)" : currentPath);
         }
 
         // Get cached properties to check for this type (includes pre-computed element types)
