@@ -654,7 +654,7 @@ public abstract class BusinessObject : IUserProperties, IOptionalGuid
 
             if (typeToConvert.IsAbstract)
             {
-                var jdoc = JsonDocument.ParseValue(ref reader);
+                using var jdoc = JsonDocument.ParseValue(ref reader);
                 if (!jdoc.RootElement.TryGetProperty("BoTyp", out var boTypeProp))
                 {
                     boTypeProp = jdoc.RootElement.GetProperty("boTyp");
