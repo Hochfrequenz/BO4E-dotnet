@@ -36,13 +36,14 @@ public class StringNullableEnumConverter : JsonConverterFactory
     )
     {
         var converterType = typeof(StringNullableEnumConverter<>).MakeGenericType(typeToConvert);
-        var converter = Activator.CreateInstance(
-            converterType,
-            BindingFlags.Instance | BindingFlags.Public,
-            null,
-            null,
-            null
-        ) as JsonConverter;
+        var converter =
+            Activator.CreateInstance(
+                converterType,
+                BindingFlags.Instance | BindingFlags.Public,
+                null,
+                null,
+                null
+            ) as JsonConverter;
 
         return converter
             ?? throw new InvalidOperationException(
