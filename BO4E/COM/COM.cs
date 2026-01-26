@@ -134,7 +134,11 @@ public abstract class COM : IUserProperties, IOptionalGuid
     public Guid? Guid { get; set; }
 
     /// <summary>
-    ///     User properties (non bo4e standard)
+    ///     User properties (non BO4E standard). Contains JSON fields that could not be mapped to model properties.
+    ///     Null or empty indicates all JSON fields were successfully mapped during deserialization.
+    ///     Use <see cref="UserPropertiesExtensions.HasEmptyUserProperties{TParent}" /> to check if empty,
+    ///     or <see cref="UserPropertiesExtensions.HasAllEmptyUserPropertiesRecursive{TParent}" /> to recursively
+    ///     check this object and all nested <see cref="IUserProperties" /> objects.
     /// </summary>
     [JsonProperty(
         PropertyName = BusinessObject.USER_PROPERTIES_NAME,
