@@ -551,7 +551,7 @@ public abstract class BusinessObject : IUserProperties, IOptionalGuid
                 boType =
                     BusinessObjectSerializationBinder.BusinessObjectAndCOMTypes.SingleOrDefault(t =>
                         typeString != null
-                        && typeString.ToUpperInvariant().StartsWith(t.FullName!.ToUpperInvariant())
+                        && typeString.StartsWith(t.FullName!, StringComparison.OrdinalIgnoreCase)
                     );
             }
             // Try both "boTyp" (camelCase) and "BoTyp" (PascalCase) - case-insensitive lookup
