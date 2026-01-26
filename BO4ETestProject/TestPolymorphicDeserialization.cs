@@ -357,7 +357,10 @@ public class TestPolymorphicDeserialization
         catch (ArgumentException ex)
         {
             // Expected - the converter should throw a descriptive ArgumentException
-            Assert.IsTrue(ex.Message.Contains("boTyp"), $"Exception message should mention 'boTyp': {ex.Message}");
+            Assert.IsTrue(
+                ex.Message.Contains("boTyp"),
+                $"Exception message should mention 'boTyp': {ex.Message}"
+            );
         }
     }
 
@@ -548,7 +551,7 @@ public class TestPolymorphicDeserialization
         var original = new Messlokation
         {
             MesslokationsId = "DE0001234567890123456789012345678",
-            Sparte = BO4E.ENUM.Sparte.STROM
+            Sparte = BO4E.ENUM.Sparte.STROM,
         };
 
         var json = JsonSerializer.Serialize<BusinessObject>(original, StjOptions);
@@ -567,7 +570,7 @@ public class TestPolymorphicDeserialization
         var original = new Messlokation
         {
             MesslokationsId = "DE0001234567890123456789012345678",
-            Sparte = BO4E.ENUM.Sparte.STROM
+            Sparte = BO4E.ENUM.Sparte.STROM,
         };
 
         var json = JsonConvert.SerializeObject(original);

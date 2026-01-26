@@ -555,19 +555,21 @@ public abstract class BusinessObject : IUserProperties, IOptionalGuid
             )
             {
                 var typeString = typeToken.Value<string>();
-                boType = BusinessObjectSerializationBinder.BusinessObjectAndCOMTypes.SingleOrDefault(
-                    t => typeString != null && typeString.ToUpperInvariant().StartsWith(t.FullName!.ToUpperInvariant())
-                );
+                boType =
+                    BusinessObjectSerializationBinder.BusinessObjectAndCOMTypes.SingleOrDefault(t =>
+                        typeString != null
+                        && typeString.ToUpperInvariant().StartsWith(t.FullName!.ToUpperInvariant())
+                    );
             }
             // Try both "boTyp" (camelCase) and "BoTyp" (PascalCase) - case-insensitive lookup
-            else if (jo.TryGetValue("boTyp", StringComparison.OrdinalIgnoreCase, out var boTypToken))
+            else if (
+                jo.TryGetValue("boTyp", StringComparison.OrdinalIgnoreCase, out var boTypToken)
+            )
             {
                 var boTypeString = boTypToken.Value<string>();
                 if (string.IsNullOrWhiteSpace(boTypeString))
                 {
-                    throw new ArgumentException(
-                        "The \"boTyp\" property cannot be null or empty."
-                    );
+                    throw new ArgumentException("The \"boTyp\" property cannot be null or empty.");
                 }
 
                 boType = GetTypeForBoName(boTypeString);
@@ -707,9 +709,7 @@ public abstract class BusinessObject : IUserProperties, IOptionalGuid
             var boTypeString = boTypeProp.GetString();
             if (string.IsNullOrWhiteSpace(boTypeString))
             {
-                throw new ArgumentException(
-                    "The \"boTyp\" property cannot be null or empty."
-                );
+                throw new ArgumentException("The \"boTyp\" property cannot be null or empty.");
             }
 
             var boType = GetTypeForBoName(boTypeString);
@@ -754,10 +754,10 @@ public abstract class BusinessObject : IUserProperties, IOptionalGuid
             // Note: We use GetRawText() because JsonElement.Deserialize(Type, options)
             // is not available in netstandard2.0 even with the System.Text.Json package.
             return System.Text.Json.JsonSerializer.Deserialize(
-                jdoc.RootElement.GetRawText(),
-                boType,
-                options
-            ) as BusinessObject;
+                    jdoc.RootElement.GetRawText(),
+                    boType,
+                    options
+                ) as BusinessObject;
         }
 
         public override void Write(
@@ -774,7 +774,12 @@ public abstract class BusinessObject : IUserProperties, IOptionalGuid
 
             var boTypeString = value.GetBoTyp();
             var boType = GetTypeForBoName(boTypeString);
-            System.Text.Json.JsonSerializer.Serialize(writer, value, boType ?? value.GetType(), options);
+            System.Text.Json.JsonSerializer.Serialize(
+                writer,
+                value,
+                boType ?? value.GetType(),
+                options
+            );
         }
     }
 #nullable restore warnings
