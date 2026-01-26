@@ -35,10 +35,13 @@ public class BusinessObjectSerializationBinder : ISerializationBinder
     public static IList<Type> BusinessObjectAndCOMTypes { get; }
 
     /// <inheritdoc cref="ISerializationBinder.BindToType(string, string)" />
+    /// <remarks>
+    /// Returns null if the type is not found. This is the original behavior maintained
+    /// for backward compatibility, even though the interface declares a non-nullable return type.
+    /// </remarks>
     public Type BindToType(string? assemblyName, string typeName)
     {
-        return BusinessObjectAndCOMTypes.SingleOrDefault(t => t.Name == typeName)
-            ?? throw new InvalidOperationException($"Type '{typeName}' not found in BO4E types.");
+        return BusinessObjectAndCOMTypes.SingleOrDefault(t => t.Name == typeName)!;
     }
 
     /// <inheritdoc cref="ISerializationBinder.BindToName(Type, out string, out string)" />

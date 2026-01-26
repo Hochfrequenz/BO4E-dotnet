@@ -35,15 +35,18 @@ public class StringNullableEnumConverter : JsonConverterFactory
         JsonSerializerOptions options
     )
     {
-        var converter = (JsonConverter?)
-            Activator.CreateInstance(
-                typeof(StringNullableEnumConverter<>).MakeGenericType(typeToConvert),
-                BindingFlags.Instance | BindingFlags.Public,
-                null,
-                null,
-                null
-            );
+        var converterType = typeof(StringNullableEnumConverter<>).MakeGenericType(typeToConvert);
+        var converter = Activator.CreateInstance(
+            converterType,
+            BindingFlags.Instance | BindingFlags.Public,
+            null,
+            null,
+            null
+        ) as JsonConverter;
 
-        return converter;
+        return converter
+            ?? throw new InvalidOperationException(
+                $"Failed to create converter for type {typeToConvert.FullName}"
+            );
     }
 }
