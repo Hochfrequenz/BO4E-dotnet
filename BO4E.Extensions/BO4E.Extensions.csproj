@@ -8,9 +8,11 @@
     <PackageId>Hochfrequenz.BO4E.Extensions</PackageId>
     <Authors>Hochfrequenz Unternehmensberatung GmbH</Authors>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-    <LangVersion>12</LangVersion>
+    <LangVersion>13</LangVersion>
     <Nullable>enable</Nullable>
-    <TargetFrameworks>netstandard2.1;netstandard2.0</TargetFrameworks>
+    <!-- TODO: Fix pre-existing nullable warnings instead of suppressing them -->
+    <NoWarn>CS8600;CS8602;CS8603;CS8604;CS8769</NoWarn>
+    <TargetFrameworks>net9.0;net10.0</TargetFrameworks>
   </PropertyGroup>
   <PropertyGroup>
     <DocumentationFile>BO4E.Extensions.xml</DocumentationFile>
