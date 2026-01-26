@@ -33,7 +33,7 @@ public class LenientStringToIntConverter : JsonConverter
             return null;
         }
 
-        var numeric = new string(reader.Value.ToString().Where(char.IsDigit).ToArray());
+        var numeric = new string(reader.Value.ToString()!.Where(char.IsDigit).ToArray());
         if (int.TryParse(numeric, out var intValue))
         {
             return intValue;
