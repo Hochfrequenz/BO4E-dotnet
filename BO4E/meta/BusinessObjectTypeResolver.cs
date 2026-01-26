@@ -72,8 +72,9 @@ internal static class BusinessObjectTypeResolver
     }
 
     /// <summary>
-    /// Scans all loaded assemblies for a type with the given name.
+    /// Scans all loaded assemblies for a BusinessObject type with the given name.
     /// Results are cached to avoid repeated assembly scanning.
+    /// Only returns types that inherit from BusinessObject to prevent false matches.
     /// </summary>
     private static Type? ScanAssembliesForType(string typeName)
     {
@@ -89,6 +90,7 @@ internal static class BusinessObjectTypeResolver
                             .GetTypes()
                             .FirstOrDefault(x =>
                                 string.Equals(x.Name, name, StringComparison.OrdinalIgnoreCase)
+                                && typeof(BusinessObject).IsAssignableFrom(x)
                             );
                         if (type != null)
                         {

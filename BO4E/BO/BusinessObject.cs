@@ -553,6 +553,13 @@ public abstract class BusinessObject : IUserProperties, IOptionalGuid
                         typeString != null
                         && typeString.StartsWith(t.FullName!, StringComparison.OrdinalIgnoreCase)
                     );
+
+                if (boType == null)
+                {
+                    throw new Newtonsoft.Json.JsonSerializationException(
+                        $"The $type '{typeString}' does not match any known BusinessObject type."
+                    );
+                }
             }
             // Try both "boTyp" (camelCase) and "BoTyp" (PascalCase) - case-insensitive lookup
             else if (
@@ -581,13 +588,6 @@ public abstract class BusinessObject : IUserProperties, IOptionalGuid
             {
                 throw new Newtonsoft.Json.JsonSerializationException(
                     "When deserializing into an abstract BusinessObject, the JSON must contain a \"boTyp\" property to identify the concrete type."
-                );
-            }
-
-            if (boType == null)
-            {
-                throw new Newtonsoft.Json.JsonSerializationException(
-                    "Could not determine the concrete BusinessObject type from the JSON."
                 );
             }
 
