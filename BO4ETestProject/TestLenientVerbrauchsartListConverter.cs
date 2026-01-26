@@ -622,7 +622,151 @@ public class TestLenientVerbrauchsartListConverter
 
     #endregion
 
+    #region Regression Tests for "read too much or not enough" Error
+
+    /// <summary>
+    /// Regression test for GitHub issue: "read too much or not enough" error when deserializing
+    /// normal Verbrauchsarten arrays (not nested) in a full Marktlokation context.
+    /// This test simulates real-world server deserialization with minified JSON.
+    /// </summary>
+    [TestMethod]
+    public void Test_SystemTextJson_NormalArray_InFullMarktlokation_NoReadError()
+    {
+        // Arrange: Minified JSON similar to what a server would receive
+        // This is a realistic scenario where Verbrauchsarten is a normal array, not nested
+        var json =
+            @"{""boTyp"":""MARKTLOKATION"",""marktlokationsId"":""12345678901"",""sparte"":""STROM"",""energierichtung"":""AUSSP"",""bilanzierungsmethode"":""SLP"",""netzebene"":""NSP"",""zaehlwerkeBeteiligteMarktrolle"":[{""zaehlwerkId"":""ZW001"",""bezeichnung"":""Hauptzähler"",""richtung"":""AUSSP"",""obisKennzahl"":""1-0:1.8.0"",""einheit"":""KWH"",""Verbrauchsarten"":[""KL""]}]}";
+
+        var options = new JsonSerializerOptions { PropertyNameCaseInsensitive = true };
+        options.Converters.Add(new JsonStringEnumConverter());
+
+        // Act & Assert: Should not throw "read too much or not enough" error
+        var action = () =>
+            System.Text.Json.JsonSerializer.Deserialize<Marktlokation>(json, options);
+
+        action.Should().NotThrow();
+        var result = action();
+        result.Should().NotBeNull();
+        result!.ZaehlwerkeBeteiligteMarktrolle.Should().NotBeNull().And.HaveCount(1);
+        result
+            .ZaehlwerkeBeteiligteMarktrolle![0]
+            .Verbrauchsarten.Should()
+            .NotBeNull()
+            .And.ContainSingle()
+            .Which.Should()
+            .Be(Verbrauchsart.KL);
+    }
+
+    /// <summary>
+    /// Regression test with multiple Verbrauchsarten values.
+    /// </summary>
+    [TestMethod]
+    public void Test_SystemTextJson_MultipleValues_InFullMarktlokation_NoReadError()
+    {
+        // Arrange: Minified JSON with multiple Verbrauchsarten values
+        var json =
+            @"{""boTyp"":""MARKTLOKATION"",""marktlokationsId"":""12345678901"",""sparte"":""STROM"",""zaehlwerkeBeteiligteMarktrolle"":[{""zaehlwerkId"":""ZW001"",""Verbrauchsarten"":[""KL"",""STW"",""W""]}]}";
+
+        var options = new JsonSerializerOptions { PropertyNameCaseInsensitive = true };
+        options.Converters.Add(new JsonStringEnumConverter());
+
+        // Act & Assert
+        var action = () =>
+            System.Text.Json.JsonSerializer.Deserialize<Marktlokation>(json, options);
+
+        action.Should().NotThrow();
+        var result = action();
+        result!
+            .ZaehlwerkeBeteiligteMarktrolle![0]
+            .Verbrauchsarten.Should()
+            .ContainInOrder(Verbrauchsart.KL, Verbrauchsart.STW, Verbrauchsart.W);
+    }
+
+    /// <summary>
+    /// Regression test with empty Verbrauchsarten array.
+    /// </summary>
+    [TestMethod]
+    public void Test_SystemTextJson_EmptyArray_InFullMarktlokation_NoReadError()
+    {
+        // Arrange: Minified JSON with empty Verbrauchsarten array
+        var json =
+            @"{""boTyp"":""MARKTLOKATION"",""marktlokationsId"":""12345678901"",""sparte"":""STROM"",""zaehlwerkeBeteiligteMarktrolle"":[{""zaehlwerkId"":""ZW001"",""Verbrauchsarten"":[]}]}";
+
+        var options = new JsonSerializerOptions { PropertyNameCaseInsensitive = true };
+        options.Converters.Add(new JsonStringEnumConverter());
+
+        // Act & Assert
+        var action = () =>
+            System.Text.Json.JsonSerializer.Deserialize<Marktlokation>(json, options);
+
+        action.Should().NotThrow();
+        var result = action();
+        result!
+            .ZaehlwerkeBeteiligteMarktrolle![0]
+            .Verbrauchsarten.Should()
+            .NotBeNull()
+            .And.BeEmpty();
+    }
+
+    /// <summary>
+    /// Regression test with Verbrauchsarten containing properties AFTER the array.
+    /// This tests that the converter leaves the reader in the correct position.
+    /// </summary>
+    [TestMethod]
+    public void Test_SystemTextJson_PropertiesAfterVerbrauchsarten_NoReadError()
+    {
+        // Arrange: JSON where Verbrauchsarten is NOT the last property in Zaehlwerk
+        var json =
+            @"{""boTyp"":""MARKTLOKATION"",""marktlokationsId"":""12345678901"",""sparte"":""STROM"",""zaehlwerkeBeteiligteMarktrolle"":[{""Verbrauchsarten"":[""KL""],""zaehlwerkId"":""ZW001"",""bezeichnung"":""Test""}]}";
+
+        var options = new JsonSerializerOptions { PropertyNameCaseInsensitive = true };
+        options.Converters.Add(new JsonStringEnumConverter());
+
+        // Act & Assert
+        var action = () =>
+            System.Text.Json.JsonSerializer.Deserialize<Marktlokation>(json, options);
+
+        action.Should().NotThrow();
+        var result = action();
+        result!.ZaehlwerkeBeteiligteMarktrolle![0].ZaehlwerkId.Should().Be("ZW001");
+        result!.ZaehlwerkeBeteiligteMarktrolle![0].Bezeichnung.Should().Be("Test");
+        result!.ZaehlwerkeBeteiligteMarktrolle![0].Verbrauchsarten.Should().ContainSingle();
+    }
+
+    #endregion
+
     #region Tests for Object Skipping
+
+    /// <summary>
+    /// Test that when Verbrauchsarten is an object (not an array), deserialization still works.
+    /// This tests a potential "read too much or not enough" edge case.
+    /// </summary>
+    [TestMethod]
+    public void Test_SystemTextJson_ObjectInsteadOfArray_IsHandled()
+    {
+        // Arrange: Verbrauchsarten is an object instead of an array
+        // This is malformed data that the lenient converter should handle
+        var json =
+            @"{""boTyp"":""MARKTLOKATION"",""marktlokationsId"":""12345678901"",""sparte"":""STROM"",""zaehlwerkeBeteiligteMarktrolle"":[{""zaehlwerkId"":""ZW001"",""Verbrauchsarten"":{""invalid"":""object""},""bezeichnung"":""Test""}]}";
+
+        var options = new JsonSerializerOptions { PropertyNameCaseInsensitive = true };
+        options.Converters.Add(new JsonStringEnumConverter());
+
+        // Act & Assert: Should not throw "read too much or not enough" error
+        var action = () =>
+            System.Text.Json.JsonSerializer.Deserialize<Marktlokation>(json, options);
+
+        action.Should().NotThrow();
+        var result = action();
+        result!.ZaehlwerkeBeteiligteMarktrolle![0].ZaehlwerkId.Should().Be("ZW001");
+        result!.ZaehlwerkeBeteiligteMarktrolle![0].Bezeichnung.Should().Be("Test");
+        // Verbrauchsarten should be empty since the object couldn't be parsed as enum values
+        result!
+            .ZaehlwerkeBeteiligteMarktrolle![0]
+            .Verbrauchsarten.Should()
+            .NotBeNull()
+            .And.BeEmpty();
+    }
 
     [TestMethod]
     public void Test_SystemTextJson_ObjectsInArray_AreSkipped()
