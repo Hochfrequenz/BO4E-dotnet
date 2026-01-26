@@ -642,25 +642,38 @@ public abstract class BusinessObject : IUserProperties, IOptionalGuid
     /// </summary>
     /// <remarks>
     /// <para>
-    /// This custom converter is required instead of [JsonPolymorphic] / [JsonDerivedType] attributes because:
+    /// This custom converter is required instead of [JsonPolymorphic] / [JsonDerivedType] attributes
+    /// for backward compatibility. The built-in STJ polymorphic handling has several limitations:
     /// </para>
     /// <list type="number">
     ///   <item>
     ///     <description>
-    ///       STJ's built-in polymorphic handling requires the discriminator property to be the FIRST
-    ///       property in the JSON object. Our JSON may have "boTyp" anywhere in the object.
+    ///       <b>Discriminator position:</b> STJ requires the discriminator to be the FIRST property
+    ///       in the JSON object. Our JSON may have "boTyp" anywhere. While .NET 9+ adds
+    ///       <c>AllowOutOfOrderMetadataProperties</c>, it comes with memory warnings for large payloads
+    ///       and this library targets netstandard2.0/2.1.
+    ///       See: https://github.com/dotnet/runtime/issues/72604
     ///     </description>
     ///   </item>
     ///   <item>
     ///     <description>
-    ///       STJ's built-in polymorphic handling is CASE-SENSITIVE for discriminator values.
-    ///       We support case-insensitive matching (e.g., "MARKTLOKATION", "marktlokation", "Marktlokation").
+    ///       <b>Discriminator value case-sensitivity:</b> STJ's polymorphic handling is CASE-SENSITIVE
+    ///       for discriminator values with no option to change this. We support case-insensitive matching
+    ///       (e.g., "MARKTLOKATION", "marktlokation", "Marktlokation" all resolve to the same type).
     ///     </description>
     ///   </item>
     ///   <item>
     ///     <description>
-    ///       We support both "boTyp" and "BoTyp" as the discriminator property name (different JSON
-    ///       serializer naming conventions).
+    ///       <b>Discriminator property name case-sensitivity:</b> Even with <c>PropertyNameCaseInsensitive = true</c>,
+    ///       STJ does not apply case-insensitivity to the discriminator property name. This is a known bug.
+    ///       We support both "boTyp" and "BoTyp" as the discriminator property name.
+    ///       See: https://github.com/dotnet/runtime/issues/118786
+    ///     </description>
+    ///   </item>
+    ///   <item>
+    ///     <description>
+    ///       <b>Target framework:</b> [JsonPolymorphic] and [JsonDerivedType] attributes require .NET 7+,
+    ///       but this library targets netstandard2.0/2.1 for broad compatibility.
     ///     </description>
     ///   </item>
     /// </list>
