@@ -160,7 +160,7 @@ public abstract class BusinessObject : IUserProperties, IOptionalGuid
     protected virtual string guidSerialized
 #pragma warning restore IDE1006 // Naming Styles
     {
-        get => Guid.HasValue ? Guid.ToString() : string.Empty;
+        get => Guid.HasValue ? Guid.Value.ToString() : string.Empty;
         set { Guid = string.IsNullOrWhiteSpace(value) ? (Guid?)null : System.Guid.Parse(value); }
     }
 
@@ -284,9 +284,9 @@ public abstract class BusinessObject : IUserProperties, IOptionalGuid
         }
         var regularPropertyNames = GetType()
             .GetProperties()
-            .Where(p => p.GetCustomAttribute<JsonPropertyNameAttribute>() != null)
-            .Select(p => p.GetCustomAttribute<JsonPropertyNameAttribute>().Name)
-            .Select(x => x.ToLower())
+            .Select(p => p.GetCustomAttribute<JsonPropertyNameAttribute>()?.Name)
+            .Where(name => name != null)
+            .Select(x => x!.ToLower())
             .ToHashSet();
         var result = UserProperties
             .Keys.Where(k => regularPropertyNames.Contains(k.ToLower()))
@@ -419,13 +419,13 @@ public abstract class BusinessObject : IUserProperties, IOptionalGuid
     /// </summary>
     /// <seealso cref="GetBoKeyProps(Type)" />
     /// <returns>A dictionary with key value pairs.</returns>
-    public Dictionary<string, object> GetBoKeys()
+    public Dictionary<string, object?> GetBoKeys()
     {
-        var result = new Dictionary<string, object>();
+        var result = new Dictionary<string, object?>();
         foreach (var pi in GetBoKeyProps(GetType()))
         {
             var jpa = pi.GetCustomAttribute<JsonPropertyAttribute>();
-            result.Add(jpa?.PropertyName != null ? jpa.PropertyName : pi.Name, pi.GetValue(this));
+            result.Add(jpa?.PropertyName ?? pi.Name, pi.GetValue(this));
         }
 
         return result;
