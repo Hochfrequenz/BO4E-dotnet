@@ -1,5 +1,9 @@
 using System;
+using System.Collections;
+using System.Collections.Concurrent;
 using System.Collections.Generic;
+using System.Linq;
+using System.Reflection;
 using System.Text.Json;
 using BO4E.meta;
 using Newtonsoft.Json.Linq;
@@ -368,4 +372,288 @@ public static class UserPropertiesExtensions
             return false;
         }
     }
+
+    #region UserProperties Emptiness Check
+
+    /// <summary>
+    ///     Cached metadata about a property that needs recursive checking.
+    ///     Stores both the PropertyInfo and pre-computed element type to avoid repeated reflection during traversal.
+    /// </summary>
+    private readonly struct CachedPropertyInfo
+    {
+        public PropertyInfo Property { get; }
+
+        /// <summary>
+        ///     The element type if this property is a collection of IUserProperties, null otherwise.
+        ///     Pre-computed to avoid calling GetUserPropertiesElementType during every traversal.
+        /// </summary>
+        public Type? CollectionElementType { get; }
+
+        public CachedPropertyInfo(PropertyInfo property, Type? collectionElementType)
+        {
+            Property = property;
+            CollectionElementType = collectionElementType;
+        }
+    }
+
+    /// <summary>
+    ///     Cache for properties that need to be checked recursively per type.
+    ///     Key: Type, Value: Array of CachedPropertyInfo with pre-computed element types.
+    /// </summary>
+    /// <remarks>
+    ///     The GetOrAdd factory may execute multiple times concurrently for the same type,
+    ///     but this is benign as results are computed identically and are immutable.
+    /// </remarks>
+    private static readonly ConcurrentDictionary<
+        Type,
+        CachedPropertyInfo[]
+    > PropertiesToCheckCache = new();
+
+    /// <summary>
+    ///     Comparison delegate for sorting paths. Extracted to static field to avoid allocation per call.
+    ///     Sorts: "(root)" first, then by depth (shallower first), then lexicographically.
+    /// </summary>
+    private static readonly Comparison<string> PathComparer = (a, b) =>
+    {
+        // Handle equality first to satisfy comparer contract
+        if (a == "(root)" && b == "(root)")
+            return 0;
+        if (a == "(root)")
+            return -1;
+        if (b == "(root)")
+            return 1;
+        var depthA = a.Count(c => c == '.');
+        var depthB = b.Count(c => c == '.');
+        if (depthA != depthB)
+            return depthA.CompareTo(depthB);
+        return string.Compare(a, b, StringComparison.Ordinal);
+    };
+
+    /// <summary>
+    ///     Checks if the <see cref="IUserProperties.UserProperties" /> dictionary is empty.
+    ///     Empty means the dictionary is either null or has no entries.
+    /// </summary>
+    /// <remarks>
+    ///     This method checks only the immediate object, not nested objects.
+    ///     Use <see cref="HasAllEmptyUserPropertiesRecursive{TParent}" /> for recursive checking.
+    ///     An empty UserProperties indicates that all JSON fields could be mapped to model properties.
+    /// </remarks>
+    /// <typeparam name="TParent">Type implementing <see cref="IUserProperties" /></typeparam>
+    /// <param name="parent">The object to check</param>
+    /// <returns>true if UserProperties is null or empty; false if it contains any entries</returns>
+    public static bool HasEmptyUserProperties<TParent>(this TParent parent)
+        where TParent : class, IUserProperties
+    {
+        if (parent == null)
+        {
+            return true;
+        }
+
+        return parent.UserProperties == null || parent.UserProperties.Count == 0;
+    }
+
+    /// <summary>
+    ///     Recursively checks if this object and all nested <see cref="IUserProperties" /> objects
+    ///     have empty UserProperties dictionaries.
+    /// </summary>
+    /// <remarks>
+    ///     This method traverses all public properties that are either <see cref="IUserProperties" />
+    ///     or collections containing <see cref="IUserProperties" /> items (e.g., List, arrays).
+    ///     Property metadata is cached per type for performance on repeated calls.
+    ///     Circular references are handled by tracking visited objects.
+    /// </remarks>
+    /// <typeparam name="TParent">Type implementing <see cref="IUserProperties" /></typeparam>
+    /// <param name="parent">The root object to check</param>
+    /// <param name="nonEmptyPaths">
+    ///     When returning false, contains paths to objects with non-empty UserProperties.
+    ///     Paths use dot notation with array indices, e.g., "Energieverbrauch[0]" or "Property.SubProperty[2]".
+    ///     Paths are sorted: "(root)" first, then by depth (shallower before deeper), then lexicographically.
+    ///     This provides deterministic, stable ordering across runs.
+    ///     When returning true, this list is empty.
+    /// </param>
+    /// <returns>true if all UserProperties (this object and all nested) are empty; false otherwise</returns>
+    public static bool HasAllEmptyUserPropertiesRecursive<TParent>(
+        this TParent parent,
+        out IReadOnlyList<string> nonEmptyPaths
+    )
+        where TParent : class, IUserProperties
+    {
+        var paths = new List<string>();
+        var visited = new HashSet<object>(ReferenceEqualityComparer.Instance);
+
+        CheckRecursive(parent, string.Empty, paths, visited);
+
+        // Sort paths: (root) first, then by depth (fewer separators first), then lexicographically
+        // This groups related paths together and orders from root down to nested objects
+        paths.Sort(PathComparer);
+
+        nonEmptyPaths = paths;
+        return paths.Count == 0;
+    }
+
+    /// <summary>
+    ///     Internal recursive implementation for checking UserProperties emptiness.
+    /// </summary>
+    private static void CheckRecursive(
+        object obj,
+        string currentPath,
+        List<string> nonEmptyPaths,
+        HashSet<object> visited
+    )
+    {
+        if (obj == null)
+        {
+            return;
+        }
+
+        // Prevent infinite loops from circular references
+        if (!visited.Add(obj))
+        {
+            return;
+        }
+
+        // Check if this object implements IUserProperties with non-empty UserProperties
+        if (obj is IUserProperties { UserProperties: { Count: > 0 } })
+        {
+            nonEmptyPaths.Add(string.IsNullOrEmpty(currentPath) ? "(root)" : currentPath);
+        }
+
+        // Get cached properties to check for this type (includes pre-computed element types)
+        var propertiesToCheck = GetPropertiesToCheck(obj.GetType());
+
+        foreach (var cached in propertiesToCheck)
+        {
+            object propertyValue;
+            try
+            {
+                propertyValue = cached.Property.GetValue(obj);
+            }
+            catch (TargetInvocationException)
+            {
+                // Skip properties that throw on access (e.g., lazy initialization failure)
+                continue;
+            }
+
+            if (propertyValue == null)
+            {
+                continue;
+            }
+
+            var propertyPath = string.IsNullOrEmpty(currentPath)
+                ? cached.Property.Name
+                : $"{currentPath}.{cached.Property.Name}";
+
+            // Check if it's a collection of IUserProperties (element type was pre-computed)
+            if (cached.CollectionElementType != null && propertyValue is IEnumerable enumerable)
+            {
+                var index = 0;
+                foreach (var item in enumerable)
+                {
+                    if (item != null)
+                    {
+                        CheckRecursive(item, $"{propertyPath}[{index}]", nonEmptyPaths, visited);
+                    }
+                    index++;
+                }
+            }
+            else
+            {
+                // Single IUserProperties object (guaranteed by GetPropertiesToCheck filtering)
+                CheckRecursive(propertyValue, propertyPath, nonEmptyPaths, visited);
+            }
+        }
+    }
+
+    /// <summary>
+    ///     Gets the cached array of properties that need recursive checking for a given type.
+    ///     Properties are sorted by name to ensure deterministic traversal order.
+    ///     Element types for collection properties are pre-computed to avoid reflection during traversal.
+    /// </summary>
+    private static CachedPropertyInfo[] GetPropertiesToCheck(Type type)
+    {
+        return PropertiesToCheckCache.GetOrAdd(
+            type,
+            t =>
+                t.GetProperties(BindingFlags.Public | BindingFlags.Instance)
+                    .Where(p => p.CanRead)
+                    .Select(p => new
+                    {
+                        Property = p,
+                        ElementType = GetUserPropertiesElementType(p.PropertyType),
+                    })
+                    .Where(x =>
+                        typeof(IUserProperties).IsAssignableFrom(x.Property.PropertyType)
+                        || x.ElementType != null
+                    )
+                    .OrderBy(x => x.Property.Name, StringComparer.Ordinal)
+                    .Select(x => new CachedPropertyInfo(x.Property, x.ElementType))
+                    .ToArray()
+        );
+    }
+
+    /// <summary>
+    ///     Gets the element type if the given type is a collection of IUserProperties.
+    ///     Returns null if not a collection or elements don't implement IUserProperties.
+    /// </summary>
+    private static Type? GetUserPropertiesElementType(Type type)
+    {
+        // Skip string (implements IEnumerable<char>)
+        if (type == typeof(string))
+        {
+            return null;
+        }
+
+        // Check if type itself is IEnumerable<T> (e.g., property declared as IEnumerable<SomeType>)
+        // GetInterfaces() doesn't include the type itself when the type IS the interface
+        if (type.IsGenericType && type.GetGenericTypeDefinition() == typeof(IEnumerable<>))
+        {
+            var elementType = type.GetGenericArguments()[0];
+            if (typeof(IUserProperties).IsAssignableFrom(elementType))
+            {
+                return elementType;
+            }
+        }
+
+        // Check for generic IEnumerable<T> in implemented interfaces where T : IUserProperties
+        var implementedElementType = type.GetInterfaces()
+            .Where(i => i.IsGenericType && i.GetGenericTypeDefinition() == typeof(IEnumerable<>))
+            .Select(i => i.GetGenericArguments()[0])
+            .FirstOrDefault(et => typeof(IUserProperties).IsAssignableFrom(et));
+
+        if (implementedElementType != null)
+        {
+            return implementedElementType;
+        }
+
+        // Check for arrays as a defensive fallback.
+        // Note: Single-dimensional arrays implement IEnumerable<T> and are handled above,
+        // but this handles edge cases like multidimensional arrays which don't implement IEnumerable<T>.
+        if (type.IsArray)
+        {
+            var elementType = type.GetElementType();
+            if (elementType != null && typeof(IUserProperties).IsAssignableFrom(elementType))
+            {
+                return elementType;
+            }
+        }
+
+        return null;
+    }
+
+    /// <summary>
+    ///     Comparer that uses reference equality for the visited set.
+    /// </summary>
+    private sealed class ReferenceEqualityComparer : IEqualityComparer<object>
+    {
+        public static readonly ReferenceEqualityComparer Instance = new();
+
+        private ReferenceEqualityComparer() { }
+
+        bool IEqualityComparer<object>.Equals(object x, object y) => ReferenceEquals(x, y);
+
+        int IEqualityComparer<object>.GetHashCode(object obj) =>
+            System.Runtime.CompilerServices.RuntimeHelpers.GetHashCode(obj);
+    }
+
+    #endregion
 }
