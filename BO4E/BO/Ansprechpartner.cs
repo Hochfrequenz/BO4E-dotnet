@@ -110,4 +110,14 @@ public class Ansprechpartner : BusinessObject
     [JsonPropertyOrder(20)]
     [ProtoMember(14)]
     public List<Zustaendigkeit>? Zustaendigkeit { get; set; }
+
+    /// <summary>
+    /// true dann und nur dann, wenn es sich um eine Firma handelt
+    /// <seealso cref="BO.Geschaeftspartner.Gewerbekennzeichnung"/>
+    /// </summary>
+    [JsonProperty(Order = 20, PropertyName = "gewerbekennzeichnung")]
+    [JsonPropertyName("gewerbekennzeichnung")]
+    [JsonPropertyOrder(21)]
+    [ProtoMember(15)]
+    public bool? Gewerbekennzeichnung { get; set; }
 }
