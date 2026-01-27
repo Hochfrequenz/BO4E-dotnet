@@ -66,10 +66,12 @@ public static class LenientParsingExtensionsNewtonsoft
                     // no default case because NONE and MOST_LENIENT do not come up with more converters
                 }
             }
+        // Use MigratedPropertyContractResolver to handle properties marked with
+        // [MigratedFromUserProperties] attribute with error tolerance
         IContractResolver contractResolver =
             userPropertiesWhiteList.Count > 0
-                ? new UserPropertiesDataContractResolver(userPropertiesWhiteList)
-                : new DefaultContractResolver();
+                ? new MigratedPropertyContractResolver(userPropertiesWhiteList)
+                : new MigratedPropertyContractResolver();
         if (lenient.HasFlag(LenientParsing.MOST_LENIENT))
         {
             converters.Insert(index: 0, item: new NewtonsoftGasqualitaetStringEnumConverter());
@@ -82,6 +84,10 @@ public static class LenientParsingExtensionsNewtonsoft
             DateParseHandling = DateParseHandling.None,
             ContractResolver = contractResolver,
         };
+
+        // Add error handler for migrated properties
+        settings.WithMigratedPropertyErrorHandling();
+
         return settings;
     }
 }

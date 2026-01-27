@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Text.Json.Serialization;
 using BO4E.ENUM;
 using BO4E.meta;
-using BO4E.meta.LenientConverters;
 using Newtonsoft.Json;
 using ProtoBuf;
 
@@ -196,15 +195,17 @@ public class Zaehlwerk : COM
     public EMobilitaetsart? EMobilitaetsart { get; set; }
 
     /// <summary>Verbrauchsarten Marktlokation</summary>
+    /// <remarks>
+    /// This property was added after data may have been stored in UserProperties.
+    /// The <see cref="MigratedFromUserPropertiesAttribute"/> enables error-tolerant deserialization
+    /// for legacy data that may not match the expected type.
+    /// </remarks>
     [JsonProperty(PropertyName = "Verbrauchsarten", Order = 1024)]
     [JsonPropertyName("Verbrauchsarten")]
     [NonOfficial(NonOfficialCategory.CUSTOMER_REQUIREMENTS)]
     [ProtoMember(1024)]
     [JsonPropertyOrder(1024)]
-    [System.Text.Json.Serialization.JsonConverter(
-        typeof(LenientSystemTextVerbrauchsartListConverter)
-    )]
-    [Newtonsoft.Json.JsonConverter(typeof(LenientNewtonsoftVerbrauchsartListConverter))]
+    [MigratedFromUserProperties]
     public List<Verbrauchsart>? Verbrauchsarten { get; set; }
 
 #pragma warning restore CS1591 // Missing XML comment for publicly visible type or member

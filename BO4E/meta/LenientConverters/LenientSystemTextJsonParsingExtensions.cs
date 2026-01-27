@@ -40,6 +40,9 @@ public static class LenientSystemTextJsonParsingExtensions
             NumberHandling = JsonNumberHandling.AllowReadingFromString,
             Encoder = JavaScriptEncoder.UnsafeRelaxedJsonEscaping,
         };
+        // Add MigratedPropertyConverterFactory first so it can handle migrated properties
+        // before other converters attempt deserialization
+        settings.Converters.Add(new MigratedPropertyConverterFactory());
         settings.Converters.Add(new AutoNumberToStringConverter());
         settings.Converters.Add(new VertragsConverter());
         settings.Converters.Add(new EnergiemengeConverter());
