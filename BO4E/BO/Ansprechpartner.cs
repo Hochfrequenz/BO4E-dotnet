@@ -120,4 +120,13 @@ public class Ansprechpartner : BusinessObject
     [JsonPropertyOrder(21)]
     [ProtoMember(15)]
     public bool? Gewerbekennzeichnung { get; set; }
+
+    /// <summary>
+    /// aus PARTIN gemappt: Für welche Art von Marktteilnehmer der Ansprechpartner tätig ist
+    /// </summary>
+    [JsonProperty(Order = 22, PropertyName = "unternehmensart")]
+    [JsonPropertyName("unternehmensart")]
+    [JsonPropertyOrder(22)]
+    [ProtoMember(16)]
+    public Unternehmensart? Unternehmensart { get; set; }
 }
