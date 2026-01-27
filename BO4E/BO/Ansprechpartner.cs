@@ -115,7 +115,7 @@ public class Ansprechpartner : BusinessObject
     /// true dann und nur dann, wenn es sich um eine Firma handelt
     /// <seealso cref="BO.Geschaeftspartner.Gewerbekennzeichnung"/>
     /// </summary>
-    [JsonProperty(Order = 20, PropertyName = "gewerbekennzeichnung")]
+    [JsonProperty(Order = 21, PropertyName = "gewerbekennzeichnung")]
     [JsonPropertyName("gewerbekennzeichnung")]
     [JsonPropertyOrder(21)]
     [ProtoMember(15)]
