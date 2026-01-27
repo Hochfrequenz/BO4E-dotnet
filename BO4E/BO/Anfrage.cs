@@ -77,4 +77,10 @@ public class Anfrage : BusinessObject
     [ProtoMember(1005)]
     [JsonPropertyOrder(11)]
     public Anfragetyp? Anfragetyp { get; set; }
+    
+    [JsonProperty(PropertyName = "positionsnummer", Order = 12)]
+    [JsonPropertyName("positionsnummer")]
+    [ProtoMember(1006)]
+    [JsonPropertyOrder(12)]
+    public string? Positionsnummer { get; set; } // it's indeed a string right now - I don't want to break it
 }
