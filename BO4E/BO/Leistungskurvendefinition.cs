@@ -84,4 +84,18 @@ public class Leistungskurvendefinition : BusinessObject
     [ProtoMember(16)]
     [JsonPropertyOrder(16)]
     public string? ObererSchwellwert { get; set; }
+
+    /// <summary>
+    /// EDIFACT-Datumsformat des Änderungszeitpunkts (z.B. "401").
+    /// </summary>
+    [JsonProperty(
+        PropertyName = "aenderungszeitpunktDateFormat",
+        Order = 17,
+        Required = Required.Default
+    )]
+    [JsonPropertyName("aenderungszeitpunktDateFormat")]
+    [ProtoMember(17)]
+    [JsonPropertyOrder(17)]
+    [NonOfficial(NonOfficialCategory.CUSTOMER_REQUIREMENTS)]
+    public string? AenderungszeitpunktDateFormat { get; set; }
 }
