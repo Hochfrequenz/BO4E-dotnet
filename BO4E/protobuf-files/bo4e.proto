@@ -413,6 +413,7 @@ message Geraeteeigenschaften {
    option (.protobuf_net.msgopt).namespace = "BO4E.COM";
    Geraetetyp Geraetetyp = 3;
    Geraetemerkmal Geraetemerkmal = 4;
+   .bcl.Decimal Wandlerfaktor = 5;
    map<string,string> Parameter = 1005;
 }
 enum Geraetemerkmal {
