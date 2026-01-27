@@ -12,7 +12,7 @@ public enum Marktteilnehmerrolle
     /// Andere Partei - ein am Vorgang beteiligter Marktpartner.
     /// </summary>
     [ProtoEnum(Name = nameof(Marktteilnehmerrolle) + "_" + nameof(ANDERE_PARTEI))]
-    [EnumMember(Value = "anderepartei")]
-    [System.Text.Json.Serialization.JsonStringEnumMemberName("anderepartei")]
+    [EnumMember(Value = "ANDERE_PARTEI")]
+    [System.Text.Json.Serialization.JsonStringEnumMemberName("ANDERE_PARTEI")]
     ANDERE_PARTEI,
 }
