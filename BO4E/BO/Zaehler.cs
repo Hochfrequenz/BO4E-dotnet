@@ -200,4 +200,14 @@ public class Zaehler : BusinessObject
     [JsonPropertyName("geraete")]
     [ProtoMember(1020)]
     public List<Geraet>? Geraete { get; set; }
+
+    /// <summary>
+    /// Weitere Gerätenummern (z.B. von Wandlern).
+    /// </summary>
+    [JsonProperty(PropertyName = "weitereGeraetenummern", Order = 27)]
+    [JsonPropertyOrder(27)]
+    [JsonPropertyName("weitereGeraetenummern")]
+    [ProtoMember(1021)]
+    [NonOfficial(NonOfficialCategory.CUSTOMER_REQUIREMENTS)]
+    public List<string>? WeitereGeraetenummern { get; set; }
 }

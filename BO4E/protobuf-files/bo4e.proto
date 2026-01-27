@@ -2019,6 +2019,7 @@ message Zaehler {
    Befestigungsart Befestigungsart = 1018;
    Geraetemerkmal Zaehlergroesse = 1019;
    repeated Geraet Geraete = 1020;
+   repeated string WeitereGeraetenummern = 1021;
 }
 enum Zaehlerauspraegung {
    option (.protobuf_net.enumopt).namespace = "BO4E.ENUM";
