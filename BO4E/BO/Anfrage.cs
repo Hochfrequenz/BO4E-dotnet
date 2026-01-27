@@ -78,6 +78,9 @@ public class Anfrage : BusinessObject
     [JsonPropertyOrder(11)]
     public Anfragetyp? Anfragetyp { get; set; }
 
+    /// <summary>
+    /// Aus der ORDERS gemappte Positionsnummer der Anfrage
+    /// </summary>
     [JsonProperty(PropertyName = "positionsnummer", Order = 12)]
     [JsonPropertyName("positionsnummer")]
     [ProtoMember(1006)]
