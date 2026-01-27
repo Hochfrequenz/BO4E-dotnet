@@ -315,4 +315,14 @@ public class TechnischeRessource : BusinessObject
     [JsonPropertyOrder(30)]
     [NonOfficial(NonOfficialCategory.CUSTOMER_REQUIREMENTS)]
     public List<MarktpartnerDetails>? Marktrollen { get; set; } // ToDo: evaluate this
+
+    /// <summary>
+    /// Zuordnung der technischen Ressource zum Lokationsbündel.
+    /// </summary>
+    [JsonProperty(Order = 34, PropertyName = "zuordnungLokationsbuendel")]
+    [JsonPropertyName("zuordnungLokationsbuendel")]
+    [ProtoMember(31)]
+    [JsonPropertyOrder(34)]
+    [NonOfficial(NonOfficialCategory.CUSTOMER_REQUIREMENTS)]
+    public ZuordnungLokationsbuendel? ZuordnungLokationsbuendel { get; set; }
 }

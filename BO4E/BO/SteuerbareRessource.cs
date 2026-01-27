@@ -112,4 +112,14 @@ public class SteuerbareRessource : BusinessObject
     [JsonPropertyOrder(18)]
     [NonOfficial(NonOfficialCategory.CUSTOMER_REQUIREMENTS)]
     public List<Messprodukt>? Messprodukte { get; set; }
+
+    /// <summary>
+    /// Zuordnung der steuerbaren Ressource zum Lokationsbündel.
+    /// </summary>
+    [JsonProperty(Order = 19, PropertyName = "zuordnungLokationsbuendel")]
+    [JsonPropertyName("zuordnungLokationsbuendel")]
+    [ProtoMember(19)]
+    [JsonPropertyOrder(19)]
+    [NonOfficial(NonOfficialCategory.CUSTOMER_REQUIREMENTS)]
+    public ZuordnungLokationsbuendel? ZuordnungLokationsbuendel { get; set; }
 }

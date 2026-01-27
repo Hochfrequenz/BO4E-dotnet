@@ -1113,6 +1113,7 @@ message Messlokation {
    string VorgelagerteLokationsId = 1027;
    bool IstFuerLieferanmeldungRelevant = 1028;
    repeated LokationsTypZuordnung VorgelagerteLokationsIds = 1029;
+   ZuordnungLokationsbuendel ZuordnungLokationsbuendel = 1030;
 }
 message Messlokationszuordnung {
    option (.protobuf_net.msgopt).namespace = "BO4E.COM";
@@ -1776,6 +1777,11 @@ message Vertragsteil {
    Menge Kundenwert = 1010;
    string Verbrauchsaufteilung = 1011;
 }
+message Verwendungszweck {
+   option (.protobuf_net.msgopt).namespace = "BO4E.COM";
+   Marktrolle Marktrolle = 3;
+   repeated Verwendungszweck Zweck = 4 [packed = false];
+}
 enum Verwendungszweck {
    option (.protobuf_net.enumopt).namespace = "BO4E.ENUM";
    NETZNUTZUNGSABRECHNUNG = 0;
@@ -1785,11 +1791,6 @@ enum Verwendungszweck {
    BLINDARBEITABRECHNUNG_BETRIEBSFUEHRUNG = 4;
    UEBERMITTLUNG_AN_DAS_HKNR = 5;
    ERMITTLUNG_AUSGEGLICHENHEIT_BILANZKREIS = 6;
-}
-message Verwendungszweck {
-   option (.protobuf_net.msgopt).namespace = "BO4E.COM";
-   Marktrolle Marktrolle = 3;
-   repeated Verwendungszweck Zweck = 4 [packed = false];
 }
 message Vorauszahlung {
    option (.protobuf_net.msgopt).namespace = "BO4E.COM";
@@ -2130,6 +2131,11 @@ enum Zeitreihentyp {
    SRE = 16;
    SRI = 17;
    VZR = 18;
+}
+enum ZuordnungLokationsbuendel {
+   option (.protobuf_net.enumopt).namespace = "BO4E.ENUM";
+   ZuordnungLokationsbuendel_Z01 = 0;
+   ZuordnungLokationsbuendel_Z02 = 1;
 }
 message Zustaendigkeit {
    option (.protobuf_net.msgopt).namespace = "BO4E.COM";
