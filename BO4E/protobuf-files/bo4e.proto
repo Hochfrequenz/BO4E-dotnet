@@ -1073,6 +1073,7 @@ enum Mengeneinheit {
    KWHK = 40;
    W_M2 = 41;
    M_S = 42;
+   STUECK = 50;
    JAHR = 228;
    KWH = 2000;
    MW = 3000;
@@ -1262,6 +1263,7 @@ message Preisstaffel {
    .bcl.Decimal StaffelgrenzeVon = 4;
    .bcl.Decimal StaffelgrenzeBis = 5;
    Sigmoidparameter Sigmoidparameter = 6;
+   Mengeneinheit Mengeneinheit = 7;
 }
 enum Preisstatus {
    option (.protobuf_net.enumopt).namespace = "BO4E.ENUM";

@@ -1,4 +1,6 @@
 using System.Text.Json.Serialization;
+using BO4E.ENUM;
+using BO4E.meta;
 using Newtonsoft.Json;
 using ProtoBuf;
 
@@ -35,4 +37,13 @@ public class Preisstaffel : COM
     [JsonPropertyName("sigmoidparameter")]
     [ProtoMember(6)]
     public Sigmoidparameter? Sigmoidparameter { get; set; }
+
+    /// <summary>
+    /// Mengeneinheit für den jährlichen Mengenbereich der Staffel.
+    /// </summary>
+    [JsonProperty(PropertyName = "mengeneinheit")]
+    [JsonPropertyName("mengeneinheit")]
+    [ProtoMember(7)]
+    [NonOfficial(NonOfficialCategory.CUSTOMER_REQUIREMENTS)]
+    public Mengeneinheit? Mengeneinheit { get; set; }
 }
