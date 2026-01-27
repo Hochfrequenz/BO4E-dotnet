@@ -22,7 +22,7 @@ public enum Unternehmensart
 
     [EnumMember(Value = "MESSSTELLENBETREIBER")]
     [System.Text.Json.Serialization.JsonStringEnumMemberName("MESSSTELLENBETREIBER")]
-    [ProtoEnum(Name = nameof(Unternehmensart) + "_" + nameof(NETZBETREIBER))]
+    [ProtoEnum(Name = nameof(Unternehmensart) + "_" + nameof(MESSSTELLENBETREIBER))]
     MESSSTELLENBETREIBER,
 
     [EnumMember(Value = "ÜBERTRAGUNGSNETZBETREIBER")]
