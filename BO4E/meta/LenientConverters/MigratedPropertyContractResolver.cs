@@ -208,9 +208,16 @@ public class MigratedPropertyContractResolver : DefaultContractResolver
             }
         }
 
+        /// <summary>
+        /// Determines if an exception is a deserialization-related error that should be caught.
+        /// </summary>
+        /// <remarks>
+        /// This method intentionally catches a broad set of exceptions because legacy data
+        /// in UserProperties can have various type mismatches. The goal is to preserve the
+        /// application's ability to function while flagging problematic data for manual cleanup.
+        /// </remarks>
         private static bool IsDeserializationError(Exception ex)
         {
-            // Only catch type conversion/deserialization errors
             return ex is JsonSerializationException
                 || ex is JsonReaderException
                 || ex is FormatException

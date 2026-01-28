@@ -289,12 +289,35 @@ internal class MigratedPropertyConverter<T> : JsonConverter<T>
         }
     }
 
+    /// <summary>
+    /// Determines if an exception is a deserialization-related error that should be caught
+    /// for migrated properties.
+    /// </summary>
+    /// <remarks>
+    /// <para>
+    /// This method intentionally catches a broad set of exceptions beyond just <see cref="JsonException"/>
+    /// because legacy data in UserProperties can have various type mismatches that manifest as different
+    /// exception types during deserialization:
+    /// </para>
+    /// <list type="bullet">
+    ///     <item><description><see cref="JsonException"/>: JSON structure doesn't match expected type</description></item>
+    ///     <item><description><see cref="ArgumentException"/>: Invalid enum values, invalid arguments during conversion</description></item>
+    ///     <item><description><see cref="FormatException"/>: Invalid string format for dates, numbers, etc.</description></item>
+    ///     <item><description><see cref="InvalidCastException"/>: Type conversion failures</description></item>
+    ///     <item><description><see cref="NotSupportedException"/>: Unsupported type conversions</description></item>
+    /// </list>
+    /// <para>
+    /// This broader catching is intentional for data migration scenarios where the goal is to preserve
+    /// the application's ability to function while flagging problematic data for manual cleanup.
+    /// Errors on properties NOT marked with <see cref="MigratedFromUserPropertiesAttribute"/> will
+    /// still propagate normally.
+    /// </para>
+    /// </remarks>
     private static bool IsDeserializationError(Exception ex)
     {
-        // Catch deserialization-related errors but not fundamental issues
         return ex is JsonException
-            || ex is ArgumentException // Invalid enum value
-            || ex is FormatException // Invalid format
+            || ex is ArgumentException
+            || ex is FormatException
             || ex is InvalidCastException
             || ex is NotSupportedException;
     }

@@ -363,26 +363,32 @@ public class TestMigratedFromUserPropertiesAttribute
     #region Type Mismatch - Array with Wrong Element Types
 
     [TestMethod]
-    [Description("Array with invalid enum values deserializes without throwing - valid values are preserved")]
-    public void Test_SystemTextJson_ArrayWithInvalidEnumValues_HandlesGracefully()
+    [Description(
+        "Array with invalid enum value is stored in UserProperties (no partial salvaging)"
+    )]
+    public void Test_SystemTextJson_ArrayWithInvalidEnumValues_StoredInUserProperties()
     {
         // Arrange: "INVALID_ENUM" is not a valid Verbrauchsart
         var json =
             @"{""zaehlwerkId"":""ZW001"",""Verbrauchsarten"":[""KL"",""INVALID_ENUM"",""STW""]}";
         var options = GetSystemTextJsonOptions();
 
-        // Act: With MOST_LENIENT parsing, invalid enum values don't throw
+        // Act: With MigratedFromUserProperties, the entire array is stored when any element fails
         var action = () => JsonSerializer.Deserialize<Zaehlwerk>(json, options);
 
-        // Assert: Should not throw and valid enum values should be preserved
+        // Assert: Should not throw, but the entire array is stored in UserProperties
+        // because MigratedFromUserProperties operates at the property level, not element level
         action.Should().NotThrow();
         var result = action();
         result.Should().NotBeNull();
         result!.ZaehlwerkId.Should().Be("ZW001");
-        // The valid enum values KL and STW should be present
-        result.Verbrauchsarten.Should().NotBeNull();
-        result.Verbrauchsarten.Should().Contain(Verbrauchsart.KL);
-        result.Verbrauchsarten.Should().Contain(Verbrauchsart.STW);
+        // The entire property is set to null and the array is stored in UserProperties
+        result.Verbrauchsarten.Should().BeNull();
+        result
+            .UserProperties.Should()
+            .ContainKey(
+                MigratedFromUserPropertiesAttribute.GetUserPropertiesKey("Verbrauchsarten")
+            );
     }
 
     #endregion
