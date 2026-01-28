@@ -363,7 +363,7 @@ public class TestMigratedFromUserPropertiesAttribute
     #region Type Mismatch - Array with Wrong Element Types
 
     [TestMethod]
-    [Description("Array with invalid enum values still deserializes - invalid values are skipped")]
+    [Description("Array with invalid enum values deserializes without throwing - valid values are preserved")]
     public void Test_SystemTextJson_ArrayWithInvalidEnumValues_HandlesGracefully()
     {
         // Arrange: "INVALID_ENUM" is not a valid Verbrauchsart
@@ -371,13 +371,18 @@ public class TestMigratedFromUserPropertiesAttribute
             @"{""zaehlwerkId"":""ZW001"",""Verbrauchsarten"":[""KL"",""INVALID_ENUM"",""STW""]}";
         var options = GetSystemTextJsonOptions();
 
-        // Act & Assert: This may throw or handle depending on enum converter settings
-        // The behavior depends on how the enum converter handles invalid values
+        // Act: With MOST_LENIENT parsing, invalid enum values don't throw
         var action = () => JsonSerializer.Deserialize<Zaehlwerk>(json, options);
 
-        // Either it succeeds with partial data or the error is caught
+        // Assert: Should not throw and valid enum values should be preserved
+        action.Should().NotThrow();
         var result = action();
         result.Should().NotBeNull();
+        result!.ZaehlwerkId.Should().Be("ZW001");
+        // The valid enum values KL and STW should be present
+        result.Verbrauchsarten.Should().NotBeNull();
+        result.Verbrauchsarten.Should().Contain(Verbrauchsart.KL);
+        result.Verbrauchsarten.Should().Contain(Verbrauchsart.STW);
     }
 
     #endregion
