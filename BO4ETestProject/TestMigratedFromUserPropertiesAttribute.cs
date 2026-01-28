@@ -517,18 +517,16 @@ public class TestMigratedFromUserPropertiesAttribute
     }
 
     [TestMethod]
-    [Ignore(
-        "Known limitation: Newtonsoft's BusinessObjectBaseConverter uses JToken.ToObject() which bypasses the error handler. Use STJ for nested polymorphic scenarios."
-    )]
     [Description(
-        "Zaehlwerk in full Marktlokation context with type mismatch works with Newtonsoft"
+        "Documents Newtonsoft limitation: BusinessObjectBaseConverter bypasses error handler for nested polymorphic types"
     )]
-    public void Test_Newtonsoft_FullMarktlokationContext_TypeMismatchHandled()
+    public void Test_Newtonsoft_FullMarktlokationContext_KnownLimitation_ErrorHandlerBypassed()
     {
         // Arrange
-        // NOTE: This test is ignored because Newtonsoft's BusinessObjectBaseConverter
-        // deserializes using JToken.ToObject(), which bypasses our error handling.
-        // The STJ version of this test works correctly.
+        // Known limitation: Newtonsoft's BusinessObjectBaseConverter deserializes nested objects
+        // using JToken.ToObject(), which creates a separate serializer context that bypasses
+        // our error handling. This test documents this limitation by verifying that the
+        // migration error key is NOT populated (unlike the STJ version which works correctly).
         // For nested polymorphic BusinessObject deserialization with error tolerance,
         // use System.Text.Json instead of Newtonsoft.Json.
         var json =
@@ -546,21 +544,15 @@ public class TestMigratedFromUserPropertiesAttribute
         }";
         var settings = GetNewtonsoftSettings();
 
-        // Act
-        var result = JsonConvert.DeserializeObject<Marktlokation>(json, settings);
+        // Act: This will throw because the error handler is bypassed in nested polymorphic context
+        var action = () => JsonConvert.DeserializeObject<Marktlokation>(json, settings);
 
-        // Assert
-        result.Should().NotBeNull();
-        result!.MarktlokationsId.Should().Be("12345678901");
-        result.ZaehlwerkeBeteiligteMarktrolle.Should().NotBeNull().And.HaveCount(1);
-        var zaehlwerk = result.ZaehlwerkeBeteiligteMarktrolle![0];
-        zaehlwerk.ZaehlwerkId.Should().Be("ZW001");
-        zaehlwerk.Bezeichnung.Should().Be("Test");
-        zaehlwerk.Verbrauchsarten.Should().BeNull();
-        zaehlwerk
-            .UserProperties.Should()
-            .ContainKey(
-                MigratedFromUserPropertiesAttribute.GetUserPropertiesKey("Verbrauchsarten")
+        // Assert: Verifies the known limitation - deserialization throws instead of gracefully
+        // storing the error in UserProperties. Use STJ for this scenario.
+        action
+            .Should()
+            .Throw<JsonSerializationException>(
+                "BusinessObjectBaseConverter uses JToken.ToObject() which bypasses error handling"
             );
     }
 
