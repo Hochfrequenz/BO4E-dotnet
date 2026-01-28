@@ -635,20 +635,6 @@ public class TestMigratedFromUserPropertiesAttribute
 
     #endregion
 
-    #region Multiple Migrated Properties
-
-    [TestMethod]
-    [Description("Multiple migrated properties can fail independently")]
-    public void Test_SystemTextJson_MultipleMigratedProperties_CanFailIndependently()
-    {
-        // This test would require a type with multiple [MigratedFromUserProperties] properties
-        // For now, we test with Zaehlwerk which has one
-        // Future properties can be added and tested here
-        Assert.IsTrue(true, "Placeholder for future multi-property tests");
-    }
-
-    #endregion
-
     #region Edge Cases
 
     [TestMethod]
