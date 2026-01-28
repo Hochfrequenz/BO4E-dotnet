@@ -204,7 +204,9 @@ internal class MigratedPropertyConverter<T> : JsonConverter<T>
         var root = document.RootElement;
 
         // Check if any migrated property has an error-prone value
-        var propertiesToRemove = new Dictionary<string, JsonElement>();
+        // Store: (originalJsonKey, normalizedPropertyName, value)
+        var propertiesToRemove =
+            new List<(string OriginalKey, string NormalizedName, JsonElement Value)>();
 
         foreach (var prop in root.EnumerateObject())
         {
@@ -226,7 +228,8 @@ internal class MigratedPropertyConverter<T> : JsonConverter<T>
                         )
                     )
                     {
-                        propertiesToRemove[prop.Name] = prop.Value;
+                        // Store original key (for JSON removal) and normalized name (for consistent UserProperties key)
+                        propertiesToRemove.Add((prop.Name, migratedProp.JsonName, prop.Value));
                     }
                 }
             }
@@ -242,17 +245,23 @@ internal class MigratedPropertyConverter<T> : JsonConverter<T>
         else
         {
             // Create a modified JSON without the problematic properties
-            var modifiedJson = CreateModifiedJson(root, propertiesToRemove.Keys);
+            var modifiedJson = CreateModifiedJson(
+                root,
+                propertiesToRemove.Select(p => p.OriginalKey)
+            );
             result = DeserializeWithoutConverter(modifiedJson, options);
 
-            // Store the failed properties in UserProperties
+            // Store the failed properties in UserProperties using normalized property names
+            // This ensures consistent keys regardless of JSON input casing
             if (result != null)
             {
                 result.UserProperties ??= new Dictionary<string, object>();
-                foreach (var kvp in propertiesToRemove)
+                foreach (var (_, normalizedName, value) in propertiesToRemove)
                 {
-                    var key = MigratedFromUserPropertiesAttribute.GetUserPropertiesKey(kvp.Key);
-                    result.UserProperties[key] = JsonElementToObject(kvp.Value);
+                    var key = MigratedFromUserPropertiesAttribute.GetUserPropertiesKey(
+                        normalizedName
+                    );
+                    result.UserProperties[key] = JsonElementToObject(value);
                 }
             }
         }

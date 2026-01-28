@@ -689,4 +689,304 @@ public class TestMigratedFromUserPropertiesAttribute
     }
 
     #endregion
+
+    #region Stored Value Format Verification
+
+    [TestMethod]
+    [Description("STJ stores the raw JSON value as JsonElement for objects")]
+    public void Test_SystemTextJson_StoredValueFormat_IsJsonElementForObject()
+    {
+        // Arrange
+        var json = @"{""zaehlwerkId"":""ZW001"",""Verbrauchsarten"":{""invalid"":""object""}}";
+        var options = GetSystemTextJsonOptions();
+
+        // Act
+        var result = JsonSerializer.Deserialize<Zaehlwerk>(json, options);
+
+        // Assert
+        result.Should().NotBeNull();
+        var key = MigratedFromUserPropertiesAttribute.GetUserPropertiesKey("Verbrauchsarten");
+        result!.UserProperties.Should().ContainKey(key);
+        var storedValue = result.UserProperties![key];
+
+        // STJ stores JsonElement for objects/arrays
+        storedValue.Should().BeOfType<JsonElement>();
+        var element = (JsonElement)storedValue;
+        element.ValueKind.Should().Be(JsonValueKind.Object);
+        element.GetProperty("invalid").GetString().Should().Be("object");
+    }
+
+    [TestMethod]
+    [Description("STJ stores primitive values directly")]
+    public void Test_SystemTextJson_StoredValueFormat_IsPrimitiveForString()
+    {
+        // Arrange
+        var json = @"{""zaehlwerkId"":""ZW001"",""Verbrauchsarten"":""not_an_array""}";
+        var options = GetSystemTextJsonOptions();
+
+        // Act
+        var result = JsonSerializer.Deserialize<Zaehlwerk>(json, options);
+
+        // Assert
+        result.Should().NotBeNull();
+        var key = MigratedFromUserPropertiesAttribute.GetUserPropertiesKey("Verbrauchsarten");
+        result!.UserProperties.Should().ContainKey(key);
+        var storedValue = result.UserProperties![key];
+
+        // STJ converts string primitives directly
+        storedValue.Should().BeOfType<string>();
+        storedValue.Should().Be("not_an_array");
+    }
+
+    [TestMethod]
+    [Description(
+        "Newtonsoft stores error metadata when converter throws (raw value not accessible)"
+    )]
+    public void Test_Newtonsoft_StoredValueFormat_IsErrorMetadataWhenConverterThrows()
+    {
+        // Arrange
+        var json = @"{""zaehlwerkId"":""ZW001"",""Verbrauchsarten"":{""invalid"":""object""}}";
+        var settings = GetNewtonsoftSettings();
+
+        // Act
+        var result = JsonConvert.DeserializeObject<Zaehlwerk>(json, settings);
+
+        // Assert
+        result.Should().NotBeNull();
+        var key = MigratedFromUserPropertiesAttribute.GetUserPropertiesKey("Verbrauchsarten");
+        result!.UserProperties.Should().ContainKey(key);
+        var storedValue = result.UserProperties![key];
+
+        // When Newtonsoft converters (like LenientEnumListConverter) throw during ReadJson,
+        // the error handler catches it but cannot access the raw value (it's been consumed).
+        // It stores error metadata instead: { error, path }
+        // This is a Newtonsoft.Json limitation compared to STJ.
+        storedValue.Should().BeOfType<Dictionary<string, object>>();
+        var errorDict = (Dictionary<string, object>)storedValue;
+        errorDict.Should().ContainKey("error");
+        errorDict.Should().ContainKey("path");
+    }
+
+    #endregion
+
+    #region JsonExtensionData Interaction Tests
+
+    [TestMethod]
+    [Description("STJ preserves both migration errors and other unknown properties")]
+    public void Test_SystemTextJson_MigrationError_WithOtherUnknownProperties_BothPreserved()
+    {
+        // Arrange: Object instead of array AND an unknown property
+        var json =
+            @"{""zaehlwerkId"":""ZW001"",""Verbrauchsarten"":{""invalid"":""object""},""unknownCustomField"":""should be preserved""}";
+        var options = GetSystemTextJsonOptions();
+
+        // Act
+        var result = JsonSerializer.Deserialize<Zaehlwerk>(json, options);
+
+        // Assert
+        result.Should().NotBeNull();
+        result!.UserProperties.Should().NotBeNull();
+
+        // Migration error should be stored
+        result
+            .UserProperties.Should()
+            .ContainKey(
+                MigratedFromUserPropertiesAttribute.GetUserPropertiesKey("Verbrauchsarten")
+            );
+
+        // Unknown property should also be captured by JsonExtensionData
+        // Note: STJ stores extension data as JsonElement
+        result.UserProperties.Should().ContainKey("unknownCustomField");
+        var unknownValue = result.UserProperties!["unknownCustomField"];
+        unknownValue.Should().BeOfType<JsonElement>();
+        ((JsonElement)unknownValue).GetString().Should().Be("should be preserved");
+    }
+
+    [TestMethod]
+    [Description("Newtonsoft preserves both migration errors and other unknown properties")]
+    public void Test_Newtonsoft_MigrationError_WithOtherUnknownProperties_BothPreserved()
+    {
+        // Arrange
+        var json =
+            @"{""zaehlwerkId"":""ZW001"",""Verbrauchsarten"":{""invalid"":""object""},""unknownCustomField"":""should be preserved""}";
+        var settings = GetNewtonsoftSettings();
+
+        // Act
+        var result = JsonConvert.DeserializeObject<Zaehlwerk>(json, settings);
+
+        // Assert
+        result.Should().NotBeNull();
+        result!.UserProperties.Should().NotBeNull();
+
+        // Migration error should be stored
+        result
+            .UserProperties.Should()
+            .ContainKey(
+                MigratedFromUserPropertiesAttribute.GetUserPropertiesKey("Verbrauchsarten")
+            );
+
+        // Unknown property should also be captured by JsonExtensionData
+        result.UserProperties.Should().ContainKey("unknownCustomField");
+    }
+
+    #endregion
+
+    #region Key Casing Normalization Tests
+
+    [TestMethod]
+    [Description("STJ normalizes key casing regardless of input JSON casing")]
+    public void Test_SystemTextJson_KeyCasing_NormalizedToPropertyName()
+    {
+        // Arrange: Use lowercase JSON key instead of PascalCase property name
+        var json = @"{""zaehlwerkId"":""ZW001"",""verbrauchsarten"":{""invalid"":""object""}}";
+        var options = GetSystemTextJsonOptions();
+
+        // Act
+        var result = JsonSerializer.Deserialize<Zaehlwerk>(json, options);
+
+        // Assert: Key should use the declared property name "Verbrauchsarten", not input "verbrauchsarten"
+        result.Should().NotBeNull();
+        var expectedKey = MigratedFromUserPropertiesAttribute.GetUserPropertiesKey(
+            "Verbrauchsarten"
+        );
+        result!.UserProperties.Should().ContainKey(expectedKey);
+    }
+
+    #endregion
+
+    #region Newtonsoft Parity Tests
+
+    [TestMethod]
+    [Description("Empty array deserializes correctly with Newtonsoft")]
+    public void Test_Newtonsoft_EmptyVerbrauchsartenArray_DeserializesCorrectly()
+    {
+        // Arrange
+        var json = @"{""zaehlwerkId"":""ZW001"",""Verbrauchsarten"":[]}";
+        var settings = GetNewtonsoftSettings();
+
+        // Act
+        var result = JsonConvert.DeserializeObject<Zaehlwerk>(json, settings);
+
+        // Assert
+        result.Should().NotBeNull();
+        result!.Verbrauchsarten.Should().NotBeNull().And.BeEmpty();
+    }
+
+    [TestMethod]
+    [Description("Null Verbrauchsarten deserializes correctly with Newtonsoft")]
+    public void Test_Newtonsoft_NullVerbrauchsarten_DeserializesCorrectly()
+    {
+        // Arrange
+        var json = @"{""zaehlwerkId"":""ZW001"",""Verbrauchsarten"":null}";
+        var settings = GetNewtonsoftSettings();
+
+        // Act
+        var result = JsonConvert.DeserializeObject<Zaehlwerk>(json, settings);
+
+        // Assert
+        result.Should().NotBeNull();
+        // Note: Newtonsoft with LenientEnumListConverter may initialize an empty list for null
+        // Both null and empty list are acceptable outcomes for null input
+        if (result!.Verbrauchsarten != null)
+        {
+            result.Verbrauchsarten.Should().BeEmpty();
+        }
+    }
+
+    [TestMethod]
+    [Description("Boolean instead of array stores in UserProperties with Newtonsoft")]
+    public void Test_Newtonsoft_BooleanInsteadOfArray_StoresInUserProperties()
+    {
+        // Arrange
+        var json = @"{""zaehlwerkId"":""ZW001"",""Verbrauchsarten"":true}";
+        var settings = GetNewtonsoftSettings();
+
+        // Act
+        var result = JsonConvert.DeserializeObject<Zaehlwerk>(json, settings);
+
+        // Assert
+        result.Should().NotBeNull();
+        result!.Verbrauchsarten.Should().BeNull();
+        result.UserProperties.Should().NotBeNull();
+        result
+            .UserProperties.Should()
+            .ContainKey(
+                MigratedFromUserPropertiesAttribute.GetUserPropertiesKey("Verbrauchsarten")
+            );
+    }
+
+    [TestMethod]
+    [Description("Deeply nested object stores in UserProperties with Newtonsoft")]
+    public void Test_Newtonsoft_DeeplyNestedObjectMismatch_StoresInUserProperties()
+    {
+        // Arrange
+        var json =
+            @"{
+            ""zaehlwerkId"":""ZW001"",
+            ""Verbrauchsarten"":{
+                ""level1"":{
+                    ""level2"":{
+                        ""level3"":""deep value""
+                    }
+                }
+            }
+        }";
+        var settings = GetNewtonsoftSettings();
+
+        // Act
+        var result = JsonConvert.DeserializeObject<Zaehlwerk>(json, settings);
+
+        // Assert
+        result.Should().NotBeNull();
+        result!.Verbrauchsarten.Should().BeNull();
+        result
+            .UserProperties.Should()
+            .ContainKey(
+                MigratedFromUserPropertiesAttribute.GetUserPropertiesKey("Verbrauchsarten")
+            );
+    }
+
+    [TestMethod]
+    [Description("Empty object stores in UserProperties with Newtonsoft")]
+    public void Test_Newtonsoft_EmptyObject_StoresInUserProperties()
+    {
+        // Arrange
+        var json = @"{""zaehlwerkId"":""ZW001"",""Verbrauchsarten"":{}}";
+        var settings = GetNewtonsoftSettings();
+
+        // Act
+        var result = JsonConvert.DeserializeObject<Zaehlwerk>(json, settings);
+
+        // Assert
+        result.Should().NotBeNull();
+        result!.Verbrauchsarten.Should().BeNull();
+        result
+            .UserProperties.Should()
+            .ContainKey(
+                MigratedFromUserPropertiesAttribute.GetUserPropertiesKey("Verbrauchsarten")
+            );
+    }
+
+    [TestMethod]
+    [Description("Object with numeric keys stores in UserProperties with Newtonsoft")]
+    public void Test_Newtonsoft_ObjectWithNumericKeys_StoresInUserProperties()
+    {
+        // Arrange
+        var json = @"{""zaehlwerkId"":""ZW001"",""Verbrauchsarten"":{""0"":""KL"",""1"":""STW""}}";
+        var settings = GetNewtonsoftSettings();
+
+        // Act
+        var result = JsonConvert.DeserializeObject<Zaehlwerk>(json, settings);
+
+        // Assert
+        result.Should().NotBeNull();
+        result!.Verbrauchsarten.Should().BeNull();
+        result
+            .UserProperties.Should()
+            .ContainKey(
+                MigratedFromUserPropertiesAttribute.GetUserPropertiesKey("Verbrauchsarten")
+            );
+    }
+
+    #endregion
 }

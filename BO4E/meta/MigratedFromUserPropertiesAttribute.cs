@@ -82,6 +82,29 @@ namespace BO4E.meta;
 /// <c>_migrationError_{PropertyName}</c> keys in their UserProperties, this attribute
 /// can be safely removed from the property.
 /// </para>
+/// <para>
+/// <strong>FRAMEWORK DIFFERENCES:</strong>
+/// </para>
+/// <para>
+/// The stored value format differs between serializers:
+/// <list type="bullet">
+///     <item><description>System.Text.Json: Always stores the raw JSON value (JsonElement clone or primitive)</description></item>
+///     <item><description>Newtonsoft.Json: May store error metadata <c>{ error, path }</c> instead of the raw value
+///         when errors occur in JsonConverters (like LenientEnumListConverter). This is because the raw value
+///         has already been consumed by the reader when the error handler catches the exception.</description></item>
+/// </list>
+/// </para>
+/// <para>
+/// <strong>KNOWN LIMITATIONS:</strong>
+/// </para>
+/// <para>
+/// <list type="bullet">
+///     <item><description>Newtonsoft.Json with nested polymorphic BusinessObject deserialization (using BusinessObjectBaseConverter):
+///         The error handling may be bypassed because <c>JToken.ToObject()</c> creates a separate serializer context.</description></item>
+///     <item><description>Newtonsoft.Json raw value preservation: When JsonConverters are involved, the raw value
+///         cannot be preserved (only error metadata is stored). Use System.Text.Json if you need the raw value for data migration.</description></item>
+/// </list>
+/// </para>
 /// </remarks>
 /// <seealso cref="IUserProperties"/>
 /// <seealso cref="IUserProperties.UserProperties"/>

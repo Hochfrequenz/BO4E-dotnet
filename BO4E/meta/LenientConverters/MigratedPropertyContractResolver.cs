@@ -66,20 +66,26 @@ public class MigratedPropertyContractResolver : DefaultContractResolver
             return contract;
         }
 
-        // Get the set of migrated property names for this type
-        var migratedPropertyNames = GetMigratedPropertyNames(objectType);
-        if (migratedPropertyNames.Count == 0)
+        // Check if this type has any migrated properties (for early exit optimization)
+        if (GetMigratedPropertyNames(objectType).Count == 0)
         {
             return contract;
         }
 
         // Set up extension data handling if applicable
+        // Always allow migration error keys (prefixed with _migrationError_) through the whitelist
         if (contract.ExtensionDataSetter != null && _userPropertiesWhiteList != null)
         {
             var oldSetter = contract.ExtensionDataSetter;
             contract.ExtensionDataSetter = (o, key, value) =>
             {
-                if (_userPropertiesWhiteList.Contains(key))
+                if (
+                    _userPropertiesWhiteList.Contains(key)
+                    || key.StartsWith(
+                        MigratedFromUserPropertiesAttribute.UserPropertiesKeyPrefix,
+                        StringComparison.Ordinal
+                    )
+                )
                 {
                     oldSetter(o, key, value);
                 }

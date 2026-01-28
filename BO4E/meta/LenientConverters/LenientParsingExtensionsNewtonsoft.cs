@@ -85,7 +85,12 @@ public static class LenientParsingExtensionsNewtonsoft
             ContractResolver = contractResolver,
         };
 
-        // Add error handler for migrated properties
+        // Add error handler for migrated properties.
+        // Note: The MigratedPropertyContractResolver also handles errors via ErrorTolerantValueProvider,
+        // but when JsonConverters (like LenientEnumListConverter) are involved, errors occur in the
+        // converter's ReadJson method before the ValueProvider is called. The error handler catches
+        // these cases. Unfortunately, the error handler cannot access the raw value (it's been consumed
+        // by the reader), so it stores error metadata instead. This is a Newtonsoft.Json limitation.
         settings.WithMigratedPropertyErrorHandling();
 
         return settings;
