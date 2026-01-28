@@ -66,21 +66,26 @@ public class MigratedPropertyContractResolver : DefaultContractResolver
             return contract;
         }
 
-        // Check if this type has any migrated properties (for early exit optimization)
-        if (GetMigratedPropertyNames(objectType).Count == 0)
+        var hasMigratedProperties = GetMigratedPropertyNames(objectType).Count > 0;
+        var hasWhitelist = _userPropertiesWhiteList != null;
+
+        // Early exit only if there are no migrated properties AND no whitelist configured.
+        // When a whitelist is configured, we need to apply the filter even for types without
+        // migrated properties to maintain consistent behavior with UserPropertiesDataContractResolver.
+        if (!hasMigratedProperties && !hasWhitelist)
         {
             return contract;
         }
 
         // Set up extension data handling if applicable
         // Always allow migration error keys (prefixed with _migrationError_) through the whitelist
-        if (contract.ExtensionDataSetter != null && _userPropertiesWhiteList != null)
+        if (contract.ExtensionDataSetter != null && hasWhitelist)
         {
             var oldSetter = contract.ExtensionDataSetter;
             contract.ExtensionDataSetter = (o, key, value) =>
             {
                 if (
-                    _userPropertiesWhiteList.Contains(key)
+                    _userPropertiesWhiteList!.Contains(key)
                     || key.StartsWith(
                         MigratedFromUserPropertiesAttribute.UserPropertiesKeyPrefix,
                         StringComparison.Ordinal
