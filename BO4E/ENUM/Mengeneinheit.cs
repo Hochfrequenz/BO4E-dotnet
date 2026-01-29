@@ -127,4 +127,12 @@ public enum Mengeneinheit
     [EnumMember(Value = "M_S")]
     [System.Text.Json.Serialization.JsonStringEnumMemberName("M_S")]
     M_S,
+
+    /// <summary>
+    /// Stück (EDIFACT H87)
+    /// </summary>
+    [EnumMember(Value = "STUECK")]
+    [System.Text.Json.Serialization.JsonStringEnumMemberName("STUECK")]
+    // todo: how is it different from ANZAHL?
+    STUECK = 50,
 }

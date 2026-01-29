@@ -34,6 +34,7 @@ public static class MengeneinheitExtenion
         new HashSet<Mengeneinheit> { Mengeneinheit.KWHK },
         new HashSet<Mengeneinheit> { Mengeneinheit.M_S },
         new HashSet<Mengeneinheit> { Mengeneinheit.W_M2 },
+        new HashSet<Mengeneinheit> { Mengeneinheit.STUECK },
     };
 
     /// <summary>
