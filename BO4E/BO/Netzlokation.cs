@@ -175,4 +175,14 @@ public class Netzlokation : BusinessObject
     [JsonPropertyOrder(25)]
     [NonOfficial(NonOfficialCategory.CUSTOMER_REQUIREMENTS)]
     public List<Messprodukt>? Messprodukte { get; set; }
+
+    /// <summary>
+    /// Zuordnung der Netzlokation zum Lokationsbündel.
+    /// </summary>
+    [JsonProperty(Order = 26, PropertyName = "zuordnungLokationsbuendel")]
+    [JsonPropertyName("zuordnungLokationsbuendel")]
+    [ProtoMember(20)]
+    [JsonPropertyOrder(26)]
+    [NonOfficial(NonOfficialCategory.CUSTOMER_REQUIREMENTS)]
+    public ZuordnungLokationsbuendel? ZuordnungLokationsbuendel { get; set; }
 }

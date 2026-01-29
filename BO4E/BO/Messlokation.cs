@@ -317,6 +317,16 @@ public class Messlokation : BusinessObject
     public List<LokationsTypZuordnung>? VorgelagerteLokationsIds { get; set; }
 
     /// <summary>
+    /// Zuordnung der Messlokation zum Lokationsbündel.
+    /// </summary>
+    [JsonProperty(Order = 36, PropertyName = "zuordnungLokationsbuendel")]
+    [JsonPropertyName("zuordnungLokationsbuendel")]
+    [ProtoMember(1030)]
+    [JsonPropertyOrder(36)]
+    [NonOfficial(NonOfficialCategory.CUSTOMER_REQUIREMENTS)]
+    public ZuordnungLokationsbuendel? ZuordnungLokationsbuendel { get; set; }
+
+    /// <summary>
     ///     Test if a <paramref name="id" /> is a valid messlokations ID.
     /// </summary>
     /// <param name="id">id to test</param>

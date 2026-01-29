@@ -1119,6 +1119,7 @@ message Messlokation {
    string VorgelagerteLokationsId = 1027;
    bool IstFuerLieferanmeldungRelevant = 1028;
    repeated LokationsTypZuordnung VorgelagerteLokationsIds = 1029;
+   ZuordnungLokationsbuendel ZuordnungLokationsbuendel = 1030;
 }
 message Messlokationszuordnung {
    option (.protobuf_net.msgopt).namespace = "BO4E.COM";
@@ -2137,6 +2138,11 @@ enum Zeitreihentyp {
    SRE = 16;
    SRI = 17;
    VZR = 18;
+}
+enum ZuordnungLokationsbuendel {
+   option (.protobuf_net.enumopt).namespace = "BO4E.ENUM";
+   ZuordnungLokationsbuendel_Z01 = 0;
+   ZuordnungLokationsbuendel_Z02 = 1;
 }
 message Zustaendigkeit {
    option (.protobuf_net.msgopt).namespace = "BO4E.COM";
