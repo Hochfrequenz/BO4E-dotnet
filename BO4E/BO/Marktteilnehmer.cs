@@ -64,4 +64,14 @@ public class Marktteilnehmer : Geschaeftspartner
     [JsonPropertyName("ansprechpartner")]
     //[ProtoMember(23)]
     public Ansprechpartner? Ansprechpartner { get; set; }
+
+    /// <summary>
+    /// Rolle des Marktteilnehmers im Nachrichtenkontext (z.B. "anderepartei" für beteiligte Marktpartner).
+    /// </summary>
+    [NonOfficial(NonOfficialCategory.CUSTOMER_REQUIREMENTS)]
+    [JsonProperty(Order = 36, PropertyName = "rolle")]
+    [JsonPropertyOrder(36)]
+    [JsonPropertyName("rolle")]
+    //[ProtoMember(24)]
+    public Marktteilnehmerrolle? Rolle { get; set; }
 }
