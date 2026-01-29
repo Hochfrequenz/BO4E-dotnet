@@ -202,12 +202,22 @@ public class Zaehler : BusinessObject
     public List<Geraet>? Geraete { get; set; }
 
     /// <summary>
+    /// Weitere Gerätenummern (z.B. von Wandlern).
+    /// </summary>
+    [JsonProperty(PropertyName = "weitereGeraetenummern", Order = 27)]
+    [JsonPropertyOrder(27)]
+    [JsonPropertyName("weitereGeraetenummern")]
+    [ProtoMember(1021)]
+    [NonOfficial(NonOfficialCategory.CUSTOMER_REQUIREMENTS)]
+    public List<string>? WeitereGeraetenummern { get; set; }
+
+    /// <summary>
     /// Art der Volumenerfassung bei Mengenumwertern.
     /// </summary>
-    [JsonProperty(PropertyName = "artVolumenerfassung", Order = 27)]
-    [JsonPropertyOrder(27)]
+    [JsonProperty(PropertyName = "artVolumenerfassung", Order = 28)]
+    [JsonPropertyOrder(28)]
     [JsonPropertyName("artVolumenerfassung")]
-    [ProtoMember(1021)]
+    [ProtoMember(1022)]
     [NonOfficial(NonOfficialCategory.CUSTOMER_REQUIREMENTS)]
     public ArtVolumenerfassung? ArtVolumenerfassung { get; set; }
 }
