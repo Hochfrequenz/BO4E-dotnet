@@ -211,6 +211,7 @@ public class Zaehler : BusinessObject
     [NonOfficial(NonOfficialCategory.CUSTOMER_REQUIREMENTS)]
     public List<string>? WeitereGeraetenummern { get; set; }
 
+    /// <summary>
     /// Art der Volumenerfassung bei Mengenumwertern.
     /// </summary>
     [JsonProperty(PropertyName = "artVolumenerfassung", Order = 28)]
