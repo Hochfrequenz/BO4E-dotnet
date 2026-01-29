@@ -121,6 +121,11 @@ enum ArithmetischeOperation {
    DIVIDEND = 4;
    POSITIVWERT = 5;
 }
+enum ArtVolumenerfassung {
+   option (.protobuf_net.enumopt).namespace = "BO4E.ENUM";
+   ArtVolumenerfassung_KENNLINIENKORREKTUR = 0;
+   ArtVolumenerfassung_SCHLEICHMENGENUNTERDRÜCKUNG = 1;
+}
 enum ArtikelIdTyp {
    option (.protobuf_net.enumopt).namespace = "BO4E.ENUM";
    ArtikelIdTyp_ARTIKELID = 0;
@@ -1777,6 +1782,11 @@ message Vertragsteil {
    Menge Kundenwert = 1010;
    string Verbrauchsaufteilung = 1011;
 }
+message Verwendungszweck {
+   option (.protobuf_net.msgopt).namespace = "BO4E.COM";
+   Marktrolle Marktrolle = 3;
+   repeated Verwendungszweck Zweck = 4 [packed = false];
+}
 enum Verwendungszweck {
    option (.protobuf_net.enumopt).namespace = "BO4E.ENUM";
    NETZNUTZUNGSABRECHNUNG = 0;
@@ -1786,11 +1796,6 @@ enum Verwendungszweck {
    BLINDARBEITABRECHNUNG_BETRIEBSFUEHRUNG = 4;
    UEBERMITTLUNG_AN_DAS_HKNR = 5;
    ERMITTLUNG_AUSGEGLICHENHEIT_BILANZKREIS = 6;
-}
-message Verwendungszweck {
-   option (.protobuf_net.msgopt).namespace = "BO4E.COM";
-   Marktrolle Marktrolle = 3;
-   repeated Verwendungszweck Zweck = 4 [packed = false];
 }
 message Vorauszahlung {
    option (.protobuf_net.msgopt).namespace = "BO4E.COM";
@@ -2020,6 +2025,7 @@ message Zaehler {
    Befestigungsart Befestigungsart = 1018;
    Geraetemerkmal Zaehlergroesse = 1019;
    repeated Geraet Geraete = 1020;
+   ArtVolumenerfassung ArtVolumenerfassung = 1021;
 }
 enum Zaehlerauspraegung {
    option (.protobuf_net.enumopt).namespace = "BO4E.ENUM";
