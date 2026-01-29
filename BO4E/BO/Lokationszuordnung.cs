@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using System.Text.Json.Serialization;
 using BO4E.COM;
+using BO4E.ENUM;
 using BO4E.meta;
 using Newtonsoft.Json;
 using ProtoBuf;
@@ -87,4 +88,24 @@ public class Lokationszuordnung : BusinessObject
     [ProtoMember(18)]
     [BoKey]
     public string? LokationsbuendelCode { get; set; }
+
+    /// <summary>
+    /// Gibt an, ob eine Lokationsbündelstruktur vorhanden ist (Z31) oder nicht (Z39).
+    /// </summary>
+    [JsonProperty(Order = 19, PropertyName = "lokationsbuendelstrukturVorhanden")]
+    [JsonPropertyName("lokationsbuendelstrukturVorhanden")]
+    [JsonPropertyOrder(19)]
+    [ProtoMember(19)]
+    [NonOfficial(NonOfficialCategory.CUSTOMER_REQUIREMENTS)]
+    public LokationsbuendelstrukturVorhanden? LokationsbuendelstrukturVorhanden { get; set; }
+
+    /// <summary>
+    /// Zeilennummer zur Referenzierung innerhalb der Lokationsbündelstruktur.
+    /// </summary>
+    [JsonProperty(Order = 20, PropertyName = "zeilennummer")]
+    [JsonPropertyName("zeilennummer")]
+    [JsonPropertyOrder(20)]
+    [ProtoMember(20)]
+    [NonOfficial(NonOfficialCategory.CUSTOMER_REQUIREMENTS)]
+    public string? Zeilennummer { get; set; }
 }

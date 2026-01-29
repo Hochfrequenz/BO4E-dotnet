@@ -210,4 +210,13 @@ public class Zaehler : BusinessObject
     [ProtoMember(1021)]
     [NonOfficial(NonOfficialCategory.CUSTOMER_REQUIREMENTS)]
     public List<string>? WeitereGeraetenummern { get; set; }
+
+    /// Art der Volumenerfassung bei Mengenumwertern.
+    /// </summary>
+    [JsonProperty(PropertyName = "artVolumenerfassung", Order = 28)]
+    [JsonPropertyOrder(28)]
+    [JsonPropertyName("artVolumenerfassung")]
+    [ProtoMember(1022)]
+    [NonOfficial(NonOfficialCategory.CUSTOMER_REQUIREMENTS)]
+    public ArtVolumenerfassung? ArtVolumenerfassung { get; set; }
 }
