@@ -45,4 +45,14 @@ public class Geraeteeigenschaften : COM
     [JsonPropertyOrder(12)]
     [Obsolete("Use the COM.UserProperties instead", true)]
     private Dictionary<string, string>? Parameter { get; set; } // ToDo: add docstring
+
+    /// <summary>
+    /// Wandlerfaktor für Strom-/Spannungswandler.
+    /// </summary>
+    [JsonProperty(PropertyName = "wandlerfaktor", Order = 13)]
+    [JsonPropertyName("wandlerfaktor")]
+    [ProtoMember(5)]
+    [JsonPropertyOrder(13)]
+    [NonOfficial(NonOfficialCategory.CUSTOMER_REQUIREMENTS)]
+    public decimal? Wandlerfaktor { get; set; }
 }
