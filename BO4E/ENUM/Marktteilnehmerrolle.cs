@@ -15,4 +15,12 @@ public enum Marktteilnehmerrolle
     [EnumMember(Value = "ANDERE_PARTEI")]
     [System.Text.Json.Serialization.JsonStringEnumMemberName("ANDERE_PARTEI")]
     ANDERE_PARTEI,
+
+    /// <summary>
+    /// Empfaenger einer Nachricht
+    /// </summary>
+    [ProtoEnum(Name = nameof(Marktteilnehmerrolle) + "_" + nameof(EMPFAENGER))]
+    [EnumMember(Value = "EMPFAENGER")]
+    [System.Text.Json.Serialization.JsonStringEnumMemberName("EMPFAENGER")]
+    EMPFAENGER,
 }
