@@ -55,4 +55,14 @@ public class Geraeteeigenschaften : COM
     [JsonPropertyOrder(13)]
     [NonOfficial(NonOfficialCategory.CUSTOMER_REQUIREMENTS)]
     public decimal? Wandlerfaktor { get; set; }
+
+    /// <summary>
+    /// Weitere Gerätenummern (z.B. von Wandlern).
+    /// </summary>
+    [JsonProperty(PropertyName = "weitereGeraetenummern", Order = 14)]
+    [JsonPropertyOrder(14)]
+    [JsonPropertyName("weitereGeraetenummern")]
+    [ProtoMember(6)]
+    [NonOfficial(NonOfficialCategory.CUSTOMER_REQUIREMENTS)]
+    public List<string>? WeitereGeraetenummern { get; set; }
 }
