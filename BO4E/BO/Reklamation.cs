@@ -103,4 +103,14 @@ public class Reklamation : BusinessObject
     [ProtoIgnore]
     [Newtonsoft.Json.JsonConverter(typeof(LenientDateTimeConverter))]
     public DateTimeOffset? ZeitpunktFuerWertanfrage { get; set; }
+
+    /// <summary>
+    /// vorgegebene Positionsnummer innerhalb einer Anforderung
+    /// </summary>
+    /// <remarks>LIN+?</remarks>
+    [JsonProperty(PropertyName = "positionsnummer", Order = 17)]
+    [JsonPropertyName("positionsnummer")]
+    [ProtoMember(1007)]
+    [JsonPropertyOrder(17)]
+    public int? Positionsnummer { get; set; }
 }
