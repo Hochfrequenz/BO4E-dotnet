@@ -105,12 +105,12 @@ public class Reklamation : BusinessObject
     public DateTimeOffset? ZeitpunktFuerWertanfrage { get; set; }
 
     /// <summary>
-    /// vorgegebene Positionsnummer innerhalb einer Anforderung
+    /// Aus der ORDERS gemappte Positionsnummer der Anfrage
     /// </summary>
     /// <remarks>LIN+?</remarks>
     [JsonProperty(PropertyName = "positionsnummer", Order = 17)]
     [JsonPropertyName("positionsnummer")]
     [ProtoMember(1007)]
     [JsonPropertyOrder(17)]
-    public int? Positionsnummer { get; set; }
+    public string? Positionsnummer { get; set; }
 }
