@@ -1,4 +1,5 @@
 using System.Runtime.Serialization;
+using BO4E.meta.LenientConverters;
 using ProtoBuf;
 
 namespace BO4E.ENUM;
@@ -6,6 +7,10 @@ namespace BO4E.ENUM;
 /// <summary>
 /// Rolle eines Marktteilnehmers im Nachrichtenkontext.
 /// </summary>
+[Newtonsoft.Json.JsonConverter(typeof(NewtonsoftMarktteilnehmerrolleStringEnumConverter))]
+[System.Text.Json.Serialization.JsonConverter(
+    typeof(SystemTextMarktteilnehmerrolleStringEnumConverter)
+)]
 public enum Marktteilnehmerrolle
 {
     /// <summary>
@@ -17,7 +22,7 @@ public enum Marktteilnehmerrolle
     ANDERE_PARTEI,
 
     /// <summary>
-    /// Empfaenger einer Nachricht
+    /// Empfaenger einer NachrichUs
     /// </summary>
     [ProtoEnum(Name = nameof(Marktteilnehmerrolle) + "_" + nameof(EMPFAENGER))]
     [EnumMember(Value = "EMPFAENGER")]
