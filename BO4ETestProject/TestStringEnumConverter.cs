@@ -1013,6 +1013,44 @@ public class TestStringEnumConverter
     [DataRow("anderepartei", Marktteilnehmerrolle.ANDERE_PARTEI)]
     [DataRow("ANDERE_PARTEI", Marktteilnehmerrolle.ANDERE_PARTEI)]
     [DataRow("EMPFAENGER", Marktteilnehmerrolle.EMPFAENGER)]
+    public void Test_Marktteilnehmer_Deserialization_Default_Settings_Newtonsoft(
+        string jsonValue,
+        Marktteilnehmerrolle expectedRolle
+    )
+    {
+        // Proves that the type-level [JsonConverter] attribute on the enum works
+        // for the actual Marktteilnehmer BO without any converter registration.
+        var jsonString = "{\"rolle\": \"" + jsonValue + "\"}";
+        var actual = Newtonsoft.Json.JsonConvert.DeserializeObject<BO4E.BO.Marktteilnehmer>(
+            jsonString
+        );
+        actual.Should().NotBeNull();
+        actual.Rolle.Should().Be(expectedRolle);
+    }
+
+    [TestMethod]
+    [DataRow("anderepartei", Marktteilnehmerrolle.ANDERE_PARTEI)]
+    [DataRow("ANDERE_PARTEI", Marktteilnehmerrolle.ANDERE_PARTEI)]
+    [DataRow("EMPFAENGER", Marktteilnehmerrolle.EMPFAENGER)]
+    public void Test_Marktteilnehmer_Deserialization_Default_Settings_SystemText(
+        string jsonValue,
+        Marktteilnehmerrolle expectedRolle
+    )
+    {
+        // Proves that the property-level [JsonConverter] attribute on Marktteilnehmer.Rolle
+        // works without any converter registration or lenient options.
+        var jsonString = "{\"rolle\": \"" + jsonValue + "\"}";
+        var actual = System.Text.Json.JsonSerializer.Deserialize<BO4E.BO.Marktteilnehmer>(
+            jsonString
+        );
+        actual.Should().NotBeNull();
+        actual.Rolle.Should().Be(expectedRolle);
+    }
+
+    [TestMethod]
+    [DataRow("anderepartei", Marktteilnehmerrolle.ANDERE_PARTEI)]
+    [DataRow("ANDERE_PARTEI", Marktteilnehmerrolle.ANDERE_PARTEI)]
+    [DataRow("EMPFAENGER", Marktteilnehmerrolle.EMPFAENGER)]
     public void Test_Newtonsoft_Marktteilnehmerrolle_Default_Settings(
         string jsonValue,
         Marktteilnehmerrolle expectedRolle
