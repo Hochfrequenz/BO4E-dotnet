@@ -7,6 +7,10 @@ namespace BO4E.meta.LenientConverters;
 /// Converts legacy value 'anderepartei' to Enum Member Marktteilnehmerrolle.ANDERE_PARTEI for non-nullable Marktteilnehmerrolle.
 /// <seealso cref="SystemTextNullableMarktteilnehmerrolleStringEnumConverter"/>
 /// </summary>
+/// <remarks>
+/// Note: <see cref="Write"/> uses <c>value.ToString()</c> which returns the C# member name (e.g. "ANDERE_PARTEI").
+/// This only produces correct output because the member name matches the <c>[EnumMember]</c> value.
+/// </remarks>
 public class SystemTextMarktteilnehmerrolleStringEnumConverter
     : System.Text.Json.Serialization.JsonConverter<Marktteilnehmerrolle>
 {

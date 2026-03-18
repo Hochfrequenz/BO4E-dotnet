@@ -4,17 +4,15 @@ using BO4E.ENUM;
 namespace BO4E.meta.LenientConverters;
 
 /// <summary>
-/// Converts legacy value 'anderepartei' to Enum Member Marktteilnehmerrolle.ANDERE_PARTEI
+/// Converts legacy value 'anderepartei' to Enum Member Marktteilnehmerrolle.ANDERE_PARTEI.
 /// </summary>
 /// <remarks>
-/// It is intended, that you use this converter TOGETHER with the <see cref="Newtonsoft.Json.Converters.StringEnumConverter"/>.
-/// In this case you need to add this converter BEFORE the <see cref="Newtonsoft.Json.Converters.StringEnumConverter"/> in the list of converters.
-/// <code>
-/// var settings = new Newtonsoft.Json.JsonSerializerSettings()
-/// {
-///     Converters = { new NewtonsoftMarktteilnehmerrolleStringEnumConverter(), new StringEnumConverter() }
-/// };
-/// </code>
+/// This converter is applied via the type-level <c>[JsonConverter]</c> attribute on <see cref="Marktteilnehmerrolle"/>.
+/// In Newtonsoft.Json, type-level attributes have higher priority than converters in
+/// <see cref="Newtonsoft.Json.JsonSerializerSettings.Converters"/>, so explicit registration is not needed.
+/// <para/>
+/// Note: <see cref="WriteJson"/> uses <c>value.ToString()</c> which returns the C# member name (e.g. "ANDERE_PARTEI").
+/// This only produces correct output because the member name matches the <c>[EnumMember]</c> value.
 /// </remarks>
 public class NewtonsoftMarktteilnehmerrolleStringEnumConverter
     : Newtonsoft.Json.JsonConverter<Marktteilnehmerrolle?>
