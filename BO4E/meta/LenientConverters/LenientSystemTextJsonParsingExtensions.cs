@@ -47,6 +47,15 @@ public static class LenientSystemTextJsonParsingExtensions
         settings.Converters.Add(new SystemTextVerwendungszweckStringEnumConverter());
         settings.Converters.Add(new SystemTextNullableGasqualitaetStringEnumConverter());
         settings.Converters.Add(new SystemTextGasqualitaetStringEnumConverter());
+        // Marktteilnehmerrolle: In STJ, options-level converters override type-level [JsonConverter]
+        // attributes (priority: property attribute > options > type attribute). So the
+        // StringNullableEnumConverter/JsonStringEnumConverter below would win over the type-level
+        // attribute. We must register these explicitly here to handle any class with a
+        // Marktteilnehmerrolle property. Marktteilnehmer.Rolle also has a property-level attribute
+        // as belt-and-suspenders. For Newtonsoft, the type-level [JsonConverter] has highest priority,
+        // so no registration is needed there (see LenientParsingExtensionsNewtonsoft).
+        settings.Converters.Add(new SystemTextNullableMarktteilnehmerrolleStringEnumConverter());
+        settings.Converters.Add(new SystemTextMarktteilnehmerrolleStringEnumConverter());
         settings.Converters.Add(new LenientSystemTextJsonStringToBoolConverter());
         settings.Converters.Add(new StringNullableEnumConverter());
         settings.Converters.Add(new JsonStringEnumConverter());

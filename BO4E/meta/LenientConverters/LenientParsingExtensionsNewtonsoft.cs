@@ -75,6 +75,10 @@ public static class LenientParsingExtensionsNewtonsoft
             converters.Insert(index: 0, item: new NewtonsoftGasqualitaetStringEnumConverter());
             converters.Insert(index: 0, item: new NewtonsoftVerwendungszweckStringEnumConverter());
             // need to be placed BEFORE the regular StringEnumConverter, see their documentation
+            // Note: No Marktteilnehmerrolle converter registered here. In Newtonsoft, the type-level
+            // [JsonConverter] attribute on the enum has higher priority than converters in settings,
+            // so the attribute alone is sufficient. This differs from STJ where options-level converters
+            // override type-level attributes (see LenientSystemTextJsonParsingExtensions).
         }
         var settings = new JsonSerializerSettings
         {

@@ -767,4 +767,407 @@ public class TestStringEnumConverter
         var reSerializedJsonString = System.Text.Json.JsonSerializer.Serialize(result);
         reSerializedJsonString.Should().Contain("MEHRMINDERMENGENABRECHNUNG");
     }
+
+    public class ClassWithNullableMarktteilnehmerrolle
+    {
+        public Marktteilnehmerrolle? Foo { get; set; }
+    }
+
+    public class ClassWithNonNullableMarktteilnehmerrolle
+    {
+        public Marktteilnehmerrolle Foo { get; set; }
+    }
+
+    [TestMethod]
+    [DataRow("anderepartei", Marktteilnehmerrolle.ANDERE_PARTEI, false)]
+    [DataRow("ANDEREPARTEI", Marktteilnehmerrolle.ANDERE_PARTEI, false)]
+    [DataRow("ANDERE_PARTEI", Marktteilnehmerrolle.ANDERE_PARTEI, false)]
+    [DataRow("EMPFAENGER", Marktteilnehmerrolle.EMPFAENGER, false)]
+    [DataRow(null, null, false)]
+    [DataRow("anderepartei", Marktteilnehmerrolle.ANDERE_PARTEI, true)]
+    [DataRow("ANDEREPARTEI", Marktteilnehmerrolle.ANDERE_PARTEI, true)]
+    [DataRow("ANDERE_PARTEI", Marktteilnehmerrolle.ANDERE_PARTEI, true)]
+    [DataRow("EMPFAENGER", Marktteilnehmerrolle.EMPFAENGER, true)]
+    [DataRow(null, null, true)]
+    public void Test_System_Text_Marktteilnehmerrolle_Legacy_Converter_With_Nullable(
+        string? jsonValue,
+        Marktteilnehmerrolle? expectedMarktteilnehmerrolle,
+        bool useMostLenient
+    )
+    {
+        string jsonString;
+        if (jsonValue != null)
+        {
+            jsonString = "{\"Foo\": \"" + jsonValue + "\"}";
+        }
+        else
+        {
+            jsonString = "{\"Foo\": null}";
+        }
+
+        JsonSerializerOptions settings;
+        if (useMostLenient)
+        {
+            settings = LenientParsing.MOST_LENIENT.GetJsonSerializerOptions();
+        }
+        else
+        {
+            settings = new JsonSerializerOptions
+            {
+                Converters = { new SystemTextNullableMarktteilnehmerrolleStringEnumConverter() },
+            };
+        }
+
+        var actual =
+            System.Text.Json.JsonSerializer.Deserialize<ClassWithNullableMarktteilnehmerrolle>(
+                jsonString,
+                settings
+            );
+        actual.Should().NotBeNull();
+        actual.Foo.Should().Be(expectedMarktteilnehmerrolle);
+
+        var reSerializedJsonString = System.Text.Json.JsonSerializer.Serialize(actual, settings);
+        reSerializedJsonString.Should().Contain(expectedMarktteilnehmerrolle?.ToString() ?? "null");
+    }
+
+    [TestMethod]
+    [DataRow("anderepartei", Marktteilnehmerrolle.ANDERE_PARTEI, false)]
+    [DataRow("ANDEREPARTEI", Marktteilnehmerrolle.ANDERE_PARTEI, false)]
+    [DataRow("ANDERE_PARTEI", Marktteilnehmerrolle.ANDERE_PARTEI, false)]
+    [DataRow("EMPFAENGER", Marktteilnehmerrolle.EMPFAENGER, false)]
+    [DataRow("anderepartei", Marktteilnehmerrolle.ANDERE_PARTEI, true)]
+    [DataRow("ANDEREPARTEI", Marktteilnehmerrolle.ANDERE_PARTEI, true)]
+    [DataRow("ANDERE_PARTEI", Marktteilnehmerrolle.ANDERE_PARTEI, true)]
+    [DataRow("EMPFAENGER", Marktteilnehmerrolle.EMPFAENGER, true)]
+    public void Test_System_Text_Marktteilnehmerrolle_Legacy_Converter_With_Non_Nullable(
+        string? jsonValue,
+        Marktteilnehmerrolle expectedMarktteilnehmerrolle,
+        bool useMostLenient
+    )
+    {
+        string jsonString = "{\"Foo\": \"" + jsonValue + "\"}";
+
+        JsonSerializerOptions settings;
+        if (useMostLenient)
+        {
+            settings = LenientParsing.MOST_LENIENT.GetJsonSerializerOptions();
+        }
+        else
+        {
+            settings = new JsonSerializerOptions
+            {
+                Converters = { new SystemTextMarktteilnehmerrolleStringEnumConverter() },
+            };
+        }
+        var actual =
+            System.Text.Json.JsonSerializer.Deserialize<ClassWithNonNullableMarktteilnehmerrolle>(
+                jsonString,
+                settings
+            );
+        actual.Should().NotBeNull();
+        actual.Foo.Should().Be(expectedMarktteilnehmerrolle);
+
+        var reSerializedJsonString = System.Text.Json.JsonSerializer.Serialize(actual, settings);
+        reSerializedJsonString.Should().Contain(expectedMarktteilnehmerrolle.ToString());
+    }
+
+    [TestMethod]
+    [DataRow("anderepartei", Marktteilnehmerrolle.ANDERE_PARTEI, false)]
+    [DataRow("ANDEREPARTEI", Marktteilnehmerrolle.ANDERE_PARTEI, false)]
+    [DataRow("ANDERE_PARTEI", Marktteilnehmerrolle.ANDERE_PARTEI, false)]
+    [DataRow("EMPFAENGER", Marktteilnehmerrolle.EMPFAENGER, false)]
+    [DataRow(null, null, false)]
+    [DataRow("anderepartei", Marktteilnehmerrolle.ANDERE_PARTEI, true)]
+    [DataRow("ANDEREPARTEI", Marktteilnehmerrolle.ANDERE_PARTEI, true)]
+    [DataRow("ANDERE_PARTEI", Marktteilnehmerrolle.ANDERE_PARTEI, true)]
+    [DataRow("EMPFAENGER", Marktteilnehmerrolle.EMPFAENGER, true)]
+    [DataRow(null, null, true)]
+    public void Test_Newtonsoft_Marktteilnehmerrolle_Legacy_Converter_With_Nullable(
+        string? jsonValue,
+        Marktteilnehmerrolle? expectedMarktteilnehmerrolle,
+        bool useMostLenient
+    )
+    {
+        string jsonString;
+        if (jsonValue != null)
+        {
+            jsonString = "{\"Foo\": \"" + jsonValue + "\"}";
+        }
+        else
+        {
+            jsonString = "{\"Foo\": null}";
+        }
+
+        Newtonsoft.Json.JsonSerializerSettings settings;
+        if (useMostLenient)
+        {
+            settings = LenientParsing.MOST_LENIENT.GetJsonSerializerSettings();
+        }
+        else
+        {
+            settings = new Newtonsoft.Json.JsonSerializerSettings()
+            {
+                Converters =
+                {
+                    new NewtonsoftMarktteilnehmerrolleStringEnumConverter(),
+                    new StringEnumConverter(),
+                },
+            };
+        }
+        var actual =
+            Newtonsoft.Json.JsonConvert.DeserializeObject<ClassWithNullableMarktteilnehmerrolle>(
+                jsonString,
+                settings
+            );
+        actual.Should().NotBeNull();
+        actual.Foo.Should().Be(expectedMarktteilnehmerrolle);
+
+        var reSerializedJsonString = Newtonsoft.Json.JsonConvert.SerializeObject(actual, settings);
+        reSerializedJsonString.Should().Contain(expectedMarktteilnehmerrolle?.ToString() ?? "null");
+    }
+
+    [TestMethod]
+    [DataRow("anderepartei", Marktteilnehmerrolle.ANDERE_PARTEI, true)]
+    [DataRow("ANDEREPARTEI", Marktteilnehmerrolle.ANDERE_PARTEI, true)]
+    [DataRow("ANDERE_PARTEI", Marktteilnehmerrolle.ANDERE_PARTEI, true)]
+    [DataRow("EMPFAENGER", Marktteilnehmerrolle.EMPFAENGER, true)]
+    [DataRow("anderepartei", Marktteilnehmerrolle.ANDERE_PARTEI, false)]
+    [DataRow("ANDEREPARTEI", Marktteilnehmerrolle.ANDERE_PARTEI, false)]
+    [DataRow("ANDERE_PARTEI", Marktteilnehmerrolle.ANDERE_PARTEI, false)]
+    [DataRow("EMPFAENGER", Marktteilnehmerrolle.EMPFAENGER, false)]
+    public void Test_Newtonsoft_Marktteilnehmerrolle_Legacy_Converter_With_Non_Nullable(
+        string? jsonValue,
+        Marktteilnehmerrolle expectedMarktteilnehmerrolle,
+        bool useMostLenient
+    )
+    {
+        string jsonString = "{\"Foo\": \"" + jsonValue + "\"}";
+        Newtonsoft.Json.JsonSerializerSettings settings;
+        if (useMostLenient)
+        {
+            settings = LenientParsing.MOST_LENIENT.GetJsonSerializerSettings();
+        }
+        else
+        {
+            settings = new Newtonsoft.Json.JsonSerializerSettings()
+            {
+                Converters =
+                {
+                    new NewtonsoftMarktteilnehmerrolleStringEnumConverter(),
+                    new StringEnumConverter(),
+                },
+            };
+        }
+
+        var actual =
+            Newtonsoft.Json.JsonConvert.DeserializeObject<ClassWithNonNullableMarktteilnehmerrolle>(
+                jsonString,
+                settings
+            );
+        actual.Should().NotBeNull();
+        actual.Foo.Should().Be(expectedMarktteilnehmerrolle);
+
+        var reSerializedJsonString = Newtonsoft.Json.JsonConvert.SerializeObject(actual, settings);
+        reSerializedJsonString.Should().Contain(expectedMarktteilnehmerrolle.ToString());
+    }
+
+    [TestMethod]
+    [DataRow("anderepartei", Marktteilnehmerrolle.ANDERE_PARTEI)]
+    [DataRow("ANDERE_PARTEI", Marktteilnehmerrolle.ANDERE_PARTEI)]
+    [DataRow("EMPFAENGER", Marktteilnehmerrolle.EMPFAENGER)]
+    public void Test_Marktteilnehmer_Deserialization_With_Legacy_Rolle_Newtonsoft(
+        string jsonValue,
+        Marktteilnehmerrolle expectedRolle
+    )
+    {
+        var jsonString = "{\"rolle\": \"" + jsonValue + "\"}";
+        var settings = LenientParsing.MOST_LENIENT.GetJsonSerializerSettings();
+        var actual = Newtonsoft.Json.JsonConvert.DeserializeObject<BO4E.BO.Marktteilnehmer>(
+            jsonString,
+            settings
+        );
+        actual.Should().NotBeNull();
+        actual.Rolle.Should().Be(expectedRolle);
+    }
+
+    [TestMethod]
+    [DataRow("anderepartei", Marktteilnehmerrolle.ANDERE_PARTEI)]
+    [DataRow("ANDERE_PARTEI", Marktteilnehmerrolle.ANDERE_PARTEI)]
+    [DataRow("EMPFAENGER", Marktteilnehmerrolle.EMPFAENGER)]
+    public void Test_Marktteilnehmer_Deserialization_With_Legacy_Rolle_SystemText(
+        string jsonValue,
+        Marktteilnehmerrolle expectedRolle
+    )
+    {
+        var jsonString = "{\"rolle\": \"" + jsonValue + "\"}";
+        var settings = LenientParsing.MOST_LENIENT.GetJsonSerializerOptions();
+        var actual = System.Text.Json.JsonSerializer.Deserialize<BO4E.BO.Marktteilnehmer>(
+            jsonString,
+            settings
+        );
+        actual.Should().NotBeNull();
+        actual.Rolle.Should().Be(expectedRolle);
+    }
+
+    [TestMethod]
+    [DataRow("anderepartei", Marktteilnehmerrolle.ANDERE_PARTEI)]
+    [DataRow("ANDERE_PARTEI", Marktteilnehmerrolle.ANDERE_PARTEI)]
+    [DataRow("EMPFAENGER", Marktteilnehmerrolle.EMPFAENGER)]
+    public void Test_Marktteilnehmer_Deserialization_Default_Settings_Newtonsoft(
+        string jsonValue,
+        Marktteilnehmerrolle expectedRolle
+    )
+    {
+        // Proves that the type-level [JsonConverter] attribute on the enum works
+        // for the actual Marktteilnehmer BO without any converter registration.
+        var jsonString = "{\"rolle\": \"" + jsonValue + "\"}";
+        var actual = Newtonsoft.Json.JsonConvert.DeserializeObject<BO4E.BO.Marktteilnehmer>(
+            jsonString
+        );
+        actual.Should().NotBeNull();
+        actual.Rolle.Should().Be(expectedRolle);
+    }
+
+    [TestMethod]
+    [DataRow("anderepartei", Marktteilnehmerrolle.ANDERE_PARTEI)]
+    [DataRow("ANDERE_PARTEI", Marktteilnehmerrolle.ANDERE_PARTEI)]
+    [DataRow("EMPFAENGER", Marktteilnehmerrolle.EMPFAENGER)]
+    public void Test_Marktteilnehmer_Deserialization_Default_Settings_SystemText(
+        string jsonValue,
+        Marktteilnehmerrolle expectedRolle
+    )
+    {
+        // Proves that the property-level [JsonConverter] attribute on Marktteilnehmer.Rolle
+        // works without any converter registration or lenient options.
+        var jsonString = "{\"rolle\": \"" + jsonValue + "\"}";
+        var actual = System.Text.Json.JsonSerializer.Deserialize<BO4E.BO.Marktteilnehmer>(
+            jsonString
+        );
+        actual.Should().NotBeNull();
+        actual.Rolle.Should().Be(expectedRolle);
+    }
+
+    [TestMethod]
+    [DataRow("anderepartei", Marktteilnehmerrolle.ANDERE_PARTEI)]
+    [DataRow("ANDERE_PARTEI", Marktteilnehmerrolle.ANDERE_PARTEI)]
+    [DataRow("EMPFAENGER", Marktteilnehmerrolle.EMPFAENGER)]
+    public void Test_Newtonsoft_Marktteilnehmerrolle_Default_Settings(
+        string jsonValue,
+        Marktteilnehmerrolle expectedRolle
+    )
+    {
+        // Proves that the type-level [JsonConverter] attribute works without any explicit
+        // converter registration — this is the core design assumption for Newtonsoft.
+        var jsonString = "{\"Foo\": \"" + jsonValue + "\"}";
+        var actual =
+            Newtonsoft.Json.JsonConvert.DeserializeObject<ClassWithNullableMarktteilnehmerrolle>(
+                jsonString
+            );
+        actual.Should().NotBeNull();
+        actual.Foo.Should().Be(expectedRolle);
+    }
+
+    [TestMethod]
+    [DataRow("anderepartei", Marktteilnehmerrolle.ANDERE_PARTEI)]
+    [DataRow("ANDERE_PARTEI", Marktteilnehmerrolle.ANDERE_PARTEI)]
+    [DataRow("EMPFAENGER", Marktteilnehmerrolle.EMPFAENGER)]
+    public void Test_SystemText_Marktteilnehmerrolle_Default_Settings_Non_Nullable(
+        string jsonValue,
+        Marktteilnehmerrolle expectedRolle
+    )
+    {
+        // Proves that the type-level [JsonConverter] attribute works without any explicit
+        // converter registration for non-nullable properties.
+        var jsonString = "{\"Foo\": \"" + jsonValue + "\"}";
+        var actual =
+            System.Text.Json.JsonSerializer.Deserialize<ClassWithNonNullableMarktteilnehmerrolle>(
+                jsonString
+            );
+        actual.Should().NotBeNull();
+        actual.Foo.Should().Be(expectedRolle);
+    }
+
+    [TestMethod]
+    [DataRow((int)Marktteilnehmerrolle.ANDERE_PARTEI, Marktteilnehmerrolle.ANDERE_PARTEI)]
+    [DataRow((int)Marktteilnehmerrolle.EMPFAENGER, Marktteilnehmerrolle.EMPFAENGER)]
+    public void Test_SystemText_Marktteilnehmerrolle_Integer_Deserialization(
+        int jsonValue,
+        Marktteilnehmerrolle expectedRolle
+    )
+    {
+        string jsonString = "{\"Foo\": " + jsonValue + "}";
+        var settings = new JsonSerializerOptions
+        {
+            Converters = { new SystemTextMarktteilnehmerrolleStringEnumConverter() },
+        };
+        var actual =
+            System.Text.Json.JsonSerializer.Deserialize<ClassWithNonNullableMarktteilnehmerrolle>(
+                jsonString,
+                settings
+            );
+        actual.Should().NotBeNull();
+        actual.Foo.Should().Be(expectedRolle);
+    }
+
+    [TestMethod]
+    [DataRow((int)Marktteilnehmerrolle.ANDERE_PARTEI, Marktteilnehmerrolle.ANDERE_PARTEI)]
+    [DataRow((int)Marktteilnehmerrolle.EMPFAENGER, Marktteilnehmerrolle.EMPFAENGER)]
+    public void Test_Newtonsoft_Marktteilnehmerrolle_Integer_Deserialization(
+        int jsonValue,
+        Marktteilnehmerrolle expectedRolle
+    )
+    {
+        string jsonString = "{\"Foo\": " + jsonValue + "}";
+        var settings = new Newtonsoft.Json.JsonSerializerSettings()
+        {
+            Converters =
+            {
+                new NewtonsoftMarktteilnehmerrolleStringEnumConverter(),
+                new StringEnumConverter(),
+            },
+        };
+        var actual =
+            Newtonsoft.Json.JsonConvert.DeserializeObject<ClassWithNonNullableMarktteilnehmerrolle>(
+                jsonString,
+                settings
+            );
+        actual.Should().NotBeNull();
+        actual.Foo.Should().Be(expectedRolle);
+    }
+
+    [TestMethod]
+    public void Test_Newtonsoft_Marktteilnehmerrolle_Invalid_Value_Throws()
+    {
+        var jsonString = "{\"Foo\": \"NONSENSE\"}";
+        var settings = new Newtonsoft.Json.JsonSerializerSettings()
+        {
+            Converters =
+            {
+                new NewtonsoftMarktteilnehmerrolleStringEnumConverter(),
+                new StringEnumConverter(),
+            },
+        };
+        var act = () =>
+            Newtonsoft.Json.JsonConvert.DeserializeObject<ClassWithNullableMarktteilnehmerrolle>(
+                jsonString,
+                settings
+            );
+        act.Should().Throw<Newtonsoft.Json.JsonSerializationException>().WithMessage("*NONSENSE*");
+    }
+
+    [TestMethod]
+    public void Test_SystemText_Marktteilnehmerrolle_Invalid_Value_Throws()
+    {
+        var jsonString = "{\"Foo\": \"NONSENSE\"}";
+        var settings = new JsonSerializerOptions
+        {
+            Converters = { new SystemTextMarktteilnehmerrolleStringEnumConverter() },
+        };
+        var act = () =>
+            System.Text.Json.JsonSerializer.Deserialize<ClassWithNonNullableMarktteilnehmerrolle>(
+                jsonString,
+                settings
+            );
+        act.Should().Throw<System.Text.Json.JsonException>().WithMessage("*NONSENSE*");
+    }
 }

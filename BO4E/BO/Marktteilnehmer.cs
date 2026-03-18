@@ -72,6 +72,9 @@ public class Marktteilnehmer : Geschaeftspartner
     [JsonProperty(Order = 36, PropertyName = "rolle")]
     [JsonPropertyOrder(36)]
     [JsonPropertyName("rolle")]
+    [System.Text.Json.Serialization.JsonConverter(
+        typeof(meta.LenientConverters.SystemTextNullableMarktteilnehmerrolleStringEnumConverter)
+    )]
     //[ProtoMember(24)]
     public Marktteilnehmerrolle? Rolle { get; set; }
 }
