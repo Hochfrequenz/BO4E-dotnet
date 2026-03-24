@@ -265,4 +265,13 @@ public enum FehlerCode
     [EnumMember(Value = "WIEDERHOLUNG_UNPLAUSIBEL")]
     [System.Text.Json.Serialization.JsonStringEnumMemberName("WIEDERHOLUNG_UNPLAUSIBEL")]
     WIEDERHOLUNG_UNPLAUSIBEL,
+
+    /// <summary>
+    /// Code nicht aus erlaubtem Wertebereich
+    /// </summary>
+    [EnumMember(Value = "CODE_NICHT_AUS_ERLAUBTEM_WERTEBEREICH")]
+    [System.Text.Json.Serialization.JsonStringEnumMemberName(
+        "CODE_NICHT_AUS_ERLAUBTEM_WERTEBEREICH"
+    )]
+    CODE_NICHT_AUS_ERLAUBTEM_WERTEBEREICH,
 }
