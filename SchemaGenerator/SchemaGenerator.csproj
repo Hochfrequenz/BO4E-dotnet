@@ -9,6 +9,6 @@
     <ProjectReference Include="..\BO4E\BO4E.csproj" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="NJsonSchema" Version="11.5.2" />
+    <PackageReference Include="NJsonSchema" Version="11.6.0" />
   </ItemGroup>
 </Project>
