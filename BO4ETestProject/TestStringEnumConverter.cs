@@ -1112,6 +1112,22 @@ public class TestStringEnumConverter
     }
 
     [TestMethod]
+    public void Test_Marktteilnehmer_Deserialization_With_Unknown_Numeric_String_Object_Rolle_Does_Not_Create_Undefined_Enum_SystemText()
+    {
+        var jsonString = "{\"rolle\": {\"code\": \"999\"}}";
+        BO4E.BO.Marktteilnehmer? actual = null;
+
+        var deserializing = () =>
+            actual = System.Text.Json.JsonSerializer.Deserialize<BO4E.BO.Marktteilnehmer>(
+                jsonString
+            );
+
+        deserializing.Should().NotThrow();
+        actual.Should().NotBeNull();
+        actual.Rolle.Should().BeNull();
+    }
+
+    [TestMethod]
     public void Test_Marktteilnehmer_Deserialization_With_Numeric_Object_Rolle_SystemText()
     {
         var jsonString = "{\"rolle\": {\"code\": 1}}";
@@ -1136,6 +1152,17 @@ public class TestStringEnumConverter
             System.Text.Json.JsonSerializer.Deserialize<BO4E.BO.Marktteilnehmer>(jsonString);
 
         act.Should().Throw<System.Text.Json.JsonException>().WithMessage("*LF*");
+    }
+
+    [TestMethod]
+    public void Test_Marktteilnehmer_Deserialization_With_Undefined_Numeric_String_Rolle_SystemText_Throws()
+    {
+        var jsonString = "{\"rolle\": \"999\"}";
+
+        var act = () =>
+            System.Text.Json.JsonSerializer.Deserialize<BO4E.BO.Marktteilnehmer>(jsonString);
+
+        act.Should().Throw<System.Text.Json.JsonException>().WithMessage("*999*");
     }
 
     [TestMethod]

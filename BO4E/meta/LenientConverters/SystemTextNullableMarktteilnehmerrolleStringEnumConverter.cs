@@ -97,7 +97,16 @@ public class SystemTextNullableMarktteilnehmerrolleStringEnumConverter
             return true;
         }
 
-        return Enum.TryParse(normalized, out result);
+        if (
+            Enum.TryParse(normalized, out result)
+            && Enum.IsDefined(typeof(Marktteilnehmerrolle), result)
+        )
+        {
+            return true;
+        }
+
+        result = default;
+        return false;
     }
 
     /// <inheritdoc />
