@@ -1048,41 +1048,50 @@ public class TestStringEnumConverter
     }
 
     [TestMethod]
-    public void Test_Marktteilnehmer_Deserialization_With_Object_Rolle_SystemText()
+    public void Test_Marktteilnehmer_Deserialization_With_Object_Rolle_Does_Not_Throw_StartObject_JsonException_SystemText()
     {
         var jsonString = "{\"rolle\": {\"code\": \"empfaenger\"}}";
+        BO4E.BO.Marktteilnehmer? actual = null;
 
-        var actual = System.Text.Json.JsonSerializer.Deserialize<BO4E.BO.Marktteilnehmer>(
-            jsonString
-        );
+        var deserializing = () =>
+            actual = System.Text.Json.JsonSerializer.Deserialize<BO4E.BO.Marktteilnehmer>(
+                jsonString
+            );
 
+        deserializing.Should().NotThrow<System.Text.Json.JsonException>();
         actual.Should().NotBeNull();
         actual.Rolle.Should().Be(Marktteilnehmerrolle.EMPFAENGER);
     }
 
     [TestMethod]
-    public void Test_Marktteilnehmer_Deserialization_With_Object_Rolle_Fallback_SystemText()
+    public void Test_Marktteilnehmer_Deserialization_With_Object_Rolle_Fallback_Does_Not_Throw_StartObject_JsonException_SystemText()
     {
         var jsonString =
             "{\"rolle\": {\"bezeichnung\": \"Lieferant\", \"legacy\": \"empfaenger\"}}";
+        BO4E.BO.Marktteilnehmer? actual = null;
 
-        var actual = System.Text.Json.JsonSerializer.Deserialize<BO4E.BO.Marktteilnehmer>(
-            jsonString
-        );
+        var deserializing = () =>
+            actual = System.Text.Json.JsonSerializer.Deserialize<BO4E.BO.Marktteilnehmer>(
+                jsonString
+            );
 
+        deserializing.Should().NotThrow<System.Text.Json.JsonException>();
         actual.Should().NotBeNull();
         actual.Rolle.Should().Be(Marktteilnehmerrolle.EMPFAENGER);
     }
 
     [TestMethod]
-    public void Test_Marktteilnehmer_Deserialization_With_Unknown_Object_Rolle_SystemText()
+    public void Test_Marktteilnehmer_Deserialization_With_Unknown_Object_Rolle_Does_Not_Throw_StartObject_JsonException_SystemText()
     {
         var jsonString = "{\"rolle\": {\"code\": \"LF\", \"bezeichnung\": \"Lieferant\"}}";
+        BO4E.BO.Marktteilnehmer? actual = null;
 
-        var actual = System.Text.Json.JsonSerializer.Deserialize<BO4E.BO.Marktteilnehmer>(
-            jsonString
-        );
+        var deserializing = () =>
+            actual = System.Text.Json.JsonSerializer.Deserialize<BO4E.BO.Marktteilnehmer>(
+                jsonString
+            );
 
+        deserializing.Should().NotThrow<System.Text.Json.JsonException>();
         actual.Should().NotBeNull();
         actual.Rolle.Should().BeNull();
     }

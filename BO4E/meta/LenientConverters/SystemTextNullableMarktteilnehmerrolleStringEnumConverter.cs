@@ -36,23 +36,20 @@ public class SystemTextNullableMarktteilnehmerrolleStringEnumConverter
         if (reader.TokenType == System.Text.Json.JsonTokenType.StartObject)
         {
             using var document = JsonDocument.ParseValue(ref reader);
-            return ParseLegacyObject(document.RootElement, typeToConvert);
+            return ParseLegacyObject(document.RootElement);
         }
         string? enumString = reader.GetString();
 
         return ParseString(enumString, typeToConvert);
     }
 
-    private static Marktteilnehmerrolle? ParseLegacyObject(
-        JsonElement rolleObject,
-        Type typeToConvert
-    )
+    private static Marktteilnehmerrolle? ParseLegacyObject(JsonElement rolleObject)
     {
         foreach (var propertyName in LegacyObjectPropertyNames)
         {
             if (
                 rolleObject.TryGetProperty(propertyName, out var property)
-                && TryParseProperty(property, typeToConvert, out var parsed)
+                && TryParseProperty(property, out var parsed)
             )
             {
                 return parsed;
@@ -61,7 +58,7 @@ public class SystemTextNullableMarktteilnehmerrolleStringEnumConverter
 
         foreach (var property in rolleObject.EnumerateObject())
         {
-            if (TryParseProperty(property.Value, typeToConvert, out var parsed))
+            if (TryParseProperty(property.Value, out var parsed))
             {
                 return parsed;
             }
@@ -70,11 +67,7 @@ public class SystemTextNullableMarktteilnehmerrolleStringEnumConverter
         return null;
     }
 
-    private static bool TryParseProperty(
-        JsonElement property,
-        Type typeToConvert,
-        out Marktteilnehmerrolle? parsed
-    )
+    private static bool TryParseProperty(JsonElement property, out Marktteilnehmerrolle? parsed)
     {
         parsed = property.ValueKind switch
         {
