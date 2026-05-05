@@ -66,7 +66,7 @@ public class SystemTextNullableMarktteilnehmerrolleStringEnumConverter
             JsonValueKind.String => TryParseString(property.GetString(), out var result)
                 ? result
                 : null,
-            JsonValueKind.Number when property.TryGetInt64(out var integerValue) => Enum.IsDefined(
+            JsonValueKind.Number when property.TryGetInt32(out var integerValue) => Enum.IsDefined(
                 typeof(Marktteilnehmerrolle),
                 integerValue
             )

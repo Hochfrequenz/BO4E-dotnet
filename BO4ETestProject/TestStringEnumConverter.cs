@@ -1112,6 +1112,22 @@ public class TestStringEnumConverter
     }
 
     [TestMethod]
+    public void Test_Marktteilnehmer_Deserialization_With_Numeric_Object_Rolle_SystemText()
+    {
+        var jsonString = "{\"rolle\": {\"code\": 1}}";
+        BO4E.BO.Marktteilnehmer? actual = null;
+
+        var deserializing = () =>
+            actual = System.Text.Json.JsonSerializer.Deserialize<BO4E.BO.Marktteilnehmer>(
+                jsonString
+            );
+
+        deserializing.Should().NotThrow();
+        actual.Should().NotBeNull();
+        actual.Rolle.Should().Be(Marktteilnehmerrolle.EMPFAENGER);
+    }
+
+    [TestMethod]
     public void Test_Marktteilnehmer_Deserialization_With_Invalid_String_Rolle_SystemText_Throws()
     {
         var jsonString = "{\"rolle\": \"LF\"}";
