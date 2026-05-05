@@ -56,14 +56,6 @@ public class SystemTextNullableMarktteilnehmerrolleStringEnumConverter
             }
         }
 
-        foreach (var property in rolleObject.EnumerateObject())
-        {
-            if (TryParseProperty(property.Value, out var parsed))
-            {
-                return parsed;
-            }
-        }
-
         return null;
     }
 
@@ -74,8 +66,12 @@ public class SystemTextNullableMarktteilnehmerrolleStringEnumConverter
             JsonValueKind.String => TryParseString(property.GetString(), out var result)
                 ? result
                 : null,
-            JsonValueKind.Number when property.TryGetInt64(out var integerValue) =>
-                (Marktteilnehmerrolle)Enum.ToObject(typeof(Marktteilnehmerrolle), integerValue),
+            JsonValueKind.Number when property.TryGetInt64(out var integerValue) => Enum.IsDefined(
+                typeof(Marktteilnehmerrolle),
+                integerValue
+            )
+                ? (Marktteilnehmerrolle)Enum.ToObject(typeof(Marktteilnehmerrolle), integerValue)
+                : null,
             JsonValueKind.Null => null,
             _ => null,
         };

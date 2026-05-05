@@ -1058,16 +1058,15 @@ public class TestStringEnumConverter
                 jsonString
             );
 
-        deserializing.Should().NotThrow<System.Text.Json.JsonException>();
+        deserializing.Should().NotThrow();
         actual.Should().NotBeNull();
         actual.Rolle.Should().Be(Marktteilnehmerrolle.EMPFAENGER);
     }
 
     [TestMethod]
-    public void Test_Marktteilnehmer_Deserialization_With_Object_Rolle_Fallback_Does_Not_Throw_StartObject_JsonException_SystemText()
+    public void Test_Marktteilnehmer_Deserialization_With_Non_Code_Object_Rolle_Does_Not_Parse_Unrelated_Properties_SystemText()
     {
-        var jsonString =
-            "{\"rolle\": {\"bezeichnung\": \"Lieferant\", \"legacy\": \"empfaenger\"}}";
+        var jsonString = "{\"rolle\": {\"bezeichnung\": \"empfaenger\"}}";
         BO4E.BO.Marktteilnehmer? actual = null;
 
         var deserializing = () =>
@@ -1075,9 +1074,9 @@ public class TestStringEnumConverter
                 jsonString
             );
 
-        deserializing.Should().NotThrow<System.Text.Json.JsonException>();
+        deserializing.Should().NotThrow();
         actual.Should().NotBeNull();
-        actual.Rolle.Should().Be(Marktteilnehmerrolle.EMPFAENGER);
+        actual.Rolle.Should().BeNull();
     }
 
     [TestMethod]
@@ -1091,7 +1090,23 @@ public class TestStringEnumConverter
                 jsonString
             );
 
-        deserializing.Should().NotThrow<System.Text.Json.JsonException>();
+        deserializing.Should().NotThrow();
+        actual.Should().NotBeNull();
+        actual.Rolle.Should().BeNull();
+    }
+
+    [TestMethod]
+    public void Test_Marktteilnehmer_Deserialization_With_Unknown_Numeric_Object_Rolle_Does_Not_Create_Undefined_Enum_SystemText()
+    {
+        var jsonString = "{\"rolle\": {\"code\": 999}}";
+        BO4E.BO.Marktteilnehmer? actual = null;
+
+        var deserializing = () =>
+            actual = System.Text.Json.JsonSerializer.Deserialize<BO4E.BO.Marktteilnehmer>(
+                jsonString
+            );
+
+        deserializing.Should().NotThrow();
         actual.Should().NotBeNull();
         actual.Rolle.Should().BeNull();
     }
