@@ -22,7 +22,7 @@ public class Anfrage : BusinessObject
     [JsonPropertyOrder(6)]
     [NonOfficial(NonOfficialCategory.MISSING)]
     [ProtoMember(1000)]
-    public string LokationsId { get; set; }
+    public string? LokationsId { get; set; }
 
     /// <summary>
     /// Gibt an, ob es sich um eine Markt- oder Messlokation handelt
@@ -77,4 +77,13 @@ public class Anfrage : BusinessObject
     [ProtoMember(1005)]
     [JsonPropertyOrder(11)]
     public Anfragetyp? Anfragetyp { get; set; }
+
+    /// <summary>
+    /// Aus der ORDERS gemappte Positionsnummer der Anfrage
+    /// </summary>
+    [JsonProperty(PropertyName = "positionsnummer", Order = 12)]
+    [JsonPropertyName("positionsnummer")]
+    [ProtoMember(1006)]
+    [JsonPropertyOrder(12)]
+    public string? Positionsnummer { get; set; } // it's indeed a string right now - I don't want to break it
 }

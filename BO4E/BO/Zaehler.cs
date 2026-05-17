@@ -1,4 +1,3 @@
-#nullable enable
 using System;
 using System.Collections.Generic;
 using System.Text.Json.Serialization;
@@ -201,4 +200,14 @@ public class Zaehler : BusinessObject
     [JsonPropertyName("geraete")]
     [ProtoMember(1020)]
     public List<Geraet>? Geraete { get; set; }
+
+    /// <summary>
+    /// Art der Volumenerfassung bei Mengenumwertern.
+    /// </summary>
+    [JsonProperty(PropertyName = "artVolumenerfassung", Order = 28)]
+    [JsonPropertyOrder(28)]
+    [JsonPropertyName("artVolumenerfassung")]
+    [ProtoMember(1022)]
+    [NonOfficial(NonOfficialCategory.CUSTOMER_REQUIREMENTS)]
+    public ArtVolumenerfassung? ArtVolumenerfassung { get; set; }
 }

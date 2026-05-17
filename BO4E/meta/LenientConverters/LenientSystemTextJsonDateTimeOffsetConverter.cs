@@ -70,7 +70,7 @@ public class LenientSystemTextJsonDateTimeOffsetConverter : JsonConverter<DateTi
             return DateTimeOffset.MinValue;
         }
 
-        var rawDate = reader.GetString();
+        var rawDate = reader.GetString()!;
         // First try to parse the date string as is (in case it is correctly formatted)
         if (typeToConvert == typeof(DateTimeOffset) || typeToConvert == typeof(DateTimeOffset?))
         {

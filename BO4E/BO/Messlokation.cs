@@ -38,7 +38,7 @@ public class Messlokation : BusinessObject
     [DataCategory(DataCategory.POD)]
     [BoKey]
     [ProtoMember(4)]
-    public string MesslokationsId { get; set; }
+    public string? MesslokationsId { get; set; }
 
     /// <summary>
     ///     * Sparte der Messlokation, z.B. Gas oder Strom.
@@ -287,6 +287,7 @@ public class Messlokation : BusinessObject
     /// Enthält die ID der vorgelagerten Lokation. Kann IDs unterschiedlicher Lokationen enthalten, also zum Beispiel
     /// einer Messlokation oder Netzlokation
     /// </summary>
+    [Obsolete("Abgelöst durch 'VorgelagerteLokationsIds'.")]
     [JsonProperty(Order = 33, PropertyName = "vorgelagerteLokationsId")]
     [JsonPropertyName("vorgelagerteLokationsId")]
     [ProtoMember(1027)]
@@ -294,11 +295,33 @@ public class Messlokation : BusinessObject
     public string? VorgelagerteLokationsId { get; set; }
 
     /// <summary>
+    /// Behelfs-Flag das anzeigt, ob eine Messlokation für die Lieferanmeldung relevant ist (true).
+    /// </summary>
+    /// <remarks>
+    /// Das kann in Systemen hilfreich sein, die nicht die volle Komplexität von Lokationsbündeln abbildeln.
+    /// </remarks>
+    [JsonProperty(Order = 34, PropertyName = "istFuerLieferanmeldungRelevant")]
+    [JsonPropertyName("istFuerLieferanmeldungRelevant")]
+    [ProtoMember(1028)]
+    [JsonPropertyOrder(34)]
+    public bool? IstFuerLieferanmeldungRelevant { get; set; } = null;
+
+    /// <summary>
+    /// Enthält die ID's der vorgelagerten Lokationen. Kann IDs unterschiedlicher Lokationen enthalten, also zum Beispiel
+    /// einer Messlokation oder Netzlokation
+    /// </summary>
+    [JsonProperty(Order = 35, PropertyName = "vorgelagerteLokationsIds")]
+    [JsonPropertyName("vorgelagerteLokationsIds")]
+    [ProtoMember(1029)]
+    [JsonPropertyOrder(35)]
+    public List<LokationsTypZuordnung>? VorgelagerteLokationsIds { get; set; }
+
+    /// <summary>
     ///     Test if a <paramref name="id" /> is a valid messlokations ID.
     /// </summary>
     /// <param name="id">id to test</param>
     /// <returns></returns>
-    public static bool ValidateId(string id)
+    public static bool ValidateId(string? id)
     {
         return !string.IsNullOrWhiteSpace(id) && RegexValidate.IsMatch(id);
     }

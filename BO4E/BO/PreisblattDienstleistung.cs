@@ -32,5 +32,5 @@ public class PreisblattDienstleistung : Preisblatt
     [JsonProperty(Order = 9, PropertyName = "herausgeber")]
     [JsonPropertyName("herausgeber")]
     //[ProtoMember(9)]
-    public Marktteilnehmer Herausgeber { get; set; }
+    public Marktteilnehmer? Herausgeber { get; set; }
 }

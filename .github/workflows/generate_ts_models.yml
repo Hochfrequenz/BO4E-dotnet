@@ -11,9 +11,9 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Check out Git repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
       - name: Set up Node.js
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@v6
         with:
           node-version: 14
       - name: Install Code Generator
@@ -26,7 +26,7 @@ jobs:
           name: TypeScriptClasses
           path: ts_models
       - name: Push ts_models content to type script models repo
-        uses: cpina/github-action-push-to-another-repository@v1.7.2
+        uses: cpina/github-action-push-to-another-repository@v1.7.3
         env:
           API_TOKEN_GITHUB: ${{ secrets.TS_MODELS_PUSH_TOKEN }} # this token expires on 2024-12-15
           # token with repo scope

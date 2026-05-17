@@ -40,7 +40,7 @@ public class NewtonsoftGasqualitaetStringEnumConverter
         }
         if (reader.TokenType == Newtonsoft.Json.JsonToken.String)
         {
-            string enumString = reader.Value.ToString();
+            string? enumString = reader.Value?.ToString();
 
             return enumString?.ToUpper() switch
             {

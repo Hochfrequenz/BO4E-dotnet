@@ -42,5 +42,5 @@ public class Tarifpreisposition : COM
     [JsonProperty(PropertyName = "preisstaffeln")]
     [JsonPropertyName("preisstaffeln")]
     [ProtoMember(7)]
-    public Preisstaffel Preisstaffeln { get; set; }
+    public Preisstaffel? Preisstaffeln { get; set; }
 }

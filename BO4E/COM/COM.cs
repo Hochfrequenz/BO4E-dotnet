@@ -73,12 +73,11 @@ namespace BO4E.COM;
 public abstract class COM : IUserProperties, IOptionalGuid
 {
     /// <inheritdoc cref="BO.BusinessObject.guidSerialized" />
-
     // note that this inheritance protobuf thing doesn't work as expected. please see the comments in TestBO4E project->TestProfobufSerialization
     [ProtoMember(1)]
 #pragma warning disable IDE1006 // Naming Styles
     // ReSharper disable once InconsistentNaming
-    protected string guidSerialized
+    protected string? guidSerialized
 #pragma warning restore IDE1006 // Naming Styles
     {
         get => Guid.HasValue ? Guid.ToString() : string.Empty;
@@ -135,7 +134,11 @@ public abstract class COM : IUserProperties, IOptionalGuid
     public Guid? Guid { get; set; }
 
     /// <summary>
-    ///     User properties (non bo4e standard)
+    ///     User properties (non BO4E standard). Contains JSON fields that could not be mapped to model properties.
+    ///     Null or empty indicates all JSON fields were successfully mapped during deserialization.
+    ///     Use <see cref="UserPropertiesExtensions.HasEmptyUserProperties{TParent}" /> to check if empty,
+    ///     or <see cref="UserPropertiesExtensions.HasAllEmptyUserPropertiesRecursive{TParent}" /> to recursively
+    ///     check this object and all nested <see cref="IUserProperties" /> objects.
     /// </summary>
     [JsonProperty(
         PropertyName = BusinessObject.USER_PROPERTIES_NAME,
@@ -174,9 +177,9 @@ public abstract class COM : IUserProperties, IOptionalGuid
         }
         var regularPropertyNames = GetType()
             .GetProperties()
-            .Where(p => p.GetCustomAttribute<JsonPropertyNameAttribute>() != null)
-            .Select(p => p.GetCustomAttribute<JsonPropertyNameAttribute>().Name)
-            .Select(x => x.ToLower())
+            .Select(p => p.GetCustomAttribute<JsonPropertyNameAttribute>()?.Name)
+            .Where(name => name != null)
+            .Select(x => x!.ToLower())
             .ToHashSet();
         var result = UserProperties
             .Keys.Where(k => regularPropertyNames.Contains(k.ToLower()))

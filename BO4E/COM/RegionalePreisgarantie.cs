@@ -11,5 +11,5 @@ public class RegionalePreisgarantie : Preisgarantie
     [JsonProperty(PropertyName = "regionaleGueltigkeit")]
     [JsonPropertyName("regionaleGueltigkeit")]
     //[ProtoMember(6)]
-    public RegionaleGueltigkeit RegionaleGueltigkeit { get; set; }
+    public RegionaleGueltigkeit? RegionaleGueltigkeit { get; set; }
 }

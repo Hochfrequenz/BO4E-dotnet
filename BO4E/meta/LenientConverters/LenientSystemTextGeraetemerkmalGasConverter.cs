@@ -25,7 +25,7 @@ public class LenientSystemTextGeraetemerkmalGasConverter
         {
             return Geraetemerkmal.EINTARIF;
         }
-        var rawString = reader.GetString();
+        var rawString = reader.GetString()!;
         try
         {
             return (BO4E.ENUM.Geraetemerkmal)

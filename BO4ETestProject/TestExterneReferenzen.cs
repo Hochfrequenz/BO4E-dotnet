@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using AwesomeAssertions;
 using BO4E.BO;
 using BO4E.COM;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -21,33 +22,25 @@ public class TestExterneReferenzen
         );
         Assert.IsTrue(marktlokation.TryGetExterneReferenz("foo", out var actualBar));
         Assert.AreEqual("bar", actualBar);
+        var settingInvalidValues = () =>
+            marktlokation.SetExterneReferenz(
+                new ExterneReferenz { ExRefName = null, ExRefWert = "nicht bar" }
+            );
+        settingInvalidValues.Should().Throw<ArgumentException>();
+        var addingInvalidValues = () =>
+            marktlokation.SetExterneReferenz(
+                new ExterneReferenz { ExRefName = "foo", ExRefWert = null }
+            );
+        addingInvalidValues.Should().Throw<ArgumentException>();
+        var addingNull = () => marktlokation.SetExterneReferenz(null);
+        addingNull.Should().Throw<ArgumentNullException>();
 
-        Assert.ThrowsException<ArgumentException>(
-            () =>
-                marktlokation.SetExterneReferenz(
-                    new ExterneReferenz { ExRefName = null, ExRefWert = "nicht bar" }
-                ),
-            "must not add invalid values"
-        );
-        Assert.ThrowsException<ArgumentException>(
-            () =>
-                marktlokation.SetExterneReferenz(
-                    new ExterneReferenz { ExRefName = "foo", ExRefWert = null }
-                ),
-            "must not add invalid values"
-        );
-        Assert.ThrowsException<ArgumentNullException>(
-            () => marktlokation.SetExterneReferenz(null),
-            "must not add null"
-        );
+        var settingConflictingDefaultValues = () =>
+            marktlokation.SetExterneReferenz(
+                new ExterneReferenz { ExRefName = "foo", ExRefWert = "nicht bar" }
+            );
+        settingConflictingDefaultValues.Should().Throw<InvalidOperationException>();
 
-        Assert.ThrowsException<InvalidOperationException>(
-            () =>
-                marktlokation.SetExterneReferenz(
-                    new ExterneReferenz { ExRefName = "foo", ExRefWert = "nicht bar" }
-                ),
-            "By default conflicting values are rejected"
-        );
         marktlokation.SetExterneReferenz(
             new ExterneReferenz { ExRefName = "foo", ExRefWert = "nicht bar" },
             true
@@ -63,6 +56,23 @@ public class TestExterneReferenzen
             new ExterneReferenz { ExRefName = "foo", ExRefWert = "bar" }
         ); // setting a non-conflicting value twice doesn't hurt
         Assert.IsTrue(marktlokation.TryGetExterneReferenz("foo", out actualBar));
+        Assert.AreEqual("bar", actualBar);
+
+        var geschaeftspartner = new Geschaeftspartner { };
+        geschaeftspartner.ExterneReferenzen = new List<ExterneReferenz>
+        {
+            // add only invalid items
+            new() { ExRefName = "foo", ExRefWert = null },
+            new() { ExRefName = "foo", ExRefWert = "" },
+        };
+        Assert.IsFalse(geschaeftspartner.TryGetExterneReferenz("foo", out actualBar));
+        Assert.IsNull(actualBar);
+
+        // add a valid item and try again
+        geschaeftspartner.SetExterneReferenz(
+            new ExterneReferenz { ExRefName = "foo", ExRefWert = "bar" }
+        );
+        Assert.IsTrue(geschaeftspartner.TryGetExterneReferenz("foo", out actualBar));
         Assert.AreEqual("bar", actualBar);
     }
 }

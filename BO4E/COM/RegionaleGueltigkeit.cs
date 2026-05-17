@@ -28,5 +28,5 @@ public class RegionaleGueltigkeit : COM
     [JsonProperty(PropertyName = "kriteriumsWerte")]
     [JsonPropertyName("kriteriumsWerte")]
     [ProtoMember(4)]
-    public List<KriteriumsWert> KriteriumsWerte { get; set; }
+    public List<KriteriumsWert>? KriteriumsWerte { get; set; }
 }

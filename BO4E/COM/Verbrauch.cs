@@ -125,7 +125,7 @@ public class Verbrauch : COM
     [JsonProperty(PropertyName = "obiskennzahl", Order = 6)]
     [JsonPropertyName("obiskennzahl")]
     [ProtoMember(6)]
-    public string Obiskennzahl { get; set; }
+    public string? Obiskennzahl { get; set; }
 
     /// <summary>
     ///     Gibt den absoluten Wert der Menge an.
@@ -199,4 +199,20 @@ public class Verbrauch : COM
     [JsonPropertyOrder(14)]
     [Newtonsoft.Json.JsonConverter(typeof(LenientDateTimeConverter))]
     public DateTimeOffset? Ausfuehrungszeitpunkt { get; set; }
+
+    /// <summary>Gibt die Temperaturmaßzahl (TMZ) für Profilscharen an.</summary>
+    [NonOfficial(NonOfficialCategory.UNSPECIFIED)]
+    [JsonProperty(PropertyName = "temperaturmasszahl", Order = 15)]
+    [JsonPropertyName("temperaturmasszahl")]
+    [JsonPropertyOrder(15)]
+    [ProtoMember(15)]
+    public string? Temperaturmasszahl { get; set; }
+
+    /// <summary>Gibt Zeitfenster für Profilscharen an.</summary>
+    [NonOfficial(NonOfficialCategory.UNSPECIFIED)]
+    [JsonProperty(PropertyName = "zeitfenster", Order = 16)]
+    [JsonPropertyName("zeitfenster")]
+    [JsonPropertyOrder(16)]
+    [ProtoMember(16)]
+    public Zeitfenster? Zeitfenster { get; set; }
 }

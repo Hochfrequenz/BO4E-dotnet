@@ -1,4 +1,3 @@
-#nullable enable
 using System.Text.Json.Serialization;
 using BO4E.ENUM;
 using BO4E.meta;
@@ -65,4 +64,17 @@ public class Marktteilnehmer : Geschaeftspartner
     [JsonPropertyName("ansprechpartner")]
     //[ProtoMember(23)]
     public Ansprechpartner? Ansprechpartner { get; set; }
+
+    /// <summary>
+    /// Rolle des Marktteilnehmers im Nachrichtenkontext (z.B. "anderepartei" für beteiligte Marktpartner).
+    /// </summary>
+    [NonOfficial(NonOfficialCategory.CUSTOMER_REQUIREMENTS)]
+    [JsonProperty(Order = 36, PropertyName = "rolle")]
+    [JsonPropertyOrder(36)]
+    [JsonPropertyName("rolle")]
+    [System.Text.Json.Serialization.JsonConverter(
+        typeof(meta.LenientConverters.SystemTextNullableMarktteilnehmerrolleStringEnumConverter)
+    )]
+    //[ProtoMember(24)]
+    public Marktteilnehmerrolle? Rolle { get; set; }
 }

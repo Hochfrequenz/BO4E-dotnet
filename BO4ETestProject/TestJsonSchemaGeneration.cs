@@ -1,7 +1,7 @@
 using System;
 using System.Linq;
+using AwesomeAssertions;
 using BO4E.BO;
-using FluentAssertions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Newtonsoft.Json.Schema;
 
@@ -26,10 +26,10 @@ public class TestJsonSchemaGeneration
     [TestMethod]
     public void NegativeTest()
     {
-        Assert.ThrowsException<ArgumentException>(
-            () => BusinessObject.GetJsonSchema(typeof(string)),
-            "Illegal types must result in a ArgumentException."
-        );
+        var gettingJsonSchemaOfIllegalType = () => BusinessObject.GetJsonSchema(typeof(string));
+        gettingJsonSchemaOfIllegalType
+            .Should()
+            .Throw<ArgumentException>("Illegal types must result in a ArgumentException.");
     }
 
     private const int LastDataRowOffset = 50;

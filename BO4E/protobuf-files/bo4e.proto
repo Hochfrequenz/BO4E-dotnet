@@ -50,6 +50,8 @@ message Angebotsposition {
    string Preisschluesselstamm = 7;
    BDEWArtikelnummer BdewArtikelnummer = 8;
    string ArtikelId = 9;
+   Menge PositionsmengeMinimum = 10;
+   Menge PositionsmengeMaximum = 11;
 }
 enum Angebotsstatus {
    option (.protobuf_net.enumopt).namespace = "BO4E.ENUM";
@@ -71,6 +73,7 @@ message Angebotsteil {
    Betrag Gesamtkostenangebotsteil = 6;
    repeated Angebotsposition Positionen = 7;
    Zeitraum Lieferzeitraum = 8;
+   repeated BusinessObject Lieferstellen = 9;
 }
 message Angebotsvariante {
    option (.protobuf_net.msgopt).namespace = "BO4E.COM";
@@ -117,6 +120,11 @@ enum ArithmetischeOperation {
    DIVISION = 3;
    DIVIDEND = 4;
    POSITIVWERT = 5;
+}
+enum ArtVolumenerfassung {
+   option (.protobuf_net.enumopt).namespace = "BO4E.ENUM";
+   ArtVolumenerfassung_KENNLINIENKORREKTUR = 0;
+   ArtVolumenerfassung_SCHLEICHMENGENUNTERDRÜCKUNG = 1;
 }
 enum ArtikelIdTyp {
    option (.protobuf_net.enumopt).namespace = "BO4E.ENUM";
@@ -191,6 +199,14 @@ enum BDEWArtikelnummer {
    BDEWArtikelnummer_ZUSATZDIENSTLEISTUNG_PARAGRAPH_35_2_4_MSBG = 49;
    BDEWArtikelnummer_ZUSATZDIENSTLEISTUNG_PARAGRAPH_35_2_5_MSBG = 50;
    BDEWArtikelnummer_ZUSATZDIENSTLEISTUNG_PARAGRAPH_35_3_MSBG = 51;
+   BDEWArtikelnummer_EINBAU_IMS = 52;
+   BDEWArtikelnummer_EINBAU_KME_RLM = 53;
+   BDEWArtikelnummer_EINBAU_WANDLER = 54;
+   BDEWArtikelnummer_WEITERE_ENERGIEFLUSSRICHTUNG = 55;
+   BDEWArtikelnummer_VERGLEICHSMESSUNG = 56;
+   BDEWArtikelnummer_ÄNDERUNG_MESSEBENE = 57;
+   BDEWArtikelnummer_EINBAU_STEUERBOX = 58;
+   BDEWArtikelnummer_ANSCHLUSS_TR_STEUERBOX_SR = 59;
 }
 message Bankverbindung {
    option (.protobuf_net.msgopt).namespace = "BO4E.COM";
@@ -265,6 +281,9 @@ enum Bilanzierungsmethode {
    Bilanzierungsmethode_PAUSCHAL = 4;
    Bilanzierungsmethode_IMS = 5;
 }
+message BusinessObject {
+   option (.protobuf_net.msgopt).namespace = "BO4E.BO";
+}
 message Dienstleistung {
    option (.protobuf_net.msgopt).namespace = "BO4E.COM";
    Dienstleistungstyp Dienstleistungstyp = 3;
@@ -323,6 +342,7 @@ message Energiemenge {
    string LokationsId = 10; // default value could not be applied: |null|
    Lokationstyp LokationsTyp = 11;
    repeated Verbrauch Energieverbrauch = 12;
+   Lastprofil Lastprofil = 13;
 }
 enum Energierichtung {
    option (.protobuf_net.enumopt).namespace = "BO4E.ENUM";
@@ -398,6 +418,7 @@ message Geraeteeigenschaften {
    option (.protobuf_net.msgopt).namespace = "BO4E.COM";
    Geraetetyp Geraetetyp = 3;
    Geraetemerkmal Geraetemerkmal = 4;
+   .bcl.Decimal Wandlerfaktor = 5;
    map<string,string> Parameter = 1005;
 }
 enum Geraetemerkmal {
@@ -510,6 +531,9 @@ enum Geraetetyp {
    Geraetetyp_STEUERBOX = 40;
    Geraetetyp_BLOCKSTROMWANDLER = 41;
    Geraetetyp_KOMBIMESSWANDLER = 42;
+   Geraetetyp_DICHTEMENGENUMWERTER = 43;
+   Geraetetyp_TEMPERATURMENGENUMWERTER = 44;
+   Geraetetyp_ZUSTANDSMENGENUMWERTER = 45;
 }
 message Geschaeftspartner {
    option (.protobuf_net.msgopt).namespace = "BO4E.BO";
@@ -918,6 +942,18 @@ enum Landescode {
    Landescode_ZR = 265;
    Landescode_ZW = 266;
 }
+message Lastprofil {
+   option (.protobuf_net.msgopt).namespace = "BO4E.COM";
+   string Bezeichnung = 1001;
+   string Profilschar = 1002;
+   Profilverfahren Verfahren = 1003;
+   bool Einspeisung = 1004;
+   Tagesparameter Tagesparameter = 1005;
+   Profilart Profilart = 1006;
+   string Herausgeber = 1007;
+   Profilklasse Profiltyp = 1008;
+   Normierungsfaktor Normierungsfaktor = 1009;
+}
 enum Leistungstyp {
    option (.protobuf_net.enumopt).namespace = "BO4E.ENUM";
    ARBEITSPREIS_WIRKARBEIT = 0;
@@ -944,10 +980,18 @@ enum Leistungstyp {
    MAHNKOSTEN = 21;
    INKASSOKOSTEN = 22;
 }
+message LokationsTypZuordnung {
+   option (.protobuf_net.msgopt).namespace = "BO4E.COM";
+   Lokationstyp Lokationstyp = 3;
+   string LokationsId = 4;
+}
 enum Lokationstyp {
    option (.protobuf_net.enumopt).namespace = "BO4E.ENUM";
    MALO = 0;
    MELO = 1;
+   NELO = 2;
+   SR = 3;
+   TR = 4;
 }
 message Marktlokation {
    option (.protobuf_net.msgopt).namespace = "BO4E.BO";
@@ -974,6 +1018,7 @@ message Marktlokation {
    repeated Konfigurationsprodukt Konfigurationsprodukte = 40;
    string LokationsbuendelObjektcode = 42;
    string VorgelagerteLokationsId = 43;
+   repeated LokationsTypZuordnung VorgelagerteLokationsIds = 44;
    repeated MarktpartnerDetails Marktrollen = 1021;
    string Regelzone = 1022;
    string Marktgebiet = 1023;
@@ -1032,6 +1077,9 @@ enum Mengeneinheit {
    VAR = 23;
    VARH = 29;
    KWHK = 40;
+   W_M2 = 41;
+   M_S = 42;
+   STUECK = 50;
    JAHR = 228;
    KWH = 2000;
    MW = 3000;
@@ -1070,6 +1118,8 @@ message Messlokation {
    repeated Messprodukt Messprodukte = 1024;
    string LokationsbuendelObjektcode = 1026;
    string VorgelagerteLokationsId = 1027;
+   bool IstFuerLieferanmeldungRelevant = 1028;
+   repeated LokationsTypZuordnung VorgelagerteLokationsIds = 1029;
 }
 message Messlokationszuordnung {
    option (.protobuf_net.msgopt).namespace = "BO4E.COM";
@@ -1161,6 +1211,12 @@ enum Netznutzungszahler {
    Netznutzungszahler_KUNDE = 0;
    Netznutzungszahler_LIEFERANT = 1;
 }
+enum Normierungsfaktor {
+   option (.protobuf_net.enumopt).namespace = "BO4E.ENUM";
+   NORMIERUNGSFAKTOR_1_000_000_KWH_A = 0;
+   NORMIERUNGSFAKTOR_300_KWH_K = 1;
+   NORMIERUNGSFAKTOR_1_000_000_KW = 2;
+}
 message Notiz {
    option (.protobuf_net.msgopt).namespace = "BO4E.COM";
    string Autor = 3;
@@ -1213,6 +1269,7 @@ message Preisstaffel {
    .bcl.Decimal StaffelgrenzeVon = 4;
    .bcl.Decimal StaffelgrenzeBis = 5;
    Sigmoidparameter Sigmoidparameter = 6;
+   Mengeneinheit Mengeneinheit = 7;
 }
 enum Preisstatus {
    option (.protobuf_net.enumopt).namespace = "BO4E.ENUM";
@@ -1226,6 +1283,44 @@ enum Prioritaet {
    NORMAL = 2;
    HOCH = 3;
    SEHR_HOCH = 4;
+}
+enum Profilart {
+   option (.protobuf_net.enumopt).namespace = "BO4E.ENUM";
+   ART_STANDARDLASTPROFIL = 0;
+   ART_TAGESPARAMETERABHAENGIGES_LASTPROFIL = 1;
+   ART_LASTPROFIL = 2;
+   ART_STANDARDEINSPEISEPROFIL = 3;
+   ART_TAGESPARAMETERABHAENGIGES_EINSPEISEPROFIL = 4;
+}
+enum Profilklasse {
+   option (.protobuf_net.enumopt).namespace = "BO4E.ENUM";
+   Profilklasse_GEWERBE = 0;
+   GEWERBE_WERKTAG_9_BIS_18 = 1;
+   GEWERBE_ABEND = 2;
+   GEWERBE_DURCHLAUFEND = 3;
+   GEWERBE_LADEN_FRISEUR = 4;
+   GEWERBE_BAECKEREI = 5;
+   GEWERBE_WOCHENENDE = 6;
+   LANDWIRTSCHAFT = 7;
+   LANDWIRTSCHAFT_MIT_MILCH = 8;
+   LANDWIRTSCHAFT_OHNE_MILCH = 9;
+   HAUSHALT = 10;
+   BANDLAST = 11;
+   UNTERBRECHBARE_VERBRAUCHSEINRICHTUNG = 12;
+   HEIZWAERMESPEICHER = 13;
+   Profilklasse_STRASSENBELEUCHTUNG = 14;
+   PHOTOVOLTAIK = 15;
+   BLOCKHEIZKRAFTWERK = 16;
+   SONSTIGE_VERBRAUCHENDE_MARKTLOKATION = 17;
+   SONSTIGE_ERZEUGENDE_MARKTLOKATION = 18;
+   EMOB_OEFFENTLICH = 19;
+   EMOB_HAUSHALT = 20;
+   EMOB_GEWERBE = 21;
+}
+enum Profilverfahren {
+   option (.protobuf_net.enumopt).namespace = "BO4E.ENUM";
+   SYNTHETISCH = 0;
+   ANALYTISCH = 1;
 }
 message Rechnung {
    option (.protobuf_net.msgopt).namespace = "BO4E.BO";
@@ -1324,6 +1419,7 @@ enum Rechnungstyp {
    BLINDARBEIT = 13;
    SONDERRECHNUNG = 14;
    ABRECHNUNG_VON_KONFIGURATIONEN_UNIVERSALBESTELLPROZESS = 15;
+   ABRECHNUNG_TECHNIK = 16;
 }
 message Region {
    option (.protobuf_net.msgopt).namespace = "BO4E.BO";
@@ -1407,6 +1503,7 @@ enum Sonderrechnungsart {
    P18_ABLAV = 6;
    KONZESSIONSABGABE_WECHSEL_RLM = 7;
    PRIVILEGIERUNG_NACH_ENFG = 8;
+   KONZESSIONSABGABE_WEIGEL_MENGEN = 9;
 }
 enum Sparte {
    option (.protobuf_net.enumopt).namespace = "BO4E.ENUM";
@@ -1530,6 +1627,13 @@ enum Steuerkennzeichen {
    VST_7 = 7;
    RCV = 8;
 }
+message Tagesparameter {
+   option (.protobuf_net.msgopt).namespace = "BO4E.COM";
+   string Klimazone = 3;
+   string Temperaturmessstelle = 4;
+   string Dienstanbieter = 5;
+   string Herausgeber = 6;
+}
 enum Tarifart {
    option (.protobuf_net.enumopt).namespace = "BO4E.ENUM";
    EINTARIF = 0;
@@ -1562,6 +1666,7 @@ enum Titel {
    DR = 0;
    PROF = 1;
    PROF_DR = 2;
+   DIPLOM_INF = 3;
 }
 enum Unterbrechbarkeit {
    option (.protobuf_net.enumopt).namespace = "BO4E.ENUM";
@@ -1588,6 +1693,8 @@ message Verbrauch {
    Tarifstufe Tarifstufe = 12;
    .google.protobuf.Timestamp Nutzungszeitpunkt = 13;
    .google.protobuf.Timestamp Ausfuehrungszeitpunkt = 14;
+   string Temperaturmasszahl = 15;
+   Zeitfenster Zeitfenster = 16;
 }
 enum Verbrauchsart {
    option (.protobuf_net.enumopt).namespace = "BO4E.ENUM";
@@ -1596,6 +1703,10 @@ enum Verbrauchsart {
    KLWS = 2;
    W = 3;
    WS = 4;
+   WK = 5;
+   EM = 6;
+   STRB = 7;
+   STW = 8;
 }
 enum Verbrauchsmengetyp {
    option (.protobuf_net.enumopt).namespace = "BO4E.ENUM";
@@ -1916,6 +2027,8 @@ message Zaehler {
    Befestigungsart Befestigungsart = 1018;
    Geraetemerkmal Zaehlergroesse = 1019;
    repeated Geraet Geraete = 1020;
+   repeated string WeitereGeraetenummern = 1021;
+   ArtVolumenerfassung ArtVolumenerfassung = 1022;
 }
 enum Zaehlerauspraegung {
    option (.protobuf_net.enumopt).namespace = "BO4E.ENUM";
@@ -1940,6 +2053,7 @@ enum Zaehlertyp {
    WASSERZAEHLER = 13;
    MODERNEMESSEINRICHTUNG = 14;
    NEUEMESSEINRICHTUNGGAS = 15;
+   MENGENUMWERTER = 16;
 }
 enum ZaehlertypSpezifikation {
    option (.protobuf_net.enumopt).namespace = "BO4E.ENUM";
@@ -1972,6 +2086,7 @@ message Zaehlwerk {
    Zaehlzeitregister Zaehlzeiten = 1021;
    string Konfiguration = 1022;
    EMobilitaetsart EMobilitaetsart = 1023;
+   repeated Verbrauchsart Verbrauchsarten = 1024 [packed = false];
 }
 message Zaehlzeitregister {
    option (.protobuf_net.msgopt).namespace = "BO4E.COM";
@@ -2015,6 +2130,16 @@ enum Zeitreihentyp {
    TLS = 6;
    SLS_TLS = 7;
    SES_TES = 8;
+   AUS = 9;
+   BAS = 10;
+   DBA = 11;
+   DZR = 12;
+   DZÜ = 13;
+   FPE = 14;
+   FPI = 15;
+   SRE = 16;
+   SRI = 17;
+   VZR = 18;
 }
 message Zustaendigkeit {
    option (.protobuf_net.msgopt).namespace = "BO4E.COM";

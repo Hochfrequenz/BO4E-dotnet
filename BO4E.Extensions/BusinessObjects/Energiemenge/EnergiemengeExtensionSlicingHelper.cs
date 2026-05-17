@@ -11,7 +11,7 @@ public static partial class EnergiemengeExtension
 {
     internal static IList<ITimeRange> GetLocalDailySlices(
         ITimeRange overallTimeRange,
-        TimeZoneInfo tz = null
+        TimeZoneInfo? tz = null
     )
     {
         if (overallTimeRange == null)
@@ -68,7 +68,7 @@ public static partial class EnergiemengeExtension
 
     internal static IList<ITimeRange> GetLocalMonthlySlices(
         ITimeRange overallTimeRange,
-        TimeZoneInfo tz = null
+        TimeZoneInfo? tz = null
     )
     {
         if (overallTimeRange == null)
@@ -189,7 +189,7 @@ public static partial class EnergiemengeExtension
     ///     null) is <see cref="CentralEuropeStandardTime.CentralEuropeStandardTimezoneInfo" />
     /// </param>
     /// <returns></returns>
-    public static DateTime AddDaysDST(this DateTime dt, double value, TimeZoneInfo tz = null)
+    public static DateTime AddDaysDST(this DateTime dt, double value, TimeZoneInfo? tz = null)
     {
         if (tz == null)
         {

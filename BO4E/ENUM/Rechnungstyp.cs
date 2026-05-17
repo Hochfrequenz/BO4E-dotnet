@@ -94,4 +94,11 @@ public enum Rechnungstyp
         "ABRECHNUNG_VON_KONFIGURATIONEN_UNIVERSALBESTELLPROZESS"
     )]
     ABRECHNUNG_VON_KONFIGURATIONEN_UNIVERSALBESTELLPROZESS,
+
+    /// <summary>
+    /// ABRECHNUNG_TECHNIK
+    /// </summary>
+    [EnumMember(Value = "ABRECHNUNG_TECHNIK")]
+    [System.Text.Json.Serialization.JsonStringEnumMemberName("ABRECHNUNG_TECHNIK")]
+    ABRECHNUNG_TECHNIK,
 }

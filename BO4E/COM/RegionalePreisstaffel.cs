@@ -11,5 +11,5 @@ public class RegionalePreisstaffel : Preisstaffel
     [JsonProperty(PropertyName = "regionaleGueltigkeit")]
     [JsonPropertyName("regionaleGueltigkeit")]
     //[ProtoMember(8)]
-    public RegionaleGueltigkeit RegionaleGueltigkeit { get; set; }
+    public RegionaleGueltigkeit? RegionaleGueltigkeit { get; set; }
 }

@@ -30,7 +30,7 @@ public class SystemTextNullableVerwendungszweckStringEnumConverter
 
         if (reader.TokenType == System.Text.Json.JsonTokenType.String)
         {
-            string enumString = reader.GetString();
+            string? enumString = reader.GetString();
 
             return enumString switch
             {

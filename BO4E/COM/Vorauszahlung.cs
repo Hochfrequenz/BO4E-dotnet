@@ -18,7 +18,7 @@ public class Vorauszahlung : COM
     [FieldName("value", Language.EN)]
     [ProtoMember(3)]
     [JsonPropertyOrder(3)]
-    public Betrag Betrag { get; set; }
+    public Betrag? Betrag { get; set; }
 
     /// <summary>
     ///     Referenz auf die Rechnungsnummer, die durch diesen Betrag bezahlt wurde

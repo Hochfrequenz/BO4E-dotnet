@@ -41,7 +41,7 @@ public class Energiemenge : BusinessObject
     [ProtoMember(10)]
     [DataCategory(DataCategory.POD)]
     [BoKey]
-    public string LokationsId { get; set; }
+    public string? LokationsId { get; set; }
 
     /// <summary>
     ///     Gibt an, ob es sich um eine Markt- oder Messlokation handelt.
@@ -63,6 +63,16 @@ public class Energiemenge : BusinessObject
     [ProtoMember(12)]
     [DataCategory(DataCategory.METER_READING)]
     public List<Verbrauch>? Energieverbrauch { get; set; }
+
+    /// <summary>
+    ///     Gibt das <see cref="Lastprofil" /> an, zu der die Energiemenge gehört.
+    /// </summary>
+    [JsonProperty(Order = 13, PropertyName = "lastprofil")]
+    [JsonPropertyName("lastprofil")]
+    [JsonPropertyOrder(13)]
+    [ProtoMember(13)]
+    [DataCategory(DataCategory.POD)]
+    public Lastprofil? Lastprofil { get; set; }
 
     /// <summary>
     ///     Adding two Energiemenge objects is allowed for Energiemenge with the same location Id and location type.
@@ -170,11 +180,11 @@ public class EnergiemengeConverter : System.Text.Json.Serialization.JsonConverte
             ref reader,
             Energiemenge.EnergiemengeSerializerOptions
         );
-        if (e.Energieverbrauch == null)
+        if (e != null && e.Energieverbrauch == null)
         {
             e.Energieverbrauch = new List<Verbrauch>();
         }
-        return e;
+        return e!;
     }
 
     /// <summary>

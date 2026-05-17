@@ -16,7 +16,7 @@ public class Ausschreibungsdetail : COM
     [JsonProperty(PropertyName = "lokationsId")]
     [JsonPropertyName("lokationsId")]
     [ProtoMember(3)]
-    public string LokationsId { get; set; }
+    public string? LokationsId { get; set; }
 
     /// <summary>Bezeichnung für die Lokation, z.B. Zentraler Einkauf, Hamburg</summary>
     [JsonProperty(PropertyName = "lokationsbezeichung")]
@@ -82,7 +82,7 @@ public class Ausschreibungsdetail : COM
     [JsonProperty(PropertyName = "lokationsadresse")]
     [JsonPropertyName("lokationsadresse")]
     [ProtoMember(12)]
-    public Adresse Lokationsadresse { get; set; }
+    public Adresse? Lokationsadresse { get; set; }
 
     /// <summary>Die (evtl. abweichende) Rechnungsadresse. Struktur <seealso cref="Adresse" /></summary>
     [JsonProperty(PropertyName = "rechnungsadresse")]

@@ -160,7 +160,7 @@ public abstract class BusinessObject : IUserProperties, IOptionalGuid
     protected virtual string guidSerialized
 #pragma warning restore IDE1006 // Naming Styles
     {
-        get => Guid.HasValue ? Guid.ToString() : string.Empty;
+        get => Guid.HasValue ? Guid.Value.ToString() : string.Empty;
         set { Guid = string.IsNullOrWhiteSpace(value) ? (Guid?)null : System.Guid.Parse(value); }
     }
 
@@ -210,7 +210,11 @@ public abstract class BusinessObject : IUserProperties, IOptionalGuid
     public virtual Guid? Guid { get; set; }
 
     /// <summary>
-    ///     User properties (non bo4e standard)
+    ///     User properties (non BO4E standard). Contains JSON fields that could not be mapped to model properties.
+    ///     Null or empty indicates all JSON fields were successfully mapped during deserialization.
+    ///     Use <see cref="UserPropertiesExtensions.HasEmptyUserProperties{TParent}" /> to check if empty,
+    ///     or <see cref="UserPropertiesExtensions.HasAllEmptyUserPropertiesRecursive{TParent}" /> to recursively
+    ///     check this object and all nested <see cref="IUserProperties" /> objects.
     /// </summary>
     [JsonProperty(
         PropertyName = USER_PROPERTIES_NAME,
@@ -280,9 +284,9 @@ public abstract class BusinessObject : IUserProperties, IOptionalGuid
         }
         var regularPropertyNames = GetType()
             .GetProperties()
-            .Where(p => p.GetCustomAttribute<JsonPropertyNameAttribute>() != null)
-            .Select(p => p.GetCustomAttribute<JsonPropertyNameAttribute>().Name)
-            .Select(x => x.ToLower())
+            .Select(p => p.GetCustomAttribute<JsonPropertyNameAttribute>()?.Name)
+            .Where(name => name != null)
+            .Select(x => x!.ToLower())
             .ToHashSet();
         var result = UserProperties
             .Keys.Where(k => regularPropertyNames.Contains(k.ToLower()))
@@ -296,7 +300,7 @@ public abstract class BusinessObject : IUserProperties, IOptionalGuid
     /// <returns></returns>
     public string GetBoTyp()
     {
-        return BoTyp;
+        return BoTyp!;
     }
 
     /// <summary>
@@ -310,9 +314,9 @@ public abstract class BusinessObject : IUserProperties, IOptionalGuid
 
     /// <summary>
     ///     <inheritdoc
-    ///         cref="ExterneReferenzExtensions.TryGetExterneReferenz(ICollection{ExterneReferenz}, string, out string)" />
+    ///         cref="ExterneReferenzExtensions.TryGetExterneReferenz(ICollection{ExterneReferenz}, string, out string?)" />
     /// </summary>
-    public bool TryGetExterneReferenz(string extRefName, out string extRefWert)
+    public bool TryGetExterneReferenz(string extRefName, out string? extRefWert)
     {
         return ExterneReferenzen.TryGetExterneReferenz(extRefName, out extRefWert);
     }
@@ -362,7 +366,7 @@ public abstract class BusinessObject : IUserProperties, IOptionalGuid
     /// <returns>a BO4E compliant URI object</returns>
     public Bo4eUri GetURI(bool includeUserProperties = false)
     {
-        return Bo4eUri.GetUri(this, includeUserProperties);
+        return Bo4eUri.GetUri(this, includeUserProperties)!;
     }
 
     /// <summary>
@@ -409,122 +413,19 @@ public abstract class BusinessObject : IUserProperties, IOptionalGuid
     }
 
     /// <summary>
-    ///     This method returns information about the object structure, especially if there are
-    ///     nested field, that could be used, e.g. to expand OData queries.
-    /// </summary>
-    /// <param name="boType">
-    ///     valid business object type
-    ///     <example>
-    ///         <code>typeof(Marktlokation)</code>
-    ///     </example>
-    /// </param>
-    /// <returns>
-    ///     A dictionary with field names as keys (or the different JSON property name if set)
-    ///     and the type of the property as value. Nesting and different layers are denoted by
-    ///     using "."
-    /// </returns>
-    public static Dictionary<string, Type> GetExpandablePropertyNames(Type boType)
-    {
-        return GetExpandablePropertyNames(boType, true);
-    }
-
-    /// <summary>
-    ///     <see cref="GetExpandablePropertyNames(Type)" />
-    /// </summary>
-    /// <param name="boTypeName">name of the business object as string</param>
-    /// <returns>
-    ///     <see cref="GetExpandablePropertyNames(Type)" />
-    /// </returns>
-    public static Dictionary<string, Type> GetExpandableFieldNames(string boTypeName)
-    {
-#pragma warning disable CS0618 // Type or member is obsolete
-        var clazz = Assembly
-            .GetExecutingAssembly()
-            .GetType(BoMapper.PackagePrefix + "." + boTypeName);
-#pragma warning restore CS0618 // Type or member is obsolete
-        if (clazz == null)
-        {
-#pragma warning disable CS0618 // Type or member is obsolete
-            throw new ArgumentException(
-                $"{boTypeName} is not a valid Business Object name. Use one of the following: {string.Join("\n -", BoMapper.GetValidBoNames())}"
-            );
-#pragma warning restore CS0618 // Type or member is obsolete
-        }
-
-        return GetExpandablePropertyNames(clazz);
-    }
-
-    /// <summary>
-    ///     recursive function to return all expandable fields for a given type <paramref name="type" />.
-    ///     Set <paramref name="rootLevel" /> when calling from outside the function itself.
-    /// </summary>
-    /// <param name="type">Type inherited from Business Object</param>
-    /// <param name="rootLevel">true iff calling from outside the function itself / default</param>
-    /// <returns>HashSet of strings</returns>
-    protected static Dictionary<string, Type> GetExpandablePropertyNames(
-        Type type,
-        bool rootLevel = true
-    )
-    {
-        if (rootLevel && !type.IsSubclassOf(typeof(BusinessObject)))
-        {
-            throw new ArgumentException("Only allowed for BusinessObjects");
-        }
-
-        var result = new Dictionary<string, Type>();
-        foreach (var prop in type.GetProperties())
-        {
-            string fieldName;
-            var jpa = prop.GetCustomAttribute<JsonPropertyAttribute>();
-            if (jpa?.PropertyName != null)
-            {
-                fieldName = jpa.PropertyName;
-            }
-            else
-            {
-                fieldName = prop.Name;
-            }
-
-            if (prop.PropertyType.IsSubclassOf(typeof(BusinessObject)))
-            {
-                foreach (var subResult in GetExpandablePropertyNames(prop.PropertyType, false))
-                    result.Add(string.Join(".", fieldName, subResult.Key), subResult.Value);
-                result.Add(fieldName, prop.PropertyType);
-            }
-            else if (prop.PropertyType.IsSubclassOf(typeof(COM.COM)))
-            {
-                result.Add(fieldName, prop.PropertyType);
-                // coms do not contain any exandable subfield since they're flat
-            }
-            else if (
-                prop.PropertyType.IsGenericType
-                && prop.PropertyType.GetGenericTypeDefinition() == typeof(List<>)
-            )
-            {
-                var listElementType = prop.PropertyType.GetGenericArguments()[0];
-                foreach (var subResult in GetExpandablePropertyNames(listElementType, false))
-                    result.Add(string.Join(".", fieldName, subResult.Key), subResult.Value);
-                result.Add(fieldName, prop.PropertyType);
-            }
-        }
-
-        return result;
-    }
-
-    /// <summary>
     ///     Get a dictionary containing the key values of this Business Object.
     ///     The dictionary has the JsonPropertyAttribute.PropertyName or FieldName
     ///     of the key as key and the actual key value as value.
     /// </summary>
     /// <seealso cref="GetBoKeyProps(Type)" />
     /// <returns>A dictionary with key value pairs.</returns>
-    public Dictionary<string, object> GetBoKeys()
+    public Dictionary<string, object?> GetBoKeys()
     {
-        var result = new Dictionary<string, object>();
+        var result = new Dictionary<string, object?>();
         foreach (var pi in GetBoKeyProps(GetType()))
         {
             var jpa = pi.GetCustomAttribute<JsonPropertyAttribute>();
-            result.Add(jpa?.PropertyName != null ? jpa.PropertyName : pi.Name, pi.GetValue(this));
+            result.Add(jpa?.PropertyName ?? pi.Name, pi.GetValue(this));
         }
 
         return result;
@@ -573,6 +474,7 @@ public abstract class BusinessObject : IUserProperties, IOptionalGuid
         return true;
     }
 
+#nullable disable warnings
     internal class BaseSpecifiedConcreteClassConverter : DefaultContractResolver
     {
         protected override JsonConverter ResolveContractConverter(Type objectType)
@@ -586,21 +488,41 @@ public abstract class BusinessObject : IUserProperties, IOptionalGuid
         }
     }
 
+    /// <summary>
+    /// Custom JSON converter for polymorphic BusinessObject deserialization using "boTyp" as discriminator.
+    /// </summary>
+    /// <remarks>
+    /// <para>
+    /// Newtonsoft.Json does not have built-in polymorphic handling equivalent to STJ's [JsonPolymorphic].
+    /// Its TypeNameHandling uses "$type" property which is different from our "boTyp" convention.
+    /// </para>
+    /// <para>
+    /// This converter provides case-insensitive "boTyp" matching and supports the "boTyp" property
+    /// at any position in the JSON object.
+    /// </para>
+    /// </remarks>
     internal class BusinessObjectBaseConverter : JsonConverter
     {
         public override bool CanWrite => false;
-
-        //private static readonly JsonSerializerSettings SpecifiedSubclassConversion = new JsonSerializerSettings() { ContractResolver = new BaseSpecifiedConcreteClassConverter() };
 
         public override bool CanConvert(Type objectType)
         {
             return objectType == typeof(BusinessObject);
         }
 
-        public override object ReadJson(
+        /// <summary>
+        /// Thread-safe serializer settings for deserializing concrete types.
+        /// Uses BaseSpecifiedConcreteClassConverter to avoid infinite recursion.
+        /// </summary>
+        private static readonly JsonSerializerSettings ConcreteTypeSettings = new()
+        {
+            ContractResolver = new BaseSpecifiedConcreteClassConverter(),
+        };
+
+        public override object? ReadJson(
             JsonReader reader,
             Type objectType,
-            object existingValue,
+            object? existingValue,
             JsonSerializer serializer
         )
         {
@@ -609,102 +531,75 @@ public abstract class BusinessObject : IUserProperties, IOptionalGuid
                 return null;
             }
 
-            if (objectType.IsAbstract)
+            var jo = JObject.Load(reader);
+
+            if (!objectType.IsAbstract)
             {
-                var jo = JObject.Load(reader);
-                Type boType;
-                if (
-                    serializer.TypeNameHandling.HasFlag(TypeNameHandling.Objects)
-                    && jo.TryGetValue("$type", out var typeToken)
-                )
-                {
-                    boType =
-                        BusinessObjectSerializationBinder.BusinessObjectAndCOMTypes.SingleOrDefault(
-                            t =>
-                                typeToken.Value<string>().ToUpper().StartsWith(t.FullName.ToUpper())
-                        );
-                }
-                else if (!jo.ContainsKey("boTyp"))
-                {
-                    throw new ArgumentException(
-                        "If deserializing into an abstract BusinessObject the key \"boTyp\" has to be set. But it wasn't."
+                // This converter only handles the abstract BusinessObject base class.
+                // Use thread-safe settings to avoid mutating shared contract resolver.
+                return jo.ToObject(
+                    objectType,
+                    Newtonsoft.Json.JsonSerializer.Create(ConcreteTypeSettings)
+                );
+            }
+
+            Type? boType;
+
+            // Check for TypeNameHandling with $type property first
+            if (
+                serializer.TypeNameHandling.HasFlag(TypeNameHandling.Objects)
+                && jo.TryGetValue("$type", out var typeToken)
+            )
+            {
+                var typeString = typeToken.Value<string>();
+                boType =
+                    BusinessObjectSerializationBinder.BusinessObjectAndCOMTypes.SingleOrDefault(t =>
+                        typeString != null
+                        && typeString.StartsWith(t.FullName!, StringComparison.OrdinalIgnoreCase)
                     );
-                }
-                else
-                {
-#pragma warning disable CS0618 // Type or member is obsolete
-                    boType = BoMapper.GetTypeForBoName(jo["boTyp"].Value<string>()); // ToDo: catch exception if boTyp is not set and throw exception with descriptive error message
-#pragma warning restore CS0618 // Type or member is obsolete
-                }
 
                 if (boType == null)
                 {
-                    foreach (var assembley in AppDomain.CurrentDomain.GetAssemblies())
-                    {
-                        try
-                        {
-                            boType = assembley
-                                .GetTypes()
-                                .FirstOrDefault(x =>
-                                    string.Equals(
-                                        x.Name,
-                                        jo["boTyp"].Value<string>(),
-                                        StringComparison.CurrentCultureIgnoreCase
-                                    )
-                                );
-                        }
-                        catch (ReflectionTypeLoadException)
-                        {
-                            continue;
-                        }
-
-                        if (boType != null)
-                        {
-                            break;
-                        }
-                    }
-
-                    if (boType == null)
-                    {
-                        throw new NotImplementedException(
-                            $"The type '{jo["boTyp"].Value<string>()}' does not exist in the BO4E standard."
-                        );
-                    }
-                }
-
-                var deserializationMethod = serializer
-                    .GetType() // https://stackoverflow.com/a/5218492/10009545
-                    .GetMethods()
-                    .Where(m => m.Name == nameof(serializer.Deserialize))
-                    .Select(m => new
-                    {
-                        Method = m,
-                        Params = m.GetParameters(),
-                        Args = m.GetGenericArguments(),
-                    })
-                    .Where(x => x.Params.Length == 1 && x.Args.Length == 1)
-                    .Select(x => x.Method)
-                    .First()
-                    .GetGenericMethodDefinition()
-                    .MakeGenericMethod(boType);
-                try
-                {
-                    return deserializationMethod.Invoke(
-                        serializer,
-                        new object[] { jo.CreateReader() }
+                    throw new Newtonsoft.Json.JsonSerializationException(
+                        $"The $type '{typeString}' does not match any known BusinessObject type."
                     );
                 }
-                catch (TargetInvocationException tie) when (tie.InnerException != null)
+            }
+            // Try both "boTyp" (camelCase) and "BoTyp" (PascalCase) - case-insensitive lookup
+            else if (
+                jo.TryGetValue("boTyp", StringComparison.OrdinalIgnoreCase, out var boTypToken)
+            )
+            {
+                var boTypeString = boTypToken.Value<string>();
+                if (string.IsNullOrWhiteSpace(boTypeString))
                 {
-                    throw tie.InnerException; // to hide the reflection to the outside.
+                    throw new Newtonsoft.Json.JsonSerializationException(
+                        "The \"boTyp\" property cannot be null or empty."
+                    );
+                }
+
+                // Resolve type using centralized resolver (includes caching and fallback)
+                boType = BusinessObjectTypeResolver.ResolveType(boTypeString);
+
+                if (boType == null)
+                {
+                    throw new Newtonsoft.Json.JsonSerializationException(
+                        $"The type '{boTypeString}' does not exist in the BO4E standard."
+                    );
                 }
             }
+            else
+            {
+                throw new Newtonsoft.Json.JsonSerializationException(
+                    "When deserializing into an abstract BusinessObject, the JSON must contain a \"boTyp\" property to identify the concrete type."
+                );
+            }
 
-            serializer.ContractResolver.ResolveContract(objectType).Converter = null;
-            return serializer.Deserialize(JObject.Load(reader).CreateReader(), objectType);
+            // Use ToObject for simpler deserialization instead of complex reflection
+            return jo.ToObject(boType, serializer);
         }
 
-        public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
+        public override void WriteJson(JsonWriter writer, object? value, JsonSerializer serializer)
         {
             throw new NotImplementedException(
                 "Serializing an abstract BusinessObject is not supported."
@@ -712,17 +607,46 @@ public abstract class BusinessObject : IUserProperties, IOptionalGuid
         }
     }
 
+    /// <summary>
+    /// Custom JSON converter for polymorphic BusinessObject deserialization using "boTyp" as discriminator.
+    /// </summary>
+    /// <remarks>
+    /// <para>
+    /// This custom converter is required instead of [JsonPolymorphic] / [JsonDerivedType] attributes
+    /// for full backward compatibility. The built-in STJ polymorphic handling has several limitations:
+    /// </para>
+    /// <list type="number">
+    ///   <item>
+    ///     <description>
+    ///       <b>Discriminator value case-sensitivity:</b> STJ's polymorphic handling is CASE-SENSITIVE
+    ///       for discriminator values with no option to change this. We support case-insensitive matching
+    ///       (e.g., "MARKTLOKATION", "marktlokation", "Marktlokation" all resolve to the same type).
+    ///     </description>
+    ///   </item>
+    ///   <item>
+    ///     <description>
+    ///       <b>Discriminator property name case-sensitivity:</b> Even with <c>PropertyNameCaseInsensitive = true</c>,
+    ///       STJ does not apply case-insensitivity to the discriminator property name. This is a known bug.
+    ///       We support case-insensitive lookup for the "boTyp" property name.
+    ///       See: https://github.com/dotnet/runtime/issues/118786
+    ///     </description>
+    ///   </item>
+    /// </list>
+    /// <para>
+    /// Note: While .NET 9+ adds <c>AllowOutOfOrderMetadataProperties</c> to allow the discriminator at any position,
+    /// the case-sensitivity issues above still require a custom converter for full compatibility.
+    /// See: https://github.com/dotnet/runtime/issues/72604
+    /// </para>
+    /// </remarks>
     internal class BusinessObjectSystemTextJsonBaseConverter
         : System.Text.Json.Serialization.JsonConverter<BusinessObject>
     {
-        //private static readonly JsonSerializerSettings SpecifiedSubclassConversion = new JsonSerializerSettings() { ContractResolver = new BaseSpecifiedConcreteClassConverter() };
-
         public override bool CanConvert(Type objectType)
         {
             return objectType == typeof(BusinessObject);
         }
 
-        public override BusinessObject Read(
+        public override BusinessObject? Read(
             ref Utf8JsonReader reader,
             Type typeToConvert,
             JsonSerializerOptions options
@@ -733,61 +657,56 @@ public abstract class BusinessObject : IUserProperties, IOptionalGuid
                 return null;
             }
 
-            if (typeToConvert.IsAbstract)
+            if (!typeToConvert.IsAbstract)
             {
-                var jdoc = JsonDocument.ParseValue(ref reader);
-                if (!jdoc.RootElement.TryGetProperty("BoTyp", out var boTypeProp))
-                {
-                    boTypeProp = jdoc.RootElement.GetProperty("boTyp");
-                }
-
-                var boTypeString = boTypeProp.GetString();
-#pragma warning disable CS0618 // Type or member is obsolete
-                var boType = BoMapper.GetTypeForBoName(boTypeString);
-#pragma warning restore CS0618 // Type or member is obsolete
-                if (boType == null)
-                {
-                    foreach (var assembley in AppDomain.CurrentDomain.GetAssemblies())
-                    {
-                        try
-                        {
-                            boType = assembley
-                                .GetTypes()
-                                .FirstOrDefault(x =>
-                                    string.Equals(
-                                        x.Name,
-                                        boTypeString,
-                                        StringComparison.CurrentCultureIgnoreCase
-                                    )
-                                );
-                        }
-                        catch (ReflectionTypeLoadException)
-                        {
-                            continue;
-                        }
-
-                        if (boType != null)
-                        {
-                            break;
-                        }
-                    }
-
-                    if (boType == null)
-                    {
-                        throw new NotImplementedException(
-                            $"The type '{boTypeString}' does not exist in the BO4E standard."
-                        );
-                    }
-                }
-
-                return System.Text.Json.JsonSerializer.Deserialize(
-                        jdoc.RootElement.GetRawText(),
-                        boType,
-                        options
-                    ) as BusinessObject;
+                // This converter only handles the abstract BusinessObject base class.
+                // Concrete types should be handled by the default serializer.
+                return null;
             }
 
-            return null;
+            // Parse the JSON document to find the boTyp discriminator.
+            // Using 'using' ensures proper disposal and prevents memory leaks.
+            using var jdoc = JsonDocument.ParseValue(ref reader);
+
+            // Validate that root element is a JSON object
+            if (jdoc.RootElement.ValueKind != JsonValueKind.Object)
+            {
+                throw new System.Text.Json.JsonException(
+                    $"Expected JSON object but found {jdoc.RootElement.ValueKind}"
+                );
+            }
+
+            // Try common casings first for performance, then fall back to case-insensitive search.
+            if (
+                !jdoc.RootElement.TryGetProperty("boTyp", out var boTypeProp)
+                && !jdoc.RootElement.TryGetProperty("BoTyp", out boTypeProp)
+                && !TryGetPropertyCaseInsensitive(jdoc.RootElement, "boTyp", out boTypeProp)
+            )
+            {
+                throw new System.Text.Json.JsonException(
+                    "When deserializing into an abstract BusinessObject, the JSON must contain a \"boTyp\" property to identify the concrete type."
+                );
+            }
+
+            var boTypeString = boTypeProp.GetString();
+            if (string.IsNullOrWhiteSpace(boTypeString))
+            {
+                throw new System.Text.Json.JsonException(
+                    "The \"boTyp\" property cannot be null or empty."
+                );
+            }
+
+            // Resolve type using centralized resolver (includes caching and fallback)
+            var boType = BusinessObjectTypeResolver.ResolveType(boTypeString);
+            if (boType == null)
+            {
+                throw new System.Text.Json.JsonException(
+                    $"The type '{boTypeString}' does not exist in the BO4E standard."
+                );
+            }
+
+            // Deserialize using the concrete type directly from the JsonElement.
+            return jdoc.RootElement.Deserialize(boType, options) as BusinessObject;
         }
 
         public override void Write(
@@ -796,11 +715,44 @@ public abstract class BusinessObject : IUserProperties, IOptionalGuid
             JsonSerializerOptions options
         )
         {
+            if (value == null)
+            {
+                writer.WriteNullValue();
+                return;
+            }
+
             var boTypeString = value.GetBoTyp();
-#pragma warning disable CS0618 // Type or member is obsolete
-            var boType = BoMapper.GetTypeForBoName(boTypeString);
-#pragma warning restore CS0618 // Type or member is obsolete
-            System.Text.Json.JsonSerializer.Serialize(writer, value, boType, options);
+            var boType = BusinessObjectTypeResolver.GetKnownType(boTypeString);
+            System.Text.Json.JsonSerializer.Serialize(
+                writer,
+                value,
+                boType ?? value.GetType(),
+                options
+            );
+        }
+
+        /// <summary>
+        /// Tries to get a property from a JsonElement using case-insensitive comparison.
+        /// This is a fallback for when the common casings ("boTyp", "BoTyp") don't match.
+        /// </summary>
+        private static bool TryGetPropertyCaseInsensitive(
+            JsonElement element,
+            string propertyName,
+            out JsonElement value
+        )
+        {
+            foreach (var property in element.EnumerateObject())
+            {
+                if (string.Equals(property.Name, propertyName, StringComparison.OrdinalIgnoreCase))
+                {
+                    value = property.Value;
+                    return true;
+                }
+            }
+
+            value = default;
+            return false;
         }
     }
+#nullable restore warnings
 }

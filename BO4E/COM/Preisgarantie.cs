@@ -34,5 +34,5 @@ public class Preisgarantie : COM
     [JsonProperty(PropertyName = "zeitlicheGueltigkeit")]
     [JsonPropertyName("zeitlicheGueltigkeit")]
     [ProtoMember(5)]
-    public Zeitraum ZeitlicheGueltigkeit { get; set; }
+    public Zeitraum? ZeitlicheGueltigkeit { get; set; }
 }

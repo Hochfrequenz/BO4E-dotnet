@@ -22,7 +22,6 @@ public enum EicType
     /// <summary>
     /// object type “Z”, Energy Metering points
     /// </summary>
-
     [EnumMember(Value = "AREA")]
     [System.Text.Json.Serialization.JsonStringEnumMemberName("AREA")]
     MEASURING_POINT,
@@ -138,7 +137,7 @@ public static class EnergyIdentificationCodeExtensions
             return false;
         }
 
-        var match = EicRegex.Match(eicCandidate); // we know it's
+        var match = EicRegex.Match(eicCandidate!); // eicCandidate is validated by IsValidEIC above
 
         return match.Groups["vergabestelle"].Value == "11";
     }
@@ -156,7 +155,7 @@ public static class EnergyIdentificationCodeExtensions
             return false;
         }
 
-        var eicType = GetEICType(EicRegex.Match(bilanzierungsGebietEic).Groups["typ"].Value);
+        var eicType = GetEICType(EicRegex.Match(bilanzierungsGebietEic!).Groups["typ"].Value);
         return eicType == EicType.AREA
             && GermanControlAreas.ContainsKey(bilanzierungsGebietEic!.Substring(3, 1));
     }

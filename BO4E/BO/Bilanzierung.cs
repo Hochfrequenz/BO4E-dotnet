@@ -231,4 +231,14 @@ public class Bilanzierung : BusinessObject
     [NonOfficial(NonOfficialCategory.MISSING)]
     [ProtoMember(1019)]
     public Abwicklungsmodell? Abwicklungsmodell { get; set; }
+
+    /// <summary>
+    /// Aus der ORDERS gemappte Positionsnummer der Anfrage
+    /// </summary>
+    /// <remarks>LIN+?</remarks>
+    [JsonProperty(PropertyName = "positionsnummer", Order = 28)]
+    [JsonPropertyName("positionsnummer")]
+    [ProtoMember(1020)]
+    [JsonPropertyOrder(28)]
+    public string? Positionsnummer { get; set; }
 }

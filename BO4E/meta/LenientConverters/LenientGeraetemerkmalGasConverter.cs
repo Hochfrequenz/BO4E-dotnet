@@ -4,6 +4,7 @@ using Newtonsoft.Json;
 
 namespace BO4E.meta.LenientConverters;
 
+#nullable disable warnings
 /// <summary>
 /// The lenient ZaehlergroesseGasConverter allows for transforming strings that do not contain the prefix "GAS_" into valid <see cref="BO4E.ENUM.Geraetemerkmal"/>
 /// </summary>
@@ -21,10 +22,10 @@ public class LenientGeraetemerkmalGasConverter : JsonConverter
     }
 
     /// <inheritdoc cref="JsonConverter.ReadJson(JsonReader, Type, object, JsonSerializer)" />
-    public override object ReadJson(
+    public override object? ReadJson(
         JsonReader reader,
         Type objectType,
-        object existingValue,
+        object? existingValue,
         JsonSerializer serializer
     )
     {
@@ -66,7 +67,7 @@ public class LenientGeraetemerkmalGasConverter : JsonConverter
     }
 
     /// <inheritdoc cref="JsonConverter.WriteJson(JsonWriter, object, JsonSerializer)" />
-    public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
+    public override void WriteJson(JsonWriter writer, object? value, JsonSerializer serializer)
     {
         writer.WriteRawValue("\"" + value.ToString() + "\"");
     }

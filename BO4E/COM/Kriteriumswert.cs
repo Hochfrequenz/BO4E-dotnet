@@ -25,5 +25,5 @@ public class KriteriumsWert : COM
     [JsonProperty(PropertyName = "wert")]
     [JsonPropertyName("wert")]
     [ProtoMember(4)]
-    public string Wert { get; set; }
+    public string? Wert { get; set; }
 }

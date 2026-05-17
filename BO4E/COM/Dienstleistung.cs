@@ -19,5 +19,5 @@ public class Dienstleistung : COM
     [JsonProperty(PropertyName = "bezeichnung")]
     [JsonPropertyName("bezeichnung")]
     [ProtoMember(4)]
-    public string Bezeichnung { get; set; }
+    public string? Bezeichnung { get; set; }
 }

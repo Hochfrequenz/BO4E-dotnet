@@ -17,7 +17,7 @@ public class AufAbschlag : COM
     [JsonProperty(PropertyName = "bezeichnung")]
     [JsonPropertyName("bezeichnung")]
     [ProtoMember(3)]
-    public string Bezeichnung { get; set; }
+    public string? Bezeichnung { get; set; }
 
     /// <summary>Beschreibung zum Auf-/Abschlag</summary>
     [JsonProperty(PropertyName = "beschreibung")]
@@ -65,5 +65,5 @@ public class AufAbschlag : COM
     [JsonProperty(PropertyName = "staffeln")]
     [JsonPropertyName("staffeln")]
     [ProtoMember(10)]
-    public List<Preisstaffel> Staffeln { get; set; }
+    public List<Preisstaffel>? Staffeln { get; set; }
 }

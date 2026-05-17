@@ -35,4 +35,14 @@ public class Geraet : COM
     [ProtoMember(5)]
     [JsonPropertyOrder(12)]
     public Geraeteart? Geraeteart { get; set; }
+
+    /// <summary>
+    /// vorgegebene Positionsnummer innerhalb einer Anforderung
+    /// </summary>
+    /// <remarks>LIN+?</remarks>
+    [JsonProperty(PropertyName = "positionsnummer", Order = 13)]
+    [JsonPropertyName("positionsnummer")]
+    [ProtoMember(6)]
+    [JsonPropertyOrder(13)]
+    public string? Positionsnummer { get; set; }
 }

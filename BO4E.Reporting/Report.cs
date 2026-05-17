@@ -26,7 +26,7 @@ public abstract class Report : BusinessObject
         char separator = ';',
         bool headerLine = true,
         string lineTerminator = "\\n",
-        List<Dictionary<string, string>> reihenfolge = null
+        List<Dictionary<string, string>>? reihenfolge = null
     )
     {
         var type = GetType();

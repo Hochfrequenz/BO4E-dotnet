@@ -2,12 +2,12 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Text.Json;
+using AwesomeAssertions;
 using BO4E;
 using BO4E.BO;
 using BO4E.COM;
 using BO4E.ENUM;
 using BO4E.meta.LenientConverters;
-using FluentAssertions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Newtonsoft.Json;
 using JsonSerializer = System.Text.Json.JsonSerializer;
@@ -107,13 +107,12 @@ public class TestUserProperties
         melo.UserProperties = null;
         Assert.IsFalse(melo.UserPropertyEquals("there are no user properties", "asd"));
         Assert.IsFalse(melo.TryGetUserProperty("there are no user properties", out string _));
-        Assert.ThrowsException<ArgumentNullException>(
-            () =>
-                melo.EvaluateUserProperty<string, bool, Messlokation>(
-                    "there are no user properties",
-                    _ => default
-                )
-        );
+        var invalidAttempt = () =>
+            melo.EvaluateUserProperty<string, bool, Messlokation>(
+                "there are no user properties",
+                _ => default
+            );
+        invalidAttempt.Should().Throw<ArgumentNullException>();
         Assert.IsFalse(melo.UserPropertyEquals("myNullProp", true));
     }
 

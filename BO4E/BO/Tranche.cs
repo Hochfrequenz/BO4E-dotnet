@@ -26,7 +26,7 @@ public class Tranche : BusinessObject
     [DataCategory(DataCategory.POD)]
     [BoKey]
     [ProtoMember(4)]
-    public string TrancheId { get; set; }
+    public string? TrancheId { get; set; }
 
     /// <summary>Sparte der Tranche, z.B. Gas oder Strom.</summary>
     [JsonProperty(Order = 11, PropertyName = "sparte")]

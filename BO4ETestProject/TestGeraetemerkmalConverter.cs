@@ -1,8 +1,8 @@
 using System.Collections.Generic;
 using System.Text.Json.Serialization;
+using AwesomeAssertions;
 using BO4E.ENUM;
 using BO4E.meta.LenientConverters;
-using FluentAssertions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Newtonsoft.Json;
 using JsonException = System.Text.Json.JsonException;

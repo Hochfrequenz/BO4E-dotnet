@@ -21,7 +21,7 @@ public class Avisposition : COM
     [JsonPropertyName("rechnungsNummer")]
     [NonOfficial(NonOfficialCategory.MISSING)]
     [ProtoMember(1)]
-    public string RechnungsNummer { get; set; }
+    public string? RechnungsNummer { get; set; }
 
     /// <summary>
     /// workaround
@@ -70,7 +70,7 @@ public class Avisposition : COM
     [JsonPropertyName("gesamtBrutto")]
     [NonOfficial(NonOfficialCategory.MISSING)]
     [ProtoMember(5)]
-    public Betrag GesamtBrutto { get; set; }
+    public Betrag? GesamtBrutto { get; set; }
 
     /// <summary>
     /// Geforderter Rechnungsbetrag
@@ -79,7 +79,7 @@ public class Avisposition : COM
     [JsonPropertyName("zuZahlen")]
     [NonOfficial(NonOfficialCategory.MISSING)]
     [ProtoMember(6)]
-    public Betrag ZuZahlen { get; set; }
+    public Betrag? ZuZahlen { get; set; }
 
     /// <summary>
     /// Referenzierung auf eine vorherige COMDIS-Nachricht

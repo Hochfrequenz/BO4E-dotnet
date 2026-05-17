@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Text.Json.Serialization;
@@ -34,6 +35,7 @@ public class TechnischeRessource : BusinessObject
     /// Beispiel:
     /// RFF+Z34:DE00713739359S0000000000001222221'
     /// </summary>
+    [Obsolete("Abgelöst durch 'VorgelagerteLokationsIds'.")]
     [JsonProperty(PropertyName = "vorgelagerteMesslokationsId", Order = 11)]
     [JsonPropertyName("vorgelagerteMesslokationsId")]
     [JsonPropertyOrder(11)]
@@ -46,6 +48,7 @@ public class TechnischeRessource : BusinessObject
     /// Beispiel:
     /// RFF+Z16:20072281644'
     /// </summary>
+    [Obsolete("Abgelöst durch 'ZugeordneteLokationsIds'.")]
     [JsonProperty(PropertyName = "zugeordneteMarktlokationsId", Order = 12)]
     [JsonPropertyName("zugeordneteMarktlokationsId")]
     [JsonPropertyOrder(12)]
@@ -58,12 +61,25 @@ public class TechnischeRessource : BusinessObject
     /// Beispiel:
     /// RFF+Z16:20072281644'
     /// </summary>
+    [Obsolete("Abgelöst durch 'ZugeordneteLokationsIds'.")]
     [JsonProperty(PropertyName = "zugeordneteSteuerbareRessourceId", Order = 13)]
     [JsonPropertyName("zugeordneteSteuerbareRessourceId")]
     [JsonPropertyOrder(13)]
     [DataCategory(DataCategory.POD)]
     [ProtoMember(13)]
     public string? ZugeordneteSteuerbareRessourceId { get; set; }
+
+    /// <summary>
+    /// Referenz auf die der Technischen Ressource Zugeordneten Marktlokationen oder der technischen Ressource zugeordneten Steuerbaren Ressourcen
+    /// Beispiel:
+    /// RFF+Z16:20072281644'
+    /// </summary>
+    [JsonProperty(PropertyName = "zugeordneteLokationsIds", Order = 32)]
+    [JsonPropertyName("zugeordneteLokationsIds")]
+    [JsonPropertyOrder(32)]
+    [DataCategory(DataCategory.POD)]
+    [ProtoMember(32)]
+    public List<LokationsTypZuordnung>? ZugeordneteLokationsIds { get; set; }
 
     /// <summary>
     /// Nennleistung (Aufnahme)
@@ -120,12 +136,30 @@ public class TechnischeRessource : BusinessObject
     ///     ZE5: E-Mobilität
     ///     ZA8: Straßenbeleuchtung
     /// </summary>
+    [Obsolete(
+        "Abgelöst durch 'Verbrauchsarten'. (Technische Ressource unterstützt mehrere Verbrauchsarten)"
+    )]
     [JsonProperty(PropertyName = "verbrauchsart", Order = 18)]
     [JsonPropertyOrder(18)]
     [JsonPropertyName("verbrauchsart")]
     [NonOfficial(NonOfficialCategory.MISSING)]
     [ProtoMember(18)]
     public TechnischeRessourceVerbrauchsart? Verbrauchsart { get; set; }
+
+    /// <summary>
+    /// Verbrauchsarten der Technischen Ressource
+    /// Beispiel: CAV+Z64'
+    ///     Z64: Kraft/Licht
+    ///     Z65: Wärme
+    ///     ZE5: E-Mobilität
+    ///     ZA8: Straßenbeleuchtung
+    /// </summary>
+    [JsonProperty(PropertyName = "verbrauchsarten", Order = 33)]
+    [JsonPropertyOrder(33)]
+    [JsonPropertyName("verbrauchsarten")]
+    [NonOfficial(NonOfficialCategory.MISSING)]
+    [ProtoMember(33)]
+    public List<TechnischeRessourceVerbrauchsart>? Verbrauchsarten { get; set; }
 
     /// <summary>
     /// Wärmenutzung
@@ -219,11 +253,22 @@ public class TechnischeRessource : BusinessObject
     /// Enthält die ID der vorgelagerten Lokation. Kann IDs unterschiedlicher Lokationen enthalten, also zum Beispiel
     /// einer Messlokation oder Netzlokation
     /// </summary>
+    [Obsolete("Abgelöst durch 'VorgelagerteLokationsIds'.")]
     [JsonProperty(Order = 25, PropertyName = "vorgelagerteLokationsId")]
     [JsonPropertyName("vorgelagerteLokationsId")]
     [ProtoMember(25)]
     [JsonPropertyOrder(25)]
     public string? VorgelagerteLokationsId { get; set; }
+
+    /// <summary>
+    /// Enthält die ID's der vorgelagerten Lokationen. Kann IDs unterschiedlicher Lokationen enthalten, also zum Beispiel
+    /// einer Messlokation oder Netzlokation
+    /// </summary>
+    [JsonProperty(Order = 31, PropertyName = "vorgelagerteLokationsIds")]
+    [JsonPropertyName("vorgelagerteLokationsIds")]
+    [ProtoMember(31)]
+    [JsonPropertyOrder(31)]
+    public List<LokationsTypZuordnung>? VorgelagerteLokationsIds { get; set; }
 
     /// <summary>
     ///Kategorie der verbrauchenden Technischen Ressource

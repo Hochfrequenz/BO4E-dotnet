@@ -21,7 +21,7 @@ public class AutoNumberToStringConverter : JsonConverter<string>
     /// <summary>
     /// <inheritdoc cref="JsonConverter{T}.Read(ref Utf8JsonReader, Type, JsonSerializerOptions)"/>
     /// </summary>
-    public override string Read(
+    public override string? Read(
         ref Utf8JsonReader reader,
         Type typeToConvert,
         JsonSerializerOptions options

@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using AwesomeAssertions;
 using BO4E.BO;
 using BO4E.COM;
 using BO4E.ENUM;
@@ -57,6 +58,7 @@ public class TestEnergiemengeAdding
     {
         var em1 = new Energiemenge { LokationsId = "DE456", LokationsTyp = Lokationstyp.MELO };
         var em2 = new Energiemenge { LokationsId = "DE789", LokationsTyp = Lokationstyp.MELO };
-        Assert.ThrowsException<InvalidOperationException>(() => em1 + em2);
+        var invalidAddition = () => em1 + em2;
+        invalidAddition.Should().Throw<InvalidOperationException>();
     }
 }

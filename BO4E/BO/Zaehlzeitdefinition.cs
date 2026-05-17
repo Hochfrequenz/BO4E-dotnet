@@ -107,7 +107,7 @@ public class Zaehlzeitdefinition : BusinessObject
     [JsonPropertyName("zaehlzeitregister")]
     [ProtoMember(11)]
     [JsonPropertyOrder(11)]
-    public List<Zaehlzeitregister> Zaehlzeitregister { get; set; }
+    public List<Zaehlzeitregister>? Zaehlzeitregister { get; set; }
 
     /// <summary>
     /// Liste der ausgerollten Zählzeiten
@@ -116,5 +116,5 @@ public class Zaehlzeitdefinition : BusinessObject
     [JsonPropertyName("ausgerollteZaehlzeiten")]
     [ProtoMember(12)]
     [JsonPropertyOrder(12)]
-    public List<AusgerollteZaehlzeit> AusgerollteZaehlzeiten { get; set; }
+    public List<AusgerollteZaehlzeit>? AusgerollteZaehlzeiten { get; set; }
 }

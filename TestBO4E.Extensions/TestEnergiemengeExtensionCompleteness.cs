@@ -246,7 +246,6 @@ public class TestEnergiemengeExtensionCompleteness
 
     //int a = 0;
 
-
     [TestMethod]
     public void TestDailyParallization()
     {
@@ -286,7 +285,6 @@ public class TestEnergiemengeExtensionCompleteness
         );
 
         //Assert.IsTrue(mpLinear.DurationMilliseconds < 4000, $"Linear completeness report generation was too slow. Expected less than 4 seconds but was {mpLinear.DurationMilliseconds}ms: {mpLinear.RenderPlainText()}");
-
 
         em.GetDailyCompletenessReports(
             new TimeRange(

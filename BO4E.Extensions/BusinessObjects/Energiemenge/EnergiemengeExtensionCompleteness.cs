@@ -27,8 +27,8 @@ public static partial class EnergiemengeExtension
     {
         return em.GetCompletenessReport(
             new TimeRange(
-                config.ReferenceTimeFrame.Startdatum.Value.UtcDateTime,
-                config.ReferenceTimeFrame.Enddatum.Value.UtcDateTime
+                config.ReferenceTimeFrame!.Startdatum!.Value.UtcDateTime,
+                config.ReferenceTimeFrame!.Enddatum!.Value.UtcDateTime
             ),
             config.Wertermittlungsverfahren,
             config.Obis,
@@ -94,7 +94,7 @@ public static partial class EnergiemengeExtension
         this BO.Energiemenge em,
         ITimeRange reference,
         Wertermittlungsverfahren? wev,
-        string obiskennzahl,
+        string? obiskennzahl,
         Mengeneinheit einheit
     )
     {
@@ -146,12 +146,12 @@ public static partial class EnergiemengeExtension
             }*/
 
             var nonNullValues = new TimePeriodCollection(
-                em.Energieverbrauch.Select(v => new TimeRange(
+                em.Energieverbrauch!.Select(v => new TimeRange(
                     (v.Startdatum ?? DateTimeOffset.MinValue).DateTime,
                     (v.Enddatum ?? DateTimeOffset.MinValue).DateTime
                 ))
             );
-            ITimeRange limits;
+            ITimeRange? limits;
             if (result.ReferenceTimeFrame != null && result.ReferenceTimeFrame.Startdatum.HasValue)
             {
                 limits = new TimeRange(

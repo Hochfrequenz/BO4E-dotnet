@@ -1,6 +1,0 @@
-@startuml
-class EdiBoMapper {
-    + {static} fromEdi(objectName:string, objectValue:string) : string
-}
-EdiBoMapper o-> "_logger" ILogger
-@enduml

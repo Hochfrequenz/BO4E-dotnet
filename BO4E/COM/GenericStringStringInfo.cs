@@ -31,8 +31,8 @@ public class GenericStringStringInfo : COM
     ///     convert object to a key value pair
     /// </summary>
     /// <returns></returns>
-    public KeyValuePair<string, string> ToKeyValuePair()
+    public KeyValuePair<string?, string?> ToKeyValuePair()
     {
-        return new KeyValuePair<string, string>(KeyColumn, Value);
+        return new KeyValuePair<string?, string?>(KeyColumn, Value);
     }
 }

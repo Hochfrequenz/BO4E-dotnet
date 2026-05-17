@@ -50,10 +50,10 @@ public class LenientDateTimeConverter : IsoDateTimeConverter
     }
 
     /// <inheritdoc cref="JsonConverter.ReadJson(JsonReader, Type, object, JsonSerializer)" />
-    public override object ReadJson(
+    public override object? ReadJson(
         JsonReader reader,
         Type objectType,
-        object existingValue,
+        object? existingValue,
         JsonSerializer serializer
     )
     {
@@ -70,7 +70,8 @@ public class LenientDateTimeConverter : IsoDateTimeConverter
             case DateTime time when objectType == typeof(DateTime):
                 return time;
             default:
-                rawDate = reader.Value.ToString();
+                // reader.Value is non-null here due to switch exhaustiveness (null case handled above)
+                rawDate = reader.Value.ToString()!;
                 break;
         }
 
@@ -179,7 +180,7 @@ public class LenientDateTimeConverter : IsoDateTimeConverter
     }
 
     /// <inheritdoc cref="JsonConverter.WriteJson(JsonWriter, object, JsonSerializer)" />
-    public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
+    public override void WriteJson(JsonWriter writer, object? value, JsonSerializer serializer)
     {
         throw new NotImplementedException();
     }

@@ -260,9 +260,46 @@ public enum FehlerCode
     WERT_ZU_LANG,
 
     /// <summary>
+    /// Wert zu kurz
+    /// </summary>
+    [EnumMember(Value = "WERT_ZU_KURZ")]
+    [System.Text.Json.Serialization.JsonStringEnumMemberName("WERT_ZU_KURZ")]
+    WERT_ZU_KURZ,
+
+    /// <summary>
+    /// Ungültige Dezimalbeschreibung
+    /// </summary>
+    [EnumMember(Value = "UNGUELTIGE_DEZIMALBESCHREIBUNG")]
+    [System.Text.Json.Serialization.JsonStringEnumMemberName("UNGUELTIGE_DEZIMALBESCHREIBUNG")]
+    UNGUELTIGE_DEZIMALBESCHREIBUNG,
+
+    /// <summary>
+    /// Ungültige Zeichenart
+    /// </summary>
+    [EnumMember(Value = "UNGUELTIGE_ZEICHENART")]
+    [System.Text.Json.Serialization.JsonStringEnumMemberName("UNGUELTIGE_ZEICHENART")]
+    UNGUELTIGE_ZEICHENART,
+
+    /// <summary>
+    /// Fehlende Ziffer vor dem Dezimalzeichen
+    /// </summary>
+    [EnumMember(Value = "FEHLENDE_ZIFFER_VOR_DEZIMALZEICHEN")]
+    [System.Text.Json.Serialization.JsonStringEnumMemberName("FEHLENDE_ZIFFER_VOR_DEZIMALZEICHEN")]
+    FEHLENDE_ZIFFER_VOR_DEZIMALZEICHEN,
+
+    /// <summary>
     /// Zu viele Wiederholungen
     /// </summary>
     [EnumMember(Value = "WIEDERHOLUNG_UNPLAUSIBEL")]
     [System.Text.Json.Serialization.JsonStringEnumMemberName("WIEDERHOLUNG_UNPLAUSIBEL")]
     WIEDERHOLUNG_UNPLAUSIBEL,
+
+    /// <summary>
+    /// Code nicht aus erlaubtem Wertebereich
+    /// </summary>
+    [EnumMember(Value = "CODE_NICHT_AUS_ERLAUBTEM_WERTEBEREICH")]
+    [System.Text.Json.Serialization.JsonStringEnumMemberName(
+        "CODE_NICHT_AUS_ERLAUBTEM_WERTEBEREICH"
+    )]
+    CODE_NICHT_AUS_ERLAUBTEM_WERTEBEREICH,
 }

@@ -17,13 +17,13 @@ public class PositionsAufAbschlag : COM
     [JsonProperty(PropertyName = "bezeichnung")]
     [JsonPropertyName("bezeichnung")]
     [ProtoMember(3)]
-    public string Bezeichnung { get; set; }
+    public string? Bezeichnung { get; set; }
 
     /// <summary>Beschreibung zum Auf-/Abschlag</summary>
     [JsonProperty(PropertyName = "beschreibung")]
     [JsonPropertyName("beschreibung")]
     [ProtoMember(4)]
-    public string Beschreibung { get; set; }
+    public string? Beschreibung { get; set; }
 
     /// <summary>Typ des AufAbschlages. Details <see cref="ENUM.AufAbschlagstyp" /></summary>
     [JsonProperty(PropertyName = "aufAbschlagstyp")]

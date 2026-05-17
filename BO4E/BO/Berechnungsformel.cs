@@ -1,5 +1,5 @@
-#nullable enable
 using System;
+using System.Collections.Generic;
 using System.Text.Json.Serialization;
 using BO4E.COM;
 using BO4E.ENUM;
@@ -73,4 +73,12 @@ public class Berechnungsformel : BusinessObject
     [JsonProperty(Order = 9, PropertyName = "rechenschritt")]
     [JsonPropertyName("rechenschritt")]
     public Rechenschritt? Rechenschritt { get; set; }
+
+    /// <summary>
+    /// Eine Berechnungsformel enthält, falls sie notwendig ist <see cref="BerechnungsformelNotwendigkeit.BERECHNUNGSFORMEL_NOTWENDIG"/>,
+    /// mehrere nicht rekursive Rechenschritte
+    /// </summary>
+    [JsonProperty(Order = 10, PropertyName = "rechenschritte")]
+    [JsonPropertyName("rechenschritte")]
+    public List<Rechenschritt>? Rechenschritte { get; set; }
 }

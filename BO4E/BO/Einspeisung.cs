@@ -70,6 +70,26 @@ public class Einspeisung : BusinessObject
     [JsonPropertyName("fernsteuerbarkeitStatus")]
     [JsonPropertyOrder(14)]
     [NonOfficial(NonOfficialCategory.MISSING)]
-    [ProtoMember(12)]
+    [ProtoMember(14)]
     public FernsteuerbarkeitStatus? FernsteuerbarkeitStatus { get; set; }
+
+    /// <summary>
+    /// Erzeugungsart
+    /// </summary>
+    [JsonProperty(PropertyName = "erzeugungsart", Order = 15)]
+    [JsonPropertyName("erzeugungsart")]
+    [JsonPropertyOrder(15)]
+    [NonOfficial(NonOfficialCategory.MISSING)]
+    [ProtoMember(15)]
+    public Erzeugungsart? Erzeugungsart { get; set; }
+
+    /// <summary>
+    /// Direktvermarktungspflichtig
+    /// </summary>
+    [JsonProperty(PropertyName = "istDvPflichtig", Order = 16)]
+    [JsonPropertyName("istDvPflichtig")]
+    [JsonPropertyOrder(16)]
+    [NonOfficial(NonOfficialCategory.MISSING)]
+    [ProtoMember(16)]
+    public bool? IstDvPflichtig { get; set; }
 }

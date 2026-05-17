@@ -52,5 +52,5 @@ public class Regionskriterium : COM
     [JsonProperty(PropertyName = "wert")]
     [JsonPropertyName("wert")]
     [ProtoMember(7)]
-    public string Wert { get; set; }
+    public string? Wert { get; set; }
 }

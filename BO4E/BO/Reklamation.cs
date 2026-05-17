@@ -24,7 +24,7 @@ public class Reklamation : BusinessObject
     [NonOfficial(NonOfficialCategory.MISSING)]
     [ProtoMember(1000)]
     [JsonPropertyOrder(10)]
-    public string LokationsId { get; set; }
+    public string? LokationsId { get; set; }
 
     /// <summary>
     /// Gibt an, ob es sich um eine Markt- oder Messlokation handelt.
@@ -48,7 +48,7 @@ public class Reklamation : BusinessObject
     [ProtoMember(1002)]
     [BoKey]
     [JsonPropertyOrder(12)]
-    public string Obiskennzahl { get; set; }
+    public string? Obiskennzahl { get; set; }
 
     /// <summary>
     /// Sollablesetermin / Zeitangabe für Messwertanfrage. Details <see cref="Zeitraum" />
@@ -103,4 +103,14 @@ public class Reklamation : BusinessObject
     [ProtoIgnore]
     [Newtonsoft.Json.JsonConverter(typeof(LenientDateTimeConverter))]
     public DateTimeOffset? ZeitpunktFuerWertanfrage { get; set; }
+
+    /// <summary>
+    /// Aus der ORDERS gemappte Positionsnummer der Anfrage
+    /// </summary>
+    /// <remarks>LIN+?</remarks>
+    [JsonProperty(PropertyName = "positionsnummer", Order = 17)]
+    [JsonPropertyName("positionsnummer")]
+    [ProtoMember(1007)]
+    [JsonPropertyOrder(17)]
+    public string? Positionsnummer { get; set; }
 }
