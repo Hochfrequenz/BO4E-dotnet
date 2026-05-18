@@ -30,6 +30,10 @@ public enum Themengebiet
     [System.Text.Json.Serialization.JsonStringEnumMemberName("ANSPRECHPARTNER_IT_TECHNIK")]
     ANSPRECHPARTNER_IT_TECHNIK,
 
+    /// <summary>Bewegungsdaten</summary>
+    [EnumMember(Value = "BEWEGUNG")]
+    BEWEGUNG,
+    
     /// <summary>Bilanzierung</summary>
     [EnumMember(Value = "BILANZIERUNG")]
     [System.Text.Json.Serialization.JsonStringEnumMemberName("BILANZIERUNG")]
@@ -71,6 +75,10 @@ public enum Themengebiet
     [EnumMember(Value = "EDIFACT")]
     [System.Text.Json.Serialization.JsonStringEnumMemberName("EDIFACT")]
     EDIFACT,
+    
+    /// <summary>EINSPEISE</summary>
+    [EnumMember(Value = "EINSPEISE")]
+    EINSPEISE,
 
     /// <summary>Energiedatenmanagement</summary>
     [EnumMember(Value = "ENERGIEDATENMANAGEMENT")]
@@ -166,6 +174,10 @@ public enum Themengebiet
     [EnumMember(Value = "KLAERFAELLE")]
     [System.Text.Json.Serialization.JsonStringEnumMemberName("KLAERFAELLE")]
     KLAERFAELLE,
+    
+    /// <summary>Kündigung</summary>
+    [EnumMember(Value = "KUENDIGUNG")]
+    KUENDIGUNG,
 
     /// <summary>Lastgänge RLM</summary>
     [EnumMember(Value = "LASTGAENGE_RLM")]
@@ -261,6 +273,10 @@ public enum Themengebiet
     [EnumMember(Value = "TECHNISCHE_FRAGEN")]
     [System.Text.Json.Serialization.JsonStringEnumMemberName("TECHNISCHE_FRAGEN")]
     TECHNISCHE_FRAGEN,
+    
+    /// <summary>technischer Netzanschluss</summary>
+    [EnumMember(Value = "TECHNISCHERNETZANSCHLUSS")]
+    TECHNISCHERNETZANSCHLUSS,
 
     /// <summary>Umstellung INVOIC</summary>
     [EnumMember(Value = "UMSTELLUNG_INVOIC")]
