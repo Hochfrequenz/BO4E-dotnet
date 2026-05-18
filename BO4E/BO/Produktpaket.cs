@@ -16,12 +16,16 @@ public class Produktpaket : BusinessObject
     /// <summary>
     ///     Paket-Identifikation (Durchnummerierung).
     /// </summary>
+    /// <remarks>
+    /// Mit der Produktpaket-ID dient der Gruppierung von Produkten. Mit ihr können mehrere Produkte, zu einem Produktpaket zusammengefasst werden.
+    /// Die Produktpaket-ID ist innerhalb einer Marktnachricht eindeutig aber nicht global, weswegen oft Werte wie bspw. <code>1</code> zu erwarten sind.
+    /// </remarks>
     [JsonProperty(Order = 8, PropertyName = "paketId")]
     [JsonPropertyName("paketId")]
     [ProtoMember(8)]
     [JsonPropertyOrder(8)]
     [BoKey]
-    public int PaketId { get; set; }
+    public int PaketId { get; set; } // todo: shouldn't this be nullable or should it actually always default to 0 even if it wasn't explicitly set
 
     /// <summary>
     ///     Liste an Produktkonfigurationen
