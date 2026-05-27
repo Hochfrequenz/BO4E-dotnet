@@ -302,6 +302,7 @@ public enum FehlerCode
         "CODE_NICHT_AUS_ERLAUBTEM_WERTEBEREICH"
     )]
     CODE_NICHT_AUS_ERLAUBTEM_WERTEBEREICH,
+
     /// <summary>
     /// Geschäftsvorfall für Objekt mit der Eigenschaft nicht erlaubt
     /// </summary>
@@ -310,6 +311,7 @@ public enum FehlerCode
         "GESCHAEFTSVORFALL_OBJEKT_EIGENSCHAFT_NICHT_ERLAUBT"
     )]
     GESCHAEFTSVORFALL_OBJEKT_EIGENSCHAFT_NICHT_ERLAUBT,
+
     /// <summary>
     /// Eigenschaft des Objekts weicht von der im Geschäftsvorfall codierten Eigenschaft ab
     /// </summary>
