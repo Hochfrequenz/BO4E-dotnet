@@ -302,4 +302,22 @@ public enum FehlerCode
         "CODE_NICHT_AUS_ERLAUBTEM_WERTEBEREICH"
     )]
     CODE_NICHT_AUS_ERLAUBTEM_WERTEBEREICH,
+
+    /// <summary>
+    /// Geschäftsvorfall für Objekt mit der Eigenschaft nicht erlaubt
+    /// </summary>
+    [EnumMember(Value = "GESCHAEFTSVORFALL_OBJEKT_EIGENSCHAFT_NICHT_ERLAUBT")]
+    [System.Text.Json.Serialization.JsonStringEnumMemberName(
+        "GESCHAEFTSVORFALL_OBJEKT_EIGENSCHAFT_NICHT_ERLAUBT"
+    )]
+    GESCHAEFTSVORFALL_OBJEKT_EIGENSCHAFT_NICHT_ERLAUBT,
+
+    /// <summary>
+    /// Eigenschaft des Objekts weicht von der im Geschäftsvorfall codierten Eigenschaft ab
+    /// </summary>
+    [EnumMember(Value = "GESCHAEFTSVORFALL_OBJEKT_EIGENSCHAFT_WEICHT_AB")]
+    [System.Text.Json.Serialization.JsonStringEnumMemberName(
+        "GESCHAEFTSVORFALL_OBJEKT_EIGENSCHAFT_WEICHT_AB"
+    )]
+    GESCHAEFTSVORFALL_OBJEKT_EIGENSCHAFT_WEICHT_AB,
 }
