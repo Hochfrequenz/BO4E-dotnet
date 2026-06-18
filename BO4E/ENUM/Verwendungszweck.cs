@@ -54,4 +54,28 @@ public enum Verwendungszweck
         "ERMITTLUNG_AUSGEGLICHENHEIT_BILANZKREIS"
     )]
     ERMITTLUNG_AUSGEGLICHENHEIT_BILANZKREIS,
+
+    /// <summary>
+    /// Selbstverbrauch
+    ///</summary>
+    /// <remarks>V13</remarks>
+    [EnumMember(Value = "SELBSTVERBRAUCH")]
+    [System.Text.Json.Serialization.JsonStringEnumMemberName("SELBSTVERBRAUCH")]
+    SELBSTVERBRAUCH,
+
+    /// <summary>
+    /// Es liegt kein Verwendungszweck vor
+    ///</summary>
+    /// <remarks>V14</remarks>
+    [EnumMember(Value = "ES_LIEGT_KEIN_VERWENDUNGSZWECK_VOR")]
+    [System.Text.Json.Serialization.JsonStringEnumMemberName("ES_LIEGT_KEIN_VERWENDUNGSZWECK_VOR")]
+    ES_LIEGT_KEIN_VERWENDUNGSZWECK_VOR,
+
+    /// <summary>
+    /// Keine Datenlieferung an Marktrolle
+    ///</summary>
+    /// <remarks>V15</remarks>
+    [EnumMember(Value = "KEINE_DATENLIEFERUNG_AN_MARKTROLLE")]
+    [System.Text.Json.Serialization.JsonStringEnumMemberName("KEINE_DATENLIEFERUNG_AN_MARKTROLLE")]
+    KEINE_DATENLIEFERUNG_AN_MARKTROLLE,
 }
