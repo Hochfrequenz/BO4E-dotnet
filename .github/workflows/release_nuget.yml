@@ -20,7 +20,7 @@ jobs:
     environment: "release" # has to match the policy name in the nuget.org Trusted Publishing setup.
     # if the environment name is not set here, you'll run into an error message like "Error: Token exchange failed (401): Environment mismatch for policy 'release': expected 'release', actual ''"
     steps:
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@v7
       - name: Setup .NET Core
         uses: actions/setup-dotnet@v5
         with:
