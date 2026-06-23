@@ -77,6 +77,7 @@ public class Netzlokation : BusinessObject
     public string? ObisKennzahl { get; set; }
 
     /// <summary>Verwendungungszweck der Werte Netzlokation</summary>
+    [Obsolete("Abgelöst durch 'Verwendungszwecke'.")]
     [JsonProperty(Order = 16, PropertyName = "verwendungszweck")]
     [JsonPropertyOrder(16)]
     [JsonPropertyName("verwendungszweck")]
@@ -175,4 +176,12 @@ public class Netzlokation : BusinessObject
     [JsonPropertyOrder(25)]
     [NonOfficial(NonOfficialCategory.CUSTOMER_REQUIREMENTS)]
     public List<Messprodukt>? Messprodukte { get; set; }
+
+    /// <summary>Verwendungungszwecke der Werte Netzlokation</summary>
+    [JsonProperty(Order = 26, PropertyName = "verwendungszwecke")]
+    [JsonPropertyOrder(26)]
+    [JsonPropertyName("verwendungszwecke")]
+    [ProtoMember(20)]
+    [NonOfficial(NonOfficialCategory.CUSTOMER_REQUIREMENTS)]
+    public List<COM.Verwendungszweck>? Verwendungszwecke { get; set; }
 }
