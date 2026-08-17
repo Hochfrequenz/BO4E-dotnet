@@ -25,6 +25,8 @@
     <DocumentationFile>BO4Enet.xml</DocumentationFile>
     <Nullable>enable</Nullable>
     <TargetFrameworks>net9.0;net10.0</TargetFrameworks>
+    <!-- Suppress protobuf-net analyzer warnings that pre-date the 3.3.x stricter checks and would require breaking wire-format changes to fix -->
+    <NoWarn>PBN0003;PBN0009;PBN0012;PBN0022</NoWarn>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
     <Optimize>false</Optimize>

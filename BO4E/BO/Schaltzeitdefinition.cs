@@ -39,7 +39,6 @@ public class Schaltzeitdefinition : BusinessObject
     /// </summary>
     [JsonProperty(Required = Required.Default, Order = 12, PropertyName = "aenderungszeitpunkt")]
     [JsonPropertyName("aenderungszeitpunkt")]
-    [ProtoMember(12)]
     [JsonPropertyOrder(12)]
     [ProtoIgnore]
     public DateTimeOffset Aenderungszeitpunkt { get; set; }

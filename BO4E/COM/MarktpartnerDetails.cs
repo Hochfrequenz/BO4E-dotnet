@@ -20,7 +20,7 @@ public class Marktrolle : MarktpartnerDetails { }
 /// <summary>
 /// Used in Marktlokation and Messlokation to represent data about MSB
 /// </summary>
-[ProtoContract]
+[ProtoContract(IgnoreUnknownSubTypes = true)]
 [NonOfficial(NonOfficialCategory.UNSPECIFIED)]
 public class MarktpartnerDetails : COM
 {

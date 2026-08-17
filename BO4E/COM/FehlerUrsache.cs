@@ -43,6 +43,6 @@ public class FehlerUrsache : COM
     /// <summary>Zusätzliche Fehlerbeschreibung.</summary>
     [JsonProperty(PropertyName = "beschreibung")]
     [JsonPropertyName("beschreibung")]
-    [ProtoMember(5)]
+    [ProtoMember(6)]
     public string? Beschreibung { get; set; }
 }

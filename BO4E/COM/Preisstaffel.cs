@@ -7,7 +7,7 @@ using ProtoBuf;
 namespace BO4E.COM;
 
 /// <summary>Gibt die Staffelgrenzen der jeweiligen Preise an.</summary>
-[ProtoContract]
+[ProtoContract(IgnoreUnknownSubTypes = true)]
 // [ProtoInclude(102, typeof(RegionalePreisstaffel))] // protobuf-net doesn't support multiple levels of inheritance yet
 public class Preisstaffel : COM
 {

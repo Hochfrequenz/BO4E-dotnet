@@ -87,7 +87,7 @@ public class Avisposition : COM
     [JsonProperty(PropertyName = "referenz", Order = 7)]
     [JsonPropertyName("referenz")]
     [NonOfficial(NonOfficialCategory.MISSING)]
-    [ProtoMember(1)]
+    [ProtoMember(9)]
     public string? Referenz { get; set; }
 
     /// <summary>

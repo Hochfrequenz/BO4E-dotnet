@@ -12,7 +12,7 @@ namespace BO4E.BO;
 /// Ein Auftrag beschreibt einen Vorgang, der von einem anderen Marktpartner auszuführen ist.
 /// </summary>
 [NonOfficial(NonOfficialCategory.REGULATORY_REQUIREMENTS)]
-[ProtoContract]
+[ProtoContract(IgnoreUnknownSubTypes = true)]
 public abstract class Auftrag : BusinessObject
 {
     /// <summary>

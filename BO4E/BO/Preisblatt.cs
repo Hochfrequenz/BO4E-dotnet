@@ -14,7 +14,7 @@ namespace BO4E.BO;
 ///     Die jeweiligen Sätze von Merkmalen sind in der Grafik ergänzt worden und stellen jeweils eine Ausprägung für die
 ///     verschiedenen Anwendungsfälle der Preisblätter dar.
 /// </summary>
-[ProtoContract]
+[ProtoContract(IgnoreUnknownSubTypes = true)]
 // [ProtoInclude(30, typeof(PreisblattDienstleistung))] // protobuf-net doesn't support multiple levels of inheritance yet
 // [ProtoInclude(31, typeof(PreisblattKonzessionsabgabe))] // protobuf-net doesn't support multiple levels of inheritance yet
 // [ProtoInclude(32, typeof(PreisblattMessung))] // protobuf-net doesn't support multiple levels of inheritance yet

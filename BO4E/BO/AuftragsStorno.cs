@@ -10,7 +10,7 @@ namespace BO4E.BO;
 /// DEPRECATED Ein AuftragsStorno beschreibt die Stornierung eines <see cref="Auftrag"/>s.
 /// </summary>
 [NonOfficial(NonOfficialCategory.REGULATORY_REQUIREMENTS)]
-[ProtoContract]
+[ProtoContract(IgnoreUnknownSubTypes = true)]
 [Obsolete(
     "This is not used in the implementation of the blocking process - we use the enum Auftragsstornogrund instead"
 )]

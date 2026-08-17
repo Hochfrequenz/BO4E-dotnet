@@ -198,7 +198,7 @@ public abstract class BusinessObject : IUserProperties, IOptionalGuid
     [JsonProperty(PropertyName = "externeReferenzen", Order = 4)]
     [JsonPropertyName("externeReferenzen")]
     [JsonPropertyOrder(4)]
-    [ProtoMember(4)]
+    [ProtoMember(5)]
     public List<ExterneReferenz>? ExterneReferenzen { get; set; }
 
     /// <summary>
