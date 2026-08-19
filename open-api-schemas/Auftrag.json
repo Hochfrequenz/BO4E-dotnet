@@ -1,102 +1,7 @@
 {
   "$schema": "http://json-schema.org/draft-04/schema#",
-  "title": "Entsperrauftrag",
+  "title": "Auftrag",
   "definitions": {
-    "Sperrauftragsart": {
-      "type": "integer",
-      "description": "Die Sperrauftragsart beschreibt die Art eines Sperrauftrags.",
-      "x-enumNames": ["SPERREN", "ENTSPERREN"],
-      "enum": [0, 1]
-    },
-    "Auftragsstatus": {
-      "type": "integer",
-      "description": "Auftragststatus (Planungsstatus in IFTSTA STS 4405 (21029) and Sperrauftragsstatus in IFTSTA STS 4405 (21039/21040))\nDer Sperrauftragsstatus beschreibt den Status eines Sperrauftrags",
-      "x-enumNames": [
-        "GESCHEITERT",
-        "ERFOLGREICH",
-        "GEPLANT",
-        "ZUGESTIMMT",
-        "WIDERSPROCHEN",
-        "ABGELEHNT"
-      ],
-      "enum": [0, 1, 2, 3, 4, 5]
-    },
-    "Auftrag": {
-      "allOf": [
-        {
-          "$ref": "#/definitions/BusinessObject"
-        },
-        {
-          "type": "object",
-          "description": "Ein Auftrag beschreibt einen Vorgang, der von einem anderen Marktpartner auszuführen ist.",
-          "x-abstract": true,
-          "additionalProperties": {},
-          "properties": {
-            "ausfuehrungsdatum": {
-              "type": "string",
-              "description": "Das Ausführungsdatum beschreibt zu welchem Zeitpunkt ein Auftrag ausgeführt werden soll.",
-              "format": "date-time",
-              "x-nullable": true
-            },
-            "fertigstellungsdatum": {
-              "type": "string",
-              "description": "Das Fertigstellungsdatum beschreibt zu welchem Zeitpunkt ein Auftrag ausgeführt wurde/wird.",
-              "format": "date-time",
-              "x-nullable": true
-            },
-            "sparte": {
-              "description": "Die Sparte in der der Auftrag relevant ist",
-              "x-nullable": true,
-              "oneOf": [
-                {
-                  "$ref": "#/definitions/Sparte"
-                }
-              ]
-            },
-            "lieferanschrift": {
-              "description": "Die Adresse, die sich in Belieferung befindet.",
-              "x-nullable": true,
-              "oneOf": [
-                {
-                  "$ref": "#/definitions/Adresse"
-                }
-              ]
-            },
-            "marktlokationsId": {
-              "type": "string",
-              "description": "Die ID der Marktlokation der der zu sperrende Zähler zugeordnet ist.",
-              "x-nullable": true
-            },
-            "bemerkungen": {
-              "type": "array",
-              "description": "Ein zusätzlicher Freitext",
-              "x-nullable": true,
-              "items": {
-                "type": "string"
-              }
-            },
-            "mindestpreis": {
-              "description": "Der Mindestpreis eines Auftrags (z.B. für eine Sperrung)",
-              "x-nullable": true,
-              "oneOf": [
-                {
-                  "$ref": "#/definitions/Preis"
-                }
-              ]
-            },
-            "hoechstpreis": {
-              "description": "Der Höchstpreis eines Auftrags (z.B. für eine Sperrung)",
-              "x-nullable": true,
-              "oneOf": [
-                {
-                  "$ref": "#/definitions/Preis"
-                }
-              ]
-            }
-          }
-        }
-      ]
-    },
     "Sparte": {
       "type": "integer",
       "description": "Unterscheidungsmöglichkeiten für die Sparte.",
@@ -751,33 +656,74 @@
   },
   "allOf": [
     {
-      "$ref": "#/definitions/Auftrag"
+      "$ref": "#/definitions/BusinessObject"
     },
     {
       "type": "object",
-      "description": "Der Entsperrauftrag ist sehr ähnlich aufgebaut wie der Sperrauftrag.",
+      "description": "Ein Auftrag beschreibt einen Vorgang, der von einem anderen Marktpartner auszuführen ist.",
+      "x-abstract": true,
       "additionalProperties": {},
       "properties": {
-        "sperrauftragsart": {
-          "$ref": "#/definitions/Sperrauftragsart"
+        "ausfuehrungsdatum": {
+          "type": "string",
+          "description": "Das Ausführungsdatum beschreibt zu welchem Zeitpunkt ein Auftrag ausgeführt werden soll.",
+          "format": "date-time",
+          "x-nullable": true
         },
-        "sperrauftragsstatus": {
-          "description": "Auftragsstatus",
+        "fertigstellungsdatum": {
+          "type": "string",
+          "description": "Das Fertigstellungsdatum beschreibt zu welchem Zeitpunkt ein Auftrag ausgeführt wurde/wird.",
+          "format": "date-time",
+          "x-nullable": true
+        },
+        "sparte": {
+          "description": "Die Sparte in der der Auftrag relevant ist",
           "x-nullable": true,
           "oneOf": [
             {
-              "$ref": "#/definitions/Auftragsstatus"
+              "$ref": "#/definitions/Sparte"
             }
           ]
         },
-        "zaehlernummer": {
+        "lieferanschrift": {
+          "description": "Die Adresse, die sich in Belieferung befindet.",
+          "x-nullable": true,
+          "oneOf": [
+            {
+              "$ref": "#/definitions/Adresse"
+            }
+          ]
+        },
+        "marktlokationsId": {
           "type": "string",
-          "description": "Die Nummer des zu sperrenden Zählers",
+          "description": "Die ID der Marktlokation der der zu sperrende Zähler zugeordnet ist.",
           "x-nullable": true
         },
-        "istNurInnerhalbDerArbeitszeitZuEntsperren": {
-          "type": "boolean",
-          "description": "Ist true, falls die Entsperrung innerhalb der Arbeitszeit zu erfolgen hat."
+        "bemerkungen": {
+          "type": "array",
+          "description": "Ein zusätzlicher Freitext",
+          "x-nullable": true,
+          "items": {
+            "type": "string"
+          }
+        },
+        "mindestpreis": {
+          "description": "Der Mindestpreis eines Auftrags (z.B. für eine Sperrung)",
+          "x-nullable": true,
+          "oneOf": [
+            {
+              "$ref": "#/definitions/Preis"
+            }
+          ]
+        },
+        "hoechstpreis": {
+          "description": "Der Höchstpreis eines Auftrags (z.B. für eine Sperrung)",
+          "x-nullable": true,
+          "oneOf": [
+            {
+              "$ref": "#/definitions/Preis"
+            }
+          ]
         }
       }
     }

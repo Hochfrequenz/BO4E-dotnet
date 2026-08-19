@@ -65,13 +65,20 @@
           }
         },
         "abweichungsgrundCode": {
-          "type": "string"
+          "type": ["string", "null"]
         },
         "abweichungsgrundCodeliste": {
-          "type": "string"
+          "type": ["string", "null"]
         }
       },
-      "required": ["abweichungsgrundCode", "abweichungsgrundCodeliste"]
+      "required": [
+        "abweichungsgrund",
+        "abweichungsgrundBemerkung",
+        "zugehoerigeRechnung",
+        "abschlagsrechnungen",
+        "abweichungsgrundCode",
+        "abweichungsgrundCodeliste"
+      ]
     },
     "Abweichungsposition": {
       "type": ["object", "null"],
@@ -98,7 +105,14 @@
         "abweichungsgrundCode": {
           "type": ["string", "null"]
         }
-      }
+      },
+      "required": [
+        "abweichungsgrundCodeliste",
+        "abweichungsgrundBemerkung",
+        "zugehoerigeRechnung",
+        "zugehoerigeBestellung",
+        "abweichungsgrundCode"
+      ]
     },
     "Avisposition": {
       "type": ["object", "null"],
@@ -108,7 +122,7 @@
           "format": "date-time"
         },
         "rechnungsNummer": {
-          "type": "string"
+          "type": ["string", "null"]
         },
         "guid": {
           "type": ["string", "null"]
@@ -149,12 +163,16 @@
         "rechnungsNummer",
         "rechnungsDatum",
         "istStorno",
+        "istSelbstausgestellt",
         "gesamtBrutto",
-        "zuZahlen"
+        "zuZahlen",
+        "referenz",
+        "abweichungen",
+        "positionen"
       ]
     },
     "Betrag": {
-      "type": "object",
+      "type": ["object", "null"],
       "properties": {
         "wert": {
           "type": "number"
@@ -371,7 +389,8 @@
         "guid": {
           "type": ["string", "null"]
         }
-      }
+      },
+      "required": ["exRefName", "exRefWert"]
     },
     "Rueckmeldungsposition": {
       "type": ["object", "null"],
@@ -392,20 +411,76 @@
             "$ref": "#/definitions/Abweichungsposition"
           }
         }
-      }
+      },
+      "required": ["positionsnummer", "abweichungspositionen"]
+    },
+    "Zeitraum": {
+      "type": ["object", "null"],
+      "properties": {
+        "einheit": {
+          "type": ["string", "null"],
+          "enum": [
+            null,
+            "SEKUNDE",
+            "MINUTE",
+            "STUNDE",
+            "VIERTEL_STUNDE",
+            "TAG",
+            "WOCHE",
+            "MONAT",
+            "QUARTAL",
+            "HALBJAHR",
+            "JAHR"
+          ]
+        },
+        "dauer": {
+          "type": ["number", "null"]
+        },
+        "startdatum": {
+          "type": ["string", "null"],
+          "format": "date-time"
+        },
+        "enddatum": {
+          "type": ["string", "null"],
+          "format": "date-time"
+        },
+        "startzeitpunkt": {
+          "type": ["string", "null"],
+          "format": "date-time"
+        },
+        "endzeitpunkt": {
+          "type": ["string", "null"],
+          "format": "date-time"
+        },
+        "timestamp": {
+          "type": ["string", "null"],
+          "format": "date-time"
+        },
+        "guid": {
+          "type": ["string", "null"]
+        }
+      },
+      "required": [
+        "einheit",
+        "dauer",
+        "startdatum",
+        "enddatum",
+        "startzeitpunkt",
+        "endzeitpunkt"
+      ]
     }
   },
   "type": "object",
   "properties": {
     "avisNummer": {
-      "type": "string"
+      "type": ["string", "null"]
     },
     "avisTyp": {
-      "type": "string",
-      "enum": ["ABGELEHNTE_FORDERUNG", "ZAHLUNGSAVIS"]
+      "type": ["string", "null"],
+      "enum": [null, "ABGELEHNTE_FORDERUNG", "ZAHLUNGSAVIS"]
     },
     "positionen": {
-      "type": "array",
+      "type": ["array", "null"],
       "items": {
         "$ref": "#/definitions/Avisposition"
       }
@@ -431,7 +506,30 @@
     },
     "guid": {
       "type": ["string", "null"]
+    },
+    "gueltigkeitszeitraum": {
+      "$ref": "#/definitions/Zeitraum"
+    },
+    "qualitaet": {
+      "type": ["string", "null"],
+      "enum": [
+        null,
+        "VOLLSTAENDIG",
+        "INFORMATIV",
+        "IM_SYSTEM_VORHANDEN",
+        "ERWARTET",
+        "VORLAEUFIG",
+        "UNVOLLSTAENDIG"
+      ]
     }
   },
-  "required": ["avisNummer", "avisTyp", "positionen", "zuZahlen"]
+  "required": [
+    "avisNummer",
+    "avisTyp",
+    "positionen",
+    "zuZahlen",
+    "boTyp",
+    "versionStruktur",
+    "externeReferenzen"
+  ]
 }

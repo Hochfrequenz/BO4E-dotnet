@@ -5,7 +5,7 @@
       "type": ["object", "null"],
       "properties": {
         "aufgabenId": {
-          "type": "string"
+          "type": ["string", "null"]
         },
         "beschreibung": {
           "type": ["string", "null"]
@@ -32,7 +32,14 @@
           "type": ["string", "null"]
         }
       },
-      "required": ["aufgabenId", "ausgefuehrt"]
+      "required": [
+        "aufgabenId",
+        "beschreibung",
+        "deadline",
+        "ausgefuehrt",
+        "ausfuehrungszeitpunkt",
+        "ausfuehrender"
+      ]
     },
     "ExterneReferenz": {
       "type": ["object", "null"],
@@ -50,7 +57,8 @@
         "guid": {
           "type": ["string", "null"]
         }
-      }
+      },
+      "required": ["exRefName", "exRefWert"]
     },
     "GenericStringStringInfo": {
       "type": ["object", "null"],
@@ -82,10 +90,10 @@
           "type": ["string", "null"]
         },
         "inhalt": {
-          "type": "string"
+          "type": ["string", "null"]
         },
         "autor": {
-          "type": "string"
+          "type": ["string", "null"]
         },
         "zeitpunkt": {
           "type": "string",
@@ -93,6 +101,61 @@
         }
       },
       "required": ["inhalt", "autor", "zeitpunkt"]
+    },
+    "Zeitraum": {
+      "type": ["object", "null"],
+      "properties": {
+        "einheit": {
+          "type": ["string", "null"],
+          "enum": [
+            null,
+            "SEKUNDE",
+            "MINUTE",
+            "STUNDE",
+            "VIERTEL_STUNDE",
+            "TAG",
+            "WOCHE",
+            "MONAT",
+            "QUARTAL",
+            "HALBJAHR",
+            "JAHR"
+          ]
+        },
+        "dauer": {
+          "type": ["number", "null"]
+        },
+        "startdatum": {
+          "type": ["string", "null"],
+          "format": "date-time"
+        },
+        "enddatum": {
+          "type": ["string", "null"],
+          "format": "date-time"
+        },
+        "startzeitpunkt": {
+          "type": ["string", "null"],
+          "format": "date-time"
+        },
+        "endzeitpunkt": {
+          "type": ["string", "null"],
+          "format": "date-time"
+        },
+        "timestamp": {
+          "type": ["string", "null"],
+          "format": "date-time"
+        },
+        "guid": {
+          "type": ["string", "null"]
+        }
+      },
+      "required": [
+        "einheit",
+        "dauer",
+        "startdatum",
+        "enddatum",
+        "startzeitpunkt",
+        "endzeitpunkt"
+      ]
     }
   },
   "type": "object",
@@ -108,7 +171,7 @@
       "format": "date-time"
     },
     "benachrichtigungsId": {
-      "type": "string"
+      "type": ["string", "null"]
     },
     "externeReferenzen": {
       "type": ["array", "null"],
@@ -137,7 +200,7 @@
       ]
     },
     "kurztext": {
-      "type": "string"
+      "type": ["string", "null"]
     },
     "erstellungsZeitpunkt": {
       "type": "string",
@@ -170,13 +233,37 @@
       "items": {
         "$ref": "#/definitions/GenericStringStringInfo"
       }
+    },
+    "gueltigkeitszeitraum": {
+      "$ref": "#/definitions/Zeitraum"
+    },
+    "qualitaet": {
+      "type": ["string", "null"],
+      "enum": [
+        null,
+        "VOLLSTAENDIG",
+        "INFORMATIV",
+        "IM_SYSTEM_VORHANDEN",
+        "ERWARTET",
+        "VORLAEUFIG",
+        "UNVOLLSTAENDIG"
+      ]
     }
   },
   "required": [
+    "boTyp",
+    "versionStruktur",
     "benachrichtigungsId",
+    "externeReferenzen",
     "prioritaet",
     "bearbeitungsstatus",
     "kurztext",
-    "erstellungsZeitpunkt"
+    "erstellungsZeitpunkt",
+    "kategorie",
+    "bearbeiter",
+    "notizen",
+    "deadline",
+    "aufgaben",
+    "infos"
   ]
 }

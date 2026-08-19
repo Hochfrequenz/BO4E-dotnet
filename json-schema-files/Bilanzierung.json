@@ -17,7 +17,8 @@
         "guid": {
           "type": ["string", "null"]
         }
-      }
+      },
+      "required": ["exRefName", "exRefWert"]
     },
     "Lastprofil": {
       "type": ["object", "null"],
@@ -52,6 +53,43 @@
         "herausgeber": {
           "type": ["string", "null"]
         },
+        "profiltyp": {
+          "type": ["string", "null"],
+          "enum": [
+            null,
+            "GEWERBE",
+            "GEWERBE_WERKTAG_9_BIS_18",
+            "GEWERBE_ABEND",
+            "GEWERBE_DURCHLAUFEND",
+            "GEWERBE_LADEN_FRISEUR",
+            "GEWERBE_BAECKEREI",
+            "GEWERBE_WOCHENENDE",
+            "LANDWIRTSCHAFT",
+            "LANDWIRTSCHAFT_MIT_MILCH",
+            "LANDWIRTSCHAFT_OHNE_MILCH",
+            "HAUSHALT",
+            "BANDLAST",
+            "UNTERBRECHBARE_VERBRAUCHSEINRICHTUNG",
+            "HEIZWAERMESPEICHER",
+            "STRASSENBELEUCHTUNG",
+            "PHOTOVOLTAIK",
+            "BLOCKHEIZKRAFTWERK",
+            "SONSTIGE_VERBRAUCHENDE_MARKTLOKATION",
+            "SONSTIGE_ERZEUGENDE_MARKTLOKATION",
+            "EMOB_OEFFENTLICH",
+            "EMOB_HAUSHALT",
+            "EMOB_GEWERBE"
+          ]
+        },
+        "normierungsfaktor": {
+          "type": ["string", "null"],
+          "enum": [
+            null,
+            "NORMIERUNGSFAKTOR_1_000_000_KWH_A",
+            "NORMIERUNGSFAKTOR_300_KWH_K",
+            "NORMIERUNGSFAKTOR_1_000_000_KW"
+          ]
+        },
         "timestamp": {
           "type": ["string", "null"],
           "format": "date-time"
@@ -59,7 +97,18 @@
         "guid": {
           "type": ["string", "null"]
         }
-      }
+      },
+      "required": [
+        "bezeichnung",
+        "profilschar",
+        "verfahren",
+        "einspeisung",
+        "tagesparameter",
+        "profilart",
+        "herausgeber",
+        "profiltyp",
+        "normierungsfaktor"
+      ]
     },
     "Menge": {
       "type": ["object", "null"],
@@ -89,6 +138,9 @@
             "VAR",
             "VARH",
             "KWHK",
+            "W_M2",
+            "M_S",
+            "STUECK",
             "JAHR",
             "KWH",
             "MW",
@@ -98,7 +150,7 @@
           ]
         }
       },
-      "required": ["wert"]
+      "required": ["wert", "einheit"]
     },
     "Tagesparameter": {
       "type": ["object", "null"],
@@ -122,7 +174,68 @@
         "guid": {
           "type": ["string", "null"]
         }
-      }
+      },
+      "required": [
+        "klimazone",
+        "temperaturmessstelle",
+        "dienstanbieter",
+        "herausgeber"
+      ]
+    },
+    "Zeitraum": {
+      "type": ["object", "null"],
+      "properties": {
+        "einheit": {
+          "type": ["string", "null"],
+          "enum": [
+            null,
+            "SEKUNDE",
+            "MINUTE",
+            "STUNDE",
+            "VIERTEL_STUNDE",
+            "TAG",
+            "WOCHE",
+            "MONAT",
+            "QUARTAL",
+            "HALBJAHR",
+            "JAHR"
+          ]
+        },
+        "dauer": {
+          "type": ["number", "null"]
+        },
+        "startdatum": {
+          "type": ["string", "null"],
+          "format": "date-time"
+        },
+        "enddatum": {
+          "type": ["string", "null"],
+          "format": "date-time"
+        },
+        "startzeitpunkt": {
+          "type": ["string", "null"],
+          "format": "date-time"
+        },
+        "endzeitpunkt": {
+          "type": ["string", "null"],
+          "format": "date-time"
+        },
+        "timestamp": {
+          "type": ["string", "null"],
+          "format": "date-time"
+        },
+        "guid": {
+          "type": ["string", "null"]
+        }
+      },
+      "required": [
+        "einheit",
+        "dauer",
+        "startdatum",
+        "enddatum",
+        "startzeitpunkt",
+        "endzeitpunkt"
+      ]
     }
   },
   "type": "object",
@@ -190,7 +303,17 @@
         "TES",
         "TLS",
         "SLS_TLS",
-        "SES_TES"
+        "SES_TES",
+        "AUS",
+        "BAS",
+        "DBA",
+        "DZR",
+        "DZÜ",
+        "FPE",
+        "FPI",
+        "SRE",
+        "SRI",
+        "VZR"
       ]
     },
     "aggregationsverantwortung": {
@@ -242,6 +365,48 @@
     "abwicklungsmodell": {
       "type": ["string", "null"],
       "enum": [null, "MODELL_1", "MODELL_2"]
+    },
+    "positionsnummer": {
+      "type": ["string", "null"]
+    },
+    "gueltigkeitszeitraum": {
+      "$ref": "#/definitions/Zeitraum"
+    },
+    "qualitaet": {
+      "type": ["string", "null"],
+      "enum": [
+        null,
+        "VOLLSTAENDIG",
+        "INFORMATIV",
+        "IM_SYSTEM_VORHANDEN",
+        "ERWARTET",
+        "VORLAEUFIG",
+        "UNVOLLSTAENDIG"
+      ]
     }
-  }
+  },
+  "required": [
+    "boTyp",
+    "versionStruktur",
+    "externeReferenzen",
+    "marktlokationsId",
+    "lastprofile",
+    "bilanzierungsbeginn",
+    "bilanzierungsende",
+    "bilanzkreis",
+    "jahresverbrauchsprognose",
+    "temperaturarbeit",
+    "kundenwert",
+    "verbrauchsaufteilung",
+    "zeitreihentyp",
+    "aggregationsverantwortung",
+    "prognosegrundlage",
+    "detailsPrognosegrundlage",
+    "wahlrechtPrognosegrundlage",
+    "fallgruppenzuordnung",
+    "prioritaet",
+    "grundWahlrechtPrognosegrundlage",
+    "abwicklungsmodell",
+    "positionsnummer"
+  ]
 }

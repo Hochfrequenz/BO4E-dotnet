@@ -1,47 +1,29 @@
 {
   "$schema": "http://json-schema.org/draft-04/schema#",
-  "title": "Vertrag",
+  "title": "Ansprechpartner",
   "definitions": {
-    "Vertragsart": {
+    "Anrede": {
       "type": "integer",
-      "description": "Aufzählung der Vertragsarten\n            ",
+      "description": "Übersicht möglicher Anreden, z.B. eines Geschäftspartners.",
       "x-enumNames": [
-        "ENERGIELIEFERVERTRAG",
-        "NETZNUTZUNGSVERTRAG",
-        "BILANZIERUNGSVERTRAG",
-        "MESSSTELLENBETRIEBSVERTRAG",
-        "BUENDELVERTRAG"
+        "HERR",
+        "FRAU",
+        "EHELEUTE",
+        "FIRMA",
+        "INDIVIDUELL",
+        "FAMILIE",
+        "ERBENGEMEINSCHAFT",
+        "WOHNGEMEINSCHAFT",
+        "GRUNDSTUECKGEMEINSCHAFT",
+        "DR"
       ],
-      "enum": [0, 1, 2, 3, 4]
+      "enum": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
     },
-    "Vertragstatus": {
+    "Titel": {
       "type": "integer",
-      "description": "Abbildung einer Statusinformation für Verträge.\n            ",
-      "x-enumNames": [
-        "IN_ARBEIT",
-        "UEBERMITTELT",
-        "ANGENOMMEN",
-        "AKTIV",
-        "ABGELEHNT",
-        "WIDERRUFEN",
-        "STORNIERT",
-        "GEKUENDIGT",
-        "BEENDET"
-      ],
-      "enum": [0, 1, 2, 3, 4, 5, 6, 7, 8]
-    },
-    "Sparte": {
-      "type": "integer",
-      "description": "Unterscheidungsmöglichkeiten für die Sparte.",
-      "x-enumNames": [
-        "STROM",
-        "GAS",
-        "FERNWAERME",
-        "NAHWAERME",
-        "WASSER",
-        "ABWASSER"
-      ],
-      "enum": [0, 1, 2, 3, 4, 5]
+      "description": "Übersicht möglicher Titel, z.B. eines Geschäftspartners.",
+      "x-enumNames": ["DR", "PROF", "PROF_DR", "DIPLOM_INF"],
+      "enum": [0, 1, 2, 3]
     },
     "Geschaeftspartner": {
       "allOf": [
@@ -187,23 +169,6 @@
           }
         }
       ]
-    },
-    "Anrede": {
-      "type": "integer",
-      "description": "Übersicht möglicher Anreden, z.B. eines Geschäftspartners.",
-      "x-enumNames": [
-        "HERR",
-        "FRAU",
-        "EHELEUTE",
-        "FIRMA",
-        "INDIVIDUELL",
-        "FAMILIE",
-        "ERBENGEMEINSCHAFT",
-        "WOHNGEMEINSCHAFT",
-        "GRUNDSTUECKGEMEINSCHAFT",
-        "DR"
-      ],
-      "enum": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
     },
     "Kontaktart": {
       "type": "integer",
@@ -926,331 +891,92 @@
       ],
       "enum": [0, 1, 2, 3, 4, 5]
     },
-    "Unterschrift": {
+    "Rufnummer": {
       "allOf": [
         {
           "$ref": "#/definitions/COM"
         },
         {
           "type": "object",
-          "description": "Modellierung einer Unterschrift, z.B. für Verträge, Angebote etc.\nhttps://www.bo4e.de/dokumentation/komponenten/com-unterschrift\n            ",
+          "description": "Abbildung von Rufnummern.",
           "additionalProperties": {},
           "properties": {
-            "ort": {
-              "type": "string",
-              "description": "Ort, an dem die Unterschrift geleistet wird\n            ",
-              "x-nullable": true
+            "nummerntyp": {
+              "description": "Ausprägung der Nummer, z.B. Zentrale, Faxnummer, Mobilnummer etc. Details Rufnummernart\n            ",
+              "x-nullable": true,
+              "oneOf": [
+                {
+                  "$ref": "#/definitions/Rufnummernart"
+                }
+              ]
             },
-            "datum": {
+            "rufnummer": {
               "type": "string",
-              "description": "Datum der Unterschrift\n            ",
-              "format": "date-time",
-              "x-nullable": true
-            },
-            "name": {
-              "type": "string",
-              "description": "Name des Unterschreibers\n            ",
+              "description": "Die konkrete Nummer, z.B. 02433 5 26 01 900",
               "x-nullable": true
             }
           }
         }
       ]
     },
-    "Vertragskonditionen": {
-      "allOf": [
-        {
-          "$ref": "#/definitions/COM"
-        },
-        {
-          "type": "object",
-          "description": "Abbildung für Vertragskonditionen. Die Komponente wird sowohl im Vertrag als auch im Tarif verwendet.",
-          "additionalProperties": {},
-          "properties": {
-            "beschreibung": {
-              "type": "string",
-              "description": "Freitext zur Beschreibung der Konditionen, z.B. \"Standardkonditionen Gas\"",
-              "x-nullable": true
-            },
-            "anzahlAbschlaege": {
-              "type": "integer",
-              "description": "Anzahl der vereinbarten Abschläge pro Jahr, z.B. 12",
-              "format": "int32",
-              "x-nullable": true
-            },
-            "vertragslaufzeit": {
-              "description": "Über diesen Zeitraum läuft der Vertrag. Details Zeitraum",
-              "x-nullable": true,
-              "oneOf": [
-                {
-                  "$ref": "#/definitions/Zeitraum"
-                }
-              ]
-            },
-            "kuendigungsfrist": {
-              "description": "Innerhalb dieser Frist kann der Vertrag gekündigt werden. Details Zeitraum",
-              "x-nullable": true,
-              "oneOf": [
-                {
-                  "$ref": "#/definitions/Zeitraum"
-                }
-              ]
-            },
-            "vertragsverlaengerung": {
-              "description": "Falls der Vertrag nicht gekündigt wird, verlängert er sich automatisch um die hier angegebene Zeit. Details\nZeitraum\n            ",
-              "x-nullable": true,
-              "oneOf": [
-                {
-                  "$ref": "#/definitions/Zeitraum"
-                }
-              ]
-            },
-            "abschlagszyklus": {
-              "description": "In diesen Zyklen werden Abschläge gestellt. Details Zeitraum. Alternativ kann auch die Anzahl\nin den Konditionen angeben werden.\"\n            ",
-              "x-nullable": true,
-              "oneOf": [
-                {
-                  "$ref": "#/definitions/Zeitraum"
-                }
-              ]
-            },
-            "startAbrechnungsjahr": {
-              "type": "string",
-              "format": "date-time",
-              "x-nullable": true
-            },
-            "geplanteTurnusablesung": {
-              "x-nullable": true,
-              "oneOf": [
-                {
-                  "$ref": "#/definitions/Zeitraum"
-                }
-              ]
-            },
-            "turnusablesungIntervall": {
-              "type": "integer",
-              "format": "int32",
-              "x-nullable": true
-            },
-            "netznutzungsabrechnung": {
-              "x-nullable": true,
-              "oneOf": [
-                {
-                  "$ref": "#/definitions/Zeitraum"
-                }
-              ]
-            },
-            "netznutzungsabrechnungIntervall": {
-              "type": "integer",
-              "format": "int32",
-              "x-nullable": true
-            },
-            "haushaltskunde": {
-              "type": "boolean",
-              "x-nullable": true
-            },
-            "netznutzungsvertrag": {
-              "x-nullable": true,
-              "oneOf": [
-                {
-                  "$ref": "#/definitions/Netznutzungsvertragsart"
-                }
-              ]
-            },
-            "netznutzungszahler": {
-              "x-nullable": true,
-              "oneOf": [
-                {
-                  "$ref": "#/definitions/Netznutzungszahler"
-                }
-              ]
-            },
-            "netznutzungsabrechnungsvariante": {
-              "x-nullable": true,
-              "oneOf": [
-                {
-                  "$ref": "#/definitions/Netznutzungsabrechnungsvariante"
-                }
-              ]
-            },
-            "netznutzungsabrechnungsgrundlage": {
-              "x-nullable": true,
-              "oneOf": [
-                {
-                  "$ref": "#/definitions/Netznutzungsabrechnungsgrundlage"
-                }
-              ]
-            },
-            "beinhaltetSingulaerGenutzteBetriebsmittel": {
-              "type": "boolean",
-              "description": "Singulär genutzte Betriebsmittel in der Netznutzungsabrechnung\nHier wird angegeben, ob in der Netznutzungsabrechnung der verbrauchenden Marktlokation singulär\ngenutzte Betriebsmittel abgerechnet werden.\n            ",
-              "x-nullable": true
-            }
-          }
-        }
-      ]
-    },
-    "Netznutzungsvertragsart": {
+    "Rufnummernart": {
       "type": "integer",
-      "description": "Art des Netznutzungsvertrags",
-      "x-enumNames": ["KUNDEN_NB", "LIEFERANTEN_NB"],
-      "enum": [0, 1]
-    },
-    "Netznutzungszahler": {
-      "type": "integer",
-      "description": "Zahlung der Netznutzung",
-      "x-enumNames": ["KUNDE", "LIEFERANT"],
-      "enum": [0, 1]
-    },
-    "Netznutzungsabrechnungsvariante": {
-      "type": "integer",
-      "description": "Netznutzungsabrechnungsvariante",
-      "x-enumNames": ["ARBEITSPREIS_GRUNDPREIS", "ARBEITSPREIS_LEISTUNGSPREIS"],
-      "enum": [0, 1]
-    },
-    "Netznutzungsabrechnungsgrundlage": {
-      "type": "integer",
-      "description": "Netznutzungsabrechnungsgrundlage",
-      "x-enumNames": ["LIEFERSCHEIN", "ABWEICHENDE_GRUNDLAGE"],
-      "enum": [0, 1]
-    },
-    "Vertragsteil": {
-      "allOf": [
-        {
-          "$ref": "#/definitions/COM"
-        },
-        {
-          "type": "object",
-          "description": "Abbildung für einen Vertragsteil. Der Vertragsteil wird dazu verwendet, eine vertragliche Leistung in Bezug zu\neiner Lokation (Markt- oder Messlokation) festzulegen.\nhttps://www.bo4e.de/dokumentation/komponenten/com-vertragsteil\n            ",
-          "additionalProperties": {},
-          "properties": {
-            "vertragsteilbeginn": {
-              "type": "string",
-              "description": "Start der Gültigkeit des Vertragsteils.\n            ",
-              "format": "date-time",
-              "x-nullable": true
-            },
-            "vertragsteilende": {
-              "type": "string",
-              "description": "Ende der Gültigkeit des Vertragsteils.\n            ",
-              "format": "date-time",
-              "x-nullable": true
-            },
-            "lokation": {
-              "type": "string",
-              "description": "Der Identifier für diejenigen Markt- oder Messlokation, die zu diesem Vertragsteil gehören.\nVerträge für mehrere Lokationen werden mit mehreren Vertragsteilen abgebildet.\n            ",
-              "x-nullable": true
-            },
-            "vertraglichFixierteMenge": {
-              "description": "Für die Lokation festgeschriebene Abnahmemenge. Siehe COM Menge\n            ",
-              "x-nullable": true,
-              "oneOf": [
-                {
-                  "$ref": "#/definitions/Menge"
-                }
-              ]
-            },
-            "minimaleAbnahmemenge": {
-              "description": "Für die Lokation festgelegte Mindestabnahmemenge. Siehe COM Menge\n            ",
-              "x-nullable": true,
-              "oneOf": [
-                {
-                  "$ref": "#/definitions/Menge"
-                }
-              ]
-            },
-            "maximaleAbnahmemenge": {
-              "description": "Für die Lokation festgelegte maximale Abnahmemenge. Siehe COM Menge\n            ",
-              "x-nullable": true,
-              "oneOf": [
-                {
-                  "$ref": "#/definitions/Menge"
-                }
-              ]
-            },
-            "jahresverbrauchsprognose": {
-              "description": "jahresverbrauchsprognose für EDIFACT mapping\n            ",
-              "x-nullable": true,
-              "oneOf": [
-                {
-                  "$ref": "#/definitions/Menge"
-                }
-              ]
-            },
-            "kundenwert": {
-              "description": "kundenwert für EDIFACT mapping\n            ",
-              "x-nullable": true,
-              "oneOf": [
-                {
-                  "$ref": "#/definitions/Menge"
-                }
-              ]
-            },
-            "verbrauchsaufteilung": {
-              "type": "string",
-              "description": "verbrauchsaufteilung für EDIFACT mapping\n            ",
-              "x-nullable": true
-            }
-          }
-        }
-      ]
-    },
-    "Menge": {
-      "allOf": [
-        {
-          "$ref": "#/definitions/COM"
-        },
-        {
-          "type": "object",
-          "description": "Abbildung einer Menge mit Wert und Einheit.",
-          "additionalProperties": {},
-          "properties": {
-            "wert": {
-              "type": "number",
-              "description": "Gibt den absoluten Wert der Menge an.",
-              "format": "decimal"
-            },
-            "einheit": {
-              "description": "Gibt die Einheit zum jeweiligen Wert an. Details Mengeneinheit",
-              "x-nullable": true,
-              "oneOf": [
-                {
-                  "$ref": "#/definitions/Mengeneinheit"
-                }
-              ]
-            }
-          }
-        }
-      ]
-    },
-    "Mengeneinheit": {
-      "type": "integer",
-      "description": "Einheit: Messgrößen, die per Messung oder Vorgabe ermittelt werden können.\n            ",
+      "description": "Abbildung verschiedener Rufnummerntypen.",
       "x-enumNames": [
-        "ZERO",
-        "WH",
-        "KW",
-        "ANZAHL",
-        "KUBIKMETER",
-        "STUNDE",
-        "TAG",
-        "MONAT",
-        "VAR",
-        "VARH",
-        "KWHK",
-        "W_M2",
-        "M_S",
-        "STUECK",
-        "JAHR",
-        "KWH",
-        "MW",
-        "KVAR",
-        "KVARH",
-        "MWH"
+        "RUF_ZENTRALE",
+        "FAX_ZENTRALE",
+        "SAMMELRUF",
+        "SAMMELFAX",
+        "ABTEILUNGRUF",
+        "ABTEILUNGFAX",
+        "RUF_DURCHWAHL",
+        "FAX_DURCHWAHL",
+        "MOBIL_NUMMER"
       ],
-      "enum": [
-        0, 2, 3, 7, 11, 13, 17, 19, 23, 29, 40, 41, 42, 50, 228, 2000, 3000,
-        23000, 29000, 2000000
+      "enum": [0, 1, 2, 3, 4, 5, 6, 7, 8]
+    },
+    "Zustaendigkeit": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/COM"
+        },
+        {
+          "type": "object",
+          "description": "Enthält die zeitliche Zuordnung eines Ansprechpartners zu Abteilungen und Zuständigkeiten.",
+          "additionalProperties": {},
+          "properties": {
+            "jobtitel": {
+              "type": "string",
+              "description": "Berufliche Rolle des Ansprechpartners",
+              "x-nullable": true
+            },
+            "abteilung": {
+              "type": "string",
+              "description": "Abteilung, in der der Ansprechpartner tätig ist",
+              "x-nullable": true
+            },
+            "themengebiet": {
+              "type": "string",
+              "description": "Hier kann eine thematische Zuordnung des APs angegeben werden. Details Themengebiet\n            ",
+              "x-nullable": true
+            }
+          }
+        }
       ]
+    },
+    "Unternehmensart": {
+      "type": "integer",
+      "description": "kategorisiert Unternehmen nach Ihrer Marktrolle (basierend auf dem PARTIN-Datenmodell)",
+      "x-enumNames": [
+        "LIEFERANT",
+        "NETZBETREIBER",
+        "MESSSTELLENBETREIBER",
+        "ÜBERTRAGUNGSNETZBETREIBER",
+        "BILANZKOORDINATOR",
+        "BILANZKREISVERANTWORTLICHER",
+        "ENERGIESERVICEANBIETER"
+      ],
+      "enum": [0, 1, 2, 3, 4, 5, 6]
     }
   },
   "allOf": [
@@ -1259,58 +985,54 @@
     },
     {
       "type": "object",
-      "description": "Modell für die Abbildung von Vertragsbeziehungen. Das Objekt dient dazu, alle Arten von Verträgen, die in der\nEnergiewirtschaft Verwendung finden, abzubilden.\nhttps://www.bo4e.de/dokumentation/geschaeftsobjekte/bo-vertrag\n            ",
+      "description": "Modellierung eines Ansprechpartners für einen bestimmten Geschäftspartner.\n            ",
       "additionalProperties": {},
       "properties": {
-        "vertragsnummer": {
-          "type": "string",
-          "description": "Eine im Verwendungskontext eindeutige Nummer für den Vertrag\n            ",
-          "x-nullable": true
-        },
-        "beschreibung": {
-          "type": "string",
-          "description": "Beschreibung zum Vertrag\n            ",
-          "x-nullable": true
-        },
-        "vertragsart": {
-          "description": "Hier ist festgelegt, um welche Art von Vertrag es sich handelt. Z.B. Netznutzungvertrag. Details siehe ENUM\nVertragsart\n            ",
+        "anrede": {
+          "description": "Mögliche Anrede des Ansprechpartners\n            ",
           "x-nullable": true,
           "oneOf": [
             {
-              "$ref": "#/definitions/Vertragsart"
+              "$ref": "#/definitions/Anrede"
             }
           ]
         },
-        "vertragstatus": {
-          "description": "Gibt den Status des Vertrags an. Siehe ENUM Vertragsstatus\n            ",
+        "inviduelleAnrede": {
+          "type": "string",
+          "description": "Im Falle einer nicht standardisierten Anrede kann hier eine frei definierbare\nAnrede vorgegeben werden. Beispiel: \"Sehr geehrte Frau Müller, sehr geehrter\nHerr Dr. Müller\"\n            ",
+          "x-nullable": true
+        },
+        "titel": {
+          "description": "Möglicher Titel des Ansprechpartners",
           "x-nullable": true,
           "oneOf": [
             {
-              "$ref": "#/definitions/Vertragstatus"
+              "$ref": "#/definitions/Titel"
             }
           ]
         },
-        "sparte": {
-          "description": "Unterscheidungsmöglichkeiten für die Sparte. Siehe ENUM Sparte\n            ",
-          "oneOf": [
-            {
-              "$ref": "#/definitions/Sparte"
-            }
-          ]
-        },
-        "vertragsbeginn": {
+        "vorname": {
           "type": "string",
-          "description": "Gibt an, wann der Vertrag beginnt.\n            ",
-          "format": "date-time"
-        },
-        "vertragsende": {
-          "type": "string",
-          "description": "Gibt an, wann der Vertrag (voraussichtlich) endet oder beendet wurde.\n            ",
-          "format": "date-time",
+          "description": "Vorname des Ansprechpartners",
           "x-nullable": true
         },
-        "vertragspartner1": {
-          "description": "Der \"erstgenannte\" Vertragspartner. In der Regel der Aussteller des Vertrags. Beispiel: \"Vertrag zwischen\nVertagspartner 1 ...\" Siehe BO Geschaeftspartner\n            ",
+        "nachname": {
+          "type": "string",
+          "description": "Nachname (Familienname) des Ansprechpartners",
+          "x-nullable": true
+        },
+        "eMailAdresse": {
+          "type": "string",
+          "description": "E-Mail Adresse",
+          "x-nullable": true
+        },
+        "kommentar": {
+          "type": "string",
+          "description": "Weitere Informationen zum Ansprechpartner",
+          "x-nullable": true
+        },
+        "geschaeftspartner": {
+          "description": "Der Geschäftspartner, für den dieser Ansprechpartner modelliert wird.",
           "x-nullable": true,
           "oneOf": [
             {
@@ -1318,60 +1040,42 @@
             }
           ]
         },
-        "vertragspartner2": {
-          "description": "Der \"zweitgenannte\" Vertragspartner. In der Regel der Empfänger des Vertrags. Beispiel \"Vertrag zwischen\nVertagspartner 1 und Vertragspartner 2\". Siehe BO Geschaeftspartner\n            ",
+        "adresse": {
+          "description": "Adresse des Ansprechpartners, falls diese von der Adresse des Geschäftspartners abweicht.",
           "x-nullable": true,
           "oneOf": [
             {
-              "$ref": "#/definitions/Geschaeftspartner"
+              "$ref": "#/definitions/Adresse"
             }
           ]
         },
-        "unterzeichnervp1": {
+        "rufnummern": {
           "type": "array",
-          "description": "Unterzeichner des Vertragspartners1. Siehe COM Unterschrift\n            ",
+          "description": "Liste der Telefonnummern, unter denen der Ansprechpartner erreichbar ist.",
           "x-nullable": true,
           "items": {
-            "$ref": "#/definitions/Unterschrift"
+            "$ref": "#/definitions/Rufnummer"
           }
         },
-        "unterzeichnervp2": {
+        "zustaendigkeit": {
           "type": "array",
-          "description": "Unterzeichner des Vertragspartners2. Siehe COM Unterschrift\n            ",
+          "description": "Liste der Abteilungen und Zuständigkeiten des Ansprechpartners.",
           "x-nullable": true,
           "items": {
-            "$ref": "#/definitions/Unterschrift"
+            "$ref": "#/definitions/Zustaendigkeit"
           }
         },
-        "vertragskonditionen": {
-          "description": "Festlegungen zu Laufzeiten und Kündigungsfristen. Details siehe COM Vertragskonditionen\n            ",
-          "x-nullable": true,
-          "oneOf": [
-            {
-              "$ref": "#/definitions/Vertragskonditionen"
-            }
-          ]
-        },
-        "vertragsteile": {
-          "type": "array",
-          "description": "Der Vertragsteil wird dazu verwendet, eine vertragliche Leistung in Bezug zu einer Lokation (Markt- oder\nMesslokation) festzulegen. Details siehe COM Vertragsteil\n            ",
-          "x-nullable": true,
-          "items": {
-            "$ref": "#/definitions/Vertragsteil"
-          }
-        },
-        "gemeinderabatt": {
-          "type": "number",
-          "description": "gemeinderabatt für EDIFACT mapping.\n            ",
-          "format": "decimal",
+        "gewerbekennzeichnung": {
+          "type": "boolean",
+          "description": "true dann und nur dann, wenn es sich um eine Firma handelt",
           "x-nullable": true
         },
-        "korrespondenzpartner": {
-          "description": "korrespondenzpartner für EDIFACT mapping\n            ",
+        "unternehmensart": {
+          "description": "aus PARTIN gemappt: Für welche Art von Marktteilnehmer der Ansprechpartner tätig ist",
           "x-nullable": true,
           "oneOf": [
             {
-              "$ref": "#/definitions/Geschaeftspartner"
+              "$ref": "#/definitions/Unternehmensart"
             }
           ]
         }

@@ -1,70 +1,54 @@
 {
   "$schema": "http://json-schema.org/draft-04/schema#",
-  "title": "Handelsunstimmigkeit",
+  "title": "Benachrichtigung",
   "definitions": {
-    "Handelsunstimmigkeitstyp": {
+    "Prioritaet": {
       "type": "integer",
-      "description": "Gibt den Typ der Handelsunstimmigkeit an (COMDIS DOC 1001)",
-      "x-enumNames": [
-        "HANDELSRECHNUNG",
-        "LIEFERSCHEIN_HANDELSUNSTIMMIGKEITSTYP",
-        "LIEFERSCHEIN_GRUND_ARBEITSPREIS",
-        "LIEFERSCHEIN_ARBEITS_LEISTUNGSPREIS"
-      ],
-      "enum": [0, 1, 2, 3]
+      "description": "Gibt die Priorität, z.b. einer Benachrichtigung an.\n            ",
+      "x-enumNames": ["SEHR_NIEDRIG", "NIEDRIG", "NORMAL", "HOCH", "SEHR_HOCH"],
+      "enum": [0, 1, 2, 3, 4]
     },
-    "Handelsunstimmigkeitsbegruendung": {
+    "Bearbeitungsstatus": {
+      "type": "integer",
+      "description": "Gibt den Bearbeitungsstatus, z.b. einer Benachrichtigung an.\n            ",
+      "x-enumNames": [
+        "OFFEN",
+        "IN_BEARBEITUNG",
+        "ABGESCHLOSSEN",
+        "STORNIERT",
+        "QUITTIERT",
+        "IGNORIERT"
+      ],
+      "enum": [0, 1, 2, 3, 4, 5]
+    },
+    "Notiz": {
       "allOf": [
         {
           "$ref": "#/definitions/COM"
         },
         {
           "type": "object",
-          "description": "Begründung der Korrektheit der Rechnung oder des Lieferscheins (COMDIS SG3 AJT)",
+          "description": "Eine Notiz enthält beliebige, unstrukturierte Zusatzinformationen\n            ",
           "additionalProperties": {},
           "properties": {
-            "referenzen": {
-              "type": "array",
-              "description": "Referenzen auf vorherige Nachrichten",
-              "x-nullable": true,
-              "items": {
-                "type": "string"
-              }
+            "autor": {
+              "type": "string",
+              "description": "Person oder System, das die Notiz angelegt hat.\n            ",
+              "x-nullable": true
             },
-            "grund": {
-              "description": "Angabe des Handelsunstimmigkeitsgrunds",
-              "x-nullable": true,
-              "oneOf": [
-                {
-                  "$ref": "#/definitions/Handelsunstimmigkeitsgrund"
-                }
-              ]
+            "zeitpunkt": {
+              "type": "string",
+              "description": "Zeitpunkt zu dem die Notiz angelegt wurde\n            ",
+              "format": "date-time"
+            },
+            "inhalt": {
+              "type": "string",
+              "description": "Inhalt der Notiz (Freitext)\n            ",
+              "x-nullable": true
             }
           }
         }
       ]
-    },
-    "Handelsunstimmigkeitsgrund": {
-      "type": "integer",
-      "description": "Begründung der Korrektheit der Rechnung oder des Lieferscheins (COMDIS SG3 AJT 4465)",
-      "x-enumNames": [
-        "ANMELDUNG_BESTAETIGT",
-        "ABRECHNUNGSBEGINN_GLEICH_BESTAETIGTEM_VERTRAGSBEGINN",
-        "ABRECHNUNGSENDE_GLEICH_BESTAETIGTEM_VERTRAGSENDE",
-        "NN_MSCONS_UEBERSENDET",
-        "RICHTIGE_MESSWERTE_ENERGIEMENGEN_UEBERSENDET",
-        "SONSTIGES_SIEHE_BEGRUENDUNG",
-        "GUELTIGES_PREISBLATT_VERSENDET",
-        "GUELTIGER_SPERRAUFTRAG_VORHANDEN",
-        "KORREKTE_ARTIKEL_ID_IN_RECHNUNG",
-        "KORREKTER_PREIS_ZU_GUELTIGEM_PREISBLATT_IN_RECHNUNG",
-        "GUELTIGES_PREISBLATT_FRISTGERECHT_VERSENDET",
-        "GUELTIGE_RECHNUNG_VORHANDEN",
-        "KORREKTER_PREIS_IN_RECHNUNG_ABGERECHNET",
-        "GUELTIGES_PREISBLATT_BLINDARBEIT_VERSENDET",
-        "KORREKTE_ARTIKEL_ID_FUER_ABRECHNUNG_STORNIERTER_SPERRAUFTRAG_ANGEGEBEN"
-      ],
-      "enum": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14]
     },
     "COM": {
       "type": "object",
@@ -90,232 +74,73 @@
         }
       }
     },
-    "Betrag": {
+    "Aufgabe": {
       "allOf": [
         {
           "$ref": "#/definitions/COM"
         },
         {
           "type": "object",
-          "description": "Die Komponente wird dazu verwendet Summebeträge - beispielsweise in Angeboten und Rechnungen - als Geldbeträge\nabzubilden. Die Einheit ist dabei immer die Hauptwährung also Euro, Dollar etc..\n            ",
+          "description": "Aufgabe als Teil einer Benachrichtigung.\nAufgaben entsprechen den Klärfall-Lösungsmethoden im SAP.\n            ",
           "additionalProperties": {},
           "properties": {
-            "wert": {
-              "type": "number",
-              "description": "Gibt den Betrag des Preises an.",
-              "format": "decimal"
+            "aufgabenId": {
+              "type": "string",
+              "description": "Eindeutige Kennzeichnung der Aufgabe\n            ",
+              "x-nullable": true
             },
-            "waehrung": {
-              "description": "            ",
-              "oneOf": [
-                {
-                  "$ref": "#/definitions/Waehrungscode"
-                }
-              ]
+            "beschreibung": {
+              "type": "string",
+              "description": "Optionale Beschreibung der Aufgabe\n            ",
+              "x-nullable": true
+            },
+            "deadline": {
+              "type": "string",
+              "description": "Optionale Deadline bis zu der die Aufgabe ausführt werden kann oder ihre Ausführung\nsinnvoll ist.\n            ",
+              "format": "date-time",
+              "x-nullable": true
+            },
+            "ausgefuehrt": {
+              "type": "boolean",
+              "description": "Wurde diese Aufgabe schon ausgeführt (true)? Steht sie noch zur Bearbeitung an (false)?\n            "
+            },
+            "ausfuehrungszeitpunkt": {
+              "type": "string",
+              "description": "Zeitpunkt zu dem die Aufgabe ausgeführt wurde. (Nur sinnvoll, wenn ausgefuehrt==true)\n            ",
+              "format": "date-time",
+              "x-nullable": true
+            },
+            "ausfuehrender": {
+              "type": "string",
+              "description": "Eindeutige Kennung des Benutzers, der diese Aufgabe ausführt hat.\n(Nur sinnvoll, wenn ausgefuehrt==true)\n            ",
+              "x-nullable": true
             }
           }
         }
       ]
     },
-    "Waehrungscode": {
-      "type": "integer",
-      "description": "Aufzählung der Währungscodes.",
-      "x-enumNames": [
-        "AFN",
-        "ALL",
-        "AMD",
-        "ANG",
-        "AOA",
-        "ARS",
-        "AUD",
-        "AWG",
-        "AZN",
-        "BAM",
-        "BBD",
-        "BDT",
-        "BGN",
-        "BHD",
-        "BIF",
-        "BMD",
-        "BND",
-        "BOB",
-        "BOV",
-        "BRL",
-        "BSD",
-        "BTN",
-        "BWP",
-        "BYN",
-        "BYR",
-        "BZD",
-        "CAD",
-        "CDF",
-        "CHE",
-        "CHF",
-        "CHW",
-        "CLF",
-        "CLP",
-        "CNY",
-        "COP",
-        "COU",
-        "CRC",
-        "CUC",
-        "CUP",
-        "CVE",
-        "CZK",
-        "DJF",
-        "DKK",
-        "DOP",
-        "DZD",
-        "EGP",
-        "ERN",
-        "ETB",
-        "EUR",
-        "FJD",
-        "FKP",
-        "GBP",
-        "GEL",
-        "GHS",
-        "GIP",
-        "GMD",
-        "GNF",
-        "GTQ",
-        "GYD",
-        "HKD",
-        "HNL",
-        "HRK",
-        "HTG",
-        "HUF",
-        "IDR",
-        "ILS",
-        "INR",
-        "IQD",
-        "IRR",
-        "ISK",
-        "JMD",
-        "JOD",
-        "JPY",
-        "KES",
-        "KGS",
-        "KHR",
-        "KMF",
-        "KPW",
-        "KRW",
-        "KWD",
-        "KYD",
-        "KZT",
-        "LAK",
-        "LBP",
-        "LKR",
-        "LRD",
-        "LSL",
-        "LTL",
-        "LYD",
-        "MAD",
-        "MDL",
-        "MGA",
-        "MKD",
-        "MMK",
-        "MNT",
-        "MOP",
-        "MRO",
-        "MUR",
-        "MVR",
-        "MWK",
-        "MXN",
-        "MXV",
-        "MYR",
-        "MZN",
-        "NAD",
-        "NGN",
-        "NIO",
-        "NOK",
-        "NPR",
-        "NZD",
-        "OMR",
-        "PAB",
-        "PEN",
-        "PGK",
-        "PHP",
-        "PKR",
-        "PLN",
-        "PYG",
-        "QAR",
-        "RON",
-        "RSD",
-        "RUB",
-        "RUR",
-        "RWF",
-        "SAR",
-        "SBD",
-        "SCR",
-        "SDG",
-        "SEK",
-        "SGD",
-        "SHP",
-        "SLL",
-        "SOS",
-        "SRD",
-        "SSP",
-        "STD",
-        "SVC",
-        "SYP",
-        "SZL",
-        "THB",
-        "TJS",
-        "TMT",
-        "TND",
-        "TOP",
-        "TRY",
-        "TTD",
-        "TWD",
-        "TZS",
-        "UAH",
-        "UGX",
-        "USD",
-        "USN",
-        "USS",
-        "UYI",
-        "UYU",
-        "UZS",
-        "VEF",
-        "VND",
-        "VUV",
-        "WST",
-        "XAF",
-        "XAG",
-        "XAU",
-        "XBA",
-        "XBB",
-        "XBC",
-        "XBD",
-        "XCD",
-        "XDR",
-        "XOF",
-        "XPD",
-        "XPF",
-        "XPT",
-        "XSU",
-        "XTS",
-        "XUA",
-        "XXX",
-        "YER",
-        "ZAR",
-        "ZMW",
-        "ZWL"
-      ],
-      "enum": [
-        0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19,
-        20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37,
-        38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55,
-        56, 57, 58, 59, 60, 61, 62, 63, 64, 65, 66, 67, 68, 69, 70, 71, 72, 73,
-        74, 75, 76, 77, 78, 79, 80, 81, 82, 83, 84, 85, 86, 87, 88, 89, 90, 91,
-        92, 93, 94, 95, 96, 97, 98, 99, 100, 101, 102, 103, 104, 105, 106, 107,
-        108, 109, 110, 111, 112, 113, 114, 115, 116, 117, 118, 119, 120, 121,
-        122, 123, 124, 125, 126, 127, 128, 129, 130, 131, 132, 133, 134, 135,
-        136, 137, 138, 139, 140, 141, 142, 143, 144, 145, 146, 147, 148, 149,
-        150, 151, 152, 153, 154, 155, 156, 157, 158, 159, 160, 161, 162, 163,
-        164, 165, 166, 167, 168, 169, 170, 171, 172, 173, 174, 175, 176, 177,
-        178, 179, 180
+    "GenericStringStringInfo": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/COM"
+        },
+        {
+          "type": "object",
+          "description": "generic object to retrieve values from a dummy Core Data Service View\n            ",
+          "additionalProperties": {},
+          "properties": {
+            "keyColumn": {
+              "type": "string",
+              "description": "key (named differently because key is a reserved keyword)\n            ",
+              "x-nullable": true
+            },
+            "value": {
+              "type": "string",
+              "description": "value\n            ",
+              "x-nullable": true
+            }
+          }
+        }
       ]
     },
     "BusinessObject": {
@@ -494,39 +319,81 @@
     },
     {
       "type": "object",
-      "description": "Handelsunstimmigkeit BO",
+      "description": "Eine Benachrichtigung ist die BO-Entsprechung eines \"Klärfall\"s im SAP oder eines \"Task\"s im Salesforce\n            ",
       "additionalProperties": {},
       "properties": {
-        "nummer": {
+        "benachrichtigungsId": {
           "type": "string",
-          "description": "Handelsunstimmigkeitsnummer",
+          "description": "Eine eindeutige ID der Benachrichtigung.\nEntspricht z.B. der Klärfallnummer in einem SAP-System oder der Task-ID im Salesforce\n            ",
           "x-nullable": true
         },
-        "typ": {
-          "description": "Gibt den Typ der Handelsunstimmigkeit an.",
+        "prioritaet": {
+          "description": "Priorität der Benachrichtigung\n            ",
+          "default": 2,
           "oneOf": [
             {
-              "$ref": "#/definitions/Handelsunstimmigkeitstyp"
+              "$ref": "#/definitions/Prioritaet"
             }
           ]
         },
-        "begruendung": {
-          "description": "Handelsunstimmigskeitsbegründung",
-          "x-nullable": true,
+        "bearbeitungsstatus": {
+          "description": "Status der Benachrichtigung\n            ",
+          "default": 0,
           "oneOf": [
             {
-              "$ref": "#/definitions/Handelsunstimmigkeitsbegruendung"
+              "$ref": "#/definitions/Bearbeitungsstatus"
             }
           ]
         },
-        "zuZahlen": {
-          "description": "angeforderter Betrag",
+        "kurztext": {
+          "type": "string",
+          "description": "Kurzbeschreibung des Fehlers (Klärfall-Überschrift im SAP, Subject im SFDC)\n            ",
+          "x-nullable": true
+        },
+        "erstellungsZeitpunkt": {
+          "type": "string",
+          "description": "Zeitpunkt zu dem die Benachrichtigung erstellt wurde (UTC).\n            ",
+          "format": "date-time"
+        },
+        "kategorie": {
+          "type": "string",
+          "description": "Optionale Kategorisierung der Benachrichtigung.\n(Entspricht z.B. der Klärfallkategorie in SAP)\n            ",
+          "x-nullable": true
+        },
+        "bearbeiter": {
+          "type": "string",
+          "description": "Eindeutige Kennung des Benutzers, der die Benachrichtigung erhält oder sie bearbeiten\nmuss; analog dem Klärfallbearbeiter im SAP oder dem Owner im Salesforce.\nKann auch null sein, wenn es keinen festen Bearbeiter gibt.\n            ",
+          "x-nullable": true
+        },
+        "notizen": {
+          "type": "array",
+          "description": "Detaillierte Beschreibung (Klärfall-Notizen im SAP, Description im SFDC)\n            ",
           "x-nullable": true,
-          "oneOf": [
-            {
-              "$ref": "#/definitions/Betrag"
-            }
-          ]
+          "items": {
+            "$ref": "#/definitions/Notiz"
+          }
+        },
+        "deadline": {
+          "type": "string",
+          "description": "Zeitpunkt bis zu dem die Benachrichtigung bearbeitet worden sein muss.\n            ",
+          "format": "date-time",
+          "x-nullable": true
+        },
+        "aufgaben": {
+          "type": "array",
+          "description": "Liste von Aktivitäten, die der Bearbeiter ausführen kann.\n            ",
+          "x-nullable": true,
+          "items": {
+            "$ref": "#/definitions/Aufgabe"
+          }
+        },
+        "infos": {
+          "type": "array",
+          "description": "list of additional information built in a customer dependet implementation\n            ",
+          "x-nullable": true,
+          "items": {
+            "$ref": "#/definitions/GenericStringStringInfo"
+          }
         }
       }
     }

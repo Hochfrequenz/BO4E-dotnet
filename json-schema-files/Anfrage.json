@@ -17,7 +17,8 @@
         "guid": {
           "type": ["string", "null"]
         }
-      }
+      },
+      "required": ["exRefName", "exRefWert"]
     },
     "Zeitraum": {
       "type": ["object", "null"],
@@ -65,7 +66,14 @@
           "type": ["string", "null"]
         }
       },
-      "required": ["startzeitpunkt", "endzeitpunkt"]
+      "required": [
+        "einheit",
+        "dauer",
+        "startdatum",
+        "enddatum",
+        "startzeitpunkt",
+        "endzeitpunkt"
+      ]
     }
   },
   "type": "object",
@@ -90,34 +98,87 @@
       "type": ["string", "null"]
     },
     "lokationsId": {
-      "type": "string"
+      "type": ["string", "null"]
     },
     "lokationsTyp": {
       "type": "string",
-      "enum": ["MALO", "MELO"]
+      "enum": ["MALO", "MELO", "NELO", "SR", "TR"]
     },
     "obiskennzahl": {
-      "type": "string"
+      "type": ["string", "null"]
     },
     "ZeitraumMesswertanfrage": {
       "$ref": "#/definitions/Zeitraum"
     },
-    "reklamationsgrund": {
+    "anfragekategorie": {
       "type": "string",
-      "enum": ["WERTE_ZU_HOCH", "WERTE_ZU_NIEDRIG", "WERTE_FEHLEN"]
+      "enum": [
+        "PROZESSDATENBERICHT",
+        "GERAETEUEBERNAHME",
+        "WEITERVERPFLICHTUNG_BETRIEB_MELO",
+        "AENDERUNG_MELO",
+        "STAMMDATEN_MALO_ODER_MELO",
+        "BILANZIERTE_MENGE_MEHR_MINDER_MENGEN",
+        "ALLOKATIONSLISTE_MEHR_MINDER_MENGEN",
+        "ENERGIEMENGE_UND_LEISTUNGSMAXIMUM",
+        "ABRECHNUNG_MESSSTELLENBETRIEB_MSB_AN_LF",
+        "AENDERUNG_PROGNOSEGRUNDLAGE_GERAETEKONFIGURATION",
+        "AENDERUNG_GERAETEKONFIGURATION",
+        "REKLAMATION_VON_WERTEN",
+        "LASTGANG_MALO_TRANCHE",
+        "SPERRUNG",
+        "ENTSPERRUNG",
+        "BESTELLUNG_AENDERUNG_MELO"
+      ]
     },
-    "reklamationsgrundBemerkung": {
+    "anfragetyp": {
+      "type": ["string", "null"],
+      "enum": [
+        null,
+        "START_ABO",
+        "ENDE_ABO",
+        "KAUF",
+        "NUTZUNGSUEBERLASSUNG",
+        "KANN_NICHT_ANGEBOTEN_WERDEN",
+        "ABRECHNUNGSBRENNWERT_UND_ZUSTANDSZAHL",
+        "LASTGANGDATEN",
+        "ZAEHLERSTAENDE",
+        "WERTEERMITTLUNG",
+        "LIEFERRICHTUNG",
+        "ANGEBOT_AUF_BASIS_PREISBLATT",
+        "INDIVIDUELLES_ANGEBOT",
+        "ENERGIEMENGE_EINZELWERT"
+      ]
+    },
+    "positionsnummer": {
       "type": ["string", "null"]
     },
-    "zeitpunktFuerWertanfrage": {
+    "gueltigkeitszeitraum": {
+      "$ref": "#/definitions/Zeitraum"
+    },
+    "qualitaet": {
       "type": ["string", "null"],
-      "format": "date-time"
+      "enum": [
+        null,
+        "VOLLSTAENDIG",
+        "INFORMATIV",
+        "IM_SYSTEM_VORHANDEN",
+        "ERWARTET",
+        "VORLAEUFIG",
+        "UNVOLLSTAENDIG"
+      ]
     }
   },
   "required": [
+    "boTyp",
+    "versionStruktur",
+    "externeReferenzen",
     "lokationsId",
     "lokationsTyp",
     "obiskennzahl",
-    "reklamationsgrund"
+    "ZeitraumMesswertanfrage",
+    "anfragekategorie",
+    "anfragetyp",
+    "positionsnummer"
   ]
 }

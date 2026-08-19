@@ -17,7 +17,8 @@
         "guid": {
           "type": ["string", "null"]
         }
-      }
+      },
+      "required": ["exRefName", "exRefWert"]
     },
     "Zeitraum": {
       "type": ["object", "null"],
@@ -65,11 +66,21 @@
           "type": ["string", "null"]
         }
       },
-      "required": ["startzeitpunkt", "endzeitpunkt"]
+      "required": [
+        "einheit",
+        "dauer",
+        "startdatum",
+        "enddatum",
+        "startzeitpunkt",
+        "endzeitpunkt"
+      ]
     }
   },
   "type": "object",
   "properties": {
+    "auftragsId": {
+      "type": ["string", "null"]
+    },
     "boTyp": {
       "type": ["string", "null"]
     },
@@ -89,58 +100,21 @@
     "guid": {
       "type": ["string", "null"]
     },
-    "lokationsId": {
-      "type": "string"
-    },
-    "lokationsTyp": {
-      "type": "string",
-      "enum": ["MALO", "MELO"]
-    },
-    "obiskennzahl": {
-      "type": ["string", "null"]
-    },
-    "ZeitraumMesswertanfrage": {
+    "gueltigkeitszeitraum": {
       "$ref": "#/definitions/Zeitraum"
     },
-    "anfragekategorie": {
-      "type": "string",
-      "enum": [
-        "PROZESSDATENBERICHT",
-        "GERAETEUEBERNAHME",
-        "WEITERVERPFLICHTUNG_BETRIEB_MELO",
-        "AENDERUNG_MELO",
-        "STAMMDATEN_MALO_ODER_MELO",
-        "BILANZIERTE_MENGE_MEHR_MINDER_MENGEN",
-        "ALLOKATIONSLISTE_MEHR_MINDER_MENGEN",
-        "ENERGIEMENGE_UND_LEISTUNGSMAXIMUM",
-        "ABRECHNUNG_MESSSTELLENBETRIEB_MSB_AN_LF",
-        "AENDERUNG_PROGNOSEGRUNDLAGE_GERAETEKONFIGURATION",
-        "AENDERUNG_GERAETEKONFIGURATION",
-        "REKLAMATION_VON_WERTEN",
-        "LASTGANG_MALO_TRANCHE",
-        "SPERRUNG",
-        "ENTSPERRUNG"
-      ]
-    },
-    "anfragetyp": {
+    "qualitaet": {
       "type": ["string", "null"],
       "enum": [
         null,
-        "START_ABO",
-        "ENDE_ABO",
-        "KAUF",
-        "NUTZUNGSUEBERLASSUNG",
-        "KANN_NICHT_ANGEBOTEN_WERDEN",
-        "ABRECHNUNGSBRENNWERT_UND_ZUSTANDSZAHL",
-        "LASTGANGDATEN",
-        "ZAEHLERSTAENDE",
-        "WERTEERMITTLUNG",
-        "LIEFERRICHTUNG",
-        "ANGEBOT_AUF_BASIS_PREISBLATT",
-        "INDIVIDUELLES_ANGEBOT",
-        "ENERGIEMENGE_EINZELWERT"
+        "VOLLSTAENDIG",
+        "INFORMATIV",
+        "IM_SYSTEM_VORHANDEN",
+        "ERWARTET",
+        "VORLAEUFIG",
+        "UNVOLLSTAENDIG"
       ]
     }
   },
-  "required": ["lokationsId", "lokationsTyp", "anfragekategorie"]
+  "required": ["auftragsId", "boTyp", "versionStruktur", "externeReferenzen"]
 }

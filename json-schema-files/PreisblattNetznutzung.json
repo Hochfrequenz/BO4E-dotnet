@@ -395,6 +395,22 @@
             "$ref": "#/definitions/Zustaendigkeit"
           }
         },
+        "gewerbekennzeichnung": {
+          "type": ["boolean", "null"]
+        },
+        "unternehmensart": {
+          "type": ["string", "null"],
+          "enum": [
+            null,
+            "LIEFERANT",
+            "NETZBETREIBER",
+            "MESSSTELLENBETREIBER",
+            "ÜBERTRAGUNGSNETZBETREIBER",
+            "BILANZKOORDINATOR",
+            "BILANZKREISVERANTWORTLICHER",
+            "ENERGIESERVICEANBIETER"
+          ]
+        },
         "gueltigkeitszeitraum": {
           "$ref": "#/definitions/Zeitraum"
         },
@@ -425,7 +441,9 @@
         "geschaeftspartner",
         "adresse",
         "rufnummern",
-        "zustaendigkeit"
+        "zustaendigkeit",
+        "gewerbekennzeichnung",
+        "unternehmensart"
       ]
     },
     "Bankverbindung": {
@@ -836,14 +854,18 @@
           "type": ["string", "null"]
         },
         "rollencodetyp": {
-          "type": "string",
-          "enum": ["ZERO", "GLN", "BDEW", "DVGW"]
+          "type": ["string", "null"],
+          "enum": [null, "ZERO", "GLN", "BDEW", "DVGW"]
         },
         "makoadresse": {
           "type": ["string", "null"]
         },
         "ansprechpartner": {
           "$ref": "#/definitions/Ansprechpartner"
+        },
+        "rolle": {
+          "type": ["string", "null"],
+          "enum": [null, "ANDERE_PARTEI", "EMPFAENGER"]
         },
         "gueltigkeitszeitraum": {
           "$ref": "#/definitions/Zeitraum"
@@ -889,7 +911,8 @@
         "rollencodenummer",
         "rollencodetyp",
         "makoadresse",
-        "ansprechpartner"
+        "ansprechpartner",
+        "rolle"
       ]
     },
     "PositionsAufAbschlag": {
@@ -1009,6 +1032,9 @@
             "VAR",
             "VARH",
             "KWHK",
+            "W_M2",
+            "M_S",
+            "STUECK",
             "JAHR",
             "KWH",
             "MW",
@@ -1092,7 +1118,15 @@
             "ZUSATZDIENSTLEISTUNG_PARAGRAPH_35_2_3_MSBG",
             "ZUSATZDIENSTLEISTUNG_PARAGRAPH_35_2_4_MSBG",
             "ZUSATZDIENSTLEISTUNG_PARAGRAPH_35_2_5_MSBG",
-            "ZUSATZDIENSTLEISTUNG_PARAGRAPH_35_3_MSBG"
+            "ZUSATZDIENSTLEISTUNG_PARAGRAPH_35_3_MSBG",
+            "EINBAU_IMS",
+            "EINBAU_KME_RLM",
+            "EINBAU_WANDLER",
+            "WEITERE_ENERGIEFLUSSRICHTUNG",
+            "VERGLEICHSMESSUNG",
+            "ÄNDERUNG_MESSEBENE",
+            "EINBAU_STEUERBOX",
+            "ANSCHLUSS_TR_STEUERBOX_SR"
           ]
         },
         "zonungsgroesse": {
@@ -1189,6 +1223,32 @@
         "sigmoidparameter": {
           "$ref": "#/definitions/Sigmoidparameter"
         },
+        "mengeneinheit": {
+          "type": ["string", "null"],
+          "enum": [
+            null,
+            "ZERO",
+            "WH",
+            "KW",
+            "ANZAHL",
+            "KUBIKMETER",
+            "STUNDE",
+            "TAG",
+            "MONAT",
+            "VAR",
+            "VARH",
+            "KWHK",
+            "W_M2",
+            "M_S",
+            "STUECK",
+            "JAHR",
+            "KWH",
+            "MW",
+            "KVAR",
+            "KVARH",
+            "MWH"
+          ]
+        },
         "timestamp": {
           "type": ["string", "null"],
           "format": "date-time"
@@ -1201,15 +1261,17 @@
         "einheitspreis",
         "staffelgrenzeVon",
         "staffelgrenzeBis",
-        "sigmoidparameter"
+        "sigmoidparameter",
+        "mengeneinheit"
       ]
     },
     "Rufnummer": {
       "type": ["object", "null"],
       "properties": {
         "nummerntyp": {
-          "type": "string",
+          "type": ["string", "null"],
           "enum": [
+            null,
             "RUF_ZENTRALE",
             "FAX_ZENTRALE",
             "SAMMELRUF",

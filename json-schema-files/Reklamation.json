@@ -102,7 +102,7 @@
     },
     "lokationsTyp": {
       "type": "string",
-      "enum": ["MALO", "MELO"]
+      "enum": ["MALO", "MELO", "NELO", "SR", "TR"]
     },
     "obiskennzahl": {
       "type": ["string", "null"]
@@ -120,6 +120,9 @@
     "zeitpunktFuerWertanfrage": {
       "type": ["string", "null"],
       "format": "date-time"
+    },
+    "positionsnummer": {
+      "type": ["string", "null"]
     },
     "gueltigkeitszeitraum": {
       "$ref": "#/definitions/Zeitraum"
@@ -147,6 +150,7 @@
     "ZeitraumMesswertanfrage",
     "reklamationsgrund",
     "reklamationsgrundBemerkung",
-    "zeitpunktFuerWertanfrage"
+    "zeitpunktFuerWertanfrage",
+    "positionsnummer"
   ]
 }

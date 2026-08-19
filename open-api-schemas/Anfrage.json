@@ -1,6 +1,6 @@
 {
   "$schema": "http://json-schema.org/draft-04/schema#",
-  "title": "Reklamation",
+  "title": "Anfrage",
   "definitions": {
     "Lokationstyp": {
       "type": "integer",
@@ -102,11 +102,48 @@
         }
       }
     },
-    "Reklamationsgrund": {
+    "Anfragekategorie": {
       "type": "integer",
-      "description": "Reklamationsgrund",
-      "x-enumNames": ["WERTE_ZU_HOCH", "WERTE_ZU_NIEDRIG", "WERTE_FEHLEN"],
-      "enum": [0, 1, 2]
+      "description": "Kategorie der Anfrage (ORDERS ORDRSP ORDCHG BGM 1001)",
+      "x-enumNames": [
+        "PROZESSDATENBERICHT",
+        "GERAETEUEBERNAHME",
+        "WEITERVERPFLICHTUNG_BETRIEB_MELO",
+        "AENDERUNG_MELO",
+        "STAMMDATEN_MALO_ODER_MELO",
+        "BILANZIERTE_MENGE_MEHR_MINDER_MENGEN",
+        "ALLOKATIONSLISTE_MEHR_MINDER_MENGEN",
+        "ENERGIEMENGE_UND_LEISTUNGSMAXIMUM",
+        "ABRECHNUNG_MESSSTELLENBETRIEB_MSB_AN_LF",
+        "AENDERUNG_PROGNOSEGRUNDLAGE_GERAETEKONFIGURATION",
+        "AENDERUNG_GERAETEKONFIGURATION",
+        "REKLAMATION_VON_WERTEN",
+        "LASTGANG_MALO_TRANCHE",
+        "SPERRUNG",
+        "ENTSPERRUNG",
+        "BESTELLUNG_AENDERUNG_MELO"
+      ],
+      "enum": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15]
+    },
+    "Anfragetyp": {
+      "type": "integer",
+      "description": "Typ/Art der Anfrage (ORDERS/ORDRSP/QUOTES IMD 7081)\nSegment heißt entweder Produkt-/ Leistungsbeschreibung, Abonnement oder Lieferrichtung.",
+      "x-enumNames": [
+        "START_ABO",
+        "ENDE_ABO",
+        "KAUF",
+        "NUTZUNGSUEBERLASSUNG",
+        "KANN_NICHT_ANGEBOTEN_WERDEN",
+        "ABRECHNUNGSBRENNWERT_UND_ZUSTANDSZAHL",
+        "LASTGANGDATEN",
+        "ZAEHLERSTAENDE",
+        "WERTEERMITTLUNG",
+        "LIEFERRICHTUNG",
+        "ANGEBOT_AUF_BASIS_PREISBLATT",
+        "INDIVIDUELLES_ANGEBOT",
+        "ENERGIEMENGE_EINZELWERT"
+      ],
+      "enum": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]
     },
     "BusinessObject": {
       "type": "object",
@@ -214,16 +251,16 @@
     },
     {
       "type": "object",
-      "description": "Reklamations BO",
+      "description": "Anfrage BO",
       "additionalProperties": {},
       "properties": {
         "lokationsId": {
           "type": "string",
-          "description": "Für welche Markt- oder Messlokation gilt diese Reklamation.",
+          "description": "Für welche Markt- oder Messlokation gilt diese Anfrage.",
           "x-nullable": true
         },
         "lokationsTyp": {
-          "description": "Gibt an, ob es sich um eine Markt- oder Messlokation handelt.",
+          "description": "Gibt an, ob es sich um eine Markt- oder Messlokation handelt",
           "oneOf": [
             {
               "$ref": "#/definitions/Lokationstyp"
@@ -245,24 +282,22 @@
             }
           ]
         },
-        "reklamationsgrund": {
-          "description": "Hier wird für die Reklamation von Werten der Reklamationsgrund angegeben.",
+        "anfragekategorie": {
+          "description": "Kategorie der Anfrage (ORDERS ORDRSP BGM 1001)",
           "oneOf": [
             {
-              "$ref": "#/definitions/Reklamationsgrund"
+              "$ref": "#/definitions/Anfragekategorie"
             }
           ]
         },
-        "reklamationsgrundBemerkung": {
-          "type": "string",
-          "description": "Freitext für eine weitere Beschreibung des Reklamationsgrunds",
-          "x-nullable": true
-        },
-        "zeitpunktFuerWertanfrage": {
-          "type": "string",
-          "description": "Zeitpunkt für Wertanfrage",
-          "format": "date-time",
-          "x-nullable": true
+        "anfragetyp": {
+          "description": "Typ/Art der Anfrage (ORDERS ORDRSP IMD 7081)",
+          "x-nullable": true,
+          "oneOf": [
+            {
+              "$ref": "#/definitions/Anfragetyp"
+            }
+          ]
         },
         "positionsnummer": {
           "type": "string",

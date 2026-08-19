@@ -4,7 +4,7 @@
   "definitions": {
     "Kostenklasse": {
       "type": "integer",
-      "description": "",
+      "description": "Kostenklassen bilden die oberste Ebene der verschiedenen Kosten. In der Regel werden die Gesamtkosten einer\nKostenklasse in einer App berechnet.\n            ",
       "x-enumNames": ["ZERO"],
       "enum": [0]
     },
@@ -15,9 +15,11 @@
         },
         {
           "type": "object",
+          "description": "Diese Komponente wird zur Abbildung von Zeiträumen in Form von Dauern oder der Angabe von Start und Ende\nverwendet.\n            ",
           "additionalProperties": {},
           "properties": {
             "einheit": {
+              "description": "Die Einheit in der die Dauer angeben ist. Z.B. Monate. ",
               "x-nullable": true,
               "oneOf": [
                 {
@@ -27,26 +29,31 @@
             },
             "dauer": {
               "type": "number",
+              "description": "Gibt die Anzahl der Zeiteinheiten an, z.B. 3 (Monate).",
               "format": "decimal",
               "x-nullable": true
             },
             "startdatum": {
               "type": "string",
+              "description": "Gibt Tag und Uhrzeit (falls vorhanden) an, wann der Zeitraum startet.",
               "format": "date-time",
               "x-nullable": true
             },
             "enddatum": {
               "type": "string",
+              "description": "Gibt Tag und Uhrzeit (falls vorhanden) an, wann der Zeitraum endet.",
               "format": "date-time",
               "x-nullable": true
             },
             "startzeitpunkt": {
               "type": "string",
+              "description": "The same value as Startdatum",
               "format": "date-time",
               "x-nullable": true
             },
             "endzeitpunkt": {
               "type": "string",
+              "description": "The same value as Enddatum",
               "format": "date-time",
               "x-nullable": true
             }
@@ -56,7 +63,7 @@
     },
     "Zeiteinheit": {
       "type": "integer",
-      "description": "",
+      "description": "Auflistung möglicher Einheiten zur Verwendung in zeitbezogenen Angaben.",
       "x-enumNames": [
         "SEKUNDE",
         "MINUTE",
@@ -73,19 +80,23 @@
     },
     "COM": {
       "type": "object",
+      "description": "The COM class is the abstract class from which all BO4E.COM classes are derived.\n            ",
       "x-abstract": true,
       "additionalProperties": {},
       "properties": {
         "guidSerialized": {
-          "type": "string"
+          "type": "string",
+          "x-nullable": true
         },
         "timestamp": {
           "type": "string",
+          "description": "Store the latest timestamp (update from the database)\n            ",
           "format": "date-time",
           "x-nullable": true
         },
         "guid": {
           "type": "string",
+          "description": "allows adding a GUID to COM objects for tracking across systems\n            ",
           "format": "guid",
           "x-nullable": true
         }
@@ -98,14 +109,21 @@
         },
         {
           "type": "object",
+          "description": "Die Komponente wird dazu verwendet Summebeträge - beispielsweise in Angeboten und Rechnungen - als Geldbeträge\nabzubilden. Die Einheit ist dabei immer die Hauptwährung also Euro, Dollar etc..\n            ",
           "additionalProperties": {},
           "properties": {
             "wert": {
               "type": "number",
+              "description": "Gibt den Betrag des Preises an.",
               "format": "decimal"
             },
             "waehrung": {
-              "$ref": "#/definitions/Waehrungscode"
+              "description": "            ",
+              "oneOf": [
+                {
+                  "$ref": "#/definitions/Waehrungscode"
+                }
+              ]
             }
           }
         }
@@ -113,7 +131,7 @@
     },
     "Waehrungscode": {
       "type": "integer",
-      "description": "",
+      "description": "Aufzählung der Währungscodes.",
       "x-enumNames": [
         "AFN",
         "ALL",
@@ -319,12 +337,16 @@
         },
         {
           "type": "object",
+          "description": "Mit dieser Komponente werden mehrere Kostenpositionen zusammengefasst.",
           "additionalProperties": {},
           "properties": {
             "kostenblockbezeichnung": {
-              "type": "string"
+              "type": "string",
+              "description": "Bezeichnung für einen Kostenblock. Z.B. Netzkosten, Messkosten, Umlagen, etc.",
+              "x-nullable": true
             },
             "summeKostenblock": {
+              "description": "Die Summe aller Kostenpositionen dieses Blocks",
               "x-nullable": true,
               "oneOf": [
                 {
@@ -334,6 +356,7 @@
             },
             "kostenpositionen": {
               "type": "array",
+              "description": "Hier sind die Details zu einer Kostenposition aufgeführt. Z.B.:Alliander Netz Heinsberg GmbH, 01.02.2018,\n31.12.2018, Arbeitspreis HT, 3.660 kWh, 5,8200 ct/kWh, 213,01 €. Details Kostenposition\n            ",
               "x-nullable": true,
               "items": {
                 "$ref": "#/definitions/Kostenposition"
@@ -350,29 +373,38 @@
         },
         {
           "type": "object",
+          "description": "Diese Komponente wird zur Übertagung der Details zu einer Kostenposition verwendet.",
           "additionalProperties": {},
           "properties": {
             "positionstitel": {
-              "type": "string"
+              "type": "string",
+              "description": "Ein Titel für die Zeile. Hier kann z.B. der Netzbetreiber eingetragen werden, wenn es sich um Netzkosten\nhandelt.\n            ",
+              "x-nullable": true
             },
             "von": {
               "type": "string",
+              "description": "von-Datum der Kostenzeitscheibe. Z.B. 2017-01-01",
               "format": "date-time",
               "x-nullable": true
             },
             "bis": {
               "type": "string",
+              "description": "bis-Datum der Kostenzeitscheibe. Z.B. 2017-12-31",
               "format": "date-time",
               "x-nullable": true
             },
             "artikelbezeichnung": {
-              "type": "string"
+              "type": "string",
+              "description": "Bezeichnung für den Artikel für den die Kosten ermittelt wurden. Beispiel: Arbeitspreis HT",
+              "x-nullable": true
             },
             "artikeldetail": {
               "type": "string",
+              "description": "Detaillierung des Artikels (optional). Beispiel: Drehstromzähler",
               "x-nullable": true
             },
             "menge": {
+              "description": "Die Menge, die in die Kostenberechnung eingeflossen ist. Beispiel: 3.660 kWh. Details\nMenge\n            ",
               "x-nullable": true,
               "oneOf": [
                 {
@@ -381,6 +413,7 @@
               ]
             },
             "zeitmenge": {
+              "description": "Wenn es einen zeitbasierten Preis gibt (z.B. €/Jahr), dann ist hier die Menge angegeben mit der die Kosten\nberechnet wurden. Z.B.  138 Tage. Details Menge\n            ",
               "x-nullable": true,
               "oneOf": [
                 {
@@ -389,10 +422,22 @@
               ]
             },
             "einzelpreis": {
-              "$ref": "#/definitions/Preis"
+              "description": "Der Preis für eine Einheit. Beispiele: 5,8200 ct/kWh oder 55 €/Jahr. Details Preis",
+              "x-nullable": true,
+              "oneOf": [
+                {
+                  "$ref": "#/definitions/Preis"
+                }
+              ]
             },
             "betragKostenposition": {
-              "$ref": "#/definitions/Betrag"
+              "description": "Der errechnete Gesamtbetrag der Position als Ergebnis der Berechnung <Menge> x <Einzelpreis> oder\n<Einzelpreis> / (Anzahl Tage Jahr) * <zeitmenge>. Details Betrag\n            ",
+              "x-nullable": true,
+              "oneOf": [
+                {
+                  "$ref": "#/definitions/Betrag"
+                }
+              ]
             }
           }
         }
@@ -405,13 +450,16 @@
         },
         {
           "type": "object",
+          "description": "Abbildung einer Menge mit Wert und Einheit.",
           "additionalProperties": {},
           "properties": {
             "wert": {
               "type": "number",
+              "description": "Gibt den absoluten Wert der Menge an.",
               "format": "decimal"
             },
             "einheit": {
+              "description": "Gibt die Einheit zum jeweiligen Wert an. Details Mengeneinheit",
               "x-nullable": true,
               "oneOf": [
                 {
@@ -425,7 +473,7 @@
     },
     "Mengeneinheit": {
       "type": "integer",
-      "description": "",
+      "description": "Einheit: Messgrößen, die per Messung oder Vorgabe ermittelt werden können.\n            ",
       "x-enumNames": [
         "ZERO",
         "WH",
@@ -438,6 +486,9 @@
         "VAR",
         "VARH",
         "KWHK",
+        "W_M2",
+        "M_S",
+        "STUECK",
         "JAHR",
         "KWH",
         "MW",
@@ -446,8 +497,8 @@
         "MWH"
       ],
       "enum": [
-        0, 2, 3, 7, 11, 13, 17, 19, 23, 29, 40, 228, 2000, 3000, 23000, 29000,
-        2000000
+        0, 2, 3, 7, 11, 13, 17, 19, 23, 29, 40, 41, 42, 50, 228, 2000, 3000,
+        23000, 29000, 2000000
       ]
     },
     "Preis": {
@@ -457,14 +508,17 @@
         },
         {
           "type": "object",
+          "description": "Preis",
           "additionalProperties": {},
           "properties": {
             "wert": {
               "type": "number",
+              "description": "Gibt die nominale Höhe des Preises an.",
               "format": "decimal",
               "x-nullable": true
             },
             "einheit": {
+              "description": "Währungseinheit für den Preis, z.B. Euro oder Ct. Details Waehrungseinheit",
               "x-nullable": true,
               "oneOf": [
                 {
@@ -473,6 +527,7 @@
               ]
             },
             "bezugswert": {
+              "description": "Angabe, für welche Bezugsgröße der Preis gilt. Z.B. kWh. ",
               "x-nullable": true,
               "oneOf": [
                 {
@@ -481,6 +536,7 @@
               ]
             },
             "status": {
+              "description": "Gibt den Status des veröffentlichten Preises an\n            ",
               "x-nullable": true,
               "oneOf": [
                 {
@@ -494,39 +550,47 @@
     },
     "Waehrungseinheit": {
       "type": "integer",
-      "description": "",
+      "description": "In diesem Enum werden die Währungen und ihre Untereinheiten definiert, beispielsweise für die Verwendung in\nPreisen.\n            ",
       "x-enumNames": ["EUR", "CT"],
       "enum": [0, 1]
     },
     "Preisstatus": {
       "type": "integer",
-      "description": "",
+      "description": "Statusinformation für Preise",
       "x-enumNames": ["VORLAEUFIG", "ENDGUELTIG"],
       "enum": [0, 1]
     },
     "BusinessObject": {
       "type": "object",
+      "description": "General abstract class for Business Objects for Energy (BO4E)\n            ",
       "x-abstract": true,
       "additionalProperties": {},
       "properties": {
+        "guidSerialized": {
+          "type": "string",
+          "description": "protobuf serilization requires the Guid as string.\n            "
+        },
         "boTyp": {
           "type": "string",
-          "x-nullable": true
+          "description": "obligatory type of the business object in UPPER CASE\n            ",
+          "x-nullable": true,
+          "x-example": "'MESSLOKATION',\n'MARKTLOKATION'\n            "
         },
         "versionStruktur": {
           "type": "string",
-          "x-nullable": true
-        },
-        "guidSerialized": {
-          "type": "string"
+          "description": "obligatory version of the BO4E definition. Currently hard coded to 1\n            ",
+          "x-nullable": true,
+          "x-example": 1
         },
         "timestamp": {
           "type": "string",
+          "description": "Store the latest database update, is Datetime, because postgres doesn't handle datetimeoffset in a generated column\ngracefully\n            ",
           "format": "date-time",
           "x-nullable": true
         },
         "externeReferenzen": {
           "type": "array",
+          "description": "Hier können IDs anderer Systeme hinterlegt werden (z.B. eine SAP-GP-Nummer) (Details siehe\nExterneReferenz)\n            ",
           "x-nullable": true,
           "items": {
             "$ref": "#/definitions/ExterneReferenz"
@@ -534,10 +598,12 @@
         },
         "guid": {
           "type": "string",
+          "description": "allows adding a GUID to Business Objects for tracking across systems\n            ",
           "format": "guid",
           "x-nullable": true
         },
         "gueltigkeitszeitraum": {
+          "description": "Defines the validity of a business object in terms of time (maybe multiple versions exist).\nBackground: German market communication requires for master data changes starting 03.04.2025 that business objects are ordered and aggregated by validity (in terms of time).\nTo easily group data based on this data a new zeitraum is introduced as an optional field in all business objects.\n            ",
           "x-nullable": true,
           "oneOf": [
             {
@@ -546,6 +612,7 @@
           ]
         },
         "qualitaet": {
+          "description": "Defines a level of data quality that is attached to the business object, this can have multiple origins, you could specify a version as draft or uncomplete if this is in the state of creation.\nAnother requirement is coming from german market communictation where business objects of different quality levels need to be grouped.\n            ",
           "x-nullable": true,
           "oneOf": [
             {
@@ -562,14 +629,17 @@
         },
         {
           "type": "object",
+          "description": "Viele Datenobjekte weisen in unterschiedlichen Systemen eine eindeutige ID (Kundennummer, GP-Nummer etc.) auf.\nBeim Austausch von Datenobjekten zwischen verschiedenen Systemen ist es daher hilfreich, sich die eindeutigen IDs\nder anzubindenden Systeme zu merken.\nDiese Komponente ermöglicht es, sich die SAP GP-Nummer zu merken, um diese bei SAP-Aufrufen als Parameter mitgeben\nzu können.\n            ",
           "additionalProperties": {},
           "properties": {
             "exRefName": {
               "type": "string",
+              "description": "Bezeichnung der externen Referenz (z.B. \"hochfrequenz integration services\")\n            ",
               "x-nullable": true
             },
             "exRefWert": {
               "type": "string",
+              "description": "Wert der externen Referenz (z.B. \"123456\"; \"4711\")\n            ",
               "x-nullable": true
             }
           }
@@ -578,7 +648,7 @@
     },
     "Qualitaet": {
       "type": "integer",
-      "description": "",
+      "description": "Qualitätsstufen eines Business-Objektes, v.a. aus Sicht Marktkommunikation ",
       "x-enumNames": [
         "VOLLSTAENDIG",
         "INFORMATIV",
@@ -596,16 +666,29 @@
     },
     {
       "type": "object",
+      "description": "Dieses BO wird zur Übertagung von hierarchischen Kostenstrukturen verwendet. Die Kosten werden dabei in\nKostenblöcke und diese wiederum in Kostenpositionen strukturiert.\n            ",
       "additionalProperties": {},
       "properties": {
         "kostenklasse": {
-          "$ref": "#/definitions/Kostenklasse"
+          "description": "Klasse der Kosten, beispielsweise Fremdkosten. Details siehe Kostenklasse\n            ",
+          "oneOf": [
+            {
+              "$ref": "#/definitions/Kostenklasse"
+            }
+          ]
         },
         "gueltigkeit": {
-          "$ref": "#/definitions/Zeitraum"
+          "description": "Für diesen Zeitraum wurden die Kosten ermittelt. Details siehe Zeitraum\n            ",
+          "x-nullable": true,
+          "oneOf": [
+            {
+              "$ref": "#/definitions/Zeitraum"
+            }
+          ]
         },
         "summeKosten": {
           "type": "array",
+          "description": "Die Gesamtsumme über alle Kostenblöcke und -positionen. Details siehe Betrag\n            ",
           "x-nullable": true,
           "items": {
             "$ref": "#/definitions/Betrag"
@@ -613,13 +696,15 @@
         },
         "kostenbloecke": {
           "type": "array",
-          "minItems": 1,
+          "description": "Eine Liste mit Kostenblöcken. In Kostenblöcken werden Kostenpositionen zusammengefasst. Beispiele: Netzkosten,\nUmlagen, Steuern etc. Details siehe Kostenblock\n            ",
+          "x-nullable": true,
           "items": {
             "$ref": "#/definitions/Kostenblock"
           }
         },
         "kostenpositionen": {
           "type": "array",
+          "description": "Hier sind die Details zu einer Kostenposition aufgeführt. Z.B.:\nAlliander Netz Heinsberg GmbH, 01.02.2018, 31.12.2018, Arbeitspreis HT, 3.660 kWh, 5,8200 ct/kWh, 213,01 €. Details\nsiehe COM Kostenposition\n            ",
           "x-nullable": true,
           "items": {
             "$ref": "#/definitions/Kostenposition"

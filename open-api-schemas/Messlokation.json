@@ -4,7 +4,7 @@
   "definitions": {
     "Sparte": {
       "type": "integer",
-      "description": "",
+      "description": "Unterscheidungsmöglichkeiten für die Sparte.",
       "x-enumNames": [
         "STROM",
         "GAS",
@@ -17,7 +17,7 @@
     },
     "Netzebene": {
       "type": "integer",
-      "description": "",
+      "description": "Auflistung möglicher Netzebenen innerhalb der Energiearten Strom und Gas.",
       "x-enumNames": [
         "NSP",
         "MSP",
@@ -39,35 +39,46 @@
         },
         {
           "type": "object",
+          "description": "Enthält eine Adresse, die für die meisten Zwecke verwendbar ist.",
           "additionalProperties": {},
           "properties": {
             "postleitzahl": {
-              "type": "string"
+              "type": "string",
+              "description": "Die Postleitzahl. Beispiel: 41836",
+              "x-nullable": true
             },
             "ort": {
-              "type": "string"
+              "type": "string",
+              "description": "Bezeichnung der Stadt. Beispiel Hückelhoven",
+              "x-nullable": true
             },
             "strasse": {
               "type": "string",
+              "description": "Bezeichnung der Straße. Beispiel: Weserstraße",
               "x-nullable": true
             },
             "hausnummer": {
               "type": "string",
+              "description": "Hausnummer inkl. Zusatz. Beispiel. 3, 4a etc.",
               "x-nullable": true
             },
             "postfach": {
               "type": "string",
+              "description": "Im Falle einer Postfachadresse das Postfach. Damit werden Straße und\nHausnummer nicht berücksichtigt.Beispiel: Postfach 4711\n            ",
               "x-nullable": true
             },
             "adresszusatz": {
               "type": "string",
+              "description": "Zusatzhinweis zum Auffinden der Adresse, z.B. \"3. Stock linke Wohnung\"",
               "x-nullable": true
             },
             "coErgaenzung": {
               "type": "string",
+              "description": "Im Falle einer c/o-Adresse steht in diesem Attribut die Anrede. Z.B. c/o\nVeronica Hauptmieterin.In diesem Fall enthält die folgende Adresse die Daten\nder in c/o adressierten Person oder Firma.\n            ",
               "x-nullable": true
             },
             "landescode": {
+              "description": "Offizieller ISO-Landescode. Z.B. NL, Details Landescode",
               "x-nullable": true,
               "oneOf": [
                 {
@@ -77,6 +88,7 @@
             },
             "ortsteil": {
               "type": "string",
+              "description": "Ortsteil für EDIFACT mapping\n            ",
               "x-nullable": true
             }
           }
@@ -85,7 +97,7 @@
     },
     "Landescode": {
       "type": "integer",
-      "description": "",
+      "description": "Der ISO-Landescode.",
       "x-enumNames": [
         "AC",
         "AD",
@@ -378,19 +390,23 @@
     },
     "COM": {
       "type": "object",
+      "description": "The COM class is the abstract class from which all BO4E.COM classes are derived.\n            ",
       "x-abstract": true,
       "additionalProperties": {},
       "properties": {
         "guidSerialized": {
-          "type": "string"
+          "type": "string",
+          "x-nullable": true
         },
         "timestamp": {
           "type": "string",
+          "description": "Store the latest timestamp (update from the database)\n            ",
           "format": "date-time",
           "x-nullable": true
         },
         "guid": {
           "type": "string",
+          "description": "allows adding a GUID to COM objects for tracking across systems\n            ",
           "format": "guid",
           "x-nullable": true
         }
@@ -403,38 +419,46 @@
         },
         {
           "type": "object",
+          "description": "Diese Komponente liefert die Geokoordinaten für einen Ort.\nHierbei kann es sich um Breiten- und Längengrad oder um UTM-Koordinaten handeln. Diese lassen sich zwar ineinander\numrechnen, jedoch sind die UTM-Koordinaten genauer, benötigen aber auch mehr Werte.\nEin Mapping ist nicht vorgesehen in UTM-Koordinaten ist aktuell nicht vorgesehen.",
           "additionalProperties": {},
           "properties": {
             "breitengrad": {
               "type": "number",
+              "description": "Gibt den Breitengrad eines entsprechenden Ortes an.",
               "format": "decimal",
               "x-nullable": true
             },
             "laengengrad": {
               "type": "number",
+              "description": "Gibt den Längengrad eines entsprechenden Ortes an.",
               "format": "decimal",
               "x-nullable": true
             },
             "oestlicheLaenge": {
               "type": "number",
+              "description": "Gibt die Östliche Länge im UTM-Koordinaten eines entsprechenden Ortes an.",
               "format": "decimal",
               "x-nullable": true
             },
             "noerdlicheBreite": {
               "type": "number",
+              "description": "Gibt die Nördliche Breite in UTM-Koordinate eines entsprechenden Ortes an.",
               "format": "decimal",
               "x-nullable": true
             },
             "zone": {
               "type": "string",
+              "description": "Gibt die UTM Zone des Ortes an.",
               "x-nullable": true
             },
             "nordWert": {
               "type": "string",
+              "description": "Gibt den Nordwert Ortes in UTM-Koordinaten an.",
               "x-nullable": true
             },
             "ostWert": {
               "type": "string",
+              "description": "Gibt Ostwert des Ortes in UTM-Koordinaten an.",
               "x-nullable": true
             }
           }
@@ -448,14 +472,17 @@
         },
         {
           "type": "object",
+          "description": "Dient der Adressierung über die Liegenschaftsinformation.",
           "additionalProperties": {},
           "properties": {
             "gemarkung_flur": {
               "type": "string",
+              "description": "Die Gemarkung oder die Flur in der die Liegenschaft liegt",
               "x-nullable": true
             },
             "flurstueck": {
               "type": "string",
+              "description": "Das Flurstück mit dem die Liegenschaft (Grundstück) bezeichnet ist.",
               "x-nullable": true
             }
           }
@@ -469,9 +496,11 @@
         },
         {
           "type": "object",
+          "description": "Abbildung einer abrechenbaren Hardware.",
           "additionalProperties": {},
           "properties": {
             "geraetetyp": {
+              "description": "Eindeutiger Typ der Hardware. Details Geraetetyp",
               "x-nullable": true,
               "oneOf": [
                 {
@@ -480,9 +509,12 @@
               ]
             },
             "bezeichnung": {
-              "type": "string"
+              "type": "string",
+              "description": "Bezeichnung der Hardware.",
+              "x-nullable": true
             },
             "geraeteeigenschaften": {
+              "description": "Bezeichnung der Hardware.",
               "x-nullable": true,
               "oneOf": [
                 {
@@ -492,10 +524,12 @@
             },
             "geraetenummer": {
               "type": "string",
+              "description": "Gerätenummer des Wandlers\n            ",
               "x-nullable": true
             },
             "geraetereferenz": {
               "type": "string",
+              "description": "Referenz auf die Gerätenummer des Zählers\n            ",
               "x-nullable": true
             }
           }
@@ -504,7 +538,7 @@
     },
     "Geraetetyp": {
       "type": "integer",
-      "description": "",
+      "description": "Auflistung möglicher abzurechnender Gerätetypen.",
       "x-enumNames": [
         "WECHSELSTROMZAEHLER",
         "DREHSTROMZAEHLER",
@@ -566,18 +600,39 @@
         },
         {
           "type": "object",
+          "description": "Mit dieser Komponente werden die Eigenschaften eines Gerätes in Bezug auf den Typ und weitere Merkmale\nmodelliert.\n            ",
           "additionalProperties": {},
           "properties": {
             "geraetetyp": {
-              "$ref": "#/definitions/Geraetetyp"
+              "description": "Der Typ eines Gerätes, beispielsweise Drehstromzähler. Details Geraetetyp",
+              "oneOf": [
+                {
+                  "$ref": "#/definitions/Geraetetyp"
+                }
+              ]
             },
             "geraetemerkmal": {
+              "description": "Weitere Merkmale des Geräts, zum Beispiel Mehrtarif, Eintarif etc.. Details Geraetemerkmal\n            ",
               "x-nullable": true,
               "oneOf": [
                 {
                   "$ref": "#/definitions/Geraetemerkmal"
                 }
               ]
+            },
+            "wandlerfaktor": {
+              "type": "number",
+              "description": "Wandlerfaktor für Strom-/Spannungswandler.",
+              "format": "decimal",
+              "x-nullable": true
+            },
+            "weitereGeraetenummern": {
+              "type": "array",
+              "description": "Weitere Gerätenummern (z.B. von Wandlern).",
+              "x-nullable": true,
+              "items": {
+                "type": "string"
+              }
             }
           }
         }
@@ -585,7 +640,7 @@
     },
     "Geraetemerkmal": {
       "type": "integer",
-      "description": "",
+      "description": "Auflistung möglicher abzurechnender Gerätetypen.",
       "x-enumNames": [
         "EINTARIF",
         "ZWEITARIF",
@@ -664,13 +719,21 @@
         },
         {
           "type": "object",
+          "description": "Abbildung einer abrechenbaren Dienstleistung.",
           "additionalProperties": {},
           "properties": {
             "dienstleistungstyp": {
-              "$ref": "#/definitions/Dienstleistungstyp"
+              "description": "Eindeutige Nummer der Dienstleistung. Details Dienstleistungstyp",
+              "oneOf": [
+                {
+                  "$ref": "#/definitions/Dienstleistungstyp"
+                }
+              ]
             },
             "bezeichnung": {
-              "type": "string"
+              "type": "string",
+              "description": "Bezeichnung der Dienstleistung.",
+              "x-nullable": true
             }
           }
         }
@@ -678,7 +741,7 @@
     },
     "Dienstleistungstyp": {
       "type": "integer",
-      "description": "",
+      "description": "Auflistung möglicher abzurechnender Dienstleistungen.",
       "x-enumNames": [
         "DATENBEREITSTELLUNG_TAEGLICH",
         "DATENBEREITSTELLUNG_WOECHENTLICH",
@@ -733,15 +796,25 @@
         },
         {
           "type": "object",
+          "description": "Mit diesem Geschäftsobjekt wird die Information zu einem Zähler abgebildet.\n            ",
           "additionalProperties": {},
           "properties": {
             "zaehlernummer": {
-              "type": "string"
+              "type": "string",
+              "description": "Nummerierung des Zählers, vergeben durch den Messstellenbetreiber",
+              "x-nullable": true
             },
             "sparte": {
-              "$ref": "#/definitions/Sparte"
+              "description": "Strom oder Gas. ",
+              "x-nullable": true,
+              "oneOf": [
+                {
+                  "$ref": "#/definitions/Sparte"
+                }
+              ]
             },
             "zaehlerauspraegung": {
+              "description": "Spezifikation die Richtung des Zählers betreffend.\n\n            ",
               "x-nullable": true,
               "oneOf": [
                 {
@@ -750,6 +823,7 @@
               ]
             },
             "zaehlertyp": {
+              "description": "Typisierung des Zählers\n\n            ",
               "x-nullable": true,
               "oneOf": [
                 {
@@ -758,6 +832,7 @@
               ]
             },
             "tarifart": {
+              "description": "Spezifikation bezüglich unterstützter Tarifarten.\n\n            ",
               "x-nullable": true,
               "oneOf": [
                 {
@@ -767,28 +842,32 @@
             },
             "zaehlerkonstante": {
               "type": "number",
+              "description": "Zählerkonstante auf dem Zähler.",
               "format": "decimal",
               "x-nullable": true
             },
             "eichungBis": {
               "type": "string",
+              "description": "Bis zu diesem Datum ist der Zähler geeicht.",
               "format": "date-time",
               "x-nullable": true
             },
             "letzteEichung": {
               "type": "string",
+              "description": "Zu diesem Datum fand die letzte Eichprüfung des Zählers statt.",
               "format": "date-time",
               "x-nullable": true
             },
             "zaehlwerke": {
               "type": "array",
-              "minItems": 1,
+              "description": "Die Zählwerke des Zählers.\n\n            ",
               "x-nullable": true,
               "items": {
                 "$ref": "#/definitions/Zaehlwerk"
               }
             },
             "zaehlerhersteller": {
+              "description": "Der Hersteller des Zählers. Details Geschaeftspartner",
               "x-nullable": true,
               "oneOf": [
                 {
@@ -798,9 +877,11 @@
             },
             "gateway": {
               "type": "string",
+              "description": "Referenz auf das Smartmeter-Gateway\n            ",
               "x-nullable": true
             },
             "fernschaltung": {
+              "description": "Fernschaltung\n            ",
               "x-nullable": true,
               "oneOf": [
                 {
@@ -809,6 +890,7 @@
               ]
             },
             "messwerterfassung": {
+              "description": "Messwerterfassung am Zählpunkt\n            ",
               "x-nullable": true,
               "oneOf": [
                 {
@@ -817,6 +899,7 @@
               ]
             },
             "zaehlertypspezifikation": {
+              "description": "Typisierung des Zählers (spezifikation für EHZ und MME)\n\n            ",
               "x-nullable": true,
               "oneOf": [
                 {
@@ -825,6 +908,7 @@
               ]
             },
             "befestigungsart": {
+              "description": "Befestigungsart\n            ",
               "x-nullable": true,
               "oneOf": [
                 {
@@ -833,6 +917,7 @@
               ]
             },
             "zaehlergroesse": {
+              "description": "Zaehlergroesse\n            ",
               "x-nullable": true,
               "oneOf": [
                 {
@@ -842,10 +927,20 @@
             },
             "geraete": {
               "type": "array",
+              "description": "Liste der Geräte, die zu diesem Zähler gehören.",
               "x-nullable": true,
               "items": {
                 "$ref": "#/definitions/Geraet"
               }
+            },
+            "artVolumenerfassung": {
+              "description": "Art der Volumenerfassung bei Mengenumwertern.",
+              "x-nullable": true,
+              "oneOf": [
+                {
+                  "$ref": "#/definitions/ArtVolumenerfassung"
+                }
+              ]
             }
           }
         }
@@ -853,13 +948,13 @@
     },
     "Zaehlerauspraegung": {
       "type": "integer",
-      "description": "",
+      "description": "* Gibt an, ob es sich um einen Einrichtungs- oder Zweirichtungszähler handelt.",
       "x-enumNames": ["EINRICHTUNGSZAEHLER", "ZWEIRICHTUNGSZAEHLER"],
       "enum": [0, 1]
     },
     "Zaehlertyp": {
       "type": "integer",
-      "description": "",
+      "description": "Bei diesem Enum handelt es sich die Abbildung von Zählertypen der Sparten Strom, Gas und Wasser.\n            ",
       "x-enumNames": [
         "DREHSTROMZAEHLER",
         "BALGENGASZAEHLER",
@@ -900,17 +995,21 @@
         },
         {
           "type": "object",
+          "description": "Mit dieser Komponente werden Zählwerke modelliert.",
           "additionalProperties": {},
           "properties": {
             "zaehlwerkId": {
               "type": "string",
+              "description": "Identifikation des Zählwerks (Registers) innerhalb des Zählers. Oftmals eine laufende Nummer hinter der\nZählernummer. Z.B. 47110815_1\n            ",
               "x-nullable": true
             },
             "bezeichnung": {
               "type": "string",
+              "description": "Zusätzliche Bezeichnung, z.B. Zählwerk_Wirkarbeit.",
               "x-nullable": true
             },
             "richtung": {
+              "description": "Die Energierichtung, Einspeisung oder Ausspeisung. Details Energierichtung",
               "x-nullable": true,
               "oneOf": [
                 {
@@ -920,14 +1019,17 @@
             },
             "obisKennzahl": {
               "type": "string",
+              "description": "Die OBIS-Kennzahl für das Zählwerk, die festlegt, welche auf die gemessene Größe mit dem Stand gemeldet wird.\nNur Zählwerkstände mit dieser OBIS-Kennzahl werden an diesem Zählwerk registriert. Beispiel:1-0:1.8.1 für\nelektrische Wirkarbeit.\n            ",
               "x-nullable": true
             },
             "wandlerfaktor": {
               "type": "number",
+              "description": "Mit diesem Faktor wird eine Zählerstandsdifferenz multipliziert, um zum eigentlichen Verbrauch im Zeitraum zu\nkommen.\n            ",
               "format": "decimal",
               "x-nullable": true
             },
             "einheit": {
+              "description": "Die Einheit der gemessenen Größe, z.B. kWh. Details Mengeneinheit",
               "x-nullable": true,
               "oneOf": [
                 {
@@ -937,11 +1039,13 @@
             },
             "kennzahl": {
               "type": "string",
+              "description": "Obis kennzahl",
               "x-deprecated": true,
               "x-deprecatedMessage": "Use existing obisKennzahl instead.",
               "x-nullable": true
             },
             "schwachlastfaehig": {
+              "description": "schwachlastfaehig",
               "x-nullable": true,
               "oneOf": [
                 {
@@ -951,12 +1055,16 @@
             },
             "verwendungszwecke": {
               "type": "array",
+              "description": "Verwendungungszweck der Werte Marktlokation",
               "x-nullable": true,
               "items": {
                 "$ref": "#/definitions/Verwendungszweck"
               }
             },
             "verbrauchsart": {
+              "description": "Stromverbrauchsart/Verbrauchsart Marktlokation",
+              "x-deprecated": true,
+              "x-deprecatedMessage": "Abgelöst durch 'Verbrauchsarten'. (Mehrere Verbrauchsarten möglich)",
               "x-nullable": true,
               "oneOf": [
                 {
@@ -965,6 +1073,7 @@
               ]
             },
             "unterbrechbarkeit": {
+              "description": "Stromverbrauchsart/Unterbrechbarkeit Marktlokation",
               "x-nullable": true,
               "oneOf": [
                 {
@@ -973,6 +1082,7 @@
               ]
             },
             "waermenutzung": {
+              "description": "Stromverbrauchsart/Wärmenutzung Marktlokation",
               "x-nullable": true,
               "oneOf": [
                 {
@@ -1021,15 +1131,25 @@
             },
             "konfiguration": {
               "type": "string",
+              "description": "Konfiguration (iMSys) des Zählwerks",
               "x-nullable": true
             },
             "emobilitaetsart": {
+              "description": "Art der E-Mobilität\nDas Segment dient dazu, im Falle der E-Mobilität eine genauere Angabe über die Art der E-Mobilität zu definieren.\nBeispiel: CAV+Z87'\n    ZE6: Wallbox: An der Marktlokation ist eine nicht öffentlliche Lademöglichkeit vorhanden\n    Z87: E-Mobilitätsladesäule: Es handelt sich um eine öffentliche Ladesäule mit ggf. mehreren Ladeanschlüssen an der Marktlokation.\n    ZE7: Ladepark: Es handelt sich um mehr als eine öffentliche Ladesäule an der Marktlokation",
               "x-nullable": true,
               "oneOf": [
                 {
                   "$ref": "#/definitions/EMobilitaetsart"
                 }
               ]
+            },
+            "Verbrauchsarten": {
+              "type": "array",
+              "description": "Verbrauchsarten Marktlokation",
+              "x-nullable": true,
+              "items": {
+                "$ref": "#/definitions/Verbrauchsart"
+              }
             }
           }
         }
@@ -1037,13 +1157,13 @@
     },
     "Energierichtung": {
       "type": "integer",
-      "description": "",
+      "description": "Spezifiziert die Energierichtung einer Markt- und/oder Messlokation.",
       "x-enumNames": ["AUSSP", "EINSP", "RUHEND", "KUNDENANLAGE"],
       "enum": [0, 1, 2, 3]
     },
     "Mengeneinheit": {
       "type": "integer",
-      "description": "",
+      "description": "Einheit: Messgrößen, die per Messung oder Vorgabe ermittelt werden können.\n            ",
       "x-enumNames": [
         "ZERO",
         "WH",
@@ -1056,6 +1176,9 @@
         "VAR",
         "VARH",
         "KWHK",
+        "W_M2",
+        "M_S",
+        "STUECK",
         "JAHR",
         "KWH",
         "MW",
@@ -1064,13 +1187,13 @@
         "MWH"
       ],
       "enum": [
-        0, 2, 3, 7, 11, 13, 17, 19, 23, 29, 40, 228, 2000, 3000, 23000, 29000,
-        2000000
+        0, 2, 3, 7, 11, 13, 17, 19, 23, 29, 40, 41, 42, 50, 228, 2000, 3000,
+        23000, 29000, 2000000
       ]
     },
     "Schwachlastfaehig": {
       "type": "integer",
-      "description": "",
+      "description": "Schwachlastfähigkeit Marktlokation",
       "x-enumNames": ["NICHT_SCHWACHLASTFAEHIG", "SCHWACHLASTFAEHIG"],
       "enum": [0, 1]
     },
@@ -1081,13 +1204,20 @@
         },
         {
           "type": "object",
+          "description": "Marktrolle\n            ",
           "additionalProperties": {},
           "properties": {
             "marktrolle": {
-              "$ref": "#/definitions/Marktrolle"
+              "description": "rollencodenummer von Marktrolle\n            ",
+              "oneOf": [
+                {
+                  "$ref": "#/definitions/Marktrolle"
+                }
+              ]
             },
             "zweck": {
               "type": "array",
+              "description": "code von Marktrolle\n            ",
               "x-nullable": true,
               "items": {
                 "$ref": "#/definitions/Verwendungszweck2"
@@ -1099,7 +1229,7 @@
     },
     "Marktrolle": {
       "type": "integer",
-      "description": "",
+      "description": "Diese Rollen kann ein Marktteilnehmer einnehmen.",
       "x-enumNames": [
         "NB",
         "LF",
@@ -1122,7 +1252,7 @@
     },
     "Verwendungszweck2": {
       "type": "integer",
-      "description": "",
+      "description": "Verwendungungszweck der Werte Marktlokation",
       "x-enumNames": [
         "NETZNUTZUNGSABRECHNUNG",
         "BILANZKREISABRECHNUNG",
@@ -1130,25 +1260,38 @@
         "ENDKUNDENABRECHNUNG",
         "BLINDARBEITABRECHNUNG_BETRIEBSFUEHRUNG",
         "UEBERMITTLUNG_AN_DAS_HKNR",
-        "ERMITTLUNG_AUSGEGLICHENHEIT_BILANZKREIS"
+        "ERMITTLUNG_AUSGEGLICHENHEIT_BILANZKREIS",
+        "SELBSTVERBRAUCH",
+        "ES_LIEGT_KEIN_VERWENDUNGSZWECK_VOR",
+        "KEINE_DATENLIEFERUNG_AN_MARKTROLLE"
       ],
-      "enum": [0, 1, 2, 3, 4, 5, 6]
+      "enum": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
     },
     "Verbrauchsart": {
       "type": "integer",
-      "description": "",
-      "x-enumNames": ["KL", "KLW", "KLWS", "W", "WS"],
-      "enum": [0, 1, 2, 3, 4]
+      "description": "Verbrauchsart einer Marktlokation.",
+      "x-enumNames": [
+        "KL",
+        "KLW",
+        "KLWS",
+        "W",
+        "WS",
+        "WK",
+        "EM",
+        "STRB",
+        "STW"
+      ],
+      "enum": [0, 1, 2, 3, 4, 5, 6, 7, 8]
     },
     "Unterbrechbarkeit": {
       "type": "integer",
-      "description": "",
+      "description": "Stromverbrauchsart/Unterbrechbarkeit Marktlokation",
       "x-enumNames": ["UV", "NUV"],
       "enum": [0, 1]
     },
     "Waermenutzung": {
       "type": "integer",
-      "description": "",
+      "description": "Stromverbrauchsart/Wärmenutzung Marktlokation",
       "x-enumNames": [
         "SPEICHERHEIZUNG",
         "WAERMEPUMPE",
@@ -1166,18 +1309,26 @@
         },
         {
           "type": "object",
+          "description": "Konzessionsabgabe\n            ",
           "additionalProperties": {},
           "properties": {
             "satz": {
-              "$ref": "#/definitions/AbgabeArt"
+              "description": "Art der Abgabe\n            ",
+              "oneOf": [
+                {
+                  "$ref": "#/definitions/AbgabeArt"
+                }
+              ]
             },
             "kosten": {
               "type": "number",
+              "description": "Konzessionsabgabe in E/kWh\n            ",
               "format": "decimal",
               "x-nullable": true
             },
             "kategorie": {
               "type": "string",
+              "description": "Gebührenkategorie der Konzessionsabgabe\n            ",
               "x-nullable": true
             }
           }
@@ -1186,7 +1337,7 @@
     },
     "AbgabeArt": {
       "type": "integer",
-      "description": "",
+      "description": "Schwachlastfähigkeit Marktlokation",
       "x-enumNames": [
         "KAS",
         "SA",
@@ -1207,17 +1358,21 @@
         },
         {
           "type": "object",
+          "description": "Ein Zählzeitregister beschreibt eine erweiterte Definition der Zählzeit in Bezug auf ein Register. Dabei werden alle Codes dazu vom Netzbetreiber vergeben.\n            ",
           "additionalProperties": {},
           "properties": {
             "zaehlzeitDefinition": {
               "type": "string",
+              "description": "Zählzeitdefinition\n            ",
               "x-nullable": true
             },
             "register": {
               "type": "string",
+              "description": "Zählzeitregister\n            ",
               "x-nullable": true
             },
             "schwachlastfaehig": {
+              "description": "Schwachlastfähigkeit des Registers\n            ",
               "x-nullable": true,
               "oneOf": [
                 {
@@ -1231,7 +1386,7 @@
     },
     "EMobilitaetsart": {
       "type": "integer",
-      "description": "",
+      "description": "Im Falle der E-Mobilität bei TechnischeRessourceNutzung, eine genauere Angabe über die Art der E-Mobilität zu definieren.",
       "x-enumNames": ["WALLBOX", "E_MOBILITAETSLADESAEULE", "LADEPARK"],
       "enum": [0, 1, 2]
     },
@@ -1242,9 +1397,11 @@
         },
         {
           "type": "object",
+          "description": "Mit diesem Objekt können Geschäftspartner übertragen werden. Sowohl\nUnternehmen, als auch Privatpersonen können Geschäftspartner sein.\n            ",
           "additionalProperties": {},
           "properties": {
             "anrede": {
+              "description": "Die Anrede für den GePa, Z.B. Herr. ",
               "x-nullable": true,
               "oneOf": [
                 {
@@ -1254,35 +1411,44 @@
             },
             "title": {
               "type": "string",
+              "description": "title of name\n            ",
               "x-deprecated": true,
               "x-deprecatedMessage": "Please use anrede instead or Ansprechpartner.individuelleAnrede",
-              "x-nullable": true
+              "x-nullable": true,
+              "x-example": "Dr."
             },
             "name1": {
               "type": "string",
+              "description": "Erster Teil des Namens. Hier kann der Firmenname oder bei Privatpersonen\nbeispielsweise der Nachname dargestellt werden. Beispiele: Yellow Strom GmbH\noder Hagen\n            ",
               "x-nullable": true
             },
             "name2": {
               "type": "string",
+              "description": "Zweiter Teil des Namens. Hier kann der eine Erweiterung zum Firmennamen oder\nbei Privatpersonen beispielsweise der Vorname dargestellt werden. Beispiele:\nBereich Süd oder Nina\n            ",
               "x-nullable": true
             },
             "name3": {
               "type": "string",
+              "description": "Dritter Teil des Namens. Hier können weitere Ergänzungen zum Firmennamen oder\nbei Privatpersonen Zusätze zum Namen dargestellt werden. Beispiele: und Afrika\noder Sängerin\n            ",
               "x-nullable": true
             },
             "gewerbekennzeichnung": {
-              "type": "boolean"
+              "type": "boolean",
+              "description": "Kennzeichnung ob es sich um einen Gewerbe/Unternehmen (gewerbeKennzeichnung = true)\noder eine Privatperson handelt. (gewerbeKennzeichnung = false)\n            "
             },
             "hrnummer": {
               "type": "string",
+              "description": "Handelsregisternummer des Geschäftspartners",
               "x-nullable": true
             },
             "amtsgericht": {
               "type": "string",
+              "description": "Amtsgericht bzw Handelsregistergericht, das die Handelsregisternummer herausgegeben hat",
               "x-nullable": true
             },
             "kontaktweg": {
               "type": "array",
+              "description": "Bevorzugter Kontaktweg des Geschäftspartners.",
               "x-nullable": true,
               "items": {
                 "$ref": "#/definitions/Kontaktart"
@@ -1290,28 +1456,34 @@
             },
             "umsatzsteuerId": {
               "type": "string",
+              "description": "Die Umsatzsteuer-ID des Geschäftspartners. Beispiel: DE 813281825",
               "x-nullable": true
             },
             "glaeubigerId": {
               "type": "string",
+              "description": "* Die Gläubiger-ID welche im Zahlungsverkehr verwendet wird- Z.B. DE 47116789",
               "x-nullable": true
             },
             "eMailAdresse": {
               "type": "string",
+              "description": "E-Mail-Adresse des Ansprechpartners. Z.B. info@mp-energie.de",
               "x-nullable": true
             },
             "website": {
               "type": "string",
+              "description": "Internetseite des Marktpartners. Beispiel: www.mp-energie.de",
               "x-nullable": true
             },
             "geschaeftspartnerrolle": {
               "type": "array",
+              "description": "Rolle, die der Geschäftspartner hat (z.B. Interessent, Kunde).",
               "x-nullable": true,
               "items": {
                 "$ref": "#/definitions/Geschaeftspartnerrolle"
               }
             },
             "partneradresse": {
+              "description": "Adresse des Geschäftspartners, an der sich der Hauptsitz befindet. Details \n            ",
               "x-nullable": true,
               "oneOf": [
                 {
@@ -1320,6 +1492,7 @@
               ]
             },
             "grundlageZurVerringerungDerUmlagenNachEnfg": {
+              "description": "Grundlage zur Verringerung der Umlagen nach EnFG",
               "x-nullable": true,
               "oneOf": [
                 {
@@ -1329,12 +1502,14 @@
             },
             "gruendeDerPrivilegierungNachEnFG": {
               "type": "array",
+              "description": "Gründe der Privilegierung nach EnFG",
               "x-nullable": true,
               "items": {
                 "$ref": "#/definitions/GrundDerPrivilegierungNachEnFG"
               }
             },
             "bankverbindung": {
+              "description": "Bankverbindung",
               "x-nullable": true,
               "oneOf": [
                 {
@@ -1344,9 +1519,11 @@
             },
             "steuernummer": {
               "type": "string",
+              "description": "Die Steuernummer-ID des Geschäftspartners. Beispiel: 30120345678",
               "x-nullable": true
             },
             "erreichbarkeit": {
+              "description": "Die Erreichbarkeit eines Unternehmens an Werktagen.",
               "x-nullable": true,
               "oneOf": [
                 {
@@ -1360,7 +1537,7 @@
     },
     "Anrede": {
       "type": "integer",
-      "description": "",
+      "description": "Übersicht möglicher Anreden, z.B. eines Geschäftspartners.",
       "x-enumNames": [
         "HERR",
         "FRAU",
@@ -1377,13 +1554,13 @@
     },
     "Kontaktart": {
       "type": "integer",
-      "description": "",
+      "description": "Art des Kontaktes zwischen Geschäftspartnern.",
       "x-enumNames": ["ANSCHREIBEN", "TELEFONAT", "FAX", "E_MAIL", "SMS"],
       "enum": [0, 1, 2, 3, 4]
     },
     "Geschaeftspartnerrolle": {
       "type": "integer",
-      "description": "",
+      "description": "Diese Rollen kann ein Geschäftspartner einnehmen.",
       "x-enumNames": [
         "LIEFERANT",
         "DIENSTLEISTER",
@@ -1395,7 +1572,7 @@
     },
     "GrundlageZurVerringerungDerUmlagenNachEnfg": {
       "type": "integer",
-      "description": "",
+      "description": "Grundlage zur Verringerung der Umlagen nach EnFG (UTILMD Strom)",
       "x-enumNames": [
         "KUNDE_ERFUELLT_VORAUSSETZUNG",
         "KUNDE_ERFUELLT_VORAUSSETZUNG_NICHT",
@@ -1405,7 +1582,7 @@
     },
     "GrundDerPrivilegierungNachEnFG": {
       "type": "integer",
-      "description": "",
+      "description": "Grund der Privilegierung nach EnFG (UTILMD Strom)",
       "x-enumNames": [
         "STROMSPEICHER_UND_VERLUSTENERGIE",
         "ELEKTRISCH_ANGETRIEBENE_WAERMEPUMPEN",
@@ -1426,22 +1603,27 @@
         },
         {
           "type": "object",
+          "description": "Enthält eine Bankverbindung",
           "additionalProperties": {},
           "properties": {
             "iban": {
               "type": "string",
+              "description": "IBAN",
               "x-nullable": true
             },
             "kontoinhaber": {
               "type": "string",
+              "description": "Der kontoinhaber",
               "x-nullable": true
             },
             "bankkennung": {
               "type": "string",
+              "description": "Die Bankkennung, BIC",
               "x-nullable": true
             },
             "bankname": {
               "type": "string",
+              "description": "Der Bankname",
               "x-nullable": true
             }
           }
@@ -1455,9 +1637,11 @@
         },
         {
           "type": "object",
+          "description": "Die Erreichbarkeit eines Unternehmens an Werktagen.",
           "additionalProperties": {},
           "properties": {
             "montagErreichbarkeit": {
+              "description": "Erreichbarkeit am Montag",
               "x-nullable": true,
               "oneOf": [
                 {
@@ -1466,6 +1650,7 @@
               ]
             },
             "dienstagErreichbarkeit": {
+              "description": "Erreichbarkeit am Dienstag",
               "x-nullable": true,
               "oneOf": [
                 {
@@ -1474,6 +1659,7 @@
               ]
             },
             "mittwochErreichbarkeit": {
+              "description": "Erreichbarkeit am Mittwoch",
               "x-nullable": true,
               "oneOf": [
                 {
@@ -1482,6 +1668,7 @@
               ]
             },
             "donnerstagErreichbarkeit": {
+              "description": "Erreichbarkeit am Donnerstag",
               "x-nullable": true,
               "oneOf": [
                 {
@@ -1490,6 +1677,7 @@
               ]
             },
             "freitagErreichbarkeit": {
+              "description": "Erreichbarkeit am Freitag",
               "x-nullable": true,
               "oneOf": [
                 {
@@ -1498,6 +1686,7 @@
               ]
             },
             "mittagspause": {
+              "description": "Mittagspause (Ausschluss der Erreichbarkeit)",
               "x-nullable": true,
               "oneOf": [
                 {
@@ -1516,15 +1705,18 @@
         },
         {
           "type": "object",
+          "description": "Ein Zeitfenster mit Start- und Endzeiten mit TimeOnly als Typ.",
           "additionalProperties": {},
           "properties": {
             "startzeit": {
               "type": "string",
+              "description": "inklusive Startzeit; z.B. 8 Uhr",
               "format": "time",
               "x-nullable": true
             },
             "endzeit": {
               "type": "string",
+              "description": "exklusive Endzeit (z.B. 17:00 Uhr)",
               "format": "time",
               "x-nullable": true
             }
@@ -1534,27 +1726,35 @@
     },
     "BusinessObject": {
       "type": "object",
+      "description": "General abstract class for Business Objects for Energy (BO4E)\n            ",
       "x-abstract": true,
       "additionalProperties": {},
       "properties": {
+        "guidSerialized": {
+          "type": "string",
+          "description": "protobuf serilization requires the Guid as string.\n            "
+        },
         "boTyp": {
           "type": "string",
-          "x-nullable": true
+          "description": "obligatory type of the business object in UPPER CASE\n            ",
+          "x-nullable": true,
+          "x-example": "'MESSLOKATION',\n'MARKTLOKATION'\n            "
         },
         "versionStruktur": {
           "type": "string",
-          "x-nullable": true
-        },
-        "guidSerialized": {
-          "type": "string"
+          "description": "obligatory version of the BO4E definition. Currently hard coded to 1\n            ",
+          "x-nullable": true,
+          "x-example": 1
         },
         "timestamp": {
           "type": "string",
+          "description": "Store the latest database update, is Datetime, because postgres doesn't handle datetimeoffset in a generated column\ngracefully\n            ",
           "format": "date-time",
           "x-nullable": true
         },
         "externeReferenzen": {
           "type": "array",
+          "description": "Hier können IDs anderer Systeme hinterlegt werden (z.B. eine SAP-GP-Nummer) (Details siehe\nExterneReferenz)\n            ",
           "x-nullable": true,
           "items": {
             "$ref": "#/definitions/ExterneReferenz"
@@ -1562,10 +1762,12 @@
         },
         "guid": {
           "type": "string",
+          "description": "allows adding a GUID to Business Objects for tracking across systems\n            ",
           "format": "guid",
           "x-nullable": true
         },
         "gueltigkeitszeitraum": {
+          "description": "Defines the validity of a business object in terms of time (maybe multiple versions exist).\nBackground: German market communication requires for master data changes starting 03.04.2025 that business objects are ordered and aggregated by validity (in terms of time).\nTo easily group data based on this data a new zeitraum is introduced as an optional field in all business objects.\n            ",
           "x-nullable": true,
           "oneOf": [
             {
@@ -1574,6 +1776,7 @@
           ]
         },
         "qualitaet": {
+          "description": "Defines a level of data quality that is attached to the business object, this can have multiple origins, you could specify a version as draft or uncomplete if this is in the state of creation.\nAnother requirement is coming from german market communictation where business objects of different quality levels need to be grouped.\n            ",
           "x-nullable": true,
           "oneOf": [
             {
@@ -1590,14 +1793,17 @@
         },
         {
           "type": "object",
+          "description": "Viele Datenobjekte weisen in unterschiedlichen Systemen eine eindeutige ID (Kundennummer, GP-Nummer etc.) auf.\nBeim Austausch von Datenobjekten zwischen verschiedenen Systemen ist es daher hilfreich, sich die eindeutigen IDs\nder anzubindenden Systeme zu merken.\nDiese Komponente ermöglicht es, sich die SAP GP-Nummer zu merken, um diese bei SAP-Aufrufen als Parameter mitgeben\nzu können.\n            ",
           "additionalProperties": {},
           "properties": {
             "exRefName": {
               "type": "string",
+              "description": "Bezeichnung der externen Referenz (z.B. \"hochfrequenz integration services\")\n            ",
               "x-nullable": true
             },
             "exRefWert": {
               "type": "string",
+              "description": "Wert der externen Referenz (z.B. \"123456\"; \"4711\")\n            ",
               "x-nullable": true
             }
           }
@@ -1611,9 +1817,11 @@
         },
         {
           "type": "object",
+          "description": "Diese Komponente wird zur Abbildung von Zeiträumen in Form von Dauern oder der Angabe von Start und Ende\nverwendet.\n            ",
           "additionalProperties": {},
           "properties": {
             "einheit": {
+              "description": "Die Einheit in der die Dauer angeben ist. Z.B. Monate. ",
               "x-nullable": true,
               "oneOf": [
                 {
@@ -1623,26 +1831,31 @@
             },
             "dauer": {
               "type": "number",
+              "description": "Gibt die Anzahl der Zeiteinheiten an, z.B. 3 (Monate).",
               "format": "decimal",
               "x-nullable": true
             },
             "startdatum": {
               "type": "string",
+              "description": "Gibt Tag und Uhrzeit (falls vorhanden) an, wann der Zeitraum startet.",
               "format": "date-time",
               "x-nullable": true
             },
             "enddatum": {
               "type": "string",
+              "description": "Gibt Tag und Uhrzeit (falls vorhanden) an, wann der Zeitraum endet.",
               "format": "date-time",
               "x-nullable": true
             },
             "startzeitpunkt": {
               "type": "string",
+              "description": "The same value as Startdatum",
               "format": "date-time",
               "x-nullable": true
             },
             "endzeitpunkt": {
               "type": "string",
+              "description": "The same value as Enddatum",
               "format": "date-time",
               "x-nullable": true
             }
@@ -1652,7 +1865,7 @@
     },
     "Zeiteinheit": {
       "type": "integer",
-      "description": "",
+      "description": "Auflistung möglicher Einheiten zur Verwendung in zeitbezogenen Angaben.",
       "x-enumNames": [
         "SEKUNDE",
         "MINUTE",
@@ -1669,7 +1882,7 @@
     },
     "Qualitaet": {
       "type": "integer",
-      "description": "",
+      "description": "Qualitätsstufen eines Business-Objektes, v.a. aus Sicht Marktkommunikation ",
       "x-enumNames": [
         "VOLLSTAENDIG",
         "INFORMATIV",
@@ -1682,19 +1895,19 @@
     },
     "Fernschaltung": {
       "type": "integer",
-      "description": "",
+      "description": "Fernschaltung",
       "x-enumNames": ["VORHANDEN", "NICHT_VORHANDEN"],
       "enum": [0, 1]
     },
     "Messwerterfassung": {
       "type": "integer",
-      "description": "",
+      "description": "Messwerterfassung",
       "x-enumNames": ["FERNAUSLESBAR", "MANUELL_AUSGELESENE"],
       "enum": [0, 1]
     },
     "ZaehlertypSpezifikation": {
       "type": "integer",
-      "description": "",
+      "description": "Bei diesem Enum handelt es sich die Abbildung von Zählertypen der Sparten Strom und Gas.\n            ",
       "x-enumNames": [
         "EDL40",
         "EDL21",
@@ -1706,7 +1919,7 @@
     },
     "Befestigungsart": {
       "type": "integer",
-      "description": "",
+      "description": "Befestigungsart",
       "x-enumNames": [
         "STECKTECHNIK",
         "DREIPUNKT",
@@ -1723,13 +1936,16 @@
         },
         {
           "type": "object",
+          "description": "Mit dieser Komponente werden alle Geräte modelliert, die keine Zähler sind.",
           "additionalProperties": {},
           "properties": {
             "geraetenummer": {
               "type": "string",
+              "description": "Die auf dem Geräte aufgedruckte Nummer, die vom MSB vergeben wird.",
               "x-nullable": true
             },
             "geraeteeigenschaften": {
+              "description": "Festlegung der Eigenschaften des Gerätes. Z.B. Wandler MS/NS. Details\nGeraeteeigenschaften\n            ",
               "x-nullable": true,
               "oneOf": [
                 {
@@ -1738,12 +1954,18 @@
               ]
             },
             "geraeteart": {
+              "description": "Festlegung der Art des Gerätes. Z.B. ZAEHLEINRICHTUNG\nGeraeteart\n            ",
               "x-nullable": true,
               "oneOf": [
                 {
                   "$ref": "#/definitions/Geraeteart"
                 }
               ]
+            },
+            "positionsnummer": {
+              "type": "string",
+              "description": "vorgegebene Positionsnummer innerhalb einer Anforderung",
+              "x-nullable": true
             }
           }
         }
@@ -1751,7 +1973,7 @@
     },
     "Geraeteart": {
       "type": "integer",
-      "description": "",
+      "description": "Auflistung möglicher Geraetearten. This is more broadly defined as a Geraetetyp, so a Zaehleinrichtung as Gerateart could be a elektronischer Haushaltszähler as a Gerätetyp.",
       "x-enumNames": [
         "WANDLER",
         "KOMMUNIKATIONSEINRICHTUNG",
@@ -1763,9 +1985,15 @@
       ],
       "enum": [0, 1, 2, 3, 4, 5, 6]
     },
+    "ArtVolumenerfassung": {
+      "type": "integer",
+      "description": "Auflistung möglicher Arten der Volumenerfassung (bzgl. Mengenumwerter)",
+      "x-enumNames": ["KENNLINIENKORREKTUR", "SCHLEICHMENGENUNTERDRÜCKUNG"],
+      "enum": [0, 1]
+    },
     "Bilanzierungsmethode": {
       "type": "integer",
-      "description": "",
+      "description": "Mit dieser Aufzählung kann zwischen den Bilanzierungsmethoden bzw. -Grundlagen unterschieden werden.",
       "x-enumNames": [
         "RLM",
         "SLP",
@@ -1783,17 +2011,21 @@
         },
         {
           "type": "object",
+          "description": "Used in Marktlokation and Messlokation to represent data about MSB",
           "additionalProperties": {},
           "properties": {
             "rollencodenummer": {
               "type": "string",
+              "description": "Rollencodenummer von Marktrolle",
               "x-nullable": true
             },
             "code": {
               "type": "string",
+              "description": "Code von Marktrolle",
               "x-nullable": true
             },
             "marktrolle": {
+              "description": "Marktrolle. Details siehe Marktrolle",
               "x-nullable": true,
               "oneOf": [
                 {
@@ -1803,6 +2035,7 @@
             },
             "weiterverpflichtet": {
               "type": "boolean",
+              "description": "Weiterverpflichtung des MSB />",
               "x-nullable": true
             }
           }
@@ -1811,13 +2044,13 @@
     },
     "Gasqualitaet": {
       "type": "integer",
-      "description": "",
+      "description": "Unterscheidung für hoch- und niedrig-kalorisches Gas.",
       "x-enumNames": ["ZERO", "H_GAS", "L_GAS"],
       "enum": [0, 1, 2]
     },
     "Betriebszustand": {
       "type": "integer",
-      "description": "",
+      "description": "Betriebszustand der Messlokation",
       "x-enumNames": ["GESPERRT_NICHT_ENTSPERREN", "GESPERRT", "REGELBETRIEB"],
       "enum": [0, 1, 2]
     },
@@ -1828,20 +2061,24 @@
         },
         {
           "type": "object",
+          "description": "Mit dieser Komponente werden Messprodukte (an Melo und Malo) modelliert.",
           "additionalProperties": {},
           "properties": {
             "messproduktId": {
               "type": "string",
+              "description": "Identifikation des Messproduktes\nZ.B. 9991000000151\n            ",
               "x-nullable": true
             },
             "verwendungszwecke": {
               "type": "array",
+              "description": "Verwendungungszweck der Werte Marktlokation",
               "x-nullable": true,
               "items": {
                 "$ref": "#/definitions/Verwendungszweck"
               }
             },
             "verbrauchsart": {
+              "description": "Stromverbrauchsart/Verbrauchsart Marktlokation",
               "x-nullable": true,
               "oneOf": [
                 {
@@ -1850,6 +2087,7 @@
               ]
             },
             "unterbrechbarkeit": {
+              "description": "Stromverbrauchsart/Unterbrechbarkeit Marktlokation",
               "x-nullable": true,
               "oneOf": [
                 {
@@ -1858,6 +2096,7 @@
               ]
             },
             "waermenutzung": {
+              "description": "Stromverbrauchsart/Wärmenutzung Marktlokation",
               "x-nullable": true,
               "oneOf": [
                 {
@@ -1866,6 +2105,7 @@
               ]
             },
             "zaehlzeiten": {
+              "description": "Zählzeiten des Messproduktes",
               "x-nullable": true,
               "oneOf": [
                 {
@@ -1875,13 +2115,16 @@
             },
             "zweiteMessung": {
               "type": "boolean",
+              "description": "zweite Messung erforderlich",
               "x-nullable": true
             },
             "werteuebermittlungAnNB": {
               "type": "boolean",
+              "description": "Werden die Werte an den Netzbetreiber übermittelt?",
               "x-nullable": true
             },
             "emobilitaetsart": {
+              "description": "Art der E-Mobilität\nDas Segment dient dazu, im Falle der E-Mobilität eine genauere Angabe über die Art der E-Mobilität zu definieren.\nBeispiel: CAV+Z87'\n    ZE6: Wallbox: An der Marktlokation ist eine nicht öffentlliche Lademöglichkeit vorhanden\n    Z87: E-Mobilitätsladesäule: Es handelt sich um eine öffentliche Ladesäule mit ggf. mehreren Ladeanschlüssen an der Marktlokation.\n    ZE7: Ladepark: Es handelt sich um mehr als eine öffentliche Ladesäule an der Marktlokation",
               "x-nullable": true,
               "oneOf": [
                 {
@@ -1892,6 +2135,40 @@
           }
         }
       ]
+    },
+    "LokationsTypZuordnung": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/COM"
+        },
+        {
+          "type": "object",
+          "description": "ordnet beliebigen einer Lokations-ID einen Lokationstyp zu",
+          "additionalProperties": {},
+          "properties": {
+            "lokationstyp": {
+              "description": "Lokationstyp",
+              "x-nullable": true,
+              "oneOf": [
+                {
+                  "$ref": "#/definitions/Lokationstyp"
+                }
+              ]
+            },
+            "lokationsId": {
+              "type": "string",
+              "description": "Wert, der einem Lokationstyp zugeordnet werden soll #TODO: generischer? (für andere zur Verfügung stellen)",
+              "x-nullable": true
+            }
+          }
+        }
+      ]
+    },
+    "Lokationstyp": {
+      "type": "integer",
+      "description": "Gibt an, ob es sich um eine Markt- oder Messlokation handelt.",
+      "x-enumNames": ["MALO", "MELO", "NELO", "SR", "TR"],
+      "enum": [0, 1, 2, 3, 4]
     }
   },
   "allOf": [
@@ -1900,16 +2177,25 @@
     },
     {
       "type": "object",
+      "description": "Objekt zur Aufnahme der Informationen zu einer Messlokation.\n            ",
       "additionalProperties": {},
       "properties": {
         "messlokationsId": {
           "type": "string",
-          "default": "|null|"
+          "description": "Die Messlokations-Identifikation. Das ist die frühere Zählpunktbezeichnung,\nz.B. DE 47108151234567\n            ",
+          "default": "|null|",
+          "x-nullable": true
         },
         "sparte": {
-          "$ref": "#/definitions/Sparte"
+          "description": "* Sparte der Messlokation, z.B. Gas oder Strom.\n\n            ",
+          "oneOf": [
+            {
+              "$ref": "#/definitions/Sparte"
+            }
+          ]
         },
         "netzebeneMessung": {
+          "description": "Spannungsebene der Messung. ",
           "x-nullable": true,
           "oneOf": [
             {
@@ -1919,23 +2205,28 @@
         },
         "messgebietNr": {
           "type": "string",
+          "description": "Die Nummer des Messgebietes in der ene't-Datenbank.",
           "x-nullable": true
         },
         "grundzustaendigerMSBCodeNr": {
           "type": "string",
+          "description": "Codenummer des grundzuständigen Messstellenbetreibers, der für diese\nMesslokation zuständig ist.( Dieser ist immer dann Messstellenbetreiber, wenn\nkein anderer MSB die Einrichtungen an der Messlokation betreibt.)\n            ",
           "x-nullable": true
         },
         "grundzustaendigerMSBIMCodeNr": {
           "type": "string",
+          "description": "Codenummer des grundzuständigen Messstellenbetreibers für intelligente\nMesssysteme der für diese Messlokation zuständig ist.(Dieser ist immer dann\nMessstellenbetreiber, wenn kein anderer MSB die Einrichtungen an der\nMesslokation betreibt.)\n            ",
           "x-nullable": true
         },
         "grundzustaendigerMDLCodeNr": {
           "type": "string",
+          "description": "Codenummer des Messdienstleisters, der für diese Messlokation zuständig\nist.( Dieser ist immer dann Messdienstleister, wenn kein anderer MDL die\nMesslokation abliest.)\n            ",
           "x-deprecated": true,
           "x-deprecatedMessage": "MDL is deprecated.",
           "x-nullable": true
         },
         "messadresse": {
+          "description": "Die Adresse, an der die Messeinrichtungen zu finden sind.( Nur angeben, wenn\ndiese von der Adresse der Marktlokation abweicht.)\nAchtung: Es darf immer nur eine Art der Ortsangabe vorhanden sein (entweder\neine Adresse oder eine GeoKoordinate oder eine Katasteradresse.\n            ",
           "x-nullable": true,
           "oneOf": [
             {
@@ -1944,6 +2235,7 @@
           ]
         },
         "geoadresse": {
+          "description": "Alternativ zu einer postalischen Adresse kann hier ein Ort mittels\nGeokoordinaten angegeben werden (z.B. zur Identifikation von Sendemasten).\nAchtung: Es darf immer nur eine Art der Ortsangabe vorhanden sein (entweder\neine Adresse oder eine GeoKoordinate oder eine Katasteradresse.\n            ",
           "x-nullable": true,
           "oneOf": [
             {
@@ -1952,6 +2244,7 @@
           ]
         },
         "katasterinformation": {
+          "description": "Alternativ zu einer postalischen Adresse und Geokoordinaten kann hier eine\nOrtsangabe mittels Gemarkung und Flurstück erfolgen.\nAchtung: Es darf immer nur eine Art der Ortsangabe vorhanden sein (entweder\neine Adresse oder eine GeoKoordinate oder eine Katasteradresse.\n            ",
           "x-nullable": true,
           "oneOf": [
             {
@@ -1961,6 +2254,7 @@
         },
         "geraete": {
           "type": "array",
+          "description": "Liste der Hardware, die zu dieser Messstelle gehört.",
           "x-nullable": true,
           "items": {
             "$ref": "#/definitions/Hardware"
@@ -1968,6 +2262,7 @@
         },
         "messdienstleistung": {
           "type": "array",
+          "description": "Liste der Messdienstleistungen, die zu dieser Messstelle gehört.",
           "x-nullable": true,
           "items": {
             "$ref": "#/definitions/Dienstleistung"
@@ -1975,12 +2270,14 @@
         },
         "messlokationszaehler": {
           "type": "array",
+          "description": "Zähler, die zu dieser Messlokation gehören. Details",
           "x-nullable": true,
           "items": {
             "$ref": "#/definitions/Zaehler"
           }
         },
         "bilanzierungsmethode": {
+          "description": "Bilanzierungsmethode\n            ",
           "x-nullable": true,
           "oneOf": [
             {
@@ -1990,16 +2287,19 @@
         },
         "abrechnungmessstellenbetriebnna": {
           "type": "boolean",
+          "description": "Dieser Wert ist true, falls die Abrechnungs des Messstellenbetriebs die Netznutzungsabrechnung enthält. false\nandernfalls\n            ",
           "x-nullable": true
         },
         "marktrollen": {
           "type": "array",
+          "description": "marktrollen für EDIFACT mapping\n            ",
           "x-nullable": true,
           "items": {
             "$ref": "#/definitions/MarktpartnerDetails"
           }
         },
         "gasqualitaet": {
+          "description": "gasqualitaet für EDIFACT mapping\n            ",
           "x-nullable": true,
           "oneOf": [
             {
@@ -2009,17 +2309,20 @@
         },
         "verlustfaktor": {
           "type": "number",
+          "description": "verlustfaktor für EDIFACT mapping\n            ",
           "format": "decimal",
           "x-nullable": true
         },
         "zaehlwerke": {
           "type": "array",
+          "description": "OBIS-Daten der Messlokation\n            ",
           "x-nullable": true,
           "items": {
             "$ref": "#/definitions/Zaehlwerk"
           }
         },
         "betriebszustand": {
+          "description": "gasqualitaet für EDIFACT mapping\n            ",
           "x-nullable": true,
           "oneOf": [
             {
@@ -2029,6 +2332,7 @@
         },
         "messprodukte": {
           "type": "array",
+          "description": "Zugeordnete Messprodukte\n            ",
           "x-nullable": true,
           "items": {
             "$ref": "#/definitions/Messprodukt"
@@ -2036,11 +2340,28 @@
         },
         "lokationsbuendelObjektcode": {
           "type": "string",
+          "description": "Lokationsbuendel Code, der die Funktion dieses BOs an der Lokationsbuendelstruktur beschreibt.",
           "x-nullable": true
         },
         "vorgelagerteLokationsId": {
           "type": "string",
+          "description": "Enthält die ID der vorgelagerten Lokation. Kann IDs unterschiedlicher Lokationen enthalten, also zum Beispiel\neiner Messlokation oder Netzlokation",
+          "x-deprecated": true,
+          "x-deprecatedMessage": "Abgelöst durch 'VorgelagerteLokationsIds'.",
           "x-nullable": true
+        },
+        "istFuerLieferanmeldungRelevant": {
+          "type": "boolean",
+          "description": "Behelfs-Flag das anzeigt, ob eine Messlokation für die Lieferanmeldung relevant ist (true).",
+          "x-nullable": true
+        },
+        "vorgelagerteLokationsIds": {
+          "type": "array",
+          "description": "Enthält die ID's der vorgelagerten Lokationen. Kann IDs unterschiedlicher Lokationen enthalten, also zum Beispiel\neiner Messlokation oder Netzlokation",
+          "x-nullable": true,
+          "items": {
+            "$ref": "#/definitions/LokationsTypZuordnung"
+          }
         }
       }
     }

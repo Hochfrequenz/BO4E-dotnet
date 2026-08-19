@@ -1,94 +1,84 @@
 {
   "$schema": "http://json-schema.org/draft-04/schema#",
-  "title": "Handelsunstimmigkeit",
+  "title": "Avis",
   "definitions": {
-    "Handelsunstimmigkeitstyp": {
+    "AvisTyp": {
       "type": "integer",
-      "description": "Gibt den Typ der Handelsunstimmigkeit an (COMDIS DOC 1001)",
-      "x-enumNames": [
-        "HANDELSRECHNUNG",
-        "LIEFERSCHEIN_HANDELSUNSTIMMIGKEITSTYP",
-        "LIEFERSCHEIN_GRUND_ARBEITSPREIS",
-        "LIEFERSCHEIN_ARBEITS_LEISTUNGSPREIS"
-      ],
-      "enum": [0, 1, 2, 3]
+      "description": "Gibt den Typ des Avis an. (REMADV BGM 1001)",
+      "x-enumNames": ["ABGELEHNTE_FORDERUNG", "ZAHLUNGSAVIS"],
+      "enum": [0, 1]
     },
-    "Handelsunstimmigkeitsbegruendung": {
+    "Avisposition": {
       "allOf": [
         {
           "$ref": "#/definitions/COM"
         },
         {
           "type": "object",
-          "description": "Begründung der Korrektheit der Rechnung oder des Lieferscheins (COMDIS SG3 AJT)",
+          "description": "Die Positionen eines Avis.",
           "additionalProperties": {},
           "properties": {
-            "referenzen": {
-              "type": "array",
-              "description": "Referenzen auf vorherige Nachrichten",
-              "x-nullable": true,
-              "items": {
-                "type": "string"
-              }
+            "rechnungsNummer": {
+              "type": "string",
+              "description": "Die Rechnungsnummer der Rechnung, auf die sich das Avis bezieht.",
+              "x-nullable": true
             },
-            "grund": {
-              "description": "Angabe des Handelsunstimmigkeitsgrunds",
+            "rechnungsDatum": {
+              "type": "string",
+              "description": "Das Rechnungsdatum der Rechnung, auf die sich das Avis bezieht.",
+              "format": "date-time"
+            },
+            "istStorno": {
+              "type": "boolean",
+              "description": "Kennzeichnung, ob es sich bei der Rechnung auf die sich das Avis bezieht, um eine Stornorechnung handelt."
+            },
+            "istSelbstausgestellt": {
+              "type": "boolean",
+              "description": "Kennzeichnung, ob es sich bei der Rechnung auf die sich das Avis bezieht, um eine Stornorechnung handelt.",
+              "x-nullable": true
+            },
+            "gesamtBrutto": {
+              "description": "Überweisungsbetrag",
               "x-nullable": true,
               "oneOf": [
                 {
-                  "$ref": "#/definitions/Handelsunstimmigkeitsgrund"
+                  "$ref": "#/definitions/Betrag"
                 }
               ]
+            },
+            "zuZahlen": {
+              "description": "Geforderter Rechnungsbetrag",
+              "x-nullable": true,
+              "oneOf": [
+                {
+                  "$ref": "#/definitions/Betrag"
+                }
+              ]
+            },
+            "referenz": {
+              "type": "string",
+              "description": "Referenzierung auf eine vorherige COMDIS-Nachricht",
+              "x-nullable": true
+            },
+            "abweichungen": {
+              "type": "array",
+              "description": "Abweichungen bei Ablehnung einer COMDIS",
+              "x-nullable": true,
+              "items": {
+                "$ref": "#/definitions/Abweichung"
+              }
+            },
+            "positionen": {
+              "type": "array",
+              "description": "Rückmeldungspositionen",
+              "x-nullable": true,
+              "items": {
+                "$ref": "#/definitions/Rueckmeldungsposition"
+              }
             }
           }
         }
       ]
-    },
-    "Handelsunstimmigkeitsgrund": {
-      "type": "integer",
-      "description": "Begründung der Korrektheit der Rechnung oder des Lieferscheins (COMDIS SG3 AJT 4465)",
-      "x-enumNames": [
-        "ANMELDUNG_BESTAETIGT",
-        "ABRECHNUNGSBEGINN_GLEICH_BESTAETIGTEM_VERTRAGSBEGINN",
-        "ABRECHNUNGSENDE_GLEICH_BESTAETIGTEM_VERTRAGSENDE",
-        "NN_MSCONS_UEBERSENDET",
-        "RICHTIGE_MESSWERTE_ENERGIEMENGEN_UEBERSENDET",
-        "SONSTIGES_SIEHE_BEGRUENDUNG",
-        "GUELTIGES_PREISBLATT_VERSENDET",
-        "GUELTIGER_SPERRAUFTRAG_VORHANDEN",
-        "KORREKTE_ARTIKEL_ID_IN_RECHNUNG",
-        "KORREKTER_PREIS_ZU_GUELTIGEM_PREISBLATT_IN_RECHNUNG",
-        "GUELTIGES_PREISBLATT_FRISTGERECHT_VERSENDET",
-        "GUELTIGE_RECHNUNG_VORHANDEN",
-        "KORREKTER_PREIS_IN_RECHNUNG_ABGERECHNET",
-        "GUELTIGES_PREISBLATT_BLINDARBEIT_VERSENDET",
-        "KORREKTE_ARTIKEL_ID_FUER_ABRECHNUNG_STORNIERTER_SPERRAUFTRAG_ANGEGEBEN"
-      ],
-      "enum": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14]
-    },
-    "COM": {
-      "type": "object",
-      "description": "The COM class is the abstract class from which all BO4E.COM classes are derived.\n            ",
-      "x-abstract": true,
-      "additionalProperties": {},
-      "properties": {
-        "guidSerialized": {
-          "type": "string",
-          "x-nullable": true
-        },
-        "timestamp": {
-          "type": "string",
-          "description": "Store the latest timestamp (update from the database)\n            ",
-          "format": "date-time",
-          "x-nullable": true
-        },
-        "guid": {
-          "type": "string",
-          "description": "allows adding a GUID to COM objects for tracking across systems\n            ",
-          "format": "guid",
-          "x-nullable": true
-        }
-      }
     },
     "Betrag": {
       "allOf": [
@@ -318,6 +308,192 @@
         178, 179, 180
       ]
     },
+    "COM": {
+      "type": "object",
+      "description": "The COM class is the abstract class from which all BO4E.COM classes are derived.\n            ",
+      "x-abstract": true,
+      "additionalProperties": {},
+      "properties": {
+        "guidSerialized": {
+          "type": "string",
+          "x-nullable": true
+        },
+        "timestamp": {
+          "type": "string",
+          "description": "Store the latest timestamp (update from the database)\n            ",
+          "format": "date-time",
+          "x-nullable": true
+        },
+        "guid": {
+          "type": "string",
+          "description": "allows adding a GUID to COM objects for tracking across systems\n            ",
+          "format": "guid",
+          "x-nullable": true
+        }
+      }
+    },
+    "Abweichung": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/COM"
+        },
+        {
+          "type": "object",
+          "description": "Zur Angabe einer Abweichung bei Ablehnung einer COMDIS. (REMADV SG5 RFF und SG7 AJT/FTX)",
+          "additionalProperties": {},
+          "properties": {
+            "abweichungsgrund": {
+              "description": "Angabe des Abweichungsgrunds",
+              "x-nullable": true,
+              "oneOf": [
+                {
+                  "$ref": "#/definitions/Abweichungsgrund"
+                }
+              ]
+            },
+            "abweichungsgrundBemerkung": {
+              "type": "string",
+              "description": "Nähere Erläuterung zum Abweichungsgrund",
+              "x-nullable": true
+            },
+            "zugehoerigeRechnung": {
+              "type": "string",
+              "description": "Zugehörige Rechnung",
+              "x-nullable": true
+            },
+            "abschlagsrechnungen": {
+              "type": "array",
+              "description": "Abschlagsrechnungen",
+              "x-nullable": true,
+              "items": {
+                "type": "string"
+              }
+            },
+            "abweichungsgrundCode": {
+              "type": "string",
+              "description": "Angabe des Abweichungsgrunds (Code)",
+              "x-nullable": true
+            },
+            "abweichungsgrundCodeliste": {
+              "type": "string",
+              "description": "Angabe des Abweichungsgrunds (Code)",
+              "x-nullable": true
+            }
+          }
+        }
+      ]
+    },
+    "Abweichungsgrund": {
+      "type": "integer",
+      "description": "Gibt einen Abweichungsgrund bei Ablehung einer COMDIS an. (REMADV SG7 AJT 4465)",
+      "x-enumNames": [
+        "PREIS_RECHENREGEL_FALSCH",
+        "FALSCHER_ABRECHNUNGSZEITRAUM",
+        "UNBEKANNTE_MARKTLOKATION_MESSLOKATION",
+        "SONSTIGER_ABWEICHUNGSGRUND",
+        "DOPPELTE_RECHNUNG",
+        "ABRECHNUNGSBEGINN_UNGLEICH_VERTRAGSBEGINN",
+        "ABRECHNUNGSENDE_UNGLEICH_VERTRAGSENDE",
+        "BETRAG_DER_ABSCHLAGSRECHNUNG_FALSCH",
+        "VORAUSBEZAHLTER_BETRAG_FALSCH",
+        "ARTIKEL_NICHT_VEREINBART",
+        "NETZNUTZUNGSMESSWERTE_ENERGIEMENGEN_FEHLEN",
+        "RECHNUNGSNUMMER_BEREITS_ERHALTEN",
+        "NETZNUTZUNGSMESSWERTE_ENERGIEMENGEN_FALSCH",
+        "ZEITLICHE_MENGENANGABE_FEHLERHAFT",
+        "FALSCHER_BILANZIERUNGSBEGINN",
+        "FALSCHES_NETZNUTZUNGSENDE",
+        "BILANZIERTE_MENGE_FEHLT",
+        "BILANZIERTE_MENGE_FALSCH",
+        "NETZNUTZUNGSABRECHNUNG_FEHLT",
+        "REVERSE_CHARGE_ANWENDUNG_FEHLT_ODER_FEHLERHAFT",
+        "ALLOKATIONSLISTE_FEHLT",
+        "MEHR_MINDERMENGE_FALSCH",
+        "UNGUELTIGES_RECHNUNGSDATUM",
+        "ZEITINTERVALL_DER_BILANZIERTEN_MENGE_INKONSISTENT",
+        "RECHNUNGSEMPFAENGER_WIDERSPRICHT_DER_STEUERRECHTLICHEN_EINSCHAETZUNG_DES_RECHNUNGSSTELLERS",
+        "ANGEGEBENE_QUOTES_AN_MARKTLOKATION_NICHT_VORHANDEN",
+        "RECHNUNGSABWICKLUNG_NICHT_VEREINBART",
+        "COMDIS_WIRD_ABGELEHNT",
+        "BEGINN_DES_ABRECHNUNGSZEITRAUMS_VOR_2024",
+        "ERWARTETE_POSITION_NICHT_VORHANDEN",
+        "KEIN_IMS_IM_GESAMTEN_ABRECHNUNGSZEITRAUM",
+        "MSB_IM_ABRECHNUNGSZEITRAUM_NICHT_IMMER_ZUGEORDNET",
+        "MSB_IM_GESAMTEN_ABRECHNUNGSZEITRAUM_NICHT_ZUGEORDNET",
+        "ARTIKELID_DER_POSITION_NICHT_IM_GESAMTEN_POSITIONSZEITRAUM_GUELTIG",
+        "ARTIKELID_FUER_RECHNUNGSTYP_IM_POSITIONSZEITRAUM_NICHT_ZULAESSIG"
+      ],
+      "enum": [
+        0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19,
+        20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34
+      ]
+    },
+    "Rueckmeldungsposition": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/COM"
+        },
+        {
+          "type": "object",
+          "description": "Zur Angabe einer Rückmeldung einer einzelnen Position",
+          "additionalProperties": {},
+          "properties": {
+            "positionsnummer": {
+              "type": "string",
+              "description": "Positionsnummer der Referenzierung",
+              "x-nullable": true
+            },
+            "abweichungspositionen": {
+              "type": "array",
+              "description": "Abweichungspositionen",
+              "x-nullable": true,
+              "items": {
+                "$ref": "#/definitions/Abweichungsposition"
+              }
+            }
+          }
+        }
+      ]
+    },
+    "Abweichungsposition": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/COM"
+        },
+        {
+          "type": "object",
+          "description": "Zur Angabe einer Abweichung einer einzelnen Position",
+          "additionalProperties": {},
+          "properties": {
+            "abweichungsgrundCodeliste": {
+              "type": "string",
+              "description": "Angabe des Abweichungsgrunds (Codeliste)",
+              "x-nullable": true
+            },
+            "abweichungsgrundBemerkung": {
+              "type": "string",
+              "description": "Nähere Erläuterung zum Abweichungsgrund",
+              "x-nullable": true
+            },
+            "zugehoerigeRechnung": {
+              "type": "string",
+              "description": "Zugehörige Rechnung",
+              "x-nullable": true
+            },
+            "zugehoerigeBestellung": {
+              "type": "string",
+              "description": "Zugehörige Bestellung",
+              "x-nullable": true
+            },
+            "abweichungsgrundCode": {
+              "type": "string",
+              "description": "Angabe des Abweichungsgrunds (Code)",
+              "x-nullable": true
+            }
+          }
+        }
+      ]
+    },
     "BusinessObject": {
       "type": "object",
       "description": "General abstract class for Business Objects for Energy (BO4E)\n            ",
@@ -494,33 +670,33 @@
     },
     {
       "type": "object",
-      "description": "Handelsunstimmigkeit BO",
+      "description": "Avis BO",
       "additionalProperties": {},
       "properties": {
-        "nummer": {
+        "avisNummer": {
           "type": "string",
-          "description": "Handelsunstimmigkeitsnummer",
+          "description": "Eine im Verwendungskontext eindeutige Nummer für das Avis.",
           "x-nullable": true
         },
-        "typ": {
-          "description": "Gibt den Typ der Handelsunstimmigkeit an.",
-          "oneOf": [
-            {
-              "$ref": "#/definitions/Handelsunstimmigkeitstyp"
-            }
-          ]
-        },
-        "begruendung": {
-          "description": "Handelsunstimmigskeitsbegründung",
+        "avisTyp": {
+          "description": "Gibt den Typ des Avis an.",
           "x-nullable": true,
           "oneOf": [
             {
-              "$ref": "#/definitions/Handelsunstimmigkeitsbegruendung"
+              "$ref": "#/definitions/AvisTyp"
             }
           ]
         },
+        "positionen": {
+          "type": "array",
+          "description": "Avispositionen",
+          "x-nullable": true,
+          "items": {
+            "$ref": "#/definitions/Avisposition"
+          }
+        },
         "zuZahlen": {
-          "description": "angeforderter Betrag",
+          "description": "Summenbetrag",
           "x-nullable": true,
           "oneOf": [
             {

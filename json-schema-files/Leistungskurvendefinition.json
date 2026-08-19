@@ -118,6 +118,9 @@
     "obererSchwellwert": {
       "type": ["string", "null"]
     },
+    "aenderungszeitpunktDateFormat": {
+      "type": ["string", "null"]
+    },
     "gueltigkeitszeitraum": {
       "$ref": "#/definitions/Zeitraum"
     },

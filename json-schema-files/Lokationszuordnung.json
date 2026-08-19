@@ -395,6 +395,22 @@
             "$ref": "#/definitions/Zustaendigkeit"
           }
         },
+        "gewerbekennzeichnung": {
+          "type": ["boolean", "null"]
+        },
+        "unternehmensart": {
+          "type": ["string", "null"],
+          "enum": [
+            null,
+            "LIEFERANT",
+            "NETZBETREIBER",
+            "MESSSTELLENBETREIBER",
+            "ÜBERTRAGUNGSNETZBETREIBER",
+            "BILANZKOORDINATOR",
+            "BILANZKREISVERANTWORTLICHER",
+            "ENERGIESERVICEANBIETER"
+          ]
+        },
         "gueltigkeitszeitraum": {
           "$ref": "#/definitions/Zeitraum"
         },
@@ -425,7 +441,9 @@
         "geschaeftspartner",
         "adresse",
         "rufnummern",
-        "zustaendigkeit"
+        "zustaendigkeit",
+        "gewerbekennzeichnung",
+        "unternehmensart"
       ]
     },
     "Bankverbindung": {
@@ -640,9 +658,17 @@
             "STEUERBOX",
             "ZAEHLEINRICHTUNG"
           ]
+        },
+        "positionsnummer": {
+          "type": ["string", "null"]
         }
       },
-      "required": ["geraetenummer", "geraeteeigenschaften", "geraeteart"]
+      "required": [
+        "geraetenummer",
+        "geraeteeigenschaften",
+        "geraeteart",
+        "positionsnummer"
+      ]
     },
     "Geraeteeigenschaften": {
       "type": ["object", "null"],
@@ -778,9 +804,24 @@
           "additionalProperties": {
             "type": ["string", "null"]
           }
+        },
+        "wandlerfaktor": {
+          "type": ["number", "null"]
+        },
+        "weitereGeraetenummern": {
+          "type": ["array", "null"],
+          "items": {
+            "type": ["string", "null"]
+          }
         }
       },
-      "required": ["geraetetyp", "geraetemerkmal", "Parameter"]
+      "required": [
+        "geraetetyp",
+        "geraetemerkmal",
+        "Parameter",
+        "wandlerfaktor",
+        "weitereGeraetenummern"
+      ]
     },
     "Geschaeftspartner": {
       "type": ["object", "null"],
@@ -1131,6 +1172,26 @@
       },
       "required": ["kosten", "kategorie", "satz"]
     },
+    "LokationsTypZuordnung": {
+      "type": ["object", "null"],
+      "properties": {
+        "timestamp": {
+          "type": ["string", "null"],
+          "format": "date-time"
+        },
+        "guid": {
+          "type": ["string", "null"]
+        },
+        "lokationstyp": {
+          "type": ["string", "null"],
+          "enum": [null, "MALO", "MELO", "NELO", "SR", "TR"]
+        },
+        "lokationsId": {
+          "type": ["string", "null"]
+        }
+      },
+      "required": ["lokationstyp", "lokationsId"]
+    },
     "Marktlokation": {
       "type": ["object", "null"],
       "properties": {
@@ -1186,7 +1247,18 @@
         },
         "verbrauchsart": {
           "type": ["string", "null"],
-          "enum": [null, "KL", "KLW", "KLWS", "W", "WS"]
+          "enum": [
+            null,
+            "KL",
+            "KLW",
+            "KLWS",
+            "W",
+            "WS",
+            "WK",
+            "EM",
+            "STRB",
+            "STW"
+          ]
         },
         "unterbrechbar": {
           "type": ["boolean", "null"]
@@ -1277,7 +1349,17 @@
             "TES",
             "TLS",
             "SLS_TLS",
-            "SES_TES"
+            "SES_TES",
+            "AUS",
+            "BAS",
+            "DBA",
+            "DZR",
+            "DZÜ",
+            "FPE",
+            "FPI",
+            "SRE",
+            "SRI",
+            "VZR"
           ]
         },
         "zaehlwerke": {
@@ -1342,6 +1424,12 @@
         "vorgelagerteLokationsId": {
           "type": ["string", "null"]
         },
+        "vorgelagerteLokationsIds": {
+          "type": ["array", "null"],
+          "items": {
+            "$ref": "#/definitions/LokationsTypZuordnung"
+          }
+        },
         "gueltigkeitszeitraum": {
           "$ref": "#/definitions/Zeitraum"
         },
@@ -1393,7 +1481,8 @@
         "messprodukte",
         "konfigurationsprodukte",
         "lokationsbuendelObjektcode",
-        "vorgelagerteLokationsId"
+        "vorgelagerteLokationsId",
+        "vorgelagerteLokationsIds"
       ]
     },
     "MarktpartnerDetails": {
@@ -1600,14 +1689,18 @@
           "type": ["string", "null"]
         },
         "rollencodetyp": {
-          "type": "string",
-          "enum": ["ZERO", "GLN", "BDEW", "DVGW"]
+          "type": ["string", "null"],
+          "enum": [null, "ZERO", "GLN", "BDEW", "DVGW"]
         },
         "makoadresse": {
           "type": ["string", "null"]
         },
         "ansprechpartner": {
           "$ref": "#/definitions/Ansprechpartner"
+        },
+        "rolle": {
+          "type": ["string", "null"],
+          "enum": [null, "ANDERE_PARTEI", "EMPFAENGER"]
         },
         "gueltigkeitszeitraum": {
           "$ref": "#/definitions/Zeitraum"
@@ -1653,7 +1746,8 @@
         "rollencodenummer",
         "rollencodetyp",
         "makoadresse",
-        "ansprechpartner"
+        "ansprechpartner",
+        "rolle"
       ]
     },
     "Menge": {
@@ -1684,6 +1778,9 @@
             "VAR",
             "VARH",
             "KWHK",
+            "W_M2",
+            "M_S",
+            "STUECK",
             "JAHR",
             "KWH",
             "MW",
@@ -1842,6 +1939,15 @@
         "vorgelagerteLokationsId": {
           "type": ["string", "null"]
         },
+        "istFuerLieferanmeldungRelevant": {
+          "type": ["boolean", "null"]
+        },
+        "vorgelagerteLokationsIds": {
+          "type": ["array", "null"],
+          "items": {
+            "$ref": "#/definitions/LokationsTypZuordnung"
+          }
+        },
         "gueltigkeitszeitraum": {
           "$ref": "#/definitions/Zeitraum"
         },
@@ -1881,7 +1987,9 @@
         "zaehlwerke",
         "messprodukte",
         "lokationsbuendelObjektcode",
-        "vorgelagerteLokationsId"
+        "vorgelagerteLokationsId",
+        "istFuerLieferanmeldungRelevant",
+        "vorgelagerteLokationsIds"
       ]
     },
     "Messlokationszuordnung": {
@@ -1941,7 +2049,18 @@
         },
         "verbrauchsart": {
           "type": ["string", "null"],
-          "enum": [null, "KL", "KLW", "KLWS", "W", "WS"]
+          "enum": [
+            null,
+            "KL",
+            "KLW",
+            "KLWS",
+            "W",
+            "WS",
+            "WK",
+            "EM",
+            "STRB",
+            "STW"
+          ]
         },
         "unterbrechbarkeit": {
           "type": ["string", "null"],
@@ -2011,8 +2130,9 @@
           "default": "|null|"
         },
         "sparte": {
-          "type": "string",
+          "type": ["string", "null"],
           "enum": [
+            null,
             "STROM",
             "GAS",
             "FERNWAERME",
@@ -2082,6 +2202,24 @@
             "$ref": "#/definitions/MarktpartnerDetails"
           }
         },
+        "vorgelagerteLokationsIds": {
+          "type": ["array", "null"],
+          "items": {
+            "$ref": "#/definitions/LokationsTypZuordnung"
+          }
+        },
+        "messprodukte": {
+          "type": ["array", "null"],
+          "items": {
+            "$ref": "#/definitions/Messprodukt"
+          }
+        },
+        "verwendungszwecke": {
+          "type": ["array", "null"],
+          "items": {
+            "$ref": "#/definitions/Verwendungszweck"
+          }
+        },
         "gueltigkeitszeitraum": {
           "$ref": "#/definitions/Zeitraum"
         },
@@ -2114,7 +2252,10 @@
         "lokationsbuendelObjektcode",
         "vorgelagerteLokationsId",
         "abrechnungsdaten",
-        "marktrollen"
+        "marktrollen",
+        "vorgelagerteLokationsIds",
+        "messprodukte",
+        "verwendungszwecke"
       ]
     },
     "Netzlokationsabrechnungsdaten": {
@@ -2238,6 +2379,9 @@
             "VAR",
             "VARH",
             "KWHK",
+            "W_M2",
+            "M_S",
+            "STUECK",
             "JAHR",
             "KWH",
             "MW",
@@ -2264,8 +2408,9 @@
       "type": ["object", "null"],
       "properties": {
         "nummerntyp": {
-          "type": "string",
+          "type": ["string", "null"],
           "enum": [
+            null,
             "RUF_ZENTRALE",
             "FAX_ZENTRALE",
             "SAMMELRUF",
@@ -2460,6 +2605,12 @@
             "$ref": "#/definitions/MarktpartnerDetails"
           }
         },
+        "messprodukte": {
+          "type": ["array", "null"],
+          "items": {
+            "$ref": "#/definitions/Messprodukt"
+          }
+        },
         "gueltigkeitszeitraum": {
           "$ref": "#/definitions/Zeitraum"
         },
@@ -2486,7 +2637,8 @@
         "konfigurationsprodukte",
         "eigenschaftMSBLokation",
         "lokationsbuendelObjektcode",
-        "marktrollen"
+        "marktrollen",
+        "messprodukte"
       ]
     },
     "TechnischeRessource": {
@@ -2628,6 +2780,30 @@
             "$ref": "#/definitions/MarktpartnerDetails"
           }
         },
+        "vorgelagerteLokationsIds": {
+          "type": ["array", "null"],
+          "items": {
+            "$ref": "#/definitions/LokationsTypZuordnung"
+          }
+        },
+        "zugeordneteLokationsIds": {
+          "type": ["array", "null"],
+          "items": {
+            "$ref": "#/definitions/LokationsTypZuordnung"
+          }
+        },
+        "verbrauchsarten": {
+          "type": ["array", "null"],
+          "items": {
+            "type": "string",
+            "enum": [
+              "KRAFT_LICHT",
+              "WAERME",
+              "E_MOBILITAET",
+              "STRASSENBELEUCHTUNG"
+            ]
+          }
+        },
         "gueltigkeitszeitraum": {
           "$ref": "#/definitions/Zeitraum"
         },
@@ -2667,7 +2843,10 @@
         "inbetriebsetzung",
         "einordnung",
         "weitereEinrichtung",
-        "marktrollen"
+        "marktrollen",
+        "vorgelagerteLokationsIds",
+        "zugeordneteLokationsIds",
+        "verbrauchsarten"
       ]
     },
     "Verbrauch": {
@@ -2759,6 +2938,9 @@
             "VAR",
             "VARH",
             "KWHK",
+            "W_M2",
+            "M_S",
+            "STUECK",
             "JAHR",
             "KWH",
             "MW",
@@ -2774,6 +2956,12 @@
         "ausfuehrungszeitpunkt": {
           "type": ["string", "null"],
           "format": "date-time"
+        },
+        "temperaturmasszahl": {
+          "type": ["string", "null"]
+        },
+        "zeitfenster": {
+          "$ref": "#/definitions/Zeitfenster"
         }
       },
       "required": [
@@ -2788,7 +2976,9 @@
         "wert",
         "einheit",
         "nutzungszeitpunkt",
-        "ausfuehrungszeitpunkt"
+        "ausfuehrungszeitpunkt",
+        "temperaturmasszahl",
+        "zeitfenster"
       ]
     },
     "Verwendungszweck": {
@@ -2826,7 +3016,10 @@
               "ENDKUNDENABRECHNUNG",
               "BLINDARBEITABRECHNUNG_BETRIEBSFUEHRUNG",
               "UEBERMITTLUNG_AN_DAS_HKNR",
-              "ERMITTLUNG_AUSGEGLICHENHEIT_BILANZKREIS"
+              "ERMITTLUNG_AUSGEGLICHENHEIT_BILANZKREIS",
+              "SELBSTVERBRAUCH",
+              "ES_LIEGT_KEIN_VERWENDUNGSZWECK_VOR",
+              "KEINE_DATENLIEFERUNG_AN_MARKTROLLE"
             ]
           }
         },
@@ -2866,8 +3059,9 @@
           "type": ["string", "null"]
         },
         "sparte": {
-          "type": "string",
+          "type": ["string", "null"],
           "enum": [
+            null,
             "STROM",
             "GAS",
             "FERNWAERME",
@@ -2929,8 +3123,7 @@
           "type": ["array", "null"],
           "items": {
             "$ref": "#/definitions/Zaehlwerk"
-          },
-          "minItems": 1
+          }
         },
         "zaehlerhersteller": {
           "$ref": "#/definitions/Geschaeftspartner"
@@ -3042,6 +3235,10 @@
             "$ref": "#/definitions/Geraet"
           }
         },
+        "artVolumenerfassung": {
+          "type": ["string", "null"],
+          "enum": [null, "KENNLINIENKORREKTUR", "SCHLEICHMENGENUNTERDRÜCKUNG"]
+        },
         "gueltigkeitszeitraum": {
           "$ref": "#/definitions/Zeitraum"
         },
@@ -3077,7 +3274,8 @@
         "zaehlertypspezifikation",
         "befestigungsart",
         "zaehlergroesse",
-        "geraete"
+        "geraete",
+        "artVolumenerfassung"
       ]
     },
     "Zaehlwerk": {
@@ -3121,6 +3319,9 @@
             "VAR",
             "VARH",
             "KWHK",
+            "W_M2",
+            "M_S",
+            "STUECK",
             "JAHR",
             "KWH",
             "MW",
@@ -3144,7 +3345,18 @@
         },
         "verbrauchsart": {
           "type": ["string", "null"],
-          "enum": [null, "KL", "KLW", "KLWS", "W", "WS"]
+          "enum": [
+            null,
+            "KL",
+            "KLW",
+            "KLWS",
+            "W",
+            "WS",
+            "WK",
+            "EM",
+            "STRB",
+            "STW"
+          ]
         },
         "unterbrechbarkeit": {
           "type": ["string", "null"],
@@ -3189,6 +3401,13 @@
         "emobilitaetsart": {
           "type": ["string", "null"],
           "enum": [null, "WALLBOX", "E_MOBILITAETSLADESAEULE", "LADEPARK"]
+        },
+        "Verbrauchsarten": {
+          "type": ["array", "null"],
+          "items": {
+            "type": "string",
+            "enum": ["KL", "KLW", "KLWS", "W", "WS", "WK", "EM", "STRB", "STW"]
+          }
         }
       },
       "required": [
@@ -3212,7 +3431,8 @@
         "anzahlAblesungen",
         "zaehlzeiten",
         "konfiguration",
-        "emobilitaetsart"
+        "emobilitaetsart",
+        "Verbrauchsarten"
       ]
     },
     "Zaehlzeitregister": {
@@ -3398,6 +3618,13 @@
     "lokationsbuendelcode": {
       "type": ["string", "null"]
     },
+    "lokationsbuendelstrukturVorhanden": {
+      "type": ["string", "null"],
+      "enum": [null, "VORHANDEN", "NICHT_VORHANDEN"]
+    },
+    "zeilennummer": {
+      "type": ["string", "null"]
+    },
     "gueltigkeitszeitraum": {
       "$ref": "#/definitions/Zeitraum"
     },
@@ -3425,6 +3652,8 @@
     "steuerbareRessourcen",
     "gueltigkeit",
     "zuordnungstyp",
-    "lokationsbuendelcode"
+    "lokationsbuendelcode",
+    "lokationsbuendelstrukturVorhanden",
+    "zeilennummer"
   ]
 }

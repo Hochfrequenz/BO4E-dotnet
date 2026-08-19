@@ -1,6 +1,6 @@
 {
   "$schema": "http://json-schema.org/draft-04/schema#",
-  "title": "Marktlokation",
+  "title": "Angebot",
   "definitions": {
     "Sparte": {
       "type": "integer",
@@ -14,80 +14,6 @@
         "ABWASSER"
       ],
       "enum": [0, 1, 2, 3, 4, 5]
-    },
-    "Energierichtung": {
-      "type": "integer",
-      "description": "Spezifiziert die Energierichtung einer Markt- und/oder Messlokation.",
-      "x-enumNames": ["AUSSP", "EINSP", "RUHEND", "KUNDENANLAGE"],
-      "enum": [0, 1, 2, 3]
-    },
-    "Bilanzierungsmethode": {
-      "type": "integer",
-      "description": "Mit dieser Aufzählung kann zwischen den Bilanzierungsmethoden bzw. -Grundlagen unterschieden werden.",
-      "x-enumNames": [
-        "RLM",
-        "SLP",
-        "TLP_GEMEINSAM",
-        "TLP_GETRENNT",
-        "PAUSCHAL",
-        "IMS"
-      ],
-      "enum": [0, 1, 2, 3, 4, 5]
-    },
-    "Verbrauchsart": {
-      "type": "integer",
-      "description": "Verbrauchsart einer Marktlokation.",
-      "x-enumNames": [
-        "KL",
-        "KLW",
-        "KLWS",
-        "W",
-        "WS",
-        "WK",
-        "EM",
-        "STRB",
-        "STW"
-      ],
-      "enum": [0, 1, 2, 3, 4, 5, 6, 7, 8]
-    },
-    "Netzebene": {
-      "type": "integer",
-      "description": "Auflistung möglicher Netzebenen innerhalb der Energiearten Strom und Gas.",
-      "x-enumNames": [
-        "NSP",
-        "MSP",
-        "HSP",
-        "HSS",
-        "MSP_NSP_UMSP",
-        "HSP_MSP_UMSP",
-        "HSS_HSP_UMSP",
-        "HD",
-        "MD",
-        "ND"
-      ],
-      "enum": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
-    },
-    "Gebiettyp": {
-      "type": "integer",
-      "description": "Auflistung der möglichen Gebietstypen.",
-      "x-enumNames": [
-        "REGELZONE",
-        "MARKTGEBIET",
-        "BILANZIERUNGSGEBIET",
-        "VERTEILNETZ",
-        "TRANSPORTNETZ",
-        "REGIONALNETZ",
-        "AREALNETZ",
-        "GRUNDVERSORGUNGSGEBIET",
-        "VERSORGUNGSGEBIET"
-      ],
-      "enum": [0, 1, 2, 3, 4, 5, 6, 7, 8]
-    },
-    "Gasqualitaet": {
-      "type": "integer",
-      "description": "Unterscheidung für hoch- und niedrig-kalorisches Gas.",
-      "x-enumNames": ["ZERO", "H_GAS", "L_GAS"],
-      "enum": [0, 1, 2]
     },
     "Geschaeftspartner": {
       "allOf": [
@@ -972,6 +898,990 @@
       ],
       "enum": [0, 1, 2, 3, 4, 5]
     },
+    "Ansprechpartner": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/BusinessObject"
+        },
+        {
+          "type": "object",
+          "description": "Modellierung eines Ansprechpartners für einen bestimmten Geschäftspartner.\n            ",
+          "additionalProperties": {},
+          "properties": {
+            "anrede": {
+              "description": "Mögliche Anrede des Ansprechpartners\n            ",
+              "x-nullable": true,
+              "oneOf": [
+                {
+                  "$ref": "#/definitions/Anrede"
+                }
+              ]
+            },
+            "inviduelleAnrede": {
+              "type": "string",
+              "description": "Im Falle einer nicht standardisierten Anrede kann hier eine frei definierbare\nAnrede vorgegeben werden. Beispiel: \"Sehr geehrte Frau Müller, sehr geehrter\nHerr Dr. Müller\"\n            ",
+              "x-nullable": true
+            },
+            "titel": {
+              "description": "Möglicher Titel des Ansprechpartners",
+              "x-nullable": true,
+              "oneOf": [
+                {
+                  "$ref": "#/definitions/Titel"
+                }
+              ]
+            },
+            "vorname": {
+              "type": "string",
+              "description": "Vorname des Ansprechpartners",
+              "x-nullable": true
+            },
+            "nachname": {
+              "type": "string",
+              "description": "Nachname (Familienname) des Ansprechpartners",
+              "x-nullable": true
+            },
+            "eMailAdresse": {
+              "type": "string",
+              "description": "E-Mail Adresse",
+              "x-nullable": true
+            },
+            "kommentar": {
+              "type": "string",
+              "description": "Weitere Informationen zum Ansprechpartner",
+              "x-nullable": true
+            },
+            "geschaeftspartner": {
+              "description": "Der Geschäftspartner, für den dieser Ansprechpartner modelliert wird.",
+              "x-nullable": true,
+              "oneOf": [
+                {
+                  "$ref": "#/definitions/Geschaeftspartner"
+                }
+              ]
+            },
+            "adresse": {
+              "description": "Adresse des Ansprechpartners, falls diese von der Adresse des Geschäftspartners abweicht.",
+              "x-nullable": true,
+              "oneOf": [
+                {
+                  "$ref": "#/definitions/Adresse"
+                }
+              ]
+            },
+            "rufnummern": {
+              "type": "array",
+              "description": "Liste der Telefonnummern, unter denen der Ansprechpartner erreichbar ist.",
+              "x-nullable": true,
+              "items": {
+                "$ref": "#/definitions/Rufnummer"
+              }
+            },
+            "zustaendigkeit": {
+              "type": "array",
+              "description": "Liste der Abteilungen und Zuständigkeiten des Ansprechpartners.",
+              "x-nullable": true,
+              "items": {
+                "$ref": "#/definitions/Zustaendigkeit"
+              }
+            },
+            "gewerbekennzeichnung": {
+              "type": "boolean",
+              "description": "true dann und nur dann, wenn es sich um eine Firma handelt",
+              "x-nullable": true
+            },
+            "unternehmensart": {
+              "description": "aus PARTIN gemappt: Für welche Art von Marktteilnehmer der Ansprechpartner tätig ist",
+              "x-nullable": true,
+              "oneOf": [
+                {
+                  "$ref": "#/definitions/Unternehmensart"
+                }
+              ]
+            }
+          }
+        }
+      ]
+    },
+    "Titel": {
+      "type": "integer",
+      "description": "Übersicht möglicher Titel, z.B. eines Geschäftspartners.",
+      "x-enumNames": ["DR", "PROF", "PROF_DR", "DIPLOM_INF"],
+      "enum": [0, 1, 2, 3]
+    },
+    "Rufnummer": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/COM"
+        },
+        {
+          "type": "object",
+          "description": "Abbildung von Rufnummern.",
+          "additionalProperties": {},
+          "properties": {
+            "nummerntyp": {
+              "description": "Ausprägung der Nummer, z.B. Zentrale, Faxnummer, Mobilnummer etc. Details Rufnummernart\n            ",
+              "x-nullable": true,
+              "oneOf": [
+                {
+                  "$ref": "#/definitions/Rufnummernart"
+                }
+              ]
+            },
+            "rufnummer": {
+              "type": "string",
+              "description": "Die konkrete Nummer, z.B. 02433 5 26 01 900",
+              "x-nullable": true
+            }
+          }
+        }
+      ]
+    },
+    "Rufnummernart": {
+      "type": "integer",
+      "description": "Abbildung verschiedener Rufnummerntypen.",
+      "x-enumNames": [
+        "RUF_ZENTRALE",
+        "FAX_ZENTRALE",
+        "SAMMELRUF",
+        "SAMMELFAX",
+        "ABTEILUNGRUF",
+        "ABTEILUNGFAX",
+        "RUF_DURCHWAHL",
+        "FAX_DURCHWAHL",
+        "MOBIL_NUMMER"
+      ],
+      "enum": [0, 1, 2, 3, 4, 5, 6, 7, 8]
+    },
+    "Zustaendigkeit": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/COM"
+        },
+        {
+          "type": "object",
+          "description": "Enthält die zeitliche Zuordnung eines Ansprechpartners zu Abteilungen und Zuständigkeiten.",
+          "additionalProperties": {},
+          "properties": {
+            "jobtitel": {
+              "type": "string",
+              "description": "Berufliche Rolle des Ansprechpartners",
+              "x-nullable": true
+            },
+            "abteilung": {
+              "type": "string",
+              "description": "Abteilung, in der der Ansprechpartner tätig ist",
+              "x-nullable": true
+            },
+            "themengebiet": {
+              "type": "string",
+              "description": "Hier kann eine thematische Zuordnung des APs angegeben werden. Details Themengebiet\n            ",
+              "x-nullable": true
+            }
+          }
+        }
+      ]
+    },
+    "Unternehmensart": {
+      "type": "integer",
+      "description": "kategorisiert Unternehmen nach Ihrer Marktrolle (basierend auf dem PARTIN-Datenmodell)",
+      "x-enumNames": [
+        "LIEFERANT",
+        "NETZBETREIBER",
+        "MESSSTELLENBETREIBER",
+        "ÜBERTRAGUNGSNETZBETREIBER",
+        "BILANZKOORDINATOR",
+        "BILANZKREISVERANTWORTLICHER",
+        "ENERGIESERVICEANBIETER"
+      ],
+      "enum": [0, 1, 2, 3, 4, 5, 6]
+    },
+    "Angebotsvariante": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/COM"
+        },
+        {
+          "type": "object",
+          "description": "Führt die verschiedenen Ausprägungen der Angebotsberechnung auf.",
+          "additionalProperties": {},
+          "properties": {
+            "angebotsstatus": {
+              "description": "Gibt den Status eines Angebotes an. ",
+              "oneOf": [
+                {
+                  "$ref": "#/definitions/Angebotsstatus"
+                }
+              ]
+            },
+            "beschreibung": {
+              "type": "string",
+              "description": "Umschreibung des Inhalts der Angebotsvariante.",
+              "x-nullable": true
+            },
+            "erstelldatum": {
+              "type": "string",
+              "description": "Datum der Erstellung der Angebotsvariante",
+              "format": "date-time",
+              "x-nullable": true
+            },
+            "bindefrist": {
+              "type": "string",
+              "description": "Bis zu diesem Zeitpunkt (Tag/Uhrzeit) inklusive gilt die Angebotsvariante, z.B. 31.12.2017, 17:00 Uhr.",
+              "format": "date-time",
+              "x-nullable": true
+            },
+            "gesamtmenge": {
+              "description": "Aufsummierte Wirkarbeitsmenge aller Angebotsteile. ",
+              "x-nullable": true,
+              "oneOf": [
+                {
+                  "$ref": "#/definitions/Menge"
+                }
+              ]
+            },
+            "gesamtkosten": {
+              "description": "Aufsummierte Kosten aller Angebotsteile. ",
+              "x-nullable": true,
+              "oneOf": [
+                {
+                  "$ref": "#/definitions/Betrag"
+                }
+              ]
+            },
+            "teile": {
+              "type": "array",
+              "description": "Angebotsteile werden im einfachsten Fall für eine Marktlokation oder Lieferstellenadresse erzeugt. Hier werden\ndie Mengen und Gesamtkosten aller Angebotspositionen zusammengefasst. Eine Variante besteht mindestens aus einem\nAngebotsteil. Details Angebotsteil\n            ",
+              "x-nullable": true,
+              "items": {
+                "$ref": "#/definitions/Angebotsteil"
+              }
+            }
+          }
+        }
+      ]
+    },
+    "Angebotsstatus": {
+      "type": "integer",
+      "description": "Gibt den Status eines Angebotes an.",
+      "x-enumNames": [
+        "KONZEPTION",
+        "UNVERBINDLICH",
+        "VERBINDLICH",
+        "BEAUFTRAGT",
+        "UNGUELTIG",
+        "ABGELEHNT",
+        "NACHGEFASST",
+        "AUSSTEHEND",
+        "ERLEDIGT"
+      ],
+      "enum": [0, 1, 2, 3, 4, 5, 6, 7, 8]
+    },
+    "Menge": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/COM"
+        },
+        {
+          "type": "object",
+          "description": "Abbildung einer Menge mit Wert und Einheit.",
+          "additionalProperties": {},
+          "properties": {
+            "wert": {
+              "type": "number",
+              "description": "Gibt den absoluten Wert der Menge an.",
+              "format": "decimal"
+            },
+            "einheit": {
+              "description": "Gibt die Einheit zum jeweiligen Wert an. Details Mengeneinheit",
+              "x-nullable": true,
+              "oneOf": [
+                {
+                  "$ref": "#/definitions/Mengeneinheit"
+                }
+              ]
+            }
+          }
+        }
+      ]
+    },
+    "Mengeneinheit": {
+      "type": "integer",
+      "description": "Einheit: Messgrößen, die per Messung oder Vorgabe ermittelt werden können.\n            ",
+      "x-enumNames": [
+        "ZERO",
+        "WH",
+        "KW",
+        "ANZAHL",
+        "KUBIKMETER",
+        "STUNDE",
+        "TAG",
+        "MONAT",
+        "VAR",
+        "VARH",
+        "KWHK",
+        "W_M2",
+        "M_S",
+        "STUECK",
+        "JAHR",
+        "KWH",
+        "MW",
+        "KVAR",
+        "KVARH",
+        "MWH"
+      ],
+      "enum": [
+        0, 2, 3, 7, 11, 13, 17, 19, 23, 29, 40, 41, 42, 50, 228, 2000, 3000,
+        23000, 29000, 2000000
+      ]
+    },
+    "Betrag": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/COM"
+        },
+        {
+          "type": "object",
+          "description": "Die Komponente wird dazu verwendet Summebeträge - beispielsweise in Angeboten und Rechnungen - als Geldbeträge\nabzubilden. Die Einheit ist dabei immer die Hauptwährung also Euro, Dollar etc..\n            ",
+          "additionalProperties": {},
+          "properties": {
+            "wert": {
+              "type": "number",
+              "description": "Gibt den Betrag des Preises an.",
+              "format": "decimal"
+            },
+            "waehrung": {
+              "description": "            ",
+              "oneOf": [
+                {
+                  "$ref": "#/definitions/Waehrungscode"
+                }
+              ]
+            }
+          }
+        }
+      ]
+    },
+    "Waehrungscode": {
+      "type": "integer",
+      "description": "Aufzählung der Währungscodes.",
+      "x-enumNames": [
+        "AFN",
+        "ALL",
+        "AMD",
+        "ANG",
+        "AOA",
+        "ARS",
+        "AUD",
+        "AWG",
+        "AZN",
+        "BAM",
+        "BBD",
+        "BDT",
+        "BGN",
+        "BHD",
+        "BIF",
+        "BMD",
+        "BND",
+        "BOB",
+        "BOV",
+        "BRL",
+        "BSD",
+        "BTN",
+        "BWP",
+        "BYN",
+        "BYR",
+        "BZD",
+        "CAD",
+        "CDF",
+        "CHE",
+        "CHF",
+        "CHW",
+        "CLF",
+        "CLP",
+        "CNY",
+        "COP",
+        "COU",
+        "CRC",
+        "CUC",
+        "CUP",
+        "CVE",
+        "CZK",
+        "DJF",
+        "DKK",
+        "DOP",
+        "DZD",
+        "EGP",
+        "ERN",
+        "ETB",
+        "EUR",
+        "FJD",
+        "FKP",
+        "GBP",
+        "GEL",
+        "GHS",
+        "GIP",
+        "GMD",
+        "GNF",
+        "GTQ",
+        "GYD",
+        "HKD",
+        "HNL",
+        "HRK",
+        "HTG",
+        "HUF",
+        "IDR",
+        "ILS",
+        "INR",
+        "IQD",
+        "IRR",
+        "ISK",
+        "JMD",
+        "JOD",
+        "JPY",
+        "KES",
+        "KGS",
+        "KHR",
+        "KMF",
+        "KPW",
+        "KRW",
+        "KWD",
+        "KYD",
+        "KZT",
+        "LAK",
+        "LBP",
+        "LKR",
+        "LRD",
+        "LSL",
+        "LTL",
+        "LYD",
+        "MAD",
+        "MDL",
+        "MGA",
+        "MKD",
+        "MMK",
+        "MNT",
+        "MOP",
+        "MRO",
+        "MUR",
+        "MVR",
+        "MWK",
+        "MXN",
+        "MXV",
+        "MYR",
+        "MZN",
+        "NAD",
+        "NGN",
+        "NIO",
+        "NOK",
+        "NPR",
+        "NZD",
+        "OMR",
+        "PAB",
+        "PEN",
+        "PGK",
+        "PHP",
+        "PKR",
+        "PLN",
+        "PYG",
+        "QAR",
+        "RON",
+        "RSD",
+        "RUB",
+        "RUR",
+        "RWF",
+        "SAR",
+        "SBD",
+        "SCR",
+        "SDG",
+        "SEK",
+        "SGD",
+        "SHP",
+        "SLL",
+        "SOS",
+        "SRD",
+        "SSP",
+        "STD",
+        "SVC",
+        "SYP",
+        "SZL",
+        "THB",
+        "TJS",
+        "TMT",
+        "TND",
+        "TOP",
+        "TRY",
+        "TTD",
+        "TWD",
+        "TZS",
+        "UAH",
+        "UGX",
+        "USD",
+        "USN",
+        "USS",
+        "UYI",
+        "UYU",
+        "UZS",
+        "VEF",
+        "VND",
+        "VUV",
+        "WST",
+        "XAF",
+        "XAG",
+        "XAU",
+        "XBA",
+        "XBB",
+        "XBC",
+        "XBD",
+        "XCD",
+        "XDR",
+        "XOF",
+        "XPD",
+        "XPF",
+        "XPT",
+        "XSU",
+        "XTS",
+        "XUA",
+        "XXX",
+        "YER",
+        "ZAR",
+        "ZMW",
+        "ZWL"
+      ],
+      "enum": [
+        0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19,
+        20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37,
+        38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55,
+        56, 57, 58, 59, 60, 61, 62, 63, 64, 65, 66, 67, 68, 69, 70, 71, 72, 73,
+        74, 75, 76, 77, 78, 79, 80, 81, 82, 83, 84, 85, 86, 87, 88, 89, 90, 91,
+        92, 93, 94, 95, 96, 97, 98, 99, 100, 101, 102, 103, 104, 105, 106, 107,
+        108, 109, 110, 111, 112, 113, 114, 115, 116, 117, 118, 119, 120, 121,
+        122, 123, 124, 125, 126, 127, 128, 129, 130, 131, 132, 133, 134, 135,
+        136, 137, 138, 139, 140, 141, 142, 143, 144, 145, 146, 147, 148, 149,
+        150, 151, 152, 153, 154, 155, 156, 157, 158, 159, 160, 161, 162, 163,
+        164, 165, 166, 167, 168, 169, 170, 171, 172, 173, 174, 175, 176, 177,
+        178, 179, 180
+      ]
+    },
+    "Angebotsteil": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/COM"
+        },
+        {
+          "type": "object",
+          "description": "Mit dieser Komponente wird ein Teil einer Angebotsvariante abgebildet. Hier werden alle Angebotspositionen\naggregiert.\n            ",
+          "additionalProperties": {},
+          "properties": {
+            "anfrageSubreferenz": {
+              "type": "string",
+              "description": "Identifizierung eines Subkapitels einer Anfrage, beispielsweise das Los einer Ausschreibung.",
+              "x-nullable": true
+            },
+            "lieferstellenangebotsteil": {
+              "type": "array",
+              "description": "Marktlokationen, für die dieses Angebotsteil gilt, falls vorhanden. Durch die Marktlokation ist auch die\nLieferadresse festgelegt. Details Marktlokation\n            ",
+              "x-deprecated": true,
+              "x-deprecatedMessage": "Abgelöst durch 'Lieferstellen', da nicht nur MaLos als Lieferstelle möglich.",
+              "x-nullable": true,
+              "items": {
+                "$ref": "#/definitions/Marktlokation"
+              }
+            },
+            "gesamtmengeangebotsteil": {
+              "description": "Summe der Verbräuche aller in diesem Angebotsteil eingeschlossenen Lieferstellen. Details Menge\n            ",
+              "x-nullable": true,
+              "oneOf": [
+                {
+                  "$ref": "#/definitions/Menge"
+                }
+              ]
+            },
+            "gesamtkostenangebotsteil": {
+              "description": "Summe der Jahresenergiekosten aller in diesem Angebotsteil enthaltenen Lieferstellen. Details\nBetrag\n            ",
+              "x-nullable": true,
+              "oneOf": [
+                {
+                  "$ref": "#/definitions/Betrag"
+                }
+              ]
+            },
+            "positionen": {
+              "type": "array",
+              "description": "Einzelne Positionen, die zu diesem Angebotsteil gehören. Details Angebotsposition",
+              "x-nullable": true,
+              "items": {
+                "$ref": "#/definitions/Angebotsposition"
+              }
+            },
+            "lieferzeitraum": {
+              "description": "Hier kann der Belieferungszeitraum angegeben werden, für den dieser Angebotsteil gilt. Details Zeitraum",
+              "x-nullable": true,
+              "oneOf": [
+                {
+                  "$ref": "#/definitions/Zeitraum"
+                }
+              ]
+            },
+            "lieferstellen": {
+              "type": "array",
+              "description": "Lieferstellen, für die dieses Angebotsteil gilt, falls vorhanden.\nMögliche Lieferstellen sind: Marktlokation, Netzlokation, Messlokation, TechnischeRessource, Steuerbare Ressource\n            ",
+              "x-nullable": true,
+              "items": {
+                "$ref": "#/definitions/BusinessObject"
+              }
+            }
+          }
+        }
+      ]
+    },
+    "Marktlokation": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/BusinessObject"
+        },
+        {
+          "type": "object",
+          "description": "Objekt zur Aufnahme der Informationen zu einer Marktlokation\n            ",
+          "additionalProperties": {},
+          "properties": {
+            "marktlokationsId": {
+              "type": "string",
+              "description": "Identifikationsnummer einer Marktlokation, an der Energie entweder\nverbraucht, oder erzeugt wird\n            ",
+              "default": "|null|",
+              "x-nullable": true
+            },
+            "sparte": {
+              "description": "Sparte der Messlokation, z.B. Gas oder Strom.",
+              "oneOf": [
+                {
+                  "$ref": "#/definitions/Sparte"
+                }
+              ]
+            },
+            "energierichtung": {
+              "description": "Kennzeichnung, ob Energie eingespeist oder entnommen (ausgespeist) wird.",
+              "x-nullable": true,
+              "oneOf": [
+                {
+                  "$ref": "#/definitions/Energierichtung"
+                }
+              ]
+            },
+            "bilanzierungsmethode": {
+              "description": "Kennzeichnung, ob Energie eingespeist oder entnommen (ausgespeist) wird.",
+              "x-nullable": true,
+              "oneOf": [
+                {
+                  "$ref": "#/definitions/Bilanzierungsmethode"
+                }
+              ]
+            },
+            "verbrauchsart": {
+              "description": "Verbrauchsart der Marktlokation",
+              "x-nullable": true,
+              "oneOf": [
+                {
+                  "$ref": "#/definitions/Verbrauchsart"
+                }
+              ]
+            },
+            "unterbrechbar": {
+              "type": "boolean",
+              "description": "Gibt an, ob es sich um eine unterbrechbare Belieferung handelt.",
+              "x-nullable": true
+            },
+            "netzebene": {
+              "description": "Netzebene, in der der Bezug der Energie erfolgt. Bei Strom Spannungsebene der\nLieferung, bei Gas Druckstufe. Beispiel Strom: Niederspannung Beispiel Gas:\nNiederdruck.\n\n            ",
+              "x-nullable": true,
+              "oneOf": [
+                {
+                  "$ref": "#/definitions/Netzebene"
+                }
+              ]
+            },
+            "netzbetreiberCodeNr": {
+              "type": "string",
+              "description": "Codenummer des Netzbetreibers, an dessen Netz diese Marktlokation\nangeschlossen ist.\n            ",
+              "x-nullable": true
+            },
+            "gebietTyp": {
+              "description": "Typ des Netzgebietes,z.B.Verteilnetz.",
+              "x-nullable": true,
+              "oneOf": [
+                {
+                  "$ref": "#/definitions/Gebiettyp"
+                }
+              ]
+            },
+            "netzgebietNr": {
+              "type": "string",
+              "description": "Die Nummer des Netzgebietes in der ene't-Datenbank.",
+              "x-nullable": true
+            },
+            "bilanzierungsgebiet": {
+              "type": "string",
+              "description": "Bilanzierungsgebiet, dem das Netzgebiet zugeordnet ist - im Falle eines Strom Netzes.",
+              "x-nullable": true
+            },
+            "grundversorgerCodeNr": {
+              "type": "string",
+              "description": "CodeNummer des Grundversorgers, der für diese Marktlokation zuständig ist.",
+              "x-nullable": true
+            },
+            "gasqualitaet": {
+              "description": "Die Gasqualität in diesem Netzgebiet. H-Gas oder L-Gas. Im Falle eines Gas-Netzes.\n\n            ",
+              "x-nullable": true,
+              "oneOf": [
+                {
+                  "$ref": "#/definitions/Gasqualitaet"
+                }
+              ]
+            },
+            "endkunde": {
+              "description": "Link zum Geschäftspartner, dem diese Marktlokation gehört.",
+              "x-nullable": true,
+              "oneOf": [
+                {
+                  "$ref": "#/definitions/Geschaeftspartner"
+                }
+              ]
+            },
+            "lokationsadresse": {
+              "description": "Die Adresse, an der die Energie-Lieferung oder -Einspeisung erfolgt. ",
+              "x-nullable": true,
+              "oneOf": [
+                {
+                  "$ref": "#/definitions/Adresse"
+                }
+              ]
+            },
+            "geoadresse": {
+              "description": "Alternativ zu einer postalischen Adresse kann hier ein Ort mittels Geokoordinaten angegeben werden (z.B. zur\nIdentifikation von Sendemasten).\n            ",
+              "x-nullable": true,
+              "oneOf": [
+                {
+                  "$ref": "#/definitions/Geokoordinaten"
+                }
+              ]
+            },
+            "katasterinformation": {
+              "type": "array",
+              "description": "Alternativ zu einer postalischen Adresse und Geokoordinaten kann hier eine  Ortsangabe mittels Gemarkung und\nFlurstück erfolgen.\n            ",
+              "x-nullable": true,
+              "items": {
+                "$ref": "#/definitions/Katasteradresse"
+              }
+            },
+            "marktrollen": {
+              "type": "array",
+              "description": "für EDIFACT mapping\n            ",
+              "x-nullable": true,
+              "items": {
+                "$ref": "#/definitions/MarktpartnerDetails"
+              }
+            },
+            "regelzone": {
+              "type": "string",
+              "description": "für EDIFACT mapping\n            ",
+              "x-nullable": true
+            },
+            "marktgebiet": {
+              "type": "string",
+              "description": "für EDIFACT mapping\n            ",
+              "x-nullable": true
+            },
+            "zeitreihentyp": {
+              "description": "für EDIFACT mapping\n            ",
+              "x-nullable": true,
+              "oneOf": [
+                {
+                  "$ref": "#/definitions/Zeitreihentyp"
+                }
+              ]
+            },
+            "zaehlwerke": {
+              "type": "array",
+              "description": "für EDIFACT mapping\n            ",
+              "x-nullable": true,
+              "items": {
+                "$ref": "#/definitions/Zaehlwerk"
+              }
+            },
+            "zaehlwerkeBeteiligteMarktrolle": {
+              "type": "array",
+              "description": "Liste der Zählwerke der beteiligten Martrolle\n            ",
+              "x-nullable": true,
+              "items": {
+                "$ref": "#/definitions/Zaehlwerk"
+              }
+            },
+            "verbrauchsmenge": {
+              "type": "array",
+              "description": "für EDIFACT mapping\n            ",
+              "x-deprecated": true,
+              "x-deprecatedMessage": "Consider if this is really the right place to store the information. I think Energiemenge->energieverbrauch is better suited.",
+              "x-nullable": true,
+              "items": {
+                "$ref": "#/definitions/Verbrauch"
+              }
+            },
+            "messlokationen": {
+              "type": "array",
+              "description": "für EDIFACT mapping\n            ",
+              "x-nullable": true,
+              "items": {
+                "$ref": "#/definitions/Messlokation"
+              }
+            },
+            "zugehoerigeMesslokationen": {
+              "type": "array",
+              "description": "Aufzählung der Messlokationen, die zu dieser Marktlokation gehören.",
+              "x-nullable": true,
+              "items": {
+                "$ref": "#/definitions/Messlokationszuordnung"
+              }
+            },
+            "messtechnischeEinordnung": {
+              "description": "Messtechnische Einordnung aus der UTILMD (IMS, KME_MME, KEINE_MESSUNG)\n            ",
+              "x-nullable": true,
+              "oneOf": [
+                {
+                  "$ref": "#/definitions/MesstechnischeEinordnung"
+                }
+              ]
+            },
+            "netznutzungsabrechnungsdaten": {
+              "type": "array",
+              "description": "Daten für die Prüfung der Netznutzungsabrechnung",
+              "x-nullable": true,
+              "items": {
+                "$ref": "#/definitions/Netznutzungsabrechnungsdaten"
+              }
+            },
+            "sperrstatus": {
+              "description": "Sperrstatus",
+              "x-nullable": true,
+              "oneOf": [
+                {
+                  "$ref": "#/definitions/Sperrstatus"
+                }
+              ]
+            },
+            "messprodukte": {
+              "type": "array",
+              "description": "Zugeordnete Messprodukte\n            ",
+              "x-nullable": true,
+              "items": {
+                "$ref": "#/definitions/Messprodukt"
+              }
+            },
+            "konfigurationsprodukte": {
+              "type": "array",
+              "description": "Produkt-Daten der Marktlokation",
+              "x-nullable": true,
+              "items": {
+                "$ref": "#/definitions/Konfigurationsprodukt"
+              }
+            },
+            "lokationsbuendelObjektcode": {
+              "type": "string",
+              "description": "Lokationsbuendel Code, der die Funktion dieses BOs an der Lokationsbuendelstruktur beschreibt.",
+              "x-nullable": true
+            },
+            "vorgelagerteLokationsId": {
+              "type": "string",
+              "description": "Enthält die ID der vorgelagerten Lokation. Kann IDs unterschiedlicher Lokationen enthalten, also zum Beispiel\neiner Messlokation oder Netzlokation",
+              "x-deprecated": true,
+              "x-deprecatedMessage": "Abgelöst durch 'VorgelagerteLokationsIds'.",
+              "x-nullable": true
+            },
+            "vorgelagerteLokationsIds": {
+              "type": "array",
+              "description": "Enthält die ID's der vorgelagerten Lokationen. Kann IDs unterschiedlicher Lokationen enthalten, also zum Beispiel\neiner Messlokation oder Netzlokation",
+              "x-nullable": true,
+              "items": {
+                "$ref": "#/definitions/LokationsTypZuordnung"
+              }
+            }
+          }
+        }
+      ]
+    },
+    "Energierichtung": {
+      "type": "integer",
+      "description": "Spezifiziert die Energierichtung einer Markt- und/oder Messlokation.",
+      "x-enumNames": ["AUSSP", "EINSP", "RUHEND", "KUNDENANLAGE"],
+      "enum": [0, 1, 2, 3]
+    },
+    "Bilanzierungsmethode": {
+      "type": "integer",
+      "description": "Mit dieser Aufzählung kann zwischen den Bilanzierungsmethoden bzw. -Grundlagen unterschieden werden.",
+      "x-enumNames": [
+        "RLM",
+        "SLP",
+        "TLP_GEMEINSAM",
+        "TLP_GETRENNT",
+        "PAUSCHAL",
+        "IMS"
+      ],
+      "enum": [0, 1, 2, 3, 4, 5]
+    },
+    "Verbrauchsart": {
+      "type": "integer",
+      "description": "Verbrauchsart einer Marktlokation.",
+      "x-enumNames": [
+        "KL",
+        "KLW",
+        "KLWS",
+        "W",
+        "WS",
+        "WK",
+        "EM",
+        "STRB",
+        "STW"
+      ],
+      "enum": [0, 1, 2, 3, 4, 5, 6, 7, 8]
+    },
+    "Netzebene": {
+      "type": "integer",
+      "description": "Auflistung möglicher Netzebenen innerhalb der Energiearten Strom und Gas.",
+      "x-enumNames": [
+        "NSP",
+        "MSP",
+        "HSP",
+        "HSS",
+        "MSP_NSP_UMSP",
+        "HSP_MSP_UMSP",
+        "HSS_HSP_UMSP",
+        "HD",
+        "MD",
+        "ND"
+      ],
+      "enum": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+    },
+    "Gebiettyp": {
+      "type": "integer",
+      "description": "Auflistung der möglichen Gebietstypen.",
+      "x-enumNames": [
+        "REGELZONE",
+        "MARKTGEBIET",
+        "BILANZIERUNGSGEBIET",
+        "VERTEILNETZ",
+        "TRANSPORTNETZ",
+        "REGIONALNETZ",
+        "AREALNETZ",
+        "GRUNDVERSORGUNGSGEBIET",
+        "VERSORGUNGSGEBIET"
+      ],
+      "enum": [0, 1, 2, 3, 4, 5, 6, 7, 8]
+    },
+    "Gasqualitaet": {
+      "type": "integer",
+      "description": "Unterscheidung für hoch- und niedrig-kalorisches Gas.",
+      "x-enumNames": ["ZERO", "H_GAS", "L_GAS"],
+      "enum": [0, 1, 2]
+    },
     "Geokoordinaten": {
       "allOf": [
         {
@@ -1301,36 +2211,6 @@
             }
           }
         }
-      ]
-    },
-    "Mengeneinheit": {
-      "type": "integer",
-      "description": "Einheit: Messgrößen, die per Messung oder Vorgabe ermittelt werden können.\n            ",
-      "x-enumNames": [
-        "ZERO",
-        "WH",
-        "KW",
-        "ANZAHL",
-        "KUBIKMETER",
-        "STUNDE",
-        "TAG",
-        "MONAT",
-        "VAR",
-        "VARH",
-        "KWHK",
-        "W_M2",
-        "M_S",
-        "STUECK",
-        "JAHR",
-        "KWH",
-        "MW",
-        "KVAR",
-        "KVARH",
-        "MWH"
-      ],
-      "enum": [
-        0, 2, 3, 7, 11, 13, 17, 19, 23, 29, 40, 41, 42, 50, 228, 2000, 3000,
-        23000, 29000, 2000000
       ]
     },
     "Schwachlastfaehig": {
@@ -2858,34 +3738,6 @@
       "x-enumNames": ["ARTIKELID", "GRUPPENARTIKELID"],
       "enum": [0, 1]
     },
-    "Menge": {
-      "allOf": [
-        {
-          "$ref": "#/definitions/COM"
-        },
-        {
-          "type": "object",
-          "description": "Abbildung einer Menge mit Wert und Einheit.",
-          "additionalProperties": {},
-          "properties": {
-            "wert": {
-              "type": "number",
-              "description": "Gibt den absoluten Wert der Menge an.",
-              "format": "decimal"
-            },
-            "einheit": {
-              "description": "Gibt die Einheit zum jeweiligen Wert an. Details Mengeneinheit",
-              "x-nullable": true,
-              "oneOf": [
-                {
-                  "$ref": "#/definitions/Mengeneinheit"
-                }
-              ]
-            }
-          }
-        }
-      ]
-    },
     "Preis": {
       "allOf": [
         {
@@ -3067,209 +3919,166 @@
       "x-enumNames": ["ZERO", "GLN", "BDEW", "DVGW"],
       "enum": [0, 9, 293, 332]
     },
-    "Ansprechpartner": {
-      "allOf": [
-        {
-          "$ref": "#/definitions/BusinessObject"
-        },
-        {
-          "type": "object",
-          "description": "Modellierung eines Ansprechpartners für einen bestimmten Geschäftspartner.\n            ",
-          "additionalProperties": {},
-          "properties": {
-            "anrede": {
-              "description": "Mögliche Anrede des Ansprechpartners\n            ",
-              "x-nullable": true,
-              "oneOf": [
-                {
-                  "$ref": "#/definitions/Anrede"
-                }
-              ]
-            },
-            "inviduelleAnrede": {
-              "type": "string",
-              "description": "Im Falle einer nicht standardisierten Anrede kann hier eine frei definierbare\nAnrede vorgegeben werden. Beispiel: \"Sehr geehrte Frau Müller, sehr geehrter\nHerr Dr. Müller\"\n            ",
-              "x-nullable": true
-            },
-            "titel": {
-              "description": "Möglicher Titel des Ansprechpartners",
-              "x-nullable": true,
-              "oneOf": [
-                {
-                  "$ref": "#/definitions/Titel"
-                }
-              ]
-            },
-            "vorname": {
-              "type": "string",
-              "description": "Vorname des Ansprechpartners",
-              "x-nullable": true
-            },
-            "nachname": {
-              "type": "string",
-              "description": "Nachname (Familienname) des Ansprechpartners",
-              "x-nullable": true
-            },
-            "eMailAdresse": {
-              "type": "string",
-              "description": "E-Mail Adresse",
-              "x-nullable": true
-            },
-            "kommentar": {
-              "type": "string",
-              "description": "Weitere Informationen zum Ansprechpartner",
-              "x-nullable": true
-            },
-            "geschaeftspartner": {
-              "description": "Der Geschäftspartner, für den dieser Ansprechpartner modelliert wird.",
-              "x-nullable": true,
-              "oneOf": [
-                {
-                  "$ref": "#/definitions/Geschaeftspartner"
-                }
-              ]
-            },
-            "adresse": {
-              "description": "Adresse des Ansprechpartners, falls diese von der Adresse des Geschäftspartners abweicht.",
-              "x-nullable": true,
-              "oneOf": [
-                {
-                  "$ref": "#/definitions/Adresse"
-                }
-              ]
-            },
-            "rufnummern": {
-              "type": "array",
-              "description": "Liste der Telefonnummern, unter denen der Ansprechpartner erreichbar ist.",
-              "x-nullable": true,
-              "items": {
-                "$ref": "#/definitions/Rufnummer"
-              }
-            },
-            "zustaendigkeit": {
-              "type": "array",
-              "description": "Liste der Abteilungen und Zuständigkeiten des Ansprechpartners.",
-              "x-nullable": true,
-              "items": {
-                "$ref": "#/definitions/Zustaendigkeit"
-              }
-            },
-            "gewerbekennzeichnung": {
-              "type": "boolean",
-              "description": "true dann und nur dann, wenn es sich um eine Firma handelt",
-              "x-nullable": true
-            },
-            "unternehmensart": {
-              "description": "aus PARTIN gemappt: Für welche Art von Marktteilnehmer der Ansprechpartner tätig ist",
-              "x-nullable": true,
-              "oneOf": [
-                {
-                  "$ref": "#/definitions/Unternehmensart"
-                }
-              ]
-            }
-          }
-        }
-      ]
-    },
-    "Titel": {
-      "type": "integer",
-      "description": "Übersicht möglicher Titel, z.B. eines Geschäftspartners.",
-      "x-enumNames": ["DR", "PROF", "PROF_DR", "DIPLOM_INF"],
-      "enum": [0, 1, 2, 3]
-    },
-    "Rufnummer": {
-      "allOf": [
-        {
-          "$ref": "#/definitions/COM"
-        },
-        {
-          "type": "object",
-          "description": "Abbildung von Rufnummern.",
-          "additionalProperties": {},
-          "properties": {
-            "nummerntyp": {
-              "description": "Ausprägung der Nummer, z.B. Zentrale, Faxnummer, Mobilnummer etc. Details Rufnummernart\n            ",
-              "x-nullable": true,
-              "oneOf": [
-                {
-                  "$ref": "#/definitions/Rufnummernart"
-                }
-              ]
-            },
-            "rufnummer": {
-              "type": "string",
-              "description": "Die konkrete Nummer, z.B. 02433 5 26 01 900",
-              "x-nullable": true
-            }
-          }
-        }
-      ]
-    },
-    "Rufnummernart": {
-      "type": "integer",
-      "description": "Abbildung verschiedener Rufnummerntypen.",
-      "x-enumNames": [
-        "RUF_ZENTRALE",
-        "FAX_ZENTRALE",
-        "SAMMELRUF",
-        "SAMMELFAX",
-        "ABTEILUNGRUF",
-        "ABTEILUNGFAX",
-        "RUF_DURCHWAHL",
-        "FAX_DURCHWAHL",
-        "MOBIL_NUMMER"
-      ],
-      "enum": [0, 1, 2, 3, 4, 5, 6, 7, 8]
-    },
-    "Zustaendigkeit": {
-      "allOf": [
-        {
-          "$ref": "#/definitions/COM"
-        },
-        {
-          "type": "object",
-          "description": "Enthält die zeitliche Zuordnung eines Ansprechpartners zu Abteilungen und Zuständigkeiten.",
-          "additionalProperties": {},
-          "properties": {
-            "jobtitel": {
-              "type": "string",
-              "description": "Berufliche Rolle des Ansprechpartners",
-              "x-nullable": true
-            },
-            "abteilung": {
-              "type": "string",
-              "description": "Abteilung, in der der Ansprechpartner tätig ist",
-              "x-nullable": true
-            },
-            "themengebiet": {
-              "type": "string",
-              "description": "Hier kann eine thematische Zuordnung des APs angegeben werden. Details Themengebiet\n            ",
-              "x-nullable": true
-            }
-          }
-        }
-      ]
-    },
-    "Unternehmensart": {
-      "type": "integer",
-      "description": "kategorisiert Unternehmen nach Ihrer Marktrolle (basierend auf dem PARTIN-Datenmodell)",
-      "x-enumNames": [
-        "LIEFERANT",
-        "NETZBETREIBER",
-        "MESSSTELLENBETREIBER",
-        "ÜBERTRAGUNGSNETZBETREIBER",
-        "BILANZKOORDINATOR",
-        "BILANZKREISVERANTWORTLICHER",
-        "ENERGIESERVICEANBIETER"
-      ],
-      "enum": [0, 1, 2, 3, 4, 5, 6]
-    },
     "Marktteilnehmerrolle": {
       "type": "integer",
       "description": "Rolle eines Marktteilnehmers im Nachrichtenkontext.",
       "x-enumNames": ["ANDERE_PARTEI", "EMPFAENGER"],
       "enum": [0, 1]
+    },
+    "Angebotsposition": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/COM"
+        },
+        {
+          "type": "object",
+          "description": "Unterhalb von Angebotsteilen sind die Angebotspositionen eingebunden. Hier werden die angebotenen Bestandteile\neinzeln aufgeführt. Beispiel:\n            ",
+          "additionalProperties": {},
+          "properties": {
+            "positionsbezeichung": {
+              "type": "string",
+              "description": "Bezeichnung der jeweiligen Position des Angebotsteils.",
+              "x-nullable": true
+            },
+            "positionsmenge": {
+              "description": "Summe der Verbräuche (z. B. in kWh), die zu dieser Angebotsposition gehören. Details Menge\n            ",
+              "x-nullable": true,
+              "oneOf": [
+                {
+                  "$ref": "#/definitions/Menge"
+                }
+              ]
+            },
+            "positionspreis": {
+              "description": "Preis pro Einheit/Stückpreis der jeweiligen Angebotsposition. Details Preis",
+              "x-nullable": true,
+              "oneOf": [
+                {
+                  "$ref": "#/definitions/Preis"
+                }
+              ]
+            },
+            "positionsbetrag": {
+              "description": "Kosten (PositionsPreis * PositionsStückzahl) für diese Angebotsposition. Details Betrag\n            ",
+              "x-nullable": true,
+              "oneOf": [
+                {
+                  "$ref": "#/definitions/Betrag"
+                }
+              ]
+            },
+            "preisschluesselstamm": {
+              "type": "string",
+              "description": "Preisschlüsselstamm als Alternative zum Preis/>",
+              "x-nullable": true
+            },
+            "bdewArtikelnummer": {
+              "description": "Eine vom BDEW standardisierte Bezeichnung für die abgerechnete Leistungserbringung. Diese Artikelnummer wird\nauch im Rechnungsteil der INVOIC verwendet. \n            ",
+              "x-nullable": true,
+              "oneOf": [
+                {
+                  "$ref": "#/definitions/BDEWArtikelnummer"
+                }
+              ]
+            },
+            "artikelId": {
+              "type": "string",
+              "description": "Die genauen Bedeutungen der einzelnen Artikel-IDs sind in der EDI@Energy Codeliste der Artikelnummern\n            und Artikel-IDs zu finden, die in der Spalte des entsprechenden Prüfidentifikator ein X haben\n            ",
+              "x-nullable": true
+            },
+            "positionsmengeMinimum": {
+              "description": "Mindestmenge der jeweiligen Position des Angebotsteils.",
+              "x-nullable": true,
+              "oneOf": [
+                {
+                  "$ref": "#/definitions/Menge"
+                }
+              ]
+            },
+            "positionsmengeMaximum": {
+              "description": "Maximale Menge für die jeweilige Position des Angebotsteils.",
+              "x-nullable": true,
+              "oneOf": [
+                {
+                  "$ref": "#/definitions/Menge"
+                }
+              ]
+            }
+          }
+        }
+      ]
+    },
+    "BDEWArtikelnummer": {
+      "type": "integer",
+      "description": "BDEWArtikelnummer",
+      "x-enumNames": [
+        "LEISTUNG",
+        "LEISTUNG_PAUSCHAL",
+        "GRUNDPREIS",
+        "REGELENERGIE_ARBEIT",
+        "REGELENERGIE_LEISTUNG",
+        "NOTSTROMLIEFERUNG_ARBEIT",
+        "NOTSTROMLIEFERUNG_LEISTUNG",
+        "RESERVENETZKAPAZITAET",
+        "RESERVELEISTUNG",
+        "ZUSAETZLICHE_ABLESUNG",
+        "PRUEFGEBUEHREN_AUSSERPLANMAESSIG",
+        "WIRKARBEIT",
+        "SINGULAER_GENUTZTE_BETRIEBSMITTEL",
+        "ABGABE_KWKG",
+        "ABSCHLAG",
+        "KONZESSIONSABGABE",
+        "ENTGELT_FERNAUSLESUNG",
+        "UNTERMESSUNG",
+        "BLINDMEHRARBEIT",
+        "ENTGELT_ABRECHNUNG",
+        "SPERRKOSTEN",
+        "ENTSPERRKOSTEN",
+        "MAHNKOSTEN",
+        "MEHR_MINDERMENGEN",
+        "INKASSOKOSTEN",
+        "BLINDMEHRLEISTUNG",
+        "ENTGELT_MESSUNG_ABLESUNG",
+        "ENTGELT_EINBAU_BETRIEB_WARTUNG_MESSTECHNIK",
+        "AUSGLEICHSENERGIE",
+        "AUSGLEICHSENERGIE_UNTERDECKUNG",
+        "ZAEHLEINRICHTUNG",
+        "WANDLER_MENGENUMWERTER",
+        "KOMMUNIKATIONSEINRICHTUNG",
+        "TECHNISCHE_STEUEREINRICHTUNG",
+        "PARAGRAF_19_STROM_NEV_UMLAGE",
+        "BEFESTIGUNGSEINRICHTUNG",
+        "OFFSHORE_HAFTUNGSUMLAGE",
+        "FIXE_ARBEITSENTGELTKOMPONENTE",
+        "FIXE_LEISTUNGSENTGELTKOMPONENTE",
+        "UMLAGE_ABSCHALTBARE_LASTEN",
+        "MEHRMENGE",
+        "MINDERMENGE",
+        "ENERGIESTEUER",
+        "SMARTMETER_GATEWAY",
+        "STEUERBOX",
+        "MSB_INKL_MESSUNG",
+        "ZUSATZDIENSTLEISTUNG_PARAGRAPH_35_2_1_MSBG",
+        "ZUSATZDIENSTLEISTUNG_PARAGRAPH_35_2_2_MSBG",
+        "ZUSATZDIENSTLEISTUNG_PARAGRAPH_35_2_3_MSBG",
+        "ZUSATZDIENSTLEISTUNG_PARAGRAPH_35_2_4_MSBG",
+        "ZUSATZDIENSTLEISTUNG_PARAGRAPH_35_2_5_MSBG",
+        "ZUSATZDIENSTLEISTUNG_PARAGRAPH_35_3_MSBG",
+        "EINBAU_IMS",
+        "EINBAU_KME_RLM",
+        "EINBAU_WANDLER",
+        "WEITERE_ENERGIEFLUSSRICHTUNG",
+        "VERGLEICHSMESSUNG",
+        "ÄNDERUNG_MESSEBENE",
+        "EINBAU_STEUERBOX",
+        "ANSCHLUSS_TR_STEUERBOX_SR"
+      ],
+      "enum": [
+        0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19,
+        20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37,
+        38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55,
+        56, 57, 58, 59
+      ]
     }
   },
   "allOf": [
@@ -3278,104 +4087,42 @@
     },
     {
       "type": "object",
-      "description": "Objekt zur Aufnahme der Informationen zu einer Marktlokation\n            ",
+      "description": "Mit diesem BO kann ein Versorgungsangebot zur Strom- oder Gasversorgung oder die Teilnahme an einer Ausschreibung\nübertragen werden.Es können verschiedene Varianten enthalten sein (z.B.ein- und mehrjährige Laufzeit). Innerhalb\njeder Variante können Teile enthalten sein, die jeweils für eine oder mehrere Marktlokationen erstellt werden.\n            ",
       "additionalProperties": {},
       "properties": {
-        "marktlokationsId": {
+        "angebotsnummer": {
           "type": "string",
-          "description": "Identifikationsnummer einer Marktlokation, an der Energie entweder\nverbraucht, oder erzeugt wird\n            ",
-          "default": "|null|",
+          "description": "Eindeutige Nummer des Angebotes.\n            ",
           "x-nullable": true
         },
+        "anfragereferenz": {
+          "type": "string",
+          "description": "Referenz auf eine Anfrage oder Ausschreibung.Kann dem Empfänger des Angebotes bei Zuordnung des Angebotes zur\nAnfrage bzw.Ausschreibung helfen.\n            ",
+          "x-nullable": true
+        },
+        "angebotsdatum": {
+          "type": "string",
+          "description": "Erstellungsdatum des Angebots,\n            ",
+          "format": "date-time",
+          "x-example": "2017-12-24\n            "
+        },
         "sparte": {
-          "description": "Sparte der Messlokation, z.B. Gas oder Strom.",
+          "description": "Sparte, für die das Angebot abgegeben wird (Strom/Gas).\n            ",
           "oneOf": [
             {
               "$ref": "#/definitions/Sparte"
             }
           ]
         },
-        "energierichtung": {
-          "description": "Kennzeichnung, ob Energie eingespeist oder entnommen (ausgespeist) wird.",
-          "x-nullable": true,
-          "oneOf": [
-            {
-              "$ref": "#/definitions/Energierichtung"
-            }
-          ]
-        },
-        "bilanzierungsmethode": {
-          "description": "Kennzeichnung, ob Energie eingespeist oder entnommen (ausgespeist) wird.",
-          "x-nullable": true,
-          "oneOf": [
-            {
-              "$ref": "#/definitions/Bilanzierungsmethode"
-            }
-          ]
-        },
-        "verbrauchsart": {
-          "description": "Verbrauchsart der Marktlokation",
-          "x-nullable": true,
-          "oneOf": [
-            {
-              "$ref": "#/definitions/Verbrauchsart"
-            }
-          ]
-        },
-        "unterbrechbar": {
-          "type": "boolean",
-          "description": "Gibt an, ob es sich um eine unterbrechbare Belieferung handelt.",
-          "x-nullable": true
-        },
-        "netzebene": {
-          "description": "Netzebene, in der der Bezug der Energie erfolgt. Bei Strom Spannungsebene der\nLieferung, bei Gas Druckstufe. Beispiel Strom: Niederspannung Beispiel Gas:\nNiederdruck.\n\n            ",
-          "x-nullable": true,
-          "oneOf": [
-            {
-              "$ref": "#/definitions/Netzebene"
-            }
-          ]
-        },
-        "netzbetreiberCodeNr": {
+        "bindefrist": {
           "type": "string",
-          "description": "Codenummer des Netzbetreibers, an dessen Netz diese Marktlokation\nangeschlossen ist.\n            ",
-          "x-nullable": true
-        },
-        "gebietTyp": {
-          "description": "Typ des Netzgebietes,z.B.Verteilnetz.",
+          "description": "Bis zu diesem Zeitpunkt(Tag/Uhrzeit) inklusive gilt das Angebot\n            ",
+          "format": "date-time",
           "x-nullable": true,
-          "oneOf": [
-            {
-              "$ref": "#/definitions/Gebiettyp"
-            }
-          ]
+          "x-example": "2017-12-31 17:00:00\n            "
         },
-        "netzgebietNr": {
-          "type": "string",
-          "description": "Die Nummer des Netzgebietes in der ene't-Datenbank.",
-          "x-nullable": true
-        },
-        "bilanzierungsgebiet": {
-          "type": "string",
-          "description": "Bilanzierungsgebiet, dem das Netzgebiet zugeordnet ist - im Falle eines Strom Netzes.",
-          "x-nullable": true
-        },
-        "grundversorgerCodeNr": {
-          "type": "string",
-          "description": "CodeNummer des Grundversorgers, der für diese Marktlokation zuständig ist.",
-          "x-nullable": true
-        },
-        "gasqualitaet": {
-          "description": "Die Gasqualität in diesem Netzgebiet. H-Gas oder L-Gas. Im Falle eines Gas-Netzes.\n\n            ",
-          "x-nullable": true,
-          "oneOf": [
-            {
-              "$ref": "#/definitions/Gasqualitaet"
-            }
-          ]
-        },
-        "endkunde": {
-          "description": "Link zum Geschäftspartner, dem diese Marktlokation gehört.",
+        "angebotgeber": {
+          "description": "Link auf den Ersteller des Angebots.\n            ",
           "x-nullable": true,
           "oneOf": [
             {
@@ -3383,161 +4130,39 @@
             }
           ]
         },
-        "lokationsadresse": {
-          "description": "Die Adresse, an der die Energie-Lieferung oder -Einspeisung erfolgt. ",
+        "angebotnehmer": {
+          "description": "Link auf den Empfänger des Angebots.\n            ",
           "x-nullable": true,
           "oneOf": [
             {
-              "$ref": "#/definitions/Adresse"
+              "$ref": "#/definitions/Geschaeftspartner"
             }
           ]
         },
-        "geoadresse": {
-          "description": "Alternativ zu einer postalischen Adresse kann hier ein Ort mittels Geokoordinaten angegeben werden (z.B. zur\nIdentifikation von Sendemasten).\n            ",
+        "unterzeichnerAngebotsnehmer": {
+          "description": "Link auf die Person, die als Angebotsnehmer das Angebot angenommen hat.\n            ",
           "x-nullable": true,
           "oneOf": [
             {
-              "$ref": "#/definitions/Geokoordinaten"
+              "$ref": "#/definitions/Ansprechpartner"
             }
           ]
         },
-        "katasterinformation": {
-          "type": "array",
-          "description": "Alternativ zu einer postalischen Adresse und Geokoordinaten kann hier eine  Ortsangabe mittels Gemarkung und\nFlurstück erfolgen.\n            ",
-          "x-nullable": true,
-          "items": {
-            "$ref": "#/definitions/Katasteradresse"
-          }
-        },
-        "marktrollen": {
-          "type": "array",
-          "description": "für EDIFACT mapping\n            ",
-          "x-nullable": true,
-          "items": {
-            "$ref": "#/definitions/MarktpartnerDetails"
-          }
-        },
-        "regelzone": {
-          "type": "string",
-          "description": "für EDIFACT mapping\n            ",
-          "x-nullable": true
-        },
-        "marktgebiet": {
-          "type": "string",
-          "description": "für EDIFACT mapping\n            ",
-          "x-nullable": true
-        },
-        "zeitreihentyp": {
-          "description": "für EDIFACT mapping\n            ",
+        "unterzeichnerAngebotsgeber": {
+          "description": "Link auf die Person, die als Angebotsgeber das Angebots ausgestellt hat.\n            ",
           "x-nullable": true,
           "oneOf": [
             {
-              "$ref": "#/definitions/Zeitreihentyp"
+              "$ref": "#/definitions/Ansprechpartner"
             }
           ]
         },
-        "zaehlwerke": {
+        "varianten": {
           "type": "array",
-          "description": "für EDIFACT mapping\n            ",
+          "description": "Eine oder mehrere Varianten des Angebots mit den Angebotsteilen. Ein Angebot besteht mindestens aus einer Variante.\n            ",
           "x-nullable": true,
           "items": {
-            "$ref": "#/definitions/Zaehlwerk"
-          }
-        },
-        "zaehlwerkeBeteiligteMarktrolle": {
-          "type": "array",
-          "description": "Liste der Zählwerke der beteiligten Martrolle\n            ",
-          "x-nullable": true,
-          "items": {
-            "$ref": "#/definitions/Zaehlwerk"
-          }
-        },
-        "verbrauchsmenge": {
-          "type": "array",
-          "description": "für EDIFACT mapping\n            ",
-          "x-deprecated": true,
-          "x-deprecatedMessage": "Consider if this is really the right place to store the information. I think Energiemenge->energieverbrauch is better suited.",
-          "x-nullable": true,
-          "items": {
-            "$ref": "#/definitions/Verbrauch"
-          }
-        },
-        "messlokationen": {
-          "type": "array",
-          "description": "für EDIFACT mapping\n            ",
-          "x-nullable": true,
-          "items": {
-            "$ref": "#/definitions/Messlokation"
-          }
-        },
-        "zugehoerigeMesslokationen": {
-          "type": "array",
-          "description": "Aufzählung der Messlokationen, die zu dieser Marktlokation gehören.",
-          "x-nullable": true,
-          "items": {
-            "$ref": "#/definitions/Messlokationszuordnung"
-          }
-        },
-        "messtechnischeEinordnung": {
-          "description": "Messtechnische Einordnung aus der UTILMD (IMS, KME_MME, KEINE_MESSUNG)\n            ",
-          "x-nullable": true,
-          "oneOf": [
-            {
-              "$ref": "#/definitions/MesstechnischeEinordnung"
-            }
-          ]
-        },
-        "netznutzungsabrechnungsdaten": {
-          "type": "array",
-          "description": "Daten für die Prüfung der Netznutzungsabrechnung",
-          "x-nullable": true,
-          "items": {
-            "$ref": "#/definitions/Netznutzungsabrechnungsdaten"
-          }
-        },
-        "sperrstatus": {
-          "description": "Sperrstatus",
-          "x-nullable": true,
-          "oneOf": [
-            {
-              "$ref": "#/definitions/Sperrstatus"
-            }
-          ]
-        },
-        "messprodukte": {
-          "type": "array",
-          "description": "Zugeordnete Messprodukte\n            ",
-          "x-nullable": true,
-          "items": {
-            "$ref": "#/definitions/Messprodukt"
-          }
-        },
-        "konfigurationsprodukte": {
-          "type": "array",
-          "description": "Produkt-Daten der Marktlokation",
-          "x-nullable": true,
-          "items": {
-            "$ref": "#/definitions/Konfigurationsprodukt"
-          }
-        },
-        "lokationsbuendelObjektcode": {
-          "type": "string",
-          "description": "Lokationsbuendel Code, der die Funktion dieses BOs an der Lokationsbuendelstruktur beschreibt.",
-          "x-nullable": true
-        },
-        "vorgelagerteLokationsId": {
-          "type": "string",
-          "description": "Enthält die ID der vorgelagerten Lokation. Kann IDs unterschiedlicher Lokationen enthalten, also zum Beispiel\neiner Messlokation oder Netzlokation",
-          "x-deprecated": true,
-          "x-deprecatedMessage": "Abgelöst durch 'VorgelagerteLokationsIds'.",
-          "x-nullable": true
-        },
-        "vorgelagerteLokationsIds": {
-          "type": "array",
-          "description": "Enthält die ID's der vorgelagerten Lokationen. Kann IDs unterschiedlicher Lokationen enthalten, also zum Beispiel\neiner Messlokation oder Netzlokation",
-          "x-nullable": true,
-          "items": {
-            "$ref": "#/definitions/LokationsTypZuordnung"
+            "$ref": "#/definitions/Angebotsvariante"
           }
         }
       }

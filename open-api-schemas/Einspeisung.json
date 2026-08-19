@@ -1,307 +1,301 @@
 {
   "$schema": "http://json-schema.org/draft-04/schema#",
-  "title": "Handelsunstimmigkeit",
+  "title": "Einspeisung",
   "definitions": {
-    "Handelsunstimmigkeitstyp": {
+    "Geschaeftspartnerrolle": {
       "type": "integer",
-      "description": "Gibt den Typ der Handelsunstimmigkeit an (COMDIS DOC 1001)",
+      "description": "Diese Rollen kann ein Geschäftspartner einnehmen.",
       "x-enumNames": [
-        "HANDELSRECHNUNG",
-        "LIEFERSCHEIN_HANDELSUNSTIMMIGKEITSTYP",
-        "LIEFERSCHEIN_GRUND_ARBEITSPREIS",
-        "LIEFERSCHEIN_ARBEITS_LEISTUNGSPREIS"
+        "LIEFERANT",
+        "DIENSTLEISTER",
+        "KUNDE",
+        "INTERESSENT",
+        "MARKTPARTNER"
+      ],
+      "enum": [0, 1, 2, 3, 4]
+    },
+    "EEGVermarktungsform": {
+      "type": "integer",
+      "description": "Verschiedenen Vermarktungsformen gemäß dem Erneuerbare-Energien-Gesetz (EEG).",
+      "x-enumNames": [
+        "AUSFALLVERGUETUNG",
+        "MARKTPRAEMIE",
+        "SONSTIGE",
+        "KWKG_VERGUETUNG"
       ],
       "enum": [0, 1, 2, 3]
     },
-    "Handelsunstimmigkeitsbegruendung": {
-      "allOf": [
-        {
-          "$ref": "#/definitions/COM"
-        },
-        {
-          "type": "object",
-          "description": "Begründung der Korrektheit der Rechnung oder des Lieferscheins (COMDIS SG3 AJT)",
-          "additionalProperties": {},
-          "properties": {
-            "referenzen": {
-              "type": "array",
-              "description": "Referenzen auf vorherige Nachrichten",
-              "x-nullable": true,
-              "items": {
-                "type": "string"
-              }
-            },
-            "grund": {
-              "description": "Angabe des Handelsunstimmigkeitsgrunds",
-              "x-nullable": true,
-              "oneOf": [
-                {
-                  "$ref": "#/definitions/Handelsunstimmigkeitsgrund"
-                }
-              ]
-            }
-          }
-        }
-      ]
-    },
-    "Handelsunstimmigkeitsgrund": {
+    "Landescode": {
       "type": "integer",
-      "description": "Begründung der Korrektheit der Rechnung oder des Lieferscheins (COMDIS SG3 AJT 4465)",
+      "description": "Der ISO-Landescode.",
       "x-enumNames": [
-        "ANMELDUNG_BESTAETIGT",
-        "ABRECHNUNGSBEGINN_GLEICH_BESTAETIGTEM_VERTRAGSBEGINN",
-        "ABRECHNUNGSENDE_GLEICH_BESTAETIGTEM_VERTRAGSENDE",
-        "NN_MSCONS_UEBERSENDET",
-        "RICHTIGE_MESSWERTE_ENERGIEMENGEN_UEBERSENDET",
-        "SONSTIGES_SIEHE_BEGRUENDUNG",
-        "GUELTIGES_PREISBLATT_VERSENDET",
-        "GUELTIGER_SPERRAUFTRAG_VORHANDEN",
-        "KORREKTE_ARTIKEL_ID_IN_RECHNUNG",
-        "KORREKTER_PREIS_ZU_GUELTIGEM_PREISBLATT_IN_RECHNUNG",
-        "GUELTIGES_PREISBLATT_FRISTGERECHT_VERSENDET",
-        "GUELTIGE_RECHNUNG_VORHANDEN",
-        "KORREKTER_PREIS_IN_RECHNUNG_ABGERECHNET",
-        "GUELTIGES_PREISBLATT_BLINDARBEIT_VERSENDET",
-        "KORREKTE_ARTIKEL_ID_FUER_ABRECHNUNG_STORNIERTER_SPERRAUFTRAG_ANGEGEBEN"
-      ],
-      "enum": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14]
-    },
-    "COM": {
-      "type": "object",
-      "description": "The COM class is the abstract class from which all BO4E.COM classes are derived.\n            ",
-      "x-abstract": true,
-      "additionalProperties": {},
-      "properties": {
-        "guidSerialized": {
-          "type": "string",
-          "x-nullable": true
-        },
-        "timestamp": {
-          "type": "string",
-          "description": "Store the latest timestamp (update from the database)\n            ",
-          "format": "date-time",
-          "x-nullable": true
-        },
-        "guid": {
-          "type": "string",
-          "description": "allows adding a GUID to COM objects for tracking across systems\n            ",
-          "format": "guid",
-          "x-nullable": true
-        }
-      }
-    },
-    "Betrag": {
-      "allOf": [
-        {
-          "$ref": "#/definitions/COM"
-        },
-        {
-          "type": "object",
-          "description": "Die Komponente wird dazu verwendet Summebeträge - beispielsweise in Angeboten und Rechnungen - als Geldbeträge\nabzubilden. Die Einheit ist dabei immer die Hauptwährung also Euro, Dollar etc..\n            ",
-          "additionalProperties": {},
-          "properties": {
-            "wert": {
-              "type": "number",
-              "description": "Gibt den Betrag des Preises an.",
-              "format": "decimal"
-            },
-            "waehrung": {
-              "description": "            ",
-              "oneOf": [
-                {
-                  "$ref": "#/definitions/Waehrungscode"
-                }
-              ]
-            }
-          }
-        }
-      ]
-    },
-    "Waehrungscode": {
-      "type": "integer",
-      "description": "Aufzählung der Währungscodes.",
-      "x-enumNames": [
-        "AFN",
-        "ALL",
-        "AMD",
-        "ANG",
-        "AOA",
-        "ARS",
-        "AUD",
-        "AWG",
-        "AZN",
-        "BAM",
-        "BBD",
-        "BDT",
-        "BGN",
-        "BHD",
-        "BIF",
-        "BMD",
-        "BND",
-        "BOB",
-        "BOV",
-        "BRL",
-        "BSD",
-        "BTN",
-        "BWP",
-        "BYN",
-        "BYR",
-        "BZD",
-        "CAD",
-        "CDF",
-        "CHE",
-        "CHF",
-        "CHW",
-        "CLF",
-        "CLP",
-        "CNY",
-        "COP",
-        "COU",
-        "CRC",
-        "CUC",
-        "CUP",
-        "CVE",
-        "CZK",
-        "DJF",
-        "DKK",
-        "DOP",
-        "DZD",
-        "EGP",
-        "ERN",
-        "ETB",
-        "EUR",
-        "FJD",
-        "FKP",
-        "GBP",
-        "GEL",
-        "GHS",
-        "GIP",
-        "GMD",
-        "GNF",
-        "GTQ",
-        "GYD",
-        "HKD",
-        "HNL",
-        "HRK",
-        "HTG",
-        "HUF",
-        "IDR",
-        "ILS",
-        "INR",
-        "IQD",
-        "IRR",
-        "ISK",
-        "JMD",
-        "JOD",
-        "JPY",
-        "KES",
-        "KGS",
-        "KHR",
-        "KMF",
-        "KPW",
-        "KRW",
-        "KWD",
-        "KYD",
-        "KZT",
-        "LAK",
-        "LBP",
-        "LKR",
-        "LRD",
-        "LSL",
-        "LTL",
-        "LYD",
-        "MAD",
-        "MDL",
-        "MGA",
-        "MKD",
-        "MMK",
-        "MNT",
-        "MOP",
-        "MRO",
-        "MUR",
-        "MVR",
-        "MWK",
-        "MXN",
-        "MXV",
-        "MYR",
-        "MZN",
-        "NAD",
-        "NGN",
-        "NIO",
-        "NOK",
-        "NPR",
-        "NZD",
-        "OMR",
-        "PAB",
-        "PEN",
-        "PGK",
-        "PHP",
-        "PKR",
-        "PLN",
-        "PYG",
-        "QAR",
-        "RON",
-        "RSD",
-        "RUB",
-        "RUR",
-        "RWF",
-        "SAR",
-        "SBD",
-        "SCR",
-        "SDG",
-        "SEK",
-        "SGD",
-        "SHP",
-        "SLL",
-        "SOS",
-        "SRD",
-        "SSP",
-        "STD",
-        "SVC",
-        "SYP",
-        "SZL",
-        "THB",
-        "TJS",
-        "TMT",
-        "TND",
-        "TOP",
-        "TRY",
-        "TTD",
-        "TWD",
-        "TZS",
-        "UAH",
-        "UGX",
-        "USD",
-        "USN",
-        "USS",
-        "UYI",
-        "UYU",
-        "UZS",
-        "VEF",
-        "VND",
-        "VUV",
-        "WST",
-        "XAF",
-        "XAG",
-        "XAU",
-        "XBA",
-        "XBB",
-        "XBC",
-        "XBD",
-        "XCD",
-        "XDR",
-        "XOF",
-        "XPD",
-        "XPF",
-        "XPT",
-        "XSU",
-        "XTS",
-        "XUA",
-        "XXX",
-        "YER",
-        "ZAR",
-        "ZMW",
-        "ZWL"
+        "AC",
+        "AD",
+        "AE",
+        "AF",
+        "AG",
+        "AI",
+        "AL",
+        "AM",
+        "AN",
+        "AO",
+        "AQ",
+        "AR",
+        "AS",
+        "AT",
+        "AU",
+        "AW",
+        "AX",
+        "AZ",
+        "BA",
+        "BB",
+        "BD",
+        "BE",
+        "BF",
+        "BG",
+        "BH",
+        "BI",
+        "BJ",
+        "BL",
+        "BM",
+        "BN",
+        "BO",
+        "BQ",
+        "BR",
+        "BS",
+        "BT",
+        "BU",
+        "BV",
+        "BW",
+        "BY",
+        "BZ",
+        "CA",
+        "CC",
+        "CD",
+        "CF",
+        "CG",
+        "CH",
+        "CI",
+        "CK",
+        "CL",
+        "CM",
+        "CN",
+        "CO",
+        "CP",
+        "CR",
+        "CS",
+        "CU",
+        "CV",
+        "CW",
+        "CX",
+        "CY",
+        "CZ",
+        "DE",
+        "DG",
+        "DJ",
+        "DK",
+        "DM",
+        "DO",
+        "DZ",
+        "EA",
+        "EC",
+        "EE",
+        "EG",
+        "EH",
+        "ER",
+        "ES",
+        "ET",
+        "EU",
+        "FI",
+        "FJ",
+        "FK",
+        "FM",
+        "FO",
+        "FR",
+        "FX",
+        "GA",
+        "GB",
+        "GD",
+        "GE",
+        "GF",
+        "GG",
+        "GH",
+        "GI",
+        "GL",
+        "GM",
+        "GN",
+        "GP",
+        "GQ",
+        "GR",
+        "GS",
+        "GT",
+        "GU",
+        "GW",
+        "GY",
+        "HK",
+        "HM",
+        "HN",
+        "HR",
+        "HT",
+        "HU",
+        "IC",
+        "ID",
+        "IE",
+        "IL",
+        "IM",
+        "IN",
+        "IO",
+        "IQ",
+        "IR",
+        "IS",
+        "IT",
+        "JE",
+        "JM",
+        "JO",
+        "JP",
+        "KE",
+        "KG",
+        "KH",
+        "KI",
+        "KM",
+        "KN",
+        "KP",
+        "KR",
+        "KW",
+        "KY",
+        "KZ",
+        "LA",
+        "LB",
+        "LC",
+        "LI",
+        "LK",
+        "LR",
+        "LS",
+        "LT",
+        "LU",
+        "LV",
+        "LY",
+        "MA",
+        "MC",
+        "MD",
+        "ME",
+        "MF",
+        "MG",
+        "MH",
+        "MK",
+        "ML",
+        "MM",
+        "MN",
+        "MO",
+        "MP",
+        "MQ",
+        "MR",
+        "MS",
+        "MT",
+        "MU",
+        "MV",
+        "MW",
+        "MX",
+        "MY",
+        "MZ",
+        "NA",
+        "NC",
+        "NE",
+        "NF",
+        "NG",
+        "NI",
+        "NL",
+        "NO",
+        "NP",
+        "NR",
+        "NT",
+        "NU",
+        "NZ",
+        "OM",
+        "PA",
+        "PE",
+        "PF",
+        "PG",
+        "PH",
+        "PK",
+        "PL",
+        "PM",
+        "PN",
+        "PR",
+        "PS",
+        "PT",
+        "PW",
+        "PY",
+        "QA",
+        "RE",
+        "RO",
+        "RS",
+        "RU",
+        "RW",
+        "SA",
+        "SB",
+        "SC",
+        "SD",
+        "SE",
+        "SF",
+        "SG",
+        "SH",
+        "SI",
+        "SJ",
+        "SK",
+        "SL",
+        "SM",
+        "SN",
+        "SO",
+        "SR",
+        "SS",
+        "ST",
+        "SU",
+        "SV",
+        "SX",
+        "SY",
+        "SZ",
+        "TA",
+        "TC",
+        "TD",
+        "TF",
+        "TG",
+        "TJ",
+        "TK",
+        "TL",
+        "TM",
+        "TN",
+        "TO",
+        "TP",
+        "TR",
+        "TT",
+        "TV",
+        "TW",
+        "TZ",
+        "UA",
+        "UG",
+        "UK",
+        "UM",
+        "US",
+        "UY",
+        "UZ",
+        "VA",
+        "VC",
+        "VE",
+        "VG",
+        "VI",
+        "VN",
+        "VU",
+        "WF",
+        "WS",
+        "XK",
+        "YE",
+        "YT",
+        "YU",
+        "ZA",
+        "ZM",
+        "ZR",
+        "ZW"
       ],
       "enum": [
         0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19,
@@ -315,8 +309,42 @@
         136, 137, 138, 139, 140, 141, 142, 143, 144, 145, 146, 147, 148, 149,
         150, 151, 152, 153, 154, 155, 156, 157, 158, 159, 160, 161, 162, 163,
         164, 165, 166, 167, 168, 169, 170, 171, 172, 173, 174, 175, 176, 177,
-        178, 179, 180
+        178, 179, 180, 181, 182, 183, 184, 185, 186, 187, 188, 189, 190, 191,
+        192, 193, 194, 195, 196, 197, 198, 199, 200, 201, 202, 203, 204, 205,
+        206, 207, 208, 209, 210, 211, 212, 213, 214, 215, 216, 217, 218, 219,
+        220, 221, 222, 223, 224, 225, 226, 227, 228, 229, 230, 231, 232, 233,
+        234, 235, 236, 237, 238, 239, 240, 241, 242, 243, 244, 245, 246, 247,
+        248, 249, 250, 251, 252, 253, 254, 255, 256, 257, 258, 259, 260, 261,
+        262, 263, 264, 265, 266
       ]
+    },
+    "FernsteuerbarkeitStatus": {
+      "type": "integer",
+      "description": "Status der Fernsteuerbarkeit einer Marktlokation gemäß den Vorgaben für die Direktvermarktung.",
+      "x-enumNames": [
+        "NICHT_FERNSTEUERBAR",
+        "TECHNISCH_FERNSTEUERBAR",
+        "LIEFERANT_FERNSTEUERBAR"
+      ],
+      "enum": [0, 1, 2]
+    },
+    "Erzeugungsart": {
+      "type": "integer",
+      "description": "Auflistung der Erzeugungsarten von Energie.",
+      "x-enumNames": [
+        "KWK",
+        "WIND",
+        "SOLAR",
+        "KERNKRAFT",
+        "WASSER",
+        "GEOTHERMIE",
+        "BIOMASSE",
+        "KOHLE",
+        "GAS",
+        "SONSTIGE",
+        "SONSTIGE_EEG"
+      ],
+      "enum": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
     },
     "BusinessObject": {
       "type": "object",
@@ -403,6 +431,30 @@
           }
         }
       ]
+    },
+    "COM": {
+      "type": "object",
+      "description": "The COM class is the abstract class from which all BO4E.COM classes are derived.\n            ",
+      "x-abstract": true,
+      "additionalProperties": {},
+      "properties": {
+        "guidSerialized": {
+          "type": "string",
+          "x-nullable": true
+        },
+        "timestamp": {
+          "type": "string",
+          "description": "Store the latest timestamp (update from the database)\n            ",
+          "format": "date-time",
+          "x-nullable": true
+        },
+        "guid": {
+          "type": "string",
+          "description": "allows adding a GUID to COM objects for tracking across systems\n            ",
+          "format": "guid",
+          "x-nullable": true
+        }
+      }
     },
     "Zeitraum": {
       "allOf": [
@@ -494,39 +546,68 @@
     },
     {
       "type": "object",
-      "description": "Handelsunstimmigkeit BO",
+      "description": "Einspeisung BO",
       "additionalProperties": {},
       "properties": {
-        "nummer": {
+        "marktlokationsId": {
           "type": "string",
-          "description": "Handelsunstimmigkeitsnummer",
+          "description": "Für welche Marktlokation gelten diese Einspeisedaten",
           "x-nullable": true
         },
-        "typ": {
-          "description": "Gibt den Typ der Handelsunstimmigkeit an.",
-          "oneOf": [
-            {
-              "$ref": "#/definitions/Handelsunstimmigkeitstyp"
-            }
-          ]
-        },
-        "begruendung": {
-          "description": "Handelsunstimmigskeitsbegründung",
+        "verguetungsempfaenger": {
+          "description": "Empfänger der Vergütung zur Einspeisung",
           "x-nullable": true,
           "oneOf": [
             {
-              "$ref": "#/definitions/Handelsunstimmigkeitsbegruendung"
+              "$ref": "#/definitions/Geschaeftspartnerrolle"
             }
           ]
         },
-        "zuZahlen": {
-          "description": "angeforderter Betrag",
+        "eegVermarktungsform": {
+          "description": "Vermarktungsformen gemäß dem Erneuerbare-Energien-Gesetz (EEG).",
           "x-nullable": true,
           "oneOf": [
             {
-              "$ref": "#/definitions/Betrag"
+              "$ref": "#/definitions/EEGVermarktungsform"
             }
           ]
+        },
+        "landescode": {
+          "description": "Land der Förderung, Details Landescode",
+          "x-nullable": true,
+          "oneOf": [
+            {
+              "$ref": "#/definitions/Landescode"
+            }
+          ]
+        },
+        "fernsteuerbarkeitStatus": {
+          "description": "Status der Fernsteuerbarkeit einer Marktlokation",
+          "x-nullable": true,
+          "oneOf": [
+            {
+              "$ref": "#/definitions/FernsteuerbarkeitStatus"
+            }
+          ]
+        },
+        "erzeugungsart": {
+          "description": "Erzeugungsart",
+          "x-nullable": true,
+          "oneOf": [
+            {
+              "$ref": "#/definitions/Erzeugungsart"
+            }
+          ]
+        },
+        "istDvPflichtig": {
+          "type": "boolean",
+          "description": "Direktvermarktungspflichtig",
+          "x-nullable": true
+        },
+        "trancheId": {
+          "type": "string",
+          "description": "Für welche Tranche gelten diese Einspeisedaten",
+          "x-nullable": true
         }
       }
     }

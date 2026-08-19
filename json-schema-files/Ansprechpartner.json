@@ -12,10 +12,10 @@
           "type": ["string", "null"]
         },
         "postleitzahl": {
-          "type": "string"
+          "type": ["string", "null"]
         },
         "ort": {
-          "type": "string"
+          "type": ["string", "null"]
         },
         "strasse": {
           "type": ["string", "null"]
@@ -309,7 +309,79 @@
           "type": ["string", "null"]
         }
       },
-      "required": ["postleitzahl", "ort"]
+      "required": [
+        "postleitzahl",
+        "ort",
+        "strasse",
+        "hausnummer",
+        "postfach",
+        "adresszusatz",
+        "coErgaenzung",
+        "landescode"
+      ]
+    },
+    "Bankverbindung": {
+      "type": ["object", "null"],
+      "properties": {
+        "timestamp": {
+          "type": ["string", "null"],
+          "format": "date-time"
+        },
+        "guid": {
+          "type": ["string", "null"]
+        },
+        "iban": {
+          "type": ["string", "null"]
+        },
+        "kontoinhaber": {
+          "type": ["string", "null"]
+        },
+        "bankkennung": {
+          "type": ["string", "null"]
+        },
+        "bankname": {
+          "type": ["string", "null"]
+        }
+      },
+      "required": ["iban", "kontoinhaber", "bankkennung", "bankname"]
+    },
+    "Erreichbarkeit": {
+      "type": ["object", "null"],
+      "properties": {
+        "timestamp": {
+          "type": ["string", "null"],
+          "format": "date-time"
+        },
+        "guid": {
+          "type": ["string", "null"]
+        },
+        "montagErreichbarkeit": {
+          "$ref": "#/definitions/Zeitfenster"
+        },
+        "dienstagErreichbarkeit": {
+          "$ref": "#/definitions/Zeitfenster"
+        },
+        "mittwochErreichbarkeit": {
+          "$ref": "#/definitions/Zeitfenster"
+        },
+        "donnerstagErreichbarkeit": {
+          "$ref": "#/definitions/Zeitfenster"
+        },
+        "freitagErreichbarkeit": {
+          "$ref": "#/definitions/Zeitfenster"
+        },
+        "mittagspause": {
+          "$ref": "#/definitions/Zeitfenster"
+        }
+      },
+      "required": [
+        "montagErreichbarkeit",
+        "dienstagErreichbarkeit",
+        "mittwochErreichbarkeit",
+        "donnerstagErreichbarkeit",
+        "freitagErreichbarkeit",
+        "mittagspause"
+      ]
     },
     "ExterneReferenz": {
       "type": ["object", "null"],
@@ -327,7 +399,8 @@
         "guid": {
           "type": ["string", "null"]
         }
-      }
+      },
+      "required": ["exRefName", "exRefWert"]
     },
     "Geschaeftspartner": {
       "type": ["object", "null"],
@@ -432,30 +505,81 @@
             "KEINE_ANGABE"
           ]
         },
-        "grundDerPrivilegierungNachEnFG": {
+        "gruendeDerPrivilegierungNachEnFG": {
+          "type": ["array", "null"],
+          "items": {
+            "type": "string",
+            "enum": [
+              "STROMSPEICHER_UND_VERLUSTENERGIE",
+              "ELEKTRISCH_ANGETRIEBENE_WAERMEPUMPEN",
+              "UMLAGEERHEBUNG_BEI_ANLAGEN_ZUR_VERSTROMUNG_VON_KUPPELGASEN",
+              "HERSTELLUNG_VON_GRUENEN_WASSERSTOFF",
+              "STROMKOSTENINTENSIVE_UNTERNEHMEN",
+              "HERSTELLUNG_VON_WASSERSTOFF_IN_STROMKOSTENINTENSIVEN_UNTERNEHMEN",
+              "SCHIENENBAHNEN",
+              "ELEKTRISCHE_BETRIEBENE_BUSSEN_IM_LINIENVERKEHR",
+              "LANDSTROMANLAGEN"
+            ]
+          }
+        },
+        "bankverbindung": {
+          "$ref": "#/definitions/Bankverbindung"
+        },
+        "steuernummer": {
+          "type": ["string", "null"]
+        },
+        "erreichbarkeit": {
+          "$ref": "#/definitions/Erreichbarkeit"
+        },
+        "gueltigkeitszeitraum": {
+          "$ref": "#/definitions/Zeitraum"
+        },
+        "qualitaet": {
           "type": ["string", "null"],
           "enum": [
             null,
-            "STROMSPEICHER_UND_VERLUSTENERGIE",
-            "ELEKTRISCH_ANGETRIEBENE_WAERMEPUMPEN",
-            "UMLAGEERHEBUNG_BEI_ANLAGEN_ZUR_VERSTROMUNG_VON_KUPPELGASEN",
-            "HERSTELLUNG_VON_GRUENEN_WASSERSTOFF",
-            "STROMKOSTENINTENSIVE_UNTERNEHMEN",
-            "HERSTELLUNG_VON_WASSERSTOFF_IN_STROMKOSTENINTENSIVEN_UNTERNEHMEN",
-            "SCHIENENBAHNEN",
-            "ELEKTRISCHE_BETRIEBENE_BUSSEN_IM_LINIENVERKEHR",
-            "LANDSTROMANLAGEN"
+            "VOLLSTAENDIG",
+            "INFORMATIV",
+            "IM_SYSTEM_VORHANDEN",
+            "ERWARTET",
+            "VORLAEUFIG",
+            "UNVOLLSTAENDIG"
           ]
         }
       },
-      "required": ["gewerbekennzeichnung"]
+      "required": [
+        "boTyp",
+        "versionStruktur",
+        "externeReferenzen",
+        "anrede",
+        "title",
+        "name1",
+        "name2",
+        "name3",
+        "gewerbekennzeichnung",
+        "hrnummer",
+        "amtsgericht",
+        "kontaktweg",
+        "umsatzsteuerId",
+        "glaeubigerId",
+        "eMailAdresse",
+        "website",
+        "geschaeftspartnerrolle",
+        "partneradresse",
+        "grundlageZurVerringerungDerUmlagenNachEnfg",
+        "gruendeDerPrivilegierungNachEnFG",
+        "bankverbindung",
+        "steuernummer",
+        "erreichbarkeit"
+      ]
     },
     "Rufnummer": {
       "type": ["object", "null"],
       "properties": {
         "nummerntyp": {
-          "type": "string",
+          "type": ["string", "null"],
           "enum": [
+            null,
             "RUF_ZENTRALE",
             "FAX_ZENTRALE",
             "SAMMELRUF",
@@ -468,7 +592,7 @@
           ]
         },
         "rufnummer": {
-          "type": "string"
+          "type": ["string", "null"]
         },
         "timestamp": {
           "type": ["string", "null"],
@@ -479,6 +603,80 @@
         }
       },
       "required": ["nummerntyp", "rufnummer"]
+    },
+    "Zeitfenster": {
+      "type": ["object", "null"],
+      "properties": {
+        "timestamp": {
+          "type": ["string", "null"],
+          "format": "date-time"
+        },
+        "guid": {
+          "type": ["string", "null"]
+        },
+        "startzeit": {
+          "type": ["string", "null"]
+        },
+        "endzeit": {
+          "type": ["string", "null"]
+        }
+      },
+      "required": ["startzeit", "endzeit"]
+    },
+    "Zeitraum": {
+      "type": ["object", "null"],
+      "properties": {
+        "einheit": {
+          "type": ["string", "null"],
+          "enum": [
+            null,
+            "SEKUNDE",
+            "MINUTE",
+            "STUNDE",
+            "VIERTEL_STUNDE",
+            "TAG",
+            "WOCHE",
+            "MONAT",
+            "QUARTAL",
+            "HALBJAHR",
+            "JAHR"
+          ]
+        },
+        "dauer": {
+          "type": ["number", "null"]
+        },
+        "startdatum": {
+          "type": ["string", "null"],
+          "format": "date-time"
+        },
+        "enddatum": {
+          "type": ["string", "null"],
+          "format": "date-time"
+        },
+        "startzeitpunkt": {
+          "type": ["string", "null"],
+          "format": "date-time"
+        },
+        "endzeitpunkt": {
+          "type": ["string", "null"],
+          "format": "date-time"
+        },
+        "timestamp": {
+          "type": ["string", "null"],
+          "format": "date-time"
+        },
+        "guid": {
+          "type": ["string", "null"]
+        }
+      },
+      "required": [
+        "einheit",
+        "dauer",
+        "startdatum",
+        "enddatum",
+        "startzeitpunkt",
+        "endzeitpunkt"
+      ]
     },
     "Zustaendigkeit": {
       "type": ["object", "null"],
@@ -499,7 +697,8 @@
         "guid": {
           "type": ["string", "null"]
         }
-      }
+      },
+      "required": ["jobtitel", "abteilung", "themengebiet"]
     }
   },
   "type": "object",
@@ -544,7 +743,7 @@
     },
     "titel": {
       "type": ["string", "null"],
-      "enum": [null, "DR", "PROF", "PROF_DR"]
+      "enum": [null, "DR", "PROF", "PROF_DR", "DIPLOM_INF"]
     },
     "vorname": {
       "type": ["string", "null"]
@@ -575,6 +774,55 @@
       "items": {
         "$ref": "#/definitions/Zustaendigkeit"
       }
+    },
+    "gewerbekennzeichnung": {
+      "type": ["boolean", "null"]
+    },
+    "unternehmensart": {
+      "type": ["string", "null"],
+      "enum": [
+        null,
+        "LIEFERANT",
+        "NETZBETREIBER",
+        "MESSSTELLENBETREIBER",
+        "ÜBERTRAGUNGSNETZBETREIBER",
+        "BILANZKOORDINATOR",
+        "BILANZKREISVERANTWORTLICHER",
+        "ENERGIESERVICEANBIETER"
+      ]
+    },
+    "gueltigkeitszeitraum": {
+      "$ref": "#/definitions/Zeitraum"
+    },
+    "qualitaet": {
+      "type": ["string", "null"],
+      "enum": [
+        null,
+        "VOLLSTAENDIG",
+        "INFORMATIV",
+        "IM_SYSTEM_VORHANDEN",
+        "ERWARTET",
+        "VORLAEUFIG",
+        "UNVOLLSTAENDIG"
+      ]
     }
-  }
+  },
+  "required": [
+    "boTyp",
+    "versionStruktur",
+    "externeReferenzen",
+    "anrede",
+    "inviduelleAnrede",
+    "titel",
+    "vorname",
+    "nachname",
+    "eMailAdresse",
+    "kommentar",
+    "geschaeftspartner",
+    "adresse",
+    "rufnummern",
+    "zustaendigkeit",
+    "gewerbekennzeichnung",
+    "unternehmensart"
+  ]
 }

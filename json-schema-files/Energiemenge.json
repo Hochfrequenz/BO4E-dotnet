@@ -20,6 +20,96 @@
       },
       "required": ["exRefName", "exRefWert"]
     },
+    "Lastprofil": {
+      "type": ["object", "null"],
+      "properties": {
+        "bezeichnung": {
+          "type": ["string", "null"]
+        },
+        "profilschar": {
+          "type": ["string", "null"]
+        },
+        "verfahren": {
+          "type": ["string", "null"],
+          "enum": [null, "SYNTHETISCH", "ANALYTISCH"]
+        },
+        "einspeisung": {
+          "type": ["boolean", "null"]
+        },
+        "tagesparameter": {
+          "$ref": "#/definitions/Tagesparameter"
+        },
+        "profilart": {
+          "type": ["string", "null"],
+          "enum": [
+            null,
+            "ART_STANDARDLASTPROFIL",
+            "ART_TAGESPARAMETERABHAENGIGES_LASTPROFIL",
+            "ART_LASTPROFIL",
+            "ART_STANDARDEINSPEISEPROFIL",
+            "ART_TAGESPARAMETERABHAENGIGES_EINSPEISEPROFIL"
+          ]
+        },
+        "herausgeber": {
+          "type": ["string", "null"]
+        },
+        "profiltyp": {
+          "type": ["string", "null"],
+          "enum": [
+            null,
+            "GEWERBE",
+            "GEWERBE_WERKTAG_9_BIS_18",
+            "GEWERBE_ABEND",
+            "GEWERBE_DURCHLAUFEND",
+            "GEWERBE_LADEN_FRISEUR",
+            "GEWERBE_BAECKEREI",
+            "GEWERBE_WOCHENENDE",
+            "LANDWIRTSCHAFT",
+            "LANDWIRTSCHAFT_MIT_MILCH",
+            "LANDWIRTSCHAFT_OHNE_MILCH",
+            "HAUSHALT",
+            "BANDLAST",
+            "UNTERBRECHBARE_VERBRAUCHSEINRICHTUNG",
+            "HEIZWAERMESPEICHER",
+            "STRASSENBELEUCHTUNG",
+            "PHOTOVOLTAIK",
+            "BLOCKHEIZKRAFTWERK",
+            "SONSTIGE_VERBRAUCHENDE_MARKTLOKATION",
+            "SONSTIGE_ERZEUGENDE_MARKTLOKATION",
+            "EMOB_OEFFENTLICH",
+            "EMOB_HAUSHALT",
+            "EMOB_GEWERBE"
+          ]
+        },
+        "normierungsfaktor": {
+          "type": ["string", "null"],
+          "enum": [
+            null,
+            "NORMIERUNGSFAKTOR_1_000_000_KWH_A",
+            "NORMIERUNGSFAKTOR_300_KWH_K",
+            "NORMIERUNGSFAKTOR_1_000_000_KW"
+          ]
+        },
+        "timestamp": {
+          "type": ["string", "null"],
+          "format": "date-time"
+        },
+        "guid": {
+          "type": ["string", "null"]
+        }
+      },
+      "required": [
+        "bezeichnung",
+        "profilschar",
+        "verfahren",
+        "einspeisung",
+        "tagesparameter",
+        "profilart",
+        "herausgeber",
+        "profiltyp",
+        "normierungsfaktor"
+      ]
+    },
     "StatusZusatzInformation": {
       "type": ["object", "null"],
       "properties": {
@@ -120,6 +210,36 @@
       },
       "required": ["art", "status"]
     },
+    "Tagesparameter": {
+      "type": ["object", "null"],
+      "properties": {
+        "klimazone": {
+          "type": ["string", "null"]
+        },
+        "temperaturmessstelle": {
+          "type": ["string", "null"]
+        },
+        "dienstanbieter": {
+          "type": ["string", "null"]
+        },
+        "herausgeber": {
+          "type": ["string", "null"]
+        },
+        "timestamp": {
+          "type": ["string", "null"],
+          "format": "date-time"
+        },
+        "guid": {
+          "type": ["string", "null"]
+        }
+      },
+      "required": [
+        "klimazone",
+        "temperaturmessstelle",
+        "dienstanbieter",
+        "herausgeber"
+      ]
+    },
     "Verbrauch": {
       "type": ["object", "null"],
       "properties": {
@@ -209,6 +329,9 @@
             "VAR",
             "VARH",
             "KWHK",
+            "W_M2",
+            "M_S",
+            "STUECK",
             "JAHR",
             "KWH",
             "MW",
@@ -224,6 +347,12 @@
         "ausfuehrungszeitpunkt": {
           "type": ["string", "null"],
           "format": "date-time"
+        },
+        "temperaturmasszahl": {
+          "type": ["string", "null"]
+        },
+        "zeitfenster": {
+          "$ref": "#/definitions/Zeitfenster"
         }
       },
       "required": [
@@ -238,8 +367,29 @@
         "wert",
         "einheit",
         "nutzungszeitpunkt",
-        "ausfuehrungszeitpunkt"
+        "ausfuehrungszeitpunkt",
+        "temperaturmasszahl",
+        "zeitfenster"
       ]
+    },
+    "Zeitfenster": {
+      "type": ["object", "null"],
+      "properties": {
+        "timestamp": {
+          "type": ["string", "null"],
+          "format": "date-time"
+        },
+        "guid": {
+          "type": ["string", "null"]
+        },
+        "startzeit": {
+          "type": ["string", "null"]
+        },
+        "endzeit": {
+          "type": ["string", "null"]
+        }
+      },
+      "required": ["startzeit", "endzeit"]
     },
     "Zeitraum": {
       "type": ["object", "null"],
@@ -324,14 +474,16 @@
     },
     "lokationsTyp": {
       "type": ["string", "null"],
-      "enum": [null, "MALO", "MELO"]
+      "enum": [null, "MALO", "MELO", "NELO", "SR", "TR"]
     },
     "energieverbrauch": {
       "type": ["array", "null"],
       "items": {
         "$ref": "#/definitions/Verbrauch"
-      },
-      "minItems": 1
+      }
+    },
+    "lastprofil": {
+      "$ref": "#/definitions/Lastprofil"
     },
     "gueltigkeitszeitraum": {
       "$ref": "#/definitions/Zeitraum"
@@ -355,6 +507,7 @@
     "externeReferenzen",
     "lokationsId",
     "lokationsTyp",
-    "energieverbrauch"
+    "energieverbrauch",
+    "lastprofil"
   ]
 }

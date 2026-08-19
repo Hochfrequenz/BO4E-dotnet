@@ -119,6 +119,9 @@
       "type": ["string", "null"],
       "enum": [null, "LEISTUNG_LOKATION_AN", "LEISTUNG_LOKATION_AUS"]
     },
+    "aenderungszeitpunktDateFormat": {
+      "type": ["string", "null"]
+    },
     "gueltigkeitszeitraum": {
       "$ref": "#/definitions/Zeitraum"
     },
