@@ -1,0 +1,110 @@
+# Regenerates the JSON/OpenAPI schemas from the C# classes whenever a release is published and
+# converts them into the TypeScript models of https://github.com/Hochfrequenz/bo4e-dotnet-ts-models.
+#
+# Before this workflow existed, both steps were manual: somebody had to run the schema generator
+# locally and commit the result (which happened roughly once a year), so the published TypeScript
+# models lagged behind the C# data model by months.
+name: Generate Schemas and TypeScript Models
+
+on:
+  release:
+    types:
+      - published
+  workflow_dispatch:
+
+jobs:
+  generate:
+    name: Generate Schemas and TypeScript Models
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      pull-requests: write
+    steps:
+      - name: Check out the released commit
+        uses: actions/checkout@v7
+        with:
+          # all branches, so that the regenerated schemas can be committed onto main below
+          fetch-depth: 0
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v6
+        with:
+          dotnet-version: 10
+      - name: Set up Node.js
+        uses: actions/setup-node@v7
+        with:
+          node-version: 22
+      # The schemas are generated outside the repository, so that switching to main afterwards
+      # does not conflict with the generated files.
+      - name: Generate JSON and OpenAPI Schemas from the C# classes
+        run: |
+          ./SchemaGenerator/generate-json-schemas.sh \
+            "$RUNNER_TEMP/json-schema-files" \
+            "$RUNNER_TEMP/open-api-schemas"
+      - name: Switch to main
+        run: git switch main
+      - name: Copy the generated schemas into the repository
+        # Deliberately no --delete: the outdated BO4E.BO.*.json schemas are still the ones exported
+        # by bo4e-dotnet-ts-models/index.d.ts. Removing them is a breaking change for the npm
+        # package and has to happen in a separate, deliberate step.
+        run: |
+          rsync -a "$RUNNER_TEMP/json-schema-files/" json-schema-files/
+          rsync -a "$RUNNER_TEMP/open-api-schemas/" open-api-schemas/
+      - name: Generate TypeScript Models from the JSON Schemas
+        # Pinned: an unpinned generator silently rewrites every .d.ts file as soon as a new major
+        # version is released.
+        run: npx --yes json-schema-to-typescript@15 -i 'json-schema-files/**.json' -o "$RUNNER_TEMP/ts_models"
+      - name: Upload the TypeScript Models as artifact
+        uses: actions/upload-artifact@v7
+        with:
+          name: TypeScriptClasses
+          path: ${{ runner.temp }}/ts_models
+      - name: Push the TypeScript Models to bo4e-dotnet-ts-models
+        env:
+          # Personal Access Token with repo scope. Rotate at
+          # https://github.com/Hochfrequenz/BO4E-dotnet/settings/secrets/actions/TS_MODELS_PUSH_TOKEN
+          GITHUB_TOKEN: ${{ secrets.TS_MODELS_PUSH_TOKEN }}
+          SOURCE_COMMIT: ${{ github.sha }}
+        run: |
+          set -euo pipefail
+          git clone --depth 1 \
+            "https://x-access-token:${GITHUB_TOKEN}@github.com/Hochfrequenz/bo4e-dotnet-ts-models.git" \
+            "$RUNNER_TEMP/ts-models-repo"
+          # --delete, so that the models of removed business objects do not linger forever
+          rsync -a --delete "$RUNNER_TEMP/ts_models/" "$RUNNER_TEMP/ts-models-repo/src/"
+          cd "$RUNNER_TEMP/ts-models-repo"
+          git config user.name "github-actions[bot]"
+          git config user.email "bo4e-dotnet@hochfrequenz.de"
+          git add -A
+          if git diff --cached --quiet; then
+            echo "The TypeScript models are already up to date."
+            exit 0
+          fi
+          git commit -m "Update from https://github.com/Hochfrequenz/BO4E-dotnet/commit/${SOURCE_COMMIT}"
+          git push origin main
+      - name: Open a Pull Request with the regenerated schemas
+        uses: peter-evans/create-pull-request@v8
+        with:
+          # A Pull Request created with the default GITHUB_TOKEN does not trigger any workflows,
+          # so its required status checks would never run and it could never be merged.
+          # SCHEMA_PR_TOKEN (or the fallback) has to be a Personal Access Token with repo scope.
+          token: ${{ secrets.SCHEMA_PR_TOKEN || secrets.TS_MODELS_PUSH_TOKEN || github.token }}
+          base: main
+          branch: chore/regenerate-schemas
+          add-paths: |
+            json-schema-files
+            open-api-schemas
+          commit-message: "chore: regenerate JSON and OpenAPI schemas"
+          title: "chore: regenerate JSON and OpenAPI schemas"
+          # whoever published the release knows which model changes are expected in it
+          reviewers: ${{ github.event.release.author.login || github.actor }}
+          body: |
+            The JSON and OpenAPI schemas were regenerated from the C# classes by the
+            [Generate Schemas and TypeScript Models](https://github.com/Hochfrequenz/BO4E-dotnet/blob/main/.github/workflows/generate_schemas_and_ts_models.yml)
+            workflow, triggered by ${{ github.event.release.html_url || 'a manual workflow run' }}.
+
+            The TypeScript models in
+            [bo4e-dotnet-ts-models](https://github.com/Hochfrequenz/bo4e-dotnet-ts-models) have
+            already been updated from these schemas; merging this PR only keeps the schemas in this
+            repository in sync.
+
+            If this PR is empty or was not created, the schemas were already up to date.
