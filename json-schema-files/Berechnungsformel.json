@@ -1,0 +1,266 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "definitions": {
+    "ExterneReferenz": {
+      "type": ["object", "null"],
+      "properties": {
+        "exRefName": {
+          "type": ["string", "null"]
+        },
+        "exRefWert": {
+          "type": ["string", "null"]
+        },
+        "timestamp": {
+          "type": ["string", "null"],
+          "format": "date-time"
+        },
+        "guid": {
+          "type": ["string", "null"]
+        }
+      },
+      "required": ["exRefName", "exRefWert"]
+    },
+    "Rechenschritt": {
+      "type": ["object", "null"],
+      "properties": {
+        "rechenschrittBestandteilId": {
+          "type": "integer"
+        },
+        "referenzRechenschrittID": {
+          "type": "integer"
+        },
+        "timestamp": {
+          "type": ["string", "null"],
+          "format": "date-time"
+        },
+        "guid": {
+          "type": ["string", "null"]
+        },
+        "operation": {
+          "type": "string",
+          "enum": [
+            "ADDITION",
+            "SUBTRAKTION",
+            "MULTIPLIKATION",
+            "DIVISION",
+            "DIVIDEND",
+            "POSITIVWERT"
+          ]
+        },
+        "verlustfaktorTrafo": {
+          "type": ["number", "null"]
+        },
+        "verlustfaktorLeitung": {
+          "type": ["number", "null"]
+        },
+        "messlokationId": {
+          "type": ["string", "null"]
+        },
+        "energieflussrichtung": {
+          "type": ["string", "null"],
+          "enum": [null, "VERBRAUCH", "ERZEUGUNG"]
+        },
+        "weitererRechenschritt": {
+          "$ref": "#/definitions/Rechenschritt"
+        },
+        "aufteilungsfaktorEnergiemenge": {
+          "type": ["number", "null"]
+        }
+      },
+      "required": [
+        "rechenschrittBestandteilId",
+        "referenzRechenschrittID",
+        "operation",
+        "verlustfaktorTrafo",
+        "verlustfaktorLeitung",
+        "messlokationId",
+        "energieflussrichtung",
+        "weitererRechenschritt",
+        "aufteilungsfaktorEnergiemenge"
+      ]
+    },
+    "Verwendungszweck": {
+      "type": ["object", "null"],
+      "properties": {
+        "marktrolle": {
+          "type": "string",
+          "enum": [
+            "NB",
+            "LF",
+            "MSB",
+            "MDL",
+            "DL",
+            "BKV",
+            "BIKO",
+            "UENB",
+            "KUNDE_SELBST_NN",
+            "MGV",
+            "EIV",
+            "RB",
+            "KUNDE",
+            "INTERESSENT",
+            "GMSB",
+            "AMSB"
+          ]
+        },
+        "zweck": {
+          "type": ["array", "null"],
+          "items": {
+            "type": "string",
+            "enum": [
+              "NETZNUTZUNGSABRECHNUNG",
+              "BILANZKREISABRECHNUNG",
+              "MEHRMINDERMENGENABRECHNUNG",
+              "ENDKUNDENABRECHNUNG",
+              "BLINDARBEITABRECHNUNG_BETRIEBSFUEHRUNG",
+              "UEBERMITTLUNG_AN_DAS_HKNR",
+              "ERMITTLUNG_AUSGEGLICHENHEIT_BILANZKREIS",
+              "SELBSTVERBRAUCH",
+              "ES_LIEGT_KEIN_VERWENDUNGSZWECK_VOR",
+              "KEINE_DATENLIEFERUNG_AN_MARKTROLLE"
+            ]
+          }
+        },
+        "timestamp": {
+          "type": ["string", "null"],
+          "format": "date-time"
+        },
+        "guid": {
+          "type": ["string", "null"]
+        }
+      },
+      "required": ["marktrolle", "zweck"]
+    },
+    "Zeitraum": {
+      "type": ["object", "null"],
+      "properties": {
+        "einheit": {
+          "type": ["string", "null"],
+          "enum": [
+            null,
+            "SEKUNDE",
+            "MINUTE",
+            "STUNDE",
+            "VIERTEL_STUNDE",
+            "TAG",
+            "WOCHE",
+            "MONAT",
+            "QUARTAL",
+            "HALBJAHR",
+            "JAHR"
+          ]
+        },
+        "dauer": {
+          "type": ["number", "null"]
+        },
+        "startdatum": {
+          "type": ["string", "null"],
+          "format": "date-time"
+        },
+        "enddatum": {
+          "type": ["string", "null"],
+          "format": "date-time"
+        },
+        "startzeitpunkt": {
+          "type": ["string", "null"],
+          "format": "date-time"
+        },
+        "endzeitpunkt": {
+          "type": ["string", "null"],
+          "format": "date-time"
+        },
+        "timestamp": {
+          "type": ["string", "null"],
+          "format": "date-time"
+        },
+        "guid": {
+          "type": ["string", "null"]
+        }
+      },
+      "required": [
+        "einheit",
+        "dauer",
+        "startdatum",
+        "enddatum",
+        "startzeitpunkt",
+        "endzeitpunkt"
+      ]
+    }
+  },
+  "type": "object",
+  "properties": {
+    "boTyp": {
+      "type": ["string", "null"]
+    },
+    "versionStruktur": {
+      "type": ["string", "null"]
+    },
+    "timestamp": {
+      "type": ["string", "null"],
+      "format": "date-time"
+    },
+    "externeReferenzen": {
+      "type": ["array", "null"],
+      "items": {
+        "$ref": "#/definitions/ExterneReferenz"
+      }
+    },
+    "beginndatum": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "guid": {
+      "type": ["string", "null"]
+    },
+    "notwendigkeit": {
+      "type": "string",
+      "enum": [
+        "BERECHNUNGSFORMEL_NOTWENDIG",
+        "BERECHNUNGSFORMEL_MUSS_ANGEFRAGT_WERDEN",
+        "BERECHNUNGSFORMEL_TRIVIAL",
+        "BERECHNUNGSFORMEL_NICHT_NOTWENDIG"
+      ]
+    },
+    "rechenschrittId": {
+      "type": ["integer", "null"]
+    },
+    "verwendungszweck": {
+      "$ref": "#/definitions/Verwendungszweck"
+    },
+    "rechenschritt": {
+      "$ref": "#/definitions/Rechenschritt"
+    },
+    "rechenschritte": {
+      "type": ["array", "null"],
+      "items": {
+        "$ref": "#/definitions/Rechenschritt"
+      }
+    },
+    "gueltigkeitszeitraum": {
+      "$ref": "#/definitions/Zeitraum"
+    },
+    "qualitaet": {
+      "type": ["string", "null"],
+      "enum": [
+        null,
+        "VOLLSTAENDIG",
+        "INFORMATIV",
+        "IM_SYSTEM_VORHANDEN",
+        "ERWARTET",
+        "VORLAEUFIG",
+        "UNVOLLSTAENDIG"
+      ]
+    }
+  },
+  "required": [
+    "boTyp",
+    "versionStruktur",
+    "externeReferenzen",
+    "beginndatum",
+    "notwendigkeit",
+    "rechenschrittId",
+    "verwendungszweck",
+    "rechenschritt",
+    "rechenschritte"
+  ]
+}
