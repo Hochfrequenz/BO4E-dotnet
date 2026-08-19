@@ -19,9 +19,51 @@ concurrency:
   cancel-in-progress: false
 
 jobs:
+  gate:
+    name: Check whether this release should regenerate the schemas
+    runs-on: ubuntu-latest
+    outputs:
+      proceed: ${{ steps.check.outputs.proceed }}
+    steps:
+      - id: check
+        env:
+          GH_TOKEN: ${{ github.token }}
+          EVENT_NAME: ${{ github.event_name }}
+          IS_PRERELEASE: ${{ github.event.release.prerelease }}
+          TAG: ${{ github.event.release.tag_name }}
+          REPOSITORY: ${{ github.repository }}
+        run: |
+          set -euo pipefail
+          if [ "$EVENT_NAME" != "release" ]; then
+            # a manual run always generates from main
+            echo "proceed=true" >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
+          if [ "$IS_PRERELEASE" = "true" ]; then
+            echo "::warning::$TAG is a prerelease. Neither the schemas nor the TypeScript models are regenerated for it."
+            echo "proceed=false" >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
+          # A release from a maintenance branch describes an older state of the data model. Without
+          # this check it would propose reverting the schemas on main and overwrite the published
+          # TypeScript models with the older ones.
+          # "identical" and "behind" both mean that the tag is contained in main.
+          status=$(gh api "repos/$REPOSITORY/compare/main...$TAG" --jq .status)
+          case "$status" in
+            identical | behind)
+              echo "proceed=true" >> "$GITHUB_OUTPUT"
+              ;;
+            *)
+              echo "::warning::$TAG is not contained in main (compare status: $status), so it is not the newest state of the data model. Neither the schemas nor the TypeScript models are regenerated."
+              echo "proceed=false" >> "$GITHUB_OUTPUT"
+              ;;
+          esac
+
   generate:
     name: Generate Schemas and TypeScript Models
     runs-on: ubuntu-latest
+    needs: gate
+    if: needs.gate.outputs.proceed == 'true'
     permissions:
       contents: write
       pull-requests: write
@@ -47,6 +89,11 @@ jobs:
           ref: ${{ github.event.release.tag_name || 'main' }}
           # all branches, so that the regenerated schemas can be committed onto main below
           fetch-depth: 0
+      - name: Remember the commit the schemas are generated from
+        id: source-commit
+        # not github.sha: on a manual run the checkout is forced to main, while github.sha is the
+        # commit of the branch the workflow was dispatched from
+        run: echo "sha=$(git rev-parse HEAD)" >> "$GITHUB_OUTPUT"
       - name: Setup .NET
         uses: actions/setup-dotnet@v6
         with:
@@ -127,13 +174,16 @@ jobs:
         run: |
           gh api "repos/${{ github.repository }}/pulls/$PULL_REQUEST_NUMBER/requested_reviewers" \
             --method POST --input - <<< "{\"reviewers\":[\"$REVIEWER\"]}" ||
-            echo "Could not request a review from $REVIEWER (they are probably the author of the Pull Request)."
+            echo "::warning::Could not request a review from $REVIEWER (probably the author of the Pull Request), so nobody was notified about Pull Request $PULL_REQUEST_NUMBER."
       - name: Push the TypeScript Models to bo4e-dotnet-ts-models
+        # Deliberately the last step: pushing to another repository cannot be undone, so it only
+        # happens once the schema Pull Request exists. If an earlier step fails, this push is
+        # skipped and the whole workflow can be re-run - every step is idempotent.
         env:
           # Personal Access Token with repo scope. Rotate at
           # https://github.com/Hochfrequenz/BO4E-dotnet/settings/secrets/actions/TS_MODELS_PUSH_TOKEN
           GITHUB_TOKEN: ${{ secrets.TS_MODELS_PUSH_TOKEN }}
-          SOURCE_COMMIT: ${{ github.sha }}
+          SOURCE_COMMIT: ${{ steps.source-commit.outputs.sha }}
         run: |
           set -euo pipefail
           # cloned without the token (the repository is public) and pushed with the token passed
