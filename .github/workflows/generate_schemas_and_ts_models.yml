@@ -12,6 +12,12 @@ on:
       - published
   workflow_dispatch:
 
+# Two releases published in quick succession would otherwise race: on the shared Pull Request
+# branch and on the push to the models repository (which would be rejected non-fast-forward).
+concurrency:
+  group: generate-schemas-and-ts-models
+  cancel-in-progress: false
+
 jobs:
   generate:
     name: Generate Schemas and TypeScript Models
@@ -25,20 +31,20 @@ jobs:
         # which does not trigger any workflows: its required status checks would never run and it
         # could never be merged - while this run still reported success.
         env:
-          PR_TOKEN: ${{ secrets.SCHEMA_PR_TOKEN || secrets.TS_MODELS_PUSH_TOKEN }}
           PUSH_TOKEN: ${{ secrets.TS_MODELS_PUSH_TOKEN }}
         run: |
+          # SCHEMA_PR_TOKEN falls back to TS_MODELS_PUSH_TOKEN, so checking the latter is enough.
+          # Note that this only checks for presence: an expired token passes and fails later.
           if [ -z "$PUSH_TOKEN" ]; then
             echo "::error::TS_MODELS_PUSH_TOKEN is not set (or expired and was removed)."
-            exit 1
-          fi
-          if [ -z "$PR_TOKEN" ]; then
-            echo "::error::Neither SCHEMA_PR_TOKEN nor TS_MODELS_PUSH_TOKEN is set."
             exit 1
           fi
       - name: Check out the released commit
         uses: actions/checkout@v7
         with:
+          # never an arbitrary dispatched branch: that would push unreleased models to
+          # bo4e-dotnet-ts-models and delete schemas that only exist on main
+          ref: ${{ github.event.release.tag_name || 'main' }}
           # all branches, so that the regenerated schemas can be committed onto main below
           fetch-depth: 0
       - name: Setup .NET
@@ -60,6 +66,8 @@ jobs:
         # actions/checkout leaves a detached HEAD on the released tag and does not create local
         # branches, so main is created explicitly from the remote instead of relying on DWIM.
         run: |
+          # a leftover modification would abort the branch switch
+          git reset --hard
           git fetch origin main
           git switch --force-create main origin/main
       - name: Copy the generated schemas into the repository
@@ -80,29 +88,6 @@ jobs:
         with:
           name: TypeScriptClasses
           path: ${{ runner.temp }}/ts_models
-      - name: Push the TypeScript Models to bo4e-dotnet-ts-models
-        env:
-          # Personal Access Token with repo scope. Rotate at
-          # https://github.com/Hochfrequenz/BO4E-dotnet/settings/secrets/actions/TS_MODELS_PUSH_TOKEN
-          GITHUB_TOKEN: ${{ secrets.TS_MODELS_PUSH_TOKEN }}
-          SOURCE_COMMIT: ${{ github.sha }}
-        run: |
-          set -euo pipefail
-          git clone --depth 1 \
-            "https://x-access-token:${GITHUB_TOKEN}@github.com/Hochfrequenz/bo4e-dotnet-ts-models.git" \
-            "$RUNNER_TEMP/ts-models-repo"
-          # --delete, so that the models of removed business objects do not linger forever
-          rsync -a --delete "$RUNNER_TEMP/ts_models/" "$RUNNER_TEMP/ts-models-repo/src/"
-          cd "$RUNNER_TEMP/ts-models-repo"
-          git config user.name "github-actions[bot]"
-          git config user.email "bo4e-dotnet@hochfrequenz.de"
-          git add -A
-          if git diff --cached --quiet; then
-            echo "The TypeScript models are already up to date."
-            exit 0
-          fi
-          git commit -m "Update from https://github.com/Hochfrequenz/BO4E-dotnet/commit/${SOURCE_COMMIT}"
-          git push origin main
       - name: Open a Pull Request with the regenerated schemas
         id: create-pull-request
         uses: peter-evans/create-pull-request@v8
@@ -124,17 +109,16 @@ jobs:
             [Generate Schemas and TypeScript Models](https://github.com/Hochfrequenz/BO4E-dotnet/blob/main/.github/workflows/generate_schemas_and_ts_models.yml)
             workflow, triggered by ${{ github.event.release.html_url || 'a manual workflow run' }}.
 
-            The TypeScript models in
-            [bo4e-dotnet-ts-models](https://github.com/Hochfrequenz/bo4e-dotnet-ts-models) have
-            already been updated from these schemas; merging this PR only keeps the schemas in this
-            repository in sync.
+            The same workflow run also pushes the TypeScript models generated from these schemas to
+            [bo4e-dotnet-ts-models](https://github.com/Hochfrequenz/bo4e-dotnet-ts-models);
+            merging this PR only keeps the schemas in this repository in sync.
 
             If this PR is empty or was not created, the schemas were already up to date.
       - name: Assign the release publisher as reviewer
         # Not the `reviewers` input of create-pull-request: if the release publisher happens to own
         # the token that created the Pull Request, GitHub answers 422 ("Review cannot be requested
-        # from pull request author") and the whole workflow run would fail - after the TypeScript
-        # models have already been pushed.
+        # from pull request author") and the whole workflow run would fail - and with it the push of
+        # the TypeScript models in the step below.
         if: steps.create-pull-request.outputs.pull-request-number
         env:
           GH_TOKEN: ${{ github.token }}
@@ -144,3 +128,28 @@ jobs:
           gh api "repos/${{ github.repository }}/pulls/$PULL_REQUEST_NUMBER/requested_reviewers" \
             --method POST --input - <<< "{\"reviewers\":[\"$REVIEWER\"]}" ||
             echo "Could not request a review from $REVIEWER (they are probably the author of the Pull Request)."
+      - name: Push the TypeScript Models to bo4e-dotnet-ts-models
+        env:
+          # Personal Access Token with repo scope. Rotate at
+          # https://github.com/Hochfrequenz/BO4E-dotnet/settings/secrets/actions/TS_MODELS_PUSH_TOKEN
+          GITHUB_TOKEN: ${{ secrets.TS_MODELS_PUSH_TOKEN }}
+          SOURCE_COMMIT: ${{ github.sha }}
+        run: |
+          set -euo pipefail
+          # cloned without the token (the repository is public) and pushed with the token passed
+          # inline, so that it is not persisted in .git/config for the rest of the job
+          git clone --depth 1 \
+            "https://github.com/Hochfrequenz/bo4e-dotnet-ts-models.git" \
+            "$RUNNER_TEMP/ts-models-repo"
+          # --delete, so that the models of removed business objects do not linger forever
+          rsync -a --delete "$RUNNER_TEMP/ts_models/" "$RUNNER_TEMP/ts-models-repo/src/"
+          cd "$RUNNER_TEMP/ts-models-repo"
+          git config user.name "github-actions[bot]"
+          git config user.email "bo4e-dotnet@hochfrequenz.de"
+          git add -A
+          if git diff --cached --quiet; then
+            echo "The TypeScript models are already up to date."
+            exit 0
+          fi
+          git commit -m "Update from https://github.com/Hochfrequenz/BO4E-dotnet/commit/${SOURCE_COMMIT}"
+          git push "https://x-access-token:${GITHUB_TOKEN}@github.com/Hochfrequenz/bo4e-dotnet-ts-models.git" main
