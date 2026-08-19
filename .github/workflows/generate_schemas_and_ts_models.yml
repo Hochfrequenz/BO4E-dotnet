@@ -20,6 +20,22 @@ jobs:
       contents: write
       pull-requests: write
     steps:
+      - name: Check that a Personal Access Token is configured
+        # Without a PAT the schema Pull Request would be created with the default GITHUB_TOKEN,
+        # which does not trigger any workflows: its required status checks would never run and it
+        # could never be merged - while this run still reported success.
+        env:
+          PR_TOKEN: ${{ secrets.SCHEMA_PR_TOKEN || secrets.TS_MODELS_PUSH_TOKEN }}
+          PUSH_TOKEN: ${{ secrets.TS_MODELS_PUSH_TOKEN }}
+        run: |
+          if [ -z "$PUSH_TOKEN" ]; then
+            echo "::error::TS_MODELS_PUSH_TOKEN is not set (or expired and was removed)."
+            exit 1
+          fi
+          if [ -z "$PR_TOKEN" ]; then
+            echo "::error::Neither SCHEMA_PR_TOKEN nor TS_MODELS_PUSH_TOKEN is set."
+            exit 1
+          fi
       - name: Check out the released commit
         uses: actions/checkout@v7
         with:
@@ -41,7 +57,11 @@ jobs:
             "$RUNNER_TEMP/json-schema-files" \
             "$RUNNER_TEMP/open-api-schemas"
       - name: Switch to main
-        run: git switch main
+        # actions/checkout leaves a detached HEAD on the released tag and does not create local
+        # branches, so main is created explicitly from the remote instead of relying on DWIM.
+        run: |
+          git fetch origin main
+          git switch --force-create main origin/main
       - name: Copy the generated schemas into the repository
         # Deliberately no --delete: the outdated BO4E.BO.*.json schemas are still the ones exported
         # by bo4e-dotnet-ts-models/index.d.ts. Removing them is a breaking change for the npm
@@ -89,8 +109,9 @@ jobs:
         with:
           # A Pull Request created with the default GITHUB_TOKEN does not trigger any workflows,
           # so its required status checks would never run and it could never be merged.
-          # SCHEMA_PR_TOKEN (or the fallback) has to be a Personal Access Token with repo scope.
-          token: ${{ secrets.SCHEMA_PR_TOKEN || secrets.TS_MODELS_PUSH_TOKEN || github.token }}
+          # SCHEMA_PR_TOKEN (or the fallback) has to be a Personal Access Token with repo scope;
+          # a missing token is caught by the very first step of this job.
+          token: ${{ secrets.SCHEMA_PR_TOKEN || secrets.TS_MODELS_PUSH_TOKEN }}
           base: main
           branch: chore/regenerate-schemas
           add-paths: |
