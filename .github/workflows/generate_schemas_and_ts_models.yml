@@ -81,6 +81,21 @@ jobs:
         # Pinned: an unpinned generator silently rewrites every .d.ts file as soon as a new major
         # version is released.
         run: npx --yes json-schema-to-typescript@15 -i 'json-schema-files/**.json' -o "$RUNNER_TEMP/ts_models"
+      - name: Check that every schema produced a TypeScript model
+        # A partial generator output would be synced with --delete further down, silently removing
+        # the models it did not regenerate. json-schema-to-typescript writes one .d.ts per schema.
+        run: |
+          set -euo pipefail
+          schemas=$(find json-schema-files -name "*.json" | wc -l)
+          generated=0
+          if [ -d "$RUNNER_TEMP/ts_models" ]; then
+            generated=$(find "$RUNNER_TEMP/ts_models" -name "*.d.ts" | wc -l)
+          fi
+          if [ "$generated" -ne "$schemas" ]; then
+            echo "::error::Generated $generated TypeScript models for $schemas schemas. Not touching the published models."
+            exit 1
+          fi
+          echo "Generated $generated TypeScript models for $schemas schemas."
       - name: Upload the TypeScript Models as artifact
         uses: actions/upload-artifact@v7
         with:
@@ -89,18 +104,19 @@ jobs:
           # the default only warns, and an empty upload is the symptom of a generator that silently
           # wrote nothing
           if-no-files-found: error
-      - name: Check that main has not moved
-        # The checkout pinned main at the start of this run. If a schema touching commit landed on
-        # main since, the Pull Request would propose reverting it and - worse, because it is not
+      - name: Check that the schemas on main have not changed
+        # The checkout pinned main at the start of this run. If somebody changed the schemas on main
+        # since, the Pull Request would propose reverting that change and - worse, because it is not
         # reviewed at all - the push below would resurrect the models it removed.
+        # Deliberately only the schemas: an unrelated commit (a dependabot automerge, a README fix)
+        # must not fail a release run, and it cannot cause either problem.
         env:
           SOURCE_COMMIT: ${{ steps.source-commit.outputs.sha }}
         run: |
           set -euo pipefail
           git fetch origin main
-          current=$(git rev-parse origin/main)
-          if [ "$current" != "$SOURCE_COMMIT" ]; then
-            echo "::error::main moved from $SOURCE_COMMIT to $current while the schemas were generated. Nothing was published; re-run this workflow."
+          if ! git diff --quiet "$SOURCE_COMMIT" origin/main -- json-schema-files open-api-schemas; then
+            echo "::error::The schemas on main changed while this run generated them (main is now $(git rev-parse origin/main)). Nothing was published; re-run this workflow."
             exit 1
           fi
       - name: Open a Pull Request with the regenerated schemas
@@ -154,19 +170,17 @@ jobs:
           SOURCE_COMMIT: ${{ steps.source-commit.outputs.sha }}
         run: |
           set -euo pipefail
+          # re-checked, because the Pull Request steps run between the check above and this push
+          git fetch origin main
+          if ! git diff --quiet "$SOURCE_COMMIT" origin/main -- json-schema-files open-api-schemas; then
+            echo "::error::The schemas on main changed while this run generated them. The models are not pushed; re-run this workflow."
+            exit 1
+          fi
           # cloned without the token (the repository is public) and pushed with the token passed
           # inline, so that it is not persisted in .git/config for the rest of the job
           git clone --depth 1 \
             "https://github.com/Hochfrequenz/bo4e-dotnet-ts-models.git" \
             "$RUNNER_TEMP/ts-models-repo"
-          # An empty generator output combined with --delete below would wipe every published model,
-          # and the resulting deletions look like a legitimate diff to the commit check further down.
-          generated=$(find "$RUNNER_TEMP/ts_models" -name "*.d.ts" | wc -l)
-          if [ "$generated" -eq 0 ]; then
-            echo "::error::The TypeScript model generation produced no files. Not touching the published models."
-            exit 1
-          fi
-          echo "Syncing $generated generated TypeScript models."
           # --delete, so that the models of removed business objects do not linger forever
           rsync -a --delete "$RUNNER_TEMP/ts_models/" "$RUNNER_TEMP/ts-models-repo/src/"
           cd "$RUNNER_TEMP/ts-models-repo"
