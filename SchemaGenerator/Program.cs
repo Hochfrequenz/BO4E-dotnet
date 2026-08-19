@@ -5,6 +5,17 @@ using NJsonSchema;
 using NJsonSchema.Generation;
 using JsonSchema = NJsonSchema.JsonSchema;
 
+// The number of business objects determines how many batches a caller has to run
+// (see the remarks on MaxSchemasPerHour below). Print the number in a machine readable way,
+// so that calling scripts do not have to hardcode - and silently outdate - it.
+if (args.Length == 1 && args[0] == "--count")
+{
+    Console.WriteLine(
+        $"BUSINESS_OBJECT_COUNT={JsonSchemaGenerator.GetRelevantBusinessObjectTypes().Count()}"
+    );
+    Environment.Exit(0);
+}
+
 Console.WriteLine("Starting schema generation process...");
 
 int offset;
@@ -60,13 +71,27 @@ Environment.Exit(0); // Success
 public class JsonSchemaGenerator
 {
     private const int LastDataRowOffset = 50;
+
+    /// <summary>
+    ///     The free license of Newtonsoft.Json.Schema only allows a limited number of schemas to be
+    ///     generated per process. Callers therefore have to invoke this application repeatedly with
+    ///     increasing offsets (a fresh process each time) to generate schemas for all business objects.
+    /// </summary>
     private const int MaxSchemasPerHour = 10;
+
+    /// <summary>
+    ///     All types for which schemas are generated: everything derived from <see cref="BusinessObject" />.
+    /// </summary>
+    public static IEnumerable<Type> GetRelevantBusinessObjectTypes()
+    {
+        return typeof(BusinessObject)
+            .Assembly.GetTypes()
+            .Where(t => t.IsSubclassOf(typeof(BusinessObject)));
+    }
 
     public static void GenerateSchemas(int offset, string jsonOutputDirectory)
     {
-        var relevantBusinessObjectTypes = typeof(BusinessObject)
-            .Assembly.GetTypes()
-            .Where(t => t.IsSubclassOf(typeof(BusinessObject)));
+        var relevantBusinessObjectTypes = GetRelevantBusinessObjectTypes();
 
         if (relevantBusinessObjectTypes.Count() > LastDataRowOffset + MaxSchemasPerHour)
         {
@@ -112,9 +137,7 @@ public class JsonSchemaGenerator
 
     public static void GenerateOpenApiSchemas(int offset, string openApiOutputDirectory)
     {
-        var relevantBusinessObjectTypes = typeof(BusinessObject)
-            .Assembly.GetTypes()
-            .Where(t => t.IsSubclassOf(typeof(BusinessObject)));
+        var relevantBusinessObjectTypes = GetRelevantBusinessObjectTypes();
 
         try
         {
