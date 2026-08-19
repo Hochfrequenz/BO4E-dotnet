@@ -10,13 +10,19 @@
 # state of the data model, so generating from an older tag - a hotfix from a maintenance branch, or
 # a long lived draft release - would revert the schemas on main and delete the models of business
 # objects that were added since.
+#
+# The flip side is that the generated artifacts describe main, which can contain commits that are
+# not part of any release yet. That is intended: the models package tracks the data model, not the
+# nuget package versions.
 name: Generate Schemas and TypeScript Models
 
 on:
   release:
     types:
-      # released: a prerelease that is promoted to a regular release does not fire "published" again
-      - published
+      # deliberately only "released", which fires when a regular release is published and when a
+      # prerelease is promoted to a regular release - but never for a prerelease itself.
+      # "published" would fire for prereleases (which must not update what the npm package is built
+      # from) and, together with "released", twice for every regular release.
       - released
   workflow_dispatch:
 
@@ -31,8 +37,6 @@ jobs:
   generate:
     name: Generate Schemas and TypeScript Models
     runs-on: ubuntu-latest
-    # a prerelease should not update what the npm package is built from
-    if: github.event.release.prerelease != true
     permissions:
       contents: write
       pull-requests: write
@@ -82,6 +86,23 @@ jobs:
         with:
           name: TypeScriptClasses
           path: ${{ runner.temp }}/ts_models
+          # the default only warns, and an empty upload is the symptom of a generator that silently
+          # wrote nothing
+          if-no-files-found: error
+      - name: Check that main has not moved
+        # The checkout pinned main at the start of this run. If a schema touching commit landed on
+        # main since, the Pull Request would propose reverting it and - worse, because it is not
+        # reviewed at all - the push below would resurrect the models it removed.
+        env:
+          SOURCE_COMMIT: ${{ steps.source-commit.outputs.sha }}
+        run: |
+          set -euo pipefail
+          git fetch origin main
+          current=$(git rev-parse origin/main)
+          if [ "$current" != "$SOURCE_COMMIT" ]; then
+            echo "::error::main moved from $SOURCE_COMMIT to $current while the schemas were generated. Nothing was published; re-run this workflow."
+            exit 1
+          fi
       - name: Open a Pull Request with the regenerated schemas
         id: create-pull-request
         uses: peter-evans/create-pull-request@v8
@@ -138,6 +159,14 @@ jobs:
           git clone --depth 1 \
             "https://github.com/Hochfrequenz/bo4e-dotnet-ts-models.git" \
             "$RUNNER_TEMP/ts-models-repo"
+          # An empty generator output combined with --delete below would wipe every published model,
+          # and the resulting deletions look like a legitimate diff to the commit check further down.
+          generated=$(find "$RUNNER_TEMP/ts_models" -name "*.d.ts" | wc -l)
+          if [ "$generated" -eq 0 ]; then
+            echo "::error::The TypeScript model generation produced no files. Not touching the published models."
+            exit 1
+          fi
+          echo "Syncing $generated generated TypeScript models."
           # --delete, so that the models of removed business objects do not linger forever
           rsync -a --delete "$RUNNER_TEMP/ts_models/" "$RUNNER_TEMP/ts-models-repo/src/"
           cd "$RUNNER_TEMP/ts-models-repo"
