@@ -1,0 +1,230 @@
+# Regenerates the JSON/OpenAPI schemas from the C# classes whenever a release is published and
+# converts them into the TypeScript models of https://github.com/Hochfrequenz/bo4e-dotnet-ts-models.
+#
+# Before this workflow existed, both steps were manual: somebody had to run the schema generator
+# locally and commit the result (which happened roughly once a year), so the published TypeScript
+# models lagged behind the C# data model by months.
+#
+# Note that a release is only the *trigger*: the schemas are always generated from main, never from
+# the released tag. They are committed to main and the models package always describes the newest
+# state of the data model, so generating from an older tag - a hotfix from a maintenance branch, or
+# a long lived draft release - would revert the schemas on main and delete the models of business
+# objects that were added since.
+#
+# The flip side is that the generated artifacts describe main, which can contain commits that are
+# not part of any release yet. That is intended: the models package tracks the data model, not the
+# nuget package versions.
+name: Generate Schemas and TypeScript Models
+
+on:
+  release:
+    types:
+      # deliberately only "released", which fires when a regular release is published and when a
+      # prerelease is promoted to a regular release - but never for a prerelease itself.
+      # "published" would fire for prereleases (which must not update what the npm package is built
+      # from) and, together with "released", twice for every regular release.
+      - released
+  workflow_dispatch:
+
+# Two releases published in quick succession would otherwise race on the shared Pull Request branch
+# and on the push to the models repository, where the loser is rejected non-fast-forward. Only one
+# run is kept pending, which is harmless here: every run regenerates the newest state of main.
+concurrency:
+  group: generate-schemas-and-ts-models
+  cancel-in-progress: false
+
+jobs:
+  generate:
+    name: Generate Schemas and TypeScript Models
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      pull-requests: write
+    steps:
+      - name: Check that a Personal Access Token is configured
+        # Without a PAT the schema Pull Request would be created with the default GITHUB_TOKEN,
+        # which does not trigger any workflows: its required status checks would never run and it
+        # could never be merged - while this run still reported success.
+        env:
+          PUSH_TOKEN: ${{ secrets.TS_MODELS_PUSH_TOKEN }}
+        run: |
+          # SCHEMA_PR_TOKEN falls back to TS_MODELS_PUSH_TOKEN, so checking the latter is enough.
+          # Note that this only checks for presence: an expired token passes and fails later.
+          if [ -z "$PUSH_TOKEN" ]; then
+            echo "::error::TS_MODELS_PUSH_TOKEN is not set (or expired and was removed)."
+            exit 1
+          fi
+      - name: Check out main
+        uses: actions/checkout@v7
+        with:
+          # deliberately not the released tag, see the note at the top of this file
+          ref: main
+      - name: Remember the commit the schemas are generated from
+        id: source-commit
+        # not github.sha: that is the commit of the release tag or of the dispatching branch, while
+        # the schemas are generated from main
+        run: echo "sha=$(git rev-parse HEAD)" >> "$GITHUB_OUTPUT"
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v6
+        with:
+          dotnet-version: 10
+      - name: Set up Node.js
+        uses: actions/setup-node@v7
+        with:
+          node-version: 22
+      - name: Generate JSON and OpenAPI Schemas from the C# classes
+        run: |
+          ./SchemaGenerator/generate-json-schemas.sh \
+            json-schema-files \
+            open-api-schemas
+      - name: Generate TypeScript Models from the JSON Schemas
+        # Pinned: an unpinned generator silently rewrites every .d.ts file as soon as a new major
+        # version is released.
+        run: npx --yes json-schema-to-typescript@15 -i 'json-schema-files/**.json' -o "$RUNNER_TEMP/ts_models"
+      - name: Check that every schema produced a TypeScript model
+        # A partial generator output would be synced with --delete further down, silently removing
+        # the models it did not regenerate. json-schema-to-typescript writes one .d.ts per schema.
+        run: |
+          set -euo pipefail
+          # -maxdepth 1, because the generator's input glob "json-schema-files/**.json" does not
+          # descend into subdirectories either - a "**" sharing a path segment behaves like "*".
+          schemas=$(find json-schema-files -maxdepth 1 -name "*.json" | wc -l)
+          generated=0
+          if [ -d "$RUNNER_TEMP/ts_models" ]; then
+            generated=$(find "$RUNNER_TEMP/ts_models" -maxdepth 1 -name "*.d.ts" | wc -l)
+          fi
+          if [ "$generated" -ne "$schemas" ]; then
+            echo "::error::Generated $generated TypeScript models for $schemas schemas. Not touching the published models."
+            exit 1
+          fi
+          echo "Generated $generated TypeScript models for $schemas schemas."
+          # Both counts shrink together when the schema generation itself silently produced less, so
+          # compare against what is checked in. Fewer schemas can be legitimate (a business object
+          # was removed), which is why this only warns - the schema Pull Request shows the deletions.
+          checked_in=$(git ls-files "json-schema-files/*.json" | wc -l)
+          if [ "$schemas" -lt "$checked_in" ]; then
+            echo "::warning::Generated $schemas schemas, $checked_in are checked in. The models of the missing ones are about to be deleted:"
+            comm -23 \
+              <(git ls-files "json-schema-files/*.json" | xargs -n1 basename | sort) \
+              <(find json-schema-files -maxdepth 1 -name "*.json" | xargs -n1 basename | sort)
+          fi
+      - name: Upload the TypeScript Models as artifact
+        uses: actions/upload-artifact@v7
+        with:
+          name: TypeScriptClasses
+          path: ${{ runner.temp }}/ts_models
+          # the default only warns, and an empty upload is the symptom of a generator that silently
+          # wrote nothing
+          if-no-files-found: error
+      - name: Check that the schemas on main have not changed
+        # The checkout pinned main at the start of this run. If somebody changed the schemas on main
+        # since, the Pull Request would propose reverting that change and - worse, because it is not
+        # reviewed at all - the push below would resurrect the models it removed.
+        # Deliberately only the schemas: an unrelated commit (a dependabot automerge, a README fix)
+        # must not fail a release run, and it cannot cause either problem.
+        env:
+          SOURCE_COMMIT: ${{ steps.source-commit.outputs.sha }}
+        run: |
+          set -euo pipefail
+          git fetch origin main
+          # `git diff --quiet` exits 1 for "differs" but 128 for its own errors, which must not be
+          # reported as a schema change - that diagnosis would send the reader to main's history.
+          set +e
+          git diff --quiet "$SOURCE_COMMIT" origin/main -- json-schema-files open-api-schemas
+          status=$?
+          set -e
+          if [ "$status" -gt 1 ]; then
+            echo "::error::Could not compare the schemas of $SOURCE_COMMIT and origin/main (git diff exited with $status)."
+            exit 1
+          fi
+          if [ "$status" -eq 1 ]; then
+            echo "::error::The schemas on main changed while this run generated them (main is now $(git rev-parse origin/main)). Nothing was published; re-run this workflow."
+            exit 1
+          fi
+      - name: Open a Pull Request with the regenerated schemas
+        id: create-pull-request
+        uses: peter-evans/create-pull-request@v8
+        with:
+          # A Pull Request created with the default GITHUB_TOKEN does not trigger any workflows,
+          # so its required status checks would never run and it could never be merged.
+          # SCHEMA_PR_TOKEN (or the fallback) has to be a Personal Access Token with repo scope;
+          # a missing token is caught by the very first step of this job.
+          token: ${{ secrets.SCHEMA_PR_TOKEN || secrets.TS_MODELS_PUSH_TOKEN }}
+          base: main
+          branch: chore/regenerate-schemas
+          add-paths: |
+            json-schema-files
+            open-api-schemas
+          commit-message: "chore: regenerate JSON and OpenAPI schemas"
+          title: "chore: regenerate JSON and OpenAPI schemas"
+          body: |
+            The JSON and OpenAPI schemas were regenerated from the C# classes on main by the
+            [Generate Schemas and TypeScript Models](https://github.com/Hochfrequenz/BO4E-dotnet/blob/main/.github/workflows/generate_schemas_and_ts_models.yml)
+            workflow, triggered by ${{ github.event.release.html_url || 'a manual workflow run' }}.
+
+            The same workflow run also pushes the TypeScript models generated from these schemas to
+            [bo4e-dotnet-ts-models](https://github.com/Hochfrequenz/bo4e-dotnet-ts-models);
+            merging this PR only keeps the schemas in this repository in sync.
+
+            If this PR is empty or was not created, the schemas were already up to date.
+      - name: Assign the release publisher as reviewer
+        # Not the `reviewers` input of create-pull-request: if the release publisher happens to own
+        # the token that created the Pull Request, GitHub answers 422 ("Review cannot be requested
+        # from pull request author") and the whole workflow run would fail - and with it the push of
+        # the TypeScript models in the step below.
+        if: steps.create-pull-request.outputs.pull-request-number
+        env:
+          GH_TOKEN: ${{ github.token }}
+          PULL_REQUEST_NUMBER: ${{ steps.create-pull-request.outputs.pull-request-number }}
+          REVIEWER: ${{ github.event.release.author.login || github.actor }}
+        run: |
+          gh api "repos/${{ github.repository }}/pulls/$PULL_REQUEST_NUMBER/requested_reviewers" \
+            --method POST --input - <<< "{\"reviewers\":[\"$REVIEWER\"]}" ||
+            echo "::warning::Could not request a review from $REVIEWER (probably the author of the Pull Request), so nobody was notified about Pull Request $PULL_REQUEST_NUMBER."
+      - name: Push the TypeScript Models to bo4e-dotnet-ts-models
+        # Deliberately the last step: pushing to another repository cannot be undone, so it only
+        # happens once the schema Pull Request exists. If an earlier step fails, this push is
+        # skipped and the whole workflow can be re-run - every step is idempotent.
+        env:
+          # Personal Access Token with repo scope. Rotate at
+          # https://github.com/Hochfrequenz/BO4E-dotnet/settings/secrets/actions/TS_MODELS_PUSH_TOKEN
+          GITHUB_TOKEN: ${{ secrets.TS_MODELS_PUSH_TOKEN }}
+          SOURCE_COMMIT: ${{ steps.source-commit.outputs.sha }}
+          PULL_REQUEST_NUMBER: ${{ steps.create-pull-request.outputs.pull-request-number || 'n/a' }}
+        run: |
+          set -euo pipefail
+          # re-checked, because the Pull Request steps run between the check above and this push
+          git fetch origin main
+          set +e
+          git diff --quiet "$SOURCE_COMMIT" origin/main -- json-schema-files open-api-schemas
+          status=$?
+          set -e
+          if [ "$status" -gt 1 ]; then
+            echo "::error::Could not compare the schemas of $SOURCE_COMMIT and origin/main (git diff exited with $status)."
+            exit 1
+          fi
+          if [ "$status" -eq 1 ]; then
+            # The Pull Request from the step above already exists at this point and was created
+            # before the change landed, so it proposes reverting it. Say so, or somebody approves a
+            # revert that looks like a routine regeneration.
+            echo "::error::The schemas on main changed while this run generated them. The models are not pushed."
+            echo "::error::Close Pull Request $PULL_REQUEST_NUMBER without merging - it proposes reverting that change - and re-run this workflow."
+            exit 1
+          fi
+          # cloned without the token (the repository is public) and pushed with the token passed
+          # inline, so that it is not persisted in .git/config for the rest of the job
+          git clone --depth 1 \
+            "https://github.com/Hochfrequenz/bo4e-dotnet-ts-models.git" \
+            "$RUNNER_TEMP/ts-models-repo"
+          # --delete, so that the models of removed business objects do not linger forever
+          rsync -a --delete "$RUNNER_TEMP/ts_models/" "$RUNNER_TEMP/ts-models-repo/src/"
+          cd "$RUNNER_TEMP/ts-models-repo"
+          git config user.name "github-actions[bot]"
+          git config user.email "bo4e-dotnet@hochfrequenz.de"
+          git add -A
+          if git diff --cached --quiet; then
+            echo "The TypeScript models are already up to date."
+            exit 0
+          fi
+          git commit -m "Update from https://github.com/Hochfrequenz/BO4E-dotnet/commit/${SOURCE_COMMIT}"
+          git push "https://x-access-token:${GITHUB_TOKEN}@github.com/Hochfrequenz/bo4e-dotnet-ts-models.git" main
