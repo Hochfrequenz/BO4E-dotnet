@@ -4,66 +4,35 @@
 # Before this workflow existed, both steps were manual: somebody had to run the schema generator
 # locally and commit the result (which happened roughly once a year), so the published TypeScript
 # models lagged behind the C# data model by months.
+#
+# Note that a release is only the *trigger*: the schemas are always generated from main, never from
+# the released tag. They are committed to main and the models package always describes the newest
+# state of the data model, so generating from an older tag - a hotfix from a maintenance branch, or
+# a long lived draft release - would revert the schemas on main and delete the models of business
+# objects that were added since.
 name: Generate Schemas and TypeScript Models
 
 on:
   release:
     types:
+      # released: a prerelease that is promoted to a regular release does not fire "published" again
       - published
+      - released
   workflow_dispatch:
 
-# Two releases published in quick succession would otherwise race: on the shared Pull Request
-# branch and on the push to the models repository (which would be rejected non-fast-forward).
+# Two releases published in quick succession would otherwise race on the shared Pull Request branch
+# and on the push to the models repository, where the loser is rejected non-fast-forward. Only one
+# run is kept pending, which is harmless here: every run regenerates the newest state of main.
 concurrency:
   group: generate-schemas-and-ts-models
   cancel-in-progress: false
 
 jobs:
-  gate:
-    name: Check whether this release should regenerate the schemas
-    runs-on: ubuntu-latest
-    outputs:
-      proceed: ${{ steps.check.outputs.proceed }}
-    steps:
-      - id: check
-        env:
-          GH_TOKEN: ${{ github.token }}
-          EVENT_NAME: ${{ github.event_name }}
-          IS_PRERELEASE: ${{ github.event.release.prerelease }}
-          TAG: ${{ github.event.release.tag_name }}
-          REPOSITORY: ${{ github.repository }}
-        run: |
-          set -euo pipefail
-          if [ "$EVENT_NAME" != "release" ]; then
-            # a manual run always generates from main
-            echo "proceed=true" >> "$GITHUB_OUTPUT"
-            exit 0
-          fi
-          if [ "$IS_PRERELEASE" = "true" ]; then
-            echo "::warning::$TAG is a prerelease. Neither the schemas nor the TypeScript models are regenerated for it."
-            echo "proceed=false" >> "$GITHUB_OUTPUT"
-            exit 0
-          fi
-          # A release from a maintenance branch describes an older state of the data model. Without
-          # this check it would propose reverting the schemas on main and overwrite the published
-          # TypeScript models with the older ones.
-          # "identical" and "behind" both mean that the tag is contained in main.
-          status=$(gh api "repos/$REPOSITORY/compare/main...$TAG" --jq .status)
-          case "$status" in
-            identical | behind)
-              echo "proceed=true" >> "$GITHUB_OUTPUT"
-              ;;
-            *)
-              echo "::warning::$TAG is not contained in main (compare status: $status), so it is not the newest state of the data model. Neither the schemas nor the TypeScript models are regenerated."
-              echo "proceed=false" >> "$GITHUB_OUTPUT"
-              ;;
-          esac
-
   generate:
     name: Generate Schemas and TypeScript Models
     runs-on: ubuntu-latest
-    needs: gate
-    if: needs.gate.outputs.proceed == 'true'
+    # a prerelease should not update what the npm package is built from
+    if: github.event.release.prerelease != true
     permissions:
       contents: write
       pull-requests: write
@@ -81,18 +50,15 @@ jobs:
             echo "::error::TS_MODELS_PUSH_TOKEN is not set (or expired and was removed)."
             exit 1
           fi
-      - name: Check out the released commit
+      - name: Check out main
         uses: actions/checkout@v7
         with:
-          # never an arbitrary dispatched branch: that would push unreleased models to
-          # bo4e-dotnet-ts-models and delete schemas that only exist on main
-          ref: ${{ github.event.release.tag_name || 'main' }}
-          # all branches, so that the regenerated schemas can be committed onto main below
-          fetch-depth: 0
+          # deliberately not the released tag, see the note at the top of this file
+          ref: main
       - name: Remember the commit the schemas are generated from
         id: source-commit
-        # not github.sha: on a manual run the checkout is forced to main, while github.sha is the
-        # commit of the branch the workflow was dispatched from
+        # not github.sha: that is the commit of the release tag or of the dispatching branch, while
+        # the schemas are generated from main
         run: echo "sha=$(git rev-parse HEAD)" >> "$GITHUB_OUTPUT"
       - name: Setup .NET
         uses: actions/setup-dotnet@v6
@@ -102,30 +68,11 @@ jobs:
         uses: actions/setup-node@v7
         with:
           node-version: 22
-      # The schemas are generated outside the repository, so that switching to main afterwards
-      # does not conflict with the generated files.
       - name: Generate JSON and OpenAPI Schemas from the C# classes
         run: |
           ./SchemaGenerator/generate-json-schemas.sh \
-            "$RUNNER_TEMP/json-schema-files" \
-            "$RUNNER_TEMP/open-api-schemas"
-      - name: Switch to main
-        # actions/checkout leaves a detached HEAD on the released tag and does not create local
-        # branches, so main is created explicitly from the remote instead of relying on DWIM.
-        run: |
-          # a leftover modification would abort the branch switch
-          git reset --hard
-          git fetch origin main
-          git switch --force-create main origin/main
-      - name: Copy the generated schemas into the repository
-        # Deliberately no --delete: the outdated BO4E.BO.*.json schemas are still the ones exported
-        # by bo4e-dotnet-ts-models/index.d.ts. Removing them is a breaking change for the npm
-        # package and has to happen in a separate, deliberate step.
-        # Consequence: the schema of a removed business object stays in this repository (and its
-        # TypeScript model therefore keeps being regenerated) until somebody deletes it by hand.
-        run: |
-          rsync -a "$RUNNER_TEMP/json-schema-files/" json-schema-files/
-          rsync -a "$RUNNER_TEMP/open-api-schemas/" open-api-schemas/
+            json-schema-files \
+            open-api-schemas
       - name: Generate TypeScript Models from the JSON Schemas
         # Pinned: an unpinned generator silently rewrites every .d.ts file as soon as a new major
         # version is released.
@@ -152,7 +99,7 @@ jobs:
           commit-message: "chore: regenerate JSON and OpenAPI schemas"
           title: "chore: regenerate JSON and OpenAPI schemas"
           body: |
-            The JSON and OpenAPI schemas were regenerated from the C# classes by the
+            The JSON and OpenAPI schemas were regenerated from the C# classes on main by the
             [Generate Schemas and TypeScript Models](https://github.com/Hochfrequenz/BO4E-dotnet/blob/main/.github/workflows/generate_schemas_and_ts_models.yml)
             workflow, triggered by ${{ github.event.release.html_url || 'a manual workflow run' }}.
 
