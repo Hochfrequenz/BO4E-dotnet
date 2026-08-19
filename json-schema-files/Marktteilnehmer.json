@@ -395,6 +395,22 @@
             "$ref": "#/definitions/Zustaendigkeit"
           }
         },
+        "gewerbekennzeichnung": {
+          "type": ["boolean", "null"]
+        },
+        "unternehmensart": {
+          "type": ["string", "null"],
+          "enum": [
+            null,
+            "LIEFERANT",
+            "NETZBETREIBER",
+            "MESSSTELLENBETREIBER",
+            "ÜBERTRAGUNGSNETZBETREIBER",
+            "BILANZKOORDINATOR",
+            "BILANZKREISVERANTWORTLICHER",
+            "ENERGIESERVICEANBIETER"
+          ]
+        },
         "gueltigkeitszeitraum": {
           "$ref": "#/definitions/Zeitraum"
         },
@@ -425,7 +441,9 @@
         "geschaeftspartner",
         "adresse",
         "rufnummern",
-        "zustaendigkeit"
+        "zustaendigkeit",
+        "gewerbekennzeichnung",
+        "unternehmensart"
       ]
     },
     "Bankverbindung": {
@@ -685,8 +703,9 @@
       "type": ["object", "null"],
       "properties": {
         "nummerntyp": {
-          "type": "string",
+          "type": ["string", "null"],
           "enum": [
+            null,
             "RUF_ZENTRALE",
             "FAX_ZENTRALE",
             "SAMMELRUF",
@@ -962,14 +981,18 @@
       "type": ["string", "null"]
     },
     "rollencodetyp": {
-      "type": "string",
-      "enum": ["ZERO", "GLN", "BDEW", "DVGW"]
+      "type": ["string", "null"],
+      "enum": [null, "ZERO", "GLN", "BDEW", "DVGW"]
     },
     "makoadresse": {
       "type": ["string", "null"]
     },
     "ansprechpartner": {
       "$ref": "#/definitions/Ansprechpartner"
+    },
+    "rolle": {
+      "type": ["string", "null"],
+      "enum": [null, "ANDERE_PARTEI", "EMPFAENGER"]
     },
     "gueltigkeitszeitraum": {
       "$ref": "#/definitions/Zeitraum"
@@ -1015,6 +1038,7 @@
     "rollencodenummer",
     "rollencodetyp",
     "makoadresse",
-    "ansprechpartner"
+    "ansprechpartner",
+    "rolle"
   ]
 }

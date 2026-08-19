@@ -803,6 +803,9 @@
             "VAR",
             "VARH",
             "KWHK",
+            "W_M2",
+            "M_S",
+            "STUECK",
             "JAHR",
             "KWH",
             "MW",
@@ -839,6 +842,9 @@
             "VAR",
             "VARH",
             "KWHK",
+            "W_M2",
+            "M_S",
+            "STUECK",
             "JAHR",
             "KWH",
             "MW",
@@ -900,6 +906,9 @@
             "VAR",
             "VARH",
             "KWHK",
+            "W_M2",
+            "M_S",
+            "STUECK",
             "JAHR",
             "KWH",
             "MW",
@@ -963,7 +972,15 @@
             "ZUSATZDIENSTLEISTUNG_PARAGRAPH_35_2_3_MSBG",
             "ZUSATZDIENSTLEISTUNG_PARAGRAPH_35_2_4_MSBG",
             "ZUSATZDIENSTLEISTUNG_PARAGRAPH_35_2_5_MSBG",
-            "ZUSATZDIENSTLEISTUNG_PARAGRAPH_35_3_MSBG"
+            "ZUSATZDIENSTLEISTUNG_PARAGRAPH_35_3_MSBG",
+            "EINBAU_IMS",
+            "EINBAU_KME_RLM",
+            "EINBAU_WANDLER",
+            "WEITERE_ENERGIEFLUSSRICHTUNG",
+            "VERGLEICHSMESSUNG",
+            "ÄNDERUNG_MESSEBENE",
+            "EINBAU_STEUERBOX",
+            "ANSCHLUSS_TR_STEUERBOX_SR"
           ]
         },
         "lokationsId": {
@@ -1451,7 +1468,8 @@
         "VERZUGSKOSTEN",
         "BLINDARBEIT",
         "SONDERRECHNUNG",
-        "ABRECHNUNG_VON_KONFIGURATIONEN_UNIVERSALBESTELLPROZESS"
+        "ABRECHNUNG_VON_KONFIGURATIONEN_UNIVERSALBESTELLPROZESS",
+        "ABRECHNUNG_TECHNIK"
       ]
     },
     "originalRechnungsnummer": {
@@ -1520,7 +1538,8 @@
         "P19_STROM_NEV_UMLAGE",
         "P18_ABLAV",
         "KONZESSIONSABGABE_WECHSEL_RLM",
-        "PRIVILEGIERUNG_NACH_ENFG"
+        "PRIVILEGIERUNG_NACH_ENFG",
+        "KONZESSIONSABGABE_WEIGEL_MENGEN"
       ]
     },
     "buchungsdatum": {

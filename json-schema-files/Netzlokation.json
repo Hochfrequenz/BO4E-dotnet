@@ -395,6 +395,22 @@
             "$ref": "#/definitions/Zustaendigkeit"
           }
         },
+        "gewerbekennzeichnung": {
+          "type": ["boolean", "null"]
+        },
+        "unternehmensart": {
+          "type": ["string", "null"],
+          "enum": [
+            null,
+            "LIEFERANT",
+            "NETZBETREIBER",
+            "MESSSTELLENBETREIBER",
+            "ÜBERTRAGUNGSNETZBETREIBER",
+            "BILANZKOORDINATOR",
+            "BILANZKREISVERANTWORTLICHER",
+            "ENERGIESERVICEANBIETER"
+          ]
+        },
         "gueltigkeitszeitraum": {
           "$ref": "#/definitions/Zeitraum"
         },
@@ -425,7 +441,9 @@
         "geschaeftspartner",
         "adresse",
         "rufnummern",
-        "zustaendigkeit"
+        "zustaendigkeit",
+        "gewerbekennzeichnung",
+        "unternehmensart"
       ]
     },
     "Bankverbindung": {
@@ -734,6 +752,26 @@
         "empfangendeMarktrolle"
       ]
     },
+    "LokationsTypZuordnung": {
+      "type": ["object", "null"],
+      "properties": {
+        "timestamp": {
+          "type": ["string", "null"],
+          "format": "date-time"
+        },
+        "guid": {
+          "type": ["string", "null"]
+        },
+        "lokationstyp": {
+          "type": ["string", "null"],
+          "enum": [null, "MALO", "MELO", "NELO", "SR", "TR"]
+        },
+        "lokationsId": {
+          "type": ["string", "null"]
+        }
+      },
+      "required": ["lokationstyp", "lokationsId"]
+    },
     "MarktpartnerDetails": {
       "type": ["object", "null"],
       "properties": {
@@ -938,14 +976,18 @@
           "type": ["string", "null"]
         },
         "rollencodetyp": {
-          "type": "string",
-          "enum": ["ZERO", "GLN", "BDEW", "DVGW"]
+          "type": ["string", "null"],
+          "enum": [null, "ZERO", "GLN", "BDEW", "DVGW"]
         },
         "makoadresse": {
           "type": ["string", "null"]
         },
         "ansprechpartner": {
           "$ref": "#/definitions/Ansprechpartner"
+        },
+        "rolle": {
+          "type": ["string", "null"],
+          "enum": [null, "ANDERE_PARTEI", "EMPFAENGER"]
         },
         "gueltigkeitszeitraum": {
           "$ref": "#/definitions/Zeitraum"
@@ -991,7 +1033,8 @@
         "rollencodenummer",
         "rollencodetyp",
         "makoadresse",
-        "ansprechpartner"
+        "ansprechpartner",
+        "rolle"
       ]
     },
     "Menge": {
@@ -1022,6 +1065,9 @@
             "VAR",
             "VARH",
             "KWHK",
+            "W_M2",
+            "M_S",
+            "STUECK",
             "JAHR",
             "KWH",
             "MW",
@@ -1032,6 +1078,81 @@
         }
       },
       "required": ["wert", "einheit"]
+    },
+    "Messprodukt": {
+      "type": ["object", "null"],
+      "properties": {
+        "timestamp": {
+          "type": ["string", "null"],
+          "format": "date-time"
+        },
+        "guid": {
+          "type": ["string", "null"]
+        },
+        "messproduktId": {
+          "type": ["string", "null"]
+        },
+        "verwendungszwecke": {
+          "type": ["array", "null"],
+          "items": {
+            "$ref": "#/definitions/Verwendungszweck"
+          }
+        },
+        "verbrauchsart": {
+          "type": ["string", "null"],
+          "enum": [
+            null,
+            "KL",
+            "KLW",
+            "KLWS",
+            "W",
+            "WS",
+            "WK",
+            "EM",
+            "STRB",
+            "STW"
+          ]
+        },
+        "unterbrechbarkeit": {
+          "type": ["string", "null"],
+          "enum": [null, "UV", "NUV"]
+        },
+        "waermenutzung": {
+          "type": ["string", "null"],
+          "enum": [
+            null,
+            "SPEICHERHEIZUNG",
+            "WAERMEPUMPE",
+            "DIREKTHEIZUNG",
+            "WAERMEPUMPE_WAERME_KAELTE",
+            "WAERMEPUMPE_KAELTE",
+            "WAERMEPUMPE_WAERME"
+          ]
+        },
+        "zaehlzeiten": {
+          "$ref": "#/definitions/Zaehlzeitregister"
+        },
+        "zweiteMessung": {
+          "type": ["boolean", "null"]
+        },
+        "werteuebermittlungAnNB": {
+          "type": ["boolean", "null"]
+        },
+        "emobilitaetsart": {
+          "type": ["string", "null"],
+          "enum": [null, "WALLBOX", "E_MOBILITAETSLADESAEULE", "LADEPARK"]
+        }
+      },
+      "required": [
+        "messproduktId",
+        "verwendungszwecke",
+        "verbrauchsart",
+        "unterbrechbarkeit",
+        "waermenutzung",
+        "zaehlzeiten",
+        "zweiteMessung",
+        "emobilitaetsart"
+      ]
     },
     "Netzlokationsabrechnungsdaten": {
       "type": ["object", "null"],
@@ -1073,8 +1194,9 @@
       "type": ["object", "null"],
       "properties": {
         "nummerntyp": {
-          "type": "string",
+          "type": ["string", "null"],
           "enum": [
+            null,
             "RUF_ZENTRALE",
             "FAX_ZENTRALE",
             "SAMMELRUF",
@@ -1134,7 +1256,10 @@
               "ENDKUNDENABRECHNUNG",
               "BLINDARBEITABRECHNUNG_BETRIEBSFUEHRUNG",
               "UEBERMITTLUNG_AN_DAS_HKNR",
-              "ERMITTLUNG_AUSGEGLICHENHEIT_BILANZKREIS"
+              "ERMITTLUNG_AUSGEGLICHENHEIT_BILANZKREIS",
+              "SELBSTVERBRAUCH",
+              "ES_LIEGT_KEIN_VERWENDUNGSZWECK_VOR",
+              "KEINE_DATENLIEFERUNG_AN_MARKTROLLE"
             ]
           }
         },
@@ -1147,6 +1272,29 @@
         }
       },
       "required": ["marktrolle", "zweck"]
+    },
+    "Zaehlzeitregister": {
+      "type": ["object", "null"],
+      "properties": {
+        "timestamp": {
+          "type": ["string", "null"],
+          "format": "date-time"
+        },
+        "guid": {
+          "type": ["string", "null"]
+        },
+        "zaehlzeitDefinition": {
+          "type": ["string", "null"]
+        },
+        "register": {
+          "type": ["string", "null"]
+        },
+        "schwachlastfaehig": {
+          "type": ["string", "null"],
+          "enum": [null, "NICHT_SCHWACHLASTFAEHIG", "SCHWACHLASTFAEHIG"]
+        }
+      },
+      "required": ["zaehlzeitDefinition", "register", "schwachlastfaehig"]
     },
     "Zeitfenster": {
       "type": ["object", "null"],
@@ -1271,8 +1419,16 @@
       "default": "|null|"
     },
     "sparte": {
-      "type": "string",
-      "enum": ["STROM", "GAS", "FERNWAERME", "NAHWAERME", "WASSER", "ABWASSER"]
+      "type": ["string", "null"],
+      "enum": [
+        null,
+        "STROM",
+        "GAS",
+        "FERNWAERME",
+        "NAHWAERME",
+        "WASSER",
+        "ABWASSER"
+      ]
     },
     "netzanschlussleistung": {
       "$ref": "#/definitions/Menge"
@@ -1335,6 +1491,24 @@
         "$ref": "#/definitions/MarktpartnerDetails"
       }
     },
+    "vorgelagerteLokationsIds": {
+      "type": ["array", "null"],
+      "items": {
+        "$ref": "#/definitions/LokationsTypZuordnung"
+      }
+    },
+    "messprodukte": {
+      "type": ["array", "null"],
+      "items": {
+        "$ref": "#/definitions/Messprodukt"
+      }
+    },
+    "verwendungszwecke": {
+      "type": ["array", "null"],
+      "items": {
+        "$ref": "#/definitions/Verwendungszweck"
+      }
+    },
     "gueltigkeitszeitraum": {
       "$ref": "#/definitions/Zeitraum"
     },
@@ -1367,6 +1541,9 @@
     "lokationsbuendelObjektcode",
     "vorgelagerteLokationsId",
     "abrechnungsdaten",
-    "marktrollen"
+    "marktrollen",
+    "vorgelagerteLokationsIds",
+    "messprodukte",
+    "verwendungszwecke"
   ]
 }

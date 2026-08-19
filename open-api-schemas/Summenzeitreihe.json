@@ -4,7 +4,7 @@
   "definitions": {
     "BezeichnungSummenzeitreihe": {
       "type": "integer",
-      "description": "",
+      "description": "Mögliche Qualifier für die Aggregationsverantwortung",
       "x-enumNames": [
         "BG_SZR_B",
         "BG_SZR_C",
@@ -17,13 +17,14 @@
         "LF_SZR_B_BG",
         "DZUE",
         "NZR",
-        "ASZR"
+        "ASZR",
+        "NGZ"
       ],
-      "enum": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11]
+      "enum": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]
     },
     "Zeiteinheit": {
       "type": "integer",
-      "description": "",
+      "description": "Auflistung möglicher Einheiten zur Verwendung in zeitbezogenen Angaben.",
       "x-enumNames": [
         "SEKUNDE",
         "MINUTE",
@@ -40,7 +41,7 @@
     },
     "Zeitreihentyp": {
       "type": "integer",
-      "description": "",
+      "description": "Codes der Summenzeitreihentypen. Die nachfolgenden Codes sind in DE7111 zu nutzen:",
       "x-enumNames": [
         "EGS",
         "LGS",
@@ -50,13 +51,23 @@
         "TES",
         "TLS",
         "SLS_TLS",
-        "SES_TES"
+        "SES_TES",
+        "AUS",
+        "BAS",
+        "DBA",
+        "DZR",
+        "DZÜ",
+        "FPE",
+        "FPI",
+        "SRE",
+        "SRI",
+        "VZR"
       ],
-      "enum": [0, 1, 2, 3, 4, 5, 6, 7, 8]
+      "enum": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18]
     },
     "Marktrolle": {
       "type": "integer",
-      "description": "",
+      "description": "Diese Rollen kann ein Marktteilnehmer einnehmen.",
       "x-enumNames": [
         "NB",
         "LF",
@@ -79,7 +90,7 @@
     },
     "Netzebene": {
       "type": "integer",
-      "description": "",
+      "description": "Auflistung möglicher Netzebenen innerhalb der Energiearten Strom und Gas.",
       "x-enumNames": [
         "NSP",
         "MSP",
@@ -101,18 +112,22 @@
         },
         {
           "type": "object",
+          "description": "Mit dieser Komponente werden Produkte von Summenzeitreihen modelliert.",
           "additionalProperties": {},
           "properties": {
             "identifikation": {
               "type": "string",
+              "description": "Die OBIS-Kennzahl für das Produkt, die festlegt, welche auf die gemessene Größe mit dem Stand gemeldet wird.\n            ",
               "x-nullable": true
             },
             "korrekturfaktor": {
               "type": "number",
+              "description": "Korrekturfaktor der Zeitreihe\n            ",
               "format": "decimal",
               "x-nullable": true
             },
             "verbrauch": {
+              "description": "Der Verbrauch der Zeitreihe. Details Verbrauch",
               "x-nullable": true,
               "oneOf": [
                 {
@@ -131,19 +146,23 @@
         },
         {
           "type": "object",
+          "description": "Abbildung eines zeitlich abgegrenzten Verbrauchs.\n            ",
           "additionalProperties": {},
           "properties": {
             "startdatum": {
               "type": "string",
+              "description": "Gibt Tag und Uhrzeit (falls vorhanden) an, wann der Zeitraum startet.",
               "format": "date-time",
               "x-nullable": true
             },
             "enddatum": {
               "type": "string",
+              "description": "Gibt Tag und Uhrzeit (falls vorhanden) an, wann der Zeitraum endet.",
               "format": "date-time",
               "x-nullable": true
             },
             "wertermittlungsverfahren": {
+              "description": "Gibt an, ob es sich um eine PROGNOSE oder eine MESSUNG handelt.\n            ",
               "x-nullable": true,
               "oneOf": [
                 {
@@ -152,6 +171,7 @@
               ]
             },
             "messwertstatus": {
+              "description": "Enthält die Gültigkeit des angegebenen Wertes\n            ",
               "x-nullable": true,
               "oneOf": [
                 {
@@ -161,23 +181,35 @@
             },
             "statuszusatzinformationen": {
               "type": "array",
+              "description": "Enthält die Auflistung der STS Segmente Plausibilisierungshinweis, Ersatzwertbildungsverfahren,\nKorrekturgrund, Gasqualität, Tarif, Grundlage der Energiemenge",
               "x-nullable": true,
               "items": {
                 "$ref": "#/definitions/StatusZusatzInformation"
               }
             },
             "obiskennzahl": {
-              "type": "string"
+              "type": "string",
+              "description": "Die OBIS-Kennzahl für den Wert, die festlegt, welche Größe mit dem Stand gemeldet wird.\n            ",
+              "x-nullable": true,
+              "x-example": "1-0:1.8.1\n            "
             },
             "wert": {
               "type": "number",
+              "description": "Gibt den absoluten Wert der Menge an.\n            ",
               "format": "decimal"
             },
             "einheit": {
-              "$ref": "#/definitions/Mengeneinheit"
+              "description": "Gibt die Einheit zum jeweiligen Wert an.\n            ",
+              "oneOf": [
+                {
+                  "$ref": "#/definitions/Mengeneinheit"
+                }
+              ]
             },
             "type": {
+              "description": "type",
               "x-nullable": true,
+              "x-example": "arbeitleistungtagesparameterabhmalo | veranschlagtejahresmenge | TUMKundenwert",
               "oneOf": [
                 {
                   "$ref": "#/definitions/Verbrauchsmengetyp"
@@ -185,6 +217,7 @@
               ]
             },
             "tarifstufe": {
+              "description": "Tarifstufe",
               "x-nullable": true,
               "oneOf": [
                 {
@@ -194,13 +227,29 @@
             },
             "nutzungszeitpunkt": {
               "type": "string",
+              "description": "Wird verwendet, um einen Zählerstand eindeutig einem Prozesszeitpunkt zuzuordnen. Dieser Prozesszeitpunkt kann entweder ein Zeitpunkt einer Stammdatenänderung sein(z. B.bei einem Gerätewechsel, in der die Änderung vor dem Versand des Zählerstandes übermittelt wurde) oder die Bestellung eines Wertes aufgrund eines eingetretenen Ereignisses(z.B. Lieferantenwechsel). Der  Nutzungszeitpunkt ist für den Zählerstand der Zeitpunkt der für die weitere Verarbeitung relevant ist(z.B.Zuordnung bei Empfänger anhand der Zuordnungstupel).",
               "format": "date-time",
               "x-nullable": true
             },
             "ausfuehrungszeitpunkt": {
               "type": "string",
+              "description": "Wird verwendet, um einen Zählerstand eindeutig einer tatsächlichen Änderung zuzuordnen, z.B.bei einem Gerätewechsel oder Geräteparameteränderung der tatsächliche Zeitpunkt an dem die Änderung an der Messlokation durchgeführt wurde.Der Nutzungszeitpunkt ist für den Zählerstand der Zeitpunkt der für die weitere Verarbeitung relevant ist(z.B. Zuordnung bei Empfänger anhand der Zuordnungstupel).",
               "format": "date-time",
               "x-nullable": true
+            },
+            "temperaturmasszahl": {
+              "type": "string",
+              "description": "Gibt die Temperaturmaßzahl (TMZ) für Profilscharen an.",
+              "x-nullable": true
+            },
+            "zeitfenster": {
+              "description": "Gibt Zeitfenster für Profilscharen an.",
+              "x-nullable": true,
+              "oneOf": [
+                {
+                  "$ref": "#/definitions/Zeitfenster"
+                }
+              ]
             }
           }
         }
@@ -208,13 +257,13 @@
     },
     "Wertermittlungsverfahren": {
       "type": "integer",
-      "description": "",
+      "description": "Gibt an, ob es sich um eine Prognose oder eine Messung handelt, beispielsweise bei der Abbildung eines Verbrauchs.\n            ",
       "x-enumNames": ["PROGNOSE", "MESSUNG"],
       "enum": [0, 1]
     },
     "Messwertstatus": {
       "type": "integer",
-      "description": "",
+      "description": "Gibt auskunft über die Gültigkeit des angegebenen Verbrauchswertes. Bildet MSCONS SG10 QTY 6063 ab.",
       "x-enumNames": [
         "ABGELESEN",
         "ERSATZWERT",
@@ -236,9 +285,11 @@
         },
         {
           "type": "object",
+          "description": "Enthält die Auflistung der STS Segmente Plausibilisierungshinweis, Ersatzwertbildungsverfahren,\nKorrekturgrund, Gasqualität, Tarif, Grundlage der Energiemenge.",
           "additionalProperties": {},
           "properties": {
             "art": {
+              "description": "Enthält die Zusatzinformation Art des angegebenen Wertes\n            ",
               "x-nullable": true,
               "oneOf": [
                 {
@@ -247,6 +298,7 @@
               ]
             },
             "status": {
+              "description": "Enthält die Zusatzinformation Status des angegebenen Wertes\n            ",
               "x-nullable": true,
               "oneOf": [
                 {
@@ -260,7 +312,7 @@
     },
     "StatusArt": {
       "type": "integer",
-      "description": "",
+      "description": "Represents the Type of Wert (MSCONS SG10 STS 9015)",
       "x-enumNames": [
         "VERTRAG",
         "MESSWERTQUALITAET",
@@ -275,7 +327,7 @@
     },
     "Status": {
       "type": "integer",
-      "description": "",
+      "description": "Represents the Status Code (MSCONS SG10 STS 4405)",
       "x-enumNames": [
         "TARIF_1",
         "TARIF_2",
@@ -354,19 +406,23 @@
     },
     "COM": {
       "type": "object",
+      "description": "The COM class is the abstract class from which all BO4E.COM classes are derived.\n            ",
       "x-abstract": true,
       "additionalProperties": {},
       "properties": {
         "guidSerialized": {
-          "type": "string"
+          "type": "string",
+          "x-nullable": true
         },
         "timestamp": {
           "type": "string",
+          "description": "Store the latest timestamp (update from the database)\n            ",
           "format": "date-time",
           "x-nullable": true
         },
         "guid": {
           "type": "string",
+          "description": "allows adding a GUID to COM objects for tracking across systems\n            ",
           "format": "guid",
           "x-nullable": true
         }
@@ -374,7 +430,7 @@
     },
     "Mengeneinheit": {
       "type": "integer",
-      "description": "",
+      "description": "Einheit: Messgrößen, die per Messung oder Vorgabe ermittelt werden können.\n            ",
       "x-enumNames": [
         "ZERO",
         "WH",
@@ -387,6 +443,9 @@
         "VAR",
         "VARH",
         "KWHK",
+        "W_M2",
+        "M_S",
+        "STUECK",
         "JAHR",
         "KWH",
         "MW",
@@ -395,13 +454,13 @@
         "MWH"
       ],
       "enum": [
-        0, 2, 3, 7, 11, 13, 17, 19, 23, 29, 40, 228, 2000, 3000, 23000, 29000,
-        2000000
+        0, 2, 3, 7, 11, 13, 17, 19, 23, 29, 40, 41, 42, 50, 228, 2000, 3000,
+        23000, 29000, 2000000
       ]
     },
     "Verbrauchsmengetyp": {
       "type": "integer",
-      "description": "",
+      "description": "type von Verbrauchsmenge",
       "x-enumNames": [
         "ARBEITLEISTUNGTAGESPARAMETERABHMALO",
         "VERANSCHLAGTEJAHRESMENGE",
@@ -411,7 +470,7 @@
     },
     "Tarifstufe": {
       "type": "integer",
-      "description": "",
+      "description": "In IFTSTA 21035 \"Rückmeldung auf Lieferschein\" (IFTSTA SG16 QTY 6063)",
       "x-enumNames": [
         "TARIFSTUFE_0",
         "TARIFSTUFE_1",
@@ -426,29 +485,63 @@
       ],
       "enum": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
     },
+    "Zeitfenster": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/COM"
+        },
+        {
+          "type": "object",
+          "description": "Ein Zeitfenster mit Start- und Endzeiten mit TimeOnly als Typ.",
+          "additionalProperties": {},
+          "properties": {
+            "startzeit": {
+              "type": "string",
+              "description": "inklusive Startzeit; z.B. 8 Uhr",
+              "format": "time",
+              "x-nullable": true
+            },
+            "endzeit": {
+              "type": "string",
+              "description": "exklusive Endzeit (z.B. 17:00 Uhr)",
+              "format": "time",
+              "x-nullable": true
+            }
+          }
+        }
+      ]
+    },
     "BusinessObject": {
       "type": "object",
+      "description": "General abstract class for Business Objects for Energy (BO4E)\n            ",
       "x-abstract": true,
       "additionalProperties": {},
       "properties": {
+        "guidSerialized": {
+          "type": "string",
+          "description": "protobuf serilization requires the Guid as string.\n            "
+        },
         "boTyp": {
           "type": "string",
-          "x-nullable": true
+          "description": "obligatory type of the business object in UPPER CASE\n            ",
+          "x-nullable": true,
+          "x-example": "'MESSLOKATION',\n'MARKTLOKATION'\n            "
         },
         "versionStruktur": {
           "type": "string",
-          "x-nullable": true
-        },
-        "guidSerialized": {
-          "type": "string"
+          "description": "obligatory version of the BO4E definition. Currently hard coded to 1\n            ",
+          "x-nullable": true,
+          "x-example": 1
         },
         "timestamp": {
           "type": "string",
+          "description": "Store the latest database update, is Datetime, because postgres doesn't handle datetimeoffset in a generated column\ngracefully\n            ",
           "format": "date-time",
           "x-nullable": true
         },
         "externeReferenzen": {
           "type": "array",
+          "description": "Hier können IDs anderer Systeme hinterlegt werden (z.B. eine SAP-GP-Nummer) (Details siehe\nExterneReferenz)\n            ",
           "x-nullable": true,
           "items": {
             "$ref": "#/definitions/ExterneReferenz"
@@ -456,10 +549,12 @@
         },
         "guid": {
           "type": "string",
+          "description": "allows adding a GUID to Business Objects for tracking across systems\n            ",
           "format": "guid",
           "x-nullable": true
         },
         "gueltigkeitszeitraum": {
+          "description": "Defines the validity of a business object in terms of time (maybe multiple versions exist).\nBackground: German market communication requires for master data changes starting 03.04.2025 that business objects are ordered and aggregated by validity (in terms of time).\nTo easily group data based on this data a new zeitraum is introduced as an optional field in all business objects.\n            ",
           "x-nullable": true,
           "oneOf": [
             {
@@ -468,6 +563,7 @@
           ]
         },
         "qualitaet": {
+          "description": "Defines a level of data quality that is attached to the business object, this can have multiple origins, you could specify a version as draft or uncomplete if this is in the state of creation.\nAnother requirement is coming from german market communictation where business objects of different quality levels need to be grouped.\n            ",
           "x-nullable": true,
           "oneOf": [
             {
@@ -484,14 +580,17 @@
         },
         {
           "type": "object",
+          "description": "Viele Datenobjekte weisen in unterschiedlichen Systemen eine eindeutige ID (Kundennummer, GP-Nummer etc.) auf.\nBeim Austausch von Datenobjekten zwischen verschiedenen Systemen ist es daher hilfreich, sich die eindeutigen IDs\nder anzubindenden Systeme zu merken.\nDiese Komponente ermöglicht es, sich die SAP GP-Nummer zu merken, um diese bei SAP-Aufrufen als Parameter mitgeben\nzu können.\n            ",
           "additionalProperties": {},
           "properties": {
             "exRefName": {
               "type": "string",
+              "description": "Bezeichnung der externen Referenz (z.B. \"hochfrequenz integration services\")\n            ",
               "x-nullable": true
             },
             "exRefWert": {
               "type": "string",
+              "description": "Wert der externen Referenz (z.B. \"123456\"; \"4711\")\n            ",
               "x-nullable": true
             }
           }
@@ -505,9 +604,11 @@
         },
         {
           "type": "object",
+          "description": "Diese Komponente wird zur Abbildung von Zeiträumen in Form von Dauern oder der Angabe von Start und Ende\nverwendet.\n            ",
           "additionalProperties": {},
           "properties": {
             "einheit": {
+              "description": "Die Einheit in der die Dauer angeben ist. Z.B. Monate. ",
               "x-nullable": true,
               "oneOf": [
                 {
@@ -517,26 +618,31 @@
             },
             "dauer": {
               "type": "number",
+              "description": "Gibt die Anzahl der Zeiteinheiten an, z.B. 3 (Monate).",
               "format": "decimal",
               "x-nullable": true
             },
             "startdatum": {
               "type": "string",
+              "description": "Gibt Tag und Uhrzeit (falls vorhanden) an, wann der Zeitraum startet.",
               "format": "date-time",
               "x-nullable": true
             },
             "enddatum": {
               "type": "string",
+              "description": "Gibt Tag und Uhrzeit (falls vorhanden) an, wann der Zeitraum endet.",
               "format": "date-time",
               "x-nullable": true
             },
             "startzeitpunkt": {
               "type": "string",
+              "description": "The same value as Startdatum",
               "format": "date-time",
               "x-nullable": true
             },
             "endzeitpunkt": {
               "type": "string",
+              "description": "The same value as Enddatum",
               "format": "date-time",
               "x-nullable": true
             }
@@ -546,7 +652,7 @@
     },
     "Qualitaet": {
       "type": "integer",
-      "description": "",
+      "description": "Qualitätsstufen eines Business-Objektes, v.a. aus Sicht Marktkommunikation ",
       "x-enumNames": [
         "VOLLSTAENDIG",
         "INFORMATIV",
@@ -564,35 +670,43 @@
     },
     {
       "type": "object",
+      "description": "Summenzeitreihen BO",
       "additionalProperties": {},
       "properties": {
         "zaehlpunktId": {
           "type": "string",
+          "description": "Für welchen MABIS-Zaehlpuunkt gelten diese Summenzeitreihendaten",
           "x-nullable": true
         },
         "bilanzierungsbeginn": {
           "type": "string",
+          "description": "Inklusiver Start der Bilanzierung",
           "format": "date-time",
           "x-nullable": true
         },
         "bilanzierungsende": {
           "type": "string",
+          "description": "Exklusives Ende der Bilanzierung",
           "format": "date-time",
           "x-nullable": true
         },
         "bilanzkreis": {
           "type": "string",
+          "description": "Bilanzkreis, should obey IsValidEIC",
           "x-nullable": true
         },
         "bilanzierungsgebiet": {
           "type": "string",
+          "description": "Bilanzierungsgebiet, dem das Netzgebiet zugeordnet ist - im Falle eines Strom Netzes.",
           "x-nullable": true
         },
         "regelzone": {
           "type": "string",
+          "description": "Regelzone",
           "x-nullable": true
         },
         "bezeichnung": {
+          "description": "Bezeichnung",
           "x-nullable": true,
           "oneOf": [
             {
@@ -601,6 +715,7 @@
           ]
         },
         "bezugszeitraum": {
+          "description": "Bezugszeitraum (TAG,MONAT)",
           "x-nullable": true,
           "oneOf": [
             {
@@ -609,6 +724,7 @@
           ]
         },
         "zeitreihentyp": {
+          "description": "Zeitreihentyp (SLS, TLS, etc.)",
           "x-nullable": true,
           "oneOf": [
             {
@@ -617,6 +733,7 @@
           ]
         },
         "marktrolle": {
+          "description": "Verantwortliche Marktrolle\n            ",
           "x-nullable": true,
           "oneOf": [
             {
@@ -625,6 +742,7 @@
           ]
         },
         "spannungsebene": {
+          "description": "Spannungsebene\n            ",
           "x-nullable": true,
           "oneOf": [
             {
@@ -634,6 +752,7 @@
         },
         "produkte": {
           "type": "array",
+          "description": "Produkte der Summenzeitreihe\n            ",
           "x-nullable": true,
           "items": {
             "$ref": "#/definitions/Zeitreihenprodukt"

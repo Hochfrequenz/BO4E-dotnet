@@ -9,13 +9,16 @@
         },
         {
           "type": "object",
+          "description": "Abbildung einer Menge mit Wert und Einheit.",
           "additionalProperties": {},
           "properties": {
             "wert": {
               "type": "number",
+              "description": "Gibt den absoluten Wert der Menge an.",
               "format": "decimal"
             },
             "einheit": {
+              "description": "Gibt die Einheit zum jeweiligen Wert an. Details Mengeneinheit",
               "x-nullable": true,
               "oneOf": [
                 {
@@ -29,7 +32,7 @@
     },
     "Mengeneinheit": {
       "type": "integer",
-      "description": "",
+      "description": "Einheit: Messgrößen, die per Messung oder Vorgabe ermittelt werden können.\n            ",
       "x-enumNames": [
         "ZERO",
         "WH",
@@ -42,6 +45,9 @@
         "VAR",
         "VARH",
         "KWHK",
+        "W_M2",
+        "M_S",
+        "STUECK",
         "JAHR",
         "KWH",
         "MW",
@@ -50,25 +56,29 @@
         "MWH"
       ],
       "enum": [
-        0, 2, 3, 7, 11, 13, 17, 19, 23, 29, 40, 228, 2000, 3000, 23000, 29000,
-        2000000
+        0, 2, 3, 7, 11, 13, 17, 19, 23, 29, 40, 41, 42, 50, 228, 2000, 3000,
+        23000, 29000, 2000000
       ]
     },
     "COM": {
       "type": "object",
+      "description": "The COM class is the abstract class from which all BO4E.COM classes are derived.\n            ",
       "x-abstract": true,
       "additionalProperties": {},
       "properties": {
         "guidSerialized": {
-          "type": "string"
+          "type": "string",
+          "x-nullable": true
         },
         "timestamp": {
           "type": "string",
+          "description": "Store the latest timestamp (update from the database)\n            ",
           "format": "date-time",
           "x-nullable": true
         },
         "guid": {
           "type": "string",
+          "description": "allows adding a GUID to COM objects for tracking across systems\n            ",
           "format": "guid",
           "x-nullable": true
         }
@@ -76,13 +86,13 @@
     },
     "TechnischeRessourceNutzung": {
       "type": "integer",
-      "description": "",
+      "description": "Art und Nutzung der Technischen Ressource",
       "x-enumNames": ["STROMVERBRAUCHSART", "STROMERZEUGUNGSART", "SPEICHER"],
       "enum": [0, 1, 2]
     },
     "TechnischeRessourceVerbrauchsart": {
       "type": "integer",
-      "description": "",
+      "description": "Verbrauchsart der Technischen Ressource.",
       "x-enumNames": [
         "KRAFT_LICHT",
         "WAERME",
@@ -93,7 +103,7 @@
     },
     "Waermenutzung": {
       "type": "integer",
-      "description": "",
+      "description": "Stromverbrauchsart/Wärmenutzung Marktlokation",
       "x-enumNames": [
         "SPEICHERHEIZUNG",
         "WAERMEPUMPE",
@@ -106,13 +116,13 @@
     },
     "EMobilitaetsart": {
       "type": "integer",
-      "description": "",
+      "description": "Im Falle der E-Mobilität bei TechnischeRessourceNutzung, eine genauere Angabe über die Art der E-Mobilität zu definieren.",
       "x-enumNames": ["WALLBOX", "E_MOBILITAETSLADESAEULE", "LADEPARK"],
       "enum": [0, 1, 2]
     },
     "Erzeugungsart": {
       "type": "integer",
-      "description": "",
+      "description": "Auflistung der Erzeugungsarten von Energie.",
       "x-enumNames": [
         "KWK",
         "WIND",
@@ -130,7 +140,7 @@
     },
     "Speicherart": {
       "type": "integer",
-      "description": "",
+      "description": "Im Falle der Speicher bei TechnischeRessourceNutzung, eine genauere Angabe über die Art der Speicher zu definieren.",
       "x-enumNames": [
         "WASSERSTOFFSPEICHER",
         "PUMPSPEICHER",
@@ -141,19 +151,19 @@
     },
     "KategorieTechnischeRessource": {
       "type": "integer",
-      "description": "",
+      "description": "Kategorisierung der technischen Ressource in Hinblick auf §14a EnWG.",
       "x-enumNames": ["FAELLT_UNTER_14A", "FAELLT_NICHT_UNTER_14A"],
       "enum": [0, 1]
     },
     "InbetriebsetzungTechnischeRessource": {
       "type": "integer",
-      "description": "",
+      "description": "Inbetriebsetzungsdatum der verbrauchenden Technischen Ressource nach § 14a EnWG",
       "x-enumNames": ["NACH_2023", "VOR_2024"],
       "enum": [0, 1]
     },
     "EinordnungTechnischeRessource": {
       "type": "integer",
-      "description": "",
+      "description": "Einordnung der verbrauchenden Technischen Ressource nach § 14a EnWG mit Inbetriebsetzung vor 2024",
       "x-enumNames": [
         "WECHSEL_IN_14A_EINMALIG_MOEGLICH",
         "WECHSEL_IN_14A_NICHT_MOEGLICH",
@@ -164,7 +174,7 @@
     },
     "InformationWeitereTechnischeRessource": {
       "type": "integer",
-      "description": "",
+      "description": "Information zu weiteren technischen Einrichtungen",
       "x-enumNames": [
         "WEITERE_EINRICHTUNG_VORHANDEN",
         "KEINE_WEITERE_EINRICHTUNG_VORHANDEN"
@@ -178,17 +188,21 @@
         },
         {
           "type": "object",
+          "description": "Used in Marktlokation and Messlokation to represent data about MSB",
           "additionalProperties": {},
           "properties": {
             "rollencodenummer": {
               "type": "string",
+              "description": "Rollencodenummer von Marktrolle",
               "x-nullable": true
             },
             "code": {
               "type": "string",
+              "description": "Code von Marktrolle",
               "x-nullable": true
             },
             "marktrolle": {
+              "description": "Marktrolle. Details siehe Marktrolle",
               "x-nullable": true,
               "oneOf": [
                 {
@@ -198,6 +212,7 @@
             },
             "weiterverpflichtet": {
               "type": "boolean",
+              "description": "Weiterverpflichtung des MSB />",
               "x-nullable": true
             }
           }
@@ -206,7 +221,7 @@
     },
     "Marktrolle": {
       "type": "integer",
-      "description": "",
+      "description": "Diese Rollen kann ein Marktteilnehmer einnehmen.",
       "x-enumNames": [
         "NB",
         "LF",
@@ -227,29 +242,71 @@
       ],
       "enum": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15]
     },
+    "LokationsTypZuordnung": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/COM"
+        },
+        {
+          "type": "object",
+          "description": "ordnet beliebigen einer Lokations-ID einen Lokationstyp zu",
+          "additionalProperties": {},
+          "properties": {
+            "lokationstyp": {
+              "description": "Lokationstyp",
+              "x-nullable": true,
+              "oneOf": [
+                {
+                  "$ref": "#/definitions/Lokationstyp"
+                }
+              ]
+            },
+            "lokationsId": {
+              "type": "string",
+              "description": "Wert, der einem Lokationstyp zugeordnet werden soll #TODO: generischer? (für andere zur Verfügung stellen)",
+              "x-nullable": true
+            }
+          }
+        }
+      ]
+    },
+    "Lokationstyp": {
+      "type": "integer",
+      "description": "Gibt an, ob es sich um eine Markt- oder Messlokation handelt.",
+      "x-enumNames": ["MALO", "MELO", "NELO", "SR", "TR"],
+      "enum": [0, 1, 2, 3, 4]
+    },
     "BusinessObject": {
       "type": "object",
+      "description": "General abstract class for Business Objects for Energy (BO4E)\n            ",
       "x-abstract": true,
       "additionalProperties": {},
       "properties": {
+        "guidSerialized": {
+          "type": "string",
+          "description": "protobuf serilization requires the Guid as string.\n            "
+        },
         "boTyp": {
           "type": "string",
-          "x-nullable": true
+          "description": "obligatory type of the business object in UPPER CASE\n            ",
+          "x-nullable": true,
+          "x-example": "'MESSLOKATION',\n'MARKTLOKATION'\n            "
         },
         "versionStruktur": {
           "type": "string",
-          "x-nullable": true
-        },
-        "guidSerialized": {
-          "type": "string"
+          "description": "obligatory version of the BO4E definition. Currently hard coded to 1\n            ",
+          "x-nullable": true,
+          "x-example": 1
         },
         "timestamp": {
           "type": "string",
+          "description": "Store the latest database update, is Datetime, because postgres doesn't handle datetimeoffset in a generated column\ngracefully\n            ",
           "format": "date-time",
           "x-nullable": true
         },
         "externeReferenzen": {
           "type": "array",
+          "description": "Hier können IDs anderer Systeme hinterlegt werden (z.B. eine SAP-GP-Nummer) (Details siehe\nExterneReferenz)\n            ",
           "x-nullable": true,
           "items": {
             "$ref": "#/definitions/ExterneReferenz"
@@ -257,10 +314,12 @@
         },
         "guid": {
           "type": "string",
+          "description": "allows adding a GUID to Business Objects for tracking across systems\n            ",
           "format": "guid",
           "x-nullable": true
         },
         "gueltigkeitszeitraum": {
+          "description": "Defines the validity of a business object in terms of time (maybe multiple versions exist).\nBackground: German market communication requires for master data changes starting 03.04.2025 that business objects are ordered and aggregated by validity (in terms of time).\nTo easily group data based on this data a new zeitraum is introduced as an optional field in all business objects.\n            ",
           "x-nullable": true,
           "oneOf": [
             {
@@ -269,6 +328,7 @@
           ]
         },
         "qualitaet": {
+          "description": "Defines a level of data quality that is attached to the business object, this can have multiple origins, you could specify a version as draft or uncomplete if this is in the state of creation.\nAnother requirement is coming from german market communictation where business objects of different quality levels need to be grouped.\n            ",
           "x-nullable": true,
           "oneOf": [
             {
@@ -285,14 +345,17 @@
         },
         {
           "type": "object",
+          "description": "Viele Datenobjekte weisen in unterschiedlichen Systemen eine eindeutige ID (Kundennummer, GP-Nummer etc.) auf.\nBeim Austausch von Datenobjekten zwischen verschiedenen Systemen ist es daher hilfreich, sich die eindeutigen IDs\nder anzubindenden Systeme zu merken.\nDiese Komponente ermöglicht es, sich die SAP GP-Nummer zu merken, um diese bei SAP-Aufrufen als Parameter mitgeben\nzu können.\n            ",
           "additionalProperties": {},
           "properties": {
             "exRefName": {
               "type": "string",
+              "description": "Bezeichnung der externen Referenz (z.B. \"hochfrequenz integration services\")\n            ",
               "x-nullable": true
             },
             "exRefWert": {
               "type": "string",
+              "description": "Wert der externen Referenz (z.B. \"123456\"; \"4711\")\n            ",
               "x-nullable": true
             }
           }
@@ -306,9 +369,11 @@
         },
         {
           "type": "object",
+          "description": "Diese Komponente wird zur Abbildung von Zeiträumen in Form von Dauern oder der Angabe von Start und Ende\nverwendet.\n            ",
           "additionalProperties": {},
           "properties": {
             "einheit": {
+              "description": "Die Einheit in der die Dauer angeben ist. Z.B. Monate. ",
               "x-nullable": true,
               "oneOf": [
                 {
@@ -318,26 +383,31 @@
             },
             "dauer": {
               "type": "number",
+              "description": "Gibt die Anzahl der Zeiteinheiten an, z.B. 3 (Monate).",
               "format": "decimal",
               "x-nullable": true
             },
             "startdatum": {
               "type": "string",
+              "description": "Gibt Tag und Uhrzeit (falls vorhanden) an, wann der Zeitraum startet.",
               "format": "date-time",
               "x-nullable": true
             },
             "enddatum": {
               "type": "string",
+              "description": "Gibt Tag und Uhrzeit (falls vorhanden) an, wann der Zeitraum endet.",
               "format": "date-time",
               "x-nullable": true
             },
             "startzeitpunkt": {
               "type": "string",
+              "description": "The same value as Startdatum",
               "format": "date-time",
               "x-nullable": true
             },
             "endzeitpunkt": {
               "type": "string",
+              "description": "The same value as Enddatum",
               "format": "date-time",
               "x-nullable": true
             }
@@ -347,7 +417,7 @@
     },
     "Zeiteinheit": {
       "type": "integer",
-      "description": "",
+      "description": "Auflistung möglicher Einheiten zur Verwendung in zeitbezogenen Angaben.",
       "x-enumNames": [
         "SEKUNDE",
         "MINUTE",
@@ -364,7 +434,7 @@
     },
     "Qualitaet": {
       "type": "integer",
-      "description": "",
+      "description": "Qualitätsstufen eines Business-Objektes, v.a. aus Sicht Marktkommunikation ",
       "x-enumNames": [
         "VOLLSTAENDIG",
         "INFORMATIV",
@@ -382,26 +452,38 @@
     },
     {
       "type": "object",
+      "description": "Technische Ressource BO",
       "additionalProperties": {},
       "properties": {
         "technischeRessourceId": {
           "type": "string",
+          "description": "Identifikationsnummer einer TechnischeRessource",
           "default": "|null|",
           "x-nullable": true
         },
         "vorgelagerteMesslokationsId": {
           "type": "string",
+          "description": "Vorgelagerte Messlokation ID\nBeispiel:\nRFF+Z34:DE00713739359S0000000000001222221'",
+          "x-deprecated": true,
+          "x-deprecatedMessage": "Abgelöst durch 'VorgelagerteLokationsIds'.",
           "x-nullable": true
         },
         "zugeordneteMarktlokationsId": {
           "type": "string",
+          "description": "Referenz auf die der Technischen Ressource Zugeordneten Marktlokation\nBeispiel:\nRFF+Z16:20072281644'",
+          "x-deprecated": true,
+          "x-deprecatedMessage": "Abgelöst durch 'ZugeordneteLokationsIds'.",
           "x-nullable": true
         },
         "zugeordneteSteuerbareRessourceId": {
           "type": "string",
+          "description": "Referenz auf die der Technischen Ressource zugeordneten Steuerbaren Ressource\nBeispiel:\nRFF+Z16:20072281644'",
+          "x-deprecated": true,
+          "x-deprecatedMessage": "Abgelöst durch 'ZugeordneteLokationsIds'.",
           "x-nullable": true
         },
         "nennleistungAufnahme": {
+          "description": "Nennleistung (Aufnahme)\nBeispiel: QTY+Z43:100:KWT'",
           "x-nullable": true,
           "oneOf": [
             {
@@ -410,6 +492,7 @@
           ]
         },
         "nennleistungAbgabe": {
+          "description": "Nennleistung (Abgabe)\nBeispiel: QTY+Z44:100:KWT'",
           "x-nullable": true,
           "oneOf": [
             {
@@ -418,6 +501,7 @@
           ]
         },
         "speicherkapazitaet": {
+          "description": "Speicherkapazität\nBeispiel: QTY+Z42:100:KWH'",
           "x-nullable": true,
           "oneOf": [
             {
@@ -426,6 +510,7 @@
           ]
         },
         "technischeRessourceNutzung": {
+          "description": "Art und Nutzung der Technischen Ressource\nBeispiel: CCI+Z17'\n    Z17: Stromverbrauchsart\n    Z50: Stromerzeugungsart\n    Z56: Speicher",
           "x-nullable": true,
           "oneOf": [
             {
@@ -434,6 +519,9 @@
           ]
         },
         "verbrauchsart": {
+          "description": "Verbrauchsart der Technischen Ressource\nBeispiel: CAV+Z64'\n    Z64: Kraft/Licht\n    Z65: Wärme\n    ZE5: E-Mobilität\n    ZA8: Straßenbeleuchtung",
+          "x-deprecated": true,
+          "x-deprecatedMessage": "Abgelöst durch 'Verbrauchsarten'. (Technische Ressource unterstützt mehrere Verbrauchsarten)",
           "x-nullable": true,
           "oneOf": [
             {
@@ -442,6 +530,7 @@
           ]
         },
         "waermenutzung": {
+          "description": "Wärmenutzung\nBeispiel: CAV+Z56'\n    Z56: Speicherheizung\n    Z57: Wärmepumpe (unspezifiziert)\n    Z61: Direktheizung\n    ZV5: Wärmepumpe (Wärme und Kälte)\n    ZV6: Wärmepumpe (Kälte)\n    ZV7: Wärmepumpe (Wärme)",
           "x-nullable": true,
           "oneOf": [
             {
@@ -450,6 +539,7 @@
           ]
         },
         "emobilitaetsart": {
+          "description": "Art der E-Mobilität\nDas Segment dient dazu, im Falle der E-Mobilität eine genauere Angabe über die Art der E-Mobilität zu definieren.\nBeispiel: CAV+Z87'\n    ZE6: Wallbox: An der Marktlokation ist eine nicht öffentlliche Lademöglichkeit vorhanden\n    Z87: E-Mobilitätsladesäule: Es handelt sich um eine öffentliche Ladesäule mit ggf. mehreren Ladeanschlüssen an der Marktlokation.\n    ZE7: Ladepark: Es handelt sich um mehr als eine öffentliche Ladesäule an der Marktlokation",
           "x-nullable": true,
           "oneOf": [
             {
@@ -458,6 +548,7 @@
           ]
         },
         "erzeugungsart": {
+          "description": "Art der Erzeugung der Energie. Details Erzeugungsart\nBeispiel: CAV+ZF5'\nErzeugungsart:\n    ZF5: Solar\n    ZF6: Wind\n    ZG0: Gas\n    ZG1: Wasser\n    ZG5: Sonstige Erzeugungsart",
           "x-nullable": true,
           "oneOf": [
             {
@@ -466,6 +557,7 @@
           ]
         },
         "speicherart": {
+          "description": "Art der speicher. Details Speicherart\nBeispiel: CAV+ZF7'\nSpeicherart:\n    ZF7: Wasserstoffspeicher\n    ZF8: Pumpspeicher\n    ZF9: Batteriespeicher\n    ZG6: Sonstige Speicherart",
           "x-nullable": true,
           "oneOf": [
             {
@@ -475,13 +567,18 @@
         },
         "lokationsbuendelObjektcode": {
           "type": "string",
+          "description": "Lokationsbuendel Code, der die Funktion dieses BOs an der Lokationsbuendelstruktur beschreibt.",
           "x-nullable": true
         },
         "vorgelagerteLokationsId": {
           "type": "string",
+          "description": "Enthält die ID der vorgelagerten Lokation. Kann IDs unterschiedlicher Lokationen enthalten, also zum Beispiel\neiner Messlokation oder Netzlokation",
+          "x-deprecated": true,
+          "x-deprecatedMessage": "Abgelöst durch 'VorgelagerteLokationsIds'.",
           "x-nullable": true
         },
         "kategorie": {
+          "description": "Kategorie der verbrauchenden Technischen Ressource\n ",
           "x-nullable": true,
           "oneOf": [
             {
@@ -490,6 +587,7 @@
           ]
         },
         "inbetriebsetzung": {
+          "description": "Inbetriebsetzungsdatum der verbrauchenden Technischen Ressource nach § 14a EnWG\n ",
           "x-nullable": true,
           "oneOf": [
             {
@@ -498,6 +596,7 @@
           ]
         },
         "einordnung": {
+          "description": "Einordnung der verbrauchenden Technischen Ressource nach § 14a EnWG mit Inbetriebsetzung vor 2024\n ",
           "x-nullable": true,
           "oneOf": [
             {
@@ -506,6 +605,7 @@
           ]
         },
         "weitereEinrichtung": {
+          "description": "Information zu weiteren technischen Einrichtungen\n ",
           "x-nullable": true,
           "oneOf": [
             {
@@ -515,9 +615,34 @@
         },
         "marktrollen": {
           "type": "array",
+          "description": "Ergänzt die Marktrollen zu der Technischen Ressource",
           "x-nullable": true,
           "items": {
             "$ref": "#/definitions/MarktpartnerDetails"
+          }
+        },
+        "vorgelagerteLokationsIds": {
+          "type": "array",
+          "description": "Enthält die ID's der vorgelagerten Lokationen. Kann IDs unterschiedlicher Lokationen enthalten, also zum Beispiel\neiner Messlokation oder Netzlokation",
+          "x-nullable": true,
+          "items": {
+            "$ref": "#/definitions/LokationsTypZuordnung"
+          }
+        },
+        "zugeordneteLokationsIds": {
+          "type": "array",
+          "description": "Referenz auf die der Technischen Ressource Zugeordneten Marktlokationen oder der technischen Ressource zugeordneten Steuerbaren Ressourcen\nBeispiel:\nRFF+Z16:20072281644'",
+          "x-nullable": true,
+          "items": {
+            "$ref": "#/definitions/LokationsTypZuordnung"
+          }
+        },
+        "verbrauchsarten": {
+          "type": "array",
+          "description": "Verbrauchsarten der Technischen Ressource\nBeispiel: CAV+Z64'\n    Z64: Kraft/Licht\n    Z65: Wärme\n    ZE5: E-Mobilität\n    ZA8: Straßenbeleuchtung",
+          "x-nullable": true,
+          "items": {
+            "$ref": "#/definitions/TechnischeRessourceVerbrauchsart"
           }
         }
       }

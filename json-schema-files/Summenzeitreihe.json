@@ -209,6 +209,9 @@
             "VAR",
             "VARH",
             "KWHK",
+            "W_M2",
+            "M_S",
+            "STUECK",
             "JAHR",
             "KWH",
             "MW",
@@ -224,6 +227,12 @@
         "ausfuehrungszeitpunkt": {
           "type": ["string", "null"],
           "format": "date-time"
+        },
+        "temperaturmasszahl": {
+          "type": ["string", "null"]
+        },
+        "zeitfenster": {
+          "$ref": "#/definitions/Zeitfenster"
         }
       },
       "required": [
@@ -238,8 +247,29 @@
         "wert",
         "einheit",
         "nutzungszeitpunkt",
-        "ausfuehrungszeitpunkt"
+        "ausfuehrungszeitpunkt",
+        "temperaturmasszahl",
+        "zeitfenster"
       ]
+    },
+    "Zeitfenster": {
+      "type": ["object", "null"],
+      "properties": {
+        "timestamp": {
+          "type": ["string", "null"],
+          "format": "date-time"
+        },
+        "guid": {
+          "type": ["string", "null"]
+        },
+        "startzeit": {
+          "type": ["string", "null"]
+        },
+        "endzeit": {
+          "type": ["string", "null"]
+        }
+      },
+      "required": ["startzeit", "endzeit"]
     },
     "Zeitraum": {
       "type": ["object", "null"],
@@ -375,7 +405,8 @@
         "LF_SZR_B_BG",
         "DZUE",
         "NZR",
-        "ASZR"
+        "ASZR",
+        "NGZ"
       ]
     },
     "bezugszeitraum": {
@@ -406,7 +437,17 @@
         "TES",
         "TLS",
         "SLS_TLS",
-        "SES_TES"
+        "SES_TES",
+        "AUS",
+        "BAS",
+        "DBA",
+        "DZR",
+        "DZÜ",
+        "FPE",
+        "FPI",
+        "SRE",
+        "SRI",
+        "VZR"
       ]
     },
     "marktrolle": {

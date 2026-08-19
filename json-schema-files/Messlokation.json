@@ -532,9 +532,17 @@
             "STEUERBOX",
             "ZAEHLEINRICHTUNG"
           ]
+        },
+        "positionsnummer": {
+          "type": ["string", "null"]
         }
       },
-      "required": ["geraetenummer", "geraeteeigenschaften", "geraeteart"]
+      "required": [
+        "geraetenummer",
+        "geraeteeigenschaften",
+        "geraeteart",
+        "positionsnummer"
+      ]
     },
     "Geraeteeigenschaften": {
       "type": ["object", "null"],
@@ -670,9 +678,24 @@
           "additionalProperties": {
             "type": ["string", "null"]
           }
+        },
+        "wandlerfaktor": {
+          "type": ["number", "null"]
+        },
+        "weitereGeraetenummern": {
+          "type": ["array", "null"],
+          "items": {
+            "type": ["string", "null"]
+          }
         }
       },
-      "required": ["geraetetyp", "geraetemerkmal", "Parameter"]
+      "required": [
+        "geraetetyp",
+        "geraetemerkmal",
+        "Parameter",
+        "wandlerfaktor",
+        "weitereGeraetenummern"
+      ]
     },
     "Geschaeftspartner": {
       "type": ["object", "null"],
@@ -970,6 +993,26 @@
       },
       "required": ["kosten", "kategorie", "satz"]
     },
+    "LokationsTypZuordnung": {
+      "type": ["object", "null"],
+      "properties": {
+        "timestamp": {
+          "type": ["string", "null"],
+          "format": "date-time"
+        },
+        "guid": {
+          "type": ["string", "null"]
+        },
+        "lokationstyp": {
+          "type": ["string", "null"],
+          "enum": [null, "MALO", "MELO", "NELO", "SR", "TR"]
+        },
+        "lokationsId": {
+          "type": ["string", "null"]
+        }
+      },
+      "required": ["lokationstyp", "lokationsId"]
+    },
     "MarktpartnerDetails": {
       "type": ["object", "null"],
       "properties": {
@@ -1040,7 +1083,18 @@
         },
         "verbrauchsart": {
           "type": ["string", "null"],
-          "enum": [null, "KL", "KLW", "KLWS", "W", "WS"]
+          "enum": [
+            null,
+            "KL",
+            "KLW",
+            "KLWS",
+            "W",
+            "WS",
+            "WK",
+            "EM",
+            "STRB",
+            "STW"
+          ]
         },
         "unterbrechbarkeit": {
           "type": ["string", "null"],
@@ -1118,7 +1172,10 @@
               "ENDKUNDENABRECHNUNG",
               "BLINDARBEITABRECHNUNG_BETRIEBSFUEHRUNG",
               "UEBERMITTLUNG_AN_DAS_HKNR",
-              "ERMITTLUNG_AUSGEGLICHENHEIT_BILANZKREIS"
+              "ERMITTLUNG_AUSGEGLICHENHEIT_BILANZKREIS",
+              "SELBSTVERBRAUCH",
+              "ES_LIEGT_KEIN_VERWENDUNGSZWECK_VOR",
+              "KEINE_DATENLIEFERUNG_AN_MARKTROLLE"
             ]
           }
         },
@@ -1158,8 +1215,9 @@
           "type": ["string", "null"]
         },
         "sparte": {
-          "type": "string",
+          "type": ["string", "null"],
           "enum": [
+            null,
             "STROM",
             "GAS",
             "FERNWAERME",
@@ -1221,8 +1279,7 @@
           "type": ["array", "null"],
           "items": {
             "$ref": "#/definitions/Zaehlwerk"
-          },
-          "minItems": 1
+          }
         },
         "zaehlerhersteller": {
           "$ref": "#/definitions/Geschaeftspartner"
@@ -1334,6 +1391,10 @@
             "$ref": "#/definitions/Geraet"
           }
         },
+        "artVolumenerfassung": {
+          "type": ["string", "null"],
+          "enum": [null, "KENNLINIENKORREKTUR", "SCHLEICHMENGENUNTERDRÜCKUNG"]
+        },
         "gueltigkeitszeitraum": {
           "$ref": "#/definitions/Zeitraum"
         },
@@ -1369,7 +1430,8 @@
         "zaehlertypspezifikation",
         "befestigungsart",
         "zaehlergroesse",
-        "geraete"
+        "geraete",
+        "artVolumenerfassung"
       ]
     },
     "Zaehlwerk": {
@@ -1413,6 +1475,9 @@
             "VAR",
             "VARH",
             "KWHK",
+            "W_M2",
+            "M_S",
+            "STUECK",
             "JAHR",
             "KWH",
             "MW",
@@ -1436,7 +1501,18 @@
         },
         "verbrauchsart": {
           "type": ["string", "null"],
-          "enum": [null, "KL", "KLW", "KLWS", "W", "WS"]
+          "enum": [
+            null,
+            "KL",
+            "KLW",
+            "KLWS",
+            "W",
+            "WS",
+            "WK",
+            "EM",
+            "STRB",
+            "STW"
+          ]
         },
         "unterbrechbarkeit": {
           "type": ["string", "null"],
@@ -1481,6 +1557,13 @@
         "emobilitaetsart": {
           "type": ["string", "null"],
           "enum": [null, "WALLBOX", "E_MOBILITAETSLADESAEULE", "LADEPARK"]
+        },
+        "Verbrauchsarten": {
+          "type": ["array", "null"],
+          "items": {
+            "type": "string",
+            "enum": ["KL", "KLW", "KLWS", "W", "WS", "WK", "EM", "STRB", "STW"]
+          }
         }
       },
       "required": [
@@ -1504,7 +1587,8 @@
         "anzahlAblesungen",
         "zaehlzeiten",
         "konfiguration",
-        "emobilitaetsart"
+        "emobilitaetsart",
+        "Verbrauchsarten"
       ]
     },
     "Zaehlzeitregister": {
@@ -1739,6 +1823,15 @@
     "vorgelagerteLokationsId": {
       "type": ["string", "null"]
     },
+    "istFuerLieferanmeldungRelevant": {
+      "type": ["boolean", "null"]
+    },
+    "vorgelagerteLokationsIds": {
+      "type": ["array", "null"],
+      "items": {
+        "$ref": "#/definitions/LokationsTypZuordnung"
+      }
+    },
     "gueltigkeitszeitraum": {
       "$ref": "#/definitions/Zeitraum"
     },
@@ -1778,6 +1871,8 @@
     "zaehlwerke",
     "messprodukte",
     "lokationsbuendelObjektcode",
-    "vorgelagerteLokationsId"
+    "vorgelagerteLokationsId",
+    "istFuerLieferanmeldungRelevant",
+    "vorgelagerteLokationsIds"
   ]
 }

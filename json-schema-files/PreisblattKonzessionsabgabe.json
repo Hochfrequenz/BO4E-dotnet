@@ -137,6 +137,9 @@
             "VAR",
             "VARH",
             "KWHK",
+            "W_M2",
+            "M_S",
+            "STUECK",
             "JAHR",
             "KWH",
             "MW",
@@ -220,7 +223,15 @@
             "ZUSATZDIENSTLEISTUNG_PARAGRAPH_35_2_3_MSBG",
             "ZUSATZDIENSTLEISTUNG_PARAGRAPH_35_2_4_MSBG",
             "ZUSATZDIENSTLEISTUNG_PARAGRAPH_35_2_5_MSBG",
-            "ZUSATZDIENSTLEISTUNG_PARAGRAPH_35_3_MSBG"
+            "ZUSATZDIENSTLEISTUNG_PARAGRAPH_35_3_MSBG",
+            "EINBAU_IMS",
+            "EINBAU_KME_RLM",
+            "EINBAU_WANDLER",
+            "WEITERE_ENERGIEFLUSSRICHTUNG",
+            "VERGLEICHSMESSUNG",
+            "ÄNDERUNG_MESSEBENE",
+            "EINBAU_STEUERBOX",
+            "ANSCHLUSS_TR_STEUERBOX_SR"
           ]
         },
         "zonungsgroesse": {
@@ -317,6 +328,32 @@
         "sigmoidparameter": {
           "$ref": "#/definitions/Sigmoidparameter"
         },
+        "mengeneinheit": {
+          "type": ["string", "null"],
+          "enum": [
+            null,
+            "ZERO",
+            "WH",
+            "KW",
+            "ANZAHL",
+            "KUBIKMETER",
+            "STUNDE",
+            "TAG",
+            "MONAT",
+            "VAR",
+            "VARH",
+            "KWHK",
+            "W_M2",
+            "M_S",
+            "STUECK",
+            "JAHR",
+            "KWH",
+            "MW",
+            "KVAR",
+            "KVARH",
+            "MWH"
+          ]
+        },
         "timestamp": {
           "type": ["string", "null"],
           "format": "date-time"
@@ -329,7 +366,8 @@
         "einheitspreis",
         "staffelgrenzeVon",
         "staffelgrenzeBis",
-        "sigmoidparameter"
+        "sigmoidparameter",
+        "mengeneinheit"
       ]
     },
     "Sigmoidparameter": {

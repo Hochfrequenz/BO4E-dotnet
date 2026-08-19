@@ -4,7 +4,7 @@
   "definitions": {
     "SteuerkanalsLeistungsbeschreibung": {
       "type": "integer",
-      "description": "",
+      "description": "Welche Funktionen der Steuerkanal einer SteuerbareRessource bereitstsellt.",
       "x-enumNames": ["AN_AUS", "GESTUFT"],
       "enum": [0, 1]
     },
@@ -15,21 +15,26 @@
         },
         {
           "type": "object",
+          "description": "Produkt-daten ein BO wie Netzlokation, Marktlokation usw.",
           "additionalProperties": {},
           "properties": {
             "produktcode": {
               "type": "string",
+              "description": "Der Konfigurationsprodukt-Code für das Objekt",
               "x-nullable": true
             },
             "leistungskurvendefinition": {
               "type": "string",
+              "description": "Code der Zugeordnete Leistungskurvendefinition für das Objekt",
               "x-nullable": true
             },
             "schaltzeitdefinition": {
               "type": "string",
+              "description": "Code der Zugeordnete Schaltzeitdefinition für das Objekt",
               "x-nullable": true
             },
             "auftraggebenderMarktpartner": {
+              "description": "Auftraggebender Marktpartner",
               "x-nullable": true,
               "oneOf": [
                 {
@@ -38,6 +43,7 @@
               ]
             },
             "empfangendeMarktrolle": {
+              "description": "Marktrolle des Marktpartners für den die Produkt-Daten relevant sind.\nDient zur Identifizierung der Marktrolle an der Marktlokation, an die die Daten des\nKonfigurationsprodukts vom MSB der Marktlokation zu übermitteln sind.",
               "x-nullable": true,
               "oneOf": [
                 {
@@ -56,10 +62,13 @@
         },
         {
           "type": "object",
+          "description": "Objekt zur Kommunikation von Marktteilnehmern jeglicher Art.\n            ",
           "additionalProperties": {},
           "properties": {
             "marktrolle": {
+              "description": "Gibt im Klartext die Bezeichnung der Marktrolle an.",
               "x-nullable": true,
+              "x-example": "LF",
               "oneOf": [
                 {
                   "$ref": "#/definitions/Marktrolle"
@@ -67,20 +76,41 @@
               ]
             },
             "rollencodenummer": {
-              "type": "string"
+              "type": "string",
+              "description": "Gibt die Codenummer der Marktrolle an.",
+              "x-nullable": true,
+              "x-example": "9903100000006"
             },
             "rollencodetyp": {
-              "$ref": "#/definitions/Rollencodetyp"
+              "description": "Gibt den Typ des Codes an.",
+              "x-nullable": true,
+              "x-example": "BDEW (instead of 293, 500 etc.)",
+              "oneOf": [
+                {
+                  "$ref": "#/definitions/Rollencodetyp"
+                }
+              ]
             },
             "makoadresse": {
               "type": "string",
+              "description": "Die 1:1-Kommunikationsadresse des Marktteilnehmers. Diese wird in der\nMarktkommunikation verwendet.\n            ",
               "x-nullable": true
             },
             "ansprechpartner": {
+              "description": "Ansprechpartner as in EDIFACT NAD+MS, that includes e.g. the email address of a natural person.\n            ",
               "x-nullable": true,
               "oneOf": [
                 {
                   "$ref": "#/definitions/Ansprechpartner"
+                }
+              ]
+            },
+            "rolle": {
+              "description": "Rolle des Marktteilnehmers im Nachrichtenkontext (z.B. \"anderepartei\" für beteiligte Marktpartner).",
+              "x-nullable": true,
+              "oneOf": [
+                {
+                  "$ref": "#/definitions/Marktteilnehmerrolle"
                 }
               ]
             }
@@ -90,7 +120,7 @@
     },
     "Marktrolle": {
       "type": "integer",
-      "description": "",
+      "description": "Diese Rollen kann ein Marktteilnehmer einnehmen.",
       "x-enumNames": [
         "NB",
         "LF",
@@ -113,7 +143,7 @@
     },
     "Rollencodetyp": {
       "type": "integer",
-      "description": "",
+      "description": "Gibt den Codetyp einer Rolle, beispielsweise einer Marktrolle, an.",
       "x-enumNames": ["ZERO", "GLN", "BDEW", "DVGW"],
       "enum": [0, 9, 293, 332]
     },
@@ -124,9 +154,11 @@
         },
         {
           "type": "object",
+          "description": "Modellierung eines Ansprechpartners für einen bestimmten Geschäftspartner.\n            ",
           "additionalProperties": {},
           "properties": {
             "anrede": {
+              "description": "Mögliche Anrede des Ansprechpartners\n            ",
               "x-nullable": true,
               "oneOf": [
                 {
@@ -136,9 +168,11 @@
             },
             "inviduelleAnrede": {
               "type": "string",
+              "description": "Im Falle einer nicht standardisierten Anrede kann hier eine frei definierbare\nAnrede vorgegeben werden. Beispiel: \"Sehr geehrte Frau Müller, sehr geehrter\nHerr Dr. Müller\"\n            ",
               "x-nullable": true
             },
             "titel": {
+              "description": "Möglicher Titel des Ansprechpartners",
               "x-nullable": true,
               "oneOf": [
                 {
@@ -148,21 +182,26 @@
             },
             "vorname": {
               "type": "string",
+              "description": "Vorname des Ansprechpartners",
               "x-nullable": true
             },
             "nachname": {
               "type": "string",
+              "description": "Nachname (Familienname) des Ansprechpartners",
               "x-nullable": true
             },
             "eMailAdresse": {
               "type": "string",
+              "description": "E-Mail Adresse",
               "x-nullable": true
             },
             "kommentar": {
               "type": "string",
+              "description": "Weitere Informationen zum Ansprechpartner",
               "x-nullable": true
             },
             "geschaeftspartner": {
+              "description": "Der Geschäftspartner, für den dieser Ansprechpartner modelliert wird.",
               "x-nullable": true,
               "oneOf": [
                 {
@@ -171,6 +210,7 @@
               ]
             },
             "adresse": {
+              "description": "Adresse des Ansprechpartners, falls diese von der Adresse des Geschäftspartners abweicht.",
               "x-nullable": true,
               "oneOf": [
                 {
@@ -180,6 +220,7 @@
             },
             "rufnummern": {
               "type": "array",
+              "description": "Liste der Telefonnummern, unter denen der Ansprechpartner erreichbar ist.",
               "x-nullable": true,
               "items": {
                 "$ref": "#/definitions/Rufnummer"
@@ -187,10 +228,25 @@
             },
             "zustaendigkeit": {
               "type": "array",
+              "description": "Liste der Abteilungen und Zuständigkeiten des Ansprechpartners.",
               "x-nullable": true,
               "items": {
                 "$ref": "#/definitions/Zustaendigkeit"
               }
+            },
+            "gewerbekennzeichnung": {
+              "type": "boolean",
+              "description": "true dann und nur dann, wenn es sich um eine Firma handelt",
+              "x-nullable": true
+            },
+            "unternehmensart": {
+              "description": "aus PARTIN gemappt: Für welche Art von Marktteilnehmer der Ansprechpartner tätig ist",
+              "x-nullable": true,
+              "oneOf": [
+                {
+                  "$ref": "#/definitions/Unternehmensart"
+                }
+              ]
             }
           }
         }
@@ -198,7 +254,7 @@
     },
     "Anrede": {
       "type": "integer",
-      "description": "",
+      "description": "Übersicht möglicher Anreden, z.B. eines Geschäftspartners.",
       "x-enumNames": [
         "HERR",
         "FRAU",
@@ -215,7 +271,7 @@
     },
     "Titel": {
       "type": "integer",
-      "description": "",
+      "description": "Übersicht möglicher Titel, z.B. eines Geschäftspartners.",
       "x-enumNames": ["DR", "PROF", "PROF_DR", "DIPLOM_INF"],
       "enum": [0, 1, 2, 3]
     },
@@ -226,9 +282,11 @@
         },
         {
           "type": "object",
+          "description": "Mit diesem Objekt können Geschäftspartner übertragen werden. Sowohl\nUnternehmen, als auch Privatpersonen können Geschäftspartner sein.\n            ",
           "additionalProperties": {},
           "properties": {
             "anrede": {
+              "description": "Die Anrede für den GePa, Z.B. Herr. ",
               "x-nullable": true,
               "oneOf": [
                 {
@@ -238,35 +296,44 @@
             },
             "title": {
               "type": "string",
+              "description": "title of name\n            ",
               "x-deprecated": true,
               "x-deprecatedMessage": "Please use anrede instead or Ansprechpartner.individuelleAnrede",
-              "x-nullable": true
+              "x-nullable": true,
+              "x-example": "Dr."
             },
             "name1": {
               "type": "string",
+              "description": "Erster Teil des Namens. Hier kann der Firmenname oder bei Privatpersonen\nbeispielsweise der Nachname dargestellt werden. Beispiele: Yellow Strom GmbH\noder Hagen\n            ",
               "x-nullable": true
             },
             "name2": {
               "type": "string",
+              "description": "Zweiter Teil des Namens. Hier kann der eine Erweiterung zum Firmennamen oder\nbei Privatpersonen beispielsweise der Vorname dargestellt werden. Beispiele:\nBereich Süd oder Nina\n            ",
               "x-nullable": true
             },
             "name3": {
               "type": "string",
+              "description": "Dritter Teil des Namens. Hier können weitere Ergänzungen zum Firmennamen oder\nbei Privatpersonen Zusätze zum Namen dargestellt werden. Beispiele: und Afrika\noder Sängerin\n            ",
               "x-nullable": true
             },
             "gewerbekennzeichnung": {
-              "type": "boolean"
+              "type": "boolean",
+              "description": "Kennzeichnung ob es sich um einen Gewerbe/Unternehmen (gewerbeKennzeichnung = true)\noder eine Privatperson handelt. (gewerbeKennzeichnung = false)\n            "
             },
             "hrnummer": {
               "type": "string",
+              "description": "Handelsregisternummer des Geschäftspartners",
               "x-nullable": true
             },
             "amtsgericht": {
               "type": "string",
+              "description": "Amtsgericht bzw Handelsregistergericht, das die Handelsregisternummer herausgegeben hat",
               "x-nullable": true
             },
             "kontaktweg": {
               "type": "array",
+              "description": "Bevorzugter Kontaktweg des Geschäftspartners.",
               "x-nullable": true,
               "items": {
                 "$ref": "#/definitions/Kontaktart"
@@ -274,28 +341,34 @@
             },
             "umsatzsteuerId": {
               "type": "string",
+              "description": "Die Umsatzsteuer-ID des Geschäftspartners. Beispiel: DE 813281825",
               "x-nullable": true
             },
             "glaeubigerId": {
               "type": "string",
+              "description": "* Die Gläubiger-ID welche im Zahlungsverkehr verwendet wird- Z.B. DE 47116789",
               "x-nullable": true
             },
             "eMailAdresse": {
               "type": "string",
+              "description": "E-Mail-Adresse des Ansprechpartners. Z.B. info@mp-energie.de",
               "x-nullable": true
             },
             "website": {
               "type": "string",
+              "description": "Internetseite des Marktpartners. Beispiel: www.mp-energie.de",
               "x-nullable": true
             },
             "geschaeftspartnerrolle": {
               "type": "array",
+              "description": "Rolle, die der Geschäftspartner hat (z.B. Interessent, Kunde).",
               "x-nullable": true,
               "items": {
                 "$ref": "#/definitions/Geschaeftspartnerrolle"
               }
             },
             "partneradresse": {
+              "description": "Adresse des Geschäftspartners, an der sich der Hauptsitz befindet. Details \n            ",
               "x-nullable": true,
               "oneOf": [
                 {
@@ -304,6 +377,7 @@
               ]
             },
             "grundlageZurVerringerungDerUmlagenNachEnfg": {
+              "description": "Grundlage zur Verringerung der Umlagen nach EnFG",
               "x-nullable": true,
               "oneOf": [
                 {
@@ -313,12 +387,14 @@
             },
             "gruendeDerPrivilegierungNachEnFG": {
               "type": "array",
+              "description": "Gründe der Privilegierung nach EnFG",
               "x-nullable": true,
               "items": {
                 "$ref": "#/definitions/GrundDerPrivilegierungNachEnFG"
               }
             },
             "bankverbindung": {
+              "description": "Bankverbindung",
               "x-nullable": true,
               "oneOf": [
                 {
@@ -328,9 +404,11 @@
             },
             "steuernummer": {
               "type": "string",
+              "description": "Die Steuernummer-ID des Geschäftspartners. Beispiel: 30120345678",
               "x-nullable": true
             },
             "erreichbarkeit": {
+              "description": "Die Erreichbarkeit eines Unternehmens an Werktagen.",
               "x-nullable": true,
               "oneOf": [
                 {
@@ -344,13 +422,13 @@
     },
     "Kontaktart": {
       "type": "integer",
-      "description": "",
+      "description": "Art des Kontaktes zwischen Geschäftspartnern.",
       "x-enumNames": ["ANSCHREIBEN", "TELEFONAT", "FAX", "E_MAIL", "SMS"],
       "enum": [0, 1, 2, 3, 4]
     },
     "Geschaeftspartnerrolle": {
       "type": "integer",
-      "description": "",
+      "description": "Diese Rollen kann ein Geschäftspartner einnehmen.",
       "x-enumNames": [
         "LIEFERANT",
         "DIENSTLEISTER",
@@ -367,35 +445,46 @@
         },
         {
           "type": "object",
+          "description": "Enthält eine Adresse, die für die meisten Zwecke verwendbar ist.",
           "additionalProperties": {},
           "properties": {
             "postleitzahl": {
-              "type": "string"
+              "type": "string",
+              "description": "Die Postleitzahl. Beispiel: 41836",
+              "x-nullable": true
             },
             "ort": {
-              "type": "string"
+              "type": "string",
+              "description": "Bezeichnung der Stadt. Beispiel Hückelhoven",
+              "x-nullable": true
             },
             "strasse": {
               "type": "string",
+              "description": "Bezeichnung der Straße. Beispiel: Weserstraße",
               "x-nullable": true
             },
             "hausnummer": {
               "type": "string",
+              "description": "Hausnummer inkl. Zusatz. Beispiel. 3, 4a etc.",
               "x-nullable": true
             },
             "postfach": {
               "type": "string",
+              "description": "Im Falle einer Postfachadresse das Postfach. Damit werden Straße und\nHausnummer nicht berücksichtigt.Beispiel: Postfach 4711\n            ",
               "x-nullable": true
             },
             "adresszusatz": {
               "type": "string",
+              "description": "Zusatzhinweis zum Auffinden der Adresse, z.B. \"3. Stock linke Wohnung\"",
               "x-nullable": true
             },
             "coErgaenzung": {
               "type": "string",
+              "description": "Im Falle einer c/o-Adresse steht in diesem Attribut die Anrede. Z.B. c/o\nVeronica Hauptmieterin.In diesem Fall enthält die folgende Adresse die Daten\nder in c/o adressierten Person oder Firma.\n            ",
               "x-nullable": true
             },
             "landescode": {
+              "description": "Offizieller ISO-Landescode. Z.B. NL, Details Landescode",
               "x-nullable": true,
               "oneOf": [
                 {
@@ -405,6 +494,7 @@
             },
             "ortsteil": {
               "type": "string",
+              "description": "Ortsteil für EDIFACT mapping\n            ",
               "x-nullable": true
             }
           }
@@ -413,7 +503,7 @@
     },
     "Landescode": {
       "type": "integer",
-      "description": "",
+      "description": "Der ISO-Landescode.",
       "x-enumNames": [
         "AC",
         "AD",
@@ -706,19 +796,23 @@
     },
     "COM": {
       "type": "object",
+      "description": "The COM class is the abstract class from which all BO4E.COM classes are derived.\n            ",
       "x-abstract": true,
       "additionalProperties": {},
       "properties": {
         "guidSerialized": {
-          "type": "string"
+          "type": "string",
+          "x-nullable": true
         },
         "timestamp": {
           "type": "string",
+          "description": "Store the latest timestamp (update from the database)\n            ",
           "format": "date-time",
           "x-nullable": true
         },
         "guid": {
           "type": "string",
+          "description": "allows adding a GUID to COM objects for tracking across systems\n            ",
           "format": "guid",
           "x-nullable": true
         }
@@ -726,7 +820,7 @@
     },
     "GrundlageZurVerringerungDerUmlagenNachEnfg": {
       "type": "integer",
-      "description": "",
+      "description": "Grundlage zur Verringerung der Umlagen nach EnFG (UTILMD Strom)",
       "x-enumNames": [
         "KUNDE_ERFUELLT_VORAUSSETZUNG",
         "KUNDE_ERFUELLT_VORAUSSETZUNG_NICHT",
@@ -736,7 +830,7 @@
     },
     "GrundDerPrivilegierungNachEnFG": {
       "type": "integer",
-      "description": "",
+      "description": "Grund der Privilegierung nach EnFG (UTILMD Strom)",
       "x-enumNames": [
         "STROMSPEICHER_UND_VERLUSTENERGIE",
         "ELEKTRISCH_ANGETRIEBENE_WAERMEPUMPEN",
@@ -757,22 +851,27 @@
         },
         {
           "type": "object",
+          "description": "Enthält eine Bankverbindung",
           "additionalProperties": {},
           "properties": {
             "iban": {
               "type": "string",
+              "description": "IBAN",
               "x-nullable": true
             },
             "kontoinhaber": {
               "type": "string",
+              "description": "Der kontoinhaber",
               "x-nullable": true
             },
             "bankkennung": {
               "type": "string",
+              "description": "Die Bankkennung, BIC",
               "x-nullable": true
             },
             "bankname": {
               "type": "string",
+              "description": "Der Bankname",
               "x-nullable": true
             }
           }
@@ -786,9 +885,11 @@
         },
         {
           "type": "object",
+          "description": "Die Erreichbarkeit eines Unternehmens an Werktagen.",
           "additionalProperties": {},
           "properties": {
             "montagErreichbarkeit": {
+              "description": "Erreichbarkeit am Montag",
               "x-nullable": true,
               "oneOf": [
                 {
@@ -797,6 +898,7 @@
               ]
             },
             "dienstagErreichbarkeit": {
+              "description": "Erreichbarkeit am Dienstag",
               "x-nullable": true,
               "oneOf": [
                 {
@@ -805,6 +907,7 @@
               ]
             },
             "mittwochErreichbarkeit": {
+              "description": "Erreichbarkeit am Mittwoch",
               "x-nullable": true,
               "oneOf": [
                 {
@@ -813,6 +916,7 @@
               ]
             },
             "donnerstagErreichbarkeit": {
+              "description": "Erreichbarkeit am Donnerstag",
               "x-nullable": true,
               "oneOf": [
                 {
@@ -821,6 +925,7 @@
               ]
             },
             "freitagErreichbarkeit": {
+              "description": "Erreichbarkeit am Freitag",
               "x-nullable": true,
               "oneOf": [
                 {
@@ -829,6 +934,7 @@
               ]
             },
             "mittagspause": {
+              "description": "Mittagspause (Ausschluss der Erreichbarkeit)",
               "x-nullable": true,
               "oneOf": [
                 {
@@ -847,15 +953,18 @@
         },
         {
           "type": "object",
+          "description": "Ein Zeitfenster mit Start- und Endzeiten mit TimeOnly als Typ.",
           "additionalProperties": {},
           "properties": {
             "startzeit": {
               "type": "string",
+              "description": "inklusive Startzeit; z.B. 8 Uhr",
               "format": "time",
               "x-nullable": true
             },
             "endzeit": {
               "type": "string",
+              "description": "exklusive Endzeit (z.B. 17:00 Uhr)",
               "format": "time",
               "x-nullable": true
             }
@@ -865,27 +974,35 @@
     },
     "BusinessObject": {
       "type": "object",
+      "description": "General abstract class for Business Objects for Energy (BO4E)\n            ",
       "x-abstract": true,
       "additionalProperties": {},
       "properties": {
+        "guidSerialized": {
+          "type": "string",
+          "description": "protobuf serilization requires the Guid as string.\n            "
+        },
         "boTyp": {
           "type": "string",
-          "x-nullable": true
+          "description": "obligatory type of the business object in UPPER CASE\n            ",
+          "x-nullable": true,
+          "x-example": "'MESSLOKATION',\n'MARKTLOKATION'\n            "
         },
         "versionStruktur": {
           "type": "string",
-          "x-nullable": true
-        },
-        "guidSerialized": {
-          "type": "string"
+          "description": "obligatory version of the BO4E definition. Currently hard coded to 1\n            ",
+          "x-nullable": true,
+          "x-example": 1
         },
         "timestamp": {
           "type": "string",
+          "description": "Store the latest database update, is Datetime, because postgres doesn't handle datetimeoffset in a generated column\ngracefully\n            ",
           "format": "date-time",
           "x-nullable": true
         },
         "externeReferenzen": {
           "type": "array",
+          "description": "Hier können IDs anderer Systeme hinterlegt werden (z.B. eine SAP-GP-Nummer) (Details siehe\nExterneReferenz)\n            ",
           "x-nullable": true,
           "items": {
             "$ref": "#/definitions/ExterneReferenz"
@@ -893,10 +1010,12 @@
         },
         "guid": {
           "type": "string",
+          "description": "allows adding a GUID to Business Objects for tracking across systems\n            ",
           "format": "guid",
           "x-nullable": true
         },
         "gueltigkeitszeitraum": {
+          "description": "Defines the validity of a business object in terms of time (maybe multiple versions exist).\nBackground: German market communication requires for master data changes starting 03.04.2025 that business objects are ordered and aggregated by validity (in terms of time).\nTo easily group data based on this data a new zeitraum is introduced as an optional field in all business objects.\n            ",
           "x-nullable": true,
           "oneOf": [
             {
@@ -905,6 +1024,7 @@
           ]
         },
         "qualitaet": {
+          "description": "Defines a level of data quality that is attached to the business object, this can have multiple origins, you could specify a version as draft or uncomplete if this is in the state of creation.\nAnother requirement is coming from german market communictation where business objects of different quality levels need to be grouped.\n            ",
           "x-nullable": true,
           "oneOf": [
             {
@@ -921,14 +1041,17 @@
         },
         {
           "type": "object",
+          "description": "Viele Datenobjekte weisen in unterschiedlichen Systemen eine eindeutige ID (Kundennummer, GP-Nummer etc.) auf.\nBeim Austausch von Datenobjekten zwischen verschiedenen Systemen ist es daher hilfreich, sich die eindeutigen IDs\nder anzubindenden Systeme zu merken.\nDiese Komponente ermöglicht es, sich die SAP GP-Nummer zu merken, um diese bei SAP-Aufrufen als Parameter mitgeben\nzu können.\n            ",
           "additionalProperties": {},
           "properties": {
             "exRefName": {
               "type": "string",
+              "description": "Bezeichnung der externen Referenz (z.B. \"hochfrequenz integration services\")\n            ",
               "x-nullable": true
             },
             "exRefWert": {
               "type": "string",
+              "description": "Wert der externen Referenz (z.B. \"123456\"; \"4711\")\n            ",
               "x-nullable": true
             }
           }
@@ -942,9 +1065,11 @@
         },
         {
           "type": "object",
+          "description": "Diese Komponente wird zur Abbildung von Zeiträumen in Form von Dauern oder der Angabe von Start und Ende\nverwendet.\n            ",
           "additionalProperties": {},
           "properties": {
             "einheit": {
+              "description": "Die Einheit in der die Dauer angeben ist. Z.B. Monate. ",
               "x-nullable": true,
               "oneOf": [
                 {
@@ -954,26 +1079,31 @@
             },
             "dauer": {
               "type": "number",
+              "description": "Gibt die Anzahl der Zeiteinheiten an, z.B. 3 (Monate).",
               "format": "decimal",
               "x-nullable": true
             },
             "startdatum": {
               "type": "string",
+              "description": "Gibt Tag und Uhrzeit (falls vorhanden) an, wann der Zeitraum startet.",
               "format": "date-time",
               "x-nullable": true
             },
             "enddatum": {
               "type": "string",
+              "description": "Gibt Tag und Uhrzeit (falls vorhanden) an, wann der Zeitraum endet.",
               "format": "date-time",
               "x-nullable": true
             },
             "startzeitpunkt": {
               "type": "string",
+              "description": "The same value as Startdatum",
               "format": "date-time",
               "x-nullable": true
             },
             "endzeitpunkt": {
               "type": "string",
+              "description": "The same value as Enddatum",
               "format": "date-time",
               "x-nullable": true
             }
@@ -983,7 +1113,7 @@
     },
     "Zeiteinheit": {
       "type": "integer",
-      "description": "",
+      "description": "Auflistung möglicher Einheiten zur Verwendung in zeitbezogenen Angaben.",
       "x-enumNames": [
         "SEKUNDE",
         "MINUTE",
@@ -1000,7 +1130,7 @@
     },
     "Qualitaet": {
       "type": "integer",
-      "description": "",
+      "description": "Qualitätsstufen eines Business-Objektes, v.a. aus Sicht Marktkommunikation ",
       "x-enumNames": [
         "VOLLSTAENDIG",
         "INFORMATIV",
@@ -1018,13 +1148,22 @@
         },
         {
           "type": "object",
+          "description": "Abbildung von Rufnummern.",
           "additionalProperties": {},
           "properties": {
             "nummerntyp": {
-              "$ref": "#/definitions/Rufnummernart"
+              "description": "Ausprägung der Nummer, z.B. Zentrale, Faxnummer, Mobilnummer etc. Details Rufnummernart\n            ",
+              "x-nullable": true,
+              "oneOf": [
+                {
+                  "$ref": "#/definitions/Rufnummernart"
+                }
+              ]
             },
             "rufnummer": {
-              "type": "string"
+              "type": "string",
+              "description": "Die konkrete Nummer, z.B. 02433 5 26 01 900",
+              "x-nullable": true
             }
           }
         }
@@ -1032,7 +1171,7 @@
     },
     "Rufnummernart": {
       "type": "integer",
-      "description": "",
+      "description": "Abbildung verschiedener Rufnummerntypen.",
       "x-enumNames": [
         "RUF_ZENTRALE",
         "FAX_ZENTRALE",
@@ -1053,23 +1192,47 @@
         },
         {
           "type": "object",
+          "description": "Enthält die zeitliche Zuordnung eines Ansprechpartners zu Abteilungen und Zuständigkeiten.",
           "additionalProperties": {},
           "properties": {
             "jobtitel": {
               "type": "string",
+              "description": "Berufliche Rolle des Ansprechpartners",
               "x-nullable": true
             },
             "abteilung": {
               "type": "string",
+              "description": "Abteilung, in der der Ansprechpartner tätig ist",
               "x-nullable": true
             },
             "themengebiet": {
               "type": "string",
+              "description": "Hier kann eine thematische Zuordnung des APs angegeben werden. Details Themengebiet\n            ",
               "x-nullable": true
             }
           }
         }
       ]
+    },
+    "Unternehmensart": {
+      "type": "integer",
+      "description": "kategorisiert Unternehmen nach Ihrer Marktrolle (basierend auf dem PARTIN-Datenmodell)",
+      "x-enumNames": [
+        "LIEFERANT",
+        "NETZBETREIBER",
+        "MESSSTELLENBETREIBER",
+        "ÜBERTRAGUNGSNETZBETREIBER",
+        "BILANZKOORDINATOR",
+        "BILANZKREISVERANTWORTLICHER",
+        "ENERGIESERVICEANBIETER"
+      ],
+      "enum": [0, 1, 2, 3, 4, 5, 6]
+    },
+    "Marktteilnehmerrolle": {
+      "type": "integer",
+      "description": "Rolle eines Marktteilnehmers im Nachrichtenkontext.",
+      "x-enumNames": ["ANDERE_PARTEI", "EMPFAENGER"],
+      "enum": [0, 1]
     },
     "MarktpartnerDetails": {
       "allOf": [
@@ -1078,17 +1241,21 @@
         },
         {
           "type": "object",
+          "description": "Used in Marktlokation and Messlokation to represent data about MSB",
           "additionalProperties": {},
           "properties": {
             "rollencodenummer": {
               "type": "string",
+              "description": "Rollencodenummer von Marktrolle",
               "x-nullable": true
             },
             "code": {
               "type": "string",
+              "description": "Code von Marktrolle",
               "x-nullable": true
             },
             "marktrolle": {
+              "description": "Marktrolle. Details siehe Marktrolle",
               "x-nullable": true,
               "oneOf": [
                 {
@@ -1098,11 +1265,221 @@
             },
             "weiterverpflichtet": {
               "type": "boolean",
+              "description": "Weiterverpflichtung des MSB />",
               "x-nullable": true
             }
           }
         }
       ]
+    },
+    "Messprodukt": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/COM"
+        },
+        {
+          "type": "object",
+          "description": "Mit dieser Komponente werden Messprodukte (an Melo und Malo) modelliert.",
+          "additionalProperties": {},
+          "properties": {
+            "messproduktId": {
+              "type": "string",
+              "description": "Identifikation des Messproduktes\nZ.B. 9991000000151\n            ",
+              "x-nullable": true
+            },
+            "verwendungszwecke": {
+              "type": "array",
+              "description": "Verwendungungszweck der Werte Marktlokation",
+              "x-nullable": true,
+              "items": {
+                "$ref": "#/definitions/Verwendungszweck"
+              }
+            },
+            "verbrauchsart": {
+              "description": "Stromverbrauchsart/Verbrauchsart Marktlokation",
+              "x-nullable": true,
+              "oneOf": [
+                {
+                  "$ref": "#/definitions/Verbrauchsart"
+                }
+              ]
+            },
+            "unterbrechbarkeit": {
+              "description": "Stromverbrauchsart/Unterbrechbarkeit Marktlokation",
+              "x-nullable": true,
+              "oneOf": [
+                {
+                  "$ref": "#/definitions/Unterbrechbarkeit"
+                }
+              ]
+            },
+            "waermenutzung": {
+              "description": "Stromverbrauchsart/Wärmenutzung Marktlokation",
+              "x-nullable": true,
+              "oneOf": [
+                {
+                  "$ref": "#/definitions/Waermenutzung"
+                }
+              ]
+            },
+            "zaehlzeiten": {
+              "description": "Zählzeiten des Messproduktes",
+              "x-nullable": true,
+              "oneOf": [
+                {
+                  "$ref": "#/definitions/Zaehlzeitregister"
+                }
+              ]
+            },
+            "zweiteMessung": {
+              "type": "boolean",
+              "description": "zweite Messung erforderlich",
+              "x-nullable": true
+            },
+            "werteuebermittlungAnNB": {
+              "type": "boolean",
+              "description": "Werden die Werte an den Netzbetreiber übermittelt?",
+              "x-nullable": true
+            },
+            "emobilitaetsart": {
+              "description": "Art der E-Mobilität\nDas Segment dient dazu, im Falle der E-Mobilität eine genauere Angabe über die Art der E-Mobilität zu definieren.\nBeispiel: CAV+Z87'\n    ZE6: Wallbox: An der Marktlokation ist eine nicht öffentlliche Lademöglichkeit vorhanden\n    Z87: E-Mobilitätsladesäule: Es handelt sich um eine öffentliche Ladesäule mit ggf. mehreren Ladeanschlüssen an der Marktlokation.\n    ZE7: Ladepark: Es handelt sich um mehr als eine öffentliche Ladesäule an der Marktlokation",
+              "x-nullable": true,
+              "oneOf": [
+                {
+                  "$ref": "#/definitions/EMobilitaetsart"
+                }
+              ]
+            }
+          }
+        }
+      ]
+    },
+    "Verwendungszweck": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/COM"
+        },
+        {
+          "type": "object",
+          "description": "Marktrolle\n            ",
+          "additionalProperties": {},
+          "properties": {
+            "marktrolle": {
+              "description": "rollencodenummer von Marktrolle\n            ",
+              "oneOf": [
+                {
+                  "$ref": "#/definitions/Marktrolle"
+                }
+              ]
+            },
+            "zweck": {
+              "type": "array",
+              "description": "code von Marktrolle\n            ",
+              "x-nullable": true,
+              "items": {
+                "$ref": "#/definitions/Verwendungszweck2"
+              }
+            }
+          }
+        }
+      ]
+    },
+    "Verwendungszweck2": {
+      "type": "integer",
+      "description": "Verwendungungszweck der Werte Marktlokation",
+      "x-enumNames": [
+        "NETZNUTZUNGSABRECHNUNG",
+        "BILANZKREISABRECHNUNG",
+        "MEHRMINDERMENGENABRECHNUNG",
+        "ENDKUNDENABRECHNUNG",
+        "BLINDARBEITABRECHNUNG_BETRIEBSFUEHRUNG",
+        "UEBERMITTLUNG_AN_DAS_HKNR",
+        "ERMITTLUNG_AUSGEGLICHENHEIT_BILANZKREIS",
+        "SELBSTVERBRAUCH",
+        "ES_LIEGT_KEIN_VERWENDUNGSZWECK_VOR",
+        "KEINE_DATENLIEFERUNG_AN_MARKTROLLE"
+      ],
+      "enum": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+    },
+    "Verbrauchsart": {
+      "type": "integer",
+      "description": "Verbrauchsart einer Marktlokation.",
+      "x-enumNames": [
+        "KL",
+        "KLW",
+        "KLWS",
+        "W",
+        "WS",
+        "WK",
+        "EM",
+        "STRB",
+        "STW"
+      ],
+      "enum": [0, 1, 2, 3, 4, 5, 6, 7, 8]
+    },
+    "Unterbrechbarkeit": {
+      "type": "integer",
+      "description": "Stromverbrauchsart/Unterbrechbarkeit Marktlokation",
+      "x-enumNames": ["UV", "NUV"],
+      "enum": [0, 1]
+    },
+    "Waermenutzung": {
+      "type": "integer",
+      "description": "Stromverbrauchsart/Wärmenutzung Marktlokation",
+      "x-enumNames": [
+        "SPEICHERHEIZUNG",
+        "WAERMEPUMPE",
+        "DIREKTHEIZUNG",
+        "WAERMEPUMPE_WAERME_KAELTE",
+        "WAERMEPUMPE_KAELTE",
+        "WAERMEPUMPE_WAERME"
+      ],
+      "enum": [0, 1, 2, 3, 4, 5]
+    },
+    "Zaehlzeitregister": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/COM"
+        },
+        {
+          "type": "object",
+          "description": "Ein Zählzeitregister beschreibt eine erweiterte Definition der Zählzeit in Bezug auf ein Register. Dabei werden alle Codes dazu vom Netzbetreiber vergeben.\n            ",
+          "additionalProperties": {},
+          "properties": {
+            "zaehlzeitDefinition": {
+              "type": "string",
+              "description": "Zählzeitdefinition\n            ",
+              "x-nullable": true
+            },
+            "register": {
+              "type": "string",
+              "description": "Zählzeitregister\n            ",
+              "x-nullable": true
+            },
+            "schwachlastfaehig": {
+              "description": "Schwachlastfähigkeit des Registers\n            ",
+              "x-nullable": true,
+              "oneOf": [
+                {
+                  "$ref": "#/definitions/Schwachlastfaehig"
+                }
+              ]
+            }
+          }
+        }
+      ]
+    },
+    "Schwachlastfaehig": {
+      "type": "integer",
+      "description": "Schwachlastfähigkeit Marktlokation",
+      "x-enumNames": ["NICHT_SCHWACHLASTFAEHIG", "SCHWACHLASTFAEHIG"],
+      "enum": [0, 1]
+    },
+    "EMobilitaetsart": {
+      "type": "integer",
+      "description": "Im Falle der E-Mobilität bei TechnischeRessourceNutzung, eine genauere Angabe über die Art der E-Mobilität zu definieren.",
+      "x-enumNames": ["WALLBOX", "E_MOBILITAETSLADESAEULE", "LADEPARK"],
+      "enum": [0, 1, 2]
     }
   },
   "allOf": [
@@ -1111,13 +1488,17 @@
     },
     {
       "type": "object",
+      "description": "Steuerbare Ressource BO",
       "additionalProperties": {},
       "properties": {
         "steuerbareRessourceId": {
           "type": "string",
-          "default": "|null|"
+          "description": "Identifikationsnummer einer SteuerbareRessource",
+          "default": "|null|",
+          "x-nullable": true
         },
         "steuerkanalsLeistungsbeschreibung": {
+          "description": "Leistungsbeschreibung des Steuerkanals",
           "x-nullable": true,
           "oneOf": [
             {
@@ -1127,16 +1508,19 @@
         },
         "zugeordnetMSBCodeNr": {
           "type": "string",
+          "description": "Angabe des Messstellenbetreibers, der der Steuerbaren Ressource zugeordnet ist.",
           "x-nullable": true
         },
         "konfigurationsprodukte": {
           "type": "array",
+          "description": "Produkt-Daten der Steuerbaren Ressource",
           "x-nullable": true,
           "items": {
             "$ref": "#/definitions/Konfigurationsprodukt"
           }
         },
         "eigenschaftMSBLokation": {
+          "description": "Eigenschaft des Messstellenbetreiber an der Lokation",
           "x-nullable": true,
           "oneOf": [
             {
@@ -1146,13 +1530,23 @@
         },
         "lokationsbuendelObjektcode": {
           "type": "string",
+          "description": "Lokationsbuendel Code, der die Funktion dieses BOs an der Lokationsbuendelstruktur beschreibt.",
           "x-nullable": true
         },
         "marktrollen": {
           "type": "array",
+          "description": "Ergänzt die Marktrollen zu der Steuerbaren Ressource",
           "x-nullable": true,
           "items": {
             "$ref": "#/definitions/MarktpartnerDetails"
+          }
+        },
+        "messprodukte": {
+          "type": "array",
+          "description": "Zugeordnete Messprodukte\n            ",
+          "x-nullable": true,
+          "items": {
+            "$ref": "#/definitions/Messprodukt"
           }
         }
       }
