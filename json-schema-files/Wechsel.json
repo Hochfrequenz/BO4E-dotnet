@@ -48,9 +48,17 @@
             "STEUERBOX",
             "ZAEHLEINRICHTUNG"
           ]
+        },
+        "positionsnummer": {
+          "type": ["string", "null"]
         }
       },
-      "required": ["geraetenummer", "geraeteeigenschaften", "geraeteart"]
+      "required": [
+        "geraetenummer",
+        "geraeteeigenschaften",
+        "geraeteart",
+        "positionsnummer"
+      ]
     },
     "Geraeteeigenschaften": {
       "type": ["object", "null"],
@@ -186,9 +194,24 @@
           "additionalProperties": {
             "type": ["string", "null"]
           }
+        },
+        "wandlerfaktor": {
+          "type": ["number", "null"]
+        },
+        "weitereGeraetenummern": {
+          "type": ["array", "null"],
+          "items": {
+            "type": ["string", "null"]
+          }
         }
       },
-      "required": ["geraetetyp", "geraetemerkmal", "Parameter"]
+      "required": [
+        "geraetetyp",
+        "geraetemerkmal",
+        "Parameter",
+        "wandlerfaktor",
+        "weitereGeraetenummern"
+      ]
     },
     "Zeitraum": {
       "type": ["object", "null"],

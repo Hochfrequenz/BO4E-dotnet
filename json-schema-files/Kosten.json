@@ -331,6 +331,9 @@
             "VAR",
             "VARH",
             "KWHK",
+            "W_M2",
+            "M_S",
+            "STUECK",
             "JAHR",
             "KWH",
             "MW",
@@ -367,6 +370,9 @@
             "VAR",
             "VARH",
             "KWHK",
+            "W_M2",
+            "M_S",
+            "STUECK",
             "JAHR",
             "KWH",
             "MW",
@@ -483,8 +489,7 @@
       "type": ["array", "null"],
       "items": {
         "$ref": "#/definitions/Kostenblock"
-      },
-      "minItems": 1
+      }
     },
     "kostenpositionen": {
       "type": ["array", "null"],

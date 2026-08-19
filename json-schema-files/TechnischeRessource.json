@@ -20,6 +20,26 @@
       },
       "required": ["exRefName", "exRefWert"]
     },
+    "LokationsTypZuordnung": {
+      "type": ["object", "null"],
+      "properties": {
+        "timestamp": {
+          "type": ["string", "null"],
+          "format": "date-time"
+        },
+        "guid": {
+          "type": ["string", "null"]
+        },
+        "lokationstyp": {
+          "type": ["string", "null"],
+          "enum": [null, "MALO", "MELO", "NELO", "SR", "TR"]
+        },
+        "lokationsId": {
+          "type": ["string", "null"]
+        }
+      },
+      "required": ["lokationstyp", "lokationsId"]
+    },
     "MarktpartnerDetails": {
       "type": ["object", "null"],
       "properties": {
@@ -97,6 +117,9 @@
             "VAR",
             "VARH",
             "KWHK",
+            "W_M2",
+            "M_S",
+            "STUECK",
             "JAHR",
             "KWH",
             "MW",
@@ -302,6 +325,25 @@
         "$ref": "#/definitions/MarktpartnerDetails"
       }
     },
+    "vorgelagerteLokationsIds": {
+      "type": ["array", "null"],
+      "items": {
+        "$ref": "#/definitions/LokationsTypZuordnung"
+      }
+    },
+    "zugeordneteLokationsIds": {
+      "type": ["array", "null"],
+      "items": {
+        "$ref": "#/definitions/LokationsTypZuordnung"
+      }
+    },
+    "verbrauchsarten": {
+      "type": ["array", "null"],
+      "items": {
+        "type": "string",
+        "enum": ["KRAFT_LICHT", "WAERME", "E_MOBILITAET", "STRASSENBELEUCHTUNG"]
+      }
+    },
     "gueltigkeitszeitraum": {
       "$ref": "#/definitions/Zeitraum"
     },
@@ -341,6 +383,9 @@
     "inbetriebsetzung",
     "einordnung",
     "weitereEinrichtung",
-    "marktrollen"
+    "marktrollen",
+    "vorgelagerteLokationsIds",
+    "zugeordneteLokationsIds",
+    "verbrauchsarten"
   ]
 }

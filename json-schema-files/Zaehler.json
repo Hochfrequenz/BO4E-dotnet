@@ -430,9 +430,17 @@
             "STEUERBOX",
             "ZAEHLEINRICHTUNG"
           ]
+        },
+        "positionsnummer": {
+          "type": ["string", "null"]
         }
       },
-      "required": ["geraetenummer", "geraeteeigenschaften", "geraeteart"]
+      "required": [
+        "geraetenummer",
+        "geraeteeigenschaften",
+        "geraeteart",
+        "positionsnummer"
+      ]
     },
     "Geraeteeigenschaften": {
       "type": ["object", "null"],
@@ -568,9 +576,24 @@
           "additionalProperties": {
             "type": ["string", "null"]
           }
+        },
+        "wandlerfaktor": {
+          "type": ["number", "null"]
+        },
+        "weitereGeraetenummern": {
+          "type": ["array", "null"],
+          "items": {
+            "type": ["string", "null"]
+          }
         }
       },
-      "required": ["geraetetyp", "geraetemerkmal", "Parameter"]
+      "required": [
+        "geraetetyp",
+        "geraetemerkmal",
+        "Parameter",
+        "wandlerfaktor",
+        "weitereGeraetenummern"
+      ]
     },
     "Geschaeftspartner": {
       "type": ["object", "null"],
@@ -801,7 +824,10 @@
               "ENDKUNDENABRECHNUNG",
               "BLINDARBEITABRECHNUNG_BETRIEBSFUEHRUNG",
               "UEBERMITTLUNG_AN_DAS_HKNR",
-              "ERMITTLUNG_AUSGEGLICHENHEIT_BILANZKREIS"
+              "ERMITTLUNG_AUSGEGLICHENHEIT_BILANZKREIS",
+              "SELBSTVERBRAUCH",
+              "ES_LIEGT_KEIN_VERWENDUNGSZWECK_VOR",
+              "KEINE_DATENLIEFERUNG_AN_MARKTROLLE"
             ]
           }
         },
@@ -856,6 +882,9 @@
             "VAR",
             "VARH",
             "KWHK",
+            "W_M2",
+            "M_S",
+            "STUECK",
             "JAHR",
             "KWH",
             "MW",
@@ -879,7 +908,18 @@
         },
         "verbrauchsart": {
           "type": ["string", "null"],
-          "enum": [null, "KL", "KLW", "KLWS", "W", "WS"]
+          "enum": [
+            null,
+            "KL",
+            "KLW",
+            "KLWS",
+            "W",
+            "WS",
+            "WK",
+            "EM",
+            "STRB",
+            "STW"
+          ]
         },
         "unterbrechbarkeit": {
           "type": ["string", "null"],
@@ -924,6 +964,13 @@
         "emobilitaetsart": {
           "type": ["string", "null"],
           "enum": [null, "WALLBOX", "E_MOBILITAETSLADESAEULE", "LADEPARK"]
+        },
+        "Verbrauchsarten": {
+          "type": ["array", "null"],
+          "items": {
+            "type": "string",
+            "enum": ["KL", "KLW", "KLWS", "W", "WS", "WK", "EM", "STRB", "STW"]
+          }
         }
       },
       "required": [
@@ -947,7 +994,8 @@
         "anzahlAblesungen",
         "zaehlzeiten",
         "konfiguration",
-        "emobilitaetsart"
+        "emobilitaetsart",
+        "Verbrauchsarten"
       ]
     },
     "Zaehlzeitregister": {
@@ -1073,8 +1121,16 @@
       "type": ["string", "null"]
     },
     "sparte": {
-      "type": "string",
-      "enum": ["STROM", "GAS", "FERNWAERME", "NAHWAERME", "WASSER", "ABWASSER"]
+      "type": ["string", "null"],
+      "enum": [
+        null,
+        "STROM",
+        "GAS",
+        "FERNWAERME",
+        "NAHWAERME",
+        "WASSER",
+        "ABWASSER"
+      ]
     },
     "zaehlerauspraegung": {
       "type": ["string", "null"],
@@ -1129,8 +1185,7 @@
       "type": ["array", "null"],
       "items": {
         "$ref": "#/definitions/Zaehlwerk"
-      },
-      "minItems": 1
+      }
     },
     "zaehlerhersteller": {
       "$ref": "#/definitions/Geschaeftspartner"
@@ -1242,6 +1297,10 @@
         "$ref": "#/definitions/Geraet"
       }
     },
+    "artVolumenerfassung": {
+      "type": ["string", "null"],
+      "enum": [null, "KENNLINIENKORREKTUR", "SCHLEICHMENGENUNTERDRÜCKUNG"]
+    },
     "gueltigkeitszeitraum": {
       "$ref": "#/definitions/Zeitraum"
     },
@@ -1277,6 +1336,7 @@
     "zaehlertypspezifikation",
     "befestigungsart",
     "zaehlergroesse",
-    "geraete"
+    "geraete",
+    "artVolumenerfassung"
   ]
 }

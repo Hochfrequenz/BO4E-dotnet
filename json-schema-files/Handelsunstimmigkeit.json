@@ -239,8 +239,9 @@
           "type": ["string", "null"]
         },
         "grund": {
-          "type": "string",
+          "type": ["string", "null"],
           "enum": [
+            null,
             "ANMELDUNG_BESTAETIGT",
             "ABRECHNUNGSBEGINN_GLEICH_BESTAETIGTEM_VERTRAGSBEGINN",
             "ABRECHNUNGSENDE_GLEICH_BESTAETIGTEM_VERTRAGSENDE",

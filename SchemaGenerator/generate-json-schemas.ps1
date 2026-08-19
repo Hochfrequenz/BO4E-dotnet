@@ -56,7 +56,7 @@ if (-not (Test-Path $openapi_output_directory -PathType Container)) {
 }
 
 # Define the project path
-$project_path = "C:/github/BO4E-dotnet/SchemaGenerator/SchemaGenerator.csproj"
+$project_path = "./SchemaGenerator.csproj"
 
 # Check if the project path exists
 if (-not (Test-Path $project_path)) {
