@@ -46,6 +46,8 @@ jobs:
         # Deliberately no --delete: the outdated BO4E.BO.*.json schemas are still the ones exported
         # by bo4e-dotnet-ts-models/index.d.ts. Removing them is a breaking change for the npm
         # package and has to happen in a separate, deliberate step.
+        # Consequence: the schema of a removed business object stays in this repository (and its
+        # TypeScript model therefore keeps being regenerated) until somebody deletes it by hand.
         run: |
           rsync -a "$RUNNER_TEMP/json-schema-files/" json-schema-files/
           rsync -a "$RUNNER_TEMP/open-api-schemas/" open-api-schemas/
@@ -82,6 +84,7 @@ jobs:
           git commit -m "Update from https://github.com/Hochfrequenz/BO4E-dotnet/commit/${SOURCE_COMMIT}"
           git push origin main
       - name: Open a Pull Request with the regenerated schemas
+        id: create-pull-request
         uses: peter-evans/create-pull-request@v8
         with:
           # A Pull Request created with the default GITHUB_TOKEN does not trigger any workflows,
@@ -95,8 +98,6 @@ jobs:
             open-api-schemas
           commit-message: "chore: regenerate JSON and OpenAPI schemas"
           title: "chore: regenerate JSON and OpenAPI schemas"
-          # whoever published the release knows which model changes are expected in it
-          reviewers: ${{ github.event.release.author.login || github.actor }}
           body: |
             The JSON and OpenAPI schemas were regenerated from the C# classes by the
             [Generate Schemas and TypeScript Models](https://github.com/Hochfrequenz/BO4E-dotnet/blob/main/.github/workflows/generate_schemas_and_ts_models.yml)
@@ -108,3 +109,17 @@ jobs:
             repository in sync.
 
             If this PR is empty or was not created, the schemas were already up to date.
+      - name: Assign the release publisher as reviewer
+        # Not the `reviewers` input of create-pull-request: if the release publisher happens to own
+        # the token that created the Pull Request, GitHub answers 422 ("Review cannot be requested
+        # from pull request author") and the whole workflow run would fail - after the TypeScript
+        # models have already been pushed.
+        if: steps.create-pull-request.outputs.pull-request-number
+        env:
+          GH_TOKEN: ${{ github.token }}
+          PULL_REQUEST_NUMBER: ${{ steps.create-pull-request.outputs.pull-request-number }}
+          REVIEWER: ${{ github.event.release.author.login || github.actor }}
+        run: |
+          gh api "repos/${{ github.repository }}/pulls/$PULL_REQUEST_NUMBER/requested_reviewers" \
+            --method POST --input - <<< "{\"reviewers\":[\"$REVIEWER\"]}" ||
+            echo "Could not request a review from $REVIEWER (they are probably the author of the Pull Request)."
