@@ -86,16 +86,28 @@ jobs:
         # the models it did not regenerate. json-schema-to-typescript writes one .d.ts per schema.
         run: |
           set -euo pipefail
-          schemas=$(find json-schema-files -name "*.json" | wc -l)
+          # -maxdepth 1, because the generator's input glob "json-schema-files/**.json" does not
+          # descend into subdirectories either - a "**" sharing a path segment behaves like "*".
+          schemas=$(find json-schema-files -maxdepth 1 -name "*.json" | wc -l)
           generated=0
           if [ -d "$RUNNER_TEMP/ts_models" ]; then
-            generated=$(find "$RUNNER_TEMP/ts_models" -name "*.d.ts" | wc -l)
+            generated=$(find "$RUNNER_TEMP/ts_models" -maxdepth 1 -name "*.d.ts" | wc -l)
           fi
           if [ "$generated" -ne "$schemas" ]; then
             echo "::error::Generated $generated TypeScript models for $schemas schemas. Not touching the published models."
             exit 1
           fi
           echo "Generated $generated TypeScript models for $schemas schemas."
+          # Both counts shrink together when the schema generation itself silently produced less, so
+          # compare against what is checked in. Fewer schemas can be legitimate (a business object
+          # was removed), which is why this only warns - the schema Pull Request shows the deletions.
+          checked_in=$(git ls-files "json-schema-files/*.json" | wc -l)
+          if [ "$schemas" -lt "$checked_in" ]; then
+            echo "::warning::Generated $schemas schemas, $checked_in are checked in. The models of the missing ones are about to be deleted:"
+            comm -23 \
+              <(git ls-files "json-schema-files/*.json" | xargs -n1 basename | sort) \
+              <(find json-schema-files -maxdepth 1 -name "*.json" | xargs -n1 basename | sort)
+          fi
       - name: Upload the TypeScript Models as artifact
         uses: actions/upload-artifact@v7
         with:
@@ -115,7 +127,17 @@ jobs:
         run: |
           set -euo pipefail
           git fetch origin main
-          if ! git diff --quiet "$SOURCE_COMMIT" origin/main -- json-schema-files open-api-schemas; then
+          # `git diff --quiet` exits 1 for "differs" but 128 for its own errors, which must not be
+          # reported as a schema change - that diagnosis would send the reader to main's history.
+          set +e
+          git diff --quiet "$SOURCE_COMMIT" origin/main -- json-schema-files open-api-schemas
+          status=$?
+          set -e
+          if [ "$status" -gt 1 ]; then
+            echo "::error::Could not compare the schemas of $SOURCE_COMMIT and origin/main (git diff exited with $status)."
+            exit 1
+          fi
+          if [ "$status" -eq 1 ]; then
             echo "::error::The schemas on main changed while this run generated them (main is now $(git rev-parse origin/main)). Nothing was published; re-run this workflow."
             exit 1
           fi
@@ -168,12 +190,25 @@ jobs:
           # https://github.com/Hochfrequenz/BO4E-dotnet/settings/secrets/actions/TS_MODELS_PUSH_TOKEN
           GITHUB_TOKEN: ${{ secrets.TS_MODELS_PUSH_TOKEN }}
           SOURCE_COMMIT: ${{ steps.source-commit.outputs.sha }}
+          PULL_REQUEST_NUMBER: ${{ steps.create-pull-request.outputs.pull-request-number || 'n/a' }}
         run: |
           set -euo pipefail
           # re-checked, because the Pull Request steps run between the check above and this push
           git fetch origin main
-          if ! git diff --quiet "$SOURCE_COMMIT" origin/main -- json-schema-files open-api-schemas; then
-            echo "::error::The schemas on main changed while this run generated them. The models are not pushed; re-run this workflow."
+          set +e
+          git diff --quiet "$SOURCE_COMMIT" origin/main -- json-schema-files open-api-schemas
+          status=$?
+          set -e
+          if [ "$status" -gt 1 ]; then
+            echo "::error::Could not compare the schemas of $SOURCE_COMMIT and origin/main (git diff exited with $status)."
+            exit 1
+          fi
+          if [ "$status" -eq 1 ]; then
+            # The Pull Request from the step above already exists at this point and was created
+            # before the change landed, so it proposes reverting it. Say so, or somebody approves a
+            # revert that looks like a routine regeneration.
+            echo "::error::The schemas on main changed while this run generated them. The models are not pushed."
+            echo "::error::Close Pull Request $PULL_REQUEST_NUMBER without merging - it proposes reverting that change - and re-run this workflow."
             exit 1
           fi
           # cloned without the token (the repository is public) and pushed with the token passed
