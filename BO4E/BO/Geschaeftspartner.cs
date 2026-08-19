@@ -17,7 +17,7 @@ namespace BO4E.BO;
 /// <see cref="Marktteilnehmer" />
 /// , welches sich von diesem BO
 /// ableitet. Hier sollte daher keine Zuordnung zu Marktrollen erfolgen.
-[ProtoContract]
+[ProtoContract(IgnoreUnknownSubTypes = true)]
 // [ProtoInclude(41, typeof(Marktteilnehmer))] multiple inheritance is not yet supported by protobuf-net
 public class Geschaeftspartner : BusinessObject
 {

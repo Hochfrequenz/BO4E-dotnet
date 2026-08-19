@@ -8,7 +8,7 @@ namespace BO4E.COM;
 /// <summary>
 ///     Definition für eine Preisgarantie mit der Möglichkeit verschiedener Ausprägungen.
 /// </summary>
-[ProtoContract]
+[ProtoContract(IgnoreUnknownSubTypes = true)]
 //[ProtoInclude(101, typeof(RegionalePreisgarantie))] // protobuf-net doesn't support multiple levels of inheritance yet
 public class Preisgarantie : COM
 {

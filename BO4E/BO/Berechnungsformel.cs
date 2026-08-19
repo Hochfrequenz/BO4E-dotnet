@@ -45,7 +45,7 @@ public class Berechnungsformel : BusinessObject
     /// <remarks>UTILTS SG5 STS 4405</remarks>
     [JsonProperty(Order = 6, PropertyName = "notwendigkeit")]
     [JsonPropertyName("notwendigkeit")]
-    [ProtoMember(6)]
+    [ProtoMember(8)]
     public BerechnungsformelNotwendigkeit Notwendigkeit { get; set; }
 
     /// <summary>

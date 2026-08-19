@@ -167,7 +167,7 @@ public class Bilanzierung : BusinessObject
     [JsonPropertyName("prognosegrundlage")]
     [JsonPropertyOrder(21)]
     [NonOfficial(NonOfficialCategory.MISSING)]
-    [ProtoMember(1013)]
+    [ProtoMember(1021)]
     public Prognosegrundlage? Prognosegrundlage { get; set; }
 
     /// <summary>
@@ -219,7 +219,7 @@ public class Bilanzierung : BusinessObject
     [JsonPropertyName("grundWahlrechtPrognosegrundlage")]
     [JsonPropertyOrder(26)]
     [NonOfficial(NonOfficialCategory.MISSING)]
-    [ProtoMember(1018)]
+    [ProtoMember(1022)]
     public WahlrechtPrognosegrundlage? GrundWahlrechtPrognosegrundlage { get; set; }
 
     /// <summary>

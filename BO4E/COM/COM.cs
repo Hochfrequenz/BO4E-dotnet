@@ -36,7 +36,6 @@ namespace BO4E.COM;
 [ProtoInclude(20, typeof(Kostenblock))]
 [ProtoInclude(21, typeof(Kostenposition))]
 [ProtoInclude(22, typeof(KriteriumsWert))]
-[ProtoInclude(23, typeof(Kostenposition))]
 #pragma warning disable CS0618 // Type or member is obsolete
 [ProtoInclude(24, typeof(MarktpartnerDetails))]
 #pragma warning restore CS0618 // Type or member is obsolete
@@ -145,7 +144,7 @@ public abstract class COM : IUserProperties, IOptionalGuid
         Order = 2,
         DefaultValueHandling = DefaultValueHandling.Ignore
     )]
-    [ProtoMember(2)]
+    [ProtoMember(100)]
     [Newtonsoft.Json.JsonExtensionData]
     [System.Text.Json.Serialization.JsonExtensionData]
     [DataCategory(DataCategory.USER_PROPERTIES)]
