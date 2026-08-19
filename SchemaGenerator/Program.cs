@@ -13,6 +13,8 @@ if (args.Length == 1 && args[0] == "--count")
     Console.WriteLine(
         $"BUSINESS_OBJECT_COUNT={JsonSchemaGenerator.GetRelevantBusinessObjectTypes().Count()}"
     );
+    // the batch size is defined here and must not be duplicated in the calling scripts
+    Console.WriteLine($"BATCH_SIZE={JsonSchemaGenerator.MaxSchemasPerHour}");
     Environment.Exit(0);
 }
 
@@ -70,35 +72,30 @@ Environment.Exit(0); // Success
 /// </summary>
 public class JsonSchemaGenerator
 {
-    private const int LastDataRowOffset = 50;
-
     /// <summary>
     ///     The free license of Newtonsoft.Json.Schema only allows a limited number of schemas to be
     ///     generated per process. Callers therefore have to invoke this application repeatedly with
     ///     increasing offsets (a fresh process each time) to generate schemas for all business objects.
+    ///     Use --count to read this value instead of duplicating it.
     /// </summary>
-    private const int MaxSchemasPerHour = 10;
+    public const int MaxSchemasPerHour = 10;
 
     /// <summary>
     ///     All types for which schemas are generated: everything derived from <see cref="BusinessObject" />.
+    ///     The order is explicit, because the offsets of the separate generator processes only address
+    ///     the same types if every process sees the same order (Assembly.GetTypes() does not guarantee one).
     /// </summary>
     public static IEnumerable<Type> GetRelevantBusinessObjectTypes()
     {
         return typeof(BusinessObject)
             .Assembly.GetTypes()
-            .Where(t => t.IsSubclassOf(typeof(BusinessObject)));
+            .Where(t => t.IsSubclassOf(typeof(BusinessObject)))
+            .OrderBy(t => t.FullName, StringComparer.Ordinal);
     }
 
     public static void GenerateSchemas(int offset, string jsonOutputDirectory)
     {
         var relevantBusinessObjectTypes = GetRelevantBusinessObjectTypes();
-
-        if (relevantBusinessObjectTypes.Count() > LastDataRowOffset + MaxSchemasPerHour)
-        {
-            throw new InvalidOperationException(
-                "Too many BusinessObject types. Increase the LastDataRowOffset or adjust the MaxSchemasPerHour."
-            );
-        }
 
         try
         {
@@ -147,7 +144,7 @@ public class JsonSchemaGenerator
                 Directory.CreateDirectory(openApiOutputDirectory);
             }
 
-            foreach (var type in relevantBusinessObjectTypes.Skip(offset))
+            foreach (var type in relevantBusinessObjectTypes.Skip(offset).Take(MaxSchemasPerHour))
             {
                 var schema = JsonSchema.FromType(
                     type,

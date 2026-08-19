@@ -35,8 +35,10 @@ if ($args.Count -gt 2) {
     exit 1
 }
 
-$json_output_directory = if ($args.Count -ge 1) { $args[0] } else { Join-Path $script_directory "../json-schema-files" }
-$openapi_output_directory = if ($args.Count -ge 2) { $args[1] } else { Join-Path $script_directory "../open-api-schemas" }
+# The paths end up in prettier glob patterns further down, where a backslash is an escape
+# character, so keep them forward slashed.
+$json_output_directory = if ($args.Count -ge 1) { $args[0] } else { (Join-Path $script_directory "../json-schema-files") -replace '\\', '/' }
+$openapi_output_directory = if ($args.Count -ge 2) { $args[1] } else { (Join-Path $script_directory "../open-api-schemas") -replace '\\', '/' }
 
 if (-not (Test-Path $project_path)) {
     Write-Host "Error: Project file not found at '$project_path'."
@@ -49,24 +51,35 @@ New-Item -ItemType Directory -Force -Path $openapi_output_directory | Out-Null
 # The free license of Newtonsoft.Json.Schema only allows a limited number of JSON schemas to be
 # generated per process. That's why the schemas are generated in batches: one process per batch,
 # each with an increasing offset into the list of business objects.
-# The batch size must not exceed the MaxSchemasPerHour constant in Program.cs.
-$batch_size = 10
-
-# Ask the generator how many business objects there are instead of hardcoding the offsets here.
-# Hardcoded offsets used to silently skip business objects whenever new ones were added.
+#
+# Both the number of business objects and the batch size are read from the generator instead of
+# being hardcoded here: hardcoded offsets used to silently skip business objects whenever new ones
+# were added.
 $count_output = dotnet run --project "$project_path" -- --count
+if ($LASTEXITCODE -ne 0) {
+    Write-Host "Error: Could not determine the number of business objects and the batch size."
+    exit 1
+}
 $business_object_count = ($count_output | Select-String -Pattern '^BUSINESS_OBJECT_COUNT=(\d+)$').Matches.Groups[1].Value
-if (-not $business_object_count) {
-    Write-Host "Error: Could not determine the number of business objects."
+$batch_size = ($count_output | Select-String -Pattern '^BATCH_SIZE=(\d+)$').Matches.Groups[1].Value
+if ((-not $business_object_count) -or (-not $batch_size)) {
+    Write-Host "Error: Could not determine the number of business objects and the batch size."
+    Write-Host $count_output
     exit 1
 }
 Write-Host "Generating schemas for $business_object_count business objects in batches of $batch_size."
 
-for ($offset = 0; $offset -lt [int]$business_object_count; $offset += $batch_size) {
+for ($offset = 0; $offset -lt [int]$business_object_count; $offset += [int]$batch_size) {
     Write-Host "Running schema generation with offset: $offset"
     Write-Host "JSON output directory: $json_output_directory"
     Write-Host "OpenAPI output directory: $openapi_output_directory"
     dotnet run --project "$project_path" -- $offset $json_output_directory $openapi_output_directory
+    # $ErrorActionPreference does not cover the exit codes of native commands, so a failed batch
+    # would otherwise be skipped silently - leaving schemas missing or outdated.
+    if ($LASTEXITCODE -ne 0) {
+        Write-Host "Error: Schema generation failed for offset $offset (exit code $LASTEXITCODE)."
+        exit $LASTEXITCODE
+    }
 }
 
 # Format the generated files so that re-generating unchanged schemas creates no diff.
@@ -84,7 +97,14 @@ if (Get-Command prettier -ErrorAction SilentlyContinue) {
 
 if ($prettier_command) {
     Write-Host "Formatting output files with $($prettier_command -join ' ')..."
-    & $prettier_command[0] @($prettier_command[1..($prettier_command.Count - 1)]) --ignore-path $prettier_ignore_override -w "$json_output_directory/*.json" "$openapi_output_directory/*.json"
+    # Select-Object -Skip, because "1..($count - 1)" is a descending range - and therefore returns
+    # the first element again - when the command consists of a single element.
+    $prettier_arguments = @($prettier_command | Select-Object -Skip 1)
+    & $prettier_command[0] @prettier_arguments --ignore-path $prettier_ignore_override -w "$json_output_directory/*.json" "$openapi_output_directory/*.json"
+    if ($LASTEXITCODE -ne 0) {
+        Write-Host "Error: Formatting the generated files failed (exit code $LASTEXITCODE)."
+        exit $LASTEXITCODE
+    }
     Write-Host "Formatting complete."
 } else {
     Write-Host "Warning: Neither prettier nor npx is available. Skipping formatting."
