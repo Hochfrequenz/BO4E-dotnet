@@ -40,7 +40,7 @@ public class TestUserProperties
             "some_value_not_covered_by_bo4e",
             melo.UserProperties["myCustomInfo"] as string
         );
-        Assert.AreEqual(123.456M, (decimal)(double)melo.UserProperties["myCustomValue"]);
+        Assert.AreEqual(123.456, (double)melo.UserProperties["myCustomValue"]);
     }
 
     [TestMethod]

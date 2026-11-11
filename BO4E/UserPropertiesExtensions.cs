@@ -58,6 +58,20 @@ public static class UserPropertiesExtensions
                     value = new JValue(token).Value<TUserProperty>();
                     break;
 
+                case double d
+                    when (Nullable.GetUnderlyingType(typeof(TUserProperty)) ?? typeof(TUserProperty))
+                        == typeof(decimal):
+                    // since .NET 11 double->decimal conversions are exact (123.456 => 123.45600000000000306...);
+                    // go via the shortest round-trippable string to keep the intuitive value
+                    value = (TUserProperty)
+                        (object)
+                            decimal.Parse(
+                                d.ToString("R", System.Globalization.CultureInfo.InvariantCulture),
+                                System.Globalization.NumberStyles.Float,
+                                System.Globalization.CultureInfo.InvariantCulture
+                            );
+                    break;
+
                 case double d:
                     value = new JValue(d).Value<TUserProperty>();
                     break;
