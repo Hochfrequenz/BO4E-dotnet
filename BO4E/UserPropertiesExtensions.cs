@@ -53,6 +53,12 @@ public static class UserPropertiesExtensions
 
         if (up != null && up.TryGetValue(userPropertyKey, out var upToken))
         {
+            if (upToken is JValue { Value: double wrappedDouble })
+            {
+                // unwrap so that wrapped doubles get the same decimal normalization as bare doubles (see below)
+                upToken = wrappedDouble;
+            }
+
             switch (upToken)
             {
                 case null:

@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Text.Json;
+using Newtonsoft.Json.Linq;
 using AwesomeAssertions;
 using BO4E;
 using BO4E.BO;
@@ -83,6 +84,28 @@ public class TestUserProperties
             melo.UserProperties["myCustomInfo"].ToString()
         );
         Assert.AreEqual(123.456M, ((JsonElement)melo.UserProperties["myCustomValue"]).GetDecimal());
+    }
+
+    [TestMethod]
+    public void TestDecimalUserPropertyFromWrappedDouble()
+    {
+        var melo = new Messlokation
+        {
+            UserProperties = new Dictionary<string, object>
+            {
+                { "bare", 123.456d },
+                { "wrapped", new JValue(123.456d) },
+            },
+        };
+        Assert.IsTrue(melo.TryGetUserProperty("bare", out decimal bare));
+        Assert.IsTrue(melo.TryGetUserProperty("wrapped", out decimal wrapped));
+        Assert.AreEqual(123.456M, bare);
+        Assert.AreEqual(123.456M, wrapped);
+        Assert.IsTrue(melo.TryGetUserProperty("wrapped", out decimal? wrappedNullable));
+        Assert.AreEqual(123.456M, wrappedNullable);
+        Assert.IsTrue(melo.UserPropertyEquals("wrapped", 123.456M));
+        Assert.IsTrue(melo.TryGetUserProperty("wrapped", out double wrappedDouble));
+        Assert.AreEqual(123.456d, wrappedDouble);
     }
 
     private void _AssertUserProperties(Messlokation melo)
