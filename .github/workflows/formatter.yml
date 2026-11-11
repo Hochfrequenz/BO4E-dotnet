@@ -10,7 +10,7 @@ jobs:
       - name: Setup .NET
         uses: actions/setup-dotnet@v6
         with:
-          dotnet-version: 10
+          dotnet-version: 11.0.x
       - name: Restore .NET tools
         run: dotnet tool restore
       - name: Run CSharpier
