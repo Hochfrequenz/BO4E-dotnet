@@ -2,7 +2,6 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Text.Json;
-using Newtonsoft.Json.Linq;
 using AwesomeAssertions;
 using BO4E;
 using BO4E.BO;
@@ -11,6 +10,7 @@ using BO4E.ENUM;
 using BO4E.meta.LenientConverters;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 using JsonSerializer = System.Text.Json.JsonSerializer;
 
 namespace TestBO4E;
