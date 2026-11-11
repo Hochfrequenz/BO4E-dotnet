@@ -16,6 +16,11 @@ namespace BO4E;
 /// </summary>
 public static class UserPropertiesExtensions
 {
+    private static bool IsDecimal<T>()
+    {
+        return (Nullable.GetUnderlyingType(typeof(T)) ?? typeof(T)) == typeof(decimal);
+    }
+
     /// <summary>
     ///     try to get the Userproperty with key <paramref name="userPropertyKey" /> from <paramref name="parent" /> if
     ///     <paramref name="parent" />.UserProperties is not null and the key is present.
@@ -58,9 +63,7 @@ public static class UserPropertiesExtensions
                     value = new JValue(token).Value<TUserProperty>();
                     break;
 
-                case double d
-                    when (Nullable.GetUnderlyingType(typeof(TUserProperty)) ?? typeof(TUserProperty))
-                        == typeof(decimal):
+                case double d when IsDecimal<TUserProperty>():
                     // since .NET 11 double->decimal conversions are exact (123.456 => 123.45600000000000306...);
                     // go via the shortest round-trippable string to keep the intuitive value
                     value = (TUserProperty)
