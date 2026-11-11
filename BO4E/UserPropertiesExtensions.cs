@@ -16,6 +16,11 @@ namespace BO4E;
 /// </summary>
 public static class UserPropertiesExtensions
 {
+    private static bool IsDecimal<T>()
+    {
+        return (Nullable.GetUnderlyingType(typeof(T)) ?? typeof(T)) == typeof(decimal);
+    }
+
     /// <summary>
     ///     try to get the Userproperty with key <paramref name="userPropertyKey" /> from <paramref name="parent" /> if
     ///     <paramref name="parent" />.UserProperties is not null and the key is present.
@@ -48,6 +53,12 @@ public static class UserPropertiesExtensions
 
         if (up != null && up.TryGetValue(userPropertyKey, out var upToken))
         {
+            if (upToken is JValue { Value: double wrappedDouble })
+            {
+                // unwrap so that wrapped doubles get the same decimal normalization as bare doubles (see below)
+                upToken = wrappedDouble;
+            }
+
             switch (upToken)
             {
                 case null:
@@ -56,6 +67,18 @@ public static class UserPropertiesExtensions
 
                 case string token:
                     value = new JValue(token).Value<TUserProperty>();
+                    break;
+
+                case double d when IsDecimal<TUserProperty>():
+                    // since .NET 11 double->decimal conversions are exact (123.456 => 123.45600000000000306...);
+                    // go via the shortest round-trippable string to keep the intuitive value
+                    value = (TUserProperty)
+                        (object)
+                            decimal.Parse(
+                                d.ToString("R", System.Globalization.CultureInfo.InvariantCulture),
+                                System.Globalization.NumberStyles.Float,
+                                System.Globalization.CultureInfo.InvariantCulture
+                            );
                     break;
 
                 case double d:

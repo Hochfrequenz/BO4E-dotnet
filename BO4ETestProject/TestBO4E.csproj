@@ -1,7 +1,9 @@
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <TargetFramework>net9.0</TargetFramework>
+    <TargetFrameworks>net10.0;net11.0</TargetFrameworks>
     <IsPackable>false</IsPackable>
+    <!-- TestProtoGenerationBo writes to a shared file in the repo; don't run both TFMs concurrently -->
+    <TestTfmsInParallel>false</TestTfmsInParallel>
     <ApplicationIcon />
     <OutputType>Library</OutputType>
     <StartupObject />

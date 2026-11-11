@@ -1,6 +1,6 @@
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <TargetFramework>net9.0</TargetFramework>
+    <TargetFrameworks>net10.0;net11.0</TargetFrameworks>
     <RootNamespace>TestBO4E_dotnet_Extensions</RootNamespace>
     <IsPackable>false</IsPackable>
     <LangVersion>13</LangVersion>

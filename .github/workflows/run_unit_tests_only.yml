@@ -5,14 +5,13 @@ on: [push, pull_request]
 jobs:
   unittest:
     runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        dotnet-version: ["8.0.401", "9", "10"]
     steps:
       - uses: actions/checkout@v7
       - name: Setup .NET Core
         uses: actions/setup-dotnet@v6
         with:
-          dotnet-version: ${{ matrix.dotnet-version }}
+          dotnet-version: |
+            10.0.x
+            11.0.x
       - name: Run Tests
         run: dotnet test --configuration Release

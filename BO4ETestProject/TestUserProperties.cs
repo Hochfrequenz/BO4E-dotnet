@@ -10,6 +10,7 @@ using BO4E.ENUM;
 using BO4E.meta.LenientConverters;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 using JsonSerializer = System.Text.Json.JsonSerializer;
 
 namespace TestBO4E;
@@ -40,7 +41,7 @@ public class TestUserProperties
             "some_value_not_covered_by_bo4e",
             melo.UserProperties["myCustomInfo"] as string
         );
-        Assert.AreEqual(123.456M, (decimal)(double)melo.UserProperties["myCustomValue"]);
+        Assert.AreEqual(123.456, (double)melo.UserProperties["myCustomValue"]);
     }
 
     [TestMethod]
@@ -83,6 +84,28 @@ public class TestUserProperties
             melo.UserProperties["myCustomInfo"].ToString()
         );
         Assert.AreEqual(123.456M, ((JsonElement)melo.UserProperties["myCustomValue"]).GetDecimal());
+    }
+
+    [TestMethod]
+    public void TestDecimalUserPropertyFromWrappedDouble()
+    {
+        var melo = new Messlokation
+        {
+            UserProperties = new Dictionary<string, object>
+            {
+                { "bare", 123.456d },
+                { "wrapped", new JValue(123.456d) },
+            },
+        };
+        Assert.IsTrue(melo.TryGetUserProperty("bare", out decimal bare));
+        Assert.IsTrue(melo.TryGetUserProperty("wrapped", out decimal wrapped));
+        Assert.AreEqual(123.456M, bare);
+        Assert.AreEqual(123.456M, wrapped);
+        Assert.IsTrue(melo.TryGetUserProperty("wrapped", out decimal? wrappedNullable));
+        Assert.AreEqual(123.456M, wrappedNullable);
+        Assert.IsTrue(melo.UserPropertyEquals("wrapped", 123.456M));
+        Assert.IsTrue(melo.TryGetUserProperty("wrapped", out double wrappedDouble));
+        Assert.AreEqual(123.456d, wrappedDouble);
     }
 
     private void _AssertUserProperties(Messlokation melo)
