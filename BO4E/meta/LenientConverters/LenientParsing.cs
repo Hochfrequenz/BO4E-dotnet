@@ -62,5 +62,5 @@ public enum LenientParsing
     /// </summary>
     [EnumMember(Value = "MOST_LENIENT")]
     [System.Text.Json.Serialization.JsonStringEnumMemberName("MOST_LENIENT")]
-    MOST_LENIENT = ~0,
+    MOST_LENIENT = DATE_TIME | ENUM_LIST | BO4_E_URI | STRING_TO_INT, // I removed SET_INITIAL_DATE_IF_NULL
 }
